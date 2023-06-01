@@ -233,6 +233,7 @@ intervention. Scales linearly over 1 year such that there is 0% coverage at base
 * :ref:`Systolic Blood Pressure <2019_risk_effect_sbp>`
 * :ref:`High LDL Cholesterol <2019_risk_effect_ldl>`
 * :ref:`Body Mass Index <2019_risk_effect_bmi>`
+* :ref:`Fasting Plasma Glucose <2019_risk_effect_fpg>`
 
 .. _4.1.4:
 
@@ -980,26 +981,32 @@ Code is below for reference
     - To follow-up on some of the issues above, we are completing a model run with risks and risk effects but not medication. In addition, we will record results starting in 2021. 
   * - 13.0
     - Lifestyle Intervention  
-    - Planned full run with all scenarios 
+    - This was a complete run including all scenarios. No new issues were found regarding the new lifestyle scenario. Runs with all interventions were completed and looked as expected. Greg confirmed that the ordering and magnitude of decreases aligns to expectations. The validation workbooks are here for `causes only <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model13_cause_VV.ipynb>`_ and `risks only <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model13_risks_VV.ipynb>`_. 
   * - 14.0
-    - New LDL-C Ramp Updates 
-    - 
+    - Adding the transient state 
+    - To help fix observed issues, we added a transient state to the IHD cause model. This ensures that the probability of an event for a single simulant never goes over 100%. More information can be found on the IHD cause model page. After some debugging, the model appears to be working as expected. This model was validated in the same workbooks as model 12 and links can be found above. At this time, the new list of outstanding `possible V and V items is here <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B3B5D387C-0BAC-4312-99FD-0EB43FC85944%7D&file=Model_Updates_5.26.23.docx&action=default&mobileredirect=true>`_. None of these are under active investigation but are important to note. 
   * - 15.0
-    - Add New Observer 
+    - New State 
     - 
   * - 16.0
-    - Results Management Updates 
+    - All 51 locations  
     - 
   * - 17.0
-    - Test Runs for Timing on 3-5 States 
-    - Research team to specify further which states are needed 
+    - Add New Observer 
+    - 
   * - 18.0
-    - Add Risk Correlation, Medication and PAF Recalculations 
+    - Results Management Updates 
     - 
   * - 19.0
+    - Test Runs for Timing on 10 States 
+    - States to be included are: Alabama, Washington, Alaska, Rhode Island, California, Texas, Kansas, West Virginia, Florida, North Dakota  
+  * - 20.0
+    - Add Risk Correlation, Medication and PAF Recalculations 
+    - 
+  * - 21.0
     - Update to GBD 2021 
     - 
-  * - 20.0
+  * - 22.0
     - Final Runs 
     - Research team to specify this further 
 
@@ -1049,11 +1056,11 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
   * - Mean FPG 
     - sum of FPG * person time *NOTE: NOT IN CURRENT MODEL*
     - Only needed for V&V 
-  * - Population achieving target LDL-C
-    - sum of person time at or below 1.81 LDL-C; can be included only in final models 
+  * - Population achieving target LDL-C values
+    - sum of person time in each category: <2.59, >/=2.59 and <3.36, >/=3.36 and <4.14, >/=4.14 and <4.91, >/=4.91; can be included only in final models 
     - 
-  * - Population achieving target SBP
-    - sum of person time at or below 130 SBP; can be included only in final models 
+  * - Population achieving target SBP values
+    - sum of person time in each category: <130, >/=130 and <140, >/=140 SBP; can be included only in final models 
     - 
   * - Healthcare appointments 
     - sum of healthcare appointments 
