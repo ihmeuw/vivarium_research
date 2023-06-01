@@ -183,7 +183,7 @@ Documents that contain information specific to the overall model and the child s
 
   Scenarios subject to change, but will follow similar structure
 
-  Note that while IFA must be included in the model for baseline calibration, it has been deficided that it will *not* be included as an intervention to include in the optimization process. Therefore, we will not "zero" out IFA coverage in the "zero coverage" scenario and we will not scale-up IFA coverage to its maximum value independently. IFA coverage may only remain at its baseline coverage level *or* be upgraded to MMS or BEP.
+  Note that while IFA must be included in the model for baseline calibration, it will *not* be included as a scale-up intervention to include in the optimization process. Therefore, we will not "zero" out IFA coverage in the "zero coverage" scenario and we will not scale-up IFA coverage to its maximum value independently. IFA coverage may only remain at its baseline coverage level *or* be reduced to zero when it is replaced with MMS or BEP.
 
 .. list-table:: Scenarios
   :header-rows: 1
