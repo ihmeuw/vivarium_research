@@ -1993,7 +1993,6 @@ Census
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
-  * - Census household ID (arbitrary identifier which is the same for simulants in the same household but **different from other observers and between timesteps for the same household**)
   * - First name
   * - Middle initial
   * - Last name
@@ -2183,7 +2182,6 @@ There are two types of sampling plans:
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
-  * - Survey household ID (arbitrary identifier which is the same for simulants in the same household but **different from other observers and between timesteps for the same household**)
   * - Survey date
   * - First name
   * - Middle initial
@@ -2393,8 +2391,6 @@ in the home.
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
-  * - WIC participant ID (arbitrary identifier which is the same for the same simulant **across time** but **different from other observers for the same simulant**)
-  * - WIC family ID (arbitrary identifier which is the same for simulants in the same household **across time** but **different from other observers for the same household**)
   * - First name
   * - Middle initial
   * - Last name
@@ -2439,8 +2435,8 @@ on the observer.
 
 To account for these interdependencies, please follow the below steps:
 
-#. Randomly select tracked mothers or guardians to enroll based on the coverage rate by race/ethnicity 
-#. Enroll ALL infants of these tracked mothers or guardians **who live in the same household as their tracked mother/guardian** (as infants are defined as less than 1 year old, it should be rare but possible to have multiple infants for the same tracked mother or guardian) 
+#. Randomly select tracked mothers or guardians to enroll based on the coverage rate by race/ethnicity
+#. Enroll ALL infants of these tracked mothers or guardians (as infants are defined as less than 1 year old, it should be rare but possible to have multiple infants for the same tracked mother or guardian)
 #. Calculate the current coverage rate for infants (will be slightly higher than the coverage rate for tracked mothers/guardians)
 #. Enroll more infants randomly, among those eligible but not already enrolled, until the overall infant coverage is met
 
@@ -2454,7 +2450,7 @@ Eligibility for WIC is based on income and age/children in the house.
 To qualify you must be both:
 
 - A child under the age of 5 (0-4 years old)
-- OR a tracked mother OR guardian of a child under the age of 1 **living in the same household as that child**
+- OR a tracked mother OR guardian of a child under the age of 1
 
 And also:
 
@@ -2537,15 +2533,8 @@ See the final limitation below for more about this approximation.
 #. Some states use different income cutoffs, but the ones listed are used in the majority of cases and so are implemented here
 #. Year over year WIC inclusion is independent - this is likely an oversimplification and will lead to higher rates of churn than are found in real life
 #. The creation of race/ethnicity specific coverage by participate category is imperfect. We do not have granular data which includes this breakdown, so it is based on the overall coverage by race/ethnicity which is an assumption. Also, for infants this would lead to over 100% selection, so it is not changed (remains at 98.4% for most race/ethnicity groups)
+#. We use a household ID. There will be cases in which a tracked mother/guardian does not live in the same household as their infant, this might be confusing in the resulting data.
 #. Real WIC data includes dates of starting and ending eligibility. We assume that data is then rolled up over some time period, say a year, to include everyone eligible for that year. For our data, we approximate this by having everyone eligible at the first time point in the new year included in the dataset. This will exclude simulants who were eligible for some part of the prior year, but are not at the time of observation. Therefore, data sampled in Jan 2029 is the approximation of data from all of 2028.
-#. We use household as the proxy for WIC family ID, which causes two issues:
-     * Our use of household means that WIC family ID only stays the same over time for participants who either
-       do not move, or move as part of a household unit.
-       The other cases should be relatively rare.
-       In reality, it is not clear in what conditions WIC family ID remains constant over time.
-       For example, would the WIC family ID of an infant be the same before and after they moved to their
-       grandparents' house?
-     * Two families that participate in WIC and live in the same household, whether at the same time or at different times, will have the same family ID in our data.
 
 Taxes
 ^^^^^
@@ -2703,7 +2692,7 @@ in January 2024.
   * - Simulant Attribute
     - Notes
   * - Unique simulant ID (for PRL tracking)
-    -  
+    -
   * - Unique household ID consistent between observers (for PRL tracking)
     -
   * - First name
