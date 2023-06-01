@@ -47,19 +47,14 @@
 
 
 
-.. _concept_model_template:
+.. _{YOUR_MODEL_TITLE}:
+
+=======================
+Concept Model Template
+=======================
 
 .. todo::
-
-  Replace the above ".. _concept_model_template:" with ".. _{YOUR_MODEL_NAME}:""
-
-=======================
-Concept model template
-=======================
-
-.. todo:
-
-  Replace the title above with your model title
+  Replace the title above with your model title.
 
 .. contents::
   :local:
@@ -72,27 +67,65 @@ Concept model template
 
 .. _{YOUR_MODEL_SHORT_NAME}1.0:
 
-1.0 Background
-++++++++++++++
+1.0 Project overview
+++++++++++++++++++++
 
 
 .. _{YOUR_MODEL_SHORT_NAME}1.1:
 
-1.1 Project overview
---------------------
-
-
-
-.. _{YOUR_MODEL_SHORT_NAME}1.2:
-
-1.2 Literature review
----------------------
+1.1 Examples of similar analyses
+--------------------------------
 
 
 .. _{YOUR_MODEL_SHORT_NAME}2.0:
 
-2.0 Modeling aims and objectives
-++++++++++++++++++++++++++++++++
+2.0 Simulation Design
+++++++++++++++++++++++
+
+.. _{YOUR_MODEL_SHORT_NAME}2.1:
+
+2.1 Default specifications 
+--------------------------
+
+.. list-table:: Default simulation specifications
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+    - Note
+  * - Location(s)
+    - 
+    - 
+  * - Number of draws
+    - 
+    - 
+  * - Population size per draw
+    - 
+    - 
+  * - Age start (initialization)
+    - Zero
+    - If sim duration > age start for observation, age_start at initialization will be zero and fertility will need to be included. Otherwise, age start at initialization will be age start for observation minus simulation duration and a closed cohort (no fertility). Note that currently vivarium can only have new simulants enter the simulation at age zero, although changing this could be a potential framework improvement. 
+  * - Age start (observation)
+    - 
+    - See note above.
+  * - Age end
+    - 
+    - 
+  * - Exit age
+    -
+    - 
+  * - Simulation start date
+    - 
+    - 
+  * - Simulation observation start date
+    - 
+    - 
+  * - Simulation end date
+    - 
+    - 
+  * - Timestep
+    - 
+    - 
 
 
 .. _{YOUR_MODEL_SHORT_NAME}3.0:
@@ -191,6 +224,22 @@ Concept model template
 .. note::
   here we use the compartmental (SEIR) models with squares
   
+.. list-table:: Model runs
+  :header-rows: 1
+
+  * - Run
+    - Description
+    - Scenarios
+    - Specification modifications
+    - Stratificaction modifications
+    - Note
+  * - 
+    - 
+    - 
+    - 
+    - 
+    - 
+
 
 .. _{YOUR_MODEL_SHORT_NAME}5.3.1:
 
@@ -202,41 +251,62 @@ Concept model template
   - add verification and validation strategy
   - add python-style pseudo code to summarize model algorithm if necessary
 
-.. _{YOUR_MODEL_SHORT_NAME}5.3.2:
+.. list-table:: Model verification and validation tracking
+   :widths: 3 10 20
+   :header-rows: 1
 
-5.3.2 Model 2
-~~~~~~~~~~~~~
+   * - Model
+     - Description
+     - V&V summary
+   * - 1.0 
+     - 
+     - V&V notebooks for model 1.0 can be found here [insert Github link here]
+   * - 2.0
+     - 
+     - 
+   * - 3.0
+     - 
+     - 
+     
+.. list-table:: Outstanding verification and validation issues
+   :header-rows: 1
 
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. _{YOUR_MODEL_SHORT_NAME}5.3.3:
-
-5.3.3 Model 3
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. _{YOUR_MODEL_SHORT_NAME}5.3.4:
-
-5.3.4 Model 4
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
+   * - Issue
+     - Explanation
+     - Action plan
+     - Timeline
+   * - 
+     - 
+     - 
+     - 
 
 
 .. _{YOUR_MODEL_SHORT_NAME}5.4:
 
 5.4 Desired outputs
 -------------------
+
+.. list-table:: Requested Count Data Outputs and Stratifications
+  :header-rows: 1
+
+  * - Output
+    - Include strata
+    - Exclude strata
+  * - Deaths and YLLs (cause-specific)
+    - 
+    - 
+  * - YLDs (cause-specific)
+    - 
+    - 
+  * - Cause state person time
+    - 
+    - 
+  * - Cause state transition counts
+    - 
+    - 
+  * - Mortality hazard first moment
+    - 
+    - 
 
 .. _{YOUR_MODEL_SHORT_NAME}5.5:
 
