@@ -280,23 +280,36 @@ lines from your trainings!
 Your Bash Configuration Files 
 -----------------------------
 
-Bash files contain commands you would enter into a command line, but 
-specifically ones you will use very often. For example, every time you 
-want to open a Jupyter session, the cluster needs certain information 
-and requirements. To find this information, it looks in your Bash files 
-rather than asking you to enter the same information every time. 
+Bash configuration files contain information and commands that are used when 
+interacting with the cluster. When the cluster tries to execute some command 
+line prompts, it will look to your bash configuration files for information 
+or filepaths. 
 
-However, Bash files can be confusing since it is less obvious when the 
-information is being used or what it is used for. Therefore, we have 
-provided a copy-and-paste formatting for information to be added to 
-your Bash files. 
+You should have 2 bash configuration files, your bash profile or :code:`.bash_profile` 
+and your bash rc or :code:`.bashrc`. 
 
-.. todo::
+The bash profile is the simpler of the two **Need more information, what is it exactly?** 
 
-  - Confirm and paste in bash files 
-  - Get Zeb's help in explaining Bash files better 
-  - Moving up since this is needed for a lot of things below 
+The only lines needed in your bash profile are: 
 
+.. code-block:: bash 
+  :linenos:
+
+  $ [[ -e ~/.profile ]] && source ~/.profile    ##Loads generic profile settings 
+  $ [[ -e ~/.bashrc  ]] && source ~/.bashrc     ##Loads bash rc 
+
+Your bash rc generally contains a few important pieces of information: 
+
+#. Code that allows conda to operate (conda is explained more in depth in :ref:`section 4 <conda_environments>`)
+#. Code that allows you to open and run Jupyter notebooks from the cluster command line 
+#. Aliases, which are included :ref:`below in the aliases section <cluster_access_other>`
+
+The code required for 1 and 2 can be copied and pasted from here: 
+
+.. code-block:: bash 
+  :linenos:
+
+  $ Need to add here 
 
 .. _cluster_access_command:
 
