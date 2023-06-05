@@ -269,8 +269,7 @@ location/age/sex/year-specific level:
 
 .. todo::
 
-  Attempt to quantify how different this approach will be from the COMO-estimated 
-  other causes DW.
+  Update this section to alternate equation with notebook proof, but first generalize to multiple causes.
 
 2. Adjusted YLD observer
 ++++++++++++++++++++++++
@@ -307,6 +306,6 @@ Potential use cases
 Challenges to consider
 ++++++++++++++++++++++
 
-- Is the current behavior of cause DW equal to prevalence-weighted average of sequela DWs really the right thing to do?
+- Consider updating current behavior of cause DW equal to prevalence-weighted average of sequela DWs
 
   - Alternative would be to assign sequela-specific DW based on prevalence-weighted probability (assuming mutually exclusive sequelae)
