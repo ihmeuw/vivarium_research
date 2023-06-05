@@ -125,39 +125,89 @@ in the Accessing the Cluster section below.
 2.0 How to Access a Terminal
 ++++++++++++++++++++++++++++
 
-.. todo::
+A lot of work you will do requires you to access a terminal. A terminal is a way for you, a 
+user, to communicate with a computer or computing system. There are many options for 
+terminals. This section is written for someone not familiar with terminals, so if 
+you have familiarity or favorite software please feel free to use those! 
 
-  - Build out this section with terminal options, Linux vs Unix vs Windows 
-  - Link to the command line training here and explain that it is Linux based 
-  - The below section needs to be reworked a bit but was pasted as a starting point 
-  - Git comes with windows but is not Linux based 
-  - Seems that some terminals require Git tokens and others don't. Figure out which 
-  - How to install conda (needed for a lot of things)
+Writing code into a terminal is called using the command line. IHME has a helpful training 
+on the command line in Module 1 of the IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_. Command lines technically interact with an 
+operating system on your computer. 
 
+Operating systems are things like Windows or macOS (for Mac computers) that help a computer run and provide some basic 
+infrastructure. Opening and saving files all happen through your operating system. You can change or 
+install multiple operating systems, but that is quite uncommon. 
 
-**How to Access GitHub:** Similar to the cluster, Git commands are written into a 
-terminal to access the repositories and push edits. On our team, most Windows folks use 
-Git Bash which automatically installs with downloading Git. However, some prefer 
-the Windows Subsystem for Linux (WSL) for it's user interface and tools. 
+Some operating systems require different command lines to accomplish the same task. The IHME 
+cluster uses the operating system Linux, and so the trainings provided are designed for Linux. 
+Linux and macOS are very similar (they are both `Unix like <https://en.wikipedia.org/wiki/Unix-like>`_), but Windows is quite different. Therefore, we recommend for 
+Windows users to install a terminal that can accept command lines written for Linux while 
+still allowing you to "speak" with your Windows computer. 
 
-For Mac users, the Terminal app which comes installed on your machine can be used for 
-Git as well. 
+**Recommended Terminals for Windows Users:** 
 
-It is worth noting here that these applications can also be used to access the cluster, 
-although the common practice on the Sim Science team is to use separate terminals for 
-GitHub on our local machine and for cluster access. 
+For updating Vivarium docs and interacting with GitHub, we recommend using Git Bash. This 
+installs automatically with Git for Windows. However, some prefer 
+the Windows Subsystem for Linux (WSL) for its user interface and tools. 
 
 Link to download `Git and Git Bash <https://git-scm.com/>`_
 
 Link to download `WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_
 
-One difference in uploading to GitHub is that the cluster will require a password 
-to push information. This is **NOT** your GitHub password, but instead is a unique 
-token that you will need to create. `This website <https://techglimpse.com/git-push-github-token-based-passwordless/>`_ has information on creating a token. Many Sim Science users set their token to 
+For accessing the cluster, we recommend using PuTTy or Bitvise. How to access the cluster 
+is included in more depth in Section 3. 
+
+**Recommended Terminals for Mac Users:** 
+
+Since macOS is similar to Linux and is the base operating system on Mac computers, the 
+pre-installed Terminal app can be used for all your terminal needs. 
+
+**Other Options:**
+
+Most terminals can also be used to access the cluster, although the common practice for 
+Windows users on the Sim Science team is to use separate terminals for working on our local machine and 
+for cluster access. 
+
+Git can be used for updating Vivarium docs from Command Prompt.
+Command Prompt is the terminal that is pre-installed on Windows computers,
+but it is not Linux based. Therefore the command line
+trainings will not be applicable if you use this option.
+
+For Mac users, there are other terminal options such as iTerm2 which provides more 
+features than Terminal. 
+
+**Git Tokens:**
+
+"Pushing" things to GitHub will create a prompt asking for a username and password. 
+Counterintuitively, the username is your GitHub username, but the password is **NOT** 
+your GitHub password, but instead is a unique token that you will need to create. 
+`This website <https://techglimpse.com/git-push-github-token-based-passwordless/>`_ 
+has information on creating a token. Many Sim Science users set their token to 
 never expire and save the token where they can reference it later. However, this 
 might compromise security in some cases, so regenerating a token periodically is 
 best practice. 
 
+There are also ways to set up terminals so that you do not have to enter this information 
+every time. This is covered in the aliases section below. 
+
+**How to Install Conda:**
+
+Conda is an open-source, cross-platform, language-agnostic package manager and 
+environment management system. In order to accomplish most tasks at IHME, you will 
+need to install it. 
+
+For your local computer, you can use this link to install Miniconda. We recommend installing 
+Miniconda3 in 64 bit. 
+
+Link to download `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ 
+
+On the cluster, you can use the version of conda provided by the Central Comp team. This is simplest and 
+recommended. To do this, log into the cluster and then enter the code 
+:code:`/ihme/code/central_comp/miniconda/bin/conda init`. This adds information on how to 
+access conda to your bashrc file. You will need to restart the terminal for the 
+changes to take effect. 
+
+There are other ways to install conda, but the above is simplest. 
 
 .. _cluster_access:
 
@@ -174,33 +224,35 @@ Some Hub pages on accessing the cluster:
 - `Science and Engineering <https://hub.ihme.washington.edu/pages/viewpage.action?pageId=72807457>`_
 - `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_
 
-.. _cluster_access_putty:
+The cluster is accessed through the Secure Shell protocol or SSH for short. 
+To access the cluster, an SSH "client" is needed. The client is an application 
+that can make SSH connections. 
 
-The cluster can be accessed from most terminals 
-on your computer. Some of the most popular ones used are: PuTTY or Bitvise for 
-Windows users and Terminal or iTerm2 for Mac users. For Windows users, most researchers use PuTTY, 
-however Bitvise is also used at IHME. For Mac users, the Terminal app comes installed 
-on your computer but some perfer to use iTerm2. 
+Both Mac and Windows include command-line SSH clients by default. This means 
+that most terminals can be used to access the cluster. As mentioned above, 
+feel free to use any terminal you are familiar with! 
 
-Terminals most commonly used to access the cluster: 
+IHME Learn provides information on accessing the cluster from the command line in 
+Module 3 within the IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_.
+
+Mac users have to use the above method for cluster access. 
+For Windows users, there are some SSH clients that come with a graphical user 
+interface (e.g., you can "click" on things rather than type commands only) 
+which are more intuitive and we recommend if you are new to this type of 
+computing work. 
+
+As mentioned above, for Windows users this is PuTTY or Bitvise 
 
 Link to download `PuTTY or Bitvise <https://www.putty.org/>`_
 
-Link to download `iTerm2 <https://iterm2.com/>`_
-
-Other information from Zeb to integrate: 
-
-The cluster is accessed through the SSH ("Secure Shell") protocol, so what is needed is an SSH "client" -- an application that can make SSH connections. Both Mac and Windows (at least, in recent versions of Windows 10) include command-line SSH clients by default.
-
-PuTTY and Bitvise are both SSH clients with graphical user interfaces for Windows. For Mac, it looks like some exist (e.g. Termius) but I didn't see anything super popular.
-
-We should note that you can also just run ssh commands from a terminal without installing anything instead of using a graphical client. I do this, and I am guessing that Nathaniel does too.
+.. _cluster_access_putty:
 
 Accessing the Cluster from PuTTY
 --------------------------------
 
-These instructions are for PuTTY, if you are using a different SSH client search for similar 
-information on the Hub or ask a team member for help. 
+We provide step by step instructions for accessing the cluster for the 
+first time. These instructions are for PuTTY, if you are using a different 
+SSH client search for similar information on the Hub or ask a team member for help. 
 
 For your first time on PuTTY, you will set up and save the instructions for a slurm session. To do this: 
 
@@ -223,9 +275,27 @@ lines from your trainings!
 
 .. image:: putty_3.png
 
+.. _cluster_access_bash:
+
+Your Bash Configuration Files 
+-----------------------------
+
+Bash files contain commands you would enter into a command line, but 
+specifically ones you will use very often. For example, every time you 
+want to open a Jupyter session, the cluster needs certain information 
+and requirements. To find this information, it looks in your Bash files 
+rather than asking you to enter the same information every time. 
+
+However, Bash files can be confusing since it is less obvious when the 
+information is being used or what it is used for. Therefore, we have 
+provided a copy-and-paste formatting for information to be added to 
+your Bash files. 
+
 .. todo::
 
-  Add information for not entering your username/password every time 
+  - Confirm and paste in bash files 
+  - Get Zeb's help in explaining Bash files better 
+  - Moving up since this is needed for a lot of things below 
 
 
 .. _cluster_access_command:
@@ -269,11 +339,70 @@ researchers do not disturb engineering workflow.
 
 .. _cluster_access_other:
 
-Other Useful Cluster Tips
--------------------------
+Aliases and Other Cluster Tips
+------------------------------
 
-#. If you get tired of typing long commands, one option is to make an alias. An alias is a shortcut command for commonly typed things. More information on how to do was written by the `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_ 
-#. When your computer falls asleep, it will stop access to the cluster and cut off any interactive jobs (i.e. :code:`srun` sessions) that were currently running. This can be problematic if a command needs to run overnight. There are a few different options to account for this including: screen, MOSH, or tmux. If you need to use these, ask a teammate.
+**Aliases:**
+
+Often, it can be annoying to type the same information repeatedly everytime you 
+access the cluster. To help account for this you can create aliases. These are 
+short-hand commands for commonly typed things. 
+
+Here is a Hub page written by the `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_ on how to set up aliases. 
+
+Here, we provide a few copy and paste aliases you can add to your bashrc file. Be 
+sure to update the names to match your project and username. Also, note that once 
+you include these you will need to restart your cluster connection for them to take 
+effect. The alias names themselves are arbitrary. While examples are provided, please 
+name these whatever is short and clear for your use. 
+
+The aliases below are: 
+
+#. Starting a Jupyter notebook in your project's repository 
+#. Starting an srun session (note: you can change the memory or other parameters before saving)
+#. Checking on your current jobs on the cluster 
+
+.. code-block:: bash 
+  :linenos:
+
+  $ alias jupyter_<PROJECT_NAME>="sh /ihme/singularity-images/rstudio/shells/jpy_rstudio_sbatch_script.sh -e <INSERT_ENVIRONMENT_NAME> -c /ihme/code/central_comp/miniconda/bin/activate -t lab -d /ihme/code/<INSERT_USERNAME>/<INSERT_PROJECT_REPO> -A proj_simscience -p i.q" 
+  $ alias srun_5G="srun --mem=5G -c 1 -A proj_simscience -p all.q --pty bash" 
+  $ alias squeue_<USERNAME>="squeue -u <INSERT_USERNAME>" 
+
+If you ever forget what settings you included in an alias you can enter the command :code:`type <ALIAS_NAME>` 
+into the terminal and the full alias code will be displayed. 
+
+This is useful if you want to change the parameters of a command as well - simply display the alias code, copy 
+and paste the command into the terminal, and then make needed adjustments before running. 
+
+**Setting up Easier Cluster Access:**
+
+There are ways to configure access so that getting on the cluster is fewer steps. 
+
+For those using PuTTY, you can configure settings such that you do not need to type 
+your username and password every time you access the cluster. This 
+`Hub page <https://hub.ihme.washington.edu/display/IHD/PuTTY>`_ 
+does a very good job of outlining the steps. However, note that for step 2 of 
+"Configure PuTTY Itself", this author needed to enter "gen-slurm-slogin-p01.cluster.ihme.washington.edu" 
+instead of "cluster-submit1.ihme.washington.edu", which is listed on the page. 
+
+A similar procedure can be used for Bitvise, instructions are on `this webpage <https://www.bitvise.com/getting-started-public-key-bitvise>`_. 
+
+For those using command line to access the cluster, you can do two things for 
+easier access: 
+
+#. Set up an alias to allow for a shorter command line to access the cluster 
+#. Configure your computer to not need your username and password everytime 
+
+For both of these, this Hub page by the `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_ has a good step by step guide to configuring your 
+setup. If you need help with this process, reach out to someone on the team. 
+
+**Long Cluster Jobs:**
+When your computer falls asleep, it will stop access to the cluster and cut 
+off any interactive jobs (i.e. :code:`srun` sessions) that were currently 
+running. This can be problematic if a command needs to run overnight. There 
+are a few different options to account for this including: screen, MOSH, or 
+tmux. If you need to use these, ask a teammate.
 
 .. _cluster_access_files:
 
@@ -306,28 +435,6 @@ being used in the sim. Therefore, follow these steps:
 
 For consistency, please use this naming convention for all files: :code:`FILENAME_20230309.ext`. 
 For example, this might be :code:`heart_failure_proportions_20230310.csv` 
-
-.. _cluster_access_bash:
-
-Your Bash Configuration Files 
------------------------------
-
-Bash files contain commands you would enter into a command line, but 
-specifically ones you will use very often. For example, every time you 
-want to open a Jupyter session, the cluster needs certain information 
-and requirements. To find this information, it looks in your Bash files 
-rather than asking you to enter the same information every time. 
-
-However, Bash files can be confusing since it is less obvious when the 
-information is being used or what it is used for. Therefore, we have 
-provided a copy-and-paste formatting for information to be added to 
-your Bash files. 
-
-.. todo::
-
-  - Confirm and paste in bash files 
-  - Get Zeb's help in explaining Bash files better 
-
 
 .. _conda_environments:
 
@@ -364,34 +471,96 @@ common packages). However, this environment is read-only. Read-only means you ca
 use it, but you can't change it. So if you want any packages not included there, 
 you will need to make your own environment.
 
-Another option is to use the engineering team's environment for a particular 
-project. Since engineering uses a similar set of packages to us - most of the 
-time these environments have everything you need to run your code. 
+Another option is to copy the engineering team's environment for a particular 
+project. For this option, you will technically make your own environment, but rather 
+than selecting packages by yourself, you will just install everything the engineering 
+team is using. However, since you are making your own environment you can also add 
+new packages or update as needed. 
 
-.. todo::
+If you are not familiar with environments, we recommend this option as it is straightforward 
+but still allows you to make a personal environment. 
 
-  Confirm with the team - I forgot how we decided this works exactly to not disturb engineering  
+Instructions for how to do this are found in the readme section of the engineering GitHub page 
+for your project. For example, these are the `CVD environment instructions <https://github.com/ihmeuw/vivarium_nih_us_cvd>`_. If you are having trouble locating these for your projects, ask an engineering team member. 
 
 Another common option is to make a make your own environment for a project. 
-It is common practice for each researcher to make a new environment for each 
+If you are familiar with environments, this is a recommended approach. It is 
+common practice for each researcher to make a new environment for each 
 project they work on. They may even make multiple if they want to use different 
 versions in different parts of a project.
 
 **How do you make a new environment?** 
+Before you can make a new environment, ensure that you have git and conda installed. 
+Instructions for this can be found above if needed. 
 
-.. todo::
+Once these are installed, navigate in your preferred terminal. Ensure that you are 
+in the right location to have this environment on your local machine or on the cluster 
+as needed. Then, follow the below code: 
 
-  - Find instructions on the vivarium CVD page and include here. 
+.. code-block:: bash 
+  :linenos:
+
+  $ conda create --name=INSERT_NAME_HERE python=3.8
+  $ #conda will download python and base dependencies
+  $ conda activate ENVIRONMENT_NAME 
+  (ENVIRONMENT_NAME) $ pip install <INSERT PACKAGE NAME HERE> 
+
+From here, repeat the pip install line for all packages you wish to include. 
 
 **How do I install new information to an existing environment?**
 Once you have made a new environment, you can add some commonly used packages 
 using :code:`pip install package`. A list of common packages to install is provided 
-below. If :code: `import` in Python fails, try 
-installing the package to the environment and reloading the page. 
+below. You can also include multiple packages in a single command. For convenience, 
+a code snippet you can copy and paste is included here with some common packages. 
 
-.. todo::
+.. code-block:: bash 
+  :linenos:
 
-  Make a list of common packages to install 
+  $ pip install numpy pandas scipy risk_distributions statsmodels matplotlib seaborn db_queries get_draws gbd_mapping 
+
+**Common Packages:**
+
+Packages for data manipulation and statistics: 
+
+- NumPy (usually imported as np)
+- Pandas (usually imported as pd)
+- SciPy 
+- risk_distributions (`more information <https://risk-distributions.readthedocs.io/en/latest/>`_)
+- statsmodels (usually imported as sm or smf)
+
+Packages for visualization: 
+
+- Matplotlib (usually imported as plt)
+- Seaborn (usually imported as sns)
+
+Packages for accessing GBD data (`shared function information <https://hub.ihme.washington.edu/display/SF/Shared+Functions+Home>`_):
+
+- db_queries 
+- get_draws 
+- gbd_mapping (`further information <https://vivarium.readthedocs.io/projects/gbd-mapping/en/latest/gbd_mapping.html>`_)
+
+**Trouble Shooting:**
+
+Packages usually have to be in your environment before you can :code:`import` 
+them in Python. If an :code:`import` command fails, try installing the package 
+to the environment and restarting the Jupyter kernel (for example Kernel -> 
+Restart in the Jupyter Notebook menu).
+
+However, there are some common packages that do not require a pip install and come 
+pre-loaded into Python. A partial list is included below for clarity. These do still need 
+to be imported at the start of a notebook. 
+
+- math 
+- warnings 
+- random 
+
+The IHME specific packages for accessing GBD data should only be used on the cluster (db_queries, 
+get_draws and gbd_mapping). If you are creating an environment on your local machine, these will 
+not install correctly and should be removed from the pip statement above. 
+
+Some packages have dependencies on other python packages or are not able to be 
+installed using the pip command. If you attempt to install a package and find errors, 
+ask a friend for help. 
 
 **When should I use the GBD environment vs making my own?**
 In general, it is best practice to use your own environment for project 

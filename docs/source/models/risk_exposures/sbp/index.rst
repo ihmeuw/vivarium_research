@@ -117,9 +117,7 @@ Assumptions and Limitations
 The quantity of interest is exposure to the mean blood pressure level regardless of whether that level is naturally occurring or occurs via use of medication; we assume full reversibility of risk and do not account for duration of exposure to elevated SBP. 
 
 The values for SBP generated include exposures outside of a reasonably expected 
-range. These values lead to extreme relative risks which cause the model to fail. 
-
-In addition to model failures, we do not think relative risks continue in a log 
+range. In addition, we do not think relative risks continue in a log 
 linear pattern indefinitely, as is implemented in this model. A natural ceiling of 
 risk associated with a single risk factor probably exists. 
 

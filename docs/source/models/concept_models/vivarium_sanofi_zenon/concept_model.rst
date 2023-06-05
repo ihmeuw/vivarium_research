@@ -1,7 +1,7 @@
 .. _2017_concept_model_vivarium_sanofi_zenon:
 
 =====================================================
-Vivarium - CSU - Simulating lipid lowering
+Vivarium CSU Simulating lipid lowering
 =====================================================
 
 Model Overview
