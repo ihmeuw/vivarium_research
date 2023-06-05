@@ -82,11 +82,11 @@ PRL case study: integration tests
 We have automated some V&V checks on the PRL project by adding integration tests
 to `the simulation repository <https://github.com/ihmeuw/vivarium_census_prl_synth_pop/>`_.
 These tests run the simulation for a given number of time steps and check certain conditions
-with explicit Python :code:`assert` statements, which fail in unexpected situations.
+with explicit Python :code:`assert` statements, which fail when the model exhibits unexpected behavior.
 For example, there is a test that checks that each non-GQ household in the simulation has exactly one
-living reference person.
+living reference person, a condition which should always be true.
 
-The integration tests have access to intermediate simulation state, not only simulation outputs, and can check
+The integration tests have access to intermediate simulation states, not only simulation outputs, and can check
 conditions at each time step.
 Therefore, they are quite similar to :ref:`interactive simulation V&V <vivarium_interactive_sim_v_and_v>` we have done in the past.
 Because not much changes over time in the PRL simulation (there is nothing like an intervention scale-up),
@@ -117,7 +117,7 @@ Nor can we use an approximation like "within X% of the true value,"
 since how much a value deviates due to chance depends on our population size.
 The difficulty of this problem is part of why, in the manual V&V process, we usually check such values visually.
 
-By building a proof of concept for the PRL simulation, we have begun to formalize this to enable
+By building a proof-of-concept for the PRL simulation, we have begun to formalize this to enable
 automated V&V of such "fuzzy" values.
 The approach we have landed on is to use frequentist hypothesis tests that correspond
 to the values we want to check in the simulation.

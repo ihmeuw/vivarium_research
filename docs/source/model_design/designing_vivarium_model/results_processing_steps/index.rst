@@ -56,7 +56,7 @@ The current standard process for verification and validation (V&V) goes roughly 
    (the file path of) the results.
    We sometimes call these results "count data" because the file path ends with :code:`count_data`.
 #. Researchers use the results to assess whether new features and models are behaving as expected.
-   Additionally, researchers check for regressions in previously-implemented behavior; generally, this is
+   Additionally, researchers check for regressions in previously implemented behavior; generally, this is
    done by re-running the V&V checks from previous model numbers on the latest results.
    These checks are usually made by graphing relevant quantities and comparing them to targets visually.
 #. Researchers report any findings that need to be addressed.
