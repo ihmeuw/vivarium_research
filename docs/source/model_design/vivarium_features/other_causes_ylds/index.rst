@@ -64,7 +64,7 @@ Comorbidity correction
 The disability weights estimated through the process described above consider
 each health state individually and must be corrected for the simultaneous 
 presence of multiple disability-causing health states within a given 
-individual. This correction accounts for the assumption that disabiliy weights 
+individual. This correction accounts for the assumption that disability weights 
 from comorbid conditions scale multiplicatively rather than additively. So in 
 effect, the reduction in health due to a newly acquired cause of disability is 
 quantified as greater for an individual who was previously in perfect health 
@@ -218,30 +218,86 @@ background morbidity, including:
 
   - Cannot calculate cause-specific YLDs adjusted for comorbidity even just among modeled causes, resulting in overestimation of cause-specific YLDs relative to "all cause" YLDs among modeled causes
 
-  - Does not adjust for comorbidity due to unmodelled causes, resulting in overestimation of YLDs due to modeled causes relative to GBD estimates
+  - Does not adjust for comorbidity due to unmodeled causes, resulting in overestimation of YLDs due to modeled causes relative to GBD estimates
 
 - Underestimation of total YLDs
 
   - Only observe a subset of total YLDs within our simulation. While we can calculate YLDs averted between scenarios, we cannot accurately calculate percent reduction in all-cause YLDs or DALYs relative to baseline because we do not model YLDs due to all causes at baseline.
 
-  - Causes us to overestimate impact of a death averted in our simulation. An averted death in the alterantive relative to baseline scenario result in some number of YLLs averted, but really this person should then start accruing YLDs overtime, which will decrease the number of DALYs averted relative to baseline. 
+  - Causes us to overestimate impact of a death averted in our simulation. An averted death in the alternative relative to baseline scenario result in some number of YLLs averted, but really this person should then start accruing YLDs overtime, which will decrease the number of DALYs averted relative to baseline. 
 
 Proposal
 --------------
 
 To address these issues, we propose to update the default vivarium behavior to 
 model background morbidity in a similar manner to the default behavior to model 
-background mortality. 
+background mortality. Additionally, we propose the incorporation of cause-specific 
+COMO-adjusted YLDs into vivarium observers.
+
+1. Background morbidity
++++++++++++++++++++++++
+
+In order to model YLDs due to non-modeled background causes, we must estimate a 
+"cause-deleted" disability weight that represents the disability weight for all
+GBD causes except for those explicitly modeled in a given vivarium simulation. 
+This "cause-deleted" disability weight should be adjusted for comorbidity of all
+individual causes of disability included in background morbidity, but NOT adjusted
+for comorbidity with modeled causes (which instead will be performed within 
+the simulation).
+
+The ideal approach to estimating this cause-deleted COMO adjusted disability weight
+due to unmodeled causes would be to perform the COMO adjustment as is done in the 
+central computation process while excluding modeled sequelae. This should be done
+at the location/age/sex/year-specific level. Integrating the central computation
+code into vivarium processes would be ideal so that we will replicate all of the
+exceptions and maintain any regular updates to their process.
+
+However, until this is able to be achieved, an interim solution will be to estimate
+the DW due to background morbidity as the difference between the all-cause YLD rate 
+and the sum of the YLD rate due to all modeled causes of disability at the 
+location/age/sex/year-specific level:
+
+.. math::
+
+  DW_\text{background} = \text{YLD rate}_\text{c294} - \sum_{c=1}^n \text{YLD rate}_c
+
+.. note::
+
+  This interim solution will systematically underestimate the DW due to background morbidity.
+  This underestimation will be larger when the relative share of YLDs due to modeled causes 
+  of YLDs due to all causes is large.
 
 .. todo::
 
-  1. Document steps to calculating DW due to background morbidity
+  Update this section to alternate equation with notebook proof, but first generalize to multiple causes.
 
-    - Immediate method: YLD subtraction
+2. Adjusted YLD observer
+++++++++++++++++++++++++
 
-    - Eventual method: Adapt central computation COMO code to calculate "cause-deleted" COMO-adjusted DW
+To align with this proposal, the default YLD observer in vivarium should function so that the
+amount of YLDs due to cause :math:`YLDs_c` accrued on a given timestep is equal to:
 
-  2. Document desired DW/YLD weighting for vivarium observers
+.. math::
+
+  YLDs_c = \frac{DW_c}{\sum_{mc=1}^n DW_\text{mc}} * DW_\text{overall} * \text{timestep scalar}
+
+Where:
+
+.. list-table::
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+  * - :math:`YLDs_c`
+    - YLDs accrued due to cause c on a given timestep for a given simulant
+  * - :math:`DW_c`
+    - Disability weight for cause c (prevalence-weighted average of sequelae DWs)
+  * - :math:`\sum_{mc=1}^n DW_\text{mc}`
+    - Sum of disability weights for all n modeled causes the simulant possesses, INCLUDING background other causes
+  * - :math:`DW_\text{overall}`
+    - :math:`1 - \prod_{mc=1}^n (1 - DW_\text{mc})`
+  * - :math:`\text{timestep scalar}`
+    - Duration of simulation timestep, in years
 
 Potential use cases
 +++++++++++++++++++
@@ -249,3 +305,7 @@ Potential use cases
 
 Challenges to consider
 ++++++++++++++++++++++
+
+- Consider updating current behavior of cause DW equal to prevalence-weighted average of sequela DWs
+
+  - Alternative would be to assign sequela-specific DW based on prevalence-weighted probability (assuming mutually exclusive sequelae)
