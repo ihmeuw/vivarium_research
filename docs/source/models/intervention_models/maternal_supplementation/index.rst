@@ -1,7 +1,7 @@
 .. _maternal_supplementation_intervention:
 
 =================================================================================================================
-Maternal Prenatal Supplementation: Iron-Folic Acid/Targeted Balanced Energy Protein and Multiple Micronutrients
+Antenatal Supplementation: Iron-Folic Acid, Multiple Micronutrients, and Balanced Energy Proteins
 =================================================================================================================
 
 .. contents::
@@ -130,7 +130,7 @@ Given the low utilization of MMS and BEP relative to IFA, we assume that baselin
     - Pregnant population
     - Proportion who took antenatal iron for 90+ days
     - 0.106
-    - DHS 2019
+    - DHS 2019. Don't use this value for Nutrition optimization! Will be provided on concept model document.
   * - India
     - Pregnant population
     - Proportion who took antenatal iron for 90+ days
@@ -145,7 +145,7 @@ Given the low utilization of MMS and BEP relative to IFA, we assume that baselin
     - Pregnant population
     - Proportion who took antenatal iron for 90+ days
     - 0.294
-    - DHS 2017
+    - DHS 2017. Don't use this value for Nutrition optimization! Will be provided on concept model document.
   * - Tanzania
     - Pregnant population
     - Proportion who took antenatal iron for 90+ days
@@ -169,13 +169,31 @@ Vivarium Modeling Strategy
 
 The maternal supplementation intervention is administered to mothers and impacts both the mother and infant. To model the impact of the intervention on either child or maternal outcomes, simulant attributes for maternal nourishment exposure (BMI/x-factor) and maternal ANC attendance exposure are required. Additionally, to model the impact on child growth, child growth exposures are required. To model the impact on maternal mortality, a maternal hemoglobin exposure value is required. This intervention model requires the additional simulant attribute of maternal supplement regimen.
 
+Coverage algorithms
++++++++++++++++++++
+
+Individual product coverage algorithms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For use in the :ref:`nutrition optimization simulation <2021_concept_model_vivarium_nutrition_optimization>`.
+
+For our purposes, each individual antenatal supplementation product (IFA, MMS, and BEP) are mutually exclusive; in other words, a given simulant can only be covered by one of these three products for any given pregnancy. We do not consider changing antenatal supplementation products during a single pregnancy. Supplementation product coverage may depend on other simulant characteristics, such as antenatal care visit attendance or pre-pregnancy body mass index (BMI) exposure.
+
+.. note::
+
+  Although the supplementation products are mutually exclusive, it is important to remember that iron and folic acid (the nutrients present in IFA) are also present in MMS and BEP products. Similarly, the micronutrients present in MMS are assumed to also be present in BEP products. However, BEP contains additional macronutrients that are not provided with MMS or IFA, and likewise, MMS contains micronutrients that are not provided with IFA.
+
+  Therefore, the intervention impacts of each intervention product "stack" upon one another such that the effect of BEP includes the effect of IFA relative to no supplementation, MMS relative to IFA, AND BEP relative to MMS. Specific instructions and details are provided in the following sections. 
+
+Targeted intervention package coverage algorithm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For use in the :ref:`Balanced energy protein simulation <2017_concept_model_vivarium_gates_bep>` and the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`.
+
 For the implementation of the intervention in an alterative scenarios, we will model BEP supplementation among undernourished mothers and MMS supplementation among adequately nourished mothers rather than IFA supplementation alone, as demonstrated in the following decision tree. The :ref:`maternal body mass index risk exposure <2019_risk_exposure_maternal_bmi>` should be used to determine maternal nourishment status for this intervention model (exposed=undernourished).
 
 .. image:: coverage_decision_tree.svg
 
-.. note::
-
-  This decision tree assumes a complete transition from IFA to targeted BEP/MMS. Alternative intervention implementations may be considered. 
 
 .. list-table:: Modeled Outcomes
   :widths: 15 15 15 15 15 15 15
@@ -466,6 +484,64 @@ In the baseline scenario, the exposure distribution of birthweight (mean birthwe
 
 If birthweight exposures are stratified by supplementation regimen and maternal nourishment strata, then birthweight differences between regimens should match the effect sizes within a given maternal nourishment exposure strata.
 
+Birth outcomes
+++++++++++++++++++
+
+Antenatal supplementation interventions will affect the risk of stillbirth for full term pregnancies (NOTE: not necessary to apply to partial term pregnancies), as described in the :ref:`pregnancy model document <other_models_pregnancy>`. Notably, it is assumed that increased risk of stillbirth will result in decreased risk of live birth and vise versa, with no impact on the risk of abortion/miscarriage or ectopic pregnancy.
+
+The observed effect of each antenatal supplementation product on the risk of stillbirth is summarized below:
+
+.. list-table:: Stillbirth effects
+  :header-rows: 1
+
+  * - Supplementation product
+    - Stillbirth RR
+    - Source
+  * - IFA
+    - 1
+    - Lack of evidence
+  * - MMS
+    - 0.91 (95% CI: 0.71, 0.93), lognormal distribution of uncertainty
+    - [Oh-et-al-2020]_
+  * - BEP
+    - 0.39 (95% CI: 0.19, 0.80), lognormal distribution of uncertainty
+    - [Lassi-et-al-2020-antenatal-supplementation]_
+
+Because there is no effect of IFA on stillbirths and we assume there is no baseline coverage of MMS or BEP, there is no differentiation in stillbirth rate due to baseline coverage of antenatal supplementation products in our modeled populations. Therefore, we can simply apply the relative risk of stillbirth directly to the baseline stillbirth rate without accounting for calibration of baseline coverage (in other words, the PAF of antenatal supplementation on stillbirths is equal to 0).
+
+The relative risk for this risk factor will apply to the probability of experiencing still birth such that:
+
+.. math::
+
+  \text{stillbirth probability}_\text{no supplementation} = \text{stillbirth probability}_{overall} 
+
+  \text{stillbirth probability}_\text{supplement} = \text{stillbirth probability}_{overall} * RR_\text{supplement}
+
+And the probabilities of experiencing the remaining birth outcomes are as follows:
+
+.. math:: 
+
+  \text{other probability}_\text{no supplementation} = \text{other probability}_{overall}
+
+  \text{other probability}_\text{supplement} = \text{other probability}_{overall} 
+
+  \text{live birth probability}_\text{no supplementation} =  \text{live birth probability}_{overall}
+
+  \text{live birth probability}_\text{supplement} = 1 - \text{stillbirth probability}_\text{supplement} - \text{other probability}_{overall}
+
+Where, :math:`\text{stillbirth probability}_{overall}`, :math:`\text{live birth probability}_{overall}`, and :math:`\text{other probability}_{overall}` are defined on the :ref:`closed cohort pregnancy model document <other_models_pregnancy>` and :math:`RR_\text{supplement}` is the supplementation product-specific relative risk of stillbirth, as defined in the table above.
+
+Validation and verification criteria
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- The rate of each birth outcome should continue to validate to input data in the baseline scenario
+- Birth outcome rates stratified by the intervention coverage should verify to the magnitude of the risk effect
+
+Assumptions and limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- There is an observed association between severe anemia during pregnancy and stillbirth, as shown in [Young-et-al-2019]_. Therefore, there should hypothetically be some effect of IFA on stillbirth given that it improves hemoglobin concentration during pregnancy; however, we do not consider this effect due to lack of evidence that shows a direct effect of IFA on stillbirth outcomes.
+
 Child Growth Failure (CGF)
 +++++++++++++++++++++++++++
 
@@ -626,6 +702,9 @@ References
 
 .. [Keats-et-al-2019-maternal-supplementation]
   Keats  EC, Haider  BA, Tam  E, Bhutta  ZA. Multiple‐micronutrient supplementation for women during pregnancy. Cochrane Database of Systematic Reviews 2019, Issue 3. Art. No.: CD004905. DOI: 10.1002/14651858.CD004905.pub6. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full>`_
+
+.. [Lassi-et-al-2020-antenatal-supplementation]
+  Lassi ZS, Padhani ZA, Rabbani A, Rind F, Salam RA, Das JK, Bhutta ZA. Impact of Dietary Interventions during Pregnancy on Maternal, Neonatal, and Child Outcomes in Low- and Middle-Income Countries. Nutrients. 2020 Feb 19;12(2):531. doi: 10.3390/nu12020531. PMID: 32092933; PMCID: PMC7071393.
 
 .. [McGovern-et-al-2019-maternal-supplementation]
   McGovern, M. E. (2019). How much does birth weight matter for child health in developing countries? Estimates from siblings and twins. Health economics, 28(1), 3-22. `https://pubmed.ncbi.nlm.nih.gov/30239053 <https://pubmed.ncbi.nlm.nih.gov/30239053/>`_.
