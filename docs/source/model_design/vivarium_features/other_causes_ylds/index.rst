@@ -71,6 +71,16 @@ quantified as greater for an individual who was previously in perfect health
 than for an individual who was already subject to some non-zero baseline level 
 of morbidity.
 
+The COMO process in GBD assumes total independence between health states and
+does not account for any correlation that may exist between related health 
+states (beyond correlation induced by location, age, and sex, which is 
+accounted for through its stratified adjustments). As reported in the GBD 2019 
+methods appendix, "[GBD] tested the contribution of dependent and independent 
+comorbidity in the US MEPS data and found that 
+**independent comorbidity was the dominant factor** even though well-known 
+examples of dependent comorbidity exist, such as clustering of conditions 
+like diabetes and stroke or anxiety and alcohol use disorders" (p. 475).
+
 The GBD study performs this comorbidity correction (termed "COMO") 
 using a microsimulation, described below. The microsimulation is performed at 
 the age-, sex-, location-, and 
@@ -81,16 +91,33 @@ sequela prevalence.
 
 .. note::
 
-  The COMO process in GBD assumes total independence between health states and 
-  does not account for any correlation that may exist between related health 
-  states (beyond correlation induced by location, age, and sex, which is 
-  accounted for through its stratified adjustments).
+  The COMO adjustment is run and maintained by IHME central computation. `The 
+  repository can be found here (as of May, 2023) <https://stash.ihme.washington.edu/projects/CCGMAC/repos/como/browse>`_.
 
-  As reported in the GBD 2019 methods appendix, "[GBD] tested the contribution 
-  of dependent and independent comorbidity in the US MEPS data and found that 
-  **independent comorbidity was the dominant factor** even though well-known 
-  examples of dependent comorbidity exist, such as clustering of conditions 
-  like diabetes and stroke or anxiety and alcohol use disorders" (p. 475).
+  According to correspondence with a central computation representative: the COMO
+  adjustment ensures that no simulant may simultaneously possess mutually exclusive
+  sequelae (mild AND moderate diarrhea, for instance), nor may they simultaneously
+  possess mutually exclusive impairments (such as mild AND moderate anemia). A 
+  simulant may, however, simultaneously possess more than one sequelae that correspond
+  to the same healthstate (for example: the sequelae ectopic pregnancy and intestinal 
+  perforation due to paratyphoid, which are both included in the abdominopelvic problem 
+  healthstate. In this case, an individual who simultaneously possesses both of these 
+  sequelae that share the same health state, the individual will in effect experience 
+  the abdominopelvic problem healthstate as approximately twice as severe than if they 
+  only possessed a one of these sequelae). 
+
+    Note, a list of GBD sequelae and healthstate pairs can be obtained with the 
+    :code:`db_queries.get_sequela_metadata()` shared function.
+
+  Additionally, the COMO adjustment handles exceptions for impairments as well as 
+  certain GBD causes (including injuries, sexual violence, and "residual" causes,
+  epilepsy, and intellectual disability) for which DWs are estimated through separate, 
+  custom processes.
+
+  The COMO adjustment also handles aggregation of cause prevalence and incidence
+  up the GBD cause hierarchy. In this process, some sub-causes of a parent cause assumed to 
+  be independent (and scale multiplicatively) and others assumed to be mutually exclusive
+  (and scale additively).
 
 Once this population has been initialized, the comorbidity correction is 
 performed as follows:
@@ -208,25 +235,13 @@ background mortality.
 
 .. todo::
 
-  Investigate and document pros and cons associated with 4 different options:
+  1. Document steps to calculating DW due to background morbidity
 
-    1. Current/historical behavior
+    - Immediate method: YLD subtraction
 
-    2. Model DWs due to all sequelae individually (potentially computationally 
-    burdensome and requires timestep updates?)
+    - Eventual method: Adapt central computation COMO code to calculate "cause-deleted" COMO-adjusted DW
 
-    3. Model DWs due to modeled causes AND composite COMO-adjusted YLDs due to 
-    background causes (note that these *should* increase slightly when we 
-    reduce YLDs due to modeled causes, but proposal will not include this 
-    behavior... need to check to see if it is expected to be more or less 
-    biased (compared to "gold standard" option 2) than option #1 is).... we'll 
-    also have some potential double-counting issues here that need to be 
-    thought through.
-
-    4. Run custom como adjustment among background causes once prior to 
-    simulation start to determine como-adjusted DW excluding all modeled causes 
-    and then use that as DW for background morbidity throughout simulation. 
-    This is probably best compromise, but does require additional upfront work
+  2. Document desired DW/YLD weighting for vivarium observers
 
 Potential use cases
 +++++++++++++++++++
