@@ -92,14 +92,22 @@ sequela prevalence.
 .. note::
 
   The COMO adjustment is run and maintained by IHME central computation. `The 
-  repository can be found here (as on May, 2023) <https://stash.ihme.washington.edu/projects/CCGMAC/repos/como/browse>`_.
+  repository can be found here (as of May, 2023) <https://stash.ihme.washington.edu/projects/CCGMAC/repos/como/browse>`_.
 
   According to correspondence with a central computation representative: the COMO
   adjustment ensures that no simulant may simultaneously possess mutually exclusive
   sequelae (mild AND moderate diarrhea, for instance), nor may they simultaneously
   possess mutually exclusive impairments (such as mild AND moderate anemia). A 
   simulant may, however, simultaneously possess more than one sequelae that correspond
-  to the same healthstate. 
+  to the same healthstate (for example: the sequelae ectopic pregnancy and intestinal 
+  perforation due to paratyphoid, which are both included in the abdominopelvic problem 
+  healthstate. In this case, an individual who simultaneously possesses both of these 
+  sequelae that share the same health state, the individual will in effect experience 
+  the abdominopelvic problem healthstate as approximately twice as severe than if they 
+  only possessed a one of these sequelae). 
+
+    Note, a list of GBD sequelae and healthstate pairs can be obtained with the 
+    :code:`db_queries.get_sequela_metadata()` shared function.
 
   Additionally, the COMO adjustment handles exceptions for impairments as well as 
   certain GBD causes (including injuries, sexual violence, and "residual" causes,
