@@ -162,15 +162,15 @@ For our hypothesis testing approach to fuzzy checking, we choose our desired
 specificity for the overall checking process (across all V&V checks).
 Then, :math:`1 - \text{specificity}` is our desired `family-wise error rate <https://en.wikipedia.org/wiki/Family-wise_error_rate>`_
 for the family of hypotheses.
-We use a Bonferroni correction to determine whether
+We use a `Bonferroni correction <https://en.wikipedia.org/wiki/Bonferroni_correction>`_ to determine whether
 any of the null hypotheses (that the simulation values match the V&V targets) can be rejected.
 This correction makes no assumptions of independence between the hypotheses,
 but **it means that our desired specificity is only a lower bound**.
 The true specificity of our automated V&V is higher, with a corresponding loss in sensitivity.
 
 .. note::
-  We use frequentist, rather than Bayesian, statistics here.
-  This is mainly because it would be more complex to implement, and
+  We use `frequentist <https://en.wikipedia.org/wiki/Frequentist_inference>`_, rather than `Bayesian <https://en.wikipedia.org/wiki/Bayesian_statistics>`_, statistics here.
+  This is mainly because a Bayesian approach would be more complex to implement, and
   it would be tricky to specify an intuitive prior about
   the distribution of potential simulation errors.
 
