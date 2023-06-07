@@ -47,11 +47,19 @@
 
 
 
-.. _{YOUR_MODEL_TITLE}:
+.. _concept_model_template:
 
 =======================
 Concept Model Template
 =======================
+
+The following template is intended to make your life easier as you start documenting 
+the concept model for a project. Feel free to move around the order of subheadings/content
+as needed!
+
+Each of the tables or sub-headings on this page include a brief description and an example
+of what information is intended to go where. Make sure to remove those as you begin filling
+out the template! 
 
 .. todo::
   Replace the title above with your model title.
@@ -69,13 +77,13 @@ Concept Model Template
 
 1.0 Project overview
 ++++++++++++++++++++
+Here you can provide an introduction and overview to the project. Information to include
+in this section might include the following: 
 
-
-.. _{YOUR_MODEL_SHORT_NAME}1.1:
-
-1.1 Examples of similar analyses
---------------------------------
-
+* Brief background of topic
+* Purpose or aims
+* Funder information
+* Examples of similar analyses
 
 .. _{YOUR_MODEL_SHORT_NAME}2.0:
 
@@ -87,45 +95,61 @@ Concept Model Template
 2.1 Default specifications 
 --------------------------
 
+The below table is intended for outlining the default specifications of your simulation. 
+Included in the table is a column of parameter definitions. Please delete this column as you 
+fill out the table. 
+
 .. list-table:: Default simulation specifications
   :header-rows: 1
 
   * - Parameter
+    - Definition
     - Value
     - Note
   * - Location(s)
     - 
     - 
+    -
   * - Number of draws
     - 
     - 
+    -
   * - Population size per draw
     - 
     - 
+    -
   * - Age start (initialization)
     - Zero
     - If sim duration > age start for observation, age_start at initialization will be zero and fertility will need to be included. Otherwise, age start at initialization will be age start for observation minus simulation duration and a closed cohort (no fertility). Note that currently vivarium can only have new simulants enter the simulation at age zero, although changing this could be a potential framework improvement. 
+    -
   * - Age start (observation)
     - 
-    - See note above.
+    - 
+    -
   * - Age end
     - 
     - 
+    -
   * - Exit age
     -
     - 
+    -
   * - Simulation start date
     - 
     - 
+    -
   * - Simulation observation start date
     - 
     - 
+    -
   * - Simulation end date
     - 
     - 
+    -
   * - Timestep
     - 
     - 
+    -
 
 
 .. _{YOUR_MODEL_SHORT_NAME}3.0:
