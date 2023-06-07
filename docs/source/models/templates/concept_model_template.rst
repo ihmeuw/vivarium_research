@@ -107,49 +107,54 @@ fill out the table.
     - Value
     - Note
   * - Location(s)
-    - 
-    - 
+    - Target/simulated region & GBD ID 
+    - e.g. Ethiopia (ID: 179)
     -
   * - Number of draws
-    - 
-    - 
-    -
+    - Desired number of draws that a given simulation is to be run for. (Generally, this should be a number between 0 and 999.)
+    - e.g. 50 draws 
+    - Read more about draws in Vivarium :ref:`here <vivarium_best_practices_monte_carlo_uncertainty>`.
   * - Population size per draw
-    - 
-    - 
-    -
+    - Desired simulated population size per draw for a given simulation. 
+    - e.g. 100,000 simulants
+    - Read more about how to determine a reasonable population size for your simulation 
+      :ref:`here <vivarium_best_practices_monte_carlo_uncertainty>`.
   * - Age start (initialization)
-    - Zero
-    - If sim duration > age start for observation, age_start at initialization will be zero and fertility will need to be included. Otherwise, age start at initialization will be age start for observation minus simulation duration and a closed cohort (no fertility). Note that currently vivarium can only have new simulants enter the simulation at age zero, although changing this could be a potential framework improvement. 
-    -
+    - If sim duration > age start for observation, age_start at initialization will be zero and
+      fertility will need to be included. Otherwise, age start at initialization will be age start for 
+      observation minus simulation duration and a closed cohort (no fertility).
+    - e.g. 0 months
+    - Currently vivarium can only have new simulants enter the simulation at age zero, although 
+      changing this could be a potential framework improvement. 
   * - Age start (observation)
-    - 
-    - 
+    - Age at which simulants are included in observer.
+    - e.g. 6 months
     -
   * - Age end
-    - 
-    - 
+    - Age at which simulants are no longer included in observer. 
+    - e.g. 5 years
     -
   * - Exit age
-    -
-    - 
+    - Age at which simulants age out of the simulation. 
+    - e.g. 5 years
     -
   * - Simulation start date
     - 
-    - 
+    - e.g. 2021-07-01
     -
   * - Simulation observation start date
     - 
-    - 
+    - e.g. 2022-01-01
     -
   * - Simulation end date
     - 
-    - 
+    - e.g. 2026-12-31
     -
   * - Timestep
-    - 
-    - 
-    -
+    - Amount of time that passes in simulation between each observer.
+    - e.g. 4 days
+    - Read more about how to determine a reasonable timestep for your simulation 
+      :ref:`here <vivarium_best_practices_time_steps>`.
 
 
 .. _{YOUR_MODEL_SHORT_NAME}3.0:
