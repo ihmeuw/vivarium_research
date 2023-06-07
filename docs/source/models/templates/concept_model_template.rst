@@ -77,7 +77,7 @@ out the template!
 
 1.0 Project overview
 ++++++++++++++++++++
-Here you can provide an introduction and overview to the project. Information to include
+Here you can provide an introduction and overview to the project. Information
 in this section might include the following: 
 
 * Brief background of topic
@@ -90,12 +90,28 @@ in this section might include the following:
 2.0 Simulation Design
 ++++++++++++++++++++++
 
+This section is intended as the main body of documentation of your simulation. Information
+in this section might include the following: 
+
+* Concept model diagram 
+* Links to relevant components of diagram
+* Scenario descriptions
+* Default specifications 
+* Demographics
+* Location description
+* Effect size
+
 .. _{YOUR_MODEL_SHORT_NAME}2.1:
 
-2.1 Default specifications 
+2.1 Concept model diagram 
+-------------------------
+
+.. _{YOUR_MODEL_SHORT_NAME}2.2:
+
+2.2 Default specifications 
 --------------------------
 
-The below table is intended for outlining the default specifications of your simulation. 
+The below table is intended to outline the default specifications of your simulation. 
 Included in the table is a column of parameter definitions. Please delete this column as you 
 fill out the table. 
 
@@ -156,16 +172,102 @@ fill out the table.
     - Read more about how to determine a reasonable timestep for your simulation 
       :ref:`here <vivarium_best_practices_time_steps>`.
 
+.. _{YOUR_MODEL_SHORT_NAME}2.4:
+
+2.4 Population description
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Describe the simulated population demographics here. Information in this section might include: 
+  - Cohort type
+  - Cohort length
+  - Age and sex structure
+  - Time step
+  - Fertility
+  - Stratifications 
+
+.. _{YOUR_MODEL_SHORT_NAME}5.2.2:
+
+2.5 Location description
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Describe the location (country and/or region(s)) of the simulation here.
 
 .. _{YOUR_MODEL_SHORT_NAME}3.0:
 
-3.0 Causal framework
-++++++++++++++++++++
+3.0 Verification & validation (V&V) tracking
+--------------------------------------------
 
-.. _{YOUR_MODEL_SHORT_NAME}3.1:
+This section is intended for tracking the progress of V&V of simulation
+results. 
 
-3.1 Causal diagram
-------------------
+The below tables can be filled out iteratively as new model runs are requested and later V&V'd. 
+ 
+.. list-table:: Model runs
+  :header-rows: 1
+
+  * - Run number
+    - Run description
+    - Scenarios
+    - Specification modifications
+    - Stratification modifications
+  * - e.g. 1.0
+    - e.g. Baseline concept model updates
+    - e.g. 50 draws; 200,000 pop size
+    - e.g. Count data results stratified by random seed for optimization
+    - e.g. Remove children under 6 months from observers
+
+.. note::
+
+  Depending on your simulation and preference, the above table could also be converted to a subheading format
+  (i.e., in the event the table gets too lengthy!)
+
+.. list-table:: Model verification and validation tracking
+   :widths: 3 10 20
+   :header-rows: 1
+
+   * - Run number
+     - V&V criteria
+     - V&V summary
+   * - e.g. 1.0 
+     - e.g. 
+     - e.g. V&V notebooks for model 1.0 can be found here [insert Github link]
+   * - 2.0
+     - 
+     - 
+   * - 3.0
+     - 
+     - 
+     
+.. list-table:: Outstanding verification and validation issues
+   :header-rows: 1
+
+   * - Issue
+     - Explanation
+     - Action plan
+     - Timeline
+   * - 
+     - 
+     - 
+     - 
+
+
+.. _{YOUR_MODEL_SHORT_NAME}4.0:
+
+4.0 Miscellaneous
++++++++++++++++++
+
+This section is intended for any other components to your new project that need to be tracked!
+Information in this section may include: 
+
+* Causal framework
+* Additional subject background/context
+* Back-of-the-envelope calculations
+* Model limitations 
+
+.. _{YOUR_MODEL_SHORT_NAME}4.1:
+
+4.1 Causal framework
+--------------------
  
  .. note::
     link to DAGs page
@@ -188,171 +290,17 @@ fill out the table.
 
 **Mediators (M)**:
 
+.. _{YOUR_MODEL_SHORT_NAME}4.2:
 
-.. _{YOUR_MODEL_SHORT_NAME}3.2:
+4.2 Additional background
+-------------------------
 
-3.2 Effect sizes
-----------------
+.. _{YOUR_MODEL_SHORT_NAME}4.3:
 
+4.3 Back-of-the-envelope calculations
+-------------------------------------
 
+.. _{YOUR_MODEL_SHORT_NAME}4.4:
 
-4.0 Intervention
-++++++++++++++++
-
-
-
-.. _{YOUR_MODEL_SHORT_NAME}4.1:
-
-4.1 Simulation scenarios
-------------------------
-
-
-.. _{YOUR_MODEL_SHORT_NAME}5.0:
-
-5.0 Vivarium modelling components
-+++++++++++++++++++++++++++++++++
-
-.. _{YOUR_MODEL_SHORT_NAME}5.1:
-
-5.1 Vivarium concept model 
---------------------------
-
-.. note::
-  This is our standard vivarium concept model diagram we are used to seeing
-
-.. _{YOUR_MODEL_SHORT_NAME}5.2:
-
-5.2 Demographics
-----------------
-
-.. _{YOUR_MODEL_SHORT_NAME}5.2.1:
-
-5.2.1 Population description
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  - cohort type
-  - cohort length
-  - age and sex structure
-  - time step
-  - fertility
-  - stratifications 
-
-
-.. _{YOUR_MODEL_SHORT_NAME}5.2.2:
-
-5.2.2 Location description
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-.. _{YOUR_MODEL_SHORT_NAME}5.3:
-
-5.3 Models
-----------
-
-.. note::
-  here we use the compartmental (SEIR) models with squares
-  
-.. list-table:: Model runs
-  :header-rows: 1
-
-  * - Run
-    - Description
-    - Scenarios
-    - Specification modifications
-    - Stratificaction modifications
-    - Note
-  * - 
-    - 
-    - 
-    - 
-    - 
-    - 
-
-
-.. _{YOUR_MODEL_SHORT_NAME}5.3.1:
-
-5.3.1 Model 1
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. list-table:: Model verification and validation tracking
-   :widths: 3 10 20
-   :header-rows: 1
-
-   * - Model
-     - Description
-     - V&V summary
-   * - 1.0 
-     - 
-     - V&V notebooks for model 1.0 can be found here [insert Github link here]
-   * - 2.0
-     - 
-     - 
-   * - 3.0
-     - 
-     - 
-     
-.. list-table:: Outstanding verification and validation issues
-   :header-rows: 1
-
-   * - Issue
-     - Explanation
-     - Action plan
-     - Timeline
-   * - 
-     - 
-     - 
-     - 
-
-
-.. _{YOUR_MODEL_SHORT_NAME}5.4:
-
-5.4 Desired outputs
--------------------
-
-.. list-table:: Requested Count Data Outputs and Stratifications
-  :header-rows: 1
-
-  * - Output
-    - Include strata
-    - Exclude strata
-  * - Deaths and YLLs (cause-specific)
-    - 
-    - 
-  * - YLDs (cause-specific)
-    - 
-    - 
-  * - Cause state person time
-    - 
-    - 
-  * - Cause state transition counts
-    - 
-    - 
-  * - Mortality hazard first moment
-    - 
-    - 
-
-.. _{YOUR_MODEL_SHORT_NAME}5.5:
-
-5.5 Output meta-table shell
----------------------------
-
-.. todo::
-  - add special stratifications if necessary
-
-.. _{YOUR_MODEL_SHORT_NAME}6.0:
-
-6.0 Back of the envelope calculations
-+++++++++++++++++++++++++++++++++++++
-
-
-.. _{YOUR_MODEL_SHORT_NAME}7.0:
-
-7.0 Limitations
-+++++++++++++++
-
+4.4 Limitations
+---------------
