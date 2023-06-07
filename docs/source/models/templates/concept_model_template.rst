@@ -229,14 +229,8 @@ The below tables can be filled out iteratively as new model runs are requested a
      - V&V criteria
      - V&V summary
    * - e.g. 1.0 
-     - e.g. 
-     - e.g. V&V notebooks for model 1.0 can be found here [insert Github link]
-   * - 2.0
-     - 
-     - 
-   * - 3.0
-     - 
-     - 
+     - e.g. Confirm that there is no variation in person-time quantity between different observers of same measure.
+     - e.g. V&V notebooks for model 1.0 can be found here [insert Github link]. V&V criteria satisfied. 
      
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -245,10 +239,10 @@ The below tables can be filled out iteratively as new model runs are requested a
      - Explanation
      - Action plan
      - Timeline
-   * - 
-     - 
-     - 
-     - 
+   * - e.g. Simulants aged 0-6 months not present at initialization, resulting in missing age cohort over time.
+     - e.g. Discrepancy between age start and entrance age.
+     - e.g. Set age start value to 0 (instead of 6 months)
+     - e.g. For next model run 
 
 
 .. _{YOUR_MODEL_SHORT_NAME}4.0:
