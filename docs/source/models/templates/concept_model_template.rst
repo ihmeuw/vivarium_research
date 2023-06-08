@@ -185,7 +185,7 @@ Describe the simulated population demographics here. Information in this section
   - Fertility
   - Stratifications 
 
-.. _{YOUR_MODEL_SHORT_NAME}5.2.2:
+.. _{YOUR_MODEL_SHORT_NAME}2.5:
 
 2.5 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~
