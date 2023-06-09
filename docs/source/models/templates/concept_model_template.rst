@@ -134,7 +134,8 @@ fill out the table.
     - Desired simulated population size per draw for a given simulation. 
     - e.g. 100,000 simulants
     - Read more about how to determine a reasonable population size for your simulation 
-      :ref:`here <vivarium_best_practices_monte_carlo_uncertainty>`.
+      :ref:`here <vivarium_best_practices_monte_carlo_uncertainty>. Note that engineers will
+      decide how many random seeds to use to achieve the specified population size per draw.`.
   * - Age start (initialization)
     - If sim duration > age start for observation, age_start at initialization will be zero and
       fertility will need to be included. Otherwise, age start at initialization will be age start for 
