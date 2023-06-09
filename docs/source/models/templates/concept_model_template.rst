@@ -171,6 +171,11 @@ fill out the table.
     - e.g. 4 days
     - Read more about how to determine a reasonable timestep for your simulation 
       :ref:`here <vivarium_best_practices_time_steps>`.
+  * - Randomness key columns
+    - Parameters used to identify identical simulants across scenarios
+    - e.g. ['entrance_time', 'maternal_id', 'sex']
+    - Entrance time is currently required as a randomness key column 
+  
 
 .. _{YOUR_MODEL_SHORT_NAME}2.4:
 
