@@ -273,33 +273,33 @@ Note, for all emulator input scenarios, use baseline values for :math:`E_{SAM}` 
     - 0
     - 0
   * - E2
-    - 0.7
+    - 1
     - 0
     - 0
   * - E3
     - 0
-    - 0.7
+    - 1
     - 0
   * - E4
     - 0
     - 0
-    - 0.7
+    - 1
   * - E5
-    - 0.7
-    - 0.7
+    - 1
+    - 1
     - 0
   * - E6
-    - 0.7
+    - 1
     - 0
-    - 0.7
+    - 1
   * - E7
     - 0
-    - 0.7
-    - 0.7
+    - 1
+    - 1
   * - E8
-    - 0.7
-    - 0.7
-    - 0.7
+    - 1
+    - 1
+    - 1
 
 2.3 Modelling components
 ------------------------------
@@ -552,6 +552,12 @@ Note, for all emulator input scenarios, use baseline values for :math:`E_{SAM}` 
     - Run select scenarios with little stratification to use in building and testing emulator for nutrition optimization project
     - E1 through E8, :ref:`defined here <emulatorscenarios>`
     - 2 draws, population size 100,000 per draw
+    - Same stratifications and outputs as run 3.1.1
+    - 
+  * - 3.1.2.1: Emulator runs with more draws and 100% max coverage
+    - Run select scenarios with little stratification to use in building and testing emulator for nutrition optimization project. Note maximum intervention coverage has been increased from 0.7 in run 3.1.2 to 1 in run 3.1.2.1
+    - E1 through E8, :ref:`defined here <emulatorscenarios>`
+    - 20 draws, population size 100,000 per draw
     - Same stratifications and outputs as run 3.1.1
     - 
   * - 3.1.3
