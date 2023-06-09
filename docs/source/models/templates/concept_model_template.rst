@@ -49,6 +49,10 @@
 
 .. _concept_model_template:
 
+.. todo::
+
+  Replace the above ".. _concept_model_template:" with ".. _{YOUR_MODEL_NAME}:""
+
 =======================
 Concept Model Template
 =======================
@@ -127,7 +131,7 @@ fill out the table.
     - e.g. Ethiopia (ID: 179)
     -
   * - Number of draws
-    - Desired number of draws that a given simulation is to be run for. (Generally, this should be a number between 1 and 999.)
+    - Desired number of draws that a given simulation is to be run for. (Generally, this should be a number between 1 and 1,000.)
     - e.g. 50 draws 
     - Read more about draws in Vivarium :ref:`here <vivarium_best_practices_monte_carlo_uncertainty>`.
   * - Population size per draw
@@ -216,8 +220,10 @@ The below tables can be filled out iteratively as new model runs are requested a
     - Scenarios
     - Specification modifications
     - Stratification modifications
+    - Observer modifications
   * - e.g. 1.0
     - e.g. Baseline concept model updates
+    - e.g. Baseline only 
     - e.g. 50 draws; 200,000 pop size
     - e.g. Count data results stratified by random seed for optimization
     - e.g. Remove children under 6 months from observers
@@ -237,7 +243,12 @@ The below tables can be filled out iteratively as new model runs are requested a
    * - e.g. 1.0 
      - e.g. Confirm that there is no variation in person-time quantity between different observers of same measure.
      - e.g. V&V notebooks for model 1.0 can be found here [insert Github link]. V&V criteria satisfied. 
-     
+
+.. note::
+
+  We recommend that you fill out the 'V&V criteria' column in the table above before the model has actually been
+  implemented. Then you can fill in the 'V&V summary' as you go!  
+
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
 
@@ -256,7 +267,10 @@ The below tables can be filled out iteratively as new model runs are requested a
 4.0 Miscellaneous
 +++++++++++++++++
 
-This section is intended for any other components to your new project that need to be tracked!
+This section is intended for any other components to your new project that need to be tracked, but aren't necessarily
+things that the engineering team needs to know in order to implement the proposed design. Anything that needs to be 
+specifically highlighted for engineering should go in 'Simulation Design' above. 
+
 Information in this section may include: 
 
 * Causal framework
