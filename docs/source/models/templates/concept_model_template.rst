@@ -167,7 +167,7 @@ fill out the table.
     - e.g. 2026-12-31
     -
   * - Timestep
-    - Amount of time that passes in simulation between each observer.
+    - Amount of time that passes in simulation between each "step," which is when events and observations can happen.
     - e.g. 4 days
     - Read more about how to determine a reasonable timestep for your simulation 
       :ref:`here <vivarium_best_practices_time_steps>`.
