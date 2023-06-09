@@ -154,6 +154,9 @@ Documents that contain information specific to the overall model and the child s
   * - Location(s)
     - Ethiopia (ID: 179)
     - Eventually will also add Nigeria (214) and Pakistan (164)
+  * - Number of draws
+    - 10
+    - May be increased for final runs
   * - Population size per draw
     - 100,000
     - Eventually to be refined based on test runs
