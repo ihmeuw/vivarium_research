@@ -127,7 +127,7 @@ fill out the table.
     - e.g. Ethiopia (ID: 179)
     -
   * - Number of draws
-    - Desired number of draws that a given simulation is to be run for. (Generally, this should be a number between 0 and 999.)
+    - Desired number of draws that a given simulation is to be run for. (Generally, this should be a number between 1 and 999.)
     - e.g. 50 draws 
     - Read more about draws in Vivarium :ref:`here <vivarium_best_practices_monte_carlo_uncertainty>`.
   * - Population size per draw
