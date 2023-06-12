@@ -67,8 +67,9 @@ and generate an unambiguous verdict on whether or not there is an issue.
 
 There are some process questions to work out about this transformation:
 
-* Who investigates the cause of automated V&V failures -- research or engineering? Does it depend on the type of failure?
-  The answers to these questions greatly affect how annoying it is to have a false alarm, which is relevant to `fuzzy checking`_.
+* Who investigates the cause of automated V&V failures -- research or engineering?
+  Should we label whether checks are verification or validation, and have engineering and research investigate them, respectively?
+  How we manage this affects how annoying it is to have a false alarm, which is relevant to `fuzzy checking`_.
 * How frequently do we run automated V&V?
     * Should we consider separate "tiers" of automated checks that require different amounts of computational resources?
       For example, running the fast checks on every update to simulation code but the slower/more intensive checks only periodically.
@@ -196,7 +197,12 @@ Hypotheses by value type
   For now, we have only investigated methods for fuzzy checking proportions and rates.
   This is sufficient for a proof-of-concept implementation, which applies fuzzy checking
   to migration rates in the PRL simulation.
-  Presumably, other types of values could be checked using the appropriate hypothesis tests.
+  Presumably, other types of values could be checked using appropriate hypothesis tests:
+
+  * Summary statistics of continuous values, such as the mean or standard deviation of a hemoglobin distribution
+  * Relative risks/rate ratios between categorical groups
+  * More complex situations such as the number of unique values of an attribute observed, though these may
+    be hard to work out p-values for, and are not likely to come up frequently in our simulations.
 
 Proportions and rates
 ~~~~~~~~~~~~~~~~~~~~~
