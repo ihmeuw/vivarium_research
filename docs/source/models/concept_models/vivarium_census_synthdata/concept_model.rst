@@ -3178,7 +3178,7 @@ for all column based noise include:
     - Taxes (both), SSA
     - 0.01
     - 0.1
-    - "Borrowed" SSN, missing data, copy from within household, numeric miswriting, OCR, typographic
+    - "Borrowed" SSN (W2 observer only), missing data, copy from within household (**not** on W2 observer), numeric miswriting, OCR, typographic
     - Note that not all types of noise apply to all observers, details below
   * - ITIN
     - Taxes 1040
