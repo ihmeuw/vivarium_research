@@ -181,18 +181,16 @@ fill out the table.
       :ref:`here <vivarium_best_practices_monte_carlo_uncertainty>`. Note that engineers will
       decide how many random seeds to use to achieve the specified population size per draw.
   * - Age start (initialization)
-    - If sim duration > age start for observation, age_start at initialization will be zero and
-      fertility will need to be included. Otherwise, age start at initialization will be age start for 
-      observation minus simulation duration and a closed cohort (no fertility).
+    - Minimum age that simulants are initialized at when the simulation begins.
     - e.g. 0 months
-    - Currently vivarium can only have new simulants enter the simulation at age zero, although 
-      changing this could be a potential framework improvement. 
+    - Simulants might be initialized into the simulaiton before they are included in observers.
+      See to-do note below. 
   * - Age start (observation)
-    - Age at which simulants are included in observer.
+    - Age at which simulants begin to be included in observers.
     - e.g. 6 months
-    -
+    - See to-do note below.
   * - Age end
-    - Age at which simulants are no longer included in observer. 
+    - Age at which simulants are no longer included in observers. 
     - e.g. 5 years
     -
   * - Exit age
@@ -200,13 +198,15 @@ fill out the table.
     - e.g. 5 years
     -
   * - Simulation start date
-    - 
-    - e.g. 2021-07-01
-    -
+    - Date at which simulation begins.
+    - e.g. 2020-01-01
+    - Sometimes, the simulation needs to be initialized with a burn-in period to ensure the simulation
+      is in a steady state by the time observation begins. See to-do note below. 
   * - Simulation observation start date
-    - 
+    - Date at which observation begins.
     - e.g. 2022-01-01
-    -
+    - As noted above, in some cases there is a delay between the simulation start date and the observation
+      start date. See to-do note below. 
   * - Simulation end date
     - 
     - e.g. 2026-12-31
@@ -220,7 +220,14 @@ fill out the table.
     - Parameters used to identify identical simulants across scenarios
     - e.g. ['entrance_time', 'maternal_id', 'sex']
     - Entrance time is currently required as a randomness key column 
-  
+
+
+.. todo::
+
+  For 'Age start (initialization)' and 'Age start (observation)', add links to documentation pages that explain age start
+  and start date in more detail once they have been written. 
+
+
 .. _{YOUR_MODEL_SHORT_NAME}2.3.1:
 
 2.3.1 Population description
