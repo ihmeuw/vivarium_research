@@ -303,8 +303,8 @@ Where:
     - Description
     - V&V summary
   * - 0.0: Standard demography
-    - 
-    - 
+    - Mortality model for standard cohort of WRA
+    - Overall seems to be functioning as expected, but would like to add person-time observer to results. `Notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/model_0.0.ipynb>`_.
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
