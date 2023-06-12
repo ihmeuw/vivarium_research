@@ -288,28 +288,154 @@ or filepaths.
 You should have 2 bash configuration files, your bash profile or :code:`.bash_profile` 
 and your bash rc or :code:`.bashrc`. 
 
-The bash profile is the simpler of the two **Need more information, what is it exactly?** 
+bash profile
+~~~~~~~~~~~~
 
-The only lines needed in your bash profile are: 
+The bash profile is only run when you open the cluster, and so is usually a shorter file. 
+Below are the lines of code you need in your bash profile. 
+
+:: 
+
+  [[ -e ~/.profile ]] && source ~/.profile    ##Loads generic profile settings 
+  [[ -e ~/.bashrc  ]] && source ~/.bashrc     ##Loads bash rc 
+
+bash rc
+~~~~~~~
+
+Your bash rc file is run more frequently and can contain helpful settings and information 
+needed to run certain commands. First, you will need to run the below line of code in 
+your terminal to set up conda. Once you're logged into the cluster on the terminal of 
+your choosing, run: 
 
 .. code-block:: bash 
   :linenos:
 
-  $ [[ -e ~/.profile ]] && source ~/.profile    ##Loads generic profile settings 
-  $ [[ -e ~/.bashrc  ]] && source ~/.bashrc     ##Loads bash rc 
+  $ /ihme/code/central_comp/miniconda/bin/conda init  
 
-Your bash rc generally contains a few important pieces of information: 
+Following that, below is a block of code designed to be copied and pasted into your bash rc file. 
+If you're curious about what this code means, there are some comments included or you can ask a 
+friend. It is mainly settings to make the terminal more user friendly. 
 
-#. Code that allows conda to operate (conda is explained more in depth in :ref:`section 4 <conda_environments>`)
-#. Code that allows you to open and run Jupyter notebooks from the cluster command line 
-#. Aliases, which are included :ref:`below in the aliases section <cluster_access_other>`
+Section to copy and paste: 
 
-The code required for 1 and 2 can be copied and pasted from here: 
+::
 
-.. code-block:: bash 
-  :linenos:
+  # Source global definitions
+  if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+  fi
 
-  $ Need to add here 
+  # don't put duplicate lines or lines starting with space in the history.
+  # See bash(1) for more options
+  HISTCONTROL=ignoreboth
+
+  # append to the history file, don't overwrite it
+  shopt -s histappend
+
+  # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+  HISTSIZE=-1
+  HISTFILESIZE=2000
+
+  # check the window size after each command and, if necessary,
+  # update the values of LINES and COLUMNS.
+  shopt -s checkwinsize
+
+  # If set, the pattern "**" used in a pathname expansion context will
+  # match all files and zero or more directories and subdirectories.
+  # shopt -s globstar
+
+  # make less more friendly for non-text input files, see lesspipe(1)
+  [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+  # set variable identifying the chroot you work in (used in the prompt below)
+  if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+      debian_chroot=$(cat /etc/debian_chroot)
+  fi
+
+  # set a fancy prompt (non-color, unless we know we "want" color)
+  case "$TERM" in
+      xterm-color|*-256color) color_prompt=yes;;
+  esac
+
+  # uncomment for a colored prompt, if the terminal has the capability; turned
+  # off by default to not distract the user: the focus in a terminal window
+  # should be on the output of commands, not on the prompt
+  force_color_prompt=yes
+
+  if [ -n "$force_color_prompt" ]; then
+      if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+      else
+    color_prompt=
+      fi
+  fi
+
+  if [ "$color_prompt" = yes ]; then
+      PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  else
+      PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  fi
+  unset color_prompt force_color_prompt
+
+  # If this is an xterm set the title to user@host:dir
+  case "$TERM" in
+  xterm*|rxvt*)
+      PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+      ;;
+  *)
+      ;;
+  esac
+
+  # enable color support of ls and also add handy aliases
+  if [ -x /usr/bin/dircolors ]; then
+      test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+      alias ls='ls --color=auto'
+      #alias dir='dir --color=auto'
+      #alias vdir='vdir --color=auto'
+
+      alias grep='grep --color=auto'
+      alias fgrep='fgrep --color=auto'
+      alias egrep='egrep --color=auto'
+  fi
+
+  # colored GCC warnings and errors
+  #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+  # some more ls aliases
+  alias ll='ls -alF'
+  alias la='ls -A'
+  alias l='ls -CF'
+
+  # Add an "alert" alias for long running commands.  Use like so:
+  #   sleep 10; alert
+  alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+  # Alias definitions.
+  # You may want to put all your additions into a separate file like
+  # ~/.bash_aliases, instead of adding them here directly.
+  # See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+  if [ -f ~/.bash_aliases ]; then
+      . ~/.bash_aliases
+  fi
+
+  # enable programmable completion features (you don't need to enable
+  # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+  # sources /etc/bash.bashrc).
+  if ! shopt -oq posix; then
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+      . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+      . /etc/bash_completion
+    fi
+  fi
+
+Another common thing to include in your bash rc file are aliases. More information on what 
+these are and some examples can be found :ref:`below in the aliases section <cluster_access_other>`. 
+
 
 .. _cluster_access_command:
 
