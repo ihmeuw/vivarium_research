@@ -112,7 +112,47 @@ in this section might include the following:
 
 .. _{YOUR_MODEL_SHORT_NAME}2.2:
 
-2.2 Default specifications 
+2.2 Scenario descriptions
+-------------------------
+
+In this section, include descriptions of the different scenarios in your model, and what the
+differences are between each scenario (e.g., intervention coverage scale-up). You could do this
+in table or subheading form, depending on what works best for you and your model!
+
+For an example of what you might put in this section, see the table below, taken from the :ref:`Vivarium
+wasting paper simulation <2020_concept_model_vivarium_ciff_sam>`.  
+
+.. list-table:: Intervention coverage and efficacy parameters
+  :header-rows: 1
+
+  * - Intervention
+    - Baseline
+    - Target
+    - Zero coverage (*)
+  * - 1: SAM treatment
+    - Baseline values for :math:`C_{SAM}` and :math:`E_{SAM}`, :ref:`defined here <wasting-treatment-baseline-parameters>`
+    - :math:`C_{SAM} = 0.7`
+
+      :math:`E_{SAM} = 0.75`
+    - :math:`C_{SAM} = 0`
+      
+      :math:`E_{SAM} = \text{baseline value}`
+  * - 2: MAM treatment
+    - Baseline values for :math:`C_{MAM}` and :math:`E_{MAM}`, :ref:`defined here <wasting-treatment-baseline-parameters>`
+    - :math:`C_{MAM} = 0.7`
+      
+      :math:`E_{MAM} = 0.75`
+    - :math:`C_{MAM} = 0`
+      
+      :math:`E_{MAM} = \text{baseline value}`
+  * - 3: SQ-LNS (all sub-interventions)
+    - :math:`C_{SQLNS} = 0`
+    - :math:`C_{SQLNS} = 0.7` (*)
+    - :math:`C_{SQLNS} = 0`
+
+.. _{YOUR_MODEL_SHORT_NAME}2.3:
+
+2.3 Default specifications 
 --------------------------
 
 The below table is intended to outline the default specifications of your simulation. 
@@ -181,11 +221,10 @@ fill out the table.
     - e.g. ['entrance_time', 'maternal_id', 'sex']
     - Entrance time is currently required as a randomness key column 
   
+.. _{YOUR_MODEL_SHORT_NAME}2.3.1:
 
-.. _{YOUR_MODEL_SHORT_NAME}2.4:
-
-2.4 Population description
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.1 Population description
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Describe the simulated population demographics here. Information in this section might include: 
   - Cohort type
@@ -195,17 +234,33 @@ Describe the simulated population demographics here. Information in this section
   - Fertility
   - Stratifications 
 
-.. _{YOUR_MODEL_SHORT_NAME}2.5:
+.. _{YOUR_MODEL_SHORT_NAME}2.3.2:
 
-2.5 Location description
-~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.2 Location description
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Describe the location (country and/or region(s)) of the simulation here.
+
+
+.. _{YOUR_MODEL_SHORT_NAME}2.4:
+
+2.4 Links to model components 
+--------------------------------------
+
+Please add here links to the different components of your model, including:
+  - Intervention model(s)
+  - Cause model(s)
+  - Risk exposure model(s)
+  - Risk-attributable cause model(s)
+  - Risk effects model(s)
+  - Risk correlation model(s)
+  - Other 
+
 
 .. _{YOUR_MODEL_SHORT_NAME}3.0:
 
 3.0 Verification & validation (V&V) tracking
---------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++
 
 This section is intended for tracking the progress of V&V of simulation
 results. 
