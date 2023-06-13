@@ -856,6 +856,7 @@ References
   Lassi ZS, Padhani ZA, Rabbani A, Rind F, Salam RA, Das JK, Bhutta ZA. Impact of Dietary Interventions during Pregnancy on Maternal, Neonatal, and Child Outcomes in Low- and Middle-Income Countries. Nutrients. 2020 Feb 19;12(2):531. doi: 10.3390/nu12020531. PMID: 32092933; PMCID: PMC7071393.
 
 .. [Li-et-al-2019-antenatal-supplementation]
+  Li, B., Zhang, X., Peng, X., Zhang, S., Wang, X., & Zhu, C. (2019). Folic Acid and Risk of Preterm Birth: A Meta-Analysis. Frontiers in Neuroscience, 13, 1284. https://doi.org/10.3389/fnins.2019.01284
 
 .. [McGovern-et-al-2019-maternal-supplementation]
   McGovern, M. E. (2019). How much does birth weight matter for child health in developing countries? Estimates from siblings and twins. Health economics, 28(1), 3-22. `https://pubmed.ncbi.nlm.nih.gov/30239053 <https://pubmed.ncbi.nlm.nih.gov/30239053/>`_.
