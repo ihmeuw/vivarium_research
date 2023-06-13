@@ -354,7 +354,7 @@ Birthweight
 
   Note to software engineers: BEP intervention on birthweight has previously been implemented and is hosted `here <https://github.com/ihmeuw/vivarium_gates_bep>`_. 
 
-The maternal supplementation intervention (all regimens) affect child birthweight exposures, :ref:`which are documented here <2019_risk_exposure_lbwsg>`. The intervention should result in an **additive change to a simulant's continuous birthweight exposure value at birth (or upon initialization into the early or late neonatal age groups).** We assume there is no corresponding change in a simulant's gestational age exposure value at birth.
+The maternal supplementation intervention (all regimens) affect child birthweight exposures, :ref:`which are documented here <2019_risk_exposure_lbwsg>`. The intervention should result in an **additive change to a simulant's continuous birthweight exposure value at birth (or upon initialization into the early or late neonatal age groups).** We assume changes in simulant birthweight are independent from changes in their gestational age exposure value at birth.
 
 .. list-table:: Restrictions for intervention effect on birthweight
   :header-rows: 1
@@ -483,6 +483,155 @@ Validation and Verification Criteria
 In the baseline scenario, the exposure distribution of birthweight (mean birthweight, if available) as well as the mortality rates among the neonatal age groups should match that of GBD. 
 
 If birthweight exposures are stratified by supplementation regimen and maternal nourishment strata, then birthweight differences between regimens should match the effect sizes within a given maternal nourishment exposure strata.
+
+Gestational age
++++++++++++++++++++
+
+.. note::
+
+  This outcome has been added in June of 2023, and will be first incorporated into the :ref:`nutrition optimization <2021_concept_model_vivarium_nutrition_optimization>` model and has not been included in the :ref:`IV iron <2019_concept_model_vivarium_iv_iron>` or :ref:`BEP <2017_concept_model_vivarium_gates_bep>` simulations. 
+
+Research background
+~~~~~~~~~~~~~~~~~~~
+
+The antenatal supplementation products affect child gestational age at birth exposures, :ref:`which are documented here <2019_risk_exposure_lbwsg>`. While we measure LBWSG exposures at the continuous level (including a joint birth weight and gestational age at birth value), the literature tends to report the effect of antenatal supplementation products on gestational age at birth in terms of a relative risk of preterm birth (less than 37 weeks gestational age at birth) or very preterm birth (less than 32 weeks gestational age at birth), which are summarized in the table below.
+
+.. list-table:: Dichotomous effect of antenatal supplementation on preterm birth
+  :header-rows: 1
+
+  * - Product
+    - Relative to 
+    - Outcome
+    - Value
+    - Source
+  * - IFA
+    - No IFA
+    - Preterm birth, <37 weeks
+    - OR = 0.9 (95% CI: 0.86, 0.95)
+    - [Li-et-al-2019-antenatal-supplementation]_
+  * - MMS
+    - IFA
+    - Preterm birth, <37 weeks
+    - RR = 0.95 (95% CI: 0.90, 1.01)
+    - [Keats-et-al-2019-maternal-supplementation]_
+  * - MMS
+    - IFA
+    - Very preterm birth, <32 weeks
+    - RR = 0.81 (95% CI: 0.71, 0.93)
+    - [Keats-et-al-2019-maternal-supplementation]_
+  * - BEP
+    - MMS
+    - Preterm birth, <37 weeks
+    - 0.96 (0.80, 1.16); assume no effect
+    - [Ota-et-al-2015]_
+
+In order to make these effects compatible with our continuous exposure modeling strategy for LBWSG, we have converted these relative risks of dichotomous outcomes to continuous gestational age "shifts" that result in preterm (and very preterm, if applicable) birth prevalence that replicates the appropriate dichotomous measure of effect. 
+
+The methodology for this conversion was inspired in part by the methodology of the air pollution GBD team in calculating the impact of the risk on LWBSG exposures. As with GBD, we assume that these shifts are independent of any shifts in birth weight. However, rather than implement the conversion using the LBWSG exposure distribution specific to the individual study included in a meta-analysis of the overall effect to find a global shift as GBD did, we used the meta-analyzed global relative risks and applied the conversion for each of our modeled locations, resulting in location-specific continuous shifts that replicate the global dichotomous effect.
+
+Additionally, our methods differ from GBD's in that we estimated two separate GA shifts, conditional on baseline GA exposure, for the effect of MMS relative to IFA rather than a single shift applied equally to the entire distribution. This approach allowed us to replicate the literature-reported relative risks of MMS on both preterm birth (<37 weeks) as well as very preterm birth (<32 weeks). This "dual shift" approach follows these steps:
+
+1. Find and apply a shift to the entire distribution that results in the replication of the very preterm birth dichotomous effect
+
+2. Find and apply a second shift that replicates the preterm birth dichotomous effect when applied only to the portion of the distribution with baseline gestational age exposures that are *greater* than 32 (the very preterm birth threshold) *minus* this second shift. Note that the second shift will be negative in direction.
+
+`The estimation of the antenatal supplementation gestational age shifts as described was performed in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/Gestational%20age%20shifts.ipynb>`_
+
+Assumptions and limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- In the case of IFA, we assume that the entire distribution experiences the same constant shift in gestational age. It is more likely that the lower end of the distribution experiences a greater shift and that the upper end experiences little to no shift (as supported from the MMS evidence). This limitation will result in an underestimation of the impact of the lower end of the distribution (which has a high magnitude of risk, but a low overall exposure) and an overestimation of the impact on the upper end of the distribution (which has lower risk magnitude, but higher overall exposure). However, we have limited data on how to better apply such a shift.
+
+- In the case of MMS, although we have improved the assumption of a single shift applied to the entire distribution through our "dual shift" strategy, it is still limited in that the true shift is likely more of a continuous function with baseline gestational age rather than two conditional values. 
+
+  - We have some ideas for how we might improve this limitation, including:
+
+    1) Create a function of the dichotomous effect of MMS relative to IFA as a function of baseline gestational age exposure by assuming a linear relationship between the points (32, log(very preterm birth RR)) and (37, log(preterm birth RR)), potentially with some additional constraints (such as constant dichotomous effects above or below some thresholds).
+
+    2) Find gestational age shifts as a function of baseline gestational age that replicates the relative risk values along the line developed in step 1.
+
+  However, we will remain limited by the lack of reported information on the true shape of the association between these "gestational age shifts" and baseline gestational age exposure.
+
+Modeling strategy
+~~~~~~~~~~~~~~~~~
+
+The a supplementation intervention (all regimens) affect child birthweight exposures, :ref:`which are documented here <2019_risk_exposure_lbwsg>`. 
+
+Antenatal supplementation intervention should result in an **additive change to a simulant's continuous gestational age exposure value at birth (or upon initialization into the early or late neonatal age groups).** :ref:`The LBWSG risk exposure document can be found here <2019_risk_exposure_lbwsg>`. We assume changes in simulant gestational age exposure values are independent from changes in their birth weight exposure values.
+
+.. list-table:: Restrictions for intervention effect on birthweight
+  :header-rows: 1
+
+  * - Restriction
+    - Value
+    - Note
+  * - Male only
+    - False
+    - 
+  * - Female only
+    - False
+    - 
+  * - Age group start
+    - Birth
+    - 
+  * - Age group end
+    - Late neonatal
+    - 
+  * - Other
+    - 
+    - 
+
+.. list-table:: Supplementation effect on gestational age
+  :header-rows: 1
+
+  * - Product
+    - Relative to
+    - Subpopulation
+    - Shift
+    - Note
+  * - IFA
+    - No supplementation
+    - Overall
+    - IFA_SHIFT
+    - 
+  * - MMS
+    - IFA
+    - IFA-shifted GA < (32 - MMS_SHIFT_2)
+    - MMS_SHIFT_1
+    - 
+  * - MMS
+    - IFA
+    - IFA-shifted GA >= (32 - MMS_SHIFT_2)
+    - MMS_SHIFT_1 + MMS_SHIFT_2
+    - 
+  * - BEP 
+    - MMS
+    - Overall
+    - 0
+    - Note effect of BEP is equivalent to effect of MMS relative to IFA or no supplementation
+
+Where,
+
+.. list-table:: Gestational age shift values
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+  * - IFA_SHIFT
+    - `Location-specific .csv files of IFA_SHIFT values can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/ifa_gestational_age_shifts>`_
+  * - MMS_SHIFT_1
+    - `Location-specific .csv files of MMS_SHIFT_1 values can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/mms_gestational_age_shifts/shift1>`_
+  * - MMS_SHIFT_2
+    - `Location-specific .csv files of MMS_SHIFT_2 values can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/mms_gestational_age_shifts/shift2>`_
+
+Verification and validation criteria
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In the baseline scenario, the LBWSG exposure distribution as well as the mortality rates among the neonatal age groups should match that of GBD. 
+
+When birthweight exposures are stratified by supplementation regimen and maternal nourishment strata, then birthweight differences between regimens should match the effect sizes within a given maternal nourishment exposure strata.
+
+The dichotomous measures of effects should also replicate the intended values.
 
 Birth outcomes
 ++++++++++++++++++
@@ -705,6 +854,8 @@ References
 
 .. [Lassi-et-al-2020-antenatal-supplementation]
   Lassi ZS, Padhani ZA, Rabbani A, Rind F, Salam RA, Das JK, Bhutta ZA. Impact of Dietary Interventions during Pregnancy on Maternal, Neonatal, and Child Outcomes in Low- and Middle-Income Countries. Nutrients. 2020 Feb 19;12(2):531. doi: 10.3390/nu12020531. PMID: 32092933; PMCID: PMC7071393.
+
+.. [Li-et-al-2019-antenatal-supplementation]
 
 .. [McGovern-et-al-2019-maternal-supplementation]
   McGovern, M. E. (2019). How much does birth weight matter for child health in developing countries? Estimates from siblings and twins. Health economics, 28(1), 3-22. `https://pubmed.ncbi.nlm.nih.gov/30239053 <https://pubmed.ncbi.nlm.nih.gov/30239053/>`_.
