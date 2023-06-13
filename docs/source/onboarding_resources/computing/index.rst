@@ -205,7 +205,7 @@ On the cluster, you can use the version of conda provided by the Central Comp te
 recommended. To do this, log into the cluster and then enter the code 
 :code:`/ihme/code/central_comp/miniconda/bin/conda init`. This adds information on how to 
 access conda to your bashrc file. You will need to restart the terminal for the 
-changes to take effect. 
+changes to take effect. This is also noted in the :ref:`bash files section <cluster_access_bash>` 
 
 There are other ways to install conda, but the above is simplest. 
 
@@ -288,6 +288,9 @@ or filepaths.
 You should have 2 bash configuration files, your bash profile or :code:`.bash_profile` 
 and your bash rc or :code:`.bashrc`. 
 
+Once you make edits to either of these files, you will need to log out and then back into 
+the cluster before they will take effect. 
+
 bash profile
 ~~~~~~~~~~~~
 
@@ -311,6 +314,8 @@ your choosing, run:
   :linenos:
 
   $ /ihme/code/central_comp/miniconda/bin/conda init  
+
+This information is also covered in the :ref:`terminal access section above <terminal_access>`
 
 Following that, below is a block of code designed to be copied and pasted into your bash rc file. 
 If you're curious about what this code means, there are some comments included or you can ask a 
