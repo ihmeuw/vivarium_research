@@ -555,7 +555,7 @@ Assumptions and limitations
 Modeling strategy
 ~~~~~~~~~~~~~~~~~
 
-The a supplementation intervention (all regimens) affect child birthweight exposures, :ref:`which are documented here <2019_risk_exposure_lbwsg>`. 
+The a supplementation intervention (all regimens) affect infant gestational age at birth exposures, :ref:`which are documented here <2019_risk_exposure_lbwsg>`. 
 
 Antenatal supplementation intervention should result in an **additive change to a simulant's continuous gestational age exposure value at birth (or upon initialization into the early or late neonatal age groups).** :ref:`The LBWSG risk exposure document can be found here <2019_risk_exposure_lbwsg>`. We assume changes in simulant gestational age exposure values are independent from changes in their birth weight exposure values.
 
