@@ -68,22 +68,42 @@ how to appropriately articulate these issues in our reports, publications, and o
 2.1 Terminology 
 ---------------
 
-2.1.1 GBD-specific terminology
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 2.2 Methodology
 ---------------
 
-2.2.1 GBD-specific methodology
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-2.3 Imperfect proxies 
+2.3 Imperfect Proxies 
 ---------------------
 Discuss the implications of imperfect proxy measures and how they correspond to what is
 exactly being measured.  
 
 3.0 Discussing Simulation Science Findings
 ++++++++++++++++++++++++++++++++++++++++++
+In this section, we will elaborate on how to incorporate BLISS principles into our own 
+research processes and calculations.  
+
+3.1 Table Presentation
+----------------------
+
+3.2 Measurement Error
+---------------------
+In this section, we will elaborate on how misinterpretations of sex/gender might affect 
+uncertainty calculations.
+
+3.3 Other Gender-Inclusive Guides
+---------------------------------
+
+- DEI Research Guide
+- Design team guidelines for discussing gender, sex, and sexuality
+- Gates Foundation
+- World Health Organization
+
 
 4.0 BLISS in Action 
 +++++++++++++++++++
+In this section, we will use case studies to explore the different ways in which 
+BLISS principles can be practically applied to specific areas of public health research. 
+Elaborate on lessons learned from other projects in which we've used BLISS (e.g., VEHSS
+DR paper; IV Iron communications and IDM Symposium)
+
+5.0 References
+++++++++++++++
