@@ -222,7 +222,7 @@ Where:
 
 - **ANC1** represents the maximum intervention coverage equal to the proportion of pregnancies that attend at least one antenatal care visit. `Draw-level values for each modeled location can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/ANC1_draws>`_
 
-- **Baseline** represents location-specific baseline IFA coverage, `which can be found in location-specific .csv files here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/baseline_ifa_coverage>`_ (`note these values were calculated in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/Gestational%20age%20shifts.ipynb>`)
+- **Baseline** represents location-specific baseline IFA coverage, `which can be found in location-specific .csv files here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/baseline_ifa_coverage>`_ (`note these values were calculated in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/Gestational%20age%20shifts.ipynb>`_
 
 2.5 Outputs
 ------------
@@ -404,7 +404,13 @@ Specific outputs for specific models are specified in the following section.
       * Intervention counts
     - Live births with maternal_ids, intervention coverage, and LBWSG exposures
     - 
-
+  * - 10.0
+    - GBD 2021 update?
+    - Baseline
+    - None
+    - 
+    - 
+    - This model may be inserted earlier in the timeline, depending on when it is ready
 
 .. todo::
 
