@@ -543,9 +543,9 @@ Assumptions and limitations
 
 - In the case of IFA, we assume that the entire distribution experiences the same constant shift in gestational age. It is more likely that the lower end of the distribution experiences a greater shift and that the upper end experiences little to no shift (as supported from the MMS evidence). This limitation will result in an underestimation of the impact of the lower end of the distribution (which has a high magnitude of risk, but a low overall exposure) and an overestimation of the impact on the upper end of the distribution (which has lower risk magnitude, but higher overall exposure). However, we have limited data on how to better apply such a shift.
 
-- In the case of MMS, although we have improved the assumption of a single shift applied to the entire distribution through our "dual shift" strategy, it is still limited in that the true shift is likely more of a continuous function with baseline gestational age rather than two conditional values. 
-In particular, a limitation of this approach is the illogical implication that the effect of treatment on a birth that would have been 31.9 weeks without treatment leads to a longer gestation than the effect of the same treatment on a birth that would have been 32.1 weeks without treatment.
-  - We have some ideas for how we might improve this limitation, including:
+- In the case of MMS, although we have improved the assumption of a single shift applied to the entire distribution through our "dual shift" strategy, it is still limited in that the true shift is likely more of a continuous function with baseline gestational age rather than two conditional values. In particular, a limitation of this approach is the illogical implication that the effect of treatment on a birth that would have been 31.9 weeks without treatment leads to a longer gestation than the effect of the same treatment on a birth that would have been 32.1 weeks without treatment.
+
+  We have some ideas for how we might improve this limitation, including:
 
     1) Create a function of the dichotomous effect of MMS relative to IFA as a function of baseline gestational age exposure by assuming a linear relationship between the points (32, log(very preterm birth RR)) and (37, log(preterm birth RR)), potentially with some additional constraints (such as constant dichotomous effects above or below some thresholds).
 
