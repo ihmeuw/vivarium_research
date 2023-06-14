@@ -227,17 +227,18 @@ Where:
 2.5 Outputs
 ------------
 
-.. todo::
+There are two important categories of outputs for this model. The first is maternal health data obtained from observing the simulants in the pregnancy simulation that will be used to inform maternal health outcomes in the emulator. The second is data that will be used as inputs to the child simulation (including information such as LBWSG risk exposure). The maternal health data will be recorded at the aggregate level, but the child health data will be recorded at the individual level. 
 
-  Detail requested observers/outputs both for:
-
-    - maternal results
-    - child input data
+Specific outputs for specific models are specified in the following section.
 
 .. _nutritionoptimizationpreg5.0:
 
 3.0 Models
 ++++++++++
+
+.. note::
+
+  Unless otherwise specified, all maternal outputs should be stratified by maternal age group
 
 .. list-table:: Model run requests
   :header-rows: 1
@@ -245,31 +246,165 @@ Where:
   * - Run
     - Description
     - Scenarios
-    - Specification modifications
-    - Output modifications
-    - Stratificaction modifications
+    - Spec. mods
+    - Maternal outputs
+    - Child outputs
     - Note
   * - 0.0
     - Standard demography 
     - Baseline
     - None
-    - Person-time and deaths
-    - Age only
+    - * Deaths
+      * YLLs
+    - N/A
     - 
   * - 0.1
     - Pregnancy demography (:ref:`docs here <other_models_pregnancy_demography>`)
     - Baseline
     - None
-    - Person-time and deaths
-    - Age only
-    - 
-  * - 1
-    - Pregnancy (:ref:`docs here <other_models_pregnancy_closed_cohort>`)
+    - * Deaths
+      * YLLs
+      * Pregnancy state person-time
+    - N/A
+    - All simulants initialized into the pregnancy state, but no other aspects of pregnancy model included
+  * - 1.0
+    - Pregnancy state transitions (:ref:`docs here <other_models_pregnancy_closed_cohort>`)
     - Baseline
     - None
-    - Person-time, birth outcomes
-    - Age and pregnancy status
+    - * Deaths
+      * YLLs
+      * Pregnancy state person-time
+      * Pregnancy transition counts
+    - N/A
     - Note closed cohort change from IV iron pregnancy model. Custom observer exit at the end of postpartum period? (Bonus ask)
+  * - 1.1 
+    - Birth outcome outputs
+    - Baseline
+    - None
+    - * Deaths
+      * YLLs
+      * Pregnancy state person-time
+      * Pregnancy transition counts
+      * Count of birth outcomes
+    - Live births paired with maternal_ids
+    -  
+  * - 1.2
+    - LBWSG outputs
+    - Baseline
+    - None
+    - * Deaths
+      * YLLs
+      * Pregnancy state person-time
+      * Pregnancy transition counts
+      * Count of birth outcomes
+    - Live births with maternal_ids and LBWSG exposures
+    - 
+  * - 2.0
+    - Maternal disorders and maternal hemorrhage cause models
+    - Baseline
+    - None
+    - * Deaths
+      * YLLs
+      * YLDs
+      * Pregnancy state person-time
+      * Pregnancy transition counts
+      * Incident maternal disorder counts
+      * Incident maternal hemorrhage counts
+    - N/A
+    - 
+  * - 3.0
+    - Hemoglobin/anemia exposure
+    - Baseline
+    - None
+    - * YLDs
+      * Anemia state person time, stratified by pregnancy state
+    - N/A
+    - 
+  * - 4.0
+    - Hemoglobin on maternal disorders, hemoglobin on maternal hemorrhage, and maternal hemorrhage on hemoglobin risk effects
+    - Baseline
+    - None
+    - * Deaths
+      * YLLs
+      * YLDs
+      * Pregnancy state person-time
+      * Pregnancy transition counts
+      * Anemia state person-time stratified by pregnancy state
+      * Incident maternal disorder counts stratified by anemia status at birth
+      * Incident maternal hemorrhage counts stratified by anemia status at birth
+    - N/A
+    - Do NOT include risk effect of hemoglobin on birth outcomes (which was included in IV iron). Data block for GBD 2021 update as of 6/23.
+  * - 5.0
+    - BMI exposure with correlation to hemoglobin and LBWSG
+    - Baseline
+    - None
+    - * Deaths
+      * YLLs
+      * YLDs
+      * BMI exposure, stratified by pregnancy state and anemia state
+    - Live births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, and LBWSG exposures
+    - Data block for GBD 2021 update as of 6/23.
+  * - 6.0
+    - Intervention effects on hemoglobin and birthweight
+    - All
+    - None
+    - * Deaths
+      * YLLs
+      * YLDs
+      * Pregnancy state person time
+      * Pregnancy transition counts
+      * Anemia state person time, stratified by intervention coverage
+      * Intervention counts
+    - Live births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
+    - Both of these intervention effects were implemented in IV iron and are not changed for this model
+  * - 7.0
+    - Intervention effects on gestational age and birth outcomes
+    - All
+    - None
+    - * Deaths 
+      * YLLs
+      * YLDs
+      * Pregnancy state person time
+      * Pregnancy transition counts
+      * Birth outcomes, stratified by intervention coverage
+    - Live births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
+    - These intervention effects are new and were not implemented in IV iron
+  * - 8.0
+    - Background morbidity
+    - All
+    - None
+    - * Deaths 
+      * YLLs
+      * YLDs
+      * Pregnancy state person time
+      * Pregnancy transition counts
+    - N/A
+    - 
+  * - 9.0
+    - Production run test
+    - 1-4
+    - (some larger number of draws and seeds, tbd)
+    - No age stratification:
+      
+      * Deaths
+      * YLLs
+      * YLDs
+      * Intervention counts
+    - Live births with maternal_ids, intervention coverage, and LBWSG exposures
+    - 
+  * - 9.1
+    - Production runs
+    - 1-4
+    - (some larger number of draws and seeds, tbd)
+    - No age stratification:
+      
+      * Deaths
+      * YLLs
+      * YLDs
+      * Intervention counts
+    - Live births with maternal_ids, intervention coverage, and LBWSG exposures
+    - 
+
 
 .. todo::
 
@@ -280,10 +415,10 @@ Where:
   :header-rows: 1
 
   * - Model
-    - Description
+    - V&V plan
     - V&V summary
-  * - 0.0: Standard demography
-    - Mortality model for standard cohort of WRA
+  * - 0.0
+    - Proportion of deaths in each age group is as expected from GBD ACMR estimates among WRA
     - Overall seems to be functioning as expected, but would like to add person-time observer to results. `Notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/model_0.0.ipynb>`_.
 
 .. list-table:: Outstanding V&V issues
