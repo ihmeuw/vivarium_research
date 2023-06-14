@@ -40,11 +40,47 @@ Building Language Inclusivity into Simulation Science (BLISS) is an important pa
 our team's work! Here you will find our ongoing style guide for incorporating inclusive 
 language into our day-to-day work.
 
-1.0 Guiding Principles 
-++++++++++++++++++++++
+
+1.0 Overview 
+++++++++++++
+
+1.1 Guiding Principles
+----------------------
+In this section, we will outline the guiding principles of BLISS.
+
+1.2 Glossary of General Terminology
+-----------------------------------
+In this section, we will create a glossary of general terminology that will be used 
+throughout this style guide (e.g., for starters, we should explicitly define sex and 
+gender; SGM).
+
+1.3 Visuals
+-----------
+In this section, we will include some visuals for accessible, quick information 
+(e.g. do's and don't's; what this is and what this isn't).
 
 2.0 Acknowledging Limitations in Peer Research
 ++++++++++++++++++++++++++++++++++++++++++++++
+In this section, we will discuss how to acknowledge limitations in external data sources
+used in our research, the different scenarios in which sex/gender conflation may occur and
+how to appropriately articulate these issues in our reports, publications, and other work.  
+
+2.1 Terminology 
+---------------
+
+2.1.1 GBD-specific terminology
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2.2 Methodology
+---------------
+
+2.2.1 GBD-specific methodology
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2.3 Imperfect proxies 
+---------------------
+Discuss the implications of imperfect proxy measures and how they correspond to what is
+exactly being measured.  
 
 3.0 Discussing Simulation Science Findings
 ++++++++++++++++++++++++++++++++++++++++++
