@@ -196,22 +196,22 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Covariate
     - 13
     - get_covariate_estimates: decomp_step='iterative' for GBD 2021
-    - Assume normal distribution of uncertainty truncated at 0 and 1. Age-shifting based on assumption of 40 week duration of pregnancy for live births.
+    - Assume lognormal distribution of uncertainty.
   * - SBR
     - Covariate
     - 2267
     - get_covariate_estimates: decomp_step='iterative' for GBD 2021
-    - No uncertainty in this estimate: use mean_value as point value for this parameter. Age-shifting based on assumption of 40 week duration of pregnancy for stillbirths.
+    - Parameter is not age specific and has no draw-level uncertainty. Use mean_value as location-specific point parameter.
   * - incidence_c995
     - Incidence rate of abortion and miscarriage cause
     - c995
     - como; decomp_step='iterative'
-    - Abortion defined as elective or medically-indicated termination of pregnancy at any gestational age and miscarriage defined as spontaneous loss of pregnancy before 24 weeks gestation. Age shifting based on assumption of average pregnancy duration of abortion/miscarriage of 15 weeks, given an assumed uniform distribution between six and 24 weeks for this birth outcome.
+    -  Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
   * - incidence_c374
     - Incidence rate of ectopic pregnancy
     - c374
     - como; decomp_step='iterative'
-    - Age shifting based on assumption of average pregnancy duration of abortion/miscarriage of 15 weeks, given an assumed uniform distribution between six and 24 weeks for this birth outcome.
+    -  Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
 
 .. note::
 

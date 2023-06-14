@@ -23,18 +23,67 @@
 
 .. _vivarium_best_practices_results_processing:
 
-=========================================================
-Vivarium V&V and Results Processing Tips
-=========================================================
+=================================================================
+Vivarium Verification and Validation (V&V) and Results Processing
+=================================================================
 
 .. contents::
    :local:
-   :depth: 1
+   :depth: 2
+
+Verification and validation
+---------------------------
+
+Verification and validation (V&V) is the process by which we check that Vivarium models
+are behaving as we expect.
+
+This can be split into verification (checking that the model approximately replicates target values it
+was explicitly designed to replicate) and validation (checking that the model results are sensible,
+e.g. by comparing to a real-life data source not used by the model).
+
+.. _vivarium_v_and_v_process:
+
+The V&V process
+---------------
+
+The current standard process for verification and validation (V&V) goes roughly as follows:
+
+#. Researchers write documentation for features and components they would like to be present in
+   the simulation, organized into model numbers.
+   Generally, they include in this documentation a description of how they will V&V the results.
+#. Software engineers implement these features and components in order by model number.
+   When they complete implementation of a model number, they run the simulation and send the researchers
+   (the file path of) the results.
+   We sometimes call these results "count data" because the file path ends with :code:`count_data`.
+#. Researchers use the results to assess whether new features and models are behaving as expected.
+   Additionally, researchers check for regressions in previously implemented behavior; generally, this is
+   done by re-running the V&V checks from previous model numbers on the latest results.
+   These checks are usually made by graphing relevant quantities and comparing them to targets visually.
+#. Researchers report any findings that need to be addressed.
+   Sometimes these are bugs (the model does not do what the docs say), which are reported to the engineering team.
+   Sometimes they are deeper issues with the model design (doing what the docs say does not give sensible results),
+   which require some further research effort to address before they can be documented and handed off to the engineering team.
+#. The engineering team makes any required updates and generates another set of results.
+   The file path is sent to the researchers, who verify that the fixes have addressed the issues.
+   The process repeats.
+
+.. note::
+  Sometimes, instead of simulation **results** being used in V&V, the researcher runs the latest version
+  of the simulation themselves.
+  See the `Interactive simulation`_ section below for more details.
+
+.. note::
+  Often, simulation runs for V&V can be smaller than the runs used for final results.
+  Specifying a population size and number of draws separately for V&V can reduce the runtime and computational
+  resource requirements.
+
+Tips on how to do V&V and results processing
+--------------------------------------------
 
 These are some non-exhaustive tips and tricks!
 
 General things to check/keep in mind
--------------------------------------
+++++++++++++++++++++++++++++++++++++
 
 - **Confirm that there are no failed jobs.** The software engineers should check this, but it can be a source of trouble if it is not caught. If there are draw/seed combinations that completed for some scenarios and not others, then the common random numbers will not be enforced across scenarios and results will not be as accurate as expected (outcomes may not exactly match across scenarios when they are expected to).
 
@@ -48,10 +97,10 @@ General things to check/keep in mind
 
 - Remember the distinction between model verification (Do model outputs accurately reflect model inputs? Did we make a mistake in *building* the model?) and model validation (Do model outputs accurately represent reality? Did we make a mistake in *designing* the model?). Be sure to validate model results, including to your own back-of-the-envelope calculation (:ref:`see this page for details <vivarium_best_practices_boe>`) as well as external data sources that may have evaluated similar research questions.
 
-- Vivarium has an "untracked" population that can cause confusing issues if it is set to something unexpected. This is something that may be investigated in the `Interactive Simulation`_
+- Vivarium has an "untracked" population that can cause confusing issues if it is set to something unexpected. This is something that may be investigated in the `interactive simulation`_.
 
 General list of things to verify
------------------------------------
+++++++++++++++++++++++++++++++++
 
 Generally, we should verify that the simulation outputs match the expected values for everything that is in the simulation artifact, including:
 
@@ -79,8 +128,10 @@ Verification of these parameters compared to artifact and GBD values is generall
 
 Additionally, especially if simulating across several years, we should check not only that the parameters meet verification criteria across all simulated years, but also that there are no unacceptable/obvious trends in simulated outputs across simulated years (ex: some mortality rate increasing with time, etc.).
 
+.. _vivarium_interactive_sim_v_and_v:
+
 Interactive simulation
-------------------------
+++++++++++++++++++++++
 
 Some things may be easier to verify in interactive simulations rather than from count data outputs. Such parameters may include:
 
@@ -94,8 +145,12 @@ Some things may be easier to verify in interactive simulations rather than from 
 
 - Continuity at the simulant level (to ensure that parameters that should not change over time *do* not change over time at the individual level)
 
+However, V&V in an interactive simulation generally uses a smaller population size than V&V of simulation results,
+since we have not developed a system for parallelizing interactive simulation runs.
+This smaller population size can make certain aspects of the simulation harder to check.
+
 Some examples of often desired outputs
----------------------------------------
+++++++++++++++++++++++++++++++++++++++
 
 - Averted {outcome, such as DALYs/deaths/etc.} count per 100,000 person-years among {population} in an alternative scenario relative to the baseline scenario in {simulated timeframe}
 
@@ -108,7 +163,7 @@ Some examples of often desired outputs
 - Relative reduction in risk exposure (low birthweight prevalence was reduced by 50% of its baseline value in the alternative scenario)
 
 Some coding resources and demos
--------------------------------
++++++++++++++++++++++++++++++++
 
 Some helpful documentation sources include:
 
