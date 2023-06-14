@@ -106,23 +106,22 @@ Relevant parameters are defined below:
     - Covariate
     - 13
     - get_covariate_estimates: decomp_step='iterative'
-    - Assume normal distribution of uncertainty truncated at 0 and 1. Regional-level estimates available. Age-shifting based on assumption of 40 week duration of pregnancy for live births.
+    - Assume lognormal distribution of uncertainty  
   * - SBR
     - Covariate
     - 2267
     - get_covariate_estimates: decomp_step=iterative'
-    - No uncertainty in this estimate: use mean_value as point value for this parameter. Age-shifting based on assumption of 40 week duration of preganncy for stillbirths. Parameter is not age-specific.
+    - Parameter is not age specific and has no draw-level uncertainty. Use mean_value as location-specific point parameter.
   * - incidence_c995
     - Incidence rate of abortion and miscarriage cause
     - c995
     - como; decomp_step='step5'
-    - Abortion defined as elective or medically-indicated termination of pregnancy at any gestational age and miscarriage defined as spontaneous loss of pregnancy before 24 weeks gestation. Age shifting based on assumption of average pregnancy duration of abortion/miscarriage of 15 weeks, given an assumed uniform distribution between six and 24 weeks for this birth outcome. Do not rescale this parameter with prevalence.
+    - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
   * - incidence_c374
     - Incidence rate of ectopic pregnancy
     - c374
     - como; decomp_step='step5'
-    - Age shifting based on assumption of average pregnancy duration of abortion/miscarriage of 15 weeks, given an assumed uniform distribution between six and 24 weeks for this birth outcome. Do not rescale this parameter with prevalence.
-
+    - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence.
 .. note::
 
   **AGE SHIFTING:** The incidence rates in the table above are measured at the *end* of pregnancy. However, we will use them to inform the rates of the *beginning* of pregnancy. This will cause us to initialize a population that is older than it should be by the average duration of pregnancy in the given population. This had a minimal influence in the IV iron simulation, so it was regarded as an acceptable model limitation. However, if this is thought to cause model validation issues, we may revist this strategy and implement an age-shifting adjustment.

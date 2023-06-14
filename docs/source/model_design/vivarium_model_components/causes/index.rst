@@ -474,6 +474,8 @@ measures are defined using the following key concepts:
        the at-risk population as susceptible (in the case of conditions with
        remission)
 
+.. _`total population incidence rate`:
+
 **Total Population Incidence Rate** is estimated by the Global Burden of
 Disease Study by estimating the number of incident cases that occur in one
 year and scaling this value per 100,000 individuals of a specified population.

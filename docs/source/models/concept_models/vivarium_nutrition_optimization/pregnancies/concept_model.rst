@@ -220,29 +220,9 @@ Where:
 
 - **0** represents the minimum intervention coverage (no coverage), 
 
-- **ANC1** represents the maximum intervention coverage equal to the proportion of pregnancies that attend at least one antenatal care visit which can be pulled with :code:`get_covariate_estimates(covariate_id=7, decomp_step='iterative')`
+- **ANC1** represents the maximum intervention coverage equal to the proportion of pregnancies that attend at least one antenatal care visit. `Draw-level values for each modeled location can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/ANC1_draws>`_
 
-- **Baseline** represents location-specific baseline IFA coverage, defined in the table below
-
-.. list-table:: Baseline IFA coverage
-  :header-rows: 1
-
-  * - Location
-    - Value
-    - Note
-  * - Ethiopia
-    - 
-    - 
-  * - Nigeria
-    - 
-    - 
-  * - Pakistan
-    - 
-    - 
-
-.. todo::
-
-  Fill in coverage levels (need to seek 2021 estimates and adjust for ANC values)
+- **Baseline** represents location-specific baseline IFA coverage, `which can be found in location-specific .csv files here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/baseline_ifa_coverage>`_ (`note these values were calculated in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/Gestational%20age%20shifts.ipynb>`)
 
 2.5 Outputs
 ------------
@@ -303,8 +283,8 @@ Where:
     - Description
     - V&V summary
   * - 0.0: Standard demography
-    - 
-    - 
+    - Mortality model for standard cohort of WRA
+    - Overall seems to be functioning as expected, but would like to add person-time observer to results. `Notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/model_0.0.ipynb>`_.
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
