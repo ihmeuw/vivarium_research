@@ -286,16 +286,19 @@ line prompts, it will look to your bash configuration files for information
 or filepaths. 
 
 You should have 2 bash configuration files, your bash profile or :code:`.bash_profile` 
-and your bash rc or :code:`.bashrc`. 
+and your bash rc or :code:`.bashrc`. The rc stands for run commands and comes from the 
+predecessors of Unix. 
 
-Once you make edits to either of these files, you will need to log out and then back into 
+If you make edits to either of these files, you will need to log out and then back into 
 the cluster before they will take effect. 
 
 bash profile
 ~~~~~~~~~~~~
 
-The bash profile is only run when you open the cluster, and so is usually a shorter file. 
-Below are the lines of code you need in your bash profile. 
+The bash profile is only run when you log in to the cluster, and so is usually a shorter file. 
+It contains a few lines with generic profile settings. You should **NOT** need to edit this file 
+when you first start. For reference, the lines of code in your bash profile are below. If you 
+think these don't match what you have, ask a friend to help you troubleshoot. 
 
 :: 
 
