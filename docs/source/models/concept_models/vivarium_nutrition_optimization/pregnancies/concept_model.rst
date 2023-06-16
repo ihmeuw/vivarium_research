@@ -425,7 +425,10 @@ Specific outputs for specific models are specified in the following section.
     - V&V summary
   * - 0.0
     - Proportion of deaths in each age group is as expected from GBD ACMR estimates among WRA
-    - Overall seems to be functioning as expected, but would like to add person-time observer to results. `Notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/model_0.0.ipynb>`_.
+    - Overall seems to be functioning as expected, but would like to add person-time observer to results. `Notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_0.0.ipynb>`_.
+  * - 0.1
+    - Check that distribution of observed person-time by age group matches distribution of pregnancies in GBD, check ACMR
+    - Looks great! Some deviation from GBD ACMR at edge age groups as a result of small numbers, but not a concern. `Model 0.1 V&V notebooks can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_0.1.ipynb>`_
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
