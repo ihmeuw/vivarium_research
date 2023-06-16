@@ -206,7 +206,6 @@ Documents that contain information specific to the overall model and the pregnan
 2.2.1 Task tracking for each wave
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
 .. list-table:: Wave I outstanding tasks
   :header-rows: 1
 
@@ -214,28 +213,28 @@ Documents that contain information specific to the overall model and the pregnan
     - Dependencies
     - Research person
     - Engineering person
-  * - 1: Artifact rebuilds
-    - None; ask Ali about which parameters need rebuilds if we run into any problems
+  * - 1: computational resource scoping
     - .
-    - TBD
-  * - 2: LBWSG PAF recalculation
-    - After task 1
-    - .
-    - TBD
-  * - 3: Child wasting exposure calibration equation updates (to include underweight, stunting mortality effects)
-    - After task 4
     - Ali
-    - TBD
-  * - 4: Child underweight exposure model
+    - Rajan
+  * - 2: timestep strategy
+    - Influenced by task #1, project timeline
+    - Ali
+    - Rajan
+  * - 3: Child underweight exposure model
     - Need DHS data
     - TBD
     - TBD
-  * - 5: Clarify LBWSG on wasting risk effect
-    - .
+  * - 4: Child wasting exposure calibration equation updates (to include underweight, stunting mortality effects)
+    - After task 3
     - Ali
     - TBD
-  * - 6: 2021 CGF risk effects
-    - .
+  * - 5: 2021 CGF risk effects
+    - Strategy influenced by task 2
+    - TBD
+    - TBD
+  * - 6: Malaria cause model
+    - Wait until task 2 is decided, might not need to do
     - TBD
     - TBD
   * - 7: Update SAM and MAM tx effects to COMPAS
@@ -246,18 +245,18 @@ Documents that contain information specific to the overall model and the pregnan
     - .
     - Ali
     - TBD
-  * - 9: Malaria cause model
-    - Wait until task 11 is decided, could be irrelevant
-    - TBD
-    - TBD
-  * - 10: computational resource scoping
+  * - 9: Clarify LBWSG on wasting risk effect
     - .
     - Ali
-    - Rajan
-  * - 11: timestep strategy
-    - Influenced by task #10, project timeline
-    - Ali
-    - Rajan
+    - TBD
+  * - 10: Artifact rebuilds
+    - None; ask Ali about which parameters need rebuilds if we run into any problems
+    - .
+    - TBD
+  * - 11: LBWSG PAF recalculation
+    - After task 1
+    - .
+    - TBD
 
 .. list-table:: Wave II outstanding tasks
   :header-rows: 1
