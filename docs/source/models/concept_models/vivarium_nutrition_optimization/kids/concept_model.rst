@@ -71,11 +71,221 @@ Documents that contain information specific to the overall model and the pregnan
 2.2 Submodels
 -------------
 
-+---------------------+-------------------------------------------+---------------------+
-| Category            | Model                                     | Note                |
-+=====================+===========================================+=====================+
-|                     |                                           |                     |
-+---------------------+-------------------------------------------+---------------------+
+.. list-table:: Risk exposure subcomponents
+  :header-rows: 1
+
+  * - Component
+    - Existing version
+    - Wave I update
+    - Wave II update
+    - Note
+  * - LBWSG exposure
+    - :ref:`2019 docs<2019_risk_exposure_lbwsg>`, implemented in IV iron
+    - Artifact rebuild
+    - 
+    - 
+  * - Child wasting exposure
+    - :ref:`2020 docs<2020_risk_exposure_wasting_state_exposure>`, implemented in wasting paper
+    - Calibration will need to include stunting/underweight mortality effects
+    - Transitions for 0-6 months
+    - (Does not require separate 2021 update)
+  * - Child stunting exposure
+    - :ref:`2020 docs<2020_risk_exposure_child_stunting>`, implemented in IV iron, wasting paper
+    - Artifact rebuild
+    - 
+    - (Does not require separate 2021 update)
+  * - Child underweight exposure
+    - No
+    - Needs to be created!
+    - 
+    - (Does not require separate 2021 update)
+  * - Target area
+    - No
+    - N/A
+    - Needs to be created!
+    - 
+ 
+.. list-table:: Risk effects subcomponents
+  :header-rows: 1
+
+  * - Risk
+    - Affected outcome
+    - Existing version
+    - Wave I update
+    - Wave II update
+    - Note
+  * - LBWSG
+    - Mortality
+    - :ref:`Docs here<2019_risk_effect_lbwsg>`, implemented in IV iron
+    - 
+    - Will need PAF calculation for GBD 2021
+    - 
+  * - LBWSG
+    - Wasting
+    - Yes, docs part of :ref:`antenatal supplementation intervention CGF effects <maternal_supplementation_intervention>`. Implemented in IV iron
+    - Use "static child wasting" effects from birth through initialization into the 6-11 month age group only; then wasting exposure model updates to transition model
+    - Update to transition wasting model 0-6m
+    - 
+  * - LBWSG
+    - Stunting
+    - Yes, docs part of :ref:`antenatal supplementation intervention CGF effects <maternal_supplementation_intervention>`, implemented in IV iron
+    - 
+    - 
+    - 
+  * - CGF (wasting, stunting, and underweight)
+    - Infectious disease
+    - Only wasting is documented :ref:`found here <2019_risk_effect_wasting>`. Docs need updating
+    - Update to 2021 values, add underweight risk effects, add malaria as affected outcome
+    - None
+    - (Does not require separate 2021 update)
+  * - Target area
+    - CGF
+    - No
+    - N/A
+    - Needs to be created
+    - 
+
+.. list-table:: Intervention subcomponents
+  :header-rows: 1
+
+  * - Intervention
+    - Existing version
+    - Wave I update
+    - Wave II update
+    - Note
+  * - SAM tx
+    - :ref:`Docs here <intervention_wasting_treatment>`, implemented in wasting paper
+    - Update to COMPAS 
+    - 
+    - 
+  * - MAM tx
+    - :ref:`Docs here <intervention_wasting_treatment>`, implemented in wasting paper
+    - Update to COMPAS
+    - 
+    - 
+  * - SQLNS
+    - :ref:`Docs here <lipid_based_nutrient_supplements>`, implemented in wasting paper
+    - Need to double check lognormal distribution for effects and change duration of supplementation
+    - 
+    - 
+
+.. list-table:: Cause subcomponents
+  :header-rows: 1
+
+  * - Cause
+    - Existing version
+    - Wave I update
+    - Wave II update
+    - Note
+  * - Diarrheal diseases
+    - :ref:`Docs here <2019_cause_diarrhea>`, implemented in IV iron
+    -  
+    - 
+    - 
+  * - Measles
+    - :ref:`Docs here <2019_cause_measles>`, implemented in IV iron
+    - 
+    - 
+    - 
+  * - Lower respiratory infections (LRI)
+    - :ref:`Docs here <2019_cause_lower_respiratory_infections>`, implemented in IV iron
+    - 
+    - 
+    - 
+  * - Malaria
+    - No existing version
+    - Needs to be created!
+    - 
+    - 
+  * - Background morbidity
+    - :ref:`Docs here <other_causes_ylds>`, but has not yet been implemented
+    - 
+    - 
+    - Bonus model, not a high priority
+
+2.2.1 Task tracking for each wave
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. list-table:: Wave I outstanding tasks
+  :header-rows: 1
+
+  * - Task
+    - Dependencies
+    - Research person
+    - Engineering person
+  * - 1: Artifact rebuilds
+    - None; ask Ali about which parameters need rebuilds if we run into any problems
+    - .
+    - TBD
+  * - 2: LBWSG PAF recalculation
+    - After task 1
+    - .
+    - TBD
+  * - 3: Child wasting exposure calibration equation updates (to include underweight, stunting mortality effects)
+    - After task 4
+    - Ali
+    - TBD
+  * - 4: Child underweight exposure model
+    - Need DHS data
+    - TBD
+    - TBD
+  * - 5: Clarify LBWSG on wasting risk effect
+    - .
+    - Ali
+    - TBD
+  * - 6: 2021 CGF risk effects
+    - .
+    - TBD
+    - TBD
+  * - 7: Update SAM and MAM tx effects to COMPAS
+    - .
+    - Ali
+    - TBD
+  * - 8: Update SQLNS docs for lognormal dist, supplementation duration
+    - .
+    - Ali
+    - TBD
+  * - 9: Malaria cause model
+    - Wait until task 11 is decided, could be irrelevant
+    - TBD
+    - TBD
+  * - 10: computational resource scoping
+    - .
+    - Ali
+    - Rajan
+  * - 11: timestep strategy
+    - Influenced by task #10, project timeline
+    - Ali
+    - Rajan
+
+.. list-table:: Wave II outstanding tasks
+  :header-rows: 1
+
+  * - Task
+    - Dependencies
+    - Research person
+    - Engineering person
+  * - 1: Wasting transition model for 0-6 months
+    - .
+    - TBD
+    - TBD
+  * - 2: Update LBWSG effect on wasting for transitions among 0-6 months
+    - After step 1
+    - TBD
+    - TBD
+  * - 3: Target area risk exposure
+    - .
+    - TBD
+    - TBD
+  * - 4: Target area risk effects
+    - After task 3
+    - TBD
+    - TBD
+  * - 5: General 2021 update, location expansion
+    - GBD timeline
+    - TBD (tasks are .csv data file updates; modeling strategy updates already complete)
+    - TBD (tasks are artifact updates)
 
 2.3 Default specifications
 --------------------------
