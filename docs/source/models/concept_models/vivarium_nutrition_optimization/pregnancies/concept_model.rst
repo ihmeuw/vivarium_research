@@ -137,6 +137,7 @@ Documents that contain information specific to the overall model and the child s
     - .
     - Docs ready, will need V&V (Ali)
     - In progress (Patrick/Steve)
+    - New content from IV iron
   * - Model builds 2-6
     - .
     - Docs ready, will need V&V (Ali)
@@ -146,6 +147,12 @@ Documents that contain information specific to the overall model and the child s
     - .
     - Docs ready, will need V&V (Ali)
     - Patrick/Steve
+    - New content from IV iron
+  * - Production runs
+    - . 
+    - Ali
+    - Patrick/Steve
+    - Triple check everything is finalized and ready for next steps :) 
 
 .. list-table:: Wave II outstanding tasks
   :header-rows: 1
