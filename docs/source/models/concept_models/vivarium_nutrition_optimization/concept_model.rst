@@ -52,10 +52,6 @@ Documents that contain information specific to the subcomponents of this simulat
 
    */concept_model*
 
-.. todo::
-
-  Link child component page
-
 .. _nutritionoptimization2.0:
 
 2.0 Modeling aims and objectives

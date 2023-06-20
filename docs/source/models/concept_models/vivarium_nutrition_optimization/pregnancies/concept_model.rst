@@ -46,9 +46,7 @@ Documents that contain information specific to the overall model and the child s
 
 - :ref:`Overall nutrition optimization concept model document<2021_concept_model_vivarium_nutrition_optimization>`
 
-.. todo::
-
-  Link child page
+- :ref:`Child subcomponent concept model document <2021_concept_model_vivarium_nutrition_optimization_children>`
 
 .. _nutritionoptimizationpreg2.0:
 
