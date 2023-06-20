@@ -123,6 +123,54 @@ Documents that contain information specific to the overall model and the child s
 |                     |                                           |updated              |
 +---------------------+-------------------------------------------+---------------------+
 
+.. list-table:: Wave I outstanding tasks
+  :header-rows: 1
+
+  * - Task
+    - Dependencies
+    - RT person
+    - ST person
+    - Note
+  * - Model builds 0.0 through 1
+    - .
+    - Docs ready, will need V&V (Ali)
+    - In progress (Patrick/Steve)
+    - New content from IV iron
+  * - Model builds 2-6
+    - .
+    - Docs ready, will need V&V (Ali)
+    - Patrick/Steve
+    - No new content from IV iron (except one exclusion)
+  * - Model build 7
+    - .
+    - Docs ready, will need V&V (Ali)
+    - Patrick/Steve
+    - New content from IV iron
+  * - Production runs
+    - . 
+    - Ali
+    - Patrick/Steve
+    - Triple check everything is finalized and ready for next steps :) 
+
+.. list-table:: Wave II outstanding tasks
+  :header-rows: 1
+
+  * - Task
+    - Dependencies
+    - RT person
+    - ST person
+    - Note
+  * - General GBD 2021 update
+    - Ali blocked by hemoglobin distribution questions, team blocked by GBD timeline
+    - Ali
+    - Patrick/Steve
+    - 
+  * - Background morbidity
+    - .
+    - Ali
+    - Patrick/Steve
+    - Bonus task, not necessary for success
+
 2.3 Default specifications
 --------------------------
 
