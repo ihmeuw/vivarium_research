@@ -215,12 +215,12 @@ Documents that contain information specific to the overall model and the pregnan
     - Engineering person
   * - 1: computational resource scoping
     - .
-    - Ali
-    - Rajan
-  * - 2: timestep strategy
-    - Influenced by task #1, project timeline
-    - Ali
-    - Rajan
+    - Done! (Ali)
+    - Done! (Rajan)
+  * - 2: Timestep increase strategy
+    - Delayed to wave II based on task 1 findings
+    - .
+    - .
   * - 3: Child underweight exposure model
     - Need DHS data
     - TBD
@@ -230,11 +230,11 @@ Documents that contain information specific to the overall model and the pregnan
     - Ali
     - TBD
   * - 5: 2021 CGF risk effects
-    - Strategy influenced by task 2
+    - .
     - TBD
     - TBD
   * - 6: Malaria cause model
-    - Wait until task 2 is decided, might not need to do
+    - .
     - TBD
     - TBD
   * - 7: Update SAM and MAM tx effects to COMPAS
@@ -285,6 +285,10 @@ Documents that contain information specific to the overall model and the pregnan
     - GBD timeline
     - TBD (tasks are .csv data file updates; modeling strategy updates already complete)
     - TBD (tasks are artifact updates)
+  * - 6: Implement some strategy to increase timestep (YLD/YLL-only or variable timestep)
+    - TBD on whether this is necessary. Depends on how fast simulations are running and timeline details
+    - TBD
+    - TBD
 
 2.3 Default specifications
 --------------------------
@@ -332,8 +336,8 @@ Documents that contain information specific to the overall model and the pregnan
     - 2029-12-31
     - 
   * - Timestep
-    - TBD, variable or 28 days
-    - 
+    - 4 days
+    - May eventually update to variable or 28 days with YLL/YLD-only modeling strategy (likely not for wave I)
   * - Randomness key columns
     - ['entrance_time', 'maternal_id']
     - Entrance time should be identical for all simulants despite simulants having different birth dates/times from the pregnancy simulation
@@ -482,7 +486,28 @@ Where:
 2.5 Outputs
 ------------
 
-.. _nutritionoptimizationchild5.0:
+.. todo::
+
+  Include more info
+
+2.6 Computational resource scoping
+------------------------------------
+
+Since this project requires running across many more scenarios than typical vivarium simulations, we ran some back-of-the-envelope calculations on the magnitude of computing resources to run all scenarios across all projects. The following assumptions went into these calculations:
+
+- 46 scenarios in wave I (no targeting of SQLNS or MAM tx and 1 location) and 288 scenraios in wave II (including targeting of SQLNS and MAM treatment as well AND 3 locations)
+- 4 day timestep in the child simulation if no "timestep inrease strategy" (such as variable timesteps or YLD/YLL-only modeling strategy) is implemented and 28 day timestep if we do implement one of these strategies
+- Simulation takes 32 seconds per timestep. This assumption was informed by the "emulator test runs" of the wasting paper simulation that output only the necessary measures with no stratifications by year, age, or sex
+- Assume 15,000 threads available on all.q
+
+Under these assumptions, a full run of wave I will take 3.8 cluster-hours with 4-day timesteps and 0.6 cluster-hours with 28-day timesteps. A full run of wave II will take 23.5 cluster-hours with 4-day timesteps and 3.5 cluster-hours with 28-day timesteps.
+
+:download:`Calculations of these estimated resource requirements can be found in this excel file <timestep scaling.xlsx>`
+
+Notably, the run time of this simulation may increase as we add complexity to our model, particularly with respect to the additional risk factor of child underweight exposure and the additional cause model of malaria, which were not present in our test runs.
+
+
+.. _nutritionoptimizationchild3.0:
 
 3.0 Models
 ++++++++++
