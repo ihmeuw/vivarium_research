@@ -247,26 +247,26 @@ Documents that contain information specific to the overall model and the child s
     - 0
   * - 1: MMS
     - 0
-    - ANC1
+    - 1
     - 0
   * - 2: Universal BEP
     - 0
     - 0
-    - ANC1
+    - 1
   * - 3: Targeted BEP/none
     - Baseline for adequate BMI pregnancies
     - 0
-    - ANC1 for low BMI pregnancies
+    - 1 for low BMI pregnancies
   * - 4: Targeted BEP/MMS
     - 0
-    - ANC1 for adequate BMI pregnancies
-    - ANC1 for low BMI pregnancies
+    - 1 for adequate BMI pregnancies
+    - 1 for low BMI pregnancies
 
 Where: 
 
-- **0** represents the minimum intervention coverage (no coverage), 
+- **0** represents the minimum intervention coverage (0%, or no coverage)
 
-- **ANC1** represents the maximum intervention coverage equal to the proportion of pregnancies that attend at least one antenatal care visit. `Draw-level values for each modeled location can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/ANC1_draws>`_
+- **1** represents the maximum intervention coverage (100%)
 
 - **Baseline** represents location-specific baseline IFA coverage, `which can be found in location-specific .csv files here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/baseline_ifa_coverage>`_ (`note these values were calculated in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/Gestational%20age%20shifts.ipynb>`_
 
@@ -475,6 +475,9 @@ Specific outputs for specific models are specified in the following section.
   * - 0.1
     - Check that distribution of observed person-time by age group matches distribution of pregnancies in GBD, check ACMR
     - Looks great! Some deviation from GBD ACMR at edge age groups as a result of small numbers, but not a concern. `Model 0.1 V&V notebooks can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_0.1.ipynb>`_
+  * - 1.0
+    - Confirm pregnancy transitions occuring and at the expected intervals. For this model, all pregnancies hard coded for duration of 40 weeks. Postpartum period duration of 6 weeks.
+    - Looks great! Note that pregnancy duration skews when evaluated at age-specific level, but this is not a bug in implementation, rather in analysis. `Model 1.0 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.0.ipynb>`_
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
