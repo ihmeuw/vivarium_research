@@ -3627,12 +3627,8 @@ should be set to 1.
 The duplicated row should have the same simulant-specific attributes as the
 original, such as name and birth date, but different household-specific
 attributes such as address fields and relation to reference person.
-
-.. todo::
-
-  Be more explicit about what the fields in the duplicated row should look like.
-  In particular, specify how the relation to reference person should be defined
-  when a simulant is duplicated at a guardian's household.
+For simplicity, set "relation to reference person" equal to "Other relative" in
+the duplicated row.
 
 To create guardian-based duplicates, each duplicated simulant will be included
 in the final dataset twice, once at their address of residence and once at their
