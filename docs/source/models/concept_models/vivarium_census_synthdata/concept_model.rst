@@ -3616,7 +3616,7 @@ If the user selects a duplication rate that is higher than the calculated
 maximum rate in the sim, a warning should be issued explaining that the selected
 rate is greater than the maximum available, and the actual rate of duplication
 should be set to the maximum for the specified simulant category. More
-precisely, the conditional probabiity that a row in the spceified category is
+precisely, the conditional probability that a row in the specified category is
 duplicated, given that the row is eligible for guardian-based duplication,
 should be set to 1.
 
