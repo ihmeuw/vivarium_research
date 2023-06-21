@@ -98,7 +98,7 @@ To achieve the general modeling objective of determining the most cost effective
 
 **In the case of the third situation:**
 
-  Then, we can combine our strategies for the first two situations so that we may estimate more complex combinations of joint intervention coverage (for example: 50% of the population covered by A and B, 25% covered by A, 25% covered by neither, for total poulation coverage of 75% for A, 50% for B).
+  Then, we can combine our strategies for the first two situations so that we may estimate more complex combinations of joint intervention coverage (for example: 50% of the population covered by A and B, 25% covered by A, 25% covered by neither, for total population coverage of 75% for A, 50% for B).
 
     In this case, we would simulate 3 scenarios (1: 100% coverage of A and B, 2: 100% coverage of A, 3: no coverage) and then estimate the overall impact of the described intervention coverage combination as 0.5 * scenario_1 + 0.25 * scenario_2 + 0.25 scenario_3.
 
