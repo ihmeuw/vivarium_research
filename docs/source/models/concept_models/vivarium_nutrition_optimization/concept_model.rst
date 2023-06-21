@@ -94,7 +94,7 @@ To achieve the general modeling objective of determining the most cost effective
 
     NOTE: see a discussion of the potential limitations of this assumption as it relates to simulated common random numbers in the `6.0 Limitations`_ section.
 
-  As this assumption requires only a weighted average, we can perform this calculation outside of our simualtion so long as we have quantified the impacts of intervention A and B within our simulation already.
+  As this assumption requires only a weighted average, we can perform this calculation outside of our simulation so long as we have quantified the impacts of intervention A and B within our simulation already.
 
 **In the case of the third situation:**
 
