@@ -86,7 +86,7 @@ To achieve the general modeling objective of determining the most cost effective
   - A child who may have benefitted from SAM treatment alone may no longer need to be treated for SAM if they are covered by MAM treatment as well as SAM treatment
   - Etc.
 
-  These interactions may be difficult to quantify directly and therefore we will plan to estimate the effect of joint coverage of multiple interventions on maternal and child health from within our simualtion.
+  These interactions may be difficult to quantify directly and therefore we will plan to estimate the effect of joint coverage of multiple interventions on maternal and child health from within our simulation.
 
 **In the case of the second situation:**
 
