@@ -475,6 +475,9 @@ Specific outputs for specific models are specified in the following section.
   * - 0.1
     - Check that distribution of observed person-time by age group matches distribution of pregnancies in GBD, check ACMR
     - Looks great! Some deviation from GBD ACMR at edge age groups as a result of small numbers, but not a concern. `Model 0.1 V&V notebooks can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_0.1.ipynb>`_
+  * - 1.0
+    - Confirm pregnancy transitions occuring and at the expected intervals. For this model, all pregnancies hard coded for duration of 40 weeks. Postpartum period duration of 6 weeks.
+    - Looks great! Note that pregnancy duration skews when evaluated at age-specific level, but this is not a bug in implementation, rather in analysis. `Model 1.0 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.0.ipynb>`_
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
