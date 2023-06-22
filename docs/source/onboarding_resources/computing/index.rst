@@ -205,7 +205,7 @@ On the cluster, you can use the version of conda provided by the Central Comp te
 recommended. To do this, log into the cluster and then enter the code 
 :code:`/ihme/code/central_comp/miniconda/bin/conda init`. This adds information on how to 
 access conda to your bashrc file. You will need to restart the terminal for the 
-changes to take effect. 
+changes to take effect. This is also noted in the :ref:`bash files section <cluster_access_bash>` 
 
 There are other ways to install conda, but the above is simplest. 
 
@@ -224,33 +224,35 @@ Some Hub pages on accessing the cluster:
 - `Science and Engineering <https://hub.ihme.washington.edu/pages/viewpage.action?pageId=72807457>`_
 - `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_
 
-.. _cluster_access_putty:
+The cluster is accessed through the Secure Shell protocol or SSH for short. 
+To access the cluster, an SSH "client" is needed. The client is an application 
+that can make SSH connections. 
 
-The cluster can be accessed from most terminals 
-on your computer. Some of the most popular ones used are: PuTTY or Bitvise for 
-Windows users and Terminal or iTerm2 for Mac users. For Windows users, most researchers use PuTTY, 
-however Bitvise is also used at IHME. For Mac users, the Terminal app comes installed 
-on your computer but some perfer to use iTerm2. 
+Both Mac and Windows include command-line SSH clients by default. This means 
+that most terminals can be used to access the cluster. As mentioned above, 
+feel free to use any terminal you are familiar with! 
 
-Terminals most commonly used to access the cluster: 
+IHME Learn provides information on accessing the cluster from the command line in 
+Module 3 within the IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_.
+
+Mac users have to use the above method for cluster access. 
+For Windows users, there are some SSH clients that come with a graphical user 
+interface (e.g., you can "click" on things rather than type commands only) 
+which are more intuitive and we recommend if you are new to this type of 
+computing work. 
+
+As mentioned above, for Windows users this is PuTTY or Bitvise 
 
 Link to download `PuTTY or Bitvise <https://www.putty.org/>`_
 
-Link to download `iTerm2 <https://iterm2.com/>`_
-
-Other information from Zeb to integrate: 
-
-The cluster is accessed through the SSH ("Secure Shell") protocol, so what is needed is an SSH "client" -- an application that can make SSH connections. Both Mac and Windows (at least, in recent versions of Windows 10) include command-line SSH clients by default.
-
-PuTTY and Bitvise are both SSH clients with graphical user interfaces for Windows. For Mac, it looks like some exist (e.g. Termius) but I didn't see anything super popular.
-
-We should note that you can also just run ssh commands from a terminal without installing anything instead of using a graphical client. I do this, and I am guessing that Nathaniel does too. Include the link to the IHME training video on how to do this. 
+.. _cluster_access_putty:
 
 Accessing the Cluster from PuTTY
 --------------------------------
 
-These instructions are for PuTTY, if you are using a different SSH client search for similar 
-information on the Hub or ask a team member for help. 
+We provide step by step instructions for accessing the cluster for the 
+first time. These instructions are for PuTTY, if you are using a different 
+SSH client search for similar information on the Hub or ask a team member for help. 
 
 For your first time on PuTTY, you will set up and save the instructions for a slurm session. To do this: 
 
@@ -273,9 +275,174 @@ lines from your trainings!
 
 .. image:: putty_3.png
 
-.. todo::
+.. _cluster_access_bash:
 
-  Add information for not entering your username/password every time 
+Your Bash Configuration Files 
+-----------------------------
+
+Bash configuration files contain information and commands that are used when 
+interacting with the cluster. When the cluster tries to execute some command 
+line prompts, it will look to your bash configuration files for information 
+or filepaths. 
+
+You should have 2 bash configuration files, your bash profile or :code:`.bash_profile` 
+and your bash rc or :code:`.bashrc`. The rc stands for run commands and comes from the 
+predecessors of Unix. 
+
+If you make edits to either of these files, you will need to log out and then back into 
+the cluster before they will take effect. 
+
+bash profile
+~~~~~~~~~~~~
+
+The bash profile is only run when you log in to the cluster, and so is usually a shorter file. 
+It contains a few lines with generic profile settings. You should **NOT** need to edit this file 
+when you first start. For reference, the lines of code in your bash profile are below. If you 
+think these don't match what you have, ask a friend to help you troubleshoot. 
+
+:: 
+
+  [[ -e ~/.profile ]] && source ~/.profile    ##Loads generic profile settings 
+  [[ -e ~/.bashrc  ]] && source ~/.bashrc     ##Loads bash rc 
+
+bash rc
+~~~~~~~
+
+Your bash rc file is run more frequently and can contain helpful settings and information 
+needed to run certain commands. First, you will need to run the below line of code in 
+your terminal to set up conda. Once you're logged into the cluster on the terminal of 
+your choosing, run: 
+
+.. code-block:: bash 
+  :linenos:
+
+  $ /ihme/code/central_comp/miniconda/bin/conda init  
+
+This information is also covered in the :ref:`terminal access section above <terminal_access>`
+
+Following that, below is a block of code designed to be copied and pasted into your bash rc file. 
+If you're curious about what this code means, there are some comments included or you can ask a 
+friend. It is mainly settings to make the terminal more user friendly. 
+
+Section to copy and paste: 
+
+::
+
+  # Source global definitions
+  if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+  fi
+
+  # don't put duplicate lines or lines starting with space in the history.
+  # See bash(1) for more options
+  HISTCONTROL=ignoreboth
+
+  # append to the history file, don't overwrite it
+  shopt -s histappend
+
+  # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+  HISTSIZE=-1
+  HISTFILESIZE=2000
+
+  # check the window size after each command and, if necessary,
+  # update the values of LINES and COLUMNS.
+  shopt -s checkwinsize
+
+  # If set, the pattern "**" used in a pathname expansion context will
+  # match all files and zero or more directories and subdirectories.
+  # shopt -s globstar
+
+  # make less more friendly for non-text input files, see lesspipe(1)
+  [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+  # set variable identifying the chroot you work in (used in the prompt below)
+  if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+      debian_chroot=$(cat /etc/debian_chroot)
+  fi
+
+  # set a fancy prompt (non-color, unless we know we "want" color)
+  case "$TERM" in
+      xterm-color|*-256color) color_prompt=yes;;
+  esac
+
+  # uncomment for a colored prompt, if the terminal has the capability; turned
+  # off by default to not distract the user: the focus in a terminal window
+  # should be on the output of commands, not on the prompt
+  force_color_prompt=yes
+
+  if [ -n "$force_color_prompt" ]; then
+      if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+      else
+    color_prompt=
+      fi
+  fi
+
+  if [ "$color_prompt" = yes ]; then
+      PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  else
+      PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  fi
+  unset color_prompt force_color_prompt
+
+  # If this is an xterm set the title to user@host:dir
+  case "$TERM" in
+  xterm*|rxvt*)
+      PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+      ;;
+  *)
+      ;;
+  esac
+
+  # enable color support of ls and also add handy aliases
+  if [ -x /usr/bin/dircolors ]; then
+      test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+      alias ls='ls --color=auto'
+      #alias dir='dir --color=auto'
+      #alias vdir='vdir --color=auto'
+
+      alias grep='grep --color=auto'
+      alias fgrep='fgrep --color=auto'
+      alias egrep='egrep --color=auto'
+  fi
+
+  # colored GCC warnings and errors
+  #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+  # some more ls aliases
+  alias ll='ls -alF'
+  alias la='ls -A'
+  alias l='ls -CF'
+
+  # Add an "alert" alias for long running commands.  Use like so:
+  #   sleep 10; alert
+  alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+  # Alias definitions.
+  # You may want to put all your additions into a separate file like
+  # ~/.bash_aliases, instead of adding them here directly.
+  # See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+  if [ -f ~/.bash_aliases ]; then
+      . ~/.bash_aliases
+  fi
+
+  # enable programmable completion features (you don't need to enable
+  # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+  # sources /etc/bash.bashrc).
+  if ! shopt -oq posix; then
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+      . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+      . /etc/bash_completion
+    fi
+  fi
+
+Another common thing to include in your bash rc file are aliases. More information on what 
+these are and some examples can be found :ref:`below in the aliases section <cluster_access_other>`. 
 
 
 .. _cluster_access_command:
@@ -319,11 +486,70 @@ researchers do not disturb engineering workflow.
 
 .. _cluster_access_other:
 
-Other Useful Cluster Tips
--------------------------
+Aliases and Other Cluster Tips
+------------------------------
 
-#. If you get tired of typing long commands, one option is to make an alias. An alias is a shortcut command for commonly typed things. More information on how to do was written by the `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_ 
-#. When your computer falls asleep, it will stop access to the cluster and cut off any interactive jobs (i.e. :code:`srun` sessions) that were currently running. This can be problematic if a command needs to run overnight. There are a few different options to account for this including: screen, MOSH, or tmux. If you need to use these, ask a teammate.
+**Aliases:**
+
+Often, it can be annoying to type the same information repeatedly everytime you 
+access the cluster. To help account for this you can create aliases. These are 
+short-hand commands for commonly typed things. 
+
+Here is a Hub page written by the `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_ on how to set up aliases. 
+
+Here, we provide a few copy and paste aliases you can add to your bashrc file. Be 
+sure to update the names to match your project and username. Also, note that once 
+you include these you will need to restart your cluster connection for them to take 
+effect. The alias names themselves are arbitrary. While examples are provided, please 
+name these whatever is short and clear for your use. 
+
+The aliases below are: 
+
+#. Starting a Jupyter notebook in your project's repository 
+#. Starting an srun session (note: you can change the memory or other parameters before saving)
+#. Checking on your current jobs on the cluster 
+
+.. code-block:: bash 
+  :linenos:
+
+  $ alias jupyter_<PROJECT_NAME>="sh /ihme/singularity-images/rstudio/shells/jpy_rstudio_sbatch_script.sh -e <INSERT_ENVIRONMENT_NAME> -c /ihme/code/central_comp/miniconda/bin/activate -t lab -d /ihme/code/<INSERT_USERNAME>/<INSERT_PROJECT_REPO> -A proj_simscience -p i.q" 
+  $ alias srun_5G="srun --mem=5G -c 1 -A proj_simscience -p all.q --pty bash" 
+  $ alias squeue_<USERNAME>="squeue -u <INSERT_USERNAME>" 
+
+If you ever forget what settings you included in an alias you can enter the command :code:`type <ALIAS_NAME>` 
+into the terminal and the full alias code will be displayed. 
+
+This is useful if you want to change the parameters of a command as well - simply display the alias code, copy 
+and paste the command into the terminal, and then make needed adjustments before running. 
+
+**Setting up Easier Cluster Access:**
+
+There are ways to configure access so that getting on the cluster is fewer steps. 
+
+For those using PuTTY, you can configure settings such that you do not need to type 
+your username and password every time you access the cluster. This 
+`Hub page <https://hub.ihme.washington.edu/display/IHD/PuTTY>`_ 
+does a very good job of outlining the steps. However, note that for step 2 of 
+"Configure PuTTY Itself", this author needed to enter "gen-slurm-slogin-p01.cluster.ihme.washington.edu" 
+instead of "cluster-submit1.ihme.washington.edu", which is listed on the page. 
+
+A similar procedure can be used for Bitvise, instructions are on `this webpage <https://www.bitvise.com/getting-started-public-key-bitvise>`_. 
+
+For those using command line to access the cluster, you can do two things for 
+easier access: 
+
+#. Set up an alias to allow for a shorter command line to access the cluster 
+#. Configure your computer to not need your username and password everytime 
+
+For both of these, this Hub page by the `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_ has a good step by step guide to configuring your 
+setup. If you need help with this process, reach out to someone on the team. 
+
+**Long Cluster Jobs:**
+When your computer falls asleep, it will stop access to the cluster and cut 
+off any interactive jobs (i.e. :code:`srun` sessions) that were currently 
+running. This can be problematic if a command needs to run overnight. There 
+are a few different options to account for this including: screen, MOSH, or 
+tmux. If you need to use these, ask a teammate.
 
 .. _cluster_access_files:
 
@@ -356,28 +582,6 @@ being used in the sim. Therefore, follow these steps:
 
 For consistency, please use this naming convention for all files: :code:`FILENAME_20230309.ext`. 
 For example, this might be :code:`heart_failure_proportions_20230310.csv` 
-
-.. _cluster_access_bash:
-
-Your Bash Configuration Files 
------------------------------
-
-Bash files contain commands you would enter into a command line, but 
-specifically ones you will use very often. For example, every time you 
-want to open a Jupyter session, the cluster needs certain information 
-and requirements. To find this information, it looks in your Bash files 
-rather than asking you to enter the same information every time. 
-
-However, Bash files can be confusing since it is less obvious when the 
-information is being used or what it is used for. Therefore, we have 
-provided a copy-and-paste formatting for information to be added to 
-your Bash files. 
-
-.. todo::
-
-  - Confirm and paste in bash files 
-  - Get Zeb's help in explaining Bash files better 
-
 
 .. _conda_environments:
 

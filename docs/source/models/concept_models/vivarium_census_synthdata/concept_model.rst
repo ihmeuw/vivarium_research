@@ -1992,6 +1992,7 @@ Census
   :header-rows: 0
 
   * - Unique simulant ID (for PRL tracking)
+  * - Unique household ID consistent between observers (for PRL tracking)
   * - First name
   * - Middle initial
   * - Last name
@@ -2179,8 +2180,8 @@ There are two types of sampling plans:
   :widths: 20
   :header-rows: 0
 
-  * - Household ID (arbitrary indicator which is only the same for simulants in the same household)
   * - Unique simulant ID (for PRL tracking)
+  * - Unique household ID consistent between observers (for PRL tracking)
   * - Survey date
   * - First name
   * - Middle initial
@@ -2388,8 +2389,8 @@ in the home.
   :widths: 20
   :header-rows: 0
 
-  * - Household ID (arbitrary indicator which is only the same for simulants in the same household)
   * - Unique simulant ID (for PRL tracking)
+  * - Unique household ID consistent between observers (for PRL tracking)
   * - First name
   * - Middle initial
   * - Last name
@@ -2559,6 +2560,7 @@ W2 and 1099 Forms
   :header-rows: 0
 
   * - Unique simulant ID (for PRL tracking)
+  * - Unique household ID consistent between observers (for PRL tracking)
   * - First name
   * - Middle initial
   * - Last name
@@ -2690,6 +2692,8 @@ in January 2024.
   * - Simulant Attribute
     - Notes
   * - Unique simulant ID (for PRL tracking)
+    -
+  * - Unique household ID consistent between observers (for PRL tracking)
     -
   * - First name
     -
@@ -2946,6 +2950,11 @@ added later (not in the minimum viable model), if desired.
   * - Date of event (stored as a string in YYYYMMDD format)
 
 .. note::
+  Unlike the other observers, there is no ground-truth unique household ID for PRL tracking in this observer.
+  Many birth events occurred before the beginning of the simulation, so it is not clear how a household ID
+  would be assigned to these events.
+
+.. note::
 
   In the final version of the observers, following the noise functions, please have all data as strings.
 
@@ -3169,7 +3178,7 @@ for all column based noise include:
     - Taxes (both), SSA
     - 0.01
     - 0.1
-    - "Borrowed" SSN, missing data, copy from within household, numeric miswriting, OCR, typographic
+    - "Borrowed" SSN (W2 observer only), missing data, copy from within household (**not** on W2 observer), numeric miswriting, OCR, typographic
     - Note that not all types of noise apply to all observers, details below
   * - ITIN
     - Taxes 1040
