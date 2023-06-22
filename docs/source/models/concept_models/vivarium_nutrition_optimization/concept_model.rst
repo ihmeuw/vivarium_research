@@ -73,7 +73,7 @@ To achieve the general modeling objective of determining the most cost effective
 
 1. Combined intervention coverage among the same individuals: 50% of the population is covered by intervention A and B, 50% of the population is covered by neither intervention A nor B
 
-2. Combined intervention coverage among separate individuals: 50% of the population is covered by intervention A, 50% of the population is covered by intervention B
+2. Combined intervention coverage among separate individuals: 50% of the population is covered by intervention A and not B, 50% of the population is covered by intervention B and not A
 
 3. Some combination of 1 and 2
 
