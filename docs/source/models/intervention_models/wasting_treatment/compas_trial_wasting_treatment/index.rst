@@ -128,7 +128,7 @@ Vivarium Modeling Strategy
     - 126 days 
     - point value
     - Update from prior version
-    - Median value ~18 weeks from S3 fig; [Bailey-et-al-2020]_
+    - Median value ~18 weeks from S3 fig, WAITING ON NUMERIC UPDATE; [Bailey-et-al-2020]_
   * - :math:`\text{time to recovery}_\text{untreated MAM}`
     - 147 
     - point value
@@ -138,7 +138,7 @@ Vivarium Modeling Strategy
     - 63 days
     - point value
     - Update from prior version
-    - Median value ~9 weeks from S3 fig; [Bailey-et-al-2020]_
+    - Median value ~9 weeks from S5 fig, WAITING ON NUMERIC UPDATE; [Bailey-et-al-2020]_
   * - :math:`k`
     - 3.5 (95% CI: 3.1-3.9)
     - lognormal
