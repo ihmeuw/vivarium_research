@@ -56,10 +56,6 @@ Documents that contain information specific to the overall model and the pregnan
 1.2 Outstanding questions and/or high-level to-dos
 -------------------------------------------------------
 
-- Need to determine expected computational requirements of proposed scenarios with current timestep. 
-
-    - If it is too large, need to determine how to increase timestep (YLD/YLL-only model versus variable timestep)
-
 2.0 Model design
 ++++++++++++++++
 
@@ -155,12 +151,12 @@ Documents that contain information specific to the overall model and the pregnan
     - Note
   * - SAM tx
     - :ref:`Docs here <intervention_wasting_treatment>`, implemented in wasting paper
-    - Update to COMPAS 
+    - :ref:`Updated modeling strategy (combined protocol data) found here <intervention_wasting_tx_combined_protocol>`
     - 
     - 
   * - MAM tx
     - :ref:`Docs here <intervention_wasting_treatment>`, implemented in wasting paper
-    - Update to COMPAS
+    - :ref:`Updated modeling strategy (combined protocol data) found here <intervention_wasting_tx_combined_protocol>`
     - 
     - 
   * - SQLNS
@@ -239,7 +235,7 @@ Documents that contain information specific to the overall model and the pregnan
     - TBD
   * - 7: Update SAM and MAM tx effects to COMPAS
     - .
-    - Ali
+    - Done (Ali)
     - TBD
   * - 8: Update SQLNS docs for lognormal dist, supplementation duration
     - .
