@@ -314,7 +314,7 @@ Specific outputs for specific models are specified in the following section.
     - N/A
     - All simulants initialized into the pregnancy state, but no other aspects of pregnancy model included
   * - 1.0
-    - Pregnancy state transitions (:ref:`docs here <other_models_pregnancy_closed_cohort>`)
+    - Pregnancy state transitions (:ref:`docs here <other_models_pregnancy_closed_cohort>`). For now, all pregnancies have duration of 40 weeks.
     - Baseline
     - None
     - * Deaths
@@ -324,7 +324,7 @@ Specific outputs for specific models are specified in the following section.
     - N/A
     - Note closed cohort change from IV iron pregnancy model. Custom observer exit at the end of postpartum period? (Bonus ask)
   * - 1.1 
-    - Birth outcome outputs
+    - Birth outcome outputs. Separation of full and partial term births. For now, full term pregnancies all have 40 weeks duration. Differentiation of live and stillbirths may occur here or in 1.2
     - Baseline
     - None
     - * Deaths
@@ -332,10 +332,10 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy state person-time
       * Pregnancy transition counts
       * Count of birth outcomes
-    - Live births paired with maternal_ids
+    - Full term births paired with maternal_ids
     -  
   * - 1.2
-    - LBWSG outputs
+    - LBWSG outputs. Update pregnancy duration to reflect sex-specific LBWSG exposures.
     - Baseline
     - None
     - * Deaths
@@ -343,7 +343,7 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy state person-time
       * Pregnancy transition counts
       * Count of birth outcomes
-    - Live births with maternal_ids and LBWSG exposures
+    - Live and still births with maternal_ids and LBWSG exposures
     - 
   * - 2.0
     - Maternal disorders and maternal hemorrhage cause models
@@ -388,7 +388,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * BMI exposure, stratified by pregnancy state and anemia state
-    - Live births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, and LBWSG exposures
+    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, and LBWSG exposures
     - Data block for GBD 2021 update as of 6/23.
   * - 6.0
     - Intervention effects on hemoglobin and birthweight
@@ -401,7 +401,7 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy transition counts
       * Anemia state person time, stratified by intervention coverage
       * Intervention counts
-    - Live births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
     - Both of these intervention effects were implemented in IV iron and are not changed for this model
   * - 7.0
     - Intervention effects on gestational age and birth outcomes
@@ -413,7 +413,7 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy state person time
       * Pregnancy transition counts
       * Birth outcomes, stratified by intervention coverage
-    - Live births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
     - These intervention effects are new and were not implemented in IV iron
   * - 8.0
     - Background morbidity
@@ -436,7 +436,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * Intervention counts
-    - Live births with maternal_ids, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, intervention coverage, and LBWSG exposures
     - 
   * - 9.1
     - Production runs
@@ -448,7 +448,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * Intervention counts
-    - Live births with maternal_ids, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, intervention coverage, and LBWSG exposures
     - 
   * - 10.0
     - GBD 2021 update?
