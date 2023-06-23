@@ -63,6 +63,13 @@ Documents that contain information specific to the subcomponents of this simulat
   
   We must be careful in optimizing for "minimizing" the prevalence of some risk such as child growth failure. This is because prevalence of such risks could be decreased via decreasing incidence (positive health impact) *or* via increasing risk-related mortality (negative health impact). That is why we choose to *maximize* the number of alive non-stunted children rather than minimize the prevalence of child growth failure.
 
+  Note that an alternative strategy here would be to minimize DALYs due to CGF. It is important to note that the former straegy would favor interventions that increase fertility even in the absence of decreased CGF exposure. When modeling interventions that have the potential to affect fertility (either directly, through averted pregnancy-related deaths resulting in future births, or through averted stillbirths or miscarriages), it is important to think through the implications of the optimization objective as it relates to fertility.
+
+.. todo::
+
+  Detail strategy for how to handle stillbirths in optimization objective. Note that assigning DALYs to stillbirths is not acceptable practice by convention.
+
+
 2.1 General modeling strategy
 -----------------------------
 
@@ -95,6 +102,10 @@ To achieve the general modeling objective of determining the most cost effective
     NOTE: see a discussion of the potential limitations of this assumption as it relates to simulated common random numbers in the `6.0 Limitations`_ section.
 
   As this assumption requires only a weighted average, we can perform this calculation outside of our simulation so long as we have quantified the impacts of intervention A and B within our simulation already.
+
+.. todo::
+
+  Create and link to notebook that shows how this strategy compares to actual simulated results
 
 **In the case of the third situation:**
 
