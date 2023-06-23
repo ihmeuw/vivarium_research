@@ -282,7 +282,7 @@ Congratulate and counsel the mother on appropriate IYCF practices.
     What about MAM with oedema? Are they treated as SAM or MAM?
     Answer: they are treated as MAM in GBD, but in reality, probably SAM. MAM with oedema is approximately 2% of MAM.
 
-:underline:`Classify no acute malnutritionin children`
+:underline:`Classify no acute malnutrition children`
 
 * WHZ ≥ -2 z score AND
 * No bilateral pitting oedema
