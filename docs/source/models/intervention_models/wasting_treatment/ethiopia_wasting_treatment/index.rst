@@ -583,7 +583,7 @@ So...
 Affected Outcomes
 +++++++++++++++++
 
-The Vivarium modeling strategy above details how to solve for the transition rates among the covered uncovered populations. However, the wasting treatment intervention will be implemented as a variable that affects the relative risk of certain transition rates between wasting states in the :ref:`dynamic wasting model <2020_risk_exposure_wasting_state_exposure>`. The following table details the relative risks for each dynamic wasting model transition rate that is affected by wasting treatment based on a given treatment category.
+The Vivarium modeling strategy above details how to solve for the transition rates among the covered and uncovered populations. However, the wasting treatment intervention will be implemented as a variable that affects the relative risk of certain transition rates between wasting states in the :ref:`dynamic wasting model <2020_risk_exposure_wasting_state_exposure>`. The following table details the relative risks for each dynamic wasting model transition rate that is affected by wasting treatment based on a given treatment category.
 
 .. warning::
 
@@ -674,8 +674,8 @@ Also note that since wasting and LBWSG are correlated, those with more severe wa
     - False
     -
   * - Female only
-    -
     - False
+    - 
   * - Age group start
     - 6-11 months, age_group_id = 389
     - (GBD 2019 does not have age_group_id=389. Use six months of age within the postneontal age group (1 month - 1 year) when using GBD 2019 results rather than GBD 2020)

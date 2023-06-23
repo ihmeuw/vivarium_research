@@ -59,6 +59,8 @@ This intervention model document builds off of the modeling strategy developed b
 
 The COMPAS trial is a non-inferiority trial that compared a "combined protocol" of SAM and MAM management to standard of care, which managed SAM and MAM separately. Rather than the standard of care to treat SAM cases with RUTF dosed to their current body weight (which increases as the child recovers) and MAM cases with RUSF, the combined protocol treats MAM cases with 1 sachet of RUTF per day until recovery and SAM cases with 2 sachets of RUTF per day until they reach MAM diagnostic criteria, at which case they will receive 1 sachet of RUTF per day until recovery from MAM (RUTF quantity decreases over time). The COMPAS trial showed that this combined protocol was not inferior to standard of care and required significantly less RUTF consumption (which has significant cost-savings implications).
 
+Note that this trial used the MUAC definition of acute malnutrition rather than the WHZ definition as our simulation does.
+
 Changes to the modeling strategy from the previously implemented version include:
 
 - Isolation of the :math:`\text{time to diagnosis}` parameter
@@ -179,7 +181,7 @@ Affected Outcomes
 
   Update link to new wasting transition model doc
 
-The Vivarium modeling strategy above details how to solve for the transition rates among the covered uncovered populations. However, the wasting treatment intervention will be implemented as a variable that affects the relative risk of certain transition rates between wasting states in the :ref:`dynamic wasting model <2020_risk_exposure_wasting_state_exposure>`. The following table details the relative risks for each dynamic wasting model transition rate that is affected by wasting treatment based on a given treatment category.
+The Vivarium modeling strategy above details how to solve for the transition rates among the covered and uncovered populations. However, the wasting treatment intervention will be implemented as a variable that affects the relative risk of certain transition rates between wasting states in the :ref:`dynamic wasting model <2020_risk_exposure_wasting_state_exposure>`. The following table details the relative risks for each dynamic wasting model transition rate that is affected by wasting treatment based on a given treatment category.
 
 .. warning::
 
@@ -266,8 +268,8 @@ For treatment of SAM and MAM, we model treatment starting at six months of age. 
     - False
     -
   * - Female only
-    -
     - False
+    - 
   * - Age group start
     - 6-11 months, age_group_id = 389
     - (GBD 2019 does not have age_group_id=389. Use six months of age within the postneontal age group (1 month - 1 year) when using GBD 2019 results rather than GBD 2020)
@@ -275,9 +277,6 @@ For treatment of SAM and MAM, we model treatment starting at six months of age. 
     - 2 - 4 years age_group_id = 34
     - 2y-4y = 34 GBD 2020; 1y-4y = 5 GBD 2019
   * - Other
-    -
-    -
-  * - Note
     -
     -
 
@@ -290,6 +289,7 @@ Assumptions and Limitations
 #. We assume that individual simulant's propensity to respond to wasting treatment is independent of their previous response/non-response to treatment. According to [Bitew-et-al-2020]_, SAM treatment response rates are associated with diarrhea, oedema, and use of antibiotics in the treament course in Ethiopia. Additionally, vitamin A supplementation and distance from the treatment center may be associated with SAM treatment response rates, although direct evidence was not provided [Bitew-et-al-2020]_. We chose to make this assumption given the non-deterministic nature of these factors.
 #. We assume that individuals who receive wasting treatment (according to parameter :math:`C`) but who do not respond to treatment according to parameters (according to parameter :math:`E_{SAM}` and :math:`E_{MAM}`) will exit the SAM state either through the :math:`r_{SAM,ux}` transition rate to the MAM state or the SAM-specific mortality rate and will exit the MAM state either through the :math:`r_{MAM,ux}` transition rate to mild wasting or the MAM-specific mortality rate. However, treatment non-responders (defined as not reaching recovery after two months of treatment) may represent especially complicated cases of MAM/SAM that may take longer to recovery and/or may have a higher mortality rate.
 #. We are limited in that the estimate of the average duration of SAM in 6-59 month old children from the [Isanaka_2021]_ paper relies on survey estimates of SAM treatment coverage, which may be subject to bias.
+#. We apply data of acute malnutrition measured using MUAC to our model that defines acute malnutrition according to WHZ scores. We assume that these definitions of acute malnutrition are good proxies of one another.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
