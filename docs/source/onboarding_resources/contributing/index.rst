@@ -15,7 +15,7 @@ Useful links
 ------------
 
 Our documentation is written using reStructuredText and Sphinx. These are ways of writing 
-text to include formatting and structure to documents. The following
+text to include formatting and structure in documents. The following
 links provide a description of how to structure your docs so they render
 correctly.
 
@@ -35,7 +35,7 @@ the commands below.
 ::
 
    $> conda create -y --name=vivarium_research python=3.8
-   $> source activate vivarium_research
+   $> conda activate vivarium_research
    (vivarium_research) $> git clone https://github.com/ihmeuw/vivarium_research.git
    (vivarium_research) $> cd vivarium_research
    (vivarium_research) $> pip install -r requirements.txt
@@ -75,7 +75,8 @@ Reviewing your changes
 ----------------------
 
 Once you've made your modifications, you can build them to see how they look. 
-Often, people use Miniconda for building pages. More information can be found 
+You'll do this within the conda environment you created above. Often, people 
+use the terminal Miniconda for this step. More information can be found 
 in this page for :ref:`computing tools <computing_interfaces>`.
 
 Use these commands to build your page with edits: 
@@ -83,14 +84,14 @@ Use these commands to build your page with edits:
 ::
 
    (base) $> cd vivarium_research/docs
-   (base) $> conda activate vivarium_research ##This line is only needed if vivarium_research has not been activated yet
+   (base) $> conda activate vivarium_research #This line is only needed if vivarium_research has not been activated yet
    (vivarium_research) $> make html
 
 This will create a new ``build`` sub-directory with the new documentation
 rendered in html.  You can open the file `vivarium_research/docs/build/html/index.html` in your
 browser to view your changes. 
 
-Note that some errors will appear as warnings in Miniconda, but will actually cause the build to 
+Note that any warnings in your terminal after the `make html` command will cause the build to 
 fail in GitHub. These include issues like duplicated references. Be sure to check for and correct 
 any warnings you may get before moving on! 
 
@@ -102,7 +103,7 @@ Once you're satisfied, you should push your changes to the remote repository
 directory and run::
 
    (vivarium_research) $> git add .
-   (vivarium_research) $> git status ##Not essential, but helpful to check that you are including the right edits
+   (vivarium_research) $> git status #Not essential, but helpful to check that you are including the right edits. You can also use git diff here
    (vivarium_research) $> git commit -m "Your commit message here."
    (vivarium_research) $> git push
 
@@ -133,3 +134,27 @@ respond to all the feedback and make updates to your pull request if necessary
 and re-request reviews. Once everyone has responded and is happy (or has, at
 least, marked your PR as approved), you can click the ``Merge Pull Request``
 button and add your docs to the master branch.
+
+**Protocol for adding reviewers:**
+
+From the research team:
+
+For pull requests that are project-specific, you should request review from all 
+members of the research team involved with that project. For more general pull 
+requests that apply to overall Vivarium protocols and/or framework, etc., you 
+should request review from all members of the research team.
+
+From the engineering team:
+
+Always tag engineers working on a given project for pull requests related to that 
+project. This will allow the engineering team members to stay informed of project 
+development and ask clarifying questions as necessary. The only potential exception 
+is for pull requests that only contain information on research background and do 
+not contain any information related to modeling strategy.
+
+Engineering team members on a given project should be tagged as required reviewers 
+when a pull request contains any changes that:
+
+- Were requested by engineering, or
+- Affects modeling strategy that has already been implemented and therefore requires code changes by the engineers
+   - In this case, the research team member who made the pull request is responsible for making a ticket on the `engineering JIRA board <https://jira.ihme.washington.edu/secure/RapidBoard.jspa?rapidView=305&view=planning.nodetail&selectedIssue=MIC-3449&epics=visible&issueLimit=100&selectedEpic=MIC-3420>`_ that outlines the requested code changes. The research team member should then post a slack message in the project-specific channel that tags the engineers and links to the new JIRA ticket. `More information on how to make engineering JIRA tickets as a research team member can be found here <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=SSE&title=RT+Ticket+Creation>`_.
