@@ -2705,10 +2705,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age (floored to integer years **before** noise is applied)
-    -
-  * - DOB (stored as a string in MM/DD/YYYY format)
-    -
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2761,10 +2757,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age
-    -
-  * - DOB (stored as a string in MM/DD/YYYY format)
-    -
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2809,8 +2801,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age
-    -
   * - Social Security Number (if present)
     -
   * - ITIN (if present)
@@ -2818,7 +2808,7 @@ in January 2024.
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Income must be rounded to the nearest whole number before applying noise.
+  In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
 
 If a simulant does not have an SSN,
