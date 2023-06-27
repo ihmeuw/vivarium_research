@@ -131,6 +131,80 @@ Step 1 in this process is detailed in the :ref:`pregnancy<2021_concept_model_viv
 
   More specific emulator documentation
 
+
+2.2 Submodels
+-------------
+
+.. list-table:: Wave I outstanding tasks for costing and emulator
+  :header-rows: 1
+
+  * - Task
+    - Dependencies
+    - RT person
+    - Note
+  * - 1: Confirm mixed coverage approach 
+    - 
+    - Ali 
+    - Completed 
+  * - 2: Emulator design choice 
+    - 
+    - Full team 
+    - 
+  * - 3: Clean emulator and remove hardcoded information 
+    - 
+    - Syl 
+    - 
+  * - 4: Allow for optimization to multiple outcomes 
+    - 
+    - TBD
+    - Example: deaths, DALYs, SAM cases 
+  * - 5: Add maternal interventions 
+    - 
+    - TBD
+    - 
+  * - 6: Test for robustness to different initial values 
+    - 
+    - TBD
+    - 
+  * - 7: Add non-linear cost functions 
+    - 
+    - TBD
+    - 
+  * - 8: Decide on costing approach and priorities 
+    - 
+    - Syl and Latera
+    -  
+
+
+.. list-table:: Wave II outstanding tasks for costing and emulator
+  :header-rows: 1
+
+  * - Task
+    - Dependencies
+    - RT person
+    - Note
+  * - 1: Literature search for cost information  
+    - All wave II tasks are dependent on 8 above 
+    - TBD
+    -  
+  * - 2: Identify and request any cost datasets  
+    - 
+    - TBD
+    - 
+  * - 3: Data analysis got costing 
+    - Dependent on what data is identified 
+    - TBD
+    - 
+  * - 4: Finalizaing cost functions 
+    - 
+    - TBD
+    - 
+  * - 5: Integrate costs into emulator 
+    - 
+    - TBD
+    - 
+
+
 .. _nutritionoptimization3.0:
 
 3.0 Concept model and submodels
