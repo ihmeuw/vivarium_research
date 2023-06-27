@@ -46,9 +46,7 @@ Documents that contain information specific to the overall model and the child s
 
 - :ref:`Overall nutrition optimization concept model document<2021_concept_model_vivarium_nutrition_optimization>`
 
-.. todo::
-
-  Link child page
+- :ref:`Child subcomponent concept model document <2021_concept_model_vivarium_nutrition_optimization_children>`
 
 .. _nutritionoptimizationpreg2.0:
 
@@ -124,6 +122,54 @@ Documents that contain information specific to the overall model and the child s
 |                     |                                           |coverage algorithm is|
 |                     |                                           |updated              |
 +---------------------+-------------------------------------------+---------------------+
+
+.. list-table:: Wave I outstanding tasks
+  :header-rows: 1
+
+  * - Task
+    - Dependencies
+    - RT person
+    - ST person
+    - Note
+  * - Model builds 0.0 through 1
+    - .
+    - Docs ready, will need V&V (Ali)
+    - In progress (Patrick/Steve)
+    - New content from IV iron
+  * - Model builds 2-6
+    - .
+    - Docs ready, will need V&V (Ali)
+    - Patrick/Steve
+    - No new content from IV iron (except one exclusion)
+  * - Model build 7
+    - .
+    - Docs ready, will need V&V (Ali)
+    - Patrick/Steve
+    - New content from IV iron
+  * - Production runs
+    - . 
+    - Ali
+    - Patrick/Steve
+    - Triple check everything is finalized and ready for next steps :) 
+
+.. list-table:: Wave II outstanding tasks
+  :header-rows: 1
+
+  * - Task
+    - Dependencies
+    - RT person
+    - ST person
+    - Note
+  * - General GBD 2021 update
+    - Ali blocked by hemoglobin distribution questions, team blocked by GBD timeline
+    - Ali
+    - Patrick/Steve
+    - 
+  * - Background morbidity
+    - .
+    - Ali
+    - Patrick/Steve
+    - Bonus task, not necessary for success
 
 2.3 Default specifications
 --------------------------
@@ -201,26 +247,26 @@ Documents that contain information specific to the overall model and the child s
     - 0
   * - 1: MMS
     - 0
-    - ANC1
+    - 1
     - 0
   * - 2: Universal BEP
     - 0
     - 0
-    - ANC1
+    - 1
   * - 3: Targeted BEP/none
     - Baseline for adequate BMI pregnancies
     - 0
-    - ANC1 for low BMI pregnancies
+    - 1 for low BMI pregnancies
   * - 4: Targeted BEP/MMS
     - 0
-    - ANC1 for adequate BMI pregnancies
-    - ANC1 for low BMI pregnancies
+    - 1 for adequate BMI pregnancies
+    - 1 for low BMI pregnancies
 
 Where: 
 
-- **0** represents the minimum intervention coverage (no coverage), 
+- **0** represents the minimum intervention coverage (0%, or no coverage)
 
-- **ANC1** represents the maximum intervention coverage equal to the proportion of pregnancies that attend at least one antenatal care visit. `Draw-level values for each modeled location can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/ANC1_draws>`_
+- **1** represents the maximum intervention coverage (100%)
 
 - **Baseline** represents location-specific baseline IFA coverage, `which can be found in location-specific .csv files here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/baseline_ifa_coverage>`_ (`note these values were calculated in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/Gestational%20age%20shifts.ipynb>`_
 
@@ -268,7 +314,7 @@ Specific outputs for specific models are specified in the following section.
     - N/A
     - All simulants initialized into the pregnancy state, but no other aspects of pregnancy model included
   * - 1.0
-    - Pregnancy state transitions (:ref:`docs here <other_models_pregnancy_closed_cohort>`)
+    - Pregnancy state transitions (:ref:`docs here <other_models_pregnancy_closed_cohort>`). For now, all pregnancies have duration of 40 weeks.
     - Baseline
     - None
     - * Deaths
@@ -278,7 +324,7 @@ Specific outputs for specific models are specified in the following section.
     - N/A
     - Note closed cohort change from IV iron pregnancy model. Custom observer exit at the end of postpartum period? (Bonus ask)
   * - 1.1 
-    - Birth outcome outputs
+    - Birth outcome outputs. Separation of full and partial term births. For now, full term pregnancies all have 40 weeks duration. Differentiation of live and stillbirths may occur here or in 1.2
     - Baseline
     - None
     - * Deaths
@@ -286,10 +332,10 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy state person-time
       * Pregnancy transition counts
       * Count of birth outcomes
-    - Live births paired with maternal_ids
+    - Full term births paired with maternal_ids
     -  
   * - 1.2
-    - LBWSG outputs
+    - LBWSG outputs. Update pregnancy duration to reflect sex-specific LBWSG exposures.
     - Baseline
     - None
     - * Deaths
@@ -297,7 +343,7 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy state person-time
       * Pregnancy transition counts
       * Count of birth outcomes
-    - Live births with maternal_ids and LBWSG exposures
+    - Live and still births with maternal_ids and LBWSG exposures
     - 
   * - 2.0
     - Maternal disorders and maternal hemorrhage cause models
@@ -342,7 +388,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * BMI exposure, stratified by pregnancy state and anemia state
-    - Live births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, and LBWSG exposures
+    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, and LBWSG exposures
     - Data block for GBD 2021 update as of 6/23.
   * - 6.0
     - Intervention effects on hemoglobin and birthweight
@@ -355,7 +401,7 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy transition counts
       * Anemia state person time, stratified by intervention coverage
       * Intervention counts
-    - Live births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
     - Both of these intervention effects were implemented in IV iron and are not changed for this model
   * - 7.0
     - Intervention effects on gestational age and birth outcomes
@@ -367,7 +413,7 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy state person time
       * Pregnancy transition counts
       * Birth outcomes, stratified by intervention coverage
-    - Live births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
     - These intervention effects are new and were not implemented in IV iron
   * - 8.0
     - Background morbidity
@@ -390,7 +436,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * Intervention counts
-    - Live births with maternal_ids, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, intervention coverage, and LBWSG exposures
     - 
   * - 9.1
     - Production runs
@@ -402,7 +448,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * Intervention counts
-    - Live births with maternal_ids, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, intervention coverage, and LBWSG exposures
     - 
   * - 10.0
     - GBD 2021 update?
@@ -429,6 +475,9 @@ Specific outputs for specific models are specified in the following section.
   * - 0.1
     - Check that distribution of observed person-time by age group matches distribution of pregnancies in GBD, check ACMR
     - Looks great! Some deviation from GBD ACMR at edge age groups as a result of small numbers, but not a concern. `Model 0.1 V&V notebooks can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_0.1.ipynb>`_
+  * - 1.0
+    - Confirm pregnancy transitions occuring and at the expected intervals. For this model, all pregnancies hard coded for duration of 40 weeks. Postpartum period duration of 6 weeks.
+    - Looks great! Note that pregnancy duration skews when evaluated at age-specific level, but this is not a bug in implementation, rather in analysis. `Model 1.0 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.0.ipynb>`_
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
