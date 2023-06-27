@@ -2945,6 +2945,7 @@ added later (not in the minimum viable model), if desired.
   * - Middle initial
   * - Last name
   * - DOB (stored as a string in YYYYMMDD format)
+  * - Sex (binary; "Male" or "Female")
   * - Social Security Number
   * - Type of event
   * - Date of event (stored as a string in YYYYMMDD format)
