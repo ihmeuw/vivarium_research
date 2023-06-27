@@ -2627,6 +2627,12 @@ Here is an example:
 
 .. image:: W2_example.PNG
 
+.. Note::
+
+  The above image is outdated and contains "Age" and "DOB" columns, but these
+  should **not** appear in the W2/1099 dataset. The image is also *missing* the
+  ground-truth "Household ID" column.
+
 **Who to Sample**
 
 Everyone who has had an employer listed within the current calendar year
