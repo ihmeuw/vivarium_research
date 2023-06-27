@@ -2564,8 +2564,6 @@ W2 and 1099 Forms
   * - First name
   * - Middle initial
   * - Last name
-  * - Age (floored to integer years **before** noise is applied)
-  * - DOB (stored as a string in MM/DD/YYYY format)
   * - Mailing Address Street Number (blank for PO boxes)
   * - Mailing Address Street Name (blank for PO boxes)
   * - Mailing Address Unit (blank for PO boxes)
@@ -2583,7 +2581,7 @@ W2 and 1099 Forms
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Wages must be rounded to the nearest whole number before applying noise.
+  In the final version of the observers, following the noise functions, please have all data as strings. Wages must be rounded to the nearest whole number before applying noise.
 
 
 If a simulant does not have a social security number but is
