@@ -22,6 +22,9 @@ correctly.
 - `reStructuredText reference <http://docutils.sourceforge.net/docs/user/rst/quickref.html>`_
 - `Sphinx reference <http://www.sphinx-doc.org/en/master/contents.html>`_.
 
+For more general information on Git, GitHub, Conda, environments and 
+links to relevant IHME trainings, see the :ref:`computing resources page <computing>`.
+
 Clone Vivarium Research and make a new environment
 --------------------------------------------------
 
@@ -158,3 +161,17 @@ when a pull request contains any changes that:
 - Were requested by engineering, or
 - Affects modeling strategy that has already been implemented and therefore requires code changes by the engineers
    - In this case, the research team member who made the pull request is responsible for making a ticket on the `engineering JIRA board <https://jira.ihme.washington.edu/secure/RapidBoard.jspa?rapidView=305&view=planning.nodetail&selectedIssue=MIC-3449&epics=visible&issueLimit=100&selectedEpic=MIC-3420>`_ that outlines the requested code changes. The research team member should then post a slack message in the project-specific channel that tags the engineers and links to the new JIRA ticket. `More information on how to make engineering JIRA tickets as a research team member can be found here <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=SSE&title=RT+Ticket+Creation>`_.
+
+
+After Approval
+--------------
+
+After you merge your changes into the master branch with 
+the ``Merge Pull Request`` button, there's a few housekeeping best practices::
+
+   (vivarium_research) $> git checkout main #Makes sure you're on the main branch 
+   (vivarium_research) $> git pull #This pulls in the new changes you merged 
+   (vivarium_research) $> git branch -d YOUR-BRANCH-NAME 
+
+You should also delete your branch from GitHub. While this step is not strictly necessary, it 
+is best practice to keep things clean and avoid confusion. 
