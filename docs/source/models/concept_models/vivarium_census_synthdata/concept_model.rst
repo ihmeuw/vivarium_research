@@ -3103,13 +3103,13 @@ for all column based noise include:
     - Missing data, fake names, phonetic, OCR, typographic
     - The list of fake names will be different than the first names
   * - Age
-    - Census, Household Surveys, Taxes (both)
+    - Census, Household Surveys
     - 0.01
     - 0.1
     - Missing data, Copy from within Household, Age miswriting, OCR, typographic
     -
   * - Date of Birth
-    - Census, Household Surveys, WIC, Taxes (both), SSA
+    - Census, Household Surveys, WIC, SSA
     - 0.01
     - 0.1
     - Missing data, copy from within household, swap month and day, numeric miswriting, OCR, typographic
