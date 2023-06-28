@@ -3417,7 +3417,7 @@ Limitations:
   noise functions are applied.
   Therefore, this noise function acts on integers.
 
-To implement this, first select the rows for noise according to the row noise probability.
+To implement this, first select the rows for noise according to the row-level noise probability.
 For each selected row, the age will be adjusted. The adjustment value will be
 randomly selected from the configured possible perturbations,
 according to the configured probabilities of selection (or uniform if a list without probabilities is configured).
