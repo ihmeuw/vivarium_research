@@ -159,17 +159,17 @@ Step 1 in this process is detailed in the :ref:`pregnancy<2021_concept_model_viv
     - TBD
     - Example: deaths, DALYs, SAM cases 
   * - 5: Add maternal interventions 
-    - 
+    - Blocked by simulation progress 
     - TBD
     - 
   * - 6: Test for robustness to different initial values 
     - 
     - TBD
     - 
-  * - 7: Add non-linear cost functions 
+  * - 7: Test non-linear cost functions 
     - 
     - TBD
-    - 
+    - Not technically needed for wave 1 but would good to keep in mind during emulator design and building
   * - 8: Decide on costing approach and priorities 
     - 
     - Syl and Latera
