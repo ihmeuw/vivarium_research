@@ -2627,7 +2627,7 @@ Here is an example:
 
 .. image:: W2_example.PNG
 
-.. Note::
+.. note::
 
   The above image is outdated and contains "Age" and "DOB" columns, but these
   should **not** appear in the W2/1099 dataset. The image is also *missing* the
@@ -2829,6 +2829,12 @@ Here is a photo showing how this might look. Note that the three tables
 are just 2 really long rows for two simulants.
 
 .. image:: 1044_example.png
+
+.. note::
+
+  The above image is outdated and contains "Age" and "DOB" columns, but these
+  should **not** appear in the 1040 dataset. The image is also *missing* the
+  ground-truth "Household ID" column.
 
 If a simulant had more than 4 employments in the tax year,
 the 4 with the highest income values are included on the 1040; other employment information
