@@ -219,7 +219,7 @@ Documents that contain information specific to the overall model and the pregnan
     - .
   * - 3: Child underweight exposure model
     - Need DHS data
-    - TBD
+    - Ali
     - TBD
   * - 4: Child wasting exposure calibration equation updates (to include underweight, stunting mortality effects)
     - After task 3
@@ -227,11 +227,11 @@ Documents that contain information specific to the overall model and the pregnan
     - TBD
   * - 5: 2021 CGF risk effects
     - .
-    - TBD
+    - Syl
     - TBD
   * - 6: Malaria cause model
     - .
-    - TBD
+    - Syl
     - TBD
   * - 7: Update SAM and MAM tx effects to COMPAS
     - .
@@ -263,7 +263,7 @@ Documents that contain information specific to the overall model and the pregnan
     - Engineering person
   * - 1: Wasting transition model for 0-6 months
     - .
-    - TBD
+    - Latera (Ali to provide context)
     - TBD
   * - 2: Update LBWSG effect on wasting for transitions among 0-6 months
     - After step 1
