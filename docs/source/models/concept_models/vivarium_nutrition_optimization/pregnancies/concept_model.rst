@@ -324,25 +324,25 @@ Specific outputs for specific models are specified in the following section.
     - N/A
     - Note closed cohort change from IV iron pregnancy model. Custom observer exit at the end of postpartum period? (Bonus ask)
   * - 1.1 
-    - Birth outcome outputs. Separation of full and partial term births. For now, full term pregnancies all have 40 weeks duration. Differentiation of live and stillbirths may occur here or in 1.2
+    - Term length outputs (separation of full and partial term births). For now, full term pregnancies all have 40 weeks duration and partial term births have duration as specified in docs. 
     - Baseline
     - None
     - * Deaths
       * YLLs
       * Pregnancy state person-time
       * Pregnancy transition counts
-      * Count of birth outcomes
+      * Counts of births stratified by pregnancy term lengths
     - Full term births paired with maternal_ids
     -  
   * - 1.2
-    - LBWSG outputs. Update pregnancy duration to reflect sex-specific LBWSG exposures.
+    - LBWSG outputs. Update pregnancy duration to reflect sex-specific LBWSG exposures and separate full term births into live birth and stillbirth outcomes.
     - Baseline
     - None
     - * Deaths
       * YLLs
-      * Pregnancy state person-time
-      * Pregnancy transition counts
-      * Count of birth outcomes
+      * Pregnancy state person-time, stratified by birth outcome
+      * Pregnancy transition counts, stratified by birth outcome
+      * Counts of birth outcomes
     - Live and still births with maternal_ids and LBWSG exposures
     - 
   * - 2.0
@@ -458,9 +458,9 @@ Specific outputs for specific models are specified in the following section.
     - 
     - This model may be inserted earlier in the timeline, depending on when it is ready
 
-.. todo::
+.. note::
 
-  Detail additional logical model builds with engineers, with the following in mind: https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp
+  Model build ordering determined with the following in mind https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp
 
 
 .. list-table:: Verification and validation tracking
@@ -476,8 +476,11 @@ Specific outputs for specific models are specified in the following section.
     - Check that distribution of observed person-time by age group matches distribution of pregnancies in GBD, check ACMR
     - Looks great! Some deviation from GBD ACMR at edge age groups as a result of small numbers, but not a concern. `Model 0.1 V&V notebooks can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_0.1.ipynb>`_
   * - 1.0
-    - Confirm pregnancy transitions occuring and at the expected intervals. For this model, all pregnancies hard coded for duration of 40 weeks. Postpartum period duration of 6 weeks.
+    - Confirm pregnancy transitions occurring and at the expected intervals. For this model, all pregnancies hard coded for duration of 40 weeks. Postpartum period duration of 6 weeks.
     - Looks great! Note that pregnancy duration skews when evaluated at age-specific level, but this is not a bug in implementation, rather in analysis. `Model 1.0 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.0.ipynb>`_
+  * - 1.1
+    - Confirm that relative distribution of partial versus full term pregnancies is as expected, that partial term pregnancy duration implemented as expected, and that child data looks good
+    - Looks great! `Model 1.1 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.1.ipynb>`
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
