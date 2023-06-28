@@ -3374,6 +3374,8 @@ Limitations:
 - Many of the fake first names include some information about the simulant (daughter, child f, minor) all specify something about the simulant. We will not try to match this information, which might lead to illogical information (an older man being labeled as 'daughter') but will not impact PRL.
 - Someone who is likely to use a fake name might well do so across multiple observers. This would likely increase PRL challenges but will not be included here.
 
+.. _census_prl_nickname_noise:
+
 **Nicknames**
 
 Many people choose to use nicknames instead of their "real" names. A common example is an
@@ -3438,6 +3440,8 @@ To implement this, select the strings eligible for noise and apply
 the zip code miswriting noise function to all strings with the user defined.
 This code is similar to the numeric miswriting above, but has different
 per-character error probability inputs for the first 2 digits, the middle digit and the last 2 digits of zip.
+
+.. _census_prl_copy_household_noise:
 
 **Copy from within Household**
 
@@ -3587,6 +3591,8 @@ As a simplifying assumption in our initial model, we will be including
 duplicates in the census only and limiting it to guardian-based duplication.
 In later models, we might choose to include other forms of duplication with
 more parameters.
+
+.. _census_prl_guardian_duplication:
 
 **Guardian-based duplication**
 
@@ -3747,6 +3753,20 @@ work: Exact match for 96.11% of DOB, 2 of 3 fields exactly match for
 3.20%, no match for 0.26%, missing for 0.24%, day and month fields
 transposed for 0.18%. For future flexibility, I make all of these
 values configurable options.
+
+.. _census_prl_noise_details:
+
+Additional noise implementation details
+'''''''''''''''''''''''''''''''''''''''
+
+Three of the noise functions specify that a warning should be raised if the user
+requests a fraction of rows that is higher than possible: :ref:`Nicknames
+<census_prl_nickname_noise>`; :ref:`Copy from within household
+<census_prl_copy_household_noise>`; and :ref:`Guardian-based duplication
+<census_prl_guardian_duplication>`. Because of our distributed data storage (the
+data is split into multiple shards), it is not entirely straightforward to
+determine the overall fraction of rows that are eligible for the requested
+noise.
 
 .. _census_prl_income:
 
