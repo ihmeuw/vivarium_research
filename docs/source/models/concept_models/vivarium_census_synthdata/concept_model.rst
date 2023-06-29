@@ -3765,8 +3765,13 @@ requests a fraction of rows that is higher than possible: :ref:`Nicknames
 <census_prl_copy_household_noise>`; and :ref:`Guardian-based duplication
 <census_prl_guardian_duplication>`. Because of our distributed data storage (the
 data is split into multiple shards), it is not entirely straightforward to
-determine the overall fraction of rows that are eligible for the requested
-noise.
+determine the overall fraction of rows that are eligible for the requested noise
+or to add noise to the correct number of rows across all shards. Here is a
+strategy to deal with this issue:
+
+#. Pre-compute the fraction :math:`F` of rows eligible for each noise type in the full dataset (i.e., across all shards concatenated together).
+#. Check whether :math:`p\le F`, where :math:`p` is the fraction of rows the user wants noised (in pseudopeople, :math:`p` is called ``cell_probability`` for column-based noise or ``row_probability`` for row-based noise). If not, raise a warning.
+#. When noising each shard,
 
 .. _census_prl_income:
 
