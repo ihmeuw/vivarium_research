@@ -2564,8 +2564,6 @@ W2 and 1099 Forms
   * - First name
   * - Middle initial
   * - Last name
-  * - Age (floored to integer years **before** noise is applied)
-  * - DOB (stored as a string in MM/DD/YYYY format)
   * - Mailing Address Street Number (blank for PO boxes)
   * - Mailing Address Street Name (blank for PO boxes)
   * - Mailing Address Unit (blank for PO boxes)
@@ -2583,7 +2581,7 @@ W2 and 1099 Forms
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Wages must be rounded to the nearest whole number before applying noise.
+  In the final version of the observers, following the noise functions, please have all data as strings. Wages must be rounded to the nearest whole number before applying noise.
 
 
 If a simulant does not have a social security number but is
@@ -2628,6 +2626,12 @@ income/wage cutoff for this observer.
 Here is an example:
 
 .. image:: W2_example.PNG
+
+.. note::
+
+  The above image is outdated and contains "Age" and "DOB" columns, but these
+  should **not** appear in the W2/1099 dataset. The image is also *missing* the
+  ground-truth "Household ID" column.
 
 **Who to Sample**
 
@@ -2701,10 +2705,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age (floored to integer years **before** noise is applied)
-    -
-  * - DOB (stored as a string in MM/DD/YYYY format)
-    -
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2757,10 +2757,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age
-    -
-  * - DOB (stored as a string in MM/DD/YYYY format)
-    -
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2805,8 +2801,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age
-    -
   * - Social Security Number (if present)
     -
   * - ITIN (if present)
@@ -2814,7 +2808,7 @@ in January 2024.
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Income must be rounded to the nearest whole number before applying noise.
+  In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
 
 If a simulant does not have an SSN,
@@ -2835,6 +2829,12 @@ Here is a photo showing how this might look. Note that the three tables
 are just 2 really long rows for two simulants.
 
 .. image:: 1044_example.png
+
+.. note::
+
+  The above image is outdated and contains "Age" and "DOB" columns, but these
+  should **not** appear in the 1040 dataset. The image is also *missing* the
+  ground-truth "Household ID" column.
 
 If a simulant had more than 4 employments in the tax year,
 the 4 with the highest income values are included on the 1040; other employment information
@@ -3104,13 +3104,13 @@ for all column based noise include:
     - Missing data, fake names, phonetic, OCR, typographic
     - The list of fake names will be different than the first names
   * - Age
-    - Census, Household Surveys, Taxes (both)
+    - Census, Household Surveys
     - 0.01
     - 0.1
     - Missing data, Copy from within Household, Age miswriting, OCR, typographic
     -
   * - Date of Birth
-    - Census, Household Surveys, WIC, Taxes (both), SSA
+    - Census, Household Surveys, WIC, SSA
     - 0.01
     - 0.1
     - Missing data, copy from within household, swap month and day, numeric miswriting, OCR, typographic
