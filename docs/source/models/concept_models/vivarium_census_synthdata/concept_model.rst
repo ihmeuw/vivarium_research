@@ -2945,6 +2945,7 @@ added later (not in the minimum viable model), if desired.
   * - Middle initial
   * - Last name
   * - DOB (stored as a string in YYYYMMDD format)
+  * - Sex (binary; "Male" or "Female")
   * - Social Security Number
   * - Type of event
   * - Date of event (stored as a string in YYYYMMDD format)
@@ -3163,7 +3164,7 @@ for all column based noise include:
     - Missing data, incorrect select
     -
   * - Sex
-    - Census, Household Surveys, WIC
+    - Census, Household Surveys, WIC, SSA
     - 0.01
     - N/A
     - Missing data, incorrect select
