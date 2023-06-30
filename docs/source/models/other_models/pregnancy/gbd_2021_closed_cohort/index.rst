@@ -361,7 +361,7 @@ At or before the time of birth, pregnancy outcome must be determined for each pr
   * - Full term
     - Live birth
     - ASFR / (ASFR + ASFR * SBR)
-    - This outcome will be used to inform the demography model of children under 5 for the IV iron simulation. The :ref:`probability of a livebirth outcome is modified by antenatal supplementation intervention coverage <maternal_supplementation_intervention>`.
+    - The :ref:`probability of a livebirth outcome is modified by antenatal supplementation intervention coverage <maternal_supplementation_intervention>`.
   * - Full term
     - Stillbirth
     - (ASFR * SBR) / (ASFR + ASFR * SBR)
