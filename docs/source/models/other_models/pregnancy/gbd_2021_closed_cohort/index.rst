@@ -249,8 +249,8 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
   1. Assign pregnancy state according to state prevalence values
   2. Assign partial or full term duration according to table in `Pregnancy term lengths`_ section
-  3. Assign sex of infant if pregnancy outcome is a stillbirth or live birth
-  4. Assign duration of pregnancy depending on pregnancy outcome and sex of the infant
+  3. Assign sex of infant if pregnancy is full term (stillbirth or live birth)
+  4. Assign duration of pregnancy depending on term length and, if applicable, sex of the infant
   5. Determine the amount of time remaining in pregnancy from the duration of pregnancy: for closed cohort, assume simulation starts at day 0 of all pregnancies
   6. Begin simulation
 
