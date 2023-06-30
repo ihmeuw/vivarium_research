@@ -3676,6 +3676,32 @@ dataset. Select the guardian at random.
 
     If it is relevant for a case study later, we can add this to the simulation at that time.
 
+.. _census_prl_noise_details:
+
+Additional noise implementation details
+'''''''''''''''''''''''''''''''''''''''
+
+Three of the noise functions specify that a warning should be raised if the user
+requests a fraction of rows that is higher than possible: :ref:`Nicknames
+<census_prl_nickname_noise>`; :ref:`Copy from within household
+<census_prl_copy_household_noise>`; and :ref:`Guardian-based duplication
+<census_prl_guardian_duplication>`. Because of our distributed data processing
+(the data is split into multiple shards), it is not entirely straightforward to
+determine the overall fraction of rows that are eligible for the requested noise
+or to add noise to the correct number of rows across all shards. Here is a
+strategy to deal with this issue:
+
+#.  Pre-compute the fraction :math:`F` of rows eligible for each relevant noise
+    type in the full dataset (i.e., across all shards concatenated together).
+#.  Check whether :math:`p\le F`, where :math:`p` is the average fraction of
+    rows the user wants noised (in pseudopeople, :math:`p` is called
+    ``cell_probability`` for column-based noise or ``row_probability`` for
+    row-based noise). If not, raise a warning to the user before noising starts.
+#.  When noising each shard, compute the fraction :math:`f` of rows elibible
+    for noise in the shard, and apply the noise to each eligible row in the
+    shard with probability :math:`\min\{p/f, 1\}`. Do **not** raise a warning to
+    the user for each shard when :math:`p>f`.
+
 **Old Abie Work, to be deleted later**
 
 For inspiration, here is the list of files that Census Bureau
@@ -3753,32 +3779,6 @@ work: Exact match for 96.11% of DOB, 2 of 3 fields exactly match for
 3.20%, no match for 0.26%, missing for 0.24%, day and month fields
 transposed for 0.18%. For future flexibility, I make all of these
 values configurable options.
-
-.. _census_prl_noise_details:
-
-Additional noise implementation details
-'''''''''''''''''''''''''''''''''''''''
-
-Three of the noise functions specify that a warning should be raised if the user
-requests a fraction of rows that is higher than possible: :ref:`Nicknames
-<census_prl_nickname_noise>`; :ref:`Copy from within household
-<census_prl_copy_household_noise>`; and :ref:`Guardian-based duplication
-<census_prl_guardian_duplication>`. Because of our distributed data processing
-(the data is split into multiple shards), it is not entirely straightforward to
-determine the overall fraction of rows that are eligible for the requested noise
-or to add noise to the correct number of rows across all shards. Here is a
-strategy to deal with this issue:
-
-#.  Pre-compute the fraction :math:`F` of rows eligible for each relevant noise
-    type in the full dataset (i.e., across all shards concatenated together).
-#.  Check whether :math:`p\le F`, where :math:`p` is the average fraction of
-    rows the user wants noised (in pseudopeople, :math:`p` is called
-    ``cell_probability`` for column-based noise or ``row_probability`` for
-    row-based noise). If not, raise a warning to the user before noising starts.
-#.  When noising each shard, compute the fraction :math:`f` of rows elibible
-    for noise in the shard, and apply the noise to each eligible row in the
-    shard with probability :math:`\min\{p/f, 1\}`. Do **not** raise a warning to
-    the user for each shard when :math:`p>f`.
 
 .. _census_prl_income:
 
