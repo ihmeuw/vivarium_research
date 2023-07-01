@@ -3689,18 +3689,46 @@ requests a fraction of rows that is higher than possible: :ref:`Nicknames
 (the data is split into multiple shards), it is not entirely straightforward to
 determine the overall fraction of rows that are eligible for the requested noise
 or to add noise to the correct number of rows across all shards. Here is a
-strategy to deal with this issue:
+simple strategy to deal with this issue:
 
-#.  Pre-compute the fraction :math:`F` of rows eligible for each relevant noise
-    type in the full dataset (i.e., across all shards concatenated together).
+#.  Pre-compute the fraction :math:`F` of rows eligible for each applicable
+    noise type in the full dataset (i.e., across all shards concatenated
+    together).
+
 #.  Check whether :math:`p\le F`, where :math:`p` is the average fraction of
     rows the user wants noised (in pseudopeople, :math:`p` is called
     ``cell_probability`` for column-based noise or ``row_probability`` for
     row-based noise). If not, raise a warning to the user before noising starts.
+
 #.  When noising each shard, compute the fraction :math:`f` of rows elibible
     for noise in the shard, and apply the noise to each eligible row in the
     shard with probability :math:`\min\{p/f, 1\}`. Do **not** raise a warning to
     the user for each shard when :math:`p>f`.
+
+This strategy has a known limitation:
+It systematically adds less noise to the datasets than requested when :math:`p` suffieicntly large. This is obvious when :math:`p>F`, but it can happen even if :math:`p\le F`. Here's an explanation of why:
+
+Due to random fluctuation between the shards, sometimes we will have :math:`f<F`. Thus, if :math:`p` is sufficiently large, we will have :math:`p>f` for some shards, even if :math:`p\le F`. Now note that for each shard with :math:`p>f`, the fraction of rows that get noised is :math:`f`, which is less than :math:`p`.
+
+Now note that :math:`P(\text{row in shard is noised})`
+equals :math:`p` if :math:`p\le f` and equals :math:`f` if :math:`p>f`. Thus, the fraction of noised rows in the shards with :math:`p>f` will be less than :math:`p` (namely, :math:`f`), and the average fraction of noised rows in the remaining shards will be :math:`p`. Combining all shards, the average fraction of noised rows will be less than :math:`p` in this case. This problem will be worse for small datasets like ACS because of greater variablity of :math:`f` around :math:`F`.
+
+This problem is a known limitation of the above strategy, but we are willing to accept it for simplicity's sake.
+
+Because of random fluctuations across shards, this strategy will systematically under-noise the datasets, particularly the smaller datasets like ACS. To see this, note that for each shard,
+
+.. math::
+
+  \begin{align*}
+  P[\text{row in shard is noised}]
+  &= P[\text{row in shard is noised and eligible}]\\
+  &= P[\text{row in shard is noised}\mid \text{eligible}]
+    \cdot P[\text{eligible}]\\
+  &= \min\{p/f, 1\} \cdot f\\
+  &\le p.
+  \end{align*}
+
+Exactly which data to use to pre-compute the eligble fraction :math:`F` depends on the implementation of the storage of the pre-computed values. If they are stored in a separate metadata file generated with each simulation run, then :math:`F` can be computed for each (dataset, year) combination that can be requested by the user. On the other hand, if the engineers want to store a single value of :math:`F` for each observer and applicable noise type, then they should use the dataset for the year 2030; since this is the midpoint of our simulation, we expect it to be sufficiently representative of the data across all simulated years. This level of imprecision is sufficient for the user warning.
 
 **Old Abie Work, to be deleted later**
 
