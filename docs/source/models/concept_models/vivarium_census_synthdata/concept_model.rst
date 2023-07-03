@@ -2564,8 +2564,6 @@ W2 and 1099 Forms
   * - First name
   * - Middle initial
   * - Last name
-  * - Age (floored to integer years **before** noise is applied)
-  * - DOB (stored as a string in MM/DD/YYYY format)
   * - Mailing Address Street Number (blank for PO boxes)
   * - Mailing Address Street Name (blank for PO boxes)
   * - Mailing Address Unit (blank for PO boxes)
@@ -2583,7 +2581,7 @@ W2 and 1099 Forms
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Wages must be rounded to the nearest whole number before applying noise.
+  In the final version of the observers, following the noise functions, please have all data as strings. Wages must be rounded to the nearest whole number before applying noise.
 
 
 If a simulant does not have a social security number but is
@@ -2628,6 +2626,12 @@ income/wage cutoff for this observer.
 Here is an example:
 
 .. image:: W2_example.PNG
+
+.. note::
+
+  The above image is outdated and contains "Age" and "DOB" columns, but these
+  should **not** appear in the W2/1099 dataset. The image is also *missing* the
+  ground-truth "Household ID" column.
 
 **Who to Sample**
 
@@ -2701,10 +2705,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age (floored to integer years **before** noise is applied)
-    -
-  * - DOB (stored as a string in MM/DD/YYYY format)
-    -
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2757,10 +2757,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age
-    -
-  * - DOB (stored as a string in MM/DD/YYYY format)
-    -
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2805,8 +2801,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age
-    -
   * - Social Security Number (if present)
     -
   * - ITIN (if present)
@@ -2814,7 +2808,7 @@ in January 2024.
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Income must be rounded to the nearest whole number before applying noise.
+  In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
 
 If a simulant does not have an SSN,
@@ -2835,6 +2829,12 @@ Here is a photo showing how this might look. Note that the three tables
 are just 2 really long rows for two simulants.
 
 .. image:: 1044_example.png
+
+.. note::
+
+  The above image is outdated and contains "Age" and "DOB" columns, but these
+  should **not** appear in the 1040 dataset. The image is also *missing* the
+  ground-truth "Household ID" column.
 
 If a simulant had more than 4 employments in the tax year,
 the 4 with the highest income values are included on the 1040; other employment information
@@ -2945,6 +2945,7 @@ added later (not in the minimum viable model), if desired.
   * - Middle initial
   * - Last name
   * - DOB (stored as a string in YYYYMMDD format)
+  * - Sex (binary; "Male" or "Female")
   * - Social Security Number
   * - Type of event
   * - Date of event (stored as a string in YYYYMMDD format)
@@ -3103,13 +3104,13 @@ for all column based noise include:
     - Missing data, fake names, phonetic, OCR, typographic
     - The list of fake names will be different than the first names
   * - Age
-    - Census, Household Surveys, Taxes (both)
+    - Census, Household Surveys
     - 0.01
     - 0.1
     - Missing data, Copy from within Household, Age miswriting, OCR, typographic
     -
   * - Date of Birth
-    - Census, Household Surveys, WIC, Taxes (both), SSA
+    - Census, Household Surveys, WIC, SSA
     - 0.01
     - 0.1
     - Missing data, copy from within household, swap month and day, numeric miswriting, OCR, typographic
@@ -3163,7 +3164,7 @@ for all column based noise include:
     - Missing data, incorrect select
     -
   * - Sex
-    - Census, Household Surveys, WIC
+    - Census, Household Surveys, WIC, SSA
     - 0.01
     - N/A
     - Missing data, incorrect select
@@ -3588,7 +3589,7 @@ duplicates in the census only and limiting it to guardian-based duplication.
 In later models, we might choose to include other forms of duplication with
 more parameters.
 
-**Guardian based duplication**
+**Guardian-based duplication**
 
 A known PRL challenge is children being reported multiple
 times at different addresses. This can occur when family structures are
@@ -3603,34 +3604,62 @@ opportunity for duplication. Since this mechanism occurs within the
 simulation, there is a natural maximum that we will impose in the
 noise function.
 
-Guardian based duplication is further divided here into two types: simulants
-younger than 18 and not in college GQ (<18), and those at college GQ less than 24 (<24).
+Guardian-based duplication is applied to three mutually exclusive categories of
+simulants based on age and GQ status: Simulants younger than 18  (<18) and not
+in GQ; simulants 18-23 (18 <= age < 24) and not in GQ; and simulants under 24
+(<24) and in GQ.
 
-For simulants younger than 18 and not in college GQ, the maximum duplication rate will
-be calculated based on those who have a guardian living at a different address in the sim.
+For each of the three categories of simulants, the maximum duplication rate will
+be calculated based on those who have a guardian living at a different address
+in the sim. Note that all simulants in *college* GQ are initialized with a
+guardian living at a different address, but this is not true for simulants in
+other types of GQ, so all three maximum duplication rates will be less than
+100%.
 
-The user can then pick a rate of duplication between 0 and 100%. If the value selected
-is higher than the calculated maximum rate in the sim, a warning will be issued to users
-explaining that the selected rate is greater than the maximum available.
-
-A default value of 5% will be selected.
+The user can then pick a rate of duplication between 0 and 100% **for each of
+the three categories of simulants**. A default duplication rate of 5% will be
+selected for each of the three categories of simulants. That is, each simulant
+under 24 is duplicated at a guardian's household with default probability 0.05,
+and there should be three user parameters for overriding this probability, one
+for each simulant category.
+If the user selects a duplication rate that is higher than the calculated
+maximum rate in the sim, a warning should be issued explaining that the selected
+rate is greater than the maximum available, and the actual rate of duplication
+should be set to the maximum for the specified simulant category. More
+precisely, the conditional probability that a row in the specified category is
+duplicated, given that the row is eligible for guardian-based duplication,
+should be set to 1.
 
 .. note::
 
     If finding the maximum rate proves too difficult to implement, we can reassess this approach
 
-For college GQ simulants aged less than 24, all are assigned to a guardian who
-by definition lives at a different address. This means that theoretically
-the maximum noise level is 100% for this group, however, that would add
-significantly to the dataset and so it not allowed here. The default rate
-will be set to 5%, with a minimum of 0% and a maximum of 25%.
+The duplicated row should have the same simulant-specific attributes as the
+original, such as name and birth date, but different household-specific
+attributes such as address fields and relation to reference person.
+For simplicity, set "relation to reference person" equal to "Other relative" in
+the duplicated row.
 
-To create duplicates, the college student will be included in the final
-dataset twice, once at their college GQ and once at their guardian's home.
+To create guardian-based duplicates, each duplicated simulant will be included
+in the final dataset twice, once at their address of residence and once at their
+guardian's address. If a simulant has more than 1 guardian living at a different
+address, only duplicate them once, for a maximum of 2 occurences in the end
+dataset. Select the guardian at random.
 
-For either group, if a simulant has more than 1 guardian living at a
-different address only duplicate them once, for a maximum of 2 occurences
-in the end dataset. Select the guardian at random.
+.. note::
+
+  Currently, the order in which simulants appear in each dataset is an
+  implementation detail that has not been specified by the research team.
+  However, we may want to reassess this for duplicated rows. For example, if
+  simulants in the census dataset are grouped together by household, then it
+  would make sense to use the same strategy for rows subject to guardian-based
+  duplication (i.e., the duplicate row should appear with rows for the
+  guardian's household, not the duplicated simulant's household). If that is
+  **not** the strategy currently used for ordering rows in the census, then some
+  further specification may be necessary. For example, it is probabably
+  undesirable for duplicated rows to always appear right after the original row,
+  or for all duplicated rows to appear at the end of the dataset, so we would
+  need a strategy to address this.
 
 .. note::
 
