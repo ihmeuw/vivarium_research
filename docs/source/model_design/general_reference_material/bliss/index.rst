@@ -87,7 +87,7 @@ research processes and calculations.
 3.2 Measurement Error
 ---------------------
 In this section, we will elaborate on how misinterpretations of sex/gender might affect 
-uncertainty calculations.
+results.
 
 3.3 Other Gender-Inclusive Guides
 ---------------------------------
