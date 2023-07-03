@@ -3706,27 +3706,13 @@ simple strategy to deal with this issue:
     the user for each shard when :math:`p>f`.
 
 This strategy has a known limitation:
-It systematically adds less noise to the datasets than requested when :math:`p` suffieicntly large. This is obvious when :math:`p>F`, but it can happen even if :math:`p\le F`. Here's an explanation of why:
+It systematically adds less noise to the dataset than requested when :math:`p` suffieicntly large. This is obvious when :math:`p>F`, but it can happen even if :math:`p\le F`. Here's why:
 
-Due to random fluctuation between the shards, sometimes we will have :math:`f<F`. Thus, if :math:`p` is sufficiently large, we will have :math:`p>f` for some shards, even if :math:`p\le F`. Now note that for each shard with :math:`p>f`, the fraction of rows that get noised is :math:`f`, which is less than :math:`p`.
+Due to random fluctuation between the shards, sometimes we will have :math:`f<F`. Thus, if :math:`p` is sufficiently large, we will have :math:`p>f` for some shards, even if :math:`p\le F`. Now note that for each shard with :math:`p>f`, the fraction of rows that get noised is :math:`f`, which is less than :math:`p`. On the other hand, for shards with :math:`p\le f`, the average fraction of rows that get noised is :math:`p`. Combining all shards, the average fraction of noised rows will be less than :math:`p`. This problem will be worse for small datasets like ACS because of greater variablity of :math:`f` around :math:`F`.
 
-Now note that :math:`P(\text{row in shard is noised})`
-equals :math:`p` if :math:`p\le f` and equals :math:`f` if :math:`p>f`. Thus, the fraction of noised rows in the shards with :math:`p>f` will be less than :math:`p` (namely, :math:`f`), and the average fraction of noised rows in the remaining shards will be :math:`p`. Combining all shards, the average fraction of noised rows will be less than :math:`p` in this case. This problem will be worse for small datasets like ACS because of greater variablity of :math:`f` around :math:`F`.
+This problem is a known limitation of the above strategy, but we are willing to accept it for simplicity's sake. Moreover, the impact of this issue should be mitigated when we change our shard-based approach to data storage so that the different data files have similar sizes rather than some datasets having tiny shards like ACS.
 
-This problem is a known limitation of the above strategy, but we are willing to accept it for simplicity's sake.
-
-Because of random fluctuations across shards, this strategy will systematically under-noise the datasets, particularly the smaller datasets like ACS. To see this, note that for each shard,
-
-.. math::
-
-  \begin{align*}
-  P[\text{row in shard is noised}]
-  &= P[\text{row in shard is noised and eligible}]\\
-  &= P[\text{row in shard is noised}\mid \text{eligible}]
-    \cdot P[\text{eligible}]\\
-  &= \min\{p/f, 1\} \cdot f\\
-  &\le p.
-  \end{align*}
+We are planning to change the shard-based approach to data storage, for example, by storing data in geographic subsets instead. If the
 
 Exactly which data to use to pre-compute the eligble fraction :math:`F` depends on the implementation of the storage of the pre-computed values. If they are stored in a separate metadata file generated with each simulation run, then :math:`F` can be computed for each (dataset, year) combination that can be requested by the user. On the other hand, if the engineers want to store a single value of :math:`F` for each observer and applicable noise type, then they should use the dataset for the year 2030; since this is the midpoint of our simulation, we expect it to be sufficiently representative of the data across all simulated years. This level of imprecision is sufficient for the user warning.
 
