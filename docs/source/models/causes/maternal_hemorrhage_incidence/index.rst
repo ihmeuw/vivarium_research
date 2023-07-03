@@ -164,7 +164,7 @@ There should be no correlation between maternal hemorrhage events and :ref:`mate
      - 0
      - Captured in the :ref:`maternal disorders cause model <2019_cause_maternal_disorders>`
    * - Incident maternal hemorrhage cases
-     - (incidence_rate_c367 - csmr_c367) / (incidence_p * prevalence_np)
+     - (incidence_rate_c367 - csmr_c367) / preg_rate
      - 
 
 The following table defines the parameters used in the calculation of maternal disorder ratios per birth.
@@ -191,15 +191,27 @@ The following table defines the parameters used in the calculation of maternal d
    * - incidence_rate_c367
      - incidence rate of maternal hemorrhage
      - como, decomp_step='step5' for GBD 2019, 'iterative' for GBD 2021
-     - 
-   * - incidence_p
+     - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
+   * - preg_rate
      - Pregnancy incidence rate
-     - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
-     - Use equations from this linked document, not the closed cohort pregnancy page
-   * - prevalence_np
-     - Prevalence of non-pregnant state
-     - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
-     - Use equations from this linked document, not the closed cohort pregnancy page
+     - :math:`ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}`
+     -
+   * - ASFR
+     - Age-specific fertility rate
+     - get_covariate_estimates: coviarate_id=13, decomp_step='iterative'
+     - Assume lognormal distribution of uncertainty.
+   * - SBR
+     - Still to live birth ratio
+     - get_covariate_estimates: covariate_id=2267, decomp_step='iterative' for GBD 2021
+     - Parameter is not age specific and has no draw-level uncertainty. Use mean_value as location-specific point parameter.
+   * - incidence_c995
+     - Incidence rate of abortion and miscarriage cause
+     - como; decomp_step='iterative'
+     - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
+   * - incidence_c374
+     - Incidence rate of ectopic pregnancy
+     - como; decomp_step='iterative'
+     - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
 
 Disability adjusted life years
 """""""""""""""""""""""""""""""""""
