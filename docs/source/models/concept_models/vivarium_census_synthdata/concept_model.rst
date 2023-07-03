@@ -3698,23 +3698,39 @@ simple strategy to deal with this issue:
 #.  Check whether :math:`p\le F`, where :math:`p` is the average fraction of
     rows the user wants noised (in pseudopeople, :math:`p` is called
     ``cell_probability`` for column-based noise or ``row_probability`` for
-    row-based noise). If not, raise a warning to the user before noising starts.
+    row-based noise). If :math:`p>F`, raise a warning to the user before
+    noising starts.
 
 #.  When noising each shard, compute the fraction :math:`f` of rows elibible
     for noise in the shard, and apply the noise to each eligible row in the
     shard with probability :math:`\min\{p/f, 1\}`. Do **not** raise a warning to
-    the user for each shard when :math:`p>f`.
+    the user for every shard with :math:`p>f`.
 
 This strategy has a known limitation:
-It systematically adds less noise to the dataset than requested when :math:`p` suffieicntly large. This is obvious when :math:`p>F`, but it can happen even if :math:`p\le F`. Here's why:
+It systematically adds less noise to the dataset than requested when :math:`p` suffieicntly large. This is obvious when :math:`p>F`, but it can happen even when :math:`p\le F`. Here's why:
 
 Due to random fluctuation between the shards, sometimes we will have :math:`f<F`. Thus, if :math:`p` is sufficiently large, we will have :math:`p>f` for some shards, even if :math:`p\le F`. Now note that for each shard with :math:`p>f`, the fraction of rows that get noised is :math:`f`, which is less than :math:`p`. On the other hand, for shards with :math:`p\le f`, the average fraction of rows that get noised is :math:`p`. Combining all shards, the average fraction of noised rows will be less than :math:`p`. This problem will be worse for small datasets like ACS because of greater variablity of :math:`f` around :math:`F`.
 
-This problem is a known limitation of the above strategy, but we are willing to accept it for simplicity's sake. Moreover, the impact of this issue should be mitigated when we change our shard-based approach to data storage so that the different data files have similar sizes rather than some datasets having tiny shards like ACS.
+We are willing to accept the above limitation for simplicity's sake. Moreover,
+the impact of this issue should be mitigated when we change our shard-based
+approach to data storage so that the different data files have similar sizes
+rather than some datasets having tiny shards like ACS currently does.
 
-We are planning to change the shard-based approach to data storage, for example, by storing data in geographic subsets instead. If the
-
-Exactly which data to use to pre-compute the eligble fraction :math:`F` depends on the implementation of the storage of the pre-computed values. If they are stored in a separate metadata file generated with each simulation run, then :math:`F` can be computed for each (dataset, year) combination that can be requested by the user. On the other hand, if the engineers want to store a single value of :math:`F` for each observer and applicable noise type, then they should use the dataset for the year 2030; since this is the midpoint of our simulation, we expect it to be sufficiently representative of the data across all simulated years. This level of imprecision is sufficient for the user warning.
+Another potentially ambiguous point in the above strategy is which data to use
+to pre-compute the eligble fraction :math:`F`. Since these pre-computed values
+are merely for user warnings, the researchers are flexible as to how closely the
+:math:`F` values should match match the corresponding datasets, and we'll let
+the engineers decide on the exact implementation. Here are a couple options: If
+the pre-computed values are stored in a separate metadata file generated with
+each simulation run, then :math:`F` can be computed for each applicable
+(dataset, year, noise type) combination that can be requested by the user. On
+the other hand, if it's easier to store a single value of :math:`F` for each
+(dataset, noise type) without varying across years, then we should should use
+the dataset for the year 2030; since 2030 is the midpoint of our simulation, we
+expect it to be sufficiently representative of the data across all simulated
+years. This level of imprecision is sufficient for the user warning, which
+should be left vague enough as to not imply exactly what fraction of rows will
+get noised.
 
 **Old Abie Work, to be deleted later**
 
