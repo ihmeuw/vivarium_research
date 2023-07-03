@@ -249,8 +249,8 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
   1. Assign pregnancy state according to state prevalence values
   2. Assign partial or full term duration according to table in `Pregnancy term lengths`_ section
-  3. Assign sex of infant if pregnancy outcome is a stillbirth or live birth
-  4. Assign duration of pregnancy depending on pregnancy outcome and sex of the infant
+  3. Assign sex of infant if pregnancy is full term (stillbirth or live birth)
+  4. Assign duration of pregnancy depending on term length and, if applicable, sex of the infant
   5. Determine the amount of time remaining in pregnancy from the duration of pregnancy: for closed cohort, assume simulation starts at day 0 of all pregnancies
   6. Begin simulation
 
@@ -337,7 +337,7 @@ For full term pregnancies (that result in live births or stillbirths), duration 
 Pregnancy outcomes
 ~~~~~~~~~~~~~~~~~~
 
-At the time of birth, pregnancy outcome must be determined for each pregnancy as either a 1) live birth, 2) stillbirth, or 3) other (ectopic pregnancy, abortion/miscarriage). The probability of each pregnancy outcome dependent on the pregnancy term length and probabilities of each outcome conditional on pregnancy term are defined in the table below. 
+At or before the time of birth, pregnancy outcome must be determined for each pregnancy as either a 1) live birth, 2) stillbirth, or 3) other (ectopic pregnancy, abortion/miscarriage). The probability of each pregnancy outcome dependent on the pregnancy term length and probabilities of each outcome conditional on pregnancy term are defined in the table below. 
 
 .. list-table:: Pregnancy outcome probabilities conditional on pregnancy term length
   :header-rows: 1
@@ -361,11 +361,11 @@ At the time of birth, pregnancy outcome must be determined for each pregnancy as
   * - Full term
     - Live birth
     - ASFR / (ASFR + ASFR * SBR)
-    - This outcome will be used to inform the demography model of children under 5 for the IV iron simulation. The :ref:`probability of a livebirth outcome is modified by the hemoglobin risk factor <2019_risk_effect_iron_deficiency>`.
+    - The :ref:`probability of a livebirth outcome is modified by antenatal supplementation intervention coverage <maternal_supplementation_intervention>`.
   * - Full term
     - Stillbirth
     - (ASFR * SBR) / (ASFR + ASFR * SBR)
-    - The :ref:`probability of a stillbirth outcome is modified by the hemoglobin risk factor <2019_risk_effect_iron_deficiency>`.
+    - The :ref:`probability of a stillbirth outcome is modified by antenatal supplementation intervention coverage <maternal_supplementation_intervention>`.
   * - Full term
     - Other (abortion, miscarriage, ectopic pregnancy)
     - 0
@@ -373,7 +373,7 @@ At the time of birth, pregnancy outcome must be determined for each pregnancy as
 
 .. note::
 
-  The current modeling strategy is dependent on our assumption that live births and stillbirths have the same duration. There is ongoing work at IHME to estimate gestational age at birth distributions among stillbirths. If we were to incorporate this new data, we would need to devise a new modeling strategy that would allow for more flexibility in assigning pregnancy duration and pregnancy outcome, allowing *both* to vary by late-term hemoglobin concentration.
+  The current modeling strategy is dependent on our assumption that live births and stillbirths have the same duration. There is ongoing work at IHME to estimate gestational age at birth distributions among stillbirths. 
 
 Assumptions and limitations
 ++++++++++++++++++++++++++++
