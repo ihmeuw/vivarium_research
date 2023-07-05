@@ -94,6 +94,15 @@ involving but not limited to:
 
   - What type of statistical model? (categorical, continuous?)
 
+   - If a continuous model, the type of distribution of must be specified.
+
+      - As discussed on the :ref:`ensemble distribution document <vivarium_best_practices_ensemble_distributions>`, if the continuous model is an ensemble distribution, the following parameters must be specified:
+
+         - Exposure mean
+         - Exposure standard deviation
+         - Ensemble distribution weights
+         - XMIN and XMAX values
+
   - How is the exposure estimated? (DisMod, STGPR?)
 
   - Which outcomes are affected by this risk?
