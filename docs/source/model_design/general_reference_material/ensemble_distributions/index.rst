@@ -266,6 +266,10 @@ modeling <GBD_ensemble_repo_description>` and for :ref:`Vivarium
     implementation does not function appropriately for the mirrored gamma or mirrored
     gumbel distributions.
 
+    4. The python implementation reads in standard deviation while the R implementation reads
+    in variance (equal to standard deviation squared), so input data must be appropriately
+    converted when comparing the two implementations.
+
 .. _R code: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse
 .. _Python code: https://github.com/ihmeuw/risk_distributions/
 .. _fit_submit.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/fit_submit.R
