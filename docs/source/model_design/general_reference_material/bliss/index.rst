@@ -1,6 +1,3 @@
-.. role:: underline
-    :class: underline
-
 ..
   Section title decorators for this document:
 
@@ -43,6 +40,7 @@ language into our day-to-day work.
 
 1.0 Overview 
 ++++++++++++
+Add an introductory paragraph here (include visual of 'What this is vs. what this isn't').
 
 1.1 Guiding Principles
 ----------------------
@@ -52,12 +50,7 @@ In this section, we will outline the guiding principles of BLISS.
 -----------------------------------
 In this section, we will create a glossary of general terminology that will be used 
 throughout this style guide (e.g., for starters, we should explicitly define sex and 
-gender; SGM).
-
-1.3 Visuals
------------
-In this section, we will include some visuals for accessible, quick information 
-(e.g. do's and don't's; what this is and what this isn't).
+gender; SGM) (include visual of 'Do's and Don'ts)
 
 2.0 Acknowledging Limitations in Peer Research
 ++++++++++++++++++++++++++++++++++++++++++++++
@@ -71,8 +64,8 @@ how to appropriately articulate these issues in our reports, publications, and o
 2.2 Methodology
 ---------------
 
-2.3 Imperfect Proxies 
----------------------
+2.2.1 Imperfect Proxies 
+~~~~~~~~~~~~~~~~~~~~~~~
 Discuss the implications of imperfect proxy measures and how they correspond to what is
 exactly being measured.  
 
@@ -107,3 +100,8 @@ DR paper; IV Iron communications and IDM Symposium)
 
 5.0 References
 ++++++++++++++
+.. [Bauer, 2022]
+    `Sex and Gender Multidimensionality in Epidemiologic Research.` American Journal of Epidemiology, Oxford University Press, 30 September 2022, https://academic.oup.com/aje/article/192/1/122/6747669. 
+
+.. [Ritz and Greaves, 2022]
+    `Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender.` International Journal of Environmental Research and Public Health, 30 March 2022, https://www.mdpi.com/1660-4601/19/7/4083. 
