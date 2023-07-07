@@ -100,3 +100,8 @@ DR paper; IV Iron communications and IDM Symposium)
 
 5.0 References
 ++++++++++++++
+.. [Bauer, 2022]
+    `Sex and Gender Multidimensionality in Epidemiologic Research.` American Journal of Epidemiology, Oxford University Press, 30 September 2022, https://academic.oup.com/aje/article/192/1/122/6747669. 
+
+.. [Ritz and Greaves, 2022]
+    `Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender.` International Journal of Environmental Research and Public Health, 30 March 2022, https://www.mdpi.com/1660-4601/19/7/4083. 
