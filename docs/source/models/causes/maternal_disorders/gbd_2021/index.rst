@@ -286,7 +286,7 @@ The following table defines the parameters used in the calculation of maternal d
    * - incidence_rate_c366
      - incidence rate of maternal disorders
      - como, decomp_step='iterative'
-     - 
+     - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
    * - ylds_non_fatal_maternal_disorder_case
      - Number of YLDs attributable to a single non-fatal maternal disorder case
      - See `Years lived with disability`_ section
