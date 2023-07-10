@@ -112,6 +112,9 @@ Documents that contain information specific to the overall model and the child s
 |                     |:ref:`Background morbidity due to other    |Modeled causes: c366,|
 |                     |causes <other_causes>`                     |r192. Change from    |
 |                     |                                           |IV iron!             |
+|                     +-------------------------------------------+---------------------+
+|                     |Removal of background mortality due to     |Change from IV iron  |
+|                     |other causes                               |                     |
 +---------------------+-------------------------------------------+---------------------+
 |Interventions        |:ref:`Antenatal supplementation, including |Change from IV iron! |
 |                     |IFA, MMS, and BEP and their effects        |New effects on       |
@@ -286,6 +289,10 @@ Specific outputs for specific models are specified in the following section.
 
   Unless otherwise specified, all maternal outputs should be stratified by maternal age group
 
+.. todo::
+
+  Determine which model we will plan to remove mortality due to "other causes" and add to V&V plan
+
 .. list-table:: Model run requests
   :header-rows: 1
 
@@ -340,8 +347,8 @@ Specific outputs for specific models are specified in the following section.
     - None
     - * Deaths
       * YLLs
-      * Pregnancy state person-time, stratified by birth outcome
-      * Pregnancy transition counts, stratified by birth outcome
+      * Pregnancy state person-time, **stratified by birth outcome**
+      * Pregnancy transition counts, **stratified by birth outcome**
       * Counts of birth outcomes
     - Live and still births with maternal_ids and LBWSG exposures
     - 
@@ -375,9 +382,9 @@ Specific outputs for specific models are specified in the following section.
       * YLDs
       * Pregnancy state person-time
       * Pregnancy transition counts
-      * Anemia state person-time stratified by pregnancy state
-      * Incident maternal disorder counts stratified by anemia status at birth
-      * Incident maternal hemorrhage counts stratified by anemia status at birth
+      * Anemia state person-time **stratified by pregnancy state**
+      * Incident maternal disorder counts **stratified by anemia status at birth**
+      * Incident maternal hemorrhage counts **stratified by anemia status at birth**
     - N/A
     - Do NOT include risk effect of hemoglobin on birth outcomes (which was included in IV iron). Data block for GBD 2021 update as of 6/23.
   * - 5.0
@@ -480,7 +487,16 @@ Specific outputs for specific models are specified in the following section.
     - Looks great! Note that pregnancy duration skews when evaluated at age-specific level, but this is not a bug in implementation, rather in analysis. `Model 1.0 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.0.ipynb>`_
   * - 1.1
     - Confirm that relative distribution of partial versus full term pregnancies is as expected, that partial term pregnancy duration implemented as expected, and that child data looks good
-    - Looks great! `Model 1.1 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.1.ipynb>`
+    - Looks great! `Model 1.1 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.1.ipynb>`_
+  * - 1.2
+    - * Check that average duration of "other" birth outcomes is 15 weeks in maternal outputs
+      * Check that average duration of live and still birth outcomes is close to 38-39 weeks or so in maternal outputs
+      * Check live birth to stillbirth ratio verifies to expected value
+      * Check that LBWSG exposure in child outputs verifies to GBD exposure distribution
+    - 
+  * - 2.0
+    - Verify incident and fatal maternal disorder and maternal hemorrhage (incident only) rates
+    - 
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1

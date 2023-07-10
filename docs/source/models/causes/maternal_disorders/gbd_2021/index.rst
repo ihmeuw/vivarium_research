@@ -239,11 +239,11 @@ Ratios of maternal disorder mortality and incidence are defined in the table bel
      - Value
      - Note
    * - Maternal disorder deaths
-     - csmr_c366 / (incidence_p * prevalence_np)
-     - 
+     - csmr_c366 / preg_rate
+     - Terms defined in table below
    * - Incident maternal disorders
-     - incidence_rate_c366 / (incidence_p * prevalence_np)
-     - **Post-maternal disorder state persists for one timestep** (one week, as implemented).
+     - incidence_rate_c366 / preg_rate
+     - **Post-maternal disorder state persists for one timestep** (one week, as implemented). Terms defined in table below.
 
 
 .. note::
@@ -286,7 +286,7 @@ The following table defines the parameters used in the calculation of maternal d
    * - incidence_rate_c366
      - incidence rate of maternal disorders
      - como, decomp_step='iterative'
-     - 
+     - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
    * - ylds_non_fatal_maternal_disorder_case
      - Number of YLDs attributable to a single non-fatal maternal disorder case
      - See `Years lived with disability`_ section
@@ -299,14 +299,27 @@ The following table defines the parameters used in the calculation of maternal d
      - Annual rate of YLDs attributable to anemia due to maternal hemorrhage among WRA
      - como, decomp_step='iterative'
      - 
-   * - incidence_p
+   * - preg_rate
      - Pregnancy incidence rate
-     - :math:`\frac{ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}}{prevalence_\text{np}}`
-     - Do NOT use the value on the closed cohort pregnancy model document, but can find ASFR/SBR/incidence data definitions there.
-   * - prevalence_np
-     - Prevalence of the non-pregnant state
-     - 1 - [(ASFR + ASFR * SBR) * 46 / 52 + (incidence_c995 + incidence_c374) * 21 /52] 
-     - Do NOT use the value on the closed cohort pregnancy model document, but can find ASFR/SBR/incidence data definitions there.
+     - :math:`ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}`
+     - 
+   * - ASFR
+     - Age-specific fertility rate
+     - get_covariate_estimates: coviarate_id=13, decomp_step='iterative'
+     - Assume lognormal distribution of uncertainty.
+   * - SBR
+     - Still to live birth ratio
+     - get_covariate_estimates: covariate_id=2267, decomp_step='iterative' for GBD 2021
+     - Parameter is not age specific and has no draw-level uncertainty. Use mean_value as location-specific point parameter.
+   * - incidence_c995
+     - Incidence rate of abortion and miscarriage cause
+     - como; decomp_step='iterative'
+     - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
+   * - incidence_c374
+     - Incidence rate of ectopic pregnancy
+     - como; decomp_step='iterative'
+     - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
+
      
 .. _AgeGroupNote:
 
