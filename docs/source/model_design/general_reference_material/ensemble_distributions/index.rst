@@ -246,9 +246,11 @@ modeling <GBD_ensemble_repo_description>` and for :ref:`Vivarium
 .. note::
 
   Given that there are two different code bases meant to perform the same task, we have
-  verified that the two code bases indeed accurately replicate one another `in a notebook
-  that can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/risk_distribution/risk%20distribution%20comparison.ipynb>`_. 
-  We found that the two code bases do accurately replicate one another with a few exceptions:
+  verified that the python implementation used in vivarium accurately replicates the R
+  implementation used in GBD processes `in a notebook that can be found here 
+  <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/risk_distribution/risk%20distribution%20comparison.ipynb>`_. 
+  We found that the python implementation does accurately replicate the R implementation,
+  but with a few exceptions:
 
     1. Accurate replication of the mirrored gamma and betasr distributions rely on values 
     for the XMIN and XMAX parameters. While the GBD R code implementation and Vivarium
