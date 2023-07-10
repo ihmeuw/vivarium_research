@@ -87,7 +87,7 @@ living reference person, a condition which should always be true.
 
 These tests have access to intermediate simulation states, not only simulation outputs, and can check
 conditions at each time step.
-Therefore, they are quite similar to :ref:`interactive simulation V&V <vivarium_interactive_sim_v_and_v>` we have done in the past.
+Therefore, they are quite similar to :ref:`interactive simulation V&V <vivarium_interactive_simulation>` we have done in the past.
 Because not much changes over time in the PRL simulation (there is nothing like an intervention scale-up),
 we test only the first 10 time steps.
 
