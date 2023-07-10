@@ -262,7 +262,7 @@ modeling <GBD_ensemble_repo_description>` and for :ref:`Vivarium
     return these unexpected results. See more in this slack thread: 
     https://ihme.slack.com/archives/C01N6LFMN3W/p1688175801435049?thread_ts=1688162029.138979&cid=C01N6LFMN3W 
 
-    3. The cumulative density function (:code:`.cdf`) in the python :code:`risk_distribution` 
+    3. The cumulative distribution function (:code:`.cdf`) in the python :code:`risk_distribution` 
     implementation does not function appropriately for the mirrored gamma or mirrored
     gumbel distributions.
 
