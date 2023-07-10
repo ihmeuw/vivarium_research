@@ -264,6 +264,10 @@ modeling <GBD_ensemble_repo_description>` and for :ref:`Vivarium
     return these unexpected results. See more in this slack thread: 
     https://ihme.slack.com/archives/C01N6LFMN3W/p1688175801435049?thread_ts=1688162029.138979&cid=C01N6LFMN3W 
 
+    TODO: Run more comparisons to determine when python optimization may/may not
+    replicate the R optimization, `as brought up in this github comment
+    <https://github.com/ihmeuw/vivarium_research/pull/1241#discussion_r1255398783>`_
+
     3. The cumulative distribution function (:code:`.cdf`) in the python :code:`risk_distribution` 
     implementation does not function appropriately for the mirrored gamma or mirrored
     gumbel distributions.
