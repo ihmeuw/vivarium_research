@@ -6,7 +6,7 @@ Maternal disorders: GBD 2021
 
 .. note::
 
-  This page is an update from the previously developed :ref:`GBD 2019 maternal disorders cause model document <2019_cause_maternal_disorders>`. There were no major updates from the 2019 to 2021 version.
+  This page is an update from the previously developed :ref:`GBD 2019 maternal disorders cause model document <2019_cause_maternal_disorders>`. The only update was a change to the YLD equation, as noted in the YLDUpdateNote_.
 
 .. contents::
    :local:
@@ -320,7 +320,6 @@ The following table defines the parameters used in the calculation of maternal d
      - como; decomp_step='iterative'
      - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
 
-     
 .. _AgeGroupNote:
 
 .. note::
@@ -342,23 +341,21 @@ Simulants who experience an incident case of maternal disorders and occupy the p
   \text{YLDs per non-fatal maternal disorders case} = 
   
 
-  \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366}) * \text{incidence_rate}_\text{c366} - csmr_\text{c366}}
+  \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - \text{csmr}_\text{c366}}
 
-.. warning::
+.. _YLDUpdateNote:
 
-  A previous version of the above equation yielded a negative value in initial attempts. We've implementated the following placeholder (which may result in an underestimation of maternal disorder YLDs):
+.. note::
 
-  .. math::
-
-    \text{YLDs per non-fatal maternal disorders case} = \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366}}
-
-  The equation may eventually be updated to the resolved version in the main section above, although it is approximately 98-99% of the temporary fix, so it is a low priority for implementation.
-
-  For reference, the previous version of the equation that yielded a negative rate was as follows:
+  This equation was updated from the previous (erroneous) implementation in IV iron (shown below):
 
   .. math::
 
-    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / \text{incidence_rate}_\text{c366})}
+    \text{YLDs per non-fatal maternal disorders case} = 
+    
+
+    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366}) * \text{incidence_rate}_\text{c366} - csmr_\text{c366}}
+
 
 .. todo::
 
