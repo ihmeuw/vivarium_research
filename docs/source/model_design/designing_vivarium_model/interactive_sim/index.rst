@@ -34,9 +34,9 @@ Utilizing the Interactive Simulation
 Intro to Interactive Simulations
 --------------------------------
 
-Interactive simulations are a way to step inside of a simulation intsead of 
+Interactive simulations are a way to step inside of a simulation instead of 
 just receiving final outputs. This can be very helpful for a number of tasks 
-including V&V, debugging, and reviewing primary outputs. These are described 
+including V&V, debugging, and generating primary outputs. These are described 
 in detail :ref:`below <interactive_tasks>`. 
 
 The interactive sim allows a user to see all of the data available for any simulant. 
@@ -47,8 +47,9 @@ BMI as well as their propensity score for BMI.
 In addition, you can move the simulation forward in time to watch and record how 
 simulants change and experience health events. 
 
-However, we tend to use much smaller populations for the interactive simulation compared to 
-the main simulation. This makes some tasks more difficult to complete interactively. 
+However, since we don't parallelize runs in the interactive sim, we tend to use much 
+smaller populations and generally only 1 draw and seed combination to limit run time. 
+This makes some tasks more difficult to complete interactively. 
 
 .. _interactive_process:
 
@@ -58,6 +59,7 @@ Setting up an Interactive Sim
 .. todo::
 
   Add how to: load the interactive sim, change parameters, and take steps 
+  Also can include: how to comment out observers or change observers to get more grainularity with faster runs  
 
   Include: - `Vivarium InteractiveContext documentation <https://vivarium.readthedocs.io/en/latest/api_reference/interface/interactive.html?highlight=InteractiveContext#vivarium.interface.interactive.InteractiveContext>`_
 
@@ -90,16 +92,16 @@ these are related to V&V. For more general information and best practices on V&V
     - Summary measures such as mean exposure or proportions below a threshold can be simulation outputs. Interactive sims can verify risk exposure standard deviation, look at spread, or check for outliers. 
     - 
   * - V&V for Events with Multiple Risk Factors
-    - Strafiying event rates by many risk factors might not be computationally feasible; you can verify risk effects by calculating the event rate at the simulant level.
+    - Stratifying event rates by many risk factors might not be computationally feasible; you can verify risk effects by calculating the event rate at the simulant level.
     - 
-  * - V&V for Continuous Relative Risks
-    - For continuous risk effects, simulant level data is needed to validate risk and outcome rates. 
+  * - V&V for Relative Risks based on Continuous Risks 
+    - For continuous risks with risk effects, simulant level data is needed to validate risk and outcome rates. 
     - 
   * - Check for Simulant Level Continuity 
     - Can check that simulant values which are not meant to change, remain constant over time (example: propensities)
     - 
   * - Debugging 
-    - This is very general, but simulant level data can be helpful in finding potential issues. Some examples include: propensity drift over time or finding problematic outliers. 
+    - This is very general, but simulant level data can be helpful in finding potential issues. Some examples include: propensity drift over time or finding problematic outliers. You can also "remove" parts of the sim to see where a problem might be. 
     - 
   * - Primary Output Graphs 
     - Creating visualizations when individual data is needed - such as simulant interactions with healthcare or continuous risk factor spreads over time. 
@@ -113,4 +115,5 @@ Common Challenges
 .. todo::
 
   Add information on: environment management, editable installs of packages within environments 
+  If you remove observers or change things it can have weird effects - talk with engineering 
 
