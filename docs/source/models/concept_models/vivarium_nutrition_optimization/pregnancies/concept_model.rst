@@ -292,9 +292,11 @@ Specific outputs for specific models are specified in the following section.
 
   Unless otherwise specified, all maternal outputs should be stratified by maternal age group
 
-.. todo::
+.. note::
 
-  Determine which model we will plan to remove mortality due to "other causes" and add to V&V plan
+  Models 2.0 through 6.0 do not contain any updates relative to the IV iron implementation (with the exception of the removal of the hemoglobin risk effect on birth outcomes/stillbirths). These model runs may be collapsed into fewer submodels if convenient for implementation. 
+
+  If this is done, model output requests should be updated. 
 
 .. list-table:: Model run requests
   :header-rows: 1
@@ -356,7 +358,7 @@ Specific outputs for specific models are specified in the following section.
     - Live and still births with maternal_ids and LBWSG exposures
     - 
   * - 2.0
-    - Maternal disorders and maternal hemorrhage cause models
+    - Maternal disorders and maternal hemorrhage cause models, removal of background mortality
     - Baseline
     - None
     - * Deaths
@@ -498,7 +500,7 @@ Specific outputs for specific models are specified in the following section.
       * Check that LBWSG exposure in child outputs verifies to GBD exposure distribution
     - Looks good! `Model 1.2 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.2.ipynb>`. Noted that infant sex should be added to child output data moving forward.
   * - 2.0
-    - Verify incident and fatal maternal disorder and maternal hemorrhage (incident only) rates
+    - Verify incident and fatal maternal disorder and maternal hemorrhage (incident only) rates as well as YLDs, confirm removal of background mortality
     - 
 
 .. list-table:: Outstanding V&V issues
