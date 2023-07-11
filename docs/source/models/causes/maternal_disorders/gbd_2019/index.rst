@@ -312,6 +312,19 @@ Years lived with disability
 
 Simulants who experience an incident case of maternal disorders and occupy the post-maternal disorders state following the incident case and will remain there for a single timestep. The disability weight for the post-maternal disorders time-step long state will then be the number of YLDs per case (defined below) divided by :math:`\text{time step duration in days} / 365`, such that the disability weight multiplied by the duration spent accruing disability is equal to the total YLDs per case (defined below). Notably, for simulations that evaluate disability due to anemia through the :ref:`hemoglobin/anemia model <2019_hemoglobin_anemia_and_iron_deficiency>` such as the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`, the disability due to anemia sequelae should not be counted as part of YLDs due to maternal disorders as they will be tracked separately as YLDs due to anemia (this is reflected in the equation below).
 
+.. note::
+
+  The equation shown below is inconsistent with the approach we implemented of accumulating all maternal disorders YLDs in a single timestep rather than over the course of 1 year. With maternal disorders YLDs accumulated in a single timestep, the equation should be: 
+
+  .. math::
+
+    \text{YLDs per non-fatal maternal disorders case} = 
+    
+
+    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - \text{csmr}_\text{c366}}
+
+  This equation has been updated for the :ref:`2021 maternal disorders cause model document <2021_cause_maternal_disorders>` and will be implemented in the nutrition optimization simulation. The erroneous equation implemented in IV iron is kept below for reference. Note that the impact of this discepency will be quite small given the small magnitude of the ACMR parameter.
+
 .. math::
 
   \text{YLDs per non-fatal maternal disorders case} = 

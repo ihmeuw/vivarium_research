@@ -208,6 +208,15 @@ modeling <GBD_ensemble_repo_description>` and for :ref:`Vivarium
     above, as the ``get_edensity`` function has a different implementation in
     :file:`eKS_parallel.R`.
 
+  - `edensity.R`_ is the function that returns an ensemble distribution density
+    function for use in PAF calculations. Note that this function sets the
+    XMIN and XMAX parameters that the mirrored gamma, mirrored gumbel, and 
+    betasr functions rely on to the 0.001 and 0.999 percentiles of a lognormal
+    distribution with the specified mean and standard deviation (or else a 
+    normal distribution if the specified mean is equal to zero). However, XMIN
+    and XMAX parameter values are overwritten with custom values for `several
+    risk factors that can be found here <https://stash.ihme.washington.edu/projects/CCGMOD/repos/paf/browse/custom>`_.
+
 .. _Vivarium_risk_distributions_repo_description:
 
 * `Risk Distributions repository (Python code) <Python code_>`_ on GitHub,
@@ -228,6 +237,44 @@ modeling <GBD_ensemble_repo_description>` and for :ref:`Vivarium
 
   - `formatting.py`_ contains helper functions for formatting data and
     converting between data types.
+
+  - Note that as of July 2023 by default, :code:`risk_distributions.py` sets XMIN and XMAX 
+    parameter values to the 0.001 and 0.999 percentile values of a lognormal distribution
+    with the specified mean and standard deviation, `as shown here 
+    <https://github.com/ihmeuw/risk_distributions/blob/242c3c16c403bdf3833a7d3077bd24708150795b/src/risk_distributions/risk_distributions.py#L76>`_
+
+.. note::
+
+  Given that there are two different code bases meant to perform the same task, we have
+  verified that the python implementation used in vivarium accurately replicates the R
+  implementation used in GBD processes `in a notebook that can be found here 
+  <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/risk_distribution/risk%20distribution%20comparison.ipynb>`_. 
+  We found that the python implementation does accurately replicate the R implementation,
+  but with a few exceptions:
+
+    1. Accurate replication of the mirrored gamma and betasr distributions rely on values 
+    for the XMIN and XMAX parameters. While the GBD R code implementation and Vivarium
+    python code implementation share common default values for the XMIN and XMAX parameters,
+    it is critical to ensure the python implementation reflect custom values used in the
+    GBD implementation to accurately replicate the GBD distributions.
+
+    2. The GBD code for the invweibull distribution relies on an optimization function 
+    that can return unexpected results. The python function appears to solve the 
+    distribution algebraically rather than via optimization and therefore does not 
+    return these unexpected results. See more in this slack thread: 
+    https://ihme.slack.com/archives/C01N6LFMN3W/p1688175801435049?thread_ts=1688162029.138979&cid=C01N6LFMN3W 
+
+    TODO: Run more comparisons to determine when python optimization may/may not
+    replicate the R optimization, `as brought up in this github comment
+    <https://github.com/ihmeuw/vivarium_research/pull/1241#discussion_r1255398783>`_
+
+    3. The cumulative distribution function (:code:`.cdf`) in the python :code:`risk_distribution` 
+    implementation does not function appropriately for the mirrored gamma or mirrored
+    gumbel distributions.
+
+    4. The python implementation reads in standard deviation while the R implementation reads
+    in variance (equal to standard deviation squared), so input data must be appropriately
+    converted when comparing the two implementations.
 
 .. _R code: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse
 .. _Python code: https://github.com/ihmeuw/risk_distributions/
