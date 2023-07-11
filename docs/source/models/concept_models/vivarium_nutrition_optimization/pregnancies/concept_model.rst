@@ -398,7 +398,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * BMI exposure, stratified by pregnancy state and anemia state
-    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, and LBWSG exposures
+    - Live and still births with maternal_ids, infant sex, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, and LBWSG exposures
     - Data block for GBD 2021 update as of 6/23.
   * - 6.0
     - Intervention effects on hemoglobin and birthweight
@@ -411,7 +411,7 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy transition counts
       * Anemia state person time, stratified by intervention coverage
       * Intervention counts
-    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, infant sex, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
     - Both of these intervention effects were implemented in IV iron and are not changed for this model
   * - 7.0
     - Intervention effects on gestational age and birth outcomes
@@ -423,7 +423,7 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy state person time
       * Pregnancy transition counts
       * Birth outcomes, stratified by intervention coverage
-    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, infant sex, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
     - These intervention effects are new and were not implemented in IV iron
   * - 8.0
     - Background morbidity
@@ -446,7 +446,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * Intervention counts
-    - Live and still births with maternal_ids, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, infant sex, intervention coverage, and LBWSG exposures
     - 
   * - 9.1
     - Production runs
@@ -458,7 +458,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * Intervention counts
-    - Live and still births with maternal_ids, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, infant sex, intervention coverage, and LBWSG exposures
     - 
   * - 10.0
     - GBD 2021 update?
@@ -496,7 +496,7 @@ Specific outputs for specific models are specified in the following section.
       * Check that average duration of live and still birth outcomes is close to 38-39 weeks or so in maternal outputs
       * Check live birth to stillbirth ratio verifies to expected value
       * Check that LBWSG exposure in child outputs verifies to GBD exposure distribution
-    - 
+    - Looks good! `Model 1.2 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.2.ipynb>`. Noted that infant sex should be added to child output data moving forward.
   * - 2.0
     - Verify incident and fatal maternal disorder and maternal hemorrhage (incident only) rates
     - 
