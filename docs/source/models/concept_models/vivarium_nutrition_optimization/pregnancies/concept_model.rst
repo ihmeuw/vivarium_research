@@ -109,8 +109,11 @@ Documents that contain information specific to the overall model and the child s
 |                     |:ref:`Maternal hemorrhage incidence        |                     |
 |                     |<2019_cause_maternal_hemorrhage_incidence>`|                     |
 |                     +-------------------------------------------+---------------------+
-|                     |:ref:`Background morbidity due to other    |Modeled causes: c366,|
-|                     |causes <other_causes>`                     |r192. Change from    |
+|                     |:ref:`Background morbidity due to other    |Modeled causes: r192 |
+|                     |causes <other_causes>`                     |(anemia). See note   |
+|                     |                                           |regarding exclusion  |
+|                     |                                           |of c366 below.       |
+|                     |                                           |Change from          |
 |                     |                                           |IV iron!             |
 |                     +-------------------------------------------+---------------------+
 |                     |Removal of background mortality due to     |Change from IV iron  |
@@ -280,7 +283,7 @@ There are two important categories of outputs for this model. The first is mater
 
 Specific outputs for specific models are specified in the following section.
 
-.. _nutritionoptimizationpreg5.0:
+.. _nutritionoptimizationpreg3.0:
 
 3.0 Models
 ++++++++++
@@ -510,3 +513,47 @@ Specific outputs for specific models are specified in the following section.
     - 
     - 
 
+4.0 Research background and limitations
+++++++++++++++++++++++++++++++++++++++++
+
+.. _MDYLDNote:
+
+4.1 A note on years lived with disability and maternal disorders
+-----------------------------------------------------------------
+
+This simulation has taken a particular modeling strategy regarding years lived with disability due to :ref:`maternal disorders <2021_cause_maternal_disorders>` that involved integrating it into the :ref:`pregnancy model <other_models_pregnancy_closed_cohort>`. 
+
+While described in more detail on the individual model documents, the main strategic decisions made in the design of this model are outlined below, with explanations:
+
+- Modeling a specific "maternal disorders" state in the pregnancy model document with a duration of a single timestep that occurs between the pregnancy and postpartum states in which a simulant is either affected or unaffected by the maternal disorders cause. 
+
+  - Modeling the maternal disorders state with the duration of one timestep (rather than an instantaneous moment at birth) allowed us to take advantage of standard vivarium behavior for accruing YLDs over the duration of time spent in the state according to a state-specific disability weight (custom calculated in this case).
+
+- Modeling YLDs due to maternal disorders according to a custom calculated "disability weight" equal to the annual amount of YLDs due to maternal disorders per non-fatal case of maternal disorders rather than the typical strategy of prevalence-weighted average of sequela-specific disability weights.  
+
+  - We took this strategy because the maternal disorders cause is a composite parent cause of many maternal disorders subcauses (see :ref:`the maternal disorders document<2021_cause_maternal_disorders>`). These subcauses all have differing disability weights as well as average durations. Therefore, by using the GBD COMO-adjusted YLD estimates to back-calculate a "disability weight" for the composite maternal disorders parent cause that results, we can produce the appropriate COMO-adjusted annual baseline rate of maternal disorders YLDs without needing to account for the differential DWs and durations of each of the maternal disorder subcauses to appropriately replicate the COMO adjustment within the simulation.
+
+    - Note that a limitation of this strategy is that there are some sequelae within the maternal disorders cause that last for longer than one year. Because of this, some of the YLDs in the GBD estimate of the COMO-adjusted annual YLD rate due to maternal disorders will be due to births that occurred in the year prior to our index year; we will therefore assign some of these YLDs due to prevalent cases to incident cases in our simulation. However, we are additionally limited in that we do not consider disability due to incident maternal disorder cases beyond one year after birth. Note that for the baseline scenario, these two limitations should cancel out so long as the incidence of these long-lasting sequelae are stable over time after adjusting for changing fertility rates. 
+
+- Pausing accumulation of YLDs due to causes other than maternal disorders (specifically anemia, other causes) while simulants occupy the maternal disorders state in the pregnancy model.
+
+  - We took this strategy because the maternal disorders YLDs as calculated above are already COMO adjusted. Therefore, we do not wish to further adjust these YLDs for comorbid causes that a simulant may possess.
+
+    - Note that this causes underestimation of YLDs due to causes other than maternal disorders from the start of pregnancy until six weeks postpartum by roughly a factor of 1/38 (~2.16 percent) for this simulation given a timestep of one week and an average pregnancy + postpartum combined duration of approximately 38 weeks (6 weeks postpartum + 32 weeks of pregnancy, weighted average of full and partial term pregnancies).
+      - We have addressed this limitation during post-processing for the IV iron simulation by multiplying YLDs due to anemia accrued during the postpartum state by :code:`6/5` given that the duration of the maternal disorders state was one week and the duration of the postpartum state was 5 weeks. 
+
+.. todo:: 
+  
+  Determine if we wish to replicate this anemia YLD re-scaling strategy for this simulation (trade off between observer stratification and associated increases in run time). Will need to update final output/stratification requests if desired. 
+
+- Not including maternal disorders as a "modeled cause" in the model of morbidity due to "other causes," :ref:`as discussed on this page <other_causes_ylds>`.
+
+  - This allows us to adjust YLDs due to causes other than maternal disorders to be COMO-adjusted for maternal disorders, since this adjustment will not be done within the simulation despite the fact that we are modeling maternal disorders due to our unique modeling strategy for this cause. Note that YLDs due to maternal disorders in our simulation are already COMO-adjusted for all other causes because we are using the GBD COMO-adjusted YLD estimate to calculate the maternal disorders disability weight, as described above.
+
+    - Note that this modeling strategy does not allow for intervention-associated reductions in YLDs due to maternal disorders to cause *increases* in YLDs due to causes other than maternal disorders (which should occur for comorbid causes, :ref:`as discussed on this page <other_causes_ylds>`) and vise versa (reductions in YLDs due to anemia will not increase comorbid YLDs due to maternal disorders). However, given that each of these individual causes represents a small portion of all cause YLDs for our modeled demographic groups, the impact of this limitation will be small. 
+
+- Modeling YLDs and YLLs due to :ref:`maternal hemorrhage <2019_cause_maternal_hemorrhage_incidence>` as part of the :ref:`maternal disorders <2021_cause_maternal_disorders>` composite cause rather than part of the maternal hemorrhage incidence cause (which has no associated morbidity or mortality).
+
+  - We did this in order to remain consistent with GBD. The GBD hemoglobin risk effect applies equally to all maternal disorders subcauses (in other words, the hemoglobin relative risks are specific to *all* maternal disorders and we do not have data for cause-specific hemoglobin risk effects). Therefore, we model the risk effect of hemoglobin on maternal disorders as a composite cause (including hemorrhage) and model maternal hemorrhage incidence **only** as a way to estimate the impact of pregnancy hemoglobin on postpartum hemoglobin as mediated through hemorrhage at birth. 
+
+    - Note that it is possible that we could use the more specific hemoglobin on maternal hemorrhage risk effects obtained from the literature to apply to maternal hemorrhage morbidity and mortality, but we chose to remain consistent with GBD rather than model more detailed risk effects for this single specific subcause of maternal disorders. 
