@@ -1974,6 +1974,15 @@ The simulant attributes to sample (listed in the "What to Sample" section for ea
 except for those marked "for noise functions only," should be the columns present in :code:`pseudopeople` outputs.
 In those outputs, the columns should be **in the order they are listed here**.
 
+In most cases, we have not actually seen the data files we are simulating,
+because they are confidential.
+The schemas we define below are based on a combination of guesswork/assumptions and any
+public documentation we can find about the data files or the data collection process.
+For example, we have described most date columns to be formatted MM/DD/YYYY in the absence
+of specific information, because this is a common American format for dates.
+We have also omitted many columns that would truly be present, since we are focused
+only on those columns that would be most relevant to record linkage.
+
 .. todo::
   Move this documentation to the :code:`pseudopeople` repository.
 
@@ -2182,7 +2191,7 @@ There are two types of sampling plans:
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
-  * - Survey date
+  * - Survey date (stored as a string in MM/DD/YYYY format)
   * - First name
   * - Middle initial
   * - Last name
@@ -2394,7 +2403,7 @@ in the home.
   * - First name
   * - Middle initial
   * - Last name
-  * - DOB (stored as a string in MMDDYYYY format)
+  * - DOB (stored as a string in MMDDYYYY format, as indicated by [WIC_Guide]_)
   * - Physical Address Street Number
   * - Physical Address Street Name
   * - Physical Address Unit
@@ -2564,8 +2573,6 @@ W2 and 1099 Forms
   * - First name
   * - Middle initial
   * - Last name
-  * - Age (floored to integer years **before** noise is applied)
-  * - DOB (stored as a string in MM/DD/YYYY format)
   * - Mailing Address Street Number (blank for PO boxes)
   * - Mailing Address Street Name (blank for PO boxes)
   * - Mailing Address Unit (blank for PO boxes)
@@ -2583,7 +2590,7 @@ W2 and 1099 Forms
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Wages must be rounded to the nearest whole number before applying noise.
+  In the final version of the observers, following the noise functions, please have all data as strings. Wages must be rounded to the nearest whole number before applying noise.
 
 
 If a simulant does not have a social security number but is
@@ -2628,6 +2635,12 @@ income/wage cutoff for this observer.
 Here is an example:
 
 .. image:: W2_example.PNG
+
+.. note::
+
+  The above image is outdated and contains "Age" and "DOB" columns, but these
+  should **not** appear in the W2/1099 dataset. The image is also *missing* the
+  ground-truth "Household ID" column.
 
 **Who to Sample**
 
@@ -2701,10 +2714,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age (floored to integer years **before** noise is applied)
-    -
-  * - DOB (stored as a string in MM/DD/YYYY format)
-    -
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2757,10 +2766,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age
-    -
-  * - DOB (stored as a string in MM/DD/YYYY format)
-    -
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2805,8 +2810,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age
-    -
   * - Social Security Number (if present)
     -
   * - ITIN (if present)
@@ -2814,7 +2817,7 @@ in January 2024.
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Income must be rounded to the nearest whole number before applying noise.
+  In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
 
 If a simulant does not have an SSN,
@@ -2835,6 +2838,12 @@ Here is a photo showing how this might look. Note that the three tables
 are just 2 really long rows for two simulants.
 
 .. image:: 1044_example.png
+
+.. note::
+
+  The above image is outdated and contains "Age" and "DOB" columns, but these
+  should **not** appear in the 1040 dataset. The image is also *missing* the
+  ground-truth "Household ID" column.
 
 If a simulant had more than 4 employments in the tax year,
 the 4 with the highest income values are included on the 1040; other employment information
@@ -2944,10 +2953,11 @@ added later (not in the minimum viable model), if desired.
   * - First name
   * - Middle initial
   * - Last name
-  * - DOB (stored as a string in YYYYMMDD format)
+  * - DOB (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
+  * - Sex (binary; "Male" or "Female")
   * - Social Security Number
   * - Type of event
-  * - Date of event (stored as a string in YYYYMMDD format)
+  * - Date of event (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
 
 .. note::
   Unlike the other observers, there is no ground-truth unique household ID for PRL tracking in this observer.
@@ -3103,13 +3113,13 @@ for all column based noise include:
     - Missing data, fake names, phonetic, OCR, typographic
     - The list of fake names will be different than the first names
   * - Age
-    - Census, Household Surveys, Taxes (both)
+    - Census, Household Surveys
     - 0.01
     - 0.1
     - Missing data, Copy from within Household, Age miswriting, OCR, typographic
     -
   * - Date of Birth
-    - Census, Household Surveys, WIC, Taxes (both), SSA
+    - Census, Household Surveys, WIC, SSA
     - 0.01
     - 0.1
     - Missing data, copy from within household, swap month and day, numeric miswriting, OCR, typographic
@@ -3163,7 +3173,7 @@ for all column based noise include:
     - Missing data, incorrect select
     -
   * - Sex
-    - Census, Household Surveys, WIC
+    - Census, Household Surveys, WIC, SSA
     - 0.01
     - N/A
     - Missing data, incorrect select
@@ -4368,3 +4378,7 @@ To Come (TK)
 .. [PUMS_Data_Dictionary] Bureau, US Census. March 31, 2022. “2016-2020 ACS PUMS Data Dictionary” Census.Gov. Accessed February 10, 2023. https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2016-2020.pdf
 
 .. [Life_Expectancy_Race_Ethnicity] GBD US Health Disparities Collaborators. Life expectancy by county, race, and ethnicity in the USA, 2000–19: a systematic analysis of health disparities. The Lancet. 2022 Jul; 400(10345):25-38. https://doi.org/10.1016/S0140-6736(22)00876-5
+
+.. [CARRA_SSA] Benjamin Cerf Harris. Likely Transgender Individuals in U.S. Federal Administrative Records and the 2010 Census. US Census Bureau. 2015. https://www.census.gov/content/dam/Census/library/working-papers/2015/adrm/carra-wp-2015-03.pdf
+
+.. [WIC_Guide] Economic Research Service of the US Department of Agriculture. Guide to Variables for WIC Administrative Data Available Through a Federal Statistical Research Data Center (FSRDC). 2022. https://www.ers.usda.gov/media/duko3qi3/guide-to-variables-for-wic-administrative-data.xlsx

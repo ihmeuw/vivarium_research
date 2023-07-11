@@ -249,8 +249,8 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
   1. Assign pregnancy state according to state prevalence values
   2. Assign partial or full term duration according to table in `Pregnancy term lengths`_ section
-  3. Assign sex of infant if pregnancy outcome is a stillbirth or live birth
-  4. Assign duration of pregnancy depending on pregnancy outcome and sex of the infant
+  3. Assign sex of infant if pregnancy is full term (stillbirth or live birth)
+  4. Assign duration of pregnancy depending on term length and, if applicable, sex of the infant
   5. Determine the amount of time remaining in pregnancy from the duration of pregnancy: for closed cohort, assume simulation starts at day 0 of all pregnancies
   6. Begin simulation
 
@@ -293,11 +293,7 @@ Sex of infant
 
   The IV iron simulation assumed 50/50 probability
 
-For pregnancies that result in live birth or stillbirth outcomes, infant sex should be determined and recorded acording to the probability of male sex shown in the table below (probability of female birth is equal to 1 minus the probability of male birth). This should be performed at the start of pregnancy (transition from np to p states) or upon initialization into the p state. These sex ratios were calculated using the live births by sex 2020 GBD covariate (ID 1106), `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/sex_ratio_calculation.ipynb>`_. 
-
-.. todo::
-
-  Fill in table
+For pregnancies that result in live birth or stillbirth outcomes, infant sex should be determined and recorded acording to the probability of male sex shown in the table below (probability of female birth is equal to 1 minus the probability of male birth). This should be performed at the start of pregnancy (transition from np to p states) or upon initialization into the p state. These sex ratios were calculated using the live births by sex 2020 GBD covariate (ID 1106), `shown here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/Live%20births%20by%20sex.ipynb>`_. Note that there is no variation by draw in this parameter. 
 
 .. _sex_ratio_table_21:
 
@@ -308,14 +304,14 @@ For pregnancies that result in live birth or stillbirth outcomes, infant sex sho
         - Location ID
         - Value
     *   - Pakistan 
-        - XXX
-        - 
+        - 165
+        - 0.514583
     *   - Nigeria
         - 214
-        -
+        - 0.511785 
     *   - Ethiopia
         - 179
-        -
+        - 0.514271  
 
 Duration of pregnancy
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -324,20 +320,20 @@ A duration of pregnancy value will need to be assigned to all pregnancies regard
 
 For partial term pregnancies (that result in abortion/miscarriage/ectopic pregnancy), assign a duration of pregnancy sampled from a uniform distribution beween 6 and 24 weeks (individual heterogeneity with no parameter uncertainty).
 
+For full term pregnancies (that result in live births or stillbirths), duration of pregnancy should be determined by gestational age exposure, which should be assigned according to the process for assigning LBWSG exposures described in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. The LBWSG exposure distribution used to assign gestational age exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section) and may also be modified by :ref:`antenatal supplementation intervention coverage <maternal_supplementation_intervention>`. Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
+
+.. note::
+
+  The impact of :ref:`antenatal supplementation intervention coverage <maternal_supplementation_intervention>` on pregnancy duration (distinguished from its effect on infant LBWSG exposure here) will have a minimal impact on total DALYs modeled in the nutrition optimization simulation (will only affect anemia YLDs by extending for the duration of the gestational age shift). Therefore, it would be an acceptable limitation to ignore the impact of this intervention coverage on pregnancy duration if it is convenient for implementation as long as the intervention continues to impact infant LBWSG exposures.
+
 .. todo::
 
-  Update link to correlation doc
-
-For full term pregnancies (that result in live births or stillbirths), duration of pregnancy should be determined by gestational age exposure, which should be assigned according to the process for assigning LBWSG exposures described in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. The LBWSG exposure distribution used to assign gestational age exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
-
-.. todo::
-
-  Describe how to handle intervention effects on gestational age here (remember, will make little difference for mothers... maybe ignore and only model impact on infants?)
+  Update the above note to reflect what is actually implemented.
 
 Pregnancy outcomes
 ~~~~~~~~~~~~~~~~~~
 
-At the time of birth, pregnancy outcome must be determined for each pregnancy as either a 1) live birth, 2) stillbirth, or 3) other (ectopic pregnancy, abortion/miscarriage). The probability of each pregnancy outcome dependent on the pregnancy term length and probabilities of each outcome conditional on pregnancy term are defined in the table below. 
+At or before the time of birth, pregnancy outcome must be determined for each pregnancy as either a 1) live birth, 2) stillbirth, or 3) other (ectopic pregnancy, abortion/miscarriage). The probability of each pregnancy outcome dependent on the pregnancy term length and probabilities of each outcome conditional on pregnancy term are defined in the table below. 
 
 .. list-table:: Pregnancy outcome probabilities conditional on pregnancy term length
   :header-rows: 1
@@ -361,11 +357,11 @@ At the time of birth, pregnancy outcome must be determined for each pregnancy as
   * - Full term
     - Live birth
     - ASFR / (ASFR + ASFR * SBR)
-    - This outcome will be used to inform the demography model of children under 5 for the IV iron simulation. The :ref:`probability of a livebirth outcome is modified by the hemoglobin risk factor <2019_risk_effect_iron_deficiency>`.
+    - The :ref:`probability of a livebirth outcome is modified by antenatal supplementation intervention coverage <maternal_supplementation_intervention>`.
   * - Full term
     - Stillbirth
     - (ASFR * SBR) / (ASFR + ASFR * SBR)
-    - The :ref:`probability of a stillbirth outcome is modified by the hemoglobin risk factor <2019_risk_effect_iron_deficiency>`.
+    - The :ref:`probability of a stillbirth outcome is modified by antenatal supplementation intervention coverage <maternal_supplementation_intervention>`.
   * - Full term
     - Other (abortion, miscarriage, ectopic pregnancy)
     - 0
@@ -373,7 +369,7 @@ At the time of birth, pregnancy outcome must be determined for each pregnancy as
 
 .. note::
 
-  The current modeling strategy is dependent on our assumption that live births and stillbirths have the same duration. There is ongoing work at IHME to estimate gestational age at birth distributions among stillbirths. If we were to incorporate this new data, we would need to devise a new modeling strategy that would allow for more flexibility in assigning pregnancy duration and pregnancy outcome, allowing *both* to vary by late-term hemoglobin concentration.
+  The current modeling strategy is dependent on our assumption that live births and stillbirths have the same duration. There is ongoing work at IHME to estimate gestational age at birth distributions among stillbirths. 
 
 Assumptions and limitations
 ++++++++++++++++++++++++++++
