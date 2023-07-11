@@ -41,6 +41,9 @@ This can be split into verification (checking that the model approximately repli
 was explicitly designed to replicate) and validation (checking that the model results are sensible,
 e.g. by comparing to a real-life data source not used by the model).
 
+Note that interactive simulations are also frequently used for V&V. This has been moved to a separate 
+page dedicated to :ref:`the interactive simulation <vivarium_interactive_simulation>`
+
 .. _vivarium_v_and_v_process:
 
 The V&V process
@@ -70,7 +73,7 @@ The current standard process for verification and validation (V&V) goes roughly 
 .. note::
   Sometimes, instead of simulation **results** being used in V&V, the researcher runs the latest version
   of the simulation themselves.
-  See the `Interactive simulation`_ section below for more details.
+  See the :ref:`interactive simulation page <vivarium_interactive_simulation>` for more details.
 
 .. note::
   Often, simulation runs for V&V can be smaller than the runs used for final results.
@@ -97,7 +100,8 @@ General things to check/keep in mind
 
 - Remember the distinction between model verification (Do model outputs accurately reflect model inputs? Did we make a mistake in *building* the model?) and model validation (Do model outputs accurately represent reality? Did we make a mistake in *designing* the model?). Be sure to validate model results, including to your own back-of-the-envelope calculation (:ref:`see this page for details <vivarium_best_practices_boe>`) as well as external data sources that may have evaluated similar research questions.
 
-- Vivarium has an "untracked" population that can cause confusing issues if it is set to something unexpected. This is something that may be investigated in the `interactive simulation`_.
+- Vivarium has an "untracked" population that can cause confusing issues if it is set to something unexpected. This is something that may be investigated in the :ref: `interactive simulation <vivarium_interactive_simulation>`.
+
 
 General list of things to verify
 ++++++++++++++++++++++++++++++++
@@ -128,26 +132,6 @@ Verification of these parameters compared to artifact and GBD values is generall
 
 Additionally, especially if simulating across several years, we should check not only that the parameters meet verification criteria across all simulated years, but also that there are no unacceptable/obvious trends in simulated outputs across simulated years (ex: some mortality rate increasing with time, etc.).
 
-.. _vivarium_interactive_sim_v_and_v:
-
-Interactive simulation
-++++++++++++++++++++++
-
-Some things may be easier to verify in interactive simulations rather than from count data outputs. Such parameters may include:
-
-- Risk factors with many categories (ex: LBWSG) because stratifying simulation outcomes by many categories may be too much of a drain on computation time
-
-- Continuous risk factors. Mean exposure values and/or proportions below a given threshold may be included as simulation outputs (TODO: provide link/info), but otherwise interactive simulations may be helpful to verify risk exposure standard deviation or other measures.
-
-- Many risk effects on the same event. If it is not computationally feasible to stratify the event rate by all risk factors that affect it, the best way to verify these risk effects may be to re-calculate and verify the event *rate* at the simulant level.
-
-- Continuous risk effects. TODO: provide details or examples
-
-- Continuity at the simulant level (to ensure that parameters that should not change over time *do* not change over time at the individual level)
-
-However, V&V in an interactive simulation generally uses a smaller population size than V&V of simulation results,
-since we have not developed a system for parallelizing interactive simulation runs.
-This smaller population size can make certain aspects of the simulation harder to check.
 
 Some examples of often desired outputs
 ++++++++++++++++++++++++++++++++++++++
@@ -175,14 +159,10 @@ Some helpful documentation sources include:
 
 - `Vivarium Artifact documentation <https://vivarium.readthedocs.io/en/latest/api_reference/framework/artifact/artifact.html>`_. Note that the research team will generally only use the :code:`.load()` function and not any of the Artifact editing functions
 
-- `Vivarium InteractiveContext documentation <https://vivarium.readthedocs.io/en/latest/api_reference/interface/interactive.html?highlight=InteractiveContext#vivarium.interface.interactive.InteractiveContext>`_
-
 
 Some example of verification and validation notebooks can be found here:
 
 - :ref:`Acute malnutrition phase I model <2019_concept_model_vivarium_ciff_sam>`, `cause and risk exposure verification notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.0.1.ipynb>`_ (note there were some outstanding V&V issues in this model version). 
-
-- `An interactive simulation demo notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/interactive_simulations/Interactive%20simulation%20demo.ipynb>`_
 
 .. todo::
 
