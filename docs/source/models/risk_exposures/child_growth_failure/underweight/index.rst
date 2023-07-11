@@ -88,7 +88,7 @@ Vivarium Modeling Strategy
 
 We will model child underweight as an **ordered polytomous variable**. 
 
-Will will use a "propensity exposure model" for child underweight, but with 
+We will use a "propensity exposure model" for child underweight, but with 
 population risk exposure distributions that are conditional on 
 :ref:`child stunting <2020_risk_exposure_child_stunting>` and 
 :ref:`child wasting <2019_risk_exposure_wasting_state_exposure>` exposures. 
