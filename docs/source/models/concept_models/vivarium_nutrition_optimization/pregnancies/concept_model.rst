@@ -57,6 +57,25 @@ Documents that contain information specific to the overall model and the child s
 
   List modeling aims and objectives
 
+1.2 Outstanding research questions/notes
+-----------------------------------------
+
+**Questions:**
+
+- For stillbirths that become live births due to intervention impact, what should their LWBSG exposure be? Hypothetically near-stillbirths should have lower birth weights than others. Ask Nick K.! GBD may be estimating these outcomes directly? Current assumption is that they will have randomly sampled exposure. 
+
+- How should we handle averted stillbirths in our optimization objectives? Note that because stillbirths do not accumulate any DALYs, an objective to minimize DALYs could disincentivize averting stillbirths, which would be inconsistent with improving outcomes. 
+
+**Notes/reminders:**
+
+- BMGF would like to assume that those who take BEP also take MMS. This does not change our health impact model at all, but will change our costing assumptions (add product price of MMS to that of BEP).
+
+- The health systems team has not updated their iron supplementation in pregnancy coverage estimates from the values they provided for the IV iron simulation, so we will move forward with those estimates.
+
+- According to Will G. (GBD anemia modeler), our hemoglobin distribution is not exactly replicating the GBD anemia impairment prevalence because we were not using most-detailed location IDs. Notably, he mentioned that very small differences are expected to remain due to slight changes in covariate estimates between the time at which the hemoglobin/anemia modeling occurred and now.
+
+- We will remove background mortality from our pregnancy simulation so that simulants may only die due to maternal disorders.
+
 2.0 Model design
 ++++++++++++++++
 
