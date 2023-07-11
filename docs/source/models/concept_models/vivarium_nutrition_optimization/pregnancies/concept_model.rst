@@ -62,8 +62,6 @@ Documents that contain information specific to the overall model and the child s
 
 **Questions:**
 
-- Should we include background mortality among pregnant individuals? If we do, we may want to model maternal death while pregnant as a birth outcome for ease of common random numbers in the child sim. We are currently including background mortality as of model 0.0 (but it should be easy to exclude at a future date).
-
 - For stillbirths that become live births due to intervention impact, what should their LWBSG exposure be? Hypothetically near-stillbirths should have lower birth weights than others. Ask Nick K.! GBD may be estimating these outcomes directly? Current assumption is that they will have randomly sampled exposure. 
 
 - How should we handle averted stillbirths in our optimization objectives? Note that because stillbirths do not accumulate any DALYs, an objective to minimize DALYs could disincentivize averting stillbirths, which would be inconsistent with improving outcomes. 
@@ -75,6 +73,8 @@ Documents that contain information specific to the overall model and the child s
 - The health systems team has not updated their iron supplementation in pregnancy coverage estimates from the values they provided for the IV iron simulation, so we will move forward with those estimates.
 
 - According to Will G. (GBD anemia modeler), our hemoglobin distribution is not exactly replicating the GBD anemia impairment prevalence because we were not using most-detailed location IDs. Notably, he mentioned that very small differences are expected to remain due to slight changes in covariate estimates between the time at which the hemoglobin/anemia modeling occurred and now.
+
+- We will remove background mortality from our pregnancy simulation so that simulants may only die due to maternal disorders.
 
 2.0 Model design
 ++++++++++++++++
