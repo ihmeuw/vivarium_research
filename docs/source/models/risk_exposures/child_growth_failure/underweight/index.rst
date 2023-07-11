@@ -95,7 +95,7 @@ population risk exposure distributions that are conditional on
 With this strategy, each simulant will be initialized with a "propensity" for 
 child underweight that does not change throughout the duration of the 
 simulation. The propensity should be assigned according to a uniform 
-distribution between 0 and 1.This propensity will represent the simulant's 
+distribution between 0 and 1.  This propensity will represent the simulant's 
 risk exposure percentile and will be used to determine the simulant's child 
 underweight exposure value by comparing it to the child underweight risk 
 exposure distribution specific to the simulant's joint stunting and wasting 
