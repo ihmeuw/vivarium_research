@@ -119,7 +119,7 @@ Documents that contain information specific to the overall model and the child s
 |                     |causes <other_causes>`                               |(anemia). See note   |
 |                     |                                                     |regarding exclusion  |
 |                     |                                                     |of c366 below. Change|
-|                     |                                                     |from IV iron!
+|                     |                                                     |from IV iron!        |
 |                     +-----------------------------------------------------+---------------------+
 |                     |Removal of background mortality due to               |Change from IV iron  |
 |                     |other causes                                         |                     |
