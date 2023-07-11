@@ -117,7 +117,7 @@ these distributions were obtained can be found in the subsequent section.
   Note we are currently blocked by awaiting communication with the GBD CGF 
   modeling team
 
-With this strategy, child underweight may will dynamically update within a 
+With this strategy, child underweight will dynamically update within a 
 single age group in tandem with child wasting exposure changes and may also 
 update upon transition to a new age group when child stunting exposure may 
 change. Therefore, child underweight exposure in our simulation should be 
