@@ -102,7 +102,7 @@ Case definition
 
 Wasting, a sub-component indicator of child growth failure (CGF), is based on a 
 categorical definition using the WHO 2006 growth standards for children 0-59 
-months. Definitions are based on Z-cores from the growth standards, which were 
+months. Definitions are based on z-scores from the growth standards, which were 
 derived from an international reference population. Mild, moderate and severe 
 categorical prevalences were estimated for each of the three indicators. 
 Theoretical minimum risk exposure level (TMREL) for wasting was assigned to be 
