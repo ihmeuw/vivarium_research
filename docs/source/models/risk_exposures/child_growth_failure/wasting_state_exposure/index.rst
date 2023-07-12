@@ -177,7 +177,7 @@ models for these three causes will draw from the corresponding GBD 2019 models,
 as GBD 2021 is not yet complete at this time (July 2021), and will be subject to 
 updates and reruns. In addition, current scatters indicate that (unlike wasting 
 and PEM), LRI, diarrhea and measles have not undergone significant changes 
-between GBD rounds 2019 and 2020.
+between GBD rounds 2019 and 2021.
 
 Assumptions and Limitations
 ---------------------------
