@@ -177,7 +177,7 @@ in the appendix of the VEHSS diabetic retinopathy paper: [VEHSS_DR]_
 
 Because we are deviating from the language of the upstream research authors, it is
 a good idea to (concisely) justify why we think the original authors' language was inaccurate.
-In the NHANES example, full first sentence of the above quote was:
+In the NHANES example, the full first sentence of the above quote was:
 
 .. pull-quote::
   NHANES data report a variable named “gender,” but this reflects a survey question, “Is
