@@ -310,6 +310,8 @@ that follows we will detail how to calculate all the variables used.
 
 In terms of the following variables:
 
+Included malaria as additional affected cause, :math:`emr_c` updated to wasting category-specific :math:`emr_{ci}`
+
 .. list-table:: Variables for transition probabilities
    :widths: 10 10 10 10
    :header-rows: 1
@@ -320,8 +322,8 @@ In terms of the following variables:
      - Notes
    * - :math:`d_i`
      - Death probability out of wasting category :math:`i`
-     - :math:`1 - exp(-1 * (acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c) * timestep)`
-     - 
+     - :math:`1 - exp(-(acmr + (\sum_{c\in causes} emr_{ci} * prevalence_{ci} - csmr_c)) * timestep)` for causes in :ref:`c302/diarrheal diseases <diarrheal_diseases>`, :ref:`c322/lower respiratory infections <cause_lri>`, :ref:`c341/measles <cause_measles>`, malaria, and c387/protein energy malnutrition
+     - TODO: link malaria and PEM documents when ready
    * - :math:`f_i`
      - "Age-in" probability into :math:`cat_i`
      - Prevalence of wasting category i, pulled from GBD
