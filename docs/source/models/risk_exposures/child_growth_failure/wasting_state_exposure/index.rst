@@ -48,7 +48,9 @@ Wasting dynamic transition model (GBD 2021)
   :ref:`nutrition optimization simulation <2021_concept_model_vivarium_nutrition_optimization>`.
 
   Any changes to the wasting exposure modeling strategy from the version implemented
-  in the acute malnutrition simulation can be viewed in this PR (TODO: LINK APPROPRIATE PR).
+  in the acute malnutrition simulation can be viewed in this PR (TODO: LINK ADDITIONAL APPROPRIATE PRs).
+
+    - `vivarium_research PR#1254 <https://github.com/ihmeuw/vivarium_research/pull/1254>`_: updated wasting intervention parameters (from the Ethiopian ministry of health values used in the acute malnutrition project to the COMPAS trial values used in the nutrition optimization project)
 
   Also note that the protein energy malnutrition (PEM) risk-attributable cause model
   has been removed from this page and is instead available here: TODO: LINK PAGE.
