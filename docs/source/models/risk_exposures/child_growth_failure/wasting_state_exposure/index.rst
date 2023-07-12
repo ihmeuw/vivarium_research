@@ -125,7 +125,7 @@ WHO 2006 standard weight-for-height curve. This has not changed since GBD 2010.
 Exposure estimation
 -------------------
 
-In modeling CGF, all data types go into ST-GPR modeling. GBD has STGPR models 
+In modeling CGF, all data types go into ST-GPR modeling. GBD has ST-GPR models 
 for moderate, severe, and mean stunting, wasting, and underweight. The output 
 of these STGPR models is an estimate of moderate, severe, and mean stunting, 
 wasting, and underweight for all under 5 age groups, all locations, both sexes, 
