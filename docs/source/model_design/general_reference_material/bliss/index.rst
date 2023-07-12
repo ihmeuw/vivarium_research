@@ -175,6 +175,16 @@ in the appendix of the VEHSS diabetic retinopathy paper: [VEHSS_DR]_
   Hereafter, we refer to this variable as “sex/gender” to reflect
   this limitation.
 
+Because we are deviating from the language of the upstream research authors, it is
+a good idea to (concisely) justify why we think the original authors' language was inaccurate.
+In the NHANES example, full first sentence of the above quote was:
+
+.. pull-quote::
+  NHANES data report a variable named “gender,” but this reflects a survey question, “Is
+  {NAME} male or female?,” which only allowed binary responses, was only asked by the
+  interviewer if they hadn't already assumed the gender of the respondent, and could be
+  interpreted as asking about biological sex.
+
 2.4 GBD
 -------
 
