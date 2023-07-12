@@ -91,12 +91,6 @@ Pages related to the wasting risk exposure model include:
 | CGF   | Child growth failure composed of wasting|
 |       | stunging and underweight                |
 +-------+-----------------------------------------+
-| DD    | Diarrheal disease                       |
-+-------+-----------------------------------------+
-| LRI   | Lower respiratory tract infection       |
-+-------+-----------------------------------------+
-| MSLS  | Measles                                 |
-+-------+-----------------------------------------+
 | PEM   | Protein energy malnutrition             |
 +-------+-----------------------------------------+
 
