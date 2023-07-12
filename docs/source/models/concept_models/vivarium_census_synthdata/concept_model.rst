@@ -2729,9 +2729,7 @@ in January 2024.
   * - Mailing Address ZIP Code
     -
   * - Social Security Number (if present)
-    -
-  * - ITIN (if present)
-    -
+    - ITIN if no SSN present
   * - Income
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Employer ID
@@ -2766,24 +2764,8 @@ in January 2024.
     -
   * - Last name
     -
-  * - Mailing Address Street Number (blank for PO boxes)
-    -
-  * - Mailing Address Street Name (blank for PO boxes)
-    -
-  * - Mailing Address Unit (blank for PO boxes)
-    -
-  * - Mailing Address PO Box (blank for not PO boxes)
-    -
-  * - Mailing Address City
-    -
-  * - Mailing Address State
-    -
-  * - Mailing Address ZIP Code
-    -
   * - Social Security Number (if present)
-    -
-  * - ITIN (if present)
-    -
+    - ITIN if no SSN present
   * - Income
     - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Employer ID
@@ -2806,14 +2788,10 @@ in January 2024.
     - This columns through the end are to be included for each dependent on the tax filing, up to 4 dependents
   * - First name
     -
-  * - Middle initial
-    -
   * - Last name
     -
   * - Social Security Number (if present)
-    -
-  * - ITIN (if present)
-    -
+    - ITIN if no SSN present
 
 .. note::
 
