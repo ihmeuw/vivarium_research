@@ -55,7 +55,22 @@ If you have any questions or comments about the content on this page - please re
 contact us directly `on GitHub <https://github.com/ihmeuw/vivarium_research/issues?q=is%3Aopen+is%3Aissue+label%3Abliss>`_ or anonymously 
 on our `team HUB page <https://hub.ihme.washington.edu/display/COS/BLISS%3A+Building+Language+Inclusivity+into+Simulation+Science>`_.  
 
-.. image:: ../what_this_is_visual.jpg 
+. list-table:: **What this is vs. What this isn't**
+   :header-rows: 1
+
+   * - This is...
+     - This isn't...
+   * - A ‘living’ document which will be regularly reviewed and updated to reflect evolving language and research practices. 
+     - An immutable document that should be treated as all-knowing and final.
+   * - An accessible guide intended for everyone’s use, regardless of your familiarity with inclusive language practices. 
+     - An intimidating guide that is full of jargon and can only be used by DEI experts. 
+   * - A safe space for people to make mistakes, ask questions, and learn new things! 
+     - A space where people need to police what they are saying or how they are speaking for fear of judgment.
+   * - Using our voice on the Simulation Science team to platform the terms we find most accurate and inclusive. 
+     - Putting words into other people’s mouths (such as changing the gendered language in external data sources). 
+   * - Gender inclusive.  
+     - Gender neutral. We recognize that there are a variety of reasons why it is important to use person-first, inclusive language that does not invisibilize women in our conversations about public health. 
+
 
 1.1 Guiding Principles
 ----------------------
