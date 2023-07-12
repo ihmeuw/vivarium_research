@@ -60,11 +60,11 @@ Overview
 ++++++++
 
 This page contains information pertaining to the child wasting risk exposure model. 
-GBD stratifies wasting 
-into four categories: TMREL, mild, moderate, and severe wasting. All PEM cases 
-are attributed to moderate and severe wasting, making PEM a PAF-of-1 model. 
-Under the GBD framework, wasting is additionally a risk for measles, diarrheal diseases,
-and lower respiratory infections. These relationships are detailed under a risk effects page for wasting.
+GBD stratifies wasting into four categories: TMREL, mild, moderate, and severe wasting. 
+Pages related to the wasting risk exposure model include:
+
+- Protein energy malnutrition risk attributable cause
+- Wasting risk effects
 
  For background information on child wasting, see the :ref:`2020 wasting/PEM model document <2020_risk_exposure_wasting_state_exposure>`.
 
@@ -121,11 +121,10 @@ WHO 2006 standard weight-for-height curve. This has not changed since GBD 2010.
 | SAM   |  < -3 Z score                        |
 +-------+--------------------------------------+
 
-
 Exposure estimation
 -------------------
 
-In modeling CGF, all data types go into ST-GPR modeling. GBD has STGPR models 
+In modeling CGF, all data types go into ST-GPR modeling. GBD has ST-GPR models 
 for moderate, severe, and mean stunting, wasting, and underweight. The output 
 of these STGPR models is an estimate of moderate, severe, and mean stunting, 
 wasting, and underweight for all under 5 age groups, all locations, both sexes, 
@@ -145,12 +144,6 @@ the curve for this optimized curve.
 Note that the z-score ranges from -7 to +7. If we limit ourselves to Z-scores 
 between -4 and +4, we will be excluding a lot of kids.
 
-.. note::
-  In the paper that Ryan (GBD modeller for CGF and LWBSG) is working on right 
-  now, he presents the first results ever for "extreme" stunting which we define 
-  as kids with stunting Z scores below -4. For Ethiopia, that's about 7% of kids. 
-  So it's non-trivial!
-
 CGF burden does not start until *after* neonatal age groups (from 1mo onwards). 
 In the neonatal age groups (0-1mo), burden comes from LBWSG. See risk effects 
 page for details on model structure. The literature on interventions for wasting 
@@ -168,16 +161,15 @@ In a given timestep a simulant will either stay put, transition to an adjacent
 wasting category, or die. In this case of "CAT 1: severe wasting", simulants can 
 also transition to "CAT 3: Mild wasting" via a treatment arrow, t1.
 
-We will use the GBD 2020 wasting and PEM models to inform this model, in 
+We will use the GBD 2021 wasting and PEM models to inform this model, in 
 addition to data found in the literature. We will derive the remaining 
 transition rates from a Markov chain model, described in further detail below. 
 Simulants in each wasting category will receive a corresponding relative risk 
-for diarrheal diseases, measles, lower respiratory infections. The vivarium 
-models for these three causes will draw from the corresponding GBD 2019 models, 
-as GBD 2020 is not yet complete at this time (July 2021), and will be subject to 
-updates and reruns. In addition, current scatters indicate that (unlike wasting 
-and PEM), LRI, diarrhea and measles have not undergone significant changes 
-between GBD rounds 2019 and 2020.
+for diarrheal diseases, measles, lower respiratory infections. 
+
+For wave I of the :ref:`nutrition optimization model <>`, the vivarium 
+models for these affected causes will draw from the corresponding GBD 2019 models
+until we update the entire simulation to GBD 2021 results.
 
 Assumptions and Limitations
 ---------------------------
@@ -200,64 +192,30 @@ Input data
 GBD and literature sources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
-  @Ninicorn will you help fill out this table? i.e. the sources for the 
-  remission rates
-
-
 .. list-table:: Wasting model input data sources
    :widths: 15 15
    :header-rows: 1
 
    * - Variable
      - Source
-   * - TMREL prevalence
+   * - Wasting state prevalence
      - GBD wasting model
-   * - Mild wasting prevalence
-     - GBD wasting model
-   * - MAM prevalence
-     - GBD wasting model
-   * - SAM prevalence
-     - GBD wasting model
-   * - TMREL mortality rate
-     - Derived from GBD
-   * - Mild wasting mortality rate
-     - Derived from GBD
-   * - MAM mortality rate
-     - Derived from GBD
-   * - SAM mortality rate
-     - Derived from GBD
-   * - Incidence of mild wasting from TMREL
+   * - Wasting state mortality rates
+     - Derived from GBD, with CGF correlation from DHS
+   * - Transition rates from severe to more mild states
+     - Derived from literature on recovery
+   * - Transition rates from mild to more severe states
      - Derived using a Markov model 
-   * - Incidence of MAM from mild wasting
-     - Derived using a Markov model 
-   * - Incidence of SAM from MAM
-     - Derived using a Markov model 
-   * - Remission from mild wasting to TMREL
-     - 
-   * - Remission from MAM to mild wasting
-     - 
-   * - Remission from SAM to MAM
-     - 
-   * - Treated remission from SAM to mild wasting
-     - 
-   * - Probability of staying in TMREL
-     - Derived using a Markov model 
-   * - Probability of staying in Mild wasting
-     - Derived using a Markov model 
-   * - Probability of staying in MAM
-     - Derived using a Markov model 
-   * - Probability of staying in SAM
-     - Derived using a Markov model
-
 
 Deriving wasting transition probabilities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Wasting model
-^^^^^^^^^^^^^
+Markov derivation
+^^^^^^^^^^^^^^^^^
 
 .. important::
+
+  **For wave I of the nutrition optimization model**
 
   We will model wasting transitions and risk effects **only** among simulants at least six months of age. Simulants should be initialized into a wasting model state at birth with a birth prevalence equal to the wasting risk exposure among the 1-5 month age group (age_group_id=388, or the postneonatal age_group_id=4 if using GBD 2019 instead of GBD 2020). 
 
@@ -274,7 +232,7 @@ Because we need simulants to die at a higher rate out of CAT 1 than CAT 2, 3, or
 the TMREL, it is necessary to include death to correctly derive our transition 
 rates. Thus we allow simulants to die into CAT 0. However, because we need to 
 assume equilibrium of our system over time, we allow simulants to "age in" to 
-CATs 1-4, out of CAT 0. We thus set the transition probabilies :math:`f_i` equal 
+CATs 1-4, from CAT 0. We thus set the transition probabilies :math:`f_i` equal 
 to the prevalence of the four wasting categories, obtained from GBD. 
 
 It is important here to note first that :math:`f_i` don't represent fertility rates: 
@@ -285,7 +243,11 @@ probabilities between the different wasting categories. However, the final
 Vivarium model of wasting will not include a reincarnation pool.
 
 Here we include equations for the transition probabilities, and in the section 
-that follows we will detail how to calculate all the variables used
+that follows we will detail how to calculate all the variables used.
+
+.. todo::
+
+  Investigate r4 parameter value... confirm if we want to keep the same
 
 .. list-table:: Wasting transition probability equations
    :widths: 5 15 10 10
@@ -310,11 +272,11 @@ that follows we will detail how to calculate all the variables used
    * - r2
      - 1 - e^(-(1-sam_tx_coverage*sam_tx_efficacy)*(1/time_to_sam_ux_recovery))
      - Daily probability of remission into cat 2 from cat 1 (untreated)
-     - Nicole's calculations; also referred to as r2ux (get lit source!)
+     - Nicole's calculations; also referred to as r2ux 
    * - r3
      - 1 - e^(-(mam_tx_coverage*mam_tx_efficacy * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage*mam_tx_efficacy)*(1/time_to_mam_ux_recovery)))
-     - Daily probability of remission from cat 2 into cat 3 (treated or untreated)
-     - Nicole's calculations (get lit source!)
+     - Daily probability of remission from cat 2 into cat 3 (average of treated and untreated combined)
+     - Nicole's calculations
    * - r4
      - 1 - e^{-rate}. 6-12 months: rate = 0.006140 (SD: 0.003015). 1-4 years: rate = 0.005043  (SD: 0.002428). For each rate parameter, use truncated normal distribution of uncertainty with lower bound equal to zero and upper bound equal to 25 standard deviations above the mean (25 standard deviations above the mean was determined to be the upper limit of the python distribution function)
      - Daily probability of remission from cat 3 into cat 4
@@ -322,7 +284,7 @@ that follows we will detail how to calculate all the variables used
    * - t1
      - 1 - e^(-sam_tx_coverage*sam_tx_efficacy * (1/time_to_sam_tx_recovery))
      - Daily probability of remission into cat 3 from cat 1 (treated)
-     - Nicole's calculations (get lit source!)
+     - Nicole's calculations 
    * - s1
      - -r2 - t1 + ap2*d2/ap1 + ap3*d3/ap1 + ap4*d4/ap1 + (-ap0 + ap1)/ap1
      - Daily probability of staying in cat 1
@@ -343,6 +305,10 @@ that follows we will detail how to calculate all the variables used
 
 in terms of the following variables:
 
+.. todo::
+
+  1. Update baseline parameter links to COMPAS trial wasting treatment page
+
 .. list-table:: Variables for transition probabilities
    :widths: 10 10 10 10
    :header-rows: 1
@@ -361,7 +327,7 @@ in terms of the following variables:
      - These probabilities were chosen to maintain equilibrium of our system
    * - :math:`ap_0`
      - Adjusted prevalence of :math:`cat_0` (the reincarnation pool)
-     - 1 - exp(-acmr * 1 / 365)
+     - 1 - exp(-acmr / 365)
      - We set this equal to the number of simulants that die each time step
    * - :math:`ap_i` for :math:`i\in \{1,2,3,4\}`
      - Adjusted prevalence of :math:`cat_i`
@@ -404,6 +370,18 @@ in terms of the following variables:
      - 1
      -
 
+.. todo::
+
+  1. Incidence_ci will need to account for stunting and underweight correlation too
+    
+    Will probably be best to provide a "joint CGF" RR calculated from correlation notebooks here
+
+  2. Update PAF data... will need to come from correlation calculations rather than calculation listed here
+
+  3. Need to make duration specific to each wasting category and a function of both remission rate and category-specific EMR
+
+  4. EMR needs to be affected by category-specific CGF RRs
+
 .. list-table:: Calculations for variables in transition equations
    :widths: 6 10 10
    :header-rows: 1
@@ -442,10 +420,10 @@ in terms of the following variables:
      - Cause-specific mortality rate of cause c
      - Pulled from GBD
 
-We now detail how the above wasting probability transition equations were derived.
+Derivation proofs
+'''''''''''''''''''
 
-.. todo::
-  Consider adding all code for calculating above eqns.
+We now detail how the above wasting probability transition equations were derived.
 
 
 We solve our transition probabilities using a 
@@ -609,13 +587,12 @@ Rows of the P matrix sums to 1
   result_1 = sym.solve(A1 * x1 - b1, x1)
 
 
-Wasting x Disease model
-^^^^^^^^^^^^^^^^^^^^^^^
-
-.. image:: wasting_state_2x4.svg
-
 Data Description Tables
 +++++++++++++++++++++++
+
+.. todo::
+
+  Will want to update this strategy to be static propensity model rather than birth prevalence of 5 month olds so that we can have LBWSG affect wasting exposure for those under 6 months of age even for wave 1 in which we don't have wasting transitions for this group yet (this should be similar to how we did it for IV iron)
 
 .. list-table:: Wasting State Data
    :widths: 5 10 10 20
@@ -625,7 +602,7 @@ Data Description Tables
      - Measure
      - Value
      - Notes
-   * - TMREL, MOD, MAM, SAM
+   * - TMREL, MILD, MAM, SAM
      - birth prevalence
      - :math:`prevalence_{240_{cat-1-4}}`
      - Use prevalence of age_group_id = 388 (1 to 5 months)
@@ -642,32 +619,6 @@ Data Description Tables
                     status='best',
                     location_id = [179],
                     decomp_step = 'iterative')
-
-.. list-table:: Wasting State Data
-   :widths: 5 10 10 20
-   :header-rows: 1
-  
-   * - State
-     - Measure
-     - Value
-     - Notes
-   * - MAM
-     - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in xt{MAM}} \scriptstyle{\text{prevalence}_s}}}`
-     - disability weight for MAM
-   * - SAM
-     - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{SAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{SAM}} \scriptstyle{\text{prevalence}_s}}}`
-     - disability weight for SAM
-   * - MAM & SAM 
-     - excess mortality 
-     - :math:`\frac{\text{deaths_c387}}{\text{population} \times \text{prevalence_c387}}`
-     - death counts come from codecorrect
-   * - All
-     - cause specific mortality
-     - :math:`\frac{\text{deaths_c387}}{\text{population}}`
-     - death counts come from codecorrect
-
 
 .. list-table:: Wasting Restrictions 2020
    :widths: 10 10 20
@@ -705,6 +656,11 @@ Data Description Tables
   2y-4y = 34    #2019 it was 5 = 1-5
 
 
+
+.. todo::
+
+  Replace this section with a link to custom-calculated correlated PAFs for all CGF
+
 As we are building this model before the completion of GBD 2020, we 
 will need to calculate the PAFs ourselves, using the following equation:
 
@@ -728,7 +684,6 @@ will need to calculate the PAFs ourselves, using the following equation:
 
 Note the RRs should be pulled as follows:
 
-
 .. code-block:: python
 
   from get_draws.api import get_draws
@@ -736,7 +691,6 @@ Note the RRs should be pulled as follows:
     gbd_id_type='rei_id',
     gbd_id=240,
     source='rr',
-    location_id=179,
     sex_id=[1,2],
     age_group_id=[2, 3, 388, 389, 34],
     decomp_step='iterative',
