@@ -55,6 +55,8 @@ If you have any questions or comments about the content on this page - please re
 contact us directly `on GitHub <https://github.com/ihmeuw/vivarium_research/issues?q=is%3Aopen+is%3Aissue+label%3Abliss>`_ or anonymously 
 on our `team HUB page <https://hub.ihme.washington.edu/display/COS/BLISS%3A+Building+Language+Inclusivity+into+Simulation+Science>`_.  
 
+.. image:: ../what_this_is_visual.jpg 
+
 1.1 Guiding Principles
 ----------------------
 In this section, we will outline the guiding principles of BLISS.
