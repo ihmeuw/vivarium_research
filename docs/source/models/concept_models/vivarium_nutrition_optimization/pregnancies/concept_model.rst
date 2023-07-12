@@ -95,58 +95,63 @@ Documents that contain information specific to the overall model and the child s
 
   Unless specifically noted, only change from the IV iron implementation is the update from GBD 2019 to GBD 2021 data
 
-+---------------------+-------------------------------------------+---------------------+
-| Category            | Model                                     | Note                |
-+=====================+===========================================+=====================+
-|Demography           |:ref:`Population structure at              |Change from IV iron  |
-|                     |initialization                             |due to closed cohort |
-|                     |<other_models_pregnancy_demography>`       |                     |
-|                     +-------------------------------------------+                     |
-|                     |:ref:`Pregnancy model (closed cohort)      |                     |
-|                     |<other_models_pregnancy_closed_cohort>`    |                     |
-+---------------------+-------------------------------------------+---------------------+
-|Risk exposure        |Hemoglobin/anemia                          |                     |
-|                     +-------------------------------------------+---------------------+
-|                     |Pre-pregnancy/first trimester BMI          |                     |
-|                     +-------------------------------------------+---------------------+
-|                     |Birth weight and gestational age           |                     |
-+---------------------+-------------------------------------------+---------------------+
-|Risk correlation     |Hgb/BMI/LBWSG                              |                     |
-+---------------------+-------------------------------------------+---------------------+
-|Risk effects         |Hemoglobin, including effects on:          |Do not include effect|
-|                     | - Maternal disorders                      |on birth outcomes    |
-|                     | - Maternal hemorrhage incidence           |(stillbirth). Change |
-|                     |                                           |from IV iron         |
-|                     +-------------------------------------------+---------------------+
-|                     |:ref:`Maternal hemorrhage effect on        |                     |
-|                     |hemoglobin                                 |                     |
-|                     |<2019_risk_effect_maternal_hemorrhage>`    |                     |
-+---------------------+-------------------------------------------+---------------------+
-|Causes               |:ref:`Maternal disorders                   |                     |
-|                     |<2021_cause_maternal_disorders>`           |                     |
-|                     +-------------------------------------------+---------------------+
-|                     |:ref:`Maternal hemorrhage incidence        |                     |
-|                     |<2019_cause_maternal_hemorrhage_incidence>`|                     |
-|                     +-------------------------------------------+---------------------+
-|                     |:ref:`Background morbidity due to other    |Modeled causes: r192 |
-|                     |causes <other_causes>`                     |(anemia). See note   |
-|                     |                                           |regarding exclusion  |
-|                     |                                           |of c366 below.       |
-|                     |                                           |Change from          |
-|                     |                                           |IV iron!             |
-|                     +-------------------------------------------+---------------------+
-|                     |Removal of background mortality due to     |Change from IV iron  |
-|                     |other causes                               |                     |
-+---------------------+-------------------------------------------+---------------------+
-|Interventions        |:ref:`Antenatal supplementation, including |Change from IV iron! |
-|                     |IFA, MMS, and BEP and their effects        |New effects on       |
-|                     |on antenatal hemoglobin, LBWSG, and        |gestational age and  |
-|                     |birth outcomes                             |birth outcomes (no   |
-|                     |<maternal_supplementation_intervention>`   |changes to hemoglobin|
-|                     |                                           |effects). Also,      |
-|                     |                                           |coverage algorithm is|
-|                     |                                           |updated              |
-+---------------------+-------------------------------------------+---------------------+
++---------------------+-----------------------------------------------------+---------------------+
+| Category            | Model                                               | Note                |
++=====================+=====================================================+=====================+
+|Demography           |:ref:`Population structure at                        |Change from IV iron  |
+|                     |initialization                                       |due to closed cohort |
+|                     |<other_models_pregnancy_demography>`                 |                     |
+|                     +-----------------------------------------------------+                     |
+|                     |:ref:`Pregnancy model (closed cohort)                |                     |
+|                     |<other_models_pregnancy_closed_cohort>`              |                     |
++---------------------+-----------------------------------------------------+---------------------+
+|Risk exposure        |:ref:`Hemoglobin/anemia                              |Wave II update to    |
+|                     |<2019_hemoglobin_model>`                             |most detailed locs.  |
+|                     +-----------------------------------------------------+---------------------+
+|                     |:ref:`Pre-pregnancy/first trimester BMI              |Will need custom data|
+|                     |<2019_risk_exposure_maternal_bmi_hgb>`               |update for 2021 (Ali)|
+|                     +-----------------------------------------------------+---------------------+
+|                     |:ref:`Birth weight and gestational age               |                     |
+|                     |<2019_risk_exposure_lbwsg>`                          |                     |
++---------------------+-----------------------------------------------------+---------------------+
+|Risk correlation     |:ref:`Hgb/BMI/LBWSG                                  |Will need custom data|
+|                     |<2019_risk_correlation_maternal_bmi_hgb_birthweight>`|update for 2021 (Ali)|
++---------------------+-----------------------------------------------------+---------------------+
+|Risk effects         |:ref:`Hemoglobin<2019_risk_effect_iron_deficiency>`  |Do not include effect|
+|                     |, including effects on (1) maternal disorders, and   |on birth outcomes    |
+|                     |(2) maternal hemorrhage incidence                    |(stillbirth), change |
+|                     |                                                     |from IV iron. Will   |
+|                     |                                                     |need custom data     |
+|                     |                                                     |update for 2021 (Ali)|
+|                     +-----------------------------------------------------+---------------------+
+|                     |:ref:`Maternal hemorrhage effect on                  |                     |
+|                     |hemoglobin                                           |                     |
+|                     |<2019_risk_effect_maternal_hemorrhage>`              |                     |
++---------------------+-----------------------------------------------------+---------------------+
+|Causes               |:ref:`Maternal disorders                             |                     |
+|                     |<2021_cause_maternal_disorders>`                     |                     |
+|                     +-----------------------------------------------------+---------------------+
+|                     |:ref:`Maternal hemorrhage incidence                  |                     |
+|                     |<2019_cause_maternal_hemorrhage_incidence>`          |                     |
+|                     +-----------------------------------------------------+---------------------+
+|                     |:ref:`Background morbidity due to other              |Modeled causes: r192 |
+|                     |causes <other_causes>`                               |(anemia). See note   |
+|                     |                                                     |regarding exclusion  |
+|                     |                                                     |of c366 below. Change|
+|                     |                                                     |from IV iron!        |
+|                     +-----------------------------------------------------+---------------------+
+|                     |Removal of background mortality due to               |Change from IV iron  |
+|                     |other causes                                         |                     |
++---------------------+-----------------------------------------------------+---------------------+
+|Interventions        |:ref:`Antenatal supplementation, including           |Change from IV iron! |
+|                     |IFA, MMS, and BEP and their effects                  |New effects on       |
+|                     |on antenatal hemoglobin, LBWSG, and                  |gestational age and  |
+|                     |birth outcomes                                       |birth outcomes (no   |
+|                     |<maternal_supplementation_intervention>`             |changes to hemoglobin|
+|                     |                                                     |effects). Also,      |
+|                     |                                                     |coverage algorithm is|
+|                     |                                                     |updated              |
++---------------------+-----------------------------------------------------+---------------------+
 
 .. list-table:: Wave I outstanding tasks
   :header-rows: 1
@@ -158,13 +163,13 @@ Documents that contain information specific to the overall model and the child s
     - Note
   * - Model builds 0.0 through 1
     - .
-    - Docs ready, will need V&V (Ali)
-    - In progress (Patrick/Steve)
+    - Done! (Ali)
+    - Done! (Patrick/Steve)
     - New content from IV iron
   * - Model builds 2-6
     - .
     - Docs ready, will need V&V (Ali)
-    - Patrick/Steve
+    - In progress (Patrick/Steve)
     - No new content from IV iron (except one exclusion)
   * - Model build 7
     - .
@@ -185,9 +190,14 @@ Documents that contain information specific to the overall model and the child s
     - RT person
     - ST person
     - Note
+  * - Update hemoglobin distribution to most detailed locations
+    - 
+    - Needs documentation (Ali)
+    - Patrick/Steve
+    -
   * - General GBD 2021 update
-    - Ali blocked by hemoglobin distribution questions, team blocked by GBD timeline
-    - Ali
+    - Blocked by GBD timeline
+    - Ali (needs custom data updates for hemoglobin)
     - Patrick/Steve
     - 
   * - Background morbidity
@@ -195,6 +205,11 @@ Documents that contain information specific to the overall model and the child s
     - Ali
     - Patrick/Steve
     - Bonus task, not necessary for success
+  * - Production runs
+    - Awaiting completion of above tasks
+    - Ali
+    - Patrick/Steve
+    - 
 
 2.3 Default specifications
 --------------------------
@@ -311,9 +326,11 @@ Specific outputs for specific models are specified in the following section.
 
   Unless otherwise specified, all maternal outputs should be stratified by maternal age group
 
-.. todo::
+.. note::
 
-  Determine which model we will plan to remove mortality due to "other causes" and add to V&V plan
+  Models 2.0 through 6.0 do not contain any updates relative to the IV iron implementation (with the exception of the removal of the hemoglobin risk effect on birth outcomes/stillbirths). These model runs may be collapsed into fewer submodels if convenient for implementation. 
+
+  If this is done, model output requests should be updated. 
 
 .. list-table:: Model run requests
   :header-rows: 1
@@ -375,7 +392,7 @@ Specific outputs for specific models are specified in the following section.
     - Live and still births with maternal_ids and LBWSG exposures
     - 
   * - 2.0
-    - Maternal disorders and maternal hemorrhage cause models
+    - Maternal disorders and maternal hemorrhage cause models, removal of background mortality
     - Baseline
     - None
     - * Deaths
@@ -517,7 +534,7 @@ Specific outputs for specific models are specified in the following section.
       * Check that LBWSG exposure in child outputs verifies to GBD exposure distribution
     - Looks good! `Model 1.2 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.2.ipynb>`. Noted that infant sex should be added to child output data moving forward.
   * - 2.0
-    - Verify incident and fatal maternal disorder and maternal hemorrhage (incident only) rates
+    - Verify incident and fatal maternal disorder and maternal hemorrhage (incident only) rates as well as YLDs, confirm removal of background mortality
     - 
 
 .. list-table:: Outstanding V&V issues
