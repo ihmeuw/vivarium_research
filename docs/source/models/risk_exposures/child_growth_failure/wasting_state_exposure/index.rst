@@ -311,64 +311,78 @@ that follows we will detail how to calculate all the variables used.
 In terms of the following variables:
 
 .. list-table:: Variables for transition probabilities
-   :widths: 10 10 10 10
+   :widths: 10 10 10 10 10
    :header-rows: 1
 
    * - Variable
      - Description
      - Equation
      - Notes
+     - Update
    * - :math:`d_i`
      - Death probability out of wasting category :math:`i`
      - :math:`1 - exp(-1 * (acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c) * timestep)`
+     - 
      - 
    * - :math:`f_i`
      - "Age-in" probability into :math:`cat_i`
      - Prevalence of wasting category i, pulled from GBD
      - These probabilities were chosen to maintain equilibrium of our system
+     -
    * - :math:`ap_0`
      - Adjusted prevalence of :math:`cat_0` (the reincarnation pool)
      - 1 - exp(-acmr / 365)
      - We set this equal to the number of simulants that die each time step
+     - 
    * - :math:`ap_i` for :math:`i\in \{1,2,3,4\}`
      - Adjusted prevalence of :math:`cat_i`
      - :math:`f_i/(ap_0 + 1)`
      - All category "prevalences" are scaled down, such that the prevalence of cat 0 (the reincarnation pool) and the prevalences of the wasting categories sum to 1
+     - 
    * - mam_tx_coverage
      - Proportion of MAM (CAT 2) cases that have treatment coverage
      - :math:`C_{MAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
      - Baseline scenario value
+     - Parameter value update
    * - sam_tx_coverage
      - Proportion of SAM (CAT 1) cases that have treatment coverage
      - :math:`C_{SAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
      - Baseline scenario value
+     - Parameter value update
    * - sam_tx_efficacy
      - Proportion of children treated for SAM who successfully respond to treatment
      - :math:`E_{SAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
      - Baseline scenario value
+     - Parameter value update
    * - mam_tx_efficacy
      - Proportion of children treated for MAM who successfully respond to treatment
      - :math:`E_{MAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
      - Baseline scenario value
+     - Parameter value update
    * - time_to_mam_ux_recovery
      - Without treatment or death, average days spent in MAM before recovery
      - :math:`365 / r_\text{MAM,ux}` 
      - :math:`r_\text{MAM,ux}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
+     - Parameter value update
    * - time_to_mam_tx_recovery
      - With treatment and without death, average days spent in MAM before recovery
      - :math:`365 / r_\text{MAM,tx}`
      - :math:`r_\text{MAM,tx}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
+     - Parameter value update
    * - time_to_sam_ux_recovery
      - Without treatment or death, average days spent in SAM before recovery
      - :math:`365 / r_{SAM,ux}`
      - :math:`r_\text{SAM,ux}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>` 
+     - Parameter value update
    * - time_to_sam_tx_recovery
      - With treatment and without death, average days spent in SAM before recovery
      - :math:`365 / r_{SAM,tx}`
      - :math:`r_\text{SAM,tx}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>` 
+     - Parameter value update
    * - time_step
      - Scalar time step conversion to days
      - 1
+     -
      -
 
 .. todo::
