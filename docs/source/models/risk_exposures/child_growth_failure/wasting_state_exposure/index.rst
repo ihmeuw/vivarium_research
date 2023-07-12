@@ -168,7 +168,7 @@ In a given timestep a simulant will either stay put, transition to an adjacent
 wasting category, or die. In this case of "CAT 1: severe wasting", simulants can 
 also transition to "CAT 3: Mild wasting" via a treatment arrow, t1.
 
-We will use the GBD 2020 wasting and PEM models to inform this model, in 
+We will use the GBD 2021 wasting and PEM models to inform this model, in 
 addition to data found in the literature. We will derive the remaining 
 transition rates from a Markov chain model, described in further detail below. 
 Simulants in each wasting category will receive a corresponding relative risk 
