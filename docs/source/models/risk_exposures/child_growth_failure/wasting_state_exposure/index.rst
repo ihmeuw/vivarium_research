@@ -39,6 +39,20 @@
 Wasting dynamic transition model (GBD 2021)
 =====================================================
 
+.. note::
+
+  This page has been adapted from the :ref:`2020 wasting/PEM model document <2020_risk_exposure_wasting_state_exposure>`
+  used in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
+
+  This adaptation is intended for use in the 
+  :ref:`nutrition optimization simulation <2021_concept_model_vivarium_nutrition_optimization>`.
+
+  Any changes to the wasting exposure modeling strategy from the version implemented
+  in the acute malnutrition simulation can be viewed in this PR (TODO: LINK APPROPRIATE PR).
+
+  Also note that the protein energy malnutrition (PEM) risk-attributable cause model
+  has been removed from this page and is instead available here: TODO: LINK PAGE.
+
 .. contents::
   :local:
 
