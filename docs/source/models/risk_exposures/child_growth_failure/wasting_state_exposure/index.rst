@@ -52,6 +52,8 @@ are attributed to moderate and severe wasting, making PEM a PAF-of-1 model.
 Under the GBD framework, wasting is additionally a risk for measles, diarrheal diseases,
  and lower respiratory infections. These relationships are detailed under a risk effects page for wasting.
 
+ For background information on child wasting, see the :ref:`2020 wasting/PEM model document <2020_risk_exposure_wasting_state_exposure>`.
+
 .. todo::
   Link to future PEM page and to risk effects doc
 
@@ -77,48 +79,6 @@ Under the GBD framework, wasting is additionally a risk for measles, diarrheal d
 +-------+-----------------------------------------+
 | PEM   | Protein energy malnutrition             |
 +-------+-----------------------------------------+
-
-
-Wasting background
-++++++++++++++++++
-
-Acute Malnutrition
-------------------
-Malnutrition is an imbalance between the body’s needs and its use and intake of
-nutrients. The imbalance can be caused by poor or lacking diet, poor hygiene, 
-disease states, lack of knowledge, and cultural practices, among others. 
-Underweight, stunting, wasting, obesity, and vitamin and mineral deficiencies 
-are all forms of malnutrition. 
-
-**Acute malnutrition (AM)**, also referred to as wasting, is recent rapid weight 
-loss or a failure to gain weight that results from illness, lack of appropriate
-foods, or other underlying causes. Wasting is mostly typically classified in 
-terms of a weight-for-height z-score. Other forms of under or malnutrition 
-include stunting (low height for age), underweight (low weight for age), and 
-micronutrient deficiencies (a lack of key vitamins or minerals).
-
-For an individual, AM is not a chronic condition: children with AM either 
-recover or die and recovered children can relapse to AM. It is measured in 
-weight-for-height z-scores (WFH) which is a comparison of a child’s WFH from 
-the median value of the global reference population. A z-score between -2 to 
--3 indicates moderate acute malnutrition (MAM) and a z-score below -3 indicate 
-severe acute malnutrition (SAM). WHZ z-scores range from -7 to +7. Although MAM 
-is less severe, it affects a greater number of children and is associated with 
-more nutrition-related deaths than SAM. 
-
-Implications
-------------
-Children with acute malnutrition are at greater risk of death from diarrhea and 
-other infectious diseases than well-nourished children. They also face greater 
-risk of morbidity from infectious diseases and delayed physical and cognitive 
-development. AM tends to peak during seasonal hunger, disease outbreaks, or 
-during food security ‘shocks’ (e.g. economic or climatic crises) and stresses 
-including humanitarian crises. However, AM is a problem that not only occurs in 
-emergencies, but also can be endemic in development contexts. When untreated, 
-MAM can deteriorate to SAM and possible death. Furthermore, evidence is emerging 
-that repeated episodes of MAM can have a significant impact on stunting; 
-prevention of wasting could potentially increase height in children. 
-
 
 Wasting Exposure in GBD 2020
 ++++++++++++++++++++++++++++
@@ -147,19 +107,6 @@ WHO 2006 standard weight-for-height curve. This has not changed since GBD 2010.
 | SAM   |  < -3 Z score                        |
 +-------+--------------------------------------+
 
-Input data
-----------
-
-Two types of input data are used in CGF estimation:  
-
-  1. **Tabulated report data**. This data does not report individual 
-  anthropometric measurements. It only reports the prevalence of forms of CGF in 
-  a sample size. For example, this data would may report a 15% prevalence of
-  moderate stunting out of a nationally representative sample of 5,000 children.
-
-  2. **Microdata**. This data does have individual anthropometric measurements. 
-  From these datasources, GBD can see entire distributions of CGF, while also 
-  collapsing them down to point prevalences like moderate and severe CGF. 
 
 Exposure estimation
 -------------------
