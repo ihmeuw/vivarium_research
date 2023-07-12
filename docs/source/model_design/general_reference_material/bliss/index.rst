@@ -163,7 +163,7 @@ This promotes clarity and reproducibility by ensuring that readers can find the
 data we used.
 
 For example, the first time we mentioned the sex/gender variable of the National Health and Nutrition Examination Survey (NHANES)
-in the appendix of the VEHSS diabetic retinopathy paper<cite>:
+in the appendix of the VEHSS diabetic retinopathy paper: [VEHSS_DR]_
 
 .. pull-quote::
 
@@ -212,6 +212,9 @@ DR paper; IV Iron communications and IDM Symposium)
 
 5.0 References
 ++++++++++++++
+
+.. [VEHSS_DR] Lundeen EA, Burke-Conte Z, Rein DB, et al. Prevalence of Diabetic Retinopathy in the US in 2021. JAMA Ophthalmol. Published online June 15, 2023. doi:10.1001/jamaophthalmol.2023.2289, `online version <https://jamanetwork.com/journals/jamaophthalmology/fullarticle/2806093>`_
+
 .. [Bauer, 2022]
     `Sex and Gender Multidimensionality in Epidemiologic Research.` American Journal of Epidemiology, Oxford University Press, 30 September 2022, https://academic.oup.com/aje/article/192/1/122/6747669. 
 
