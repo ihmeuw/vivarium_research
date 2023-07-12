@@ -66,6 +66,10 @@ Pages related to the wasting risk exposure model include:
 - Protein energy malnutrition risk attributable cause
 - Wasting risk effects
 
+.. todo::
+
+  Include links to above referenced pages
+
  For background information on child wasting, see the :ref:`2020 wasting/PEM model document <2020_risk_exposure_wasting_state_exposure>`.
 
 .. todo::
@@ -167,7 +171,7 @@ transition rates from a Markov chain model, described in further detail below.
 Simulants in each wasting category will receive a corresponding relative risk 
 for diarrheal diseases, measles, lower respiratory infections. 
 
-For wave I of the :ref:`nutrition optimization model <>`, the vivarium 
+For wave I of the :ref:`nutrition optimization model <2021_concept_model_vivarium_nutrition_optimization>`, the vivarium 
 models for these affected causes will draw from the corresponding GBD 2019 models
 until we update the entire simulation to GBD 2021 results.
 
@@ -217,7 +221,7 @@ Markov derivation
 
   **For wave I of the nutrition optimization model**
 
-  We will model wasting transitions and risk effects **only** among simulants at least six months of age. Simulants should be initialized into a wasting model state at birth with a birth prevalence equal to the wasting risk exposure among the 1-5 month age group (age_group_id=388, or the postneonatal age_group_id=4 if using GBD 2019 instead of GBD 2020). 
+  We will model wasting transitions and risk effects **only** among simulants at least six months of age. Simulants should be initialized into a wasting model state at birth with a birth prevalence equal to the wasting risk exposure among the 1-5 month age group (age_group_id=388, or the postneonatal age_group_id=4 if using GBD 2019 instead of GBD 2021). 
 
   All wasting transition rates should equal zero among all ages under 6 months. The relative risks for each wasting risk exposure category and each risk/outcome pair should equal one for all ages under 6 months.
 
@@ -446,7 +450,7 @@ T =
 
   a) :math:`π_{T}\times\text{T} = π_{T}` (the T means transposed, this is a 1 row vector)
   b) :math:`\sum_{\text{i=p}}` = :math:`π_{T}`
-  c) :math:`π_{i}` ≥ 0 , these are GBD 2020 age/sex/location/year-specific prevalence for wasting categories 1-4, plus :math:`p0`, which will equal the number of sims who die in a timestep
+  c) :math:`π_{i}` ≥ 0 , these are GBD 2021 age/sex/location/year-specific prevalence for wasting categories 1-4, plus :math:`p0`, which will equal the number of sims who die in a timestep
 
 
 Solving a)
@@ -609,18 +613,18 @@ Data Description Tables
 
 .. code-block:: python
 
-   #to pull GBD 2020 category specific prevalence of wasting
+   #to pull GBD 2021 category specific prevalence of wasting
 
     get_draws(gbd_id_type='rei_id',
                     gbd_id=240,
                     source='exposure',
-                    year_id=2020,
+                    year_id=2021,
                     gbd_round_id=7,
                     status='best',
                     location_id = [179],
                     decomp_step = 'iterative')
 
-.. list-table:: Wasting Restrictions 2020
+.. list-table:: Wasting Restrictions 2021
    :widths: 10 10 20
    :header-rows: 1
 
@@ -645,9 +649,9 @@ Data Description Tables
 
 .. code-block:: python
 
-  #age group id differences between 2019 and 2020
+  #age group id differences between 2019 and 2021
 
-  #2020 age ids
+  #2021 age ids
   early nn = 2 
   late nn = 3
   1m-5m = 388   #2019 it was 4 = postneonatal
