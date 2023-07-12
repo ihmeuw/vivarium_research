@@ -106,6 +106,10 @@ Vivarium Modeling Strategy
 
 We will model pregnancy as a characteristic of women of reproductive age in our simulations. We will inform the *incidence* of pregnancy using the age-specific fertility and stillbirth to live birth ratio covariates from GBD. We will inform the *duration* of pregnancy using the GBD 2019 exposure distribution of gestational age.
 
+.. note::
+
+  For an explanation of the rationale behind the maternal disorders state in this model, see the :ref:`note on maternal disorders, pregnancies, and YLDs <MDYLDNote>` on the nutrition optimization pregnancy concept model document.
+
 .. image:: diagram.svg
 
 .. list-table:: State definitions
