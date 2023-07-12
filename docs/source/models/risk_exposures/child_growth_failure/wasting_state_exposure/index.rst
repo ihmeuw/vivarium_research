@@ -376,9 +376,9 @@ In terms of the following variables:
      - Parameter value update
    * - time_step
      - Scalar time step conversion to days
-     - 1
+     - 1/365
      -
-     -
+     - Update from documented value of 1; I suspect the docs were out of date with implementation. Ask Ali if confused.
 
 .. todo::
 
