@@ -306,12 +306,7 @@ that follows we will detail how to calculate all the variables used.
      - Daily probability of staying in cat 4
      - System of equations
 
-
-in terms of the following variables:
-
-.. todo::
-
-  1. Update baseline parameter links to COMPAS trial wasting treatment page
+In terms of the following variables:
 
 .. list-table:: Variables for transition probabilities
    :widths: 10 10 10 10
@@ -339,36 +334,36 @@ in terms of the following variables:
      - All category "prevalences" are scaled down, such that the prevalence of cat 0 (the reincarnation pool) and the prevalences of the wasting categories sum to 1
    * - mam_tx_coverage
      - Proportion of MAM (CAT 2) cases that have treatment coverage
-     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`C_{MAM}`
-     - 
+     - :math:`C_{MAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
+     - Baseline scenario value
    * - sam_tx_coverage
      - Proportion of SAM (CAT 1) cases that have treatment coverage
-     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`C_{SAM}`
-     - 
+     - :math:`C_{SAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
+     - Baseline scenario value
    * - sam_tx_efficacy
      - Proportion of children treated for SAM who successfully respond to treatment
-     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`E_{SAM}`
+     - :math:`E_{SAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
      - Baseline scenario value
    * - mam_tx_efficacy
      - Proportion of children treated for MAM who successfully respond to treatment
-     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`E_{MAM}`
+     - :math:`E_{MAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
      - Baseline scenario value
-   * - :math:`time_to_mam_ux_recovery`
+   * - time_to_mam_ux_recovery
      - Without treatment or death, average days spent in MAM before recovery
-     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`\text{time to recovery}_\text{untreated MAM}`
-     - 
+     - :math:`365 / r_\text{MAM,ux}` 
+     - :math:`r_\text{MAM,ux}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
    * - time_to_mam_tx_recovery
      - With treatment and without death, average days spent in MAM before recovery
-     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`\text{time to recovery}_\text{treated MAM}`
-     - 
+     - :math:`365 / r_\text{MAM,tx}`
+     - :math:`r_\text{MAM,tx}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
    * - time_to_sam_ux_recovery
      - Without treatment or death, average days spent in SAM before recovery
      - :math:`365 / r_{SAM,ux}`
-     - :math:`r_{SAM,ux}` defined in the :ref:`untreated-sam-time-to-recovery-reference-label` table in the :ref:`wasting treatment intervention document <intervention_wasting_treatment>` 
+     - :math:`r_\text{SAM,ux}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>` 
    * - time_to_sam_tx_recovery
      - With treatment and without death, average days spent in SAM before recovery
-     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`\text{time to recovery}_\text{treated SAM}`
-     - 
+     - :math:`365 / r_{SAM,tx}`
+     - :math:`r_\text{SAM,tx}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>` 
    * - time_step
      - Scalar time step conversion to days
      - 1
