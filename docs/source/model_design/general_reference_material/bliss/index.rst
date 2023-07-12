@@ -46,6 +46,15 @@ and to address the harmful conflation of sex and gender in public health researc
 We hope this page will serve as a useful guide to members of the Simulation Science team as
 well as other teams at IHME!
 
+On this page you will find our guiding principles, a glossary of commonly used terms related
+to BLISS, recommendations for how to address sex/gender-related limitations in external data
+sources, discussion of the implications of imperfect proxy measures with regards to sex/gender,
+examples of how our team has incorporated BLISS into our work process, and more! 
+
+If you have any questions or comments about the content on this page - please reach out! You can
+contact us directly `on GitHub <https://github.com/ihmeuw/vivarium_research/issues?q=is%3Aopen+is%3Aissue+label%3Abliss>`_ or anonymously 
+on our `team HUB page <https://hub.ihme.washington.edu/display/COS/BLISS%3A+Building+Language+Inclusivity+into+Simulation+Science>`_.  
+
 1.1 Guiding Principles
 ----------------------
 In this section, we will outline the guiding principles of BLISS.
@@ -104,6 +113,7 @@ DR paper; IV Iron communications and IDM Symposium)
 
 5.0 References
 ++++++++++++++
+
 .. [Bauer, 2022]
     `Sex and Gender Multidimensionality in Epidemiologic Research.` American Journal of Epidemiology, Oxford University Press, 30 September 2022, https://academic.oup.com/aje/article/192/1/122/6747669. 
 
