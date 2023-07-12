@@ -40,7 +40,11 @@ language into our day-to-day work.
 
 1.0 Overview 
 ++++++++++++
-Add an introductory paragraph here (include visual of 'What this is vs. what this isn't').
+As part of our team and organization's larger DEI efforts, we are committed to researching
+and building a style guide so as to incorporate inclusive language into our day-to-day work
+and to address the harmful conflation of sex and gender in public health research and data. 
+We hope this page will serve as a useful guide to members of the Simulation Science team as
+well as other teams at IHME!
 
 1.1 Guiding Principles
 ----------------------
