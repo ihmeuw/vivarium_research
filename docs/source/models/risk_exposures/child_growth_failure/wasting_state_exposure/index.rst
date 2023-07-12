@@ -39,6 +39,15 @@
 Wasting
 =======
 
+.. todo::
+
+  Update this page to reflect dynamic wasting transition model, currently located in "risk-attributable cause" page with PEM. Then update PEM-specific page under risk attributable cause section. (Keep existing page as a reference).
+
+  Update the existing risk attributable page to include:
+
+    - Differential mortality rate for each wasting state to reflect entire CGF risk exposure rather than wasting only
+    - Links to updated wasting treatment page (COMPAS trial rather than Ethiopian MOH page)
+
 .. contents::
   :local:
 
