@@ -64,7 +64,7 @@ GBD stratifies wasting
 into four categories: TMREL, mild, moderate, and severe wasting. All PEM cases 
 are attributed to moderate and severe wasting, making PEM a PAF-of-1 model. 
 Under the GBD framework, wasting is additionally a risk for measles, diarrheal diseases,
- and lower respiratory infections. These relationships are detailed under a risk effects page for wasting.
+and lower respiratory infections. These relationships are detailed under a risk effects page for wasting.
 
  For background information on child wasting, see the :ref:`2020 wasting/PEM model document <2020_risk_exposure_wasting_state_exposure>`.
 
