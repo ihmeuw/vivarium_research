@@ -51,6 +51,7 @@ Wasting dynamic transition model (GBD 2021)
   in the acute malnutrition simulation can be viewed in this PR (TODO: LINK ADDITIONAL APPROPRIATE PRs).
 
     - `vivarium_research PR#1254 <https://github.com/ihmeuw/vivarium_research/pull/1254>`_: updated wasting intervention parameters (from the Ethiopian ministry of health values used in the acute malnutrition project to the COMPAS trial values used in the nutrition optimization project)
+    - `vivarium_rsearch PR#1257 <https://github.com/ihmeuw/vivarium_research/pull/1257>`_: updated :math:`d_i` equation to include malaria as an affected cause and to make excess mortality rates of affected causes specific to wasting exposure category 
 
   Also note that the protein energy malnutrition (PEM) risk-attributable cause model
   has been removed from this page and is instead available here: TODO: LINK PAGE.
@@ -90,12 +91,6 @@ Pages related to the wasting risk exposure model include:
 +-------+-----------------------------------------+
 | CGF   | Child growth failure composed of wasting|
 |       | stunging and underweight                |
-+-------+-----------------------------------------+
-| DD    | Diarrheal disease                       |
-+-------+-----------------------------------------+
-| LRI   | Lower respiratory tract infection       |
-+-------+-----------------------------------------+
-| MSLS  | Measles                                 |
 +-------+-----------------------------------------+
 | PEM   | Protein energy malnutrition             |
 +-------+-----------------------------------------+
@@ -319,9 +314,14 @@ In terms of the following variables:
      - Equation
      - Notes
      - Update
+   * - :math:`\text{mortality rate}_i`
+     - Annual mortality rate of wasting category :math:`i`
+     - :math:`acmr + (\sum_{c\in causes} emr_{c,i} * prevalence_{c,i} - csmr_c)` for causes in :ref:`c302/diarrheal diseases <diarrheal_diseases>`, :ref:`c322/lower respiratory infections <cause_lri>`, :ref:`c341/measles <cause_measles>`, malaria, and c387/protein energy malnutrition
+     - TODO: add malaria and PEM document links when they are ready
+     - Included malaria as additional affected cause, :math:`emr_c` updated to wasting category-specific :math:`emr_{c,i}`
    * - :math:`d_i`
-     - Death probability out of wasting category :math:`i`
-     - :math:`1 - exp(-1 * (acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c) * timestep)`
+     - Daily death probability out of wasting category :math:`i`
+     - :math:`1 - exp(-\text{mortality rate}_i * \text{time_step})` 
      - 
      - 
    * - :math:`f_i`
