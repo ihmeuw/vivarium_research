@@ -314,11 +314,16 @@ In terms of the following variables:
      - Equation
      - Notes
      - Update
+   * - :math:`\text{mortality rate}_i`
+     - Annual mortality rate of wasting category :math:`i`
+     - :math:`acmr + (\sum_{c\in causes} emr_{c,i} * prevalence_{c,i} - csmr_c)` for causes in :ref:`c302/diarrheal diseases <diarrheal_diseases>`, :ref:`c322/lower respiratory infections <cause_lri>`, :ref:`c341/measles <cause_measles>`, malaria, and c387/protein energy malnutrition
+     - TODO: add malaria and PEM document links when they are ready
+     - Included malaria as additional affected cause, :math:`emr_c` updated to wasting category-specific :math:`emr_{c,i}`
    * - :math:`d_i`
-     - Death probability out of wasting category :math:`i`
-     - :math:`1 - exp(-(acmr + (\sum_{c\in causes} emr_{ci} * prevalence_{ci} - csmr_c)) * timestep)` for causes in :ref:`c302/diarrheal diseases <diarrheal_diseases>`, :ref:`c322/lower respiratory infections <cause_lri>`, :ref:`c341/measles <cause_measles>`, malaria, and c387/protein energy malnutrition
-     - TODO: link malaria and PEM documents when ready
-     - Included malaria as additional affected cause, :math:`emr_c` updated to wasting category-specific :math:`emr_{ci}`
+     - Daily death probability out of wasting category :math:`i`
+     - :math:`1 - exp(-\text{mortality rate}_i * \text{time_step})` 
+     - 
+     - 
    * - :math:`f_i`
      - "Age-in" probability into :math:`cat_i`
      - Prevalence of wasting category i, pulled from GBD
