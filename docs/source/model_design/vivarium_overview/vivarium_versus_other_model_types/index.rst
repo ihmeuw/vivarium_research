@@ -71,8 +71,7 @@ How does Vivarium compare with other microsimulation tools?
 
 References
 ----------
-.. [Sorensen_2017]
-    `Microsimulation models for cost-effectiveness analysis: a review and introduction to CEAM.` SummerSim '17: Proceedings of the Summer Simulation Multi-Conference, Society for Computer Simulation International, 9 July 2017, https://dl.acm.org/doi/10.5555/3140065.3140097. 
 
-.. [Allen_2019]
-    `Enabling Model Complexity Through an Improved Workflow.` Healthy Algorithms, May 2019, https://healthyalgorithms.files.wordpress.com/2021/05/2019-enabling-model-complexity-through-an-improved-workflow-mws_paper-christine-allen.pdf. 
+Sorensen et al. (2017). `Microsimulation models for cost-effectiveness analysis: a review and introduction to CEAM.` SummerSim '17: Proceedings of the Summer Simulation Multi-Conference, Society for Computer Simulation International, https://dl.acm.org/doi/10.5555/3140065.3140097. 
+
+Allen et al. (2019). `Enabling Model Complexity Through an Improved Workflow.` Healthy Algorithms, https://healthyalgorithms.files.wordpress.com/2021/05/2019-enabling-model-complexity-through-an-improved-workflow-mws_paper-christine-allen.pdf. 
