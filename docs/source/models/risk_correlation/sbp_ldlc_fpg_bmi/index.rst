@@ -54,7 +54,7 @@ would be included in the following way:
 
 The correlation was then recalculated based on the above (age specific or not) 
 and the final values for correlation coefficients are stored in the csv file 
-here: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/correlation.csv 
+here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/correlation.csv 
 
 The correlation is then used to create propensity values for all simulants. Therefore, the 
 correlation will continue to be the same even as simulants age and their risk exposure values 
