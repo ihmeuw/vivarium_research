@@ -2730,26 +2730,6 @@ in January 2024.
     -
   * - Social Security Number (if present)
     - ITIN if no SSN present
-  * - Income
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ID
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Name
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Street Number
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Street Name
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Unit
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address City
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address State
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address ZIP Code
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Type of tax form (W2 or 1099)
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Tracked Dependent(s) (for noise functions ONLY)
     -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
@@ -2766,18 +2746,6 @@ in January 2024.
     -
   * - Social Security Number (if present)
     - ITIN if no SSN present
-  * - Income
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ID
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Name
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ZIP Code
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Type of tax form (W2 or 1099)
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Tracked Dependent(s) (for noise functions ONLY)
     -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
