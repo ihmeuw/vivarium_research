@@ -148,30 +148,20 @@ the work and use the terms we find most accurate and inclusive.
 In this section, you will find a glossary of general terminology that will be used 
 throughout this style guide. 
 
+
 .. list-table:: **Glossary**
    :header-rows: 1
 
    * - Term
      - Definition
    * - Sex
-     - According to [Ritz_and_Greaves_2022]_, *sex* refers to biological attributes and 
-     functions associated with chromosomal makeup, endocrine function, reproductive organs,
-     secondary sex characteristics, and other physiological and morphological variations 
-     and processes not directly related to reproduction (e.g., body size and composition,
-     metabolic function, or organ function).
+     - *Sex* refers to biological attributes and functions associated with chromosomal makeup, endocrine function, reproductive organs, secondary sex characteristics, and other physiological and morphological variations and processes not directly related to reproduction (e.g., body size and composition, metabolic function, or organ function) [Ritz_and_Greaves_2022]_.
    * - Gender
-     - *Gender*, on the other hand, is a sociocultural construct that refers to social norms,
-     behaviors, and institutional structures that shape any individual's experiences, exposures,
-     and access to power and resources, as well as one's internal sense of self as a gendered 
-     individual [Ritz_and_Greaves_2022]_. 
+     - *Gender*, on the other hand, is a sociocultural construct that refers to social norms, behaviors, and institutional structures that shape any individual's experiences, exposures, and access to power and resources, as well as one's internal sense of self as a gendered individual [Ritz_and_Greaves_2022]_. 
    * - Sexual and gender minority (SGM) 
-     - An umbrella term that includes (but is not limited to) individuals that are two-spirit, 
-     intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender 
-     non-conforming identities.
+     - An umbrella term that includes (but is not limited to) individuals that are two-spirit, intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender non-conforming identities.
    * - Nondifferentiated sex/gender measure
-     - A useful hybrid term that reflects the dynamic relationship that exists between sex and gender
-     and acknowledges the common conflation between sex and gender in public health research and 
-     data [Ritz_and_Greaves_2022]_. 
+     - A useful hybrid term that reflects the dynamic relationship that exists between sex and gender and acknowledges the common conflation between sex and gender in public health research and data [Ritz_and_Greaves_2022]_. 
 
 .. todo::
 
