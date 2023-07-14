@@ -53,9 +53,9 @@ examples of how our team has incorporated BLISS into our work process, and more!
 
 If you have any questions or comments about the content on this page - please reach out! You can
 contact us directly `on GitHub <https://github.com/ihmeuw/vivarium_research/issues?q=is%3Aopen+is%3Aissue+label%3Abliss>`_ or anonymously 
-on our `team HUB page <https://hub.ihme.washington.edu/display/COS/BLISS%3A+Building+Language+Inclusivity+into+Simulation+Science>`_.  
+on our `feedback form <https://docs.google.com/forms/d/e/1FAIpQLSeCED9TFQsH-1u4QkFxJvno4WaEDz6h9rhJeyFlAlqyG7MAJg/viewform>`_.  
 
-. list-table:: **What this is vs. What this isn't**
+.. list-table:: **What this is vs. What this isn't**
    :header-rows: 1
 
    * - This is...
@@ -145,9 +145,37 @@ the work and use the terms we find most accurate and inclusive.
 
 1.2 Glossary of General Terminology
 -----------------------------------
-In this section, we will create a glossary of general terminology that will be used 
-throughout this style guide (e.g., for starters, we should explicitly define sex and 
-gender; SGM) (include visual of 'Do's and Don'ts)
+In this section, you will find a glossary of general terminology that will be used 
+throughout this style guide. 
+
+.. list-table:: **Glossary**
+   :header-rows: 1
+
+   * - Term
+     - Definition
+   * - Sex
+     - According to [Ritz_and_Greaves_2022]_, *sex* refers to biological attributes and 
+     functions associated with chromosomal makeup, endocrine function, reproductive organs,
+     secondary sex characteristics, and other physiological and morphological variations 
+     and processes not directly related to reproduction (e.g., body size and composition,
+     metabolic function, or organ function).
+   * - Gender
+     - *Gender*, on the other hand, is a sociocultural construct that refers to social norms,
+     behaviors, and institutional structures that shape any individual's experiences, exposures,
+     and access to power and resources, as well as one's internal sense of self as a gendered 
+     individual [Ritz_and_Greaves_2022]_. 
+   * - Sexual and gender minority (SGM) 
+     - An umbrella term that includes (but is not limited to) individuals that are two-spirit, 
+     intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender 
+     non-conforming identities.
+   * - Nondifferentiated sex/gender measure
+     - A useful hybrid term that reflects the dynamic relationship that exists between sex and gender
+     and acknowledges the common conflation between sex and gender in public health research and 
+     data [Ritz_and_Greaves_2022]_. 
+
+.. todo::
+
+   (include visual of 'Do's and Don'ts)
 
 2.0 Acknowledging Limitations in Peer Research
 ++++++++++++++++++++++++++++++++++++++++++++++
