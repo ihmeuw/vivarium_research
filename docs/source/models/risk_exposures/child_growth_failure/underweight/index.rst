@@ -91,7 +91,7 @@ We will model child underweight as an **ordered polytomous variable**.
 We will use a "propensity exposure model" for child underweight, but with 
 population risk exposure distributions that are conditional on 
 :ref:`child stunting <2020_risk_exposure_child_stunting>` and 
-:ref:`child wasting <2019_risk_exposure_wasting_state_exposure>` exposures. 
+:ref:`child wasting <2021_risk_exposure_wasting_state_exposure>` exposures. 
 With this strategy, each simulant will be initialized with a "propensity" for 
 child underweight that does not change throughout the duration of the 
 simulation. The propensity should be assigned according to a uniform 
