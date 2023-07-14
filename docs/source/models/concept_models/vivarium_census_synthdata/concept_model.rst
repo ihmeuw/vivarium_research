@@ -2765,6 +2765,13 @@ in January 2024.
 
   In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
+.. todo::
+  
+  Add total income to this observer. 
+
+.. todo::
+  
+  Add a way to capture forms a simulant would file besides the 1040 (e.g. W2/1099 forms).
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
