@@ -55,12 +55,12 @@ not synonymous, unidimensional traits. [Bauer_2022]_ acknowledges this and expla
 how common sex and gender proxies such as chromosomes or sex organs are imperfect 
 and not fully inclusive of lived experiences.  
 
-Using imperfect proxies can create real harm by alienating individuals, and by 
-creating invalid research. People who are not cisgendered (a diverse group including 
-intersex, nonbinary, transgender and other gender nonconforming individuals) experience 
-gendered language frequently which can be alienating and cause harm. These individuals 
-might be less likely to interact with healthcare, see themselves in research, and lose 
-opportunities as a result. In an effort to work toward institution-wide DEI goals and 
+Using imperfect proxies and gendered language can create harm by alienating individuals, and by 
+creating invalid research. People who are intersex, transgender, nonbinary, and/or 
+have other gender-nonconforming identities experience harm from gendered language in a 
+number of ways, including documented reductions in interactions 
+with healthcare, not being included in research, and lost 
+opportunities. In an effort to work toward institution-wide DEI goals and 
 advance our team’s research and publications, we created this guide to explore the 
 concepts of sex and gender and offer inclusive language alternatives.  
 
@@ -68,15 +68,15 @@ One example of how proxy measures can affect the validity of research is in [Bau
 where researchers used 'women' as a proxy for people with a uterus. The researchers were 
 trying to find the incidence of uterine cancer, but by using 'women' as the denominator, 
 even though not all women have a uterus, cancer rates were thought to be lower than was true 
-in real lif. This was especially prominent in Black women who are more likely to have had 
+in real life. This was especially prominent for Black women who are more likely to have had 
 a hysterectomy. This example highlights the importance of using a measure that is actually 
 tied to the research question.  
 
 A second example of the potential impact on research validity is equating differences in 
 results to only sex or gender. As explained in [Ritz_and_Greaves_2022]_, both sex and gender 
 can lead to biological changes and untangling these pathways is complex or impossible. Often, 
-researchers will report findings as "sex differences" implying that they are a result of sex, 
-when the possibility that gendered behavior or norms was the cause was never explored. 
+researchers will report findings as "sex differences," implying that they are a result of sex, 
+without exploring the role of gendered behavior or norms. 
 
 Lastly, we hope to inspire change in other researchers by presenting our studies with gender 
 inclusive language and model practices we believe in. For all of these reasons, we feel this 
@@ -89,7 +89,7 @@ choice may evolve over time. Therefore, this guide will be a living document tha
 regularly review and update. We will hold ourselves accountable for aligning the guide with 
 the current preferred language, terminology and approaches.  
 
-While we hope this can be up to date and comprehensive, no guide can anticipate every use case, 
+While we hope this can be up-to-date and comprehensive, no guide can anticipate every use case, 
 recognize every limitation, or be applicable to every research question. We aim to provide enough 
 information that users can understand the spirit of the guide and apply that to their unique needs.  
 
@@ -100,7 +100,7 @@ practices from standard, gendered language. Although using gender inclusive lang
 we highlight here that there are many benefits to incorporating more inclusive language into 
 everyday public health research practices.  
 
-Gender inclusive language can often by longer or more verbose than gendered language, but we 
+Gender inclusive language can often be longer or more verbose than gendered language, but we 
 believe specificity is more important than brevity. We seek to include all groups and identities 
 in our language, even if that means using more words! For example, we would rather use terms like 
 "women and people" to describe pregnancy related issues since this is inclusive of all who can get 
