@@ -20,7 +20,7 @@ also involve swelling, difficulty breathing, unconsciousness, and potentially
 death. Microscopy is considered the gold-standard diagnostic approach for the 
 purposes of GBD. The relevant ICD-10 codes are B50-B54. [GBD-2019-Capstone-Appendix-Malaria-2020]_
 
-According to the latest World malaria report, there were 247 million cases of 
+According to the latest world malaria report, there were 247 million cases of 
 malaria in 2021 compared to 245 million cases in 2020. The estimated number of 
 malaria deaths stood at 619,000 in 2021 compared to 625,000 in 2020.
 
@@ -32,38 +32,38 @@ Modeling Malaria in GBD 2020
 ----------------------------
 
 Malaria is modeled separately for inside versus outside sub-Saharan Africa. 
-However, Ethiopia is modeled as outside sub-Saharan Africa, since it exhibits 
-epidemiological trends and have data availability/quality more akin to non-African 
+However, Ethiopia is modeled as outside sub-Saharan Africa since it exhibits 
+epidemiological trends and has data availability and quality more akin to non-African 
 settings. 
 
-For countries in Africa, Nigeria in this model, the PfPR surveys by the Malaria 
-Atlas Project (MAP) were used to predict malaria for both the non-fatal and fatal 
-models. 
+For countries in sub-Saharan Africa (Nigeria in the nutrition optimization model) 
+the PfPR surveys by the Malaria Atlas Project (MAP) were used to predict malaria 
+rates for both the non-fatal and fatal models. 
 
-For countries outside of Africa, Ethiopia and Pakistan in this project, surveillance 
-systems tends to be stronger and so national and subnational case reports are the 
+For countries outside of sub-Saharan Africa (Ethiopia and Pakistan in this project) surveillance 
+systems tend to be stronger and so national and subnational case reports are the 
 primary data source for the nonfatal model. 
 
-For nonfatal modeling in all countries, these data sources were used to generate pixel-level predictions 
-of clinical incidence rate. These were combined with high-resolution gridded population 
+Nonfatal modeling in all countries combined data sources to generate pixel-level predictions 
+of clinical incidence rates. These predications were combined with high-resolution gridded population 
 data to estimate total cases per pixel-year. These were then aggregated to GBD 
-national/subnational areas. Inside sub-Saharan Africa, for countries endemic for P. 
-vivax and P. falciparum, we calculated the number of cases due to P. vivax by applying 
-the fraction of P. vivax and P. falciparum obtained from WHO and a literature review. 
-Outside sub-Saharan Africa we followed the identical procedure for P. vivax and 
-P. falciparum. 
+national/ subnational areas. 
 
-For the fatal model, the MAP data was used to estimate the cause specific mortality rate. 
+For the fatal model, MAP data was used to estimate the cause specific mortality rate. 
 This was then combined with the incidence rate from the nonfatal model in order to 
 find estimates for case fatality rate. This in turn was used to find annual mortality 
 rates for each location. [GBD-2019-Capstone-Appendix-Malaria-2020]_
+
+.. todo::
+
+   GBD 2021 includes COVID shocks. We need to decide if and how we want to include this information. 
 
 A systematic review of malaria severity was conducted, from which simple 
 severity splits were obtained and applied across all cases:
 
 
 .. list-table:: Malaria severity splits
-	:widths: 5 50 50 3 3
+	:widths: 5 50 5
 	:header-rows: 1
 	
 	* - Severity level
@@ -83,11 +83,7 @@ severity splits were obtained and applied across all cases:
 GBD Hierarchy
 -------------
 
-.. todo::
-
-   Update image 
-
-.. image:: DD_cause_hierarchy.svg
+.. image:: malaria_cause_hierarchy.svg
 
 Cause Model Diagram
 -------------------
@@ -103,9 +99,9 @@ I: **I**\ nfected and currently experiencing malaria
 Model Assumptions and Limitations
 ---------------------------------
 
-Malaria has been modeled extensively and in very in depth ways. For this model, 
-we will not be including any of the causes of malaria (mosquitos) and so this 
-model is not appropriate for interventions targetting malaria prevention or treatment 
+Malaria has been modeled extensively by other teams. For this model, 
+we will not be including any information on vectors and so it is not 
+appropriate for interventions targetting malaria prevention or treatment 
 directly. 
 
 There is evidence that people living in malaria endemic areas do gain immunity over 
@@ -114,7 +110,7 @@ GBD. We do not include in this model any gains in malaria resistance from prior 
 
 .. todo::
 
-   Add any other relevant items to this section 
+   Continue to add to this section as needed 
 
 Data Description
 ----------------
@@ -182,13 +178,13 @@ Data Description
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{incidence_rate_c302}*(\text{duration_c302} / 365)}`
-	  - We transform incidence to be a rate within the susceptible population under the assumption that prevalence ~= incidence * duration.
+	  - :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_345}}`
+	  - Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
 	* - r
 	  - I
 	  - S
-	  - (-1/time_step)*log(1-time_step/duration_c302)
-	  - Where time_step is the simulation time_step in years. See notes below on adjusted duration. Use :code:`np.log()` function. The above is equivalent to 1/adjusted_duration_c302.
+	  - :math:`\frac{1}{\text{duration_c345}}`
+	  - 
 
 	  
 .. list-table:: Data Sources and Definitions
@@ -199,42 +195,36 @@ Data Description
 	  - Source
 	  - Description
 	  - Notes
-	* - prevalence_c302
+	* - prevalence_c345
 	  - como
-	  - Prevalence of diarrheal diseases
+	  - Prevalence of malaria
 	  -
-	* - deaths_c302
+	* - deaths_c345
 	  - codcorrect
-	  - Deaths from diarrheal diseases
+	  - Deaths from malaria
 	  -
-	* - duration_c302
-	  - (4.3 days; 95% CI: 4.2, 4.4; normal distribution of uncertainty)/365
-	  - Mean duration of diarrheal disease episode (in years). Obtained from [Troeger-et-al-2018-Diarrhea-2020]_ and the GBD YLD appendix.
+	* - duration_c345
+	  - Uniform distribution between 14 and 28 days. 
+	  - Obtained from [GBD-2019-Capstone-Appendix-Malaria-2020]_
 	  - This value should not vary by age group
-	* - adjusted_duration_c302
-	  - 4.04485 (95% CI: 3.94472, 4.144975), assume normal distribution of uncertainty
-	  - Average duration of a diarrheal disease episode in days among children under five (defined in the note column) TRANSFORMED to accomodate a short timestep of 0.5 days, `as discussed in this slack thread <https://ihme.slack.com/archives/C018BLX2JKT/p1646183763054739>`_. See the note below for more information.
-	  - This value does not necessarily need to be stored -- included here for reference.
-	* - incidence_rate_c302
+	* - incidence_rate_c345
 	  - como
-	  - Incidence of diarrheal disease within the entire population
+	  - Incidence of malaria within the entire population
 	  - 
 	* - population
 	  - demography
 	  - Mid-year population for given age/sex/year/location
 	  -
-	* - sequelae_c302
-	  - gbd_mapping
-	  - List of 4 sequelae for diarrheal diseases
-	  - Note Guillain-Barre due to diarrheal diseases is included in sequelae.
 	* - prevalence_s{`sid`}
  	  - como
 	  - Prevalence of sequela with id `sid`
-	  -
+	  - Sequela used here are 121, 122, and 123 
 	* - disability_weight_s{`sid`}
 	  - YLD appendix
 	  - Disability weight of sequela with id `sid`
-	  - 
+	  - Sequela used here are 121, 122, and 123 
+
+
 .. list-table:: Restrictions
 	:widths: 15 15 20
 	:header-rows: 1
@@ -271,10 +261,11 @@ Data Description
 Validation Criteria
 -------------------
 
-.. todo::
-
-   Describe tests for model validation.
-
+Simulation results should replicate the GBD 2020 cause-specific mortality rate, 
+excess mortality rate, incidence rate, and prevalence for all age/sex/location 
+groups. Notably, these measures should be tracked over time in the simulation 
+to ensure that simulation rates do not deviate from GBD rates as the simulation 
+progresses.
 
 References
 ----------
