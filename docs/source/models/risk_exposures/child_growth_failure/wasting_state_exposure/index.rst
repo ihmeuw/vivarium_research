@@ -55,7 +55,7 @@ Wasting dynamic transition model (GBD 2021)
     - `vivarium_research PR#1258 <https://github.com/ihmeuw/vivarium_research/pull/1258>`_: updated time_step scalar value (may have already been implemented in the acute malnutrition model and just the docs were out of date)
 
   Also note that the protein energy malnutrition (PEM) risk-attributable cause model
-  has been removed from this page and is instead available here: TODO: LINK PAGE.
+  has been removed from this page and is :ref:`instead available here <2021_pem>`.
 
 .. contents::
   :local:
@@ -67,7 +67,7 @@ This page contains information pertaining to the child wasting risk exposure mod
 GBD stratifies wasting into four categories: TMREL, mild, moderate, and severe wasting. 
 Pages related to the wasting risk exposure model include:
 
-- Protein energy malnutrition risk attributable cause
+- :ref:`Protein energy malnutrition risk attributable cause <2021_pem>`
 - Wasting risk effects
 
 .. todo::
