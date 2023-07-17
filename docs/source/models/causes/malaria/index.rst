@@ -139,7 +139,11 @@ Data Description
 	  - Notes
 	* - S
 	  - prevalence
-	  - 1-prevalence_345
+	  - 1-prevalence_I
+	  - 
+	* - S
+	  - birth prevalence
+	  - 1 
 	  - 
 	* - S
 	  - emr
@@ -151,7 +155,11 @@ Data Description
 	  -
 	* - I
 	  - prevalence
-	  - prevalence_345
+	  - **For early neonatal age group:** (birth_prevalence_I + prevalence_345)/2. **For all other age groups:** prevalence_345
+	  - 
+	* - I
+	  - birth prevalence
+	  - 0 
 	  - 
 	* - I
 	  - excess mortality rate
@@ -178,7 +186,7 @@ Data Description
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_345}}`
+	  - :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_I}}`
 	  - Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
 	* - r
 	  - I
@@ -204,7 +212,7 @@ Data Description
 	  - Deaths from malaria
 	  -
 	* - duration_c345
-	  - Uniform distribution between 14 and 28 days. 
+	  - Uniform distribution between 14 and 28 days
 	  - Obtained from [GBD-2019-Capstone-Appendix-Malaria-2020]_
 	  - This value should not vary by age group
 	* - incidence_rate_c345
