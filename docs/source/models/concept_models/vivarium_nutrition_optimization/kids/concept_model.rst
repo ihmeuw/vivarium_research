@@ -190,7 +190,7 @@ Documents that contain information specific to the overall model and the pregnan
     - 
   * - Malaria
     - No existing version
-    - Needs to be created!
+    - :ref:`Docs here <2021_cause_malaria>`, was not included in IV iron
     - 
     - 
   * - Protein energy malnutrition (PEM)
