@@ -81,8 +81,9 @@ framework. GBD maintains a cause of death model called "Nutritional
 deficiencies" that is split into *PEM* and *Other Nutritional Deficiencies* that 
 estimates PEM mortality. Nonfatal PEM cases are modelled independently, using 
 the case definition moderate and severe acute malnutrition, defined in terms of 
-weight-for-height Z-scores (WHZ). All PEM cases are attributed to the GBD Child 
-Growth Failure risk factor, which is not detailed here. We include specifics on 
+weight-for-height Z-scores (WHZ). All PEM cases are attributed to the 
+:ref:`GBD Child Growth Failure risk factor <risk_exposure_child_growth_failure>`. 
+We include specifics on 
 the PEM cause models below. [GBD-2019-Capstone-Appendix-Wasting]_, p789.
 
 PEM Fatal Model
@@ -205,9 +206,10 @@ The nonfatal estimation pipeline comprises five models:
 For the all-age model, they set the duration of PEM to 9 months after consulting 
 with nutrition experts. The current modelers (as of June 2021 no longer have 
 documentation of these conversations, which took place sometime before 2015). 
-They used a remission rate of 0.25 - 1.25 (remitted cases of PEM per person-year 
-of illness). Note this is a rather wide interval that allowed DisMod to choose a 
-remission rate within the given bounds based on other input data. [GBD-2019-Capstone-Appendix-Wasting]_
+They used a remission rate of 0.25 - 1.25 remitted cases of PEM per person-year 
+of illness. Note this is a rather wide interval that allowed DisMod to choose a 
+remission rate within the given bounds based on other input data. 
+[GBD-2019-Capstone-Appendix-Wasting]_
 
 From the all-age model, they then derived (1) a prevalence:incidence ratio that 
 was applied across all categories of non-fatal PEM, and (2) a moderate:severe 
