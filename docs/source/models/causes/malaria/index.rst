@@ -1,7 +1,7 @@
-.. _2020_cause_malaria:
+.. _2021_cause_malaria:
 
 =================
-Malaria: GBD 2020
+Malaria: GBD 2021
 =================
 
 Disease Description
@@ -18,7 +18,7 @@ attack. Individuals with an untreated P. falciparum infection may develop
 severe malaria, which includes the symptoms of uncomplicated malaria but may 
 also involve swelling, difficulty breathing, unconsciousness, and potentially 
 death. Microscopy is considered the gold-standard diagnostic approach for the 
-purposes of GBD. The relevant ICD-10 codes are B50-B54. [GBD-2019-Capstone-Appendix-Malaria-2020]_
+purposes of GBD. The relevant ICD-10 codes are B50-B54. [GBD-2019-Capstone-Appendix-Malaria-2021]_
 
 According to the latest world malaria report, there were 247 million cases of 
 malaria in 2021 compared to 245 million cases in 2020. The estimated number of 
@@ -26,12 +26,12 @@ malaria deaths stood at 619,000 in 2021 compared to 625,000 in 2020.
 
 Four African countries accounted for just over half of all malaria deaths 
 worldwide: Nigeria (31.3%), the Democratic Republic of the Congo (12.6%), 
-United Republic of Tanzania (4.1%) and Niger (3.9%). [WHO-Malaria-2020]_
+United Republic of Tanzania (4.1%) and Niger (3.9%). [WHO-Malaria-2021]_
 
-Modeling Malaria in GBD 2020
+Modeling Malaria in GBD 2021
 ----------------------------
 
-Malaria is modeled separately for inside versus outside sub-Saharan Africa. 
+Malaria is modeled separately for inside versus outside sub-Saharan Africa in GBD 2021. 
 However, Ethiopia is modeled as outside sub-Saharan Africa since it exhibits 
 epidemiological trends and has data availability and quality more akin to non-African 
 settings. 
@@ -44,15 +44,16 @@ For countries outside of sub-Saharan Africa (Ethiopia and Pakistan in this proje
 systems tend to be stronger and so national and subnational case reports are the 
 primary data source for the nonfatal model. 
 
-Nonfatal modeling in all countries combined data sources to generate pixel-level predictions 
-of clinical incidence rates. These predications were combined with high-resolution gridded population 
+Nonfatal modeling in all countries combined data sources to generate rasterized predictions 
+of clinical incidence rates  on a 5 km by 5 km grid. These predications were 
+combined with high-resolution gridded population 
 data to estimate total cases per pixel-year. These were then aggregated to GBD 
 national/ subnational areas. 
 
 For the fatal model, MAP data was used to estimate the cause specific mortality rate. 
 This was then combined with the incidence rate from the nonfatal model in order to 
 find estimates for case fatality rate. This in turn was used to find annual mortality 
-rates for each location. [GBD-2019-Capstone-Appendix-Malaria-2020]_
+rates for each location. [GBD-2019-Capstone-Appendix-Malaria-2021]_
 
 .. todo::
 
@@ -70,7 +71,7 @@ severity splits were obtained and applied across all cases:
 	  - Lay description
 	  - Disability weight
 	* - Mild
-	  - Mild malaria	Has a low fever and mild discomfort but no difficulty with daily activities.	
+	  - Has a low fever and mild discomfort but no difficulty with daily activities.	
 	  - 0.006 (0.002–0.012)
 	* - Moderate
 	  - Has a fever and aches and feels weak, which causes some difficulty with daily activities. 
@@ -107,6 +108,10 @@ directly.
 There is evidence that people living in malaria endemic areas do gain immunity over 
 their lifetimes. We assume this is represented in prevalence and incidence rates from 
 GBD. We do not include in this model any gains in malaria resistance from prior exposure. 
+
+For the nutrition optimization work, our model is focused on child growth failure 
+and its effects. Therefore, malaria is included to capture CGF's effects on malaria, 
+but does not include additional detail not relevant for this model. 
 
 .. todo::
 
@@ -187,7 +192,7 @@ Data Description
 	  - S
 	  - I
 	  - :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_I}}`
-	  - Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
+	  - Equivalent to "load standard data" Vivarium public health function for incidence rates ("susceptible-population" incidence rate). Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
 	* - r
 	  - I
 	  - S
@@ -213,7 +218,7 @@ Data Description
 	  -
 	* - duration_c345
 	  - Uniform distribution between 14 and 28 days
-	  - Obtained from [GBD-2019-Capstone-Appendix-Malaria-2020]_
+	  - Obtained from [GBD-2019-Capstone-Appendix-Malaria-2021]_
 	  - This value should not vary by age group
 	* - incidence_rate_c345
 	  - como
@@ -269,7 +274,7 @@ Data Description
 Validation Criteria
 -------------------
 
-Simulation results should replicate the GBD 2020 cause-specific mortality rate, 
+Simulation results should replicate the GBD 2021 cause-specific mortality rate, 
 excess mortality rate, incidence rate, and prevalence for all age/sex/location 
 groups. Notably, these measures should be tracked over time in the simulation 
 to ensure that simulation rates do not deviate from GBD rates as the simulation 
@@ -278,12 +283,12 @@ progresses.
 References
 ----------
 
-.. [GBD-2019-Capstone-Appendix-Malaria-2020]
+.. [GBD-2019-Capstone-Appendix-Malaria-2021]
   Appendix to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of
   369 diseases and injuries in 204 countries and territories, 1990–2019: a 
   systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
   17 Oct 2020;396:1204-1222` 
 
-.. [WHO-Malaria-2020] Malaria Fact Sheet. World Health Organization.
+.. [WHO-Malaria-2021] Malaria Fact Sheet. World Health Organization.
    Retrieved 14 July 2023.
    https://www.who.int/news-room/fact-sheets/detail/malaria
