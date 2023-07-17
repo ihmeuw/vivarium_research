@@ -193,6 +193,11 @@ Documents that contain information specific to the overall model and the pregnan
     - Needs to be created!
     - 
     - 
+  * - Protein energy malnutrition (PEM)
+    - :ref:`Old docs here <2020_risk_exposure_wasting_state_exposure>`, implemented in IV iron and CIFF
+    - :ref:`New docs here <2021_pem>`. TODO: list whether or not there are updates other than breaking up docs pages
+    - 
+    - 
   * - Background morbidity
     - :ref:`Docs here <other_causes_ylds>`, but has not yet been implemented
     - 
