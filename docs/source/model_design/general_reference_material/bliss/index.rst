@@ -74,7 +74,74 @@ on our `team HUB page <https://hub.ihme.washington.edu/display/COS/BLISS%3A+Buil
 
 1.1 Guiding Principles
 ----------------------
-In this section, we will outline the guiding principles of BLISS.
+
+Our guiding principles for this document can be summarized in three points:  
+
+**1. This work is important**
+
+Inclusive language use is important, and we want to begin by acknowledging the 
+potential harm that using gendered language can create. ‘Sex’ and ‘gender’ are 
+not synonymous, unidimensional traits. [Bauer_2022]_ acknowledges this and explains 
+how common sex and gender proxies such as chromosomes or sex organs are imperfect 
+and not fully inclusive of lived experiences.  
+
+Using imperfect proxies and gendered language can create harm by alienating individuals, and by 
+creating invalid research. People who are intersex, transgender, nonbinary, and/or 
+have other gender-nonconforming identities experience harm from gendered language in a 
+number of ways, including documented reductions in interactions 
+with healthcare, not being included in research, and lost 
+opportunities. In an effort to work toward institution-wide DEI goals and 
+advance our team’s research and publications, we created this guide to explore the 
+concepts of sex and gender and offer inclusive language alternatives.  
+
+One example of how proxy measures can affect the validity of research is in [Bauer_2022]_, 
+where researchers used 'women' as a proxy for people with a uterus. The researchers were 
+trying to find the incidence of uterine cancer, but by using 'women' as the denominator, 
+even though not all women have a uterus, cancer rates were thought to be lower than was true 
+in real life. This was especially prominent for Black women who are more likely to have had 
+a hysterectomy. This example highlights the importance of using a measure that is actually 
+tied to the research question.  
+
+A second example of the potential impact on research validity is equating differences in 
+results to only sex or gender. As explained in [Ritz_and_Greaves_2022]_, both sex and gender 
+can lead to biological changes and untangling these pathways is complex or impossible. Often, 
+researchers will report findings as "sex differences," implying that they are a result of sex, 
+without exploring the role of gendered behavior or norms. 
+
+Lastly, we hope to inspire change in other researchers by presenting our studies with gender 
+inclusive language and model practices we believe in. For all of these reasons, we feel this 
+guide is very important.  
+
+**2. This work is evolving**
+
+Language is constantly evolving, so there is rarely a single “right” choice and the accepted 
+choice may evolve over time. Therefore, this guide will be a living document that we will 
+regularly review and update. We will hold ourselves accountable for aligning the guide with 
+the current preferred language, terminology and approaches.  
+
+While we hope this can be up-to-date and comprehensive, no guide can anticipate every use case, 
+recognize every limitation, or be applicable to every research question. We aim to provide enough 
+information that users can understand the spirit of the guide and apply that to their unique needs.  
+
+**3. This is work**
+
+We acknowledge that there is a cost associated with a transition to gender inclusive language 
+practices from standard, gendered language. Although using gender inclusive language is work, 
+we highlight here that there are many benefits to incorporating more inclusive language into 
+everyday public health research practices.  
+
+Gender inclusive language can often be longer or more verbose than gendered language, but we 
+believe specificity is more important than brevity. We seek to include all groups and identities 
+in our language, even if that means using more words! For example, we would rather use terms like 
+"women and people" to describe pregnancy related issues since this is inclusive of all who can get 
+pregnant while not invisibilizing women.
+
+The ever-evolving nature of the work means that this guide is for everyone! You don’t have to be 
+an expert; this is meant to be accessible for all people. Wherever you are in the learning 
+journey, this guide is intended to be a clear, helpful resource.  
+
+We’re not going to put any words into other people’s mouths, but we will use our own voice to do 
+the work and use the terms we find most accurate and inclusive.  
 
 1.2 Glossary of General Terminology
 -----------------------------------
@@ -130,9 +197,8 @@ DR paper; IV Iron communications and IDM Symposium)
 
 5.0 References
 ++++++++++++++
-
-.. [Bauer, 2022]
+.. [Bauer_2022]
     `Sex and Gender Multidimensionality in Epidemiologic Research.` American Journal of Epidemiology, Oxford University Press, 30 September 2022, https://academic.oup.com/aje/article/192/1/122/6747669. 
 
-.. [Ritz and Greaves, 2022]
+.. [Ritz_and_Greaves_2022]
     `Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender.` International Journal of Environmental Research and Public Health, 30 March 2022, https://www.mdpi.com/1660-4601/19/7/4083. 
