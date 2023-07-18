@@ -53,6 +53,7 @@ Taken in aggregate, these attributes match real-world population-level data, der
 Over the duration of a given microsimulation run, simulant attributes are dynamically updated.
 
 .. image:: microsim_visual.png
+   :target: mirosim_visual.html
 
 Simulation components are interdependent, and relationships between attributes are also based on best available real-world 
 evidence. For example, disease progression is a function of simulant characteristics and treatment; survival depends on stage of disease and other characteristics. 
