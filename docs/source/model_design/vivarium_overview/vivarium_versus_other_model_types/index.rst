@@ -31,12 +31,14 @@ What is Vivarium Good For?
    :local:
    :depth: 1
 
-What are individual-based microsimulations?
--------------------------------------------
+What are microsimulation?
+-------------------------
 
-Vivarium, a platform developed by the Simulation Science team, enables individual-based microsimulation, also known as agent-based simulation. This is a technique for combining information about attributes of individuals in a population (such as demographics, risk factors, disease occurrence, and intervention coverage) and relationships between these attributes, to estimate health outcomes in a simulated environment over time.
+Vivarium, a platform developed by the IHME Simulation Science team, enables individual-based modeling or **microsimulation**.
+This is a technique for combining information about attributes of individuals in a population (such as demographics, risk factors,
+disease occurrence, and intervention coverage) and relationships between these attributes, to estimate health outcomes in a simulated environment over time.
 
-Individual-level microsimulation models incorporate relevant characteristics, including: 
+Microsimulation models incorporate relevant characteristics, including: 
 
 - Basic demographics (e.g., age, sex/gender, race/ethnicity)
 - Exposure to risk factors
@@ -46,18 +48,24 @@ Individual-level microsimulation models incorporate relevant characteristics, in
 - Adverse events
 - Mortality rate/life expectancy 
 
-By using individual-level microsimulation, we probabilitistically assign the above attributes heterogeneously across individuals within the simulated population. Taken in aggregate, these attributes match real-world population-level data, derived from IHME's Global Burden of Disease (GBD) databases and other sources. Over the duration of a given microsimulation
-run, simulant attributes are dynamically updated.
+By using microsimulation, we probabilistically assign the above attributes heterogeneously across individuals within the simulated population. 
+Taken in aggregate, these attributes match real-world population-level data, derived from IHME's Global Burden of Disease (GBD) databases and other sources. 
+Over the duration of a given microsimulation run, simulant attributes are dynamically updated.
 
 Simulation components are interdependent, and relationships between attributes are also based on best available real-world 
 evidence. For example, disease progression is a function of simulant characteristics and treatment; survival depends on stage of disease and other characteristics. 
+
+.. note::
+
+  Are you feeling confused by some of the vocabulary on this page? Please visit our `Vivarium glossary <https://vivarium-research.readthedocs.io/en/latest/glossary/index.html>`_ 
+  for some definitions of microsimulation vocabulary!
 
 What are the advantages and disadvantages of individual-based microsimulations?
 -------------------------------------------------------------------------------
 
 .. todo::
 
-  Fill out this section with strengths and weakness of individual-based microsimulation. 
+  Fill out this section with strengths and weakness of individual-based microsimulation. Could also add context about how microsim compares to agent-based simulation and the broader umbrella term of IBM.
   
 
 How does Vivarium compare with other microsimulation tools?
