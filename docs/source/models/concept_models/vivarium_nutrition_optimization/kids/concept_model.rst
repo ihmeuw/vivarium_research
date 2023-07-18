@@ -190,7 +190,12 @@ Documents that contain information specific to the overall model and the pregnan
     - 
   * - Malaria
     - No existing version
-    - Needs to be created!
+    - :ref:`Docs here <2021_cause_malaria>`, was not included in IV iron
+    - 
+    - 
+  * - Protein energy malnutrition (PEM)
+    - :ref:`Old docs here <2020_risk_exposure_wasting_state_exposure>`, implemented in IV iron and CIFF
+    - :ref:`New docs here <2021_pem>`. TODO: list whether or not there are updates other than breaking up docs pages
     - 
     - 
   * - Background morbidity
