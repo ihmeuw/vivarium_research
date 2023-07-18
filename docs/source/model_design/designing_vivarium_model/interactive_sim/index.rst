@@ -56,13 +56,116 @@ This makes some tasks more difficult to complete interactively.
 Setting up an Interactive Sim
 -----------------------------
 
-.. todo::
+Setting up an interactive sim for the first time can be confusing. To help guide you 
+through this, follow these instructions along with the example notebook included. 
+Another useful resource is the `Vivarium InteractiveContext documentation <https://vivarium.readthedocs.io/en/latest/api_reference/interface/interactive.html?highlight=InteractiveContext#vivarium.interface.interactive.InteractiveContext>`_. 
 
-  Add how to: load the interactive sim, change parameters, and take steps 
-  Also can include: how to comment out observers or change observers to get more grainularity with faster runs  
+**Step 1: General Prep**
 
-  Include: - `Vivarium InteractiveContext documentation <https://vivarium.readthedocs.io/en/latest/api_reference/interface/interactive.html?highlight=InteractiveContext#vivarium.interface.interactive.InteractiveContext>`_
+  - Ensure that you have cloned the engineer's GitHub repo and have pulled the latest version of the simulation.  
+  - Check that you have 'vivarium' installed in your environment and can import 'InteractiveContext' in a Jupyter notebook. 
+  - If you need more general help with Git or environments for this part, see these :ref:`computing resources <computing>`.
 
+In Jupyter: 
+
+:: 
+
+  from vivarium import InteractiveContext 
+
+
+**Step 2: Creating a Simulation** 
+
+Now that you're prepped and able to run a simulation, we can actually load the sim! To 
+do this, we will use the 'InteractiveContext' function in Vivarium. 
+
+First, you'll need to locate the model specs file. It will be in the engineering repo usually 
+in a file path similar to: :code:`<project_repo_name>/src/<project_repo_name>/model_specifications/`. 
+It will be a .yaml file. 
+
+If you can't locate the proper model specs file or are unsure - ask the engineers for help! 
+
+Once you have that, you can follow this code to create a simulation 
+
+::
+  path = Path('<file_path_for_model_spec_file>')
+  sim = InteractiveContext(Path(path), setup=False)
+
+This creates an object called 'sim' that is the simulation. 
+
+**Step 3: Updating the Simulation Parameters**
+
+Often, you will want to ues slightly different parameters than are the standard in the model 
+spec. For example, you might want to change the population size. To do this, you can use 
+'configuration.update'. 
+
+Below is an example of changing the population size to be 50,000. You 
+can use this to help change anything in the 'configuration' section of the model spec. 
+
+From the model spec file: 
+
+:: 
+  configuration: 
+    population: 
+      population_size: 100_000
+      age_start: 5 
+      age_end: 125 
+
+To update the population_size variable to be 50,000: 
+::
+  sim.configuration.update({
+                          'population':
+                              {'population_size': 50_000,
+                              },
+                          }
+                        )
+
+Instead of using 'configuration.update' you can just directly change the values in the 
+model spec file. However, since this file exists in the engineering repo, changing it on 
+your local machine can cause errors and confusion. Also, whenever you pull from main, 
+your updates would be removed. Therefore, we do NOT recommend this approach. 
+
+**Step 4: Loading Data from the Simulation** 
+
+Now that you have the parameters set-up, you're ready to start getting data from the simulation! 
+The first step is to run 'sim.setup'. Running this command will take some time and possibly generate 
+some pink warning text. Don't worry! Just wait for the cell to finish running. 
+
+Once it's done, you will have a simulated population. You can use 'get_population' to create a dataset 
+with your population. Some simulant data automatically gets recorded for your sim. To find a list of these, 
+list the columns in your dataset. Other simulant data does not automatically get added, but can also 
+be saved. To find a list of additional sim data available, use 'list_values'. If you find 
+something from the list that you want included in your data, just add it using 'get_value'. 
+
+The below will show using all of these in practice: 
+
+:: 
+  sim.setup() # Sets up the simulation 
+  pop0 = sim.get_population() # Generates a dataset with some simulant data included 
+  pop0.columns # Lists the columns in your simulant dataset 
+  sim.list_values() # Lists the additional columns you can add to the dataset 
+  sim.get_value('<variable_from_list_values>')(pop0.index) #Pulls data for all simulants 
+
+The example notebook at the bottom will include how to utilize these in practice to 
+create datasets. 
+
+**Step 5: Taking a Step Forward** 
+
+The above steps only include a base population. You can also run the simulation forward 
+by taking time steps. The most popular way to do this is using the 'step' function. This 
+function takes a single step forward in the simulation. Most commonly, researchers will 
+take a single step and record needed information and then take another step. An example 
+of this is in the notebook below. 
+
+There are other methods to run a simulation forward which are shown in the docstring 
+above such as 'run_for' and 'run_until'. These are designed to run the simulation forward 
+without recording data. These can be useful for burn-in periods. 
+
+:: 
+  sim.step() 
+
+**Example notebook**
+
+This :ref:`notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/interactive_sim_example_setup.ipynb>`_ includes all of the steps seen above. 
 
 .. _interactive_tasks:
 
