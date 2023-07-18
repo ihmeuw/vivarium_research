@@ -34,7 +34,7 @@ What is Vivarium Good For?
 What are individual-based microsimulations?
 -------------------------------------------
 
-Vivarium is the Simulation Science team's platform for individual-based microsimulation (also known as agent-based simulation), which is a technique for leveraging information about attributes of individuals in a population (such as demographics, risk factors, disease occurrence, and intervention coverage) and relationships between these attributes to estimate health outcomes in a synthetic environment over time.
+Vivarium, a platform developed by the Simulation Science team, enables individual-based microsimulation, also known as agent-based simulation. This is a technique for combining information about attributes of individuals in a population (such as demographics, risk factors, disease occurrence, and intervention coverage) and relationships between these attributes, to estimate health outcomes in a simulated environment over time.
 
 Individual-level microsimulation models incorporate relevant characteristics, including: 
 
