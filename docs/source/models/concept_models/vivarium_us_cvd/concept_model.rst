@@ -432,7 +432,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - Measurements have a minimum value of 0 enforced [Wallace_2011]_
   * - B
     - 41.76% will not start medication due to theraputic inertia. The others will start on one drug at half dose. 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Ali_2021]_ [Liu_2017]_
+    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - C
     - 41.76% will not start medication. Of those that start medication: 45% will receive two drugs at half dose and 55% will receive one drug at half dose  
     - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
