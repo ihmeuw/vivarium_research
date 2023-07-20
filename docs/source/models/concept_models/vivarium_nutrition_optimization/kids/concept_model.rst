@@ -75,7 +75,7 @@ In addition to other differences detailed in the next section:
 - Wave II will use GBD 2021 data for the entire model.
 
 Notably, GBD 2021 uses different age groups than GBD 2019 (as summarized in the 
-tables below). Therefore, the wave I implementation that uses data from both GBD 
+tables below). Therefore, the Wave I implementation that uses data from both GBD 
 2019 and 2021 will require a hybrid approach that was used in the CIFF and wasting 
 paper simulations. In this hybrid approach, the simulation uses GBD 2021 age groups 
 for the entire simulation, but informs rates for these age groups from pooled 2019 
