@@ -1,6 +1,8 @@
 .. role:: underline
     :class: underline
 
+
+
 ..
   Section title decorators for this document:
 
@@ -51,6 +53,7 @@ Wasting dynamic transition model (GBD 2021)
     - `vivarium_research PR#1254 <https://github.com/ihmeuw/vivarium_research/pull/1254>`_: updated wasting intervention parameters (from the Ethiopian ministry of health values used in the acute malnutrition project to the COMPAS trial values used in the nutrition optimization project)
     - `vivarium_research PR#1257 <https://github.com/ihmeuw/vivarium_research/pull/1257>`_: updated :math:`d_i` equation to include malaria as an affected cause and to make excess mortality rates of affected causes specific to wasting exposure category
     - `vivarium_research PR#1258 <https://github.com/ihmeuw/vivarium_research/pull/1258>`_: updated time_step scalar value (may have already been implemented in the acute malnutrition model and just the docs were out of date)
+    - `vivarium_research PR#1274 <https://github.com/ihmeuw/vivarium_research/pull/1274>`_: applied model to those 6 months and older only
 
   Also note that the protein energy malnutrition (PEM) risk-attributable cause model
   has been removed from this page and is :ref:`instead available here <2021_pem>`.
@@ -154,8 +157,6 @@ breastfeeding and reduction of LBWSG.
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-.. image:: vivarium_wasting_model_with_t1.svg
-
 We will model wasting in four compartments: TMREL, Mild, Moderate, and Severe.
 In a given timestep a simulant will either stay put, transition to an adjacent 
 wasting category, or die. In this case of "CAT 1: severe wasting", simulants can 
@@ -170,6 +171,15 @@ for diarrheal diseases, measles, lower respiratory infections.
 For wave I of the :ref:`nutrition optimization model <2021_concept_model_vivarium_nutrition_optimization>`, the vivarium 
 models for these affected causes will draw from the corresponding GBD 2019 models
 until we update the entire simulation to GBD 2021 results.
+
+.. important::
+
+  We will model wasting transitions as detailed on this page **only** among simulants at least six months of age.
+
+  There will be separate wasting exposure models for simulants 0-6 months of age will be detailed separately.
+
+    - :ref:`Static wasting exposure <2020_risk_exposure_static_wasting>` for wave I of the nutrition optimization model
+    - Wasting transition model among 0-6 month olds for wave II of the nutrition optimization model (TODO: link page when ready)
 
 Assumptions and Limitations
 ---------------------------
@@ -189,8 +199,7 @@ Assumptions and Limitations
 Input data
 ----------
 
-GBD and literature sources
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. image:: vivarium_wasting_model_with_t1.svg
 
 .. list-table:: Wasting model input data sources
    :widths: 15 15
@@ -212,20 +221,6 @@ Deriving wasting transition probabilities
 
 Markov derivation
 ^^^^^^^^^^^^^^^^^
-
-.. important::
-
-  **For wave I of the nutrition optimization model**
-
-  We will model wasting transitions and risk effects **only** among simulants at least six months of age. Simulants should be initialized into a wasting model state at birth with a birth prevalence equal to the wasting risk exposure among the 1-5 month age group (age_group_id=388, or the postneonatal age_group_id=4 if using GBD 2019 instead of GBD 2021). 
-
-  All wasting transition rates should equal zero among all ages under 6 months. The relative risks for each wasting risk exposure category and each risk/outcome pair should equal one for all ages under 6 months.
-
-  Wasting transition rates should be informed by the data tables below for ages over 6 months. Wasting risk effects for ages over 6 months should be informed by the standard GBD wasting relative risks.
-
-  NOTE: When the birthweight and wasting risk exposure at birth correlation is implemented, it will cause simulants with a greater neonatal mortality (due to brithweight exposure) to be initialized into more severe wasting states. This will cause the wasting exposure distribution to shift to less severe wasting states over the neonatal period as simulants with lower birthweights (and more severe wasting states due to the birthweight and wasting exposure correlation) die. The magnitude of the bias introduced by this modeling strategy should be investigated upon implementation to determine if different modeling strategies are necessary. This should be done by comparing the wasting exposure and wasting-affected outcomes in the simulation output to the GBD inputs by age group.
-
-  NOTE: The modeling decision not to model wasting transitions among simulants less than six months of age is due to the reliance of the wasting model transition rates on the wasting treatment model and the lack of data to inform treatment-related transition rates among this age group. Note that a sensitivity analysis scenario that includes infants less than six months of age in the treatment model may be performed in the future.
 
 This Markov model comprises 5 compartments: four wasting categories, plus CAT 0.
 Because we need simulants to die at a higher rate out of CAT 1 than CAT 2, 3, or
