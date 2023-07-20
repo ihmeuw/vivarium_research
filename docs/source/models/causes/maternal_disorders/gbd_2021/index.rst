@@ -6,7 +6,7 @@ Maternal disorders: GBD 2021
 
 .. note::
 
-  This page is an update from the previously developed :ref:`GBD 2019 maternal disorders cause model document <2019_cause_maternal_disorders>`. There were no major updates from the 2019 to 2021 version.
+  This page is an update from the previously developed :ref:`GBD 2019 maternal disorders cause model document <2019_cause_maternal_disorders>`. The only update was a change to the YLD equation, as noted in the YLDUpdateNote_.
 
 .. contents::
    :local:
@@ -239,11 +239,11 @@ Ratios of maternal disorder mortality and incidence are defined in the table bel
      - Value
      - Note
    * - Maternal disorder deaths
-     - csmr_c366 / (incidence_p * prevalence_np)
-     - 
+     - csmr_c366 / preg_rate
+     - Terms defined in table below
    * - Incident maternal disorders
-     - incidence_rate_c366 / (incidence_p * prevalence_np)
-     - **Post-maternal disorder state persists for one timestep** (one week, as implemented).
+     - incidence_rate_c366 / preg_rate
+     - **Post-maternal disorder state persists for one timestep** (one week, as implemented). Terms defined in table below.
 
 
 .. note::
@@ -286,7 +286,7 @@ The following table defines the parameters used in the calculation of maternal d
    * - incidence_rate_c366
      - incidence rate of maternal disorders
      - como, decomp_step='iterative'
-     - 
+     - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
    * - ylds_non_fatal_maternal_disorder_case
      - Number of YLDs attributable to a single non-fatal maternal disorder case
      - See `Years lived with disability`_ section
@@ -299,15 +299,27 @@ The following table defines the parameters used in the calculation of maternal d
      - Annual rate of YLDs attributable to anemia due to maternal hemorrhage among WRA
      - como, decomp_step='iterative'
      - 
-   * - incidence_p
+   * - preg_rate
      - Pregnancy incidence rate
-     - :math:`\frac{ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}}{prevalence_\text{np}}`
-     - Do NOT use the value on the closed cohort pregnancy model document, but can find ASFR/SBR/incidence data definitions there.
-   * - prevalence_np
-     - Prevalence of the non-pregnant state
-     - 1 - [(ASFR + ASFR * SBR) * 46 / 52 + (incidence_c995 + incidence_c374) * 21 /52] 
-     - Do NOT use the value on the closed cohort pregnancy model document, but can find ASFR/SBR/incidence data definitions there.
-     
+     - :math:`ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}`
+     - 
+   * - ASFR
+     - Age-specific fertility rate
+     - get_covariate_estimates: coviarate_id=13, decomp_step='iterative'
+     - Assume lognormal distribution of uncertainty.
+   * - SBR
+     - Still to live birth ratio
+     - get_covariate_estimates: covariate_id=2267, decomp_step='iterative' for GBD 2021
+     - Parameter is not age specific and has no draw-level uncertainty. Use mean_value as location-specific point parameter.
+   * - incidence_c995
+     - Incidence rate of abortion and miscarriage cause
+     - como; decomp_step='iterative'
+     - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
+   * - incidence_c374
+     - Incidence rate of ectopic pregnancy
+     - como; decomp_step='iterative'
+     - Use the :ref:`total population incidence rate <total population incidence rate>` directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
+
 .. _AgeGroupNote:
 
 .. note::
@@ -322,6 +334,8 @@ Years of life lost (YLLs) should be assigned to simulants who experience a death
 Years lived with disability
 """"""""""""""""""""""""""""
 
+The modeling strategy for YLDs due to maternal disorders is described below. For more information regarding the rationale behind this strategy and associated assumptions and limitations, see the :ref:`note on maternal disorders, pregnancies, and YLDs <MDYLDNote>` on the nutrition optimization pregnancy concept model document.
+
 Simulants who experience an incident case of maternal disorders and occupy the post-maternal disorders state following the incident case and will remain there for a single timestep. The disability weight for the post-maternal disorders time-step long state will then be the number of YLDs per case (defined below) divided by :math:`\text{time step duration in days} / 365`, such that the disability weight multiplied by the duration spent accruing disability is equal to the total YLDs per case (defined below). Notably, for simulations that evaluate disability due to anemia through the :ref:`hemoglobin/anemia model <2019_hemoglobin_anemia_and_iron_deficiency>` such as the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`, the disability due to anemia sequelae should not be counted as part of YLDs due to maternal disorders as they will be tracked separately as YLDs due to anemia (this is reflected in the equation below).
 
 .. math::
@@ -329,27 +343,20 @@ Simulants who experience an incident case of maternal disorders and occupy the p
   \text{YLDs per non-fatal maternal disorders case} = 
   
 
-  \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366}) * \text{incidence_rate}_\text{c366} - csmr_\text{c366}}
+  \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - \text{csmr}_\text{c366}}
 
-.. warning::
+.. _YLDUpdateNote:
 
-  A previous version of the above equation yielded a negative value in initial attempts. We've implementated the following placeholder (which may result in an underestimation of maternal disorder YLDs):
+.. note::
 
-  .. math::
-
-    \text{YLDs per non-fatal maternal disorders case} = \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366}}
-
-  The equation may eventually be updated to the resolved version in the main section above, although it is approximately 98-99% of the temporary fix, so it is a low priority for implementation.
-
-  For reference, the previous version of the equation that yielded a negative rate was as follows:
+  This equation was updated from the previous (erroneous) implementation in IV iron (shown below):
 
   .. math::
 
-    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / \text{incidence_rate}_\text{c366})}
+    \text{YLDs per non-fatal maternal disorders case} = 
+    
 
-.. todo::
-
-  Outline COMO limitations associated with this strategy.
+    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366}) * \text{incidence_rate}_\text{c366} - csmr_\text{c366}}
 
 Validation Criteria
 +++++++++++++++++++

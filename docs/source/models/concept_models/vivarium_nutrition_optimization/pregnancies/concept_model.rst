@@ -57,6 +57,25 @@ Documents that contain information specific to the overall model and the child s
 
   List modeling aims and objectives
 
+1.2 Outstanding research questions/notes
+-----------------------------------------
+
+**Questions:**
+
+- For stillbirths that become live births due to intervention impact, what should their LWBSG exposure be? Hypothetically near-stillbirths should have lower birth weights than others. Ask Nick K.! GBD may be estimating these outcomes directly? Current assumption is that they will have randomly sampled exposure. 
+
+- How should we handle averted stillbirths in our optimization objectives? Note that because stillbirths do not accumulate any DALYs, an objective to minimize DALYs could disincentivize averting stillbirths, which would be inconsistent with improving outcomes. 
+
+**Notes/reminders:**
+
+- BMGF would like to assume that those who take BEP also take MMS. This does not change our health impact model at all, but will change our costing assumptions (add product price of MMS to that of BEP).
+
+- The health systems team has not updated their iron supplementation in pregnancy coverage estimates from the values they provided for the IV iron simulation, so we will move forward with those estimates.
+
+- According to Will G. (GBD anemia modeler), our hemoglobin distribution is not exactly replicating the GBD anemia impairment prevalence because we were not using most-detailed location IDs. Notably, he mentioned that very small differences are expected to remain due to slight changes in covariate estimates between the time at which the hemoglobin/anemia modeling occurred and now.
+
+- We will remove background mortality from our pregnancy simulation so that simulants may only die due to maternal disorders.
+
 2.0 Model design
 ++++++++++++++++
 
@@ -76,52 +95,63 @@ Documents that contain information specific to the overall model and the child s
 
   Unless specifically noted, only change from the IV iron implementation is the update from GBD 2019 to GBD 2021 data
 
-+---------------------+-------------------------------------------+---------------------+
-| Category            | Model                                     | Note                |
-+=====================+===========================================+=====================+
-|Demography           |:ref:`Population structure at              |Change from IV iron  |
-|                     |initialization                             |due to closed cohort |
-|                     |<other_models_pregnancy_demography>`       |                     |
-|                     +-------------------------------------------+                     |
-|                     |:ref:`Pregnancy model (closed cohort)      |                     |
-|                     |<other_models_pregnancy_closed_cohort>`    |                     |
-+---------------------+-------------------------------------------+---------------------+
-|Risk exposure        |Hemoglobin/anemia                          |                     |
-|                     +-------------------------------------------+---------------------+
-|                     |Pre-pregnancy/first trimester BMI          |                     |
-|                     +-------------------------------------------+---------------------+
-|                     |Birth weight and gestational age           |                     |
-+---------------------+-------------------------------------------+---------------------+
-|Risk correlation     |Hgb/BMI/LBWSG                              |                     |
-+---------------------+-------------------------------------------+---------------------+
-|Risk effects         |Hemoglobin, including effects on:          |Do not include effect|
-|                     | - Maternal disorders                      |on birth outcomes    |
-|                     | - Maternal hemorrhage incidence           |(stillbirth). Change |
-|                     |                                           |from IV iron         |
-|                     +-------------------------------------------+---------------------+
-|                     |:ref:`Maternal hemorrhage effect on        |                     |
-|                     |hemoglobin                                 |                     |
-|                     |<2019_risk_effect_maternal_hemorrhage>`    |                     |
-+---------------------+-------------------------------------------+---------------------+
-|Causes               |:ref:`Maternal disorders                   |                     |
-|                     |<2021_cause_maternal_disorders>`           |                     |
-|                     +-------------------------------------------+---------------------+
-|                     |:ref:`Maternal hemorrhage incidence        |                     |
-|                     |<2019_cause_maternal_hemorrhage_incidence>`|                     |
-|                     +-------------------------------------------+---------------------+
-|                     |:ref:`Background morbidity due to other    |Modeled causes: c366,|
-|                     |causes <other_causes>`                     |r192. Change from    |
-|                     |                                           |IV iron!             |
-+---------------------+-------------------------------------------+---------------------+
-|Interventions        |:ref:`Antenatal supplementation, including |Change from IV iron! |
-|                     |IFA, MMS, and BEP and their effects        |New effects on       |
-|                     |on antenatal hemoglobin, LBWSG, and        |gestational age and  |
-|                     |birth outcomes                             |birth outcomes (no   |
-|                     |<maternal_supplementation_intervention>`   |changes to hemoglobin|
-|                     |                                           |effects). Also,      |
-|                     |                                           |coverage algorithm is|
-|                     |                                           |updated              |
-+---------------------+-------------------------------------------+---------------------+
++---------------------+-----------------------------------------------------+---------------------+
+| Category            | Model                                               | Note                |
++=====================+=====================================================+=====================+
+|Demography           |:ref:`Population structure at                        |Change from IV iron  |
+|                     |initialization                                       |due to closed cohort |
+|                     |<other_models_pregnancy_demography>`                 |                     |
+|                     +-----------------------------------------------------+                     |
+|                     |:ref:`Pregnancy model (closed cohort)                |                     |
+|                     |<other_models_pregnancy_closed_cohort>`              |                     |
++---------------------+-----------------------------------------------------+---------------------+
+|Risk exposure        |:ref:`Hemoglobin/anemia                              |Wave II update to    |
+|                     |<2019_hemoglobin_model>`                             |most detailed locs.  |
+|                     +-----------------------------------------------------+---------------------+
+|                     |:ref:`Pre-pregnancy/first trimester BMI              |Will need custom data|
+|                     |<2019_risk_exposure_maternal_bmi_hgb>`               |update for 2021 (Ali)|
+|                     +-----------------------------------------------------+---------------------+
+|                     |:ref:`Birth weight and gestational age               |                     |
+|                     |<2019_risk_exposure_lbwsg>`                          |                     |
++---------------------+-----------------------------------------------------+---------------------+
+|Risk correlation     |:ref:`Hgb/BMI/LBWSG                                  |Will need custom data|
+|                     |<2019_risk_correlation_maternal_bmi_hgb_birthweight>`|update for 2021 (Ali)|
++---------------------+-----------------------------------------------------+---------------------+
+|Risk effects         |:ref:`Hemoglobin<2019_risk_effect_iron_deficiency>`  |Do not include effect|
+|                     |, including effects on (1) maternal disorders, and   |on birth outcomes    |
+|                     |(2) maternal hemorrhage incidence                    |(stillbirth), change |
+|                     |                                                     |from IV iron. Will   |
+|                     |                                                     |need custom data     |
+|                     |                                                     |update for 2021 (Ali)|
+|                     +-----------------------------------------------------+---------------------+
+|                     |:ref:`Maternal hemorrhage effect on                  |                     |
+|                     |hemoglobin                                           |                     |
+|                     |<2019_risk_effect_maternal_hemorrhage>`              |                     |
++---------------------+-----------------------------------------------------+---------------------+
+|Causes               |:ref:`Maternal disorders                             |                     |
+|                     |<2021_cause_maternal_disorders>`                     |                     |
+|                     +-----------------------------------------------------+---------------------+
+|                     |:ref:`Maternal hemorrhage incidence                  |                     |
+|                     |<2019_cause_maternal_hemorrhage_incidence>`          |                     |
+|                     +-----------------------------------------------------+---------------------+
+|                     |:ref:`Background morbidity due to other              |Modeled causes: r192 |
+|                     |causes <other_causes>`                               |(anemia). See note   |
+|                     |                                                     |regarding exclusion  |
+|                     |                                                     |of c366 below. Change|
+|                     |                                                     |from IV iron!        |
+|                     +-----------------------------------------------------+---------------------+
+|                     |Removal of background mortality due to               |Change from IV iron  |
+|                     |other causes                                         |                     |
++---------------------+-----------------------------------------------------+---------------------+
+|Interventions        |:ref:`Antenatal supplementation, including           |Change from IV iron! |
+|                     |IFA, MMS, and BEP and their effects                  |New effects on       |
+|                     |on antenatal hemoglobin, LBWSG, and                  |gestational age and  |
+|                     |birth outcomes                                       |birth outcomes (no   |
+|                     |<maternal_supplementation_intervention>`             |changes to hemoglobin|
+|                     |                                                     |effects). Also,      |
+|                     |                                                     |coverage algorithm is|
+|                     |                                                     |updated              |
++---------------------+-----------------------------------------------------+---------------------+
 
 .. list-table:: Wave I outstanding tasks
   :header-rows: 1
@@ -133,13 +163,13 @@ Documents that contain information specific to the overall model and the child s
     - Note
   * - Model builds 0.0 through 1
     - .
-    - Docs ready, will need V&V (Ali)
-    - In progress (Patrick/Steve)
+    - Done! (Ali)
+    - Done! (Patrick/Steve)
     - New content from IV iron
   * - Model builds 2-6
     - .
     - Docs ready, will need V&V (Ali)
-    - Patrick/Steve
+    - In progress (Patrick/Steve)
     - No new content from IV iron (except one exclusion)
   * - Model build 7
     - .
@@ -160,9 +190,14 @@ Documents that contain information specific to the overall model and the child s
     - RT person
     - ST person
     - Note
+  * - Update hemoglobin distribution to most detailed locations
+    - 
+    - Needs documentation (Ali)
+    - Patrick/Steve
+    -
   * - General GBD 2021 update
-    - Ali blocked by hemoglobin distribution questions, team blocked by GBD timeline
-    - Ali
+    - Blocked by GBD timeline
+    - Ali (needs custom data updates for hemoglobin)
     - Patrick/Steve
     - 
   * - Background morbidity
@@ -170,6 +205,11 @@ Documents that contain information specific to the overall model and the child s
     - Ali
     - Patrick/Steve
     - Bonus task, not necessary for success
+  * - Production runs
+    - Awaiting completion of above tasks
+    - Ali
+    - Patrick/Steve
+    - 
 
 2.3 Default specifications
 --------------------------
@@ -277,7 +317,7 @@ There are two important categories of outputs for this model. The first is mater
 
 Specific outputs for specific models are specified in the following section.
 
-.. _nutritionoptimizationpreg5.0:
+.. _nutritionoptimizationpreg3.0:
 
 3.0 Models
 ++++++++++
@@ -285,6 +325,12 @@ Specific outputs for specific models are specified in the following section.
 .. note::
 
   Unless otherwise specified, all maternal outputs should be stratified by maternal age group
+
+.. note::
+
+  Models 2.0 through 6.0 do not contain any updates relative to the IV iron implementation (with the exception of the removal of the hemoglobin risk effect on birth outcomes/stillbirths). These model runs may be collapsed into fewer submodels if convenient for implementation. 
+
+  If this is done, model output requests should be updated. 
 
 .. list-table:: Model run requests
   :header-rows: 1
@@ -340,13 +386,13 @@ Specific outputs for specific models are specified in the following section.
     - None
     - * Deaths
       * YLLs
-      * Pregnancy state person-time, stratified by birth outcome
-      * Pregnancy transition counts, stratified by birth outcome
+      * Pregnancy state person-time, **stratified by birth outcome**
+      * Pregnancy transition counts, **stratified by birth outcome**
       * Counts of birth outcomes
     - Live and still births with maternal_ids and LBWSG exposures
     - 
   * - 2.0
-    - Maternal disorders and maternal hemorrhage cause models
+    - Maternal disorders and maternal hemorrhage cause models, removal of background mortality
     - Baseline
     - None
     - * Deaths
@@ -375,9 +421,9 @@ Specific outputs for specific models are specified in the following section.
       * YLDs
       * Pregnancy state person-time
       * Pregnancy transition counts
-      * Anemia state person-time stratified by pregnancy state
-      * Incident maternal disorder counts stratified by anemia status at birth
-      * Incident maternal hemorrhage counts stratified by anemia status at birth
+      * Anemia state person-time **stratified by pregnancy state**
+      * Incident maternal disorder counts **stratified by anemia status at birth**
+      * Incident maternal hemorrhage counts **stratified by anemia status at birth**
     - N/A
     - Do NOT include risk effect of hemoglobin on birth outcomes (which was included in IV iron). Data block for GBD 2021 update as of 6/23.
   * - 5.0
@@ -388,7 +434,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * BMI exposure, stratified by pregnancy state and anemia state
-    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, and LBWSG exposures
+    - Live and still births with maternal_ids, infant sex, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, and LBWSG exposures
     - Data block for GBD 2021 update as of 6/23.
   * - 6.0
     - Intervention effects on hemoglobin and birthweight
@@ -401,7 +447,7 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy transition counts
       * Anemia state person time, stratified by intervention coverage
       * Intervention counts
-    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, infant sex, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
     - Both of these intervention effects were implemented in IV iron and are not changed for this model
   * - 7.0
     - Intervention effects on gestational age and birth outcomes
@@ -413,7 +459,7 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy state person time
       * Pregnancy transition counts
       * Birth outcomes, stratified by intervention coverage
-    - Live and still births with maternal_ids, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, infant sex, maternal BMI exposure, maternal hemoglobin above/below 100 g/L, intervention coverage, and LBWSG exposures
     - These intervention effects are new and were not implemented in IV iron
   * - 8.0
     - Background morbidity
@@ -436,7 +482,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * Intervention counts
-    - Live and still births with maternal_ids, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, infant sex, intervention coverage, and LBWSG exposures
     - 
   * - 9.1
     - Production runs
@@ -448,7 +494,7 @@ Specific outputs for specific models are specified in the following section.
       * YLLs
       * YLDs
       * Intervention counts
-    - Live and still births with maternal_ids, intervention coverage, and LBWSG exposures
+    - Live and still births with maternal_ids, infant sex, intervention coverage, and LBWSG exposures
     - 
   * - 10.0
     - GBD 2021 update?
@@ -480,7 +526,16 @@ Specific outputs for specific models are specified in the following section.
     - Looks great! Note that pregnancy duration skews when evaluated at age-specific level, but this is not a bug in implementation, rather in analysis. `Model 1.0 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.0.ipynb>`_
   * - 1.1
     - Confirm that relative distribution of partial versus full term pregnancies is as expected, that partial term pregnancy duration implemented as expected, and that child data looks good
-    - Looks great! `Model 1.1 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.1.ipynb>`
+    - Looks great! `Model 1.1 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.1.ipynb>`_
+  * - 1.2
+    - * Check that average duration of "other" birth outcomes is 15 weeks in maternal outputs
+      * Check that average duration of live and still birth outcomes is close to 38-39 weeks or so in maternal outputs
+      * Check live birth to stillbirth ratio verifies to expected value
+      * Check that LBWSG exposure in child outputs verifies to GBD exposure distribution
+    - Looks good! `Model 1.2 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.2.ipynb>`. Noted that infant sex should be added to child output data moving forward.
+  * - 2.0
+    - Verify incident and fatal maternal disorder and maternal hemorrhage (incident only) rates as well as YLDs, confirm removal of background mortality
+    - 
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -494,3 +549,47 @@ Specific outputs for specific models are specified in the following section.
     - 
     - 
 
+4.0 Research background and limitations
+++++++++++++++++++++++++++++++++++++++++
+
+.. _MDYLDNote:
+
+4.1 A note on years lived with disability and maternal disorders
+-----------------------------------------------------------------
+
+This simulation has taken a particular modeling strategy regarding years lived with disability due to :ref:`maternal disorders <2021_cause_maternal_disorders>` that involved integrating it into the :ref:`pregnancy model <other_models_pregnancy_closed_cohort>`. 
+
+While described in more detail on the individual model documents, the main strategic decisions made in the design of this model are outlined below, with explanations:
+
+- Modeling a specific "maternal disorders" state in the pregnancy model document with a duration of a single timestep that occurs between the pregnancy and postpartum states in which a simulant is either affected or unaffected by the maternal disorders cause. 
+
+  - Modeling the maternal disorders state with the duration of one timestep (rather than an instantaneous moment at birth) allowed us to take advantage of standard vivarium behavior for accruing YLDs over the duration of time spent in the state according to a state-specific disability weight (custom calculated in this case).
+
+- Modeling YLDs due to maternal disorders according to a custom calculated "disability weight" equal to the annual amount of YLDs due to maternal disorders per non-fatal case of maternal disorders rather than the typical strategy of prevalence-weighted average of sequela-specific disability weights.  
+
+  - We took this strategy because the maternal disorders cause is a composite parent cause of many maternal disorders subcauses (see :ref:`the maternal disorders document<2021_cause_maternal_disorders>`). These subcauses all have differing disability weights as well as average durations. Therefore, by using the GBD COMO-adjusted YLD estimates to back-calculate a "disability weight" for the composite maternal disorders parent cause that results, we can produce the appropriate COMO-adjusted annual baseline rate of maternal disorders YLDs without needing to account for the differential DWs and durations of each of the maternal disorder subcauses to appropriately replicate the COMO adjustment within the simulation.
+
+    - Note that a limitation of this strategy is that there are some sequelae within the maternal disorders cause that last for longer than one year. Because of this, some of the YLDs in the GBD estimate of the COMO-adjusted annual YLD rate due to maternal disorders will be due to births that occurred in the year prior to our index year; we will therefore assign some of these YLDs due to prevalent cases to incident cases in our simulation. However, we are additionally limited in that we do not consider disability due to incident maternal disorder cases beyond one year after birth. Note that for the baseline scenario, these two limitations should cancel out so long as the incidence of these long-lasting sequelae are stable over time after adjusting for changing fertility rates. 
+
+- Pausing accumulation of YLDs due to causes other than maternal disorders (specifically anemia, other causes) while simulants occupy the maternal disorders state in the pregnancy model.
+
+  - We took this strategy because the maternal disorders YLDs as calculated above are already COMO adjusted. Therefore, we do not wish to further adjust these YLDs for comorbid causes that a simulant may possess.
+
+    - Note that this causes underestimation of YLDs due to causes other than maternal disorders from the start of pregnancy until six weeks postpartum by roughly a factor of 1/38 (~2.16 percent) for this simulation given a timestep of one week and an average pregnancy + postpartum combined duration of approximately 38 weeks (6 weeks postpartum + 32 weeks of pregnancy, weighted average of full and partial term pregnancies).
+      - We have addressed this limitation during post-processing for the IV iron simulation by multiplying YLDs due to anemia accrued during the postpartum state by :code:`6/5` given that the duration of the maternal disorders state was one week and the duration of the postpartum state was 5 weeks. 
+
+.. todo:: 
+  
+  Determine if we wish to replicate this anemia YLD re-scaling strategy for this simulation (trade off between observer stratification and associated increases in run time). Will need to update final output/stratification requests if desired. 
+
+- Not including maternal disorders as a "modeled cause" in the model of morbidity due to "other causes," :ref:`as discussed on this page <other_causes_ylds>`.
+
+  - This allows us to adjust YLDs due to causes other than maternal disorders to be COMO-adjusted for maternal disorders, since this adjustment will not be done within the simulation despite the fact that we are modeling maternal disorders due to our unique modeling strategy for this cause. Note that YLDs due to maternal disorders in our simulation are already COMO-adjusted for all other causes because we are using the GBD COMO-adjusted YLD estimate to calculate the maternal disorders disability weight, as described above.
+
+    - Note that this modeling strategy does not allow for intervention-associated reductions in YLDs due to maternal disorders to cause *increases* in YLDs due to causes other than maternal disorders (which should occur for comorbid causes, :ref:`as discussed on this page <other_causes_ylds>`) and vise versa (reductions in YLDs due to anemia will not increase comorbid YLDs due to maternal disorders). However, given that each of these individual causes represents a small portion of all cause YLDs for our modeled demographic groups, the impact of this limitation will be small. 
+
+- Modeling YLDs and YLLs due to :ref:`maternal hemorrhage <2019_cause_maternal_hemorrhage_incidence>` as part of the :ref:`maternal disorders <2021_cause_maternal_disorders>` composite cause rather than part of the maternal hemorrhage incidence cause (which has no associated morbidity or mortality).
+
+  - We did this in order to remain consistent with GBD. The GBD hemoglobin risk effect applies equally to all maternal disorders subcauses (in other words, the hemoglobin relative risks are specific to *all* maternal disorders and we do not have data for cause-specific hemoglobin risk effects). Therefore, we model the risk effect of hemoglobin on maternal disorders as a composite cause (including hemorrhage) and model maternal hemorrhage incidence **only** as a way to estimate the impact of pregnancy hemoglobin on postpartum hemoglobin as mediated through hemorrhage at birth. 
+
+    - Note that it is possible that we could use the more specific hemoglobin on maternal hemorrhage risk effects obtained from the literature to apply to maternal hemorrhage morbidity and mortality, but we chose to remain consistent with GBD rather than model more detailed risk effects for this single specific subcause of maternal disorders. 
