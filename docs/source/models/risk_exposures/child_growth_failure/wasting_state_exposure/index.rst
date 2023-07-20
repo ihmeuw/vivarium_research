@@ -68,16 +68,11 @@ GBD stratifies wasting into four categories: TMREL, mild, moderate, and severe w
 Pages related to the wasting risk exposure model include:
 
 - :ref:`Protein energy malnutrition risk attributable cause <2021_pem>`
-- Wasting risk effects
+- :ref:`Child growth failure risk effects <2021_risk_effect_cgf>`
 
-.. todo::
-
-  Include links to above referenced pages
+.. note::
 
  For background information on child wasting, see the :ref:`2020 wasting/PEM model document <2020_risk_exposure_wasting_state_exposure>`.
-
-.. todo::
-  Link to future PEM page and to risk effects doc
 
 +-------------------------------------------------+
 | List of abbreviations                           |
@@ -317,8 +312,8 @@ In terms of the following variables:
      - Update
    * - :math:`\text{mortality rate}_i`
      - Annual mortality rate of wasting category :math:`i`
-     - :math:`acmr + (\sum_{c\in causes} emr_{c,i} * prevalence_{c,i} - csmr_c)` for causes in :ref:`c302/diarrheal diseases <diarrheal_diseases>`, :ref:`c322/lower respiratory infections <cause_lri>`, :ref:`c341/measles <cause_measles>`, malaria, and c387/protein energy malnutrition
-     - TODO: add malaria and PEM document links when they are ready
+     - :math:`acmr + (\sum_{c\in causes} emr_{c,i} * prevalence_{c,i} - csmr_c)` for causes in :ref:`c302/diarrheal diseases <diarrheal_diseases>`, :ref:`c322/lower respiratory infections <cause_lri>`, :ref:`c341/measles <cause_measles>`, :ref:`c345/malaria <2021_cause_malaria>`, and :ref:`c387/PEM <2021_pem>`
+     - 
      - Included malaria as additional affected cause, :math:`emr_c` updated to wasting category-specific :math:`emr_{c,i}`
    * - :math:`d_i`
      - Daily death probability out of wasting category :math:`i`
@@ -398,13 +393,13 @@ In terms of the following variables:
      - :math:`incidence_{c,i} * duration_c`
    * - :math:`duration_c`
      - The average duration of cause c, in years
-     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, and :ref:`malaria <2021_cause_malaria>`
+     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, :ref:`malaria <2021_cause_malaria>`, and :ref:`PEM <2021_pem>`
    * - :math:`incidence_{c,i}`
      - incidence probability of cause c among wasting category i
      - :math:`incidence_{c}*(1-paf_{c})*rr_{c,i}`
    * - :math:`incidence_c`
      - population-level incidence probability of cause c 
-     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, and :ref:`malaria <2021_cause_malaria>`
+     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, :ref:`malaria <2021_cause_malaria>`, and :ref:`PEM <2021_pem>`
    * - :math:`paf_{c}`
      - The PAF of cause c attributable to child growth failure (wasting, stunting, and underweight)
      - PAFs can be found on the :ref:`CGF risk effects document <2021_risk_effect_cgf>` both for incidence and excess mortality measures
@@ -419,13 +414,13 @@ In terms of the following variables:
      - Pulled from GBD
    * - :math:`emr_c`
      - Excess mortality rate of cause c
-     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, and :ref:`malaria <2021_cause_malaria>`
+     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, :ref:`malaria <2021_cause_malaria>`, and :ref:`PEM <2021_pem>`
    * - :math:`emr_\text{c,i}`
      - Excess mortality rate of cause c among wasting state i
      - :math:`emr_\text{c} * (1 - paf_c) * rr_\text{c,i}`
    * - :math:`csmr_c`
      - Cause-specific mortality rate of cause c
-     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, and :ref:`malaria <2021_cause_malaria>`
+     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, :ref:`malaria <2021_cause_malaria>`, and :ref:`PEM <2021_pem>`
 
 Derivation proofs
 '''''''''''''''''''
@@ -662,47 +657,6 @@ Data Description Tables
   12m-23m = 238 #2019 it was 5 = 1-5
   2y-4y = 34    #2019 it was 5 = 1-5
 
-
-
-.. todo::
-
-  Replace this section with a link to custom-calculated correlated PAFs for all CGF
-
-As we are building this model before the completion of GBD 2020, we 
-will need to calculate the PAFs ourselves, using the following equation:
-
-.. math::
-  \frac{(\sum_{wasting\_category_i} prevalence_{i} * rr_{ci})-1}{\sum_{wasting\_category_i} prevalence_{i} * rr_{ci}}
-
-.. list-table:: PAF equation variable descriptions
-   :widths: 6 10 10
-   :header-rows: 1
-
-   * - Variable
-     - Description
-     - Equation
-   * - :math:`rr_{ci}`
-     - The relative risk for incidence of cause c given wasting category i
-     -
-   * - :math:`prevalence_{i}`
-     - the prevalence of wasting category i 
-     - Pulled from GBD
-
-
-Note the RRs should be pulled as follows:
-
-.. code-block:: python
-
-  from get_draws.api import get_draws
-  get_draws(
-    gbd_id_type='rei_id',
-    gbd_id=240,
-    source='rr',
-    sex_id=[1,2],
-    age_group_id=[2, 3, 388, 389, 34],
-    decomp_step='iterative',
-    status='best'
-  )
 
 
 .. list-table:: Transition Data
