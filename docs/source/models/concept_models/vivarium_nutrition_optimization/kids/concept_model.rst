@@ -413,43 +413,25 @@ All possible observers and their default stratifications are outlined below. Req
   :header-rows: 1
 
   * - Output
-    - Include strata
-    - Exclude strata
+    - Note
   * - Stunting state person time
-    - * SQ-LNS coverage/utilization 
     - 
   * - Wasting transition counts
-    - * MAM treatment coverage* 
-      * SAM treatment coverage*
     - 
   * - Wasting state person time
-    - * SQ-LNS coverage/utilization 
-      * MAM treatment coverage*
-      * SAM treatment coverage*
+    - 
+  * - Underweight state person time
     - 
   * - Deaths and YLLs (cause-specific)
-    - * SQ-LNS coverage/utilization 
-      * MAM treatment coverage*
-      * SAM treatment coverage*
     - 
   * - YLDs (cause-specific)
     - 
-    - 
   * - Cause state person time
-    - 
     - 
   * - Cause state transition counts
     - 
-    - 
   * - Mortality hazard first moment
-    - * MAM treatment coverage*
-      * SAM treatment coverage*
-      * SQ-LNS coverage/utilization (separately if targeting)
-    - 
-
-.. note::
-
-  The mortality hazard first moment should be recorded as the sum of each simulant’s all-cause mortality hazard multiplied by the person-time spent with that mortality hazard for each observed stratum. This observer is an attempt to measure the expected differences in mortality between scenarios without the influence of stochastic uncertainty, which will enable us to run the simulation with smaller population sizes.
+    - Each simulant’s all-cause mortality hazard multiplied by the person-time spent with that mortality hazard for each observed stratum. This observer is an attempt to measure the expected differences in mortality between scenarios without the influence of stochastic uncertainty, which will enable us to run the simulation with smaller population sizes.
 
 2.6 Computational resource scoping
 ------------------------------------
