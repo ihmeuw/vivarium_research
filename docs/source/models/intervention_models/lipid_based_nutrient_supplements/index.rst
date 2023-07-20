@@ -134,6 +134,16 @@ There have been several recent meta-analyses on the effects of SQ-LNS, outlined 
 
       - Effect modified by sex
 
+  - Severe growth outcomes: [Dewey-et-al-2022]_
+
+    - Severe stunting prevalence ratio: 0.83 (95% CI: 0.78, 0.90)
+
+    - Severe wasting prevalence ration: 0.69 (95% CI: 0.55, 0.86)
+
+    - Concurrent severe stunting and severe wasting prevalence ratio: 0.47 (0.30, 0.73)
+
+    - Effects modified by level of wasting and stunting burden
+
   - Anemia and micronutrient status: [Wessells-et-al-2021]_
 
     - Significantly decreased anemia and vitamin A deficiency
@@ -165,7 +175,7 @@ Utilization algorithms
 
 We will consider two concepts of SQ-LNS services, including coverage and utilization:
 
-- **Coverage:** *access* to the intervention (such as living in an area where SQ-LNS products are available and in use). This will be determined by coverage scale-up algorithms in the concept model document.
+**1. Coverage:** *access* to the intervention (such as living in an area where SQ-LNS products are available and in use). This will be determined by coverage scale-up algorithms in the concept model document.
 
 Possible coverage values include:
 
@@ -173,7 +183,7 @@ Possible coverage values include:
 - **Covered:** Actively receiving SQ-LNS supplementation. Simulants aged 6 months to 2 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on wasting and stunting.
 - **Received:** No longer actively receiving SQ-LNS supplementation, but did receive SQ-LNS supplementation before the age of 2. Simulants aged 2 to 5 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on stunting, but not wasting.
 
-- **Utilization:** *use* of the intervention (actually taking the supplements and receiving the effects). This will be determined by the utilization algorithms below.
+**2. Utilization:** *use* of the intervention (actually taking the supplements and receiving the effects). This will be determined by the utilization algorithms below.
 
 There are various SQ-LNS utilization algorithms that may be desired under differing scenarios. They include:
 
