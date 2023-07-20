@@ -92,7 +92,7 @@ Documents that contain information specific to the overall model and the pregnan
     - (Does not require separate 2021 update)
   * - Child underweight exposure
     - No
-    - New :ref:`child underweight exposure model <2020_risk_exposure_child_underweight>`, still in progress
+    - New :ref:`child underweight exposure model <2020_risk_exposure_child_underweight>`
     - 
     - (Does not require separate 2021 update)
   * - Target area
