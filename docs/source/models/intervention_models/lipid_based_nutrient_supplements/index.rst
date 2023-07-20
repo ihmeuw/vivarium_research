@@ -369,6 +369,12 @@ References
     data meta-analysis of randomized controlled trials. Am J Clin Nutr
     2021;114(Suppl 11):15S–42S.
 
+.. [Dewey-et-al-2022]
+
+  View `Dewey et al. 2022 <https://pubmed.ncbi.nlm.nih.gov/36045000/>`_
+
+    Dewey KG, Arnold CD, Wessells KR, Prado EL, Abbeddou S, Adu-Afarwuah S, Ali H, Arnold BF, Ashorn P, Ashorn U, Ashraf S, Becquey E, Brown KH, Christian P, Colford JM Jr, Dulience SJ, Fernald LC, Galasso E, Hallamaa L, Hess SY, Humphrey JH, Huybregts L, Iannotti LL, Jannat K, Lartey A, Le Port A, Leroy JL, Luby SP, Maleta K, Matias SL, Mbuya MN, Mridha MK, Nkhoma M, Null C, Paul RR, Okronipa H, Ouédraogo JB, Pickering AJ, Prendergast AJ, Ruel M, Shaikh S, Weber AM, Wolff P, Zongrone A, Stewart CP. Preventive small-quantity lipid-based nutrient supplements reduce severe wasting and severe stunting among young children: an individual participant data meta-analysis of randomized controlled trials. Am J Clin Nutr. 2022 Nov;116(5):1314-1333. doi: 10.1093/ajcn/nqac232. Epub 2023 Feb 10. PMID: 36045000.
+
 .. [Huybregts-et-al-2019-sqlns]
 
   View `Huybregts et al. 2019 <https://pubmed.ncbi.nlm.nih.gov/31454356/>`_
