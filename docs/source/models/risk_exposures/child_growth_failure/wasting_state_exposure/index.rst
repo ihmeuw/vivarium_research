@@ -240,10 +240,6 @@ Vivarium model of wasting will not include a reincarnation pool.
 Here we include equations for the transition probabilities, and in the section 
 that follows we will detail how to calculate all the variables used.
 
-.. todo::
-
-  Investigate r4 parameter value... confirm if we want to keep the same
-
 .. list-table:: Wasting transition probability equations
    :widths: 5 15 10 10
    :header-rows: 1
