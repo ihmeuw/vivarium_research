@@ -72,6 +72,13 @@ The incidence and mortality RR values from GBD are for incidence and CSMR. For t
 we will convert to incidence and EMR relative risks. More information on this conversion is 
 below. 
 
+In order to account for the high degree of correlation between CGF indicators, GBD used a 
+constrained optimisation method to adjust the observed univariate RRs that come out of the 
+Burden of Proof analysis. Using a joint distribution of stunting, underweight, and wasting, 
+they generated one thousand RR draws for each univariate indicator and severity. Then they 
+altered these univariate RRs for each causes based upon interactions among the CGF indicators. 
+This means that the resulting RRs are independent of other CGF risks. 
+
 Vivarium Modeling Strategy
 --------------------------
 
@@ -133,6 +140,8 @@ Where the relative risk value will depend on the simulant's age group and risk e
 
    EMR_\text{cause,i} = EMR_\text{cause} * (1 - PAF_\text{CGF,cause}) * RR_\text{HAZ,cause,i} * RR_\text{WAZ,cause,i} * RR_\text{WHZ,cause,i}
 
+Note that since the RR values from GBD are independent, we multiply them together here without 
+double counting the CGF relative risks. 
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

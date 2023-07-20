@@ -131,7 +131,7 @@ Documents that contain information specific to the overall model and the pregnan
   * - CGF (wasting, stunting, and underweight)
     - Infectious disease
     - Only wasting is documented :ref:`found here <2019_risk_effect_wasting>`. Docs need updating
-    - Update to 2021 values, add underweight risk effects, add malaria as affected outcome
+    - Updated to 2021 values, added underweight risk effects, added malaria as affected outcome. :ref:`Updated version of CGF risk effects <2021_risk_effect_cgf>`
     - None
     - (Does not require separate 2021 update)
   * - Target area
