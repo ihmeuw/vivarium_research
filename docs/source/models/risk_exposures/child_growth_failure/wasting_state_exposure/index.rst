@@ -1,8 +1,6 @@
 .. role:: underline
     :class: underline
 
-
-
 ..
   Section title decorators for this document:
 
@@ -606,37 +604,7 @@ Rows of the P matrix sums to 1
 Data Description Tables
 +++++++++++++++++++++++
 
-.. todo::
-
-  Will want to update this strategy to be static propensity model rather than birth prevalence of 5 month olds so that we can have LBWSG affect wasting exposure for those under 6 months of age even for wave 1 in which we don't have wasting transitions for this group yet (this should be similar to how we did it for IV iron)
-
-.. list-table:: Wasting State Data
-   :widths: 5 10 10 20
-   :header-rows: 1
-
-   * - State
-     - Measure
-     - Value
-     - Notes
-   * - TMREL, MILD, MAM, SAM
-     - birth prevalence
-     - :math:`prevalence_{240_{cat-1-4}}`
-     - Use prevalence of age_group_id = 388 (1 to 5 months)
-
-.. code-block:: python
-
-   #to pull GBD 2021 category specific prevalence of wasting
-
-    get_draws(gbd_id_type='rei_id',
-                    gbd_id=240,
-                    source='exposure',
-                    year_id=2021,
-                    gbd_round_id=7,
-                    status='best',
-                    location_id = [179],
-                    decomp_step = 'iterative')
-
-.. list-table:: Wasting Restrictions 2021
+.. list-table:: Wasting transition model restrictions 2021
    :widths: 10 10 20
    :header-rows: 1
 
@@ -649,12 +617,9 @@ Data Description Tables
    * - Female only
      - False
      -
-   * - Prevalence age group start
-     - Early Neonatal
-     - age_group_id = 2. This is the earliest age group for which the wasting risk exposure estimates nonzero prevalence.
-   * - Burden age group start
-     - 28 days - 5 months
-     - age_group_id = 388. This is the earliest age group for which there exist wasting RRs.
+   * - Age group start
+     - 6-11 months
+     - age_group_id = 389
    * - Age group end
      - 2 to 4
      - age_group_id = 34
@@ -671,7 +636,16 @@ Data Description Tables
   12m-23m = 238 #2019 it was 5 = 1-5
   2y-4y = 34    #2019 it was 5 = 1-5
 
+.. code-block:: python
 
+   #to pull GBD 2021 category specific prevalence of wasting
+
+    get_draws(gbd_id_type='rei_id',
+                    gbd_id=240,
+                    source='exposure',
+                    year_id=2021,
+                    gbd_round_id=7,
+                    decomp_step='iterative')
 
 .. todo::
 
