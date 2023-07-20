@@ -455,12 +455,12 @@ Notably, the run time of this simulation may increase as we add complexity to ou
 3.0 Models
 ++++++++++
 
+Wave I
+------
+
 .. note::
 
   Model sequences were designed with the following in mind: https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp
-
-Wave I
-------
 
 .. list-table:: Model run requests
   :header-rows: 1
@@ -476,11 +476,12 @@ Wave I
     - Baseline
     - Baseline
     - 
-    - 
+    - Should include antenatal supplementation intervention effects
   * - 2.0
     - Include CIFF/wasting paper implementation of the wasting transition model for children 6-59 months
     - Baseline
     - Baseline
+    - 
     - 
     - This will implicitly include a model of wasting treatment
   * - 3.0
@@ -512,7 +513,7 @@ Wave I
     - Baseline, 0
     - Baseline, 0, 3
     - 
-    -
+    - 
   * - 8.0
     - Production test runs
     - Baseline, 0, 2
@@ -608,10 +609,6 @@ Wave I
       5. Stunting state person-time stratified by SQ-LNS utilization
       6. Mortality hazard first moment (?)
     - None
-
-.. todo::
-
-  Detail V&V plan for model versions above
 
 .. list-table:: Verification and validation tracking
   :header-rows: 1
