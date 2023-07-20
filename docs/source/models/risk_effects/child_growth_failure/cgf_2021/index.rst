@@ -122,6 +122,12 @@ PAF values are available below:
    - `Ethiopian PAF values calculated here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/CGF%20correlation%20data%20generation.ipynb>`_
  
 
+.. note::
+
+   There are some draws for which the PAF is negative. This happens because the 
+   relative risk values for some draws are less than one. We should use these 
+   values regardless as part of our Monte Carlo analysis.
+
 With the RR and PAF values above, the following equations can be used to calculate 
 simulant level incidence and EMR. 
 
