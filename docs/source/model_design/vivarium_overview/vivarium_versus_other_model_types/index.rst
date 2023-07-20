@@ -52,8 +52,7 @@ By using microsimulation, we probabilistically assign the above attributes heter
 Taken in aggregate, these attributes match real-world population-level data, derived from IHME's Global Burden of Disease (GBD) databases and other sources. 
 Over the duration of a given microsimulation run, simulant attributes are dynamically updated.
 
-.. image:: microsim_visual.png
-   :target: mirosim_visual.html
+.. image:: microsim_visual.PNG
 
 Simulation components are interdependent, and relationships between attributes are also based on best available real-world 
 evidence. For example, disease progression is a function of simulant characteristics and treatment; survival depends on stage of disease and other characteristics. 
