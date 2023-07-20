@@ -482,7 +482,6 @@ Wave I
     - Baseline
     - Baseline
     - 
-    - 
     - This will implicitly include a model of wasting treatment
   * - 3.0
     - Add malaria cause model
