@@ -386,18 +386,6 @@ In terms of the following variables:
      -
      - Update from documented value of 1; I suspect the docs were out of date with implementation. Ask Ali if confused.
 
-.. todo::
-
-  1. Incidence_ci will need to account for stunting and underweight correlation too
-    
-    Will probably be best to provide a "joint CGF" RR calculated from correlation notebooks here
-
-  2. Update PAF data... will need to come from correlation calculations rather than calculation listed here
-
-  3. Need to make duration specific to each wasting category and a function of both remission rate and category-specific EMR
-
-  4. EMR needs to be affected by category-specific CGF RRs
-
 .. list-table:: Calculations for variables in transition equations
    :widths: 6 10 10
    :header-rows: 1
@@ -405,36 +393,39 @@ In terms of the following variables:
    * - Variable
      - Description
      - Equation
-   * - :math:`prevalence_{ci}`
+   * - :math:`prevalence_{c,i}`
      - The prevalence of cause c among wasting category i
-     - :math:`incidence_{ci} * duration_c`
+     - :math:`incidence_{c,i} * duration_c`
    * - :math:`duration_c`
      - The average duration of cause c, in years
-     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`
-   * - :math:`incidence_{ci}`
+     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, and :ref:`malaria <2021_cause_malaria>`
+   * - :math:`incidence_{c,i}`
      - incidence probability of cause c among wasting category i
-     - :math:`incidence_{c}*(1-paf_{c})*rr_{ci}`
+     - :math:`incidence_{c}*(1-paf_{c})*rr_{c,i}`
    * - :math:`incidence_c`
      - population-level incidence probability of cause c 
-     - Pulled from GBD
+     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, and :ref:`malaria <2021_cause_malaria>`
    * - :math:`paf_{c}`
-     - The PAF of cause c attributable to wasting
-     - :math:`\frac{(\sum_{i} prevalence_{i} * rr_{ci})-1}{\sum_{i} prevalence_{i} * rr_{ci}}`
-   * - :math:`rr_{ci}`
-     - The relative risk for incidence of cause c given wasting category i
-     -
+     - The PAF of cause c attributable to child growth failure (wasting, stunting, and underweight)
+     - PAFs can be found on the :ref:`CGF risk effects document <2021_risk_effect_cgf>` both for incidence and excess mortality measures
+   * - :math:`rr_{c,i}`
+     - The CGF relative risk for of cause c given wasting category i
+     - Combined CGF relative risks (wasting, stunting, and underweight) specific to each wasting state `can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/joint_rrs.csv>`_, both for incidence and excess mortality measures
    * - :math:`prevalence_{i}`
      - the prevalence of wasting category i 
      - Pulled from GBD
    * - :math:`acmr`
-     - All-cause mortality probability
+     - All-cause mortality rate
      - Pulled from GBD
    * - :math:`emr_c`
-     - Excess mortality probability of cause c
-     - Pulled from GBD
+     - Excess mortality rate of cause c
+     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, and :ref:`malaria <2021_cause_malaria>`
+   * - :math:`emr_\text{c,i}`
+     - Excess mortality rate of cause c among wasting state i
+     - :math:`emr_\text{c} * (1 - paf_c) * rr_\text{c,i}`
    * - :math:`csmr_c`
      - Cause-specific mortality rate of cause c
-     - Pulled from GBD
+     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, and :ref:`malaria <2021_cause_malaria>`
 
 Derivation proofs
 '''''''''''''''''''
