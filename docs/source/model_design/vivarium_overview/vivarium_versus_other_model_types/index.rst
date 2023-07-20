@@ -52,7 +52,7 @@ Microsimulation models incorporate relevant characteristics, including:
 
 The above table provides an illustration of the simulant attributes that might be included in a Vivarium microsimulation. This particular example is pulled from a microsimulation of 
 antenatal nutritional supplementation effects on birthweight and child-growth failure. As you can see, the simulant listed here has attributes covering demography, risk factors (e.g., 
-*did the mother/birthing person received iron and folic acid (IFA) supplementation during pregnancy?*), causes (e.g., *what is the probability of child simulant having protein energy malnutrition (PEM)*),
+*did the mother/birthing person received iron and folic acid (IFA) supplementation during pregnancy?*), causes (e.g., *what is the probability of child simulant having protein energy malnutrition (PEM)?*),
 and mortality (e.g., *is the simulant alive or dead at this given timestep?*).
 
 By using microsimulation, we probabilistically assign the above attributes heterogeneously across individuals within the simulated population. 
