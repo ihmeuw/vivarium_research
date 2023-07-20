@@ -180,7 +180,7 @@ Assumptions and Limitations
 
 - We do not consider individual heterogeneity in wasting transition rates beyond what is modeled in the :ref:`wasting x-factor <2019_risk_exposure_x_factor>` model when it is included in the simulation
 
-- We rely on treatment data with sparce availability and assume that child wasting measured by WHZ is a reasonable proxy for acute malnutrition (often measured by MUAC)
+- We rely on treatment data with sparse availability and assume that child wasting measured by WHZ is a reasonable proxy for acute malnutrition (often measured by MUAC)
 
 - We cannot directly observe recovery time of untreated wasting as it would be unethical. Therefore, we must indirectly estimate this parameter
 
