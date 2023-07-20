@@ -405,9 +405,51 @@ Where:
 2.5 Outputs
 ------------
 
-.. todo::
+The outputs for this simulation will be highly variable by model version. This is because the production runs will have as few outputs and stratifications as possible to maximize efficiency and minimize computational resource requirements across the many modeled scenarios. However, different outputs and additional stratifications will be needed throughout model development for verification and validation. 
 
-  Include more info
+All possible observers and their default stratifications are outlined below. Requested outputs and stratification for each model run will be detailed in the model run request table. 
+
+.. list-table:: Requested Count Data Outputs and Stratifications
+  :header-rows: 1
+
+  * - Output
+    - Include strata
+    - Exclude strata
+  * - Stunting state person time
+    - * SQ-LNS coverage/utilization 
+    - 
+  * - Wasting transition counts
+    - * MAM treatment coverage* 
+      * SAM treatment coverage*
+    - 
+  * - Wasting state person time
+    - * SQ-LNS coverage/utilization 
+      * MAM treatment coverage*
+      * SAM treatment coverage*
+    - 
+  * - Deaths and YLLs (cause-specific)
+    - * SQ-LNS coverage/utilization 
+      * MAM treatment coverage*
+      * SAM treatment coverage*
+    - 
+  * - YLDs (cause-specific)
+    - 
+    - 
+  * - Cause state person time
+    - 
+    - 
+  * - Cause state transition counts
+    - 
+    - 
+  * - Mortality hazard first moment
+    - * MAM treatment coverage*
+      * SAM treatment coverage*
+      * SQ-LNS coverage/utilization (separately if targeting)
+    - 
+
+.. note::
+
+  The mortality hazard first moment should be recorded as the sum of each simulant’s all-cause mortality hazard multiplied by the person-time spent with that mortality hazard for each observed stratum. This observer is an attempt to measure the expected differences in mortality between scenarios without the influence of stochastic uncertainty, which will enable us to run the simulation with smaller population sizes.
 
 2.6 Computational resource scoping
 ------------------------------------
