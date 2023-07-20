@@ -106,6 +106,10 @@ Vivarium Modeling Strategy
 
 We will model pregnancy as a characteristic of women of reproductive age in our simulations. We will inform the *incidence* of pregnancy using the age-specific fertility and stillbirth to live birth ratio covariates from GBD. We will inform the *duration* of pregnancy using the GBD 2019 exposure distribution of gestational age.
 
+.. note::
+
+  For an explanation of the rationale behind the maternal disorders state in this model, see the :ref:`note on maternal disorders, pregnancies, and YLDs <MDYLDNote>` on the nutrition optimization pregnancy concept model document.
+
 .. image:: diagram.svg
 
 .. list-table:: State definitions
@@ -320,15 +324,15 @@ A duration of pregnancy value will need to be assigned to all pregnancies regard
 
 For partial term pregnancies (that result in abortion/miscarriage/ectopic pregnancy), assign a duration of pregnancy sampled from a uniform distribution beween 6 and 24 weeks (individual heterogeneity with no parameter uncertainty).
 
+For full term pregnancies (that result in live births or stillbirths), duration of pregnancy should be determined by gestational age exposure, which should be assigned according to the process for assigning LBWSG exposures described in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. The LBWSG exposure distribution used to assign gestational age exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section) and may also be modified by :ref:`antenatal supplementation intervention coverage <maternal_supplementation_intervention>`. Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
+
+.. note::
+
+  The impact of :ref:`antenatal supplementation intervention coverage <maternal_supplementation_intervention>` on pregnancy duration (distinguished from its effect on infant LBWSG exposure here) will have a minimal impact on total DALYs modeled in the nutrition optimization simulation (will only affect anemia YLDs by extending for the duration of the gestational age shift). Therefore, it would be an acceptable limitation to ignore the impact of this intervention coverage on pregnancy duration if it is convenient for implementation as long as the intervention continues to impact infant LBWSG exposures.
+
 .. todo::
 
-  Update link to correlation doc
-
-For full term pregnancies (that result in live births or stillbirths), duration of pregnancy should be determined by gestational age exposure, which should be assigned according to the process for assigning LBWSG exposures described in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. The LBWSG exposure distribution used to assign gestational age exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
-
-.. todo::
-
-  Describe how to handle intervention effects on gestational age here (remember, will make little difference for mothers... maybe ignore and only model impact on infants?)
+  Update the above note to reflect what is actually implemented.
 
 Pregnancy outcomes
 ~~~~~~~~~~~~~~~~~~

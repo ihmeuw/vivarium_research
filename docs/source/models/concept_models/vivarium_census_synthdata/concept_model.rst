@@ -1974,6 +1974,15 @@ The simulant attributes to sample (listed in the "What to Sample" section for ea
 except for those marked "for noise functions only," should be the columns present in :code:`pseudopeople` outputs.
 In those outputs, the columns should be **in the order they are listed here**.
 
+In most cases, we have not actually seen the data files we are simulating,
+because they are confidential.
+The schemas we define below are based on a combination of guesswork/assumptions and any
+public documentation we can find about the data files or the data collection process.
+For example, we have described most date columns to be formatted MM/DD/YYYY in the absence
+of specific information, because this is a common American format for dates.
+We have also omitted many columns that would truly be present, since we are focused
+only on those columns that would be most relevant to record linkage.
+
 .. todo::
   Move this documentation to the :code:`pseudopeople` repository.
 
@@ -2182,7 +2191,7 @@ There are two types of sampling plans:
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
-  * - Survey date
+  * - Survey date (stored as a string in MM/DD/YYYY format)
   * - First name
   * - Middle initial
   * - Last name
@@ -2394,7 +2403,7 @@ in the home.
   * - First name
   * - Middle initial
   * - Last name
-  * - DOB (stored as a string in MMDDYYYY format)
+  * - DOB (stored as a string in MMDDYYYY format, as indicated by [WIC_Guide]_)
   * - Physical Address Street Number
   * - Physical Address Street Name
   * - Physical Address Unit
@@ -2720,29 +2729,7 @@ in January 2024.
   * - Mailing Address ZIP Code
     -
   * - Social Security Number (if present)
-    -
-  * - ITIN (if present)
-    -
-  * - Income
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ID
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Name
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Street Number
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Street Name
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Unit
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address City
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address State
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address ZIP Code
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Type of tax form (W2 or 1099)
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
+    - ITIN if no SSN present
   * - Tracked Dependent(s) (for noise functions ONLY)
     -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
@@ -2757,36 +2744,8 @@ in January 2024.
     -
   * - Last name
     -
-  * - Mailing Address Street Number (blank for PO boxes)
-    -
-  * - Mailing Address Street Name (blank for PO boxes)
-    -
-  * - Mailing Address Unit (blank for PO boxes)
-    -
-  * - Mailing Address PO Box (blank for not PO boxes)
-    -
-  * - Mailing Address City
-    -
-  * - Mailing Address State
-    -
-  * - Mailing Address ZIP Code
-    -
   * - Social Security Number (if present)
-    -
-  * - ITIN (if present)
-    -
-  * - Income
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ID
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Name
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ZIP Code
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Type of tax form (W2 or 1099)
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
+    - ITIN if no SSN present
   * - Tracked Dependent(s) (for noise functions ONLY)
     -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
@@ -2797,19 +2756,22 @@ in January 2024.
     - This columns through the end are to be included for each dependent on the tax filing, up to 4 dependents
   * - First name
     -
-  * - Middle initial
-    -
   * - Last name
     -
   * - Social Security Number (if present)
-    -
-  * - ITIN (if present)
-    -
+    - ITIN if no SSN present
 
 .. note::
 
   In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
+.. todo::
+  
+  Add total income to this observer. 
+
+.. todo::
+  
+  Add a way to capture forms a simulant would file besides the 1040 (e.g. W2/1099 forms).
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
@@ -2944,11 +2906,11 @@ added later (not in the minimum viable model), if desired.
   * - First name
   * - Middle initial
   * - Last name
-  * - DOB (stored as a string in YYYYMMDD format)
+  * - DOB (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
   * - Sex (binary; "Male" or "Female")
   * - Social Security Number
   * - Type of event
-  * - Date of event (stored as a string in YYYYMMDD format)
+  * - Date of event (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
 
 .. note::
   Unlike the other observers, there is no ground-truth unique household ID for PRL tracking in this observer.
@@ -4369,3 +4331,7 @@ To Come (TK)
 .. [PUMS_Data_Dictionary] Bureau, US Census. March 31, 2022. “2016-2020 ACS PUMS Data Dictionary” Census.Gov. Accessed February 10, 2023. https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2016-2020.pdf
 
 .. [Life_Expectancy_Race_Ethnicity] GBD US Health Disparities Collaborators. Life expectancy by county, race, and ethnicity in the USA, 2000–19: a systematic analysis of health disparities. The Lancet. 2022 Jul; 400(10345):25-38. https://doi.org/10.1016/S0140-6736(22)00876-5
+
+.. [CARRA_SSA] Benjamin Cerf Harris. Likely Transgender Individuals in U.S. Federal Administrative Records and the 2010 Census. US Census Bureau. 2015. https://www.census.gov/content/dam/Census/library/working-papers/2015/adrm/carra-wp-2015-03.pdf
+
+.. [WIC_Guide] Economic Research Service of the US Department of Agriculture. Guide to Variables for WIC Administrative Data Available Through a Federal Statistical Research Data Center (FSRDC). 2022. https://www.ers.usda.gov/media/duko3qi3/guide-to-variables-for-wic-administrative-data.xlsx
