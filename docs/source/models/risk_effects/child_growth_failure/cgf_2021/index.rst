@@ -46,17 +46,11 @@ age (WAZ).
 The risk effects are found for each of these risk exposures based on categorical 
 definitions using the WHO 2006 growth standards for children 0-59 months. 
 They are: mild (<-1 to -2 Z score), moderate (<-2 to -3 Z score), and severe 
-(<3 Z score).
+(<-3 Z score).
 
 All three metrics are a measure of acute malnutrition and are associated with increased 
 mortality and susceptibility to infectious disease. More information can be found in 
-the :ref:`wasting risk exposure model document <2020_risk_exposure_wasting_state_exposure>`, 
-the :ref:`stunting risk exposure model document <2020_risk_exposure_child_stunting>`, and the 
-underweight exposure model document. 
-
-.. todo::
-
-   Add a link to the underweight exposure model document when completed. 
+the :ref:`CGF risk exposure model document <risk_exposure_child_growth_failure>`. 
 
 GBD Modeling Strategy
 ----------------------
@@ -74,6 +68,10 @@ result in a couple of differences relevant to our simulation:
 #. There are now separate RR values for incidence and mortality 
 #. Malaria was identified as an affected cause 
 
+The incidence and mortality RR values from GBD are for incidence and CSMR. For this model, 
+we will convert to incidence and EMR relative risks. More information on this conversion is 
+below. 
+
 Vivarium Modeling Strategy
 --------------------------
 
@@ -87,16 +85,34 @@ Additionally, these relative risks vary by simulant age. The age categories are:
 of age, the risk effects are caused by LBWSG not CGF and so are not included here. Additionally, 
 there are separate relative risks for incidence and mortality. 
 
-Therefore, a simulant's relative risk value is dependent on: the risk exposure variable, 
-the simulant's risk exposure category, the cause and cause metric affected, and the 
-simulant's age. For example, a single relative risk might be the 
-RR for **WAZ** on **malaria incidence** for a simulant in the **moderate** exposure 
-category who is **6-11 months** old. 
+Therefore, a simulant's relative risk value is dependent on: the risk exposure variable 
+(e.g., WAZ), the simulant's risk exposure category (e.g., moderate), the cause (e.g., malaria) 
+and cause metric affected (e.g., incidence), and the simulant's age (e.g., 6-11 months). 
+Putting this together, a single relative risk might be the RR for **WAZ** on **malaria incidence** 
+for a simulant in the **moderate** exposure category who is **6-11 months** old. 
 
 Relative risk values can be pulled using the following code::
 
   rrs = get_draws(gbd_round_id=7, year_id=2021, gbd_id_type='rei_id', gbd_id=[241,240,94], source='rr', decomp_step='iterative')
 
+The mortality relative risk values will then need to be adjusted. The GBD values are for CSMR, 
+but we will use EMR. To adjust between CSMR and EMR values, you can use this equation: 
+
+.. math::
+   
+   \text{EMR RR_cause,i} = \frac{\text{CSMR RR_cause,i}}{\text{incidence RR_cause,i}}
+
+We have validated this equation in two ways. First, we checked this mathematically. 
+Using equations for incidence, EMR, and prevalence based on information we knew in the 
+model, we found an equation for EMR relative risk. We tested this equation and found 
+that the answer was almost identical to the equation shown above. The math 
+proof for this can be found :download:`in this word doc <cgf_risks_math.docx>`.
+
+
+Secondly, we created a `nano simulation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_nanosim/cgf_nanosim_v3.ipynb>`_ to test that by using the equation above and 
+applying the EMR and incidence relative risks to the simulated population, that the 
+resulting CSMR relative risk was about what we expected. The notebook validated this 
+approach and was able to reproduce the expected CSMR RR with some noise. 
 
 PAFs will be calculated separately to have a single joint PAF for CGF. 
 
@@ -109,17 +125,13 @@ simulant level incidence and EMR.
 
 .. math::
 
-   incidence rate_\text{cause,i} = incidence rate_\text{cause} * (1 - PAF_\text{CGF,cause}) * RR_\text{HAZ,cause,i} * RR_\text{WAZ,cause,i} * RR_\text{WHZ,cause,i}
+   incidence_\text{cause,i} = incidence_\text{cause} * (1 - PAF_\text{CGF,cause}) * RR_\text{HAZ,cause,i} * RR_\text{WAZ,cause,i} * RR_\text{WHZ,cause,i}
 
 Where the relative risk value will depend on the simulant's age group and risk exposure category. 
 
 .. math:: 
 
    EMR_\text{cause,i} = EMR_\text{cause} * (1 - PAF_\text{CGF,cause}) * RR_\text{HAZ,cause,i} * RR_\text{WAZ,cause,i} * RR_\text{WHZ,cause,i}
-
-.. todo::
-
-   We need to add an adjustment since the GBD mortality data is actually for CSMR not EMR. So the above equation is currently incorrect. 
 
 
 Validation and Verification Criteria
@@ -132,9 +144,7 @@ Validation and Verification Criteria
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
-
-   List assumptions and limitations
+#. We assume that converting to EMR relative risks from the GBD supplied CSMR relative risks will work for all combinations of RRs, incidences, risk exposures, etc. We believe this is true based on the nano sim and math proof above. 
 
 References
 ----------
