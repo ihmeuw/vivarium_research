@@ -389,7 +389,7 @@ In terms of the following variables:
    * - Variable
      - Description
      - Equation
-   * - :math:`prevalence_{c,i}`
+   * - :math:`\text{prevalence}_{c,i}`
      - The prevalence of cause c among wasting category i
      - :math:`incidence_{c,i} * duration_c`
    * - :math:`duration_c`
