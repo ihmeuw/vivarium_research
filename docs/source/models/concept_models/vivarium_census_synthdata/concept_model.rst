@@ -2806,6 +2806,13 @@ If a simulant has more than 4 dependents,
 4 of their dependents are chosen to be included on the 1040 and the rest are omitted.
 This can be uniformly at random (preferred), or in another way if that is easier computationally.
 
+.. note::
+  Due to random sampling of a filer's dependents being more complicated to implement, the engineers have
+  currently implemented this as the 4 dependents included in the 1040 observer as the first 4 of the filer,
+  rather than 4 randomly selected dependents from both guardians in a joint filing row. In a later release,
+  we can implement the random sampling!
+
+
 **Who to Sample**
 
 .. todo::
