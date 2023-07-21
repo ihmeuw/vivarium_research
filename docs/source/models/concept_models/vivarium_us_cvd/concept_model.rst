@@ -432,7 +432,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - Measurements have a minimum value of 0 enforced [Wallace_2011]_
   * - B
     - 41.76% will not start medication due to theraputic inertia. The others will start on one drug at half dose. 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Ali_2021]_ [Liu_2017]_
+    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - C
     - 41.76% will not start medication. Of those that start medication: 45% will receive two drugs at half dose and 55% will receive one drug at half dose  
     - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
@@ -1017,27 +1017,24 @@ Code is below for reference
     - Adding the transient state 
     - To help fix observed issues, we added a transient state to the IHD cause model. This ensures that the probability of an event for a single simulant never goes over 100%. More information can be found on the IHD cause model page. After some debugging, the model appears to be working as expected. This model was validated in the same workbooks as model 12 and links can be found above. At this time, the new list of outstanding `possible V and V items is here <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B3B5D387C-0BAC-4312-99FD-0EB43FC85944%7D&file=Model_Updates_5.26.23.docx&action=default&mobileredirect=true>`_. None of these are under active investigation but are important to note. 
   * - 15.0
-    - New State 
-    - 
+    - Extended V&V Attempts 
+    - There were many runs and a significant amount of back and forth to try to solve some V&V issues. The main issues were: too low exposures at initialization, decreasing risk factors over time, and too low incidence for MI and stroke. The test runs completed and current thinking are best recorded in this `tracker <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BC6881D3C-63E1-450A-A1A6-3A866080D0DD%7D&file=CVD_VV_Tracker_06202023.xlsx&action=default&mobileredirect=true>`_. At this time, this has not been solved. 
   * - 16.0
-    - All 51 locations  
-    - 
-  * - 17.0
     - Add New Observer 
     - 
-  * - 18.0
-    - Results Management Updates 
-    - 
-  * - 19.0
+  * - 17.0
     - Test Runs for Timing on 10 States 
     - States to be included are: Alabama, Washington, Alaska, Rhode Island, California, Texas, Kansas, West Virginia, Florida, North Dakota  
-  * - 20.0
+  * - 18.0
+    - Adjusting Theraputic Inertia 
+    - 
+  * - 19.0
     - Add Risk Correlation, Medication and PAF Recalculations 
     - 
-  * - 21.0
+  * - 20.0
     - Update to GBD 2021 
-    - 
-  * - 22.0
+    - Need to confirm if this is going to be included in phase 1 
+  * - 21.0
     - Final Runs 
     - Research team to specify this further 
 
