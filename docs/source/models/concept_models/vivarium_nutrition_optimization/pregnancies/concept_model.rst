@@ -564,6 +564,7 @@ Specific outputs for specific models are specified in the following section.
 
       * Background mortality successfully removed
       * Maternal disorders incidence looks great
+      
       1. Maternal disorders mortality is overestimated
 
         * Accurately replicates :code:`cause.maternal_disoders.mortality_probability` artifact key values, but these values are not as expected. Could need artifact rebuild?
@@ -577,7 +578,7 @@ Specific outputs for specific models are specified in the following section.
       3. `Additionally, duration of the postpartum state is looking too long <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_2.0_preg_states.ipynb>`_
 
       4. Artifact value for maternal disorders CSMR equals zero for 50-54 age group when it should not
-      
+
 
 
 .. list-table:: Outstanding V&V issues
