@@ -82,8 +82,8 @@ Documents that contain information specific to the overall model and the pregnan
     - 
   * - Child wasting exposure
     - :ref:`2020 docs<2020_risk_exposure_wasting_state_exposure>`, implemented in wasting paper
-    - Calibration will need to include stunting/underweight mortality effects
-    - Transitions for 0-6 months
+    - :ref:`Updated docs for children 6-59 months <2021_risk_exposure_wasting_state_exposure>`, use :ref:`static wasting exposure <2020_risk_exposure_static_wasting>` for children 0-6 months of age (as implemented in IV iron)
+    - Include transitions for 0-6 months
     - (Does not require separate 2021 update)
   * - Child stunting exposure
     - :ref:`2020 docs<2020_risk_exposure_child_stunting>`, implemented in IV iron, wasting paper

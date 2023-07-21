@@ -53,6 +53,7 @@ Wasting dynamic transition model (GBD 2021)
     - `vivarium_research PR#1254 <https://github.com/ihmeuw/vivarium_research/pull/1254>`_: updated wasting intervention parameters (from the Ethiopian ministry of health values used in the acute malnutrition project to the COMPAS trial values used in the nutrition optimization project)
     - `vivarium_research PR#1257 <https://github.com/ihmeuw/vivarium_research/pull/1257>`_: updated :math:`d_i` equation to include malaria as an affected cause and to make excess mortality rates of affected causes specific to wasting exposure category
     - `vivarium_research PR#1258 <https://github.com/ihmeuw/vivarium_research/pull/1258>`_: updated time_step scalar value (may have already been implemented in the acute malnutrition model and just the docs were out of date)
+    - `vivarium_research PR#1274 <https://github.com/ihmeuw/vivarium_research/pull/1274>`_: applied model to those 6 months and older only
 
   Also note that the protein energy malnutrition (PEM) risk-attributable cause model
   has been removed from this page and is :ref:`instead available here <2021_pem>`.
@@ -156,8 +157,6 @@ breastfeeding and reduction of LBWSG.
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-.. image:: vivarium_wasting_model_with_t1.svg
-
 We will model wasting in four compartments: TMREL, Mild, Moderate, and Severe.
 In a given timestep a simulant will either stay put, transition to an adjacent 
 wasting category, or die. In this case of "CAT 1: severe wasting", simulants can 
@@ -173,6 +172,15 @@ For wave I of the :ref:`nutrition optimization model <2021_concept_model_vivariu
 models for these affected causes will draw from the corresponding GBD 2019 models
 until we update the entire simulation to GBD 2021 results.
 
+.. important::
+
+  We will model wasting transitions as detailed on this page **only** among simulants at least six months of age.
+
+  There will be separate wasting exposure models for simulants 0-6 months of age will be detailed separately.
+
+    - :ref:`Static wasting exposure <2020_risk_exposure_static_wasting>` for wave I of the nutrition optimization model
+    - Wasting transition model among 0-6 month olds for wave II of the nutrition optimization model (TODO: link page when ready)
+
 Assumptions and Limitations
 ---------------------------
 
@@ -187,8 +195,7 @@ Assumptions and Limitations
 Input data
 ----------
 
-GBD and literature sources
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. image:: vivarium_wasting_model_with_t1.svg
 
 .. list-table:: Wasting model input data sources
    :widths: 15 15
@@ -211,20 +218,6 @@ Deriving wasting transition probabilities
 Markov derivation
 ^^^^^^^^^^^^^^^^^
 
-.. important::
-
-  **For wave I of the nutrition optimization model**
-
-  We will model wasting transitions and risk effects **only** among simulants at least six months of age. Simulants should be initialized into a wasting model state at birth with a birth prevalence equal to the wasting risk exposure among the 1-5 month age group (age_group_id=388, or the postneonatal age_group_id=4 if using GBD 2019 instead of GBD 2021). 
-
-  All wasting transition rates should equal zero among all ages under 6 months. The relative risks for each wasting risk exposure category and each risk/outcome pair should equal one for all ages under 6 months.
-
-  Wasting transition rates should be informed by the data tables below for ages over 6 months. Wasting risk effects for ages over 6 months should be informed by the standard GBD wasting relative risks.
-
-  NOTE: When the birthweight and wasting risk exposure at birth correlation is implemented, it will cause simulants with a greater neonatal mortality (due to brithweight exposure) to be initialized into more severe wasting states. This will cause the wasting exposure distribution to shift to less severe wasting states over the neonatal period as simulants with lower birthweights (and more severe wasting states due to the birthweight and wasting exposure correlation) die. The magnitude of the bias introduced by this modeling strategy should be investigated upon implementation to determine if different modeling strategies are necessary. This should be done by comparing the wasting exposure and wasting-affected outcomes in the simulation output to the GBD inputs by age group.
-
-  NOTE: The modeling decision not to model wasting transitions among simulants less than six months of age is due to the reliance of the wasting model transition rates on the wasting treatment model and the lack of data to inform treatment-related transition rates among this age group. Note that a sensitivity analysis scenario that includes infants less than six months of age in the treatment model may be performed in the future.
-
 This Markov model comprises 5 compartments: four wasting categories, plus CAT 0.
 Because we need simulants to die at a higher rate out of CAT 1 than CAT 2, 3, or
 the TMREL, it is necessary to include death to correctly derive our transition 
@@ -242,10 +235,6 @@ Vivarium model of wasting will not include a reincarnation pool.
 
 Here we include equations for the transition probabilities, and in the section 
 that follows we will detail how to calculate all the variables used.
-
-.. todo::
-
-  Investigate r4 parameter value... confirm if we want to keep the same
 
 .. list-table:: Wasting transition probability equations
    :widths: 5 15 10 10
@@ -602,37 +591,7 @@ Rows of the P matrix sums to 1
 Data Description Tables
 +++++++++++++++++++++++
 
-.. todo::
-
-  Will want to update this strategy to be static propensity model rather than birth prevalence of 5 month olds so that we can have LBWSG affect wasting exposure for those under 6 months of age even for wave 1 in which we don't have wasting transitions for this group yet (this should be similar to how we did it for IV iron)
-
-.. list-table:: Wasting State Data
-   :widths: 5 10 10 20
-   :header-rows: 1
-
-   * - State
-     - Measure
-     - Value
-     - Notes
-   * - TMREL, MILD, MAM, SAM
-     - birth prevalence
-     - :math:`prevalence_{240_{cat-1-4}}`
-     - Use prevalence of age_group_id = 388 (1 to 5 months)
-
-.. code-block:: python
-
-   #to pull GBD 2021 category specific prevalence of wasting
-
-    get_draws(gbd_id_type='rei_id',
-                    gbd_id=240,
-                    source='exposure',
-                    year_id=2021,
-                    gbd_round_id=7,
-                    status='best',
-                    location_id = [179],
-                    decomp_step = 'iterative')
-
-.. list-table:: Wasting Restrictions 2021
+.. list-table:: Wasting transition model restrictions 2021
    :widths: 10 10 20
    :header-rows: 1
 
@@ -645,12 +604,9 @@ Data Description Tables
    * - Female only
      - False
      -
-   * - Prevalence age group start
-     - Early Neonatal
-     - age_group_id = 2. This is the earliest age group for which the wasting risk exposure estimates nonzero prevalence.
-   * - Burden age group start
-     - 28 days - 5 months
-     - age_group_id = 388. This is the earliest age group for which there exist wasting RRs.
+   * - Age group start
+     - 6-11 months
+     - age_group_id = 389
    * - Age group end
      - 2 to 4
      - age_group_id = 34
@@ -667,7 +623,16 @@ Data Description Tables
   12m-23m = 238 #2019 it was 5 = 1-5
   2y-4y = 34    #2019 it was 5 = 1-5
 
+.. code-block:: python
 
+   #to pull GBD 2021 category specific prevalence of wasting
+
+    get_draws(gbd_id_type='rei_id',
+                    gbd_id=240,
+                    source='exposure',
+                    year_id=2021,
+                    gbd_round_id=7,
+                    decomp_step='iterative')
 
 .. todo::
 
