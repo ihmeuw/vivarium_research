@@ -564,15 +564,20 @@ Specific outputs for specific models are specified in the following section.
 
       * Background mortality successfully removed
       * Maternal disorders incidence looks great
-      * Maternal disorders mortality is overestimated
+      1. Maternal disorders mortality is overestimated
 
         * Accurately replicates :code:`cause.maternal_disoders.mortality_probability` artifact key values, but these values are not as expected. Could need artifact rebuild?
       
-      * Maternal disorders YLDs underestimated
+      2. Maternal disorders YLDs underestimated
 
-        * Likely a result of overestimation of mortality because fatal cases do not receive YLDs
+        * Could be due to (1) overestimation of mortality because fatal cases do not receive YLDs and/or (2) YLD equation build with out-of-date MD incidence rate that was not "raw" (total population incidence rate)
 
-      * `Additionally, duration of the postpartum state is looking too long <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_2.0_preg_states.ipynb>`_
+        * Maternal disorders YLD artifact value does not match expected value
+
+      3. `Additionally, duration of the postpartum state is looking too long <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_2.0_preg_states.ipynb>`_
+
+      4. Artifact value for maternal disorders CSMR equals zero for 50-54 age group when it should not
+      
 
 
 .. list-table:: Outstanding V&V issues
