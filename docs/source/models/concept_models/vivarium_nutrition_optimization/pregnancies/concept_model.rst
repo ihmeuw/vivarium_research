@@ -572,6 +572,8 @@ Specific outputs for specific models are specified in the following section.
 
         * Likely a result of overestimation of mortality because fatal cases do not receive YLDs
 
+      * `Additionally, duration of the postpartum state is looking too long <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_2.0_preg_states.ipynb>`_
+
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -588,6 +590,10 @@ Specific outputs for specific models are specified in the following section.
     - most likely a result of the above issue
     - Check to see it is resolved in 2.0.1 bugfix run
     - 
+  * - Duration of postpartum state is looking too long
+    - Unknown
+    - Align on expected duration of 5 or 6 weeks and update docs to clarify. Patrick to investigate postartum state behavior in implementation (Ali could check in interactive sim too)
+    - Lower priority.
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++
