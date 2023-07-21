@@ -401,6 +401,30 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy state person-time
       * Pregnancy transition counts
       * Incident maternal disorder counts
+    - N/A
+    - 
+  * - 2.0.1
+    - Maternal disorders bugfix
+    - Baseline
+    - None
+    - * Deaths
+      * YLLs
+      * YLDs
+      * Pregnancy state person-time
+      * Pregnancy transition counts
+      * Incident maternal disorder counts
+    - N/A
+    - 
+  * - 2.1
+    - Maternal hemorrhage cause models
+    - Baseline
+    - None
+    - * Deaths
+      * YLLs
+      * YLDs
+      * Pregnancy state person-time
+      * Pregnancy transition counts
+      * Incident maternal disorder counts
       * Incident maternal hemorrhage counts
     - N/A
     - 
@@ -511,6 +535,7 @@ Specific outputs for specific models are specified in the following section.
 
 .. list-table:: Verification and validation tracking
   :header-rows: 1
+  :widths: 1 5 5
 
   * - Model
     - V&V plan
@@ -532,10 +557,21 @@ Specific outputs for specific models are specified in the following section.
       * Check that average duration of live and still birth outcomes is close to 38-39 weeks or so in maternal outputs
       * Check live birth to stillbirth ratio verifies to expected value
       * Check that LBWSG exposure in child outputs verifies to GBD exposure distribution
-    - Looks good! `Model 1.2 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.2.ipynb>`. Noted that infant sex should be added to child output data moving forward.
+    - Looks good! `Model 1.2 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.2.ipynb>`_. Noted that infant sex should be added to child output data moving forward.
   * - 2.0
-    - Verify incident and fatal maternal disorder and maternal hemorrhage (incident only) rates as well as YLDs, confirm removal of background mortality
-    - 
+    - Verify incident and fatal maternal disorder rates as well as YLDs, confirm removal of background mortality
+    - `Model 2.0 V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_2.0_maternal_disorders.ipynb>`_
+
+      * Background mortality successfully removed
+      * Maternal disorders incidence looks great
+      * Maternal disorders mortality is overestimated
+
+        * Accurately replicates :code:`cause.maternal_disoders.mortality_probability` artifact key values, but these values are not as expected. Could need artifact rebuild?
+      
+      * Maternal disorders YLDs underestimated
+
+        * Likely a result of overestimation of mortality because fatal cases do not receive YLDs
+
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -544,9 +580,13 @@ Specific outputs for specific models are specified in the following section.
     - Explanation
     - Action plan
     - Timeline
-  * - 
-    - 
-    - 
+  * - Overestimation of maternal disorders mortality
+    - :code:`cause.maternal_disoders.mortality_probability` artifact key values incorrect
+    - Patrick to investigate
+    - Next model run 2.0.1
+  * - Underestimation of maternal disorders YLDs
+    - most likely a result of the above issue
+    - Check to see it is resolved in 2.0.1 bugfix run
     - 
 
 4.0 Research background and limitations
