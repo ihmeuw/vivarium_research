@@ -407,12 +407,7 @@ Specific outputs for specific models are specified in the following section.
     - Maternal disorders bugfix
     - Baseline
     - None
-    - * Deaths
-      * YLLs
-      * YLDs
-      * Pregnancy state person-time
-      * Pregnancy transition counts
-      * Incident maternal disorder counts
+    - Same as 2.0
     - N/A
     - 
   * - 2.1
