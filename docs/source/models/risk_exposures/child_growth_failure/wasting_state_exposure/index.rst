@@ -184,17 +184,13 @@ until we update the entire simulation to GBD 2021 results.
 Assumptions and Limitations
 ---------------------------
 
-..  todo::
+- We do not consider seasonal variation in wasting exposure or transition rates
 
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model. Flesh out list below.
+- We do not consider individual heterogeneity in wasting transition rates beyond what is modeled in the :ref:`wasting x-factor <2019_risk_exposure_x_factor>` model when it is included in the simulation
 
- - Markov chain assumption is flawed (remission / incidence isn't constant over time / memoryless).
+- We rely on treatment data with sparse availability and assume that child wasting measured by WHZ is a reasonable proxy for acute malnutrition (often measured by MUAC)
 
- - Seasonality of data
-
- - Unclear if our input data that informs "time to recovery from SAM" ought to be "time to recovery or death from SAM"
+- We cannot directly observe recovery time of untreated wasting as it would be unethical. Therefore, we must indirectly estimate this parameter
 
 Input data
 ----------
