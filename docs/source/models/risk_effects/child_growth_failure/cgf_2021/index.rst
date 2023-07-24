@@ -121,6 +121,12 @@ applying the EMR and incidence relative risks to the simulated population, that 
 resulting CSMR relative risk was about what we expected. The notebook validated this 
 approach and was able to reproduce the expected CSMR RR with some noise. 
 
+There are some cases where the CSMR RR is less than the incidence RR value. This will then 
+create an EMR RR less than one - or a protective effect from CGF to disease survival. While 
+this is counterintuitive, we are allowing for this case to be in the model. We expect this 
+is due to a lack of statistical significance in creation of RR values which will be accounted 
+for in our monte carlo uncertainty. 
+
 PAFs will be calculated separately to have a single joint PAF for CGF. 
 
 .. todo::
@@ -155,6 +161,7 @@ Assumptions and Limitations
 
 #. We assume that converting to EMR relative risks from the GBD supplied CSMR relative risks will work for all combinations of RRs, incidences, risk exposures, etc. We believe this is true based on the nano sim and math proof above. 
 #. We assume that the duration of illness will be the same for all simulants. It is possible that wasted, stunted, or underweight children might have lower immune function and therefore take longer to recover from an illness. This would lead to a longer duration. We do not include this in our model. 
+#. Some EMR RR values might be less than 1 when the CSMR RR is less than the incidence RR. This is counterintuitivebut we allow it in the model since we think this is due to a lack of statistical significance in creation of RR values which will be accounted for in our monte carlo uncertainty. 
 
 References
 ----------
