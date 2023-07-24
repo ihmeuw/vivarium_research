@@ -107,15 +107,13 @@ exposures.
   propensity (test in notebook)
 
 The underweight exposure distribution conditional on wasting and stunting 
-exposures to be used in vivarium simulations can be found here. Details on how 
+exposures to be used in vivarium simulations can be found in the links below.
+Details on how 
 these distributions were obtained can be found in the subsequent section.
 
-.. todo::
+- `Ethiopian conditional underweight exposure distributions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/lookup.csv>`_
 
-  Link conditional exposure distribution .csv when complete
-
-  Note we are currently blocked by awaiting communication with the GBD CGF 
-  modeling team
+  - Note: the postneonatal age group should be applied to the early neonatal age group as well.
 
 With this strategy, child underweight will dynamically update within a 
 single age group in tandem with child wasting exposure changes and may also 
@@ -130,10 +128,6 @@ reassessed upon the following events:
 Calculation of wasting exposure distribution conditional on stunting and wasting exposures
 -------------------------------------------------------------------------------------------
 
-.. todo::
-
-  Link notebook in which this calculation is performed when it is ready
-
 The child underweight exposure distribution conditional on wasting and stunting 
 exposure is custom calculated according to the following steps:
 
@@ -142,16 +136,18 @@ correlation coefficients from Demographic Health Survey (DHS) data for the
 population of interest
 
 2. In a "nano simulation," assign simulants continuous WHZ, HAZ, and WAZ 
-exposure values according to:
+exposure propensity values according to the correlation coefficients obtained 
+from DHS data.
 
-  - The GBD continuous exposure distributions for these metrics
-
-  - The correlation coefficients obtained from DHS data
-
-3. Convert the continuous exposures to categorical exposures
+3. Use these propensities to assign categorical wasting, stunting, and underweight
+exposure values to each simulant.
 
 4. Calculate categorical child underweight exposure distributions specific to 
-each joint wasting and stunting exposure category
+each joint wasting and stunting exposure category.
+
+The notebook for which these steps were performed can be found at the links below:
+
+- `Ethiopian notebooks <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/cgf_correlation/ethiopia>`_
 
 Restrictions
 ------------
