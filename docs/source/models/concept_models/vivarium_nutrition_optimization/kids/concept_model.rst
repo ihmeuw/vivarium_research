@@ -56,6 +56,30 @@ Documents that contain information specific to the overall model and the pregnan
 1.2 Outstanding questions and/or high-level to-dos
 -------------------------------------------------------
 
+**Outstanding questions/to-dos:**
+
+- Determine how to handle the :ref:`wasting treatment propensity strategy as described here <WastingPropensityNote>` for the baseline scenario 
+
+  - In short, the optimization protocol generally assumes that all interventions have the same propensity, although the child wasting treatment modeling strategy has a randomly generated propensity value upon each wasting transition. 
+
+  - Note that this should only affect the baseline scenario as it is the only scenario in which wasting treatment coverage values will not equal zero or one.
+
+**Notes/reminders:**
+
+- We have chosen to exclude the "vicious cycle" feedback model from diarrheal diseases to child wasting in this simulation for the following reasons:
+
+  - Inclusion of this effect would require "backing out" the direct effect of SQ-LNS on wasting exposure from the total effect of SQ-LNS on wasting exposure as mediated through the feedback cycle with diarrheal diseases as to not "double count" any effects of SQ-LNS on child wasting exposure.
+
+  - This simulation model does not include any interventions that directly reduce diarrheal disease incidence rates, so it is not a pathway by which interventions primarily affect intervention outcomes.
+
+- We have chosen to exclude the x-factor model of heterogeneity in wasting incidence rates calibrated to wasting treatment relapse data from this simulation for the following reasons:
+
+  - This model made little difference in population-level intervention impact estimates when included in the CIFF project.
+
+  - This model requires robust external calibration.
+
+  - We are not considering any interventions that are directly targeted to the "x-factor." Instead, we will target interventions to a separate "target area" risk factor that will incorporate heterogeneity in wasting incidence rates. 
+
 2.0 Model design
 ++++++++++++++++
 

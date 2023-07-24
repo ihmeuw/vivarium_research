@@ -241,6 +241,8 @@ and
 
   \overline{RR_{r}} = C * RR_{r, treated} + (1 - C) * RR_{r, untreated}
 
+.. _WastingPropensityNote:
+
 Coverage Propensities
 ++++++++++++++++++++++
 
