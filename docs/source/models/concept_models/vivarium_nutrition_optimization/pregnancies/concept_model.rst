@@ -403,13 +403,6 @@ Specific outputs for specific models are specified in the following section.
       * Incident maternal disorder counts
     - N/A
     - 
-  * - 2.0.1
-    - Maternal disorders bugfix
-    - Baseline
-    - None
-    - Same as 2.0
-    - N/A
-    - 
   * - 2.1
     - Maternal hemorrhage cause models
     - Baseline
@@ -563,18 +556,10 @@ Specific outputs for specific models are specified in the following section.
       1. Maternal disorders mortality is overestimated
 
         * Accurately replicates :code:`cause.maternal_disoders.mortality_probability` artifact key values, but these values are not as expected. Could need artifact rebuild?
-      
-      2. Maternal disorders YLDs underestimated
 
-        * Could be due to (1) overestimation of mortality because fatal cases do not receive YLDs and/or (2) YLD equation build with out-of-date MD incidence rate that was not "raw" (total population incidence rate)
+      2. `Additionally, duration of the postpartum state is looking too long <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_2.0_preg_states.ipynb>`_
 
-        * Maternal disorders YLD artifact value does not match expected value
-
-      3. `Additionally, duration of the postpartum state is looking too long <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_2.0_preg_states.ipynb>`_
-
-      4. Artifact value for maternal disorders CSMR equals zero for 50-54 age group when it should not
-
-
+      3. Artifact value for maternal disorders CSMR equals zero for 50-54 age group when it should not based on raw GBD values
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -587,14 +572,6 @@ Specific outputs for specific models are specified in the following section.
     - :code:`cause.maternal_disoders.mortality_probability` artifact key values incorrect
     - Patrick to investigate
     - Next model run 2.0.1
-  * - Underestimation of maternal disorders YLDs
-    - most likely a result of the above issue
-    - Check to see it is resolved in 2.0.1 bugfix run
-    - 
-  * - Duration of postpartum state is looking too long
-    - Unknown
-    - Align on expected duration of 5 or 6 weeks and update docs to clarify. Patrick to investigate postartum state behavior in implementation (Ali could check in interactive sim too)
-    - Lower priority.
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++
