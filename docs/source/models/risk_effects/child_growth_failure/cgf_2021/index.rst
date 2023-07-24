@@ -72,6 +72,13 @@ The incidence and mortality RR values from GBD are for incidence and CSMR. For t
 we will convert to incidence and EMR relative risks. More information on this conversion is 
 below. 
 
+In order to account for the high degree of correlation between CGF indicators, GBD used a 
+constrained optimisation method to adjust the observed univariate RRs that come out of the 
+Burden of Proof analysis. Using a joint distribution of stunting, underweight, and wasting, 
+they generated one thousand RR draws for each univariate indicator and severity. Then they 
+altered these univariate RRs for each causes based upon interactions among the CGF indicators. 
+This means that the resulting RRs are independent of other CGF risks. 
+
 Vivarium Modeling Strategy
 --------------------------
 
@@ -108,17 +115,31 @@ model, we found an equation for EMR relative risk. We tested this equation and f
 that the answer was almost identical to the equation shown above. The math 
 proof for this can be found :download:`in this word doc <cgf_risks_math.docx>`.
 
-
 Secondly, we created a `nano simulation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_nanosim/cgf_nanosim_v3.ipynb>`_ to test that by using the equation above and 
 applying the EMR and incidence relative risks to the simulated population, that the 
 resulting CSMR relative risk was about what we expected. The notebook validated this 
 approach and was able to reproduce the expected CSMR RR with some noise. 
 
-PAFs will be calculated separately to have a single joint PAF for CGF. 
+There are some cases where the CSMR RR is less than the incidence RR value. This will then 
+create an EMR RR less than one - or a protective effect from CGF to disease survival. There
+are also some cases in which the GBD estimate of the incidence RR is less than one. While 
+this is counterintuitive, we are allowing for this case to be in the model. We expect this 
+is due to a lack of statistical significance in creation of RR values which will be accounted 
+for in our monte carlo uncertainty. 
 
-.. todo::
+PAFs will be calculated separately to account for the correlation between wasting, 
+stunting, and underweight risk exposures as a single joint PAF for CGF. Draw-level
+PAF values are available below:
 
-   Add information on PAF calculations and file for engineers to use. 
+- `Ethiopia CGF PAF values <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/pafs.csv>`_
+
+   - `Ethiopian PAF values calculated here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/CGF%20correlation%20data%20generation.ipynb>`_
+
+.. note::
+
+   There are some draws for which the PAF is negative. This happens because the 
+   relative risk values for some draws are less than one. We should use these 
+   values regardless as part of our Monte Carlo analysis.
 
 With the RR and PAF values above, the following equations can be used to calculate 
 simulant level incidence and EMR. 
@@ -133,6 +154,8 @@ Where the relative risk value will depend on the simulant's age group and risk e
 
    EMR_\text{cause,i} = EMR_\text{cause} * (1 - PAF_\text{CGF,cause}) * RR_\text{HAZ,cause,i} * RR_\text{WAZ,cause,i} * RR_\text{WHZ,cause,i}
 
+Note that since the RR values from GBD are independent, we multiply them together here without 
+double counting the CGF relative risks. 
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,6 +168,8 @@ Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. We assume that converting to EMR relative risks from the GBD supplied CSMR relative risks will work for all combinations of RRs, incidences, risk exposures, etc. We believe this is true based on the nano sim and math proof above. 
+#. We assume that the duration of illness will be the same for all simulants. It is possible that wasted, stunted, or underweight children might have lower immune function and therefore take longer to recover from an illness. This would lead to a longer duration. We do not include this in our model. 
+#. Some EMR RR values might be less than 1 when the CSMR RR is less than the incidence RR. This is counterintuitivebut we allow it in the model since we think this is due to a lack of statistical significance in creation of RR values which will be accounted for in our monte carlo uncertainty. 
 
 References
 ----------
