@@ -154,6 +154,7 @@ Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. We assume that converting to EMR relative risks from the GBD supplied CSMR relative risks will work for all combinations of RRs, incidences, risk exposures, etc. We believe this is true based on the nano sim and math proof above. 
+#. We assume that the duration of illness will be the same for all simulants. It is possible that wasted, stunted, or underweight children might have lower immune function and therefore take longer to recover from an illness. This would lead to a longer duration. We do not include this in our model. 
 
 References
 ----------
