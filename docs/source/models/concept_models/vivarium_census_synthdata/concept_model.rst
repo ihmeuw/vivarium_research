@@ -2822,7 +2822,7 @@ This can be uniformly at random (preferred), or in another way if that is easier
     Also need to address complex family structures
 
 
-Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a random 65.5% of the population to file taxes (i.e., to show up in the
+Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a random 65.5% of the working-age population to file taxes (i.e., to show up in the
 1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_ 
 and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
 
