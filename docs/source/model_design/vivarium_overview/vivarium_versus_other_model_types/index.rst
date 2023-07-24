@@ -31,8 +31,8 @@ What is Vivarium Good For?
    :local:
    :depth: 1
 
-What are microsimulation?
--------------------------
+What is microsimulation?
+------------------------
 
 Vivarium, a platform developed by the IHME Simulation Science team, enables individual-based modeling or **microsimulation**.
 This is a technique for combining information about attributes of individuals in a population (such as demographics, risk factors,
