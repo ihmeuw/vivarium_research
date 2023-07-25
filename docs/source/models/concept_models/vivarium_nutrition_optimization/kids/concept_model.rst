@@ -64,7 +64,71 @@ Documents that contain information specific to the overall model and the pregnan
 
 .. image:: nutrition_optimization_child_concept_model.svg
 
-2.2 Submodels
+2.2 Waves, GBD Rounds, and age groups
+-------------------------------------
+
+We will separate the implementation of the child model into two waves of updates. 
+In addition to other differences detailed in the next section:
+
+- Wave I will use GBD 2019 data, with the exception of using GBD 2021 data for child growth failure risk exposure and risk effects.
+
+- Wave II will use GBD 2021 data for the entire model.
+
+Notably, GBD 2021 uses different age groups than GBD 2019 (as summarized in the 
+tables below). Therefore, the Wave I implementation that uses data from both GBD 
+2019 and 2021 will require a hybrid approach that was used in the CIFF and wasting 
+paper simulations. In this hybrid approach, the simulation uses GBD 2021 age groups 
+for the entire simulation, but informs rates for these age groups from pooled 2019 
+age groups for parameters other than child growth failure risk exposures and 
+effects. For instance, cause model data for the 1-5 month and 6-11 month age groups 
+in the simulation will be informed using data specific to the post neonatal age group from 2019.
+
+.. list-table:: GBD 2019 age groups
+  :header-rows: 1
+
+  * - Age group
+    - Age range
+    - Age group ID
+  * - early_neonatal
+    - 0-6 days
+    - 2
+  * - late_neonatal
+    - 7-28 days
+    - 3
+  * - post_neonatal
+    - 28 days to 1 year
+    - 4
+  * - 1_to_4_years
+    - 1 to 4 years
+    - 5
+
+.. list-table:: GBD 2021 age groups
+  :header-rows: 1
+
+  * - Age group
+    - Age range
+    - Age group ID
+  * - early_neonatal
+    - 0-6 days
+    - 2
+  * - late_neonatal
+    - 7-28 days
+    - 3
+  * - 1-5_months
+    - 1-5 months
+    - 388
+  * - 6-11_months
+    - 6-11 months
+    - 389
+  * - 12_to_23_months
+    - 12-23 months
+    - 238
+  * - 2_to_4_years
+    - 2-4 years
+    - 34
+
+
+2.3 Submodels
 -------------
 
 .. list-table:: Risk exposure subcomponents
@@ -82,8 +146,8 @@ Documents that contain information specific to the overall model and the pregnan
     - 
   * - Child wasting exposure
     - :ref:`2020 docs<2020_risk_exposure_wasting_state_exposure>`, implemented in wasting paper
-    - Calibration will need to include stunting/underweight mortality effects
-    - Transitions for 0-6 months
+    - :ref:`Updated docs for children 6-59 months <2021_risk_exposure_wasting_state_exposure>`, use :ref:`static wasting exposure <2020_risk_exposure_static_wasting>` for children 0-6 months of age (as implemented in IV iron)
+    - Include transitions for 0-6 months
     - (Does not require separate 2021 update)
   * - Child stunting exposure
     - :ref:`2020 docs<2020_risk_exposure_child_stunting>`, implemented in IV iron, wasting paper
@@ -131,7 +195,7 @@ Documents that contain information specific to the overall model and the pregnan
   * - CGF (wasting, stunting, and underweight)
     - Infectious disease
     - Only wasting is documented :ref:`found here <2019_risk_effect_wasting>`. Docs need updating
-    - Update to 2021 values, add underweight risk effects, add malaria as affected outcome
+    - Updated to 2021 values, added underweight risk effects, added malaria as affected outcome. :ref:`Updated version of CGF risk effects <2021_risk_effect_cgf>`
     - None
     - (Does not require separate 2021 update)
   * - Target area
@@ -204,12 +268,12 @@ Documents that contain information specific to the overall model and the pregnan
     - 
     - Bonus model, not a high priority
 
-2.2.1 Task tracking for each wave
+2.3.1 Task tracking for each wave
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 `A list of outstanding tasks for the child model (separated into wave I and wave II) can be found in this excel file in the "outstanding tasks" tab <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BB63E43A6-D0A8-482E-9AE2-5F8653F72818%7D&file=20230615_MNCH_Nutrition%20Optimization%20Timeline.xlsx&action=default&mobileredirect=true>`_
 
-2.3 Default specifications
+2.4 Default specifications
 --------------------------
 
 .. list-table::
@@ -263,7 +327,7 @@ Documents that contain information specific to the overall model and the pregnan
 
 .. _nutritionoptimizationchild4.0:
 
-2.4 Simulation scenarios
+2.5 Simulation scenarios
 ------------------------
 
 As of June, 2023, there are a total of 5 scenarios in the pregnancy simulation, :ref:`which can be found here <nutritionoptimizationpreg4.0>`. With the exception of the baseline scenario, all of the following child scenarios should be run on the outputs for each pregnancy scenario.
@@ -402,7 +466,7 @@ Where:
 
     Link relevant parameters for coverage (C_SAM, C_MAM, E_SAM, E_MAM, SQ-LNS cov)
 
-2.5 Outputs
+2.6 Outputs
 ------------
 
 The outputs for this simulation will be highly variable by model version. This is because the production runs will have as few outputs and stratifications as possible to maximize efficiency and minimize computational resource requirements across the many modeled scenarios. However, different outputs and additional stratifications will be needed throughout model development for verification and validation. 
@@ -433,7 +497,7 @@ All possible observers and their default stratifications are outlined below. Req
   * - Mortality hazard first moment
     - Each simulant’s all-cause mortality hazard multiplied by the person-time spent with that mortality hazard for each observed stratum. This observer is an attempt to measure the expected differences in mortality between scenarios without the influence of stochastic uncertainty, which will enable us to run the simulation with smaller population sizes.
 
-2.6 Computational resource scoping
+2.7 Computational resource scoping
 ------------------------------------
 
 Since this project requires running across many more scenarios than typical vivarium simulations, we ran some back-of-the-envelope calculations on the magnitude of computing resources to run all scenarios across all projects. The following assumptions went into these calculations:
