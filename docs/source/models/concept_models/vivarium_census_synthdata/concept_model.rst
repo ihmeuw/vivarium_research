@@ -2806,6 +2806,13 @@ If a simulant has more than 4 dependents,
 4 of their dependents are chosen to be included on the 1040 and the rest are omitted.
 This can be uniformly at random (preferred), or in another way if that is easier computationally.
 
+.. note::
+  Due to random sampling of a filer's dependents being more complicated to implement, the engineers have
+  currently implemented this as the 4 dependents included in the 1040 observer as the first 4 of the filer,
+  rather than 4 randomly selected dependents from both guardians in a joint filing row. In a later release,
+  we can implement the random sampling!
+
+
 **Who to Sample**
 
 .. todo::
@@ -2815,9 +2822,17 @@ This can be uniformly at random (preferred), or in another way if that is easier
     Also need to address complex family structures
 
 
-Not everyone who receives a W2 or 1099 will end up filing taxes.
+Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a random 65.5% of the working-age population to file taxes (i.e., to show up in the
+1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_ 
+and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
+
+**Future Add** 
+
+As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below 
+inclusion/exclusion criteria for who files taxes.
+
 However, those who do not are concentrated in low incomes for whom
-taxes are not required. Currently, we will chose to have all those
+taxes are not required. Currently, we will choose to have all those
 who are legally required to file taxes, file taxes. This is a
 limitation and is listed below.
 
@@ -2881,7 +2896,7 @@ in April 2024.
 #. There are additional people who file taxes that are not included, mainly those living abroad, and those who have died in the past year.
 #. The system for having the head of household claim all dependents does not work well for complex family structures. To see this, imagine two siblings living together with their spouses and children. In the current model, one person will claim all of the children as dependents, when more accurately, each sibling would claim their children only. This is a limitation of our model. Also, the other married couple would not file jointly since our model would not identify them as spouses.
 #. As the reference person in a household is random, they might not be the one who should be claiming dependents.
-#. Not everyone files income taxes who are meant to. This might be modeled either in the above step of W2 and 1099, in this step, or both.
+#. See 'Future Add' above regarding how we'd like to simulate who files their taxes in a future implementation of this simulation.
 
 Social Security Observer
 ^^^^^^^^^^^^^^^^^^^^^^^^
