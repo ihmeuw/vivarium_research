@@ -112,6 +112,10 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
 .. image:: diagram.svg
 
+.. note::
+
+  In the implementation for this model in the nutrition optimization simulation, the maternal disorders state in this diagram is referred to as the "parturition" state. Additionally, note that maternal disorders deaths occur in the first timestep of the postpartum state.
+
 .. list-table:: State definitions
   :widths: 15 15 15
   :header-rows: 1
