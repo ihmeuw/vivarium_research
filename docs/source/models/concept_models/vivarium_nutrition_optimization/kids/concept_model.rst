@@ -72,6 +72,8 @@ Documents that contain information specific to the overall model and the pregnan
 
   - This simulation model does not include any interventions that directly reduce diarrheal disease incidence rates, so it is not a pathway by which interventions primarily affect intervention outcomes.
 
+  - The impact of child wasting on diarrheal diseases *incidence* is relatively small in magnitude (the majority of the effect applies to diarrheal diseases *mortality*). Therefore, the effect of feedback loop between *incidence* of wasting and *incidence* of diarrhea is expected to be modest.
+
 - We have chosen to exclude the x-factor model of heterogeneity in wasting incidence rates calibrated to wasting treatment relapse data from this simulation for the following reasons:
 
   - This model made little difference in population-level intervention impact estimates when included in the CIFF project.
