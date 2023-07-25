@@ -155,9 +155,9 @@ throughout this style guide.
    * - Term
      - Definition
    * - Sex
-     - *Sex* refers to biological attributes and functions associated with chromosomal makeup, endocrine function, reproductive organs, secondary sex characteristics, and other physiological and morphological variations and processes not directly related to reproduction (e.g., body size and composition, metabolic function, or organ function) [Ritz_and_Greaves_2022]_.
+     - *Sex* refers to biological attributes and functions associated with chromosomal makeup, reproductive anatomy, and secondary sex characteristics [Ritz_and_Greaves_2022]_.
    * - Gender
-     - *Gender*, on the other hand, is a sociocultural construct that refers to social norms, behaviors, and institutional structures that shape any individual's experiences, exposures, and access to power and resources, as well as one's internal sense of self as a gendered individual [Ritz_and_Greaves_2022]_. 
+     - *Gender*, on the other hand, is a social construct that refers to the culturally specific expectations, behaviors, and institutions that shape any individual's access to power, privilege, and resources. It can also refer to a gendered individual's internal sense of identity [Ritz_and_Greaves_2022]_. 
    * - Sexual and gender minority (SGM) 
      - An umbrella term that includes (but is not limited to) individuals that are two-spirit, intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender non-conforming identities.
    * - Nondifferentiated sex/gender measure
