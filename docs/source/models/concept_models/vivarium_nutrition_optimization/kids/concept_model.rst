@@ -469,9 +469,33 @@ Where:
 2.6 Outputs
 ------------
 
-.. todo::
+The outputs for this simulation will be highly variable by model version. This is because the production runs will have as few outputs and stratifications as possible to maximize efficiency and minimize computational resource requirements across the many modeled scenarios. However, different outputs and additional stratifications will be needed throughout model development for verification and validation. 
 
-  Include more info
+All possible observers and their default stratifications are outlined below. Requested outputs and stratification for each model run will be detailed in the model run request table. 
+
+.. list-table:: Requested Count Data Outputs and Stratifications
+  :header-rows: 1
+
+  * - Output
+    - Note
+  * - Stunting state person time
+    - 
+  * - Wasting transition counts
+    - 
+  * - Wasting state person time
+    - 
+  * - Underweight state person time
+    - 
+  * - Deaths and YLLs (cause-specific)
+    - 
+  * - YLDs (cause-specific)
+    - 
+  * - Cause state person time
+    - 
+  * - Cause state transition counts
+    - 
+  * - Mortality hazard first moment
+    - Each simulant’s all-cause mortality hazard multiplied by the person-time spent with that mortality hazard for each observed stratum. This observer is an attempt to measure the expected differences in mortality between scenarios without the influence of stochastic uncertainty, which will enable us to run the simulation with smaller population sizes.
 
 2.7 Computational resource scoping
 ------------------------------------
@@ -495,9 +519,12 @@ Notably, the run time of this simulation may increase as we add complexity to ou
 3.0 Models
 ++++++++++
 
-.. todo::
+Wave I
+------
 
-  Detail additional logical model builds with engineers, with the following in mind: https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp
+.. note::
+
+  Model sequences were designed with the following in mind: https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp
 
 .. list-table:: Model run requests
   :header-rows: 1
@@ -507,24 +534,199 @@ Notably, the run time of this simulation may increase as we add complexity to ou
     - Pregnancy scenario(s)
     - Child scenario(s)
     - Spec. mods
-    - Outputs
     - Note
-  * - 
-    -  
+  * - 1.0
+    - Replication of IV iron child model fit to nutrition optimization pregnancy model input data
+    - Baseline
+    - Baseline
+    - 
+    - Should include antenatal supplementation intervention effects
+  * - 2.0
+    - Include CIFF/wasting paper implementation of the wasting transition model for children 6-59 months
+    - Baseline
+    - Baseline
+    - 
+    - This will implicitly include a model of wasting treatment
+  * - 3.0
+    - Add malaria cause model
+    - Baseline
+    - Baseline
     - 
     - 
+  * - 4.0 
+    - Add underweight risk exposure model
+    - Baseline
+    - Baseline
     - 
+    - 
+  * - 5.0
+    - Update CGF risk effects
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 6.0
+    - Wasting risk exposure model update
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 7.0
+    - SQLNS intervention updates
+    - Baseline, 0
+    - Baseline, 0, 3
+    - 
+    - 
+  * - 8.0
+    - Production test runs
+    - Baseline, 0, 2
+    - Baseline, 0, 3, 8
+    - 
+    - 
+  * - 8.1
+    - Production runs
+    - All
+    - All
     - 
     - 
 
+.. list-table:: Output specifications
+  :header-rows: 1
+  :widths: 1 10 3
+
+  * - Model
+    - Outputs
+    - Overall strata
+  * - 1.0
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+      5. Stunting state person time, stratified by antenatal intervention coverage
+      6. Wasting state person time, stratified by antenatal intervention coverage
+    - * Age group
+      * Sex
+  * - 2.0
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+      5. Stunting state person time, stratified by antenatal intervention coverage
+      6. Wasting state person time, stratified by antenatal intervention coverage
+      7. Wasting transition counts, stratified by wasting treatement coverage
+    - * Age group
+      * Sex
+  * - 3.0
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+    - * Age group
+      * Sex
+  * - 4.0 
+    - 1. Deaths 
+      2. Stunting state person time
+      3. Wasting state person time
+      4. Wasting transition counts
+      5. Underweight state person time
+    - * Age group
+      * Sex
+  * - 5.0
+    - 1. Deaths and YLLs (cause-specific) stratified by wasting
+      2. Cause state person time, stratified by wasting
+      3. Cause state transition counts, stratified by wasting
+      4. Stunting state person time
+      5. Wasting state person time
+      6. Underweight state person time
+    - * Age group
+      * Sex
+  * - 6.0
+    - 1. Deaths, stratified by wasting exposure state
+      2. Wasting state person time, stratified by wasting treatment coverage
+      3. Wasting transition rates, stratified by wasting treatment coverage
+      4. Stunting state person time
+      5. Underweight state person time
+    - * Age group
+      * Sex
+  * - 7.0 
+    - 1. Deaths
+      2. Wasting state person time
+      3. Stunting state person time
+      4. Underweight state person time
+      5. Wasting transition counts
+    - * Age group
+      * Sex
+  * - 8.0
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Count of incident SAM cases
+      4. Count of incident MAM cases
+      5. Stunting state person-time stratified by SQ-LNS utilization
+      6. Mortality hazard first moment
+    - * Random seed
+  * - 8.1
+    - 1. Deaths and YLLs (**NOT**) cause-specific)
+      2. YLDs (**NOT** cause-specific)
+      3. Count of incident SAM cases
+      4. Count of incident MAM cases
+      5. Stunting state person-time stratified by SQ-LNS utilization
+      6. Mortality hazard first moment (?)
+    - None
+
 .. list-table:: Verification and validation tracking
   :header-rows: 1
+  :widths: 1 5 5 
 
   * - Model
     - V&V plan
     - V&V summary
-  * - 
+  * - 1.0
+    - * Verify to GBD cause YLDs and YLLs and risk exposures
+      * Verify antenatal intervention effects on wasting and stunting exposures
     - 
+  * - 2.0
+    - * Verify wasting risk exposure
+      * Verify baseline wasting treatment coverage
+      * Verify that antenatal intervention effects remain for stunting
+      * Verify that wasting intervention effects remain for wasting among <6 months, and taper off for >6 months
+    - 
+  * - 3.0
+    - * Verify that malaria YLDs and YLLs match expected values
+    - 
+  * - 4.0
+    - In simulation outputs:
+
+      * Verify risk exposure for all CGF measures
+
+      In interactive sim:
+
+      * Verify conditional risk exposures
+    -  
+  * - 5.0
+    - In simulation outputs:
+      
+      * Cause-specific incidence rates and EMRs stratified by wasting should match expected joint CGF RR values by wasting state
+      * Note that wasting exposure (and therefore underweight exposure and cause-specific data) may not meet verification criteria for this model version until updates in model 6.0 are implemented
+
+      In interactive sim:
+
+      * Verify wasting, stunting, and underweight risk effects for incidence and mortality
+    - 
+  * - 6.0
+    - * Verify updated wasting recovery parameters
+      * Verify CGF risk exposures
+      * Verify cause-specific parameters
+    -
+  * - 7.0 
+    - Between scenario 0 and 3:
+      * Verify SQ-LNS utilization ends at 6 months
+      * Verify SQ-LNS prevalence ratios
+      Baseline YLDs and YLLs should still verify
+    - 
+  * - 8.0
+    - * Verify that intervention coverage is as expected in each scenario
+      * Final check on baseline deaths, YLLs, YLDs
+      * Check population size stability
     - 
 
 .. list-table:: Outstanding V&V issues
