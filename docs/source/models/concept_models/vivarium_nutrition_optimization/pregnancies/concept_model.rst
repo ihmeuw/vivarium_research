@@ -560,6 +560,11 @@ Specific outputs for specific models are specified in the following section.
       2. `Additionally, duration of the postpartum state is looking too long <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_2.0_preg_states.ipynb>`_
 
       3. Artifact value for maternal disorders CSMR equals zero for 50-54 age group when it should not based on raw GBD values
+  * - 2.1
+    - Verify that maternal disorders CSMR has been fixed and that maternal hemorrhage incidence is as expected
+    - `Model 2.1 V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_2.1_maternal_disorders.ipynb>`_ 
+      * Maternal disorders CSMR now validating, except for zero value for 50-55 year olds (see explanation in table below)
+      * Maternal hemorrhage incidence is validating, except for zero value for 50-55 year olds (see explanation in table below)
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -568,10 +573,14 @@ Specific outputs for specific models are specified in the following section.
     - Explanation
     - Action plan
     - Timeline
-  * - Overestimation of maternal disorders mortality
-    - :code:`cause.maternal_disoders.mortality_probability` artifact key values incorrect
-    - Patrick to investigate
-    - Next model run 2.0.1
+  * - Duration of postpartum state is looking too long
+    - This is because simulants who die of maternal disorders die in the first timestep of the postpartum state rather than in the parturition state. Because of this, there is more person-time in the postartum state than expected. 
+    - Acceptable limitation. Use interactive sim to determine the duration of the postpartum period among those who do not die.
+    - Low priority (research team)
+  * - Zero values for 50-55 year old age group
+    - Vivarium inputs fills maternal disorders deaths and maternal hemorrhage incidence with zeros due to :code:`age_end` parameter in :code:`gbd_mapping`, despite raw GBD estimates for these parameters being non-zero for this age group
+    - Acceptable limitation given very low pregnancy incidence in this age group
+    - N/A
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++
