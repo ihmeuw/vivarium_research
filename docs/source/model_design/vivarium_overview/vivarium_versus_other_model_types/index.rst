@@ -24,20 +24,71 @@
 .. _vivarium_best_practices_vivarium_and_other_models:
 
 =========================================================
-Vivarium Versus Other Types of Models
+What is Vivarium Good For?
 =========================================================
 
 .. contents::
    :local:
    :depth: 1
 
+What is microsimulation?
+------------------------
+
+Vivarium, a platform developed by the IHME Simulation Science team, enables individual-based modeling or **microsimulation**.
+This is a technique for combining information about attributes of individuals in a population (such as demographics, risk factors,
+disease occurrence, and intervention coverage) and relationships between these attributes, to estimate health outcomes in a simulated environment over time.
+
+Microsimulation models incorporate relevant characteristics, including: 
+
+- Basic demographics (e.g., age, sex/gender, race/ethnicity)
+- Exposure to risk factors
+- Disease incidence 
+- Healthcare visit frequency
+- Treatment (i.e., timing, duration, frequency, adherence, and known/assumed treatment effects)
+- Adverse events
+- Mortality rate/life expectancy 
+
+.. image:: microsim_example_table_2.PNG
+
+The above table provides an illustration of the simulant attributes that might be included in a Vivarium microsimulation. This particular example is pulled from a microsimulation of 
+antenatal nutritional supplementation effects on birthweight and child-growth failure. As you can see, the simulant listed here has attributes covering demography, risk factors (e.g., 
+*did the mother/birthing person received iron and folic acid (IFA) supplementation during pregnancy?*), causes (e.g., *what is the probability of child simulant having protein energy malnutrition (PEM)?*),
+and mortality (e.g., *is the simulant alive or dead at this given timestep?*).
+
+By using microsimulation, we probabilistically assign the above attributes heterogeneously across individuals within the simulated population. 
+Taken in aggregate, these attributes match real-world population-level data, derived from IHME's Global Burden of Disease (GBD) databases and other sources. 
+Over the duration of a given microsimulation run, simulant attributes are dynamically updated.
+
+.. image:: microsim_visual.PNG
+
+Simulation components are interdependent, and relationships between attributes are also based on best available real-world 
+evidence. For example, disease progression is a function of simulant characteristics and treatment; survival depends on stage of disease and other characteristics. 
+
+.. note::
+
+  Are you feeling confused by some of the vocabulary on this page? Please visit our `Vivarium glossary <https://vivarium-research.readthedocs.io/en/latest/glossary/index.html>`_ 
+  for some definitions of microsimulation vocabulary!
+
+What are the advantages and disadvantages of individual-based microsimulations?
+-------------------------------------------------------------------------------
+
 .. todo::
 
-  - What can (and should) we use vivarium for? 
-    - Versus decision tree or other types of models?
-    - Different types of agent-based models
+  Fill out this section with strengths and weakness of individual-based microsimulation. Could also add context about how microsim compares to agent-based simulation and the broader umbrella term of IBM.
+  
 
-      - Strengths/weaknesses
-      - Where does Vivarium fit in?
+How does Vivarium compare with other microsimulation tools?
+-----------------------------------------------------------
 
-    - What differential equations underly these different types of models?
+.. todo::
+
+ - Versus decision tree or other types of models?
+ - Different types of agent-based models (mini lit review) 
+ - What differential equations underly these different types of models?
+
+References
+----------
+
+Sorensen et al. (2017). `Microsimulation models for cost-effectiveness analysis: a review and introduction to CEAM.` SummerSim '17: Proceedings of the Summer Simulation Multi-Conference, Society for Computer Simulation International, https://dl.acm.org/doi/10.5555/3140065.3140097. 
+
+Allen et al. (2019). `Enabling Model Complexity Through an Improved Workflow.` Healthy Algorithms, https://healthyalgorithms.files.wordpress.com/2021/05/2019-enabling-model-complexity-through-an-improved-workflow-mws_paper-christine-allen.pdf. 
