@@ -2013,12 +2013,12 @@ Census
   * - Physical Address City
   * - Physical Address State
   * - Physical Address ZIP Code
-  * - Relationship to Person 1 (Head of Household)
+  * - Housing Type ("Household" for an individual household, or one of the six different types of group quarters)
+  * - Relationship to Reference Person
   * - Sex (binary; "Male" or "Female")
   * - Race/Ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
 
 .. note::
 
@@ -2766,11 +2766,11 @@ in January 2024.
   In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
 .. todo::
-  
-  Add total income to this observer. 
+
+  Add total income to this observer.
 
 .. todo::
-  
+
   Add a way to capture forms a simulant would file besides the 1040 (e.g. W2/1099 forms).
 
 If a simulant does not have an SSN,
@@ -2823,12 +2823,12 @@ This can be uniformly at random (preferred), or in another way if that is easier
 
 
 Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a random 65.5% of the working-age population to file taxes (i.e., to show up in the
-1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_ 
+1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_
 and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
 
-**Future Add** 
+**Future Add**
 
-As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below 
+As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below
 inclusion/exclusion criteria for who files taxes.
 
 However, those who do not are concentrated in low incomes for whom
