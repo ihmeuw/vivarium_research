@@ -3760,7 +3760,7 @@ rather than some datasets having tiny shards like ACS currently does.
 Another potentially ambiguous point in the above strategy is which data to use
 to pre-compute the eligible fraction :math:`F`. Since these pre-computed values
 are merely for user warnings, the researchers are flexible as to how closely the
-:math:`F` values should match match the corresponding datasets, and we'll let
+:math:`F` values should match the corresponding datasets, and we'll let
 the engineers decide on the exact implementation. Here are a couple options: If
 the pre-computed values are stored in a separate metadata file generated with
 each simulation run, then :math:`F` can be computed for each applicable
