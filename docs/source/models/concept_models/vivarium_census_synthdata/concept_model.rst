@@ -3739,7 +3739,7 @@ simple strategy to deal with this issue:
     the user for every shard with :math:`p>f`.
 
 This strategy has a known limitation: It systematically adds less noise to the
-dataset than requested when :math:`p` sufficiently large. This is obvious when
+dataset than requested when :math:`p` is sufficiently large. This is obvious when
 :math:`p>F`, but it can happen even when :math:`p\le F`. Here's why:
 
 Due to random fluctuation between the shards, sometimes we will have
