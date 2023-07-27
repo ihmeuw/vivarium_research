@@ -3387,6 +3387,17 @@ determine who is eligible for a nickname. Then select simulants for noise. Lastl
 name with any of the nicknames included in the csv. If there are multiple options,
 select at random.
 
+When selecting simulants for noise in the second step above, the unconditional
+probability of a cell being selected for nickname noise should match the
+row-level probability specified by the user, *unless* this probability is
+greater than the fraction of cells eligible for nicknames as calculated in the
+first step above. If the user requests a higher row-level probability of
+nickname noise than the fraction of cells that is eligible for nicknames, raise
+a warning to the user, and add noise to all eligible cells in the column. For
+details about how to implement the user warning given our shard-based
+distributed data processing approach, see the `Additional noise implementation
+details`_ section below.
+
 Limitations:
 
 - The list of nicknames above is hand-curated and almost definitely misses some nicknames. It is also likely that it misses nicknames in a bias way based on language of origin, personal history, etc.
