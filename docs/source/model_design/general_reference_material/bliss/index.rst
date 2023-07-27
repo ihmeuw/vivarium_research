@@ -160,12 +160,12 @@ throughout this style guide.
      - *Gender*, on the other hand, is a social construct that refers to the culturally specific expectations, behaviors, and institutions that shape any individual's access to power, privilege, and resources. It can also refer to a gendered individual's internal sense of identity [Ritz_and_Greaves_2022]_. 
    * - Sexual and gender minority (SGM) 
      - An umbrella term that includes (but is not limited to) individuals that are two-spirit, intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender non-conforming identities.
-   * - Nondifferentiated sex/gender measure
+   * - Undifferentiated sex/gender measure
      - A useful hybrid term that reflects the dynamic relationship that exists between sex and gender and acknowledges the common conflation between sex and gender in public health research and data [Ritz_and_Greaves_2022]_. 
 
 .. todo::
 
-   (include visual of 'Do's and Don'ts)
+   Add other BLISS-related terms and definitions, like gender identity, gender expression, etc. and include visual of 'Do's and Don'ts! Also, refine definition for undifferentiated sex/gender measure.
 
 2.0 Acknowledging Limitations in Peer Research
 ++++++++++++++++++++++++++++++++++++++++++++++
