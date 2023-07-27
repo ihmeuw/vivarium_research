@@ -2013,12 +2013,12 @@ Census
   * - Physical Address City
   * - Physical Address State
   * - Physical Address ZIP Code
-  * - Relationship to Person 1 (Head of Household)
+  * - Housing Type ("Household" for an individual household, or one of the six different types of group quarters)
+  * - Relationship to Reference Person
   * - Sex (binary; "Male" or "Female")
   * - Race/Ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
 
 .. note::
 
@@ -2207,7 +2207,8 @@ There are two types of sampling plans:
   * - Race/ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
+  * - Housing Type (“Household” for an individual household, or one of the six different types of group quarters. Included in ACS, used for noise functions ONLY in CPS)
+  * - Relationship to Reference Person (for ACS only)
 
 .. note::
 
@@ -2766,11 +2767,11 @@ in January 2024.
   In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
 .. todo::
-  
-  Add total income to this observer. 
+
+  Add total income to this observer.
 
 .. todo::
-  
+
   Add a way to capture forms a simulant would file besides the 1040 (e.g. W2/1099 forms).
 
 If a simulant does not have an SSN,
@@ -2823,12 +2824,12 @@ This can be uniformly at random (preferred), or in another way if that is easier
 
 
 Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a random 65.5% of the working-age population to file taxes (i.e., to show up in the
-1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_ 
+1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_
 and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
 
-**Future Add** 
+**Future Add**
 
-As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below 
+As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below
 inclusion/exclusion criteria for who files taxes.
 
 However, those who do not are concentrated in low incomes for whom
@@ -3134,8 +3135,14 @@ for all column based noise include:
     - 0.1
     - Missing data, zip code miswriting, OCR, typographic
     -
-  * - Relationship to head of household
-    - Census
+  * - Housing type
+    - Census, ACS
+    - 0.01
+    - N/A
+    - Missing data, incorrect select
+    -
+  * - Relationship to reference person
+    - Census, ACS
     - 0.01
     - N/A
     - Missing data, incorrect select
@@ -3442,15 +3449,14 @@ would be listed in MM/DD/YYYY format as 08/12/2022).
 **Incorrect Select**
 
 Incorrect select applies to a range of data types. For this, select the sample to
-have noise added. For those selected, randomly select a new option. This is chosen
-from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes the full list of options, not just those seen in the household.
+have noise added. For those selected, randomly select a new option from the list of all possible options. For example, for relationship to reference person, this includes the full list of options, not just those seen in the household, and similarly for other fields that get this type of noise.
 
 Please ensure that the new selection is in fact an incorrect selection and that the original
 response was not randomly selected.
 
 Limitations:
 
-- For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways.
+- For single person homes, incorrectly selecting relationship to reference person does not make as much sense. However, we continue with it here anyways.
 - Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity.
 
 .. note::
