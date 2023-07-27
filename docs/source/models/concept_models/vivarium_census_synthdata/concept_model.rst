@@ -3769,7 +3769,10 @@ the other hand, if it's easier to store a single value of :math:`F` for each
 (dataset, noise type) without varying across years, then we should should use
 the dataset for the year 2030; since 2030 is the midpoint of our simulation, we
 expect it to be sufficiently representative of the data across all simulated
-years. This level of imprecision is sufficient for the user warning, which
+years.
+If even this is too complicated, a single :math:`F` can be computed for a noise type, and not vary between datasets;
+the decennial census dataset should be used to do this.
+The level of imprecision is acceptable for the user warning, which
 should be left vague enough as to not imply exactly what fraction of rows will
 get noised.
 
