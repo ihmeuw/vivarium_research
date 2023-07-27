@@ -3741,7 +3741,8 @@ years. This level of imprecision is sufficient for the user warning, which
 should be left vague enough as to not imply exactly what fraction of rows will
 get noised.
 
-**Old Abie Work, to be deleted later**
+Old Abie Work, to be deleted later
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For inspiration, here is the list of files that Census Bureau
 routinely links:
