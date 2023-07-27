@@ -3634,6 +3634,9 @@ should be set to the maximum for the specified simulant category. More
 precisely, the conditional probability that a row in the specified category is
 duplicated, given that the row is eligible for guardian-based duplication,
 should be set to 1.
+For details about how to implement the user warning given our shard-based
+distributed data processing model, see the `Additional noise implementation
+details`_ section.
 
 .. note::
 
