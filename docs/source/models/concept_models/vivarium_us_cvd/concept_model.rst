@@ -469,16 +469,16 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - 
   * - D
     - 19.4% will not start medication. Of those that start medication, 42% will receive high intensity statin; 52% medium intensity; and 6% low intensity 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - E
     - 19.4% will not start medication. Of those that start medication, 24% will receive high intensity statin; 66% medium intensity; and 10% low intensity 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - F
     - 19.4% will not start medication. Of those that start medication, 15% will receive high intensity statin; 71% medium intensity; and 14% low intensity 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - G
     - Only adherent simulants will move up categories. 19.4% will not move up medication categories due to theraputic inertia 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ 
+    - Theraputic inertia should remain constant within a specific treatment level. A simulant will draw an inertia value for each treatment level (i.e., medium intensity statin) and that value will not change. If they do move up to the next treatment, a new value will be drawn. If not, they will remain at that treatment indefinitely. [Morales_2018]_ 
   * - H
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - 
