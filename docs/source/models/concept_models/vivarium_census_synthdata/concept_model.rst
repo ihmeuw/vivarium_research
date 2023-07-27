@@ -2013,12 +2013,12 @@ Census
   * - Physical Address City
   * - Physical Address State
   * - Physical Address ZIP Code
-  * - Relationship to Person 1 (Head of Household)
+  * - Housing Type ("Household" for an individual household, or one of the six different types of group quarters)
+  * - Relationship to Reference Person
   * - Sex (binary; "Male" or "Female")
   * - Race/Ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
 
 .. note::
 
@@ -2207,7 +2207,8 @@ There are two types of sampling plans:
   * - Race/ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
+  * - Housing Type (“Household” for an individual household, or one of the six different types of group quarters. Included in ACS, used for noise functions ONLY in CPS)
+  * - Relationship to Reference Person (for ACS only)
 
 .. note::
 
@@ -2730,26 +2731,6 @@ in January 2024.
     -
   * - Social Security Number (if present)
     - ITIN if no SSN present
-  * - Income
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ID
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Name
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Street Number
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Street Name
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Unit
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address City
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address State
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address ZIP Code
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Type of tax form (W2 or 1099)
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Tracked Dependent(s) (for noise functions ONLY)
     -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
@@ -2766,18 +2747,6 @@ in January 2024.
     -
   * - Social Security Number (if present)
     - ITIN if no SSN present
-  * - Income
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ID
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Name
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ZIP Code
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Type of tax form (W2 or 1099)
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Tracked Dependent(s) (for noise functions ONLY)
     -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
@@ -2797,6 +2766,13 @@ in January 2024.
 
   In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
+.. todo::
+
+  Add total income to this observer.
+
+.. todo::
+
+  Add a way to capture forms a simulant would file besides the 1040 (e.g. W2/1099 forms).
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
@@ -2831,6 +2807,13 @@ If a simulant has more than 4 dependents,
 4 of their dependents are chosen to be included on the 1040 and the rest are omitted.
 This can be uniformly at random (preferred), or in another way if that is easier computationally.
 
+.. note::
+  Due to random sampling of a filer's dependents being more complicated to implement, the engineers have
+  currently implemented this as the 4 dependents included in the 1040 observer as the first 4 of the filer,
+  rather than 4 randomly selected dependents from both guardians in a joint filing row. In a later release,
+  we can implement the random sampling!
+
+
 **Who to Sample**
 
 .. todo::
@@ -2840,9 +2823,17 @@ This can be uniformly at random (preferred), or in another way if that is easier
     Also need to address complex family structures
 
 
-Not everyone who receives a W2 or 1099 will end up filing taxes.
+Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a random 65.5% of the working-age population to file taxes (i.e., to show up in the
+1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_
+and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
+
+**Future Add**
+
+As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below
+inclusion/exclusion criteria for who files taxes.
+
 However, those who do not are concentrated in low incomes for whom
-taxes are not required. Currently, we will chose to have all those
+taxes are not required. Currently, we will choose to have all those
 who are legally required to file taxes, file taxes. This is a
 limitation and is listed below.
 
@@ -2906,7 +2897,7 @@ in April 2024.
 #. There are additional people who file taxes that are not included, mainly those living abroad, and those who have died in the past year.
 #. The system for having the head of household claim all dependents does not work well for complex family structures. To see this, imagine two siblings living together with their spouses and children. In the current model, one person will claim all of the children as dependents, when more accurately, each sibling would claim their children only. This is a limitation of our model. Also, the other married couple would not file jointly since our model would not identify them as spouses.
 #. As the reference person in a household is random, they might not be the one who should be claiming dependents.
-#. Not everyone files income taxes who are meant to. This might be modeled either in the above step of W2 and 1099, in this step, or both.
+#. See 'Future Add' above regarding how we'd like to simulate who files their taxes in a future implementation of this simulation.
 
 Social Security Observer
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -3144,8 +3135,14 @@ for all column based noise include:
     - 0.1
     - Missing data, zip code miswriting, OCR, typographic
     -
-  * - Relationship to head of household
-    - Census
+  * - Housing type
+    - Census, ACS
+    - 0.01
+    - N/A
+    - Missing data, incorrect select
+    -
+  * - Relationship to reference person
+    - Census, ACS
     - 0.01
     - N/A
     - Missing data, incorrect select
@@ -3452,15 +3449,14 @@ would be listed in MM/DD/YYYY format as 08/12/2022).
 **Incorrect Select**
 
 Incorrect select applies to a range of data types. For this, select the sample to
-have noise added. For those selected, randomly select a new option. This is chosen
-from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes the full list of options, not just those seen in the household.
+have noise added. For those selected, randomly select a new option from the list of all possible options. For example, for relationship to reference person, this includes the full list of options, not just those seen in the household, and similarly for other fields that get this type of noise.
 
 Please ensure that the new selection is in fact an incorrect selection and that the original
 response was not randomly selected.
 
 Limitations:
 
-- For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways.
+- For single person homes, incorrectly selecting relationship to reference person does not make as much sense. However, we continue with it here anyways.
 - Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity.
 
 .. note::
