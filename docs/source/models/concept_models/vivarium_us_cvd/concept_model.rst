@@ -1020,21 +1020,24 @@ Code is below for reference
     - Extended V&V Attempts 
     - There were many runs and a significant amount of back and forth to try to solve some V&V issues. The main issues were: too low exposures at initialization, decreasing risk factors over time, and too low incidence for MI and stroke. The test runs completed and current thinking are best recorded in this `tracker <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BC6881D3C-63E1-450A-A1A6-3A866080D0DD%7D&file=CVD_VV_Tracker_06202023.xlsx&action=default&mobileredirect=true>`_. At this time, this has not been solved. 
   * - 16.0
+    - Adding Correlation 
+    - No new issues found with adding correlation. `Causes with correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_correlation_07.25.2023.ipynb>`_ and `risks with correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/risks_VV_07.25.2023.ipynb>`_ were checked in the same manner as previous runs. Additionally, `simulant exposure values <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/interactive_correlation.ipynb>`_ were checked for correlation in the interactive sim both on initialization and after 25 time steps. It was found that correlation varied around the expected input values. 
+  * - 17.0
     - Add New Observer 
     - 
-  * - 17.0
+  * - 18.0
     - Test Runs for Timing on 10 States 
     - States to be included are: Alabama, Washington, Alaska, Rhode Island, California, Texas, Kansas, West Virginia, Florida, North Dakota  
-  * - 18.0
+  * - 19.0
     - Adjusting Theraputic Inertia 
     - 
-  * - 19.0
-    - Add Risk Correlation, Medication and PAF Recalculations 
-    - 
   * - 20.0
+    - Add Medication and PAF Recalculations 
+    - 
+  * - 21.0
     - Update to GBD 2021 
     - Need to confirm if this is going to be included in phase 1 
-  * - 21.0
+  * - 22.0
     - Final Runs 
     - Research team to specify this further 
 
