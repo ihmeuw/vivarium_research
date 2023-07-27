@@ -3466,6 +3466,16 @@ type of noise.
 From the eligble simulants, select the sample to have noise added. For those individuals,
 copy the relevant piece of data from another person in the household.
 
+When selecting the sample from the eligible simulants, the unconditional
+probability of a simulant having noise added should match the row-level
+probability specified by the user, *unless* this probability is greater than the
+fraction of simulants eligible for noise. If the user requests a higher
+row-level probability of copy-from-within-household noise than the fraction of
+simulants that is eligible for copying, raise a warning to the user, and add
+noise to all eligible cells in the column. For details about how to implement
+the user warning given our shard-based distributed data processing approach, see
+the `Additional noise implementation details`_ section below.
+
 Limitations:
 
 - This oversimplifies some swapping of ages or birthdays between family members. However, it allows better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenge.
