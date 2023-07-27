@@ -3662,7 +3662,7 @@ the duplicated row.
 To create guardian-based duplicates, each duplicated simulant will be included
 in the final dataset twice, once at their address of residence and once at their
 guardian's address. If a simulant has more than 1 guardian living at a different
-address, only duplicate them once, for a maximum of 2 occurences in the end
+address, only duplicate them once, for a maximum of 2 occurrences in the end
 dataset. Select the guardian at random.
 
 .. note::
@@ -3715,13 +3715,13 @@ simple strategy to deal with this issue:
     row-based noise). If :math:`p>F`, raise a warning to the user before
     noising starts.
 
-#.  When noising each shard, compute the fraction :math:`f` of rows elibible
+#.  When noising each shard, compute the fraction :math:`f` of rows eligible
     for noise in the shard, and apply the noise to each eligible row in the
     shard with probability :math:`\min\{p/f, 1\}`. Do **not** raise a warning to
     the user for every shard with :math:`p>f`.
 
 This strategy has a known limitation: It systematically adds less noise to the
-dataset than requested when :math:`p` suffieicntly large. This is obvious when
+dataset than requested when :math:`p` sufficiently large. This is obvious when
 :math:`p>F`, but it can happen even when :math:`p\le F`. Here's why:
 
 Due to random fluctuation between the shards, sometimes we will have
@@ -3731,7 +3731,7 @@ for some shards, even if :math:`p\le F`. Now note that for each shard with
 than :math:`p`. On the other hand, for shards with :math:`p\le f`, the average
 fraction of rows that get noised is :math:`p`. Combining all shards, the average
 fraction of noised rows will be less than :math:`p`. This problem will be worse
-for small datasets like ACS because of greater variablity of :math:`f` around
+for small datasets like ACS because of greater variability of :math:`f` around
 :math:`F`.
 
 We are willing to accept the above limitation for simplicity's sake. Moreover,
@@ -3740,7 +3740,7 @@ approach to data storage so that the different data files have similar sizes
 rather than some datasets having tiny shards like ACS currently does.
 
 Another potentially ambiguous point in the above strategy is which data to use
-to pre-compute the eligble fraction :math:`F`. Since these pre-computed values
+to pre-compute the eligible fraction :math:`F`. Since these pre-computed values
 are merely for user warnings, the researchers are flexible as to how closely the
 :math:`F` values should match match the corresponding datasets, and we'll let
 the engineers decide on the exact implementation. Here are a couple options: If
