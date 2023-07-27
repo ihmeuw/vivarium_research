@@ -3480,6 +3480,14 @@ Limitations:
 
 - This oversimplifies some swapping of ages or birthdays between family members. However, it allows better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenge.
 
+.. todo::
+
+  Add details about how to select another person in the household to copy from.
+  See `this Slack thread
+  <https://ihme.slack.com/archives/C02KUQ9LX32/p1682457132563079>`_ and `this
+  engineering ticket <https://jira.ihme.washington.edu/browse/MIC-4041>`_ for
+  what we actually implemented.
+
 **Month and Day Swap**
 
 Month and day swaps apply to dates. For this, select the sample to have noise added.
