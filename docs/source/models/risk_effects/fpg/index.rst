@@ -217,11 +217,22 @@ mediation factor can be found in the csv file above. The rei_id for
 FPG is 105. The cause_id for IHD is 493. The med_id is 367 for LDL-C. 
 The csv has data for individual draws that will be used. 
 
-:math:`RR_\text{adjusted} = 1 + (RR_\text{unadjusted} - 1) * (1 - MF_LDL)`
+The math is written out in the equations below and example python code 
+is also included. 
 
-Where :math:`MF` is the mediation factor for LDL-C, :math:`RR_unadjusted` 
-is from the get_draws code above and the :math:`RR_adjusted` is what is used to 
+:math:`delta_\text{LDL} = \frac{log(MF_\text{LDL} * (RR_\text{FPG,unadjusted} -1)+1)} {log(RR_\text{LDL})}`
+
+:math:`RR_\text{FPG,adjusted} = \frac{RR_\text{FPG,unadjusted}}{{RR_\text{LDL}}^{delta_\text{LDL}}}`
+
+Where :math:`MF_\text{LDL}` is the mediation factor for LDL-C, :math:`RR_\text{unadjusted}` 
+is from the get_draws code above and the :math:`RR_\text{adjusted}` is what is used to 
 find the risk of FPG on IHD. 
+
+:: 
+
+  delta_ldl = np.log((ldl_mf*(fpg_ihd_rr-1))+1)/np.log(ldl_ihd_rr)
+
+  RR_adj=(fpg_ihd_rr)/(pow(ldl_ihd_rr, delta_ldl))
 
 Risk Outcome Pair #2: Ischemic stroke
 +++++++++++++++++++++++++++++++++++++
@@ -250,11 +261,22 @@ mediation factor can be found in the csv file above. The rei_id for
 FPG is 105. The cause_id for IHD is 495. The med_id is 367 for LDL-C. 
 The csv has data for individual draws that will be used. 
 
-:math:`RR_\text{adjusted} = 1 + (RR_\text{unadjusted} - 1) * (1 - MF)`
+The math is written out in the equations below and example python code 
+is also included. 
 
-Where :math:`MF` is the mediation factor for LDL-C, :math:`RR_unadjusted` 
-is from the get_draws code above and the :math:`RR_adjusted` is what is used to 
-find the risk of FPG on ischemic stroke. 
+:math:`delta_\text{LDL} = \frac{log(MF_\text{LDL} * (RR_\text{FPG,unadjusted} -1)+1)} {log(RR_\text{LDL})}`
+
+:math:`RR_\text{FPG,adjusted} = \frac{RR_\text{FPG,unadjusted}}{{RR_\text{LDL}}^{delta_\text{LDL}}}`
+
+Where :math:`MF_\text{LDL}` is the mediation factor for LDL-C, :math:`RR_\text{unadjusted}` 
+is from the get_draws code above and the :math:`RR_\text{adjusted}` is what is used to 
+find the risk of FPG on stroke. 
+
+:: 
+
+  delta_ldl = np.log((ldl_mf*(fpg_stroke_rr-1))+1)/np.log(ldl_stroke_rr)
+
+  RR_adj=(fpg_stroke_rr)/(pow(ldl_stroke_rr, delta_ldl))
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
