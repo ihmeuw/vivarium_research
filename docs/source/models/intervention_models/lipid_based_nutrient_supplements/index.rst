@@ -234,7 +234,7 @@ Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic 
 
 .. note::
 
-  Lognormal distributions of uncertainty should be used for all effect sizes in the table below and the uncertainty intervals.
+  Lognormal distributions of uncertainty should be used for all effect sizes in the table below and the uncertainty intervals. We have confirmed that the lognormal distribution reasonably replicates the uncertainty intervals for these effects in this `SQLNS dsitribution check notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/SQLNS_distribution_check.ipynb>`_.
 
   The same percentile should be sampled from within each uncertainty interval for ALL of the effect samples (across age groups and measures) for each draw of the simulation.
 
