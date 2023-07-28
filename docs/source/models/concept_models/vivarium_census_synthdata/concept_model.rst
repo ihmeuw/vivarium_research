@@ -1974,6 +1974,15 @@ The simulant attributes to sample (listed in the "What to Sample" section for ea
 except for those marked "for noise functions only," should be the columns present in :code:`pseudopeople` outputs.
 In those outputs, the columns should be **in the order they are listed here**.
 
+In most cases, we have not actually seen the data files we are simulating,
+because they are confidential.
+The schemas we define below are based on a combination of guesswork/assumptions and any
+public documentation we can find about the data files or the data collection process.
+For example, we have described most date columns to be formatted MM/DD/YYYY in the absence
+of specific information, because this is a common American format for dates.
+We have also omitted many columns that would truly be present, since we are focused
+only on those columns that would be most relevant to record linkage.
+
 .. todo::
   Move this documentation to the :code:`pseudopeople` repository.
 
@@ -2004,12 +2013,12 @@ Census
   * - Physical Address City
   * - Physical Address State
   * - Physical Address ZIP Code
-  * - Relationship to Person 1 (Head of Household)
+  * - Housing Type ("Household" for an individual household, or one of the six different types of group quarters)
+  * - Relationship to Reference Person
   * - Sex (binary; "Male" or "Female")
   * - Race/Ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
 
 .. note::
 
@@ -2182,7 +2191,7 @@ There are two types of sampling plans:
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
-  * - Survey date
+  * - Survey date (stored as a string in MM/DD/YYYY format)
   * - First name
   * - Middle initial
   * - Last name
@@ -2198,7 +2207,8 @@ There are two types of sampling plans:
   * - Race/ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
+  * - Housing Type (“Household” for an individual household, or one of the six different types of group quarters. Included in ACS, used for noise functions ONLY in CPS)
+  * - Relationship to Reference Person (for ACS only)
 
 .. note::
 
@@ -2396,7 +2406,7 @@ in the home.
   * - First name
   * - Middle initial
   * - Last name
-  * - DOB (stored as a string in MMDDYYYY format)
+  * - DOB (stored as a string in MMDDYYYY format, as indicated by [WIC_Guide]_)
   * - Physical Address Street Number
   * - Physical Address Street Name
   * - Physical Address Unit
@@ -2600,8 +2610,6 @@ W2 and 1099 Forms
   * - First name
   * - Middle initial
   * - Last name
-  * - Age (floored to integer years **before** noise is applied)
-  * - DOB (stored as a string in MM/DD/YYYY format)
   * - Mailing Address Street Number (blank for PO boxes)
   * - Mailing Address Street Name (blank for PO boxes)
   * - Mailing Address Unit (blank for PO boxes)
@@ -2611,7 +2619,7 @@ W2 and 1099 Forms
   * - Mailing Address ZIP Code
   * - Social Security Number
   * - Wages (income from this job)
-  * - Employer ID
+  * - Employer ID (for PRL tracking)
   * - Employer Name
   * - Employer Address
   * - Employer ZIP Code
@@ -2619,7 +2627,7 @@ W2 and 1099 Forms
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Wages must be rounded to the nearest whole number before applying noise.
+  In the final version of the observers, following the noise functions, please have all data as strings. Wages must be rounded to the nearest whole number before applying noise.
 
 
 If a simulant does not have a social security number but is
@@ -2664,6 +2672,12 @@ income/wage cutoff for this observer.
 Here is an example:
 
 .. image:: W2_example.PNG
+
+.. note::
+
+  The above image is outdated and contains "Age" and "DOB" columns, but these
+  should **not** appear in the W2/1099 dataset. The image is also *missing* the
+  ground-truth "Household ID" column.
 
 **Who to Sample**
 
@@ -2737,10 +2751,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age (floored to integer years **before** noise is applied)
-    -
-  * - DOB (stored as a string in MM/DD/YYYY format)
-    -
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2756,29 +2766,7 @@ in January 2024.
   * - Mailing Address ZIP Code
     -
   * - Social Security Number (if present)
-    -
-  * - ITIN (if present)
-    -
-  * - Income
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ID
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Name
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Street Number
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Street Name
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address Unit
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address City
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address State
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address ZIP Code
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Type of tax form (W2 or 1099)
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
+    - ITIN if no SSN present
   * - Tracked Dependent(s) (for noise functions ONLY)
     -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
@@ -2793,40 +2781,8 @@ in January 2024.
     -
   * - Last name
     -
-  * - Age
-    -
-  * - DOB (stored as a string in MM/DD/YYYY format)
-    -
-  * - Mailing Address Street Number (blank for PO boxes)
-    -
-  * - Mailing Address Street Name (blank for PO boxes)
-    -
-  * - Mailing Address Unit (blank for PO boxes)
-    -
-  * - Mailing Address PO Box (blank for not PO boxes)
-    -
-  * - Mailing Address City
-    -
-  * - Mailing Address State
-    -
-  * - Mailing Address ZIP Code
-    -
   * - Social Security Number (if present)
-    -
-  * - ITIN (if present)
-    -
-  * - Income
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ID
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Name
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer Address
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Employer ZIP Code
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
-  * - Type of tax form (W2 or 1099)
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
+    - ITIN if no SSN present
   * - Tracked Dependent(s) (for noise functions ONLY)
     -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
@@ -2837,21 +2793,22 @@ in January 2024.
     - This columns through the end are to be included for each dependent on the tax filing, up to 4 dependents
   * - First name
     -
-  * - Middle initial
-    -
   * - Last name
     -
-  * - Age
-    -
   * - Social Security Number (if present)
-    -
-  * - ITIN (if present)
-    -
+    - ITIN if no SSN present
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Income must be rounded to the nearest whole number before applying noise.
+  In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
+.. todo::
+
+  Add total income to this observer.
+
+.. todo::
+
+  Add a way to capture forms a simulant would file besides the 1040 (e.g. W2/1099 forms).
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
@@ -2872,6 +2829,12 @@ are just 2 really long rows for two simulants.
 
 .. image:: 1044_example.png
 
+.. note::
+
+  The above image is outdated and contains "Age" and "DOB" columns, but these
+  should **not** appear in the 1040 dataset. The image is also *missing* the
+  ground-truth "Household ID" column.
+
 If a simulant had more than 4 employments in the tax year,
 the 4 with the highest income values are included on the 1040; other employment information
 is omitted.
@@ -2879,6 +2842,13 @@ is omitted.
 If a simulant has more than 4 dependents,
 4 of their dependents are chosen to be included on the 1040 and the rest are omitted.
 This can be uniformly at random (preferred), or in another way if that is easier computationally.
+
+.. note::
+  Due to random sampling of a filer's dependents being more complicated to implement, the engineers have
+  currently implemented this as the 4 dependents included in the 1040 observer as the first 4 of the filer,
+  rather than 4 randomly selected dependents from both guardians in a joint filing row. In a later release,
+  we can implement the random sampling!
+
 
 **Who to Sample**
 
@@ -2889,9 +2859,17 @@ This can be uniformly at random (preferred), or in another way if that is easier
     Also need to address complex family structures
 
 
-Not everyone who receives a W2 or 1099 will end up filing taxes.
+Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a random 65.5% of the working-age population to file taxes (i.e., to show up in the
+1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_
+and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
+
+**Future Add**
+
+As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below
+inclusion/exclusion criteria for who files taxes.
+
 However, those who do not are concentrated in low incomes for whom
-taxes are not required. Currently, we will chose to have all those
+taxes are not required. Currently, we will choose to have all those
 who are legally required to file taxes, file taxes. This is a
 limitation and is listed below.
 
@@ -2955,7 +2933,7 @@ in April 2024.
 #. There are additional people who file taxes that are not included, mainly those living abroad, and those who have died in the past year.
 #. The system for having the head of household claim all dependents does not work well for complex family structures. To see this, imagine two siblings living together with their spouses and children. In the current model, one person will claim all of the children as dependents, when more accurately, each sibling would claim their children only. This is a limitation of our model. Also, the other married couple would not file jointly since our model would not identify them as spouses.
 #. As the reference person in a household is random, they might not be the one who should be claiming dependents.
-#. Not everyone files income taxes who are meant to. This might be modeled either in the above step of W2 and 1099, in this step, or both.
+#. See 'Future Add' above regarding how we'd like to simulate who files their taxes in a future implementation of this simulation.
 
 Social Security Observer
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -2980,10 +2958,11 @@ added later (not in the minimum viable model), if desired.
   * - First name
   * - Middle initial
   * - Last name
-  * - DOB (stored as a string in YYYYMMDD format)
+  * - DOB (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
+  * - Sex (binary; "Male" or "Female")
   * - Social Security Number
   * - Type of event
-  * - Date of event (stored as a string in YYYYMMDD format)
+  * - Date of event (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
 
 .. note::
   Unlike the other observers, there is no ground-truth unique household ID for PRL tracking in this observer.
@@ -3139,13 +3118,13 @@ for all column based noise include:
     - Missing data, fake names, phonetic, OCR, typographic
     - The list of fake names will be different than the first names
   * - Age
-    - Census, Household Surveys, Taxes (both)
+    - Census, Household Surveys
     - 0.01
     - 0.1
     - Missing data, Copy from within Household, Age miswriting, OCR, typographic
     -
   * - Date of Birth
-    - Census, Household Surveys, WIC, Taxes (both), SSA
+    - Census, Household Surveys, WIC, SSA
     - 0.01
     - 0.1
     - Missing data, copy from within household, swap month and day, numeric miswriting, OCR, typographic
@@ -3192,14 +3171,20 @@ for all column based noise include:
     - 0.1
     - Missing data, zip code miswriting, OCR, typographic
     -
-  * - Relationship to head of household
-    - Census
+  * - Housing type
+    - Census, ACS
+    - 0.01
+    - N/A
+    - Missing data, incorrect select
+    -
+  * - Relationship to reference person
+    - Census, ACS
     - 0.01
     - N/A
     - Missing data, incorrect select
     -
   * - Sex
-    - Census, Household Surveys, WIC
+    - Census, Household Surveys, WIC, SSA
     - 0.01
     - N/A
     - Missing data, incorrect select
@@ -3214,7 +3199,7 @@ for all column based noise include:
     - Taxes (both), SSA
     - 0.01
     - 0.1
-    - "Borrowed" SSN, missing data, copy from within household, numeric miswriting, OCR, typographic
+    - "Borrowed" SSN (W2 observer only), missing data, copy from within household (**not** on W2 observer), numeric miswriting, OCR, typographic
     - Note that not all types of noise apply to all observers, details below
   * - ITIN
     - Taxes 1040
@@ -3228,12 +3213,6 @@ for all column based noise include:
     - 0.1
     - Missing data, numeric miswriting, OCR, typographic
     - Note that wages and income are on separate tax forms and noise is applied to each separately
-  * - Employer ID
-    - Taxes (both)
-    - 0.01
-    - 0.1
-    - Missing data, numeric miswriting, OCR, typographic
-    -
   * - Employer Name
     - Taxes (both)
     - 0.01
@@ -3500,15 +3479,14 @@ would be listed in MM/DD/YYYY format as 08/12/2022).
 **Incorrect Select**
 
 Incorrect select applies to a range of data types. For this, select the sample to
-have noise added. For those selected, randomly select a new option. This is chosen
-from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes the full list of options, not just those seen in the household.
+have noise added. For those selected, randomly select a new option from the list of all possible options. For example, for relationship to reference person, this includes the full list of options, not just those seen in the household, and similarly for other fields that get this type of noise.
 
 Please ensure that the new selection is in fact an incorrect selection and that the original
 response was not randomly selected.
 
 Limitations:
 
-- For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways.
+- For single person homes, incorrectly selecting relationship to reference person does not make as much sense. However, we continue with it here anyways.
 - Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity.
 
 .. note::
@@ -3624,7 +3602,7 @@ duplicates in the census only and limiting it to guardian-based duplication.
 In later models, we might choose to include other forms of duplication with
 more parameters.
 
-**Guardian based duplication**
+**Guardian-based duplication**
 
 A known PRL challenge is children being reported multiple
 times at different addresses. This can occur when family structures are
@@ -3639,34 +3617,62 @@ opportunity for duplication. Since this mechanism occurs within the
 simulation, there is a natural maximum that we will impose in the
 noise function.
 
-Guardian based duplication is further divided here into two types: simulants
-younger than 18 and not in college GQ (<18), and those at college GQ less than 24 (<24).
+Guardian-based duplication is applied to three mutually exclusive categories of
+simulants based on age and GQ status: Simulants younger than 18  (<18) and not
+in GQ; simulants 18-23 (18 <= age < 24) and not in GQ; and simulants under 24
+(<24) and in GQ.
 
-For simulants younger than 18 and not in college GQ, the maximum duplication rate will
-be calculated based on those who have a guardian living at a different address in the sim.
+For each of the three categories of simulants, the maximum duplication rate will
+be calculated based on those who have a guardian living at a different address
+in the sim. Note that all simulants in *college* GQ are initialized with a
+guardian living at a different address, but this is not true for simulants in
+other types of GQ, so all three maximum duplication rates will be less than
+100%.
 
-The user can then pick a rate of duplication between 0 and 100%. If the value selected
-is higher than the calculated maximum rate in the sim, a warning will be issued to users
-explaining that the selected rate is greater than the maximum available.
-
-A default value of 5% will be selected.
+The user can then pick a rate of duplication between 0 and 100% **for each of
+the three categories of simulants**. A default duplication rate of 5% will be
+selected for each of the three categories of simulants. That is, each simulant
+under 24 is duplicated at a guardian's household with default probability 0.05,
+and there should be three user parameters for overriding this probability, one
+for each simulant category.
+If the user selects a duplication rate that is higher than the calculated
+maximum rate in the sim, a warning should be issued explaining that the selected
+rate is greater than the maximum available, and the actual rate of duplication
+should be set to the maximum for the specified simulant category. More
+precisely, the conditional probability that a row in the specified category is
+duplicated, given that the row is eligible for guardian-based duplication,
+should be set to 1.
 
 .. note::
 
     If finding the maximum rate proves too difficult to implement, we can reassess this approach
 
-For college GQ simulants aged less than 24, all are assigned to a guardian who
-by definition lives at a different address. This means that theoretically
-the maximum noise level is 100% for this group, however, that would add
-significantly to the dataset and so it not allowed here. The default rate
-will be set to 5%, with a minimum of 0% and a maximum of 25%.
+The duplicated row should have the same simulant-specific attributes as the
+original, such as name and birth date, but different household-specific
+attributes such as address fields and relation to reference person.
+For simplicity, set "relation to reference person" equal to "Other relative" in
+the duplicated row.
 
-To create duplicates, the college student will be included in the final
-dataset twice, once at their college GQ and once at their guardian's home.
+To create guardian-based duplicates, each duplicated simulant will be included
+in the final dataset twice, once at their address of residence and once at their
+guardian's address. If a simulant has more than 1 guardian living at a different
+address, only duplicate them once, for a maximum of 2 occurences in the end
+dataset. Select the guardian at random.
 
-For either group, if a simulant has more than 1 guardian living at a
-different address only duplicate them once, for a maximum of 2 occurences
-in the end dataset. Select the guardian at random.
+.. note::
+
+  Currently, the order in which simulants appear in each dataset is an
+  implementation detail that has not been specified by the research team.
+  However, we may want to reassess this for duplicated rows. For example, if
+  simulants in the census dataset are grouped together by household, then it
+  would make sense to use the same strategy for rows subject to guardian-based
+  duplication (i.e., the duplicate row should appear with rows for the
+  guardian's household, not the duplicated simulant's household). If that is
+  **not** the strategy currently used for ordering rows in the census, then some
+  further specification may be necessary. For example, it is probabably
+  undesirable for duplicated rows to always appear right after the original row,
+  or for all duplicated rows to appear at the end of the dataset, so we would
+  need a strategy to address this.
 
 .. note::
 
@@ -4376,3 +4382,7 @@ To Come (TK)
 .. [PUMS_Data_Dictionary] Bureau, US Census. March 31, 2022. “2016-2020 ACS PUMS Data Dictionary” Census.Gov. Accessed February 10, 2023. https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2016-2020.pdf
 
 .. [Life_Expectancy_Race_Ethnicity] GBD US Health Disparities Collaborators. Life expectancy by county, race, and ethnicity in the USA, 2000–19: a systematic analysis of health disparities. The Lancet. 2022 Jul; 400(10345):25-38. https://doi.org/10.1016/S0140-6736(22)00876-5
+
+.. [CARRA_SSA] Benjamin Cerf Harris. Likely Transgender Individuals in U.S. Federal Administrative Records and the 2010 Census. US Census Bureau. 2015. https://www.census.gov/content/dam/Census/library/working-papers/2015/adrm/carra-wp-2015-03.pdf
+
+.. [WIC_Guide] Economic Research Service of the US Department of Agriculture. Guide to Variables for WIC Administrative Data Available Through a Federal Statistical Research Data Center (FSRDC). 2022. https://www.ers.usda.gov/media/duko3qi3/guide-to-variables-for-wic-administrative-data.xlsx

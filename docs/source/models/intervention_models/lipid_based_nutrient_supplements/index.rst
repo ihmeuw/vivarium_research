@@ -134,6 +134,16 @@ There have been several recent meta-analyses on the effects of SQ-LNS, outlined 
 
       - Effect modified by sex
 
+  - Severe growth outcomes: [Dewey-et-al-2022]_
+
+    - Severe stunting prevalence ratio: 0.83 (95% CI: 0.78, 0.90)
+
+    - Severe wasting prevalence ration: 0.69 (95% CI: 0.55, 0.86)
+
+    - Concurrent severe stunting and severe wasting prevalence ratio: 0.47 (0.30, 0.73)
+
+    - Effects modified by level of wasting and stunting burden
+
   - Anemia and micronutrient status: [Wessells-et-al-2021]_
 
     - Significantly decreased anemia and vitamin A deficiency
@@ -165,7 +175,7 @@ Utilization algorithms
 
 We will consider two concepts of SQ-LNS services, including coverage and utilization:
 
-- **Coverage:** *access* to the intervention (such as living in an area where SQ-LNS products are available and in use). This will be determined by coverage scale-up algorithms in the concept model document.
+**1. Coverage:** *access* to the intervention (such as living in an area where SQ-LNS products are available and in use). This will be determined by coverage scale-up algorithms in the concept model document.
 
 Possible coverage values include:
 
@@ -173,7 +183,7 @@ Possible coverage values include:
 - **Covered:** Actively receiving SQ-LNS supplementation. Simulants aged 6 months to 2 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on wasting and stunting.
 - **Received:** No longer actively receiving SQ-LNS supplementation, but did receive SQ-LNS supplementation before the age of 2. Simulants aged 2 to 5 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on stunting, but not wasting.
 
-- **Utilization:** *use* of the intervention (actually taking the supplements and receiving the effects). This will be determined by the utilization algorithms below.
+**2. Utilization:** *use* of the intervention (actually taking the supplements and receiving the effects). This will be determined by the utilization algorithms below.
 
 There are various SQ-LNS utilization algorithms that may be desired under differing scenarios. They include:
 
@@ -224,7 +234,7 @@ Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic 
 
 .. note::
 
-  Lognormal distributions of uncertainty should be used for all effect sizes in the table below and the uncertainty intervals.
+  Lognormal distributions of uncertainty should be used for all effect sizes in the table below and the uncertainty intervals. We have confirmed that the lognormal distribution reasonably replicates the uncertainty intervals for these effects in this `SQLNS dsitribution check notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/SQLNS_distribution_check.ipynb>`_.
 
   The same percentile should be sampled from within each uncertainty interval for ALL of the effect samples (across age groups and measures) for each draw of the simulation.
 
@@ -358,6 +368,12 @@ References
     nutrient supplementation on child growth: an individual participant
     data meta-analysis of randomized controlled trials. Am J Clin Nutr
     2021;114(Suppl 11):15S–42S.
+
+.. [Dewey-et-al-2022]
+
+  View `Dewey et al. 2022 <https://pubmed.ncbi.nlm.nih.gov/36045000/>`_
+
+    Dewey KG, Arnold CD, Wessells KR, Prado EL, Abbeddou S, Adu-Afarwuah S, Ali H, Arnold BF, Ashorn P, Ashorn U, Ashraf S, Becquey E, Brown KH, Christian P, Colford JM Jr, Dulience SJ, Fernald LC, Galasso E, Hallamaa L, Hess SY, Humphrey JH, Huybregts L, Iannotti LL, Jannat K, Lartey A, Le Port A, Leroy JL, Luby SP, Maleta K, Matias SL, Mbuya MN, Mridha MK, Nkhoma M, Null C, Paul RR, Okronipa H, Ouédraogo JB, Pickering AJ, Prendergast AJ, Ruel M, Shaikh S, Weber AM, Wolff P, Zongrone A, Stewart CP. Preventive small-quantity lipid-based nutrient supplements reduce severe wasting and severe stunting among young children: an individual participant data meta-analysis of randomized controlled trials. Am J Clin Nutr. 2022 Nov;116(5):1314-1333. doi: 10.1093/ajcn/nqac232. Epub 2023 Feb 10. PMID: 36045000.
 
 .. [Huybregts-et-al-2019-sqlns]
 
