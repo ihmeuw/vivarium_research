@@ -2583,7 +2583,7 @@ W2 and 1099 Forms
   * - Mailing Address ZIP Code
   * - Social Security Number
   * - Wages (income from this job)
-  * - Employer ID
+  * - Employer ID (for PRL tracking)
   * - Employer Name
   * - Employer Address
   * - Employer ZIP Code
@@ -3177,12 +3177,6 @@ for all column based noise include:
     - 0.1
     - Missing data, numeric miswriting, OCR, typographic
     - Note that wages and income are on separate tax forms and noise is applied to each separately
-  * - Employer ID
-    - Taxes (both)
-    - 0.01
-    - 0.1
-    - Missing data, numeric miswriting, OCR, typographic
-    -
   * - Employer Name
     - Taxes (both)
     - 0.01
