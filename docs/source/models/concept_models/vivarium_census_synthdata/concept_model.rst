@@ -3107,7 +3107,13 @@ for all column based noise include:
     - Missing data, nicknames, fake names, phonetic, OCR, typographic
     -
   * - Middle Initial
-    - Census, Household Surveys, WIC, Taxes (both), SSA
+    - Census, Household Surveys, WIC, Taxes (both)
+    - 0.01
+    - 0.1
+    - Missing data, phonetic, OCR, typographic
+    -
+  * - Middle Name
+    - SSA
     - 0.01
     - 0.1
     - Missing data, phonetic, OCR, typographic
