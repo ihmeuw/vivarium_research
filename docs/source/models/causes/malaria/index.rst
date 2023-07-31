@@ -113,6 +113,12 @@ For the nutrition optimization work, our model is focused on child growth failur
 and its effects. Therefore, malaria is included to capture CGF's effects on malaria, 
 but does not include additional detail not relevant for this model. 
 
+Our rate based recovery method will approximate the duration seen in GBD, but might 
+have simulants with improbably high or low durations due to random chance. In the 
+future, we might consider a time based duration that would more accurately replicate 
+the 14-28 day duration from GBD. We do not expect this limitation to have a 
+significant impact on our results. 
+
 .. todo::
 
    Continue to add to this section as needed 
