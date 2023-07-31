@@ -2013,12 +2013,12 @@ Census
   * - Physical Address City
   * - Physical Address State
   * - Physical Address ZIP Code
-  * - Relationship to Person 1 (Head of Household)
+  * - Housing Type ("Household" for an individual household, or one of the six different types of group quarters)
+  * - Relationship to Reference Person
   * - Sex (binary; "Male" or "Female")
   * - Race/Ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
 
 .. note::
 
@@ -2207,7 +2207,8 @@ There are two types of sampling plans:
   * - Race/ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
+  * - Housing Type (“Household” for an individual household, or one of the six different types of group quarters. Included in ACS, used for noise functions ONLY in CPS)
+  * - Relationship to Reference Person (for ACS only)
 
 .. note::
 
@@ -2400,6 +2401,8 @@ in the home.
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
+  * - WIC client ID (arbitrary identifier which is the same for the same simulant **across time** but **different from other observers for the same simulant**)
+  * - WIC family ID (arbitrary identifier which is the same for simulants in the same household **across time** but **different from other observers for the same household**)
   * - First name
   * - Middle initial
   * - Last name
@@ -2423,6 +2426,33 @@ Here is an example:
 
   In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise.
 
+**Generating WIC IDs**
+
+To generate the WIC family ID for simulated households observed in WIC,
+sort them by when the household was first observed in WIC (it does not matter how ties are broken),
+then assign them consecutive integers.
+Zero-pad these integers to 9 digits before noising.
+
+.. note::
+  The `actual process for generating WIC family IDs <https://web.archive.org/web/20230601182852/https://www.wichands.com/Content/Docs/Help/ClinicUserManual/Module1/index.html?page=family-id-number.html>`_  involves using the year in combination with
+  a consecutive integer.
+  Our approach is simpler, while still capturing that these
+  numbers are likely to be similar and easy to mistake for one another.
+  In fact, we will tend to overstate how much this is the case by not changing
+  the prefix every year.
+
+To generate the WIC client ID for simulants observed in WIC,
+sort them by when they were first observed in WIC (it does not matter how ties are broken),
+then assign them consecutive integers.
+Zero-pad these integers to 11 digits before noising.
+
+.. note::
+  The `actual process for generating WIC client IDs <https://web.archive.org/web/20230601183736/https://www.wichands.com/Content/Docs/Help/ClinicUserManual/Module1/index.html?page=client-id-number.html>`_ involves using the clinic number, local agency number, and year in combination with
+  a consecutive integer.
+  Our approach is simpler, while still capturing that these
+  numbers are likely to be similar and easy to mistake for one another.
+  In fact, we will tend to overstate how much this is the case by essentially having a single
+  clinic, local agency, and year (all with IDs of 0).
 
 **Who to Sample**
 
@@ -2445,7 +2475,7 @@ on the observer.
 To account for these interdependencies, please follow the below steps:
 
 #. Randomly select tracked mothers or guardians to enroll based on the coverage rate by race/ethnicity
-#. Enroll ALL infants of these tracked mothers or guardians (as infants are defined as less than 1 year old, it should be rare but possible to have multiple infants for the same tracked mother or guardian)
+#. Enroll ALL infants of these tracked mothers or guardians **who live in the same household as their tracked mother/guardian** (as infants are defined as less than 1 year old, it should be rare but possible to have multiple infants for the same tracked mother or guardian)
 #. Calculate the current coverage rate for infants (will be slightly higher than the coverage rate for tracked mothers/guardians)
 #. Enroll more infants randomly, among those eligible but not already enrolled, until the overall infant coverage is met
 
@@ -2459,7 +2489,7 @@ Eligibility for WIC is based on income and age/children in the house.
 To qualify you must be both:
 
 - A child under the age of 5 (0-4 years old)
-- OR a tracked mother OR guardian of a child under the age of 1
+- OR a tracked mother OR guardian of a child under the age of 1 **living in the same household as that child**
 
 And also:
 
@@ -2542,8 +2572,15 @@ See the final limitation below for more about this approximation.
 #. Some states use different income cutoffs, but the ones listed are used in the majority of cases and so are implemented here
 #. Year over year WIC inclusion is independent - this is likely an oversimplification and will lead to higher rates of churn than are found in real life
 #. The creation of race/ethnicity specific coverage by participate category is imperfect. We do not have granular data which includes this breakdown, so it is based on the overall coverage by race/ethnicity which is an assumption. Also, for infants this would lead to over 100% selection, so it is not changed (remains at 98.4% for most race/ethnicity groups)
-#. We use a household ID. There will be cases in which a tracked mother/guardian does not live in the same household as their infant, this might be confusing in the resulting data.
 #. Real WIC data includes dates of starting and ending eligibility. We assume that data is then rolled up over some time period, say a year, to include everyone eligible for that year. For our data, we approximate this by having everyone eligible at the first time point in the new year included in the dataset. This will exclude simulants who were eligible for some part of the prior year, but are not at the time of observation. Therefore, data sampled in Jan 2029 is the approximation of data from all of 2028.
+#. We use household as the proxy for WIC family ID, which causes two issues:
+     * Our use of household means that WIC family ID only stays the same over time for participants who either
+       do not move, or move as part of a household unit.
+       The other cases should be relatively rare.
+       In reality, it is not clear in what conditions WIC family ID remains constant over time.
+       For example, would the WIC family ID of an infant be the same before and after they moved to their
+       grandparents' house?
+     * Two families that participate in WIC and live in the same household, whether at the same time or at different times, will have the same family ID in our data.
 
 Taxes
 ^^^^^
@@ -2582,7 +2619,7 @@ W2 and 1099 Forms
   * - Mailing Address ZIP Code
   * - Social Security Number
   * - Wages (income from this job)
-  * - Employer ID
+  * - Employer ID (for PRL tracking)
   * - Employer Name
   * - Employer Address
   * - Employer ZIP Code
@@ -2766,11 +2803,11 @@ in January 2024.
   In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
 .. todo::
-  
-  Add total income to this observer. 
+
+  Add total income to this observer.
 
 .. todo::
-  
+
   Add a way to capture forms a simulant would file besides the 1040 (e.g. W2/1099 forms).
 
 If a simulant does not have an SSN,
@@ -2806,6 +2843,13 @@ If a simulant has more than 4 dependents,
 4 of their dependents are chosen to be included on the 1040 and the rest are omitted.
 This can be uniformly at random (preferred), or in another way if that is easier computationally.
 
+.. note::
+  Due to random sampling of a filer's dependents being more complicated to implement, the engineers have
+  currently implemented this as the 4 dependents included in the 1040 observer as the first 4 of the filer,
+  rather than 4 randomly selected dependents from both guardians in a joint filing row. In a later release,
+  we can implement the random sampling!
+
+
 **Who to Sample**
 
 .. todo::
@@ -2815,9 +2859,17 @@ This can be uniformly at random (preferred), or in another way if that is easier
     Also need to address complex family structures
 
 
-Not everyone who receives a W2 or 1099 will end up filing taxes.
+Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a random 65.5% of the working-age population to file taxes (i.e., to show up in the
+1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_
+and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
+
+**Future Add**
+
+As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below
+inclusion/exclusion criteria for who files taxes.
+
 However, those who do not are concentrated in low incomes for whom
-taxes are not required. Currently, we will chose to have all those
+taxes are not required. Currently, we will choose to have all those
 who are legally required to file taxes, file taxes. This is a
 limitation and is listed below.
 
@@ -2881,7 +2933,7 @@ in April 2024.
 #. There are additional people who file taxes that are not included, mainly those living abroad, and those who have died in the past year.
 #. The system for having the head of household claim all dependents does not work well for complex family structures. To see this, imagine two siblings living together with their spouses and children. In the current model, one person will claim all of the children as dependents, when more accurately, each sibling would claim their children only. This is a limitation of our model. Also, the other married couple would not file jointly since our model would not identify them as spouses.
 #. As the reference person in a household is random, they might not be the one who should be claiming dependents.
-#. Not everyone files income taxes who are meant to. This might be modeled either in the above step of W2 and 1099, in this step, or both.
+#. See 'Future Add' above regarding how we'd like to simulate who files their taxes in a future implementation of this simulation.
 
 Social Security Observer
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -3119,8 +3171,14 @@ for all column based noise include:
     - 0.1
     - Missing data, zip code miswriting, OCR, typographic
     -
-  * - Relationship to head of household
-    - Census
+  * - Housing type
+    - Census, ACS
+    - 0.01
+    - N/A
+    - Missing data, incorrect select
+    -
+  * - Relationship to reference person
+    - Census, ACS
     - 0.01
     - N/A
     - Missing data, incorrect select
@@ -3155,12 +3213,6 @@ for all column based noise include:
     - 0.1
     - Missing data, numeric miswriting, OCR, typographic
     - Note that wages and income are on separate tax forms and noise is applied to each separately
-  * - Employer ID
-    - Taxes (both)
-    - 0.01
-    - 0.1
-    - Missing data, numeric miswriting, OCR, typographic
-    -
   * - Employer Name
     - Taxes (both)
     - 0.01
@@ -3427,15 +3479,14 @@ would be listed in MM/DD/YYYY format as 08/12/2022).
 **Incorrect Select**
 
 Incorrect select applies to a range of data types. For this, select the sample to
-have noise added. For those selected, randomly select a new option. This is chosen
-from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes the full list of options, not just those seen in the household.
+have noise added. For those selected, randomly select a new option from the list of all possible options. For example, for relationship to reference person, this includes the full list of options, not just those seen in the household, and similarly for other fields that get this type of noise.
 
 Please ensure that the new selection is in fact an incorrect selection and that the original
 response was not randomly selected.
 
 Limitations:
 
-- For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways.
+- For single person homes, incorrectly selecting relationship to reference person does not make as much sense. However, we continue with it here anyways.
 - Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity.
 
 .. note::
