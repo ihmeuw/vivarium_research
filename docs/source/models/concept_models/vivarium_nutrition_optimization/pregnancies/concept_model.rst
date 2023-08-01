@@ -424,6 +424,14 @@ Specific outputs for specific models are specified in the following section.
       * Anemia state person time, stratified by pregnancy state
     - N/A
     - 
+  * - 3.1
+    - Hemoglobin/anemia exposure with bugfixes
+    - Baseline
+    - None
+    - * YLDs (anemia severity specific), stratified by pregnancy state
+      * Anemia state person time, stratified by pregnancy state
+    - N/A
+    - 
   * - 4.0
     - Hemoglobin on maternal disorders, hemoglobin on maternal hemorrhage, and maternal hemorrhage on hemoglobin risk effects
     - Baseline
@@ -565,6 +573,9 @@ Specific outputs for specific models are specified in the following section.
     - `Model 2.1 V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_2.1_maternal_disorders.ipynb>`_ 
       * Maternal disorders CSMR now validating, except for zero value for 50-55 year olds (see explanation in table below)
       * Maternal hemorrhage incidence is validating, except for zero value for 50-55 year olds (see explanation in table below)
+  * - 3.0
+    - Verify anemia prevalence and YLDs, postpartum state duration
+    - Anemia prevalence looks good among pregnant population, too high among non-pregnant population. Anemia YLDs too high. Simulation duration extended to one year fixed postpartum duration oddities, now exactly equal to six weeks. `Model 3.0 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/29>`_
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -573,14 +584,22 @@ Specific outputs for specific models are specified in the following section.
     - Explanation
     - Action plan
     - Timeline
-  * - Duration of postpartum state is looking too long
-    - This is because simulants who die of maternal disorders die in the first timestep of the postpartum state rather than in the parturition state. Because of this, there is more person-time in the postartum state than expected. 
-    - Acceptable limitation. Use interactive sim to determine the duration of the postpartum period among those who do not die.
-    - Low priority (research team)
+  * - Duration of postpartum state is looking too long and/or postpartum anemia YLDs should not be scaled up
+    - Duration of postpartum state is 6 weeks AND anemia YLDs during postpartum period are scaled to account for non-accumulation during the parturition state. Only one of these strategies should be taken.
+    - Update strategy
+    - For next model run
   * - Zero values for 50-55 year old age group
     - Vivarium inputs fills maternal disorders deaths and maternal hemorrhage incidence with zeros due to :code:`age_end` parameter in :code:`gbd_mapping`, despite raw GBD estimates for these parameters being non-zero for this age group
     - Acceptable limitation given very low pregnancy incidence in this age group
     - N/A
+  * - Anemia prevalence too high among non-pregnant population
+    - Unknown
+    - Either investigate bug and fix (double check pregnancy adjustment on hemoglobin as well as pregnancy-specific anemia thresholds) or remove non-pregnant individuals from simulation
+    - Next model run
+  * - Anemia YLDs too high
+    - Could be a result of the above issue
+    - Reassess in results of next model run
+    - 
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++
