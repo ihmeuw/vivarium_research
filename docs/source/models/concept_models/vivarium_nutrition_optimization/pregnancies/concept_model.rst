@@ -254,8 +254,8 @@ Documents that contain information specific to the overall model and the child s
     - 2025-01-01
     - (No burn-in period)
   * - Simulation end date
-    - 2025-12-3
-    - Assumes maximum pregnancy duration of 42 weeks + 6 weeks postpartum + 1 day. 2025 is not a leap year
+    - 2025-12-31
+    - Needs to accommodate maximum gestation of 42 weeks + 6 weeks postpartum. Note this was previously 2025-12-3 and was updated for model 3.0.
   * - Timestep
     - 1 week (7 days)
     - Note, could be increased to two weeks if duration of maternal disorders pregnancy state is updated.
