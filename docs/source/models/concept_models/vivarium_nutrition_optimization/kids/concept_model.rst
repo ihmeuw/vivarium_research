@@ -488,9 +488,11 @@ Where:
 
 - **1** is 100% coverage 
 
-.. todo::
+Baseline values for :ref:`wasting treatment <intervention_wasting_tx_combined_protocol>` (:math:`C_\text{SAM}`, :math:`E_\text{SAM}`, :math:`C_\text{MAM}`, and :math:`E_\text{MAM}` parameters) and :ref:`SQ-LNS <lipid_based_nutrient_supplements>` interventions can be found on the respective intervention model documents.
 
-    Link relevant parameters for coverage (C_SAM, C_MAM, E_SAM, E_MAM, SQ-LNS cov)
+.. note::
+
+  :math:`E_\text{SAM}` and :math:`E_\text{MAM}` parameter values will **not** vary by scenario in this model.
 
 2.6 Outputs
 ------------

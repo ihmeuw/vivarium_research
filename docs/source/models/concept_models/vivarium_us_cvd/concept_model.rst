@@ -469,16 +469,16 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - 
   * - D
     - 19.4% will not start medication. Of those that start medication, 42% will receive high intensity statin; 52% medium intensity; and 6% low intensity 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - E
     - 19.4% will not start medication. Of those that start medication, 24% will receive high intensity statin; 66% medium intensity; and 10% low intensity 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - F
     - 19.4% will not start medication. Of those that start medication, 15% will receive high intensity statin; 71% medium intensity; and 14% low intensity 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - G
     - Only adherent simulants will move up categories. 19.4% will not move up medication categories due to theraputic inertia 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ 
+    - Theraputic inertia should remain constant within a specific treatment level. A simulant will draw an inertia value for each treatment level (i.e., medium intensity statin) and that value will not change. If they do move up to the next treatment, a new value will be drawn. If not, they will remain at that treatment indefinitely. [Morales_2018]_ 
   * - H
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - 
@@ -1020,21 +1020,24 @@ Code is below for reference
     - Extended V&V Attempts 
     - There were many runs and a significant amount of back and forth to try to solve some V&V issues. The main issues were: too low exposures at initialization, decreasing risk factors over time, and too low incidence for MI and stroke. The test runs completed and current thinking are best recorded in this `tracker <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BC6881D3C-63E1-450A-A1A6-3A866080D0DD%7D&file=CVD_VV_Tracker_06202023.xlsx&action=default&mobileredirect=true>`_. At this time, this has not been solved. 
   * - 16.0
+    - Adding Correlation 
+    - No new issues found with adding correlation. `Causes with correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_correlation_07.25.2023.ipynb>`_ and `risks with correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/risks_VV_07.25.2023.ipynb>`_ were checked in the same manner as previous runs. Additionally, `simulant exposure values <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/interactive_correlation.ipynb>`_ were checked for correlation in the interactive sim both on initialization and after 25 time steps. It was found that correlation varied around the expected input values. 
+  * - 17.0
     - Add New Observer 
     - 
-  * - 17.0
+  * - 18.0
     - Test Runs for Timing on 10 States 
     - States to be included are: Alabama, Washington, Alaska, Rhode Island, California, Texas, Kansas, West Virginia, Florida, North Dakota  
-  * - 18.0
+  * - 19.0
     - Adjusting Theraputic Inertia 
     - 
-  * - 19.0
-    - Add Risk Correlation, Medication and PAF Recalculations 
-    - 
   * - 20.0
+    - Add Medication and PAF Recalculations 
+    - 
+  * - 21.0
     - Update to GBD 2021 
     - Need to confirm if this is going to be included in phase 1 
-  * - 21.0
+  * - 22.0
     - Final Runs 
     - Research team to specify this further 
 
