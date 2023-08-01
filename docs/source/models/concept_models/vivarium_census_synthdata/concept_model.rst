@@ -3116,8 +3116,8 @@ for all column based noise include:
     - SSA
     - 0.01
     - 0.1
-    - Missing data, phonetic, OCR, typographic
-    -
+    - Missing data, nicknames, fake names, phonetic, OCR, typographic
+    - Use the list of fake first names for middle names as well
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA
     - 0.01
