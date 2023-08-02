@@ -3760,21 +3760,20 @@ rather than some datasets having tiny shards like ACS currently does.
 Another potentially ambiguous point in the above strategy is which data to use
 to pre-compute the eligible fraction :math:`F`. Since these pre-computed values
 are merely for user warnings, the researchers are flexible as to how closely the
-:math:`F` values should match the corresponding datasets, and we'll let
-the engineers decide on the exact implementation. Here are three options: (1) If
-the pre-computed values are stored in a separate metadata file generated with
-each simulation run, then :math:`F` can be computed for each applicable
-(dataset, year, noise type) combination that can be requested by the user. (2) On
-the other hand, if it's easier to store a single value of :math:`F` for each
-(dataset, noise type) without varying across years, then we should use
-the dataset for the year 2030; since 2030 is the midpoint of our simulation, we
+:math:`F` values should match the corresponding datasets, and we'll let the
+engineers decide on the exact implementation. Here are three options: (1) If the
+pre-computed values are stored in a separate metadata file generated with each
+simulation run, then :math:`F` can be computed for each applicable (dataset,
+year, noise type) combination that can be requested by the user. (2) On the
+other hand, if it's easier to store a single value of :math:`F` for each
+(dataset, noise type) without varying across years, then we should use the
+dataset for the year 2030; since 2030 is the midpoint of our simulation, we
 expect it to be sufficiently representative of the data across all simulated
-years.
-(3) If even this is too complicated, a single :math:`F` can be computed for a noise type, and not vary between datasets (or years);
-the decennial census dataset should be used to do this.
-The level of imprecision in any of the above options is acceptable for the user warning, which
-should be left vague enough as to not imply exactly what fraction of rows will
-get noised.
+years. (3) If even this is too complicated, a single :math:`F` can be computed
+for a noise type, and not vary between datasets (or years); the decennial census
+dataset should be used to do this. The level of imprecision in any of the above
+options is acceptable for the user warning, which should be left vague enough as
+to not imply exactly what fraction of rows will get noised.
 
 Old Abie Work, to be deleted later
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
