@@ -246,7 +246,7 @@ Documents that contain information specific to the overall model and the child s
     - 
   * - Exit age (observation)
     - Age at which postpartum period ends
-    - Need to confirm with engineers
+    - 
   * - Simulation start date
     - 2025-01-01
     -
@@ -576,6 +576,9 @@ Specific outputs for specific models are specified in the following section.
   * - 3.0
     - Verify anemia prevalence and YLDs, postpartum state duration
     - Anemia prevalence looks good among pregnant population, too high among non-pregnant population. Anemia YLDs too high. Simulation duration extended to one year fixed postpartum duration oddities, now exactly equal to six weeks. `Model 3.0 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/29>`_
+  * - 3.1 (3.0bugfix)
+    - Verify no person time in the not-pregnant state, check anemia YLDs
+    - Both look good! `Model 3.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/30>`_
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -584,22 +587,10 @@ Specific outputs for specific models are specified in the following section.
     - Explanation
     - Action plan
     - Timeline
-  * - Duration of postpartum state is looking too long and/or postpartum anemia YLDs should not be scaled up
-    - Duration of postpartum state is 6 weeks AND anemia YLDs during postpartum period are scaled to account for non-accumulation during the parturition state. Only one of these strategies should be taken.
-    - Update strategy
-    - For next model run
   * - Zero values for 50-55 year old age group
     - Vivarium inputs fills maternal disorders deaths and maternal hemorrhage incidence with zeros due to :code:`age_end` parameter in :code:`gbd_mapping`, despite raw GBD estimates for these parameters being non-zero for this age group
     - Acceptable limitation given very low pregnancy incidence in this age group
     - N/A
-  * - Anemia prevalence too high among non-pregnant population
-    - Unknown
-    - Either investigate bug and fix (double check pregnancy adjustment on hemoglobin as well as pregnancy-specific anemia thresholds) or remove non-pregnant individuals from simulation
-    - Next model run
-  * - Anemia YLDs too high
-    - Could be a result of the above issue
-    - Reassess in results of next model run
-    - 
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++
