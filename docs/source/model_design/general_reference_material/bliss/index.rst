@@ -103,7 +103,7 @@ They may not respond at all, or they may inaccurately choose one of the
 binary categories.
 
 When it is not feasible to trace a sex or gender variable back to its source,
-either because we are many levels steps removed from the original data or because
+either because we are many steps removed from the original data or because
 there is a lack of public documentation about a data source,
 **we should assume that it is a non-differentiated sex/gender measure,**
 unless there are clear signs of effort to construct a valid sex/gender measure.
