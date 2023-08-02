@@ -2956,13 +2956,14 @@ added later (not in the minimum viable model), if desired.
 
   * - Unique simulant ID (for PRL tracking)
   * - First name
-  * - Middle initial
+  * - Middle name
   * - Last name
   * - DOB (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
   * - Sex (binary; "Male" or "Female")
   * - Social Security Number
   * - Type of event
   * - Date of event (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
+  * - Event ID (unique integer identifier for each row in the SSA dataset, representing a ground-truth identifier for the event recorded in that row; unaffected by noise functions; to be used for comparing noised and unnoised data)
 
 .. note::
   Unlike the other observers, there is no ground-truth unique household ID for PRL tracking in this observer.
@@ -3106,11 +3107,17 @@ for all column based noise include:
     - Missing data, nicknames, fake names, phonetic, OCR, typographic
     -
   * - Middle Initial
-    - Census, Household Surveys, WIC, Taxes (both), SSA
+    - Census, Household Surveys, WIC, Taxes (both)
     - 0.01
     - 0.1
     - Missing data, phonetic, OCR, typographic
     -
+  * - Middle Name
+    - SSA
+    - 0.01
+    - 0.1
+    - Missing data, nicknames, fake names, phonetic, OCR, typographic
+    - Use the list of fake first names for middle names as well
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA
     - 0.01
