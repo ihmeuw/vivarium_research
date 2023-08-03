@@ -3718,15 +3718,15 @@ dataset. Select the guardian at random.
 Additional noise implementation details
 '''''''''''''''''''''''''''''''''''''''
 
-Three of the noise functions specify that a warning should be raised if the user
-requests a fraction of rows that is higher than possible: :ref:`Nicknames
-<census_prl_nickname_noise>`; :ref:`Copy from within household
-<census_prl_copy_household_noise>`; and :ref:`Guardian-based duplication
-<census_prl_guardian_duplication>`. Because of our distributed data processing
-(the data is split into multiple shards), it is not entirely straightforward to
-determine the overall fraction of rows that are eligible for the requested noise
-or to add noise to the correct number of rows across all shards. Here is a
-simple strategy to deal with this issue:
+Three of the noise functions have additional row eligibility requirements and
+specify that a warning should be raised if the user requests a fraction of rows
+that is higher than possible: :ref:`Nicknames <census_prl_nickname_noise>`;
+:ref:`Copy from within household <census_prl_copy_household_noise>`; and
+:ref:`Guardian-based duplication <census_prl_guardian_duplication>`. Because of
+our distributed data processing (the data is split into multiple shards), it is
+not entirely straightforward to determine the overall fraction of rows that are
+eligible for the requested noise or to add noise to the correct number of rows
+across all shards. Here is a simple strategy to deal with this issue:
 
 #.  Pre-compute the fraction :math:`F` of rows eligible for each applicable
     noise type in the full dataset (i.e., across all shards concatenated
