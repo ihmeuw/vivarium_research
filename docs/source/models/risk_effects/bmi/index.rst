@@ -257,12 +257,26 @@ all is 370. The cause_id for IHD is 493. The med_ids are 105 for FPG,
 107 for SBP and 367 for LDL-C. The csv has data for individual draws 
 that will be used. 
 
-:math:`RR_\text{adjusted} = 1 + (RR_\text{unadjusted} - 1) * \prod_{m=1}^{n} (1 - MF_m)`
+The math is written out in the equations below and example python code 
+is also included. 
 
-Where :math:`MF_m` is the mediation factor for each mediator :math:`m` in SBP, LDL-C, and FPG.
+:math:`delta_\text{m} = \frac{log(MF_m * (RR_\text{BMI,unadjusted} -1)+1)} {log(RR_\text{m})}`
+
+:math:`RR_\text{BMI,adjusted} = \frac{RR_\text{BMI,unadjusted}}{\prod_{m=1}^{n} {RR_\text{m}}^{delta_\text{m}}}`
+
+Where :math:`MF_m` is the mediation factor and :math:`RR_\text{m}` is the relative risk for each mediator :math:`m` in SBP, LDL-C, and FPG.
 
 where the RR_unadjusted is from the get_draws code above and the 
 RR_adjusted is what is used to find the risk of BMI on IHD. 
+
+:: 
+
+  delta_sbp = np.log((sbp_mf*(bmi_ihd_rr-1))+1)/np.log(sbp_ihd_rr)
+  delta_ldl = np.log((ldl_mf*(bmi_ihd_rr-1))+1)/np.log(ldl_ihd_rr)
+  delta_fpg = np.log((fpg_mf*(bmi_ihd_rr-1))+1)/np.log(fpg_ihd_rr)
+
+  RR_adj=(bmi_ihd_rr)/((pow(sbp_ihd_rr, delta_sbp))*(pow(ldl_ihd_rr, delta_ldl))*(pow(fpg_ihd_rr, delta_fpg)))
+
 
 Risk Outcome Pair #2: Ischemic stroke
 +++++++++++++++++++++++++++++++++++++
@@ -292,12 +306,25 @@ all is 370. The cause_id for ischemic stroke is 495. The med_ids are 105 for FPG
 107 for SBP and 367 for LDL-C. The csv has data for individual draws 
 that will be used. 
 
-:math:`RR_\text{adjusted} = 1 + (RR_\text{unadjusted} - 1) * \prod_{m=1}^{n} (1 - MF_m)`
+The math is written out in the equations below and example python code 
+is also included. 
 
-Where :math:`MF_m` is the mediation factor for each mediator :math:`m` in SBP, LDL-C, and FPG.
+:math:`delta_\text{m} = \frac{log(MF_m * (RR_\text{BMI,unadjusted} -1)+1)} {log(RR_\text{m})}`
+
+:math:`RR_\text{BMI,adjusted} = \frac{RR_\text{BMI,unadjusted}}{\prod_{m=1}^{n} {RR_\text{m}}^{delta_\text{m}}}`
+
+Where :math:`MF_m` is the mediation factor and :math:`RR_\text{m}` is the relative risk for each mediator :math:`m` in SBP, LDL-C, and FPG.
 
 where the RR_unadjusted is from the get_draws code above and the 
-RR_adjusted is what is used to find the risk of BMI on ischemic stroke. 
+RR_adjusted is what is used to find the risk of BMI on stroke. 
+
+:: 
+
+  delta_sbp = np.log((sbp_mf*(bmi_stroke_rr-1))+1)/np.log(sbp_stroke_rr)
+  delta_ldl = np.log((ldl_mf*(bmi_stroke_rr-1))+1)/np.log(ldl_stroke_rr)
+  delta_fpg = np.log((fpg_mf*(bmi_stroke_rr-1))+1)/np.log(fpg_stroke_rr)
+
+  RR_adj=(bmi_stroke_rr)/((pow(sbp_stroke_rr, delta_sbp))*(pow(ldl_stroke_rr, delta_ldl))*(pow(fpg_stroke_rr, delta_fpg)))
 
 Risk Outcome Pair #10: Heart failure
 ++++++++++++++++++++++++++++++++++++
@@ -356,19 +383,19 @@ Mediation for heart failure is included for SBP only. LDL-C and FPG do
 not have a direct effect on heart failure, so they are not needed as mediation 
 factors here. Data for the mediation factors can be found in the csv file here. 
 
-RR_adjusted = (1 - MF for SBP) * (RR_unadjusted - 1) + 1
+:math:`RR_\text{BMI,adjusted} = \frac{RR_\text{BMI,unadjusted}}{{RR_\text{SBP}}^{delta_\text{SBP}}}`
 
 where the RR_unadjusted is 1.14 (1.12, 1.16) and the 
 RR_adjusted is what is used to find the risk of BMI on heart failure. 
 
-The MF is the mediation factor. This can be found in the table below. 
+The delta can be found in the table below. 
 
 .. csv-table:: Mediation Factor 
   :file: heart_failure_MF.csv
-  :widths: 40 30 30 30 30
+  :widths: 40 30 30 30
   :header-rows: 1 
 
-This mediation factor is calculated in this `workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/risk_mediation.ipynb>`_ 
+This mediation factor is calculated in this `workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/risk_mediation_2.ipynb>`_ 
 
 
 Assumptions and Limitations

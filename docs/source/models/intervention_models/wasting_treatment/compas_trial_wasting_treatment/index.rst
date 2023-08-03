@@ -66,6 +66,7 @@ Changes to the modeling strategy from the previously implemented version include
 - Isolation of the :math:`\text{time to diagnosis}` parameter
 - Updated value for :math:`\text{time to recovery}_\text{effectively treated SAM}`
 - Updated value for :math:`\text{time to recovery}_\text{effectively treated SAM}`
+- :math:`E_\text{MAM}` and :math:`E_\text{SAM}` parameters no longer vary by scenario
 
 Otherwise, the modeling strategy remains the same.
 
@@ -147,7 +148,7 @@ Vivarium Modeling Strategy
   * - :math:`mortality_{SAM|a,s,l,y}`
     - Mortality rate among SAM wasting state
     - N/A
-    - TODO: Update to 2021 wasting transition page. :ref:`defined on the wasting documentation <2020_risk_exposure_wasting_state_exposure>`
+    - :ref:`Defined on the wasting documentation <2021_risk_exposure_wasting_state_exposure>`
     - GBD
 
 .. list-table:: Location-specific parameter values
@@ -177,17 +178,15 @@ Vivarium Modeling Strategy
 Affected Outcomes
 +++++++++++++++++
 
-.. todo:: 
+The Vivarium modeling strategy above details how to solve for the transition rates among the covered and uncovered populations. However, the wasting treatment intervention will be implemented as a variable that affects the relative risk of certain transition rates between wasting states in the :ref:`dynamic wasting model <2021_risk_exposure_wasting_state_exposure>`. The following table details the relative risks for each dynamic wasting model transition rate that is affected by wasting treatment based on a given treatment category.
 
-  Update link to new wasting transition model doc
+.. note::
 
-The Vivarium modeling strategy above details how to solve for the transition rates among the covered and uncovered populations. However, the wasting treatment intervention will be implemented as a variable that affects the relative risk of certain transition rates between wasting states in the :ref:`dynamic wasting model <2020_risk_exposure_wasting_state_exposure>`. The following table details the relative risks for each dynamic wasting model transition rate that is affected by wasting treatment based on a given treatment category.
+  The :math:`E_{SAM}` and :math:`E_{MAM}` parameters will **NOT** vary between baseline and alterantive scenarios for the nutrition optimization model as they did for the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`. 
 
-.. warning::
+  Because of this, the rate at which simulants covered by MAM/SAM treatment transition through the treated and untreated pathways will not vary by scenario as they did for the CIFF project. 
 
-  The :math:`E_{SAM}` and :math:`E_{MAM}` parameters MAY vary between baseline and alterantive scenarios for the nutrition optimization model as they did for the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`. (UPDATE TO COME) 
-
-  This will cause the rate at which simulants covered by MAM/SAM treatment transition through the treated and untreated pathways to vary by scenario (the treated pathway transition rate will be greater and the untreated pathway transition rate will be lower in the alternative scenario relative to the the baseline scenario). This should be reflected in the implementation of the treatment model (such as separate intervention "risk factor" components for baseline and alternative treatments).
+  We made this decision as there was no significant difference in response rate between standard of care and combined protocol arms of the COMPAS trial [Bailey-et-al-2020]_.
 
 .. list-table:: Wasting transition rate relative risks for wasting treatment
   :header-rows: 1
@@ -240,6 +239,8 @@ and
 .. math::
 
   \overline{RR_{r}} = C * RR_{r, treated} + (1 - C) * RR_{r, untreated}
+
+.. _WastingPropensityNote:
 
 Coverage Propensities
 ++++++++++++++++++++++
@@ -294,7 +295,7 @@ Assumptions and Limitations
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Verify the relative risks for MAM and SAM *recovery* rates by treatment coverage status in the *Wasting transition rate relative risks for wasting treatment* table. Note that the relative risks will vary between the baseline and alternative scenarios given the reliance of the relative risks on :math:`E_{MAM}` and :math:`E_{SAM}` values, which vary between simulation scenarios.
+#. Verify the relative risks for MAM and SAM *recovery* rates by treatment coverage status in the *Wasting transition rate relative risks for wasting treatment* table. 
 
 #. Verify that the wasting *incidence* rates do not vary by treatment coverage. Incidence rates for this verification should be calculated as :math:`\frac{\text{incident MAM/SAM cases|treatment coverage status}}{\text{person time in mild/MAM wasting states|treatment coverage status}}` (note denominator is not total person time for treatment coverage status, which may differ between treatment coverage categories).
 
