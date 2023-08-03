@@ -3754,19 +3754,22 @@ across all shards. Here is a simple strategy to deal with this issue:
     shard with probability :math:`\min\{p/f, 1\}`. Do **not** raise a warning to
     the user for every shard with :math:`p>f`.
 
-This strategy has a known limitation: It systematically adds less noise to the
-dataset than requested when :math:`p` is sufficiently large. This is obvious when
-:math:`p>F`, but it can happen even when :math:`p\le F`. Here's why:
+.. caution::
 
-Due to random fluctuation between the shards, sometimes we will have
-:math:`f<F`. Thus, if :math:`p` is sufficiently large, we will have :math:`p>f`
-for some shards, even if :math:`p\le F`. Now note that for each shard with
-:math:`p>f`, the fraction of rows that get noised is :math:`f`, which is less
-than :math:`p`. On the other hand, for shards with :math:`p\le f`, the average
-fraction of rows that get noised is :math:`p`. Combining all shards, the average
-fraction of noised rows will be less than :math:`p`. This problem will be worse
-for small datasets like ACS because of greater variability of :math:`f` around
-:math:`F`.
+  The algorithm in Step 3 above has a known limitation: It systematically adds
+  less noise to the dataset than requested when :math:`p` is sufficiently large.
+  This is obvious when :math:`p>F`, but it can happen even when :math:`p\le F`.
+  Here's why:
+
+  Due to random fluctuation between the shards, sometimes we will have
+  :math:`f<F`. Thus, if :math:`p` is sufficiently large, we will have
+  :math:`p>f` for some shards, even if :math:`p\le F`. Now note that for each
+  shard with :math:`p>f`, the fraction of rows that get noised is :math:`f`,
+  which is less than :math:`p`. On the other hand, for shards with :math:`p\le
+  f`, the average fraction of rows that get noised is :math:`p`. Combining all
+  shards, the average fraction of noised rows will be less than :math:`p`. This
+  problem will be worse for small datasets like ACS because of greater
+  variability of :math:`f` around :math:`F`.
 
 We are willing to accept the above limitation for simplicity's sake. Moreover,
 the impact of this issue should be mitigated when we change our shard-based
