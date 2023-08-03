@@ -3393,10 +3393,15 @@ row-level probability specified by the user, *unless* this probability is
 greater than the fraction of cells eligible for nicknames as calculated in the
 first step above. If the user requests a higher row-level probability of
 nickname noise than the fraction of cells that is eligible for nicknames, raise
-a warning to the user, and add noise to all eligible cells in the column. For
-details about how to implement the user warning given our shard-based
-distributed data processing approach, see the `Additional noise implementation
-details`_ section below.
+a warning to the user, and add noise to all eligible cells in the column.
+
+.. attention::
+
+  With our shard-based distributed data processing approach, implementing the
+  above instructions is not entirely straightforward. See the `Additional noise
+  implementation details`_ section below for further details about how to add
+  noise to approximately the correct number of cells and how to implement the
+  user warning.
 
 Limitations:
 
