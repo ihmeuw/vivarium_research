@@ -2013,12 +2013,12 @@ Census
   * - Physical Address City
   * - Physical Address State
   * - Physical Address ZIP Code
-  * - Relationship to Person 1 (Head of Household)
+  * - Housing Type ("Household" for an individual household, or one of the six different types of group quarters)
+  * - Relationship to Reference Person
   * - Sex (binary; "Male" or "Female")
   * - Race/Ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
 
 .. note::
 
@@ -2207,7 +2207,8 @@ There are two types of sampling plans:
   * - Race/ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
+  * - Housing Type (“Household” for an individual household, or one of the six different types of group quarters. Included in ACS, used for noise functions ONLY in CPS)
+  * - Relationship to Reference Person (for ACS only)
 
 .. note::
 
@@ -2400,6 +2401,8 @@ in the home.
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
+  * - WIC client ID (arbitrary identifier which is the same for the same simulant **across time** but **different from other observers for the same simulant**)
+  * - WIC family ID (arbitrary identifier which is the same for simulants in the same household **across time** but **different from other observers for the same household**)
   * - First name
   * - Middle initial
   * - Last name
@@ -2423,6 +2426,33 @@ Here is an example:
 
   In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise.
 
+**Generating WIC IDs**
+
+To generate the WIC family ID for simulated households observed in WIC,
+sort them by when the household was first observed in WIC (it does not matter how ties are broken),
+then assign them consecutive integers.
+Zero-pad these integers to 9 digits before noising.
+
+.. note::
+  The `actual process for generating WIC family IDs <https://web.archive.org/web/20230601182852/https://www.wichands.com/Content/Docs/Help/ClinicUserManual/Module1/index.html?page=family-id-number.html>`_  involves using the year in combination with
+  a consecutive integer.
+  Our approach is simpler, while still capturing that these
+  numbers are likely to be similar and easy to mistake for one another.
+  In fact, we will tend to overstate how much this is the case by not changing
+  the prefix every year.
+
+To generate the WIC client ID for simulants observed in WIC,
+sort them by when they were first observed in WIC (it does not matter how ties are broken),
+then assign them consecutive integers.
+Zero-pad these integers to 11 digits before noising.
+
+.. note::
+  The `actual process for generating WIC client IDs <https://web.archive.org/web/20230601183736/https://www.wichands.com/Content/Docs/Help/ClinicUserManual/Module1/index.html?page=client-id-number.html>`_ involves using the clinic number, local agency number, and year in combination with
+  a consecutive integer.
+  Our approach is simpler, while still capturing that these
+  numbers are likely to be similar and easy to mistake for one another.
+  In fact, we will tend to overstate how much this is the case by essentially having a single
+  clinic, local agency, and year (all with IDs of 0).
 
 **Who to Sample**
 
@@ -2445,7 +2475,7 @@ on the observer.
 To account for these interdependencies, please follow the below steps:
 
 #. Randomly select tracked mothers or guardians to enroll based on the coverage rate by race/ethnicity
-#. Enroll ALL infants of these tracked mothers or guardians (as infants are defined as less than 1 year old, it should be rare but possible to have multiple infants for the same tracked mother or guardian)
+#. Enroll ALL infants of these tracked mothers or guardians **who live in the same household as their tracked mother/guardian** (as infants are defined as less than 1 year old, it should be rare but possible to have multiple infants for the same tracked mother or guardian)
 #. Calculate the current coverage rate for infants (will be slightly higher than the coverage rate for tracked mothers/guardians)
 #. Enroll more infants randomly, among those eligible but not already enrolled, until the overall infant coverage is met
 
@@ -2459,7 +2489,7 @@ Eligibility for WIC is based on income and age/children in the house.
 To qualify you must be both:
 
 - A child under the age of 5 (0-4 years old)
-- OR a tracked mother OR guardian of a child under the age of 1
+- OR a tracked mother OR guardian of a child under the age of 1 **living in the same household as that child**
 
 And also:
 
@@ -2542,8 +2572,15 @@ See the final limitation below for more about this approximation.
 #. Some states use different income cutoffs, but the ones listed are used in the majority of cases and so are implemented here
 #. Year over year WIC inclusion is independent - this is likely an oversimplification and will lead to higher rates of churn than are found in real life
 #. The creation of race/ethnicity specific coverage by participate category is imperfect. We do not have granular data which includes this breakdown, so it is based on the overall coverage by race/ethnicity which is an assumption. Also, for infants this would lead to over 100% selection, so it is not changed (remains at 98.4% for most race/ethnicity groups)
-#. We use a household ID. There will be cases in which a tracked mother/guardian does not live in the same household as their infant, this might be confusing in the resulting data.
 #. Real WIC data includes dates of starting and ending eligibility. We assume that data is then rolled up over some time period, say a year, to include everyone eligible for that year. For our data, we approximate this by having everyone eligible at the first time point in the new year included in the dataset. This will exclude simulants who were eligible for some part of the prior year, but are not at the time of observation. Therefore, data sampled in Jan 2029 is the approximation of data from all of 2028.
+#. We use household as the proxy for WIC family ID, which causes two issues:
+     * Our use of household means that WIC family ID only stays the same over time for participants who either
+       do not move, or move as part of a household unit.
+       The other cases should be relatively rare.
+       In reality, it is not clear in what conditions WIC family ID remains constant over time.
+       For example, would the WIC family ID of an infant be the same before and after they moved to their
+       grandparents' house?
+     * Two families that participate in WIC and live in the same household, whether at the same time or at different times, will have the same family ID in our data.
 
 Taxes
 ^^^^^
@@ -2582,7 +2619,7 @@ W2 and 1099 Forms
   * - Mailing Address ZIP Code
   * - Social Security Number
   * - Wages (income from this job)
-  * - Employer ID
+  * - Employer ID (for PRL tracking)
   * - Employer Name
   * - Employer Address
   * - Employer ZIP Code
@@ -2766,11 +2803,11 @@ in January 2024.
   In the final version of the observers, following the noise functions, please have all data as strings. Income must be rounded to the nearest whole number before applying noise.
 
 .. todo::
-  
-  Add total income to this observer. 
+
+  Add total income to this observer.
 
 .. todo::
-  
+
   Add a way to capture forms a simulant would file besides the 1040 (e.g. W2/1099 forms).
 
 If a simulant does not have an SSN,
@@ -2823,12 +2860,12 @@ This can be uniformly at random (preferred), or in another way if that is easier
 
 
 Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a random 65.5% of the working-age population to file taxes (i.e., to show up in the
-1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_ 
+1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_
 and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
 
-**Future Add** 
+**Future Add**
 
-As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below 
+As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below
 inclusion/exclusion criteria for who files taxes.
 
 However, those who do not are concentrated in low incomes for whom
@@ -2919,13 +2956,14 @@ added later (not in the minimum viable model), if desired.
 
   * - Unique simulant ID (for PRL tracking)
   * - First name
-  * - Middle initial
+  * - Middle name
   * - Last name
   * - DOB (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
   * - Sex (binary; "Male" or "Female")
   * - Social Security Number
   * - Type of event
   * - Date of event (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
+  * - Event ID (unique integer identifier for each row in the SSA dataset, representing a ground-truth identifier for the event recorded in that row; unaffected by noise functions; to be used for comparing noised and unnoised data)
 
 .. note::
   Unlike the other observers, there is no ground-truth unique household ID for PRL tracking in this observer.
@@ -3069,11 +3107,17 @@ for all column based noise include:
     - Missing data, nicknames, fake names, phonetic, OCR, typographic
     -
   * - Middle Initial
-    - Census, Household Surveys, WIC, Taxes (both), SSA
+    - Census, Household Surveys, WIC, Taxes (both)
     - 0.01
     - 0.1
     - Missing data, phonetic, OCR, typographic
     -
+  * - Middle Name
+    - SSA
+    - 0.01
+    - 0.1
+    - Missing data, nicknames, fake names, phonetic, OCR, typographic
+    - Use the list of fake first names for middle names as well
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA
     - 0.01
@@ -3134,8 +3178,14 @@ for all column based noise include:
     - 0.1
     - Missing data, zip code miswriting, OCR, typographic
     -
-  * - Relationship to head of household
-    - Census
+  * - Housing type
+    - Census, ACS
+    - 0.01
+    - N/A
+    - Missing data, incorrect select
+    -
+  * - Relationship to reference person
+    - Census, ACS
     - 0.01
     - N/A
     - Missing data, incorrect select
@@ -3170,12 +3220,6 @@ for all column based noise include:
     - 0.1
     - Missing data, numeric miswriting, OCR, typographic
     - Note that wages and income are on separate tax forms and noise is applied to each separately
-  * - Employer ID
-    - Taxes (both)
-    - 0.01
-    - 0.1
-    - Missing data, numeric miswriting, OCR, typographic
-    -
   * - Employer Name
     - Taxes (both)
     - 0.01
@@ -3352,6 +3396,8 @@ Limitations:
 - Many of the fake first names include some information about the simulant (daughter, child f, minor) all specify something about the simulant. We will not try to match this information, which might lead to illogical information (an older man being labeled as 'daughter') but will not impact PRL.
 - Someone who is likely to use a fake name might well do so across multiple observers. This would likely increase PRL challenges but will not be included here.
 
+.. _census_prl_nickname_noise:
+
 **Nicknames**
 
 Many people choose to use nicknames instead of their "real" names. A common example is an
@@ -3362,6 +3408,22 @@ Only those simulants with names in the csv above are eligible to recieve a nickn
 determine who is eligible for a nickname. Then select simulants for noise. Lastly, replace their
 name with any of the nicknames included in the csv. If there are multiple options,
 select at random.
+
+When selecting simulants for noise in the second step above, the unconditional
+probability of a cell being selected for nickname noise should match the
+row-level probability specified by the user, *unless* this probability is
+greater than the fraction of cells eligible for nicknames as calculated in the
+first step above. If the user requests a higher row-level probability of
+nickname noise than the fraction of cells that is eligible for nicknames, raise
+a warning to the user, and add noise to all eligible cells in the column.
+
+.. attention::
+
+  With our shard-based distributed data processing approach, implementing the
+  above instructions is not entirely straightforward. See the `Additional noise
+  implementation details`_ section below for further details about how to add
+  noise to approximately the correct number of cells and how to implement the
+  user warning.
 
 Limitations:
 
@@ -3395,7 +3457,7 @@ Limitations:
   noise functions are applied.
   Therefore, this noise function acts on integers.
 
-To implement this, first select the rows for noise according to the row noise probability.
+To implement this, first select the rows for noise according to the row-level noise probability.
 For each selected row, the age will be adjusted. The adjustment value will be
 randomly selected from the configured possible perturbations,
 according to the configured probabilities of selection (or uniform if a list without probabilities is configured).
@@ -3417,6 +3479,8 @@ the zip code miswriting noise function to all strings with the user defined.
 This code is similar to the numeric miswriting above, but has different
 per-character error probability inputs for the first 2 digits, the middle digit and the last 2 digits of zip.
 
+.. _census_prl_copy_household_noise:
+
 **Copy from within Household**
 
 To allow for confusion between household members, noise will be included to copy data
@@ -3429,9 +3493,33 @@ type of noise.
 From the eligble simulants, select the sample to have noise added. For those individuals,
 copy the relevant piece of data from another person in the household.
 
+When selecting the sample from the eligible simulants, the unconditional
+probability of a simulant having noise added should match the row-level
+probability specified by the user, *unless* this probability is greater than the
+fraction of simulants eligible for noise. If the user requests a higher
+row-level probability of copy-from-within-household noise than the fraction of
+simulants that is eligible for copying, raise a warning to the user, and add
+noise to all eligible cells in the column.
+
+.. attention::
+
+  With our shard-based distributed data processing approach, implementing the
+  above instructions is not entirely straightforward. See the `Additional noise
+  implementation details`_ section below for further details about how to add
+  noise to approximately the correct number of cells and how to implement the
+  user warning.
+
 Limitations:
 
 - This oversimplifies some swapping of ages or birthdays between family members. However, it allows better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenge.
+
+.. todo::
+
+  Add details about how to select another person in the household to copy from.
+  See `this Slack thread
+  <https://ihme.slack.com/archives/C02KUQ9LX32/p1682457132563079>`_ and `this
+  engineering ticket <https://jira.ihme.washington.edu/browse/MIC-4041>`_ for
+  what we actually implemented.
 
 **Month and Day Swap**
 
@@ -3442,15 +3530,14 @@ would be listed in MM/DD/YYYY format as 08/12/2022).
 **Incorrect Select**
 
 Incorrect select applies to a range of data types. For this, select the sample to
-have noise added. For those selected, randomly select a new option. This is chosen
-from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes the full list of options, not just those seen in the household.
+have noise added. For those selected, randomly select a new option from the list of all possible options. For example, for relationship to reference person, this includes the full list of options, not just those seen in the household, and similarly for other fields that get this type of noise.
 
 Please ensure that the new selection is in fact an incorrect selection and that the original
 response was not randomly selected.
 
 Limitations:
 
-- For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways.
+- For single person homes, incorrectly selecting relationship to reference person does not make as much sense. However, we continue with it here anyways.
 - Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity.
 
 .. note::
@@ -3566,6 +3653,8 @@ duplicates in the census only and limiting it to guardian-based duplication.
 In later models, we might choose to include other forms of duplication with
 more parameters.
 
+.. _census_prl_guardian_duplication:
+
 **Guardian-based duplication**
 
 A known PRL challenge is children being reported multiple
@@ -3607,6 +3696,14 @@ precisely, the conditional probability that a row in the specified category is
 duplicated, given that the row is eligible for guardian-based duplication,
 should be set to 1.
 
+.. attention::
+
+  With our shard-based distributed data processing approach, implementing the
+  above instructions is not entirely straightforward. See the `Additional noise
+  implementation details`_ section below for further details about how to add
+  noise to approximately the correct number of cells and how to implement the
+  user warning.
+
 .. note::
 
     If finding the maximum rate proves too difficult to implement, we can reassess this approach
@@ -3620,7 +3717,7 @@ the duplicated row.
 To create guardian-based duplicates, each duplicated simulant will be included
 in the final dataset twice, once at their address of residence and once at their
 guardian's address. If a simulant has more than 1 guardian living at a different
-address, only duplicate them once, for a maximum of 2 occurences in the end
+address, only duplicate them once, for a maximum of 2 occurrences in the end
 dataset. Select the guardian at random.
 
 .. note::
@@ -3648,7 +3745,78 @@ dataset. Select the guardian at random.
 
     If it is relevant for a case study later, we can add this to the simulation at that time.
 
-**Old Abie Work, to be deleted later**
+.. _census_prl_noise_details:
+
+Additional noise implementation details
+'''''''''''''''''''''''''''''''''''''''
+
+Three of the noise functions have additional row eligibility requirements and
+specify that a warning should be raised if the user requests a fraction of rows
+that is higher than possible: :ref:`Nicknames <census_prl_nickname_noise>`;
+:ref:`Copy from within household <census_prl_copy_household_noise>`; and
+:ref:`Guardian-based duplication <census_prl_guardian_duplication>`. Because of
+our distributed data processing (the data is split into multiple shards), it is
+not entirely straightforward to determine the overall fraction of rows that are
+eligible for the requested noise or to add noise to the correct number of rows
+across all shards. Here is a simple strategy to deal with this issue:
+
+#.  Pre-compute the fraction :math:`F` of rows eligible for each applicable
+    noise type in the full dataset (i.e., across all shards concatenated
+    together).
+
+#.  Check whether :math:`p\le F`, where :math:`p` is the average fraction of
+    rows the user wants noised (in pseudopeople, :math:`p` is called
+    ``cell_probability`` for column-based noise or ``row_probability`` for
+    row-based noise). If :math:`p>F`, raise a warning to the user before
+    noising starts.
+
+#.  When noising each shard, compute the fraction :math:`f` of rows eligible
+    for noise in the shard, and apply the noise to each eligible row in the
+    shard with probability :math:`\min\{p/f, 1\}`. Do **not** raise a warning to
+    the user for every shard with :math:`p>f`.
+
+.. caution::
+
+  The algorithm in Step 3 above has a known limitation: It systematically adds
+  less noise to the dataset than requested when :math:`p` is sufficiently large.
+  This is obvious when :math:`p>F`, but it can happen even when :math:`p\le F`.
+  Here's why:
+
+  Due to random fluctuation between the shards, sometimes we will have
+  :math:`f<F`. Thus, if :math:`p` is sufficiently large, we will have
+  :math:`p>f` for some shards, even if :math:`p\le F`. Now note that for each
+  shard with :math:`p>f`, the fraction of rows that get noised is :math:`f`,
+  which is less than :math:`p`. On the other hand, for shards with :math:`p\le
+  f`, the average fraction of rows that get noised is :math:`p`. Combining all
+  shards, the average fraction of noised rows will be less than :math:`p`. This
+  problem will be worse for small datasets like ACS because of greater
+  variability of :math:`f` around :math:`F`.
+
+We are willing to accept the above limitation for simplicity's sake. Moreover,
+the impact of this issue should be mitigated when we change our shard-based
+approach to data storage so that the different data files have similar sizes
+rather than some datasets having tiny shards like ACS currently does.
+
+Another potentially ambiguous point in the above strategy is which data to use
+to pre-compute the eligible fraction :math:`F`. Since these pre-computed values
+are merely for user warnings, the researchers are flexible as to how closely the
+:math:`F` values should match the corresponding datasets, and we'll let the
+engineers decide on the exact implementation. Here are three options: (1) If the
+pre-computed values are stored in a separate metadata file generated with each
+simulation run, then :math:`F` can be computed for each applicable (dataset,
+year, noise type) combination that can be requested by the user. (2) On the
+other hand, if it's easier to store a single value of :math:`F` for each
+(dataset, noise type) without varying across years, then we should use the
+dataset for the year 2030; since 2030 is the midpoint of our simulation, we
+expect it to be sufficiently representative of the data across all simulated
+years. (3) If even this is too complicated, a single :math:`F` can be computed
+for a noise type, and not vary between datasets (or years); the decennial census
+dataset should be used to do this. The level of imprecision in any of the above
+options is acceptable for the user warning, which should be left vague enough as
+to not imply exactly what fraction of rows will get noised.
+
+Old Abie Work, to be deleted later
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For inspiration, here is the list of files that Census Bureau
 routinely links:
