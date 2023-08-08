@@ -4283,12 +4283,20 @@ Limitations
 
 Speaking of the names for employers, we will generate names for
 employers based on a conditional random model that Abie developed and
-Jim refactored into the vivarium model.  It should have more details
-documented at some point.  Jim will ensure that all employer names are
-unique for now, although it would be interesting one day to add some
-duplicates.  Businesses can have the same name in real life but
-if/when we do have duplicate names we need to prevent duplicates for
-the names of the largest employers.
+Jim refactored into the vivarium model. We based our simulated employer names 
+on a database of 5,321,506 "location names" from the SafeGraph "Core Places of 
+Interest USA" dataset released in June 2020. To create a representation of bigrams
+from this dataset, we constructed a directed multigraph. Each word in a location name 
+was treated as a node, and we included special <start> and <end> nodes, as well. 
+We included a directed multi-edge for each occurrence of a word pair in sequence 
+in each location name. To generate simulated employer names, we performed a random
+walk through the bigram graph. Starting from the start node, we traversed 
+directed edges selected uniformly at random until we reached the end node or 
+exceeded a predetermined maximum path length. We then combined the words associated 
+with each node that was encountered along the path to form the simulated employer name.
+This approach resulted in a diverse range of names that maintained a realistic quality.
+Businesses can have the same name in real life but if/when we do have duplicate names 
+we need to prevent duplicates for the names of the largest employers.
 
 .. _census_prl_perturbation:
 
