@@ -581,16 +581,17 @@ Specific outputs for specific models are specified in the following section.
     - Both look good! `Model 3.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/30>`_
   * - 4.0
     - Verify that:
-      * Hemoglobin on maternal hemorrhage and maternal disorders incidence effects are as expected
-      * Hemorrhage on postpartum hemoglobin effect is as expected
-      * Maternal disorders and hemorrhage cause model V&V criteria are still met
-    - `Model 4 V&V notebooks are available here <>`_
+        * Hemoglobin on maternal hemorrhage and maternal disorders incidence effects are as expected
+        * Hemorrhage on postpartum hemoglobin effect is as expected
+        * Maternal disorders and hemorrhage cause model V&V criteria are still met
+    - `Model 4 V&V notebooks are available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/32>`_
         * Hemorrhage effect on postpartum hemoglobin effects are as expected (assessed via interactive sim)
         * Hemoglobin effect on maternal hemorrhage incidence is as expected. Maternal hemorrhage incidence still verifies as the population level. Note that there was a resolved bug where maternal *disorders* PAFs and RRs were applied to maternal hemorrhage, but this was resolved.
         * Hemoglobin on maternal disorders PAFs and RRs applied as expected, however, maternal disorders incidence (and therefore mortality) are slightly underestimated at the population level. This is due to risk-affected probabilities of an incident maternal disorder case greater than 1 for a substantial number of simulants with low hemoglobin levels. More details discussed in table below.
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
+  :widths: 5 20 15 5
 
   * - Issue
     - Explanation
