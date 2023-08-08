@@ -2019,6 +2019,7 @@ Census
   * - Race/Ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
+  * - Year
 
 .. note::
 
@@ -2417,6 +2418,7 @@ in the home.
   * - Race/ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
+  * - Year
 
 Here is an example:
 
@@ -2624,6 +2626,7 @@ W2 and 1099 Forms
   * - Employer Address
   * - Employer ZIP Code
   * - Type of Tax Form (W2 or 1099)
+  * - Tax year
 
 .. note::
 
@@ -2797,6 +2800,8 @@ in January 2024.
     -
   * - Social Security Number (if present)
     - ITIN if no SSN present
+  * - Tax year
+    - 
 
 .. note::
 
