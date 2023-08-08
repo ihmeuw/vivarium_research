@@ -579,6 +579,15 @@ Specific outputs for specific models are specified in the following section.
   * - 3.1 (3.0bugfix)
     - Verify no person time in the not-pregnant state, check anemia YLDs
     - Both look good! `Model 3.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/30>`_
+  * - 4.0
+    - Verify that:
+      * Hemoglobin on maternal hemorrhage and maternal disorders incidence effects are as expected
+      * Hemorrhage on postpartum hemoglobin effect is as expected
+      * Maternal disorders and hemorrhage cause model V&V criteria are still met
+    - `Model 4 V&V notebooks are available here <>`_
+        * Hemorrhage effect on postpartum hemoglobin effects are as expected (assessed via interactive sim)
+        * Hemoglobin effect on maternal hemorrhage incidence is as expected. Maternal hemorrhage incidence still verifies as the population level. Note that there was a resolved bug where maternal *disorders* PAFs and RRs were applied to maternal hemorrhage, but this was resolved.
+        * Hemoglobin on maternal disorders PAFs and RRs applied as expected, however, maternal disorders incidence (and therefore mortality) are slightly underestimated at the population level. This is due to risk-affected probabilities of an incident maternal disorder case greater than 1 for a substantial number of simulants with low hemoglobin levels. More details discussed in table below.
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -591,6 +600,10 @@ Specific outputs for specific models are specified in the following section.
     - Vivarium inputs fills maternal disorders deaths and maternal hemorrhage incidence with zeros due to :code:`age_end` parameter in :code:`gbd_mapping`, despite raw GBD estimates for these parameters being non-zero for this age group
     - Acceptable limitation given very low pregnancy incidence in this age group
     - N/A
+  * - Slight underestimation of maternal disorders incidence and mortality
+    - GBD maternal disorders parent cause is equal to the *sum* of maternal disorders sub-causes. Therefore, the incidence of the aggregate maternal disorders cause is quite high relative to the rate of pregnancies and when it is increased due to risk effects from hemoglobin, the calculated probability of an incident case can be greater than one. Since these probabilities are capped at one, we end up underestimating the incidence rate of maternal disorders at a population level. Note that this issue was present in the IV iron implementation; however, in the nutrition optimization implementation, maternal disorders mortality is conditional on maternal disorders incidence (whereas mortality was correlated with incidence, but not conditional on incidence in the IV iron implementation). Therefore, we are slightly underestimating maternal disorders mortality in this model.
+    - As the underestimation is slight, we will move forward despite this limitation. In the meantime, we will investigate possible solutions to address this issue (in particular, modeling each individual maternal disorders sub-cause within the simulation), which we may consider incorporating into the model after other higher priority updates are made (such as intervention implementations in models 6 and 7)
+    - TBD
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++
