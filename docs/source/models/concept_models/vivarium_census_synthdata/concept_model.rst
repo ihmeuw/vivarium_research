@@ -2005,7 +2005,6 @@ Census
   * - First name
   * - Middle initial
   * - Last name
-  * - Year
   * - Age (floored to integer years **before** noise is applied)
   * - Date of Birth (stored as a string in MM/DD/YYYY format)
   * - Physical Address Street Number
@@ -2020,6 +2019,7 @@ Census
   * - Race/Ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
+  * - Year
 
 .. note::
 
@@ -2407,7 +2407,6 @@ in the home.
   * - First name
   * - Middle initial
   * - Last name
-  * - Year
   * - DOB (stored as a string in MMDDYYYY format, as indicated by [WIC_Guide]_)
   * - Physical Address Street Number
   * - Physical Address Street Name
@@ -2419,6 +2418,7 @@ in the home.
   * - Race/ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
+  * - Year
 
 Here is an example:
 
@@ -2612,7 +2612,6 @@ W2 and 1099 Forms
   * - First name
   * - Middle initial
   * - Last name
-  * - Tax year
   * - Mailing Address Street Number (blank for PO boxes)
   * - Mailing Address Street Name (blank for PO boxes)
   * - Mailing Address Unit (blank for PO boxes)
@@ -2627,6 +2626,7 @@ W2 and 1099 Forms
   * - Employer Address
   * - Employer ZIP Code
   * - Type of Tax Form (W2 or 1099)
+  * - Tax year
 
 .. note::
 
@@ -2754,8 +2754,6 @@ in January 2024.
     -
   * - Last name
     -
-  * - Tax year
-    - 
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2802,6 +2800,8 @@ in January 2024.
     -
   * - Social Security Number (if present)
     - ITIN if no SSN present
+  * - Tax year
+    - 
 
 .. note::
 
