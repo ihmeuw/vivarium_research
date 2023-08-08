@@ -4165,10 +4165,6 @@ addresses are generated for GQ types.
 
   This business size distribution doesn't seem plausible!
 
-.. todo::
-
-  Document how we name businesses.
-
 We generate the number of employers needed to (in expectation) employ our starting
 non-military employed population, that is:
 
