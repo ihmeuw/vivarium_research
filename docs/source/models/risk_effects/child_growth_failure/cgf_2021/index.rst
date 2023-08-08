@@ -115,23 +115,31 @@ model, we found an equation for EMR relative risk. We tested this equation and f
 that the answer was almost identical to the equation shown above. The math 
 proof for this can be found :download:`in this word doc <cgf_risks_math.docx>`.
 
-
 Secondly, we created a `nano simulation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_nanosim/cgf_nanosim_v3.ipynb>`_ to test that by using the equation above and 
 applying the EMR and incidence relative risks to the simulated population, that the 
 resulting CSMR relative risk was about what we expected. The notebook validated this 
 approach and was able to reproduce the expected CSMR RR with some noise. 
 
 There are some cases where the CSMR RR is less than the incidence RR value. This will then 
-create an EMR RR less than one - or a protective effect from CGF to disease survival. While 
+create an EMR RR less than one - or a protective effect from CGF to disease survival. There
+are also some cases in which the GBD estimate of the incidence RR is less than one. While 
 this is counterintuitive, we are allowing for this case to be in the model. We expect this 
 is due to a lack of statistical significance in creation of RR values which will be accounted 
 for in our monte carlo uncertainty. 
 
-PAFs will be calculated separately to have a single joint PAF for CGF. 
+PAFs will be calculated separately to account for the correlation between wasting, 
+stunting, and underweight risk exposures as a single joint PAF for CGF. Draw-level
+PAF values are available below:
 
-.. todo::
+- `Ethiopia CGF PAF values <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/pafs.csv>`_
 
-   Add information on PAF calculations and file for engineers to use. 
+   - `Ethiopian PAF values calculated here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/CGF%20correlation%20data%20generation.ipynb>`_
+
+.. note::
+
+   There are some draws for which the PAF is negative. This happens because the 
+   relative risk values for some draws are less than one. We should use these 
+   values regardless as part of our Monte Carlo analysis.
 
 With the RR and PAF values above, the following equations can be used to calculate 
 simulant level incidence and EMR. 

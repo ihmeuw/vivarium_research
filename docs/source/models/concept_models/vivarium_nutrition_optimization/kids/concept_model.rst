@@ -182,7 +182,7 @@ in the simulation will be informed using data specific to the post neonatal age 
     - (Does not require separate 2021 update)
   * - Child underweight exposure
     - No
-    - New :ref:`child underweight exposure model <2020_risk_exposure_child_underweight>`, still in progress
+    - New :ref:`child underweight exposure model <2020_risk_exposure_child_underweight>`
     - 
     - (Does not require separate 2021 update)
   * - Target area

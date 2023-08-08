@@ -2961,13 +2961,14 @@ added later (not in the minimum viable model), if desired.
 
   * - Unique simulant ID (for PRL tracking)
   * - First name
-  * - Middle initial
+  * - Middle name
   * - Last name
   * - DOB (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
   * - Sex (binary; "Male" or "Female")
   * - Social Security Number
   * - Type of event
   * - Date of event (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
+  * - Event ID (unique integer identifier for each row in the SSA dataset, representing a ground-truth identifier for the event recorded in that row; unaffected by noise functions; to be used for comparing noised and unnoised data)
 
 .. note::
   Unlike the other observers, there is no ground-truth unique household ID for PRL tracking in this observer.
@@ -3111,11 +3112,17 @@ for all column based noise include:
     - Missing data, nicknames, fake names, phonetic, OCR, typographic
     -
   * - Middle Initial
-    - Census, Household Surveys, WIC, Taxes (both), SSA
+    - Census, Household Surveys, WIC, Taxes (both)
     - 0.01
     - 0.1
     - Missing data, phonetic, OCR, typographic
     -
+  * - Middle Name
+    - SSA
+    - 0.01
+    - 0.1
+    - Missing data, nicknames, fake names, phonetic, OCR, typographic
+    - Use the list of fake first names for middle names as well
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA
     - 0.01
@@ -3394,6 +3401,8 @@ Limitations:
 - Many of the fake first names include some information about the simulant (daughter, child f, minor) all specify something about the simulant. We will not try to match this information, which might lead to illogical information (an older man being labeled as 'daughter') but will not impact PRL.
 - Someone who is likely to use a fake name might well do so across multiple observers. This would likely increase PRL challenges but will not be included here.
 
+.. _census_prl_nickname_noise:
+
 **Nicknames**
 
 Many people choose to use nicknames instead of their "real" names. A common example is an
@@ -3404,6 +3413,22 @@ Only those simulants with names in the csv above are eligible to recieve a nickn
 determine who is eligible for a nickname. Then select simulants for noise. Lastly, replace their
 name with any of the nicknames included in the csv. If there are multiple options,
 select at random.
+
+When selecting simulants for noise in the second step above, the unconditional
+probability of a cell being selected for nickname noise should match the
+row-level probability specified by the user, *unless* this probability is
+greater than the fraction of cells eligible for nicknames as calculated in the
+first step above. If the user requests a higher row-level probability of
+nickname noise than the fraction of cells that is eligible for nicknames, raise
+a warning to the user, and add noise to all eligible cells in the column.
+
+.. attention::
+
+  With our shard-based distributed data processing approach, implementing the
+  above instructions is not entirely straightforward. See the `Additional noise
+  implementation details`_ section below for further details about how to add
+  noise to approximately the correct number of cells and how to implement the
+  user warning.
 
 Limitations:
 
@@ -3437,7 +3462,7 @@ Limitations:
   noise functions are applied.
   Therefore, this noise function acts on integers.
 
-To implement this, first select the rows for noise according to the row noise probability.
+To implement this, first select the rows for noise according to the row-level noise probability.
 For each selected row, the age will be adjusted. The adjustment value will be
 randomly selected from the configured possible perturbations,
 according to the configured probabilities of selection (or uniform if a list without probabilities is configured).
@@ -3459,6 +3484,8 @@ the zip code miswriting noise function to all strings with the user defined.
 This code is similar to the numeric miswriting above, but has different
 per-character error probability inputs for the first 2 digits, the middle digit and the last 2 digits of zip.
 
+.. _census_prl_copy_household_noise:
+
 **Copy from within Household**
 
 To allow for confusion between household members, noise will be included to copy data
@@ -3471,9 +3498,33 @@ type of noise.
 From the eligble simulants, select the sample to have noise added. For those individuals,
 copy the relevant piece of data from another person in the household.
 
+When selecting the sample from the eligible simulants, the unconditional
+probability of a simulant having noise added should match the row-level
+probability specified by the user, *unless* this probability is greater than the
+fraction of simulants eligible for noise. If the user requests a higher
+row-level probability of copy-from-within-household noise than the fraction of
+simulants that is eligible for copying, raise a warning to the user, and add
+noise to all eligible cells in the column.
+
+.. attention::
+
+  With our shard-based distributed data processing approach, implementing the
+  above instructions is not entirely straightforward. See the `Additional noise
+  implementation details`_ section below for further details about how to add
+  noise to approximately the correct number of cells and how to implement the
+  user warning.
+
 Limitations:
 
 - This oversimplifies some swapping of ages or birthdays between family members. However, it allows better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenge.
+
+.. todo::
+
+  Add details about how to select another person in the household to copy from.
+  See `this Slack thread
+  <https://ihme.slack.com/archives/C02KUQ9LX32/p1682457132563079>`_ and `this
+  engineering ticket <https://jira.ihme.washington.edu/browse/MIC-4041>`_ for
+  what we actually implemented.
 
 **Month and Day Swap**
 
@@ -3607,6 +3658,8 @@ duplicates in the census only and limiting it to guardian-based duplication.
 In later models, we might choose to include other forms of duplication with
 more parameters.
 
+.. _census_prl_guardian_duplication:
+
 **Guardian-based duplication**
 
 A known PRL challenge is children being reported multiple
@@ -3648,6 +3701,14 @@ precisely, the conditional probability that a row in the specified category is
 duplicated, given that the row is eligible for guardian-based duplication,
 should be set to 1.
 
+.. attention::
+
+  With our shard-based distributed data processing approach, implementing the
+  above instructions is not entirely straightforward. See the `Additional noise
+  implementation details`_ section below for further details about how to add
+  noise to approximately the correct number of cells and how to implement the
+  user warning.
+
 .. note::
 
     If finding the maximum rate proves too difficult to implement, we can reassess this approach
@@ -3661,7 +3722,7 @@ the duplicated row.
 To create guardian-based duplicates, each duplicated simulant will be included
 in the final dataset twice, once at their address of residence and once at their
 guardian's address. If a simulant has more than 1 guardian living at a different
-address, only duplicate them once, for a maximum of 2 occurences in the end
+address, only duplicate them once, for a maximum of 2 occurrences in the end
 dataset. Select the guardian at random.
 
 .. note::
@@ -3689,7 +3750,78 @@ dataset. Select the guardian at random.
 
     If it is relevant for a case study later, we can add this to the simulation at that time.
 
-**Old Abie Work, to be deleted later**
+.. _census_prl_noise_details:
+
+Additional noise implementation details
+'''''''''''''''''''''''''''''''''''''''
+
+Three of the noise functions have additional row eligibility requirements and
+specify that a warning should be raised if the user requests a fraction of rows
+that is higher than possible: :ref:`Nicknames <census_prl_nickname_noise>`;
+:ref:`Copy from within household <census_prl_copy_household_noise>`; and
+:ref:`Guardian-based duplication <census_prl_guardian_duplication>`. Because of
+our distributed data processing (the data is split into multiple shards), it is
+not entirely straightforward to determine the overall fraction of rows that are
+eligible for the requested noise or to add noise to the correct number of rows
+across all shards. Here is a simple strategy to deal with this issue:
+
+#.  Pre-compute the fraction :math:`F` of rows eligible for each applicable
+    noise type in the full dataset (i.e., across all shards concatenated
+    together).
+
+#.  Check whether :math:`p\le F`, where :math:`p` is the average fraction of
+    rows the user wants noised (in pseudopeople, :math:`p` is called
+    ``cell_probability`` for column-based noise or ``row_probability`` for
+    row-based noise). If :math:`p>F`, raise a warning to the user before
+    noising starts.
+
+#.  When noising each shard, compute the fraction :math:`f` of rows eligible
+    for noise in the shard, and apply the noise to each eligible row in the
+    shard with probability :math:`\min\{p/f, 1\}`. Do **not** raise a warning to
+    the user for every shard with :math:`p>f`.
+
+.. caution::
+
+  The algorithm in Step 3 above has a known limitation: It systematically adds
+  less noise to the dataset than requested when :math:`p` is sufficiently large.
+  This is obvious when :math:`p>F`, but it can happen even when :math:`p\le F`.
+  Here's why:
+
+  Due to random fluctuation between the shards, sometimes we will have
+  :math:`f<F`. Thus, if :math:`p` is sufficiently large, we will have
+  :math:`p>f` for some shards, even if :math:`p\le F`. Now note that for each
+  shard with :math:`p>f`, the fraction of rows that get noised is :math:`f`,
+  which is less than :math:`p`. On the other hand, for shards with :math:`p\le
+  f`, the average fraction of rows that get noised is :math:`p`. Combining all
+  shards, the average fraction of noised rows will be less than :math:`p`. This
+  problem will be worse for small datasets like ACS because of greater
+  variability of :math:`f` around :math:`F`.
+
+We are willing to accept the above limitation for simplicity's sake. Moreover,
+the impact of this issue should be mitigated when we change our shard-based
+approach to data storage so that the different data files have similar sizes
+rather than some datasets having tiny shards like ACS currently does.
+
+Another potentially ambiguous point in the above strategy is which data to use
+to pre-compute the eligible fraction :math:`F`. Since these pre-computed values
+are merely for user warnings, the researchers are flexible as to how closely the
+:math:`F` values should match the corresponding datasets, and we'll let the
+engineers decide on the exact implementation. Here are three options: (1) If the
+pre-computed values are stored in a separate metadata file generated with each
+simulation run, then :math:`F` can be computed for each applicable (dataset,
+year, noise type) combination that can be requested by the user. (2) On the
+other hand, if it's easier to store a single value of :math:`F` for each
+(dataset, noise type) without varying across years, then we should use the
+dataset for the year 2030; since 2030 is the midpoint of our simulation, we
+expect it to be sufficiently representative of the data across all simulated
+years. (3) If even this is too complicated, a single :math:`F` can be computed
+for a noise type, and not vary between datasets (or years); the decennial census
+dataset should be used to do this. The level of imprecision in any of the above
+options is acceptable for the user warning, which should be left vague enough as
+to not imply exactly what fraction of rows will get noised.
+
+Old Abie Work, to be deleted later
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For inspiration, here is the list of files that Census Bureau
 routinely links:
