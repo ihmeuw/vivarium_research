@@ -191,7 +191,7 @@ To sample hemoglobin values for pregnant/lactating women, use the same functions
     - Note
   * - Mean hemoglobin adjustment factor
     - 0.919325 (95% UI: 0.86, 0.98)
-    - Assume a normal distribution of uncertainty within uncertainty interval (No uncertainty was used in the GBD 2019 code, but the uncerainty interval was reported in the methods appendix).
+    - Assume a normal distribution of uncertainty within uncertainty interval. Use random seed :code:`'pregnancy_adjustment_factor'` to ensure the same values for this parameter are used in the simulation and for generation of validation targets and other externally calculated values. In other words, we will use the pre-determined values `as generated in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/hemoglobin_maternal_disorder_pafs/Generate%20pregnancy%20adjustment%20factor%20values.ipynb>`_ that can be as a `.csv file here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/hemoglobin_maternal_disorder_pafs/mean_pregnancy_adjustment_factor_draws.csv>`_ (Note that no uncertainty was used in the GBD 2019 code, but the uncerainty interval was reported in the methods appendix). 
   * - Hemoglobin standard deviation adjustment factor
     - 1.032920188
     - Assume no uncertainty distribution. (No uncertainty is used in the GBD 2019 code or listed in the methods appendix).
