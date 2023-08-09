@@ -46,6 +46,8 @@ and to address the harmful conflation of sex and gender in public health researc
 We hope this page will serve as a useful guide to members of the Simulation Science team as
 well as other teams at IHME!
 
+.. image:: inclusion_icon.PNG
+
 On this page you will find our guiding principles, a glossary of commonly used terms related
 to BLISS, recommendations for how to address sex/gender-related limitations in external data
 sources, discussion of the implications of imperfect proxy measures with regards to sex/gender,
@@ -161,7 +163,10 @@ throughout this style guide.
    * - Sexual and gender minority (SGM) 
      - An umbrella term that includes (but is not limited to) individuals that are two-spirit, intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender non-conforming identities.
    * - Undifferentiated sex/gender measure
-     - A useful hybrid term that reflects the dynamic relationship that exists between sex and gender and acknowledges the common conflation between sex and gender in public health research and data [Ritz_and_Greaves_2022]_. 
+     - Due to data limitations or availability, it might not always be possible to elucidate whether a
+       certain data source is intended to capture sex or gender, or some factor related to both. In such 
+       cases, we will capture this uncertainty by using an *undifferentiated sex/gender measure*, a binary
+       variable that combines sex and gender measures across data sources.
 
 .. todo::
 
@@ -334,6 +339,8 @@ In this section, we will use case studies to explore the different ways in which
 BLISS principles can be practically applied to specific areas of public health research. 
 Elaborate on lessons learned from other projects in which we've used BLISS (e.g., VEHSS
 DR paper; IV Iron communications and IDM Symposium)
+
+.. image:: safe_space_icon.PNG
 
 5.0 References
 ++++++++++++++
