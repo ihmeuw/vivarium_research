@@ -46,7 +46,7 @@ and to address the harmful conflation of sex and gender in public health researc
 We hope this page will serve as a useful guide to members of the Simulation Science team as
 well as other teams at IHME!
 
-.. image:: inclusion_icon.PNG
+.. image:: inclusion_icon.png
 
 On this page you will find our guiding principles, a glossary of commonly used terms related
 to BLISS, recommendations for how to address sex/gender-related limitations in external data
@@ -361,7 +361,7 @@ BLISS principles can be practically applied to specific areas of public health r
 Elaborate on lessons learned from other projects in which we've used BLISS (e.g., VEHSS
 DR paper; IV Iron communications and IDM Symposium)
 
-.. image:: safe_space_icon.PNG
+.. image:: safe_space_icon.png
 
 5.0 References
 ++++++++++++++
