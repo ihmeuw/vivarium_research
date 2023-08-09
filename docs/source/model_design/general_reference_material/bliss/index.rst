@@ -157,20 +157,41 @@ throughout this style guide.
    * - Term
      - Definition
    * - Sex
-     - *Sex* refers to biological attributes and functions associated with chromosomal makeup, reproductive anatomy, and secondary sex characteristics [Ritz_and_Greaves_2022]_.
+     - *Sex* refers to biological attributes and functions associated with chromosomal makeup, 
+       reproductive anatomy, and secondary sex characteristics [Ritz_and_Greaves_2022]_.
    * - Gender
-     - *Gender*, on the other hand, is a social construct that refers to the culturally specific expectations, behaviors, and institutions that shape any individual's access to power, privilege, and resources. It can also refer to a gendered individual's internal sense of identity [Ritz_and_Greaves_2022]_. 
+     - *Gender*, on the other hand, is a social construct that refers to the culturally specific 
+       expectations, behaviors, and institutions that shape any individual's access to power, 
+       privilege, and resources. It can also refer to a gendered individual's internal sense of 
+       identity [Ritz_and_Greaves_2022]_. 
    * - Sexual and gender minority (SGM) 
-     - An umbrella term that includes (but is not limited to) individuals that are two-spirit, intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender non-conforming identities.
+     - An umbrella term that includes (but is not limited to) individuals that are two-spirit, 
+       intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender 
+       non-conforming identities.
    * - Undifferentiated sex/gender measure
      - Due to data limitations or availability, it might not always be possible to elucidate whether a
        certain data source is intended to capture sex or gender, or some factor related to both. In such 
        cases, we will capture this uncertainty by using an *undifferentiated sex/gender measure*, a binary
-       variable that combines sex and gender measures across data sources.
+       variable that combines sex and gender measures across data sources. See Section `2.0 Dealing with 
+       Limitations in Upstream Research`_ for more information. 
+   * - Sex- and gender-related factors
+     - "Factors associated with sex/gender that are not themselves dimensions of
+       sex or gender (e.g., gene expression, body weight, risk taking, age at
+       sexual debut, structural sexism)" [Bauer_2022]_. 
+   * - Sex-assigned at birth
+     - "Recorded on initial birth record; generally genital phenotype" [Bauer_2022]_. 
+   * - Intersex status
+     - "Reported presence of intersex conditions generally or a specific condition" [Bauer_2022]_. 
+   * - Gender identity
+     - "Personally held sense of one’s gender as man/boy, woman/girl, another cultural gender, 
+       trans, nonbinary, etc." [Bauer_2022]_. 
+   * - Intersex identity
+     - "Personally held identification as intersex" [Bauer_2022]_. 
 
 .. todo::
 
-   Add other BLISS-related terms and definitions, like gender identity, gender expression, etc. and include visual of 'Do's and Don'ts! Also, refine definition for undifferentiated sex/gender measure.
+   Include visual of 'Do's and Don'ts!
+
 
 2.0 Dealing with Limitations in Upstream Research
 +++++++++++++++++++++++++++++++++++++++++++++++++
