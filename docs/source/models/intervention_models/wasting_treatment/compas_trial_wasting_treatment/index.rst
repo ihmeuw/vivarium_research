@@ -61,9 +61,9 @@ The COMPAS trial is a non-inferiority trial that compared a "combined protocol" 
 
 Note that this trial used the MUAC definition of acute malnutrition rather than the WHZ definition as our simulation does.
 
-Changes to the modeling strategy from the previously implemented version include:
+An exhaustive list of changes to the modeling strategy from the previously implemented version include:
 
-- Isolation of the :math:`\text{time to diagnosis}` parameter
+- Isolation of the :math:`\text{time to diagnosis}` parameter (now defined separately as part of the :math:`r_{SAM,tx}` and :math:`r_{MAM,tx}` parameters instead of being included within the time to recovery parameters directly)
 - Updated value for :math:`\text{time to recovery}_\text{effectively treated SAM}`
 - Updated value for :math:`\text{time to recovery}_\text{effectively treated SAM}`
 - :math:`E_\text{MAM}` and :math:`E_\text{SAM}` parameters no longer vary by scenario
