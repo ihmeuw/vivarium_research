@@ -272,11 +272,6 @@ Their date of birth is defined to be consistent with that precise age.
   Date of birth, in reality, is not evenly spread throughout the year.
   We do not model this.
 
-.. note::
-  The PUMS column is top-coded at 99 years. That means our simulation will start with
-  no centenarians; if we wanted to address this, we could distribute top-coded values
-  according to some distribution.
-
 We perturb the age attribute as described in the
 :ref:`perturbation section <census_prl_perturbation>`.
 
