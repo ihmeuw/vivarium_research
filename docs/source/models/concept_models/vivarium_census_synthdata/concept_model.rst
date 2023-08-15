@@ -272,6 +272,11 @@ Their date of birth is defined to be consistent with that precise age.
   Date of birth, in reality, is not evenly spread throughout the year.
   We do not model this.
 
+.. note::
+  The PUMS column is top-coded at 99 years. That means our simulation will start with
+  no centenarians; if we wanted to address this, we could distribute top-coded values
+  according to some distribution.
+
 We perturb the age attribute as described in the
 :ref:`perturbation section <census_prl_perturbation>`.
 
@@ -4409,8 +4414,16 @@ from international immigration in a household move, the following steps are **al
 #. Any individuals with negative age values have their age multiplied by -1, e.g. age -1.5 becomes 1.5, -2.3 becomes 2.3, etc.
 
 .. note::
+  The clipping of large ages to 99 years matches the situation in our source data, the ACS PUMS,
+  which top-codes age at 99.
+  It will lead to some unrealistic DOB clumping at 99 years before our simulation start, but
+  we ignore this for now; there are not that many 99 year olds in the population anyway.
+  If this turns out to be a problem, we might consider "reflecting" around 99 as we do
+  around 0.
 
-  Reflecting age will roughly preserve the overall age distribution (i.e. it will not lead to lots
+.. note::
+
+  Reflecting negative ages will roughly preserve the overall age distribution (i.e. it will not lead to lots
   fewer children than expected, as we would get if we dropped these simulants).
   With a rough simulation approach, we found that other simple approaches, such as truncating the
   distribution to only sample perturbations resulting in non-negative ages, as well as clipping
