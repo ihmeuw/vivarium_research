@@ -330,10 +330,29 @@ results.
 
 4.0 BLISS in Action 
 +++++++++++++++++++
-In this section, we will use case studies to explore the different ways in which 
-BLISS principles can be practically applied to specific areas of public health research. 
-Elaborate on lessons learned from other projects in which we've used BLISS (e.g., VEHSS
-DR paper; IV Iron communications and IDM Symposium)
+
+Our team has been able to implement these BLISS guidelines in our own work. 
+Here we chronical guides, papers and presentations that include BLISS best 
+practices, as well as some lessons learned. 
+
+4.1 Examples of Our Work with BLISS
+-----------------------------------
+
+#. A `BLISS guide for Topics Concerning Pregnancy <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B3E09642A-1A84-4D63-8690-EDA98E611295%7D&file=202204_Gender%20Neutral%20Language%20for%20Topics%20concerning%20Pregnancy.docx&action=default&mobileredirect=true>`_. This includes recommendations on gender inclusive language that can be used for topics of pregnancy and child birth. 
+#. A presentation about IV iron at the `Institute of Disease Modeling symposium <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B141E4585-6A1B-414C-8DDE-2F075FEB1667%7D&file=20230501_IDM_Symposium_DRAFT_v0.2.pptx&action=edit&mobileredirect=true>`_. This presenation included many of the terms from out pregnancy guide implemented in practice.
+#. A paper on the `prevalence of diabetic retinopathy <https://jamanetwork.com/journals/jamaophthalmology/article-abstract/2806093>`_ that includes a "nondifferentiated sex and gender measure" for data anlysis and helpful explanation of what that means with respect to the specific primary data sources used. 
+
+
+
+4.2 Lessons Learned
+-------------------
+
+- Most people are willing and even enthusiastic about improving language to be more gender inclusive! 
+- Changing language requires an explanation. It is important to explain the new language, why it is important and what it means.
+- In situations where using gender-inclusive language changes established practices or definitions in the field (e.g., maternal mortality is a commonly understood term), we must take extra care to not confuse our audience and ensure all are able to understand and benefit from our work. 
+- As secondary data analyzers, we are limited by the data we can find and the information included about its collection. As much as we want to, it it often impossible to decide if a variable represents sex or gender or who in a dataset might be being missed, or misclassified. 
+- Acknowledging these limitations and considering their impact is an important part of this work. 
+
 
 5.0 References
 ++++++++++++++
