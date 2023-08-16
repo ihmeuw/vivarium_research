@@ -1,8 +1,8 @@
 .. _other_causes:
 
-==============================
-"Other" causes
-==============================
+======================================================================
+Background morbidity for the nutrition optimization pregnancy model
+======================================================================
 
 This cause model document is meant to represent residual morbidity and mortality for all causes other than specific modeled causes of interest. 
 
@@ -13,19 +13,7 @@ This cause model document is meant to represent residual morbidity and mortality
 Disease Overview
 ----------------
 
-Modeling YLDs and YLLs due to causes other than those specifically modeled in a vivarium simulation is critical to accurate estimation of intervention impact. 
-
-  For instance, let's say that a simulant without :ref:`small quantity lipid-based nutrient supplementation <lipid_based_nutrient_supplements>` coverage in the baseline scenario dies due to protein energy malnutrition at age 1 in the baseline scenario, accumulating (approximately) 80 YLLs. 
-
-  Now in the alternative scenario, this simulant is covered by SQ-LNS and their death at age 1 is prevented by this intervention. If we stopped observing this simulant at that instant, we would conclude that this resulted in 80 YLLs averted! 
-
-  However, if we were to observe this simulant further, we might see that they go on to develop asthma and start to accumulate YLDs due to this condition. Since this simulant in the baseline scenario died prior to developing asthma, these YLDs were not accumulated in the baseline scenario. Let's say this simulant accumulates 0.75 YLDs by age 10 in the alternative scenario. This makes our estimation of total DALYs averted now 70.25, *less than* the originally estimated 80. 
-
-  In fact, it's possible that this simulant then dies of an asthma attack at age 10 in the alternative scenario, accumulating (approximately) 70 YLLs. This dramatically changes our estimation of total DALYs averted due to the intervention for this simulant to from 80 to just 9.25!
-
-This example demonstrates that it is important to estimate morbidity and mortality from all causes even when they are not directly affected by the intervention we are modeling. Ideally we would observe all simulated individuals affected by an intervention until death for completely accurate accounting; however, this may not always be necessary as we may be specifically interested in particular age groups of interest. Additionally, sometimes YLDs accumulated following an averted death may be dwarfed by YLLs averted due to that averted death. In this case, it may be an acceptable limitation to exclude YLDs due to other causes; however, this is less likely to be an acceptable limitation when modeling older ages.
-
-Therefore, this cause model document exists to model both morbidity and mortality due to unmodeled causes in vivarium simulations.
+For a discussion of the importance of modeling background morbidity, see the :ref:`background morbidity page <other_causes_ylds>`. 
 
 Vivarium Modeling Strategy
 --------------------------
@@ -33,7 +21,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-This cause model document is reliant on a list of modeled causes to be specified in a concept model when this cause is included in a given vivarium simulation.
+This cause model document existing as an intermim solution to these issues specific discussed in the :ref:`background morbidity page <other_causes_ylds>`, specifically designed for the :ref:`nutrition optimization pregnancy model <2021_concept_model_vivarium_nutrition_optimization_pregnancies>`.
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -82,29 +70,23 @@ States Data
      - 
    * - C
      - excess mortality rate
-     - :math:`CSMR_\text{other causes}` 
-     - CSMR is equal to the EMR because prevalence is equal to 1
+     - 0
+     - 
    * - C
      - disabilty weight
-     - :math:`YLDs_{c294} - \sum_{cid}^{n} YLDs_{cid}`
-     - Where :math:`\sum_{cid}^{n} YLDs_{cid}` is the sum of YLDs due to all specified modeled components (may be causes, sequelae, and/or impairments). List of such IDs must be provided in concept model document.
-   * - ALL
-     - cause specific mortality rate
-     - :math:`ACMR - \sum_{cid}^{n} CSMR_{cid}`
-     - Where :math:`\sum_{cid}^{n} CSMR_{cid}` is the sum of the CSMRs of modeled causes. List of modeled cause IDs must be provided in concept model document.
+     - :math:`YLDs_{c294} - YLDs_{r192} - (YLDs_{c366} - YLDs_{s182,s183,s184}) + \frac{YLD_{c366} - YLDs_{\text{s182,s183,s184}}}{\text{preg_rate}}`
+     - See extended note below
 
 .. note::
 
-  The CSMR/EMR as well as the "disability weight" in the table above may be modified by modeled risk exposures.
+  Note that we are assuming the YLD rate due to all causes other than maternal disorders (including YLDs due to anemia) do not significantly vary between the pregnant/postpartum not pregnant/postpartum populations. We do rescale the rate of maternal disorders from the general population of women of reproductive age to the rate among the pregnant/postpartum population in this equation. 
 
-.. todo::
-  
-  Confirm with the engineers that it will be possible for risk exposures to modify the "disability weight" as stated above 
+  Note that we include YLDs due to maternal disorders in the disability weight of "background morbidity" here despite the fact that maternal disorders is included as a cause of disability within the nutrition optimization pregnancy simulation. This is because in the simulation, simulants acquire pre-COMO-adjusted maternal disorders YLDs over the course of a single timestep in which accumulation of YLDs due to all other causes besides maternal disorders is paused. Therefore, since maternal disorders YLDs are not accumulated during the remainder of the simulation when anemia YLDs are accumulated, anemia YLDs would not be adjusted for comorbidity with maternal disorders unless they were included in the disability weight for background morbidity, which will be present during the timesteps for which anemia YLDs are accumulated
 
 Data Sources
 """"""""""""
 
-This table contains the data sources for all the measures. The table structure and common measures are as below:
+This table contains the data sources for all the measures. 
 
 .. list-table:: Data Sources
    :widths: 20 25 25 25
@@ -114,30 +96,14 @@ This table contains the data sources for all the measures. The table structure a
      - Sources
      - Description
      - Notes
-   * - ACMR
-     - deaths_c294 / population
+   * - :math:`YLDs_{\text{gbd id}}`
+     - como, decomp_step='step4', metric_id=3
+     - YLD rate for a specified GBD ID
      - 
+   * - preg_rate
+     - Incidence rate of pregnancy
+     - As defined in the data table on the :ref:`maternal disorders cause model document <2021_cause_maternal_disorders>`
      - 
-   * - CSMR_{cid}
-     - deaths_{cid} / population
-     - cause-specific mortality rate for specified cause ID
-     - 
-   * - population
-     - get_population, decomp_step='step4'
-     - population size
-     - 
-   * - deaths_{cid}
-     - codcorrect, decomp_step='step4'
-     - count of deaths due to specified cause ID
-     - 
-   * - YLDs_{cid}
-     - como, decomp_step='step4'
-     - YLD rate for a specified cause ID
-     - 
-
-.. todo::
-
-  Confirm that this definition of YLDs is compatible with engineering definitions of disability weights... I always get turned around here.
 
 Validation Criteria
 +++++++++++++++++++
@@ -147,6 +113,6 @@ Our simulation should replicate GBD estimates of all-cause mortality, YLL, and Y
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-1. This modeling strategy is limited in that it introduces potential incompatibilities with GBD YLD estimates as adjusted for comorbidities due to the fact that disability weights are not additive across multiple conditions.
+1. Our estimation of the disability weight of background morbidity (which should be equal to the YLD rate for all causes other than modeled causes, COMO adjusted for all causes other than modeled causes) is an approximation of the true value that slightly underestimates the true value. Therefore, we will slightly overestimate COMO-adjusted YLDs due to modeled causes and therefore slightly overestimate YLDs averted. However, this underestimation should be very slight given that YLDs_modeled << YLDs_background. Additionally, this resulting overestimation is much smaller in magnitude that the overestimation of YLDs averted due to not considering background mortality in our model.
 
 2. We assume that all simulants have the same morbidity and mortality rates due to other causes with no individual-level heterogeneity. When modeled interventions avert deaths in the alternative scenario relative to the baseline scenario, it is possible that these simulants experience *greater* than average background morbidity and mortality rates due to their vulnerable status in the baseline scenario, which could cause us to slightly overestimate the impact of our interventions on DALYs by underestimating the magnitude of DALYs experienced in the alternative scenario following the averted deaths.

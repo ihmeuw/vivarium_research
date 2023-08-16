@@ -487,7 +487,7 @@ Specific outputs for specific models are specified in the following section.
     - None
     - * Deaths 
       * YLLs
-      * YLDs
+      * YLDs (including YLDs due to "all causes")
       * Pregnancy state person time
       * Pregnancy transition counts
     - N/A
