@@ -588,6 +588,22 @@ Specific outputs for specific models are specified in the following section.
         * Hemorrhage effect on postpartum hemoglobin effects are as expected (assessed via interactive sim)
         * Hemoglobin effect on maternal hemorrhage incidence is as expected. Maternal hemorrhage incidence still verifies as the population level. Note that there was a resolved bug where maternal *disorders* PAFs and RRs were applied to maternal hemorrhage, but this was resolved.
         * Hemoglobin on maternal disorders PAFs and RRs applied as expected, however, maternal disorders incidence (and therefore mortality) are slightly underestimated at the population level. This is due to risk-affected probabilities of an incident maternal disorder case greater than 1 for a substantial number of simulants with low hemoglobin levels. More details discussed in table below.
+  * - 5.0
+    - Verify that joint anemia/BMI risk exposure matches expected value and that exposure does not change over time with changing hemoglobin
+    - Looks great! 
+        * `Model 5.0 anemia exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_5.0_maternal_disorders_anemia.ipynb>`_
+        * `Model 5.0 joint anemia/BMI exposure prevalence <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_5_bmi_exposure.ipynb>`_
+        * `Interactive sim to check that joint anemia/BMI exposure does not change over time <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_7_interactive_sim.ipynb>`_
+  * - 6.0
+    - Verify:
+        * Scenario-specific intervention coverage
+        * Intervention impacts on hemoglobin exposure
+    - * `Intervention coverage looks good by scenario <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_6_intervention_coverage.ipynb>`_, and `confirmed to be appropriately targeted to BMI exposure in the interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_7_interactive_sim.ipynb>`_
+      * Draw-level uncertainty in intervention effect on hemoglobin erroneously applied as individual-level stochastic uncertainty, as shown in the interactive sim linked above
+      * Baseline calibration of IFA effect on hemoglobin appears not to be performed correctly, as shown in the interactive sim linked above
+  * - 7.0
+    - Verify that intervention impacts on stillbirths were applied as expected
+    - Looks great! `See the model 7 birth outcome V&V here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_7.0_preg_outcomes.ipynb>`_ 
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -605,6 +621,14 @@ Specific outputs for specific models are specified in the following section.
     - GBD maternal disorders parent cause is equal to the *sum* of maternal disorders sub-causes. Therefore, the incidence of the aggregate maternal disorders cause is quite high relative to the rate of pregnancies and when it is increased due to risk effects from hemoglobin, the calculated probability of an incident case can be greater than one. Since these probabilities are capped at one, we end up underestimating the incidence rate of maternal disorders at a population level. Note that this issue was present in the IV iron implementation; however, in the nutrition optimization implementation, maternal disorders mortality is conditional on maternal disorders incidence (whereas mortality was correlated with incidence, but not conditional on incidence in the IV iron implementation). Therefore, we are slightly underestimating maternal disorders mortality in this model.
     - As the underestimation is slight, we will move forward despite this limitation. In the meantime, we will investigate possible solutions to address this issue (in particular, modeling each individual maternal disorders sub-cause within the simulation), which we may consider incorporating into the model after other higher priority updates are made (such as intervention implementations in models 6 and 7)
     - TBD
+  * - Uncertainty in the intervention impact on hemoglobin applied as individual heterogeneity rather than draw-level uncertainty
+    - Effect size uncertainty represents statistical uncertainty about the estimation of the population mean difference rather than a measure of standard deviation in measured individual responses to the intervention
+    - Update how we handle uncertainty for this parameter
+    - Bugfix run
+  * - No baseline calibration of IFA effect on hemoglobin
+    - IFA effect on hemoglobin should be adjusted for baseline coverage as described in the intervention model document so that those with no baseline coverage experience a hgb change equal to -hgb_shift * baseline_coverage and those with baseline coverage experience a hgb change equal to hgb_shift * (1 - baseline_coverage)
+    - Update how we handle baseline coverage
+    - Bugfix run
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++
