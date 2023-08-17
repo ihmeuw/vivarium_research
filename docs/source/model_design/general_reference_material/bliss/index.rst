@@ -339,7 +339,7 @@ practices, as well as some lessons learned.
 -----------------------------------
 
 #. A `BLISS guide for Topics Concerning Pregnancy <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B3E09642A-1A84-4D63-8690-EDA98E611295%7D&file=202204_Gender%20Neutral%20Language%20for%20Topics%20concerning%20Pregnancy.docx&action=default&mobileredirect=true>`_. This includes recommendations on gender inclusive language that can be used for topics of pregnancy and child birth. 
-#. A presentation about IV iron at the `Institute of Disease Modeling symposium <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B141E4585-6A1B-414C-8DDE-2F075FEB1667%7D&file=20230501_IDM_Symposium_DRAFT_v0.2.pptx&action=edit&mobileredirect=true>`_. This presenation included many of the terms from out pregnancy guide implemented in practice.
+#. A presentation about IV iron at the `Institute of Disease Modeling symposium <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B141E4585-6A1B-414C-8DDE-2F075FEB1667%7D&file=20230501_IDM_Symposium_DRAFT_v0.2.pptx&action=edit&mobileredirect=true>`_. This presentation included many of the terms from out pregnancy guide implemented in practice.
 #. A paper on the `prevalence of diabetic retinopathy <https://jamanetwork.com/journals/jamaophthalmology/article-abstract/2806093>`_ that includes a "nondifferentiated sex and gender measure" for data anlysis and helpful explanation of what that means with respect to the specific primary data sources used. 
 
 
