@@ -225,48 +225,63 @@ these are related to V&V. For more general information and best practices on V&V
 
 
 .. list-table:: Common Interactive Simulation Tasks 
-  :widths: 15 15 15
+  :widths: 15 15 15 15
   :header-rows: 1
 
   * - Task 
     - Why is this done interactively? 
-    - Example Notebook 
+    - Example Notebook
+    - Relevant Concept Model
   * - V&V for Risks with Many Categories (E.g., LBWSG)
     - Stratifying simulation outcomes by many categories may be too much of a drain on computation time 
-    - `LBWSG exposure <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/interactive_simulations/model_5/lbwsg_exposure_model_7.ipynb>`_ 
+    - `LBWSG exposure <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/b6fc8cc68eaaeafc563ad373977e7e4495b4db47/model_validation/interactive_simulations/model_5/lbwsg_exposure_model_7.ipynb>`_ 
+    - `CIFF malnutrition model <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_ciff_sam/concept_model.html>`_
   * - V&V for Continuous Risks
     - Summary measures such as mean exposure or proportions below a threshold can be simulation outputs. Interactive sims can verify risk exposure standard deviation, look at spread, or check for outliers. You can also verify correlation between risks. 
     - Examples: 
       
-      - `Continous risk standard deviation and visualization <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/interactive_example_continuous_risks.ipynb>`_ 
-      - `Risk correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/interactive_correlation.ipynb>`_ 
+      - `Continous risk standard deviation and visualization <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/interactive_example_continuous_risks.ipynb>`_ 
+      - `Risk correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/interactive_correlation.ipynb>`_ 
+    - `CVD model <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_us_cvd/concept_model.html>`_
   * - V&V for Events with Multiple Risk Factors
     - Stratifying event rates by many risk factors might not be computationally feasible; you can verify risk effects by calculating the event rate at the simulant level.
-    - `Multiple risks impacting CVD <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_RR_GregGraphs.ipynb>`_ 
+    - `Multiple risks impacting CVD <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Interactive_RR_GregGraphs.ipynb>`_ 
+    - `CVD model <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_us_cvd/concept_model.html>`_
   * - V&V for Relative Risks based on Continuous Risks 
     - For continuous risks with risk effects, simulant level data is needed to validate risk and outcome rates. 
-    - `Same example as prior row <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_RR_GregGraphs.ipynb>`_ 
+    - `Same example as prior row <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Interactive_RR_GregGraphs.ipynb>`_ 
+    - `CVD model <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_us_cvd/concept_model.html>`_
   * - Check for Simulant Level Continuity 
     - Can check that simulant values which are not meant to change, remain constant over time (example: propensities)
-    - `Testing propensities drift <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Old_VV_unresolved/Interactive_Sim_Tests_06.18.2023_testing_propensity.ipynb>`_
+    - `Testing propensities drift <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Old_VV_unresolved/Interactive_Sim_Tests_06.18.2023_testing_propensity.ipynb>`_
+    - `CVD model <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_us_cvd/concept_model.html>`_
   * - Debugging 
     - This is very general, but simulant level data can be helpful in finding potential issues. Some examples include: propensity drift over time or finding problematic outliers. You can also "remove" parts of the sim to see where a problem might be. 
     - Examples: 
 
-      - `Finding common random number error <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/interactive_simulations/20221003%20Common%20random%20numbers%20investigation.ipynb>`_. 
-      - The `propensity drift notebook above <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Old_VV_unresolved/Interactive_Sim_Tests_06.18.2023_testing_propensity.ipynb>`_ was also an effort at debugging using the interactive sim. 
+      - `Finding common random number error <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/b1ca9e95f40942a92a9c8ed544d8adef6dc68695/validation/child/interactive_simulations/20221003%20Common%20random%20numbers%20investigation.ipynb>`_. 
+      - The `propensity drift notebook above <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Old_VV_unresolved/Interactive_Sim_Tests_06.18.2023_testing_propensity.ipynb>`_ was also an effort at debugging using the interactive sim. 
+    - Concept Models:
+
+      - `IV iron model <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_iv_iron/concept_model.html>`_
+      - `CVD model <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_us_cvd/concept_model.html>`_
   * - Primary Output Graphs 
     - Creating visualizations when individual data is needed - such as simulant interactions with healthcare or continuous risk factor spreads over time. 
     - Examples: 
 
-      - `Simulant level hemoglobin changes over time <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/interactive_simulations/Hemoglobin%20trajectory%20plots%2020220616.ipynb>`_ 
+      - `Simulant level hemoglobin changes over time <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/b1ca9e95f40942a92a9c8ed544d8adef6dc68695/validation/maternal/interactive_simulations/Hemoglobin%20trajectory%20plots%2020220616.ipynb>`_ 
       - `Simulant healthcare interactions <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Single_Simulant_Graph_Lifestyle.ipynb>`_  
-      - `Sankey diagrams <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/tree/8ca7c6d23354ffb08f532d163990f18745f4c80a/verification/interactive_simulations/sankey_diagrams>`_ (pictured below). Note that this repo is **private** which means you'll need a team member to add you before you can view it. 
+      - `Sankey diagrams of transitions between states <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/tree/8ca7c6d23354ffb08f532d163990f18745f4c80a/verification/interactive_simulations/sankey_diagrams>`_ (pictured below). Note that this repo is **private** which means you'll need a team member to add you before you can view it. 
+    - Concept Models:
+
+      - `IV iron model <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_iv_iron/concept_model.html>`_
+      - `CVD model <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_us_cvd/concept_model.html>`_
+      - `Multiple Myeloma model <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_csu_multiple_myeloma_2/concept_model.html>`_
 
 
 .. image:: sankey-diagram.PNG
 
-You might notice that in a lot of the tasks above, especially making primary ouput graphs, 
+You might notice that in a lot of the tasks above, especially making primary output graphs, 
 you will make new "observers" for the sim and then run time forward, capturing this 
 additional data. You might ask yourself, why not just make those the built-in observers 
 to my actual sim? The answer is that the "dimensions" of complexity of a model run 
