@@ -21,7 +21,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-This cause model document existing as an intermim solution to these issues specific discussed in the :ref:`background morbidity page <other_causes_ylds>`, specifically designed for the :ref:`nutrition optimization pregnancy model <2021_concept_model_vivarium_nutrition_optimization_pregnancies>`.
+This cause model document serves as an interim solution to these issues specific discussed in the :ref:`background morbidity page <other_causes_ylds>`, specifically designed for the :ref:`nutrition optimization pregnancy model <2021_concept_model_vivarium_nutrition_optimization_pregnancies>`.
 
 Cause Model Diagram
 +++++++++++++++++++
