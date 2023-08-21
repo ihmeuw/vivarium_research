@@ -113,26 +113,134 @@ To achieve the general modeling objective of determining the most cost effective
 
     In this case, we would simulate 3 scenarios (1: 100% coverage of A and B, 2: 100% coverage of A, 3: no coverage) and then estimate the overall impact of the described intervention coverage combination as 0.5 * scenario_1 + 0.25 * scenario_2 + 0.25 * scenario_3.
 
-2.1.1 Process in practice
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Simulate 1 scenario for each possible combination of modeled interventions either at 0% or 100% coverage.
+2.2 Emulator Design
+-------------------
 
-2. External to vivarium, pair the simulated results of these scenarios with an intervention costing function and solve for combination of scenarios that maximizes health impact under the following constraints/assumptions:
+The emulator is designed to take in the results from the simulation and costing 
+functions and output an optimized approach for each budget. Below is more details 
+about how the emulator works, its input parameters, and limitations. 
 
-  - Constraint: total cost of resulting combination of interventions cannot exceed some set budget
-  - Constraint: total coverage of any one intervention cannot exceed that intervention-specific saturation coverage level
-  - Assumption: all interventions have the same coverage propensities. See the `6.0 Limitations`_ section for a discussion of this assumption.  
-  - Pending constraint: avoid operationally infeasible coverage recommendations (for example: separate antenatal care intervention product based on whether child nutrition saturation coverage has already been maxxed out)
+2.2.1 General Emulator Strategy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Step 1 in this process is detailed in the :ref:`pregnancy<2021_concept_model_vivarium_nutrition_optimization_pregnancies>` and :ref:`child<2021_concept_model_vivarium_nutrition_optimization_children>` concept model documents. Step 2 in this process will be performed using the outputs from step 1 and `can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/emulator>`_
+To find optimized results, we will: 
 
-.. todo::
+#. Simulate 1 scenario for each possible combination of modeled interventions either at 0% or 100% coverage.
+#. Define cost functions for each intervention. 
+#. External to vivarium, pair the simulated results of these scenarios with the intervention costing function and solve for combination of scenarios that maximizes health impact. 
 
-  More specific emulator documentation
+Further details can be found in the below sections. 
+
+Step 1 in this process is detailed in the :ref:`pregnancy<2021_concept_model_vivarium_nutrition_optimization_pregnancies>` and :ref:`child<2021_concept_model_vivarium_nutrition_optimization_children>` concept model documents. 
 
 
-2.2 Submodels
+2.2.2 Input Parameters
+~~~~~~~~~~~~~~~~~~~~~~
+
+We expect that the emulator will have the following input parameters 
+that are configurable for each run: 
+
+.. list-table:: Input Parameters
+  :header-rows: 1
+
+  * - Parameter
+    - Options to include 
+    - Notes
+  * - Results directory
+    - 
+    - This will include results for only one location. The emulator will be rerun each location.
+  * - Location ID 
+    - 
+    - Accepts exactly one location ID 
+  * - Optimization Measure 
+    - Deaths, DALYs, cases averted (stunting for example), total population (alive, not stunted, etc.)
+    - 
+  * - Population to optimize for
+    - Maternal, child, all 
+    - This only applies to some measures e.g., deaths could be any population, stunting cases averted is by definition for children only.  
+  * - Budget(s)
+    - A set of budgets or single budget to optimize for 
+    - We will plan to include some "help" for selecting a budget such as the cost of maximizing all interventions or the current baseline budget 
+  * - Stillbirth inclusion in YLLs 
+    - Stillbirths included in YLLs, stillbirths NOT included in YLLs
+    - 
+
+We have considered some other possible input parameters, but at this time 
+are planning to have these be pre-set in the emulator. We can choose to change 
+these to be configurable on each run if the need arises. 
+
+Additional parameters: 
+
+#. Draw-specific results vs summarized results. Currently we are planning to have results be draw-specific. 
+#. Rate vs total population. Currently we will generate results for the total population. E.g., all deaths averted in Ethiopia.
+#. Additional constraints in the optimization. E.g., running the emulator allowing for operationally infeasible cases and not allowing for them. 
+#. Changing saturation coverage limits. 
+
+
+2.2.3 Constraints and Assumptions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Constraints: 
+
+- Total cost of resulting combination of interventions cannot exceed some set budget
+- Coverage of any one intervention cannot exceed that intervention-specific saturation coverage level
+- Avoid operationally infeasible coverage recommendations (for example: separate antenatal care intervention product based on whether child nutrition saturation coverage has already been maxxed out)
+
+Assumptions: 
+
+- All interventions have the same coverage propensities. See the `6.0 Limitations`_ section for a discussion of this assumption. 
+
+
+2.2.4 Emulator Versions
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table:: Emulator Versions 
+  :header-rows: 1
+
+  * - Version Number
+    - Description
+    - Link
+    - Notes
+  * - 1
+    - Emulator with two step optimization 
+    - `Emulator version 1 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/98bab97f05bdbb0277f84f48f220294cb59f1245/emulator/emulator%20rough%20draft_20230607.ipynb>`_  
+    - We have not progressed the two step optimization version at this time 
+  * - 2
+    - Replicate results with single step optimization 
+    - `Emulator version 2 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/98bab97f05bdbb0277f84f48f220294cb59f1245/emulator/emulator_draft_20230628.ipynb>`_  
+    - Successfully replicated prior results 
+  * - 3
+    - Removing hard coded information 
+    - `Emulator version 3 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/98bab97f05bdbb0277f84f48f220294cb59f1245/emulator/emulator_draft_20230724.ipynb>`_  
+    - 
+  * - 4
+    - Converted to .py files 
+    - `Emulator version 4 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/d667cd01cd0ddc63137fe55798cc6d04831701d0/emulator/emulator_with_py_files_20230810.ipynb>`_ and `py files version 4 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/d667cd01cd0ddc63137fe55798cc6d04831701d0/emulator/emulator_with_py_files_20230810.ipynb>`_  
+    - 
+  * - 5
+    - Adding maternal interventions  
+    - 
+    - 
+  * - 6
+    - Allowing optimization to different parameters 
+    - 
+    - 
+  * - 7
+    - Add in additional constraints for unfeasible scenarios 
+    - 
+    - 
+  * - 8
+    - Adjusting to fit final model outputs 
+    - 
+    - 
+  * - 9
+    - Adding non-linear costs  
+    - 
+    - 
+
+
+2.3 Submodels
 -------------
 
 .. list-table:: Wave I outstanding tasks for costing and emulator
@@ -149,19 +257,19 @@ Step 1 in this process is detailed in the :ref:`pregnancy<2021_concept_model_viv
   * - 2: Emulator design choice 
     - 
     - Full team 
-    - 
+    - Completed 
   * - 3: Clean emulator and remove hardcoded information 
     - 
     - Syl 
-    - 
+    - Completed 
   * - 4: Allow for optimization to multiple outcomes 
     - 
-    - TBD
+    - Syl
     - Example: deaths, DALYs, SAM cases 
   * - 5: Add maternal interventions 
     - Blocked by simulation progress 
-    - TBD
-    - 
+    - Syl
+    - WIP
   * - 6: Test for robustness to different initial values 
     - 
     - TBD
