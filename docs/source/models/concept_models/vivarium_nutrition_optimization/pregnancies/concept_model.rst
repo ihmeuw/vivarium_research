@@ -604,6 +604,11 @@ Specific outputs for specific models are specified in the following section.
   * - 7.0
     - Verify that intervention impacts on stillbirths were applied as expected
     - Looks great! `See the model 7 birth outcome V&V here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_7.0_preg_outcomes.ipynb>`_ 
+  * - 8.0
+    - * Check that model 6.0 V&V issues are resolved
+      * Verify expected behavior of background morbidity implementation
+    - * Intervention effect applications look as expected! `Model 8.0 interactive sim notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_8_interactive_sim.ipynb>`_
+      * Implementation of background morbidity looks to be functioning as intended, but unexpected value for disability weight of other causes. `Model 8 YLDs notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_8.0_yld_checks.ipynb>`_
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -621,14 +626,10 @@ Specific outputs for specific models are specified in the following section.
     - GBD maternal disorders parent cause is equal to the *sum* of maternal disorders sub-causes. Therefore, the incidence of the aggregate maternal disorders cause is quite high relative to the rate of pregnancies and when it is increased due to risk effects from hemoglobin, the calculated probability of an incident case can be greater than one. Since these probabilities are capped at one, we end up underestimating the incidence rate of maternal disorders at a population level. Note that this issue was present in the IV iron implementation; however, in the nutrition optimization implementation, maternal disorders mortality is conditional on maternal disorders incidence (whereas mortality was correlated with incidence, but not conditional on incidence in the IV iron implementation). Therefore, we are slightly underestimating maternal disorders mortality in this model.
     - As the underestimation is slight, we will move forward despite this limitation. In the meantime, we will investigate possible solutions to address this issue (in particular, modeling each individual maternal disorders sub-cause within the simulation), which we may consider incorporating into the model after other higher priority updates are made (such as intervention implementations in models 6 and 7)
     - TBD
-  * - Uncertainty in the intervention impact on hemoglobin applied as individual heterogeneity rather than draw-level uncertainty
-    - Effect size uncertainty represents statistical uncertainty about the estimation of the population mean difference rather than a measure of standard deviation in measured individual responses to the intervention
-    - Update how we handle uncertainty for this parameter
-    - Bugfix run
-  * - No baseline calibration of IFA effect on hemoglobin
-    - IFA effect on hemoglobin should be adjusted for baseline coverage as described in the intervention model document so that those with no baseline coverage experience a hgb change equal to -hgb_shift * baseline_coverage and those with baseline coverage experience a hgb change equal to hgb_shift * (1 - baseline_coverage)
-    - Update how we handle baseline coverage
-    - Bugfix run
+  * - Error in calculation of disability weight of "other causes"
+    - I think it has something to do with how GBD returns impairment YLD values for multiple causes, `as mentioned here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization/pull/58/files#r1300721328>`_
+    - Investigate and update
+    - Next model run
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++
