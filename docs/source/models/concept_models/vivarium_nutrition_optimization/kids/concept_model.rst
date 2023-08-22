@@ -565,16 +565,22 @@ Wave I
     - Note
   * - 1.0
     - Replication of IV iron child model fit to nutrition optimization pregnancy model input data
-    - Baseline
+    - All
     - Baseline
     - 
-    - Should include antenatal supplementation intervention effects
+    - Should include antenatal supplementation intervention and maternal anemia/BMI exposure effects on birth weight
+  * - 1.1
+    - Replication of IV iron child model fit to nutrition optimization pregnancy model input data
+    - All
+    - Baseline
+    - 
+    - Include new intervention impacts on gestational age 
   * - 2.0
     - Include CIFF/wasting paper implementation of the wasting transition model for children 6-59 months
-    - Baseline
+    - All
     - Baseline
     - 
-    - This will implicitly include a model of wasting treatment
+    - This will implicitly include the model of wasting treatment (as implemented in the wasting paper; updates to this model to come later)
   * - 3.0
     - Add malaria cause model
     - Baseline
@@ -710,7 +716,11 @@ Wave I
     - V&V summary
   * - 1.0
     - * Verify to GBD cause YLDs and YLLs and risk exposures
-      * Verify antenatal intervention effects on wasting and stunting exposures
+      * Verify antenatal intervention effects on birthweight, wasting, and stunting exposures
+      * Verify maternal BMI/anemia exposure effects on birthweight
+    - 
+  * - 1.1
+    - * Verify new antenatal intervention effects on gestational age
     - 
   * - 2.0
     - * Verify wasting risk exposure
