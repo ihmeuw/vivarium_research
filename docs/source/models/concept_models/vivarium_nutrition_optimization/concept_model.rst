@@ -126,7 +126,7 @@ about how the emulator works, its input parameters, and limitations.
 
 To find optimized results, we will: 
 
-#. Simulate 1 scenario for each possible combination of modeled interventions either at 0% or 100% coverage.
+#. Simulate a scenario for each possible combination of modeled interventions either at 0% or 100% coverage.
 #. Define cost functions for each intervention. 
 #. External to vivarium, pair the simulated results of these scenarios with the intervention costing function and solve for combination of scenarios that maximizes health impact. 
 
