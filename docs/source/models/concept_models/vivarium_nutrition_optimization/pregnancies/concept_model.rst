@@ -492,13 +492,27 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy transition counts
     - N/A
     - 
+  * - 8.1
+    - 8.0bugfix
+    - All
+    - Same as 8.0
+    - Same as 8.0
+    - 
+  * - 8.2
+    - Birth outcome randomness bugfix, stratify YLDs by pregnancy status
+    - All
+    - * Deaths
+      * YLLs
+      * YLDs, both cause-specific (including background morbidity due to other causes) as well as for all causes combined; all stratified by pregnancy state
+      * Pregnancy state person time
+      * Pregnancy transition counts
   * - 9.0
     - Production run test
-    - 1-4
-    - (some larger number of draws and seeds, tbd)
-    - No age stratification:
-      
-      * Deaths
+    - Baseline, 3
+    - 4,000,000
+    - No age stratification and not cause-specific:
+
+      * Deaths 
       * YLLs
       * YLDs
       * Intervention counts
@@ -609,6 +623,10 @@ Specific outputs for specific models are specified in the following section.
       * Verify expected behavior of background morbidity implementation
     - * Intervention effect applications look as expected! `Model 8.0 interactive sim notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_8_interactive_sim.ipynb>`_
       * Implementation of background morbidity looks to be functioning as intended, but unexpected value for disability weight of other causes. `Model 8 YLDs notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_8.0_yld_checks.ipynb>`_
+  * - 8.1
+    - Verify that other causes disability weight is now as expected
+    - * Looks good! Unable to verify that all_causes YLD observer is performing COMO adjustment (individual-level YLD data not available in the interactive sim and population-level observer results are not obviously indicating presence of COMO adjustment). Requesting observed YLDs to be stratified by pregnancy status as an attempt to remove influence of custom maternal disorders YLDs model to see if it becomes more obvious.
+      * Also, noticed that while population-level intervention effects on birth outcomes is functioning as expected, the individual-level trajectories are not. At the population level, rate of "other" outcome stays approximately the same, live births increase, and stillbirths decrease with increasing intervention coverage, as expected. However, at the individual level, "other" outcomes become live births, and stillbirths become "other" outcomes. We believe this is due to the ordering of outcome choices in the random.choice call.
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -626,17 +644,17 @@ Specific outputs for specific models are specified in the following section.
     - GBD maternal disorders parent cause is equal to the *sum* of maternal disorders sub-causes. Therefore, the incidence of the aggregate maternal disorders cause is quite high relative to the rate of pregnancies and when it is increased due to risk effects from hemoglobin, the calculated probability of an incident case can be greater than one. Since these probabilities are capped at one, we end up underestimating the incidence rate of maternal disorders at a population level. Note that this issue was present in the IV iron implementation; however, in the nutrition optimization implementation, maternal disorders mortality is conditional on maternal disorders incidence (whereas mortality was correlated with incidence, but not conditional on incidence in the IV iron implementation). Therefore, we are slightly underestimating maternal disorders mortality in this model.
     - As the underestimation is slight, we will move forward despite this limitation. In the meantime, we will investigate possible solutions to address this issue (in particular, modeling each individual maternal disorders sub-cause within the simulation), which we may consider incorporating into the model after other higher priority updates are made (such as intervention implementations in models 6 and 7)
     - TBD
-  * - Error in calculation of disability weight of "other causes"
-    - I think it has something to do with how GBD returns impairment YLD values for multiple causes, `as mentioned here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization/pull/58/files#r1300721328>`_
-    - Investigate and update
-    - Next model run
+  * - Illogical birth outcome changes at the individual level
+    - At the population level, rate of "other" outcome stays approximately the same, live births increase, and stillbirths decrease with increasing intervention coverage, as expected. However, at the individual level, "other" outcomes become live births, and stillbirths become "other" outcomes. We believe this is due to the ordering of outcome choices in the random.choice call.
+    - Update ordering of random.choice call so that "other" outcomes are not in the middle
+    - For next model run
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++
 
 .. _MDYLDNote:
 
-4.1 A note on years lived with disability and maternal disorders
+4.1 A note on years lived with disability and maternal  disorders
 -----------------------------------------------------------------
 
 This simulation has taken a particular modeling strategy regarding years lived with disability due to :ref:`maternal disorders <2021_cause_maternal_disorders>` that involved integrating it into the :ref:`pregnancy model <other_models_pregnancy_closed_cohort>`. 
