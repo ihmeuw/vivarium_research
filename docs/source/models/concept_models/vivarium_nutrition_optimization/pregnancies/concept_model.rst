@@ -281,7 +281,11 @@ Documents that contain information specific to the overall model and the child s
     - IFA coverage
     - MMS coverage
     - BEP coverage
-  * - Baseline/zero coverage
+  * - Zero coverage
+    - 0
+    - 0
+    - 0
+  * - Baseline
     - Baseline
     - 0
     - 0
@@ -501,7 +505,7 @@ Specific outputs for specific models are specified in the following section.
     - 
   * - 8.2
     - Birth outcome randomness bugfix, stratify YLDs by pregnancy status
-    - All
+    - All scenarios (including new "zero" coverage scenario)
     - None
     - * Deaths
       * YLLs
@@ -512,7 +516,7 @@ Specific outputs for specific models are specified in the following section.
     - 
   * - 9.0
     - Production run test
-    - Baseline, 1, 3
+    - All
     - 4,000,000 population size
     - No age stratification and not cause-specific, BUT stratified by random seed:
 
@@ -524,7 +528,7 @@ Specific outputs for specific models are specified in the following section.
     - Will analyze to determine minimum viable population size for maternal outcomes (can later use child data to analyze for child outcomes)
   * - 9.0.1
     - Production run test
-    - Baseline, 1, 3
+    - All
     - TBD population size, 100 draws
     - No age stratification and not cause-specific (no need to stratify by random seed):
 
