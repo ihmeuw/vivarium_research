@@ -495,17 +495,21 @@ Specific outputs for specific models are specified in the following section.
   * - 8.1
     - 8.0bugfix
     - All
+    - None
     - Same as 8.0
     - Same as 8.0
     - 
   * - 8.2
     - Birth outcome randomness bugfix, stratify YLDs by pregnancy status
     - All
+    - None
     - * Deaths
       * YLLs
       * YLDs, both cause-specific (including background morbidity due to other causes) as well as for all causes combined; all stratified by pregnancy state
       * Pregnancy state person time
       * Pregnancy transition counts
+    - Same as 8.0
+    - 
   * - 9.0
     - Production run test
     - Baseline, 3
