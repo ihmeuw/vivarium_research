@@ -536,16 +536,16 @@ Specific outputs for specific models are specified in the following section.
     - Will analyze to determine minimum viable number of draws for maternal outcomes (can later use child data to analyze for child outcomes)
   * - 9.1
     - Production runs
-    - 1-4
+    - All
     - (some larger number of draws and seeds, tbd)
-    - No age stratification:
+    - No age stratification and not cause-specific:
       
       * Deaths
       * YLLs
       * YLDs
       * Intervention counts
-    - Live and still births with maternal_ids, infant sex, intervention coverage, and LBWSG exposures
-    - 
+    - Live and still births with maternal_ids, infant sex, joint BMI/anemia exposure, intervention coverage, and LBWSG exposures
+    - NOTE: would be best to determine appropriate population sizes/number of draws from child sim before production runs, but it is ok to move forward without this information if it would be preferable due to timing considerations
   * - 10.0
     - GBD 2021 update?
     - Baseline
