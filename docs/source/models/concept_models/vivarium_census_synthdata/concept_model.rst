@@ -272,6 +272,11 @@ Their date of birth is defined to be consistent with that precise age.
   Date of birth, in reality, is not evenly spread throughout the year.
   We do not model this.
 
+.. note::
+  The PUMS column is top-coded at 99 years. That means our simulation will start with
+  no centenarians; if we wanted to address this, we could distribute top-coded values
+  according to some distribution.
+
 We perturb the age attribute as described in the
 :ref:`perturbation section <census_prl_perturbation>`.
 
@@ -672,6 +677,16 @@ Data sources
 
 All data comes from ACS PUMS.
 We use the standard columns about demographics, household structure, etc.
+
+.. note::
+  The ACS PUMS column for age is top-coded at 99 years.
+  Even though our last age group is 80-100, it therefore was
+  calculated including people who are 100+.
+  This is also how it is applied in the simulation, due to
+  `Vivarium's extrapolation strategy <https://vivarium.readthedocs.io/en/latest/concepts/lookup.html#extrapolation>`_.
+  Technically, it would be more correct to say this age group
+  has no upper bound.
+
 We also use some that are specifically relevant to moving:
 
 * What PUMA the person lives in now (:code:`ST` and :code:`PUMA`).
@@ -1114,8 +1129,14 @@ Our assumption is that the **number (per year) and characteristics** of recent i
 in the 2016-2020 ACS PUMS will be replicated in all future years of the simulation.
 
 .. note::
+  All ACS PUMS data used in this component should be subset to the simulation's catchment area, e.g. Florida.
 
-    All ACS PUMS data used in this component should be subset to the simulation's catchment area, e.g. Florida.
+.. note::
+  As at population initialization, we ignore the fact that age has
+  been top-coded to 99 years in the ACS PUMS.
+  This means no simulant will ever immigrate who is 100+ years old.
+  If we wanted to fix this in the future, we could distribute the
+  top-coded ages to higher ages somehow.
 
 Move type
 '''''''''
@@ -1316,6 +1337,15 @@ according to the distributions of these demographics in a resample of the corres
 with perturbation as described in the :ref:`perturbation section below <census_prl_perturbation>`.
 Note that in the case of household moves, these are the demographics **of the immigrant's household's reference person**,
 while for the other two types they are demographics of the immigrant themselves.
+
+.. note::
+  The ACS PUMS column for age is top-coded at 99 years.
+  Even though our last age group is 80-100, it therefore was
+  calculated including people who are 100+.
+  This is also how it is applied in the simulation, due to
+  `Vivarium's extrapolation strategy <https://vivarium.readthedocs.io/en/latest/concepts/lookup.html#extrapolation>`_.
+  Technically, it would be more correct to say this age group
+  has no upper bound.
 
 Finally, we calculate the rates of people emigrating per year of person-time "at risk":
 
@@ -3992,6 +4022,15 @@ The primary data source for this component is the ACS PUMS, which reports
 respondent income.
 We subset the PUMS to only those who are employed; as discussed in the previous
 section, in our simulation, unemployed people have 0 income.
+
+.. note::
+  The ACS PUMS column for age is top-coded at 99 years.
+  Even though our last age group is 80-100, it therefore was
+  calculated including people who are 100+.
+  This is also how it is applied in the simulation, due to
+  `Vivarium's extrapolation strategy <https://vivarium.readthedocs.io/en/latest/concepts/lookup.html#extrapolation>`_.
+  Technically, it would be more correct to say this age group
+  has no upper bound.
 
 Distribution parameters
 '''''''''''''''''''''''
