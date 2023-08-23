@@ -517,7 +517,7 @@ Specific outputs for specific models are specified in the following section.
   * - 9.0
     - Production run test
     - All
-    - 4,000,000 population size
+    - 2,000,000 population size
     - No age stratification and not cause-specific, BUT stratified by random seed:
 
       * Deaths 
