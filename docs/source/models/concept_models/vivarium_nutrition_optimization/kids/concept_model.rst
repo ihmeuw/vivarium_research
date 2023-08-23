@@ -565,16 +565,28 @@ Wave I
     - Note
   * - 1.0
     - Replication of IV iron child model fit to nutrition optimization pregnancy model input data
-    - Baseline
+    - All
     - Baseline
     - 
-    - Should include antenatal supplementation intervention effects
+    - Should include antenatal supplementation intervention and maternal anemia/BMI exposure effects on birth weight
+  * - 1.1
+    - Replication of IV iron child model fit to nutrition optimization pregnancy model input data
+    - All
+    - Baseline
+    - 
+    - Include new intervention impacts on gestational age 
   * - 2.0
     - Include CIFF/wasting paper implementation of the wasting transition model for children 6-59 months
-    - Baseline
+    - All
     - Baseline
     - 
-    - This will implicitly include a model of wasting treatment
+    - This will implicitly include the model of wasting treatment (as implemented in the wasting paper; updates to this model to come later)
+  * - 2.1
+    - Same as model 2.0, but more scenarios and less observers to act as emulator test runs
+    - All
+    - Baseline, 0-8
+    - 
+    - 
   * - 3.0
     - Add malaria cause model
     - Baseline
@@ -614,7 +626,7 @@ Wave I
   * - 8.1
     - Production runs
     - All
-    - All
+    - Baseline, 0-8
     - 
     - 
 
@@ -641,9 +653,16 @@ Wave I
       4. Cause state transition counts
       5. Stunting state person time, stratified by antenatal intervention coverage
       6. Wasting state person time, stratified by antenatal intervention coverage
-      7. Wasting transition counts, stratified by wasting treatement coverage
+      7. Wasting transition counts, stratified by wasting treatment coverage
     - * Age group
       * Sex
+  * - 2.1
+    - 1. Deaths and YLLs (does not need to be not cause-specific)
+      2. YLDs (does not need to be cause-specific)
+      3. Stunting state person time, stratified by SQ-LNS coverage
+      4. Wasting transition counts, stratified by wasting treatment coverage
+      5. Wasting state person time
+    - None
   * - 3.0
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
@@ -710,13 +729,23 @@ Wave I
     - V&V summary
   * - 1.0
     - * Verify to GBD cause YLDs and YLLs and risk exposures
-      * Verify antenatal intervention effects on wasting and stunting exposures
+      * Verify antenatal intervention effects on birthweight, wasting, and stunting exposures
+      * Verify maternal BMI/anemia exposure effects on birthweight
+    - `Model 1.0 V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_1.0_risk_and_cause_checks.ipynb>`_
+      * Diarrheal diseases prevalence spikes at the post neonatal age group - why?
+      * Underestimating diarrheal disease incidence rates - why? (note this was present in IV iron for Ethiopia but not other locations)
+      * Didn't have additional pregnancy scenarios, so could not check LBWSG by intervention - will evaluate in model 1.1 instead.
+  * - 1.1
+    - * Verify new antenatal intervention effects on gestational age
     - 
   * - 2.0
     - * Verify wasting risk exposure
       * Verify baseline wasting treatment coverage
       * Verify that antenatal intervention effects remain for stunting
       * Verify that wasting intervention effects remain for wasting among <6 months, and taper off for >6 months
+    - 
+  * - 2.1
+    - Check intervention algorithm for all scenarios
     - 
   * - 3.0
     - * Verify that malaria YLDs and YLLs match expected values
@@ -764,8 +793,12 @@ Wave I
     - Explanation
     - Action plan
     - Timeline
-  * - 
-    - 
-    - 
-    - 
+  * - Diarrheal diseases prevalence spikes in the postneonatal age group
+    - Unknown
+    - Engineers to review
+    - Low priority
+  * - Diarrheal diseases incidence rate underestimated
+    - Unknown
+    - Engineers to review and/or to revisit after we update CGF risk effects to CGF 2021
+    - Low priority
 

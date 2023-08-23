@@ -652,10 +652,10 @@ The observed effect of each antenatal supplementation product on the risk of sti
     - Lack of evidence
   * - MMS
     - 0.91 (95% CI: 0.71, 0.93), lognormal distribution of uncertainty
-    - [Oh-et-al-2020]_
+    - Relative to no supplementation/IFA [Oh-et-al-2020]_
   * - BEP
     - 0.39 (95% CI: 0.19, 0.80), lognormal distribution of uncertainty
-    - [Lassi-et-al-2020-antenatal-supplementation]_
+    - Relative to no supplementation/IFA, [Lassi-et-al-2020-antenatal-supplementation]_
 
 Because there is no effect of IFA on stillbirths and we assume there is no baseline coverage of MMS or BEP, there is no differentiation in stillbirth rate due to baseline coverage of antenatal supplementation products in our modeled populations. Therefore, we can simply apply the relative risk of stillbirth directly to the baseline stillbirth rate without accounting for calibration of baseline coverage (in other words, the PAF of antenatal supplementation on stillbirths is equal to 0).
 
