@@ -2989,6 +2989,7 @@ added later (not in the minimum viable model), if desired.
   :widths: 20
   :header-rows: 0
 
+  * - Event ID (unique integer identifier for each row in the SSA dataset, representing a ground-truth identifier for the unique event recorded in that row; unaffected by noise functions; to be used for comparing noised and unnoised data)
   * - Unique simulant ID (for PRL tracking)
   * - Social Security Number
   * - First name
@@ -2998,7 +2999,6 @@ added later (not in the minimum viable model), if desired.
   * - Sex (binary; "Male" or "Female")
   * - Type of event
   * - Date of event (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
-  * - Event ID (unique integer identifier for each row in the SSA dataset, representing a ground-truth identifier for the event recorded in that row; unaffected by noise functions; to be used for comparing noised and unnoised data)
 
 .. note::
   Unlike the other observers, there is no ground-truth unique household ID for PRL tracking in this observer.
