@@ -2641,6 +2641,10 @@ W2 and 1099 Forms
   * - Unique household ID consistent between observers (for PRL tracking)
   * - Employer ID (for PRL tracking)
   * - Social Security Number
+  * - Wages (income from this job)
+  * - Employer Name
+  * - Employer Address
+  * - Employer ZIP Code
   * - First name
   * - Middle initial
   * - Last name
@@ -2651,10 +2655,6 @@ W2 and 1099 Forms
   * - Mailing Address City
   * - Mailing Address State
   * - Mailing Address ZIP Code
-  * - Wages (income from this job)
-  * - Employer Name
-  * - Employer Address
-  * - Employer ZIP Code
   * - Type of Tax Form (W2 or 1099)
   * - Tax year
 
