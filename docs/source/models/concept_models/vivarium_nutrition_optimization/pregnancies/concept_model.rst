@@ -674,7 +674,7 @@ Specific outputs for specific models are specified in the following section.
 
 .. _MDYLDNote:
 
-4.1 A note on years lived with disability and maternal  disorders
+4.1 A note on years lived with disability and maternal disorders
 -----------------------------------------------------------------
 
 This simulation has taken a particular modeling strategy regarding years lived with disability due to :ref:`maternal disorders <2021_cause_maternal_disorders>` that involved integrating it into the :ref:`pregnancy model <other_models_pregnancy_closed_cohort>`. 
