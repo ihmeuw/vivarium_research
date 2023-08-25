@@ -505,7 +505,7 @@ Specific outputs for specific models are specified in the following section.
     - 
   * - 8.2
     - Birth outcome randomness bugfix, stratify YLDs by pregnancy status
-    - All scenarios (including new "zero" coverage scenario)
+    - All scenarios 
     - None
     - * Deaths
       * YLLs
@@ -513,6 +513,15 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy state person time
       * Pregnancy transition counts
     - Same as 8.0
+    - 
+  * - 8.3
+    - * `Update other causes DW value in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1313>`_,
+      * `Resolve discrepancies between cause-specific and all cause YLD observers during the parturition state, as shown in this notebook (cell 92) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/[…]_and_validation/pregnancy_model/model_8.2_interactive_sim.ipynb>`_
+      * `Confirm that individual-level birth outcome changes between scenario are functioning as intended, as assessed in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/[…]_and_validation/pregnancy_model/model_8.2_interactive_sim.ipynb>`_
+    - All scenarios, including new "zero coverage" scenario
+    - None
+    - Same as 8.2
+    - Same as 8.2
     - 
   * - 9.0
     - Production run test
@@ -647,6 +656,11 @@ Specific outputs for specific models are specified in the following section.
     - Verify that other causes disability weight is now as expected
     - * Looks good! Unable to verify that all_causes YLD observer is performing COMO adjustment (individual-level YLD data not available in the interactive sim and population-level observer results are not obviously indicating presence of COMO adjustment). Requesting observed YLDs to be stratified by pregnancy status as an attempt to remove influence of custom maternal disorders YLDs model to see if it becomes more obvious.
       * Also, noticed that while population-level intervention effects on birth outcomes is functioning as expected, the individual-level trajectories are not. At the population level, rate of "other" outcome stays approximately the same, live births increase, and stillbirths decrease with increasing intervention coverage, as expected. However, at the individual level, "other" outcomes become live births, and stillbirths become "other" outcomes. We believe this is due to the ordering of outcome choices in the random.choice call.
+  * - 8.2
+    - * Check for evidence of COMO adjustment functioning as expected between all-cause and cause-specific YLD observers in YLD results stratified by pregnancy state
+      * Check that individual-level birth outcome transitions are logical between scenarios
+    - * COMO adjustment between all-cause and cause-specific observers looks to be functioning as expected in all pregnancy states except for the parturition state
+      * Unable to verify that individual-level birth outcome transitions are functioning as expected
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -668,6 +682,10 @@ Specific outputs for specific models are specified in the following section.
     - At the population level, rate of "other" outcome stays approximately the same, live births increase, and stillbirths decrease with increasing intervention coverage, as expected. However, at the individual level, "other" outcomes become live births, and stillbirths become "other" outcomes. We believe this is due to the ordering of outcome choices in the random.choice call.
     - Update ordering of random.choice call so that "other" outcomes are not in the middle
     - For next model run
+  * - Inconsistencies between cause-specific and all-cause YLD observers in the parturition state
+    - Unknown
+    - Investigate for model run 8.3
+    - 
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++
