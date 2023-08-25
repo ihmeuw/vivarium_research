@@ -74,16 +74,21 @@ States Data
      - 
    * - C
      - disabilty weight
-     - all_cause_yld_rate - anemia_yld_rate - population_maternal_disorders_yld_rate + pregnancy_maternal_disorders_yld_rate
+     - all_cause_yld_rate - anemia_yld_rate - population_maternal_disorders_yld_rate 
      - See extended note below
 
 .. note::
 
   Note that we are assuming the YLD rate due to all causes other than maternal disorders (including YLDs due to anemia) do not significantly vary between the pregnant/postpartum not pregnant/postpartum populations. We do rescale the rate of maternal disorders from the general population of women of reproductive age to the rate among the pregnant/postpartum population in this equation. 
 
-  Note that we include YLDs due to maternal disorders in the disability weight of "background morbidity" here despite the fact that maternal disorders is included as a cause of disability within the nutrition optimization pregnancy simulation. This is because in the simulation, simulants acquire pre-COMO-adjusted maternal disorders YLDs over the course of a single timestep in which accumulation of YLDs due to all other causes besides maternal disorders is paused. Therefore, since maternal disorders YLDs are not accumulated during the remainder of the simulation when anemia YLDs are accumulated, anemia YLDs would not be adjusted for comorbidity with maternal disorders unless they were included in the disability weight for background morbidity, which will be present during the timesteps for which anemia YLDs are accumulated.
+  Note that we are excluding YLDs due to maternal disorders in YLDs due to background morbidity, despite that YLDs due to maternal disorders in the nutrition optimization model are modeled separately and are never comorbid with other conditions. This limits us in that we therefore do not capture:
 
-    Note that while this allows us to more accurately estimate YLDs averted between scenarios, it will cause double counting of YLDs due to maternal disorders in the total amount of YLDs accrued within the simulation (due to all modeled causes combined).
+    1. any increase in maternal disorders YLDs due to reductions in anemia YLDs through the COMO adjustment,
+    2. any increase in anemia YLDs due to reductions in maternal disorders YLDs through the COMO adjustment, 
+    3. any increase in background morbidity YLDs due to reductions in maternal disorders, nor
+    4. COMO adjustments in YLDs due to anemia and other causes from comorbidity with maternal disorders. 
+
+  All of these limitations are expected to cause us to overestimate the magnitude of YLDs averted in our simulation. However, this overestimate will be lower in magnitude than failing to include background morbidity in any capacity. Additionally, the alternative strategy of including YLDs due to maternal disorders in background morbidity would resolve limitations #4, partially address limitation #1 (although it would then be slightly biased in the opposite direction), limitations #2 and #3 would remain, and it would introduce the additional limitation of double-counting YLDs due to maternal disorders among averted deaths in our simulation, which would result in an underestimate of DALYs averted.
 
   For more information on how we are modeling YLDs due to maternal disorders, see the :ref:`maternal disorders cause model document <2021_cause_maternal_disorders>` and for more information regarding the rationale behind these strategies, see the :ref:`discussion on the nutrition optimization pregnancy concept model document <MDYLDNote>`
 
@@ -107,19 +112,11 @@ This table contains the data sources for all the measures.
    * - anemia_yld_rate
      - rei_id=192, source='como', decomp_step='step5', metric_id=3
      - Rate of YLDs due to anemia
-     - 
+     - Note, must select value for cause_id==294 (all causes)
    * - population_maternal_disorders_yld_rate
      - ylds_c366 - ylds_s182 - ylds_s183 - ylds_s184
      - Rate of YLDs due to maternal disorders (excluding disability due to anemia caused by maternal hemorrhage) among the general population
      - Anemia sequelae are excluded from this parameter because they are included in the YLDs due to the anemia impairment
-   * - pregnancy_maternal_disorders_yld_rate
-     - population_maternal_disorders_yld_rate / preg_rate
-     - Rate of YLDs due to maternal disorders (excluding disability due to anemia caused by maternal hemorrhage) among the pregnant/postpartum population
-     - 
-   * - preg_rate
-     - Incidence rate of pregnancy
-     - As defined in the data table on the :ref:`maternal disorders cause model document <2021_cause_maternal_disorders>`
-     - 
 
 Validation Criteria
 +++++++++++++++++++
