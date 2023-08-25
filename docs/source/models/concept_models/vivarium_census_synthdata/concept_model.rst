@@ -2639,6 +2639,12 @@ W2 and 1099 Forms
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
+  * - Employer ID (for PRL tracking)
+  * - Social Security Number
+  * - Wages (income from this job)
+  * - Employer Name
+  * - Employer Address
+  * - Employer ZIP Code
   * - First name
   * - Middle initial
   * - Last name
@@ -2649,12 +2655,6 @@ W2 and 1099 Forms
   * - Mailing Address City
   * - Mailing Address State
   * - Mailing Address ZIP Code
-  * - Social Security Number
-  * - Wages (income from this job)
-  * - Employer ID (for PRL tracking)
-  * - Employer Name
-  * - Employer Address
-  * - Employer ZIP Code
   * - Type of Tax Form (W2 or 1099)
   * - Tax year
 
@@ -2784,6 +2784,8 @@ in January 2024.
     -
   * - Last name
     -
+  * - Social Security Number (if present)
+    - ITIN if no SSN present
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2798,8 +2800,6 @@ in January 2024.
     -
   * - Mailing Address ZIP Code
     -
-  * - Social Security Number (if present)
-    - ITIN if no SSN present
   * - Tracked Dependent(s) (for noise functions ONLY)
     -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
@@ -2831,7 +2831,7 @@ in January 2024.
   * - Social Security Number (if present)
     - ITIN if no SSN present
   * - Tax year
-    - 
+    -
 
 .. note::
 
@@ -2989,16 +2989,16 @@ added later (not in the minimum viable model), if desired.
   :widths: 20
   :header-rows: 0
 
+  * - Event ID (unique integer identifier for each row in the SSA dataset, representing a ground-truth identifier for the unique event recorded in that row; unaffected by noise functions; to be used for comparing noised and unnoised data)
   * - Unique simulant ID (for PRL tracking)
+  * - Social Security Number
   * - First name
   * - Middle name
   * - Last name
   * - DOB (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
   * - Sex (binary; "Male" or "Female")
-  * - Social Security Number
   * - Type of event
   * - Date of event (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
-  * - Event ID (unique integer identifier for each row in the SSA dataset, representing a ground-truth identifier for the event recorded in that row; unaffected by noise functions; to be used for comparing noised and unnoised data)
 
 .. note::
   Unlike the other observers, there is no ground-truth unique household ID for PRL tracking in this observer.
