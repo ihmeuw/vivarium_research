@@ -748,7 +748,10 @@ Wave I
       * Underestimating diarrheal disease incidence rates - why? (note this was present in IV iron for Ethiopia but not other locations)
       * Didn't have additional pregnancy scenarios, so could not check LBWSG by intervention - will evaluate in model 1.1 instead.
   * - 1.1
-    - * Verify new antenatal intervention effects on gestational age
+    - The following will be best to perform in the interactive sim:
+      * Verify new antenatal intervention effects on gestational age
+      * Check intervention effects on birthweight as well as impact of maternal joint BMI/anemia exposure on BW (should be the same as IV iron)
+      * Note that LBWSG exposure has already been verified in the maternal output data
     - 
   * - 2.0
     - * Verify wasting risk exposure
