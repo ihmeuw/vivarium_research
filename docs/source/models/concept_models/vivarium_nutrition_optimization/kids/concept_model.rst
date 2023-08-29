@@ -581,6 +581,12 @@ Wave I
     - Baseline
     - 
     - This will implicitly include the model of wasting treatment (as implemented in the wasting paper; updates to this model to come later)
+  * - 2.0.1
+    - CGF exposure bugfixes
+    - All
+    - Baseline
+    - 
+    - 
   * - 2.1
     - Same as model 2.0, but more scenarios and less observers to act as emulator test runs
     - All
@@ -589,6 +595,12 @@ Wave I
     - 
   * - 3.0
     - Add malaria cause model
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 3.0.1
+    - Update to malaria cause model (specifics TBD)
     - Baseline
     - Baseline
     - 
@@ -646,7 +658,7 @@ Wave I
       6. Wasting state person time, stratified by antenatal intervention coverage
     - * Age group
       * Sex
-  * - 2.0
+  * - 2.0 and 2.0.1
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
       3. Cause state person time
@@ -663,7 +675,7 @@ Wave I
       4. Wasting transition counts, stratified by wasting treatment coverage
       5. Wasting state person time
     - None
-  * - 3.0
+  * - 3.0 and 3.0.1
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
       3. Cause state person time
@@ -743,13 +755,20 @@ Wave I
       * Verify baseline wasting treatment coverage
       * Verify that antenatal intervention effects remain for stunting
       * Verify that wasting intervention effects remain for wasting among <6 months, and taper off for >6 months
-    - 
+    - See `notebook with CGF exposure here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_2.0_risk_and_cause_checks.ipynb>`_ and a `notebook on wasting transitions here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_wasting_transitions.ipynb>`_. Note that a `V&V notebook that may be helpful for future wasting transition rate V&V can be found here (basically a record of what we expect each rate to be) <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/KI_rates_5.3.3.ipynb>`_.
+
+      * Wasting exposure is really wacky. Looks like incidence rates are really large, remission rates are zero.
+      * Stunting exposure model does not appear to be updated to GBD 2021
+      * Will wait to examine antenatal intervention effects on CGF exposures until we resolve major issues with CGF exposure models
+      * Wasting treatment coverage does not appear to be affecting wasting transition rates
+      * Baseline wasting treatment coverage looks good
+      * Note that cause model V&V looks bad here because CGF exposure is so off
   * - 2.1
     - Check intervention algorithm for all scenarios
     - 
   * - 3.0
     - * Verify that malaria YLDs and YLLs match expected values
-    - 
+    - `Malaria prevalence and CSMR are really low <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_risk_and_cause_checks.ipynb>`_
   * - 4.0
     - In simulation outputs:
 
@@ -795,10 +814,22 @@ Wave I
     - Timeline
   * - Diarrheal diseases prevalence spikes in the postneonatal age group
     - Unknown
-    - Engineers to review
+    - Engineers/RT to review
     - Low priority
   * - Diarrheal diseases incidence rate underestimated
     - Unknown
-    - Engineers to review and/or to revisit after we update CGF risk effects to CGF 2021
+    - Engineers/RT to review and/or to revisit after we update CGF risk effects to CGF 2021
     - Low priority
+  * - Wasting transition rates not as expected
+    - Unknown
+    - Engineers to investigate
+    - High priority, for model 2.0.1
+  * - Stunting risk exposure not updated to GBD 2021
+    - Still has 2019 age groups and values (from IV iron) in model 2.0 artifact
+    - Engineers to update to 2021
+    - High priority, for model 2.0.1
+  * - Measles prevalence and CSMR really low
+    - Unknown
+    - Engineers/researchers to review
+    - High priority, for model 3.0.1
 
