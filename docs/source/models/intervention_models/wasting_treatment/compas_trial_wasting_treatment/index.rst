@@ -67,8 +67,9 @@ An exhaustive list of changes to the modeling strategy from the previously imple
 - Updated value for :math:`\text{time to recovery}_\text{effectively treated SAM}`
 - Updated value for :math:`\text{time to recovery}_\text{effectively treated SAM}`
 - :math:`E_\text{MAM}` and :math:`E_\text{SAM}` parameters no longer vary by scenario
+- Compatibility with new :ref:`wasting exposure transition model <2021_risk_exposure_wasting_state_exposure>`
 
-Otherwise, the modeling strategy remains the same.
+Otherwise, the modeling strategy (and notably the intervention effects on wasting transition rate modeling strategy) remains the same.
 
 Baseline Coverage Data
 ++++++++++++++++++++++
@@ -88,6 +89,14 @@ See the data tables in the following sections for coverage and effectiveness val
 Vivarium Modeling Strategy
 --------------------------
 
+.. important::
+
+  Any updates to this model will influence the :ref:`wasting risk exposure transitions rates <2021_risk_exposure_wasting_state_exposure>` and require them to be recalculated. 
+
+  Note that the parameters/values in the "Annual recovery rate equations" and "Parameter Values" tables are used as inputs to the generation of the wastin grisk exposure transition rates and will not be utilized in the simulation model directly.
+
+  The parameters/values in the "Location-specific parameter values" table will be used directly in simulation implementation, but should use the draw-specific values linked in the table that were used in the generation of the wasting exposure transitions rate values.
+
 .. list-table:: Annual recovery rate equations
   :header-rows: 1
 
@@ -95,22 +104,14 @@ Vivarium Modeling Strategy
     - Definition
     - Value
     - Note
-  * - :math:`r_{SAM,ux}`
-    - Annual transition rate from SAM to MAM among those not effectively covered by SAM treatment
-    - :math:`\frac{k - r_{SAM,tx} * C_{SAM} * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C_{SAM} * E_{SAM}}`
-    - See constant values in table below and the :ref:`Ethiopian program CMAM page<intervention_wasting_treatment>` for details on equation derivation. Previously referred to as :math:`r2_{ux}`
   * - :math:`r_{SAM,tx}`
     - Annual transition rate from SAM to mild wasting among those effectively treated for SAM
     - :math:`365 / (\text{time to diagnosis} + \text{time to recovery}_\text{effectively treated SAM})`
-    - See constant values in table below. Previously referred to as :math:`t1_{SAM}`
-  * - :math:`r_{MAM,ux}`
-    - Annual transition rate from MAM to mild wasting among those not effectively covered by MAM treatment
-    - :math:`365 / \text{time to recovery}_\text{untreated MAM}`
-    - See constant values in table below. Previously referred to as :math:`r3_{ux}`
+    - See constant values in table below
   * - :math:`r_{MAM,tx}`
     - Annual transition rate from MAM to mild wasting among those effectively treated for MAM
     - :math:`365 / (\text{time to diagnosis} + \text{time to recovery}_\text{effectively treated MAM})`
-    - See constant values in table below. Previously referred to as :math:`t2_{MAM}`
+    - See constant values in table below
 
 .. list-table:: Parameter Values
   :header-rows: 1
@@ -130,26 +131,11 @@ Vivarium Modeling Strategy
     - point value
     - Update from prior version
     - Median value ~18 weeks from S3 fig, WAITING ON NUMERIC UPDATE; [Bailey-et-al-2020]_
-  * - :math:`\text{time to recovery}_\text{untreated MAM}`
-    - 147 
-    - point value
-    - No update
-    - Transition rate of 1/21 weeks derived from [James-et-al-2016]_ (Ethiopia) `in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/Calculation%20of%20James%20paper%20MAM%20to%20mild%20rate.ipynb>`_
   * - :math:`\text{time to recovery}_\text{effectively treated MAM}`
     - 63 days
     - point value
     - Update from prior version
     - Median value ~9 weeks from S5 fig, WAITING ON NUMERIC UPDATE; [Bailey-et-al-2020]_
-  * - :math:`k`
-    - 3.5 (95% CI: 3.1-3.9)
-    - lognormal
-    - See notes on uncertainty distribution and interpretation of this value below on the :ref:`Ethiopian program CMAM page<intervention_wasting_treatment>`
-    - [Isanaka-et-al-2021]_
-  * - :math:`mortality_{SAM|a,s,l,y}`
-    - Mortality rate among SAM wasting state
-    - N/A
-    - :ref:`Defined on the wasting documentation <2021_risk_exposure_wasting_state_exposure>`
-    - GBD
 
 .. list-table:: Location-specific parameter values
   :header-rows: 1
@@ -158,22 +144,27 @@ Vivarium Modeling Strategy
     - Location
     - Value
     - Source
+    - Note
   * - :math:`C_{SAM}` (baseline)
     - Ethiopia
     - 0.488 (95% CI:0.374-0.604), normal distribution of uncertainty
     - [Isanaka-et-al-2021]_
+    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
   * - :math:`C_{MAM}` (baseline)
     - Ethiopia
     - 0.15 (95% CI: 0.1, 0.2), normal distribution of uncertainty
     - Informed through discussion with CIFF/UNICEF that reported there is not reliable data on this parameter, but that this appeared to be a plausible range
+    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
   * - :math:`E_\text{SAM}`
     - Ethiopia
     - 0.70 (95% CI:0.64-0.76); normal distribution of uncertainty
     - [Bitew-et-al-2020]_
+    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
   * - :math:`E_\text{MAM}`
     - Ethiopia
     - :math:`E_\text{SAM}` value for Ethiopia
     - Assumption in lack of direct data
+    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
 
 Affected Outcomes
 +++++++++++++++++
@@ -195,34 +186,34 @@ The Vivarium modeling strategy above details how to solve for the transition rat
     - Treatment category
     - Value
     - Note
-  * - r3
+  * - rem_rate_mam
     - Untreated/uncovered by :math:`C_{MAM}`
     - :math:`\frac{r_{MAM,ux}}{r_{MAM,tx} * E_{MAM} + r_{MAM,ux} * (1 - E_{MAM})}`
     -
-  * - t1
+  * - tx_rem_rate_sam
     - Untreated/uncovered by :math:`C_{SAM}`
     - 0
     - :math:`\frac{0 * r_{SAM,tx}}{E_{SAM} * r_{SAM,tx}}`
-  * - r2
+  * - ux_rem_rate_sam
     - Untreated/uncovered by :math:`C_{SAM}`
     - :math:`1 / (1 - E_{SAM})`
     - :math:`\frac{r_{SAM,ux} * 1}{r_{SAM,ux} * (1 - E_{SAM})}`
-  * - r3
+  * - rem_rate_mam
     - Treated/covered by :math:`C_{MAM}`
     - 1
     -
-  * - t1
+  * - tx_rem_rate_sam
     - Treated/covered by :math:`C_{SAM}`
     - 1
     -
-  * - r2
+  * - ux_rem_rate_sam
     - Treated/covered by :math:`C_{SAM}`
     - 1
     -
 
 **How to apply treatment effects at the simulant level**
 
-For rate, :math:`r`, in [r3, r2, t1]:
+For rate, :math:`r`, in [rem_rate_mam, ux_rem_rate_sam, tx_rem_rate_sam]:
 
 .. math::
 
