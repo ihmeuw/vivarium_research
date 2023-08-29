@@ -771,7 +771,7 @@ Wave I
     - 
   * - 3.0
     - * Verify that malaria YLDs and YLLs match expected values
-    - `Malaria prevalence and CSMR are really low <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_risk_and_cause_checks.ipynb>`_
+    - `Malaria prevalence and CSMR are really low <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_risk_and_cause_checks.ipynb>`_. Remission looks as expected, so likely an incompatibility between prevalence/incidence/remission from GBD. 
   * - 4.0
     - In simulation outputs:
 
@@ -831,8 +831,8 @@ Wave I
     - Still has 2019 age groups and values (from IV iron) in model 2.0 artifact
     - Engineers to update to 2021
     - High priority, for model 2.0.1
-  * - Measles prevalence and CSMR really low
-    - Unknown
-    - Engineers/researchers to review
+  * - Malaria prevalence and CSMR really low
+    - Suspected incompatibility between GBD prevalence/incidence/remission
+    - RT to update malaria cause model doc so that prevalence = incidence * duration rather than GBD prevalence (like we've done for LRI and diarrheal diseases cause models), engineers to implement
     - High priority, for model 3.0.1
 
