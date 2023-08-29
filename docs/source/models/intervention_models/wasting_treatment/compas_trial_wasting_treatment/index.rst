@@ -331,13 +331,6 @@ References
 
 .. _`Isanaka et al. 2021`: https://gh.bmj.com/content/6/3/e004342
 
-.. [James-et-al-2016]
-
-  View `James 2016`_
-
-    Children with Moderate Acute Malnutrition with No Access to Supplementary Feeding Programmes Experience High Rates of Deterioration and No Improvement
-
-.. _`James 2016`: https://pubmed.ncbi.nlm.nih.gov/PMC4839581
 
 .. [Laillou-et-al-2022-combined]
 
