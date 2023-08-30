@@ -119,6 +119,10 @@ future, we might consider a time based duration that would more accurately repli
 the 14-28 day duration from GBD. We do not expect this limitation to have a 
 significant impact on our results. 
 
+Because DisMod estimated an unrealistically high birth prevalence, the modelers 
+set birth prevalence to zero. Consequently, the birth prevalence, incidence, 
+and prevalence available from get_outputs are incongruous with one another.
+
 .. todo::
 
    Continue to add to this section as needed 
@@ -150,7 +154,7 @@ Data Description
 	  - Notes
 	* - S
 	  - prevalence
-	  - 1-prevalence_I
+	  - 1-prevalence_calculated
 	  - 
 	* - S
 	  - birth prevalence
@@ -165,8 +169,8 @@ Data Description
 	  - 0
 	  -
 	* - I
-	  - prevalence
-	  - **For early neonatal age group:** (birth_prevalence_I + prevalence_345)/2. **For all other age groups:** prevalence_345
+	  - prevalence_calculated 
+	  - **For early neonatal age group:** (birth_prevalence_I + (incidence_rate_c345 * duration_c345))/2. **For all other age groups:** incidence_rate_c345 * duration_c345 
 	  - 
 	* - I
 	  - birth prevalence
@@ -174,7 +178,7 @@ Data Description
 	  - 
 	* - I
 	  - excess mortality rate
-	  - :math:`\frac{\text{deaths_c345}}{\text{population} \,\times\, \text{prevalence_345}}`
+	  - :math:`\frac{\text{deaths_c345}}{\text{population} \,\times\, \text{prevalence_calculated}}`
 	  - 
 	* - I
 	  - disability weight
@@ -184,6 +188,18 @@ Data Description
 	  - cause-specific mortality rate
 	  - :math:`\frac{\text{deaths_c345}}{\text{population}}`
 	  -
+
+We calculate prevalence using the equation prevalence = incidence * duration. 
+(See assumptions and limitations for the need to replace GBD's prevalence).
+This is appropriate because malaria has a short and relatively uniform duration of 
+14-28 days [GBD-2019-Capstone-Appendix-Malaria-2021]_. This assumption is valid under 
+steady state conditions. However, the prevalence of malaria is not in steady state 
+for the early neonatal age group given a birth prevalence of 0 and a short duration 
+of the age group (prevalence will increase as the population ages within the age group). 
+Therefore, we calculate the prevalence in the early neonatal age group as an average 
+of the birth prevalence and the approximated prevalence under a steady state transition 
+(incidence * duration). This is approach is discussed `in this citation for reference <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3465772/>`_.
+
 
 .. list-table:: Transition Data
 	:widths: 10 10 10 10 10
@@ -197,7 +213,7 @@ Data Description
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_I}}`
+	  - :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_calculated}}`
 	  - Equivalent to "load standard data" Vivarium public health function for incidence rates ("susceptible-population" incidence rate). Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
 	* - r
 	  - I
@@ -205,7 +221,7 @@ Data Description
 	  - :math:`\frac{1}{\text{duration_c345}}`
 	  - 
 
-	  
+
 .. list-table:: Data Sources and Definitions
 	:widths: 1 3 10 10
 	:header-rows: 1
@@ -214,9 +230,9 @@ Data Description
 	  - Source
 	  - Description
 	  - Notes
-	* - prevalence_c345
-	  - como
-	  - Prevalence of malaria
+	* - prevalence_calculated
+	  - Calculated from incidence (como) and duration (literature/gbd)
+	  - Duration-based calculation of malaria prevalence
 	  -
 	* - deaths_c345
 	  - codcorrect
