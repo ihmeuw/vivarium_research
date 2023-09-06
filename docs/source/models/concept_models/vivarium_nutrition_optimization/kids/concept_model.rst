@@ -767,6 +767,19 @@ Wave I
       * Baseline wasting treatment coverage looks good
       * Note that cause model V&V looks bad here because CGF exposure is so off
   * - 2.1
+    - * Verify wasting risk exposure
+      * Verify baseline wasting treatment coverage
+      * Verify that antenatal intervention effects remain for stunting
+      * Verify that wasting intervention effects remain for wasting among <6 months, and taper off for >6 months
+    - See `notebook with CGF exposure and cause data here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_2.0_risk_and_cause_checks.ipynb>`_ and a `notebook on wasting transitions here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_wasting_transitions.ipynb>`_. Note that a `V&V notebook that may be helpful for future wasting transition rate V&V can be found here (basically a record of what we expect each rate to be) <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/KI_rates_5.3.3.ipynb>`_.
+
+      * Wasting exposure is looking correct 
+      * Stunting exposure model is looking correct. Noting that early and late neonatal have 100% of simulants in cat4 
+      * Have not assessed antenatal intervention effects on CGF exposures 
+      * Have not reassessed wasting treatment coverage's effect on wasting transition rates
+      * Cause models look very strange. There are no recorded male deaths except for "other causes". Also, incidence is low but prevalence, CSMR and EMR are all correct. This is true for all causes. Engineering is looking into this. 
+      * I attempted to see the cause models in an `interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_2.0_interactive.ipynb>`_ but it failed on early time steps and incidence rates were listed as infinite or NaN. Engineering might be able to help debug this with more time. 
+  * - 2.2
     - Check intervention algorithm for all scenarios
     - 
   * - 3.0
