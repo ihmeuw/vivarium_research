@@ -777,14 +777,13 @@ Wave I
       * Stunting exposure model is looking correct. Noting that early and late neonatal have 100% of simulants in cat4 
       * Have not assessed antenatal intervention effects on CGF exposures 
       * Have not reassessed wasting treatment coverage's effect on wasting transition rates
-      * Cause models look very strange. There are no recorded male deaths except for "other causes". Also, incidence is low but prevalence, CSMR and EMR are all correct. This is true for all causes. Engineering is looking into this. 
-      * I attempted to see the cause models in an `interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_2.0_interactive.ipynb>`_ but it failed on early time steps and incidence rates were listed as infinite or NaN. Engineering might be able to help debug this with more time. 
+      * Cause models are looking correct. There are the same issues with diarrheal diseases prevalence spiking in the post neonatal age group which was noted in Model 1. 
   * - 2.2
     - Check intervention algorithm for all scenarios
     - 
   * - 3.0
     - * Verify that malaria YLDs and YLLs match expected values
-    - `Malaria prevalence and CSMR are really low <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_risk_and_cause_checks.ipynb>`_. Remission looks as expected, so likely an incompatibility between prevalence/incidence/remission from GBD. 
+    - `Malaria is now looking pretty good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_risk_and_cause_checks.ipynb>`_. The incidence and prevalence are a bit low but within the uncertainty. 
   * - 4.0
     - In simulation outputs:
 
@@ -793,7 +792,10 @@ Wave I
       In interactive sim:
 
       * Verify conditional risk exposures
-    -  
+    - `There are no simulants in cat3 underweight exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_4.0_risk_and_cause_checks.ipynb>`_. It appears that in generating the lookup.csv file some data was cut off. The file has been regenerated and engineering will rerun with the new file. 
+      
+      * Cause models have not been assessed since the underweight exposure is being updated. 
+      * The interactive sim has not been assessed since underwight exposure is being updated. 
   * - 5.0
     - In simulation outputs:
       
