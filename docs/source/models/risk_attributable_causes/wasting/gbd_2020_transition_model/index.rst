@@ -1224,8 +1224,8 @@ Note the RRs should be pulled as follows:
    - :math:`-log(1 - i2) * 365`
    - Incidence rate (counts/person-year) from mild wasting to MAM
  * - inc_rate_mild
-   - CAT 2
-   - CAT 1
+   - CAT 4
+   - CAT 3
    - :math:`-log(1 - i3) * 365`
    - Incidence rate (counts/person-year) from TMREL to mild wasting
 
