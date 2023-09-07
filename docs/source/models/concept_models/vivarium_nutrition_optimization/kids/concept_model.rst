@@ -172,7 +172,7 @@ in the simulation will be informed using data specific to the post neonatal age 
     - 
   * - Child wasting exposure
     - :ref:`2020 docs<2020_risk_exposure_wasting_state_exposure>`, implemented in wasting paper
-    - :ref:`Updated docs for children 6-59 months <2021_risk_exposure_wasting_state_exposure>`, use :ref:`static wasting exposure <2020_risk_exposure_static_wasting>` for children 0-6 months of age (as implemented in IV iron)
+    - :ref:`Updated docs for children 6-59 months <2021_risk_exposure_wasting_state_exposure>` (use transitions rate values linked in .csv file) use :ref:`static wasting exposure <2020_risk_exposure_static_wasting>` for children 0-6 months of age (as implemented in IV iron)
     - Include transitions for 0-6 months
     - (Does not require separate 2021 update)
   * - Child stunting exposure
@@ -241,12 +241,12 @@ in the simulation will be informed using data specific to the post neonatal age 
     - Note
   * - SAM tx
     - :ref:`Docs here <intervention_wasting_treatment>`, implemented in wasting paper
-    - :ref:`Updated modeling strategy (combined protocol data) found here <intervention_wasting_tx_combined_protocol>`
+    - :ref:`Updated modeling strategy (combined protocol data) found here <intervention_wasting_tx_combined_protocol>`. Use draw-level E_SAM and C_SAM parameters linked on this page.
     - 
     - 
   * - MAM tx
     - :ref:`Docs here <intervention_wasting_treatment>`, implemented in wasting paper
-    - :ref:`Updated modeling strategy (combined protocol data) found here <intervention_wasting_tx_combined_protocol>`
+    - :ref:`Updated modeling strategy (combined protocol data) found here <intervention_wasting_tx_combined_protocol>`. Use draw-level E_MAM and C_MAM parameters linked on this page.
     - 
     - 
   * - SQLNS
@@ -581,8 +581,26 @@ Wave I
     - Baseline
     - 
     - This will implicitly include the model of wasting treatment (as implemented in the wasting paper; updates to this model to come later)
+  * - 2.0.1
+    - CGF exposure bugfixes
+    - All
+    - Baseline
+    - 
+    - 
+  * - 2.1
+    - Same as model 2.0, but more scenarios and less observers to act as emulator test runs
+    - All
+    - Baseline, 0-8
+    - 
+    - 
   * - 3.0
     - Add malaria cause model
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 3.0.1
+    - Update to malaria cause model (specifics TBD)
     - Baseline
     - Baseline
     - 
@@ -600,7 +618,7 @@ Wave I
     - 
     - 
   * - 6.0
-    - Wasting risk exposure model update
+    - Wasting risk exposure model update (update wasting transition rates and C_MAM,C_SAM,E_MAM,E_SAM parameter values found in .csv files linked in documentation)
     - Baseline
     - Baseline
     - 
@@ -620,7 +638,7 @@ Wave I
   * - 8.1
     - Production runs
     - All
-    - All
+    - Baseline, 0-8
     - 
     - 
 
@@ -640,17 +658,24 @@ Wave I
       6. Wasting state person time, stratified by antenatal intervention coverage
     - * Age group
       * Sex
-  * - 2.0
+  * - 2.0 and 2.0.1
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
       3. Cause state person time
       4. Cause state transition counts
       5. Stunting state person time, stratified by antenatal intervention coverage
       6. Wasting state person time, stratified by antenatal intervention coverage
-      7. Wasting transition counts, stratified by wasting treatement coverage
+      7. Wasting transition counts, stratified by wasting treatment coverage
     - * Age group
       * Sex
-  * - 3.0
+  * - 2.1
+    - 1. Deaths and YLLs (does not need to be not cause-specific)
+      2. YLDs (does not need to be cause-specific)
+      3. Stunting state person time, stratified by SQ-LNS coverage
+      4. Wasting transition counts, stratified by wasting treatment coverage
+      5. Wasting state person time
+    - None
+  * - 3.0 and 3.0.1
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
       3. Cause state person time
@@ -718,19 +743,47 @@ Wave I
     - * Verify to GBD cause YLDs and YLLs and risk exposures
       * Verify antenatal intervention effects on birthweight, wasting, and stunting exposures
       * Verify maternal BMI/anemia exposure effects on birthweight
-    - 
+    - `Model 1.0 V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_1.0_risk_and_cause_checks.ipynb>`_
+      * Diarrheal diseases prevalence spikes at the post neonatal age group - why?
+      * Underestimating diarrheal disease incidence rates - why? (note this was present in IV iron for Ethiopia but not other locations)
+      * Didn't have additional pregnancy scenarios, so could not check LBWSG by intervention - will evaluate in model 1.1 instead.
   * - 1.1
-    - * Verify new antenatal intervention effects on gestational age
+    - The following will be best to perform in the interactive sim:
+      * Verify new antenatal intervention effects on gestational age
+      * Check intervention effects on birthweight as well as impact of maternal joint BMI/anemia exposure on BW (should be the same as IV iron)
+      * Note that LBWSG exposure has already been verified in the maternal output data
     - 
   * - 2.0
     - * Verify wasting risk exposure
       * Verify baseline wasting treatment coverage
       * Verify that antenatal intervention effects remain for stunting
       * Verify that wasting intervention effects remain for wasting among <6 months, and taper off for >6 months
+    - See `notebook with CGF exposure here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_2.0_risk_and_cause_checks.ipynb>`_ and a `notebook on wasting transitions here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_wasting_transitions.ipynb>`_. Note that a `V&V notebook that may be helpful for future wasting transition rate V&V can be found here (basically a record of what we expect each rate to be) <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/KI_rates_5.3.3.ipynb>`_.
+
+      * Wasting exposure is really wacky. Looks like incidence rates are really large, remission rates are zero.
+      * Stunting exposure model does not appear to be updated to GBD 2021
+      * Will wait to examine antenatal intervention effects on CGF exposures until we resolve major issues with CGF exposure models
+      * Wasting treatment coverage does not appear to be affecting wasting transition rates
+      * Baseline wasting treatment coverage looks good
+      * Note that cause model V&V looks bad here because CGF exposure is so off
+  * - 2.1
+    - * Verify wasting risk exposure
+      * Verify baseline wasting treatment coverage
+      * Verify that antenatal intervention effects remain for stunting
+      * Verify that wasting intervention effects remain for wasting among <6 months, and taper off for >6 months
+    - See `notebook with CGF exposure and cause data here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_2.0_risk_and_cause_checks.ipynb>`_ and a `notebook on wasting transitions here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_wasting_transitions.ipynb>`_. Note that a `V&V notebook that may be helpful for future wasting transition rate V&V can be found here (basically a record of what we expect each rate to be) <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/KI_rates_5.3.3.ipynb>`_.
+
+      * Wasting exposure is looking correct 
+      * Stunting exposure model is looking correct. Noting that early and late neonatal have 100% of simulants in cat4 
+      * Have not assessed antenatal intervention effects on CGF exposures 
+      * Have not reassessed wasting treatment coverage's effect on wasting transition rates
+      * Cause models are looking correct. There are the same issues with diarrheal diseases prevalence spiking in the post neonatal age group which was noted in Model 1. 
+  * - 2.2
+    - Check intervention algorithm for all scenarios
     - 
   * - 3.0
     - * Verify that malaria YLDs and YLLs match expected values
-    - 
+    - `Malaria is now looking pretty good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_risk_and_cause_checks.ipynb>`_. The incidence and prevalence are a bit low but within the uncertainty. 
   * - 4.0
     - In simulation outputs:
 
@@ -739,7 +792,10 @@ Wave I
       In interactive sim:
 
       * Verify conditional risk exposures
-    -  
+    - `There are no simulants in cat3 underweight exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_4.0_risk_and_cause_checks.ipynb>`_. It appears that in generating the lookup.csv file some data was cut off. The file has been regenerated and engineering will rerun with the new file. 
+      
+      * Cause models have not been assessed since the underweight exposure is being updated. 
+      * The interactive sim has not been assessed since underwight exposure is being updated. 
   * - 5.0
     - In simulation outputs:
       
@@ -774,8 +830,24 @@ Wave I
     - Explanation
     - Action plan
     - Timeline
-  * - 
-    - 
-    - 
-    - 
+  * - Diarrheal diseases prevalence spikes in the postneonatal age group
+    - Unknown
+    - Engineers/RT to review
+    - Low priority
+  * - Diarrheal diseases incidence rate underestimated
+    - Unknown
+    - Engineers/RT to review and/or to revisit after we update CGF risk effects to CGF 2021
+    - Low priority
+  * - Wasting transition rates not as expected
+    - Unknown
+    - Engineers to investigate
+    - High priority, for model 2.0.1
+  * - Stunting risk exposure not updated to GBD 2021
+    - Still has 2019 age groups and values (from IV iron) in model 2.0 artifact
+    - Engineers to update to 2021
+    - High priority, for model 2.0.1
+  * - Malaria prevalence and CSMR really low
+    - Suspected incompatibility between GBD prevalence/incidence/remission
+    - RT to update malaria cause model doc so that prevalence = incidence * duration rather than GBD prevalence (like we've done for LRI and diarrheal diseases cause models), engineers to implement
+    - High priority, for model 3.0.1
 
