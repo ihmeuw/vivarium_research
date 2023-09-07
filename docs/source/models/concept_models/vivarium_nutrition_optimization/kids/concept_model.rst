@@ -600,7 +600,19 @@ Wave I
     - 
     - 
   * - 3.0.1
-    - Update to malaria cause model (specifics TBD)
+    - `Update malaria prevalence to be a function of incidence, in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1316>`_
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 3.0.2
+    - 3.0.1bugfix (update EMR as a function of updated prevalence from 3.0.1)
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 3.0.3
+    - `Remove neonatal age groups from malaria cause model, in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1319>`_
     - Baseline
     - Baseline
     - 
@@ -675,7 +687,7 @@ Wave I
       4. Wasting transition counts, stratified by wasting treatment coverage
       5. Wasting state person time
     - None
-  * - 3.0 and 3.0.1
+  * - 3.0, 3.0.1, 3.0.2, and 3.0.3
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
       3. Cause state person time
@@ -783,7 +795,16 @@ Wave I
     - 
   * - 3.0
     - * Verify that malaria YLDs and YLLs match expected values
-    - `Malaria is now looking pretty good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_risk_and_cause_checks.ipynb>`_. The incidence and prevalence are a bit low but within the uncertainty. 
+    - Initially, prevalence and CSMR were dramatically underestimated
+  * - 3.0.1
+    - Verify malaria prevalence and CSMR match expected values
+    - Prevalence matches artifact value, but still underestimating CSMR because the artifact value for EMR was not updated to new prevalence value
+  * - 3.0.2
+    - Verify malaria prevalence and CSMR match expected values
+    - `Malaria is now looking pretty good, except for the late neonatal age group (expected long time step issue) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_risk_and_cause_checks.ipynb>`_. The incidence and prevalence are a bit low but within the uncertainty. 
+  * - 3.0.3
+    - Verify exclusion of neonatal age groups from malaria cause model and that ACMR is still validating for neonatal age groups
+    - TBD
   * - 4.0
     - In simulation outputs:
 
