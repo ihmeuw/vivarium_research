@@ -831,7 +831,9 @@ Wave I
     - * Verify updated wasting recovery parameters
       * Verify CGF risk exposures
       * Verify cause-specific parameters
-    -
+    - * `Wasting transitions rates match expected values <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_6.0_wasting_transitions.ipynb>`_ (implemented correctly, yay)
+      * `Wasting risk exposure still looks good at a population level <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_6.0_risk_and_cause_checks.ipynb>`_ (calculated correctly, yay)
+      * Wasting treatment does not appear to be affecting MAM and SAM recovery rates (needs to be updated)
   * - 7.0 
     - Between scenario 0 and 3:
       * Verify SQ-LNS utilization ends at 6 months
