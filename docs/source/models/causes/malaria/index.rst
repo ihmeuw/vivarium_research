@@ -158,8 +158,8 @@ Data Description
 	  - 
 	* - S
 	  - birth prevalence
-	  - 1 
-	  - Not applicable, age start = 1 month
+	  - 1 - prevalence_calculated for the post neonatal/1-5 month age group  
+	  -  
 	* - S
 	  - emr
 	  - 0
@@ -174,8 +174,8 @@ Data Description
 	  - 
 	* - I
 	  - birth prevalence
-	  - 0 
-	  - Not applicable, age start = 1 month
+	  - prevalence_calculated for the post neonatal/1-5 month age group 
+	  - 
 	* - I
 	  - excess mortality rate
 	  - :math:`\frac{\text{deaths_c345}}{\text{population} \,\times\, \text{prevalence_calculated}}`
@@ -186,8 +186,26 @@ Data Description
 	  - Malaria sequelae are: 121, 122, 123
 	* - All
 	  - cause-specific mortality rate
-	  - :math:`\frac{\text{deaths_c345}}{\text{population}}`
-	  -
+	  - 0 for early neonatal (ID 2) and late neonatal (ID 3) age groups, :math:`\frac{\text{deaths_c345}}{\text{population}}` for all other age groups
+	  - See note below for justification
+
+.. note:: 
+
+	**A note on the the neonatal age groups**
+
+	This Vivarium modeling strategy is an indirect attempt to sets the cause model age start to the 1 month of age (post neonatal age group for GBD 2019 and 1-5 month age group for GBD 2021) despite the GBD age start parameter being the early neonatal age group (0 to 6 days). The exclusion of the the early and late neonatal age groups from the cause model as a strategy that allows us to increase the timestep of our cause models.
+
+	However, setting the age start parameter to 1 month in vivarium is not especially straight forward, so we took a compromise strategy of:
+
+		- Setting birth prevalence equal to the prevalence among the 1 month old age group, and
+		- Setting CSMR to zero for the neonatal age groups
+
+	Note that this compromise approach is limited in that there will be some amount of YLDs due to malaria accrued during the neonatal age groups.
+
+	The rationale behind excluding the neonatal age groups from this cause model is related to the *Relationship between timesteps and modeled rates in Vivarium* as described on the :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>`. Essentially, high EMR in the neonatal age groups may require a smaller time step to meet validation criteria, which we did not meet for the neonatal age groups in initial versions of the model.
+
+	Notably, there are no risk factors that affect malaria during the neonatal age groups in the nutrition optimization model, so not modeling malaria among these age groups will not affect our model. However, mortality due to malaria should be included in mortality due to other causes for the early and late neonatal age groups (which will be achieved with CSMR=0 in these age groups). 
+
 
 We calculate prevalence using the equation prevalence = incidence * duration. 
 (See assumptions and limitations for the need to replace GBD's prevalence).
@@ -274,28 +292,17 @@ steady state conditions.
 	  - False
 	  -
 	* - YLL age group start
-	  - 28 days (post neonatal/1-5 months)
-	  - age_group_id = 4/388; [0-7 days)
+	  - early neonatal, ID = 2 (0-6 days)
+	  - 
 	* - YLL age group end
 	  - 95 plus
 	  - age_group_id = 235; 95 years +
 	* - YLD age group start
-	  - Early neonatal
-	  - age_group_id = 2; [0-7 days)
+	  - early neonatal, ID = 2 (0-6 days)
+	  - 
 	* - YLD age group end
 	  - 95 plus
 	  - age_group_id = 235; 95 years +
-
-
-.. note:: 
-
-	**A note on the age start parameter:**
-
-		This Vivarium modeling strategy sets the cause model age start to the 1 month of age (post neonatal age group for GBD 2019 and 1-5 month age group for GBD 2021) despite the GBD age start parameter being the early neonatal age group (0 to 6 days). We exclude the early and late neonatal age groups from the cause model as a strategy that allows us to increase the timestep of our cause models.
-
-		The rationale behind this modeling decision is related to the *Relationship between timesteps and modeled rates in Vivarium* as described on the :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>`. Essentially, high EMR in the neonatal age groups may require a smaller time step to meet validation criteria, which we did not meet for the neonatal age groups in initial versions of the model.
-
-		Notably, there are no risk factors that affect malaria during the neonatal age groups in the nutrition optimization model, so not modeling malaria among these age groups will not affect our model. However, mortality due to malaria should be included in mortality due to other causes for the early and late neonatal age groups. 
 
 Validation Criteria
 -------------------
