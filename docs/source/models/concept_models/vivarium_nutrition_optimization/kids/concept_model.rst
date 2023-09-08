@@ -752,7 +752,7 @@ Wave I
       * Verify new antenatal intervention effects on gestational age
       * Check intervention effects on birthweight as well as impact of maternal joint BMI/anemia exposure on BW (should be the same as IV iron)
       * Note that LBWSG exposure has already been verified in the maternal output data
-    - 
+    - The `interactive sim model 1 notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_1.0_interactive.ipynb>`_ shows that antenatal intervention effects on birth weight and gestational age seem to be working but have a lot of variation. This is to be expected though given the wide confidence intervals in effect size. 
   * - 2.0
     - * Verify wasting risk exposure
       * Verify baseline wasting treatment coverage
@@ -776,7 +776,7 @@ Wave I
       * Wasting exposure is looking correct 
       * Stunting exposure model is looking correct. Noting that early and late neonatal have 100% of simulants in cat4 
       * Have not assessed antenatal intervention effects on CGF exposures 
-      * Have not reassessed wasting treatment coverage's effect on wasting transition rates
+      * Wasting treatment coverage's effect on wasting transition rates appear to be working 
       * Cause models are looking correct. There are the same issues with diarrheal diseases prevalence spiking in the post neonatal age group which was noted in Model 1. 
   * - 2.2
     - Check intervention algorithm for all scenarios
@@ -792,9 +792,21 @@ Wave I
       In interactive sim:
 
       * Verify conditional risk exposures
-    - `There are no simulants in cat3 underweight exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_4.0_risk_and_cause_checks.ipynb>`_. It appears that in generating the lookup.csv file some data was cut off. The file has been regenerated and engineering will rerun with the new file. 
+    - `There are no simulants in cat3 underweight exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_4.0.1_risk_and_cause_checks.ipynb>`_. It appears that in generating the lookup.csv file some data was cut off. The file has been regenerated and engineering will rerun with the new file. 
       
       * Cause models have not been assessed since the underweight exposure is being updated. 
+      * The interactive sim has not been assessed since underwight exposure is being updated. 
+  * - 4.0.1
+    - In simulation outputs:
+
+      * Verify risk exposure for all CGF measures
+
+      In interactive sim:
+
+      * Verify conditional risk exposures
+    - `cat2 and cat3 underweight exposures appear to be switched <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_4.0_risk_and_cause_checks.ipynb>`_. The lookup.csv file error was found and is being recreated. We will rerun with the updated file. 
+
+      * Malaria CSMR and prevalence look low but other cause models appear to be working. Waiting for the Model 3 updates to malaria before continuing. 
       * The interactive sim has not been assessed since underwight exposure is being updated. 
   * - 5.0
     - In simulation outputs:
