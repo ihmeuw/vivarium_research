@@ -159,7 +159,7 @@ Data Description
 	* - S
 	  - birth prevalence
 	  - 1 
-	  - 
+	  - Not applicable, age start = 1 month
 	* - S
 	  - emr
 	  - 0
@@ -170,12 +170,12 @@ Data Description
 	  -
 	* - I
 	  - prevalence_calculated 
-	  - **For early neonatal age group:** (birth_prevalence_I + (incidence_rate_c345 * duration_c345))/2. **For all other age groups:** incidence_rate_c345 * duration_c345 
+	  - incidence_rate_c345 * duration_c345 
 	  - 
 	* - I
 	  - birth prevalence
 	  - 0 
-	  - 
+	  - Not applicable, age start = 1 month
 	* - I
 	  - excess mortality rate
 	  - :math:`\frac{\text{deaths_c345}}{\text{population} \,\times\, \text{prevalence_calculated}}`
@@ -193,13 +193,7 @@ We calculate prevalence using the equation prevalence = incidence * duration.
 (See assumptions and limitations for the need to replace GBD's prevalence).
 This is appropriate because malaria has a short and relatively uniform duration of 
 14-28 days [GBD-2019-Capstone-Appendix-Malaria-2021]_. This assumption is valid under 
-steady state conditions. However, the prevalence of malaria is not in steady state 
-for the early neonatal age group given a birth prevalence of 0 and a short duration 
-of the age group (prevalence will increase as the population ages within the age group). 
-Therefore, we calculate the prevalence in the early neonatal age group as an average 
-of the birth prevalence and the approximated prevalence under a steady state transition 
-(incidence * duration). This is approach is discussed `in this citation for reference <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3465772/>`_.
-
+steady state conditions.
 
 .. list-table:: Transition Data
 	:widths: 10 10 10 10 10
@@ -280,8 +274,8 @@ of the birth prevalence and the approximated prevalence under a steady state tra
 	  - False
 	  -
 	* - YLL age group start
-	  - Early neonatal
-	  - age_group_id = 2; [0-7 days)
+	  - 28 days (post neonatal/1-5 months)
+	  - age_group_id = 4/388; [0-7 days)
 	* - YLL age group end
 	  - 95 plus
 	  - age_group_id = 235; 95 years +
@@ -292,6 +286,16 @@ of the birth prevalence and the approximated prevalence under a steady state tra
 	  - 95 plus
 	  - age_group_id = 235; 95 years +
 
+
+.. note:: 
+
+	**A note on the age start parameter:**
+
+		This Vivarium modeling strategy sets the cause model age start to the 1 month of age (post neonatal age group for GBD 2019 and 1-5 month age group for GBD 2021) despite the GBD age start parameter being the early neonatal age group (0 to 6 days). We exclude the early and late neonatal age groups from the cause model as a strategy that allows us to increase the timestep of our cause models.
+
+		The rationale behind this modeling decision is related to the *Relationship between timesteps and modeled rates in Vivarium* as described on the :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>`. Essentially, high EMR in the neonatal age groups may require a smaller time step to meet validation criteria, which we did not meet for the neonatal age groups in initial versions of the model.
+
+		Notably, there are no risk factors that affect malaria during the neonatal age groups in the nutrition optimization model, so not modeling malaria among these age groups will not affect our model. However, mortality due to malaria should be included in mortality due to other causes for the early and late neonatal age groups. 
 
 Validation Criteria
 -------------------
