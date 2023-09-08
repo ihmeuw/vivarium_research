@@ -826,7 +826,10 @@ Wave I
       In interactive sim:
 
       * Verify wasting, stunting, and underweight risk effects for incidence and mortality
-    - 
+    -   1. Appears that there are only stunting effects on incidence for and no effects of any risks on excess mortality in the 1-5 month age group (from the interactive sim. Also no difference in incidence or EMR stratified by wasting in count data)
+          1a. Cause data is underestimated for the 1-5 age group in model 5.0bugix. Perhaps PAFs are being applied but not RRs?
+        2. Appears that underweight does not affect incidence rates in the `model 5.0bugfix interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.0bugfix_intsim.ipynb>`_
+        3. Unable to verify in the interactive sim that there are any effects on excess mortality rates, although it appears that there are in the `model 5.0bugfix count data results <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.0bugfix_rrs.ipynb>`_
   * - 6.0
     - * Verify updated wasting recovery parameters
       * Verify CGF risk exposures
