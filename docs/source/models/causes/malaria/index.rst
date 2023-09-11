@@ -158,8 +158,8 @@ Data Description
 	  - 
 	* - S
 	  - birth prevalence
-	  - 1 
-	  - 
+	  - 1 - prevalence_calculated for the post neonatal/1-5 month age group  
+	  -  
 	* - S
 	  - emr
 	  - 0
@@ -170,11 +170,11 @@ Data Description
 	  -
 	* - I
 	  - prevalence_calculated 
-	  - **For early neonatal age group:** (birth_prevalence_I + (incidence_rate_c345 * duration_c345))/2. **For all other age groups:** incidence_rate_c345 * duration_c345 
+	  - incidence_rate_c345 * duration_c345 
 	  - 
 	* - I
 	  - birth prevalence
-	  - 0 
+	  - prevalence_calculated for the post neonatal/1-5 month age group 
 	  - 
 	* - I
 	  - excess mortality rate
@@ -186,20 +186,32 @@ Data Description
 	  - Malaria sequelae are: 121, 122, 123
 	* - All
 	  - cause-specific mortality rate
-	  - :math:`\frac{\text{deaths_c345}}{\text{population}}`
-	  -
+	  - 0 for early neonatal (ID 2) and late neonatal (ID 3) age groups, :math:`\frac{\text{deaths_c345}}{\text{population}}` for all other age groups
+	  - See note below for justification
+
+.. note:: 
+
+	**A note on the the neonatal age groups**
+
+	This Vivarium modeling strategy is an indirect attempt to sets the cause model age start to the 1 month of age (post neonatal age group for GBD 2019 and 1-5 month age group for GBD 2021) despite the GBD age start parameter being the early neonatal age group (0 to 6 days). The exclusion of the the early and late neonatal age groups from the cause model as a strategy that allows us to increase the timestep of our cause models.
+
+	However, setting the age start parameter to 1 month in vivarium is not especially straight forward, so we took a compromise strategy of:
+
+		- Setting birth prevalence equal to the prevalence among the 1 month old age group, and
+		- Setting CSMR to zero for the neonatal age groups
+
+	Note that this compromise approach is limited in that there will be some amount of YLDs due to malaria accrued during the neonatal age groups.
+
+	The rationale behind excluding the neonatal age groups from this cause model is related to the *Relationship between timesteps and modeled rates in Vivarium* as described on the :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>`. Essentially, high EMR in the neonatal age groups may require a smaller time step to meet validation criteria, which we did not meet for the neonatal age groups in initial versions of the model.
+
+	Notably, there are no risk factors that affect malaria during the neonatal age groups in the nutrition optimization model, so not modeling malaria among these age groups will not affect our model. However, mortality due to malaria should be included in mortality due to other causes for the early and late neonatal age groups (which will be achieved with CSMR=0 in these age groups). 
+
 
 We calculate prevalence using the equation prevalence = incidence * duration. 
 (See assumptions and limitations for the need to replace GBD's prevalence).
 This is appropriate because malaria has a short and relatively uniform duration of 
 14-28 days [GBD-2019-Capstone-Appendix-Malaria-2021]_. This assumption is valid under 
-steady state conditions. However, the prevalence of malaria is not in steady state 
-for the early neonatal age group given a birth prevalence of 0 and a short duration 
-of the age group (prevalence will increase as the population ages within the age group). 
-Therefore, we calculate the prevalence in the early neonatal age group as an average 
-of the birth prevalence and the approximated prevalence under a steady state transition 
-(incidence * duration). This is approach is discussed `in this citation for reference <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3465772/>`_.
-
+steady state conditions.
 
 .. list-table:: Transition Data
 	:widths: 10 10 10 10 10
@@ -280,18 +292,17 @@ of the birth prevalence and the approximated prevalence under a steady state tra
 	  - False
 	  -
 	* - YLL age group start
-	  - Early neonatal
-	  - age_group_id = 2; [0-7 days)
+	  - early neonatal, ID = 2 (0-6 days)
+	  - 
 	* - YLL age group end
 	  - 95 plus
 	  - age_group_id = 235; 95 years +
 	* - YLD age group start
-	  - Early neonatal
-	  - age_group_id = 2; [0-7 days)
+	  - early neonatal, ID = 2 (0-6 days)
+	  - 
 	* - YLD age group end
 	  - 95 plus
 	  - age_group_id = 235; 95 years +
-
 
 Validation Criteria
 -------------------

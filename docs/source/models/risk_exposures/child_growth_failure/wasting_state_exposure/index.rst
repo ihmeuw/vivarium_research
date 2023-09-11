@@ -204,8 +204,8 @@ Prevalence of each wasting state for use in this model can be pulled using the f
    - CAT 3
    - CAT 2
  * - inc_rate_mild
-   - CAT 2
-   - CAT 1
+   - CAT 4
+   - CAT 3
 
 Validation 
 ++++++++++
