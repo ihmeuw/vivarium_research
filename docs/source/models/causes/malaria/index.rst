@@ -182,7 +182,7 @@ Data Description
 	  - 
 	* - I
 	  - disability weight
-	  - :math:`\displaystyle{\sum_{s\in \text{sequelae_malaria}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+	  - 0 for early neonatal (ID 2) and late neonatal (ID 3) age groups, :math:`\displaystyle{\sum_{s\in \text{sequelae_malaria}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}` for all others
 	  - Malaria sequelae are: 121, 122, 123
 	* - All
 	  - cause-specific mortality rate
@@ -198,9 +198,7 @@ Data Description
 	However, setting the age start parameter to 1 month in vivarium is not especially straight forward, so we took a compromise strategy of:
 
 		- Setting birth prevalence equal to the prevalence among the 1 month old age group, and
-		- Setting CSMR to zero for the neonatal age groups
-
-	Note that this compromise approach is limited in that there will be some amount of YLDs due to malaria accrued during the neonatal age groups.
+		- Setting CSMR, DW, and incidence/remission rates to zero for the neonatal age groups
 
 	The rationale behind excluding the neonatal age groups from this cause model is related to the *Relationship between timesteps and modeled rates in Vivarium* as described on the :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>`. Essentially, high EMR in the neonatal age groups may require a smaller time step to meet validation criteria, which we did not meet for the neonatal age groups in initial versions of the model.
 
@@ -225,12 +223,12 @@ steady state conditions.
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_calculated}}`
+	  - 0 for neonatal age groups, :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_calculated}}` for all other ages
 	  - Equivalent to "load standard data" Vivarium public health function for incidence rates ("susceptible-population" incidence rate). Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
 	* - r
 	  - I
 	  - S
-	  - :math:`\frac{1}{\text{duration_c345}}`
+	  - 0 for neonatal age groups, :math:`\frac{1}{\text{duration_c345}}` for all other ages
 	  - 
 
 
