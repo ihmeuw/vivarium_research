@@ -267,7 +267,7 @@ in the simulation will be informed using data specific to the post neonatal age 
     - :ref:`Docs here <2019_cause_diarrhea>`, implemented in IV iron
     -  
     - 
-    - 
+    - See note below
   * - Measles
     - :ref:`Docs here <2019_cause_measles>`, implemented in IV iron
     - 
@@ -277,12 +277,12 @@ in the simulation will be informed using data specific to the post neonatal age 
     - :ref:`Docs here <2019_cause_lower_respiratory_infections>`, implemented in IV iron
     - 
     - 
-    - 
+    - See note below
   * - Malaria
     - No existing version
     - :ref:`Docs here <2021_cause_malaria>`, was not included in IV iron
     - 
-    - 
+    - See note below
   * - Protein energy malnutrition (PEM)
     - :ref:`Old docs here <2020_risk_exposure_wasting_state_exposure>`, implemented in IV iron and CIFF
     - :ref:`New docs here <2021_pem>`. TODO: list whether or not there are updates other than breaking up docs pages
@@ -293,6 +293,19 @@ in the simulation will be informed using data specific to the post neonatal age 
     - 
     - 
     - Bonus model, not a high priority
+
+.. note::
+
+  For the diarrheal diseases, lower respiratory infections, and malaria cause models, we intend to set the age start parameter for each cause model to 28 days (the end of the late neonatal age group). We achieve this by applying the following conditions for each of these models:
+
+  - Birth prevalence equal to the post neonatal (ID=4, 28 days to 1 year) age group for GBD 2019 and the 1-5 month age group (ID=388, 28 days to 6 months) for GBD 2021
+  - Set CSMR, disability weight, incidence rate, and remission rate to zero for the early neonatal (ID=2, 0-6 days) and late neonatal (ID=3, 7-28 days) age groups
+
+  This strategy allows us to increase our simulation timestep by removing the need to model very high excess mortality rates due to these causes in the neonatal age groups (:ref:`see an explanation here <vivarium_best_practices_time_steps>`), but while still including mortality due to these causes in the background mortality (deaths due to "other causes") component in our model. 
+
+  Notably, CGF risks do not affect these causes during the neonatal period and we are able to model the effect of the LBWSG risk factor on diarrheal diseases and LRI by including them as "affected unmodeled causes" in the risk effects modeling strategy. 
+
+  Also note that the measles cause model age start value in GBD is the postneonatal (GBD 2019)/6-11 month (GBD 2021) age gorups, so these changes are not necessary to apply to the measles cause model.
 
 2.3.1 Task tracking for each wave
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
