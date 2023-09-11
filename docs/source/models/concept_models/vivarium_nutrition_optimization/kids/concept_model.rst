@@ -636,18 +636,30 @@ Wave I
     - Baseline
     - 
     - 
+  * - 4.0.1
+    - Update to 4.0 to include 2.0bugfixes, rerun of underweight lookup table to fix missing values
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 4.0.2
+    - `Data update to lookup table that solved mixup between underweight cat2 and cat3, shown in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
+    - Baseline
+    - Baseline
+    - 
+    - 
   * - 5.0
     - Update CGF risk effects
     - Baseline
     - Baseline
     - 
-    - 
+    - `Future model versions of 5.0 should use data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
   * - 6.0
     - Wasting risk exposure model update (update wasting transition rates and C_MAM,C_SAM,E_MAM,E_SAM parameter values found in .csv files linked in documentation)
     - Baseline
     - Baseline
     - 
-    - 
+    - `Future model versions of 6.0 should use data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
   * - 7.0
     - SQLNS intervention updates
     - Baseline, 0
@@ -707,7 +719,7 @@ Wave I
       4. Cause state transition counts
     - * Age group
       * Sex
-  * - 4.0 
+  * - 4.0, 4.0.1, 4.0.2
     - 1. Deaths 
       2. Stunting state person time
       3. Wasting state person time
@@ -715,7 +727,7 @@ Wave I
       5. Underweight state person time
     - * Age group
       * Sex
-  * - 5.0
+  * - 5.0 and all bugfixes
     - 1. Deaths and YLLs (cause-specific) stratified by wasting
       2. Cause state person time, stratified by wasting
       3. Cause state transition counts, stratified by wasting
@@ -842,6 +854,9 @@ Wave I
 
       * Malaria CSMR and prevalence look low but other cause models appear to be working. Waiting for the Model 3 updates to malaria before continuing. 
       * The interactive sim has not been assessed since underwight exposure is being updated. 
+  * - 4.0.2
+    - Same as 4.0.1
+    - TBD
   * - 5.0
     - In simulation outputs:
       

@@ -175,7 +175,7 @@ Prevalence of each wasting state for use in this model can be pulled using the f
                     gbd_round_id=7,
                     decomp_step='iterative')
 
-`Draw-specific values for transition rates (defined in the table below) for Ethiopia (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions.csv>`_. Values in this file are defined in terms of transitions per person-year in the source state.
+`Draw-specific values for transition rates (defined in the table below) for Ethiopia (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions_3.csv>`_. Values in this file are defined in terms of transitions per person-year in the source state.
 
   - `These values were generated in this notebook as of 8/28/2023 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_transition_sampling.ipynb>`_
 
