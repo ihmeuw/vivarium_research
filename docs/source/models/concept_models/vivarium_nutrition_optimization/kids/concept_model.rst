@@ -623,6 +623,18 @@ Wave I
     - Baseline
     - 
     - 
+  * - 4.0.1
+    - Update to 4.0 to include 2.0bugfixes, rerun of underweight lookup table to fix missing values
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 4.0.2
+    - Data update to lookup table that solved mixup between underweight cat2 and cat3
+    - Baseline
+    - Baseline
+    - 
+    - 
   * - 5.0
     - Update CGF risk effects
     - Baseline
@@ -694,7 +706,7 @@ Wave I
       4. Cause state transition counts
     - * Age group
       * Sex
-  * - 4.0 
+  * - 4.0, 4.0.1, 4.0.2
     - 1. Deaths 
       2. Stunting state person time
       3. Wasting state person time
@@ -829,6 +841,9 @@ Wave I
 
       * Malaria CSMR and prevalence look low but other cause models appear to be working. Waiting for the Model 3 updates to malaria before continuing. 
       * The interactive sim has not been assessed since underwight exposure is being updated. 
+  * - 4.0.2
+    - Same as 4.0.1
+    - TBD
   * - 5.0
     - In simulation outputs:
       
