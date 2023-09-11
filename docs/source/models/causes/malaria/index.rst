@@ -225,12 +225,12 @@ steady state conditions.
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_calculated}}`
+	  - 0 for neonatal age groups, :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_calculated}}` for all other ages
 	  - Equivalent to "load standard data" Vivarium public health function for incidence rates ("susceptible-population" incidence rate). Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
 	* - r
 	  - I
 	  - S
-	  - :math:`\frac{1}{\text{duration_c345}}`
+	  - 0 for neonatal age groups, :math:`\frac{1}{\text{duration_c345}}` for all other ages
 	  - 
 
 
