@@ -630,7 +630,7 @@ Wave I
     - 
     - 
   * - 4.0.2
-    - Data update to lookup table that solved mixup between underweight cat2 and cat3
+    - `Data update to lookup table that solved mixup between underweight cat2 and cat3, shown in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
     - Baseline
     - Baseline
     - 
@@ -640,13 +640,13 @@ Wave I
     - Baseline
     - Baseline
     - 
-    - 
+    - `Future model versions of 5.0 should use data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
   * - 6.0
     - Wasting risk exposure model update (update wasting transition rates and C_MAM,C_SAM,E_MAM,E_SAM parameter values found in .csv files linked in documentation)
     - Baseline
     - Baseline
     - 
-    - 
+    - `Future model versions of 6.0 should use data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
   * - 7.0
     - SQLNS intervention updates
     - Baseline, 0
@@ -714,7 +714,7 @@ Wave I
       5. Underweight state person time
     - * Age group
       * Sex
-  * - 5.0
+  * - 5.0 and all bugfixes
     - 1. Deaths and YLLs (cause-specific) stratified by wasting
       2. Cause state person time, stratified by wasting
       3. Cause state transition counts, stratified by wasting
