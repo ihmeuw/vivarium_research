@@ -57,9 +57,9 @@ Small quantity lipid based nutrient supplements (SQ-LNS)
   - New utilization algorithms
   - Potential for new intervention effect on ACMR (not currently included in this document)
 
-  Additional changes associated with the September 2023 update are listed below `and can be found in this PR <>`_
+  Additional changes associated with the September 2023 update are listed below `and can be found in this PR <https://github.com/ihmeuw/vivarium_research/pull/1327>`_
 
-  - Reduction in teh age end parameter from 2 years to 18 months
+  - Reduction in the age end parameter from 2 years to 18 months
   - Data update to new wasting transition rate effects for wave I of the nutrition optimization simulation
   - Change in age thresholds for different SQLNS/wasting effect sizes.
 
@@ -240,7 +240,7 @@ Notebooks that generated these values can be found here:
 
 - `"Wasting paper" implementation (12/22 update) <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/misc_investigations/Prevalence%20ratio%20nano%20sim%2C%20age-specific.ipynb>`_.
 
-- `Nutrition optimization implementation (9/23 update that uses wasting transition rates from Wave I of the nutrition optimization model) <>`_. Note that only incidence effects have been calculated for this project, as they are thought to be the primary route through which SQ-LNS affects child wasting, although we may revisit this assumption after more investigation into individual SQ-LNS trials that may provide guidance.
+- `Nutrition optimization implementation (9/23 update that uses wasting transition rates from Wave I of the nutrition optimization model) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/sqlns/Prevalence%20ratio%20nano%20sim%2C%20age-specific.ipynb>`_. Note that only incidence effects have been calculated for this project, as they are thought to be the primary route through which SQ-LNS affects child wasting, although we may revisit this assumption after more investigation into individual SQ-LNS trials that may provide guidance.
 
 Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic wasting transition model document <2021_risk_exposure_wasting_state_exposure>`. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure. 
 
