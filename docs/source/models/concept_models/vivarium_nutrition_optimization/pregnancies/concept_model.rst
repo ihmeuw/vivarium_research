@@ -526,7 +526,7 @@ Specific outputs for specific models are specified in the following section.
   * - 9.0
     - Production run test
     - All
-    - 2,000,000 population size
+    - 2,000,000 population size per draw, 5 draws
     - No age stratification and not cause-specific, BUT stratified by random seed:
 
       * Deaths 
@@ -535,18 +535,6 @@ Specific outputs for specific models are specified in the following section.
       * Intervention counts
     - Live and still births with maternal_ids, infant sex, joint BMI/anemia exposure, intervention coverage, and LBWSG exposures
     - Will analyze to determine minimum viable population size for maternal outcomes (can later use child data to analyze for child outcomes)
-  * - 9.0.1
-    - Production run test
-    - All
-    - TBD population size, 100 draws
-    - No age stratification and not cause-specific (no need to stratify by random seed):
-
-      * Deaths
-      * YLLs
-      * YLDs
-      * Intervention counts
-    - Live and still births with maternal_ids, infant sex, joint BMI/anemia exposure, intervention coverage, and LBWSG exposures
-    - Will analyze to determine minimum viable number of draws for maternal outcomes (can later use child data to analyze for child outcomes)
   * - 9.1
     - Production runs
     - All
