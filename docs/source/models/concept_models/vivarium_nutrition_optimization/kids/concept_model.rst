@@ -900,24 +900,19 @@ Wave I
     - Explanation
     - Action plan
     - Timeline
-  * - Diarrheal diseases prevalence spikes in the postneonatal age group
+  * - Issues with cause models in neonatal ages
+    - Non-zero transition rates in neonatal ages
+    - `Update in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1325>`_
+    - For 3.0.3
+  * - Wasting treatment not affecting wasting transition rates
     - Unknown
-    - Engineers/RT to review
-    - Low priority
-  * - Diarrheal diseases incidence rate underestimated
+    - Hussain is investigating
+    - For 6.0.2, bugfix can be implemented in tandem with wasting transition data update
+  * - CGF risk effects don't look as expected in the interactive sim or count data
     - Unknown
-    - Engineers/RT to review and/or to revisit after we update CGF risk effects to CGF 2021
-    - Low priority
-  * - Wasting transition rates not as expected
-    - Unknown
-    - Engineers to investigate
-    - High priority, for model 2.0.1
-  * - Stunting risk exposure not updated to GBD 2021
-    - Still has 2019 age groups and values (from IV iron) in model 2.0 artifact
-    - Engineers to update to 2021
-    - High priority, for model 2.0.1
-  * - Malaria prevalence and CSMR really low
-    - Suspected incompatibility between GBD prevalence/incidence/remission
-    - RT to update malaria cause model doc so that prevalence = incidence * duration rather than GBD prevalence (like we've done for LRI and diarrheal diseases cause models), engineers to implement
-    - High priority, for model 3.0.1
-
+    - Engineers and RT to put heads together!
+    - High priority, for 5.0.1
+  * - Underweight cat2 and cat3 artifact data was switched for 4.0.1
+    - RT data issue
+    - Engineering to run with updated values
+    - For 4.0.2
