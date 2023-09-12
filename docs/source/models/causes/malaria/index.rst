@@ -119,6 +119,10 @@ future, we might consider a time based duration that would more accurately repli
 the 14-28 day duration from GBD. We do not expect this limitation to have a 
 significant impact on our results. 
 
+Because DisMod estimated an unrealistically high birth prevalence, the modelers 
+set birth prevalence to zero. Consequently, the birth prevalence, incidence, 
+and prevalence available from get_outputs are incongruous with one another.
+
 .. todo::
 
    Continue to add to this section as needed 
@@ -150,12 +154,12 @@ Data Description
 	  - Notes
 	* - S
 	  - prevalence
-	  - 1-prevalence_I
+	  - 1-prevalence_calculated
 	  - 
 	* - S
 	  - birth prevalence
-	  - 1 
-	  - 
+	  - 1 - prevalence_calculated for the post neonatal/1-5 month age group  
+	  -  
 	* - S
 	  - emr
 	  - 0
@@ -165,25 +169,47 @@ Data Description
 	  - 0
 	  -
 	* - I
-	  - prevalence
-	  - **For early neonatal age group:** (birth_prevalence_I + prevalence_345)/2. **For all other age groups:** prevalence_345
+	  - prevalence_calculated 
+	  - incidence_rate_c345 * duration_c345 
 	  - 
 	* - I
 	  - birth prevalence
-	  - 0 
+	  - prevalence_calculated for the post neonatal/1-5 month age group 
 	  - 
 	* - I
 	  - excess mortality rate
-	  - :math:`\frac{\text{deaths_c345}}{\text{population} \,\times\, \text{prevalence_345}}`
+	  - :math:`\frac{\text{deaths_c345}}{\text{population} \,\times\, \text{prevalence_calculated}}`
 	  - 
 	* - I
 	  - disability weight
-	  - :math:`\displaystyle{\sum_{s\in \text{sequelae_malaria}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+	  - 0 for early neonatal (ID 2) and late neonatal (ID 3) age groups, :math:`\displaystyle{\sum_{s\in \text{sequelae_malaria}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}` for all others
 	  - Malaria sequelae are: 121, 122, 123
 	* - All
 	  - cause-specific mortality rate
-	  - :math:`\frac{\text{deaths_c345}}{\text{population}}`
-	  -
+	  - 0 for early neonatal (ID 2) and late neonatal (ID 3) age groups, :math:`\frac{\text{deaths_c345}}{\text{population}}` for all other age groups
+	  - See note below for justification
+
+.. note:: 
+
+	**A note on the the neonatal age groups**
+
+	This Vivarium modeling strategy is an indirect attempt to sets the cause model age start to the 1 month of age (post neonatal age group for GBD 2019 and 1-5 month age group for GBD 2021) despite the GBD age start parameter being the early neonatal age group (0 to 6 days). The exclusion of the the early and late neonatal age groups from the cause model as a strategy that allows us to increase the timestep of our cause models.
+
+	However, setting the age start parameter to 1 month in vivarium is not especially straight forward, so we took a compromise strategy of:
+
+		- Setting birth prevalence equal to the prevalence among the 1 month old age group, and
+		- Setting CSMR, DW, and incidence/remission rates to zero for the neonatal age groups
+
+	The rationale behind excluding the neonatal age groups from this cause model is related to the *Relationship between timesteps and modeled rates in Vivarium* as described on the :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>`. Essentially, high EMR in the neonatal age groups may require a smaller time step to meet validation criteria, which we did not meet for the neonatal age groups in initial versions of the model.
+
+	Notably, there are no risk factors that affect malaria during the neonatal age groups in the nutrition optimization model, so not modeling malaria among these age groups will not affect our model. However, mortality due to malaria should be included in mortality due to other causes for the early and late neonatal age groups (which will be achieved with CSMR=0 in these age groups). 
+
+
+We calculate prevalence using the equation prevalence = incidence * duration. 
+(See assumptions and limitations for the need to replace GBD's prevalence).
+This is appropriate because malaria has a short and relatively uniform duration of 
+14-28 days [GBD-2019-Capstone-Appendix-Malaria-2021]_. This assumption is valid under 
+steady state conditions.
 
 .. list-table:: Transition Data
 	:widths: 10 10 10 10 10
@@ -197,15 +223,15 @@ Data Description
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_I}}`
+	  - 0 for neonatal age groups, :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_calculated}}` for all other ages
 	  - Equivalent to "load standard data" Vivarium public health function for incidence rates ("susceptible-population" incidence rate). Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
 	* - r
 	  - I
 	  - S
-	  - :math:`\frac{1}{\text{duration_c345}}`
+	  - 0 for neonatal age groups, :math:`\frac{1}{\text{duration_c345}}` for all other ages
 	  - 
 
-	  
+
 .. list-table:: Data Sources and Definitions
 	:widths: 1 3 10 10
 	:header-rows: 1
@@ -214,9 +240,9 @@ Data Description
 	  - Source
 	  - Description
 	  - Notes
-	* - prevalence_c345
-	  - como
-	  - Prevalence of malaria
+	* - prevalence_calculated
+	  - Calculated from incidence (como) and duration (literature/gbd)
+	  - Duration-based calculation of malaria prevalence
 	  -
 	* - deaths_c345
 	  - codcorrect
@@ -264,18 +290,17 @@ Data Description
 	  - False
 	  -
 	* - YLL age group start
-	  - Early neonatal
-	  - age_group_id = 2; [0-7 days)
+	  - early neonatal, ID = 2 (0-6 days)
+	  - 
 	* - YLL age group end
 	  - 95 plus
 	  - age_group_id = 235; 95 years +
 	* - YLD age group start
-	  - Early neonatal
-	  - age_group_id = 2; [0-7 days)
+	  - early neonatal, ID = 2 (0-6 days)
+	  - 
 	* - YLD age group end
 	  - 95 plus
 	  - age_group_id = 235; 95 years +
-
 
 Validation Criteria
 -------------------

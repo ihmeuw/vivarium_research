@@ -47,14 +47,7 @@ Wasting dynamic transition model (GBD 2021)
   This adaptation is intended for use in the 
   :ref:`nutrition optimization simulation <2021_concept_model_vivarium_nutrition_optimization>`.
 
-  Any changes to the wasting exposure modeling strategy from the version implemented
-  in the acute malnutrition simulation can be viewed in this PR (TODO: LINK ADDITIONAL APPROPRIATE PRs).
-
-    - `vivarium_research PR#1254 <https://github.com/ihmeuw/vivarium_research/pull/1254>`_: updated wasting intervention parameters (from the Ethiopian ministry of health values used in the acute malnutrition project to the COMPAS trial values used in the nutrition optimization project)
-    - `vivarium_research PR#1257 <https://github.com/ihmeuw/vivarium_research/pull/1257>`_: updated :math:`d_i` equation to include malaria as an affected cause and to make excess mortality rates of affected causes specific to wasting exposure category
-    - `vivarium_research PR#1258 <https://github.com/ihmeuw/vivarium_research/pull/1258>`_: updated time_step scalar value (may have already been implemented in the acute malnutrition model and just the docs were out of date)
-    - `vivarium_research PR#1272 <https://github.com/ihmeuw/vivarium_research/pull/1272>`_: updated risk effects section to account for 2021 correlated risk effects modeling strategy
-    - `vivarium_research PR#1274 <https://github.com/ihmeuw/vivarium_research/pull/1274>`_: applied model to those 6 months and older only
+  There have been many updates to this model from the original implementation, but the underlying risk exposure model diagram (the risk exposure states and possible transitions between them) remain the same. Notably, the values for these transition rates are now directly provided rather than only providing equations to calculate the transition rates.
 
   Also note that the protein energy malnutrition (PEM) risk-attributable cause model
   has been removed from this page and is :ref:`instead available here <2021_pem>`.
@@ -153,20 +146,10 @@ breastfeeding and reduction of LBWSG.
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-We will model wasting in four compartments: TMREL, Mild, Moderate, and Severe.
-In a given timestep a simulant will either stay put, transition to an adjacent 
-wasting category, or die. In this case of "CAT 1: severe wasting", simulants can 
-also transition to "CAT 3: Mild wasting" via a treatment arrow, t1.
-
-We will use the GBD 2021 wasting and PEM models to inform this model, in 
-addition to data found in the literature. We will derive the remaining 
-transition rates from a Markov chain model, described in further detail below. 
-Simulants in each wasting category will receive a corresponding relative risk 
-for diarrheal diseases, measles, lower respiratory infections. 
-
-For wave I of the :ref:`nutrition optimization model <2021_concept_model_vivarium_nutrition_optimization>`, the vivarium 
-models for these affected causes will draw from the corresponding GBD 2019 models
-until we update the entire simulation to GBD 2021 results.
+Our transition model of child wasting will consist of the same 4 GBD risk exposure
+categories as the GBD child wasting model. In our transition model, simulants may
+transition between adjacent categories as well as between the cat1 (SAM) and cat3
+(mild) categories, representing a pathway for those successfully treated for SAM.
 
 .. important::
 
@@ -176,6 +159,124 @@ until we update the entire simulation to GBD 2021 results.
 
     - :ref:`Static wasting exposure <2020_risk_exposure_static_wasting>` for wave I of the nutrition optimization model
     - Wasting transition model among 0-6 month olds for wave II of the nutrition optimization model (TODO: link page when ready)
+
+**Risk exposure model diagram**
+
+.. image:: wasting_sim_transitions.png
+
+Prevalence of each wasting state for use in this model can be pulled using the following call:
+
+.. code-block:: python
+
+    get_draws(gbd_id_type='rei_id',
+                    gbd_id=240,
+                    source='exposure',
+                    year_id=2021,
+                    gbd_round_id=7,
+                    decomp_step='iterative')
+
+`Draw-specific values for transition rates (defined in the table below) for Ethiopia (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions_3.csv>`_. Values in this file are defined in terms of transitions per person-year in the source state.
+
+  - `These values were generated in this notebook as of 8/28/2023 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_transition_sampling.ipynb>`_
+
+.. list-table:: Transition Data
+ :header-rows: 1
+
+ * - Transition
+   - Source State
+   - Sink State
+ * - ux_rem_rate_sam
+   - CAT 1
+   - CAT 2
+ * - tx_rem_rate_sam
+   - CAT 1
+   - CAT 3
+ * - rem_rate_mam
+   - CAT 2
+   - CAT 3
+ * - rem_rate_mild
+   - CAT 3
+   - CAT 4
+ * - inc_rate_sam
+   - CAT 2
+   - CAT 1
+ * - inc_rate_mam
+   - CAT 3
+   - CAT 2
+ * - inc_rate_mild
+   - CAT 4
+   - CAT 3
+
+Validation 
+++++++++++
+
+Wasting model
+
+  - prevalence of cat 1-4
+  - model transition rates
+
+Note that validation of this model is dependent on validation of wasting-specific mortality rates, which are dependent on the following models meeting their individual validation criteria:
+
+  - Stunting and underweight exposure models
+  - CGF risk exposure correlation
+  - CGF risk effects
+  - Cause-specific and all-cause mortality rates
+
+Deriving the wasting transition rates
+--------------------------------------
+
+We utilized information from several sources to develop a wasting transition model.
+
+- **Wasting risk exposure:** GBD 2021 risk prevalence
+- **Wasting-specific mortality rates:** 
+
+  - :ref:`GBD 2021 CGF risk effects <2021_risk_effect_cgf>`
+  - :ref:`GBD 2019 PEM risk-attributable cause model <2021_pem>`
+  - GBD 2019 cause models for diarrheal diseases, lower respiratory infections, measles, and malaria (as linked on the :ref:`nutrition optimization child concept model <2021_concept_model_vivarium_nutrition_optimization>`)
+
+- **Treated MAM and SAM recovery rates:** :ref:`wasting treatment intervention model <intervention_wasting_tx_combined_protocol>`
+- **Incidence rates from less to more severe wasting categories:** BMGF Knowledge Integration (KI) longitudinal database. `A description of included studies is available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/KI%20studies.xlsx>`_
+
+However, recovery from MAM and SAM states for those who do not receive treatment is very limited in the case of MAM and not observable in the case of SAM as it would be unethical for researchers to track the natural history of SAM without providing access to treatment. Therefore, we utilized a Markov model to solve for the untreated wasting recovery rates that would result in a steady state equilibrium of the system below and the values from the sources described above.
+
+.. note::
+
+  The previous implementation of this model relied on literature estimates of untreated recovery rates from SAM and MAM (observed indirectly in the case of untreated SAM) and used the markov steady state model to solve for wasting incidence rates. This update is an improvement upon the previous implementation in that it relies on directly observed data as inputs to the model and outputs values for limited/un-observable parameters rather than the other way around. Additionally, this implementation results in values that better validate to KI transition rate data where applicable. 
+
+:download:`See this word document for a description of these parameters and the equations used to solve the system <WASTING CALIBRATION.docx>`
+
+.. image:: calibration_transitions.svg
+
+A small-level individual-based simulation has demonstrated the system of equations used in the derivation of these rates successfully maintains steady state. `See a demonstration of the steady state equilibrium maintained by this system of equations in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_calibration_solved_from_incidence_rates.ipynb>`_
+
+The process of generating draw-level values for all wasting transitions is outlined below. `See the code for generating draw-specific transition values in this notebook here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_transition_sampling.ipynb>`_
+
+1. Load all input data values (in accordance with documentation linked above)
+
+2. Exclude studies in the KI database that have inappropriate study populations. A list of excluded studies and there reasons for exclusion are provided below.
+
+  - AKU_EE: Infants with insufficient response to RUTF
+  - DIVIDS: Small for gestational age infants, not SAM, not ill
+  - Ilins-Dose: LNS supplementation
+  - Ilins-Dyad: LNS supplementation
+  - SAS_LBW: LBW babies
+
+3. At the sex, age, and draw-specific level, randomly sample a study from the remaining KI studies 
+
+4. Randomly sample event count values (numerator values) for i1, i2, and i3 transition rates under the assumption that the event counts follow a Poisson distribution of uncertainty, divide by person-time denominators (child days in provided KI data), and then convert to daily transition probabilities
+
+5. Calculate r4, r3 (as well as r3_treated and r3_untreated), r2 recovery probabilities according to draw-specific input parameters and sampled i1, i2, and i3 values
+
+6. Assess validity of results according to the following rules:
+
+  - r4, r3, r3_untreated, and r2 must be positive
+  - t1 must be greater than r2
+  - r3_treated must be greater than r3_untreated
+  - result for r3 value solved by two different methods must be within 10% of one another
+
+7. If any of the rules in step #6 fail, begin again at step #3 until valid result is obtained. Repeat until 1,000 valid draws are generated for each age/sex group
+
+8. Convert daily probabilities to annual rates and output as .csv
 
 Assumptions and Limitations
 ---------------------------
@@ -188,495 +289,8 @@ Assumptions and Limitations
 
 - We cannot directly observe recovery time of untreated wasting as it would be unethical. Therefore, we must indirectly estimate this parameter
 
-Input data
-----------
+- We assume that those successfully treated for SAM transition directly to the mild wasting state without transitioning through the MAM state. By definition, a transition through the MAM state must occur in reality. However, this design was selected for convenient compatibility with the standard discharge criteria for SAM treatment used in studies that report treated SAM recovery rates. Additionally, there is some data to suggest that immunologic recovery (and therefore reduction in mortality risk) of SAM cases lags behind anthropomorphic recovery. 
 
-.. image:: vivarium_wasting_model_with_t1.svg
-
-.. list-table:: Wasting model input data sources
-   :widths: 15 15
-   :header-rows: 1
-
-   * - Variable
-     - Source
-   * - Wasting state prevalence
-     - GBD wasting model
-   * - Wasting state mortality rates
-     - Derived from GBD, with CGF correlation from DHS
-   * - Transition rates from severe to more mild states
-     - Derived from literature on recovery
-   * - Transition rates from mild to more severe states
-     - Derived using a Markov model 
-
-Deriving wasting transition probabilities
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Markov derivation
-^^^^^^^^^^^^^^^^^
-
-This Markov model comprises 5 compartments: four wasting categories, plus CAT 0.
-Because we need simulants to die at a higher rate out of CAT 1 than CAT 2, 3, or
-the TMREL, it is necessary to include death to correctly derive our transition 
-rates. Thus we allow simulants to die into CAT 0. However, because we need to 
-assume equilibrium of our system over time, we allow simulants to "age in" to 
-CATs 1-4, from CAT 0. We thus set the transition probabilies :math:`f_i` equal 
-to the prevalence of the four wasting categories, obtained from GBD. 
-
-It is important here to note first that :math:`f_i` don't represent fertility rates: 
-rather, if :math:`k_i` sims died in timestep :math:`k`, we allow :math:`k_i` sims to
-age in in timestep :math:`k+1`, to replenish those that died. Second, we 
-emphasize that we utilize this method in order to calculate transition 
-probabilities between the different wasting categories. However, the final 
-Vivarium model of wasting will not include a reincarnation pool.
-
-Here we include equations for the transition probabilities, and in the section 
-that follows we will detail how to calculate all the variables used.
-
-.. list-table:: Wasting transition probability equations
-   :widths: 5 15 10 10
-   :header-rows: 1
-
-   * - Variable
-     - Equation
-     - Description
-     - Source
-   * - i1
-     - ap0*f2/ap2 + ap0*f3/ap2 + ap0*f4/ap2 + ap1*r2/ap2 + ap1*t1/ap2 - d2 - ap3*d3/ap2 - ap4*d4/ap2
-     - Daily probability of incidence into cat 1 from cat 2
-     - System of equations
-   * - i2
-     - ap0*f3/ap3 + ap0*f4/ap3 + ap1*t1/ap3 + ap2*r3/ap3 - d3 - ap4*d4/ap3
-     - Daily probability of incidence into cat 2 from cat 1
-     - System of equations
-   * - i3
-     - ap0*f4/ap4 + ap3*r4/ap4 - d4
-     - Daily probability of incidence into cat 3 from cat 4
-     - System of equations
-   * - r2
-     - 1 - e^(-(1-sam_tx_coverage*sam_tx_efficacy)*(1/time_to_sam_ux_recovery))
-     - Daily probability of remission into cat 2 from cat 1 (untreated)
-     - Nicole's calculations; also referred to as r2ux 
-   * - r3
-     - 1 - e^(-(mam_tx_coverage*mam_tx_efficacy * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage*mam_tx_efficacy)*(1/time_to_mam_ux_recovery)))
-     - Daily probability of remission from cat 2 into cat 3 (average of treated and untreated combined)
-     - Nicole's calculations
-   * - r4
-     - 1 - e^{-rate}. 6-12 months: rate = 0.006140 (SD: 0.003015). 1-4 years: rate = 0.005043  (SD: 0.002428). For each rate parameter, use truncated normal distribution of uncertainty with lower bound equal to zero and upper bound equal to 25 standard deviations above the mean (25 standard deviations above the mean was determined to be the upper limit of the python distribution function)
-     - Daily probability of remission from cat 3 into cat 4
-     - From `implied transition rate from the KI data <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/KI_rates_5.3.3.ipynb>`_. Assume a normal distribution of uncertainty.
-   * - t1
-     - 1 - e^(-sam_tx_coverage*sam_tx_efficacy * (1/time_to_sam_tx_recovery))
-     - Daily probability of remission into cat 3 from cat 1 (treated)
-     - Nicole's calculations 
-   * - s1
-     - -r2 - t1 + ap2*d2/ap1 + ap3*d3/ap1 + ap4*d4/ap1 + (-ap0 + ap1)/ap1
-     - Daily probability of staying in cat 1
-     - System of equations
-   * - s2
-     - -ap0*f2/ap2 - ap0*f3/ap2 - ap0*f4/ap2 - ap1*r2/ap2 - ap1*t1/ap2 - r3 + 1 + ap3*d3/ap2 + ap4*d4/ap2
-     - Daily probability of staying in cat 2
-     - System of equations
-   * - s3
-     - -ap0*f3/ap3 - ap0*f4/ap3 - ap1*t1/ap3 - ap2*r3/ap3 - r4 + 1 + ap4*d4/ap3
-     - Daily probability of staying in cat 3
-     - System of equations
-   * - s4
-     - -ap0*f4/ap4 - ap3*r4/ap4 + 1
-     - Daily probability of staying in cat 4
-     - System of equations
-
-In terms of the following variables:
-
-.. list-table:: Variables for transition probabilities
-   :widths: 10 10 10 10 10
-   :header-rows: 1
-
-   * - Variable
-     - Description
-     - Equation
-     - Notes
-     - Update
-   * - :math:`\text{mortality rate}_i`
-     - Annual mortality rate of wasting category :math:`i`
-     - :math:`acmr + (\sum_{c\in causes} emr_{c,i} * prevalence_{c,i} - csmr_c)` for causes in :ref:`c302/diarrheal diseases <diarrheal_diseases>`, :ref:`c322/lower respiratory infections <cause_lri>`, :ref:`c341/measles <cause_measles>`, :ref:`c345/malaria <2021_cause_malaria>`, and :ref:`c387/PEM <2021_pem>`
-     - 
-     - Included malaria as additional affected cause, :math:`emr_c` updated to wasting category-specific :math:`emr_{c,i}`
-   * - :math:`d_i`
-     - Daily death probability out of wasting category :math:`i`
-     - :math:`1 - exp(-\text{mortality rate}_i * \text{time_step})` 
-     - 
-     - 
-   * - :math:`f_i`
-     - "Age-in" probability into :math:`cat_i`
-     - Prevalence of wasting category i, pulled from GBD
-     - These probabilities were chosen to maintain equilibrium of our system
-     -
-   * - :math:`ap_0`
-     - Adjusted prevalence of :math:`cat_0` (the reincarnation pool)
-     - 1 - exp(-acmr / 365)
-     - We set this equal to the number of simulants that die each time step
-     - 
-   * - :math:`ap_i` for :math:`i\in \{1,2,3,4\}`
-     - Adjusted prevalence of :math:`cat_i`
-     - :math:`f_i/(ap_0 + 1)`
-     - All category "prevalences" are scaled down, such that the prevalence of cat 0 (the reincarnation pool) and the prevalences of the wasting categories sum to 1
-     - 
-   * - mam_tx_coverage
-     - Proportion of MAM (CAT 2) cases that have treatment coverage
-     - :math:`C_{MAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
-     - Baseline scenario value
-     - Parameter value update
-   * - sam_tx_coverage
-     - Proportion of SAM (CAT 1) cases that have treatment coverage
-     - :math:`C_{SAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
-     - Baseline scenario value
-     - Parameter value update
-   * - sam_tx_efficacy
-     - Proportion of children treated for SAM who successfully respond to treatment
-     - :math:`E_{SAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
-     - Baseline scenario value
-     - Parameter value update
-   * - mam_tx_efficacy
-     - Proportion of children treated for MAM who successfully respond to treatment
-     - :math:`E_{MAM}` parameter on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
-     - Baseline scenario value
-     - Parameter value update
-   * - time_to_mam_ux_recovery
-     - Without treatment or death, average days spent in MAM before recovery
-     - :math:`365 / r_\text{MAM,ux}` 
-     - :math:`r_\text{MAM,ux}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
-     - Parameter value update
-   * - time_to_mam_tx_recovery
-     - With treatment and without death, average days spent in MAM before recovery
-     - :math:`365 / r_\text{MAM,tx}`
-     - :math:`r_\text{MAM,tx}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>`
-     - Parameter value update
-   * - time_to_sam_ux_recovery
-     - Without treatment or death, average days spent in SAM before recovery
-     - :math:`365 / r_{SAM,ux}`
-     - :math:`r_\text{SAM,ux}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>` 
-     - Parameter value update
-   * - time_to_sam_tx_recovery
-     - With treatment and without death, average days spent in SAM before recovery
-     - :math:`365 / r_{SAM,tx}`
-     - :math:`r_\text{SAM,tx}` parameter defined on the :ref:`combined protocol wasting intervention page <intervention_wasting_tx_combined_protocol>` 
-     - Parameter value update
-   * - time_step
-     - Scalar time step conversion to days
-     - 1/365
-     -
-     - Update from documented value of 1; I suspect the docs were out of date with implementation. Ask Ali if confused.
-
-.. list-table:: Calculations for variables in transition equations
-   :widths: 6 10 10
-   :header-rows: 1
-
-   * - Variable
-     - Description
-     - Equation
-   * - :math:`\text{prevalence}_{c,i}`
-     - The prevalence of cause c among wasting category i
-     - :math:`incidence_{c,i} * duration_c`
-   * - :math:`duration_c`
-     - The average duration of cause c, in years
-     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, :ref:`malaria <2021_cause_malaria>`, and :ref:`PEM <2021_pem>`
-   * - :math:`incidence_{c,i}`
-     - incidence probability of cause c among wasting category i
-     - :math:`incidence_{c}*(1-paf_{c})*rr_{c,i}`
-   * - :math:`incidence_c`
-     - population-level incidence probability of cause c 
-     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, :ref:`malaria <2021_cause_malaria>`, and :ref:`PEM <2021_pem>`
-   * - :math:`paf_{c}`
-     - The PAF of cause c attributable to child growth failure (wasting, stunting, and underweight)
-     - PAFs can be found on the :ref:`CGF risk effects document <2021_risk_effect_cgf>` both for incidence and excess mortality measures
-   * - :math:`rr_{c,i}`
-     - The CGF relative risk for of cause c given wasting category i
-     - Combined CGF relative risks (wasting, stunting, and underweight) specific to each wasting state `can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/joint_rrs.csv>`_, both for incidence and excess mortality measures
-   * - :math:`prevalence_{i}`
-     - the prevalence of wasting category i 
-     - Pulled from GBD
-   * - :math:`acmr`
-     - All-cause mortality rate
-     - Pulled from GBD
-   * - :math:`emr_c`
-     - Excess mortality rate of cause c
-     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, :ref:`malaria <2021_cause_malaria>`, and :ref:`PEM <2021_pem>`
-   * - :math:`emr_\text{c,i}`
-     - Excess mortality rate of cause c among wasting state i
-     - :math:`emr_\text{c} * (1 - paf_c) * rr_\text{c,i}`
-   * - :math:`csmr_c`
-     - Cause-specific mortality rate of cause c
-     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, :ref:`malaria <2021_cause_malaria>`, and :ref:`PEM <2021_pem>`
-
-Derivation proofs
-'''''''''''''''''''
-
-We now detail how the above wasting probability transition equations were derived.
-
-
-We solve our transition probabilities using a 
-Markov Chain transition matrix **T**. 
-
-T = 
-
-.. csv-table:: 
-   :file: wasting_state_1x4_death.csv
-   :widths: 5, 5, 5, 5, 5, 5
-
-
-:math:`π_{T}` = 
-
-+----+----+----+----+----+
-| p4 | p3 | p2 | p1 | p0 |
-+----+----+----+----+----+
-
-:math:`π_{T}` is the eigenvector at equilibrium
-
-  a) :math:`π_{T}\times\text{T} = π_{T}` (the T means transposed, this is a 1 row vector)
-  b) :math:`\sum_{\text{i=p}}` = :math:`π_{T}`
-  c) :math:`π_{i}` ≥ 0 , these are GBD 2021 age/sex/location/year-specific prevalence for wasting categories 1-4, plus :math:`p0`, which will equal the number of sims who die in a timestep
-
-
-Solving a)
-
-  1)  :math:`ap_4s_4 + ap_3r_4 + ap_0f_4 = ap_4` 
-  2)  :math:`ap_4i_3 + ap_3s_3 + ap_2r_3 + ap_0f_3 = ap_3`
-  3)  :math:`ap_3i_2 + ap_2s_2 + ap_1r_2 + ap_0f_2 = ap_2`
-  4)  :math:`ap_2i_1 + ap_1s_1 + ap_0f_1 = ap_1`
-  5)  :math:`ap_4d_4 + ap_3d_3 + ap_2d_2 + ap_1d_1=ap_0`
-
-Rows of the P matrix sums to 1
-
-  6)  :math:`s_4 + i_3 + d-4 = 1`
-  7)  :math:`r_4 + s_3 + i_2 + d_3 = 1`
-  8)  :math:`r_3 + s_2 + i_1 + d_2 = 1`
-  9)  :math:`r_2 + s_1 + d_1 = 1`
-  10) :math:`f_4+f_3+f_2+f_1=1`
-
-
-.. code-block:: python
-
-  import numpy as np, pandas as pd
-  import sympy as sym
-  from sympy import symbols, Matrix, solve, simplify
-
-  # define symbols
-  s4, i3 = symbols('s4 i3')
-  r4, s3, i2 = symbols('r4 s3 i2')
-  r3, s2, i1 = symbols('r3 s2 i1')
-  r2, s1 = symbols('r2 s1')
-  d4, d3, d2, d1 = symbols('d4 d3 d2 d1')
-  f4, f3, f2, f1 = symbols('f4 f3 f2 f1')
-  ap4, ap3, ap2, ap1, ap0 = symbols('ap4 ap3 ap2 ap1 ap0')
-  acmr = sym.Symbol('acmr')
-
-
-  # for k linearly independent eqns, sympy will solve the first k unknowns
-  unknowns = [i2,s1,s2,s3,s4,r3,i1,i3,t1,r4,r2,d1,d2,d3,d4,f1,f2,f3,f4]
-
-  def add_eq(terms, y, i, A, v):
-    """
-    For input equation y = sum([coeff*var for var:coeff in {terms}])
-    adds right side of equation to to row i of matrix A
-    
-    adds y to row i of vector v
-    """
-    for x in terms.keys():
-        A[x][i] = terms[x]
-    v.iloc[i] = y
-
-
-  # # assuming equilibrium:
-  # p4*s4 + p3*r4 + p0*f4 = p4
-  eq1 = [{s4:p4, r4:p3, f4:p0}, p4]
-
-  # p4*i3 + p3*s3 + p2*r3 + p0*f3 = p3
-  eq2 = [{i3:p4, s3:p3, r3:p2, f3:p0}, p3]
-
-  # p3*i2 + p2*s2 + p1*r2 + p0*f2 = p2
-  eq3 = [{i2:p3, s2:p2, r2:p1, f2:p0}, p2]
-
-  # p2*i1 + p1*s1 + p0*f1 = p1
-  eq4 = [{i1:p2, s1:p1, f1:p0}, p1]
-
-  # p4*d4 + p3*d3 + p2*d2 + p1*d1 + p0*sld = p0
-  eq5 = [{d4:p4, d3:p3, d2:p2, d1:p1}, p0]
-
-
-  # # rows sum to one:
-  # s4 + i3 + d4 = 1
-  eq6 = [{s4:1, i3:1, d4:1}, 1]
-
-  # r4 + s3 + i2 + d3 = 1
-  eq7 = [{r4:1, s3:1, i2:1, d3:1}, 1]
-
-  # r3 + s2 + i1 + d2 = 1
-  eq8 = [{r3:1, s2:1, i1:1, d2:1}, 1]
-
-  # r2 + s1 + d1 = 1
-  eq9 = [{r2:1, s1:1, d1:1}, 1]
-
-  # f4 + f3 + f2 + f1 + sld = 1
-  eq10 = [{f4:1, f3:1, f2:1, f1:1}, 1]
-
-
-  def build_matrix(eqns, unknowns):
-    """
-    INPUT
-    ----
-    eqns: a list of sympy equations
-    unknowns: a list of sympy unknowns
-    ----
-    OUTPUT
-    ----
-    A:  a matrix containing the coefficients of LHS of all eq in eqns.
-        nrows = number of equations
-        rcols = number of unknowns
-    b: an nx1 matrix containing the RHS of all the eqns
-    x: a sympy matrix of the unknowns
-    """
-    n_eqns = len(eqns)
-    n_unknowns = len(unknowns)
-
-    # frame for matrix/LHS equations.
-    # nrows = n_eqns, ncols = n_unknowns
-    A = pd.DataFrame(
-        index = range(n_eqns),
-        columns = unknowns,
-        data = np.zeros([n_eqns,n_unknowns])
-    )
-    
-    # frame for RHS of equations
-    b = pd.DataFrame(index = range(n_eqns), columns = ['val'])
-    
-    # populate LHS/RHS
-    i = 0
-    for eq in eqns:
-
-        add_eq(eq[0], eq[1], i, A, b)
-        i += 1
-    
-    # convert to sympy matrices
-    A = sym.Matrix(A)
-    b = sym.Matrix(b)
-    x = sym.Matrix(unknowns) #vars to solve for
-    
-    return A, x, b
-
-  # solve in terms of i3 
-  A0, x0, b0 = build_matrix([eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8,eq9,eq10,eq11,eq12],
-                           unknowns)
-
-  result_0 = sym.solve(A0 * x0 - b0, x0)
-
-  # solve in terms of duration of cat3 instead of i3:
-  A1, x1, b1 = build_matrix([eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8,eq9,eq10],
-                         unknowns)
-  result_1 = sym.solve(A1 * x1 - b1, x1)
-
-
-Data Description Tables
-+++++++++++++++++++++++
-
-.. list-table:: Wasting transition model restrictions 2021
-   :widths: 10 10 20
-   :header-rows: 1
-
-   * - Restriction type
-     - Value
-     - Notes
-   * - Male only
-     - False
-     -
-   * - Female only
-     - False
-     -
-   * - Age group start
-     - 6-11 months
-     - age_group_id = 389
-   * - Age group end
-     - 2 to 4
-     - age_group_id = 34
-
-.. code-block:: python
-
-  #age group id differences between 2019 and 2021
-
-  #2021 age ids
-  early nn = 2 
-  late nn = 3
-  1m-5m = 388   #2019 it was 4 = postneonatal
-  6m-11m = 389  #2019 it was 4 = postneonatal
-  12m-23m = 238 #2019 it was 5 = 1-5
-  2y-4y = 34    #2019 it was 5 = 1-5
-
-.. code-block:: python
-
-   #to pull GBD 2021 category specific prevalence of wasting
-
-    get_draws(gbd_id_type='rei_id',
-                    gbd_id=240,
-                    source='exposure',
-                    year_id=2021,
-                    gbd_round_id=7,
-                    decomp_step='iterative')
-
-.. list-table:: Transition Data
- :widths: 10 10 10 10 10
- :header-rows: 1
-
- * - Transition
-   - Source State
-   - Sink State
-   - Value
-   - Notes
- * - ux_rem_rate_sam
-   - CAT 1
-   - CAT 2
-   - :math:`-log(1 - r2) * 365`
-   - Untreated remission rate (counts/person-year) from SAM to MAM
- * - tx_rem_rate_sam
-   - CAT 1
-   - CAT 3
-   - :math:`-log(1 - t1) * 365`
-   - Treated remission rate (counts/person-year) from SAM to mild wasting
- * - rem_rate_mam
-   - CAT 2
-   - CAT 3
-   - :math:`-log(1 - r3) * 365`
-   - Remission rate (counts/person-year) from MAM to mild wasting
- * - rem_rate_mild
-   - CAT 3
-   - CAT 4
-   - :math:`-log(1 - r4) * 365`
-   - Remission rate (counts/person-year) from mild wasting to TMREL
- * - inc_rate_sam
-   - CAT 2
-   - CAT 1
-   - :math:`-log(1 - i1) * 365`
-   - Incidence rate (counts/person-year) from MAM to SAM
- * - inc_rate_mam
-   - CAT 3
-   - CAT 2
-   - :math:`-log(1 - i2) * 365`
-   - Incidence rate (counts/person-year) from mild wasting to MAM
- * - inc_rate_mild
-   - CAT 2
-   - CAT 1
-   - :math:`-log(1 - i3) * 365`
-   - Incidence rate (counts/person-year) from TMREL to mild wasting
-
-Validation 
-++++++++++
-
-Wasting model
-
-  - prevalence of cat 1-4
-  - the incidences and the recovery rates (with our calibration inputs, can be accessed in interative sim)
-  - death rates per category
-  - relative risks (this would be done in the cause model validation)
-  - SAM and MAM duration (including who recovered from t1 arrow vs. r2 arrow)
-  - fertility (total person-time vs. year)
 
 References
 ++++++++++
