@@ -835,6 +835,9 @@ Wave I
   * - 3.0.3
     - Verify exclusion of neonatal age groups from malaria cause model and that ACMR is still validating for neonatal age groups
     - Exclusion of neonatal age groups looks good, but malaria cause model appears to be using prevalence and EMR values from model 3.0 rather than 3.0.2. `Model 3.0.3 V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0.3_risk_and_cause_checks.ipynb>`_
+  * - 3.0.4
+    - Verify malaria prevalence and CSMR are as expected
+    - Looks great! Ready to move on. `Model 3.0.4 notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0.4_risk_and_cause_checks.ipynb>`_
   * - 4.0
     - In simulation outputs:
 
@@ -905,10 +908,6 @@ Wave I
     - Explanation
     - Action plan
     - Timeline
-  * - Old malaria prevalence and EMR values
-    - Needs artifact update
-    - Engineers to update and rerun
-    - For 3.0.4
   * - Wasting treatment not affecting wasting transition rates
     - Unknown
     - Hussain is investigating
