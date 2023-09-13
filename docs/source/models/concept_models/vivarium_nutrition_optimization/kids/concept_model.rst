@@ -251,7 +251,7 @@ in the simulation will be informed using data specific to the post neonatal age 
     - 
   * - SQLNS
     - :ref:`Docs here <lipid_based_nutrient_supplements>`, implemented in wasting paper
-    - Need to double check lognormal distribution for effects and change duration of supplementation
+    - :ref:`Updates described in docs <lipid_based_nutrient_supplements>` and `found in this PR <https://github.com/ihmeuw/vivarium_research/pull/1327>`_
     - 
     - 
 

@@ -57,6 +57,12 @@ Small quantity lipid based nutrient supplements (SQ-LNS)
   - New utilization algorithms
   - Potential for new intervention effect on ACMR (not currently included in this document)
 
+  Additional changes associated with the September 2023 update are listed below `and can be found in this PR <https://github.com/ihmeuw/vivarium_research/pull/1327>`_
+
+  - Reduction in the age end parameter from 2 years to 18 months
+  - Data update to new wasting transition rate effects for wave I of the nutrition optimization simulation
+  - Change in age thresholds for different SQLNS/wasting effect sizes.
+
 Ideally, infants are breastfed for two years or longer, with complementary food introduced at six months of age. Diets of infants and young children aged six to 23 months need to include a variety of nutrient-dense foods, preferably from local sources, to ensure their nutrient needs are met. However, children's diets are likely to be deficient in macronutrients and micronutrients, specifically essential fatty acids, when nutrient-rich diets are not available to them in resource-poor settings. Various interventions are recommended, or have been used, to improve child malnutrition. This document focuses on small quantity lipid based nutrient supplements (SQ-LNS) as an intervention to improve malnutrition, particularly child wasting and stunting. Particularly, it draws on the 2019 Cochrane Review by Das et. al. [DAS_Cochrane_Review_2019]_
 
 .. contents::
@@ -180,8 +186,8 @@ We will consider two concepts of SQ-LNS services, including coverage and utiliza
 Possible coverage values include:
 
 - **Uncovered:** Not supplemented by SQ-LNS currently or in the past. Simulants aged 6 months to 5 years are eligible for this category.
-- **Covered:** Actively receiving SQ-LNS supplementation. Simulants aged 6 months to 2 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on wasting and stunting.
-- **Received:** No longer actively receiving SQ-LNS supplementation, but did receive SQ-LNS supplementation before the age of 2. Simulants aged 2 to 5 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on stunting, but not wasting.
+- **Covered:** Actively receiving SQ-LNS supplementation. Simulants aged 6 months to 18 months are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on wasting and stunting.
+- **Received:** No longer actively receiving SQ-LNS supplementation, but did receive SQ-LNS supplementation before the age of 18 months. Simulants aged 18 months to 5 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on stunting, but not wasting.
 
 **2. Utilization:** *use* of the intervention (actually taking the supplements and receiving the effects). This will be determined by the utilization algorithms below.
 
@@ -191,7 +197,7 @@ There are various SQ-LNS utilization algorithms that may be desired under differ
 - **Targeted to AM treatment:** Covered simulants who transition from MAM or SAM to mild wasting will receive intervention effects starting at that timestep.
 - **Targeted to mild wasting:** Covered simulants who are initialized into or transition into the mild wasting state will receive intervention effects starting at that timestep.
 
-SQ-LNS effects on wasting will persist until 24 months of age and effects on stunting will persist until five years of age.
+SQ-LNS effects on wasting will persist until 18 months of age and effects on stunting will persist until five years of age.
 
 .. list-table:: SQ-LNS Utilization Restrictions
   :widths: 15 15 15
@@ -207,11 +213,11 @@ SQ-LNS effects on wasting will persist until 24 months of age and effects on stu
     - No
     -
   * - Age group start
-    - 389 (6-11mo)
-    - intervention starts at 6 months
+    - 6 months
+    - 
   * - Age group end (exclusive)
-    - 34 (2-4yr)
-    - Children >24 months of age **not** eligible
+    - 18 months
+    - Children >18 months of age **not** eligible
   * - Other
     -
     -
@@ -224,13 +230,21 @@ Wasting
 
 .. note::
 
-  These values changed in both the December and August, 2022 updates
+  These values changed in both the 8/22, 12/22, and 9/23 updates
 
 Since the effect of SQ-LNS on child wasting was measured in prevalence ratios, it is not known whether SQ-LNS reduces wasting prevalence through a reduction of wasting incidence or duration. Therefore, we will run a sensitivity analysis in which SQ-LNS affects wasting incidence rates and another in which SQ-LNS affects wasting recovery rates. There is some evidence from [Huybregts-et-al-2019-sqlns]_ that SQ-LNS affects the incidence of acute malnutrition and some evidence that it may affect time to recovery, although it appears that the pathway through incidence is the primary route by which SQ-LNS impacts wasting prevalence from this limited evidence. 
 
-Additionally, due to the multi-compartment transition model of child wasting used in our simulation, we cannot apply the observed prevalence ratios directly to wasting transition rates to replicate the intended prevalence ratios. Rather, we `solved for specific transition rate ratios (separately for incidence and recovery rates) that resulted in the intended prevalence ratios of SQ-LNS <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/misc_investigations/Prevalence%20ratio%20nano%20sim%2C%20age-specific.ipynb>`_. Due to the finding by [Huybregts-et-al-2019-sqlns]_ that "the difference between study arms in the probability of developing the first AM episode mainly occurred during the first 4 months of follow-up and then remained constant" (p. 19), we decided to implement age-specific effects such that for those who begin SQ-LNS supplementation at six months of age, the prevalence ratios from the meta-analysis are achieved at 12 months of age and maintained through 23 months of age. Notably, these values were calibrated to the child population in Ethiopia and the calibration may not hold for all other populations and should be tested before applying to different locations. 
+Additionally, due to the multi-compartment transition model of child wasting used in our simulation, we cannot apply the observed prevalence ratios directly to wasting transition rates to replicate the intended prevalence ratios. Rather, we solved for specific transition rate ratios (separately for incidence and recovery rates) that resulted in the intended prevalence ratios of SQ-LNS. Due to the finding by [Huybregts-et-al-2019-sqlns]_ that "the difference between study arms in the probability of developing the first AM episode mainly occurred during the first 4 months of follow-up and then remained constant" (p. 19), we decided to implement age-specific effects such that for those who begin SQ-LNS supplementation at six months of age, the prevalence ratios from the meta-analysis are achieved at 12 months of age and maintained through 23 months of age. Notably, these values were calibrated to the child population in Ethiopia and the calibration may not hold for all other populations and should be tested before applying to different locations. 
 
-Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic wasting transition model document <2020_risk_exposure_wasting_state_exposure>`. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure. The SQ-LNS effects on wasting transition rates should apply to simulants covered by SQ-LNS from the start of coverage (at six months of age) until they are 2 years of age, at which point SQ-LNS should no longer affect their transition rates. In other words, the :code:`covered` SQ-LNS coverage state affects wasting transitions rates, but the :code:`received` and :code:`uncovered` states do not.
+Notebooks that generated these values can be found here:
+
+- `"Wasting paper" implementation (12/22 update) <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/misc_investigations/Prevalence%20ratio%20nano%20sim%2C%20age-specific.ipynb>`_.
+
+- `Nutrition optimization implementation (9/23 update that uses wasting transition rates from Wave I of the nutrition optimization model) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/sqlns/Prevalence%20ratio%20nano%20sim%2C%20age-specific.ipynb>`_. Note that only incidence effects have been calculated for this project, as they are thought to be the primary route through which SQ-LNS affects child wasting, although we may revisit this assumption after more investigation into individual SQ-LNS trials that may provide guidance.
+
+Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic wasting transition model document <2021_risk_exposure_wasting_state_exposure>`. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure. 
+
+The SQ-LNS effects on wasting transition rates should apply to simulants covered by SQ-LNS from the start of coverage (at six months of age) until they are 18 months of age, at which point SQ-LNS should no longer affect their transition rates. In other words, the :code:`covered` SQ-LNS coverage state affects wasting transitions rates, but the :code:`received` and :code:`uncovered` states do not.
 
 .. note::
 
@@ -243,38 +257,38 @@ Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic 
 
   * - Outcome
     - Sensitivity analysis 
-    - 6-11_months effect
-    - 12_to_23_months effect
+    - 6 to 10 months 
+    - 10 to 18 months 
     - Note
   * - i3 rate from wasting TMREL to mild wasting
     - Incidence effects
-    - 0.73 (0.60, 0.905)
-    - 0.905 (0.87, 0.965)
+    - 0.8 (0.71, 0.93)
+    - 0.9 (0.84, 0.96)
     - 
   * - i2 rate from mild wasting to MAM
     - Incidence effects
-    - 0.72 (0.58, 0.89)
-    - 0.90 (0.84, 0.965)
+    - 0.7 (0.57, 0.88)
+    - 0.9 (0.83, 0.97)
     - 
   * - i1 rate from MAM to SAM
     - Incidence effects
-    - 0.56 (0.347, 0.80)
-    - 0.78 (0.67, 0.89) 
+    - 0.3 (0.15, 0.68)
+    - 0.79 (0.64, 0.895)
     - 
   * - r4 rate from mild wasting to wasting TMREL
     - Recovery effects
-    - 1.29 (1.10, 1.45)
-    - 1.10 (1.03, 1.15)
+    - 1
+    - 1
     - 
   * - r3 rate from MAM to mild wasting
     - Recovery effects
-    - 1.15 (1.085, 1.40)
-    - 1.08 (1.02, 1.13)
+    - 1
+    - 1
     - 
   * - r1 (SAM to MAM) and t1 (SAM to mild) rates 
     - Recovery effects
-    - 1.49 (1.205, 1.77)
-    - 1.25 (1.10, 1.45)
+    - 1
+    - 1
     - Apply this effect to both r1 and t1 transition rates
 
 Stunting
