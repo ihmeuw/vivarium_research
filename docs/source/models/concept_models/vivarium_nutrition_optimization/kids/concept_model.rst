@@ -251,7 +251,7 @@ in the simulation will be informed using data specific to the post neonatal age 
     - 
   * - SQLNS
     - :ref:`Docs here <lipid_based_nutrient_supplements>`, implemented in wasting paper
-    - Need to double check lognormal distribution for effects and change duration of supplementation
+    - :ref:`Updates described in docs <lipid_based_nutrient_supplements>` and `found in this PR <https://github.com/ihmeuw/vivarium_research/pull/1327>`_
     - 
     - 
 
@@ -789,7 +789,7 @@ Wave I
       * Verify new antenatal intervention effects on gestational age
       * Check intervention effects on birthweight as well as impact of maternal joint BMI/anemia exposure on BW (should be the same as IV iron)
       * Note that LBWSG exposure has already been verified in the maternal output data
-    - The `interactive sim model 1 notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_1.0_interactive.ipynb>`_ shows that antenatal intervention effects on birth weight and gestational age seem to be working but have a lot of variation. This is to be expected though given the wide confidence intervals in effect size. 
+    - The `interactive sim model 1 notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_1.0_interactive.ipynb>`_ shows that antenatal intervention effects on birth weight and gestational age seem to be working but have a lot of variation. This is to be expected though given the wide confidence intervals in effect size. The same notebook also contains checks on the maternal joint BMI/anemia exposure on birthweight which seem to be working fine as well. 
   * - 2.0
     - * Verify wasting risk exposure
       * Verify baseline wasting treatment coverage
@@ -799,7 +799,6 @@ Wave I
 
       * Wasting exposure is really wacky. Looks like incidence rates are really large, remission rates are zero.
       * Stunting exposure model does not appear to be updated to GBD 2021
-      * Will wait to examine antenatal intervention effects on CGF exposures until we resolve major issues with CGF exposure models
       * Wasting treatment coverage does not appear to be affecting wasting transition rates
       * Baseline wasting treatment coverage looks good
       * Note that cause model V&V looks bad here because CGF exposure is so off
@@ -812,7 +811,7 @@ Wave I
 
       * Wasting exposure is looking correct 
       * Stunting exposure model is looking correct. Noting that early and late neonatal have 100% of simulants in cat4 
-      * Have not assessed antenatal intervention effects on CGF exposures 
+      * Antenatal intervention effects on CGF exposures seem to be working. This is seen in an `interactive CGF exposure sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_2.0_interactive.ipynb>`_ and a `results based model <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/antenatal_effects_on_wasting_and_stunting.ipynb>`_. 
       * Wasting treatment coverage's effect on wasting transition rates appear to be working 
       * Cause models are looking correct. There are the same issues with diarrheal diseases prevalence spiking in the post neonatal age group which was noted in Model 1. 
   * - 2.2
@@ -853,7 +852,7 @@ Wave I
     - `cat2 and cat3 underweight exposures appear to be switched <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_4.0_risk_and_cause_checks.ipynb>`_. The lookup.csv file error was found and is being recreated. We will rerun with the updated file. 
 
       * Malaria CSMR and prevalence look low but other cause models appear to be working. Waiting for the Model 3 updates to malaria before continuing. 
-      * The interactive sim has not been assessed since underwight exposure is being updated. 
+      * The interactive sim was used to find `underweight exposure by wasting stunting group <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_4.0_interactive.ipynb>`_. Overall this appeared to match the artifact across age/sex groups. In some cases, cat1 and 2 were less aligned than other groups, but the overall rate of underweight individuals was consistently correct. 
   * - 4.0.2
     - Same as 4.0.1
     - TBD
