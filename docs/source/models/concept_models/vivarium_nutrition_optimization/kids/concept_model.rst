@@ -630,6 +630,12 @@ Wave I
     - Baseline
     - 
     - 
+  * - 3.0.4
+    - Keep updates from 3.0.3, but pull back in 3.0.1 (updated prevalence) and 3.0.2 (updated EMR) updates
+    - Baseline
+    - Baseline
+    - 
+    - 
   * - 4.0 
     - Add underweight risk exposure model
     - Baseline
@@ -712,7 +718,7 @@ Wave I
       4. Wasting transition counts, stratified by wasting treatment coverage
       5. Wasting state person time
     - None
-  * - 3.0, 3.0.1, 3.0.2, and 3.0.3
+  * - 3.0, 3.0.1, 3.0.2, 3.0.3, 3.0.4
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
       3. Cause state person time
@@ -828,7 +834,7 @@ Wave I
     - `Malaria is now looking pretty good, except for the late neonatal age group (expected long time step issue) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_risk_and_cause_checks.ipynb>`_. The incidence and prevalence are a bit low but within the uncertainty. 
   * - 3.0.3
     - Verify exclusion of neonatal age groups from malaria cause model and that ACMR is still validating for neonatal age groups
-    - TBD
+    - Exclusion of neonatal age groups looks good, but malaria cause model appears to be using prevalence and EMR values from model 3.0 rather than 3.0.2. `Model 3.0.3 V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0.3_risk_and_cause_checks.ipynb>`_
   * - 4.0
     - In simulation outputs:
 
@@ -855,7 +861,7 @@ Wave I
       * The interactive sim was used to find `underweight exposure by wasting stunting group <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_4.0_interactive.ipynb>`_. Overall this appeared to match the artifact across age/sex groups. In some cases, cat1 and 2 were less aligned than other groups, but the overall rate of underweight individuals was consistently correct. 
   * - 4.0.2
     - Same as 4.0.1
-    - TBD
+    - Looks great! `4.0.2 notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_4.0.2_risk_and_cause_checks.ipynb>`_
   * - 5.0
     - In simulation outputs:
       
@@ -899,10 +905,10 @@ Wave I
     - Explanation
     - Action plan
     - Timeline
-  * - Issues with cause models in neonatal ages
-    - Non-zero transition rates in neonatal ages
-    - `Update in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1325>`_
-    - For 3.0.3
+  * - Old malaria prevalence and EMR values
+    - Needs artifact update
+    - Engineers to update and rerun
+    - For 3.0.4
   * - Wasting treatment not affecting wasting transition rates
     - Unknown
     - Hussain is investigating
@@ -911,7 +917,3 @@ Wave I
     - Unknown
     - Engineers and RT to put heads together!
     - High priority, for 5.0.1
-  * - Underweight cat2 and cat3 artifact data was switched for 4.0.1
-    - RT data issue
-    - Engineering to run with updated values
-    - For 4.0.2
