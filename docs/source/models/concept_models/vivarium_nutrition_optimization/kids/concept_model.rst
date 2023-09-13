@@ -177,12 +177,12 @@ in the simulation will be informed using data specific to the post neonatal age 
     - (Does not require separate 2021 update)
   * - Child stunting exposure
     - :ref:`2020 docs<2020_risk_exposure_child_stunting>`, implemented in IV iron, wasting paper
-    - Artifact rebuild
+    - Artifact rebuild, effects applied to 1-5 month age group
     - 
     - (Does not require separate 2021 update)
   * - Child underweight exposure
     - No
-    - New :ref:`child underweight exposure model <2020_risk_exposure_child_underweight>`
+    - New :ref:`child underweight exposure model <2020_risk_exposure_child_underweight>`, effects applied to 1-5 month age group
     - 
     - (Does not require separate 2021 update)
   * - Target area
@@ -750,7 +750,7 @@ Wave I
       3. Stunting state person time
       4. Underweight state person time
       5. Wasting transition counts
-    - * Age group
+    - * Custom age groups: early_neonatal, late_neonatal, 1-5_months, [6, 10) months, [10, 18) months, [18, 24) months, 2_to_4_years
       * Sex
   * - 8.0
     - 1. Deaths and YLLs (cause-specific)
