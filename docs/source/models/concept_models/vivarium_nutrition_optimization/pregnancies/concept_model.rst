@@ -526,7 +526,7 @@ Specific outputs for specific models are specified in the following section.
   * - 9.0
     - Production run test
     - All
-    - 2,000,000 population size
+    - 2,000,000 population size per draw, 5 draws
     - No age stratification and not cause-specific, BUT stratified by random seed:
 
       * Deaths 
@@ -535,18 +535,6 @@ Specific outputs for specific models are specified in the following section.
       * Intervention counts
     - Live and still births with maternal_ids, infant sex, joint BMI/anemia exposure, intervention coverage, and LBWSG exposures
     - Will analyze to determine minimum viable population size for maternal outcomes (can later use child data to analyze for child outcomes)
-  * - 9.0.1
-    - Production run test
-    - All
-    - TBD population size, 100 draws
-    - No age stratification and not cause-specific (no need to stratify by random seed):
-
-      * Deaths
-      * YLLs
-      * YLDs
-      * Intervention counts
-    - Live and still births with maternal_ids, infant sex, joint BMI/anemia exposure, intervention coverage, and LBWSG exposures
-    - Will analyze to determine minimum viable number of draws for maternal outcomes (can later use child data to analyze for child outcomes)
   * - 9.1
     - Production runs
     - All
@@ -661,6 +649,11 @@ Specific outputs for specific models are specified in the following section.
       * Check that individual-level birth outcome transitions are logical between scenarios
     - * COMO adjustment between all-cause and cause-specific observers looks to be functioning as expected in all pregnancy states except for the parturition state
       * Unable to verify that individual-level birth outcome transitions are functioning as expected
+  * - 8.3
+    - * Check updated other causes DW value
+      * Check resolution of CRN issue
+      * Check resolution of all cause and cause-specific observer discrepancies in parturition state
+    - All looks good! Ready to move to production :). `8.3 notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_8.3_yld_checks.ipynb>`_
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -678,14 +671,7 @@ Specific outputs for specific models are specified in the following section.
     - GBD maternal disorders parent cause is equal to the *sum* of maternal disorders sub-causes. Therefore, the incidence of the aggregate maternal disorders cause is quite high relative to the rate of pregnancies and when it is increased due to risk effects from hemoglobin, the calculated probability of an incident case can be greater than one. Since these probabilities are capped at one, we end up underestimating the incidence rate of maternal disorders at a population level. Note that this issue was present in the IV iron implementation; however, in the nutrition optimization implementation, maternal disorders mortality is conditional on maternal disorders incidence (whereas mortality was correlated with incidence, but not conditional on incidence in the IV iron implementation). Therefore, we are slightly underestimating maternal disorders mortality in this model.
     - As the underestimation is slight, we will move forward despite this limitation. In the meantime, we will investigate possible solutions to address this issue (in particular, modeling each individual maternal disorders sub-cause within the simulation), which we may consider incorporating into the model after other higher priority updates are made (such as intervention implementations in models 6 and 7)
     - TBD
-  * - Illogical birth outcome changes at the individual level
-    - At the population level, rate of "other" outcome stays approximately the same, live births increase, and stillbirths decrease with increasing intervention coverage, as expected. However, at the individual level, "other" outcomes become live births, and stillbirths become "other" outcomes. We believe this is due to the ordering of outcome choices in the random.choice call.
-    - Update ordering of random.choice call so that "other" outcomes are not in the middle
-    - For next model run
-  * - Inconsistencies between cause-specific and all-cause YLD observers in the parturition state
-    - Unknown
-    - Investigate for model run 8.3
-    - 
+
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++

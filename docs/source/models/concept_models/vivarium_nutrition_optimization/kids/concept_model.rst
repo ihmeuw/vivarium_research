@@ -177,12 +177,12 @@ in the simulation will be informed using data specific to the post neonatal age 
     - (Does not require separate 2021 update)
   * - Child stunting exposure
     - :ref:`2020 docs<2020_risk_exposure_child_stunting>`, implemented in IV iron, wasting paper
-    - Artifact rebuild
+    - Artifact rebuild, effects applied to 1-5 month age group
     - 
     - (Does not require separate 2021 update)
   * - Child underweight exposure
     - No
-    - New :ref:`child underweight exposure model <2020_risk_exposure_child_underweight>`
+    - New :ref:`child underweight exposure model <2020_risk_exposure_child_underweight>`, effects applied to 1-5 month age group
     - 
     - (Does not require separate 2021 update)
   * - Target area
@@ -251,7 +251,7 @@ in the simulation will be informed using data specific to the post neonatal age 
     - 
   * - SQLNS
     - :ref:`Docs here <lipid_based_nutrient_supplements>`, implemented in wasting paper
-    - Need to double check lognormal distribution for effects and change duration of supplementation
+    - :ref:`Updates described in docs <lipid_based_nutrient_supplements>` and `found in this PR <https://github.com/ihmeuw/vivarium_research/pull/1327>`_
     - 
     - 
 
@@ -630,6 +630,12 @@ Wave I
     - Baseline
     - 
     - 
+  * - 3.0.4
+    - Keep updates from 3.0.3, but pull back in 3.0.1 (updated prevalence) and 3.0.2 (updated EMR) updates
+    - Baseline
+    - Baseline
+    - 
+    - 
   * - 4.0 
     - Add underweight risk exposure model
     - Baseline
@@ -718,7 +724,7 @@ Wave I
       4. Wasting transition counts, stratified by wasting treatment coverage
       5. Wasting state person time
     - None
-  * - 3.0, 3.0.1, 3.0.2, and 3.0.3
+  * - 3.0, 3.0.1, 3.0.2, 3.0.3, 3.0.4
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
       3. Cause state person time
@@ -756,7 +762,7 @@ Wave I
       3. Stunting state person time
       4. Underweight state person time
       5. Wasting transition counts
-    - * Age group
+    - * Custom age groups: early_neonatal, late_neonatal, 1-5_months, [6, 10) months, [10, 18) months, [18, 24) months, 2_to_4_years
       * Sex
   * - 8.0
     - 1. Deaths and YLLs (cause-specific)
@@ -834,7 +840,7 @@ Wave I
     - `Malaria is now looking pretty good, except for the late neonatal age group (expected long time step issue) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0_risk_and_cause_checks.ipynb>`_. The incidence and prevalence are a bit low but within the uncertainty. 
   * - 3.0.3
     - Verify exclusion of neonatal age groups from malaria cause model and that ACMR is still validating for neonatal age groups
-    - TBD
+    - Exclusion of neonatal age groups looks good, but malaria cause model appears to be using prevalence and EMR values from model 3.0 rather than 3.0.2. `Model 3.0.3 V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_3.0.3_risk_and_cause_checks.ipynb>`_
   * - 4.0
     - In simulation outputs:
 
@@ -861,7 +867,7 @@ Wave I
       * The interactive sim was used to find `underweight exposure by wasting stunting group <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_4.0_interactive.ipynb>`_. Overall this appeared to match the artifact across age/sex groups. In some cases, cat1 and 2 were less aligned than other groups, but the overall rate of underweight individuals was consistently correct. 
   * - 4.0.2
     - Same as 4.0.1
-    - TBD
+    - Looks great! `4.0.2 notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_4.0.2_risk_and_cause_checks.ipynb>`_
   * - 5.0
     - In simulation outputs:
       
@@ -908,10 +914,10 @@ Wave I
     - Explanation
     - Action plan
     - Timeline
-  * - Issues with cause models in neonatal ages
-    - Non-zero transition rates in neonatal ages
-    - `Update in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1325>`_
-    - For 3.0.3
+  * - Old malaria prevalence and EMR values
+    - Needs artifact update
+    - Engineers to update and rerun
+    - For 3.0.4
   * - Wasting treatment not affecting wasting transition rates
     - Unknown
     - Hussain is investigating
@@ -920,7 +926,3 @@ Wave I
     - Unknown
     - Engineers and RT to put heads together!
     - High priority, for 5.0.1
-  * - Underweight cat2 and cat3 artifact data was switched for 4.0.1
-    - RT data issue
-    - Engineering to run with updated values
-    - For 4.0.2
