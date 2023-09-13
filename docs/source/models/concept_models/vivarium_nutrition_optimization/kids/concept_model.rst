@@ -666,6 +666,12 @@ Wave I
     - Baseline
     - 
     - `Future model versions of 6.0 should use data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
+  * - 6.1
+    - Emulator data runs
+    - All (includes zero coverage scenario)
+    - Baseline, 0-8
+    - 
+    - 
   * - 7.0
     - SQLNS intervention updates
     - Baseline, 0
@@ -742,7 +748,7 @@ Wave I
       6. Underweight state person time
     - * Age group
       * Sex
-  * - 6.0
+  * - 6.0 and 6.1
     - 1. Deaths, stratified by wasting exposure state
       2. Wasting state person time, stratified by wasting treatment coverage
       3. Wasting transition rates, stratified by wasting treatment coverage
@@ -886,6 +892,9 @@ Wave I
     - * `Wasting transitions rates match expected values <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_6.0_wasting_transitions.ipynb>`_ (implemented correctly, yay)
       * `Wasting risk exposure still looks good at a population level <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_6.0_risk_and_cause_checks.ipynb>`_ (calculated correctly, yay)
       * Wasting treatment does not appear to be affecting MAM and SAM recovery rates (needs to be updated)
+  * - 6.1
+    - Results to be used for emulator design only 
+    - N/A
   * - 7.0 
     - Between scenario 0 and 3:
       * Verify SQ-LNS utilization ends at 6 months
