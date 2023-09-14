@@ -673,7 +673,7 @@ Wave I
     - 
     - 
   * - 5.3
-    - Update PAF values in accordance with data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_, attempt to resolve overestimation of CGF impact on mortality (not quite sure what the issue is yet)
+    - Update PAF values in accordance with data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
     - Baseline
     - Baseline
     - 
@@ -919,8 +919,8 @@ Wave I
       * Excess mortality rate RRs are not being adjusted for incidence rate RRs in the artifact; looks to be updated in 5.2 artifact already :). `See 5.1 RR notebook here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.1_rrs.ipynb>`_
   * - 5.2
     - Verify updated artifact EMR values were applied and check for data update
-    - * `Although artifact values look as expected, we are still overestimating CGF effects on mortality, particularly for the younger age groups <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.2_rrs.ipynb>`_
-      * PAF values appear to not have been updated `in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
+    - * PAF values appear to not have been updated `in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
+      * Note that when evaluating mean RRs, effects on mortality appeared to be overestimated in the younger age groups, but verified to expected values when evaluating median values instead. `5.2 RR V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.2_rrs.ipynb>`_
   * - 6.0
     - * Verify updated wasting recovery parameters
       * Verify CGF risk exposures
@@ -953,7 +953,3 @@ Wave I
     - Explanation
     - Action plan
     - Timeline
-  * - Overestimation of CGF effect on mortality in younger age groups relative to expected joint CGF RRs stratified by wasting
-    - Unknown
-    - Engineers and RT to put heads together!
-    - High priority, for 5.3
