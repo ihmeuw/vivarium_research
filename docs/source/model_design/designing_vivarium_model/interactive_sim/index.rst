@@ -296,8 +296,32 @@ choose to make plots in the interactive sim instead!
 Common Challenges
 -----------------
 
-.. todo::
+Using the interactive sim is fundamentally different than looking at simulation outputs 
+and this can lead to challenges. Because you are running a mini simulation on your computer, 
+you overlap a lot more with engineering workflow and have to watch out for some common pitfalls.
 
-  Add information on: environment management, editable installs of packages within environments 
-  If you remove observers or change things it can have weird effects - talk with engineering 
+1. Using the correct branch and simulation version: 
 
+Be sure that you are pulling from the engineering repo as needed. If you forget, the latest work 
+might not be present in your version of the sim, leading to confusion. 
+
+If you need to look at an old version of the sim or are actively debugging something, you might 
+need to work with engineering to ensure you're on the correct branch. In some cases, they might 
+have you work from a branch other than main. 
+
+2. Editing engineering files on your local machine: 
+
+In some cases, you might make edits to the model files on your local machine. This might be to 
+remove certain observers, edit model specs, or change parameters. Be careful!! While it's fine 
+to make edits you need, don't push them to the engineering repo. Also, track the edits so 
+if you have to pull a new model version from engineering, you can reset the interactive sim to 
+how you need. 
+
+3. Differing environments: 
+
+Engineering generally uses a different environment to you, which means it can use different 
+versions of packages or of Python. This can cause confusion if something isn't running as 
+expected. 
+
+
+editable installs of packages within environments 
