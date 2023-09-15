@@ -702,6 +702,12 @@ Wave I
     - Baseline, 0, 3
     - 
     - 
+  * - 7.0rerun
+    - Rerun for emulator
+    - All
+    - All
+    - 
+    - 
   * - 8.0
     - Production test runs
     - Baseline, 0, 2
@@ -788,6 +794,9 @@ Wave I
       5. Wasting transition counts
     - * Custom age groups: early_neonatal, late_neonatal, 1-5_months, [6, 10) months, [10, 18) months, [18, 24) months, 2_to_4_years
       * Sex
+  * - 7.0rerun
+    - Same as 7.0, but with stunting state person time stratified by SQ-LNS coverage
+    - Same as 7.0
   * - 8.0
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
@@ -921,6 +930,9 @@ Wave I
     - Verify updated artifact EMR values were applied and check for data update
     - * PAF values appear to not have been updated `in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
       * Note that when evaluating mean RRs, effects on mortality appeared to be overestimated in the younger age groups, but verified to expected values when evaluating median values instead. `5.2 RR V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.2_rrs.ipynb>`_
+  * - 5.3
+    - Baseline cause and risk values should verify to GBD expected values
+    - Looks great! `5.3 notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.3_risk_and_cause_checks.ipynb>`_
   * - 6.0
     - * Verify updated wasting recovery parameters
       * Verify CGF risk exposures
@@ -936,10 +948,11 @@ Wave I
     - N/A
   * - 7.0 
     - Between scenario 0 and 3:
-      * Verify SQ-LNS utilization ends at 6 months
+      * Verify SQ-LNS utilization ends at 18 months
+      * Verify SQ-LNS incidence rate ratios by age
       * Verify SQ-LNS prevalence ratios
       Baseline YLDs and YLLs should still verify
-    - 
+    - Looks great! `Model 7.0 notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_7.0.ipynb>`_
   * - 8.0
     - * Verify that intervention coverage is as expected in each scenario
       * Final check on baseline deaths, YLLs, YLDs
