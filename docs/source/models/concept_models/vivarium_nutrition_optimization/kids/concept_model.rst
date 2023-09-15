@@ -660,12 +660,36 @@ Wave I
     - Baseline
     - 
     - `Future model versions of 5.0 should use data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
+  * - 5.1
+    - 5.0 Bugfix
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 5.2
+    - Updated EMR RR artifact values
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 5.3
+    - Update PAF values in accordance with data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
+    - Baseline
+    - Baseline
+    - 
+    - 
   * - 6.0
     - Wasting risk exposure model update (update wasting transition rates and C_MAM,C_SAM,E_MAM,E_SAM parameter values found in .csv files linked in documentation)
     - Baseline
     - Baseline
     - 
     - `Future model versions of 6.0 should use data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
+  * - 6.0.2
+    - `Data update <https://github.com/ihmeuw/vivarium_research/pull/1326>`_ and resolve issue with treatment not affecting transitions
+    - Baseline
+    - Baseline
+    - 
+    - Additional bugfix results at :code:`6.0.2_no_neonatal_wasting_transitions` that addressed issue with transitions among those less than 6 months of age
   * - 6.1
     - Emulator data runs
     - All (includes zero coverage scenario)
@@ -888,6 +912,15 @@ Wave I
       2. Appears that underweight does not affect incidence rates in the `model 5.0bugfix interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.0bugfix_intsim.ipynb>`_
       
       3. Unable to verify in the interactive sim that there are any effects on excess mortality rates, although it appears that there are in the `model 5.0bugfix count data results <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.0bugfix_rrs.ipynb>`_
+  * - 5.1
+    - Same as 5.0
+    - * `5.1 interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.1_intsim.ipynb>`_ on branch :code:`feature/pnast/MIC-4537-Model-5.0-bugfix-2` now demonstrates expected behavior
+      * Relative risks now being applied to 1-5 month age group
+      * Excess mortality rate RRs are not being adjusted for incidence rate RRs in the artifact; looks to be updated in 5.2 artifact already :). `See 5.1 RR notebook here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.1_rrs.ipynb>`_
+  * - 5.2
+    - Verify updated artifact EMR values were applied and check for data update
+    - * PAF values appear to not have been updated `in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
+      * Note that when evaluating mean RRs, effects on mortality appeared to be overestimated in the younger age groups, but verified to expected values when evaluating median values instead. `5.2 RR V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_5.2_rrs.ipynb>`_
   * - 6.0
     - * Verify updated wasting recovery parameters
       * Verify CGF risk exposures
@@ -895,6 +928,9 @@ Wave I
     - * `Wasting transitions rates match expected values <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_6.0_wasting_transitions.ipynb>`_ (implemented correctly, yay)
       * `Wasting risk exposure still looks good at a population level <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_6.0_risk_and_cause_checks.ipynb>`_ (calculated correctly, yay)
       * Wasting treatment does not appear to be affecting MAM and SAM recovery rates (needs to be updated)
+  * - 6.0.2
+    - Ensure wasting transitions are as expected when stratified by treatment coverage and check that data update has been applied 
+    - `Transitions are in line with expected values from data update and when stratified by wasting treatment <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_6.0.2_wasting_transitions.ipynb>`_. Note that 6.0.2 had wasting transitions in the under 6 month ages, but this was resolved in `6.0.2_no_neonatal_wasting_transitions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_6.0.2bugfix_wasting_transitions.ipynb>`_. 
   * - 6.1
     - Results to be used for emulator design only 
     - N/A
@@ -917,11 +953,7 @@ Wave I
     - Explanation
     - Action plan
     - Timeline
-  * - Wasting treatment not affecting wasting transition rates
-    - Unknown
-    - Hussain is investigating
-    - For 6.0.2, bugfix can be implemented in tandem with wasting transition data update
-  * - CGF risk effects don't look as expected in the interactive sim or count data
-    - Unknown
-    - Engineers and RT to put heads together!
-    - High priority, for 5.0.1
+  * - 
+    - 
+    - 
+    - 
