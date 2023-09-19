@@ -821,11 +821,9 @@ Wave I
   * - 8.1
     - 1. Deaths and YLLs (**NOT**) cause-specific)
       2. YLDs (**NOT** cause-specific)
-      3. Count of incident SAM cases stratified by SAM treatment
-      4. Count of incident MAM cases stratified by MAM treatment
+      3. Wasting transition counts **stratified by MAM/SAM treatment**
       5. Stunting state person-time stratified by SQ-LNS utilization
-      6. Mortality hazard first moment (?)
-    - None
+    - Age strata of 0-6 months, 6-18 months, 18-59 months
 
 .. list-table:: Verification and validation tracking
   :header-rows: 1
