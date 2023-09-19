@@ -822,7 +822,7 @@ Wave I
     - 1. Deaths and YLLs (**NOT**) cause-specific)
       2. YLDs (**NOT** cause-specific)
       3. Wasting transition counts **stratified by MAM/SAM treatment**
-      5. Stunting state person-time stratified by SQ-LNS utilization
+      4. Stunting state person-time stratified by SQ-LNS utilization
     - Age strata of 0-6 months, 6-18 months, 18-59 months
 
 .. list-table:: Verification and validation tracking
