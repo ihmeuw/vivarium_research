@@ -1035,7 +1035,7 @@ Code is below for reference
     - Single draw run in 51 locations 
     - Runs were completed with draw 829. The V&V for causes and risks looked to be expected in this notebook for `51 location causes <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_multi_location_8.4.23.ipynb>`_ and `51 location risks <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_multi_location_8_7_23.ipynb>`_. However, there were issues with overlap between scenarios. We are still investigating this but it might be related to heart failure. Additionally, there are still issues with the PAFs containing zero values. We are currently avoiding this by selecting specific draws, however, a more permanent solution would be preferred. 
   * - 21.0
-    - Add Medication and PAF Recalculations 
+    - Add Mediation and PAF Recalculations 
     - Note: not planned to be completed before NIH results 
   * - 22.0
     - Update to GBD 2021 

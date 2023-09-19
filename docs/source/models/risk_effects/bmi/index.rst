@@ -223,7 +223,7 @@ be unaffected.
      - [95, 125 years)
 
 
-Mediation data is here: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
+Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
 
 Risk Outcome Pair #1: Ischemic heart disease
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -264,7 +264,7 @@ is also included.
 
 :math:`RR_\text{BMI,adjusted} = \frac{RR_\text{BMI,unadjusted}}{\prod_{m=1}^{n} {RR_\text{m}}^{delta_\text{m}}}`
 
-Where :math:`MF_m` is the mediation factor and :math:`RR_\text{m}` is the relative risk for each mediator :math:`m` in SBP, LDL-C, and FPG.
+Where :math:`MF_m` is the mediation factor and :math:`RR_\text{m}` is the unadjusted relative risk for each mediator :math:`m` in SBP, LDL-C, and FPG.
 
 where the RR_unadjusted is from the get_draws code above and the 
 RR_adjusted is what is used to find the risk of BMI on IHD. 
@@ -313,7 +313,7 @@ is also included.
 
 :math:`RR_\text{BMI,adjusted} = \frac{RR_\text{BMI,unadjusted}}{\prod_{m=1}^{n} {RR_\text{m}}^{delta_\text{m}}}`
 
-Where :math:`MF_m` is the mediation factor and :math:`RR_\text{m}` is the relative risk for each mediator :math:`m` in SBP, LDL-C, and FPG.
+Where :math:`MF_m` is the mediation factor and :math:`RR_\text{m}` is the unadjusted relative risk for each mediator :math:`m` in SBP, LDL-C, and FPG.
 
 where the RR_unadjusted is from the get_draws code above and the 
 RR_adjusted is what is used to find the risk of BMI on stroke. 
