@@ -714,6 +714,12 @@ Wave I
     - Baseline, 0, 3, 8
     - 
     - 
+  * - 8.0.1
+    - Update observers/maternal input data, BEP->BW update for adequately nourished pregnancies
+    - All
+    - All
+    - Only 5 draws
+    - Use pregnancy model 9.1 as inputs
   * - 8.1
     - Production runs
     - All
@@ -805,6 +811,13 @@ Wave I
       5. Stunting state person-time stratified by SQ-LNS utilization
       6. Mortality hazard first moment
     - * Random seed
+  * - 8.0.1, NOTE: use maternal model 9.1 results, but only for 5 draws
+    - 1. Deaths and YLLs (do not need to be cause-specific)
+      2. YLDs (do not need to be cause-specific)
+      3. Wasting transition counts **stratified by MAM/SAM treatment**
+      4. Stunting state person-time stratified by SQ-LNS utilization
+    - * Random seed
+      * Age strata of 0-6 months, 6-18 months, 18-59 months
   * - 8.1
     - 1. Deaths and YLLs (**NOT**) cause-specific)
       2. YLDs (**NOT** cause-specific)
@@ -957,7 +970,9 @@ Wave I
     - * Verify that intervention coverage is as expected in each scenario
       * Final check on baseline deaths, YLLs, YLDs
       * Check population size stability
-    - 
+    - * No stratification by MAM/SAM tx in these results
+      * Realized that BEP->BW undernourished effect size is being applied to all pregnancies
+      * Run on pregnancy 8.3 results with smaller pop size, so we will follow-up on population stability
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -966,7 +981,7 @@ Wave I
     - Explanation
     - Action plan
     - Timeline
-  * - 
-    - 
-    - 
-    - 
+  * - BEP undernourished effect size being applied to all pregnancies
+    - There should be a separate effect size for adequately nourished pregnancies
+    - Update and do V&V in interactive sim
+    - ASAP
