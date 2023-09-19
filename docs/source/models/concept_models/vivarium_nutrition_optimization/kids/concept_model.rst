@@ -797,19 +797,19 @@ Wave I
   * - 7.0rerun
     - Same as 7.0, but with stunting state person time stratified by SQ-LNS coverage
     - Same as 7.0
-  * - 8.0
+  * - 8.0, NOTE: use maternal model 9.1 results, but only for 5 draws
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
-      3. Count of incident SAM cases
-      4. Count of incident MAM cases
+      3. Count of incident SAM cases stratified by SAM treatment
+      4. Count of incident MAM cases stratified by MAM treatment
       5. Stunting state person-time stratified by SQ-LNS utilization
       6. Mortality hazard first moment
     - * Random seed
   * - 8.1
     - 1. Deaths and YLLs (**NOT**) cause-specific)
       2. YLDs (**NOT** cause-specific)
-      3. Count of incident SAM cases
-      4. Count of incident MAM cases
+      3. Count of incident SAM cases stratified by SAM treatment
+      4. Count of incident MAM cases stratified by MAM treatment
       5. Stunting state person-time stratified by SQ-LNS utilization
       6. Mortality hazard first moment (?)
     - None
