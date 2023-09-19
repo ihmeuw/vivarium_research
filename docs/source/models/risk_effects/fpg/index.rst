@@ -188,7 +188,7 @@ be unaffected.
      - 235
      - [95, 125 years) 
 
-Mediation data is here: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
+Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
 
 Risk Outcome Pair #1: Ischemic heart disease
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -224,7 +224,7 @@ is also included.
 
 :math:`RR_\text{FPG,adjusted} = \frac{RR_\text{FPG,unadjusted}}{{RR_\text{LDL}}^{delta_\text{LDL}}}`
 
-Where :math:`MF_\text{LDL}` is the mediation factor for LDL-C, :math:`RR_\text{unadjusted}` 
+Where :math:`MF_\text{LDL}` is the unadjusted mediation factor for LDL-C, :math:`RR_\text{unadjusted}` 
 is from the get_draws code above and the :math:`RR_\text{adjusted}` is what is used to 
 find the risk of FPG on IHD. 
 
@@ -268,7 +268,7 @@ is also included.
 
 :math:`RR_\text{FPG,adjusted} = \frac{RR_\text{FPG,unadjusted}}{{RR_\text{LDL}}^{delta_\text{LDL}}}`
 
-Where :math:`MF_\text{LDL}` is the mediation factor for LDL-C, :math:`RR_\text{unadjusted}` 
+Where :math:`MF_\text{LDL}` is the unadjusted mediation factor for LDL-C, :math:`RR_\text{unadjusted}` 
 is from the get_draws code above and the :math:`RR_\text{adjusted}` is what is used to 
 find the risk of FPG on stroke. 
 
