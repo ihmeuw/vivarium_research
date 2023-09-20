@@ -306,16 +306,26 @@ Be sure that you are pulling from the engineering repo as needed. If you forget,
 might not be present in your version of the sim, leading to confusion. 
 
 If you need to look at an old version of the sim or are actively debugging something, you might 
-need to work with engineering to ensure you're on the correct branch. In some cases, they might 
-have you work from a branch other than main. 
+not work from the main branch. Work with engineering to ensure you're on the correct branch for 
+your needed task. 
+
+This can be especially challenging if you need to use different branchs of upstream repos, like 
+vivarium or vivarium public health. If you run into this type of situation, consult with the 
+engineers to find the best strategy to move forward. 
 
 2. Editing engineering files on your local machine: 
 
 In some cases, you might make edits to the model files on your local machine. This might be to 
-remove certain observers, edit model specs, or change parameters. Be careful!! While it's fine 
-to make edits you need, don't push them to the engineering repo. Also, track the edits so 
-if you have to pull a new model version from engineering, you can reset the interactive sim to 
-how you need. 
+remove certain observers, or model components. While small changes like population or 
+scenario can be done in a notebook, removing components cannot. 
+
+Be careful!! While it's fine to make edits you need, don't push them to the engineering repo. 
+Also, track the edits so if you have to pull a new model version from engineering, you can reset 
+the interactive sim to how you need. 
+
+If you are making edits on your local machine, be sure to write down what changes you make in the 
+notebook so you can refer back to it later. Also consider using :code:`git stash` and 
+:code:`git stash apply` to save and reapply changes. 
 
 3. Differing environments: 
 
@@ -323,5 +333,6 @@ Engineering generally uses a different environment to you, which means it can us
 versions of packages or of Python. This can cause confusion if something isn't running as 
 expected. 
 
-
-editable installs of packages within environments 
+Usually we use editable installs which will automatically update environments to what is in 
+the engineering repo and fixes this problem. However, it is still good to consider package 
+versions if you are seeing unexpected results. 
