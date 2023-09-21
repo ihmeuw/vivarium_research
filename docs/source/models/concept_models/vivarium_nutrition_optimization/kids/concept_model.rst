@@ -971,6 +971,13 @@ Wave I
     - * No stratification by MAM/SAM tx in these results
       * Realized that BEP->BW undernourished effect size is being applied to all pregnancies
       * Run on pregnancy 8.3 results with smaller pop size, so we will follow-up on population stability
+  * - 8.0.1
+    - * Check stratifications
+      * Check BEP -> BW effect was updated for adequate BMI pregnancies
+      * Check population size stability
+    - * Stratifications look good
+      * `BEP effect on BW is now appropriately modified by maternal BMI category <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_8.0_interactive.ipynb>`_
+      * Currently waiting on more seeds to complete to check population size stability before moving onto remaining production runs
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -979,7 +986,7 @@ Wave I
     - Explanation
     - Action plan
     - Timeline
-  * - BEP undernourished effect size being applied to all pregnancies
-    - There should be a separate effect size for adequately nourished pregnancies
-    - Update and do V&V in interactive sim
-    - ASAP
+  * - 
+    - 
+    - 
+    - 
