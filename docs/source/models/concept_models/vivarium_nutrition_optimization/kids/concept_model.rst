@@ -725,7 +725,7 @@ Wave I
     - All
     - Baseline, 0-8
     - 20 pregnancy seeds (at 20,000 pregnancies per seed) per draw; as many batched draws as we can!
-    - 
+    - NOTE: this is 1/4 of the number of seeds run in the pregnancy model production runs (9.1). We will need to rescale the relative population sizes accordingly before passing these results into the emulator.
 
 .. list-table:: Output specifications
   :header-rows: 1
