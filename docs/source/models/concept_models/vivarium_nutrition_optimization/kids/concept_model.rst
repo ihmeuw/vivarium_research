@@ -724,7 +724,7 @@ Wave I
     - Production runs
     - All
     - Baseline, 0-8
-    - 
+    - 20 pregnancy seeds (at 20,000 pregnancies per seed) per draw; as many batched draws as we can!
     - 
 
 .. list-table:: Output specifications
@@ -977,7 +977,7 @@ Wave I
       * Check population size stability
     - * Stratifications look good
       * `BEP effect on BW is now appropriately modified by maternal BMI category <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_8.0_interactive.ipynb>`_
-      * Currently waiting on more seeds to complete to check population size stability before moving onto remaining production runs
+      * `20 seeds per draw (at 20,000 PREGNANCIES per seed) is sufficient for our runs <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_8.0_seed_analysis.ipynb>`_
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
