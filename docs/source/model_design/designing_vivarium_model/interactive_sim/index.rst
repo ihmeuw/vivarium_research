@@ -297,10 +297,15 @@ Common Challenges
 -----------------
 
 Using the interactive sim is fundamentally different than looking at simulation outputs 
-and this can lead to challenges. Because you are running a mini simulation on your computer, 
+and this can lead to challenges. Because you are running a mini-simulation on your computer, 
 you overlap a lot more with engineering workflow and have to watch out for some common pitfalls.
 
 1. Using the correct branch and simulation version: 
+
+To run an interactive sim, you usually clone the simulation repository and then perform
+an `editable install <https://pip.pypa.io/en/stable/topics/local-project-installs/#editable-installs>`_
+(:code:`pip install -e .`), which means you are running exactly the code you have in your cloned repository.
+More information on this can be found in the :ref:`set-up guide above <interactive_setup_1>`.
 
 Be sure that you are pulling from the engineering repo as needed. If you forget, the latest work 
 might not be present in your version of the sim, leading to confusion. 
@@ -313,9 +318,9 @@ This can be especially challenging if you need to use different branchs of upstr
 vivarium or vivarium public health. If you run into this type of situation, consult with the 
 engineers to find the best strategy to move forward. 
 
-2. Editing engineering files on your local machine: 
+2. Editing engineering files on your local clone: 
 
-In some cases, you might make edits to the model files on your local machine. This might be to 
+In some cases, you might make edits to the model files on your local copy of the code. This might be to 
 remove certain observers, or model components. While small changes like population or 
 scenario can be done in a notebook, removing components cannot. 
 
@@ -323,16 +328,17 @@ Be careful!! While it's fine to make edits you need, don't push them to the engi
 Also, track the edits so if you have to pull a new model version from engineering, you can reset 
 the interactive sim to how you need. 
 
-If you are making edits on your local machine, be sure to write down what changes you make in the 
+If you are making edits on your local copy, be sure to write down what changes you make in the 
 notebook so you can refer back to it later. Also consider using :code:`git stash` and 
 :code:`git stash apply` to save and reapply changes. 
 
 3. Differing environments: 
 
-Engineering generally uses a different environment to you, which means it can use different 
-versions of packages or of Python. This can cause confusion if something isn't running as 
-expected. 
+Engineers create their own environments, and might use different versions of packages or 
+of Python than you are using. This can cause confusion if something isn't running as 
+expected.
 
-Usually we use editable installs which will automatically update environments to what is in 
-the engineering repo and fixes this problem. However, it is still good to consider package 
-versions if you are seeing unexpected results. 
+If you created your environment a while ago and you think you might have gotten out of sync,
+you should try re-running the :code:`pip install -e .` command in the engineering repo or
+re-creating the environment entirely. If you're not sure what version of Python to use, 
+ask the engineers what they are using.
