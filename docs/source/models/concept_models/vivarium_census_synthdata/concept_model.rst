@@ -3163,7 +3163,7 @@ for all column based noise include:
     - Census, Household Surveys
     - 0.01
     - 0.1
-    - Missing data, Copy from within Household, Age miswriting, OCR, typographic
+    - Missing data, Copy from within Household, Age miswriting, numeric miswriting, OCR, typographic
     -
   * - Date of Birth
     - Census, Household Surveys, WIC, SSA
