@@ -538,15 +538,10 @@ Specific outputs for specific models are specified in the following section.
   * - 9.1
     - Production runs
     - All
-    - (some larger number of draws and seeds, tbd)
-    - No age stratification and not cause-specific:
-      
-      * Deaths
-      * YLLs
-      * YLDs
-      * Intervention counts
+    - 1,600,000 population size per draw, 100 draws
+    - Same as 9.0, but no longer stratified by random seed
     - Live and still births with maternal_ids, infant sex, joint BMI/anemia exposure, intervention coverage, and LBWSG exposures
-    - NOTE: would be best to determine appropriate population sizes/number of draws from child sim before production runs, but it is ok to move forward without this information if it would be preferable due to timing considerations
+    - NOTE: This population size has not yet been tested in the child model; however, as maternal mortality is more rare than child mortality it is expected to be sufficient 
   * - 10.0
     - GBD 2021 update?
     - Baseline
