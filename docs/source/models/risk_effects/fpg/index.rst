@@ -105,6 +105,21 @@ FPG will impact the incidence rates of: ischemic heart disease and ischemic
 stroke. The excess mortality rate for all outcomes will 
 be unaffected. 
 
+Mediation
+---------
+
+Mediation is included for FPG through LDL-C. We have generally 
+followed the GBD approach to mediation, however we use slightly different 
+equations based on math in the word doc below. 
+
+:download:`Please see this word doc for details of the new math included <Mediation Notes.docx>`.
+
+In cases where the RR for FPG or LDL-C is 1, mediation will not be included as we assume 
+no effect for one set of risks. In theory, there could be a protective effect of 
+mediation, but GBD does not include this so we follow the same logic. 
+
+Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
+
 .. list-table:: FPG Risk-Outcomes Pairs
    :widths: 15 20
    :header-rows: 1
@@ -187,8 +202,6 @@ be unaffected.
    * - Age group end
      - 235
      - [95, 125 years) 
-
-Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
 
 Risk Outcome Pair #1: Ischemic heart disease
 ++++++++++++++++++++++++++++++++++++++++++++
