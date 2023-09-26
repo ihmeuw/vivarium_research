@@ -235,26 +235,26 @@ these are related to V&V. For more general information and best practices on V&V
   * - V&V for Risks with Many Categories (E.g., LBWSG)
     - Stratifying simulation outcomes by many categories may be too much of a drain on computation time 
     - `LBWSG exposure <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/b6fc8cc68eaaeafc563ad373977e7e4495b4db47/model_validation/interactive_simulations/model_5/lbwsg_exposure_model_7.ipynb>`_ 
-    - :ref: `CIFF malnutrition model <2019_concept_model_vivarium_ciff_sam>`_
+    - :ref:`CIFF malnutrition model<2019_concept_model_vivarium_ciff_sam>`
   * - V&V for Continuous Risks
     - Summary measures such as mean exposure or proportions below a threshold can be simulation outputs. Interactive sims can verify risk exposure standard deviation, look at spread, or check for outliers. You can also verify correlation between risks. 
     - Examples: 
       
       - `Continous risk standard deviation and visualization <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/interactive_example_continuous_risks.ipynb>`_ 
       - `Risk correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/interactive_correlation.ipynb>`_ 
-    - :ref: `CVD model <us_cvd_concept_model>`_
+    - :ref:`CVD model<us_cvd_concept_model>`
   * - V&V for Events with Multiple Risk Factors
     - Stratifying event rates by many risk factors might not be computationally feasible; you can verify risk effects by calculating the event rate at the simulant level.
     - `Multiple risks impacting CVD <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Interactive_RR_GregGraphs.ipynb>`_ 
-    - :ref: `CVD model <us_cvd_concept_model>`_
+    - :ref:`CVD model<us_cvd_concept_model>`
   * - V&V for Relative Risks based on Continuous Risks 
     - For continuous risks with risk effects, simulant level data is needed to validate risk and outcome rates. 
     - `Same example as prior row <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Interactive_RR_GregGraphs.ipynb>`_ 
-    - :ref: `CVD model <us_cvd_concept_model>`_
+    - :ref:`CVD model<us_cvd_concept_model>`
   * - Check for Simulant Level Continuity 
     - Can check that simulant values which are not meant to change, remain constant over time (example: propensities)
     - `Testing propensities drift <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Old_VV_unresolved/Interactive_Sim_Tests_06.18.2023_testing_propensity.ipynb>`_
-    - :ref: `CVD model <us_cvd_concept_model>`_
+    - :ref:`CVD model<us_cvd_concept_model>`
   * - Debugging 
     - This is very general, but simulant level data can be helpful in finding potential issues. Some examples include: propensity drift over time or finding problematic outliers. You can also "remove" parts of the sim to see where a problem might be. 
     - Examples: 
@@ -263,8 +263,8 @@ these are related to V&V. For more general information and best practices on V&V
       - The `propensity drift notebook above <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Old_VV_unresolved/Interactive_Sim_Tests_06.18.2023_testing_propensity.ipynb>`_ was also an effort at debugging using the interactive sim. 
     - Concept Models:
 
-      - :ref: `IV iron model <2019_concept_model_vivarium_iv_iron>`_
-      - :ref: `CVD model <us_cvd_concept_model>`_
+      - :ref:`IV iron model<2019_concept_model_vivarium_iv_iron>`
+      - :ref:`CVD model<us_cvd_concept_model>`
   * - Primary Output Graphs 
     - Creating visualizations when individual data is needed - such as simulant interactions with healthcare or continuous risk factor spreads over time. 
     - Examples: 
@@ -274,9 +274,9 @@ these are related to V&V. For more general information and best practices on V&V
       - `Sankey diagrams of transitions between states <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/tree/8ca7c6d23354ffb08f532d163990f18745f4c80a/verification/interactive_simulations/sankey_diagrams>`_ (pictured below). Note that this repo is **private** which means you'll need a team member to add you before you can view it. 
     - Concept Models:
 
-      - :ref: `IV iron model <2019_concept_model_vivarium_iv_iron>`_
-      - :ref: `CVD model <us_cvd_concept_model>`_
-      - :ref: `Multiple Myeloma model <2019_concept_model_vivarium_csu_multiple_myeloma_phase_2>`_
+      - :ref:`IV iron model<2019_concept_model_vivarium_iv_iron>`
+      - :ref:`CVD model<us_cvd_concept_model>`
+      - :ref:`Multiple Myeloma model<2019_concept_model_vivarium_csu_multiple_myeloma_phase_2>`
 
 
 .. image:: sankey-diagram.PNG
