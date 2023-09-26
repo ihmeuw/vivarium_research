@@ -50,18 +50,12 @@ Exposures should be assigned according to the following steps:
     - BMI < 18.5 exposure value
     - Note
   * - < 10 g/dL
-    - `Low hemoglobin draw/location/age-specific values available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10.csv>`_
-    - Informed from [Woman-First-Trial]_ data provided by BMGF and the GBD BMI exposure distribution. `Calculated in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/BMI%20and%20anemia%20exposure.ipynb>`_. `Low BMI prevalence given hemoglobin below 10 g/dL non-age-specific values (for use in the child sim) can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10_age_weighted.csv>`_
+    - `Low hemoglobin draw/location/age-specific values available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10.csv>`_ and `here for Pakistan (below 10, age-specific) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10_pakistan.csv>`_
+    - Informed from [Woman-First-Trial]_ data provided by BMGF and the GBD BMI exposure distribution. `Calculated in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/BMI%20and%20anemia%20exposure.ipynb>`_. `Low BMI prevalence given hemoglobin below 10 g/dL non-age-specific values (for use in the child sim) can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10_age_weighted.csv>`_ and `here for Pakistan (below 10, not age-specific) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10_age_weighted_pakistan.csv>`_
   * - >= 10 g/dL
-    - `High hemoglobin draw/location/age-specific values available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_. `Low BMI prevalence given hemoglobin above 10 g/dL non-age-specific values (for use in the child sim) can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10_age_weighted.csv>`_
-    - Estimated in the same way as the above row
+    - `High hemoglobin draw/location/age-specific values available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_ and `here for Pakistan (above 10, age-specific) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10_pakistan.csv>`_. 
+    - Estimated in the same way as the above row. `Low BMI prevalence given hemoglobin above 10 g/dL non-age-specific values (for use in the child sim) can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10_age_weighted.csv>`_ and `here for Pakistan (above 10, not age-specific) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10_age_weighted.csv>`_.
 
-
-https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10_age_weighted.csv
-
-.. note::
-  
-  I could calculate non age-specific values if that would be easier for the SWEs
 
 .. list-table:: Joint pre-pregnancy BMI and early pregnancy hemoglobin exposure categories
   :header-rows: 1
