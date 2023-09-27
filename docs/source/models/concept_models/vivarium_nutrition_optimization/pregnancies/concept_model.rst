@@ -542,7 +542,29 @@ Specific outputs for specific models are specified in the following section.
     - Same as 9.0, but no longer stratified by random seed
     - Live and still births with maternal_ids, infant sex, joint BMI/anemia exposure, intervention coverage, and LBWSG exposures
     - NOTE: This population size has not yet been tested in the child model; however, as maternal mortality is more rare than child mortality it is expected to be sufficient 
+  * - 9.2
+    - Production runs with intervention count observer fix (just once at 6 weeks instead of every timestep)
+    - All
+    - Same as 9.1
+    - Same as 9.1
+    - Same as 9.1
+    - 
   * - 10.0
+    - Nigeria and Pakistan locations
+    - All
+    - 400,000 population size per draw, 20 draws
+    - * Deaths, YLLs
+      * YLDs, stratified by pregnancy state
+      * Maternal disorder incident counts, stratified by anemia state
+      * Maternal hemorrhage incident counts, stratified by anemia state
+      * Anemia state person time, stratified by pregnancy state 
+      * Pregnancy state person time, stratified by birth outcome
+      * Pregnancy state transition counts, stratified by birth outcome
+      * Counts of birth outcomes
+      * Intervention counts
+    - Same as 9.1
+    - The underlying model should be identical to 9.1 except for locations and the modifications noted here
+  * - 11.0
     - GBD 2021 update?
     - Baseline
     - None
