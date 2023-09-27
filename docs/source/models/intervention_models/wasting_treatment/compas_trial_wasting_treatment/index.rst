@@ -247,7 +247,7 @@ The coverage propensity for wasting treatment parameter :math:`C` for any given 
 Targeted Coverage for MAM Treatment
 +++++++++++++++++++++++++++++++++++
 
-In accordance with new guidelines from the WHO on the prevention and management of acute 
+In accordance with `new guidelines from the WHO <https://files.magicapp.org/guideline/a3fe934f-6516-460d-902f-e1c7bbcec034/published_guideline_7330-1_1.pdf>`_ on the prevention and management of acute 
 malnutrition, we are including an option for targeted MAM treatment. The guidelines for 
 receiving MAM treatment include numerous factors for children to be consider for MAM 
 treatment including: 
