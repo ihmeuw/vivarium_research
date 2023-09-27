@@ -400,7 +400,7 @@ Mediation for heart failure is included for SBP only. LDL-C and FPG do
 not have a direct effect on heart failure, so they are not needed as mediation 
 factors here. Data for the mediation factors can be found in the csv file path below. 
 
-Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/heart_failure_deltas.csv
+Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/heart_failure_deltas_all_draws.csv
 
 :math:`RR_\text{BMI,adjusted} = \frac{RR_\text{BMI,unadjusted}}{{RR_\text{SBP}}^{delta_\text{SBP}}}`
 
