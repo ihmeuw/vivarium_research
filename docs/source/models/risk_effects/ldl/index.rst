@@ -143,6 +143,10 @@ rrs = get_draws(gbd_id_type='rei_id', gbd_id=367, source='rr', year_id=2019, gbd
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[367, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
+Once correlation is included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
+
 
 Risk Outcome Pair #2: Ischemic stroke
 +++++++++++++++++++++++++++++++++++++
@@ -157,6 +161,9 @@ rrs = get_draws(gbd_id_type='rei_id', gbd_id=367, source='rr', year_id=2019, gbd
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[367, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
+Once correlation is included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
