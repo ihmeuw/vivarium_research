@@ -979,6 +979,59 @@ Wave I
       * `BEP effect on BW is now appropriately modified by maternal BMI category <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_8.0_interactive.ipynb>`_
       * `20 seeds per draw (at 20,000 PREGNANCIES per seed) is sufficient for our runs <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_8.0_seed_analysis.ipynb>`_
 
+
+Wave II
+-------
+
+.. list-table:: Model run requests
+  :header-rows: 1
+
+  * - Run
+    - Description
+    - Pregnancy scenario(s)
+    - Child scenario(s)
+    - Spec. mods
+    - Note
+  * - 9.0
+    - Adding in Targeted MAM Scenarios
+    - Baseline
+    - 13
+    - 
+    - Scenario 13 is targeted MAM only 
+
+
+.. list-table:: Output specifications
+  :header-rows: 1
+  :widths: 1 10 3
+
+  * - Model
+    - Outputs
+    - Overall strata
+  * - 9.0 
+    - 1. Deaths
+      2. Wasting state person time, stratified by wasting treatment coverage
+      3. Stunting state person time
+      4. Underweight state person time, stratified by wasting treatment coverage
+      5. Wasting transition counts, stratified by wasting treatment coverage
+    - * Age group
+      * Sex
+      * Underweight category
+
+
+.. list-table:: Verification and validation tracking
+  :header-rows: 1
+  :widths: 1 5 5 
+
+  * - Model
+    - V&V plan
+    - V&V summary
+  * - 9.0
+    - * Verify MAM treatment is targeted based on age and underweight category
+      * Verify wasting state person time, wasting transitions and underweight person time all vary based on MAM treatment coverage 
+      * Verify other parts of the model still look as expected 
+    - 
+
+
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
 

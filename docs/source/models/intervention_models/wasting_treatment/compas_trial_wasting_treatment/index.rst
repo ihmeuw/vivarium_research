@@ -250,7 +250,7 @@ Targeted Coverage for MAM Treatment
 In accordance with `new guidelines from the WHO <https://files.magicapp.org/guideline/a3fe934f-6516-460d-902f-e1c7bbcec034/published_guideline_7330-1_1.pdf>`_ on the prevention and management of acute 
 malnutrition, we are including an option for targeted MAM treatment. The guidelines for 
 receiving MAM treatment include numerous factors for children to be consider for MAM 
-treatment including: 
+treatment including the presence of *any* of the following criteria:
 
 - WAZ z-score <-3 
 - Age <24 months
@@ -262,7 +262,8 @@ treatment including:
 - Recent on ongoing humanitarian crisis
 
 Currently, we will be using the first two of these (WAZ and/or age) for targeting MAM treatment. 
-This accounts for 57% of all MAM cases. 
+This accounts for 57% of all MAM cases. In the future, we plan to also include the third criterion 
+around MUAC but have not completed this currently. 
 
 In modeling, the targeted MAM intervention will be given to children who: 
 
