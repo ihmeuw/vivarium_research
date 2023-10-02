@@ -265,6 +265,10 @@ PAFs and relative risks can be pulled using the following code::
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[370, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
+Once correlation and mediation are included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
+
 Mediation
 ^^^^^^^^^
 
@@ -313,6 +317,10 @@ PAFs and relative risks can be pulled using the following code::
   rrs = get_draws(gbd_id_type='rei_id', gbd_id=370, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[370, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+Once correlation and mediation are included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
 
 Mediation
 ^^^^^^^^^
@@ -389,9 +397,10 @@ Notes:
 - (*) The population of 100,000 was determined by testing the standard deviation across draws to see where variation stabilized. This testing was completed `in this workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/heart_failure_pafs_pop_profiling.ipynb>`_. We found that the standard deviation was comparable for 10,000, 100,000 and 1,000,000 for most age/sex groups. However, for some groups 100,000 was significantly better than 10,000 so we will use 100,000. 
 - (**) We truncate the exposures of BMI as this calculation is based on literature values that have limited applicability in our model. 40.8 is 3 standard deviations above the mean BMI exposure for obese individuals in the paper being used. [Kenchaiah_2008]_ Without this truncation, there would be RR's that are 2000+ which makes mean PAF values very close to 1. We do not want to assume a continued relationship in BMI to RR for values 40 BMI units above the max used in the paper. 
 
-.. todo:: 
 
-  This will need to be adjusted to account for mediation and correlation when they are added to the model. A simpler solution is included here to allow for runs without correlation and mediation. 
+Once correlation and mediation are included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
 
 Mediation
 ^^^^^^^^^

@@ -222,6 +222,10 @@ PAFs and relative risks can be pulled using the following code::
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[105, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
+Once correlation and mediation are included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
+
 Mediation
 ^^^^^^^^^
 
@@ -265,6 +269,10 @@ PAFs and relative risks can be pulled using the following code::
   rrs = get_draws(gbd_id_type='rei_id', gbd_id=105, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[105, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+Once correlation and mediation are included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
 
 Mediation
 ^^^^^^^^^
