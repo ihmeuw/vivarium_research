@@ -193,6 +193,10 @@ rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
+Once correlation is included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
+
 Risk Outcome Pair #2: Ischemic stroke
 +++++++++++++++++++++++++++++++++++++
 
@@ -205,6 +209,10 @@ PAFs and relative risks can be pulled using the following code:
 rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+Once correlation is included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
 
 Risk Outcome Pair #3: Intracerebral hemorrhage
 ++++++++++++++++++++++++++++++++++++++++++++++
@@ -337,11 +345,9 @@ risks above. The calculations can be found in `this workbook <https://github.com
 For the Alabama population, the PAF is 0.205025 with a confidence interval of 
 (0.125341, 0.282451). Note that this is for the Alabama population ONLY. 
 
-.. todo:: 
-
-  The PAF either needs to be calculated at the national level, since the RR is at a national level. Or it needs to be calculated at the state level based on the exposure in each state. 
-
-  The Alabama value is provided for now so that a minimum model can be made for one state. 
+Once correlation is included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
