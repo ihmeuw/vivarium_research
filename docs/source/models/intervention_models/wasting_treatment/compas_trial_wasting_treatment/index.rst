@@ -244,6 +244,32 @@ The coverage propensity for wasting treatment parameter :math:`C` for any given 
 
   This strategy assumes that simulants who are treated for MAM and SAM once are no more likely to be treated again than simulants who have never been treated for SAM or MAM (despite need).
 
+Targeted Coverage for MAM Treatment
++++++++++++++++++++++++++++++++++++
+
+In accordance with `new guidelines from the WHO <https://files.magicapp.org/guideline/a3fe934f-6516-460d-902f-e1c7bbcec034/published_guideline_7330-1_1.pdf>`_ on the prevention and management of acute 
+malnutrition, we are including an option for targeted MAM treatment. The guidelines for 
+receiving MAM treatment include numerous factors for children to be consider for MAM 
+treatment including the presence of *any* of the following criteria:
+
+- WAZ z-score <-3 
+- Age <24 months
+- MUAC between 115-119 
+- Failing to recover from MAM after receiving other interventions
+- History of SAM
+- Comorbidities (like HIV, TB, some physical/mental disability)
+- Severe personal circumstances, such as mother died or poor maternal health and well-being 
+- Recent on ongoing humanitarian crisis
+
+Currently, we will be using the first two of these (WAZ and/or age) for targeting MAM treatment. 
+This accounts for 57% of all MAM cases. In the future, we plan to also include the third criterion 
+around MUAC but have not completed this currently. 
+
+In modeling, the targeted MAM intervention will be given to children who: 
+
+- Fall in the MAM category for wasting (WHZ z-score < -2 to -3) AND
+- Are aged 6-24 months OR are underweight with WAZ z-score < -3 
+
 Restrictions
 ++++++++++++
 
