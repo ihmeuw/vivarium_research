@@ -173,7 +173,7 @@ in the simulation will be informed using data specific to the post neonatal age 
   * - Child wasting exposure
     - :ref:`2020 docs<2020_risk_exposure_wasting_state_exposure>`, implemented in wasting paper
     - :ref:`Updated docs for children 6-59 months <2021_risk_exposure_wasting_state_exposure>` (use transitions rate values linked in .csv file) use :ref:`static wasting exposure <2020_risk_exposure_static_wasting>` for children 0-6 months of age (as implemented in IV iron)
-    - Include transitions for 0-6 months
+    - :ref:`Updated documentation for children 0-6 months of age <2021_risk_exposure_wasting_state_exposure_u6mos>`
     - (Does not require separate 2021 update)
   * - Child stunting exposure
     - :ref:`2020 docs<2020_risk_exposure_child_stunting>`, implemented in IV iron, wasting paper
