@@ -3111,6 +3111,41 @@ Noise should be added in the order below.
   Not all noise functions apply to all observers and columns, but the subset of noise functions
   applied should always be applied in the order they appear in this list.
 
+.. note::
+
+  The noise function names that are listed above and used throughout this concept model document are outdated according to what we have implemented in pseudopeople. In general, we decided to make the names into verbs as opposed to nouns in effort to be more user-friendly and to more clearly reflect how the noise would be introduced into the data in the real world.  
+
+  .. list-table:: Mapping noise function names in concept model to those implemented in pseudopeople
+    :header-rows: 1
+    * - Concept model name
+      - Pseudopeople name
+    * - "Borrowed" SSN
+      - Borrow a social security number
+    * - Omissions
+      - Omit a row
+    * - Missing data
+      - Do not respond
+    * - Incorrect selection
+      - Choose the wrong option
+    * - Month and day swaps
+      - Swap month and day
+    * - Zip code miswriting
+      - Write the wrong ZIP code digits
+    * - Age miswriting
+      - Misreport age
+    * - Numeric miswriting
+      - Write the wrong digits 
+    * - Nicknames
+      - Use a nickname
+    * - Fake names
+      - Use a fake name
+    * - Phonetic
+      - Make phonetic errors
+    * - OCR 
+      - Make optical character recognition (OCR) errors
+    * - Typographic
+      - Make typos
+
 Column Noise
 ''''''''''''
 
