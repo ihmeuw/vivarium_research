@@ -3117,6 +3117,7 @@ Noise should be added in the order below.
 
   .. list-table:: Mapping noise function names in concept model to those implemented in pseudopeople
     :header-rows: 1
+
     * - Concept model name
       - Pseudopeople name
     * - "Borrowed" SSN
@@ -3145,6 +3146,8 @@ Noise should be added in the order below.
       - Make optical character recognition (OCR) errors
     * - Typographic
       - Make typos
+
+
 
 Column Noise
 ''''''''''''
