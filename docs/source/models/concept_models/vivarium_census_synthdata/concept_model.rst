@@ -4209,10 +4209,6 @@ addresses are generated for GQ types.
 
   This business size distribution doesn't seem plausible!
 
-.. todo::
-
-  Document how we name businesses.
-
 We generate the number of employers needed to (in expectation) employ our starting
 non-military employed population, that is:
 
@@ -4246,6 +4242,33 @@ Finally, we set all working-age simulants living in military group quarters to b
 military.
 This is in addition to the 0.32% assigned across the entire working-age population regardless of
 living situation.
+
+We will generate names for employers based on a conditional random model that Abie developed and
+Jim refactored into the vivarium model. We based our simulated employer names 
+on a database of 5,321,506 "location names" from the SafeGraph "Core Places of 
+Interest USA" dataset released in June 2020. To create a representation of bigrams
+from this dataset, we constructed a directed multigraph. Each word in a location name 
+was treated as a node, and we included special <start> and <end> nodes, as well. 
+We included a directed multi-edge for each occurrence of a word pair in sequence 
+in each location name. 
+
+To generate simulated employer names, we performed a random
+walk through the bigram graph. Starting from the start node, we traversed 
+directed edges selected uniformly at random until we reached the end node or 
+exceeded a predetermined maximum path length. We then combined the words associated 
+with each node that was encountered along the path to form the simulated employer name.
+This approach resulted in a diverse range of names that maintained a realistic quality.
+However, it also resulted in some duplicates.
+Businesses can have the same name in real life, but they are more likely to choose unique
+names so that customers can tell them apart.
+To approximate this, we split the generated business names into 15 groups, and removed
+duplicate names within each group; therefore, no single name could be used by more than
+15 businesses.
+
+Lastly, we removed business names that actually existed in the SafeGraph dataset
+and were used in that dataset fewer than 1,000 times, to avoid businesses in our
+simulation having real names by coincidence.
+
 
 Updating employer over time
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -4325,14 +4348,6 @@ Limitations
 #. Business addresses that are vacated are not re-used (except by coincidence).
    This likely makes business linking easier than it is in reality.
 
-Speaking of the names for employers, we will generate names for
-employers based on a conditional random model that Abie developed and
-Jim refactored into the vivarium model.  It should have more details
-documented at some point.  Jim will ensure that all employer names are
-unique for now, although it would be interesting one day to add some
-duplicates.  Businesses can have the same name in real life but
-if/when we do have duplicate names we need to prevent duplicates for
-the names of the largest employers.
 
 .. _census_prl_perturbation:
 

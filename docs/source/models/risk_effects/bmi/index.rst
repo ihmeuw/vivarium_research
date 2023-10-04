@@ -106,6 +106,25 @@ BMI will impact the incidence rates of: ischemic heart disease, ischemic
 stroke, and heart failure. The excess mortality rate for all outcomes will 
 be unaffected. 
 
+Mediation
+---------
+
+Mediation is included for BMI through SBP, LDL-C and FPG. We have generally 
+followed the GBD approach to mediation, however we use slightly different 
+equations based on math in the word doc below. 
+
+:download:`Please see this word doc for details of the new math included <Mediation Notes.docx>`.
+
+In cases where the RR for BMI is 1 or the mediators' (SBP, LDL-C or FPG) RR is 1, mediation 
+will not be included for that risk since we assume no effect for one of risks. Note that we 
+could still include mediation for other present risks. E.g., BMI RR = 1.2, SBP RR = 1 and FPG RR 
+= 1.2, then we would NOT include mediation for BMI->SBP but would still include BMI->FPG. 
+
+In theory, there could be a protective effect of mediation, but GBD does not include this 
+so we follow the same logic. 
+
+Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
+
 
 .. list-table:: All Risk-Outcome Pairs for BMI
    :widths: 11 25
@@ -222,8 +241,6 @@ be unaffected.
      - 235
      - [95, 125 years)
 
-
-Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
 
 Risk Outcome Pair #1: Ischemic heart disease
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -390,17 +407,20 @@ Mediation
 
 Mediation for heart failure is included for SBP only. LDL-C and FPG do 
 not have a direct effect on heart failure, so they are not needed as mediation 
-factors here. Data for the mediation factors can be found in the csv file here. 
+factors here. Data for the mediation factors can be found in the csv file path below. 
+
+Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/heart_failure_deltas_all_draws.csv
 
 :math:`RR_\text{BMI,adjusted} = \frac{RR_\text{BMI,unadjusted}}{{RR_\text{SBP}}^{delta_\text{SBP}}}`
 
 where the RR_unadjusted is 1.14 (1.12, 1.16) and the 
-RR_adjusted is what is used to find the risk of BMI on heart failure. 
+RR_adjusted is what is used to find the risk of BMI on heart failure. For age groups 
+90+ and <25, use the closest age group. 
 
 The delta can be found in the table below. 
 
-.. csv-table:: Mediation Factor 
-  :file: heart_failure_MF.csv
+.. csv-table:: Delta Values 
+  :file: heart_failure_deltas.csv
   :widths: 40 30 30 30
   :header-rows: 1 
 
