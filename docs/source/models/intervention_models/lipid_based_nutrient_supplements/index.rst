@@ -291,6 +291,12 @@ The SQ-LNS effects on wasting transition rates should apply to simulants covered
     - 1
     - Apply this effect to both r1 and t1 transition rates
 
+.. note::
+  
+  We reviewed the individual studies included in [Dewey-et-al-2021b]_ to check if any evaluated the effects of SQ-LNS on wasting incidence rather than prevalence ([Dewey-et-al-2021b]_ focused on prevalence). We found that the RCTs rarely reported on incidence, but were still able to confirm that those that did had similar findings as our back-calculated incidence values (e.g., [Huybregts-et-al-2019-sqlns]_).
+
+  None of the RCTs included in [Dewey-et-al-2021b]_ reported on recovery rates. 
+
 Stunting
 ~~~~~~~~~
 
