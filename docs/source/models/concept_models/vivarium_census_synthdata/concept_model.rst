@@ -4214,8 +4214,16 @@ directed edges selected uniformly at random until we reached the end node or
 exceeded a predetermined maximum path length. We then combined the words associated 
 with each node that was encountered along the path to form the simulated employer name.
 This approach resulted in a diverse range of names that maintained a realistic quality.
-Businesses can have the same name in real life but if/when we do have duplicate names 
-we need to prevent duplicates for the names of the largest employers.
+However, it also resulted in some duplicates.
+Businesses can have the same name in real life, but they are more likely to choose unique
+names so that customers can tell them apart.
+To approximate this, we split the generated business names into 15 groups, and removed
+duplicate names within each group; therefore, no single name could be used by more than
+15 businesses.
+
+Lastly, we removed business names that actually existed in the SafeGraph dataset
+and were used in that dataset fewer than 1,000 times, to avoid businesses in our
+simulation having real names by coincidence.
 
 
 Updating employer over time
