@@ -169,10 +169,10 @@ throughout this style guide.
        intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender 
        non-conforming identities.
    * - Undifferentiated sex/gender measure
-     - Undifferentiated sex/gender measure is a binary variable that combines sex and gender 
-       measures across data sources. Due to data limitations or availability, it might not always 
-       be possible to elucidate whether a certain data source is intended to capture sex or gender, 
-       or some factor related to both. This term captures that uncertainty.See Section `2.0 Dealing 
+     - Undifferentiated sex/gender measure is a placeholder variable that indicates uncertainty 
+       regarding what is being captured. Due to data limitations or availability, it might not always 
+       be possible to elucidate whether a certain data source (e.g., a question in a household survey)
+       is intended to capture sex or gender, or some factor related to both. See Section `2.0 Dealing 
        with Limitations in Upstream Research`_ for more information. 
    * - Sex- and gender-related factors
      - "Factors associated with sex/gender that are not themselves dimensions of
