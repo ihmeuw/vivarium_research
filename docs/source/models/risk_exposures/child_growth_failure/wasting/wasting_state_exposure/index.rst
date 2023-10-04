@@ -151,20 +151,105 @@ categories as the GBD child wasting model. In our transition model, simulants ma
 transition between adjacent categories as well as between the cat1 (SAM) and cat3
 (mild) categories, representing a pathway for those successfully treated for SAM.
 
-.. important::
-
-  We will model wasting transitions as detailed on this page **only** among simulants at least six months of age.
-
-  There will be separate wasting exposure models for simulants 0-6 months of age will be detailed separately.
-
-    - :ref:`Static wasting exposure <2020_risk_exposure_static_wasting>` for wave I of the nutrition optimization model
-    - Wasting transition model among 0-6 month olds for wave II of the nutrition optimization model (TODO: link page when ready)
-
 **Risk exposure model diagram**
 
 .. image:: wasting_sim_transitions.png
 
-Prevalence of each wasting state for use in this model can be pulled using the following call:
+.. important::
+
+  The modeling strategy on this page applies to all simulants from birth to 5 years of age
+  for use in wave II of the nutrition optimization model.
+  Note that this is a change from the wave I strategy, described in the note below.
+
+.. note::
+
+  For wave I of the nutrition optimization model:
+
+  We will modeled wasting transitions as detailed on this page **only** among simulants at least six months of age.
+
+  For wave I, infants 0-6 months followed the 
+  :ref:`Static wasting exposure modeling strategy <2020_risk_exposure_static_wasting>`.
+
+Initialization
+--------------
+
+Simulants will be initialized into a wasting state **at birth** according to the wasting risk exposure
+distribution specific to the 1-5 month (ID 388) age group.
+
+Wasting state at initialization will be entirely dependent on :ref:`infant LBWSG exposure <2019_risk_exposure_lbwsg>`, 
+such that low birth weight (LBW) infants with birth weight exposures equal to or below 2,500 grams will have a greater 
+probability of being wasted than adequate birth weight (ABW) infants with birth weight exposures greater than 2,500 grams.
+
+.. list-table:: Parameter definitions
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Note
+  * - :math:`p_\text{cat(i)}`
+    - Population level prevalence of wasting category i
+    - In the 1-5 month age group (ID=388)
+  * - :math:`p_\text{cat(i),LBW}`
+    - Prevalence of wasting category i among the low birth weight population
+    - Low birth weight as BW =< 2,500 grams
+  * - :math:`p_\text{cat(i),ABW}`
+    - Prevalence of wasting catgory i among the adequate birth weight population
+    - Adequate birth weight as BW > 2,500 grams
+  * - RR
+    - Relative risk of wasting (cat1 and cat2 combined) at 30 days of life among LBW relative to ABW babies
+    - 
+  * - :math:`p_\text{LBW}`
+    - Prevalence of low birth weight among infants who survive to 30 days of life
+    - This value is specific to the baseline scenario
+
+Given the following equations:
+
+1. :math:`p_\text{cat1,LBW} * p_\text{LBW} + p_\text{cat1,ABW} * (1 - p_\text{LBW}) = p_\text{cat1}`
+
+2. :math:`RR = p_\text{cat1,LBW} / p_\text{cat1,ABW}` 
+
+.. list-table:: Wasting state probabilities by birth weight status
+  :header-rows: 1
+
+  * - Wasting category
+    - ABW probability
+    - LBW probability
+  * - cat1
+    - :math:`p_\text{cat1} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
+    - ABW probability * RR
+  * - cat2
+    - :math:`p_\text{cat2} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
+    - ABW probability * RR
+  * - cat3
+    - :math:`p_\text{cat3} / (p_\text{LBW}/RR + (1 - p_\text{LBW}))`
+    - ABW probability / RR
+  * - cat4
+    - :math:`p_\text{cat4} / (p_\text{LBW}/RR + (1 - p_\text{LBW}))`
+    - ABW probability / RR
+
+.. note::
+
+  The values in the *Wasting state probabilities by birth weight status* should **not**
+  change between scenarios as LBWSG exposures change.
+
+.. todo::
+
+  Update placeholder values below
+
+.. list-table:: Parameter values
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+    - Note/Source
+  * - RR
+    - 2
+    - PLACEHOLDER
+  * - :math:`p_\text{LBW}`
+    - 0.1
+    - PLACEHOLDER
+
+Note that prevalence of each wasting state for use in this model can be pulled using the following call:
 
 .. code-block:: python
 
@@ -175,9 +260,12 @@ Prevalence of each wasting state for use in this model can be pulled using the f
                     gbd_round_id=7,
                     decomp_step='iterative')
 
-`Draw-specific values for transition rates (defined in the table below) for Ethiopia (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions_3.csv>`_. Values in this file are defined in terms of transitions per person-year in the source state.
+Transitions
+------------
 
-  - `These values were generated in this notebook as of 8/28/2023 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_transition_sampling.ipynb>`_
+`Draw-specific values for transition rates (defined in the table below) for Ethiopia (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions_4.csv>`_. Values in this file are defined in terms of transitions per person-year in the source state.
+
+  - `These values were generated in this notebook as of 10/4/2023 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_transition_sampling.ipynb>`_
 
 .. list-table:: Transition Data
  :header-rows: 1

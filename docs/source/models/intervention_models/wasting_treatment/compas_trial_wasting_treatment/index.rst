@@ -93,7 +93,7 @@ Vivarium Modeling Strategy
 
   Any updates to this model will influence the :ref:`wasting risk exposure transitions rates <2021_risk_exposure_wasting_state_exposure>` and require them to be recalculated. 
 
-  Note that the parameters/values in the "Annual recovery rate equations" and "Parameter Values" tables are used as inputs to the generation of the wastin grisk exposure transition rates and will not be utilized in the simulation model directly.
+  Note that the parameters/values in the "Annual recovery rate equations" and "Parameter Values" tables are used as inputs to the generation of the wasting risk exposure transition rates and will not be utilized in the simulation model directly.
 
   The parameters/values in the "Location-specific parameter values" table will be used directly in simulation implementation, but should use the draw-specific values linked in the table that were used in the generation of the wasting exposure transitions rate values.
 
@@ -147,12 +147,12 @@ Vivarium Modeling Strategy
     - Note
   * - :math:`C_{SAM}` (baseline)
     - Ethiopia
-    - 0.488 (95% CI:0.374-0.604), normal distribution of uncertainty
+    - 0.488 (95% CI:0.374-0.604), normal distribution of uncertainty (0 for those <6 months)
     - [Isanaka-et-al-2021]_
     - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
   * - :math:`C_{MAM}` (baseline)
     - Ethiopia
-    - 0.15 (95% CI: 0.1, 0.2), normal distribution of uncertainty
+    - 0.15 (95% CI: 0.1, 0.2), normal distribution of uncertainty (0 for those <6 months)
     - Informed through discussion with CIFF/UNICEF that reported there is not reliable data on this parameter, but that this appeared to be a plausible range
     - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
   * - :math:`E_\text{SAM}`
@@ -178,6 +178,10 @@ The Vivarium modeling strategy above details how to solve for the transition rat
   Because of this, the rate at which simulants covered by MAM/SAM treatment transition through the treated and untreated pathways will not vary by scenario as they did for the CIFF project. 
 
   We made this decision as there was no significant difference in response rate between standard of care and combined protocol arms of the COMPAS trial [Bailey-et-al-2020]_.
+
+.. important::
+
+  Treatment effects should only be applied to those 6-59 months of age and **not** to infants less than six months of age.
 
 .. list-table:: Wasting transition rate relative risks for wasting treatment
   :header-rows: 1

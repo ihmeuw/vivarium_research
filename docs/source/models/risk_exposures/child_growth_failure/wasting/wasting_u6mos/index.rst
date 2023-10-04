@@ -41,3 +41,20 @@ Wasting dynamic transition model (GBD 2021): Under six months of age
 Overview
 ++++++++
 
+Vivarium Modeling Strategy
+++++++++++++++++++++++++++
+
+Initialization
+--------------
+
+Transitions
+-----------
+
+Determining exposure upon the 6 months of age transition
+--------------------------------------------------------
+
+Assumptions/Limitations
+-----------------------
+
+References
+++++++++++
