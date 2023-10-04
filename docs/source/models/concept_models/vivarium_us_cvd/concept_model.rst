@@ -431,14 +431,14 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
     - Measurements have a minimum value of 0 enforced [Wallace_2011]_
   * - B
-    - 41.76% will not start medication due to theraputic inertia. The others will start on one drug at half dose. 
-    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
+    - 80% will not start medication due to theraputic inertia. Of those that start medication: 20.5% will start on two drugs at half dose and 79.5% will start on one drug at half dose. [An_2021]_
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Turchin_2010]_ [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - C
-    - 41.76% will not start medication. Of those that start medication: 45% will receive two drugs at half dose and 55% will receive one drug at half dose  
-    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
+    - 80% will not start medication. Of those that start medication: 45% will receive two drugs at half dose and 55% will receive one drug at half dose  
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Turchin_2010]_ [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - D
-    - Only adherent simulants will move up categories. 41.76% will not change medication due to theraputic inertia. The remainder will move to the next treatment category on the ladder. If a simulant is in the highest category, there will be no change.  
-    - Theraputic inertia should remain constant within a specific treatment level. A simulant will draw an inertia value for each treatment level (i.e., two drugs at standard dose) and that value will not change. If they do move up to the next treatment, a new value will be drawn. If not, they will remain at that treatment indefinitely. [Ali_2021]_ [Liu_2017]_
+    - Only adherent simulants will move up categories. 87% will not change medication due to theraputic inertia. The remainder will move to the next treatment category on the ladder. If a simulant is in the highest category, there will be no change.  
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Bolen_2008]_ [Ali_2021]_ [Liu_2017]_
   * - E (outreach intervention scenarios)
     - If simulant is eligible, either 50% or 100% enrolled depending on scenario  
     - For 50% scenario, assignment is random 
@@ -468,17 +468,17 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - If simulant is in: AMI, Post MI, HF_IHD, AMI_HF, HF_Resid, acute ischemic stroke, or chronic ischemic stroke 
     - 
   * - D
-    - 19.4% will not start medication. Of those that start medication, 42% will receive high intensity statin; 52% medium intensity; and 6% low intensity 
-    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - 84% will not start medication. Of those that start medication, 42% will receive high intensity statin; 52% medium intensity; and 6% low intensity 
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
   * - E
-    - 19.4% will not start medication. Of those that start medication, 24% will receive high intensity statin; 66% medium intensity; and 10% low intensity 
-    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - 84% will not start medication. Of those that start medication, 24% will receive high intensity statin; 66% medium intensity; and 10% low intensity 
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
   * - F
-    - 19.4% will not start medication. Of those that start medication, 15% will receive high intensity statin; 71% medium intensity; and 14% low intensity 
-    - Theraputic inertia should remain constant throughout the simulation. Therefore, simulants who do not overcome inertia will **never** be prescribed medication. [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - 84% will not start medication. Of those that start medication, 15% will receive high intensity statin; 71% medium intensity; and 14% low intensity 
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
   * - G
-    - Only adherent simulants will move up categories. 19.4% will not move up medication categories due to theraputic inertia 
-    - Theraputic inertia should remain constant within a specific treatment level. A simulant will draw an inertia value for each treatment level (i.e., medium intensity statin) and that value will not change. If they do move up to the next treatment, a new value will be drawn. If not, they will remain at that treatment indefinitely. [Morales_2018]_ 
+    - Only adherent simulants will move up categories. 84% will not move up medication categories due to theraputic inertia 
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit   
   * - H
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - 
@@ -508,6 +508,42 @@ Notes:
     - If simulant is eligible, either 8.55%, 50% or 100% depending on scenario 
     - 
 
+.. _uscvd4.3.1:
+
+4.3.1 Therapeutic Inertia Propensity
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Therapeutic inertia is a complex combination of simulant level characteristics and 
+random variation. Therefore, we want each individual simulant’s propensity 
+to be autocorrelated between healthcare visits, but we don’t want this autocorrelation 
+to be 1. To model this, we use a combination of a random component which is 
+redrawn at each healthcare visit and a simulant level component with is constant over 
+the course of the simulation. 
+
+By the time a simulant has their first healthcare visit, (it does not matter if 
+this happens at initialization, or first healthcare visit), the simulant-specific 
+component should be randomly drawn from a normal distribution with mean 0 and 
+variance 0.5.
+
+At each healthcare visit, the random component should be randomly drawn from a 
+normal distribution with mean 0 and variance 0.5.
+
+The last step is combining these two components, which is done with this equation:
+
+.. math::
+  \text{inertia_propensity} = \Phi(\text{simulant_component} + \text{random_component})
+
+The sum of the two components has a standard normal distribution, which means 
+that the standard normal’s CDF of that sum is uniformly distributed between 
+0 and 1. This can be seen visually in the notebook below. 
+
+This final simulant inertia propensity will be compared against the cutoffs in the 
+healthcare modeling section to determine if a simulant overcomes inertia. 
+
+The math for this is modeled after :ref:`income in the PRL work <census_prl_income>`. The variances 
+were found via `nanosim testing <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/therapeutic_inertia_nanosim.ipynb>`_. To derive these values, a percent of eligible 
+people on medication was found from NHANES and then different variances were plugged into 
+the nanosim until the desired medication level was achieved in equilibrium. 
 
 .. _uscvd4.4:
 
@@ -1194,6 +1230,9 @@ Some limitations of this analysis include:
 .. [Baumgartner_2018] Baumgartner, Pascal C., R. Brian Haynes, Kurt E. Hersberger, and Isabelle Arnet. 2018. “A Systematic Review of Medication Adherence Thresholds Dependent of Clinical Outcomes.” Frontiers in Pharmacology 9. 
   https://www.frontiersin.org/articles/10.3389/fphar.2018.01290 
 
+.. [Bolen_2008] Bolen, Shari Danielle, T. Alafia Samuels, Hsin-Chieh Yeh, Spyridon S. Marinopoulos, Maura McGuire, Marcela Abuid, and Frederick L. Brancati. 2008. “Failure to Intensify Antihypertensive Treatment by Primary Care Providers: A Cohort Study in Adults with Diabetes Mellitus and Hypertension.” Journal of General Internal Medicine 23 (5): 543–50. 
+  https://doi.org/10.1007/s11606-008-0507-2.
+
 .. [Byrd_2011] Byrd, James B., Chan Zeng, Heather M. Tavel, David J. Magid, Patrick J. O’Connor, Karen L. Margolis, Joe V. Selby, and P. Michael Ho. 2011. “Combination Therapy as Initial Treatment for Newly Diagnosed Hypertension.” American Heart Journal 162 (2): 340–46. 
   https://doi.org/10.1016/j.ahj.2011.05.010.
 
@@ -1215,6 +1254,9 @@ Some limitations of this analysis include:
 .. [Goff_2014] Goff, David C., Donald M. Lloyd-Jones, Glen Bennett, Sean Coady, Ralph B. D’Agostino, Raymond Gibbons, Philip Greenland, et al. 2014. “2013 ACC/AHA Guideline on the Assessment of Cardiovascular Risk.” Circulation 129 (25_suppl_2): S49–73. 
   https://doi.org/10.1161/01.cir.0000437741.48606.98
 
+.. [Goldberg_2007] Goldberg, Kenneth C., Stephanie D. Melnyk, and David L. Simel. 2007. “Overcoming Inertia: Improvement in Achieving Target Low-Density Lipoprotein Cholesterol.” The American Journal of Managed Care 13 (9): 530–34.
+  https://pubmed-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/17803367/ 
+
 .. [Gu_2012] Gu, Qiuping, Vicki L. Burt, Charles F. Dillon, and Sarah Yoon. 2012. “Trends in Antihypertensive Medication Use and Blood Pressure Control Among United States Adults  With Hypertension.” Circulation 126 (17): 2105–14. 
   https://doi.org/10.1161/CIRCULATIONAHA.112.096156. 
 
@@ -1233,8 +1275,6 @@ Some limitations of this analysis include:
 .. [McCormack_2020] McCormack, James P., and Daniel T. Holmes. 2020. “Your Results May Vary: The Imprecision of Medical Measurements.” BMJ 368 (February): m149. 
   https://doi.org/10.1136/bmj.m149.
 
-.. [Morales_2018] Morales, Clotilde, Núria Plana, Anna Arnau, Laia Matas, Marta Mauri, Àlex Vila, Lluís Vila, et al. 2018. “Causas de no consecución del objetivo terapéutico del colesterol de las lipoproteínas de baja densidad en pacientes de alto y muy alto riesgo vascular controlados en Unidades de Lípidos y Riesgo Vascular. Estudio EROMOT.” Clín. investig. arterioscler. (Ed. impr.), 1–9.
-
 .. [Munoz-NEJM] Muñoz, Daniel, et al. "Polypill for cardiovascular disease prevention in an underserved population." New England Journal of Medicine 381.12 (2019): 1114-1123.
   https://www.nejm.org/doi/10.1056/NEJMoa1815359
 
@@ -1248,6 +1288,9 @@ Some limitations of this analysis include:
 
 .. [Thom-2013] Thom, Simon, et al. "Effects of a fixed-dose combination strategy on adherence and risk factors in patients with or at high risk of CVD: the UMPIRE randomized clinical trial." Jama 310.9 (2013): 918-929.
 	https://jamanetwork.com/journals/jama/fullarticle/1734704
+
+.. [Turchin_2010] Turchin, Alexander, Saveli I. Goldberg, Maria Shubina, Jonathan S. Einbinder, and Paul R. Conlin. 2010. “Encounter Frequency and Blood Pressure in Hypertensive Patients with Diabetes.” Hypertension 56 (1): 68–74. 
+  https://doi.org/10.1161/HYPERTENSIONAHA.109.148791.
 
 .. [Wallace_2011] Wallace, Emma, and Tom Fahey. 2011. “Measuring Blood Pressure in Primary Care: Identifying ‘White Coat Syndrome’ and Blood Pressure Device Comparison.” The British Journal of General Practice 61 (590): 544–45.
   https://doi.org/10.3399/bjgp11X593749. 
