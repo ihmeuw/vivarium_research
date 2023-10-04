@@ -111,9 +111,9 @@ exposures to be used in vivarium simulations can be found in the links below.
 Details on how 
 these distributions were obtained can be found in the subsequent section.
 
-- `Ethiopian conditional underweight exposure distributions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/lookup.csv>`_
+- `Ethiopian conditional underweight exposure distributions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/lookup_3.csv>`_
 
-  - Note: the postneonatal age group should be applied to the early neonatal age group as well.
+  - Note: the late neonatal age group should be applied to the early neonatal age group as well.
 
 With this strategy, child underweight will dynamically update within a 
 single age group in tandem with child wasting exposure changes and may also 

@@ -272,6 +272,11 @@ Their date of birth is defined to be consistent with that precise age.
   Date of birth, in reality, is not evenly spread throughout the year.
   We do not model this.
 
+.. note::
+  The PUMS column is top-coded at 99 years. That means our simulation will start with
+  no centenarians; if we wanted to address this, we could distribute top-coded values
+  according to some distribution.
+
 We perturb the age attribute as described in the
 :ref:`perturbation section <census_prl_perturbation>`.
 
@@ -672,6 +677,16 @@ Data sources
 
 All data comes from ACS PUMS.
 We use the standard columns about demographics, household structure, etc.
+
+.. note::
+  The ACS PUMS column for age is top-coded at 99 years.
+  Even though our last age group is 80-100, it therefore was
+  calculated including people who are 100+.
+  This is also how it is applied in the simulation, due to
+  `Vivarium's extrapolation strategy <https://vivarium.readthedocs.io/en/latest/concepts/lookup.html#extrapolation>`_.
+  Technically, it would be more correct to say this age group
+  has no upper bound.
+
 We also use some that are specifically relevant to moving:
 
 * What PUMA the person lives in now (:code:`ST` and :code:`PUMA`).
@@ -1114,8 +1129,14 @@ Our assumption is that the **number (per year) and characteristics** of recent i
 in the 2016-2020 ACS PUMS will be replicated in all future years of the simulation.
 
 .. note::
+  All ACS PUMS data used in this component should be subset to the simulation's catchment area, e.g. Florida.
 
-    All ACS PUMS data used in this component should be subset to the simulation's catchment area, e.g. Florida.
+.. note::
+  As at population initialization, we ignore the fact that age has
+  been top-coded to 99 years in the ACS PUMS.
+  This means no simulant will ever immigrate who is 100+ years old.
+  If we wanted to fix this in the future, we could distribute the
+  top-coded ages to higher ages somehow.
 
 Move type
 '''''''''
@@ -1316,6 +1337,15 @@ according to the distributions of these demographics in a resample of the corres
 with perturbation as described in the :ref:`perturbation section below <census_prl_perturbation>`.
 Note that in the case of household moves, these are the demographics **of the immigrant's household's reference person**,
 while for the other two types they are demographics of the immigrant themselves.
+
+.. note::
+  The ACS PUMS column for age is top-coded at 99 years.
+  Even though our last age group is 80-100, it therefore was
+  calculated including people who are 100+.
+  This is also how it is applied in the simulation, due to
+  `Vivarium's extrapolation strategy <https://vivarium.readthedocs.io/en/latest/concepts/lookup.html#extrapolation>`_.
+  Technically, it would be more correct to say this age group
+  has no upper bound.
 
 Finally, we calculate the rates of people emigrating per year of person-time "at risk":
 
@@ -2609,6 +2639,12 @@ W2 and 1099 Forms
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
+  * - Employer ID (for PRL tracking)
+  * - Social Security Number
+  * - Wages (income from this job)
+  * - Employer Name
+  * - Employer Address
+  * - Employer ZIP Code
   * - First name
   * - Middle initial
   * - Last name
@@ -2619,12 +2655,6 @@ W2 and 1099 Forms
   * - Mailing Address City
   * - Mailing Address State
   * - Mailing Address ZIP Code
-  * - Social Security Number
-  * - Wages (income from this job)
-  * - Employer ID (for PRL tracking)
-  * - Employer Name
-  * - Employer Address
-  * - Employer ZIP Code
   * - Type of Tax Form (W2 or 1099)
   * - Tax year
 
@@ -2754,6 +2784,8 @@ in January 2024.
     -
   * - Last name
     -
+  * - Social Security Number (if present)
+    - ITIN if no SSN present
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2768,8 +2800,6 @@ in January 2024.
     -
   * - Mailing Address ZIP Code
     -
-  * - Social Security Number (if present)
-    - ITIN if no SSN present
   * - Tracked Dependent(s) (for noise functions ONLY)
     -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
@@ -2801,7 +2831,7 @@ in January 2024.
   * - Social Security Number (if present)
     - ITIN if no SSN present
   * - Tax year
-    - 
+    -
 
 .. note::
 
@@ -2959,16 +2989,16 @@ added later (not in the minimum viable model), if desired.
   :widths: 20
   :header-rows: 0
 
+  * - Event ID (unique integer identifier for each row in the SSA dataset, representing a ground-truth identifier for the unique event recorded in that row; unaffected by noise functions; to be used for comparing noised and unnoised data)
   * - Unique simulant ID (for PRL tracking)
+  * - Social Security Number
   * - First name
   * - Middle name
   * - Last name
   * - DOB (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
   * - Sex (binary; "Male" or "Female")
-  * - Social Security Number
   * - Type of event
   * - Date of event (stored as a string in YYYYMMDD format, as indicated by [CARRA_SSA]_ Table 1)
-  * - Event ID (unique integer identifier for each row in the SSA dataset, representing a ground-truth identifier for the event recorded in that row; unaffected by noise functions; to be used for comparing noised and unnoised data)
 
 .. note::
   Unlike the other observers, there is no ground-truth unique household ID for PRL tracking in this observer.
@@ -3993,6 +4023,15 @@ respondent income.
 We subset the PUMS to only those who are employed; as discussed in the previous
 section, in our simulation, unemployed people have 0 income.
 
+.. note::
+  The ACS PUMS column for age is top-coded at 99 years.
+  Even though our last age group is 80-100, it therefore was
+  calculated including people who are 100+.
+  This is also how it is applied in the simulation, due to
+  `Vivarium's extrapolation strategy <https://vivarium.readthedocs.io/en/latest/concepts/lookup.html#extrapolation>`_.
+  Technically, it would be more correct to say this age group
+  has no upper bound.
+
 Distribution parameters
 '''''''''''''''''''''''
 
@@ -4170,10 +4209,6 @@ addresses are generated for GQ types.
 
   This business size distribution doesn't seem plausible!
 
-.. todo::
-
-  Document how we name businesses.
-
 We generate the number of employers needed to (in expectation) employ our starting
 non-military employed population, that is:
 
@@ -4207,6 +4242,33 @@ Finally, we set all working-age simulants living in military group quarters to b
 military.
 This is in addition to the 0.32% assigned across the entire working-age population regardless of
 living situation.
+
+We will generate names for employers based on a conditional random model that Abie developed and
+Jim refactored into the vivarium model. We based our simulated employer names 
+on a database of 5,321,506 "location names" from the SafeGraph "Core Places of 
+Interest USA" dataset released in June 2020. To create a representation of bigrams
+from this dataset, we constructed a directed multigraph. Each word in a location name 
+was treated as a node, and we included special <start> and <end> nodes, as well. 
+We included a directed multi-edge for each occurrence of a word pair in sequence 
+in each location name. 
+
+To generate simulated employer names, we performed a random
+walk through the bigram graph. Starting from the start node, we traversed 
+directed edges selected uniformly at random until we reached the end node or 
+exceeded a predetermined maximum path length. We then combined the words associated 
+with each node that was encountered along the path to form the simulated employer name.
+This approach resulted in a diverse range of names that maintained a realistic quality.
+However, it also resulted in some duplicates.
+Businesses can have the same name in real life, but they are more likely to choose unique
+names so that customers can tell them apart.
+To approximate this, we split the generated business names into 15 groups, and removed
+duplicate names within each group; therefore, no single name could be used by more than
+15 businesses.
+
+Lastly, we removed business names that actually existed in the SafeGraph dataset
+and were used in that dataset fewer than 1,000 times, to avoid businesses in our
+simulation having real names by coincidence.
+
 
 Updating employer over time
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -4286,14 +4348,6 @@ Limitations
 #. Business addresses that are vacated are not re-used (except by coincidence).
    This likely makes business linking easier than it is in reality.
 
-Speaking of the names for employers, we will generate names for
-employers based on a conditional random model that Abie developed and
-Jim refactored into the vivarium model.  It should have more details
-documented at some point.  Jim will ensure that all employer names are
-unique for now, although it would be interesting one day to add some
-duplicates.  Businesses can have the same name in real life but
-if/when we do have duplicate names we need to prevent duplicates for
-the names of the largest employers.
 
 .. _census_prl_perturbation:
 
@@ -4406,13 +4460,35 @@ from international immigration in a household move, the following steps are **al
    and standard deviation 1 year.
 #. The age shift is added to the age values of all individuals in the household.
 #. If any age values in the household exceed 99 years, they are set to 99 years.
-#. Any individuals with negative age values are set to have age 0.
+#. Any individuals with negative age values have their age multiplied by -1, e.g. age -1.5 becomes 1.5, -2.3 becomes 2.3, etc.
+
+.. note::
+  The clipping of large ages to 99 years matches the situation in our source data, the ACS PUMS,
+  which top-codes age at 99.
+  It will lead to some unrealistic DOB clumping at 99 years before our simulation start, but
+  we ignore this for now; there are not that many 99 year olds in the population anyway.
+  If this turns out to be a problem, we might consider "reflecting" around 99 as we do
+  around 0.
 
 .. note::
 
-  Clipping age to 0 will create more newborns in the distribution than would normally be expected.
-  However, other (simple) approaches also change the distribution (e.g. dropping simulants with
-  negative age decreases the number of young people).
+  Reflecting negative ages will roughly preserve the overall age distribution (i.e. it will not lead to lots
+  fewer children than expected, as we would get if we dropped these simulants).
+  With a rough simulation approach, we found that other simple approaches, such as truncating the
+  distribution to only sample perturbations resulting in non-negative ages, as well as clipping
+  negative ages to 0, would all lead to strange population age distributions.
+  Clipping also has the serious flaw of causing a clumping of dates of birth, which has direct PRL
+  implications.
+
+  However, it can make the relationships between simulants implausible or impossible in combination
+  with their ages: for example, a parent who is younger than their child.
+  This should be rare given the size of our perturbations.
+  Additionally, some other components of the simulation can already cause these situations, such as
+  domestic migration.
+
+  If this issue turns out to have PRL relevance, or be distracting from the general realism of our
+  simulated data, we might consider adding rules that transform the relationship attribute, disallowing
+  certain situations.
 
 Using a single age shift for a household makes it more likely that the age/relationship combinations
 are logical.
@@ -4425,14 +4501,11 @@ Additionally, individual GQ simulants can be added by international immigration 
 and individual non-GQ simulants can be added in non-reference-person moves.
 In all these cases, the following steps are **always** performed after sampling an individual:
 
-#. An age shift is generated by taking a random draw from a truncated normal distribution with
-   mean 0, standard deviation 1 year, and truncation such that the age shift cannot be less than
-   or equal to -1 times the individual's age.
-   Equivalently, this can be thought of as repeating draws from a normal distribution until the first
-   draw that is greater than this lower bound.
-#. The age shift is added to the individual's age value. This should never result in a negative value,
-   due to the truncated distribution described in the previous step.
+#. An age shift is generated by taking a random draw from a normal distribution with mean 0
+   and standard deviation 1 year.
+#. The age shift is added to the individual's age value.
 #. If the individual's age value is greater than 99 years, it is set to 99 years.
+#. If the individual's age is negative, it is multiplied by -1, e.g. age -1.5 becomes 1.5, -2.3 becomes 2.3, etc.
 
 We do not consider relationship to reference person (for non-GQ people), GQ type (for GQ people),
 or initially sampled age when determining the age shift.

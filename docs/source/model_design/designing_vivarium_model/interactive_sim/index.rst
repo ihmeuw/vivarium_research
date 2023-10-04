@@ -221,45 +221,124 @@ these are related to V&V. For more general information and best practices on V&V
 
 .. todo::
 
-  Add example notebooks to table below. For reference this is the old notebook from the prior V&V page: https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/interactive_simulations/Interactive%20simulation%20demo.ipynb 
+  Add further example notebooks to table below if/when they are received. 
 
 
 .. list-table:: Common Interactive Simulation Tasks 
-  :widths: 15 15 15
+  :widths: 15 15 15 15
   :header-rows: 1
 
   * - Task 
     - Why is this done interactively? 
-    - Example Notebook 
+    - Example Notebook
+    - Relevant Concept Model
   * - V&V for Risks with Many Categories (E.g., LBWSG)
     - Stratifying simulation outcomes by many categories may be too much of a drain on computation time 
-    - 
+    - `LBWSG exposure <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/b6fc8cc68eaaeafc563ad373977e7e4495b4db47/model_validation/interactive_simulations/model_5/lbwsg_exposure_model_7.ipynb>`_ 
+    - :ref:`CIFF malnutrition model<2019_concept_model_vivarium_ciff_sam>`
   * - V&V for Continuous Risks
-    - Summary measures such as mean exposure or proportions below a threshold can be simulation outputs. Interactive sims can verify risk exposure standard deviation, look at spread, or check for outliers. 
-    - 
+    - Summary measures such as mean exposure or proportions below a threshold can be simulation outputs. Interactive sims can verify risk exposure standard deviation, look at spread, or check for outliers. You can also verify correlation between risks. 
+    - Examples: 
+      
+      - `Continous risk standard deviation and visualization <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/interactive_example_continuous_risks.ipynb>`_ 
+      - `Risk correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/interactive_correlation.ipynb>`_ 
+    - :ref:`CVD model<us_cvd_concept_model>`
   * - V&V for Events with Multiple Risk Factors
     - Stratifying event rates by many risk factors might not be computationally feasible; you can verify risk effects by calculating the event rate at the simulant level.
-    - 
+    - `Multiple risks impacting CVD <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Interactive_RR_GregGraphs.ipynb>`_ 
+    - :ref:`CVD model<us_cvd_concept_model>`
   * - V&V for Relative Risks based on Continuous Risks 
     - For continuous risks with risk effects, simulant level data is needed to validate risk and outcome rates. 
-    - 
+    - `Same example as prior row <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Interactive_RR_GregGraphs.ipynb>`_ 
+    - :ref:`CVD model<us_cvd_concept_model>`
   * - Check for Simulant Level Continuity 
     - Can check that simulant values which are not meant to change, remain constant over time (example: propensities)
-    - 
+    - `Testing propensities drift <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Old_VV_unresolved/Interactive_Sim_Tests_06.18.2023_testing_propensity.ipynb>`_
+    - :ref:`CVD model<us_cvd_concept_model>`
   * - Debugging 
     - This is very general, but simulant level data can be helpful in finding potential issues. Some examples include: propensity drift over time or finding problematic outliers. You can also "remove" parts of the sim to see where a problem might be. 
-    - 
+    - Examples: 
+
+      - `Finding common random number error <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/b1ca9e95f40942a92a9c8ed544d8adef6dc68695/validation/child/interactive_simulations/20221003%20Common%20random%20numbers%20investigation.ipynb>`_. 
+      - The `propensity drift notebook above <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Old_VV_unresolved/Interactive_Sim_Tests_06.18.2023_testing_propensity.ipynb>`_ was also an effort at debugging using the interactive sim. 
+    - Concept Models:
+
+      - :ref:`IV iron model<2019_concept_model_vivarium_iv_iron>`
+      - :ref:`CVD model<us_cvd_concept_model>`
   * - Primary Output Graphs 
     - Creating visualizations when individual data is needed - such as simulant interactions with healthcare or continuous risk factor spreads over time. 
-    - 
+    - Examples: 
+
+      - `Simulant level hemoglobin changes over time <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/b1ca9e95f40942a92a9c8ed544d8adef6dc68695/validation/maternal/interactive_simulations/Hemoglobin%20trajectory%20plots%2020220616.ipynb>`_ 
+      - `Simulant healthcare interactions <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Single_Simulant_Graph_Lifestyle.ipynb>`_  
+      - `Sankey diagrams of transitions between states <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/tree/8ca7c6d23354ffb08f532d163990f18745f4c80a/verification/interactive_simulations/sankey_diagrams>`_ (pictured below). Note that this repo is **private** which means you'll need a team member to add you before you can view it. 
+    - Concept Models:
+
+      - :ref:`IV iron model<2019_concept_model_vivarium_iv_iron>`
+      - :ref:`CVD model<us_cvd_concept_model>`
+      - :ref:`Multiple Myeloma model<2019_concept_model_vivarium_csu_multiple_myeloma_phase_2>`
+
+
+.. image:: sankey-diagram.PNG
+
+You might notice that in a lot of the tasks above, especially making primary output graphs, 
+you will make new "observers" for the sim and then run time forward, capturing this 
+additional data. You might ask yourself, why not just make those the built-in observers 
+to my actual sim? The answer is that the "dimensions" of complexity of a model run 
+combine multiplicatively, so it is super expensive to do all of them at once. For example, 
+you can run the simulation with 60 draws and simple observers, and you can run an 
+interactive sim with 1 draw and complicated observers, but 60 draws and complicated 
+observers takes way more resources than adding up those two runs. Therefore we sometimes 
+choose to make plots in the interactive sim instead! 
 
 .. _interactive_challenges:
 
 Common Challenges
 -----------------
 
-.. todo::
+Using the interactive sim is fundamentally different than looking at simulation outputs 
+and this can lead to challenges. Because you are running a mini-simulation on your computer, 
+you overlap a lot more with engineering workflow and have to watch out for some common pitfalls.
 
-  Add information on: environment management, editable installs of packages within environments 
-  If you remove observers or change things it can have weird effects - talk with engineering 
+1. Using the correct branch and simulation version: 
 
+To run an interactive sim, you usually clone the simulation repository and then perform
+an `editable install <https://pip.pypa.io/en/stable/topics/local-project-installs/#editable-installs>`_
+(:code:`pip install -e .`), which means you are running exactly the code you have in your cloned repository.
+More information on this can be found in the :ref:`set-up guide above <interactive_setup_1>`.
+
+Be sure that you are pulling from the engineering repo as needed. If you forget, the latest work 
+might not be present in your version of the sim, leading to confusion. 
+
+If you need to look at an old version of the sim or are actively debugging something, you might 
+not work from the main branch. Work with engineering to ensure you're on the correct branch for 
+your needed task. 
+
+This can be especially challenging if you need to use different branchs of upstream repos, like 
+vivarium or vivarium public health. If you run into this type of situation, consult with the 
+engineers to find the best strategy to move forward. 
+
+2. Editing engineering files on your local clone: 
+
+In some cases, you might make edits to the model files on your local copy of the code. This might be to 
+remove certain observers, or model components. While small changes like population or 
+scenario can be done in a notebook, removing components cannot. 
+
+Be careful!! While it's fine to make edits you need, don't push them to the engineering repo. 
+Also, track the edits so if you have to pull a new model version from engineering, you can reset 
+the interactive sim to how you need. 
+
+If you are making edits on your local copy, be sure to write down what changes you make in the 
+notebook so you can refer back to it later. Also consider using :code:`git stash` and 
+:code:`git stash apply` to save and reapply changes. 
+
+3. Differing environments: 
+
+Engineers create their own environments, and might use different versions of packages or 
+of Python than you are using. This can cause confusion if something isn't running as 
+expected.
+
+If you created your environment a while ago and you think you might have gotten out of sync,
+you should try re-running the :code:`pip install -e .` command in the engineering repo or
+re-creating the environment entirely. If you're not sure what version of Python to use, 
+ask the engineers what they are using.
