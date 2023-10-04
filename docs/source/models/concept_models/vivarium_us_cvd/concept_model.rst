@@ -1023,21 +1023,24 @@ Code is below for reference
     - Adding Correlation 
     - No new issues found with adding correlation. `Causes with correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_correlation_07.25.2023.ipynb>`_ and `risks with correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/risks_VV_07.25.2023.ipynb>`_ were checked in the same manner as previous runs. Additionally, `simulant exposure values <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/interactive_correlation.ipynb>`_ were checked for correlation in the interactive sim both on initialization and after 25 time steps. It was found that correlation varied around the expected input values. 
   * - 17.0
-    - Add New Observer 
-    - 
+    - Add New Observer - Binned Exposure  
+    - The new observer seems to be working well, V&V for this observer only can be found in the `binned exposure notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/binned_risks_08.08.2023.ipynb>`_. 
   * - 18.0
     - Test Runs for Timing on 10 States 
-    - States to be included are: Alabama, Washington, Alaska, Rhode Island, California, Texas, Kansas, West Virginia, Florida, North Dakota  
+    - These runs were completed and the V&V was saved to this `folder <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/tree/main/10_locations_7.18.23>`_. V&V largely worked well and no state specific issues were noted. There was an issue with randomness being included between scenarios which was resolved and fixed.
   * - 19.0
     - Adjusting Theraputic Inertia 
-    - 
+    - After adjustments to theraputic inertia, initialized values for medication are more stable throughout the sim. This workbook included the `latest medication rates <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_08_3_23.ipynb>`_. There are still three outstanding questions: (1) the no treatment group increases over time in the sim  for both medications (2) very few simulants move to higher treatment categories and (3) the age for LDL-C medication change should be lower in men to prevent drift. However, we are leaving this until after the 51 location run is working to reassess. 
   * - 20.0
-    - Add Medication and PAF Recalculations 
-    - 
+    - Single draw run in 51 locations 
+    - Runs were completed with draw 829. The V&V for causes and risks looked to be expected in this notebook for `51 location causes <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_multi_location_8.4.23.ipynb>`_ and `51 location risks <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_multi_location_8_7_23.ipynb>`_. However, there were issues with overlap between scenarios. We are still investigating this but it might be related to heart failure. Additionally, there are still issues with the PAFs containing zero values. We are currently avoiding this by selecting specific draws, however, a more permanent solution would be preferred. 
   * - 21.0
-    - Update to GBD 2021 
-    - Need to confirm if this is going to be included in phase 1 
+    - Add Mediation and PAF Recalculations 
+    - Note: not planned to be completed before NIH results 
   * - 22.0
+    - Update to GBD 2021 
+    - Note: not planned to be completed before NIH results 
+  * - 23.0
     - Final Runs 
     - Research team to specify this further 
 

@@ -131,7 +131,7 @@ PAFs will be calculated separately to account for the correlation between wastin
 stunting, and underweight risk exposures as a single joint PAF for CGF. Draw-level
 PAF values are available below:
 
-- `Ethiopia CGF PAF values <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/pafs.csv>`_
+- `Ethiopia CGF PAF values <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/pafs_3.csv>`_
 
    - `Ethiopian PAF values calculated here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/CGF%20correlation%20data%20generation.ipynb>`_
 

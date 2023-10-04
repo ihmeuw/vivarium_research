@@ -246,7 +246,7 @@ Documents that contain information specific to the overall model and the child s
     - 
   * - Exit age (observation)
     - Age at which postpartum period ends
-    - Need to confirm with engineers
+    - 
   * - Simulation start date
     - 2025-01-01
     -
@@ -254,8 +254,8 @@ Documents that contain information specific to the overall model and the child s
     - 2025-01-01
     - (No burn-in period)
   * - Simulation end date
-    - 2025-12-3
-    - Assumes maximum pregnancy duration of 42 weeks + 6 weeks postpartum + 1 day. 2025 is not a leap year
+    - 2025-12-31
+    - Needs to accommodate maximum gestation of 42 weeks + 6 weeks postpartum. Note this was previously 2025-12-3 and was updated for model 3.0.
   * - Timestep
     - 1 week (7 days)
     - Note, could be increased to two weeks if duration of maternal disorders pregnancy state is updated.
@@ -281,7 +281,11 @@ Documents that contain information specific to the overall model and the child s
     - IFA coverage
     - MMS coverage
     - BEP coverage
-  * - Baseline/zero coverage
+  * - Zero coverage
+    - 0
+    - 0
+    - 0
+  * - Baseline
     - Baseline
     - 0
     - 0
@@ -424,6 +428,14 @@ Specific outputs for specific models are specified in the following section.
       * Anemia state person time, stratified by pregnancy state
     - N/A
     - 
+  * - 3.1
+    - Hemoglobin/anemia exposure with bugfixes
+    - Baseline
+    - None
+    - * YLDs (anemia severity specific), stratified by pregnancy state
+      * Anemia state person time, stratified by pregnancy state
+    - N/A
+    - 
   * - 4.0
     - Hemoglobin on maternal disorders, hemoglobin on maternal hemorrhage, and maternal hemorrhage on hemoglobin risk effects
     - Baseline
@@ -479,36 +491,80 @@ Specific outputs for specific models are specified in the following section.
     - None
     - * Deaths 
       * YLLs
-      * YLDs
+      * YLDs, both cause-specific (including background morbidity) as well as for all causes combined
       * Pregnancy state person time
       * Pregnancy transition counts
     - N/A
     - 
+  * - 8.1
+    - 8.0bugfix
+    - All
+    - None
+    - Same as 8.0
+    - Same as 8.0
+    - 
+  * - 8.2
+    - Birth outcome randomness bugfix, stratify YLDs by pregnancy status
+    - All scenarios 
+    - None
+    - * Deaths
+      * YLLs
+      * YLDs, both cause-specific (including background morbidity due to other causes) as well as for all causes combined; all stratified by pregnancy state
+      * Pregnancy state person time
+      * Pregnancy transition counts
+    - Same as 8.0
+    - 
+  * - 8.3
+    - * `Update other causes DW value in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1313>`_,
+      * `Resolve discrepancies between cause-specific and all cause YLD observers during the parturition state, as shown in this notebook (cell 92) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/[…]_and_validation/pregnancy_model/model_8.2_interactive_sim.ipynb>`_
+      * `Confirm that individual-level birth outcome changes between scenario are functioning as intended, as assessed in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/[…]_and_validation/pregnancy_model/model_8.2_interactive_sim.ipynb>`_
+    - All scenarios, including new "zero coverage" scenario
+    - None
+    - Same as 8.2
+    - Same as 8.2
+    - 
   * - 9.0
     - Production run test
-    - 1-4
-    - (some larger number of draws and seeds, tbd)
-    - No age stratification:
-      
-      * Deaths
+    - All
+    - 2,000,000 population size per draw, 5 draws
+    - No age stratification and not cause-specific, BUT stratified by random seed:
+
+      * Deaths 
       * YLLs
       * YLDs
       * Intervention counts
-    - Live and still births with maternal_ids, infant sex, intervention coverage, and LBWSG exposures
-    - 
+    - Live and still births with maternal_ids, infant sex, joint BMI/anemia exposure, intervention coverage, and LBWSG exposures
+    - Will analyze to determine minimum viable population size for maternal outcomes (can later use child data to analyze for child outcomes)
   * - 9.1
     - Production runs
-    - 1-4
-    - (some larger number of draws and seeds, tbd)
-    - No age stratification:
-      
-      * Deaths
-      * YLLs
-      * YLDs
-      * Intervention counts
-    - Live and still births with maternal_ids, infant sex, intervention coverage, and LBWSG exposures
+    - All
+    - 1,600,000 population size per draw, 100 draws
+    - Same as 9.0, but no longer stratified by random seed
+    - Live and still births with maternal_ids, infant sex, joint BMI/anemia exposure, intervention coverage, and LBWSG exposures
+    - NOTE: This population size has not yet been tested in the child model; however, as maternal mortality is more rare than child mortality it is expected to be sufficient 
+  * - 9.2
+    - Production runs with intervention count observer fix (just once at 6 weeks instead of every timestep)
+    - All
+    - Same as 9.1
+    - Same as 9.1
+    - Same as 9.1
     - 
   * - 10.0
+    - Nigeria and Pakistan locations
+    - All
+    - 400,000 population size per draw, 20 draws
+    - * Deaths, YLLs
+      * YLDs, stratified by pregnancy state
+      * Maternal disorder incident counts, stratified by anemia state
+      * Maternal hemorrhage incident counts, stratified by anemia state
+      * Anemia state person time, stratified by pregnancy state 
+      * Pregnancy state person time, stratified by birth outcome
+      * Pregnancy state transition counts, stratified by birth outcome
+      * Counts of birth outcomes
+      * Intervention counts
+    - Same as 9.1
+    - The underlying model should be identical to 9.1 except for locations and the modifications noted here
+  * - 11.0
     - GBD 2021 update?
     - Baseline
     - None
@@ -565,22 +621,74 @@ Specific outputs for specific models are specified in the following section.
     - `Model 2.1 V&V notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_2.1_maternal_disorders.ipynb>`_ 
       * Maternal disorders CSMR now validating, except for zero value for 50-55 year olds (see explanation in table below)
       * Maternal hemorrhage incidence is validating, except for zero value for 50-55 year olds (see explanation in table below)
+  * - 3.0
+    - Verify anemia prevalence and YLDs, postpartum state duration
+    - Anemia prevalence looks good among pregnant population, too high among non-pregnant population. Anemia YLDs too high. Simulation duration extended to one year fixed postpartum duration oddities, now exactly equal to six weeks. `Model 3.0 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/29>`_
+  * - 3.1 (3.0bugfix)
+    - Verify no person time in the not-pregnant state, check anemia YLDs
+    - Both look good! `Model 3.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/30>`_
+  * - 4.0
+    - Verify that:
+        * Hemoglobin on maternal hemorrhage and maternal disorders incidence effects are as expected
+        * Hemorrhage on postpartum hemoglobin effect is as expected
+        * Maternal disorders and hemorrhage cause model V&V criteria are still met
+    - `Model 4 V&V notebooks are available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/32>`_
+        * Hemorrhage effect on postpartum hemoglobin effects are as expected (assessed via interactive sim)
+        * Hemoglobin effect on maternal hemorrhage incidence is as expected. Maternal hemorrhage incidence still verifies as the population level. Note that there was a resolved bug where maternal *disorders* PAFs and RRs were applied to maternal hemorrhage, but this was resolved.
+        * Hemoglobin on maternal disorders PAFs and RRs applied as expected, however, maternal disorders incidence (and therefore mortality) are slightly underestimated at the population level. This is due to risk-affected probabilities of an incident maternal disorder case greater than 1 for a substantial number of simulants with low hemoglobin levels. More details discussed in table below.
+  * - 5.0
+    - Verify that joint anemia/BMI risk exposure matches expected value and that exposure does not change over time with changing hemoglobin
+    - Looks great! 
+        * `Model 5.0 anemia exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_5.0_maternal_disorders_anemia.ipynb>`_
+        * `Model 5.0 joint anemia/BMI exposure prevalence <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_5_bmi_exposure.ipynb>`_
+        * `Interactive sim to check that joint anemia/BMI exposure does not change over time <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_7_interactive_sim.ipynb>`_
+  * - 6.0
+    - Verify:
+        * Scenario-specific intervention coverage
+        * Intervention impacts on hemoglobin exposure
+    - * `Intervention coverage looks good by scenario <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_6_intervention_coverage.ipynb>`_, and `confirmed to be appropriately targeted to BMI exposure in the interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_7_interactive_sim.ipynb>`_
+      * Draw-level uncertainty in intervention effect on hemoglobin erroneously applied as individual-level stochastic uncertainty, as shown in the interactive sim linked above
+      * Baseline calibration of IFA effect on hemoglobin appears not to be performed correctly, as shown in the interactive sim linked above
+  * - 7.0
+    - Verify that intervention impacts on stillbirths were applied as expected
+    - Looks great! `See the model 7 birth outcome V&V here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_7.0_preg_outcomes.ipynb>`_ 
+  * - 8.0
+    - * Check that model 6.0 V&V issues are resolved
+      * Verify expected behavior of background morbidity implementation
+    - * Intervention effect applications look as expected! `Model 8.0 interactive sim notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_8_interactive_sim.ipynb>`_
+      * Implementation of background morbidity looks to be functioning as intended, but unexpected value for disability weight of other causes. `Model 8 YLDs notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_8.0_yld_checks.ipynb>`_
+  * - 8.1
+    - Verify that other causes disability weight is now as expected
+    - * Looks good! Unable to verify that all_causes YLD observer is performing COMO adjustment (individual-level YLD data not available in the interactive sim and population-level observer results are not obviously indicating presence of COMO adjustment). Requesting observed YLDs to be stratified by pregnancy status as an attempt to remove influence of custom maternal disorders YLDs model to see if it becomes more obvious.
+      * Also, noticed that while population-level intervention effects on birth outcomes is functioning as expected, the individual-level trajectories are not. At the population level, rate of "other" outcome stays approximately the same, live births increase, and stillbirths decrease with increasing intervention coverage, as expected. However, at the individual level, "other" outcomes become live births, and stillbirths become "other" outcomes. We believe this is due to the ordering of outcome choices in the random.choice call.
+  * - 8.2
+    - * Check for evidence of COMO adjustment functioning as expected between all-cause and cause-specific YLD observers in YLD results stratified by pregnancy state
+      * Check that individual-level birth outcome transitions are logical between scenarios
+    - * COMO adjustment between all-cause and cause-specific observers looks to be functioning as expected in all pregnancy states except for the parturition state
+      * Unable to verify that individual-level birth outcome transitions are functioning as expected
+  * - 8.3
+    - * Check updated other causes DW value
+      * Check resolution of CRN issue
+      * Check resolution of all cause and cause-specific observer discrepancies in parturition state
+    - All looks good! Ready to move to production :). `8.3 notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_8.3_yld_checks.ipynb>`_
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
+  :widths: 5 20 15 5
 
   * - Issue
     - Explanation
     - Action plan
     - Timeline
-  * - Duration of postpartum state is looking too long
-    - This is because simulants who die of maternal disorders die in the first timestep of the postpartum state rather than in the parturition state. Because of this, there is more person-time in the postartum state than expected. 
-    - Acceptable limitation. Use interactive sim to determine the duration of the postpartum period among those who do not die.
-    - Low priority (research team)
   * - Zero values for 50-55 year old age group
     - Vivarium inputs fills maternal disorders deaths and maternal hemorrhage incidence with zeros due to :code:`age_end` parameter in :code:`gbd_mapping`, despite raw GBD estimates for these parameters being non-zero for this age group
     - Acceptable limitation given very low pregnancy incidence in this age group
     - N/A
+  * - Slight underestimation of maternal disorders incidence and mortality
+    - GBD maternal disorders parent cause is equal to the *sum* of maternal disorders sub-causes. Therefore, the incidence of the aggregate maternal disorders cause is quite high relative to the rate of pregnancies and when it is increased due to risk effects from hemoglobin, the calculated probability of an incident case can be greater than one. Since these probabilities are capped at one, we end up underestimating the incidence rate of maternal disorders at a population level. Note that this issue was present in the IV iron implementation; however, in the nutrition optimization implementation, maternal disorders mortality is conditional on maternal disorders incidence (whereas mortality was correlated with incidence, but not conditional on incidence in the IV iron implementation). Therefore, we are slightly underestimating maternal disorders mortality in this model.
+    - As the underestimation is slight, we will move forward despite this limitation. In the meantime, we will investigate possible solutions to address this issue (in particular, modeling each individual maternal disorders sub-cause within the simulation), which we may consider incorporating into the model after other higher priority updates are made (such as intervention implementations in models 6 and 7)
+    - TBD
+
 
 4.0 Research background and limitations
 ++++++++++++++++++++++++++++++++++++++++

@@ -106,6 +106,25 @@ BMI will impact the incidence rates of: ischemic heart disease, ischemic
 stroke, and heart failure. The excess mortality rate for all outcomes will 
 be unaffected. 
 
+Mediation
+---------
+
+Mediation is included for BMI through SBP, LDL-C and FPG. We have generally 
+followed the GBD approach to mediation, however we use slightly different 
+equations based on math in the word doc below. 
+
+:download:`Please see this word doc for details of the new math included <Mediation Notes.docx>`.
+
+In cases where the RR for BMI is 1 or the mediators' (SBP, LDL-C or FPG) RR is 1, mediation 
+will not be included for that risk since we assume no effect for one of risks. Note that we 
+could still include mediation for other present risks. E.g., BMI RR = 1.2, SBP RR = 1 and FPG RR 
+= 1.2, then we would NOT include mediation for BMI->SBP but would still include BMI->FPG. 
+
+In theory, there could be a protective effect of mediation, but GBD does not include this 
+so we follow the same logic. 
+
+Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
+
 
 .. list-table:: All Risk-Outcome Pairs for BMI
    :widths: 11 25
@@ -223,8 +242,6 @@ be unaffected.
      - [95, 125 years)
 
 
-Mediation data is here: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
-
 Risk Outcome Pair #1: Ischemic heart disease
 ++++++++++++++++++++++++++++++++++++++++++++
 
@@ -248,6 +265,10 @@ PAFs and relative risks can be pulled using the following code::
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[370, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
+Once correlation and mediation are included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
+
 Mediation
 ^^^^^^^^^
 
@@ -264,7 +285,7 @@ is also included.
 
 :math:`RR_\text{BMI,adjusted} = \frac{RR_\text{BMI,unadjusted}}{\prod_{m=1}^{n} {RR_\text{m}}^{delta_\text{m}}}`
 
-Where :math:`MF_m` is the mediation factor and :math:`RR_\text{m}` is the relative risk for each mediator :math:`m` in SBP, LDL-C, and FPG.
+Where :math:`MF_m` is the mediation factor and :math:`RR_\text{m}` is the unadjusted relative risk for each mediator :math:`m` in SBP, LDL-C, and FPG.
 
 where the RR_unadjusted is from the get_draws code above and the 
 RR_adjusted is what is used to find the risk of BMI on IHD. 
@@ -297,6 +318,10 @@ PAFs and relative risks can be pulled using the following code::
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[370, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
+Once correlation and mediation are included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
+
 Mediation
 ^^^^^^^^^
 
@@ -313,7 +338,7 @@ is also included.
 
 :math:`RR_\text{BMI,adjusted} = \frac{RR_\text{BMI,unadjusted}}{\prod_{m=1}^{n} {RR_\text{m}}^{delta_\text{m}}}`
 
-Where :math:`MF_m` is the mediation factor and :math:`RR_\text{m}` is the relative risk for each mediator :math:`m` in SBP, LDL-C, and FPG.
+Where :math:`MF_m` is the mediation factor and :math:`RR_\text{m}` is the unadjusted relative risk for each mediator :math:`m` in SBP, LDL-C, and FPG.
 
 where the RR_unadjusted is from the get_draws code above and the 
 RR_adjusted is what is used to find the risk of BMI on stroke. 
@@ -372,26 +397,30 @@ Notes:
 - (*) The population of 100,000 was determined by testing the standard deviation across draws to see where variation stabilized. This testing was completed `in this workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/heart_failure_pafs_pop_profiling.ipynb>`_. We found that the standard deviation was comparable for 10,000, 100,000 and 1,000,000 for most age/sex groups. However, for some groups 100,000 was significantly better than 10,000 so we will use 100,000. 
 - (**) We truncate the exposures of BMI as this calculation is based on literature values that have limited applicability in our model. 40.8 is 3 standard deviations above the mean BMI exposure for obese individuals in the paper being used. [Kenchaiah_2008]_ Without this truncation, there would be RR's that are 2000+ which makes mean PAF values very close to 1. We do not want to assume a continued relationship in BMI to RR for values 40 BMI units above the max used in the paper. 
 
-.. todo:: 
 
-  This will need to be adjusted to account for mediation and correlation when they are added to the model. A simpler solution is included here to allow for runs without correlation and mediation. 
+Once correlation and mediation are included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
 
 Mediation
 ^^^^^^^^^
 
 Mediation for heart failure is included for SBP only. LDL-C and FPG do 
 not have a direct effect on heart failure, so they are not needed as mediation 
-factors here. Data for the mediation factors can be found in the csv file here. 
+factors here. Data for the mediation factors can be found in the csv file path below. 
+
+Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/heart_failure_deltas_all_draws.csv
 
 :math:`RR_\text{BMI,adjusted} = \frac{RR_\text{BMI,unadjusted}}{{RR_\text{SBP}}^{delta_\text{SBP}}}`
 
 where the RR_unadjusted is 1.14 (1.12, 1.16) and the 
-RR_adjusted is what is used to find the risk of BMI on heart failure. 
+RR_adjusted is what is used to find the risk of BMI on heart failure. For age groups 
+90+ and <25, use the closest age group. 
 
 The delta can be found in the table below. 
 
-.. csv-table:: Mediation Factor 
-  :file: heart_failure_MF.csv
+.. csv-table:: Delta Values 
+  :file: heart_failure_deltas.csv
   :widths: 40 30 30 30
   :header-rows: 1 
 

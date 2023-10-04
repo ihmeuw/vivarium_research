@@ -1,0 +1,300 @@
+.. role:: underline
+    :class: underline
+
+
+
+..
+  Section title decorators for this document:
+
+  ==============
+  Document Title
+  ==============
+
+  Section Level 1 (#.0)
+  +++++++++++++++++++++
+  
+  Section Level 2 (#.#)
+  ---------------------
+
+  Section Level 3 (#.#.#)
+  ~~~~~~~~~~~~~~~~~~~~~~~
+
+  Section Level 4
+  ^^^^^^^^^^^^^^^
+
+  Section Level 5
+  '''''''''''''''
+
+  The depth of each section level is determined by the order in which each
+  decorator is encountered below. If you need an even deeper section level, just
+  choose a new decorator symbol from the list here:
+  https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
+  And then add it to the list of decorators above.
+
+
+
+.. _2021_risk_exposure_wasting_state_exposure:
+
+=====================================================
+Wasting dynamic transition model (GBD 2021)
+=====================================================
+
+.. note::
+
+  This page has been adapted from the :ref:`2020 wasting/PEM model document <2020_risk_exposure_wasting_state_exposure>`
+  used in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
+
+  This adaptation is intended for use in the 
+  :ref:`nutrition optimization simulation <2021_concept_model_vivarium_nutrition_optimization>`.
+
+  There have been many updates to this model from the original implementation, but the underlying risk exposure model diagram (the risk exposure states and possible transitions between them) remain the same. Notably, the values for these transition rates are now directly provided rather than only providing equations to calculate the transition rates.
+
+  Also note that the protein energy malnutrition (PEM) risk-attributable cause model
+  has been removed from this page and is :ref:`instead available here <2021_pem>`.
+
+.. contents::
+  :local:
+
+Overview
+++++++++
+
+This page contains information pertaining to the child wasting risk exposure model. 
+GBD stratifies wasting into four categories: TMREL, mild, moderate, and severe wasting. 
+Pages related to the wasting risk exposure model include:
+
+- :ref:`Protein energy malnutrition risk attributable cause <2021_pem>`
+- :ref:`Child growth failure risk effects <2021_risk_effect_cgf>`
+
+.. note::
+
+ For background information on child wasting, see the :ref:`2020 wasting/PEM model document <2020_risk_exposure_wasting_state_exposure>`.
+
++-------------------------------------------------+
+| List of abbreviations                           |
++=======+=========================================+
+| AM    | Acute malnutrition                      |
++-------+-----------------------------------------+
+| MAM   | Moderate acute malnutrtion              |
++-------+-----------------------------------------+
+| SAM   | Severe acute malnutrition               |
++-------+-----------------------------------------+
+| TMREL | Theoretical minimum risk exposure level |
++-------+-----------------------------------------+
+| CGF   | Child growth failure composed of wasting|
+|       | stunging and underweight                |
++-------+-----------------------------------------+
+| PEM   | Protein energy malnutrition             |
++-------+-----------------------------------------+
+
+Wasting Exposure in GBD 2021
+++++++++++++++++++++++++++++
+
+Case definition
+---------------
+
+Wasting, a sub-component indicator of child growth failure (CGF), is based on a 
+categorical definition using the WHO 2006 growth standards for children 0-59 
+months. Definitions are based on z-scores from the growth standards, which were 
+derived from an international reference population. Mild, moderate and severe 
+categorical prevalences were estimated for each of the three indicators. 
+Theoretical minimum risk exposure level (TMREL) for wasting was assigned to be 
+greater than or equal to one standard deviation below the mean (-1 SD) of the 
+WHO 2006 standard weight-for-height curve. This has not changed since GBD 2010.
+
++----------------------------------------------+
+| Wasting category definition (range -7 to +7) |
++=======+======================================+
+| TMREL |  >= -1                               |            
++-------+--------------------------------------+
+| MILD  |  < -1 to -2 Z score                  |
++-------+--------------------------------------+
+| MAM   |  < -2 to -3 Z score                  |
++-------+--------------------------------------+
+| SAM   |  < -3 Z score                        |
++-------+--------------------------------------+
+
+Exposure estimation
+-------------------
+
+In modeling CGF, all data types go into ST-GPR modeling. GBD has ST-GPR models 
+for moderate, severe, and mean stunting, wasting, and underweight. The output 
+of these STGPR models is an estimate of moderate, severe, and mean stunting, 
+wasting, and underweight for all under 5 age groups, all locations, both sexes, 
+and all years. 
+
+They also take the microdata sources and fit ensemble distributions to the 
+shapes of the stunting, wasting, and underweight distributions. They thus find 
+characteristic shapes of stunting, wasting, and underweight curves. Once they 
+have ST-GPR output as well as weights that define characteristic curve shapes, 
+the last step is to combine them. They anchor the curves at the mean output from 
+ST-GPR, use the curve shape from the ensemble distribution modeling, and then 
+use an optimization function to find the standard deviation value that allows 
+them to stretch/shrink the curve to best match the moderate and severe CGF 
+estimates from ST-GPR. The final CGF estimates are the area under 
+the curve for this optimized curve.
+
+Note that the z-score ranges from -7 to +7. If we limit ourselves to Z-scores 
+between -4 and +4, we will be excluding a lot of kids.
+
+CGF burden does not start until *after* neonatal age groups (from 1mo onwards). 
+In the neonatal age groups (0-1mo), burden comes from LBWSG. See risk effects 
+page for details on model structure. The literature on interventions for wasting 
+target age groups 6mo onwards. This coincides with the timing of supplementary 
+food introduction. Prior to 6mo, interventions to reduce DALYs focus on 
+breastfeeding and reduction of LBWSG. 
+
+Vivarium Modeling Strategy
+++++++++++++++++++++++++++
+
+Our transition model of child wasting will consist of the same 4 GBD risk exposure
+categories as the GBD child wasting model. In our transition model, simulants may
+transition between adjacent categories as well as between the cat1 (SAM) and cat3
+(mild) categories, representing a pathway for those successfully treated for SAM.
+
+.. important::
+
+  We will model wasting transitions as detailed on this page **only** among simulants at least six months of age.
+
+  There will be separate wasting exposure models for simulants 0-6 months of age will be detailed separately.
+
+    - :ref:`Static wasting exposure <2020_risk_exposure_static_wasting>` for wave I of the nutrition optimization model
+    - Wasting transition model among 0-6 month olds for wave II of the nutrition optimization model (TODO: link page when ready)
+
+**Risk exposure model diagram**
+
+.. image:: wasting_sim_transitions.png
+
+Prevalence of each wasting state for use in this model can be pulled using the following call:
+
+.. code-block:: python
+
+    get_draws(gbd_id_type='rei_id',
+                    gbd_id=240,
+                    source='exposure',
+                    year_id=2021,
+                    gbd_round_id=7,
+                    decomp_step='iterative')
+
+`Draw-specific values for transition rates (defined in the table below) for Ethiopia (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions_3.csv>`_. Values in this file are defined in terms of transitions per person-year in the source state.
+
+  - `These values were generated in this notebook as of 8/28/2023 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_transition_sampling.ipynb>`_
+
+.. list-table:: Transition Data
+ :header-rows: 1
+
+ * - Transition
+   - Source State
+   - Sink State
+ * - ux_rem_rate_sam
+   - CAT 1
+   - CAT 2
+ * - tx_rem_rate_sam
+   - CAT 1
+   - CAT 3
+ * - rem_rate_mam
+   - CAT 2
+   - CAT 3
+ * - rem_rate_mild
+   - CAT 3
+   - CAT 4
+ * - inc_rate_sam
+   - CAT 2
+   - CAT 1
+ * - inc_rate_mam
+   - CAT 3
+   - CAT 2
+ * - inc_rate_mild
+   - CAT 4
+   - CAT 3
+
+Validation 
+++++++++++
+
+Wasting model
+
+  - prevalence of cat 1-4
+  - model transition rates
+
+Note that validation of this model is dependent on validation of wasting-specific mortality rates, which are dependent on the following models meeting their individual validation criteria:
+
+  - Stunting and underweight exposure models
+  - CGF risk exposure correlation
+  - CGF risk effects
+  - Cause-specific and all-cause mortality rates
+
+Deriving the wasting transition rates
+--------------------------------------
+
+We utilized information from several sources to develop a wasting transition model.
+
+- **Wasting risk exposure:** GBD 2021 risk prevalence
+- **Wasting-specific mortality rates:** 
+
+  - :ref:`GBD 2021 CGF risk effects <2021_risk_effect_cgf>`
+  - :ref:`GBD 2019 PEM risk-attributable cause model <2021_pem>`
+  - GBD 2019 cause models for diarrheal diseases, lower respiratory infections, measles, and malaria (as linked on the :ref:`nutrition optimization child concept model <2021_concept_model_vivarium_nutrition_optimization>`)
+
+- **Treated MAM and SAM recovery rates:** :ref:`wasting treatment intervention model <intervention_wasting_tx_combined_protocol>`
+- **Incidence rates from less to more severe wasting categories:** BMGF Knowledge Integration (KI) longitudinal database. `A description of included studies is available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/KI%20studies.xlsx>`_
+
+However, recovery from MAM and SAM states for those who do not receive treatment is very limited in the case of MAM and not observable in the case of SAM as it would be unethical for researchers to track the natural history of SAM without providing access to treatment. Therefore, we utilized a Markov model to solve for the untreated wasting recovery rates that would result in a steady state equilibrium of the system below and the values from the sources described above.
+
+.. note::
+
+  The previous implementation of this model relied on literature estimates of untreated recovery rates from SAM and MAM (observed indirectly in the case of untreated SAM) and used the markov steady state model to solve for wasting incidence rates. This update is an improvement upon the previous implementation in that it relies on directly observed data as inputs to the model and outputs values for limited/un-observable parameters rather than the other way around. Additionally, this implementation results in values that better validate to KI transition rate data where applicable. 
+
+:download:`See this word document for a description of these parameters and the equations used to solve the system <WASTING CALIBRATION.docx>`
+
+.. image:: calibration_transitions.svg
+
+A small-level individual-based simulation has demonstrated the system of equations used in the derivation of these rates successfully maintains steady state. `See a demonstration of the steady state equilibrium maintained by this system of equations in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_calibration_solved_from_incidence_rates.ipynb>`_
+
+The process of generating draw-level values for all wasting transitions is outlined below. `See the code for generating draw-specific transition values in this notebook here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_transition_sampling.ipynb>`_
+
+1. Load all input data values (in accordance with documentation linked above)
+
+2. Exclude studies in the KI database that have inappropriate study populations. A list of excluded studies and there reasons for exclusion are provided below.
+
+  - AKU_EE: Infants with insufficient response to RUTF
+  - DIVIDS: Small for gestational age infants, not SAM, not ill
+  - Ilins-Dose: LNS supplementation
+  - Ilins-Dyad: LNS supplementation
+  - SAS_LBW: LBW babies
+
+3. At the sex, age, and draw-specific level, randomly sample a study from the remaining KI studies 
+
+4. Randomly sample event count values (numerator values) for i1, i2, and i3 transition rates under the assumption that the event counts follow a Poisson distribution of uncertainty, divide by person-time denominators (child days in provided KI data), and then convert to daily transition probabilities
+
+5. Calculate r4, r3 (as well as r3_treated and r3_untreated), r2 recovery probabilities according to draw-specific input parameters and sampled i1, i2, and i3 values
+
+6. Assess validity of results according to the following rules:
+
+  - r4, r3, r3_untreated, and r2 must be positive
+  - t1 must be greater than r2
+  - r3_treated must be greater than r3_untreated
+  - result for r3 value solved by two different methods must be within 10% of one another
+
+7. If any of the rules in step #6 fail, begin again at step #3 until valid result is obtained. Repeat until 1,000 valid draws are generated for each age/sex group
+
+8. Convert daily probabilities to annual rates and output as .csv
+
+Assumptions and Limitations
+---------------------------
+
+- We do not consider seasonal variation in wasting exposure or transition rates
+
+- We do not consider individual heterogeneity in wasting transition rates beyond what is modeled in the :ref:`wasting x-factor <2019_risk_exposure_x_factor>` model when it is included in the simulation
+
+- We rely on treatment data with sparse availability and assume that child wasting measured by WHZ is a reasonable proxy for acute malnutrition (often measured by MUAC)
+
+- We cannot directly observe recovery time of untreated wasting as it would be unethical. Therefore, we must indirectly estimate this parameter
+
+- We assume that those successfully treated for SAM transition directly to the mild wasting state without transitioning through the MAM state. By definition, a transition through the MAM state must occur in reality. However, this design was selected for convenient compatibility with the standard discharge criteria for SAM treatment used in studies that report treated SAM recovery rates. Additionally, there is some data to suggest that immunologic recovery (and therefore reduction in mortality risk) of SAM cases lags behind anthropomorphic recovery. 
+
+
+References
+++++++++++
+
+.. todo::
+
+  Link GBD 2021 methods appendix when finished
