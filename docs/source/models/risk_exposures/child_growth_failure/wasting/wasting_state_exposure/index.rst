@@ -246,8 +246,11 @@ Given the following equations:
     - 2
     - PLACEHOLDER
   * - :math:`p_\text{LBW}`
-    - 0.1
-    - PLACEHOLDER
+    - Exposure of LBWSG categories with BW < 2500 grams for the late neonatal age group in GBD
+        * :code:`get_draws(source='exposure', rei_id=339, age_group_id=3)`
+        * decomp_step='step4' for GBD 2019
+        * Sum over the following categories: *['cat10', 'cat106', 'cat11', 'cat116', 'cat117', 'cat123', 'cat124', 'cat14', 'cat15', 'cat17', 'cat19', 'cat2', 'cat20', 'cat21', 'cat22', 'cat23', 'cat24', 'cat25', 'cat26', 'cat27', 'cat28', 'cat29', 'cat30', 'cat31', 'cat32', 'cat34', 'cat35', 'cat36', 'cat8', 'cat80']*
+    - :ref:`LBWSG exposure document found here for reference <2019_risk_exposure_lbwsg>`
 
 Note that prevalence of each wasting state for use in this model can be pulled using the following call:
 
