@@ -159,7 +159,7 @@ Vivarium Modeling Strategy
     - Pakistan
     - 0.05 (point value)
     - CMAM 2021 Virtual Conference - Scaling Up Management of Wasting in South Asia: A Case Study. :download:`PDF available here <04_South Asia_CMAM_EN.pdf>`
-    - 
+    - Note acknowledged lack of data on CMAM coverage in South Asia. Reference was provided to us by KOL Indi Trehan.
   * - :math:`C_{MAM}` (baseline)
     - Ethiopia and Nigeria
     - 0.15 (95% CI: 0.1, 0.2), normal distribution of uncertainty
