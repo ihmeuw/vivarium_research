@@ -334,18 +334,143 @@ In the NHANES example, the full first sentence of the above quote was:
 
 3.0 Discussing Simulation Science Findings
 ++++++++++++++++++++++++++++++++++++++++++
-In this section, we will elaborate on how to incorporate BLISS principles into our own 
-research processes and calculations.  
 
-3.1 Table Presentation
-----------------------
+As mentioned above, before beginning our research, we should determine the variables
+of interest: the facets of gender and/or sex that we expect to be most directly associated with
+our outcome.
+If it isn't possible to narrow this down or distinguish what might be important, we can consider
+all gender- and sex-related factors to be variables of interest.
 
-3.2 Measurement Error
+When we present our findings, we have two goals:
+
+* Accurately convey what associations we are looking for, and what the causal structures might be.
+  We should strive to be as precise as possible, and not rely on "common sense"
+  to indicate which gender- and sex-related factors are related to a health outcome.
+  Research shows that if descriptions of sex or gender differences are imprecise,
+  readers tend to ascribe them to sex, due to misconceptions about what gender can affect. [cite]
+  Even when we do think that a sex-related factor is most proximal to our outcome,
+  we should still mention that some of its impact could be mediated through
+  gender factors and that it is difficult to disentangle these.
+* Highlight data limitations around sex and gender measures.
+  We don't want our inclusive language to give the impression that we are able to make accurate
+  conclusions about sexual and gender minority populations when the data prevents us from doing this.
+  Furthermore, drawing attention to the problems with how almost every data source currently
+  captures sex and/or gender raises awareness that changes need to be made in primary data collection.
+
+In this section, we make some suggestions about language to use in external
+communications when discussing findings (papers, talks, etc).
+
+3.1 Initial Description of Results
+----------------------------------
+
+Before the first time a gender- or sex-related result is presented,
+we should:
+
+- Name the gender- and sex-related factors our result pertains to, if clear.
+  If unclear (which is most of the time), call out the difficulty of disentangling factors
+  from each other, to prevent readers from jumping to the conclusion that it's always
+  biological factors that are important.
+- Acknowledge data limitations and proxy measures used.
+- Call for better data to be collected.
+
+Let's consider the example of reporting a result about pregnancy.
+In this case, while gender-related factors could play a role in e.g. pregnancy outcomes,
+the sex- or gender-related factor with the most direct relevance is clearly the ability
+to become pregnant.
+In this case, we might say:
+
+.. pull-quote::
+
+  In health research on pregnancy, it is important to identify the group
+  of people who can become pregnant.
+  Typically, a proxy measure of "women of reproductive age" is constructed for
+  this purpose, combining some indicator of female sex or gender with an age restriction
+  such as 15-49 years.
+  This measure does not account for infertility, for example by including people who
+  have had hysterectomies.
+  Additionally, when it is defined in a way that conflates sex with gender,
+  it will be highly inaccurate among transgender people and other gender minority populations.
+
+  To be more precise and inclusive in our language, we define our population of interest as
+  women and birthing people of reproductive age (WBPRA): people ages 15-49 who were assigned
+  female sex at birth.
+  Note that this definition retains the limitation about infertility.
+
+  Sex assigned at birth was not measured in any of our data sources,
+  so we used proxy measures for this attribute.
+  Notably, <source> and <source> only provided undifferentiated sex/gender measures,
+  making it unclear how our conclusions generalize to transgender people and other gender minority populations.
+  Due to these issues, our results are among WBPRA according to imperfect proxy measures.
+  To address these limitations, data would need to be collected using more robust measures
+  of sex- and gender-related factors. [cite guidelines for collecting these]
+
+On the other hand, if we were doing descriptive epidemiology and didn't have even an educated
+guess of what specific sex- and gender-related factors could be associated with our outcome:
+
+.. pull-quote::
+
+  Sex and gender are multi-dimensional concepts.
+  Collectively, they span a number of biological (sex-related) and sociocultural
+  (gender-related) factors which are highly correlated and causally entangled with one other. [citations!]
+  Frequently in health research, differences are attributed wholly to sex-related factors, when
+  in fact gender-related factors also play a part in those differences. [citation]
+  Since prevalence of <outcome> could be influenced by sex- and/or gender-related factors,
+  an ideal analysis would report prevalence by multiple of these factors.
+
+  However, each data source used in this study reported only a single sex or gender variable,
+  and many of these were binary as well as undifferentiated.
+  Therefore, we have used each of these variables as proxies for the entire group of
+  sex- and gender-related factors, and are only able to report prevalence in "male" and "female"
+  groups.
+  It is unclear how our conclusions would generalize to transgender people and other gender minority
+  populations.
+  To address these limitations, data would need to be collected using more robust measures
+  of sex- and gender-related factors. [cite guidelines for collecting these]
+
+3.2 Further Results (Text, Figures, Tables)
+-------------------------------------------
+
+Of course, it is not possible to include a long explanation each and every time sex- or
+gender-related concepts are referenced.
+After an initial, comprehensive description, we have to switch to some kind of shorthand.
+
+The most important things to keep in mind when choosing this shorthand are:
+
+- If the full term includes both sex and gender, both should appear in it in some way
+  -- using only one or the other invites the reader to jump to conclusions.
+- Likewise, we should not use the basic terms "males" and "females" or "men" and "women"
+  when we are reporting a concept that is more complex than correctly-measured sex or gender alone.
+- If the full term includes an acknowledgement that results are based on proxy measures,
+  that should be preserved, or at least nodded to, in the shorthand.
+
+.. todo::
+
+  Give concrete recommendations for shorthand in common situations (e.g. proxy for all sex- and gender-related factors)
+
+To continue the two examples from the previous section, the pregnancy example might use this shorthand:
+
+.. pull-quote::
+  
+  ... our results are among WBPRA according to imperfect proxy measures,
+  henceforth "proxy WBPRA."
+
+  ... the fertility rate was 14 per 1,000 person-years among proxy WBPRA ...
+
+while the descriptive epidemiology example might use this:
+
+.. pull-quote:: 
+
+  ... we estimate that prevalence was 7.8% among people with a "male" proxy value for sex- and gender-related factors ...
+
+.. todo::
+  This should be shorter!
+
+3.3 Measurement Error
 ---------------------
 In this section, we will elaborate on how misinterpretations of sex/gender might affect 
 results.
 
-3.3 Other Gender-Inclusive Guides
+3.4 Other Gender-Inclusive Guides
 ---------------------------------
 
 - DEI Research Guide
