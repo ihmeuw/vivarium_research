@@ -296,14 +296,14 @@ The SQ-LNS effects on wasting transition rates should apply to simulants covered
   We reviewed the individual studies included in [Dewey-et-al-2021b]_ to check if any evaluated the effects of SQ-LNS on wasting incidence rather than prevalence ([Dewey-et-al-2021b]_ focused on prevalence). Few RCTs reported on incidence, but those that did had similar findings as our back-calculated incidence values (e.g., [Huybregts-et-al-2019-sqlns]_).
 
   .. list-table:: [Huybregts-et-al-2019-sqlns]_ effect sizes
-  :header-rows: 1
+    :header-rows: 1
 
-  * - 1st episode of AM
-    - 0.71
-  * - All episodes of AM
-    - 0.69
-  * - Relapse
-    - 0.81
+    * - 1st episode of AM
+      - 0.71
+    * - All episodes of AM
+      - 0.69
+    * - Relapse
+      - 0.81
 
   [Becquey-et-al-2019]_ reported lower or null incidence rate effects than we use in our model, but they also found low or null effects of SQLNS on prevalence and recovery as well, so we believe their results to not be representative based on what we know about overall SQLNS effects from [Dewey-et-al-2021b]_.
 
