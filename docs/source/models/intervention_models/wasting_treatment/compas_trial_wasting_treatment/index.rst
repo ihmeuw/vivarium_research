@@ -297,8 +297,8 @@ around MUAC but have not completed this currently.
 In modeling, the targeted MAM intervention will be given to children who fall in the MAM category for wasting (WHZ z-score < -2 to -3) AND:
 
 - Are aged 6-24 months, 
-- OR are underweight with WAZ z-score < -3 (WAZ cat1)
-- OR are in the "Worse" MAM/cat2.0 wasting exposure state
+- OR are severely :ref:`underweight <2020_risk_exposure_child_underweight>` with WAZ z-score < -3 (WAZ cat1)
+- OR are in the "Worse" MAM/cat2.0 :ref:`wasting exposure state <2021_risk_exposure_wasting_state_exposure>`
 
 Restrictions
 ++++++++++++

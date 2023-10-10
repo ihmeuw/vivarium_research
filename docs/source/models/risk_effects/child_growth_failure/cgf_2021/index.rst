@@ -103,7 +103,7 @@ For stunting and underweight, relative risk values can be pulled using the follo
   rrs = get_draws(gbd_round_id=7, year_id=2021, gbd_id_type='rei_id', gbd_id=[241,240,94], source='rr', decomp_step='iterative')
 
 Wasting relative risks will be generated separately to accomodate the sub-exposures in the 
-MAM (cat2) category in our :ref:`wasting risk exposure model <>`. 
+MAM (cat2) category in our :ref:`wasting risk exposure model <2021_risk_exposure_wasting_state_exposure>`. 
 Until these relative risk estimates are available, we can assume both MAM sub exposures
 ("Better" MAM/cat2.5 and "Worse" MAM/cat2.0) have the same relative risk values as 
 the overall MAM category cat2.

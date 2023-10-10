@@ -113,10 +113,7 @@ these distributions were obtained can be found in the subsequent section.
 
 - `Ethiopian conditional underweight exposure distributions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/lookup_3.csv>`_
 
-  - NOTE: these values are currently not specific to MAM sub-exposures ("Better" and "Worse" MAM, 
-  as described on the :ref:`wasting risk exposure document <>`). Until these values are available,
-  assume that the underweight exposure distribution specific to the wasting cat2 (MAM) exposure state
-  in the linked file applies to both the "Better" and "Worse" MAM sub-exposures.
+  - NOTE: these values are currently not specific to MAM sub-exposures ("Better" and "Worse" MAM, as described on the :ref:`wasting risk exposure document <2021_risk_exposure_wasting_state_exposure>`). Until these values are available, assume that the underweight exposure distribution specific to the wasting cat2 (MAM) exposure state in the linked file applies to both the "Better" and "Worse" MAM sub-exposures.
 
   - Note: the late neonatal age group should be applied to the early neonatal age group as well.
 
