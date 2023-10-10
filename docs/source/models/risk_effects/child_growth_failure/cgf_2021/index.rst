@@ -104,9 +104,9 @@ For stunting and underweight, relative risk values can be pulled using the follo
 
 Wasting relative risks will be generated separately to accomodate the sub-exposures in the 
 MAM (cat2) category in our :ref:`wasting risk exposure model <2021_risk_exposure_wasting_state_exposure>`. 
-Until these relative risk estimates are available, we can assume both MAM sub exposures
-("Better" MAM/cat2.5 and "Worse" MAM/cat2.0) have the same relative risk values as 
-the overall MAM category cat2.
+Until these relative risk estimates are available, assume wasting relative risks consistent
+with those pulled from GBD with both MAM sub exposures ("Better" MAM/cat2.5 and "Worse" MAM/cat2.0) 
+having the same relative risk values as the overall MAM category cat2.
 
 .. todo::
 
