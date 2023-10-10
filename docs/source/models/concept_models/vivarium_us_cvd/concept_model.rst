@@ -432,13 +432,13 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - Measurements have a minimum value of 0 enforced [Wallace_2011]_
   * - B
     - 80% will not start medication due to theraputic inertia. Of those that start medication: 20.5% will start on two drugs at half dose and 79.5% will start on one drug at half dose. [An_2021]_
-    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Turchin_2010]_ [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 80% was selected based on a statement in Turchin 2010 that stated 1 in 5 encounters with elevated blood pressure lead to medication. [Turchin_2010]_ [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - C
     - 80% will not start medication. Of those that start medication: 45% will receive two drugs at half dose and 55% will receive one drug at half dose  
-    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Turchin_2010]_ [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 80% was selected based on a statement in Turchin 2010 that stated 1 in 5 encounters with elevated blood pressure lead to medication. [Turchin_2010]_ [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - D
     - Only adherent simulants will move up categories. 87% will not change medication due to theraputic inertia. The remainder will move to the next treatment category on the ladder. If a simulant is in the highest category, there will be no change.  
-    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Bolen_2008]_ [Ali_2021]_ [Liu_2017]_
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 87% was selected here from Bolen 2008 which found that in 13% of cases, patients were titrated up. [Bolen_2008]_ [Ali_2021]_ [Liu_2017]_
   * - E (outreach intervention scenarios)
     - If simulant is eligible, either 50% or 100% enrolled depending on scenario  
     - For 50% scenario, assignment is random 
@@ -469,13 +469,13 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - 
   * - D
     - 84% will not start medication. Of those that start medication, 42% will receive high intensity statin; 52% medium intensity; and 6% low intensity 
-    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 84% was selected from Goldberg 2007 which found that statin dose was increased 16% of the time. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
   * - E
     - 84% will not start medication. Of those that start medication, 24% will receive high intensity statin; 66% medium intensity; and 10% low intensity 
-    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 84% was selected from Goldberg 2007 which found that statin dose was increased 16% of the time. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
   * - F
     - 84% will not start medication. Of those that start medication, 15% will receive high intensity statin; 71% medium intensity; and 14% low intensity 
-    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 84% was selected from Goldberg 2007 which found that statin dose was increased 16% of the time. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
   * - G
     - Only adherent simulants will move up categories. 84% will not move up medication categories due to theraputic inertia 
     - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit   
@@ -486,6 +486,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
 Notes: 
  - We added an additional stratificaiton to LDL-C treatment assignment for simulants over 75. In ACC/AHA guidelines, stain use in older populations is based on clinical assessment, which is difficult to include in a simulation model. 
  - Here, we set guidelines for use based on LDL-C level that will result in treatment levels approximately aligned to NHANES statin use in older adults. We do this by setting the LDL-C level for treatment equal to the 65th percentile in exposures, as NHANES has about 35% of older adults on statins. Overtime, this will lead to about the correct number of simulants on treatment. 
+ - For LDL-C we only have one inertia value for treatment intialization and up-tiration instead of the two seen in SBP. This is due to limited data availablility. 
 
 **Lifestyle Intervention Ramp**
 
@@ -513,10 +514,10 @@ Notes:
 4.3.1 Therapeutic Inertia Propensity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Therapeutic inertia is a complex combination of simulant level characteristics and 
+Therapeutic inertia is a complex combination of simulant-level characteristics and 
 random variation. Therefore, we want each individual simulant’s propensity 
 to be autocorrelated between healthcare visits, but we don’t want this autocorrelation 
-to be 1. To model this, we use a combination of a random component which is 
+to be 100%. To model this, we use a combination of a random component which is 
 redrawn at each healthcare visit and a simulant level component with is constant over 
 the course of the simulation. 
 
@@ -542,8 +543,8 @@ healthcare modeling section to determine if a simulant overcomes inertia.
 
 The math for this is modeled after :ref:`income in the PRL work <census_prl_income>`. The variances 
 were found via `nanosim testing <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/therapeutic_inertia_nanosim.ipynb>`_. To derive these values, a percent of eligible 
-people on medication was found from NHANES and then different variances were plugged into 
-the nanosim until the desired medication level was achieved in equilibrium. 
+people on medication was found from NHANES and then we plugged different variances into 
+the nanosim until we achieved the desired medication level in equilibrium. 
 
 .. _uscvd4.4:
 
