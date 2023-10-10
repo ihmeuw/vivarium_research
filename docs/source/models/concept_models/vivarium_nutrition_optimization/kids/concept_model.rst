@@ -985,7 +985,7 @@ Wave II
 
 .. todo::
 
-  Add model duplication for Nigeria and Pakistan as well as "worse" MAM targeting model versions to table, versioning TBD
+  Add model duplication for Nigeria and Pakistan as well as "worse" MAM targeting model versions to table, ordering TBD
 
 .. list-table:: Model run requests
   :header-rows: 1
