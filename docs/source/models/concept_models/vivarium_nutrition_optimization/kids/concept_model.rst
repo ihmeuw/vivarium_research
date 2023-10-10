@@ -1029,7 +1029,9 @@ Wave II
     - * Verify MAM treatment is targeted based on age and underweight category
       * Verify wasting state person time, wasting transitions and underweight person time all vary based on MAM treatment coverage 
       * Verify other parts of the model still look as expected 
-    - 
+    - * MAM targeting looks to be working correctly 
+      * `MAM targeting appears to be covering the correct simulants <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_9.0.ipynb>`_
+      * We see that all of the simulants in the wasting cat2 and age 6-18 months are targeted and a subset of wasting cat2 in other age groups. This matches with the model design. 
 
 
 .. list-table:: Outstanding V&V issues
