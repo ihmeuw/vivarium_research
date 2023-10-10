@@ -294,10 +294,11 @@ Currently, we will be using the first two of these (WAZ and/or age) for targetin
 This accounts for 57% of all MAM cases. In the future, we plan to also include the third criterion 
 around MUAC but have not completed this currently. 
 
-In modeling, the targeted MAM intervention will be given to children who: 
+In modeling, the targeted MAM intervention will be given to children who fall in the MAM category for wasting (WHZ z-score < -2 to -3) AND:
 
-- Fall in the MAM category for wasting (WHZ z-score < -2 to -3) AND
-- Are aged 6-24 months OR are underweight with WAZ z-score < -3 
+- Are aged 6-24 months, 
+- OR are underweight with WAZ z-score < -3 (WAZ cat1)
+- OR are in the "Worse" MAM/cat2.0 wasting exposure state
 
 Restrictions
 ++++++++++++

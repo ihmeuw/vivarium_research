@@ -98,9 +98,19 @@ and cause metric affected (e.g., incidence), and the simulant's age (e.g., 6-11 
 Putting this together, a single relative risk might be the RR for **WAZ** on **malaria incidence** 
 for a simulant in the **moderate** exposure category who is **6-11 months** old. 
 
-Relative risk values can be pulled using the following code::
+For stunting and underweight, relative risk values can be pulled using the following code::
 
   rrs = get_draws(gbd_round_id=7, year_id=2021, gbd_id_type='rei_id', gbd_id=[241,240,94], source='rr', decomp_step='iterative')
+
+Wasting relative risks will be generated separately to accomodate the sub-exposures in the 
+MAM (cat2) category in our :ref:`wasting risk exposure model <>`. 
+Until these relative risk estimates are available, we can assume both MAM sub exposures
+("Better" MAM/cat2.5 and "Worse" MAM/cat2.0) have the same relative risk values as 
+the overall MAM category cat2.
+
+.. todo::
+
+   Generate and link custom wasting RR values
 
 The mortality relative risk values will then need to be adjusted. The GBD values are for CSMR, 
 but we will use EMR. To adjust between CSMR and EMR values, you can use this equation: 
