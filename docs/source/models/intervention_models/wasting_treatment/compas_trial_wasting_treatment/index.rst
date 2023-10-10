@@ -93,7 +93,7 @@ Vivarium Modeling Strategy
 
   Any updates to this model will influence the :ref:`wasting risk exposure transitions rates <2021_risk_exposure_wasting_state_exposure>` and require them to be recalculated. 
 
-  Note that the parameters/values in the "Annual recovery rate equations" and "Parameter Values" tables are used as inputs to the generation of the wastin grisk exposure transition rates and will not be utilized in the simulation model directly.
+  Note that the parameters/values in the "Annual recovery rate equations" and "Parameter Values" tables are used as inputs to the generation of the wasting risk exposure transition rates and will not be utilized in the simulation model directly.
 
   The parameters/values in the "Location-specific parameter values" table will be used directly in simulation implementation, but should use the draw-specific values linked in the table that were used in the generation of the wasting exposure transitions rate values.
 
@@ -147,22 +147,47 @@ Vivarium Modeling Strategy
     - Note
   * - :math:`C_{SAM}` (baseline)
     - Ethiopia
-    - 0.488 (95% CI:0.374-0.604), normal distribution of uncertainty
+    - 0.488 (95% CI:0.374-0.604), normal distribution of uncertainty (0 for those <6 months)
     - [Isanaka-et-al-2021]_
     - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
+  * - :math:`C_{SAM}` (baseline)
+    - Nigeria
+    - 0.353 (95% CI: 0.263-0.443), normal distribution of uncertainty (0 for those <6 months)
+    - [Isanaka-et-al-2021]_
+    - TODO: generate draw-specific values
+  * - :math:`C_{SAM}` (baseline)
+    - Pakistan
+    - 0.05 (point value); zero for those <6 months
+    - CMAM 2021 Virtual Conference - Scaling Up Management of Wasting in South Asia: A Case Study. :download:`PDF available here <04_South Asia_CMAM_EN.pdf>`
+    - Note acknowledged lack of data on CMAM coverage in South Asia. Reference was provided to us by KOL Indi Trehan.
   * - :math:`C_{MAM}` (baseline)
-    - Ethiopia
-    - 0.15 (95% CI: 0.1, 0.2), normal distribution of uncertainty
+    - Ethiopia and Nigeria
+    - 0.15 (95% CI: 0.1, 0.2), normal distribution of uncertainty (0 for those <6 months)
     - Informed through discussion with CIFF/UNICEF that reported there is not reliable data on this parameter, but that this appeared to be a plausible range
     - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
+  * - :math:`C_{MAM}` (baseline)
+    - Pakistan
+    - 0.05 (point value); zero for those <6 months
+    - Assumed to be the same as :math:`C_{SAM}` due to lack of data and fact that Pakistan national guideline suggests treatment for both SAM and MAM
+    - 
   * - :math:`E_\text{SAM}`
     - Ethiopia
     - 0.70 (95% CI:0.64-0.76); normal distribution of uncertainty
     - [Bitew-et-al-2020]_
     - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
+  * - :math:`E_{SAM}`
+    - Nigeria
+    - 0.712 (95% CI: 0.685–0.738); normal distribution of uncertainty
+    - [Desyibelew-et-al-2020]_ Systematic review of sub-Saharan African countries as Nigerian-specific meta-analysis could not be found.  
+    - TODO: generate draw-specific values
+  * - :math:`E_{SAM}`
+    - Pakistan
+    - 0.88 (95% CI: 0.87, 0.89); normal distribution of uncertainty
+    - [Aguayo-et-al-2020]_ NOTE: this value does not come from a meta-analysis, but a single study; uncertainty reflects only sample size of this study and no heterogeneity between studies.  
+    - TODO: generate draw-specific values
   * - :math:`E_\text{MAM}`
-    - Ethiopia
-    - :math:`E_\text{SAM}` value for Ethiopia
+    - Ethiopia, Nigeria, Pakistan
+    - Location-specific :math:`E_\text{SAM}` value 
     - Assumption in lack of direct data
     - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
 
@@ -178,6 +203,10 @@ The Vivarium modeling strategy above details how to solve for the transition rat
   Because of this, the rate at which simulants covered by MAM/SAM treatment transition through the treated and untreated pathways will not vary by scenario as they did for the CIFF project. 
 
   We made this decision as there was no significant difference in response rate between standard of care and combined protocol arms of the COMPAS trial [Bailey-et-al-2020]_.
+
+.. important::
+
+  Treatment effects should only be applied to those 6-59 months of age and **not** to infants less than six months of age.
 
 .. list-table:: Wasting transition rate relative risks for wasting treatment
   :header-rows: 1
@@ -337,6 +366,10 @@ and
 References
 ----------
 
+.. [Aguayo-et-al-2020]
+
+  Aguayo VM, Badgaiyan N, Qadir SS, Bugti AN, Alam MM, Nishtar N, Galvin M. Community management of acute malnutrition (CMAM) programme in Pakistan effectively treats children with uncomplicated severe wasting. Matern Child Nutr. 2018 Nov;14 Suppl 4(Suppl 4):e12623. doi: 10.1111/mcn.12623. PMID: 30499254; PMCID: PMC6866122.
+
 .. [Bailey-et-al-2020]
 
   Bailey J, Opondo C, Lelijveld N, Marron B, Onyo P, Musyoki EN, Adongo SW, Manary M, Briend A, Kerac M. A simplified, combined protocol versus standard treatment for acute malnutrition in children 6-59 months (ComPAS trial): A cluster-randomized controlled non-inferiority trial in Kenya and South Sudan. PLoS Med. 2020 Jul 9;17(7):e1003192. doi: 10.1371/journal.pmed.1003192. PMID: 32645109; PMCID: PMC7347103. https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003192#sec018
@@ -348,6 +381,14 @@ References
     Treatment outcomes of severe acute malnutrition and predictors of recovery in under-five children treated within outpatient therapeutic programs in Ethiopia: a systematic review and meta-analysis
 
 .. _`Bitew et al. 2020`: https://pubmed.ncbi.nlm.nih.gov/32631260
+
+.. [Desyibelew-et-al-2020] 
+
+  View `Desyibelew et al. 2020`_
+
+    Desyibelew HD, Bayih MT, Baraki AG, Dadi AF. The recovery rate from severe acute malnutrition among under-five years of children remains low in sub-Saharan Africa. A systematic review and meta-analysis of observational studies. PLoS One. 2020 Mar 18;15(3):e0229698. doi: 10.1371/journal.pone.0229698. PMID: 32187182; PMCID: PMC7080262.
+
+.. _`Desyibelew et al. 2020`: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7080262/
 
 .. [Isanaka-et-al-2021]
 

@@ -46,6 +46,8 @@ and to address the harmful conflation of sex and gender in public health researc
 We hope this page will serve as a useful guide to members of the Simulation Science team as
 well as other teams at IHME!
 
+.. image:: inclusion_icon.png
+
 On this page you will find our guiding principles, a glossary of commonly used terms related
 to BLISS, recommendations for how to address sex/gender-related limitations in external data
 sources, discussion of the implications of imperfect proxy measures with regards to sex/gender,
@@ -155,17 +157,41 @@ throughout this style guide.
    * - Term
      - Definition
    * - Sex
-     - *Sex* refers to biological attributes and functions associated with chromosomal makeup, reproductive anatomy, and secondary sex characteristics [Ritz_and_Greaves_2022]_.
+     - *Sex* refers to biological attributes and functions associated with chromosomal makeup, 
+       reproductive anatomy, and secondary sex characteristics [Ritz_and_Greaves_2022]_.
    * - Gender
-     - *Gender*, on the other hand, is a social construct that refers to the culturally specific expectations, behaviors, and institutions that shape any individual's access to power, privilege, and resources. It can also refer to a gendered individual's internal sense of identity [Ritz_and_Greaves_2022]_. 
+     - *Gender*, on the other hand, is a social construct that refers to the culturally specific 
+       expectations, behaviors, and institutions that shape any individual's access to power, 
+       privilege, and resources. It can also refer to a gendered individual's internal sense of 
+       identity [Ritz_and_Greaves_2022]_. 
    * - Sexual and gender minority (SGM) 
-     - An umbrella term that includes (but is not limited to) individuals that are two-spirit, intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender non-conforming identities.
+     - An umbrella term that includes (but is not limited to) individuals that are two-spirit, 
+       intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender 
+       non-conforming identities.
    * - Undifferentiated sex/gender measure
-     - A useful hybrid term that reflects the dynamic relationship that exists between sex and gender and acknowledges the common conflation between sex and gender in public health research and data [Ritz_and_Greaves_2022]_. 
+     - Undifferentiated sex/gender measure is a placeholder variable that indicates uncertainty 
+       regarding what is being captured. Due to data limitations or availability, it might not always 
+       be possible to elucidate whether a certain data source (e.g., a question in a household survey)
+       is intended to capture sex or gender, or some factor related to both. See Section `2.0 Dealing 
+       with Limitations in Upstream Research`_ for more information. 
+   * - Sex- and gender-related factors
+     - "Factors associated with sex/gender that are not themselves dimensions of
+       sex or gender (e.g., gene expression, body weight, risk taking, age at
+       sexual debut, structural sexism)" [Bauer_2022]_. 
+   * - Sex assigned at birth
+     - "Recorded on initial birth record; generally genital phenotype" [Bauer_2022]_. 
+   * - Intersex status
+     - "Reported presence of intersex conditions generally or a specific condition" [Bauer_2022]_. 
+   * - Gender identity
+     - "Personally held sense of one’s gender as man/boy, woman/girl, another cultural gender, 
+       trans, nonbinary, etc." [Bauer_2022]_. 
+   * - Intersex identity
+     - "Personally held identification as intersex" [Bauer_2022]_. 
 
 .. todo::
 
-   Add other BLISS-related terms and definitions, like gender identity, gender expression, etc. and include visual of 'Do's and Don'ts! Also, refine definition for undifferentiated sex/gender measure.
+   Include visual of 'Do's and Don'ts!
+
 
 2.0 Dealing with Limitations in Upstream Research
 +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -353,6 +379,8 @@ practices, as well as some lessons learned.
 - As secondary data analyzers, we are limited by the data we can find and the information included about its collection. As much as we want to, it it often impossible to decide if a variable represents sex or gender or who in a dataset might be being missed, or misclassified. 
 - Acknowledging these limitations and considering their impact is an important part of this work. 
 
+
+.. image:: safe_space_icon.png
 
 5.0 References
 ++++++++++++++
