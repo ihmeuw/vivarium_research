@@ -1041,7 +1041,7 @@ Wave II
       * The mild underweight category is being used for targeting instead of the severe category - this will be updated and fixed. 
   * - 9.0.1
     - * Verify that the correct underweight category is being used for targeting 
-    - 
+    - `Underweight category was fixed <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_9.0.1.ipynb>`_. Ready to move on. 
 
 
 .. list-table:: Outstanding V&V issues
