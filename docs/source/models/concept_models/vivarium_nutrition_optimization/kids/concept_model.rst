@@ -1038,7 +1038,7 @@ Wave II
     - * MAM targeting looks to be working correctly for age but underweight category needs to be updated.  
       * `MAM targeting appears to be mostly covering the correct simulants <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_9.0.ipynb>`_
       * We see that all of the simulants in the wasting cat2 and age 6-18 months are targeted and a subset of wasting cat2 in other age groups. This matches with the model design. 
-      * The mild underweight category is being used for targeting instead of the server category - this will be updated and fixed. 
+      * The mild underweight category is being used for targeting instead of the severe category - this will be updated and fixed. 
   * - 9.0.1
     - * Verify that the correct underweight category is being used for targeting 
     - 
