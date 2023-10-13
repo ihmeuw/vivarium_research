@@ -298,12 +298,32 @@ Transitions
    - CAT 4
    - CAT 3
 
+MAM (cat2) substates
+----------------------
+
+For simulants that transition into the moderate acute malnutrition (MAM, cat2) wasting exposure state, they will be assigned one of the two following sub-exposures:
+
+1. "Better" MAM/cat2.5: WHZ between -2 and -2.5
+2. "Worse" MAM/cat2.0: WHZ between -2.5 and -3
+
+The PLACEHOLDER probability of occupying the "Worse" MAM/cat2.0 sub-exposure upon transitioning into the MAM state is 0.33. The probability of "Better" MAM/cat2.5 is equal to 1-the probability of Worse MAM.
+
+.. todo::
+
+  Generate and link age/sex/location/draw-specific values for the probability of the worse MAM subexposure.
+
+These subexposures will vary with respect to their wasting relative risk values (detailed on the CGF risk effects page) and their targeted MAM treatment eligibility (detailed on the wasting treatment page), but they will **not** differ with respect to wasting transition rates (e.g. progression to SAM or recovery to mild wasting states).
+
+.. note::
+
+  These sub-exposures should be included in wasting state person-time observers.
+
 Validation 
 ++++++++++
 
 Wasting model
 
-  - prevalence of cat 1-4
+  - prevalence of cat 1-4 (including the MAM sub-states)
   - model transition rates
 
 Note that validation of this model is dependent on validation of wasting-specific mortality rates, which are dependent on the following models meeting their individual validation criteria:

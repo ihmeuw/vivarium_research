@@ -290,14 +290,16 @@ treatment including the presence of *any* of the following criteria:
 - Severe personal circumstances, such as mother died or poor maternal health and well-being 
 - Recent on ongoing humanitarian crisis
 
-Currently, we will be using the first two of these (WAZ and/or age) for targeting MAM treatment. 
-This accounts for 57% of all MAM cases. In the future, we plan to also include the third criterion 
-around MUAC but have not completed this currently. 
+Currently, we will be using the first two of these (WAZ and/or age) plus an analogy of the third
+to WHZ scores (WHZ between -2.5 and -3) for MAM targeting in our model. These three targets
+combined are thought to comprise approximately 67% of all MAM cases among children 6-59 months
+of age, `as investigated in this notebook. <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/mam_target_sizes.ipynb>`_
 
-In modeling, the targeted MAM intervention will be given to children who: 
+In modeling, the targeted MAM intervention will be given to children who fall in the MAM category for wasting (WHZ z-score < -2 to -3) AND:
 
-- Fall in the MAM category for wasting (WHZ z-score < -2 to -3) AND
-- Are aged 6-24 months OR are underweight with WAZ z-score < -3 
+- Are aged 6-24 months, 
+- OR are severely :ref:`underweight <2020_risk_exposure_child_underweight>` with WAZ z-score < -3 (WAZ cat1)
+- OR are in the "Worse" MAM/cat2.0 :ref:`wasting exposure state <2021_risk_exposure_wasting_state_exposure>`
 
 Restrictions
 ++++++++++++
