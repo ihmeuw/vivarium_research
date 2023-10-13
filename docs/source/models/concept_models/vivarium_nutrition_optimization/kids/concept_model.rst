@@ -1004,7 +1004,12 @@ Wave II
     - 13
     - 
     - Scenario 13 is targeted MAM only 
-
+  * - 10.0
+    - Wasting transitions among 1-5 months, including LBWSG-dependent initialization
+    - Baseline, zero coverage, MMS
+    - Baseline
+    - 
+    - 
 
 .. list-table:: Output specifications
   :header-rows: 1
@@ -1022,7 +1027,14 @@ Wave II
     - * Age group
       * Sex
       * Underweight category
-
+  * - 10.0
+    - 1. Deaths
+      2. Wasting state person time, stratified by BW +/- 2500 grams if possible
+      3. Stunting state person time
+      4. Underweight state person time
+      5. Wasting transition counts, stratified b BW +/- 2500 grams if possible
+    - * Age group
+      * Sex
 
 .. list-table:: Verification and validation tracking
   :header-rows: 1
