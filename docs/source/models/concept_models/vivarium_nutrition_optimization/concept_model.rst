@@ -324,10 +324,152 @@ Assumptions:
 
 .. _nutritionoptimization4.0:
 
-4.0 Simulation scenarios
+4.0 2021 Data Notes
 ++++++++++++++++++++++++
 
+For all calls in the following table, relevant values for:
 
+  - :code:`age_group_id`
+  - :code:`location_id`
+  - :code:`sex_id`
+  - :code:`gbd_id`
+
+Will need to be filled in as appropriate.
+
+Also, the following packages must be imported as so:
+
+.. code-block::
+
+  from get_draws.api import get_draws
+  from db_queries import get_population, get_covariate_estimates
+
+.. list-table:: GBD 2021 Data Update Needs
+  :header-rows: 1
+
+  * - Category
+    - Details
+    - Status
+    - Call
+    - Note
+  * - Demographics
+    - Used for age structure at initialization, to convert codcorrect results from counts to rates
+    - Ready
+    - :code:`get_population(gbd_round_id=7, #2021`
+      
+      :code:`year_id=2021,` 
+      
+      :code:`decomp_step='iterative',` 
+      
+      :code:`run_id=359)`
+    - `Run ID obtained here <https://hub.ihme.washington.edu/display/GBD2020/GBD+2021+Estimation>`_
+  * - Mortality
+    - Deaths to be used to calculate CSMRs
+    - Ready
+    - :code:`get_draws(gbd_round_id=7,`
+
+      :code:`year_id=2021,`
+
+      :code:`source='codcorrect',`
+
+      :code:`gbd_id_type='cause_id',`
+
+      :code:`gbd_id=CAUSE_IDS,`
+
+      :code:`decomp_step='step3',`
+
+      :code:`version_id=363,`
+
+      :code:`measure_id=1)`
+    - Returns counts that will need to be converted to rate. `Codcorrect version ID obtained here <https://hub.ihme.washington.edu/display/GBD2020/GBD+2021+CodCorrect+Tracking>`_
+  * - Incidence
+    - Incidence rates
+    - Not yet ready
+    - :code:`get_draws(gbd_round_id=7,`
+
+      :code:`year_id=2021,`
+
+      :code:`source='como',`
+
+      :code:`gbd_id_type='cause_id',`
+
+      :code:`gbd_id=CAUSE_IDS,`
+
+      :code:`decomp_step='iterative',`
+
+      :code:`version_id=???,`
+
+      :code:`measure_id=6)`
+    - Returns per person-year rate. `Final COMO version ID can be found here when ready <https://hub.ihme.washington.edu/display/GBD2020/COMO+tracking>`_
+  * - Risk exposure
+    - Hemoglobin mean/standard deviation
+    - Ready
+    - :code:`get_draws(gbd_round_id=7,`
+
+      :code:`year_id=2021,`
+
+      :code:`source='epi',`
+
+      :code:`gbd_id_type='modelable_entity_id',`
+
+      :code:`gbd_id=MEID,`
+
+      :code:`decomp_step='iterative')`
+    - 
+  * - Risk exposure
+    - LBWSG and CGF
+    - Already updated for CGF, ready for LBWSG
+    - :code:`get_draws(gbd_round_id=7,`
+
+      :code:`year_id=2021,`
+
+      :code:`source='exposure',`
+
+      :code:`gbd_id_type='rei_id',`
+
+      :code:`gbd_id=REI_IDS,`
+
+      :code:`decomp_step='iterative')`
+    - 
+  * - Relative risk
+    - Hemoglobin on maternal disorders, LBWSG and CGF
+    - Already updated for CGF, ready for hemoglobin and LBWSG
+    - :code:`get_draws(gbd_round_id=7,`
+
+      :code:`year_id=2021,`
+
+      :code:`source='rr',`
+
+      :code:`gbd_id_type='rei_id',`
+
+      :code:`gbd_id=REI_IDS,`
+
+      :code:`decomp_step='iterative')`
+    - 
+  * - Covariates
+    - ASFR, SBR
+    - Ready
+    - :code:`get_covariate_estimates(gbd_round_id=7,`
+
+      :code:`year_id=2021,`
+
+      :code:`decomp_step='iterative',`
+
+      :code:`covariate_id=COVARIATE_ID)`
+    - 
+
+**Additional dependencies:**
+
+- There are no PAFs in the table above as all PAFs are custom-calculated in this model, including:
+
+  - Hemoglobin on maternal disorders and maternal hemorrhage PAFs - calculated by the research team (unblocked)
+
+  - LBWSG PAFs have been calculated by the engineers (unblocked)
+
+  - CGF PAFs calculated by the research team (blocked by 2021 cause data artifact keys)
+
+- Joint BMI/hemoglobin exposure, as calculated by the research team (unblocked)
+
+- Child growth failure accessory data (wasting transitions and correlated underweight exposure distributions) calculated by the research team (blocked by 2021 cause data artifact keys)
 
 .. _nutritionoptimization5.0:
 
