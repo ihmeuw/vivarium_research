@@ -1014,6 +1014,25 @@ Wave II
     - Baseline
     - 
     - 
+  * - 11.0
+    - Replication for Nigeria and Pakistan
+    - Baseline
+    - Baseline
+    - 
+    - Remember data updates for:
+      
+      * Antenatal supplementation gestational age shifts
+      * Wasting transition rates
+      * CGF PAFs
+      * LBWSG PAFs (to be generated)
+      * Underweight exposure lookup table
+      * Wasting treatment C_SAM, E_SAM, C_MAM, and E_MAM parameter values
+  * - 12.0
+    - MAM treatment also targeted to "worse" MAM category
+    - Baseline
+    - 13
+    - 
+    - Could be switched with model 11.0 in ordering
 
 .. list-table:: Output specifications
   :header-rows: 1
@@ -1039,6 +1058,26 @@ Wave II
       5. Wasting transition counts, stratified b BW +/- 2500 grams if possible
     - * Age group
       * Sex
+  * - 11.0
+    - 1. Deaths, stratifie by wasting state
+      2. Wasting state person time, stratified by wasting treatment coverage
+      3. Stunting state person time
+      4. Underweight state person time
+      5. Wasting transition counts, stratified by wasting treatment coverage
+      6. Cause state person time, stratified by wasting state
+      7. Cause transition counts, stratified by wasting state
+      8. YLDs and YLLs
+    - * Age group
+      * Sex
+  * - 12.0
+    - 1. Deaths
+      2. Wasting state person time (including better/worse MAM differentiation), stratifie by wasting treatment coverage
+      3. Stunting state person time
+      4. Underweight state person time, stratified by wasting treatment coverage
+      5. Wasting transition counts (including better/worse MAM differentiation), stratified by wasting treatment coverage
+    - * Age group
+      * Sex
+      * Underweight category
 
 .. list-table:: Verification and validation tracking
   :header-rows: 1
