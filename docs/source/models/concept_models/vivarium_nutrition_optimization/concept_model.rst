@@ -343,6 +343,8 @@ Also, the following packages must be imported as so:
   from get_draws.api import get_draws
   from db_queries import get_population, get_covariate_estimates
 
+As of 10/16/2023:
+
 .. list-table:: GBD 2021 Data Update Needs
   :header-rows: 1
 
