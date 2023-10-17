@@ -266,7 +266,7 @@ Note that prevalence of each wasting state for use in this model can be pulled u
 Transitions
 ------------
 
-`Draw-specific values for transition rates (defined in the table below) for Ethiopia, Nigeria, and Pakistan (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found listed below. Values in these files are defined in terms of transitions per person-year in the source state. 
+Draw-specific values for transition rates (defined in the table below) for Ethiopia, Nigeria, and Pakistan (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found listed below. Values in these files are defined in terms of transitions per person-year in the source state. 
 
 - `Ethiopia wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions_4.csv>`_ 
 
