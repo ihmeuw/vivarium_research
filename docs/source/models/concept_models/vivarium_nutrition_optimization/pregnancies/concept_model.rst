@@ -564,6 +564,13 @@ Specific outputs for specific models are specified in the following section.
       * Intervention counts
     - Same as 9.1
     - The underlying model should be identical to 9.1 except for locations and the modifications noted here
+  * - 10.1
+    - Production runs with live birth and still birth counts 
+    - All
+    - Same as 9.1
+    - Same as 9.1 but including count of live births and still births 
+    - Same as 9.1
+    - 
   * - 11.0
     - GBD 2021 update?
     - Baseline
