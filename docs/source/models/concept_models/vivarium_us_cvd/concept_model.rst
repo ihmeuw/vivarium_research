@@ -329,8 +329,7 @@ Note:
   - In order to pick this draw, end results for DALYs and heart failure prevalence were analyzed for a set of 10 draws and 829 was selected as the best middle ground for `all interventions <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Figure_Mockup2.ipynb>`_ 
   - The draws were also looked at in terms of input data - MI incidence, SBP mean value, etc to ensure that it was also reasonably close to the average for `input data <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Draw_Correlation.ipynb>`_ 
 
-
-**Draw Testing:**
+**Seed Testing:**
 
 .. list-table:: CVD simulation model population parameters
    :header-rows: 1
@@ -339,10 +338,10 @@ Note:
      - Value
      - Note
    * - Population size
-     - 1 seed
+     - 50 seeds (10,000 sims per seed)
      - 
    * - Number of draws
-     - 50
+     - 5
      - 
    * - Cohort type
      - Closed
@@ -357,7 +356,10 @@ Note:
      - None 
      - 
 
-**Seed Testing:**
+Note: 
+  - For this run, results must **be stratified by seed** 
+
+**Draw Testing:**
 
 .. list-table:: CVD simulation model population parameters
    :header-rows: 1
@@ -366,10 +368,10 @@ Note:
      - Value
      - Note
    * - Population size
-     - 50 seeds
+     - TBD from seed testing run above 
      - 
    * - Number of draws
-     - 1
+     - 50
      - 
    * - Cohort type
      - Closed
