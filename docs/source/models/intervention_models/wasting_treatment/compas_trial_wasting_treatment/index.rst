@@ -149,47 +149,47 @@ Vivarium Modeling Strategy
     - Ethiopia
     - 0.488 (95% CI:0.374-0.604), normal distribution of uncertainty (0 for those <6 months)
     - [Isanaka-et-al-2021]_
-    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
   * - :math:`C_{SAM}` (baseline)
     - Nigeria
     - 0.353 (95% CI: 0.263-0.443), normal distribution of uncertainty (0 for those <6 months)
     - [Isanaka-et-al-2021]_
-    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/treatment_data_draws.csv>`_
   * - :math:`C_{SAM}` (baseline)
     - Pakistan
     - 0.05 (point value); zero for those <6 months
     - CMAM 2021 Virtual Conference - Scaling Up Management of Wasting in South Asia: A Case Study. :download:`PDF available here <04_South Asia_CMAM_EN.pdf>`
-    - Note acknowledged lack of data on CMAM coverage in South Asia. Reference was provided to us by KOL Indi Trehan. `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/treatment_data_draws.csv>`_
+    - Note acknowledged lack of data on CMAM coverage in South Asia. Reference was provided to us by KOL Indi Trehan. Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/treatment_data_draws.csv>`_
   * - :math:`C_{MAM}` (baseline)
     - Ethiopia and Nigeria
     - 0.15 (95% CI: 0.1, 0.2), normal distribution of uncertainty (0 for those <6 months)
     - Informed through discussion with CIFF/UNICEF that reported there is not reliable data on this parameter, but that this appeared to be a plausible range
-    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
   * - :math:`C_{MAM}` (baseline)
     - Pakistan
     - 0.05 (point value); zero for those <6 months
     - Assumed to be the same as :math:`C_{SAM}` due to lack of data and fact that Pakistan national guideline suggests treatment for both SAM and MAM
-    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/treatment_data_draws.csv>`_
   * - :math:`E_\text{SAM}`
     - Ethiopia
     - 0.70 (95% CI:0.64-0.76); normal distribution of uncertainty
     - [Bitew-et-al-2020]_
-    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
   * - :math:`E_{SAM}`
     - Nigeria
     - 0.712 (95% CI: 0.685–0.738); normal distribution of uncertainty
     - [Desyibelew-et-al-2020]_ Systematic review of sub-Saharan African countries as Nigerian-specific meta-analysis could not be found.  
-    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/treatment_data_draws.csv>`_
   * - :math:`E_{SAM}`
     - Pakistan
     - 0.88 (95% CI: 0.87, 0.89); normal distribution of uncertainty
     - [Aguayo-et-al-2020]_ NOTE: this value does not come from a meta-analysis, but a single study; uncertainty reflects only sample size of this study and no heterogeneity between studies.  
-    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/treatment_data_draws.csv>`_
   * - :math:`E_\text{MAM}`
     - Ethiopia, Nigeria, Pakistan
     - Location-specific :math:`E_\text{SAM}` value 
     - Assumption in lack of direct data
-    - `Use draw-level values defined here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
 
 
 Affected Outcomes
