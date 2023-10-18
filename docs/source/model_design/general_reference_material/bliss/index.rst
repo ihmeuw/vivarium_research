@@ -368,7 +368,9 @@ with respect to the outcome. Each case is described below:
 
 In either case, measurement error of sex and/or gender can lead to biased results and care 
 should be taken to minimize error in measuring these variables (as for all variables!) to 
-minimize bias in study results.
+minimize bias in study results. When we are using data published by others, it is important
+to consider how results may be affected by potential measurement error and dicuss any
+relevant limitations accordingly.
 
 3.3 Other Gender-Inclusive Guides
 ---------------------------------
