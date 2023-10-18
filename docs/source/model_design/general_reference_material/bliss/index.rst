@@ -356,15 +356,15 @@ the bias depends on whether or not the measurement error is differential or non-
 with respect to the outcome. Each case is described below:
 
 - Non-differential measurement error of the exposure is when the amount of exposure 
-misclassification does not vary by outcome level. In this case, the measure of effect of the
-exposure on the outcome will be biased towards the null.
+  misclassification does not vary by outcome level. In this case, the measure of effect of the
+  exposure on the outcome will be biased towards the null.
 
 - Differential measurement error of the exposure occurs when the amount of exposure 
-misclassification varies by the outcome level. For instance, a study design in which gender was
-ascertained from recorded sex in medical records for lung cancer cases, but was self-reported
-among control participants is likely to have differential rates of measurement error of gender
-by case versus control status. In this situation, the measure of effect of the exposure on the 
-outcome may be biased upwards or downwards.
+  misclassification varies by the outcome level. For instance, a study design in which gender was
+  ascertained from recorded sex in medical records for lung cancer cases, but was self-reported
+  among control participants is likely to have differential rates of measurement error of gender
+  by case versus control status. In this situation, the measure of effect of the exposure on the 
+  outcome may be biased upwards or downwards.
 
 In either case, measurement error of sex and/or gender can lead to biased results and care 
 should be taken to minimize error in measuring these variables (as for all variables!) to 
