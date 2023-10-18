@@ -145,6 +145,14 @@ PAF values are available below:
 
    - `Ethiopian PAF values calculated here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/CGF%20correlation%20data%20generation.ipynb>`_
 
+- `Pakistan CGF PAF values <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/pafs_3.csv>`_
+
+   - `Pakistani PAF values calculated here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakista /CGF%20correlation%20data%20generation.ipynb>`_
+
+- `Nigeria CGF PAF values <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/pafs_3.csv>`_
+
+   - `Nigerian PAF values calculated here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/CGF%20correlation%20data%20generation.ipynb>`_
+
 .. note::
 
    There are some draws for which the PAF is negative. This happens because the 
