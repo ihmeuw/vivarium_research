@@ -167,9 +167,9 @@ throughout this style guide.
    * - Undifferentiated sex/gender measure
      - Undifferentiated sex/gender measure is a variable that indicates uncertainty 
        regarding what is being reported. This uncertainty can arise  due to unclearly defined variables 
-       in an external data source (e.g., vague survey question) or from the compilation of many data sources
-       with clear definitions of 'sex' or 'gender' into one conglomerate sex/gender variable (e.g., GBD "sex"
-       variable).
+       in an external data source (e.g., vague survey question that different respondents may interpret differently) 
+       or from the compilation of many data sources with clear definitions of 'sex' or 'gender' into one 
+       conglomerate sex/gender variable (e.g., GBD "sex" variable).
    * - Sex- and gender-related factors
      - An umbrella term that refers to any and all characteristics related to sex and/or gender (e.g., 
        gamete size, hormone production, reproductive or sexual anatomy, or any so-called 'secondary sex
