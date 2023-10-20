@@ -25,7 +25,7 @@ Note that there is a central computation maintained conda environment that is gu
 
 - Note that archived GBD rounds (for example, GBD 2017) may require archived GBD environments to access - see the "Current and Archive GBD environments" subpage for more details.
 
-- Also note that while the :code:`gbd_env` environment is guarenteed to have the most up to date versions of shared functions, it is unlikely to support additional functions you may want to use, which is a downside of using this environment.
+- Also note that while the :code:`gbd_env` environment is guaranteed to have the most up to date versions of shared functions, it is unlikely to include additional packages you may want to use, which is a downside of using this environment.
 
 If you wish to use your own environment and add shared functions to that environment, you may do so using :code:`pip`, but you will need to add *artifactory.ihme.washington.edu* as a trusted host in you :code:`~/.pip/pip.conf` file first, `as described on this HUB page <https://hub.ihme.washington.edu/display/SF/Current+and+archive+GBD+environments>`_. See :ref:`the computing onboarding resource page <computing>` for more information on managing conda environments. 
 
