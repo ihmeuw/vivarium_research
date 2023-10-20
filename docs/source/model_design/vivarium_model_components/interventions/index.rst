@@ -4,8 +4,27 @@
 Modeling Interventions
 ======================
 
-An essential part of many vivarium simulation models is the
-Intervention Model Document.  This must communicate the following
+Many of our Vivarium simulations are designed to measure the effects of
+a hypothetical intervention on a simulated population. Such
+interventions are described by an Intervention Model Document. Like a
+Cause Model Document, a Risk Exposure Document, or a Risk Effects
+Document, the goal of an Intervention Model Document is to organize the
+complexity of the model so that others can understand it: The simulation
+researcher is responsible for communicating in writing how the
+intervention model should function, with sufficient detail so that (1)
+the engineer can implement the model in Vivarium; and (2) other
+researchers can understand what was done, including the strengths and
+weaknesses of the approach and how to verify and validate the results.
+This page describes in more detail what should go into an Intervention
+Model Document.
+
+.. contents::
+  :local:
+
+General guidelines
+------------------
+
+This must communicate the following
 details to allow a software engineer to implement the model:
 
 * Attributes of a simulant that are required for modeling the
@@ -23,24 +42,12 @@ details to allow a software engineer to implement the model:
   attributes) during each simulation time-step.
 
 
-The goal of an Intervention Model Document is to organize the
-complexity of the intervention model --- the simulation researcher is
-responsible for communicating in writing how the intervention model
-should function, with sufficient detail so that (1) the engineer can
-implement the model in Vivarium; and (2) other researchers can
-understand what was done, including the strengths and weaknesses of
-the approach and how to verify and validate the results.
-
 We have developed a template for an intervention model document, which
 can help organize a complex model, and the remainder of this document
 describes what a researcher might include for each section when using
 :ref:`this template <intervention_model_template>`.
-
-Here is an example of a recent application of this template for the :ref:`latent tuberculosis treatment intervention <intervention_latent_tuberculosis_treatment>`.
-
-
-.. contents:
-
+An example Intervention Model Document that uses this template is the
+:ref:`latent tuberculosis treatment intervention <intervention_latent_tuberculosis_treatment>`.
 
 
 The structure of an intervention model document
