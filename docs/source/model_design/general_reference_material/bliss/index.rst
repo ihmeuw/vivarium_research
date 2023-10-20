@@ -342,8 +342,35 @@ research processes and calculations.
 
 3.2 Measurement Error
 ---------------------
-In this section, we will elaborate on how misinterpretations of sex/gender might affect 
-results.
+
+In the evaluation of sex and/or gender as a variable in an epidemiologic study, error in
+the measurement of these variables can lead to bias in study results. Measurement error
+may be introduced through researchers assuming participants' gender rather than self-reporting,
+or not asking questions in a way that allows participants to accurately report their sex
+and/or gender.
+
+In situations where sex and/or gender are being treated as an exposure variable relative to
+some outcome (for instance, in a research question such as "what influence does sex have on
+a given outcome?"), measurement error will bias the measure of effect, and the direction of 
+the bias depends on whether or not the measurement error is differential or non-differential
+with respect to the outcome. Each case is described below:
+
+- Non-differential measurement error of the exposure is when the amount of exposure 
+  misclassification does not vary by outcome level. In this case, the measure of effect of the
+  exposure on the outcome will be biased towards the null.
+
+- Differential measurement error of the exposure occurs when the amount of exposure 
+  misclassification varies by the outcome level. For instance, a study design in which gender was
+  ascertained from recorded sex in medical records for lung cancer cases, but was self-reported
+  among control participants is likely to have differential rates of measurement error of gender
+  by case versus control status. In this situation, the measure of effect of the exposure on the 
+  outcome may be biased upwards or downwards.
+
+In either case, measurement error of sex and/or gender can lead to biased results and care 
+should be taken to minimize error in measuring these variables (as for all variables!) to 
+minimize bias in study results. When we are using data published by others, it is important
+to consider how results may be affected by potential measurement error and dicuss any
+relevant limitations accordingly.
 
 3.3 Other Gender-Inclusive Guides
 ---------------------------------
