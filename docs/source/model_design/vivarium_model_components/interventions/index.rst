@@ -6,17 +6,17 @@ Modeling Interventions
 
 Many of our Vivarium simulations are designed to measure the effects of
 a hypothetical intervention on a simulated population. Such
-interventions are described by an Intervention Model Document. Like a
-Cause Model Document, a Risk Exposure Document, or a Risk Effects
-Document, the goal of an Intervention Model Document is to organize the
-complexity of the model so that others can understand it: The simulation
-researcher is responsible for communicating in writing how the
-intervention model should function, with sufficient detail so that (1)
-the engineer can implement the model in Vivarium; and (2) other
+interventions are described by an intervention model document. Like a
+cause model document, a risk exposure model document, or a risk effects
+model document, the goal of an intervention model document is to
+organize the complexity of the model so that others can understand it:
+The simulation researcher is responsible for communicating in writing
+how the intervention model should function, with sufficient detail so
+that (1) the engineer can implement the model in Vivarium; and (2) other
 researchers can understand what was done, including the strengths and
 weaknesses of the approach and how to verify and validate the results.
-This page describes in more detail what should go into an Intervention
-Model Document.
+This page describes in more detail what should go into an intervention
+model document.
 
 .. contents::
   :local:
@@ -24,8 +24,9 @@ Model Document.
 General guidelines
 ------------------
 
-This must communicate the following
-details to allow a software engineer to implement the model:
+When writing an intervention model document (or any other component
+model document for Vivarium), you must include the following details to
+allow a software engineer to implement the model:
 
 * Attributes of a simulant that are required for modeling the
   intervention (e.g. age, sex, and systolic blood pressure level for a
@@ -41,8 +42,7 @@ details to allow a software engineer to implement the model:
 * How to update the attributes (including both required and added
   attributes) during each simulation time-step.
 
-
-We have developed a template for an intervention model document, which
+We have developed a template for intervention model documents, which
 can help organize a complex model, and the remainder of this document
 describes what a researcher might include for each section when using
 :ref:`this template <intervention_model_template>`.
