@@ -11,6 +11,8 @@ difficult task. Some helpful resources for understanding the GBD study are liste
 - IHME onboarding trainings
 - GBD capstone papers and their methods appendices 
 - `The GBD compare tool <https://vizhub.healthdata.org/gbd-compare/>`_, which allows you to visualize GBD estimates
+- `GBD ID viewer <https://shiny.ihme.washington.edu/connect/#/apps/1cbf4a06-bfe9-4896-9028-9f4d23cc75c6/access>`_
+- `GBD risk factors toolbox <https://shiny.ihme.washington.edu/content/13/>`_
 - Your simulation science team members!
 - Talking to GBD modelers directly
 
