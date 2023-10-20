@@ -1,6 +1,6 @@
 ..
   Section title decorators for this document:
-  
+
   ==============
   Document Title
   ==============
@@ -27,28 +27,15 @@
 Types of Vivarium model components
 ================================================
 
-The purpose of this page is to describe the general types of model components that comprise Vivarium models. 
+The purpose of this page is to describe the general types of model components that comprise Vivarium models.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :titlesonly:
    :glob:
 
    causes/index
    impairments/index
    interventions/index
    intervention_features/index
-   risk_factors/index
-
-Sub-components of risk factors can be found here:
-
-  .. toctree::
-     :maxdepth: 1
-     :glob:
-
-     risk_factors/risk_exposure/index
-     risk_factors/risk_attributable_causes/index
-     risk_factors/risk_correlation/index
-     risk_factors/risk_effects/index
-     risk_factors/risk_mediation/index
-     risk_factors/population_attributable_fraction/index
-     risk_factors/residual_confounding/index
+   risk_factors/*
