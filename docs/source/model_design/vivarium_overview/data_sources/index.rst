@@ -4,7 +4,7 @@
 Understanding and Pulling GBD Data
 ===================================
 
-Global Burden of Disease (GBD) Study data is a primary data source for our simulation models. 
+Global Burden of Disease (GBD) Study data is a fundamental data source for our simulation models. 
 Understanding what data is available in the GBD and what modeling processes produced it is a 
 difficult task. Some helpful resources for understanding the GBD study are listed below: 
 
@@ -26,11 +26,11 @@ Pulling GBD Data using *Shared Functions*
 
 IHME central computation maintains functions for accessing GBD data, referred to as "Shared Functions." `The main HUB page for shared functions can be found here <https://hub.ihme.washington.edu/display/SF/Shared+Functions+Home>`_
 
-Note that there is a central computation maintained conda environment that is guarenteed to have the latest version of all GBD shared functions, called :code:`gbd_env`, as described on the Shared Functions HUB page. 
+Note that there is a central computation maintained conda environment that is guaranteed to have the latest version of all GBD shared functions, called :code:`gbd_env`, as described on the Shared Functions HUB page. 
 
 - Note that archived GBD rounds (for example, GBD 2017) may require archived GBD environments to access - see the "Current and Archive GBD environments" subpage for more details.
 
-- Also note that while the :code:`gbd_env` environment is guarenteed to have the most up to date versions of shared functions, it is unlikely to support additional functions you may want to use, which is a downside of using this environment.
+- Also note that while the :code:`gbd_env` environment is guaranteed to have the most up to date versions of shared functions, it is unlikely to include additional packages you may want to use, which is a downside of using this environment.
 
 If you wish to use your own environment and add shared functions to that environment, you may do so using :code:`pip`, but you will need to add *artifactory.ihme.washington.edu* as a trusted host in you :code:`~/.pip/pip.conf` file first, `as described on this HUB page <https://hub.ihme.washington.edu/display/SF/Current+and+archive+GBD+environments>`_. See :ref:`the computing onboarding resource page <computing>` for more information on managing conda environments. 
 
@@ -124,7 +124,7 @@ Additionally, there are certain intermediate values used in GBD that are not ava
 Handling GBD versioning
 ++++++++++++++++++++++++
 
-Decomposition (or "decomp") steps are a versioning scheme used in some GBD rounds that allowed updates to GBD results based on iterative updates to certain parts of the computation process. For instance, the first step may be equivalent to the prior GBD round in all aspects except for an updated demographic model; the second step may be equivalent to the prior steps, but with updated risk exposures; and so on. This process allowed GBD researchers to evaluate individual components of the many changes included in a GBD round advancement influenced the main results of the GBD study rather than updating the entire pipeline at once. 
+Decomposition (or "decomp") steps are a versioning scheme used in some GBD rounds that allowed updates to GBD results based on iterative updates to certain parts of the computation process. For instance, the first step may be equivalent to the prior GBD round in all aspects except for an updated demographic model; the second step may be equivalent to the prior steps, but with updated risk exposures; and so on. This process allowed GBD researchers to evaluate how individual components of the many changes included in a GBD round advancement influenced the main results of the GBD study, rather than updating the entire pipeline at once.
 
 When pulling GBD data from GBD rounds that used decomp step versioning, you are required to specify a :code:`decomp_step` value in your shared functions call. 
 

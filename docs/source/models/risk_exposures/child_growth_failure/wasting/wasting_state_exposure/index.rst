@@ -246,8 +246,11 @@ Given the following equations:
     - 2
     - PLACEHOLDER
   * - :math:`p_\text{LBW}`
-    - 0.1
-    - PLACEHOLDER
+    - Exposure of LBWSG categories with BW < 2500 grams for the late neonatal age group in GBD
+        * :code:`get_draws(source='exposure', rei_id=339, age_group_id=3)`
+        * decomp_step='step4' for GBD 2019
+        * Sum over the following categories: *['cat10', 'cat106', 'cat11', 'cat116', 'cat117', 'cat123', 'cat124', 'cat14', 'cat15', 'cat17', 'cat19', 'cat2', 'cat20', 'cat21', 'cat22', 'cat23', 'cat24', 'cat25', 'cat26', 'cat27', 'cat28', 'cat29', 'cat30', 'cat31', 'cat32', 'cat34', 'cat35', 'cat36', 'cat8', 'cat80']*
+    - :ref:`LBWSG exposure document found here for reference <2019_risk_exposure_lbwsg>`. List of LBW categories was `generated from this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/LBW%20categories.ipynb>`_
 
 Note that prevalence of each wasting state for use in this model can be pulled using the following call:
 
@@ -263,9 +266,20 @@ Note that prevalence of each wasting state for use in this model can be pulled u
 Transitions
 ------------
 
-`Draw-specific values for transition rates (defined in the table below) for Ethiopia (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions_4.csv>`_. Values in this file are defined in terms of transitions per person-year in the source state.
+Draw-specific values for transition rates (defined in the table below) for Ethiopia, Nigeria, and Pakistan (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found listed below. Values in these files are defined in terms of transitions per person-year in the source state. 
+
+- `Ethiopia wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions_4.csv>`_ 
 
   - `These values were generated in this notebook as of 10/4/2023 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_transition_sampling.ipynb>`_
+
+- `Nigeria wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/nigeria_2019_wasting_transitions_4.csv>`_ 
+
+  - `These values were generated in this notebook as of 10/17/2023 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/wasting_transition_sampling.ipynb>`_
+
+- `Pakistan wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/pakistan_2019_wasting_transitions_4.csv>`_ 
+
+  - `These values were generated in this notebook (10/17/2023) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/wasting_transition_sampling.ipynb>`_
+
 
 .. list-table:: Transition Data
  :header-rows: 1
@@ -295,12 +309,32 @@ Transitions
    - CAT 4
    - CAT 3
 
+MAM (cat2) substates
+----------------------
+
+For simulants that transition into the moderate acute malnutrition (MAM, cat2) wasting exposure state, they will be assigned one of the two following sub-exposures:
+
+1. "Better" MAM/cat2.5: WHZ between -2 and -2.5
+2. "Worse" MAM/cat2.0: WHZ between -2.5 and -3
+
+The PLACEHOLDER probability of occupying the "Worse" MAM/cat2.0 sub-exposure upon transitioning into the MAM state is 0.33. The probability of "Better" MAM/cat2.5 is equal to 1-the probability of Worse MAM.
+
+.. todo::
+
+  Generate and link age/sex/location/draw-specific values for the probability of the worse MAM subexposure.
+
+These subexposures will vary with respect to their wasting relative risk values (detailed on the CGF risk effects page) and their targeted MAM treatment eligibility (detailed on the wasting treatment page), but they will **not** differ with respect to wasting transition rates (e.g. progression to SAM or recovery to mild wasting states).
+
+.. note::
+
+  These sub-exposures should be included in wasting state person-time observers.
+
 Validation 
 ++++++++++
 
 Wasting model
 
-  - prevalence of cat 1-4
+  - prevalence of cat 1-4 (including the MAM sub-states)
   - model transition rates
 
 Note that validation of this model is dependent on validation of wasting-specific mortality rates, which are dependent on the following models meeting their individual validation criteria:

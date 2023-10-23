@@ -564,6 +564,13 @@ Specific outputs for specific models are specified in the following section.
       * Intervention counts
     - Same as 9.1
     - The underlying model should be identical to 9.1 except for locations and the modifications noted here
+  * - 10.1
+    - Production runs with live birth and still birth counts 
+    - All
+    - Same as 9.1
+    - Same as 9.1 but including count of live births and still births 
+    - Same as 9.1
+    - 
   * - 11.0
     - GBD 2021 update?
     - Baseline
@@ -671,6 +678,12 @@ Specific outputs for specific models are specified in the following section.
       * Check resolution of CRN issue
       * Check resolution of all cause and cause-specific observer discrepancies in parturition state
     - All looks good! Ready to move to production :). `8.3 notebook available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_8.3_yld_checks.ipynb>`_
+  * - 10.0
+    - * Check that model generally still looks as expected 
+      * Check that anemia, maternal disorders and deaths match with target values 
+      * Check that different scenarios visually appear to separated as expected 
+    - All looks good! Ready to move to production runs. `Nigeria notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_10.0_nigeria_maternal_disorders_anemia.ipynb>`_ and `Pakistan notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_10.0_pakistan_maternal_disorders_anemia.ipynb>`_. Note for Pakistan notebook that the parent ID used was 159 which was different than expected. We are investigating this but think it is an issue with target data generation NOT with the model. 
+
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
