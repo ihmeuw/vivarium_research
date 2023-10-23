@@ -4,7 +4,7 @@
 Understanding and Pulling GBD Data
 ===================================
 
-Global Burden of Disease (GBD) Study data is a primary data source for our simulation models. 
+Global Burden of Disease (GBD) Study data is a fundamental data source for our simulation models. 
 Understanding what data is available in the GBD and what modeling processes produced it is a 
 difficult task. Some helpful resources for understanding the GBD study are listed below: 
 
