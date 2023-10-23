@@ -27,8 +27,6 @@
 How to model Vivarium components
 ================================================
 
-.. The purpose of this page is to describe the general types of model components that comprise Vivarium models.
-
 The following subpages describe the different types of Vivarium
 components we typically encounter and provide guidelines on how to model
 them in our simulations.
@@ -45,10 +43,10 @@ them in our simulations.
    risk_factors/*
 
 To document a new component or an entirely new simulation, you should
-start with one of the following templates, referring to the above pages
-for more information. The Concept Model Template is the starting point
-for designing a new Vivarium simulation, whereas the other templates are
-for discrete components within a simulation.
+start with one of the following templates (if applicable), referring to
+the above pages for more information. The Concept Model Template is the
+starting point for designing a new Vivarium simulation, whereas the
+other templates are for discrete components within a simulation.
 
 .. toctree::
   :maxdepth: 2
