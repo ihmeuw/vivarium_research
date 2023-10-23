@@ -9,7 +9,12 @@ Understanding what data is available in the GBD and what modeling processes prod
 difficult task. Some helpful resources for understanding the GBD study are listed below: 
 
 - IHME onboarding trainings
-- GBD capstone papers and their methods appendices 
+- GBD capstone papers and their methods appendices, such as:
+   
+   - `The GBD 2019 Demographics Capstone Paper <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30977-6/fulltext>`_
+   - `The GBD 2019 Causes Capstone Paper <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30925-9/fulltext>`_
+   - `The GBD 2019 Risk Factors Capstone Paper <https://doi.org/10.1016/S0140-6736(20)30752-2>`_
+
 - `The GBD compare tool <https://vizhub.healthdata.org/gbd-compare/>`_, which allows you to visualize GBD estimates
 - `GBD ID viewer <https://shiny.ihme.washington.edu/connect/#/apps/1cbf4a06-bfe9-4896-9028-9f4d23cc75c6/access>`_
 - `GBD risk factors toolbox <https://shiny.ihme.washington.edu/content/13/>`_
