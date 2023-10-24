@@ -3139,6 +3139,8 @@ Noise should be added in the order below.
       - Leave a field blank
     * - Incorrect selection
       - Choose the wrong option
+    * - Copy from within household
+      - Copy from household member
     * - Month and day swaps
       - Swap month and day
     * - Zip code miswriting
