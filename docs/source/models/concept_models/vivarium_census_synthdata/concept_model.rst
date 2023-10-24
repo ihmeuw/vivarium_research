@@ -3113,7 +3113,12 @@ Noise should be added in the order below.
 
 .. note::
 
-  The noise function names that are listed above and used throughout this concept model document are outdated according to what we have implemented in pseudopeople. In general, we decided to make the names into verbs as opposed to nouns in effort to be more user-friendly and to more clearly reflect how the noise would be introduced into the data in the real world.  
+  The noise function names that are listed above and used throughout
+  this concept model document are outdated according to what we have
+  implemented in pseudopeople. In general, we decided to make the names
+  into verbs as opposed to nouns in effort to be more user-friendly and
+  to more clearly reflect how the noise would be introduced into the
+  data in the real world.
 
   .. list-table:: Mapping noise function names in concept model to those implemented in pseudopeople
     :header-rows: 1
@@ -3122,10 +3127,16 @@ Noise should be added in the order below.
       - Pseudopeople name
     * - "Borrowed" SSN
       - Borrow a social security number
-    * - Omissions
+    * - Simple Omission
       - Omit a row
-    * - Missing data
+    * - Targeted Omission
       - Do not respond
+    * - (Simple) Duplication
+      - (not yet implemented)
+    * - Guardian-based duplication
+      - (not yet implemented)
+    * - Missing data
+      - Leave a field blank
     * - Incorrect selection
       - Choose the wrong option
     * - Month and day swaps
@@ -3135,14 +3146,14 @@ Noise should be added in the order below.
     * - Age miswriting
       - Misreport age
     * - Numeric miswriting
-      - Write the wrong digits 
+      - Write the wrong digits
     * - Nicknames
       - Use a nickname
     * - Fake names
       - Use a fake name
     * - Phonetic
       - Make phonetic errors
-    * - OCR 
+    * - OCR
       - Make optical character recognition (OCR) errors
     * - Typographic
       - Make typos
@@ -4282,18 +4293,18 @@ This is in addition to the 0.32% assigned across the entire working-age populati
 living situation.
 
 We will generate names for employers based on a conditional random model that Abie developed and
-Jim refactored into the vivarium model. We based our simulated employer names 
-on a database of 5,321,506 "location names" from the SafeGraph "Core Places of 
+Jim refactored into the vivarium model. We based our simulated employer names
+on a database of 5,321,506 "location names" from the SafeGraph "Core Places of
 Interest USA" dataset released in June 2020. To create a representation of bigrams
-from this dataset, we constructed a directed multigraph. Each word in a location name 
-was treated as a node, and we included special <start> and <end> nodes, as well. 
-We included a directed multi-edge for each occurrence of a word pair in sequence 
-in each location name. 
+from this dataset, we constructed a directed multigraph. Each word in a location name
+was treated as a node, and we included special <start> and <end> nodes, as well.
+We included a directed multi-edge for each occurrence of a word pair in sequence
+in each location name.
 
 To generate simulated employer names, we performed a random
-walk through the bigram graph. Starting from the start node, we traversed 
-directed edges selected uniformly at random until we reached the end node or 
-exceeded a predetermined maximum path length. We then combined the words associated 
+walk through the bigram graph. Starting from the start node, we traversed
+directed edges selected uniformly at random until we reached the end node or
+exceeded a predetermined maximum path length. We then combined the words associated
 with each node that was encountered along the path to form the simulated employer name.
 This approach resulted in a diverse range of names that maintained a realistic quality.
 However, it also resulted in some duplicates.
