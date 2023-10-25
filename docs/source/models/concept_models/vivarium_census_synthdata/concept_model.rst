@@ -3702,9 +3702,9 @@ below).
 The following two sections discuss the two types of
 omission in more detail.
 
-**Simple Omission:**
+**Omit a Row (Simple Omission):**
 
-For simple omission (:code:`omit_row`), rows will be randomly removed at
+For simple omission ("Omit a Row"), rows will be randomly removed at
 the rate specified by the user. Removal will be entirely at random
 (i.e., rows are chosen independently) and not correlated to the omission
 of others in the household or any other simulant attribute. The default
@@ -3744,7 +3744,7 @@ row omission probabilities for the different datasets are as follows:
       data on people not filing taxes
       <https://www.cbsnews.com/news/taxes-what-happens-if-you-dont-file-tax-return/>`_.
 
-**Targeted Omission:**
+**Do Not Respond (Targeted Omission):**
 
 For the census and for household surveys, individuals are found to not
 respond at different rates based on their age, sex, and race/ethnicity.
