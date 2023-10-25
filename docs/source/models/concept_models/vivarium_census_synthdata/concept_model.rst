@@ -3686,28 +3686,21 @@ We will define two types of omission:
    where differential non-response rates are built into the observer
 
 Note that the census and household surveys can have both types of
-ommission applied. The following two sections discuss the two types of
-omission in more detail.
-
-For the census and household surveys, where non-response is built
-into the observer, the default omission rate will the equal to the
+ommission applied. The default rate of "simple omission" for these
+datasets will be 0%, while the default non-response rate will equal the
 expected omission rate of that survey. For the census and ACS survey,
-this is 1.45%. For the CPS survey, this is 29.05%. The other observers’
-default rate is 0%.
+this is 1.45%. For the CPS survey, this is 29.05% (see details below).
 
-The process for omitting simulants from the data will be divided into
-two groups based on observer:
-
-#. Simple omission will be used for: WIC, taxes and SSA
-
-#. Targeted omission will be used for: census, household surveys
+The following two sections discuss the two types of
+omission in more detail.
 
 **Simple Omission:**
 
-For simple omission (:code:`omit_row`), rows will be randomly removed at the rate specified
-by the user. Removal will be entirely at random (i.e., independently) and not correlated to the
-omission of others in the household or any other simulant attribute. The
-default row omission probabilities for the different datasets are as follows:
+For simple omission (:code:`omit_row`), rows will be randomly removed at
+the rate specified by the user. Removal will be entirely at random
+(i.e., rows are chosen independently) and not correlated to the omission
+of others in the household or any other simulant attribute. The default
+row omission probabilities for the different datasets are as follows:
 
 .. list-table:: Default row probabilities for :code:`omit_row` noise
   :widths: 1 1 4
@@ -3742,10 +3735,6 @@ default row omission probabilities for the different datasets are as follows:
       may want to change the default to `something like 5% to reflect
       data on people not filing taxes
       <https://www.cbsnews.com/news/taxes-what-happens-if-you-dont-file-tax-return/>`_.
-
-The
-default is set to 0% as we do not expect people to be "missing" from
-administrative data.
 
 **Targeted Omission:**
 
