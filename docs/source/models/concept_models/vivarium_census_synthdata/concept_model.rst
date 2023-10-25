@@ -3678,12 +3678,13 @@ into three buckets:
 
 **Omissions:**
 
-It is assumed that in any dataset, there are people missed. This
-is important in PRL as the user will try to find a match for someone
-that doesn’t exist. For simplicity, we will have pseudopeople end
-users input one value: the overall omission rate (called :code:`row_probability` in pseudopeople). This value can
-range from 0% (indicating NO omission or a perfect response) up
-to 100% omission and will be defined at the observer level.
+It is assumed that in any dataset, there are people missed. This is
+important in PRL as the user will try to find a match for someone that
+doesn’t exist. For simplicity, we will have end users of pseudopeople
+input one value for each type of omission: the overall omission rate
+(called :code:`row_probability` in pseudopeople). This value can range
+from 0% (indicating NO omission or a perfect response) up to 100%
+omission and will be defined at the observer level.
 
 We will define two types of omission:
 
@@ -3699,7 +3700,7 @@ omission applied; in this case targeted omission (do not respond)
 should be applied **before** simple omission (omit a row). The default
 rate of "simple omission" for the census and surveys will be 0%, while
 the default non-response rate for "targeted omission" will equal the
-expected omission rate of that survey computed using the non-response
+expected omission rate of that survey, computed using the non-response
 strategy described above in the :ref:`Census <prl_census_section>` and
 :ref:`Household Surveys <prl_household_surveys_section>` sections. For
 the census and ACS survey, this is 1.45%. For the CPS survey, this is
