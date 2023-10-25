@@ -2016,6 +2016,8 @@ only on those columns that would be most relevant to record linkage.
 .. todo::
   Move this documentation to the :code:`pseudopeople` repository.
 
+.. _prl_census_section:
+
 Census
 ^^^^^^
 
@@ -2188,6 +2190,8 @@ get an error.
 #. There are multiple other factors that contribute to omission rate including: tenure in a home, state/geography, and having a SSN (as a proxy for citizenship) [Elliot_2021]_. These are not currently included in our model
 #. There is some evidence that young children are missed in the post enumeration survey and therefore are missed more than accounted for here [OHare_2019]_
 #. It is assumed that race and age/sex are independent, do not have interaction, and combine additively
+
+.. _prl_household_surveys_section:
 
 Household Surveys
 ^^^^^^^^^^^^^^^^^
@@ -2898,7 +2902,7 @@ Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a
 1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_
 and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
 
-.. _1040_future_add:
+.. _prl_1040_future_add:
 
 **Future Add**
 
@@ -3687,9 +3691,13 @@ We will define two types of omission:
 
 Note that the census and household surveys can have both types of
 ommission applied. The default rate of "simple omission" for these
-datasets will be 0%, while the default non-response rate will equal the
-expected omission rate of that survey. For the census and ACS survey,
-this is 1.45%. For the CPS survey, this is 29.05% (see details below).
+datasets will be 0%, while the default non-response rate for "targeted
+omission" will equal the expected omission rate of that survey computed
+using the non-response strategy described above in the :ref:`Census
+<prl_census_section>` and :ref:`Household Surveys
+<prl_household_surveys_section>` sections. For the census and ACS
+survey, this is 1.45%. For the CPS survey, this is 29.05% (see details
+below).
 
 The following two sections discuss the two types of
 omission in more detail.
@@ -3731,8 +3739,8 @@ row omission probabilities for the different datasets are as follows:
     - 0.0
     - We already only include 65.5% of working age adults, based on
       actual data. If we implement the :ref:`more complex
-      inclusion/exclusion criteria for the 1040 <1040_future_add>`, we
-      may want to change the default to `something like 5% to reflect
+      inclusion/exclusion criteria for the 1040 <prl_1040_future_add>`,
+      we may want to change the default to `something like 5% to reflect
       data on people not filing taxes
       <https://www.cbsnews.com/news/taxes-what-happens-if-you-dont-file-tax-return/>`_.
 
@@ -3740,8 +3748,9 @@ row omission probabilities for the different datasets are as follows:
 
 For the census and for household surveys, individuals are found to not
 respond at different rates based on their age, sex, and race/ethnicity.
-In order to preserve this underlying data structure while allowing for
-a variable overall omission rate, the noise function must be more complex.
+In order to preserve this underlying data structure while allowing for a
+variable overall omission rate, the noise function must be more complex.
+This noise type is called :code:`do_not_respond` in pseudopeople.
 
 Census:
 
