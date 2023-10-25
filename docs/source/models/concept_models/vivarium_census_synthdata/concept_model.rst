@@ -2898,6 +2898,8 @@ Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a
 1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_
 and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
 
+.. _1040_future_add:
+
 **Future Add**
 
 As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below
@@ -3669,10 +3671,23 @@ into three buckets:
 
 It is assumed that in any dataset, there are people missed. This
 is important in PRL as the user will try to find a match for someone
-that doesn’t exist. For simplicity, we will have pseudo-people end
-users input one value: the overall omission rate. This value can
+that doesn’t exist. For simplicity, we will have pseudopeople end
+users input one value: the overall omission rate (called :code:`row_probability` in pseudopeople). This value can
 range from 0% (indicating NO omission or a perfect response) up
-to 50% omission and will be defined at the observer level.
+to 100% omission and will be defined at the observer level.
+
+We will define two types of omission:
+
+#. **Simple omission** (called :code:`omit_row` in pseudopeople),
+   applicable to all datasets
+
+#. **Targeted omission** (called :code:`do_not_respond` in
+   pseudopeople), applicable only to the census and household surveys,
+   where differential non-response rates are built into the observer
+
+Note that the census and household surveys can have both types of
+ommission applied. The following two sections discuss the two types of
+omission in more detail.
 
 For the census and household surveys, where non-response is built
 into the observer, the default omission rate will the equal to the
@@ -3689,9 +3704,46 @@ two groups based on observer:
 
 **Simple Omission:**
 
-For simple omission, rows will be randomly removed at the rate specified
-by the user. Removal will be entirely at random and not correlated to the
+For simple omission (:code:`omit_row`), rows will be randomly removed at the rate specified
+by the user. Removal will be entirely at random (i.e., independently) and not correlated to the
 omission of others in the household or any other simulant attribute. The
+default row omission probabilities for the different datasets are as follows:
+
+.. list-table:: Default row probabilities for :code:`omit_row` noise
+  :widths: 1 1 4
+  :header-rows: 1
+
+  * - Dataset
+    - Default row probability
+    - Notes
+  * - Decennial census
+    - 0.0
+    - Default is zero because targeted omission is available
+  * - ACS
+    - 0.0
+    - Default is zero because targeted omission is available
+  * - CPS
+    - 0.0
+    - Default is zero because targeted omission is available
+  * - WIC
+    - 0.005
+    - We expect a very low rate of administrative errors that would lead to missing records
+  * - SSA
+    - 0.0
+    - We expect SSA to keep accurate records of social security numbers
+  * - Taxes W2 & 1099
+    - 0.005
+    - Employers face penalties for not submitting W2s, so we expect very few to be missing
+  * - Taxes 1040
+    - 0.0
+    - We already only include 65.5% of working age adults, based on
+      actual data. If we implement the :ref:`more complex
+      inclusion/exclusion criteria for the 1040 <1040_future_add>`, we
+      may want to change the default to `something like 5% to reflect
+      data on people not filing taxes
+      <https://www.cbsnews.com/news/taxes-what-happens-if-you-dont-file-tax-return/>`_.
+
+The
 default is set to 0% as we do not expect people to be "missing" from
 administrative data.
 
