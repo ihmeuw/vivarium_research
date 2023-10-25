@@ -3695,7 +3695,7 @@ We will define two types of omission:
    where differential non-response rates are built into the observer
 
 Note that the census and household surveys can have both types of
-ommission applied; in this case targeted omission (do not respond)
+omission applied; in this case targeted omission (do not respond)
 should be applied **before** simple omission (omit a row). The default
 rate of "simple omission" for the census and surveys will be 0%, while
 the default non-response rate for "targeted omission" will equal the
