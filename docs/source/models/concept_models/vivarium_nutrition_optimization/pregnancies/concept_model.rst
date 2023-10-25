@@ -293,7 +293,7 @@ Documents that contain information specific to the overall model and the child s
     - 0
     - 1
     - 0
-  * - 2: Universal BEP
+  * - 2: IFA
     - 0
     - 0
     - 1
@@ -313,6 +313,10 @@ Where:
 - **1** represents the maximum intervention coverage (100%)
 
 - **Baseline** represents location-specific baseline IFA coverage, `which can be found in location-specific .csv files here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/baseline_ifa_coverage>`_ (`note these values were calculated in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/Gestational%20age%20shifts.ipynb>`_
+
+.. note::
+  
+  Scenario #2 was previously "Universal BEP" rather than IFA, but was updated to IFA on 10/23/23 prior to wave II production runs. Universal BEP is no longer a scenario of interest. 
 
 2.5 Outputs
 ------------
