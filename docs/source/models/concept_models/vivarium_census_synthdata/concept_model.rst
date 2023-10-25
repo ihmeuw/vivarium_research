@@ -3098,7 +3098,12 @@ Noise should be added in the order below.
 
 #. "Borrowed" SSN (happens in simulation NOT noise functions)
 #. Omissions
+
+   a. Do not respond (targeted omission)
+   b. Omit a row (simple omission)
 #. Duplications
+
+   a. Guardian-based dupilcation
 #. Missing Data
 #. Incorrect Selection
 #. Copy from Within Household
@@ -3133,13 +3138,13 @@ Noise should be added in the order below.
       - Pseudopeople name
     * - "Borrowed" SSN
       - Borrow a social security number
-    * - Simple Omission
-      - Omit a row
     * - Targeted Omission
       - Do not respond
-    * - (Simple) Duplication
-      - (not yet implemented)
+    * - Simple Omission
+      - Omit a row
     * - Guardian-based duplication
+      - (not yet implemented)
+    * - (Simple) Duplication
       - (not yet implemented)
     * - Missing data
       - Leave a field blank
@@ -3690,14 +3695,15 @@ We will define two types of omission:
    where differential non-response rates are built into the observer
 
 Note that the census and household surveys can have both types of
-ommission applied. The default rate of "simple omission" for these
-datasets will be 0%, while the default non-response rate for "targeted
-omission" will equal the expected omission rate of that survey computed
-using the non-response strategy described above in the :ref:`Census
-<prl_census_section>` and :ref:`Household Surveys
-<prl_household_surveys_section>` sections. For the census and ACS
-survey, this is 1.45%. For the CPS survey, this is 29.05% (see details
-below).
+ommission applied; in this case targeted omission (do not respond)
+should be applied **before** simple omission (omit a row). The default
+rate of "simple omission" for the census and surveys will be 0%, while
+the default non-response rate for "targeted omission" will equal the
+expected omission rate of that survey computed using the non-response
+strategy described above in the :ref:`Census <prl_census_section>` and
+:ref:`Household Surveys <prl_household_surveys_section>` sections. For
+the census and ACS survey, this is 1.45%. For the CPS survey, this is
+29.05% (see details below).
 
 The following two sections discuss the two types of
 omission in more detail.
@@ -3777,6 +3783,10 @@ In general, the same logic as is outlined for the census can be applied to all h
 #. Scale the simulant level omission rate based on the ratio of the user-inputted omission rate and the default omission rate
 
 For the two surveys currently outlined in the model, the default rates are 1.45% for ACS, and 29.05% for CPS.
+
+When applying both "do not respond" noise and "omit a row" noise to the
+census or household surveys, the "do not respond" noise should happen
+first.
 
 **Duplicates:**
 
