@@ -208,6 +208,8 @@ Given the following equations:
 
 2. :math:`RR = p_\text{cat1,LBW} / p_\text{cat1,ABW}` 
 
+We can then solve for the ABW and LBW probabilities of initialization into wasting categories 1 and 2. We then assume that the difference between the ABW and LBW probabilities for categories 1 and 2 with the population-level probabilities is equally distributed amongst categories 3 and 4.
+
 .. list-table:: Wasting state probabilities by birth weight status
   :header-rows: 1
 
@@ -216,16 +218,16 @@ Given the following equations:
     - LBW probability
   * - cat1
     - :math:`p_\text{cat1} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
-    - ABW probability * RR
+    - :math:`p_\text{ABW,cat1} * RR`
   * - cat2
     - :math:`p_\text{cat2} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
-    - ABW probability * RR
+    - :math:`p_\text{ABW,cat2} * RR`
   * - cat3
-    - :math:`p_\text{cat3} / (p_\text{LBW}/RR + (1 - p_\text{LBW}))`
-    - ABW probability / RR
+    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{ABW,cat1} - p_\text{ABW,cat2}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
+    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{LBW,cat1} - p_\text{LBW,cat2}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
   * - cat4
-    - :math:`p_\text{cat4} / (p_\text{LBW}/RR + (1 - p_\text{LBW}))`
-    - ABW probability / RR
+    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{ABW,cat1} - p_\text{ABW,cat2}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
+    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{LBW,cat1} - p_\text{LBW,cat2}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
 
 .. note::
 
