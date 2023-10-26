@@ -2016,6 +2016,8 @@ only on those columns that would be most relevant to record linkage.
 .. todo::
   Move this documentation to the :code:`pseudopeople` repository.
 
+.. _prl_census_section:
+
 Census
 ^^^^^^
 
@@ -2188,6 +2190,8 @@ get an error.
 #. There are multiple other factors that contribute to omission rate including: tenure in a home, state/geography, and having a SSN (as a proxy for citizenship) [Elliot_2021]_. These are not currently included in our model
 #. There is some evidence that young children are missed in the post enumeration survey and therefore are missed more than accounted for here [OHare_2019]_
 #. It is assumed that race and age/sex are independent, do not have interaction, and combine additively
+
+.. _prl_household_surveys_section:
 
 Household Surveys
 ^^^^^^^^^^^^^^^^^
@@ -2898,6 +2902,8 @@ Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a
 1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_
 and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
 
+.. _prl_1040_future_add:
+
 **Future Add**
 
 As noted above, not everyone who is meant to file income taxes end up doing so. In a future version, we would like to implement the below
@@ -3092,7 +3098,12 @@ Noise should be added in the order below.
 
 #. "Borrowed" SSN (happens in simulation NOT noise functions)
 #. Omissions
+
+   a. Do not respond (targeted omission)
+   b. Omit a row (simple omission)
 #. Duplications
+
+   a. Guardian-based dupilcation
 #. Missing Data
 #. Incorrect Selection
 #. Copy from Within Household
@@ -3113,7 +3124,12 @@ Noise should be added in the order below.
 
 .. note::
 
-  The noise function names that are listed above and used throughout this concept model document are outdated according to what we have implemented in pseudopeople. In general, we decided to make the names into verbs as opposed to nouns in effort to be more user-friendly and to more clearly reflect how the noise would be introduced into the data in the real world.  
+  The noise function names that are listed above and used throughout
+  this concept model document are outdated according to what we have
+  implemented in pseudopeople. In general, we decided to make the names
+  into verbs as opposed to nouns in effort to be more user-friendly and
+  to more clearly reflect how the noise would be introduced into the
+  data in the real world.
 
   .. list-table:: Mapping noise function names in concept model to those implemented in pseudopeople
     :header-rows: 1
@@ -3122,12 +3138,20 @@ Noise should be added in the order below.
       - Pseudopeople name
     * - "Borrowed" SSN
       - Borrow a social security number
-    * - Omissions
-      - Omit a row
-    * - Missing data
+    * - Targeted Omission
       - Do not respond
+    * - Simple Omission
+      - Omit a row
+    * - Guardian-based duplication
+      - (not yet implemented)
+    * - (Simple) Duplication
+      - (not yet implemented)
+    * - Missing data
+      - Leave a field blank
     * - Incorrect selection
       - Choose the wrong option
+    * - Copy from within household
+      - Copy from household member
     * - Month and day swaps
       - Swap month and day
     * - Zip code miswriting
@@ -3135,14 +3159,14 @@ Noise should be added in the order below.
     * - Age miswriting
       - Misreport age
     * - Numeric miswriting
-      - Write the wrong digits 
+      - Write the wrong digits
     * - Nicknames
       - Use a nickname
     * - Fake names
       - Use a fake name
     * - Phonetic
       - Make phonetic errors
-    * - OCR 
+    * - OCR
       - Make optical character recognition (OCR) errors
     * - Typographic
       - Make typos
@@ -3654,40 +3678,86 @@ into three buckets:
 
 **Omissions:**
 
-It is assumed that in any dataset, there are people missed. This
-is important in PRL as the user will try to find a match for someone
-that doesn’t exist. For simplicity, we will have pseudo-people end
-users input one value: the overall omission rate. This value can
-range from 0% (indicating NO omission or a perfect response) up
-to 50% omission and will be defined at the observer level.
+It is assumed that in any dataset, there are people missed. This is
+important in PRL as the user will try to find a match for someone that
+doesn’t exist. For simplicity, we will have end users of pseudopeople
+input one value for each type of omission: the overall omission rate
+(called :code:`row_probability` in pseudopeople). This value can range
+from 0% (indicating NO omission or a perfect response) up to 100%
+omission and will be defined at the observer level.
 
-For the census and household surveys, where non-response is built
-into the observer, the default omission rate will the equal to the
-expected omission rate of that survey. For the census and ACS survey,
-this is 1.45%. For the CPS survey, this is 29.05%. The other observers’
-default rate is 0%.
+We will define two types of omission:
 
-The process for omitting simulants from the data will be divided into
-two groups based on observer:
+#. **Simple omission** (called :code:`omit_row` in pseudopeople),
+   applicable to all datasets
 
-#. Simple omission will be used for: WIC, taxes and SSA
+#. **Targeted omission** (called :code:`do_not_respond` in
+   pseudopeople), applicable only to the census and household surveys,
+   where differential non-response rates are built into the observer
 
-#. Targeted omission will be used for: census, household surveys
+Note that the census and household surveys can have both types of
+omission applied; in this case targeted omission (do not respond)
+should be applied **before** simple omission (omit a row). The default
+rate of "simple omission" for the census and surveys will be 0%, while
+the default non-response rate for "targeted omission" will equal the
+expected omission rate of that survey, computed using the non-response
+strategy described above in the :ref:`Census <prl_census_section>` and
+:ref:`Household Surveys <prl_household_surveys_section>` sections. For
+the census and ACS survey, this is 1.45%. For the CPS survey, this is
+29.05% (see details below).
 
-**Simple Omission:**
+The following two sections discuss the two types of
+omission in more detail.
 
-For simple omission, rows will be randomly removed at the rate specified
-by the user. Removal will be entirely at random and not correlated to the
-omission of others in the household or any other simulant attribute. The
-default is set to 0% as we do not expect people to be "missing" from
-administrative data.
+**Omit a Row (Simple Omission):**
 
-**Targeted Omission:**
+For simple omission ("Omit a Row"), rows will be randomly removed at
+the rate specified by the user. Removal will be entirely at random
+(i.e., rows are chosen independently) and not correlated to the omission
+of others in the household or any other simulant attribute. The default
+row omission probabilities for the different datasets are as follows:
+
+.. list-table:: Default row probabilities for :code:`omit_row` noise
+  :widths: 1 1 4
+  :header-rows: 1
+
+  * - Dataset
+    - Default row probability
+    - Notes
+  * - Decennial census
+    - 0.0
+    - Default is zero because targeted omission is available
+  * - ACS
+    - 0.0
+    - Default is zero because targeted omission is available
+  * - CPS
+    - 0.0
+    - Default is zero because targeted omission is available
+  * - WIC
+    - 0.005
+    - We expect a very low rate of administrative errors that would lead to missing records
+  * - SSA
+    - 0.0
+    - We expect SSA to keep accurate records of social security numbers
+  * - Taxes W2 & 1099
+    - 0.005
+    - Employers face penalties for not submitting W2s, so we expect very few to be missing
+  * - Taxes 1040
+    - 0.0
+    - We already only include 65.5% of working age adults, based on
+      actual data. If we implement the :ref:`more complex
+      inclusion/exclusion criteria for the 1040 <prl_1040_future_add>`,
+      we may want to change the default to `something like 5% to reflect
+      data on people not filing taxes
+      <https://www.cbsnews.com/news/taxes-what-happens-if-you-dont-file-tax-return/>`_.
+
+**Do Not Respond (Targeted Omission):**
 
 For the census and for household surveys, individuals are found to not
 respond at different rates based on their age, sex, and race/ethnicity.
-In order to preserve this underlying data structure while allowing for
-a variable overall omission rate, the noise function must be more complex.
+In order to preserve this underlying data structure while allowing for a
+variable overall omission rate, the noise function must be more complex.
+This noise type is called :code:`do_not_respond` in pseudopeople.
 
 Census:
 
@@ -3714,6 +3784,10 @@ In general, the same logic as is outlined for the census can be applied to all h
 #. Scale the simulant level omission rate based on the ratio of the user-inputted omission rate and the default omission rate
 
 For the two surveys currently outlined in the model, the default rates are 1.45% for ACS, and 29.05% for CPS.
+
+When applying both "do not respond" noise and "omit a row" noise to the
+census or household surveys, the "do not respond" noise should happen
+first.
 
 **Duplicates:**
 
@@ -4282,18 +4356,18 @@ This is in addition to the 0.32% assigned across the entire working-age populati
 living situation.
 
 We will generate names for employers based on a conditional random model that Abie developed and
-Jim refactored into the vivarium model. We based our simulated employer names 
-on a database of 5,321,506 "location names" from the SafeGraph "Core Places of 
+Jim refactored into the vivarium model. We based our simulated employer names
+on a database of 5,321,506 "location names" from the SafeGraph "Core Places of
 Interest USA" dataset released in June 2020. To create a representation of bigrams
-from this dataset, we constructed a directed multigraph. Each word in a location name 
-was treated as a node, and we included special <start> and <end> nodes, as well. 
-We included a directed multi-edge for each occurrence of a word pair in sequence 
-in each location name. 
+from this dataset, we constructed a directed multigraph. Each word in a location name
+was treated as a node, and we included special <start> and <end> nodes, as well.
+We included a directed multi-edge for each occurrence of a word pair in sequence
+in each location name.
 
 To generate simulated employer names, we performed a random
-walk through the bigram graph. Starting from the start node, we traversed 
-directed edges selected uniformly at random until we reached the end node or 
-exceeded a predetermined maximum path length. We then combined the words associated 
+walk through the bigram graph. Starting from the start node, we traversed
+directed edges selected uniformly at random until we reached the end node or
+exceeded a predetermined maximum path length. We then combined the words associated
 with each node that was encountered along the path to form the simulated employer name.
 This approach resulted in a diverse range of names that maintained a realistic quality.
 However, it also resulted in some duplicates.
