@@ -983,6 +983,10 @@ Wave I
 Wave II
 -------
 
+.. todo::
+
+  Add model duplication for Nigeria and Pakistan as well as "worse" MAM targeting model versions to table, ordering TBD
+
 .. list-table:: Model run requests
   :header-rows: 1
 
@@ -1004,6 +1008,37 @@ Wave II
     - 13
     - 
     - Scenario 13 is targeted MAM only 
+  * - 10.0
+    - Wasting transitions among 1-5 months, including LBWSG-dependent initialization
+    - Baseline, zero coverage, MMS
+    - Baseline
+    - 
+    - 
+  * - 10.1
+    - Bugfix, `equation update <https://github.com/ihmeuw/vivarium_research/pull/1376>`_, and RR placeholder data update
+    - Same as 10.0
+    - Same as 10.0
+    - 
+    - 
+  * - 11.0
+    - MAM treatment also targeted to "worse" MAM category
+    - Baseline
+    - 13
+    - 
+    - 
+  * - 12.0
+    - Replication for Nigeria and Pakistan
+    - Baseline
+    - Baseline
+    - 
+    - Remember data updates for:
+      
+      * Antenatal supplementation gestational age shifts
+      * Wasting transition rates
+      * CGF PAFs
+      * LBWSG PAFs (to be generated)
+      * Underweight exposure lookup table
+      * Wasting treatment C_SAM, E_SAM, C_MAM, and E_MAM parameter values
 
 
 .. list-table:: Output specifications
@@ -1022,6 +1057,34 @@ Wave II
     - * Age group
       * Sex
       * Underweight category
+  * - 10.0 and 10.1
+    - 1. Deaths
+      2. Wasting state person time, stratified by BW +/- 2500 grams if possible
+      3. Stunting state person time
+      4. Underweight state person time
+      5. Wasting transition counts, stratified b BW +/- 2500 grams if possible
+    - * Age group
+      * Sex
+  * - 11.0
+    - 1. Deaths
+      2. Wasting state person time (including better/worse MAM differentiation), stratifie by wasting treatment coverage
+      3. Stunting state person time
+      4. Underweight state person time, stratified by wasting treatment coverage
+      5. Wasting transition counts (including better/worse MAM differentiation), stratified by wasting treatment coverage
+    - * Age group
+      * Sex
+      * Underweight category
+  * - 12.0
+    - 1. Deaths, stratifie by wasting state
+      2. Wasting state person time, stratified by wasting treatment coverage
+      3. Stunting state person time
+      4. Underweight state person time
+      5. Wasting transition counts, stratified by wasting treatment coverage
+      6. Cause state person time, stratified by wasting state
+      7. Cause transition counts, stratified by wasting state
+      8. YLDs and YLLs
+    - * Age group
+      * Sex
 
 
 .. list-table:: Verification and validation tracking

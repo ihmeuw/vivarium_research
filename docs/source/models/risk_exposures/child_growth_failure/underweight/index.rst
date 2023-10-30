@@ -112,8 +112,20 @@ Details on how
 these distributions were obtained can be found in the subsequent section.
 
 - `Ethiopian conditional underweight exposure distributions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/lookup_3.csv>`_
+- `Pakistani conditional underweight exposure distributions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/lookup_3.csv>`_
+- `Nigerian conditional underweight exposure distributions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/lookup_3.csv>`_
 
-  - Note: the late neonatal age group should be applied to the early neonatal age group as well.
+.. note:: 
+
+    These values are currently not specific to MAM sub-exposures ("Better" and "Worse" MAM, as described on the :ref:`wasting risk exposure document <2021_risk_exposure_wasting_state_exposure>`). Until these values are available, assume that the underweight exposure distribution specific to the wasting cat2 (MAM) exposure state in the linked file applies to both the "Better" and "Worse" MAM sub-exposures.
+
+.. note::
+
+   The late neonatal age group should be applied to the early neonatal age group as well.
+
+.. todo::
+
+  Generate and link underweight exposure distributions specific to MAM subcategories.
 
 With this strategy, child underweight will dynamically update within a 
 single age group in tandem with child wasting exposure changes and may also 
@@ -148,6 +160,8 @@ each joint wasting and stunting exposure category.
 The notebook for which these steps were performed can be found at the links below:
 
 - `Ethiopian notebooks <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/cgf_correlation/ethiopia>`_
+- `Pakistani notebooks <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/cgf_correlation/pakistan>`_
+- `Nigerian notebooks <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/cgf_correlation/nigeria>`_
 
 Restrictions
 ------------
