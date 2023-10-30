@@ -245,8 +245,8 @@ We can then solve for the ABW and LBW probabilities of initialization into wasti
     - Value
     - Note/Source
   * - RR
-    - 2
-    - PLACEHOLDER
+    - 1.82 (95% CI: 1.35, 2.45), assume a lognormal distribution of uncertainty
+    - Calculated using meta-analysis of most recent available DHS round 7 or 8 as of 10/2023. `Analysis performed and resulting forest plot can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/95>`_
   * - :math:`p_\text{LBW}`
     - Exposure of LBWSG categories with BW < 2500 grams for the late neonatal age group in GBD
         * :code:`get_draws(source='exposure', rei_id=339, age_group_id=3)`

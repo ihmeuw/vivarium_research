@@ -1014,6 +1014,12 @@ Wave II
     - Baseline
     - 
     - 
+  * - 10.1
+    - Bugfix, `equation update <https://github.com/ihmeuw/vivarium_research/pull/1376>`_, and RR placeholder data update
+    - Same as 10.0
+    - Same as 10.0
+    - 
+    - 
   * - 11.0
     - MAM treatment also targeted to "worse" MAM category
     - Baseline
@@ -1051,7 +1057,7 @@ Wave II
     - * Age group
       * Sex
       * Underweight category
-  * - 10.0
+  * - 10.0 and 10.1
     - 1. Deaths
       2. Wasting state person time, stratified by BW +/- 2500 grams if possible
       3. Stunting state person time
