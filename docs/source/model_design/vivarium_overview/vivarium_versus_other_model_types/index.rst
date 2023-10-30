@@ -49,19 +49,19 @@ Microsimulation models incorporate relevant characteristics, including:
 - Adverse events
 - Mortality rate/life expectancy 
 
-.. image:: microsim_example_table_3.PNG
-
-.. image:: microsim_example_table_4.PNG
-
-The above tables provide a simplified illustration of what is included in a Vivarium microsimulation. Both tables are based on a microsimulation of 
+The below tables provide a simplified illustration of what is included in a Vivarium microsimulation. Both tables are based on a microsimulation of 
 antenatal nutritional supplementation effects on birthweight and child-growth failure. 
 
-As you can see in the first table, the simulants listed here have attributes covering demography, risk factors (e.g., 
+.. image:: microsim_example_table_3.PNG
+
+As you can see in this first table, the simulants listed here have attributes covering demography, risk factors (e.g., 
 *did the mother/birthing person received iron and folic acid (IFA) supplementation during pregnancy?*), causes (e.g., 
 *what is the probability of child simulant having protein energy malnutrition (PEM)?*),
 and mortality (e.g., *is the simulant alive or dead at this given timestep?*). 
 
-The second table demonstrates our ability to simulate different intervention scenarios and compare outcomes. In this case, the baseline scenario 
+.. image:: microsim_example_table_4.PNG
+
+This second table demonstrates our ability to simulate different intervention scenarios and compare outcomes. In this case, the baseline scenario 
 entailed no antenatal supplementation for the simulant's mother/birthing person, which led to the simulant's low birthweight. This caused the simulant
 to be more susceptible to get diarrhea and not recover, which ultimately led to the simulant's death by day 6. In the alternative scenario, the simulant's 
 mother/birthing person received antenatal supplementation, which led to the simulant's healthier birthweight and, subsequently, their higher likelihood of 
