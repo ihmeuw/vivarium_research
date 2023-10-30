@@ -358,6 +358,7 @@ Note:
 
 Note: 
   - For this run, results must **be stratified by seed** 
+  - 30 seeds was selected as the size based on this `draw and seed sizing notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/draw_seed_analysis.ipynb>`_
 
 **Draw Testing:**
 
@@ -368,7 +369,7 @@ Note:
      - Value
      - Note
    * - Population size
-     - TBD from seed testing run above 
+     - 30 seeds (10,000 sims per seed)
      - 
    * - Number of draws
      - 50
