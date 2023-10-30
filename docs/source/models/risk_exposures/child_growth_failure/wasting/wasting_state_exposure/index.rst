@@ -314,6 +314,10 @@ Draw-specific values for transition rates (defined in the table below) for Ethio
 MAM (cat2) substates
 ----------------------
 
+.. note::
+
+  This was implemented in a manner that divided the MAM state into two separate states, creating an overall 5-category wasting transition model. Transition rates from the 4-category model were scaled such that transitions in and out of the MAM category did not vary by MAM substate. 
+
 For simulants that transition into the moderate acute malnutrition (MAM, cat2) wasting exposure state, they will be assigned one of the two following sub-exposures:
 
 1. "Better" MAM/cat2.5: WHZ between -2 and -2.5
