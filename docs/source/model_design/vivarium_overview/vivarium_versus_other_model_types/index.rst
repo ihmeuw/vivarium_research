@@ -54,10 +54,8 @@ antenatal nutritional supplementation effects on birthweight and child-growth fa
 
 .. image:: microsim_example_table_3.PNG
 
-As you can see in this first table, the simulants listed here have attributes covering demography, risk factors (e.g., 
-*did the mother/birthing person received iron and folic acid (IFA) supplementation during pregnancy?*), causes (e.g., 
-*what is the probability of child simulant having protein energy malnutrition (PEM)?*),
-and mortality (e.g., *is the simulant alive or dead at this given timestep?*). 
+This first table outlines some of the simulant attributes we can include in our microsimulations. The simulants listed here have demographic attributes
+such as sex and location, as well as risk factors (e.g., *did the mother/birthing person received iron and folic acid (IFA) supplementation during pregnancy?*).
 
 .. image:: microsim_example_table_4.PNG
 
