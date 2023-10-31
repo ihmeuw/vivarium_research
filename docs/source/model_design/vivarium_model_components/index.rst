@@ -34,6 +34,7 @@ The purpose of this page is to describe the general types of model components th
    :glob:
 
    causes/index
+   GBD_disease_health/index
    impairments/index
    interventions/index
    intervention_features/index

@@ -329,6 +329,64 @@ Note:
   - In order to pick this draw, end results for DALYs and heart failure prevalence were analyzed for a set of 10 draws and 829 was selected as the best middle ground for `all interventions <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Figure_Mockup2.ipynb>`_ 
   - The draws were also looked at in terms of input data - MI incidence, SBP mean value, etc to ensure that it was also reasonably close to the average for `input data <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Draw_Correlation.ipynb>`_ 
 
+**Seed Testing:**
+
+.. list-table:: CVD simulation model population parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - 50 seeds (10,000 sims per seed)
+     - 
+   * - Number of draws
+     - 5
+     - 
+   * - Cohort type
+     - Closed
+     - 
+   * - Age start
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
+   * - Age end
+     - 125 years
+     - Maximum age at initialization
+   * - Sex restrictions
+     - None 
+     - 
+
+Note: 
+  - For this run, results must **be stratified by seed** 
+  - 30 seeds was selected as the size based on this `draw and seed sizing notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/draw_seed_analysis.ipynb>`_
+
+**Draw Testing:**
+
+.. list-table:: CVD simulation model population parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - 30 seeds (10,000 sims per seed)
+     - 
+   * - Number of draws
+     - 50
+     - 
+   * - Cohort type
+     - Closed
+     - 
+   * - Age start
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
+   * - Age end
+     - 125 years
+     - Maximum age at initialization
+   * - Sex restrictions
+     - None 
+     - 
+
 
 **Final Model Run:**
 
@@ -1073,11 +1131,17 @@ Code is below for reference
     - Runs were completed with draw 829. The V&V for causes and risks looked to be expected in this notebook for `51 location causes <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_multi_location_8.4.23.ipynb>`_ and `51 location risks <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_multi_location_8_7_23.ipynb>`_. However, there were issues with overlap between scenarios. We are still investigating this but it might be related to heart failure. Additionally, there are still issues with the PAFs containing zero values. We are currently avoiding this by selecting specific draws, however, a more permanent solution would be preferred. 
   * - 21.0
     - Add Mediation and PAF Recalculations 
-    - Note: not planned to be completed before NIH results 
+    - Runs were completed for mediation and PAFs were recalculated. PAFs no longer contain any zero values. Most of the model is working as expected. The `causes with mediation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_mediation_10.16.2023.ipynb>`_ are working as prior model versions. The `risks with mediation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_10_16_23.ipynb>`_ have strange results in the 95+ age group which is still being investigated. 
+  * - 21.1
+    - Mediation and PAF Recalculations with Fix for 95+ Age Group 
+    - With the updates to the exposure observer for the oldest age group, the `risks for 95+ <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_10_20_23.ipynb>`_ have resolved. 
   * - 22.0
+    - Changes to Inertia with Simulant and Random Propensities 
+    - The medication levels were tested for a `50 50 component split <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_10_18_23.ipynb>`_ and a `75 random 25 simulant component split <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_10_20_23.ipynb>`_. It was decided to proceed with the 50/50 split. There are some changes in treatment over the course of the sim, but we do not expect them to impact final results significantly.  
+  * - 23.0
     - Update to GBD 2021 
     - Note: not planned to be completed before NIH results 
-  * - 23.0
+  * - 24.0
     - Final Runs 
     - Research team to specify this further 
 
