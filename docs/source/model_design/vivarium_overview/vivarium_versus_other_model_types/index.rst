@@ -50,7 +50,7 @@ Microsimulation models incorporate relevant characteristics, including:
 - Mortality rate/life expectancy 
 
 The below tables provide a simplified illustration of what is included in a Vivarium microsimulation. Both tables are based on a microsimulation of 
-antenatal nutritional supplementation effects on birthweight and child-growth failure. 
+antenatal nutritional supplementation effects on birthweight and child growth failure. 
 
 .. image:: microsim_example_table_3.png
 
