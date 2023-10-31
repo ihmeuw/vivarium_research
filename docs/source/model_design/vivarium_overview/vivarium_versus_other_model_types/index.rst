@@ -52,7 +52,7 @@ Microsimulation models incorporate relevant characteristics, including:
 The below tables provide a simplified illustration of what is included in a Vivarium microsimulation. Both tables are based on a microsimulation of 
 antenatal nutritional supplementation effects on birthweight and child-growth failure. 
 
-.. image:: microsim_example_table_3.PNG
+.. image:: microsim_example_table_3.png
 
 This first table outlines some of the simulant attributes we can include in our microsimulations. The simulants listed here have demographic attributes
 such as sex and location, as well as risk factors (e.g., *did the mother/birthing person received iron and folic acid (IFA) supplementation during pregnancy?*).
