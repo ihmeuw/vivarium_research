@@ -60,7 +60,7 @@ such as sex and location, as well as risk factors (e.g., *did the mother/birthin
 .. image:: microsim_example_table_4.PNG
 
 This second table demonstrates our ability to simulate different intervention scenarios and compare outcomes. In this case, the baseline scenario 
-entailed no antenatal supplementation for the simulant's mother/birthing person, which led to the simulant's low birthweight. This caused the simulant
+entailed no antenatal supplementation for the simulant's mother/birthing person, which meant the simulant had a low birthweight. This caused the simulant
 to be more susceptible to get diarrhea and not recover, which ultimately led to the simulant's death by day 6. In the alternative scenario, the simulant's 
 mother/birthing person received antenatal supplementation, which led to the simulant's healthier birthweight and, subsequently, their higher likelihood of 
 recovering from diarrhea and surviving past day 6. 
