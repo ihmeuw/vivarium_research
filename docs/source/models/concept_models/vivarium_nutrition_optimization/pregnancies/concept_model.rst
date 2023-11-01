@@ -268,11 +268,6 @@ Documents that contain information specific to the overall model and the child s
 2.4 Simulation scenarios
 ------------------------
 
-.. note::
-
-  Scenarios subject to change, but will follow similar structure
-
-  Note that while IFA must be included in the model for baseline calibration, it will *not* be included as a scale-up intervention to include in the optimization process. Therefore, we will not "zero" out IFA coverage in the "zero coverage" scenario and we will not scale-up IFA coverage to its maximum value independently. IFA coverage may only remain at its baseline coverage level *or* be reduced to zero when it is replaced with MMS or BEP.
 
 .. list-table:: Scenarios
   :header-rows: 1
@@ -571,9 +566,9 @@ Specific outputs for specific models are specified in the following section.
   * - 10.1
     - Production runs with live birth and still birth counts 
     - All
-    - Same as 9.1
-    - Same as 9.1 but including count of live births and still births 
-    - Same as 9.1
+    - Same as 9.2
+    - Same as 9.2 but including count of live births and still births 
+    - Same as 9.2
     - 
   * - 11.0
     - GBD 2021 update?
