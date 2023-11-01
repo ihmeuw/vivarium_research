@@ -358,6 +358,7 @@ Note:
 
 Note: 
   - For this run, results must **be stratified by seed** 
+  - 30 seeds was selected as the size based on this `draw and seed sizing notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/draw_seed_analysis.ipynb>`_
 
 **Draw Testing:**
 
@@ -368,7 +369,7 @@ Note:
      - Value
      - Note
    * - Population size
-     - TBD from seed testing run above 
+     - 30 seeds (10,000 sims per seed)
      - 
    * - Number of draws
      - 50
@@ -386,6 +387,8 @@ Note:
      - None 
      - 
 
+Note: 
+  - 20 draws was selected as the size based on this `draw and seed sizing notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/draw_seed_analysis.ipynb>`_
 
 **Final Model Run:**
 
@@ -396,10 +399,10 @@ Note:
      - Value
      - Note
    * - Population size
-     - TBD
+     - 30 seeds (10,000 sims per seed)
      - per draw
    * - Number of draws
-     - TBD
+     - 20 
      - 
    * - Cohort type
      - Closed
@@ -1131,10 +1134,16 @@ Code is below for reference
   * - 21.0
     - Add Mediation and PAF Recalculations 
     - Runs were completed for mediation and PAFs were recalculated. PAFs no longer contain any zero values. Most of the model is working as expected. The `causes with mediation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_mediation_10.16.2023.ipynb>`_ are working as prior model versions. The `risks with mediation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_10_16_23.ipynb>`_ have strange results in the 95+ age group which is still being investigated. 
+  * - 21.1
+    - Mediation and PAF Recalculations with Fix for 95+ Age Group 
+    - With the updates to the exposure observer for the oldest age group, the `risks for 95+ <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_10_20_23.ipynb>`_ have resolved. 
   * - 22.0
+    - Changes to Inertia with Simulant and Random Propensities 
+    - The medication levels were tested for a `50 50 component split <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_10_18_23.ipynb>`_ and a `75 random 25 simulant component split <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_10_20_23.ipynb>`_. It was decided to proceed with the 50/50 split. There are some changes in treatment over the course of the sim, but we do not expect them to impact final results significantly.  
+  * - 23.0
     - Update to GBD 2021 
     - Note: not planned to be completed before NIH results 
-  * - 23.0
+  * - 24.0
     - Final Runs 
     - Research team to specify this further 
 

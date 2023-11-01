@@ -208,6 +208,8 @@ Given the following equations:
 
 2. :math:`RR = p_\text{cat1,LBW} / p_\text{cat1,ABW}` 
 
+We can then solve for the ABW and LBW probabilities of initialization into wasting categories 1 and 2. We then assume that the difference between the ABW and LBW probabilities for categories 1 and 2 with the population-level probabilities is equally distributed amongst categories 3 and 4.
+
 .. list-table:: Wasting state probabilities by birth weight status
   :header-rows: 1
 
@@ -216,16 +218,16 @@ Given the following equations:
     - LBW probability
   * - cat1
     - :math:`p_\text{cat1} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
-    - ABW probability * RR
+    - :math:`p_\text{ABW,cat1} * RR`
   * - cat2
     - :math:`p_\text{cat2} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
-    - ABW probability * RR
+    - :math:`p_\text{ABW,cat2} * RR`
   * - cat3
-    - :math:`p_\text{cat3} / (p_\text{LBW}/RR + (1 - p_\text{LBW}))`
-    - ABW probability / RR
+    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{ABW,cat1} - p_\text{ABW,cat2}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
+    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{LBW,cat1} - p_\text{LBW,cat2}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
   * - cat4
-    - :math:`p_\text{cat4} / (p_\text{LBW}/RR + (1 - p_\text{LBW}))`
-    - ABW probability / RR
+    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{ABW,cat1} - p_\text{ABW,cat2}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
+    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{LBW,cat1} - p_\text{LBW,cat2}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
 
 .. note::
 
@@ -243,8 +245,8 @@ Given the following equations:
     - Value
     - Note/Source
   * - RR
-    - 2
-    - PLACEHOLDER
+    - 1.82 (95% CI: 1.35, 2.45), assume a lognormal distribution of uncertainty
+    - Calculated using meta-analysis of most recent available DHS round 7 or 8 as of 10/2023. `Analysis performed and resulting forest plot can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/95>`_
   * - :math:`p_\text{LBW}`
     - Exposure of LBWSG categories with BW < 2500 grams for the late neonatal age group in GBD
         * :code:`get_draws(source='exposure', rei_id=339, age_group_id=3)`
@@ -266,9 +268,20 @@ Note that prevalence of each wasting state for use in this model can be pulled u
 Transitions
 ------------
 
-`Draw-specific values for transition rates (defined in the table below) for Ethiopia (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions_4.csv>`_. Values in this file are defined in terms of transitions per person-year in the source state.
+Draw-specific values for transition rates (defined in the table below) for Ethiopia, Nigeria, and Pakistan (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found listed below. Values in these files are defined in terms of transitions per person-year in the source state. 
+
+- `Ethiopia wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions_4.csv>`_ 
 
   - `These values were generated in this notebook as of 10/4/2023 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_transition_sampling.ipynb>`_
+
+- `Nigeria wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/nigeria_2019_wasting_transitions_4.csv>`_ 
+
+  - `These values were generated in this notebook as of 10/17/2023 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/wasting_transition_sampling.ipynb>`_
+
+- `Pakistan wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/pakistan_2019_wasting_transitions_4.csv>`_ 
+
+  - `These values were generated in this notebook (10/17/2023) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/wasting_transition_sampling.ipynb>`_
+
 
 .. list-table:: Transition Data
  :header-rows: 1
@@ -300,6 +313,10 @@ Transitions
 
 MAM (cat2) substates
 ----------------------
+
+.. note::
+
+  This was implemented in a manner that divided the MAM state into two separate states, creating an overall 5-category wasting transition model. Transition rates from the 4-category model were scaled such that transitions in and out of the MAM category did not vary by MAM substate. 
 
 For simulants that transition into the moderate acute malnutrition (MAM, cat2) wasting exposure state, they will be assigned one of the two following sub-exposures:
 

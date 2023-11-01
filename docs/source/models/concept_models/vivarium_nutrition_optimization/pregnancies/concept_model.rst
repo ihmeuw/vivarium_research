@@ -268,11 +268,6 @@ Documents that contain information specific to the overall model and the child s
 2.4 Simulation scenarios
 ------------------------
 
-.. note::
-
-  Scenarios subject to change, but will follow similar structure
-
-  Note that while IFA must be included in the model for baseline calibration, it will *not* be included as a scale-up intervention to include in the optimization process. Therefore, we will not "zero" out IFA coverage in the "zero coverage" scenario and we will not scale-up IFA coverage to its maximum value independently. IFA coverage may only remain at its baseline coverage level *or* be reduced to zero when it is replaced with MMS or BEP.
 
 .. list-table:: Scenarios
   :header-rows: 1
@@ -293,7 +288,7 @@ Documents that contain information specific to the overall model and the child s
     - 0
     - 1
     - 0
-  * - 2: Universal BEP
+  * - 2: IFA
     - 0
     - 0
     - 1
@@ -313,6 +308,10 @@ Where:
 - **1** represents the maximum intervention coverage (100%)
 
 - **Baseline** represents location-specific baseline IFA coverage, `which can be found in location-specific .csv files here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/baseline_ifa_coverage>`_ (`note these values were calculated in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/Gestational%20age%20shifts.ipynb>`_
+
+.. note::
+  
+  Scenario #2 was previously "Universal BEP" rather than IFA, but was updated to IFA on 10/23/23 prior to wave II production runs. Universal BEP is no longer a scenario of interest. 
 
 2.5 Outputs
 ------------
@@ -567,9 +566,9 @@ Specific outputs for specific models are specified in the following section.
   * - 10.1
     - Production runs with live birth and still birth counts 
     - All
-    - Same as 9.1
-    - Same as 9.1 but including count of live births and still births 
-    - Same as 9.1
+    - Same as 9.2
+    - Same as 9.2 but including count of live births and still births 
+    - Same as 9.2
     - 
   * - 11.0
     - GBD 2021 update?

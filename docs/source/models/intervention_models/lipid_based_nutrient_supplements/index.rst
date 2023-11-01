@@ -269,12 +269,12 @@ The SQ-LNS effects on wasting transition rates should apply to simulants covered
     - Incidence effects
     - 0.7 (0.57, 0.88)
     - 0.9 (0.83, 0.97)
-    - 
+    - Should apply equally to transitions into "worse" MAM and "better" MAM substates
   * - i1 rate from MAM to SAM
     - Incidence effects
     - 0.3 (0.15, 0.68)
     - 0.79 (0.64, 0.895)
-    - 
+    - Should apply equally to transitions originated from "worse" MAM and "better" MAM substates
   * - r4 rate from mild wasting to wasting TMREL
     - Recovery effects
     - 1
