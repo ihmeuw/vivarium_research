@@ -163,30 +163,37 @@ throughout this style guide.
      - *Gender*, on the other hand, is a social construct that refers to the culturally specific 
        expectations, behaviors, and institutions that shape any individual's access to power, 
        privilege, and resources. It can also refer to a gendered individual's internal sense of 
-       identity [Ritz_and_Greaves_2022]_. 
-   * - Sexual and gender minority (SGM) 
-     - An umbrella term that includes (but is not limited to) individuals that are two-spirit, 
-       intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender 
-       non-conforming identities.
+       identity [Ritz_and_Greaves_2022]_.
    * - Undifferentiated sex/gender measure
-     - Undifferentiated sex/gender measure is a placeholder variable that indicates uncertainty 
-       regarding what is being captured. Due to data limitations or availability, it might not always 
-       be possible to elucidate whether a certain data source (e.g., a question in a household survey)
-       is intended to capture sex or gender, or some factor related to both. See Section `2.0 Dealing 
-       with Limitations in Upstream Research`_ for more information. 
+     - Undifferentiated sex/gender measure is a variable that indicates uncertainty 
+       regarding what is being reported. This uncertainty can arise  due to unclearly defined variables 
+       in an external data source (e.g., vague survey question that different respondents may interpret differently) 
+       or from the compilation of many data sources with clear definitions of 'sex' or 'gender' into one 
+       conglomerate sex/gender variable (e.g., GBD "sex" variable).
    * - Sex- and gender-related factors
-     - "Factors associated with sex/gender that are not themselves dimensions of
-       sex or gender (e.g., gene expression, body weight, risk taking, age at
-       sexual debut, structural sexism)" [Bauer_2022]_. 
+     - An umbrella term that refers to any and all characteristics related to sex and/or gender (e.g., 
+       gamete size, hormone production, reproductive or sexual anatomy, so-called 'secondary sex
+       characteristics' such as body hair or breast tissue, gender identity, gender expression, risk-taking behavior, etc). 
+   * - Proxy measure
+     - "An indirect measure of the desired outcome which is itself strongly correlated to that outcome" [GovEx_Johns_Hopkins]_.
+       Unacknowledged use of a proxy measure for the output variable of interest can lead to inaccurate
+       or harmful findings and should therefore be approached with caution. For example, [Bauer_2022]_
+       discusses in their paper how the "unacknowledged use of a sex/gender proxy for a sexed dimension of interest
+       (i.e., uterine status) resulted in decades of cancer research misestimating risks, racial disparities,
+       and age trends".
    * - Sex assigned at birth
-     - "Recorded on initial birth record; generally genital phenotype" [Bauer_2022]_. 
+     - "Recorded on initial birth record; generally genital phenotype" [Bauer_2022]_.
    * - Intersex status
      - "Reported presence of intersex conditions generally or a specific condition" [Bauer_2022]_. 
    * - Gender identity
      - "Personally held sense of one’s gender as man/boy, woman/girl, another cultural gender, 
-       trans, nonbinary, etc." [Bauer_2022]_. 
+       trans, nonbinary, etc." [Bauer_2022]_.
    * - Intersex identity
-     - "Personally held identification as intersex" [Bauer_2022]_. 
+     - "Personally held identification as intersex" [Bauer_2022]_.
+   * - Sexual and gender minority (SGM) 
+     - An umbrella term that includes (but is not limited to) individuals that are two-spirit, 
+       intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender 
+       non-conforming identities.
 
 .. todo::
 
@@ -419,3 +426,6 @@ practices, as well as some lessons learned.
 
 .. [Ritz_and_Greaves_2022]
     `Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender.` International Journal of Environmental Research and Public Health, 30 March 2022, https://www.mdpi.com/1660-4601/19/7/4083. 
+
+.. [GovEx_Johns_Hopkins]
+    https://centerforgov.gitbooks.io/benchmarking/content/
