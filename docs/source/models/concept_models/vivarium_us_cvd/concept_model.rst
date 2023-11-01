@@ -792,6 +792,60 @@ LDL-C decrease for an individual simulant can be calculated as:
 
 Where adherence score = 0 for primary or secondary nonadherent; and adherence score = 1 for adherent 
 
+
+Treatment Discontinuation
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In order to address overly optimisitic medication in the simulation, 
+we are adding a possibility for treatment discontinuation. The general 
+priniples for discontinuation are based on the observations of [An_2021]_ 
+which summarized the number of patients who discontinued treatment at 1 year 
+and 2 years after initialization. This approach can be summarized as: 
+
+- Approximately 31.4% of simulants who start medication will discontinue all treatments within 1 year (this is a weighted average across medication types)
+- Simulants who make it one year on treatment will continue on treatment indefinitely - this is based on the relatively low number of patients who discontinued treatment between year 1 and year 2 
+- Simulants who discontinue treatment will not restart medication at any point 
+
+In practice, these principles are implemented through rules applied to at initialization 
+and on time steps: 
+
+**On Initialization**
+
+Simulants initialized on treatment: 
+
+Some of the simulants initialized on treatment will have started their medication within 1 
+year and are therefore eligible for discontinuation. To include this in the sim, simulants 
+initialized on treatment will be assigned a treatment start time uniformly distributed 
+between 0 and 3 years in the past. This is designed so that approximately 1/3 of simulants are 
+eligible for discontinuation and was validated through the interactive sim below. It was 
+designed so that the initialized rates of medication are maintained throughout the sim. 
+
+Simulants initialized NOT on treatment: 
+
+Some simulants initialized not on treatment will have already started and discontinued 
+treatment, meaning they are not eligible for future treatment. To include this in the sim, 
+31.4% of simulants within an age/sex group will be randomly assigned as inelgible for future 
+treatment due to prior discontinuation. The remaining 68.6% will still be eligible for future 
+treatment assignment. 
+
+This 31.4% will be an overestimate, especially for age/sex groups with low medication rates. However, 
+it is a reasonable simplification and was designed so that the initialized rates of medication 
+are maintained throughout the sim. This was validated in the interactive sim. 
+
+**On Time Steps**
+
+All simulants receiving treatment will have a chance to discontinue 
+based on their time on treatment. Any simulant who has started treatment 
+within 1 year will have a 2.4% chance of discontinuing treatment on each time step. 
+
+Simulants who previously received and discontinued treatment are not eligible to 
+restart treatment. 
+
+Simulants who have not previously received or discontinued treatment can receive 
+treatment per the treatment ladder above. 
+
+This work was tested in an `edited interactive simulation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/2023_10_31b_interactive_medication_inertia-take_2_pr60%20(1).ipynb>`_. 
+
 .. _uscvd4.5:
 
 4.5 Initialization Parameters
