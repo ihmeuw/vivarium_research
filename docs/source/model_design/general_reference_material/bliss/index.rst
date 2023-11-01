@@ -172,8 +172,8 @@ throughout this style guide.
        conglomerate sex/gender variable (e.g., GBD "sex" variable).
    * - Sex- and gender-related factors
      - An umbrella term that refers to any and all characteristics related to sex and/or gender (e.g., 
-       gamete size, hormone production, reproductive or sexual anatomy, or any so-called 'secondary sex
-       characeristics', like body hair, breast tissue, or body mass index). 
+       gamete size, hormone production, reproductive or sexual anatomy, so-called 'secondary sex
+       characteristics' such as body hair or breast tissue, gender identity, gender expression, risk-taking behavior, etc). 
    * - Proxy measure
      - "An indirect measure of the desired outcome which is itself strongly correlated to that outcome" [GovEx_Johns_Hopkins]_.
        Unacknowledged use of a proxy measure for the output variable of interest can lead to inaccurate
