@@ -226,7 +226,7 @@ we fit a `beta distribution <https://en.wikipedia.org/wiki/Beta_distribution>`_ 
 lower bound as the 2.5th percentile and the upper bound as the 97.5th.)
 Because the beta distribution is the conjugate of the binomial distribution,
 we can then use an easy-to-calculate `beta-binomial <https://en.wikipedia.org/wiki/Beta-binomial_distribution>`_ as the distribution
-of our number of events.
+of the number of events when there is not a bug.
 
 Finally, we must specify a distribution in the case where there is a bug/error
 in the simulation.
@@ -272,7 +272,8 @@ Migration into the US is a bit different; it is not an event with a rate of occu
 an at-risk population.
 The only stochastic part of determining the number of immigration events is the
 :ref:`"stochastic rounding" used <census_prl_international_immigration>`.
-We fuzzy test this rounding.
+We check this rounding as a set of Bernoulli trials, one per time step:
+whether to round up or down.
 
 The PRL integration tests are run very frequently by the software engineering team.
 Due to how frequently they are run and the difficulty of debugging a failed test
