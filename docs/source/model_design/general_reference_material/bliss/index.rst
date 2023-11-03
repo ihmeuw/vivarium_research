@@ -420,7 +420,11 @@ guess of what specific sex- and gender-related factors could be associated with 
   Collectively, they span a number of biological (sex-related) and sociocultural
   (gender-related) factors which are highly correlated and causally entangled with one other. [Bauer_2022]_ [Springer_2012]_
   Frequently in health research, differences are attributed wholly to sex-related factors, when
-  in fact gender-related factors also play a part in those differences. [Ritz_and_Greaves_2022]_
+  in fact gender-related factors also play a part in those differences. [Ritz_and_Greaves_2022]_ [Springer_2012]_
+  For example, gender-associated behaviors such as care-seeking and risk-taking can influence
+  health outcomes,
+  and structural or interpersonal sexism or cisnormativity can influence the quality of preventive health
+  care received.
   Since prevalence of <outcome> could be influenced by sex- and/or gender-related factors,
   an ideal analysis would report prevalence by multiple of these factors.
 
