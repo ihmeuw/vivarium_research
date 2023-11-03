@@ -169,18 +169,28 @@ The higher our cutoff is, the higher our specificity, but the lower our sensitiv
 
 .. todo::
   We do not estimate what the sensitivity and specificity values are.
-  We could estimate these from our priors, if desired, to help with choosing a cutoff
-  (note that these would only be estimates, not exact values, when our priors are knowingly
-  mis-specified; see "Proportions and rates" section for how we approximate a Poisson binomial
-  with a binomial distribution).
-  For now we have used a conventional "decisive" cutoff of 100.
+  We could estimate these from our priors, if desired.
+  Note that these sensitivity and specificity estimates would only be as good as our priors,
+  and our priors are sometimes knowingly mis-specified; see the "Proportions and rates" section
+  for how we approximate a Poisson binomial with a binomial distribution.
+
+  Having estimates of sensitivity and specificity could help with choosing a cutoff and
+  a population size.
+  They would only depend on the priors and not on the data, and therefore
+  would not change frequently, unless our sample size for (some of) our fuzzy checks was the
+  result of dynamic simulation behavior.
+  As described above, changing the Bayes factor cutoff trades off sensitivity for specificity,
+  whereas increasing population size improves sensitivity (at all specificities) but also increases
+  runtime.
+
+  For now we have used a conventional "decisive" cutoff of 100 for the Bayes factor,
+  and in the PRL simulation we typically run the integration tests with 250,000 simulants,
+  which is about as large as we can run in a reasonable amount of time (10-20 minutes).
 
 .. todo::
   There is potential to do something like a "power calculation," finding what ranges of
   true parameter values would be extreme enough to reject our hypothesis X% of the time.
   However, it is unclear whether this would add anything beyond calculating a sensitivity.
-  Both would depend only on our priors, not on the data, and therefore would generally not
-  change frequently unless our sample size was the result of dynamic simulation behavior.
 
 Hypotheses by value type
 ++++++++++++++++++++++++
