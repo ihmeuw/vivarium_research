@@ -402,7 +402,7 @@ In this case, we might say:
   making it unclear how our conclusions generalize to transgender people and other gender minority populations.
   Due to these issues, our results are among WBPRA according to imperfect proxy measures.
   To address these limitations, data would need to be collected using more robust measures
-  of sex- and gender-related factors. [cite guidelines for collecting these]
+  of sex- and gender-related factors. [Bauer_2017]_ [Nielsen_2021]_ [ABS_2021]_ [National_Academies_2022]_
 
 On the other hand, if we were doing descriptive epidemiology and didn't have even an educated
 guess of what specific sex- and gender-related factors could be associated with our outcome:
@@ -411,9 +411,9 @@ guess of what specific sex- and gender-related factors could be associated with 
 
   Sex and gender are multi-dimensional concepts.
   Collectively, they span a number of biological (sex-related) and sociocultural
-  (gender-related) factors which are highly correlated and causally entangled with one other. [citations!]
+  (gender-related) factors which are highly correlated and causally entangled with one other. [Bauer_2022]_ [Springer_2012]_
   Frequently in health research, differences are attributed wholly to sex-related factors, when
-  in fact gender-related factors also play a part in those differences. [citation]
+  in fact gender-related factors also play a part in those differences. [Ritz_and_Greaves_2022]_
   Since prevalence of <outcome> could be influenced by sex- and/or gender-related factors,
   an ideal analysis would report prevalence by multiple of these factors.
 
@@ -425,7 +425,7 @@ guess of what specific sex- and gender-related factors could be associated with 
   It is unclear how our conclusions would generalize to transgender people and other gender minority
   populations.
   To address these limitations, data would need to be collected using more robust measures
-  of sex- and gender-related factors. [cite guidelines for collecting these]
+  of sex- and gender-related factors. [Bauer_2017]_ [Nielsen_2021]_ [ABS_2021]_ [National_Academies_2022]_
 
 3.2 Further Results (Text, Figures, Tables)
 -------------------------------------------
@@ -516,4 +516,19 @@ practices, as well as some lessons learned.
     `Sex and Gender Multidimensionality in Epidemiologic Research.` American Journal of Epidemiology, Oxford University Press, 30 September 2022, https://academic.oup.com/aje/article/192/1/122/6747669. 
 
 .. [Ritz_and_Greaves_2022]
-    `Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender.` International Journal of Environmental Research and Public Health, 30 March 2022, https://www.mdpi.com/1660-4601/19/7/4083. 
+    `Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender.` International Journal of Environmental Research and Public Health, 30 March 2022, https://www.mdpi.com/1660-4601/19/7/4083.
+
+.. [Springer_2012]
+  `Beyond a catalogue of differences: A theoretical frame and good practice guidelines for researching sex/gender in human health.` Social Science & Medicine, June 2012, https://doi.org/10.1016/j.socscimed.2011.05.033
+
+.. [Bauer_2017]
+  Bauer GR, Braimoh J, Scheim AI, Dharma C (2017) Transgender-inclusive measures of sex/gender for population surveys: Mixed-methods evaluation and recommendations. PLoS ONE 12(5): e0178043. https://doi.org/10.1371/journal.pone.0178043
+
+.. [Nielsen_2021]
+  Nielsen, M.W., Stefanick, M.L., Peragine, D. et al. Gender-related variables for health research. Biol Sex Differ 12, 23 (2021). https://doi.org/10.1186/s13293-021-00366-3
+
+.. [ABS_2021]
+  Standard for Sex, Gender, Variations of Sex Characteristics and Sexual Orientation Variables. Australian Bureau of Statistics. https://www.abs.gov.au/statistics/standards/standard-sex-gender-variations-sex-characteristics-and-sexual-orientation-variables/latest-release
+
+.. [National_Academies_2022]
+  Measuring Sex, Gender Identity, and Sexual Orientation. National Academies of Sciences, Engineering, and Medicine. https://nap.nationalacademies.org/catalog/26424/measuring-sex-gender-identity-and-sexual-orientation
