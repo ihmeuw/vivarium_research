@@ -346,8 +346,8 @@ When we present our findings, we have two goals:
 * Accurately convey what associations we are looking for, and what the causal structures might be.
   We should strive to be as precise as possible, and not rely on "common sense"
   to indicate which gender- and sex-related factors are related to a health outcome.
-  Research shows that if descriptions of sex or gender differences are imprecise,
-  readers tend to ascribe them to sex, due to misconceptions about what gender can affect. [cite]
+  Despite prevailing belief that sex affects gender but not vice versa, there is
+  strong evidence for causal influence in both directions. [Ritz_and_Greaves_2022]_ [Springer_2012]_
   Even when we do think that a sex-related factor is most proximal to our outcome,
   we should still mention that some of its impact could be mediated through
   gender factors and that it is difficult to disentangle these.
