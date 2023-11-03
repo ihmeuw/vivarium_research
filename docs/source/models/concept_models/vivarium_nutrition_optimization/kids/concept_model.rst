@@ -1143,17 +1143,9 @@ Wave II
       * `Wasting exposure not validating <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.1_risk_and_cause_checks.ipynb>`_ (MAM overestimated), but `transitions look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.1_wasting_transitions.ipynb>`_. 
 
         * Could it be something to do with our MAM targets applying to baseline as well? We did not check this for model 9. Will add this check to a rerun request.
-
-      * No :code:`12_to_23_months` age group in observed outputs. Only incident MAM/SAM transitions observed. Let's add this age group and all wasting transitions in moving forward.
   * - 11.0
     - Check implementation of better/worse MAM and targeting of MAM treatment to worse MAM state
-    - * Observers:
-
-        * No :code:`12_to_23_months` age group in observed outputs
-
-        * Only observing incident MAM and SAM counts - let's add all back in for V&V
-
-      * `Ratio of worse:better MAM exposure looks good, but combined MAM exposure is off (low at initialization) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_risk_exposure.ipynb>`_
+    - * `Ratio of worse:better MAM exposure looks good, but combined MAM exposure is off (low at initialization) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_risk_exposure.ipynb>`_
 
       * `MAM treatment targets do not appear to be functioning correctly <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_MAM_targets.ipynb>`_:
 
@@ -1161,10 +1153,16 @@ Wave II
 
         * Appears that there is no targeting based on worse MAM state
 
-      * `Transitions out of better/worse MAM states look good, but transitions into better/worse MAM states are underestimated <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_wasting_transitions.ipynb>`_
+      * `Better/worse MAM transition rates look good, but mild to no wasting transition is underestimated <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_wasting_transitions.ipynb>`_
 
-        * Need to look into how we are applying scalars
 
+.. note::
+
+  Action plan for models 10 and 11:
+
+    1. Launch model 10.2 with updated observers and scenarios so we can check on V&V issue #1 below and gain more information before proceeding.
+
+    2. Look into issues #2 and #3 for model 11. If we find something quickly, then fix for model 11.1. If we don't find something quickly, let's go ahead and launch model 11.1 with the fixes for issues #4 and #5 so that we can check those while we continue to investigate issues #2 and #3
 
 
 .. list-table:: Outstanding V&V issues
@@ -1178,27 +1176,19 @@ Wave II
     - Could potentially be related to changes to MAM treatment made in model 9
     - Run model 10.2 so we can check on MAM treatment in baseline scenario versus scenarios 2 (universal MAM) and 13 (targeted MAM)
     - For model 10.2
-  * - 2. :code:`12_to_23_months` age group not showing up in observed outputs
-    - Unknown
-    - Engineers to investigate and fix
-    - For 10.2 and 11.1
-  * - 3. Only observing incident MAM and SAM transitions
-    - We requested this for production runs, but would like all transitions for V&V runs
-    - Revert back to old behavior for V&V runs so we can examine all transition rates
-    - For model 10.2 and 11.1
-  * - 4. Total MAM exposure underestimated for early age groups in model 11.0 (note we overestimate for the later age groups, but I think this may be a result of issue #1)
+  * - 2. Total MAM exposure underestimated for early age groups in model 11.0 (note we overestimate for the later age groups, but I think this may be a result of issue #1)
     - Unknown, but let's check how we are initializing MAM exposure with the substates. It looks like we might be underestimating by ~1/3, which would mean that we are using the "worse" MAM state as the total MAM envelope rather than worse + better as the total MAM envelope
     - Engineers to investigate and resolve
     - For model 11.1
-  * - 5. Transitions into better and worse MAM underestimated
-    - Likely an issue with how we are scaling these transition rates from the overall MAM transitions to the MAM substate transitions
-    - Engineers to share how this is functioning currently with RT for investigation
+  * - 3. Transition rate from mild child wasting to susceptible to child wasting is underestimated
+    - Could we accidentally be applying the better/worse MAM scalars to this transition rate when it doesn't need it?
+    - Engineers to check
     - For model 11.1
-  * - 6. Targeted MAM intervention not targeted to those 6-24 months (should be 100% coverage for this group)
-    - Unknown
-    - Engineers to investigate and resolve
+  * - 4. Targeted MAM intervention not targeted to those 6-24 months (should be 100% coverage for this group)
+    - Bug
+    - Hussain implemented fix, but not yet run
     - For model 11.1
-  * - 7. Targeted MAM intervention not targeted to worse MAM state
-    - Unknown
-    - Engineers to investigate and resolve
+  * - 5. Targeted MAM intervention not targeted to worse MAM state
+    - Bug
+    - Hussain implemented fix, but not yet run
     - For model 11.1
