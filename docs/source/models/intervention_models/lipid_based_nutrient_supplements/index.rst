@@ -269,12 +269,12 @@ The SQ-LNS effects on wasting transition rates should apply to simulants covered
     - Incidence effects
     - 0.7 (0.57, 0.88)
     - 0.9 (0.83, 0.97)
-    - 
+    - Should apply equally to transitions into "worse" MAM and "better" MAM substates
   * - i1 rate from MAM to SAM
     - Incidence effects
     - 0.3 (0.15, 0.68)
     - 0.79 (0.64, 0.895)
-    - 
+    - Should apply equally to transitions originated from "worse" MAM and "better" MAM substates
   * - r4 rate from mild wasting to wasting TMREL
     - Recovery effects
     - 1
@@ -290,6 +290,27 @@ The SQ-LNS effects on wasting transition rates should apply to simulants covered
     - 1
     - 1
     - Apply this effect to both r1 and t1 transition rates
+
+.. note::
+  
+  We reviewed the individual studies included in [Dewey-et-al-2021b]_ to check if any evaluated the effects of SQ-LNS on wasting incidence rather than prevalence ([Dewey-et-al-2021b]_ focused on prevalence). Few RCTs reported on incidence, but those that did had similar findings as our back-calculated incidence values (e.g., [Huybregts-et-al-2019-sqlns]_).
+
+  .. list-table:: [Huybregts-et-al-2019-sqlns]_ effect sizes
+    :header-rows: 1
+
+    * - 1st episode of AM
+      - 0.71
+    * - All episodes of AM
+      - 0.69
+    * - Relapse
+      - 0.81
+
+  [Becquey-et-al-2019]_ reported lower or null incidence rate effects than we use in our model, but they also found low or null effects of SQLNS on prevalence and recovery as well, so we believe their results to not be representative based on what we know about overall SQLNS effects from [Dewey-et-al-2021b]_.
+
+  None of the RCTs included in [Dewey-et-al-2021b]_ reported on recovery rates. However, [Huybregts-et-al-2019-sqlns]_ found no significant difference in the
+  length of treatment between the group that received SQ-LNS and those that didn't. This confirms our assumption that SQ-LNS works via reducing incidence rather than speeding up recovery.
+
+  For more info on this work, please visit the `Sharepoint folder <https://uwnetid.sharepoint.com/sites/ihme_simulation_science_team/SitePages/CollabHome.aspx?e=1:d6ac44c342bc4d0aa7c1ed55bbc4be47&CT=1635811402240&OR=OWA-NT&CID=801b0619-19ad-c1e1-a5b2-da2666bb5282>`_ that contains notes and PDFs of all the studies included in [Dewey-et-al-2021b]_.
 
 Stunting
 ~~~~~~~~~
@@ -357,6 +378,12 @@ Validation and Verification Criteria
 
 References
 -----------
+
+.. [Becquey-et-al-2019]
+
+  View `Becquey et al 2019 <https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1002877>`_
+
+    Impact on child acute malnutrition of integrating a preventive nutrition package into facility-based screening for acute malnutrition during well-baby consultation: A cluster-randomized controlled trial in Burkina Faso
 
 .. [DAS_Cochrane_Review_2019]
 
