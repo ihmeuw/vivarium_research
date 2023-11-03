@@ -486,3 +486,10 @@ Validation and Verification Criteria
  - Simulation mortality rates in the MM states, stratified by year and age and/or sex as above, should **approximately** match GBD 2019 all-cause mortality with the MM cause deleted plus the GBD 2019 MM EMR.
  - MM-state-specific survival analysis in the baseline scenario of time-to-death (or overall survival in the case of fourth and higher relapse) and time-to-next-treatment by disease state should match the corresponding curves obtained from Flatiron survival analysis. For detail on how risks will be calculated in each simulation timestep, see the V&V section of :ref:`the MM treatment documentation <multiple_myeloma_treatment>`.
  - The proportions of simulants with MM in the different MM cause model states should change from initialization (since all simulants are initialized into NDMM) and then stabilize without a significant time trend before 2021, indicating that our burn-in period is long enough to reach a steady state.
+
+.. warning::
+  In both Phase 1 and Phase 2, multiple myeloma prevalence sharply differed from GBD 2019, particularly in the older age groups.
+  See `the graphs in this V&V notebook  <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/b1d2d1f6263a902c17cc3e300c50dee5907b938c/verification/model_0/mm_cause_vs_gbd.ipynb>`_ for examples of this.
+  We believe this is due in part to the *replacement* of all-cause mortality with the mortality from the Flatiron cohort,
+  instead of back-calculating excess mortality.
+  If we return to this model, this should be a priority area to improve.
