@@ -34,6 +34,7 @@ The purpose of this page is to describe the general types of model components th
    :glob:
 
    causes/index
+   GBD_disease_health/index
    impairments/index
    interventions/index
    intervention_features/index
@@ -51,3 +52,4 @@ Sub-components of risk factors can be found here:
      risk_factors/risk_effects/index
      risk_factors/risk_mediation/index
      risk_factors/population_attributable_fraction/index
+     risk_factors/residual_confounding/index

@@ -29,3 +29,21 @@ Modeling Impairments
 
 .. contents::
   :local:
+
+What is an "impairment" and why might you model one?
+----------------------------------------------------
+
+- Include a link to :ref:`GBD health page <GBD_disease_health>` and the definition of an impairment 
+- Highlight situations in which you might want to include an impairment in a model 
+
+Comparing and Contrasting Impairment and Cause Models
+-----------------------------------------------------
+
+- Most of the modeling is very similar and we can utilize the cause model page 
+- What is not applicable from that page? (e.g., certain data sources) 
+
+Considerations when Modeling Impairments with Causes Together
+-------------------------------------------------------------
+
+- Cover the possibility of double counting 
+- Recommend strategies to reduce bias 

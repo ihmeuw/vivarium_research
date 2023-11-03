@@ -34,7 +34,7 @@
 .. _2019_concept_model_vivarium_ciff_sam:
 
 ===================================
-Vivarium acute malnutrition Phase 1
+Vivarium Acute Malnutrition Phase 1
 ===================================
 
 .. contents::
@@ -359,7 +359,7 @@ The following diagram represents the resulting model correlation structure in ou
 
 .. image:: correlation_structure.svg
 
-For correlated risks that affect the same outcomes in our simulation (just wasting and stunting in this model), the joint PAF calculation rather than multiplicative PAF calculation should be used for outcomes affected by wasting and stunting (see the :ref:`risk correlation proposal document <2017_risk_models>` for details). The joint PAF equation is shown below for convenient reference.
+For correlated risks that affect the same outcomes in our simulation (just wasting and stunting in this model), the joint PAF calculation rather than multiplicative PAF calculation should be used for outcomes affected by wasting and stunting (see the :ref:`risk correlation document <risk_correlation>` for details). The joint PAF equation is shown below for convenient reference.
 
 .. math::
 

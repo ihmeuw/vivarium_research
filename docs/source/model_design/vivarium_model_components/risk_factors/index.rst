@@ -3,29 +3,31 @@
 =====================
 Modeling Risk Factors
 =====================
-.. todo::
 
-  Add description of what's in this document.
+This document contains information on risk factors as they relate to modeling in vivarium, including definitional overviews as well as more detailed descriptions of sub-topics related to modeling risk factors (such as risk exposures, effects, correlation, etc.). 
 
-  Also see the following sections in :ref:`Modeling Causes <models_cause>`:
+For our purposes, a risk factor is any attribute that is associated with some outcome. The presence of this attribute, what we term the **risk exposure**, may be measured in various ways, including the dichotomous, categorical, or continuous measures. This association between the risk factor and outcome, what we term the **risk effect**, can be causal and/or non-causal, may be of large or small magnitude, and may take a linear or non-linear shape. The **population attributable fraction (PAF)** is a summary measure of how a risk factor causally relates to an outcome. Causes that are entirely attributable to a risk factor are termed **risk-attributable causes** or **PAF-of-one causes**. Additionally, risk **correlation** and **mediation** are ways in which multiple risk factors may relate to each other. 
 
-  * Learning objectives
-  * Why do we want a document that describes each cause model?
+See the following pages for more information on these risk factor sub-components:
 
-  It looks like most of that content is generalizable to both risks and causes.
-  Should we put similar sections in both documents, or pull them out into a more
-  general document about designing Vivarium models?
+.. toctree::
+   :maxdepth: 1
+   :glob:
 
-  On the other hand, it looks like the following sections in :ref:`Modeling
-  Causes <models_cause>` have details that are specific to causes, but should
-  have analogues for risks in this document:
+   risk_exposure/index
+   risk_effects/index
+   population_attributable_fraction/index
+   risk_attributable_causes/index
+   risk_correlation/index
+   risk_mediation/index
+   residual_confounding/index
+   
+Risk factors in GBD
+^^^^^^^^^^^^^^^^^^^
 
-  * How is a cause model incorporated into a larger model?
-  * What does a model document look like?
+The Global Burden of Disease study models risk factors and their effects on specific outcomes that meet the burden of proof for causality. The effort to assess the quality of evidence on causality is described in publications such as [Zheng-et-al-2022]_ and summarized on the `Burden of Proof Data Visualization webpage <https://vizhub.healthdata.org/burden-of-proof/>`_. The `GBD 2019 risk factors capstone publication can be found here <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30752-2/fulltext>`_ and can also be explored one the `GBD compare data visualization webpage <https://vizhub.healthdata.org/gbd-compare/>`_
 
-A risk factor is any attribute whose measure is *causally* related to the measure
-of an outcome. Such attributes can range widely, and are categorized by GBD into
-environmental/occupational, behavioral, and metabolic risks. For example:
+The GBD categorizes risk factors it models into environmental/occupational, behavioral, and metabolic risks. For example:
 
   * Environmental/occupational
 
@@ -46,6 +48,9 @@ environmental/occupational, behavioral, and metabolic risks. For example:
     * The blood pressure of an individual
 
     * Having or not having a high BMI
+
+Some examples and additional considerations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For our purposes, the outcomes of these risks will generally be a differential
 probability of some cause of health loss. However, the outcome of a risk could
@@ -90,31 +95,12 @@ risk factor.
 
 .. note::
 
-  For information regarding the definition of **causal relationships**, see the causal relationship section on the :ref:`General Epidemiology Research Considerations and Best Practices <general_research>` page.
-
-.. todo:: 
-
-  Note that we may want to model non-causal risk factors for purposes related to targeting or some other reason
-
-See the following pages for how to model specific risk factor sub-components:
-
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   risk_exposure/index
-   risk_attributable_causes/index
-   risk_correlation/index
-   risk_effects/index
-   risk_mediation/index
-   population_attributable_fraction/index
+  For information regarding the definition of **causal relationships**, see the :ref:`Causal Diagrams Page <general_dags>` page.
 
 References
 ----------
 
-
 .. [WHO-Global-Health-Risks-Annex]
-
   `Annex A: Data and methods
   <https://www.who.int/healthinfo/global_burden_disease/GlobalHealthRisks_report_annex.pdf>`_
   in :title:`Global Health Risks: Mortality and burden of disease attributable
@@ -122,13 +108,11 @@ References
   https://www.who.int/healthinfo/global_burden_disease/global_health_risks/en/
 
 .. [Comparative-quantification-health-risks-2003]
-
   Murray, C.J., Ezzati, M., Lopez, A.D. et al. Comparative quantification of
   health risks: Conceptual framework and methodological issues. :title:`Popul
   Health Metrics` 1, 1 (2003). https://doi.org/10.1186/1478-7954-1-1
 
 .. [Estimating-Attributable-Burden]
-
   `Chapter 25: Estimating attributable burden of disease from exposure and
   hazard data
   <http://www9.who.int/publications/cra/chapters/volume2/2129-2140.pdf>`_ by
@@ -139,7 +123,6 @@ References
   http://www9.who.int/publications/cra/en/
 
 .. [GBD-2017-Risk-Appendix-Modeling-Risk-Factors]
-
   `Supplementary appendix 1 <Risk appendix on ScienceDirect_>`_ to the **GBD
   2017 Risk Factors Capstone**: GBD 2017 Risk Factor Collaborators. Global,
   regional, and national comparative risk assessment of 84 behavioural,
@@ -147,10 +130,11 @@ References
   195 countries and territories, 1990–2017: a systematic analysis for the Global
   Burden of Disease Study 2017. :title:`The Lancet`. 8 Nov 2018; 392: 1923-94.
   doi: http://dx.doi.org/10.1016/S0140-6736(18)32225-6.
-
 .. _Risk appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322256-mmc1.pdf
 
 .. [ICRP]
-
   `Radon: Units of Measure <http://icrpaedia.org/Radon:_Units_of_Measure>`_.
   International Commission on Radiological Protection.
+
+.. [Zheng-et-al-2022]
+  Zheng, P., Afshin, A., Biryukov, S. et al. The Burden of Proof studies: assessing the evidence of risk. Nat Med 28, 2038–2044 (2022). https://doi.org/10.1038/s41591-022-01973-2

@@ -73,6 +73,15 @@ Vivarium Modeling Strategy
 
 Mean SBP is a continuous exposure modelled in GBD using an ensemble distribution. SBP will be a target of medication interventions in the simulation; the outcomes affected are described in the overall concept model document.  
 
+For the purposes of our project, we will be using data from the US Health 
+Disparities team, which includes US based results instead of global and 
+includes race/ethnicity specific estimates. For Phase 1 of the work, we 
+will not be using race/ethnicity specific results, but we will for Phase 2. 
+
+For this model, we will use the US Health Disparities team's ensemble distribution. 
+This is based on NHANES data and therefore is more US specific than the GBD model. 
+The ensemble weights can be found here :code:`/mnt/team/cvd/priv/usa_re/risks/metab_sbp/ensemble/weights.csv`
+
 Restrictions
 ++++++++++++
 
@@ -107,10 +116,16 @@ Assumptions and Limitations
 
 The quantity of interest is exposure to the mean blood pressure level regardless of whether that level is naturally occurring or occurs via use of medication; we assume full reversibility of risk and do not account for duration of exposure to elevated SBP. 
 
-We assume a maximum and minimum systolic blood pressure limit to account for high variation in 
-randomly drawn numbers. These values are set to 50 as the minimum and 300 as the maximum. This 
-effects only about 0.05% of simulants. Simulants that had values outside of the max and min are 
-reassigned to the max or min value automatically. 
+The values for SBP generated include exposures outside of a reasonably expected 
+range. In addition, we do not think relative risks continue in a log 
+linear pattern indefinitely, as is implemented in this model. A natural ceiling of 
+risk associated with a single risk factor probably exists. 
+
+To account for this and allow our model to run, we implemented maximum and minimum 
+exposures based on NHANES. The maximum was set to include 99.5% of NHANES data, meaning 
+that 0.5% or fewer participants had values more extreme than the maximum. 
+
+The minimum SBP is 50 and the maximum is 200 mmHg. 
 
 Data Description
 ++++++++++++++++
@@ -125,11 +140,11 @@ The rei_id for SBP is 107
 	  - ME_ID
 	  - Notes
 	* - Mean exposure
-	  - 2547
-	  - 
+	  - 23871
+	  - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8
 	* - Standard deviation
-	  - 15788
-	  - 
+	  - 27049
+	  - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8
 	* - Relative risk
 	  - 9030
 	  - Must be accessed with get_draws
@@ -139,9 +154,9 @@ The exposure values should be used to represent the distribution of mean blood p
 Validation Criteria
 +++++++++++++++++++
 
-Does the mean in the model match the mean in GBD? 
+Does the mean in the model match the expected mean? 
 
-Does the standard deviation in the model match the standard deviation in GBD? 
+Does the standard deviation in the model match the expected standard deviation? 
 
 References
 ----------

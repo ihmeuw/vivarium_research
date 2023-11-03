@@ -328,13 +328,14 @@ and discussed in more detail afterward.
      - Transition rates
      - Amount of time a simulant remains in a given state
    * - `Progression <Progression Transitions_>`_
-     -
+     - Transition from a lower severity state to a higher severity state
+       within a given cause model.
      - Transition rates
-     -
+     - Used to determine prevalence of a given condition by severity.
    * - `Severity Splits`_
-     -
-     - Transition Rates
-     -
+     - Separation of a cause into different states by severity.
+     - Transition rates
+     - Used to determine prevalence of a given condition by severity.
    * - `Restrictions`_
      - List of groups that are not included in a cause.
      - General
@@ -347,13 +348,15 @@ and discussed in more detail afterward.
      - Rate at which an individual accrues years lived with disability due to
        the state in the cause model.
    * - `Cause-specific Mortality`_
-     -
-     -
-     -
+     - Measure of deaths due to a particular cause per person-year in the overall
+       age-, sex-, time-, and location-specific population.
+     - Mortality impacts
+     - Used to determine a simulant's mortality hazard rate. 
    * - `Excess Mortality`_
-     -
-     -
-     -
+     - Measure of deaths due to a particular condition per person-year in the 
+       age-, sex-, time-, and location-specific population with that condition.
+     - Mortality impacts
+     - Used to determine a simulant's mortality hazard rate.
 
 Cause Model Initialization
 ++++++++++++++++++++++++++
@@ -470,6 +473,8 @@ measures are defined using the following key concepts:
      - Individuals with the condition recover from the condition and re-enter
        the at-risk population as susceptible (in the case of conditions with
        remission)
+
+.. _`total population incidence rate`:
 
 **Total Population Incidence Rate** is estimated by the Global Burden of
 Disease Study by estimating the number of incident cases that occur in one
@@ -824,5 +829,102 @@ Morbidity Impacts
 Disability Weights
 ^^^^^^^^^^^^^^^^^^
 
+Disability weights (DWs) represent the magnitude of health loss associated with specific health states. The weights are measured on a scale from 0 (full health) to 1 (complete loss of health; equivalent to death). GBD assigns DWs based upon household and internet surveys for which respondents are presented with paired comparison questions for different health problems. These paired comparison questions include lay descriptions of health states and ask the respondent to choose which has the greatest functional consequences and symptoms associated with the given health state. For more information on the 2010 DW Measurement study in which these surveys were carried out, see this `recording of the GBD Science Seminar from 2/7/2023 <https://hub.ihme.washington.edu/display/GBD2020/GBD+Science+Seminar+series?preview=/87186031/192089713/GBD%20Science%20Seminar_Disability%20weights%20(DWs)_Feb%202023.pdf>`_ or see Section 4.8.1 of the GBD 2019 Methods Appendix. 
+
+In order to compute **years lived with disability (YLDs)** for a particular health outcome in a given population, the number of people living with that outcome is mulitplied by the DW for the health state associated with that sequela. Ultimately, YLDs are used to indicate burden of disease: DALYs are calculated as the sum of YLLs and YLDs. The DALY-based estimation of the burden of disease is important because it simultaneously considers the reduced health state due to disability before death and the decline in life expectancy due to death. It thus moves away from conventional measurements of the burden of disease that use readily available data on mortality, prevalence, and incidence (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_). 
+
+If an individual is living with multiple diseases at once, YLDs can be calculated to include the sum health burden of all the given diseases. Overall DW for multiple diseases is calculated with the equation below, and then this overall DW is multiplied by the time spent with that combination of diseases.
+
+.. math::
+    DW_\text{overall} = 1 - \prod_{i = 1}^{n} 1 - DW_{i}
+
+YLD Uncertainty
+^^^^^^^^^^^^^^^
+
+The uncertainty ranges reported around YLDs incorporate uncertainty in prevalence and uncertainty in the DW. To do this, GBD takes the 1000 samples of comorbidity-corrected YLDs and 1000 samples of the DW to generate 1000 samples of the YLD distribution. GBD assumes no correlation in the uncertainty in prevalence and DWs. The 95% uncertainty interval is reported as the 25th and 975th values of the distribution. UIs for YLDs at different points in time (1990, 1995, 2000, 2005, 2010, and 2016) for a given disease or sequela are correlated because of the shared uncertainty in the DW. For this reason, changes in YLDs over time can be significant even if the UIs of the two estimates of YLDs largely overlap because significance is determined by the uncertainty around the prevalence estimates.
+
+
+Residual YLDs
+^^^^^^^^^^^^^
+
+For less common diseases and their sequelae, GBD may not currently estimate disease prevalence and YLDs, and have thus been included in residual categories. For these residual categories, GBD estimates YLDs by multiplying the residual YLL estimates by the ratio of YLDs to YLLs from the estimates of Level 3 causes in the same disease category that were explicitly modelled. This scaling is done for each country-sex-year. 
+
+Incidence- vs. Prevalence-Based YLDs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+*Incidence-based YLDs* provide a measure of the disease burden experienced by an individual over the course of their lifetime. An incident case of an incurable disease would accrue as many incidence-based YLDs as years left of that person's life expectancy. 
+
+*Prevalence-based YLDs*, on the other hand, are what we tend to use in Vivarium models. Prevalence-based YLDs reflect the burden of disease in the year(s) in which we observe the individual. An incident case of an incurable disease would only accrue YLDs for the duration of observation. For another example of how prevalence-based YLDs work, imagine we are evaluating DALYs among children 0-5 years old, and there was a baby with a birth defect. We would only count YLDs accumulated in the first 5 years of their life, not the YLDs that they will accumulate over the entire course of their life.
+
+.. list-table:: Incidence vs. Prevalence-based YLDs (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_)
+   :widths: 30 30 30 
+   :header-rows: 1
+
+   * - Measure
+     - Advantages
+     - Disadvantages
+   * - Incidence-based YLDs
+     - YLDs and YLLs are measured consistently; Provide a more valid data source for policies or interventions focused on disease prevention.
+     - Data on disease duration are required; Incorporation of comorbidities can be relatively difficult.
+   * - Prevalence-based YLDs
+     - Does not require data on disease duration; Incorporation of comorbidities is easier.
+     - YLD and YLL measurements are measured using different methods; For diseases with a short duration, YLDs may be underestimated.
+
+
+YLDs in Vivarium 
+^^^^^^^^^^^^^^^^
+DWs and YLDs in Vivarium apply to the duration of the condition. A DW determines the rate at which an individual accrues YLDs over the course of 1 year. Remember, YLDs are a product of the DW associated with the condition and the time between onset and survival. To illustrate an example, let's say an individual contracted the flu with a disability weight of 0.05 and recovered after 1 week. Because DWs are weighted to one year of disability, we would multiply 0.05 by 1/52 (0.019) to calculate the YLDs accumulated. 
+
+Another important note is that DWs must always be less than 1, because '1' is essentially death. For this reason, if an individual experiences multiple conditions at once, the overall DW is calculated multiplicatively (see equation used for GBD above). For instance, let's say an individual has lived with three health conditions, with respective DWs of 0.3, 0.4, and 0.5. The total overall DW here would be :code:`1 - ((1-0.3) * (1-0.4) * (1-0.5)) = 0.79`. 
+
+In Vivarium, in each timestep, a simulant will accumulate YLDs equal to :code:`DW * time_step` for each timestep that they are infected, where timestep is defined in a fraction of one year. Therefore, choosing an appropriate timestep duration is important for getting YLDs correct! If we had month-long timesteps, then a case of the flu (which should really only be 1 week) would accrue YLDs for the flu over an entire month.
+
+.. todo::
+  Investigate how GBD calculates all-cause YLDs, and whether all-cause YLDs is different than summed total of specific-cause YLDs. 
+
+.. todo::
+  Investigate how GBD uses COMO calculations. (What assumptions do they make when calculating comorbidities? See GBD Methods Appendix.) 
+
 Restrictions
 ++++++++++++
+*Cause restrictions* answer the question: Who does this apply to? For which population groups (e.g. age and sex groups) is this cause model not valid?
+
+For each cause we model, we use a restrictions table which describes any restrictions on the effects of the given cause (such as being only fatal or only nonfatal), as well as restrictions on the age and sex of simulants to which different aspects of the cause model apply. If a cause is labeled as 'YLL only', this for example signifies that the cause is only fatal, whereas 'YLD only' implies that the cause is only non-fatal. Please note that in the restrictions table, the age group start and end values for YLLs and YLDs are inclusive (i.e., 'YLL age group start' at 10 to 14 years old means that the cause model does apply to 10 to 14 year-old individuals). 
+
+As an example, please see the following table, which describes any restrictions for `Maternal Disorders in GBD 2019 <https://vivarium-research.readthedocs.io/en/latest/models/causes/maternal_disorders/index.html>`_. By looking at this table, we can see that this cause only applies to people reported as 'Female' by GBD. We can also see that this cause is only fatal (i.e., 'YLL only') depending on the sub-cause: the fatal sub-causes here are indirect maternal deaths, late maternal deaths, and maternal deaths aggravated by HIV/AIDS. In terms of restrictions by age group, we can see from this table that individuals younger than 10 years old and older than 54 years old do not apply to this cause model (see note below table).
+
+.. list-table:: GBD 2019 Cause Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - True
+     -
+   * - YLL only
+     - False
+     - False for maternal disorders (c_366), True for subcauses including indirect maternal deaths (c_375), late maternal deaths (c_376), and maternal deaths aggravated by HIV/AIDs (c_741)
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 10 to 14 (ID=7)
+     -
+   * - YLL age group end
+     - 50 to 54 (ID=15)
+     - (See note below for how to handle births that occur in the 55-59 age group)
+   * - YLD age group start
+     - 10 to 14 (ID=7)
+     -
+   * - YLD age group end
+     - 50 to 54 (ID=15)
+     - (See note below for how to handle births that occur in the 55-59 age group)
+
+.. note::
+
+  GBD defines both the fertile age range and the age range of maternal disorders as 10 to 54 years. This implicitly assumes that there are no cases of someone becoming pregnant at age 54 and experiencing a maternal disorder death or disability at the age of 55 years or older.

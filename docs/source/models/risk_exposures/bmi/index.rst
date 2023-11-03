@@ -11,10 +11,10 @@ Risk Exposure Overview
 Body mass index (BMI) is a person’s weight in kilograms divided by the square of height in meters (weight (kg) / [height (m)]\ :sup:`2`\). BMI is an inexpensive and easy screening method; values are frequently divided into categories: underweight (<18.5 kg/m\ :sup:`2`\), healthy weight (18.5 to 24.9 kg/m\ :sup:`2`\), overweight (25.0 to 29.9 kg/m\ :sup:`2`\), and obese (>=30.0 kg/m\ :sup:`2`\). BMI does not measure body fat directly, but it is moderately correlated with more direct measures of body fat. BMI has also been shown to be correlated with various metabolic and disease outcomes. BMI can be a screening tool, but it does not diagnose the body fatness or health of an individual.
 [CDC-BMI]_
 
-Risk Exposures Description in GBD
----------------------------------
+Risk Exposures Description
+--------------------------
 
-In GBD, BMI is modeled as a continuous variable using ST-GPR based on measured and self-reported height and weight measurements and sources reporting tabulated BMI categories.  
+BMI is modeled as a continuous variable using ST-GPR based on measured and self-reported height and weight measurements and sources reporting tabulated BMI categories.  
 
 **Self-report bias adjustment:**\
 
@@ -27,10 +27,6 @@ After adjusting for self-report bias and splitting aggregated data into five-yea
 **Estimating mean BMI:**\
 
 To estimate the mean BMI for adults in each country, age, and sex, over the time period 1980–2019, we first used a nested hierarchical mixed-effects model, fit using restricted maximum likelihood on data from sources containing estimates of all three indicators (prevalence of overweight, prevalence of obesity, and mean BMI), in order to characterise the relationship between overweight, obesity, and mean BMI. We applied 1000 draws of the regression coefficients to the 1000 draws of overweight prevalence and obesity prevalence produced through ST-GPR to estimate 1000 draws of mean BMI for each country, year, age, and sex. This approach ensured that overweight prevalence, obesity prevalence, and mean BMI were correlated at the draw level and uncertainty was propagated. 
-
-**Estimating BMI distribution:**\
-
-We used the standard GBD ensemble approach to estimate the distribution of BMI. 
 
 **Theoretical minimum risk exposure level:**\
 
@@ -130,6 +126,15 @@ Vivarium Modeling Strategy
 
 Mean BMI is a continuous exposure modelled in GBD using an ensemble distribution. BMI will be a target of lifestyle interventions in the simulation; the outcomes affected are described in the overall concept model document.  
 
+For the purposes of our project, we will be using data from the US Health 
+Disparities team, which includes US based results instead of global and 
+includes race/ethnicity specific estimates. For Phase 1 of the work, we 
+will not be using race/ethnicity specific results, but we will for Phase 2. 
+
+For this model, we will use the US Health Disparities team's ensemble distribution. 
+This is based on NHANES data and therefore is more US specific than the GBD model. 
+The ensemble weights can be found here :code:`/mnt/team/cvd/priv/usa_re/risks/metab_bmi/ensemble/weights.csv`
+
 Restrictions
 ++++++++++++
 
@@ -164,41 +169,49 @@ Assumptions and Limitations
 
 The quantity of interest is exposure to the mean BMI level; we assume full reversibility of risk and do not account for duration of exposure to BMI values above the range of the TMREL. 
 
-The values for BMI drawn from GBD include some negative values. To adjust for this, 
-we are implementing a minimum BMI of 5. This is below any documented BMI value and 
-so should include all possible BMIs. 
+The values for BMI generated include exposures outside of a reasonably expected 
+range. In addition, we do not think relative risks continue in a log 
+linear pattern indefinitely, as is implemented in this model. A natural ceiling of 
+risk associated with a single risk factor probably exists. 
 
+To account for this, we implemented maximum and minimum 
+exposures based on NHANES. The maximum was set to include 99.5% of NHANES data, meaning 
+that 0.5% or fewer participants had values more extreme than the maximum. 
+
+The minimum BMI is 5 and the maximum is 55. 
 
 Data Description
 ++++++++++++++++
 
 The rei_id for BMI is 370
 
-.. list-table:: ID Table 
-	:widths: 10, 5, 15
-	:header-rows: 1
+.. list-table:: ID Table
+   :widths: 10 5 15
+   :header-rows: 1
 
-	* - Component
-	  - ME_ID
-	  - Notes
-	* - Mean exposure
-	  - 2548
-	  - 
-	* - Standard deviation
-	  - 18706
-	  - 
-	* - Relative risk
-	  - 9031
-	  - Must be accessed with get_draws; adult values
+   * - Component
+     - ME_ID
+     - Notes
+   * - Mean exposure
+     - 23873
+     - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8 
+   * - Standard deviation
+     - 27050
+     - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8 
+   * - Relative risk 
+     - 9031
+     - Must be accessed with get_draws; adult values 
+
 
 The exposure and standard deviation values should be used to represent the distribution of mean BMI values that the simulants will be assigned in the model. 
+
 
 Validation Criteria
 +++++++++++++++++++
 
-Does the mean in the model match the mean in GBD? 
+Does the mean in the model match the expected mean? 
 
-Does the standard deviation in the model match the standard deviation of the GBD model? 
+Does the standard deviation in the model match the expected standard deviation? 
 
 References
 ----------
