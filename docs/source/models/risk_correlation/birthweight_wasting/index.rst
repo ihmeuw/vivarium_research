@@ -68,7 +68,7 @@ Spearman correlation coefficients between birthweight and WLZ among the first tw
 
 .. note::
 
-   These correlation coefficients were estimated by Chris Troeger for previous work on the :ref:`risk correlation proposal <2017_risk_models>` for the :ref:`Balanced Energy Protein simulation <2017_concept_model_vivarium_gates_bep>`.
+   These correlation coefficients were estimated by Chris Troeger for previous work on risk correlation for the :ref:`Balanced Energy Protein simulation <2017_concept_model_vivarium_gates_bep>`.
 
 Causation
 +++++++++++
@@ -115,7 +115,7 @@ When simulants are initialized into the early or late neonatal age groups or bor
 
 2. Assess the percentile of a simulant's birthweight exposure value (after application of all birthweight-affecting variables in the baseline scenario but before the application of *new* intervention coverage in the alternative scenario) within the overall sex, location, and year-specific birthweight exposure distribution *at birth*.
 
-3. Assign the simulant a wasting propensity that is correlated to their birthweight percentile according to the spearman correlation coefficient of birthweight and wasting at six months of age (mean: 0.3083092, standard deviation: 0.02225747, normal distribution of uncertainty). This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
+3. Assign the simulant a wasting propensity that is correlated to their birthweight percentile according to the spearman correlation coefficient of birthweight and wasting at six months of age (mean: 0.3083092, standard deviation: 0.02225747, normal distribution of uncertainty). This should be done according to the methodology described in the :ref:`risk-risk correlation page <risk_correlation>`.
 
 4. Assign the simulant a wasting exposure based on their wasting propensity and their sex/location/year-specific wasting exposure distribution among the 6-11 month age group (for all age groups including birth, early neonatal and late neonatal) such that the propensity is equal to the percentile within the exposure distribution.
 

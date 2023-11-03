@@ -19,5 +19,5 @@ To get started adding new documentation, check out our
    :maxdepth: 1
    :glob:
 
-   contributing/index
+   onboarding_resources/index
    glossary/index

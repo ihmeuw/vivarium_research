@@ -54,12 +54,19 @@
   Replace the above ".. _concept_model_template:" with ".. _{YOUR_MODEL_NAME}:""
 
 =======================
-Concept model template
+Concept Model Template
 =======================
 
-.. todo:
+The following template is intended to make your life easier as you start documenting 
+the concept model for a project. Feel free to move around the order of subheadings/content
+as needed!
 
-  Replace the title above with your model title
+Each of the tables or sub-headings on this page include a brief description and an example
+of what information is intended to go where. Make sure to remove those as you begin filling
+out the template! 
+
+.. todo::
+  Replace the title above with your model title.
 
 .. contents::
   :local:
@@ -72,38 +79,271 @@ Concept model template
 
 .. _{YOUR_MODEL_SHORT_NAME}1.0:
 
-1.0 Background
-++++++++++++++
+1.0 Project overview
+++++++++++++++++++++
+Here you can provide an introduction and overview to the project. Information
+in this section might include the following: 
 
-
-.. _{YOUR_MODEL_SHORT_NAME}1.1:
-
-1.1 Project overview
---------------------
-
-
-
-.. _{YOUR_MODEL_SHORT_NAME}1.2:
-
-1.2 Literature review
----------------------
-
+* Brief background of topic
+* Purpose or aims
+* Funder information
+* Examples of similar analyses
 
 .. _{YOUR_MODEL_SHORT_NAME}2.0:
 
-2.0 Modeling aims and objectives
-++++++++++++++++++++++++++++++++
+2.0 Simulation Design
+++++++++++++++++++++++
+
+This section is intended as the main body of documentation of your simulation. Information
+in this section might include the following: 
+
+* Concept model diagram 
+* Links to relevant components of diagram
+* Scenario descriptions
+* Default specifications 
+* Demographics
+* Location description
+* Effect size
+
+.. _{YOUR_MODEL_SHORT_NAME}2.1:
+
+2.1 Concept model diagram 
+-------------------------
+
+.. _{YOUR_MODEL_SHORT_NAME}2.2:
+
+2.2 Scenario descriptions
+-------------------------
+
+In this section, include descriptions of the different scenarios in your model, and what the
+differences are between each scenario (e.g., intervention coverage scale-up). You could do this
+in table or subheading form, depending on what works best for you and your model!
+
+For an example of what you might put in this section, see the table below, taken from the :ref:`Vivarium
+wasting paper simulation <2020_concept_model_vivarium_ciff_sam>`.  
+
+.. list-table:: Intervention coverage and efficacy parameters
+  :header-rows: 1
+
+  * - Intervention
+    - Baseline
+    - Target
+    - Zero coverage (*)
+  * - 1: SAM treatment
+    - Baseline values for :math:`C_{SAM}` and :math:`E_{SAM}`, :ref:`defined here <wasting-treatment-baseline-parameters>`
+    - :math:`C_{SAM} = 0.7`
+
+      :math:`E_{SAM} = 0.75`
+    - :math:`C_{SAM} = 0`
+      
+      :math:`E_{SAM} = \text{baseline value}`
+  * - 2: MAM treatment
+    - Baseline values for :math:`C_{MAM}` and :math:`E_{MAM}`, :ref:`defined here <wasting-treatment-baseline-parameters>`
+    - :math:`C_{MAM} = 0.7`
+      
+      :math:`E_{MAM} = 0.75`
+    - :math:`C_{MAM} = 0`
+      
+      :math:`E_{MAM} = \text{baseline value}`
+  * - 3: SQ-LNS (all sub-interventions)
+    - :math:`C_{SQLNS} = 0`
+    - :math:`C_{SQLNS} = 0.7` (*)
+    - :math:`C_{SQLNS} = 0`
+
+.. _{YOUR_MODEL_SHORT_NAME}2.3:
+
+2.3 Default specifications 
+--------------------------
+
+The below table is intended to outline the default specifications of your simulation. 
+Included in the table is a column of parameter definitions. Please delete this column as you 
+fill out the table. 
+
+.. list-table:: Default simulation specifications
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - Location(s)
+    - Target/simulated region & GBD ID 
+    - e.g. Ethiopia (ID: 179)
+    -
+  * - Number of draws
+    - Desired number of draws that a given simulation is to be run for. (Generally, this should be a number between 1 and 1,000.)
+    - e.g. 50 draws 
+    - Read more about draws in Vivarium :ref:`here <vivarium_best_practices_monte_carlo_uncertainty>`.
+  * - Population size per draw
+    - Desired simulated population size per draw for a given simulation. 
+    - e.g. 100,000 simulants
+    - Read more about how to determine a reasonable population size for your simulation 
+      :ref:`here <vivarium_best_practices_monte_carlo_uncertainty>`. Note that engineers will
+      decide how many random seeds to use to achieve the specified population size per draw.
+  * - Age start (initialization)
+    - Minimum age that simulants are initialized at when the simulation begins.
+    - e.g. 0 months
+    - Simulants might be initialized into the simulaiton before they are included in observers.
+      See to-do note below. 
+  * - Age start (observation)
+    - Age at which simulants begin to be included in observers.
+    - e.g. 6 months
+    - See to-do note below.
+  * - Age end
+    - Age at which simulants are no longer included in observers. 
+    - e.g. 5 years
+    -
+  * - Exit age
+    - Age at which simulants age out of the simulation. 
+    - e.g. 5 years
+    -
+  * - Simulation start date
+    - Date at which simulation begins.
+    - e.g. 2020-01-01
+    - Sometimes, the simulation needs to be initialized with a burn-in period to ensure the simulation
+      is in a steady state by the time observation begins. See to-do note below. 
+  * - Simulation observation start date
+    - Date at which observation begins.
+    - e.g. 2022-01-01
+    - As noted above, in some cases there is a delay between the simulation start date and the observation
+      start date. See to-do note below. 
+  * - Simulation end date
+    - 
+    - e.g. 2026-12-31
+    -
+  * - Timestep
+    - Amount of time that passes in simulation between each "step," which is when events and observations can happen.
+    - e.g. 4 days
+    - Read more about how to determine a reasonable timestep for your simulation 
+      :ref:`here <vivarium_best_practices_time_steps>`.
+  * - Randomness key columns
+    - Parameters used to identify identical simulants across scenarios
+    - e.g. ['entrance_time', 'maternal_id', 'sex']
+    - Entrance time is currently required as a randomness key column 
+
+
+.. todo::
+
+  For 'Age start (initialization)' and 'Age start (observation)', add links to documentation pages that explain age start
+  and start date in more detail once they have been written. 
+
+
+.. _{YOUR_MODEL_SHORT_NAME}2.3.1:
+
+2.3.1 Population description
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Describe the simulated population demographics here. Information in this section might include: 
+  - Cohort type
+  - Cohort length
+  - Age and sex structure
+  - Time step
+  - Fertility
+  - Stratifications 
+
+.. _{YOUR_MODEL_SHORT_NAME}2.3.2:
+
+2.3.2 Location description
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Describe the location (country and/or region(s)) of the simulation here.
+
+
+.. _{YOUR_MODEL_SHORT_NAME}2.4:
+
+2.4 Links to model components 
+--------------------------------------
+
+Please add here links to the different components of your model, including:
+  - Intervention model(s)
+  - Cause model(s)
+  - Risk exposure model(s)
+  - Risk-attributable cause model(s)
+  - Risk effects model(s)
+  - Risk correlation model(s)
+  - Other 
 
 
 .. _{YOUR_MODEL_SHORT_NAME}3.0:
 
-3.0 Causal framework
-++++++++++++++++++++
+3.0 Verification & validation (V&V) tracking
+++++++++++++++++++++++++++++++++++++++++++++
 
-.. _{YOUR_MODEL_SHORT_NAME}3.1:
+This section is intended for tracking the progress of V&V of simulation
+results. 
 
-3.1 Causal diagram
-------------------
+The below tables can be filled out iteratively as new model runs are requested and later V&V'd. 
+ 
+.. list-table:: Model runs
+  :header-rows: 1
+
+  * - Run number
+    - Run description
+    - Scenarios
+    - Specification modifications
+    - Stratification modifications
+    - Observer modifications
+  * - e.g. 1.0
+    - e.g. Baseline concept model updates
+    - e.g. Baseline only 
+    - e.g. 50 draws; 200,000 pop size
+    - e.g. Count data results stratified by random seed for optimization
+    - e.g. Remove children under 6 months from observers
+
+.. note::
+
+  Depending on your simulation and preference, the above table could also be converted to a subheading format
+  (i.e., in the event the table gets too lengthy!)
+
+.. list-table:: Model verification and validation tracking
+   :widths: 3 10 20
+   :header-rows: 1
+
+   * - Run number
+     - V&V criteria
+     - V&V summary
+   * - e.g. 1.0 
+     - e.g. Confirm that there is no variation in person-time quantity between different observers of same measure.
+     - e.g. V&V notebooks for model 1.0 can be found here [insert Github link]. V&V criteria satisfied. 
+
+.. note::
+
+  We recommend that you fill out the 'V&V criteria' column in the table above before the model has actually been
+  implemented. Then you can fill in the 'V&V summary' as you go!  
+
+.. list-table:: Outstanding verification and validation issues
+   :header-rows: 1
+
+   * - Issue
+     - Explanation
+     - Action plan
+     - Timeline
+   * - e.g. Simulants aged 0-6 months not present at initialization, resulting in missing age cohort over time.
+     - e.g. Discrepancy between age start and entrance age.
+     - e.g. Set age start value to 0 (instead of 6 months)
+     - e.g. For next model run 
+
+
+.. _{YOUR_MODEL_SHORT_NAME}4.0:
+
+4.0 Miscellaneous
++++++++++++++++++
+
+This section is intended for any other components to your new project that need to be tracked, but aren't necessarily
+things that the engineering team needs to know in order to implement the proposed design. Anything that needs to be 
+specifically highlighted for engineering should go in 'Simulation Design' above. 
+
+Information in this section may include: 
+
+* Causal framework
+* Additional subject background/context
+* Back-of-the-envelope calculations
+* Model limitations 
+
+.. _{YOUR_MODEL_SHORT_NAME}4.1:
+
+4.1 Causal framework
+--------------------
  
  .. note::
     link to DAGs page
@@ -126,134 +366,17 @@ Concept model template
 
 **Mediators (M)**:
 
+.. _{YOUR_MODEL_SHORT_NAME}4.2:
 
-.. _{YOUR_MODEL_SHORT_NAME}3.2:
+4.2 Additional background
+-------------------------
 
-3.2 Effect sizes
-----------------
+.. _{YOUR_MODEL_SHORT_NAME}4.3:
 
+4.3 Back-of-the-envelope calculations
+-------------------------------------
 
+.. _{YOUR_MODEL_SHORT_NAME}4.4:
 
-4.0 Intervention
-++++++++++++++++
-
-
-
-.. _{YOUR_MODEL_SHORT_NAME}4.1:
-
-4.1 Simulation scenarios
-------------------------
-
-
-.. _{YOUR_MODEL_SHORT_NAME}5.0:
-
-5.0 Vivarium modelling components
-+++++++++++++++++++++++++++++++++
-
-.. _{YOUR_MODEL_SHORT_NAME}5.1:
-
-5.1 Vivarium concept model 
---------------------------
-
-.. note::
-  This is our standard vivarium concept model diagram we are used to seeing
-
-.. _{YOUR_MODEL_SHORT_NAME}5.2:
-
-5.2 Demographics
-----------------
-
-.. _{YOUR_MODEL_SHORT_NAME}5.2.1:
-
-5.2.1 Population description
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  - cohort type
-  - cohort length
-  - age and sex structure
-  - time step
-  - fertility
-  - stratifications 
-
-
-.. _{YOUR_MODEL_SHORT_NAME}5.2.2:
-
-5.2.2 Location description
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-.. _{YOUR_MODEL_SHORT_NAME}5.3:
-
-5.3 Models
-----------
-
-.. note::
-  here we use the compartmental (SEIR) models with squares
-  
-
-.. _{YOUR_MODEL_SHORT_NAME}5.3.1:
-
-5.3.1 Model 1
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. _{YOUR_MODEL_SHORT_NAME}5.3.2:
-
-5.3.2 Model 2
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. _{YOUR_MODEL_SHORT_NAME}5.3.3:
-
-5.3.3 Model 3
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. _{YOUR_MODEL_SHORT_NAME}5.3.4:
-
-5.3.4 Model 4
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-
-.. _{YOUR_MODEL_SHORT_NAME}5.4:
-
-5.4 Desired outputs
--------------------
-
-.. _{YOUR_MODEL_SHORT_NAME}5.5:
-
-5.5 Output meta-table shell
----------------------------
-
-.. todo::
-  - add special stratifications if necessary
-
-.. _{YOUR_MODEL_SHORT_NAME}6.0:
-
-6.0 Back of the envelope calculations
-+++++++++++++++++++++++++++++++++++++
-
-
-.. _{YOUR_MODEL_SHORT_NAME}7.0:
-
-7.0 Limitations
-+++++++++++++++
-
+4.4 Limitations
+---------------

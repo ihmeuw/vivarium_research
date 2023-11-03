@@ -86,7 +86,7 @@ Theoretical minimum-risk exposure level
 
 The theoretical minimum-risk exposure level (TMREL) for FPG is 4.8-5.4 mmol/L for those risk-outcome pairs where risk is assessed on a continuous basis. To include the uncertainty 
 in the TMREL, we took a random draw from the uniform distribution of 
-the interval between 20–25 mmol/L each time the population 
+the interval between 4.8-5.4 mmol/L each time the population 
 attributable burden was calculated. This was calculated by taking the person-year 
 weighted average of the levels of FPG that were associated with the lowest risk of mortality in the pooled analyses of prospective cohort studies. The TMREL is no diabetes for those outcomes where risk 
 is assessed on a categorical basis. The risk-outcome pairs are listed below, along with whether they are continuous or categorical.  
@@ -104,6 +104,21 @@ in the table below. We will model this in Vivarium such that exposure to
 FPG will impact the incidence rates of: ischemic heart disease and ischemic 
 stroke. The excess mortality rate for all outcomes will 
 be unaffected. 
+
+Mediation
+---------
+
+Mediation is included for FPG through LDL-C. We have generally 
+followed the GBD approach to mediation, however we use slightly different 
+equations based on math in the word doc below. 
+
+:download:`Please see this word doc for details of the new math included <Mediation Notes.docx>`.
+
+In cases where the RR for FPG or LDL-C is 1, mediation will not be included as we assume 
+no effect for one set of risks. In theory, there could be a protective effect of 
+mediation, but GBD does not include this so we follow the same logic. 
+
+Mediation data is here: /mnt/team/simulation_science/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
 
 .. list-table:: FPG Risk-Outcomes Pairs
    :widths: 15 20
@@ -188,7 +203,6 @@ be unaffected.
      - 235
      - [95, 125 years) 
 
-
 Risk Outcome Pair #1: Ischemic heart disease
 ++++++++++++++++++++++++++++++++++++++++++++
 
@@ -208,6 +222,34 @@ PAFs and relative risks can be pulled using the following code::
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[105, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
+Once correlation and mediation are included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
+
+Mediation
+^^^^^^^^^
+
+Mediation for IHD is included for LDL-C. Data for the 
+mediation factor can be found in the csv file above. The rei_id for 
+FPG is 105. The cause_id for IHD is 493. The med_id is 367 for LDL-C. 
+The csv has data for individual draws that will be used. 
+
+The math is written out in the equations below and example python code 
+is also included. 
+
+:math:`delta_\text{LDL} = \frac{log(MF_\text{LDL} * (RR_\text{FPG,unadjusted} -1)+1)} {log(RR_\text{LDL})}`
+
+:math:`RR_\text{FPG,adjusted} = \frac{RR_\text{FPG,unadjusted}}{{RR_\text{LDL}}^{delta_\text{LDL}}}`
+
+Where :math:`MF_\text{LDL}` is the unadjusted mediation factor for LDL-C, :math:`RR_\text{unadjusted}` 
+is from the get_draws code above and the :math:`RR_\text{adjusted}` is what is used to 
+find the risk of FPG on IHD. 
+
+:: 
+
+  delta_ldl = np.log((ldl_mf*(fpg_ihd_rr-1))+1)/np.log(ldl_ihd_rr)
+
+  RR_adj=(fpg_ihd_rr)/(pow(ldl_ihd_rr, delta_ldl))
 
 Risk Outcome Pair #2: Ischemic stroke
 +++++++++++++++++++++++++++++++++++++
@@ -227,6 +269,35 @@ PAFs and relative risks can be pulled using the following code::
   rrs = get_draws(gbd_id_type='rei_id', gbd_id=105, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[105, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+Once correlation and mediation are included in the model, find joint PAFs 
+by using this :ref:`information <2023_sbp_ldlc_fpg_bmi>` instead of pulling 
+values from GBD. 
+
+Mediation
+^^^^^^^^^
+
+Mediation for ischemic stroke is included for LDL-C. Data for the 
+mediation factor can be found in the csv file above. The rei_id for 
+FPG is 105. The cause_id for IHD is 495. The med_id is 367 for LDL-C. 
+The csv has data for individual draws that will be used. 
+
+The math is written out in the equations below and example python code 
+is also included. 
+
+:math:`delta_\text{LDL} = \frac{log(MF_\text{LDL} * (RR_\text{FPG,unadjusted} -1)+1)} {log(RR_\text{LDL})}`
+
+:math:`RR_\text{FPG,adjusted} = \frac{RR_\text{FPG,unadjusted}}{{RR_\text{LDL}}^{delta_\text{LDL}}}`
+
+Where :math:`MF_\text{LDL}` is the unadjusted mediation factor for LDL-C, :math:`RR_\text{unadjusted}` 
+is from the get_draws code above and the :math:`RR_\text{adjusted}` is what is used to 
+find the risk of FPG on stroke. 
+
+:: 
+
+  delta_ldl = np.log((ldl_mf*(fpg_stroke_rr-1))+1)/np.log(ldl_stroke_rr)
+
+  RR_adj=(fpg_stroke_rr)/(pow(ldl_stroke_rr, delta_ldl))
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++

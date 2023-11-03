@@ -233,6 +233,7 @@ intervention. Scales linearly over 1 year such that there is 0% coverage at base
 * :ref:`Systolic Blood Pressure <2019_risk_effect_sbp>`
 * :ref:`High LDL Cholesterol <2019_risk_effect_ldl>`
 * :ref:`Body Mass Index <2019_risk_effect_bmi>`
+* :ref:`Fasting Plasma Glucose <2019_risk_effect_fpg>`
 
 .. _4.1.4:
 
@@ -288,8 +289,8 @@ Individual intervention pages:
      - Closed
      - 
    * - Age start
-     - 7 years
-     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 7-25 will be modeled but not observed. 
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
    * - Age end
      - 125 years
      - Maximum age at initialization
@@ -297,8 +298,7 @@ Individual intervention pages:
      - None 
      - 
 
-
-**Final Model Run:**
+**Single Draw Run:**
 
 .. list-table:: CVD simulation model population parameters
    :header-rows: 1
@@ -310,14 +310,106 @@ Individual intervention pages:
      - TBD
      - per draw
    * - Number of draws
-     - TBD
+     - 1
+     - We will use draw 829 
+   * - Cohort type
+     - Closed
+     - 
+   * - Age start
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
+   * - Age end
+     - 125 years
+     - Maximum age at initialization
+   * - Sex restrictions
+     - None 
+     - 
+
+Note: 
+  - In order to pick this draw, end results for DALYs and heart failure prevalence were analyzed for a set of 10 draws and 829 was selected as the best middle ground for `all interventions <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Figure_Mockup2.ipynb>`_ 
+  - The draws were also looked at in terms of input data - MI incidence, SBP mean value, etc to ensure that it was also reasonably close to the average for `input data <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Draw_Correlation.ipynb>`_ 
+
+**Seed Testing:**
+
+.. list-table:: CVD simulation model population parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - 50 seeds (10,000 sims per seed)
+     - 
+   * - Number of draws
+     - 5
      - 
    * - Cohort type
      - Closed
      - 
    * - Age start
-     - 7 years
-     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 7-25 will be modeled but not observed. 
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
+   * - Age end
+     - 125 years
+     - Maximum age at initialization
+   * - Sex restrictions
+     - None 
+     - 
+
+Note: 
+  - For this run, results must **be stratified by seed** 
+  - 30 seeds was selected as the size based on this `draw and seed sizing notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/draw_seed_analysis.ipynb>`_
+
+**Draw Testing:**
+
+.. list-table:: CVD simulation model population parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - 30 seeds (10,000 sims per seed)
+     - 
+   * - Number of draws
+     - 50
+     - 
+   * - Cohort type
+     - Closed
+     - 
+   * - Age start
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
+   * - Age end
+     - 125 years
+     - Maximum age at initialization
+   * - Sex restrictions
+     - None 
+     - 
+
+Note: 
+  - 20 draws was selected as the size based on this `draw and seed sizing notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/draw_seed_analysis.ipynb>`_
+
+**Final Model Run:**
+
+.. list-table:: CVD simulation model population parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - 30 seeds (10,000 sims per seed)
+     - per draw
+   * - Number of draws
+     - 20 
+     - 
+   * - Cohort type
+     - Closed
+     - 
+   * - Age start
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
    * - Age end
      - 125 years
      - Maximum age at initialization
@@ -339,9 +431,7 @@ Individual intervention pages:
 ------------------------------
 
 Within this model, simulants move through the healthcare system. The initialization parameters for screening visits 
-are listed separately. Below are diagrams for how blood pressure and LDL-C measurement and medication are handled. 
-Regardless of visit type (screening, follow-up, or emergency), simulants will move through the same pathway for both 
-conditions at each visit. 
+are listed separately. Below are diagrams for how blood pressure and LDL-C measurement and medication, as well as the lifestyle intervention are handled. Regardless of visit type (screening, follow-up, or emergency), simulants will move through the same pathways for all conditions at each visit. 
 
 First, it is determined if the simulant will have a healthcare interaction in that time step. 
 
@@ -401,19 +491,19 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
     - Measurements have a minimum value of 0 enforced [Wallace_2011]_
   * - B
-    - 41.76% will not start medication due to theraputic inertia. The others will start on one drug at half dose. 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Ali_2021]_ [Liu_2017]_
+    - 80% will not start medication due to theraputic inertia. Of those that start medication: 20.5% will start on two drugs at half dose and 79.5% will start on one drug at half dose. [An_2021]_
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 80% was selected based on a statement in Turchin 2010 that stated 1 in 5 encounters with elevated blood pressure lead to medication. [Turchin_2010]_ [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - C
-    - 41.76% will not start medication. Of those that start medication: 45% will receive two drugs at half dose and 55% will receive one drug at half dose  
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
+    - 80% will not start medication. Of those that start medication: 45% will receive two drugs at half dose and 55% will receive one drug at half dose  
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 80% was selected based on a statement in Turchin 2010 that stated 1 in 5 encounters with elevated blood pressure lead to medication. [Turchin_2010]_ [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - D
-    - Only adherent simulants will move up categories. 41.76% will not change medication due to theraputic inertia. The remainder will move to the next treatment category on the ladder. If a simulant is in the highest category, there will be no change.  
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Ali_2021]_ [Liu_2017]_
+    - Only adherent simulants will move up categories. 87% will not change medication due to theraputic inertia. The remainder will move to the next treatment category on the ladder. If a simulant is in the highest category, there will be no change.  
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 87% was selected here from Bolen 2008 which found that in 13% of cases, patients were titrated up. [Bolen_2008]_ [Ali_2021]_ [Liu_2017]_
   * - E (outreach intervention scenarios)
     - If simulant is eligible, either 50% or 100% enrolled depending on scenario  
     - For 50% scenario, assignment is random 
   * - F (polypill intervention scenarios)
-    - If simulant has a measured SBP of 140+ and is eligible, either 50% or 100% are enrolled depending on scenario  
+    - If simulant has a measured SBP of 140+ OR 130+ and a history of MI or stroke, either 50% or 100% are enrolled depending on scenario  
     - 
 
 
@@ -435,25 +525,86 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=0.08 mmol/L 
     - Measurements have a minimum value of 0 enforced [McCormack_2020]_
   * - C
-    - If simulant is in the acute or post MI or stroke states 
+    - If simulant is in: AMI, Post MI, HF_IHD, AMI_HF, HF_Resid, acute ischemic stroke, or chronic ischemic stroke 
     - 
   * - D
-    - 19.4% will not start medication. Of those that start medication, 42% will receive high intensity statin; 52% medium intensity; and 6% low intensity 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - 84% will not start medication. Of those that start medication, 42% will receive high intensity statin; 52% medium intensity; and 6% low intensity 
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 84% was selected from Goldberg 2007 which found that statin dose was increased 16% of the time. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
   * - E
-    - 19.4% will not start medication. Of those that start medication, 24% will receive high intensity statin; 66% medium intensity; and 10% low intensity 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - 84% will not start medication. Of those that start medication, 24% will receive high intensity statin; 66% medium intensity; and 10% low intensity 
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 84% was selected from Goldberg 2007 which found that statin dose was increased 16% of the time. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
   * - F
-    - 19.4% will not start medication. Of those that start medication, 15% will receive high intensity statin; 71% medium intensity; and 14% low intensity 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - 84% will not start medication. Of those that start medication, 15% will receive high intensity statin; 71% medium intensity; and 14% low intensity 
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit. 84% was selected from Goldberg 2007 which found that statin dose was increased 16% of the time. [Goldberg_2007]_ [Arnett_2019]_ [Nguyen_2015]_
   * - G
-    - Only adherent simulants will move up categories. 19.4% will not move up medication categories due to theraputic inertia 
-    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ 
+    - Only adherent simulants will move up categories. 84% will not move up medication categories due to theraputic inertia 
+    - Theraputic inertia should be calculated based on section 4.3.1 on each healthcare visit   
   * - H
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - 
 
+Notes: 
+ - We added an additional stratificaiton to LDL-C treatment assignment for simulants over 75. In ACC/AHA guidelines, stain use in older populations is based on clinical assessment, which is difficult to include in a simulation model. 
+ - Here, we set guidelines for use based on LDL-C level that will result in treatment levels approximately aligned to NHANES statin use in older adults. We do this by setting the LDL-C level for treatment equal to the 65th percentile in exposures, as NHANES has about 35% of older adults on statins. Overtime, this will lead to about the correct number of simulants on treatment. 
+ - For LDL-C we only have one inertia value for treatment intialization and up-tiration instead of the two seen in SBP. This is due to limited data availablility. 
 
+**Lifestyle Intervention Ramp**
+
+.. image:: lifestyle_ramp.svg
+
+.. list-table:: Lifestyle Intervention Inputs
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - A
+    - Simulant is age 35+, BMI 25+ AND has not had their FPG tested in 3 years 
+    - 
+  * - B
+    - Eligible simulants will have their FPG measured 71% of the time 
+    - [Mehta_2017]_ 
+  * - C
+    - If simulant is eligible, either 8.55%, 50% or 100% depending on scenario 
+    - 
+
+.. _uscvd4.3.1:
+
+4.3.1 Therapeutic Inertia Propensity
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Therapeutic inertia is a complex combination of simulant-level characteristics and 
+random variation. Therefore, we want each individual simulant’s propensity 
+to be autocorrelated between healthcare visits, but we don’t want this autocorrelation 
+to be 100%. To model this, we use a combination of a random component which is 
+redrawn at each healthcare visit and a simulant level component with is constant over 
+the course of the simulation. 
+
+By the time a simulant has their first healthcare visit, (it does not matter if 
+this happens at initialization, or first healthcare visit), the simulant-specific 
+component should be randomly drawn from a normal distribution with mean 0 and 
+variance 0.5.
+
+At each healthcare visit, the random component should be randomly drawn from a 
+normal distribution with mean 0 and variance 0.5.
+
+The last step is combining these two components, which is done with this equation:
+
+.. math::
+  \text{inertia_propensity} = \Phi(\text{simulant_component} + \text{random_component})
+
+The sum of the two components has a standard normal distribution, which means 
+that the standard normal’s CDF of that sum is uniformly distributed between 
+0 and 1. This can be seen visually in the notebook below. 
+
+This final simulant inertia propensity will be compared against the cutoffs in the 
+healthcare modeling section to determine if a simulant overcomes inertia. 
+
+The math for this is modeled after :ref:`income in the PRL work <census_prl_income>`. The variances 
+were found via `nanosim testing <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/therapeutic_inertia_nanosim.ipynb>`_. To derive these values, a percent of eligible 
+people on medication was found from NHANES and then we plugged different variances into 
+the nanosim until we achieved the desired medication level in equilibrium. 
 
 .. _uscvd4.4:
 
@@ -597,7 +748,7 @@ is assumed that different medications have a similar impact and therefore are no
   * - Three Drugs at Standard Dose 
 
 
-Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is `at this link <https://github.com/ihmeuw/vivarium_nih_us_cvd/blob/main/src/vivarium_nih_us_cvd/data/drug_efficacy_sbp.csv>`_ [Law_2009]_
+Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is at this file path: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/drug_efficacy_sbp.csv [Law_2009]_
 
 Due to lack of data, the same efficacy value for SBP will be used for all simulants. 
 **Please note that this is intentionally different than for LDL-C medication.** 
@@ -627,7 +778,7 @@ similar and therefore are not modeled individually.
 
 
 LDL-C treatment efficacy is a **percent reduction** in LDL-C level. This means that simulants with higher 
-initial LDL-C levels will see a higher total reduction. `The full efficacy data is here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data/drug_efficacy_ldl.csv>`_ [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
+initial LDL-C levels will see a higher total reduction. The full efficacy data is file path: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/drug_efficacy_ldl.csv [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
 
 For each input draw, a parameter value for efficacy will be selected based on the mean and 
 standard deviation provided in the table above. Assume a normal distribution for the parameter value. 
@@ -675,6 +826,10 @@ Where adherence score = 0 for primary or secondary nonadherent; and adherence sc
     - 
     - All simulants will be assigned a follow-up from a uniform distribution of 0-3 months 
     - Burn in period will allow the distribution of follow-up appointments to reach equilibrium prior to time start 
+  * - Last FPG Test 
+    - 
+    - Simulants who are not eligible for FPG testing (age is <35 OR BMI <25) will never have had an FPG test. Among those eligible, 29% will never have had an FPG test and 71% will have their last test date selected from a uniform distirbution between 0-3 years prior to time start. 
+    - For our model, it only matters if the simulant has been tested within 3 years. So for eligible simulants who have not had a test in the past 3 years, it does not matter if they were tested 3.1 years ago or never, it will have the same outcome in the simulation.  
 
 
 Creation of "Untreated" SBP Values on Initializaiton
@@ -818,11 +973,11 @@ a non-adherent simulant is assigned to medication:
 
 These covariate values are calculated for each simulant and are then plugged into the below equations to provide the individual probabilities. 
 
- :math:`SBP_{i} = exp((-6.75) + (0.025 * SBP_{level}) + (-0.0045 * LDL_{level}) + (0.05 * age_{(yrs)}) + (0.16 * sex))` 
+ :math:`SBP_{i} = exp((-6.75) + (0.025 * SBP_{level}) + (-0.173 * LDL_{level}) + (0.05 * age_{(yrs)}) + (0.158 * sex))` 
 
- :math:`LDL_{i} = exp((-4.23) + (-0.0026 * SBP_{level}) + (-0.005 * LDL_{level}) + (0.062 * age_{(yrs)}) + (-0.19 * sex))` 
+ :math:`LDL_{i} = exp((-4.23) + (-0.0026 * SBP_{level}) + (-0.196 * LDL_{level}) + (0.062 * age_{(yrs)}) + (-0.19 * sex))` 
 
- :math:`Both_{i} = exp((-6.26) + (0.018 * SBP_{level}) + (-0.014 * LDL_{level}) + (0.069 * age_{(yrs)}) + (0.13 * sex))` 
+ :math:`Both_{i} = exp((-6.26) + (0.018 * SBP_{level}) + (-0.524 * LDL_{level}) + (0.069 * age_{(yrs)}) + (0.13 * sex))` 
 
 Where sex = 1 for men and 2 for women 
 and SBP and LDL level refer to the raw values from GBD 
@@ -861,6 +1016,7 @@ Code is below for reference
   data[,tx:=ifelse(sbptx==0 & choltx==0, "none", ifelse(sbptx==1 & choltx==0, "bponly", 
       ifelse(sbptx==0 & choltx==1, "cholonly", ifelse(sbptx==1 & choltx==1, "both", NA))))]
   data[,tx2:=factor(tx, levels=c("none", "bponly", "cholonly", "both"))]
+  data$ldl <- data$lbdldl * 0.02586
 
   meds <- multinom(tx2 ~ bpsys + lbdldl + sex_id + age_year, data=data)
 
@@ -872,24 +1028,24 @@ Code is below for reference
   converged
 
   summary(meds)
-  Call: multinom(formula = tx2 ~ bpsys + lbdldl + sex_id + age_year, 
+  Call: multinom(formula = tx2 ~ bpsys + ldl + sex_id + age_year, 
     data = data)
 
   Coefficients:
-           (Intercept)        bpsys       lbdldl     sex_id   age_year
-  bponly     -6.746432  0.024905946 -0.004474287  0.1578084 0.05006270
-  cholonly   -4.234380 -0.002564668 -0.005063271 -0.1900133 0.06173726
-  both       -6.262507  0.018470096 -0.013548739  0.1326292 0.06909707
+           (Intercept)        bpsys        ldl     sex_id   age_year
+  bponly     -6.746073  0.024903737 -0.1729900  0.1577051 0.05006258
+  cholonly   -4.234099 -0.002565917 -0.1957560 -0.1899843 0.06173408
+  both       -6.261919  0.018468094 -0.5239551  0.1326455 0.06909274
 
   Std. Errors:
-           (Intercept)       bpsys       lbdldl     sex_id    age_year
-  bponly     0.1863489 0.001265926 0.0006439986 0.04686429 0.001632670
-  cholonly   0.2665387 0.001872484 0.0009045871 0.06485975 0.002270549
-  both       0.2067298 0.001371421 0.0007557389 0.05139671 0.001875866
+           (Intercept)       bpsys        ldl     sex_id    age_year
+  bponly     0.1863466 0.001265914 0.02490310 0.04686404 0.001632663
+  cholonly   0.2665264 0.001872415 0.03497859 0.06485717 0.002270436
+  both       0.2067255 0.001371409 0.02922430 0.05139634 0.001875815
 
   Residual Deviance: 29807.44 
   AIC: 29837.44 
-
+ 
 
 .. _uscvd4.6:
 
@@ -932,19 +1088,64 @@ Code is below for reference
     - `Validation workbook for Model 7 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model7_VV.ipynb>`_. V&V worked well for this model. In the incidence of MI and stroke, there is a clear difference between scenarios that is in line with back of the envelope expectations. We do not visually see a separation in ACMR, but that was also expected. 
   * - 8.0
     - Adding Polypill Intervention
-    - `Validation workbook for Model 8 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model8_VV.ipynb>`_. The change between scenarios is less visually apparent in this model, which is expected as this only affects SBP and works for fewer simulants. We are planning to review findings with the team to discuss if we should adjust the intervention or not. 
+    - `Validation workbook for Model 8 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model8_VV.ipynb>`_. The change between scenarios was less visually apparent in this model. Following discussion with Greg, we had the intervention change efficacy and have higher enrollment. This lead to better scenario differentiation. 
   * - 9.0
     - Adding BMI
-    -  
-  * - 10.0
-    - Adding Heart Failure  
-    -  
+    - `Validation workbook for Model 9 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model9_VV.ipynb>`_ and `interactive sim for Model 9 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model9_VV.ipynb>`_. We had significant issues with BMI validation. The standard deviation for BMI has a lot of variation. After discussing with the GBD modeling team, we removed all standard deviations over 15. However, we still see significant variation between draws, which is leading to higher exposure values than expected and higher incidence and CSMR rates. The interactive sim shows that the model is working as expected, and we believe the issues is with the input data. Currently, we are considering using data from Greg's team, using a mean draw, or ignoring until GBD 2021 is available.  
+  * - 10.0 
+    - Adding FPG 
+    - `Validation workbook for Model 10 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model10_VV.ipynb>`_. FPG validation largely worked as expected. We found that FPG levels remained stable over time and matched the artifact. In the `interactive sim for Model 10 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model10_VV.ipynb>`_, we additionally saw that standard deviation matched the expected outputs. There were some high RRs for FPG -> MI in older populations. This appears to be a result of a cluster of higher exposure values in these groups, also visible on exposure graphs. Therefore, we think that FPG is validating as expected.  
   * - 11.0
-    - FPG 
-    -  
+    - Adding Heart Failure  
+    - After heart failure was added, the model would not run due to transition rates summing to greater than 1. This was causes by very high risk individuals who would have an 100% chance of a cardiac event on that time step. To fix this, we updated the model to include the US Health Disparities team risk factor data for SBP, BMI and LDL-C. In addition, we set new maximum exposure values for all 4 risks. 
+  * - 11.1
+    - Changes in Risk Factors
+    - With the new changes in risk factors and heart failure, we re-ran the model as a cause only model. The `validation workbook for model 11 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model11_VV.ipynb>`_. As this included only causes, we checked heart failure which appeared to validate as expected. 
   * - 12.0
+    - LDL-C Ramp Update 
+    - This run included risks and medications but was still only the baseline scenario. The validation workbooks for `causes <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model12_cause_VV.ipynb>`_, `risks <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model12_risks_VV.ipynb>`_, and the `interactive sim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model12_VV.ipynb>`_ are here. There were a number of possible V&V issues identified, which are being tracked with next steps in this `document <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/GBD_CVD/V%20and%20V%20Questions.docx?d=w18c68f6abf2045cca0b79147de851454&csf=1&web=1&e=aev52f>`_. 
+  * - 12.1
+    - V&V Follow-up 
+    - To follow-up on some of the issues above, we are completing a model run with risks and risk effects but not medication. In addition, we will record results starting in 2021. 
+  * - 13.0
     - Lifestyle Intervention  
-    -  
+    - This was a complete run including all scenarios. No new issues were found regarding the new lifestyle scenario. Runs with all interventions were completed and looked as expected. Greg confirmed that the ordering and magnitude of decreases aligns to expectations. The validation workbooks are here for `causes only <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model13_cause_VV.ipynb>`_ and `risks only <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model13_risks_VV.ipynb>`_. 
+  * - 14.0
+    - Adding the transient state 
+    - To help fix observed issues, we added a transient state to the IHD cause model. This ensures that the probability of an event for a single simulant never goes over 100%. More information can be found on the IHD cause model page. After some debugging, the model appears to be working as expected. This model was validated in the same workbooks as model 12 and links can be found above. At this time, the new list of outstanding `possible V and V items is here <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B3B5D387C-0BAC-4312-99FD-0EB43FC85944%7D&file=Model_Updates_5.26.23.docx&action=default&mobileredirect=true>`_. None of these are under active investigation but are important to note. 
+  * - 15.0
+    - Extended V&V Attempts 
+    - There were many runs and a significant amount of back and forth to try to solve some V&V issues. The main issues were: too low exposures at initialization, decreasing risk factors over time, and too low incidence for MI and stroke. The test runs completed and current thinking are best recorded in this `tracker <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BC6881D3C-63E1-450A-A1A6-3A866080D0DD%7D&file=CVD_VV_Tracker_06202023.xlsx&action=default&mobileredirect=true>`_. At this time, this has not been solved. 
+  * - 16.0
+    - Adding Correlation 
+    - No new issues found with adding correlation. `Causes with correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_correlation_07.25.2023.ipynb>`_ and `risks with correlation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/risks_VV_07.25.2023.ipynb>`_ were checked in the same manner as previous runs. Additionally, `simulant exposure values <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/interactive_correlation.ipynb>`_ were checked for correlation in the interactive sim both on initialization and after 25 time steps. It was found that correlation varied around the expected input values. 
+  * - 17.0
+    - Add New Observer - Binned Exposure  
+    - The new observer seems to be working well, V&V for this observer only can be found in the `binned exposure notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/binned_risks_08.08.2023.ipynb>`_. 
+  * - 18.0
+    - Test Runs for Timing on 10 States 
+    - These runs were completed and the V&V was saved to this `folder <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/tree/main/10_locations_7.18.23>`_. V&V largely worked well and no state specific issues were noted. There was an issue with randomness being included between scenarios which was resolved and fixed.
+  * - 19.0
+    - Adjusting Theraputic Inertia 
+    - After adjustments to theraputic inertia, initialized values for medication are more stable throughout the sim. This workbook included the `latest medication rates <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_08_3_23.ipynb>`_. There are still three outstanding questions: (1) the no treatment group increases over time in the sim  for both medications (2) very few simulants move to higher treatment categories and (3) the age for LDL-C medication change should be lower in men to prevent drift. However, we are leaving this until after the 51 location run is working to reassess. 
+  * - 20.0
+    - Single draw run in 51 locations 
+    - Runs were completed with draw 829. The V&V for causes and risks looked to be expected in this notebook for `51 location causes <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_multi_location_8.4.23.ipynb>`_ and `51 location risks <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_multi_location_8_7_23.ipynb>`_. However, there were issues with overlap between scenarios. We are still investigating this but it might be related to heart failure. Additionally, there are still issues with the PAFs containing zero values. We are currently avoiding this by selecting specific draws, however, a more permanent solution would be preferred. 
+  * - 21.0
+    - Add Mediation and PAF Recalculations 
+    - Runs were completed for mediation and PAFs were recalculated. PAFs no longer contain any zero values. Most of the model is working as expected. The `causes with mediation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_mediation_10.16.2023.ipynb>`_ are working as prior model versions. The `risks with mediation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_10_16_23.ipynb>`_ have strange results in the 95+ age group which is still being investigated. 
+  * - 21.1
+    - Mediation and PAF Recalculations with Fix for 95+ Age Group 
+    - With the updates to the exposure observer for the oldest age group, the `risks for 95+ <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_10_20_23.ipynb>`_ have resolved. 
+  * - 22.0
+    - Changes to Inertia with Simulant and Random Propensities 
+    - The medication levels were tested for a `50 50 component split <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_10_18_23.ipynb>`_ and a `75 random 25 simulant component split <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_10_20_23.ipynb>`_. It was decided to proceed with the 50/50 split. There are some changes in treatment over the course of the sim, but we do not expect them to impact final results significantly.  
+  * - 23.0
+    - Update to GBD 2021 
+    - Note: not planned to be completed before NIH results 
+  * - 24.0
+    - Final Runs 
+    - Research team to specify this further 
 
 Model 3 V&V for the relative risk with angina showed a lot of variability: 
     .. image:: Model3_VV_Angina.png
@@ -992,11 +1193,11 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
   * - Mean FPG 
     - sum of FPG * person time *NOTE: NOT IN CURRENT MODEL*
     - Only needed for V&V 
-  * - Population achieving target LDL-C
-    - sum of person time at or below 1.81 LDL-C; can be included only in final models 
+  * - Population achieving target LDL-C values
+    - sum of person time in each category: <2.59, >/=2.59 and <3.36, >/=3.36 and <4.14, >/=4.14 and <4.91, >/=4.91; can be included only in final models 
     - 
-  * - Population achieving target SBP
-    - sum of person time at or below 130 SBP; can be included only in final models 
+  * - Population achieving target SBP values
+    - sum of person time in each category: <130, >/=130 and <140, >/=140 SBP; can be included only in final models 
     - 
   * - Healthcare appointments 
     - sum of healthcare appointments 
@@ -1096,6 +1297,9 @@ Some limitations of this analysis include:
 .. [Baumgartner_2018] Baumgartner, Pascal C., R. Brian Haynes, Kurt E. Hersberger, and Isabelle Arnet. 2018. “A Systematic Review of Medication Adherence Thresholds Dependent of Clinical Outcomes.” Frontiers in Pharmacology 9. 
   https://www.frontiersin.org/articles/10.3389/fphar.2018.01290 
 
+.. [Bolen_2008] Bolen, Shari Danielle, T. Alafia Samuels, Hsin-Chieh Yeh, Spyridon S. Marinopoulos, Maura McGuire, Marcela Abuid, and Frederick L. Brancati. 2008. “Failure to Intensify Antihypertensive Treatment by Primary Care Providers: A Cohort Study in Adults with Diabetes Mellitus and Hypertension.” Journal of General Internal Medicine 23 (5): 543–50. 
+  https://doi.org/10.1007/s11606-008-0507-2.
+
 .. [Byrd_2011] Byrd, James B., Chan Zeng, Heather M. Tavel, David J. Magid, Patrick J. O’Connor, Karen L. Margolis, Joe V. Selby, and P. Michael Ho. 2011. “Combination Therapy as Initial Treatment for Newly Diagnosed Hypertension.” American Heart Journal 162 (2): 340–46. 
   https://doi.org/10.1016/j.ahj.2011.05.010.
 
@@ -1108,9 +1312,6 @@ Some limitations of this analysis include:
 .. [Descamps_2015] Descamps, Olivier, Joanne E. Tomassini, Jianxin Lin, Adam B. Polis, Arvind Shah, Philippe Brudi, Mary E. Hanson, and Andrew M. Tershakovec. 2015. “Variability of the LDL-C Lowering Response to Ezetimibe and Ezetimibe + Statin Therapy in Hypercholesterolemic Patients.” Atherosclerosis 240 (2): 482–89. 
   https://doi.org/10.1016/j.atherosclerosis.2015.03.004.
 
-.. [Ely-2017] Ely, Elizabeth K., et al. "A national effort to prevent type 2 diabetes: participant-level evaluation of CDC’s National Diabetes Prevention Program." Diabetes care 40.10 (2017): 1331-1341.
-  https://care.diabetesjournals.org/content/40/10/1331
-
 .. [Fischer_2010] Fischer, Michael A., Margaret R. Stedman, Joyce Lii, Christine Vogeli, William H. Shrank, M. Alan Brookhart, and Joel S. Weissman. 2010. “Primary Medication Non-Adherence: Analysis of 195,930 Electronic Prescriptions.” Journal of General Internal Medicine 25 (4): 284–90. 
   https://doi.org/10.1007/s11606-010-1253-9 
 
@@ -1119,6 +1320,9 @@ Some limitations of this analysis include:
 
 .. [Goff_2014] Goff, David C., Donald M. Lloyd-Jones, Glen Bennett, Sean Coady, Ralph B. D’Agostino, Raymond Gibbons, Philip Greenland, et al. 2014. “2013 ACC/AHA Guideline on the Assessment of Cardiovascular Risk.” Circulation 129 (25_suppl_2): S49–73. 
   https://doi.org/10.1161/01.cir.0000437741.48606.98
+
+.. [Goldberg_2007] Goldberg, Kenneth C., Stephanie D. Melnyk, and David L. Simel. 2007. “Overcoming Inertia: Improvement in Achieving Target Low-Density Lipoprotein Cholesterol.” The American Journal of Managed Care 13 (9): 530–34.
+  https://pubmed-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/17803367/ 
 
 .. [Gu_2012] Gu, Qiuping, Vicki L. Burt, Charles F. Dillon, and Sarah Yoon. 2012. “Trends in Antihypertensive Medication Use and Blood Pressure Control Among United States Adults  With Hypertension.” Circulation 126 (17): 2105–14. 
   https://doi.org/10.1161/CIRCULATIONAHA.112.096156. 
@@ -1138,11 +1342,6 @@ Some limitations of this analysis include:
 .. [McCormack_2020] McCormack, James P., and Daniel T. Holmes. 2020. “Your Results May Vary: The Imprecision of Medical Measurements.” BMJ 368 (February): m149. 
   https://doi.org/10.1136/bmj.m149.
 
-.. [Metz-et-al-2000] Metz, Jill A., et al. "A randomized trial of improved weight loss with a prepared meal plan in overweight and obese patients: impact on cardiovascular risk reduction." Archives of internal medicine 160.14 (2000): 2150-2158.
-  https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/485403
-
-.. [Morales_2018] Morales, Clotilde, Núria Plana, Anna Arnau, Laia Matas, Marta Mauri, Àlex Vila, Lluís Vila, et al. 2018. “Causas de no consecución del objetivo terapéutico del colesterol de las lipoproteínas de baja densidad en pacientes de alto y muy alto riesgo vascular controlados en Unidades de Lípidos y Riesgo Vascular. Estudio EROMOT.” Clín. investig. arterioscler. (Ed. impr.), 1–9.
-
 .. [Munoz-NEJM] Muñoz, Daniel, et al. "Polypill for cardiovascular disease prevention in an underserved population." New England Journal of Medicine 381.12 (2019): 1114-1123.
   https://www.nejm.org/doi/10.1056/NEJMoa1815359
 
@@ -1156,6 +1355,9 @@ Some limitations of this analysis include:
 
 .. [Thom-2013] Thom, Simon, et al. "Effects of a fixed-dose combination strategy on adherence and risk factors in patients with or at high risk of CVD: the UMPIRE randomized clinical trial." Jama 310.9 (2013): 918-929.
 	https://jamanetwork.com/journals/jama/fullarticle/1734704
+
+.. [Turchin_2010] Turchin, Alexander, Saveli I. Goldberg, Maria Shubina, Jonathan S. Einbinder, and Paul R. Conlin. 2010. “Encounter Frequency and Blood Pressure in Hypertensive Patients with Diabetes.” Hypertension 56 (1): 68–74. 
+  https://doi.org/10.1161/HYPERTENSIONAHA.109.148791.
 
 .. [Wallace_2011] Wallace, Emma, and Tom Fahey. 2011. “Measuring Blood Pressure in Primary Care: Identifying ‘White Coat Syndrome’ and Blood Pressure Device Comparison.” The British Journal of General Practice 61 (590): 544–45.
   https://doi.org/10.3399/bjgp11X593749. 

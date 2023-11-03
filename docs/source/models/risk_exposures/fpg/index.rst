@@ -140,7 +140,26 @@ The quantity of interest is exposure to the mean fasting plasma glucose level re
 level is naturally occurring or occurs via use of medication; we assume full reversibility of risk and 
 do not account for duration of exposure to elevated FPG.
 
+The values for FPG generated include exposures outside of a reasonably expected 
+range. In addition, we do not think relative risks continue in a log 
+linear pattern indefinitely, as is implemented in this model. A natural ceiling of 
+risk associated with a single risk factor probably exists. 
 
+To account for this, we implemented maximum and minimum 
+exposures based on NHANES. The maximum was set to include 99.5% of NHANES data, meaning 
+that 0.5% or fewer participants had values more extreme than the maximum. 
+
+The minimum FPG is 1 and the maximum is 16 mmol/L. 
+
+Another noticed issue with GBD data is striations in the standard deviation values. The graph below 
+visually shows this issue. After speaking with GBD modelers, it seems that these are known issues 
+and will not be addressed in GBD 2021. These striations are causing higher than expected FPG exposures. 
+To account for this, we are instead using standard deviations derived from NHANES data. 
+
+.. image:: FPG_SD.png
+
+To create these new standard deviation draws, we bootstrapped the NHANES data to a random resampling of the original 
+dataset, and then calculated the standard deviations by age/sex. The full workbook can be `found here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/fpg_std_nhanes.R>`_
 
 Data Description Tables
 +++++++++++++++++++++++
@@ -159,8 +178,8 @@ The rei_id for FPG is 105.
      - 8909 
      -
    * - Standard deviation 
-     - 18705 
-     -
+     - /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/fpg_std_nhanes_draw_level.csv
+     - Due to limited sample size in older age groups, please use the 80-85 age group for all simulants 80+ 
    * - Relative risk, continuous 
      - 9056 
      - Must be accessed with get_draws 
@@ -176,7 +195,7 @@ Validation Criteria
 +++++++++++++++++++
 
 1. Does the mean in the model match the mean in GBD? 
-2. Does the standard deviation in the model match the std in GBD? 
+2. Does the standard deviation in the model match the std in the artifact? 
 
 
 References

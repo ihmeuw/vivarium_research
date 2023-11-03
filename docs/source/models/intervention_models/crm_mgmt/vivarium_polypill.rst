@@ -72,7 +72,7 @@ Vivarium Modeling Strategy
 Eligibility and Initiation
 ++++++++++++++++++++++++++
 
-- SBP >=140 mmHg 
+- SBP >=140 mmHg OR SBP >= 130 and a history of myocardial infarction or stroke [Webster_2018]_
 - Enrollment in the intervention only happens during interactions with healthcare, as shown :ref:`here <us_cvd_concept_model>`
 
 
@@ -144,3 +144,6 @@ References
 [Thom-2013]_ 
 
 [Munoz-NEJM]_ 
+
+.. [Webster_2018] Webster, Ruth, Abdul Salam, H. Asita de Silva, Vanessa Selak, Sandrine Stepien, Senaka Rajapakse, Stanley Amarasekara, et al. 2018. “Fixed Low-Dose Triple Combination Antihypertensive Medication vs Usual Care for Blood Pressure Control in Patients With Mild to Moderate Hypertension in Sri Lanka: A Randomized Clinical Trial.” JAMA 320 (6): 566–79. 
+  https://doi.org/10.1001/jama.2018.10359.
