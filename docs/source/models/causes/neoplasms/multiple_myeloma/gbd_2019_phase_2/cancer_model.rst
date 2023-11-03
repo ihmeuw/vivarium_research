@@ -171,8 +171,35 @@ of mortality among simulants with multiple myeloma and excess mortality among
 simulants with multiple myeloma for "other causes," as typically defined by the
 cause-deleted all-cause mortality rate, should be zero.
 
-Multiplier
-++++++++++
+Multiplier (not implemented)
+++++++++++++++++++++++++++++
+
+.. note::
+  In order to speed up the simulation, we considered "scaling up" prevalence and incidence.
+  Multiple myeloma is a very rare disease, so this has the potential to enormously reduce
+  computational requirements and/or decrease stochastic uncertainty of results.
+  However, challenges in determining how much this would bias our results led us not to pursue
+  this path in Phase 2.
+
+  There are two approaches we considered to perform this "scaling up."
+  One is to literally multiply the incidence and prevalence rates by a constant.
+  The other is to multiply the prevalence rate by a constant and scale the incidence rate in
+  a way that *accounts* for the change in size of the susceptible population.
+
+  This section describes the bias that would be expected if we used the first (simpler) approach,
+  **and our multiple myeloma prevalence rates (divided by the multiplier) validated to GBD.**
+  However, we know that even in the current model (equivalent to the multiplier being equal to 1),
+  our prevalence rates are very different from GBD in older age groups.
+
+  I now believe that using the second approach is clearly better, and did some thinking on what the
+  bias would be, **accounting for the mismatch between simulated and GBD prevalence**, `here <https://github.com/ihmeuw/vivarium_research/pull/908#discussion_r911492115>`_.
+  Broadly speaking, I think our bias in incident cases relative to prevalent cases is already substantial without a multiplier,
+  and wouldn't get much worse with one.
+
+  It could also be a cleaner solution than any of this to run a simulation where **everyone** has multiple myeloma,
+  directly calculate from GBD what the incidence-to-prevalence ratio should be (in the baseline scenario), and implement that in Vivarium
+  as a sort of "fertility" component.
+  In other words, tracking only the population with multiple myeloma, and treating incidence as a simulation enter event.
 
 Because simulants in the susceptible state do not figure into our results, and multiple myeloma is so rare,
 the standard approach would require a very large population in order to have enough simulants with MM for analysis.
@@ -236,7 +263,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      - Notes
    * - S
      - prevalence
-     - Initialized to (1 - (prev_c486 * 50))
+     - Initialized to (1 - (prev_c486 * multiplier)); multiplier is currently 1; see multiplier section above
      - 
    * - S
      - excess mortality rate
@@ -244,7 +271,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      - 
    * - NDMM
      - prevalence
-     - Initialized to prev_c486 * 50; derived from "burn-in" method
+     - Initialized to prev_c486 * multiplier; derived from "burn-in" method
      - 
    * - NDMM
      - excess mortality rate
@@ -295,7 +322,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
    * - incidence_MM
      - S
      - NDMM
-     - :math:`\frac{\text{incidence_c486} * 50}{1 - \text{prev_c486}}`
+     - :math:`\frac{\text{incidence_c486} * multiplier}{1 - \text{prev_c486}}`; multiplier is currently 1; see multiplier section above
      - incidence of MM among susceptible population
    * - incidence_MM_first_relapse
      - NDMM

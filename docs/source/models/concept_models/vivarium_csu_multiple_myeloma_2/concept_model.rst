@@ -164,7 +164,7 @@ United States.
 Population description:
 
 * Cohort type: Prospective closed cohort of individuals aged 15 years and older. The sim duration is 15 years (see below), so results above age 30 will not be impacted by the open/closed distinction; essentially all multiple myeloma occurs at age 30+.
-* Size of largest starting population: 2,000 simulants
+* Size of largest starting population: 100,000 simulants
 * Time span: Jan 1, 2013 to Dec 31, 2027 (Jan 1, 2013 to Jan 1, 2023 is a 10-year long burn-in period)
 * Time step: 28 days (final run) or 90 days (intermediate runs) -- the only input data that depends on the timestep is the time-varying hazard; we will have a copy of those CSVs for each of the two time step values
 
