@@ -484,6 +484,7 @@ Validation and Verification Criteria
  - MM incidence stratified by age, sex, and year should match GBD 2019 age-/sex-specific MM incidence. MM incidence stratified by only age and year should match GBD 2019 age-specific MM incidence. MM incidence stratified by only sex and year should match GBD 2019 sex-specific MM incidence, among the 30+ year old population (to avoid cohort effects). MM incidence stratified by only year should match GBD 2019 MM incidence, again among the 30+ year old population.
  - The same as the previous for MM prevalence, except that it only need **approximately** match. As long as deviations are not too large among the largest age groups, this is acceptable.
  - Simulation mortality rates in the MM states, stratified by year and age and/or sex as above, should **approximately** match GBD 2019 all-cause mortality with the MM cause deleted plus the GBD 2019 MM EMR.
+ - Simulation mortality rates in the non-MM state, stratified by year and age and/or sex as above, should match GBD 2019 all-cause mortality with the MM cause deleted.
  - MM-state-specific survival analysis in the baseline scenario of time-to-death (or overall survival in the case of fourth and higher relapse) and time-to-next-treatment by disease state should match the corresponding curves obtained from Flatiron survival analysis. For detail on how risks will be calculated in each simulation timestep, see the V&V section of :ref:`the MM treatment documentation <multiple_myeloma_treatment>`.
  - The proportions of simulants with MM in the different MM cause model states should change from initialization (since all simulants are initialized into NDMM) and then stabilize without a significant time trend before 2021, indicating that our burn-in period is long enough to reach a steady state.
 
@@ -493,3 +494,6 @@ Validation and Verification Criteria
   We believe this is due in part to the *replacement* of all-cause mortality with the mortality from the Flatiron cohort,
   instead of back-calculating excess mortality.
   If we return to this model, this should be a priority area to improve.
+
+.. todo::
+  In the existing V&V, mortality was not validated conditional on MM state as described above, only overall.
