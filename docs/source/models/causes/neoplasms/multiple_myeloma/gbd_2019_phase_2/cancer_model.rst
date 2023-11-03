@@ -171,6 +171,52 @@ of mortality among simulants with multiple myeloma and excess mortality among
 simulants with multiple myeloma for "other causes," as typically defined by the
 cause-deleted all-cause mortality rate, should be zero.
 
+Multiplier (not implemented)
+++++++++++++++++++++++++++++
+
+.. note::
+  In order to speed up the simulation, we considered "scaling up" prevalence and incidence.
+  Multiple myeloma is a very rare disease, so this has the potential to enormously reduce
+  computational requirements and/or decrease stochastic uncertainty of results.
+  However, challenges in determining how much this would bias our results led us not to pursue
+  this path in Phase 2.
+
+  There are two approaches we considered to perform this "scaling up."
+  One is to literally multiply the incidence and prevalence rates by a constant.
+  The other is to multiply the prevalence rate by a constant and scale the incidence rate in
+  a way that *accounts* for the change in size of the susceptible population.
+
+  This section describes the bias that would be expected if we used the first (simpler) approach,
+  **and our multiple myeloma prevalence rates (divided by the multiplier) validated to GBD.**
+  However, we know that even in the current model (equivalent to the multiplier being equal to 1),
+  our prevalence rates are very different from GBD in older age groups.
+
+  I now believe that using the second approach is clearly better, and did some thinking on what the
+  bias would be, **accounting for the mismatch between simulated and GBD prevalence**, `here <https://github.com/ihmeuw/vivarium_research/pull/908#discussion_r911492115>`_.
+  Broadly speaking, I think our bias in incident cases relative to prevalent cases is already substantial without a multiplier,
+  and wouldn't get much worse with one.
+
+  It could also be a cleaner solution than any of this to run a simulation where **everyone** has multiple myeloma,
+  directly calculate from GBD what the incidence-to-prevalence ratio should be (in the baseline scenario), and implement that in Vivarium
+  as a sort of "fertility" component.
+  In other words, tracking only the population with multiple myeloma, and treating incidence as a simulation enter event.
+
+Because simulants in the susceptible state do not figure into our results, and multiple myeloma is so rare,
+the standard approach would require a very large population in order to have enough simulants with MM for analysis.
+To allow for meaningful results with smaller populations, we have decided to **multiply all GBD prevalence and
+incidence inputs by 50**. Results in the form of counts or proportions of the total population will be divided by 50
+before interpretation. Results that are proportions of the population with multiple myeloma, or any sub-group with
+multiple myeloma, do not require any interpretation change.
+
+
+The only effect this has on simulation results (besides needing to divide some by 50) is that the susceptible population
+will be smaller than it is in reality, and therefore incident MM will be lower in relation to prevalent MM. This bias is in proportion to the change
+in size of the susceptible population. As mentioned above, multiple myeloma is very rare. According to `GBD Compare <http://ihmeuw.org/5spe>`_, the MM
+prevalence in the highest-prevalence age/sex group is 0.177%. A 50x multiplier increases this prevalence to 8.85%, which means
+our incidence of MM **per prevalent case of MM** in this group will only be biased downward by :math:`1 - \frac{1 - 0.085}{1 - 0.00177}` = 8.34%.
+The observed prevalence in our simulation may differ from GBD prevalence, but this indicates that bias will be small, especially because most age/sex
+groups will be significantly less affected.
+
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
@@ -217,7 +263,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      - Notes
    * - S
      - prevalence
-     - (1 - prev_c486)
+     - Initialized to (1 - (prev_c486 * multiplier)); multiplier is currently 1; see multiplier section above
      - 
    * - S
      - excess mortality rate
@@ -225,7 +271,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      - 
    * - NDMM
      - prevalence
-     - Derived from "burn-in" method
+     - Initialized to prev_c486 * multiplier; derived from "burn-in" method
      - 
    * - NDMM
      - excess mortality rate
@@ -233,7 +279,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      -
    * - MM_first_relapse
      - prevalence
-     - Derived from "burn-in" method
+     - Initialized to 0; derived from "burn-in" method
      - 
    * - MM_first_relapse
      - excess mortality rate
@@ -241,7 +287,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      -
    * - MM_second_relapse
      - prevalence
-     - Derived from "burn-in" method
+     - Initialized to 0; derived from "burn-in" method
      - 
    * - MM_second_relapse
      - excess mortality rate
@@ -249,7 +295,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      -
    * - MM_third_relapse
      - prevalence
-     - Derived from "burn-in" method
+     - Initialized to 0; derived from "burn-in" method
      - 
    * - MM_third_relapse
      - excess mortality rate
@@ -257,7 +303,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      -
    * - MM_fourth_or_higher_relapse
      - prevalence
-     - Derived from "burn-in" method
+     - Initialized to 0; derived from "burn-in" method
      - 
    * - MM_fourth_or_higher_relapse
      - excess mortality rate
@@ -276,7 +322,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
    * - incidence_MM
      - S
      - NDMM
-     - :math:`\frac{\text{incidence_c486}}{1-\text{prev_c486}}`
+     - :math:`\frac{\text{incidence_c486} * multiplier}{1 - \text{prev_c486}}`; multiplier is currently 1; see multiplier section above
      - incidence of MM among susceptible population
    * - incidence_MM_first_relapse
      - NDMM
