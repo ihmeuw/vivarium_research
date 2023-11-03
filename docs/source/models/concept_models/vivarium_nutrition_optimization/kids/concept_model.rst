@@ -1174,7 +1174,31 @@ Wave II
     - Explanation
     - Action plan
     - Timeline
-  * - See issues with model 10.1 and 11.0 in V&V table
-    - 
-    - 
-    - 
+  * - MAM exposure overestimated in baseline scenario in model 10.1
+    - Could potentially be related to changes to MAM treatment made in model 9
+    - Run model 10.2 so we can check on MAM treatment in baseline scenario versus scenarios 2 (universal MAM) and 13 (targeted MAM)
+    - For model 10.2
+  * - :code:`12_to_23_months` age group not showing up in observed outputs
+    - Unknown
+    - Engineers to investigate and fix
+    - For 10.2 and 11.1
+  * - Only observing incident MAM and SAM transitions
+    - We requested this for production runs, but would like all transitions for V&V runs
+    - Revert back to old behavior for V&V runs so we can examine all transition rates
+    - For model 10.2 and 11.1
+  * - Total MAM exposure underestimated for early age groups in model 11.0 (note we overestimate for the later age groups, but I think this may be a result of issue #1)
+    - Unknown, but let's check how we are initializing MAM exposure with the substates. It looks like we might be underestimating by ~1/3, which would mean that we are using the "worse" MAM state as the total MAM envelope rather than worse + better as the total MAM envelope
+    - Engineers to investigate and resolve
+    - For model 11.1
+  * - Transitions into better and worse MAM underestimated
+    - Likely an issue with how we are scaling these transition rates from the overall MAM transitions to the MAM substate transitions
+    - Engineers to share how this is functioning currently with RT for investigation
+    - For model 11.1
+  * - Targeted MAM intervention not targeted to those 6-24 months (should be 100% coverage for this group)
+    - Unknown
+    - Engineers to investigate and resolve
+    - For model 11.1
+  * - Targeted MAM intervention not targeted to worse MAM state
+    - Unknown
+    - Engineers to investigate and resolve
+    - For model 11.1
