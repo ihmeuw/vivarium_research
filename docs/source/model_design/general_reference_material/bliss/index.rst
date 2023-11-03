@@ -163,30 +163,37 @@ throughout this style guide.
      - *Gender*, on the other hand, is a social construct that refers to the culturally specific 
        expectations, behaviors, and institutions that shape any individual's access to power, 
        privilege, and resources. It can also refer to a gendered individual's internal sense of 
-       identity [Ritz_and_Greaves_2022]_. 
-   * - Sexual and gender minority (SGM) 
-     - An umbrella term that includes (but is not limited to) individuals that are two-spirit, 
-       intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender 
-       non-conforming identities.
+       identity [Ritz_and_Greaves_2022]_.
    * - Undifferentiated sex/gender measure
-     - Undifferentiated sex/gender measure is a placeholder variable that indicates uncertainty 
-       regarding what is being captured. Due to data limitations or availability, it might not always 
-       be possible to elucidate whether a certain data source (e.g., a question in a household survey)
-       is intended to capture sex or gender, or some factor related to both. See Section `2.0 Dealing 
-       with Limitations in Upstream Research`_ for more information. 
+     - Undifferentiated sex/gender measure is a variable that indicates uncertainty 
+       regarding what is being reported. This uncertainty can arise  due to unclearly defined variables 
+       in an external data source (e.g., vague survey question that different respondents may interpret differently) 
+       or from the compilation of many data sources with clear definitions of 'sex' or 'gender' into one 
+       conglomerate sex/gender variable (e.g., GBD "sex" variable).
    * - Sex- and gender-related factors
-     - "Factors associated with sex/gender that are not themselves dimensions of
-       sex or gender (e.g., gene expression, body weight, risk taking, age at
-       sexual debut, structural sexism)" [Bauer_2022]_. 
+     - An umbrella term that refers to any and all characteristics related to sex and/or gender (e.g., 
+       gamete size, hormone production, reproductive or sexual anatomy, so-called 'secondary sex
+       characteristics' such as body hair or breast tissue, gender identity, gender expression, risk-taking behavior, etc). 
+   * - Proxy measure
+     - "An indirect measure of the desired outcome which is itself strongly correlated to that outcome" [GovEx_Johns_Hopkins]_.
+       Unacknowledged use of a proxy measure for the output variable of interest can lead to inaccurate
+       or harmful findings and should therefore be approached with caution. For example, [Bauer_2022]_
+       discusses in their paper how the "unacknowledged use of a sex/gender proxy for a sexed dimension of interest
+       (i.e., uterine status) resulted in decades of cancer research misestimating risks, racial disparities,
+       and age trends".
    * - Sex assigned at birth
-     - "Recorded on initial birth record; generally genital phenotype" [Bauer_2022]_. 
+     - "Recorded on initial birth record; generally genital phenotype" [Bauer_2022]_.
    * - Intersex status
      - "Reported presence of intersex conditions generally or a specific condition" [Bauer_2022]_. 
    * - Gender identity
      - "Personally held sense of one’s gender as man/boy, woman/girl, another cultural gender, 
-       trans, nonbinary, etc." [Bauer_2022]_. 
+       trans, nonbinary, etc." [Bauer_2022]_.
    * - Intersex identity
-     - "Personally held identification as intersex" [Bauer_2022]_. 
+     - "Personally held identification as intersex" [Bauer_2022]_.
+   * - Sexual and gender minority (SGM) 
+     - An umbrella term that includes (but is not limited to) individuals that are two-spirit, 
+       intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender 
+       non-conforming identities.
 
 .. todo::
 
@@ -334,13 +341,142 @@ In the NHANES example, the full first sentence of the above quote was:
 
 3.0 Discussing Simulation Science Findings
 ++++++++++++++++++++++++++++++++++++++++++
-In this section, we will elaborate on how to incorporate BLISS principles into our own 
-research processes and calculations.  
 
-3.1 Table Presentation
-----------------------
+As mentioned above, before beginning our research, we should determine the variables
+of interest: the facets of gender and/or sex that we expect to be most directly associated with
+our outcome.
+If it isn't possible to narrow this down or distinguish what might be important, we can consider
+all gender- and sex-related factors to be variables of interest.
 
-3.2 Measurement Error
+When we present our findings, we have two goals:
+
+* Accurately convey what associations we are looking for, and what the causal structures might be.
+  We should strive to be as precise as possible, and not rely on "common sense"
+  to indicate which gender- and sex-related factors are related to a health outcome.
+  Despite prevailing belief that sex affects gender but not vice versa, there is
+  strong evidence for causal influence in both directions. [Ritz_and_Greaves_2022]_ [Springer_2012]_
+  Even when we do think that a sex-related factor is most proximal to our outcome,
+  we should still mention that some of its impact could be mediated through
+  gender factors and that it is difficult to disentangle these.
+* Highlight data limitations around sex and gender measures.
+  We don't want our inclusive language to give the impression that we are able to make accurate
+  conclusions about sexual and gender minority populations when the data prevents us from doing this.
+  Furthermore, drawing attention to the problems with how almost every data source currently
+  captures sex and/or gender raises awareness that changes need to be made in primary data collection.
+
+In this section, we make some suggestions about language to use in external
+communications when discussing findings (papers, talks, etc).
+
+3.1 Initial Description of Results
+----------------------------------
+
+Before the first time a gender- or sex-related result is presented,
+we should:
+
+- Name the gender- and sex-related factors our result pertains to, if clear.
+  If unclear (which is most of the time), call out the difficulty of disentangling factors
+  from each other, to prevent readers from jumping to the conclusion that it's always
+  biological factors that are important.
+- Acknowledge data limitations and proxy measures used.
+- Call for better data to be collected.
+
+Let's consider the example of reporting a result about pregnancy.
+In this case, while gender-related factors could play a role in e.g. pregnancy outcomes,
+the sex- or gender-related factor with the most direct relevance is clearly the ability
+to become pregnant.
+In this case, we might say:
+
+.. pull-quote::
+
+  In health research on pregnancy, it is important to identify the group
+  of people who can become pregnant.
+  Typically, a proxy measure of "women of reproductive age" is constructed for
+  this purpose, combining some indicator of female sex or gender with an age restriction
+  such as 15-49 years.
+  This measure does not account for infertility, for example by including people who
+  have had hysterectomies.
+  Additionally, when it is defined in a way that conflates sex with gender,
+  it will be highly inaccurate among transgender people and other gender minority populations.
+
+  To be more precise and inclusive in our language, we define our population of interest as
+  women and birthing people of reproductive age (WBPRA): people ages 15-49 who were assigned
+  female sex at birth.
+  Note that this definition retains the limitation about infertility.
+
+  Sex assigned at birth was not measured in any of our data sources,
+  so we used proxy measures for this attribute.
+  Notably, <source> and <source> only provided undifferentiated sex/gender measures,
+  making it unclear how our conclusions generalize to transgender people and other gender minority populations.
+  Due to these issues, our results are among WBPRA according to imperfect proxy measures.
+  To address these limitations, data would need to be collected using more robust measures
+  of sex- and gender-related factors. [Bauer_2017]_ [Nielsen_2021]_ [ABS_2021]_ [National_Academies_2022]_
+
+On the other hand, if we were doing descriptive epidemiology and didn't have even an educated
+guess of what specific sex- and gender-related factors could be associated with our outcome:
+
+.. pull-quote::
+
+  Sex and gender are multi-dimensional concepts.
+  Collectively, they span a number of biological (sex-related) and sociocultural
+  (gender-related) factors which are highly correlated and causally entangled with one other. [Bauer_2022]_ [Springer_2012]_
+  Frequently in health research, differences are attributed wholly to sex-related factors, when
+  in fact gender-related factors also play a part in those differences. [Ritz_and_Greaves_2022]_ [Springer_2012]_
+  For example, gender-associated behaviors such as care-seeking and risk-taking can influence
+  health outcomes,
+  and structural or interpersonal sexism or cisnormativity can influence the quality of preventive health
+  care received.
+  Since prevalence of <outcome> could be influenced by sex- and/or gender-related factors,
+  an ideal analysis would report prevalence by multiple of these factors.
+
+  However, each data source used in this study reported only a single sex or gender variable,
+  and many of these were binary as well as undifferentiated.
+  Therefore, we have used each of these variables as proxies for the entire group of
+  sex- and gender-related factors, and are only able to report prevalence in "male" and "female"
+  groups.
+  It is unclear how our conclusions would generalize to transgender people and other gender minority
+  populations.
+  To address these limitations, data would need to be collected using more robust measures
+  of sex- and gender-related factors. [Bauer_2017]_ [Nielsen_2021]_ [ABS_2021]_ [National_Academies_2022]_
+
+3.2 Further Results (Text, Figures, Tables)
+-------------------------------------------
+
+Of course, it is not possible to include a long explanation each and every time sex- or
+gender-related concepts are referenced.
+After an initial, comprehensive description, we have to switch to some kind of shorthand.
+
+The most important things to keep in mind when choosing this shorthand are:
+
+- If the full term includes both sex and gender, both should appear in it in some way
+  -- using only one or the other invites the reader to jump to conclusions.
+- Likewise, we should not use the basic terms "males" and "females" or "men" and "women"
+  when we are reporting a concept that is more complex than correctly-measured sex or gender alone.
+- If the full term includes an acknowledgement that results are based on proxy measures,
+  that should be preserved, or at least nodded to, in the shorthand.
+
+.. todo::
+
+  Give concrete recommendations for shorthand in common situations (e.g. proxy for all sex- and gender-related factors)
+
+To continue the two examples from the previous section, the pregnancy example might use this shorthand:
+
+.. pull-quote::
+  
+  ... our results are among WBPRA according to imperfect proxy measures,
+  henceforth "proxy WBPRA."
+
+  ... the fertility rate was 14 per 1,000 person-years among proxy WBPRA ...
+
+while the descriptive epidemiology example might use this:
+
+.. pull-quote:: 
+
+  ... we estimate that prevalence was 7.8% among people with a "male" proxy value for sex- and gender-related factors ...
+
+.. todo::
+  This should be shorter!
+
+3.3 Measurement Error
 ---------------------
 
 In the evaluation of sex and/or gender as a variable in an epidemiologic study, error in
@@ -372,7 +508,7 @@ minimize bias in study results. When we are using data published by others, it i
 to consider how results may be affected by potential measurement error and dicuss any
 relevant limitations accordingly.
 
-3.3 Other Gender-Inclusive Guides
+3.4 Other Gender-Inclusive Guides
 ---------------------------------
 
 - DEI Research Guide
@@ -418,4 +554,22 @@ practices, as well as some lessons learned.
     `Sex and Gender Multidimensionality in Epidemiologic Research.` American Journal of Epidemiology, Oxford University Press, 30 September 2022, https://academic.oup.com/aje/article/192/1/122/6747669. 
 
 .. [Ritz_and_Greaves_2022]
-    `Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender.` International Journal of Environmental Research and Public Health, 30 March 2022, https://www.mdpi.com/1660-4601/19/7/4083. 
+    `Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender.` International Journal of Environmental Research and Public Health, 30 March 2022, https://www.mdpi.com/1660-4601/19/7/4083.
+
+.. [GovEx_Johns_Hopkins]
+    https://centerforgov.gitbooks.io/benchmarking/content/
+
+.. [Springer_2012]
+  `Beyond a catalogue of differences: A theoretical frame and good practice guidelines for researching sex/gender in human health.` Social Science & Medicine, June 2012, https://doi.org/10.1016/j.socscimed.2011.05.033
+
+.. [Bauer_2017]
+  Bauer GR, Braimoh J, Scheim AI, Dharma C (2017) Transgender-inclusive measures of sex/gender for population surveys: Mixed-methods evaluation and recommendations. PLoS ONE 12(5): e0178043. https://doi.org/10.1371/journal.pone.0178043
+
+.. [Nielsen_2021]
+  Nielsen, M.W., Stefanick, M.L., Peragine, D. et al. Gender-related variables for health research. Biol Sex Differ 12, 23 (2021). https://doi.org/10.1186/s13293-021-00366-3
+
+.. [ABS_2021]
+  Standard for Sex, Gender, Variations of Sex Characteristics and Sexual Orientation Variables. Australian Bureau of Statistics. https://www.abs.gov.au/statistics/standards/standard-sex-gender-variations-sex-characteristics-and-sexual-orientation-variables/latest-release
+
+.. [National_Academies_2022]
+  Measuring Sex, Gender Identity, and Sexual Orientation. National Academies of Sciences, Engineering, and Medicine. https://nap.nationalacademies.org/catalog/26424/measuring-sex-gender-identity-and-sexual-orientation
