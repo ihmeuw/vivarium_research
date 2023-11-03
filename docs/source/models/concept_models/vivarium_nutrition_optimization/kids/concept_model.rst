@@ -1020,10 +1020,22 @@ Wave II
     - Same as 10.0
     - 
     - 
+  * - 10.2
+    - Updated observers, check in on model 9 MAM targeting
+    - Baseline
+    - Baseline, 2, 13
+    - 
+    - 
   * - 11.0
     - MAM treatment also targeted to "worse" MAM category
     - Baseline
     - 13
+    - 
+    - 
+  * - 11.1
+    - Bugfixes and updated observers
+    - Baseline
+    - Baseline, 2, 13
     - 
     - 
   * - 12.0
@@ -1065,6 +1077,14 @@ Wave II
       5. Wasting transition counts, stratified b BW +/- 2500 grams if possible
     - * Age group
       * Sex
+  * - 10.2
+    - 1. Deaths
+      2. Wasting state preson time, stratified by wasting treatment coverage (all transitions)
+      3. Stunting state person time
+      4. Underweight state person time, stratified by wasting treatment coverage
+    - * Age group (including 12_to_23_months)
+      * Sex
+      * Underweight category
   * - 11.0
     - 1. Deaths
       2. Wasting state person time (including better/worse MAM differentiation), stratifie by wasting treatment coverage
@@ -1072,6 +1092,15 @@ Wave II
       4. Underweight state person time, stratified by wasting treatment coverage
       5. Wasting transition counts (including better/worse MAM differentiation), stratified by wasting treatment coverage
     - * Age group
+      * Sex
+      * Underweight category
+  * - 11.1
+    - 1. Deaths
+      2. Wasting state person time (including better/worse MAM differentiation), stratifie by wasting treatment coverage
+      3. Stunting state person time
+      4. Underweight state person time, stratified by wasting treatment coverage
+      5. Wasting transition counts (including better/worse MAM differentiation and ALL transitions), stratified by wasting treatment coverage
+    - * Age group (including 12_to_23_months)
       * Sex
       * Underweight category
   * - 12.0
@@ -1105,6 +1134,37 @@ Wave II
   * - 9.0.1
     - * Verify that the correct underweight category is being used for targeting 
     - `Underweight category was fixed <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_9.0.1.ipynb>`_. Ready to move on. 
+  * - 10.0
+    - Check application of LBWSG to wasting effect
+    - There were issues with our equations, so we `updated <https://github.com/ihmeuw/vivarium_research/pull/1376>`_ and reran
+  * - 10.1
+    - Same as 10.0
+    - * `LBWSG effect on wasting looks as expected <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.1_lbwsg_on_wasting_effects.ipynb>`_
+      * `Wasting exposure not validating <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.1_risk_and_cause_checks.ipynb>`_ (MAM overestimated), but `transitions look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.1_wasting_transitions.ipynb>`_. 
+
+        * Could it be something to do with our MAM targets applying to baseline as well? We did not check this for model 9. Will add this check to a rerun request.
+
+      * No :code:`12_to_23_months` age group in observed outputs. Only incident MAM/SAM transitions observed. Let's add this age group and all wasting transitions in moving forward.
+  * - 11.0
+    - Check implementation of better/worse MAM and targeting of MAM treatment to worse MAM state
+    - * Observers:
+
+        * No :code:`12_to_23_months` age group in observed outputs
+
+        * Only observing incident MAM and SAM counts - let's add all back in for V&V
+
+      * `Ratio of worse:better MAM exposure looks good, but combined MAM exposure is off (low at initialization) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_risk_exposure.ipynb>`_
+
+      * `MAM treatment targets do not appear to be functioning correctly <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_MAM_targets.ipynb>`_:
+
+        * Low coverage in 6-11 month age group, which should be 100% covered
+
+        * Appears that there is no targeting based on worse MAM state
+
+      * `Transitions out of better/worse MAM states look good, but transitions into better/worse MAM states are underestimated <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_wasting_transitions.ipynb>`_
+
+        * Need to look into how we are applying scalars
+
 
 
 .. list-table:: Outstanding V&V issues
@@ -1114,7 +1174,7 @@ Wave II
     - Explanation
     - Action plan
     - Timeline
-  * - 
+  * - See issues with model 10.1 and 11.0 in V&V table
     - 
     - 
     - 
