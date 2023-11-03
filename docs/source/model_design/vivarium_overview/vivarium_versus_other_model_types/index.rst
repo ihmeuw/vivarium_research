@@ -89,7 +89,7 @@ What are the advantages and disadvantages of microsimulations?
 --------------------------------------------------------------
 
 Microsimulation, described above, is a special kind of model that falls under the broader umbrella of **individual-based modeling (IBM)**. This section
-expands on what differentiates IBM, including microsimulation, from other methods of modeling population dynamics.
+expands on what differentiates IBM, including microsimulation, from other types of statistical models such as compartmental models or multiplication models.
 
 Advantages of microsimulation
 +++++++++++++++++++++++++++++
@@ -146,14 +146,7 @@ Residual confounding
 
 Getting realistic, individual-level characteristics from population-level data is difficult, and creates opportunity for residual confounding...
 
-Simulant agency
-~~~~~~~~~~~~~~~
-
-Unlike agent-based models, microsimulations do not necessarily program agency into individual simulants. This removes some of the real-world likeness of these models...
-
 .. todo::
-
-  Fill out this section with strengths and weakness of microsimulation. Could also add context about how microsim compares to agent-based simulation and the broader umbrella term of IBM.
 
   Explanation of relationships between macroscopic population-level measures such as incidence rate and the corresponding microscopic hazard rates we use in our simulations, and how these relationships might affect our model design and V&V.
 
@@ -184,6 +177,15 @@ The IHME microsimulation platform, unlike most other microsimulation frameworks,
  - Versus decision tree or other types of models?
  - Different types of individual-based models (mini lit review) 
  - What differential equations underly these different types of models?
+
+Simulant agency
+~~~~~~~~~~~~~~~
+
+Unlike agent-based models, microsimulations do not necessarily program agency into individual simulants. This removes some of the real-world likeness of these models...
+
+.. todo:: 
+  
+  Expand upon how microsim is different from agent-based modeling here. 
 
 References
 ----------
