@@ -76,6 +76,10 @@ evidence. For example, disease progression is a function of simulant characteris
 
 As the simulation proceeds, various simulant attributes change and these changes are recorded through observers (to read more about observers, visit [insert link here]).
 
+.. todo::
+
+  Add link to observers page ('Types of Vivarium Model Components') once it is created. 
+
 .. note::
 
   Are you feeling confused by some of the vocabulary on this page? Please visit our `Vivarium glossary <https://vivarium-research.readthedocs.io/en/latest/glossary/index.html>`_ 
@@ -84,19 +88,23 @@ As the simulation proceeds, various simulant attributes change and these changes
 What are the advantages and disadvantages of microsimulations?
 --------------------------------------------------------------
 
-Microsimulation, described above, is a special kind of model that falls under the broader umbrella of **individual-based modeling (IBM)**.
-
-In this section, we will elaborate on what differentiates microsimulation from other forms of IBM, such as agent-based simulation. 
+Microsimulation, described above, is a special kind of model that falls under the broader umbrella of **individual-based modeling (IBM)**. This section
+expands on what differentiates IBM, including microsimulation, from other methods of modeling population dynamics.
 
 Advantages of microsimulation
 +++++++++++++++++++++++++++++
+
+.. todo::
+
+  Fill out the following sections under 'Advantages of microsimulation' subheading. 
 
 Correlation between risk exposures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 At the individual level, risk exposures are frequently correlated. Examples include high body mass index and high fasting plasma glucose, tobacco smoking and alcohol use, and childhood height and weight.
 
-Usually, Vivarium assigns each risk exposure independently to simulants, such that each one follows the desired population-level univariate distribution, which frequently comes from GBD. In the common case of a dichotomous exposure, this means that each simulant (in the same age/sex/location group) has the same probability of exposure, which is equal to the prevalence in that population.
+Usually, Vivarium assigns each risk exposure independently to simulants, such that each one follows the desired population-level univariate distribution, which frequently comes from GBD. 
+In the common case of a dichotomous exposure, this means that each simulant (in the same age/sex/location group) has the same probability of exposure, which is equal to the prevalence in that population.
 
 Continuous values
 ~~~~~~~~~~~~~~~~~
@@ -121,6 +129,10 @@ In the context of healthcare estimates typically characterized by considerable v
 
 Disadvantages of microsimulation
 ++++++++++++++++++++++++++++++++
+
+.. todo::
+
+  Fill out the following sections under 'Disadvantages of microsimulation' subheading.
 
 Resource requirements
 ~~~~~~~~~~~~~~~~~~~~~
@@ -150,6 +162,12 @@ Unlike agent-based models, microsimulations do not necessarily program agency in
 
 How does Vivarium compare with other microsimulation tools?
 -----------------------------------------------------------
+
+In this section, we will elaborate on what differentiates Vivarium, our team's microsimulation platform, from other methods of microsimulation and IBM. 
+
+.. todo::
+
+  Fill out the following sections under 'How does Vivarium compare with other microsimulation tools' subheading.
 
 Leveraging the Global Burden of Disease (GBD) Study
 +++++++++++++++++++++++++++++++++++++++++++++++++++
