@@ -271,10 +271,12 @@ since that *cannot* be the true data-generating distribution.
 [Bernardo_2002]_
 
 For lack of a better option, we follow this pattern.
-Therefore, for both of our hypotheses, we summarize our subjective belief using a 95% UI.
+Therefore, we summarize our subjective belief in the "no bug/error" case using a 95% UI.
 Instead of testing the subjective belief itself, which is difficult or impossible to quantify,
 we test the distribution in the appropriate class (e.g. beta distribution) that most closely
 replicates that 95% UI.
+The same limitation applies to the "bug/error" case, where we simply choose a plausible distribution
+of the appropriate class to use for all checks.
 
 Sensitivity and specificity
 +++++++++++++++++++++++++++
