@@ -105,6 +105,14 @@ Tests have been developed by the engineering team to cover most of the simulatio
 though test coverage is not complete.
 Notably, none of the observers currently have integration tests.
 
+.. todo::
+  Due to technical limitations in the :code:`pytest` tool, integration tests currently must select a simulation
+  "size" (population, draws, time span), run it completely, and then check the results.
+  It would likely lead to a much quicker iteration cycle if we ran a small simulation, checked the results,
+  then added more population/draws/time and checked the results again, etc, similar to how we expand runs with
+  :code:`psimulate`.
+  This way, egregious bugs could be caught very quickly.
+
 Fuzzy checking
 --------------
 
