@@ -387,6 +387,8 @@ Note:
      - None 
      - 
 
+Note: 
+  - 20 draws was selected as the size based on this `draw and seed sizing notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/draw_seed_analysis.ipynb>`_
 
 **Final Model Run:**
 
@@ -397,10 +399,10 @@ Note:
      - Value
      - Note
    * - Population size
-     - TBD
+     - 30 seeds (10,000 sims per seed)
      - per draw
    * - Number of draws
-     - TBD
+     - 20 
      - 
    * - Cohort type
      - Closed

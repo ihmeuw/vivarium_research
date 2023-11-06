@@ -245,8 +245,8 @@ We can then solve for the ABW and LBW probabilities of initialization into wasti
     - Value
     - Note/Source
   * - RR
-    - 2
-    - PLACEHOLDER
+    - 1.82 (95% CI: 1.35, 2.45), assume a lognormal distribution of uncertainty
+    - Calculated using meta-analysis of most recent available DHS round 7 or 8 as of 10/2023. `Analysis performed and resulting forest plot can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/95>`_
   * - :math:`p_\text{LBW}`
     - Exposure of LBWSG categories with BW < 2500 grams for the late neonatal age group in GBD
         * :code:`get_draws(source='exposure', rei_id=339, age_group_id=3)`
@@ -313,6 +313,10 @@ Draw-specific values for transition rates (defined in the table below) for Ethio
 
 MAM (cat2) substates
 ----------------------
+
+.. note::
+
+  This was implemented in a manner that divided the MAM state into two separate states, creating an overall 5-category wasting transition model. Transition rates from the 4-category model were scaled such that transitions in and out of the MAM category did not vary by MAM substate. 
 
 For simulants that transition into the moderate acute malnutrition (MAM, cat2) wasting exposure state, they will be assigned one of the two following sub-exposures:
 
