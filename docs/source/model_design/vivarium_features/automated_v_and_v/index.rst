@@ -129,14 +129,18 @@ The difficulty of this problem is part of why, in the manual V&V process, we usu
 Note that fuzzy checking can be applied to both **verification** and **validation**.
 For verification, the "target" is that the simulation's value is exactly
 correct.
-For validation, we specify a target 95% uncertainty interval (UI), within which we expect the simulation's **true** value (i.e. the value of the simulation result as the simulated population size goes to infinity) should fall 95% of the time.
-For example, we could specify that the UI of the simulation's true value is +/-10% of the GBD estimate, which means it is 95% certain to be within 10% **as the population size goes to infinity.**
+For example, if the simulation applies a GBD incidence rate, we can verify the simulation's incidence rate against
+that GBD rate.
+If we run with an arbitrarily large population, the simulation's rate should match arbitrarily well;
+a simulation with billions of simulants would be expected to match the GBD rate to many decimal points.
+For validation, we specify a target 95% uncertainty interval (UI), within which we expect the simulation's **underlying** value (i.e. the value of the simulation result as the simulated population size goes to infinity) should fall 95% of the time.
+For example, we could specify that the UI of the simulation's prevalence value is +/-10% of the GBD prevalence, which means it should be 95% certain to be within 10% of GBD **as the simulated population size goes to infinity.**
 
 We have begun to formalize fuzzy checking using Bayesian hypothesis tests,
 one for each of the values we want to check in the simulation.
-In these hypothesis tests, the null hypothesis is that the simulation value comes from our V&V target distribution
-and the alternative hypothesis is that it comes from a prior distribution of bugs/errors;
-rejecting the null hypothesis indicates a problem with the simulation.
+In these hypothesis tests, one hypothesis is that the simulation value comes from our V&V target distribution
+and the other hypothesis is that it comes from a prior distribution of bugs/errors;
+when our data strongly favors the latter, it indicates a problem with the simulation.
 
 Sensitivity and specificity
 +++++++++++++++++++++++++++
@@ -171,7 +175,7 @@ the more important it is for the checks to have high specificity.
 For our hypothesis testing approach to fuzzy checking, we choose a
 cutoff `Bayes factor <https://en.wikipedia.org/wiki/Bayes_factor>`_.
 The Bayes factor represents the size of the *update* we would make toward
-the alternative hypothesis (that there is an error/bug in the simulation)
+the hypothesis that there is an error/bug in the simulation
 in a Bayesian framework.
 The higher our cutoff is, the higher our specificity, but the lower our sensitivity.
 
