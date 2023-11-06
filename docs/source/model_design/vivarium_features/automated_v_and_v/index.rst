@@ -135,12 +135,146 @@ If we run with an arbitrarily large population, the simulation's rate should mat
 a simulation with billions of simulants would be expected to match the GBD rate to many decimal points.
 For validation, we specify a target 95% uncertainty interval (UI), within which we expect the simulation's **underlying** value (i.e. the value of the simulation result as the simulated population size goes to infinity) should fall 95% of the time.
 For example, we could specify that the UI of the simulation's prevalence value is +/-10% of the GBD prevalence, which means it should be 95% certain to be within 10% of GBD **as the simulated population size goes to infinity.**
+For more on the interpretation/meaning of this UI, see the next section.
 
 We have begun to formalize fuzzy checking using Bayesian hypothesis tests,
 one for each of the values we want to check in the simulation.
 In these hypothesis tests, one hypothesis is that the simulation value comes from our V&V target distribution
 and the other hypothesis is that it comes from a prior distribution of bugs/errors;
 when our data strongly favors the latter, it indicates a problem with the simulation.
+
+Interpreting the hypotheses
++++++++++++++++++++++++++++
+
+In the previous section, we have been a bit vague about what the hypotheses under consideration **mean**, using terms like "should"
+(in "should fall 95% of the time") and "bugs/errors" without defining them.
+Here, we attempt to define more precisely how we intend to interpret these competing hypotheses.
+Understanding the interpretation is important to setting validation targets.
+
+V&V as a decision problem
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The decision that will be informed by these results, and by V&V in general, is whether to move forward with a simulation as-is,
+(e.g., to report its results in a scholarly publication) or investigate the cause of a surprising result.
+When we do investigate a result, we will either end up gaining more confidence it is valid, determine it is caused by a limitation and leave it be,
+or make changes to the simulation to fix a bug or limitation.
+We define "acceptable" limitations as those we would leave in the simulation if we knew about them,
+while "unacceptable" limitations are those we would make changes to address if we knew about them.
+Generally, all bugs (issues caused by differences between documentation and implementation) are considered unacceptable,
+no matter the severity, because a bug is unambiguously wrong and relatively easy to fix
+(in that it does not require redesigning the model or seeking more data).
+Note that all of our models, being imperfect representations of the real world, have many limitations that we knew about during the design process,
+and these are acceptable by definition since we put them there intentionally -- we call these "planned" limitations,
+while the limitations that we didn't know about before running the simulation are "unplanned" limitations.
+However, if we failed to accurately anticipate the impact of a planned limitation on our results, that constitutes an additional unplanned
+limitation that, when we discover it, we may deem acceptable or unacceptable.
+
+Since the direct decision to make in response to V&V results is whether to **investigate** a surprising result,
+not whether to fix it, there are (at least) three ways to define our ideal decision function.
+By the "ideal decision function" here, we mean the way we would make the decision if we had perfect information;
+that is, if we already knew which limitations were acceptable and which weren't, but we still had to investigate them
+before we could fix them.
+All three are subject to the restriction that the decision function operates at the level of the check and not at the level of the simulation overall
+(i.e. the decision of whether or not to investigate each surprising result must be made independently).
+
+1. Ideal decision function: investigate all unplanned limitations, even those that we know (since we have perfect information) are acceptable.
+   This decision function is ideal if it is worth the cost of investigation to understand our simulation completely, e.g. to be able to write a comprehensive
+   "Limitations" section.
+2. Ideal decision function: investigate all unplanned limitations that are larger than the unplanned limitations we typically produce in simulation design,
+   even those that are acceptable.
+   This decision function is ideal if it is worth the cost of investigation to understand the areas in which our simulation is **more** limited than a typical simulation we do.
+3. Ideal decision function: investigate only unacceptable limitations (which are all unplanned by definition).
+   We place no value on understanding the simulation better unless we would take action based on that information.
+
+Connecting the decision to the hypotheses
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In fuzzy checking, we make hypotheses about the simulation **process**, which includes everything starting from primary data collection in the real world,
+to data seeking and interpretation, to the modeling itself (since unacceptable or acceptable issues could be introduced anywhere in this chain).
+In all cases, our second hypothesis, which we described above as "bug/error," is more precisely a distribution that represents our subjective belief about the
+distribution of results that would be generated by a process that **always** produces an unacceptable limitation or bug
+in the simulation.
+Our first hypothesis is defined based on one of the ideal decision functions in the previous section:
+
+1. With ideal decision function 1, the hypothesis is a distribution representing our subjective belief about the distribution of results
+   that would be generated by a simulation with only our planned limitations and no bugs.
+2. With ideal decision function 2, ditto, but for a simulation with our planned limitations, plus the amount and kind of
+   unplanned limitations we've typically seen in past model results, and no bugs.
+3. With ideal decision function 3, ditto, but for a simulation with the maximum limitation that would be acceptable,
+   and no bugs.
+
+Sources of uncertainty
+~~~~~~~~~~~~~~~~~~~~~~
+
+When constructing our "no bug/error" hypothesis based on our validation data,
+we should take into account the process that generated that validation data.
+For example, if our validation data is a survey that we didn't use to inform the simulation,
+we should conceptually start with a prior about the real-world
+value we are interested in (e.g. prevalence of a certain disease).
+We should then update that prior with our validation data to obtain our subjective belief,
+including uncertainty, about the real-world value.
+Then, we should consider the (probably wider spread) distribution of simulation input data that could be collected
+under such a distribution of real-world values, and finally the (probably wider spread) distribution of simulation
+results ("underlying" values, ignoring stochastic uncertainty) that could be generated under this distribution
+of input data, given the assumed modeling limitations in one of
+the hypothesis versions above.
+It will probably not be feasible to do this whole process quantitatively, but conceptually
+that is the belief we should attempt to represent with our V&V target.
+
+However, on the other hand, if we are using validation data that shares some process in common
+with our simulation, we would **not** want to include that part of the process in our uncertainty.
+For example, in the PRL case study, we validate our simulation against a population-level migration rate in ACS,
+when we also used ACS to calculate demographic-stratified migration rates for input to the simulation
+and to initialize the demographics of the simulated population.
+Therefore, the data collection step of ACS is almost entirely common between the validation data
+and the simulation result, and uncertainty about how well this data collection reflects the real
+world should mostly not be included in our hypothesis.
+The only divergence between the ACS value and the simulation result will be due to dynamic
+components such as immigration, emigration, fertility, and mortality, which are based on various
+data sources, and update the demographic structure of the simulated population, thereby causing
+drift in the population-level rate.
+So, as before, we should start by thinking of priors on the migration rates,
+and then update that with the ACS observations stratified by demographics.
+We should also think of priors on the real-life values of the rates, etc
+collected in our non-ACS data inputs to the immigration, emigration, fertility, and mortality components.
+Then we could imagine a distribution of data that would be collected by these non-ACS data inputs given the
+real-life values,
+and a distribution of effects those components would be expected to have on the population structure by modeling
+those processes (with assumed limitations) based on those data collected, including
+the aspect of modeling that projects those present-day dynamics into the future.
+Finally, we would construct from these pieces a distribution of population-level rates that we would expect the simulation to have if it
+was built with assumed limitations, with the stratified rates directly from ACS but a population that starts with
+ACS and applies X years of the population structure effects from the dynamic components.
+This hypothesis should be much more concentrated around the ACS population-level value than it would be if the ACS
+was being used as validation data for a simulation that did not use it as an input.
+Again, we are unlikely to follow a process this formal, but this is the distribution we should do our best to
+subjectively approximate.
+
+Computational simplification
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The last, but quite large, caveat to our hypothesis tests is that our hypotheses' distributions will always be restricted to
+a functional form that is too simple to represent our true subjective belief.
+For example, in the case of rates, as described below, we use a beta distribution for computational reasons.
+We can say categorically that the distribution of outcomes of a process as complex as building a
+simulation will not have such a simple distribution;
+therefore, you could argue that our prior belief in *any* beta-distributed hypothesis should be 0,
+since that *cannot* be the true data-generating distribution.
+
+.. pull-quote::
+  ... it is difficult to accept the existence of a “true” model in a
+  literal sense. There are many situations however where one is prepared to proceed “as if” such a
+  true model existed, and furthermore belonged to some specified class of models. Naturally, any
+  further conclusions will then be conditional on this (often strong) assumption being reasonable
+  in the situation considered.
+
+[Bernardo_2002]_
+
+For lack of a better option, we follow this pattern.
+Therefore, for both of our hypotheses, we summarize our subjective belief using a 95% UI.
+Instead of testing the subjective belief itself, which is difficult or impossible to quantify,
+we test the distribution in the appropriate class (e.g. beta distribution) that most closely
+replicates that 95% UI.
 
 Sensitivity and specificity
 +++++++++++++++++++++++++++
@@ -305,3 +439,8 @@ they should very rarely fail by chance.
 For that reason, we have set the Bayes factor cutoff to 100, commonly called "decisive,"
 in *addition* to the generally conservative approximations listed in the section above.
 In practice, by manually introducing bugs in the simulation, we have found that even with this very conservative approach, automated V&V is quite sensitive.
+
+References
+----------
+
+.. [Bernardo_2002] Bernardo, José M., and Raúl Rueda. “Bayesian Hypothesis Testing: A Reference Approach.” International Statistical Review / Revue Internationale de Statistique, vol. 70, no. 3, 2002, pp. 351–72. JSTOR, https://doi.org/10.2307/1403862. Accessed 6 Nov. 2023.
