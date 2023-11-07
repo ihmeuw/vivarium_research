@@ -1143,6 +1143,10 @@ Wave II
       * `Wasting exposure not validating <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.1_risk_and_cause_checks.ipynb>`_ (MAM overestimated), but `transitions look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.1_wasting_transitions.ipynb>`_. 
 
         * Could it be something to do with our MAM targets applying to baseline as well? We did not check this for model 9. Will add this check to a rerun request.
+  * - 10.2
+    - Check on wasting transitions and MAM treatment coverage in different scenarios
+    - * `Underestimation of mild wasting to TMREL transition rate for all age groups. Also, underestimating MAM to mild transition rate among the 1-5 month age group. <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.2_wasting_transitions.ipynb>`_ These issues may be causing the `miscalibration of our wasting exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.2_risk_and_cause_checks.ipynb>`_ (underestimation of cat4, overestimation of cat2 and cat3)
+      * `There is coverage of MAM treatment in scenarios 2 and 13 among the 1-5 month age group <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.2_MAM_targets.ipynb>`_ -- this age group is ineligible for treatment and coverage should be at 0% for all scenarios.
   * - 11.0
     - Check implementation of better/worse MAM and targeting of MAM treatment to worse MAM state
     - * `Ratio of worse:better MAM exposure looks good, but combined MAM exposure is off (low at initialization) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_risk_exposure.ipynb>`_
@@ -1160,9 +1164,13 @@ Wave II
 
   Action plan for models 10 and 11:
 
-    1. Launch model 10.2 with updated observers and scenarios so we can check on V&V issue #1 below and gain more information before proceeding.
+    * DONE! Launch model 10.2 with updated observers and scenarios so we can check on V&V issue #1 below and gain more information before proceeding.
 
-    2. Look into issues #2 and #3 for model 11. If we find something quickly, then fix for model 11.1. If we don't find something quickly, let's go ahead and launch model 11.1 with the fixes for issues #4 and #5 so that we can check those while we continue to investigate issues #2 and #3
+    * Look into issue #4 for model 11. If we find something quickly, then fix for model 11.1. If we don't find something quickly, let's go ahead and launch model 11.1 with the fixes for issues #5 and #6 so that we can check those while we continue to investigate issue #4 
+
+    * Look into issues 1-3 for model 10.3
+
+    * Implement LBWSG PAF code
 
 
 .. list-table:: Outstanding V&V issues
@@ -1172,23 +1180,27 @@ Wave II
     - Explanation
     - Action plan
     - Timeline
-  * - 1. MAM exposure overestimated in baseline scenario in model 10.1
-    - Could potentially be related to changes to MAM treatment made in model 9
-    - Run model 10.2 so we can check on MAM treatment in baseline scenario versus scenarios 2 (universal MAM) and 13 (targeted MAM)
-    - For model 10.2
-  * - 2. Total MAM exposure underestimated for early age groups in model 11.0 (note we overestimate for the later age groups, but I think this may be a result of issue #1)
+  * - 1. MAM and mild exposure overestimated in baseline scenario in model 10.2
+    - Appears to be due to underestimation of mild to TMREL wasting transition and underestimation of MAM to mild for 1-5 month age group
+    - Engineers to investigate
+    - For model 10.3
+  * - 2. Coverage of MAM treatment in the 1-5 month age group, who are ineligible for treatment
+    - Unknown.
+    - Engineers to investigate - also to confirm that there is zero coverage of SAM treatment in this age group across all scenarios
+    - For model 10.3
+  * - 3. Hussain noted that LBWSG-adjusted wasting categories at initialization do not sum to one, but get rescaled.
+    - Unknown - these should sum to one for the baseline scenario
+    - Engineers/RT to investigate and confirm equations functioning correctly
+    - For model 10.3
+  * - 4. Total MAM exposure underestimated for early age groups in model 11.0 (note we overestimate for the later age groups, but I think this may be a result of issue #1)
     - Unknown, but let's check how we are initializing MAM exposure with the substates. It looks like we might be underestimating by ~1/3, which would mean that we are using the "worse" MAM state as the total MAM envelope rather than worse + better as the total MAM envelope
     - Engineers to investigate and resolve
     - For model 11.1 or 11.2
-  * - 3. Transition rate from mild child wasting to susceptible to child wasting is underestimated
-    - Could we accidentally be applying the better/worse MAM scalars to this transition rate when it doesn't need it?
-    - Engineers to check
-    - For model 11.1 or 11.2
-  * - 4. Targeted MAM intervention not targeted to those 6-24 months (should be 100% coverage for this group)
+  * - 5. Targeted MAM intervention not targeted to those 6-24 months (should be 100% coverage for this group)
     - Bug
     - Hussain implemented fix, but not yet run
     - For model 11.1
-  * - 5. Targeted MAM intervention not targeted to worse MAM state
+  * - 6. Targeted MAM intervention not targeted to worse MAM state
     - Bug
     - Hussain implemented fix, but not yet run
     - For model 11.1
