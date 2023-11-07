@@ -36,7 +36,7 @@ Automated verification and validation (V&V)
 .. note::
 
   This is a description of how to automate some verification and validation checks of our models.
-  The approach described here has already been used in practice on the probabilistic record linkage (PRL) project
+  The approach described here has been prototyped on the probabilistic record linkage (PRL) project
   but it is not yet part of our routine simulation process.
 
 Background/Motivation
@@ -105,6 +105,14 @@ Tests have been developed by the engineering team to cover most of the simulatio
 though test coverage is not complete.
 Notably, none of the observers currently have integration tests.
 
+.. todo::
+  Due to technical limitations in the :code:`pytest` tool, integration tests currently must select a simulation
+  "size" (population, draws, time span), run it completely, and then check the results.
+  It would likely lead to a much quicker iteration cycle if we ran a small simulation, checked the results,
+  then added more population/draws/time and checked the results again, etc, similar to how we expand runs with
+  :code:`psimulate`.
+  This way, egregious bugs could be caught very quickly.
+
 Fuzzy checking
 --------------
 
@@ -121,13 +129,18 @@ The difficulty of this problem is part of why, in the manual V&V process, we usu
 Note that fuzzy checking can be applied to both **verification** and **validation**.
 For verification, the "target" is that the simulation's value is exactly
 correct.
-For validation, we specify a target range, within which we expect the simulation's **true** value (i.e. the value of the simulation result as the simulated population size goes to infinity) should fall.
-For example, we could specify that the simulation's true value should be within 10% of the GBD estimate, which means it is within 10% **not including stochastic variation.**
+For example, if the simulation applies a GBD incidence rate, we can verify the simulation's incidence rate against
+that GBD rate.
+If we run with an arbitrarily large population, the simulation's rate should match arbitrarily well;
+a simulation with billions of simulants would be expected to match the GBD rate to many decimal points.
+For validation, we specify a target 95% uncertainty interval (UI), within which we expect the simulation's **underlying** value (i.e. the value of the simulation result as the simulated population size goes to infinity) should fall 95% of the time.
+For example, we could specify that the UI of the simulation's prevalence value is +/-10% of the GBD prevalence, which means it should be 95% certain to be within 10% of GBD **as the simulated population size goes to infinity.**
 
-We have begun to formalize fuzzy checking using frequentist hypothesis tests,
+We have begun to formalize fuzzy checking using Bayesian hypothesis tests,
 one for each of the values we want to check in the simulation.
-In these hypothesis tests, the null hypothesis is that the simulation value matches the V&V target;
-rejecting the null hypothesis indicates a problem with the simulation.
+In these hypothesis tests, one hypothesis is that the simulation value comes from our V&V target distribution
+and the other hypothesis is that it comes from a prior distribution of bugs/errors;
+when our data strongly favors the latter, it indicates a problem with the simulation.
 
 Sensitivity and specificity
 +++++++++++++++++++++++++++
@@ -159,36 +172,37 @@ there being an actual problem in the simulation.
 The more difficult it is to investigate false alarms,
 the more important it is for the checks to have high specificity.
 
-For our hypothesis testing approach to fuzzy checking, we choose our desired
-specificity for the overall checking process (across all V&V checks).
-Then, :math:`1 - \text{specificity}` is our desired `family-wise error rate <https://en.wikipedia.org/wiki/Family-wise_error_rate>`_
-for the family of hypotheses.
-We use a `Bonferroni correction <https://en.wikipedia.org/wiki/Bonferroni_correction>`_ to determine whether
-any of the null hypotheses (that the simulation values match the V&V targets) can be rejected.
-This correction makes no assumptions of independence between the hypotheses,
-but **it means that our desired specificity is only a lower bound**.
-The true specificity of our automated V&V is higher, with a corresponding loss in sensitivity.
+For our hypothesis testing approach to fuzzy checking, we choose a
+cutoff `Bayes factor <https://en.wikipedia.org/wiki/Bayes_factor>`_.
+The Bayes factor represents the size of the *update* we would make toward
+the hypothesis that there is an error/bug in the simulation
+in a Bayesian framework.
+The higher our cutoff is, the higher our specificity, but the lower our sensitivity.
 
-.. note::
-  We use `frequentist <https://en.wikipedia.org/wiki/Frequentist_inference>`_, rather than `Bayesian <https://en.wikipedia.org/wiki/Bayesian_statistics>`_, statistics here.
-  This is mainly because a Bayesian approach would be more complex to implement, and
-  it would be tricky to specify an intuitive prior about
-  the distribution of potential simulation errors.
+.. todo::
+  We do not estimate what the sensitivity and specificity values are.
+  We could estimate these from our priors, if desired.
+  Note that these sensitivity and specificity estimates would only be as good as our priors,
+  and our priors are sometimes knowingly mis-specified; see the "Proportions and rates" section
+  for how we approximate a Poisson binomial with a binomial distribution.
 
-  However, using a Bayesian approach here would lead to a more interpretable result,
-  namely the posterior probability that there is a bug.
-  In other words, it would allow us to know what the tradeoff is between sensitivity and specificity, instead of setting specificity only and not knowing how sensitive our automated V&V is.
-  This is worth exploring further.
+  Having estimates of sensitivity and specificity could help with choosing a cutoff and
+  a population size.
+  They would only depend on the priors and not on the data, and therefore
+  would not change frequently, unless our sample size for (some of) our fuzzy checks was the
+  result of dynamic simulation behavior.
+  As described above, changing the Bayes factor cutoff trades off sensitivity for specificity,
+  whereas increasing population size improves sensitivity (at all specificities) but also increases
+  runtime.
 
-While we cannot directly calculate the sensitivity of our fuzzy checks (or, for that matter, of our non-fuzzy checks),
-we can gain some intuition about whether our fuzzy checks are sensitive enough.
-We do this by reporting the range of true simulation values we would have an 80% chance of detecting as not matching the target value (in other words, the values we are `powered <https://en.wikipedia.org/wiki/Power_of_a_test>`_ to detect with power ≥ 0.8).
-This power calculation does not depend on what is actually observed in the simulation, unless dynamic behavior
-changes our sample size.
-Therefore, in most cases we only need to look at power when adding new checks to our automated V&V;
-if human inspection of the ranges of values that would be detected indicates that
-the hypotheses are sufficiently powered to find bugs,
-we can then move forward with that population size for all future runs of those checks.
+  For now we have used a conventional "decisive" cutoff of 100 for the Bayes factor,
+  and in the PRL simulation we typically run the integration tests with 250,000 simulants,
+  which is about as large as we can run in a reasonable amount of time (10-20 minutes).
+
+.. todo::
+  There is potential to do something like a "power calculation," finding what ranges of
+  true parameter values would be extreme enough to reject our hypothesis X% of the time.
+  However, it is unclear whether this would add anything beyond calculating a sensitivity.
 
 Hypotheses by value type
 ++++++++++++++++++++++++
@@ -202,7 +216,7 @@ Hypotheses by value type
   * Summary statistics of continuous values, such as the mean or standard deviation of a hemoglobin distribution
   * Relative risks/rate ratios between categorical groups
   * More complex situations such as the number of unique values of an attribute observed, though these may
-    be hard to work out p-values for, and are not likely to come up frequently in our simulations.
+    be hard to work out hypotheses for, and are not likely to come up frequently in our simulations.
 
 Proportions and rates
 ~~~~~~~~~~~~~~~~~~~~~
@@ -215,37 +229,42 @@ one for each simulant at risk.
 Usually, in our simulations, the probability associated with each simulant/trial varies only according
 to some categorical risk factors, which means that within each combination of categories,
 the probability is the same for all simulants and the number of events has a binomial distribution.
-Therefore, a two-tailed `binomial test <https://sites.utexas.edu/sos/guided/inferential/categorical/univariate/binomial/>`_
-can determine the p-value of the simulation result in that group, which is the probability
-of observing a result equally or less likely, given that the simulation's value is correct.
 
 When simulant-level probabilities of an event vary within a group (for example, if there is a continuous risk factor
-of the event), the Bernoulli trials are independent but not identically distributed.
-The number of events observed has a `Poisson binomial <https://en.wikipedia.org/wiki/Poisson_binomial_distribution>`_
+of the event), the Bernoulli trials are independent but not identically distributed,
+**if we take into account our prior knowledge about the risk factor.**
+In that case, we could say that the number of events observed has a `Poisson binomial <https://en.wikipedia.org/wiki/Poisson_binomial_distribution>`_
 distribution.
 This distribution has the same mean and **lower** variance, relative to a binomial distribution where each trial
 has the mean probability.
-The simple binomial distribution can be used as an approximation, allowing the use of a binomial test in this situation as well;
-due to the variance property, this approximation will increase the specificity of the fuzzy check higher than it was configured to be.
-This increase in specificity will cause a decrease in sensitivity.
+Generally, it will be easier for us to ignore our prior knowledge about which simulants have higher
+event probabilities, and use the binomial distribution.
+This sacrifices some sensitivity without a corresponding increase in specificity, because we will
+not flag an issue where the result is only very unlikely **given the observed distribution of risk factors.**
 
-When a range instead of a single number is specified for a validation target,
-we use for the probability of a result its *maximum* probability, given *any* value in the specified range.
-This naturally means that all values within the range have a p-value of 1.
-This approach is more "conservative" (higher specificity and lower sensitivity) than any possible Bayesian prior about the
-true value.
+When a target 95% UI is specified instead of a single target value,
+we fit a `beta distribution <https://en.wikipedia.org/wiki/Beta_distribution>`_ that has approximately that UI.
+(This is an equal-tailed interval; in other words, we treat the
+lower bound as the 2.5th percentile and the upper bound as the 97.5th.)
+Because the beta distribution is the conjugate of the binomial distribution,
+we can then use an easy-to-calculate `beta-binomial <https://en.wikipedia.org/wiki/Beta-binomial_distribution>`_ as the distribution
+of the number of events when there is not a bug.
 
-.. todo::
-  What is this called? A minimax hypothesis test?
+Finally, we must specify a distribution in the case where there is a bug/error
+in the simulation.
+For computational reasons, this should use a conjugate prior to the binomial,
+which means our prior on the underlying simulation rate as the population
+goes to infinity should be a weighted sum of beta distributions.
+For simplicity, we currently use a `Jeffreys prior <https://en.wikipedia.org/wiki/Jeffreys_prior>`_ of a single beta distribution with :math:`\alpha = \beta = 0.5`.
 
 PRL case study: population-level rates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
-  As of June 2023, implementation of fuzzy checking in the PRL simulation's
-  automated V&V is `still in progress <https://github.com/ihmeuw/vivarium_census_prl_synth_pop/pull/256>`_.
-  That PR contains the statistics, but does not yet apply the method to migration
-  as described here; PRs for that are forthcoming.
+  As of October 2023, implementation of fuzzy checking in the PRL simulation's
+  automated V&V is `still in progress <https://github.com/ihmeuw/vivarium_census_prl_synth_pop/pull/333>`_.
+  That PR contains the statistics, and applies the method to domestic migration and immigration;
+  emigration will be added in a forthcoming PR.
 
 As an initial example of fuzzy checking, we are working on a proof-of-concept implementation of integration tests of
 rates of simulant migration (into, out of, and within the US) in the PRL simulation.
@@ -263,22 +282,26 @@ due to demographic change over the course of the simulation.
 Checking at the population level makes use of the binomial approximation to the Poisson binomial,
 as described in the previous section.
 
-For rates of migration within the US, and migration into the US, we check the migration rate at *each* time step.
-We set the target range for each time step by assuming that the drift will be at most 1% per time step that has elapsed
+For rates of migration within the US, we check the migration rate at each time step, and overall.
+We set the target range for each time step by assuming with 95% certainty that the drift will be at most 1% per time step that has elapsed
 since initialization.
-
-For rates of migration out of the US, we check the migration rate over all time steps, setting a maximum 10% overall drift.
-There is no particular reason for this discrepancy with the other two types of migration.
+Overall, we set a UI of +/-10% the ACS value.
 
 .. todo::
-  Let's correct the discrepancy in the proof-of-concept by checking rates both overall *and* on each time step, for all three migration types.
+  We do not yet test emigration, but plan to do so with similar assumptions.
+
+Migration into the US is a bit different; it is not an event with a rate of occurrence among
+an at-risk population.
+The only stochastic part of determining the number of immigration events is the
+:ref:`"stochastic rounding" used <census_prl_international_immigration>`.
+We check this rounding as a set of Bernoulli trials, one per time step:
+whether to round up or down.
 
 The PRL integration tests are run very frequently by the software engineering team.
 Due to how frequently they are run and the difficulty of debugging a failed test
 (perhaps requiring researcher input in some cases),
 it is important for these tests to be highly **specific**;
 they should very rarely fail by chance.
-For that reason, we set the specificity to 95%,
-in *addition* to the generally conservative approximations listed in the section above,
-which will in effect further increase this number.
+For that reason, we have set the Bayes factor cutoff to 100, commonly called "decisive,"
+in *addition* to the generally conservative approximations listed in the section above.
 In practice, by manually introducing bugs in the simulation, we have found that even with this very conservative approach, automated V&V is quite sensitive.
