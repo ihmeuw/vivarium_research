@@ -805,6 +805,7 @@ and 2 years after initialization. This approach can be summarized as:
 - Approximately 31.4% of simulants who start medication will discontinue all treatments within 1 year (this is a weighted average across medication types in reference above)
 - Simulants who make it one year on treatment will continue on treatment indefinitely - this is based on the relatively low number of patients who discontinued treatment between year 1 and year 2 
 - Simulants who discontinue treatment will not restart medication at any point 
+- This approach applies to both SBP and LDL-C medications, although discontinuation on the different medication classes is independent (e.g., discontinuing SBP meds does not affect a simulant's discontinuation rate on LDL-C meds)
 
 In practice, these principles are implemented through rules applied to at initialization 
 and on time steps: 
