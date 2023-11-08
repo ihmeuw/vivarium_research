@@ -105,3 +105,33 @@ When this adjustment is applied, we then see that the approximation between calc
 .. image:: bias_plot_with_adjustment.png
 
 This will allow us to model longer timesteps (and therefore decreasing the run-time of our simulations) without systematically biasing our simulation transition rates.
+
+
+.. note::
+
+  For reference, here is the code used to produce the plots included in this page.
+
+  .. code-block::
+
+    import pandas as pd
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    r = 5
+    df = pd.DataFrame()
+    df['scalar'] = np.linspace(1.01, 100, 100)
+    df['dt'] = (1/r) / df.scalar
+    df['r_dt'] = r * df.dt
+    df['r_prime'] = (-1 / df.dt) * np.log(1 - df.dt * r)
+    df['prob'] = 1 - np.exp(-r * df.dt)
+    df['prob_prime'] = 1 - np.exp(-df.r_prime * df.dt)
+    df['ratio'] = df.prob / df.r_dt 
+    df['ratio_prime'] = df.prob_prime / df.r_dt 
+
+    plt.plot(df.scalar, df.ratio)
+    plt.plot(df.scalar, df.ratio_prime)
+    plt.grid()
+    plt.legend(['Historical behavior','Proposed behavior'])
+    plt.xlabel('Time-to-event to timestep ratio')
+    plt.ylabel('Ratio of calculated probability to rate')
+    plt.title('Bias in rate-to-probability conversion\nby ratio of rate to timestep')
