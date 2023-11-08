@@ -31,6 +31,13 @@ Choosing an Appropriate Time Step
    :local:
    :depth: 3
 
+.. warning::
+
+  There are proposed/in-progress vivarium framework improvements that will affect the information on this page. These framework improvements include:
+
+    1. In-progress implementation of a variable simulation clock that allows for timestep duration to be affected by vivarium components
+    2. Outstanding proposal to update the default rate-to-probability calculation as a function of the simulation timestep to account for potential bias, :ref:`as described here <rate_timestep_adjustment>`.
+
 General Considerations
 ----------------------
 
