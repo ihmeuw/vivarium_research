@@ -171,6 +171,52 @@ of mortality among simulants with multiple myeloma and excess mortality among
 simulants with multiple myeloma for "other causes," as typically defined by the
 cause-deleted all-cause mortality rate, should be zero.
 
+Multiplier (not implemented)
+++++++++++++++++++++++++++++
+
+.. note::
+  In order to speed up the simulation, we considered "scaling up" prevalence and incidence.
+  Multiple myeloma is a very rare disease, so this has the potential to enormously reduce
+  computational requirements and/or decrease stochastic uncertainty of results.
+  However, challenges in determining how much this would bias our results led us not to pursue
+  this path in Phase 2.
+
+  There are two approaches we considered to perform this "scaling up."
+  One is to literally multiply the incidence and prevalence rates by a constant.
+  The other is to multiply the prevalence rate by a constant and scale the incidence rate in
+  a way that *accounts* for the change in size of the susceptible population.
+
+  This section describes the bias that would be expected if we used the first (simpler) approach,
+  **and our multiple myeloma prevalence rates (divided by the multiplier) validated to GBD.**
+  However, we know that even in the current model (equivalent to the multiplier being equal to 1),
+  our prevalence rates are very different from GBD in older age groups.
+
+  I now believe that using the second approach is clearly better, and did some thinking on what the
+  bias would be, **accounting for the mismatch between simulated and GBD prevalence**, `here <https://github.com/ihmeuw/vivarium_research/pull/908#discussion_r911492115>`_.
+  Broadly speaking, I think our bias in incident cases relative to prevalent cases is already substantial without a multiplier,
+  and wouldn't get much worse with one.
+
+  It could also be a cleaner solution than any of this to run a simulation where **everyone** has multiple myeloma,
+  directly calculate from GBD what the incidence-to-prevalence ratio should be (in the baseline scenario), and implement that in Vivarium
+  as a sort of "fertility" component.
+  In other words, tracking only the population with multiple myeloma, and treating incidence as a simulation enter event.
+
+Because simulants in the susceptible state do not figure into our results, and multiple myeloma is so rare,
+the standard approach would require a very large population in order to have enough simulants with MM for analysis.
+To allow for meaningful results with smaller populations, we have decided to **multiply all GBD prevalence and
+incidence inputs by 50**. Results in the form of counts or proportions of the total population will be divided by 50
+before interpretation. Results that are proportions of the population with multiple myeloma, or any sub-group with
+multiple myeloma, do not require any interpretation change.
+
+
+The only effect this has on simulation results (besides needing to divide some by 50) is that the susceptible population
+will be smaller than it is in reality, and therefore incident MM will be lower in relation to prevalent MM. This bias is in proportion to the change
+in size of the susceptible population. As mentioned above, multiple myeloma is very rare. According to `GBD Compare <http://ihmeuw.org/5spe>`_, the MM
+prevalence in the highest-prevalence age/sex group is 0.177%. A 50x multiplier increases this prevalence to 8.85%, which means
+our incidence of MM **per prevalent case of MM** in this group will only be biased downward by :math:`1 - \frac{1 - 0.085}{1 - 0.00177}` = 8.34%.
+The observed prevalence in our simulation may differ from GBD prevalence, but this indicates that bias will be small, especially because most age/sex
+groups will be significantly less affected.
+
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
@@ -217,7 +263,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      - Notes
    * - S
      - prevalence
-     - (1 - prev_c486)
+     - Initialized to (1 - (prev_c486 * multiplier)); multiplier is currently 1; see multiplier section above
      - 
    * - S
      - excess mortality rate
@@ -225,7 +271,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      - 
    * - NDMM
      - prevalence
-     - Derived from "burn-in" method
+     - Initialized to prev_c486 * multiplier; derived from "burn-in" method
      - 
    * - NDMM
      - excess mortality rate
@@ -233,7 +279,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      -
    * - MM_first_relapse
      - prevalence
-     - Derived from "burn-in" method
+     - Initialized to 0; derived from "burn-in" method
      - 
    * - MM_first_relapse
      - excess mortality rate
@@ -241,7 +287,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      -
    * - MM_second_relapse
      - prevalence
-     - Derived from "burn-in" method
+     - Initialized to 0; derived from "burn-in" method
      - 
    * - MM_second_relapse
      - excess mortality rate
@@ -249,7 +295,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      -
    * - MM_third_relapse
      - prevalence
-     - Derived from "burn-in" method
+     - Initialized to 0; derived from "burn-in" method
      - 
    * - MM_third_relapse
      - excess mortality rate
@@ -257,7 +303,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
      -
    * - MM_fourth_or_higher_relapse
      - prevalence
-     - Derived from "burn-in" method
+     - Initialized to 0; derived from "burn-in" method
      - 
    * - MM_fourth_or_higher_relapse
      - excess mortality rate
@@ -276,7 +322,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
    * - incidence_MM
      - S
      - NDMM
-     - :math:`\frac{\text{incidence_c486}}{1-\text{prev_c486}}`
+     - :math:`\frac{\text{incidence_c486} * multiplier}{1 - \text{prev_c486}}`; multiplier is currently 1; see multiplier section above
      - incidence of MM among susceptible population
    * - incidence_MM_first_relapse
      - NDMM
@@ -478,71 +524,22 @@ Model Assumptions and Limitations
    for risk factor and treatment effects.
 #. We assume that hazards increase by a constant hazard ratio with each additional relapse.
 
-Validation Criteria
-+++++++++++++++++++
+Validation and Verification Criteria
+++++++++++++++++++++++++++++++++++++
 
- - Model 1 (Susceptible to MM): compare simulation baseline results of MM prevalence, 
-   MM incidence, and MM cause-specific mortality stratified by age, sex, and year to 
-   GBD 2019 age-/sex-specific MM estimates.
- - Model 2 (MM to MM_{Nth}_relapse): compare simulation baseline results of overall 
-   survival and progression-free survival by disease state to line-specific survival 
-   outcomes obtained from [Braunlin-et-al-2020]_.
+ - MM incidence stratified by age, sex, and year should match GBD 2019 age-/sex-specific MM incidence. MM incidence stratified by only age and year should match GBD 2019 age-specific MM incidence. MM incidence stratified by only sex and year should match GBD 2019 sex-specific MM incidence, among the 30+ year old population (to avoid cohort effects). MM incidence stratified by only year should match GBD 2019 MM incidence, again among the 30+ year old population.
+ - The same as the previous for MM prevalence, except that it only need **approximately** match. As long as deviations are not too large among the largest age groups, this is acceptable.
+ - Simulation mortality rates in the MM states, stratified by year and age and/or sex as above, should **approximately** match GBD 2019 all-cause mortality with the MM cause deleted plus the GBD 2019 MM EMR.
+ - Simulation mortality rates in the non-MM state, stratified by year and age and/or sex as above, should match GBD 2019 all-cause mortality with the MM cause deleted.
+ - MM-state-specific survival analysis in the baseline scenario of time-to-death (or overall survival in the case of fourth and higher relapse) and time-to-next-treatment by disease state should match the corresponding curves obtained from Flatiron survival analysis. For detail on how risks will be calculated in each simulation timestep, see the V&V section of :ref:`the MM treatment documentation <multiple_myeloma_treatment>`.
+ - The proportions of simulants with MM in the different MM cause model states should change from initialization (since all simulants are initialized into NDMM) and then stabilize without a significant time trend before 2021, indicating that our burn-in period is long enough to reach a steady state.
 
-.. list-table:: Count measures from simulation stratified by disease state and time
-   :widths: 1 10
-   :header-rows: 1
-   
-   * - Measure
-     - Definition
-   * - disease_state
-     - indication of health status 
-   * - t_start
-     - start time since entrance of specified disease state (months)
-   * - t_end
-     - end time since entrance of specified disease state (months)
-   * - deaths
-     - count of deaths among simulants with specified disease state for a given 
-       period of (t_end - t_start) months
-   * - progression
-     - count of incident cases to new line of treatment among simulants with 
-       specified disease state for a given period of (t_end - t_start) months
-   * - person_time
-     - count of person time among simulants with specified disease state contributed 
-       to a given period of (t_end - t_start) months
+.. warning::
+  In both Phase 1 and Phase 2, multiple myeloma prevalence sharply differed from GBD 2019, particularly in the older age groups.
+  See `the graphs in this V&V notebook  <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/b1d2d1f6263a902c17cc3e300c50dee5907b938c/verification/model_0/mm_cause_vs_gbd.ipynb>`_ for examples of this.
+  We believe this is due in part to the *replacement* of all-cause mortality with the mortality from the Flatiron cohort,
+  instead of back-calculating excess mortality.
+  If we return to this model, this should be a priority area to improve.
 
-.. list-table:: OS and PFS from simulation stratified by line of treatment
-   :header-rows: 1
-
-   * - state
-     - line_of_tx
-     - outcome
-     - measure
-     - numerator
-     - denominator
-   * - MM
-     - first
-     - OS
-     - excess mortality
-     - mm_deaths_count
-     - mm_state_person_time
-   * - MM
-     - first
-     - PFS
-     - progression
-     - mm_to_mm_first_relapse_incidence_count
-     - mm_state_person_time
-   * - MM_{Nth}_relapse
-     - N+1
-     - OS
-     - excess mortality
-     - mm_{Nth}_relapse_deaths_count
-     - mm_{Nth}_relapse_state_person_time
-   * - MM_{Nth}_relapse
-     - N+1
-     - PFS
-     - progression
-     - mm_{Nth}_relapse_to_mm_{(N+1)th}_relapse_incidence_count
-     - mm_{Nth}_relapse_state_person_time
-
-Formula to calculate OS or PFS by line of treatment = 
-:math:`\prod \limits_{t=0}^{t<=n} (1 - \frac{numerator}{denominator} \times duration)`
+.. todo::
+  In the existing V&V, mortality was not validated conditional on MM state as described above, only overall.
