@@ -414,6 +414,8 @@ The general strategy for developing timestep rules for this project has been to 
 
   Fill out this section with more detailed timestep rules as a function of risk category, as previewed in RT meeting
 
+  Note that artifact values for diarrheal diseases and LRI remission rates currently include rate adjustment -- we may want to remove this adjustment from the artifact values depending on our path forward.
+
 .. _nutritionoptimizationchild4.0:
 
 2.5 Simulation scenarios
