@@ -358,11 +358,61 @@ in the simulation will be informed using data specific to the post neonatal age 
     - 2029-12-31
     - 
   * - Timestep
-    - 4 days
-    - May eventually update to variable or 28 days with YLL/YLD-only modeling strategy (likely not for wave I)
+    - Non-varying: 4 days. For variable timesteps details see section below. 
+    - 
   * - Randomness key columns
     - ['entrance_time', 'maternal_id']
     - Entrance time should be identical for all simulants despite simulants having different birth dates/times from the pregnancy simulation
+
+Variable timestep rules
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The general strategy for developing timestep rules for this project has been to review all transition rates and determine the shortest-time-to-event intervals across different demographics. This was done by selecting the maximum rate across all 1,000 draws and manually evaluating/grouping by demographic group, `as explored in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/timestep_investigation.ipynb>`_.
+
+**For test run:**
+
+.. list-table::
+  :header-rows: 1
+
+  * - Group
+    - Timestep in days
+    - Rationale
+    - Note
+  * - Neonatal age group
+    - 0.5
+    - Lower than current 4 days to test whether V&V improves for these age groups
+    - Note that this timestep will still be unacceptably large for the highest risk LBWSG categories, but an improvement from 4 days.
+  * - Acute disease (diarrheal diseases, LRI, measles, OR malaria)
+    - 4
+    - Shortest time to event is remission rate of diarrheal diseases (4.2 days)
+    - Maintaining currently implemented 4 day timestep here for consistency between models as cause remission rates have been adjusted to this timestep duration
+  * - 1-5 month age group
+    - 4
+    - Shortest time to event is 14 days (if we are modeling wasting transitions in this age group (model 10 and beyond); otherwise 23 days for highest risk CGF categories.
+    - Keep currently implemented timestep for consistency (note that we will have relatively larger timestep:time-to-events for this age group than the "otherwise" category)
+  * - Otherwise
+    - 8
+    - Shortest time to event is in MAM and mild states (35 days). Timestep selected as 25% of this duration.
+    - 
+
+.. note::
+
+  Preference for this test run would be to use the model version used for wave I production runs.
+
+  However, if this model version is not ready-to-go, then we should run two versions of the latest wave II model:
+
+    - One with 4 day timesteps for all simulants
+    - One with the variable timesteps described in the table above
+
+  This is because there are ongoing V&V issues with the most recent wave II models (as of 11/13/23), so we will use the model run with non-variable timesteps as our V&V target rather than GBD/artifact validation targets.
+
+  Regardless of the model version used, the baseline pregnancy and baseline child model scenario should be used and we should run for 5 draws.
+
+**For future runs:**
+
+.. todo::
+
+  Fill out this section with more detailed timestep rules as a function of risk category, as previewed in RT meeting
 
 .. _nutritionoptimizationchild4.0:
 
@@ -673,7 +723,7 @@ Wave I
     - 
     - 
   * - 5.3
-    - Update PAF values in accordance with data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
+    - Update PAF values `in accordance with data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
     - Baseline
     - Baseline
     - 
