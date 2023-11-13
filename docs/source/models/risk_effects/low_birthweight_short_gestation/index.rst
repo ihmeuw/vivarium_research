@@ -921,7 +921,7 @@ code above:
   categories.
 
   Additionally, we further reduce the influence of stochastic variation by enforcing an exact 
-  unifrom exposure distribution within each LWBSG exposure category rather than randomly
+  uniform exposure distribution within each LWBSG exposure category rather than randomly
   sampling an exposure from a uniform distribution for each simulant.
 
 .. todo::
