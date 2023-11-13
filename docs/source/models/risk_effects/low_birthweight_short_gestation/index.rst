@@ -907,6 +907,29 @@ average relative risk and the PAF for the simulated population. Here is Python
 (pseudo-)code to achieve this, continuing from the relative risk interpolation
 code above:
 
+.. note::
+
+  For the nutrition optimization child simulation, we have conducted this PAF calculation
+  slightly differently than done in the code block below. For the nutrition
+  optimization simulation LBWSG PAF calculation, we have likewise utilized
+  the vivarium microsimulation to initialze a population of simulants, assess their LBWSG
+  relative risks, and then compute the PAF among the simulated population. 
+
+  However, in the nutrition optimization simulation, we have stratified the initialized 
+  population by LBWSG exposure category. This allow us avoid having small counts in the 
+  low-exposure categories and reduces the influence of stochastic variation for these
+  categories.
+
+  Additionally, we further reduce the influence of stochastic variation by enforcing an exact 
+  uniform exposure distribution within each LWBSG exposure category rather than randomly
+  sampling an exposure from a uniform distribution for each simulant.
+
+.. todo::
+  
+  Link to the code for LBWSG PAF calculation used for the nutrition optimization simulation and 
+  also provide information on minimum population size testing for each age/sex/location/category
+  group.
+
 .. code-block:: Python
 
   def initialize_population_from_lbwsg_exposure(
