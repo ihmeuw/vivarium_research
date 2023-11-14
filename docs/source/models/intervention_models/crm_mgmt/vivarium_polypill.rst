@@ -131,8 +131,8 @@ treatment effect component (e.g., matches the other parts of this model).
 The polypill includes: 
 - Amlodipine where the standard dose is 5 mg. Our polypill uses half standard dose or 2.5 mg. 
 - Losartan where the standard dose is 50 mg. Our polypill uses half standard dose or 25 mg. 
-- Hydrochlorothiazide is not used in isolation in the UK but is simialr to chlorthalidone in action and dosing, which has a standard dose of 25 mg. Our polypill uses half standard dose so that would map to 12.5 mg. 
-- [Munoz-NEJM]_ includes atorvastatin as well which we would be ignoring. This limitation was noting and discussed with Greg. 
+- Hydrochlorothiazide is not used in isolation in the UK but is similar to chlorthalidone in action and dosing, which has a standard dose of 25 mg. Our polypill uses half standard dose so that would map to 12.5 mg. 
+- [Munoz-NEJM]_ includes atorvastatin as well which we would be ignoring. This limitation was noted and discussed with Greg. 
 
 
 Assumptions and Limitations
