@@ -1237,11 +1237,11 @@ Wave II
     - Action plan
     - Timeline
   * - 1. Underestimation of MAM to mild transition rate among all age groups older than 6 months
-    - Unknown - perhaps related to model 10.3 updates to treatment effects on this transition rate?
+    - May be overwriting MAM treatment PAFs to zero for all ages rather than for 1-5 month age group only
     - Engineers to investigate
     - For model 10.4
   * - 2. Underestimation of untreated SAM to MAM transition rate among 1-5 month age group
-    - Unknown - perhaps related to model 10.3 updates to treatment effects on this transition rate?
+    - May not be setting SAM treatment PAFs to zero for 1-5 month age group
     - Engineers to investigate 
     - For model 10.4
   * - 3. Total MAM exposure underestimated for early age groups in model 11.0 
