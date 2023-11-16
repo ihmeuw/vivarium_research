@@ -1255,4 +1255,4 @@ Wave II
   * - 5. Targeted MAM intervention not targeted to worse MAM state
     - Bug
     - Hussain implemented fix, but still running
-    - odel 11.1
+    - Model 11.1
