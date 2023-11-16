@@ -1244,15 +1244,15 @@ Wave II
     - Unknown - perhaps related to model 10.3 updates to treatment effects on this transition rate?
     - Engineers to investigate 
     - For model 10.4
-  * - 3. Total MAM exposure underestimated for early age groups in model 11.0 (note we overestimate for the later age groups, but I think this may be a result of issue #1)
-    - Unknown, but let's check how we are initializing MAM exposure with the substates. It looks like we might be underestimating by ~1/3, which would mean that we are using the "worse" MAM state as the total MAM envelope rather than worse + better as the total MAM envelope
-    - Engineers to investigate and resolve
-    - For model 11.1 or 11.2
+  * - 3. Total MAM exposure underestimated for early age groups in model 11.0 
+    - Identified issue with wasting initialization using worse MAM rather than total MAM
+    - Hussain implemented fix, but still running
+    - Model 11.1 
   * - 4. Targeted MAM intervention not targeted to those 6-24 months (should be 100% coverage for this group)
     - Bug
-    - Hussain implemented fix, but not yet run
-    - For model 11.1
+    - Hussain implemented fix, but still running
+    - Model 11.1
   * - 5. Targeted MAM intervention not targeted to worse MAM state
     - Bug
-    - Hussain implemented fix, but not yet run
-    - For model 11.1
+    - Hussain implemented fix, but still running
+    - odel 11.1
