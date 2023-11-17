@@ -36,27 +36,33 @@ GBD Definitions
 These definitions and others can be found on the `glossary Hub page <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=INTRANET&title=IHME+Glossary>`_. 
 
 .. list-table:: GBD definitions of terms 
-  :widths: 15 15 15
+  :widths: 15 15 15 15
   :header-rows: 1
 
   * - Term 
     - Definition
     - Notes
+    - Example 
   * - Cause
     - A cause of death or disability. Includes injuries, diseases, and conditions. 
     - See cause list for more details 
+    - Ischemic heart disease
   * - Cause List 
     - The list of all causes in GBD. It is a mutually exclusive and collectively exhaustive list of hierarchical categories that does not ignore any cause of death. All death and disability within GBD can be found within the cause list. 
     - 
+    - N/A
   * - Health State 
     - The current state of health associated with a given cause and sequela.
-    - 
+    - Each sequela has one health state associated with it. This might be combination of symptoms "Mild abdominal pain with mild anemia", but it is defined as a single "health state". 
+    - Heart failure, mild 
   * - Impairment
     - The symptoms of a disease, such as vision loss as a result of diabetes. Clinically the same as sequelae. 
     - GBD calculates these very differently than sequelae despite them being clinically the same. 
+    - Heart failure 
   * - Sequela or Sequelae 
     - The medical conditions that can occur among people who contract a disease or suffer an injury. In other words, the negative health effects of a cause that are associated with certain health states. For example, chronic kidney disease can be a sequela of diabetes, neck pain can be a sequela of whiplash, and foot ulcers is a sequela of diabetes.
-    - "Sequela" is singular. "Sequelae" is plural. 
+    - "Sequela" is singular. "Sequelae" is plural. There are asymptomatic sequelae. They are distinct, mutually exclusive categories of health consequences that can be directly attributed to a cause. 
+    - Mild heart failure due to ischemic heart disease 
 
 
 Understanding the Definitions within the GBD Hierarchy Context
@@ -71,23 +77,21 @@ In particular, we will examine:
 - Impairments: heart failure 
 - Sequelae: numerous, including "severe heart failure due to IHD" and "AMI first 2 days" among others 
 
+To help with understanding some of the below information, a diagram of the heart failure impairment is provided: 
+
+.. image:: health_state_impairment_sequela.svg
+
+
 Causes
 ++++++
 
-The cause hierarchy diagrams for IHD and HHD are included here as a reference. 
+The cause hierarchy diagram for IHD and HHD is included here as a reference. 
 
-
-**IHD**:
-
-.. image:: cause_hierarchy_ihd.svg
-
-**HHD**: 
-
-.. image:: cause_hierarchy_hhd.svg
+.. image:: cause_hierarchy_ihd_hhd.svg
 
 As you can see, the cause hierarchy slowly breaks down cause groups into more specific 
 diseases, moving from all non-communicable diseases to specific types of cardiovascular 
-disease. At each level, the cause hierarchy is mutually exclusive and 
+disease. At each level (labeled), the cause hierarchy is mutually exclusive and 
 collectively exhaustive - meaning all disease and death can be placed into a group at 
 each level of the diagram. 
 
@@ -113,7 +117,8 @@ Health States
 +++++++++++++
 
 A health state is the amount of health or disability within a sequelae. This is summarized 
-through the disability weight. More information on this can be found in `this section of the cause model page <https://vivarium-research.readthedocs.io/en/latest/model_design/vivarium_model_components/causes/index.html#disability-weights>`_. 
+through the disability weight. More information on this can be found in `this section of the cause model page <https://vivarium-research.readthedocs.io/en/latest/model_design/vivarium_model_components/causes/index.html#disability-weights>`_. A health state for a sequelae and its disability weight can be 
+found in the GBD methods appendix. 
 
 Using our above sequelae (acute myocardial infarction and angina) as an example - 
 the amount of health lost while experiencing an acute 
@@ -132,10 +137,10 @@ Impairments
 
 In some cases, a medical condition or sequela might have multiple causes. For example, heart failure. 
 It is caused by both IHD and HHD (and others!) and has sequelae associated with both causes. 
-We even learned above that it has the exact same health state in both causes. Heart failure 
-is an example of an impairment. 
+We even learned above that it can have the exact same health state in both causes. Heart failure 
+is an example of an impairment. It is shown in blue on the diagram above. 
 
-An impairment is a sequelae that shows up in 2 or more causes. 
+An impairment is a group of sequelae that show up in 2 or more causes. 
 
 In the GBD machinery, impairments are estimated very differently than sequelae. Instead of 
 estimating a cause and then its sequelae, impairments are estimated first and then attributed 
