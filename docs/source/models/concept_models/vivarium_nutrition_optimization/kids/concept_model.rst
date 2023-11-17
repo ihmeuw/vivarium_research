@@ -452,7 +452,7 @@ For each individual simulant, the duration of the next timestep should be determ
 
 .. important::
 
-  For this run, the artifact values for the diarrheal diseases and lower respiratory infections remission rates should be updated in accordance with the changes in this PR.
+  For this run, the artifact values for the diarrheal diseases and lower respiratory infections remission rates should be updated `in accordance with the changes in this PR. <https://github.com/ihmeuw/vivarium_research/pull/1400>`_
 
 .. _nutritionoptimizationchild4.0:
 
