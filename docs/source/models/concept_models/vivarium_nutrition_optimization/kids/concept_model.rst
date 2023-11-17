@@ -410,11 +410,49 @@ The general strategy for developing timestep rules for this project has been to 
 
 **For future runs:**
 
-.. todo::
+For each individual simulant, the duration of the next timestep should be determined by selecting the minimum value that results from the following two tables. We would like to run multiple runs with differing scalar values to test the impact of this parameter including values equal to 2 and 4 to start. Test runs should be performed on the baseline pregnancy and baseline child model scenarios and run across 5 draws.
 
-  Fill out this section with more detailed timestep rules as a function of risk category, as previewed in RT meeting
+.. list-table:: Equation-based timestep lengths
+  :header-rows: 1
 
-  Note that artifact values for diarrheal diseases and LRI remission rates currently include rate adjustment -- we may want to remove this adjustment from the artifact values depending on our path forward.
+  * - Component
+    - Timestep in days
+    - Note
+  * - Simulant-specific mortality hazard
+    - 365.25/(1/mortality_rate_i)/scalar
+    - 
+  * - Diarrheal diseases incidence rate
+    - 365.25/(1/(diarrheal_diseases_incidence_rate * (1-PAF) * whz_rr_i * haz_rr_i * waz_rr_9))/scalar
+    - Use diarrheal diseases incidence rate here because it is the largest of the modeled causes. PAF and relative risk values should be specific to affected_entity=diarrheal_diseases and affected_measure=incidence_rate. 
+
+.. list-table:: Group-based timestep lengths
+  :header-rows: 1
+
+  * - Group
+    - Timestep in days
+    - Note
+  * - Early neonatal age group
+    - 2
+    - 
+  * - Late neonatal age group
+    - 4
+    - 
+  * - Infected with diarrheal diseases, LRI, measles, OR malaria
+    - 4.2/scalar
+    - Minimum duration of diarrheal diseases case selected as it is the shortest duration of all modeled acute causes
+  * - 1-5 month age group AND in SAM wasting state (cat1)
+    - 14/scalar
+    - 
+  * - Mild or MAM wasting states (cat3 or cat2)
+    - 35/scalar
+    - 
+  * - Otherwise
+    - 126/scalar
+    - 
+
+.. important::
+
+  For this run, the artifact values for the diarrheal diseases and lower respiratory infections remission rates should be updated in accordance with the changes in this PR.
 
 .. _nutritionoptimizationchild4.0:
 
