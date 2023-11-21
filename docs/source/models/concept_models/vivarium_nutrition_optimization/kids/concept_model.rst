@@ -410,7 +410,18 @@ The general strategy for developing timestep rules for this project has been to 
 
 **For future runs:**
 
-For each individual simulant, the duration of the next timestep should be determined by selecting the minimum value that results from the following two tables. We would like to run multiple runs with differing scalar values to test the impact of this parameter including values equal to 2 and 4 to start. Test runs should be performed on the baseline pregnancy and baseline child model scenarios and run across 5 draws.
+For each individual simulant, the duration of the next timestep should be determined by selecting the minimum value that results from the following two tables. We would like to run multiple runs with differing scalar values to test the impact of this parameter. Test runs should be performed on the baseline pregnancy and baseline child model scenarios and run across 5 draws.
+
+Requested test runs:
+
+1. Standard probability value; scalar=2
+2. Standard probability value; scalar=10
+3. Probability = annual rate * timestep; scalar=2
+4. Probability = annual rate * timestep; scalar=10
+
+.. important::
+
+  For these runs, the artifact values for the diarrheal diseases and lower respiratory infections remission rates should be updated `in accordance with the changes in this PR. <https://github.com/ihmeuw/vivarium_research/pull/1400>`_
 
 .. list-table:: Equation-based timestep lengths
   :header-rows: 1
@@ -449,10 +460,6 @@ For each individual simulant, the duration of the next timestep should be determ
   * - Otherwise
     - 126/scalar
     - 
-
-.. important::
-
-  For this run, the artifact values for the diarrheal diseases and lower respiratory infections remission rates should be updated `in accordance with the changes in this PR. <https://github.com/ihmeuw/vivarium_research/pull/1400>`_
 
 .. _nutritionoptimizationchild4.0:
 
