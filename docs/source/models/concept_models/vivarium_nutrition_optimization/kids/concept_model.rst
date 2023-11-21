@@ -1254,7 +1254,7 @@ Wave II
     - Timeline
   * - 1: Underestimation of MAM and SAM exposure despite accurate replication of artifact wasting transition rates
     - Bug in generation of wasting transition rate version #4 that erroneously set c_mam and c_sam parameters to zero
-    - Update wasting transition rates to version 5 (in accordance with this PR)
+    - `Update wasting transition rates to version 5 (in accordance with this PR) <https://github.com/ihmeuw/vivarium_research/pull/1403>`_
     - Model 11.2
   * - 2: Targeted MAM intervention not targeted to those 6-24 months (should be 100% coverage for this group)
     - Unknown -- we thought a fix for this bug was included in model 11.1, but no change from 11.0
