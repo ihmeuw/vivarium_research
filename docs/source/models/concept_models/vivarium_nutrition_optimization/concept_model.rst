@@ -385,7 +385,7 @@ As of 10/16/2023:
     - Returns counts that will need to be converted to rate. `Codcorrect version ID obtained here <https://hub.ihme.washington.edu/display/GBD2020/GBD+2021+CodCorrect+Tracking>`_
   * - Incidence
     - Incidence rates
-    - Not yet ready
+    - Ready
     - :code:`get_draws(gbd_round_id=7,`
 
       :code:`year_id=2021,`
@@ -398,10 +398,10 @@ As of 10/16/2023:
 
       :code:`decomp_step='iterative',`
 
-      :code:`version_id=???,`
+      :code:`version_id=1469,`
 
       :code:`measure_id=6)`
-    - Returns per person-year rate. `Final COMO version ID can be found here when ready <https://hub.ihme.washington.edu/display/GBD2020/COMO+tracking>`_
+    - Returns per person-year rate. `Final COMO version ID obtained here <https://hub.ihme.washington.edu/display/GBD2020/COMO+tracking>`_
   * - Risk exposure
     - Hemoglobin mean/standard deviation
     - Ready
@@ -463,13 +463,29 @@ As of 10/16/2023:
 
 - There are no PAFs in the table above as all PAFs are custom-calculated in this model, including:
 
-  - Hemoglobin on maternal disorders and maternal hemorrhage PAFs - calculated by the research team (unblocked)
+  - `Hemoglobin on maternal disorders and maternal hemorrhage PAFs <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/hemoglobin_maternal_disorder_pafs/hemoglobin_and_maternal_disorders_pafs.csv>`_
 
   - LBWSG PAFs have been calculated by the engineers (unblocked)
 
   - CGF PAFs calculated by the research team (blocked by 2021 cause data artifact keys)
 
-- Joint BMI/hemoglobin exposure, as calculated by the research team (unblocked)
+- `Prevalence of hemoglobin below 100 g/L among the pregnant population <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_
+
+  - Overall (not age specific) values available here for use in the child simulation (to be calculated by research team, unblocked)
+
+- `Prevalence of hemoglobin below 70 g/L among the pregnant population <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_
+
+  - Overall (not age specific) values available here for use in the child simulation (to be calculated by research team, unblocked)
+
+- Joint BMI/hemoglobin exposure, as calculated by the research team 
+
+  - `Prevalence of low BMI given hemoglobin above 10 g/dL <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
+
+    - Overall (note age specific) values available here for use in the child simulation (to be calculated by research team, unblocked)
+
+  - `Prevalence of low BMI given hemoglobin below 10 g/dL <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
+
+    - Overall (note age specific) values available here for use in the child simulation (to be calculated by research team, unblocked)
 
 - Child growth failure accessory data (wasting transitions and correlated underweight exposure distributions) calculated by the research team (blocked by 2021 cause data artifact keys)
 
