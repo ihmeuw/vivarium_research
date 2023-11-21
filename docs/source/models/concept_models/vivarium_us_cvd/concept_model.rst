@@ -835,12 +835,14 @@ are maintained throughout the sim. This was validated in the interactive sim.
 
 **On Time Steps**
 
-All simulants receiving treatment will have a chance to discontinue 
-based on their time on treatment. Any simulant who has started treatment 
-within 1 year will have a 31.4% chance of discontinuing treatment within 1 person-year. 
+A simulant who starts treatment (and does not end treatment for any other 
+reason such as death within the first year) should have a 31.4% chance of 
+discontinuing treatment within 1 year, with a constant risk over that time. 
+This probability is the same for all simulants. 
 
 Simulants who previously received and discontinued treatment are not eligible to 
-restart treatment. 
+restart treatment. They are therefore also not eligible for the outreach and 
+polypill interventions. They are still eligible for the lifestyle intervention. 
 
 Simulants who have not previously received or discontinued treatment can receive 
 treatment per the treatment ladder above. 
