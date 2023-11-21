@@ -32,7 +32,7 @@ Understanding GBD's Disease and Health Categories
 
 This document seeks to clarify a few different disease and health concepts in 
 GBD. These are: a cause, a sequela, a health state and an impairment. First, we 
-will explain these different concepts conceptual. The official GBD defintions 
+will explain these different concepts conceptually. The official GBD definitions 
 can be found at the bottom of the page. 
 
 Conceptual Definitions within the GBD Hierarchy Context
@@ -73,7 +73,8 @@ Sequelae
 
 Once you have selected a specific cause - for example, IHD - you can then identify the 
 sequelae within that cause. These are all of the items listed below IHD and HHD in the 
-diagrams above. 
+diagrams above. Sequelae are almost like the last level of the cause hierarchy, but are 
+not modeled with the same complexity as causes. 
 
 Sequelae detail a specific medical condition associated with 
 a cause. For example, IHD has medical conditions like acute myocardial infarction 
@@ -86,15 +87,17 @@ angina are both sequelae within IHD.
 Health States
 +++++++++++++
 
-A health state is the amount of health or disability within a sequelae. This is summarized 
-through the disability weight. More information on this can be found in `this section of the cause model page <https://vivarium-research.readthedocs.io/en/latest/model_design/vivarium_model_components/causes/index.html#disability-weights>`_. A health state for a sequelae and its disability weight can be 
+A health state is the state of health within a sequelae. This is summarized as the amount 
+of disability with a single value called the disability weight. More information on this can be found in `this section of the cause model page <https://vivarium-research.readthedocs.io/en/latest/model_design/vivarium_model_components/causes/index.html#disability-weights>`_. A health state for a sequelae and its disability weight can be 
 found in the GBD methods appendix. 
 
 Using our above sequelae (acute myocardial infarction and angina) as an example - 
 the amount of health lost while experiencing an acute 
 myocardial infarction is quite high! You're likely hospitalized and in a lot of pain. 
+The health state here is called 'Acute myocardial infarction, days 1-2' and the disability weight is 0.432. 
 However, the health lost from angina might be less significant. You're likely at home and 
-might only experience discomfort when under stress. This affects your disability weight value. 
+might only experience discomfort when under stress. The health state is called 'Angina pectoris, mild' and 
+the disability weight is 0.033. 
 
 Each sequela has exactly one health state associated with it. If you are experiencing multiple 
 symptoms, such as "headache and chest pain", your health state contains all of these losses to 
@@ -109,27 +112,27 @@ say that the health state and therefore the disability weight is the same for bo
 Impairments
 +++++++++++
 
-Sometimes, GBD has a lot of information about a health state - such as severe heart failure in the 
+Sometimes, GBD has a lot of information about an overall condition - such as heart failure in the 
 example above - that the modelers want to utilize. However, in the process of normal GBD 
-modeling, this wouldn't be possible. Usually, the cause level information is calculated 
-first and then divded into sequelae. 
+modeling, this wouldn't be possible. Usually, information is calculated at the cause level first 
+(deaths, incidence, prevalence, etc.) and then divided into sequelae. This would make 
+it impossible to use information about heart failure generally. 
 
-Therefore, to use this valuable information about a health state, GBD created a new 
-category called impairments. An impairment is medically the same as a sequela, but 
-there is more information about it. To include this, GBD modelers first find the total 
+Therefore, to use this valuable information about a condition, GBD created a new 
+category called impairments. An impairment is medically the same as a sequela. 
+Meaning that for a doctor, a sequela and an impairment would both be a specific 
+medical condition associated with a cause. The difference between a sequela and 
+an impairment is not a clinical difference, it's an artifact of how GBD does its 
+modeling. 
+
+To include the extra information about an impairment, GBD modelers first find the total 
 amount of the impairment - heart failure - and then divide it between causes. This 
 creates the sequelae of "heart failure due to IHD" and "heart failure 
 due to HHD" for example. These are included in blue in the diagram above. 
 
-These sequelae therfore have the same health state. Therefore, an 
-impairment is a grouping of the related health states (mild/moderate/severe heart failure for 
-example) that show up in 2 or more causes. There are many examples that fit this 
-definition but are not GBD impairments, since the main criteria is the amount of 
-information about the health state. 
-
 Further information the GBD calculations can be found on the `Impairments 101 Hub page <https://hub.ihme.washington.edu/display/GBD2016/Impairments+101>`_. 
 
-To learn more about how to model impairments, check out this :ref:`page on modeling impairments <impairments>`. 
+To learn more about how to model impairments in Vivarium, check out this :ref:`page on modeling impairments <impairments>`. 
 
 Official GBD Definitions
 ------------------------
