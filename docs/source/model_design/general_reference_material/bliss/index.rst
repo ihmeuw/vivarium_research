@@ -202,7 +202,10 @@ Sex and gender characteristics are a tangle of causal relationships and feedback
 **Multi-dimensional**: Sex includes dimensions such as chromosomes, gonads, hormones, etc, while gender
 includes dimensions of identity, presentation, perception, and societal roles.
 To say that a person has "male sex" or "female gender" can be a useful shorthand
-when most or all of the dimensions usually "align," but stopping at observing a difference
+when most or all of the dimensions usually "align," but it ignores the complexities
+of what happens when these dimensions don't align -- and nearly every imaginable
+combination occurs at least some the time.
+Furthermore, stopping at observing a difference
 between groups categorized like this does little to explain the underlying mechanism.
 Many research questions can be more precisely stated in terms of a specific dimension or dimensions
 of sex and/or gender. [Bauer_2022]_
