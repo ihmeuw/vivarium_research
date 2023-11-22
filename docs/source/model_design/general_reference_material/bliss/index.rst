@@ -269,8 +269,8 @@ both how to use the variables reported in our analysis, and how to acknowledge
 the limitations introduced to our research by these issues in our
 research outputs (presentations, reports, etc).
 
-3.1 Investigate sex and gender variables in upstream research 
--------------------------------------------------------------
+3.1 Sex and gender variables in upstream research 
+-------------------------------------------------
 
 **We should not take the names of sex or gender variables in input data at
 face value.**
@@ -340,8 +340,8 @@ relevant limitations accordingly.
 4.0 Methods 
 +++++++++++
 
-4.1 Investigate terminology
----------------------------
+4.1 Terminology
+---------------
 
 When we determine that a variable in an input data source reflects something different
 than the name it was given by the upstream researchers, we should use the more
