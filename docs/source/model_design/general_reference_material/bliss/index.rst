@@ -571,7 +571,7 @@ practices, as well as some lessons learned.
 
   Topics include: pregnancy, biological sex ... ?
 
-6.0 References
+7.0 References
 ++++++++++++++
 
 .. [VEHSS_DR] Lundeen EA, Burke-Conte Z, Rein DB, et al. Prevalence of Diabetic Retinopathy in the US in 2021. JAMA Ophthalmol. Published online June 15, 2023. doi:10.1001/jamaophthalmol.2023.2289, `online version <https://jamanetwork.com/journals/jamaophthalmology/fullarticle/2806093>`_
