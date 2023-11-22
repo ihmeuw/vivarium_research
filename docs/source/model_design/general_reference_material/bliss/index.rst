@@ -222,8 +222,8 @@ In some cases, even this may not be clear, for example if we are researching an
 association that could be mediated by either sex or gender (or both), making them both
 variables of interest.
 
-2.1 Define your proxy measure
------------------------------
+2.1 Proxy measures
+------------------
 
 When our input data does not include a variable of interest, we are forced to use
 **proxy measures**.
