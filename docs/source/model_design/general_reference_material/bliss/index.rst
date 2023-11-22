@@ -381,7 +381,7 @@ In the NHANES example, the full first sentence of the above quote was:
 -----------------
 
 3.2.1 Global Burden of Disease (GBD)
-------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. todo::
   Describe the best methodology/terminology for working with the "sex" variable from GBD
@@ -567,13 +567,12 @@ practices, as well as some lessons learned.
 .. image:: safe_space_icon.png
 
 6.0 Knowledge Share
--------------------
++++++++++++++++++++
 
 .. todo::
   
   Fill in this section with recommended papers on different topics so that if people are looking for references, they can easily find them. (e.g., this paper about pregnancy in transmasculine people: https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-020-03166-6)
-
-  Topics include: pregnancy, biological sex ... ?
+  
 
 .. list-table:: **Recommended papers on sex and/or gender-related topics**
    :header-rows: 1
