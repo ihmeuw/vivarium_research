@@ -481,7 +481,7 @@ As of 10/16/2023:
 
   - `Prevalence of low BMI given hemoglobin above 10 g/dL <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
 
-    - Overall (note age specific) values available here for use in the child simulation (to be calculated by research team, unblocked)
+    - Overall (not age specific) values available here for use in the child simulation (to be calculated by research team, unblocked)
 
   - `Prevalence of low BMI given hemoglobin below 10 g/dL <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
 
