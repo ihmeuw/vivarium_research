@@ -569,6 +569,8 @@ practices, as well as some lessons learned.
   
   Fill in this section with papers on different topics so that if people are looking for references, they can easily find them. (e.g., this paper about pregnancy in transmasculine people: https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-020-03166-6)
 
+  Topics include: pregnancy, biological sex ... ?
+
 6.0 References
 ++++++++++++++
 
