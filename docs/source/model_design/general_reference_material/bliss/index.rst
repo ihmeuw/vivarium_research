@@ -247,8 +247,11 @@ and intersex people.
 We should always weigh these harms against the potential benefits of the research
 before deciding to use a proxy measure.
 
-3.0 Data collection
-+++++++++++++++++++
+3.0 Methodology
++++++++++++++++
+
+3.1 Data collection
+-------------------
 
 Our research doesn't generally involve primary data collection.
 Therefore, the *input* data to our modeling process is almost always
@@ -269,8 +272,8 @@ both how to use the variables reported in our analysis, and how to acknowledge
 the limitations introduced to our research by these issues in our
 research outputs (presentations, reports, etc).
 
-3.1 Sex and gender variables in upstream research 
--------------------------------------------------
+3.1.1 Sex and gender variables in upstream research 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **We should not take the names of sex or gender variables in input data at
 face value.**
@@ -305,8 +308,8 @@ unless there are clear signs of effort to construct a valid sex/gender measure.
 Unfortunately, given current research practices, it is most common that a single binary variable
 labeled either "gender" or "sex" actually represents a non-differentiated sex/gender measure.
 
-3.2 Measurement error
----------------------
+3.1.2 Measurement error
+~~~~~~~~~~~~~~~~~~~~~~~
 
 In the evaluation of sex and/or gender as a variable in an epidemiologic study, error in
 the measurement of these variables can lead to bias in study results. Measurement error
@@ -337,11 +340,8 @@ minimize bias in study results. When we are using data published by others, it i
 to consider how results may be affected by potential measurement error and dicuss any
 relevant limitations accordingly.
 
-4.0 Methods 
-+++++++++++
-
-4.1 Terminology
----------------
+3.1.3 Terminology
+~~~~~~~~~~~~~~~~~
 
 When we determine that a variable in an input data source reflects something different
 than the name it was given by the upstream researchers, we should use the more
@@ -377,13 +377,17 @@ In the NHANES example, the full first sentence of the above quote was:
   interviewer if they hadn't already assumed the gender of the respondent, and could be
   interpreted as asking about biological sex.
 
-4.2 GBD
--------
+3.2 Data Analysis
+-----------------
+
+3.2.1 Global Burden of Disease (GBD)
+------------------------------------
 
 .. todo::
   Describe the best methodology/terminology for working with the "sex" variable from GBD
 
-5.0 Results
+
+4.0 Results
 +++++++++++
 
 As mentioned above, before beginning our research, we should determine the variables
@@ -411,7 +415,7 @@ When we present our findings, we have two goals:
 In this section, we make some suggestions about language to use in external
 communications when discussing findings (papers, talks, etc).
 
-5.1 Initial Description of Results
+4.1 Initial Description of Results
 ----------------------------------
 
 Before the first time a gender- or sex-related result is presented,
@@ -486,7 +490,7 @@ guess of what specific sex- and gender-related factors could be associated with 
 
   Reference 'measurement error' section again here.
 
-5.2 Further Results (Text, Figures, Tables)
+4.2 Further Results (Text, Figures, Tables)
 -------------------------------------------
 
 Of course, it is not possible to include a long explanation each and every time sex- or
@@ -525,7 +529,7 @@ while the descriptive epidemiology example might use this:
   This should be shorter!
 
 
-5.3 Other Gender-Inclusive Guides
+4.3 Other Gender-Inclusive Guides
 ---------------------------------
 
 - DEI Research Guide
@@ -534,14 +538,14 @@ while the descriptive epidemiology example might use this:
 - World Health Organization
 
 
-6.0 BLISS in Action 
+5.0 BLISS in Action 
 +++++++++++++++++++
 
 Our team has been able to implement these BLISS guidelines in our own work. 
 Here we chronicle guides, papers and presentations that include BLISS best 
 practices, as well as some lessons learned. 
 
-6.1 Examples of Our Work with BLISS
+5.1 Examples of Our Work with BLISS
 -----------------------------------
 
 #. A `BLISS guide for Topics Concerning Pregnancy <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B3E09642A-1A84-4D63-8690-EDA98E611295%7D&file=202204_Gender%20Neutral%20Language%20for%20Topics%20concerning%20Pregnancy.docx&action=default&mobileredirect=true>`_. This includes recommendations on gender inclusive language that can be used for topics of pregnancy and child birth. 
@@ -550,7 +554,7 @@ practices, as well as some lessons learned.
 
 
 
-6.2 Lessons Learned
+5.2 Lessons Learned
 -------------------
 
 - Most people are willing and even enthusiastic about improving language to be more gender inclusive! 
@@ -562,7 +566,7 @@ practices, as well as some lessons learned.
 
 .. image:: safe_space_icon.png
 
-6.3 Knowledge Share
+6.0 Knowledge Share
 -------------------
 
 .. todo::
