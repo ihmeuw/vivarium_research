@@ -1203,11 +1203,14 @@ Code is below for reference
     - Changes to Inertia with Simulant and Random Propensities 
     - The medication levels were tested for a `50 50 component split <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_10_18_23.ipynb>`_ and a `75 random 25 simulant component split <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_10_20_23.ipynb>`_. It was decided to proceed with the 50/50 split. There are some changes in treatment over the course of the sim, but we do not expect them to impact final results significantly.  
   * - 23.0
-    - Update to GBD 2021 
-    - Note: not planned to be completed before NIH results 
+    - Add treatment discontinuation 
+    - Although treatment discontinuation did not acheive the idealized results we might have hoped for, we still think this is a significant improvement to the model. We tested the results both in the `general sim outputs <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_11_20_23.ipynb>`_ and in the interactive sim in order to include only the simulants that `need medication <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/interactive_medication_inertia.ipynb>`_. Treatment rates still change, but are acceptably stable over time. This is a limitation in the model. 
   * - 24.0
     - Final Runs 
     - Research team to specify this further 
+  * - 25.0
+    - Update to GBD 2021 
+    - No longer planned at this time 
 
 Model 3 V&V for the relative risk with angina showed a lot of variability: 
     .. image:: Model3_VV_Angina.png
