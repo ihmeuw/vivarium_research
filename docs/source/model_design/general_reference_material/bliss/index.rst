@@ -37,6 +37,12 @@ Building Language Inclusivity into Simulation Science (BLISS) is an important pa
 our team's work! Here you will find our ongoing style guide for incorporating inclusive 
 language into our day-to-day work.
 
+For those on the simulation science team or not - if you are setting out to do some research 
+that somehow touches on sex and gender and  you aren’t sure how to proceed with methods and 
+results, this should be exactly what you need!
+
+.. contents::
+  :local:
 
 1.0 Overview 
 ++++++++++++
