@@ -204,7 +204,7 @@ includes dimensions of identity, presentation, perception, and societal roles.
 To say that a person has "male sex" or "female gender" can be a useful shorthand
 when most or all of the dimensions usually "align," but it ignores the complexities
 of what happens when these dimensions don't align -- and nearly every imaginable
-combination occurs at least some the time.
+combination occurs at least some of the time.
 Furthermore, stopping at observing a difference
 between groups categorized like this does little to explain the underlying mechanism.
 Many research questions can be more precisely stated in terms of a specific dimension or dimensions
@@ -212,7 +212,7 @@ of sex and/or gender. [Bauer_2022]_
 
 It is important to distinguish conceptually between sex and gender,
 and where possible between the different dimensions within each of them,
-both to be inclusive of all people and to produce solid research.
+both to be inclusive of all people and to produce valid research.
 However, it is also important not to assume that the causal relationships between
 sex- and gender-related factors are simple or easy to determine.
 
@@ -220,7 +220,7 @@ There is a lot we still don't know about the science of sex and gender,
 and lots of ongoing research about these topics.
 However, this understanding of sex and gender as an intertwined collection
 of factors spanning biology, psychology, and sociology is the foundation
-we build on in this guide.
+upon which we build in this guide.
 
 1.3 Glossary of General Terminology
 -----------------------------------
