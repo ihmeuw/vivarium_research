@@ -178,7 +178,7 @@ one other, because all these factors are strongly correlated with each other.
 
 The dominant culture in the West has historically seen sex and gender as synonymous and
 binary.
-According to the traditional view, a person is born either male or female,
+According to this traditional view, a person is born either male or female,
 and people born male should identify and behave like boys and men,
 while people born female should identify and behave like girls and women.
 This viewpoint treats the correlations between different aspects of sex and gender
