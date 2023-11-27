@@ -247,10 +247,6 @@ throughout this style guide.
        in an external data source (e.g., vague survey question that different respondents may interpret differently) 
        or from the compilation of many data sources with clear definitions of 'sex' or 'gender' into one 
        conglomerate sex/gender variable (e.g., GBD "sex" variable).
-   * - Sex- and gender-related factors
-     - An umbrella term that refers to any and all characteristics related to sex and/or gender (e.g., 
-       gamete size, hormone production, reproductive or sexual anatomy, so-called 'secondary sex
-       characteristics' such as body hair or breast tissue, gender identity, gender expression, risk-taking behavior, etc). 
    * - Proxy measure
      - "An indirect measure of the desired outcome which is itself strongly correlated to that outcome" [GovEx_Johns_Hopkins]_.
        Unacknowledged use of a proxy measure for the output variable of interest can lead to inaccurate
@@ -265,6 +261,12 @@ throughout this style guide.
    * - Gender identity
      - "Personally held sense of one’s gender as man/boy, woman/girl, another cultural gender, 
        trans, nonbinary, etc." [Bauer_2022]_.
+   * - Gender role
+     - "the different expectations that individuals, groups, and societies have of individuals based on their sex and based on each society's values and beliefs about gender" [Blackstone_2003]_.
+   * - Sex- and gender-related factors
+     - An umbrella term that refers to any and all characteristics related to sex and/or gender (e.g., 
+       gamete size, hormone production, so-called 'secondary sex
+       characteristics' such as body hair or breast tissue, gender identity, gender expression, gendered social roles, etc). 
    * - Intersex identity
      - "Personally held identification as intersex" [Bauer_2022]_.
    * - Sexual and gender minority (SGM) 
@@ -277,8 +279,52 @@ throughout this style guide.
    Include visual of 'Do's and Don'ts!
 
 
-2.0 Dealing with Limitations in Upstream Research
-+++++++++++++++++++++++++++++++++++++++++++++++++
+2.0 Research question
++++++++++++++++++++++
+
+As much as possible, our research should be precise about the variables of interest.
+For example, if we are modeling pregnancy, the variable we are interested in is the
+ability to become pregnant.
+This not only clarifies that we are interested in biological sex and not gender, but is even
+more precise that it is this facet of biological sex that matters,
+not another facet such as chromosomal makeup.
+
+It is frequently not possible to be this precise;
+we should try to at least determine whether our research question is about sex or gender.
+In some cases, even this may not be clear, for example if we are researching an
+association that could be mediated by either sex or gender (or both), making them both
+variables of interest.
+
+2.1 Proxy measures
+------------------
+
+When defining your research question, you might have to use proxy measures (e.g., due to a lack of availability of primary data - more
+on this in Section 3.1 Data collection below.) 
+A proxy measure is another variable that is highly correlated with the variable of interest,
+which we use as a stand-in for it.
+In the pregnancy example, we might use as a proxy whether `someone was assigned female sex at birth <https://en.wikipedia.org/wiki/Sex_assignment>`_
+and is between the ages of 15 and 50.
+This is an imperfect proxy for the ability to become pregnant because some people in this group
+are not able to become pregnant (e.g. due to having had a hysterectomy) and in rare cases
+someone may be able to become pregnant who is not in this group (e.g. due to inaccuracy in sex assignment at birth).
+
+Whenever we use a proxy measure, we introduce a limitation into our research,
+which we should acknowledge explicitly.
+These limitations could lead to harm if they informed incorrect conclusions that
+resulted in real-world decisions or policies.
+This harm would be especially likely to impact those for whom the proxy measure and the
+underlying variable of interest are not the same.
+For example, if we use gender as a proxy measure for sex,
+the people most likely to be left out of our conclusions are transgender, non-binary,
+and intersex people.
+We should always weigh these harms against the potential benefits of the research
+before deciding to use a proxy measure.
+
+3.0 Methodology
++++++++++++++++
+
+3.1 Data collection
+-------------------
 
 Our research doesn't generally involve primary data collection.
 Therefore, the *input* data to our modeling process is almost always
@@ -297,10 +343,10 @@ reflect the difference between, and complexity of, those concepts.
 Since we are stuck with whatever is reported, we have to decide
 both how to use the variables reported in our analysis, and how to acknowledge
 the limitations introduced to our research by these issues in our
-research outputs (presentations, reports, etc).
+research outputs (presentations, reports, etc). 
 
-2.1 Investigating sex and gender variables in upstream research 
----------------------------------------------------------------
+3.1.1 Sex and gender variables in upstream research 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **We should not take the names of sex or gender variables in input data at
 face value.**
@@ -335,46 +381,40 @@ unless there are clear signs of effort to construct a valid sex/gender measure.
 Unfortunately, given current research practices, it is most common that a single binary variable
 labeled either "gender" or "sex" actually represents a non-differentiated sex/gender measure.
 
-2.2 Methodology
----------------
+3.1.2 Measurement error
+~~~~~~~~~~~~~~~~~~~~~~~
 
-As much as possible, our research should be precise about the variables of interest.
-For example, if we are modeling pregnancy, the variable we are interested in is the
-ability to become pregnant.
-This not only clarifies that we are interested in biological sex and not gender, but is even
-more precise that it is this facet of biological sex that matters,
-not another facet such as chromosomal makeup.
+In the evaluation of sex and/or gender as a variable in an epidemiologic study, error in
+the measurement of these variables can lead to bias in study results. Measurement error
+may be introduced through researchers assuming participants' gender rather than self-reporting,
+or not asking questions in a way that allows participants to accurately report their sex
+and/or gender.
 
-It is frequently not possible to be this precise;
-we should try to at least determine whether our research question is about sex or gender.
-In some cases, even this may not be clear, for example if we are researching an
-association that could be mediated by either sex or gender (or both), making them both
-variables of interest.
+In situations where sex and/or gender are being treated as an exposure variable relative to
+some outcome (for instance, in a research question such as "what influence does sex have on
+a given outcome?"), measurement error will bias the measure of effect, and the direction of 
+the bias depends on whether or not the measurement error is differential or non-differential
+with respect to the outcome. Each case is described below:
 
-When our input data does not include a variable of interest, we are forced to use
-**proxy measures**.
-A proxy measure is another variable that is highly correlated with the variable of interest,
-which we use as a stand-in for it.
-In the pregnancy example, we might use as a proxy whether `someone was assigned female sex at birth <https://en.wikipedia.org/wiki/Sex_assignment>`_
-and is between the ages of 15 and 50.
-This is an imperfect proxy for the ability to become pregnant because some people in this group
-are not able to become pregnant (e.g. due to having had a hysterectomy) and in rare cases
-someone may be able to become pregnant who is not in this group (e.g. due to inaccuracy in sex assignment at birth).
+- Non-differential measurement error of the exposure is when the amount of exposure 
+  misclassification does not vary by outcome level. In this case, the measure of effect of the
+  exposure on the outcome will be biased towards the null.
 
-Whenever we use a proxy measure, we introduce a limitation into our research,
-which we should acknowledge explicitly.
-These limitations could lead to harm if they informed incorrect conclusions that
-resulted in real-world decisions or policies.
-This harm would be especially likely to impact those for whom the proxy measure and the
-underlying variable of interest are not the same.
-For example, if we use gender as a proxy measure for sex,
-the people most likely to be left out of our conclusions are transgender, non-binary,
-and intersex people.
-We should always weigh these harms against the potential benefits of the research
-before deciding to use a proxy measure.
+- Differential measurement error of the exposure occurs when the amount of exposure 
+  misclassification varies by the outcome level. For instance, a study design in which gender was
+  ascertained from recorded sex in medical records for lung cancer cases, but was self-reported
+  among control participants is likely to have differential rates of measurement error of gender
+  by case versus control status. In this situation, the measure of effect of the exposure on the 
+  outcome may be biased upwards or downwards.
 
-2.3 Terminology
----------------
+In either case, measurement error of sex and/or gender can lead to biased results and care 
+should be taken to minimize error in measuring these variables (as for all variables!) to 
+minimize bias in study results. When we are using data published by others, it is important
+to consider how results may be affected by potential measurement error and dicuss any
+relevant limitations accordingly.
+
+3.1.3 Terminology
+~~~~~~~~~~~~~~~~~
 
 When we determine that a variable in an input data source reflects something different
 than the name it was given by the upstream researchers, we should use the more
@@ -410,14 +450,18 @@ In the NHANES example, the full first sentence of the above quote was:
   interviewer if they hadn't already assumed the gender of the respondent, and could be
   interpreted as asking about biological sex.
 
-2.4 GBD
--------
+3.2 Data Analysis
+-----------------
+
+3.2.1 Global Burden of Disease (GBD)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. todo::
   Describe the best methodology/terminology for working with the "sex" variable from GBD
 
-3.0 Discussing Simulation Science Findings
-++++++++++++++++++++++++++++++++++++++++++
+
+4.0 Results
++++++++++++
 
 As mentioned above, before beginning our research, we should determine the variables
 of interest: the facets of gender and/or sex that we expect to be most directly associated with
@@ -444,7 +488,7 @@ When we present our findings, we have two goals:
 In this section, we make some suggestions about language to use in external
 communications when discussing findings (papers, talks, etc).
 
-3.1 Initial Description of Results
+4.1 Initial Description of Results
 ----------------------------------
 
 Before the first time a gender- or sex-related result is presented,
@@ -515,7 +559,11 @@ guess of what specific sex- and gender-related factors could be associated with 
   To address these limitations, data would need to be collected using more robust measures
   of sex- and gender-related factors. [Bauer_2017]_ [Nielsen_2021]_ [ABS_2021]_ [National_Academies_2022]_
 
-3.2 Further Results (Text, Figures, Tables)
+.. todo::
+
+  Reference 'measurement error' section again here.
+
+4.2 Further Results (Text, Figures, Tables)
 -------------------------------------------
 
 Of course, it is not possible to include a long explanation each and every time sex- or
@@ -553,55 +601,15 @@ while the descriptive epidemiology example might use this:
 .. todo::
   This should be shorter!
 
-3.3 Measurement Error
----------------------
 
-In the evaluation of sex and/or gender as a variable in an epidemiologic study, error in
-the measurement of these variables can lead to bias in study results. Measurement error
-may be introduced through researchers assuming participants' gender rather than self-reporting,
-or not asking questions in a way that allows participants to accurately report their sex
-and/or gender.
-
-In situations where sex and/or gender are being treated as an exposure variable relative to
-some outcome (for instance, in a research question such as "what influence does sex have on
-a given outcome?"), measurement error will bias the measure of effect, and the direction of 
-the bias depends on whether or not the measurement error is differential or non-differential
-with respect to the outcome. Each case is described below:
-
-- Non-differential measurement error of the exposure is when the amount of exposure 
-  misclassification does not vary by outcome level. In this case, the measure of effect of the
-  exposure on the outcome will be biased towards the null.
-
-- Differential measurement error of the exposure occurs when the amount of exposure 
-  misclassification varies by the outcome level. For instance, a study design in which gender was
-  ascertained from recorded sex in medical records for lung cancer cases, but was self-reported
-  among control participants is likely to have differential rates of measurement error of gender
-  by case versus control status. In this situation, the measure of effect of the exposure on the 
-  outcome may be biased upwards or downwards.
-
-In either case, measurement error of sex and/or gender can lead to biased results and care 
-should be taken to minimize error in measuring these variables (as for all variables!) to 
-minimize bias in study results. When we are using data published by others, it is important
-to consider how results may be affected by potential measurement error and dicuss any
-relevant limitations accordingly.
-
-3.4 Other Gender-Inclusive Guides
----------------------------------
-
-- DEI Research Guide
-- Design team guidelines for discussing gender, sex, and sexuality
-- Gates Foundation
-- World Health Organization
-
-
-4.0 BLISS in Action 
+5.0 BLISS in Action 
 +++++++++++++++++++
 
 Our team has been able to implement these BLISS guidelines in our own work. 
 Here we chronicle guides, papers and presentations that include BLISS best 
 practices, as well as some lessons learned. 
 
-4.1 Examples of Our Work with BLISS
+5.1 Examples of Our Work with BLISS
 -----------------------------------
 
 #. A `BLISS guide for Topics Concerning Pregnancy <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B3E09642A-1A84-4D63-8690-EDA98E611295%7D&file=202204_Gender%20Neutral%20Language%20for%20Topics%20concerning%20Pregnancy.docx&action=default&mobileredirect=true>`_. This includes recommendations on gender inclusive language that can be used for topics of pregnancy and child birth. 
@@ -610,7 +618,7 @@ practices, as well as some lessons learned.
 
 
 
-4.2 Lessons Learned
+5.2 Lessons Learned
 -------------------
 
 - Most people are willing and even enthusiastic about improving language to be more gender inclusive! 
@@ -622,7 +630,36 @@ practices, as well as some lessons learned.
 
 .. image:: safe_space_icon.png
 
-5.0 References
+6.0 Recommended Resources
++++++++++++++++++++++++++
+
+.. todo::
+  
+  Fill in this section with recommended papers on different topics so that if people are looking for references, they can easily find them. (e.g., this paper about pregnancy in transmasculine people: https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-020-03166-6)
+  
+
+.. list-table:: **Recommended papers on sex and/or gender-related topics**
+   :header-rows: 1
+
+   * - You want to know more about...
+     - So we recommend you check out... 
+   * - How to be inclusive in pregnancy-related research
+     - 
+   * - How sex and gender are multidimensional and interrelated
+     - 
+   * - How to build an inclusive survey questionnaire
+     - 
+
+6.1 Other Gender-Inclusive Guides
+---------------------------------
+
+- DEI Research Guide
+- Design team guidelines for discussing gender, sex, and sexuality
+- Gates Foundation
+- World Health Organization
+
+
+7.0 References
 ++++++++++++++
 
 .. [VEHSS_DR] Lundeen EA, Burke-Conte Z, Rein DB, et al. Prevalence of Diabetic Retinopathy in the US in 2021. JAMA Ophthalmol. Published online June 15, 2023. doi:10.1001/jamaophthalmol.2023.2289, `online version <https://jamanetwork.com/journals/jamaophthalmology/fullarticle/2806093>`_
@@ -641,6 +678,9 @@ practices, as well as some lessons learned.
 
 .. [Bauer_2017]
   Bauer GR, Braimoh J, Scheim AI, Dharma C (2017) Transgender-inclusive measures of sex/gender for population surveys: Mixed-methods evaluation and recommendations. PLoS ONE 12(5): e0178043. https://doi.org/10.1371/journal.pone.0178043
+
+.. [Blackstone_2003]
+  Blackstone, A (2003) Gender Roles and Society. In Human Ecology: An Encyclopedia of Children, Families, Communities, and Environments: pp.335-338.
 
 .. [Nielsen_2021]
   Nielsen, M.W., Stefanick, M.L., Peragine, D. et al. Gender-related variables for health research. Biol Sex Differ 12, 23 (2021). https://doi.org/10.1186/s13293-021-00366-3
