@@ -1317,7 +1317,7 @@ Wave II
     - Engineers to investigate
     - Model 11.2
   * - 4: Issue with MAM and SAM recovery rates among 6-59 month age group
-    - Unknown, but suspected to be an issue with how wasting treatment component is interacting with the better/worse MAM substates, as issue is only present in the age groups that receive treatment (not the 1-5 month age group) and only among the transitions that are affected by treatment. NOTE: this issue was NOT present in model 12.0 -- checking versioning between these models could be helpful in dianosing issue.
+    - Unknown, but suspected to be an issue with how wasting treatment component is interacting with the better/worse MAM substates, as issue is only present in the age groups that receive treatment (not the 1-5 month age group) and only among the transitions that are affected by treatment. NOTE: this issue was NOT present in model 12.0 -- checking versioning between these models could be helpful in diagnosing issue.
     - Ali to pair with engineers to review how treatment component is interacting with better/worse MAM substates
     - Model 11.2
   * - 5: Underestimation of diarrheal diseases and LRI excess mortality rates in 1-5 and 6-11 month age groups
