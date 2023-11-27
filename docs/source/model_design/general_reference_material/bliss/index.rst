@@ -227,8 +227,8 @@ variables of interest.
 2.1 Proxy measures
 ------------------
 
-When our input data does not include a variable of interest, we are forced to use
-**proxy measures**.
+When defining your research question, you might have to use proxy measures (e.g., due to a lack of availability of primary data - more
+on this in Section 3.1 `Data collection`_ below.) 
 A proxy measure is another variable that is highly correlated with the variable of interest,
 which we use as a stand-in for it.
 In the pregnancy example, we might use as a proxy whether `someone was assigned female sex at birth <https://en.wikipedia.org/wiki/Sex_assignment>`_
@@ -273,6 +273,8 @@ Since we are stuck with whatever is reported, we have to decide
 both how to use the variables reported in our analysis, and how to acknowledge
 the limitations introduced to our research by these issues in our
 research outputs (presentations, reports, etc).
+
+.. _below: 
 
 3.1.1 Sex and gender variables in upstream research 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
