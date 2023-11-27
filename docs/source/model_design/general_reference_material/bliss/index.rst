@@ -48,13 +48,16 @@ results, this should be exactly what you need!
 ++++++++++++
 As part of our team and organization's larger DEI efforts, we are committed to researching
 and building a style guide so as to incorporate inclusive language into our day-to-day work
-and to address the harmful conflation of sex and gender in public health research and data. 
+and to address the harmful conflation and oversimplification
+of sex and gender in public health research and data. 
 We hope this page will serve as a useful guide to members of the Simulation Science team as
 well as other teams at IHME!
 
 .. image:: inclusion_icon.png
 
-On this page you will find our guiding principles, a glossary of commonly used terms related
+On this page you will find our guiding principles,
+an introduction to sex and gender from a scientific perspective,
+a glossary of commonly used terms related
 to BLISS, recommendations for how to address sex/gender-related limitations in external data
 sources, discussion of the implications of imperfect proxy measures with regards to sex/gender,
 examples of how our team has incorporated BLISS into our work process, and more! 
@@ -88,37 +91,29 @@ Our guiding principles for this document can be summarized in three points:
 **1. This work is important**
 
 Inclusive language use is important, and we want to begin by acknowledging the 
-potential harm that using gendered language can create. ‘Sex’ and ‘gender’ are 
-not synonymous, unidimensional traits. [Bauer_2022]_ acknowledges this and explains 
-how common sex and gender proxies such as chromosomes or sex organs are imperfect 
-and not fully inclusive of lived experiences.  
-
-Using imperfect proxies and gendered language can create harm by alienating individuals, and by 
-creating invalid research. People who are intersex, transgender, nonbinary, and/or 
+potential harm that using simplistic and gendered language can create.
+People who are intersex, transgender, nonbinary, and/or 
 have other gender-nonconforming identities experience harm from gendered language in a 
 number of ways, including documented reductions in interactions 
 with healthcare, not being included in research, and lost 
-opportunities. In an effort to work toward institution-wide DEI goals and 
-advance our team’s research and publications, we created this guide to explore the 
-concepts of sex and gender and offer inclusive language alternatives.  
+opportunities.
 
-One example of how proxy measures can affect the validity of research is in [Bauer_2022]_, 
-where researchers used 'women' as a proxy for people with a uterus. The researchers were 
-trying to find the incidence of uterine cancer, but by using 'women' as the denominator, 
-even though not all women have a uterus, cancer rates were thought to be lower than was true 
-in real life. This was especially prominent for Black women who are more likely to have had 
-a hysterectomy. This example highlights the importance of using a measure that is actually 
-tied to the research question.  
+An accurate understanding of sex and gender improves the validity
+of our research methods and conclusions about all people, not only
+sexual and gender minority people.
+As an example, past research about uterine cancer that used "women" as a proxy for people with a uterus
+substantially underestimated incidence.
+This underestimate was especially large for Black women,
+who are more likely to have had a hysterectomy,
+which lead to inaccurate conclusions about racial disparities. [Bauer_2022]_
 
-A second example of the potential impact on research validity is equating differences in 
-results to only sex or gender. As explained in [Ritz_and_Greaves_2022]_, both sex and gender 
-can lead to biological changes and untangling these pathways is complex or impossible. Often, 
-researchers will report findings as "sex differences," implying that they are a result of sex, 
-without exploring the role of gendered behavior or norms. 
-
-Lastly, we hope to inspire change in other researchers by presenting our studies with gender 
+In an effort to work toward institution-wide DEI goals and
+advance our team’s research and publications, we created this guide to explore the
+concepts of sex and gender and offer a more inclusive approach to conducting and reporting research
+that involves these topics.
+We hope to inspire change in other researchers by presenting our studies with gender 
 inclusive language and model practices we believe in. For all of these reasons, we feel this 
-guide is very important.  
+guide is very important.
 
 **2. This work is evolving**
 
@@ -136,7 +131,15 @@ information that users can understand the spirit of the guide and apply that to 
 We acknowledge that there is a cost associated with a transition to gender inclusive language 
 practices from standard, gendered language. Although using gender inclusive language is work, 
 we highlight here that there are many benefits to incorporating more inclusive language into 
-everyday public health research practices.  
+everyday public health research practices.
+
+As human beings, we each have a lived experience of sex and gender -- none of us
+are neutral outside observers.
+We have all unconsciously internalized many ideas about sex and gender from our
+experiences interacting with other people and with society.
+These ideas may have served us well in some ways and helped us make sense of the world
+around us.
+This guide asks us to take a step back and re-examine our ideas, which requires effort and care.
 
 Gender inclusive language can often be longer or more verbose than gendered language, but we 
 believe specificity is more important than brevity. We seek to include all groups and identities 
@@ -149,9 +152,77 @@ an expert; this is meant to be accessible for all people. Wherever you are in th
 journey, this guide is intended to be a clear, helpful resource.  
 
 We’re not going to put any words into other people’s mouths, but we will use our own voice to do 
-the work and use the terms we find most accurate and inclusive.  
+the work and use the terms we find most accurate and inclusive.
 
-1.2 Glossary of General Terminology
+1.2 Introduction to sex and gender
+----------------------------------
+
+Most human fetuses have either two X chromosomes or one X and one Y chromosome.
+A fetus' configuration of X and Y chromosomes influences a number of aspects of development,
+such as hormones, gonads, and genitalia.
+Then the child is born into a society with lots of pre-existing ideas about how bodies "should"
+look and work, how people "should" behave, and how all these things "should" relate to one another.
+Almost immediately, expectations and norms about identity and behavior are placed on the child,
+based on their external genitalia at birth.
+As that child grows up and throughout their life, societal pressures and norms impact their identity and behavior,
+and their identity, behavior, and experiences have impacts in turn,
+including on very "biological" factors such as hormone levels.
+Meanwhile, their chromosomal makeup, hormones, etc. continue to have evolving impacts on their body,
+which in turn can affect their identity and behavior, and how society views them.
+
+This constellation of attributes is what we mean by "sex and gender."
+It is an incredibly broad umbrella, spanning everything from
+chromosomes to clothing styles to power structures.
+Despite this range, it is difficult to tease apart the causal impacts of these factors from
+one other, because all these factors are strongly correlated with each other.
+
+The dominant culture in the West has historically seen sex and gender as synonymous and
+binary.
+According to this traditional view, a person is born either male or female,
+and people born male "should" identify and behave like boys and men,
+while people born female "should" identify and behave like girls and women.
+This viewpoint treats the correlations between different aspects of sex and gender
+as absolutes, marginalizing anyone who doesn't fit into one of the two prescribed options.
+
+In the last few decades, the research community and the general public have moved toward an understanding
+of "sex" and "gender" as separate terms, where "sex" refers to the biological and physical
+characteristics in the constellation, while "gender" refers to the psychological and social ones.
+The two need not align, so this framing is inherently more inclusive of transgender people,
+who identify with a gender discordant with the sex assigned to them at birth.
+Terms like "intersex" and "non-binary" have also gained wider recognition, raising counter-examples to formerly
+assumed binaries of both sex and gender.
+
+Recently, scholars have highlighted that sex and gender are **intertwined** and each **multi-dimensional**.
+
+**Intertwined**: Just because there is a biological effect, like a disparity in deaths from cardiovascular disease,
+does not mean we should rule out psychosocial causes such as care-seeking behavior or provider
+perceptions of pain levels.
+Sex and gender characteristics are a tangle of causal relationships and feedback loops. [Ritz_and_Greaves_2022]_
+
+**Multi-dimensional**: Sex includes dimensions such as chromosomes, gonads, hormones, etc, while gender
+includes dimensions of identity, presentation, perception, and societal roles.
+To say that a person has "male sex" or "female gender" can be a useful shorthand
+when most or all of the dimensions usually "align," but it ignores the complexities
+of what happens when these dimensions don't align -- and nearly every imaginable
+combination occurs at least some of the time.
+Furthermore, stopping at observing a difference
+between groups categorized like this does little to explain the underlying mechanism.
+Many research questions can be more precisely stated in terms of a specific dimension or dimensions
+of sex and/or gender. [Bauer_2022]_
+
+It is important to distinguish conceptually between sex and gender,
+and where possible between the different dimensions within each of them,
+both to be inclusive of all people and to produce valid research.
+However, it is also important not to assume that the causal relationships between
+sex- and gender-related factors are simple or easy to determine.
+
+There is a lot we still don't know about the science of sex and gender,
+and lots of ongoing research about these topics.
+However, this understanding of sex and gender as an intertwined collection
+of factors spanning biology, psychology, and sociology is the foundation
+upon which we build in this guide.
+
+1.3 Glossary of General Terminology
 -----------------------------------
 In this section, you will find a glossary of general terminology that will be used 
 throughout this style guide. 
