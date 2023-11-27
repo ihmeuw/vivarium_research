@@ -176,10 +176,6 @@ throughout this style guide.
        in an external data source (e.g., vague survey question that different respondents may interpret differently) 
        or from the compilation of many data sources with clear definitions of 'sex' or 'gender' into one 
        conglomerate sex/gender variable (e.g., GBD "sex" variable).
-   * - Sex- and gender-related factors
-     - An umbrella term that refers to any and all characteristics related to sex and/or gender (e.g., 
-       gamete size, hormone production, reproductive or sexual anatomy, so-called 'secondary sex
-       characteristics' such as body hair or breast tissue, gender identity, gender expression, risk-taking behavior, etc). 
    * - Proxy measure
      - "An indirect measure of the desired outcome which is itself strongly correlated to that outcome" [GovEx_Johns_Hopkins]_.
        Unacknowledged use of a proxy measure for the output variable of interest can lead to inaccurate
@@ -194,6 +190,12 @@ throughout this style guide.
    * - Gender identity
      - "Personally held sense of one’s gender as man/boy, woman/girl, another cultural gender, 
        trans, nonbinary, etc." [Bauer_2022]_.
+   * - Gender role
+     - "the different expectations that individuals, groups, and societies have of individuals based on their sex and based on each society's values and beliefs about gender" [Blackstone_2003]_.
+   * - Sex- and gender-related factors
+     - An umbrella term that refers to any and all characteristics related to sex and/or gender (e.g., 
+       gamete size, hormone production, so-called 'secondary sex
+       characteristics' such as body hair or breast tissue, gender identity, gender expression, gendered social roles, etc). 
    * - Intersex identity
      - "Personally held identification as intersex" [Bauer_2022]_.
    * - Sexual and gender minority (SGM) 
@@ -570,6 +572,9 @@ practices, as well as some lessons learned.
 
 .. [Bauer_2017]
   Bauer GR, Braimoh J, Scheim AI, Dharma C (2017) Transgender-inclusive measures of sex/gender for population surveys: Mixed-methods evaluation and recommendations. PLoS ONE 12(5): e0178043. https://doi.org/10.1371/journal.pone.0178043
+
+.. [Blackstone_2003]
+  Blackstone, A (2003) Gender Roles and Society. In Human Ecology: An Encyclopedia of Children, Families, Communities, and Environments: pp.335-338.
 
 .. [Nielsen_2021]
   Nielsen, M.W., Stefanick, M.L., Peragine, D. et al. Gender-related variables for health research. Biol Sex Differ 12, 23 (2021). https://doi.org/10.1186/s13293-021-00366-3
