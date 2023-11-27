@@ -160,8 +160,8 @@ the work and use the terms we find most accurate and inclusive.
 Most human fetuses have either two X chromosomes or one X and one Y chromosome.
 A fetus' configuration of X and Y chromosomes influences a number of aspects of development,
 such as hormones, gonads, and genitalia.
-Then the child is born into a society with lots of pre-existing ideas about how bodies should
-look and work, how people should behave, and how all these things should relate to one another.
+Then the child is born into a society with lots of pre-existing ideas about how bodies "should"
+look and work, how people "should" behave, and how all these things "should" relate to one another.
 Almost immediately, expectations and norms about identity and behavior are placed on the child,
 based on their external genitalia at birth.
 As that child grows up and throughout their life, societal pressures and norms impact their identity and behavior,
@@ -179,8 +179,8 @@ one other, because all these factors are strongly correlated with each other.
 The dominant culture in the West has historically seen sex and gender as synonymous and
 binary.
 According to this traditional view, a person is born either male or female,
-and people born male should identify and behave like boys and men,
-while people born female should identify and behave like girls and women.
+and people born male "should" identify and behave like boys and men,
+while people born female "should" identify and behave like girls and women.
 This viewpoint treats the correlations between different aspects of sex and gender
 as absolutes, marginalizing anyone who doesn't fit into one of the two prescribed options.
 
