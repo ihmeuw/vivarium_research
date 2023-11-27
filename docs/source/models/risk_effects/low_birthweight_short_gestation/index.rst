@@ -924,11 +924,14 @@ code above:
   uniform exposure distribution within each LWBSG exposure category rather than randomly
   sampling an exposure from a uniform distribution for each simulant.
 
+  We have evaluated the influence of the population size for each LBWSG exposure category 
+  within a given age/sex/location group (`see notebook here 
+  <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/LBWSG%20PAF%20population%20size%20check.ipynb>`_) 
+  and have determined that **529 simulants per LBWSG category/age/sex/location group** is adequate.
+
 .. todo::
   
-  Link to the code for LBWSG PAF calculation used for the nutrition optimization simulation and 
-  also provide information on minimum population size testing for each age/sex/location/category
-  group.
+  Link to the code for LBWSG PAF calculation used for the nutrition optimization simulation.
 
 .. code-block:: Python
 
