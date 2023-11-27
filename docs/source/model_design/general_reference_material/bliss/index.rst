@@ -533,15 +533,6 @@ while the descriptive epidemiology example might use this:
   This should be shorter!
 
 
-4.3 Other Gender-Inclusive Guides
----------------------------------
-
-- DEI Research Guide
-- Design team guidelines for discussing gender, sex, and sexuality
-- Gates Foundation
-- World Health Organization
-
-
 5.0 BLISS in Action 
 +++++++++++++++++++
 
@@ -570,8 +561,8 @@ practices, as well as some lessons learned.
 
 .. image:: safe_space_icon.png
 
-6.0 Knowledge Share
-+++++++++++++++++++
+6.0 Recommended Resources
++++++++++++++++++++++++++
 
 .. todo::
   
@@ -590,6 +581,13 @@ practices, as well as some lessons learned.
    * - How to build an inclusive survey questionnaire
      - 
 
+6.1 Other Gender-Inclusive Guides
+---------------------------------
+
+- DEI Research Guide
+- Design team guidelines for discussing gender, sex, and sexuality
+- Gates Foundation
+- World Health Organization
 
 
 7.0 References
