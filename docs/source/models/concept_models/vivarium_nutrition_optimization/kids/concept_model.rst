@@ -1321,6 +1321,6 @@ Wave II
     - Ali to pair with engineers to review how treatment component is interacting with better/worse MAM substates
     - Model 11.2
   * - 5: Underestimation of diarrheal diseases and LRI excess mortality rates in 1-5 and 6-11 month age groups
-    - Suspected to be a timestep issue. Application of CGF EMR RRs can cause very high EMR rates for high-risk individuals in these age groups and our timesteps may not be short enough to accurately capture them. (Note that they are no faster than the diarrheal diseases and LRI remission rates, but we have adjusted the remission rates to account for the relatively long timestep in a way that we have not done for these EMRs)
+    - Suspected to be a timestep issue. Application of CGF EMR RRs can cause very high EMR rates for high-risk individuals in these age groups and our timesteps may not be short enough to accurately capture them. (Note that they are no faster than the diarrheal diseases and LRI remission rates, but we have adjusted the remission rates to account for the relatively long timestep in a way that we have not done for these EMRs. Also note that this same pattern is not present for ages/causes with lower EMRs, indicating it is likely not an issue with implementation of CGF risk effects on EMR)
     - Test validation in variable timestep test runs when ready. No code changes for now.
     - N/A
