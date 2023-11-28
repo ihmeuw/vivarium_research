@@ -384,6 +384,7 @@ When a target 95% UI is specified instead of a single target value,
 we fit a `beta distribution <https://en.wikipedia.org/wiki/Beta_distribution>`_ that has approximately that UI.
 (This is an equal-tailed interval; in other words, we treat the
 lower bound as the 2.5th percentile and the upper bound as the 97.5th.)
+Note that the lower and upper bounds must both in the interval :math:`(0, 1)`.
 Because the beta distribution is the conjugate of the binomial distribution,
 we can then use an easy-to-calculate `beta-binomial <https://en.wikipedia.org/wiki/Beta-binomial_distribution>`_ as the distribution
 of the number of events when there is not a bug.
