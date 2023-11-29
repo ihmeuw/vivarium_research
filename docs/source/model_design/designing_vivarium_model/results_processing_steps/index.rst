@@ -100,7 +100,7 @@ General things to check/keep in mind
 
 - Remember the distinction between model verification (Do model outputs accurately reflect model inputs? Did we make a mistake in *building* the model?) and model validation (Do model outputs accurately represent reality? Did we make a mistake in *designing* the model?). Be sure to validate model results, including to your own back-of-the-envelope calculation (:ref:`see this page for details <vivarium_best_practices_boe>`) as well as external data sources that may have evaluated similar research questions.
 
-- Vivarium has an "untracked" population that can cause confusing issues if it is set to something unexpected. This is something that may be investigated in the :ref: `interactive simulation <vivarium_interactive_simulation>`.
+- Vivarium has an "untracked" population that can cause confusing issues if it is set to something unexpected. This is something that may be investigated in the :ref:`interactive simulation <vivarium_interactive_simulation>`.
 
 
 General list of things to verify
