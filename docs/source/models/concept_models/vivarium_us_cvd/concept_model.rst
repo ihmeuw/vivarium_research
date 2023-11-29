@@ -1044,6 +1044,22 @@ These covariate values are calculated for each simulant and are then plugged int
 Where sex = 1 for men and 2 for women 
 and SBP and LDL level refer to the raw values from GBD 
 
+**Adjusting for State Level Variation:** 
+
+Each state has an age/sex/medication type specific "relative risk" value for being 
+medicated. These values are stored in THIS CSV. 
+
+Once the above covariates have been calculated, 
+multiply them by the appropriate relative risk found in the csv file. There are 3 
+columns labeled "SBP", "LDL-C" and "Both" that can be used independently. The relative risk 
+is then pulled for the specific age group, sex and state and multiplied by the covariate. 
+
+ :math:`SBP_{i} = SBP_{i} * RR_{SBP, age, sex, state}` 
+
+ :math:`LDL_{i} = LDL_{i} * RR_{LDL, age, sex, state}` 
+
+ :math:`Both_{i} = Both_{i} * RR_{Both, age, sex, state}` 
+
 **Calculating Probabilities:** 
 
  :math:`P(tx=SBPonly) = \frac{SBP_{i}}{SBP_{i} + LDL_{i} + Both_{i} + 1}`
