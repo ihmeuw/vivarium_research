@@ -1287,6 +1287,13 @@ Wave II
         * Underestimated treated SAM->mild transition rate
         * Overestimated untreated SAM->worse MAM and SAM->better MAM recovery rates
         * Overestimated worse MAM->mild and better MAM->mild recovery rates
+  * - 12.0
+    - Check alignment with GBD metrics
+    - [1] `Issues with wasting exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_ -- this is thought to be due to identified issue with wasting transition rate data used for this run and is expected to be resolved when `data is updated in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1403>`_. `Otherwise, wasting transition rate implementation looks appropriate. <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_wasting_transitions.ipynb>`_
+
+      [2] `Issues with underweight exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_ -- this is suspected to be an issue resulting from the miscalibration of wasting exposure described above.
+
+      [3] `Underestimation of diarrheal diseases and LRI excess mortality rates in 1-5 and 6-11 month age groups <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_
 
 
 
@@ -1310,6 +1317,10 @@ Wave II
     - Engineers to investigate
     - Model 11.2
   * - 4: Issue with MAM and SAM recovery rates among 6-59 month age group
-    - Unknown, but suspected to be an issue with how wasting treatment component is interacting with the better/worse MAM substates, as issue is only present in the age groups that receive treatment (not the 1-5 month age group) and only among the transitions that are affected by treatment
+    - Unknown, but suspected to be an issue with how wasting treatment component is interacting with the better/worse MAM substates, as issue is only present in the age groups that receive treatment (not the 1-5 month age group) and only among the transitions that are affected by treatment. NOTE: this issue was NOT present in model 12.0 -- checking versioning between these models could be helpful in diagnosing issue.
     - Ali to pair with engineers to review how treatment component is interacting with better/worse MAM substates
     - Model 11.2
+  * - 5: Underestimation of diarrheal diseases and LRI excess mortality rates in 1-5 and 6-11 month age groups
+    - Suspected to be a timestep issue. Application of CGF EMR RRs can cause very high EMR rates for high-risk individuals in these age groups and our timesteps may not be short enough to accurately capture them. (Note that they are no faster than the diarrheal diseases and LRI remission rates, but we have adjusted the remission rates to account for the relatively long timestep in a way that we have not done for these EMRs. Also note that this same pattern is not present for ages/causes with lower EMRs, indicating it is likely not an issue with implementation of CGF risk effects on EMR)
+    - Test validation in variable timestep test runs when ready. No code changes for now.
+    - N/A
