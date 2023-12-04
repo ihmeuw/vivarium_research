@@ -1047,12 +1047,15 @@ and SBP and LDL level refer to the raw values from GBD
 **Adjusting for State Level Variation:** 
 
 Each state has an age/sex/medication type specific "relative risk" value for being 
-medicated. These values are stored in THIS CSV. 
+medicated. These values are stored in the 'state_medication_FAKE_data.csv'. This 
+will be updated with real data in the same formatting soon. 
 
 Once the above covariates have been calculated, 
 multiply them by the appropriate relative risk found in the csv file. There are 3 
-columns labeled "SBP", "LDL-C" and "Both" that can be used independently. The relative risk 
+columns labeled "sbp_rr", "ldl_rr" and "both_rr" that can be used independently. The relative risk 
 is then pulled for the specific age group, sex and state and multiplied by the covariate. 
+Note that the age groups end at 80+. The 80+ age group can be used for all simulants 
+over the age of 80. 
 
  :math:`SBP_{i} = SBP_{i} * RR_{SBP, age, sex, state}` 
 
@@ -1124,6 +1127,8 @@ Code is below for reference
   Residual Deviance: 29807.44 
   AIC: 29837.44 
  
+
+Additional information on the `generation of data can be found in this notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/generating_state_medication.ipynb>`_. 
 
 .. _uscvd4.6:
 
