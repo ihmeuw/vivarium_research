@@ -1055,7 +1055,7 @@ multiply them by the appropriate relative risk found in the csv file. There are 
 columns labeled "sbp_rr", "ldl_rr" and "both_rr" that can be used independently. The relative risk 
 is then pulled for the specific age group, sex and state and multiplied by the covariate. 
 Note that the age groups end at 80+. The 80+ age group can be used for all simulants 
-over the age of 80. 
+over the age of 80. Similar the 25 age group can be used for all simulants less than 25. 
 
  :math:`SBP_{i} = SBP_{i} * RR_{SBP, age, sex, state}` 
 
