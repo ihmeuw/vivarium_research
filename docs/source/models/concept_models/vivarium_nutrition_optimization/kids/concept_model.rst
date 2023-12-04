@@ -1164,7 +1164,7 @@ Wave II
     - 
     - 
   * - 12.2
-    - All locations, mean_draw_subset (to test whether mean draw replicates mean of draws)
+    - Pakistan, mean_draw_subset (to test whether mean draw replicates mean of draws)
     - Baseline
     - Baseline
     - 
