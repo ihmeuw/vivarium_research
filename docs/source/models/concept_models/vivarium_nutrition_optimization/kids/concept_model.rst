@@ -1163,6 +1163,12 @@ Wave II
     - Baseline
     - 
     - 
+  * - 12.2
+    - All locations, mean_draw_subset (to test whether mean draw replicates mean of draws)
+    - Baseline
+    - Baseline
+    - 
+    - `Code to generte mean draw for all artifact keys except the LBWSG PAF can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/mean_draw_generation.ipynb>`_. The mean LBWSG PAF can be calculated using the LBWSG PAF calculation code using the mean draw for LBWSG RRs and LBWSG exposure.
 
 .. list-table:: Output specifications
   :header-rows: 1
@@ -1214,7 +1220,7 @@ Wave II
     - * Age group (including 12_to_23_months)
       * Sex
       * Underweight category
-  * - 12.0 and 12.1
+  * - 12.0 and 12.1 and 12.2
     - 1. Deaths, stratifie by wasting state
       2. Wasting state person time, stratified by wasting treatment coverage
       3. Stunting state person time
@@ -1301,6 +1307,9 @@ Wave II
       [3] `Underestimation of diarrheal diseases and LRI excess mortality rates in 1-5 and 6-11 month age groups <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_
   * - 12.1
     - Confirm wasting transition rate data update in sim outputs and confirm MMS effect size update in the interactive sim
+    - 
+  * - 12.2
+    - Check that results for this run approximate the mean of the results from run 12.1
     - 
 
 
