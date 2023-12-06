@@ -304,9 +304,10 @@ A proxy measure is another variable that is highly correlated with the variable 
 which we use as a stand-in for it.
 In the pregnancy example, we might use as a proxy whether `someone was assigned female sex at birth <https://en.wikipedia.org/wiki/Sex_assignment>`_
 and is between the ages of 15 and 50.
-This is an imperfect proxy for the ability to become pregnant because some people in this group
-are not able to become pregnant (e.g. due to having had a hysterectomy) and in rare cases
-someone may be able to become pregnant who is not in this group (e.g. due to inaccuracy in sex assignment at birth).
+This is an imperfect proxy for the ability to become pregnant. You can see how these 
+measures overlap, but are not the same in the figure below. 
+
+.. image:: bliss_proxy_fig.png
 
 Whenever we use a proxy measure, we introduce a limitation into our research,
 which we should acknowledge explicitly.
@@ -355,23 +356,15 @@ these variables are very likely to be mislabeled.
 
 Instead, we should trace these variables back to their source when it is
 feasible to do so.
-For example, if we are using data from a survey, we should find the actual survey
-questions asked to respondents.
 
-Sometimes, doing this investigation will make it clear that the variable
-is an accurate reflection of either sex or gender.
-In fact, it may be an even more precise measure, such as the presence of a Y chromosome
-(a characteristic that is one facet of biological sex) or gender *identity* (as opposed
-to expression).
-Unfortunately, however, the most common outcome of this investigation will be to find
-that sex and gender were conflated and/or restricted to a binary.
-For example, a survey question that simply asks "are you male or female?" may be
-interpreted by some respondents as asking about sex and by other respondents as asking
-about gender.
-Non-binary people who interpret it as a gender question, and intersex people who interpret
-it as a sex question, will not see themselves represented in the answer choices.
-They may not respond at all, or they may inaccurately choose one of the
-binary categories.
+This figure shows some example data sources and some of the common pitfalls. For example, 
+data sources might mislabel their data (gender vs sex), might use misleading or 
+difficult questions ("Are you male or female?" doesn't indicate sex vs gender and 
+doesn't have options for gender non-conforming people), or might conflate different aspects of sex and 
+gender (gender presentation might differ from identity). There are some cases where 
+a more exact and defined metric is used though - such as sex assigned at birth. 
+
+.. image:: bliss_data_sources_fig.png
 
 When it is not feasible to trace a sex or gender variable back to its source,
 either because we are many steps removed from the original data or because
