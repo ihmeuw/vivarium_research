@@ -1157,7 +1157,12 @@ Wave II
       * LBWSG PAFs (to be generated)
       * Underweight exposure lookup table
       * Wasting treatment C_SAM, E_SAM, C_MAM, and E_MAM parameter values
-
+  * - 12.1
+    - All locations, with data updates (MMS shifts and wasting transition rates)
+    - Baseline
+    - Baseline
+    - 
+    - 
 
 .. list-table:: Output specifications
   :header-rows: 1
@@ -1209,7 +1214,7 @@ Wave II
     - * Age group (including 12_to_23_months)
       * Sex
       * Underweight category
-  * - 12.0
+  * - 12.0 and 12.1
     - 1. Deaths, stratifie by wasting state
       2. Wasting state person time, stratified by wasting treatment coverage
       3. Stunting state person time
@@ -1291,6 +1296,9 @@ Wave II
       [2] `Issues with underweight exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_ -- this is suspected to be an issue resulting from the miscalibration of wasting exposure described above.
 
       [3] `Underestimation of diarrheal diseases and LRI excess mortality rates in 1-5 and 6-11 month age groups <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_
+  * - 12.1
+    - Confirm wasting transition rate data update in sim outputs and confirm MMS effect size update in the interactive sim
+    - 
 
 
 
