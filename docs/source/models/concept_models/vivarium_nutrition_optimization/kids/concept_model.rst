@@ -1286,12 +1286,9 @@ Wave II
   * - 11.1
     - Check on issues from run 11.1
     - * `Total MAM exposure now looks good at initialization (bug resolved) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_risk_exposure.ipynb>`_. Note that MAM and SAM is underestimated in 6-59 month ages, but this issue is present in model 10 and therefore not a model 11 bug.
-      * `Targete MAM treatment targeted to better rather than worse MAM state <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_MAM_targets.ipynb>`_
-      * `Inaccurate MAM/SAM recovery rates among 6-59 month age group (new bugs) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_wasting_transitions.ipynb>`_, including:
-
-        * Underestimated treated SAM->mild transition rate
-        * Overestimated untreated SAM->worse MAM and SAM->better MAM recovery rates
-        * Overestimated worse MAM->mild and better MAM->mild recovery rates
+      * `Targeted MAM treatment targeted to better rather than worse MAM state <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_MAM_targets.ipynb>`_
+      * `Wasting transition rates look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_wasting_transitions.ipynb>`_
+      * `All MAM wasting transition rates in scenario 13 observed as uncovered, despite having covered wasting person time <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_wasting_treatment_effects.ipynb>`_ 
   * - 12.0
     - Check alignment with GBD metrics
     - [1] `Issues with wasting exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_ -- this is thought to be due to identified issue with wasting transition rate data used for this run and is expected to be resolved when `data is updated in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1403>`_. `Otherwise, wasting transition rate implementation looks appropriate. <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_wasting_transitions.ipynb>`_
@@ -1320,10 +1317,10 @@ Wave II
     - Bug
     - Hussain implemented fix but it has not yet been run
     - Model 11.2
-  * - 3: Issue with MAM and SAM recovery rates among 6-59 month age group
-    - Unknown, but suspected to be an issue with how wasting treatment component is interacting with the better/worse MAM substates, as issue is only present in the age groups that receive treatment (not the 1-5 month age group) and only among the transitions that are affected by treatment. NOTE: this issue was NOT present in model 12.0 -- checking versioning between these models could be helpful in diagnosing issue.
-    - Ali to pair with engineers to review how treatment component is interacting with better/worse MAM substates
-    - Model 11.2
+  * - 3: Wasting transition rates in scenario #13 are all considered uncovered by MAM treatment, despite having person time covered by MAM treatment
+    - Unknown
+    - Engineers to investigate
+    - Next model version
   * - 4: Underestimation of diarrheal diseases and LRI excess mortality rates in 1-5 and 6-11 month age groups
     - Suspected to be a timestep issue. Application of CGF EMR RRs can cause very high EMR rates for high-risk individuals in these age groups and our timesteps may not be short enough to accurately capture them. (Note that they are no faster than the diarrheal diseases and LRI remission rates, but we have adjusted the remission rates to account for the relatively long timestep in a way that we have not done for these EMRs. Also note that this same pattern is not present for ages/causes with lower EMRs, indicating it is likely not an issue with implementation of CGF risk effects on EMR)
     - Test validation in variable timestep test runs when ready. No code changes for now.
