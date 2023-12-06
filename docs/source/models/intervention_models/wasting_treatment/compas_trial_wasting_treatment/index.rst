@@ -127,15 +127,15 @@ Vivarium Modeling Strategy
     - Update from prior version
     - Average value under assumption of monthly screenings
   * - :math:`\text{time to recovery}_\text{effectively treated SAM}`
-    - 126 days 
+    - 112 days 
     - point value
     - Update from prior version
-    - Median value ~18 weeks from S3 fig, WAITING ON NUMERIC UPDATE; [Bailey-et-al-2020]_
+    - Mean recovery value obtained from communication with study authors (median 121 days) [Bailey-et-al-2020]_
   * - :math:`\text{time to recovery}_\text{effectively treated MAM}`
-    - 63 days
+    - 73 days
     - point value
     - Update from prior version
-    - Median value ~9 weeks from S5 fig, WAITING ON NUMERIC UPDATE; [Bailey-et-al-2020]_
+    - Mean recovery value obtained from communication with study authors (median 62 days) [Bailey-et-al-2020]_
 
 .. list-table:: Location-specific parameter values
   :header-rows: 1
