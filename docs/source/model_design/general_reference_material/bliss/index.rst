@@ -456,9 +456,29 @@ In the NHANES example, the full first sentence of the above quote was:
 3.2.1 Global Burden of Disease (GBD)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
-  Describe the best methodology/terminology for working with the "sex" variable from GBD
+The GBD study is very complex and many different data sources. Here, 
+we provide a general overview of how the demographics team works with the "sex" 
+variable and some of the limitations. To understand "sex" in the context of a 
+particular disease or risk factor, please reference the `GBD methods appendix <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30925-9/fulltext#supplementaryMaterial>`_ to 
+see the exact data sources used. 
 
+The high level steps used for calculating population estimates for each 
+country, year, age group and sex are: 
+
+  #. First, GBD uses fertility rate estimates from hospital records and surveys such as DHS to define the population. A standard sex ratio at birth is applied to all. 
+  #. The population is then aged up from birth, with mortality. In the 0-5 age group, mortality estimates come from DHS surveys, vital registries and death records. 
+  #. In older age groups, mortality estimates continue and are dervied from vital registries and death records. 
+  #. Next, fatal discontinuities such as war or natural disasters are added. 
+  #. Lastly, the estimated population is then matched against census and other survey results and adjustments are made as needed. 
+
+These methods contain a few limitations: 
+
+- Sex assigned at birth is used to create the population. Intersex people are not considered here and the full population is assigned to either male or female. 
+- An implicit assumption of creating a population based on sex assigned at birth and then aging it up is that no one changes sex/gender during their lifetime. We know this to be untrue. 
+- More broadly, GBD does not attempt to include any category other than male or female. 
+- Since there are so many different input data sources and they vary by country, it would be very difficult for GBD to have anything other than "undifferentiated sex/gender" in their final results. However, GBD still uses the language "sex" for its variable. 
+
+More information on the methods can be found in the `demographics methods appendix <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30977-6/fulltext#supplementaryMaterial>`_
 
 4.0 Results
 +++++++++++
