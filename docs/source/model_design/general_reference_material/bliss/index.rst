@@ -476,7 +476,7 @@ country, year, age group and sex are:
 While it would be challenging to include how sex/gender is recorded in all data sources used, here are some examples: 
 
 - In the DHS survey, women (unknown how "women" are identified or what might happen if a man were the birthing parent) are asked about their births and children, specifically they are asked about their "sons and daughters" or later "boys and girls". No option is included for intersex children and it is not clear how they would be recorded. 
-- Death certificates are usually completed by a medical profressional and therefore reflect a person's anatomy at death. The options are male, female or "unknown". Unknown is usually used only if a body is mutilated such that anatomy cannot be determined. There is not a box to include gender or identity. 
+- Death certificates are usually completed by a medical professional and therefore reflect a person's anatomy at death. The options are male, female or "unknown". Unknown is usually used only if a body is mutilated such that anatomy cannot be determined. There is not a box to include gender or identity. 
 - The US Census asks "What is [person 1]'s sex?" with options for male and female only. They state that the question should be completed based on how that person currently identifies. 
 
 These methods contain a few limitations: 
