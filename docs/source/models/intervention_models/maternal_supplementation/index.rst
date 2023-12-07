@@ -512,8 +512,8 @@ The antenatal supplementation products affect child gestational age at birth exp
   * - MMS
     - IFA
     - Preterm birth, <37 weeks
-    - RR = 0.95 (95% CI: 0.90, 1.01)
-    - [Keats-et-al-2019-maternal-supplementation]_
+    - RR = 0.91 (95% CI: 0.84, 0.99)
+    - [Gomes-et-al-2023-antenatal-supplementation]_, effect with *prospective* last menstrual period and/or ultrasound-based pregnancy dating (rather than *retrospective* last menstrual period dating). Note that this value was updated between wave I and wave II of the N.O. project from 0.95 (0.90, 1.01) from [Keats-et-al-2019-maternal-supplementation]_, which did not conduct the outcome assessment quality sensitivity analysis.
   * - MMS
     - IFA
     - Very preterm birth, <32 weeks
@@ -621,9 +621,9 @@ Where,
   * - IFA_SHIFT
     - `Location-specific .csv files of IFA_SHIFT values can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/ifa_gestational_age_shifts>`_
   * - MMS_SHIFT_1
-    - `Location-specific .csv files of MMS_SHIFT_1 values can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/mms_gestational_age_shifts/shift1>`_
+    - `Location-specific .csv files of MMS_SHIFT_1 values can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/updated_mms_shifts.csv>`_
   * - MMS_SHIFT_2
-    - `Location-specific .csv files of MMS_SHIFT_2 values can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/mms_gestational_age_shifts/shift2>`_
+    - `Location-specific .csv files of MMS_SHIFT_2 values can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/updated_mms_shifts.csv>`_
 
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -849,6 +849,9 @@ Verification and validation criteria
 
 References
 ------------
+
+.. [Gomes-et-al-2023-antenatal-supplementation]
+  Gomes F, Askari S, Black RE, Christian P, Dewey KG, Mwangi MN, Rana Z, Reed S, Shankar AH, Smith ER, Tumilowicz A. Antenatal multiple micronutrient supplements versus iron-folic acid supplements and birth outcomes: Analysis by gestational age assessment method. Matern Child Nutr. 2023 Jul;19(3):e13509. `https://doi.org/10.1111/mcn.13509 <https://doi.org/10.1111/mcn.13509>`_
 
 .. [Keats-et-al-2019-maternal-supplementation]
   Keats  EC, Haider  BA, Tam  E, Bhutta  ZA. Multiple‐micronutrient supplementation for women during pregnancy. Cochrane Database of Systematic Reviews 2019, Issue 3. Art. No.: CD004905. DOI: 10.1002/14651858.CD004905.pub6. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full>`_
