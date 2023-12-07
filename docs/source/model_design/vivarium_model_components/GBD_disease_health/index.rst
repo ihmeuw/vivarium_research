@@ -49,7 +49,7 @@ In particular, we will examine:
 
 To help with understanding some of the below information, a diagram of the heart failure impairment is provided: 
 
-.. image:: health_state_impairment_sequela.svg
+.. image:: overview_diagram.png
 
 
 Causes
