@@ -390,6 +390,33 @@ Note:
 Note: 
   - 20 draws was selected as the size based on this `draw and seed sizing notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/draw_seed_analysis.ipynb>`_
 
+**Timing Test Run:**
+
+.. list-table:: CVD simulation model population parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - 100_000 (plan to test both 100_000 with 1 seed and 50_000 with 2 seeds)
+     - per draw
+   * - Number of draws
+     - 10 
+     - 
+   * - Cohort type
+     - Closed
+     - 
+   * - Age start
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
+   * - Age end
+     - 125 years
+     - Maximum age at initialization
+   * - Sex restrictions
+     - None 
+     - 
+
 **Final Model Run:**
 
 .. list-table:: CVD simulation model population parameters
@@ -1269,16 +1296,16 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - i.e., transition from susceptible to acute MI, stratified by cause 
   * - Mean SBP 
     - sum of SBP * person time
-    - Only needed for V&V 
+    - Not included in timing test runs
   * - Mean LDL-C
     - sum of LDL-C * person time
-    - Only needed for V&V 
+    - Not included in timing test runs
   * - Mean BMI 
-    - sum of BMI * person time *NOTE: NOT IN CURRENT MODEL*
-    - Only needed for V&V 
+    - sum of BMI * person time 
+    - Not included in timing test runs
   * - Mean FPG 
-    - sum of FPG * person time *NOTE: NOT IN CURRENT MODEL*
-    - Only needed for V&V 
+    - sum of FPG * person time 
+    - Not included in timing test runs
   * - Population achieving target LDL-C values
     - sum of person time in each category: <2.59, >/=2.59 and <3.36, >/=3.36 and <4.14, >/=4.14 and <4.91, >/=4.91; can be included only in final models 
     - 
@@ -1287,19 +1314,19 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - 
   * - Healthcare appointments 
     - sum of healthcare appointments 
-    - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc. Only needed for V&V 
+    - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc. Not included in timing test runs
   * - Missed follow-up appointments 
     - sum of missed follow-up appointments 
-    - Only needed for V&V 
+    - Not included in timing test runs
   * - Population on SBP medication 
     - sum of person time on SBP medication 
-    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
+    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category. Not included in timing test runs
   * - Population on LDL-C medication 
     - sum of person time on LDL-C medication 
-    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
+    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category. Not included in timing test runs
   * - Number of interventions 
     - sum of person-time in interventions 
-    - Split by intervention type 
+    - Split by intervention type. Not included in timing test runs
 
 
 Stratifications for All (not included above): 
