@@ -494,6 +494,22 @@ we should:
 - Acknowledge data limitations and proxy measures used.
 - Call for better data to be collected.
 
+To understand this, we can look at our figure of hypothetical data sources 
+from above. There is now an additional row with how we would include 
+this data in our analysis. You can see the first two data sources would both be 
+undifferentiated sex/gender. This is due to ambiguity between sex and gender in 
+the question asked. 
+
+The latter two data source more clearly include sex, although one is sex assigned 
+at birth and the other is sex identity. Therefore if you included both data source 
+3 and 4, you might label this as undifferentiated sex factors. 
+
+If you included one of the first two data sources as well, it is no longer clear 
+that sex is measured instead of gender and so you would use undifferentiated sex/gender. 
+
+.. image:: bliss_data_sources_fig_2.png
+
+
 Let's consider the example of reporting a result about pregnancy.
 In this case, while gender-related factors could play a role in e.g. pregnancy outcomes,
 the sex- or gender-related factor with the most direct relevance is clearly the ability
