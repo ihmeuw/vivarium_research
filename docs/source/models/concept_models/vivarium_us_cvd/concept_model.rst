@@ -818,7 +818,9 @@ First, find the appropriate discontinuation base rate to use with:
 
 
 Each state has an age/sex/medication type specific "relative risk" value for being 
-medicated. These values are stored in the 'state_medication_real_data.csv'. 
+medicated. These values are stored in the 'state_medication_real_data.csv'. For ages 
+not included in this csv, use the closest age (e.g., use 25-29 for all sims under 25 
+and 80+ for all sims over 80).
 
 These values :math:`SBPdiscon_{i}` and :math:`LDLdiscon_{i}` are these used in all 
 steps below.
