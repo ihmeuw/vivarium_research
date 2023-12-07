@@ -829,13 +829,29 @@ principles for discontinuation are based on the observations of [An_2021]_
 which summarized the number of patients who had discontinued treatment by 1 year 
 and 2 years after initialization. This approach can be summarized as: 
 
-- Approximately 31.4% of simulants who start medication will discontinue all treatments within 1 year (this is a weighted average across medication types in reference above)
+- Approximately 31.4% (adjusted by age/sex/state) of simulants who start medication will discontinue all treatments within 1 year (this is a weighted average across medication types in reference above)
 - Simulants who make it one year on treatment will continue on treatment indefinitely - this is based on the relatively low number of patients who discontinued treatment between year 1 and year 2 
 - Simulants who discontinue treatment will not restart medication at any point 
 - This approach applies to both SBP and LDL-C medications, although discontinuation on the different medication classes is independent (e.g., discontinuing SBP meds does not affect a simulant's discontinuation rate on LDL-C meds)
 
-In practice, these principles are implemented through rules applied to at initialization 
-and on time steps: 
+To include state level medication changes on time steps, 
+we are adding age/sex/state specific discontinuation here. 
+
+First, find the appropriate discontinuation base rate to use with: 
+
+ :math:`SBPdiscon_{i} = 0.314 / RR_{SBP, age, sex, state}` 
+
+ :math:`LDLdiscon_{i} = 0.314 / RR_{LDL, age, sex, state}` 
+
+Please note that the equations are dividing by relative risk instead of multiplying. 
+
+Each state has an age/sex/medication type specific "relative risk" value for being 
+medicated. These values are stored in the 'state_medication_real_data.csv'. For ages 
+not included in this csv, use the closest age (e.g., use 25-29 for all sims under 25 
+and 80+ for all sims over 80).
+
+These values :math:`SBPdiscon_{i}` and :math:`LDLdiscon_{i}` are these used in all 
+steps below.
 
 **On Initialization**
 
@@ -852,18 +868,21 @@ Simulants initialized NOT on treatment:
 
 Some simulants initialized not on treatment will have already started and discontinued 
 treatment, meaning they are not eligible for future treatment. To include this in the sim, 
-31.4% of simulants within an age/sex group will be randomly assigned as inelgible for future 
-treatment due to prior discontinuation. The remaining 68.6% will still be eligible for future 
+:math:`SBPdiscon_{i}` (or :math:`LDLdiscon_{i}`) percent of simulants within an age/sex group will be randomly 
+assigned as inelgible for future 
+treatment due to prior discontinuation. The remaining :math:`1 - SBPdiscon_{i}` (or :math:`1 - LDLdiscon_{i}`) 
+will still be eligible for future 
 treatment assignment. 
 
-This 31.4% will be an overestimate, especially for age/sex groups with low medication rates. However, 
+This will be an overestimate, especially for age/sex groups with low medication rates. However, 
 it is a reasonable simplification and was designed so that the initialized rates of medication 
 are maintained throughout the sim. This was validated in the interactive sim. 
 
 **On Time Steps**
 
 A simulant who starts treatment (and does not end treatment for any other 
-reason such as death within the first year) should have a 31.4% chance of 
+reason such as death within the first year) should have a :math:`SBPdiscon_{i}` 
+(or :math:`LDLdiscon_{i}`) chance of 
 discontinuing treatment within 1 year, with a constant risk over that time. 
 This probability is the same for all simulants. 
 
@@ -875,6 +894,9 @@ Simulants who have not previously received or discontinued treatment can receive
 treatment per the treatment ladder above. 
 
 This work was tested in an `edited interactive simulation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/2023_10_31b_interactive_medication_inertia-take_2_pr60%20(1).ipynb>`_. 
+
+The addition of the state level variation was tested first in `a discontination nanosim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/therapeutic_inertia_nanosim_add_discontinuation.ipynb>`_ 
+and then in an interactive sim `adjusted to include a different discontinuation rate <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/2023_12_6_interactive_discon_state_variation.ipynb>`_. 
 
 Note: this strategy will likely result in less simulant "churn" between not treatment 
 and treated than happens in real life. While the overall level of treatment is correct, 
@@ -1074,8 +1096,7 @@ and SBP and LDL level refer to the raw values from GBD
 **Adjusting for State Level Variation:** 
 
 Each state has an age/sex/medication type specific "relative risk" value for being 
-medicated. These values are stored in the 'state_medication_FAKE_data.csv'. This 
-will be updated with real data in the same formatting soon. 
+medicated. These values are stored in the 'state_medication_real_data.csv'. 
 
 Once the above covariates have been calculated, 
 multiply them by the appropriate relative risk found in the csv file. There are 3 
