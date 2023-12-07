@@ -812,10 +812,11 @@ we are adding age/sex/state specific discontinuation here.
 
 First, find the appropriate discontinuation base rate to use with: 
 
- :math:`SBPdiscon_{i} = 0.314 * RR_{SBP, age, sex, state}` 
+ :math:`SBPdiscon_{i} = 0.314 / RR_{SBP, age, sex, state}` 
 
- :math:`LDLdiscon_{i} = 0.314 * RR_{LDL, age, sex, state}` 
+ :math:`LDLdiscon_{i} = 0.314 / RR_{LDL, age, sex, state}` 
 
+Please note that the equations are dividing by relative risk instead of multiplying. 
 
 Each state has an age/sex/medication type specific "relative risk" value for being 
 medicated. These values are stored in the 'state_medication_real_data.csv'. For ages 
