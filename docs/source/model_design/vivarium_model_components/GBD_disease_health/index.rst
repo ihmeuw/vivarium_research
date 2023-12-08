@@ -74,7 +74,8 @@ Sequelae
 Once you have selected a specific cause - for example, IHD - you can then identify the 
 sequelae within that cause. These are all of the items listed below IHD and HHD in the 
 diagrams above. Sequelae are almost like the last level of the cause hierarchy, but are 
-not modeled with the same complexity as causes. 
+not modeled with the same complexity as causes. Sequelae are only used in GBD non-fatal 
+estimates; deaths are attributed to a cause but not to a sequela within that cause.
 
 Sequelae detail a specific medical condition associated with 
 a cause. For example, IHD has medical conditions like acute myocardial infarction 
@@ -131,13 +132,13 @@ it can be caused by a lot of different things. Therefore, it is difficult to pla
 cause hierarchy, but we want to include all the rich data we have. Hence, it is an 
 impairment. 
 
-There can even be impairment hierarchies. For example, mild heart failure is an impairment, 
-but it also fits under the larger impairment of heart failure. 
-
 To include the extra information about an impairment, GBD modelers first find the total 
 amount of the impairment - heart failure - and then divide it between causes. This 
 creates the sequelae of "heart failure due to IHD" and "heart failure 
 due to HHD" for example. These are included in blue in the diagram above. 
+
+There can even be impairment hierarchies. For example, mild heart failure is an impairment, 
+but it also fits under the larger impairment of heart failure. 
 
 Further information the GBD calculations can be found on the `Impairments 101 Hub page <https://hub.ihme.washington.edu/display/GBD2016/Impairments+101>`_. 
 
