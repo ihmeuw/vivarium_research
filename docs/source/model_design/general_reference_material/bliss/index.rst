@@ -465,7 +465,7 @@ particular disease or risk factor, please reference the `GBD methods appendix <h
 see the exact data sources used. 
 
 The high level steps used for calculating population estimates for each 
-country, year, age group and sex are: 
+country, year, age group and sex/gender are: 
 
   #. First, GBD uses fertility rate estimates from hospital records and surveys such as DHS to define the population. A standard sex ratio at birth is applied to all. 
   #. The population is then aged up from birth, with mortality. In the 0-5 age group, mortality estimates come from DHS surveys, vital registries and death records. 
