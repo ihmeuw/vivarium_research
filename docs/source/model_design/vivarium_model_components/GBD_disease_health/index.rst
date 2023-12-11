@@ -49,7 +49,7 @@ In particular, we will examine:
 
 To help with understanding some of the below information, a diagram of the heart failure impairment is provided: 
 
-.. image:: health_state_impairment_sequela.svg
+.. image:: overview_diagram.png
 
 
 Causes
@@ -74,12 +74,15 @@ Sequelae
 Once you have selected a specific cause - for example, IHD - you can then identify the 
 sequelae within that cause. These are all of the items listed below IHD and HHD in the 
 diagrams above. Sequelae are almost like the last level of the cause hierarchy, but are 
-not modeled with the same complexity as causes. 
+not modeled with the same complexity as causes. Sequelae are only used in GBD non-fatal 
+estimates; deaths are attributed to a cause but not to a sequela within that cause.
 
 Sequelae detail a specific medical condition associated with 
 a cause. For example, IHD has medical conditions like acute myocardial infarction 
 (a heart attack) and angina (chest pain) as associated sequelae. These are the things 
-a patient might be experiencing, or a doctor might identify. 
+a patient might be experiencing, or a doctor might identify. The differentiation between 
+a cause and a sequela might sometimes be arbitrary and based on a modelers 
+discretion based on doctor's opinions and available data. 
 
 Sequelae often contain a level of severity for that condition - for example, mild and moderate 
 angina are both sequelae within IHD. 
@@ -119,16 +122,23 @@ modeling, this wouldn't be possible. Usually, information is calculated at the c
 it impossible to use information about heart failure generally. 
 
 Therefore, to use this valuable information about a condition, GBD created a new 
-category called impairments. An impairment is medically the same as a sequela. 
-Meaning that for a doctor, a sequela and an impairment would both be a specific 
-medical condition associated with a cause. The difference between a sequela and 
-an impairment is not a clinical difference, it's an artifact of how GBD does its 
-modeling. 
+category called impairments. An impairment is a medical condition that GBD has extra 
+data on, but can't be included in the cause hierarchy since it has more than one 
+cause. Again, deciding what is a cause that can fit in the hierarchy and what is an 
+impairment is often a result of historical context and modeler decisions. 
+
+An easy example to grasp is blindness. There is a lot of data available about blindness, but 
+it can be caused by a lot of different things. Therefore, it is difficult to place in the 
+cause hierarchy, but we want to include all the rich data we have. Hence, it is an 
+impairment. 
 
 To include the extra information about an impairment, GBD modelers first find the total 
 amount of the impairment - heart failure - and then divide it between causes. This 
 creates the sequelae of "heart failure due to IHD" and "heart failure 
 due to HHD" for example. These are included in blue in the diagram above. 
+
+There can even be impairment hierarchies. For example, mild heart failure is an impairment, 
+but it also fits under the larger impairment of heart failure. 
 
 Further information the GBD calculations can be found on the `Impairments 101 Hub page <https://hub.ihme.washington.edu/display/GBD2016/Impairments+101>`_. 
 
