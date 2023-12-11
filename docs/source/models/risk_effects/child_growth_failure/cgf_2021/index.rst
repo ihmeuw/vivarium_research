@@ -102,15 +102,13 @@ For stunting and underweight, relative risk values can be pulled using the follo
 
   rrs = get_draws(gbd_round_id=7, year_id=2021, gbd_id_type='rei_id', gbd_id=[241,240,94], source='rr', decomp_step='iterative')
 
-Wasting relative risks will be generated separately to accomodate the sub-exposures in the 
-MAM (cat2) category in our :ref:`wasting risk exposure model <2021_risk_exposure_wasting_state_exposure>`. 
-Until these relative risk estimates are available, assume wasting relative risks consistent
-with those pulled from GBD with both MAM sub exposures ("Better" MAM/cat2.5 and "Worse" MAM/cat2.0) 
-having the same relative risk values as the overall MAM category cat2.
+Wasting relative risks were generated separately to accomodate the sub-exposures in the 
+MAM (cat2) category in our :ref:`wasting risk exposure model <2021_risk_exposure_wasting_state_exposure>`
+`and can be found in this CSV file <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/wasting_rrs_with_subcategories.csv>`_.
 
-.. todo::
-
-   Generate and link custom wasting RR values
+   `These values were calculated in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/subcategory%20data.ipynb>`_. Notably, CGF PAFs were
+   calculated prior to the implementation of separate relative risks for MAM substates; however, 
+   we have investigated that the substate relative risks change PAF estimates very minimally.
 
 The mortality relative risk values will then need to be adjusted. The GBD values are for CSMR, 
 but we will use EMR. To adjust between CSMR and EMR values, you can use this equation: 
