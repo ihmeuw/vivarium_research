@@ -1328,6 +1328,8 @@ Wave II
 
       * `No major cause model concerns at the moment <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_risk_and_cause_checks.ipynb>`_ -- let's revisit once we resolve underweight exposure issues
 
+      * NOTE: still need to confirm appropriate implementation of MMS effect data update
+
   * - 12.2
     - Check that results for this run approximate the mean of the results from run 12.1
     - 
