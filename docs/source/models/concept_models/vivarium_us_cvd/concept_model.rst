@@ -846,9 +846,9 @@ First, find the appropriate discontinuation base rate to use with:
 Please note that the equations are dividing by relative risk instead of multiplying. 
 
 Each state has an age/sex/medication type specific "relative risk" value for being 
-medicated. These values are stored in the 'state_medication_real_data.csv'. For ages 
+medicated. These values are stored in the 'state_medication_real_data_v3.csv'. For ages 
 not included in this csv, use the closest age (e.g., use 25-29 for all sims under 25 
-and 80+ for all sims over 80).
+and 80+ for all sims over 80). Note that the data has been smoothed using a loess model. 
 
 These values :math:`SBPdiscon_{i}` and :math:`LDLdiscon_{i}` are these used in all 
 steps below.
@@ -1096,7 +1096,8 @@ and SBP and LDL level refer to the raw values from GBD
 **Adjusting for State Level Variation:** 
 
 Each state has an age/sex/medication type specific "relative risk" value for being 
-medicated. These values are stored in the 'state_medication_real_data.csv'. 
+medicated. These values are stored in the 'state_medication_real_data_v3.csv'. 
+Note that the data has been smoothed using a loess model. 
 
 Once the above covariates have been calculated, 
 multiply them by the appropriate relative risk found in the csv file. There are 3 
@@ -1275,9 +1276,12 @@ Additional information on the `generation of data can be found in this notebook 
     - Add treatment discontinuation 
     - Although treatment discontinuation did not acheive the idealized results we might have hoped for, we still think this is a significant improvement to the model. We tested the results both in the `general sim outputs <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_11_20_23.ipynb>`_ and in the interactive sim in order to include only the simulants that `need medication <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/interactive_medication_inertia.ipynb>`_. Treatment rates still change, but are acceptably stable over time. This is a limitation in the model. 
   * - 24.0
+    - Add state level treatment variation
+    - It is believed that this was implemented correctly, but noisy data lead to weird patterns over time. To address this, the data was smoothed using a loess model and is being rerun now. `medication levels in the sim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_multi_location_12_11_23.ipynb>`_. 
+  * - 25.0
     - Final Runs 
     - Research team to specify this further 
-  * - 25.0
+  * - 26.0
     - Update to GBD 2021 
     - No longer planned at this time 
 
@@ -1317,16 +1321,16 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - i.e., transition from susceptible to acute MI, stratified by cause 
   * - Mean SBP 
     - sum of SBP * person time
-    - Not included in timing test runs
+    - Not included in final runs
   * - Mean LDL-C
     - sum of LDL-C * person time
-    - Not included in timing test runs
+    - Not included in final runs
   * - Mean BMI 
     - sum of BMI * person time 
-    - Not included in timing test runs
+    - Not included in final runs
   * - Mean FPG 
     - sum of FPG * person time 
-    - Not included in timing test runs
+    - Not included in final runs
   * - Population achieving target LDL-C values
     - sum of person time in each category: <2.59, >/=2.59 and <3.36, >/=3.36 and <4.14, >/=4.14 and <4.91, >/=4.91; can be included only in final models 
     - 
@@ -1335,19 +1339,19 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - 
   * - Healthcare appointments 
     - sum of healthcare appointments 
-    - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc. Not included in timing test runs
+    - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc. Not included in final runs
   * - Missed follow-up appointments 
     - sum of missed follow-up appointments 
-    - Not included in timing test runs
+    - Not included in final runs
   * - Population on SBP medication 
     - sum of person time on SBP medication 
-    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category. Not included in timing test runs
+    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category. Not included in final runs
   * - Population on LDL-C medication 
     - sum of person time on LDL-C medication 
-    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category. Not included in timing test runs
+    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category. Not included in final runs
   * - Number of interventions 
     - sum of person-time in interventions 
-    - Split by intervention type. Not included in timing test runs
+    - Split by intervention type. Not included in final runs
 
 
 Stratifications for All (not included above): 
