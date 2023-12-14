@@ -2623,8 +2623,10 @@ Taxes
 
 Taxes, as we all know, can contain many different forms and processes.
 For this model, we will split the tax information into two main sections:
-W2/1099 forms from employers; and 1040 forms from simulants. We will look
-at these separately, starting with W2 and 1099 forms.
+W2/1099 forms from employers; and 1040 forms from simulants. 1099 forms are used for independent
+contractors or self-employed individuals, while W-2 forms are submitted by an employer for their employee 
+(as the employer withholds payroll taxes from employee earnings). 1040 forms are 
+submitted by the employee. We will look at these separately, starting with W2 and 1099 forms.
 
 
 W2 and 1099 Forms
