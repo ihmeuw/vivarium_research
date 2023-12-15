@@ -289,9 +289,9 @@ Documents that contain information specific to the overall model and the child s
     - 1
     - 0
   * - 2: IFA
-    - 0
-    - 0
     - 1
+    - 0
+    - 0
   * - 3: Targeted BEP/none
     - Baseline for adequate BMI pregnancies
     - 0
