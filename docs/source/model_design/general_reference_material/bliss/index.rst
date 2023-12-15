@@ -304,9 +304,10 @@ A proxy measure is another variable that is highly correlated with the variable 
 which we use as a stand-in for it.
 In the pregnancy example, we might use as a proxy whether `someone was assigned female sex at birth <https://en.wikipedia.org/wiki/Sex_assignment>`_
 and is between the ages of 15 and 50.
-This is an imperfect proxy for the ability to become pregnant because some people in this group
-are not able to become pregnant (e.g. due to having had a hysterectomy) and in rare cases
-someone may be able to become pregnant who is not in this group (e.g. due to inaccuracy in sex assignment at birth).
+This is an imperfect proxy for the ability to become pregnant. You can see how these 
+measures overlap, but are not the same in the figure below. 
+
+.. image:: bliss_proxy_fig.png
 
 Whenever we use a proxy measure, we introduce a limitation into our research,
 which we should acknowledge explicitly.
@@ -355,23 +356,15 @@ these variables are very likely to be mislabeled.
 
 Instead, we should trace these variables back to their source when it is
 feasible to do so.
-For example, if we are using data from a survey, we should find the actual survey
-questions asked to respondents.
 
-Sometimes, doing this investigation will make it clear that the variable
-is an accurate reflection of either sex or gender.
-In fact, it may be an even more precise measure, such as the presence of a Y chromosome
-(a characteristic that is one facet of biological sex) or gender *identity* (as opposed
-to expression).
-Unfortunately, however, the most common outcome of this investigation will be to find
-that sex and gender were conflated and/or restricted to a binary.
-For example, a survey question that simply asks "are you male or female?" may be
-interpreted by some respondents as asking about sex and by other respondents as asking
-about gender.
-Non-binary people who interpret it as a gender question, and intersex people who interpret
-it as a sex question, will not see themselves represented in the answer choices.
-They may not respond at all, or they may inaccurately choose one of the
-binary categories.
+This figure shows some example data sources and some of the common pitfalls. For example, 
+data sources might mislabel their data (gender vs sex), might use misleading or 
+difficult questions ("Are you male or female?" doesn't indicate sex vs gender and 
+doesn't have options for gender non-conforming people), or might conflate different aspects of sex and 
+gender (gender presentation might differ from identity). There are some cases where 
+a more exact and defined metric is used though - such as sex assigned at birth. 
+
+.. image:: bliss_data_sources_fig.png
 
 When it is not feasible to trace a sex or gender variable back to its source,
 either because we are many steps removed from the original data or because
@@ -456,9 +449,38 @@ In the NHANES example, the full first sentence of the above quote was:
 3.2.1 Global Burden of Disease (GBD)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
-  Describe the best methodology/terminology for working with the "sex" variable from GBD
+The GBD study is very complex and has many different data sources. Here, 
+we provide a general overview of how the demographics team works with the "sex" 
+(later referred to undifferentiated sex/gender as this is more accurate) 
+variable and some of the limitations (as of GBD 2021). To understand undifferentiated 
+sex/gender in the context of a 
+particular disease or risk factor, please reference the `GBD methods appendix <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30925-9/fulltext#supplementaryMaterial>`_ to 
+see the exact data sources used. 
 
+The high level steps used for calculating population estimates for each 
+country, year, age group and sex/gender are: 
+
+  #. First, GBD uses fertility rate estimates from hospital records and surveys such as DHS to define the population. A standard sex ratio at birth is applied to all. 
+  #. The population is then aged up from birth, with mortality. In the 0-5 age group, mortality estimates come from DHS surveys, vital registries and death records. 
+  #. In older age groups, mortality estimates continue and are derived from vital registries and death records. 
+  #. Next, fatal discontinuities such as war or natural disasters are added. 
+  #. Lastly, the estimated population is then matched against census and other survey results and adjustments are made as needed. 
+
+While it would be challenging to include how sex/gender is recorded in all data sources used, here are some examples: 
+
+- In the DHS survey, women (unknown how "women" are identified or what might happen if a man were the birthing parent) are asked about their births and children, specifically they are asked about their "sons and daughters" or later "boys and girls". No option is included for intersex children and it is not clear how they would be recorded. 
+- Death certificates are usually completed by a medical professional and therefore reflect a person's anatomy at death. The options are male, female or "unknown". Unknown is usually used only if a body is mutilated such that anatomy cannot be determined. There is not a box to include gender or identity. 
+- The US Census asks "What is [person 1]'s sex?" with options for male and female only. They state that the question should be completed based on how that person currently identifies. 
+
+These methods contain a few limitations: 
+
+- Sex assigned at birth is used to create the population. Intersex people are not considered here and the full population is assigned to either male or female. 
+- An implicit assumption of creating a population based on sex assigned at birth and then aging it up is that no one changes sex/gender during their lifetime. We know this to be untrue. 
+- Additionally, different data sources track different data - anatomy at death might be different than a held sex identity. 
+- More broadly, GBD does not attempt to include any category other than male or female. 
+- Since there are so many different input data sources and they vary by country, it would be very difficult for GBD to have anything other than "undifferentiated sex/gender" in their final results. However, GBD still uses the language "sex" for its variable. 
+
+More information on the methods can be found in the `demographics methods appendix <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30977-6/fulltext#supplementaryMaterial>`_
 
 4.0 Results
 +++++++++++
@@ -500,6 +522,25 @@ we should:
   biological factors that are important.
 - Acknowledge data limitations and proxy measures used.
 - Call for better data to be collected.
+
+When the sex/gender related factors we are reporting on are unclear - 
+for example when we have assumed equivalence between different measures across 
+data sources - we should use terms that reflect this uncertainty. 
+To understand this, we can look at our figure of hypothetical data sources 
+from above. There is now an additional row with how we would include 
+this data in our analysis. You can see the first two data sources would both be 
+undifferentiated sex/gender. This is due to ambiguity between sex and gender in 
+the question asked. 
+
+The latter two data sources more clearly reflect sex, although one is sex assigned 
+at birth and the other is sex identity. Therefore if you included both data source 
+3 and 4, you might label this as sex. 
+
+If you included one of the first two data sources as well, it is no longer clear 
+that sex is measured instead of gender and so you would use undifferentiated sex/gender. 
+
+.. image:: bliss_data_sources_fig_2.png
+
 
 Let's consider the example of reporting a result about pregnancy.
 In this case, while gender-related factors could play a role in e.g. pregnancy outcomes,
