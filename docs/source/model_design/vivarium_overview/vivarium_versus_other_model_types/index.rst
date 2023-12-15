@@ -126,11 +126,12 @@ we used for this joint distribution :ref:`here <maternal_bmi_hgb>`.
 Time-varying rates dependent on multiple factors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Another complexity enabled by microsimulation is the inclusion of time-varying rates dependent on multiple factors. 
+Another complexity enabled by microsimulation is the inclusion of time-varying rates dependent on multiple factors. A good example of this is in our microsimulation of Multiple Myeloma, 
+which allow relapse hazard rates to vary over time since treatment line initiation. Read more about how we calculated relapse hazard rates :ref:`here <calculation-of-mortality-and-relapse-hazard>`.
 
 .. todo:: 
 
-    Elaborate on example from previous work: Multiple Myeloma model
+    Elaborate on example from Multiple Myeloma model
 
 Incorporating uncertainty
 ~~~~~~~~~~~~~~~~~~~~~~~~~
