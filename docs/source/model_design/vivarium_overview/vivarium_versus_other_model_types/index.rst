@@ -111,12 +111,17 @@ these risk factor correlations :ref:`on this page <sbp_ldlc_fpg_bmi>`.
 Continuous values
 ~~~~~~~~~~~~~~~~~
 
-Similarly, microsimulation allows the modeling of joint distribution between continuous values (e.g., blood pressure and blood glucose levels). This is not as possible with 
-categorical data, which is characteristic of multiplication models.
+Similarly, microsimulation allows the modeling of joint distribution between continuous values, something which is not as possible with categorical data characteristic of 
+multiplication models.
+
+For example, in our intravenous (IV) iron intervention microsimulation, we model the joint distribution of maternal BMI and hemoglobin levels, as two risk exposures associated with poor
+health outcomes for both mother/birthing parent and child. We treat hemoglobin as a continuous risk exposure that varies as simulants age and move through the pregancy model states,
+while maternal BMI is a categorical risk exposure conditional on hemoglobin status (i.e., above or below 100 g/L) at the start of the pregnancy. Read more about the modeling strategy
+we used for this joint distribution :ref:`here <maternal_bmi_hgb>`.
 
 .. todo::
 
-    Use IV iron model of continuous hemoglobin levels as an example of modeling continuous values. 
+    Check what we agreed is a good BLISS alternative for 'maternal BMI'. 
 
 Time-varying rates dependent on multiple factors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
