@@ -102,9 +102,11 @@ and childhood height and weight. Microsimulation methods allow us to assign a ri
 level univariate distribution (the distribution of which comes from the GBD, in our microsimulations). In the common case of a dichotomous exposure, each simulant 
 (in the same age/sex/location group) has the same probability of exposure, which is equal to the prevalence in that population.
 
-.. todo::
-    
-    Use CVD model as a typical example of modeling correlation.
+Our cardiovascular disease (CVD) microsimulation offers a useful example of how risk exposure correlation typically looks in microsimulations. There are several correlated 
+risk factors that affect different CVD outcomes, including: body mass index (BMI), systolic blood pressure (SBP), low-density lipoprotein cholesterol levels (LDL-C), and fasting 
+plasma glucose (FPG). Using NHANES survey data, we calculated correlation coefficients for these relationships, which could then be used to generate propensity values for all
+simulants. As such, the correlation coefificients remain constant as simulants age and their risk exposure values change. You can read more about our modeling strategy for 
+these risk factor correlations :ref:`on this page <sbp_ldlc_fpg_bmi>`.
 
 Continuous values
 ~~~~~~~~~~~~~~~~~
@@ -146,7 +148,7 @@ Another benefit of microsimulations in general is that they can surface complica
 
 .. todo:: 
   
-  Elaborate on example of this from previous work: examining hmeoglobin on curve on an individual level and seeing the discrepancies from real life that would also be present in a 
+  Elaborate on example of this from previous work: examining hemoglobin on curve on an individual level and seeing the discrepancies from real life that would also be present in a 
   model that doesn't go to the level of detail we do in microsim. 
 
 
