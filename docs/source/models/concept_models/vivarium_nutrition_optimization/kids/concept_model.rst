@@ -1157,7 +1157,18 @@ Wave II
       * LBWSG PAFs (to be generated)
       * Underweight exposure lookup table
       * Wasting treatment C_SAM, E_SAM, C_MAM, and E_MAM parameter values
-
+  * - 12.1
+    - All locations, with data updates (MMS shifts and wasting transition rates)
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 12.2
+    - Pakistan, mean_draw_subset (to test whether mean draw replicates mean of draws)
+    - Baseline
+    - Baseline
+    - 
+    - `Code to generte mean draw for all artifact keys except the LBWSG PAF can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/mean_draw_generation.ipynb>`_. The mean LBWSG PAF can be calculated using the LBWSG PAF calculation code using the mean draw for LBWSG RRs and LBWSG exposure.
 
 .. list-table:: Output specifications
   :header-rows: 1
@@ -1209,7 +1220,7 @@ Wave II
     - * Age group (including 12_to_23_months)
       * Sex
       * Underweight category
-  * - 12.0
+  * - 12.0 and 12.1 and 12.2
     - 1. Deaths, stratifie by wasting state
       2. Wasting state person time, stratified by wasting treatment coverage
       3. Stunting state person time
@@ -1281,12 +1292,15 @@ Wave II
   * - 11.1
     - Check on issues from run 11.1
     - * `Total MAM exposure now looks good at initialization (bug resolved) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_risk_exposure.ipynb>`_. Note that MAM and SAM is underestimated in 6-59 month ages, but this issue is present in model 10 and therefore not a model 11 bug.
-      * `Targete MAM treatment targeted to better rather than worse MAM state <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_MAM_targets.ipynb>`_
-      * `Inaccurate MAM/SAM recovery rates among 6-59 month age group (new bugs) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_wasting_transitions.ipynb>`_, including:
-
-        * Underestimated treated SAM->mild transition rate
-        * Overestimated untreated SAM->worse MAM and SAM->better MAM recovery rates
-        * Overestimated worse MAM->mild and better MAM->mild recovery rates
+      * `Targeted MAM treatment targeted to better rather than worse MAM state <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_MAM_targets.ipynb>`_
+      * `Wasting transition rates look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_wasting_transitions.ipynb>`_
+      * `All MAM wasting transition rates in scenario 13 observed as uncovered, despite having covered wasting person time <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_wasting_treatment_effects.ipynb>`_ 
+  * - 11.2
+    - Check bugs from 11.1
+    - * `CGF exposure looks good after data update <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_risk_exposure.ipynb>`_
+      * `Targeted MAM now appears to be targeted to the worse rather than better MAM substate (bug resolved!) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.2_MAM_targets.ipynb>`_
+      * `Issue with no coverage of targeted MAM intervention in MAM->mild transition remains (was not addresssed directly in this run) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_wasting_treatment_effects.ipynb>`_
+      * `Note that some mortality rates are off even after fixing our risk exposures <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_risk_exposure.ipynb>`_
   * - 12.0
     - Check alignment with GBD metrics
     - [1] `Issues with wasting exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_ -- this is thought to be due to identified issue with wasting transition rate data used for this run and is expected to be resolved when `data is updated in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1403>`_. `Otherwise, wasting transition rate implementation looks appropriate. <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_wasting_transitions.ipynb>`_
@@ -1294,6 +1308,31 @@ Wave II
       [2] `Issues with underweight exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_ -- this is suspected to be an issue resulting from the miscalibration of wasting exposure described above.
 
       [3] `Underestimation of diarrheal diseases and LRI excess mortality rates in 1-5 and 6-11 month age groups <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_
+  * - 12.1
+    - Confirm wasting transition rate data update in sim outputs and confirm MMS effect size update in the interactive sim
+    - * `Wasting transition rates data update implemented as expected at the population level <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_wasting_transitions.ipynb>`_
+      * `MAM and SAM treatment do not appear to be affecting wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_wasting_treatment_effects.ipynb>`_
+
+        * Note that *targeted* MAM treatment appears to be functioning correctly in scenario #13
+        * Note that there are simulants uncovered by SAM treatment who are transitioning through the treated SAM to mild child wasting transition (this should never happen)
+        * Note this is a new issue from 11.2
+
+      * `There are non-zero uncovered MAM->mild transition counts in the 6-11 month age group for targeted MAM in scenario #13 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_MAM_targets.ipynb>`_
+
+        * Note this is a new issue from 11.2. There should be 100% coverage in this age group, but it is a low priority to fix because coverage remains close to 1 in this age group.
+
+      * `Underweight exposure is scrambled for all locations <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_risk_and_cause_checks.ipynb>`_
+
+        * Note this is a new issue from model 11.2 for Ethiopia
+        * Underweight exposure was off for Nigeria and Pakistan in model 12.0, but I thought it was due to being off in our wasting exposures due to outdated transition rates. However, underweight exposure issues are persisting despite resolved wasting exposure issues.
+
+      * `No major cause model concerns at the moment <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_risk_and_cause_checks.ipynb>`_ -- let's revisit once we resolve underweight exposure issues
+
+      * NOTE: still need to confirm appropriate implementation of MMS effect data update
+
+  * - 12.2
+    - Check that results for this run approximate the mean of the results from run 12.1
+    - 
 
 
 
@@ -1304,19 +1343,15 @@ Wave II
     - Explanation
     - Action plan
     - Timeline
-  * - 1: Underestimation of MAM and SAM exposure despite accurate replication of artifact wasting transition rates
-    - Bug in generation of wasting transition rate version #4 that erroneously set c_mam and c_sam parameters to zero
-    - `Update wasting transition rates to version 5 (in accordance with this PR) <https://github.com/ihmeuw/vivarium_research/pull/1403>`_
-    - Model 11.2
-  * - 2: Targeted MAM intervention not targeted to better MAM state instead of worse MAM state
-    - Bug
-    - Hussain implemented fix but it has not yet been run
-    - Model 11.2
-  * - 3: Issue with MAM and SAM recovery rates among 6-59 month age group
-    - Unknown, but suspected to be an issue with how wasting treatment component is interacting with the better/worse MAM substates, as issue is only present in the age groups that receive treatment (not the 1-5 month age group) and only among the transitions that are affected by treatment. NOTE: this issue was NOT present in model 12.0 -- checking versioning between these models could be helpful in diagnosing issue.
-    - Ali to pair with engineers to review how treatment component is interacting with better/worse MAM substates
-    - Model 11.2
-  * - 4: Underestimation of diarrheal diseases and LRI excess mortality rates in 1-5 and 6-11 month age groups
-    - Suspected to be a timestep issue. Application of CGF EMR RRs can cause very high EMR rates for high-risk individuals in these age groups and our timesteps may not be short enough to accurately capture them. (Note that they are no faster than the diarrheal diseases and LRI remission rates, but we have adjusted the remission rates to account for the relatively long timestep in a way that we have not done for these EMRs. Also note that this same pattern is not present for ages/causes with lower EMRs, indicating it is likely not an issue with implementation of CGF risk effects on EMR)
-    - Test validation in variable timestep test runs when ready. No code changes for now.
-    - N/A
+  * - 1: MAM and SAM treatment not affecting wasting transition rates in baseline scenario
+    - Unknown, new issue from 11.2. Note that *targeted* MAM treatment appears to be functioning correctly.
+    - Engineers to investigate
+    - ASAP; for model 12.1.1
+  * - 2: Underweight exposure scrambled
+    - Unknown, new issue from 11.2, but persistent issue in model 12
+    - Engineers to investigate
+    - ASAP; for model 12.1.1
+  * - 3: There are non-zero uncovered MAM->mild transitions for 6-11 month age group in targeted MAM scenario #13 (coverage should be 100% in this group)
+    - Unknown, new issue from 11.2
+    - Engineers to investigate, but this is a lower priority than issues #1 and #2
+    - For next model that is convenient... don't want to spend too much time troubleshooting

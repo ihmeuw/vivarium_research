@@ -271,7 +271,7 @@ these are related to V&V. For more general information and best practices on V&V
 
       - `Simulant level hemoglobin changes over time <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/b1ca9e95f40942a92a9c8ed544d8adef6dc68695/validation/maternal/interactive_simulations/Hemoglobin%20trajectory%20plots%2020220616.ipynb>`_ 
       - `Simulant healthcare interactions <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Single_Simulant_Graph_Lifestyle.ipynb>`_  
-      - `Sankey diagrams of transitions between states <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/tree/8ca7c6d23354ffb08f532d163990f18745f4c80a/verification/interactive_simulations/sankey_diagrams>`_ (pictured below). Note that this repo is **private** which means you'll need a team member to add you before you can view it. 
+      - `Sankey diagrams of transitions between states <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/tree/7bdb02f4d9242128790001ed216bb20c881050b2/verification/interactive_simulations/sankey_diagrams>`_ (example pictured below). Note that this repo is **private** which means you'll need a team member to add you before you can view it. 
     - Concept Models:
 
       - :ref:`IV iron model<2019_concept_model_vivarium_iv_iron>`
