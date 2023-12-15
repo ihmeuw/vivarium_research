@@ -162,8 +162,11 @@ that are configurable for each run:
   * - Budget(s)
     - A set of budgets or single budget to optimize for 
     - We will plan to include some "help" for selecting a budget such as the cost of maximizing all interventions or the current baseline budget 
-  * - Stillbirth inclusion in YLLs 
-    - Stillbirths included in YLLs, stillbirths NOT included in YLLs
+  * - Stillbirth inclusion 
+    - Stillbirths included in YLLs and deaths
+    - 
+  * - Mean draw vs individual draws
+    - Either finds results only for the mean of draws OR for individual draws 
     - 
 
 We have considered some other possible input parameters, but at this time 
@@ -172,10 +175,17 @@ these to be configurable on each run if the need arises.
 
 Additional parameters: 
 
-#. Draw-specific results vs summarized results. Currently we are planning to have results be draw-specific. 
 #. Rate vs total population. Currently we will generate results for the total population. E.g., all deaths averted in Ethiopia.
 #. Additional constraints in the optimization. E.g., running the emulator allowing for operationally infeasible cases and not allowing for them. 
 #. Changing saturation coverage limits. 
+
+.. note::
+
+  Stillbirths can either be included or excluded from YLLs, DALYs and deaths. The question of including stillbirths as a negative outcome is complex. Traditionally, stillbirths are not seen as "deaths" and therefore don't contribute to outcomes. 
+
+  However, pregnancy interventions are known to decrease the stillbirth rate, leading to more live births. These children are often vulnerable to infections and deaths in early life. Therefore, results can sometimes be misleading if a child that would have been stillborn was born alive but died quickly. If stillbirths are not counted as a death, then it might appear like pregnancy interventions increase deaths. 
+
+  Therefore we have an adjustable parameter in the emulator where stillbirths can be included or not included in the counts for deaths, YLLs and YLDs. 
 
 
 2.2.3 Constraints and Assumptions
@@ -219,23 +229,19 @@ Assumptions:
     - `Emulator version 4 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/d667cd01cd0ddc63137fe55798cc6d04831701d0/emulator/emulator_with_py_files_20230810.ipynb>`_ and `py files version 4 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/d667cd01cd0ddc63137fe55798cc6d04831701d0/emulator/emulator_with_py_files_20230810.ipynb>`_  
     - 
   * - 5
-    - Adding maternal interventions  
-    - 
+    - Adding maternal interventions
+    - `Emulator version 5 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/emulator/emulator_10_04_2023.ipynb>`_ and `py files version 5 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/emulator/emulator_functions_10_04_23.py>`_
     - 
   * - 6
     - Allowing optimization to different parameters 
-    - 
+    - `Emulator version 5 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/emulator/emulator_10_04_2023.ipynb>`_ and `py files version 5 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/emulator/emulator_functions_10_04_23.py>`_
     - 
   * - 7
-    - Add in additional constraints for unfeasible scenarios 
+    - Add in stillbirths parameter 
     - 
     - 
   * - 8
     - Adjusting to fit final model outputs 
-    - 
-    - 
-  * - 9
-    - Adding non-linear costs  
     - 
     - 
 
@@ -267,17 +273,17 @@ Assumptions:
     - Syl
     - Example: deaths, DALYs, SAM cases 
   * - 5: Add maternal interventions 
-    - Blocked by simulation progress 
+    -  
     - Syl
-    - WIP
+    - Completed 
   * - 6: Test for robustness to different initial values 
     - 
-    - TBD
-    - 
+    - Syl
+    - Completed 
   * - 7: Test non-linear cost functions 
     - 
-    - TBD
-    - Not technically needed for wave 1 but would good to keep in mind during emulator design and building
+    - Some testing, decided against moving forward here 
+    - 
   * - 8: Decide on costing approach and priorities 
     - 
     - Syl and Latera
