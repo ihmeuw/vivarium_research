@@ -503,9 +503,9 @@ this data in our analysis. You can see the first two data sources would both be
 undifferentiated sex/gender. This is due to ambiguity between sex and gender in 
 the question asked. 
 
-The latter two data source more clearly reflect sex, although one is sex assigned 
+The latter two data sources more clearly reflect sex, although one is sex assigned 
 at birth and the other is sex identity. Therefore if you included both data source 
-3 and 4, you might label this as undifferentiated sex factors. 
+3 and 4, you might label this as sex. 
 
 If you included one of the first two data sources as well, it is no longer clear 
 that sex is measured instead of gender and so you would use undifferentiated sex/gender. 
