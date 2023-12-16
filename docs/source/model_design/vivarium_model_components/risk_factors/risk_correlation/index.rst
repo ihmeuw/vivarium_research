@@ -303,6 +303,8 @@ The overestimate of the rate, as a proportion of the true rate, is :math:`\frac{
   error is in :download:`this document <Why_is_getting_the_paf_right_.pdf>`.
   This should be merged into the contents of this page when we get more rigorous about quantifying these biases.
 
+.. _joint_paf_calculation:
+
 Calculation of joint PAFs in presence of correlation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -337,6 +339,15 @@ For two continuous risks with RRs **per unit increase** the value is:
 This can be approximated by sampling from the joint distribution, calculating
 :math:`RR_{r1}(v1) * RR_{r2}(v2)` for each pair of exposures drawn, and taking the average
 of those values.
+
+This approach extends naturally to a group of more than 2 correlated risk factors.
+If all factors are categorical and the number of categories is low enough to make it feasible, you could calculate:
+
+.. math::
+  E(\prod_{r \in R}{RR_{r}}) = \sum_{v \in R_1 \times R_2 \times ...}{p(v) * \prod_{r \in R}{RR_{r}(v_r)}}
+
+or you could sample from the joint distribution, calculate :math:`\prod_{r \in R}{RR_{r}(v_r)}`
+for each set :math:`v` of exposure values drawn, and take the average of those values.
 
 For more details on the calculation of PAFs in the presence of correlated risks,
 see `this example from the BEP project <https://github.com/ihmeuw/vivarium_research_bep_notebooks/blob/main/Correlation/2020_02_11a_correlation_and_paf.ipynb>`_.
