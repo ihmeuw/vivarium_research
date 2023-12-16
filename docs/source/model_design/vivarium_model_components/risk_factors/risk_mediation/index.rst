@@ -197,6 +197,12 @@ or to be consistent with GBD's mediation methodology.
 In past models, we have mostly done the latter; we recommend doing the former in future models.
 Both approaches are described below.
 
+.. todo::
+
+  We don't totally understand why GBD models *excess* risk -- while there is a possibility that
+  there is a good reason behind it, we haven't been able to find that reason, so we prefer
+  Approach 1 for now.
+
 If GBD does not report a mediation factor, it may still report one or more of the effects in the diagram.
 The rest can be filled in with external sources.
 
