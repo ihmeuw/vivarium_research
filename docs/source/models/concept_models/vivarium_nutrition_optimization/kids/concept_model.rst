@@ -1328,7 +1328,7 @@ Wave II
 
       * `No major cause model concerns at the moment <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_risk_and_cause_checks.ipynb>`_ -- let's revisit once we resolve underweight exposure issues
 
-      * NOTE: still need to confirm appropriate implementation of MMS effect data update
+      * `MMS is not affecting gestational age at all <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_interactive_MMS_effect.ipynb>`_. In the interactive sim, MMS didn't have any effect on gestational age. IFA did affect gestational age and MMS did affect birthweight so it is suspected that this is a "typo type" error in data loading or linkage. Engineering to investigate. 
 
   * - 12.2
     - Check that results for this run approximate the mean of the results from run 12.1
