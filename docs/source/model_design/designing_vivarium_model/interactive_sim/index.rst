@@ -88,6 +88,9 @@ Example code:
 
 .. code:: python
 
+  ! pip list | grep vivarium
+  ! pip freeze | grep vivarium
+
   import warnings
   warnings.simplefilter(action='ignore', category=FutureWarning)
   
@@ -124,8 +127,8 @@ You'll do this by building a model specification object from the default YAML fi
   # Delete the "metrics" component (an observer)
   del custom_model_specification.components.vivarium_public_health.metrics
   # Filter out components with 'Observer' or 'Stratifier' in the name
-  custom_model_specification.components['<YOUR_MODEL_NAME>.components'] = [
-      c for c in custom_model_specification.components['<YOUR_MODEL_NAME>.components']
+  custom_model_specification.components.<YOUR_MODEL_NAME>.components = [
+      c for c in custom_model_specification.components.<YOUR_MODEL_NAME>.components
       if 'Observer' not in c and 'Stratifier' not in c
   ]
 
@@ -202,8 +205,6 @@ something from the list that you want included in your data, just add it using `
 The below will show using all of these in practice: 
 
 .. code:: python
-
-  sim.setup() # Sets up the simulation 
 
   pop0 = sim.get_population() # Generates a dataset with some simulant data included 
   pop0.columns # Lists the columns in your simulant dataset 
