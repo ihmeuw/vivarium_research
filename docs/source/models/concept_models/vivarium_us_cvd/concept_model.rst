@@ -1278,6 +1278,9 @@ Additional information on the `generation of data can be found in this notebook 
   * - 24.0
     - Add state level treatment variation
     - It is believed that this was implemented correctly, but noisy data lead to weird patterns over time. To address this, the data was smoothed using a loess model and is being rerun now. `medication levels in the sim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_multi_location_12_11_23.ipynb>`_. 
+  * - 24.1
+    - Add state level treatment variation 
+    - After smoothing with the loess model, the results look good. `updated medication levels in the sim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_multi_location_12_11_23.ipynb>`_. 
   * - 25.0
     - Final Runs 
     - Research team to specify this further 
