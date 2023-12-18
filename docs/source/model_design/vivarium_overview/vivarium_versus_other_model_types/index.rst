@@ -106,7 +106,7 @@ Our cardiovascular disease (CVD) microsimulation offers a useful example of how 
 risk factors that affect different CVD outcomes, including: body mass index (BMI), systolic blood pressure (SBP), low-density lipoprotein cholesterol levels (LDL-C), and fasting 
 plasma glucose (FPG). Using NHANES survey data, we calculated correlation coefficients for these relationships, which could then be used to generate propensity values for all
 simulants. As such, the correlation coefificients remain constant as simulants age and their risk exposure values change. You can read more about our modeling strategy for 
-these risk factor correlations :ref:`on this page <sbp_ldlc_fpg_bmi>`.
+these risk factor correlations :ref:`on this page <2023_sbp_ldlc_fpg_bmi>`.
 
 Continuous values
 ~~~~~~~~~~~~~~~~~
@@ -117,7 +117,7 @@ multiplication models.
 For example, in our intravenous (IV) iron intervention microsimulation, we model the joint distribution of maternal BMI and hemoglobin levels, as two risk exposures associated with poor
 health outcomes for both mother/birthing parent and child. We treat hemoglobin as a continuous risk exposure that varies as simulants age and move through the pregancy model states,
 while maternal BMI is a categorical risk exposure conditional on hemoglobin status (i.e., above or below 100 g/L) at the start of the pregnancy. Read more about the modeling strategy
-we used for this joint distribution :ref:`here <maternal_bmi_hgb>`.
+we used for this joint distribution :ref:`here <2019_risk_exposure_maternal_bmi_hgb>`.
 
 .. todo::
 
@@ -127,7 +127,7 @@ Time-varying rates dependent on multiple factors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Another complexity enabled by microsimulation is the inclusion of time-varying rates dependent on multiple factors. A good example of this is in our microsimulation of Multiple Myeloma, 
-which allow relapse hazard rates to vary over time since treatment line initiation. Read more about how we calculated relapse hazard rates :ref:`here <calculation-of-mortality-and-relapse-hazard>`.
+which allow relapse hazard rates to vary over time since treatment line initiation. Read more about how we calculated relapse hazard rates :ref:`here <calc_mortality_relapse_hazard>`.
 
 .. todo:: 
 
