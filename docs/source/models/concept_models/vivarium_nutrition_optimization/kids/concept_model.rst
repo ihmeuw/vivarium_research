@@ -1329,12 +1329,18 @@ Wave II
       * `No major cause model concerns at the moment <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_risk_and_cause_checks.ipynb>`_ -- let's revisit once we resolve underweight exposure issues
 
       * `MMS is not affecting gestational age at all <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_interactive_MMS_effect.ipynb>`_. In the interactive sim, MMS didn't have any effect on gestational age. IFA did affect gestational age and MMS did affect birthweight so it is suspected that this is a "typo type" error in data loading or linkage. Engineering to investigate. 
-
+  * - 12.1.1
+    - Check (1) underweight exposure, (2) wasting treatment effects, (3) MAM substate exposure data update, (4) MAM substate risk effects data update, (5) cause models
+    - * `Underweight exposure looks good now (bug resolved!) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+      * `Wasting treatment looks good in baseline scenario now (bug resolved!) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_wasting_treatment_effects.ipynb>`_
+      * MAM substate exposure looks good (TODO: LINK)
+      * `MAM substate relative risks look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_rrs.ipynb>`_
+      * `Diarrheal diseases and LRI mortality still a bit underestimated for specific age groups in Pakistan and Nigeria, but I am ready to call this close enough <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+      * `Zero counts for non-MAM wasting state person time among those covered by targeted MAM in scenario #13 (new issue) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+      * `Zero transition counts for several transitions among those covered by targeted MAM in scenario #13 (new issue) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
   * - 12.2
     - Check that results for this run approximate the mean of the results from run 12.1
     - 
-
-
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -1343,15 +1349,15 @@ Wave II
     - Explanation
     - Action plan
     - Timeline
-  * - 1: MAM and SAM treatment not affecting wasting transition rates in baseline scenario
-    - Unknown, new issue from 11.2. Note that *targeted* MAM treatment appears to be functioning correctly.
+  * - 1: MMS not affecting gestational age exposure
+    - Unknown
     - Engineers to investigate
-    - ASAP; for model 12.1.1
-  * - 2: Underweight exposure scrambled
-    - Unknown, new issue from 11.2, but persistent issue in model 12
+    - ASAP; for model 12.1.2
+  * - 2: Zero counts for non-MAM wasting state person time for those covered by targeted MAM treatment
+    - Unknown
     - Engineers to investigate
-    - ASAP; for model 12.1.1
-  * - 3: There are non-zero uncovered MAM->mild transitions for 6-11 month age group in targeted MAM scenario #13 (coverage should be 100% in this group)
-    - Unknown, new issue from 11.2
-    - Engineers to investigate, but this is a lower priority than issues #1 and #2
-    - For next model that is convenient... don't want to spend too much time troubleshooting
+    - ASAP; for model 12.1.2
+  * - 3: Zero wasting transition counts for several transitions among those covered by targeted MAM treatment
+    - Unknown
+    - Engineers to investigate
+    - ASAP; for model 12.1.2
