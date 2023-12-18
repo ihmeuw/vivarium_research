@@ -158,31 +158,33 @@ are the first, second, and third level keys.
 If you just want to change a value, you can set it, as we have with the population size in the example.
 
 You can also use the default value to create your new value. That's what's happening with the last lines in
-the example, where we take whatever is in the list at :code:`<YOUR_MODEL_NAME>.components` under :code:`components`
+the example, where we take whatever is in the list at :code:`components` inside :code:`<YOUR_MODEL_NAME>` under :code:`components`
 and remove only the items that have 'Observer' or 'Stratifier' in them.
 This is equivalent to editing a YAML file that looks like this...
 
 .. code:: yaml
 
   components:
-    <YOUR_MODEL_NAME>.components:
-      - ComponentOne()
-      - ComponentTwo()
-      - ComponentThree()
-      - ObserverOne()
-      - ObserverTwo()
-      - StratifierOne()
-      - StratifierTwo()
+    <YOUR_MODEL_NAME>:
+      components:
+        - ComponentOne()
+        - ComponentTwo()
+        - ComponentThree()
+        - ObserverOne()
+        - ObserverTwo()
+        - StratifierOne()
+        - StratifierTwo()
 
 ... by simply removing the lines specified, leaving everything else:
 
 .. code:: yaml
 
   components:
-    <YOUR_MODEL_NAME>.components:
-      - ComponentOne()
-      - ComponentTwo()
-      - ComponentThree()
+    <YOUR_MODEL_NAME>:
+      components:
+        - ComponentOne()
+        - ComponentTwo()
+        - ComponentThree()
 
 .. _interactive_setup_3:
 
