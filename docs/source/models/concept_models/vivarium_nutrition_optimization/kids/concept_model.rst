@@ -1170,7 +1170,7 @@ Wave II
     - 
     - `Code to generte mean draw for all artifact keys except the LBWSG PAF can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/mean_draw_generation.ipynb>`_. The mean LBWSG PAF can be calculated using the LBWSG PAF calculation code using the mean draw for LBWSG RRs and LBWSG exposure.
   * - 13
-    - Production runs using model version 12.1.1/branch bugfix/MIC-4769_mms_bug
+    - Production runs using model version 12.1.1
     - All
     - Baseline, 0-8, 13-16
     - Constant 4 day timestep, all locations, 20 pregnancy seeds (at 20,000 pregnancies per seed) per draw; 20 draws
