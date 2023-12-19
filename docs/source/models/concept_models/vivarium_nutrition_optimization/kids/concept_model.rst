@@ -1336,8 +1336,11 @@ Wave II
       * `MAM substate exposure looks good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_MAM_substate_exposure.ipynb>`_
       * `MAM substate relative risks look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_rrs.ipynb>`_
       * `Diarrheal diseases and LRI mortality still a bit underestimated for specific age groups in Pakistan and Nigeria, but I am ready to call this close enough <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
-      * `Zero counts for non-MAM wasting state person time among those covered by targeted MAM in scenario #13 (new issue) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
-      * `Zero transition counts for several transitions among those covered by targeted MAM in scenario #13 (new issue) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+      * `Zero counts for non-MAM wasting state person time among those covered by targeted MAM in scenario #13 and zero transition counts for some transitions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+
+        * NOTE: this is expected behavior for how treatment coverage implementation interacts with observers (coverage only exists for certain transitions and states). This does result in inability to directly verify that treated recovery rate for the targeted MAM intervention, but this looked good in model 12.1 when the coverage/observer was tweaked to examine the MAM->mild transition rate instead. Follow-up in the interactive sim to directly confirm expected behavior, but no indication that it is not functioning as expected currently.
+
+      * `MMS effect size update and implementation confirmed to be functioning in interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_interactive_MMS_effect.ipynb>`_
   * - 12.2
     - Check that results for this run approximate the mean of the results from run 12.1
     - 
@@ -1349,15 +1352,8 @@ Wave II
     - Explanation
     - Action plan
     - Timeline
-  * - 1: MMS not affecting gestational age exposure
-    - Unknown
-    - Engineers to investigate
-    - ASAP; for model 12.1.2
-  * - 2: Zero counts for non-MAM wasting state person time for those covered by targeted MAM treatment
-    - Unknown
-    - Engineers to investigate
-    - ASAP; for model 12.1.2
-  * - 3: Zero wasting transition counts for several transitions among those covered by targeted MAM treatment
-    - Unknown
-    - Engineers to investigate
-    - ASAP; for model 12.1.2
+  * -  
+    -  
+    -  
+    -  
+
