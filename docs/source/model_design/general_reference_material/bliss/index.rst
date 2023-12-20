@@ -679,17 +679,21 @@ practices, as well as some lessons learned.
   Fill in this section with recommended papers on different topics so that if people are looking for references, they can easily find them. (e.g., this paper about pregnancy in transmasculine people: https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-020-03166-6)
   
 
+
 .. list-table:: **Recommended papers on sex and/or gender-related topics**
    :header-rows: 1
 
    * - You want to know more about...
      - So we recommend you check out... 
    * - How to be inclusive in pregnancy-related research
-     - 
+     - * *Men, trans/masculine, and non-binary people’s experiences of pregnancy loss: an international qualitative study* [Riggs_2020]_
+       * *Gender-inclusive writing for epidemiological research on pregnancy* [Rioux_2022]_
    * - How sex and gender are multidimensional and interrelated
-     - 
+     - * *Sex and Gender Multidimensionality in Epidemiologic Research* [Bauer_2017]_
+       * *Beyond a catalogue of differences: A theoretical frame and good practice guidelines for researching sex/gender in human health.* [Springer_2012]_
+       * *Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender.* [Ritz_and_Greaves_2022]_
    * - How to build an inclusive survey questionnaire
-     - 
+     - *Transgender-inclusive measures of sex/gender for population surveys: Mixed-methods evaluation and recommendations* [Bauer_2017]_
 
 6.1 Other Gender-Inclusive Guides
 ---------------------------------
@@ -706,28 +710,35 @@ practices, as well as some lessons learned.
 .. [VEHSS_DR] Lundeen EA, Burke-Conte Z, Rein DB, et al. Prevalence of Diabetic Retinopathy in the US in 2021. JAMA Ophthalmol. Published online June 15, 2023. doi:10.1001/jamaophthalmol.2023.2289, `online version <https://jamanetwork.com/journals/jamaophthalmology/fullarticle/2806093>`_
 
 .. [Bauer_2022]
-    `Sex and Gender Multidimensionality in Epidemiologic Research.` American Journal of Epidemiology, Oxford University Press, 30 September 2022, https://academic.oup.com/aje/article/192/1/122/6747669. 
+    Bauer, G. (2022) Sex and Gender Multidimensionality in Epidemiologic Research. American Journal of Epidemiology, Oxford University Press, 30 September 2022, https://academic.oup.com/aje/article/192/1/122/6747669. 
 
 .. [Ritz_and_Greaves_2022]
-    `Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender.` International Journal of Environmental Research and Public Health, 30 March 2022, https://www.mdpi.com/1660-4601/19/7/4083.
+    Ritz, S. and Greaves, L. (2022) Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender. International Journal of Environmental Research and Public Health, 30 March 2022, https://www.mdpi.com/1660-4601/19/7/4083.
 
 .. [GovEx_Johns_Hopkins]
     https://centerforgov.gitbooks.io/benchmarking/content/
 
 .. [Springer_2012]
-  `Beyond a catalogue of differences: A theoretical frame and good practice guidelines for researching sex/gender in human health.` Social Science & Medicine, June 2012, https://doi.org/10.1016/j.socscimed.2011.05.033
+    Springer, K., Stellman, J., Jordan-Young, R. (2012) Beyond a catalogue of differences: A theoretical frame and good practice guidelines for researching sex/gender in human health. Social Science & Medicine, June 2012, https://doi.org/10.1016/j.socscimed.2011.05.033
 
 .. [Bauer_2017]
-  Bauer GR, Braimoh J, Scheim AI, Dharma C (2017) Transgender-inclusive measures of sex/gender for population surveys: Mixed-methods evaluation and recommendations. PLoS ONE 12(5): e0178043. https://doi.org/10.1371/journal.pone.0178043
+    Bauer, G.R., Braimoh, J., Scheim, A.I., Dharma, C. (2017) Transgender-inclusive measures of sex/gender for population surveys: Mixed-methods evaluation and recommendations. PLoS ONE 12(5): e0178043. https://doi.org/10.1371/journal.pone.0178043
 
 .. [Blackstone_2003]
-  Blackstone, A (2003) Gender Roles and Society. In Human Ecology: An Encyclopedia of Children, Families, Communities, and Environments: pp.335-338.
+    Blackstone, A. (2003) Gender Roles and Society. In Human Ecology: An Encyclopedia of Children, Families, Communities, and Environments: pp.335-338.
 
 .. [Nielsen_2021]
-  Nielsen, M.W., Stefanick, M.L., Peragine, D. et al. Gender-related variables for health research. Biol Sex Differ 12, 23 (2021). https://doi.org/10.1186/s13293-021-00366-3
+    Nielsen, M.W., Stefanick, M.L., Peragine, D. et al. Gender-related variables for health research. Biol Sex Differ 12, 23 (2021). https://doi.org/10.1186/s13293-021-00366-3
 
 .. [ABS_2021]
-  Standard for Sex, Gender, Variations of Sex Characteristics and Sexual Orientation Variables. Australian Bureau of Statistics. https://www.abs.gov.au/statistics/standards/standard-sex-gender-variations-sex-characteristics-and-sexual-orientation-variables/latest-release
+    Standard for Sex, Gender, Variations of Sex Characteristics and Sexual Orientation Variables. Australian Bureau of Statistics. https://www.abs.gov.au/statistics/standards/standard-sex-gender-variations-sex-characteristics-and-sexual-orientation-variables/latest-release
 
 .. [National_Academies_2022]
-  Measuring Sex, Gender Identity, and Sexual Orientation. National Academies of Sciences, Engineering, and Medicine. https://nap.nationalacademies.org/catalog/26424/measuring-sex-gender-identity-and-sexual-orientation
+    Measuring Sex, Gender Identity, and Sexual Orientation. National Academies of Sciences, Engineering, and Medicine. https://nap.nationalacademies.org/catalog/26424/measuring-sex-gender-identity-and-sexual-orientation
+
+.. [Riggs_2020] 
+    Riggs, D., Pearce, R., Pfeffer, C., Hines, S., White, F.R., Ruspini, E. (2020) Men, trans/masculine, and non-binary people’s experiences of pregnancy loss: an international qualitative study`. BMC Pregnancy and Childbirth. https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-020-03166-6  
+
+.. [Rioux_2022]
+    Rioux, C., Weedon, S., London-Nadeau, K., Pare, A., Juster, R.P., Roos, L., Freeman, M., Tomfohr-Madsen, L. (2022) Gender-inclusive writing for epidemiological research on pregnancy. J Epidemiological
+    Community. 28 June 2022, http://dx.doi.org/10.1136/jech-2022-219172).
