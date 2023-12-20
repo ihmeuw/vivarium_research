@@ -683,7 +683,7 @@ practices, as well as some lessons learned.
      - * *Men, trans/masculine, and non-binary people’s experiences of pregnancy loss: an international qualitative study* [Riggs_2020]_
        * *Gender-inclusive writing for epidemiological research on pregnancy* [Rioux_2022]_
    * - How sex and gender are multidimensional and interrelated
-     - * *Sex and Gender Multidimensionality in Epidemiologic Research* [Bauer_2017]_
+     - * *Sex and Gender Multidimensionality in Epidemiologic Research* [Bauer_2022]_
        * *Beyond a catalogue of differences: A theoretical frame and good practice guidelines for researching sex/gender in human health.* [Springer_2012]_
        * *Transcending the Male-Female Binary in Biomedical Research: Constellations, Heterogeneity, and Mechanism When Considering Sex and Gender.* [Ritz_and_Greaves_2022]_
    * - How to build an inclusive survey questionnaire
