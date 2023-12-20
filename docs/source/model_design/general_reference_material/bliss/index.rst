@@ -674,12 +674,6 @@ practices, as well as some lessons learned.
 6.0 Recommended Resources
 +++++++++++++++++++++++++
 
-.. todo::
-  
-  Fill in this section with recommended papers on different topics so that if people are looking for references, they can easily find them. (e.g., this paper about pregnancy in transmasculine people: https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-020-03166-6)
-  
-
-
 .. list-table:: **Recommended papers on sex and/or gender-related topics**
    :header-rows: 1
 
