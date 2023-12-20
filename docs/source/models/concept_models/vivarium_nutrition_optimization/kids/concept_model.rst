@@ -1169,6 +1169,12 @@ Wave II
     - Baseline
     - 
     - `Code to generte mean draw for all artifact keys except the LBWSG PAF can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/mean_draw_generation.ipynb>`_. The mean LBWSG PAF can be calculated using the LBWSG PAF calculation code using the mean draw for LBWSG RRs and LBWSG exposure.
+  * - 13
+    - Production runs using model version 12.1.1
+    - All
+    - Baseline, 0-8, 13-16
+    - Constant 4 day timestep, all locations, 20 pregnancy seeds (at 20,000 pregnancies per seed) per draw; 20 draws
+    - 
 
 .. list-table:: Output specifications
   :header-rows: 1
@@ -1231,6 +1237,13 @@ Wave II
       8. YLDs and YLLs
     - * Age group
       * Sex
+  * - 13
+    - 1. Deaths and YLLs (non-cause-specific)
+      2. YLDs (all-cause observer only)
+      3. Count of incident SAM cases stratified by SAM treatment coverage
+      4. Count of incident MAM cases stratified by MAM treatment coverage
+      5. Stunting state person time stratified by SQ-LNS utilization
+    - Age strata of 0-6 months, 6-18 months, 18-60 months
 
 
 .. list-table:: Verification and validation tracking
