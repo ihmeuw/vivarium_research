@@ -125,7 +125,7 @@ Another complexity enabled by microsimulation is the inclusion of time-varying r
 which allow relapse and mortality hazard rates to vary over time since treatment line initiation, in addition to being impacted by the line of treatment, demographic covariates, and treatment regimen. Read more about how we calculated these rates :ref:`here <calc_mortality_relapse_hazard>`.
 
 The figure below demonstrates how survival rates in multiple myeloma patients differ based on the year of diagnosis and treatment line initiation. This figure was produced by
-researchers at Amgen, Inc, and you can read the paper in which it was published `here <https://www.tandfonline.com/doi/full/10.1080/10428194.2020.1827253>`_.[Braunlin-MM-2020]_ 
+researchers at Amgen, Inc, and you can read the paper in which it was published `here <https://www.tandfonline.com/doi/full/10.1080/10428194.2020.1827253>`_. [Braunlin-MM-2020]_ 
 
 .. image:: MM_graph_time_varying_rates.jpg
 
