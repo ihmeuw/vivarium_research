@@ -133,7 +133,7 @@ Incorporating uncertainty
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Microsimulation methods provide a useful approach to modeling stochastic uncertainty in a conceptually valid manner because chance – that is, reliance on randomly generated numbers – 
-is used to govern movement between health states for individual simulants from a single computer-generated population, as opposed to comparing the role of chance across multiple 
+is used to govern movement between states for individual simulants from a single computer-generated population, as opposed to comparing the role of chance across multiple 
 populations with differing characteristics.
 
 In the context of healthcare estimates typically characterized by considerable variance across quantities of interest, the use of Monte Carlo methods to run simulations using iterative 
