@@ -129,19 +129,6 @@ which allow relapse and mortality hazard rates to vary over time since treatment
 
     Elaborate on example from Multiple Myeloma model
 
-Incorporating uncertainty
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Microsimulation methods provide a useful approach to modeling stochastic uncertainty in a conceptually valid manner because chance – that is, reliance on randomly generated numbers – 
-is used to govern movement between states for individual simulants from a single computer-generated population, as opposed to comparing the role of chance across multiple 
-populations with differing characteristics.
-
-In the context of healthcare estimates typically characterized by considerable variance across quantities of interest, the use of Monte Carlo methods to run simulations using iterative 
-draws from probability distributions provides an effective means of incorporating parameter uncertainty. 
-
-Simulation methods have the added advantage of reducing confounding variance between different scenarios by ensuring that the simulated population is identical across all scenarios analyzed. 
-The only difference between scenarios, then, is the presence or absence of health interventions. By incorporating heterogeneity at the level of the individual simulant, microsimulations are 
-able to provide an additional degree of flexibility and detail (such as stratifying results according to demographic or epidemiological attributes) not available in population-level models. 
 
 Allowing other complexities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -160,7 +147,7 @@ Disadvantages of microsimulation
 Resource requirements
 ~~~~~~~~~~~~~~~~~~~~~
 
-Our microsimulation models require a significant amount of detailed data to accurately represent individual behaviors and the relationships between them.
+Our microsimulation Our microsimulation models require a significant amount of detailed data to accurately represent individual behaviors and the relationships between them.
 Obtaining this data can be challenging and time-consuming, and there may be privacy concerns associated with using such detailed personal data. If we're 
 not interested in the complexities described in the section above, then it is likely that a less resource-intensive alternative, such as a multiplication model,
 is a suitable modeling strategy.
@@ -208,13 +195,30 @@ The IHME microsimulation platform, unlike most other microsimulation frameworks,
  - What differential equations underly these different types of models?
 
 Simulant agency
-~~~~~~~~~~~~~~~
++++++++++++++++
 
 Unlike agent-based models, microsimulations do not necessarily program agency into individual simulants. This removes some of the real-world likeness of these models...
 
 .. todo:: 
   
   Expand upon how microsim is different from agent-based modeling here. 
+
+Incorporating uncertainty
++++++++++++++++++++++++++
+
+Microsimulation methods provide a useful approach to modeling stochastic uncertainty in a conceptually valid manner because chance – that is, reliance on randomly generated numbers – 
+is used to govern movement between states for individual simulants from a single computer-generated population, as opposed to comparing the role of chance across multiple 
+populations with differing characteristics.
+
+In the context of healthcare estimates typically characterized by considerable variance across quantities of interest, the use of Monte Carlo methods to run simulations using iterative 
+draws from probability distributions provides an effective means of incorporating parameter uncertainty. 
+
+Simulation methods have the added advantage of reducing confounding variance between different scenarios by ensuring that the simulated population is identical across all scenarios analyzed. 
+The only difference between scenarios, then, is the presence or absence of health interventions. By incorporating heterogeneity at the level of the individual simulant, microsimulations are 
+able to provide an additional degree of flexibility and detail (such as stratifying results according to demographic or epidemiological attributes) not available in population-level models.
+
+.. todo::
+    Reword this section to make it clear that this is about common random numbers (not Monte Carlo) as a distinguishing feature of Vivarium (as compared to other microsim methods) 
 
 References
 ----------
