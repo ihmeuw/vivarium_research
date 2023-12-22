@@ -110,7 +110,7 @@ these risk factor correlations :ref:`on this page <2023_sbp_ldlc_fpg_bmi>`.
 Continuous values
 ~~~~~~~~~~~~~~~~~
 
-Similarly, microsimulation allows the modeling of continuous values, something which is not as straightforward with categorical data characteristic of 
+Additionally, microsimulation allows the modeling of continuous values, something which is not as straightforward (if possible) with categorical data characteristic of 
 compartmental models.
 
 For example, in our intravenous (IV) iron intervention microsimulation, we model precise hemoglobin levels as a continuous risk exposure that varies as simulants age and move 
@@ -122,12 +122,14 @@ Time-varying rates dependent on multiple factors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Another complexity enabled by microsimulation is the inclusion of time-varying rates dependent on multiple factors. A good example of this is in our microsimulation of Multiple Myeloma, 
-which allow relapse and mortality hazard rates to vary over time since treatment line initiation, in addition to being impacted by the line of treatment, demographic covariates, and treatment regimen. Read more about how we calculated hazard rates :ref:`here <calc_mortality_relapse_hazard>`.
+which allow relapse and mortality hazard rates to vary over time since treatment line initiation, in addition to being impacted by the line of treatment, demographic covariates, and treatment regimen. Read more about how we calculated these rates :ref:`here <calc_mortality_relapse_hazard>`.
 
-.. todo:: 
+The figure below demonstrates how survival rates in multiple myeloma patients differ based on the year of diagnosis and treatment line initiation. This figure was produced by
+researchers at Amgen, Inc, and you can read the paper in which it was published `here <https://www.tandfonline.com/doi/full/10.1080/10428194.2020.1827253>`_.[Braunlin-et-al-2020]_ 
 
-    Elaborate on example from Multiple Myeloma model
+.. image:: MM_graph_time_varying_rates.jpg
 
+.. _allowing_other_complexities:
 
 Allowing other complexities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -139,6 +141,10 @@ Another benefit of microsimulations in general is that they can surface complica
   Elaborate on example of this from previous work: examining hemoglobin on curve on an individual level and seeing the discrepancies from real life that would also be present in a 
   model that doesn't go to the level of detail we do in microsim. 
 
+  Another example I'll use in this section is the PRL project: family structure (if something like this is available at all in a comparmental model, then it is only reported in a 
+  much more aggregated way.) Connect this directly to the data requirements disadvantage: even with the very detailed ACS data, simulating realistic family structures is a big 
+  challenge! 
+
 
 Disadvantages of microsimulation
 ++++++++++++++++++++++++++++++++
@@ -146,14 +152,23 @@ Disadvantages of microsimulation
 Resource requirements
 ~~~~~~~~~~~~~~~~~~~~~
 
-Our microsimulation Our microsimulation models require a significant amount of detailed data to accurately represent individual behaviors and the relationships between them.
-Obtaining this data can be challenging and time-consuming, and there may be privacy concerns associated with using such detailed personal data. If we're 
-not interested in the complexities described in the section above, then it is likely that a less resource-intensive alternative, such as a multiplication model,
-is a suitable modeling strategy.
-
-It is also important to note that our microsimulations typically require a substantial amount of computational resources to run. For example, our microsimulation of a full-scale
+Our microsimulations typically require a substantial amount of computational resources to run. For example, our microsimulation of a full-scale
 United States population was made possible through the use of a high performance computing cluster and used approximately 55 gigabytes of memory over a runtime of 21.5 hours.
-Read more about this project :ref:`here <vivarium_census_prl_synth_data>`
+Read more about this project :ref:`here <vivarium_census_prl_synth_data>`.
+
+The demanding resource needs of microsimulations may require we use a smaller simulant population (that can, post-simulation, be up-scaled to better reflect the real-world target population),
+thus presenting limitations related to sample size and stochastic uncertainty. 
+
+Data requirements
+~~~~~~~~~~~~~~~~~
+
+As we highlighted above in our section on :ref:`Allowing other complexities <allowing_other_complexities>`, microsimulations enable the modeling of complexities otherwise
+difficult or impossible to replicate. Unfortunately, these complexities require a significant amount of detailed data to accurately represent individual behaviors and the relationships between them.
+Obtaining these data can be challenging and time-consuming, and there may be privacy concerns associated with using such detailed personal data. This is particularly true given the nature of
+what we on the Simulation Science team investigate in our microsimulations: accurately modeling the effects of health interventions at an individual-level likely requires access to medical 
+records, medication histories, and other highly personal information.  
+
+If we're not interested in the complexities described in the section above, then it is likely a less data- and resource-intensive alternative, such as a multiplication model, is a suitable modeling strategy.
 
 Residual confounding
 ~~~~~~~~~~~~~~~~~~~~
@@ -166,6 +181,8 @@ You can read more about residual confounding and how our team accounts for it :r
 .. todo::
 
   Cite [Allen-et-al-2019]_ and [Sorensen-et-al-2017]_ somewhere.
+
+  Elaborate on this in approachable/jargon-free language.
   
 
 How does Vivarium compare with other microsimulation tools?
@@ -234,6 +251,10 @@ References
 
       Allen et al. (2019). `Enabling Model Complexity Through an Improved Workflow.` Healthy Algorithms. 
 
+.. [Braunlin-et-al-2020]
+
+    Braunlin et al. (2020) `Trends in the multiple myeloma treatment landscape and survival: a U.S. analysis using 2011–2019 oncology clinic electronic health record data`.
+    Leukemia & Lymphoma, 62:2, 377-386, DOI: https://doi.org/10.1080/10428194.2020.1827253
 
 .. todo:: 
   Add citation to Vivarium Technical Document 2019
