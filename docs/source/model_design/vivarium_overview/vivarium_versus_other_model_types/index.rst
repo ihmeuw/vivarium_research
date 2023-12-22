@@ -103,7 +103,7 @@ level univariate distribution (which frequently comes from the GBD in our micros
 
 Our cardiovascular disease (CVD) microsimulation offers a useful example of how risk exposure correlation typically looks in microsimulations. There are several correlated 
 risk factors that affect CVD outcomes, including: body mass index (BMI), systolic blood pressure (SBP), low-density lipoprotein cholesterol levels (LDL-C), and fasting 
-plasma glucose (FPG). Using NHANES survey data, we calculated correlation coefficients for these relationships, which could then be used to generate propensity values for all
+plasma glucose (FPG). Using NHANES survey data, we calculated correlation coefficients for these relationships, which we used to generate values for all
 simulants. As such, the correlation coefificients remain constant as simulants age and their risk exposure values change. You can read more about our modeling strategy for 
 these risk factor correlations :ref:`on this page <2023_sbp_ldlc_fpg_bmi>`.
 
