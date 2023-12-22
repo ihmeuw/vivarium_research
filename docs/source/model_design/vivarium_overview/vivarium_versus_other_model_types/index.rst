@@ -110,7 +110,7 @@ these risk factor correlations :ref:`on this page <2023_sbp_ldlc_fpg_bmi>`.
 Continuous values
 ~~~~~~~~~~~~~~~~~
 
-Similarly, microsimulation allows the modeling of joint distribution between continuous values, something which is not as possible with categorical data characteristic of 
+Similarly, microsimulation allows the modeling of joint distributions between continuous values, something which is not as straightforward with categorical data characteristic of 
 multiplication models.
 
 For example, in our intravenous (IV) iron intervention microsimulation, we model the joint distribution of pre-pregnancy/first trimester BMI and hemoglobin levels, as two risk 
