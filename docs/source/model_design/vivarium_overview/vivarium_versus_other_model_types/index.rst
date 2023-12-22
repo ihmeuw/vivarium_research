@@ -160,10 +160,14 @@ Disadvantages of microsimulation
 Resource requirements
 ~~~~~~~~~~~~~~~~~~~~~
 
-Our microsimulation models require a significant amount of detailed data to accurately represent individual behaviors and the relationships between them. 
+Our microsimulation models require a significant amount of detailed data to accurately represent individual behaviors and the relationships between them.
 Obtaining this data can be challenging and time-consuming, and there may be privacy concerns associated with using such detailed personal data. If we're 
 not interested in the complexities described in the section above, then it is likely that a less resource-intensive alternative, such as a multiplication model,
 is a suitable modeling strategy.
+
+It is also important to note that our microsimulations typically require a substantial amount of computational resources to run. For example, our microsimulation of a full-scale
+United States population was made possible through the use of a high performance computing cluster and used approximately 55 gigabytes of memory over a runtime of 21.5 hours.
+Read more about this project :ref:`here <vivarium_census_prl_synth_data>`
 
 Residual confounding
 ~~~~~~~~~~~~~~~~~~~~
