@@ -1169,6 +1169,12 @@ Wave II
     - Baseline
     - 
     - `Code to generte mean draw for all artifact keys except the LBWSG PAF can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/mean_draw_generation.ipynb>`_. The mean LBWSG PAF can be calculated using the LBWSG PAF calculation code using the mean draw for LBWSG RRs and LBWSG exposure.
+  * - 13
+    - Production runs using model version 12.1.1
+    - All
+    - Baseline, 0-8, 13-16
+    - Constant 4 day timestep, all locations, 20 pregnancy seeds (at 20,000 pregnancies per seed) per draw; 20 draws
+    - 
 
 .. list-table:: Output specifications
   :header-rows: 1
@@ -1231,6 +1237,13 @@ Wave II
       8. YLDs and YLLs
     - * Age group
       * Sex
+  * - 13
+    - 1. Deaths and YLLs (non-cause-specific)
+      2. YLDs (all-cause observer only)
+      3. Count of incident SAM cases stratified by SAM treatment coverage
+      4. Count of incident MAM cases stratified by MAM treatment coverage
+      5. Stunting state person time stratified by SQ-LNS utilization
+    - Age strata of 0-6 months, 6-18 months, 18-60 months
 
 
 .. list-table:: Verification and validation tracking
@@ -1336,8 +1349,11 @@ Wave II
       * `MAM substate exposure looks good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_MAM_substate_exposure.ipynb>`_
       * `MAM substate relative risks look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_rrs.ipynb>`_
       * `Diarrheal diseases and LRI mortality still a bit underestimated for specific age groups in Pakistan and Nigeria, but I am ready to call this close enough <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
-      * `Zero counts for non-MAM wasting state person time among those covered by targeted MAM in scenario #13 (new issue) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
-      * `Zero transition counts for several transitions among those covered by targeted MAM in scenario #13 (new issue) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+      * `Zero counts for non-MAM wasting state person time among those covered by targeted MAM in scenario #13 and zero transition counts for some transitions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+
+        * NOTE: this is expected behavior for how treatment coverage implementation interacts with observers (coverage only exists for certain transitions and states). This does result in inability to directly verify that treated recovery rate for the targeted MAM intervention, but this looked good in model 12.1 when the coverage/observer was tweaked to examine the MAM->mild transition rate instead. `We have separately confirmed that the recovery rate for targeted MAM is the expected value using the interactive context <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_interactive_treated_mam_check.ipynb>`_
+
+      * `MMS effect size update and implementation confirmed to be functioning in interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_interactive_MMS_effect.ipynb>`_
   * - 12.2
     - Check that results for this run approximate the mean of the results from run 12.1
     - 
@@ -1349,15 +1365,8 @@ Wave II
     - Explanation
     - Action plan
     - Timeline
-  * - 1: MMS not affecting gestational age exposure
-    - Unknown
-    - Engineers to investigate
-    - ASAP; for model 12.1.2
-  * - 2: Zero counts for non-MAM wasting state person time for those covered by targeted MAM treatment
-    - Unknown
-    - Engineers to investigate
-    - ASAP; for model 12.1.2
-  * - 3: Zero wasting transition counts for several transitions among those covered by targeted MAM treatment
-    - Unknown
-    - Engineers to investigate
-    - ASAP; for model 12.1.2
+  * -  
+    -  
+    -  
+    -  
+
