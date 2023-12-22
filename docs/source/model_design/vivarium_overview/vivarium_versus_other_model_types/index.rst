@@ -99,8 +99,7 @@ Correlation between risk exposures
 
 At the individual level, risk exposures are frequently correlated. Examples include high body mass index and high fasting plasma glucose, tobacco smoking and alcohol use, 
 and childhood height and weight. Microsimulation methods allow us to assign a risk exposure value independently to simulants, such that each one follows the desired population-
-level univariate distribution (the distribution of which comes from the GBD, in our microsimulations). In the common case of a dichotomous exposure, each simulant 
-(in the same age/sex/location group) has the same probability of exposure, which is equal to the prevalence in that population.
+level univariate distribution (which frequently comes from the GBD in our microsimulations).
 
 Our cardiovascular disease (CVD) microsimulation offers a useful example of how risk exposure correlation typically looks in microsimulations. There are several correlated 
 risk factors that affect different CVD outcomes, including: body mass index (BMI), systolic blood pressure (SBP), low-density lipoprotein cholesterol levels (LDL-C), and fasting 
