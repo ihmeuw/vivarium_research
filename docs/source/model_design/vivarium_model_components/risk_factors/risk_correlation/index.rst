@@ -29,6 +29,8 @@ of the risks.
   which results are biased by the omission of a risk correlation and
   how to assess size/acceptability of the bias.
 
+.. _risk_correlation_when_important:
+
 When modeling risk correlation may be important
 ------------------------------------------------
 

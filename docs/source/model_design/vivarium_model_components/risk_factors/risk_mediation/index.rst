@@ -55,7 +55,7 @@ and there may be a non-mediated effect as well.
 .. image:: mediation-complex.drawio.svg
 
 At the top of this diagram, we see multi-layer mediation through the chain
-of R1→R2→R3→O.
+of R1→R2→R3→O, where R1-R4 are different risks and O is an outcome.
 Starting from the end of the chain:
 
 * R3 has a direct effect on O
@@ -69,10 +69,10 @@ effect.
 When is it necessary to model mediators?
 ----------------------------------------
 
-**Just because mediation is present in the real world does not mean it needs
+**Just because a mediator is present in the real world does not mean it needs
 to be modeled.**
 
-All effects are mediated, and we usually ignore this.
+All effects are mediated by something, and we usually ignore this.
 For example, the effect of smoking on lung cancer is mediated by tar in the lungs,
 the effect of tar in the lungs on lung cancer is mediated by DNA mutations
 in lung cells, and so on.
@@ -107,6 +107,17 @@ If we can ignore one mediator, we can also ignore a cluster of mediators with ar
 so long as none of them are being acted on by our intervention (except through the modeled risk):
 
 .. image:: unnecessary-mediators.drawio.svg
+
+.. todo::
+  This section describes the factors to consider when deciding whether to model a mediator,
+  or leave it out of the model entirely.
+  It does **not** cover the decision of whether or not to model risk-risk effects or mediation,
+  *given* that all the risks/outcomes involved are included in the model.
+  In the past we have sometimes skipped modeling mediation even between modeled attributes;
+  we have a rough conceptual framework for when this is okay, but have not formalized
+  anything yet.
+
+  A related (though different) question is explored :ref:`on the Risk Correlation page <risk_correlation_when_important>`.
 
 Risk effects in the presence of mediation
 -----------------------------------------
@@ -178,8 +189,11 @@ and the mediated pathway having different effect directions.
 However, if more than 50 of the 1,000 draws were negative, that mediation
 pathway was excluded from GBD.
 
-.. todo::
-  Why does GBD exclude due to negative draws?
+.. note::
+  Excluding when more than 50 of the 1,000 draws are negative is a kind of "significance" test.
+  However, it assumes that a significant *negative* mediation factor
+  (direct and mediated pathways have opposite effect directions) could never occur;
+  therefore GBD never models such mediation situations.
 
 This "mediation factor" can be used to calculate values for each of the causal effects represented by arrows
 in the diagram in one of two ways; the following sections describe how to do this.
@@ -282,10 +296,11 @@ risk-risk effect.
 For example, BMI→SBP→IHD and BMI→SBP→Stroke both imply delta values for BMI→SBP.
 However, the calculated values from different mediation pathways
 may be inconsistent, since GBD does not enforce consistency.
-We will have to choose one or aggregate them, depending on the situation:
-it could be that we trust the GBD modeling of one of the mediation pathways
-more than the others, or that the values are all similar so it doesn't matter
-much what we do.
+We can only use one value in our simulation;
+for future models, we recommend averaging all the values,
+or averaging a subset of values that we believe are informed by higher-quality data.
+In the past, we have sometimes chosen an arbitrary pathway as the source
+of the simulation value.
 
 Once we select a single delta for each risk-mediator pair,
 these deltas are used to inform the risk to mediator arrows in our causal diagram.
