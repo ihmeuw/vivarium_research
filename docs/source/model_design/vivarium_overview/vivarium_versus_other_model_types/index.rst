@@ -115,7 +115,7 @@ compartmental models.
 
 For example, in our intravenous (IV) iron intervention microsimulation, we model precise hemoglobin levels as a continuous risk exposure that varies as simulants age and move 
 through the pregancy model states, as low hemoglobin levels (or anemia) are associated with poor health outcomes for both mother/birthing parent and child. Read more about the 
-modeling strategy we used to generate precise hemoglobin levels for each simulant :ref:`here <_2019_hemoglobin_anemia_and_iron_deficiency>`.
+modeling strategy we used to generate precise hemoglobin levels for each simulant :ref:`here <2019_hemoglobin_anemia_and_iron_deficiency>`.
 
 
 Time-varying rates dependent on multiple factors
