@@ -110,7 +110,7 @@ these risk factor correlations :ref:`on this page <2023_sbp_ldlc_fpg_bmi>`.
 Continuous values
 ~~~~~~~~~~~~~~~~~
 
-Similarly, microsimulation allows the modeling of joint distribution between continuous values, something which is not as possible with categorical data characteristic of 
+Similarly, microsimulation allows the modeling of joint distributions between continuous values, something which is not as straightforward with categorical data characteristic of 
 multiplication models.
 
 For example, in our intravenous (IV) iron intervention microsimulation, we model the joint distribution of pre-pregnancy/first trimester BMI and hemoglobin levels, as two risk 
@@ -123,7 +123,7 @@ Time-varying rates dependent on multiple factors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Another complexity enabled by microsimulation is the inclusion of time-varying rates dependent on multiple factors. A good example of this is in our microsimulation of Multiple Myeloma, 
-which allow relapse hazard rates to vary over time since treatment line initiation. Read more about how we calculated relapse hazard rates :ref:`here <calc_mortality_relapse_hazard>`.
+which allow relapse and mortality hazard rates to vary over time since treatment line initiation, in addition to being impacted by the line of treatment, demographic covariates, and treatment regimen. Read more about how we calculated hazard rates :ref:`here <calc_mortality_relapse_hazard>`.
 
 .. todo:: 
 
@@ -133,7 +133,7 @@ Incorporating uncertainty
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Microsimulation methods provide a useful approach to modeling stochastic uncertainty in a conceptually valid manner because chance – that is, reliance on randomly generated numbers – 
-is used to govern movement between health states for individual simulants from a single computer-generated population, as opposed to comparing the role of chance across multiple 
+is used to govern movement between states for individual simulants from a single computer-generated population, as opposed to comparing the role of chance across multiple 
 populations with differing characteristics.
 
 In the context of healthcare estimates typically characterized by considerable variance across quantities of interest, the use of Monte Carlo methods to run simulations using iterative 
