@@ -123,7 +123,7 @@ Time-varying rates dependent on multiple factors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Another complexity enabled by microsimulation is the inclusion of time-varying rates dependent on multiple factors. A good example of this is in our microsimulation of Multiple Myeloma, 
-which allow relapse hazard rates to vary over time since treatment line initiation. Read more about how we calculated relapse hazard rates :ref:`here <calc_mortality_relapse_hazard>`.
+which allow relapse and mortality hazard rates to vary over time since treatment line initiation, in addition to being impacted by the line of treatment, demographic covariates, and treatment regimen. Read more about how we calculated hazard rates :ref:`here <calc_mortality_relapse_hazard>`.
 
 .. todo:: 
 
