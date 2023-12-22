@@ -65,10 +65,7 @@ Another useful resource is the `Vivarium InteractiveContext documentation <https
 Example notebook
 ++++++++++++++++
 
-This `notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/interactive_sim_example_setup.ipynb>`_ includes all of the steps seen below using the CVD project as an example.
-
-.. todo::
-  Update this example.
+This `notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/e7821cd18025757e966a8dd4c23f9621c3b21fec/interactive_sim_example_setup.ipynb>`_ includes all of the steps seen below using the CVD project as an example.
 
 .. _interactive_setup_1:
 
@@ -96,7 +93,9 @@ and
 
   ! pip freeze | grep vivarium
 
-Then, a Python cell with:
+These two cells automatically document what version of the simulation and related
+packages you are running with.
+Then, include a Python cell with:
 
 .. code:: python
 
@@ -185,6 +184,9 @@ This is equivalent to editing a YAML file that looks like this...
         - ComponentOne()
         - ComponentTwo()
         - ComponentThree()
+
+If you want to double-check your customizations, you can always print/display the model specification object,
+though this is often very verbose.
 
 .. _interactive_setup_3:
 
