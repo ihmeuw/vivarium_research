@@ -110,13 +110,12 @@ these risk factor correlations :ref:`on this page <2023_sbp_ldlc_fpg_bmi>`.
 Continuous values
 ~~~~~~~~~~~~~~~~~
 
-Similarly, microsimulation allows the modeling of joint distributions between continuous values, something which is not as straightforward with categorical data characteristic of 
-multiplication models.
+Similarly, microsimulation allows the modeling of continuous values, something which is not as straightforward with categorical data characteristic of 
+compartmental models.
 
-For example, in our intravenous (IV) iron intervention microsimulation, we model the joint distribution of pre-pregnancy/first trimester BMI and hemoglobin levels, as two risk 
-exposures associated with poor health outcomes for both mother/birthing parent and child. We treat hemoglobin as a continuous risk exposure that varies as simulants age and move 
-through the pregancy model states, while pre-pregnancy/first trimester BMI is a categorical risk exposure conditional on hemoglobin status (i.e., above or below 100 g/L) at the 
-start of the pregnancy. Read more about the modeling strategy we used for this joint distribution :ref:`here <2019_risk_exposure_maternal_bmi_hgb>`.
+For example, in our intravenous (IV) iron intervention microsimulation, we model precise hemoglobin levels as a continuous risk exposure that varies as simulants age and move 
+through the pregancy model states, as low hemoglobin levels (or anemia) are associated with poor health outcomes for both mother/birthing parent and child. Read more about the 
+modeling strategy we used to generate precise hemoglobin levels for each simulant :ref:`here <_2019_hemoglobin_anemia_and_iron_deficiency>`.
 
 
 Time-varying rates dependent on multiple factors
