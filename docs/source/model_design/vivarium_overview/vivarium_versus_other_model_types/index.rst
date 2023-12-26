@@ -141,7 +141,7 @@ Another benefit of microsimulations in general is that they can surface complica
   Elaborate on example of this from previous work: examining hemoglobin on curve on an individual level and seeing the discrepancies from real life that would also be present in a 
   model that doesn't go to the level of detail we do in microsim. 
 
-  Another example I'll use in this section is the PRL project: family structure (if something like this is available at all in a comparmental model, then it is only reported in a 
+  Another example I'll use in this section is the PRL project: family structure (if something like this is available at all in a compartmental model, then it is only reported in a 
   much more aggregated way.) Connect this directly to the data requirements disadvantage: even with the very detailed ACS data, simulating realistic family structures is a big 
   challenge! 
 
