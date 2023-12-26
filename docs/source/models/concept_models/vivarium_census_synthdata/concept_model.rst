@@ -50,7 +50,7 @@
 
 
 
-.. _{vivarium_census_prl_synth_data}:
+.. _vivarium_census_prl_synth_data:
 
 ==================================
 Vivarium Census PRL Simulated Data
