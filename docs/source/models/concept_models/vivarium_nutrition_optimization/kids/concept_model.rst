@@ -1169,6 +1169,12 @@ Wave II
     - Baseline
     - 
     - `Code to generte mean draw for all artifact keys except the LBWSG PAF can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/mean_draw_generation.ipynb>`_. The mean LBWSG PAF can be calculated using the LBWSG PAF calculation code using the mean draw for LBWSG RRs and LBWSG exposure.
+  * - 13
+    - Production runs using model version 12.1.1
+    - All
+    - Baseline, 0-8, 13-16
+    - Constant 4 day timestep, all locations, 20 pregnancy seeds (at 20,000 pregnancies per seed) per draw; 20 draws
+    - 
 
 .. list-table:: Output specifications
   :header-rows: 1
@@ -1231,6 +1237,13 @@ Wave II
       8. YLDs and YLLs
     - * Age group
       * Sex
+  * - 13
+    - 1. Deaths and YLLs (non-cause-specific)
+      2. YLDs (all-cause observer only)
+      3. Count of incident SAM cases stratified by SAM treatment coverage
+      4. Count of incident MAM cases stratified by MAM treatment coverage
+      5. Stunting state person time stratified by SQ-LNS utilization
+    - Age strata of 0-6 months, 6-18 months, 18-60 months
 
 
 .. list-table:: Verification and validation tracking
@@ -1328,13 +1341,22 @@ Wave II
 
       * `No major cause model concerns at the moment <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_risk_and_cause_checks.ipynb>`_ -- let's revisit once we resolve underweight exposure issues
 
-      * NOTE: still need to confirm appropriate implementation of MMS effect data update
+      * `MMS is not affecting gestational age at all <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_interactive_MMS_effect.ipynb>`_. In the interactive sim, MMS didn't have any effect on gestational age. IFA did affect gestational age and MMS did affect birthweight so it is suspected that this is a "typo type" error in data loading or linkage. Engineering to investigate. 
+  * - 12.1.1
+    - Check (1) underweight exposure, (2) wasting treatment effects, (3) MAM substate exposure data update, (4) MAM substate risk effects data update, (5) cause models
+    - * `Underweight exposure looks good now (bug resolved!) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+      * `Wasting treatment looks good in baseline scenario now (bug resolved!) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_wasting_treatment_effects.ipynb>`_
+      * `MAM substate exposure looks good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_MAM_substate_exposure.ipynb>`_
+      * `MAM substate relative risks look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_rrs.ipynb>`_
+      * `Diarrheal diseases and LRI mortality still a bit underestimated for specific age groups in Pakistan and Nigeria, but I am ready to call this close enough <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+      * `Zero counts for non-MAM wasting state person time among those covered by targeted MAM in scenario #13 and zero transition counts for some transitions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
 
+        * NOTE: this is expected behavior for how treatment coverage implementation interacts with observers (coverage only exists for certain transitions and states). This does result in inability to directly verify that treated recovery rate for the targeted MAM intervention, but this looked good in model 12.1 when the coverage/observer was tweaked to examine the MAM->mild transition rate instead. `We have separately confirmed that the recovery rate for targeted MAM is the expected value using the interactive context <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_interactive_treated_mam_check.ipynb>`_
+
+      * `MMS effect size update and implementation confirmed to be functioning in interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_interactive_MMS_effect.ipynb>`_
   * - 12.2
     - Check that results for this run approximate the mean of the results from run 12.1
     - 
-
-
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -1343,15 +1365,8 @@ Wave II
     - Explanation
     - Action plan
     - Timeline
-  * - 1: MAM and SAM treatment not affecting wasting transition rates in baseline scenario
-    - Unknown, new issue from 11.2. Note that *targeted* MAM treatment appears to be functioning correctly.
-    - Engineers to investigate
-    - ASAP; for model 12.1.1
-  * - 2: Underweight exposure scrambled
-    - Unknown, new issue from 11.2, but persistent issue in model 12
-    - Engineers to investigate
-    - ASAP; for model 12.1.1
-  * - 3: There are non-zero uncovered MAM->mild transitions for 6-11 month age group in targeted MAM scenario #13 (coverage should be 100% in this group)
-    - Unknown, new issue from 11.2
-    - Engineers to investigate, but this is a lower priority than issues #1 and #2
-    - For next model that is convenient... don't want to spend too much time troubleshooting
+  * -  
+    -  
+    -  
+    -  
+
