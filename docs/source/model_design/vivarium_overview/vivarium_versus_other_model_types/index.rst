@@ -153,7 +153,7 @@ Resource requirements
 ~~~~~~~~~~~~~~~~~~~~~
 
 Our microsimulations typically require a substantial amount of computational resources to run. For example, our microsimulation of a full-scale
-United States population was made possible through the use of a high performance computing cluster and used approximately 55 gigabytes of memory over a runtime of 21.5 hours.
+United States population was made possible through the use of a high performance computing cluster and used 334 parallel runs, each requiring approximately 55 gigabytes of memory over a runtime of 21.5 hours.
 Read more about this project :ref:`here <vivarium_census_prl_synth_data>`.
 
 The demanding resource needs of microsimulations may require we use a smaller simulant population (that can, post-simulation, be up-scaled to better reflect the real-world target population),
