@@ -474,6 +474,8 @@ Endpoints
     - Death or initiation of next treatment or loss to progression and/or treatment follow-up
     - We invented this; never reported in trials
 
+.. _calc_mortality_relapse_hazard:
+
 Calculation of Mortality and Relapse Hazard
 +++++++++++++++++++++++++++++++++++++++++++
 
