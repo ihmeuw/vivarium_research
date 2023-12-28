@@ -513,7 +513,9 @@ approach:
 
 * Somewhere in the paper/report, we explain in a fair amount of detail the
   sex and gender measures we used, why we used them that way, etc.
-* In each part that "stands alone" (e.g. each document, each table/figure for a journal publication) we **either**:
+  For example, this could be in a methods appendix (as in the VEHSS papers)
+  or a technical report that accompanies a PowerPoint presentation of results.
+* In each part that "stands alone" (e.g. each document or presentation; see next paragraph) we **either**:
 
   * Define our resulting indicator the first time we reference it, then abbreviate it;
     the abbreviation does not need to
@@ -523,7 +525,18 @@ approach:
     we use the shortest term for our resulting
     indicator that both conveys its main limitations and does not need a definition.
 
-The following sections give concrete recommendations and examples of each of these pieces.
+A part "stands alone" if it is likely to be viewed/read separately from other parts, and a reader
+would expect it to be self-contained: referencing other resources where necessary,
+but not using terms or ideas from elsewhere without reference or explanation.
+Think of acronyms: it is acceptable to use an acronym in the discussion
+section of a journal article that was introduced in the methods section of that article,
+because it is part of the same document.
+But a journal editor would not allow you to use an acronym in the discussion section of
+a journal article that is only introduced in the supplementary material.
+Most journal editors also consider tables and figures to stand alone in this way (i.e. they cannot use
+acronyms from the main text), so we follow that convention with our sex and gender terminology.
+
+The following sections give more concrete recommendations for each part of results reporting.
 
 4.3 Detailed description
 ------------------------
@@ -543,11 +556,13 @@ Here are a few suggestions for the detailed description:
   and gives credit to the researchers whose ideas we are building on.
   See the Recommended Resources section below.
 * If we are not able to present quantitative results for sexual and
-  gender minority populations, but have reason to believe that these
-  populations are especially impacted by health issues (this will be
-  true for almost any health condition in the US), we can cite some
-  tangentially related quantitative research or qualitative research
-  about disparities.
+  gender minority populations, but have reason to believe that (any of) these
+  populations are especially impacted by the health issues we are studying,
+  we can cite relevant quantitative or qualitative research
+  about disparities, for example about a similar condition, risk factors, or healthcare access.
+  Unfortunately, we will have reason to believe this for just about any health condition in a US context,
+  since there are well-documented disparities across various outcomes and healthcare access
+  for e.g. transgender people. [Brown_2016]_ [Baker_2019]_ [Grant_2011]_
 
 4.3.1 Example 1: Pregnancy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -820,3 +835,12 @@ practices, as well as some lessons learned.
 .. [Rioux_2022]
     Rioux, C., Weedon, S., London-Nadeau, K., Pare, A., Juster, R.P., Roos, L., Freeman, M., Tomfohr-Madsen, L. (2022) Gender-inclusive writing for epidemiological research on pregnancy. J Epidemiological
     Community. 28 June 2022, http://dx.doi.org/10.1136/jech-2022-219172).
+
+.. [Brown_2016]
+    Brown, G. R., & Jones, K. T. (2016). Mental Health and Medical Health Disparities in 5135 Transgender Veterans Receiving Healthcare in the Veterans Health Administration: A Case-Control Study. LGBT health, 3(2), 122–131. https://doi.org/10.1089/lgbt.2015.0058
+
+.. [Baker_2019]
+    Baker, K. E. (2019). Findings from the behavioral risk factor surveillance system on health-related quality of life among US transgender adults, 2014-2017. JAMA Internal Medicine, 179(8), 1141-1144.
+
+.. [Grant_2011]
+    Grant, J. M., Mottet, L. A., Tanis, J. J., & Min, D. (2011). Transgender discrimination survey. National Center for Transgender Equality and National Gay and Lesbian Task Force: Washington, DC, USA.
