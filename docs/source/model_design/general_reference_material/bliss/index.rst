@@ -500,7 +500,7 @@ When we present our findings, we have two primary goals:
   gender factors and that it is difficult to disentangle these.
 * Highlight data limitations around sex and gender measures.
   We don't want our inclusive language to give the impression that we are able to make accurate
-  conclusions about sexual and gender minority populations when the data prevent us from doing this.
+  conclusions about SGM populations when the data prevent us from doing this.
   Furthermore, drawing attention to the problems with how almost every data source currently
   captures sex and/or gender raises awareness that changes need to be made in primary data collection.
 
@@ -555,8 +555,8 @@ Here are a few suggestions for the detailed description:
   This gives curious readers a starting point to learn more,
   and gives credit to the researchers whose ideas we are building on.
   See the Recommended Resources section below.
-* If we are not able to present quantitative results for sexual and
-  gender minority populations, but have reason to believe that (any of) these
+* If we are not able to present quantitative results for SGM
+  populations, but have reason to believe that (any of) these
   populations are especially impacted by the health issues we are studying,
   we can cite relevant quantitative or qualitative research
   about disparities, for example about a similar condition, risk factors, or healthcare access.
