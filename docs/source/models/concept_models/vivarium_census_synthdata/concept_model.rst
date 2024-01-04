@@ -3821,13 +3821,13 @@ noise function.
 
 Guardian-based duplication is applied to two mutually exclusive categories of
 simulants based on age and GQ status: Simulants younger than 18  (<18) and not
-in GQ and simulants under 24 (<24) and in GQ (i.e., college).
+in GQ and simulants under 24 (<24) and in college GQ.
 
 For each of the two categories of simulants, the maximum duplication rate will
 be calculated based on those who have a guardian living at a different address
 in the sim. Note that all simulants in *college* GQ are initialized with a
 guardian living at a different address, but this is not true for simulants in
-other types of GQ, so all three maximum duplication rates will be less than
+other types of GQ, so both maximum duplication rates will be less than
 100%.
 
 The user can then pick a rate of duplication between 0 and 100% **for each of
