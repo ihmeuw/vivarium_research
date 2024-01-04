@@ -3831,7 +3831,7 @@ other types of GQ, so all three maximum duplication rates will be less than
 100%.
 
 The user can then pick a rate of duplication between 0 and 100% **for each of
-the three categories of simulants**. A default duplication rate of 5% will be
+the two categories of simulants**. A default duplication rate of 5% will be
 selected for each of the two categories of simulants. That is, each simulant
 under 24 is duplicated at a guardian's household with default probability 0.05,
 and there should be two user parameters for overriding this probability, one
