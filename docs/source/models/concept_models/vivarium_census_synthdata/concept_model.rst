@@ -3823,7 +3823,7 @@ Guardian-based duplication is applied to two mutually exclusive categories of
 simulants based on age and GQ status: Simulants younger than 18  (<18) and not
 in GQ and simulants under 24 (<24) and in GQ (i.e., college).
 
-For each of the three categories of simulants, the maximum duplication rate will
+For each of the two categories of simulants, the maximum duplication rate will
 be calculated based on those who have a guardian living at a different address
 in the sim. Note that all simulants in *college* GQ are initialized with a
 guardian living at a different address, but this is not true for simulants in
