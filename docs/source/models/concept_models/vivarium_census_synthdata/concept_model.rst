@@ -3819,24 +3819,27 @@ opportunity for duplication. Since this mechanism occurs within the
 simulation, there is a natural maximum that we will impose in the
 noise function.
 
-Guardian-based duplication is applied to three mutually exclusive categories of
+Guardian-based duplication is applied to two mutually exclusive categories of
 simulants based on age and GQ status: Simulants younger than 18  (<18) and not
-in GQ; simulants 18-23 (18 <= age < 24) and not in GQ; and simulants under 24
-(<24) and in GQ.
+in GQ and simulants under 24 (<24) and in college GQ.
 
-For each of the three categories of simulants, the maximum duplication rate will
+For each of the two categories of simulants, the maximum duplication rate will
 be calculated based on those who have a guardian living at a different address
-in the sim. Note that all simulants in *college* GQ are initialized with a
-guardian living at a different address, but this is not true for simulants in
-other types of GQ, so all three maximum duplication rates will be less than
-100%.
+in the sim. Note that all simulants in college GQ are initialized with a
+guardian living at a different address, but this is not true for simulants that 
+move into college GQ during the simulation, so both maximum duplication rates 
+will be less than 100%.
 
 The user can then pick a rate of duplication between 0 and 100% **for each of
-the three categories of simulants**. A default duplication rate of 5% will be
-selected for each of the three categories of simulants. That is, each simulant
-under 24 is duplicated at a guardian's household with default probability 0.05,
-and there should be three user parameters for overriding this probability, one
+the two categories of simulants**. We will set a default duplication rate of 2% for
+simulants under 18 and not in GQ, and a default duplication rate of 5% for simulants
+under 24 and in college GQ.
+That is, each simulant under 18 and not in GQ is duplicated at a guardian's household 
+with default probability 0.02, and each simulant under 24 in college GQ is duplicated 
+at a guardian's household with default probability 0.05.
+There should be two user parameters for overriding these probabilities, one
 for each simulant category.
+
 If the user selects a duplication rate that is higher than the calculated
 maximum rate in the sim, a warning should be issued explaining that the selected
 rate is greater than the maximum available, and the actual rate of duplication
