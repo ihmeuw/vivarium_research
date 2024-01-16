@@ -3831,11 +3831,15 @@ move into college GQ during the simulation, so both maximum duplication rates
 will be less than 100%.
 
 The user can then pick a rate of duplication between 0 and 100% **for each of
-the two categories of simulants**. A default duplication rate of 5% will be
-selected for each of the two categories of simulants. That is, each simulant
-under 24 is duplicated at a guardian's household with default probability 0.05,
-and there should be two user parameters for overriding this probability, one
+the two categories of simulants**. We will set a default duplication rate of 2% for
+simulants under 18 and not in GQ, and a default duplication rate of 5% for simulants
+under 24 and in college GQ.
+That is, each simulant under 18 and not in GQ is duplicated at a guardian's household 
+with default probability 0.02, and each simulant under 24 in college GQ is duplicated 
+at a guardian's household with default probability 0.05.
+There should be two user parameters for overriding these probabilities, one
 for each simulant category.
+
 If the user selects a duplication rate that is higher than the calculated
 maximum rate in the sim, a warning should be issued explaining that the selected
 rate is greater than the maximum available, and the actual rate of duplication
