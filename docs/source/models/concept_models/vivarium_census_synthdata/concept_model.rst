@@ -3840,7 +3840,7 @@ at a guardian's household with default probability 0.05.
 There should be two user parameters for overriding these probabilities, one
 for each simulant category.
 
-This percentage was estimated from Figure 1 of `"An Analysis of Person Duplication 
+The 2% duplication rate for simulants under 18 was estimated from Figure 1 of `"An Analysis of Person Duplication 
 in Census 2000" <http://www.asasrms.org/Proceedings/y2004/files/Jsm2004-000730.pdf>`_ 
 and roughly corroborated by Table 4 of `"Real-Time 2020 Administrative Record 
 Census Simulation" <https://www2.census.gov/programs-surveys/decennial/2020/program-management/evaluate-docs/EAE-2020-admin-records-experiment.pdf>`_ 
