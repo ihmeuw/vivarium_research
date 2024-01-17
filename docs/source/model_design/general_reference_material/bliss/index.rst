@@ -292,8 +292,8 @@ not another facet such as chromosomal makeup.
 It is frequently not possible to be this precise;
 we should try to at least determine whether our research question is about sex or gender.
 In some cases, even this may not be clear, for example if we are researching an
-association that could be mediated by either sex or gender (or both), making them both
-variables of interest.
+association that could be mediated by any facet of sex or gender (or multiple),
+which would mean that all sex- and gender-related factors are variables of interest.
 
 2.1 Proxy measures
 ------------------
@@ -485,62 +485,87 @@ More information on the methods can be found in the `demographics methods append
 4.0 Results
 +++++++++++
 
-As mentioned above, before beginning our research, we should determine the variables
-of interest: the facets of gender and/or sex that we expect to be most directly associated with
-our outcome.
-If it isn't possible to narrow this down or distinguish what might be important, we can consider
-all gender- and sex-related factors to be variables of interest.
+4.1 Goals when Reporting Results
+--------------------------------
 
-When we present our findings, we have two goals:
+When we present our findings, we have two primary goals:
 
-* Accurately convey what associations we are looking for, and what the causal structures might be.
+* Accurately convey the variables of interest, and what the causal structures might be.
   We should strive to be as precise as possible, and not rely on "common sense"
   to indicate which gender- and sex-related factors are related to a health outcome.
   Despite prevailing belief that sex affects gender but not vice versa, there is
   strong evidence for causal influence in both directions. [Ritz_and_Greaves_2022]_ [Springer_2012]_
-  Even when we do think that a sex-related factor is most proximal to our outcome,
+  Even when we do think that a sex-related factor is most causally related to our outcome,
   we should still mention that some of its impact could be mediated through
   gender factors and that it is difficult to disentangle these.
 * Highlight data limitations around sex and gender measures.
   We don't want our inclusive language to give the impression that we are able to make accurate
-  conclusions about sexual and gender minority populations when the data prevents us from doing this.
+  conclusions about SGM populations when the data prevent us from doing this.
   Furthermore, drawing attention to the problems with how almost every data source currently
   captures sex and/or gender raises awareness that changes need to be made in primary data collection.
 
-In this section, we make some suggestions about language to use in external
-communications when discussing findings (papers, talks, etc).
+4.2 Strategy
+------------
 
-4.1 Initial Description of Results
-----------------------------------
+We often need to be very concise, and can't surface all the complexity
+of sex and gender every time we reference them. So, we take the following
+approach:
 
-Before the first time a gender- or sex-related result is presented,
-we should:
+* Somewhere in the paper/report, we explain in a fair amount of detail the
+  sex and gender measures we used, why we used them that way, etc.
+  For example, this could be in a methods appendix (as in the VEHSS papers)
+  or a technical report that accompanies a PowerPoint presentation of results.
+* In each part that "stands alone" (e.g. each document or presentation; see next paragraph) we **either**:
 
-- Name the gender- and sex-related factors our result pertains to, if clear.
-  If unclear (which is most of the time), call out the difficulty of disentangling factors
-  from each other, to prevent readers from jumping to the conclusion that it's always
-  biological factors that are important.
-- Acknowledge data limitations and proxy measures used.
-- Call for better data to be collected.
+  * Define our resulting indicator the first time we reference it, then abbreviate it;
+    the abbreviation does not need to
+    entirely capture what the indicator means, but it should
+    not be a common word/phrase that someone would likely assume has a different meaning.
+  * If the previous is not possible (e.g. in an abstract where words are extremely limited),
+    we use the shortest term for our resulting
+    indicator that both conveys its main limitations and does not need a definition.
 
-When the sex/gender related factors we are reporting on are unclear - 
-for example when we have assumed equivalence between different measures across 
-data sources - we should use terms that reflect this uncertainty. 
-To understand this, we can look at our figure of hypothetical data sources 
-from above. There is now an additional row with how we would include 
-this data in our analysis. You can see the first two data sources would both be 
-undifferentiated sex/gender. This is due to ambiguity between sex and gender in 
-the question asked. 
+A part "stands alone" if it is likely to be viewed/read separately from other parts, and a reader
+would expect it to be self-contained: referencing other resources where necessary,
+but not using terms or ideas from elsewhere without reference or explanation.
+Think of acronyms: it is acceptable to use an acronym in the discussion
+section of a journal article that was introduced in the methods section of that article,
+because it is part of the same document.
+But a journal editor would not allow you to use an acronym in the discussion section of
+a journal article that is only introduced in the supplementary material.
+Most journal editors also consider tables and figures to stand alone in this way (i.e. they cannot use
+acronyms from the main text), so we follow that convention with our sex and gender terminology.
 
-The latter two data sources more clearly reflect sex, although one is sex assigned 
-at birth and the other is sex identity. Therefore if you included both data source 
-3 and 4, you might label this as sex. 
+The following sections give more concrete recommendations for each part of results reporting.
 
-If you included one of the first two data sources as well, it is no longer clear 
-that sex is measured instead of gender and so you would use undifferentiated sex/gender. 
+4.3 Detailed description
+------------------------
 
-.. image:: bliss_data_sources_fig_2.png
+The detailed description of our methods regarding sex and gender can be centralized
+in one place, or spread throughout the paper or report.
+Wherever it is, it should include most of the considerations described in earlier
+sections of this guide: defining the variables of interest for our
+research question and noting the difficulty of disentangling factors from each other,
+giving details about the sex- and gender-related measures in the data sources used,
+and (usually) calling for better data to be collected.
 
+Here are a few suggestions for the detailed description:
+
+* If we can, cite some of the research that is cited in this guide!
+  This gives curious readers a starting point to learn more,
+  and gives credit to the researchers whose ideas we are building on.
+  See the Recommended Resources section below.
+* If we are not able to present quantitative results for SGM
+  populations, but have reason to believe that (any of) these
+  populations are especially impacted by the health issues we are studying,
+  we can cite relevant quantitative or qualitative research
+  about disparities, for example about a similar condition, risk factors, or healthcare access.
+  Unfortunately, we will have reason to believe this for just about any health condition in a US context,
+  since there are well-documented disparities across various outcomes and healthcare access
+  for e.g. transgender people. [Brown_2016]_ [Baker_2019]_ [Grant_2011]_
+
+4.3.1 Example 1: Pregnancy
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Let's consider the example of reporting a result about pregnancy.
 In this case, while gender-related factors could play a role in e.g. pregnancy outcomes,
@@ -573,8 +598,15 @@ In this case, we might say:
   To address these limitations, data would need to be collected using more robust measures
   of sex- and gender-related factors. [Bauer_2017]_ [Nielsen_2021]_ [ABS_2021]_ [National_Academies_2022]_
 
+4.3.2 Example 2: Descriptive epidemiology
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In the previous example, we were able to define our variables of interest pretty precisely,
+even if our data sources didn't measure them.
+
 On the other hand, if we were doing descriptive epidemiology and didn't have even an educated
-guess of what specific sex- and gender-related factors could be associated with our outcome:
+guess of what specific sex- and gender-related factors could be associated with our outcome,
+we might say:
 
 .. pull-quote::
 
@@ -604,27 +636,68 @@ guess of what specific sex- and gender-related factors could be associated with 
 
   Reference 'measurement error' section again here.
 
-4.2 Further Results (Text, Figures, Tables)
--------------------------------------------
+4.4 Result indicator definition
+-------------------------------
 
-Of course, it is not possible to include a long explanation each and every time sex- or
-gender-related concepts are referenced.
-After an initial, comprehensive description, we have to switch to some kind of shorthand.
+In *each* stand-alone document (paper, table, figure, etc) where we present results
+that relate to sex and/or gender,
+we should define our result indicator (or indicators, though we
+usually won't be able to report more than one).
 
-The most important things to keep in mind when choosing this shorthand are:
+How an indicator should be defined depends on the data that informed it.
+In general, we think of an indicator as the "least common denominator"
+of the data that went into it.
 
-- If the full term includes both sex and gender, both should appear in it in some way
-  -- using only one or the other invites the reader to jump to conclusions.
-- Likewise, we should not use the basic terms "males" and "females" or "men" and "women"
-  when we are reporting a concept that is more complex than correctly-measured sex or gender alone.
-- If the full term includes an acknowledgement that results are based on proxy measures,
-  that should be preserved, or at least nodded to, in the shorthand.
+Put another way, when the sex/gender-related factors we are reporting on are unclear - 
+for example when we have assumed equivalence between different measures across 
+data sources - we should use terms that reflect this uncertainty.
+
+To understand this, we can look at our figure of hypothetical data sources
+from above. There is now an additional row with how we would include
+this data in our analysis. You can see the first two data sources would both be
+undifferentiated sex/gender. This is due to ambiguity between sex and gender in
+the question asked.
+
+The latter two data sources more clearly reflect sex, although one is sex assigned
+at birth and the other is sex identity. Therefore if you included only data sources
+3 and 4, you might label your result as sex.
 
 .. todo::
 
-  Give concrete recommendations for shorthand in common situations (e.g. proxy for all sex- and gender-related factors)
+  This contradicts what we say below about common terms -- we should discuss this more.
 
-To continue the two examples from the previous section, the pregnancy example might use this shorthand:
+If you included one of the first two data sources as well, it is no longer clear
+that sex is reported instead of gender and so you would
+consider your resulting indicator to be undifferentiated sex/gender.
+
+.. image:: bliss_data_sources_fig_2.png
+
+4.5 Result indicator abbreviation
+---------------------------------
+
+Frequently we will report many results related to sex and gender,
+and we can't repeat our definition every time we do so.
+Therefore, we need to abbreviate our result indicator.
+Frequently, we will also need to abbreviate the *values* it can take.
+
+The best abbreviation is a case-by-case decision, but the guidelines to follow
+are:
+
+* Do not use an abbreviation that is already a common term,
+  such as "sex", "gender", "male", or "female".
+  It's better to use an abbreviation our reader doesn't know
+  than to use an abbreviation they *think* they know but don't.
+* If the indicator spans aspects of sex and gender, neither or both of "sex" and "gender"
+  should appear in the abbreviation.
+  Using one without the other invites the reader to assume the indicator is better-defined
+  than it is.
+
+4.5.1 Example 1: Pregnancy
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+
+  Brainstorm the best abbreviation here; this should be considered a rough draft.
 
 .. pull-quote::
   
@@ -633,15 +706,41 @@ To continue the two examples from the previous section, the pregnancy example mi
 
   ... the fertility rate was 14 per 1,000 person-years among proxy WBPRA ...
 
-while the descriptive epidemiology example might use this:
+4.5.2 Example 2: Descriptive epidemiology
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Continuing the "descriptive epidemiology" example from above,
+this is a common case where our resulting indicator is
+undifferentiated sex/gender, without any specificity about which
+factors are at play.
+
+Currently, we have been abbreviating this to simply "sex/gender" --
+this could create the impression that we are saying sex
+and gender are the same thing, but it should be unusual enough that
+a curious reader looks at the definition, which explains that they are
+different but can't be reported precisely.
+
+.. note::
+
+  When the abbreviation has to appear before the definition, as in
+  a figure title that is only later clarified by a footnote,
+  we use "undifferentiated sex/gender" as the
+  abbreviation to address this ambiguity.
 
 .. pull-quote:: 
 
-  ... we estimate that prevalence was 7.8% among people with a "male" proxy value for sex- and gender-related factors ...
+  ... we estimate that prevalence was 7.8% among people with male sex/gender ...
 
-.. todo::
-  This should be shorter!
+An even more concise alternative is to capitalize "Male" and "Female" to indicate
+that these are defined terms:
 
+.. pull-quote::
+
+  ... Henceforth, we refer to this indicator as "sex/gender" and to these categories
+  as "Male" and "Female"...
+
+  ... we estimate that prevalence was 7.8% among Male people, as defined previously...
+  ... we estimate that prevalence was 4.5% among Female people...
 
 5.0 BLISS in Action 
 +++++++++++++++++++
@@ -736,3 +835,12 @@ practices, as well as some lessons learned.
 .. [Rioux_2022]
     Rioux, C., Weedon, S., London-Nadeau, K., Pare, A., Juster, R.P., Roos, L., Freeman, M., Tomfohr-Madsen, L. (2022) Gender-inclusive writing for epidemiological research on pregnancy. J Epidemiological
     Community. 28 June 2022, http://dx.doi.org/10.1136/jech-2022-219172).
+
+.. [Brown_2016]
+    Brown, G. R., & Jones, K. T. (2016). Mental Health and Medical Health Disparities in 5135 Transgender Veterans Receiving Healthcare in the Veterans Health Administration: A Case-Control Study. LGBT health, 3(2), 122–131. https://doi.org/10.1089/lgbt.2015.0058
+
+.. [Baker_2019]
+    Baker, K. E. (2019). Findings from the behavioral risk factor surveillance system on health-related quality of life among US transgender adults, 2014-2017. JAMA Internal Medicine, 179(8), 1141-1144.
+
+.. [Grant_2011]
+    Grant, J. M., Mottet, L. A., Tanis, J. J., & Min, D. (2011). Transgender discrimination survey. National Center for Transgender Equality and National Gay and Lesbian Task Force: Washington, DC, USA.
