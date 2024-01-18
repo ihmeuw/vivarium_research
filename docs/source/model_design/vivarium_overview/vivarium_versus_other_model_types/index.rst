@@ -94,63 +94,95 @@ expands on what differentiates IBM, including microsimulation, from other types 
 Advantages of microsimulation
 +++++++++++++++++++++++++++++
 
-.. todo::
-
-  Fill out the following sections under 'Advantages of microsimulation' subheading. 
-
 Correlation between risk exposures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-At the individual level, risk exposures are frequently correlated. Examples include high body mass index and high fasting plasma glucose, tobacco smoking and alcohol use, and childhood height and weight.
+At the individual level, risk exposures are frequently correlated. Examples include high body mass index and high fasting plasma glucose, tobacco smoking and alcohol use, 
+and childhood height and weight. Microsimulation methods allow us to assign a risk exposure value independently to simulants, such that each one follows the desired population-
+level univariate distribution (which frequently comes from the GBD in our microsimulations).
 
-Usually, Vivarium assigns each risk exposure independently to simulants, such that each one follows the desired population-level univariate distribution, which frequently comes from GBD. 
-In the common case of a dichotomous exposure, this means that each simulant (in the same age/sex/location group) has the same probability of exposure, which is equal to the prevalence in that population.
+Our cardiovascular disease (CVD) microsimulation offers a useful example of how risk exposure correlation typically looks in microsimulations. There are several correlated 
+risk factors that affect CVD outcomes, including: body mass index (BMI), systolic blood pressure (SBP), low-density lipoprotein cholesterol levels (LDL-C), and fasting 
+plasma glucose (FPG). Using NHANES survey data, we calculated correlation coefficients for these relationships, which we used to generate values for all
+simulants. As such, the correlation coefficients remain constant as simulants age and their risk exposure values change. You can read more about our modeling strategy for 
+these risk factor correlations :ref:`on this page <2023_sbp_ldlc_fpg_bmi>`.
 
 Continuous values
 ~~~~~~~~~~~~~~~~~
 
-e.g., allows the modeling of joint distribution between blood pressure and blood glucose levels -- this kind of thing is hard with categorical data characteristic of multiplication models
+Additionally, microsimulation allows the modeling of continuous values, something which is not as straightforward (if possible) with categorical data characteristic of 
+compartmental models.
+
+For example, in our intravenous (IV) iron intervention microsimulation, we model precise hemoglobin levels as a continuous risk exposure that varies as simulants age and move 
+through the pregancy model states, as low hemoglobin levels (or anemia) are associated with poor health outcomes for both mother/birthing parent and child. Read more about the 
+modeling strategy we used to generate precise hemoglobin levels for each simulant :ref:`here <2019_hemoglobin_anemia_and_iron_deficiency>`.
+
 
 Time-varying rates dependent on multiple factors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-e.g., Multiple Myeloma model
+Another complexity enabled by microsimulation is the inclusion of time-varying rates dependent on multiple factors. A good example of this is in our microsimulation of multiple myeloma, 
+which allowed relapse and mortality hazard rates to vary over time since treatment line initiation, in addition to being impacted by the line of treatment, demographic covariates, and treatment regimen. Read more about how we calculated these rates :ref:`here <calc_mortality_relapse_hazard>`.
 
-Incorporating uncertainty
-~~~~~~~~~~~~~~~~~~~~~~~~~
+The figure below demonstrates how survival rates in multiple myeloma patients differ based on the time since treatment line initiation. This figure was produced by
+researchers at Amgen, Inc, and you can read the paper in which it was published `here <https://www.tandfonline.com/doi/full/10.1080/10428194.2020.1827253>`_. [Braunlin-MM-2020]_ 
 
-Our microsimulation framework is formulated to routinely propagate forward the uncertainty captured by these draws. Monte Carlo methods allow us to effectively incorporate different kinds of uncertainty into our models. 
+.. image:: MM_graph_time_varying_rates.jpg
 
-Monte Carlo microsimulation methods provide a useful approach to modeling stochastic uncertainty in a conceptually valid manner because chance – that is, reliance on randomly generated numbers – is used to govern movement between health states for individual simulants from a single computer-generated population, as opposed to comparing the role of chance across multiple populations with differing characteristics.
+.. _allowing_other_complexities:
 
-In the context of healthcare estimates typically characterized by considerable variance across quantities of interest, the use of Monte Carlo methods to run simulations using iterative draws from probability distributions provides an effective means of incorporating parameter uncertainty. Simulation methods have the added advantage of reducing confounding variance between different scenarios by ensuring that the simulated population is identical across all scenarios analyzed. The only difference is the presence or absence of health interventions. As a further refinement of these methods, microsimulations represent each person in the population as an individual simulant with attributes variably assigned across simulants to reflect the population of interest. By incorporating heterogeneity at the level of the individual simulant, microsimulations are able to provide an additional degree of flexibility and detail (such as stratifying results according to demographic or epidemiological attributes) not available in population-level models. 
+Allowing other complexities
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Surfaces complications that are more hidden in non-individual-based models (e.g., compartmental models can obscure certain limitations)
+Another benefit of microsimulations in general is that they can surface complications or limitations that are obscured in non-individual-based models, such as compartmental models.
+
+.. todo:: 
+  
+  Elaborate on example of this from previous work: examining hemoglobin on curve on an individual level and seeing the discrepancies from real life that would also be present in a 
+  model that doesn't go to the level of detail we do in microsim. 
+
+  Another example I'll use in this section is the PRL project: family structure (if something like this is available at all in a compartmental model, then it is only reported in a 
+  much more aggregated way.) Connect this directly to the data requirements disadvantage: even with the very detailed ACS data, simulating realistic family structures is a big 
+  challenge! 
+
 
 Disadvantages of microsimulation
 ++++++++++++++++++++++++++++++++
 
-.. todo::
-
-  Fill out the following sections under 'Disadvantages of microsimulation' subheading.
-
 Resource requirements
 ~~~~~~~~~~~~~~~~~~~~~
 
-Our microsimulation models require a significant amount of detailed data to accurately represent individual behaviors and the relationships between them. Obtaining this data can be challenging and time-consuming, and there may be privacy concerns associated with using such detailed personal data. 
+Our microsimulations typically require a substantial amount of computational resources to run. For example, our microsimulation of a full-scale
+United States population was made possible through the use of a high performance computing cluster and used 334 parallel runs, each requiring approximately 55 gigabytes of memory over a runtime of 21.5 hours.
+Read more about this project :ref:`here <vivarium_census_prl_synth_data>`.
 
-If we're not modeling the sort of complexity that microsimulation enables... perhaps a multiplication model would suit us just as well?
+The demanding resource needs of microsimulations may require we use a smaller simulant population (that can, post-simulation, be up-scaled to better reflect the real-world target population),
+thus presenting limitations related to sample size and stochastic uncertainty. 
+
+Data requirements
+~~~~~~~~~~~~~~~~~
+
+As we highlighted above in our section on :ref:`Allowing other complexities <allowing_other_complexities>`, microsimulations enable the modeling of complexities otherwise
+difficult or impossible to replicate. Unfortunately, these complexities require a significant amount of detailed data to accurately represent individual behaviors and the relationships between them.
+Obtaining these data can be challenging and time-consuming, and there may be privacy concerns associated with using such detailed personal data. This is particularly true given the nature of
+what we on the Simulation Science team investigate in our microsimulations: accurately modeling the effects of health interventions at an individual-level likely requires access to medical 
+records, medication histories, and other highly personal information.  
+
+If we're not interested in the complexities described in the section above, then it is likely a less data- and resource-intensive alternative, such as a multiplication model, is a suitable modeling strategy.
 
 Residual confounding
 ~~~~~~~~~~~~~~~~~~~~
 
-Getting realistic, individual-level characteristics from population-level data is difficult, and creates opportunity for residual confounding...
+Another limitation or disadvantage of microsimulations is that getting realistic, individual-level characteristics from population-level data is difficult, and 
+creates opportunity for residual confounding. 
+
+You can read more about residual confounding and how our team accounts for it :ref:`here <residual_confounding>`.
 
 .. todo::
 
-  Explanation of relationships between macroscopic population-level measures such as incidence rate and the corresponding microscopic hazard rates we use in our simulations, and how these relationships might affect our model design and V&V.
-
   Cite [Allen-et-al-2019]_ and [Sorensen-et-al-2017]_ somewhere.
+
+  Elaborate on this in approachable/jargon-free language.
   
 
 How does Vivarium compare with other microsimulation tools?
@@ -179,13 +211,30 @@ The IHME microsimulation platform, unlike most other microsimulation frameworks,
  - What differential equations underly these different types of models?
 
 Simulant agency
-~~~~~~~~~~~~~~~
++++++++++++++++
 
 Unlike agent-based models, microsimulations do not necessarily program agency into individual simulants. This removes some of the real-world likeness of these models...
 
 .. todo:: 
   
   Expand upon how microsim is different from agent-based modeling here. 
+
+Incorporating uncertainty
++++++++++++++++++++++++++
+
+Microsimulation methods provide a useful approach to modeling stochastic uncertainty in a conceptually valid manner because chance – that is, reliance on randomly generated numbers – 
+is used to govern movement between states for individual simulants from a single computer-generated population, as opposed to comparing the role of chance across multiple 
+populations with differing characteristics.
+
+In the context of healthcare estimates typically characterized by considerable variance across quantities of interest, the use of Monte Carlo methods to run simulations using iterative 
+draws from probability distributions provides an effective means of incorporating parameter uncertainty. 
+
+Simulation methods have the added advantage of reducing confounding variance between different scenarios by ensuring that the simulated population is identical across all scenarios analyzed. 
+The only difference between scenarios, then, is the presence or absence of health interventions. By incorporating heterogeneity at the level of the individual simulant, microsimulations are 
+able to provide an additional degree of flexibility and detail (such as stratifying results according to demographic or epidemiological attributes) not available in population-level models.
+
+.. todo::
+    Reword this section to make it clear that this is about common random numbers (not Monte Carlo) as a distinguishing feature of Vivarium (as compared to other microsim methods) 
 
 References
 ----------
@@ -202,6 +251,10 @@ References
 
       Allen et al. (2019). `Enabling Model Complexity Through an Improved Workflow.` Healthy Algorithms. 
 
+.. [Braunlin-MM-2020]
+
+    Braunlin et al. (2020) `Trends in the multiple myeloma treatment landscape and survival: a U.S. analysis using 2011–2019 oncology clinic electronic health record data`.
+    Leukemia & Lymphoma, 62:2, 377-386, DOI: https://doi.org/10.1080/10428194.2020.1827253
 
 .. todo:: 
   Add citation to Vivarium Technical Document 2019
