@@ -223,7 +223,7 @@ we can say that
 
 .. math::
 
-  RR_\text{r→o,total} = RR_\text{r→o,direct} * RR_\text{r1→r2→o}
+  RR_\text{r→o,total} = RR_\text{r→o,direct} \times RR_\text{r1→r2→o}
 
 This equation can be used in either direction, depending on what we have
 data about.
@@ -356,7 +356,7 @@ is 2.
 If R1 increases by one unit, R2 therefore increases by two units.
 Increasing R2 by two units is the same thing as increasing it by one unit
 *twice* -- so the log-linear effect of R2 on O gets applied twice.
-:math:`O_\text{after} = RR_\text{R2→O} * RR_\text{R2→O} * O_\text{before}`,
+:math:`O_\text{after} = RR_\text{R2→O} \times RR_\text{R2→O} \times O_\text{before}`,
 so :math:`RR_\text{path} = \frac{O_\text{after}}{O_\text{before}} = (RR_\text{R2→O})^2`.
 This is squared (power 2) because our delta is 2, and this result generalizes to any delta.
 
@@ -507,7 +507,7 @@ A total RR of 2.3 implies an
 If GBD reported a mediation factor for this triple (where R1
 is the distal risk, R2 is the mediator, and O is the cause)
 of 0.538, the interpretation would be that the RR of the mediated
-pathway is 1.7, since :math:`0.538 * 1.3 \approx 0.7` is the
+pathway is 1.7, since :math:`0.538 \times 1.3 \approx 0.7` is the
 amount of the *excess* (above 1) risk that is assigned to that pathway.
 Since there are no other mediators, the "rest" of the excess risk (0.6)
 is assigned to the direct/unmediated pathway,
@@ -519,7 +519,7 @@ With the standard, default way we apply RRs, a simulant
 who has a 1-unit increase in R1 will end up getting their value
 for O multiplied by the RRs for *both* pathways.
 Whatever their value before the R1 increase, it will be
-:math:`1.7 * 1.6 = 2.72` times as high afterwards --
+:math:`1.7 \times 1.6 = 2.72` times as high afterwards --
 which is significantly more than the 2.3 total RR we started with!
 
 Unfortunately, this fundamental inconsistency between GBD mediation
@@ -570,7 +570,7 @@ to solve for :math:`RR_\text{r→o,adjusted for m}`:
 
 .. math::
 
-  RR_\text{r→o,adjusted for m} = RR_\text{r→o,total} - MF * (RR_\text{r→o,total} - 1)
+  RR_\text{r→o,adjusted for m} = RR_\text{r→o,total} - MF \times (RR_\text{r→o,total} - 1)
 
 :math:`RR_\text{r→o,adjusted for m}` is the underlying data point, but it
 usually doesn't show up
@@ -632,7 +632,7 @@ for :math:`\Delta_\text{r→m}`:
 
 .. math::
 
-  \Delta_\text{r→m} = \frac{MF * (RR_\text{r→o,total} - 1) + 1}{log(RR_\text{m→o})}
+  \Delta_\text{r→m} = \frac{MF \times (RR_\text{r→o,total} - 1) + 1}{log(RR_\text{m→o})}
 
 Having arrived at :math:`\Delta_\text{r→m}`, the remaining steps are the same as
 in the previous section.
@@ -654,7 +654,7 @@ calculate this like so:
 
 .. math::
 
-  \Delta_\text{r→m} = \frac{MF * (RR_\text{r→o,total} - 1) + 1}{log(RR_\text{m→o})}
+  \Delta_\text{r→m} = \frac{MF \times (RR_\text{r→o,total} - 1) + 1}{log(RR_\text{m→o})}
 
 As in Approach 1, this can result in multiple different delta values for the same risk-mediator
 pair; we have to choose one or aggregate them somehow.
@@ -663,13 +663,13 @@ With this approach, we calculate the RR of the direct effect using the equation
 
 .. math::
 
-  RR_\text{r→o,direct} = 1 + (RR_\text{r→o,total} - 1) * (1 - MF_m)
+  RR_\text{r→o,direct} = 1 + (RR_\text{r→o,total} - 1) \times (1 - MF_m)
 
 when there is only one mediator :math:`m`, as described in the methods appendix, or
 
 .. math::
 
-  RR_\text{r→o,direct} = 1 + (RR_\text{r→o,total} - 1) * \prod_{m \in M}{(1 - MF_m)}
+  RR_\text{r→o,direct} = 1 + (RR_\text{r→o,total} - 1) \times \prod_{m \in M}{(1 - MF_m)}
 
 when there are multiple mediators, which is used internally by GBD (e.g. when calculating PAFs)
 
