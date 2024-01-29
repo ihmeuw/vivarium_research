@@ -277,6 +277,8 @@ modification, and mediation are discussed in the following subsections.
 Notably, in the following sections, solid arrows are used to depict causal 
 relationships directionally between a cause/exposure and effect/outcome. 
 
+.. _confounding:
+
 Confounding
 +++++++++++
 
@@ -399,6 +401,8 @@ Having established that smoking appears to confound the association between coff
 
 .. todo::
   What we should look for re: confounding when assessing effect sizes
+
+.. _general_dags_intermediates:
 
 Intermediates
 +++++++++++++
