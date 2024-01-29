@@ -167,8 +167,7 @@ so long as none of them need to be modeled:
 
 .. image:: unnecessary-mediators.drawio.svg
 
-The ignored mediator(s) will be implicitly included in any data we have
-about the effect that they mediate.
+The ignored mediator(s) will be implicitly included in any measured association between the risk and the outcome.
 
 Therefore, we often construct causal diagrams that are sufficient
 to answer our research questions without including any complex
@@ -443,7 +442,7 @@ where :math:`r` is the risk factor and :math:`m` is the mediator.
 
 .. note::
   This ignores the concept of a TMREL below which the RR does not apply and risk
-  is flat.
+  is constant.
   This seems to be ignored throughout the GBD's descriptions of its mediation methods, although
   some risks that are mediators in GBD, such as BMI, clearly have non-zero TMRELs.
 
@@ -724,13 +723,20 @@ for the direct effect, we need an RR adjusted for **all** mediated pathways.
 Risk deletion (PAFs) in the presence of mediation
 -------------------------------------------------
 
-In order to accurately perform risk deletion in the presence of mediation,
-we must use the correct risk-outcome effects, as described in the previous sections,
-**and** we must account for the correlation between risks caused by risk-risk effects.
 We generally perform risk deletion by calculating a population-attributable fraction (PAF):
 the proportion of an outcome that is attributable to all our modeled risk factors.
 Then, we delete this proportion of the observed outcome to obtain the
 risk-deleted value.
+
+When we perform risk deletion, we should use **the same** causal
+diagram that we model.
+For example, when our diagram has a direct pathway separate from
+mediated pathways, we should use those pathways and their **pathway**
+effects in the risk deletion calculation, not the total effect.
+
+In order to accurately perform risk deletion in the presence of mediation,
+we must use the correct risk-outcome effects, as described in the previous sections,
+**and** we must account for the correlation between risks caused by risk-risk effects.
 
 Because R1 has a direct causal effect on R2 in this diagram,
 they will certainly be correlated.
