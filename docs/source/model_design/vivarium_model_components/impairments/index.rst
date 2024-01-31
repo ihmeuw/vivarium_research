@@ -90,13 +90,19 @@ Therefore, other methods might be needed in order to have a dynamic
 anemia model. You can see one example of this based on simulant's hemoglobin 
 levels in the :ref:`hemoglobin, anemia and iron deficiency model <2019_hemoglobin_anemia_and_iron_deficiency>`.
 
+Another option would be to derive the needed values from cause level data. 
+You could aggregate incidence or another needed variable from all their 
+causes, weighted by prevalence of their sequelae in the impairment. This 
+might require working with the relevant GBD team to get any data available 
+on sequelae included in the impairment and proportion of each cause. 
+
 Risk Models
 +++++++++++
 
 GBD does NOT include relative risks or PAFs connecting risk factors 
 to impairments. Therefore, if you need to model the impact of a risk 
 factor to an impairment you will need to use literature values for 
-realtive risks. These values 
+relative risks. These values 
 might have limitations. For example, check the study population used to 
 find relative risks to ensure it is applicable to the full range of 
 risk factor values - sometimes you might need to cap the relative risks 
@@ -190,7 +196,7 @@ are included in the same :ref:`cause model <2019_cause_ihd>`.
 By including both the cause and impairment in a single modeling component, 
 they are no longer independent which solves our prior problems of overlap. 
 In addition, you can define part of the model to overlap - for example states 
-could inlcude diabetes, blindness due to diabetes, and blindness due to other 
+could include diabetes, blindness due to diabetes, and blindness due to other 
 causes. 
 
 Including cause models structured in this way does sometimes lead to strange "predictive" 
@@ -228,10 +234,15 @@ the diabetes cause model. This essentially enforces the idea that a simulant
 can only go blind by 1 cause. This could in theory scale up for 
 an increasing number of cause and/or impairment models. 
 
+However, this would introduce bias as you are changing the susceptible 
+population in practice but not adjusting for that change in the model. Basically, 
+the model would "think" that more people are susceptible to blindness 
+than are actually susceptible and so would end up misrepresenting the incidence. 
+
 Another way to utilize causes acting as risks would be to have cause model 
 states dictate the options available for the impairment model. 
 
-Imagine a blindness impairment where simulants move from suseptible to blind 
+Imagine a blindness impairment where simulants move from susceptible to blind 
 based on an incidence rate and once they are selected to be blind, the model 
 would check what other health states that simulant is in. It would then use this 
 information to determine the 
@@ -254,3 +265,9 @@ needed to ensure this works smoothly.
 
 This approach shouldn't create bias in the model and is a good option 
 if you need to include more cause models in the simulation. 
+
+.. todo::
+  
+  We have not implemented causes as risks in practice and so this section is 
+  speculative. We will further build this out as we implement these ideas in 
+  practice. 
