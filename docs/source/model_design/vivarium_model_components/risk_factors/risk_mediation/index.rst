@@ -581,7 +581,7 @@ as described in the composition section above:
 
 .. math::
 
-  \Delta_\text{r→m} = \frac{log(RR_\text{r→o,total}) - log(RR_\text{r→o,adjusted for m})}{log(RR_\text{m→o,total})}
+  \Delta_\text{r→m} = \frac{\log(RR_\text{r→o,total}) - \log(RR_\text{r→o,adjusted for m})}{\log(RR_\text{m→o,total})}
 
 Every mediation pathway that begins with the same primary risk
 and mediator will give us the information we need to calculate such a linear
@@ -631,7 +631,7 @@ for :math:`\Delta_\text{r→m}`:
 
 .. math::
 
-  \Delta_\text{r→m} = \frac{MF \times (RR_\text{r→o,total} - 1) + 1}{log(RR_\text{m→o})}
+  \Delta_\text{r→m} = \frac{\log(MF \times (RR_\text{r→o,total} - 1) + 1)}{\log(RR_\text{m→o})}
 
 Having arrived at :math:`\Delta_\text{r→m}`, the remaining steps are the same as
 in the previous section.
@@ -653,7 +653,7 @@ calculate this like so:
 
 .. math::
 
-  \Delta_\text{r→m} = \frac{MF \times (RR_\text{r→o,total} - 1) + 1}{log(RR_\text{m→o})}
+  \Delta_\text{r→m} = \frac{MF \times (RR_\text{r→o,total} - 1) + 1}{\log(RR_\text{m→o})}
 
 As in Approach 1, this can result in multiple different delta values for the same risk-mediator
 pair; we have to choose one or aggregate them somehow.
