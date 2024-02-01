@@ -282,9 +282,9 @@ throughout this style guide.
 1.4 The Politics of Language
 ----------------------------
 The language we choose to use is inherently political and we are aware of that fact. 
-This guide asserts that gender inclusive language is important and pushes for it's 
-inclusion. In doing so, we hope to advocate for gender minority inclusion 
-in statisitcs and research. 
+This guide asserts that gender inclusive language is important and pushes for its 
+wider use in public health research and dissemination. In doing so, we hope to 
+advocate for SGM inclusion in this field.
 
 However we also recognize that others, particularly those fighting for women's 
 empowerment might choose to use different language to advocate for other groups. For example, 
@@ -302,10 +302,10 @@ options can benefit both cis-women and gender minorities. There are wide variati
 in bodies among cis-women and moving towards better measurements will force 
 researchers to define what they are hoping to quantify outside of just "male" or "female". 
 For example, considering "people with uteruses" instead of "women" when measuring uterine 
-cancer rates would have helped better quantify incidence for all people. 
+cancer rates would have helped better quantify incidence for all people [Bauer_2022]_.
 
 Our hope is that someday, sex and gender are better 
-measured and reported in data leading to less friction between groups. 
+measured and reported in data, leading to less friction between perspectives. 
 As stated in [Rioux_2022]_ "as this becomes the norm, cis 
 women-related terms and language inclusive of gender diversity will be able to 
 better coexist" and they can both be applied more precisely. 
