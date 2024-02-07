@@ -279,6 +279,37 @@ throughout this style guide.
    Include visual of 'Do's and Don'ts!
 
 
+1.4 The Politics of Language
+----------------------------
+The language we choose to use is inherently political and we are aware of that fact. 
+This guide asserts that gender inclusive language is important and pushes for its 
+wider use in public health research and dissemination. In doing so, we hope to 
+advocate for SGM inclusion in this field.
+
+However we also recognize that others, particularly those fighting for women's 
+empowerment might choose to use different language to advocate for other groups. For example, 
+there are places where women's inclusion in clinical trials or datasets is not 
+guaranteed and they are still pushing for anyone other than cis-gendered men to be included 
+in research. This is important and vital work. Additionally, some groups want to push 
+back on male centric lanaguage - such as defaulting to masculine pronouns for 
+a non-gendered person. This is also a worthy cause. We recognize and respect that the intentional 
+use of language to further a goal might lead some to different language choices in certain situtions. 
+
+Some of the people in women's empowerment groups might feel that including gender 
+inclusive language is antagonistic, detrimental, or mutually exclusive to women's empowerment. Our group 
+disagrees with this proposed dichotomy. Having more diverse and precise language 
+options can benefit both cis-women and gender minorities. There are wide variations 
+in bodies among cis-women and moving towards better measurements will force 
+researchers to define what they are hoping to quantify outside of just "male" or "female". 
+For example, considering "people with uteruses" instead of "women" when measuring uterine 
+cancer rates would have helped better quantify incidence for all people [Bauer_2022]_.
+
+Our hope is that someday, sex and gender are better 
+measured and reported in data, leading to less friction between perspectives. 
+As stated in [Rioux_2022]_ "as this becomes the norm, cis 
+women-related terms and language inclusive of gender diversity will be able to 
+better coexist" and they can both be applied more precisely. 
+
 2.0 Research question
 +++++++++++++++++++++
 
