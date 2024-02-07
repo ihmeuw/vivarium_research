@@ -325,14 +325,27 @@ which would mean that all sex- and gender-related factors are variables of inter
 2.1 Research considerations
 ---------------------------
 
-Before beginning with your research, there are some considerations to take as you read through
+Before beginning with your research, there are some crucial considerations to take as you read through
 our recommendations. 
 
-- Audience  (both in terms of readership and affected/studied population; e.g., global health vs. 
-US health; maternal health; geographically and culturally specific gender dynamics) 
-- Target journal policies (although uncommon, some journals might have preexisting guidelines for 
-how to report on sex and gender)
-- Centrality of sex/gender to research question 
+First, understanding your audience is key - both in terms of who will be reading your study, and the population 
+your research affects or studies. For instance, if your work addresses global health, the cultural and 
+geographical nuances of sex and gender may differ significantly from those in U.S. health contexts. 
+Moreover, as covered in our section on the `Politics of Language`_, if your research is focused on a specific subset
+of health sciences, such as maternal or pregnancy-related health, you should be attuned to the political implications 
+of sex and gender within your field.
+
+As noted in the above section, you should also consider how central sex and gender are to your research question, and
+whether you're most interested in sex, gender, or some combination of both in your research. If sex and gender are 
+central to your research, it may necessitate a more careful and detailed approach to how you analyze and report sex- and gender-
+related data - in which case, you hopefully will find the majority of this guide useful to you!
+
+Lastly, make sure to be aware of your target journal’s policies regarding sex and gender. 
+While it is currently not very common, certain journals may have established guidelines that must be adhered to.
+
+Taking these considerations into account before implementing the guide's recommendations will help ensure that 
+your research is not only respectful and sensitive to the complexities of sex and gender but also adherent to 
+relevant guidelines and meaningful to your intended audience.
 
 2.2 Proxy measures
 ------------------
