@@ -274,10 +274,6 @@ throughout this style guide.
        intersex, lesbian, gay, bisexual, transgender, non-binary, asexual, or have other gender 
        non-conforming identities.
 
-.. todo::
-
-   Include visual of 'Do's and Don'ts!
-
 
 2.0 Research question
 +++++++++++++++++++++
@@ -295,7 +291,19 @@ In some cases, even this may not be clear, for example if we are researching an
 association that could be mediated by either sex or gender (or both), making them both
 variables of interest.
 
-2.1 Proxy measures
+2.1 Research considerations
+---------------------------
+
+Before beginning with your research, there are some considerations to take as you read through
+our recommendations. 
+
+- Audience  (both in terms of readership and affected/studied population; e.g., global health vs. 
+US health; maternal health; geographically and culturally specific gender dynamics) 
+- Target journal policies (although uncommon, some journals might have preexisting guidelines for 
+how to report on sex and gender)
+- Centrality of sex/gender to research question 
+
+2.2 Proxy measures
 ------------------
 
 When defining your research question, you might have to use proxy measures (e.g., due to a lack of availability of primary data - more
