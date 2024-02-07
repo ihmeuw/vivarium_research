@@ -331,7 +331,7 @@ our recommendations.
 First, understanding your audience is key - both in terms of who will be reading your study, and the population 
 your research affects or studies. For instance, if your work addresses global health, the cultural and 
 geographical nuances of sex and gender may differ significantly from those in U.S. health contexts. 
-Moreover, as covered in our section on the `Politics of Language`_, if your research is focused on a specific subset
+Moreover, as covered in our section on `The Politics of Language`_, if your research is focused on a specific subset
 of health sciences, such as maternal or pregnancy-related health, you should be attuned to the political implications 
 of sex and gender within your field.
 
