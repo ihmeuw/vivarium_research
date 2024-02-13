@@ -218,56 +218,34 @@ in choosing your modeling approach.
 Have Causes Act as "Risks"
 ++++++++++++++++++++++++++
 
-Another option is to have cause models that act as "risks" for other 
-causes. To understand this, imagine a model with both diabetes and 
-the blindness impairment included. As we discussed 
-above, causes in Vivarium are usually independent, but we can have causes 
-act on other transition pathways. 
-
-For example, if a simulant is in the state within the diabetes cause 
-for "blindness due to diabetes", it could prevent them from transitioning 
-from "susceptible" to "blindness due to other causes" in the blindness impairment. 
-Hence, a cause (diabetes) acts on a transition in the impairment component. 
-
-You could imagine a similar pathway from the blindness impairment to 
-the diabetes cause model. This essentially enforces the idea that a simulant 
-can only go blind by 1 cause. This could in theory scale up for 
-an increasing number of cause and/or impairment models. 
-
-However, this would introduce bias as you are changing the susceptible 
-population in practice but not adjusting for that change in the model. Basically, 
-the model would "think" that more people are susceptible to blindness 
-than are actually susceptible and so would end up misrepresenting the incidence. 
-
-Another way to utilize causes acting as risks would be to have cause model 
-states dictate the options available for the impairment model. 
-
-Imagine a blindness impairment where simulants move from susceptible to blind 
-based on an incidence rate and once they are selected to be blind, the model 
-would check what other health states that simulant is in. It would then use this 
-information to determine the 
-cause of blindness. 
-
-For example, if that simulant has diabetes, it would increase the 
-chance they would be assigned "blindness due to diabetes" rather than 
-"blindness due to other causes". Similar to the above, the cause model(s) 
-act as "risks" determining what state a simulant goes to. This could again 
-work with increasing numbers of cause models. 
-
-There are some additional data requirements with this method. Namely 
-you would need to have equations based on all causes in the model to 
-determine which "cause" to assign to the impairment. You could imagine 
-this getting complicated if you had diabetes, meningitis and glaucoma in 
-the model. If a simulant is in multiple of these states - say they have 
-both diabetes and glaucoma - which caused 
-their blindness? A nanosim or additional calibration exercises might be 
-needed to ensure this works smoothly. 
-
-This approach shouldn't create bias in the model and is a good option 
-if you need to include more cause models in the simulation. 
-
-.. todo::
+.. note::
   
-  We have not implemented causes as risks in practice and so this section is 
-  speculative. We will further build this out as we implement these ideas in 
-  practice. 
+  While we think this methodology will work well, it has not been tested in a 
+  model up to this point. Therefore the implemenation remains theoretical, and 
+  some details to the approach would need to be finalized before it could be 
+  used. 
+
+Another option is to have cause models that act as "risks" for other 
+causes. In effect, we would adjust the incidence of the impairment 
+to remove the impact of all modeled causes. This is very similar to how we currently 
+include mortality in our models.
+
+For mortality, a simulant can die due to all cause mortality at any point, or 
+they can die due to a specific cause in our model. Therefore, we decrease the 
+background all cause mortality rate in the model to account for the presence of causes 
+with increased mortality rates. For more information on the math behind this, see 
+:ref:`the mortality hazards section of the cause model page <models_cause>`.
+
+A similar principle can be used here. Referring to the figure below, we can see 
+that two causes, X and Y, act on the incidence of an impairment, B. Since 
+simulants can get impairment B through the causes X and Y, we need to decrease the 
+overall incidence of B to account for the other model factors. 
+
+.. image:: impairment_cause_as_risk.png
+
+The amount that the incidence of B is impacted will depend on the causes 
+present in the model and the amount of B caused by modeled causes vs 
+other factors. The math for this will largely follow the math for mortality, 
+but has not been designed or tested in a model. If the adjustments are done 
+correctly, this approach shouldn't create bias in the model and is a good 
+option if you need to include more cause models in the simulation. 
