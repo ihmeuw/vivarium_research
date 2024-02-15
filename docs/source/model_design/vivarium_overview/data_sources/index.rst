@@ -134,29 +134,93 @@ For reference, `the decomposition rules for GBD 2021 can be found here <https://
 
 Additionally, you may be required to specify a :code:`version_id`, :code:`release_id`, and/or :code:`status` when pulling GBD results from certain GBD rounds. The HUB space for a given GBD round is a good resource on where to obtain this information, but do not hesitate to open a helpdesk ticket to inquire or confirm whether you are using appropriate versioning IDs for you GBD shared functions call.
 
+.. todo::
+
+   Discuss release_id as preferred alternative to gbd_round_id + decomp_step.
+
 Pulling GBD Data using *Vivarium Inputs*
 ----------------------------------------
 
-.. todo::
+There are two main code bases within the Vivarium software framework that are especially useful for interacting with GBD data, including `gbd_mapping <https://vivarium.readthedocs.io/projects/gbd-mapping/en/latest/index.html>`_ and `vivarium_inputs.interface <https://vivarium.readthedocs.io/projects/vivarium-inputs/en/latest/index.html>`_.
 
-   this section
+Both of these code bases translate ID numbers used in GBD to human-readable text by default.
+
+Overview of :code:`gbd_mapping`
++++++++++++++++++++++++++++++++
+
+:code:`gbd_mapping` provides a convienient way to access all of the metadata associated with a given GBD entity (ex: diarrheal diseases cause or child growth failure risk factor), but does not return any estimates assoicated with that entity (ex: prevalence or relative risks).
+
+Overview of :code:`vivarium_inputs.interface`
+++++++++++++++++++++++++++++++++++++++++++++++
+
+:code:`vivarium_inputs.interface` provides simplified functions to query GBD data and reformats the data to be compatible with the data structure required for building Vivarium Artifact objects. :code:`vivarium_inputs.interface` generally returns data for the most up-to-date *complete* GBD round/release and does not allow for user-specification of prior rounds/releases -- ask the software engineers if you have questions about which GBD round/release is active in :code:`vivarium_inputs.interface` at any given time. Additionally, if there is any doubt as to which GBD versioning is being returned by a given :code:`vivarium_inputs.interface` call, you can utilize :code:`get_raw_data`, which will return full data including GBD versioning IDs for a given call.
+
+`For documentation on Vivarium Inputs, click here <https://vivarium.readthedocs.io/projects/vivarium-inputs/en/latest/index.html>`_.
+
+Some important notes and considerations not included in the documentation above are listed below:
+
+.. todo::
+   
+   List default behavior of get_measures/other functions once the GBD 2021 update is finalized, including things like:
+
+   - Returning most recent available year - note potential exception with risk effects?
+   - Filtering of draws (reduction of 1,000 COD draws down to 500 that are present in COMO)?
+   - Returning all ages/sexes and filling NANs with zeros
+   - Version ID behavior with GBD 2021? 
+   - Anything else?
+
+.. list-table:: Notable default behavior of get_measures
+   :header-rows: 1
+
+   *  - Measure
+      - Data returned
+      - Note
+   *  - :code:`'incidence'`
+      - GBD_incidence / (1 - GBD_prevalence)
+      - By default, get_measures automatically converts GBD's "population-level incidence rates" to "susceptible population incidence rates" using the GBD estimate of prevalence. Note that if a model is using an alternative vlaue for prevalence, this rescaling should be done separately using that prevalence value.
+   *  - :code:`'raw_incidence_rate'`
+      - GBD_incidence
+      - 
+   *  - :code:`'cause_specific_mortality'`
+      - GBD_death_count / GBD_population_counts
+      - 
+   *  - :code:`'excess_mortality'`
+      - cause_specific_mortality / GBD_prevalence
+      - By default, get_measures calculates excess mortality rates in accordance with the GBD estimate of prevalence. If a model is using an alternative value for cause prevalence, excess mortality rates should likely be calculated separately using that prevalence value.
 
 Applied examples
 -----------------
 
 .. todo::
 
-   Link notebook
+   Link notebook that shows examples of using these functions.
 
 Considerations of each approach
-----------------------------------------------
+----------------------------------
 
-.. todo::
+Generally, GBD shared functions offers greater flexibility in querying GBD data than Vivarium Inputs, but requires specification of detailed IDs that are not human-readable and requires translation with get_ids. Vivarium Inputs offers less flexibility in favor of the convenience of returning a human-readable version of the most relevant data for running Vivarium simulations and compatibility with required Vivarium Artifact formatting. Therefore, GBD shared functions may be the code base of choice to use when taking deep dives into GBD data, and Vivarium Inputs when preparing GBD data for Vivarium simulations. Some specific comparisons are summarized in the table below for additional specific considerations of the differences betweent the two code bases.
 
-   Discuss how:
+.. list-table::
+   :header-rows: 1
 
-   - Vivarium inputs converts IDs to names, which may be convenient for pairing  formatting with vivarium outputs
-   - Vivarium inputs may have some wrappers/transformations in get_measures versus get_raw_data
-   - Vivarium inputs is available for finalized GBD rounds only (can only pull intermediate results using shared functions)
-
-   Maybe link to functions to help us convert between shared functions and vivarium formatting so that translating between the two isn't so annoying 
+   *  - Topic
+      - GBD Shared Functions
+      - Vivarium Inputs
+   *  - GBD round
+      - Able to specify any GBD round/release; useful for noting and comparing major changes between rounds
+      - Returns most recent complete GBD round/release only
+   *  - DALYs
+      - Returns YLD, YLL, DALY estimates
+      - Does not return YLD, YLL, or DALY estimates
+   *  - Metrics
+      - Returns counts, rates, and prevalence estimates
+      - Returns rate estimates with the exception of population structure, which are in counts; convenient
+   *  - Summary values
+      - Can return mean, upper, and lower estimates using get_outputs
+      - Returns draw-level estimates only
+   *  - Age/sex/location specificity
+      - Allows for specification across all these parameters, allows for grouping (via get_outputs) and/or aggregation (via make_custom_aggregates) across demographic categories
+      - Returns *all* most-detailed age and sex estimates. Supports only one location at a time.
+   *  - Format
+      - Generally uses ID numbers that are not human-readable before pairing with get_ids information
+      - Converts to human readable entity names rather than IDs and is compatible with formatting required for vivarium Artifacts and simulations
