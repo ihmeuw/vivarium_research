@@ -224,3 +224,9 @@ Generally, GBD shared functions offers greater flexibility in querying GBD data 
    *  - Format
       - Generally uses ID numbers that are not human-readable before pairing with get_ids information
       - Converts to human readable entity names rather than IDs and is compatible with formatting required for vivarium Artifacts and simulations
+
+.. note::
+
+   To convert between GBD shared function entity names (such as cause_name) to the entity name in Vivarium inputs, convert the GBD shared function entity name to all lower case and replace spaces with underscores. Python code do this is shown below:
+
+      :code:`vivarium_inputs_entity_name = gbd_entity_name.lower().replace(' ', '_')`
