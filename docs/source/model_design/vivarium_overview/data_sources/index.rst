@@ -177,7 +177,7 @@ Some important notes and considerations not included in the documentation above 
       - Note
    *  - :code:`'incidence'`
       - GBD_incidence / (1 - GBD_prevalence)
-      - By default, get_measures automatically converts GBD's "population-level incidence rates" to "susceptible population incidence rates" using the GBD estimate of prevalence. Note that if a model is using an alternative vlaue for prevalence, this rescaling should be done separately using that prevalence value.
+      - By default, get_measures automatically converts GBD's "population-level incidence rates" to "susceptible population incidence rates" using the GBD estimate of prevalence. Note that if a model is using an alternative value for prevalence, this rescaling should be done separately using that prevalence value.
    *  - :code:`'raw_incidence_rate'`
       - GBD_incidence
       - 
