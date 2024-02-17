@@ -198,7 +198,7 @@ Applied examples
 Considerations of each approach
 ----------------------------------
 
-Generally, GBD shared functions offers greater flexibility in querying GBD data than Vivarium Inputs, but requires specification of detailed IDs that are not human-readable and requires translation with get_ids. Vivarium Inputs offers less flexibility in favor of the convenience of returning a human-readable version of the most relevant data for running Vivarium simulations and compatibility with required Vivarium Artifact formatting. Therefore, GBD shared functions may be the code base of choice to use when taking deep dives into GBD data, and Vivarium Inputs when preparing GBD data for Vivarium simulations. Some specific comparisons are summarized in the table below for additional specific considerations of the differences betweent the two code bases.
+Generally, GBD shared functions offer greater flexibility in querying GBD data than Vivarium Inputs, but require specification of detailed IDs that are not human-readable and require translation with get_ids. Vivarium Inputs offers less flexibility in favor of the convenience of returning a human-readable version of the most relevant data for running Vivarium simulations and compatibility with required Vivarium Artifact formatting. Therefore, GBD shared functions may be the code base to use when taking deep dives into GBD data, and Vivarium Inputs when preparing GBD data for Vivarium simulations. Some additional specific considerations about the differences between the two options are summarized in the table below.
 
 .. list-table::
    :header-rows: 1
