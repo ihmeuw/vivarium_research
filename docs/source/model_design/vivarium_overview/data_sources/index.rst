@@ -143,7 +143,7 @@ Pulling GBD Data using *Vivarium Inputs*
 
 There are two main packages within the Vivarium software framework that are especially useful for interacting with GBD data: `gbd_mapping <https://vivarium.readthedocs.io/projects/gbd-mapping/en/latest/index.html>`_ and `vivarium_inputs <https://vivarium.readthedocs.io/projects/vivarium-inputs/en/latest/index.html>`_.
 
-Both of these code bases translate ID numbers used in GBD to human-readable text by default.
+Both of these packages translate ID numbers used in GBD to human-readable text by default.
 
 Overview of :code:`gbd_mapping`
 +++++++++++++++++++++++++++++++
