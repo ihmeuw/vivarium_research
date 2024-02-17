@@ -143,17 +143,17 @@ Pulling GBD Data using *Vivarium Inputs*
 
 There are two main packages within the Vivarium software framework that are especially useful for interacting with GBD data: `gbd_mapping <https://vivarium.readthedocs.io/projects/gbd-mapping/en/latest/index.html>`_ and `vivarium_inputs <https://vivarium.readthedocs.io/projects/vivarium-inputs/en/latest/index.html>`_.
 
-Both of these packages translate ID numbers used in GBD to human-readable text by default.
+Both of these packages translate ID numbers used in GBD to human-readable text.
 
 Overview of :code:`gbd_mapping`
 +++++++++++++++++++++++++++++++
 
 :code:`gbd_mapping` provides a convienient way to access all of the metadata associated with a given GBD entity (ex: diarrheal diseases cause or child growth failure risk factor), but does not return any estimates assoicated with that entity (ex: prevalence or relative risks).
 
-Overview of :code:`vivarium_inputs.interface`
+Overview of :code:`vivarium_inputs`
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-:code:`vivarium_inputs.interface` provides simplified functions to query GBD data and reformats the data to be compatible with the data structure required for building Vivarium Artifact objects. :code:`vivarium_inputs.interface` generally returns data for the most up-to-date *complete* GBD round/release and does not allow for user-specification of prior rounds/releases -- ask the software engineers if you have questions about which GBD round/release is active in :code:`vivarium_inputs.interface` at any given time. Additionally, if there is any doubt as to which GBD versioning is being returned by a given :code:`vivarium_inputs.interface` call, you can utilize :code:`get_raw_data`, which will return full data including GBD versioning IDs for a given call.
+:code:`vivarium_inputs` provides simplified functions to query GBD data and reformats the data to be compatible with the data structure required for building Vivarium Artifact objects. :code:`vivarium_inputs` generally returns data for the most up-to-date *complete* GBD round/release and does not allow for user-specification of prior rounds/releases -- ask the software engineers if you have questions about which GBD round/release is active in :code:`vivarium_inputs` at any given time. Additionally, if there is any doubt as to which GBD versioning is being returned by a given :code:`vivarium_inputs` call, you can utilize :code:`get_raw_data`, which will return full data including GBD versioning IDs for a given call.
 
 `For documentation on Vivarium Inputs, click here <https://vivarium.readthedocs.io/projects/vivarium-inputs/en/latest/index.html>`_.
 
