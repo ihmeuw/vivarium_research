@@ -148,7 +148,7 @@ Both of these packages translate ID numbers used in GBD to human-readable text.
 Overview of :code:`gbd_mapping`
 +++++++++++++++++++++++++++++++
 
-:code:`gbd_mapping` provides a convienient way to access all of the metadata associated with a given GBD entity (ex: diarrheal diseases cause or child growth failure risk factor), but does not return any estimates assoicated with that entity (ex: prevalence or relative risks).
+:code:`gbd_mapping` provides a convenient way to access all of the metadata associated with a given GBD entity (ex: diarrheal diseases cause or child growth failure risk factor), but does not return any estimates associated with that entity (ex: prevalence or relative risks).
 
 Overview of :code:`vivarium_inputs`
 ++++++++++++++++++++++++++++++++++++++++++++++
