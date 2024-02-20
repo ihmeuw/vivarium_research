@@ -225,8 +225,8 @@ Have Causes Act as "Risks"
   some details to the approach would need to be finalized before it could be 
   used. 
 
-Another option is to have cause models that act as "risks" for other 
-causes. In effect, we would adjust the incidence of the impairment 
+Another option is to have cause models that act as "risks" on the 
+impairment model. In effect, we would adjust the incidence of the impairment 
 to remove the impact of all modeled causes. This is very similar to how we currently 
 include mortality in our models.
 
@@ -249,3 +249,7 @@ other factors. The math for this will largely follow the math for mortality,
 but has not been designed or tested in a model. If the adjustments are done 
 correctly, this approach shouldn't create bias in the model and is a good 
 option if you need to include more cause models in the simulation. 
+
+If the impairment needs to include remission (e.g., an SIS model instead 
+of an SI model), the analogy to mortality breaks down, and this approach 
+might not be appropriate.
