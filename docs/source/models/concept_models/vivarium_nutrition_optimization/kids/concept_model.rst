@@ -469,9 +469,40 @@ Requested test runs:
 Subnational Approach
 ~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+In order to include SQ-LNS targeting by location, we are switching to 
+use a subnational approach for most data in Wave 3. However, rather 
+than model all subnational locations separately, simulants 
+will just be assigned to a subnational location within their primary 
+location, and have input data pulled for the subnational location instead. 
+Unless otherwise specified in the model request table below, the data outputs 
+do not need to stratified by subnational location.
 
-  Add general information here on the subnational approach planned. Include: data on which location IDs to use and the percent of the population in each ID. Information on intializing sims with a country and subnational location. What data to pull subnationally vs nationally.
+
+Initializing Simulant's Locations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Simulants will be obtained from the pregnancy sim, the same as in prior 
+waves. These simulants will already have a country location. The pregnancy 
+simulation is only run at the national level.
+
+When these simulants are loaded into the child simulation, they will be 
+assigned a subnational location within their country. Here is the data 
+for the `percent of simulants assigned to each subnational location by sex <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/ff08145109e1434669f08afe702ffc5e3d45a6c2/data_prep/sqlns_subnational/subnational_percents.csv>`_. Note that all 3 countries are included 
+in this csv file. 
+
+Data Inputs: 
+^^^^^^^^^^^^
+
+Once a simulant is assigned to a subnational location, all GBD data used 
+will be subnational specific data. Artifacts will be made for all subnational 
+geographies. We will also regenerate data for all custom made datasets, 
+such as wasting transitions, PAFs, and CGF correlation, at the subnational 
+level. 
+
+Wasting coverage and efficacy data will continue to be national only. Also, 
+for all scenarios other that targeted SQ-LNS, roll out of interventions will 
+be the same for all subnational locations. Efficacy of interventions will also 
+be assumed to be the same for all subnational locations. 
 
 
 .. _nutritionoptimizationchild4.0:
