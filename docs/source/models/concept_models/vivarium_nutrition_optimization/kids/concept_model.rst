@@ -93,12 +93,12 @@ Documents that contain information specific to the overall model and the pregnan
 2.2 Waves, GBD Rounds, and age groups
 -------------------------------------
 
-We will separate the implementation of the child model into two waves of updates. 
+We will separate the implementation of the child model into waves of updates. 
 In addition to other differences detailed in the next section:
 
 - Wave I will use GBD 2019 data, with the exception of using GBD 2021 data for child growth failure risk exposure and risk effects.
 
-- Wave II will use GBD 2021 data for the entire model.
+- Wave II and later will use GBD 2021 data for the entire model.
 
 Notably, GBD 2021 uses different age groups than GBD 2019 (as summarized in the 
 tables below). Therefore, the Wave I implementation that uses data from both GBD 
@@ -156,6 +156,11 @@ in the simulation will be informed using data specific to the post neonatal age 
 
 2.3 Submodels
 -------------
+
+.. todo::
+
+  Update the below tables as needed for a "wave 3" with SQ-LNS targeting and subnational data included. 
+
 
 .. list-table:: Risk exposure subcomponents
   :header-rows: 1
@@ -322,8 +327,8 @@ in the simulation will be informed using data specific to the post neonatal age 
     - Value
     - Note
   * - Location(s)
-    - Ethiopia (ID: 179)
-    - Eventually will also add Nigeria (214) and Pakistan (164)
+    - Ethiopia (ID: 179), Nigeria (214), Pakistan (164)
+    - Most data will be modeled subnationally, see section below
   * - Number of draws
     - Same as pregnancy sim output data
     - 
@@ -461,6 +466,14 @@ Requested test runs:
     - 126/scalar
     - 
 
+Subnational Approach
+~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+
+  Add general information here on the subnational approach planned. Include: data on which location IDs to use and the percent of the population in each ID. Information on intializing sims with a country and subnational location. What data to pull subnationally vs nationally.
+
+
 .. _nutritionoptimizationchild4.0:
 
 2.5 Simulation scenarios
@@ -485,6 +498,10 @@ Wave II:
 - Total number of scenarios = (5 pregnancy :math:`\times` 19 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **288 scenarios** 
 
 - It is possible we decide to exclude scenarios 13-18 from wave II, reducing the number of child scenarios from 19 to 13 and the total number of scenarios to 66/location for **198 scenarios**
+
+.. todo::
+
+  Update the below table to include targeted SQ-LNS scenarios. Then we will need to define a strategy for running the simulation since we will have multiple SQ-LNS targeting strategies and doing 3-4 complete runs might be infeasible.
 
 .. list-table:: Child scenarios, implemented for each pregnancy scenario
   :header-rows: 1
@@ -651,6 +668,9 @@ Under these assumptions, a full run of wave I will take 3.8 cluster-hours with 4
 
 Notably, the run time of this simulation may increase as we add complexity to our model, particularly with respect to the additional risk factor of child underweight exposure and the additional cause model of malaria, which were not present in our test runs.
 
+.. todo::
+
+  Revisit this once we have completed the scenarios and model run plans for including targeted SQ-LNS. 
 
 .. _nutritionoptimizationchild3.0:
 
@@ -1369,4 +1389,52 @@ Wave II
     -  
     -  
     -  
+
+
+Wave III
+--------
+
+.. todo::
+
+  Add tables for the new runs requested to add in targeted SQ-LNS and update to GBD 2021. Below tables are placeholders for now. 
+
+.. list-table:: Model run requests
+  :header-rows: 1
+
+  * - Run
+    - Description
+    - Pregnancy scenario(s)
+    - Child scenario(s)
+    - Spec. mods
+    - Note
+  * - 14.0
+    - 
+    - 
+    - 
+    - 
+    - 
+
+
+.. list-table:: Output specifications
+  :header-rows: 1
+  :widths: 1 10 3
+
+  * - Model
+    - Outputs
+    - Overall strata
+  * - 14
+    - 
+    - 
+
+
+.. list-table:: Verification and validation tracking
+  :header-rows: 1
+  :widths: 1 5 5 
+
+  * - Model
+    - V&V plan
+    - V&V summary
+  * - 14
+    - 
+    - 
 

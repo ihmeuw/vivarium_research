@@ -34,6 +34,10 @@
 Small quantity lipid based nutrient supplements (SQ-LNS)
 ========================================================
 
+.. todo::
+
+  Update the note with the newest information added once the subnational targeted approach has been documented 
+
 .. note::
 
   This page underwent a revision in December of 2022 to reflect an a desired modeling strategy update of the :ref:`phase II acute malnutrition simulation <2020_concept_model_vivarium_ciff_sam>` in response to updated effect size data and feedback obtained from collaborators. `The pull request associated with these updates can be found here <https://github.com/ihmeuw/vivarium_research/pull/1097>`_. A summary of the associated changes to the modeling strategy includes:
@@ -221,6 +225,14 @@ SQ-LNS effects on wasting will persist until 18 months of age and effects on stu
   * - Other
     -
     -
+
+Targeted SQ-LNS
+~~~~~~~~~~~~~~~
+
+.. todo::
+
+  Add information here on what targeting criteria we plan to use (wasting prevalence, etc.). Include the rationale for each, and what subnational locations are included in each targeting approach. 
+
 
 Affected Outcomes
 +++++++++++++++++
