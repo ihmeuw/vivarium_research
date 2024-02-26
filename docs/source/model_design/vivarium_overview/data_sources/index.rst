@@ -227,6 +227,8 @@ Generally, GBD shared functions offer greater flexibility in querying GBD data t
 
 .. note::
 
-   To convert between GBD shared function entity names (such as cause_name) to the entity name in Vivarium inputs, convert the GBD shared function entity name to all lower case and replace spaces with underscores. Python code to do this is shown below:
+   Generally, to convert between GBD shared function entity names (such as cause_name) to the entity name in Vivarium inputs, convert the GBD shared function entity name to all lower case and replace spaces with underscores. Python code to do this is shown below:
 
       :code:`vivarium_inputs_entity_name = gbd_entity_name.lower().replace(' ', '_')`
+
+   There are some exceptions to this code that will require additional conversion, which can be viewed in the vivarium inputs source code found in the :code:`clean_entity_list` method, `found here <https://github.com/ihmeuw/gbd_mapping/blob/1511a4181d45ece5c146b6c5934e5d8b35774409/src/gbd_mapping_generator/util.py#L117>`_.
