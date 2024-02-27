@@ -513,29 +513,36 @@ be the same for all subnational locations.
 2.5 Simulation scenarios
 ------------------------
 
-As of June, 2023, there are a total of 5 scenarios in the pregnancy simulation, :ref:`which can be found here <nutritionoptimizationpreg4.0>`. With the exception of the baseline scenario, all of the following child scenarios should be run on the outputs for each pregnancy scenario.
+As of June, 2023, there are a total of 5 scenarios in the pregnancy simulation, :ref:`which can be found here <nutritionoptimizationpreg4.0>`. With the exception of the baseline scenario, all of the following child scenarios should be run on the outputs for each pregnancy scenario unless otherwise noted, particularly for Wave III.
 
 Wave I:
 
 - 1 location
 
-- Baseline scenario as well as scenarios 0 through 8
+- Baseline scenario as well as scenarios 0 through 7
 
-- Total number of scenarios = (5 pregnancy :math:`\times` 9 child :math:`+` 1 baseline) :math:`\times` 1 location :math:`=` **46 scenarios** 
+- Total number of scenarios = (5 pregnancy :math:`\times` 8 child :math:`+` 1 baseline) :math:`\times` 1 location :math:`=` **41 scenarios** 
 
 Wave II:
 
 - 3 locations
 
-- Baseline scenario as well as scenarios 0 through 18
+- Baseline scenario as well as scenarios 0 through 7 and 12 through 15 (12 total)
 
-- Total number of scenarios = (5 pregnancy :math:`\times` 19 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **288 scenarios** 
+- Total number of scenarios = (5 pregnancy :math:`\times` 12 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **183 scenarios** 
 
-- It is possible we decide to exclude scenarios 13-18 from wave II, reducing the number of child scenarios from 19 to 13 and the total number of scenarios to 66/location for **198 scenarios**
+Wave III:
 
-.. todo::
+- 3 locations
 
-  Update the below table to include targeted SQ-LNS scenarios. Then we will need to define a strategy for running the simulation since we will have multiple SQ-LNS targeting strategies and doing 3-4 complete runs might be infeasible.
+- Baseline scenario as well as scenarios 0 through 17 
+
+- For 1 SQLNS targeting scenario, the total number of scenarios = (5 pregnancy :math:`\times` 18 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **273 scenarios**  
+
+- For 4 SQLNS targeting scenario, the total number of scenarios = ((5 pregnancy :math:`\times` (18-6) child :math:`+` 1 baseline) :math:`\times` 3 locations) + (5 pregnancy :math:`\times` 6 targeted SQ-LNS :math:`\times` 4 targeting options :math:`\times` 3 locations) :math:`=` **543 scenarios** 
+
+- Due to logistic limitations, we will not be able to run 543 scenarios for the production runs. See the section below titled "Scenario Runs for Targeted SQ-LNS"
+
 
 .. list-table:: Child scenarios, implemented for each pregnancy scenario
   :header-rows: 1
@@ -571,72 +578,72 @@ Wave II:
     - 0
     - 1
   * - All
-    - 5: SAM and MAM
+    - 4: SAM and MAM
     - 1
     - 1
     - 0
   * - All
-    - 6: SAM and SQLNS
+    - 5: SAM and SQLNS
     - 1
     - 0
     - 1
   * - All
-    - 7: MAM and SQLNS
+    - 6: MAM and SQLNS
     - 0
     - 1
     - 1
   * - All
-    - 8: All
+    - 7: All
     - 1
     - 1
     - 1
   * - All
-    - 9: targeted SQLNS
+    - 8: targeted SQLNS
     - 0
-    - 0
-    - 1 for target group; 0 for others
-  * - All
-    - 10: targeted SQLNS and SAM
-    - 1
     - 0
     - 1 for target group; 0 for others
   * - All
-    - 11: targeted SQLNS and MAM
+    - 9: targeted SQLNS and SAM
+    - 1
+    - 0
+    - 1 for target group; 0 for others
+  * - All
+    - 10: targeted SQLNS and MAM
     - 0
     - 1
     - 1 for target group; 0 for others
   * - All
-    - 12: targeted SQLNS and SAM and MAM
+    - 11: targeted SQLNS and SAM and MAM
     - 1
     - 1
     - 1 for target group; 0 for others
   * - All
-    - 13: targeted MAM
+    - 12: targeted MAM
     - 0
     - 1 for target group; 0 for others
     - 0
   * - All
-    - 14: SAM and targeted MAM
+    - 13: SAM and targeted MAM
     - 1
     - 1 for target group; 0 for others
     - 0
   * - All
-    - 15: SQLNS and targeted MAM
+    - 14: SQLNS and targeted MAM
     - 0
     - 1 for target group; 0 for others
     - 1
   * - All
-    - 16: SQLNS and SAM and targeted MAM
+    - 15: SQLNS and SAM and targeted MAM
     - 1
     - 1 for target group; 0 for others
     - 1
   * - All
-    - 17: targeted MAM and targeted SQLNS
+    - 16: targeted MAM and targeted SQLNS
     - 0 
     - 1 for target group; 0 for others
     - 1 for target group; 0 for others
   * - All
-    - 18: SAM plus targeted MAM and targeted SQLNS
+    - 17: SAM plus targeted MAM and targeted SQLNS
     - 1
     - 1 for target group; 0 for others
     - 1 for target group; 0 for others
@@ -654,6 +661,40 @@ Baseline values for :ref:`wasting treatment <intervention_wasting_tx_combined_pr
 .. note::
 
   :math:`E_\text{SAM}` and :math:`E_\text{MAM}` parameter values will **not** vary by scenario in this model.
+
+
+Scenario Runs for Targeted SQ-LNS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Due to logistic limitations, running 543 is likely unfeasible. Given this, there are two 
+main options for limiting the scenarios needed. First, we can limit what antenatal 
+scenarios and child scenarios are run together. Or second, we can limit what child 
+products are run simultaneously. 
+
+From our prior work on this model, we have seen that the difference between antenatal 
+products and child products is much more significant that between different 
+child product combinations. For this reason, we think it makes more sense to 
+limit the pregnancy scenarios included in all child scenario runs. 
+
+We will test this implement plan with the following steps: 
+
+1. Do a run of all child scenarios for a single pregnancy scenario and determine the optimal combination of child products. Note that yes, this could change based on the antenatal scenario and this is a limitation. 
+2. For the optimal child scenario indentified, run all pregnancy scenarios. Ensure that in all cases, MMS and BEP are both scaled up prior to any child products. If this is not true, other scenarios might be needed, such as zero coverage of antenatal products or baseline. 
+3. Assuming the assumption that MMS and BEP always scale up first holds, run the child scenarios with only the MMS+BEP pregnancy scenario. Another option would be to run the child scenarios for both MMS alone and MMS+BEP. 
+
+Running for both MMS alone and MMS+BEP will create: ((2 pregnancy :math:`\times` (18-6) child :math:`+` 1 baseline) :math:`\times` 3 locations) + (2 pregnancy :math:`\times` 6 targeted SQ-LNS :math:`\times` 4 targeting options :math:`\times` 3 locations) :math:`=` **219 scenarios**
+
+Or for only MMS+BEP we will need: ((1 pregnancy :math:`\times` (18-6) child :math:`+` 1 baseline) :math:`\times` 3 locations) + (2 pregnancy :math:`\times` 6 targeted SQ-LNS :math:`\times` 4 targeting options :math:`\times` 3 locations) :math:`=` **111 scenarios** 
+
+Either 219 or 111 scenarios are similar to what was achieved in Wave II, and seem feasible here. 
+
+While this approach can be successfully used to create all outcome graphs and 
+information we have presented thus far, it might limit our future work. We 
+would no longer to able to create an estimate for any combination of coverage. 
+That means previously discussed options like user inputted coverage values would be challenging 
+or impossible. If this becomes of greater interest, we might consider pursuing 
+additional scenario runs. 
+
 
 2.6 Outputs
 ------------
