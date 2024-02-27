@@ -732,12 +732,12 @@ All possible observers and their default stratifications are outlined below. Req
 
 Since this project requires running across many more scenarios than typical vivarium simulations, we ran some back-of-the-envelope calculations on the magnitude of computing resources to run all scenarios across all projects. The following assumptions went into these calculations:
 
-- 46 scenarios in wave I (no targeting of SQLNS or MAM tx and 1 location) and 288 scenraios in wave II (including targeting of SQLNS and MAM treatment as well AND 3 locations)
+- 46 scenarios in wave I (no targeting of SQLNS or MAM tx and 1 location), 183 scenraios in wave II (including targeting of MAM treatment as well AND 3 locations), and either 111 or 219 scenarios in wave III (adding targeted SQ-LNS).
 - 4 day timestep in the child simulation if no "timestep inrease strategy" (such as variable timesteps or YLD/YLL-only modeling strategy) is implemented and 28 day timestep if we do implement one of these strategies
 - Simulation takes 32 seconds per timestep. This assumption was informed by the "emulator test runs" of the wasting paper simulation that output only the necessary measures with no stratifications by year, age, or sex
 - Assume 15,000 threads available on all.q
 
-Under these assumptions, a full run of wave I will take 3.8 cluster-hours with 4-day timesteps and 0.6 cluster-hours with 28-day timesteps. A full run of wave II will take 23.5 cluster-hours with 4-day timesteps and 3.5 cluster-hours with 28-day timesteps.
+Under these assumptions, a full run of wave I will take 3.8 cluster-hours with 4-day timesteps and 0.6 cluster-hours with 28-day timesteps. A full run of wave II will take 15.0 cluster-hours with 4-day timesteps and 2.2 cluster-hours with 28-day timesteps. A full run of wave III assuming the higher 219 scenarios will take 17.9 cluster-hours with 4-day timesteps and 2.7 cluster-hours with 28-day timesteps.
 
 :download:`Calculations of these estimated resource requirements can be found in this excel file <timestep scaling.xlsx>`
 
@@ -745,7 +745,7 @@ Notably, the run time of this simulation may increase as we add complexity to ou
 
 .. todo::
 
-  Revisit this once we have completed the scenarios and model run plans for including targeted SQ-LNS. 
+  Added wave III information. Should still update based on wave II production runs to include variable timestep and other complexity based changes. 
 
 .. _nutritionoptimizationchild3.0:
 
