@@ -237,12 +237,8 @@ Assumptions:
     - `Emulator version 5 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/emulator/emulator_10_04_2023.ipynb>`_ and `py files version 5 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/emulator/emulator_functions_10_04_23.py>`_
     - 
   * - 7
-    - Add in stillbirths parameter 
-    - 
-    - 
-  * - 8
-    - Adjusting to fit final model outputs 
-    - 
+    - Add in stillbirths, updating to wave 2 data, multiple locations, improved figures
+    - `Emulator version 7 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/a51363fa1703fec3645f9a9cde84a878ad7aa653/emulator/emulator_2_27_2024.ipynb>`_ and `py files for version 7 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/a51363fa1703fec3645f9a9cde84a878ad7aa653/emulator/emulator_functions_2_27_24.py>`_.
     - 
 
 
