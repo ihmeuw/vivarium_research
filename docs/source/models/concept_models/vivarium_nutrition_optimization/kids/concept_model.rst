@@ -499,10 +499,13 @@ geographies. We will also regenerate data for all custom made datasets,
 such as wasting transitions, PAFs, and CGF correlation, at the subnational 
 level. 
 
-Wasting coverage and efficacy data will continue to be national only. Also, 
-for all scenarios other that targeted SQ-LNS, roll out of interventions will 
-be the same for all subnational locations. Efficacy of interventions will also 
-be assumed to be the same for all subnational locations. 
+SAM and MAM treatmet coverage and efficacy data will continue to be national only. Also, 
+for all scenarios other than targeted SQ-LNS, roll out of interventions will 
+be the same for all subnational locations.
+
+.. todo::
+
+  Revisit this paragraph once we have decided about SQ-LNS effect modification. Add either that it is national or subnational. 
 
 
 .. _nutritionoptimizationchild4.0:
