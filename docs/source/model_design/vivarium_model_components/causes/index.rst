@@ -20,7 +20,10 @@ Unsafe water would not fit into the cause model
 paradigm either---it is a cause of
 :ref:`diarrheal disease <diarrheal_diseases>`, but it is a risk factor in the
 GBD taxonomy.  :ref:`Latent tuberculosis <2017_cause_latent_tb>` infection
-(LTBI) does fit into this chapter, but just barely.
+(LTBI) does fit into this chapter, but just barely. :ref:`Impairments <impairments>` 
+have additional, targeted information on a separate page. If you're not 
+sure what an impairment is or how it might be different than a cause, 
+check out this :ref: `page explaining causes, impairments, and related GBD terms. <GBD_disease_health>` 
 
 
 .. contents::
