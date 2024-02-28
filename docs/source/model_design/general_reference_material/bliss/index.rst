@@ -746,7 +746,10 @@ be exceptions to these rules, depending on context. For example, in the above se
 data sources which report 'sex'. One source defines 'sex' as sex assigned at birth, and the 
 other defines 'sex' as sex identity. Depending on how central the differences between these 
 dimensions are to your research, it may be sufficient to refer to these collectively as 
-'sex'. 
+'sex'. It's worth noting, however, that based on today's standards of sex and gender 
+reporting, having any data source specify which dimension of sex was measured can be rare.
+This demonstrates how improving our data reporting standards will allow researchers to more 
+easily use language that accurately reflects the dimensions of sex and gender within their work [Rioux_2022].
 
 4.5.1 Example 1: Pregnancy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
