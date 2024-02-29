@@ -571,12 +571,28 @@ Specific outputs for specific models are specified in the following section.
     - Same as 9.2
     - 
   * - 11.0
-    - GBD 2021 update?
+    - GBD 2021 update
     - Baseline
-    - None
+    - 400,000 population size per draw, 20 draws
+    - * Deaths, YLLs
+      * YLDs, stratified by pregnancy state
+      * Maternal disorder incident counts, stratified by anemia state
+      * Maternal hemorrhage incident counts, stratified by anemia state
+      * Anemia state person time, stratified by pregnancy state 
+      * Pregnancy state person time, stratified by birth outcome
+      * Pregnancy state transition counts, stratified by birth outcome
+      * Counts of birth outcomes
+      * Intervention counts
+    - Same as 9.2
+    - Should be the same as the adding locations test runs
+  * - 12.0
+    - GBD 2021 production runs
+    - Baseline
+    - Same as 9.2
+    - Same as 9.2 but including count of live births and still births 
+    - Same as 9.2
     - 
-    - 
-    - This model may be inserted earlier in the timeline, depending on when it is ready
+
 
 .. note::
 
@@ -682,6 +698,11 @@ Specific outputs for specific models are specified in the following section.
       * Check that anemia, maternal disorders and deaths match with target values 
       * Check that different scenarios visually appear to separated as expected 
     - All looks good! Ready to move to production runs. `Nigeria notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_10.0_nigeria_maternal_disorders_anemia.ipynb>`_ and `Pakistan notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_10.0_pakistan_maternal_disorders_anemia.ipynb>`_. Note for Pakistan notebook that the parent ID used was 159 which was different than expected. We are investigating this but think it is an issue with target data generation NOT with the model. 
+  * - 11.0
+    - * Check that model generally still looks as expected and matches GBD 2021 data
+      * Check that anemia, maternal disorders and deaths match with target values
+      * Check that different scenarios visually appear to separated as expected
+    - 
 
 
 .. list-table:: Outstanding V&V issues
