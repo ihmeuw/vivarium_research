@@ -490,11 +490,24 @@ assigned a subnational location within their country. Here is the data
 for the `percent of simulants assigned to each subnational location by sex <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/ff08145109e1434669f08afe702ffc5e3d45a6c2/data_prep/sqlns_subnational/subnational_percents.csv>`_. Note that all 3 countries are included 
 in this csv file. 
 
+Since LBWSG is done nationally, there is a risk in assigning locations 
+at birth that they will be incorrect by 6 months of age. Subnational 
+locations with higher LBWSG should have more deaths, which will not be captured here. 
+However, after reviewing the changes in population distribution between 
+birth and 6 months in GBD data, we found this impact to be very minimal, and 
+therefore believe this is a reasonable limitation. Additionally, 
+overall mortality will still be at a subnational level, further 
+mitigating these effects. 
+
 Data Inputs: 
 ^^^^^^^^^^^^
 
-Once a simulant is assigned to a subnational location, all GBD data used 
-will be subnational specific data. Artifacts will be made for all subnational 
+Once a simulant is assigned to a subnational location, most GBD data used 
+will be subnational specific data. LBWSG, which comes as an output from the 
+pregnancy sim, will be national. Similarly, the PAFs for LBWSG will also 
+be national. All other GBD data will be at the subnational level.
+
+Artifacts will be made for all subnational 
 geographies. We will also regenerate data for all custom made datasets, 
 such as wasting transitions, PAFs, and CGF correlation, at the subnational 
 level. 
