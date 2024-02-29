@@ -513,7 +513,7 @@ be the same for all subnational locations.
 2.5 Simulation scenarios
 ------------------------
 
-As of June, 2023, there are a total of 5 scenarios in the pregnancy simulation, :ref:`which can be found here <nutritionoptimizationpreg4.0>`. With the exception of the baseline scenario, all of the following child scenarios should be run on the outputs for each pregnancy scenario unless otherwise noted, particularly for Wave III.
+As of June, 2023, there are a total of 4 scenarios in the pregnancy simulation, :ref:`which can be found here <nutritionoptimizationpreg4.0>`. With the exception of the baseline scenario, all of the following child scenarios should be run on the outputs for each pregnancy scenario unless otherwise noted, particularly for Wave III.
 
 Wave I:
 
@@ -521,7 +521,7 @@ Wave I:
 
 - Baseline scenario as well as scenarios 0 through 7
 
-- Total number of scenarios = (5 pregnancy :math:`\times` 8 child :math:`+` 1 baseline) :math:`\times` 1 location :math:`=` **41 scenarios** 
+- Total number of scenarios = (4 pregnancy :math:`\times` 8 child :math:`+` 1 baseline) :math:`\times` 1 location :math:`=` **33 scenarios** 
 
 Wave II:
 
@@ -529,7 +529,7 @@ Wave II:
 
 - Baseline scenario as well as scenarios 0 through 7 and 12 through 15 (12 total)
 
-- Total number of scenarios = (5 pregnancy :math:`\times` 12 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **183 scenarios** 
+- Total number of scenarios = (4 pregnancy :math:`\times` 12 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **147 scenarios** 
 
 Wave III:
 
@@ -537,11 +537,9 @@ Wave III:
 
 - Baseline scenario as well as scenarios 0 through 17 
 
-- For 1 SQLNS targeting scenario, the total number of scenarios = (5 pregnancy :math:`\times` 18 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **273 scenarios**  
+- For 1 SQLNS targeting scenario, the total number of scenarios = (4 pregnancy :math:`\times` 18 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **219 scenarios**  
 
-- For 4 SQLNS targeting scenario, the total number of scenarios = ((5 pregnancy :math:`\times` (18-6) child :math:`+` 1 baseline) :math:`\times` 3 locations) + (5 pregnancy :math:`\times` 6 targeted SQ-LNS :math:`\times` 4 targeting options :math:`\times` 3 locations) :math:`=` **543 scenarios** 
-
-- Due to logistic limitations, we will not be able to run 543 scenarios for the production runs. See the section below titled "Scenario Runs for Targeted SQ-LNS"
+- For 4 SQLNS targeting scenario, the total number of scenarios = ((4 pregnancy :math:`\times` (18-6) child :math:`+` 1 baseline) :math:`\times` 3 locations) + (4 pregnancy :math:`\times` 6 targeted SQ-LNS :math:`\times` 4 targeting options :math:`\times` 3 locations) :math:`=` **435 scenarios** 
 
 
 .. list-table:: Child scenarios, implemented for each pregnancy scenario
@@ -666,35 +664,23 @@ Baseline values for :ref:`wasting treatment <intervention_wasting_tx_combined_pr
 Scenario Runs for Targeted SQ-LNS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Due to logistic limitations, running 543 is likely unfeasible. Given this, there are two 
-main options for limiting the scenarios needed. First, we can limit what antenatal 
-scenarios and child scenarios are run together. Or second, we can limit what child 
-products are run simultaneously. 
+As we expand the number of scenarios, computational feasibility becomes an increasing 
+consideration. The team is exploring several options for how to address this: 
 
-From our prior work on this model, we have seen that the difference between antenatal 
-products and child products is much more significant that between different 
-child product combinations. For this reason, we think it makes more sense to 
-limit the pregnancy scenarios included in all child scenario runs. 
+#. Run all scenarios with full draws and seeds, simply plan ahead better for cluster and run time limitations.
+#. Make the simulation faster through variable time steps or other approaches.
+#. Run with fewer draws or seeds. One version of this would be to use the mean draw instead of individual draws.
+#. Limit the scenarios by not running all child scenarios on all pregnancy scenarios.
 
-We will test this implement plan with the following steps: 
+We will continue to analyze options to see if options 1 or 2 are possible. If not, 
+some combination of 3 and 4 will likely work. For example, we could use the mean 
+draw for the full scenario space, and use a more robust set of draws for a 
+"targeted space" where we know the true optimization will occur. This plan would 
+allow us to run the model relatively quickly, while providing robust draw-level 
+results where we need them most.
 
-1. Do a run of all child scenarios for a single pregnancy scenario and determine the optimal combination of child products. Note that yes, this could change based on the antenatal scenario and this is a limitation. 
-2. For the optimal child scenario indentified, run all pregnancy scenarios. Ensure that in all cases, MMS and BEP are both scaled up prior to any child products. If this is not true, other scenarios might be needed, such as zero coverage of antenatal products or baseline. 
-3. Assuming the assumption that MMS and BEP always scale up first holds, run the child scenarios with only the MMS+BEP pregnancy scenario. Another option would be to run the child scenarios for both MMS alone and MMS+BEP. 
-
-Running for both MMS alone and MMS+BEP will create: ((2 pregnancy :math:`\times` (18-6) child :math:`+` 1 baseline) :math:`\times` 3 locations) + (2 pregnancy :math:`\times` 6 targeted SQ-LNS :math:`\times` 4 targeting options :math:`\times` 3 locations) :math:`=` **219 scenarios**
-
-Or for only MMS+BEP we will need: ((1 pregnancy :math:`\times` (18-6) child :math:`+` 1 baseline) :math:`\times` 3 locations) + (2 pregnancy :math:`\times` 6 targeted SQ-LNS :math:`\times` 4 targeting options :math:`\times` 3 locations) :math:`=` **111 scenarios** 
-
-Either 219 or 111 scenarios are similar to what was achieved in Wave II, and seem feasible here. 
-
-While this approach can be successfully used to create all outcome graphs and 
-information we have presented thus far, it might limit our future work. We 
-would no longer to able to create an estimate for any combination of coverage. 
-That means previously discussed options like user inputted coverage values would be challenging 
-or impossible. If this becomes of greater interest, we might consider pursuing 
-additional scenario runs. 
-
+We will continue to investigate this and update the model specifications tables 
+with the draw, seed, scenario combinations for each run. 
 
 2.6 Outputs
 ------------
