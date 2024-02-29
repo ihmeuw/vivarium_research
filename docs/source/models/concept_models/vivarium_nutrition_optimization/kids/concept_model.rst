@@ -1407,8 +1407,8 @@ Wave III
     - Update to GBD 2021 data 
     - Baseline
     - Baseline
-    - 
-    - 
+    - Ethiopia location ONLY
+    - Should use 2021 GBD pregnancy model
   * - 15.0
     - Change child data to subnational
     - Baseline
@@ -1416,32 +1416,26 @@ Wave III
     - 
     - 
   * - 16.0
-    - Add targeted SQ-LNS intervention for wasting prevalence > 10%
+    - Add SQ-LNS intervention targeting for WAZ > 20%
     - Baseline
     - 8
     - 
     - Targeted SQ-LNS only
   * - 17.0
-    - Add other targeted SQ-LNS criteria
+    - Add additional SQ-LNS geographic targeting criteria
     - Baseline
     - 8
     - 
     - Targeted SQ-LNS only
   * - 18.0
-    - Determining scenarios needed part 1
+    - Add targeted SQ-LNS effect modification
     - Baseline
-    - All
+    - 8
     - 
-    - 
+    - Targeted SQ-LNS only
   * - 19.0
-    - Determining scenarios needed part 2
-    - All
-    - TBD - best child scenario from run 18
-    - 
-    - 
-  * - 20.0
     - Production runs
-    - TBD, likely only MMS alone and MMS+BEP
+    - All
     - All
     - 
     - 
@@ -1459,8 +1453,10 @@ Wave III
       2. YLDs (cause-specific)
       3. Cause state person time
       4. Cause state transition counts
-      5. Stunting state person time, stratified by antenatal intervention coverage
-      6. Wasting state person time, stratified by antenatal intervention coverage
+      5. Stunting state person time
+      6. Wasting state person time
+      7. Underweight state person time
+      8. Wasting transition counts 
     - * Age group
       * Sex
   * - 15.0
@@ -1468,8 +1464,10 @@ Wave III
       2. YLDs (cause-specific)
       3. Cause state person time
       4. Cause state transition counts
-      5. Stunting state person time, stratified by antenatal intervention coverage
-      6. Wasting state person time, stratified by antenatal intervention coverage
+      5. Stunting state person time
+      6. Wasting state person time
+      7. Underweight state person time
+      8. Wasting transition counts 
     - * Age group
       * Sex
       * Subnational location
@@ -1486,27 +1484,20 @@ Wave III
       3. Stunting state person time, stratified by SQ-LNS treatment coverage
     - * Age group
       * Sex
-      * Subnational location
+      * Targeted SQ-LNS location vs not
   * - 18.0
-    - 1. Deaths and YLLs (non-cause-specific)
-      2. YLDs (all-cause observer only)
-      3. Count of incident SAM cases stratified by SAM treatment coverage
-      4. Count of incident MAM cases stratified by MAM treatment coverage
-      5. Stunting state person time stratified by SQ-LNS utilization
-    - Age strata of 0-6 months, 6-18 months, 18-60 months
+    - 1. Deaths
+      2. Wasting state person time, stratified by SQ-LNS treatment coverage
+      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - * Age group
+      * Sex
+      * Targeted SQ-LNS location vs not
   * - 19.0
     - 1. Deaths and YLLs (non-cause-specific)
       2. YLDs (all-cause observer only)
       3. Count of incident SAM cases stratified by SAM treatment coverage
       4. Count of incident MAM cases stratified by MAM treatment coverage
-      5. Stunting state person time stratified by SQ-LNS utilization
-    - Age strata of 0-6 months, 6-18 months, 18-60 months
-  * - 20.0
-    - 1. Deaths and YLLs (non-cause-specific)
-      2. YLDs (all-cause observer only)
-      3. Count of incident SAM cases stratified by SAM treatment coverage
-      4. Count of incident MAM cases stratified by MAM treatment coverage
-      5. Stunting state person time stratified by SQ-LNS utilization
+      5. Stunting state person time stratified by SQ-LNS coverage
     - Age strata of 0-6 months, 6-18 months, 18-60 months
 
 
@@ -1537,17 +1528,16 @@ Wave III
       * Verify other model components look as expected
     - 
   * - 17.0
-    - * Verify SQ-LNS is correctly targeted based on subnational location and criteria
+    - * Verify SQ-LNS targeting matches expected population
       * Verify stunting, wasting vary with SQ-LNS exposure
       * Verify other model components look as expected
     - 
   * - 18.0
-    - * Test for best child intervention
+    - * Verify SQ-LNS effect modification changes as expected with targeting
+      * Verify stunting, wasting vary with SQ-LNS exposure
+      * Verify other model components look as expected
     - 
   * - 19.0
-    - * Confirm that for the optimal child intervention, MMS alone or MMS+BEP are still always scaled up first
-    - 
-  * - 20.0
     - * Confirm that results for production runs match expected outputs
     - 
 
