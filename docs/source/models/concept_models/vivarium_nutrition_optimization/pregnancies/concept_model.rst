@@ -702,6 +702,7 @@ Specific outputs for specific models are specified in the following section.
     - * Check that model generally still looks as expected and matches GBD 2021 data
       * Check that anemia, maternal disorders and deaths match with target values
       * Check that different scenarios visually appear to separated as expected
+      * Check that birth outcome count observer is functioning as expected
     - 
 
 
