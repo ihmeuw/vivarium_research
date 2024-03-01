@@ -1491,7 +1491,7 @@ Wave III
       3. Stunting state person time, stratified by SQ-LNS treatment coverage
     - * Age group
       * Sex
-      * Targeted SQ-LNS location vs not
+      * Subnational location
   * - 19.0
     - 1. Deaths and YLLs (non-cause-specific)
       2. YLDs (all-cause observer only)
