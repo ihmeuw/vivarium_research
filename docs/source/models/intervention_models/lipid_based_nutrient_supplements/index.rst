@@ -237,6 +237,11 @@ Targeted SQ-LNS
 Affected Outcomes
 +++++++++++++++++
 
+.. todo::
+
+  Effect size of SQ-LNS has been shown to change based on the prior conditions of a location. Therefore in the new targeted SQ-LNS, we would like to re-evaluate SQ-LNS intervention effects, to see if they should be different between targeted and non-targeted areas. 
+
+
 Wasting
 ~~~~~~~
 

@@ -96,9 +96,9 @@ Documents that contain information specific to the overall model and the pregnan
 We will separate the implementation of the child model into waves of updates. 
 In addition to other differences detailed in the next section:
 
-- Wave I will use GBD 2019 data, with the exception of using GBD 2021 data for child growth failure risk exposure and risk effects.
+- Wave I and II will use GBD 2019 data, with the exception of using GBD 2021 data for child growth failure risk exposure and risk effects.
 
-- Wave II and later will use GBD 2021 data for the entire model.
+- Wave III and later will use GBD 2021 data for the entire model.
 
 Notably, GBD 2021 uses different age groups than GBD 2019 (as summarized in the 
 tables below). Therefore, the Wave I implementation that uses data from both GBD 
