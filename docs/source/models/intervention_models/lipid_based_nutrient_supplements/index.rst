@@ -229,9 +229,48 @@ SQ-LNS effects on wasting will persist until 18 months of age and effects on stu
 Targeted SQ-LNS
 ~~~~~~~~~~~~~~~
 
+The WHO has issued guidelines on the use and targeting of SQ-LNS, 
+which are available here: `WHO guidelines <https://app.magicapp.org/#/guideline/7352/section/133966>`_. 
+These guidelines state that "in areas of or during periods of 
+high food insecurity" providing SQ-LNS or similar food supplementation 
+might be appropriate. They state that targeting to a geographic region 
+or to specific children or households might be appropriate. Additionally 
+they recommend using the food security metric to determine targeting.
+
+However, these guidelines are quite vague. This 
+is a relatively new intervention and so the best metric for targeting 
+is still being debated. Simulation is especially well suited for these 
+types of questions, and so we will try several different SQ-LNS targeting 
+criteria.
+
+For all criteria, a csv file with the subnational locations and whether or 
+not they are included in targeting will be provided.
+
+.. list-table:: SQ-LNS Targeting Criteria
+  :widths: 5 15 15 15
+  :header-rows: 1
+
+  * - Targeting Number 
+    - Targeting Criteria
+    - Description
+    - Notes
+  * - 1 
+    - WAZ
+    - WAZ based threshold that results in about 20% of the population being targeted. Also need to determine age group for WAZ prevalence (all kids under 5, 6-59 months, or 6-24 months)
+    - See note below
+
+.. note::
+
+  The WHO guidelines included above state that targeting should be based off of food security, more specifically it should be targeted to those who are severely food insecure. Based on `FAOSTAT data <https://www.fao.org/faostat/en/#data/FS>`_, this would be when approximately 20% of the population is targeted as severaly food insecure. We are using underweight as a proxy for severe food insecurity as it is already in our model, and it is a better representation of concurrent stunting and wasting - which is more dangerous that stunting or wasting alone.
+
+  Additionally, Indi Trehan recommended using underweight as a metric. Weight is more commonly tracked in practice than height, making this data more available than stunting or wasting.
+
+
 .. todo::
 
-  Add information here on what targeting criteria we plan to use (wasting prevalence, etc.). Include the rationale for each, and what subnational locations are included in each targeting approach. 
+  Add additional targeting criteria we plan to use. 
+
+  Create csv file indicating which subnational locations are included for each targeting criteria.
 
 
 Affected Outcomes
@@ -239,7 +278,9 @@ Affected Outcomes
 
 .. todo::
 
-  Effect size of SQ-LNS has been shown to change based on the prior conditions of a location. Therefore in the new targeted SQ-LNS, we would like to re-evaluate SQ-LNS intervention effects, to see if they should be different between targeted and non-targeted areas. 
+  Effect size of SQ-LNS has been shown to change based on stunting or wasting prevalence in a location [Dewey-et-al-2022]_. Therefore, we would like to include two SQ-LNS effect sizes - based on if the location surpasses either a stunting or wasting prevalence threshold. This would be separate from targeting. It is worth noting that approximately 95% of the population in Ethiopia would qualify for the higher effect sizes.
+
+  However, there are some data limitations from current literature. The study we hope to use only reports on changes to the severe category [Dewey-et-al-2022]_. We will likely need data for all categories in order to implement this correctly. We will work with the UC Davis team to try and gather this information and see how feasible this effect modification is.
 
 
 Wasting
