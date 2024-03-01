@@ -744,7 +744,7 @@ Again, these guidelines should be taken on a case-by-case basis, and there will 
 be exceptions to these rules, depending on context. For example, in the above section
 `4.5 Result indicator abbreviation`_, we provided an example where a researcher has two
 data sources which report 'sex'. One source defines 'sex' as sex assigned at birth, and the 
-other defines 'sex' as sex identity. Depending on how central the differences between these 
+other defines 'sex' as self-reported sex. Depending on how central the differences between these 
 dimensions are to your research, it may be sufficient to refer to these collectively as 
 'sex'. It's worth noting, however, that based on today's standards of sex and gender 
 reporting, having any data source specify which dimension of sex was measured can be rare.
