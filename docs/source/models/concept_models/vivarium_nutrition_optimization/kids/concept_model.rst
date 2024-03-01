@@ -530,29 +530,38 @@ be the same for all subnational locations.
 2.5 Simulation scenarios
 ------------------------
 
-As of June, 2023, there are a total of 5 scenarios in the pregnancy simulation, :ref:`which can be found here <nutritionoptimizationpreg4.0>`. With the exception of the baseline scenario, all of the following child scenarios should be run on the outputs for each pregnancy scenario.
+As of June, 2023, there are a total of 4 scenarios in the pregnancy simulation, :ref:`which can be found here <nutritionoptimizationpreg4.0>`. With the exception of the baseline scenario, all of the following child scenarios should be run on the outputs for each pregnancy scenario unless otherwise noted, particularly for Wave III.
 
 Wave I:
 
 - 1 location
 
-- Baseline scenario as well as scenarios 0 through 8
+- Baseline scenario as well as scenarios 0 through 7
 
-- Total number of scenarios = (5 pregnancy :math:`\times` 9 child :math:`+` 1 baseline) :math:`\times` 1 location :math:`=` **46 scenarios** 
+- Total number of scenarios = (4 pregnancy :math:`\times` 8 child :math:`+` 1 baseline) :math:`\times` 1 location :math:`=` **33 scenarios** 
 
 Wave II:
 
 - 3 locations
 
-- Baseline scenario as well as scenarios 0 through 18
+- Baseline scenario as well as scenarios 0 through 7 and 12 through 15 (12 total)
 
-- Total number of scenarios = (5 pregnancy :math:`\times` 19 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **288 scenarios** 
+- Total number of scenarios = (4 pregnancy :math:`\times` 12 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **147 scenarios** 
 
-- It is possible we decide to exclude scenarios 13-18 from wave II, reducing the number of child scenarios from 19 to 13 and the total number of scenarios to 66/location for **198 scenarios**
+Wave III:
 
-.. todo::
+- 3 locations
 
-  Update the below table to include targeted SQ-LNS scenarios. Then we will need to define a strategy for running the simulation since we will have multiple SQ-LNS targeting strategies and doing 3-4 complete runs might be infeasible.
+- Baseline scenario as well as scenarios 0 through 17 
+
+- For 1 SQLNS targeting scenario, the total number of scenarios = (4 pregnancy :math:`\times` 18 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **219 scenarios**  
+
+- For 4 SQLNS targeting scenario, the total number of scenarios = ((4 pregnancy :math:`\times` (18-6) child :math:`+` 1 baseline) :math:`\times` 3 locations) + (4 pregnancy :math:`\times` 6 targeted SQ-LNS :math:`\times` 4 targeting options :math:`\times` 3 locations) :math:`=` **435 scenarios** 
+
+.. note::
+
+  A prior version of this table had erroreously skipped '4'. Therefore in older docs, you might see scenario '5' listed as 'SAM and MAM' instead of 'SAM and SQLNS' as it is here. Similarly for all later scenarios they might be off by 1 number.
+
 
 .. list-table:: Child scenarios, implemented for each pregnancy scenario
   :header-rows: 1
@@ -588,72 +597,72 @@ Wave II:
     - 0
     - 1
   * - All
-    - 5: SAM and MAM
+    - 4: SAM and MAM
     - 1
     - 1
     - 0
   * - All
-    - 6: SAM and SQLNS
+    - 5: SAM and SQLNS
     - 1
     - 0
     - 1
   * - All
-    - 7: MAM and SQLNS
+    - 6: MAM and SQLNS
     - 0
     - 1
     - 1
   * - All
-    - 8: All
+    - 7: All
     - 1
     - 1
     - 1
   * - All
-    - 9: targeted SQLNS
+    - 8: targeted SQLNS
     - 0
-    - 0
-    - 1 for target group; 0 for others
-  * - All
-    - 10: targeted SQLNS and SAM
-    - 1
     - 0
     - 1 for target group; 0 for others
   * - All
-    - 11: targeted SQLNS and MAM
+    - 9: targeted SQLNS and SAM
+    - 1
+    - 0
+    - 1 for target group; 0 for others
+  * - All
+    - 10: targeted SQLNS and MAM
     - 0
     - 1
     - 1 for target group; 0 for others
   * - All
-    - 12: targeted SQLNS and SAM and MAM
+    - 11: targeted SQLNS and SAM and MAM
     - 1
     - 1
     - 1 for target group; 0 for others
   * - All
-    - 13: targeted MAM
+    - 12: targeted MAM
     - 0
     - 1 for target group; 0 for others
     - 0
   * - All
-    - 14: SAM and targeted MAM
+    - 13: SAM and targeted MAM
     - 1
     - 1 for target group; 0 for others
     - 0
   * - All
-    - 15: SQLNS and targeted MAM
+    - 14: SQLNS and targeted MAM
     - 0
     - 1 for target group; 0 for others
     - 1
   * - All
-    - 16: SQLNS and SAM and targeted MAM
+    - 15: SQLNS and SAM and targeted MAM
     - 1
     - 1 for target group; 0 for others
     - 1
   * - All
-    - 17: targeted MAM and targeted SQLNS
+    - 16: targeted MAM and targeted SQLNS
     - 0 
     - 1 for target group; 0 for others
     - 1 for target group; 0 for others
   * - All
-    - 18: SAM plus targeted MAM and targeted SQLNS
+    - 17: SAM plus targeted MAM and targeted SQLNS
     - 1
     - 1 for target group; 0 for others
     - 1 for target group; 0 for others
@@ -671,6 +680,28 @@ Baseline values for :ref:`wasting treatment <intervention_wasting_tx_combined_pr
 .. note::
 
   :math:`E_\text{SAM}` and :math:`E_\text{MAM}` parameter values will **not** vary by scenario in this model.
+
+
+Scenario Runs for Targeted SQ-LNS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As we expand the number of scenarios, computational feasibility becomes an increasing 
+consideration. The team is exploring several options for how to address this: 
+
+#. Run all scenarios with full draws and seeds, simply plan ahead better for cluster and run time limitations.
+#. Make the simulation faster through variable time steps or other approaches.
+#. Run with fewer draws or seeds. One version of this would be to use the mean draw instead of individual draws.
+#. Limit the scenarios by not running all child scenarios on all pregnancy scenarios.
+
+We will continue to analyze options to see if options 1 or 2 are possible. If not, 
+some combination of 3 and 4 will likely work. For example, we could use the mean 
+draw for the full scenario space, and use a more robust set of draws for a 
+"targeted space" where we know the true optimization will occur. This plan would 
+allow us to run the model relatively quickly, while providing robust draw-level 
+results where we need them most.
+
+We will continue to investigate this and update the model specifications tables 
+with the draw, seed, scenario combinations for each run. 
 
 2.6 Outputs
 ------------
@@ -708,12 +739,12 @@ All possible observers and their default stratifications are outlined below. Req
 
 Since this project requires running across many more scenarios than typical vivarium simulations, we ran some back-of-the-envelope calculations on the magnitude of computing resources to run all scenarios across all projects. The following assumptions went into these calculations:
 
-- 46 scenarios in wave I (no targeting of SQLNS or MAM tx and 1 location) and 288 scenraios in wave II (including targeting of SQLNS and MAM treatment as well AND 3 locations)
+- 46 scenarios in wave I (no targeting of SQLNS or MAM tx and 1 location), 183 scenraios in wave II (including targeting of MAM treatment as well AND 3 locations), and 435 scenarios in wave III (adding targeted SQ-LNS).
 - 4 day timestep in the child simulation if no "timestep inrease strategy" (such as variable timesteps or YLD/YLL-only modeling strategy) is implemented and 28 day timestep if we do implement one of these strategies
 - Simulation takes 32 seconds per timestep. This assumption was informed by the "emulator test runs" of the wasting paper simulation that output only the necessary measures with no stratifications by year, age, or sex
 - Assume 15,000 threads available on all.q
 
-Under these assumptions, a full run of wave I will take 3.8 cluster-hours with 4-day timesteps and 0.6 cluster-hours with 28-day timesteps. A full run of wave II will take 23.5 cluster-hours with 4-day timesteps and 3.5 cluster-hours with 28-day timesteps.
+Under these assumptions, a full run of wave I will take 3.8 cluster-hours with 4-day timesteps and 0.6 cluster-hours with 28-day timesteps. A full run of wave II will take 15.0 cluster-hours with 4-day timesteps and 2.2 cluster-hours with 28-day timesteps. A full run of wave III assuming the higher 435 scenarios will take 35.4 cluster-hours with 4-day timesteps and 5.2 cluster-hours with 28-day timesteps.
 
 :download:`Calculations of these estimated resource requirements can be found in this excel file <timestep scaling.xlsx>`
 
@@ -721,7 +752,7 @@ Notably, the run time of this simulation may increase as we add complexity to ou
 
 .. todo::
 
-  Revisit this once we have completed the scenarios and model run plans for including targeted SQ-LNS. 
+  Added wave III information. Should still update based on wave II production runs to include variable timestep and other complexity based changes. 
 
 .. _nutritionoptimizationchild3.0:
 
