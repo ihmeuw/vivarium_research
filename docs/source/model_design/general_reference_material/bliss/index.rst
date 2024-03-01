@@ -528,7 +528,7 @@ These methods contain a few limitations:
 
 - Sex assigned at birth is used to create the population. Intersex people are not considered here and the full population is assigned to either male or female. 
 - An implicit assumption of creating a population based on sex assigned at birth and then aging it up is that no one changes sex/gender during their lifetime. We know this to be untrue. 
-- Additionally, different data sources track different data - anatomy at death might be different than a held sex identity. 
+- Additionally, different data sources track different data - anatomy at death might be different from a person's self-reported sex.
 - More broadly, GBD does not attempt to include any category other than male or female. 
 - Since there are so many different input data sources and they vary by country, it would be very difficult for GBD to have anything other than "undifferentiated sex/gender" in their final results. However, GBD still uses the language "sex" for its variable. 
 
@@ -711,7 +711,7 @@ undifferentiated sex/gender. This is due to ambiguity between sex and gender in
 the question asked.
 
 The latter two data sources more clearly reflect sex, although one is sex assigned
-at birth and the other is sex identity. Therefore if you included only data sources
+at birth and the other is self-reported sex. Therefore if you included only data sources
 3 and 4, you might label your result as sex.
 
 If you included one of the first two data sources as well, it is no longer clear
