@@ -541,6 +541,10 @@ Wave III:
 
 - For 4 SQLNS targeting scenario, the total number of scenarios = ((4 pregnancy :math:`\times` (18-6) child :math:`+` 1 baseline) :math:`\times` 3 locations) + (4 pregnancy :math:`\times` 6 targeted SQ-LNS :math:`\times` 4 targeting options :math:`\times` 3 locations) :math:`=` **435 scenarios** 
 
+.. note::
+
+  A prior version of this table had erroreously skipped '4'. Therefore in older docs, you might see scenario '5' listed as 'SAM and MAM' instead of 'SAM and SQLNS' as it is here. Similarly for all later scenarios they might be off by 1 number.
+
 
 .. list-table:: Child scenarios, implemented for each pregnancy scenario
   :header-rows: 1
@@ -718,12 +722,12 @@ All possible observers and their default stratifications are outlined below. Req
 
 Since this project requires running across many more scenarios than typical vivarium simulations, we ran some back-of-the-envelope calculations on the magnitude of computing resources to run all scenarios across all projects. The following assumptions went into these calculations:
 
-- 46 scenarios in wave I (no targeting of SQLNS or MAM tx and 1 location), 183 scenraios in wave II (including targeting of MAM treatment as well AND 3 locations), and either 111 or 219 scenarios in wave III (adding targeted SQ-LNS).
+- 46 scenarios in wave I (no targeting of SQLNS or MAM tx and 1 location), 183 scenraios in wave II (including targeting of MAM treatment as well AND 3 locations), and 435 scenarios in wave III (adding targeted SQ-LNS).
 - 4 day timestep in the child simulation if no "timestep inrease strategy" (such as variable timesteps or YLD/YLL-only modeling strategy) is implemented and 28 day timestep if we do implement one of these strategies
 - Simulation takes 32 seconds per timestep. This assumption was informed by the "emulator test runs" of the wasting paper simulation that output only the necessary measures with no stratifications by year, age, or sex
 - Assume 15,000 threads available on all.q
 
-Under these assumptions, a full run of wave I will take 3.8 cluster-hours with 4-day timesteps and 0.6 cluster-hours with 28-day timesteps. A full run of wave II will take 15.0 cluster-hours with 4-day timesteps and 2.2 cluster-hours with 28-day timesteps. A full run of wave III assuming the higher 219 scenarios will take 17.9 cluster-hours with 4-day timesteps and 2.7 cluster-hours with 28-day timesteps.
+Under these assumptions, a full run of wave I will take 3.8 cluster-hours with 4-day timesteps and 0.6 cluster-hours with 28-day timesteps. A full run of wave II will take 15.0 cluster-hours with 4-day timesteps and 2.2 cluster-hours with 28-day timesteps. A full run of wave III assuming the higher 435 scenarios will take 35.4 cluster-hours with 4-day timesteps and 5.2 cluster-hours with 28-day timesteps.
 
 :download:`Calculations of these estimated resource requirements can be found in this excel file <timestep scaling.xlsx>`
 
