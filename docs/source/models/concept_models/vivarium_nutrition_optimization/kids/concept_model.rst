@@ -491,11 +491,15 @@ for the `percent of simulants assigned to each subnational location by sex <http
 in this csv file. 
 
 Since LBWSG is done nationally, there is a risk in assigning locations 
-at birth that they will be incorrect by 6 months of age. Subnational 
-locations with higher LBWSG should have more deaths, which will not be captured here. 
+at birth that the population-distribution of subnational locations 
+will be incorrect by 6 months of age. Subnational 
+locations with less optimal LBWSG exposures distributions should 
+have more deaths, which will not be captured here. 
 However, after reviewing the changes in population distribution between 
 birth and 6 months in GBD data, we found this impact to be very minimal, and 
-therefore believe this is a reasonable limitation. Additionally, 
+therefore believe this is a reasonable limitation. This notebook 
+prints the `population distirbution for both the birth and 6 to 11 month age groups <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/7fe7ade434cadafcd1ae1c631e005809148bf908/data_prep/sqlns_subnational/SQLNS%20Targeting%20Work%20.ipynb>`_. The greatest difference between these was 
+seen to be 0.004 or 0.4% of the population. Additionally, 
 overall mortality will still be at a subnational level, further 
 mitigating these effects. 
 
