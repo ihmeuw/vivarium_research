@@ -469,9 +469,60 @@ Requested test runs:
 Subnational Approach
 ~~~~~~~~~~~~~~~~~~~~
 
+In order to include SQ-LNS targeting by location, we are switching to 
+use a subnational approach for most data in Wave 3. However, rather 
+than model all subnational locations separately, simulants 
+will just be assigned to a subnational location within their primary 
+location, and have input data pulled for the subnational location instead. 
+Unless otherwise specified in the model request table below, the data outputs 
+do not need to stratified by subnational location.
+
+
+Initializing Simulant's Locations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Simulants will be obtained from the pregnancy sim, the same as in prior 
+waves. These simulants will already have a country location. The pregnancy 
+simulation is only run at the national level.
+
+When these simulants are loaded into the child simulation, they will be 
+assigned a subnational location within their country. Here is the data 
+for the `percent of simulants assigned to each subnational location by sex <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/ff08145109e1434669f08afe702ffc5e3d45a6c2/data_prep/sqlns_subnational/subnational_percents.csv>`_. Note that all 3 countries are included 
+in this csv file. 
+
+Since LBWSG is done nationally, there is a risk in assigning locations 
+at birth that the population-distribution of subnational locations 
+will be incorrect by 6 months of age. Subnational 
+locations with less optimal LBWSG exposures distributions should 
+have more deaths, which will not be captured here. 
+However, after reviewing the changes in population distribution between 
+birth and 6 months in GBD data, we found this impact to be very minimal, and 
+therefore believe this is a reasonable limitation. This notebook 
+prints the `population distirbution for both the birth and 6 to 11 month age groups <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/7fe7ade434cadafcd1ae1c631e005809148bf908/data_prep/sqlns_subnational/SQLNS%20Targeting%20Work%20.ipynb>`_. The greatest difference between these was 
+seen to be 0.004 or 0.4% of the population. Additionally, 
+overall mortality will still be at a subnational level, further 
+mitigating these effects. 
+
+Data Inputs: 
+^^^^^^^^^^^^
+
+Once a simulant is assigned to a subnational location, most GBD data used 
+will be subnational specific data. LBWSG, which comes as an output from the 
+pregnancy sim, will be national. Similarly, the PAFs for LBWSG will also 
+be national. All other GBD data will be at the subnational level.
+
+Artifacts will be made for all subnational 
+geographies. We will also regenerate data for all custom made datasets, 
+such as wasting transitions, PAFs, and CGF correlation, at the subnational 
+level. 
+
+SAM and MAM treatmet coverage and efficacy data will continue to be national only. Also, 
+for all scenarios other than targeted SQ-LNS, roll out of interventions will 
+be the same for all subnational locations.
+
 .. todo::
 
-  Add general information here on the subnational approach planned. Include: data on which location IDs to use and the percent of the population in each ID. Information on intializing sims with a country and subnational location. What data to pull subnationally vs nationally.
+  Revisit this paragraph once we have decided about SQ-LNS effect modification. Add either that it is national or subnational. 
 
 
 .. _nutritionoptimizationchild4.0:
