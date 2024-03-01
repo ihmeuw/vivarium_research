@@ -93,12 +93,12 @@ Documents that contain information specific to the overall model and the pregnan
 2.2 Waves, GBD Rounds, and age groups
 -------------------------------------
 
-We will separate the implementation of the child model into two waves of updates. 
+We will separate the implementation of the child model into waves of updates. 
 In addition to other differences detailed in the next section:
 
-- Wave I will use GBD 2019 data, with the exception of using GBD 2021 data for child growth failure risk exposure and risk effects.
+- Wave I and II will use GBD 2019 data, with the exception of using GBD 2021 data for child growth failure risk exposure and risk effects.
 
-- Wave II will use GBD 2021 data for the entire model.
+- Wave III and later will use GBD 2021 data for the entire model.
 
 Notably, GBD 2021 uses different age groups than GBD 2019 (as summarized in the 
 tables below). Therefore, the Wave I implementation that uses data from both GBD 
@@ -156,6 +156,11 @@ in the simulation will be informed using data specific to the post neonatal age 
 
 2.3 Submodels
 -------------
+
+.. todo::
+
+  Update the below tables as needed for a "wave 3" with SQ-LNS targeting and subnational data included. 
+
 
 .. list-table:: Risk exposure subcomponents
   :header-rows: 1
@@ -322,8 +327,8 @@ in the simulation will be informed using data specific to the post neonatal age 
     - Value
     - Note
   * - Location(s)
-    - Ethiopia (ID: 179)
-    - Eventually will also add Nigeria (214) and Pakistan (164)
+    - Ethiopia (ID: 179), Nigeria (214), Pakistan (164)
+    - Most data will be modeled subnationally, see section below
   * - Number of draws
     - Same as pregnancy sim output data
     - 
@@ -461,6 +466,65 @@ Requested test runs:
     - 126/scalar
     - 
 
+Subnational Approach
+~~~~~~~~~~~~~~~~~~~~
+
+In order to include SQ-LNS targeting by location, we are switching to 
+use a subnational approach for most data in Wave 3. However, rather 
+than model all subnational locations separately, simulants 
+will just be assigned to a subnational location within their primary 
+location, and have input data pulled for the subnational location instead. 
+Unless otherwise specified in the model request table below, the data outputs 
+do not need to stratified by subnational location.
+
+
+Initializing Simulant's Locations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Simulants will be obtained from the pregnancy sim, the same as in prior 
+waves. These simulants will already have a country location. The pregnancy 
+simulation is only run at the national level.
+
+When these simulants are loaded into the child simulation, they will be 
+assigned a subnational location within their country. Here is the data 
+for the `percent of simulants assigned to each subnational location by sex <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/ff08145109e1434669f08afe702ffc5e3d45a6c2/data_prep/sqlns_subnational/subnational_percents.csv>`_. Note that all 3 countries are included 
+in this csv file. 
+
+Since LBWSG is done nationally, there is a risk in assigning locations 
+at birth that the population-distribution of subnational locations 
+will be incorrect by 6 months of age. Subnational 
+locations with less optimal LBWSG exposures distributions should 
+have more deaths, which will not be captured here. 
+However, after reviewing the changes in population distribution between 
+birth and 6 months in GBD data, we found this impact to be very minimal, and 
+therefore believe this is a reasonable limitation. This notebook 
+prints the `population distirbution for both the birth and 6 to 11 month age groups <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/7fe7ade434cadafcd1ae1c631e005809148bf908/data_prep/sqlns_subnational/SQLNS%20Targeting%20Work%20.ipynb>`_. The greatest difference between these was 
+seen to be 0.004 or 0.4% of the population. Additionally, 
+overall mortality will still be at a subnational level, further 
+mitigating these effects. 
+
+Data Inputs: 
+^^^^^^^^^^^^
+
+Once a simulant is assigned to a subnational location, most GBD data used 
+will be subnational specific data. LBWSG, which comes as an output from the 
+pregnancy sim, will be national. Similarly, the PAFs for LBWSG will also 
+be national. All other GBD data will be at the subnational level.
+
+Artifacts will be made for all subnational 
+geographies. We will also regenerate data for all custom made datasets, 
+such as wasting transitions, PAFs, and CGF correlation, at the subnational 
+level. 
+
+SAM and MAM treatmet coverage and efficacy data will continue to be national only. Also, 
+for all scenarios other than targeted SQ-LNS, roll out of interventions will 
+be the same for all subnational locations.
+
+.. todo::
+
+  Revisit this paragraph once we have decided about SQ-LNS effect modification. Add either that it is national or subnational. 
+
+
 .. _nutritionoptimizationchild4.0:
 
 2.5 Simulation scenarios
@@ -485,6 +549,10 @@ Wave II:
 - Total number of scenarios = (5 pregnancy :math:`\times` 19 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **288 scenarios** 
 
 - It is possible we decide to exclude scenarios 13-18 from wave II, reducing the number of child scenarios from 19 to 13 and the total number of scenarios to 66/location for **198 scenarios**
+
+.. todo::
+
+  Update the below table to include targeted SQ-LNS scenarios. Then we will need to define a strategy for running the simulation since we will have multiple SQ-LNS targeting strategies and doing 3-4 complete runs might be infeasible.
 
 .. list-table:: Child scenarios, implemented for each pregnancy scenario
   :header-rows: 1
@@ -651,6 +719,9 @@ Under these assumptions, a full run of wave I will take 3.8 cluster-hours with 4
 
 Notably, the run time of this simulation may increase as we add complexity to our model, particularly with respect to the additional risk factor of child underweight exposure and the additional cause model of malaria, which were not present in our test runs.
 
+.. todo::
+
+  Revisit this once we have completed the scenarios and model run plans for including targeted SQ-LNS. 
 
 .. _nutritionoptimizationchild3.0:
 
@@ -1369,4 +1440,155 @@ Wave II
     -  
     -  
     -  
+
+
+Wave III
+--------
+
+.. list-table:: Model run requests
+  :header-rows: 1
+
+  * - Run
+    - Description
+    - Pregnancy scenario(s)
+    - Child scenario(s)
+    - Spec. mods
+    - Note
+  * - 14.0
+    - Update to GBD 2021 data 
+    - Baseline
+    - Baseline
+    - Ethiopia location ONLY
+    - Should use 2021 GBD pregnancy model
+  * - 15.0
+    - Change child data to subnational
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 16.0
+    - Add SQ-LNS intervention targeting for WAZ > 20%
+    - Baseline
+    - 8
+    - 
+    - Targeted SQ-LNS only
+  * - 17.0
+    - Add additional SQ-LNS geographic targeting criteria
+    - Baseline
+    - 8
+    - 
+    - Targeted SQ-LNS only
+  * - 18.0
+    - Add targeted SQ-LNS effect modification
+    - Baseline
+    - 8
+    - 
+    - Targeted SQ-LNS only
+  * - 19.0
+    - Production runs
+    - All
+    - All
+    - 
+    - 
+
+
+.. list-table:: Output specifications
+  :header-rows: 1
+  :widths: 1 10 3
+
+  * - Model
+    - Outputs
+    - Overall strata
+  * - 14.0
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+      5. Stunting state person time
+      6. Wasting state person time
+      7. Underweight state person time
+      8. Wasting transition counts 
+    - * Age group
+      * Sex
+  * - 15.0
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+      5. Stunting state person time
+      6. Wasting state person time
+      7. Underweight state person time
+      8. Wasting transition counts 
+    - * Age group
+      * Sex
+      * Subnational location
+  * - 16.0
+    - 1. Deaths
+      2. Wasting state person time, stratified by SQ-LNS treatment coverage
+      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - * Age group
+      * Sex
+      * Subnational location
+  * - 17.0
+    - 1. Deaths
+      2. Wasting state person time, stratified by SQ-LNS treatment coverage
+      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - * Age group
+      * Sex
+      * Targeted SQ-LNS location vs not
+  * - 18.0
+    - 1. Deaths
+      2. Wasting state person time, stratified by SQ-LNS treatment coverage
+      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - * Age group
+      * Sex
+      * Subnational location
+  * - 19.0
+    - 1. Deaths and YLLs (non-cause-specific)
+      2. YLDs (all-cause observer only)
+      3. Count of incident SAM cases stratified by SAM treatment coverage
+      4. Count of incident MAM cases stratified by MAM treatment coverage
+      5. Stunting state person time stratified by SQ-LNS coverage
+    - Age strata of 0-6 months, 6-18 months, 18-60 months
+
+
+.. list-table:: Verification and validation tracking
+  :header-rows: 1
+  :widths: 1 5 5 
+
+  * - Model
+    - V&V plan
+    - V&V summary
+  * - 14.0
+    - * Verify to GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
+      * Verify CGF risk exposures and effects
+      * Verify antenatal intervention effects
+      * Verify child intervention effects 
+    - 
+  * - 15.0
+    - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
+      * Verify national CGF risk exposures and effects
+      * Verify national antenatal intervention effects
+      * Verify national child intervention effects
+      * Verify population in each subnational location
+      * Verify subnational differentiation in above criteria
+    - 
+  * - 16.0
+    - * Verify SQ-LNS is correctly targeted based on subnational location
+      * Verify stunting, wasting vary with SQ-LNS exposure
+      * Verify other model components look as expected
+    - 
+  * - 17.0
+    - * Verify SQ-LNS targeting matches expected population
+      * Verify stunting, wasting vary with SQ-LNS exposure
+      * Verify other model components look as expected
+    - 
+  * - 18.0
+    - * Verify SQ-LNS effect modification changes as expected with targeting
+      * Verify stunting, wasting vary with SQ-LNS exposure
+      * Verify other model components look as expected
+    - 
+  * - 19.0
+    - * Confirm that results for production runs match expected outputs
+    - 
 
