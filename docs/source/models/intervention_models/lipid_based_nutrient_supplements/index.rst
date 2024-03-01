@@ -229,11 +229,19 @@ SQ-LNS effects on wasting will persist until 18 months of age and effects on stu
 Targeted SQ-LNS
 ~~~~~~~~~~~~~~~
 
-There is not a gold standard currently for how to target SQ-LNS. This 
+The WHO has issued guidelines on the use and targeting of SQ-LNS, 
+which are available here: `WHO guidelines <https://app.magicapp.org/#/guideline/7352/section/133966>`_. 
+These guidelines state that "in areas of or during periods of 
+high food insecurity" providing SQ-LNS or similar food supplementation 
+might be appropriate. They state that targeting to a geographic region 
+or to specific children or households might be appropriate. Additionally 
+they recommend using the food security metric to determine targeting.
+
+However, these guidelines are quite vague. This 
 is a relatively new intervention and so the best metric for targeting 
 is still being debated. Simulation is especially well suited for these 
 types of questions, and so we will try several different SQ-LNS targeting 
-criteria. 
+criteria.
 
 For all criteria, a csv file with the subnational locations and whether or 
 not they are included in targeting will be provided.
@@ -247,9 +255,16 @@ not they are included in targeting will be provided.
     - Description
     - Notes
   * - 1 
-    - WAZ > 20%
-    - Percent of the population who is underwight in each subnational location
-    - Based on suggestion from Indi Trehan that underweight data is sometimes more available than height based data
+    - WAZ
+    - WAZ based threshold that results in about 20% of the population being targeted. Also need to determine age group for WAZ prevalence (all kids under 5, 6-59 months, or 6-24 months)
+    - See note below
+
+.. note::
+
+  The WHO guidelines included above state that targeting should be based off of food security, more specifically it should be targeted to those who are severely food insecure. Based on `FAOSTAT data <https://www.fao.org/faostat/en/#data/FS>`_, this would be when approximately 20% of the population is targeted as severaly food insecure. We are using underweight as a proxy for severe food insecurity as it is already in our model, and it is a better representation of concurrent stunting and wasting - which is more dangerous that stunting or wasting alone.
+
+  Additionally, Indi Trehan recommended using underweight as a metric. Weight is more commonly tracked in practice than height, making this data more available than stunting or wasting.
+
 
 .. todo::
 
