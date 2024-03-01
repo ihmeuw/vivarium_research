@@ -1445,10 +1445,6 @@ Wave II
 Wave III
 --------
 
-.. todo::
-
-  Add tables for the new runs requested to add in targeted SQ-LNS and update to GBD 2021. Below tables are placeholders for now. 
-
 .. list-table:: Model run requests
   :header-rows: 1
 
@@ -1459,9 +1455,39 @@ Wave III
     - Spec. mods
     - Note
   * - 14.0
+    - Update to GBD 2021 data 
+    - Baseline
+    - Baseline
+    - Ethiopia location ONLY
+    - Should use 2021 GBD pregnancy model
+  * - 15.0
+    - Change child data to subnational
+    - Baseline
+    - Baseline
     - 
     - 
+  * - 16.0
+    - Add SQ-LNS intervention targeting for WAZ > 20%
+    - Baseline
+    - 8
     - 
+    - Targeted SQ-LNS only
+  * - 17.0
+    - Add additional SQ-LNS geographic targeting criteria
+    - Baseline
+    - 8
+    - 
+    - Targeted SQ-LNS only
+  * - 18.0
+    - Add targeted SQ-LNS effect modification
+    - Baseline
+    - 8
+    - 
+    - Targeted SQ-LNS only
+  * - 19.0
+    - Production runs
+    - All
+    - All
     - 
     - 
 
@@ -1473,9 +1499,57 @@ Wave III
   * - Model
     - Outputs
     - Overall strata
-  * - 14
-    - 
-    - 
+  * - 14.0
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+      5. Stunting state person time
+      6. Wasting state person time
+      7. Underweight state person time
+      8. Wasting transition counts 
+    - * Age group
+      * Sex
+  * - 15.0
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+      5. Stunting state person time
+      6. Wasting state person time
+      7. Underweight state person time
+      8. Wasting transition counts 
+    - * Age group
+      * Sex
+      * Subnational location
+  * - 16.0
+    - 1. Deaths
+      2. Wasting state person time, stratified by SQ-LNS treatment coverage
+      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - * Age group
+      * Sex
+      * Subnational location
+  * - 17.0
+    - 1. Deaths
+      2. Wasting state person time, stratified by SQ-LNS treatment coverage
+      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - * Age group
+      * Sex
+      * Targeted SQ-LNS location vs not
+  * - 18.0
+    - 1. Deaths
+      2. Wasting state person time, stratified by SQ-LNS treatment coverage
+      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - * Age group
+      * Sex
+      * Subnational location
+  * - 19.0
+    - 1. Deaths and YLLs (non-cause-specific)
+      2. YLDs (all-cause observer only)
+      3. Count of incident SAM cases stratified by SAM treatment coverage
+      4. Count of incident MAM cases stratified by MAM treatment coverage
+      5. Stunting state person time stratified by SQ-LNS coverage
+    - Age strata of 0-6 months, 6-18 months, 18-60 months
 
 
 .. list-table:: Verification and validation tracking
@@ -1485,7 +1559,36 @@ Wave III
   * - Model
     - V&V plan
     - V&V summary
-  * - 14
+  * - 14.0
+    - * Verify to GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
+      * Verify CGF risk exposures and effects
+      * Verify antenatal intervention effects
+      * Verify child intervention effects 
     - 
+  * - 15.0
+    - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
+      * Verify national CGF risk exposures and effects
+      * Verify national antenatal intervention effects
+      * Verify national child intervention effects
+      * Verify population in each subnational location
+      * Verify subnational differentiation in above criteria
+    - 
+  * - 16.0
+    - * Verify SQ-LNS is correctly targeted based on subnational location
+      * Verify stunting, wasting vary with SQ-LNS exposure
+      * Verify other model components look as expected
+    - 
+  * - 17.0
+    - * Verify SQ-LNS targeting matches expected population
+      * Verify stunting, wasting vary with SQ-LNS exposure
+      * Verify other model components look as expected
+    - 
+  * - 18.0
+    - * Verify SQ-LNS effect modification changes as expected with targeting
+      * Verify stunting, wasting vary with SQ-LNS exposure
+      * Verify other model components look as expected
+    - 
+  * - 19.0
+    - * Confirm that results for production runs match expected outputs
     - 
 
