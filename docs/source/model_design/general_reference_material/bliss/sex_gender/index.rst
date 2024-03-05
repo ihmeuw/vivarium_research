@@ -33,6 +33,9 @@
 Inclusive Health Metrics: Sex and gender
 ========================================
 
+1.0 Overview
+++++++++++++
+
 On this page you will find our guiding principles,
 an introduction to sex and gender from a scientific perspective,
 a glossary of commonly used terms related
@@ -366,7 +369,7 @@ For example, many of our models use Global Burden of Disease (GBD) outputs.
 These outputs are the result of a modeling process which itself
 uses published results from primary research.
 GBD is a little bit special in that we have a pretty good understanding of
-its inner workings; see the `3.2.1 Global Burden of Disease (GBD)`_ section below.
+its inner workings; see section 3.2.1 Global Burden of Disease (GBD) below.
 
 Frequently, upstream research does not report sex and/or gender in ways that
 reflect the difference between, and complexity of, those concepts.
