@@ -29,15 +29,15 @@
 
 .. _bliss:
 
-==================
-BLISS Style Guide
-==================
+========================================
+Inclusive Health Metrics: Sex and gender
+========================================
 
 Building Language Inclusivity into Simulation Science (BLISS) is an important part of
-our team's work! Here you will find our ongoing style guide for incorporating inclusive 
-language into our day-to-day work.
+our team's work! Here you will find our ongoing guide for incorporating inclusive 
+language regarding sex and gender into your day-to-day work.
 
-For those on the simulation science team or not - if you are setting out to do some research 
+For those on the Simulation Science team or not - if you are setting out to do some research 
 that somehow touches on sex and gender and  you aren’t sure how to proceed with methods and 
 results, this should be exactly what you need!
 
@@ -47,7 +47,7 @@ results, this should be exactly what you need!
 1.0 Overview 
 ++++++++++++
 As part of our team and organization's larger DEI efforts, we are committed to researching
-and building a style guide so as to incorporate inclusive language into our day-to-day work
+and building a guide to incorporate inclusive language into our day-to-day work
 and to address the harmful conflation and oversimplification
 of sex and gender in public health research and data. 
 We hope this page will serve as a useful guide to members of the Simulation Science team as
@@ -109,7 +109,6 @@ which lead to inaccurate conclusions about racial disparities. [Bauer_2022]_
 
 In an effort to work toward institution-wide DEI goals and
 advance our team’s research and publications, we created this guide to explore the
-concepts of sex and gender and offer a more inclusive approach to conducting and reporting research
 that involves these topics.
 We hope to inspire change in other researchers by presenting our studies with gender 
 inclusive language and model practices we believe in. For all of these reasons, we feel this 
@@ -389,7 +388,7 @@ For example, many of our models use Global Burden of Disease (GBD) outputs.
 These outputs are the result of a modeling process which itself
 uses published results from primary research.
 GBD is a little bit special in that we have a pretty good understanding of
-its inner workings; see the GBD-specific section below.
+its inner workings; see the `3.2.1 Global Burden of Disease (GBD)`_ section below.
 
 Frequently, upstream research does not report sex and/or gender in ways that
 reflect the difference between, and complexity of, those concepts.
@@ -455,7 +454,7 @@ with respect to the outcome. Each case is described below:
 In either case, measurement error of sex and/or gender can lead to biased results and care 
 should be taken to minimize error in measuring these variables (as for all variables!) to 
 minimize bias in study results. When we are using data published by others, it is important
-to consider how results may be affected by potential measurement error and dicuss any
+to consider how results may be affected by potential measurement error and discuss any
 relevant limitations accordingly.
 
 3.1.3 Terminology
@@ -502,7 +501,7 @@ In the NHANES example, the full first sentence of the above quote was:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The GBD study is very complex and has many different data sources. Here, 
-we provide a general overview of how the demographics team works with the "sex" 
+we provide a general overview of how the Demographics team works with the "sex" 
 (later referred to undifferentiated sex/gender as this is more accurate) 
 variable and some of the limitations (as of GBD 2021). To understand undifferentiated 
 sex/gender in the context of a 
@@ -521,7 +520,7 @@ country, year, age group and sex/gender are:
 While it would be challenging to include how sex/gender is recorded in all data sources used, here are some examples: 
 
 - In the DHS survey, women (unknown how "women" are identified or what might happen if a man were the birthing parent) are asked about their births and children, specifically they are asked about their "sons and daughters" or later "boys and girls". No option is included for intersex children and it is not clear how they would be recorded. 
-- Death certificates are usually completed by a medical professional and therefore reflect a person's anatomy at death. The options are male, female or "unknown". Unknown is usually used only if a body is mutilated such that anatomy cannot be determined. There is not a box to include gender or identity. 
+- Death ce3.2.1 Global Burden of Disease (GBD)rtificates are usually completed by a medical professional and therefore reflect a person's anatomy at death. The options are male, female or "unknown". Unknown is usually used only if a body is mutilated such that anatomy cannot be determined. There is not a box to include gender or identity. 
 - The US Census asks "What is [person 1]'s sex?" with options for male and female only. They state that the question should be completed based on how that person currently identifies. 
 
 These methods contain a few limitations: 
@@ -606,7 +605,7 @@ Here are a few suggestions for the detailed description:
 * If we can, cite some of the research that is cited in this guide!
   This gives curious readers a starting point to learn more,
   and gives credit to the researchers whose ideas we are building on.
-  See the Recommended Resources section below.
+  See the `6.0 Recommended Resources`_ section below.
 * If we are not able to present quantitative results for SGM
   populations, but have reason to believe that (any of) these
   populations are especially impacted by the health issues we are studying,
@@ -684,9 +683,6 @@ we might say:
   To address these limitations, data would need to be collected using more robust measures
   of sex- and gender-related factors. [Bauer_2017]_ [Nielsen_2021]_ [ABS_2021]_ [National_Academies_2022]_
 
-.. todo::
-
-  Reference 'measurement error' section again here.
 
 4.4 Result indicator definition
 -------------------------------
