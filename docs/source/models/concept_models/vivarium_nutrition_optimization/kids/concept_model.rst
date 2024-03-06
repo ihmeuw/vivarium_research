@@ -512,9 +512,17 @@ pregnancy sim, will be national. Similarly, the PAFs for LBWSG will also
 be national. All other GBD data will be at the subnational level.
 
 Artifacts will be made for all subnational 
-geographies. We will also regenerate data for all custom made datasets, 
-such as wasting transitions, PAFs, and CGF correlation, at the subnational 
-level. 
+geographies. We will also regenerate most data for custom made datasets, 
+such as wasting transitions and PAFs.
+
+CGF correlation data will continue to be at the national level. This is 
+following a subnational analysis which showed little subnational variation 
+and small sample sizes for many locations. Correlation coefficients generally 
+only varied by a maximum of 0.1 points (for exmaple, between 0.6 and 0.7). 
+Furthermore, no geographic patterns such as north/south or urban/rural were 
+noted in the location data. Lastly, many location/age/sex groups had fewer than 
+50 children, leading to lack of confidence in results. The analysis of this 
+was in `this PR <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/134>`_. 
 
 SAM and MAM treatmet coverage and efficacy data will continue to be national only. Also, 
 for all scenarios other than targeted SQ-LNS, roll out of interventions will 
