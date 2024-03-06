@@ -3867,11 +3867,16 @@ should be set to 1.
 
     If finding the maximum rate proves too difficult to implement, we can reassess this approach
 
-The duplicated row should have the same simulant-specific attributes as the
-original, such as name and birth date, but different household-specific
-attributes such as address fields and relation to reference person.
-For simplicity, set "relation to reference person" equal to "Other relative" in
-the duplicated row.
+The duplicated row should have the same simulant-specific attributes as
+the original, such as name and birth date, but different
+household-specific attributes such as address fields and relationship to
+reference person. For simplicity, when the guardian's housing type is
+"Household," set "Relationship to reference person" equal to "Other
+relative" in the duplicated row. If the guardian lives in group
+quarters, the value of "Relationship to reference person" in the
+duplicated row should match that of the guardian (either
+“Institutionalized group quarters population” or “Noninstitutionalized
+group quarters population”).
 
 To create guardian-based duplicates, each duplicated simulant will be included
 in the final dataset twice, once at their address of residence and once at their
