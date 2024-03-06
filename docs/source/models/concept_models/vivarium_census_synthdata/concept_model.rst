@@ -2853,7 +2853,8 @@ in January 2024.
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
-Instead, fill in the SSN field with the simulant's ITIN (recall that every simulant has either an SSN or ITIN, but not both).
+Instead, fill in the SSN field with the simulant's ITIN
+(recall that every simulant has either an SSN or ITIN, but not both).
 This is designed to reflect undocumented immigrants, who primarily
 file taxes under the ITIN system.
 
@@ -2872,9 +2873,20 @@ are just 2 really long rows for two simulants.
 
 .. note::
 
-  The above image is outdated and contains "Age" and "DOB" columns, but these
-  should **not** appear in the 1040 dataset. The image is also *missing* the
-  ground-truth "Household ID" column.
+  The above image is outdated and has several discrepancies with what is
+  specified elsewhere in the concept model:
+
+  - The image contains "Age" and "DOB" columns, but these
+    should **not** appear in the 1040 dataset.
+
+  - The image is *missing* the ground-truth "Household ID" column.
+
+  - The image shows separate SSN and ITIN columns, but the 1040 dataset
+    should contain **only** SSN columns, in which ITINs will appear for
+    simulants who don't have SSNs.
+
+  The text descriptions are more up-to-date and take precedence over the
+  image.
 
 If a simulant had more than 4 employments in the tax year,
 the 4 with the highest income values are included on the 1040; other employment information
