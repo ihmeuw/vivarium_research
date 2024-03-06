@@ -2624,8 +2624,8 @@ Taxes
 Taxes, as we all know, can contain many different forms and processes.
 For this model, we will split the tax information into two main sections:
 W2/1099 forms from employers; and 1040 forms from simulants. 1099 forms are used for independent
-contractors or self-employed individuals, while W-2 forms are submitted by an employer for their employee 
-(as the employer withholds payroll taxes from employee earnings). 1040 forms are 
+contractors or self-employed individuals, while W-2 forms are submitted by an employer for their employee
+(as the employer withholds payroll taxes from employee earnings). 1040 forms are
 submitted by the employee. We will look at these separately, starting with W2 and 1099 forms.
 
 
@@ -3826,24 +3826,24 @@ in GQ and simulants under 24 (<24) and in college GQ.
 For each of the two categories of simulants, the maximum duplication rate will
 be calculated based on those who have a guardian living at a different address
 in the sim. Note that all simulants in college GQ are initialized with a
-guardian living at a different address, but this is not true for simulants that 
-move into college GQ during the simulation, so both maximum duplication rates 
+guardian living at a different address, but this is not true for simulants that
+move into college GQ during the simulation, so both maximum duplication rates
 will be less than 100%.
 
 The user can then pick a rate of duplication between 0 and 100% **for each of
 the two categories of simulants**. We will set a default duplication rate of 2% for
 simulants under 18 and not in GQ, and a default duplication rate of 5% for simulants
 under 24 and in college GQ.
-That is, each simulant under 18 and not in GQ is duplicated at a guardian's household 
-with default probability 0.02, and each simulant under 24 in college GQ is duplicated 
+That is, each simulant under 18 and not in GQ is duplicated at a guardian's household
+with default probability 0.02, and each simulant under 24 in college GQ is duplicated
 at a guardian's household with default probability 0.05.
 There should be two user parameters for overriding these probabilities, one
 for each simulant category.
 
-The 2% duplication rate for simulants under 18 was estimated from Figure 1 of `"An Analysis of Person Duplication 
-in Census 2000" <http://www.asasrms.org/Proceedings/y2004/files/Jsm2004-000730.pdf>`_ 
-and roughly corroborated by Table 4 of `"Real-Time 2020 Administrative Record 
-Census Simulation" <https://www2.census.gov/programs-surveys/decennial/2020/program-management/evaluate-docs/EAE-2020-admin-records-experiment.pdf>`_ 
+The 2% duplication rate for simulants under 18 was estimated from Figure 1 of `"An Analysis of Person Duplication
+in Census 2000" <http://www.asasrms.org/Proceedings/y2004/files/Jsm2004-000730.pdf>`_
+and roughly corroborated by Table 4 of `"Real-Time 2020 Administrative Record
+Census Simulation" <https://www2.census.gov/programs-surveys/decennial/2020/program-management/evaluate-docs/EAE-2020-admin-records-experiment.pdf>`_
 combined with the totals from Table 1.
 
 
