@@ -3623,13 +3623,16 @@ noise to all eligible cells in the column.
 
   When we implemented the copy-from-within-household noise type, we
   stored a copy of a random household member's SSN but no copies of
-  household members' ITINs. Thus, when applying this noise type to an
-  SSN column (e.g. in the 1040 dataset), an SSN or ITIN can get replaced
-  with another household member's SSN, but never with an ITIN. In order
-  for a simulant's SSN to be eligible for this noise type, they must
-  live in a household (not GQ) with at least one other member who has an
-  SSN. It's possible we may want to reconsider this behavior in the
-  future, e.g. to allow replacing an ITIN with another ITIN.
+  household members' ITINs. (This was a result of our consideration of
+  SSN and ITIN as separate attributes, before we realized that ITINs get
+  recorded in the SSN field on actual tax forms, meaning that we should
+  only have one column, not two.) Thus, when applying this noise type to
+  an SSN column (e.g. in the 1040 dataset), an SSN or ITIN can get
+  replaced with another household member's SSN, but never with an ITIN.
+  In order for a simulant's SSN to be eligible for this noise type, they
+  must live in a household (not GQ) with at least one other member who
+  has an SSN. It's possible we may want to reconsider this behavior in
+  the future, e.g. to allow replacing an ITIN with another ITIN.
 
 Limitations:
 
