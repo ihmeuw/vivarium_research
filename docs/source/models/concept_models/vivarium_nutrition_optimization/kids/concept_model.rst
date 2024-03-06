@@ -516,9 +516,9 @@ geographies. We will also regenerate most data for custom made datasets,
 such as wasting transitions and PAFs.
 
 CGF correlation data will continue to be at the national level. This is 
-following a subnational analysis which showed little subnational variation 
+following a analysis of DHS data which showed little subnational variation 
 and small sample sizes for many locations. Correlation coefficients generally 
-only varied by a maximum of 0.1 points (for exmaple, between 0.6 and 0.7). 
+only varied by a maximum of 0.1 points (for example, between 0.6 and 0.7). 
 Furthermore, no geographic patterns such as north/south or urban/rural were 
 noted in the location data. Lastly, many location/age/sex groups had fewer than 
 50 children, leading to lack of confidence in results. The analysis of this 
