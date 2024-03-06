@@ -3619,6 +3619,18 @@ noise to all eligible cells in the column.
   noise to approximately the correct number of cells and how to implement the
   user warning.
 
+.. note::
+
+  When we implemented the copy-from-within-household noise type, we
+  stored a copy of a random household member's SSN but no copies of
+  household members' ITINs. Thus, when applying this noise type to an
+  SSN column (e.g. in the 1040 dataset), an SSN or ITIN can get replaced
+  with another household member's SSN, but never with an ITIN. In order
+  for a simulant's SSN to be eligible for this noise type, they must
+  live in a household (not GQ) with at least one other member who has an
+  SSN. It's possible we may want to reconsider this behavior in the
+  future, e.g. to allow replacing an ITIN with another ITIN.
+
 Limitations:
 
 - This oversimplifies some swapping of ages or birthdays between family members. However, it allows better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenge.
