@@ -2873,20 +2873,19 @@ are just 2 really long rows for two simulants.
 
 .. note::
 
-  The above image is outdated and has several discrepancies with what is
-  specified elsewhere in the concept model:
+  The above image is outdated in the following ways:
 
-  - The image contains "Age" and "DOB" columns, but these
+  - The image shows "Age" and "DOB" columns, but these
     should **not** appear in the 1040 dataset.
 
   - The image is *missing* the ground-truth "Household ID" column.
 
   - The image shows separate SSN and ITIN columns, but the 1040 dataset
-    should contain **only** SSN columns, in which ITINs will appear for
-    simulants who don't have SSNs.
+    should contain **only** SSN columns. Simulants without SSNs should
+    have their ITIN placed in the appropriate SSN column.
 
-  The text descriptions are more up-to-date and take precedence over the
-  image.
+  Text descriptions elsewhere in the concept model are more up-to-date
+  and take precedence over the image.
 
 If a simulant had more than 4 employments in the tax year,
 the 4 with the highest income values are included on the 1040; other employment information
