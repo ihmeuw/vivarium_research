@@ -3099,22 +3099,22 @@ noise added to the data. We currently divide noise into two types:
 Noise should be added in the order below.
 
 #. "Borrowed" SSN (happens in simulation NOT noise functions)
+#. Duplications
+
+   a. Guardian-based dupilcation
 #. Omissions
 
    a. Do not respond (targeted omission)
    b. Omit a row (simple omission)
-#. Duplications
-
-   a. Guardian-based dupilcation
 #. Missing Data
 #. Incorrect Selection
 #. Copy from Within Household
-#. Month and day swaps (applies to dates only)
-#. Zip Code Miswriting (applies to Zip Code only)
-#. Age Miswriting (applies to age only)
-#. Numeric miswriting
 #. Nicknames
 #. Fake names
+#. Month and day swaps (applies to dates only)
+#. Age Miswriting (applies to age only)
+#. Numeric miswriting
+#. Zip Code Miswriting (applies to Zip Code only)
 #. Phonetic
 #. OCR
 #. Typographic
