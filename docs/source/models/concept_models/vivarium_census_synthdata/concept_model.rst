@@ -3811,6 +3811,8 @@ times at different addresses. This can occur when family structures are
 complex and children might spend time at multiple households. A related
 challenge occurs with college students, who often are counted both at their
 university and at their guardian’s home address.
+We will implement this type of duplication only for the decennial
+census.
 
 To facilitate this type of error, we have simulants assigned to guardians
 within the simulation. Sometimes, those guardians may move and live at
