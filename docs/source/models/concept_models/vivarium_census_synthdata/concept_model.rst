@@ -3900,6 +3900,19 @@ specific state (or other location) should be as follows:
   available) unless the user also generates data for the state where the
   dependent lives.
 
+.. todo::
+
+  As of March 7, 2024, we have implemented the first of the above
+  behaviors for state filtering but not the second. That is, duplicated
+  rows do not appear in the filtered dataset if the guardian **or** the
+  simulant lives out of state. Including duplicate rows when the
+  guardian lives in-state but the dependent does not is more complicated
+  because state filtering happens when data is loaded. To solve this, we
+  may have to pre-compute all *potentially* duplicated rows and store
+  them with the appropriate state. `MIC-4907
+  <https://jira.ihme.washington.edu/browse/MIC-4907>`_ was created to
+  address this issue.
+
 .. note::
 
   Currently, the order in which simulants appear in each dataset is an
