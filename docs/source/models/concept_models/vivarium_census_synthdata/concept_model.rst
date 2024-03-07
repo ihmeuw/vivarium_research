@@ -3884,6 +3884,22 @@ guardian's address. If a simulant has more than 1 guardian living at a different
 address, only duplicate them once, for a maximum of 2 occurrences in the end
 dataset. Select the guardian at random.
 
+The behavior of guardian-based duplication when filtering the data to a
+specific state (or other location) should be as follows:
+
+* If a simulant lives in the state but their guardian does not, then
+  the duplicated row does **not** appear in the filtered dataset: Since
+  the guardian is not part of the dataset, they have no opportunity to
+  create a duplicate record.
+
+* If a simulant lives outside the state but their guardian lives in the
+  state, then the duplicated row **does** appear in the filtered
+  dataset: The guardian erroneously reports that their out-of-state
+  dependent lives with them. In this case it would not be apparent that
+  the duplicated record is a duplicate (even with ground truth
+  available) unless the user also generates data for the state where the
+  dependent lives.
+
 .. note::
 
   Currently, the order in which simulants appear in each dataset is an
