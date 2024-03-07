@@ -39,7 +39,7 @@ Inclusive Health Metrics: Sex and gender
 On this page you will find our guiding principles,
 an introduction to sex and gender from a scientific perspective,
 a glossary of commonly used terms related
-to BLISS, recommendations for how to address sex/gender-related limitations in external data
+to sex and gender, recommendations for how to address sex/gender-related limitations in external data
 sources, discussion of the implications of imperfect proxy measures with regards to sex/gender,
 examples of how our team has incorporated BLISS into our work process, and more! 
 
