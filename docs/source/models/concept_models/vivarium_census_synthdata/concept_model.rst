@@ -2853,7 +2853,8 @@ in January 2024.
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
-Leave the field blank.
+Instead, fill in the SSN field with the simulant's ITIN
+(recall that every simulant has either an SSN or ITIN, but not both).
 This is designed to reflect undocumented immigrants, who primarily
 file taxes under the ITIN system.
 
@@ -2872,9 +2873,19 @@ are just 2 really long rows for two simulants.
 
 .. note::
 
-  The above image is outdated and contains "Age" and "DOB" columns, but these
-  should **not** appear in the 1040 dataset. The image is also *missing* the
-  ground-truth "Household ID" column.
+  The above image is outdated in the following ways:
+
+  - The image shows "Age" and "DOB" columns, but these
+    should **not** appear in the 1040 dataset.
+
+  - The image is *missing* the ground-truth "Household ID" column.
+
+  - The image shows separate SSN and ITIN columns, but the 1040 dataset
+    should contain **only** SSN columns. Simulants without SSNs should
+    have their ITIN placed in the appropriate SSN column.
+
+  Text descriptions elsewhere in the concept model are more up-to-date
+  and take precedence over the image.
 
 If a simulant had more than 4 employments in the tax year,
 the 4 with the highest income values are included on the 1040; other employment information
@@ -3607,6 +3618,22 @@ noise to all eligible cells in the column.
   implementation details`_ section below for further details about how to add
   noise to approximately the correct number of cells and how to implement the
   user warning.
+
+.. note::
+
+  When we implemented the copy-from-within-household noise type, we
+  stored a copy of a random household member's SSN but no copies of
+  household members' ITINs. (This was a result of our consideration of
+  SSN and ITIN as separate attributes, before we realized that ITINs get
+  recorded in the SSN field on actual tax forms, meaning that we should
+  only have one column, not two.) Thus, when applying this noise type to
+  an SSN column (e.g. in the 1040 dataset), an SSN or ITIN can get
+  replaced with another household member's SSN, but never with an ITIN.
+  In order for a simulant's SSN or ITIN to be eligible for this noise
+  type, they must live in a household (not GQ) with at least one other
+  member who has an SSN. It's possible we may want to reconsider this
+  behavior in the future, e.g. to allow replacing an ITIN with another
+  ITIN.
 
 Limitations:
 
