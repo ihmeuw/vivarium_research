@@ -3887,7 +3887,7 @@ address, only duplicate them once, for a maximum of 2 occurrences in the end
 dataset. Select the guardian at random.
 
 The behavior of guardian-based duplication when filtering the data to a
-specific state (or other location) should be as follows:
+US state (or other location) should be as follows:
 
 * If a simulant lives in the state but their guardian does not, then
   the duplicated row does **not** appear in the filtered dataset: Since
