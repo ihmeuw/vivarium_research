@@ -2624,8 +2624,8 @@ Taxes
 Taxes, as we all know, can contain many different forms and processes.
 For this model, we will split the tax information into two main sections:
 W2/1099 forms from employers; and 1040 forms from simulants. 1099 forms are used for independent
-contractors or self-employed individuals, while W-2 forms are submitted by an employer for their employee 
-(as the employer withholds payroll taxes from employee earnings). 1040 forms are 
+contractors or self-employed individuals, while W-2 forms are submitted by an employer for their employee
+(as the employer withholds payroll taxes from employee earnings). 1040 forms are
 submitted by the employee. We will look at these separately, starting with W2 and 1099 forms.
 
 
@@ -2853,7 +2853,8 @@ in January 2024.
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
-Leave the field blank.
+Instead, fill in the SSN field with the simulant's ITIN
+(recall that every simulant has either an SSN or ITIN, but not both).
 This is designed to reflect undocumented immigrants, who primarily
 file taxes under the ITIN system.
 
@@ -2872,9 +2873,19 @@ are just 2 really long rows for two simulants.
 
 .. note::
 
-  The above image is outdated and contains "Age" and "DOB" columns, but these
-  should **not** appear in the 1040 dataset. The image is also *missing* the
-  ground-truth "Household ID" column.
+  The above image is outdated in the following ways:
+
+  - The image shows "Age" and "DOB" columns, but these
+    should **not** appear in the 1040 dataset.
+
+  - The image is *missing* the ground-truth "Household ID" column.
+
+  - The image shows separate SSN and ITIN columns, but the 1040 dataset
+    should contain **only** SSN columns. Simulants without SSNs should
+    have their ITIN placed in the appropriate SSN column.
+
+  Text descriptions elsewhere in the concept model are more up-to-date
+  and take precedence over the image.
 
 If a simulant had more than 4 employments in the tax year,
 the 4 with the highest income values are included on the 1040; other employment information
@@ -3608,6 +3619,22 @@ noise to all eligible cells in the column.
   noise to approximately the correct number of cells and how to implement the
   user warning.
 
+.. note::
+
+  When we implemented the copy-from-within-household noise type, we
+  stored a copy of a random household member's SSN but no copies of
+  household members' ITINs. (This was a result of our consideration of
+  SSN and ITIN as separate attributes, before we realized that ITINs get
+  recorded in the SSN field on actual tax forms, meaning that we should
+  only have one column, not two.) Thus, when applying this noise type to
+  an SSN column (e.g. in the 1040 dataset), an SSN or ITIN can get
+  replaced with another household member's SSN, but never with an ITIN.
+  In order for a simulant's SSN or ITIN to be eligible for this noise
+  type, they must live in a household (not GQ) with at least one other
+  member who has an SSN. It's possible we may want to reconsider this
+  behavior in the future, e.g. to allow replacing an ITIN with another
+  ITIN.
+
 Limitations:
 
 - This oversimplifies some swapping of ages or birthdays between family members. However, it allows better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenge.
@@ -3826,24 +3853,24 @@ in GQ and simulants under 24 (<24) and in college GQ.
 For each of the two categories of simulants, the maximum duplication rate will
 be calculated based on those who have a guardian living at a different address
 in the sim. Note that all simulants in college GQ are initialized with a
-guardian living at a different address, but this is not true for simulants that 
-move into college GQ during the simulation, so both maximum duplication rates 
+guardian living at a different address, but this is not true for simulants that
+move into college GQ during the simulation, so both maximum duplication rates
 will be less than 100%.
 
 The user can then pick a rate of duplication between 0 and 100% **for each of
 the two categories of simulants**. We will set a default duplication rate of 2% for
 simulants under 18 and not in GQ, and a default duplication rate of 5% for simulants
 under 24 and in college GQ.
-That is, each simulant under 18 and not in GQ is duplicated at a guardian's household 
-with default probability 0.02, and each simulant under 24 in college GQ is duplicated 
+That is, each simulant under 18 and not in GQ is duplicated at a guardian's household
+with default probability 0.02, and each simulant under 24 in college GQ is duplicated
 at a guardian's household with default probability 0.05.
 There should be two user parameters for overriding these probabilities, one
 for each simulant category.
 
-The 2% duplication rate for simulants under 18 was estimated from Figure 1 of `"An Analysis of Person Duplication 
-in Census 2000" <http://www.asasrms.org/Proceedings/y2004/files/Jsm2004-000730.pdf>`_ 
-and roughly corroborated by Table 4 of `"Real-Time 2020 Administrative Record 
-Census Simulation" <https://www2.census.gov/programs-surveys/decennial/2020/program-management/evaluate-docs/EAE-2020-admin-records-experiment.pdf>`_ 
+The 2% duplication rate for simulants under 18 was estimated from Figure 1 of `"An Analysis of Person Duplication
+in Census 2000" <http://www.asasrms.org/Proceedings/y2004/files/Jsm2004-000730.pdf>`_
+and roughly corroborated by Table 4 of `"Real-Time 2020 Administrative Record
+Census Simulation" <https://www2.census.gov/programs-surveys/decennial/2020/program-management/evaluate-docs/EAE-2020-admin-records-experiment.pdf>`_
 combined with the totals from Table 1.
 
 
