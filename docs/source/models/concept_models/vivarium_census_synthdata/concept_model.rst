@@ -3140,32 +3140,32 @@ Noise should be added in the order below.
       - Pseudopeople name
     * - "Borrowed" SSN
       - Borrow a social security number
+    * - Guardian-based duplication
+      - Duplicate with guardian
+    * - (Simple) Duplication
+      - (not yet implemented)
     * - Targeted Omission
       - Do not respond
     * - Simple Omission
       - Omit a row
-    * - Guardian-based duplication
-      - (not yet implemented)
-    * - (Simple) Duplication
-      - (not yet implemented)
     * - Missing data
       - Leave a field blank
     * - Incorrect selection
       - Choose the wrong option
     * - Copy from within household
       - Copy from household member
-    * - Month and day swaps
-      - Swap month and day
-    * - Zip code miswriting
-      - Write the wrong ZIP code digits
-    * - Age miswriting
-      - Misreport age
-    * - Numeric miswriting
-      - Write the wrong digits
     * - Nicknames
       - Use a nickname
     * - Fake names
       - Use a fake name
+    * - Month and day swaps
+      - Swap month and day
+    * - Age miswriting
+      - Misreport age
+    * - Numeric miswriting
+      - Write the wrong digits
+    * - Zip code miswriting
+      - Write the wrong ZIP code digits
     * - Phonetic
       - Make phonetic errors
     * - OCR
