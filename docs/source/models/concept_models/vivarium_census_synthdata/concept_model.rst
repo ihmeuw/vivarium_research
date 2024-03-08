@@ -3915,6 +3915,18 @@ specific state (or other location) should be as follows:
   <https://jira.ihme.washington.edu/browse/MIC-4907>`_ was created to
   address this issue.
 
+Guardian-based duplication should be applied **before** the omission
+noise types ("Do not respond", "Omit a row") so as not to preclude
+eligible rows from being duplicated. In real life, we'd expect that a
+dependent might be reported with their guardian even if the dependent
+did not respond themselves or had their record erroneously omitted, and
+we'd expect that a guardian who did not respond would never report a
+dependent who lives elsewhere. Currently, this second scenario is not
+implemented (i.e., a dependent *can* be reported at their guardian's
+address even if the guardian does not respond), but `SSCI-1790
+<https://jira.ihme.washington.edu/browse/SSCI-1790>`_ has been created
+to address this.
+
 .. note::
 
   Currently, the order in which simulants appear in each dataset is an
