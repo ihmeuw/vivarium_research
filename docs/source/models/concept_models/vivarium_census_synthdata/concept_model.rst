@@ -3921,6 +3921,25 @@ dataset. Select the guardian at random.
   or for all duplicated rows to appear at the end of the dataset, so we would
   need a strategy to address this.
 
+.. warning::
+
+  We `tried sorting <https://github.com/ihmeuw/pseudopeople/pull/384>`_
+  the decennial census by year and household ID (`SSCI-1677
+  <https://jira.ihme.washington.edu/browse/SSCI-1677>`_, `MIC-4833
+  <https://jira.ihme.washington.edu/browse/MIC-4833>`_) so that
+  simulants duplicated at a guardian's household would appear next to
+  other members of the guardian's household in the returned dataset.
+  However, the runtime of the sort was unacceptably slow for the USA
+  data, so we `reverted the change
+  <https://github.com/ihmeuw/pseudopeople/pull/386>`_. In the current
+  implementation, duplicates are appended to the end of the DataFrame,
+  but this happens at the *shard* level. Thus, while the sample data has
+  all duplicates appearing at the end of the dataset (making them easy
+  to find), duplicates in the USA or RI data appear at the end of each
+  shard, which is less obvious. We deemed this acceptable behavior for
+  the time being, though it may be worth revisiting the order of rows in
+  each dataset as we continue to make improvements.
+
 .. note::
 
     Currently, we have not included a more general duplication for other types of simulants. There are known rates for duplication that could be added at a later time.
