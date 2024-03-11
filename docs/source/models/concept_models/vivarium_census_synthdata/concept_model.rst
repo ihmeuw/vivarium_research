@@ -3938,7 +3938,8 @@ dataset. Select the guardian at random.
   to find), duplicates in the USA or RI data appear at the end of each
   shard, which is less obvious. We deemed this acceptable behavior for
   the time being, though it may be worth revisiting the order of rows in
-  each dataset as we continue to make improvements.
+  each dataset as we continue to make improvements (`SSCI-1794
+  <https://jira.ihme.washington.edu/browse/SSCI-1794>`_).
 
 .. note::
 
