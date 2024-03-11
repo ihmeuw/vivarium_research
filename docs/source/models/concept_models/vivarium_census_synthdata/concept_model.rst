@@ -3838,6 +3838,8 @@ times at different addresses. This can occur when family structures are
 complex and children might spend time at multiple households. A related
 challenge occurs with college students, who often are counted both at their
 university and at their guardian’s home address.
+We will implement this type of duplication only for the decennial
+census.
 
 To facilitate this type of error, we have simulants assigned to guardians
 within the simulation. Sometimes, those guardians may move and live at
@@ -3894,17 +3896,63 @@ should be set to 1.
 
     If finding the maximum rate proves too difficult to implement, we can reassess this approach
 
-The duplicated row should have the same simulant-specific attributes as the
-original, such as name and birth date, but different household-specific
-attributes such as address fields and relation to reference person.
-For simplicity, set "relation to reference person" equal to "Other relative" in
-the duplicated row.
+The duplicated row should have the same simulant-specific attributes as
+the original, such as name and birth date, but different
+household-specific attributes such as address fields and relationship to
+reference person. For simplicity, when the guardian's housing type is
+"Household," set "Relationship to reference person" equal to "Other
+relative" in the duplicated row. If the guardian lives in group
+quarters, the value of "Relationship to reference person" in the
+duplicated row should match that of the guardian (either
+“Institutionalized group quarters population” or “Noninstitutionalized
+group quarters population”).
 
 To create guardian-based duplicates, each duplicated simulant will be included
 in the final dataset twice, once at their address of residence and once at their
 guardian's address. If a simulant has more than 1 guardian living at a different
 address, only duplicate them once, for a maximum of 2 occurrences in the end
 dataset. Select the guardian at random.
+
+The behavior of guardian-based duplication when filtering the data to a
+US state (or other location) should be as follows:
+
+* If a simulant lives in the state but their guardian does not, then
+  the duplicated row does **not** appear in the filtered dataset: Since
+  the guardian is not part of the dataset, they have no opportunity to
+  create a duplicate record.
+
+* If a simulant lives outside the state but their guardian lives in the
+  state, then the duplicated row **does** appear in the filtered
+  dataset: The guardian erroneously reports that their out-of-state
+  dependent lives with them. In this case it would not be apparent that
+  the duplicated record is a duplicate (even with ground truth
+  available) unless the user also generates data for the state where the
+  dependent lives.
+
+.. todo::
+
+  As of March 7, 2024, we have implemented the first of the above
+  behaviors for state filtering but not the second. That is, duplicated
+  rows do not appear in the filtered dataset if the guardian **or** the
+  simulant lives out of state. Including duplicate rows when the
+  guardian lives in-state but the dependent does not is more complicated
+  because state filtering happens when data is loaded. To solve this, we
+  may have to pre-compute all *potentially* duplicated rows and store
+  them with the appropriate state. `MIC-4907
+  <https://jira.ihme.washington.edu/browse/MIC-4907>`_ was created to
+  address this issue.
+
+Guardian-based duplication should be applied **before** the omission
+noise types ("Do not respond", "Omit a row") so as not to preclude
+eligible rows from being duplicated. In real life, we'd expect that a
+dependent might be reported with their guardian even if the dependent
+did not respond themselves or had their record erroneously omitted, and
+we'd expect that a guardian who did not respond would never report a
+dependent who lives elsewhere. Currently, this second scenario is not
+implemented (i.e., a dependent *can* be reported at their guardian's
+address even if the guardian does not respond), but `SSCI-1790
+<https://jira.ihme.washington.edu/browse/SSCI-1790>`_ has been created
+to address this.
 
 .. note::
 
