@@ -3142,8 +3142,6 @@ Noise should be added in the order below.
       - Borrow a social security number
     * - Guardian-based duplication
       - Duplicate with guardian
-    * - (Simple) Duplication
-      - (not yet implemented)
     * - Targeted Omission
       - Do not respond
     * - Simple Omission
