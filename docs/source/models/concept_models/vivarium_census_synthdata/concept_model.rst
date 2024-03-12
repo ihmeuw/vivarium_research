@@ -3102,10 +3102,8 @@ Noise should be added in the order below.
 #. Duplications
 
    a. Guardian-based dupilcation
-#. Omissions
-
-   a. Do not respond (targeted omission)
-   b. Omit a row (simple omission)
+#. Do not respond (targeted omission)
+#. Omit a row (simple omission)
 #. Missing Data
 #. Incorrect Selection
 #. Copy from Within Household
