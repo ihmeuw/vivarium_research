@@ -3110,22 +3110,20 @@ noise added to the data. We currently divide noise into two types:
 Noise should be added in the order below.
 
 #. "Borrowed" SSN (happens in simulation NOT noise functions)
-#. Omissions
-
-   a. Do not respond (targeted omission)
-   b. Omit a row (simple omission)
 #. Duplications
 
    a. Guardian-based dupilcation
+#. Do not respond (targeted omission)
+#. Omit a row (simple omission)
 #. Missing Data
 #. Incorrect Selection
 #. Copy from Within Household
-#. Month and day swaps (applies to dates only)
-#. Zip Code Miswriting (applies to Zip Code only)
-#. Age Miswriting (applies to age only)
-#. Numeric miswriting
 #. Nicknames
 #. Fake names
+#. Month and day swaps (applies to dates only)
+#. Age Miswriting (applies to age only)
+#. Numeric miswriting
+#. Zip Code Miswriting (applies to Zip Code only)
 #. Phonetic
 #. OCR
 #. Typographic
@@ -3151,32 +3149,30 @@ Noise should be added in the order below.
       - Pseudopeople name
     * - "Borrowed" SSN
       - Borrow a social security number
+    * - Guardian-based duplication
+      - Duplicate with guardian
     * - Targeted Omission
       - Do not respond
     * - Simple Omission
       - Omit a row
-    * - Guardian-based duplication
-      - (not yet implemented)
-    * - (Simple) Duplication
-      - (not yet implemented)
     * - Missing data
       - Leave a field blank
     * - Incorrect selection
       - Choose the wrong option
     * - Copy from within household
       - Copy from household member
-    * - Month and day swaps
-      - Swap month and day
-    * - Zip code miswriting
-      - Write the wrong ZIP code digits
-    * - Age miswriting
-      - Misreport age
-    * - Numeric miswriting
-      - Write the wrong digits
     * - Nicknames
       - Use a nickname
     * - Fake names
       - Use a fake name
+    * - Month and day swaps
+      - Swap month and day
+    * - Age miswriting
+      - Misreport age
+    * - Numeric miswriting
+      - Write the wrong digits
+    * - Zip code miswriting
+      - Write the wrong ZIP code digits
     * - Phonetic
       - Make phonetic errors
     * - OCR
