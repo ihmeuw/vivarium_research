@@ -65,7 +65,7 @@ on our `feedback form <https://docs.google.com/forms/d/e/1FAIpQLSeCED9TFQsH-1u4Q
     In this section we'll discuss the questions "How do race and ethnicity fit into my research question?" and "Does my research highlight biological or social components of causality?",
     and how a health metrics researcher would answer this question and use that answer to inform their research question.
 
-1.3 Risk factors vs. risk markers 
+1.2 Risk factors vs. risk markers 
 ---------------------------------
 
 .. todo:: 
@@ -81,15 +81,16 @@ on our `feedback form <https://docs.google.com/forms/d/e/1FAIpQLSeCED9TFQsH-1u4Q
 
 .. todo:: 
 
-    In this section we'll discuss the question "How do our data sources adjust for race and ethnicity and how does that affect how we adjust in our own models?" and how a health 
+    In this section we'll discuss the question "What do I do when data sources have different categories?" and how a health 
     metrics researcher would answer this question and use that answer to inform their methods.
+
 
 2.2 Considering prior adjustment for race and ethnicity
 -------------------------------------------------------
 
 .. todo:: 
 
-    In this section we'll discuss the question "What do I do when data sources have different categories?" and how a health 
+    In this section we'll discuss the question "How do our data sources adjust for race and ethnicity and how does that affect how we adjust in our own models?" and how a health 
     metrics researcher would answer this question and use that answer to inform their methods.
 
 
