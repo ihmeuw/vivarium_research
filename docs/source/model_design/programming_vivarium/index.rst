@@ -36,8 +36,8 @@ The purpose of this page is to document information relevant to the Vivarium and
    */index
 
 
-General Engineering Documenation for Relevant Packages
-------------------------------------------------------
+General Engineering Documentation for Relevant Packages
+-------------------------------------------------------
 
 Vivarium
 ++++++++
