@@ -1,35 +1,46 @@
-.. _software:
+..
+  Section title decorators for this document:
+  
+  ==============
+  Document Title
+  ==============
+  Section Level 1
+  ---------------
+  Section Level 2
+  +++++++++++++++
+  Section Level 3
+  ~~~~~~~~~~~~~~~
+  Section Level 4
+  ^^^^^^^^^^^^^^^
+  Section Level 5
+  '''''''''''''''
 
-===============================
-The Vivarium Software Framework
-===============================
+  The depth of each section level is determined by the order in which each
+  decorator is encountered below. If you need an even deeper section level, just
+  choose a new decorator symbol from the list here:
+  https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
+  And then add it to the list of decorators above.
 
-The Vivarium microsimulation framework is separated into numerous
-source-controlled repositories to keep things focused and organized. A list of
-repositories relevant to researchers can be found below, including short
-descriptions and links to the repositories and their documentation. Each
-repository holds installation information in its README.
+.. _programming_vivarium:
 
-Each Vivarium repository contains documentation in the form of API references,
-tutorials, and/or conceptual information. These tutorials are especially useful
-and explain many common tasks but because they are scattered across many
-repositories they can be hard to find. Below is a list of some of the most
-important pieces of documentation to know about.
+==============================================
+Vivarium engineering for research team members
+==============================================
+
+The purpose of this page is to document information relevant to the Vivarium and Vivarium Public Health frameworks from a research perspective. This primarly includes "how-to" pages for different engineering type tasks. A good rule for an engineering type task included here is one that edits or is run from the engineering repository rather than from the research repository.
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   */index
 
 
-- `The model specification <https://vivarium.readthedocs.io/en/latest/concepts/model_specification/index.html>`_
-- `Running a simulation <https://vivarium.readthedocs.io/en/latest/tutorials/running_a_simulation/index.html>`_
-- `Exploring a simulation in an interactive setting <https://vivarium.readthedocs.io/en/latest/tutorials/exploration.html>`_
-- `Creating and altering a data artifact <https://vivarium.readthedocs.io/en/latest/tutorials/artifact.html>`_
-- `Pulling data using Vivarium Inputs <https://vivarium-inputs.readthedocs.io/en/latest/tutorials/pulling_data.html>`_
-- `YAML basics <https://vivarium.readthedocs.io/en/latest/concepts/model_specification/yaml_basics.html#model-specification-yaml-concept>`_
-- `The branches file <https://vivarium-cluster-tools.readthedocs.io/en/latest/branch.html>`_
-
-.. contents:
-   :local:
+General Engineering Documenation for Relevant Packages
+------------------------------------------------------
 
 Vivarium
---------
+++++++++
 
 Vivarium is the core microsimulation framework and command line tools for
 running individual simulations. It contains documentation about how Vivarium
@@ -41,7 +52,7 @@ things.
 - `Documentation <https://vivarium.readthedocs.io/en/latest/>`__
 
 Vivarium Public Health
-----------------------
+++++++++++++++++++++++
 
 Vivarium Public Health is a set of tools for Vivarium simulations that enable
 public health applications like disease and intervention modeling. This is where
@@ -54,7 +65,7 @@ data artifacts.
 
 
 Vivarium Inputs
----------------
++++++++++++++++
 
 Vivarium Inputs contains the tools needed to create data artifacts from GBD
 data. The data artifact is an important notion, you can think of it as all of
@@ -68,7 +79,7 @@ helpful tutorial here for pulling data using these functions, too.
 
 
 Vivarium Cluster Tools
-----------------------
+++++++++++++++++++++++
 
 Vivarium Cluster Tools contains command line tools for running Vivarium
 simulations in parallel using IHME's cluster. It contains documentation
@@ -79,7 +90,7 @@ describing how this is done, as well as how YAML files and branches files work.
 
 
 GBD Mapping
------------
++++++++++++
 
 GBD Mapping is a python package that contains all the things modeled by the GBD
 and their relationships. This means things like causes, risk factors, and
