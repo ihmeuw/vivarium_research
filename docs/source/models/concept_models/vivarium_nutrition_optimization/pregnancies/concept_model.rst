@@ -585,6 +585,21 @@ Specific outputs for specific models are specified in the following section.
       * Intervention counts
     - Same as 9.2
     - Should be the same as the adding locations test runs
+  * - 11.0
+    - GBD 2021 update, but with year=2021 rather than year=2022 and disability due to other causes ("background morbidity") excluded
+    - Baseline
+    - 400,000 population size per draw, 20 draws
+    - * Deaths, YLLs
+      * YLDs, stratified by pregnancy state
+      * Maternal disorder incident counts, stratified by anemia state
+      * Maternal hemorrhage incident counts, stratified by anemia state
+      * Anemia state person time, **stratified by pregnancy state** 
+      * Pregnancy state person time, **stratified by birth outcome**
+      * Pregnancy state transition counts, stratified by birth outcome
+      * Counts of birth outcomes
+      * Intervention counts
+    - Same as 9.2
+    - Should be the same as the adding locations test runs
   * - 12.0
     - GBD 2021 production runs
     - Baseline
@@ -703,8 +718,15 @@ Specific outputs for specific models are specified in the following section.
       * Check that anemia, maternal disorders and deaths match with target values
       * Check that different scenarios visually appear to separated as expected
       * Check that birth outcome count observer is functioning as expected
+    - `Model 11.0 V&V notebook (Ethiopia only) available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/141>`_
+      * Anemia prevalence is underestimated
+      * Pregnancy outcome observer appears to be recording once per timestep rather than once per simulation 
+  * - 11.1
+    - * Check that anemia prevalence looks good with stratification and updated artifact keys
+      * Check that 2021 year update looks as expected
+      * Check that birth outcome count observer is functioning as expected (if fix is implemented prior to running)
+      * Check that background morbidity has been excluded
     - 
-
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -714,6 +736,14 @@ Specific outputs for specific models are specified in the following section.
     - Explanation
     - Action plan
     - Timeline
+  * - Anemia prevalence underestimated
+    - Could be due to non-stratification of anemia person time by pregnancy state? Could be because the hemoglobin key indices look weird?
+    - RT to add stratification and fix hemoglobin artifact keys and run again
+    - For 11.1
+  * - Pregnancy outcome observer recording every timestep rather than once per sim
+    - Known issue
+    - Engineers to update observer accordingly. In the meantime, RT can add pregnancy outcome stratification to pregnancy transition observer to verify that relative pregnancy outcome counts are as expected with 2021 data.
+    - ASAP/11.1
   * - Zero values for 50-55 year old age group
     - Vivarium inputs fills maternal disorders deaths and maternal hemorrhage incidence with zeros due to :code:`age_end` parameter in :code:`gbd_mapping`, despite raw GBD estimates for these parameters being non-zero for this age group
     - Acceptable limitation given very low pregnancy incidence in this age group
