@@ -585,7 +585,7 @@ Specific outputs for specific models are specified in the following section.
       * Intervention counts
     - Same as 9.2
     - Should be the same as the adding locations test runs
-  * - 11.0
+  * - 11.1
     - GBD 2021 update, but with year=2021 rather than year=2022 and disability due to other causes ("background morbidity") excluded
     - Baseline
     - 400,000 population size per draw, 20 draws
