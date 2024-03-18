@@ -33,7 +33,7 @@ Overview of Engineering Files
 
 .. todo::
 
-  Add to this page. Include explanations for the relevant engineering files (model specs, branches file, loader.py, etc.) the includes when the functions are called, when you might need to look at them, what information is stored where, and any other relavent information for RT based tasks. 
+  Add to this page. Include explanations for the relevant engineering files (model specs, branches file, loader.py, etc.) that includes when the functions are called, when you might need to look at them, what information is stored where, and any other relevant information for RT based tasks. 
 
   Integrate links to: `YAML basics <https://vivarium.readthedocs.io/en/latest/concepts/model_specification/yaml_basics.html#model-specification-yaml-concept>`_, `model specs file <https://vivarium.readthedocs.io/en/latest/concepts/model_specification/index.html>`_, and the `branches file <https://vivarium-cluster-tools.readthedocs.io/en/latest/branch.html>`_. 
 
