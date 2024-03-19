@@ -1499,7 +1499,7 @@ Wave III
     - Baseline
     - Ethiopia location ONLY
     - Should use 2021 GBD pregnancy model
-  * - 24.0
+  * - 14.0
     - Change child data to subnational
     - Baseline
     - Baseline
