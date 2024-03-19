@@ -13,4 +13,5 @@ This section of Vivarium Research Documentation contains information related to 
    vivarium_model_components/index
    designing_vivarium_model/index
    vivarium_features/index
+   programming_vivarium/index
    general_reference_material/index
