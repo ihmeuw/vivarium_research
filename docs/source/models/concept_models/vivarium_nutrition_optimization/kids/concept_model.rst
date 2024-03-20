@@ -1493,37 +1493,37 @@ Wave III
     - Child scenario(s)
     - Spec. mods
     - Note
-  * - 1.0
+  * - 13.0
     - Update to GBD 2021 data 
     - Baseline
     - Baseline
     - Ethiopia location ONLY
     - Should use 2021 GBD pregnancy model
-  * - 2.0
+  * - 14.0
     - Change child data to subnational
     - Baseline
     - Baseline
     - 
     - 
-  * - 3.0
+  * - 15.0
     - Add SQ-LNS intervention targeting for WAZ criteria
     - Baseline
     - 3 and 8
     - 
     - Universal and Targeted SQ-LNS only
-  * - 4.0
+  * - 16.0
     - Add additional SQ-LNS geographic targeting criteria
     - Baseline
     - 3 and 8
     - 
     - Universal and Targeted SQ-LNS only
-  * - 5.0
+  * - 17.0
     - Add targeted SQ-LNS effect modification
     - Baseline
     - 3 and 8
     - 
     - Universal and Targeted SQ-LNS only
-  * - 6.0
+  * - 18.0
     - Production runs
     - All
     - All
@@ -1538,7 +1538,7 @@ Wave III
   * - Model
     - Outputs
     - Overall strata
-  * - 1.0
+  * - 13.0
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
       3. Cause state person time
@@ -1549,7 +1549,7 @@ Wave III
       8. Wasting transition counts 
     - * Age group
       * Sex
-  * - 2.0
+  * - 14.0
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
       3. Cause state person time
@@ -1561,28 +1561,28 @@ Wave III
     - * Age group
       * Sex
       * Subnational location
-  * - 3.0
+  * - 15.0
     - 1. Deaths
       2. Wasting state person time, stratified by SQ-LNS treatment coverage
       3. Stunting state person time, stratified by SQ-LNS treatment coverage
     - * Age group
       * Sex
       * Subnational location
-  * - 4.0
+  * - 16.0
     - 1. Deaths
       2. Wasting state person time, stratified by SQ-LNS treatment coverage
       3. Stunting state person time, stratified by SQ-LNS treatment coverage
     - * Age group
       * Sex
       * Targeted SQ-LNS location vs not
-  * - 5.0
+  * - 17.0
     - 1. Deaths
       2. Wasting state person time, stratified by SQ-LNS treatment coverage
       3. Stunting state person time, stratified by SQ-LNS treatment coverage
     - * Age group
       * Sex
       * Subnational location
-  * - 6.0
+  * - 18.0
     - 1. Deaths and YLLs (non-cause-specific)
       2. YLDs (all-cause observer only)
       3. Count of incident SAM cases stratified by SAM treatment coverage
@@ -1598,13 +1598,13 @@ Wave III
   * - Model
     - V&V plan
     - V&V summary
-  * - 1.0
+  * - 13.0
     - * Verify to GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
       * Verify CGF risk exposures and effects
       * Verify antenatal intervention effects
       * Verify child intervention effects 
     - 
-  * - 2.0
+  * - 14.0
     - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
       * Verify national CGF risk exposures and effects
       * Verify national antenatal intervention effects
@@ -1612,22 +1612,22 @@ Wave III
       * Verify population in each subnational location
       * Verify subnational differentiation in above criteria
     - 
-  * - 3.0
+  * - 15.0
     - * Verify SQ-LNS is correctly targeted based on subnational location
       * Verify stunting, wasting vary with SQ-LNS exposure
       * Verify other model components look as expected
     - 
-  * - 4.0
+  * - 16.0
     - * Verify SQ-LNS targeting matches expected population
       * Verify stunting, wasting vary with SQ-LNS exposure
       * Verify other model components look as expected
     - 
-  * - 5.0
+  * - 17.0
     - * Verify SQ-LNS effect modification changes as expected with targeting
       * Verify stunting, wasting vary with SQ-LNS exposure
       * Verify other model components look as expected
     - 
-  * - 6.0
+  * - 18.0
     - * Confirm that results for production runs match expected outputs
     - 
 
