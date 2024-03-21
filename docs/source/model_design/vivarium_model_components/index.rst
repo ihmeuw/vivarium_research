@@ -23,9 +23,9 @@
 
 .. _vivarium_model_components:
 
-================================================
-How to model Vivarium components
-================================================
+===================================================
+Types of Vivarium components and how to design them
+===================================================
 
 The following subpages describe the different types of Vivarium
 components we typically encounter and provide guidelines on how to model
