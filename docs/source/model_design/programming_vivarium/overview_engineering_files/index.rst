@@ -40,6 +40,11 @@ for research team members, and the files included change between models.
 This page is organized in sections by the different folders found in engineering 
 repositories and then the pages within folders, as relevant. 
 
+.. todo::
+
+  Add information on ownership of documents to this file. What is RT responsibility vs engineering. 
+
+
 Project Folder
 --------------
 
