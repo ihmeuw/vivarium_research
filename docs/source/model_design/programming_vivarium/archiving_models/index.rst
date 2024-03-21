@@ -21,16 +21,17 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_overview:
+.. _archiving_models_rt:
 
-================================================
-Overview of Vivarium Simulation Models
-================================================
+================
+Archiving Models
+================
 
-The purpose of this page is to document information relevant to the Vivarium framework from a research perspective. 
+.. contents::
+   :local:
+   :depth: 1
 
-.. toctree::
-   :maxdepth: 1
-   :glob:
+.. todo::
 
-   */index
+  Add to this page. Include how-to type information on archiving models, targeted to a research team audience. Include links to the engineering documentation as well and the `Hub page maintained by engineering <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=SSE&title=Archiving+a+Simulation+Model+Repository>`_. 
+

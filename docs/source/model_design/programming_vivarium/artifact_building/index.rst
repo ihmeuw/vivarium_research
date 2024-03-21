@@ -21,16 +21,20 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_overview:
+.. _artifact_building_rt:
 
-================================================
-Overview of Vivarium Simulation Models
-================================================
+=================
+Artifact Building
+=================
 
-The purpose of this page is to document information relevant to the Vivarium framework from a research perspective. 
+.. contents::
+   :local:
+   :depth: 1
 
-.. toctree::
-   :maxdepth: 1
-   :glob:
+.. todo::
 
-   */index
+  Add to this page. Include how-to type information on building the artifact, targeted to a research team audience. Include links to the engineering documentation as well. 
+
+  Review and integrate this `engineering page <https://vivarium.readthedocs.io/en/latest/tutorials/artifact.html>`_. 
+
+

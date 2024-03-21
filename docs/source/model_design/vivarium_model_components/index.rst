@@ -37,6 +37,7 @@ them in our simulations.
    :glob:
 
    causes/index
+   GBD_disease_health/index
    impairments/index
    interventions/index
    intervention_features/index

@@ -358,6 +358,7 @@ Note:
 
 Note: 
   - For this run, results must **be stratified by seed** 
+  - 30 seeds was selected as the size based on this `draw and seed sizing notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/draw_seed_analysis.ipynb>`_
 
 **Draw Testing:**
 
@@ -368,7 +369,7 @@ Note:
      - Value
      - Note
    * - Population size
-     - TBD from seed testing run above 
+     - 30 seeds (10,000 sims per seed)
      - 
    * - Number of draws
      - 50
@@ -386,6 +387,35 @@ Note:
      - None 
      - 
 
+Note: 
+  - 20 draws was selected as the size based on this `draw and seed sizing notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/draw_seed_analysis.ipynb>`_
+
+**Timing Test Run:**
+
+.. list-table:: CVD simulation model population parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - 100_000 (plan to test both 100_000 with 1 seed and 50_000 with 2 seeds)
+     - per draw
+   * - Number of draws
+     - 10 
+     - 
+   * - Cohort type
+     - Closed
+     - 
+   * - Age start
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
+   * - Age end
+     - 125 years
+     - Maximum age at initialization
+   * - Sex restrictions
+     - None 
+     - 
 
 **Final Model Run:**
 
@@ -396,10 +426,10 @@ Note:
      - Value
      - Note
    * - Population size
-     - TBD
+     - 30 seeds (10,000 sims per seed)
      - per draw
    * - Number of draws
-     - TBD
+     - 20 
      - 
    * - Cohort type
      - Closed
@@ -789,6 +819,90 @@ LDL-C decrease for an individual simulant can be calculated as:
 
 Where adherence score = 0 for primary or secondary nonadherent; and adherence score = 1 for adherent 
 
+
+Treatment Discontinuation
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In order to address overly optimisitic (i.e. too much) medication in the simulation, 
+we are adding a possibility for treatment discontinuation. The general 
+principles for discontinuation are based on the observations of [An_2021]_ 
+which summarized the number of patients who had discontinued treatment by 1 year 
+and 2 years after initialization. This approach can be summarized as: 
+
+- Approximately 31.4% (adjusted by age/sex/state) of simulants who start medication will discontinue all treatments within 1 year (this is a weighted average across medication types in reference above)
+- Simulants who make it one year on treatment will continue on treatment indefinitely - this is based on the relatively low number of patients who discontinued treatment between year 1 and year 2 
+- Simulants who discontinue treatment will not restart medication at any point 
+- This approach applies to both SBP and LDL-C medications, although discontinuation on the different medication classes is independent (e.g., discontinuing SBP meds does not affect a simulant's discontinuation rate on LDL-C meds)
+
+To include state level medication changes on time steps, 
+we are adding age/sex/state specific discontinuation here. 
+
+First, find the appropriate discontinuation base rate to use with: 
+
+ :math:`SBPdiscon_{i} = 0.314 / RR_{SBP, age, sex, state}` 
+
+ :math:`LDLdiscon_{i} = 0.314 / RR_{LDL, age, sex, state}` 
+
+Please note that the equations are dividing by relative risk instead of multiplying. 
+
+Each state has an age/sex/medication type specific "relative risk" value for being 
+medicated. These values are stored in the 'state_medication_real_data_v3.csv'. For ages 
+not included in this csv, use the closest age (e.g., use 25-29 for all sims under 25 
+and 80+ for all sims over 80). Note that the data has been smoothed using a loess model. 
+
+These values :math:`SBPdiscon_{i}` and :math:`LDLdiscon_{i}` are these used in all 
+steps below.
+
+**On Initialization**
+
+Simulants initialized on treatment: 
+
+Some of the simulants initialized on treatment will have started their medication within 1 
+year and are therefore eligible for discontinuation. To include this in the sim, simulants 
+initialized on treatment will be assigned a treatment start time uniformly distributed 
+between 0 and 3 years in the past. This is designed so that approximately 1/3 of simulants are 
+eligible for discontinuation and was validated through the interactive sim below. It was 
+designed so that the initialized rates of medication are maintained throughout the sim. 
+
+Simulants initialized NOT on treatment: 
+
+Some simulants initialized not on treatment will have already started and discontinued 
+treatment, meaning they are not eligible for future treatment. To include this in the sim, 
+:math:`SBPdiscon_{i}` (or :math:`LDLdiscon_{i}`) percent of simulants within an age/sex group will be randomly 
+assigned as inelgible for future 
+treatment due to prior discontinuation. The remaining :math:`1 - SBPdiscon_{i}` (or :math:`1 - LDLdiscon_{i}`) 
+will still be eligible for future 
+treatment assignment. 
+
+This will be an overestimate, especially for age/sex groups with low medication rates. However, 
+it is a reasonable simplification and was designed so that the initialized rates of medication 
+are maintained throughout the sim. This was validated in the interactive sim. 
+
+**On Time Steps**
+
+A simulant who starts treatment (and does not end treatment for any other 
+reason such as death within the first year) should have a :math:`SBPdiscon_{i}` 
+(or :math:`LDLdiscon_{i}`) chance of 
+discontinuing treatment within 1 year, with a constant risk over that time. 
+This probability is the same for all simulants. 
+
+Simulants who previously received and discontinued treatment are not eligible to 
+restart treatment. They are therefore also not eligible for the outreach and 
+polypill interventions. They are still eligible for the lifestyle intervention. 
+
+Simulants who have not previously received or discontinued treatment can receive 
+treatment per the treatment ladder above. 
+
+This work was tested in an `edited interactive simulation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/2023_10_31b_interactive_medication_inertia-take_2_pr60%20(1).ipynb>`_. 
+
+The addition of the state level variation was tested first in `a discontination nanosim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/therapeutic_inertia_nanosim_add_discontinuation.ipynb>`_ 
+and then in an interactive sim `adjusted to include a different discontinuation rate <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/2023_12_6_interactive_discon_state_variation.ipynb>`_. 
+
+Note: this strategy will likely result in less simulant "churn" between not treatment 
+and treated than happens in real life. While the overall level of treatment is correct, 
+we have simulants relatively fixed into either not treated or treated permanently, which 
+is not reflective of real life. 
+
 .. _uscvd4.5:
 
 4.5 Initialization Parameters
@@ -979,6 +1093,25 @@ These covariate values are calculated for each simulant and are then plugged int
 Where sex = 1 for men and 2 for women 
 and SBP and LDL level refer to the raw values from GBD 
 
+**Adjusting for State Level Variation:** 
+
+Each state has an age/sex/medication type specific "relative risk" value for being 
+medicated. These values are stored in the 'state_medication_real_data_v3.csv'. 
+Note that the data has been smoothed using a loess model. 
+
+Once the above covariates have been calculated, 
+multiply them by the appropriate relative risk found in the csv file. There are 3 
+columns labeled "sbp_rr", "ldl_rr" and "both_rr" that can be used independently. The relative risk 
+is then pulled for the specific age group, sex and state and multiplied by the covariate. 
+Note that the age groups end at 80+. The 80+ age group can be used for all simulants 
+over the age of 80. Similar the 25 age group can be used for all simulants less than 25. 
+
+ :math:`SBP_{i} = SBP_{i} * RR_{SBP, age, sex, state}` 
+
+ :math:`LDL_{i} = LDL_{i} * RR_{LDL, age, sex, state}` 
+
+ :math:`Both_{i} = Both_{i} * RR_{Both, age, sex, state}` 
+
 **Calculating Probabilities:** 
 
  :math:`P(tx=SBPonly) = \frac{SBP_{i}}{SBP_{i} + LDL_{i} + Both_{i} + 1}`
@@ -1043,6 +1176,8 @@ Code is below for reference
   Residual Deviance: 29807.44 
   AIC: 29837.44 
  
+
+Additional information on the `generation of data can be found in this notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/generating_state_medication.ipynb>`_. 
 
 .. _uscvd4.6:
 
@@ -1131,12 +1266,27 @@ Code is below for reference
   * - 21.0
     - Add Mediation and PAF Recalculations 
     - Runs were completed for mediation and PAFs were recalculated. PAFs no longer contain any zero values. Most of the model is working as expected. The `causes with mediation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Cause_VV_mediation_10.16.2023.ipynb>`_ are working as prior model versions. The `risks with mediation <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_10_16_23.ipynb>`_ have strange results in the 95+ age group which is still being investigated. 
+  * - 21.1
+    - Mediation and PAF Recalculations with Fix for 95+ Age Group 
+    - With the updates to the exposure observer for the oldest age group, the `risks for 95+ <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Risks_VV_10_20_23.ipynb>`_ have resolved. 
   * - 22.0
-    - Update to GBD 2021 
-    - Note: not planned to be completed before NIH results 
+    - Changes to Inertia with Simulant and Random Propensities 
+    - The medication levels were tested for a `50 50 component split <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_10_18_23.ipynb>`_ and a `75 random 25 simulant component split <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_10_20_23.ipynb>`_. It was decided to proceed with the 50/50 split. There are some changes in treatment over the course of the sim, but we do not expect them to impact final results significantly.  
   * - 23.0
+    - Add treatment discontinuation 
+    - Although treatment discontinuation did not acheive the idealized results we might have hoped for, we still think this is a significant improvement to the model. We tested the results both in the `general sim outputs <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_11_20_23.ipynb>`_ and in the interactive sim in order to include only the simulants that `need medication <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/interactive_medication_inertia.ipynb>`_. Treatment rates still change, but are acceptably stable over time. This is a limitation in the model. 
+  * - 24.0
+    - Add state level treatment variation
+    - It is believed that this was implemented correctly, but noisy data lead to weird patterns over time. To address this, the data was smoothed using a loess model and is being rerun now. `medication levels in the sim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_multi_location_12_11_23.ipynb>`_. 
+  * - 24.1
+    - Add state level treatment variation 
+    - After smoothing with the loess model, the results look good. `updated medication levels in the sim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/meds_VV_multi_location_12_11_23.ipynb>`_. 
+  * - 25.0
     - Final Runs 
     - Research team to specify this further 
+  * - 26.0
+    - Update to GBD 2021 
+    - No longer planned at this time 
 
 Model 3 V&V for the relative risk with angina showed a lot of variability: 
     .. image:: Model3_VV_Angina.png
@@ -1174,16 +1324,16 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - i.e., transition from susceptible to acute MI, stratified by cause 
   * - Mean SBP 
     - sum of SBP * person time
-    - Only needed for V&V 
+    - Not included in final runs
   * - Mean LDL-C
     - sum of LDL-C * person time
-    - Only needed for V&V 
+    - Not included in final runs
   * - Mean BMI 
-    - sum of BMI * person time *NOTE: NOT IN CURRENT MODEL*
-    - Only needed for V&V 
+    - sum of BMI * person time 
+    - Not included in final runs
   * - Mean FPG 
-    - sum of FPG * person time *NOTE: NOT IN CURRENT MODEL*
-    - Only needed for V&V 
+    - sum of FPG * person time 
+    - Not included in final runs
   * - Population achieving target LDL-C values
     - sum of person time in each category: <2.59, >/=2.59 and <3.36, >/=3.36 and <4.14, >/=4.14 and <4.91, >/=4.91; can be included only in final models 
     - 
@@ -1192,19 +1342,19 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - 
   * - Healthcare appointments 
     - sum of healthcare appointments 
-    - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc. Only needed for V&V 
+    - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc. Not included in final runs
   * - Missed follow-up appointments 
     - sum of missed follow-up appointments 
-    - Only needed for V&V 
+    - Not included in final runs
   * - Population on SBP medication 
     - sum of person time on SBP medication 
-    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
+    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category. Not included in final runs
   * - Population on LDL-C medication 
     - sum of person time on LDL-C medication 
-    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
+    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category. Not included in final runs
   * - Number of interventions 
     - sum of person-time in interventions 
-    - Split by intervention type 
+    - Split by intervention type. Not included in final runs
 
 
 Stratifications for All (not included above): 
