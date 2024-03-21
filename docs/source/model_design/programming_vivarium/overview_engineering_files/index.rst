@@ -34,19 +34,46 @@ Overview of Engineering Files
 
 This document is designed to provide an overview of the files found in the 
 engineering repository and some examples of when you might need to use 
-each file. This is NOT inclusive of files as some are less relevant 
+each file. This is NOT exhaustive as some files are less relevant 
 for research team members, and the files included change between models. 
 
 This page is organized in sections by the different folders found in engineering 
 repositories and then the pages within folders, as relevant. 
+
+Project Folder
+--------------
+
+In the initial project folder, there are some files for information storage and 
+documentation that are helpful to know about. These do not used in the actual 
+model, but you might need to edit them in order to document your work. 
+
+CHANGELOG
++++++++++
+
+The :code:`CHANGELOG.rst` file is a way to track what has been run and what 
+updates took place with each model run. This information should match the 
+model runs seen in Vivarium Research documenation. When you run a model, 
+be sure to update this. 
+
+README
+++++++
+
+The :code:`README.rst` file is found in most GitHub repositories, not just 
+on our team! It provides information on cloning and running the code stored 
+in the repo, and how to setup your environment. This is a helpful resource 
+to review when you first start on a project. 
+
+Additionally, you might have to update and edit the :code:`README.rst` file 
+while doing archiving, but more details on this can be found on 
+the :ref:`archiving page <archiving_models_rt>`. 
 
 Components
 ----------
 
 The :code:`components` folder contains files on the information for each 
 modeling "component". This includes things like disease models, 
-risk factors, pregnancies, the health care system, or 
-interventions. 
+risk factors, pregnancies, the health care system, 
+interventions, or observers. 
 
 The files included will be specific to your project rather than generalizable. 
 Additionally, these files will mostly be maintained and written by the 
@@ -66,15 +93,19 @@ are not all inclusive, but represent most of what you should be aware of.
 data_keys
 +++++++++
 
-The :code:`data_keys.py` file dictates which keys are run to make the artifact. Usually, the 
-list of data keys is at the bottom of the file. More information on how and when to 
+The :code:`data_keys.py` file dictates which keys are run to make the artifact. Any 
+keys not included in the :code:`MAKE_ARTIFACTS_KEY_GROUPS` list at the bottom of the 
+file will be ignored when making artifacts. More information on how and when to 
 edit this can be found on the :ref:`artifact building page <artifact_building_rt>`. 
 
 metadata
 ++++++++
 
-The :code:`metadata.py` file will mainly need to be edited to change the locations for artifact 
-building, although this can also be done from the command line. More information 
+The :code:`metadata.py` file stores metadata information for the model. For example, 
+locations the model can be run for, age groups, draw counts, index columns or similar. 
+Research will not be expected to edit this information for the most part, but may 
+need to change the locations for artifact building, although this can also be done 
+from the command line. More information 
 can be found on the :ref:`artifact building page <artifact_building_rt>`.
 
 paths
@@ -82,6 +113,13 @@ paths
 
 The :code:`paths.py` file contains the file paths for all input data. When editing input data (especially 
 RT generated data), check to see if you need to update the file path or file name here. 
+
+results
++++++++
+
+The :code:`results.py` file contains the expected results columns and files. If 
+you want to change what is included in the results, you'll need to edit this. More 
+information on when and how to do that can be found on the :ref:`running simulations page <running_simulations_rt>`.
 
 Data
 ----
@@ -122,7 +160,7 @@ These files are .yaml files. There is general information on `YAML basics <https
 
 Information included here:
 
-- Which components will be included in a model run (e.g., maybe you wish to run a model with interventions "turned off")
+- Which components (including observers) will be included in a model run (e.g., maybe you wish to run a model with interventions "turned off")
 - Population size, seed count, and draw count
 - The time the simulation runs for and time step size 
 - Any stratifications for observers 
@@ -168,8 +206,8 @@ process_results
 
 The :code:`process_results.py` file contains the information on what results to create and 
 the functions to make those results. If you want to remove a component from the model, 
-do so here as well. Otherwise, this is where functions to read in data, manipulate it, 
-and create csvs are stored. 
+do so here as well or :code:`make_results` will fail. Otherwise, this is where 
+functions to read in data, manipulate it, and create csvs are stored. 
 
 Tools
 -----
