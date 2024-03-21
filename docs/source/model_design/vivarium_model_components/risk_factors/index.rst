@@ -1,7 +1,7 @@
 .. _models_risk_factors:
 
 =====================
-Modeling Risk Factors
+Risk Factors
 =====================
 
 This document contains information on risk factors as they relate to modeling in vivarium, including definitional overviews as well as more detailed descriptions of sub-topics related to modeling risk factors (such as risk exposures, effects, correlation, etc.).

@@ -1,7 +1,7 @@
 .. _models_cause:
 
 ===============
-Modeling Causes
+Causes
 ===============
 
 What is included in this chapter: models of causes that are represented as
