@@ -52,7 +52,7 @@ An example intervention model document that uses this template is the
 Key questions to address early
 ------------------------------
 
-There are many questions about the intervention that we need to answer
+There are many questions about an intervention that we need to answer
 early in the research process in collaboration with the client. This
 section lays out several such questions that will help clarify the goals
 of the project and ensure that basic aspects of an intervention are
