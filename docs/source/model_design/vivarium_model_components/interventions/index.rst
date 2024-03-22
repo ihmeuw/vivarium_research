@@ -26,7 +26,7 @@ General guidelines
 
 When writing an intervention model document (or any other component
 model document for Vivarium), you must include the following details to
-allow a software engineer to implement the model:
+allow a software engineer (SWE) to implement the model:
 
 * Attributes of a simulant that are required for modeling the
   intervention (e.g. age, sex, and systolic blood pressure level for a
@@ -49,15 +49,16 @@ describes what a researcher might include for each section when using
 An example intervention model document that uses this template is the
 :ref:`latent tuberculosis treatment intervention <intervention_latent_tuberculosis_treatment>`.
 
-Key questions to address
-------------------------
+Key questions to address early
+------------------------------
 
-This  template aims at making sure basic aspects of an intervention are
-understood and written out so that the SWE team has a clear idea of
-expectations and the Researchers and SWEs do not need to go back and
-forth about clarifying these details throughout the project. Questions
-we need to answer about intervention early in research process (to be
-agreed upon with the client):
+There are many questions about the intervention that we need to answer
+early in the research process in collaboration with the client. This
+section lays out several such questions that will help clarify the goals
+of the project and ensure that basic aspects of an intervention are
+understood and written out. The goal is to give the SWE team a clear
+idea of expectations and to avoid the need for researchers and SWEs to
+go back and forth about clarifying these details throughout the project.
 
 Research aims and objectives
 ++++++++++++++++++++++++++++
