@@ -90,6 +90,13 @@ Outcomes the intervention affects
 Effect sizes and definitions
 ++++++++++++++++++++++++++++
 
+* What are the exposure and control groups?
+* What is the definition of the effect size (prevalence or incidence or mortality, etc.)?
+* What units are the effect size(s) measured in?
+* Are the effects measured in shifts or RRs? Is this compatible with GBD risk factor distribution/definition? Can we convert or find alternative data source if not?
+* Do we need to alter our units on GBD side (using cross-walks) or intervention data source side?
+* NOTE: We need to understand the GBD structure for the relevant risk/cause enough to determine compatibility with our intervention effect sizes.
+
 Potential confounders and mediators
 +++++++++++++++++++++++++++++++++++
 
