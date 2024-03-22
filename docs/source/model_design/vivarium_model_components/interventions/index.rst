@@ -63,6 +63,27 @@ go back and forth about clarifying these details throughout the project.
 Research aims and objectives
 ++++++++++++++++++++++++++++
 
+1. Write a one sentence aim --- What does the client want to learn,
+   specifically?
+
+   - Example: "To evaluate the effect of different interventions of
+     population-wide nutritional fortification of staple foods on
+     disability-adjusted life years in children under 5 in India,
+     Nigeria, and Pakistan."
+
+2. Write a few SMART objectives, answering one question per objective.
+   *Think about*: What is the client willing to ignore? Is GBD/Vivarium
+   able to answer these questions well? How might we adapt our questions
+   to questions that GBD can answer?
+
+   - Example objective 1: "To quantify the what-if scenario of
+     increasing coverage of vitamin A from existing to X% on under 5
+     childhood mortality and morbidity."
+
+   - Example objective 2: "To quantify the what-if scenario of
+     increasing coverage of folic acid from existing to X% on under 5
+     childhood mortality and morbidity."
+
 Outcomes the intervention affects
 +++++++++++++++++++++++++++++++++
 
