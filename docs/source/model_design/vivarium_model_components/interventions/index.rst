@@ -49,6 +49,30 @@ describes what a researcher might include for each section when using
 An example intervention model document that uses this template is the
 :ref:`latent tuberculosis treatment intervention <intervention_latent_tuberculosis_treatment>`.
 
+Key questions to address
+------------------------
+
+This  template aims at making sure basic aspects of an intervention are
+understood and written out so that the SWE team has a clear idea of
+expectations and the Researchers and SWEs do not need to go back and
+forth about clarifying these details throughout the project. Questions
+we need to answer about intervention early in research process (to be
+agreed upon with the client):
+
+Research aims and objectives
+++++++++++++++++++++++++++++
+
+Outcomes the intervention affects
++++++++++++++++++++++++++++++++++
+
+Effect sizes and definitions
+++++++++++++++++++++++++++++
+
+Potential confounders and mediators
++++++++++++++++++++++++++++++++++++
+
+Limitations
++++++++++++
 
 The structure of an intervention model document
 -----------------------------------------------
