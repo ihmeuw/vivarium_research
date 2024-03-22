@@ -46,7 +46,7 @@ We have developed a template for intervention model documents, which
 can help organize a complex model, and the remainder of this document
 describes what a researcher might include for each section when using
 :ref:`this template <intervention_model_template>`.
-An example Intervention Model Document that uses this template is the
+An example intervention model document that uses this template is the
 :ref:`latent tuberculosis treatment intervention <intervention_latent_tuberculosis_treatment>`.
 
 
