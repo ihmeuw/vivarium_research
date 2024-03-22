@@ -87,6 +87,8 @@ Research aims and objectives
 Outcomes the intervention affects
 +++++++++++++++++++++++++++++++++
 
+* What outcomes does the intervention affect?
+
 Effect sizes and definitions
 ++++++++++++++++++++++++++++
 
@@ -100,8 +102,14 @@ Effect sizes and definitions
 Potential confounders and mediators
 +++++++++++++++++++++++++++++++++++
 
+* What are the potential confounders and mediators?
+* Might we need to control for them?
+
 Limitations
 +++++++++++
+
+* What are the limitations of our modeling strategy?
+* Are these acceptable to the client?
 
 The structure of an intervention model document
 -----------------------------------------------
