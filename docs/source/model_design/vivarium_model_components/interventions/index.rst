@@ -1,7 +1,7 @@
 .. _models_intervention:
 
 ======================
-Modeling Interventions
+Interventions
 ======================
 
 An essential part of many vivarium simulation models is the
