@@ -50,7 +50,7 @@
 
 
 
-.. _{vivarium_census_prl_synth_data}:
+.. _vivarium_census_prl_synth_data:
 
 ==================================
 Vivarium Census PRL Simulated Data
@@ -2016,6 +2016,8 @@ only on those columns that would be most relevant to record linkage.
 .. todo::
   Move this documentation to the :code:`pseudopeople` repository.
 
+.. _prl_census_section:
+
 Census
 ^^^^^^
 
@@ -2188,6 +2190,8 @@ get an error.
 #. There are multiple other factors that contribute to omission rate including: tenure in a home, state/geography, and having a SSN (as a proxy for citizenship) [Elliot_2021]_. These are not currently included in our model
 #. There is some evidence that young children are missed in the post enumeration survey and therefore are missed more than accounted for here [OHare_2019]_
 #. It is assumed that race and age/sex are independent, do not have interaction, and combine additively
+
+.. _prl_household_surveys_section:
 
 Household Surveys
 ^^^^^^^^^^^^^^^^^
@@ -2619,8 +2623,10 @@ Taxes
 
 Taxes, as we all know, can contain many different forms and processes.
 For this model, we will split the tax information into two main sections:
-W2/1099 forms from employers; and 1040 forms from simulants. We will look
-at these separately, starting with W2 and 1099 forms.
+W2/1099 forms from employers; and 1040 forms from simulants. 1099 forms are used for independent
+contractors or self-employed individuals, while W-2 forms are submitted by an employer for their employee
+(as the employer withholds payroll taxes from employee earnings). 1040 forms are
+submitted by the employee. We will look at these separately, starting with W2 and 1099 forms.
 
 
 W2 and 1099 Forms
@@ -2847,7 +2853,8 @@ in January 2024.
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
-Leave the field blank.
+Instead, fill in the SSN field with the simulant's ITIN
+(recall that every simulant has either an SSN or ITIN, but not both).
 This is designed to reflect undocumented immigrants, who primarily
 file taxes under the ITIN system.
 
@@ -2866,9 +2873,19 @@ are just 2 really long rows for two simulants.
 
 .. note::
 
-  The above image is outdated and contains "Age" and "DOB" columns, but these
-  should **not** appear in the 1040 dataset. The image is also *missing* the
-  ground-truth "Household ID" column.
+  The above image is outdated in the following ways:
+
+  - The image shows "Age" and "DOB" columns, but these
+    should **not** appear in the 1040 dataset.
+
+  - The image is *missing* the ground-truth "Household ID" column.
+
+  - The image shows separate SSN and ITIN columns, but the 1040 dataset
+    should contain **only** SSN columns. Simulants without SSNs should
+    have their ITIN placed in the appropriate SSN column.
+
+  Text descriptions elsewhere in the concept model are more up-to-date
+  and take precedence over the image.
 
 If a simulant had more than 4 employments in the tax year,
 the 4 with the highest income values are included on the 1040; other employment information
@@ -2897,6 +2914,8 @@ This can be uniformly at random (preferred), or in another way if that is easier
 Not everyone who receives a W2 or 1099 will end up filing taxes. Please select a random 65.5% of the working-age population to file taxes (i.e., to show up in the
 1040 observer). This value is based on the following sources: `eFile statistics <https://www.efile.com/efile-tax-return-direct-deposit-statistics/>`_
 and `2020 Census data <https://www.census.gov/library/stories/2021/08/united-states-adult-population-grew-faster-than-nations-total-population-from-2010-to-2020.html>`_.
+
+.. _prl_1040_future_add:
 
 **Future Add**
 
@@ -3091,17 +3110,20 @@ noise added to the data. We currently divide noise into two types:
 Noise should be added in the order below.
 
 #. "Borrowed" SSN (happens in simulation NOT noise functions)
-#. Omissions
 #. Duplications
+
+   a. Guardian-based dupilcation
+#. Do not respond (targeted omission)
+#. Omit a row (simple omission)
 #. Missing Data
 #. Incorrect Selection
 #. Copy from Within Household
-#. Month and day swaps (applies to dates only)
-#. Zip Code Miswriting (applies to Zip Code only)
-#. Age Miswriting (applies to age only)
-#. Numeric miswriting
 #. Nicknames
 #. Fake names
+#. Month and day swaps (applies to dates only)
+#. Age Miswriting (applies to age only)
+#. Numeric miswriting
+#. Zip Code Miswriting (applies to Zip Code only)
 #. Phonetic
 #. OCR
 #. Typographic
@@ -3113,7 +3135,12 @@ Noise should be added in the order below.
 
 .. note::
 
-  The noise function names that are listed above and used throughout this concept model document are outdated according to what we have implemented in pseudopeople. In general, we decided to make the names into verbs as opposed to nouns in effort to be more user-friendly and to more clearly reflect how the noise would be introduced into the data in the real world.  
+  The noise function names that are listed above and used throughout
+  this concept model document are outdated according to what we have
+  implemented in pseudopeople. In general, we decided to make the names
+  into verbs as opposed to nouns in effort to be more user-friendly and
+  to more clearly reflect how the noise would be introduced into the
+  data in the real world.
 
   .. list-table:: Mapping noise function names in concept model to those implemented in pseudopeople
     :header-rows: 1
@@ -3122,27 +3149,33 @@ Noise should be added in the order below.
       - Pseudopeople name
     * - "Borrowed" SSN
       - Borrow a social security number
-    * - Omissions
+    * - Guardian-based duplication
+      - Duplicate with guardian
+    * - Targeted Omission
+      - Do not respond
+    * - Simple Omission
       - Omit a row
     * - Missing data
-      - Do not respond
+      - Leave a field blank
     * - Incorrect selection
       - Choose the wrong option
-    * - Month and day swaps
-      - Swap month and day
-    * - Zip code miswriting
-      - Write the wrong ZIP code digits
-    * - Age miswriting
-      - Misreport age
-    * - Numeric miswriting
-      - Write the wrong digits 
+    * - Copy from within household
+      - Copy from household member
     * - Nicknames
       - Use a nickname
     * - Fake names
       - Use a fake name
+    * - Month and day swaps
+      - Swap month and day
+    * - Age miswriting
+      - Misreport age
+    * - Numeric miswriting
+      - Write the wrong digits
+    * - Zip code miswriting
+      - Write the wrong ZIP code digits
     * - Phonetic
       - Make phonetic errors
-    * - OCR 
+    * - OCR
       - Make optical character recognition (OCR) errors
     * - Typographic
       - Make typos
@@ -3582,6 +3615,22 @@ noise to all eligible cells in the column.
   noise to approximately the correct number of cells and how to implement the
   user warning.
 
+.. note::
+
+  When we implemented the copy-from-within-household noise type, we
+  stored a copy of a random household member's SSN but no copies of
+  household members' ITINs. (This was a result of our consideration of
+  SSN and ITIN as separate attributes, before we realized that ITINs get
+  recorded in the SSN field on actual tax forms, meaning that we should
+  only have one column, not two.) Thus, when applying this noise type to
+  an SSN column (e.g. in the 1040 dataset), an SSN or ITIN can get
+  replaced with another household member's SSN, but never with an ITIN.
+  In order for a simulant's SSN or ITIN to be eligible for this noise
+  type, they must live in a household (not GQ) with at least one other
+  member who has an SSN. It's possible we may want to reconsider this
+  behavior in the future, e.g. to allow replacing an ITIN with another
+  ITIN.
+
 Limitations:
 
 - This oversimplifies some swapping of ages or birthdays between family members. However, it allows better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenge.
@@ -3654,40 +3703,86 @@ into three buckets:
 
 **Omissions:**
 
-It is assumed that in any dataset, there are people missed. This
-is important in PRL as the user will try to find a match for someone
-that doesn’t exist. For simplicity, we will have pseudo-people end
-users input one value: the overall omission rate. This value can
-range from 0% (indicating NO omission or a perfect response) up
-to 50% omission and will be defined at the observer level.
+It is assumed that in any dataset, there are people missed. This is
+important in PRL as the user will try to find a match for someone that
+doesn’t exist. For simplicity, we will have end users of pseudopeople
+input one value for each type of omission: the overall omission rate
+(called :code:`row_probability` in pseudopeople). This value can range
+from 0% (indicating NO omission or a perfect response) up to 100%
+omission and will be defined at the observer level.
 
-For the census and household surveys, where non-response is built
-into the observer, the default omission rate will the equal to the
-expected omission rate of that survey. For the census and ACS survey,
-this is 1.45%. For the CPS survey, this is 29.05%. The other observers’
-default rate is 0%.
+We will define two types of omission:
 
-The process for omitting simulants from the data will be divided into
-two groups based on observer:
+#. **Simple omission** (called :code:`omit_row` in pseudopeople),
+   applicable to all datasets
 
-#. Simple omission will be used for: WIC, taxes and SSA
+#. **Targeted omission** (called :code:`do_not_respond` in
+   pseudopeople), applicable only to the census and household surveys,
+   where differential non-response rates are built into the observer
 
-#. Targeted omission will be used for: census, household surveys
+Note that the census and household surveys can have both types of
+omission applied; in this case targeted omission (do not respond)
+should be applied **before** simple omission (omit a row). The default
+rate of "simple omission" for the census and surveys will be 0%, while
+the default non-response rate for "targeted omission" will equal the
+expected omission rate of that survey, computed using the non-response
+strategy described above in the :ref:`Census <prl_census_section>` and
+:ref:`Household Surveys <prl_household_surveys_section>` sections. For
+the census and ACS survey, this is 1.45%. For the CPS survey, this is
+29.05% (see details below).
 
-**Simple Omission:**
+The following two sections discuss the two types of
+omission in more detail.
 
-For simple omission, rows will be randomly removed at the rate specified
-by the user. Removal will be entirely at random and not correlated to the
-omission of others in the household or any other simulant attribute. The
-default is set to 0% as we do not expect people to be "missing" from
-administrative data.
+**Omit a Row (Simple Omission):**
 
-**Targeted Omission:**
+For simple omission ("Omit a Row"), rows will be randomly removed at
+the rate specified by the user. Removal will be entirely at random
+(i.e., rows are chosen independently) and not correlated to the omission
+of others in the household or any other simulant attribute. The default
+row omission probabilities for the different datasets are as follows:
+
+.. list-table:: Default row probabilities for :code:`omit_row` noise
+  :widths: 1 1 4
+  :header-rows: 1
+
+  * - Dataset
+    - Default row probability
+    - Notes
+  * - Decennial census
+    - 0.0
+    - Default is zero because targeted omission is available
+  * - ACS
+    - 0.0
+    - Default is zero because targeted omission is available
+  * - CPS
+    - 0.0
+    - Default is zero because targeted omission is available
+  * - WIC
+    - 0.005
+    - We expect a very low rate of administrative errors that would lead to missing records
+  * - SSA
+    - 0.0
+    - We expect SSA to keep accurate records of social security numbers
+  * - Taxes W2 & 1099
+    - 0.005
+    - Employers face penalties for not submitting W2s, so we expect very few to be missing
+  * - Taxes 1040
+    - 0.0
+    - We already only include 65.5% of working age adults, based on
+      actual data. If we implement the :ref:`more complex
+      inclusion/exclusion criteria for the 1040 <prl_1040_future_add>`,
+      we may want to change the default to `something like 5% to reflect
+      data on people not filing taxes
+      <https://www.cbsnews.com/news/taxes-what-happens-if-you-dont-file-tax-return/>`_.
+
+**Do Not Respond (Targeted Omission):**
 
 For the census and for household surveys, individuals are found to not
 respond at different rates based on their age, sex, and race/ethnicity.
-In order to preserve this underlying data structure while allowing for
-a variable overall omission rate, the noise function must be more complex.
+In order to preserve this underlying data structure while allowing for a
+variable overall omission rate, the noise function must be more complex.
+This noise type is called :code:`do_not_respond` in pseudopeople.
 
 Census:
 
@@ -3715,6 +3810,10 @@ In general, the same logic as is outlined for the census can be applied to all h
 
 For the two surveys currently outlined in the model, the default rates are 1.45% for ACS, and 29.05% for CPS.
 
+When applying both "do not respond" noise and "omit a row" noise to the
+census or household surveys, the "do not respond" noise should happen
+first.
+
 **Duplicates:**
 
 Duplication is most relevant for the census, which has a significant
@@ -3735,6 +3834,8 @@ times at different addresses. This can occur when family structures are
 complex and children might spend time at multiple households. A related
 challenge occurs with college students, who often are counted both at their
 university and at their guardian’s home address.
+We will implement this type of duplication only for the decennial
+census.
 
 To facilitate this type of error, we have simulants assigned to guardians
 within the simulation. Sometimes, those guardians may move and live at
@@ -3743,24 +3844,34 @@ opportunity for duplication. Since this mechanism occurs within the
 simulation, there is a natural maximum that we will impose in the
 noise function.
 
-Guardian-based duplication is applied to three mutually exclusive categories of
+Guardian-based duplication is applied to two mutually exclusive categories of
 simulants based on age and GQ status: Simulants younger than 18  (<18) and not
-in GQ; simulants 18-23 (18 <= age < 24) and not in GQ; and simulants under 24
-(<24) and in GQ.
+in GQ and simulants under 24 (<24) and in college GQ.
 
-For each of the three categories of simulants, the maximum duplication rate will
+For each of the two categories of simulants, the maximum duplication rate will
 be calculated based on those who have a guardian living at a different address
-in the sim. Note that all simulants in *college* GQ are initialized with a
-guardian living at a different address, but this is not true for simulants in
-other types of GQ, so all three maximum duplication rates will be less than
-100%.
+in the sim. Note that all simulants in college GQ are initialized with a
+guardian living at a different address, but this is not true for simulants that
+move into college GQ during the simulation, so both maximum duplication rates
+will be less than 100%.
 
 The user can then pick a rate of duplication between 0 and 100% **for each of
-the three categories of simulants**. A default duplication rate of 5% will be
-selected for each of the three categories of simulants. That is, each simulant
-under 24 is duplicated at a guardian's household with default probability 0.05,
-and there should be three user parameters for overriding this probability, one
+the two categories of simulants**. We will set a default duplication rate of 2% for
+simulants under 18 and not in GQ, and a default duplication rate of 5% for simulants
+under 24 and in college GQ.
+That is, each simulant under 18 and not in GQ is duplicated at a guardian's household
+with default probability 0.02, and each simulant under 24 in college GQ is duplicated
+at a guardian's household with default probability 0.05.
+There should be two user parameters for overriding these probabilities, one
 for each simulant category.
+
+The 2% duplication rate for simulants under 18 was estimated from Figure 1 of `"An Analysis of Person Duplication
+in Census 2000" <http://www.asasrms.org/Proceedings/y2004/files/Jsm2004-000730.pdf>`_
+and roughly corroborated by Table 4 of `"Real-Time 2020 Administrative Record
+Census Simulation" <https://www2.census.gov/programs-surveys/decennial/2020/program-management/evaluate-docs/EAE-2020-admin-records-experiment.pdf>`_
+combined with the totals from Table 1.
+
+
 If the user selects a duplication rate that is higher than the calculated
 maximum rate in the sim, a warning should be issued explaining that the selected
 rate is greater than the maximum available, and the actual rate of duplication
@@ -3781,17 +3892,63 @@ should be set to 1.
 
     If finding the maximum rate proves too difficult to implement, we can reassess this approach
 
-The duplicated row should have the same simulant-specific attributes as the
-original, such as name and birth date, but different household-specific
-attributes such as address fields and relation to reference person.
-For simplicity, set "relation to reference person" equal to "Other relative" in
-the duplicated row.
+The duplicated row should have the same simulant-specific attributes as
+the original, such as name and birth date, but different
+household-specific attributes such as address fields and relationship to
+reference person. For simplicity, when the guardian's housing type is
+"Household," set "Relationship to reference person" equal to "Other
+relative" in the duplicated row. If the guardian lives in group
+quarters, the value of "Relationship to reference person" in the
+duplicated row should match that of the guardian (either
+“Institutionalized group quarters population” or “Noninstitutionalized
+group quarters population”).
 
 To create guardian-based duplicates, each duplicated simulant will be included
 in the final dataset twice, once at their address of residence and once at their
 guardian's address. If a simulant has more than 1 guardian living at a different
 address, only duplicate them once, for a maximum of 2 occurrences in the end
 dataset. Select the guardian at random.
+
+The behavior of guardian-based duplication when filtering the data to a
+US state (or other location) should be as follows:
+
+* If a simulant lives in the state but their guardian does not, then
+  the duplicated row does **not** appear in the filtered dataset: Since
+  the guardian is not part of the dataset, they have no opportunity to
+  create a duplicate record.
+
+* If a simulant lives outside the state but their guardian lives in the
+  state, then the duplicated row **does** appear in the filtered
+  dataset: The guardian erroneously reports that their out-of-state
+  dependent lives with them. In this case it would not be apparent that
+  the duplicated record is a duplicate (even with ground truth
+  available) unless the user also generates data for the state where the
+  dependent lives.
+
+.. todo::
+
+  As of March 7, 2024, we have implemented the first of the above
+  behaviors for state filtering but not the second. That is, duplicated
+  rows do not appear in the filtered dataset if the guardian **or** the
+  simulant lives out of state. Including duplicate rows when the
+  guardian lives in-state but the dependent does not is more complicated
+  because state filtering happens when data is loaded. To solve this, we
+  may have to pre-compute all *potentially* duplicated rows and store
+  them with the appropriate state. `MIC-4907
+  <https://jira.ihme.washington.edu/browse/MIC-4907>`_ was created to
+  address this issue.
+
+Guardian-based duplication should be applied **before** the omission
+noise types ("Do not respond", "Omit a row") so as not to preclude
+eligible rows from being duplicated. In real life, we'd expect that a
+dependent might be reported with their guardian even if the dependent
+did not respond themselves or had their record erroneously omitted, and
+we'd expect that a guardian who did not respond would never report a
+dependent who lives elsewhere. Currently, this second scenario is not
+implemented (i.e., a dependent *can* be reported at their guardian's
+address even if the guardian does not respond), but `SSCI-1790
+<https://jira.ihme.washington.edu/browse/SSCI-1790>`_ has been created
+to address this.
 
 .. note::
 
@@ -3807,6 +3964,26 @@ dataset. Select the guardian at random.
   undesirable for duplicated rows to always appear right after the original row,
   or for all duplicated rows to appear at the end of the dataset, so we would
   need a strategy to address this.
+
+.. warning::
+
+  We `tried sorting <https://github.com/ihmeuw/pseudopeople/pull/384>`_
+  the decennial census by year and household ID (`SSCI-1677
+  <https://jira.ihme.washington.edu/browse/SSCI-1677>`_, `MIC-4833
+  <https://jira.ihme.washington.edu/browse/MIC-4833>`_) so that
+  simulants duplicated at a guardian's household would appear next to
+  other members of the guardian's household in the returned dataset.
+  However, the runtime of the sort was unacceptably slow for the USA
+  data, so we `reverted the change
+  <https://github.com/ihmeuw/pseudopeople/pull/386>`_. In the current
+  implementation, duplicates are appended to the end of the DataFrame,
+  but this happens at the *shard* level. Thus, while the sample data has
+  all duplicates appearing at the end of the dataset (making them easy
+  to find), duplicates in the USA or RI data appear at the end of each
+  shard, which is less obvious. We deemed this acceptable behavior for
+  the time being, though it may be worth revisiting the order of rows in
+  each dataset as we continue to make improvements (`SSCI-1794
+  <https://jira.ihme.washington.edu/browse/SSCI-1794>`_).
 
 .. note::
 
@@ -4282,18 +4459,18 @@ This is in addition to the 0.32% assigned across the entire working-age populati
 living situation.
 
 We will generate names for employers based on a conditional random model that Abie developed and
-Jim refactored into the vivarium model. We based our simulated employer names 
-on a database of 5,321,506 "location names" from the SafeGraph "Core Places of 
+Jim refactored into the vivarium model. We based our simulated employer names
+on a database of 5,321,506 "location names" from the SafeGraph "Core Places of
 Interest USA" dataset released in June 2020. To create a representation of bigrams
-from this dataset, we constructed a directed multigraph. Each word in a location name 
-was treated as a node, and we included special <start> and <end> nodes, as well. 
-We included a directed multi-edge for each occurrence of a word pair in sequence 
-in each location name. 
+from this dataset, we constructed a directed multigraph. Each word in a location name
+was treated as a node, and we included special <start> and <end> nodes, as well.
+We included a directed multi-edge for each occurrence of a word pair in sequence
+in each location name.
 
 To generate simulated employer names, we performed a random
-walk through the bigram graph. Starting from the start node, we traversed 
-directed edges selected uniformly at random until we reached the end node or 
-exceeded a predetermined maximum path length. We then combined the words associated 
+walk through the bigram graph. Starting from the start node, we traversed
+directed edges selected uniformly at random until we reached the end node or
+exceeded a predetermined maximum path length. We then combined the words associated
 with each node that was encountered along the path to form the simulated employer name.
 This approach resulted in a diverse range of names that maintained a realistic quality.
 However, it also resulted in some duplicates.

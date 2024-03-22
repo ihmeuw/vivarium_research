@@ -223,11 +223,16 @@ This is appropriate because LRI has a short and relatively uniform duration of
      - I
      - :math:`\frac{\text{incidence_rate_c322}}{(1-\text{prevalence_calculated})}`
      - Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
-   * - r
+   * - r: USED IN CIFF AND IV IRON SIMULATIONS AS WELL AS MODELS 1-11 OF NUTRITION OPTIMIZATION SIMULATION
      - I
      - S
      - (-1/time_step)*log(1-time_step/duration_c322)
      - Where time_step is the duration of the simulation time_step in years. Use the :code:`np.log()` function. See discussion of this equation on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>` and :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>` page for more information.
+   * - r: FOR USE IN NUTRITION OPTIMIZATION SIMULATION AFTER IMPLEMENTATION OF VARIABLE TIMESTEPS
+     - I
+     - S
+     - 1/duration_c322
+     - 
 
 .. list-table:: Data Sources
    :widths: 20 25 25 25

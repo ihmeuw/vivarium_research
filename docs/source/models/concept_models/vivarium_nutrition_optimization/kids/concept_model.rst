@@ -93,12 +93,12 @@ Documents that contain information specific to the overall model and the pregnan
 2.2 Waves, GBD Rounds, and age groups
 -------------------------------------
 
-We will separate the implementation of the child model into two waves of updates. 
+We will separate the implementation of the child model into waves of updates. 
 In addition to other differences detailed in the next section:
 
-- Wave I will use GBD 2019 data, with the exception of using GBD 2021 data for child growth failure risk exposure and risk effects.
+- Wave I and II will use GBD 2019 data, with the exception of using GBD 2021 data for child growth failure risk exposure and risk effects.
 
-- Wave II will use GBD 2021 data for the entire model.
+- Wave III and later will use GBD 2021 data for the entire model.
 
 Notably, GBD 2021 uses different age groups than GBD 2019 (as summarized in the 
 tables below). Therefore, the Wave I implementation that uses data from both GBD 
@@ -156,6 +156,11 @@ in the simulation will be informed using data specific to the post neonatal age 
 
 2.3 Submodels
 -------------
+
+.. todo::
+
+  Update the below tables as needed for a "wave 3" with SQ-LNS targeting and subnational data included. 
+
 
 .. list-table:: Risk exposure subcomponents
   :header-rows: 1
@@ -322,8 +327,8 @@ in the simulation will be informed using data specific to the post neonatal age 
     - Value
     - Note
   * - Location(s)
-    - Ethiopia (ID: 179)
-    - Eventually will also add Nigeria (214) and Pakistan (164)
+    - Ethiopia (ID: 179), Nigeria (214), Pakistan (164)
+    - Most data will be modeled subnationally, see section below
   * - Number of draws
     - Same as pregnancy sim output data
     - 
@@ -358,36 +363,213 @@ in the simulation will be informed using data specific to the post neonatal age 
     - 2029-12-31
     - 
   * - Timestep
-    - 4 days
-    - May eventually update to variable or 28 days with YLL/YLD-only modeling strategy (likely not for wave I)
+    - Non-varying: 4 days. For variable timesteps details see section below. 
+    - 
   * - Randomness key columns
     - ['entrance_time', 'maternal_id']
     - Entrance time should be identical for all simulants despite simulants having different birth dates/times from the pregnancy simulation
+
+Variable timestep rules
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The general strategy for developing timestep rules for this project has been to review all transition rates and determine the shortest-time-to-event intervals across different demographics. This was done by selecting the maximum rate across all 1,000 draws and manually evaluating/grouping by demographic group, `as explored in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/timestep_investigation.ipynb>`_.
+
+**For test run:**
+
+.. list-table::
+  :header-rows: 1
+
+  * - Group
+    - Timestep in days
+    - Rationale
+    - Note
+  * - Neonatal age group
+    - 0.5
+    - Lower than current 4 days to test whether V&V improves for these age groups
+    - Note that this timestep will still be unacceptably large for the highest risk LBWSG categories, but an improvement from 4 days.
+  * - Acute disease (diarrheal diseases, LRI, measles, OR malaria)
+    - 4
+    - Shortest time to event is remission rate of diarrheal diseases (4.2 days)
+    - Maintaining currently implemented 4 day timestep here for consistency between models as cause remission rates have been adjusted to this timestep duration
+  * - 1-5 month age group
+    - 4
+    - Shortest time to event is 14 days (if we are modeling wasting transitions in this age group (model 10 and beyond); otherwise 23 days for highest risk CGF categories.
+    - Keep currently implemented timestep for consistency (note that we will have relatively larger timestep:time-to-events for this age group than the "otherwise" category)
+  * - Otherwise
+    - 8
+    - Shortest time to event is in MAM and mild states (35 days). Timestep selected as 25% of this duration.
+    - 
+
+.. note::
+
+  Preference for this test run would be to use the model version used for wave I production runs.
+
+  However, if this model version is not ready-to-go, then we should run two versions of the latest wave II model:
+
+    - One with 4 day timesteps for all simulants
+    - One with the variable timesteps described in the table above
+
+  This is because there are ongoing V&V issues with the most recent wave II models (as of 11/13/23), so we will use the model run with non-variable timesteps as our V&V target rather than GBD/artifact validation targets.
+
+  Regardless of the model version used, the baseline pregnancy and baseline child model scenario should be used and we should run for 5 draws.
+
+**For future runs:**
+
+For each individual simulant, the duration of the next timestep should be determined by selecting the minimum value that results from the following two tables. We would like to run multiple runs with differing scalar values to test the impact of this parameter. Test runs should be performed on the baseline pregnancy and baseline child model scenarios and run across 5 draws.
+
+Requested test runs:
+
+1. Standard probability value; scalar=2
+2. Standard probability value; scalar=10
+3. Probability = annual rate * timestep; scalar=2
+4. Probability = annual rate * timestep; scalar=10
+
+.. important::
+
+  For these runs, the artifact values for the diarrheal diseases and lower respiratory infections remission rates should be updated `in accordance with the changes in this PR. <https://github.com/ihmeuw/vivarium_research/pull/1400>`_
+
+.. list-table:: Equation-based timestep lengths
+  :header-rows: 1
+
+  * - Component
+    - Timestep in days
+    - Note
+  * - Simulant-specific mortality hazard
+    - 365.25/(1/mortality_rate_i)/scalar
+    - 
+  * - Diarrheal diseases incidence rate
+    - 365.25/(1/(diarrheal_diseases_incidence_rate * (1-PAF) * whz_rr_i * haz_rr_i * waz_rr_9))/scalar
+    - Use diarrheal diseases incidence rate here because it is the largest of the modeled causes. PAF and relative risk values should be specific to affected_entity=diarrheal_diseases and affected_measure=incidence_rate. 
+
+.. list-table:: Group-based timestep lengths
+  :header-rows: 1
+
+  * - Group
+    - Timestep in days
+    - Note
+  * - Early neonatal age group
+    - 2
+    - 
+  * - Late neonatal age group
+    - 4
+    - 
+  * - Infected with diarrheal diseases, LRI, measles, OR malaria
+    - 4.2/scalar
+    - Minimum duration of diarrheal diseases case selected as it is the shortest duration of all modeled acute causes
+  * - 1-5 month age group AND in SAM wasting state (cat1)
+    - 14/scalar
+    - 
+  * - Mild or MAM wasting states (cat3 or cat2)
+    - 35/scalar
+    - 
+  * - Otherwise
+    - 126/scalar
+    - 
+
+Subnational Approach
+~~~~~~~~~~~~~~~~~~~~
+
+In order to include SQ-LNS targeting by location, we are switching to 
+use a subnational approach for most data in Wave 3. However, rather 
+than model all subnational locations separately, simulants 
+will just be assigned to a subnational location within their primary 
+location, and have input data pulled for the subnational location instead. 
+Unless otherwise specified in the model request table below, the data outputs 
+do not need to stratified by subnational location.
+
+
+Initializing Simulant's Locations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Simulants will be obtained from the pregnancy sim, the same as in prior 
+waves. These simulants will already have a country location. The pregnancy 
+simulation is only run at the national level.
+
+When these simulants are loaded into the child simulation, they will be 
+assigned a subnational location within their country. Here is the data 
+for the `percent of simulants assigned to each subnational location by sex <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/ff08145109e1434669f08afe702ffc5e3d45a6c2/data_prep/sqlns_subnational/subnational_percents.csv>`_. Note that all 3 countries are included 
+in this csv file. 
+
+Since LBWSG is done nationally, there is a risk in assigning locations 
+at birth that the population-distribution of subnational locations 
+will be incorrect by 6 months of age. Subnational 
+locations with less optimal LBWSG exposures distributions should 
+have more deaths, which will not be captured here. 
+However, after reviewing the changes in population distribution between 
+birth and 6 months in GBD data, we found this impact to be very minimal, and 
+therefore believe this is a reasonable limitation. This notebook 
+prints the `population distirbution for both the birth and 6 to 11 month age groups <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/7fe7ade434cadafcd1ae1c631e005809148bf908/data_prep/sqlns_subnational/SQLNS%20Targeting%20Work%20.ipynb>`_. The greatest difference between these was 
+seen to be 0.004 or 0.4% of the population. Additionally, 
+overall mortality will still be at a subnational level, further 
+mitigating these effects. 
+
+Data Inputs: 
+^^^^^^^^^^^^
+
+Once a simulant is assigned to a subnational location, most GBD data used 
+will be subnational specific data. LBWSG, which comes as an output from the 
+pregnancy sim, will be national. Similarly, the PAFs for LBWSG will also 
+be national. All other GBD data will be at the subnational level.
+
+Artifacts will be made for all subnational 
+geographies. We will also regenerate most data for custom made datasets, 
+such as wasting transitions and PAFs.
+
+CGF correlation data will continue to be at the national level. This is 
+following a analysis of DHS data which showed little subnational variation 
+and small sample sizes for many locations. Correlation coefficients generally 
+only varied by a maximum of 0.1 points (for example, between 0.6 and 0.7). 
+Furthermore, no geographic patterns such as north/south or urban/rural were 
+noted in the location data. Lastly, many location/age/sex groups had fewer than 
+50 children, leading to lack of confidence in results. The analysis of this 
+was in `this PR <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/134>`_. 
+
+SAM and MAM treatmet coverage and efficacy data will continue to be national only. Also, 
+for all scenarios other than targeted SQ-LNS, roll out of interventions will 
+be the same for all subnational locations.
+
+.. todo::
+
+  Revisit this paragraph once we have decided about SQ-LNS effect modification. Add either that it is national or subnational. 
+
 
 .. _nutritionoptimizationchild4.0:
 
 2.5 Simulation scenarios
 ------------------------
 
-As of June, 2023, there are a total of 5 scenarios in the pregnancy simulation, :ref:`which can be found here <nutritionoptimizationpreg4.0>`. With the exception of the baseline scenario, all of the following child scenarios should be run on the outputs for each pregnancy scenario.
+As of June, 2023, there are a total of 4 scenarios in the pregnancy simulation, :ref:`which can be found here <nutritionoptimizationpreg4.0>`. With the exception of the baseline scenario, all of the following child scenarios should be run on the outputs for each pregnancy scenario unless otherwise noted, particularly for Wave III.
 
 Wave I:
 
 - 1 location
 
-- Baseline scenario as well as scenarios 0 through 8
+- Baseline scenario as well as scenarios 0 through 7
 
-- Total number of scenarios = (5 pregnancy :math:`\times` 9 child :math:`+` 1 baseline) :math:`\times` 1 location :math:`=` **46 scenarios** 
+- Total number of scenarios = (4 pregnancy :math:`\times` 8 child :math:`+` 1 baseline) :math:`\times` 1 location :math:`=` **33 scenarios** 
 
 Wave II:
 
 - 3 locations
 
-- Baseline scenario as well as scenarios 0 through 18
+- Baseline scenario as well as scenarios 0 through 7 and 12 through 15 (12 total)
 
-- Total number of scenarios = (5 pregnancy :math:`\times` 19 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **288 scenarios** 
+- Total number of scenarios = (4 pregnancy :math:`\times` 12 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **147 scenarios** 
 
-- It is possible we decide to exclude scenarios 13-18 from wave II, reducing the number of child scenarios from 19 to 13 and the total number of scenarios to 66/location for **198 scenarios**
+Wave III:
+
+- 3 locations
+
+- Baseline scenario as well as scenarios 0 through 17 
+
+- For 1 SQLNS targeting scenario, the total number of scenarios = (4 pregnancy :math:`\times` 18 child :math:`+` 1 baseline) :math:`\times` 3 locations :math:`=` **219 scenarios**  
+
+- For 4 SQLNS targeting scenario, the total number of scenarios = ((4 pregnancy :math:`\times` (18-6) child :math:`+` 1 baseline) :math:`\times` 3 locations) + (4 pregnancy :math:`\times` 6 targeted SQ-LNS :math:`\times` 4 targeting options :math:`\times` 3 locations) :math:`=` **435 scenarios** 
+
+.. note::
+
+  A prior version of this table had erroreously skipped '4'. Therefore in older docs, you might see scenario '5' listed as 'SAM and MAM' instead of 'SAM and SQLNS' as it is here. Similarly for all later scenarios they might be off by 1 number.
+
 
 .. list-table:: Child scenarios, implemented for each pregnancy scenario
   :header-rows: 1
@@ -423,72 +605,72 @@ Wave II:
     - 0
     - 1
   * - All
-    - 5: SAM and MAM
+    - 4: SAM and MAM
     - 1
     - 1
     - 0
   * - All
-    - 6: SAM and SQLNS
+    - 5: SAM and SQLNS
     - 1
     - 0
     - 1
   * - All
-    - 7: MAM and SQLNS
+    - 6: MAM and SQLNS
     - 0
     - 1
     - 1
   * - All
-    - 8: All
+    - 7: All
     - 1
     - 1
     - 1
   * - All
-    - 9: targeted SQLNS
+    - 8: targeted SQLNS
     - 0
-    - 0
-    - 1 for target group; 0 for others
-  * - All
-    - 10: targeted SQLNS and SAM
-    - 1
     - 0
     - 1 for target group; 0 for others
   * - All
-    - 11: targeted SQLNS and MAM
+    - 9: targeted SQLNS and SAM
+    - 1
+    - 0
+    - 1 for target group; 0 for others
+  * - All
+    - 10: targeted SQLNS and MAM
     - 0
     - 1
     - 1 for target group; 0 for others
   * - All
-    - 12: targeted SQLNS and SAM and MAM
+    - 11: targeted SQLNS and SAM and MAM
     - 1
     - 1
     - 1 for target group; 0 for others
   * - All
-    - 13: targeted MAM
+    - 12: targeted MAM
     - 0
     - 1 for target group; 0 for others
     - 0
   * - All
-    - 14: SAM and targeted MAM
+    - 13: SAM and targeted MAM
     - 1
     - 1 for target group; 0 for others
     - 0
   * - All
-    - 15: SQLNS and targeted MAM
+    - 14: SQLNS and targeted MAM
     - 0
     - 1 for target group; 0 for others
     - 1
   * - All
-    - 16: SQLNS and SAM and targeted MAM
+    - 15: SQLNS and SAM and targeted MAM
     - 1
     - 1 for target group; 0 for others
     - 1
   * - All
-    - 17: targeted MAM and targeted SQLNS
+    - 16: targeted MAM and targeted SQLNS
     - 0 
     - 1 for target group; 0 for others
     - 1 for target group; 0 for others
   * - All
-    - 18: SAM plus targeted MAM and targeted SQLNS
+    - 17: SAM plus targeted MAM and targeted SQLNS
     - 1
     - 1 for target group; 0 for others
     - 1 for target group; 0 for others
@@ -506,6 +688,28 @@ Baseline values for :ref:`wasting treatment <intervention_wasting_tx_combined_pr
 .. note::
 
   :math:`E_\text{SAM}` and :math:`E_\text{MAM}` parameter values will **not** vary by scenario in this model.
+
+
+Scenario Runs for Targeted SQ-LNS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As we expand the number of scenarios, computational feasibility becomes an increasing 
+consideration. The team is exploring several options for how to address this: 
+
+#. Run all scenarios with full draws and seeds, simply plan ahead better for cluster and run time limitations.
+#. Make the simulation faster through variable time steps or other approaches.
+#. Run with fewer draws or seeds. One version of this would be to use the mean draw instead of individual draws.
+#. Limit the scenarios by not running all child scenarios on all pregnancy scenarios.
+
+We will continue to analyze options to see if options 1 or 2 are possible. If not, 
+some combination of 3 and 4 will likely work. For example, we could use the mean 
+draw for the full scenario space, and use a more robust set of draws for a 
+"targeted space" where we know the true optimization will occur. This plan would 
+allow us to run the model relatively quickly, while providing robust draw-level 
+results where we need them most.
+
+We will continue to investigate this and update the model specifications tables 
+with the draw, seed, scenario combinations for each run. 
 
 2.6 Outputs
 ------------
@@ -543,17 +747,20 @@ All possible observers and their default stratifications are outlined below. Req
 
 Since this project requires running across many more scenarios than typical vivarium simulations, we ran some back-of-the-envelope calculations on the magnitude of computing resources to run all scenarios across all projects. The following assumptions went into these calculations:
 
-- 46 scenarios in wave I (no targeting of SQLNS or MAM tx and 1 location) and 288 scenraios in wave II (including targeting of SQLNS and MAM treatment as well AND 3 locations)
+- 46 scenarios in wave I (no targeting of SQLNS or MAM tx and 1 location), 183 scenraios in wave II (including targeting of MAM treatment as well AND 3 locations), and 435 scenarios in wave III (adding targeted SQ-LNS).
 - 4 day timestep in the child simulation if no "timestep inrease strategy" (such as variable timesteps or YLD/YLL-only modeling strategy) is implemented and 28 day timestep if we do implement one of these strategies
 - Simulation takes 32 seconds per timestep. This assumption was informed by the "emulator test runs" of the wasting paper simulation that output only the necessary measures with no stratifications by year, age, or sex
 - Assume 15,000 threads available on all.q
 
-Under these assumptions, a full run of wave I will take 3.8 cluster-hours with 4-day timesteps and 0.6 cluster-hours with 28-day timesteps. A full run of wave II will take 23.5 cluster-hours with 4-day timesteps and 3.5 cluster-hours with 28-day timesteps.
+Under these assumptions, a full run of wave I will take 3.8 cluster-hours with 4-day timesteps and 0.6 cluster-hours with 28-day timesteps. A full run of wave II will take 15.0 cluster-hours with 4-day timesteps and 2.2 cluster-hours with 28-day timesteps. A full run of wave III assuming the higher 435 scenarios will take 35.4 cluster-hours with 4-day timesteps and 5.2 cluster-hours with 28-day timesteps.
 
 :download:`Calculations of these estimated resource requirements can be found in this excel file <timestep scaling.xlsx>`
 
 Notably, the run time of this simulation may increase as we add complexity to our model, particularly with respect to the additional risk factor of child underweight exposure and the additional cause model of malaria, which were not present in our test runs.
 
+.. todo::
+
+  Added wave III information. Should still update based on wave II production runs to include variable timestep and other complexity based changes. 
 
 .. _nutritionoptimizationchild3.0:
 
@@ -673,7 +880,7 @@ Wave I
     - 
     - 
   * - 5.3
-    - Update PAF values in accordance with data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
+    - Update PAF values `in accordance with data update in this PR <https://github.com/ihmeuw/vivarium_research/pull/1326>`_
     - Baseline
     - Baseline
     - 
@@ -1014,10 +1221,37 @@ Wave II
     - Baseline
     - 
     - 
+  * - 10.1
+    - Bugfix, `equation update <https://github.com/ihmeuw/vivarium_research/pull/1376>`_, and RR placeholder data update
+    - Same as 10.0
+    - Same as 10.0
+    - 
+    - 
+  * - 10.2
+    - Updated observers, check in on model 9 MAM targeting
+    - Baseline
+    - Baseline, 2, 13
+    - 
+    - 
+  * - 10.3
+    - Bugfixes to:
+      * Wasting treatment coverage in 1-5 month age group
+      * Underestimation of mild to susceptible transition rate for all ages
+      * Effect of wasting treatment on wasting transition rates for the 1-5 month age group
+    - Baseline
+    - Baseline, 2, 13
+    - 
+    - 
   * - 11.0
     - MAM treatment also targeted to "worse" MAM category
     - Baseline
     - 13
+    - 
+    - 
+  * - 11.1 and 11.2
+    - Bugfixes and updated observers
+    - Baseline
+    - Baseline, 2, 13
     - 
     - 
   * - 12.0
@@ -1033,7 +1267,24 @@ Wave II
       * LBWSG PAFs (to be generated)
       * Underweight exposure lookup table
       * Wasting treatment C_SAM, E_SAM, C_MAM, and E_MAM parameter values
-
+  * - 12.1
+    - All locations, with data updates (MMS shifts and wasting transition rates)
+    - Baseline
+    - Baseline
+    - 
+    - 
+  * - 12.2
+    - Pakistan, mean_draw_subset (to test whether mean draw replicates mean of draws)
+    - Baseline
+    - Baseline
+    - 
+    - `Code to generte mean draw for all artifact keys except the LBWSG PAF can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/mean_draw_generation.ipynb>`_. The mean LBWSG PAF can be calculated using the LBWSG PAF calculation code using the mean draw for LBWSG RRs and LBWSG exposure.
+  * - 13
+    - Production runs using model version 12.1.1
+    - All
+    - Baseline, 0-8, 13-16
+    - Constant 4 day timestep, all locations, 20 pregnancy seeds (at 20,000 pregnancies per seed) per draw; 20 draws
+    - 
 
 .. list-table:: Output specifications
   :header-rows: 1
@@ -1051,7 +1302,7 @@ Wave II
     - * Age group
       * Sex
       * Underweight category
-  * - 10.0
+  * - 10.0 and 10.1
     - 1. Deaths
       2. Wasting state person time, stratified by BW +/- 2500 grams if possible
       3. Stunting state person time
@@ -1059,6 +1310,14 @@ Wave II
       5. Wasting transition counts, stratified b BW +/- 2500 grams if possible
     - * Age group
       * Sex
+  * - 10.2, 10.3, 10.3.1
+    - 1. Deaths
+      2. Wasting state preson time, stratified by wasting treatment coverage (all transitions)
+      3. Stunting state person time
+      4. Underweight state person time, stratified by wasting treatment coverage
+    - * Age group (including 12_to_23_months)
+      * Sex
+      * Underweight category
   * - 11.0
     - 1. Deaths
       2. Wasting state person time (including better/worse MAM differentiation), stratifie by wasting treatment coverage
@@ -1068,7 +1327,16 @@ Wave II
     - * Age group
       * Sex
       * Underweight category
-  * - 12.0
+  * - 11.1 and 11.2
+    - 1. Deaths
+      2. Wasting state person time (including better/worse MAM differentiation), stratifie by wasting treatment coverage
+      3. Stunting state person time
+      4. Underweight state person time, stratified by wasting treatment coverage
+      5. Wasting transition counts (including better/worse MAM differentiation and ALL transitions), stratified by wasting treatment coverage
+    - * Age group (including 12_to_23_months)
+      * Sex
+      * Underweight category
+  * - 12.0 and 12.1 and 12.2
     - 1. Deaths, stratifie by wasting state
       2. Wasting state person time, stratified by wasting treatment coverage
       3. Stunting state person time
@@ -1079,6 +1347,13 @@ Wave II
       8. YLDs and YLLs
     - * Age group
       * Sex
+  * - 13
+    - 1. Deaths and YLLs (non-cause-specific)
+      2. YLDs (all-cause observer only)
+      3. Count of incident SAM cases stratified by SAM treatment coverage
+      4. Count of incident MAM cases stratified by MAM treatment coverage
+      5. Stunting state person time stratified by SQ-LNS utilization
+    - Age strata of 0-6 months, 6-18 months, 18-60 months
 
 
 .. list-table:: Verification and validation tracking
@@ -1099,7 +1374,99 @@ Wave II
   * - 9.0.1
     - * Verify that the correct underweight category is being used for targeting 
     - `Underweight category was fixed <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_9.0.1.ipynb>`_. Ready to move on. 
+  * - 10.0
+    - Check application of LBWSG to wasting effect
+    - There were issues with our equations, so we `updated <https://github.com/ihmeuw/vivarium_research/pull/1376>`_ and reran
+  * - 10.1
+    - Same as 10.0
+    - * `LBWSG effect on wasting looks as expected <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.1_lbwsg_on_wasting_effects.ipynb>`_
+      * `Wasting exposure not validating <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.1_risk_and_cause_checks.ipynb>`_ (MAM overestimated), but `transitions look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.1_wasting_transitions.ipynb>`_. 
 
+        * Could it be something to do with our MAM targets applying to baseline as well? We did not check this for model 9. Will add this check to a rerun request.
+  * - 10.2
+    - Check on wasting transitions and MAM treatment coverage in different scenarios
+    - * `Underestimation of mild wasting to TMREL transition rate for all age groups. Also, underestimating MAM to mild transition rate among the 1-5 month age group. <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.2_wasting_transitions.ipynb>`_ These issues may be causing the `miscalibration of our wasting exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.2_risk_and_cause_checks.ipynb>`_ (underestimation of cat4, overestimation of cat2 and cat3)
+      * `There is coverage of MAM treatment in scenarios 2 and 13 among the 1-5 month age group <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.2_MAM_targets.ipynb>`_ -- this age group is ineligible for treatment and coverage should be at 0% for all scenarios.
+  * - 10.3
+    - Check wasting transition rates and wasting treatment coverage in 1-5 month groups
+    - * `Underestimation of untreated SAM to MAM remission rate for 1-5 month age group <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.3_wasting_transitions.ipynb>`_
+      * `Underestimation of MAM to mild remission rate for all ages 6-59 months (but resolved for 1-5 month age group) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.3_wasting_transitions.ipynb>`_
+
+      The above two issues are resulting in `lack of person-time exposure validation for MAM and SAM states. <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.3_risk_and_cause_checks.ipynb>`_
+
+      Otherwise, the underestimation of the mild to susceptible transition rate for all ages (see transition rate notebook) as well as the `treatment coverage issue among the 1-5 month age group have been resolved. <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.3_MAM_targets.ipynb>`_
+  * - 10.3.1
+    - Check on wasting transition rates and exposure
+    - * `Transition rates are now all verifying <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.3.1_wasting_transitions.ipynb>`_
+      * `We are underestimating SAM and MAM exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_10.3.1_risk_and_cause_checks.ipynb>`_ despite accurate implementation of wasting transition rates. This may be an issue with our wasting transition rate values rather than model implementation.
+
+        - Confirmed to be an issue with wasting transition rate generation, which was `resolved in this PR <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/106>`_
+  * - 11.0
+    - Check implementation of better/worse MAM and targeting of MAM treatment to worse MAM state
+    - * `Ratio of worse:better MAM exposure looks good, but combined MAM exposure is off (low at initialization) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_risk_exposure.ipynb>`_
+
+      * `MAM treatment targets do not appear to be functioning correctly <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_MAM_targets.ipynb>`_:
+
+        * Low coverage in 6-11 month age group, which should be 100% covered
+
+        * Appears that there is no targeting based on worse MAM state
+
+      * `Better/worse MAM transition rates look good, but mild to no wasting transition is underestimated <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.0_wasting_transitions.ipynb>`_
+  * - 11.1
+    - Check on issues from run 11.1
+    - * `Total MAM exposure now looks good at initialization (bug resolved) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_risk_exposure.ipynb>`_. Note that MAM and SAM is underestimated in 6-59 month ages, but this issue is present in model 10 and therefore not a model 11 bug.
+      * `Targeted MAM treatment targeted to better rather than worse MAM state <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_MAM_targets.ipynb>`_
+      * `Wasting transition rates look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_wasting_transitions.ipynb>`_
+      * `All MAM wasting transition rates in scenario 13 observed as uncovered, despite having covered wasting person time <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_wasting_treatment_effects.ipynb>`_ 
+  * - 11.2
+    - Check bugs from 11.1
+    - * `CGF exposure looks good after data update <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_risk_exposure.ipynb>`_
+      * `Targeted MAM now appears to be targeted to the worse rather than better MAM substate (bug resolved!) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.2_MAM_targets.ipynb>`_
+      * `Issue with no coverage of targeted MAM intervention in MAM->mild transition remains (was not addresssed directly in this run) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_wasting_treatment_effects.ipynb>`_
+      * `Note that some mortality rates are off even after fixing our risk exposures <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_11.1_risk_exposure.ipynb>`_
+  * - 12.0
+    - Check alignment with GBD metrics
+    - [1] `Issues with wasting exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_ -- this is thought to be due to identified issue with wasting transition rate data used for this run and is expected to be resolved when `data is updated in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1403>`_. `Otherwise, wasting transition rate implementation looks appropriate. <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_wasting_transitions.ipynb>`_
+
+      [2] `Issues with underweight exposure <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_ -- this is suspected to be an issue resulting from the miscalibration of wasting exposure described above.
+
+      [3] `Underestimation of diarrheal diseases and LRI excess mortality rates in 1-5 and 6-11 month age groups <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.0_risk_and_cause_checks.ipynb>`_
+  * - 12.1
+    - Confirm wasting transition rate data update in sim outputs and confirm MMS effect size update in the interactive sim
+    - * `Wasting transition rates data update implemented as expected at the population level <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_wasting_transitions.ipynb>`_
+      * `MAM and SAM treatment do not appear to be affecting wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_wasting_treatment_effects.ipynb>`_
+
+        * Note that *targeted* MAM treatment appears to be functioning correctly in scenario #13
+        * Note that there are simulants uncovered by SAM treatment who are transitioning through the treated SAM to mild child wasting transition (this should never happen)
+        * Note this is a new issue from 11.2
+
+      * `There are non-zero uncovered MAM->mild transition counts in the 6-11 month age group for targeted MAM in scenario #13 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_MAM_targets.ipynb>`_
+
+        * Note this is a new issue from 11.2. There should be 100% coverage in this age group, but it is a low priority to fix because coverage remains close to 1 in this age group.
+
+      * `Underweight exposure is scrambled for all locations <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_risk_and_cause_checks.ipynb>`_
+
+        * Note this is a new issue from model 11.2 for Ethiopia
+        * Underweight exposure was off for Nigeria and Pakistan in model 12.0, but I thought it was due to being off in our wasting exposures due to outdated transition rates. However, underweight exposure issues are persisting despite resolved wasting exposure issues.
+
+      * `No major cause model concerns at the moment <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_risk_and_cause_checks.ipynb>`_ -- let's revisit once we resolve underweight exposure issues
+
+      * `MMS is not affecting gestational age at all <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1_interactive_MMS_effect.ipynb>`_. In the interactive sim, MMS didn't have any effect on gestational age. IFA did affect gestational age and MMS did affect birthweight so it is suspected that this is a "typo type" error in data loading or linkage. Engineering to investigate. 
+  * - 12.1.1
+    - Check (1) underweight exposure, (2) wasting treatment effects, (3) MAM substate exposure data update, (4) MAM substate risk effects data update, (5) cause models
+    - * `Underweight exposure looks good now (bug resolved!) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+      * `Wasting treatment looks good in baseline scenario now (bug resolved!) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_wasting_treatment_effects.ipynb>`_
+      * `MAM substate exposure looks good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_MAM_substate_exposure.ipynb>`_
+      * `MAM substate relative risks look good <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_rrs.ipynb>`_
+      * `Diarrheal diseases and LRI mortality still a bit underestimated for specific age groups in Pakistan and Nigeria, but I am ready to call this close enough <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+      * `Zero counts for non-MAM wasting state person time among those covered by targeted MAM in scenario #13 and zero transition counts for some transitions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_risk_and_cause_checks.ipynb>`_
+
+        * NOTE: this is expected behavior for how treatment coverage implementation interacts with observers (coverage only exists for certain transitions and states). This does result in inability to directly verify that treated recovery rate for the targeted MAM intervention, but this looked good in model 12.1 when the coverage/observer was tweaked to examine the MAM->mild transition rate instead. `We have separately confirmed that the recovery rate for targeted MAM is the expected value using the interactive context <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_interactive_treated_mam_check.ipynb>`_
+
+      * `MMS effect size update and implementation confirmed to be functioning in interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_interactive_MMS_effect.ipynb>`_
+  * - 12.2
+    - Check that results for this run approximate the mean of the results from run 12.1
+    - 
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -1108,7 +1475,159 @@ Wave II
     - Explanation
     - Action plan
     - Timeline
-  * - 
+  * -  
+    -  
+    -  
+    -  
+
+
+Wave III
+--------
+
+.. list-table:: Model run requests
+  :header-rows: 1
+
+  * - Run
+    - Description
+    - Pregnancy scenario(s)
+    - Child scenario(s)
+    - Spec. mods
+    - Note
+  * - 13.0
+    - Update to GBD 2021 data 
+    - Baseline
+    - Baseline
+    - Ethiopia location ONLY
+    - Should use 2021 GBD pregnancy model
+  * - 14.0
+    - Change child data to subnational
+    - Baseline
+    - Baseline
     - 
     - 
+  * - 15.0
+    - Add SQ-LNS intervention targeting for WAZ criteria
+    - Baseline
+    - 3 and 8
     - 
+    - Universal and Targeted SQ-LNS only
+  * - 16.0
+    - Add additional SQ-LNS geographic targeting criteria
+    - Baseline
+    - 3 and 8
+    - 
+    - Universal and Targeted SQ-LNS only
+  * - 17.0
+    - Add targeted SQ-LNS effect modification
+    - Baseline
+    - 3 and 8
+    - 
+    - Universal and Targeted SQ-LNS only
+  * - 18.0
+    - Production runs
+    - All
+    - All
+    - 
+    - 
+
+
+.. list-table:: Output specifications
+  :header-rows: 1
+  :widths: 1 10 3
+
+  * - Model
+    - Outputs
+    - Overall strata
+  * - 13.0
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+      5. Stunting state person time
+      6. Wasting state person time
+      7. Underweight state person time
+      8. Wasting transition counts 
+    - * Age group
+      * Sex
+  * - 14.0
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+      5. Stunting state person time
+      6. Wasting state person time
+      7. Underweight state person time
+      8. Wasting transition counts 
+    - * Age group
+      * Sex
+      * Subnational location
+  * - 15.0
+    - 1. Deaths
+      2. Wasting state person time, stratified by SQ-LNS treatment coverage
+      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - * Age group
+      * Sex
+      * Subnational location
+  * - 16.0
+    - 1. Deaths
+      2. Wasting state person time, stratified by SQ-LNS treatment coverage
+      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - * Age group
+      * Sex
+      * Targeted SQ-LNS location vs not
+  * - 17.0
+    - 1. Deaths
+      2. Wasting state person time, stratified by SQ-LNS treatment coverage
+      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - * Age group
+      * Sex
+      * Subnational location
+  * - 18.0
+    - 1. Deaths and YLLs (non-cause-specific)
+      2. YLDs (all-cause observer only)
+      3. Count of incident SAM cases stratified by SAM treatment coverage
+      4. Count of incident MAM cases stratified by MAM treatment coverage
+      5. Stunting state person time stratified by SQ-LNS coverage
+    - Age strata of 0-6 months, 6-18 months, 18-60 months
+
+
+.. list-table:: Verification and validation tracking
+  :header-rows: 1
+  :widths: 1 5 5 
+
+  * - Model
+    - V&V plan
+    - V&V summary
+  * - 13.0
+    - * Verify to GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
+      * Verify CGF risk exposures and effects
+      * Verify antenatal intervention effects
+      * Verify child intervention effects 
+    - 
+  * - 14.0
+    - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
+      * Verify national CGF risk exposures and effects
+      * Verify national antenatal intervention effects
+      * Verify national child intervention effects
+      * Verify population in each subnational location
+      * Verify subnational differentiation in above criteria
+    - 
+  * - 15.0
+    - * Verify SQ-LNS is correctly targeted based on subnational location
+      * Verify stunting, wasting vary with SQ-LNS exposure
+      * Verify other model components look as expected
+    - 
+  * - 16.0
+    - * Verify SQ-LNS targeting matches expected population
+      * Verify stunting, wasting vary with SQ-LNS exposure
+      * Verify other model components look as expected
+    - 
+  * - 17.0
+    - * Verify SQ-LNS effect modification changes as expected with targeting
+      * Verify stunting, wasting vary with SQ-LNS exposure
+      * Verify other model components look as expected
+    - 
+  * - 18.0
+    - * Confirm that results for production runs match expected outputs
+    - 
+

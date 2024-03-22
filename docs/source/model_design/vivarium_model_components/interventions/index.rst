@@ -1,7 +1,7 @@
 .. _models_intervention:
 
 ======================
-Modeling Interventions
+Interventions
 ======================
 
 Many of our Vivarium simulations are designed to measure the effects of

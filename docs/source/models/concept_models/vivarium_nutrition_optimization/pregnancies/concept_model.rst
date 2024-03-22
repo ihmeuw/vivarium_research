@@ -268,11 +268,6 @@ Documents that contain information specific to the overall model and the child s
 2.4 Simulation scenarios
 ------------------------
 
-.. note::
-
-  Scenarios subject to change, but will follow similar structure
-
-  Note that while IFA must be included in the model for baseline calibration, it will *not* be included as a scale-up intervention to include in the optimization process. Therefore, we will not "zero" out IFA coverage in the "zero coverage" scenario and we will not scale-up IFA coverage to its maximum value independently. IFA coverage may only remain at its baseline coverage level *or* be reduced to zero when it is replaced with MMS or BEP.
 
 .. list-table:: Scenarios
   :header-rows: 1
@@ -293,12 +288,12 @@ Documents that contain information specific to the overall model and the child s
     - 0
     - 1
     - 0
-  * - 2: Universal BEP
-    - 0
-    - 0
+  * - 2: IFA
     - 1
-  * - 3: Targeted BEP/none
-    - Baseline for adequate BMI pregnancies
+    - 0
+    - 0
+  * - 3: Targeted BEP/IFA
+    - 1 for adequate BMI pregnancies
     - 0
     - 1 for low BMI pregnancies
   * - 4: Targeted BEP/MMS
@@ -313,6 +308,10 @@ Where:
 - **1** represents the maximum intervention coverage (100%)
 
 - **Baseline** represents location-specific baseline IFA coverage, `which can be found in location-specific .csv files here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/baseline_ifa_coverage>`_ (`note these values were calculated in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/Gestational%20age%20shifts.ipynb>`_
+
+.. note::
+  
+  Scenario #2 was previously "Universal BEP" rather than IFA, but was updated to IFA on 10/23/23 prior to wave II production runs. Universal BEP is no longer a scenario of interest. 
 
 2.5 Outputs
 ------------
@@ -567,17 +566,48 @@ Specific outputs for specific models are specified in the following section.
   * - 10.1
     - Production runs with live birth and still birth counts 
     - All
-    - Same as 9.1
-    - Same as 9.1 but including count of live births and still births 
-    - Same as 9.1
+    - Same as 9.2
+    - Same as 9.2 but including count of live births and still births 
+    - Same as 9.2
     - 
   * - 11.0
-    - GBD 2021 update?
+    - GBD 2021 update
     - Baseline
-    - None
+    - 400,000 population size per draw, 20 draws
+    - * Deaths, YLLs
+      * YLDs, stratified by pregnancy state
+      * Maternal disorder incident counts, stratified by anemia state
+      * Maternal hemorrhage incident counts, stratified by anemia state
+      * Anemia state person time, stratified by pregnancy state 
+      * Pregnancy state person time, stratified by birth outcome
+      * Pregnancy state transition counts, stratified by birth outcome
+      * Counts of birth outcomes
+      * Intervention counts
+    - Same as 9.2
+    - Should be the same as the adding locations test runs
+  * - 11.1
+    - GBD 2021 update, but with year=2021 rather than year=2022 and disability due to other causes ("background morbidity") excluded
+    - Baseline
+    - 400,000 population size per draw, 20 draws
+    - * Deaths, YLLs
+      * YLDs, stratified by pregnancy state
+      * Maternal disorder incident counts, stratified by anemia state
+      * Maternal hemorrhage incident counts, stratified by anemia state
+      * Anemia state person time, **stratified by pregnancy state** 
+      * Pregnancy state person time, **stratified by birth outcome**
+      * Pregnancy state transition counts, stratified by birth outcome
+      * Counts of birth outcomes
+      * Intervention counts
+    - Same as 9.2
+    - Should be the same as the adding locations test runs
+  * - 12.0
+    - GBD 2021 production runs
+    - Baseline
+    - Same as 9.2
+    - Same as 9.2 but including count of live births and still births 
+    - Same as 9.2
     - 
-    - 
-    - This model may be inserted earlier in the timeline, depending on when it is ready
+
 
 .. note::
 
@@ -683,7 +713,20 @@ Specific outputs for specific models are specified in the following section.
       * Check that anemia, maternal disorders and deaths match with target values 
       * Check that different scenarios visually appear to separated as expected 
     - All looks good! Ready to move to production runs. `Nigeria notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_10.0_nigeria_maternal_disorders_anemia.ipynb>`_ and `Pakistan notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_10.0_pakistan_maternal_disorders_anemia.ipynb>`_. Note for Pakistan notebook that the parent ID used was 159 which was different than expected. We are investigating this but think it is an issue with target data generation NOT with the model. 
-
+  * - 11.0
+    - * Check that model generally still looks as expected and matches GBD 2021 data
+      * Check that anemia, maternal disorders and deaths match with target values
+      * Check that different scenarios visually appear to separated as expected
+      * Check that birth outcome count observer is functioning as expected
+    - `Model 11.0 V&V notebook (Ethiopia only) available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/141>`_
+      * Anemia prevalence is underestimated
+      * Pregnancy outcome observer appears to be recording once per timestep rather than once per simulation 
+  * - 11.1
+    - * Check that anemia prevalence looks good with stratification and updated artifact keys
+      * Check that 2021 year update looks as expected
+      * Check that birth outcome count observer is functioning as expected (if fix is implemented prior to running)
+      * Check that background morbidity has been excluded
+    - 
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -693,6 +736,14 @@ Specific outputs for specific models are specified in the following section.
     - Explanation
     - Action plan
     - Timeline
+  * - Anemia prevalence underestimated
+    - Could be due to non-stratification of anemia person time by pregnancy state? Could be because the hemoglobin key indices look weird?
+    - RT to add stratification and fix hemoglobin artifact keys and run again
+    - For 11.1
+  * - Pregnancy outcome observer recording every timestep rather than once per sim
+    - Known issue
+    - Engineers to update observer accordingly. In the meantime, RT can add pregnancy outcome stratification to pregnancy transition observer to verify that relative pregnancy outcome counts are as expected with 2021 data.
+    - ASAP/11.1
   * - Zero values for 50-55 year old age group
     - Vivarium inputs fills maternal disorders deaths and maternal hemorrhage incidence with zeros due to :code:`age_end` parameter in :code:`gbd_mapping`, despite raw GBD estimates for these parameters being non-zero for this age group
     - Acceptable limitation given very low pregnancy incidence in this age group

@@ -448,6 +448,12 @@ The naive models can be summarized very easily. They are provided as CSV
 files where the first row contains treatment regimen categories and the second contains corresponding
 (invariant) probabilities of assignment.
 
+.. warning::
+  These naive probabilities `have missing categories for RRMM due to a data processing error <https://ihme.slack.com/archives/C016L1Y7G6R/p1661120837399389>`_.
+  They also were not run with the most updated version of the line of therapy coding algorithm.
+
+  These are not critical issues since the naive scenario is not a key output of our simulation.
+
 .. list-table:: Naive probabilities CSV paths
   :widths: 1 10
   :header-rows: 1
@@ -759,6 +765,10 @@ Data files:
 :download:`Target Dara coverage in China <target_dara_coverage_china.csv>`
 
 Details on the calculation of these values can be found at J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\China Projections.xlsx
+
+.. warning::
+  These values were calculated in the Excel spreadsheet listed above, which is not very easy to understand;
+  if we return to this work we should replace this with code.
 
 Modeled Affected Outcomes
 +++++++++++++++++++++++++

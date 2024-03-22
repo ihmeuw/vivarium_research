@@ -1,6 +1,6 @@
 ..
   Section title decorators for this document:
-  
+
   ==============
   Document Title
   ==============
@@ -23,32 +23,33 @@
 
 .. _vivarium_model_components:
 
-================================================
-Types of Vivarium model components
-================================================
+===================================================
+Types of Vivarium components and how to design them
+===================================================
 
-The purpose of this page is to describe the general types of model components that comprise Vivarium models. 
+The following subpages describe the different types of Vivarium
+components we typically encounter and provide guidelines on how to model
+them in our simulations.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :titlesonly:
    :glob:
 
+   GBD_disease_health/index
    causes/index
    impairments/index
    interventions/index
    intervention_features/index
-   risk_factors/index
+   risk_factors/*
 
-Sub-components of risk factors can be found here:
+To document a new component or an entirely new simulation, you should
+start with one of the following templates (if applicable), referring to
+the above pages for more information. The Concept Model Template is the
+starting point for designing a new Vivarium simulation, whereas the
+other templates are for discrete components within a simulation.
 
-  .. toctree::
-     :maxdepth: 1
-     :glob:
+.. toctree::
+  :maxdepth: 2
 
-     risk_factors/risk_exposure/index
-     risk_factors/risk_attributable_causes/index
-     risk_factors/risk_correlation/index
-     risk_factors/risk_effects/index
-     risk_factors/risk_mediation/index
-     risk_factors/population_attributable_fraction/index
-     risk_factors/residual_confounding/index
+  ../../models/templates/index

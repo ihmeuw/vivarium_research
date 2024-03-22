@@ -222,11 +222,16 @@ Data Descriptions
 	  - I
 	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{incidence_rate_c302}*(\text{duration_c302} / 365)}`
 	  - We transform incidence to be a rate within the susceptible population under the assumption that prevalence ~= incidence * duration.
-	* - r
+	* - r: USED IN CIFF AND IV IRON SIMULATIONS AS WELL AS MODELS 1-11 OF NUTRITION OPTIMIZATION SIMULATION
 	  - I
 	  - S
 	  - (-1/time_step)*log(1-time_step/duration_c302)
 	  - Where time_step is the simulation time_step in years. See notes below on adjusted duration. Use :code:`np.log()` function. The above is equivalent to 1/adjusted_duration_c302.
+	*	- r: FOR USE IN NUTRITION OPTIMIZATION SIMULATION AFTER IMPLEMENTATION OF VARIABLE TIMESTEPS
+		- I
+		- S
+		- 1/duration_c302
+		- 
 
 .. note::
 

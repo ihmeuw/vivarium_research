@@ -162,8 +162,11 @@ that are configurable for each run:
   * - Budget(s)
     - A set of budgets or single budget to optimize for 
     - We will plan to include some "help" for selecting a budget such as the cost of maximizing all interventions or the current baseline budget 
-  * - Stillbirth inclusion in YLLs 
-    - Stillbirths included in YLLs, stillbirths NOT included in YLLs
+  * - Stillbirth inclusion 
+    - Stillbirths included in YLLs and deaths
+    - 
+  * - Mean draw vs individual draws
+    - Either finds results only for the mean of draws OR for individual draws 
     - 
 
 We have considered some other possible input parameters, but at this time 
@@ -172,10 +175,17 @@ these to be configurable on each run if the need arises.
 
 Additional parameters: 
 
-#. Draw-specific results vs summarized results. Currently we are planning to have results be draw-specific. 
 #. Rate vs total population. Currently we will generate results for the total population. E.g., all deaths averted in Ethiopia.
 #. Additional constraints in the optimization. E.g., running the emulator allowing for operationally infeasible cases and not allowing for them. 
 #. Changing saturation coverage limits. 
+
+.. note::
+
+  Stillbirths can either be included or excluded from YLLs, DALYs and deaths. The question of including stillbirths as a negative outcome is complex. Traditionally, stillbirths are not seen as "deaths" and therefore don't contribute to outcomes. 
+
+  However, pregnancy interventions are known to decrease the stillbirth rate, leading to more live births. These children are often vulnerable to infections and deaths in early life. Therefore, results can sometimes be misleading if a child that would have been stillborn was born alive but died quickly. If stillbirths are not counted as a death, then it might appear like pregnancy interventions increase deaths. 
+
+  Therefore we have an adjustable parameter in the emulator where stillbirths can be included or not included in the counts for deaths, YLLs and YLDs. 
 
 
 2.2.3 Constraints and Assumptions
@@ -219,24 +229,16 @@ Assumptions:
     - `Emulator version 4 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/d667cd01cd0ddc63137fe55798cc6d04831701d0/emulator/emulator_with_py_files_20230810.ipynb>`_ and `py files version 4 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/d667cd01cd0ddc63137fe55798cc6d04831701d0/emulator/emulator_with_py_files_20230810.ipynb>`_  
     - 
   * - 5
-    - Adding maternal interventions  
-    - 
+    - Adding maternal interventions
+    - `Emulator version 5 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/emulator/emulator_10_04_2023.ipynb>`_ and `py files version 5 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/emulator/emulator_functions_10_04_23.py>`_
     - 
   * - 6
     - Allowing optimization to different parameters 
-    - 
+    - `Emulator version 5 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/emulator/emulator_10_04_2023.ipynb>`_ and `py files version 5 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/emulator/emulator_functions_10_04_23.py>`_
     - 
   * - 7
-    - Add in additional constraints for unfeasible scenarios 
-    - 
-    - 
-  * - 8
-    - Adjusting to fit final model outputs 
-    - 
-    - 
-  * - 9
-    - Adding non-linear costs  
-    - 
+    - Add in stillbirths, updating to wave 2 data, multiple locations, improved figures
+    - `Emulator version 7 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/a51363fa1703fec3645f9a9cde84a878ad7aa653/emulator/emulator_2_27_2024.ipynb>`_ and `py files for version 7 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/a51363fa1703fec3645f9a9cde84a878ad7aa653/emulator/emulator_functions_2_27_24.py>`_.
     - 
 
 
@@ -267,17 +269,17 @@ Assumptions:
     - Syl
     - Example: deaths, DALYs, SAM cases 
   * - 5: Add maternal interventions 
-    - Blocked by simulation progress 
+    -  
     - Syl
-    - WIP
+    - Completed 
   * - 6: Test for robustness to different initial values 
     - 
-    - TBD
-    - 
+    - Syl
+    - Completed 
   * - 7: Test non-linear cost functions 
     - 
-    - TBD
-    - Not technically needed for wave 1 but would good to keep in mind during emulator design and building
+    - Some testing, decided against moving forward here 
+    - 
   * - 8: Decide on costing approach and priorities 
     - 
     - Syl and Latera
@@ -385,7 +387,7 @@ As of 10/16/2023:
     - Returns counts that will need to be converted to rate. `Codcorrect version ID obtained here <https://hub.ihme.washington.edu/display/GBD2020/GBD+2021+CodCorrect+Tracking>`_
   * - Incidence
     - Incidence rates
-    - Not yet ready
+    - Ready
     - :code:`get_draws(gbd_round_id=7,`
 
       :code:`year_id=2021,`
@@ -398,10 +400,10 @@ As of 10/16/2023:
 
       :code:`decomp_step='iterative',`
 
-      :code:`version_id=???,`
+      :code:`version_id=1469,`
 
       :code:`measure_id=6)`
-    - Returns per person-year rate. `Final COMO version ID can be found here when ready <https://hub.ihme.washington.edu/display/GBD2020/COMO+tracking>`_
+    - Returns per person-year rate. `Final COMO version ID obtained here <https://hub.ihme.washington.edu/display/GBD2020/COMO+tracking>`_
   * - Risk exposure
     - Hemoglobin mean/standard deviation
     - Ready
@@ -463,13 +465,29 @@ As of 10/16/2023:
 
 - There are no PAFs in the table above as all PAFs are custom-calculated in this model, including:
 
-  - Hemoglobin on maternal disorders and maternal hemorrhage PAFs - calculated by the research team (unblocked)
+  - `Hemoglobin on maternal disorders and maternal hemorrhage PAFs <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/hemoglobin_maternal_disorder_pafs/hemoglobin_and_maternal_disorders_pafs.csv>`_
 
   - LBWSG PAFs have been calculated by the engineers (unblocked)
 
   - CGF PAFs calculated by the research team (blocked by 2021 cause data artifact keys)
 
-- Joint BMI/hemoglobin exposure, as calculated by the research team (unblocked)
+- `Prevalence of hemoglobin below 100 g/L among the pregnant population <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_
+
+  - Overall (not age specific) values available here for use in the child simulation (to be calculated by research team, unblocked)
+
+- `Prevalence of hemoglobin below 70 g/L among the pregnant population <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_
+
+  - Overall (not age specific) values available here for use in the child simulation (to be calculated by research team, unblocked)
+
+- Joint BMI/hemoglobin exposure, as calculated by the research team 
+
+  - `Prevalence of low BMI given hemoglobin above 10 g/dL <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
+
+    - Overall (not age specific) values available here for use in the child simulation (to be calculated by research team, unblocked)
+
+  - `Prevalence of low BMI given hemoglobin below 10 g/dL <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
+
+    - Overall (not age specific) values available here for use in the child simulation (to be calculated by research team, unblocked)
 
 - Child growth failure accessory data (wasting transitions and correlated underweight exposure distributions) calculated by the research team (blocked by 2021 cause data artifact keys)
 
