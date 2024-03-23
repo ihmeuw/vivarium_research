@@ -40,7 +40,6 @@ them in our simulations.
    causes/index
    impairments/index
    interventions/index
-   intervention_features/index
    risk_factors/*
 
 To document a new component or an entirely new simulation, you should
