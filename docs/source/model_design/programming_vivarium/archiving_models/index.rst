@@ -37,7 +37,7 @@ this page will not go into as much depth to avoid duplicating information.
 Archiving a project is the process of storing information and data 
 in order to make it publically available. Zenodo is an open repository 
 we use to accomplish this. Basically, archiving a repository is 
-adding data to the repo, checking to make sure the informaiton is 
+adding data to the repo, checking to make sure the information is 
 intelligible and correct for non-simulation science individuals, and 
 creating a referenceable version of the GitHub repo on Zenodo. 
 
@@ -53,7 +53,7 @@ Some more background and callouts for each step is included below.
 Adding Artifacts
 ----------------
 
-When building simulations, we store artifacts on the cluster not on 
+When building simulations, we store artifacts on the cluster instead of on 
 the GitHub repository because storing large files on GitHub is difficult 
 and can make cloning and working on the repo much slower. 
 Therefore, once the model is complete we need to add the artifacts 
@@ -67,13 +67,8 @@ Updating Repository Information
 
 There are 2 files you should check for accuracy at this point: 
 
-#. :code:`.zenodo.json` which needs to include the Orcid IDs for everyone who worked on the project 
+#. :code:`.zenodo.json` which needs to include the Orcid IDs for everyone who worked on the project. A list of Orcid IDs can be found at :code:`/mnt/team/simulation_science/priv/orcid.json` 
 #. :code:`README.rst` which needs to be accurate to the actual steps needed for running a simulation. The goal is that someone can read these instructions and successfully clone the repo and run a simulation. This file is best updated in tandem with step 3 - running a replication test. 
-
-.. todo::
-
-  Add link to Orcid ID reference that I am fairly confident was created based on `this slack thread <https://ihme.slack.com/archives/C221EE33J/p1704324609813369>`_ but can't locate. 
-
 
 Running a Replication Test
 --------------------------
