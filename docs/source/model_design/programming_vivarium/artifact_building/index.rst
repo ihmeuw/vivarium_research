@@ -77,13 +77,13 @@ If you need to edit a data key, you can locate the corresponding function from
 to match your needs.
 
 It is important to note that some of the more common
-functions are stored in other respositories like :code:`vivarium_inputs`.
+functions are stored in other repositories like :code:`vivarium_inputs`.
 Looking at these repositories can be helpful in understanding how the data is
 being pulled. However, generally RT should not edit functions in other
-engineering resposities, instead talk to engineering if you think a function needs
+engineering repositories. Talk to engineering if you think a function needs
 new functionality or try to add the needed updates in the :code:`loader.py` function instead.
 
-Another important watch-out is that most of these functions are used for
+Another important call-out is that most of these functions are used for
 more than one data key. Check if you want to change how data is pulled for
 all data keys using that function, or only one, and edit accordingly.
 
@@ -127,8 +127,8 @@ information matches what you expect.
 As referenced above, there is also a :code:`paths.py` file which
 cotains the file paths and names for all other input data.
 
-Building an Artifacts on the Command Line
------------------------------------------
+Building an Artifact on the Command Line
+----------------------------------------
 
 Before you try to build your artifact, make sure the data inputs are
 up to date. Consider what you are changing in the new model version
@@ -164,7 +164,7 @@ below with an explanation for each flag.
 
 Flags: 
   - -vvv is for the verbosity, the vvv is standard on the team
-  - ---pdb has you reach the python debugger if there are any errors
+  - --pdb has you reach the python debugger if there are any errors
   - -o is where to put the output artifact
   - -l is the location to make the artifact for. The location must be included in the :code:`metadata.py` file in order to be called here.
   - -a is for append, this means the program will check for existing data keys and only run the keys that are not currently present
@@ -172,7 +172,7 @@ Flags:
 It is highly likely you will land in the debugger the first time you
 try make the artifact. Look through the stack trace and see which data key
 is causing the error. Then try and trace to where the issue might be.
-If you're unsure what's causing the error - ask for help!
+We know that this is hard! If you're unsure what's causing the error - ask for help!
 
 Using append is helpful in the case of errors - you can rerun the same command
 and it will automatically start from where it errored out previously.
