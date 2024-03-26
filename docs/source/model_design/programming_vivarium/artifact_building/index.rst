@@ -40,6 +40,9 @@ There are also artifact building instructions in the `vivarium tutorial docs <ht
 these are largely written for a software developer, so here we endeavor to
 create documentation from a research team perspective.
 
+Another helpful resource to use is the `vivarium research template <https://github.com/ihmeuw/vivarium_research_template>`_ which is the code present when starting 
+a new project repository. This inlcudes baseline information and functions. 
+
 Understanding Data Keys
 -----------------------
 
@@ -54,41 +57,44 @@ test the model.
 
 These data keys show up in two places:
 
-#. The :code:`data_keys.py` file
-#. The :code:`loader.py` file
+#. The :code:`constants/data_keys.py` file
+#. The :code:`data/loader.py` file
 
-In :code:`data_keys.py`, all data keys are defined. At the bottom in
+In :code:`constants/data_keys.py`, all data keys are defined. At the bottom in
 the :code:`MAKE_ARTIFACT_KEY_GROUPS` you'll see the data key groups -
 things like :code:`POPULATION`, :code:`MEASLES`, or :code:`WASTING`
 from the examples above. The code above in the rest of the documentation
-is designed to take inputs from :code:`loader.py` and return the correct
+is designed to take inputs from :code:`data/loader.py` and return the correct
 data key string.
 
-At the top of :code:`loader.py` you will see :code:`mapping`. The map provides
-inputs for :code:`data_keys.py` which returns the data key name. The second
+At the top of :code:`data/loader.py` you will see :code:`mapping`. The map provides
+inputs for :code:`constants/data_keys.py` which returns the data key name. The second
 part of the line in :code:`mapping` is the function where the data key
 serves as an input. These functions are written below :code:`mapping`.
 
 Writing or Editing Data Keys
 ----------------------------
 
-If you need to edit a data key, you can locate the corresponding function from
-:code:`mapping` at the top of :code:`loader.py` and simply edit the function
+If you need to edit how data is loaded into a key, you can locate the corresponding function from
+:code:`mapping` at the top of :code:`data/loader.py` and simply edit the function
 to match your needs.
 
 It is important to note that some of the more common
 functions are stored in other repositories like :code:`vivarium_inputs`.
-Looking at these repositories can be helpful in understanding how the data is
+If you want more information on loading data and :code:`vivarium_inputs`, 
+look at the :ref:`pulling data page in vivarium research <data>`.
+
+Looking at engineering repositories can be helpful in understanding how the data is
 being pulled. However, generally RT should not edit functions in other
 engineering repositories. Talk to engineering if you think a function needs
-new functionality or try to add the needed updates in the :code:`loader.py` function instead.
+new functionality or try to add the needed updates in the :code:`data/loader.py` function instead.
 
 Another important call-out is that most of these functions are used for
 more than one data key. Check if you want to change how data is pulled for
 all data keys using that function, or only one, and edit accordingly.
 
 If you're being asked to add a new data key, or write an artifact from scratch,
-a good place to start is from the `vivarium research template <https://github.com/ihmeuw/vivarium_research_template>`_. In this repo's version of :code:`loader.py`
+a good place to start is from the `vivarium research template <https://github.com/ihmeuw/vivarium_research_template>`_. In this repo's version of :code:`data/loader.py`
 you can find some basic examples of creating the loader functions.
 
 Most of the time, data is loaded using the :code:`load_standard_data` function,
@@ -104,8 +110,8 @@ limit the size of the artifact.
 For data keys that don't pull information from GBD, the process of writing
 or editing these functions is largely the same. Instead of :code:`load_standard_data`
 you would generally just use :code:`read_csv` from a specified data path. The
-path to each data input is stored in the :code:`paths.py` file. If you update a
-data input, update the reference in the :code:`paths.py` file to ensure you're
+path to each data input is stored in the :code:`constants/paths.py` file. If you update a
+data input, update the reference in the :code:`constants/paths.py` file to ensure you're
 pulling the most up to date information.
 
 Other Input Data
@@ -114,17 +120,16 @@ Other Input Data
 Data keys and their functions make up the bulk of the data pulling
 infrastructure for artifact building. However, there might be some other
 metadata that's important to be aware of. Most of this can be found
-in the :code:`metadata.py` file.
+in the :code:`constants/metadata.py` file.
 
 This is information like draw counts, index columns, and locations that
-can be run. If you're starting a new model, you'll have to write
-this information, but it should largely match what is present in
-the `vivarium research template <https://github.com/ihmeuw/vivarium_research_template>`_.
+can be run. You can use the `vivarium research template <https://github.com/ihmeuw/vivarium_research_template>`_ as a reference for the information 
+generally found in this file.
 
 If you are editing an existing model, just check to make sure this
 information matches what you expect.
 
-As referenced above, there is also a :code:`paths.py` file which
+As referenced above, there is also a :code:`constants/paths.py` file which
 cotains the file paths and names for all other input data.
 
 Building an Artifact on the Command Line
@@ -141,7 +146,9 @@ Creating an Environment
 First, you will need to create an environment. This will be the same
 as creating usual environments, except when you install the project repo,
 you'll need to do a special editable install. The command looks like this :code:`pip install -e.[data]`. Some other packages can be helpful here as well like :code:`ipython` for
-debugging.
+debugging. Note that this environment is different than the one needed 
+to run the simulation model, where you will use the :code:`[dev]` flag instead 
+of the :code:`[data]` flag needed for artifact building. 
 
 Generally, the project repo is the only thing you will need to install,
 but check with the engineers if there are updates to other vivarium
@@ -166,7 +173,7 @@ Flags:
   - -vvv is for the verbosity, the vvv is standard on the team
   - --pdb has you reach the python debugger if there are any errors
   - -o is where to put the output artifact
-  - -l is the location to make the artifact for. The location must be included in the :code:`metadata.py` file in order to be called here.
+  - -l is the location to make the artifact for. The location must be included in the :code:`constants/metadata.py` file in order to be called here.
   - -a is for append, this means the program will check for existing data keys and only run the keys that are not currently present
 
 It is highly likely you will land in the debugger the first time you
@@ -179,6 +186,6 @@ and it will automatically start from where it errored out previously.
 
 If you need to edit a data key that you already generated, you can either
 edit the above :code:`make_artifacts` command to have it replace instead of append
-, or you can remove
+by using the :code:`-r` flag, or you can remove
 certain data keys from the artifact using :code:`art.remove('<DATA_KEY>')`
 with ipython.
