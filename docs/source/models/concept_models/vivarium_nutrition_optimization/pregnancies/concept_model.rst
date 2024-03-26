@@ -585,7 +585,7 @@ Specific outputs for specific models are specified in the following section.
       * Intervention counts
     - Same as 9.2
     - Should be the same as the adding locations test runs
-  * - 11.1
+  * - 11.1 and 11.2
     - GBD 2021 update, but with year=2021 rather than year=2022 and disability due to other causes ("background morbidity") excluded
     - Baseline
     - 400,000 population size per draw, 20 draws
@@ -726,6 +726,14 @@ Specific outputs for specific models are specified in the following section.
       * Check that 2021 year update looks as expected
       * Check that birth outcome count observer is functioning as expected (if fix is implemented prior to running)
       * Check that background morbidity has been excluded
+    - `V&V notebooks for model 11.1 can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/142>`_
+      * Anemia prevalence looks good!
+      * 2021 data update as expected
+      * Birth outcome observer looks as expected
+      * YLDs due to other causes successfully removed
+      * Zero YLDs due to maternal disorders
+  * - 11.2
+    - * Check that maternal YLDs are functioning as expected
     - 
 
 .. list-table:: Outstanding V&V issues
@@ -736,14 +744,10 @@ Specific outputs for specific models are specified in the following section.
     - Explanation
     - Action plan
     - Timeline
-  * - Anemia prevalence underestimated
-    - Could be due to non-stratification of anemia person time by pregnancy state? Could be because the hemoglobin key indices look weird?
-    - RT to add stratification and fix hemoglobin artifact keys and run again
-    - For 11.1
-  * - Pregnancy outcome observer recording every timestep rather than once per sim
-    - Known issue
-    - Engineers to update observer accordingly. In the meantime, RT can add pregnancy outcome stratification to pregnancy transition observer to verify that relative pregnancy outcome counts are as expected with 2021 data.
-    - ASAP/11.1
+  * - Zero YLDs due to maternal disorders
+    - Could be because of year versioning in artifact? There is data for all years in :code:`cause.maternal_disorders.ylds` keys and all non-2021 years are zero. For other keys, there is only data for 2021 year.
+    - RT update artifact and run again
+    - For 11.2
   * - Zero values for 50-55 year old age group
     - Vivarium inputs fills maternal disorders deaths and maternal hemorrhage incidence with zeros due to :code:`age_end` parameter in :code:`gbd_mapping`, despite raw GBD estimates for these parameters being non-zero for this age group
     - Acceptable limitation given very low pregnancy incidence in this age group
