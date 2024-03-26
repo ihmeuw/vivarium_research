@@ -734,7 +734,8 @@ Specific outputs for specific models are specified in the following section.
       * Zero YLDs due to maternal disorders
   * - 11.2
     - * Check that maternal YLDs are functioning as expected
-    - 
+    - `V&V notebooks for model 11.2 can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/143>`_
+      * Maternal disorders YLDs now look as expected -- ready to move on to production runs
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -744,10 +745,6 @@ Specific outputs for specific models are specified in the following section.
     - Explanation
     - Action plan
     - Timeline
-  * - Zero YLDs due to maternal disorders
-    - Could be because of year versioning in artifact? There is data for all years in :code:`cause.maternal_disorders.ylds` keys and all non-2021 years are zero. For other keys, there is only data for 2021 year.
-    - RT update artifact and run again
-    - For 11.2
   * - Zero values for 50-55 year old age group
     - Vivarium inputs fills maternal disorders deaths and maternal hemorrhage incidence with zeros due to :code:`age_end` parameter in :code:`gbd_mapping`, despite raw GBD estimates for these parameters being non-zero for this age group
     - Acceptable limitation given very low pregnancy incidence in this age group
