@@ -1,12 +1,12 @@
 .. _models_risk_factors:
 
 =====================
-Modeling Risk Factors
+Risk Factors
 =====================
 
-This document contains information on risk factors as they relate to modeling in vivarium, including definitional overviews as well as more detailed descriptions of sub-topics related to modeling risk factors (such as risk exposures, effects, correlation, etc.). 
+This document contains information on risk factors as they relate to modeling in vivarium, including definitional overviews as well as more detailed descriptions of sub-topics related to modeling risk factors (such as risk exposures, effects, correlation, etc.).
 
-For our purposes, a risk factor is any attribute that is associated with some outcome. The presence of this attribute, what we term the **risk exposure**, may be measured in various ways, including the dichotomous, categorical, or continuous measures. This association between the risk factor and outcome, what we term the **risk effect**, can be causal and/or non-causal, may be of large or small magnitude, and may take a linear or non-linear shape. The **population attributable fraction (PAF)** is a summary measure of how a risk factor causally relates to an outcome. Causes that are entirely attributable to a risk factor are termed **risk-attributable causes** or **PAF-of-one causes**. Additionally, risk **correlation** and **mediation** are ways in which multiple risk factors may relate to each other. 
+For our purposes, a risk factor is any attribute that is associated with some outcome. The presence of this attribute, what we term the **risk exposure**, may be measured in various ways, including the dichotomous, categorical, or continuous measures. This association between the risk factor and outcome, what we term the **risk effect**, can be causal and/or non-causal, may be of large or small magnitude, and may take a linear or non-linear shape. The **population attributable fraction (PAF)** is a summary measure of how a risk factor causally relates to an outcome. Causes that are entirely attributable to a risk factor are termed **risk-attributable causes** or **PAF-of-one causes**. Additionally, risk **correlation** and **mediation** are ways in which multiple risk factors may relate to each other.
 
 See the following pages for more information on these risk factor sub-components:
 
@@ -21,7 +21,7 @@ See the following pages for more information on these risk factor sub-components
    risk_correlation/index
    risk_mediation/index
    residual_confounding/index
-   
+
 Risk factors in GBD
 ^^^^^^^^^^^^^^^^^^^
 

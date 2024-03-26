@@ -1,12 +1,32 @@
 .. _models_intervention:
 
 ======================
-Modeling Interventions
+Interventions
 ======================
 
-An essential part of many vivarium simulation models is the
-Intervention Model Document.  This must communicate the following
-details to allow a software engineer to implement the model:
+Many of our Vivarium simulations are designed to measure the effects of
+a hypothetical intervention on a simulated population. Such
+interventions are described by an intervention model document. Like a
+cause model document, a risk exposure model document, or a risk effects
+model document, the goal of an intervention model document is to
+organize the complexity of the model so that others can understand it:
+The simulation researcher is responsible for communicating in writing
+how the intervention model should function, with sufficient detail so
+that (1) the engineer can implement the model in Vivarium; and (2) other
+researchers can understand what was done, including the strengths and
+weaknesses of the approach and how to verify and validate the results.
+This page describes in more detail what should go into an intervention
+model document.
+
+.. contents::
+  :local:
+
+General guidelines
+------------------
+
+When writing an intervention model document (or any other component
+model document for Vivarium), you must include the following details to
+allow a software engineer (SWE) to implement the model:
 
 * Attributes of a simulant that are required for modeling the
   intervention (e.g. age, sex, and systolic blood pressure level for a
@@ -22,26 +42,74 @@ details to allow a software engineer to implement the model:
 * How to update the attributes (including both required and added
   attributes) during each simulation time-step.
 
-
-The goal of an Intervention Model Document is to organize the
-complexity of the intervention model --- the simulation researcher is
-responsible for communicating in writing how the intervention model
-should function, with sufficient detail so that (1) the engineer can
-implement the model in Vivarium; and (2) other researchers can
-understand what was done, including the strengths and weaknesses of
-the approach and how to verify and validate the results.
-
-We have developed a template for an intervention model document, which
+We have developed a template for intervention model documents, which
 can help organize a complex model, and the remainder of this document
 describes what a researcher might include for each section when using
 :ref:`this template <intervention_model_template>`.
+An example intervention model document that uses this template is the
+:ref:`latent tuberculosis treatment intervention <intervention_latent_tuberculosis_treatment>`.
 
-Here is an example of a recent application of this template for the :ref:`latent tuberculosis treatment intervention <intervention_latent_tuberculosis_treatment>`.
+Key questions to address early
+------------------------------
 
+There are many questions about an intervention that we need to answer
+early in the research process in collaboration with the client. This
+section lays out several such questions that will help clarify the goals
+of the project and ensure that basic aspects of an intervention are
+understood and written out. The goal is to give the SWE team a clear
+idea of expectations and to avoid the need for researchers and SWEs to
+go back and forth about clarifying these details throughout the project.
 
-.. contents:
+Research aims and objectives
+++++++++++++++++++++++++++++
 
+1. Write a one sentence aim --- What does the client want to learn,
+   specifically?
 
+   - Example: "To evaluate the effect of different interventions of
+     population-wide nutritional fortification of staple foods on
+     disability-adjusted life years in children under 5 in India,
+     Nigeria, and Pakistan."
+
+2. Write a few SMART objectives, answering one question per objective.
+   *Think about*: What is the client willing to ignore? Is GBD/Vivarium
+   able to answer these questions well? How might we adapt our questions
+   to questions that GBD can answer?
+
+   - Example objective 1: "To quantify the what-if scenario of
+     increasing coverage of vitamin A from existing to X% on under 5
+     childhood mortality and morbidity."
+
+   - Example objective 2: "To quantify the what-if scenario of
+     increasing coverage of folic acid from existing to X% on under 5
+     childhood mortality and morbidity."
+
+Outcomes the intervention affects
++++++++++++++++++++++++++++++++++
+
+* What outcomes does the intervention affect?
+
+Effect sizes and definitions
+++++++++++++++++++++++++++++
+
+* What are the exposure and control groups?
+* What is the definition of the effect size (prevalence or incidence or mortality, etc.)?
+* What units are the effect size(s) measured in?
+* Are the effects measured in shifts or RRs? Is this compatible with GBD risk factor distribution/definition? Can we convert or find alternative data source if not?
+* Do we need to alter our units on GBD side (using cross-walks) or intervention data source side?
+* NOTE: We need to understand the GBD structure for the relevant risk/cause enough to determine compatibility with our intervention effect sizes.
+
+Potential confounders and mediators
++++++++++++++++++++++++++++++++++++
+
+* What are the potential confounders and mediators?
+* Might we need to control for them?
+
+Limitations
++++++++++++
+
+* What are the limitations of our modeling strategy?
+* Are these acceptable to the client?
 
 The structure of an intervention model document
 -----------------------------------------------

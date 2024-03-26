@@ -49,7 +49,7 @@ Project Folder
 --------------
 
 In the initial project folder, there are some files for information storage and 
-documentation that are helpful to know about. These do not used in the actual 
+documentation that are helpful to know about. These are not used in the actual 
 model, but you might need to edit them in order to document your work. 
 
 CHANGELOG
