@@ -4065,6 +4065,23 @@ dataset should be used to do this. The level of imprecision in any of the above
 options is acceptable for the user warning, which should be left vague enough as
 to not imply exactly what fraction of rows will get noised.
 
+.. note::
+
+  We plan to eventually implement the above user warnings by including
+  with each simulated population a metadata file that contains the
+  eligible fractions :math:`F` for each (sublocation [e.g. state],
+  dataset, year, noise type) combination. However, for pseudopeople
+  version 1.0.0 (released Feb 12, 2024), we did not want to make users
+  update their copies of the USA and RI data, so instead we included a
+  single metadata file in the pseudople package on PyPI. Since we
+  currently have no way to tell which simulated population the user is
+  using, we computed values of :math:`F` for the USA simulated
+  population, and we will use these for all three simulated populations
+  (USA, Rhode Island, or sample data). Thus, the values that trigger the
+  user warnings will not be as accurate as possible, but since they are
+  not totally precise anyway, we deemed this an acceptable limitation
+  until we do the next data release.
+
 Old Abie Work, to be deleted later
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
