@@ -572,7 +572,7 @@ Specific outputs for specific models are specified in the following section.
     - 
   * - 11.0
     - GBD 2021 update
-    - Baseline
+    - All
     - 400,000 population size per draw, 20 draws
     - * Deaths, YLLs
       * YLDs, stratified by pregnancy state
@@ -587,7 +587,7 @@ Specific outputs for specific models are specified in the following section.
     - Should be the same as the adding locations test runs
   * - 11.1 and 11.2
     - GBD 2021 update, but with year=2021 rather than year=2022 and disability due to other causes ("background morbidity") excluded
-    - Baseline
+    - All
     - 400,000 population size per draw, 20 draws
     - * Deaths, YLLs
       * YLDs, stratified by pregnancy state
@@ -602,7 +602,7 @@ Specific outputs for specific models are specified in the following section.
     - Should be the same as the adding locations test runs
   * - 12.0
     - GBD 2021 production runs
-    - Baseline
+    - All
     - Same as 9.2
     - Same as 9.2 but including count of live births and still births 
     - Same as 9.2
