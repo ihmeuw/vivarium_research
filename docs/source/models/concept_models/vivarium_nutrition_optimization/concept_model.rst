@@ -473,7 +473,7 @@ As of 10/16/2023:
 
 - `Prevalence of hemoglobin below 100 g/L among the pregnant population <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_
 
-  - `Overall (not age specific) values available here for use in the child simulation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_aggregated.csv>`_
+  - `Overall (not age specific) values for prevalence of hemoglobin below 100 g/L available here for use in the child simulation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_aggregated.csv>`_
 
 - `Prevalence of hemoglobin below 70 g/L among the pregnant population <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_
 
@@ -481,11 +481,11 @@ As of 10/16/2023:
 
   - `Prevalence of low BMI given hemoglobin above 10 g/dL <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
 
-  - `Overall (not age specific) values available here for use in the child simulation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10_age_weighted.csv>`_
+  - `Overall (not age specific) values for prevalence of low BMI given hemoglobin above 10 g/dL available here for use in the child simulation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10_age_weighted.csv>`_
 
   - `Prevalence of low BMI given hemoglobin below 10 g/dL <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
 
-    - `Overall (not age specific) values available here for use in the child simulation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10_age_weighted.csv>`_
+    - `Overall (not age specific) values for prevalence of low BMI given hemoglobin below 10 g/dL available here for use in the child simulation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10_age_weighted.csv>`_
 
 - Child growth failure accessory data (wasting transitions and correlated underweight exposure distributions) calculated by the research team (blocked by 2021 cause data artifact keys)
 
