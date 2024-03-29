@@ -33,8 +33,8 @@ Running Simulations
 
 Once you have your model completed, you'll need to actually run a simulation. 
 There is documentation on an `engineering page <https://vivarium.readthedocs.io/en/latest/tutorials/running_a_simulation/index.html>`_ and `on the Hub <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=SSE&title=Running+a+parallel+simulation>`_ about 
-running the simulation, but here 
-will make a how-to guide for running simulations for a research team 
+running the simulation, but here we
+provide a how-to guide for running simulations for a research team 
 audience. The below sections are meant to guide someone through running 
 a simulation and the various sub-steps. 
 
@@ -76,6 +76,7 @@ Below is the :code:`configuration` section, which contains the specifications
 for a single model run, including the draw number, artifact path, population, 
 scenario, time period, and any stratifications. This should largely be 
 familiar as RT members edit this frequently for interactive sim runs. 
+For more information on running an interactive sim, check out :ref:`this page <vivarium_interactive_simulation>`. 
 
 Match this information to the run specified in the vivarium research 
 documentation. 
@@ -135,12 +136,12 @@ Here is an example :code:`simulate` run and an explanation of the flags.
 Flags: 
   - -vvv is for the verbosity, the vvv is standard on the team
   - --pdb has you reach the python debugger if there are any errors
-  - --proj_simscience_prod has you run on the production project on the cluster, which has higher priority than other projects. You might need to be added to access this project! 
+  - --proj_simscience_prod has you run on the production project on the cluster, which is reserved for simulation runs and may help your jobs get scheduled faster. You might need to be added to access this project! 
   - -o is where to put the output results
   - -i is the location of the artifact
 
 The simulate run should be relatively quick and won't take a tremendous amount 
-of data to run or store results. 
+of memory to run or store results. 
 
 Psimulate
 +++++++++
@@ -148,13 +149,15 @@ Psimulate
 The :code:`psimulate` run will run multiple simulations, using information 
 from both the :code:`model_spec.yaml` and :code:`branches/scenarios.yaml` files.
 One way to think about this is that the :code:`branches/scenarios.yaml` 
-file with supersede the :code:`model_spec.yaml`, so anything 
+file will supersede the :code:`model_spec.yaml`, so anything 
 present there - draws count, seed count, or scenarios for example, 
 will therefore overwrite the corresponding lines in the :code:`model_spec.yaml`. 
 
 Since the :code:`psimulate` run is quite large, you'll need to start 
 by getting a large :code:`srun` going. There is pretty good documentation 
-of this `on the Hub <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=SSE&title=Running+a+parallel+simulation>`_. 
+of this `on the Hub <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=SSE&title=Running+a+parallel+simulation>`_. You do also 
+need an srun for :code:`simulate`, but without any special parameters, 
+so we focus on this here instead. 
 
 We have included an example :code:`srun` command here as well though. 
 
@@ -168,7 +171,7 @@ Flags:
   - -c is the number of threads, how to find this is covered on the Hub page above 
   - -A is the project, for simulation runs we can use :code:`proj_simscience_prod`
   - -p is the queue. Here we use all.q but long.q would also work 
-  - --pty tells the cluster to use your bash files for settings 
+  - --pty tells the cluster you want an interactive bash session 
 
 Now that you have your srun going, you can run :code:`psimulate`. 
 An example of the command is below 
@@ -176,7 +179,7 @@ An example of the command is below
 .. code-block:: bash 
   :linenos:
 
-  $ psimulate run <PATH_TO_MODEL_SPEC> <PATH_TO_SCENARIOS_FILE> -vvv --pdb --proj_simscience_prod -o /mnt/team/simulation_science/pub/models/<PROJCET_NAME>/results/<MODEL_NUMBER>/ -i '<PATH_TO_ARTIFACT>' 
+  $ psimulate run <PATH_TO_MODEL_SPEC> <PATH_TO_SCENARIOS_FILE> -vvv --pdb --proj_simscience_prod -o /mnt/team/simulation_science/pub/models/<PROJECT_NAME>/results/<MODEL_NUMBER>/ -i '<PATH_TO_ARTIFACT>' 
 
 Flags: 
   - run runs that model as defined in the model_spec and scenario files
@@ -188,7 +191,7 @@ Flags:
 
 In addition to running the model, :code:`psimulate` can also restart a 
 run and expand a run. Restarting a run is very helpful if some jobs failed. 
-It will automatically check what draw/seed/scenario are missing, and only 
+It will automatically check what draws/seeds/scenarios are missing, and only 
 run those jobs. Sometimes jobs fail due to cluster limitations, even if there 
 aren't any bugs in the code, so this is helpful to try if only a few things 
 failed. 
