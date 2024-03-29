@@ -734,8 +734,9 @@ Specific outputs for specific models are specified in the following section.
       * Zero YLDs due to maternal disorders
   * - 11.2
     - * Check that maternal YLDs are functioning as expected
-    - `V&V notebooks for model 11.2 can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/143>`_
+    - `V&V notebooks for model 11.2 can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/146>`_
       * Maternal disorders YLDs now look as expected -- ready to move on to production runs
+      * Also confirmed that the birth outcome observer is capturing outcomes among all simulated individuals, including those who die during the simulation
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
