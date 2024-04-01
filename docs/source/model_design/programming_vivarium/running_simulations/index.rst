@@ -214,10 +214,22 @@ Flags:
   - --pdb has you reach the python debugger if there are any errors
   - --proj_simscience_prod has you run on the production project on the cluster, which has higher priority than other projects. You might need to be added to access this project! 
 
-.. todo::
+Lastly, you can use :code:`psimulate expand` to increase the size of a run. 
+For example, if you completed a successful run with 10 seeds and 15 draws you 
+use the below run to expand it to be 15 draws and 25 seeds. 
 
-  Add an example psimulate expand call and the flags 
+.. code-block:: bash 
+  :linenos:
 
+  $ psimulate expand <PATH_TO_CURRENT_RESULTS> -vvv --pdb --proj_simscience_prod --add-draws 5 --add-seeds 10
+
+Flags: 
+  - expand adds the new runs to your current results 
+  - -vvv is for the verbosity, the vvv is standard on the team
+  - --pdb has you reach the python debugger if there are any errors
+  - --proj_simscience_prod has you run on the production project on the cluster, which has higher priority than other projects. You might need to be added to access this project! 
+  - --add-draws says how many new draws you would like to add to the results 
+  - --add-seeds says how many new seeds you would like to add to the results 
 
 Debugging
 ---------
