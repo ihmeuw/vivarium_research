@@ -94,6 +94,13 @@ expands on what differentiates IBM, including microsimulation, from other types 
 Advantages of microsimulation
 +++++++++++++++++++++++++++++
 
+Event tracking
+~~~~~~~~~~~~~~
+
+One advantage of microsimulation (as opposed to some form of cohort analysis) is the ability to record events as they occur to each simulant. Depending on the
+microsimulation, there are different ways these events are recorded. Read more about the advantages and disadvantages of different forms of event tracking in a later section,
+`Type of event simulation`_. 
+
 Correlation between risk exposures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -129,21 +136,28 @@ researchers at Amgen, Inc, and you can read the paper in which it was published 
 
 .. image:: MM_graph_time_varying_rates.jpg
 
-.. _allowing_other_complexities:
 
-Allowing other complexities
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Surfacing limitations
+~~~~~~~~~~~~~~~~~~~~~
 
 Another benefit of microsimulations in general is that they can surface complications or limitations that are obscured in non-individual-based models, such as compartmental models.
 
+We can revisit our IV iron intervention microsimulation to illustrate. The graph below depicts individual hemoglobin concentration over time, which as described earlier, is an
+important risk exposure variable in this model. When examining this curve, you may notice minute discrepancies from what you would expect to see in the real world. These are 
+limitations in our model that become more evident due to the high resolution of our microsimulation. Importantly, these same limitations could be in a population-based model, but 
+because there is no individual level detail, we wouldn't come face to face with them. 
+
+Another example that illustrates this is our microsimulation of a full-scale United States population. 350 million simulants in this population have 
+names, family members, addresses, employers, and other similar individual characteristics, and over time, they experience life events, such as migration, 
+employment change, and death. There are limitations in our model that are only visible at this level of detail, such as how we simulate migration: we assume
+that 100% of people who move change employment. Due to data availability, we have not been able to calculate a more accurate rate, but we know that this limitation
+exists and therefore can make improvements, i.e. by finding a new data source. Such a limitation may well be present in a model that does not include individual output 
+data, but because this information is aggregated, the limitation won't be surfaced and improved upon. 
+Read more about this project :ref:`here <vivarium_census_prl_synth_data>`.
+
 .. todo:: 
   
-  Elaborate on example of this from previous work: examining hemoglobin on curve on an individual level and seeing the discrepancies from real life that would also be present in a 
-  model that doesn't go to the level of detail we do in microsim. 
-
-  Another example I'll use in this section is the PRL project: family structure (if something like this is available at all in a compartmental model, then it is only reported in a 
-  much more aggregated way.) Connect this directly to the data requirements disadvantage: even with the very detailed ACS data, simulating realistic family structures is a big 
-  challenge! 
+  Add hemoglobin curve and briefly describe discrepancy and maybe why it's okay?
 
 
 Disadvantages of microsimulation
@@ -154,15 +168,14 @@ Resource requirements
 
 Our microsimulations typically require a substantial amount of computational resources to run. For example, our microsimulation of a full-scale
 United States population was made possible through the use of a high performance computing cluster and used 334 parallel runs, each requiring approximately 55 gigabytes of memory over a runtime of 21.5 hours.
-Read more about this project :ref:`here <vivarium_census_prl_synth_data>`.
 
-The demanding resource needs of microsimulations may require we use a smaller simulant population (that can, post-simulation, be up-scaled to better reflect the real-world target population),
-thus presenting limitations related to sample size and stochastic uncertainty. 
+The demanding resource needs of microsimulations may require we use a smaller simulant population (that can, post-simulation, be up-scaled to better reflect the 
+real-world target population), thus presenting limitations related to sample size and stochastic uncertainty. 
 
 Data requirements
 ~~~~~~~~~~~~~~~~~
 
-As we highlighted above in our section on :ref:`Allowing other complexities <allowing_other_complexities>`, microsimulations enable the modeling of complexities otherwise
+As we highlighted above in our section on `Surfacing limitations`_, microsimulations enable the modeling of complexities otherwise
 difficult or impossible to replicate. Unfortunately, these complexities require a significant amount of detailed data to accurately represent individual behaviors and the relationships between them.
 Obtaining these data can be challenging and time-consuming, and there may be privacy concerns associated with using such detailed personal data. This is particularly true given the nature of
 what we on the Simulation Science team investigate in our microsimulations: accurately modeling the effects of health interventions at an individual-level likely requires access to medical 
@@ -197,18 +210,12 @@ In this section, we will elaborate on what differentiates Vivarium, our team's m
 Leveraging the Global Burden of Disease (GBD) Study
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Based on GBD population-level estimates stratified by age, sex, time, and location, the IHME microsimulation framework creates a simulated population that mirrors the relevant qualities of a given real-world population of interest. Each individual simulant in the population is assigned health and demographic attributes that specify characteristics such as age, sex, disease, and risk factor status (for example, diabetes diagnosis, systolic blood pressure level, or body-mass index). In any given microsimulation analysis, there can be thousands, millions, or, theoretically, billions of simulants. Although the assigned health and demographic attributes are heterogeneous across individuals within the simulated population, when taken in aggregate they match the relevant real-world population-level data supplied by the GBD.
+Vivarium is uniquely positioned to access population-level estimates from the Global Burden of Disease (GBD) study. 
+These estimates are stratified by age, sex, time, and location, allowing us to simulate a population that mirrors the relevant 
+qualities of a given real-world population of interest.  Vivarium researchers extract relevant input parameters from the vast 
+repository of GBD population health data that are explicitly structured to quantify uncertainty by representing estimates as 
+draws from Bayesian-derived joint posterior distributions.
 
-The IHME platform is uniquely positioned to extract relevant input parameters from the vast repository of GBD population health data that are explicitly structured to quantify uncertainty by representing estimates as draws from Bayesian-derived joint posterior distributions.
-
-The IHME microsimulation platform, unlike most other microsimulation frameworks, additionally reduces variance between scenarios by appropriately controlling stochastic uncertainty through a common-random-numbers approach. In this procedure, for each simulant, the same randomly generated number is used in both baseline and intervention scenarios to dictate change or maintenance of health status across time steps.
-
-
-.. todo::
-
- - Versus decision tree or other types of models?
- - Different types of individual-based models (mini lit review) 
- - What differential equations underly these different types of models?
 
 Simulant agency
 +++++++++++++++
@@ -217,24 +224,60 @@ Unlike agent-based models, microsimulations do not necessarily program agency in
 
 .. todo:: 
   
-  Expand upon how microsim is different from agent-based modeling here. 
+  -  The Vivarium simulation with the most simulant agency is our synthetic population simulation for PRL. [explain how in 1 sentence]
+  - HPVsim (along with others in Starsim series) provides example of agent-based simulation (eg different simulants have different sexual patterns leading to different risks)
+  - Cite definition of agent-based simulation 
+
 
 Incorporating uncertainty
 +++++++++++++++++++++++++
 
-Microsimulation methods provide a useful approach to modeling stochastic uncertainty in a conceptually valid manner because chance – that is, reliance on randomly generated numbers – 
-is used to govern movement between states for individual simulants from a single computer-generated population, as opposed to comparing the role of chance across multiple 
-populations with differing characteristics.
+Like other microsimulation frameworks [[add example and citation]], Vivarium utilizes randomly generated numbers to incorporate stochastic uncertainty into our simulations. 
+However, unlike most other microsimulation frameworks, the IHME microsimulation platform additionally reduces variance between scenarios by appropriately controlling 
+stochastic uncertainty through a common-random-numbers approach. In this procedure, for each simulant, the same randomly generated number is used in both baseline and 
+intervention scenarios to dictate change or maintenance of health status across time steps. The only difference between scenarios, then, is the presence or absence of 
+health interventions.
 
-In the context of healthcare estimates typically characterized by considerable variance across quantities of interest, the use of Monte Carlo methods to run simulations using iterative 
-draws from probability distributions provides an effective means of incorporating parameter uncertainty. 
+.. todo:: 
+  
+  Example of microsim that uses random numbers but not common random numbers? 
 
-Simulation methods have the added advantage of reducing confounding variance between different scenarios by ensuring that the simulated population is identical across all scenarios analyzed. 
-The only difference between scenarios, then, is the presence or absence of health interventions. By incorporating heterogeneity at the level of the individual simulant, microsimulations are 
-able to provide an additional degree of flexibility and detail (such as stratifying results according to demographic or epidemiological attributes) not available in population-level models.
 
-.. todo::
-    Reword this section to make it clear that this is about common random numbers (not Monte Carlo) as a distinguishing feature of Vivarium (as compared to other microsim methods) 
+Computational needs
++++++++++++++++++++
+
+To date, all Vivarium simulations require a super-computer (such as a high-performance cluster) to run. [[refer to previous section on details]] Other microsimulation frameworks may have prioritized computational ease, such as starsim...  
+
+.. todo:: 
+  
+    Elaborate on HPVsim's inclusion of ways to run simulations in parallel: 
+    - the “MultiSim” class for running, summarizing, and plotting an arbitrary collection of simulations; the “Scenario” class for running, summarizing, and plotting a collection of simulations that specifically differ according to their input parameters, including interventions; the “Sweep” class for running 2+ dimensional sweeps over parameter values and producing automated heatmaps of the resulting outcomes of interest. 
+    - All of these can be used on personal computers to run a small number of simulations in parallel, or to run very large numbers of simulations on cloudbased or HPC computing resources
+
+
+Type of event simulation
+++++++++++++++++++++++++
+
+The way simulants undergo events (i.e., move from one state to another) can be recorded in different ways, depending on microsimulation methods. These divergent methods are referred to as discrete time simulation (simulants progress at fixed time increments, and it is recorded if they experienced an event) and discrete event simulation (simulants
+move from event to event based on sampled timing of those events occuring). There are advantages and disadvantages related to each of these disparate methods of event simulation,
+which we elaborate upon below. 
+
+
+.. todo:: 
+
+  Discrete time simulation (continuous event): e.g. Vivarium (https://vivarium-research.readthedocs.io/en/latest/model_design/designing_vivarium_model/choosing_appropriate_time_step/index.html?highlight=choosing%20an%20appropriate#choosing-an-appropriate-time-step) 
+    
+  - Advantages: results in the same distribution as with discrete event 
+  - Disadvantages: staying in each state for the same amount of time, less computationally efficient
+  - Note that we have been discussing updating these methods and switching to discrete event with a global clock
+  
+  Discrete event simulation (continuous time): e.g. Starsim https://www.ncbi.nlm.nih.gov/books/NBK293948/#:~:text=Discrete%20event%20simulation%20(DES)%20is,life%20process%2C%20facility%20or%20system. 
+
+  - Advantages: can use rates to determine varying amounts of time in different states (e.g. in rainy for longer than in cloudy, due to statistical probability). More computationally efficient
+  - Disadvantages: Need to know the maximum rate (or, if you have multiple states that you could go to, the sum of all the rates) in order to get a valid probability distribution In non-sink states (e.g., mortality is a sink state)
+
+
+
 
 References
 ----------
