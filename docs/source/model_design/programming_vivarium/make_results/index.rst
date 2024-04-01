@@ -73,6 +73,9 @@ malfunctioned, but check if the issue is just a difference in
 column name (e.g., the column might actually be called 
 :code:`MEASURE_death_due_to_heart_failure_AGE_GROUP_50_to_54_SEX_female`). 
 
+An example of changing or adding a new stratification is on 
+the :ref:`common changes page <common_model_changes>`. 
+
 Running the make_results Command
 --------------------------------
 

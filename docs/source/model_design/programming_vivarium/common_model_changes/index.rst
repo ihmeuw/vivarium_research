@@ -82,7 +82,8 @@ variable name (:code:`sam_treatment`) match what is found in the
 :code:`components/observers.py` file.
 
 You're now ready to start the model run! The last thing to change will be 
-in the :code:`constants/results.py` file. As outlined in the PAGE 
+in the :code:`constants/results.py` file. As outlined in the 
+:ref:`make results page <make_results_rt>`
 you will need to change the column name. For example, here the column 
 might change from :code:`"MEASURE_child_wasting_{WASTING_STATE_NUMERIC}_person_time_AGE_GROUP_{AGE_GROUP}_SEX_{SEX}"` to :code:`"MEASURE_child_wasting_{WASTING_STATE_NUMERIC}_person_time_AGE_GROUP_{AGE_GROUP}_SAM_TREATMENT_{SAM_TREATMENT}_SEX_{SEX}"`. 
 
