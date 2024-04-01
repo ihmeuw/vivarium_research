@@ -70,7 +70,8 @@ multiple simulations.
 
 Generally, research will not be responsible for writing or maintaining 
 components, though this might change in the future. You'll mainly use this 
-section to turn on or off components. 
+section to turn on or off components. For an example of turning off a component, 
+check the :ref:`common changes page <common_model_changes>`.
 
 Below is the :code:`configuration` section, which contains the specifications 
 for a single model run, including the draw number, artifact path, population, 
@@ -92,6 +93,12 @@ majority of our simulation runs.
 The information in this file is limited. It contains the number of draws, seeds, 
 and scenarios to include in a simulation run. Check that this information 
 matches the run specified in the vivarium research documentation. 
+
+If you are trying to run multiple locations simultaneously, you can also 
+add multiple artifact paths to this file, one for each location. This 
+can make the file much more complex, so take a look at some examples from 
+:ref:`the CVD simulation <https://github.com/ihmeuw/vivarium_nih_us_cvd/blob/main/src/vivarium_nih_us_cvd/model_specifications/branches/scenarios.yaml>`_ or 
+:ref:`the MNCH child simulation <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/blob/main/src/vivarium_gates_nutrition_optimization_child/model_specifications/branches/scenarios.yaml>`_. But also ask for help with this if you need to!
 
 Running a Simulation on the Command Line
 ----------------------------------------
@@ -231,10 +238,17 @@ go to your cluster log directory on a command line and enter
 
 Once you have a log that failed open, look through and find the error 
 message and stack trace. If you can figure out what's causing the issue, 
-try to fix it. If the error message is inscrutable, ask for help! 
+try to fix it. 
+
+If the error message is inscrutable, you can also get the draw and seed 
+number from the log file, and then do a :code:`simulate` run for the 
+specific draw and seed by updating the :code:`model_spec.yaml` file. With the 
+:code:`--pdb` flag, the run will drop you into the debugger when the 
+simulation fails, and you can try to debug more interactively. 
 
 Also, check the docs `on the Hub <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=SSE&title=Running+a+parallel+simulation>`_ 
 as these include specific failure messages that indicate types of 
 failures, such as memory or node issues. 
 
-
+If these all fail, please ask for help! This can be confusing so 
+don't be afraid to ask your friends. 
