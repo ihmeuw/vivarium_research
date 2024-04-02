@@ -72,10 +72,10 @@ look like:
 .. code-block:: bash 
   :linenos:
 
-  $ configuration: 
-  $   stratification: 
-  $     child_wasting: 
-  $       include: ['sam_treatment']
+    configuration: 
+      stratification: 
+        child_wasting: 
+          include: ['sam_treatment']
 
 Check that both the observer name (:code:`child_wasting`) and the stratification 
 variable name (:code:`sam_treatment`) match what is found in the 
