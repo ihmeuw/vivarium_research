@@ -97,8 +97,8 @@ matches the run specified in the vivarium research documentation.
 If you are trying to run multiple locations simultaneously, you can also 
 add multiple artifact paths to this file, one for each location. This 
 can make the file much more complex, so take a look at some examples from 
-:ref:`the CVD simulation <https://github.com/ihmeuw/vivarium_nih_us_cvd/blob/main/src/vivarium_nih_us_cvd/model_specifications/branches/scenarios.yaml>`_ or 
-:ref:`the MNCH child simulation <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/blob/main/src/vivarium_gates_nutrition_optimization_child/model_specifications/branches/scenarios.yaml>`_. But also ask for help with this if you need to!
+`the CVD simulation <https://github.com/ihmeuw/vivarium_nih_us_cvd/blob/main/src/vivarium_nih_us_cvd/model_specifications/branches/scenarios.yaml>`_ or 
+`the MNCH child simulation <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/blob/main/src/vivarium_gates_nutrition_optimization_child/model_specifications/branches/scenarios.yaml>`_. But also ask for help with this if you need to!
 
 Running a Simulation on the Command Line
 ----------------------------------------
