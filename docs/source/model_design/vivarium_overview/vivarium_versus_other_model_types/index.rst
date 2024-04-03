@@ -147,6 +147,8 @@ important risk exposure variable in this model. When examining this curve, you m
 limitations in our model that become more evident due to the high resolution of our microsimulation. Importantly, these same limitations could be in a population-based model, but 
 because there is no individual level detail, we wouldn't come face to face with them. 
 
+.. image:: hemoglobin_plot.png
+
 Another example that illustrates this is our microsimulation of a full-scale United States population. 350 million simulants in this population have 
 names, family members, addresses, employers, and other similar individual characteristics, and over time, they experience life events, such as migration, 
 employment change, and death. There are limitations in our model that are only visible at this level of detail, such as how we simulate migration: we assume
@@ -157,7 +159,8 @@ Read more about this project :ref:`here <vivarium_census_prl_synth_data>`.
 
 .. todo:: 
   
-  Add hemoglobin curve and briefly describe discrepancy and maybe why it's okay?
+  Better explain discrepancies between hemoglobin plot and real life. 
+  Use a better example from PRL (household structure).
 
 
 Disadvantages of microsimulation
