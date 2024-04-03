@@ -276,8 +276,20 @@ which we elaborate upon below.
   - Advantages: can use rates to determine varying amounts of time in different states (e.g. in rainy for longer than in cloudy, due to statistical probability). More computationally efficient
   - Disadvantages: Need to know the maximum rate (or, if you have multiple states that you could go to, the sum of all the rates) in order to get a valid probability distribution In non-sink states (e.g., mortality is a sink state)
 
+Calibration
++++++++++++
 
+.. todo:: 
 
+    Describe how some microsimulations automatically fit to data as opposed to being retroactively checked against data like we do on SimSci with a separate V&V process. Read more about our V&V process
+    here [[insert link]]
+
+Correlation
++++++++++++
+
+.. todo:: 
+
+    Describe how we overlay population-level statistics (e.g. GBD estimates) onto individuals rather than using individual-level data (e.g. hospital records) - can use CVD as an example of the latter.
 
 References
 ----------
