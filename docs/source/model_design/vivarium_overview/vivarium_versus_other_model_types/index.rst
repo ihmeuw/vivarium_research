@@ -232,8 +232,8 @@ Unlike agent-based models, microsimulations do not necessarily program agency in
   - Cite definition of agent-based simulation 
 
 
-Incorporating uncertainty
-+++++++++++++++++++++++++
+Reducing variance between scenarios
++++++++++++++++++++++++++++++++++++
 
 Like other microsimulation frameworks [[add example and citation]], Vivarium utilizes randomly generated numbers to incorporate stochastic uncertainty into our simulations. 
 However, unlike most other microsimulation frameworks, the IHME microsimulation platform additionally reduces variance between scenarios by appropriately controlling 
