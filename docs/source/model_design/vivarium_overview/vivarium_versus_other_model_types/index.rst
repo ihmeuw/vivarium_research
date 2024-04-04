@@ -97,7 +97,7 @@ Advantages of microsimulation
 Event tracking
 ~~~~~~~~~~~~~~
 
-One advantage of microsimulation (as opposed to some form of cohort analysis) is the ability to record events as they occur to each simulant. Depending on the
+One advantage of microsimulation (as opposed to some form of non-individual-based simulation) is the ability to record events as they occur to each simulant. Depending on the
 microsimulation, there are different ways these events are recorded. Read more about the advantages and disadvantages of different forms of event tracking in a later section,
 `Type of event simulation`_. 
 
@@ -143,9 +143,10 @@ Surfacing limitations
 Another benefit of microsimulations in general is that they can surface complications or limitations that are obscured in non-individual-based models, such as compartmental models.
 
 We can revisit our IV iron intervention microsimulation to illustrate. The graph below depicts individual hemoglobin concentration over time, which as described earlier, is an
-important risk exposure variable in this model. When examining this curve, you may notice minute discrepancies from what you would expect to see in the real world. These are 
-limitations in our model that become more evident due to the high resolution of our microsimulation. Importantly, these same limitations could be in a population-based model, but 
-because there is no individual level detail, we wouldn't come face to face with them. 
+important risk exposure variable in this model. When examining this curve, you may notice minute discrepancies from what you would expect to see in the real world. For instance,
+in this plot you can see hemoglobin concentrations change drastically very quickly (e.g., the drop from ~115 g/L Hb to ~90 g/L Hb once a simulant reaches six weeks postpartum). In 
+reality, these changes in hemoglobin concentration would likely be less steep than this. These are limitations in our model that become more evident due to the high resolution 
+of our microsimulation. Importantly, these same limitations could be in a population-based model, but because there is no individual level detail, we wouldn't come face-to-face with them. 
 
 .. image:: hemoglobin_plot.png
 
@@ -159,7 +160,6 @@ Read more about this project :ref:`here <vivarium_census_prl_synth_data>`.
 
 .. todo:: 
   
-  Better explain discrepancies between hemoglobin plot and real life. 
   Use a better example from PRL (household structure).
 
 
@@ -227,9 +227,10 @@ Unlike agent-based models, microsimulations do not necessarily program agency in
 
 .. todo:: 
   
-  -  The Vivarium simulation with the most simulant agency is our synthetic population simulation for PRL. [explain how in 1 sentence]
+  - The Vivarium simulation with the most simulant agency is our synthetic population simulation for PRL. [explain how in 1 sentence]
   - HPVsim (along with others in Starsim series) provides example of agent-based simulation (eg different simulants have different sexual patterns leading to different risks)
   - Cite definition of agent-based simulation 
+  - Describe CVD's use of simulants with different adherence rates to medications and likelihoods of discontinuation. And this in turn affects their risks.
 
 
 Reducing variance between scenarios
