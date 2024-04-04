@@ -91,7 +91,8 @@ categories. However, this is not guaranteed. Here, we will go through
 a few scenarios of how race and ethnicity categories might be misaligned 
 between datasets and the options for handling each. 
 
-**Nested Categories**
+Nested Categories
+~~~~~~~~~~~~~~~~~
 
 In this guide, we use nested categories to mean that one dataset has more granular 
 categories than another. For example, one dataset might report a race group 
@@ -106,7 +107,8 @@ issues with statistical power or small sample size. Weigh the different
 pros and cons as they relate to your project, centering people's 
 identities and needs in the conversation. 
 
-**Non-Nested Categories**
+Non-Nested Categories
+~~~~~~~~~~~~~~~~~~~~~
 
 If you need to combine multiple datasets, you will likely have to combine 
 race and ethnicity categories that won't match up perfectly. One option 
@@ -125,7 +127,8 @@ Another option is to attempt a crosswalking approach if one or more of your
 input datasets use different categories than the standard. This would allow 
 you to retain all of the data inputs, while keeping some granularity in categories. 
 
-**Multiracial Groups**
+Multiracial Groups
+~~~~~~~~~~~~~~~~~~
 
 Part of the US standard approach is allowing people to select as many race and 
 ethnicity categories as they identify with. Many people have multiracial 
