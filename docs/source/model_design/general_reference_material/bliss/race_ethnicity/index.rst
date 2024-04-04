@@ -87,7 +87,7 @@ categories are Hispanic or Latino and Not Hispanic or Latino.
 
 By having a set standard, 
 it improves the chance that multiple data sources will have the same 
-categories. However, this is not guarunteed. Here, we will go through 
+categories. However, this is not guaranteed. Here, we will go through 
 a few scenarios of how race and ethnicity categories might be misaligned 
 between datasets and the options for handling each. 
 
@@ -96,13 +96,13 @@ between datasets and the options for handling each.
 In this guide, we use nested categories to mean that one dataset has more granular 
 categories than another. For example, one dataset might report a race group 
 as simply "Asian" whereas another might have many categories that fit within 
-this group like Chinese, Filipino, Japanese, or Korean. In fact, the US Census 
+this group like Chinese, Filipino, Japanese, or Korean. In fact, the US goverment 
 often collects both the more granular and rolled up categories of data. 
 
 Granular data is usually better, as different groups within a single race 
 category can have very different experiences and needs. Try to keep the 
 most granular data possible. However, granular data can sometimes create 
-issues with statisitcal power or small sample size. Weigh the different 
+issues with statistical power or small sample size. Weigh the different 
 pros and cons as they relate to your project, centering people's 
 identities and needs in the conversation. 
 
@@ -111,8 +111,8 @@ identities and needs in the conversation.
 If you need to combine multiple datasets, you will likely have to combine 
 race and ethnicity categories that won't match up perfectly. One option 
 is to take the "least common denominator" approach, which essentially means 
-use the most granular race and ethnicity categories possible that still 
-captures the data fully. 
+using the most granular race and ethnicity categories possible that still 
+capture the data fully. 
 
 Often this will end up being the US standard categories above. We strongly 
 recommend against using fewer categories than the US standard unless it 
@@ -132,13 +132,19 @@ ethnicity categories as they identify with. Many people have multiracial
 identities and capturing this is important. However, it creates a statistical 
 issue without an easy answer - how do you handle overlapping groups? 
 
-To understand the options below, let's provide an example of a single 
+Often, someone will have made the decision about how to handle 
+race/ethnicity categories and multiracial individuals before you 
+receive the data. In this case, try to find out what was assumed 
+and note it appropriately in your limitations as needed.
+
+Below we outline some options for how to handle multiracial data. 
+To understand them more clearly, let's provide an example of a single 
 person who selected both "Black or African American" and "Asian" for 
 their race. 
 
 The first option is to include all 
-relevant race/ethnicity groups. So for this example, you would have 
-groups for "Black or African American", "Asian", and "Both Black or African 
+combinations of race/ethnicity groups. So for this example, you would have 
+groups for "Black or African American alone", "Asian alone", and "Both Black or African 
 American and Asian". If your dataset is large 
 enough to support having this level of granularity in groups, this 
 approach can work well. However, often this leads to issues with 
@@ -158,7 +164,7 @@ selected. Therefore in our example, the individual would be
 counted twice - once in "Black or African American" and once in "Asian". This 
 can lead to double counting in the data which might be more or 
 less important depending on the size of the multiracial group 
-in the dataset. This might be a reasonable option.
+in the dataset and the type of analysis. This might be a reasonable option.
 
 The fifth option is to run analyses with 
 both a more limited race/ethnicity group, and then with a larger, 
@@ -178,13 +184,6 @@ most identify with. [Liebler_2008]_ Therefore, the example individual
 would be placed in a single racial group - either "Black or African 
 American" or "Asian" based on their other data. If this is 
 feasible based on the data present, it is also a reasonable approach. 
-
-Often, someone will have made the decision about how to handle 
-race/ethnicity categories and multiracial individuals before you 
-receive the data. In this case, try to find out what was assumed 
-and note it appropriately in your limitations as needed. There is 
-more information on this in the section below. 
-
 
 2.2 Considering prior adjustment for race and ethnicity
 -------------------------------------------------------
