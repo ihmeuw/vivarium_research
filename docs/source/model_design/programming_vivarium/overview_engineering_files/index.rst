@@ -49,7 +49,7 @@ Project Folder
 --------------
 
 In the initial project folder, there are some files for information storage and 
-documentation that are helpful to know about. These do not used in the actual 
+documentation that are helpful to know about. These are not used in the actual 
 model, but you might need to edit them in order to document your work. 
 
 CHANGELOG
@@ -124,7 +124,7 @@ results
 
 The :code:`results.py` file contains the expected results columns and files. If 
 you want to change what is included in the results, you'll need to edit this. More 
-information on when and how to do that can be found on the :ref:`running simulations page <running_simulations_rt>`.
+information on when and how to do that can be found on the :ref:`make results page <make_results_rt>`.
 
 Data
 ----
@@ -204,7 +204,7 @@ researchers are used to receiving.
 It's important to note that if there is a mismatch between components that are run 
 and those are are requested in the results, you will get an error. It's good to check 
 that what was run is the same as what is expected in the outputs. More on this can 
-be found on the :ref:`running simulations page <running_simulations_rt>`.
+be found on the :ref:`make results page <make_results_rt>`.
 
 process_results
 +++++++++++++++
