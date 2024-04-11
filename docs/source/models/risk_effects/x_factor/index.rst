@@ -129,6 +129,8 @@ We have attempted to calibrate the wasting and x-factor models using a static ri
 
 Notably, the x-factor implementation had very little impact on population-level results for the CIFF project. Inclusion of the x-factor risk is expected to be more impactful if any interventions are targeted to the x-factor (either directly or through some correlated factor), such as targeting SQ-LNS to those who are discharged from acute malnutrition treatment. However, **if we plan to include the x-factor risk in a model in the future, additional thought should be put into how to operationalize the x-factor exposure model as well as best practices for calibrating the x-factor and wasting risk exposure models before proceeding.**
 
+Finally -- an entirely different conceptualization of the x-factor risk effects could also be considered. For instance, rather than informing x-factor effects through literature related to wasting relapse, we could inform such effects through literature that examines drivers of wasting such as socioeconomic status and/or food security that are more aligned with the static risk exposure implementation and that have directly measureable exposure values. This would resolve a challenge of calibrating the population-level exposure distribution and would leave only the remaining challenge of finding the wasting state-specific exposure distribution of the "x-factor" (which will differ from the population level distribution).
+
 Wasting Incidence Rates
 ++++++++++++++++++++++++
 
