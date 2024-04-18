@@ -1555,7 +1555,7 @@ Wave III
       8. Wasting transition counts 
     - * Age group
       * Sex
-  * - 13.0
+  * - 13.1
     - 1. Stunting state person time
       2. Wasting state person time
       3. Wasting transition counts 
