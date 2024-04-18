@@ -1500,7 +1500,7 @@ Wave III
     - Ethiopia location ONLY
     - Should use 2021 GBD pregnancy model
   * - 13.1
-    - SQ-LNS effect update, updated age group stratification
+    - `SQ-LNS effect update <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/154>`_, updated age group stratification (see stratification table below)
     - Baseline
     - Zero coverage, 3 (SQ-LNS)
     - Ethiopia location ONLY
