@@ -1499,6 +1499,12 @@ Wave III
     - Baseline
     - Ethiopia location ONLY
     - Should use 2021 GBD pregnancy model
+  * - 13.1
+    - SQ-LNS effect update, updated age group stratification
+    - Baseline
+    - Zero coverage, 3 (SQ-LNS)
+    - Ethiopia location ONLY
+    - 
   * - 14.0
     - Change child data to subnational
     - Baseline
@@ -1548,6 +1554,12 @@ Wave III
       7. Underweight state person time
       8. Wasting transition counts 
     - * Age group
+      * Sex
+  * - 13.0
+    - 1. Stunting state person time
+      2. Wasting state person time
+      3. Wasting transition counts 
+    - * Age group (0-6 months, 6-10 months, 10-18 months, 18-60 months)
       * Sex
   * - 14.0
     - 1. Deaths and YLLs (cause-specific)
@@ -1603,6 +1615,9 @@ Wave III
       * Verify CGF risk exposures and effects
       * Verify antenatal intervention effects
       * Verify child intervention effects 
+    - 
+  * - 13.1
+    - Verify updated SQ-LNS effects are acting as expected
     - 
   * - 14.0
     - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
