@@ -1495,14 +1495,20 @@ Wave III
     - Note
   * - 13.0
     - Update to GBD 2021 data 
-    - Baseline
-    - Baseline
+    - All
+    - All
     - Ethiopia location ONLY
     - Should use 2021 GBD pregnancy model
   * - 13.1
     - `SQ-LNS effect update <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/154>`_, updated age group stratification (see stratification table below)
     - Baseline
     - Zero coverage, 3 (SQ-LNS)
+    - Ethiopia location ONLY
+    - 
+  * - 13.2
+    - `PEM updates to fix mortality in moderate PEM and YLDs in all PEM <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/1a74f6815abacee6fc53c671afbf1fee5f44a22a/verification_and_validation/child_model/model_13.0_PEM.ipynb>`_
+    - Baseline
+    - Baseline
     - Ethiopia location ONLY
     - 
   * - 14.0
@@ -1561,6 +1567,17 @@ Wave III
       3. Wasting transition counts 
     - * Age group (0-6 months, 6-10 months, 10-18 months, 18-60 months)
       * Sex
+  * - 13.2
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+      5. Stunting state person time
+      6. Wasting state person time
+      7. Underweight state person time
+      8. Wasting transition counts 
+    - * Age group
+      * Sex
   * - 14.0
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
@@ -1615,9 +1632,13 @@ Wave III
       * Verify CGF risk exposures and effects
       * Verify antenatal intervention effects
       * Verify child intervention effects 
-    - 
+    - * Generally the `cause models and CGF risk exposures <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/1a74f6815abacee6fc53c671afbf1fee5f44a22a/verification_and_validation/child_model/model_13.0_risk_and_cause_checks.ipynb>`_, `wasting transitions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/1a74f6815abacee6fc53c671afbf1fee5f44a22a/verification_and_validation/child_model/model_13.0_wasting_transitions.ipynb>`_, and `wasting treatment effects <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/1a74f6815abacee6fc53c671afbf1fee5f44a22a/verification_and_validation/child_model/model_13.0_wasting_treatment_effects.ipynb>`_ are acting as expected. 
+      * However, the PEM model has issues. First, mortality is not being applied to both categories of MAM. Th severe wasting/PEM mortality is working correctly. Additionally, the YLDs recorded for both moderate and severe PEM are very low. `PEM notebook here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/1a74f6815abacee6fc53c671afbf1fee5f44a22a/verification_and_validation/child_model/model_13.0_PEM.ipynb>`_ 
   * - 13.1
     - Verify updated SQ-LNS effects are acting as expected
+    - Some confusion with age groups, but generally `SQ-LNS effects are acting as expected <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/1a74f6815abacee6fc53c671afbf1fee5f44a22a/verification_and_validation/child_model/model_13.1_sqlns_effects.ipynb>`_. 
+  * - 13.2
+    - Verify that PEM mortality and YLDs are now acting as expected 
     - 
   * - 14.0
     - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
