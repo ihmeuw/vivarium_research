@@ -1515,7 +1515,7 @@ Wave III
     - No changes from 13.2
     - All
     - All
-    - Ethiopia location ONLY
+    - Ethiopia location ONLY, 20 pregnancy seeds (at 20,000 pregnancies per seed) per draw; 20 draws
     - 
   * - 14.0
     - Change child data to subnational
