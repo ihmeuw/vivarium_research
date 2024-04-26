@@ -104,11 +104,13 @@ For stunting and underweight, relative risk values can be pulled using the follo
 
 Wasting relative risks were generated separately to accomodate the sub-exposures in the 
 MAM (cat2) category in our :ref:`wasting risk exposure model <2021_risk_exposure_wasting_state_exposure>`
-`and can be found in this CSV file <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/wasting_rrs_with_subcategories.csv>`_.
+`and can be found in this CSV file <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/wasting_rrs_with_subcategories_only_locations.csv>`_.
 
-   `These values were calculated in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/subcategory%20data.ipynb>`_. Notably, CGF PAFs were
+   `These values were calculated in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/f58b327a853aa3eeb5f947b60fcbeb5dc3eefa27/data_prep/cgf_correlation/subcategory%20data.ipynb>`_. Notably, CGF PAFs were
    calculated prior to the implementation of separate relative risks for MAM substates; however, 
    we have investigated that the substate relative risks change PAF estimates very minimally.
+
+  In April of 2024, this was updated due to a found bug in the code. The data was aggregated over age and sex, though kept location specific. The data file and notebook were updated accordingly. This change was due to lack of difference in subcategory MAM exposure at the age or sex level, and small counts leading to NaN values and incorrect final data. 
 
 The mortality relative risk values will then need to be adjusted. The GBD values are for CSMR, 
 but we will use EMR. To adjust between CSMR and EMR values, you can use this equation: 
