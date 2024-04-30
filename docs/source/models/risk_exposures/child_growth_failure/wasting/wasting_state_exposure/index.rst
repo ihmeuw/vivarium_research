@@ -323,9 +323,11 @@ For simulants that transition into the moderate acute malnutrition (MAM, cat2) w
 1. "Better" MAM/cat2.5: WHZ between -2 and -2.5
 2. "Worse" MAM/cat2.0: WHZ between -2.5 and -3
 
-`The probability of occupying the "Worse" MAM/cat2.0 sub-exposure upon transitioning into the MAM state is can be found in this CSV file <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/worse_exp_frac.csv>`_. The probability of "Better" MAM/cat2.5 is equal to 1-the probability of Worse MAM. 
+`The probability of occupying the "Worse" MAM/cat2.0 sub-exposure upon transitioning into the MAM state is can be found in this CSV file <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/worse_exp_frac_only_loc.csv>`_. The probability of "Better" MAM/cat2.5 is equal to 1-the probability of Worse MAM. 
 
-  These probabilities were generated according to a continuous distribution of child WHZ scores, `as performed in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/subcategory%20data.ipynb>`_. Note that mean WHZ and WHZ sd estimates from GBD were not available for GBD 2021, so we used DHS data to inform these parameters paired with GBD ensemble distribution weights to generate a continuous WHZ distribution for this purpose.
+  These probabilities were generated according to a continuous distribution of child WHZ scores, `as performed in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/f58b327a853aa3eeb5f947b60fcbeb5dc3eefa27/data_prep/cgf_correlation/subcategory%20data.ipynb>`_. Note that mean WHZ and WHZ sd estimates from GBD were not available for GBD 2021, so we used DHS data to inform these parameters paired with GBD ensemble distribution weights to generate a continuous WHZ distribution for this purpose.
+
+  In April of 2024, this was updated due to a found bug in the code. The data was aggregated over age and sex, though kept location specific. The data file and notebook were updated accordingly. This change was due to lack of difference at the age or sex level, and small counts leading to NaN values and incorrect final data. 
 
 These subexposures will vary with respect to their wasting relative risk values (detailed on the CGF risk effects page) and their targeted MAM treatment eligibility (detailed on the wasting treatment page), but they will **not** differ with respect to wasting transition rates (e.g. progression to SAM or recovery to mild wasting states).
 
