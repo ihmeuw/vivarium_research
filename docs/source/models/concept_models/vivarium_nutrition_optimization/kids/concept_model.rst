@@ -527,13 +527,18 @@ was in `this PR <https://github.com/ihmeuw/vivarium_research_nutrition_optimizat
 Similarly, MAM subcategory exposure, the percent of children in "worse" MAM 
 and "better" MAM, will be national only. We analyzed the rate of change 
 between regions in worse MAM fraction and found that it was generally 
-consistent between regions, while pooling for age and sex. 
+consistent between regions, while pooling for age and sex. The youngest age 
+group, neonatal, was excluded prior to pooling the data. 
 
 There were two regions where this was not true - Addis Ababa in Ethiopia and 
-Gilgit-Baltistan in Pakistan. However, these regions had many 
-NaNs in processed data. This is a result of too few data points with MAM children to 
-get results from the function. Since both regions made up a small percent of their national 
-children under 5 (about 1% in each country), we decided this was likely data noise. 
+Gilgit-Baltistan in Pakistan. These regions had lower calculated exposure fractions 
+for worse MAM as the population WHZ distributions for these locations as modeled
+had very low density below z-scores of -2.5 (note that the 
+:code:`risk_distributions.EnsembleDistribution` functions used for modeling these curves 
+do not return values below the 0.1st percentile). Since both regions made up a small 
+percent of their national children under 5 (about 1% in each country), we decided 
+the variation could be noise and, either way, that not including subnational variation 
+in this parameter was an acceptable limitation.
 
 Lastly, since we are not targetting the "targeted MAM" intervention subnationally, 
 this is unlikely to impact final model results. Should we want to try this approach 
