@@ -524,6 +524,26 @@ noted in the location data. Lastly, many location/age/sex groups had fewer than
 50 children, leading to lack of confidence in results. The analysis of this 
 was in `this PR <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/134>`_. 
 
+Similarly, MAM subcategory exposure, the percent of children in "worse" MAM 
+and "better" MAM, will be national only. We analyzed the rate of change 
+between regions in worse MAM fraction and found that it was generally 
+consistent between regions, while pooling for age and sex. The youngest age 
+group, neonatal, was excluded prior to pooling the data. 
+
+There were two regions where this was not true - Addis Ababa in Ethiopia and 
+Gilgit-Baltistan in Pakistan. These regions had lower calculated exposure fractions 
+for worse MAM as the population WHZ distributions for these locations as modeled
+had very low density below z-scores of -2.5 (note that the 
+:code:`risk_distributions.EnsembleDistribution` functions used for modeling these curves 
+do not return values below the 0.1st percentile). Since both regions made up a small 
+percent of their national children under 5 (about 1% in each country), we decided 
+the variation could be noise and, either way, that not including subnational variation 
+in this parameter was an acceptable limitation.
+
+Lastly, since we are not targetting the "targeted MAM" intervention subnationally, 
+this is unlikely to impact final model results. Should we want to try this approach 
+later, we might reconsider. This notebook contains the `MAM subcategory exposure analysis for subnational regions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/f58b327a853aa3eeb5f947b60fcbeb5dc3eefa27/data_prep/cgf_correlation/subcategory_data_subnational.ipynb>`_. 
+
 SAM and MAM treatmet coverage and efficacy data will continue to be national only. Also, 
 for all scenarios other than targeted SQ-LNS, roll out of interventions will 
 be the same for all subnational locations.
