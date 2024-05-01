@@ -53,6 +53,9 @@ on our `feedback form <https://docs.google.com/forms/d/e/1FAIpQLSeCED9TFQsH-1u4Q
    * -
      -
 
+Guiding principles
+------------------
+
 .. todo::
 
     Fill out table with some guiding principles for this guide. Can refer to same table in the sex and gender guide.
