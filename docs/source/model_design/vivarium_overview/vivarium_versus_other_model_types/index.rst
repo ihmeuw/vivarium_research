@@ -101,6 +101,15 @@ One advantage of microsimulation (as opposed to some form of non-individual-base
 microsimulation, there are different ways these events are recorded. Read more about the advantages and disadvantages of different forms of event tracking in a later section,
 `Type of event simulation`_. 
 
+Each of the microsimulations that our team has developed include this advantage, but we can use our microsimulation of multiple myeloma as an
+example. Multiple myeloma is a kind of plasma cell cancer, characterized by end organ damage—renal impairment, hypercalcemia, lytic bony lesions, and anemia. The below causal diagram 
+shows how we split multiple myeloma into two disease states: newly-diagnosed multiple myeloma (NDMM); and relapsed and/or refractory multiple myeloma (RRMM). Simulants move between these
+states in predetermined timesteps (e.g., in this microsimulation, 28 or 90 days), and without our ability to track these events, we wouldn't be able to draw meaningful findings 
+from our models. 
+
+.. image:: cause_model_diagram_mm.svg
+
+
 Correlation between risk exposures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -152,15 +161,10 @@ of our microsimulation. Importantly, these same limitations could be in a popula
 
 Another example that illustrates this is our microsimulation of a full-scale United States population. 350 million simulants in this population have 
 names, family members, addresses, employers, and other similar individual characteristics, and over time, they experience life events, such as migration, 
-employment change, and death. There are limitations in our model that are only visible at this level of detail, such as how we simulate migration: we assume
-that 100% of people who move change employment. Due to data availability, we have not been able to calculate a more accurate rate, but we know that this limitation
-exists and therefore can make improvements, i.e. by finding a new data source. Such a limitation may well be present in a model that does not include individual output 
-data, but because this information is aggregated, the limitation won't be surfaced and improved upon. 
+employment change, and death. There are limitations in our model that are only visible at this level of detail, such as how we simulate household structure.
+For instance, in an earlier iteration of the simulation, it was possible for children (i.e., under 18 years old) to get married, stemming from a limitation in how we perturbed age with
+regard to relationship type. Fortunately, this limitation has since been resolved and our model was thereby improved! Again, such a limitation may well be present in a model that does not include individual output data, but because this information is aggregated, the limitation won't be surfaced and improved upon. 
 Read more about this project :ref:`here <vivarium_census_prl_synth_data>`.
-
-.. todo:: 
-  
-  Use a better example from PRL (household structure).
 
 
 Disadvantages of microsimulation
@@ -286,7 +290,7 @@ Calibration
 .. todo:: 
 
     Describe how some microsimulations automatically fit to data as opposed to being retroactively checked against data like we do on SimSci with a separate V&V process. Read more about our V&V process
-    here [[insert link]]
+    here [[insert link]]. Use example from another microsimulation that uses automatic fitting to data
 
 Correlation
 +++++++++++
@@ -294,6 +298,7 @@ Correlation
 .. todo:: 
 
     Describe how we overlay population-level statistics (e.g. GBD estimates) onto individuals rather than using individual-level data (e.g. hospital records) - can use CVD as an example of the latter.
+    Find example of another microsimulation outside of CVD that uses individual-level data for individual-based sim
 
 References
 ----------
