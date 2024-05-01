@@ -54,8 +54,48 @@ on our `feedback form <https://docs.google.com/forms/d/e/1FAIpQLSeCED9TFQsH-1u4Q
 
     Fill out table with some guiding principles for this guide. Can refer to same table in the sex and gender guide.
 
-1.0 Research question
-+++++++++++++++++++++
+1.0 Research considerations
+++++++++++++++++++++++++++++
+
+Before beginning with your research, there are some crucial considerations to
+take as you read through our recommendations. Determining precisely how 
+concepts of race and ethnicity fit into your research question is a critical 
+first step. For instance, the following are some examples of questions you may 
+ask yourself in the early stages of your research: “Why are race and/or 
+ethnicity important to my research question?”, “What is gained by considering 
+race and/or ethnicity in my research project?”, and “Is race, ethnicity, or 
+some combination of the two the appropriate measure for my analysis?”. An 
+`IHME-created guide to diversity, equity, and inclusion research considerations <https://hub.ihme.washington.edu/display/DEI/DEI+and+Research+Considerations>`_ 
+is a resource that may be useful in providing a framework to think through 
+these sorts of questions in addition to the remainder of this guide. 
+
+Another important consideration to take throughout the process is an 
+understanding of your specific context and audience. For instance, relevant 
+race and ethnicity categories and associations will vary by population; you 
+should be sure to have an understanding of the dynamics of the population 
+relevant to your research and remember that racial and ethnic categories used 
+in one setting may not be appropriate in others. Seeking guidance from experts 
+and existing resources in the field specific to your setting is encouraged!
+
+There are three main challenges in considering race and ethnicity in biomedical 
+research that have been proposed by [Kaplan-and-Bennet-2003]_ and we encourage 
+you to keep them in mind throughout your work. These challenges are listed 
+below and discussed in more detail in the referenced paper and will also be 
+expanded upon throughout the remainder of this guide.
+    
+    1.  To account for the limitations of racial/ethnic data
+    2.  To distinguish between race/ethnicity as risk factor or as risk marker
+    3.  To avoid contributing to the racial/ethnic division of society
+
+Finally, make sure to be aware of your target journal’s policies regarding race 
+and ethnicity. Many journals have specific established guidelines that must be 
+adhered to.
+
+Taking these considerations into account in your work before and while 
+implementing this guide’s recommendation will help to ensure that your research 
+is not only respectful and sensitive to the complexities of race and ethnicity 
+but also adherent to relevant guidelines and meaningful to your intended 
+audience. 
 
 1.1 Research question
 ---------------------
@@ -208,5 +248,9 @@ feasible based on the data present, it is also a reasonable approach.
 4.0 References
 ++++++++++++++
 
+.. [Kaplan-and-Bennet-2003]
+    Kaplan JB, Bennett T. Use of Race and Ethnicity in Biomedical Publication. JAMA. 2003;289(20):2709–2716. doi:10.1001/jama.289.20.2709
+
 .. [Liebler_2008]
     Liebler CA, Halpern-Manners A. A practical approach to using multiple-race response data: a bridging method for public-use microdata. Demography. 2008 Feb;45(1):143-55. doi: 10.1353/dem.2008.0004. PMID: 18390296; PMCID: PMC2831381.
+
