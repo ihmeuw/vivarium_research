@@ -32,6 +32,9 @@
 Inclusive Health Metrics: Race and Ethnicity
 ============================================
 
+Overview
++++++++++++++++++++++
+
 On this page you will find ...
 
 .. todo::
@@ -53,6 +56,11 @@ on our `feedback form <https://docs.google.com/forms/d/e/1FAIpQLSeCED9TFQsH-1u4Q
 .. todo::
 
     Fill out table with some guiding principles for this guide. Can refer to same table in the sex and gender guide.
+
+Introduction to race and ethnicity
+------------------------------------------
+
+
 
 1.0 Research question
 +++++++++++++++++++++
