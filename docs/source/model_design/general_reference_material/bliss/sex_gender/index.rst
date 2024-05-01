@@ -33,6 +33,11 @@
 Inclusive Health Metrics: Sex and gender
 ========================================
 
+.. contents::
+   :depth: 2
+   :local:
+   :backlinks: none
+
 1.0 Overview
 ++++++++++++
 
