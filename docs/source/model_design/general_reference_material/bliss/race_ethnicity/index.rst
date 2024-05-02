@@ -92,7 +92,7 @@ and ethnicity. Many journals have specific established guidelines that must be
 adhered to.
 
 Taking these considerations into account in your work before and while 
-implementing this guide’s recommendation will help to ensure that your research 
+implementing this guide’s recommendations will help to ensure that your research 
 is not only respectful and sensitive to the complexities of race and ethnicity 
 but also adherent to relevant guidelines and meaningful to your intended 
 audience. 
