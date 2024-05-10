@@ -120,8 +120,11 @@ Making Subnational Data
 You can also make artifact data files that contain subnational data. These 
 files have all of the subnational data for a specific national geography 
 contained in a single file. For example, if you ran this in the US, you would 
-have one data file for each data keys, with a new column called "location" 
-which would contain the subnational locations like "Alabama" or "Alaska".
+get data files with a new column called "location" 
+which would contain the subnational locations like "Alabama" or "Alaska". Different 
+national locations will continue to be stored in different files (e.g., 
+US and Canada would be different files, each with a "location" column that 
+included the states/provinces).
 
 Currently, the basic setup of Vivarium will make a subnational artifact, so 
 no additional steps are needed. However, usually there will be some data keys 
@@ -133,8 +136,8 @@ keys which should remain national are contained in a list called
 file.
 
 Also be sure to check any functions that combine subnational and 
-national data. For example, remission rates are sometimes calculated 
-based on duration (a national data key) and prevalence (a subnational 
+national data. For example, prevalence rates are sometimes calculated 
+based on duration (a national data key) and incidence (a subnational 
 data key). These functions will likely require extra attention to 
 ensure they are pulling and providing the data needed. 
 

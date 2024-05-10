@@ -69,17 +69,20 @@ to fix the error.
 For our example, let's look at two photos of the stack trace 
 output. The first is the immediate output you see. This is quite 
 difficult to read, and as you can see, the bottom lines of the traceback, 
-which are the most immediate code that failed, just show an error in 
-the pandas operating system. Above that, we can start to see the error 
+which are the most immediate code that failed, just show an error within
+pandas code. Above that, we can start to see the error 
 being traced through calls in the :code:`loader.py` file. 
 
 .. image:: stacktrace_1.png
 
 The second photo is a formatted version of the stack trace that 
-vivarium creates. This is color coded, includes information on the 
+might be outputted based on your terminal and version of python. 
+It contains most of the same information, but with nicer coloring and 
+added information on the 
 parameters used at each point in the call, and notably includes 
 more relevant information - the lines of code in :code:`loader.py` 
-that failed. 
+that failed. If this doesn't appear, try updating python, or explore 
+new terminal options.
 
 .. image:: stacktrace_2.png
 
