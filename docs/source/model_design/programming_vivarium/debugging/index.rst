@@ -35,7 +35,26 @@ Debugging is an art and science that we couldn't hope to cover on this
 single page. Rather than attempt such foolishness, we review a few simple 
 techniques in the context of a targeted example here. If you find your 
 bug to be outside the scope of this page, it's likely time to ask an 
-engineer for help.  
+engineer for help.
+
+For the purpose of this debugging example, we will be working with 
+an intentionally set error to see how the error messages appear 
+and how to read them.
+
+Say we are building an artifact (more information on the :ref:`artifact 
+building page <artifact_building_rt>`) and working on the function 
+:code:`load_sbr` 
+in the :code:`loader.py` file (more information about file types can be found in the 
+:ref:`overview of engineering files page <engineering_files_rt>`). In this 
+function, a line of code we edit filters a dataset incorrectly. 
+
+.. image:: initial_error_code.png
+
+You can see in the photo above, we have added line 222, where we incorrectly 
+added a line filtering the dataset to the year 2005. This will lead to the 
+returned dataset being empty, since the year 2005 is not present in the data. 
+
+Let's see how this might show up in the code, and how we'd debug it. 
 
 Making Sense of the Stack Trace
 -------------------------------
@@ -47,33 +66,34 @@ Often the immediate line of code that generated the error will be
 significantly removed from the line of code that will need to be changed 
 to fix the error. 
 
-Let's work through an example to understand this. Say we are building an 
-artifact (more information on the :ref:`artifact building page <artifact_building_rt>`) and working 
-on a funciton in the :code:`loader.py` file (more information in the 
-:ref:`overview of engineering files page <engineering_files_rt>`. In this 
-fucntion, a line of code 
-we edit filters a dataset incorrectly 
-such that it is actually empty. Nothing in that immediate block of 
-code catches this error - instead the provided dataframe is just 
-stored as empty. 
+For our example, let's look at two photos of the stack trace 
+output. The first is the immediate output you see. This is quite 
+difficult to read, and as you can see, the bottom lines of the traceback, 
+which are the most immediate code that failed, just show an error within
+pandas code. Above that, we can start to see the error 
+being traced through calls in the :code:`loader.py` file. 
 
-From there this same, empty dataset is used in another :code:`loader.py` 
-function to calculate a rate. So our erroreously empty dataframe will be 
-multiplied by a dataframe with the correct data in it. 
-When pandas tries to run this multiplication on the dataframes, 
-it will find that the lengths do not match when they should. Pandas has 
-functions that run through a series of checks and if one fails, throws an 
-error message. 
+.. image:: stacktrace_1.png
 
-So the bottom line of the stack trace will likely say an error was thrown 
-in a pandas error message function that the lengths are not equal. From there, 
-the stack trace displays the code that lead here - for example the pandas 
-checking function that was run, then the pandas function that was called 
-(the multiplication), then the secondary 
-:code:`loader.py` function that tried to multiply with the empty dataframe. And still, 
-none of these will actually reveal the issue with filtering the dataset 
-we started with! This can be further complicated if the :code:`loader.py` function 
-uses some functions for other packages, like :code:`vivarium_research` or :code:`vivarium_public_health`. 
+The second photo is a formatted version of the stack trace that 
+might be outputted based on your terminal and version of python. 
+It contains most of the same information, but with nicer coloring and 
+added information on the 
+parameters used at each point in the call, and notably includes 
+more relevant information - the lines of code in :code:`loader.py` 
+that failed. If this doesn't appear, try updating python, or explore 
+new terminal options.
+
+.. image:: stacktrace_2.png
+
+Sometimes, it will be apparent from the stack trace where the bug 
+in the code is. However, sometimes it won't be. Here, we see that the 
+line of code we know is wrong (line 222 from the intro) isn't listed 
+anywhere in the stack trace. 
+
+Different errors might produce different outputs. You might see lines in the stack trace
+from pandas functions, other functions in :code:`loader.py`, or 
+functions from other packages, like :code:`vivarium_research` or :code:`vivarium_public_health`. 
 
 As you can see from this example, the stack trace can be both helpful and unhelpful. 
 In general, look through the files to see if you can get back to something 
@@ -95,11 +115,14 @@ in a pandas checking function.
 
 The Python debugger places you at the end of the stack trace - 
 so we are currently sitting in a pandas error message function. 
-We can check this by typing :code:`l.` or :code:`ll` which prints 
-the code around the current line (l.), or a longer version of this 
+We can check this by typing :code:`l` or :code:`ll` which prints 
+the code around the current line (l), or a longer version of this 
 print out (ll). This will let you see what the code surrounding the 
-error is. Likely in this case, it will just show you that pandas found 
-mismatched lengths and threw the error message, which isn't too helpful. 
+error is. In our example, typing :code:`ll` will show the photo below, 
+which is a pandas checking function showing an error with levels in the 
+data frames. 
+
+.. image:: ll_printout.png
 
 Next, you can move up or down the call stack with :code:`u` or 
 :code:`d` respectively. The stack is the code you're currently 
@@ -109,9 +132,10 @@ should match what is printed for you in the stack trace. The "trace"
 is the output when the error is found. 
 
 Since we start at the bottom of the stack, we will move up first. 
-By entering :code:`u`, we move to the 
-pandas checking function, then the pandas multiplication function, and finally 
-to the line in our :code:`loader.py` function. 
+By entering :code:`u`, we move through the pandas functions 
+until finally we reach the line in our :code:`loader.py` function. 
+
+.. image:: u_printout.png
 
 Note: it can 
 often take several times entering :code:`u` to get to a useful 
@@ -122,9 +146,10 @@ that started this error. Since the debugger is "in" this line of code,
 the objects at that point in the code are able to be called. For example, 
 we can print or manipulate the dataframes being worked with. The code 
 for this in the Python debugger is the same as used in 
-a Jupyter notebook. By printing the dataframes being used, you 
-might discover that one of the dataframes is empty - and the 
-issue is more clear! 
+a Jupyter notebook. By printing the :code:`sbr` dataframe, we 
+discover that it is empty - and the issue is more clear! 
+
+.. image:: sbr_printout.png
 
 From there, we can look at the code generating the empty dataframe. 
 Maybe you see the error quickly. But if not, we'll probably 
@@ -144,6 +169,10 @@ A breakpoint is a line of code :code:`breakpoint()` that "breaks"
 the code. So when this line is read, the model will drop you into a 
 Python debugger at that point in the code. So in our example, we might 
 set a breakpoint in the function which creates the empty dataframe. 
+Since we know that the :code:`sbr` dataframe is empty, we can look at 
+the :code:`load_sbr` function and add a breakpoint, see the image below.
+
+.. image:: adding_breakpoint.png
 
 Once in the Python debugger, we can use a similar process to the above. 
 Start by printing the dataframe. If it's empty, the issue is earlier 
