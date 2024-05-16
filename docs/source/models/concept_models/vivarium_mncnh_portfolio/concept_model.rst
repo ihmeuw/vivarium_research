@@ -98,6 +98,7 @@ and details on the intrapartum and neonatal time periods.
 **Wave 4**: Add the neonatal period and related interventions
 
 - Wave 4 will add the last decision tree for the neonatal time period 
+- We will add interventions that are administered during the neonatal period (corticosteroids for birthing parent, CPAP, iKMC, probiotics, and amoxicillin and gentamicin)
   
 .. _mncnh_portfolio_3.2:
 
