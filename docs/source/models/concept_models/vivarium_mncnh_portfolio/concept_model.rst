@@ -71,32 +71,35 @@ and details on the intrapartum and neonatal time periods.
 3.1 Model Waves
 ---------------
 
-**Wave 1**: Expand risk and cause models to include all needed 
+**Wave 1**: Add new risk and cause models and update existing risks and causes as needed
 
 .. todo::
 
-  Determine if wave 1 includes making multiple, smaller simulations covering a subset of risks and causes or if it will all be integrated.
+  Determine if wave 1 will include making multiple, smaller simulations covering a subset of risks and causes or if it will all be integrated.
 
-- Wave 1 will be focused on expanding the risks and causes to cover what we need and calibrating a baseline model 
+- Wave 1 will be focused on expanding the risks and causes to cover everything we need to model the new interventions and calibrating a baseline model 
 - There will be only the baseline scenario in this wave 
-- We will make the simulation 3 time steps, but without the healthcare system or decision trees at any point 
+- We will make the simulation 3 time steps, but without the healthcare system or decision trees at each time step 
 - Making the model 3 time steps will necessitate us to tackle issues around YLDs and disability weights disconnected from "time" as we normally think of it in the simulation 
 
 **Wave 2**: Add in healthcare during pregnancy and related interventions
 
-- Wave 2 will add the first "decision tree" for the healthcare system during pregnancy 
-- We will add interventions with dummy impact variables when they impact things in intrapartum or later 
+- Wave 2 will add the first decision tree for the healthcare system during pregnancy 
+- We will add interventions that are administered during pregnancy and primarily impact the health of the birthing parent and previously modeled child impacts (MMS, BEP, IV iron, anemia diagnostics and treatment, pre-ecamplsia diagnostics and treatment, and antenatal azithromycin)
+- Any downstream effects on antenatal or child outcomes can be modeled with dummy impact variables if the impacts cannot be properly included yet (e.g., since deliver in a higher level facility is not included yet, we can include a dummy variable for birth impacts)
+- Additionally, we will decide on how to include the post-neonatal child effects. We anticipate adding a summarized later childhood impact (post neonatal to age 5) based on the nutrition optimization work, but this has not been decided.
 
 **Wave 3**: Add the intrapartum model and related interventions
 
-- Wave 3 will add the second "decision tree" for the intrapartum time period 
-- We will add interventions with dummy impact variables when they impact things in the neonatal time
+- Wave 3 will add the second decision tree for the intrapartum time period 
+- We will add interventions that are administered during OR affect the intrapartum period (AI ultrasound, birth monitoring and sensors, PPH bundle)
+- Any downstream effects on neonatal or later child outcomes can be modeled with with dummy impact variables if the impacts cannot be properly included yet
 
 **Wave 4**: Add the neonatal period and related interventions
 
-- Wave 4 will add the last "decision tree" for the neonatal time period 
-
-.. _mncnh_portfolio_3.1:
+- Wave 4 will add the last decision tree for the neonatal time period 
+  
+.. _mncnh_portfolio_3.2:
 
 3.2 Submodels
 -------------
