@@ -48,14 +48,14 @@ but that effect is (completely) mediated by another risk factor R2.
   However, it can be useful to analyze this situation as a special case of mediation;
   for example, this
   causal structure of GBD risks would report a mediation factor
-  (see GBD section for more on this).
+  (see :ref:`the GBD section <mediation_gbd>` for more on this).
 
 .. note::
 
   In our work, we typically run into mediation with risk factors.
   Throughout this page, we will use risk factor examples.
   Most of this page would equally apply to other exposure/outcome pairs;
-  only the GBD section is specific to risk factors.
+  only :ref:`the GBD section <mediation_gbd>` is specific to risk factors.
 
 Such a simple situation doesn't pose any major modelling challenges.
 To see how things can start to get tricky, consider this slight change
@@ -206,6 +206,14 @@ total effect should not be used to inform the direct effect!
 Instead, we have to split the total effect into its constituent
 parts: the effect of each mediated pathway, with the direct effect
 being whatever is left over.
+
+.. note::
+
+  The idea of "splitting" an effect fundamentally relies on the assumption
+  that there is no effect modification, i.e. that the total effect is just
+  applying each of the constituent effects in turn and that they don't
+  amplify each other or interact more complexly.
+  This is our standard assumption and is implicit throughout this page.
 
 In our simulations to date, most causal pathways have had effects measured in RRs.
 These are also called "log-linear" effects, since for each unit change in the independent
@@ -391,12 +399,16 @@ multiplicative effect.
 
 .. image:: composition-longer.drawio.svg
 
+.. _mediation_gbd:
+
 Risk-risk effects and mediation in GBD
 --------------------------------------
 
 .. todo::
   This section only covers mediation methods from GBD 2019.
-  It appears that substantial aspects of mediation may change in GBD 2021.
+  In GBD 2021, there are substantial added complications: risk effects
+  can be arbitrary functions of the exposure, and not only log-linear RRs
+  above a TMREL.
   We have yet to model any mediation using GBD 2021 but will need to expand this
   to cover new methods.
 
@@ -418,15 +430,13 @@ in addition to a direct effect.
 
   GBD currently models every risk factor-mediator-cause triple separately,
   which means its results can imply multiple conflicting values for the same effect in
-  this diagram.
-  This may have been addressed for GBD 2021.
+  this diagram, and that pathways are not always coherent --
+  for example, there can be a triple A->B->C and a triple X->B->Y
+  but no triple A->B->Y even though both of those arrows are implied
+  by the other triples.
 
-.. todo::
-
-  We have yet to make a simulation that uses a combination of risks where GBD implies
-  multi-layer mediation.
-  It is not yet clear whether the implied pathway will always be internally consistent,
-  or whether the effect sizes will be identifiable from GBD results in this case.
+  We have yet to decide on a general strategy for how to deal with logical
+  inconsistencies.
 
 GBD does not directly report effect sizes for risk-risk effects, but it
 does estimate them.
@@ -530,12 +540,6 @@ but going forward we advise preferring to validate to the total effects by
 using an undo-then-redo approach to GBD mediation.
 Both approaches are described below.
 
-.. todo::
-
-  We don't totally understand *why* GBD models excess risk -- while there is a possibility that
-  there is a good reason behind it, we haven't been able to find that reason, so we prefer
-  Approach 1 for now.
-
 Approach 1: consistent with RR application, inconsistent with GBD mediation
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -543,14 +547,23 @@ In this approach, we work backwards from the result reported by GBD (the mediati
 to an underlying data point we can use to create an internally-consistent set of causal effects.
 It is an "undo and redo" approach: we undo the calculations GBD did using excess risk to infer
 the data they used as inputs, then do a completely different calculation on those data with the splitting and combination methods described above.
+
 To do this, we have to know whether the mediation factor for the pathway in question was calculated
 with the adjusted RR method ("Comparing crude RR versus mediator-adjusted RR"
 in `the GBD risk factors methods appendix [supplementary appendix 1] <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30752-2/fulltext#supplementaryMaterial>`_) or
 the delta method ("Estimating the mediation factor by pathway of the effect").
+Unfortunately, this information is not stored in the mediation matrix.
+In general, mediation factors that existed prior to GBD 2021 were mostly calculated
+with the adjusted RR method, while those that were created for GBD 2021
+were calculated with the delta method.
+The Math Sciences team, Future Health Scenarios team, and GBD research teams
+can be asked for help in determining how a specific mediation factor was
+calculated.
 
 .. todo::
 
-  Where should someone look to find this out?
+  Add an enhanced mediation matrix that lists what round mediation factors
+  were added and what team calculated them (if known).
 
 Adjusted RR method
 ~~~~~~~~~~~~~~~~~~
@@ -571,9 +584,7 @@ to solve for :math:`RR_\text{r→o,adjusted for m}`:
 
   RR_\text{r→o,adjusted for m} = RR_\text{r→o,total} - MF \times (RR_\text{r→o,total} - 1)
 
-:math:`RR_\text{r→o,adjusted for m}` is the underlying data point, but it
-usually doesn't show up
-anywhere in our causal diagram.
+:math:`RR_\text{r→o,adjusted for m}` is the underlying data point.
 We can use it to calculate a delta, an (assumed linear) increase in the mediator
 per unit increase in the mediated risk, with the knowledge that
 :math:`RR_\text{r→o,adjusted for M} = \frac{RR_\text{r→o,total}}{\prod_{m \in M}{RR_\text{r→o, via m}}}`
@@ -670,15 +681,12 @@ when there is only one mediator :math:`m`, as described in the methods appendix,
 
   RR_\text{r→o,direct} = 1 + (RR_\text{r→o,total} - 1) \times \prod_{m \in M}{(1 - MF_m)}
 
-when there are multiple mediators, which is used internally by GBD (e.g. when calculating PAFs)
-
-.. todo::
-  Find a good citation for GBD's methods here.
-  Currently the best we have is this code file: https://stash.ihme.washington.edu/projects/CCGMOD/repos/paf/browse/mediate_rr.R?until=2af3bdeabcfce96ea48a0d77e3e24e6edd2f287a&untilPath=mediate_rr.R
+when there are multiple mediators, which is used internally by GBD (e.g. when calculating PAFs).
+For more on this, see the `PAF calculator documentation <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/mediation.html#total-mediation-factor>`_.
 
 .. note::
-  This multiplicative combination of multiple mediation factors is hard to interpret -- it seems
-  to imply that mediators *overlap* in what they mediate, which seems to contradict the idea of
+  This multiplicative combination of multiple mediation factors is hard to interpret -- it implies
+  that mediators *overlap* in what they mediate, which seems to contradict the idea of
   a causal effect.
 
   This additional inconsistency is another reason to prefer Approach 1.
