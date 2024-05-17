@@ -571,12 +571,43 @@ Specific outputs for specific models are specified in the following section.
     - Same as 9.2
     - 
   * - 11.0
-    - GBD 2021 update?
-    - Baseline
-    - None
+    - GBD 2021 update
+    - All
+    - 400,000 population size per draw, 20 draws
+    - * Deaths, YLLs
+      * YLDs, stratified by pregnancy state
+      * Maternal disorder incident counts, stratified by anemia state
+      * Maternal hemorrhage incident counts, stratified by anemia state
+      * Anemia state person time, stratified by pregnancy state 
+      * Pregnancy state person time, stratified by birth outcome
+      * Pregnancy state transition counts, stratified by birth outcome
+      * Counts of birth outcomes
+      * Intervention counts
+    - Same as 9.2
+    - Should be the same as the adding locations test runs
+  * - 11.1 and 11.2
+    - GBD 2021 update, but with year=2021 rather than year=2022 and disability due to other causes ("background morbidity") excluded
+    - All
+    - 400,000 population size per draw, 20 draws
+    - * Deaths, YLLs
+      * YLDs, stratified by pregnancy state
+      * Maternal disorder incident counts, stratified by anemia state
+      * Maternal hemorrhage incident counts, stratified by anemia state
+      * Anemia state person time, **stratified by pregnancy state** 
+      * Pregnancy state person time, **stratified by birth outcome**
+      * Pregnancy state transition counts, stratified by birth outcome
+      * Counts of birth outcomes
+      * Intervention counts
+    - Same as 9.2
+    - Should be the same as the adding locations test runs
+  * - 12.0
+    - GBD 2021 production runs
+    - All
+    - Same as 9.2
+    - Same as 9.2 but including count of live births and still births 
+    - Same as 9.2
     - 
-    - 
-    - This model may be inserted earlier in the timeline, depending on when it is ready
+
 
 .. note::
 
@@ -682,7 +713,30 @@ Specific outputs for specific models are specified in the following section.
       * Check that anemia, maternal disorders and deaths match with target values 
       * Check that different scenarios visually appear to separated as expected 
     - All looks good! Ready to move to production runs. `Nigeria notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_10.0_nigeria_maternal_disorders_anemia.ipynb>`_ and `Pakistan notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_10.0_pakistan_maternal_disorders_anemia.ipynb>`_. Note for Pakistan notebook that the parent ID used was 159 which was different than expected. We are investigating this but think it is an issue with target data generation NOT with the model. 
-
+  * - 11.0
+    - * Check that model generally still looks as expected and matches GBD 2021 data
+      * Check that anemia, maternal disorders and deaths match with target values
+      * Check that different scenarios visually appear to separated as expected
+      * Check that birth outcome count observer is functioning as expected
+    - `Model 11.0 V&V notebook (Ethiopia only) available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/141>`_
+      * Anemia prevalence is underestimated
+      * Pregnancy outcome observer appears to be recording once per timestep rather than once per simulation 
+  * - 11.1
+    - * Check that anemia prevalence looks good with stratification and updated artifact keys
+      * Check that 2021 year update looks as expected
+      * Check that birth outcome count observer is functioning as expected (if fix is implemented prior to running)
+      * Check that background morbidity has been excluded
+    - `V&V notebooks for model 11.1 can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/142>`_
+      * Anemia prevalence looks good!
+      * 2021 data update as expected
+      * Birth outcome observer looks as expected
+      * YLDs due to other causes successfully removed
+      * Zero YLDs due to maternal disorders
+  * - 11.2
+    - * Check that maternal YLDs are functioning as expected
+    - `V&V notebooks for model 11.2 can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/146>`_
+      * Maternal disorders YLDs now look as expected -- ready to move on to production runs
+      * Also confirmed that the birth outcome observer is capturing outcomes among all simulated individuals, including those who die during the simulation
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
