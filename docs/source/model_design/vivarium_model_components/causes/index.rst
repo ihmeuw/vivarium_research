@@ -1,7 +1,7 @@
 .. _models_cause:
 
 ===============
-Modeling Causes
+Causes
 ===============
 
 What is included in this chapter: models of causes that are represented as
@@ -20,7 +20,10 @@ Unsafe water would not fit into the cause model
 paradigm either---it is a cause of
 :ref:`diarrheal disease <diarrheal_diseases>`, but it is a risk factor in the
 GBD taxonomy.  :ref:`Latent tuberculosis <2017_cause_latent_tb>` infection
-(LTBI) does fit into this chapter, but just barely.
+(LTBI) does fit into this chapter, but just barely. :ref:`Impairments <impairments>`
+have additional, targeted information on a separate page. If you're not
+sure what an impairment is or how it might be different than a cause,
+check out this :ref: `page explaining causes, impairments, and related GBD terms. <GBD_disease_health>`
 
 
 .. contents::
@@ -351,9 +354,9 @@ and discussed in more detail afterward.
      - Measure of deaths due to a particular cause per person-year in the overall
        age-, sex-, time-, and location-specific population.
      - Mortality impacts
-     - Used to determine a simulant's mortality hazard rate. 
+     - Used to determine a simulant's mortality hazard rate.
    * - `Excess Mortality`_
-     - Measure of deaths due to a particular condition per person-year in the 
+     - Measure of deaths due to a particular condition per person-year in the
        age-, sex-, time-, and location-specific population with that condition.
      - Mortality impacts
      - Used to determine a simulant's mortality hazard rate.
@@ -447,9 +450,9 @@ measures are defined using the following key concepts:
 
   .. _person-time-defn:
 
-  **Person-time:** person-time is a measure of the number of individuals 
-  multiplied by the amount of time they individually occupy the population 
-  of interest. Notably, the population of interest varies depending on context 
+  **Person-time:** person-time is a measure of the number of individuals
+  multiplied by the amount of time they individually occupy the population
+  of interest. Notably, the population of interest varies depending on context
   and can be defined by age group, sex, location, time, disease status, etc.
 
     For example, if one individual is occupies the population of interest for
@@ -567,53 +570,53 @@ Remission Rates
 
 Definition
 """"""""""
-Remission is a measure of cases that recover from a with-condition state, given 
-a specified population and time period. Just as with incidence, the numerator is 
-given by the count of recovered (or *remitted*) cases, and the denominator is 
+Remission is a measure of cases that recover from a with-condition state, given
+a specified population and time period. Just as with incidence, the numerator is
+given by the count of recovered (or *remitted*) cases, and the denominator is
 the cumulative :ref:`person-time <person-time-defn>` during which cases are able to go into remission:
 
   .. math::
-    \frac{\text{number of remitted cases}}{\text{person-time in the with-condition 
+    \frac{\text{number of remitted cases}}{\text{person-time in the with-condition
     population}}
 
-  For example, consider diarrhea cases in the Philippines in 2017. Say that in 
-  the year under consideration, every such case remitted after an average of 5 
+  For example, consider diarrhea cases in the Philippines in 2017. Say that in
+  the year under consideration, every such case remitted after an average of 5
   days:
 
   .. math::
 
-    \frac{\text{1 case}}{\text{5 person-days}} = \frac{\text{1 case}}{\text{5 person-days}} \times 
+    \frac{\text{1 case}}{\text{5 person-days}} = \frac{\text{1 case}}{\text{5 person-days}} \times
     \frac{\text{365 person-days}}{\text{1 person-year}}=\frac{73\text{ cases}}{\text{1 person-year}}
 
   This calculation is straightfoward, as diarrheal diseases have a highly
   consistent disease duration.
 
   In contrast, consider diabetes. Say that there were 142,794 prevalent cases of
-  diabetes (both type I and type II) in Moldova amongst males in 2017, and of 
+  diabetes (both type I and type II) in Moldova amongst males in 2017, and of
   those 142,794 cases, 509 remitted in 2017. This gives us the following rate:
 
     .. math::
       \frac{\text{509 cases}}{\text{142,794 person-years}} = \frac{\text{0.0036 cases}}{\text{1 person-year}}
 
-  It is important to note two things here: first, that this is a remission rate 
-  for diabetes at all ages, which obscures the generally increasing age-pattern 
-  that this rate follows. Second: there is no set duration for which one generally experiences diabetes. In fact, remission does not occur for type I, and is not guaranteed for type II. In the context of the diarrheal diseases example, this makes it seem as if diabetes cases remit, on average, after :math:`\frac{1}{0.0036}\simeq 279` years--which clearly does a poor job of capturing the behavior of diabetes. This sort of description was only 
-  appropriate for diarrhea, as there is a uniform remission rate across all 
-  cases. With diabetes, however, the remission rate does *not* tell us the 
+  It is important to note two things here: first, that this is a remission rate
+  for diabetes at all ages, which obscures the generally increasing age-pattern
+  that this rate follows. Second: there is no set duration for which one generally experiences diabetes. In fact, remission does not occur for type I, and is not guaranteed for type II. In the context of the diarrheal diseases example, this makes it seem as if diabetes cases remit, on average, after :math:`\frac{1}{0.0036}\simeq 279` years--which clearly does a poor job of capturing the behavior of diabetes. This sort of description was only
+  appropriate for diarrhea, as there is a uniform remission rate across all
+  cases. With diabetes, however, the remission rate does *not* tell us the
   average duration that an individual will experience diabetes.
 
-  How do we apply this to our simulants? Say we randomly selected 10 people with 
-  diarrhea in the Philippines on a random day in 2017. In the next day, they 
-  would accumulate 10 person days. Our rate tells us that in the next day, the 
+  How do we apply this to our simulants? Say we randomly selected 10 people with
+  diarrhea in the Philippines on a random day in 2017. In the next day, they
+  would accumulate 10 person days. Our rate tells us that in the next day, the
   expected value for cases remitted is given by:
 
   .. math::
 
     \frac{\text{1 case of diarrhea}}{\text{5 person-days}}\times\text{10 person-days} = \text{2 remitted cases of diarrhea}.
 
-  Similarly, we can take the rate of remission of diabetes, and for a randomly 
-  selected case of diabetes in Moldova in 2017, consider if they will remit some 
-  time in the next year. The expected value for cases remitted is then given by: 
+  Similarly, we can take the rate of remission of diabetes, and for a randomly
+  selected case of diabetes in Moldova in 2017, consider if they will remit some
+  time in the next year. The expected value for cases remitted is then given by:
 
 .. math::
 
@@ -621,15 +624,15 @@ the cumulative :ref:`person-time <person-time-defn>` during which cases are able
 
 Note that when we refer to remission rates, we are typically considering
 a rate within the infected or with-condition population. This is true both in
-general, and in the context of GBD--unlike with incidence, which GBD calculates 
+general, and in the context of GBD--unlike with incidence, which GBD calculates
 within the entire population, as discussed above.
 
 Remission within GBD
 """"""""""""""""""""
-Most nonfatal models in GBD are run using DisMod (:ref:`cause_models`). 
-DisMod estimates compartmental models of disease, and thus produces estimates of 
-measures (prevalence, incidence, remission, excess mortality rate, etc.) that 
-are internally consistent for any given model. DisMod estimates remission rates 
+Most nonfatal models in GBD are run using DisMod (:ref:`cause_models`).
+DisMod estimates compartmental models of disease, and thus produces estimates of
+measures (prevalence, incidence, remission, excess mortality rate, etc.) that
+are internally consistent for any given model. DisMod estimates remission rates
 as:
 
 .. math::
@@ -639,21 +642,21 @@ as:
 .. todo::
   update link to dismod page, once available
 
-GBD's final outputs, however, are in the form of YLLs, YLDs, and DALYs. To 
-calculate these measures such that they are consistent across *different* 
-causes, GBD runs standardizing processes on estimates of prevalence, incidence, 
-and estimated mortality rate. Note then that these final estimates are no longer 
-consistent with the DisMod estimates. However, as remission is not needed to 
-calculate YLDs, the latest-stage estimate of remission produced by GBD comes 
+GBD's final outputs, however, are in the form of YLLs, YLDs, and DALYs. To
+calculate these measures such that they are consistent across *different*
+causes, GBD runs standardizing processes on estimates of prevalence, incidence,
+and estimated mortality rate. Note then that these final estimates are no longer
+consistent with the DisMod estimates. However, as remission is not needed to
+calculate YLDs, the latest-stage estimate of remission produced by GBD comes
 from DisMod models.
 
 Implementing remission rates in cause models
 """"""""""""""""""""""""""""""""""""""""""""
-For a given simulation with timesteps of length *time unit* and a given time 
-unit, we convert remission rates to the form of cases remitted per 
+For a given simulation with timesteps of length *time unit* and a given time
+unit, we convert remission rates to the form of cases remitted per
 person-time-unit. If the rate is small with respect to the timestep (that is, if
-the rate is less than 1 per the time step), it can be used to compute the 
-probability of a simulant transitioning from an infected or with-condition state 
+the rate is less than 1 per the time step), it can be used to compute the
+probability of a simulant transitioning from an infected or with-condition state
 to a susceptible or free-of-condition state in a given timestep.
 
 Duration-Based Transitions
@@ -674,59 +677,59 @@ Mortality Impacts
 All-Cause Mortality
 ^^^^^^^^^^^^^^^^^^^
 
-All-cause mortality rate (ACMR) is a measure of total deaths (due to all 
-causes) per person-year in the overall age-, sex-, time-, and 
-location-specific population. Specifically, 
+All-cause mortality rate (ACMR) is a measure of total deaths (due to all
+causes) per person-year in the overall age-, sex-, time-, and
+location-specific population. Specifically,
 
 .. math::
 
   \frac{\text{number of deaths due to all causes}}{\text{person-years in the overall population}}
 
-For instance, the global ACMR for the early neonatal age group (0-6 days) 
-in 2017 was approximately 70,000 deaths per 100,000 person-years (0.7 
-deaths per person-year). However, the global ACMR for the post neonatal 
-age group (1 month to 1 year) in 2017 was approximately 1,000 deaths per 
-100,000 person-years (0.01 deaths per person-year). By comparing ACMRs 
-between these age groups, we can see that individuals die at a higher rate 
-during the early neonatal period than the post neonatal period. 
+For instance, the global ACMR for the early neonatal age group (0-6 days)
+in 2017 was approximately 70,000 deaths per 100,000 person-years (0.7
+deaths per person-year). However, the global ACMR for the post neonatal
+age group (1 month to 1 year) in 2017 was approximately 1,000 deaths per
+100,000 person-years (0.01 deaths per person-year). By comparing ACMRs
+between these age groups, we can see that individuals die at a higher rate
+during the early neonatal period than the post neonatal period.
 
-Notably, ACMR is used both for validation of Vivarium simulations, as well as 
-for estimating simulation mortality rates (see the `Mortality Hazards`_ 
+Notably, ACMR is used both for validation of Vivarium simulations, as well as
+for estimating simulation mortality rates (see the `Mortality Hazards`_
 section for more detail).
 
 Cause-Specific Mortality
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Cause-specific mortality rate (CSMR) is a measure of deaths due to a 
-particular cause (or group of causes) per person-year in the overall age-, 
-sex-, time-, and location-specific population. Specifically, 
+Cause-specific mortality rate (CSMR) is a measure of deaths due to a
+particular cause (or group of causes) per person-year in the overall age-,
+sex-, time-, and location-specific population. Specifically,
 
 .. math::
 
   \frac{\text{number of deaths due to cause}}{\text{person-years in the overall population}}
 
-For instance, the global CSMR for mesothelioma in 2017 was approximately 0.4 
-deaths per 100,000 person-years. The global CSMR for diabetes mellitus in 2017 
-was approximately 18 deaths per 100,000 person years. By comparing these two 
-CSMRs, we can see that more individuals in the overall global popultaion died 
+For instance, the global CSMR for mesothelioma in 2017 was approximately 0.4
+deaths per 100,000 person-years. The global CSMR for diabetes mellitus in 2017
+was approximately 18 deaths per 100,000 person years. By comparing these two
+CSMRs, we can see that more individuals in the overall global popultaion died
 due to diabetes mellitus than mesothelioma in 2017.
 
 .. note::
 
-  The concept of cause-specific mortality as we discuss here (and as it is used in the Global Burden of Disease study and Vivarium simulations) implies that there is always one *single* cause of death for an individual. This may be a reasonable assumption in some cases, for instance, death due to a traffic accident. However, ascertaining a single cause of death can be more complicated in other cases; imagine an individual is in a serious traffic accident and the stress of the accident causes them to have a heart attack -- did the traffic accident or the heart attack cause the death of this individual? 
+  The concept of cause-specific mortality as we discuss here (and as it is used in the Global Burden of Disease study and Vivarium simulations) implies that there is always one *single* cause of death for an individual. This may be a reasonable assumption in some cases, for instance, death due to a traffic accident. However, ascertaining a single cause of death can be more complicated in other cases; imagine an individual is in a serious traffic accident and the stress of the accident causes them to have a heart attack -- did the traffic accident or the heart attack cause the death of this individual?
 
-  If interested, see this publication by `Piffaretti et al. (2016) <https://www.who.int/bulletin/volumes/94/12/16-172189.pdf>`_ that discusses the classical single cause of death analysis and proposes an alternative approach that weights multiple causes of death. 
+  If interested, see this publication by `Piffaretti et al. (2016) <https://www.who.int/bulletin/volumes/94/12/16-172189.pdf>`_ that discusses the classical single cause of death analysis and proposes an alternative approach that weights multiple causes of death.
 
-Notably, CSMRs are useful for validation of Vivarium simulations, as well as 
-for estimating simulation mortality rates (see the `Mortality Hazards`_ 
+Notably, CSMRs are useful for validation of Vivarium simulations, as well as
+for estimating simulation mortality rates (see the `Mortality Hazards`_
 section for more detail).
 
 Excess Mortality
 ^^^^^^^^^^^^^^^^
 
-Excess mortality rates (EMRs) are a measure of the rate at which individuals 
-with a given condition die due to that position; in other words, the number of 
-deaths due to a particular condition per person-year in the age-, sex-, time-, 
+Excess mortality rates (EMRs) are a measure of the rate at which individuals
+with a given condition die due to that position; in other words, the number of
+deaths due to a particular condition per person-year in the age-, sex-, time-,
 and location-specific population *with that condition*. Specifically,
 
 .. math::
@@ -739,32 +742,32 @@ Or, approximately,
 
   \frac{\text{CSMR per 100,000 person years}}{\text{Prevalence of cause per 100,000}}
 
-For instance, the excess mortality rate of mesothelioma in 2017 was 
-approximately 0.38 while the excess mortality rate of diabetes mellitus was 
-0.003, indicating that mesothelioma is a more fatal disease than diabetes 
-mellitus once acquired. Contrast this with the cause-specific mortality rates 
-for these two conditions discussed above; mesothelioma has a higher EMR but 
-lower CSMR than diabetes mellitus. This means that while someone with 
-mesothelioma is more likely to die due to mesothelioma than someone with 
-diabetes is to die due to diabetes  because mesothelioma is more fatal (as 
-reflected by the higher EMR), someone in the general population is less likely 
-to die of mesothelioma than of diabetes because mesothelioma is much less 
-*prevalent* than diabetes (as reflected by the lower CSMR).  
+For instance, the excess mortality rate of mesothelioma in 2017 was
+approximately 0.38 while the excess mortality rate of diabetes mellitus was
+0.003, indicating that mesothelioma is a more fatal disease than diabetes
+mellitus once acquired. Contrast this with the cause-specific mortality rates
+for these two conditions discussed above; mesothelioma has a higher EMR but
+lower CSMR than diabetes mellitus. This means that while someone with
+mesothelioma is more likely to die due to mesothelioma than someone with
+diabetes is to die due to diabetes  because mesothelioma is more fatal (as
+reflected by the higher EMR), someone in the general population is less likely
+to die of mesothelioma than of diabetes because mesothelioma is much less
+*prevalent* than diabetes (as reflected by the lower CSMR).
 
-Notably, EMRs are useful for validation of Vivarium simulations, as well as 
-for estimating simulation mortality rates (see the `Mortality Hazards`_ 
+Notably, EMRs are useful for validation of Vivarium simulations, as well as
+for estimating simulation mortality rates (see the `Mortality Hazards`_
 section for more detail).
 
 .. note::
 
-  The application of EMRs in Vivarium simulations allow for the consideration that an individual with a given cause is at an increased mortality rate for *that* cause. However, it does not necessarily allow for the consideration that an individual with that cause may *also* have an increased mortality rate for *other* causes due to the impact of comorbidities. While this phenomenon can be represented for *some* causes through the GBD risk factors framework (ex: vitamin A deficiency is related to increased mortality due to measles), our modeling framework is limited in that it does not consider the effect of comorbidities outside of GBD risk factors. 
+  The application of EMRs in Vivarium simulations allow for the consideration that an individual with a given cause is at an increased mortality rate for *that* cause. However, it does not necessarily allow for the consideration that an individual with that cause may *also* have an increased mortality rate for *other* causes due to the impact of comorbidities. While this phenomenon can be represented for *some* causes through the GBD risk factors framework (ex: vitamin A deficiency is related to increased mortality due to measles), our modeling framework is limited in that it does not consider the effect of comorbidities outside of GBD risk factors.
 
 Mortality Hazards
 ^^^^^^^^^^^^^^^^^
 
-At each time-step in a Vivarium simulation it must be determined if each 
-simulant remains alive or dies. The **probability that a simulant will die** 
-is assessed using the *mortality hazard* for an individual simulant, 
+At each time-step in a Vivarium simulation it must be determined if each
+simulant remains alive or dies. The **probability that a simulant will die**
+is assessed using the *mortality hazard* for an individual simulant,
 :math:`i`, as shown below:
 
 In a simulation with only one cause, :math:`c`:
@@ -782,45 +785,45 @@ Where,
 
 .. note::
 
-  The individual mortality hazard for a simulation that models more than one 
+  The individual mortality hazard for a simulation that models more than one
   cause is represented as follows:
 
   .. math::
 
     \text{mortality hazard}_i = ACMR - \sum_{c=1}^{c} CSMR_c + \sum_{c=1}^{c} C_i * EMR_c
 
-If it is determined that a simulant dies at a given time-step (as determined 
-by the individual mortality hazard above), it then needs to be determined what 
-the cause of death was. The simulant may have died due to a cause that was 
-explicitly modeled in the simulation, or the simulant may have died due to a 
-cause that was not explicitly modeled in the simulation, which we will refer 
-to as *other causes*. 
+If it is determined that a simulant dies at a given time-step (as determined
+by the individual mortality hazard above), it then needs to be determined what
+the cause of death was. The simulant may have died due to a cause that was
+explicitly modeled in the simulation, or the simulant may have died due to a
+cause that was not explicitly modeled in the simulation, which we will refer
+to as *other causes*.
 
-The probability that a simulant died of a modeled cause :math:`c` is 
+The probability that a simulant died of a modeled cause :math:`c` is
 represented as:
 
 .. math::
-  
+
   P(\text{cause of death} = c) = \frac{C_i * EMR_c}{\text{mortality hazard}_i}
 
 And the probability that a simulant died of other causes is represented as:
 
-.. math:: 
+.. math::
 
   P(\text{cause of death} = \text{other causes}) = \frac{ACMR - \sum_{c=1}^{c} CSMR_c}{\text{mortality hazard}_i}
 
 Observing Mortality
 ^^^^^^^^^^^^^^^^^^^
 
-When it is determined that a simulant dies at a given time step, the 
-simulant's age and cause of death should be observed and recorded by the 
-simulation. This allows for the recording of deaths and years of life lost due 
-to specific modeled causes in the simulation, which can then be used to 
-validate against baseline GBD estimates as well as to estimate measure of 
-intevention impact between simulation scenarios. 
+When it is determined that a simulant dies at a given time step, the
+simulant's age and cause of death should be observed and recorded by the
+simulation. This allows for the recording of deaths and years of life lost due
+to specific modeled causes in the simulation, which can then be used to
+validate against baseline GBD estimates as well as to estimate measure of
+intevention impact between simulation scenarios.
 
-Years of life lost (YLLs) are calculated in the simulation by subtracting the 
-simulants age at the time of death from the simulant's sex- and age-specific 
+Years of life lost (YLLs) are calculated in the simulation by subtracting the
+simulants age at the time of death from the simulant's sex- and age-specific
 *theoretical minimum risk life expectancy* (TMRLE) value. Notably, the TMRLE does not vary by location.
 
 Morbidity Impacts
@@ -829,9 +832,9 @@ Morbidity Impacts
 Disability Weights
 ^^^^^^^^^^^^^^^^^^
 
-Disability weights (DWs) represent the magnitude of health loss associated with specific health states. The weights are measured on a scale from 0 (full health) to 1 (complete loss of health; equivalent to death). GBD assigns DWs based upon household and internet surveys for which respondents are presented with paired comparison questions for different health problems. These paired comparison questions include lay descriptions of health states and ask the respondent to choose which has the greatest functional consequences and symptoms associated with the given health state. For more information on the 2010 DW Measurement study in which these surveys were carried out, see this `recording of the GBD Science Seminar from 2/7/2023 <https://hub.ihme.washington.edu/display/GBD2020/GBD+Science+Seminar+series?preview=/87186031/192089713/GBD%20Science%20Seminar_Disability%20weights%20(DWs)_Feb%202023.pdf>`_ or see Section 4.8.1 of the GBD 2019 Methods Appendix. 
+Disability weights (DWs) represent the magnitude of health loss associated with specific health states. The weights are measured on a scale from 0 (full health) to 1 (complete loss of health; equivalent to death). GBD assigns DWs based upon household and internet surveys for which respondents are presented with paired comparison questions for different health problems. These paired comparison questions include lay descriptions of health states and ask the respondent to choose which has the greatest functional consequences and symptoms associated with the given health state. For more information on the 2010 DW Measurement study in which these surveys were carried out, see this `recording of the GBD Science Seminar from 2/7/2023 <https://hub.ihme.washington.edu/display/GBD2020/GBD+Science+Seminar+series?preview=/87186031/192089713/GBD%20Science%20Seminar_Disability%20weights%20(DWs)_Feb%202023.pdf>`_ or see Section 4.8.1 of the GBD 2019 Methods Appendix.
 
-In order to compute **years lived with disability (YLDs)** for a particular health outcome in a given population, the number of people living with that outcome is mulitplied by the DW for the health state associated with that sequela. Ultimately, YLDs are used to indicate burden of disease: DALYs are calculated as the sum of YLLs and YLDs. The DALY-based estimation of the burden of disease is important because it simultaneously considers the reduced health state due to disability before death and the decline in life expectancy due to death. It thus moves away from conventional measurements of the burden of disease that use readily available data on mortality, prevalence, and incidence (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_). 
+In order to compute **years lived with disability (YLDs)** for a particular health outcome in a given population, the number of people living with that outcome is mulitplied by the DW for the health state associated with that sequela. Ultimately, YLDs are used to indicate burden of disease: DALYs are calculated as the sum of YLLs and YLDs. The DALY-based estimation of the burden of disease is important because it simultaneously considers the reduced health state due to disability before death and the decline in life expectancy due to death. It thus moves away from conventional measurements of the burden of disease that use readily available data on mortality, prevalence, and incidence (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_).
 
 If an individual is living with multiple diseases at once, YLDs can be calculated to include the sum health burden of all the given diseases. Overall DW for multiple diseases is calculated with the equation below, and then this overall DW is multiplied by the time spent with that combination of diseases.
 
@@ -847,17 +850,17 @@ The uncertainty ranges reported around YLDs incorporate uncertainty in prevalenc
 Residual YLDs
 ^^^^^^^^^^^^^
 
-For less common diseases and their sequelae, GBD may not currently estimate disease prevalence and YLDs, and have thus been included in residual categories. For these residual categories, GBD estimates YLDs by multiplying the residual YLL estimates by the ratio of YLDs to YLLs from the estimates of Level 3 causes in the same disease category that were explicitly modelled. This scaling is done for each country-sex-year. 
+For less common diseases and their sequelae, GBD may not currently estimate disease prevalence and YLDs, and have thus been included in residual categories. For these residual categories, GBD estimates YLDs by multiplying the residual YLL estimates by the ratio of YLDs to YLLs from the estimates of Level 3 causes in the same disease category that were explicitly modelled. This scaling is done for each country-sex-year.
 
 Incidence- vs. Prevalence-Based YLDs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-*Incidence-based YLDs* provide a measure of the disease burden experienced by an individual over the course of their lifetime. An incident case of an incurable disease would accrue as many incidence-based YLDs as years left of that person's life expectancy. 
+*Incidence-based YLDs* provide a measure of the disease burden experienced by an individual over the course of their lifetime. An incident case of an incurable disease would accrue as many incidence-based YLDs as years left of that person's life expectancy.
 
 *Prevalence-based YLDs*, on the other hand, are what we tend to use in Vivarium models. Prevalence-based YLDs reflect the burden of disease in the year(s) in which we observe the individual. An incident case of an incurable disease would only accrue YLDs for the duration of observation. For another example of how prevalence-based YLDs work, imagine we are evaluating DALYs among children 0-5 years old, and there was a baby with a birth defect. We would only count YLDs accumulated in the first 5 years of their life, not the YLDs that they will accumulate over the entire course of their life.
 
 .. list-table:: Incidence vs. Prevalence-based YLDs (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_)
-   :widths: 30 30 30 
+   :widths: 30 30 30
    :header-rows: 1
 
    * - Measure
@@ -871,25 +874,25 @@ Incidence- vs. Prevalence-Based YLDs
      - YLD and YLL measurements are measured using different methods; For diseases with a short duration, YLDs may be underestimated.
 
 
-YLDs in Vivarium 
+YLDs in Vivarium
 ^^^^^^^^^^^^^^^^
-DWs and YLDs in Vivarium apply to the duration of the condition. A DW determines the rate at which an individual accrues YLDs over the course of 1 year. Remember, YLDs are a product of the DW associated with the condition and the time between onset and survival. To illustrate an example, let's say an individual contracted the flu with a disability weight of 0.05 and recovered after 1 week. Because DWs are weighted to one year of disability, we would multiply 0.05 by 1/52 (0.019) to calculate the YLDs accumulated. 
+DWs and YLDs in Vivarium apply to the duration of the condition. A DW determines the rate at which an individual accrues YLDs over the course of 1 year. Remember, YLDs are a product of the DW associated with the condition and the time between onset and survival. To illustrate an example, let's say an individual contracted the flu with a disability weight of 0.05 and recovered after 1 week. Because DWs are weighted to one year of disability, we would multiply 0.05 by 1/52 (0.019) to calculate the YLDs accumulated.
 
-Another important note is that DWs must always be less than 1, because '1' is essentially death. For this reason, if an individual experiences multiple conditions at once, the overall DW is calculated multiplicatively (see equation used for GBD above). For instance, let's say an individual has lived with three health conditions, with respective DWs of 0.3, 0.4, and 0.5. The total overall DW here would be :code:`1 - ((1-0.3) * (1-0.4) * (1-0.5)) = 0.79`. 
+Another important note is that DWs must always be less than 1, because '1' is essentially death. For this reason, if an individual experiences multiple conditions at once, the overall DW is calculated multiplicatively (see equation used for GBD above). For instance, let's say an individual has lived with three health conditions, with respective DWs of 0.3, 0.4, and 0.5. The total overall DW here would be :code:`1 - ((1-0.3) * (1-0.4) * (1-0.5)) = 0.79`.
 
 In Vivarium, in each timestep, a simulant will accumulate YLDs equal to :code:`DW * time_step` for each timestep that they are infected, where timestep is defined in a fraction of one year. Therefore, choosing an appropriate timestep duration is important for getting YLDs correct! If we had month-long timesteps, then a case of the flu (which should really only be 1 week) would accrue YLDs for the flu over an entire month.
 
 .. todo::
-  Investigate how GBD calculates all-cause YLDs, and whether all-cause YLDs is different than summed total of specific-cause YLDs. 
+  Investigate how GBD calculates all-cause YLDs, and whether all-cause YLDs is different than summed total of specific-cause YLDs.
 
 .. todo::
-  Investigate how GBD uses COMO calculations. (What assumptions do they make when calculating comorbidities? See GBD Methods Appendix.) 
+  Investigate how GBD uses COMO calculations. (What assumptions do they make when calculating comorbidities? See GBD Methods Appendix.)
 
 Restrictions
 ++++++++++++
 *Cause restrictions* answer the question: Who does this apply to? For which population groups (e.g. age and sex groups) is this cause model not valid?
 
-For each cause we model, we use a restrictions table which describes any restrictions on the effects of the given cause (such as being only fatal or only nonfatal), as well as restrictions on the age and sex of simulants to which different aspects of the cause model apply. If a cause is labeled as 'YLL only', this for example signifies that the cause is only fatal, whereas 'YLD only' implies that the cause is only non-fatal. Please note that in the restrictions table, the age group start and end values for YLLs and YLDs are inclusive (i.e., 'YLL age group start' at 10 to 14 years old means that the cause model does apply to 10 to 14 year-old individuals). 
+For each cause we model, we use a restrictions table which describes any restrictions on the effects of the given cause (such as being only fatal or only nonfatal), as well as restrictions on the age and sex of simulants to which different aspects of the cause model apply. If a cause is labeled as 'YLL only', this for example signifies that the cause is only fatal, whereas 'YLD only' implies that the cause is only non-fatal. Please note that in the restrictions table, the age group start and end values for YLLs and YLDs are inclusive (i.e., 'YLL age group start' at 10 to 14 years old means that the cause model does apply to 10 to 14 year-old individuals).
 
 As an example, please see the following table, which describes any restrictions for `Maternal Disorders in GBD 2019 <https://vivarium-research.readthedocs.io/en/latest/models/causes/maternal_disorders/index.html>`_. By looking at this table, we can see that this cause only applies to people reported as 'Female' by GBD. We can also see that this cause is only fatal (i.e., 'YLL only') depending on the sub-cause: the fatal sub-causes here are indirect maternal deaths, late maternal deaths, and maternal deaths aggravated by HIV/AIDS. In terms of restrictions by age group, we can see from this table that individuals younger than 10 years old and older than 54 years old do not apply to this cause model (see note below table).
 

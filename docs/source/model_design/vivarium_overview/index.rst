@@ -27,7 +27,7 @@
 Overview of Vivarium Simulation Models
 ================================================
 
-The purpose of this page is to document information relevant to the Vivarium framework from a research perspective. Vivarium framework documentation maintained by the engineers :ref:`can be found elsewhere <software>`.
+The purpose of this page is to document information relevant to the Vivarium framework from a research perspective. 
 
 .. toctree::
    :maxdepth: 1

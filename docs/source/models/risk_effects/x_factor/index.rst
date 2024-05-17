@@ -121,6 +121,18 @@ Additional literature on relapse rates
 Vivarium Modeling Strategy
 --------------------------
 
+The literature summarized above relates to differential risk of acute malnutrition incidence as it relates to a recent episode of acute malnutrition. We have previously used this estimation of risk effect as a proxy measure for the risk effect of an *environmental-type* risk factor with an exposure status that does not change over time (like socioeconomic status or food security, for example rather than "episode of acute malnutrition in the past year") -- :ref:`see the existing corresponding X-factor risk exposure page <2019_risk_exposure_x_factor>`. Note that an alternative implementation of this risk factor could be paired with a dynamic exposure model that corresponds to an individual simulant's time since last acute malnutrition episode. 
+
+   Note that these two alternative approaches are quite different in their implications. A risk factor based on a recent acute malnutrition episode would imply that averting a given case of acute malnutrition could avert *furture* cases of acute malnutrition whereas the "environmental-type" risk factor approach would not. Note that in reality, both such forces are likely at play and would require careful epidemiologic analysis to disentangle these differential types of causal effects.
+
+In any case, calibrating the baseline :ref:`wasting exposure model <risk_exposure_wasting_subpages>` and the x-factor risk factor implementation poses a significant challenge. We have not previously attempted to calibrate a model that uses a dynamic risk exposure implementation of the x-factor risk based on recent acute malnutrition episodes. 
+
+We have attempted to calibrate the wasting and x-factor models using a static risk exposure implementation of the x-factor model for the :ref:`CIFF malnutrition project <2019_concept_model_vivarium_ciff_sam>`. We had assumed risk effect values as informed from the literature, but a primary remaining question was how to inform the population-level risk exposure of the x-factor model. For the prior implementation, we ran the simulation under several different population-level exposure values for the x-factor. We wrote a custom observer using the interactive context to observe the proportion of simulants who recovered from SAM/MAM who had a subsequent episode of SAM/MAM in the following year (`see this notebook for details on the code <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/interactive_simulations/model_5/calibration_function_test_run.ipynb>`_). We then selected the population-level exposure that yielded results that were most similar to the relapse rate statistics summarized in the literature above. However, this process was additionally complicated/limited by the need for a burn-in period to reach a steady state across wasting categories (as x-factor exposure will vary by wasting state), lack of age specificity, vague/uncertain validation targets, and process inefficiencies. Note that we had initially considered setting population-level x-factor exposure equal to the prevalence of SAM, but this did not validate well to external validation targets, which was suspected to be a result of the prevalence of SAM being unequal to the proportion of children who experienced an episode of SAM in the past year.
+
+Notably, the x-factor implementation had very little impact on population-level results for the CIFF project. Despite the implementation of the x-factor risk factor being imperfect in concept and practice, further improvement to the risk factor was not pursed given this minimal impact within this model. Inclusion of the x-factor risk is expected to be more impactful if any interventions are targeted to the x-factor (either directly or through some correlated factor), such as targeting SQ-LNS to those who are discharged from acute malnutrition treatment. However, **if we plan to include the x-factor risk in a model in the future, additional thought should be put into how to operationalize the x-factor exposure model as well as best practices for calibrating the x-factor and wasting risk exposure models before proceeding.**
+
+Finally -- an entirely different conceptualization of the x-factor risk effects could also be considered. For instance, rather than informing x-factor effects through literature related to wasting relapse, we could inform such effects through literature that examines drivers of wasting such as socioeconomic status and/or food security that are more aligned with the static risk exposure implementation and that have directly measureable exposure values. This would resolve a challenge of calibrating the population-level exposure distribution and would leave only the remaining challenge of finding the wasting state-specific exposure distribution of the "x-factor" (which will differ from the population level distribution). However, research goals of the project for which the x-factor risk factor implementation will be applied should guide whether or not this is an appropriate direction.
+
 Wasting Incidence Rates
 ++++++++++++++++++++++++
 
@@ -177,9 +189,9 @@ Where:
 
 - :math:`p_\text{cat1|source wasting state}` is the :ref:`x-factor risk exposure <2019_risk_exposure_x_factor>` among the source state for the relevant transition. Values shown in the table below:
 
-.. todo::
+.. warning::
 
-   The values in the table below will need to be re-estimated via the calibration process due to the update in the risk effect values assoicated with the publication of [Girma-et-al-2022]_
+   The values in the table below were specific to a given calibration of the x-factor risk implementation and will need to be re-estimated via a calibration process if the x-factor exposure will be included in any additional models.
 
 .. list-table:: X-factor risk exposure by wasting state at initialization
    :header-rows: 1
@@ -218,10 +230,6 @@ Validation and Verification Criteria
 - There should be no difference in wasting state remission rates by x-factor exposure status
 - Wasting exposure should be greater among those exposed to the x-factor than those unexposed
 - Wasting exposure should continue to validate to GBD
-
-.. todo::
-
-   Link interactive sim validation notebooks and describe targets
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
