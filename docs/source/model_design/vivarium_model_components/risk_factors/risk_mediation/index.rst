@@ -230,7 +230,7 @@ we can say that
 
 .. math::
 
-  RR_\text{r→o,total} = RR_\text{r→o,direct} \times RR_\text{r1→r2→o}
+  RR_\text{R1→O,total} = RR_\text{R1→O,direct} \times RR_\text{R1→R2→O}
 
 This equation can be used in either direction, depending on what we have
 data about.
