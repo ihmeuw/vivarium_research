@@ -164,7 +164,7 @@ Some important notes and considerations not included in the documentation above 
    - Returns *default* version IDs within GBD system
    - Returns data specific to most recent *published* year unless user specifies to return all available years 
 
-      - Note: will return data specific to 2021 for GBD 2021, despite estimates being available for 2022 because the 2022 year was not published as part of GBD 2021)
+      - Note: will return data specific to 2021 for GBD 2021, despite estimates being available for 2022 because the 2022 year was not published as part of GBD 2021
       - Note: for non-log-linear relative risks, GBD returns data for a single year only. In these cases, vivarium inputs will return that data and label it as 2021 data (even if GBD does not claim it to be specific to 2021 - notably, however, relative risks in GBD do not vary by year)
 
 .. note::
