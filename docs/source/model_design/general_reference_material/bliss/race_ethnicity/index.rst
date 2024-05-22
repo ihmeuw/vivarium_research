@@ -97,7 +97,54 @@ on our `feedback form <https://docs.google.com/forms/d/e/1FAIpQLSeCED9TFQsH-1u4Q
 3.0 Results
 +++++++++++
 
+Communication of results
+------------------------
+
+In this section we’ll discuss how health metric researchers can talk about health research related to race and ethnicity without stigmatizing, othering,
+or otherwise causing harm to historically marginalized racial and ethnic groups. It is important to be aware of how we talk about race and racism, 
+particularly in the field of health metrics sciences, in which we aim [[to identify and investigate health inequities]]. 
+
+One helpful framework for differentiating ways of communicating about race is that of *race-based research vs. race-conscious research* 
+(https://www.thelancet.com/article/S0140-6736(20)32076-6/fulltext). Race-based research, which is characterized by race essentialism, 
+the notion that race is a biological factor (rather than a sociopolitical construct). The practice of using race in this way has historically 
+been the norm in US health research, and causes harm for historically marginalized and minoritized groups, thereby exacerbating the very health 
+inequities their health research may be attempting to elucidate and alleviate. For examples of outdated race-based practices in medicine, and 
+their race-conscious alternatives, see Table 1 from Cerdena et al.’s 2020 paper (https://www.thelancet.com/article/S0140-6736(20)32076-6/fulltext#tbl1). 
+Race-conscious research, on the other hand, calls for a shift in focus from race to racism as a key determinant of illness and health.
+
+Key recommendations from other sources
+--------------------------------------
+
+Here we have collected recommendations from various experts and guides advocating for new standards of communication regarding racial health disparities.
+
+1. Use a health equity lens when framing information about health disparities (https://www.cdc.gov/healthcommunication/HealthEquityGuidingPrinciples.pdf).
+
+    Rather than allowing dominant narratives around race, individualism, and meritocracy limit our understanding of the root causes of health inequities, 
+    it is important to center a health equity perspective in health metrics research.  An equity lens allows us to recognize that systems of power and oppression 
+    (including white supremacy) shape institutional policies and living conditions that systematically harm populations (https://www.ama-assn.org/system/files/ama-aamc-equity-guide.pdf).
+
+2. Use person-first language, avoid unintentional blaming, and be as specific as possible about the group to which you're referring. 
+    
+    For more elaboration on these tips, please see Advancing Health Equity: A Guide to Language, Narrative and Concepts (https://www.ama-assn.org/system/files/ama-aamc-equity-guide.pdf).
+
+3. Explicitly define race during experimental design, and specify the reason for its use in the study (https://www.healthaffairs.org/content/forefront/racism-new-standard-publishing-racial-health-inequities). 
+    
+    In defining race as it pertains to your research, you shouldreview all relevant social, environmental, and structural factors for which race may serve as a 
+    proxy measure.  "For the reader, these additional details enable careful interpretation of study results and implications. But for authors, it engenders critical thinking about racial constructs that prevent the reification of race as a biological entity. (https://www.healthaffairs.org/content/forefront/racism-new-standard-publishing-racial-health-inequities)" 
+
+    Health metrics researchers should embrace a critical race theory framework, which provides "tools for conducting research and practice are intended to elucidate contemporary racial phenomena, expand the vocabulary with which to discuss complex racial concepts, and challenge racial hierarchies" (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2837428/pdf/S30.pdf)
+
+4. Cite the experts, particularly scholars of color whose work forms the basis of the field’s knowledge on racism and its effects (https://www.healthaffairs.org/content/forefront/racism-new-standard-publishing-racial-health-inequities).
+
+.. todo::
+
+    Fix citations.
+
+Reporting results accurately
+----------------------------
+
 .. todo:: 
 
-    In this section we'll discuss the question "How do I frame my communication about race and ethnicity without stigmatizing/othering?" and how a health 
-    metrics researcher would answer this question and use that answer to inform their communications and language.
+    Use recommendations from sex/gender guide to fill out this section. This section should include 
+    a. Outline goals when we present our race/ethnicity-related findings
+    b. General strategy (ie explain fully in standalone parts of paper, otherwise use shorthand) - Recs for detailed description of methods with examples and recs for abbreviated description with examples 
