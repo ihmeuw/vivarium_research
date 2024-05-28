@@ -43,7 +43,7 @@ MNCNH Portfolio
 ++++++++++++
 
 This document is the overall page for the MNCNH Portfolio simulation and 
-contains information that relates to all modeled subcomonents included in 
+contains information that relates to all modeled subcomponents included in 
 the simulation.
 
 .. _mncnh_portfolio_2.0:
