@@ -1539,8 +1539,20 @@ Wave III
     - 
   * - 14.0
     - Change child data to subnational
+    - All
+    - All
+    - 
+    - 
+  * - 14.1
+    - SQ-LNS effect data updated to subnational, update age groups 
+    - All
+    - All
+    - 
+    - 
+  * - 14.2
+    - Update age groups for SQ-LNS testing
     - Baseline
-    - Baseline
+    - Zero coverage, 3 (SQ-LNS)
     - 
     - 
   * - 15.0
@@ -1623,6 +1635,25 @@ Wave III
     - * Age group
       * Sex
       * Subnational location
+  * - 14.1
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+      5. Stunting state person time
+      6. Wasting state person time
+      7. Underweight state person time
+      8. Wasting transition counts 
+    - * Age group (standard GBD)
+      * Sex
+      * Subnational location
+  * - 14.2
+    - 1. Stunting state person time
+      2. Wasting state person time
+      3. Wasting transition counts 
+    - * Age group (0-6 months, 6-10 months, 10-18 months, 18-60 months)
+      * Sex
+      * Subnational location
   * - 15.0
     - 1. Deaths
       2. Wasting state person time, stratified by SQ-LNS treatment coverage
@@ -1680,7 +1711,22 @@ Wave III
       * Verify national child intervention effects
       * Verify population in each subnational location
       * Verify subnational differentiation in above criteria
-    - 
+    - * Missing subnational location stratification. Need to validate population and metric differentiation by subnational location. 
+      * Incorrect age group stratification. Need to have GBD age groups instead of SQ-LNS testing age groups.
+      * Given limitations in stratifications, `model 14 causes and risks <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/78f1caf5326bda570e73271f20d67c6f3ff446dc/verification_and_validation/child_model/model_14.0_risk_and_cause_checks.ipynb>`_, `model 14 wasting transitions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/78f1caf5326bda570e73271f20d67c6f3ff446dc/verification_and_validation/child_model/model_14.0_wasting_transitions.ipynb>`_, and `model 14 wasting treatment effects <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/78f1caf5326bda570e73271f20d67c6f3ff446dc/verification_and_validation/child_model/model_14.0_wasting_treatment_effects.ipynb>`_ all look to be correct. They will need to be rechecked when the age groups match. 
+      * Have not assessed SQ-LNS effect modification at this time since the artifact data needs to be updated to be subnational. 
+  * - 14.1
+    - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence for correct age groups
+      * Verify national CGF risk exposures and effects for correct age groups
+      * Verify national antenatal intervention effects for correct age groups
+      * Verify national wasting intervention effects for correct age groups
+      * Verify population in each subnational location
+      * Verify subnational differentiation in above criteria
+    - * 
+  * - 14.2
+    - * Verify subnational SQ-LNS effects
+      * Verify subnational SQ-LNS prevalence ratio 
+    - * 
   * - 15.0
     - * Verify SQ-LNS is correctly targeted based on subnational location
       * Verify stunting, wasting vary with SQ-LNS exposure
