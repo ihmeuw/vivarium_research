@@ -55,7 +55,7 @@ it's calculated by dividing the rate of some outcome (such as incidence or morta
 rate) among the population exposed to a risk by the outcome rate in the unexposed population.
 For example, if there are A incident cases and B person-years in exposed group;
 C incident cases and D person-years in the unexposed group, then the relative risk
-(rate ratio) equals :math:`\frac{AD}{BC}`. The "unexposed" or "reference" group
+(rate ratio) equals :math:`\frac{A/B}{C/D} = \frac{AD}{BC}`. The "unexposed" or "reference" group
 in the GBD-estimated relative risks is always the TMREL for that risk. For GBD 
 risk factors with continuous risk exposures, the GBD-estimated relative risks
 represent the relative risk associated with a defined unit increase in risk exposure
