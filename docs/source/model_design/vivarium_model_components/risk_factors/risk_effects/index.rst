@@ -86,6 +86,55 @@ to discuss reasonable assumptions with subject matter experts to determine the
 most appropriate measure to which to apply the GBD risk effects in our vivarium
 simulations.
 
+In GBD 2021, some continuous risk exposures were modeled with general
+relationships between the exposure level and the relative risk (going
+beyond the log-linear relationship assumed for previous iterations).
+Interpreting the GBD estimates is straightforward, once you have
+chased down all of the necessary definitions.  The relevant estimates
+include a column for exposure level, as well as columns for 500 draws
+of relative risk values at each exposure level.  The GBD 2021 PAF
+calculator often selected a TMREL for each draw from a uniform
+distribution, but for some risk factors, analysts provided draws for
+the TMREL as well.  The precise calculation to go from exposure levels
+and GBD-recorded risks to a function suitable for use as
+:math:`f_{rr}` as defined below are perhaps most clearly represented
+as python code:
+
+.. code-block:: python
+
+    def get_rr(draw_id):
+        # select rows for this sex and age_group
+        t1 = df[
+                (df.rei_id == rei_id)
+                & (df.cause_id == cause_id)
+                & (df.age_group_id == age_group_id)
+                & (df.sex_id == sex_id)]
+
+        # select column for requested draw
+        # and use exposure as index
+        t2 = t1.set_index('exposure').sort_index()
+        t3 = t2[f'draw_{draw_id}']
+
+        # make a rr function for this (risk, outcome, age, sex)
+        # by linear interpolation
+        import scipy.interpolate
+        x = np.array(t3.index) # df.exposure
+        y = np.array(t3.values)  # df.draw_n
+        f_rr = scipy.interpolate.interp1d(x, y, kind='linear', bounds_error=False, fill_value=(min(y), max(y)))
+
+        # pick a tmrel between tmred.min and tmred.max --- for certain risk factors, the modeling team uploads a model for this, too --- shiny tool has information about this
+        # and calculate relative risk at tmrel
+        tmrel = np.random.uniform(tmred.min, tmred.max)
+        rr_at_tmrel = f_rr(tmrel)
+        t4 = t3 / rr_at_tmrel
+
+        # TODO: see if GBD would also benefit from clipping these RRs
+        t5 = np.clip(t4, 1.0, np.inf)
+
+        y = np.array(t5.values)
+        f_rr_2 = scipy.interpolate.interp1d(x, y, kind='linear', bounds_error=False, fill_value=(min(y), max(y)))
+        return f_rr_2
+
 Finally, it is important to note that because the GBD relative risks represent
 the *causal* impact between and risk and an outcome, they cannot represent
 the non-causal association between a given risk and an outcome or other risk factors.
@@ -126,9 +175,14 @@ The mathematical expressions are mainly fall into two categories:
      - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
      - :math:`E(RR_e) = p \times RR + (1-p)`
  - risk exposure is continuous distributed:
-     - :math:`i = i \times (1-PAF) \times rr^{max(e−tmrel,0)/scalar}`
-     - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
-     - :math:`E(RR_e) = \int_{lower}^{upper}rr^{max(e−tmrel,0)/scalar}p(e)de`
+     - risk effect has a log-linear "dose-response" relationship with exposure:
+         - :math:`i = i \times (1-PAF) \times rr^{max(e-tmrel,0)/scalar}`
+         - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
+         - :math:`E(RR_e) = \int_{lower}^{upper}rr^{max(e-tmrel,0)/scalar}p(e)de`
+     - risk effect has a non-log-linear relationship with exposure:
+         - :math:`i = i \times (1-PAF) \times f_{rr}(e)`
+         - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
+         - :math:`E(RR_e) = \int_{lower}^{upper}f_{rr}(e)p(e)de`
 
 Where,
  - :math:`e` stands for risk exposure level
@@ -144,6 +198,8 @@ Where,
  - :math:`scalar` is a numeric variable used to convert risk exposure level to 
    a desired unit
  - :math:`p(e)` is probability density function used to calculate the probability 
+   of given risk exposure level e
+ - :math:`f_{rr}(e)` is function capturing the relationship between the exposure level and the relative risk at that exposure level (for log-linear relative risks, :math:`f_{rr}(e) = rr^{max(e-tmrel,0)/scalar}.`)
    of given risk exposure level e
 
 We can refer to the outcome rate multiplied by (1 - PAF) as the "risk-deleted outcome rate."
