@@ -265,6 +265,8 @@ not they are included in targeting will be provided.
 
   Additionally, Indi Trehan recommended using underweight as a metric. Weight is more commonly tracked in practice than height, making this data more available than stunting or wasting.
 
+  A preliminary version of `targeting based on underweight was created in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/386cf36f7dcd6073077dd8f663b17d0b740ef60f/data_prep/sqlns_subnational/Underweight-based%20targeting%20threshold%20exploration.ipynb>`_. However, we are waiting for confirmation from Rahul before continuing with this approach. This `food insecurity target list <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/386cf36f7dcd6073077dd8f663b17d0b740ef60f/data_prep/sqlns_subnational/food_insecurity_target_list.csv>`_ can be used as a placeholder for testing the model to run targeted SQ-LNS. 
+
 
 .. todo::
 
@@ -299,6 +301,8 @@ Notebooks that generated these values can be found here:
 - `"Wasting paper" implementation (12/22 update) <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/misc_investigations/Prevalence%20ratio%20nano%20sim%2C%20age-specific.ipynb>`_.
 
 - `Nutrition optimization implementation (9/23 update that uses wasting transition rates from Wave I of the nutrition optimization model) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/sqlns/Prevalence%20ratio%20nano%20sim%2C%20age-specific.ipynb>`_. Note that only incidence effects have been calculated for this project, as they are thought to be the primary route through which SQ-LNS affects child wasting, although we may revisit this assumption after more investigation into individual SQ-LNS trials that may provide guidance.
+
+- `Subnational optimization by location (5/29 update to have location specific values) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/386cf36f7dcd6073077dd8f663b17d0b740ef60f/data_prep/sqlns/sqlns_effect_size_generation_subnational.ipynb>`_. No changes in approach, this was an adjustment to run for many locations successfully only. 
 
 Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic wasting transition model document <2021_risk_exposure_wasting_state_exposure>`. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure. 
 
