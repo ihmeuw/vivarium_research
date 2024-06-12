@@ -1555,6 +1555,12 @@ Wave III
     - Zero coverage, 3 (SQ-LNS)
     - 
     - 
+  * - 14.3
+    - Issues with Wasting, Stunting models  
+    - Baseline
+    - Baseline
+    - 
+    - 
   * - 15.0
     - Add SQ-LNS intervention targeting for WAZ criteria
     - Baseline
@@ -1654,6 +1660,18 @@ Wave III
     - * Age group (0-6 months, 6-10 months, 10-18 months, 18-60 months)
       * Sex
       * Subnational location
+  * - 14.3
+    - 1. Deaths and YLLs (cause-specific)
+      2. YLDs (cause-specific)
+      3. Cause state person time
+      4. Cause state transition counts
+      5. Stunting state person time
+      6. Wasting state person time
+      7. Underweight state person time
+      8. Wasting transition counts 
+    - * Age group (standard GBD)
+      * Sex
+      * Subnational location
   * - 15.0
     - 1. Deaths
       2. Wasting state person time, stratified by SQ-LNS treatment coverage
@@ -1716,16 +1734,24 @@ Wave III
       * Given limitations in stratifications, `model 14 causes and risks <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/78f1caf5326bda570e73271f20d67c6f3ff446dc/verification_and_validation/child_model/model_14.0_risk_and_cause_checks.ipynb>`_, `model 14 wasting transitions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/78f1caf5326bda570e73271f20d67c6f3ff446dc/verification_and_validation/child_model/model_14.0_wasting_transitions.ipynb>`_, and `model 14 wasting treatment effects <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/78f1caf5326bda570e73271f20d67c6f3ff446dc/verification_and_validation/child_model/model_14.0_wasting_treatment_effects.ipynb>`_ all look to be correct. They will need to be rechecked when the age groups match. 
       * Have not assessed SQ-LNS effect modification at this time since the artifact data needs to be updated to be subnational. 
   * - 14.1
-    - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence for correct age groups
-      * Verify national CGF risk exposures and effects for correct age groups
-      * Verify national antenatal intervention effects for correct age groups
-      * Verify national wasting intervention effects for correct age groups
+    - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
+      * Verify national CGF risk exposures and effects
+      * Verify national antenatal intervention effects
+      * Verify national child intervention effects
       * Verify population in each subnational location
       * Verify subnational differentiation in above criteria
-    - * 
+    - * National GBD cause models have some issues, suspected this is due to wasting miscalibration. `Model 14.1 national cause model V&V <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8257d6bc9c84e2bb1c1a254d50d69340097abd34/verification_and_validation/child_model/model_14.1_risk_and_cause_checks_national.ipynb>`_. 
+      * `Wasting and stunting national exposure is incorrect in model 14.1 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8257d6bc9c84e2bb1c1a254d50d69340097abd34/verification_and_validation/child_model/model_14.1_risk_and_cause_checks_national.ipynb>`_. Issues have been found in the wasting exposure artifact data that might be related to these issues. Planning to update, investigate stunting artifact data as well and rerun with updates in model 14.3.
+      * `Model 14.1 wasting transitions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8257d6bc9c84e2bb1c1a254d50d69340097abd34/verification_and_validation/child_model/model_14.1_wasting_transitions.ipynb>`_ and `model 14.1 wasting effects <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8257d6bc9c84e2bb1c1a254d50d69340097abd34/verification_and_validation/child_model/model_14.1_wasting_treatment_effects.ipynb>`_ look reasonable. 
+      * `Subnational model 14.1 cause and CGF exposure models <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8257d6bc9c84e2bb1c1a254d50d69340097abd34/verification_and_validation/child_model/model_14.1_risk_and_cause_checks_subnational.ipynb>`_ have higer data variability, likely due to small sample sizes (issues are more common in low population regions).
+      * `Model 14.1 percent in each subnational location <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8257d6bc9c84e2bb1c1a254d50d69340097abd34/verification_and_validation/child_model/model_14.1_subnational_population.ipynb>`_ looks good. 
   * - 14.2
     - * Verify subnational SQ-LNS effects
       * Verify subnational SQ-LNS prevalence ratio 
+    - * 
+  * - 14.3
+    - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence for correct age groups
+      * Verify national CGF risk exposures and effects for correct age groups
     - * 
   * - 15.0
     - * Verify SQ-LNS is correctly targeted based on subnational location
