@@ -86,7 +86,7 @@ to discuss reasonable assumptions with subject matter experts to determine the
 most appropriate measure to which to apply the GBD risk effects in our vivarium
 simulations.
 
-In GBD 2021, some continuous risk exposures were modeled with general
+Starting in GBD 2021, some continuous risk exposures were modeled with general
 relationships between the exposure level and the relative risk (going
 beyond the log-linear relationship assumed for previous iterations).
 Interpreting the GBD estimates is straightforward, once you have
