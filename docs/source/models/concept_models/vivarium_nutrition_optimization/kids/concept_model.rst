@@ -1737,7 +1737,8 @@ Wave III
     - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence for Ethiopia
       * Verify national CGF risk exposures and effects for Ethiopia
       * Verify subnational differentiation in above criteria for Ethiopia
-    - * 
+    - * Ethiopia is now meeting national GBD cause models and CGF exposures targets! `Model 14.1.1 national cause and CGF exposure model V&V <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/396813dc61da5b7b6518add0b195f67769e2e7d0/verification_and_validation/child_model/model_14.1_risk_and_cause_checks_national.ipynb>`_. 
+      * Ethiopia subnational CGF exposure and cause models look mostly correct. The same noted issues above are present with low counts and prevalence mismatch. `Model 14.1.1 subnational cause model and CGF exposure V&V <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/396813dc61da5b7b6518add0b195f67769e2e7d0/verification_and_validation/child_model/model_14.1_risk_and_cause_checks_subnational_ethiopia.ipynb>`_. 
   * - 14.2
     - * Verify subnational SQ-LNS effects
       * Verify subnational SQ-LNS prevalence ratio 
