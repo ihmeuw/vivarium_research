@@ -1549,6 +1549,12 @@ Wave III
     - All
     - 
     - 
+  * - 14.1.1
+    - Fix issues with Ethiopia artifact data, rerun Ethiopia only 
+    - All
+    - All
+    - Ethiopia only
+    - 
   * - 14.2
     - Update age groups for SQ-LNS testing
     - Baseline
@@ -1635,7 +1641,7 @@ Wave III
     - * Age group
       * Sex
       * Subnational location
-  * - 14.1
+  * - 14.1 and 14.1.1
     - 1. Deaths and YLLs (cause-specific)
       2. YLDs (cause-specific)
       3. Cause state person time
@@ -1716,12 +1722,21 @@ Wave III
       * Given limitations in stratifications, `model 14 causes and risks <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/78f1caf5326bda570e73271f20d67c6f3ff446dc/verification_and_validation/child_model/model_14.0_risk_and_cause_checks.ipynb>`_, `model 14 wasting transitions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/78f1caf5326bda570e73271f20d67c6f3ff446dc/verification_and_validation/child_model/model_14.0_wasting_transitions.ipynb>`_, and `model 14 wasting treatment effects <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/78f1caf5326bda570e73271f20d67c6f3ff446dc/verification_and_validation/child_model/model_14.0_wasting_treatment_effects.ipynb>`_ all look to be correct. They will need to be rechecked when the age groups match. 
       * Have not assessed SQ-LNS effect modification at this time since the artifact data needs to be updated to be subnational. 
   * - 14.1
-    - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence for correct age groups
-      * Verify national CGF risk exposures and effects for correct age groups
-      * Verify national antenatal intervention effects for correct age groups
-      * Verify national wasting intervention effects for correct age groups
+    - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence
+      * Verify national CGF risk exposures and effects
+      * Verify national antenatal intervention effects
+      * Verify national child intervention effects
       * Verify population in each subnational location
       * Verify subnational differentiation in above criteria
+    - * Nigeria and Paksitan national GBD cause models and CGF exposures look correct `Model 14.1 national cause and CGF exposure model V&V <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/f6fa980c06c183d12e28ad73a076c22ac49659d3/verification_and_validation/child_model/model_14.1_risk_and_cause_checks_national.ipynb>`_. 
+      * Nigeria and Paksitan subnational CGF exposure and cause models look mostly correct. There are some suspected low count issues, particularly with cause-specific mortality. Since national targets are being met and we are not powered for subnational results, this is an acceptable limitation. However, we should use caution with any subnational results presented. Additionally, the prevalence in a few models was off. This is due to inconsistencies in GBD data where prevalence does not equal incidence times duration, which it does in our model. Incidence was correct and matched GBD. `Model 14.1 subnational cause model and CGF exposure V&V <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/f6fa980c06c183d12e28ad73a076c22ac49659d3/verification_and_validation/child_model/model_14.1_risk_and_cause_checks_subnational.ipynb>`_. 
+      * Ethiopia is NOT meeting targets. Specifically, issues have been identified with inconsistencies between Ethiopia's artifact and GBD data. This is still under investigation. One example of the issue is outlined in this `Ethiopia investigation notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/f6fa980c06c183d12e28ad73a076c22ac49659d3/verification_and_validation/child_model/ethiopia_investigation.ipynb>`_.
+      * `Model 14.1 wasting transitions <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8257d6bc9c84e2bb1c1a254d50d69340097abd34/verification_and_validation/child_model/model_14.1_wasting_transitions.ipynb>`_ and `model 14.1 wasting effects <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8257d6bc9c84e2bb1c1a254d50d69340097abd34/verification_and_validation/child_model/model_14.1_wasting_treatment_effects.ipynb>`_ look reasonable for all locations. 
+      * `Model 14.1 percent in each subnational location <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8257d6bc9c84e2bb1c1a254d50d69340097abd34/verification_and_validation/child_model/model_14.1_subnational_population.ipynb>`_ looks good for all locations. 
+  * - 14.1.1
+    - * Verify national GBD cause models - YLDs, YLLs, mortality, incidence, prevalence for Ethiopia
+      * Verify national CGF risk exposures and effects for Ethiopia
+      * Verify subnational differentiation in above criteria for Ethiopia
     - * 
   * - 14.2
     - * Verify subnational SQ-LNS effects
