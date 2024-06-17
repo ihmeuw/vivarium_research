@@ -199,7 +199,7 @@ Where,
    a desired unit
  - :math:`p(e)` is probability density function used to calculate the probability 
    of given risk exposure level e
- - :math:`f_{rr}(e)` is function capturing the relationship between the exposure level and the relative risk at that exposure level (for log-linear relative risks, :math:`f_{rr}(e) = rr^{max(e-tmrel,0)/scalar}.`)
+ - :math:`f_{rr}(e)` is function capturing the relationship between the exposure level and the relative risk at that exposure level (for log-linear relative risks, :math:`f_{rr}(e) = rr^{max(e-tmrel,0)/scalar}`)
    of given risk exposure level e
 
 We can refer to the outcome rate multiplied by (1 - PAF) as the "risk-deleted outcome rate."
