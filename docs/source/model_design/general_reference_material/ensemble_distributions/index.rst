@@ -252,8 +252,9 @@ modeling <GBD_ensemble_repo_description>` and for :ref:`Vivarium
   We found that the python implementation does accurately replicate the R implementation,
   but with a few exceptions:
 
-    1. Accurate replication of the mirrored gamma and betasr distributions rely on values 
-    for the XMIN and XMAX parameters. While the GBD R code implementation and Vivarium
+    1. Accurate replication of the shape of mirrored gamma and betasr distributions rely on values 
+    for the XMIN and XMAX parameters. Notably, the mean value of the distribution is unaffected by
+    the XMIN and XMAX parameter values. While the GBD R code implementation and Vivarium
     python code implementation share common default values for the XMIN and XMAX parameters,
     it is critical to ensure the python implementation reflect custom values used in the
     GBD implementation to accurately replicate the GBD distributions.
