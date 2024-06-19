@@ -105,10 +105,10 @@ as python code:
   import numpy as np
   import scipy.interpolate
   import matplotlib.pyplot as plt
-  import gbd_mapping, vivarium_gbd_access
+  import gbd_mapping, vivarium_gbd_access.gbd
 
   # Replace with your risk of interest
-  risk = gbd_mapping.risk_factors.high_systolic_blood_pressure # high_body_mass_index_in_adults
+  risk = gbd_mapping.risk_factors.high_systolic_blood_pressure
   # Replace with your cause of interest
   cause = gbd_mapping.causes.ischemic_heart_disease
   age_group_id = 20 # 75 to 79
@@ -133,45 +133,66 @@ as python code:
 
   # Do calculation at the draw level
   for draw_id in range(1_000):
-    relative_risk_draw = relative_risk_data[f'draw_{draw_id}']
-    # interpolate a continuous function between the points,
-    # and extrapolate outside the range with the endpoints
-    raw_relative_risk_function = scipy.interpolate.interp1d(
-        relative_risk_data.exposure,
-        relative_risk_draw,
-        kind='linear',
-        bounds_error=False,
-        fill_value=(
-            relative_risk_draw.min(),
-            relative_risk_draw.max(),
-        )
-    )
+      relative_risk_draw = relative_risk_data[f'draw_{draw_id}']
+      # interpolate a continuous function between the points,
+      # and extrapolate outside the range with the endpoints
+      raw_relative_risk_function = scipy.interpolate.interp1d(
+          relative_risk_data.exposure,
+          relative_risk_draw,
+          kind='linear',
+          bounds_error=False,
+          fill_value=(
+              relative_risk_draw.min(),
+              relative_risk_draw.max(),
+          )
+      )
 
-    # pick a tmrel between tmred.min and tmred.max and calculate relative risk at tmrel
-    # for certain risk factors, the modeling team uploads a model for this with TMREL draws --
-    # those should be used instead of this, when available!
-    tmrel = np.random.uniform(risk.tmred.min, risk.tmred.max)
-    rr_at_tmrel = raw_relative_risk_function(tmrel)
-    normalized_relative_risk_draw = relative_risk_draw / rr_at_tmrel
+      # pick a tmrel between tmred.min and tmred.max and calculate relative risk at tmrel
+      # for certain risk factors, the modeling team uploads a model for this with TMREL draws --
+      # those should be used instead of this, when available!
+      tmrel = np.random.uniform(risk.tmred.min, risk.tmred.max)
+      rr_at_tmrel = raw_relative_risk_function(tmrel)
+      normalized_relative_risk_draw = relative_risk_draw / rr_at_tmrel
 
-    # Clip relative risk to 1, since the TMREL is supposed to represent minimum risk
-    # NOTE: It is not clear if this is always appropriate, since TMRELs are across all
-    # risk-cause pairs involving this risk, not only the pair we are modeling
-    # TODO: see if GBD would also benefit from clipping these RRs
-    clipped_normalized_relative_risk_draw = np.clip(normalized_relative_risk_draw, 1.0, np.inf)
+      # This clipping is what the GBD PAF calculator does, but it is not clear that it makes
+      # sense conceptually.
+      # A single risk factor can have positive (protective) and negative (harmful) effects on
+      # different causes, and the TMREL can then be a balance between them, which doesn't necessarily
+      # imply it is the ideal exposure when looking at either cause individually.
+      # TODO: Revisit this.
+      clipped_normalized_relative_risk_draw = np.clip(normalized_relative_risk_draw, 1.0, np.inf)
 
-    relative_risk_function = scipy.interpolate.interp1d(
-        relative_risk_data.exposure,
-        clipped_normalized_relative_risk_draw,
-        kind='linear',
-        bounds_error=False,
-        fill_value=(
-            clipped_normalized_relative_risk_draw.min(),
-            clipped_normalized_relative_risk_draw.max(),
-        )
-    )
+      relative_risk_function = scipy.interpolate.interp1d(
+          relative_risk_data.exposure,
+          clipped_normalized_relative_risk_draw,
+          kind='linear',
+          bounds_error=False,
+          fill_value=(
+              clipped_normalized_relative_risk_draw.min(),
+              clipped_normalized_relative_risk_draw.max(),
+          )
+      )
 
-    relative_risk_functions[draw_id] = relative_risk_function
+      relative_risk_functions[draw_id] = relative_risk_function
+
+  # Plot the relative risk functions
+  x_values = np.linspace(relative_risk_data.exposure.min() * 0.5, relative_risk_data.exposure.max() * 1.5, 500)
+  mean = np.zeros_like(x_values)
+
+  for i, function in enumerate(relative_risk_functions.values()):
+      y_values = function(x_values)
+      plt.plot(x_values, y_values, color="gray", alpha=0.01)
+      mean += y_values
+
+  mean = mean / len(relative_risk_functions)
+  plt.plot(x_values, mean, color="green")
+  plt.gca().set_xlabel(f'{risk.name} exposure')
+  plt.gca().set_ylabel(f'RR of {cause.name}')
+  plt.show()
+
+This code generates a separate function/curve for each *draw*, as seen in the plot:
+
+.. image:: ./sbp_ihd_risk_curve.png
 
 Finally, it is important to note that because the GBD relative risks represent
 the *causal* impact between and risk and an outcome, they cannot represent
