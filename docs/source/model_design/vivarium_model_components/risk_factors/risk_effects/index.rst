@@ -194,6 +194,10 @@ This code generates a separate function/curve for each *draw*, as seen in the pl
 
 .. image:: ./sbp_ihd_risk_curve.png
 
+We've validated that using this approach, we can get approximately the same result
+as the GBD PAF calculator.
+This is demonstrated in `this notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/edae08c5f034efa84d33413b923b1edcdf692538/pre_processing/nonlinear_risk_factors/nonlinear_risk_salt_stomach_cancer.ipynb>`_.
+
 Finally, it is important to note that because the GBD relative risks represent
 the *causal* impact between and risk and an outcome, they cannot represent
 the non-causal association between a given risk and an outcome or other risk factors.
