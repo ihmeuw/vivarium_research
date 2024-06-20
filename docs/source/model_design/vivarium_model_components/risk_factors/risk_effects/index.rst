@@ -92,7 +92,10 @@ beyond the log-linear relationship assumed for previous iterations).
 Interpreting the GBD estimates is straightforward, once you have
 chased down all of the necessary definitions.  The relevant estimates
 include a column for exposure level, as well as columns for 500 draws
-of relative risk values at each exposure level.  The GBD 2021 PAF
+of relative risk values at each exposure level.
+These represent points on the continuous curve, which can then be approximated
+by interpolating these points.
+The GBD 2021 PAF
 calculator often selected a TMREL for each draw from a uniform
 distribution, but for some risk factors, analysts provided draws for
 the TMREL as well.  The precise calculation to go from exposure levels
@@ -196,6 +199,8 @@ This code generates a separate function/curve for each *draw*, as seen in the pl
 
 We've validated that using this approach, we can get approximately the same result
 as the GBD PAF calculator.
+The relevant code in the PAF calculator can be found `here <https://stash.ihme.washington.edu/projects/CCGMOD/repos/ihme_cc_paf_calculator/browse/src/ihme_cc_paf_calculator/lib/math.py>`_;
+the clipping is implemented `here <https://stash.ihme.washington.edu/projects/CCGMOD/repos/ihme_cc_paf_calculator/browse/src/ihme_cc_paf_calculator/lib/math.py#171-207>`_.
 This is demonstrated in `this notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/edae08c5f034efa84d33413b923b1edcdf692538/pre_processing/nonlinear_risk_factors/nonlinear_risk_salt_stomach_cancer.ipynb>`_.
 
 Finally, it is important to note that because the GBD relative risks represent
@@ -239,11 +244,11 @@ The mathematical expressions are mainly fall into two categories:
      - :math:`E(RR_e) = p \times RR + (1-p)`
  - risk exposure is continuous distributed:
      - risk effect has a log-linear "dose-response" relationship with exposure:
-         - :math:`i = i \times (1-PAF) \times rr^{max(e-tmrel,0)/scalar}`
+         - :math:`i_{\text{simulant}} = i \times (1-PAF) \times rr^{max(e_{\text{simulant}}-tmrel,0)/scalar}`
          - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
          - :math:`E(RR_e) = \int_{lower}^{upper}rr^{max(e-tmrel,0)/scalar}p(e)de`
      - risk effect has a non-log-linear relationship with exposure:
-         - :math:`i = i \times (1-PAF) \times f_{rr}(e)`
+         - :math:`i_{\text{simulant}} = i \times (1-PAF) \times f_{rr}(e_{\text{simulant}})`
          - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
          - :math:`E(RR_e) = \int_{lower}^{upper}f_{rr}(e)p(e)de`
 
