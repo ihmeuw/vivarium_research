@@ -55,7 +55,7 @@ it's calculated by dividing the rate of some outcome (such as incidence or morta
 rate) among the population exposed to a risk by the outcome rate in the unexposed population.
 For example, if there are A incident cases and B person-years in exposed group;
 C incident cases and D person-years in the unexposed group, then the relative risk
-(rate ratio) equals :math:`\frac{AD}{BC}`. The "unexposed" or "reference" group
+(rate ratio) equals :math:`\frac{A/B}{C/D} = \frac{AD}{BC}`. The "unexposed" or "reference" group
 in the GBD-estimated relative risks is always the TMREL for that risk. For GBD 
 risk factors with continuous risk exposures, the GBD-estimated relative risks
 represent the relative risk associated with a defined unit increase in risk exposure
@@ -85,6 +85,123 @@ its incidence rate, remission rate, or severity of disease. Therefore, it is imp
 to discuss reasonable assumptions with subject matter experts to determine the
 most appropriate measure to which to apply the GBD risk effects in our vivarium
 simulations.
+
+Starting in GBD 2021, some continuous risk exposures were modeled with general
+relationships between the exposure level and the relative risk (going
+beyond the log-linear relationship assumed for previous iterations).
+Interpreting the GBD estimates is straightforward, once you have
+chased down all of the necessary definitions.  The relevant estimates
+include a column for exposure level, as well as columns for 500 draws
+of relative risk values at each exposure level.
+These represent points on the continuous curve, which can then be approximated
+by interpolating these points.
+The GBD 2021 PAF
+calculator often selected a TMREL for each draw from a uniform
+distribution, but for some risk factors, analysts provided draws for
+the TMREL as well.  The precise calculation to go from exposure levels
+and GBD-recorded risks to a function suitable for use as
+:math:`f_{rr}` as defined below are perhaps most clearly represented
+as python code:
+
+.. code-block:: python
+
+  import numpy as np
+  import scipy.interpolate
+  import matplotlib.pyplot as plt
+  import gbd_mapping, vivarium_gbd_access.gbd
+
+  # Replace with your risk of interest
+  risk = gbd_mapping.risk_factors.high_systolic_blood_pressure
+  # Replace with your cause of interest
+  cause = gbd_mapping.causes.ischemic_heart_disease
+  age_group_id = 20 # 75 to 79
+  sex_id = 1 # Male
+  year_id = 2021
+
+  relative_risk_data = vivarium_gbd_access.gbd.get_relative_risk(
+      risk.gbd_id,
+      1, # Global
+      year_id=year_id,
+  )
+
+  # Subset to cause, age, and sex of interest
+  # If interested in multiple, would loop through them
+  relative_risk_data = relative_risk_data[
+      (relative_risk_data.cause_id == cause.gbd_id) &
+      (relative_risk_data.age_group_id == age_group_id) &
+      (relative_risk_data.sex_id == sex_id)
+  ].sort_values('exposure')
+
+  relative_risk_functions = {}
+
+  # Do calculation at the draw level
+  for draw_id in range(1_000):
+      relative_risk_draw = relative_risk_data[f'draw_{draw_id}']
+      # interpolate a continuous function between the points,
+      # and extrapolate outside the range with the endpoints
+      raw_relative_risk_function = scipy.interpolate.interp1d(
+          relative_risk_data.exposure,
+          relative_risk_draw,
+          kind='linear',
+          bounds_error=False,
+          fill_value=(
+              relative_risk_draw.min(),
+              relative_risk_draw.max(),
+          )
+      )
+
+      # pick a tmrel between tmred.min and tmred.max and calculate relative risk at tmrel
+      # for certain risk factors, the modeling team uploads a model for this with TMREL draws --
+      # those should be used instead of this, when available!
+      tmrel = np.random.uniform(risk.tmred.min, risk.tmred.max)
+      rr_at_tmrel = raw_relative_risk_function(tmrel)
+      normalized_relative_risk_draw = relative_risk_draw / rr_at_tmrel
+
+      # This clipping is what the GBD PAF calculator does, but it is not clear that it makes
+      # sense conceptually.
+      # A single risk factor can have positive (protective) and negative (harmful) effects on
+      # different causes, and the TMREL can then be a balance between them, which doesn't necessarily
+      # imply it is the ideal exposure when looking at either cause individually.
+      # TODO: Revisit this.
+      clipped_normalized_relative_risk_draw = np.clip(normalized_relative_risk_draw, 1.0, np.inf)
+
+      relative_risk_function = scipy.interpolate.interp1d(
+          relative_risk_data.exposure,
+          clipped_normalized_relative_risk_draw,
+          kind='linear',
+          bounds_error=False,
+          fill_value=(
+              clipped_normalized_relative_risk_draw.min(),
+              clipped_normalized_relative_risk_draw.max(),
+          )
+      )
+
+      relative_risk_functions[draw_id] = relative_risk_function
+
+  # Plot the relative risk functions
+  x_values = np.linspace(relative_risk_data.exposure.min() * 0.5, relative_risk_data.exposure.max() * 1.5, 500)
+  mean = np.zeros_like(x_values)
+
+  for i, function in enumerate(relative_risk_functions.values()):
+      y_values = function(x_values)
+      plt.plot(x_values, y_values, color="gray", alpha=0.01)
+      mean += y_values
+
+  mean = mean / len(relative_risk_functions)
+  plt.plot(x_values, mean, color="green")
+  plt.gca().set_xlabel(f'{risk.name} exposure')
+  plt.gca().set_ylabel(f'RR of {cause.name}')
+  plt.show()
+
+This code generates a separate function/curve for each *draw*, as seen in the plot:
+
+.. image:: ./sbp_ihd_risk_curve.png
+
+We've validated that using this approach, we can get approximately the same result
+as the GBD PAF calculator.
+The relevant code in the PAF calculator is `on Stash <https://stash.ihme.washington.edu/projects/CCGMOD/repos/ihme_cc_paf_calculator/browse/src/ihme_cc_paf_calculator/lib/math.py>`_;
+the clipping is implemented `here <https://stash.ihme.washington.edu/projects/CCGMOD/repos/ihme_cc_paf_calculator/browse/src/ihme_cc_paf_calculator/lib/math.py#171-207>`_.
+This is demonstrated in `this notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/edae08c5f034efa84d33413b923b1edcdf692538/pre_processing/nonlinear_risk_factors/nonlinear_risk_salt_stomach_cancer.ipynb>`_.
 
 Finally, it is important to note that because the GBD relative risks represent
 the *causal* impact between and risk and an outcome, they cannot represent
@@ -126,9 +243,14 @@ The mathematical expressions are mainly fall into two categories:
      - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
      - :math:`E(RR_e) = p \times RR + (1-p)`
  - risk exposure is continuous distributed:
-     - :math:`i = i \times (1-PAF) \times rr^{max(e−tmrel,0)/scalar}`
-     - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
-     - :math:`E(RR_e) = \int_{lower}^{upper}rr^{max(e−tmrel,0)/scalar}p(e)de`
+     - risk effect has a log-linear "dose-response" relationship with exposure:
+         - :math:`i_{\text{simulant}} = i \times (1-PAF) \times rr^{max(e_{\text{simulant}}-tmrel,0)/scalar}`
+         - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
+         - :math:`E(RR_e) = \int_{lower}^{upper}rr^{max(e-tmrel,0)/scalar}p(e)de`
+     - risk effect has a non-log-linear relationship with exposure:
+         - :math:`i_{\text{simulant}} = i \times (1-PAF) \times f_{rr}(e_{\text{simulant}})`
+         - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
+         - :math:`E(RR_e) = \int_{lower}^{upper}f_{rr}(e)p(e)de`
 
 Where,
  - :math:`e` stands for risk exposure level
@@ -144,6 +266,8 @@ Where,
  - :math:`scalar` is a numeric variable used to convert risk exposure level to 
    a desired unit
  - :math:`p(e)` is probability density function used to calculate the probability 
+   of given risk exposure level e
+ - :math:`f_{rr}(e)` is function capturing the relationship between the exposure level and the relative risk at that exposure level (for log-linear relative risks, :math:`f_{rr}(e) = rr^{max(e-tmrel,0)/scalar}`)
    of given risk exposure level e
 
 We can refer to the outcome rate multiplied by (1 - PAF) as the "risk-deleted outcome rate."
