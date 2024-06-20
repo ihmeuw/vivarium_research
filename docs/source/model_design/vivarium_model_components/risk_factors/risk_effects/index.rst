@@ -199,7 +199,7 @@ This code generates a separate function/curve for each *draw*, as seen in the pl
 
 We've validated that using this approach, we can get approximately the same result
 as the GBD PAF calculator.
-The relevant code in the PAF calculator can be found `here <https://stash.ihme.washington.edu/projects/CCGMOD/repos/ihme_cc_paf_calculator/browse/src/ihme_cc_paf_calculator/lib/math.py>`_;
+The relevant code in the PAF calculator is `on Stash <https://stash.ihme.washington.edu/projects/CCGMOD/repos/ihme_cc_paf_calculator/browse/src/ihme_cc_paf_calculator/lib/math.py>`_;
 the clipping is implemented `here <https://stash.ihme.washington.edu/projects/CCGMOD/repos/ihme_cc_paf_calculator/browse/src/ihme_cc_paf_calculator/lib/math.py#171-207>`_.
 This is demonstrated in `this notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/edae08c5f034efa84d33413b923b1edcdf692538/pre_processing/nonlinear_risk_factors/nonlinear_risk_salt_stomach_cancer.ipynb>`_.
 
