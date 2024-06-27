@@ -229,6 +229,22 @@ SQ-LNS effects on wasting will persist until 18 months of age and effects on stu
 Targeted SQ-LNS
 ~~~~~~~~~~~~~~~
 
+The team has decided to run the model for each subnational location with 
+SQ-LNS "on" and "off" and test different targeting plans for SQ-LNS in a separate 
+notebook. The goal of this approach is to allow for more extensive testing of 
+different possible targeting approaches and the option to run a regression and 
+create a more complex metric. 
+
+To achieve this, we will create an emulator to combine results from individual 
+subnationals where SQ-LNS is on and off to create a national result for targeting 
+a given list of regions. The metrics used for generating targeting lists are 
+undecided currently, but we expect to use child growth failure metrics and 
+child mortality as starting examples. One of the metrics we plan to test is 
+outlined in more detail below. 
+
+This section will continue to be updated as we design the emulator and create 
+other targeting approaches. 
+
 The WHO has issued guidelines on the use and targeting of SQ-LNS, 
 which are available here: `WHO guidelines <https://app.magicapp.org/#/guideline/7352/section/133966>`_. 
 These guidelines state that "in areas of or during periods of 
@@ -266,13 +282,6 @@ not they are included in targeting will be provided.
   Additionally, Indi Trehan recommended using underweight as a metric. Weight is more commonly tracked in practice than height, making this data more available than stunting or wasting.
 
   A preliminary version of `targeting based on underweight was created in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/386cf36f7dcd6073077dd8f663b17d0b740ef60f/data_prep/sqlns_subnational/Underweight-based%20targeting%20threshold%20exploration.ipynb>`_. However, we are waiting for confirmation from Rahul before continuing with this approach. This `food insecurity target list <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/386cf36f7dcd6073077dd8f663b17d0b740ef60f/data_prep/sqlns_subnational/food_insecurity_target_list.csv>`_ can be used as a placeholder for testing the model to run targeted SQ-LNS. 
-
-
-.. todo::
-
-  Add additional targeting criteria we plan to use. 
-
-  Create csv file indicating which subnational locations are included for each targeting criteria.
 
 
 Affected Outcomes
