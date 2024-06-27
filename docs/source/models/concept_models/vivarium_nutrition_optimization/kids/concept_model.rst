@@ -546,11 +546,9 @@ later, we might reconsider. This notebook contains the `MAM subcategory exposure
 
 SAM and MAM treatmet coverage and efficacy data will continue to be national only. Also, 
 for all scenarios other than targeted SQ-LNS, roll out of interventions will 
-be the same for all subnational locations.
-
-.. todo::
-
-  Revisit this paragraph once we have decided about SQ-LNS effect modification. Add either that it is national or subnational. 
+be the same for all subnational locations. SQ-LNS includes a sensitivity analysis where 
+the effect of SQ-LNS is modified by the subnational location's wasting burden. More 
+details can be found on the SQ-LNS page.
 
 
 .. _nutritionoptimizationchild4.0:
@@ -1562,29 +1560,29 @@ Wave III
     - 
     - 
   * - 15.0
-    - Add SQ-LNS intervention targeting for WAZ criteria
+    - Testing SQ-LNS effect modification and targeting 
     - Baseline
     - 3 and 8
     - 
-    - Universal and Targeted SQ-LNS only
+    - Universal and Targeted SQ-LNS only with standard and modified effects for SQ-LNS
   * - 16.0
-    - Add additional SQ-LNS geographic targeting criteria
-    - Baseline
-    - 3 and 8
-    - 
-    - Universal and Targeted SQ-LNS only
+    - Small run for emulator design
+    - Baseline and MMS
+    - Baseline, (SAM + Targeted MAM + SQLNS), (SAM + Targeted MAM)
+    - Pakistan only, individual subnational runs, 5 draws, 5 seeds
+    - Includes both standard and effect modified SQ-LNS
   * - 17.0
-    - Add targeted SQ-LNS effect modification
-    - Baseline
-    - 3 and 8
-    - 
-    - Universal and Targeted SQ-LNS only
+    - Production runs for targeted SQ-LNS
+    - Baseline and MMS
+    - Baseline, (SAM + Targeted MAM + SQLNS), (SAM + Targeted MAM)
+    - Individual subnational runs, 20 draws, 20 seeds
+    - Includes both standard and effect modified SQ-LNS
   * - 18.0
-    - Production runs
+    - Production runs with single targeted SQ-LNS
     - All
     - All
-    - 
-    - 
+    - National runs
+    - TBD if this will include standard and effect modified SQ-LNS or not
 
 
 .. list-table:: Output specifications
@@ -1668,19 +1666,21 @@ Wave III
       * Sex
       * Subnational location
   * - 16.0
-    - 1. Deaths
-      2. Wasting state person time, stratified by SQ-LNS treatment coverage
-      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - 1. Deaths and YLLs (non-cause-specific)
+      2. YLDs (all-cause observer only)
+      3. Count of incident SAM cases stratified by SAM treatment coverage
+      4. Count of incident MAM cases stratified by MAM treatment coverage
+      5. Stunting state person time stratified by SQ-LNS coverage
     - * Age group
-      * Sex
-      * Targeted SQ-LNS location vs not
+      * Subnational location (need to determine how this will be "stratified")
   * - 17.0
-    - 1. Deaths
-      2. Wasting state person time, stratified by SQ-LNS treatment coverage
-      3. Stunting state person time, stratified by SQ-LNS treatment coverage
+    - 1. Deaths and YLLs (non-cause-specific)
+      2. YLDs (all-cause observer only)
+      3. Count of incident SAM cases stratified by SAM treatment coverage
+      4. Count of incident MAM cases stratified by MAM treatment coverage
+      5. Stunting state person time stratified by SQ-LNS coverage
     - * Age group
-      * Sex
-      * Subnational location
+      * Subnational location (need to determine how this will be "stratified")
   * - 18.0
     - 1. Deaths and YLLs (non-cause-specific)
       2. YLDs (all-cause observer only)
@@ -1745,18 +1745,15 @@ Wave III
     - * 
   * - 15.0
     - * Verify SQ-LNS is correctly targeted based on subnational location
-      * Verify stunting, wasting vary with SQ-LNS exposure
+      * Verify stunting, wasting vary with SQ-LNS exposure and with effect modification
       * Verify other model components look as expected
     - 
   * - 16.0
-    - * Verify SQ-LNS targeting matches expected population
-      * Verify stunting, wasting vary with SQ-LNS exposure
+    - * Verify subnational results, SQ-LNS effects look as expected
       * Verify other model components look as expected
     - 
   * - 17.0
-    - * Verify SQ-LNS effect modification changes as expected with targeting
-      * Verify stunting, wasting vary with SQ-LNS exposure
-      * Verify other model components look as expected
+    - * Confirm that results for production runs match expected outputs
     - 
   * - 18.0
     - * Confirm that results for production runs match expected outputs
