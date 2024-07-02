@@ -101,16 +101,24 @@ audience.
 ---------------------
 
 When you’re designing a research question, it’s important to consider both if race, 
-ethnicity, and/or ancestry are relevant, and, if so, what the casual pathways might be. Spending 
+ethnicity, and/or ancestry are relevant, and, if so, what the causal pathways might be. Spending 
 time considering the causal pathways will help you consider what exactly you are 
 investigating and might identify more relevant proxy measures.
 
-To work through this example, let’s consider a starting research question: how will 
+First, let’s consider this hypothetical research question: how much would expanding access 
+to clean water impact diarrhea rates in Nigeria?
+
+Is race, ethnicity, and/or ancestry relevant here? Race/ethnicity are a much less 
+common marker used in disease measurement in Nigeria, compared to the US. We don't have 
+any data to indicate that race, ethnicity, or ancestry impact diarrhea rates, or rates 
+of access to clean water. Therefore, in this example we might choose NOT to include race. 
+
+For the rest of this section, let’s consider a different research question: how will 
 the rates of cardiovascular disease (CVD) change over the next 5 years in the US?
 
 First, let’s consider if including race, ethnicity, and/or ancestry is relevant to 
 the research question. It’s commonly known that CVD rates vary with race, and that 
-race demographics are changing within the US. Understanding how different groups’ 
+racial demographics are changing within the US. Understanding how different groups’ 
 CVD rates are changing differently might lead us to make a better forecast for 
 the future. So, it seems relevant to include race here.  
 
@@ -120,39 +128,34 @@ racial groups, decision-makers might deploy racially aware intervention strategi
 So here, including something about race, ethnicity, and/or ancestry seems relevant. 
 
 Last, let’s think through the possible causal pathways and decide what metric(s) 
-we want to include. In the below diagrams, the solid lines indicate casual pathways, 
-while the dotted lines indicate correlation. 
+we want to include. 
+
+Below, we have drawn several causal diagrams. These are designed to show the 
+pathways between inputs and impacts. In our diagrams, the solid arrows indicate 
+causal pathways (x directly causes y), the dotted lines indicate correlation (x is 
+related to y, but doesn't necessarily cause it), and the red arrows indicate false 
+causal pathways (x leads to y due to society and history but does not need to 
+cause it in a better world). 
+
+**Option 1: Race** 
+
+We stated above that it's commonly known that CVD rates vary with race. This is 
+well documented and true. We know is that there is a correlation between race and 
+CVD, so we can draw the below diagram with a correlation line included. Now, let's 
+more closely examine what might be causing this correlation. 
+
+.. image:: race_v1.svg
 
 **Option 1a: Race** 
 
-.. image:: race_a_v1.svg
-
-We stated above that its commonly known that CVD rates vary with race. This is 
-well documented and true. It's easy therefore to think about the casual diagram 
-as a single line between race and disease. But all we know is that there is a 
-correlation between race and CVD. We want to more closely examine what might be 
-causing this correlation. 
-
-Given our defintion of race as physical characteristics, for race to cause the 
-disease, it means that the physical characteristics are causing the disease itself. 
-There might be a few cases where this causal pathway is correct, but they are limited 
-in scope. For example, lighter skinned individuals tend to get skin cancer at higher 
-rates. In this case, the physical characteristic of race impacts the disease. However, 
-this is quite uncommon. 
-
-There isn't any known reason why skin color or other physical characteristics are 
-tied to CVD, so we can dismiss this option for our research question. 
-
-**Option 1b: Race** 
-
-.. image:: race_b_v1.svg
-
-A much more common option is race “leads” to experiences of racism which in turn leads 
+One option is race “leads” to experiences of racism which in turn leads 
 to the disease. We put “leads” in quotes as we don’t want to imply that existing with 
 certain physical characteristics “causes” racism, but rather that racism is the result 
 of years of history defining groups based on physical characteristics. 
 
-This casual pathway is much more common, and seems more applicable to our example with CVD. 
+.. image:: race_b_v1.svg
+
+This causal pathway is unfortunately quite common, and seems applicable to our example with CVD. 
 However, considering the exact pathway here is important. We list a few possible pathways for 
 CVD based on race. Note that these do overlap with ethnicity in some cases. This is 
 because discrimination can impact culture/ethnic practices. These are often 
@@ -163,23 +166,46 @@ rooted in racism.
 - Microaggressions experienced by non-white individuals leading to elevated blood pressure 
 - Racism in healthcare settings leading to delayed treatment once a person seeks care 
 
+**Option 1b: Race** 
+
+Since race is related to physical characteristics.
+We might naively assume that the physical characteristics are causing the disease itself. 
+
+.. image:: race_a_v1.svg
+
+There might be a few cases where this causal pathway is correct, but they are limited 
+in scope. For example, lighter skinned individuals tend to get skin cancer at higher 
+rates. In this case, the physical characteristic which leads to racial categorization impacts the disease. However, 
+this is quite uncommon. 
+
+There isn't any known reason why skin color or other physical characteristics are 
+tied to CVD, so we can dismiss this option for our research question. 
+
+**Option 2: Ethnicity** 
+
+A second correlation often observed is between ethnicity and disease. Again, 
+we can draw a diagram that connects ethnicity and disease with a correlation line. 
+
+.. image:: ethnicity_v1.svg
+
 **Option 2a: Ethnicity** 
+
+Next, we might examine whether there is a plausible causal pathway between ethnicity and 
+the disease. Here, there are some compelling arguments that this relationship could be causal for CVD. 
 
 .. image:: ethnicity_a_v1.svg
 
-The second causal pathway is between ethnicity and disease. Here, there are 
-some compelling arguments for CVD. For example, the mediterranean diet has 
+
+For example, the Mediterranean diet has 
 been shown to lower risk of cardiovascular disease. So ethnic groups that 
 tend to follow this type of diet might have lowered risk of CVD. 
 
-However, a big risk of this causal pathway is that ethnicity can be 
-greatly affected by circumstance and history. 
+However, this is not the only potential explanation for correlation with ethnicity,
+which can be greatly affected by circumstance and history. 
 
 **Option 2b: Ethnicity** 
 
-.. image:: ethnicity_b_v1.svg
-
-Here is a more complete picture of the same casual diagram which includes history and 
+Here is a more complete picture of the same causal diagram which includes history and 
 discrimination. One example of how history impacts ethnicity can be seen by comparing 
 immigrant populations' CVD rates with their counterparts who did not immigrate. As immigrants tend 
 to assimilate to “western” lifestyles, which often involve more processed and 
@@ -187,11 +213,13 @@ fatty foods, they tend to have higher rates of CVD. Here, the outside force is c
 leading to changes in lifestyle and food choices, which in turn to lead to 
 differences in CVD rates. 
 
+.. image:: ethnicity_b_v1.svg
+
 Some other examples include: 
 
-- Slavery creating new African American cultural norms separate from African cultural norms 
-- Availability of green space or parks leading to increase exercise in some communities 
-- Food deserts leading to different food practices
+- Discrimination against people who do not speak English leading to inferior care
+- Ethnic foods being labeled as "unhealthy" and leading to physician discrimination
+- Incorrect assumption of cultural practices or lack of understanding of differences in household, family, or cultural norms 
 
 If you want to study ethnicity’s effect on a disease, it’s important to think 
 about why some practices might exist and to approach different cultures with 
@@ -199,25 +227,32 @@ respect and curiosity instead of judgement.
 
 **Option 3: Ancestry** 
 
-.. image:: ancestry_v1.svg
+To start, we can include the correlation diagram. Since ancestry overlaps with race 
+and ethnicity, this correlation also likely exists. 
+
+.. image:: ancestry_corr_v1.svg
+
+**Option 3a: Ancestry** 
 
 As defined above, ancestry is about the genetics of your ancestors. There are 
-a few cases where this causal diagram is correct, but they are limited. For example, 
-sickle cell disease is more common in people whose ancestors lived in areas with 
-endemic malaria prevalence. Another example is Ashkenazi Jewish people, who are 
-more likely to be carriers for some genetic conditions like Gaucher disease or 
-cystic fibrosis. 
+a few cases where this causal diagram is correct, but they are limited.
+
+.. image:: ancestry_v1.svg
+
+For example: 
+- Sickle cell disease is more common in people whose ancestors lived in areas with endemic malaria prevalence 
+- Ashkenazi Jewish people are more likely to be carriers for some genetic conditions like Gaucher disease or cystic fibrosis
 
 In our case, there isn’t a lot of known evidence to support a genetic link between 
-CVD and ancestry, so we can eliminate this casual pathway. 
+CVD and ancestry, so we can eliminate this causal pathway. 
 
 **Option 4: Combination** 
-
-.. image:: big_diagram_v1.svg
 
 In reality, a lot of this overlaps and compounds in individuals. There is also a 
 lot of historical context that overlays these diagrams. One version of a combined diagram 
 is above, though even this is very simplistic and could be expanded significantly. 
+
+.. image:: big_diagram_v1.svg
 
 For our research question, there are lots of possible causal pathways. A lot of 
 the time, race/ethnicity gets used as a proxy for the wide range of possible 
