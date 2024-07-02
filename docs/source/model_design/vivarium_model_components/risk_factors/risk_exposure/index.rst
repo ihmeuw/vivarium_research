@@ -48,7 +48,7 @@ and an individual will possess a specific measure within this distribution.
 
 Risk exposure distributions can be:
 
- - Categorical
+- Categorical
 
   - Dichotomous
 
@@ -56,7 +56,7 @@ Risk exposure distributions can be:
 
   - Ordered polytomous
 
- - Continuous
+- Continuous
 
 Generally, risk exposure distributions should be mutually exclusive and collectively exhaustive.
 In other words, the prevalence of all risk exposure categories for a categorical distribution and 
@@ -127,7 +127,7 @@ population.
 
 If the exposure is dichotomous, for each location, sex, and year, GBD
 will estimate a continuous age trend of the proportion of, say, individuals with
-BMI over 30. If the exposure is continuous, then GBD estimates the distribution of the
+BMI over 30 kg/m\ :sup:`2`. If the exposure is continuous, then GBD estimates the distribution of the
 exposure variable over the population in each age, sex, year, and location.
 
 GBD's risk exposures will generally be less reliable than GBD cause-of-death
