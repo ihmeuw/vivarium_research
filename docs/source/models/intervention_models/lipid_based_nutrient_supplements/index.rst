@@ -298,7 +298,7 @@ effect sizes using this `SQLNS effect modification testing notebook <https://git
 to generate the wasting transition impacts.
 
 We again received data inputs from the team at UC Davis showing the prevalence ratio for each 
-category separated by high and low burden locations. This data is stored :code:`J:\Project\simulation_science\ciff_malnutrition\Data\sqlns_effects\ipd_list request_20240620.xlsx`. 
+category separated by high and low burden locations. This data is stored at :code:`J:\Project\simulation_science\ciff_malnutrition\Data\sqlns_effects\ipd_list request_20240620.xlsx`. 
 The trials included in this meta-analysis were identical to those included in the prior meta-analysis. 
 The new data here was the prevalence ratios separated by high and low burden regions. 
 
