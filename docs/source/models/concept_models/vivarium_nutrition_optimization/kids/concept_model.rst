@@ -1561,9 +1561,9 @@ Wave III
     - 
   * - 15.0
     - Testing SQ-LNS effect modification and targeting 
-    - Baseline
-    - 3 and 8
-    - 
+    - Baseline and MMS
+    - Baseline, (SAM + Targeted MAM + SQLNS), (SAM + Targeted MAM)
+    - A single subnational location, with SQ-LNS standard and effect modified
     - Universal and Targeted SQ-LNS only with standard and modified effects for SQ-LNS
   * - 16.0
     - Small run for emulator design
