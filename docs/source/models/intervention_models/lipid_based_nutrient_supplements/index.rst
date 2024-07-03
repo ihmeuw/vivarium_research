@@ -429,7 +429,7 @@ Additionally, as suggested by the observed prevalence ratios from the meta-analy
     - 
   * - Severe (cat1) stunting exposure
     - Prevalence ratio
-    - Modified effects 
+    - Standard effects
     - 0.83 (0.78, 0.90), lognormal distribution of uncertainty
     - 
   * - Severe (cat1) stunting exposure
