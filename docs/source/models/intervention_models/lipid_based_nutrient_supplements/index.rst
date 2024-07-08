@@ -287,11 +287,29 @@ not they are included in targeting will be provided.
 Affected Outcomes
 +++++++++++++++++
 
-.. todo::
+Effect Modification
+~~~~~~~~~~~~~~~~~~~
 
-  Effect size of SQ-LNS has been shown to change based on stunting or wasting prevalence in a location [Dewey-et-al-2022]_. Therefore, we would like to include two SQ-LNS effect sizes - based on if the location surpasses either a stunting or wasting prevalence threshold. This would be separate from targeting. It is worth noting that approximately 95% of the population in Ethiopia would qualify for the higher effect sizes.
+The effect size of SQ-LNS has been shown to change based on stunting or wasting prevalence 
+in a location [Dewey-et-al-2022]_. Therefore, we are including a sensitivity analysis where 
+there are two SQ-LNS effect sizes - based on if the subnational location surpasses a wasting 
+prevalence threshold of 10%. This is separate from targeting.
 
-  However, there are some data limitations from current literature. The study we hope to use only reports on changes to the severe category [Dewey-et-al-2022]_. We will likely need data for all categories in order to implement this correctly. We will work with the UC Davis team to try and gather this information and see how feasible this effect modification is.
+Wasting prevalence was selected over stunting because the other interventions in our model 
+focus on wasting treatment (SAM and MAM treatment), and therefore the prevention vs treatment 
+framework is most relevant and interesting in high wasting burden locations. At current, we are 
+waiting for input from Indi Trehan on guidance for whether wasting or stunting is a more 
+appropriate effect modifier to use.
+
+The effect modified impact on stunting and wasting were calulated in the same way as the standard 
+impacts. We first identified the subnational locations that would receive the higher and lower 
+effect sizes using this `SQLNS effect modification testing notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/5bd6e8845ea852129e1a977b47472c5da62a2400/data_prep/sqlns_subnational/sqlns_effect_modification_prep.ipynb>`_, and then used the same process as before
+to generate the wasting transition impacts.
+
+We again received data inputs from the team at UC Davis showing the prevalence ratio for each 
+category separated by high and low burden locations. This data is stored at :code:`J:\Project\simulation_science\ciff_malnutrition\Data\sqlns_effects\ipd_list request_20240620.xlsx`. 
+The trials included in this meta-analysis were identical to those included in the prior meta-analysis. 
+The new data here was the prevalence ratios separated by high and low burden regions. 
 
 
 Wasting
@@ -311,7 +329,12 @@ Notebooks that generated these values can be found here:
 
 - `Nutrition optimization implementation (9/23 update that uses wasting transition rates from Wave I of the nutrition optimization model) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/sqlns/Prevalence%20ratio%20nano%20sim%2C%20age-specific.ipynb>`_. Note that only incidence effects have been calculated for this project, as they are thought to be the primary route through which SQ-LNS affects child wasting, although we may revisit this assumption after more investigation into individual SQ-LNS trials that may provide guidance.
 
-- `Subnational optimization by location (5/29 update to have location specific values) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/386cf36f7dcd6073077dd8f663b17d0b740ef60f/data_prep/sqlns/sqlns_effect_size_generation_subnational.ipynb>`_. No changes in approach, this was an adjustment to run for many locations successfully only. 
+- `Subnational optimization by location (5/29 update to have location specific values) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/386cf36f7dcd6073077dd8f663b17d0b740ef60f/data_prep/sqlns/sqlns_effect_size_generation_subnational.ipynb>`_. No changes in approach, this was an adjustment to run for many locations successfully only.
+
+.. todo::
+
+  Add the effect modified notebook and csv files when completed for the wasting transition rates.
+
 
 Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic wasting transition model document <2021_risk_exposure_wasting_state_exposure>`. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure. 
 
@@ -399,15 +422,30 @@ Additionally, as suggested by the observed prevalence ratios from the meta-analy
 
   * - Outcome
     - Effect size measure
+    - Sensitivity analysis 
     - Effect size
     - Note
   * - Moderate (cat2) stunting exposure
     - Prevalence ratio
+    - Standard effects
     - 0.89 (0.86, 0.93), lognormal distribution of uncertainty
+    - 
+  * - Moderate (cat2) stunting exposure
+    - Prevalence ratio
+    - Modified effects
+    - 0.83 (0.78, 0.89) in high burden areas, lognormal distribution of uncertainty
+      0.87 (0.77, 0.98) in low burden areas, lognormal distribution of uncertainty
     - 
   * - Severe (cat1) stunting exposure
     - Prevalence ratio
+    - Standard effects
     - 0.83 (0.78, 0.90), lognormal distribution of uncertainty
+    - 
+  * - Severe (cat1) stunting exposure
+    - Prevalence ratio
+    - Modified effects
+    - 0.78 (0.65, 0.93) in high burden areas, lognormal distribution of uncertainty
+      0.92 (0.83, 1.02) in low burden areas, lognormal distribution of uncertainty
     - 
 
 .. image:: viviarium_strategy_stunting.svg
