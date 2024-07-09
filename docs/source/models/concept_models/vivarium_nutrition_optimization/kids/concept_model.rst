@@ -1747,7 +1747,7 @@ Wave III
   * - 14.2
     - * Verify subnational SQ-LNS effects
       * Verify subnational SQ-LNS prevalence ratio 
-    - * 
+    - * All countries are within expected uncertainty for the wasting and stunting prevalence ratios. The individual effects on wasting transition rates are less clearly able to pass V&V, but there are limitations in the anlaysis. We do not have a national, 2021 artifact to compare against for Pakistan and Nigeria. The rates appear to be reasonable and since the next run is a subnational run where we will again check the SQ-LNS effects, I think it is best to move on. `Model 14.2 SQ-LNS effect V&V <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/69960042fc0209b1e2fdebb69d67c0631425115b/verification_and_validation/child_model/model_14.2_sqlns_effects.ipynb>`_. 
   * - 15.0
     - * Verify SQ-LNS is correctly targeted based on subnational location
       * Verify stunting, wasting vary with SQ-LNS exposure and with effect modification
