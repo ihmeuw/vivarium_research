@@ -692,6 +692,11 @@ Wave III:
     - 1
     - 1 for target group; 0 for others
     - 1 for target group; 0 for others
+  * - Baseline
+    - 18: Baseline with SQ-LNS
+    - Baseline
+    - Baseline
+    - 1
 
 Where:
 
@@ -1561,20 +1566,20 @@ Wave III
     - 
   * - 15.0
     - Testing SQ-LNS effect modification and targeting 
-    - Baseline and MMS
-    - Baseline, (SAM + Targeted MAM + SQLNS), (SAM + Targeted MAM)
-    - A single subnational location, with SQ-LNS standard and effect modified
-    - Universal and Targeted SQ-LNS only with standard and modified effects for SQ-LNS
+    - Baseline and MMS+BEP
+    - Baseline, 18 (Baseline with SQ-LNS); 13 (SAM + Targeted MAM), and 15 (SAM + Targeted MAM + SQLNS) 
+    - Punjab (ID 53620), 5 draws, 5 seeds 
+    - For all SQ-LNS containing scenarios, include standard and modified effects
   * - 16.0
     - Small run for emulator design
-    - Baseline and MMS
-    - Baseline, (SAM + Targeted MAM + SQLNS), (SAM + Targeted MAM)
+    - Baseline and MMS+BEP
+    - Baseline, 18 (Baseline with SQ-LNS); 13 (SAM + Targeted MAM), and 15 (SAM + Targeted MAM + SQLNS) 
     - Pakistan only, individual subnational runs, 5 draws, 5 seeds
     - Includes both standard and effect modified SQ-LNS
   * - 17.0
     - Production runs for targeted SQ-LNS
-    - Baseline and MMS
-    - Baseline, (SAM + Targeted MAM + SQLNS), (SAM + Targeted MAM)
+    - Baseline and MMS+BEP
+    - Baseline, 18 (Baseline with SQ-LNS); 13 (SAM + Targeted MAM), and 15 (SAM + Targeted MAM + SQLNS) 
     - Individual subnational runs, 20 draws, 20 seeds
     - Includes both standard and effect modified SQ-LNS
   * - 18.0
