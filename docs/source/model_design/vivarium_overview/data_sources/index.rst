@@ -159,15 +159,17 @@ Overview of :code:`vivarium_inputs`
 
 Some important notes and considerations not included in the documentation above are listed below:
 
-.. todo::
-   
-   List default behavior of get_measures/other functions once the GBD 2021 update is finalized, including things like:
+   - All data returned is filtered to 500 draws (draw 0 through 499), even if more draws are available
+   - Returns data for all most-detailed age groups and sexes - if any such data is missing in GBD, NaNs will be filled with zeros
+   - Returns *default* version IDs within GBD system
+   - Returns data specific to most recent *published* year unless user specifies to return all available years 
 
-   - Returning most recent available year - note potential exception with risk effects?
-   - Filtering of draws (reduction of 1,000 COD draws down to 500 that are present in COMO)?
-   - Returning all ages/sexes and filling NANs with zeros
-   - Version ID behavior with GBD 2021? 
-   - Anything else?
+      - Note: will return data specific to 2021 for GBD 2021, despite estimates being available for 2022 because the 2022 year was not published as part of GBD 2021
+      - Note: for non-log-linear relative risks, GBD returns data for a single year only. In these cases, vivarium inputs will return that data and label it as 2021 data (even if GBD does not claim it to be specific to 2021 - notably, however, relative risks in GBD do not vary by year)
+
+.. note::
+
+   The above notes and considerations were written in May of 2024. Updates to vivarium inputs may affect these notes and they should be updated accordingly.
 
 .. list-table:: Notable default behavior of get_measures
    :header-rows: 1
