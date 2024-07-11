@@ -311,6 +311,11 @@ category separated by high and low burden locations. This data is stored at :cod
 The trials included in this meta-analysis were identical to those included in the prior meta-analysis. 
 The new data here was the prevalence ratios separated by high and low burden regions. 
 
+In generating the wasting transition data from the prevalence ratios, we encountered a few limitations: 
+
+- The upper bound of the prevalence ratio for low burden regions was greater than 1. This would imply that SQ-LNS has a negative impact. For our model, we set the upper limit to be exactly 1, indicating no impact. 
+- For the lower bounds, sometimes the limits were lower than could be acheived in our nanosim. In these cases, we do not hit the prevalence ratio at 10 months. We reach the prevalence ratio later, or in some cases approach it without fully acheiving it. We believe this is a reasonable limitation.
+
 
 Wasting
 ~~~~~~~
@@ -331,10 +336,7 @@ Notebooks that generated these values can be found here:
 
 - `Subnational optimization by location (5/29 update to have location specific values) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/386cf36f7dcd6073077dd8f663b17d0b740ef60f/data_prep/sqlns/sqlns_effect_size_generation_subnational.ipynb>`_. No changes in approach, this was an adjustment to run for many locations successfully only.
 
-.. todo::
-
-  Add the effect modified notebook and csv files when completed for the wasting transition rates.
-
+- `Subnational optimization with effect modification <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8718562f3419a10c03106ef7d45b28c7a9a65833/data_prep/sqlns/sqlns_effect_size_generation_subnational.ipynb>`_. This includes the new effect modification for all locations. The `data used in the model <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8718562f3419a10c03106ef7d45b28c7a9a65833/data_prep/sqlns/modified_and_standard_subnational_sqlns_effects_v1.csv>`_. 
 
 Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic wasting transition model document <2021_risk_exposure_wasting_state_exposure>`. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure. 
 
