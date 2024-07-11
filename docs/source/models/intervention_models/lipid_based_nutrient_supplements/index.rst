@@ -313,7 +313,7 @@ The new data here was the prevalence ratios separated by high and low burden reg
 
 In generating the wasting transition data from the prevalence ratios, we encountered a few limitations: 
 
-- The upper bound of the prevalence ratio for low burden regions was greater than 1. This would imply that SQ-LNS has a negative impact. For our model, we set the upper limit to be exactly 1, indicating no impact. 
+- The upper bound of the prevalence ratio for low burden regions was greater than 1. This would imply that SQ-LNS has a negative impact. For our model, we set the upper limit to be exactly 1, indicating no impact. This is implemented in cell [2] of the effect generation notebook, in the line `validation_targets_ucl_low_burden = [1.0, 1.0, 1.0, 1.01]`.
 - For the lower bounds, sometimes the limits were lower than could be acheived in our nanosim. In these cases, we do not hit the prevalence ratio at 10 months. We reach the prevalence ratio later, or in some cases approach it without fully acheiving it. We believe this is a reasonable limitation.
 
 
