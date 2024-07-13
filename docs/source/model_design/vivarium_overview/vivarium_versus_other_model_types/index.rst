@@ -227,62 +227,94 @@ draws from Bayesian-derived joint posterior distributions.
 Simulant agency
 +++++++++++++++
 
-Unlike agent-based models, microsimulations do not necessarily program agency into individual simulants. This removes some of the real-world likeness of these models...
+Unlike agent-based models, microsimulations do not necessarily program agency into individual simulants. This removes some of the real-world likeness of these models in favor 
+of reflecting realistic population-level dynamics that would be more difficult to program in agency-based simulation. The Vivarium simulations that might be described as having 
+the most simulant agency would be our microsimulation of the entire US population, which you can read more about :ref:`here <vivarium_census_prl_synth_data>`_, as well as
+our simulation of cardiovascular disease, which you can read more about `here <_2019_cause_ihd>`_. In the prior simulation, simulants are programmed with propensities to migrate into and out of the 
+country, change addresses and employment, have babies, and more. In the latter, simulants are initiated into the population with different adherence rates to medications and likelihoods of discontinuing
+said medications - in turn, this affects their level of risk for moving to a worsened state.
 
-.. todo:: 
-  
-  - The Vivarium simulation with the most simulant agency is our synthetic population simulation for PRL. [explain how in 1 sentence]
-  - HPVsim (along with others in Starsim series) provides example of agent-based simulation (eg different simulants have different sexual patterns leading to different risks)
-  - Cite definition of agent-based simulation 
-  - Describe CVD's use of simulants with different adherence rates to medications and likelihoods of discontinuation. And this in turn affects their risks.
+HPVsim, part of the Starsim series, provides an example of an agent-based simulation where individual simulants exhibit different sexual behaviors, leading to varied risk profiles for HPV and its related 
+conditions. This highlights the core principle of agent-based models, where individual entities (i.e., agents) have distinct characteristics and decision-making capabilities that influence their 
+interactions and outcomes within the simulation environment. Read more about HPVsim `here <https://www.medrxiv.org/content/10.1101/2023.02.01.23285356v1>`_.
 
 
 Reducing variance between scenarios
 +++++++++++++++++++++++++++++++++++
 
-Like other microsimulation frameworks [[add example and citation]], Vivarium utilizes randomly generated numbers to incorporate stochastic uncertainty into our simulations. 
+Like other microsimulation frameworks such as the Starsim series, Vivarium utilizes randomly generated numbers to incorporate stochastic uncertainty into our simulations. 
 However, unlike most other microsimulation frameworks, the IHME microsimulation platform additionally reduces variance between scenarios by appropriately controlling 
 stochastic uncertainty through a common-random-numbers approach. In this procedure, for each simulant, the same randomly generated number is used in both baseline and 
 intervention scenarios to dictate change or maintenance of health status across time steps. The only difference between scenarios, then, is the presence or absence of 
 health interventions.
 
-.. todo:: 
-  
-  Example of microsim that uses random numbers but not common random numbers? 
-
 
 Computational needs
 +++++++++++++++++++
 
-To date, all Vivarium simulations require a super-computer (such as a high-performance cluster) to run. [[refer to previous section on details]] Other microsimulation frameworks may have prioritized computational ease, such as starsim...  
+To date, all vivarium simulations require supercomputers or high-performance clusters due to their complexity and computational demands. In contrast, frameworks such as the Starsim series focus on 
+computational ease. HPVsim, for example, utilizes features that improve computational efficiency and accessibility, allowing simulations to run on a wider range of computing resources, from personal 
+computers to cloud-based and HPC systems. Key features of HPVsim include: 
 
-.. todo:: 
-  
-    Elaborate on HPVsim's inclusion of ways to run simulations in parallel: 
-    - the “MultiSim” class for running, summarizing, and plotting an arbitrary collection of simulations; the “Scenario” class for running, summarizing, and plotting a collection of simulations that specifically differ according to their input parameters, including interventions; the “Sweep” class for running 2+ dimensional sweeps over parameter values and producing automated heatmaps of the resulting outcomes of interest. 
-    - All of these can be used on personal computers to run a small number of simulations in parallel, or to run very large numbers of simulations on cloudbased or HPC computing resources
+- The “MultiSim” class for managing and analyzing multiple simulations.
+- The “Scenario” class for comparing simulations with varying input parameters, including different interventions.
+- The “Sweep” class for conducting parameter sweeps and generating heatmaps of outcomes.
+
+These features enable parallel runs of simulations, making it feasible to conduct both small and large-scale simulations without requiring supercomputing resources. Read more about HPVsim
+`here <https://www.medrxiv.org/content/10.1101/2023.02.01.23285356v1>`_.
 
 
 Type of event simulation
 ++++++++++++++++++++++++
 
-The way simulants undergo events (i.e., move from one state to another) can be recorded in different ways, depending on microsimulation methods. These divergent methods are referred to as discrete time simulation (simulants progress at fixed time increments, and it is recorded if they experienced an event) and discrete event simulation (simulants
+The way simulants undergo events (i.e.ove from one state to another) can be recorded in different ways, depending on microsimulation methods. These divergent methods are referred 
+to as discrete time simulation (simulants progress at fixed time increments, and it is recorded if they experienced an event) and discrete event simulation (simulants
 move from event to event based on sampled timing of those events occuring). There are advantages and disadvantages related to each of these disparate methods of event simulation,
 which we elaborate upon below. 
 
 
-.. todo:: 
+Discrete time simulation
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Discrete time simulation (continuous event): e.g. Vivarium (https://vivarium-research.readthedocs.io/en/latest/model_design/designing_vivarium_model/choosing_appropriate_time_step/index.html?highlight=choosing%20an%20appropriate#choosing-an-appropriate-time-step) 
-    
-  - Advantages: results in the same distribution as with discrete event 
-  - Disadvantages: staying in each state for the same amount of time, less computationally efficient
-  - Note that we have been discussing updating these methods and switching to discrete event with a global clock
+Currently, Vivarium runs in discrete time increments, and at each time step, it is determined whether simulants experience one or more events. Discrete time simulation 
+can also be thought of as continuous event simulation. Advantages associated with this type of event simulation include: 
   
-  Discrete event simulation (continuous time): e.g. Starsim https://www.ncbi.nlm.nih.gov/books/NBK293948/#:~:text=Discrete%20event%20simulation%20(DES)%20is,life%20process%2C%20facility%20or%20system. 
+- Discrete time simulation can produce results that are statistically equivalent to those generated by discrete event simulation, assuming appropriate handling of time steps and event probabilities. 
+- Can be simpler to implement for scenarios where time steps align closely with the natural progression of events or states.
 
-  - Advantages: can use rates to determine varying amounts of time in different states (e.g. in rainy for longer than in cloudy, due to statistical probability). More computationally efficient
-  - Disadvantages: Need to know the maximum rate (or, if you have multiple states that you could go to, the sum of all the rates) in order to get a valid probability distribution In non-sink states (e.g., mortality is a sink state)
+There are, however, some disadvantages associated with discrete time simulation, such as: 
+
+- All simulants stay in each state for the same amount of time, which may not accurately reflect the variability seen in real-world scenarios.
+- Can be less computationally efficient compared to discrete event simulation, especially for large-scale models, because it requires evaluating the state of all simulants at each time step,
+regardless of whether events occur. 
+
+To read more about how we select the length of time steps in our simulations, please see `_vivarium_best_practices_time_steps`_.
+
+
+Discrete event simulation 
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On the other hand, discrete event simulation allows simulants to move from event to event, with the timing of these events determined by sampling from probability distributions. For this reason,
+discrete event simulation is synonymous with continuous time simulation; and could also be thought of as using a global clock. For an example of a microsimulation that uses discrete event simulation, 
+see the `Starsim series <https://www.ncbi.nlm.nih.gov/books/NBK293948/#:~:text=Discrete%20event%20simulation%20(DES)%20is,life%20process%2C%20facility%20or%20system>`_. As with discrete time simulation,
+there are some advantages and disadvantages associated with this type of event simulation.
+
+Advantages include: 
+
+- Can more accurately model the variability in time that simulants spend in different states, as the timing of transiitons is based on sampled events rather than fixed intervals. 
+- Can be more computationally efficient for many scenarios, as computations are only performed when events occur, rather than at every time step. This efficiency can be particularly significant
+in models where events are infrequent relative to the chosen time step in a discrete time simulation. 
+
+Disadvantages include:
+
+- Requires knowledge of the maximum rate or the sum of all rates leading out of a state to calculate valid transition probability. This can complicate model setup, especially in models with complex state
+transition dynamics.
+- Managing and debugging the event queue (which tracks the order and timing of future events) can be more complex than the relatively straightforward time-stepping approach in discrete time simulation. 
+
+Overall, the choice between discrete time and discrete event simulation depends on the specific requirements and constraints of the model being developed. Discrete event simulation offers advantages in
+terms of computational efficiency and realistic modeling of state durations but comes with increased complexity in model design and implementation. Conversely, discrete time simulation may be easier to
+implement and understand but can be less efficient and less flexible in representing variable state durations. As such, our team has had an ongoing discussion regarding updating Vivarium methods from 
+discrete time to discrete event simulation as we continue to seek more accurate and efficient ways to model complex systems.
 
 Calibration
 +++++++++++
@@ -322,3 +354,4 @@ References
 
 .. todo:: 
   Add citation to Vivarium Technical Document 2019
+  Add citations to all the other microsims compared to vivarium (e.g. https://www.medrxiv.org/content/10.1101/2023.02.01.23285356v1)
