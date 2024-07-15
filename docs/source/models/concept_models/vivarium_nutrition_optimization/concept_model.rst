@@ -487,9 +487,11 @@ As of 10/16/2023:
 
     - `Overall (not age specific) values for prevalence of low BMI given hemoglobin below 10 g/dL available here for use in the child simulation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10_age_weighted.csv>`_
 
-- Child growth failure accessory data (wasting transitions and correlated underweight exposure distributions) calculated by the research team (blocked by 2021 cause data artifact keys)
+- Wasting transition rate data 
 
-- Location-specific SQ-LNS effect sizes (blocked by 2021 child growth failure accessory data)
+  - `Ethiopia 2021 wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2021_wasting_transitions_1.csv>`_
+
+- `Location-specific SQ-LNS effect sizes <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/sqlns/2021_sqlns_effects_by_location.csv>`_
 
 .. _nutritionoptimization5.0:
 

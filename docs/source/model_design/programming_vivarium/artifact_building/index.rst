@@ -114,6 +114,33 @@ path to each data input is stored in the :code:`constants/paths.py` file. If you
 data input, update the reference in the :code:`constants/paths.py` file to ensure you're
 pulling the most up to date information.
 
+Making Subnational Data
+-----------------------
+
+You can also make artifact data files that contain subnational data. These 
+files have all of the subnational data for a specific national geography 
+contained in a single file. For example, if you ran this in the US, you would 
+get data files with a new column called "location" 
+which would contain the subnational locations like "Alabama" or "Alaska". Different 
+national locations will continue to be stored in different files (e.g., 
+US and Canada would be different files, each with a "location" column that 
+included the states/provinces).
+
+Currently, the basic setup of Vivarium will make a subnational artifact, so 
+no additional steps are needed. However, usually there will be some data keys 
+that will need to pull national data, even if most data is subnational. For 
+example, relative risks don't vary by location, or the duration of an 
+illness might be the same for all locations. In these cases, the data 
+keys which should remain national are contained in a list called 
+:code:`NATIONAL_LEVEL_DATA_KEYS` at the top of the :code:`data/loader.py` 
+file.
+
+Also be sure to check any functions that combine subnational and 
+national data. For example, prevalence rates are sometimes calculated 
+based on duration (a national data key) and incidence (a subnational 
+data key). These functions will likely require extra attention to 
+ensure they are pulling and providing the data needed. 
+
 Other Input Data
 ----------------
 
@@ -167,12 +194,13 @@ below with an explanation for each flag.
 .. code-block:: bash 
   :linenos:
 
-  $ make_artifacts -vvv --pdb -o /mnt/team/simulation_science/pub/models/<PROJCET_NAME>/artifacts/<MODEL_NUMBER>/ -l '<LOCATION>' -a
+  $ make_artifacts -vvv --pdb -o /mnt/team/simulation_science/pub/models/<PROJCET_NAME>/artifacts/<MODEL_NUMBER>/ --national -l '<LOCATION>' -a
 
 Flags: 
   - -vvv is for the verbosity, the vvv is standard on the team
   - --pdb has you reach the python debugger if there are any errors
   - -o is where to put the output artifact
+  - --national tells vivarium to run the artifact nationally instead of subnationally. Remove this flag to run the artifact for subnational locations. 
   - -l is the location to make the artifact for. The location must be included in the :code:`constants/metadata.py` file in order to be called here.
   - -a is for append, this means the program will check for existing data keys and only run the keys that are not currently present
 

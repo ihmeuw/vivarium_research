@@ -26,6 +26,7 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
+.. sectnum::
 
 .. _sex_gender:
 
@@ -33,8 +34,13 @@
 Inclusive Health Metrics: Sex and gender
 ========================================
 
-1.0 Overview
-++++++++++++
+.. contents::
+   :depth: 2
+   :local:
+   :backlinks: none
+
+Overview
++++++++++
 
 On this page you will find our guiding principles,
 an introduction to sex and gender from a scientific perspective,
@@ -64,8 +70,8 @@ on our `feedback form <https://docs.google.com/forms/d/e/1FAIpQLSeCED9TFQsH-1u4Q
      - Gender neutral. We recognize that there are a variety of reasons why it is important to use person-first, inclusive language that does not invisibilize women in our conversations about public health. 
 
 
-1.1 Guiding Principles
-----------------------
+Guiding Principles
+------------------
 
 Our guiding principles for this document can be summarized in three points:  
 
@@ -134,8 +140,8 @@ journey, this guide is intended to be a clear, helpful resource.
 We’re not going to put any words into other people’s mouths, but we will use our own voice to do 
 the work and use the terms we find most accurate and inclusive.
 
-1.2 Introduction to sex and gender
-----------------------------------
+Introduction to sex and gender
+------------------------------
 
 Most human fetuses have either two X chromosomes or one X and one Y chromosome.
 A fetus' configuration of X and Y chromosomes influences a number of aspects of development,
@@ -202,8 +208,8 @@ However, this understanding of sex and gender as an intertwined collection
 of factors spanning biology, psychology, and sociology is the foundation
 upon which we build in this guide.
 
-1.3 Glossary of General Terminology
------------------------------------
+Glossary of General Terminology
+-------------------------------
 In this section, you will find a glossary of general terminology that will be used 
 throughout this style guide. 
 
@@ -255,8 +261,8 @@ throughout this style guide.
        non-conforming identities.
 
 
-1.4 The Politics of Language
-----------------------------
+The Politics of Language
+------------------------
 The language we choose to use is inherently political and we are aware of that fact. 
 This guide asserts that gender inclusive language is important and pushes for its 
 wider use in public health research and dissemination. In doing so, we hope to 
@@ -286,8 +292,8 @@ As stated in [Rioux_2022]_ "as this becomes the norm, cis
 women-related terms and language inclusive of gender diversity will be able to 
 better coexist" and they can both be applied more precisely. 
 
-2.0 Research question
-+++++++++++++++++++++
+Research question
++++++++++++++++++
 
 As much as possible, our research should be precise about the variables of interest.
 For example, if we are modeling pregnancy, the variable we are interested in is the
@@ -302,8 +308,8 @@ In some cases, even this may not be clear, for example if we are researching an
 association that could be mediated by any facet of sex or gender (or multiple),
 which would mean that all sex- and gender-related factors are variables of interest.
 
-2.1 Research considerations
----------------------------
+Research considerations
+-----------------------
 
 Before beginning with your research, there are some crucial considerations to take as you read through
 our recommendations. 
@@ -311,7 +317,7 @@ our recommendations.
 First, understanding your audience is key - both in terms of who will be reading your study, and the population 
 your research affects or studies. For instance, if your work addresses global health, the cultural and 
 geographical nuances of sex and gender may differ significantly from those in U.S. health contexts. 
-Moreover, as covered in our section `1.4 The Politics of Language`_, if your research is focused on a specific subset
+Moreover, as covered in our section `The Politics of Language`_, if your research is focused on a specific subset
 of health sciences, such as maternal or pregnancy-related health, you should be attuned to the political implications 
 of sex and gender within your field.
 
@@ -327,8 +333,8 @@ Taking these considerations into account before implementing the guide's recomme
 your research is not only respectful and sensitive to the complexities of sex and gender but also adherent to 
 relevant guidelines and meaningful to your intended audience.
 
-2.2 Proxy measures
-------------------
+Proxy measures
+--------------
 
 When defining your research question, you might have to use proxy measures (e.g., due to a lack of availability of primary data - more
 on this in Section 3.1 Data collection below.) 
@@ -353,11 +359,11 @@ and intersex people.
 We should always weigh these harms against the potential benefits of the research
 before deciding to use a proxy measure.
 
-3.0 Methodology
-+++++++++++++++
+Methodology
++++++++++++
 
-3.1 Data collection
--------------------
+Data collection
+---------------
 
 Our research doesn't generally involve primary data collection.
 Therefore, the *input* data to our modeling process is almost always
@@ -378,8 +384,8 @@ both how to use the variables reported in our analysis, and how to acknowledge
 the limitations introduced to our research by these issues in our
 research outputs (presentations, reports, etc). 
 
-3.1.1 Sex and gender variables in upstream research 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sex and gender variables in upstream research 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **We should not take the names of sex or gender variables in input data at
 face value.**
@@ -406,8 +412,8 @@ unless there are clear signs of effort to construct a valid sex/gender measure.
 Unfortunately, given current research practices, it is most common that a single binary variable
 labeled either "gender" or "sex" actually represents a non-differentiated sex/gender measure.
 
-3.1.2 Measurement error
-~~~~~~~~~~~~~~~~~~~~~~~
+Measurement error
+~~~~~~~~~~~~~~~~~
 
 In the evaluation of sex and/or gender as a variable in an epidemiologic study, error in
 the measurement of these variables can lead to bias in study results. Measurement error
@@ -438,8 +444,8 @@ minimize bias in study results. When we are using data published by others, it i
 to consider how results may be affected by potential measurement error and discuss any
 relevant limitations accordingly.
 
-3.1.3 Terminology
-~~~~~~~~~~~~~~~~~
+Terminology
+~~~~~~~~~~~
 
 When we determine that a variable in an input data source reflects something different
 than the name it was given by the upstream researchers, we should use the more
@@ -475,11 +481,11 @@ In the NHANES example, the full first sentence of the above quote was:
   interviewer if they hadn't already assumed the gender of the respondent, and could be
   interpreted as asking about biological sex.
 
-3.2 Data Analysis
------------------
+Data Analysis
+-------------
 
-3.2.1 Global Burden of Disease (GBD)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Global Burden of Disease (GBD)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The GBD study is very complex and has many different data sources. Here, 
 we provide a general overview of how the Demographics team works with the "sex" 
@@ -514,11 +520,11 @@ These methods contain a few limitations:
 
 More information on the methods can be found in the `demographics methods appendix <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30977-6/fulltext#supplementaryMaterial>`_
 
-4.0 Results
-+++++++++++
+Results
++++++++
 
-4.1 Goals when Reporting Results
---------------------------------
+Goals when Reporting Results
+----------------------------
 
 When we present our findings, we have two primary goals:
 
@@ -536,8 +542,8 @@ When we present our findings, we have two primary goals:
   Furthermore, drawing attention to the problems with how almost every data source currently
   captures sex and/or gender raises awareness that changes need to be made in primary data collection.
 
-4.2 Strategy
-------------
+Strategy
+--------
 
 We often need to be very concise, and can't surface all the complexity
 of sex and gender every time we reference them. So, we take the following
@@ -570,8 +576,8 @@ acronyms from the main text), so we follow that convention with our sex and gend
 
 The following sections give more concrete recommendations for each part of results reporting.
 
-4.3 Detailed description
-------------------------
+Detailed description
+--------------------
 
 The detailed description of our methods regarding sex and gender can be centralized
 in one place, or spread throughout the paper or report.
@@ -586,7 +592,7 @@ Here are a few suggestions for the detailed description:
 * If we can, cite some of the research that is cited in this guide!
   This gives curious readers a starting point to learn more,
   and gives credit to the researchers whose ideas we are building on.
-  See the `6.0 Recommended Resources`_ section below.
+  See the `Recommended Resources`_ section below.
 * If we are not able to present quantitative results for SGM
   populations, but have reason to believe that (any of) these
   populations are especially impacted by the health issues we are studying,
@@ -596,8 +602,8 @@ Here are a few suggestions for the detailed description:
   since there are well-documented disparities across various outcomes and healthcare access
   for e.g. transgender people. [Brown_2016]_ [Baker_2019]_ [Grant_2011]_
 
-4.3.1 Example 1: Pregnancy
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Example 1: Pregnancy
+~~~~~~~~~~~~~~~~~~~~
 
 Let's consider the example of reporting a result about pregnancy.
 In this case, while gender-related factors could play a role in e.g. pregnancy outcomes,
@@ -630,8 +636,8 @@ In this case, we might say:
   To address these limitations, data would need to be collected using more robust measures
   of sex- and gender-related factors. [Bauer_2017]_ [Nielsen_2021]_ [ABS_2021]_ [National_Academies_2022]_
 
-4.3.2 Example 2: Descriptive epidemiology
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Example 2: Descriptive epidemiology
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In the previous example, we were able to define our variables of interest pretty precisely,
 even if our data sources didn't measure them.
@@ -665,8 +671,8 @@ we might say:
   of sex- and gender-related factors. [Bauer_2017]_ [Nielsen_2021]_ [ABS_2021]_ [National_Academies_2022]_
 
 
-4.4 Result indicator definition
--------------------------------
+Result indicator definition
+---------------------------
 
 In *each* stand-alone document (paper, table, figure, etc) where we present results
 that relate to sex and/or gender,
@@ -697,8 +703,8 @@ consider your resulting indicator to be undifferentiated sex/gender.
 
 .. image:: bliss_data_sources_fig_2.png
 
-4.5 Result indicator abbreviation
----------------------------------
+Result indicator abbreviation
+-----------------------------
 
 Frequently we will report many results related to sex and gender,
 and we can't repeat our definition every time we do so.
@@ -719,7 +725,7 @@ are:
 
 Again, these guidelines should be taken on a case-by-case basis, and there will certainly
 be exceptions to these rules, depending on context. For example, in the above section
-`4.5 Result indicator abbreviation`_, we provided an example where a researcher has two
+`Result indicator abbreviation`_, we provided an example where a researcher has two
 data sources which report 'sex'. One source defines 'sex' as sex assigned at birth, and the 
 other defines 'sex' as self-reported sex. Depending on how central the differences between these 
 dimensions are to your research, it may be sufficient to refer to these collectively as 
@@ -728,8 +734,8 @@ reporting, having any data source specify which dimension of sex was measured ca
 This demonstrates how improving our data reporting standards will allow researchers to more 
 easily use language that accurately reflects the dimensions of sex and gender within their work [Rioux_2022].
 
-4.5.1 Example 1: Pregnancy
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Example 1: Pregnancy
+~~~~~~~~~~~~~~~~~~~~
 
 .. todo::
 
@@ -742,8 +748,8 @@ easily use language that accurately reflects the dimensions of sex and gender wi
 
   ... the fertility rate was 14 per 1,000 person-years among proxy WBPRA ...
 
-4.5.2 Example 2: Descriptive epidemiology
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Example 2: Descriptive epidemiology
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Continuing the "descriptive epidemiology" example from above,
 this is a common case where our resulting indicator is
@@ -778,15 +784,15 @@ that these are defined terms:
   ... we estimate that prevalence was 7.8% among Male people, as defined previously...
   ... we estimate that prevalence was 4.5% among Female people...
 
-5.0 BLISS in Action 
-+++++++++++++++++++
+BLISS in Action 
++++++++++++++++
 
 Our team has been able to implement these BLISS guidelines in our own work. 
 Here we chronicle guides, papers and presentations that include BLISS best 
 practices, as well as some lessons learned. 
 
-5.1 Examples of Our Work with BLISS
------------------------------------
+Examples of Our Work with BLISS
+-------------------------------
 
 #. A `BLISS guide for Topics Concerning Pregnancy <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B3E09642A-1A84-4D63-8690-EDA98E611295%7D&file=202204_Gender%20Neutral%20Language%20for%20Topics%20concerning%20Pregnancy.docx&action=default&mobileredirect=true>`_. This includes recommendations on gender inclusive language that can be used for topics of pregnancy and child birth. 
 #. A presentation about IV iron at the `Institute of Disease Modeling symposium <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B141E4585-6A1B-414C-8DDE-2F075FEB1667%7D&file=20230501_IDM_Symposium_DRAFT_v0.2.pptx&action=edit&mobileredirect=true>`_. This presentation included many of the terms from our pregnancy guide implemented in practice.
@@ -794,8 +800,8 @@ practices, as well as some lessons learned.
 
 
 
-5.2 Lessons Learned
--------------------
+Lessons Learned
+---------------
 
 - Most people are willing and even enthusiastic about improving language to be more gender inclusive! 
 - Changing language requires an explanation. It is important to explain the new language, why it is important and what it means.
@@ -806,8 +812,8 @@ practices, as well as some lessons learned.
 
 .. image:: safe_space_icon.png
 
-6.0 Recommended Resources
-+++++++++++++++++++++++++
+Recommended Resources
++++++++++++++++++++++
 
 .. list-table:: **Recommended papers on sex and/or gender-related topics**
    :header-rows: 1
@@ -824,8 +830,8 @@ practices, as well as some lessons learned.
    * - How to build an inclusive survey questionnaire
      - *Transgender-inclusive measures of sex/gender for population surveys: Mixed-methods evaluation and recommendations* [Bauer_2017]_
 
-6.1 Other Gender-Inclusive Guides
----------------------------------
+Other Gender-Inclusive Guides
+-----------------------------
 
 - DEI Research Guide
 - Design team guidelines for discussing gender, sex, and sexuality
@@ -833,8 +839,8 @@ practices, as well as some lessons learned.
 - World Health Organization
 
 
-7.0 References
-++++++++++++++
+References
+++++++++++
 
 .. [VEHSS_DR] Lundeen EA, Burke-Conte Z, Rein DB, et al. Prevalence of Diabetic Retinopathy in the US in 2021. JAMA Ophthalmol. Published online June 15, 2023. doi:10.1001/jamaophthalmol.2023.2289, `online version <https://jamanetwork.com/journals/jamaophthalmology/fullarticle/2806093>`_
 
