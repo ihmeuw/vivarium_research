@@ -138,10 +138,11 @@ Time-varying rates dependent on multiple factors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Another complexity enabled by microsimulation is the inclusion of time-varying rates dependent on multiple factors. A good example of this is in our microsimulation of multiple myeloma, 
-which allowed relapse and mortality hazard rates to vary over time since treatment line initiation, in addition to being impacted by the line of treatment, demographic covariates, and treatment regimen. Read more about how we calculated these rates :ref:`here <calc_mortality_relapse_hazard>`.
+which allowed relapse and mortality hazard rates to vary over time since treatment line initiation, in addition to being impacted by the line of treatment, demographic covariates, and treatment regimen. 
+Read more about how we calculated these rates :ref:`here <calc_mortality_relapse_hazard>`.
 
 The figure below demonstrates how survival rates in multiple myeloma patients differ based on the time since treatment line initiation. This figure was produced by
-researchers at Amgen, Inc, and you can read the paper in which it was published `here <https://www.tandfonline.com/doi/full/10.1080/10428194.2020.1827253>`_. [Braunlin-MM-2020]_ 
+researchers at Amgen, Inc, and you can read the paper in which it was published `here <https://www.tandfonline.com/doi/full/10.1080/10428194.2020.1827253>`__. [Braunlin-MM-2020]_ 
 
 .. image:: MM_graph_time_varying_rates.jpg
 
@@ -163,7 +164,8 @@ Another example that illustrates this is our microsimulation of a full-scale Uni
 names, family members, addresses, employers, and other similar individual characteristics, and over time, they experience life events, such as migration, 
 employment change, and death. There are limitations in our model that are only visible at this level of detail, such as how we simulate household structure.
 For instance, in an earlier iteration of the simulation, it was possible for children (i.e., under 18 years old) to get married, stemming from a limitation in how we perturbed age with
-regard to relationship type. Fortunately, this limitation has since been resolved and our model was thereby improved! Again, such a limitation may well be present in a model that does not include individual output data, but because this information is aggregated, the limitation won't be surfaced and improved upon. 
+regard to relationship type. Fortunately, this limitation has since been resolved and our model was thereby improved! Again, such a limitation may well be present in a model that does not include 
+individual output data, but because this information is aggregated, the limitation won't be surfaced and improved upon. 
 Read more about this project :ref:`here <vivarium_census_prl_synth_data>`.
 
 
@@ -174,7 +176,8 @@ Resource requirements
 ~~~~~~~~~~~~~~~~~~~~~
 
 Our microsimulations typically require a substantial amount of computational resources to run. For example, our microsimulation of a full-scale
-United States population was made possible through the use of a high performance computing cluster and used 334 parallel runs, each requiring approximately 55 gigabytes of memory over a runtime of 21.5 hours.
+United States population was made possible through the use of a high performance computing cluster and used 334 parallel runs, each requiring approximately 55 gigabytes of memory over a runtime of 21.5 
+hours.
 
 The demanding resource needs of microsimulations may require we use a smaller simulant population (that can, post-simulation, be up-scaled to better reflect the 
 real-world target population), thus presenting limitations related to sample size and stochastic uncertainty. 
@@ -188,7 +191,8 @@ Obtaining these data can be challenging and time-consuming, and there may be pri
 what we on the Simulation Science team investigate in our microsimulations: accurately modeling the effects of health interventions at an individual-level likely requires access to medical 
 records, medication histories, and other highly personal information.  
 
-If we're not interested in the complexities described in the section above, then it is likely a less data- and resource-intensive alternative, such as a multiplication model, is a suitable modeling strategy.
+If we're not interested in the complexities described in the section above, then it is likely a less data- and resource-intensive alternative, such as a multiplication model, is a suitable modeling 
+strategy.
 
 Residual confounding
 ~~~~~~~~~~~~~~~~~~~~
@@ -210,9 +214,6 @@ How does Vivarium compare with other microsimulation tools?
 
 In this section, we will elaborate on what differentiates Vivarium, our team's microsimulation platform, from other methods of microsimulation and IBM. 
 
-.. todo::
-
-  Fill out the following sections under 'How does Vivarium compare with other microsimulation tools' subheading.
 
 Leveraging the Global Burden of Disease (GBD) Study
 +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -229,14 +230,14 @@ Simulant agency
 
 Unlike agent-based models, microsimulations do not necessarily program agency into individual simulants. This removes some of the real-world likeness of these models in favor 
 of reflecting realistic population-level dynamics that would be more difficult to program in agency-based simulation. The Vivarium simulations that might be described as having 
-the most simulant agency would be our microsimulation of the entire US population, which you can read more about :ref:`here <vivarium_census_prl_synth_data>`_, as well as
-our simulation of cardiovascular disease, which you can read more about `here <_2019_cause_ihd>`_. In the prior simulation, simulants are programmed with propensities to migrate into and out of the 
+the most simulant agency would be our microsimulation of the entire US population, which you can read more about at `<vivarium_census_prl_synth_data>`_, as well as
+our simulation of cardiovascular disease, which you can read more about at `<2019_cause_ihd>`_. In the prior simulation, simulants are programmed with propensities to migrate into and out of the 
 country, change addresses and employment, have babies, and more. In the latter, simulants are initiated into the population with different adherence rates to medications and likelihoods of discontinuing
 said medications - in turn, this affects their level of risk for moving to a worsened state.
 
 HPVsim, part of the Starsim series, provides an example of an agent-based simulation where individual simulants exhibit different sexual behaviors, leading to varied risk profiles for HPV and its related 
 conditions. This highlights the core principle of agent-based models, where individual entities (i.e., agents) have distinct characteristics and decision-making capabilities that influence their 
-interactions and outcomes within the simulation environment. Read more about HPVsim `here <https://www.medrxiv.org/content/10.1101/2023.02.01.23285356v1>`_.
+interactions and outcomes within the simulation environment. Read more about HPVsim `here <https://www.medrxiv.org/content/10.1101/2023.02.01.23285356v1>`__.
 
 
 Reducing variance between scenarios
@@ -261,7 +262,7 @@ computers to cloud-based and HPC systems. Key features of HPVsim include:
 - The “Sweep” class for conducting parameter sweeps and generating heatmaps of outcomes.
 
 These features enable parallel runs of simulations, making it feasible to conduct both small and large-scale simulations without requiring supercomputing resources. Read more about HPVsim
-`here <https://www.medrxiv.org/content/10.1101/2023.02.01.23285356v1>`_.
+`here <https://www.medrxiv.org/content/10.1101/2023.02.01.23285356v1>`__.
 
 
 Type of event simulation
@@ -282,13 +283,14 @@ can also be thought of as continuous event simulation. Advantages associated wit
 - Discrete time simulation can produce results that are statistically equivalent to those generated by discrete event simulation, assuming appropriate handling of time steps and event probabilities. 
 - Can be simpler to implement for scenarios where time steps align closely with the natural progression of events or states.
 
+
 There are, however, some disadvantages associated with discrete time simulation, such as: 
 
 - All simulants stay in each state for the same amount of time, which may not accurately reflect the variability seen in real-world scenarios.
-- Can be less computationally efficient compared to discrete event simulation, especially for large-scale models, because it requires evaluating the state of all simulants at each time step,
-regardless of whether events occur. 
+- Can be less computationally efficient compared to discrete event simulation, especially for large-scale models, because it requires evaluating the state of all simulants at each time step, regardless of whether events occur. 
 
-To read more about how we select the length of time steps in our simulations, please see `_vivarium_best_practices_time_steps`_.
+
+To read more about how we select the length of time steps in our simulations, please see `<vivarium_best_practices_time_steps>`_.
 
 
 Discrete event simulation 
@@ -302,14 +304,14 @@ there are some advantages and disadvantages associated with this type of event s
 Advantages include: 
 
 - Can more accurately model the variability in time that simulants spend in different states, as the timing of transiitons is based on sampled events rather than fixed intervals. 
-- Can be more computationally efficient for many scenarios, as computations are only performed when events occur, rather than at every time step. This efficiency can be particularly significant
-in models where events are infrequent relative to the chosen time step in a discrete time simulation. 
+- Can be more computationally efficient for many scenarios, as computations are only performed when events occur, rather than at every time step. This efficiency can be particularly significant in models where events are infrequent relative to the chosen time step in a discrete time simulation. 
+
 
 Disadvantages include:
 
-- Requires knowledge of the maximum rate or the sum of all rates leading out of a state to calculate valid transition probability. This can complicate model setup, especially in models with complex state
-transition dynamics.
+- Requires knowledge of the maximum rate or the sum of all rates leading out of a state to calculate valid transition probability. This can complicate model setup, especially in models with complex state transition dynamics.
 - Managing and debugging the event queue (which tracks the order and timing of future events) can be more complex than the relatively straightforward time-stepping approach in discrete time simulation. 
+
 
 Overall, the choice between discrete time and discrete event simulation depends on the specific requirements and constraints of the model being developed. Discrete event simulation offers advantages in
 terms of computational efficiency and realistic modeling of state durations but comes with increased complexity in model design and implementation. Conversely, discrete time simulation may be easier to
@@ -319,18 +321,30 @@ discrete time to discrete event simulation as we continue to seek more accurate 
 Calibration
 +++++++++++
 
-.. todo:: 
+Vivarium microsimulations are retrospectively assessed for quality through a process we refer to as verification and validation (or V&V). This process is crucial in ensuring our models match the 
+target values they were developed to replicate, and that our models are sensible and reflect trends in real-world data not used in model development. Target values come from input data (often from GBD
+estimates, but also other data sources) and typically include population age and sex/gender structure, risk factor exposures and effects, all-cause mortality rates, cause-specific parameters, 
+intervention coverages, and more. If any of these checks fail, we debug and go through the process again until model results behave as expected. To read more about our team's V&V process, see 
+`<vivarium_best_practices_results_processing>`_.
 
-    Describe how some microsimulations automatically fit to data as opposed to being retroactively checked against data like we do on SimSci with a separate V&V process. Read more about our V&V process
-    here [[insert link]]. Use example from another microsimulation that uses automatic fitting to data
+In contrast, the Framework for Reconstructing Epidemiological Dynamics (FRED) (an agent-based model) has a calibration process that is directly integrated into the simulation's runtime, 
+allowing the model to adjust its parameters dynamically to ensure a better fit with empirical data. Unlike the separate V&V process, where models are developed and then retrospectively compared and 
+adjusted based on data, FRED's integrated calibration allows for a more dynamic and responsive approach to fitting model outputs to real-world evidence. You can read more about FRED 
+`here <https://bmcpublichealth.biomedcentral.com/articles/10.1186/1471-2458-13-940>`__.
+
+.. note:: 
+
+  Although the authors of FRED do not explicitly name it as a microsimulation, they refer to it as an agent-based modeling system that represents every individual in a sepcific geographic region. 
+  Their use of a built-in calibration mechanism provides a useful contrast to the retrospective and iterative process utilized by Vivarium researchers.
 
 Correlation
 +++++++++++
 
-.. todo:: 
-
-    Describe how we overlay population-level statistics (e.g. GBD estimates) onto individuals rather than using individual-level data (e.g. hospital records) - can use CVD as an example of the latter.
-    Find example of another microsimulation outside of CVD that uses individual-level data for individual-based sim
+When developing a Vivarium simulation, we typically overlay population-level statistic generated through the GBD onto individual simulants, rather than using individual-level input data such 
+as hospital records or registry data. This approach involves taking broad, aggregated data and distributing its implications onto the simulated individuals to approximate their health status, risks, and 
+progression within the model's context. This modeling strategy is not ubiquitous across all public health microsimulations, nor even all Vivarium microsimulations. For instance, our aforementioned
+microsimulation of cardiovascular disease (`<2019_cause_ihd>`_) uses inpatient hospital and claims data to inform the burden of heart failure due to each of the underlying causes of heart failure. These
+data sources include vital registry data from Mexico, Brazil, Taiwan, Colombia, and the US; inpatient admissions from Friuli Venezia, Italy; and linked vital registry data from Friuli Venezia, Italy.
 
 References
 ----------
