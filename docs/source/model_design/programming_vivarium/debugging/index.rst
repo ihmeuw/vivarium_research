@@ -202,9 +202,9 @@ these types of errors earlier and be able to fix them. To do this, we
 recommend having a file, or Jupyter notebook open to run some basic 
 checks.
 
-While working in VS Code with the cluster set-up - information on 
-doing this can be found in the Onboarding Resources section of 
-Vivarium Research - you can run Jupyter notebooks while creating 
+While working in VS Code with the cluster set-up, `information on this can be found here <https://stash.ihme.washington.edu/projects/CCGUTS/repos/script_utils/browse/bin/submit_vscode_server.py>`_ on there 
+is more in depth information in the Onboarding Resources section of 
+Vivarium Research, you can run Jupyter notebooks while creating 
 the artifact from the command line. This will allow you to run active 
 checks on outputs as you create them. 
 
