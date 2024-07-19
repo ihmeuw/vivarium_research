@@ -1757,7 +1757,7 @@ Wave III
   * - 16.0
     - * Verify subnational results, SQ-LNS effects look as expected
       * Verify other model components look as expected
-    - 
+    - * Since this run used SQ-LNS age groups, we only checked SQ-LNS effects. Overall these looked good. A few locations had lower SQ-LNS effects than seen in UC Davis data. This was most notable in the transition rates RRs. We validated the scope of the problem with graphs comparing PRs. There were 1-2 locations outside the range for some wasting categories, but they are smaller locations and we think this is an acceptable limitation especially as the data from the UC Davis team had to be converted into wasting transition effects which sometimes were very extreme values. `Model 16 SQLNS effects <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/edf1952265f05095fe8efca28851a19d77ef9865/verification_and_validation/child_model/model_16.0_sqlns_effects.ipynb>`_. 
   * - 17.0
     - * Confirm that results for production runs match expected outputs
     - 
