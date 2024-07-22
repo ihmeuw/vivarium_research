@@ -233,7 +233,7 @@ of reflecting realistic population-level dynamics that would be more difficult t
 the most simulant agency would be our microsimulation of the entire US population, which you can read more about at `<vivarium_census_prl_synth_data>`_, as well as
 our simulation of cardiovascular disease, which you can read more about at `<2019_cause_ihd>`_. In the prior simulation, simulants are programmed with propensities to migrate into and out of the 
 country, change addresses and employment, have babies, and more. In the latter, simulants are initiated into the population with different adherence rates to medications and likelihoods of discontinuing
-said medications - in turn, this affects their level of risk for moving to a worsened state.
+said medications - in turn, this affects their level of risk for moving to a disease state.
 
 HPVsim, part of the Starsim series, provides an example of an agent-based simulation where individual simulants exhibit different sexual behaviors, leading to varied risk profiles for HPV and its related 
 conditions. This highlights the core principle of agent-based models, where individual entities (i.e., agents) have distinct characteristics and decision-making capabilities that influence their 
