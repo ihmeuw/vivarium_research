@@ -203,8 +203,7 @@ recommend having a file, or Jupyter notebook open to run some basic
 checks.
 
 Information on working in VS Code with the cluster `is available here <https://stash.ihme.washington.edu/projects/CCGUTS/repos/script_utils/browse/bin/submit_vscode_server.py>`_ and there 
-is more in-depth information in the Onboarding Resources section of 
-Vivarium Research, you can run Jupyter notebooks while creating 
+is more in-depth information in the `Onboarding Resources section of Vivarium Research <computing>`, you can run Jupyter notebooks while creating 
 the artifact from the command line. This will allow you to run active 
 checks on outputs as you create them. 
 
