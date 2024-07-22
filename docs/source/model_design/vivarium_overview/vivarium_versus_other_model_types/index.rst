@@ -268,7 +268,7 @@ These features enable parallel runs of simulations, making it feasible to conduc
 Type of event simulation
 ++++++++++++++++++++++++
 
-The way simulants undergo events (i.e.ove from one state to another) can be recorded in different ways, depending on microsimulation methods. These divergent methods are referred 
+The way simulants undergo events (i.e. move from one state to another) can be recorded in different ways, depending on microsimulation methods. These divergent methods are referred 
 to as discrete time simulation (simulants progress at fixed time increments, and it is recorded if they experienced an event) and discrete event simulation (simulants
 move from event to event based on sampled timing of those events occuring). There are advantages and disadvantages related to each of these disparate methods of event simulation,
 which we elaborate upon below. 
