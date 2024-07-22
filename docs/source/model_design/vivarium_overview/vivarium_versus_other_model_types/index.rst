@@ -303,7 +303,7 @@ there are some advantages and disadvantages associated with this type of event s
 
 Advantages include: 
 
-- Can more accurately model the variability in time that simulants spend in different states, as the timing of transiitons is based on sampled events rather than fixed intervals. 
+- Can more accurately model the variability in time that simulants spend in different states, as the timing of transitions is based on sampled events rather than fixed intervals. 
 - Can be more computationally efficient for many scenarios, as computations are only performed when events occur, rather than at every time step. This efficiency can be particularly significant in models where events are infrequent relative to the chosen time step in a discrete time simulation. 
 
 
