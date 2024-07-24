@@ -246,45 +246,65 @@ feasible based on the data present, it is also a reasonable approach.
 Communication of results
 ------------------------
 
-In this section we’ll discuss how health metric researchers can talk about health research related to race and ethnicity without stigmatizing, othering,
-or otherwise causing harm to historically marginalized racial and ethnic groups. It is important to be aware of how we talk about race and racism, 
-particularly in the field of health metrics sciences, our goal is often to uncover and scrutinize the underlying factors contributing to health disparities.
+In this section we’ll discuss how health metric researchers can talk about health research related to 
+race and ethnicity without stigmatizing, othering, or otherwise causing harm to historically marginalized 
+racial and ethnic groups. It is important to be aware of how we talk about race and racism, 
+particularly in the field of health metrics sciences, our goal is often to uncover and scrutinize the 
+underlying factors contributing to health disparities.
 
 One helpful framework for differentiating ways of communicating about race is that of *race-based research vs. race-conscious research* 
-(https://www.thelancet.com/article/S0140-6736(20)32076-6/fulltext). Race-based research, which is characterized by race essentialism, 
-the notion that race is a biological factor (rather than a sociopolitical construct). The practice of using race in this way has historically 
-been the norm in US health research, and causes harm for historically marginalized and minoritized groups, thereby exacerbating the very health 
-inequities their health research may be attempting to elucidate and alleviate. For examples of outdated race-based practices in medicine, and 
-their race-conscious alternatives, see Table 1 from Cerdena et al.’s 2020 paper (https://www.thelancet.com/article/S0140-6736(20)32076-6/fulltext#tbl1). 
-Race-conscious research, on the other hand, calls for a shift in focus from race to racism as a key determinant of illness and health.
+[Cerdena_2020]_. Race-based research, which is characterized 
+by race essentialism, the notion that race is a biological factor (rather than a sociopolitical construct). 
+The practice of using race in this way has historically been the norm in US health research, and causes harm for 
+historically marginalized and minoritized groups, thereby exacerbating the very health inequities their health 
+research may be attempting to elucidate and alleviate. For examples of outdated race-based practices in medicine, 
+and their race-conscious alternatives, see Table 1 from Cerdena et al.’s 2020 paper [Cerdena_2020]_. 
+Race-conscious research, on the other hand, calls for a shift in focus from race to racism as a key determinant of 
+illness and health.
 
 Key recommendations from other sources
 --------------------------------------
 
-Here we have collected recommendations from various experts and guides advocating for new standards of communication regarding racial health disparities.
+Here we have collected recommendations from various experts and guides advocating for new standards of communication 
+regarding racial health disparities.
 
-1. Use a health equity lens when framing information about health disparities (https://www.cdc.gov/healthcommunication/HealthEquityGuidingPrinciples.pdf).
+1. **Use a health equity lens when framing information about health disparities** [Calanan_2023]_.
 
-    Rather than allowing dominant narratives around race, individualism, and meritocracy limit our understanding of the root causes of health inequities, 
-    it is important to center a health equity perspective in health metrics research.  An equity lens allows us to recognize that systems of power and oppression 
-    (including white supremacy) shape institutional policies and living conditions that systematically harm populations (https://www.ama-assn.org/system/files/ama-aamc-equity-guide.pdf).
+    Rather than allowing dominant narratives around race, individualism, and meritocracy limit our understanding of 
+    the root causes of health inequities, it is important to center a health equity perspective in health metrics 
+    research.  An equity lens allows us to recognize that systems of power and oppression (including white supremacy) 
+    shape institutional policies and living conditions that systematically harm populations 
+    [AMA_2021]_.
 
-2. Use person-first language, avoid unintentional blaming, and be as specific as possible about the group to which you're referring. 
+2. **Use person-first language, avoid unintentional blaming, and be as specific as possible about the group to which you're referring**. 
     
-    For more elaboration on these tips, please see Advancing Health Equity: A Guide to Language, Narrative and Concepts (https://www.ama-assn.org/system/files/ama-aamc-equity-guide.pdf).
+    For more elaboration on these tips, please see Advancing Health Equity: A Guide to Language, Narrative and Concepts 
+    [AMA_2021]_.
 
-3. Explicitly define race during experimental design, and specify the reason for its use in the study (https://www.healthaffairs.org/content/forefront/racism-new-standard-publishing-racial-health-inequities). 
+3. **Explicitly define race during experimental design, and specify the reason for its use in the study** [Boyd_2020]_. 
     
-    In defining race as it pertains to your research, you should review all relevant social, environmental, and structural factors for which race may serve as a 
-    proxy measure.  "For the reader, these additional details enable careful interpretation of study results and implications. But for authors, it engenders critical thinking about racial constructs that prevent the reification of race as a biological entity. (https://www.healthaffairs.org/content/forefront/racism-new-standard-publishing-racial-health-inequities)" 
+    As is described in our earlier section, `1.1 Research question`_, you should review all relevant 
+    social, environmental, and structural factors for which race may serve as a proxy measure when defining 
+    race as it pertains to your research,. "For the reader, these additional details enable careful interpretation 
+    of study results and implications. But for authors, it engenders critical thinking about racial constructs that 
+    prevent the reification of race as a biological entity." [Boyd_2020]_ 
 
-    Health metrics researchers should embrace a critical race theory framework, which provides "tools for conducting research and practice are intended to elucidate contemporary racial phenomena, expand the vocabulary with which to discuss complex racial concepts, and challenge racial hierarchies" (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2837428/pdf/S30.pdf)
+    Health metrics researchers should embrace a critical race theory (CRT) framework, which provides "tools for conducting research and practice 
+    are intended to elucidate contemporary racial phenomena, expand the vocabulary with which to discuss complex racial concepts, and 
+    challenge racial hierarchies" [Ford_Airhihenbuwa_2010]_. Embracing a CRT framework might entail
+    some of the following: 
 
-4. Cite the experts, particularly scholars of color whose work forms the basis of the field’s knowledge on racism and its effects (https://www.healthaffairs.org/content/forefront/racism-new-standard-publishing-racial-health-inequities).
+    - *Contextualization of research*: Contextualize health disparities within historical and systemic inequities. This involves understanding how policies, practices, and social conditions contribute to health outcomes across different racial groups.
+    - *Intentional use of vocabulary*: Use language that accurately reflects the complexity of racial issues in health. This includes being precise about how terms like race, ethnicity, systemic racism, health equity, and social determinants of health are used and understood in research. It also involves recognizing the fluidity and socially constructed nature of racial categories and how they affect health outcomes.
+    - *Incorporation of intersectionality*: Acknowledge that the impact of race and ethnicity on health is not uniform across different groups and that multiple forms of discrimination can compound health disparities. 
+    - *Community engagement and participation*: Where possible, involve in your research process communities affected by health disparities. Instead of *studying about* these communities, health researchers should be *working with* them to identify priorities, interpret findings, and co-create interventions. By doing so, we ensure that research is grounded in the realities of those most impacted by health inequities.
+    - *Policy advocacy*: Research informed by CRT should not only aim to understand and document disparities but also to drive change. This involves advocating for policies that address the root causes of racial disparities in health, such as economic inequality, housing, education, and access to healthcare. Researchers can play a role in informing policy, engaging in public discourse, and supporting community-led initiatives.
+    - *Reflective practice*:  Engage in ongoing reflection about your own positions, biases, and the power dynamics in your work. This includes being open to critique, actively seeking diverse perspectives, and being committed to anti-racist practices both personally and professionally.
+  
 
-.. todo::
+4. **Cite the experts, particularly scholars of color whose work forms the basis of the field’s knowledge on racism and its effects** 
+[Boyd_2020]_.
 
-    Fix citations and add to References list.
 
 Reporting results accurately
 ----------------------------
@@ -298,9 +318,26 @@ Reporting results accurately
 4.0 References
 ++++++++++++++
 
+.. [AMA_2021]
+    American Medical Assiociation. Advancing Health Equity: A Guide to Language, Narrative and Concepts. 2021. https://www.ama-assn.org/system/files/ama-aamc-equity-guide.pdf
+
+.. [Boyd_2020]
+    Boyd RW, Lindo EG, Weeks LD, McLemore MR. On Racism: A New Standard for Publishing on Racial Health Inequities. Health Affairs Blog. 2020 Jul. doi: 10.1377/hblog20200630.939347
+
+.. [Calanan_2023]
+    Calanan RM, Bonds ME, Bedrosian SR, Laird SK, Satter D, Penman-Aguilar A. CDC’s Guiding Principles to Promote an Equity-Centered Approach to Public Health Communication. Prev Chronic Dis 2023;20:230061. DOI: http://dx.doi.org/10.5888/pcd20.230061
+
+.. [Cerdena_2020]
+    Cerdena JP, Plaisime MV, Tsai J. The Lancet. 2020 Oct; 396(10257):1125-1128. doi: https://doi.org/10.1016/S0140-6736(20)32076-6
+
+.. [Ford_Airhihenbuwa_2010]
+    Ford CL, Airhihenbuwa CO. Critical Race Theory, Race Equity, and Public Health: Toward Antiracism Praxis
+
 .. [Kaplan-and-Bennet-2003]
     Kaplan JB, Bennett T. Use of Race and Ethnicity in Biomedical Publication. JAMA. 2003;289(20):2709–2716. doi:10.1001/jama.289.20.2709
 
 .. [Liebler_2008]
     Liebler CA, Halpern-Manners A. A practical approach to using multiple-race response data: a bridging method for public-use microdata. Demography. 2008 Feb;45(1):143-55. doi: 10.1353/dem.2008.0004. PMID: 18390296; PMCID: PMC2831381.
+
+
 
