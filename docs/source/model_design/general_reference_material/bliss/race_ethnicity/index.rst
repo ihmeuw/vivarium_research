@@ -275,7 +275,7 @@ Here we have collected recommendations from various experts and guides advocatin
 
 3. Explicitly define race during experimental design, and specify the reason for its use in the study (https://www.healthaffairs.org/content/forefront/racism-new-standard-publishing-racial-health-inequities). 
     
-    In defining race as it pertains to your research, you shouldreview all relevant social, environmental, and structural factors for which race may serve as a 
+    In defining race as it pertains to your research, you should review all relevant social, environmental, and structural factors for which race may serve as a 
     proxy measure.  "For the reader, these additional details enable careful interpretation of study results and implications. But for authors, it engenders critical thinking about racial constructs that prevent the reification of race as a biological entity. (https://www.healthaffairs.org/content/forefront/racism-new-standard-publishing-racial-health-inequities)" 
 
     Health metrics researchers should embrace a critical race theory framework, which provides "tools for conducting research and practice are intended to elucidate contemporary racial phenomena, expand the vocabulary with which to discuss complex racial concepts, and challenge racial hierarchies" (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2837428/pdf/S30.pdf)
