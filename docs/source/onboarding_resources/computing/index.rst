@@ -112,6 +112,13 @@ Link to download `R and R Studio <https://www.dataquest.io/blog/installing-r-on-
 
 Link to download `R and R Studio <https://www.dataquest.io/blog/installing-r-on-your-computer/>`_ 
 
+**VS Code:** 
+Visual Studio Code, also commonly referred to as VS Code, is a source-code editor 
+developed by Microsoft for Windows, Linux, macOS and web browsers. This is a popular 
+choice on the Sim Science team. 
+
+Link to download `VS Code <https://code.visualstudio.com/download>`_
+
 **Jupyter:** 
 
 Jupyter is a web-based IDE. That essentially means it’s a place 
@@ -148,13 +155,16 @@ still allowing you to "speak" with your Windows computer.
 
 For updating Vivarium docs and interacting with GitHub, we recommend using Git Bash. This 
 installs automatically with Git for Windows. However, some prefer 
-the Windows Subsystem for Linux (WSL) for its user interface and tools. 
+the Windows Subsystem for Linux (WSL) for its user interface and tools. You can also use 
+VS Code to access a terminal. 
 
 Link to download `Git and Git Bash <https://git-scm.com/>`_
 
 Link to download `WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_
 
-For accessing the cluster, we recommend using PuTTy or Bitvise. How to access the cluster 
+Link to download `VS Code <https://code.visualstudio.com/download>`_
+
+For accessing the cluster, we recommend using PuTTy, Bitvise, or VS Code. How to access the cluster 
 is included in more depth in Section 3. 
 
 **Recommended Terminals for Mac Users:** 
@@ -241,9 +251,11 @@ interface (e.g., you can "click" on things rather than type commands only)
 which are more intuitive and we recommend if you are new to this type of 
 computing work. 
 
-As mentioned above, for Windows users this is PuTTY or Bitvise 
+As mentioned above, for Windows users this is PuTTY, Bitvise, or VS Code
 
 Link to download `PuTTY or Bitvise <https://www.putty.org/>`_
+
+Link to download `VS Code <https://code.visualstudio.com/download>`_
 
 .. _cluster_access_putty:
 
@@ -274,6 +286,23 @@ password. After that you are connected to the cluster and can enter command
 lines from your trainings!  
 
 .. image:: putty_3.png
+
+.. _cluster_access_vs_code:
+
+Accessing the Cluster from VS Code
+----------------------------------
+
+Another good option is to set up cluster access within VS Code. VS Code is 
+source-code editor with some nice features like help debugging and custom formatting. 
+It can also host terminals which can connect to the cluster. 
+
+More information on setting this up including `step by step instructions can be found here <https://stash.ihme.washington.edu/projects/CCGUTS/repos/script_utils/browse/bin/submit_vscode_server.py>`_. 
+
+One nice aspect of VS Code is cluster access can be configured for up to 16 days, meaning 
+you can reload as existing session without having to submit a new srun. Additionally, with 
+some extensions, you can open and run Jupyter notebooks directly in VS Code. Lastly, you 
+can add Github Copilot access to VS Code, which might help with coding! To access Copilot, 
+`follow this Hub page <https://hub.ihme.washington.edu/display/IHD/Copilot+Setup>`_. 
 
 .. _cluster_access_bash:
 

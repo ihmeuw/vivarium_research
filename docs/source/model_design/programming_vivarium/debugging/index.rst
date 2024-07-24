@@ -187,39 +187,36 @@ and fix the bug.
 If you need to use multiple breakpoints, you can also use the 
 command :code:`c` for continue, to move until the next breakpoint. 
 
-Using IPython
--------------
+Assessing Outputs While Debugging
+---------------------------------
 
-IPython is less commonly used for the type of debugging outlined 
-above. Instead, it is helpful for doing some basic checks on 
-outputs, or manipulation of outputs without opening a Jupyter 
-notebook. This section assumes you are on the cluster.
+It is often helpful to check outputs you receive while coding to ensure 
+that they are correct. The above information only applies to bugs that 
+throw errors. What if we didn't use our empty dataframe again, and so 
+instead of receiving an error message, we just accidentally saved the empty 
+dataframe to the artifact? We might not notice until we got incorrect 
+results from a simulation run! 
 
-First, you'll need to install IPython in your environment with 
-:code:`pip install ipython`. Then start an IPython session by 
-typing :code:`ipython` in the command line. If you have :code:`jupyter` 
-installed, IPython will also be installed automatically. 
+It would be helpful to check some of these outputs along the way to catch 
+these types of errors earlier and be able to fix them. To do this, we 
+recommend having a file, or Jupyter notebook open to run some basic 
+checks.
 
-From here, you can use this the same as a Jupyter notebook, except 
-code can't be stored and you must enter and run lines one at a time. Some effects 
-of this are, for example, you have to run all :code:`import` lines every 
-time you start an IPython session, and you can't store custom 
-functions to use repeatedly easily. However, there are some use cases. 
+Information on working in VS Code with the cluster `is available here <https://stash.ihme.washington.edu/projects/CCGUTS/repos/script_utils/browse/bin/submit_vscode_server.py>`_ and there 
+is more in-depth information in the `Onboarding Resources section of Vivarium Research <computing>`, you can run Jupyter notebooks while creating 
+the artifact from the command line. This will allow you to run active 
+checks on outputs as you create them. 
 
-For example, if you want to print out the data stored in an artifact key to check the 
-columns included. Jupyter notebook can do this, but you will need 
-to open a notebook, connect online, create a notebook, load and print the data in the artifact, 
-and at the end of that, you'll need to end the Jupyter session before you 
-can run anything else from the open terminal. This is a lot of work to visualize 
-one dataframe! IPython can be run in the 
-terminal without creating unneeded files or worrying about connections. 
+.. todo::
+    
+    Add in link to onboarding docs where VS Code set-up lives once that section is written. 
 
-Therefore, while IPython is "worse" than Jupyter notebooks overall (in this 
-author's opinion), it is faster and therefore useful for quick tasks. 
-Common uses include: printing out dataframes for visualization; simple 
-tests for an input data file on the index, length, etc.; removing 
-a key from the artifact so it can be replaced, or any other quick checks and 
-changes of this nature.
+
+Additionally, if you find an error in an artifact key, this will 
+allow you to remove it, fix the code, and rerun the artifact generation 
+for that key quickly and efficiently. Here is an example of an `artifact checking notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/e24190c9c2ceae9bbd5990819c974e98f6af450c/verification_and_validation/child_model/artifact_vv_subnational.ipynb>`_. 
+This file assess the artifact keys for missing data, incorrect 
+parameters and other basic items that would cause errors in the sim.
 
 Continued Learning
 ------------------

@@ -51,7 +51,6 @@ You will need to check or edit three different files to include a stratification
 
 #. First, you'll need to look at the :code:`components/observers.py` file to check that the code for your needed stratification exists or add it. 
 #. Before you run the model, you'll need to update the :code:`model_specifications/model_spec.yaml` file to include the stratification.
-#. Last, you'll need to update the :code:`constants/results.py` file to make sure the expected column names match the new stratifications.
 
 Let's walk through an example. Say we want to add a stratification of SAM treatment 
 coverage to our child wasting observer. This would allow us to count the number of 
@@ -79,18 +78,7 @@ look like:
 
 Check that both the observer name (:code:`child_wasting`) and the stratification 
 variable name (:code:`sam_treatment`) match what is found in the 
-:code:`components/observers.py` file.
-
-You're now ready to start the model run! The last thing to change will be 
-in the :code:`constants/results.py` file. As outlined in the 
-:ref:`make results page <make_results_rt>`
-you will need to change the column name. For example, here the column 
-might change from :code:`"MEASURE_child_wasting_{WASTING_STATE_NUMERIC}_person_time_AGE_GROUP_{AGE_GROUP}_SEX_{SEX}"` to :code:`"MEASURE_child_wasting_{WASTING_STATE_NUMERIC}_person_time_AGE_GROUP_{AGE_GROUP}_SAM_TREATMENT_{SAM_TREATMENT}_SEX_{SEX}"`. 
-
-If you had to add a new :code:`builder.results.register_stratification` above, 
-you'll also need to add a list of the possible stratification options here. If 
-the stratification already exists, you likely can just edit the column name. The 
-list of the possible stratification options for SAM treatment would be :code:`SAM_TREATMENTS = ("uncovered", "covered")`. 
+:code:`components/observers.py` file. You're now ready to start the model run! 
 
 Turn off a Component in the Model
 ---------------------------------
