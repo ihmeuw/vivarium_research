@@ -290,7 +290,7 @@ There are, however, some disadvantages associated with discrete time simulation,
 - Can be less computationally efficient compared to discrete event simulation, especially for large-scale models, because it requires evaluating the state of all simulants at each time step, regardless of whether events occur. 
 
 
-To read more about how we select the length of time steps in our simulations, please see `<vivarium_best_practices_time_steps>`_.
+To read more about how we select the length of time steps in our simulations, please see .._vivarium_best_practices_time_steps_.
 
 
 Discrete event simulation 
@@ -325,7 +325,7 @@ Vivarium microsimulations are retrospectively assessed for quality through a pro
 target values they were developed to replicate, and that our models are sensible and reflect trends in real-world data not used in model development. Target values come from input data (often from GBD
 estimates, but also other data sources) and typically include population age and sex/gender structure, risk factor exposures and effects, all-cause mortality rates, cause-specific parameters, 
 intervention coverages, and more. If any of these checks fail, we debug and go through the process again until model results behave as expected. To read more about our team's V&V process, see 
-`<vivarium_best_practices_results_processing>`_.
+:ref: `<vivarium_best_practices_results_processing>`_.
 
 In contrast, the Framework for Reconstructing Epidemiological Dynamics (FRED) (an agent-based model) has a calibration process that is directly integrated into the simulation's runtime, 
 allowing the model to adjust its parameters dynamically to ensure a better fit with empirical data. Unlike the separate V&V process, where models are developed and then retrospectively compared and 
@@ -340,11 +340,13 @@ adjusted based on data, FRED's integrated calibration allows for a more dynamic 
 Correlation
 +++++++++++
 
-When developing a Vivarium simulation, we typically overlay population-level statistic generated through the GBD onto individual simulants, rather than using individual-level input data such 
-as hospital records or registry data. This approach involves taking broad, aggregated data and distributing its implications onto the simulated individuals to approximate their health status, risks, and 
-progression within the model's context. This modeling strategy is not ubiquitous across all public health microsimulations, nor even all Vivarium microsimulations. For instance, our aforementioned
-microsimulation of cardiovascular disease (`<2019_cause_ihd>`_) uses inpatient hospital and claims data to inform the burden of heart failure due to each of the underlying causes of heart failure. These
-data sources include vital registry data from Mexico, Brazil, Taiwan, Colombia, and the US; inpatient admissions from Friuli Venezia, Italy; and linked vital registry data from Friuli Venezia, Italy.
+When developing a Vivarium simulation, we typically overlay population-level statistic generated through the GBD onto individual simulants, rather than using individual-level input 
+data such as hospital records or registry data. This approach involves taking broad, aggregated data and distributing its implications onto the simulated individuals to approximate 
+their health status, risks, and progression within the model's context. This modeling strategy is not ubiquitous across all public health microsimulations, nor even all Vivarium 
+microsimulations. For instance, our aforementioned microsimulation of cardiovascular disease uses individual-level data from NHANES 
+(`National Health and Nutrition Examination Survey <https://www.cdc.gov/nchs/nhanes/index.htm>`_) to inform risk exposure correlation between systolic blood pressure, LDL 
+cholesterol, fasting plasma glucose, and body mass index. Read more about how we calculate these correaltion coefficients using NHANES data :ref: `here <2023_sbp_ldlc_fpg_bmi>`_.
+
 
 References
 ----------
