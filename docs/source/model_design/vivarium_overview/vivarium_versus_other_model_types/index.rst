@@ -286,7 +286,7 @@ can also be thought of as continuous event simulation. Advantages associated wit
 
 There are, however, some disadvantages associated with discrete time simulation, such as: 
 
-- All simulants stay in each state for at some multiple of the time step, which may not accurately reflect the variability seen in real-world scenarios and can require small time steps for very quick events.
+- All simulants stay in each state for some multiple of the time step, which may not accurately reflect the variability seen in real-world scenarios and can require small time steps for very quick events.
 - Can be less computationally efficient compared to discrete event simulation, especially for large-scale models, because it requires evaluating the state of all simulants at each time step, regardless of whether events occur. 
 
 
@@ -296,8 +296,7 @@ To read more about how we select the length of time steps in our simulations, yo
 Discrete event simulation 
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On the other hand, discrete event simulation allows simulants to move from event to event, with the timing of these events determined by sampling from probability distributions. For this reason,
-discrete event simulation is synonymous with continuous time simulation; and could also be thought of as using a global clock. For an example of a microsimulation that uses discrete event simulation, 
+On the other hand, discrete event simulation allows simulants to move from event to event, with the timing of these events determined by sampling from probability distributions. For an example of a microsimulation that uses discrete event simulation, 
 see the `Starsim series <https://www.ncbi.nlm.nih.gov/books/NBK293948/#:~:text=Discrete%20event%20simulation%20(DES)%20is,life%20process%2C%20facility%20or%20system>`_. As with discrete time simulation,
 there are some advantages and disadvantages associated with this type of event simulation.
 
