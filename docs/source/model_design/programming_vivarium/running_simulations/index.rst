@@ -231,6 +231,11 @@ Flags:
   - --add-draws says how many new draws you would like to add to the results 
   - --add-seeds says how many new seeds you would like to add to the results 
 
+
+Once psimulate has finished running, it will automatically create a results folder 
+with the outputs from the simulation included. The files will include all of the specified 
+observers, stratifications, and run parameters. 
+
 Debugging
 ---------
 
