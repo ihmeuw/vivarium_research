@@ -340,7 +340,7 @@ adjusted based on data, FRED's integrated calibration allows for a more dynamic 
 Correlation
 +++++++++++
 
-When developing a Vivarium simulation, we typically overlay population-level statistic generated through the GBD onto individual simulants, rather than using individual-level input data such 
+When developing a Vivarium simulation, we typically overlay population-level statistics generated through the GBD onto individual simulants, rather than using individual-level input data such 
 as hospital records or registry data. This approach involves taking broad, aggregated data and distributing its implications onto the simulated individuals to approximate their health status, risks, and 
 progression within the model's context. This modeling strategy is not ubiquitous across all public health microsimulations, nor even all Vivarium microsimulations. For instance, our aforementioned
 microsimulation of cardiovascular disease (`<2019_cause_ihd>`_) uses inpatient hospital and claims data to inform the burden of heart failure due to each of the underlying causes of heart failure. These
