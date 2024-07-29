@@ -163,7 +163,7 @@ of our microsimulation. Importantly, these same limitations could be in a popula
 Another example that illustrates this is our microsimulation of a full-scale United States population. 350 million simulants in this population have 
 names, family members, addresses, employers, and other similar individual characteristics, and over time, they experience life events, such as migration, 
 employment change, and death. There are limitations in our model that are only visible at this level of detail, such as how we simulate household structure.
-For instance, in an earlier iteration of the simulation, it was possible for children (i.e., under 18 years old) to get married, stemming from a limitation in how we perturbed age with
+For instance, in an earlier iteration of the simulation, it was possible for children (i.e., under 18 years old) to be married, stemming from a limitation in how we perturbed age with
 regard to relationship type. Fortunately, this limitation has since been resolved and our model was thereby improved! Again, such a limitation may well be present in a model that does not include 
 individual output data, but because this information is aggregated, the limitation won't be surfaced and improved upon. 
 Read more about this project :ref:`here <vivarium_census_prl_synth_data>`.
