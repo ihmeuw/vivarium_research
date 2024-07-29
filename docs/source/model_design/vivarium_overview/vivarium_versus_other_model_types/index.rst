@@ -103,9 +103,9 @@ microsimulation, there are different ways these events are recorded. Read more a
 
 Each of the microsimulations that our team has developed include this advantage, but we can use our microsimulation of multiple myeloma as an
 example. Multiple myeloma is a kind of plasma cell cancer, characterized by end organ damage—renal impairment, hypercalcemia, lytic bony lesions, and anemia. The below causal diagram 
-shows how we split multiple myeloma into two disease states: newly-diagnosed multiple myeloma (NDMM); and relapsed and/or refractory multiple myeloma (RRMM). Simulants move between these
-states in predetermined timesteps (e.g., in this microsimulation, 28 or 90 days), and without our ability to track these events, we wouldn't be able to draw meaningful findings 
-from our models. 
+shows how we split multiple myeloma into five disease states: newly-diagnosed multiple myeloma (NDMM); and 4 separate states for the first four relapses of relapsed and/or refractory multiple myeloma (RRMM). Simulants are affected differently by being in each of these states;
+for example, later relapses happen faster and have higher associated mortality risk.
+Tracking the individual events allows us to model treatment for each relapse in a highly detailed way.
 
 .. image:: cause_model_diagram_mm.svg
 
@@ -121,7 +121,7 @@ Our cardiovascular disease (CVD) microsimulation offers a useful example of how 
 risk factors that affect CVD outcomes, including: body mass index (BMI), systolic blood pressure (SBP), low-density lipoprotein cholesterol levels (LDL-C), and fasting 
 plasma glucose (FPG). Using NHANES survey data, we calculated correlation coefficients for these relationships, which we used to generate values for all
 simulants. As such, the correlation coefficients remain constant as simulants age and their risk exposure values change. You can read more about our modeling strategy for 
-these risk factor correlations :ref:`on this page <2023_sbp_ldlc_fpg_bmi>`.
+these risk factor correlations `here <https://vivarium-research.readthedocs.io/en/latest/models/risk_correlation/risk_correlation_ldlc_fpg_sbp_ikf/index.html>`__.
 
 Continuous values
 ~~~~~~~~~~~~~~~~~
@@ -131,7 +131,7 @@ compartmental models.
 
 For example, in our intravenous (IV) iron intervention microsimulation, we model precise hemoglobin levels as a continuous risk exposure that varies as simulants age and move 
 through the pregancy model states, as low hemoglobin levels (or anemia) are associated with poor health outcomes for both mother/birthing parent and child. Read more about the 
-modeling strategy we used to generate precise hemoglobin levels for each simulant :ref:`here <2019_hemoglobin_anemia_and_iron_deficiency>`.
+modeling strategy we used to generate precise hemoglobin levels for each simulant `here <https://vivarium-research.readthedocs.io/en/latest/models/other_models/hemoglobin_anemia_and_iron_deficiency/index.html>`__.
 
 
 Time-varying rates dependent on multiple factors
@@ -139,7 +139,7 @@ Time-varying rates dependent on multiple factors
 
 Another complexity enabled by microsimulation is the inclusion of time-varying rates dependent on multiple factors. A good example of this is in our microsimulation of multiple myeloma, 
 which allowed relapse and mortality hazard rates to vary over time since treatment line initiation, in addition to being impacted by the line of treatment, demographic covariates, and treatment regimen. 
-Read more about how we calculated these rates :ref:`here <calc_mortality_relapse_hazard>`.
+Read more about how we calculated these rates `here <https://vivarium-research.readthedocs.io/en/latest/models/intervention_models/multiple_myeloma_treatment/index.html#mortality-and-relapse-effects>`__.
 
 The figure below demonstrates how survival rates in multiple myeloma patients differ based on the time since treatment line initiation. This figure was produced by
 researchers at Amgen, Inc, and you can read the paper in which it was published `here <https://www.tandfonline.com/doi/full/10.1080/10428194.2020.1827253>`__. [Braunlin-MM-2020]_ 
@@ -163,10 +163,10 @@ of our microsimulation. Importantly, these same limitations could be in a popula
 Another example that illustrates this is our microsimulation of a full-scale United States population. 350 million simulants in this population have 
 names, family members, addresses, employers, and other similar individual characteristics, and over time, they experience life events, such as migration, 
 employment change, and death. There are limitations in our model that are only visible at this level of detail, such as how we simulate household structure.
-For instance, in an earlier iteration of the simulation, it was possible for children (i.e., under 18 years old) to get married, stemming from a limitation in how we perturbed age with
-regard to relationship type. Fortunately, this limitation has since been resolved and our model was thereby improved! Again, such a limitation may well be present in a model that does not include 
-individual output data, but because this information is aggregated, the limitation won't be surfaced and improved upon. 
-Read more about this project :ref:`here <vivarium_census_prl_synth_data>`.
+For instance, in an earlier iteration of the simulation, it was possible for children (i.e., under 18 years old) to be married, stemming from a limitation in how we perturbed age with
+regard to relationship type. Fortunately, this limitation has since been resolved and our model was thereby improved! Again, such a limitation may well be present in a model that does not output
+individual-level data, but because this information is aggregated, the limitation won't be surfaced and improved upon. 
+Read more about this project `here <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_census_synthdata/concept_model.html>`__.
 
 
 Disadvantages of microsimulation
@@ -200,7 +200,7 @@ Residual confounding
 Another limitation or disadvantage of microsimulations is that getting realistic, individual-level characteristics from population-level data is difficult, and 
 creates opportunity for residual confounding. 
 
-You can read more about residual confounding and how our team accounts for it :ref:`here <residual_confounding>`.
+You can read more about residual confounding and how our team accounts for it `here <https://vivarium-research.readthedocs.io/en/latest/model_design/vivarium_model_components/risk_factors/residual_confounding/index.html>`__.
 
 .. todo::
 
@@ -231,7 +231,7 @@ Simulant agency
 Unlike agent-based models, microsimulations do not necessarily program agency into individual simulants. This removes some of the real-world likeness of these models in favor 
 of reflecting realistic population-level dynamics that would be more difficult to program in agency-based simulation. The Vivarium simulations that might be described as having 
 the most simulant agency would be our microsimulation of the entire US population, which you can read more about at `<vivarium_census_prl_synth_data>`_, as well as
-our simulation of cardiovascular disease, which you can read more about at `<2019_cause_ihd>`_. In the prior simulation, simulants are programmed with propensities to migrate into and out of the 
+our simulation of cardiovascular disease, which you can read more about at `<2019_cause_ihd>`_. In the former simulation, simulants are programmed with propensities to migrate into and out of the 
 country, change addresses and employment, have babies, and more. In the latter, simulants are initiated into the population with different adherence rates to medications and likelihoods of discontinuing
 said medications - in turn, this affects their level of risk for moving to a disease state.
 
@@ -277,7 +277,7 @@ which we elaborate upon below.
 Discrete time simulation
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Currently, Vivarium runs in discrete time increments, and at each time step, it is determined whether simulants experience one or more events. Discrete time simulation 
+Currently, Vivarium runs in discrete time increments, and at each time step, it is determined whether simulants experience an event. Discrete time simulation 
 can also be thought of as continuous event simulation. Advantages associated with this type of event simulation include: 
   
 - Discrete time simulation can produce results that are statistically equivalent to those generated by discrete event simulation, assuming appropriate handling of time steps and event probabilities. 
@@ -286,11 +286,11 @@ can also be thought of as continuous event simulation. Advantages associated wit
 
 There are, however, some disadvantages associated with discrete time simulation, such as: 
 
-- All simulants stay in each state for the same amount of time, which may not accurately reflect the variability seen in real-world scenarios.
+- All simulants stay in each state for at some multiple of the time step, which may not accurately reflect the variability seen in real-world scenarios and can require small time steps for very quick events.
 - Can be less computationally efficient compared to discrete event simulation, especially for large-scale models, because it requires evaluating the state of all simulants at each time step, regardless of whether events occur. 
 
 
-To read more about how we select the length of time steps in our simulations, please see .._vivarium_best_practices_time_steps_.
+To read more about how we select the length of time steps in our simulations, you can check out `this page <https://vivarium-research.readthedocs.io/en/latest/model_design/designing_vivarium_model/choosing_appropriate_time_step/index.html>`__.
 
 
 Discrete event simulation 
@@ -309,7 +309,7 @@ Advantages include:
 
 Disadvantages include:
 
-- Requires knowledge of the maximum rate or the sum of all rates leading out of a state to calculate valid transition probability. This can complicate model setup, especially in models with complex state transition dynamics.
+- Requires knowledge of how to sample event times, as opposed to event probabilities. This can complicate model setup, especially in models with complex state transition dynamics.
 - Managing and debugging the event queue (which tracks the order and timing of future events) can be more complex than the relatively straightforward time-stepping approach in discrete time simulation. 
 
 
@@ -324,8 +324,7 @@ Calibration
 Vivarium microsimulations are retrospectively assessed for quality through a process we refer to as verification and validation (or V&V). This process is crucial in ensuring our models match the 
 target values they were developed to replicate, and that our models are sensible and reflect trends in real-world data not used in model development. Target values come from input data (often from GBD
 estimates, but also other data sources) and typically include population age and sex/gender structure, risk factor exposures and effects, all-cause mortality rates, cause-specific parameters, 
-intervention coverages, and more. If any of these checks fail, we debug and go through the process again until model results behave as expected. To read more about our team's V&V process, see 
-:ref: `<vivarium_best_practices_results_processing>`_.
+intervention coverages, and more. If any of these checks fail, we debug and go through the process again until model results behave as expected. To read more about our team's V&V process, you can visit `this page <https://vivarium-research.readthedocs.io/en/latest/model_design/designing_vivarium_model/results_processing_steps/index.html>`__.
 
 In contrast, the Framework for Reconstructing Epidemiological Dynamics (FRED) (an agent-based model) has a calibration process that is directly integrated into the simulation's runtime, 
 allowing the model to adjust its parameters dynamically to ensure a better fit with empirical data. Unlike the separate V&V process, where models are developed and then retrospectively compared and 
@@ -345,7 +344,7 @@ data such as hospital records or registry data. This approach involves taking br
 their health status, risks, and progression within the model's context. This modeling strategy is not ubiquitous across all public health microsimulations, nor even all Vivarium 
 microsimulations. For instance, our aforementioned microsimulation of cardiovascular disease uses individual-level data from NHANES 
 (`National Health and Nutrition Examination Survey <https://www.cdc.gov/nchs/nhanes/index.htm>`_) to inform risk exposure correlation between systolic blood pressure, LDL 
-cholesterol, fasting plasma glucose, and body mass index. Read more about how we calculate these correaltion coefficients using NHANES data :ref: `here <2023_sbp_ldlc_fpg_bmi>`_.
+cholesterol, fasting plasma glucose, and body mass index. Read more about how we calculate these correaltion coefficients using NHANES data `here <2023_sbp_ldlc_fpg_bmi>`__.
 
 
 References
