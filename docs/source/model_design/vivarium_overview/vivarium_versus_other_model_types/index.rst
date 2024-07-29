@@ -334,7 +334,7 @@ adjusted based on data, FRED's integrated calibration allows for a more dynamic 
 
 .. note:: 
 
-  Although the authors of FRED do not explicitly name it as a microsimulation, they refer to it as an agent-based modeling system that represents every individual in a sepcific geographic region. 
+  Although the authors of FRED do not explicitly name it as a microsimulation, they refer to it as an agent-based modeling system that represents every individual in a specific geographic region. 
   Their use of a built-in calibration mechanism provides a useful contrast to the retrospective and iterative process utilized by Vivarium researchers.
 
 Correlation
