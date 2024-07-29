@@ -309,7 +309,7 @@ Advantages include:
 
 Disadvantages include:
 
-- Requires knowledge of the maximum rate or the sum of all rates leading out of a state to calculate valid transition probability. This can complicate model setup, especially in models with complex state transition dynamics.
+- Requires knowledge of how to sample event times, as opposed to event probabilities. This can complicate model setup, especially in models with complex state transition dynamics.
 - Managing and debugging the event queue (which tracks the order and timing of future events) can be more complex than the relatively straightforward time-stepping approach in discrete time simulation. 
 
 
