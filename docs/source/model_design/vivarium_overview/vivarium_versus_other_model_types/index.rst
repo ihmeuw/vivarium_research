@@ -103,9 +103,9 @@ microsimulation, there are different ways these events are recorded. Read more a
 
 Each of the microsimulations that our team has developed include this advantage, but we can use our microsimulation of multiple myeloma as an
 example. Multiple myeloma is a kind of plasma cell cancer, characterized by end organ damage—renal impairment, hypercalcemia, lytic bony lesions, and anemia. The below causal diagram 
-shows how we split multiple myeloma into two disease states: newly-diagnosed multiple myeloma (NDMM); and relapsed and/or refractory multiple myeloma (RRMM). Simulants move between these
-states in predetermined timesteps (e.g., in this microsimulation, 28 or 90 days), and without our ability to track these events, we wouldn't be able to draw meaningful findings 
-from our models. 
+shows how we split multiple myeloma into five disease states: newly-diagnosed multiple myeloma (NDMM); and 4 separate states for the first four relapses of relapsed and/or refractory multiple myeloma (RRMM). Simulants are affected differently by being in each of these states;
+for example, later relapses happen faster and have higher associated mortality risk.
+Tracking the individual events allows us to model treatment for each relapse in a highly detailed way.
 
 .. image:: cause_model_diagram_mm.svg
 
