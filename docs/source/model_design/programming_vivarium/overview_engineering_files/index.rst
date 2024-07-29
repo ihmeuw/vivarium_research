@@ -119,13 +119,6 @@ paths
 The :code:`paths.py` file contains the file paths for all input data. When editing input data (especially 
 RT generated data), check to see if you need to update the file path or file name here. 
 
-results
-+++++++
-
-The :code:`results.py` file contains the expected results columns and files. If 
-you want to change what is included in the results, you'll need to edit this. More 
-information on when and how to do that can be found on the :ref:`make results page <make_results_rt>`.
-
 Data
 ----
 
@@ -194,26 +187,6 @@ matches the needed run size for V&V runs.
 
 Engineering notes can be found on this `branches file page <https://vivarium-cluster-tools.readthedocs.io/en/latest/branch.html>`_.
 
-Results Processing
-------------------
-
-The :code:`results_processing` folder contains the information and functions that are 
-used after the model is run to process the outputs and create the results files 
-researchers are used to receiving.
-
-It's important to note that if there is a mismatch between components that are run 
-and those are are requested in the results, you will get an error. It's good to check 
-that what was run is the same as what is expected in the outputs. More on this can 
-be found on the :ref:`make results page <make_results_rt>`.
-
-process_results
-+++++++++++++++
-
-The :code:`process_results.py` file contains the information on what results to create and 
-the functions to make those results. If you want to remove a component from the model, 
-do so here as well or :code:`make_results` will fail. Otherwise, this is where 
-functions to read in data, manipulate it, and create csvs are stored. 
-
 Tools
 -----
 
@@ -227,4 +200,4 @@ cli
 The :code:`cli.py` file contains some information on the commands for running simulations, 
 making results, and making the artifact. However, this information is 
 documented elsewhere is a more clear format, or you can run code in the command line 
-to get this information. For example :code:`make_results --help`. 
+to get this information. For example :code:`psimulate --help`. 
