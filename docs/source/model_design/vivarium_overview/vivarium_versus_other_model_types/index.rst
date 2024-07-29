@@ -286,7 +286,7 @@ can also be thought of as continuous event simulation. Advantages associated wit
 
 There are, however, some disadvantages associated with discrete time simulation, such as: 
 
-- All simulants stay in each state for the same amount of time, which may not accurately reflect the variability seen in real-world scenarios.
+- All simulants stay in each state for at some multiple of the time step, which may not accurately reflect the variability seen in real-world scenarios and can require small time steps for very quick events.
 - Can be less computationally efficient compared to discrete event simulation, especially for large-scale models, because it requires evaluating the state of all simulants at each time step, regardless of whether events occur. 
 
 
