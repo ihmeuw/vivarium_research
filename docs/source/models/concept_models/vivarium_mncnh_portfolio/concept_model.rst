@@ -62,43 +62,122 @@ and details on the intrapartum and neonatal time periods.
 3.0 Concept model and submodels
 +++++++++++++++++++++++++++++++
 
-.. todo::
+We plan to complete this work in 3 waves. 
 
-  Insert colorful full concept model
+* Wave 1 will include in basic model design, outlines of the healthcare system, and some interventions (AI ultrasound, higher level delivery facility interventions, RDS management). 
+* Wave 2 will some antenatal supplements(MMS, IV iron), the hemoglobin risk for birthing parents, and all downstream causes affected by hemoglobin. 
+* Wave 3 will add in gestational blood pressure and relevant causes and risks including pre-eclampsia care and downstream effects of high blood pressure. 
+
+**Wave 1 Concept Model Map:**
+
+.. image:: wave_1_full.svg
 
 .. _mncnh_portfolio_3.1:
 
-3.1 Model Waves
----------------
+3.1 Model Components
+--------------------
 
-**Wave 1**: Add new risk and cause models and update existing risks and causes as needed
+Our model will have 3 main "components" that each represent a part of a 
+parent and child dyad's journey. In this model, the simulants (note: simulant 
+here is a parent child dyad) will each run through 3 decision tree based "time 
+steps", where future decisions are based on what the simulant previously experienced. 
 
-.. todo::
+For each phase of the model, we will provide inputs needed (state table tracked values), 
+outputs that need to be recorded, and the decision tree. Nodes in the decision trees are 
+all labeled and additional information will be included below.
 
-  Determine if wave 1 will include making multiple, smaller simulations covering a subset of risks and causes or if it will all be integrated.
+3.1.1 Wave 1 Model Components
+-----------------------------
 
-- Wave 1 will be focused on expanding the risks and causes to cover everything we need to model the new interventions and calibrating a baseline model 
-- There will be only the baseline scenario in this wave 
-- We will make the simulation 3 time steps, but without the healthcare system or decision trees at each time step 
-- Making the model 3 time steps will necessitate us to tackle issues around YLDs and disability weights disconnected from "time" as we normally think of it in the simulation 
+**Component 1**: The Pregnancy Model
 
-**Wave 2**: Add in healthcare during pregnancy and related interventions
+.. image:: pregnancy_decision_tree_vr.svg
 
-- Wave 2 will add the first decision tree for the healthcare system during pregnancy 
-- We will add interventions that are administered during pregnancy and primarily impact the health of the birthing parent and previously modeled child impacts (MMS, BEP, IV iron, anemia diagnostics and treatment, pre-ecamplsia diagnostics and treatment, and antenatal azithromycin)
-- Any downstream effects on antenatal or child outcomes can be modeled with dummy impact variables if the impacts cannot be properly included yet (e.g., since deliver in a higher level facility is not included yet, we can include a dummy variable for birth impacts)
-- Additionally, we will decide on how to include the post-neonatal child effects. We anticipate adding a summarized later childhood impact (post neonatal to age 5) based on the nutrition optimization work, but this has not been decided.
+.. list-table:: Pregnancy Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
 
-**Wave 3**: Add the intrapartum model and related interventions
+  * - ID
+    - Decision Information 
+    - Notes
+  * - 1
+    - XX% of simulants will receive ANC care, based on their propensity 
+    - Several details are still outstanding including: will ANC vary with age, subnational location or upstream factors, will ANC care propensity by correlated with delivery facility propensity
+  * - 2
+    - XX% of simulants will receive AI-assisted ultrasound, XX% will receive standard ultrasound, XX% will receive no ultrasound 
+    - Need to determine if this is random or correlated with other outcomes. Need to find baseline and scenario values.
+  * - 3
+    - All patients are assigned a stated gestational age (GA). Their stated GA will be their real GA +/- an error margin randomly assigned within an interval. For AI assisted ultrasound, the interval is +/- XX weeks, for standard ultrasound XX weeks, for no ultrasound XX weeks. 
+    - Check if distribution for error is random or more likely to be an over/underestimate. 
+  * - 4
+    - XX% of those who received AI-assisted ultrasound will be identified as SGA, XX% with standard ultrasound and XX% with no ultrasound. 
+    - 
 
-- Wave 3 will add the second decision tree for the intrapartum time period 
-- We will add interventions that are administered during OR affect the intrapartum period (AI ultrasound, birth monitoring and sensors, PPH bundle)
-- Any downstream effects on neonatal or later child outcomes can be modeled with with dummy impact variables if the impacts cannot be properly included yet
 
-**Wave 4**: Add the neonatal period and related interventions
+.. list-table:: Inputs to Pregnancy Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
 
-- Wave 4 will add the last decision tree for the neonatal time period 
-- We will add interventions that are administered during the neonatal period (corticosteroids for birthing parent, CPAP, iKMC, probiotics, and amoxicillin and gentamicin)
+  * - Input
+    - Data Source 
+    - Notes
+  * - Age 
+    - GBD and fertility model 
+    - Will be the same population generation as used in nutrition optimization pregnancy model 
+  * - Upstream factors
+    - Likely DHS 
+    - Need to decide what if anything we want to include
+  * - ANC Visit Propensity
+    - Likely DHS 
+    - Need to determine correlation if we want to use it 
+  * - Gestational age at birth
+    - GBD LBWSG
+    - 
+  * - Small for gestational age at birth 
+    - GBD LBWSG
+    - Need to find definition for SGA and determine percent, need to define overlap with gestational age if relevant
+
+
+.. list-table:: Outputs from Pregnancy Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - Input
+    - Data Source 
+    - Notes
+  * - ANC attendance
+    - Decision tree point
+    - 
+  * - Ultrasound status (AI assisted, standard, none)
+    - Decision tree point
+    - 
+  * - Gestational age stated
+    - Decision tree value
+    - We should track both the real GA at birth and the believed GA 
+  * - If identified as small for gestational age
+    - Decision tree value
+    - We should track both the real SGA status and the believed one
+
+
+Limitations:
+
+* Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
+* Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
+* We are not planning to include ANC timing. The timing of ANC visits impacts the ability to accurately estimate gestational age, so we will use an average instead. 
+
+**Component 2**: The Intrapartum Model
+
+ADD IN IMAGE 
+
+ADD IN TABLE WITH DETAILS 
+
+
+**Component 3**: The Neonatal Model
+
+ADD IN IMAGE 
+
+ADD IN TABLE WITH DETAILS 
+
   
 .. _mncnh_portfolio_3.2:
 
