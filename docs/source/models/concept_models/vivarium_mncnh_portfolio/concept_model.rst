@@ -59,13 +59,13 @@ and details on the intrapartum and neonatal time periods.
 
 .. _mncnh_portfolio_3.0:
 
-3.0 Concept model and submodels
-+++++++++++++++++++++++++++++++
+3.0 Concept model diagram and submodels
++++++++++++++++++++++++++++++++++++++++
 
 We plan to complete this work in 3 waves. 
 
-* Wave 1 will include in basic model design, outlines of the healthcare system, and some interventions (AI ultrasound, higher level delivery facility interventions, RDS management). 
-* Wave 2 will some antenatal supplements(MMS, IV iron), the hemoglobin risk for birthing parents, and all downstream causes affected by hemoglobin. 
+* Wave 1 will include the basic model design, outlines of the healthcare system, and some interventions (AI ultrasound, higher level delivery facility interventions, RDS management). 
+* Wave 2 will add in some antenatal supplements(MMS, IV iron), the hemoglobin risk for birthing parents, and all downstream causes affected by hemoglobin. 
 * Wave 3 will add in gestational blood pressure and relevant causes and risks including pre-eclampsia care and downstream effects of high blood pressure. 
 
 **Wave 1 Concept Model Map:**
@@ -77,13 +77,13 @@ We plan to complete this work in 3 waves.
 3.1 Model Components
 --------------------
 
-Our model will have 3 main "components" that each represent a part of a 
-parent and child dyad's journey. In this model, the simulants (note: simulant 
-here is a parent child dyad) will each run through 3 decision tree based "time 
+Our model will have 3 main "components" that each represent a part of the 
+journey of a parent-child dyad. In this model, the simulants (note: simulant 
+here is a parent-child dyad) will each run through 3 decision tree based "time 
 steps", where future decisions are based on what the simulant previously experienced. 
 
-For each phase of the model, we will provide inputs needed (state table tracked values), 
-outputs that need to be recorded, and the decision tree. Nodes in the decision trees are 
+For each phase of the model, we will provide inputs needed (in the form of  a "state table" of tracked values), 
+outputs that need to be recorded for the next state table, and the decision tree that maps from inputs to outputs. Nodes in the decision trees are 
 all labeled and additional information will be included below.
 
 3.1.1 Wave 1 Model Components
@@ -102,7 +102,7 @@ all labeled and additional information will be included below.
     - Notes
   * - 1
     - XX% of simulants will receive ANC care, based on their propensity 
-    - Several details are still outstanding including: will ANC vary with age, subnational location or upstream factors, will ANC care propensity by correlated with delivery facility propensity
+    - Several details are still outstanding including: will ANC vary with age, subnational location or upstream factors, will ANC care propensity be correlated with delivery facility propensity
   * - 2
     - XX% of simulants will receive AI-assisted ultrasound, XX% will receive standard ultrasound, XX% will receive no ultrasound 
     - Need to determine if this is random or correlated with other outcomes. Need to find baseline and scenario values.
@@ -164,6 +164,7 @@ Limitations:
 * Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
 * Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
 * We are not planning to include ANC timing. The timing of ANC visits impacts the ability to accurately estimate gestational age, so we will use an average instead. 
+* The current version of the model does not include any false positive rates for pre-term of SGA. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
 
 **Component 2**: The Intrapartum Model
 
