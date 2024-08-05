@@ -168,9 +168,113 @@ Limitations:
 
 **Component 2**: The Intrapartum Model
 
-ADD IN IMAGE 
+.. image:: intrapartum_decision_tree_vr .svg
 
-ADD IN TABLE WITH DETAILS 
+
+.. list-table:: Intrapartum Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - 1
+    - XX% of simulants to attend each delivery facility type, based on their propensity 
+    - Several details are still outstanding including: types of delivery facilities modeled, will facility propensity vary with age, subnational location or upstream factors, will ANC care propensity be correlated with delivery facility propensity
+  * - 2
+    - Type of delivery facility has an overall, documented impact on maternal disorders and outcomes 
+    - Need to determine how we will include this (RR on all outcomes or subset, how will it overlap with other pathways, incidence vs mortality, etc.)
+  * - 3
+    - Need to figure out how we will determine which simulants need a c-section
+    - 
+  * - 4
+    - XX% of each facility type have cesarian section capabilities
+    -  
+  * - 5
+    - XX relative risk on incidence of hemorrhage and obstructed labor 
+    - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
+  * - 6
+    - XX% of pregnancy receive in each delivery facility type
+    - Confirm understanding that all pregnancies can/should receive this
+  * - 7
+    - XX relative risk of incidence of sepsis and other infections
+    - Outstanding items: what is the RR, how will we implement this with overlaps in total MD impact of facility type 
+  * - 8
+    - XX% of pre-term or known SGA pregnancies will receive, split by delivery facility type
+    - Outstanding items: data by delivery facility, is this for preterm, SGA, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
+
+
+.. list-table:: Inputs to Intrapartum Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - Input
+    - Data Source 
+    - Notes
+  * - Age 
+    - GBD and fertility model 
+    - Will be the same population generation as used in nutrition optimization pregnancy model 
+  * - Upstream factors
+    - Likely DHS 
+    - Need to decide what if anything we want to include
+  * - Delivery facility Propensity
+    - Likely DHS 
+    - Need to determine correlation if we want to use it 
+  * - ANC attendance
+    - Decision tree point
+    - 
+  * - Gestational age at birth
+    - GBD LBWSG
+    - 
+  * - Gestational age stated
+    - Decision tree value
+    - 
+  * - Small for gestational age at birth 
+    - GBD LBWSG
+    - 
+  * - If identified as small for gestational age
+    - Decision tree value
+    - 
+
+
+.. list-table:: Outputs from Intrapartum Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - Input
+    - Data Source 
+    - Notes
+  * - Delivery facility type
+    - Decision tree point
+    - 
+  * - Interventions received (c-section, azithromycin, corticosteroids)
+    - Decision tree values
+    - 
+  * - Count of maternal disorders
+    - Simulant experiences in model
+    - 
+  * - Maternal outcomes
+    - Simulant experiences in model
+    - To be defined, YLLs, YLDs, deaths, etc. 
+  * - Type of birth
+    - Simulant experiences in model
+    - E.g., live, still 
+  * - Gestational age at birth
+    - GBD LBWSG
+    - 
+  * - Birthweight
+    - GBD LBWSG
+    - 
+  * - If identified as small for gestational age
+    - Decision tree value
+    - From pregnancy model
+
+
+Limitations:
+
+* Only have one cohort, will not allow for downstream effects through pregnancies (c-sections likely to get another c-section in the future, losing a child might impact delivery facility, etc.)
+* Moving to a higher level care facility during the intrapartum period is common (referred up once labor begins if there is an issue) and the ability to do this is often a result of transport available, distance to clinics, etc. We will not include this and instead have simulants remain at a single facility for the whole intrapartum period. 
+* There are many other maternal disorders which we do not plan to individually model. 
 
 
 **Component 3**: The Neonatal Model
