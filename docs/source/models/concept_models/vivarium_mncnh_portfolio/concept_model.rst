@@ -136,6 +136,9 @@ all labeled and additional information will be included below.
   * - Small for gestational age at birth 
     - GBD LBWSG
     - Need to find definition for SGA and determine percent, need to define overlap with gestational age if relevant
+  * - Pregnancy end type
+    - GBD
+    - Sum of GBD ectopic and abortion and miscarriage rates
 
 
 .. list-table:: Outputs from Pregnancy Decision Tree
@@ -157,6 +160,9 @@ all labeled and additional information will be included below.
   * - If identified as small for gestational age
     - Decision tree value
     - We should track both the real SGA status and the believed one
+  * - Pregnancy end type
+    - GBD
+    - Sum of GBD ectopic and abortion and miscarriage rates
 
 
 Limitations:
@@ -165,6 +171,7 @@ Limitations:
 * Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
 * We are not planning to include ANC timing. The timing of ANC visits impacts the ability to accurately estimate gestational age, so we will use an average instead. 
 * The current version of the model does not include any false positive rates for pre-term of SGA. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
+* We are not planning to include twins or multiple pregnancies, which has limitations as twins are more likely to preterm and have birth complications. 
 
 **Component 2**: The Intrapartum Model
 
@@ -178,6 +185,9 @@ Limitations:
   * - ID
     - Decision Information 
     - Notes
+  * - 0
+    - XX% of simulants have ectopic pregnancies, abortion or miscarriage
+    - These simulants will NOT continue in the model
   * - 1
     - XX% of simulants to attend each delivery facility type, based on their propensity 
     - Several details are still outstanding including: types of delivery facilities modeled, will facility propensity vary with age, subnational location or upstream factors, will ANC care propensity be correlated with delivery facility propensity
@@ -235,6 +245,9 @@ Limitations:
   * - If identified as small for gestational age
     - Decision tree value
     - 
+  * - Pregnancy end
+    - GBD
+    - Sum of GBD ectopic and abortion and miscarriage rates
 
 
 .. list-table:: Outputs from Intrapartum Decision Tree
@@ -268,6 +281,9 @@ Limitations:
   * - If identified as small for gestational age
     - Decision tree value
     - From pregnancy model
+  * - Pregnancy end
+    - GBD
+    - Sum of GBD ectopic and abortion and miscarriage rates
 
 
 Limitations:
@@ -289,6 +305,9 @@ Limitations:
   * - ID
     - Decision Information 
     - Notes
+  * - 0
+    - XX% of simulants are stillborn
+    - These simulants will NOT continue in the model
   * - 1
     - Input value from intrapartum model
     - 
