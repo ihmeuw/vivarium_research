@@ -136,6 +136,9 @@ all labeled and additional information will be included below.
   * - Small for gestational age at birth 
     - GBD LBWSG
     - Need to find definition for SGA and determine percent, need to define overlap with gestational age if relevant
+  * - Pregnancy end type
+    - GBD
+    - Sum of GBD ectopic and abortion and miscarriage rates
 
 
 .. list-table:: Outputs from Pregnancy Decision Tree
@@ -157,6 +160,9 @@ all labeled and additional information will be included below.
   * - If identified as small for gestational age
     - Decision tree value
     - We should track both the real SGA status and the believed one
+  * - Pregnancy end type
+    - GBD
+    - Sum of GBD ectopic and abortion and miscarriage rates
 
 
 Limitations:
@@ -165,19 +171,238 @@ Limitations:
 * Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
 * We are not planning to include ANC timing. The timing of ANC visits impacts the ability to accurately estimate gestational age, so we will use an average instead. 
 * The current version of the model does not include any false positive rates for pre-term of SGA. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
+* We are not planning to include twins or multiple pregnancies, which has limitations as twins are more likely to preterm and have birth complications. 
 
 **Component 2**: The Intrapartum Model
 
-ADD IN IMAGE 
+.. image:: intrapartum_decision_tree_vr.svg
 
-ADD IN TABLE WITH DETAILS 
+
+.. list-table:: Intrapartum Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - 0
+    - XX% of simulants have ectopic pregnancies, abortion or miscarriage
+    - These simulants will NOT continue in the model
+  * - 1
+    - XX% of simulants to attend each delivery facility type, based on their propensity 
+    - Several details are still outstanding including: types of delivery facilities modeled, will facility propensity vary with age, subnational location or upstream factors, will ANC care propensity be correlated with delivery facility propensity
+  * - 2
+    - Type of delivery facility has an overall, documented impact on maternal disorders and outcomes 
+    - Need to determine how we will include this (RR on all outcomes or subset, how will it overlap with other pathways, incidence vs mortality, etc.)
+  * - 3
+    - Need to figure out how we will determine which simulants need a c-section
+    - 
+  * - 4
+    - XX% of each facility type have cesarian section capabilities
+    -  
+  * - 5
+    - XX relative risk on incidence of hemorrhage and obstructed labor 
+    - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
+  * - 6
+    - XX% of pregnancy receive in each delivery facility type
+    - Confirm understanding that all pregnancies can/should receive this
+  * - 7
+    - XX relative risk of incidence of sepsis and other infections
+    - Outstanding items: what is the RR, how will we implement this with overlaps in total MD impact of facility type 
+  * - 8
+    - XX% of pre-term or known SGA pregnancies will receive, split by delivery facility type
+    - Outstanding items: data by delivery facility, is this for preterm, SGA, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
+
+
+.. list-table:: Inputs to Intrapartum Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - Input
+    - Data Source 
+    - Notes
+  * - Age 
+    - GBD and fertility model 
+    - Will be the same population generation as used in nutrition optimization pregnancy model 
+  * - Upstream factors
+    - Likely DHS 
+    - Need to decide what if anything we want to include
+  * - Delivery facility Propensity
+    - Likely DHS 
+    - Need to determine correlation if we want to use it 
+  * - ANC attendance
+    - Decision tree point
+    - 
+  * - Gestational age at birth
+    - GBD LBWSG
+    - 
+  * - Gestational age stated
+    - Decision tree value
+    - 
+  * - Small for gestational age at birth 
+    - GBD LBWSG
+    - 
+  * - If identified as small for gestational age
+    - Decision tree value
+    - 
+  * - Pregnancy end
+    - GBD
+    - Sum of GBD ectopic and abortion and miscarriage rates
+
+
+.. list-table:: Outputs from Intrapartum Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - Input
+    - Data Source 
+    - Notes
+  * - Delivery facility type
+    - Decision tree point
+    - 
+  * - Interventions received (c-section, azithromycin, corticosteroids)
+    - Decision tree values
+    - 
+  * - Count of maternal disorders
+    - Simulant experiences in model
+    - 
+  * - Maternal outcomes
+    - Simulant experiences in model
+    - To be defined, YLLs, YLDs, deaths, etc. 
+  * - Type of birth
+    - Simulant experiences in model
+    - E.g., live, still 
+  * - Gestational age at birth
+    - GBD LBWSG
+    - 
+  * - Birthweight
+    - GBD LBWSG
+    - 
+  * - If identified as small for gestational age
+    - Decision tree value
+    - From pregnancy model
+  * - Pregnancy end
+    - GBD
+    - Sum of GBD ectopic and abortion and miscarriage rates
+
+
+Limitations:
+
+* Only have one cohort, will not allow for downstream effects through pregnancies (c-sections likely to get another c-section in the future, losing a child might impact delivery facility, etc.)
+* Moving to a higher level care facility during the intrapartum period is common (referred up once labor begins if there is an issue) and the ability to do this is often a result of transport available, distance to clinics, etc. We will not include this and instead have simulants remain at a single facility for the whole intrapartum period. 
+* There are many other maternal disorders which we do not plan to individually model. 
 
 
 **Component 3**: The Neonatal Model
 
-ADD IN IMAGE 
+.. image:: neonatal_decision_tree_vr.svg
 
-ADD IN TABLE WITH DETAILS 
+
+.. list-table:: Neonatal Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - 0
+    - XX% of simulants are stillborn
+    - These simulants will NOT continue in the model
+  * - 1
+    - Input value from intrapartum model
+    - 
+  * - 2
+    - XX% of each type of facility have antibiotics available
+    - 
+  * - 3
+    - XX relative risk on mortality from sepsis or other neonatal infections
+    - Need to confirm this will impact mortality not incidence. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
+  * - 4
+    - XX% of each type of facility have probiotics available
+    - Need to determine who recevied probiotics - all newborns, only SGA, only preterm, etc. 
+  * - 5
+    - XX relative risk on incidence of sepsis or other neonatal infections
+    - Need to confirm this will impact incidence not mortality. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
+  * - 6
+    - XX relative risk on incidence of encephalopathy if birthing parent experiences obstructed labor
+    - Need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
+  * - 7
+    - XX% of each type of facility have CPAP or NICU capabilities
+    - 
+  * - 8
+    - XX relative risk for RDS mortality 
+    - Need to confirm this will impact mortality not incidence. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
+  * - 9
+    - XX relative risk for RDS incidence based on birthing parent receiving antenatal corticosteroids
+    - Need to confirm this will impact incidence not mortality. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
+
+
+.. list-table:: Inputs to Neonatal Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - Input
+    - Data Source 
+    - Notes
+  * - Age 
+    - GBD and fertility model 
+    - Will be the same population generation as used in nutrition optimization pregnancy model 
+  * - Upstream factors
+    - Likely DHS 
+    - Need to decide what if anything we want to include
+  * - Birth delivery facility
+    - From intrapartum model
+    - 
+  * - Type of birth
+    - From intrapartum model
+    - E.g., live, still 
+  * - Gestational age at birth
+    - From intrapartum model
+    - 
+  * - Birthweight
+    - From intrapartum model
+    - 
+  * - If identified as small for gestational age
+    - Decision tree value
+    - From pregnancy model
+  * - If birth parent experienced obstructive labor
+    - From intrapartum model
+    - 
+  * - If birth parent received antenatal corticosteroids
+    - From intrapartum model
+    - 
+
+
+.. list-table:: Outputs from Neonatal Decision Tree
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - Input
+    - Data Source 
+    - Notes
+  * - Interventions received (antibiotics, probiotics, RDS treatment)
+    - Decision tree values
+    - 
+  * - Count of neonatal disorders
+    - Simulant experiences in model
+    - 
+  * - Neonatal outcomes
+    - Simulant experiences in model
+    - To be defined, YLLs, YLDs, deaths, etc.
+  * - Type of birth
+    - Simulant experiences in model
+    - E.g., live, still 
+  * - Gestational age at birth
+    - GBD LBWSG
+    - 
+  * - Birthweight
+    - GBD LBWSG
+    - 
+
+Limitations:
+
+* Need to further determine how neonatal mortality will be managed. In GBD, LBWSG impacts all cause mortality, which overlaps with the other neonatal causes. The method for handling this is yet to be fully determined and therefore this limitation will be updated later. 
+* At current, we are not including lung surfactant or kangaroo care which are closely tied to the CPAP/NICU intervention. We ight add these to the model later, but they are not present at this time. 
 
   
 .. _mncnh_portfolio_3.2:
