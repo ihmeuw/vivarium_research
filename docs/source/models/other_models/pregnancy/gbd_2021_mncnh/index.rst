@@ -230,7 +230,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 #. Assign partial or full term duration according to table in `Pregnancy term lengths`_ section
 #. Assign sex of infant if pregnancy is full term (stillbirth or live birth)
 #. Assign duration of pregnancy depending on term length and, if applicable, sex of the infant. Note that this is the same value as "gestational age" in other parts of the documentation.
-#. Assign birthweight of simulant child 
+#. Assign birthweight of simulant child and low birthweight status
 #. Assign propensity values for ANC and ultrasound 
 #. Begin simulation
 
@@ -291,14 +291,16 @@ For pregnancies that result in live birth or stillbirth outcomes, infant sex sho
         - 179
         - 0.514271  
 
-Birthweight and Gestational Age
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Birthweight, Gestational Age, and LBW Status
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A duration of pregnancy value will need to be assigned to all pregnancies regardless of the pregnancy outcome. This value will inform the duration that the simulant remains in the pregnancy state prior to transitioning to the postpartum state.
 
 For partial term pregnancies (that result in abortion/miscarriage/ectopic pregnancy), assign a duration of pregnancy sampled from a uniform distribution beween 6 and 24 weeks (individual heterogeneity with no parameter uncertainty). For these simulants, the birthweight can be assigned as N/A since they will not be going through the intrapartum model.
 
 For full term pregnancies (that result in live births or stillbirths), a LBWSG exposure value will be assigned that will include both the gestational age and birthweight of the simulant child. For wave 1 of this project, the LBWSG can be assigned using information outlined in the :ref:`LBWSG exposure page <2019_risk_exposure_lbwsg>`. Exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Based on the assigned category, a gestational age and birthweight can be recorded separately.
+
+Based on the LBWSG category, the simulant will also be categorized as either low birth weight or not low birth weight. Low birth weight is defined as less than 2500 grams.
 
 .. note::
 
