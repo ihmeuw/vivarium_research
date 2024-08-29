@@ -108,7 +108,7 @@ Where :math:`ASFR` is the age-specific fertility rate, :math:`SBR` is the stillb
 Vivarium Modeling Strategy
 ----------------------------
 
-We will model pregnancy as a characteristic of women of reproductive age in our simulations. We will inform the *incidence* of pregnancy using the age-specific fertility and stillbirth to live birth ratio covariates from GBD. We will inform the *duration* of pregnancy using the GBD 2019 exposure distribution of gestational age.
+We will model pregnancy as a characteristic of women of reproductive age in our simulations. We will inform the *incidence* of pregnancy using the age-specific fertility and stillbirth to live birth ratio covariates from GBD. We will inform the *duration* of pregnancy using the GBD 2021 exposure distribution of gestational age.
 
 .. image:: diagram.svg
 
@@ -116,7 +116,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
   Maternal disorders are entirely handled in the intrapartum model for wave 1 of this project. At current there are no risk factors (other than age) included either. 
 
-  We will add risk factors to this model (BMI, blood pressure, hemoglobin) and may also add some maternal disorders, such as preeclampsia and anemia. Though we have not determined where we will have simulants accumulate YLDs/deaths (might all be in the intrapartum model). 
+  We will add risk factors to this model (BMI, blood pressure, hemoglobin, blood glucose level) and may also add some maternal disorders, such as preeclampsia, anemia, and gestational diabetes. Though we have not determined where we will have simulants accumulate YLDs/deaths (might all be in the intrapartum model). 
 
 .. list-table:: State definitions
   :widths: 15 15 15
