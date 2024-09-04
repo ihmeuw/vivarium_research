@@ -369,6 +369,43 @@ in the simulation will be informed using data specific to the post neonatal age 
     - ['entrance_time', 'maternal_id']
     - Entrance time should be identical for all simulants despite simulants having different birth dates/times from the pregnancy simulation
 
+
+Production Run Specifications
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+All parameters are the same as above unless specifically indicated in the table below.
+
+Two notebooks have been used to find the appropriate seed count, `this seed analysis with the most recent results <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/9fcb9fb334ae94ad2e859cffc78b9ea5c13bb594/verification_and_validation/child_model/child%20seeds%20and%20draws%20analysis.ipynb>`_ and this `notebook that was done previously <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/9fcb9fb334ae94ad2e859cffc78b9ea5c13bb594/verification_and_validation/child_model/model_8.0_seed_analysis.ipynb>`_. 
+
+Draw count is based the minimum size for publication of uncertainty of results. Fewer 
+than 20 draws would be difficult to use to publish uncertainty. 
+
+.. list-table::
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+    - Note
+  * - Location(s)
+    - Ethiopia (ID: 179), Nigeria (214), Pakistan (164)
+    - While data is subnational, model results will be national only
+  * - Number of draws
+    - 1 (mean) or 20
+    - For runs with pregnancy scenarios IFA and zero coverage we will use a mean draw only. For runs with pregnancy scenarios MMS and MMS+targeted BEP we will use 20 draws.
+  * - Population size per draw
+    - 200,000 pregnancies
+    - Usually this has been 20,000 pregnancies per seed with 10 seeds.
+
+Given there will be 37 scenarios will the mean draw (2 pregnancies scenarios * 18 child 
+scenarios + 1 baseline) and 36 scenarios with 20 draws, and all are in 3 locations with 10 seeds, 
+the below math provides a total run count of 22,710. 
+
+37 scenarios * 3 locations * 10 seeds = 1,110
+36 scenarios * 3 locations * 20 draws * 10 seeds = 21,600 
+
+Noting here that this assumes a single SQ-LNS targeting approach and single 
+SQ-LNS effect size (standard OR modified by wasting prevalence).
+
 Variable timestep rules
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1587,7 +1624,7 @@ Wave III
     - All
     - All
     - National runs
-    - TBD if this will include standard and effect modified SQ-LNS or not
+    - Standard SQ-LNS effects only
 
 
 .. list-table:: Output specifications
