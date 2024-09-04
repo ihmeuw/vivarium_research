@@ -104,9 +104,9 @@ all labeled and additional information will be included below.
     - Notes
   * - 1
     - ANC1 rates
-    - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
+    - get_covariate_estimates(location_id=location_id, gbd_round_id=7, year_id=2021, decomp_step='iterative', covariate_id=7)
     - GBD covariate ID 7
-    - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors.
+    - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
   * - 2
     - Ultrasound rate at ANC in baseline scenario
     - 60.7% 
