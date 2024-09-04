@@ -110,17 +110,17 @@ all labeled and additional information will be included below.
   * - 2
     - Ultrasound rate at ANC in baseline scenario
     - 60.7% 
-    - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9201203/
+    - `Linked ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9201203/>`_ 
     - Data value is a stand-in as we finalize. We would like this to be location specific, please code accordingly.
   * - 3
     - Stated gestational age (GA) at ANC 
-    - Real GA +/- a value from a uniform distribution of: 0-5 days for AI ultrasound, 10-30 days for standard ultrasound, 10-45.5 days for no ultrasound 
-    - Ultrasound values assumed from BMGF inputs. No ultrasound value from this paper: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272718#sec007 
+    - Real GA +/- a value from a normal distribution with a mean of zero and standard deviations of: 5 days for AI ultrasound, 20 days for standard ultrasound, and 45.5 days for no ultrasound 
+    - Need further clarification on outstanding questions from BMGF, see `PR comments <https://github.com/ihmeuw/vivarium_research/pull/1525>`_. `Standard deviation value for no ultrasound <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272718#sec007>`_.
     - Values should be confirmed with further research and data anlaysis
   * - 4
     - Successful identification of LBW
     - 80% for AI ultrasound, 61% with standard ultrasound, 10% with no ultrasound 
-    - Need to get AI ultrasound value from BMGF, 61% is from this study: https://link.springer.com/article/10.1186/s12884-023-05866-1, 10% is made-up stand-in value, needs to be replaced
+    - Need to get AI ultrasound value from BMGF, `61% from this study <https://link.springer.com/article/10.1186/s12884-023-05866-1>`_, 10% is made-up stand-in value, needs to be replaced
     - We will not be including false positives at this time. 
 
 
