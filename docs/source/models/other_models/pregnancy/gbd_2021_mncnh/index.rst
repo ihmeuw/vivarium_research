@@ -144,7 +144,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
   :header-rows: 1
 
   * - State
-    - Value
+    - Prevalence
     - Note
   * - np
     - 0
@@ -222,7 +222,11 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
      - ID=15
 
 
-**Pregnancy modeling steps:**
+Pregnancy modeling steps:
++++++++++++++++++++++++++
+
+First is a summary of the steps for the pregnancy model. 
+Details for each step are provided below.
 
 *At initialization:*
 
@@ -234,8 +238,6 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 #. Assign propensity values for ANC and ultrasound 
 #. Begin simulation
 
-
-See below for more detailed information on how to assign several of these items. 
 
 .. note::
 
@@ -298,6 +300,11 @@ A duration of pregnancy value will need to be assigned to all pregnancies regard
 
 For partial term pregnancies (that result in abortion/miscarriage/ectopic pregnancy), assign a duration of pregnancy sampled from a uniform distribution beween 6 and 24 weeks (individual heterogeneity with no parameter uncertainty). For these simulants, the birthweight can be assigned as N/A since they will not be going through the intrapartum model.
 
+.. todo::
+
+   As we figure out YLDs and how they will relate to pregnancy duration, assess if the uniform distribution is a significant limitation and how it might be improved if needed. 
+
+
 For full term pregnancies (that result in live births or stillbirths), a LBWSG exposure value will be assigned that will include both the gestational age and birthweight of the simulant child. For wave 1 of this project, the LBWSG can be assigned using information outlined in the :ref:`LBWSG exposure page <2019_risk_exposure_lbwsg>`. Exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Based on the assigned category, a gestational age and birthweight can be recorded separately.
 
 .. note::
@@ -320,14 +327,13 @@ Assumptions and limitations
 - We do not distiguish between intended and unintended pregnancies.
 - We do not consider the impact of birth interval timing or family size in our model of pregnancy.
 - We do not consider the impact of singleton versus non-singleton pregnancies.
-- We are limited in that we apply the age-specific fertility rate to the *beginning* of pregnancy when it is actually measured at the *end* of pregnancy (birth). Therefore, maternal age at birth in our simulation will be overestimated due to simulants becoming pregnant in one age group and giving birth in the next.
 
 Verification and validation criteria
 ++++++++++++++++++++++++++++++++++++++
 
 The following should validate:
 
-- Average duration of pregnancy
+- Match distribution of LBWSG 
 - Rates of each birth outcomes
 
 References
