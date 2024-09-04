@@ -219,24 +219,21 @@ V&V Checks:
     - XX% of simulants to attend each delivery facility type, based on their propensity 
     - Several details are still outstanding including: types of delivery facilities modeled, will facility propensity vary with age, subnational location or upstream factors, will ANC care propensity be correlated with delivery facility propensity
   * - 2
-    - Type of delivery facility has an overall, documented impact on maternal disorders and outcomes 
-    - Need to determine how we will include this (RR on all outcomes or subset, how will it overlap with other pathways, incidence vs mortality, etc.)
-  * - 3
     - Need to figure out how we will determine which simulants need a c-section
     - 
-  * - 4
+  * - 3
     - XX% of each facility type have cesarian section capabilities
     -  
-  * - 5
+  * - 4
     - XX relative risk on incidence of hemorrhage and obstructed labor 
     - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
-  * - 6
+  * - 5
     - XX% of pregnancy receive in each delivery facility type
     - Confirm understanding that all pregnancies can/should receive this
-  * - 7
+  * - 6
     - XX relative risk of incidence of sepsis and other infections
     - Outstanding items: what is the RR, how will we implement this with overlaps in total MD impact of facility type 
-  * - 8
+  * - 7
     - XX% of pre-term or known LBW pregnancies will receive, split by delivery facility type
     - Outstanding items: data by delivery facility, is this for preterm, LBW, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
 
