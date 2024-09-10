@@ -109,8 +109,8 @@ all labeled and additional information will be included below.
     - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
   * - 2
     - Ultrasound rate at ANC in baseline scenario
-    - Ethiopia: 60.7%, Nigeria: 58.7%, Pakistan: 61.4%
-    - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_, `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_  
+    - Ethiopia: 60.7%, Nigeria: 58.7%, Pakistan: 55.7%
+    - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_ (Table 8.12), `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_  
     - These values are extracted from literature (see links in 'Source' column). For Pakistan, we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research.
   * - 3
     - Stated gestational age (GA) at ANC 
@@ -206,35 +206,51 @@ V&V Checks:
 
 
 .. list-table:: Intrapartum Decision Tree
-  :widths: 3 15 15
+  :widths: 3 5 10 10 15
   :header-rows: 1
 
   * - ID
     - Decision Information 
+    - Data Value 
+    - Source
     - Notes
   * - 0
-    - XX% of simulants have ectopic pregnancies, abortion or miscarriage
-    - These simulants will NOT continue in the model
+    - % of simulants that have ectopic pregnancies, abortion or miscarriage
+    - get_draws(gbd_round_id=7,location_id=location_id, gbd_id_type='cause_id', gbd_id=[995,374], source='como', age_group_id=24, sex_id=2, year_id=2021, decomp_step='iterative')
+    - GBD cause IDs 374 (ectopic pregnancy) and 996 (abortion or miscarriage)
+    - These simulants will NOT continue in the model. We want these values to be country specific. Engineers, you can pull these value straight from GBD using get_draws.
   * - 1
     - XX% of simulants to attend each delivery facility type, based on their propensity 
+    - 
+    - 
     - Several details are still outstanding including: types of delivery facilities modeled, will facility propensity vary with age, subnational location or upstream factors, will ANC care propensity be correlated with delivery facility propensity
   * - 2
     - Need to figure out how we will determine which simulants need a c-section
     - 
   * - 3
     - XX% of each facility type have cesarian section capabilities
+    - 
+    - 
     -  
   * - 4
     - XX relative risk on incidence of hemorrhage and obstructed labor 
+    - 
+    - 
     - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
   * - 5
     - XX% of pregnancy receive in each delivery facility type
+    - 
+    - 
     - Confirm understanding that all pregnancies can/should receive this
   * - 6
     - XX relative risk of incidence of sepsis and other infections
+    - 
+    - 
     - Outstanding items: what is the RR, how will we implement this with overlaps in total MD impact of facility type 
   * - 7
     - XX% of pre-term or known LBW pregnancies will receive, split by delivery facility type
+    - 
+    - 
     - Outstanding items: data by delivery facility, is this for preterm, LBW, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
 
 
