@@ -215,15 +215,15 @@ V&V Checks:
     - Source
     - Notes
   * - 0
-    - XX% of simulants have ectopic pregnancies, abortion or miscarriage
-    -
-    -
-    - These simulants will NOT continue in the model
+    - Incidence of ectopic pregnancies, abortion or miscarriage among pregnant women
+    - get_draws(gbd_round_id=7, location_id=location_id, gbd_id_type='cause_id', gbd_id=[995,374], source='como', measure_id=6, metric_id=3, age_group_id=24, sex_id=2, year_id=2021, decomp_step='iterative')
+    - incidence_c374 + incidence_c995
+    - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence.
   * - 1
-    - XX% of simulants to attend each delivery facility type, based on their propensity
-    -
-    - 
-    - Several details are still outstanding including: types of delivery facilities modeled, will facility propensity vary with age, subnational location or upstream factors, will ANC care propensity be correlated with delivery facility propensity
+    - % of simulants to attend each delivery facility type, based on their propensity
+    - At home (68.3%), in public/governmental health facility (26.6%), in private/NGO health facility (3.3%), and other (4.8%) 
+    - DHS for each location; placeholder values are from `this Ethiopia paper <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_.
+    - Denominator in DHS is all births (live and stillbirths) to interviewed women in the 2 years preceding the survey. The above values are placeholders until we do a more in-depth analysis. We would like this to be location specific, please code accordingly. 
   * - 2
     - Need to figure out how we will determine which simulants need a c-section
     -
