@@ -221,7 +221,7 @@ V&V Checks:
     - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence.
   * - 1
     - % of simulants to attend each delivery facility type, based on their propensity
-    - At home (68.3%), in public/governmental health facility (26.6%), in private/NGO health facility (3.3%), and other (4.8%) 
+    - At home (68.3%), in public/governmental health facility (26.6%), in private and/or NGO health facility (3.3%), and other (4.8%) 
     - DHS for each location; placeholder values are from `this Ethiopia paper <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_.
     - Denominator in DHS is all births (live and stillbirths) to interviewed women in the 2 years preceding the survey. The above values are placeholders until we do a more in-depth analysis. We would like this to be location specific, please code accordingly. 
   * - 2
@@ -230,10 +230,10 @@ V&V Checks:
     - 
     -    
   * - 3
-    - XX% of each facility type have cesarian section capabilities
-    - 
-    - 
-    -  
+    - % of each facility type have cesarian section capabilities
+    - Public/governmental health facility (62%), private and/or NGO health facility (73%), at home  (0%), other (50%) 
+    - EmONC (Ethiopia; saved at J:\Project\simulation_science\optimization_model_data\EmONC 2016_Master Dataset_Final\ETH_EmONC Assessment 2016_Final Report Jan11 2018.pdf) 
+    - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the EmONC Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
   * - 4
     - XX relative risk on incidence of hemorrhage and obstructed labor 
     - 
