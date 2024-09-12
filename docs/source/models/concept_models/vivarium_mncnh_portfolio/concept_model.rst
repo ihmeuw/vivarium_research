@@ -221,7 +221,7 @@ V&V Checks:
     - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
   * - 1
     - % of simulants to attend each delivery facility type, based on their propensity
-    - At home (68.3%), in public/governmental health facility (26.6%), in private for-profit health facility (2.5%), in private not-for-profit health facility (0.8%), and other (1.8) 
+    - At home (68.3%), in public/governmental health facility (26.6%), in private for-profit health facility (2.5%), in private not-for-profit health facility (0.8%), and other (1.8%) 
     - DHS for each location; placeholder values are from `this Ethiopia paper <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_.
     - Denominator in DHS is all births (live and stillbirths) to interviewed women in the 2 years preceding the survey. The above values are placeholders until we do a more in-depth analysis. We would like this to be location specific, please code accordingly. 
   * - 2
@@ -231,7 +231,7 @@ V&V Checks:
     -    
   * - 3
     - % of each facility type have cesarian section capabilities
-    - Public/governmental health facility (62%), private for-profit health facility (60%), at home  (0%), private not-for-profit health facility (86%) 
+    - Public/governmental health facility (62%), private for-profit health facility (60%), at home  (0%), private not-for-profit health facility (86%), other (10%)  
     - EmONC (Ethiopia; saved at J:\Project\simulation_science\optimization_model_data\EmONC 2016_Master Dataset_Final\ETH_EmONC Assessment 2016_Final Report Jan11 2018.pdf) 
     - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the EmONC Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
   * - 4
@@ -241,7 +241,7 @@ V&V Checks:
     - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
   * - 5
     - % of pregnancy receive azithromycin in each delivery facility type
-    - At home (10%), in public/governmental health facility (41%), in private for-profit health facility (10%), and private not-for-profit health facility (10%) 
+    - At home (10%), in public/governmental health facility (41%), in private for-profit health facility (10%), private not-for-profit health facility (10%), other (10%)  
     - SARA (Ethiopia; Table 3.8.2)
     - These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly.  
   * - 6
@@ -251,7 +251,7 @@ V&V Checks:
     - Outstanding items: how will we implement this with overlaps in total MD impact of facility type 
   * - 7
     - % of pre-term or known LBW pregnancies will receive antenatal corticosteroids, split by delivery facility type
-    - At home (10%), in public/governmental health facility (2%), in private for-profit health facility (22%), and private not-for-profit health facility (4%) 
+    - At home (10%), in public/governmental health facility (2%), in private for-profit health facility (22%), and private not-for-profit health facility (4%), other (10%)  
     - EmONC (Ethiopia; Table 10.5.4A)
     - Outstanding items: is this for preterm, LBW, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
 
