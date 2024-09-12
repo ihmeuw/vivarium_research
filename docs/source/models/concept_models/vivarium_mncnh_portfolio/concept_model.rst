@@ -235,7 +235,7 @@ V&V Checks:
     - EmONC (Ethiopia; saved at J:\Project\simulation_science\optimization_model_data\EmONC 2016_Master Dataset_Final\ETH_EmONC Assessment 2016_Final Report Jan11 2018.pdf) 
     - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the EmONC Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
   * - 4
-    - XX relative risk on incidence of hemorrhage and obstructed labor 
+    - XX relative risk of c-section on incidence of hemorrhage and obstructed labor 
     - 
     - 
     - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
@@ -245,15 +245,15 @@ V&V Checks:
     - SARA (Ethiopia; Table 3.8.2)
     - These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The 'at home' and 'other' values are made up. 
   * - 6
-    - XX relative risk of incidence of sepsis and other infections
-    - 
-    - 
-    - Outstanding items: what is the RR, how will we implement this with overlaps in total MD impact of facility type 
+    - Relative risk of azithromycin on incidence of sepsis and other infections
+    - 0.65 (0.55, 0.77)
+    - https://www.ajog.org/article/S0002-9378(22)02210-4/fulltext#undfig1 
+    - Outstanding items: how will we implement this with overlaps in total MD impact of facility type 
   * - 7
-    - XX% of pre-term or known LBW pregnancies will receive, split by delivery facility type
-    - 
-    - 
-    - Outstanding items: data by delivery facility, is this for preterm, LBW, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
+    - XX% of pre-term or known LBW pregnancies will receive antenatal corticosteroids, split by delivery facility type
+    - At home (10%), in public/governmental health facility (2%), in private and/or NGO health facility (13%), and other (10%) 
+    - EmONC (Ethiopia; Table 10.5.4A)
+    - Outstanding items: is this for preterm, LBW, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
 
 
 .. list-table:: Inputs to Intrapartum Decision Tree
