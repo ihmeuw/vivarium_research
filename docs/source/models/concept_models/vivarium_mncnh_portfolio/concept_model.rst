@@ -218,7 +218,7 @@ V&V Checks:
     - Incidence of ectopic pregnancies, abortion or miscarriage
     - get_draws(gbd_round_id=7, location_id=location_id, gbd_id_type='cause_id', gbd_id=[995,374], source='como', measure_id=6, metric_id=3, age_group_id=24, sex_id=2, year_id=2021, decomp_step='iterative')
     - incidence_c374 + incidence_c995
-    - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence.
+    - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
   * - 1
     - % of simulants to attend each delivery facility type, based on their propensity
     - At home (68.3%), in public/governmental health facility (26.6%), in private and/or NGO health facility (3.3%), and other (4.8%) 
@@ -240,10 +240,10 @@ V&V Checks:
     - 
     - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
   * - 5
-    - XX% of pregnancy receive in each delivery facility type
-    - 
-    - 
-    - Confirm understanding that all pregnancies can/should receive this
+    - % of pregnancy receive azithromycin in each delivery facility type
+    - At home (10%), in public/governmental health facility (41%), in private and/or NGO health facility (10%), and other (10%) 
+    - SARA (Ethiopia; Table 3.8.2)
+    - These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The 'at home' and 'other' values are made up. 
   * - 6
     - XX relative risk of incidence of sepsis and other infections
     - 
