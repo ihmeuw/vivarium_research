@@ -206,35 +206,53 @@ V&V Checks:
 
 
 .. list-table:: Intrapartum Decision Tree
-  :widths: 3 15 15
+  :widths:  3 5 10 10 15
   :header-rows: 1
 
   * - ID
     - Decision Information 
+    - Data Value 
+    - Source
     - Notes
   * - 0
-    - XX% of simulants have ectopic pregnancies, abortion or miscarriage
-    - These simulants will NOT continue in the model
+    - Incidence of ectopic pregnancies, abortion or miscarriage
+    - incidence_c374 + incidence_c995
+    - get_draws(gbd_round_id=7, location_id=location_id, gbd_id_type='cause_id', gbd_id=[995,374], source='como', measure_id=6, metric_id=3, age_group_id=24, sex_id=2, year_id=2021, decomp_step='iterative')
+    - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence.
   * - 1
-    - XX% of simulants to attend each delivery facility type, based on their propensity 
-    - Several details are still outstanding including: types of delivery facilities modeled, will facility propensity vary with age, subnational location or upstream factors, will ANC care propensity be correlated with delivery facility propensity
+    - % of simulants to attend each delivery facility type, based on their propensity
+    - At home (68.3%), in public/governmental health facility (26.6%), in private and/or NGO health facility (3.3%), and other (4.8%) 
+    - DHS for each location; placeholder values are from `this Ethiopia paper <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_.
+    - Denominator in DHS is all births (live and stillbirths) to interviewed women in the 2 years preceding the survey. The above values are placeholders until we do a more in-depth analysis. We would like this to be location specific, please code accordingly. 
   * - 2
     - Need to figure out how we will determine which simulants need a c-section
+    -
     - 
+    -    
   * - 3
-    - XX% of each facility type have cesarian section capabilities
-    -  
+    - % of each facility type have cesarian section capabilities
+    - Public/governmental health facility (62%), private and/or NGO health facility (73%), at home  (0%), other (50%) 
+    - EmONC (Ethiopia; filepath saved `on SharePoint <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B63F98143-C6C3-4CF7-BF62-969344726A87%7D&file=ethiopia_data_received_notes.docx&action=default&mobileredirect=true>`_.) 
+    - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the EmONC Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
   * - 4
     - XX relative risk on incidence of hemorrhage and obstructed labor 
+    - 
+    - 
     - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
   * - 5
     - XX% of pregnancy receive in each delivery facility type
+    - 
+    - 
     - Confirm understanding that all pregnancies can/should receive this
   * - 6
     - XX relative risk of incidence of sepsis and other infections
+    - 
+    - 
     - Outstanding items: what is the RR, how will we implement this with overlaps in total MD impact of facility type 
   * - 7
     - XX% of pre-term or known LBW pregnancies will receive, split by delivery facility type
+    - 
+    - 
     - Outstanding items: data by delivery facility, is this for preterm, LBW, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
 
 
