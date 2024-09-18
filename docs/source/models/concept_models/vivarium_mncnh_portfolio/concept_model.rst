@@ -259,6 +259,11 @@ V&V Checks:
     - At home (10%), in public/governmental health facility (2%), in private for-profit health facility (22%), and private not-for-profit health facility (4%), other (10%)  
     - EmONC (Ethiopia; Table 10.5.4A)
     - Outstanding items: is this for preterm, LBW, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
+  * - 8
+    - % of those who receive intrapartum sensors that get identified as needing a c-section
+    - 
+    - 
+    - Outstanding items: which facility types have intrapartum sensors? Is there anything else that an intrapartum sensor should influence (e.g. who receives ACS, can someone be identified as high risk from an intrapartum sensor and be moved to a higher level facility in time for birth)?
 
 
 .. list-table:: Inputs to Intrapartum Decision Tree
