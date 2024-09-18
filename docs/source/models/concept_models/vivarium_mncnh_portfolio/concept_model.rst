@@ -258,7 +258,7 @@ V&V Checks:
     - % of pre-term or known LBW pregnancies will receive antenatal corticosteroids, split by delivery facility type
     - At home (10%), in public/governmental hospital (2%), in private for-profit health facility (22%), and private not-for-profit health facility (4%), country-specific governmental health facility (10%)  
     - EmONC (Ethiopia; Table 10.5.4A)
-    - Outstanding items: is this for preterm, LBW, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
+    - These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The denominator for these values is LBW and preterm births. Outstanding items: believe this only affected neonatal outcomes, confirm with BMGF
 
 
 .. list-table:: Inputs to Intrapartum Decision Tree
