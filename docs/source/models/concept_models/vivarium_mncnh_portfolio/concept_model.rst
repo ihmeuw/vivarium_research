@@ -248,7 +248,7 @@ V&V Checks:
     - % of pregnancy receive azithromycin in each delivery facility type
     - At home (10%), in public/governmental hospital (41%), in private for-profit health facility (10%), private not-for-profit health facility (10%), country-specific governmental health facility (10%)  
     - SARA (Ethiopia; Table 3.8.2)
-    - These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly.  
+    - These are placeholder values (percentage of each facility type that have azithromycin, not the percentage of pregnancies that receive it) and will be updated with further analysis. We want these to be location specific, please code accordingly.  
   * - 6
     - Relative risk of azithromycin on incidence of sepsis and other infections
     - 0.65 (0.55, 0.77)
