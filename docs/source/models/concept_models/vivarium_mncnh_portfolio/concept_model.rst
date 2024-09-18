@@ -109,9 +109,9 @@ all labeled and additional information will be included below.
     - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
   * - 2
     - Ultrasound rate at ANC in baseline scenario
-    - Ethiopia: 60.7%, Nigeria: 58.7%, Pakistan: 61.4%
-    - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_, `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_  
-    - These values are extracted from literature (see links in 'Source' column). For Pakistan, we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research.
+    - Ethiopia: 60.7%, Nigeria: 58.7%, Pakistan: 66.7%
+    - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_ (Table 8.12, averaged percentage of women attending ANC 1-3 times and 4+ times), `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_  
+    - These values are extracted from literature (see links in 'Source' column). For Pakistan, we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research. The denominator of these values is: pregnant people who have attended an ANC. 
   * - 3
     - Stated gestational age (GA) at ANC 
     - Real GA +/- a value from a normal distribution with a mean of zero and standard deviations of: 5 days for AI ultrasound, 20 days for standard ultrasound, and 45.5 days for no ultrasound 
@@ -216,9 +216,9 @@ V&V Checks:
     - Notes
   * - 0
     - Incidence of ectopic pregnancies, abortion or miscarriage
-    - get_draws(gbd_round_id=7, location_id=location_id, gbd_id_type='cause_id', gbd_id=[995,374], source='como', measure_id=6, metric_id=3, age_group_id=24, sex_id=2, year_id=2021, decomp_step='iterative')
     - incidence_c374 + incidence_c995
-    - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence. 
+    - get_draws(gbd_round_id=7, location_id=location_id, gbd_id_type='cause_id', gbd_id=[995,374], source='como', measure_id=6, metric_id=3, age_group_id=24, sex_id=2, year_id=2021, decomp_step='iterative')
+    - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence.
   * - 1
     - % of simulants to attend each delivery facility type, based on their propensity
     - At home (68.3%), in public/governmental health facility (26.6%), in private for-profit health facility (2.5%), in private not-for-profit health facility (0.8%), and other (1.8%) 
@@ -231,8 +231,8 @@ V&V Checks:
     -    
   * - 3
     - % of each facility type have cesarian section capabilities
-    - Public/governmental health facility (62%), private for-profit health facility (60%), at home  (0%), private not-for-profit health facility (86%), other (10%)  
-    - EmONC (Ethiopia; saved at J:\Project\simulation_science\optimization_model_data\EmONC 2016_Master Dataset_Final\ETH_EmONC Assessment 2016_Final Report Jan11 2018.pdf) 
+    - Public/governmental health facility (62%), private and/or NGO health facility (73%), at home  (0%), other (50%) 
+    - EmONC (Ethiopia; filepath saved `on SharePoint <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B63F98143-C6C3-4CF7-BF62-969344726A87%7D&file=ethiopia_data_received_notes.docx&action=default&mobileredirect=true>`_.) 
     - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the EmONC Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
   * - 4a
     - Relative risk of c-section on incidence of hemorrhage
