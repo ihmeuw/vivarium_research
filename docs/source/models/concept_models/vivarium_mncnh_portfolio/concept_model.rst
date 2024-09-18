@@ -245,7 +245,7 @@ V&V Checks:
     - 
     - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type  
   * - 5
-    - % of pregnancy receive azithromycin in each delivery facility type
+    - % of pregnancies that receive azithromycin in each delivery facility type
     - At home (10%), in public/governmental health facility (41%), in private for-profit health facility (10%), private not-for-profit health facility (10%), other (10%)  
     - SARA (Ethiopia; Table 3.8.2)
     - These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly.  
