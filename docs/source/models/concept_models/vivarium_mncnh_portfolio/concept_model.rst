@@ -234,11 +234,16 @@ V&V Checks:
     - Public/governmental health facility (62%), private for-profit health facility (60%), at home  (0%), private not-for-profit health facility (86%), other (10%)  
     - EmONC (Ethiopia; saved at J:\Project\simulation_science\optimization_model_data\EmONC 2016_Master Dataset_Final\ETH_EmONC Assessment 2016_Final Report Jan11 2018.pdf) 
     - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the EmONC Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
-  * - 4
-    - XX relative risk of c-section on incidence of hemorrhage and obstructed labor 
+  * - 4a
+    - Relative risk of c-section on incidence of hemorrhage
+    - 2.05 (1.84-2.29)
+    - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7887994/
+    - This value is a stand-in from this population-based study in Tibet (see 'Source' column), in which the authors reported an odds ratio rather than a relative risk. With further research and analysis we will likely update this value. Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type
+  * - 4b
+    - Relative risk of c-section on incidence of obstructed labor 
     - 
     - 
-    - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
+    - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type  
   * - 5
     - % of pregnancy receive azithromycin in each delivery facility type
     - At home (10%), in public/governmental health facility (41%), in private for-profit health facility (10%), private not-for-profit health facility (10%), other (10%)  
