@@ -231,7 +231,7 @@ V&V Checks:
     -    
   * - 3
     - % of each facility type have cesarian section capabilities
-    - Public/governmental hospital (62%), private and/or NGO health facility (73%), at home  (0%), country-specific governmental health facility (50%) 
+    - Public/governmental health facility (62%), private for-profit health facility (60%), at home (0%), private not-for-profit health facility (86%), other (10%)
     - EmONC (Ethiopia; filepath saved `on SharePoint <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B63F98143-C6C3-4CF7-BF62-969344726A87%7D&file=ethiopia_data_received_notes.docx&action=default&mobileredirect=true>`_.) 
     - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the EmONC Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
   * - 4a
