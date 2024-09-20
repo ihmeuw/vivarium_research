@@ -221,7 +221,7 @@ V&V Checks:
     - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence.
   * - 1
     - % of simulants to attend each delivery facility type, based on their propensity
-    - At home (68.3%), in public/governmental health facility (26.6%), in private and/or NGO health facility (3.3%), and other (4.8%) 
+    - At home (68.3%), in public/governmental hospital(26.6%), in private for-profit health facility (2.5%), in private not-for-profit health facility (0.8%), and country-specific governmental health facility (1.8%) 
     - DHS for each location; placeholder values are from `this Ethiopia paper <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_.
     - Denominator in DHS is all births (live and stillbirths) to interviewed women in the 2 years preceding the survey. The above values are placeholders until we do a more in-depth analysis. We would like this to be location specific, please code accordingly. 
   * - 2
@@ -231,29 +231,34 @@ V&V Checks:
     -    
   * - 3
     - % of each facility type have cesarian section capabilities
-    - Public/governmental health facility (62%), private and/or NGO health facility (73%), at home  (0%), other (50%) 
+    - Public/governmental health facility (62%), private for-profit health facility (60%), at home (0%), private not-for-profit health facility (86%), other (10%)
     - EmONC (Ethiopia; filepath saved `on SharePoint <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B63F98143-C6C3-4CF7-BF62-969344726A87%7D&file=ethiopia_data_received_notes.docx&action=default&mobileredirect=true>`_.) 
     - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the EmONC Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
-  * - 4
-    - XX relative risk on incidence of hemorrhage and obstructed labor 
+  * - 4a
+    - Relative risk of c-section on incidence of hemorrhage
+    - 2.05 (1.84-2.29)
+    - `Pubu et al 2021 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7887994/>`_ 
+    - This value is a stand-in from this population-based study in Tibet (see 'Source' column), in which the authors reported an odds ratio rather than a relative risk. With further research and analysis we will likely update this value. Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type
+  * - 4b
+    - Relative risk of c-section on incidence of obstructed labor 
     - 
     - 
-    - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
+    - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type  
   * - 5
-    - XX% of pregnancy receive in each delivery facility type
-    - 
-    - 
-    - Confirm understanding that all pregnancies can/should receive this
+    - % of pregnancy receive azithromycin in each delivery facility type
+    - At home (10%), in public/governmental hospital (41%), in private for-profit health facility (10%), private not-for-profit health facility (10%), country-specific governmental health facility (10%)  
+    - SARA (Ethiopia; Table 3.8.2)
+    - These are placeholder values (percentage of each facility type that have azithromycin, not the percentage of pregnancies that receive it) and will be updated with further analysis. We want these to be location specific, please code accordingly.  
   * - 6
-    - XX relative risk of incidence of sepsis and other infections
-    - 
-    - 
-    - Outstanding items: what is the RR, how will we implement this with overlaps in total MD impact of facility type 
+    - Relative risk of azithromycin on incidence of sepsis and other infections
+    - 0.65 (0.55, 0.77)
+    - `Tita et al 2023 <https://www.ajog.org/article/S0002-9378(22)02210-4/fulltext#undfig1>`_ 
+    - Outstanding items: how will we implement this with overlaps in total MD impact of facility type 
   * - 7
-    - XX% of pre-term or known LBW pregnancies will receive, split by delivery facility type
-    - 
-    - 
-    - Outstanding items: data by delivery facility, is this for preterm, LBW, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
+    - % of pre-term or known LBW pregnancies will receive antenatal corticosteroids, split by delivery facility type
+    - At home (10%), in public/governmental hospital (2%), in private for-profit health facility (22%), and private not-for-profit health facility (4%), country-specific governmental health facility (10%)  
+    - EmONC (Ethiopia; Table 10.5.4A)
+    - These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The denominator for these values is LBW and preterm births. Outstanding items: believe this only affected neonatal outcomes, confirm with BMGF
 
 
 .. list-table:: Inputs to Intrapartum Decision Tree
