@@ -238,12 +238,7 @@ V&V Checks:
     - Relative risk of c-section on incidence of hemorrhage
     - 2.05 (1.84-2.29)
     - `Pubu et al 2021 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7887994/>`_ 
-    - This value is a stand-in from this population-based study in Tibet (see 'Source' column), in which the authors reported an odds ratio rather than a relative risk. With further research and analysis we will likely update this value. Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type
-  * - 4b
-    - Relative risk of c-section on incidence of obstructed labor 
-    - 
-    - 
-    - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type  
+    - This value is a stand-in from this population-based study in Tibet (see 'Source' column), in which the authors reported an odds ratio rather than a relative risk. With further research and analysis we will likely update this value. Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
   * - 5
     - % of pregnancy receive azithromycin in each delivery facility type
     - At home (10%), in public/governmental hospital (41%), in private for-profit health facility (10%), private not-for-profit health facility (10%), country-specific governmental health facility (10%)  
