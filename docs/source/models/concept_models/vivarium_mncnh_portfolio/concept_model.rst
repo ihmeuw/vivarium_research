@@ -94,24 +94,34 @@ all labeled and additional information will be included below.
 .. image:: pregnancy_decision_tree_vr.svg
 
 .. list-table:: Pregnancy Decision Tree
-  :widths: 3 15 15
+  :widths: 3 5 10 10 15
   :header-rows: 1
 
   * - ID
     - Decision Information 
+    - Data Value 
+    - Source
     - Notes
   * - 1
-    - XX% of simulants will receive ANC care, based on their propensity 
-    - Several details are still outstanding including: will ANC vary with age, subnational location or upstream factors, will ANC care propensity be correlated with delivery facility propensity
+    - ANC1 rates
+    - get_covariate_estimates(location_id=location_id, gbd_round_id=7, year_id=2021, decomp_step='iterative', covariate_id=7)
+    - GBD covariate ID 7
+    - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
   * - 2
-    - XX% of simulants will receive AI-assisted ultrasound, XX% will receive standard ultrasound, XX% will receive no ultrasound 
-    - Need to determine if this is random or correlated with other outcomes. Need to find baseline and scenario values.
+    - Ultrasound rate at ANC in baseline scenario
+    - Ethiopia: 60.7%, Nigeria: 58.7%, Pakistan: 66.7%
+    - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_ (Table 8.12, averaged percentage of women attending ANC 1-3 times and 4+ times), `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_  
+    - These values are extracted from literature (see links in 'Source' column). For Pakistan, we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research. The denominator of these values is: pregnant people who have attended an ANC. 
   * - 3
-    - All patients are assigned a stated gestational age (GA). Their stated GA will be their real GA +/- an error margin randomly assigned within an interval. For AI assisted ultrasound, the interval is +/- XX weeks, for standard ultrasound XX weeks, for no ultrasound XX weeks. 
-    - Check if distribution for error is random or more likely to be an over/underestimate. 
+    - Stated gestational age (GA) at ANC 
+    - Real GA +/- a value from a normal distribution with a mean of zero and standard deviations of: 5 days for AI ultrasound, 20 days for standard ultrasound, and 45.5 days for no ultrasound 
+    - Need further clarification on outstanding questions from BMGF, see `PR comments <https://github.com/ihmeuw/vivarium_research/pull/1525>`_. `Standard deviation value for no ultrasound <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272718#sec007>`_.
+    - Values should be confirmed with further research and data anlaysis
   * - 4
-    - XX% of those who received AI-assisted ultrasound will be identified as SGA, XX% with standard ultrasound and XX% with no ultrasound. 
-    - 
+    - Successful identification of LBW
+    - 80% for AI ultrasound, 61% with standard ultrasound, 10% with no ultrasound 
+    - Need to get AI ultrasound value from BMGF, `61% from this study <https://link.springer.com/article/10.1186/s12884-023-05866-1>`_, 10% is made-up stand-in value, needs to be replaced
+    - We will not be including false positives at this time. 
 
 
 .. list-table:: Inputs to Pregnancy Decision Tree
@@ -122,23 +132,23 @@ all labeled and additional information will be included below.
     - Data Source 
     - Notes
   * - Age 
-    - GBD and fertility model 
-    - Will be the same population generation as used in nutrition optimization pregnancy model 
-  * - Upstream factors
-    - Likely DHS 
-    - Need to decide what if anything we want to include
+    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+    - 
   * - ANC Visit Propensity
     - Likely DHS 
-    - Need to determine correlation if we want to use it 
+    - Need to determine correlation if we want to use it. For now use standard propensity values.
   * - Gestational age at birth
-    - GBD LBWSG
+    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
-  * - Small for gestational age at birth 
-    - GBD LBWSG
-    - Need to find definition for SGA and determine percent, need to define overlap with gestational age if relevant
-  * - Pregnancy end type
-    - GBD
-    - Sum of GBD ectopic and abortion and miscarriage rates
+  * - Birthweight
+    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+    - 
+  * - Low birthweight status
+    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+    - 
+  * - Pregnancy term (full term or partial term)
+    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+    - 
 
 
 .. list-table:: Outputs from Pregnancy Decision Tree
@@ -154,15 +164,24 @@ all labeled and additional information will be included below.
   * - Ultrasound status (AI assisted, standard, none)
     - Decision tree point
     - 
+  * - Gestational age at birth
+    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+    - 
   * - Gestational age stated
     - Decision tree value
     - We should track both the real GA at birth and the believed GA 
-  * - If identified as small for gestational age
+  * - Birthweight
+    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+    - 
+  * - Low birthweight status
+    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+    - 
+  * - If identified as low birthweight
     - Decision tree value
-    - We should track both the real SGA status and the believed one
-  * - Pregnancy end type
-    - GBD
-    - Sum of GBD ectopic and abortion and miscarriage rates
+    - We should track both the real LBW status and the believed one
+  * - Pregnancy term (full term or partial term)
+    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+    - 
 
 
 Limitations:
@@ -170,8 +189,16 @@ Limitations:
 * Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
 * Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
 * We are not planning to include ANC timing. The timing of ANC visits impacts the ability to accurately estimate gestational age, so we will use an average instead. 
-* The current version of the model does not include any false positive rates for pre-term of SGA. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
+* The current version of the model does not include any false positive rates for pre-term or LBW. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
 * We are not planning to include twins or multiple pregnancies, which has limitations as twins are more likely to preterm and have birth complications. 
+
+V&V Checks:
+
+* Confirm ANC visit rate matches expectations 
+* Confirm ultrasound rates matches inputs for all scenarios 
+* Confirm stated gestational age and real gestational age have the correct margin of error based on ultrasound type 
+* Confirm that rate of identifying low birthweight is correct based on ultrasound type
+
 
 **Component 2**: The Intrapartum Model
 
@@ -179,39 +206,59 @@ Limitations:
 
 
 .. list-table:: Intrapartum Decision Tree
-  :widths: 3 15 15
+  :widths:  3 5 10 10 15
   :header-rows: 1
 
   * - ID
     - Decision Information 
+    - Data Value 
+    - Source
     - Notes
   * - 0
-    - XX% of simulants have ectopic pregnancies, abortion or miscarriage
-    - These simulants will NOT continue in the model
+    - Incidence of ectopic pregnancies, abortion or miscarriage
+    - incidence_c374 + incidence_c995
+    - get_draws(gbd_round_id=7, location_id=location_id, gbd_id_type='cause_id', gbd_id=[995,374], source='como', measure_id=6, metric_id=3, age_group_id=24, sex_id=2, year_id=2021, decomp_step='iterative')
+    - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence.
   * - 1
-    - XX% of simulants to attend each delivery facility type, based on their propensity 
-    - Several details are still outstanding including: types of delivery facilities modeled, will facility propensity vary with age, subnational location or upstream factors, will ANC care propensity be correlated with delivery facility propensity
+    - % of simulants to attend each delivery facility type, based on their propensity
+    - At home (68.3%), in public/governmental hospital(26.6%), in private for-profit health facility (2.5%), in private not-for-profit health facility (0.8%), and country-specific governmental health facility (1.8%) 
+    - DHS for each location; placeholder values are from `this Ethiopia paper <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_.
+    - Denominator in DHS is all births (live and stillbirths) to interviewed women in the 2 years preceding the survey. The above values are placeholders until we do a more in-depth analysis. We would like this to be location specific, please code accordingly. 
   * - 2
-    - Type of delivery facility has an overall, documented impact on maternal disorders and outcomes 
-    - Need to determine how we will include this (RR on all outcomes or subset, how will it overlap with other pathways, incidence vs mortality, etc.)
-  * - 3
     - Need to figure out how we will determine which simulants need a c-section
+    -
     - 
-  * - 4
-    - XX% of each facility type have cesarian section capabilities
-    -  
+    -    
+  * - 3
+    - % of each facility type have cesarian section capabilities
+    - Public/governmental health facility (62%), private for-profit health facility (60%), at home (0%), private not-for-profit health facility (86%), other (10%)
+    - EmONC (Ethiopia; filepath saved `on SharePoint <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B63F98143-C6C3-4CF7-BF62-969344726A87%7D&file=ethiopia_data_received_notes.docx&action=default&mobileredirect=true>`_.) 
+    - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the EmONC Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
+  * - 4a
+    - Relative risk of c-section on incidence of hemorrhage
+    - 2.05 (1.84-2.29)
+    - `Pubu et al 2021 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7887994/>`_ 
+    - This value is a stand-in from this population-based study in Tibet (see 'Source' column), in which the authors reported an odds ratio rather than a relative risk. With further research and analysis we will likely update this value. Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type
+  * - 4b
+    - Relative risk of c-section on incidence of obstructed labor 
+    - 
+    - 
+    - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type  
   * - 5
-    - XX relative risk on incidence of hemorrhage and obstructed labor 
-    - Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
+    - % of pregnancy receive azithromycin in each delivery facility type
+    - At home (10%), in public/governmental hospital (41%), in private for-profit health facility (10%), private not-for-profit health facility (10%), country-specific governmental health facility (10%)  
+    - SARA (Ethiopia; Table 3.8.2)
+    - These are placeholder values (percentage of each facility type that have azithromycin, not the percentage of pregnancies that receive it) and will be updated with further analysis. We want these to be location specific, please code accordingly.  
   * - 6
-    - XX% of pregnancy receive in each delivery facility type
-    - Confirm understanding that all pregnancies can/should receive this
+    - Relative risk of azithromycin on incidence of sepsis and other infections
+    - 0.65 (0.55, 0.77)
+    - `Tita et al 2023 <https://www.ajog.org/article/S0002-9378(22)02210-4/fulltext#undfig1>`_ 
+    - Outstanding items: how will we implement this with overlaps in total MD impact of facility type 
   * - 7
-    - XX relative risk of incidence of sepsis and other infections
-    - Outstanding items: what is the RR, how will we implement this with overlaps in total MD impact of facility type 
-  * - 8
-    - XX% of pre-term or known SGA pregnancies will receive, split by delivery facility type
-    - Outstanding items: data by delivery facility, is this for preterm, SGA, or both/combination; believe this only affected neonatal outcomes, confirm with BMGF
+    - % of pre-term or known LBW pregnancies will receive antenatal corticosteroids, split by delivery facility type
+    - At home (10%), in public/governmental hospital (2%), in private for-profit health facility (22%), and private not-for-profit health facility (4%), country-specific governmental health facility (10%)  
+    - EmONC (Ethiopia; Table 10.5.4A)
+    - These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The denominator for these values is LBW and preterm births. Outstanding items: believe this only affected neonatal outcomes, confirm with BMGF
 
 
 .. list-table:: Inputs to Intrapartum Decision Tree
@@ -239,10 +286,10 @@ Limitations:
   * - Gestational age stated
     - Decision tree value
     - 
-  * - Small for gestational age at birth 
+  * - Low birthweight 
     - GBD LBWSG
     - 
-  * - If identified as small for gestational age
+  * - If identified as low birthweight
     - Decision tree value
     - 
   * - Pregnancy end
@@ -278,7 +325,7 @@ Limitations:
   * - Birthweight
     - GBD LBWSG
     - 
-  * - If identified as small for gestational age
+  * - If identified as low birthweight
     - Decision tree value
     - From pregnancy model
   * - Pregnancy end
@@ -319,7 +366,7 @@ Limitations:
     - Need to confirm this will impact mortality not incidence. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
   * - 4
     - XX% of each type of facility have probiotics available
-    - Need to determine who recevied probiotics - all newborns, only SGA, only preterm, etc. 
+    - Need to determine who recevied probiotics - all newborns, only LBW, only preterm, etc. 
   * - 5
     - XX relative risk on incidence of sepsis or other neonatal infections
     - Need to confirm this will impact incidence not mortality. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
@@ -362,7 +409,7 @@ Limitations:
   * - Birthweight
     - From intrapartum model
     - 
-  * - If identified as small for gestational age
+  * - If identified as low birthweight
     - Decision tree value
     - From pregnancy model
   * - If birth parent experienced obstructive labor
