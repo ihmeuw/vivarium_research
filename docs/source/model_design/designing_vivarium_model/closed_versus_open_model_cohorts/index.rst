@@ -69,7 +69,7 @@ Similarly, there are two ways a simulant can leave a simulation:
 
 .. note::
   
-  Currently, the only Vivarium simulation where it is possible for simulants to enter and leave the cohort via migration is our
+  As of September, 2024, the only Vivarium simulation where it is possible for simulants to enter and leave the cohort via migration is our
   `simulation for the PRL project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_census_synthdata/concept_model.html>`_.
   Most of our open-cohort Vivarium simulations are what is typically referred to as 'dynamic cohort analysis', which
   is a subset of the greater umbrella category of open cohort analysis, in which new simulants are added over the course of the
