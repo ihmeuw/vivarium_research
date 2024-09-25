@@ -231,9 +231,9 @@ V&V Checks:
     -    
   * - 3
     - % of each facility type have cesarian section capabilities
-    - At home (0%), in hospital(74%), in clinic/low-level facility (53%)
-    - EmONC (Ethiopia; filepath saved `on SharePoint <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B63F98143-C6C3-4CF7-BF62-969344726A87%7D&file=ethiopia_data_received_notes.docx&action=default&mobileredirect=true>`_.) 
-    - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the EmONC Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
+    - At home (0%), in hospital(94%), in clinic/low-level facility (1%)
+    - SARA (Ethiopia; filepath saved `on SharePoint <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B63F98143-C6C3-4CF7-BF62-969344726A87%7D&file=ethiopia_data_received_notes.docx&action=default&mobileredirect=true>`_.) 
+    - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the SARA Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
   * - 4a
     - Relative risk of c-section on incidence of hemorrhage
     - 2.05 (1.84-2.29)
