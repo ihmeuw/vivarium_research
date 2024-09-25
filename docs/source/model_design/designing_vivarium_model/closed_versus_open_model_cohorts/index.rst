@@ -47,7 +47,7 @@ When Vivarium researchers use the phrase 'cohort analysis', it means something a
 a real-world study might define it.  In the context of microsimulation, the term 'cohort' is used to describe 
 a group of simulated individuals who share certain baseline characteristics or are subject to the same set of 
 rules and conditions over the simulation period. Microsimulation models often track these cohorts to project 
-outcomes under various scenarios.
+outcomes under various scenarios. 
 
 In microsimulation, we can think of two distinct types of cohort analysis: open and closed cohort analysis.
 These two types essentially differ based on how fertility is enacted in the demographics of our microsimulation. 
@@ -80,8 +80,18 @@ Closed cohort analysis
 
 Closed cohort analysis in Vivarium occurs when no new simulants are added to the cohort over the course of the
 simulation. In such simulations, simulants can only be initialized into the population at the beginning of the 
-simulation. If a simulant dies or transitions out of the model, they do not get replaced. An example of a Vivarium
-simulation that used closed cohort analysis is our pregnancy model for the Nutrition Optimization project (`see here <https://vivarium-research.readthedocs.io/en/latest/models/other_models/pregnancy/gbd_2021_closed_cohort/index.html?highlight=cohort#pregnancy-gbd-2021-closed-cohort>`_).
+simulation. If a simulant dies or transitions out of the model, they do not get replaced. 
+
+Simulation cohort vs. observation cohort
+++++++++++++++++++++++++++++++++++++++++
+
+When considering whether the simulation you're building is an open or closed cohort analysis, it can be helpful to 
+conceptualize two different framings of what the cohort is: the simulation cohort and the observation cohort. 
+What we consider a *simulation cohort* includes the entire population of simulants who have been programmed into the simulation. An *observation cohort*,
+conversely, is the population of simulants who are actually observed (i.e., their data are recorded). Ideally, from 
+a computational perspective, our simulation and observation cohort would be one and the same: i.e., we wouldn't be simulating
+individuals who don't get observed. However, it is not rare for these two cohorts to be different. [[use CVD and PRL sims as examples to illustrate]]
+
 
 Interpretation of results
 +++++++++++++++++++++++++
@@ -91,11 +101,12 @@ our results.
 
 With closed cohort analysis, we can examine results through the *Kaplan-Meier survival curve*, which allows
 us to calculate survival probabilities. In essence, the Kaplan-Meier survival curve provides a way to visualize 
-the probability of surviving over time, accounting for time in small intervals. [Goel-MK-2010]_ 
+the probability of surviving over time, accounting for time in small intervals. [Goel-MK-2010]_ We conducted a 
+survival analysis in our simulation of multiple myeloma.
 
 .. todo:: 
 
-  - Expand on this section.
+  - Expand on this section (Are there other ways in which open vs. closed cohort analysis affects how we interpret our results?)
   - Link out to `survival analysis page <https://vivarium-research.readthedocs.io/en/latest/model_design/general_reference_material/survival_analysis/index.html>`_ when it's ready.
 
 
