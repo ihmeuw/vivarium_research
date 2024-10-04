@@ -478,9 +478,37 @@ Limitations:
 5.0 Model run requests
 ++++++++++++++++++++++
 
-.. todo::
+.. list-table:: Model run plan as of October 4, 2024
+  :header-rows: 1
 
-  Fill in this section as we continue to work
+  * - Number
+    - Run
+    - Status
+    - Priority
+    - Number of draws
+    - Population size per draw
+    - Note
+  * - 1
+    - Wave I Pakistan maternal
+    - Incomplete
+    - N/A
+    - 25
+    - 600,000
+    - 
+  * - 2
+    - Wave I Nigeria maternal
+    - Incomplete
+    - N/A
+    - 25
+    - 600,000
+    - 
+  * - 3
+    - Wave I Ethiopia maternal
+    - Incomplete
+    - N/A
+    - 25
+    - 600,000
+    - 
 
 
 .. _mncnh_portfolio_6.0:
