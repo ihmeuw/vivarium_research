@@ -489,27 +489,33 @@ Limitations:
     - Population size per draw
     - Note
   * - 1
-    - Wave I Pakistan maternal
+    - Wave I Pakistan maternal V&V
     - Incomplete
     - N/A
-    - 25
-    - 600,000
+    - 20
+    - 20,000
     - 
   * - 2
-    - Wave I Nigeria maternal
+    - Wave I Nigeria maternal V&V
     - Incomplete
     - N/A
-    - 25
-    - 600,000
+    - 20
+    - 20,000
     - 
   * - 3
-    - Wave I Ethiopia maternal
+    - Wave I Ethiopia maternal V&V
     - Incomplete
     - N/A
-    - 25
-    - 600,000
+    - 20
+    - 20,000
     - 
 
+.. note:: 
+  
+  These numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_)
+  that found the appropriate seed and draw count for production runs. I'm not sure 
+  if these numbers are correct for V&V runs. This table also doesn't include seed count,
+  but based on the page I linked, NO runs used 10 random seeds. -Alix 
 
 .. _mncnh_portfolio_6.0:
 
