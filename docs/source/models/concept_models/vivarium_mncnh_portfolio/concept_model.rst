@@ -489,33 +489,17 @@ Limitations:
     - Population size per draw
     - Note
   * - 1
-    - Wave I Pakistan maternal V&V
+    - Wave I Pregnancy V&V
     - Incomplete
     - N/A
-    - 20
-    - 20,000
-    - 
-  * - 2
-    - Wave I Nigeria maternal V&V
-    - Incomplete
-    - N/A
-    - 20
-    - 20,000
-    - 
-  * - 3
-    - Wave I Ethiopia maternal V&V
-    - Incomplete
-    - N/A
-    - 20
-    - 20,000
-    - 
+    - 10
+    - 100,000
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
 
 .. note:: 
   
   These numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_)
-  that found the appropriate seed and draw count for production runs. I'm not sure 
-  if these numbers are correct for V&V runs. This table also doesn't include seed count,
-  but based on the page I linked, NO runs used 10 random seeds. -Alix 
+  that found the appropriate seed and draw count for production runs, then divided in half for V&V runs. 
 
 .. _mncnh_portfolio_6.0:
 
