@@ -467,10 +467,28 @@ Limitations:
 5.0 Model run requests
 ++++++++++++++++++++++
 
-.. todo::
+.. list-table:: Model run plan as of October 4, 2024
+  :header-rows: 1
 
-  Fill in this section as we continue to work
+  * - Number
+    - Run
+    - Status
+    - Priority
+    - Number of draws
+    - Population size per draw
+    - Note
+  * - 1
+    - Wave I Pregnancy V&V
+    - Incomplete
+    - N/A
+    - 10
+    - 100,000
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
 
+.. note:: 
+  
+  These numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_)
+  that found the appropriate seed and draw count for production runs, then divided in half for V&V runs. 
 
 .. _mncnh_portfolio_6.0:
 
