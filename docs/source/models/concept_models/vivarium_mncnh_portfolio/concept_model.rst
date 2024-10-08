@@ -117,11 +117,6 @@ all labeled and additional information will be included below.
     - Real GA +/- a value from a normal distribution with a mean of zero and standard deviations of: 5 days for AI ultrasound, 20 days for standard ultrasound, and 45.5 days for no ultrasound 
     - Need further clarification on outstanding questions from BMGF, see `PR comments <https://github.com/ihmeuw/vivarium_research/pull/1525>`_. `Standard deviation value for no ultrasound <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272718#sec007>`_.
     - Values should be confirmed with further research and data anlaysis
-  * - 4
-    - Successful identification of LBW
-    - 80% for AI ultrasound, 61% with standard ultrasound, 10% with no ultrasound 
-    - Need to get AI ultrasound value from BMGF, `61% from this study <https://link.springer.com/article/10.1186/s12884-023-05866-1>`_, 10% is made-up stand-in value, needs to be replaced
-    - We will not be including false positives at this time. 
 
 
 .. list-table:: Inputs to Pregnancy Decision Tree
@@ -141,9 +136,6 @@ all labeled and additional information will be included below.
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
   * - Birthweight
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
-  * - Low birthweight status
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
   * - Pregnancy term (full term or partial term)
@@ -176,9 +168,6 @@ all labeled and additional information will be included below.
   * - Low birthweight status
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
-  * - If identified as low birthweight
-    - Decision tree value
-    - We should track both the real LBW status and the believed one
   * - Pregnancy term (full term or partial term)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
