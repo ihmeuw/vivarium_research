@@ -149,26 +149,40 @@ all labeled and additional information will be included below.
 
   * - Input
     - Data Source 
-    - Notes
+    - Overall stratification
+    - Use case 
   * - ANC attendance
     - Decision tree point
-    - 
+    - Age, scenario 
+    - Decision tree value & export value 
   * - Ultrasound status (AI assisted, standard, none)
     - Decision tree point
-    - 
+    - Scenario
+    - Decision tree value & export value 
   * - Gestational age at birth
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
+    - Decision tree value & export value 
+    - Scenario
   * - Gestational age stated
     - Decision tree value
-    - We should track both the real GA at birth and the believed GA 
+    - 
+    - Decision tree value
   * - Birthweight
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
+    - Decision tree value & export value 
   * - Pregnancy term (full term or partial term)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
+    - Decision tree value
+  * - Age of pregnant simulant
+    - 
+    - 
+    - 
 
+.. note::
+
+    We should track both the real GA at birth and the believed GA.
 
 Limitations:
 
