@@ -144,7 +144,7 @@ all labeled and additional information will be included below.
 
 
 .. list-table:: Outputs from Pregnancy Decision Tree
-  :widths: 3 15 15
+  :widths: 3 15 15 15
   :header-rows: 1
 
   * - Input
