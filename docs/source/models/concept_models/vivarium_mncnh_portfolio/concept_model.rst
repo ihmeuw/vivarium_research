@@ -165,9 +165,6 @@ all labeled and additional information will be included below.
   * - Birthweight
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
-  * - Low birthweight status
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
   * - Pregnancy term (full term or partial term)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
@@ -489,6 +486,23 @@ Limitations:
   
   These numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_)
   that found the appropriate seed and draw count for production runs, then divided in half for V&V runs. 
+
+.. list-table:: V&V tracking 
+  :header-rows: 1
+
+  * - Model number
+    - V&V plan
+    - V&V summary
+    - Link to notebook
+  * - 1.0
+    - 
+      - Confirm ANC visit rate matches expectations
+      - Confirm ultrasound rates matches inputs for all scenarios
+      - Confirm stated gestational age and real gestational age have the correct margin of error based on ultrasound type
+      - Confirm pregnancy population is within expected WRA age group (15-49 years) 
+    - All checks passed except last one; RT is updating our observer output requests to add an observer for pregnant person age.
+    - https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/pregnancy_model.ipynb 
+
 
 .. _mncnh_portfolio_6.0:
 
