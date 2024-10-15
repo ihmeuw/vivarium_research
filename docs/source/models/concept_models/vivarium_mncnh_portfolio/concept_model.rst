@@ -154,23 +154,23 @@ all labeled and additional information will be included below.
   * - ANC attendance
     - Decision tree point
     - Age, scenario 
-    - Decision tree value & export value 
+    - Decision tree value & export for V&V
   * - Ultrasound status (AI assisted, standard, none)
     - Decision tree point
     - Scenario
-    - Decision tree value & export value 
+    - Decision tree value & export for V&V
   * - Gestational age at birth
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Decision tree value & export value 
+    - Decision tree value & export for V&V 
     - Scenario
   * - Gestational age stated
-    - Decision tree value
+    - Decision tree value 
     - 
-    - Decision tree value
+    - Decision tree value and & export for V&V 
   * - Birthweight
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
-    - Decision tree value & export value 
+    - Decision tree value & & export for V&V  
   * - Pregnancy term (full term or partial term)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
@@ -178,7 +178,7 @@ all labeled and additional information will be included below.
   * - Age of pregnant simulant
     - 
     - 
-    - 
+    - Export for V&V 
 
 .. note::
 
