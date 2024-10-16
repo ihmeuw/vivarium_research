@@ -515,7 +515,7 @@ Limitations:
       - Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type
       - Confirm pregnancy population is within expected WRA age group (15-49 years) 
     - All checks passed except last one; RT is updating our observer output requests to add an observer for pregnant person age.
-    - https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/pregnancy_model.ipynb 
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/pregnancy_model.ipynb>`_ 
 
 
 .. _mncnh_portfolio_6.0:
