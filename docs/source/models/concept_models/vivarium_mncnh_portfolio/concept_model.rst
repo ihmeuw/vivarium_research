@@ -169,7 +169,7 @@ all labeled and additional information will be included below.
     - Decision tree value and & export for V&V 
   * - Birthweight
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Scenario
+    - Age, scenario
     - Decision tree value & export for V&V  
   * - Pregnancy term (full term or partial term)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
@@ -498,7 +498,7 @@ Limitations:
 
 .. note:: 
   
-  These numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_)
+  The above numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_)
   that found the appropriate seed and draw count for production runs, then divided in half for V&V runs. 
 
 .. list-table:: V&V tracking 
