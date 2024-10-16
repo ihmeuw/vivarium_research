@@ -113,7 +113,7 @@ all labeled and additional information will be included below.
     - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_ (Table 8.12, averaged percentage of women attending ANC 1-3 times and 4+ times), `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_  
     - These values are extracted from literature (see links in 'Source' column). For Pakistan, we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research. The denominator of these values is: pregnant people who have attended an ANC. 
   * - 3
-    - Stated gestational age (GA) at ANC 
+    - Gestational age (GA) estimate at ANC 
     - Real GA +/- a value from a normal distribution with a mean of zero and standard deviations of: 5 days for AI ultrasound, 20 days for standard ultrasound, and 45.5 days for no ultrasound 
     - Need further clarification on outstanding questions from BMGF, see `PR comments <https://github.com/ihmeuw/vivarium_research/pull/1525>`_. `Standard deviation value for no ultrasound <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272718#sec007>`_.
     - Values should be confirmed with further research and data anlaysis
@@ -147,7 +147,7 @@ all labeled and additional information will be included below.
   :widths: 3 15 15 15
   :header-rows: 1
 
-  * - Input
+  * - Output
     - Data Source 
     - Overall stratification
     - Use case 
@@ -163,19 +163,19 @@ all labeled and additional information will be included below.
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - Decision tree value & export for V&V 
     - Scenario
-  * - Gestational age stated
+  * - Gestational age estimate
     - Decision tree value 
-    - 
+    - Scenario
     - Decision tree value and & export for V&V 
   * - Birthweight
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
-    - Decision tree value & & export for V&V  
+    - Scenario
+    - Decision tree value & export for V&V  
   * - Pregnancy term (full term or partial term)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
+    - Scenario
     - Decision tree value
-  * - Age of pregnant simulant
+  * - GBD age group of pregnant simulant
     - 
     - 
     - Export for V&V 
@@ -196,7 +196,7 @@ V&V Checks:
 
 * Confirm ANC visit rate matches expectations 
 * Confirm ultrasound rates matches inputs for all scenarios 
-* Confirm stated gestational age and real gestational age have the correct margin of error based on ultrasound type 
+* Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type 
 * Confirm that rate of identifying low birthweight is correct based on ultrasound type
 
 
@@ -512,7 +512,7 @@ Limitations:
     - 
       - Confirm ANC visit rate matches expectations
       - Confirm ultrasound rates matches inputs for all scenarios
-      - Confirm stated gestational age and real gestational age have the correct margin of error based on ultrasound type
+      - Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type
       - Confirm pregnancy population is within expected WRA age group (15-49 years) 
     - All checks passed except last one; RT is updating our observer output requests to add an observer for pregnant person age.
     - https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/pregnancy_model.ipynb 
