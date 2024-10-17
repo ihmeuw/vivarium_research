@@ -54,6 +54,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'matplotlib.sphinxext.plot_directive',
     'sphinx_rtd_theme',
+    'sphinxcontrib.kroki',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
