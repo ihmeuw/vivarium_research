@@ -63,45 +63,13 @@ Guiding principles
 Introduction to race and ethnicity
 ------------------------------------------
 
-Race and ethnicity are complex social constructs that have significant
-impacts on individuals' lives and health outcomes. While often used
-interchangeably, race and ethnicity are distinct concepts. Race is
-typically associated with physical characteristics such as skin color,
-facial features, and hair texture, while ethnicity encompasses cultural
-factors such as language, religion, and shared history.
+Race, ethnicity, and ancestry are complex, interrelated social
+constructs that have significant impacts on individuals' lives and
+health outcomes. Despite the importance of race and ethnicity in
+understanding health disparities and developing health interventions,
+there are significant gaps in the academic treatment of these concepts.
 
-Historically, the concept of race has been used to justify
-discrimination, oppression, and social hierarchies. The scientific
-community has largely rejected the notion of race as a biological
-construct, recognizing that genetic variation within racial groups is
-often greater than the variation between them. However, the social,
-economic, and political implications of race persist, shaping
-individuals' experiences, opportunities, and health outcomes.
-
-Ethnicity, on the other hand, is a more fluid concept that can evolve
-over time and across generations. It is often tied to a shared cultural
-heritage, including traditions, beliefs, and values. Ethnic identities
-can be influenced by factors such as migration, acculturation, and
-intermarriage.
-
-Despite the importance of race and ethnicity in understanding health
-disparities and developing targeted interventions, there are significant
-gaps in the academic treatment of these concepts. Research often relies
-on broad racial and ethnic categories, such as "Black," "White,"
-"Hispanic," and "Asian," which can mask important heterogeneity within
-these groups. Additionally, the categories used in research may not
-align with how individuals self-identify, leading to misclassification
-and inaccurate conclusions.
-
-Data availability and collection methods also pose challenges in
-studying race and ethnicity. Many datasets lack detailed information on
-race and ethnicity, and when such data are collected, they may be based
-on observer-reported rather than self-reported information. Furthermore,
-the categories used in data collection may not be comprehensive or may
-change over time, making it difficult to compare findings across studies
-or to track trends.
-
-In the context of simulation science, it is important to recognize that
+In the context of simulation science, and health metrics more broadly,
 we are often using data collected and analyzed by others. As such, we
 need to understand and adapt to the choices that they have made
 regarding race and ethnicity. This requires carefully examining the data
@@ -109,28 +77,13 @@ sources, the categories used, and the potential limitations and biases
 inherent in the data. By doing so, we can make informed decisions about
 how to interpret and apply the data in our simulations.
 
-It is also crucial to acknowledge that the concepts of race and
-ethnicity, as understood in the United States, may not translate
-directly to other global contexts. Different countries and cultures have
-their own unique histories, social structures, and ways of categorizing
-and understanding diversity. In a global context, the complexities
-surrounding race and ethnicity are likely to be even more pronounced,
-requiring researchers to be particularly attentive to local contexts and
-to engage with diverse perspectives.
-
-To address these issues, researchers must be mindful of the limitations
-of racial and ethnic categories and strive to use more granular and
-self-reported data when possible. It is also important to consider the
-intersectionality of race and ethnicity with other factors such as
-socioeconomic status, gender, and age, as these can have compounding
-effects on health outcomes.
-
 As we work towards building more inclusive health metrics, it is crucial
-to recognize the complexities of race and ethnicity and to develop
-approaches that accurately capture the experiences and needs of diverse
-populations. This requires ongoing collaboration between researchers,
-policymakers, and communities to ensure that our understanding of these
-concepts evolves alongside societal changes and scientific advancements.
+to recognize the complexities of race, ethnicity, and ancestry and to
+develop approaches that accurately capture the experiences and needs of
+diverse populations. This requires ongoing collaboration between
+researchers, policymakers, and communities to ensure that our
+understanding of these concepts evolves alongside societal changes and
+scientific advancements.
 
 1.0 Research considerations
 ++++++++++++++++++++++++++++
