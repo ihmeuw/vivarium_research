@@ -149,7 +149,7 @@ scenario). The 'Use case' column in the table denotes what we will be using the 
 need this value to be exported so we can check it looks right). For this specific model, all of the following outputs in the table are needed for V&V. 
 
 .. list-table:: Outputs from Pregnancy Decision Tree
-  :widths: 3 15 15 15
+  :widths: 3 15 15
   :header-rows: 1
 
   * - Output
