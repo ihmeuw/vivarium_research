@@ -142,42 +142,39 @@ all labeled and additional information will be included below.
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
 
+The following table details outputs from the pregnancy model. Each row in this table should be a column in the population
+state table outputted by the model. RT will tabulate the population table with the stratifications needed for V&V (e.g., age group and 
+scenario). The 'Use case' column in the table denotes what we will be using the output for: either as an input for a later modeling stage
+(i.e., intrapartum or neonatal; this value does not explicitly need to be exported in the population table) or exported for V&V (we explicitly
+need this value to be exported so we can check it looks right). For this specific model, all of the following outputs in the table are needed for V&V. 
 
 .. list-table:: Outputs from Pregnancy Decision Tree
   :widths: 3 15 15 15
   :header-rows: 1
 
   * - Output
-    - Data Source 
-    - Overall stratification
+    - Data Source
     - Use case 
   * - ANC attendance
     - Decision tree point
-    - Age, scenario 
-    - Decision tree value & export for V&V
+    - Input for later modeling stage & export for V&V
   * - Ultrasound status (AI assisted, standard, none)
     - Decision tree point
-    - Scenario
-    - Decision tree value & export for V&V
+    - Input for later modeling stage & export for V&V
   * - Gestational age at birth
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Decision tree value & export for V&V 
-    - Scenario
+    - Input for later modeling stage & export for V&V
   * - Gestational age estimate
-    - Decision tree value 
-    - Scenario
-    - Decision tree value and & export for V&V 
+    - Decision tree point
+    - Input for later modeling stage and & export for V&V 
   * - Birthweight
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Age, scenario
-    - Decision tree value & export for V&V  
+    - Input for later modeling stage & export for V&V  
   * - Pregnancy term (full term or partial term)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Scenario
-    - Decision tree value
+    - Input for later modeling stage
   * - GBD age group of pregnant simulant
-    - 
-    - 
+    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - Export for V&V 
 
 .. note::
@@ -198,6 +195,7 @@ V&V Checks:
 * Confirm ultrasound rates matches inputs for all scenarios 
 * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type 
 * Confirm that rate of identifying low birthweight is correct based on ultrasound type
+* Confirm that all pregnant simulants fall within WHO definition of WRA (15-49yrs)
 
 
 **Component 2**: The Intrapartum Model
