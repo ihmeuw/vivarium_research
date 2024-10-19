@@ -315,6 +315,53 @@ Based on the LBWSG category, the simulant will also be categorized as either low
 
   Additionally, the LBWSG exposure distribution may be modified by :ref:`antenatal supplementation intervention coverage <maternal_supplementation_intervention>` in later waves of the project. 
 
+Pregnancy outcomes
+~~~~~~~~~~~~~~~~~~
+
+During the intrapartum phase of the model, the pregnancy outcome must be
+determined for each pregnancy as either 1) live birth, 2) stillbirth, or
+3) partial term (ectopic pregnancy, abortion/miscarriage). The
+probability of each pregnancy outcome conditional on pregnancy term
+length is defined in the table below.
+
+.. list-table:: Pregnancy outcome probabilities conditional on pregnancy term length
+  :header-rows: 1
+
+  * - Pregnancy term length
+    - Outcome
+    - Conditional probability
+    - Note
+  * - Partial term
+    - Live birth
+    - 0
+    -
+  * - Partial term
+    - Stillbirth
+    - 0
+    -
+  * - Partial term
+    - Partial term (abortion, miscarriage, ectopic pregnancy)
+    - 1
+    -
+  * - Full term
+    - Live birth
+    - ASFR / (ASFR + ASFR * SBR)
+    - The probability of a livebirth outcome is modified by the
+      :ref:`antenatal supplementation intervention
+      <maternal_supplementation_intervention>` and by the obstructed
+      labor cause and C-section intervention.
+  * - Full term
+    - Stillbirth
+    - (ASFR * SBR) / (ASFR + ASFR * SBR)
+    - The probability of a stillbirth outcome is modified by the
+      :ref:`antenatal supplementation intervention
+      <maternal_supplementation_intervention>` and by the obstructed
+      labor cause and C-section intervention.
+  * - Full term
+    - Partial term (abortion, miscarriage, ectopic pregnancy)
+    - 0
+    -
+
 .. note::
 
   The current modeling strategy is dependent on our assumption that live births and stillbirths have the same duration. There is ongoing work at IHME to estimate gestational age at birth distributions among stillbirths. 
