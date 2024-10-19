@@ -229,21 +229,54 @@ SQ-LNS effects on wasting will persist until 18 months of age and effects on stu
 Targeted SQ-LNS
 ~~~~~~~~~~~~~~~
 
-The team has decided to run the model for each subnational location with 
-SQ-LNS "on" and "off" and test different targeting plans for SQ-LNS in a separate 
-notebook. The goal of this approach is to allow for more extensive testing of 
+The team ran the model for each subnational location with 
+SQ-LNS "on" and "off" and tested different targeting plans for SQ-LNS in an emulator, 
+see below. The goal of this approach was to allow for more extensive testing of 
 different possible targeting approaches and the option to run a regression and 
 create a more complex metric. 
 
-To achieve this, we will create an emulator to combine results from individual 
-subnationals where SQ-LNS is on and off to create a national result for targeting 
-a given list of regions. The metrics used for generating targeting lists are 
-undecided currently, but we expect to use child growth failure metrics and 
-child mortality as starting examples. One of the metrics we plan to test is 
-outlined in more detail below. 
+To achieve this, we created an emulator to combine results from individual 
+subnationals where SQ-LNS is on and off and compare the relative effectiveness 
+of different targetting. The metrics used for generating targeting lists were: 
+wasting prevalence, stunting prevalence, underweight prevalence, under 5 mortality, 
+food insecurity, and a composite metric based on the Global Hunger Index (https://www.globalhungerindex.org/methodology.html).
+The GHI composite score was `calculated here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/e6b718a9d9c5ec8e9fa3baf2cabe6733dca05800/emulator/sqlns_targeting/sqlns_targeting_metric_selection.ipynb>`_. The food insecurity is based on IPC classifications (https://www.ipcinfo.org/). All other values are from GBD. 
 
-This section will continue to be updated as we design the emulator and create 
-other targeting approaches. 
+This is the `emultor for SQ-LNS targeting <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/e6b718a9d9c5ec8e9fa3baf2cabe6733dca05800/emulator/sqlns_targeting/sqlns_targeting_emulator_7_19_2024.ipynb>`_ and this is 
+the `functions file <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/e6b718a9d9c5ec8e9fa3baf2cabe6733dca05800/emulator/sqlns_targeting/sqlns_targeting_emulator_functions_7_19_24.py>`_.
+
+An example of the main figure generated in this analysis is below, comparing the ICER 
+from SQ-LNS and the GHI score in Nigeria.
+
+.. image:: sqlns_targeting_fig.png
+
+While we will continue to explore targeting and sensitivity metrics, for use in 
+Model 18 (https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#wave-iii) we have selected the GHI composite metrics to use for targeting. 
+
+We had planned to target approximately 20% of the population but due to constraints 
+on size of population included based on the subnational sizes, we 
+ended up targeting 30% of the population. Below are the 
+subnational locations for each country, in rank order of GHI score and including the 
+cumulative percent of the population. 
+
+The included list of subnational locations to target is: 
+
+- Nigeria: Sokoto, Jigawa, Zamfara, Yobe, Katsina, Kebbi, Kano
+- Ethiopia: Afar, Somali, Amhara
+- Pakistan: Balochistan, Sindh
+
+Nigeria: 
+
+.. image:: nigeria.png
+
+Ethiopia: 
+
+.. image:: ethiopia.png
+
+Pakistan: 
+
+.. image:: pakistan.png
+
 
 The WHO has issued guidelines on the use and targeting of SQ-LNS, 
 which are available here: `WHO guidelines <https://app.magicapp.org/#/guideline/7352/section/133966>`_. 
@@ -259,21 +292,6 @@ is still being debated. Simulation is especially well suited for these
 types of questions, and so we will try several different SQ-LNS targeting 
 criteria.
 
-For all criteria, a csv file with the subnational locations and whether or 
-not they are included in targeting will be provided.
-
-.. list-table:: SQ-LNS Targeting Criteria
-  :widths: 5 15 15 15
-  :header-rows: 1
-
-  * - Targeting Number 
-    - Targeting Criteria
-    - Description
-    - Notes
-  * - 1 
-    - WAZ
-    - WAZ based threshold that results in about 20% of the population being targeted. Also need to determine age group for WAZ prevalence (all kids under 5, 6-59 months, or 6-24 months)
-    - See note below
 
 .. note::
 
@@ -311,6 +329,11 @@ category separated by high and low burden locations. This data is stored at :cod
 The trials included in this meta-analysis were identical to those included in the prior meta-analysis. 
 The new data here was the prevalence ratios separated by high and low burden regions. 
 
+In generating the wasting transition data from the prevalence ratios, we encountered a few limitations: 
+
+- The upper bound of the prevalence ratio for low burden regions was greater than 1. This would imply that SQ-LNS has a negative impact. For our model, we set the upper limit to be exactly 1, indicating no impact. This is implemented in cell [2] of the effect generation notebook, in the line `validation_targets_ucl_low_burden = [1.0, 1.0, 1.0, 1.01]`.
+- For the lower bounds, sometimes the limits were lower than could be achieved in our nanosim. In these cases, we do not hit the prevalence ratio at 10 months. We reach the prevalence ratio later, or in some cases approach it without fully acheiving it. We believe this is a reasonable limitation.  The plot for Balochistan in the effect generation notebook shows an example of this.
+
 
 Wasting
 ~~~~~~~
@@ -331,10 +354,7 @@ Notebooks that generated these values can be found here:
 
 - `Subnational optimization by location (5/29 update to have location specific values) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/386cf36f7dcd6073077dd8f663b17d0b740ef60f/data_prep/sqlns/sqlns_effect_size_generation_subnational.ipynb>`_. No changes in approach, this was an adjustment to run for many locations successfully only.
 
-.. todo::
-
-  Add the effect modified notebook and csv files when completed for the wasting transition rates.
-
+- `Subnational optimization with effect modification <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8718562f3419a10c03106ef7d45b28c7a9a65833/data_prep/sqlns/sqlns_effect_size_generation_subnational.ipynb>`_. This includes the new effect modification for all locations. The `data used in the model <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/8718562f3419a10c03106ef7d45b28c7a9a65833/data_prep/sqlns/modified_and_standard_subnational_sqlns_effects_v1.csv>`_. 
 
 Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic wasting transition model document <2021_risk_exposure_wasting_state_exposure>`. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure. 
 
