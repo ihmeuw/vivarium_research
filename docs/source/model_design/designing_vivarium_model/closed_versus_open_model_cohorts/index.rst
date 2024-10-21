@@ -55,8 +55,8 @@ These two types essentially differ based on how fertility is enacted in the demo
 Open-cohort analysis 
 ++++++++++++++++++++
 
-In Vivarium, open cohort analysis occurs when simulants are able to move into the cohort at any time.
-In an open cohort Vivarium simulation, there are three ways that a simulant can enter a simulation: 
+In Vivarium, open-cohort analysis occurs when simulants are able to move into the cohort at any time.
+In an open-cohort Vivarium simulation, there are three ways that a simulant can enter a simulation: 
 
 1. Initialized into initial population (i.e., based on GBD outputs, such as prevalence of a certain health state)
 2. Born into population at a later timestep
@@ -71,14 +71,14 @@ Similarly, there are two ways a simulant can leave a simulation:
   
   As of September, 2024, the only Vivarium simulation where it is possible for simulants to enter and leave the cohort via migration is our
   `simulation for the PRL project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_census_synthdata/concept_model.html>`_.
-  Most of our open-cohort Vivarium simulations are what is typically referred to as 'dynamic cohort analysis', which
-  is a subset of the greater umbrella category of open cohort analysis, in which new simulants are added over the course of the
+  Most of our open-cohort Vivarium simulations are what is typically referred to as 'dynamic-cohort analysis', which
+  is a subset of the greater umbrella category of open-cohort analysis, in which new simulants are added over the course of the
   simulation, but they cannot be replaced once they leave (die).  
 
-Closed cohort analysis 
+Closed-cohort analysis 
 ++++++++++++++++++++++
 
-Closed cohort analysis in Vivarium occurs when no new simulants are added to the cohort over the course of the
+Closed-cohort analysis in Vivarium occurs when no new simulants are added to the cohort over the course of the
 simulation. In such simulations, simulants can only be initialized into the population at the beginning of the 
 simulation. If a simulant dies or transitions out of the model, they do not get replaced. 
 
@@ -97,12 +97,12 @@ observers in this simulation, which return synthetic data intended to replicate 
 Census, tax forms). Some of these observers, such as the simulated Women, Infants, and Children (WIC) registry, do not return information
 (i.e., observe) on all of the simulants: it only returns information about those simulants who are registered for WIC. 
 We can think of the entire simulated US population as the simulation cohort in this example, whereas the observation cohort
-would include only those simulants returned by the WIC observer.
+would include only those simulants returned by the WIC observer. 
 
 Interpretation of results
 +++++++++++++++++++++++++
 
-Whether we use open or closed cohort analysis in Vivarium simulations has implications for how we interpret
+Whether we use open- or closed-cohort analysis in Vivarium simulations has implications for how we interpret
 our results. 
 
 With closed cohort analysis, we can examine results through the *Kaplan-Meier survival curve*, which allows
