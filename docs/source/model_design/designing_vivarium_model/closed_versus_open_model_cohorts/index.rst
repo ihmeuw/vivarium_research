@@ -49,7 +49,7 @@ a group of simulated individuals who share certain baseline characteristics or a
 rules and conditions over the simulation period. Microsimulation models often track these cohorts to project 
 outcomes under various scenarios. 
 
-In microsimulation, we can think of two distinct types of cohort analysis: open and closed cohort analysis.
+In microsimulation, we can think of two distinct types of cohort analysis: open- and closed-cohort analysis.
 These two types essentially differ based on how fertility is enacted in the demographics of our microsimulation. 
 
 Open cohort analysis 
