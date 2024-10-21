@@ -52,7 +52,7 @@ outcomes under various scenarios.
 In microsimulation, we can think of two distinct types of cohort analysis: open- and closed-cohort analysis.
 These two types essentially differ based on how fertility is enacted in the demographics of our microsimulation. 
 
-Open cohort analysis 
+Open-cohort analysis 
 ++++++++++++++++++++
 
 In Vivarium, open cohort analysis occurs when simulants are able to move into the cohort at any time.
