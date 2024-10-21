@@ -90,8 +90,14 @@ conceptualize two different framings of what the cohort is: the simulation cohor
 What we consider a *simulation cohort* includes the entire population of simulants who have been programmed into the simulation. An *observation cohort*,
 conversely, is the population of simulants who are actually observed (i.e., their data are recorded). Ideally, from 
 a computational perspective, our simulation and observation cohort would be one and the same: i.e., we wouldn't be simulating
-individuals who don't get observed. However, it is not rare for these two cohorts to be different. [[use CVD and PRL sims as examples to illustrate]]
+individuals who don't get observed. However, it is not rare for these two cohorts to be different.
 
+To illustrate, we can use previous simulations our team has developed as examples. `The PRL project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_census_synthdata/concept_model.html>`_, in which we simulated the entire US population (i.e., about 350 million simulants). We used several different
+observers in this simulation, which return synthetic data intended to replicate real administrative data (e.g., Social Security, Decennial
+Census, tax forms). Some of these observers, such as the simulated Women, Infants, and Children (WIC) registry, do not return information
+(i.e., observe) on all of the simulants: it only returns information about those simulants who are registered for WIC. 
+We can think of the entire simulated US population as the simulation cohort in this example, whereas the observation cohort
+would include only those simulants returned by the WIC observer.
 
 Interpretation of results
 +++++++++++++++++++++++++
