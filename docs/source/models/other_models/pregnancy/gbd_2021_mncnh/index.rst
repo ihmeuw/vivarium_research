@@ -226,15 +226,19 @@ Pregnancy modeling steps:
 +++++++++++++++++++++++++
 
 First is a summary of the steps for the pregnancy model. 
-Details for each step are provided below.
+Details for each step are provided in the subsections below.
 
 *At initialization:*
 
-#. Assign pregnancy state according to state prevalence values
+#. Assign pregnancy state according to state prevalence values above
 #. Assign partial or full term duration according to table in `Pregnancy term lengths`_ section
-#. Assign sex of infant if pregnancy is full term (stillbirth or live birth)
-#. Assign duration of pregnancy depending on term length and, if applicable, sex of the infant. Note that this is the same value as "gestational age" in other parts of the documentation.
-#. Assign birthweight of simulant child and low birthweight status
+#. Assign `sex of infant`_ if pregnancy is full term (stillbirth or live birth)
+#. Assign duration of pregnancy depending on term length and, if
+   applicable, sex of the infant. Note that this is the same value as
+   "gestational age" in other parts of the documentation (see
+   `Birthweight, Gestational Age, and LBW Status`_ section).
+#. Assign birthweight of simulant child and low birthweight status (see
+   `Birthweight, Gestational Age, and LBW Status`_ section)
 #. Assign propensity values for ANC and ultrasound 
 #. Begin simulation
 
