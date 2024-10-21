@@ -250,7 +250,16 @@ Details for each step are provided below.
 
 *During simulation:*
 
-Run simulants through the pregnancy model as outlined in the :ref:`MNCNH Portfolio project <2024_concept_model_vivarium_mncnh_portfolio>` page. Record all data outlined on the above page. Then move to the intrapartum model. 
+#. Run simulants through the pregnancy model as outlined in the
+   :ref:`MNCNH Portfolio project
+   <2024_concept_model_vivarium_mncnh_portfolio>` page. Record all data
+   outlined on the above page for use in the intrapartum model.
+#. During the intrapartum phase of the model, assign a
+   pregnancy outcome (live birth, stillbirth, or partial term) according
+   to the probabilities in the `Pregnancy outcomes`_ section. Note that
+   some interventions and maternal causes occurring during the
+   intrapartum phase may affect these probabilities.
+
 
 Pregnancy term lengths
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -346,14 +355,14 @@ length is defined in the table below.
   * - Full term
     - Live birth
     - ASFR / (ASFR + ASFR * SBR)
-    - The probability of a livebirth outcome is modified by the
+    - The probability of a livebirth outcome will be modified by the
       :ref:`antenatal supplementation intervention
       <maternal_supplementation_intervention>` and by the obstructed
       labor cause and C-section intervention.
   * - Full term
     - Stillbirth
     - (ASFR * SBR) / (ASFR + ASFR * SBR)
-    - The probability of a stillbirth outcome is modified by the
+    - The probability of a stillbirth outcome will be modified by the
       :ref:`antenatal supplementation intervention
       <maternal_supplementation_intervention>` and by the obstructed
       labor cause and C-section intervention.
