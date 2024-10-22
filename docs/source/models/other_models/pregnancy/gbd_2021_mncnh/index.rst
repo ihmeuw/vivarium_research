@@ -226,15 +226,19 @@ Pregnancy modeling steps:
 +++++++++++++++++++++++++
 
 First is a summary of the steps for the pregnancy model. 
-Details for each step are provided below.
+Details for each step are provided in the subsections below.
 
 *At initialization:*
 
-#. Assign pregnancy state according to state prevalence values
+#. Assign pregnancy state according to state prevalence values above
 #. Assign partial or full term duration according to table in `Pregnancy term lengths`_ section
-#. Assign sex of infant if pregnancy is full term (stillbirth or live birth)
-#. Assign duration of pregnancy depending on term length and, if applicable, sex of the infant. Note that this is the same value as "gestational age" in other parts of the documentation.
-#. Assign birthweight of simulant child and low birthweight status
+#. Assign `sex of infant`_ if pregnancy is full term (stillbirth or live birth)
+#. Assign duration of pregnancy depending on term length and, if
+   applicable, sex of the infant. Note that this is the same value as
+   "gestational age" in other parts of the documentation (see
+   `Birthweight, Gestational Age, and LBW Status`_ section).
+#. Assign birthweight of simulant child and low birthweight status (see
+   `Birthweight, Gestational Age, and LBW Status`_ section)
 #. Assign propensity values for ANC and ultrasound 
 #. Begin simulation
 
@@ -250,7 +254,16 @@ Details for each step are provided below.
 
 *During simulation:*
 
-Run simulants through the pregnancy model as outlined in the :ref:`MNCNH Portfolio project <2024_concept_model_vivarium_mncnh_portfolio>` page. Record all data outlined on the above page. Then move to the intrapartum model. 
+#. Run simulants through the pregnancy model as outlined in the
+   :ref:`MNCNH Portfolio project
+   <2024_concept_model_vivarium_mncnh_portfolio>` page. Record all data
+   outlined on the above page for use in the intrapartum model.
+#. During the intrapartum phase of the model, assign a
+   pregnancy outcome (live birth, stillbirth, or partial term) according
+   to the probabilities in the `Pregnancy outcomes`_ section. Note that
+   some interventions and maternal causes occurring during the
+   intrapartum phase may affect these probabilities.
+
 
 Pregnancy term lengths
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -314,6 +327,53 @@ Based on the LBWSG category, the simulant will also be categorized as either low
   In later waves of the model, we will make this process more complex by including correlation with other maternal characteristics, similar to what is outlined in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. 
 
   Additionally, the LBWSG exposure distribution may be modified by :ref:`antenatal supplementation intervention coverage <maternal_supplementation_intervention>` in later waves of the project. 
+
+Pregnancy outcomes
+~~~~~~~~~~~~~~~~~~
+
+During the intrapartum phase of the model, the pregnancy outcome must be
+determined for each pregnancy as either 1) live birth, 2) stillbirth, or
+3) partial term (ectopic pregnancy, abortion/miscarriage). The
+probability of each pregnancy outcome conditional on pregnancy term
+length is defined in the table below.
+
+.. list-table:: Pregnancy outcome probabilities conditional on pregnancy term length
+  :header-rows: 1
+
+  * - Pregnancy term length
+    - Outcome
+    - Conditional probability
+    - Note
+  * - Partial term
+    - Live birth
+    - 0
+    -
+  * - Partial term
+    - Stillbirth
+    - 0
+    -
+  * - Partial term
+    - Partial term (abortion, miscarriage, ectopic pregnancy)
+    - 1
+    -
+  * - Full term
+    - Live birth
+    - ASFR / (ASFR + ASFR * SBR)
+    - The probability of a livebirth outcome will be modified by the
+      :ref:`antenatal supplementation intervention
+      <maternal_supplementation_intervention>` and by the obstructed
+      labor cause and C-section intervention.
+  * - Full term
+    - Stillbirth
+    - (ASFR * SBR) / (ASFR + ASFR * SBR)
+    - The probability of a stillbirth outcome will be modified by the
+      :ref:`antenatal supplementation intervention
+      <maternal_supplementation_intervention>` and by the obstructed
+      labor cause and C-section intervention.
+  * - Full term
+    - Partial term (abortion, miscarriage, ectopic pregnancy)
+    - 0
+    -
 
 .. note::
 
