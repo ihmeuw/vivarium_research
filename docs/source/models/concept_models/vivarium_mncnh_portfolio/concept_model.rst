@@ -113,7 +113,7 @@ all labeled and additional information will be included below.
     - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_ (Table 8.12, averaged percentage of women attending ANC 1-3 times and 4+ times), `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_  
     - These values are extracted from literature (see links in 'Source' column). For Pakistan, we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research. The denominator of these values is: pregnant people who have attended an ANC. 
   * - 3
-    - Stated gestational age (GA) at ANC 
+    - Gestational age (GA) estimate at ANC 
     - Real GA +/- a value from a normal distribution with a mean of zero and standard deviations of: 5 days for AI ultrasound, 20 days for standard ultrasound, and 45.5 days for no ultrasound 
     - Need further clarification on outstanding questions from BMGF, see `PR comments <https://github.com/ihmeuw/vivarium_research/pull/1525>`_. `Standard deviation value for no ultrasound <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272718#sec007>`_.
     - Values should be confirmed with further research and data anlaysis
@@ -142,36 +142,44 @@ all labeled and additional information will be included below.
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - 
 
+The following table details outputs from the pregnancy model. Each row in this table should be a column in the population
+state table outputted by the model. RT will tabulate the population table with the stratifications needed for V&V (e.g., age group, 
+scenario, and input draw). The 'Use case' column in the table denotes what we will be using the output for: either as an input for a later modeling stage
+(i.e., intrapartum or neonatal; this value does not explicitly need to be exported in the population table) or exported for V&V (we explicitly
+need this value to be exported so we can check it looks right). For this specific model, all of the following outputs in the table are needed for V&V. 
 
 .. list-table:: Outputs from Pregnancy Decision Tree
   :widths: 3 15 15
   :header-rows: 1
 
-  * - Input
-    - Data Source 
-    - Notes
-  * - ANC attendance
+  * - Output
+    - Data Source
+    - Use case 
+  * - ANC attendance (true if attended ANC, false if not)
     - Decision tree point
-    - 
+    - Input for later modeling stage & export for V&V
   * - Ultrasound status (AI assisted, standard, none)
     - Decision tree point
-    - 
-  * - Gestational age at birth
+    - Input for later modeling stage & export for V&V
+  * - Gestational age at birth (weeks)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
-  * - Gestational age stated
-    - Decision tree value
-    - We should track both the real GA at birth and the believed GA 
-  * - Birthweight
+    - Input for later modeling stage & export for V&V
+  * - Gestational age estimate (weeks)
+    - Decision tree point
+    - Input for later modeling stage and & export for V&V 
+  * - Birthweight (grams)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
-  * - Low birthweight status
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
+    - Input for later modeling stage & export for V&V  
   * - Pregnancy term (full term or partial term)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
+    - Input for later modeling stage & export for V&V
+  * - GBD age group of pregnant simulant
+    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+    - Export for V&V 
 
+.. note::
+
+    We should track both the real GA at birth and the believed GA.
 
 Limitations:
 
@@ -185,8 +193,9 @@ V&V Checks:
 
 * Confirm ANC visit rate matches expectations 
 * Confirm ultrasound rates matches inputs for all scenarios 
-* Confirm stated gestational age and real gestational age have the correct margin of error based on ultrasound type 
+* Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type 
 * Confirm that rate of identifying low birthweight is correct based on ultrasound type
+* Confirm that all pregnant simulants fall within WHO definition of WRA (15-49yrs)
 
 
 **Component 2**: The Intrapartum Model
@@ -487,8 +496,25 @@ Limitations:
 
 .. note:: 
   
-  These numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_)
+  The above numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_)
   that found the appropriate seed and draw count for production runs, then divided in half for V&V runs. 
+
+.. list-table:: V&V tracking 
+  :header-rows: 1
+
+  * - Model number
+    - V&V plan
+    - V&V summary
+    - Link to notebook
+  * - 1.0
+    - 
+      - Confirm ANC visit rate matches expectations
+      - Confirm ultrasound rates matches inputs for all scenarios
+      - Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type
+      - Confirm pregnancy population is within expected WRA age group (15-49 years) 
+    - All checks passed except last one; RT is updating our observer output requests to add an observer for pregnant person age.
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/pregnancy_model.ipynb>`_ 
+
 
 .. _mncnh_portfolio_6.0:
 
