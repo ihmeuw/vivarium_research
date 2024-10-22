@@ -172,7 +172,7 @@ need this value to be exported so we can check it looks right). For this specifi
     - Input for later modeling stage & export for V&V  
   * - Pregnancy term (full term or partial term)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Input for later modeling stage
+    - Input for later modeling stage & export for V&V
   * - GBD age group of pregnant simulant
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - Export for V&V 
