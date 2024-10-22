@@ -155,13 +155,13 @@ need this value to be exported so we can check it looks right). For this specifi
   * - Output
     - Data Source
     - Use case 
-  * - ANC attendance
+  * - ANC attendance (true if attended ANC, false if not)
     - Decision tree point
     - Input for later modeling stage & export for V&V
   * - Ultrasound status (AI assisted, standard, none)
     - Decision tree point
     - Input for later modeling stage & export for V&V
-  * - Gestational age at birth
+  * - Gestational age at birth (weeks)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - Input for later modeling stage & export for V&V
   * - Gestational age estimate (weeks)
