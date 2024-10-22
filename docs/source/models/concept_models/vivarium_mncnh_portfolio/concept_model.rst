@@ -167,7 +167,7 @@ need this value to be exported so we can check it looks right). For this specifi
   * - Gestational age estimate
     - Decision tree point
     - Input for later modeling stage and & export for V&V 
-  * - Birthweight
+  * - Birthweight (grams)
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - Input for later modeling stage & export for V&V  
   * - Pregnancy term (full term or partial term)
