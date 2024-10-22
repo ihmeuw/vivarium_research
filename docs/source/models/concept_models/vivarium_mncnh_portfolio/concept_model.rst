@@ -143,8 +143,8 @@ all labeled and additional information will be included below.
     - 
 
 The following table details outputs from the pregnancy model. Each row in this table should be a column in the population
-state table outputted by the model. RT will tabulate the population table with the stratifications needed for V&V (e.g., age group and 
-scenario). The 'Use case' column in the table denotes what we will be using the output for: either as an input for a later modeling stage
+state table outputted by the model. RT will tabulate the population table with the stratifications needed for V&V (e.g., age group, 
+scenario, and input draw). The 'Use case' column in the table denotes what we will be using the output for: either as an input for a later modeling stage
 (i.e., intrapartum or neonatal; this value does not explicitly need to be exported in the population table) or exported for V&V (we explicitly
 need this value to be exported so we can check it looks right). For this specific model, all of the following outputs in the table are needed for V&V. 
 
