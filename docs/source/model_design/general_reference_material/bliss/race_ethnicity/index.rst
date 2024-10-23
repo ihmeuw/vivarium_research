@@ -420,7 +420,7 @@ by race essentialism: the notion that race is a biological factor (rather than a
 The practice of using race in this way has historically been the norm in US health research, and causes harm for 
 historically marginalized and minoritized groups, thereby exacerbating the very health inequities the health 
 research may be attempting to elucidate and alleviate. For examples of outdated race-based practices in medicine, 
-and their race-conscious alternatives, see Table 1 from Cerdena et al.’s 2020 paper [Cerdena_2020]_. 
+and their race-conscious alternatives, see Table 1 from Cerdeña et al.’s 2020 paper [Cerdeña_2020]_. 
 Race-conscious research, on the other hand, calls for a shift in focus from race to racism as a key determinant of 
 illness and health.
 
