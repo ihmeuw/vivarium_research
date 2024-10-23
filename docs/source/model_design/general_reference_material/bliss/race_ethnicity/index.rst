@@ -416,7 +416,7 @@ underlying factors contributing to health disparities.
 
 One helpful framework for differentiating ways of communicating about race is that of *race-based research vs. race-conscious research* 
 [Cerdeña_2020]_. Race-based research is characterized 
-by race essentialism, the notion that race is a biological factor (rather than a sociopolitical construct). 
+by race essentialism: the notion that race is a biological factor (rather than a sociopolitical construct). 
 The practice of using race in this way has historically been the norm in US health research, and causes harm for 
 historically marginalized and minoritized groups, thereby exacerbating the very health inequities their health 
 research may be attempting to elucidate and alleviate. For examples of outdated race-based practices in medicine, 
