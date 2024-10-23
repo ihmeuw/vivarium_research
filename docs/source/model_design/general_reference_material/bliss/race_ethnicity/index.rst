@@ -432,7 +432,7 @@ regarding racial health disparities.
 
 1. **Use a health equity lens when framing information about health disparities** [Calanan_2023]_.
 
-    Rather than allowing dominant narratives around race, individualism, and meritocracy limit our understanding of 
+    Rather than allowing dominant narratives around race, individualism, and meritocracy to limit our understanding of 
     the root causes of health inequities, it is important to center a health equity perspective in health metrics 
     research.  An equity lens allows us to recognize that systems of power and oppression (including white supremacy) 
     shape institutional policies and living conditions that systematically harm populations 
