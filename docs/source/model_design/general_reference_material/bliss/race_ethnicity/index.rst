@@ -447,7 +447,7 @@ regarding racial health disparities.
     
     As is described in our earlier section, `1.1 Research question`_, you should review all relevant 
     social, environmental, and structural factors for which race may serve as a proxy measure when defining 
-    race as it pertains to your research,. "For the reader, these additional details enable careful interpretation 
+    race as it pertains to your research. "For the reader, these additional details enable careful interpretation 
     of study results and implications. But for authors, it engenders critical thinking about racial constructs that 
     prevent the reification of race as a biological entity." [Boyd_2020]_ 
 
