@@ -479,7 +479,7 @@ regarding racial health disparities.
     prevent the reification of race as a biological entity." [Boyd_2020]_ 
 
     Health metrics researchers should embrace a critical race theory (CRT) framework, which provides "tools for conducting research and practice 
-    are intended to elucidate contemporary racial phenomena, expand the vocabulary with which to discuss complex racial concepts, and 
+    [that] are intended to elucidate contemporary racial phenomena, expand the vocabulary with which to discuss complex racial concepts, and 
     challenge racial hierarchies" [Ford_Airhihenbuwa_2010]_. Embracing a CRT framework might entail
     some of the following: 
 
