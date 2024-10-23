@@ -411,7 +411,7 @@ Communication of results
 In this section we’ll discuss how health metric researchers can talk about health research related to 
 race and ethnicity without stigmatizing, othering, or otherwise causing harm to historically marginalized 
 racial and ethnic groups. It is important to be aware of how we talk about race and racism, 
-particularly in the field of health metrics sciences, our goal is often to uncover and scrutinize the 
+particularly in the field of health metrics sciences, as our goal is often to uncover and scrutinize the 
 underlying factors contributing to health disparities.
 
 One helpful framework for differentiating ways of communicating about race is that of *race-based research vs. race-conscious research* 
