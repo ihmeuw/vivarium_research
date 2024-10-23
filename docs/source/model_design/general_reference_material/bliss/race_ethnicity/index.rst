@@ -489,7 +489,7 @@ Reporting results accurately
 .. [Calanan_2023]
     Calanan RM, Bonds ME, Bedrosian SR, Laird SK, Satter D, Penman-Aguilar A. CDC’s Guiding Principles to Promote an Equity-Centered Approach to Public Health Communication. Prev Chronic Dis 2023;20:230061. DOI: http://dx.doi.org/10.5888/pcd20.230061
 
-.. [Cerdena_2020]
+.. [Cerdeña_2020]
     Cerdena JP, Plaisime MV, Tsai J. The Lancet. 2020 Oct; 396(10257):1125-1128. doi: https://doi.org/10.1016/S0140-6736(20)32076-6
 
 .. [Ford_Airhihenbuwa_2010]
