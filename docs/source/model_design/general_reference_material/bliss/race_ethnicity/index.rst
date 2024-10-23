@@ -443,7 +443,7 @@ regarding racial health disparities.
     For more elaboration on these tips, please see Advancing Health Equity: A Guide to Language, Narrative and Concepts 
     [AMA_2021]_.
 
-3. **Explicitly define race during experimental design, and specify the reason for its use in the study** [Boyd_2020]_. 
+3. **Explicitly define race during \[study\] design, and specify the reason for its use in the study** [Boyd_2020]_. 
     
     As is described in our earlier section, `1.1 Research question`_, you should review all relevant 
     social, environmental, and structural factors for which race may serve as a proxy measure when defining 
