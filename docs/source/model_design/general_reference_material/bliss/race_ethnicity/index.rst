@@ -515,13 +515,13 @@ Reporting results accurately
     Boyd RW, Lindo EG, Weeks LD, McLemore MR. On Racism: A New Standard for Publishing on Racial Health Inequities. Health Affairs Blog. 2020 Jul. doi: 10.1377/hblog20200630.939347
 
 .. [Calanan_2023]
-    Calanan RM, Bonds ME, Bedrosian SR, Laird SK, Satter D, Penman-Aguilar A. CDC’s Guiding Principles to Promote an Equity-Centered Approach to Public Health Communication. Prev Chronic Dis 2023;20:230061. DOI: http://dx.doi.org/10.5888/pcd20.230061
+    Calanan RM, Bonds ME, Bedrosian SR, Laird SK, Satter D, Penman-Aguilar A. CDC’s Guiding Principles to Promote an Equity-Centered Approach to Public Health Communication. Prev Chronic Dis 2023;20:230061. doi:10.5888/pcd20.230061
 
 .. [Cerdeña_2020]
-    Cerdeña JP, Plaisime MV, Tsai J. The Lancet. 2020 Oct; 396(10257):1125-1128. doi: https://doi.org/10.1016/S0140-6736(20)32076-6
+    Cerdeña JP, Plaisime MV, Tsai J. The Lancet. 2020 Oct; 396(10257):1125-1128. doi:10.1016/S0140-6736(20)32076-6
 
 .. [Ford_Airhihenbuwa_2010]
-    Ford CL, Airhihenbuwa CO. Critical Race Theory, Race Equity, and Public Health: Toward Antiracism Praxis
+    Ford CL, Airhihenbuwa CO. Critical Race Theory, race equity, and public health: toward antiracism praxis. Am J Public Health. 2010 Apr 1;100 Suppl 1(Suppl 1):S30-5. doi: `10.2105/AJPH.2009.171058 <https://doi.org/10.2105/AJPH.2009.171058>`_. Epub 2010 Feb 10. PMID: `20147679 <https://pmc.ncbi.nlm.nih.gov/articles/PMC2837428/>`_; PMCID: PMC2837428.
 
 .. [Kaplan-and-Bennet-2003]
     Kaplan JB, Bennett T. Use of Race and Ethnicity in Biomedical Publication. JAMA. 2003;289(20):2709–2716. doi:10.1001/jama.289.20.2709
