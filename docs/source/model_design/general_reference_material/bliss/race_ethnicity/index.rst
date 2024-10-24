@@ -446,10 +446,9 @@ One helpful framework for differentiating ways of communicating about race is th
 by race essentialism: the notion that race is a biological factor (rather than a sociopolitical construct). 
 The practice of using race in this way has historically been the norm in US health research, and causes harm for 
 historically marginalized and minoritized groups, thereby exacerbating the very health inequities the health 
-research may be attempting to elucidate and alleviate. For examples of outdated race-based practices in medicine, 
+research may be attempting to elucidate and alleviate. Race-conscious research, on the other hand, calls for a shift in 
+focus from race to racism as a key determinant of illness and health. For examples of outdated race-based practices in medicine, 
 and their race-conscious alternatives, see Table 1 from Cerdeña et al.’s 2020 paper [Cerdeña_2020]_. 
-Race-conscious research, on the other hand, calls for a shift in focus from race to racism as a key determinant of 
-illness and health.
 
 Key recommendations from other sources
 --------------------------------------
@@ -465,12 +464,19 @@ regarding racial health disparities.
     shape institutional policies and living conditions that systematically harm populations 
     [AMA_2021]_.
 
-2. **Use person-first language, avoid unintentional blaming, and be as specific as possible about the group to which you're referring**. 
+2. **Use person-first language, avoid unintentional blaming, and be as specific as possible about the group to which you're referring**.
     
-    For more elaboration on these tips, please see Advancing Health Equity: A Guide to Language, Narrative and Concepts 
-    [AMA_2021]_.
+     Remember that are many types of subpopulations, and it is important to specify the type of subpopulation you are referring to.
+     For instance, avoid using generalized terms such as 'ethnic groups' or 'minorities'. Instead, be specific (e.g., 'Korean persons')
+     and use person-first language if possible (e.g., 'people with undocumented status' rather than 'illegal immigrants'). For more elaboration 
+     on these tips, please see Advancing Health Equity: A Guide to Language, Narrative and Concepts [AMA_2021]_.
 
-3. **Explicitly define race during \[study\] design, and specify the reason for its use in the study** [Boyd_2020]_. 
+
+3. **Cite the experts, particularly scholars of color whose work forms the basis of the field’s knowledge on racism and its effects** 
+[Boyd_2020]_.
+
+
+4. **Explicitly define race during \[study\] design, and specify the reason for its use in the study** [Boyd_2020]_. 
     
     As is described in our earlier section, `1.1 Research question`_, you should review all relevant 
     social, environmental, and structural factors for which race may serve as a proxy measure when defining 
@@ -478,8 +484,9 @@ regarding racial health disparities.
     of study results and implications. But for authors, it engenders critical thinking about racial constructs that 
     prevent the reification of race as a biological entity." [Boyd_2020]_ 
 
-    Health metrics researchers should embrace a critical race theory (CRT) framework, which provides "tools for conducting research and practice 
-    [that] are intended to elucidate contemporary racial phenomena, expand the vocabulary with which to discuss complex racial concepts, and 
+    Health metrics researchers can embrace a critical race theory (CRT) framework. CRT "is an iterative methodology 
+    for helping investigators remain attentive to equity" through providing "tools for conducting research and practice 
+    are intended to elucidate contemporary racial phenomena, expand the vocabulary with which to discuss complex racial concepts, and 
     challenge racial hierarchies" [Ford_Airhihenbuwa_2010]_. Embracing a CRT framework might entail
     some of the following: 
 
@@ -490,10 +497,6 @@ regarding racial health disparities.
     - *Policy advocacy*: Research informed by CRT should not only aim to understand and document disparities but also to drive change. This involves advocating for policies that address the root causes of racial disparities in health, such as economic inequality, housing, education, and access to healthcare. Researchers can play a role in informing policy, engaging in public discourse, and supporting community-led initiatives.
     - *Reflective practice*:  Engage in ongoing reflection about your own positions, biases, and the power dynamics in your work. This includes being open to critique, actively seeking diverse perspectives, and being committed to anti-racist practices both personally and professionally.
   
-
-4. **Cite the experts, particularly scholars of color whose work forms the basis of the field’s knowledge on racism and its effects** 
-[Boyd_2020]_.
-
 
 Reporting results accurately
 ----------------------------
@@ -509,13 +512,13 @@ Reporting results accurately
     American Medical Assiociation. Advancing Health Equity: A Guide to Language, Narrative and Concepts. 2021. https://www.ama-assn.org/system/files/ama-aamc-equity-guide.pdf
 
 .. [Boyd_2020]
-    Boyd RW, Lindo EG, Weeks LD, McLemore MR. On Racism: A New Standard for Publishing on Racial Health Inequities. Health Affairs Blog. 2020 Jul. doi: https://doi.org/10.1377/forefront.20200630.939347
+    Boyd RW, Lindo EG, Weeks LD, McLemore MR. On Racism: A New Standard for Publishing on Racial Health Inequities. Health Affairs Blog. 2020 Jul. doi: 10.1377/hblog20200630.939347
 
 .. [Calanan_2023]
     Calanan RM, Bonds ME, Bedrosian SR, Laird SK, Satter D, Penman-Aguilar A. CDC’s Guiding Principles to Promote an Equity-Centered Approach to Public Health Communication. Prev Chronic Dis 2023;20:230061. DOI: http://dx.doi.org/10.5888/pcd20.230061
 
 .. [Cerdeña_2020]
-    Cerdena JP, Plaisime MV, Tsai J. The Lancet. 2020 Oct; 396(10257):1125-1128. doi: https://doi.org/10.1016/S0140-6736(20)32076-6
+    Cerdeña JP, Plaisime MV, Tsai J. The Lancet. 2020 Oct; 396(10257):1125-1128. doi: https://doi.org/10.1016/S0140-6736(20)32076-6
 
 .. [Ford_Airhihenbuwa_2010]
     Ford CL, Airhihenbuwa CO. Critical Race Theory, Race Equity, and Public Health: Toward Antiracism Praxis
