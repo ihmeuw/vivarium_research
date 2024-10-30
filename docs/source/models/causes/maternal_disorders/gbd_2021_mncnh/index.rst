@@ -24,7 +24,11 @@ Maternal disorders: GBD 2021, MNCNH
 Modeled Subcauses
 -----------------
 
-The following maternal disorders subcauses will be modeled individually:
+The following maternal disorders subcauses will be modeled individually,
+in the indicated model-building wave:
+
+Wave 1
+++++++
 
 .. toctree::
     :maxdepth: 1
@@ -32,6 +36,14 @@ The following maternal disorders subcauses will be modeled individually:
     maternal_hemorrhage
     maternal_sepsis
     obstructed_labor
+
+Wave 2
+++++++
+
+Wave 3
+++++++
+
+* Maternal hypertensive disorders
 
 The remainder of this document describes maternal disorders overall and
 describes the strategy for capturing the burden of the maternal
