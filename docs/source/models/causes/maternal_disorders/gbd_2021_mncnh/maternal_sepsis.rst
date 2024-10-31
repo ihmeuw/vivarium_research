@@ -56,6 +56,12 @@ Assumptions and Limitations
 Cause Model Diagram
 +++++++++++++++++++
 
+Although we're not modeling sepsis dynamically as a finite state
+machine, we can draw an analogous directed graph that can be interpreted
+as a decision tree rather than a state transition diagram. The main
+difference is that the values on the transition arrows represent
+decision probabilities rather than rates per unit time.
+
 .. image:: maternal_sepsis_diagram.drawio.svg
 
 Data Tables
