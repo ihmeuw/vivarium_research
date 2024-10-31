@@ -60,12 +60,43 @@ Although we're not modeling sepsis dynamically as a finite state
 machine, we can draw an analogous directed graph that can be interpreted
 as a decision tree rather than a state transition diagram. The main
 difference is that the values on the transition arrows represent
-decision probabilities rather than rates per unit time.
+decision probabilities rather than rates per unit time. The following
+maternal sepsis diagram can be viewed as an extension of the cause model
+diagram from the :ref:`pregnancy model
+<other_models_pregnancy_closed_cohort_mncnh>` for simulants whose
+pregnancy is full term, with the **P** (Pregnant) states of the two
+diagrams overlapping.
 
 .. image:: maternal_sepsis_diagram.drawio.svg
 
 Data Tables
 +++++++++++
+
+State Definitions
+"""""""""""""""""
+
+.. list-table:: State Definitions
+    :widths: 5 5 20
+    :header-rows: 1
+
+    * - State
+      - State Name
+      - Definition
+    * - P
+      - **P**\regnant
+      - Simulant has a full term pregnancy as determined by the
+        :ref:`pregnancy model
+        <other_models_pregnancy_closed_cohort_mncnh>`
+    * - Sepsis
+      - Sepsis
+      - Simulant has maternal sepsis or another maternal infection
+    * - D
+      - **D**\ead
+      - Simulant died of maternal sepsis
+    * - Output
+      - Output
+      - Record information for use in the neonatal model
+
 
 Calculating Burden
 ++++++++++++++++++
