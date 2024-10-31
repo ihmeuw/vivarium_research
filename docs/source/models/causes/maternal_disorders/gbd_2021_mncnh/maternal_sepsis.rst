@@ -56,6 +56,8 @@ Assumptions and Limitations
 Cause Model Diagram
 +++++++++++++++++++
 
+.. image:: maternal_sepsis_diagram.drawio.svg
+
 Data Tables
 +++++++++++
 
