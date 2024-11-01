@@ -69,11 +69,8 @@ diagrams overlapping.
 
 .. image:: maternal_sepsis_diagram.drawio.svg
 
-Data Tables
-+++++++++++
-
-State Definitions
-"""""""""""""""""
+State and Transition Definitions
+""""""""""""""""""""""""""""""""
 
 .. list-table:: State Definitions
     :widths: 5 5 20
@@ -92,11 +89,32 @@ State Definitions
       - Simulant has maternal sepsis or another maternal infection
     * - D
       - **D**\ead
-      - Simulant died of maternal sepsis
+      - Simulant died of maternal sepsis or another maternal infection
     * - Output
       - Output
       - Record information for use in the neonatal model
 
+.. list-table:: Transition Definitions
+    :widths: 5 5 20
+    :header-rows: 1
+
+    * - Transition
+      - Transition Name
+      - Definition
+    * - ir
+      - incidence risk
+      - The probability that a pregnant simulant gets maternal sepsis or
+        another maternal infection
+    * - CFR
+      - case fatality rate
+      - The probability that a simulant with sepsis or another maternal
+        infection dies of that infection
+
+Data Tables
++++++++++++
+
+Transition Data
+"""""""""""""""
 
 Calculating Burden
 ++++++++++++++++++
