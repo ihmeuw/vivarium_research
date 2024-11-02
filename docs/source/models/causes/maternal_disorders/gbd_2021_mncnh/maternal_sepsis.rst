@@ -56,6 +56,18 @@ Assumptions and Limitations
 Cause Model Diagram
 +++++++++++++++++++
 
+.. graphviz::
+
+    digraph sepsis_decisions {
+        rankdir = LR;
+        pregnant -> "not dead"  [label = "1 - ir"]
+        pregnant -> sepsis [label = "ir"]
+        sepsis -> "not dead" [label = "1 - cfr"]
+        sepsis -> dead [label = "cfr"]
+        "not dead" -> "child born"  [label = "1"]
+        dead -> "child born"  [label = "1"]
+    }
+
 Data Tables
 +++++++++++
 
