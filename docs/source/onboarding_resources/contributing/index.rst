@@ -46,6 +46,23 @@ the commands below.
 At this point, a folder called vivarium_research should be added to your computer and 
 accessible from your file explorer. 
 
+Install Graphviz
+----------------
+
+Our documentation uses the `Sphinx Graphviz extension`_ to embed code
+for Graphviz_ graphs using the DOT_ language, rendering the graphs when
+the docs are built. Graphviz is a separate program that you will need to
+install on your computer in order for the documentation to build without
+errors. The method of installation depends on your platform ( Windows,
+Mac, or Linux), and installation instructions can be found here:
+
+* `Graphviz download page`_
+
+.. _Sphinx Graphviz extension: https://www.sphinx-doc.org/en/master/usage/extensions/graphviz.html
+.. _Graphviz: https://graphviz.org/
+.. _DOT: https://graphviz.org/doc/info/lang.html
+.. _Graphviz download page: https://graphviz.org/download/
+
 Make a new git branch
 ---------------------
 
