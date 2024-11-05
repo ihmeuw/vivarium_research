@@ -53,8 +53,8 @@ YLDs.
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Cause Model Diagram
-+++++++++++++++++++
+Temporary Section
++++++++++++++++++
 
 Although we're not modeling sepsis dynamically as a finite state
 machine, we can draw an analogous directed graph that can be interpreted
@@ -109,6 +109,9 @@ State and Transition Definitions
       - case fatality rate
       - The probability that a simulant with sepsis or another maternal
         infection dies of that infection
+
+Cause Model Diagram
++++++++++++++++++++
 
 Data Tables
 +++++++++++
