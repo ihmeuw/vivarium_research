@@ -52,6 +52,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
+    'sphinx.ext.graphviz',
     'matplotlib.sphinxext.plot_directive',
     'sphinx_rtd_theme',
 ]
@@ -163,6 +164,13 @@ latex_documents = [
      about["__author__"], 'manual'),
 ]
 
+# -- Options for graphviz output ---------------------------------------
+
+# Can be 'png' or 'svg', default is 'png'. If 'svg' is used, in order to
+#  make URL links work properly for graph elements, an appropriate
+#  target attribute must be set, such as "_top" and "_blank".
+#  https://www.sphinx-doc.org/en/master/usage/extensions/graphviz.html
+graphviz_output_format = 'svg'
 
 # -- Options for manual page output ---------------------------------------
 
