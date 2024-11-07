@@ -117,12 +117,15 @@ Cause Model Diagram
 
     digraph sepsis_decisions {
         rankdir = LR;
-        pregnant -> "not dead"  [label = "1 - ir"]
-        pregnant -> sepsis [label = "ir"]
-        sepsis -> "not dead" [label = "1 - cfr"]
-        sepsis -> dead [label = "cfr"]
-        "not dead" -> "child born"  [label = "1"]
-        dead -> "child born"  [label = "1"]
+        "full term\npregnancy" [style=dashed]
+        "full term\nbirth" [style=dashed]
+
+        "full term\npregnancy" -> "parent alive"  [label = "1 - ir"]
+        "full term\npregnancy" -> sepsis [label = "ir"]
+        sepsis -> "parent alive" [label = "1 - cfr"]
+        sepsis -> "parent dead" [label = "cfr"]
+        "parent alive" -> "full term\nbirth"  [label = "1", style=dashed]
+        "parent dead" -> "full term\nbirth"  [label = "1", style=dashed]
     }
 
 Data Tables
