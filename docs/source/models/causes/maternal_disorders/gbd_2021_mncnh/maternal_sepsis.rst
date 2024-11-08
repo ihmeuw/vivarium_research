@@ -71,6 +71,53 @@ Cause Model Diagram
 Data Tables
 +++++++++++
 
+The incidence risk (ir) per birth will be computed as
+
+.. math::
+
+    \text{ir} = \frac{\text{sepsis cases}}{\text{births}}
+        = \frac{\text{(sepsis cases) / person-time}}
+            {\text{births / person-time}}
+        = \frac{\text{sepsis incidence rate}}{\text{birth rate}}.
+
+The case fatality rate (cfr) will be computed as
+
+.. math::
+
+    \text{cfr} = \frac{\text{sepsis deaths}}{\text{sepsis cases}}
+        = \frac{\text{(sepsis deaths) / person-time}}
+            {\text{(sepsis cases) / person-time}}
+        = \frac{\text{sepsis cause specific mortality rate}}
+            {\text{sepsis incidence rate}}.
+
+The following table shows the data needed from GBD for these
+calculations as well as for the calculations of YLDs in the next
+section.
+
+.. list-table:: Data values and sources
+    :header-rows: 1
+
+    * - Variable
+      - Definition
+      - Value or source
+      - Note
+    * - ir
+      - maternal sepsis incidence risk per birth
+      - incidence_c368 / birth_rate
+      -
+    * - cfr
+      - case fatality rate of maternal sepsis
+      - csmr_c368 / incidence_368
+      -
+    * - incidence_c368
+      - incidence rate of maternal sepsis
+      - como
+      - Use the :ref:`total population incidence rate <total population
+        incidence rate>` directly from GBD and do not rescale this
+        parameter to susceptible-population incidence rate using
+        condition prevalence.
+
+
 Calculating Burden
 ++++++++++++++++++
 
