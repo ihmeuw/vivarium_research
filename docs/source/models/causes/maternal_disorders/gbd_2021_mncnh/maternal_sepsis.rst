@@ -110,23 +110,51 @@ State and Transition Definitions
       - The probability that a simulant with sepsis or another maternal
         infection dies of that infection
 
-Cause Model Diagram
-+++++++++++++++++++
+Cause Model Decision Graph
+++++++++++++++++++++++++++
+
+Although we're not modeling sepsis dynamically as a finite state
+machine, we can draw an analogous directed graph that can be interpreted
+as a decision tree rather than a state transition diagram. The main
+difference is that the values on the transition arrows represent
+decision probabilities rather than rates per unit time. The graph can be
+interpreted as a tree by making a copy of each rooted subgraph for each
+incoming arrow of its root. The following maternal sepsis decision graph
+can be viewed as an extension of the decision graph from the
+:ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>` for
+simulants whose pregnancy is full term, with the "full term pregnancy"
+and "full term birth" states of the two diagrams overlapping.
 
 .. graphviz::
 
     digraph sepsis_decisions {
         rankdir = LR;
-        "full term\npregnancy" [style=dashed]
-        "full term\nbirth" [style=dashed]
+        ftp [label="full term pregnancy\n(post intrapartum model)", style=dashed]
+        ftb [label="full term\nbirth", style=dashed]
 
-        "full term\npregnancy" -> "parent alive"  [label = "1 - ir"]
-        "full term\npregnancy" -> sepsis [label = "ir"]
+        ftp -> "parent alive"  [label = "1 - ir"]
+        ftp -> sepsis [label = "ir"]
         sepsis -> "parent alive" [label = "1 - cfr"]
         sepsis -> "parent dead" [label = "cfr"]
-        "parent alive" -> "full term\nbirth"  [label = "1", style=dashed]
-        "parent dead" -> "full term\nbirth"  [label = "1", style=dashed]
+        "parent alive" -> ftb  [label = "1", style=dashed]
+        "parent dead" -> ftb  [label = "1", style=dashed]
     }
+
+.. list-table:: Transition Definitions
+    :widths: 5 5 20
+    :header-rows: 1
+
+    * - Transition
+      - Transition Name
+      - Definition
+    * - ir
+      - incidence risk
+      - The probability that a pregnant simulant gets maternal sepsis or
+        another maternal infection
+    * - cfr
+      - case fatality rate
+      - The probability that a simulant with sepsis or another maternal
+        infection dies of that infection
 
 Data Tables
 +++++++++++
