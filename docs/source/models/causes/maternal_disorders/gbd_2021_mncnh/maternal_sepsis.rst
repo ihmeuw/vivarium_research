@@ -53,63 +53,6 @@ YLDs.
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Temporary Section
-+++++++++++++++++
-
-Although we're not modeling sepsis dynamically as a finite state
-machine, we can draw an analogous directed graph that can be interpreted
-as a decision tree rather than a state transition diagram. The main
-difference is that the values on the transition arrows represent
-decision probabilities rather than rates per unit time. The following
-maternal sepsis diagram can be viewed as an extension of the cause model
-diagram from the :ref:`pregnancy model
-<other_models_pregnancy_closed_cohort_mncnh>` for simulants whose
-pregnancy is full term, with the **P** (Pregnant) states of the two
-diagrams overlapping.
-
-.. image:: maternal_sepsis_diagram.drawio.svg
-
-State and Transition Definitions
-""""""""""""""""""""""""""""""""
-
-.. list-table:: State Definitions
-    :widths: 5 5 20
-    :header-rows: 1
-
-    * - State
-      - State Name
-      - Definition
-    * - P
-      - **P**\regnant
-      - Simulant has a full term pregnancy as determined by the
-        :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>`
-    * - Sepsis
-      - Sepsis
-      - Simulant has maternal sepsis or another maternal infection
-    * - D
-      - **D**\ead
-      - Simulant died of maternal sepsis or another maternal infection
-    * - Output
-      - Output
-      - Record information for use in the neonatal model
-
-.. list-table:: Transition Definitions
-    :widths: 5 5 20
-    :header-rows: 1
-
-    * - Transition
-      - Transition Name
-      - Definition
-    * - ir
-      - incidence risk
-      - The probability that a pregnant simulant gets maternal sepsis or
-        another maternal infection
-    * - CFR
-      - case fatality rate
-      - The probability that a simulant with sepsis or another maternal
-        infection dies of that infection
-
 Cause Model Decision Graph
 ++++++++++++++++++++++++++
 
@@ -198,9 +141,6 @@ lines indicate pieces of the underlying pregnancy model.
 
 Data Tables
 +++++++++++
-
-Transition Data
-"""""""""""""""
 
 Calculating Burden
 ++++++++++++++++++
