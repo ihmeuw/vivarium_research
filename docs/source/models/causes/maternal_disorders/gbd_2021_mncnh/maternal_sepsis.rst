@@ -84,15 +84,16 @@ The case fatality rate (cfr) will be computed as
 
 .. math::
 
+    \begin{align*}
     \text{cfr} = \frac{\text{sepsis deaths}}{\text{sepsis cases}}
-        = \frac{\text{(sepsis deaths) / person-time}}
-            {\text{(sepsis cases) / person-time}}
-        = \frac{\text{sepsis cause specific mortality rate}}
+        &= \frac{\text{(sepsis deaths) / person-time}}
+            {\text{(sepsis cases) / person-time}} \\
+        &= \frac{\text{sepsis cause specific mortality rate}}
             {\text{sepsis incidence rate}}.
+    \end{align*}
 
 The following table shows the data needed from GBD for these
-calculations as well as for the calculations of YLDs in the next
-section.
+calculations as well as for the calculation of YLDs in the next section.
 
 .. list-table:: Data values and sources
     :header-rows: 1
@@ -116,6 +117,32 @@ section.
         incidence rate>` directly from GBD and do not rescale this
         parameter to susceptible-population incidence rate using
         condition prevalence.
+    * - csmr_c368
+      - maternal sepsis cause-specific mortality rate
+      - deaths_c368 / population
+      -
+    * - deaths_c368
+      - count of deaths due to maternal sepsis
+      - codcorrect
+      -
+    * - population
+      - population count
+      - get_population
+      - Specific to age/sex/location/year demographic group
+    * - birth_rate
+      - birth rate (live or still)
+      - ASFR (1 + SBR)
+      - Units are total births (live or still) per person-year
+    * - ASFR
+      - Age-specific fertility rate
+      - get_covariate_estimates: coviarate_id=13
+      - Assume lognormal distribution of uncertainty. Units in GBD are
+        live births per person, or equivalently, per person-year.
+    * - SBR
+      - Still to live birth ratio
+      - get_covariate_estimates: covariate_id=2267
+      - Parameter is not age specific and has no draw-level uncertainty.
+        Use mean_value as location-specific point parameter.
 
 
 Calculating Burden
