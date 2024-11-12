@@ -126,12 +126,13 @@ calculations as well as for the calculation of YLDs in the next section.
       - codcorrect
       -
     * - population
-      - population count
+      - average population in a given year
       - get_population
-      - Specific to age/sex/location/year demographic group
+      - Specific to age/sex/location/year demographic group. Numerically
+        equal to person-time for the year.
     * - birth_rate
       - birth rate (live or still)
-      - ASFR (1 + SBR)
+      - (1 + SBR) ASFR
       - Units are total births (live or still) per person-year
     * - ASFR
       - Age-specific fertility rate
@@ -143,6 +144,10 @@ calculations as well as for the calculation of YLDs in the next section.
       - get_covariate_estimates: covariate_id=2267
       - Parameter is not age specific and has no draw-level uncertainty.
         Use mean_value as location-specific point parameter.
+    * - yld_rate_c368
+      - rate of maternal sepsis YLDs per person-year
+      - como
+      -
 
 
 Calculating Burden
