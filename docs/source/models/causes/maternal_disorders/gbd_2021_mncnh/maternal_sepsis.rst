@@ -73,12 +73,15 @@ lines indicate pieces of the underlying pregnancy model.
     Put an explanation like the following (but with more precision) on
     some central page (rather than on each individual model page):
 
-    To convert the graph to a decision tree, recursively split nodes
-    with more than one incoming arrow until all nodes except the root
-    have one incoming edge. Each time a node is split, all its outgoing
-    edges are replicated, which may lead to additional downstream
-    splits. Equivalently, the tree structure can be implicitly recovered
-    by remembering the path taken to get to each node.
+        To convert the graph to a decision tree, recursively split nodes
+        with more than one incoming arrow until all nodes except the
+        root have one incoming edge. Each time a node is split, all its
+        outgoing edges are replicated, which may lead to additional
+        downstream splits. Equivalently, the tree structure can be
+        implicitly recovered by remembering the path taken to get to
+        each node.
+
+    Jira ticket: https://jira.ihme.washington.edu/browse/SSCI-2006
 
 .. graphviz::
 
