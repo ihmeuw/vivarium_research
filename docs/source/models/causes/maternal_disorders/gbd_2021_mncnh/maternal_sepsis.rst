@@ -77,8 +77,32 @@ Calculating Burden
 Years of life lost
 """""""""""""""""""
 
+Years of life lost (YLLs) should be assigned to simulants who die of
+maternal sepsis based on their age and theoretical minimum risk life
+expectancy at the time of death.
+
 Years lived with disability
 """""""""""""""""""""""""""
+
+Years lived with disability (YLDs) should be accrued by each simulant
+with an incident case of maternal sepsis or other maternal infections.
+Specifically, the total number of sepsis YLDs accrued by each infected
+simlant should be ylds_per_case_c368, which is defined as in the above
+data table by
+
+.. math::
+
+    \begin{align*}
+    \text{ylds_per_case_c368}
+        &= \frac{\text{sepsis YLDs}}{\text{sepsis cases}}\\
+        &= \frac{\text{(sepsis YLDs) / person-time}}
+            {\text{(sepsis cases) / person-time}}
+        = \frac{\text{sepsis YLD rate}}{\text{sepsis incidence rate}}.
+    \end{align*}
+
+Since each simulant can get at most one case of maternal sepsis during
+the simulation, the number of YLDs accrued by each infected simulant is
+the same as the number of YLDs per case.
 
 Validation Criteria
 +++++++++++++++++++
