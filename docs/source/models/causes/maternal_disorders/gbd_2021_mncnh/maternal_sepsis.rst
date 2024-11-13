@@ -167,6 +167,10 @@ calculations as well as for the calculation of YLDs in the next section.
       - rate of maternal sepsis YLDs per person-year
       - como
       -
+    * - ylds_per_case_c368
+      - YLDs per case of maternal sepsis
+      - yld_rate_c368 / incidence_c368
+      -
 
 
 Calculating Burden
