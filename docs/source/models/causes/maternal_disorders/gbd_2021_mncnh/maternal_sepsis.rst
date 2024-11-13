@@ -81,14 +81,25 @@ Years of life lost (YLLs) should be assigned to simulants who die of
 maternal sepsis based on their age and theoretical minimum risk life
 expectancy at the time of death.
 
+The maternal sepsis YLLs for a simulant who dies of maternal sepsis or
+other maternal infections should equal the difference between the
+theoretical minimum risk life expectancy for the simulant's age group at
+the time of death and the simulant's age at the time of death.
+
+The years of life lost (YLLs) due to maternal sepsis for a simulant who
+dies of maternal sepsis or other maternal infections at age :math:`a`
+should equal :math:`\operatorname{TMRLE}(a) - a`, where
+:math:`\operatorname{TMRLE}(a)` is the theoretical minimum risk life
+expectancy for a person of age :math:`a`.
+
 Years lived with disability
 """""""""""""""""""""""""""
 
 Years lived with disability (YLDs) should be accrued by each simulant
 with an incident case of maternal sepsis or other maternal infections.
-Specifically, the total number of sepsis YLDs accrued by each infected
-simlant should be ylds_per_case_c368, which is defined as in the above
-data table by
+Specifically, the total number of maternal sepsis YLDs accrued by each
+infected simlant should be ylds_per_case_c368, which is defined as in
+the above data table by
 
 .. math::
 
@@ -102,7 +113,8 @@ data table by
 
 Since each simulant can get at most one case of maternal sepsis during
 the simulation, the number of YLDs accrued by each infected simulant is
-the same as the number of YLDs per case.
+the same as the number of YLDs per case. Simulants with a case of sepsis
+should accrue YLDs whether or not they die.
 
 Validation Criteria
 +++++++++++++++++++
