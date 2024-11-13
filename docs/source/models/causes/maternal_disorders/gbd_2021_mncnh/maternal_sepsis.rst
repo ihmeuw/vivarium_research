@@ -87,10 +87,10 @@ The case fatality rate will be computed as
 .. math::
 
     \begin{align*}
-    \text{cfr} = \frac{\text{sepsis deaths}}{\text{sepsis cases}}
+    \text{cfr} &= \frac{\text{sepsis deaths}}{\text{sepsis cases}} \\
         &= \frac{\text{(sepsis deaths) / person-time}}
-            {\text{(sepsis cases) / person-time}} \\
-        &= \frac{\text{sepsis cause specific mortality rate}}
+            {\text{(sepsis cases) / person-time}}
+        = \frac{\text{sepsis cause specific mortality rate}}
             {\text{sepsis incidence rate}}.
     \end{align*}
 
