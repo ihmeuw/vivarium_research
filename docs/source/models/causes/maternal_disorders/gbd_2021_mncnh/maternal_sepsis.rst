@@ -53,20 +53,94 @@ YLDs.
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Cause Model Diagram
-+++++++++++++++++++
+Cause Model Decision Graph
+++++++++++++++++++++++++++
+
+Although we're not modeling sepsis dynamically as a finite state
+machine, we can draw an analogous directed graph that can be interpreted
+as a (collapsed) decision tree rather than a state transition diagram.
+The main difference is that the values on the transition arrows
+represent decision probabilities rather than rates per unit time. The
+maternal sepsis decision graph drawn below should be inserted on the
+"full term pregnancy" branch of the decision graph from the
+:ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`,
+between the intrapartum model and the birth of the child simulant. Solid
+lines are the pieces added by the maternal sepsis model, while dashed
+lines indicate pieces of the underlying pregnancy model.
+
+.. todo::
+
+    Put an explanation like the following (but with more precision) on
+    some central page (rather than on each individual model page):
+
+        To convert the graph to a decision tree, recursively split nodes
+        with more than one incoming arrow until all nodes except the
+        root have one incoming edge. Each time a node is split, all its
+        outgoing edges are replicated, which may lead to additional
+        downstream splits. Equivalently, the tree structure can be
+        implicitly recovered by remembering the path taken to get to
+        each node.
+
+    Jira ticket: https://jira.ihme.washington.edu/browse/SSCI-2006
 
 .. graphviz::
 
     digraph sepsis_decisions {
         rankdir = LR;
-        pregnant -> "not dead"  [label = "1 - ir"]
-        pregnant -> sepsis [label = "ir"]
-        sepsis -> "not dead" [label = "1 - cfr"]
+        ftp [label="full term\npregnancy,\npost ipm", style=dashed]
+        ftb [label="full term\nbirth", style=dashed]
+        alive [label="parent alive"]
+        dead [label="parent dead"]
+
+        ftp -> alive  [label = "1 - ir"]
+        ftp -> sepsis [label = "ir"]
+        sepsis -> alive [label = "1 - cfr"]
         sepsis -> dead [label = "cfr"]
-        "not dead" -> "child born"  [label = "1"]
-        dead -> "child born"  [label = "1"]
+        alive -> ftb  [label = "1", style=dashed]
+        dead -> ftb  [label = "1", style=dashed]
     }
+
+.. list-table:: State Definitions
+    :widths: 7 20
+    :header-rows: 1
+
+    * - State
+      - Definition
+    * - full term pregnancy, post ipm
+      - Parent simulant has a full term pregnancy as determined by the
+        :ref:`pregnancy model
+        <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
+        already been through the antenatal and intrapartum models ("post
+        ipm" stands for "post intrapartum model")
+    * - sepsis
+      - Parent simulant has maternal sepsis or another maternal
+        infection
+    * - parent alive
+      - Parent simulant is still alive
+    * - parent dead
+      - Parent simulant died of maternal sepsis or another maternal
+        infection
+    * - full term birth
+      - The parent simulant has given birth to a child simulant (which
+        may be a live birth or a still birth, to be determined in the
+        next step of the :ref:`pregnancy model
+        <other_models_pregnancy_closed_cohort_mncnh>`)
+
+.. list-table:: Transition Probability Definitions
+    :widths: 1 5 20
+    :header-rows: 1
+
+    * - Symbol
+      - Name
+      - Definition
+    * - ir
+      - incidence risk
+      - The probability that a pregnant simulant gets maternal sepsis or
+        another maternal infection
+    * - cfr
+      - case fatality rate
+      - The probability that a simulant with sepsis or another maternal
+        infection dies of that infection
 
 Data Tables
 +++++++++++
