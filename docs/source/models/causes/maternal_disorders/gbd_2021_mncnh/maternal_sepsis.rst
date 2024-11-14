@@ -86,11 +86,12 @@ expectancy for a person of age :math:`a`.
 Years lived with disability
 """""""""""""""""""""""""""
 
-Years lived with disability (YLDs) should be accrued by each simulant
-with an incident case of maternal sepsis or other maternal infections.
-Specifically, the total number of maternal sepsis YLDs accrued by each
-infected simlant should be ylds_per_case_c368, which is defined as in
-the above data table by
+For simplicity, each simulant with an incident case of maternal sepsis
+or other maternal infections in a given age group  will accrue the same
+number of years lived with disability (YLDs). Specifically, the total
+number of maternal sepsis YLDs accrued by each infected simulant should
+be the average number of YLDs per case of maternal sepsis in the
+simulant's age group, which is defined in the above data table as
 
 .. math::
 
@@ -102,10 +103,11 @@ the above data table by
         = \frac{\text{sepsis YLD rate}}{\text{sepsis incidence rate}}.
     \end{align*}
 
-Since each simulant can get at most one case of maternal sepsis during
-the simulation, the number of YLDs accrued by each infected simulant is
-the same as the number of YLDs per case. Simulants with a case of sepsis
-should accrue YLDs whether or not they die.
+We are using the fact that  each simulant can get at most one case of
+maternal sepsis during the simulation, so the average number of YLDs per
+infected simulant is the same as the average number of YLDs per case.
+Simulants with a case of sepsis should accrue YLDs whether or not they
+die.
 
 .. admonition:: Limitation
 
@@ -126,26 +128,26 @@ should accrue YLDs whether or not they die.
 
     #. If the modeled birth and puerperal sepsis case *does* cause
        infertility, the total infertility YLDs will be spread out over
-       the simulant's remaining reproductive years, which would be
-       counted in later age groups, not entirely in the simulant's
-       current age group. Thus we will be "missing" a large portion of
-       the YLDs caused by the current birth events when we tally up YLDs
-       for births in the simulant's current age group.
+       the simulant's remaining reproductive years, occurring in later
+       age groups, not entirely in the simulant's current age group.
+       Thus we will be "missing" a large portion of the YLDs caused by
+       the current birth events when we tally up YLDs for births in the
+       simulant's current age group.
 
     Thus, if we avert a case of sepsis, we will be simultaneously
     averting *extra* YLDs that we shouldn't be, because we are counting
-    YLDs that don't actually belong to simulant whose case was averted,
-    as well as *missing* YLDs that should have been averted because we
-    are only counting YLDs in the simulant's current age group, and not
-    the YLDs that they would accrue in later years. Since births and
-    hence incident cases of maternal sepsis `generally decrease with age
-    <http://ihmeuw.org/6q63>`_, while cases of secondary infertility
-    `generally increase with age <http://ihmeuw.org/6q62>`_, we will
-    probably be systematically *undercounting* the YLDs that would be
-    averted by each averted case of sepsis, because for a sepsis case,
-    the missed YLDs for the simulant in question will on average be
-    greater than the extraneous YLDs from other simulants in the same
-    age group.
+    YLDs that don't actually belong to the simulant whose case was
+    averted, as well as *missing* YLDs that should have been averted
+    because we are only counting YLDs in the simulant's current age
+    group, and not the YLDs that they would accrue in later years. Since
+    births and hence incident cases of maternal sepsis `generally
+    decrease with age <http://ihmeuw.org/6q63>`_, while cases of
+    secondary infertility `generally increase with age
+    <http://ihmeuw.org/6q62>`_, we will probably be systematically
+    *undercounting* the YLDs that would be averted by each averted case
+    of sepsis, because for a sepsis case, the missed YLDs for the
+    simulant in question will on average be greater than the extraneous
+    YLDs from other simulants in the same age group.
 
     It may be possible to develop a different strategy of counting YLDs
     that would help correct this bias, but the discrepancy will likely
