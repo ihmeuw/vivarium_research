@@ -16,6 +16,55 @@ GBD 2021 Modeling Strategy
 Cause Hierarchy
 +++++++++++++++
 
+- All causes (c_294) [level 0]
+
+  - Communicable, maternal, neonatal, and nutritional diseases (c_295)
+
+    - Maternal disorders and neonatal disorders (c_962)
+
+      - Maternal disorders (c_366)
+
+        - **Maternal sepsis and other maternal infections (c_368)**
+
+          - Infertility due to puerperal sepsis (s_675)
+
+          - Puerperal sepsis (s_937)
+
+          - Other maternal infections (s_938)
+
+*Maternal sepsis and other maternal infections (c_368)* ia a most
+detailed cause, at level 4 of the GBD hierarchy. It has three sequelae,
+detailed in the following table:
+
+.. list-table:: Sequelae of maternal sepsis and other maternal infections
+    :header-rows: 1
+    :widths: 2 1 5 5
+
+    * - Sequela
+      - GBD ID
+      - Health state and disability weight
+      - Notes
+    * - Infertility due to puerperal sepsis
+      - s_675
+      - infertility, secondary
+
+        DW: 0.005 (0.002–0.011)
+      - Modeled under the infertility impairment. Secondary infertility
+        means inability to have a livebirth after you've already had at
+        least one child.
+    * - Puerperal sepsis
+      - s_937
+      - infectious disease, acute episode, severe
+
+        DW: 0.133 (0.088–0.19)
+      -
+    * - Other maternal infections
+      - s_938
+      - infectious disease, acute episode, moderate
+
+        DW: 0.051 (0.032–0.074)
+      -
+
 Restrictions
 ++++++++++++
 
