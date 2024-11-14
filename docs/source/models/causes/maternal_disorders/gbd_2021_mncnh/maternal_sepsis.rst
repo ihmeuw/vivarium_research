@@ -19,6 +19,42 @@ Cause Hierarchy
 Restrictions
 ++++++++++++
 
+The following table describes any restrictions in GBD 2021 on the
+effects of this cause (such as being only fatal or only nonfatal), as
+well as restrictions on the ages and sexes to which the cause applies.
+
+.. list-table:: GBD 2021 Cause Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - True
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 10 to 14 (ID=7)
+     -
+   * - YLL age group end
+     - 50 to 54 (ID=15)
+     -
+   * - YLD age group start
+     - 10 to 14 (ID=7)
+     -
+   * - YLD age group end
+     - 50 to 54 (ID=15)
+     -
+
 Vivarium Modeling Strategy
 --------------------------
 
