@@ -417,5 +417,25 @@ die.
 Validation Criteria
 +++++++++++++++++++
 
+In order to verify and validate the model, we should record at least the
+following information:
+
+- Number of simulants with full term pregnancies in each age group
+  before the maternal sepsis model is run
+- Number of maternal sepsis cases and maternal sepsis deaths in each age
+  group
+- Number of maternal sepsis YLDs and YLLs in each age group
+
+Using the above data, we should be able to verify/validate the
+following:
+
+- Validate the maternal sepsis incidence risk and case fatality rate in
+  each age group against the corresponding quantities calculated from
+  GBD data
+- Validate the number of maternal sepsis deaths per population against
+  the maternal sepsis CSMR from GBD
+- Validate the total maternal sepsis YLDs and YLLs per population
+  against the rates from GBD
+
 References
 ----------
