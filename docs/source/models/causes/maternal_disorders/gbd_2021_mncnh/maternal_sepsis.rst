@@ -172,7 +172,7 @@ lines indicate pieces of the underlying pregnancy model.
 
     digraph sepsis_decisions {
         rankdir = LR;
-        ftp [label="full term\npregnancy,\npost ipm", style=dashed]
+        ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
         ftb [label="full term\nbirth", style=dashed]
         alive [label="parent alive"]
         dead [label="parent dead"]
@@ -191,12 +191,11 @@ lines indicate pieces of the underlying pregnancy model.
 
     * - State
       - Definition
-    * - full term pregnancy, post ipm
+    * - full term pregnancy, post intrapartum
       - Parent simulant has a full term pregnancy as determined by the
         :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
-        already been through the antenatal and intrapartum models ("post
-        ipm" stands for "post intrapartum model")
+        already been through the antenatal and intrapartum models
     * - sepsis
       - Parent simulant has maternal sepsis or another maternal
         infection
