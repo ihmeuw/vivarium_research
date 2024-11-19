@@ -280,6 +280,8 @@ We can refer to the outcome rate multiplied by (1 - PAF) as the "risk-deleted ou
 
         But maybe this belongs in the PAF section?
 
+    Relevant ticket in backlog: https://jira.ihme.washington.edu/browse/SSCI-1152 
+
 Direct and indirect risk effect
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
