@@ -207,6 +207,8 @@ You can read more about residual confounding and how our team accounts for it `h
   Cite [Allen-et-al-2019]_ and [Sorensen-et-al-2017]_ somewhere.
 
   Elaborate on this in approachable/jargon-free language.
+
+  Relevant ticket in backlog: https://jira.ihme.washington.edu/browse/SSCI-1921
   
 
 How does Vivarium compare with other microsimulation tools?
