@@ -29,7 +29,7 @@ Cause Hierarchy
 
             - Vesicovaginal fistula (s_190)
 
-*Obstructed labor and uterine rupture (c_370)* is a most
+*Obstructed labor and uterine rupture (c_370)* ia a most
 detailed cause, at level 4 of the GBD hierarchy. It has three sequelae,
 detailed in the following table:
 
@@ -52,18 +52,60 @@ detailed in the following table:
       - rectovaginal fistula 
 
         DW: 0.501 (0.339–0.657)
-      - The non-fatal burden of fistulas is included in the non-fatal 
-        burden of obstructed labour in reporting, but estimation is 
+      - Obstetric fistula is defined as an abnormal opening between the vagina and 
+        the bladder or rectum with involuntary escape of urine, flatus, and/or faeces 
+        following childbirth.  The non-fatal burden of fistulas is included in the 
+        non-fatal burden of obstructed labour in reporting, but estimation is 
         described in a separate appendix section on “Fistula – impairment.”
     * - Vesicovaginal fistula
       - s_190
       - vesicovaginal fistula
 
         DW: 0.342 (0.227–0.478) 
-      -
+      - Obstetric fistula is defined as an abnormal opening between the vagina and 
+        the bladder or rectum with involuntary escape of urine, flatus, and/or faeces 
+        following childbirth.  The non-fatal burden of fistulas is included in the 
+        non-fatal burden of obstructed labour in reporting, but estimation is 
+        described in a separate appendix section on “Fistula – impairment.”
 
 Restrictions
 ++++++++++++
+
+The following table describes any restrictions in GBD 2021 on the
+effects of this cause (such as being only fatal or only nonfatal), as
+well as restrictions on the ages and sexes to which the cause applies.
+
+.. list-table:: GBD 2021 Cause Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - True
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 10 to 14 (ID=7)
+     -
+   * - YLL age group end
+     - 50 to 54 (ID=15)
+     -
+   * - YLD age group start
+     - 10 to 14 (ID=7)
+     -
+   * - YLD age group end
+     - 50 to 54 (ID=15)
+     -
 
 Vivarium Modeling Strategy
 --------------------------
