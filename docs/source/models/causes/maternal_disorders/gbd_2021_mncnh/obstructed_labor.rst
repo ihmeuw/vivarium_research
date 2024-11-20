@@ -53,7 +53,7 @@ detailed in the following table:
 
         DW: 0.501 (0.339–0.657)
       - Rectovaginal fistula is defined as an abnormal opening between the vagina and 
-        the rectum with involuntary escape of flatus, and/or faeces 
+        the rectum with involuntary escape of flatus and/or faeces 
         following childbirth.  The non-fatal burden of fistulas is included in the 
         non-fatal burden of obstructed labour in reporting, but estimation is 
         described in a separate appendix section on “Fistula – impairment.”
