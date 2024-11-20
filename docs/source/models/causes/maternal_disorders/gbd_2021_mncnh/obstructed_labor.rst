@@ -52,8 +52,8 @@ detailed in the following table:
       - rectovaginal fistula 
 
         DW: 0.501 (0.339–0.657)
-      - Obstetric fistula is defined as an abnormal opening between the vagina and 
-        the bladder or rectum with involuntary escape of urine, flatus, and/or faeces 
+      - Rectovaginal fistula is defined as an abnormal opening between the vagina and 
+        the rectum with involuntary escape of flatus, and/or faeces 
         following childbirth.  The non-fatal burden of fistulas is included in the 
         non-fatal burden of obstructed labour in reporting, but estimation is 
         described in a separate appendix section on “Fistula – impairment.”
@@ -62,11 +62,11 @@ detailed in the following table:
       - vesicovaginal fistula
 
         DW: 0.342 (0.227–0.478) 
-      - Obstetric fistula is defined as an abnormal opening between the vagina and 
-        the bladder or rectum with involuntary escape of urine, flatus, and/or faeces 
-        following childbirth.  The non-fatal burden of fistulas is included in the 
-        non-fatal burden of obstructed labour in reporting, but estimation is 
-        described in a separate appendix section on “Fistula – impairment.”
+      - Vesicovaginal  fistula is defined as an abnormal opening between the vagina and 
+        the bladder with involuntary escape of urine following childbirth.  The non-fatal 
+        burden of fistulas is included in the non-fatal burden of obstructed labour in 
+        reporting, but estimation is described in a separate appendix section on 
+        “Fistula – impairment.”
 
 Restrictions
 ++++++++++++
