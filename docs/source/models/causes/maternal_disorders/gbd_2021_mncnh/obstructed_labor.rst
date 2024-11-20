@@ -29,7 +29,7 @@ Cause Hierarchy
 
             - Vesicovaginal fistula (s_190)
 
-*Obstructed labor and uterine rupture (c_370)* ia a most
+*Obstructed labor and uterine rupture (c_370)* is a most
 detailed cause, at level 4 of the GBD hierarchy. It has three sequelae,
 detailed in the following table:
 
