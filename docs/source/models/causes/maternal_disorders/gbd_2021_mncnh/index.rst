@@ -58,13 +58,13 @@ GBD 2021 Modeling Strategy
 Cause Hierarchy
 +++++++++++++++
 
-- All causes (c_294)
+- All causes (c_294) [level 0]
 
   - Communicable, maternal, neonatal, and nutritional diseases (c_295)
 
     - Maternal disorders and neonatal disorders (c_962)
 
-      - **Maternal disorders (c_366)**
+      - **Maternal disorders (c_366)** [level 3]
 
         - Maternal hemorrhage (c_367)
 
@@ -80,11 +80,11 @@ Cause Hierarchy
 
         - Maternal sepsis and other maternal infections (c_368)
 
-          - Infertility due to puerperal sepsis (s_675)
-
           - Puerperal sepsis (s_937)
 
           - Other maternal infections (s_938)
+
+          - Infertility due to puerperal sepsis (s_675)
 
         - Maternal hypertensive disorders (c_369)
 
@@ -92,11 +92,11 @@ Cause Hierarchy
 
           - Eclampsia (s_186)
 
+          - Other hypertensive disorders of pregnancy (s_676)
+
           - Long term sequelae of severe pre-eclampsia (s_187)
 
           - Long term sequelae of eclampsia (s_677)
-
-          - Other hypertensive disorders of pregnancy (s_676)
 
         - Maternal obstructed labor and uterine rupture (c_370)
 
