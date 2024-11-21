@@ -272,7 +272,7 @@ calculations as well as for the calculation of YLDs in the next section.
       - csmr_c368 / incidence_368
       - The value of cfr is a probabiity in [0,1]
     * - incidence_c368
-      - incidence rate of obstructed labor and uterine rupture and other maternal infections
+      - incidence rate of obstructed labor and uterine rupture
       - como
       - Use the :ref:`total population incidence rate <total population
         incidence rate>` directly from GBD and do not rescale this
@@ -285,8 +285,7 @@ calculations as well as for the calculation of YLDs in the next section.
       - deaths_c368 / population
       - Note that deaths / (average population for year) = deaths / person-time
     * - deaths_c368
-      - count of deaths due to obstructed labor and uterine rupture and other maternal
-        infections
+      - count of deaths due to obstructed labor and uterine rupture
       - codcorrect
       -
     * - population
