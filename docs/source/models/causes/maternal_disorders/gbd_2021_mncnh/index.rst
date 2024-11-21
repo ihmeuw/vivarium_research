@@ -58,8 +58,77 @@ GBD 2021 Modeling Strategy
 Cause Hierarchy
 +++++++++++++++
 
-Subcause definitions
+- All causes (c_294)
+
+  - Communicable, maternal, neonatal, and nutritional diseases (c_295)
+
+    - Maternal disorders and neonatal disorders (c_962)
+
+      - **Maternal disorders (c_366)**
+
+        - Maternal hemorrhage (c_367)
+
+          - Mild anemia due to maternal hemorrhage (s_182)
+
+          - Moderate anemia due to maternal hemorrhage (s_183)
+
+          - Severe anemia due to maternal hemorrhage (s_184)
+
+          - Maternal hemorrhage with less than 1 liter blood loss (s_180)
+
+          - Maternal hemorrhage with greater than 1 liter blood loss (s_181)
+
+        - Maternal sepsis and other maternal infections (c_368)
+
+          - Infertility due to puerperal sepsis (s_675)
+
+          - Other maternal infections (s_938)
+
+          - Puerperal sepsis (s_937)
+
+        - Maternal hypertensive disorders (c_369)
+
+          - Long term sequelae of severe pre-eclampsia (s_677)
+
+          - Long term sequelae of eclampsia (s_677)
+
+          - Other hypertensive disorders of pregnancy (s_676)
+
+          - Severe pre-eclampsia (s_185)
+
+          - Eclampsia (s_186)
+
+        - Maternal obstructed labor and uterine rupture (c_370)
+
+          - Obstructed labor, acute event (s_188)
+
+          - Rectovaginal fistula (s_189)
+
+          - Vesicovaginal fistula (s_190)
+
+        - Abortion and miscarriage (c_995)
+
+          - Maternal abortive outcome (s_191)
+
+        - Ectopic pregnancy (c_374)
+
+          - Ectopic pregnancy (s_5165)
+
+        - Indirect maternal deaths (c_375)
+
+        - Late maternal deaths (c_376)
+
+        - Maternal deaths aggrevated by HIV/AIDs (c_741)
+
+        - Other maternal disorders (c_379)
+
+          - Other maternal disorders (s_192)
+
+Subcause case definitions
 """"""""""""""""""""""""""""
+
+Maternal disorders are direct obstetric complications of pregnancy,
+childbirth, and the postpartum period:
 
 #. Abortion is defined as elective or medically indicated termination of
    pregnancy at any gestational age, regardless of symptoms or
