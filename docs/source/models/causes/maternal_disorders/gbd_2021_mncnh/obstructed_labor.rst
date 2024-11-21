@@ -113,11 +113,105 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
+The goal of the obstructed labor model is to capture YLLs and YLDs due to
+obstructed labor and uterine rupture among women of
+reproductive age. We only model obstructed labor and uterine rupture among 
+simulants who give (live or still) birth after a full term pregnancy. This 
+page documents how to model the baseline burden of obstructed labor and 
+uterine rupture. Other simulation components such as c-sections will affect 
+the rates of the pages for the corresponding :ref:`intervention <intervention_models>`
+or :ref:`risk effects <risk_effects_models>` model.
+
+Summary of modeling strategy
+++++++++++++++++++++++++++++
+
+Since the :ref:`MNCNH Portfolio project
+<2024_concept_model_vivarium_mncnh_portfolio>` does not model the
+passage of time, we will not model obstructed labor and uterine rupture
+as a state machine with dynamic state transitions like our typical cause 
+models. Rather, all "transitions" in the model will be modeled as decisions 
+made during a single timestep. To obtain the decision probabilities of each 
+incident case or obstructed labor and uterine rupture death, we will convert 
+GBD's annual incidence and mortality rates among women of reproductive age 
+into event rates *per birth* (including stillbirths). We will track obstructed 
+labor and uterine rupture deaths to calculate YLLs, and we will track incident 
+cases to calculate YLDs.
+
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Cause Model Diagram
-+++++++++++++++++++
+Cause Model Decision Graph
+++++++++++++++++++++++++++
+
+Although we're not modeling obstructed labor and uterine rupture
+dynamically as a finite state machine, we can draw an analogous directed 
+graph that can be interpreted as a (collapsed) decision tree rather than 
+a state transition diagram. The main difference is that the values on the 
+transition arrows represent decision probabilities rather than rates per 
+unit time. The obstructed labor and uterine rupture decision graph drawn 
+below should be inserted on the "full term pregnancy" branch of the decision 
+graph from the :ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`,
+between the intrapartum model and the birth of the child simulant. Solid
+lines are the pieces added by the obstructed labor and uterine rupture model, 
+while dashed lines indicate pieces of the underlying pregnancy model.
+
+.. graphviz::
+
+    digraph OL_decisions {
+        rankdir = LR;
+        ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
+        ftb [label="full term\nbirth", style=dashed]
+        alive [label="parent alive"]
+        dead [label="parent dead"]
+
+        ftp -> alive  [label = "1 - ir"]
+        ftp -> OL [label = "ir"]
+        OL -> alive [label = "1 - cfr"]
+        OL -> dead [label = "cfr"]
+        alive -> ftb  [label = "1", style=dashed]
+        dead -> ftb  [label = "1", style=dashed]
+    }
+
+.. list-table:: State Definitions
+    :widths: 7 20
+    :header-rows: 1
+
+    * - State
+      - Definition
+    * - full term pregnancy, post intrapartum
+      - Parent simulant has a full term pregnancy as determined by the
+        :ref:`pregnancy model
+        <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
+        already been through the antenatal and intrapartum models
+    * - OL
+      - Parent simulant experiences obstructed labor or uterine rupture 
+        (fistula).
+    * - parent alive
+      - Parent simulant is still alive
+    * - parent dead
+      - Parent simulant died of obstructed labor or uterine rupture
+    * - full term birth
+      - The parent simulant has given birth to a child simulant (which
+        may be a live birth or a still birth, to be determined in the
+        next step of the :ref:`pregnancy model
+        <other_models_pregnancy_closed_cohort_mncnh>`)
+
+.. list-table:: Transition Probability Definitions
+    :widths: 1 5 20
+    :header-rows: 1
+
+    * - Symbol
+      - Name
+      - Definition
+    * - ir
+      - incidence risk
+      - The probability that a pregnant simulant experiences obstructed 
+        labor or uterine rupture
+    * - cfr
+      - case fatality rate
+      - The probability that a simulant with  experiences dies of that 
+        event
+
 
 Data Tables
 +++++++++++
