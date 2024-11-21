@@ -61,6 +61,59 @@ Cause Hierarchy
 Subcause definitions
 """"""""""""""""""""""""""""
 
+1) Abortion is defined as elective or medically indicated termination of pregnancy at any
+gestational age, regardless of symptoms or complications (abortion), or spontaneous loss of
+pregnancy before 24 weeks of gestation (miscarriage) with complications requiring medical care.
+Miscarriages that do not require medical care are not included in this cause.
+2) Ectopic pregnancy is defined as a pregnancy that implants outside of the uterine cavity,
+generally presenting with abdominal pain and vaginal bleeding.
+3) Obstructed labour and uterine rupture.
+a. Acute event includes failure to progress (no advance of the presenting part of the fetus
+despite strong uterine contractions), cephalopelvic disproportion (fetal size that is too
+721
+large for maternal pelvic dimensions), non-vertex fetal positioning during labour (any
+fetal position besides head down during labour; excludes non-vertex positioning during
+antepartum period), and uterine rupture during labour (non-surgical breakdown of
+uterine wall during labour and delivery). Perineal lacerations without any of the above
+conditions are excluded from the case definition. (Estimation of the incidence and short-
+term disability due to these conditions is described in this appendix section.)
+b. Obstetric fistula is defined as an abnormal opening between the vagina and the bladder
+or rectum with involuntary escape of urine, flatus, and/or faeces following childbirth.
+(The non-fatal burden of fistulas is included in the non-fatal burden of obstructed labour
+in reporting, but estimation is described in a separate appendix section on “Fistula –
+impairment.”)
+4) Maternal haemorrhage includes heavier than expected postpartum bleeding (>500 ml following
+vaginal delivery or >1000 ml after cesarean delivery) or antepartum bleeding (vaginal bleeding
+from any cause at or beyond 20 weeks of gestation and prior to onset of labour), or placental
+disorders with haemorrhage regardless of blood volume lost or timing of bleeding event.
+Placental disorders without haemorrhage are included with other [direct] maternal disorders.
+5) Maternal sepsis and other maternal infections encompasses maternal sepsis during or following
+labour and delivery (defined as temperature <36°C or >38°C and clinical signs of shock [systolic
+blood pressure <90 mmHg and tachycardia >120 bpm]) as well as other maternal infections
+believed to have a close epidemiological relationship with pregnancy, including genitourinary
+tract infections (excluding sexually transmitted diseases), obstetrical wound infections, and
+breast infections related to childbirth and lactation.
+6) Hypertensive disorders of pregnancy includes several subcategories:
+a. Gestational hypertension is the new onset of hypertension in a pregnant person after 20
+weeks’ gestation, as defined by having a blood pressure measured >140/90 mmHg on
+more than one occasion.
+b. Preeclampsia is defined by hypertension [>140/90 mmHg] and proteinuria [≥0.3 g/l],
+with or without signs of end-organ damage.
+c. Severe preeclampsia is defined by preeclampsia with severe hypertension [>160/100
+mmHg] or other signs of end organ damage [liver: low platelets, elevated liver enzymes,
+coagulation issues; kidney: elevated creatinine; central nervous system: headaches or
+visual disturbances], syndrome of hypertension, elevated liver enzymes, low platelets
+[HELLP syndrome]).
+d. Eclampsia is defined as hypertension and seizures, with or without proteinuria.
+This definition excludes chronic hypertension in a pregnant person (hypertension present prior
+to 20 weeks’ gestation) unless superimposed preeclampsia develops.
+7) Other [direct] maternal disorders includes a variety of different obstetric complications. The
+most common of these in ICD-10-coded vital registration sources in terms of number of deaths
+include O88 (obstetric embolism), O26 (maternal care for other conditions predominantly
+related to pregnancy), O90 (complications of the puerperium, not elsewhere classified), O75
+(other complications of labour and delivery, not elsewhere classified), C58 (malignant neoplasm
+of placenta), and O36 (maternal care for other fetal problems).
+
 Restrictions
 ++++++++++++
 
