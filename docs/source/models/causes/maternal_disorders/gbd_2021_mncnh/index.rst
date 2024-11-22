@@ -130,14 +130,14 @@ Subcause case definitions
 Maternal disorders are direct obstetric complications of pregnancy,
 childbirth, and the postpartum period:
 
-1. **Abortion** is defined as elective or medically indicated termination of
-   pregnancy at any gestational age, regardless of symptoms or
-   complications (**abortion**), or spontaneous loss of pregnancy before 24
-   weeks of gestation (**miscarriage**) with complications requiring medical
-   care. Miscarriages that do not require medical care are not included
-   in this cause.
-#. **Ectopic pregnancy** is defined as a pregnancy that implants outside of
-   the uterine cavity, generally presenting with abdominal pain and
+1. **Abortion** is defined as elective or medically indicated
+   termination of pregnancy at any gestational age, regardless of
+   symptoms or complications (**abortion**), or spontaneous loss of
+   pregnancy before 24 weeks of gestation (**miscarriage**) with
+   complications requiring medical care. Miscarriages that do not
+   require medical care are not included in this cause.
+#. **Ectopic pregnancy** is defined as a pregnancy that implants outside
+   of the uterine cavity, generally presenting with abdominal pain and
    vaginal bleeding.
 #. **Obstructed labour and uterine rupture**.
 
@@ -166,8 +166,8 @@ childbirth, and the postpartum period:
    labour), or placental disorders with haemorrhage regardless of blood
    volume lost or timing of bleeding event. Placental disorders without
    haemorrhage are included with other [direct] maternal disorders.
-#. **Maternal sepsis and other maternal infections** encompasses maternal
-   sepsis during or following labour and delivery (defined as
+#. **Maternal sepsis and other maternal infections** encompasses
+   maternal sepsis during or following labour and delivery (defined as
    temperature <36°C or >38°C and clinical signs of shock [systolic
    blood pressure <90 mmHg and tachycardia >120 bpm]) as well as other
    maternal infections believed to have a close epidemiological
@@ -176,7 +176,8 @@ childbirth, and the postpartum period:
    infections, and breast infections related to childbirth and
    lactation.
 
-#. **Hypertensive disorders of pregnancy** includes several subcategories:
+#. **Hypertensive disorders of pregnancy** includes several
+   subcategories:
 
    a. Gestational hypertension is the new onset of hypertension in a
       pregnant person after 20 weeks’ gestation, as defined by having a
