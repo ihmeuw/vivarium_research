@@ -16,7 +16,8 @@ Maternal disorders: GBD 2021, MNCNH
     Subcauses`_) rather than modeling a single overarching cause. This
     page documents the strategy for capturing the burden of the
     remaining maternal disorders subcauses that are not explicitly
-    modeled.
+    modeled, as well as the strategy for dealing with interactions
+    between the different subcauses.
 
 .. contents::
    :local:
