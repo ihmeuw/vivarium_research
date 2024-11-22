@@ -143,7 +143,7 @@ childbirth, and the postpartum period:
 
    a. Acute event includes failure to progress (no advance of the
       presenting part of the fetus despite strong uterine contractions),
-      cephalopelvic disproportion (fetal size that is too 721 large for
+      cephalopelvic disproportion (fetal size that is too large for
       maternal pelvic dimensions), non-vertex fetal positioning during
       labour (any fetal position besides head down during labour;
       excludes non-vertex positioning during antepartum period), and
