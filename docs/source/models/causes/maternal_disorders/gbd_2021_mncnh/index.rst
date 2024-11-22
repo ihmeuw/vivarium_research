@@ -62,7 +62,7 @@ Cause Hierarchy
 
   - Communicable, maternal, neonatal, and nutritional diseases (c_295)
 
-    - Maternal disorders and neonatal disorders (c_962)
+    - Maternal and neonatal disorders (c_962)
 
       - **Maternal disorders (c_366)** [level 3]
 
