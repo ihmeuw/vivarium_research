@@ -95,6 +95,20 @@ Modeling multiple maternal disorders together
 Subcause ordering
 """""""""""""""""
 
+We anticipate that there are correlations and perhaps causal
+relationships between various maternal disorders subcauses. In Wave 1,
+we are ignoring such interactions and treating the different subcauses
+as independent. However, to be able to handle such interactions in
+future waves, the simulation should make decisions about the different
+subcauses in the order of the suspected causal relationships, as
+follows:
+
+#. Maternal hypertensive disorders
+#. Obstructed labor and uterine rupture
+#. Maternal hemorrhage
+#. Maternal sepsis and other maternal infections
+#. Residual maternal disorders
+
 Mortality component
 """""""""""""""""""
 
