@@ -46,9 +46,10 @@ Wave 3
 
 * Maternal hypertensive disorders
 
-The remainder of this document describes maternal disorders overall and
+The remainder of this document describes maternal disorders overall,
 describes the strategy for capturing the burden of the maternal
-disorders subcauses that are not explicitly modeled above.
+disorders subcauses that are not explicitly modeled above, and explains
+how to incorporate multiple modeled subcauses into the same simulation.
 
 Disease Overview
 ----------------
