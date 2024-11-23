@@ -92,6 +92,30 @@ Years lived with disability
 Modeling multiple maternal disorders together
 +++++++++++++++++++++++++++++++++++++++++++++
 
+Since the :ref:`MNCNH Portfolio simulation
+<2024_concept_model_vivarium_mncnh_portfolio>` uses Vivarium timesteps
+in a nonstandard way, we need to do more work to specify how different
+simulation components interact and in what order decisions should be
+made. This has two implications for modeling multiple maternal disorders
+subcauses together:
+
+1. We need to decide in which order to make decisions about the
+   different maternal disorders subcauses, which will be important if
+   there are causal interactions between them.
+2. If a simulant experiences multiple maternal disorders simultaneously,
+   we need to specify how to determine whether the simulant dies from
+   one of the subcauses, and from which one.
+
+To deal with the above two issues, we will
+
+* Split incidence and mortality into separate timesteps
+* Have a single timestep that handles mortality from all the maternal
+  disorders subcauses together
+* Have a separate incidence timestep for each of the modeled maternal
+  disorders subcauses
+
+More details are in the following two subsections.
+
 Subcause ordering
 """""""""""""""""
 
