@@ -123,15 +123,19 @@ We anticipate that there are correlations and perhaps causal
 relationships between various maternal disorders subcauses. In Wave 1,
 we are ignoring such interactions and treating the different subcauses
 as independent. However, to be able to handle such interactions in
-future waves, the simulation should make decisions about the different
-subcauses in the order of the suspected causal relationships, as
-follows:
+future waves, the simulation should make decisions about incidence of
+the different subcauses in the order of the suspected causal
+relationships. The specified order is:
 
 #. Maternal hypertensive disorders
 #. Obstructed labor and uterine rupture
 #. Maternal hemorrhage
 #. Maternal sepsis and other maternal infections
 #. Residual maternal disorders
+
+The current plan is to have a separate "incidence timestep" for each of the
+modeled subcauses, ordered as above, and the simulation will decide
+which simulants experience each subcause on the corresponding timestep.
 
 Mortality component
 """""""""""""""""""
