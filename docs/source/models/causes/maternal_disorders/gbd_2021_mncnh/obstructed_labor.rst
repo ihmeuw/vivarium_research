@@ -119,7 +119,7 @@ reproductive age. We only model obstructed labor and uterine rupture among
 simulants who give (live or still) birth after a full term pregnancy. This 
 page documents how to model the baseline burden of obstructed labor and 
 uterine rupture. Other simulation components such as c-sections will affect 
-the rates of the pages for the corresponding :ref:`intervention <intervention_models>`
+the rates of obstructed labor; the pages for the corresponding :ref:`intervention <intervention_models>`
 or :ref:`risk effects <risk_effects_models>` model.
 
 Summary of modeling strategy
