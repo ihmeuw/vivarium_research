@@ -104,7 +104,7 @@ well as restrictions on the ages and sexes to which the cause applies.
      - 10 to 14 (ID=7)
      -
    * - YLD age group end
-     - 95 plus (ID=235)
+     - 50 to 54 (ID=15)
      -
 
 Vivarium Modeling Strategy
@@ -113,7 +113,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-The goal of the obstructed labor model is to capture YLLs and YLDs due to
+The goal of the obstructed labor (OL) model is to capture YLLs and YLDs due to
 obstructed labor and uterine rupture among women of
 reproductive age. We only model obstructed labor and uterine rupture among 
 simulants who give (live or still) birth after a full term pregnancy. This 
@@ -161,8 +161,8 @@ while dashed lines indicate pieces of the underlying pregnancy model.
         rankdir = LR;
         ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
         ftb [label="full term\nbirth", style=dashed]
-        alive [label="parent alive"]
-        dead [label="parent dead"]
+        alive [label="parent did not die of OL"]
+        dead [label="parent died of OL"]
 
         ftp -> alive  [label = "1 - ir"]
         ftp -> OL [label = "ir"]
@@ -184,8 +184,7 @@ while dashed lines indicate pieces of the underlying pregnancy model.
         <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
         already been through the antenatal and intrapartum models
     * - OL
-      - Parent simulant experiences obstructed labor or uterine rupture 
-        (fistula).
+      - Parent simulant experiences obstructed labor or uterine rupture
     * - parent alive
       - Parent simulant is still alive
     * - parent dead
