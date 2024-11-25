@@ -185,9 +185,9 @@ while dashed lines indicate pieces of the underlying pregnancy model.
         already been through the antenatal and intrapartum models
     * - OL
       - Parent simulant experiences obstructed labor or uterine rupture
-    * - parent alive
-      - Parent simulant is still alive
-    * - parent dead
+    * - parent not dead of OL 
+      - Parent simulant did not die of obstructed labor or uterine rupture
+    * - parent died of OL
       - Parent simulant died of obstructed labor or uterine rupture
     * - full term birth
       - The parent simulant has given birth to a child simulant (which
