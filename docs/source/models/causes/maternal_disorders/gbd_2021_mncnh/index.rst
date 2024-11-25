@@ -231,6 +231,15 @@ Years of life lost
 Years lived with disability
 """""""""""""""""""""""""""
 
+Modeling multiple maternal disorders together
++++++++++++++++++++++++++++++++++++++++++++++
+
+Subcause ordering
+"""""""""""""""""
+
+Mortality component
+"""""""""""""""""""
+
 Validation Criteria
 +++++++++++++++++++
 
