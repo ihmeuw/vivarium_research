@@ -97,6 +97,45 @@ Subcause ordering
 Mortality component
 """""""""""""""""""
 
+We will have a single simulation timestep that handles mortality from
+all the maternal disorders subcauses together. The mortality timestep
+should happen after the incidence timesteps of all the maternal
+disorders subcauses. The mortlity timestep will work similarly to the
+mortality component in a standard Vivarium simulation.
+
+On the mortality timestep, first we will determine whether the simulant
+dies of *any* of the maternal disorders subcauses. Then, if the simulant
+dies, we will decide which maternal disorder caused the death. Suppose
+after the incidence timesteps for all the maternal disorders subcauses,
+a simulant simultaneously has cases of :math:`k` different subcauses,
+say :math:`c_1, \dotsc, c_k`. Then the probability that the simulant
+dies of one of these subcauses is
+
+.. math::
+
+    \Pr (\text{simulant dies of a maternal disorder})
+    = \sum_{i=1}^k \operatorname{cfr}_i,
+
+where :math:`\operatorname{cfr}_i` is the case fatality risk of the
+:math:`i^\mathrm{th}` subcause, :math:`c_i`. If the simulant dies, the
+probability that they die of :math:`c_i` is then
+
+.. math::
+
+    \Pr(\text{simulant dies of $c_i$}
+    \mid \text{simulant dies of a maternal disorder})
+    = \frac{\operatorname{cfr}_i}{\sum_{i=1}^k \operatorname{cfr}_i}.
+
+Clearly these conditional probabilities sum to 1, so every simulant who
+dies will be assigned a cause of death.
+
+If a simulant has more than one maternal disorders subcause
+simultaneously,...
+Suppose a simulant has...
+Let
+:math:`\mathrm{causes} = \{c_1, \dotsc, c_k\}` be the set of maternal
+disorders subcauses that a simulant has after the incidence timesteps.
+
 Validation Criteria
 +++++++++++++++++++
 
