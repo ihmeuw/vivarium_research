@@ -128,8 +128,83 @@ Calculating Burden
 Years of life lost
 """""""""""""""""""
 
+The years of life lost (YLLs) due to obstructed labor or uterine rupture
+for a simulant who dies of obstructed labor or uterine rupture at age :math:`a`
+should equal :math:`\operatorname{TMRLE}(a) - a`, where
+:math:`\operatorname{TMRLE}(a)` is the theoretical minimum risk life
+expectancy for a person of age :math:`a`.
+
 Years lived with disability
 """""""""""""""""""""""""""
+
+For simplicity, each simulant with an incident case of obstructed labor
+or uterine rupture in a given age group  will accrue the same
+number of years lived with disability (YLDs). Specifically, the total
+number of obstructed labor YLDs accrued by each affected simulant should
+be the average number of YLDs per case of obstructed labor or uterine 
+rupture in the simulant's age group, which is defined in the above data 
+table as
+
+.. math::
+
+    \begin{align*}
+    \text{ylds_per_case_c368}
+        &= \frac{\text{OL YLDs}}{\text{OL cases}}\\
+        &= \frac{\text{(OL YLDs) / person-time}}
+            {\text{(OL cases) / person-time}}
+        = \frac{\text{OL YLD rate}}{\text{OL incidence rate}}.
+    \end{align*}
+
+We are using the fact that  each simulant can get at most one case of
+obstructed labor or uterine rupture during the simulation, so the average 
+number of YLDs per affected simulant is the same as the average number of 
+YLDs per case. Simulants with a case of obstructed labor or uterine rupture
+should accrue YLDs whether or not they die.
+
+.. admonition:: Limitation
+
+    The above strategy of computing average OL YLDs per
+    case should correctly capture total YLDs for the acute sequela
+    "obstructed_labor". However, **when
+    we compute averted YLDs, the above calculation will not correctly
+    count uncured or untreated fistula YLDs from the long-term sequelae 
+    "rectovaginal_fistula" or "vesicovaginal_fistula"**, for two reasons:
+
+    #. Fistula YLDs for a given age group will include not only OL or 
+       uterine ruptures caused by current births, but by OL or 
+       uterine ruptures caused by prior births. This means that we are 
+       assigning extra YLDs to each current OL or uterine rupture case
+       that are actually being accrued by other, nonpregnant people in
+       the population who have lasting impacts of a previous birth and 
+       have nothing to do with the OL or uterine rupture case we are modeling.
+
+    #. If the modeled birth and uterine rupture case *does* lead to an
+       uncured or untreated fistula, the total fistula YLDs will be spread 
+       out over the simulant's remaining reproductive years, occurring in later
+       age groups, not entirely in the simulant's current age group.
+       Thus we will be "missing" a large portion of the YLDs caused by
+       the current birth events when we tally up YLDs for births in the
+       simulant's current age group.
+
+    Thus, if we avert a case of OL or uterine rupture, we will be simultaneously
+    averting *extra* YLDs that we shouldn't be, because we are counting
+    YLDs that don't actually belong to the simulant whose case was
+    averted, as well as *missing* YLDs that should have been averted
+    because we are only counting YLDs in the simulant's current age
+    group, and not the YLDs that they would accrue in later years. Since
+    births and hence incident cases of OL or uterine rupture `generally
+    decrease with age <https://vizhub.healthdata.org/gbd-compare/#>`_, while cases of
+    uncured or untreated fistulas `generally increase with age
+    <http://ihmeuw.org/6q62>`_, we will probably be systematically
+    *undercounting* the YLDs that would be averted by each averted case
+    of OL, because for a OL case, the missed YLDs for the
+    simulant in question will on average be greater than the extraneous
+    YLDs from other simulants in the same age group.
+
+    It may be possible to develop a different strategy of counting YLDs
+    that would help correct this bias, but the discrepancy will likely
+    be a relatively small proportion of total DALYs, so we are willing
+    to accept this limitation for now.
 
 Validation Criteria
 +++++++++++++++++++
