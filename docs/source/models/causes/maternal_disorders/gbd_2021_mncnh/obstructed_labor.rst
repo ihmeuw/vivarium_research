@@ -166,14 +166,14 @@ in the decision graph. The incidence risk per birth will be computed as
       - Note
     * - ir
       - obstructed labor and uterine rupture incidence risk per birth
-      - incidence_c368 / birth_rate
+      - incidence_c370 / birth_rate
       - The value of ir is a probabiity in [0,1]. Denominator includes
         live births and stillbirths.
     * - cfr
       - case fatality rate of obstructed labor and uterine rupture
-      - csmr_c368 / incidence_368
+      - csmr_c370 / incidence_368
       - The value of cfr is a probabiity in [0,1]
-    * - incidence_c368
+    * - incidence_c370
       - incidence rate of obstructed labor and uterine rupture
       - como
       - Use the :ref:`total population incidence rate <total population
@@ -181,12 +181,12 @@ in the decision graph. The incidence risk per birth will be computed as
         parameter to susceptible-population incidence rate using
         condition prevalence. Total population person-time is used in
         the denominator in order to cancel out with the person-time in
-        the denominators of birth_rate and csmr_c368.
-    * - csmr_c368
+        the denominators of birth_rate and csmr_c370.
+    * - csmr_c370
       - obstructed labor and uterine rupture cause-specific mortality rate
-      - deaths_c368 / population
+      - deaths_c370 / population
       - Note that deaths / (average population for year) = deaths / person-time
-    * - deaths_c368
+    * - deaths_c370
       - count of deaths due to obstructed labor and uterine rupture
       - codcorrect
       -
@@ -209,13 +209,13 @@ in the decision graph. The incidence risk per birth will be computed as
       - get_covariate_estimates: covariate_id=2267
       - Parameter is not age specific and has no draw-level uncertainty.
         Use mean_value as location-specific point parameter.
-    * - yld_rate_c368
+    * - yld_rate_c370
       - rate of obstructed labor and uterine rupture YLDs per person-year
       - como
       -
-    * - ylds_per_case_c368
+    * - ylds_per_case_c370
       - YLDs per case of obstructed labor and uterine rupture
-      - yld_rate_c368 / incidence_c368
+      - yld_rate_c370 / incidence_c370
       -
 
 Calculating Burden
