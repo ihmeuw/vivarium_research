@@ -200,7 +200,7 @@ should accrue YLDs whether or not they die.
     YLDs for the simulant in question will on average be greater than 
     the extraneous YLDs from other simulants in the same age group.
 
-    It may be possible to develop a different strategy of counting YLDs
+    It may be possible to develop a different strategy of counting YLDs (such as switching to "incidence YLDs")
     that would help correct this bias, but the discrepancy will likely
     be a relatively small proportion of total DALYs, so we are willing
     to accept this limitation for now.
