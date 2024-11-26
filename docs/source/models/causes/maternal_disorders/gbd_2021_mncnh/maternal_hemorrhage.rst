@@ -48,13 +48,13 @@ It has five sequelae, detailed in the following table:
       - s_180
       - abdominopelvic problem, moderate 
 
-        DW: 0.324 (0.22–0.442) 
+        DW: 0.114 (0.078–0.159) 
       - 
     * - Maternal hemorrhage with greater than 1 liter blood loss
       - s_181
       - abdominopelvic problem, severe 
 
-        DW: 0.133 (0.088–0.19)
+        DW: 0.324 (0.22–0.442) 
       -
     * - Mild anaemia due to maternal haemorrhage 
       - s_182
