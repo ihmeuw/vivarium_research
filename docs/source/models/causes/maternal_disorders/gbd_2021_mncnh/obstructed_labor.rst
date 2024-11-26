@@ -181,7 +181,7 @@ should accrue YLDs whether or not they die.
     #. If the modeled birth and uterine rupture case *does* lead to an
        uncured or untreated fistula, the total fistula YLDs will be spread 
        out over the simulant's remaining reproductive years, occurring in later
-       age groups, not entirely in the simulant's current age group.
+       age groups, not entirely in the simulant's current age group (when using the "prevalence YLD" approach currently employed by GBD).
        Thus we will be "missing" a large portion of the YLDs caused by
        the current birth events when we tally up YLDs for births in the
        simulant's current age group.
