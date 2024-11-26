@@ -160,7 +160,8 @@ yields
 In particular, :eq:`cfr_cond_indep_eqn` holds for **any set of causes**
 :math:`c_1,\dotsc, c_k`, **as long as** :math:`c_i` **is one of them**.
 Therefore, when we compute the overall case fatality risk of :math:`c_i`
-by averaging over the entire population of simulants, we get
+by averaging over the entire population of simulants who have the cause
+:math:`c_i`, we get
 
  .. math::
 
@@ -180,13 +181,21 @@ by averaging over the entire population of simulants, we get
         \sum_{\substack{c_1,\dotsc, c_k\in \text{causes}
             \\ c_i \in \{c_1,\dotsc, c_k\}}}
         P(\text{has $c_1,\dotsc, c_k$ only} \mid \text{has $c_i$})\\
-    &= \operatorname{cfr}_i \cdot 1,
+    &= \operatorname{cfr}_i \cdot 1.
     \end{align*}
 
-where the last step follows because the union of the disjoint events
-:math:`\{\text{has $c_1,\dotsc, c_k$ only}\}` over all subsets
+The first step and last step hold because the union of the disjoint
+events :math:`\{\text{has $c_1,\dotsc, c_k$ only}\}` over all subsets
 :math:`\{c_1,\dotsc, c_k\}` containing the cause :math:`c_i` equals the
-event :math:`\{\text{has $c_i$}\}`.
+event :math:`\{\text{has $c_i$}\}`. Since :math:`c_i` was arbitrary, we
+get
+
+.. math::
+
+    P(\text{simulant dies of $c_i$} \mid \text{simulant has $c_i$})
+    = \operatorname{cfr}_i
+
+for all maternal disorders subcauses :math:`c_i` as claimed.
 
 Validation Criteria
 +++++++++++++++++++
