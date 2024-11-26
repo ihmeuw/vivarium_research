@@ -108,33 +108,67 @@ dies of *any* of the maternal disorders subcauses. Then, if the simulant
 dies, we will decide which maternal disorder caused the death. Suppose
 after the incidence timesteps for all the maternal disorders subcauses,
 a simulant simultaneously has cases of :math:`k` different subcauses,
-say :math:`c_1, \dotsc, c_k`. Then the probability that the simulant
-dies of one of these subcauses is
+say :math:`c_1, \dotsc, c_k`. We will assume that the probability that
+the simulant dies of one of these subcauses is
 
 .. math::
 
-    \Pr (\text{simulant dies of a maternal disorder})
+    \Pr (\text{simulant dies of one of $c_1,\dotsc, c_k$}
+    \mid \text{simulant has $c_1,\dotsc, c_k$})
     = \sum_{i=1}^k \operatorname{cfr}_i,
 
-where :math:`\operatorname{cfr}_i` is the case fatality risk of the
-:math:`i^\mathrm{th}` subcause, :math:`c_i`. If the simulant dies, the
-probability that they die of :math:`c_i` is then
+where :math:`\operatorname{cfr}_i` is the case fatality risk (a.k.a.
+case fatality rate) of the :math:`i^\mathrm{th}` subcause, :math:`c_i`.
+If the simulant dies, we then specify that the probability that they die
+of :math:`c_i` should be
 
 .. math::
 
     \Pr(\text{simulant dies of $c_i$}
-    \mid \text{simulant dies of a maternal disorder})
+    \mid \text{simulant dies of one of $c_1,\dotsc, c_k$})
     = \frac{\operatorname{cfr}_i}{\sum_{i=1}^k \operatorname{cfr}_i}.
 
 Clearly these conditional probabilities sum to 1, so every simulant who
-dies will be assigned a cause of death.
+dies will be assigned a cause of death. Moreover, we claim that using the
+above conditional probabilities will lead to the correct case fatality
+risk for all the maternal disorders subcauses.
 
-If a simulant has more than one maternal disorders subcause
-simultaneously,...
-Suppose a simulant has...
-Let
-:math:`\mathrm{causes} = \{c_1, \dotsc, c_k\}` be the set of maternal
-disorders subcauses that a simulant has after the incidence timesteps.
+To see this, first observe that multiplying the above two equations
+yields
+
+.. math::
+    :label: cfr_cond_indep_eqn
+
+    \Pr(\text{simulant dies of $c_i$}
+    \mid \text{simulant has $c_1,\dotsc, c_k$})
+    = \operatorname{cfr}_i
+
+This holds because if :math:`A, B, C` are events with :math:`A\subseteq
+B \subseteq C`, then
+
+.. math::
+
+    P(A\mid B)\, P(B\mid C) = P(A\mid C).
+
+In particular, :eq:`cfr_cond_indep_eqn` holds for **any set of causes**
+:math:`c_1,\dotsc, c_k`, **as long as** :math:`c_i` **is one of them**.
+Therefore, when we compute the overall case fatality risk of :math:`c_i`
+over the entire population of simulants, we get
+
+ .. math::
+
+    \begin{align*}
+    \Pr(\text{simulant dies of $c_i$} \mid \text{simulant has $c_i$})
+        \hspace{-7cm}& \\
+    &= \sum_{S\subseteq \{\text{all causes except $c_i$} \}}
+        \Pr(\text{simulant dies of $c_i$}
+        \mid \text{simulant has $c_i$ and all causes in $S$})
+    \end{align*}
+
+Note: This probability doesn't depend on :math:`c_2,\dotsc, c_k`.
+
+
+
 
 Validation Criteria
 +++++++++++++++++++
