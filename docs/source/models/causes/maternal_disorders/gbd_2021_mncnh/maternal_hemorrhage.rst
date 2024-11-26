@@ -79,14 +79,14 @@ calculations as well as for the calculation of YLDs in the next section.
       - Note
     * - ir
       - maternal hemorrhage incidence risk per birth
-      - incidence_c368 / birth_rate
+      - incidence_c367 / birth_rate
       - The value of ir is a probabiity in [0,1]. Denominator includes
         live births and stillbirths.
     * - cfr
       - case fatality rate of maternal hemorrhage
-      - csmr_c368 / incidence_368
+      - csmr_c367 / incidence_368
       - The value of cfr is a probabiity in [0,1]
-    * - incidence_c368
+    * - incidence_c367
       - incidence rate of maternal hemorrhage
       - como
       - Use the :ref:`total population incidence rate <total population
@@ -94,12 +94,12 @@ calculations as well as for the calculation of YLDs in the next section.
         parameter to susceptible-population incidence rate using
         condition prevalence. Total population person-time is used in
         the denominator in order to cancel out with the person-time in
-        the denominators of birth_rate and csmr_c368.
-    * - csmr_c368
+        the denominators of birth_rate and csmr_c367.
+    * - csmr_c367
       - maternal hemorrhage cause-specific mortality rate
-      - deaths_c368 / population
+      - deaths_c367 / population
       - Note that deaths / (average population for year) = deaths / person-time
-    * - deaths_c368
+    * - deaths_c367
       - count of deaths due to maternal hemorrhage
       - codcorrect
       -
@@ -122,13 +122,13 @@ calculations as well as for the calculation of YLDs in the next section.
       - get_covariate_estimates: covariate_id=2267
       - Parameter is not age specific and has no draw-level uncertainty.
         Use mean_value as location-specific point parameter.
-    * - yld_rate_c368
+    * - yld_rate_c367
       - rate of maternal hemorrhage YLDs per person-year
       - como
       -
-    * - ylds_per_case_c368
+    * - ylds_per_case_c367
       - YLDs per case of maternal hemorrhage
-      - yld_rate_c368 / incidence_c368
+      - yld_rate_c367 / incidence_c367
       -
 
 
