@@ -153,22 +153,36 @@ B \subseteq C`, then
 In particular, :eq:`cfr_cond_indep_eqn` holds for **any set of causes**
 :math:`c_1,\dotsc, c_k`, **as long as** :math:`c_i` **is one of them**.
 Therefore, when we compute the overall case fatality risk of :math:`c_i`
-over the entire population of simulants, we get
+by averaging over the entire population of simulants, we get
 
  .. math::
 
     \begin{align*}
     \Pr(\text{simulant dies of $c_i$} \mid \text{simulant has $c_i$})
         \hspace{-7cm}& \\
-    &= \sum_{S\subseteq \{\text{all causes except $c_i$} \}}
-        \Pr(\text{simulant dies of $c_i$}
-        \mid \text{simulant has $c_i$ and all causes in $S$})
+    %&= \sum_{S\subseteq \{\text{all causes except $c_i$} \}}
+    %    \Pr(\text{simulant dies of $c_i$}
+    %    \mid \text{simulant has $c_i$ and all causes in $S$}) \\
+    &= \sum_k \sum_{\substack{c_1,\dotsc, c_k\in \text{all causes}
+        \\ c_i \in \{c_1,\dotsc, c_k\}}}
+        \Pr(\text{dies of $c_i$}
+        \mid \text{has $c_1,\dotsc, c_k$})
+        \cdot \Pr(\text{has $c_1,\dotsc, c_k$} \mid \text{has $c_i$})\\
+    &= \sum_k \sum_{\substack{c_1,\dotsc, c_k\in \text{all causes}
+        \\ c_i \in \{c_1,\dotsc, c_k\}}}
+        \operatorname{cfr}_i
+        \cdot \Pr(\text{has $c_1,\dotsc, c_k$} \mid \text{has $c_i$})\\
+    &= \operatorname{cfr}_i \cdot  \sum_k
+        \sum_{\substack{c_1,\dotsc, c_k\in \text{all causes}
+            \\ c_i \in \{c_1,\dotsc, c_k\}}}
+        \Pr(\text{has $c_1,\dotsc, c_k$} \mid \text{has $c_i$})\\
+    &= \operatorname{cfr}_i \cdot 1,
     \end{align*}
 
-Note: This probability doesn't depend on :math:`c_2,\dotsc, c_k`.
-
-
-
+where the last step follows because the union of the disjoint events
+:math:`\{\text{has $c_1,\dotsc, c_k$}\}` over all subsets
+:math:`\{c_1,\dotsc, c_k\}` containing the cause :math:`c_i` equals the
+event :math:`\{\text{has $c_i$}\}`.
 
 Validation Criteria
 +++++++++++++++++++
