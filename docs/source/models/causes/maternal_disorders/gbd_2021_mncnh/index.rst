@@ -103,6 +103,16 @@ should happen after the incidence timesteps of all the maternal
 disorders subcauses. The mortlity timestep will work similarly to the
 mortality component in a standard Vivarium simulation.
 
+.. note::
+
+    We may need to adjust the strategy for deciding mortality after
+    implementing the "residual" maternal disorders subcause to capture
+    DALYs from maternal disrders that are not explicitly modeled. In
+    particular, some of the un-modeled subcauses are YLL only, so we
+    will not have incidence rate data, so we'll have to assign deaths
+    among the entire pregnant population rather than among incident
+    cases.
+
 On the mortality timestep, first we will determine whether the simulant
 dies of *any* of the maternal disorders subcauses. Then, if the simulant
 dies, we will decide which maternal disorder caused the death. Suppose
