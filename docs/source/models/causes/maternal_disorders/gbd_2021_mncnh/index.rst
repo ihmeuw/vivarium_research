@@ -123,8 +123,8 @@ the simulant dies of one of these subcauses is
 
 .. math::
 
-    \Pr (\text{simulant dies of one of $c_1,\dotsc, c_k$}
-    \mid \text{simulant has $c_1,\dotsc, c_k$})
+    P(\text{simulant dies of one of $c_1,\dotsc, c_k$}
+    \mid \text{simulant has $c_1,\dotsc, c_k$ only})
     = \sum_{i=1}^k \operatorname{cfr}_i,
 
 where :math:`\operatorname{cfr}_i` is the case fatality risk (a.k.a.
@@ -134,8 +134,11 @@ of :math:`c_i` should be
 
 .. math::
 
-    \Pr(\text{simulant dies of $c_i$}
-    \mid \text{simulant dies of one of $c_1,\dotsc, c_k$})
+    P\left(\text{simulant dies of $c_i$}
+    \:\middle|\:
+    \genfrac{}{}{0pt}{}
+    {\text{simulant has $c_1,\dotsc, c_k$ only}}{\text{and dies of one of them}}
+    \right)
     = \frac{\operatorname{cfr}_i}{\sum_{i=1}^k \operatorname{cfr}_i}.
 
 Clearly these conditional probabilities sum to 1, so every simulant who
@@ -149,16 +152,10 @@ yields
 .. math::
     :label: cfr_cond_indep_eqn
 
-    \Pr(\text{simulant dies of $c_i$}
-    \mid \text{simulant has $c_1,\dotsc, c_k$})
-    = \operatorname{cfr}_i
-
-This holds because if :math:`A, B, C` are events with :math:`A\subseteq
-B \subseteq C`, then
-
-.. math::
-
-    P(A\mid B)\, P(B\mid C) = P(A\mid C).
+    P(\text{simulant dies of $c_i$}
+    \mid \text{simulant has $c_1,\dotsc, c_k$ only})
+    = \operatorname{cfr}_i,
+    \text{ if } c_i \in \{c_1,\dotsc, c_k\}.
 
 In particular, :eq:`cfr_cond_indep_eqn` holds for **any set of causes**
 :math:`c_1,\dotsc, c_k`, **as long as** :math:`c_i` **is one of them**.
@@ -168,29 +165,26 @@ by averaging over the entire population of simulants, we get
  .. math::
 
     \begin{align*}
-    \Pr(\text{simulant dies of $c_i$} \mid \text{simulant has $c_i$})
-        \hspace{-7cm}& \\
-    %&= \sum_{S\subseteq \{\text{all causes except $c_i$} \}}
-    %    \Pr(\text{simulant dies of $c_i$}
-    %    \mid \text{simulant has $c_i$ and all causes in $S$}) \\
-    &= \sum_k \sum_{\substack{c_1,\dotsc, c_k\in \text{all causes}
+    P(\text{simulant dies of $c_i$} \mid \text{simulant has $c_i$})
+        \hspace{-7.5cm}& \\
+    &= \sum_k \sum_{\substack{c_1,\dotsc, c_k\in \text{causes}
         \\ c_i \in \{c_1,\dotsc, c_k\}}}
-        \Pr(\text{dies of $c_i$}
-        \mid \text{has $c_1,\dotsc, c_k$})
-        \cdot \Pr(\text{has $c_1,\dotsc, c_k$} \mid \text{has $c_i$})\\
-    &= \sum_k \sum_{\substack{c_1,\dotsc, c_k\in \text{all causes}
+        P(\text{dies of $c_i$}
+        \mid \text{has $c_1,\dotsc, c_k$ only})
+        \cdot P(\text{has $c_1,\dotsc, c_k$ only} \mid \text{has $c_i$})\\
+    &= \sum_k \sum_{\substack{c_1,\dotsc, c_k\in \text{causes}
         \\ c_i \in \{c_1,\dotsc, c_k\}}}
         \operatorname{cfr}_i
-        \cdot \Pr(\text{has $c_1,\dotsc, c_k$} \mid \text{has $c_i$})\\
+        \cdot P(\text{has $c_1,\dotsc, c_k$ only} \mid \text{has $c_i$})\\
     &= \operatorname{cfr}_i \cdot  \sum_k
-        \sum_{\substack{c_1,\dotsc, c_k\in \text{all causes}
+        \sum_{\substack{c_1,\dotsc, c_k\in \text{causes}
             \\ c_i \in \{c_1,\dotsc, c_k\}}}
-        \Pr(\text{has $c_1,\dotsc, c_k$} \mid \text{has $c_i$})\\
+        P(\text{has $c_1,\dotsc, c_k$ only} \mid \text{has $c_i$})\\
     &= \operatorname{cfr}_i \cdot 1,
     \end{align*}
 
 where the last step follows because the union of the disjoint events
-:math:`\{\text{has $c_1,\dotsc, c_k$}\}` over all subsets
+:math:`\{\text{has $c_1,\dotsc, c_k$ only}\}` over all subsets
 :math:`\{c_1,\dotsc, c_k\}` containing the cause :math:`c_i` equals the
 event :math:`\{\text{has $c_i$}\}`.
 
