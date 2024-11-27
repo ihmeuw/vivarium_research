@@ -208,7 +208,7 @@ while dashed lines indicate pieces of the underlying pregnancy model.
         labor or uterine rupture
     * - cfr
       - case fatality rate
-      - The probability that a simulant with  experiences dies of that 
+      - The probability that a simulant who experiences obstructed labor or uterine rupture dies of that 
         event
 
 
