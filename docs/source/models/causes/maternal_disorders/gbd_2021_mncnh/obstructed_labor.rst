@@ -162,7 +162,7 @@ while dashed lines indicate pieces of the underlying pregnancy model.
         ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
         ftb [label="full term\nbirth", style=dashed]
         alive [label="parent did not\ndie of OL"]
-        dead [label="parent died of OL"]
+        dead [label="parent died\nof OL"]
 
         ftp -> alive  [label = "1 - ir"]
         ftp -> OL [label = "ir"]
