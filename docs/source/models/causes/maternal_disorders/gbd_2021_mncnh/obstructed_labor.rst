@@ -400,5 +400,25 @@ should accrue YLDs whether or not they die.
 Validation Criteria
 +++++++++++++++++++
 
+In order to verify and validate the model, we should record at least the
+following information:
+
+- Number of simulants with full term pregnancies in each age group
+  before the OL and uterine rupture model is run
+- Number of OL and uterine rupture cases and OL and uterine rupture deaths in each age
+  group
+- Number of OL and uterine rupture YLDs and YLLs in each age group
+
+Using the above data, we should be able to verify/validate the
+following:
+
+- Validate the OL and uterine rupture incidence risk and case fatality rate in
+  each age group against the corresponding quantities calculated from
+  GBD data
+- Validate the number of OL and uterine rupture deaths per population against
+  the OL and uterine rupture CSMR from GBD
+- Validate the total OL and uterine rupture YLDs and YLLs per population
+  against the rates from GBD
+
 References
 ----------
