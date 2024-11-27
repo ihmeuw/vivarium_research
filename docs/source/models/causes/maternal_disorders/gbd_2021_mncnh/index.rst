@@ -421,7 +421,7 @@ for all maternal disorders subcauses :math:`c_i` as claimed.
 
     That is, in general, we expect the probability of dying from
     :math:`c_i` to depend on what other causes you have concurrently,
-    because there could be crowd out effects (e.g., the fall crowds out
+    because there could be crowd-out effects (e.g., the fall crowds out
     the cancer in the example above) or possibly "reinforcement" effects
     between the different causes. However, we suspect that this won't be
     an issue for the maternal disorders we are modeling, and the above
