@@ -295,41 +295,63 @@ V&V Checks:
     - GBD
     - Sum of GBD ectopic and abortion and miscarriage rates
 
+Unlike the pregnancy model (for which we used state tables for V&V), we are requesting count data from the observers, as 
+outlined in the table below. 
+
 
 .. list-table:: Outputs from Intrapartum Decision Tree
-  :widths: 3 15 15
+  :widths: 3 15 15 15
   :header-rows: 1
 
-  * - Input
-    - Data Source 
-    - Notes
-  * - Delivery facility type
+  * - Output
+    - Data Source
+    - Stratifications
+    - Use case
+  * - Counts of simulants attending each delivery facility type
+      (BeMONC, CeMONC, home)
     - Decision tree point
-    - 
-  * - Interventions received (c-section, azithromycin, corticosteroids)
-    - Decision tree values
-    - 
-  * - Count of maternal disorders
-    - Simulant experiences in model
-    - 
-  * - Maternal outcomes
-    - Simulant experiences in model
-    - To be defined, YLLs, YLDs, deaths, etc. 
-  * - Type of birth
-    - Simulant experiences in model
-    - E.g., live, still 
+    - ?
+    - Input for later modeling stage & export for V&V
+  * - Counts of simulant receiving each intervention (c-section, 
+      azithromycin, corticosteroids)
+    - Decision tree point
+    - Facility type
+    - Input for later modeling stage & export for V&V
+  * - Obstructed labor outcomes (deaths, YLLs, YLDs, pregnancy transition counts;
+      incident counts)
+    - :ref:`Obstructed labor and uterine rupture model <2021_cause_obstructed_labor_mncnh>`
+    - Facility type, age, LBW/preterm (?)
+    - Input for later modeling stage & export for V&V
+  * - Hemorrhage outcomes (deaths, YLLs, YLDs, pregnancy transition counts;
+      incident counts)
+    - :ref:`Maternal hemorrhage model <2021_cause_maternal_hemorrhage_mncnh>`
+    - Facility type, age, LBW/preterm (?)
+    - Input for later modeling stage & export for V&V
+  * - Sepsis outcomes (deaths, YLLs, YLDs, pregnancy transition counts;
+      incident counts)
+    - :ref:`Maternal sepsis model <2021_cause_maternal_sepsis_mncnh>`
+    - Facility type, age, LBW/preterm (?)
+    - Input for later modeling stage & export for V&V
+  * - Counts of pregnancy outcomes (full term, partial term)
+    - Pregnancy model
+    - Facility type, age, LBW/preterm (?)
+    - Input for later modeling stage
+  * - Counts of birth outcomes (live, still)
+    - Pregnancy model
+    - Facility type, age, LBW/preterm (?)
+    - Input for later modeling stage
   * - Gestational age at birth
-    - GBD LBWSG
-    - 
+    - Pregnancy model
+    - Facility type, age, LBW/preterm (?)
+    - Input for later modeling stage
   * - Birthweight
-    - GBD LBWSG
-    - 
+    - Pregnancy model
+    - Facility type, age, LBW/preterm (?)
+    - Input for later modeling stage
   * - If identified as low birthweight
-    - Decision tree value
-    - From pregnancy model
-  * - Pregnancy end
-    - GBD
-    - Sum of GBD ectopic and abortion and miscarriage rates
+    - Pregnancy model
+    - Facility type, age, LBW/preterm (?)
+    - Input for later modeling stage
 
 
 Limitations:
