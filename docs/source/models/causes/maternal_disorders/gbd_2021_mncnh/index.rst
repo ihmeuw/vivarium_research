@@ -122,6 +122,7 @@ say :math:`c_1, \dotsc, c_k`. We will assume that the probability that
 the simulant dies of one of these subcauses is
 
 .. math::
+    :label: prob_dies_eqn
 
     P(\text{simulant dies of one of $c_1,\dotsc, c_k$}
     \mid \text{simulant has $c_1,\dotsc, c_k$ only})
@@ -133,6 +134,7 @@ If the simulant dies, we then specify that the probability that they die
 of :math:`c_i` should be
 
 .. math::
+    :label: prob_ci_eqn
 
     P\left(\text{simulant dies of $c_i$}
     \:\middle|\:
@@ -164,6 +166,7 @@ by averaging over the entire population of simulants who have the cause
 :math:`c_i`, we get
 
  .. math::
+    :label: cfr_correct_eqn
 
     \begin{align*}
     P(\text{simulant dies of $c_i$} \mid \text{simulant has $c_i$})
@@ -196,6 +199,47 @@ get
     = \operatorname{cfr}_i
 
 for all maternal disorders subcauses :math:`c_i` as claimed.
+
+.. warning::
+
+    If the case fatality risks of some of the maternal disorders
+    subcauses are too large, the "probability" calculated in
+    :eq:`prob_dies_eqn` may be greater than 1, which would lead the
+    model to underestimate the true case fatality risks. This problem
+    could be fixed, for example, by scaling down the probability in
+    :eq:`prob_dies_eqn` to be less than 1, and scaling up the
+    probability :math:`P(\text{simulant dies of $c_i$} \mid
+    \text{simulant has $c_i$ only})` so that the average of the
+    probabilities computed in :eq:`cfr_correct_eqn` still works out to
+    the correct overall case fatality risk :math:`\operatorname{cfr}_i`.
+    Note that the probabilities in :eq:`cfr_correct_eqn` depend on the
+    joint distribution of all the causes, so in order to solve for the
+    correct probability, we would either need some information about the
+    joint distribution, or we would have to calibrate the model
+    empirically.
+
+    The potential for probabilities greater than 1 illustrates an
+    inherent deficiency in the above methodology. Specifically, the the
+    two assumptions :eq:`prob_dies_eqn` and :eq:`prob_ci_eqn` lead to
+    the equation :eq:`cfr_cond_indep_eqn`, which is equivalent to the
+    assumption that **the case fatality risk of** :math:`c_i` **is
+    conditionally independent of whatever other causes you have, given
+    that you have** :math:`c_i`. It is not difficult to see that this
+    assumption cannot hold in general. For example, if you have a
+    particularly deadly form of cancer, your case fatality risk for that
+    cancer might be quite high in general. However, if you are also
+    falling off a cliff, the case fatality risk of the cancer will be 0,
+    since you will die of the fall with probability 1 before the cancer
+    kills you.
+
+    That is, in general, we expect the probability of dying from
+    :math:`c_i` to depend on what other causes you have concurrently,
+    because there could be crowd out effects (e.g., the fall crowds out
+    the cancer in the example above) or possibly "reinforcement" effects
+    between the different causes. However, we suspect that this won't be
+    an issue for the maternal disorders we are modeling, and the above
+    calculations will likely be good enough approximations for our
+    purposes.
 
 Validation Criteria
 +++++++++++++++++++
