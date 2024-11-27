@@ -131,6 +131,7 @@ in the decision graph. The incidence risk per birth will be computed as
         = \frac{\text{(OL cases) / person-time}}
             {\text{births / person-time}}
         = \frac{\text{OL incidence rate}}{\text{birth rate}}.
+
   The case fatality rate will be computed as
 
 .. math::
