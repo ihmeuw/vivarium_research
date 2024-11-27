@@ -161,7 +161,7 @@ while dashed lines indicate pieces of the underlying pregnancy model.
         rankdir = LR;
         ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
         ftb [label="full term\nbirth", style=dashed]
-        alive [label="parent did not die of OL"]
+        alive [label="parent did not\ndie of OL"]
         dead [label="parent died of OL"]
 
         ftp -> alive  [label = "1 - ir"]
