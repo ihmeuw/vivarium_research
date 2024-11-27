@@ -84,7 +84,7 @@ calculations as well as for the calculation of YLDs in the next section.
         live births and stillbirths.
     * - cfr
       - case fatality rate of maternal hemorrhage
-      - csmr_c367 / incidence_368
+      - csmr_c367 / incidence_c367
       - The value of cfr is a probabiity in [0,1]
     * - incidence_c367
       - incidence rate of maternal hemorrhage
