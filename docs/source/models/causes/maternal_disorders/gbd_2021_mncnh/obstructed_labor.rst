@@ -193,8 +193,8 @@ should accrue YLDs whether or not they die.
     because we are only counting YLDs in the simulant's current age
     group, and not the YLDs that they would accrue in later years. Since
     births and hence incident cases of OL or uterine rupture `generally
-    decrease with age <https://vizhub.healthdata.org/gbd-compare/#>`_, while cases of
-    uncured or untreated fistulas increase with age until age group 11 (and fistula YLDs can
+    decrease with age <http://ihmeuw.org/6qzx>`_, while cases of
+    uncured or untreated fistulas increase with age until about age 34 (and fistula YLDs can
     continue accruing all the way through the 95+ age group, unlike YLDs caused by sepsis
     or hemorrhage), we *might* be systematically *undercounting* the YLDs that would be 
     averted by each averted case of OL, because for a OL case, the missed 
