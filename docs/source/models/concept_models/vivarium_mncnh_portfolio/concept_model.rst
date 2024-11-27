@@ -376,7 +376,7 @@ Limitations:
     - XX% of each type of facility have CPAP or NICU capabilities
     - 
   * - 8
-    - XX relative risk for RDS mortality if facility has CPAP or NICU capabilities
+    - XX relative risk on RDS mortality of facility having CPAP or NICU capabilities vs. not
     - Need to confirm this will impact mortality not incidence. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
   * - 9
     - XX relative risk for RDS incidence based on birthing parent receiving antenatal corticosteroids
