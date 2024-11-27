@@ -142,6 +142,7 @@ in the decision graph. The incidence risk per birth will be computed as
         = \frac{\text{OL cause specific mortality rate}}
             {\text{OL incidence rate}}.
     \end{align*}
+
   The following table shows the data needed from GBD for these
   calculations as well as for the calculation of YLDs in the next section.
 
