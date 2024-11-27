@@ -122,7 +122,8 @@ The potential impact of residual confounding
 
 .. todo::
 
-  Fill in this section
+  Fill in this section 
+  Relevant ticket in backlog: https://jira.ihme.washington.edu/browse/SSCI-1197 
 
 
 Modeling the influence of residual confounding
@@ -134,6 +135,7 @@ How to estimate the direction and magnitude of residual confounding
 .. todo::
 
   Fill in this section
+  Relevant ticket in backlog: https://jira.ihme.washington.edu/browse/SSCI-1214
 
 How to model residual confounding in a vivarium simulation
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -141,3 +143,4 @@ How to model residual confounding in a vivarium simulation
 .. todo::
 
   Fill in this section
+  Relevant ticket in backlog: https://jira.ihme.washington.edu/browse/SSCI-1198
