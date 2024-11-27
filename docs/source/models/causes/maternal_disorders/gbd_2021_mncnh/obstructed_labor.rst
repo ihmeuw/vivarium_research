@@ -165,7 +165,7 @@ should accrue YLDs whether or not they die.
 
     The above strategy of computing average OL YLDs per
     case should correctly capture total YLDs for the acute sequela
-    "obstructed_labor". However, **when
+    "obstructed labor, acute event". However, **when
     we compute averted YLDs, the above calculation will not correctly
     count uncured or untreated fistula YLDs from the long-term sequelae 
     "rectovaginal_fistula" or "vesicovaginal_fistula"**, for two reasons:
