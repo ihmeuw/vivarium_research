@@ -1,8 +1,8 @@
-.. _2021_cause_obstructed_labor_mncnh:
+.. _2021_cause_neonatal_sepsis_mncnh:
 
-====================================
-Obstructed labor and uterine rupture
-====================================
+===============
+Neonatal Sepsis
+===============
 
 Disease Overview
 ----------------
