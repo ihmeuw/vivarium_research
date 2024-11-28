@@ -11,6 +11,18 @@ Neonatal disorders: GBD 2021, MNCNH
     several neonatal subcauses (see `Modeled
     Subcauses`_) which is complicated because the LBWSG risk factor in GBD acts on overall neonatal mortality.
 
+.. contents::
+   :local:
+
+Modeled Subcauses
+-----------------
+
+.. toctree::
+    :maxdepth: 1
+
+    neonatal_sepsis
+    neonatal_encephalopathy
+    preterm_birth
 
 The remainder of this document describes neonatal disorders overall and
 the strategy for capturing the burden of the neonatal subcauses to calibrate to all-cause mortality, preterm paf-of-one, and LBWSG risk.
@@ -45,6 +57,7 @@ Modeled Subcauses
     neonatal_sepsis
     neonatal_encephalopathy
     preterm_birth
+
 
 Restrictions
 ++++++++++++
