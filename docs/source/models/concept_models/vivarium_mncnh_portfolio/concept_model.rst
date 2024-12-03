@@ -295,63 +295,42 @@ V&V Checks:
     - GBD
     - Sum of GBD ectopic and abortion and miscarriage rates
 
-Unlike the pregnancy model (for which we used state tables for V&V), we are requesting count data from the observers, as 
-outlined in the table below. 
 
+Requested outputs for V&V from the intrapartum model are described in the following table.
+For these V&V observers we'd like count data, as described. For information on what from the 
+intrapartum model will be used as input to the neonatal model, please see the table
+:ref:`Inputs to neonatal decision tree <inputs_to_neonatal_decision_tree_table>` in the next section.
 
-.. list-table:: Outputs from Intrapartum Decision Tree
-  :widths: 3 15 15 15
+.. list-table:: V&V Outputs from Intrapartum Decision Tree 
+  :widths: 10 10 10
   :header-rows: 1
 
   * - Output
     - Data Source
     - Stratifications
-    - Use case
   * - Counts of simulants attending each delivery facility type
       (BeMONC, CeMONC, home)
     - Decision tree point
-    - ?
-    - Input for later modeling stage & export for V&V
-  * - Counts of simulant receiving each intervention (c-section, 
-      azithromycin, corticosteroids)
+    - None
+  * - Counts of simulants receiving each intervention (azithromycin, corticosteroids; 
+      c-sections will be added in a later wave)
     - Decision tree point
     - Facility type
-    - Input for later modeling stage & export for V&V
-  * - Obstructed labor outcomes (deaths, YLLs, YLDs, pregnancy transition counts;
-      incident counts)
+  * - Obstructed labor outcomes (deaths, YLLs, YLDs, incident counts)
     - :ref:`Obstructed labor and uterine rupture model <2021_cause_obstructed_labor_mncnh>`
-    - Facility type, age, LBW/preterm (?)
-    - Input for later modeling stage & export for V&V
-  * - Hemorrhage outcomes (deaths, YLLs, YLDs, pregnancy transition counts;
-      incident counts)
+    - Facility type, age
+  * - Hemorrhage outcomes (deaths, YLLs, YLDs, incident counts)
     - :ref:`Maternal hemorrhage model <2021_cause_maternal_hemorrhage_mncnh>`
-    - Facility type, age, LBW/preterm (?)
-    - Input for later modeling stage & export for V&V
-  * - Sepsis outcomes (deaths, YLLs, YLDs, pregnancy transition counts;
-      incident counts)
+    - Facility type, age
+  * - Sepsis outcomes (deaths, YLLs, YLDs, incident counts)
     - :ref:`Maternal sepsis model <2021_cause_maternal_sepsis_mncnh>`
-    - Facility type, age, LBW/preterm (?)
-    - Input for later modeling stage & export for V&V
-  * - Counts of pregnancy outcomes (full term, partial term)
-    - Pregnancy model
-    - Facility type, age, LBW/preterm (?)
-    - Input for later modeling stage
-  * - Counts of birth outcomes (live, still)
-    - Pregnancy model
-    - Facility type, age, LBW/preterm (?)
-    - Input for later modeling stage
-  * - Gestational age at birth
-    - Pregnancy model
-    - Facility type, age, LBW/preterm (?)
-    - Input for later modeling stage
-  * - Birthweight
-    - Pregnancy model
-    - Facility type, age, LBW/preterm (?)
-    - Input for later modeling stage
-  * - If identified as low birthweight
-    - Pregnancy model
-    - Facility type, age, LBW/preterm (?)
-    - Input for later modeling stage
+    - Facility type, age, whether given azithromycin or not
+
+.. todo::
+
+  Figure out whether we want any of these count data to be stratified by LBW or preterm status, 
+  and what our V&V plan would be for this if so (e.g., interactive sim to compare risk ratios for OL
+  of people with LBWSG babies or not?).
 
 
 Limitations:
@@ -404,6 +383,7 @@ Limitations:
     - XX relative risk for RDS incidence based on birthing parent receiving antenatal corticosteroids
     - Need to confirm this will impact incidence not mortality. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
 
+.. _inputs_to_neonatal_decision_tree_table:
 
 .. list-table:: Inputs to Neonatal Decision Tree
   :widths: 3 15 15
@@ -430,7 +410,9 @@ Limitations:
   * - If birth parent received antenatal corticosteroids
     - From intrapartum model
     - 
-
+  * - If birth parent received azithromycin
+    - From intrapartum model
+    - 
 
 .. list-table:: Outputs from Neonatal Decision Tree
   :widths: 3 15 15
