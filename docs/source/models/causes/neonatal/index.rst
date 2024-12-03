@@ -8,8 +8,8 @@ Neonatal disorders: GBD 2021, MNCNH
 
     This page is adapted from the :ref:`Maternal disorders: GBD 2021, MNCNH <2021_cause_maternal_disorders_mncnh>` page and is also part of the :ref:`MNCNH Portfolio project
     <2024_concept_model_vivarium_mncnh_portfolio>`.  In this work we are modeling
-    several neonatal subcauses (see `Modeled
-    Subcauses`_) which is complicated because the LBWSG risk factor in GBD acts on overall neonatal mortality.
+    several neonatal subcauses (see Modeled
+    Subcauses) which is complicated because the LBWSG risk factor in GBD acts on overall neonatal mortality.
 
 .. contents::
    :local:
@@ -103,7 +103,7 @@ Vivarium Modeling Strategy
 --------------------------
 This model is designed to estimate deaths and YLLs due to neonatal disorders that could be
 averted by a suite of intervention that affect sepsis, respiratory stress disorder, and perhaps encephalopathy, as well as :ref:`Low Birth Weight and Short
-Gestation (LBWSG) <2019_risk_lbwsg>`. The model groups together all of the
+Gestation (LBWSG) <2019_risk_effect_lbwsg>`. The model groups together all of the
 neonatal sub-causes, and is fatal-only (no disability). The rationale for this
 design is as follows:
 
