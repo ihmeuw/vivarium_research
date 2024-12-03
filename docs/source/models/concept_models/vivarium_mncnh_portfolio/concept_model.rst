@@ -326,12 +326,6 @@ intrapartum model will be used as input to the neonatal model, please see the ta
     - :ref:`Maternal sepsis model <2021_cause_maternal_sepsis_mncnh>`
     - Facility type, age, whether given azithromycin or not
 
-.. todo::
-
-  Figure out whether we want any of these count data to be stratified by LBW or preterm status, 
-  and what our V&V plan would be for this if so (e.g., interactive sim to compare risk ratios for OL
-  of people with LBWSG babies or not?).
-
 
 Limitations:
 
@@ -339,6 +333,18 @@ Limitations:
 * Moving to a higher level care facility during the intrapartum period is common (referred up once labor begins if there is an issue) and the ability to do this is often a result of transport available, distance to clinics, etc. We will not include this and instead have simulants remain at a single facility for the whole intrapartum period. 
 * There are many other maternal disorders which we do not plan to individually model. 
 
+V&V Checks:
+
+* Confirm attendance rate for each type of delivery facility matches inputs
+* Confirm rates of simulants receiving azithromycin and corticosteroid matches inputs
+* Confirm outcomes for each maternal disorder (OL, sepsis, and hemorrhage) matches GBD data 
+* Confirm that relative risk of azithromycin on sepsis outcomes matches expectations
+
+.. todo::
+
+  Figure out whether we want any of these count data to be stratified by LBW or preterm status, 
+  and what our V&V plan would be for this if so (e.g., interactive sim to compare risk ratios for OL
+  of people with LBWSG babies or not?).
 
 **Component 3**: The Neonatal Model
 
