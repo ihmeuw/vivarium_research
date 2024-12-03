@@ -209,7 +209,7 @@ calculations.
     * - mr
       - neonatal mortality risk per live birth
       - deaths_c380 / live_births
-      - The value of ir is a probabiity in [0,1]. Denominator includes
+      - The value of mr is a probabiity in [0,1]. Denominator includes
         live births only.
     * - deaths_c380
       - cause-specific deaths due to neonatal disorders
