@@ -332,5 +332,24 @@ Years lived with disability
 Validation Criteria
 +++++++++++++++++++
 
+In order to verify and validate the model, we should record at least the
+following information:
+
+- Number of simulants with full term pregnancies in each age group
+  before the maternal hemorrhage model is run
+- Number of maternal hemorrhage cases and maternal hemorrhage deaths in each age
+  group
+- Number of maternal hemorrhage YLDs and YLLs in each age group
+
+Using the above data, we should be able to verify/validate the
+following:
+
+- Validate the maternal hemorrhage incidence risk and case fatality rate in
+  each age group against the corresponding quantities calculated from
+  GBD data
+- Validate the number of maternal hemorrhage deaths per population against
+  the maternal hemorrhage CSMR from GBD
+- Validate the total maternal hemorrhage YLDs and YLLs per population
+
 References
 ----------
