@@ -65,7 +65,7 @@ and details on the intrapartum and neonatal time periods.
 We plan to complete this work in 3 waves. 
 
 * Wave 1 will include the basic model design, outlines of the healthcare system, and some interventions (AI ultrasound, higher level delivery facility interventions, RDS management). 
-* Wave 2 will add in some antenatal supplements(MMS, IV iron), the hemoglobin risk for birthing parents, and all downstream causes affected by hemoglobin. 
+* Wave 2 will add in some antenatal supplements (MMS, IV iron), the hemoglobin risk for birthing parents, and all downstream causes affected by hemoglobin. 
 * Wave 3 will add in gestational blood pressure and relevant causes and risks including pre-eclampsia care and downstream effects of high blood pressure. 
 
 **Wave 1 Concept Model Map:**
@@ -352,20 +352,20 @@ Limitations:
     - Decision Information 
     - Notes
   * - 0
-    - XX% of simulants are stillborn
-    - These simulants will NOT continue in the model
+    - Pregnancy outcome (live birth or not) value from :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+    - Only live birth outcomes continue in the model
   * - 1
-    - Input value from intrapartum model
+    - Delivery facility type (home, BEmONC, CEmONC) value from intrapartum model
     - 
   * - 2
     - XX% of each type of facility have antibiotics available
     - 
   * - 3
     - XX relative risk on mortality from sepsis or other neonatal infections
-    - Need to confirm this will impact mortality not incidence. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
+    - It seems like this relative risk will be hard to find in the literature, and we might need to use a sensitivity-analysis approach.
   * - 4
     - XX% of each type of facility have probiotics available
-    - Need to determine who recevied probiotics - all newborns, only LBW, only preterm, etc. 
+    - Need to determine who recevied probiotics - all newborns, only LBW, only preterm, etc. ; the coverage is probably zero in current practice, and we will model scenarios where it is nonzero.
   * - 5
     - XX relative risk on incidence of sepsis or other neonatal infections
     - Need to confirm this will impact incidence not mortality. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
@@ -376,7 +376,7 @@ Limitations:
     - XX% of each type of facility have CPAP or NICU capabilities
     - 
   * - 8
-    - XX relative risk for RDS mortality 
+    - XX relative risk on RDS mortality of facility having CPAP or NICU capabilities vs. not
     - Need to confirm this will impact mortality not incidence. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
   * - 9
     - XX relative risk for RDS incidence based on birthing parent receiving antenatal corticosteroids
@@ -390,12 +390,6 @@ Limitations:
   * - Input
     - Data Source 
     - Notes
-  * - Age 
-    - GBD and fertility model 
-    - Will be the same population generation as used in nutrition optimization pregnancy model 
-  * - Upstream factors
-    - Likely DHS 
-    - Need to decide what if anything we want to include
   * - Birth delivery facility
     - From intrapartum model
     - 
@@ -408,9 +402,6 @@ Limitations:
   * - Birthweight
     - From intrapartum model
     - 
-  * - If identified as low birthweight
-    - Decision tree value
-    - From pregnancy model
   * - If birth parent experienced obstructive labor
     - From intrapartum model
     - 
@@ -426,29 +417,41 @@ Limitations:
   * - Input
     - Data Source 
     - Notes
+  * - Interventions available (antibiotics, probiotics, RDS treatment)
+    - Decision tree values
+    - 
   * - Interventions received (antibiotics, probiotics, RDS treatment)
     - Decision tree values
     - 
-  * - Count of neonatal disorders
-    - Simulant experiences in model
+  * - Count of neonatal deaths by cause
+    - Neonatal disorder models
     - 
-  * - Neonatal outcomes
-    - Simulant experiences in model
-    - To be defined, YLLs, YLDs, deaths, etc.
-  * - Type of birth
-    - Simulant experiences in model
-    - E.g., live, still 
+  * - Burden of Neonatal deaths by cause
+    - Neonatal disorder model
+    - YLLs
   * - Gestational age at birth
-    - GBD LBWSG
+    - From intrapartum model
     - 
   * - Birthweight
-    - GBD LBWSG
+    - From intrapartum model
     - 
 
 Limitations:
 
-* Need to further determine how neonatal mortality will be managed. In GBD, LBWSG impacts all cause mortality, which overlaps with the other neonatal causes. The method for handling this is yet to be fully determined and therefore this limitation will be updated later. 
-* At current, we are not including lung surfactant or kangaroo care which are closely tied to the CPAP/NICU intervention. We ight add these to the model later, but they are not present at this time. 
+* In GBD, LBWSG impacts all-cause mortality, which overlaps with the other neonatal causes. The method for handling this is complex, since preterm birth is a PAF-of-one cause, that we want to split into preterm with and without RDS, and other causes must have a RR with LBWSG to make the all-cause RR calibrate.
+
+* In this phase of model building, we are not including lung surfactant or kangaroo care which are closely tied to the CPAP/NICU intervention. We might add these to the model in a later phase. 
+
+
+V&V Checks:
+
+* Confirm ACMR in sim matches ACMR in artifact
+* Confirm LBWSG exposure match
+* Confirm LBWSG RR on ACMR matches
+* Confirm CSMR matches for preterm, sepsis, encephalopathy
+* Confirm that RDS incidence and mortality match expectations
+* Confirm that interventions have expected efficacy and coverage rates
+
 
   
 .. _mncnh_portfolio_3.2:
@@ -456,11 +459,31 @@ Limitations:
 3.2 Submodels
 -------------
 
+1. :ref:`Pregnancy Model <other_models_pregnancy_closed_cohort_mncnh>`
+
+  a. :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+  b. :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
+  c. :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
+  d. Maternal hypertensive disorders
+
+2. :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`
+
+  a. :ref:`Neonatal Sepsis and Other Infections Model <2021_cause_obstructed_labor_mncnh>`
+  b. :ref:`Neonatal Encephalopathy Model <2021_cause_neonatal_encephalopathy_mncnh>`
+  c. :ref:`Preterm Birth <2021_cause_preterm_birth_mncnh>`
+
+    i. with Respiratory Distress Syndrome (RDS)
+    ii. without RDS 
+
+3. Low Birthweight/Short Gestation Risk Exposure
+4. Low Birthweight/Short Gestation Risk Effect on Neonatal Moratlity Model
+5. Hemoglobin Risk Exposure
+6. Hemoglobin Risk Effect on Maternal Hemorrhage
+
 .. todo::
 
-  Add in tables with all risk exposures, risk effects, causes, interventions, etc. 
-
-
+  * Add in components that Abie missed
+  
 .. _mncnh_portfolio_4.0:
 
 4.0 Data Inputs
