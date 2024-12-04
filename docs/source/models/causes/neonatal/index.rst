@@ -14,17 +14,7 @@ Neonatal disorders: GBD 2021, MNCNH
 .. contents::
    :local:
 
-Modeled Subcauses
------------------
-
-.. toctree::
-    :maxdepth: 1
-
-    neonatal_sepsis
-    neonatal_encephalopathy
-    preterm_birth
-
-The remainder of this document describes neonatal disorders overall and
+This document describes neonatal disorders overall and
 the strategy for capturing the burden of the neonatal subcauses to calibrate to all-cause mortality, preterm paf-of-one, and LBWSG risk.
 
 Disease Overview
@@ -34,7 +24,7 @@ This model captures deaths due to any cause that occur during the first 28 days 
 GBD 2021 Modeling Strategy
 --------------------------
 
-I guess this comes from the mortality team.
+I guess this comes from the demographics research team.
 
 Cause Hierarchy
 +++++++++++++++
@@ -97,19 +87,13 @@ The following table describes the restrictions from GBD 2021 and our intended us
      - Not applicable
      - 
 
+  Vivarium Modeling Strategy
+  --------------------------
+  This model is designed to estimate deaths and YLLs due to neonatal disorders that could be averted by interventions targeting sepsis, respiratory distress syndrome (RDS), and possibly encephalopathy, as well as :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>`. The model groups all neonatal sub-causes together and focuses only on fatal outcomes (no disability). The rationale for this design is as follows:
 
+  1. The LBWSG risk factor in GBD affects overall neonatal mortality, so we need to model all-cause neonatal mortality to calibrate to all-cause mortality, preterm PAF-of-one, and LBWSG risk.
 
-Vivarium Modeling Strategy
---------------------------
-This model is designed to estimate deaths and YLLs due to neonatal disorders that could be
-averted by a suite of intervention that affect sepsis, respiratory stress disorder, and perhaps encephalopathy, as well as :ref:`Low Birth Weight and Short
-Gestation (LBWSG) <2019_risk_effect_lbwsg>`. The model groups together all of the
-neonatal sub-causes, and is fatal-only (no disability). The rationale for this
-design is as follows:
-
-1. The LBWSG risk factor in GBD acts on overall neonatal mortality, so we need to model all-cause neonatal mortality to calibrate to all-cause mortality, preterm paf-of-one, and LBWSG risk.
-
-2. The nonfatal burden of neonatal causes is around 10% of the total burden, so we will have a much simpler model without missing too much by excluding YLDs.
+  2. The nonfatal burden of neonatal causes is around 10% of the total burden. Excluding YLDs simplifies the model significantly without losing much accuracy. Most of this nonfatal burden is accrued throughout life, which complicates combining it with the prevalence DALYs construct.
 
 Scope
 +++++
@@ -140,7 +124,7 @@ unit time.
 
 .. graphviz::
 
-    digraph OL_decisions {
+    digraph NN_decisions {
         rankdir = LR;
         lb [label="live birth", style=dashed]
         nn_alive [label="neonate survived"]
@@ -185,11 +169,12 @@ The neonatal death model requires only the probability of death (aka "mortality 
 in the decision graph. This will be computed as
 
 .. math::
-    \text{mr} = \frac{\text{neontal deaths}}{\text{live births}}
-        = \frac{\text{(neonatal mortality rate)} \cdot  \text{(neonatal person-time)}}
+    \begin{align*}
+    \text{mr} &= \frac{\text{neontal deaths}}{\text{live births}}\\
+        &= \frac{\text{(neonatal mortality rate)} \cdot  \text{(neonatal person-time)}}
             {\sum_{\text{age groups}} \text{ASFR} \cdot (\text{age-specific person-time})
             }.
-
+    \end{align*}
 
 The following table shows the data needed from GBD for these
 calculations.
@@ -197,7 +182,7 @@ calculations.
 .. note::
 
   All quantities pulled from GBD in the following table are for a
-  specific year, sex, age group, and location.
+  specific year, sex, and location for the 0-28 day year old age group.
 
 .. list-table:: Data values and sources
     :header-rows: 1
