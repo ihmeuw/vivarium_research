@@ -16,6 +16,10 @@ not already modelled separately in the GBD.  For the MNCNH portfolio, we will in
 
 GBD 2021 Modeling Strategy
 --------------------------
+
+We focus on only the mortality due to this cause, which is estimated together with all other cause-specific mortality through the CODEm process.
+
+The nonfatal part is described here:
 `GBD 2021 Non-fatal Neonatal Infections Modeling Strategy <https://www.healthdata.org/sites/default/files/methods_appendices/2021/Neonatal_nonfatal_GBD2020_final_RS_updated_Jul_11_AC.pdf>`_ (pages 32-39).
 
 Cause Hierarchy
@@ -80,9 +84,9 @@ The Level 4 neonatal conditions included in the MNCNH Portfolio model are closel
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Our focus on YLLs only will underestimate the total burden of sepsis, and therefor also underestimate the DALYs averted by interventions that reduce the risk of sepsis.  However, we expect this to be an underestimate of less than 10%.
+Focusing solely on YLLs will likely underestimate the total burden of sepsis and, consequently, the DALYs averted by interventions that reduce sepsis risk. However, we anticipate this underestimation to be less than 10%.
 
-Our strategy of splitting overall mortality risk into subcause-specific mortality risk is an approximation that might over or underestimate the burden of sepsis, depending on the other causes that included and the order in which they are considered.  Since all of these mortality risks are small, we expect this to lead to an error of less than 1%.
+Our approach of dividing overall mortality risk into subcause-specific mortality risks is an approximation that may either overestimate or underestimate the burden of sepsis, depending on the other included causes and their order of consideration. Given that these mortality risks are relatively small, we expect this to result in an error of less than 1%.
 
 
 Cause Model Diagram
@@ -97,7 +101,7 @@ unit time.
 
 .. graphviz::
 
-    digraph OL_decisions {
+    digraph NN_sepsis_decisions {
         rankdir = LR;
         lb [label="live birth", style=dashed]
         nn_alive [label="neonate survived"]
@@ -132,7 +136,7 @@ unit time.
       - Definition
     * - mr
       - sepsis mortality risk
-      - The probability that a simulant who was born alive dies from sepsis during the neonatal period
+      - The probability that a simulant who was born alive dies from this cause during the neonatal period
 
 
 Data Tables
