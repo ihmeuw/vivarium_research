@@ -87,13 +87,13 @@ The following table describes the restrictions from GBD 2021 and our intended us
      - Not applicable
      - 
 
-  Vivarium Modeling Strategy
-  --------------------------
-  This model is designed to estimate deaths and YLLs due to neonatal disorders that could be averted by interventions targeting sepsis, respiratory distress syndrome (RDS), and possibly encephalopathy, as well as :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>`. The model groups all neonatal sub-causes together and focuses only on fatal outcomes (no disability). The rationale for this design is as follows:
+Vivarium Modeling Strategy
+--------------------------
+This model is designed to estimate deaths and YLLs due to neonatal disorders that could be averted by interventions targeting sepsis, respiratory distress syndrome (RDS), and possibly encephalopathy, as well as :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>`. The model groups all neonatal sub-causes together and focuses only on fatal outcomes (no disability). The rationale for this design is as follows:
 
-  1. The LBWSG risk factor in GBD affects overall neonatal mortality, so we need to model all-cause neonatal mortality to calibrate to all-cause mortality, preterm PAF-of-one, and LBWSG risk.
+1. The LBWSG risk factor in GBD affects overall neonatal mortality, so we need to model all-cause neonatal mortality to calibrate to all-cause mortality, preterm PAF-of-one, and LBWSG risk.
 
-  2. The nonfatal burden of neonatal causes is around 10% of the total burden. Excluding YLDs simplifies the model significantly without losing much accuracy. Most of this nonfatal burden is accrued throughout life, which complicates combining it with the prevalence DALYs construct.
+2. The nonfatal burden of neonatal causes is around 10% of the total burden. Excluding YLDs simplifies the model significantly without losing much accuracy. Most of this nonfatal burden is accrued throughout life, which complicates combining it with the prevalence DALYs construct.
 
 Scope
 +++++
