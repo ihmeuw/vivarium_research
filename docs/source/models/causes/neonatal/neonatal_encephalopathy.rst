@@ -45,8 +45,7 @@ Cause Hierarchy
 
       - Neonatal disorders (c_380)
           
-        - **Neonatal encephalopathy due to birth asphyxia and birth trauma
-  (c_382) [level 4]**
+        - **Neonatal encephalopathy due to birth asphyxia and birth trauma (c_382) [level 4]**
 
 
 Restrictions
