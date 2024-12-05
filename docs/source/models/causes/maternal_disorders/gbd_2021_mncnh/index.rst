@@ -294,7 +294,7 @@ mortality component in a standard Vivarium simulation.
 
     We may need to adjust the strategy for deciding mortality after
     implementing the "residual" maternal disorders subcause to capture
-    DALYs from maternal disrders that are not explicitly modeled. In
+    DALYs from maternal disorders that are not explicitly modeled. In
     particular, some of the un-modeled subcauses are YLL only, so we
     will not have incidence rate data, so we'll have to assign deaths
     among the entire pregnant population rather than among incident
