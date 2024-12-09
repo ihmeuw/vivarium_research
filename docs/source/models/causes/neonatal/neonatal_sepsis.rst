@@ -122,7 +122,7 @@ unit time.
         is determined in the
         intrapartum step of the :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`)
-    * - neonate survived
+    * - neonate did not die of sepsis
       - The child simulant survived for the first 28 days of life
     * - neonate died
       - The child simulant died within the first 28 days of life
