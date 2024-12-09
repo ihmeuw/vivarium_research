@@ -105,7 +105,7 @@ unit time.
         rankdir = LR;
         lb [label="live birth", style=dashed]
         nn_alive [label="neonate did not \ndie of sepsis"]
-        nn_dead [label="neonate died"]
+        nn_dead [label="neonate died \nof sepsis"]
 
         lb -> nn_alive  [label = "1 - mr"]
         lb -> nn_dead [label = "mr"]
