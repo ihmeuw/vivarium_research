@@ -104,7 +104,7 @@ unit time.
     digraph NN_sepsis_decisions {
         rankdir = LR;
         lb [label="live birth", style=dashed]
-        nn_alive [label="neonate survived"]
+        nn_alive [label="neonate did not \ndie of sepsis"]
         nn_dead [label="neonate died"]
 
         lb -> nn_alive  [label = "1 - mr"]
