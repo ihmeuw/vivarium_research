@@ -125,7 +125,7 @@ unit time.
     * - neonate did not die of sepsis
       - The child simulant survived for the first 28 days of life
     * - neonate died of sepsis
-      - The child simulant died within the first 28 days of life
+      - The child simulant died of sepsis within the first 28 days of life
 
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20
