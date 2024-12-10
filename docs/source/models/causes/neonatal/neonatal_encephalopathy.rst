@@ -136,7 +136,7 @@ unit time.
         <other_models_pregnancy_closed_cohort_mncnh>`)
     * - neonate didn't die of encephalopathy
       - The child simulant survived for the first 28 days of life
-    * - neonate died
+    * - neonate died of encephalopathy
       - The child simulant died within the first 28 days of life
 
 .. list-table:: Transition Probability Definitions
