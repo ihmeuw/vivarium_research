@@ -89,8 +89,8 @@ Focusing solely on YLLs will likely underestimate the total burden of sepsis and
 Our approach of dividing overall mortality risk into subcause-specific mortality risks is an approximation that may either overestimate or underestimate the burden of sepsis, depending on the other included causes and their order of consideration. Given that these mortality risks are relatively small, we expect this to result in an error of less than 1%.
 
 
-Cause Model Diagram
-+++++++++++++++++++
+Cause Model Decision Graph
+++++++++++++++++++++++++++
 
 We are not modeling Neonatal Sepsis dynamically as a finite state machine, but we can draw an directed 
 graph to represent the collapsed decision tree  
@@ -104,8 +104,8 @@ unit time.
     digraph NN_sepsis_decisions {
         rankdir = LR;
         lb [label="live birth", style=dashed]
-        nn_alive [label="neonate survived"]
-        nn_dead [label="neonate died"]
+        nn_alive [label="neonate did not\ndie of sepsis"]
+        nn_dead [label="neonate died\nof sepsis"]
 
         lb -> nn_alive  [label = "1 - mr"]
         lb -> nn_dead [label = "mr"]
