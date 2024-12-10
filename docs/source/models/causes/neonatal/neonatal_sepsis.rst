@@ -104,8 +104,8 @@ unit time.
     digraph NN_sepsis_decisions {
         rankdir = LR;
         lb [label="live birth", style=dashed]
-        nn_alive [label="neonate did not\ndie of sepsis"]
-        nn_dead [label="neonate died\nof sepsis"]
+        nn_alive [label="neonate did not \ndie of sepsis"]
+        nn_dead [label="neonate died \nof sepsis"]
 
         lb -> nn_alive  [label = "1 - mr"]
         lb -> nn_dead [label = "mr"]
@@ -122,10 +122,10 @@ unit time.
         is determined in the
         intrapartum step of the :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`)
-    * - neonate survived
-      - The child simulant survived for the first 28 days of life
-    * - neonate died
-      - The child simulant died within the first 28 days of life
+    * - neonate did not die of sepsis
+      - The child simulant did not die of sepsis for the first 28 days of life
+    * - neonate died of sepsis
+      - The child simulant died of sepsis within the first 28 days of life
 
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20
