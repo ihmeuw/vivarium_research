@@ -1,21 +1,22 @@
 .. _2021_cause_neonatal_disorders_mncnh:
 
-===================================
-Neonatal disorders: GBD 2021, MNCNH
-===================================
+=============================================
+Neonatal all-cause mortality: GBD 2021, MNCNH
+=============================================
 
 .. note::
 
     This page is adapted from the :ref:`Maternal disorders: GBD 2021, MNCNH <2021_cause_maternal_disorders_mncnh>` page and is also part of the :ref:`MNCNH Portfolio project
     <2024_concept_model_vivarium_mncnh_portfolio>`.  In this work we are modeling
     several neonatal subcauses (see Modeled
-    Subcauses) which is complicated because the LBWSG risk factor in GBD acts on overall neonatal mortality.
+    Subcauses) which is complicated because the LBWSG risk factor in GBD acts on all-cause mortality during the neonatal period.
 
 .. contents::
    :local:
 
 This document describes neonatal disorders overall and
-the strategy for capturing the burden of the neonatal subcauses to calibrate to all-cause mortality, preterm paf-of-one, and LBWSG risk.
+
+the strategy for capturing the burden of the neonatal subcauses in a manner that also is calibrated to match all-cause mortality and the LBWSG risk effect on all-cause mortality.
 
 Disease Overview
 ----------------
@@ -89,16 +90,16 @@ The following table describes the restrictions from GBD 2021 and our intended us
 
 Vivarium Modeling Strategy
 --------------------------
-This model is designed to estimate deaths and YLLs due to neonatal disorders that could be averted by interventions targeting sepsis, respiratory distress syndrome (RDS), and possibly encephalopathy, as well as :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>`. The model groups all neonatal sub-causes together and focuses only on fatal outcomes (no disability). The rationale for this design is as follows:
+This model is designed to estimate deaths and YLLs during the neonatal period that could be averted by interventions targeting sepsis, respiratory distress syndrome (RDS), and possibly encephalopathy, as well as :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>`. The model groups neonatal sub-causes together and focuses only on fatal outcomes (no disability). The rationale for this design is as follows:
 
-1. The LBWSG risk factor in GBD affects overall neonatal mortality, so we need to model all-cause neonatal mortality to calibrate to all-cause mortality, preterm PAF-of-one, and LBWSG risk.
+1. The LBWSG risk factor in GBD affects all-cause mortality during the neonatal period, so we need to model all-cause mortality and the LBWSG risk.
 
 2. The nonfatal burden of neonatal causes is around 10% of the total burden. Excluding YLDs simplifies the model significantly without losing much accuracy. Most of this nonfatal burden is accrued throughout life, which complicates combining it with the prevalence DALYs construct.
 
 Scope
 +++++
 
-1. Capture neonatal deaths, and the relationship with LBWSG.
+1. Capture deaths by any cause during the neonatal, and the relationship between all-cause mortality and LBWSG.
 2. Capture the deaths averted by interventions that reduce the cause-specific mortality rates of preterm with respiratory distress and sepsis (and perhaps encephalopathy).
 3. Do not capture nonfatal burden.
 
@@ -112,8 +113,8 @@ The evidence base for identifying the level 4 subcauses is not as solid as I wou
 
 Preterm must be split into with and without respiratory distress syndrome (RDS) outside of GBD, since GBD does not distinguish preterms deaths with and without RDS.
 
-Cause Model Diagram
-+++++++++++++++++++
+Cause Model Decision Graph
+++++++++++++++++++++++++++
 
 We are not modeling neonatal disorders dynamically as a finite state machine, but we can draw an directed 
 graph to represent the collapsed decision tree  
