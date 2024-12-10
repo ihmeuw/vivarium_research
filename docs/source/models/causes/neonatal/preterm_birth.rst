@@ -80,7 +80,7 @@ Scope
 +++++
 
 The Level 4 neonatal conditions included in the MNCNH Portfolio model are closely linked via the 
-:ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>`.  Since the LBWSG Risk Factor has an effect on overall neonatal mortality, and this subcause has a PAF-of-one relationship with LBWSG we will need to perform a  calibration computation to satisfy multiple criteria simultaneously.  This will produce internally consistent mortality risk values for all neonatal subcauses and LBWSG exposure levels. These risks can then be further individualized based on treatment coverage and efficacy, to ensure that individuals who have access to a specific existing or hypothetical treatment have a lower risk of mortality.
+:ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>`.  Since the LBWSG Risk Factor has a PAF-of-one relationship with this Preterm Birth cause, we will need to ensure that the risk-stratified cause-specific mortality rates are zero for non-preterm categories, and their weighted average matches the overall cause-specific mortality rate.  This will produce internally consistent mortality risk values for all neonatal subcauses and LBWSG exposure levels. These risks can then be further individualized based on treatment coverage and efficacy, to ensure that individuals who have access to a specific existing or hypothetical treatment have a lower risk of mortality.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -89,8 +89,10 @@ Focusing solely on YLLs will likely underestimate the total burden of this cause
 
 GBD does not provide an estimate of the proportion of preterm births that are associated with RDS. We will need to make an assumption about this proportion based on data we obtain from another source.
 
-Cause Model Diagram
-+++++++++++++++++++
+We might need to include the prevalence of Preterm Birth Complications, in order to quantify the cost and impact of corticosteroids intervention, which prevents RDS incidence (as opposed to the CPAP intervention, which reduces on mortality among neonates who have RDS).
+
+Cause Model Decision Graph
+++++++++++++++++++++++++++
 
 We are not modeling Preterm Birth dynamically as a finite state machine, but we can draw an directed 
 graph to represent the collapsed decision tree  
@@ -104,9 +106,9 @@ unit time.
     digraph NN_preterm_decisions {
         rankdir = LR;
         lb [label="live birth", style=dashed]
-        nn_alive [label="neonate survived"]
-        nn_dead_RDS [label="neonate died\nwith RDS"]
-        nn_dead_no_RDS [label="neonate died\nwithout RDS"]
+        nn_alive [label="neonate did not\ndie of preterm"]
+        nn_dead_RDS [label="neonate died\nof preterm with RDS"]
+        nn_dead_no_RDS [label="neonate died\nof preterm without RDS"]
 
         lb -> nn_alive  [label = "1 - mr_w - mr_wo"]
         lb -> nn_dead_RDS [label = "mr_w"]
@@ -149,7 +151,7 @@ unit time.
 Data Tables
 +++++++++++
 
-The Neonatal Encephalopathy model requires only the probability of death (aka "mortality risk") for use
+The Preterm Birth model requires only the probability of death (aka "mortality risk") for use
 in the decision graph. This will be computed from the overall neonatal mortality risk and the cause-specific mortality fraction.
 
 Since this is a PAF-of-one cause, the calculation must take into account the "structural zeros" representing no mortality risk for simulants withe a gestational age above 37 weeks.
