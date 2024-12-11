@@ -126,8 +126,8 @@ unit time.
         is determined in the
         intrapartum step of the :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`)
-    * - neonate survived
-      - The child simulant survived for the first 28 days of life
+    * - neonate did not die of preterm
+      - The child simulant did not die of preterm birth complications during the first 28 days of life
     * - neonate died with RDS
       - The child simulant died due to preterm birth with respiratory distress syndrome within the first 28 days of life
     * - neonate died without RDS
