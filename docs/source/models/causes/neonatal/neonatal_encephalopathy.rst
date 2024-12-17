@@ -116,7 +116,7 @@ unit time.
     digraph NN_encephalopathy_decisions {
         rankdir = LR;
         lb [label="live birth", style=dashed]
-        nn_alive [label="neonate didn't die\nof encephalopathy"]
+        nn_alive [label="neonate did not die\nof encephalopathy"]
         nn_dead [label="neonate died of\nencephalopathy"]
 
         lb -> nn_alive  [label = "1 - mr"]
@@ -134,10 +134,10 @@ unit time.
         is determined in the
         intrapartum step of the :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`)
-    * - neonate didn't die of encephalopathy
-      - The child simulant survived for the first 28 days of life
+    * - neonate did not die of encephalopathy
+      - The child simulant did not die of encephalopathy within the first 28 days of life
     * - neonate died of encephalopathy
-      - The child simulant died within the first 28 days of life
+      - The child simulant died of encephalopathy within the first 28 days of life
 
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20
