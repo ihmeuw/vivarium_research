@@ -38,6 +38,15 @@ Cause Hierarchy
 
       - **Neonatal disorders (c_380)** [level 3]
 
+        - Neonatal preterm birth (c_381) [level 4]
+
+        - Neonatal encephalopathy due to birth asphyxia and trauma (c_382) [level 4]
+
+        - Neonatal sepsis and other neonatal infections (c_383) [level 4]
+
+        - Hemolytic disease and other neonatal jaundice (c_384) [level 4]
+
+        - Other neonatal disorders (c_385) [level 4]
 
 Modeled Subcauses
 -----------------
@@ -73,7 +82,7 @@ The following table describes the restrictions from GBD 2021 and our intended us
      - **Note:** GBD estimates both YLLs and YLDs for neonatal disorders, but
        **we are ignoring YLDs for this model**.
    * - YLD only
-     - True
+     - False
      - See above.
    * - YLL age group start
      - Early Neonatal
@@ -90,7 +99,7 @@ The following table describes the restrictions from GBD 2021 and our intended us
 
 Vivarium Modeling Strategy
 --------------------------
-This model is designed to estimate deaths and YLLs during the neonatal period that could be averted by interventions targeting sepsis, respiratory distress syndrome (RDS), and possibly encephalopathy, as well as :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>`. The model groups neonatal sub-causes together and focuses only on fatal outcomes (no disability). The rationale for this design is as follows:
+This model is designed to estimate deaths and YLLs during the neonatal period that could be averted by interventions targeting sepsis, respiratory distress syndrome (RDS), and possibly encephalopathy, as well as :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>`. The model accounts for key neonatal sub-causes explicitly and groups all other causes of mortality during the neonatal period together.  It focuses only on fatal outcomes (no disability). The rationale for this design is as follows:
 
 1. The LBWSG risk factor in GBD affects all-cause mortality during the neonatal period, so we need to model all-cause mortality and the LBWSG risk.
 
@@ -126,30 +135,39 @@ unit time.
 .. graphviz::
 
     digraph NN_decisions {
+        graph [size="7,5"]
         rankdir = LR;
         lb [label="live birth", style=dashed]
-        nn_alive [label="neonate survived"]
-        nn_dead [label="neonate died"]
+        enn_alive [label="neonate survived\nfirst 7 days"]
+        enn_dead [label="neonate died\nduring first 7 days"]
+        lnn_alive [label="neonate survived\nfirst 28 days"]
+        lnn_dead [label="neonate died\nduring first 28 days"]
 
-        lb -> nn_alive  [label = "1 - mr"]
-        lb -> nn_dead [label = "mr"]
+        lb -> enn_alive  [label = "1 - enn_mr"]
+        lb -> enn_dead [label = "enn_mr"]
+        enn_alive -> lnn_alive [label = "1 - lnn_mr"]
+        enn_alive -> lnn_dead [label = "lnn_mr"]
     }
 
-.. list-table:: State Definitions
+.. list-table:: Decision Point Definitions
     :widths: 7 20
     :header-rows: 1
 
-    * - State
+    * - Decision
       - Definition
     * - live birth
       - The parent simulant has given birth to a live child simulant (which
         is determined in the
         intrapartum step of the :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`)
-    * - neonate survived
+    * - neonate survived first 7 days
+      - The child simulant survived for the first 7 days of life
+    * - neonate died during first 7 days
+      - The child simulant died within the first 7 days of life
+    * - neonate survived first 28 days
       - The child simulant survived for the first 28 days of life
-    * - neonate died
-      - The child simulant died within the first 28 days of life
+    * - neonate died during first 28 days
+      - The child simulant died between day 8 and 28 of life
 
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20
@@ -158,32 +176,58 @@ unit time.
     * - Symbol
       - Name
       - Definition
-    * - mr
-      - mortality risk
-      - The probability that a simulant who was born alive dies during the neonatal period
+    * - enn_mr
+      - mortality risk during the early neonatal period
+      - The probability that a simulant who was born alive dies during the first 7 days
+    * - lnn_mr
+      - mortality risk during the late neonatal period
+      - The probability that a simulant who was born alive dies between day 8 to 28 of life
 
 
 Data Tables
 +++++++++++
 
-The neonatal death model requires only the probability of death (aka "mortality risk") for use
-in the decision graph. This will be computed as
+The neonatal death model requires only the probability of death (aka "mortality risk") for the early and late neonatal time periods.  But computing this for an individual simulant is a bit complicated.  It will follow the pattern from the general mortality component in :code:`vivarium_public_health`, and work in rate space to make the math simpler.  The final step will be converting from rates to risks.
 
 .. math::
     \begin{align*}
-    \text{mr} &= \frac{\text{neontal deaths}}{\text{live births}}\\
-        &= \frac{\text{(neonatal mortality rate)} \cdot  \text{(neonatal person-time)}}
-            {\sum_{\text{age groups}} \text{ASFR} \cdot (\text{age-specific person-time})
-            }.
+    \text{mr}_i &= 1-\exp(-\text{ACMR}_i \Delta t),
     \end{align*}
 
-The following table shows the data needed from GBD for these
-calculations.
+where :math:`\text{mr}_i` is the probability of mortality for simulant :math:`i` during the early or late neonatal period, :math:`\text{ACMR}_i` is the all-cause mortality rate for the early or late neonatal period, and :math:`\Delta t` is length of that period in years.
 
+The calculation of :math:`\text{ACMR}_i` is a bit complicated, however. We begin with a population ACMR and use the LBWSG PAF to derive a risk-deleted ACMR to which we can then apply the relative risk of LBWSG matching each risk exposure category.  Mathematically this is achieved by the following formula:
+
+.. math::
+    \begin{align*}
+    \text{ACMR}_j &= \text{ACMR} \times (1 - \text{PAF}_{\text{LBWSG}}) \times \text{RR}_{\text{LBWSG},j},
+    \end{align*}
+
+where :math:`\text{ACMR}_j` is the all-cause mortality rate for the population with LBWSG exposure category :math:`j`, :math:`\text{ACMR}` is the all-cause mortality rate for the total population, :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, and :math:`\text{RR}_{\text{LBWSG},j}` is the relative mortality rate for LBWSG.
+
+To obtain the ACMR for a specific simulant, we subtract off the *population* CSMRs for each modeled subcause for the LBWSG exposure level of the simulant, and then add back in the (potentially pipeline-modified) *individual* CSMRs for the specific simulant, which might differ from baseline due to intervention coverage.
+
+.. math::
+    \begin{align*}
+    \text{ACMR}_i &= \text{ACMR}_j - \sum_k \text{CSMR}_{k,j}^{\text{population}}
+    + \sum_k \text{CSMR}_{k,i},^{\text{individual}}
+    \end{align*}
+
+where :math:`\text{CSMR}_{k,j}^{\text{population}}` is the cause-specific mortality rate for subcause :math:`k` for the population with LBWSG exposure category :math:`j`, and :math:`\text{CSMR}_{k,i}^{\text{individual}}` is the cause-specific mortality rate for subcause :math:`k` for simulant :math:`i` (both detailed in the subcause models linked from this page). (Also note that simulant :math:`i` is assumed to be in LBWSG exposure category :math:`j`.)
+
+In addition to determining which simulants die due to any cause, we also need to determine which subcause is underlying the death.  This is done by sampling from a categorical distribution obtained by renormalizing the CSMRs:
+
+.. math::
+    \begin{align*}
+    \text{Pr}[\text{subcause} = k\;|\;\text{neonate died}] &= \frac{\text{CSMR}_{k,i}^{\text{individual}}}
+    {\text{ACMR}_i},
+    \end{align*}
+
+including a special :math:`k=0` for the residual "all other causes" category.
 .. note::
 
   All quantities pulled from GBD in the following table are for a
-  specific year, sex, and location for the 0-28 day year old age group.
+  specific year, sex, age group, and location.
 
 .. list-table:: Data values and sources
     :header-rows: 1
@@ -192,29 +236,26 @@ calculations.
       - Definition
       - Value or source
       - Note
-    * - mr
-      - neonatal mortality risk per live birth
-      - deaths_c380 / live_births
-      - The value of mr is a probabiity in [0,1]. Denominator includes
-        live births only.
-    * - deaths_c380
-      - cause-specific deaths due to neonatal disorders
-      - codcorrect
-      - just for neonatal age groups
-    * - live_births
-      - birth rate (live births only)
-      - sum(ASFR*population)
-      - Units are total live births  per person-year
-    * - ASFR
-      - Age-specific fertility rate
-      - get_covariate_estimates: coviarate_id=13
-      - Assume lognormal distribution of uncertainty. Units in GBD are
-        live births per person, or equivalently, per person-year.
-    * - population
-      - average population in a given year
-      - get_population
-      - Specific to age/sex/location/year demographic group. Numerically
-        equal to person-time for the year.
+    * - ACMR
+      - all-cause mortality rate (per person year)
+      - GBD
+      -
+    * - PAF_LBWSG
+      - population attributable fraction of all-cause mortality for low birth weight and short gestation
+      - Computed to be consistent with GBD
+      -
+    * - RR_LBWSG
+      - relative risk of all-cause mortality for low birth weight and short gestation
+      - GBD
+      -
+    * - CSMR_k,j_population
+      - cause-specific mortality rate for subcause k, for LBWSG exposure j at the population level
+      - GBD + assumption about relative risks
+      - see subcause models for details
+    * - CSMR_k,i_individual
+      - cause-specific mortality rate for subcause k, for individual i
+      - GBD + assumption about relative risks + intervention model effects
+      - see subcause models for details
 
 
 
