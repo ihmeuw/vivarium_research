@@ -135,6 +135,7 @@ unit time.
 .. graphviz::
 
     digraph NN_decisions {
+        graph [size="7,5"]
         rankdir = LR;
         lb [label="live birth", style=dashed]
         enn_alive [label="neonate survived\nfirst 7 days"]
@@ -202,7 +203,7 @@ The calculation of :math:`\text{ACMR}_i` is a bit complicated, however. We begin
     \text{ACMR}_j &= \text{ACMR} \times (1 - \text{PAF}_{\text{LBWSG}}) \times \text{RR}_{\text{LBWSG},j},
     \end{align*}
 
-where :math:`\text{ACMR}_j` is the all-cause mortality rate for the population with LBWSG exposure category :math:`j`, :math:`\text{ACMR}` is the all-cause mortality rate for the total population, :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, and :math:`\text{RR}_{\text{LBWSG}}` is the relative mortality rate for LBWSG.
+where :math:`\text{ACMR}_j` is the all-cause mortality rate for the population with LBWSG exposure category :math:`j`, :math:`\text{ACMR}` is the all-cause mortality rate for the total population, :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, and :math:`\text{RR}_{\text{LBWSG},j}` is the relative mortality rate for LBWSG.
 
 To obtain the ACMR for a specific simulant, we subtract off the *population* CSMRs for each modeled subcause for the LBWSG exposure level of the simulant, and then add back in the (potentially pipeline-modified) *individual* CSMRs for the specific simulant, which might differ from baseline due to intervention coverage.
 
@@ -212,16 +213,17 @@ To obtain the ACMR for a specific simulant, we subtract off the *population* CSM
     + \sum_k \text{CSMR}_{k,i},^{\text{individual}}
     \end{align*}
 
-where :math:`\text{CSMR}_{k,j}^{\text{population}}` is the cause-specific mortality rate for subcause :math:`k` for the population with LBWSG exposure category :math:`j`, and :math:`\text{CSMR}_{k,i}^{\text{individual}}` is the cause-specific mortality rate for subcause :math:`k` for simulant :math:`i` (both detailed in the subcause models linked from this page).
+where :math:`\text{CSMR}_{k,j}^{\text{population}}` is the cause-specific mortality rate for subcause :math:`k` for the population with LBWSG exposure category :math:`j`, and :math:`\text{CSMR}_{k,i}^{\text{individual}}` is the cause-specific mortality rate for subcause :math:`k` for simulant :math:`i` (both detailed in the subcause models linked from this page). (Also note that simulant :math:`i` is assumed to be in LBWSG exposure category :math:`j`.)
 
-In addition to determining which simulants die due to any cause, we also need to determine which subcause is underlying the death.  This is done by sampling from a multinomial distribution obtained by renormalizing the CSMRs:
+In addition to determining which simulants die due to any cause, we also need to determine which subcause is underlying the death.  This is done by sampling from a categorical distribution obtained by renormalizing the CSMRs:
 
 .. math::
     \begin{align*}
     \text{Pr}[\text{subcause} = k\;|\;\text{neonate died}] &= \frac{\text{CSMR}_{k,i}^{\text{individual}}}
-    {\text{ACMR}_i}.
+    {\text{ACMR}_i},
     \end{align*}
 
+including a special :math:`k=0` for the residual "all other causes" category.
 .. note::
 
   All quantities pulled from GBD in the following table are for a
@@ -240,7 +242,7 @@ In addition to determining which simulants die due to any cause, we also need to
       -
     * - PAF_LBWSG
       - population attributable fraction of all-cause mortality for low birth weight and short gestation
-      - GBD
+      - Computed to be consistent with GBD
       -
     * - RR_LBWSG
       - relative risk of all-cause mortality for low birth weight and short gestation
