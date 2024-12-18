@@ -133,7 +133,6 @@ unit time.
 .. graphviz::
 
     digraph NN_decisions {
-        graph [size="7,5"]
         rankdir = LR;
         lb [label="live birth", style=dashed]
         enn_alive [label="neonate survived\nfirst 7 days"]
