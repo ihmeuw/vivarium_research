@@ -133,7 +133,6 @@ unit time.
 .. graphviz::
 
     digraph NN_decisions {
-        graph [size="7,5"]
         rankdir = LR;
         lb [label="live birth", style=dashed]
         enn_alive [label="neonate survived\nfirst 7 days"]
@@ -182,8 +181,8 @@ unit time.
       - The probability that a simulant who was born alive dies between day 8 to 28 of life
 
 
-Data Tables
-+++++++++++
+Modeling Strategy
++++++++++++++++++
 
 The neonatal death model requires only the probability of death (aka "mortality risk") for the early and late neonatal time periods.  But computing this for an individual simulant is a bit complicated.  It will follow the pattern from the general mortality component in :code:`vivarium_public_health`, and work in rate space to make the math simpler.  The final step will be converting from rates to risks.
 
@@ -226,6 +225,10 @@ In addition to determining which simulants die due to any cause, we also need to
 
 including a special :math:`k=0` for the residual "all other causes" category defined by :math:`\text{CSMR}_{i}^{0} = \text{ACMR}_i - \sum_{k=1}^K \text{CSMR}_{i}^{k}.`
 
+
+Data Tables
++++++++++++
+
 .. note::
 
   All quantities pulled from GBD in the following table are for a
@@ -238,23 +241,23 @@ including a special :math:`k=0` for the residual "all other causes" category def
       - Definition
       - Value or source
       - Note
-    * - ACMR
+    * - :math:`\text{ACMR}`
       - all-cause mortality rate (per person year)
       - GBD
       -
-    * - PAF_LBWSG
+    * - :math:`\text{PAF}_\text{LBWSG}`
       - population attributable fraction of all-cause mortality for low birth weight and short gestation
-      - Computed to be consistent with GBD
+      - computed so that PAF = 1 - 1 / E(RR) from the interpolated relative risk function (with expectation taken over the distribution of LBWSG exposure)
       -
-    * - RR_LBWSG
+    * - :math:`\text{RR}_{\text{BW},\text{GA}}`
       - relative risk of all-cause mortality for low birth weight and short gestation
       - interpolated from GBD values, as described in :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` docs
       -
-    * - CSMR_k,BW,GA
+    * - :math:`\text{CSMR}^k_{\text{BW},\text{GA}}`
       - cause-specific mortality rate for subcause k, for population with birth weight BW and gestational age GA
       - GBD + assumption about relative risks
       - see subcause models for details
-    * - CSMR_k,i
+    * - :math:`\text{CSMR}^k_i`
       - cause-specific mortality rate for subcause k, for individual i
       - GBD + assumption about relative risks + intervention model effects
       - see subcause models for details
@@ -282,7 +285,7 @@ For simplicity, we will not include YLDs in this model.
 Validation Criteria
 +++++++++++++++++++
 
-Neonatal deaths per live birth in simulation should match same ratio derived from GBD.
+Neonatal deaths per live birth in simulation should be within 10% of same ratio derived from GBD.  (We don't expect it to match exactly because of (1) our interpolation of the RRs, and (2) we use a constant mortality hazard at each BW-GA level, rather than the GBD's more complex model.)
 
 Relative Risk of neonatal death at specific categories of LBWSG exposure should match GBD estimates.
 

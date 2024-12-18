@@ -148,15 +148,15 @@ unit time.
       - The probability that a simulant who was born alive dies from preterm without RDS during the neonatal period
 
 
-Data Tables
-+++++++++++
+Modeling Strategy
++++++++++++++++++
 
 The Preterm Birth model requires only the probability of death (aka "mortality risk") for use
 in the decision graph. This will be computed from the overall neonatal mortality risk and the cause-specific mortality fraction.
 
 Since this is a PAF-of-one cause, the calculation must take into account the "structural zeros" representing no mortality risk for simulants with a gestational age of 38 or more weeks.
 
-The details of this calculation require information about other subcauses as well as preterm, and therefore are included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.  This page describes the birth-weight- and gestational-age-specific cause specific mortality rates that are used for this cause on that page, :math:`\text{CSMR}^{\text{preterm with RDS}}_{\text{BW},\text{GA}}` and :math:`\text{CSMR}^{\text{preterm without RDS}}_{\text{BW},\text{GA}}`. In both cases, the formula is:
+The details of this calculation are the same for all subcauses, and therefore are included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.  This page describes the birth-weight- and gestational-age-specific cause specific mortality rates that are used for this cause on that page, :math:`\text{CSMR}^{\text{preterm with RDS}}_{\text{BW},\text{GA}}` and :math:`\text{CSMR}^{\text{preterm without RDS}}_{\text{BW},\text{GA}}`. In both cases, the formula is:
 
 .. math::
     \begin{align*}
@@ -172,8 +172,19 @@ where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 :math:`\text{CSMR}` is the cause-specific mortality rate for preterm birth complications,
 :math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`\int_{\text{BW<38}} \int_{\text{GA}} \text{RR}_{\text{BW},\text{GA}} \cdot Z = 1`.
 
+.. note::
+  the choice to use :math:`\text{RR}_{\text{BW},\text{GA}}` in this equation is essentially arbitrary, and it could be replaced by any other nonnegative "weight function" :math:`w(\text{BW},\text{GA})` as long it doesn't lead to a negative "other causes" mortality hazard.
+  
+  If we get more specific data about RDS or non-RDS preterm death rates stratified by gestational age, we may want to change these weights to reflect that. The fact that the weight function is arbitrary from a mathematical perspective means that we have a lot of flexibility here to adjust things to work out how we want. Choosing the RRs for the weight function makes the probability of death from this cause equal across (preterm) LBWSG categories, which may or may not be what we want.
+
+  Also, it is possible that the choice of :math:`\text{RR}_{\text{BW},\text{GA}}` might not work for every subcause. Since we're moving all the preterm mortality into the preterm categories, there is less room there for mortality from other causes, so depending on the hazards involved, we may need to shift mortality from some other causes into the non-preterm categories in order to avoid making things negative.
+  It is even possible that there is no way to make this work consistently, meaning that any choice of weight function would lead to negative mortality hazards.  We expect that this will not be an issue, but we haven't actually tried it with the real data yet.
+
 The following table shows the data needed for these
 calculations.
+
+Data Tables
++++++++++++
 
 .. note::
 
