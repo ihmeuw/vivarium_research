@@ -72,7 +72,7 @@ and sex of simulants to which different aspects of the cause model apply.
 Vivarium Modeling Strategy
 --------------------------
 
-Preterm birth is a PAF-of-one cause, meaning it is 100% attributable to the Low Birth Weight and Short Gestation (LBWSG) risk factor.  In models where this risk factor is included, it is important that only simulants with a LBWSG exposure category corresponding to preterm birth are able to acrrue DALYs from this cause.
+Preterm birth is a PAF-of-one cause, meaning it is 100% attributable to the :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` risk factor.  It is important that only simulants with a gestational age of less than 37 weeks are able to accrue DALYs from this cause.
 
 Key interventions in the MNCNH portfolio are expected to be relevant to preterm birth **with RDS** and therefore we further need to decompose preterm birth burden into "with RDS" and "without RDS" components.
 
@@ -99,6 +99,7 @@ graph to represent the collapsed decision tree
 representing this cause. Unlike a state machine representation, the values on the 
 transition arrows represent decision probabilities rather than rates per 
 unit time.
+Note that these probabilities are not used directly in the model and are included here only for clarity.  If they end up being more confusing than enlightening, we should delete them.
 
 
 .. graphviz::
@@ -148,23 +149,47 @@ unit time.
       - The probability that a simulant who was born alive dies from preterm without RDS during the neonatal period
 
 
-Data Tables
-+++++++++++
+Modeling Strategy
++++++++++++++++++
 
-The Preterm Birth model requires only the probability of death (aka "mortality risk") for use
-in the decision graph. This will be computed from the overall neonatal mortality risk and the cause-specific mortality fraction.
+The Preterm Birth submodel requires only the birth-weight- and gestation-age-stratified cause specific mortality rates for preterm birth complications with and without respiratory distress syndrome during the early and late neonatal periods.
 
-Since this is a PAF-of-one cause, the calculation must take into account the "structural zeros" representing no mortality risk for simulants withe a gestational age above 37 weeks.
+Since this is a PAF-of-one cause, the calculation must take into account the "structural zeros" representing no mortality risk for simulants with a gestational age of 37 or more weeks.
 
-The details of this calculation require information about other subcauses as well as preterm, and therefore are included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.
+The way these CSMRs are used is the same for all subcauses, and therefore is included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.  This page describes the birth-weight- and gestational-age-specific cause specific mortality rates that are used for this cause on that page, :math:`\text{CSMR}^{\text{preterm with RDS}}_{\text{BW},\text{GA}}` and :math:`\text{CSMR}^{\text{preterm without RDS}}_{\text{BW},\text{GA}}`. In both cases, the formula is:
+
+.. math::
+    \begin{align*}
+    \text{CSMR}^{k}_{\text{BW},\text{GA}}
+    &=
+    \begin{cases}
+    \text{CSMR}\cdot f_k \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z, & \text{if BW} < 37; \\
+    0, & \text{if BW} \geq 37;
+    \end{cases}
+    \end{align*}
+
+where :math:`k` is the subcause of interest (preterm birth with or without RDS),
+:math:`\text{CSMR}` is the cause-specific mortality rate for preterm birth complications,
+:math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`\int_{\text{BW<37}} \int_{\text{GA}} \text{RR}_{\text{BW},\text{GA}} \cdot Z = 1`.
+
+.. note::
+  the choice to use :math:`\text{RR}_{\text{BW},\text{GA}}` in this equation is essentially arbitrary, and it could be replaced by any other nonnegative "weight function" :math:`w(\text{BW},\text{GA})` as long it doesn't lead to a negative "other causes" mortality hazard.
+  
+  If we get more specific data about RDS or non-RDS preterm death rates stratified by gestational age, we may want to change these weights to reflect that. The fact that the weight function is arbitrary from a mathematical perspective means that we have a lot of flexibility here to adjust things to work out how we want. Choosing the RRs for the weight function makes the probability of death from this cause equal across (preterm) LBWSG categories, which may or may not be what we want.
+
+  Also, it is possible that the choice of :math:`\text{RR}_{\text{BW},\text{GA}}` might not work for every subcause. Since we're moving all the preterm mortality into the preterm categories, there is less room there for mortality from other causes, so depending on the hazards involved, we may need to shift mortality from some other causes into the non-preterm categories in order to avoid making things negative.
+  It is even possible that there is no way to make this work consistently, meaning that any choice of weight function would lead to negative mortality hazards.  We expect that this will not be an issue, but we haven't actually tried it with the real data yet.
 
 The following table shows the data needed for these
 calculations.
 
+Data Tables
++++++++++++
+
 .. note::
 
   All quantities pulled from GBD in the following table are for a
-  specific year, sex, and location, for the age range 0 to 28 days.
+  specific year, sex, age group, and location.
 
 .. list-table:: Data values and sources
     :header-rows: 1
@@ -173,18 +198,22 @@ calculations.
       - Definition
       - Value or source
       - Note
-    * - mr_total
-      - neonatal mortality risk per live birth
-      - The mortality risk from the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>`
-      - The value of mr is a probability in [0,1]. Denominator includes live births only.
-    * - cause-specific mortality fraction
-      - fraction of all neonatal deaths due to neonatal preterm birth
-      - deaths_c381 / deaths_c380
-      -
-    * - frac_rds
+    * - :math:`\text{CSMR}`
+      - cause-specific mortality rate of preterm birth complications
+      - csmr_c381
+      - from GBD (CodCorrect)
+    * - :math:`f_k`
       - fraction of preterm deaths with RDS
       - XX%
       - This value is not available from GBD and will need to be estimated based on other data sources.
+    * - :math:`\text{RR}_{\text{BW},\text{GA}}`
+      - Relative Risk of all-cause mortality for a birth weight of BW and gestational age of GA
+      - interpolated from GBD data
+      - See :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` page for details.
+    * - :math:`Z`
+      - Normalizing constant
+      - calculated from :math:`\text{RR}_{\text{BW},\text{GA}}` and LBWSG exposure distribution.
+      - see above for details.
 
 
 Calculating Burden
@@ -208,9 +237,13 @@ For simplicity, we will not include YLDs in this model.
 Validation Criteria
 +++++++++++++++++++
 
-* Preterm death count and rate in simulation should match GBD estimates.
+* Preterm deaths per live birth in simulation should match GBD estimates.
 
 * No preterm deaths for simulants with LBWSG categories for gestational ages of 37 weeks or greater.
+
+* Relative Risk of preterm with and without RDS deaths due to LBWSG should match overall neonatal mortality RR.
+
+* Fraction of preterm deaths with RDS should match assumption in data table above.
 
 References
 ----------
