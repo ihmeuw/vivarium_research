@@ -286,9 +286,9 @@ For simplicity, we will not include YLDs in this model.
 Validation Criteria
 +++++++++++++++++++
 
-Neonatal deaths per live birth in simulation should be within 10% of same ratio derived from GBD.  (We don't expect it to match exactly because of (1) our interpolation of the RRs, and (2) we use a constant mortality hazard at each BW-GA level, rather than the GBD's more complex model.)
+Neonatal deaths per live birth in simulation should match corresponding quantity as derived from GBD estimates.
 
-Relative Risk of neonatal death at specific categories of LBWSG exposure should match GBD estimates.
+Relative Risk of neonatal death at specific categories of LBWSG exposure should be within 10% of same ratio derived from GBD.  (We don't expect it to match exactly because of (1) our interpolation of the RRs, and (2) we use a constant mortality hazard at each BW-GA level, rather than the GBD's more complex model.)
 
 References
 ----------

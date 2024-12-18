@@ -180,6 +180,8 @@ where :math:`k` is the subcause of interest (preterm birth with or without RDS),
   Also, it is possible that the choice of :math:`\text{RR}_{\text{BW},\text{GA}}` might not work for every subcause. Since we're moving all the preterm mortality into the preterm categories, there is less room there for mortality from other causes, so depending on the hazards involved, we may need to shift mortality from some other causes into the non-preterm categories in order to avoid making things negative.
   It is even possible that there is no way to make this work consistently, meaning that any choice of weight function would lead to negative mortality hazards.  We expect that this will not be an issue, but we haven't actually tried it with the real data yet.
 
+Each individual simulant :math:`i` has their own :math:`\text{CSMR}_i^k` that might be different from :math:`\text{CSMR}^k_{\text{BW}_i,\text{GA}_i}` (meaning the average birth-weight- and gestational-age-specific CSMR for simulants with the birth weight and gestational age matching simulant :math:`i`.  We recommend implementing this as a pipeline eventually because it will be modified by interventions (or access to interventions) relevant to this subcause.  (Until we implement those, we will have :math:`\text{CSMR}_{i}^k = \text{CSMR}^k_{\text{BW}_i,\text{GA}_i}`, though.)
+
 The following table shows the data needed for these
 calculations.
 
@@ -202,10 +204,14 @@ Data Tables
       - cause-specific mortality rate of preterm birth complications
       - csmr_c381
       - from GBD (CodCorrect)
-    * - :math:`f_k`
+    * - :math:`f_\text{preterm w RDS}`
       - fraction of preterm deaths with RDS
-      - XX%
-      - This value is not available from GBD and will need to be estimated based on other data sources.
+      - 85%
+      - This value is not available from GBD and will need to be estimated based on other data sources. Tentative value of 85% included here is based on Table 4 in `this paper <https://www.sciencedirect.com/science/article/pii/S2214109X19302207>`_.
+    * - :math:`f_\text{preterm wo RDS}`
+      - fraction of preterm deaths without RDS
+      - :math:`1 - f_\text{preterm w RDS}`
+      - fractions sum to 1.0.
     * - :math:`\text{RR}_{\text{BW},\text{GA}}`
       - Relative Risk of all-cause mortality for a birth weight of BW and gestational age of GA
       - interpolated from GBD data
@@ -241,7 +247,7 @@ Validation Criteria
 
 * No preterm deaths for simulants with LBWSG categories for gestational ages of 37 weeks or greater.
 
-* Relative Risk of preterm with and without RDS deaths due to LBWSG should match overall neonatal mortality RR.
+* Relative Risk of preterm with and without RDS deaths due to LBWSG should match overall neonatal mortality RR (when comparing between categories with :math:`GA < 37` weeks).
 
 * Fraction of preterm deaths with RDS should match assumption in data table above.
 
