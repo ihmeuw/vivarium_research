@@ -8,7 +8,7 @@ Neonatal all-cause mortality: GBD 2021, MNCNH
 
     This page is adapted from the :ref:`Maternal disorders: GBD 2021, MNCNH <2021_cause_maternal_disorders_mncnh>` page and is also part of the :ref:`MNCNH Portfolio project
     <2024_concept_model_vivarium_mncnh_portfolio>`.  In this work we are modeling
-    several neonatal subcauses (see `Modeled Subcauses`_) which is complicated because the :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` in GBD acts on all-cause mortality during the neonatal period.
+    several neonatal subcauses (see `Modeled Subcauses`_) which is complicated because the :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` risk factor in GBD acts on all-cause mortality during the neonatal period.
 
 .. contents::
    :local:
@@ -184,7 +184,7 @@ unit time.
 Modeling Strategy
 +++++++++++++++++
 
-The neonatal death model requires only the probability of death (aka "mortality risk") for the early and late neonatal time periods.  But computing this for an individual simulant is a bit complicated.  It will follow the pattern from the general mortality component in :code:`vivarium_public_health`, and work in rate space to make the math simpler.  The final step will be converting from rates to risks.
+The neonatal death model requires only the probability of death (aka "mortality risk") for the early and late neonatal time periods.  But computing this for an individual simulant is a bit complicated.  It will follow the pattern from the general mortality component in :code:`vivarium_public_health`, and work in rate space to make the math simpler.  The final step will be converting from rates to risks:
 
 .. math::
     \begin{align*}
@@ -202,7 +202,7 @@ The calculation of :math:`\text{ACMR}_i` is a bit complicated, however. We begin
 
 where :math:`\text{ACMR}_{\text{BW},\text{GA}}` is the all-cause mortality rate for a population with birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`, :math:`\text{ACMR}` is the all-cause mortality rate for the total population, :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, and :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative mortality rate for a specific birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`.
 
-To obtain the ACMR for a specific simulant, we subtract off the *population* CSMRs for each modeled subcause for the birth weight and gestational age of the simulant, and then add back in the (potentially pipeline-modified) *individual* CSMRs for the specific simulant, which might differ from baseline due to intervention coverage.
+To obtain the ACMR for a specific simulant, we subtract off the *population* CSMRs for each modeled subcause for the birth weight and gestational age of the simulant, and then add back in the (potentially pipeline-modified) *individual* CSMRs for the specific simulant, which might differ from baseline due to intervention coverage:
 
 .. math::
     \begin{align*}
