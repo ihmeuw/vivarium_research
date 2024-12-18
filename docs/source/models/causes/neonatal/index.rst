@@ -133,6 +133,7 @@ unit time.
 .. graphviz::
 
     digraph NN_decisions {
+        graph [size="7,5"]
         rankdir = LR;
         lb [label="live birth", style=dashed]
         enn_alive [label="neonate survived\nfirst 7 days"]
@@ -214,6 +215,7 @@ where :math:`\text{BW}_i` and :math:`\text{BW}_i` are the birth weight and gesta
 :math:`\text{CSMR}_{\text{BW}_i,\text{GA}_i}^{k}` is the cause-specific mortality rate for subcause :math:`k` for a population with the same gestational age and birth weight as this simulant, 
 and :math:`\text{CSMR}_{i}^{k}` is the cause-specific mortality rate for subcause :math:`k` for simulant :math:`i` (both detailed in the `Modeled Subcauses`_
 linked from this page).
+
 
 In addition to determining which simulants die due to any cause, we also need to determine which subcause is underlying the death.  This is done by sampling from a categorical distribution obtained by renormalizing the CSMRs:
 
