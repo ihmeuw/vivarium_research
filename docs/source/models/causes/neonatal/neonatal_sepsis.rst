@@ -181,7 +181,7 @@ Data Tables
       - Value or source
       - Note
     * - :math:`\text{CSMR}`
-      - cause-specific mortality rate of preterm birth complications
+      - cause-specific mortality rate of neonatal sepsis and other neonatal infections
       - csmr_c383
       - from GBD (CodCorrect)
     * - :math:`\text{RR}_{\text{BW},\text{GA}}`
