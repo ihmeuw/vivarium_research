@@ -478,7 +478,7 @@ V&V Checks:
 
 2. :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`
 
-  a. :ref:`Neonatal Sepsis and Other Infections Model <2021_cause_obstructed_labor_mncnh>`
+  a. :ref:`Neonatal Sepsis and Other Infections Model <2021_cause_neonatal_sepsis_mncnh>`
   b. :ref:`Neonatal Encephalopathy Model <2021_cause_neonatal_encephalopathy_mncnh>`
   c. :ref:`Preterm Birth <2021_cause_preterm_birth_mncnh>`
 
