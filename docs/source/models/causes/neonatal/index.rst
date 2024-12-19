@@ -136,14 +136,26 @@ unit time.
         rankdir = TB;
         lb [label="live birth", style=dashed]
         enn_alive [label="neonate survived\nfirst 7 days"]
-        enn_dead [label="neonate died\nduring first 7 days"]
         lnn_alive [label="neonate survived\nfirst 28 days"]
-        lnn_dead [label="neonate died\nduring first 28 days"]
+        dead [label="neonate died"]
+        died_of_subcause_0 [label="neonate died\nof subcause 0"]
+        died_of_subcause_1 [label="neonate died\nof subcause 1"]
+        died_of_subcause_K [label="neonate died\nof subcause K"]
+
+        {rank=same;
+        died_of_subcause_0
+        died_of_subcause_1
+        died_of_subcause_K
+        }
 
         lb -> enn_alive  [label = "1 - enn_mr"]
-        lb -> enn_dead [label = "enn_mr"]
+        lb -> dead [label = "enn_mr"]
         enn_alive -> lnn_alive [label = "1 - lnn_mr"]
-        enn_alive -> lnn_dead [label = "lnn_mr"]
+        enn_alive -> dead [label = "lnn_mr"]
+        dead -> died_of_subcause_0 [label="p_0"]
+        dead -> died_of_subcause_1 [label="p_1"]
+        dead -> died_of_subcause_K [label="p_K"]
+        died_of_subcause_1 -> died_of_subcause_K [color="none", label="..."]
     }
 
 .. list-table:: Decision Point Definitions
@@ -158,13 +170,13 @@ unit time.
         intrapartum step of the :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`)
     * - neonate survived first 7 days
-      - The child simulant survived for the first 7 days of life
-    * - neonate died during first 7 days
-      - The child simulant died within the first 7 days of life
+      - The simulant survived for the first 7 days of life
     * - neonate survived first 28 days
-      - The child simulant survived for the first 28 days of life
-    * - neonate died during first 28 days
-      - The child simulant died between day 8 and 28 of life
+      - The simulant survived for the first 28 days of life
+    * - neonate died
+      - The simulant died during the first 28 days of life
+    * - neonate died of subcause k
+      - The simulant died due to cause :math:`k` for :math:`k = 0, 1, \ldots, K`. (Here :math:`k = 0` denotes a residual "all other causes" category.)
 
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20
@@ -179,6 +191,9 @@ unit time.
     * - lnn_mr
       - mortality risk during the late neonatal period
       - The probability that a simulant who was born alive dies between day 8 to 28 of life
+    * - p_k
+      - cause-specific mortality fraction
+      - The probability that a simulant death was due to cause :math:`k`
 
 
 Modeling Strategy
