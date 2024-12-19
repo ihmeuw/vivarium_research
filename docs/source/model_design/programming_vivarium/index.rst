@@ -51,6 +51,20 @@ things.
 - `Repository <https://github.com/ihmeuw/vivarium>`__
 - `Documentation <https://vivarium.readthedocs.io/en/latest/>`__
 
+.. image:: https://badge.fury.io/py/vivarium.svg
+    :target: https://badge.fury.io/py/vivarium
+
+.. image:: https://github.com/ihmeuw/vivarium/actions/workflows/build.yml/badge.svg?branch=main
+    :target: https://github.com/ihmeuw/vivarium
+    :alt: Latest Version
+
+.. image:: https://readthedocs.org/projects/vivarium/badge/?version=latest
+    :target: https://vivarium.readthedocs.io/en/latest/?badge=latest
+    :alt: Latest Docs
+
+.. image:: https://zenodo.org/badge/96817805.svg
+   :target: https://zenodo.org/badge/latestdoi/96817805
+
 Vivarium Public Health
 ++++++++++++++++++++++
 
@@ -63,6 +77,40 @@ data artifacts.
 - `Repository <https://github.com/ihmeuw/vivarium_public_health>`__
 - `Documentation <https://vivarium.readthedocs.io/projects/vivarium-public-health/en/latest/>`__
 
+.. image:: https://badge.fury.io/py/vivarium-public-health.svg
+    :target: https://badge.fury.io/py/vivarium-public-health
+
+.. image:: https://github.com/ihmeuw/vivarium_public_health/actions/workflows/build.yml/badge.svg?branch=main
+    :target: https://github.com/ihmeuw/vivarium_public_health
+    :alt: Latest Version
+
+.. image:: https://readthedocs.org/projects/vivarium_public_health/badge/?version=latest
+    :target: https://vivarium_public_health.readthedocs.io/en/latest/?badge=latest
+    :alt: Latest Docs
+
+.. image:: https://zenodo.org/badge/141212278.svg
+   :target: https://zenodo.org/badge/latestdoi/141212278
+
+Vivarium Cluster Tools
+++++++++++++++++++++++
+
+Vivarium Cluster Tools contains command line tools for running Vivarium
+simulations in parallel using IHME's cluster. It contains documentation
+describing how this is done, as well as how YAML files and branches files work.
+
+- `Repository <https://github.com/ihmeuw/vivarium_cluster_tools>`__
+- `Documentation <https://vivarium-cluster-tools.readthedocs.io/en/latest/>`__
+
+.. image:: https://badge.fury.io/py/vivarium-cluster-tools.svg
+    :target: https://badge.fury.io/py/vivarium-cluster-tools
+
+.. image:: https://github.com/ihmeuw/vivarium_cluster_tools/actions/workflows/build.yml/badge.svg?branch=main
+    :target: https://github.com/ihmeuw/vivarium_cluster_tools
+    :alt: Latest Version
+
+.. image:: https://readthedocs.org/projects/vivarium-cluster-tools/badge/?version=latest
+    :target: https://vivarium-cluster-tools.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 Vivarium Inputs
 +++++++++++++++
@@ -77,17 +125,16 @@ helpful tutorial here for pulling data using these functions, too.
 - `Repository <https://github.com/ihmeuw/vivarium_inputs>`__
 - `Documentation <https://vivarium.readthedocs.io/projects/vivarium-inputs/en/latest/>`__
 
+.. image:: https://badge.fury.io/py/vivarium-inputs.svg
+    :target: https://badge.fury.io/py/vivarium-inputs
 
-Vivarium Cluster Tools
-++++++++++++++++++++++
+.. image:: https://github.com/ihmeuw/vivarium_inputs/actions/workflows/build.yml/badge.svg?branch=main
+    :target: https://github.com/ihmeuw/vivarium_inputs
+    :alt: Latest Version
 
-Vivarium Cluster Tools contains command line tools for running Vivarium
-simulations in parallel using IHME's cluster. It contains documentation
-describing how this is done, as well as how YAML files and branches files work.
-
-- `Repository <https://github.com/ihmeuw/vivarium_cluster_tools>`__
-- `Documentation <https://vivarium-cluster-tools.readthedocs.io/en/latest/>`__
-
+.. image:: https://readthedocs.org/projects/vivarium_inputs/badge/?version=latest
+    :target: https://vivarium_inputs.readthedocs.io/en/latest/?badge=latest
+    :alt: Latest Docs
 
 GBD Mapping
 +++++++++++
@@ -100,3 +147,14 @@ repositories, especially Vivarium Inputs.
 
 - `Repository <https://github.com/ihmeuw/gbd_mapping>`__
 - `Documentation <https://vivarium.readthedocs.io/projects/gbd-mapping/en/latest/gbd_mapping.html>`__
+
+.. image:: https://badge.fury.io/py/gbd-mapping.svg
+    :target: https://badge.fury.io/py/gbd-mapping
+
+.. image:: https://github.com/ihmeuw/gbd_mapping/actions/workflows/build.yml/badge.svg?branch=main
+    :target: https://github.com/ihmeuw/gbd_mapping
+    :alt: Latest Version
+
+.. image:: https://readthedocs.org/projects/gbd_mapping/badge/?version=latest
+    :target: https://gbd_mapping.readthedocs.io/en/latest/?badge=latest
+    :alt: Latest Docs
