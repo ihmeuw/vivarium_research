@@ -78,7 +78,7 @@ Scope
 +++++
 
 The Level 4 neonatal conditions included in the MNCNH Portfolio model are closely linked to the 
-:ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>`.  Since the LBWSG Risk Factor has an effect on overall neonatal mortality, this subcause will have a baseline mortality fraction that can be combined with the overall mortality risk to determine the population mortality risk for individuals with a given LBWSG exposure.  This might then be further individualized based on treatment coverage and efficacy, to ensure that individuals who have access to a treatment like antibiotics have a lower risk of mortality from neonatal sepsis than those who do not.
+:ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>`.  Since the LBWSG Risk Factor has an effect on overall neonatal mortality, this subcause will define a birth-weight- and gestational-age-specific cause specific mortality rate that the Overall Neonatal Disorders Model can use.  This risk-specific CSMR might then be further individualized based on treatment coverage and efficacy, to ensure that individuals who have access to a treatment like antibiotics have a lower risk of mortality from neonatal sepsis than those who do not.
 
 
 Assumptions and Limitations
@@ -86,7 +86,7 @@ Assumptions and Limitations
 
 Focusing solely on YLLs will likely underestimate the total burden of sepsis and, consequently, the DALYs averted by interventions that reduce sepsis risk. However, we anticipate this underestimation to be less than 10%.
 
-Our approach of dividing overall mortality risk into subcause-specific mortality risks is an approximation that may either overestimate or underestimate the burden of sepsis, depending on the other included causes and their order of consideration. Given that these mortality risks are relatively small, we expect this to result in an error of less than 1%.
+We assume that the relationship between LBWSG and sepsis CSMR follow the relationship between LBWSG and all-cause mortality during the neonatal period, and could be refined with additional data.
 
 
 Cause Model Decision Graph
@@ -97,6 +97,7 @@ graph to represent the collapsed decision tree
 representing this cause. Unlike a state machine representation, the values on the 
 transition arrows represent decision probabilities rather than rates per 
 unit time.
+Note that these probabilities are not used directly in the model and are included here only for clarity.  If they end up being more confusing than enlightening, we should delete them.
 
 
 .. graphviz::
@@ -123,7 +124,7 @@ unit time.
         intrapartum step of the :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`)
     * - neonate did not die of sepsis
-      - The child simulant did not die of sepsis for the first 28 days of life
+      - The child simulant did not die of sepsis within the first 28 days of life
     * - neonate died of sepsis
       - The child simulant died of sepsis within the first 28 days of life
 
@@ -139,23 +140,40 @@ unit time.
       - The probability that a simulant who was born alive dies from this cause during the neonatal period
 
 
-Data Tables
-+++++++++++
+Modeling Strategy
++++++++++++++++++
 
-The Neonatal Sepsis model requires only the probability of death (aka "mortality risk") for use
-in the decision graph. This will be computed from the overall neonatal mortality risk and the cause-specific mortality fraction for sepsis.
+The Neonatal Sepsis submodel requires only the birth-weight- and gestation-age-stratified cause specific mortality rates for sepsis during the early and late neonatal periods.
+
+The way these CSMRs are used is the same for all subcauses, and therefore is included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.  This page describes the birth-weight- and gestational-age-specific cause specific mortality rates that are used for this cause on that page, :math:`\text{CSMR}^{\text{sepsis}}_{\text{BW},\text{GA}}`.
+The formula is:
 
 .. math::
-    \text{mr}_\text{sepsis} = \text{mr}_\text{total} \cdot (\text{cause-specific mortality fraction}).
+    \begin{align*}
+    \text{CSMR}_{\text{BW},\text{GA}}
+    &=
+    \text{CSMR} \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z
+    \end{align*}
 
+where 
+:math:`\text{CSMR}` is the cause-specific mortality rate for sepsis,
+:math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`\int_{\text{BW}} \int_{\text{GA}} \text{RR}_{\text{BW},\text{GA}} \cdot Z = 1`.
+
+.. note::
+  the choice to use :math:`\text{RR}_{\text{BW},\text{GA}}` in this equation is essentially arbitrary, and it could be replaced by any other nonnegative "weight function" :math:`w(\text{BW},\text{GA})` as long it doesn't lead to a negative "other causes" mortality hazard.  But with this choice, :math:`Z` is equal to the :math:`1-\text{PAF}` of LBWSG on all-cause mortality.
+
+Each individual simulant :math:`i` has their own :math:`\text{CSMR}_i` that might be different from :math:`\text{CSMR}_{\text{BW}_i,\text{GA}_i}` (meaning the average birth-weight- and gestational-age-specific CSMR for simulants with the birth weight and gestational age matching simulant :math:`i`.  We recommend implementing this as a pipeline eventually because it will be modified by interventions (or access to interventions) relevant to this subcause.  (Until we implement those, we will have :math:`\text{CSMR}_{i} = \text{CSMR}_{\text{BW}_i,\text{GA}_i}`, though.)
 
 The following table shows the data needed for these
 calculations.
 
+Data Tables
++++++++++++
+
 .. note::
 
   All quantities pulled from GBD in the following table are for a
-  specific year, sex, and location, for the age range 0 to 28 days.
+  specific year, sex, age group, and location.
 
 .. list-table:: Data values and sources
     :header-rows: 1
@@ -164,15 +182,18 @@ calculations.
       - Definition
       - Value or source
       - Note
-    * - mr_total
-      - neonatal mortality risk per live birth
-      - The mortality risk from the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>`
-      - The value of mr is a probabiity in [0,1]. Denominator includes live births only.
-    * - cause-specific mortality fraction
-      - fraction of all neonatal deaths due to neonatal sepsis
-      - deaths_c383 / deaths_c380
-      -
-        
+    * - :math:`\text{CSMR}`
+      - cause-specific mortality rate of neonatal sepsis and other neonatal infections
+      - csmr_c383
+      - from GBD (CodCorrect)
+    * - :math:`\text{RR}_{\text{BW},\text{GA}}`
+      - Relative Risk of all-cause mortality for a birth weight of BW and gestational age of GA
+      - interpolated from GBD data
+      - See :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` page for details.
+    * - :math:`Z`
+      - Normalizing constant
+      - calculated from :math:`\text{RR}_{\text{BW},\text{GA}}` and LBWSG exposure distribution.
+      - see above for details.
 
 Calculating Burden
 ++++++++++++++++++
@@ -195,7 +216,9 @@ For simplicity, we will not include YLDs in this model.
 Validation Criteria
 +++++++++++++++++++
 
-Neonatal Sepsis death count and rate in simulation should match GBD estimates.
+* Neonatal Sepsis deaths per live birth in simulation should match GBD estimates.
+
+* Relative Risk of Neonatal Sepsis death due to LBWSG should match overall neonatal mortality RR.
 
 References
 ----------

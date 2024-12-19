@@ -8,24 +8,22 @@ Neonatal all-cause mortality: GBD 2021, MNCNH
 
     This page is adapted from the :ref:`Maternal disorders: GBD 2021, MNCNH <2021_cause_maternal_disorders_mncnh>` page and is also part of the :ref:`MNCNH Portfolio project
     <2024_concept_model_vivarium_mncnh_portfolio>`.  In this work we are modeling
-    several neonatal subcauses (see Modeled
-    Subcauses) which is complicated because the LBWSG risk factor in GBD acts on all-cause mortality during the neonatal period.
+    several neonatal subcauses (see `Modeled Subcauses`_) which is complicated because the :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` risk factor in GBD acts on all-cause mortality during the neonatal period.
 
 .. contents::
    :local:
 
 This document describes neonatal disorders overall and
-
-the strategy for capturing the burden of the neonatal subcauses in a manner that also is calibrated to match all-cause mortality and the LBWSG risk effect on all-cause mortality.
+the strategy for capturing the burden of the neonatal subcauses in a manner that also is calibrated to match all-cause mortality and our continuous (interpolated) LBWSG risk effect on all-cause mortality.
 
 Disease Overview
 ----------------
-This model captures deaths due to any cause that occur during the first 28 days of life. The Low Birth Weight and Short Gestation (LBWSG) risk factor provides a single relative risk for all neonatal deaths, and the way we plan to use it is by applying to this all-cause neonatal mortality model.
+This model captures deaths due to any cause that occur during the first 28 days of life. The Low Birth Weight and Short Gestation (LBWSG) risk factor provides a single relative risk for all neonatal deaths, and this all-cause neonatal mortality model describes how we can include it in our simulations.
 
 GBD 2021 Modeling Strategy
 --------------------------
 
-I guess this comes from the demographics research team.
+The all-cause neonatal mortality estimates are produced by the demographics research team.  The cause-specific mortality for neonatal subcauses are estimated using the Cause of Death Ensemble model (CODEm) process.  The low-birth weight and short gestation risk factor exposure and effect size was estimated by yet another GBD team.
 
 Cause Hierarchy
 +++++++++++++++
@@ -135,18 +133,29 @@ unit time.
 .. graphviz::
 
     digraph NN_decisions {
-        graph [size="7,5"]
-        rankdir = LR;
+        rankdir = TB;
         lb [label="live birth", style=dashed]
         enn_alive [label="neonate survived\nfirst 7 days"]
-        enn_dead [label="neonate died\nduring first 7 days"]
         lnn_alive [label="neonate survived\nfirst 28 days"]
-        lnn_dead [label="neonate died\nduring first 28 days"]
+        dead [label="neonate died"]
+        died_of_subcause_0 [label="neonate died\nof subcause 0"]
+        died_of_subcause_1 [label="neonate died\nof subcause 1"]
+        died_of_subcause_K [label="neonate died\nof subcause K"]
+
+        {rank=same;
+        died_of_subcause_0
+        died_of_subcause_1
+        died_of_subcause_K
+        }
 
         lb -> enn_alive  [label = "1 - enn_mr"]
-        lb -> enn_dead [label = "enn_mr"]
+        lb -> dead [label = "enn_mr"]
         enn_alive -> lnn_alive [label = "1 - lnn_mr"]
-        enn_alive -> lnn_dead [label = "lnn_mr"]
+        enn_alive -> dead [label = "lnn_mr"]
+        dead -> died_of_subcause_0 [label="p_0"]
+        dead -> died_of_subcause_1 [label="p_1"]
+        dead -> died_of_subcause_K [label="p_K"]
+        died_of_subcause_1 -> died_of_subcause_K [color="none", label="..."]
     }
 
 .. list-table:: Decision Point Definitions
@@ -161,13 +170,13 @@ unit time.
         intrapartum step of the :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`)
     * - neonate survived first 7 days
-      - The child simulant survived for the first 7 days of life
-    * - neonate died during first 7 days
-      - The child simulant died within the first 7 days of life
+      - The simulant survived for the first 7 days of life
     * - neonate survived first 28 days
-      - The child simulant survived for the first 28 days of life
-    * - neonate died during first 28 days
-      - The child simulant died between day 8 and 28 of life
+      - The simulant survived for the first 28 days of life
+    * - neonate died
+      - The simulant died during the first 28 days of life
+    * - neonate died of subcause k
+      - The simulant died due to cause :math:`k` for :math:`k = 0, 1, \ldots, K`. (Here :math:`k = 0` denotes a residual "all other causes" category.)
 
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20
@@ -182,48 +191,60 @@ unit time.
     * - lnn_mr
       - mortality risk during the late neonatal period
       - The probability that a simulant who was born alive dies between day 8 to 28 of life
+    * - p_k
+      - cause-specific mortality fraction
+      - The probability that a simulant death was due to cause :math:`k`
 
 
-Data Tables
-+++++++++++
+Modeling Strategy
++++++++++++++++++
 
-The neonatal death model requires only the probability of death (aka "mortality risk") for the early and late neonatal time periods.  But computing this for an individual simulant is a bit complicated.  It will follow the pattern from the general mortality component in :code:`vivarium_public_health`, and work in rate space to make the math simpler.  The final step will be converting from rates to risks.
+The neonatal death model requires only the probability of death (aka "mortality risk") for the early and late neonatal time periods.  But computing this for an individual simulant is a bit complicated.  It will follow the pattern from the general mortality component in :code:`vivarium_public_health`, and work in rate space to make the math simpler.  The final step will be converting from rates to risks:
 
 .. math::
     \begin{align*}
-    \text{mr}_i &= 1-\exp(-\text{ACMR}_i \Delta t),
+    \text{mr}_i &= 1-\exp(-\text{ACMR}_i \cdot \Delta t),
     \end{align*}
 
 where :math:`\text{mr}_i` is the probability of mortality for simulant :math:`i` during the early or late neonatal period, :math:`\text{ACMR}_i` is the all-cause mortality rate for the early or late neonatal period, and :math:`\Delta t` is length of that period in years.
 
-The calculation of :math:`\text{ACMR}_i` is a bit complicated, however. We begin with a population ACMR and use the LBWSG PAF to derive a risk-deleted ACMR to which we can then apply the relative risk of LBWSG matching each risk exposure category.  Mathematically this is achieved by the following formula:
+The calculation of :math:`\text{ACMR}_i` is a bit complicated, however. We begin with a population ACMR and use the LBWSG PAF to derive a risk-deleted ACMR to which we can then apply the relative risk of LBWSG matching any risk exposure level.  Mathematically this is achieved by the following formula:
 
 .. math::
     \begin{align*}
-    \text{ACMR}_j &= \text{ACMR} \times (1 - \text{PAF}_{\text{LBWSG}}) \times \text{RR}_{\text{LBWSG},j},
+    \text{ACMR}_{\text{BW},\text{GA}} &= \text{ACMR} \times (1 - \text{PAF}_{\text{LBWSG}}) \times \text{RR}_{\text{BW},\text{GA}},
     \end{align*}
 
-where :math:`\text{ACMR}_j` is the all-cause mortality rate for the population with LBWSG exposure category :math:`j`, :math:`\text{ACMR}` is the all-cause mortality rate for the total population, :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, and :math:`\text{RR}_{\text{LBWSG},j}` is the relative mortality rate for LBWSG.
+where :math:`\text{ACMR}_{\text{BW},\text{GA}}` is the all-cause mortality rate for a population with birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`, :math:`\text{ACMR}` is the all-cause mortality rate for the total population, :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, and :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative mortality rate for a specific birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`.
 
-To obtain the ACMR for a specific simulant, we subtract off the *population* CSMRs for each modeled subcause for the LBWSG exposure level of the simulant, and then add back in the (potentially pipeline-modified) *individual* CSMRs for the specific simulant, which might differ from baseline due to intervention coverage.
+To obtain the ACMR for a specific simulant, we subtract off the *population* CSMRs for each modeled subcause for the birth weight and gestational age of the simulant, and then add back in the (potentially pipeline-modified) *individual* CSMRs for the specific simulant, which might differ from baseline due to intervention coverage:
 
 .. math::
     \begin{align*}
-    \text{ACMR}_i &= \text{ACMR}_j - \sum_k \text{CSMR}_{k,j}^{\text{population}}
-    + \sum_k \text{CSMR}_{k,i},^{\text{individual}}
+    \text{ACMR}_i &= \text{ACMR}_{\text{BW}_i,\text{GA}_i} - \sum_k \text{CSMR}_{\text{BW}_i,\text{GA}_i}^{k}
+    + \sum_k \text{CSMR}_{i}^{k},
     \end{align*}
 
-where :math:`\text{CSMR}_{k,j}^{\text{population}}` is the cause-specific mortality rate for subcause :math:`k` for the population with LBWSG exposure category :math:`j`, and :math:`\text{CSMR}_{k,i}^{\text{individual}}` is the cause-specific mortality rate for subcause :math:`k` for simulant :math:`i` (both detailed in the subcause models linked from this page). (Also note that simulant :math:`i` is assumed to be in LBWSG exposure category :math:`j`.)
+where :math:`\text{BW}_i` and :math:`\text{BW}_i` are the birth weight and gestational age for simulant :math:`i`,
+:math:`\text{CSMR}_{\text{BW}_i,\text{GA}_i}^{k}` is the cause-specific mortality rate for subcause :math:`k` for a population with the same gestational age and birth weight as this simulant, 
+and :math:`\text{CSMR}_{i}^{k}` is the cause-specific mortality rate for subcause :math:`k` for simulant :math:`i` (both detailed in the `Modeled Subcauses`_
+linked from this page).
+
 
 In addition to determining which simulants die due to any cause, we also need to determine which subcause is underlying the death.  This is done by sampling from a categorical distribution obtained by renormalizing the CSMRs:
 
 .. math::
     \begin{align*}
-    \text{Pr}[\text{subcause} = k\;|\;\text{neonate died}] &= \frac{\text{CSMR}_{k,i}^{\text{individual}}}
+    \text{Pr}[\text{subcause} = k\;|\;\text{neonate died}] &= \frac{\text{CSMR}_{i}^{k}}
     {\text{ACMR}_i},
     \end{align*}
 
-including a special :math:`k=0` for the residual "all other causes" category.
+including a special :math:`k=0` for the residual "all other causes" category defined by :math:`\text{CSMR}_{i}^{0} = \text{ACMR}_i - \sum_{k=1}^K \text{CSMR}_{i}^{k}.`
+
+
+Data Tables
++++++++++++
+
 .. note::
 
   All quantities pulled from GBD in the following table are for a
@@ -236,23 +257,23 @@ including a special :math:`k=0` for the residual "all other causes" category.
       - Definition
       - Value or source
       - Note
-    * - ACMR
+    * - :math:`\text{ACMR}`
       - all-cause mortality rate (per person year)
       - GBD
       -
-    * - PAF_LBWSG
+    * - :math:`\text{PAF}_\text{LBWSG}`
       - population attributable fraction of all-cause mortality for low birth weight and short gestation
-      - Computed to be consistent with GBD
+      - computed so that PAF = 1 - 1 / E(RR) from the interpolated relative risk function (with expectation taken over the distribution of LBWSG exposure)
       -
-    * - RR_LBWSG
+    * - :math:`\text{RR}_{\text{BW},\text{GA}}`
       - relative risk of all-cause mortality for low birth weight and short gestation
-      - GBD
+      - interpolated from GBD values, as described in :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` docs
       -
-    * - CSMR_k,j_population
-      - cause-specific mortality rate for subcause k, for LBWSG exposure j at the population level
+    * - :math:`\text{CSMR}^k_{\text{BW},\text{GA}}`
+      - cause-specific mortality rate for subcause k, for population with birth weight BW and gestational age GA
       - GBD + assumption about relative risks
       - see subcause models for details
-    * - CSMR_k,i_individual
+    * - :math:`\text{CSMR}^k_i`
       - cause-specific mortality rate for subcause k, for individual i
       - GBD + assumption about relative risks + intervention model effects
       - see subcause models for details
@@ -280,7 +301,9 @@ For simplicity, we will not include YLDs in this model.
 Validation Criteria
 +++++++++++++++++++
 
-Neonatal mortality counts and rate in simulation should match GBD estimates.
+Neonatal deaths per live birth in simulation should match corresponding quantity as derived from GBD estimates.
+
+Relative Risk of neonatal death at specific categories of LBWSG exposure should be within 10% of same ratio derived from GBD.  (We don't expect it to match exactly because of (1) our interpolation of the RRs, and (2) we use a constant mortality hazard at each BW-GA level, rather than the GBD's more complex model.)
 
 References
 ----------
