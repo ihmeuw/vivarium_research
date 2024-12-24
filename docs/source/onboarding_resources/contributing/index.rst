@@ -37,7 +37,7 @@ the commands below.
 
 ::
 
-   $> conda create -y --name=vivarium_research python=3.8
+   $> conda create -y --name=vivarium_research python graphviz pandoc
    $> conda activate vivarium_research
    (vivarium_research) $> git clone https://github.com/ihmeuw/vivarium_research.git
    (vivarium_research) $> cd vivarium_research
@@ -88,13 +88,14 @@ Use these commands to build your page with edits:
 
    (base) $> cd vivarium_research/docs
    (base) $> conda activate vivarium_research #This line is only needed if vivarium_research has not been activated yet
-   (vivarium_research) $> make html
+   (vivarium_research) $> sphinx-autobuild source build/html
 
 This will create a new ``build`` sub-directory with the new documentation
-rendered in html.  You can open the file `vivarium_research/docs/build/html/index.html` in your
-browser to view your changes. 
+rendered in html, and will open a browser window with the result.
+It should automatically update as you save edits to reStructuredText files, though occasionally
+you may need to manually delete ``build`` and re-run the command.
 
-Note that any warnings in your terminal after the `make html` command will cause the build to 
+Note that any warnings in your terminal will cause the build to 
 fail in GitHub. These include issues like duplicated references. Be sure to check for and correct 
 any warnings you may get before moving on! 
 
