@@ -37,7 +37,7 @@ the commands below.
 
 ::
 
-   $> conda create -y --name=vivarium_research python graphviz
+   $> conda create -y --name=vivarium_research python=3.13 graphviz
    $> conda activate vivarium_research
    (vivarium_research) $> git clone https://github.com/ihmeuw/vivarium_research.git
    (vivarium_research) $> cd vivarium_research
