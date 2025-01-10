@@ -55,6 +55,8 @@ extensions = [
     'sphinx.ext.graphviz',
     'matplotlib.sphinxext.plot_directive',
     'sphinx_rtd_theme',
+    'nbsphinx',
+    'IPython.sphinxext.ipython_console_highlighting',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -82,7 +84,10 @@ language = "en"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = []
+exclude_patterns = [
+    # Exclude notebook meant for download only, not rendering
+    "model_design/vivarium_model_components/risk_factors/risk_correlation/bias_quantification.ipynb",
+]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
