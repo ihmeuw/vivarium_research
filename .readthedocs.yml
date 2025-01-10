@@ -10,6 +10,7 @@ build:
     python: "3.13"
   apt_packages:
     - graphviz
+    - pandoc
 
 python:
   install:
