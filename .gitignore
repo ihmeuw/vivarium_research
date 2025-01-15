@@ -113,6 +113,3 @@ venv.bak/
 
 # Mac OS stuff
 .DS_Store
-
-# Data
-*.hdf
