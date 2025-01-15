@@ -117,7 +117,7 @@ Key features of the model include:
 
 - The "with_condition" state can be used as a risk exposure
 - Treatment state has no excess mortality or disability weight relative to susceptible
-- State membership is determined by prevalence data and treatment ratios loaded from artifact (designed to be internally consistent and to match GBD 2021 estimates)
+- State membership is determined by prevalence data and treatment ratios designed to be internally consistent and to match GBD 2021 estimates
 
 
 4 Data Notes
