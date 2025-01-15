@@ -163,14 +163,14 @@ The way these CSMRs are used is the same for all subcauses, and therefore is inc
     \text{CSMR}^{k}_{\text{BW},\text{GA}}
     &=
     \begin{cases}
-    \text{CSMR}\cdot f_k \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z, & \text{if BW} < 37; \\
-    0, & \text{if BW} \geq 37;
+    \text{CSMR}\cdot f_k \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z, & \text{if GA} < 37; \\
+    0, & \text{if GA} \geq 37;
     \end{cases}
     \end{align*}
 
 where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 :math:`\text{CSMR}` is the cause-specific mortality rate for preterm birth complications,
-:math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`\int_{\text{BW<37}} \int_{\text{GA}} \text{RR}_{\text{BW},\text{GA}} \cdot Z = 1`.
+:math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`\int_{\text{GA<37}} \int_{\text{BW}} \text{RR}_{\text{BW},\text{GA}} \cdot Z = 1`.
 
 .. note::
   the choice to use :math:`\text{RR}_{\text{BW},\text{GA}}` in this equation is essentially arbitrary, and it could be replaced by any other nonnegative "weight function" :math:`w(\text{BW},\text{GA})` as long it doesn't lead to a negative "other causes" mortality hazard.
