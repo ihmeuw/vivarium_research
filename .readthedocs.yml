@@ -15,6 +15,7 @@ python:
   install:
     - requirements: requirements.txt
 
-# Doc builds will fail if there are any warnings
 sphinx:
+  configuration: docs/source/conf.py
+  # Doc builds will fail if there are any warnings
   fail_on_warning: true
