@@ -116,7 +116,7 @@ The core disease model represents opioid use disorder as a state machine with th
 Key features of the model include:
 
 - The "with_condition" state can be used as a risk exposure
-- Treatment state has no excess mortality or disability weight relative to baseline
+- Treatment state has no excess mortality or disability weight relative to susceptible
 - State membership is determined by prevalence data and treatment ratios loaded from artifact (designed to be internally consistent and to match GBD 2021 estimates)
 
 
