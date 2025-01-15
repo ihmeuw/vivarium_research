@@ -40,6 +40,18 @@ Medications for Opioid Use Disorder (MOUD) Simulation
   :depth: 1
 
 
+.. list-table:: Abbreviations
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+  * - MOUD
+    - Medications for Opioid Use Disorder
+  * - OUD
+    - Opioid Use Disorder
+
+
+
 
 1 Overview
 ++++++++++
@@ -128,6 +140,7 @@ The model requires the following data streams:
 - Overall OUD prevalence
 - Treatment coverage ratios
 - Transition rates:
+
   - Treatment initiation
   - Treatment failure
   - Treatment success
@@ -163,15 +176,3 @@ TK - Discussion of model limitations and assumptions
 
 7 References/Other
 ++++++++++++++++++
-
-.. list-table:: Abbreviations
-  :header-rows: 1
-
-  * - Abbreviation
-    - Definition
-  * - MOUD
-    - Medications for Opioid Use Disorder
-  * - OUD
-    - Opioid Use Disorder
-
-
