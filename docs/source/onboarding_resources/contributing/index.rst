@@ -32,7 +32,8 @@ If you want to add or modify documentation, you'll first need to clone and
 install this repository.  As always, you should do this in a clean environment.
 
 Start by opening the terminal of your choosing. If you want more information on 
-this, check out this :ref:`page on terminals <terminal_access>`.
+this, check out this :ref:`page on terminals <terminal_access>`.  Then enter 
+the commands below. 
 
 .. include:: ../../../../README.rst
    :start-after: .. _installation:
