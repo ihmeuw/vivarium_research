@@ -380,15 +380,26 @@ V&V Checks:
     - XX relative risk on incidence of encephalopathy if birthing parent experiences obstructed labor
     - Need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
   * - 7
-    - XX% of each type of facility have CPAP or NICU capabilities
-    - 
+    - Percentage of each facility type that have CPAP capabilities: CMONC - 39.3% and BMONC - 7.5% 
+    - These values are from the 2016 EmONC Final Report and are therefore only reflective of Ethiopian health systems. Please use these as a placeholder for now while we 
+      try to find reliable values for Nigeria and Pakistan. 
   * - 8
-    - XX relative risk on RDS mortality of facility having CPAP or NICU capabilities vs. not
-    - Need to confirm this will impact mortality not incidence. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
+    - 0.64 (95% CI 0.50-0.82) relative risk on RDS mortality of facility having CPAP capabilities 
+    - Need to confirm this will impact mortality not incidence. Also need to determine how neonatal mortality in general will be modeled 
+      and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality. Note that we might want RR for NICU, but this value 
+      is for CPAP capabilities. Source: `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_
   * - 9
-    - XX relative risk for RDS incidence based on birthing parent receiving antenatal corticosteroids
-    - Need to confirm this will impact incidence not mortality. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
+    - 0.66 (95% CI 0.56-0.77) relative risk for RDS incidence based on birthing parent receiving antenatal corticosteroids
+    - This value is for incidence of RDS, however there is also an RR on RDS mortality (0.69, 95% CI 0.59-0.81). Also need to determine how neonatal mortality 
+      in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality. 
+      Source: `2017 Cochrane review <https://pubmed.ncbi.nlm.nih.gov/28321847/>`_
+  * - 10
+    - Percentage of preterm deaths caused by RDS: Ethiopia - 45.3%; Nigeria - 52.4%; Pakistan - 35.6% 
+    - Ethiopia source: `Major causes of death in preterm infants in selected hospitals in Ethiopia <https://www.sciencedirect.com/science/article/pii/S2214109X19302207>`_
+      Nigeria source: `Current Trends in Neonatal Morbidity and Mortality - Experiences from a Tertiary Center in Lagos, Nigeria <https://pmc.ncbi.nlm.nih.gov/articles/PMC9490664/>`_
+      Pakistan source: `Birth asphyxia is under-rated as a cause of preterm neonatal mortality in low- and middle-income countries <https://obgyn.onlinelibrary.wiley.com/doi/10.1111/1471-0528.17220>`_
 
+      
 .. _inputs_to_neonatal_decision_tree_table:
 
 .. list-table:: Inputs to Neonatal Decision Tree
