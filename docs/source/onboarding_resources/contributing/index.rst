@@ -38,7 +38,6 @@ this, check out this :ref:`page on terminals <terminal_access>`.
    :start-after: .. _installation:
    :end-before: .. _end_installation:
 
-::
 
 At this point, a folder called vivarium_research should be added to your computer and 
 accessible from your file explorer. 
