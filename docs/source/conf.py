@@ -25,7 +25,7 @@ about = {
 # -- Project information -----------------------------------------------------
 
 project = about['__title__']
-copyright = f'2021, {about["__author__"]}'
+copyright = f'2025, {about["__author__"]}'
 author = about["__author__"]
 
 # The short X.Y version.
