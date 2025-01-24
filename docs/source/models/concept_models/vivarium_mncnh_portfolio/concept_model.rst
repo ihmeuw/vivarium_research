@@ -399,7 +399,8 @@ V&V Checks:
     - Ethiopia source: `Major causes of death in preterm infants in selected hospitals in Ethiopia <https://www.sciencedirect.com/science/article/pii/S2214109X19302207>`_
       Nigeria source: `Current Trends in Neonatal Morbidity and Mortality - Experiences from a Tertiary Center in Lagos, Nigeria <https://pmc.ncbi.nlm.nih.gov/articles/PMC9490664/>`_
       Pakistan source: `Birth asphyxia is under-rated as a cause of preterm neonatal mortality in low- and middle-income countries <https://obgyn.onlinelibrary.wiley.com/doi/10.1111/1471-0528.17220>`_
-
+      Note about the Pakistan paper: the study provides two estimates of preterm deaths caused by RDS, and the value above is based on physician diagnoses, but the authors also 
+      had a panel of experts review the diagnoses independently, and the panel found RDS to be far less common than the physicians, with 35.6% of preterm deaths attributed to RDS.     
       
 .. _inputs_to_neonatal_decision_tree_table:
 
