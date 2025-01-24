@@ -25,10 +25,10 @@
 .. _general_dags:
 
 ===============
-Casual Diagrams
+Causal Diagrams
 ===============
 
-The purpose of this page is to document information on types of casual diagrams 
+The purpose of this page is to document information on types of causal diagrams 
 and how they are used. This includes background on the set of of different diagrams, 
 cause vs correlation, mediation, and effect modification. 
 
@@ -167,7 +167,7 @@ The first approach is to introduce an additional variable into the dag, termed "
 
 .. image:: unknown_var_association.svg
 
-The second approach is to represent the association between the two variables with a *dashed* line. For our purposes, dashed lines in DAGs will represent a non-causal association between two variables as shown in the figure below. While this format does not allow us to easily identify open backdoor paths in the way described in this section, it still allows us to identify confounding using the definition provided in the Confounding_ section. Additionally, this method allows us to represent non-casual associations that we may want to model explicitly, such as a correlation coefficient between two variables.
+The second approach is to represent the association between the two variables with a *dashed* line. For our purposes, dashed lines in DAGs will represent a non-causal association between two variables as shown in the figure below. While this format does not allow us to easily identify open backdoor paths in the way described in this section, it still allows us to identify confounding using the definition provided in the Confounding_ section. Additionally, this method allows us to represent non-causal associations that we may want to model explicitly, such as a correlation coefficient between two variables.
 
 .. image:: dashed_association.svg
 
