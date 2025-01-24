@@ -58,7 +58,7 @@ assisted ultrasound for pregnancies, and better care for respiratory distress sy
 important to consider the how the two interventions interact – will including both create 
 synergies or will including one make the other less effective?” 
 
-**Step 2: Define an all-inclusive casual diagram** 
+**Step 2: Define an all-inclusive causal diagram** 
 
 The goal in this step is to be inclusive of everything we think might matter in real 
 life, even things we don’t expect to be in the simulation or don’t expect to have data 
