@@ -25,7 +25,7 @@ CPAP for treating Preterm with RDS
 Intervention Overview
 -----------------------
 
-CPAP is used for the prevention and treatment of respiratory distress syndrome. A recent (2020)Cochrane Review found that CPAP was associated with lower risk of treatment failure (death or use of assisted ventilation) and lower overall mortality with moderate‐certainty evidence.
+CPAP is used for the prevention and treatment of respiratory distress syndrome. A recent (2020) Cochrane Review found that CPAP was associated with lower risk of treatment failure (death or use of assisted ventilation) and lower overall mortality with moderate‐certainty evidence.
 
 This section describes how a CPAP intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 
