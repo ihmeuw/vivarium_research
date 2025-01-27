@@ -50,7 +50,7 @@ The :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>` i
 Vivarium Modeling Strategy
 --------------------------
 
-We will use the enhanced decision tree below to find the probability of RDS mortality with and without access to CPAP that are logically consistent with the baseline delivery facility rates and baseline CPAP coverage (and population level RDS mortality probability). Since the neonatal model include timesteps for both the early and late neonatal periods, this  alculation must be calculated for both time periods.
+We will use the enhanced decision tree below to find the probability of RDS mortality with and without access to CPAP that are logically consistent with the baseline delivery facility rates and baseline CPAP coverage (and population level RDS mortality probability). Since the neonatal model includes timesteps for both the early and late neonatal periods, this calculation must be calculated for both time periods.
 
 We will then add an attribute to each simulant indicating whether the birth occurs at a facility with access to CPAP (which will be dependent on the facility choice, i.e. no access for home births and lower access for BEmONC than CEmONC facilities).
 
