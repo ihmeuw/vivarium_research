@@ -13,7 +13,7 @@ The hosted documentation can be found at https://vivarium-research.readthedocs.i
 
 Information on how to contribute to vivarium research docs can be found at https://vivarium-research.readthedocs.io/en/latest/onboarding_resources/contributing/index.html. 
 
-Use the following steps to get set up to build the docs locally::
+Use the following steps to get set up to build the docs locally:
 
 
 .. _installation:
