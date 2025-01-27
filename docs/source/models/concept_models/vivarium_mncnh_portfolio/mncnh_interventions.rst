@@ -64,7 +64,7 @@ We will then use the conditional probabilities for simulants with and without ac
 Calibration Strategy
 --------------------
 
-The following decision tree shows all of the paths from delivery facility choice to CPAP availability.  Each path corresponds to a disjoint event that we can sum over to find the population probability of RDS mortality.
+The following decision tree shows all of the paths from delivery facility choice to CPAP availability.  Distinct paths in the tree correspond to disjoint events, which we can sum over to find the population probability of RDS mortality.
 
 .. graphviz::
 
