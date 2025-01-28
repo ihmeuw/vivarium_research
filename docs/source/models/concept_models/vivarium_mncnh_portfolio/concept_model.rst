@@ -505,11 +505,10 @@ V&V Checks:
 4. Low Birthweight/Short Gestation Risk Effect on Neonatal Moratlity Model
 5. Hemoglobin Risk Exposure
 6. Hemoglobin Risk Effect on Maternal Hemorrhage
+7. :ref:`Intervention Models <neonatal_intervention_models>`
 
-.. todo::
+  a. :ref:`CPAP for treating Preterm with RDS <cpap_intervention>`
 
-  * Add in components that Abie missed
-  
 .. _mncnh_portfolio_4.0:
 
 4.0 Data Inputs
