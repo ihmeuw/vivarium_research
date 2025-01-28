@@ -134,6 +134,8 @@ Note that these probabilities are not used directly in the model and are include
     * - neonate died without RDS
       - The child simulant died due to preterm birth **without** respiratory distress syndrome within the first 28 days of life
 
+.. _2021_cause_preterm_birth_mncnh_transition_probability_definitions:
+
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20
     :header-rows: 1
@@ -142,10 +144,10 @@ Note that these probabilities are not used directly in the model and are include
       - Name
       - Definition
     * - mr_w
-      - preterm mortality risk
+      - Preterm with RDS Mortality Risk
       - The probability that a simulant who was born alive dies from preterm with RDS during the neonatal period
     * - mr_wo
-      - preterm mortality risk
+      - Preterm without RDS Mortality Risk
       - The probability that a simulant who was born alive dies from preterm without RDS during the neonatal period
 
 
