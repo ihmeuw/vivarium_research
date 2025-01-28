@@ -63,6 +63,9 @@ Guiding principles
 Introduction to race and ethnicity
 ------------------------------------------
 
+Why is this important?
+~~~~~~~~~~~~~~~~~~~~~~
+
 Race, ethnicity, and ancestry are complex, interrelated social
 constructs that have significant impacts on individuals' lives and
 health outcomes. Despite the importance of race and ethnicity in
@@ -84,6 +87,178 @@ diverse populations. This requires ongoing collaboration between
 researchers, policymakers, and communities to ensure that our
 understanding of these concepts evolves alongside societal changes and
 scientific advancements.
+
+What are race, ethnicity, and ancestry?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+
+    Scientifically defining race, ethnicity, and ancestry can feel uncomfortable,
+    particularly because of the history of scientific racism.
+    Scientific racism used pseudo-scientific ideas, accepted in the scientific establishment at the time
+    (18th Century through World War II),
+    to justify racial inequities and essentialize race.
+    **Racism is not scientific; scientific racism is bogus, in addition to being morally reprehensible.**
+    Here, we define race, ethnicity, and ancestry from a scientific perspective and *debunk* scientific racism.
+
+Ancestry
+^^^^^^^^
+
+Ancestry refers to the characteristics of one's ancestors:
+parents, grandparents, great-grandparents, and so on.
+Technically, these characteristics could be anything (which ancestors were farmers, for example),
+but in the context of this guide we are focused on geographic ancestry.
+Geographic ancestry generally means where one's ancestors lived a few hundred years ago,
+since mobility was quite a bit lower before then, but there are exceptions.
+People often have only a vague idea about their own ancestry!
+
+It is common to quantify ancestry, e.g. "I'm 1/8th Italian" to mean that
+1 out of 8 great-grandparents lived in Italy.
+Strictly speaking, this is *genealogical* (geographic) ancestry, since it counts ancestors equally.
+On the other hand, *genetic* (geographic) ancestry refers to the ancestors you inherited genes from;
+due to the random nature of genetic inheritance, many distant ancestors
+did not actually contribute anything to your genome.
+Genetic ancestry is frequently operationalized in genetic research using
+*genetic similarity* to modern-day populations as a proxy. [Mathieson_Scally_2020]_
+The limitations of this proxy measure should not be ignored!
+For example, there is huge inequity in which modern-day populations
+have more genetic testing data available for comparison.
+
+Humans have been globally widespread for only about 60,000 years --
+an incredibly short timespan on an evolutionary scale!
+We share 99.6%-99.9% of our DNA with each other, making us nearly identical.
+That said, there are some small genetic differences between populations.
+Some of these are probably random drift, but others are due to different traits
+being advantageous in different geographic regions.
+For example, sickle cell trait is protective against malaria,
+so populations in regions where malaria is endemic are much more likely to have the gene for it.
+Often, people use examples like this to claim that "race" is a biologically meaningful concept,
+but it is really genetic ancestry that drives these differences,
+and racial categories are only *correlated* with ancestry -- we discuss this further below.
+
+Ethnicity
+^^^^^^^^^
+
+An ethnicity is a group *cultural identity*,
+which can include language, food, art, religion, social norms, and so on.
+
+Frequently, ethnicities are associated with an area of the world,
+though this may or may not be a country.
+There is a distinct French culture that roughly corresponds to the boundaries of France,
+while Igbo culture is mostly found in just one part of Nigeria;
+this is a legacy of European colonizers splitting Africa along arbitrary lines.
+
+There are also ethnic groups, such as the Romani people,
+that have a distinct cultural identity despite having been spread out geographically for centuries.
+These groups often live among people of other ethnicities but preserve their unique culture.
+
+When families immigrate from one place to another,
+they frequently maintain some aspects of multiple ethnic identities,
+for example speaking one language in public and another at home.
+Over generations, their descendants may assimilate
+(adopt the prevailing culture of the place they are now living)
+completely, or only partially, maintaining a "hyphenated" cultural identity like Chinese-American.
+
+Language is a particularly important aspect of ethnicity when it comes to health inequities,
+as speaking a non-dominant language, or even speaking the dominant language of an area with a non-native accent,
+can lead to others perceiving one's ethnicity and using that as an excuse for discrimination.
+Limited proficiency in the dominant language spoken by healthcare professionals in an area
+can also pose a substantial practical barrier to accessing the healthcare system.
+
+Race
+^^^^
+
+Race is a social construct **with no inherent biological meaning** that categorizes people
+primarily based on a few visible characteristics such as skin and eye color, hair, and facial features.
+These highly visible characteristics are a tiny proportion of what we inherit genetically --
+think about all the important biological traits such as blood type
+that are invisible to us and were not even known to exist until a few hundred years ago!
+
+For all of recorded history, people have noticed that some visible traits differ between populations.
+At least as far back as the ancient Greeks, people have held stereotypes and made overgeneralizations
+about other tribes or groups, based in part on appearance.
+
+These overgeneralizations became dramatically stronger and more impactful roughly 500 years ago,
+when colonists from Western Europe took the land and resources of Indigenous people in many places around the world
+and began kidnapping and enslaving large numbers of people from Africa.
+Colonialism and slavery created a widespread and enduring association between visible hereditary traits and social status.
+This association reinforced stereotypes and prejudice, which in turn reinforced segregation, creating a vicious cycle.
+
+Unfortunately, scientists also played a prominent role in legitimizing racism,
+expounding theories of human evolution and biology that reinforced ideas of distinct human "races"
+and justified inequities in society.
+These theories, based on cherry-picked anecdotes and ascribing disparities to biology that were in fact created by social forces,
+have been soundly debunked.
+Modern science regards race as an **entirely social construct**.
+The only reasons it is correlated with health outcomes are the impacts of racism
+and the (very rough) correlation between race and genetic ancestry.
+
+As racial categories are socially defined, they can and do change over time.
+In the US, for example, people of Italian or Irish ancestry
+started to be seen as White (and therefore not targets of racism) in the 20th century.
+Jews were widely seen as a "non-White race" in pre-World War II Europe
+but are not even considered a racial group in current European and North American classifications.
+
+Despite changes in legal and political structures such as formal decolonization,
+the abolition of slavery, and descendants of enslaved people gaining their civil rights,
+the legacy of colonialism and slavery can be clearly seen today.
+Racial discrimination and stereotypes persist,
+de facto segregation in housing and education remain widespread,
+and in most former colonies, large racial disparities exist across health and economic domains.
+
+Though racial "categories" originally were based on visible characteristics,
+racial prejudice extends beyond these, to things like names, dialect, or fashion,
+when these are used by an observer to "categorize" someone into a racial group. [Bertrand_2004]_
+
+The history and origins of racism are complex,
+and sometimes contentious, topics.
+We've provided a brief overview here, but there is much more to learn.
+We recommend the following resources to deepen your understanding.
+
+* *Stamped from the Beginning* by Ibram X. Kendi
+* *The Wretched of the Earth* by Frantz Fanon
+* *The History of White People* by Nell Irvin Painter
+* *A People's History of the United States* by Howard Zinn
+* `The 1619 Project <https://www.nytimes.com/interactive/2019/08/14/magazine/1619-america-slavery.html>`_
+  by Nikole Hannah-Jones and others
+
+.. note::
+
+    Most of these come from a US-centric perspective,
+    which reflects our own backgrounds but should not be taken as the only or most important perspective.
+    The history of racism is global.
+
+Race, ethnicity, ancestry
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Though we can understand race, ethnicity, and ancestry as distinct concepts,
+they are deeply *causally* entangled.
+
+For example, cultural processes like assimilation are greatly impacted by racism
+because they depend on the prevailing society's perception and acceptance of an ethnic group.
+For example, the families of European immigrants to the United States were able to assimilate
+and be considered "American" much more easily than those from other places in the world,
+due to racial prejudice.
+Outsiders might expect several ethnic groups to have similar cultures,
+or mix up their cultural practices,
+because they perceive members of those ethnic groups as being in the same racial category.
+Racism can even create new ethnic identities, as in the case of African American culture,
+which emerged because of racial segregation and shared experiences of oppression in the United States.
+
+On the other hand, ethnicities can also become "racialized."
+A good example of this is people of Puerto Rican ancestry in New York City --
+though in most places in the US people of Puerto Rican ancestry are perceived as Hispanic/Latino,
+in New York they are perceived as a distinct racial group
+and there is racial prejudice against them specifically. [Grosfoguel_2004]_
+
+Though we've focused on race, ethnicity, and ancestry here,
+there are other concepts these are sometimes conflated with,
+particularly **nationality** (country of residence or citizenship),
+**national origin** (country of birth),
+and **immigration status**.
+While these are out of scope for the present guide,
+that doesn't mean they are less important than race, ethnicity, and ancestry.
+We may address these concepts in a future guide. 
 
 1.0 Research considerations
 ++++++++++++++++++++++++++++
@@ -528,3 +703,12 @@ Reporting results accurately
 
 .. [Liebler_2008]
     Liebler CA, Halpern-Manners A. A practical approach to using multiple-race response data: a bridging method for public-use microdata. Demography. 2008 Feb;45(1):143-55. doi: 10.1353/dem.2008.0004. PMID: 18390296; PMCID: PMC2831381.
+
+.. [Bertrand_2004]
+    Bertrand M, Mullainathan S. Are Emily and Greg More Employable Than Lakisha and Jamal? A Field Experiment on Labor Market Discrimination. American Economic Review. 2004;94(4):991-1013. doi:10.1257/0002828042002561
+
+.. [Mathieson_Scally_2020]
+    Mathieson I, Scally A (2020) What is ancestry? PLoS Genet 16(3): e1008624. https://doi.org/10.1371/journal.pgen.1008624
+
+.. [Grosfoguel_2004]
+    Grosfoguel, R. (2004). Race and Ethnicity or Racialized Ethnicities?: Identities within Global Coloniality. Ethnicities, 4(3), 315-336. https://doi.org/10.1177/1468796804045237
