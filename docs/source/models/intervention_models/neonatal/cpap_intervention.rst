@@ -1,4 +1,4 @@
-.. _cpap_intervention:
+.. _intervention_neonatal_cpap:
 
 ==================================
 CPAP for treating Preterm with RDS
@@ -15,6 +15,12 @@ CPAP for treating Preterm with RDS
   * - Abbreviation
     - Definition
     - Note
+  * - BEmONC
+    - Basic emergency obstetric and neonatal care
+    - 
+  * - CEmONC
+    - Comprehensive emergency obstetric and neonatal care
+    - 
   * - CPAP
     - Continuous positive airway pressure
     - 
@@ -23,7 +29,7 @@ CPAP for treating Preterm with RDS
     - 
 
 Intervention Overview
------------------------
+---------------------
 
 CPAP is used for the prevention and treatment of respiratory distress syndrome. A recent (2020) Cochrane Review found that CPAP was associated with lower risk of treatment failure (death or use of assisted ventilation) and lower overall mortality with moderate‐certainty evidence.
 
@@ -45,9 +51,9 @@ This section describes how a CPAP intervention can be implemented and calibrated
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-39.3% of CMONC facilities and 7.5% of BMONC facilities have CPAP, according to the 2016 Ethiopia EmONC Final Report.  Please use these as a placeholder for now while we try to find reliable values for Nigeria and Pakistan. 
+39.3% of CEmONC facilities and 7.5% of BEmONC facilities have CPAP, according to the 2016 Ethiopia EmONC Final Report.  Please use these as a placeholder for now while we try to find reliable values for Nigeria and Pakistan. 
 
-The :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>` includes data on current coverage levels for the specific locations we are focused on modeling.  We might be able to borrow strength from other locations and times by predicting coverage more country-years simultaneously, perhaps even in combination with other key intervention technologies, based on sources such as existing `Service Provision Assessment (SPA) <https://www.dhsprogram.com/methodology/Survey-Types/SPA.cfm>` and `Service Availability and Readiness Assessment (SARA) <https://www.who.int/data/data-collection-tools/service-availability-and-readiness-assessment-(sara)>` data.
+We might be able to borrow strength from other locations and times by predicting coverage more country-years simultaneously, perhaps even in combination with other key intervention technologies, based on sources such as existing `Service Provision Assessment (SPA) <https://www.dhsprogram.com/methodology/Survey-Types/SPA.cfm>` and `Service Availability and Readiness Assessment (SARA) <https://www.who.int/data/data-collection-tools/service-availability-and-readiness-assessment-(sara)>` data.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -60,7 +66,7 @@ We will then add an attribute to each simulant indicating whether the birth occu
 
 We will then use the conditional probabilities for simulants with and without access to determine which simulants die from RDS.
 
-A `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_ found a relative risk of 0.53 (95% CI 0.34-0.83) of RDS mortality for neonates receiving CPAP.   (Note that the population that this effect size applies to is preterm infants with "respiratory failure becoming evident soon after birth".)
+A `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_ found a relative risk of 0.53 (95% CI 0.34-0.83) of RDS mortality for neonates with access to CPAP.   (Note that the population that this effect size applies to is preterm infants with "respiratory failure becoming evident soon after birth".)
 
 
 Calibration Strategy
