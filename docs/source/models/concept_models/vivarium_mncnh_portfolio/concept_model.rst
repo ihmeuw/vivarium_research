@@ -365,11 +365,14 @@ V&V Checks:
     - Delivery facility type (home, BEmONC, CEmONC) value from intrapartum model
     - 
   * - 2
-    - XX% of each type of facility have antibiotics available
-    - 
+    - Percentage of each facility type that have antibiotics for neonatal sepsis: 76.8% of CEmONC and 30.2% of BEmONC 
+    - These values are from the 2016 EmONC Final Report and are therefore only reflective of Ethiopian health system a decade ago (we also have data on this
+      from SARA, via the Health Systems team). Please use these as a placeholder for now while we try to find reliable values for Nigeria and Pakistan. 
   * - 3
-    - XX relative risk on mortality from sepsis or other neonatal infections
-    - It seems like this relative risk will be hard to find in the literature, and we might need to use a sensitivity-analysis approach.
+    - 0.72 (95% CI 0.64-0.80) relative risk on mortality from sepsis or other neonatal infections
+    - It seems like this relative risk is hard to find in the literature, and we might need to use a sensitivity-analysis approach. 
+      `This meta-analysis for LiST <https://pmc.ncbi.nlm.nih.gov/articles/PMC3231886/>`_ provides an estimate of the RR of antibiotics on neonatal sepsis, 
+      and we could use their methodology to make our own estimate, or use this one (which is currently a placeholder). 
   * - 4
     - XX% of each type of facility have probiotics available
     - Need to determine who recevied probiotics - all newborns, only LBW, only preterm, etc. ; the coverage is probably zero in current practice, and we will model scenarios where it is nonzero.
