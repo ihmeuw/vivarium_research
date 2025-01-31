@@ -369,7 +369,7 @@ V&V Checks:
     - These values are from the 2016 EmONC Final Report and are therefore only reflective of Ethiopian health system a decade ago (we also have data on this
       from SARA, via the Health Systems team). Please use these as a placeholder for now while we try to find reliable values for Nigeria and Pakistan. 
   * - 3
-    - 0.72 (95% CI 0.64-0.80) relative risk on mortality from sepsis or other neonatal infections
+    - 0.72 (95% CI 0.64-0.80) relative risk of antibiotics on mortality from sepsis or other neonatal infections
     - It seems like this relative risk is hard to find in the literature, and we might need to use a sensitivity-analysis approach. 
       `This meta-analysis for LiST <https://pmc.ncbi.nlm.nih.gov/articles/PMC3231886/>`_ provides an estimate of the RR of antibiotics on neonatal sepsis, 
       and we could use their methodology to make our own estimate, or use this one (which is currently a placeholder). 
