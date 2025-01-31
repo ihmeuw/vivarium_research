@@ -32,6 +32,11 @@
 Inclusive Health Metrics: Race and Ethnicity
 ============================================
 
+.. contents::
+   :depth: 2
+   :local:
+   :backlinks: none
+
 Overview
 +++++++++++++++++++++
 
@@ -61,7 +66,7 @@ Guiding principles
     Fill out table with some guiding principles for this guide. Can refer to same table in the sex and gender guide.
 
 Introduction to race and ethnicity
-------------------------------------------
+----------------------------------
 
 Why is this important?
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -258,7 +263,162 @@ particularly **nationality** (country of residence or citizenship),
 and **immigration status**.
 While these are out of scope for the present guide,
 that doesn't mean they are less important than race, ethnicity, and ancestry.
-We may address these concepts in a future guide. 
+We may address these concepts in a future guide.
+
+US Government Definitions
+-------------------------
+
+The definitions of race and ethnicity described above intend to be global,
+not specific to the US context.
+However, our research institute is based in the US
+and most of the research we have done thus far on race and ethnicity
+has applied those concepts in the US context.
+For this reason, it is especially important to compare our definitions
+with those of the US government.
+
+The US has an official Federal system for defining and measuring race and ethnicity.
+It is common for scientific work, particularly in fields such as demography
+where much of the data is collected by governments, to defer to
+government definitions of race, ethnicity, and ancestry.
+As this document exemplifies, we see it our duty to maintain our own independent perspective
+on these definitions, rather than defer to any government definition.
+In doing so, we strive to develop concepts and standards
+with maximal construct validity and global relevance.
+
+How the US government defines race, ethnicity, and ancestry 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before 1977, the US Census Bureau was the *de facto* authority
+on racial/ethnic/ancestral categorization
+and changed its questions and categories numerous times.
+Pew Research Center created `a helpful infographic <https://www.pewresearch.org/social-trends/feature/what-census-calls-us/>`_
+on how the Decennial Census form categories have changed since 1790.
+
+In 1977, the Federal Office of Management and Budget (OMB)
+first published Race and Ethnic Standards for Federal Statistics and Administrative Reporting,
+which apply to all federal agencies, including the Census Bureau.
+As of early 2025, OMB is still the authority on these definitions
+in the federal government.
+Furthermore, the Federal system has substantial indirect control
+over state and local levels via numerous funding and accreditation mechanisms,
+and therefore the OMB standards also hold in general at those levels as well.
+
+The OMB standards were revised in 1997 and in March 2024.
+Note that all 3 versions were instituted during Federal Administrations
+led by the Democratic party.
+Implementation of OMB standards by various agencies inevitably lags their official publication.
+In general, Republican-led states and local agencies tend to lag more, by as long as 20+ years.
+Conversely, some Democratic-led local governments tend to
+implement systems similar to the upcoming OMB standard,
+even before its publication.
+(For example, the "Middle Eastern and North African" group
+added to the OMB 2024 standards has already been an option
+in Washington State and University of Washington forms for at least several years.)
+
+It is easiest to concretely understand the standards by reading the survey questions
+asked in accordance with them.
+The 1997 OMB standards were implemented in the 2020 Decennial Census
+(below left, `source <https://www.census.gov/programs-surveys/decennial-census/technical-documentation/questionnaires.2020_Census.html>`__);
+the 2024 OMB standards have yet to be implemented in a Decennial Census
+but the directive contains an example survey question
+(below right, `source <https://www.federalregister.gov/documents/2024/03/29/2024-06469/revisions-to-ombs-statistical-policy-directive-no-15-standards-for-maintaining-collecting-and>`__).
+
+.. list-table::
+   :width: 100%
+   :class: borderless
+
+   * - .. image:: 2020_census_questions.png
+          :width: 100%
+         
+     - .. image:: omb_2024_example_question.png
+          :width: 100%
+
+Untangling race, ethnicity, and ancestry in US government data 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**The biggest source of confusion when using US government data about
+race, ethnicity, and ancestry is how "race" and "ethnicity" are defined.**
+Since 1970, the Census Bureau has asked a "race" question
+with categories like "Black" and "White" (but *without* a category for "Latine" or "Hispanic")
+and a separate yes/no `"Hispanic origin" <https://www.census.gov/topics/population/hispanic-origin/about.html>`_ question.
+When the OMB 1977 standards codified this approach,
+they referred to the second question as "ethnicity,"
+even though the word "ethnicity" has *never* appeared in the question
+on the official Decennial Census forms (before or after 1977).
+Consequently, the terms "ethnicity" and "Hispanic origin"
+are often used synonymously in data products.
+
+It is important to note that this status quo is the result of an overtly political process,
+rather than a principled scientific one.
+"Mexican" was included as a *race* in the 1930 Decennial Census
+but removed by 1940
+`due to political advocacy by Mexican American groups who felt that being classified as non-White would make them seem less American <https://www.npr.org/sections/codeswitch/2014/06/16/321819185/on-the-census-who-checks-hispanic-who-checks-white-and-why>`_.
+This was a precursor to a much broader and still ongoing debate
+about the extent to which Latine people are racialized versus
+being folded into Whiteness as European immigrant groups have been in the past --
+to this day, the way Hispanic and Latine people answer the standard "race" question
+in practice is often politically motivated. [Dowling_2014]_
+There was also political tension and debate between the terms "Hispanic" and "Latino/a"
+during the adoption of "Hispanic" by the federal government:
+"Hispanic" was associated with a pan-ethnic identity based in linguistic and cultural roots
+and was seen as more conservative,
+while "Latino/a," as well as related terms like "Chicano/a" (for Mexican American)
+and "Boricua" (for Puerto Rican),
+were associated with shared experiences of racialization and oppression,
+an emphasis on Indigeneity, and a more activist stance. [Lacomba_2020]_
+
+The OMB 1977/1997 split between "race" and "ethnicity" questions
+is confusing to many respondents.
+Many who indicate they have Hispanic origins are unsure how to answer the race question,
+as evidenced by substantial amounts of non-response and "other" responses
+on that question among this group in the 2010 and 2020 Censuses.
+On the flip side, Afro-Latine groups have advocated for the two separate questions,
+on the basis that Afro-Latine people identify along two separate axes
+of culture/heritage and race simultaneously.
+Lastly, people from Latin American countries where Spanish is not the majority language,
+particularly Brazil, are officially excluded from the OMB's "Hispanic or Latino" definition.
+This is sufficiently counter-intuitive that
+`more than two-thirds of Brazilians indicate they are "Hispanic or Latino," <https://www.pewresearch.org/short-reads/2023/04/19/how-a-coding-error-provided-a-rare-glimpse-into-latino-identity-among-brazilians-in-the-u-s/>`_
+a response which the Census Bureau reverses
+if they also marked Brazil as their specific "Hispanic or Latino" origin.
+
+From the perspective of the scientific definitions introduced above,
+this confusion is a result of not precisely defining the constructs being measured,
+a mismatch between the definitions and popular perception,
+or not acknowledging that dimensions of race, ethnicity, and ancestry
+can be conceptually distinct even when they are highly correlated.
+
+Language is an aspect of ethnicity, and there are forms of discrimination
+perpetuated against those speaking Spanish or Spanish-accented English in the US.
+There are also forms of discrimination against those who appear Latine, *mestizo*,
+or more colloquially "Brown," whether or not they speak Spanish.
+People raised in Spain who pass as White would be impacted by the former but not the latter,
+whereas many Brazilian Americans would be impacted by the latter but not the former.
+Furthermore, the use of country names as sub-categories in survey questions
+about race and ethnicity (e.g. "Vietnamese," "Pakistani," "Egyptian," "Irish")
+without clarification can create the impression these questions are asking about ancestry,
+nationality, or national origin.
+As a result, it is likely that respondents answer these questions
+with some unclear choice between (or undifferentiated combination of)
+dimensions of their race, ethnicity, ancestry, and other factors.
+
+The predominant response of social researchers and data analysts
+to the "Hispanic or Latino" confusion has been to treat this "ethnicity"
+as another racial category, overriding people's response to the race question
+if they identified as "Hispanic or Latino."
+2024 OMB standards switch to a single question
+with "Hispanic or Latino" as one of the options;
+therefore, people who identify as such will not be *required* to answer
+a separate race question but *may* still select multiple responses
+(e.g. to indicate Afro-Latine identity).
+The 2024 standards also add a Middle Eastern or North African (MENA) category.
+Though these welcome changes will address immediate issues causing non-response
+among Hispanic and MENA people and bring OMB standards
+into alignment with common research practices,
+they will not address the conflation of race with language that we believe is inherent
+in the phrase "Hispanic or Latino,"
+nor clarify the distinctions between race, ethnicity, and ancestry for survey respondents
+or data analysts.
 
 1.0 Research considerations
 ++++++++++++++++++++++++++++
@@ -446,8 +606,9 @@ a few cases where this causal diagram is correct, but they are limited.
 .. image:: ancestry_v1.svg
 
 For example:
-- Sickle cell disease is more common in people whose ancestors lived in areas with endemic malaria prevalence
-- Ashkenazi Jewish people are more likely to be carriers for some genetic conditions like Gaucher disease or cystic fibrosis
+
+* Sickle cell disease is more common in people whose ancestors lived in areas with endemic malaria prevalence
+* Ashkenazi Jewish people are more likely to be carriers for some genetic conditions like Gaucher disease or cystic fibrosis
 
 In our case, there isn’t a lot of known evidence to support a genetic link between
 CVD and ancestry, so we can eliminate this causal pathway.
@@ -486,6 +647,24 @@ race which can include all or none of these.
 
 2.1 Data sources
 ----------------
+
+For self-reported data, the typical survey questions used
+(including those standardized by the US Federal government as described above)
+are unclear about which dimensions they are asking. 
+
+There are alternative data collection approaches that hold more promise
+for differentiating dimensions of race, ethnicity, and ancestry.
+For example, questions about "perceived" or "socially assigned" race
+(also known as `"street race" <https://race.unm.edu/what-is-street-race.html>`_)
+directly address the potential for racial discrimination based on appearance.
+These have been used in a number of surveys, [White_2020]_
+and when they are fielded alongside questions on self-identified race,
+can be used to understand the interplay between identity and perception. [Vargas_2016]_ [Stepanikova_2016]_
+Genetic ancestry can be analyzed in combination with race to tease apart the importance of different factors. [Cole_2021]_
+
+US death certificates record an undifferentiated mixture of perceived race
+and family-reported race, due to the complex process by which they are filled out
+(typically by funeral directors). [Arias_2016]_
 
 As noted above, the government provides standardized race and ethnicity
 categories, though these do change over time. Currently, the race
@@ -712,3 +891,24 @@ Reporting results accurately
 
 .. [Grosfoguel_2004]
     Grosfoguel, R. (2004). Race and Ethnicity or Racialized Ethnicities?: Identities within Global Coloniality. Ethnicities, 4(3), 315-336. https://doi.org/10.1177/1468796804045237
+
+.. [Dowling_2014]
+    Dowling JA. Mexican Americans and the question of race. University of Texas Press; 2014 Dec 31. https://utpress.utexas.edu/9781477307540/
+
+.. [Lacomba_2020]
+    Lacomba C. Hispanics and/or Latinos in the United States: The Social Construction of an Identity. Estudios Del Observatorio/Observatorio Studies. 2020. https://cervantesobservatorio.fas.harvard.edu/sites/default/files/65_en_hispanics_andor_latinos_in_the_united_states_the_social_construction_of_an_identity_4.pdf
+
+.. [White_2020]
+    White K, Lawrence JA, Tchangalova N, Huang SJ, Cummings JL. Socially-assigned race and health: a scoping review with global implications for population health equity. International journal for equity in health. 2020 Dec;19:1-4. https://equityhealthj.biomedcentral.com/articles/10.1186/s12939-020-1137-5
+
+.. [Vargas_2016]
+    Vargas N, Stainback K. Documenting contested racial identities among self-identified Latina/os, Asians, Blacks, and Whites. American Behavioral Scientist. 2016 Apr;60(4):442-64. https://journals.sagepub.com/doi/full/10.1177/0002764215613396
+
+.. [Stepanikova_2016]
+    Stepanikova I, Oates GR. Dimensions of racial identity and perceived discrimination in health care. Ethnicity & Disease. 2016;26(4):501. https://pubmed.ncbi.nlm.nih.gov/27773977/
+
+.. [Cole_2021]
+    Cole BS, Gudiseva HV, Pistilli M, Salowe R, McHugh CP, Zody MC, Chavali VR, Ying GS, Moore JH, O'Brien JM. The role of genetic ancestry as a risk factor for primary open-angle glaucoma in African Americans. Investigative Ophthalmology & Visual Science. 2021 Feb 1;62(2):28-. https://pmc.ncbi.nlm.nih.gov/articles/PMC7900887/
+
+.. [Arias_2016]
+    Arias E, Heron MP, Hakes JK. The validity of race and Hispanic origin reporting on death certificates in the United States: an update. https://pubmed.ncbi.nlm.nih.gov/28436642/
