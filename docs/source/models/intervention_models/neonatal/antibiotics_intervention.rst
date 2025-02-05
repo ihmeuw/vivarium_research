@@ -45,7 +45,7 @@ This section describes how an antibiotic-treatment intervention can be implement
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-X% of CEmONC facilities and Y% of BEmONC facilities have CPAP (check if this is included in the 2016 Ethiopia EmONC Final Report).  Please use placeholder values for now while we try to find reliable values.  We might be able to borrow strength from other locations and times by predicting coverage more country-years simultaneously, perhaps even in combination with other key intervention technologies, based on sources such as existing `Service Provision Assessment (SPA) <https://www.dhsprogram.com/methodology/Survey-Types/SPA.cfm>` and `Service Availability and Readiness Assessment (SARA) <https://www.who.int/data/data-collection-tools/service-availability-and-readiness-assessment-(sara)>` data.
+X% of CEmONC facilities and Y% of BEmONC facilities have antibiotics for neonatal sepsis.  Please use placeholder values for now while we try to find reliable values.  We might be able to borrow strength from other locations and times by predicting coverage more country-years simultaneously, perhaps even in combination with other key intervention technologies, based on sources such as existing `Service Provision Assessment (SPA) <https://www.dhsprogram.com/methodology/Survey-Types/SPA.cfm>` and `Service Availability and Readiness Assessment (SARA) <https://www.who.int/data/data-collection-tools/service-availability-and-readiness-assessment-(sara)>` data.
 
 Vivarium Modeling Strategy
 --------------------------
