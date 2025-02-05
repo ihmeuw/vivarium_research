@@ -112,6 +112,24 @@ where :math:`p(\text{RDS})` is the probability of dying from Preterm with RDS in
 
 When we fill in the location-specific values for delivery facility rates, CPAP coverage, relative risk of mortality with CPAP access, and mortality probability (which is also age-specific), this becomes a system of two linear equations have two unknown (p_RDS_w and p_RDS_wo), which we can solve analytically.
 
+We can derive the PAF and RR of lack of access to CPAP from these quantities as follows::
+
+  # TODO: replace these stand-in values
+  # with appropriate artifact draws
+  p_RDS = .1
+  p_home = .5
+  p_BEmONC = .1
+  p_CEmONC = .4
+  p_CPAP_BEmONC = 0.075
+  p_CPAP_CEmONC = 0.393
+  RR_CPAP = 0.53
+
+  p_RDS_w = ... # solve system of equations from previous section
+  p_RDS_wo = ...
+
+  p_RDS_w = (1 - PAF_no_CPAP) * p_RDS
+  PAF_no_CPAP = ... # rearange equation from line above to solve for this
+  RR_no_CPAP = 1/RR_CPAP
 
 Scenarios
 ---------
