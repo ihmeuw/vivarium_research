@@ -45,7 +45,7 @@ This section describes how an antibiotic-treatment intervention can be implement
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-X% of CEmONC facilities and Y% of BEmONC facilities have antibiotics for neonatal sepsis.  Please use placeholder values for now while we try to find reliable values.  We might be able to borrow strength from other locations and times by predicting coverage more country-years simultaneously, perhaps even in combination with other key intervention technologies, based on sources such as existing `Service Provision Assessment (SPA) <https://www.dhsprogram.com/methodology/Survey-Types/SPA.cfm>` and `Service Availability and Readiness Assessment (SARA) <https://www.who.int/data/data-collection-tools/service-availability-and-readiness-assessment-(sara)>` data.
+X% of CEmONC facilities and Y% of BEmONC facilities have antibiotics for neonatal sepsis.  Please use placeholder values for now while we try to find reliable values.  We might be able to borrow strength from other locations and times by predicting coverage more country-years simultaneously, perhaps even in combination with other key intervention technologies, based on sources such as existing `Service Provision Assessment (SPA) <https://www.dhsprogram.com/methodology/Survey-Types/SPA.cfm>`_ and `Service Availability and Readiness Assessment (SARA) <https://www.who.int/data/data-collection-tools/service-availability-and-readiness-assessment-(sara)>`_ data.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -58,7 +58,7 @@ We will then add an attribute to each simulant indicating whether the birth occu
 
 We will then use the conditional probabilities for simulants with and without access to determine which simulants die from sepsis.
 
-While we are searching the literature, we will use a placeholder relative risk of 0.50 (95% CI 0.25-0.75) of sepsis mortality for neonates with access to antibiotics.
+While we are searching the literature, we will use a placeholder relative risk of 0.72 (95% CI 0.64-0.80) of sepsis mortality for neonates with access to antibiotics.
 
 
 Calibration Strategy
@@ -93,9 +93,9 @@ The following decision tree shows all of the paths from delivery facility choice
 .. math::
     \begin{align*}
         p(\text{sepsis}) 
-        &= \sum_{\text{paths without antibiotics}} p(\text{path})\cdot p(\text{sepsis_wo})\\
-        &+ \sum_{\text{paths with antibiotics}} p(\text{path})\cdot p(\text{sepsis_w})\\[.1in]
-        p(\text{sepsis_w}) &= \text{RR}_\text{antibiotics} \cdot p(\text{sepsis_wo})
+        &= \sum_{\text{paths without antibiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{no antibiotics})\\
+        &+ \sum_{\text{paths with antibiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{antibiotics})\\[.1in]
+        p(\text{sepsis}|\text{antibiotics}) &= \text{RR}_\text{antibiotics} \cdot p(\text{sepsis}|\text{no antibiotics})
     \end{align*}
 
 where :math:`p(\text{sepsis})` is the probability of dying from sepsis in the general population, and :math:`p(\text{sepsis_w})` and :math:`p(\text{sepsis_wo})` are the probability of dying from sepsis in setting with and without access to antibiotics.  For each path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has antibiotics available.
@@ -116,7 +116,7 @@ Assumptions and Limitations
 - We assume that antibiotics availability captures actual use, and not simply the treatment being in the facility 
 - We assume that the delivery facility is the final facility in the care continum for deliveries that are transferred due to complications
 - We assume that the relative risk of sepsis mortality with antibiotics in practice is a value that we can find in the literature
-
+- We have excluded the effect of antibiotics on pneumonia mortality, because this cause is currently lumped with 'other causes'
 
 Validation and Verification Criteria
 ------------------------------------
@@ -124,6 +124,7 @@ Validation and Verification Criteria
 - Population-level mortality rate should be the same as when this intervention is not included in the model
 - The ratio of sepsis deaths per birth among those without antibiotics access divided by those with antibiotics access should equal the relative risk parameter used in the model
 - The baseline coverage of antibiotics in each facility type should match the values in the artifact
+- Validation: how does the sepsis moratlity rate in a counterfactual scenario with 100% antibiotic access compare to sepsis mortality rates in high-income countries?  They should be close, and the counterfactual should not be lower.
 
 References
 ------------
