@@ -43,10 +43,10 @@ This section describes how a CPAP intervention can be implemented and calibrated
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Preterm with RDS Mortality Probability
-    - Decrease multiplicatively
+  * - Preterm with RDS Mortality Probability (:math:`\text{CSMR}_i^\text{RDS}`)
+    - Adjust multiplicatively using PAF and RR, just like a dichotomous risk factor
     - Yes
-    - 
+    - The approach to calculating the PAF is complicated and described below
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
@@ -61,6 +61,8 @@ Vivarium Modeling Strategy
 This intervention requires adding an attribute to all simulants to specify if a birth happens in a facility with access to CPAP.  Since the neonatal mortality model does not explicitly represent incidence of RDS, we will also not track who receives CPAP.  Instead the model will have different cause-specific mortality rates for RDS for individuals born with and without access to CPAP.
 
 We will use the decision tree below to find the probability of RDS mortality with and without access to CPAP that are logically consistent with the baseline delivery facility rates and baseline CPAP coverage (and population level RDS mortality probability). Since the neonatal model includes different mortality probabilities for both the early and late neonatal periods, this calculation must be performed for both time periods as well.
+
+From this, we will calculate a PAF for "lack of access to CPAP".
 
 We will then add an attribute to each simulant indicating whether the birth occurs at a facility with access to CPAP (which will be dependent on the facility choice, i.e. no access for home births and lower access for BEmONC than CEmONC facilities).
 
@@ -100,16 +102,34 @@ The following decision tree shows all of the paths from delivery facility choice
 
 .. math::
     \begin{align*}
-        p_\text{RDS} 
-        &= \sum_{\text{paths without CPAP}} p(\text{path})\cdot p_\text{RDS_wo}\\
-        &+ \sum_{\text{paths with CPAP}} p(\text{path})\cdot p_\text{RDS_w}\\[.1in]
-        p_\text{RDS_w} &= \text{RR}_\text{CPAP} \cdot p_\text{RDS_wo}
+        p(\text{RDS})
+        &= \sum_{\text{paths without CPAP}} p(\text{path})\cdot p(\text{RDS}|\text{no CPAP})\\
+        &+ \sum_{\text{paths with CPAP}} p(\text{path})\cdot p(\text{RDS}|\text{CPAP})\\[.1in]
+        p(\text{RDS}|\text{CPAP}) &= \text{RR}_\text{CPAP} \cdot p(\text{RDS}|\text{no CPAP})
     \end{align*}
 
-where :math:`p_\text{RDS}` is the probability of dying from Preterm with RDS in the general population, and :math:`p_\text{RDS_w}` and :math:`p_\text{RDS_wo}` are the probability of dying from Preterm with RDS in setting with and without access to CPAP.  For each path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has CPAP available (7.5% in Ethiopia in 2016)
-
+where :math:`p(\text{RDS})` is the probability of dying from Preterm with RDS in the general population, and :math:`p(\text{RDS}|\text{CPAP})` and :math:`p(\text{RDS}|\text{no CPAP})` are the probability of dying from Preterm with RDS in setting with and without access to CPAP.  For each path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has CPAP available (7.5% in Ethiopia in 2016)
 
 When we fill in the location-specific values for delivery facility rates, CPAP coverage, relative risk of mortality with CPAP access, and mortality probability (which is also age-specific), this becomes a system of two linear equations have two unknown (p_RDS_w and p_RDS_wo), which we can solve analytically.
+
+We can derive the PAF and RR of lack of access to CPAP from these quantities as follows::
+
+  # TODO: replace these stand-in values
+  # with appropriate artifact draws
+  p_RDS = .1
+  p_home = .5
+  p_BEmONC = .1
+  p_CEmONC = .4
+  p_CPAP_BEmONC = 0.075
+  p_CPAP_CEmONC = 0.393
+  RR_CPAP = 0.53
+
+  p_RDS_w = ... # solve system of equations from previous section
+  p_RDS_wo = ...
+
+  p_RDS_w = (1 - PAF_no_CPAP) * p_RDS
+  PAF_no_CPAP = ... # rearange equation from line above to solve for this
+  RR_no_CPAP = 1/RR_CPAP
 
 Scenarios
 ---------
