@@ -100,7 +100,7 @@ The following decision tree shows all of the paths from delivery facility choice
 
 where :math:`p(\text{sepsis})` is the probability of dying from sepsis in the general population, and :math:`p(\text{sepsis_w})` and :math:`p(\text{sepsis_wo})` are the probability of dying from sepsis in setting with and without access to antibiotics.  For each path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has antibiotics available.
 
-When we fill in the location-specific values for delivery facility rates, antibiotics coverage, relative risk of mortality with antibiotics access, and mortality probability (which is also age-specific), this becomes a system of two linear equations have two unknown (p_RDS_w and p_RDS_wo), which we can solve analytically.
+When we fill in the location-specific values for delivery facility rates, antibiotics coverage, relative risk of mortality with antibiotics access, and mortality probability (which is also age-specific), this becomes a system of two linear equations have two unknown (p_sepsis_w and p_sepsis_wo), which we can solve analytically.
 
 Scenarios
 ---------
