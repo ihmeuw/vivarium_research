@@ -110,7 +110,7 @@ where :math:`p(\text{RDS})` is the probability of dying from Preterm with RDS in
 
 When we fill in the location-specific values for delivery facility rates, CPAP coverage by facility type, relative risk of mortality with CPAP access, and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (p_RDS_w and p_RDS_wo), which we can solve analytically.
 
-As mentioned above, it is convenient to model this like a dichotomous risk factor, so that we can reuse the
+As mentioned above, it is convenient to model this intervention like a dichotomous risk factor, so that we can reuse the
 :class:`Risk<vivarium_public_health.risks.base_risk.Risk>`
 and :class:`RiskEffect<vivarium_public_health.risks.effect.RiskEffect>` components in Vivarium Public Health,
 rather than having to write new components from scratch.
