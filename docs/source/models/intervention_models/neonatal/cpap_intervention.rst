@@ -127,7 +127,7 @@ We can derive the PAF and RR of lack of access to CPAP from these quantities as 
   p_RDS_w = ... # solve system of equations from previous section
   p_RDS_wo = ...
 
-  p_RDS_w = (1 - PAF_no_CPAP) * p_RDS
+  # p_RDS_w = (1 - PAF_no_CPAP) * p_RDS
   PAF_no_CPAP = ... # rearange equation from line above to solve for this
   RR_no_CPAP = 1/RR_CPAP
 
