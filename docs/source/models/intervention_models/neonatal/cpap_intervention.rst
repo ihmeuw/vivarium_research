@@ -112,7 +112,9 @@ where :math:`p(\text{RDS})` is the probability of dying from Preterm with RDS in
 
 When we fill in the location-specific values for delivery facility rates, CPAP coverage, relative risk of mortality with CPAP access, and mortality probability (which is also age-specific), this becomes a system of two linear equations have two unknown (p_RDS_w and p_RDS_wo), which we can solve analytically.
 
-We can derive the PAF and RR of lack of access to CPAP from these quantities as follows::
+As mentioned above, we can calculate a PAF for "lack of access to CPAP".  This is convenient because Vivarium Public Health includes RiskExposure and RiskEffect components that can represent the way CPAP changes RDS mortality without requiring additional code.
+
+We can derive the PAF and RR of "lack of access to CPAP" from these quantities as follows::
 
   # TODO: replace these stand-in values
   # with appropriate artifact draws
