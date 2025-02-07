@@ -268,7 +268,7 @@ We may address these concepts in a future guide.
 US Government Definitions
 -------------------------
 
-The definitions of race and ethnicity described above intend to be global,
+The definitions of race and ethnicity described above are intended to be global,
 not specific to the US context.
 However, our research institute is based in the US
 and most of the research we have done thus far on race and ethnicity
@@ -280,7 +280,7 @@ The US has an official Federal system for defining and measuring race and ethnic
 It is common for scientific work, particularly in fields such as demography
 where much of the data is collected by governments, to defer to
 government definitions of race, ethnicity, and ancestry.
-As this document exemplifies, we see it our duty to maintain our own independent perspective
+However, as this document demonstrates, we strive to maintain an independent, scientific perspective
 on these definitions, rather than defer to any government definition.
 In doing so, we strive to develop concepts and standards
 with maximal construct validity and global relevance.
@@ -652,7 +652,7 @@ For self-reported data, the typical survey questions used
 (including those standardized by the US Federal government as described above)
 are unclear about which dimensions they are asking. 
 
-There are alternative data collection approaches that hold more promise
+There are alternative data collection approaches that hold promise
 for differentiating dimensions of race, ethnicity, and ancestry.
 For example, questions about "perceived" or "socially assigned" race
 (also known as `"street race" <https://race.unm.edu/what-is-street-race.html>`_)
