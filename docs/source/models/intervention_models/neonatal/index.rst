@@ -7,6 +7,7 @@ Neonatal Interventions
 .. toctree::
     :maxdepth: 1
 
+    antibiotics_intervention
     cpap_intervention
 
 

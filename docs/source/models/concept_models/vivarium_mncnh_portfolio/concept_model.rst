@@ -507,7 +507,8 @@ V&V Checks:
 6. Hemoglobin Risk Effect on Maternal Hemorrhage
 7. :ref:`Intervention Models <neonatal_intervention_models>`
 
-  a. :ref:`CPAP for treating Preterm with RDS <cpap_intervention>`
+  a. :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
+  b. :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
 
 .. _mncnh_portfolio_4.0:
 
