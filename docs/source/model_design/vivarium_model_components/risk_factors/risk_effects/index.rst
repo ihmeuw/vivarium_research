@@ -14,7 +14,7 @@ A risk effect is a measure of how some variable (the risk factor) causally impac
 some outcome variable. 
 
 Generally, we will use risk effects models to represent 
-associations between two variables that are assumed to be causal and 
+a causal effect of one variable on another and 
 :ref:`risk correlation models <risk_correlation>` to represent *non-causal* 
 associations between two variables (see the :ref:`causality <general_dags>`
 documentation page for more information on causality). It is important to note
@@ -25,46 +25,49 @@ variables and shared common causes.
 There are several attributes of a risk effect that are important to consider, 
 including the 
 
-- direction (ex: positive or negative association), 
+- direction (ex: positive or negative effect of increased exposure), 
 - shape (ex: linear, U-shaped, etc.), 
 - magnitude (ex: large or small), 
 - and statisical certainty 
 
-of the association between the risk factor and the outcome. 
+of the effect the risk factor has on the outcome. 
 
 The risk effect may be measured in both absolute (ex: risk difference) or 
 relative terms (ex: relative risk). See the 
-:ref:`measures of excess risk page <excess_risk_measures>` for more 
+:ref:`measures of risk page <measures_of_risk>` for more 
 information on such measures.
 
-Risk effects are typically estimated in epidemiologic studies that assess
+To implement a risk effect in simulation we also need to know how to
+*delete* that effect from baseline population-level rates of the outcome.
+This is done with a :ref:`measure of population impact <measures_of_impact>`.
+
+Risk effect in GBD
+^^^^^^^^^^^^^^^^^^
+
+GBD reports risk effects using relative risks (RRs) and population attributable fractions (PAFs).
+A relative risk describes the *multiplier* on the risk of the outcome
+caused by exposure.
+
+For GBD risk factors with categorical risk exposures,
+GBD reports an estimated relative risk for each level of risk exposure,
+relative to the TMREL for that risk.
+
+For most GBD risk factors with continuous risk exposures (see below for exceptions starting in GBD 2021),
+GBD reports an estimated relative risk *per unit increase* in risk exposure above the TMREL.
+This unit increase may be more than a single unit change in risk
+exposure, so it is important to clarify this with the GBD modeler.
+
+.. todo::
+
+    Determine if there is a data source that documents these units
+
+GBD risk effects are typically estimated by meta-analysis of epidemiologic studies that assess
 how different levels of :ref:`risk exposures <risk_exposure>` affect some 
 outcome variable such as an incidence or mortality rate.
 There are several factors that may bias the quantification of a risk effect
 in epidemiologic studies (including influence by confounding), 
 and causal inference from such studies may be inhibited by such limitations.
 See the page on :ref:`causality <general_dags>` for more information on the topic.
-
-Risk effect in GBD
-^^^^^^^^^^^^^^^^^^
-
-The measure of risk effect in GBD is usually reported in relative terms, namely
-relative risk. It describes the relative relationship between the risk of
-disease Y in the presence of agent X versus in absence of X. Mathematically,
-it's calculated by dividing the rate of some outcome (such as incidence or mortality
-rate) among the population exposed to a risk by the outcome rate in the unexposed population.
-For example, if there are A incident cases and B person-years in exposed group;
-C incident cases and D person-years in the unexposed group, then the relative risk
-(rate ratio) equals :math:`\frac{A/B}{C/D} = \frac{AD}{BC}`. The "unexposed" or "reference" group
-in the GBD-estimated relative risks is always the TMREL for that risk. For GBD 
-risk factors with continuous risk exposures, the GBD-estimated relative risks
-represent the relative risk associated with a defined unit increase in risk exposure
-above the TMREL. This unit increase may be more than a single unit change in risk
-exposure, so it is important to clarify this with the GBD modeler.
-
-.. todo::
-
-    Determine if there is a data source that documents these units
 
 The GBD-estimated relative risks are assumed to represent the *causal* effect of the 
 risk on the outcome, as they are calculated in the absense of confounding factors and 
@@ -209,10 +212,10 @@ the non-causal association between a given risk and an outcome or other risk fac
 Desired correlation between two variables will need to be accounted for separately; see
 the :ref:`risk correlation page <risk_correlation>` for more details.
 
-Risk effect in vivarium
+Risk effect in Vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Materials related to risk effects models in vivarium:
+Materials related to risk effects models in Vivarium:
 
 - :ref:`Existing risk effects models <risk_effects_models>`
 - :ref:`Risk effect model document template <risk_effects_model_template>`
@@ -224,9 +227,9 @@ associations between two variables in vivarium.
 A risk effects model for a given risk-outcome pair must document:
 
 - Relative risk as a function of risk exposure
-- Instructions for how to apply the risk effect to a given outcome
-
-    - This will likely include information related to the risk-outcome pair's :ref:`population attributable fraction <pafs>`.
+- Instructions for how to delete the baseline effect,
+  that is, the effect of the risk exposure on the outcome
+  that is already baked into the baseline population-level rates of the outcome.
 
 In vivarium, we build the risk-outcomes component in order to study the
 impact of desired outcomes contributed by given risk exposure. The outcome might
@@ -257,7 +260,7 @@ Where,
  - :math:`i` stands for incidence rate
  - :math:`p` stands for proportion of exposed population
  - :math:`RR` stands for relative risk or incidence rate ratio
- - :math:`PAF` stands for population attributable fraction
+ - :math:`PAF` stands for population attributable fraction (:ref:`described in detail here <measures_of_impact>`)
  - :math:`E(RR_e)` stands for expected relative risk at risk exposure level e 
  - :math:`tmrel` stands for theoretical minimum risk exposure level
  - :math:`lower` stands for minimum exposure value
@@ -272,6 +275,104 @@ Where,
 
 We can refer to the outcome rate multiplied by (1 - PAF) as the "risk-deleted outcome rate."
 
+Using RRs and PAFs from GBD
+---------------------------
+
+While GBD reports RRs and PAFs, they are often not suitable for use in Vivarium models.
+This is because we typically model GBD causes as dynamic state-transition models,
+and are interested in applying RRs and PAFs to *transitions* in the model.
+
+GBD reports RRs and PAFs for years of life lost (YLLs) and years lived with disability (YLDs).
+YLLs are the number of deaths (due to a cause) multiplied by the average remaining life expectancy
+(which is a constant for a given age and sex group).
+YLDs are the number of prevalent cases of a cause multiplied by the disability weight
+of that cause, which is a constant for a given cause.
+Therefore
+
+.. math::
+
+  RR_\text{prevalence} = RR_\text{YLDs}
+
+  PAF_\text{prevalence} = PAF_\text{YLDs}
+
+  RR_\text{CSMR} = RR_\text{YLLs}
+
+  PAF_\text{CSMR} = PAF_\text{YLLs}
+
+where CSMR is the cause-specific mortality rate for a given cause.
+
+However, if we have a dynamic SIS model for a cause, we are interested in applying risk effects to
+the transitions in this diagram:
+
+.. graphviz::
+
+  digraph {
+    rankdir=LR
+    node [shape=box]
+    S [label="Susceptible"]
+    I [label="Infected"]
+    D [label="Dead"]
+    S -> I [label="Incidence rate"]
+    I -> S [label="Remission rate"]
+    I -> D [label="Excess mortality rate"]
+  }
+
+The RR and PAF we have on prevalence (aka the number of people in the infected state)
+might apply to either of the incidence and remission rates, or some combination.
+Intuitively, the fact that more people with the risk exposure have the disease might be because
+more of them *get* the disease, or because it takes longer for them to *recover* from it.
+
+.. note::
+
+  Technically, mortality also matters: if the risk exposure causes people to die more quickly
+  if they have the disease,
+  that will lower the effect of the risk exposure on prevalence (since people who die are no
+  longer prevalent cases).
+  However, this effect is small when the mortality rate overall is small.
+  See TODO below to make this precise.
+
+We typically apply the risk effect to the incidence rate, but this is a modeling choice.
+With this choice:
+
+.. math::
+
+  RR_\text{remission} = 1
+
+  PAF_\text{remission} = 0
+
+  RR_\text{incidence} = RR_\text{prevalence}
+
+  PAF_\text{incidence} = PAF_\text{prevalence}
+
+The RR and PAF we have on CSMR doesn't directly fit anywhere into our diagram, because CSMR is a mortality rate among
+the total population, and our mortality transition only applies to the infected population.
+Intutively, the CSMR measures *overlap* with the prevalence measures; there could be more deaths among
+people with the risk exposure because they are more likely to have the disease, even if
+they are no more likely to die from it once they have it.
+
+We've developed a simple equation to adjust the CSMR RR to apply to the excess mortality rate:
+
+.. math::
+  
+  RR_\text{excess mortality} = \frac{RR_\text{CSMR}}{RR_\text{incidence}}
+
+The PAF has no such closed-form solution, so should be recalculated from the new RR
+using equations above (see also :ref:`joint_paf_calculation` for a more explicit description
+of this process, including the note about not yet having a standard computational approach
+to calculating our own PAFs).
+
+.. todo::
+
+  Make this precise.
+  I believe that this is heuristic and not quite correct.
+  The :ref:`child growth failure risk effects page <2021_risk_effect_cgf>` includes a notebook that approximately checks it
+  numerically, and a Word document that concludes with an "almost identical"
+  equation that seems importantly different.
+  Also, the Word doc appears to be about a risk factor that affects mortality,
+  rather than a risk factor that affects a disease that affects mortality?
+  So I think something has been lost here.
+
+
 .. todo::
 
     Add a note about bias this introduces...
@@ -280,33 +381,7 @@ We can refer to the outcome rate multiplied by (1 - PAF) as the "risk-deleted ou
 
         But maybe this belongs in the PAF section?
 
-    Relevant ticket in backlog: https://jira.ihme.washington.edu/browse/SSCI-1152 
-
-Direct and indirect risk effect
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. todo::
-
-    Move mediation-related information to the mediation page
-
-For a risk-mediator outcome, simulation model would map a probability
-distribution of possible mediator exposure level to each measurement of
-associated risk factor (e.g. there is X% chance you will observe a SBP
->= 100 mm Hg for given BMI of 25 in adults).
-
-In general, we would model the risk-outcomes that are directly causally related
-(e.g. BMI -> IHD), but sometimes we consider adding a mediator to account for
-indirect relationship between a risk-cause pair. (e.g. BMI -> SBP -> IHD)
-In the example shown above, the direct effect is determined by risk effect
-between BMI and IHD (:math:`\mu_{1}`) and the indirect effect is the product
-of risk effect between BMI and SBP (:math:`\mu_{2}`) and risk effect between
-SBP and IHD (:math:`\mu_{3}`). Therefore, the total risk effect is the sum of
-direct and indirect effect, namely :math:`\mu_{1} + \mu_{2} \times \mu_{3}`
-based on a linear approach. Note that we need to check with GBD modeler whether 
-the relative risk from GBD the direct, indirect or total effects and then choose 
-the appropriate one in our model.
-
-.. image:: mediation_example_bmi.svg
+    Relevant ticket in backlog: https://jira.ihme.washington.edu/browse/SSCI-1152
 
 
 Restrictions
