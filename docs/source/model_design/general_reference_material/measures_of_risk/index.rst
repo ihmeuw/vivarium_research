@@ -179,12 +179,12 @@ Example:
       - 5-year risk = 0.3 per person-year X 5 years = 150%
 
 Measures of effect
-++++++++++++++++++
+^^^^^^^^^^^^^^^^^^
 
 Measures of effect are used to compare the frequency of outcome between specified populations. When one population group is exposed to a risk factor and the other is not, measures of effect can be used to study associations between frequency of disease and the risk factor. They reflect the increase or decrease in frequency of disease in one population in comparison with another. Frequency measures (e.g. risks, rates) can be compared by estimating their *ratios* or *differences*.
 
 Ratio measures
-^^^^^^^^^^^^^^
+**************
 Ratio measures estimate how many times more common a disease is in one population compared with another; they provide a measure of the *magnitude* of the effect of a risk factor on incidence of disease. The effect of the risk factor can be also be measured on cause-specific mortality, or all cause-mortality.
 
 It is possible to compare any type of measure of frequency (e.g. risks, rates) between two populations. For example, the rate ratio (RR) compares the rate of disease between two groups. Similarly, the risk ratio and the odds ratio (OR) compare risks and odds between two groups respectively. For rare diseases, risks and rates tend to be numerically similar, so rate ratios and risk ratios tend also to be numerically very similar. The term ‘relative risk’ is often used to mean either the rate ratio or risk ratio (or sometimes even the odds ratio). However, it is always better to be specific about which ratio measure you are using, to avoid confusion.
@@ -255,7 +255,7 @@ To summarize, relative risks can be:
   If the relative risk is >1, the exposure is harmful. If the relative risk is <1, the exposure is protective. In GBD, we define risks as harmful and so we always use >1 relative risks.
 
 Difference measures
-^^^^^^^^^^^^^^^^^^^
+*******************
 
 Difference measures are used to estimate the *excess* risk of disease caused by a risk factor *among the exposed group*. That is, difference measures of effect estimate how much of the
 disease in the exposed group was due to the risk factor of interest. Two commonly used difference measures of effect are the risk difference and the risk difference percent.
@@ -281,7 +281,7 @@ For example, the RD% from the above example is :math:`\frac{(280/1000) - (150/10
 We interpret this by saying breastfeeding was responsible for 46% of HIV infections among children born to, and breastfed by, HIV-infected mothers (the exposed). Note that this does not mean that breastfeeding is responsible for 46% of HIV infections among children born to HIV-infected mothers. Measures of effect tell us only about the additional risk of disease among exposed individuals (here, children of HIV-infected mothers who were breastfed) compared with unexposed individuals. In order to estimate how important breastfeeding is as a risk factor for HIV in the target population (here, children born to HIV-infected mothers), we would also need to have information on how common the risk factor is in the population (i.e., what proportion of children born to HIV-infected mothers are breastfed), see next section. The RD% is sometimes also called the *attributable fraction in the exposed*, or the *aetiologic fraction in the exposed*.
 
 Ratios versus differences: which is more appropriate?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+*****************************************************
 
 Ratio measures and difference measures tell us very different things. Ratio measures are used to summarise the strength of association between a risk factor and an outcome. Difference measures, on the other hand, are used to summarise how much more disease is experienced by a group exposed to a risk factor of interest compared to an unexposed group. Assuming that the association between risk factor and disease is causal, difference measures can be used to estimate how much of a disease among the exposed can be attributed to exposure, or could be prevented by eliminating the risk factor. Note these measures only relate to the exposed group.
 
@@ -290,7 +290,7 @@ Difference measures relating to the whole population tend to be more useful and 
 .. _measures_of_impact:
 
 Measures of impact
-++++++++++++++++++
+^^^^^^^^^^^^^^^^^^
 
 Measures of population impact estimate the expected health impact on a population *if* the distribution of risk factors that cause disease in that population were changed or removed. Measures of impact take into account both the **strength of the effect** and the **distribution of the risk factor in the population**.
 Measures of impact assume that we have established a *causal* effect of the exposure on the outcome. Population impact estimates measure how much of the disease in the population is caused by the suspected risk factor.
@@ -314,7 +314,7 @@ The PAF is not the only measure of population impact; another measure common in 
 is discussed first here.
 
 Population attributable risk (PAR)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**********************************
 
 Example 2x2 risk table:
 
@@ -363,7 +363,7 @@ where
       = (ad-bc)/[(a+b+c+d)(c+d)]
 
 Population attributable risk fraction (PAF)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+*******************************************
 
 The population attributable fraction is a quantification of the proportion of a given cause outcome, such as cases, deaths, or DALYs, that could be eliminated by removing a risk exposure. It is the proportion of all cases in the whole study population (exposed and unexposed) that may be attributed to the exposure, assuming a causal association. The population attributable risk fraction (PAF) is estimated by dividing the population attributable risk by the risk in the total population (r).
 
@@ -397,7 +397,7 @@ The following diagram illustrates how the PAF is derived intuitively from the **
 However, it is not always possible to find the *prevalence of exposure among cases* (:math:`p_c`) and so equation (a) is often used, introducing bias. The following section talks about the bias that occurs.
 
 Bias in PAF Calculation
-^^^^^^^^^^^^^^^^^^^^^^^
+***********************
 
 The PAF can be calculated using the following formula:
 
@@ -493,7 +493,7 @@ Where the biased PAF is calculated using equation :eq:`exposed_population_paf_eq
 calculated using equation :eq:`stratified_paf_eq`.
 
 Direction
-^^^^^^^^^
++++++++++
 
 The direction of this bias was found to be fully determined by the confounding
 risk ratio:
@@ -536,7 +536,7 @@ This relationship is captured as follows:
     - :math:`+`
 
 Magnitude
-^^^^^^^^^
++++++++++
 
 The magnitude of the PAF bias was shown to **increase** with:
 
@@ -572,7 +572,7 @@ exposure prevalence and RR.
     .. image:: darrow_confounding_figures.jpg
 
 Other sources of bias
-^^^^^^^^^^^^^^^^^^^^^
++++++++++++++++++++++
 
 Darrow concludes by noting that the PAF is highly sensitive to the relative
 risk, exposure prevalence, and distribution of confounders. Thus when relative
@@ -584,7 +584,7 @@ populations can result in vastly more bias than that of using the wrong PAF
 equation.
 
 Estimation of the PAF in epidemiological studies
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+************************************************
 
 .. todo::
 
