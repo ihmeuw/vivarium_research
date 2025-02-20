@@ -537,6 +537,30 @@ V&V Checks:
     - Note
   * - 1
     - Wave I Pregnancy V&V
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 2
+    - Wave I Maternal disorders V&V
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update 
+      the Pakistan OL prevalence values from GBD 2021 to GBD 2023. Locations include Pakistan, Nigeria, and Ethiopia. 
+      10 seeds * 10,000 simulants = 100,000 total population.
+  * - 3
+    - Wave I Neonatal disorders V&V
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Found error in LBWSG exposure distribution in artifact. Locations include Pakistan, Nigeria, and Ethiopia. 
+      10 seeds * 10,000 simulants = 100,000 total population.
+  * - 3.1
+    - Wave I Neonatal disorders V&V with correct LBWSG distribution
     - Incomplete
     - N/A
     - 10
@@ -563,6 +587,29 @@ V&V Checks:
       - Confirm pregnancy population is within expected WRA age group (15-49 years) 
     - All checks passed except last one; RT is updating our observer output requests to add an observer for pregnant person age.
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/pregnancy_model.ipynb>`_ 
+  * - 2.0
+    - 
+       - For each modeled maternal disorder (sepsis, hemorrhage, and OL/uterine rupture), we need to: 
+          - Validate the cause-specific incidence risk and case fatality rate in
+            each age group against the corresponding quantities calculated from
+            GBD data
+          - Validate the number of cause-specific deaths per population against
+            the CSMR from GBD
+          - Validate the total YLDs and YLLs per case
+       - Confirm the overall mortality rate of all maternal disorders lines up with GBD expectations. 
+    - All checks passed except error found in GBD 2021 for Pakistan fistula modeling - need to update the artifact for Pakistan OL prevalence values from 
+      GBD 2021 to GBD 2023. Did not explicitly check YLLs yet.
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/maternal_disorders_refactored.ipynb>`_
+  * - 3.0
+    - For each modeled neonatal disorder (sepsis, hemorrhage, and OL/uterine rupture), we need to: 
+       - Validate the cause-specific incidence risk and case fatality rate in
+        each age group against the corresponding quantities calculated from
+        GBD data
+       - Validate the number of cause-specific deaths per population against
+        the CSMR from GBD
+    - Found an error in LBWSG distribution in artifact, which might be the cause of some of the other checks that weren't passing, including the ACMR 
+      for the late neonatal group and the CSMR for preterm 
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/neonatal_disorders.ipynb>`_
 
 
 .. _mncnh_portfolio_6.0:
