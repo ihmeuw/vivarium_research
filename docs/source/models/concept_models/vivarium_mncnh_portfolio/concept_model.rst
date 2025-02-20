@@ -566,6 +566,8 @@ V&V Checks:
     - 10
     - 100,000
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+      LBWSG distributions in artifact, GBD, and simulation are now matching, but preterm deaths still look too low
+      in the simulation.
 
 .. note:: 
   
