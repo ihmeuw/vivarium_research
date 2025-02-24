@@ -588,7 +588,7 @@ V&V Checks:
       - Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type
       - Confirm pregnancy population is within expected WRA age group (15-49 years) 
     - All checks passed except last one; RT is updating our observer output requests to add an observer for pregnant person age.
-    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/pregnancy_model.ipynb>`_ 
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/pregnancy_model.ipynb>`__ 
   * - 2.0
     - 
        - For each modeled maternal disorder (sepsis, hemorrhage, and OL/uterine rupture), we need to: 
@@ -601,17 +601,17 @@ V&V Checks:
        - Confirm the overall mortality rate of all maternal disorders lines up with GBD expectations. 
     - All checks passed except error found in GBD 2021 for Pakistan fistula modeling - need to update the artifact for Pakistan OL prevalence values from 
       GBD 2021 to GBD 2023. Did not explicitly check YLLs yet.
-    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/maternal_disorders_refactored.ipynb>`_
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/maternal_disorders_refactored.ipynb>`__
   * - 3.0
     - For each modeled neonatal disorder (sepsis, hemorrhage, and OL/uterine rupture), we need to: 
        - Validate the cause-specific incidence risk and case fatality rate in
-        each age group against the corresponding quantities calculated from
-        GBD data
+          each age group against the corresponding quantities calculated from
+          GBD data
        - Validate the number of cause-specific deaths per population against
-        the CSMR from GBD
+          the CSMR from GBD 
     - Found an error in LBWSG distribution in artifact, which might be the cause of some of the other checks that weren't passing, including the ACMR 
       for the late neonatal group and the CSMR for preterm 
-    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/neonatal_disorders.ipynb>`_
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/neonatal_disorders.ipynb>`__
 
 
 .. _mncnh_portfolio_6.0:
