@@ -622,7 +622,10 @@ V&V Checks:
     - Validate LBWSG exposure distribution
     - LBWSG distributions in artifact, GBD, and simulation are now matching, but preterm deaths still look too low in the simulation
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/lbwsg_distribution.ipynb>`__
-
+  * - 3.2
+    - Validate all-cause mortality for early and late neonatal age groups with LBWSG component removed 
+    - Early neonatal mortality is still being overestimated in the simulation 
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_26_vnv_neonatal_acmr.ipynb>`__
 
 
 .. _mncnh_portfolio_6.0:
