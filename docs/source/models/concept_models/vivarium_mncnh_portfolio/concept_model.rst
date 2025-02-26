@@ -557,17 +557,22 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
-    - Found error in LBWSG exposure distribution in artifact. Locations include Pakistan, Nigeria, and Ethiopia. 
+    - Locations include Pakistan, Nigeria, and Ethiopia. 
       10 seeds * 10,000 simulants = 100,000 total population.
   * - 3.1
     - Wave I Neonatal disorders V&V with correct LBWSG distribution
-    - Incomplete
+    - Complete
     - N/A
     - 10
     - 100,000
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
-      LBWSG distributions in artifact, GBD, and simulation are now matching, but preterm deaths still look too low
-      in the simulation.
+  * - 3.2
+    - Wave I Neonatal disorders V&V with LBWSG component removed
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
 
 .. note:: 
   
@@ -586,6 +591,7 @@ V&V Checks:
       - Confirm ANC visit rate matches expectations
       - Confirm ultrasound rates matches inputs for all scenarios
       - Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type
+      - Confirm birth rates (live, still, partial) match GBD
       - Confirm pregnancy population is within expected WRA age group (15-49 years) 
     - All checks passed except last one; RT is updating our observer output requests to add an observer for pregnant person age.
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/pregnancy_model.ipynb>`__ 
@@ -612,6 +618,11 @@ V&V Checks:
     - Found an error in LBWSG distribution in artifact, which might be the cause of some of the other checks that weren't passing, including the ACMR 
       for the late neonatal group and the CSMR for preterm 
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/neonatal_disorders.ipynb>`__
+  * - 3.1
+    - Validate LBWSG exposure distribution
+    - LBWSG distributions in artifact, GBD, and simulation are now matching, but preterm deaths still look too low in the simulation
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/lbwsg_distribution.ipynb>`__
+
 
 
 .. _mncnh_portfolio_6.0:
