@@ -193,7 +193,7 @@ Assumptions and Limitations
 ---------------------------
 
 - We assume that antibiotics availability captures actual use, and not simply the treatment being in the facility 
-- We assume that the delivery facility is also the facility where a sick neonatal will seek care for sepsis
+- We assume that the delivery facility is also the facility where a sick neonate will seek care for sepsis
 - We assume that the relative risk of sepsis mortality with antibiotics in practice is a value that we can find in the literature
 - We have excluded the effect of antibiotics on pneumonia mortality, because this cause is currently lumped with 'other causes'
 
