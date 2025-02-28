@@ -172,7 +172,7 @@ Here is some pseudocode for deriving the PAF and RR of "lack of access to CPAP" 
   RR_no_CPAP = 1 / RR_CPAP
   # p_RDS_w_CPAP = (1 - PAF_no_CPAP) * p_RDS
   PAF_no_CPAP = 1 - p_RDS_w / p_RDS # solved equation in previous line for PAF
-  PAF_no_CPAP = 1 - 1 / (RR_no_CPAP * p_RDS_wo_CPAP + p_RDS_w_CPAP)
+  PAF_no_CPAP = 1 - 1 / (RR_no_CPAP * p_no_CPAP + p_CPAP)
 
 Scenarios
 ---------
