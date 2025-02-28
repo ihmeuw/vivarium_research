@@ -201,7 +201,7 @@ Validation and Verification Criteria
 ------------------------------------
 
 - Population-level mortality rate should be the same as when this intervention is not included in the model
-- The ratio of sepsis deaths per birth among those with antibiotics access divided by those without antibiotics access should equal the relative risk parameter used in the model
+- The ratio of sepsis deaths per birth among those without antibiotics access divided by those with antibiotics access should equal the relative risk parameter used in the model
 - The baseline coverage of antibiotics in each facility type should match the values in the artifact
 - Validation: how does the sepsis moratlity rate in a counterfactual scenario with 100% antibiotic access compare to sepsis mortality rates in high-income countries?  They should be close, and the counterfactual should not be lower.
 
