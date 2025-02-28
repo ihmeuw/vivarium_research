@@ -61,7 +61,7 @@ These placeholder values come from two data sources, both for Ethiopia, both ide
   * - Home Birth
     - 5
     - :math:`\text{Uniform}(0,10)`
-    - Assumtion; need to investigate data sources for care seeking among children born outside of the hospital system 
+    - Assumption; need to investigate data sources for care seeking among children born outside of the hospital system 
   * - BEmONC Facilities
     - 41.55
     - :math:`\text{Uniform}(30.2,52.9)`
