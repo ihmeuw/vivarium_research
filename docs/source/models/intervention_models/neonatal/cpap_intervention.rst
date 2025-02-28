@@ -81,7 +81,7 @@ Vivarium Modeling Strategy
 
 This intervention requires adding an attribute to all simulants to specify if a birth happens in a facility with access to CPAP.  Since the neonatal mortality model does not explicitly represent incidence of RDS, we will also not track who receives CPAP.  Instead the model will have different cause-specific mortality rates for RDS for individuals born with and without access to CPAP (implemented with our ``Risk`` and ``RiskEffect`` components).
 
-We will use the decision tree below to find the PAF of RDS mortality without access to CPAP that are logically consistent with the baseline delivery facility rates and baseline CPAP coverage.
+We will use the decision tree below to find the PAF of RDS mortality without access to CPAP that is logically consistent with the baseline delivery facility rates and baseline CPAP coverage.
 
 We will then add an attribute to each simulant indicating whether the birth occurs at a facility with access to CPAP (which will be dependent on the facility choice, i.e. no access for home births and lower access for BEmONC than CEmONC facilities).
 
