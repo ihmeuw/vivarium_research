@@ -66,7 +66,7 @@ We might be able to borrow strength from other locations and times by predicting
   * - Home Birth
     - 0
     - Deterministic value (no uncertainty)
-    - Assumtion; need to double check if this is reasonable
+    - Assumption; need to double check if this is reasonable
   * - BEmONC Facilities
     - 7.5
     - :math:`\text{Normal}(7.5,2^2)`
