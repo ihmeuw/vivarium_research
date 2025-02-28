@@ -43,24 +43,45 @@ This section describes how a CPAP intervention can be implemented and calibrated
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Preterm with RDS Mortality Probability (:math:`\text{CSMR}_i^\text{RDS}`)
+  * - Preterm with RDS Mortality Probability :math:`\text{CSMR}_i^\text{RDS}`
     - Adjust multiplicatively using RR
     - Yes
     - For convenience, we will model this like a dichotomous risk factor; more details below
 
-Baseline Coverage Data
-++++++++++++++++++++++++
+Baseline Coverage and RR Data
++++++++++++++++++++++++++++++
 
 39.3% of CEmONC facilities and 7.5% of BEmONC facilities have CPAP, according to the 2016 Ethiopia EmONC Final Report.  Please use these as a placeholder for now while we try to find reliable values for Nigeria and Pakistan. 
 
 We might be able to borrow strength from other locations and times by predicting coverage for more country-years simultaneously, perhaps even in combination with other key intervention technologies, based on sources such as existing `Service Provision Assessment (SPA) <https://www.dhsprogram.com/methodology/Survey-Types/SPA.cfm>`_ and `Service Availability and Readiness Assessment (SARA) <https://www.who.int/data/data-collection-tools/service-availability-and-readiness-assessment-(sara)>`_ data.
 
+.. list-table:: Baseline Coverage of CPAP (placeholder values)
+  :widths: 15 15 15 15
+  :header-rows: 1
+
+  * - Birth Facility
+    - Coverage Mean (%)
+    - Coverage Distribution (%)
+    - Notes
+  * - Home Birth
+    - 0
+    - Deterministic value (no uncertainty)
+    - Assumtion; need to double check if this is reasonable
+  * - BEmONC Facilities
+    - 7.5
+    - :math:`\text{Normal}(7.5,2^2)`
+    - placeholder value based on a single data point; uncertainty is an assumption without direct evidence
+  * - CEmONC Facilities
+    - 39.3
+    - :math:`\text{Normal}(39.3,5^2)`
+    - placeholder value based on a single data point; uncertainty is an assumption without direct evidence
+
 Vivarium Modeling Strategy
 --------------------------
 
-This intervention requires adding an attribute to all simulants to specify if a birth happens in a facility with access to CPAP.  Since the neonatal mortality model does not explicitly represent incidence of RDS, we will also not track who receives CPAP.  Instead the model will have different cause-specific mortality rates for RDS for individuals born with and without access to CPAP.
+This intervention requires adding an attribute to all simulants to specify if a birth happens in a facility with access to CPAP.  Since the neonatal mortality model does not explicitly represent incidence of RDS, we will also not track who receives CPAP.  Instead the model will have different cause-specific mortality rates for RDS for individuals born with and without access to CPAP (implemented with our ``Risk`` and ``RiskEffect`` components).
 
-We will use the decision tree below to find the probability of RDS mortality with and without access to CPAP that are logically consistent with the baseline delivery facility rates and baseline CPAP coverage (and population level RDS mortality probability). Since the neonatal model includes different mortality probabilities for both the early and late neonatal periods, this calculation must be performed for both time periods as well.
+We will use the decision tree below to find the PAF of RDS mortality without access to CPAP that are logically consistent with the baseline delivery facility rates and baseline CPAP coverage.
 
 We will then add an attribute to each simulant indicating whether the birth occurs at a facility with access to CPAP (which will be dependent on the facility choice, i.e. no access for home births and lower access for BEmONC than CEmONC facilities).
 
@@ -68,6 +89,7 @@ We will then use the conditional probabilities for simulants with and without ac
 
 A `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_ found a relative risk of 0.53 (95% CI 0.34-0.83) of RDS mortality for neonates with access to CPAP.   (Note that the population that this effect size applies to is preterm infants with "respiratory failure becoming evident soon after birth".)
 
+.. _cpap_calibration:
 
 Calibration Strategy
 --------------------
@@ -108,7 +130,7 @@ The following decision tree shows all of the paths from delivery facility choice
 
 where :math:`p(\text{RDS})` is the probability of dying from Preterm with RDS in the general population, and :math:`p(\text{RDS}|\text{CPAP})` and :math:`p(\text{RDS}|\text{no CPAP})` are the probability of dying from Preterm with RDS in setting with and without access to CPAP.  For each path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has CPAP available (7.5% in Ethiopia in 2016)
 
-When we fill in the location-specific values for delivery facility rates, CPAP coverage by facility type, relative risk of mortality with CPAP access, and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (p_RDS_w and p_RDS_wo), which we can solve analytically.
+When we fill in the location-specific values for delivery facility rates, CPAP coverage by facility type, relative risk of mortality with CPAP access, and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (p_RDS_w_CPAP and p_RDS_wo_CPAP), which we can solve analytically.
 
 As mentioned above, it is convenient to model this intervention like a dichotomous risk factor, so that we can reuse the
 :class:`Risk<vivarium_public_health.risks.base_risk.Risk>`
@@ -144,12 +166,13 @@ Here is some pseudocode for deriving the PAF and RR of "lack of access to CPAP" 
   p_CPAP_CEmONC = 0.393
   RR_CPAP = 0.53
 
-  p_RDS_w = ... # solve system of equations from previous section
-  p_RDS_wo = ...
+  p_RDS_w_CPAP = ... # solve system of equations from previous section
+  p_RDS_wo_CPAP = # TODO: fill this in explicitly
 
   RR_no_CPAP = 1 / RR_CPAP
-  # p_RDS_w = (1 - PAF_no_CPAP) * p_RDS
+  # p_RDS_w_CPAP = (1 - PAF_no_CPAP) * p_RDS
   PAF_no_CPAP = 1 - p_RDS_w / p_RDS # solved equation in previous line for PAF
+  PAF_no_CPAP = 1 - 1 / (RR_no_CPAP * p_RDS_wo_CPAP + p_RDS_w_CPAP)
 
 Scenarios
 ---------
@@ -179,3 +202,5 @@ References
 ------------
 
 * https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/
+* https://chatgpt.com/share/67c1c86e-3194-8010-9fe7-aadd3e15c4d0
+
