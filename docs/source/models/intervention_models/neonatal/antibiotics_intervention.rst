@@ -79,7 +79,7 @@ This intervention requires adding an attribute to all simulants to specify if a 
 
 The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has access to antibiotics during the neonatal period, which we assume will be closely related to the facility choice during birth, i.e. home births have much lower access than in-facility births, and births in BEmONC facilities have lower access than CEmONC facilities.
 
-To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "lack of access to antibiotics".  With this framing, ``RiskEffect`` component requires data on (1) the relative risk of sepsis mortality for people with lack of access to antibiotics, and (2) the population attributable fraction (PAF) of sepsis due to lack of access to antibiotics.  We will use the decision tree below to find the probability of sepsis mortality with and without access to antibiotics that are logically consistent with the baseline delivery facility rates and baseline antibiotics coverage.
+To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "lack of access to antibiotics".  With this framing, the ``RiskEffect`` component requires data on (1) the relative risk of sepsis mortality for people with lack of access to antibiotics, and (2) the population attributable fraction (PAF) of sepsis due to lack of access to antibiotics.  We will use the decision tree below to find the probability of sepsis mortality with and without access to antibiotics that are logically consistent with the baseline delivery facility rates and baseline antibiotics coverage.
 
 In Vivarium, this risk effect will modify the sepsis mortality pipeline, resulting in 
 
