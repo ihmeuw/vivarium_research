@@ -573,6 +573,13 @@ V&V Checks:
     - 10
     - 100,000
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 3.3
+    - Wave I Neonatal disorders V&V with early NN observer bugfix
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
 
 .. note:: 
   
@@ -622,8 +629,14 @@ V&V Checks:
     - Validate LBWSG exposure distribution
     - LBWSG distributions in artifact, GBD, and simulation are now matching, but preterm deaths still look too low in the simulation
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/lbwsg_distribution.ipynb>`__
-
-
+  * - 3.2
+    - Validate all-cause mortality for early and late neonatal age groups with LBWSG component removed 
+    - Early neonatal mortality is still being overestimated in the simulation 
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_26_vnv_neonatal_acmr.ipynb>`__
+  * - 3.3
+    - Validate all-cause mortality for early neonatal age group with observer bugfix
+    - Early neonatal mortality is validating now! 
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_27_vnv_neonatal_acmr.ipynb>`__
 
 .. _mncnh_portfolio_6.0:
 
