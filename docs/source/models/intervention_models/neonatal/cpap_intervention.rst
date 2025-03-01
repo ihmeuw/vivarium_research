@@ -172,7 +172,15 @@ Here is some pseudocode for deriving the PAF and RR of "lack of access to CPAP" 
   RR_no_CPAP = 1 / RR_CPAP
   # p_RDS_w_CPAP = (1 - PAF_no_CPAP) * p_RDS
   PAF_no_CPAP = 1 - p_RDS_w / p_RDS # solved equation in previous line for PAF
-  PAF_no_CPAP = 1 - 1 / (RR_no_CPAP * p_no_CPAP + p_CPAP)
+
+**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that :math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.
+The math for this can be found :ref:`on the antibiotics page <intervention_neonatal_antibiotics>`
+and the pseudocode would look as follows:
+
+::
+  population_average_RR = RR_no_CPAP * p_no_CPAP + 1 * p_CPAP
+  PAF_no_CPAP = 1 - 1 / population_average_RR
+
 
 Scenarios
 ---------
