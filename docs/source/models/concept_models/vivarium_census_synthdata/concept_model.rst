@@ -3791,6 +3791,24 @@ to omissions and not duplicates. Therefore, we calculated the existing net
 omission rate from the census to be 1.45% based on the population in the
 simulation. We will need this value for further calculations.
 
+.. warning::
+
+  For computational reasons and to simplify, this calculation was done once
+  on (a prior version of) the simulated *population*, rather than on a
+  per-dataset, per-year, per-location basis.
+
+  The primary reason why we don't simply calculate this at runtime during the
+  pseudopeople noising process is that we noise shards independently, and don't
+  want this scaling factor to be per-shard.
+
+  As a result, the pseudopeople user will not receive *exactly* the amount
+  of "do not respond" noise they request, due to differences between datasets,
+  years, locations, and potentially changes we've made to the simulation since
+  this 1.45% number was calculated.
+  In the pseudopeople tests, we address this issue by including a 95% uncertainty
+  interval spanning +/- 3 percentage points from the user-requested noise level
+  on our :ref:`target value for fuzzy checking <fuzzy_checking>`.
+
 Currently, an individual probability of omission is found for each simulant
 based on their age, sex and race/ethnicity. To allow for higher or lower rates
 of omission, we will then scale this individual omission risk based on the new
