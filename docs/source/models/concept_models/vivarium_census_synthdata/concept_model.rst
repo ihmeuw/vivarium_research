@@ -3793,7 +3793,7 @@ simulation. We will need this value for further calculations.
 
 .. warning::
 
-  For computational reasons and to simplify, this calculation was done once
+  For computational reasons and to keep things simple, this calculation was done once
   on (a prior version of) the simulated *population*, rather than on a
   per-dataset, per-year, per-location basis.
 
