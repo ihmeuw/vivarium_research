@@ -110,8 +110,8 @@ if the study does not apply to very high risk factor values.
 
 After you have defined the relative risks you plan to use, you will need
 to recalculate the PAFs to include this new "cause" in the
-model. More information on PAFs and how to find them can be found
-on the :ref:`PAF vivarium page <pafs>`.
+model. More information on PAFs can be found
+on the :ref:`measures of risk page <measures_of_impact>`.
 
 Once you have a completed model design, take care to include model updates
 one step at a time with V&V between each step. Mixing data sources and
