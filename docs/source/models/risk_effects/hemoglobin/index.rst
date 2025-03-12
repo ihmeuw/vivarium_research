@@ -179,24 +179,3 @@ As noted in the `Population Attributable Fraction` section of the :ref:`Modeling
 References
 ----------
 
-.. todo::
-
-  Update the GBD 2019 Risk Factor Methods appendix citation to be unique to your
-  risk effects page (replace 'Risk-Effects-Model-Template' with '{Risk
-  Name}-Effects')
-
-  Update the appropriate page numbers in the GBD risk factors methods appendix below
-
-  Add additional references as necessary
-
-.. [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Model-Template]
-
-  Pages ???-??? in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
-
-    **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factors Collaborators.
-    :title:`Global burden of 87 risk factors in 204 countries and territories,
-    1990–2019: a systematic analysis for the Global Burden of Disease Study
-    2019`. Lancet 2020; **396:** 1223–49. DOI:
-    https://doi.org/10.1016/S0140-6736(20)30752-2
-
-.. _2019_risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
