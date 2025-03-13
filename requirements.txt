@@ -1,6 +1,4 @@
-# HACK: The <8.2.0 is a workaround for https://github.com/spatialaudio/nbsphinx/issues/825
-# Can be removed when nbsphinx is updated to support Sphinx 8.2.0
-sphinx<8.2.0
+sphinx
 sphinx-autobuild
 sphinx_rtd_theme
 nbsphinx
