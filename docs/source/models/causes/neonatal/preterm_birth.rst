@@ -172,7 +172,7 @@ The way these CSMRs are used is the same for all subcauses, and therefore is inc
 
 where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 :math:`\text{CSMR}` is the cause-specific mortality rate for preterm birth complications,
-:math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`Z = 1 / E[\text{RR}_{\text{BW,GA}} | \text{GA}<37]`.
+:math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`E[\text{RR}_{\text{BW,GA}} | \text{GA}<37] \cdot Z = 1`. Solving for :math:`Z` gives :math:`Z = 1 / E[\text{RR}_{\text{BW,GA}} | \text{GA}<37]`.
 
 .. note::
 
@@ -180,7 +180,7 @@ where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 
   As described on the :ref:`LBWSG risk effects page <2019_risk_effect_lbwsg>`, we utilize a custom PAF calculation for the interpolated LBWSG relative risks specific to a given gestational age and birth weight. This custom calculation has been performed in a pipeline like the one `linked here for the nutrition optimization simulation <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/blob/main/src/vivarium_gates_nutrition_optimization_child/data/lbwsg_paf.yaml>`_.
 
-  We will utilize this same LBWSG PAF calculation pipeline to calculate the normalizing constant :math:`Z` for the preterm birth cause of death. To do this, we will follow the same LBWSG PAF calculation steps, but perform it only among LBWSG exposures that have gestational ages less than 37 weeks. This pipeline then outputs a "PAF" value equivalent to :math:`\frac{E[\text{RR}_{\text{BW,GA}} | \text{GA}<37] - 1}{E[\text{RR}_{\text{BW,GA}} | \text{GA}<37]}`, which is equal to :math:`Z + 1`. Therefore, we can use (1 - "PAF") as the :math:`Z` term for the preterm birth cause of death (with "PAF" equal to the value output from the PAF calculation pipeline).
+  We will utilize this same LBWSG PAF calculation pipeline to calculate the normalizing constant :math:`Z` for the preterm birth cause of death. To do this, we will follow the same LBWSG PAF calculation steps, but perform it only among LBWSG exposures that have gestational ages less than 37 weeks. This pipeline then outputs a "PAF" value which is difficult/counterintuitive to interpret as a PAF, calculated as :math:`\frac{E[\text{RR}_{\text{BW,GA}} | \text{GA}<37] - 1}{E[\text{RR}_{\text{BW,GA}} | \text{GA}<37]}`, which is equal to :math:`Z + 1`. Therefore, we can use (1 - "PAF") as the :math:`Z` term for the preterm birth cause of death (with "PAF" equal to the value output from the PAF calculation pipeline).
 
   We will use a **population size of 195_112** for this calculation. This number was selected in order to satisfy the following criteria:
 
