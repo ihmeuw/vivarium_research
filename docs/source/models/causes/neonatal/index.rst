@@ -225,7 +225,7 @@ To obtain the ACMR for a specific simulant, we subtract off the *population* CSM
     + \sum_k \text{CSMR}_{i}^{k},
     \end{align*}
 
-where :math:`\text{BW}_i` and :math:`\text{BW}_i` are the birth weight and gestational age for simulant :math:`i`,
+where :math:`\text{BW}_i` and :math:`\text{GA}_i` are the birth weight and gestational age for simulant :math:`i`,
 :math:`\text{CSMR}_{\text{BW}_i,\text{GA}_i}^{k}` is the cause-specific mortality rate for subcause :math:`k` for a population with the same gestational age and birth weight as this simulant, 
 and :math:`\text{CSMR}_{i}^{k}` is the cause-specific mortality rate for subcause :math:`k` for simulant :math:`i` (both detailed in the `Modeled Subcauses`_
 linked from this page).

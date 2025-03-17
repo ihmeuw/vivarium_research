@@ -196,7 +196,10 @@ texinfo_documents = [
 ]
 
 # Other docs we can link to
-intersphinx_mapping = {'python': ('https://docs.python.org/3.8', None),
-                       'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
-                       'tables': ('https://www.pytables.org/', None),
-                       'numpy': ('https://numpy.org/doc/stable/', None)}
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3.11', None),
+    'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
+    'tables': ('https://www.pytables.org/', None),
+    'numpy': ('https://numpy.org/doc/stable/', None),
+    'vivarium_public_health': ('https://vivarium.readthedocs.io/projects/vivarium-public-health/en/latest/', None),
+}
