@@ -356,7 +356,23 @@ We've developed a simple equation to adjust the CSMR RR to apply to the excess m
   
   RR_\text{excess mortality} = \frac{RR_\text{CSMR}}{RR_\text{incidence}}
 
-The PAF has no such closed-form solution, so should be recalculated from the new RR
+.. note::
+
+  In this equation, which we calculate at the draw level, we act as though the covariance between
+  :math:`RR_\text{CSMR}` and :math:`RR_\text{incidence}` has been estimated by GBD.
+
+  However, it hasn't been, and these quantities will be independent at the draw level, though
+  we would intuitively expect a strong correlation.
+
+  Primarily due to this independence assumption, the equation above will in some draws
+  result in an :math:`RR_\text{excess mortality} < 1`.
+  This is not conceptually incoherent (perhaps a risk factor could cause more cases,
+  but they are on average less severe and less likely to cause death) but probably
+  happens far too often due to the independence issue.
+
+  The larger covariance issue is tracked at: https://jira.ihme.washington.edu/browse/SSCI-2161
+
+The PAF on excess mortality has no such simple approximation, so should be recalculated from the new RR
 using equations above (see also :ref:`joint_paf_calculation` for a more explicit description
 of this process, including the note about not yet having a standard computational approach
 to calculating our own PAFs).
