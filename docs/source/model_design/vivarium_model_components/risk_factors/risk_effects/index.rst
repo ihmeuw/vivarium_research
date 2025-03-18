@@ -289,14 +289,18 @@ Using RRs and PAFs from GBD
 
 While GBD reports RRs and PAFs, they are often not suitable for use in Vivarium models.
 This is because we typically model GBD causes as dynamic state-transition models,
-and are interested in applying RRs and PAFs to *transitions* in the model.
+and are interested in applying RRs and PAFs to *transitions* in the model,
+while GBD's RRs and PAFs are applied to static, population level quantities,
+namely years of life lost (YLLs) and years lived with disability (YLDs).
 
-GBD reports RRs and PAFs for years of life lost (YLLs) and years lived with disability (YLDs).
 YLLs are the number of deaths (due to a cause) multiplied by the average remaining life expectancy
 (which is a constant for a given age and sex group).
+The number of deaths due to a cause is that cause's cause-specific mortality rate (CSMR)
+multiplied by the population size, which is also a constant for a given age and sex group.
 YLDs are the number of prevalent cases of a cause multiplied by the disability weight
 of that cause, which is a constant for a given cause.
-Therefore
+Therefore, since relative risk is computed as a ratio (and the PAF is computed from the RRs),
+the constant factors cancel out, and we get
 
 .. math::
 
@@ -307,8 +311,6 @@ Therefore
   RR_\text{CSMR} = RR_\text{YLLs}
 
   PAF_\text{CSMR} = PAF_\text{YLLs}
-
-where CSMR is the cause-specific mortality rate for a given cause.
 
 However, if we have a dynamic SIS model for a cause, we are interested in applying risk effects to
 the transitions in this diagram:
@@ -327,7 +329,7 @@ the transitions in this diagram:
   }
 
 The RR and PAF we have on prevalence (aka the number of people in the infected state)
-might apply to either of the incidence and remission rates, or some combination.
+might apply to either of the incidence and remission transition rates, or some combination.
 Intuitively, the fact that more people with the risk exposure have the disease might be because
 more of them *get* the disease, or because it takes longer for them to *recover* from it.
 
@@ -355,7 +357,7 @@ With this choice:
 
 The RR and PAF we have on CSMR doesn't directly fit anywhere into our diagram, because CSMR is a mortality rate among
 the total population, and our mortality transition only applies to the infected population.
-Intutively, the CSMR measures *overlap* with the prevalence measures; there could be more deaths among
+Intutively, the CSMR RR *is partially overlapping* with the prevalence RR; there could be more deaths among
 people with the risk exposure because they are more likely to have the disease, even if
 they are no more likely to die from it once they have it.
 
