@@ -53,8 +53,8 @@ GBD reports an estimated relative risk for each level of risk exposure,
 relative to the TMREL for that risk.
 
 For most GBD risk factors with continuous risk exposures (see below for exceptions starting in GBD 2021),
-GBD reports an estimated relative risk *per unit increase* in risk exposure above the TMREL.
-This unit increase may be more than a single unit change in risk
+GBD reports an estimated relative risk *caused by each increase of a specified amount* in risk exposure above the TMREL.
+This specified increase may be more than a single unit change in risk
 exposure, so it is important to clarify this with the GBD modeler.
 
 .. todo::
