@@ -384,9 +384,12 @@ We've developed a simple equation to adjust the CSMR RR to apply to the excess m
   The larger covariance issue is tracked at: https://jira.ihme.washington.edu/browse/SSCI-2161
 
 The PAF on excess mortality has no such simple approximation, so should be recalculated from the new RR
-using equations above (see also :ref:`joint_paf_calculation` for a more explicit description
-of this process, including the note about not yet having a standard computational approach
-to calculating our own PAFs).
+using the relevant equation (for the categorical or continuous case) from the top of this section.
+(For a more explicit description of this process,
+but with the added complication of handling multiple risk factors at once,
+see :ref:`joint_paf_calculation`.
+As noted there, we do not yet have a standard computational approach
+to calculating our own PAFs.)
 
 .. todo::
 
