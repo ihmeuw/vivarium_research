@@ -248,13 +248,13 @@ which we assign to all simulants *before* applying their exposure-specific
 risk effect.
 We delete the baseline effect with a :ref:`measure of population impact <measures_of_impact>`.
 
-The mathematical expressions are mainly fall into two categories:
- - risk exposure is categorical distributed:
+The mathematical expressions mainly fall into two categories:
+ - risk exposure is categorical:
      - :math:`i_{exposed} = i \times (1-PAF) \times RR`
      - :math:`i_{unexposed} = i \times (1-PAF)`
      - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
      - :math:`E(RR_e) = p \times RR + (1-p)`
- - risk exposure is continuous distributed:
+ - risk exposure is continuous:
      - risk effect has a log-linear "dose-response" relationship with exposure:
          - :math:`i_{\text{simulant}} = i \times (1-PAF) \times rr^{max(e_{\text{simulant}}-tmrel,0)/scalar}`
          - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
