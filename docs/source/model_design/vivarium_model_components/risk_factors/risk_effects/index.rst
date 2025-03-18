@@ -42,7 +42,7 @@ To implement a risk effect in simulation we also need to know how to
 This is done with a :ref:`measure of population impact <measures_of_impact>`.
 
 Risk effects in GBD
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
 GBD reports risk effects using relative risks (RRs) and population attributable fractions (PAFs).
 A relative risk describes the *multiplier* on the risk of the outcome
@@ -213,7 +213,7 @@ Desired correlation between two variables will need to be accounted for separate
 the :ref:`risk correlation page <risk_correlation>` for more details.
 
 Risk effects in Vivarium
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Materials related to risk effects models in Vivarium:
 
