@@ -371,6 +371,7 @@ to calculating our own PAFs).
   Also, the Word doc appears to be about a risk factor that affects mortality,
   rather than a risk factor that affects a disease that affects mortality?
   So I think something has been lost here.
+  See https://jira.ihme.washington.edu/browse/SSCI-2160.
 
 
 .. todo::
