@@ -239,6 +239,7 @@ Deleting the effects of baseline exposure yields the outcome rate
 in a counterfactual where everyone is at the lowest-risk exposure,
 which we assign to all simulants *before* applying their exposure-specific
 risk effect.
+We delete the baseline effect with a :ref:`measure of population impact <measures_of_impact>`.
 
 In vivarium, we build the risk-outcomes component in order to study the
 impact of desired outcomes contributed by given risk exposure. The outcome might
