@@ -226,10 +226,19 @@ associations between two variables in vivarium.
 
 A risk effects model for a given risk-outcome pair must document:
 
-- Relative risk as a function of risk exposure
-- Instructions for how to delete the baseline effect,
-  that is, the effect of the risk exposure on the outcome
-  that is already baked into the baseline population-level rates of the outcome.
+- Relative risk as a function of risk exposure.
+- Instructions for how to delete the baseline effect.
+
+You can think of deleting the baseline effect as finding the outcome rate for simulants
+with the lowest-risk exposure.
+The outcome rate estimated by GBD at the population level is
+across the population distribution of exposure,
+so the effect of the risk exposure on the outcome is already
+partially baked into that population-level number.
+Deleting the effects of baseline exposure yields the outcome rate
+in a counterfactual where everyone is at the lowest-risk exposure,
+which we assign to all simulants *before* applying their exposure-specific
+risk effect.
 
 In vivarium, we build the risk-outcomes component in order to study the
 impact of desired outcomes contributed by given risk exposure. The outcome might
