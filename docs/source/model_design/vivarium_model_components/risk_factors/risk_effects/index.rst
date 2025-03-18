@@ -224,6 +224,13 @@ Generally, we will use risk effects models to represent *causal* associations
 between two variables and risk correlation models to represent *non-causal*
 associations between two variables in vivarium.
 
+In Vivarium, we build risk effect components in order to study the
+impact on outcomes of interest contributed by a given risk exposure. The outcome might
+be a cause (e.g. ischemic heart disease attributable to high body-mass index)
+or a intermediate outcome (e.g. systolic blood pressure associated with BMI).
+For a risk-cause pair, our risk effects models typically link the incidence (or other measure
+such as excess mortality rate) of that cause to the exposure of the risk.
+
 A risk effects model for a given risk-outcome pair must document:
 
 - Relative risk as a function of risk exposure.
@@ -240,14 +247,6 @@ in a counterfactual where everyone is at the lowest-risk exposure,
 which we assign to all simulants *before* applying their exposure-specific
 risk effect.
 We delete the baseline effect with a :ref:`measure of population impact <measures_of_impact>`.
-
-In vivarium, we build the risk-outcomes component in order to study the
-impact of desired outcomes contributed by given risk exposure. The outcome might
-be a cause (e.g. ischemic heart disease attributable to high body-mass index)
-or a intermediate outcome (e.g. systolic blood pressure associated with BMI).
-For a risk-cause pair, simulation model would link the incidence (or other measure
-such as excess mortality rate) of that cause to the relative risk from GBD or
-external data sources like literature evidence.
 
 The mathematical expressions are mainly fall into two categories:
  - risk exposure is categorical distributed:
