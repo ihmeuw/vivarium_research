@@ -41,7 +41,7 @@ To implement a risk effect in simulation we also need to know how to
 *delete* that effect from baseline population-level rates of the outcome.
 This is done with a :ref:`measure of population impact <measures_of_impact>`.
 
-Risk effect in GBD
+Risk effects in GBD
 ^^^^^^^^^^^^^^^^^^
 
 GBD reports risk effects using relative risks (RRs) and population attributable fractions (PAFs).
@@ -212,7 +212,7 @@ the non-causal association between a given risk and an outcome or other risk fac
 Desired correlation between two variables will need to be accounted for separately; see
 the :ref:`risk correlation page <risk_correlation>` for more details.
 
-Risk effect in Vivarium
+Risk effects in Vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Materials related to risk effects models in Vivarium:
