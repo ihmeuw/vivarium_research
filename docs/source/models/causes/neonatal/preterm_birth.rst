@@ -165,14 +165,34 @@ The way these CSMRs are used is the same for all subcauses, and therefore is inc
     \text{CSMR}^{k}_{\text{BW},\text{GA}}
     &=
     \begin{cases}
-    \text{CSMR}\cdot f_k \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z, & \text{if GA} < 37; \\
+    \text{CSMR} / p_\text{preterm} \cdot f_k \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z, & \text{if GA} < 37; \\
     0, & \text{if GA} \geq 37;
     \end{cases}
     \end{align*}
 
 where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 :math:`\text{CSMR}` is the cause-specific mortality rate for preterm birth complications,
-:math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`\int_{\text{GA<37}} \int_{\text{BW}} \text{RR}_{\text{BW},\text{GA}} \cdot Z = 1`.
+:math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`E[\text{RR}_{\text{BW,GA}} | \text{GA}<37] \cdot Z = 1`. Solving for :math:`Z` gives :math:`Z = 1 / E[\text{RR}_{\text{BW,GA}} | \text{GA}<37]`.
+
+.. note::
+
+  **Notes on how to calculate the normalizing constant** :math:`Z` **for the preterm birth cause of death described above.**
+
+  As described on the :ref:`LBWSG risk effects page <2019_risk_effect_lbwsg>`, we utilize a custom PAF calculation for the interpolated LBWSG relative risks specific to a given gestational age and birth weight. This custom calculation has been performed in a pipeline like the one `linked here for the nutrition optimization simulation <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/blob/main/src/vivarium_gates_nutrition_optimization_child/data/lbwsg_paf.yaml>`_.
+
+  We will utilize this same LBWSG PAF calculation pipeline to calculate the normalizing constant :math:`Z` for the preterm birth cause of death. To do this, we will follow the same LBWSG PAF calculation steps, but perform it only among LBWSG exposures that have gestational ages less than 37 weeks. This pipeline then outputs a "PAF" value which is difficult/counterintuitive to interpret as a PAF, calculated as :math:`\frac{E[\text{RR}_{\text{BW,GA}} | \text{GA}<37] - 1}{E[\text{RR}_{\text{BW,GA}} | \text{GA}<37]}`, which is equal to :math:`Z + 1`. Therefore, we can use (1 - "PAF") as the :math:`Z` term for the preterm birth cause of death (with "PAF" equal to the value output from the PAF calculation pipeline).
+
+  We will use a **population size of 195_112** for this calculation. This number was selected in order to satisfy the following criteria:
+
+  - The population size per LWBSG exposure category is required to be a perfect square to be compatible with our strategy of initializing individual exposures on a grid within each LBWSG exposure category
+  
+  - The total population size of the PAF calculation pipeline must be divisible by the product of the number of LBWSG exposure categories (58), the number of sexes (2), and the number of age groups (2) used in the PAF calculation
+  
+  - 529 was determined to be an adequate population size per LBWSG exposure category in a `previous analysis <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/LBWSG%20PAF%20population%20size%20check.ipynb>`_ of the PAF using all 59 LBWSG exposure categories
+  
+  - We would like to increase the population size per category by a factor of at least 58/38, as we will be performing this calculation on the 38 preterm categories among of the 58 total categories
+
+
 
 .. note::
   the choice to use :math:`\text{RR}_{\text{BW},\text{GA}}` in this equation is essentially arbitrary, and it could be replaced by any other nonnegative "weight function" :math:`w(\text{BW},\text{GA})` as long it doesn't lead to a negative "other causes" mortality hazard.
@@ -206,6 +226,10 @@ Data Tables
       - cause-specific mortality rate of preterm birth complications
       - csmr_c381
       - from GBD (CodCorrect)
+    * - :math:`p_\text{preterm}`
+      - Prevalence of gestational age <37 weeks at birth
+      - Derived from :ref:`GBD LBWSG exposure <risk_exposure_lbwsg>`
+      - Equal to the sum of exposures for all categories with gestational age at birth <37 weeks. A list of such categories can be generated in a manner similar to `this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/LBW%20categories.ipynb>`_ 
     * - :math:`f_\text{preterm w RDS}`
       - fraction of preterm deaths with RDS
       - 85%
