@@ -112,6 +112,14 @@ The hemoglobin team has also estimated risk effects for several additional outco
 Vivarium Modeling Strategy
 --------------------------
 
+.. todo::
+
+  Add strategy for modeling neonatal outcomes. This must account for the following:
+
+    - Overlap between effects on PTB and LBW
+
+    - Mediation of effects on neonatal sepsis and neonatal ACMR by effects on PTB/LBW
+
 .. list-table:: Risk Outcome Relationships for Vivarium
    :header-rows: 1
 
