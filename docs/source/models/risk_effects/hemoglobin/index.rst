@@ -184,6 +184,10 @@ Use the population attributable fraction values pulled from GBD shared functions
 
   ir_i = ir * (1 - PAF) * RR_i
 
+.. todo::
+
+  Check with engineers on default behavior of continuous risk curves and if any additional information is needed in order to implement these and/or if we need to do any transformations of RRs to be relative to specific TMREL, in which case we would need to edit PAFs, etc.
+
 The relative risk curves for maternal disorders affected outcomes in GBD shared functions as of March 2025 are shown below for reference. These values have been transformed to be relative to a hemoglobin exposure of 110 g/L (the threshold for anemia in pregnancy) for ease of interpretation. However, they are stored in GBD shared functions as relative to a hemoglobin exposure of 40 g/L.
 
 .. image:: maternal_disorders_risk_curve.png
