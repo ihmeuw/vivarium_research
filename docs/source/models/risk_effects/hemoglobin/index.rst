@@ -186,7 +186,7 @@ Use the population attributable fraction values pulled from GBD shared functions
 
 The relative risk curves for maternal disorders affected outcomes in GBD shared functions as of March 2025 are shown below for reference. These values have been transformed to be relative to a hemoglobin exposure of 110 g/L (the threshold for anemia in pregnancy) for ease of interpretation. However, they are stored in GBD shared functions as relative to a hemoglobin exposure of 40 g/L.
 
-.. image:: maternal_disorders_risk_curve.PNG
+.. image:: maternal_disorders_risk_curve.png
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
