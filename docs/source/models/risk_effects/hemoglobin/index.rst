@@ -116,9 +116,11 @@ Vivarium Modeling Strategy
 
   Add strategy for modeling neonatal outcomes. This must account for the following:
 
-    - Overlap between effects on PTB and LBW
+    - Consistency/overlap between effects on PTB and LBW
 
     - Mediation of effects on neonatal sepsis and neonatal ACMR by effects on PTB/LBW
+
+    - Mediation of MMS effect on LBWSG through MMS->hemoglobin->LBWSG pathway (and consistency with IV, for which we do not model a direct effect on LBWSG)
 
 .. list-table:: Risk Outcome Relationships for Vivarium
    :header-rows: 1
