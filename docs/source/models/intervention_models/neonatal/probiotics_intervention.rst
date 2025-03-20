@@ -114,7 +114,7 @@ This reduces to the previous formula if there are no other interventions, and we
 
    \text{CSMR}^\text{sepsis}_{i, \text{original}} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
 
-While we are searching the literature for an appropriate value for the relative risk, we will use a stand-in value from the most recent Cochrane review (2014),
+While we are searching the literature for an appropriate value for the relative risk, we will use a stand-in value from the `most recent Cochrane review (2014) <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD005496.pub4/full>`_,
 which is actually the mean of the calculated RRs for nosocomial sepsis and necrotizing enterocolitis (NEC is a non-GBD-modeled condition that leads to 
 sepsis).
 
@@ -237,4 +237,5 @@ References
 
 * https://chatgpt.com/share/67c1c7cf-f294-8010-8e65-261f87039e3b
 * https://chatgpt.com/share/67c1c7f9-8230-8010-9ade-30ed07b06bd0
+* https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD005496.pub4/full 
 
