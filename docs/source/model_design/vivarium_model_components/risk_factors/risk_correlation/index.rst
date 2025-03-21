@@ -144,7 +144,7 @@ This is correct when risks are all independent, but it has two problems in the p
 
 * The GBD approach to calculating PAFs is biased in the presence of any confounding,
   **even though the relative risks are adjusted for confounding**.
-  This issue is explained in more detail :ref:`on the PAFs page <pafs>`.
+  This issue is explained in more detail :ref:`in the measures of impact section <measures_of_impact>`.
   If we are choosing to model correlated risk exposures with effects on the same outcome,
   that means we believe there is **at least** one confounding variable in each PAF calculation.
   If risks (with RR > 1) are positively correlated, the GBD approach will underestimate the PAF of each.
@@ -243,12 +243,12 @@ Total bias
 ^^^^^^^^^^
 
 Since the bias discussed in the previous section causes an overestimate of the joint PAF (for positively-correlated, RR > 1 risks),
-and the :ref:`bias in the GBD calculation method for individual PAFs in the presence of confounders <pafs>`
+and the :ref:`bias in the GBD calculation method for individual PAFs in the presence of confounders <measures_of_impact>`
 causes an underestimate of each PAF (for positively-correlated, RR > 1 risks),
 it is reasonable to wonder if these factors cancel each other out and lead to accurate PAFs.
 
 Anecdotally, bias in the GBD calculation method for individual PAFs is typically
-on the order of 10%-20%, as reported on :ref:`the PAFs page <pafs>`.
+on the order of 10%-20%, as reported in :ref:`the measures of impact section <measures_of_impact>`.
 In the example above of bias from multiplicative combination, we found a
 6.7% overestimated PAF.
 
