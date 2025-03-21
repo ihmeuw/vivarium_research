@@ -534,6 +534,7 @@ V&V Checks:
     - Priority
     - Number of draws
     - Population size per draw
+    - Scenarios
     - Note
   * - 1
     - Wave I Pregnancy V&V
@@ -541,6 +542,7 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 2
     - Wave I Maternal disorders V&V
@@ -548,6 +550,7 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    -Baseline only
     - Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update 
       the Pakistan OL prevalence values from GBD 2021 to GBD 2023. Locations include Pakistan, Nigeria, and Ethiopia. 
       10 seeds * 10,000 simulants = 100,000 total population.
@@ -559,12 +562,14 @@ V&V Checks:
     - 100,000
     - Locations include Pakistan, Nigeria, and Ethiopia. 
       10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline only
   * - 3.1
     - Wave I Neonatal disorders V&V with correct LBWSG distribution
     - Complete
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 3.2
     - Wave I Neonatal disorders V&V with LBWSG component removed
@@ -572,6 +577,7 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 3.3
     - Wave I Neonatal disorders V&V with early NN observer bugfix
@@ -579,7 +585,50 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.1
+    - Wave I CPAP 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.2
+    - Wave I CPAP with observer for counts per facility type
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.3
+    - Wave I CPAP with addition of a delivery facility column in births observer and CPAP availability stratification
+      in neonatal burden observer
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.4
+    - Wave I CPAP 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.5
+    - Wave I CPAP 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+
 
 .. note:: 
   
