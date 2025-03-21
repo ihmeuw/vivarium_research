@@ -510,6 +510,21 @@ V&V Checks:
   a. :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
   b. :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
 
+
+3.3 Simulation scenarios 
+------------------------
+
+1. Baseline: baseline coverage for all maternal and neonatal interventions 
+2. CPAP total scale-up: 100% CPAP availability in both BEMONC and CEMONC facilities  
+3. CPAP CEMONC-only scale-up: 100% CPAP availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
+4. CPAP BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% CPAP availability in BEMONC facilities 
+5. Antibiotics total scale-up: 100% antibiotics availability in both BEMONC and CEMONC facilities  
+6. Antibiotics CEMONC-only scale-up: 100% antibiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
+7. Antibiotics BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% antibiotics availability in BEMONC facilities 
+8. Probiotics total scale-up: 100% probiotics availability in both BEMONC and CEMONC facilities  
+9. Probiotics CEMONC-only scale-up: 100% probiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
+10. Probiotics BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% probiotics availability in BEMONC facilities 
+
 .. _mncnh_portfolio_4.0:
 
 4.0 Data Inputs
