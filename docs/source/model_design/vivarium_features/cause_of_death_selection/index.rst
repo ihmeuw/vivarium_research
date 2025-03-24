@@ -59,32 +59,50 @@ So that counterfactual can only delay their death by some finite amount of time.
 Perhaps they wouldn't have died that *minute* but they still would have died within
 the hour, or perhaps they would have lived 50 more years!
 
+It isn't necessarily the case that every death even has *any* disease that "caused" it,
+unless the when question is answered with "wouldn't have died *that instant*."
+Consider someone who has two separate types of terminal cancer.
+For any non-instantaneous period of time, they could be sick enough with both cancers
+that even in a counterfactual where one type of cancer was cured,
+they would die of the other, and vice versa.
+
 Cause of death in GBD
 ---------------------
 
 The Global Burden of Disease study (GBD), informed primarily by death certificates
 and by methods that seek to approximate them such as verbal autopsy, **assigns every
 death a single cause.**
+(GBD chooses from a hand-crafted standardized list of causes, which aren't always the same as what would
+actually be written on a death certificate.)
 
-When GBD uses cause of death, particularly in its risk factors analysis which has an
+As discussed above, assigning a cause to every death is only strictly compatible
+with an instantaneous interpretation of cause of death.
+However, when GBD uses cause of death, particularly in its risk factors analysis which has an
 explicitly causal interpretation (how many fewer deaths would there be in a world where
 nobody smoked?), it reports these numbers at an annual level (e.g. how many fewer deaths there would
 have been in 2021).
-Therefore, it is implicitly answering the when question: in a counterfactual where
-those people didn't have the diseases in question, they wouldn't have died anytime that year.
+This is (implicitly) a contradictory answer to the when question:
+counting people who wouldn't have died *that year*.
 
-However, a limitation of GBD is that it assumes deaths averted due to each cause sum to the total deaths averted,
-which implies that everyone who died in the real world and didn't die under the exact same circumstances
-in the counterfactual *also would not die for any other reason during the rest of the year*.
+This inconsistency is a limitation in GBD.
+Essentially, according to GBD, everyone who died in the real world and wouldn't have died at the same instant
+in a counterfactual without the cause
+*also would not have died for any other reason during the rest of the year*.
 It is as if, in the counterfactual, instead of dying they became invincible (for the rest of the year).
 This is obviously not realistic but simplifies things mathematically.
+
+.. note::
+
+  Assigning a *single* cause to every death (assuming no deaths have multiple causes)
+  also implies additional assumptions about causality, i.e. that two distinct causes cannot have
+  their impacts on mortality mediated by the same factors.
+  We don't delve into this issue here.
 
 Cause of death in Vivarium
 --------------------------
 
 In our microsimulations, following GBD, we assign every death a single cause --
-going beyond this would make our simulations discordant with GBD in ways that
-would be very difficult to reason about.
+going beyond this would make our simulations discordant with GBD in large ways.
 
 However, the causal interpretation of our cause-of-death assignment is a bit different than in
 GBD on the *when* question, because we partially address the GBD limitation
@@ -93,7 +111,7 @@ When we say a simulant died of cause A, it means that if they hadn't had cause A
 they would not have died *on that timestep.*
 If they didn't die, however, they could still die on a future timestep;
 we don't want to replicate the lasting invincibility implied by the GBD limitation.
-If our timesteps are long enough that it still feels implausible to say they
+If our timesteps are long enough that it still feels like a big limitation to say they
 wouldn't have died of anything else during that time, that may be a sign that our
 timesteps are too long!
 
@@ -104,8 +122,8 @@ any differences in outcomes are therefore caused by the one thing we changed.
 With cause of death, we don't actually run a scenario in which we delete that cause;
 the cause of death is assigned within the scenario.
 
-To be internally consistent, though, we **want the deaths we assign cause A on a given timestep
-to be the same deaths that would not occur if we did run a no-cause-A scenario.**
+To be internally consistent, though, we **want the deaths we assign to cause A on a given timestep
+to be the same deaths that would not occur on the same timestep in a scenario where no simulants had cause A.**
 This might seem like an academic point, since we will never run such a scenario.
 But this property turns out to be equivalent to another property that has more practical relevance:
 **when we intervene only on cause A, only cause A deaths should be averted**.
@@ -163,6 +181,15 @@ but depending on where our finite population of simulants actually fall on this
 graph, we may get nonzero (positive or negative) numbers of deaths averted
 for both cause B and C.
 
+This problem can only occur when simulants have (on a given timestep) multiple causes of death
+with non-zero probabilities.
+In simulations where comorbidity is rare, and generally only one cause of death is a possibility for
+each simulant on each timestep, one cause's probability shifting another is also rare and therefore not
+much of an issue.
+This might be the case in a simulation where all modeled causes are acute, short-duration conditions.
+Conversely, in a simulation with multiple chronic conditions modeled, comorbidity will be
+more common and the shifting issue will be as well.
+
 Proposed behavior
 --------------------------
 
@@ -199,18 +226,63 @@ for these purposes.
 These are conservative upper-bound reservations that could be tightened if there was more
 inter-scenario information sharing.
 
+Here's what the probability space might look like for different simulants in the
+same age and sex group:
+
+.. image:: cod_reservation_diagram.drawio.svg
+
 If our reservations under this scheme would require us to reserve more than 100% probability,
 we will scale down our reservations proportionally to fit under 100%.
 This means that our reservations may not be big enough all of the time and it is theoretically
 possible for the true probability to "overflow" the reservation.
 In this case, we revert to the status quo: an overflowing probability will shift over the next
 cause's probability.
-As long as this happens rarely, we will still get good variance reduction in aggregate.
-If this is common, it may indicate that our timestep is too long.
+This is illustrated below: at the highest risk exposure for cause B,
+Simulant 3's Cause B probability overflows its reservation and shifts cause C.
+
+.. image:: cod_reservation_overflow_diagram.drawio.svg
+
+As long as shifting happens only rarely (for a few simulants on a few timesteps),
+we will still get good variance reduction in aggregate.
+If this happens often, it may indicate that our timestep is too long.
+Our probabilities are a function of our rates and our timestep, and decreasing the timestep
+will decrease the probabilities and therefore the reservations needed to ensure no overflow.
 
 .. note::
 
-  I believe we could get slightly better variance reduction by starting each cause's probability
+  In these bar charts, all the bars have substantial width, for visibility.
+  In real simulations, for many simulants, deaths due to certain causes
+  will be rare; some of the cause-specific bars will be extremely narrow.
+
+  With improbable enough events, we may have *numerical precision* problems:
+  floating-point numbers only have a certain amount of precision, and if
+  a bar is too narrow, floating-point imprecision could lead to it essentially
+  being rounded down to zero and never happening.
+
+  We're unsure whether this is a common problem in practice.
+  If so, it could be addressed by using multiple floating-point numbers to sample
+  the outcome.
+  For example, first sampling which reservation the simulant's draw should fall into,
+  then sampling where *in* the assigned reservation it falls, or any other procedure
+  that achieves uniform sampling overall,
+  is invariant between scenarios (to preserve the common-random-numbers properties),
+  and avoids transforming any numbers in such a way that they become subject to
+  significant floating-point imprecision.
+
+.. note::
+
+  An idea for how we could get slightly better variance reduction: starting each cause's probability
   at the midpoint of its reservation, and growing symmetrically outward toward the edges of the
-  reservation, then overflowing the reservation in a random direction (e.g. right).
-  But the benefit is probably small and not worth the implementation effort.
+  reservation, then overflowing in both directions (until/unless hitting one of the edges of
+  the 0-1 space, at which point it would overflow solely the other direction).
+
+  The thinking here is trying to minimize the probability that one cause's probability allocation
+  "bumps into" (and therefore shifts) another.
+  Starting everything at the left side of its reservation, as actually proposed here,
+  means that anytime a cause's probability overflows its reservation and the next
+  cause's probability is non-zero, shifting occurs.
+  The midpoint approach would mean that a shift would require the amount of overflow to be
+  greater than next_cause_reservation minus next_cause_probability divided by 2.
+  But it's possible I've totally missed something, like a case where this idea shifts and the actual proposal doesn't.
+
+  In any case, the benefit is probably small and not worth the implementation effort.
