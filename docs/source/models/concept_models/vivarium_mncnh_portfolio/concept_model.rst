@@ -646,7 +646,7 @@ V&V Checks:
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.6
     - Wave I CPAP with scale-up scenarios 
-    - Incomplete
+    - Complete
     - N/A
     - 10
     - 100,000
