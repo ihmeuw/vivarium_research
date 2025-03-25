@@ -541,7 +541,7 @@ V&V Checks:
 ++++++++++++++++++++++
 
 .. list-table:: Model run plan as of October 4, 2024
-  :widths: 3 10 5 5 5 5 5 15
+  :widths: 3 3 3 3 3 3 3 15
   :header-rows: 1
 
   * - Number
@@ -645,7 +645,7 @@ V&V Checks:
     - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.6
-    - Wave I CPAP with bugfix for negative other causes mortality rates
+    - Wave I CPAP with scale-up scenarios 
     - Incomplete
     - N/A
     - 10
