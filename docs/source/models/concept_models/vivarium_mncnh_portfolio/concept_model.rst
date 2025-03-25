@@ -643,7 +643,7 @@ V&V Checks:
     - 100,000
     - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
-  * - 4.5
+  * - 4.6
     - Wave I CPAP with bugfix for negative other causes mortality rates
     - Incomplete
     - N/A
@@ -708,7 +708,7 @@ V&V Checks:
     - Validate all-cause mortality for early neonatal age group with observer bugfix
     - Early neonatal mortality is validating now! 
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_27_vnv_neonatal_acmr.ipynb>`__
-
+ 
 .. _mncnh_portfolio_6.0:
 
 6.0 Limitations
