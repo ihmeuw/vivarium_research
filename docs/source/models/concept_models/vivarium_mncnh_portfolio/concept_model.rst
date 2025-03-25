@@ -613,7 +613,7 @@ V&V Checks:
     - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.4
-    - Wave I CPAP 
+    - Wave I CPAP with updated determination of delivery facility type
     - Complete
     - N/A
     - 10
@@ -621,18 +621,25 @@ V&V Checks:
     - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.5
-    - Wave I CPAP 
+    - Wave I CPAP with bugfix for negative other causes mortality rates
     - Complete
     - N/A
     - 10
     - 100,000
     - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
-
+  * - 4.5
+    - Wave I CPAP with bugfix for negative other causes mortality rates
+    - Incomplete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline and alternative scenarios 2, 3, and 4
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
 
 .. note:: 
   
-  The above numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_)
+  The above numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_
   that found the appropriate seed and draw count for production runs, then divided in half for V&V runs. 
 
 .. list-table:: V&V tracking 
