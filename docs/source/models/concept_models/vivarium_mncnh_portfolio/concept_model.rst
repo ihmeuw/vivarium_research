@@ -565,7 +565,7 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
-    -Baseline only
+    - Baseline only
     - Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update 
       the Pakistan OL prevalence values from GBD 2021 to GBD 2023. Locations include Pakistan, Nigeria, and Ethiopia. 
       10 seeds * 10,000 simulants = 100,000 total population.
