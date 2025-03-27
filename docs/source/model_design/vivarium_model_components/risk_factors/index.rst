@@ -16,7 +16,6 @@ See the following pages for more information on these risk factor sub-components
 
    risk_exposure/index
    risk_effects/index
-   population_attributable_fraction/index
    risk_attributable_causes/index
    risk_correlation/index
    risk_mediation/index
