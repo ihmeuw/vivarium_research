@@ -83,7 +83,7 @@ probiotics.  Instead the model will have different cause-specific mortality rate
 (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
 
 The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has access to probiotics during the neonatal period, 
-which we assume will be closely related to the facility choice during birth, i.e. home births have much lower access than in-facility births, and 
+which we assume to be 0.0% regardless of birth facility choice in our baseline scenario.
 births in BEmONC facilities have lower access than CEmONC facilities.
 
 To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "lack of access to probiotics".  
