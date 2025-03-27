@@ -28,7 +28,7 @@ Probiotics for treating bacterial infections
 Intervention Overview
 -----------------------
 
-Probiotics are used to prevent bacterial infections in neonates, reducing the risk mortality.
+Probiotics might be used to prevent bacterial infections in neonates, reducing the risk mortality.
 
 This section describes how a probiotic-treatment intervention can be implemented and calibrated for the 
 :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
