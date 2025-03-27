@@ -50,21 +50,65 @@ back far enough.
   but this doesn't happen on death certificates.
 
 What does it mean when we say a death was *caused* by a disease?
-It means that in a counterfactual where the person didn't have that disease,
+It means that in a counterfactual where everything was the same
+except that the person didn't have that disease,
 they wouldn't have died.
 That explicit framing makes clear that there is some imprecision here:
 they wouldn't have died *when*?
 Of course, everyone is going to die eventually, regardless of what diseases they have.
 So that counterfactual can only delay their death by some finite amount of time.
-Perhaps they wouldn't have died that *minute* but they still would have died within
+Perhaps they wouldn't have died that *instant* but they still would have died within
 the hour, or perhaps they would have lived 50 more years!
 
-It isn't necessarily the case that every death even has *any* disease that "caused" it,
-unless the when question is answered with "wouldn't have died *that instant*."
-Consider someone who has two separate types of terminal cancer.
-For any non-instantaneous period of time, they could be sick enough with both cancers
-that even in a counterfactual where one type of cancer was cured,
-they would die of the other, and vice versa.
+Instructions on how to fill out death certificates don't explicitly answer the when question,
+but we believe they are best interpreted as identifying diseases without which the person
+would not have died *that instant*.
+We think this because death certificates require there to be exactly **one** underlying cause
+for each death.
+
+Imagine if what we meant by a disease causing a death was that without that disease,
+the person would not have died *in the next decade*.
+If we were tasked with determining cause of death for someone who had five separate serious chronic
+conditions, we might reasonably conclude that there was no *single* disease we could
+have cured that would have kept them alive for 10 more years.
+We either could say that *all five* diseases caused their death (because, in a counterfactual
+where all five were cured, they would have lived 10 more years), or we could say no disease
+caused their death (because no counterfactual curing a single disease would have prevented
+them from dying during the next decade).
+We would run into *lots* of deaths like this with an "in the next decade" definition.
+For example, nearly anyone over the age of 90 probably has a handful of diseases that would each alone
+cause them to die in the next 10 years.
+
+If we shortened our time period to one year, it would be far rarer to find people
+who had a situation like this, but it could still occur, for example with the very
+elderly.
+If we shortened it further to one month, it would be rarer still --
+but we can imagine a patient who has two kinds of terminal cancer simultaneously,
+and would need *both* to be cured to survive another month.
+Decreasing to a day, we would only run into trouble with very extreme cases,
+such as someone with two life-threatening acute infections.
+In the *limit* as our time period goes to zero, it becomes the case that each
+death has exactly one disease that caused it.
+
+This is why we say that death certificates, which require exactly one disease to
+be listed as the underlying cause of death for each death,
+are best interpreted as recording the disease without which the person wouldn't
+have died *that instant*.
+
+.. note::
+
+  This isn't the only assumption baked into having a single cause of death for each
+  death.
+
+  Two more are:
+
+  * Diseases can't cause other diseases, otherwise you could imagine
+    two diseases in the causal chain, where preventing *either* would have delayed death.
+  * Distinct diseases can't cause death *through* the same mechanism,
+    otherwise you could have e.g. two diseases that both sped up cardiac arrest, and
+    preventing either disease would have delayed the cardiac arrest and therefore the death.
+
+  Both these assumptions are likely violated in the real world.
 
 Cause of death in GBD
 ---------------------
@@ -91,13 +135,6 @@ in a counterfactual without the cause
 It is as if, in the counterfactual, instead of dying they became invincible (for the rest of the year).
 This is obviously not realistic but simplifies things mathematically.
 
-.. note::
-
-  Assigning a *single* cause to every death (assuming no deaths have multiple causes)
-  also implies additional assumptions about causality, i.e. that two distinct causes cannot have
-  their impacts on mortality mediated by the same factors.
-  We don't delve into this issue here.
-
 Cause of death in Vivarium
 --------------------------
 
@@ -111,6 +148,8 @@ When we say a simulant died of cause A, it means that if they hadn't had cause A
 they would not have died *on that timestep.*
 If they didn't die, however, they could still die on a future timestep;
 we don't want to replicate the lasting invincibility implied by the GBD limitation.
+In other words, we shorten the duration of the invincibility from one year to one
+timestep.
 If our timesteps are long enough that it still feels like a big limitation to say they
 wouldn't have died of anything else during that time, that may be a sign that our
 timesteps are too long!
