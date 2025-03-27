@@ -234,7 +234,6 @@ Validation and Verification Criteria
 References
 ------------
 
-* https://chatgpt.com/share/67c1c7cf-f294-8010-8e65-261f87039e3b
 * https://chatgpt.com/share/67c1c7f9-8230-8010-9ade-30ed07b06bd0
 * https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD005496.pub4/full 
 
