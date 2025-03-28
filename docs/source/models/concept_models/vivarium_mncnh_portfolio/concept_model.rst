@@ -514,16 +514,16 @@ V&V Checks:
 3.3 Simulation scenarios 
 ------------------------
 
-1. Baseline: baseline coverage for all maternal and neonatal interventions 
-2. CPAP total scale-up: 100% CPAP availability in both BEMONC and CEMONC facilities  
-3. CPAP CEMONC-only scale-up: 100% CPAP availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
-4. CPAP BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% CPAP availability in BEMONC facilities 
-5. Antibiotics total scale-up: 100% antibiotics availability in both BEMONC and CEMONC facilities  
-6. Antibiotics CEMONC-only scale-up: 100% antibiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
-7. Antibiotics BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% antibiotics availability in BEMONC facilities 
-8. Probiotics total scale-up: 100% probiotics availability in both BEMONC and CEMONC facilities  
-9. Probiotics CEMONC-only scale-up: 100% probiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
-10. Probiotics BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% probiotics availability in BEMONC facilities 
+1. **Baseline**: baseline coverage for all maternal and neonatal interventions 
+2. **CPAP total scale-up**: 100% CPAP availability in both BEMONC and CEMONC facilities  
+3. **CPAP CEMONC-only scale-up**: 100% CPAP availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
+4. **CPAP BEMONC-only scale-up**: keep baseline coverage for CEMONC facilities, 100% CPAP availability in BEMONC facilities 
+5. **Antibiotics total scale-up**: 100% antibiotics availability in both BEMONC and CEMONC facilities  
+6. **Antibiotics CEMONC-only scale-up**: 100% antibiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
+7. **Antibiotics BEMONC-only scale-up**: keep baseline coverage for CEMONC facilities, 100% antibiotics availability in BEMONC facilities 
+8. **Probiotics total scale-up**: 100% probiotics availability in both BEMONC and CEMONC facilities  
+9. **Probiotics CEMONC-only scale-up**: 100% probiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
+10. **Probiotics BEMONC-only scale-up**: keep baseline coverage for CEMONC facilities, 100% probiotics availability in BEMONC facilities 
 
 .. _mncnh_portfolio_4.0:
 
@@ -541,6 +541,7 @@ V&V Checks:
 ++++++++++++++++++++++
 
 .. list-table:: Model run plan as of October 4, 2024
+  :widths: 3 3 3 3 3 3 3 15
   :header-rows: 1
 
   * - Number
@@ -549,6 +550,7 @@ V&V Checks:
     - Priority
     - Number of draws
     - Population size per draw
+    - Scenarios
     - Note
   * - 1
     - Wave I Pregnancy V&V
@@ -556,6 +558,7 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 2
     - Wave I Maternal disorders V&V
@@ -563,6 +566,7 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update 
       the Pakistan OL prevalence values from GBD 2021 to GBD 2023. Locations include Pakistan, Nigeria, and Ethiopia. 
       10 seeds * 10,000 simulants = 100,000 total population.
@@ -574,12 +578,14 @@ V&V Checks:
     - 100,000
     - Locations include Pakistan, Nigeria, and Ethiopia. 
       10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline only
   * - 3.1
     - Wave I Neonatal disorders V&V with correct LBWSG distribution
     - Complete
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 3.2
     - Wave I Neonatal disorders V&V with LBWSG component removed
@@ -587,6 +593,7 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 3.3
     - Wave I Neonatal disorders V&V with early NN observer bugfix
@@ -594,11 +601,61 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.1
+    - Wave I CPAP 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.2
+    - Wave I CPAP with observer for counts per facility type
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.3
+    - Wave I CPAP with addition of a delivery facility column in births observer and CPAP availability stratification
+      in neonatal burden observer
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.4
+    - Wave I CPAP with updated determination of delivery facility type
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.5
+    - Wave I CPAP with bugfix for negative other causes mortality rates
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.6
+    - Wave I CPAP with scale-up scenarios 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline and alternative scenarios 2, 3, and 4
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
 
 .. note:: 
   
-  The above numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_)
+  The above numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_
   that found the appropriate seed and draw count for production runs, then divided in half for V&V runs. 
 
 .. list-table:: V&V tracking 
@@ -652,6 +709,41 @@ V&V Checks:
     - Validate all-cause mortality for early neonatal age group with observer bugfix
     - Early neonatal mortality is validating now! 
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_27_vnv_neonatal_acmr.ipynb>`__
+  * - 4.1
+    - Validate averted CSMR of CPAP on RDS preterm (and confirm other CSMRs are unchanged)
+    - Cannot validate, need observer with counts per facility type 
+    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+
+  * - 4.2
+    - Validate averted CSMR of CPAP on RDS preterm (and confirm other CSMRs are unchanged)
+    - Cannot validate, need to add delivery facility column in births observer and stratification for CPAP availability 
+    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+
+  * - 4.3
+    - Validate averted CSMR of CPAP on RDS preterm (and confirm other CSMRs are unchanged)
+    - Not validating, need to update how we determine which delivery facility type a simulant will go to 
+    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+
+  * - 4.4
+    - Validate averted CSMR of CPAP on RDS preterm (and confirm other CSMRs are unchanged)
+    - Not validating, we are seeing negative mortality rates for Other causes 
+    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+
+  * - 4.5
+    - Validate averted CSMR of CPAP on RDS preterm (and confirm other CSMRs are unchanged)
+    - CSMRs and ACMR are all validating now, with the bugfix to adjust all negative values to 0 and rescale the rest of the RRs to add up to 1
+    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+
 
 .. _mncnh_portfolio_6.0:
 
