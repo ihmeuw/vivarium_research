@@ -274,8 +274,8 @@ V&V Checks:
     - Likely DHS 
     - Need to decide what if anything we want to include
   * - Delivery facility Propensity
-    - Likely DHS 
-    - Need to determine correlation if we want to use it 
+    - Modeled to depend on ANC and believed GA 
+    - See :doc:`Delivery Facility Choice Model <facility_model>` for more information
   * - ANC attendance
     - Decision tree point
     - 
