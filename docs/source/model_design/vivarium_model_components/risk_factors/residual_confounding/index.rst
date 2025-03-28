@@ -58,7 +58,7 @@ unexposed (perhaps through some hypothetical "cure" for the exposure).
   BMIs as well as the difference in their air pollution exposure and the differences in 
   all other known and unknown risk exposures that affect cardiovascular disease mortality.
 
-As discussed on the :ref:`population attributable fraction page <pafs>`, a situation in 
+As discussed in the :ref:`measures of impact section <measures_of_impact>`, a situation in 
 which the crude association between a risk and an outcome is not equal to the causal 
 association between that risk and outcome can cause 
 a biased estimate of the PAF of R1 on O. If we are modeling one or more of the R2 
@@ -101,8 +101,7 @@ the presence of RC can have a significant influence on our models, through the
 following mechanisms:
 
   1. Bias in estimating the PAF of modeled risk factors on an outcome of interest. The 
-  influence of this type of bias is described on the :ref:`population attributable 
-  fraction page <pafs>`.
+  influence of this type of bias is described on the :ref:`measures of impact page <measures_of_impact>`.
 
   2. Bias in estimating the absolute change in an outcome rate caused by a change 
   in risk exposure. The influence of this type of bias is described in the following 
