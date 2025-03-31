@@ -335,6 +335,8 @@ The following pseudocode outlines how this can be done.
 
 - At the individual level, only simulants who attend ANC should receive interventions
 
+- We assume the IV iron intervention (+23 g/L) to have a greater effect than GBD 2023's implied effect of IV iron used in the estimation of their iron deficiency models (+14.3 g/L(95% UL:3.58 -25.59). Notably, our assumed effect is within the confidence interval of GBD's assumed effect size and the value we assume is specific to the pregnant population (whereas GBD's value is not).
+
 5.0 References
 +++++++++++++++
 
