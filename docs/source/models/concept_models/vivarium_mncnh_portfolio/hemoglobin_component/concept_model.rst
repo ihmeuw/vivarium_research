@@ -256,8 +256,8 @@ The following pseudocode outlines how this can be done.
 
   if output_A == 'none' and output_B == False: # no oral or IV iron in pregnancy
     ylds = dw(hgb_at_birth) * ga_birth
-  elif output_A is in ['ifa','mms']: # also received oral iron
-    if output_B: # received IV iron
+  elif output_A is in ['ifa','mms']: # received oral iron
+    if output_B: # also received IV iron
       if ga_oral_iron < ga_iv_iron: # oral iron was started before receiving IV iron
         ylds = (dw(hgb_start_of_pregnancy) * ga_oral_iron
               + dw(hgb_start_of_pregnancy + oral_iron_effect) * (ga_iv_iron - ga_oral_iron)
