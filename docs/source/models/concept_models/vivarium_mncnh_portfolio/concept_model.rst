@@ -702,47 +702,72 @@ V&V Checks:
     - LBWSG distributions in artifact, GBD, and simulation are now matching, but preterm deaths still look too low in the simulation
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/lbwsg_distribution.ipynb>`__
   * - 3.2
-    - Validate all-cause mortality for early and late neonatal age groups with LBWSG component removed 
+    - Validate all-cause mortality for early and late neonatal age groups with LBWSG component removed
     - Early neonatal mortality is still being overestimated in the simulation 
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_26_vnv_neonatal_acmr.ipynb>`__
   * - 3.3
-    - Validate all-cause mortality for early neonatal age group with observer bugfix
+    - 
+      - Validate all-cause mortality for early neonatal age group with observer bugfix
+      - Validate that individual RRs vary with LBWSG exposure 
+      - Validate that individual RRs affect mortality rates appropriately
+      - Validate that no non-preterm babies are dying of preterm
     - Early neonatal mortality is validating now! 
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_27_vnv_neonatal_acmr.ipynb>`__
+      `LBWSG interactive sim <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/20250313_lbwsg_effects_interactive_simulation.ipynb>`__
   * - 4.1
-    - Validate averted CSMR of CPAP on RDS preterm (and confirm other CSMRs are unchanged)
+    - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
     - Cannot validate, need observer with counts per facility type 
     - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
       `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
       `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
 
   * - 4.2
-    - Validate averted CSMR of CPAP on RDS preterm (and confirm other CSMRs are unchanged)
+    - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
     - Cannot validate, need to add delivery facility column in births observer and stratification for CPAP availability 
     - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
       `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
       `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
 
   * - 4.3
-    - Validate averted CSMR of CPAP on RDS preterm (and confirm other CSMRs are unchanged)
+    - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
     - Not validating, need to update how we determine which delivery facility type a simulant will go to 
     - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
       `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
       `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
 
   * - 4.4
-    - Validate averted CSMR of CPAP on RDS preterm (and confirm other CSMRs are unchanged)
+    - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
     - Not validating, we are seeing negative mortality rates for Other causes 
     - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
       `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
       `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
 
   * - 4.5
-    - Validate averted CSMR of CPAP on RDS preterm (and confirm other CSMRs are unchanged)
+    - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
     - CSMRs and ACMR are all validating now, with the bugfix to adjust all negative values to 0 and rescale the rest of the RRs to add up to 1
     - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
       `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
       `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+
+  * - 5.0
+    - Validate RR of antibiotics on sepsis (and confirm other causes are unchanged)
+    - There's an RR of 0.78 for antibiotics on preterm with RDS (it should be 1). Otherwise everything is validating - RR on sepsis aligns with expected value. Other causes, 
+      non-RDS preterm, and encephalopathy all have the expected RRs of 1 from antibiotics.
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_31a_vnv_and_scenario_results_antibiotics.ipynb>`__
+
+
+
+.. list-table:: Outstanding model verification and validation issues
+  :header-rows: 1
+
+  * - Issue
+    - Explanation
+    - Action plan
+    - Timeline
+  * - LBWSG exposures in the state table do not match LBWSG exposure pipeline values
+    -  
+    -  
+    -  
 
 
 .. _mncnh_portfolio_6.0:
