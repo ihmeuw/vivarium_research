@@ -491,6 +491,7 @@ V&V Checks:
   b. :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
   c. :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
   d. Maternal hypertensive disorders
+  e. (WAVE II) Hemoglobin component <2024_vivarium_mncnh_portfolio_hemoglobin_module>
 
 2. :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`
 
