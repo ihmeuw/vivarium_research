@@ -97,7 +97,7 @@ This module will:
     - (True/False value)
   * - Gestational age at first trimester ANC visit
     - ANC module
-    - Anemia YLD calculation
+    - Anemia YLD calculation (action point XII)
     - Point value in weeks, N/A for those who do not attend first trimester ANC
   * - Later pregnancy ANC attendance
     - ANC module
@@ -105,11 +105,11 @@ This module will:
     - (True/False value)
   * - Gestational age at later pregnancy ANC visit
     - ANC module 
-    - Anemia YLD calculation
+    - Anemia YLD calculation (action point XII)
     - Point value in weeks, N/A for those who do not attend first trimester ANC
   * - Pregnancy duration (aka gestational age at birth)
     - ???
-    - Anemia YLD calculation
+    - Anemia YLD calculation (action point XII)
     - Point value in weeks
 
 .. todo::
