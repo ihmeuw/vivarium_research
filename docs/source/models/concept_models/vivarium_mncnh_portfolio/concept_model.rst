@@ -511,6 +511,15 @@ V&V Checks:
   a. :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
   b. :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
 
+.. note::
+
+  The following TOC has been included to avoid a build warning and will be updated with a larger reorganization of this concept model document.
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   */concept_model*
 
 3.3 Simulation scenarios 
 ------------------------
