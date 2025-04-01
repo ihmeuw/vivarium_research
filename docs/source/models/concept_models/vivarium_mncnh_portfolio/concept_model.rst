@@ -765,9 +765,15 @@ V&V Checks:
     - Action plan
     - Timeline
   * - LBWSG exposures in the state table do not match LBWSG exposure pipeline values
-    -  
-    -  
-    -  
+    - Summary from Ali: "Essentially the LBWSG exposure values in the state table do not match the LBWSG exposure pipeline values. 
+      RRs and mortality rates vary in accordance with the state table values. I am not sure how or even if the pipeline 
+      values are being utilized, but my concern is that the pipeline values are specific to the mother and therefore 
+      that the maternal LBWSG exposure values are not synced with child LWBSG exposure values. Again, maybe they're not 
+      even used so it doesn't matter, but this seems like something that should at least be cleaned up so it doesn't 
+      accidentally trip us up in the future."
+      `LBWSG interactive sim <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/20250313_lbwsg_effects_interactive_simulation.ipynb>`__
+    -  No action plan yet
+    -  No current timeline 
 
 
 .. _mncnh_portfolio_6.0:
