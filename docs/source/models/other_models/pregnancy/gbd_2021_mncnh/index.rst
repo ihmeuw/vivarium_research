@@ -388,7 +388,7 @@ Assumptions and limitations
 - We are limited in the assumption that the stillbirth to livebirth ratio does not vary by maternal age and does not incorporate an uncertainty distribution.
 - We do not distiguish between intended and unintended pregnancies.
 - We do not consider the impact of birth interval timing or family size in our model of pregnancy.
-- We do not consider the impact of singleton versus non-singleton pregnancies.
+- We are not planning to include twins or multiple pregnancies, which has limitations as twins are more likely to preterm and have birth complications. 
 
 Verification and validation criteria
 ++++++++++++++++++++++++++++++++++++++
@@ -397,6 +397,9 @@ The following should validate:
 
 - Match distribution of LBWSG 
 - Rates of each birth outcomes
+- Confirm that all pregnant simulants fall within WHO definition of WRA (15-49yrs)
+- Confirm pregnancy duration of partial term pregnancies
+- Population structure should reflect age-specific pregnancy incidence rate
 
 References
 -----------

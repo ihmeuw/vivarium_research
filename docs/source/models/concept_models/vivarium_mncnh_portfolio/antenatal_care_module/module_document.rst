@@ -42,9 +42,11 @@ Antenatal care module
 1.0 Overview
 ++++++++++++
 
-.. todo::
+This module determines whether or not a simulant attends an antenatal care visit according to their ANC visit propensity value.
 
-  Provide a brief overview of what this module does and note which component it is a part of
+.. note::
+
+  This module is expecting to go through updates in wave II of the simulation.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -52,9 +54,7 @@ Antenatal care module
 2.1 Module Diagram
 ----------------------
 
-.. todo::
-
-  Insert module decision tree diagram. Use squares for action points (numbered with roman numerals) and rounded boxes for decision nodes (numbered with integers).
+.. image:: antenatal_care_module_diagram.png
 
 2.2 Module Inputs
 ---------------------
@@ -66,9 +66,9 @@ Antenatal care module
     - Source module
     - Application
     - Note
-  * - 
-    - 
-    - 
+  * - ANC propensity value
+    - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - Used to determine answer to decision node #1
     - 
 
 
@@ -82,14 +82,10 @@ Antenatal care module
     - Description
     - Information
     - Note
-  * - 1
-    - 
-    - 
-    - 
-  * - 2
-    - 
-    - 
-    - 
+  * - 1: Attends ANC?
+    - Value is *True* if ANC propensity value input is <= ANC1 rate
+    - ANC1 rates (GBD covariate ID 7): get_covariate_estimates(location_id=location_id, gbd_round_id=7, year_id=2021, decomp_step='iterative', covariate_id=7)
+    - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
 
 2.4 Module Action Points
 ---------------------------
@@ -102,12 +98,8 @@ Antenatal care module
     - Information
     - Note
   * - I
-    - 
-    - 
-    - 
-  * - II
-    - 
-    - 
+    - Record ANC attendance
+    - Record to output A
     - 
 
 2.4: Module Outputs
@@ -118,28 +110,20 @@ Antenatal care module
 
   * - Output
     - Value
-    - Dependencies
-  * - A. 
+    - Note
+  * - A. ANC1?
+    - *True* / *False*
     - 
-    - 
-  * - B.
-    - 
-    - 
-
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-.. todo::
-
-  List module assumptions and limitations
+* This model does not consider timing of ANC visit
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-.. todo::
-  
-  List module V&V criteria
+* Verify ANC1 coverage proportion
 
 5.0 References
 +++++++++++++++

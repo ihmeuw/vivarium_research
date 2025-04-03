@@ -42,76 +42,16 @@ Initial attributes Module
 1.0 Overview
 ++++++++++++
 
-.. todo::
-
-  Provide a brief overview of what this module does and note which component it is a part of
+This module assigns initial simulant attributes.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
 
-2.1 Module Diagram
-----------------------
+There is no need for a diagram for the initial attributes module of this simulation. Eventually, it is expected that we will assign correlated propensity values for ANC attendance, facility choice, and LBWSG exposure. However, that has not yet been implemented or documented. 
 
 .. todo::
 
-  Insert module decision tree diagram. Use squares for action points (numbered with roman numerals) and rounded boxes for decision nodes (numbered with integers).
-
-2.2 Module Inputs
----------------------
-
-.. list-table:: Module required inputs
-  :header-rows: 1
-
-  * - Input
-    - Source module
-    - Application
-    - Note
-  * - 
-    - 
-    - 
-    - 
-
-
-2.3 Module Decision Nodes
------------------------------
-
-.. list-table:: Module decision nodes
-  :header-rows: 1
-
-  * - Decision node
-    - Description
-    - Information
-    - Note
-  * - 1
-    - 
-    - 
-    - 
-  * - 2
-    - 
-    - 
-    - 
-
-2.4 Module Action Points
----------------------------
-
-.. list-table:: Hemoglobin module action point
-  :header-rows: 1
-
-  * - Action point
-    - Description
-    - Information
-    - Note
-  * - I
-    - 
-    - 
-    - 
-  * - II
-    - 
-    - 
-    - 
-
-2.4: Module Outputs
------------------------
+  Fill this section in accordingly
 
 .. list-table:: Module outputs
   :header-rows: 1
