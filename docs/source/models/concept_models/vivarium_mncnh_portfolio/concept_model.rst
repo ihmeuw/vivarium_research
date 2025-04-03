@@ -652,6 +652,38 @@ V&V Checks:
     - 100,000
     - Baseline and alternative scenarios 2, 3, and 4
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 5.0
+    - Wave I neonatal antibiotics with scale-up scenarios 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline and alternative scenarios 2 - 7 
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 6.0
+    - Wave I azithromycin 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 7.0
+    - Wave I AI ultrasound
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline 
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 8.0
+    - Wave I antenatal corticosteroids
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
 
 .. note:: 
   
