@@ -126,7 +126,7 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
     - 
 
 2.4.1 Estimation of "belived" gestational age
-+++++++++++++++++++++++++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 "Believed" gestational age should be estimated by adding a randomly sampled value from a normal distribution with a mean of zero and a standard deviation defined below to the simulant's assigned gestational age at birth exposure (input from the pregnancy module).
 
