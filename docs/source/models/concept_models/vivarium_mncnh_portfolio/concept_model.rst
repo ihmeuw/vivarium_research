@@ -652,6 +652,14 @@ V&V Checks:
     - 100,000
     - Baseline and alternative scenarios 2, 3, and 4
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.7
+    - Correct pregnancy duration for partial term pregnancies
+    - Incomplete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline and alternative scenarios 2, 3, and 4
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 5.0
     - Wave I neonatal antibiotics with scale-up scenarios 
     - Complete
