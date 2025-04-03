@@ -42,9 +42,7 @@ AI Ultrasound Module
 1.0 Overview
 ++++++++++++
 
-.. todo::
-
-  Provide a brief overview of what this module does and note which component it is a part of
+This module assesses whether a simulant receives an ultrasound during antenatal care, tracks the details of that care, and outputs a "believed" gestational age for that simulant based on the simulant's real gestational age and the measurement error of the gestational age dating care they recieved. Notably, coverage and type of ultrasounds offered at ANC visits will be scenario-dependent.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -52,9 +50,7 @@ AI Ultrasound Module
 2.1 Module Diagram
 ----------------------
 
-.. todo::
-
-  Insert module decision tree diagram. Use squares for action points (numbered with roman numerals) and rounded boxes for decision nodes (numbered with integers).
+.. image:: ai_ultrasound_module_diagram.png
 
 2.2 Module Inputs
 ---------------------
@@ -67,11 +63,12 @@ AI Ultrasound Module
     - Application
     - Note
   * - ANC attendance
-    - :ref:`Antenatal care module <>`
+    - :ref:`Antenatal care module <2024_vivarium_mncnh_portfolio_anc_module>`
     - Decision node 1
     - True/False value for each simulant
   * - Gestational age
-    - :ref:`Pregnancy module <>`
+    - :ref:`Pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+    - Action point IV
     - Point value in days
 
 .. todo::
@@ -94,11 +91,11 @@ AI Ultrasound Module
     - 
   * - 2
     - Receives ultrasound?
-    - Scenario-dependent variable: see scenario table for values TODO: LINK
-    - 
+    - Scenario-dependent variable: see the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values
+    - "Yes" if random propensity <= scenario-specific ultrasound coverage defined in table
   * - 3
     - Ultrasound type?
-    - Scenario-dependent variable: see scenario table for values TODO: LINK
+    - Scenario-dependent variable: :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values
     - 
 
 2.4 Module Action Points
@@ -163,11 +160,11 @@ AI Ultrasound Module
     - Value
     - Note
   * - A. Ultrasound coverage
-    - *none* / *standard* / AI-assisted
+    - *none* / *standard* / *AI-assisted*
     - Used for V&V and for estimation of output B
   * - B. "Believed" gestational age
-    - 
-    - 
+    - Point values in days
+    - Used for V&V and facility choice module of intrapartum component
 
 
 3.0 Assumptions and limitations

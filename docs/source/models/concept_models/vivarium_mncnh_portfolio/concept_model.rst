@@ -149,9 +149,11 @@ A table of contents for all modules in this simulation is included below
 
    */module_document*
 
-.. todo::
+.. note::
 
-  Move the following information to individual module documents (and maintain a log of changes for future reference)
+  This concept model diagram was reorganized in April 2025 after much of wave I had been implemented. A record of the PRs for this reorganization are listed below:
+
+
 
 **Wave 1 Concept Model Map:**
 
@@ -161,6 +163,8 @@ A table of contents for all modules in this simulation is included below
 
 3.1 Scenario information
 --------------------------
+
+.. _MNCNH pregnancy component scenario table:
 
 .. list-table:: Pregnancy component scenario-dependent variables
   :header-rows: 1
@@ -183,30 +187,6 @@ A table of contents for all modules in this simulation is included below
 **Component 1**: The Pregnancy Model
 
 .. image:: pregnancy_decision_tree_vr.svg
-
-
-.. list-table:: Inputs to Pregnancy Decision Tree
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - Input
-    - Data Source 
-    - Notes
-  * - ANC Visit Propensity
-    - Likely DHS 
-    - Need to determine correlation if we want to use it. For now use standard propensity values.
-
-The following table details outputs from the pregnancy model. Each row in this table should be a column in the population
-state table outputted by the model. RT will tabulate the population table with the stratifications needed for V&V (e.g., age group, 
-scenario, and input draw). The 'Use case' column in the table denotes what we will be using the output for: either as an input for a later modeling stage
-(i.e., intrapartum or neonatal; this value does not explicitly need to be exported in the population table) or exported for V&V (we explicitly
-need this value to be exported so we can check it looks right). For this specific model, all of the following outputs in the table are needed for V&V. 
-
-
-Limitations:
-
-* Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
-
 
 
 **Component 2**: The Intrapartum Model
@@ -793,10 +773,7 @@ V&V Checks:
 6.0 Limitations
 +++++++++++++++
 
-.. todo::
-
-  Fill in this section as we continue to work
-
+* Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
 
 .. _mncnh_portfolio_7.0:
 

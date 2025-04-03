@@ -42,9 +42,7 @@ Pregnancy module
 1.0 Overview
 ++++++++++++
 
-.. todo::
-
-  Provide a brief overview of what this module does and note which component it is a part of
+This module initializes a maternal age and determines basic pregnancy outcome information such as term length, child sex, etc.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
