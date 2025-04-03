@@ -662,7 +662,7 @@ V&V Checks:
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.0
     - Wave I azithromycin 
-    - Complete
+    - Incomplete
     - N/A
     - 10
     - 100,000
@@ -670,7 +670,7 @@ V&V Checks:
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 7.0
     - Wave I AI ultrasound
-    - Complete
+    - Incomplete
     - N/A
     - 10
     - 100,000
@@ -678,7 +678,7 @@ V&V Checks:
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 8.0
     - Wave I antenatal corticosteroids
-    - Complete
+    - Incomplete
     - N/A
     - 10
     - 100,000
