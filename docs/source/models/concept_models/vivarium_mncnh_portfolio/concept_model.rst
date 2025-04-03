@@ -712,6 +712,8 @@ V&V Checks:
       - Validate that individual RRs affect mortality rates appropriately
       - Validate that no non-preterm babies are dying of preterm
     - Early neonatal mortality is validating now! 
+      Note: Ali noticed in the LBWSG interactive sim that the state table and pipeline values for LBWSG exposure don't match, but engineers confirmed this is okay,
+      the pipeline values refresh after being recorded in the state table (and then are not used again).
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_27_vnv_neonatal_acmr.ipynb>`__
       `LBWSG interactive sim <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/20250313_lbwsg_effects_interactive_simulation.ipynb>`__
   * - 4.1
@@ -751,8 +753,9 @@ V&V Checks:
 
   * - 5.0
     - Validate RR of antibiotics on sepsis (and confirm other causes are unchanged)
-    - There's an RR of 0.78 for antibiotics on preterm with RDS (it should be 1). Otherwise everything is validating - RR on sepsis aligns with expected value. Other causes, 
-      non-RDS preterm, and encephalopathy all have the expected RRs of 1 from antibiotics.
+    - Everything is validating - RR on sepsis aligns with expected value; other causes, non-RDS preterm, and encephalopathy all have the expected RRs of 1 from antibiotics.
+      There's an RR of 0.78 for antibiotics on preterm with RDS, but we confirmed that when we group this by facility type, there is the expected RR of 1. This is because
+      the probability of a simulant receiving CPAP and the probability of receiving antibiotics are not independent (both related to facility choice).
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_31a_vnv_and_scenario_results_antibiotics.ipynb>`__
 
 
@@ -764,15 +767,13 @@ V&V Checks:
     - Explanation
     - Action plan
     - Timeline
-  * - LBWSG exposures in the state table do not match LBWSG exposure pipeline values
-    - Summary from Ali: "Essentially the LBWSG exposure values in the state table do not match the LBWSG exposure pipeline values. 
-      RRs and mortality rates vary in accordance with the state table values. I am not sure how or even if the pipeline 
-      values are being utilized, but my concern is that the pipeline values are specific to the mother and therefore 
-      that the maternal LBWSG exposure values are not synced with child LWBSG exposure values. Again, maybe they're not 
-      even used so it doesn't matter, but this seems like something that should at least be cleaned up so it doesn't 
-      accidentally trip us up in the future."
-      `LBWSG interactive sim <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/20250313_lbwsg_effects_interactive_simulation.ipynb>`__
-    -  No action plan yet
+  * - Pregnancy duration for partial term pregnancies is incorrect
+    - We will end up using pregnancy duration later in the model (to make sure no one shows up for ANC visits 
+      in the second trimester if they never even make it to the second trimester and to calculate anemia YLDs), 
+      so we will want something that defines pregnancy duration for partial term pregnancies.
+    -  Jim is implementing a change: 
+        - Gestational ages for partial term pregnancies are sampled to be uniform between 6 and 24 weeks.
+        - Pregnancy duration pipeline now is just a simple unit converter that will convert the gestational age column to days.
     -  No current timeline 
 
 
