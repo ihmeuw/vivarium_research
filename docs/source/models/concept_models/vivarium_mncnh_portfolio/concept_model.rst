@@ -92,11 +92,17 @@ defined as a module input in a subsequent row.
     - Inputs
     - Outputs
   * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-    - N/A
+    - 
     - 
   * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     - 
-    - 
+    - * Maternal age
+      * Pregnancy term duration
+      * Birth outcome
+      * Child sex
+      * Gestational age
+      * Birthweight
+      * Pregnancy duration
   * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
     - 
     - 
@@ -194,21 +200,9 @@ A table of contents for all modules in this simulation is included below
   * - Input
     - Data Source 
     - Notes
-  * - Age 
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
   * - ANC Visit Propensity
     - Likely DHS 
     - Need to determine correlation if we want to use it. For now use standard propensity values.
-  * - Gestational age at birth
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
-  * - Birthweight
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
-  * - Pregnancy term (full term or partial term)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
 
 The following table details outputs from the pregnancy model. Each row in this table should be a column in the population
 state table outputted by the model. RT will tabulate the population table with the stratifications needed for V&V (e.g., age group, 
@@ -229,18 +223,9 @@ need this value to be exported so we can check it looks right). For this specifi
   * - Ultrasound status (AI assisted, standard, none)
     - Decision tree point
     - Input for later modeling stage & export for V&V
-  * - Gestational age at birth (weeks)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Input for later modeling stage & export for V&V
   * - Gestational age estimate (weeks)
     - Decision tree point
     - Input for later modeling stage and & export for V&V 
-  * - Birthweight (grams)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Input for later modeling stage & export for V&V  
-  * - Pregnancy term (full term or partial term)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Input for later modeling stage & export for V&V
   * - GBD age group of pregnant simulant
     - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
     - Export for V&V 
@@ -255,7 +240,6 @@ Limitations:
 * Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
 * We are not planning to include ANC timing. The timing of ANC visits impacts the ability to accurately estimate gestational age, so we will use an average instead. 
 * The current version of the model does not include any false positive rates for pre-term or LBW. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
-* We are not planning to include twins or multiple pregnancies, which has limitations as twins are more likely to preterm and have birth complications. 
 
 V&V Checks:
 
@@ -263,8 +247,6 @@ V&V Checks:
 * Confirm ultrasound rates matches inputs for all scenarios 
 * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type 
 * Confirm that rate of identifying low birthweight is correct based on ultrasound type
-* Confirm that all pregnant simulants fall within WHO definition of WRA (15-49yrs)
-
 
 **Component 2**: The Intrapartum Model
 

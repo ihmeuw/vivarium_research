@@ -52,95 +52,37 @@ Pregnancy module
 2.1 Module Diagram
 ----------------------
 
-.. todo::
+There is no diagram necessary for the pregnancy module. Instead, all instructions are detailed on the :ref:`MNCNH portfolio pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`. This document also contains a list of model assumptions and limitations as well as verification and validation criteria.
 
-  Insert module decision tree diagram. Use squares for action points (numbered with roman numerals) and rounded boxes for decision nodes (numbered with integers).
-
-2.2 Module Inputs
----------------------
-
-.. list-table:: Module required inputs
-  :header-rows: 1
-
-  * - Input
-    - Source module
-    - Application
-    - Note
-  * - 
-    - 
-    - 
-    - 
-
-
-2.3 Module Decision Nodes
------------------------------
-
-.. list-table:: Module decision nodes
-  :header-rows: 1
-
-  * - Decision node
-    - Description
-    - Information
-    - Note
-  * - 1
-    - 
-    - 
-    - 
-  * - 2
-    - 
-    - 
-    - 
-
-2.4 Module Action Points
----------------------------
-
-.. list-table:: Hemoglobin module action point
-  :header-rows: 1
-
-  * - Action point
-    - Description
-    - Information
-    - Note
-  * - I
-    - 
-    - 
-    - 
-  * - II
-    - 
-    - 
-    - 
-
-2.4: Module Outputs
------------------------
+Module outputs are summarized in the table below. 
 
 .. list-table:: Module outputs
   :header-rows: 1
 
   * - Output
     - Value
-    - Dependencies
-  * - A. 
+    - Note
+  * - A. Maternal age
+    - point value in years
     - 
+  * - B. Pregnancy term duration
+    - *partial* / *full*
     - 
-  * - B.
+  * - C. Birth outcome
+    - *other* / *live_birth* / *stillbirth*
+    - "Other" is equivalent to partial term pregnancies
+  * - D. Child sex
+    - *male* / *female*
     - 
-    - 
+  * - E. Gestational age
+    - point value in days
+    - N/A for partial term pregnancies
+  * - F. Birthweight
+    - point value in grams
+    - N/A for partial term pregnancies
+  * - G. Pregnancy duration
+    - point value in weeks
+    - Equal to gestational age for full term pregnancies
 
 
-3.0 Assumptions and limitations
-++++++++++++++++++++++++++++++++
-
-.. todo::
-
-  List module assumptions and limitations
-
-4.0 Verification and Validation Criteria
-+++++++++++++++++++++++++++++++++++++++++
-
-.. todo::
-  
-  List module V&V criteria
-
-5.0 References
-+++++++++++++++
 
