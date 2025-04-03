@@ -1,22 +1,92 @@
+:orphan:
+
+.. _2024_facility_model_vivarium_mncnh_portfolio:
+
 Delivery Facility Choice Model
 ==============================
 
+.. contents::
+   :local:
+   :depth: 2
 
-[[Causal model diagram]]
+To capture the complex relationship between home delivery, antenatal care (ANC), and low birth weight small for gestational age (LBWSG) risk exposure, we will include two novel affordances in our simulation: (1) correlated propensities for ANC, home delivery, and LBWSG; and (2) conditional probabilities for home delivery that differ based on the believe pre-term/full-term status when labor begins.
 
-Description of "instrisic correlation" of propensities for ANC, home delivery, and LBWSG
-----------------------------------------------------------------------------------------
+Coming up with values for these correlations and conditional probabilities that are consistent with GBD and external evidence is detailed at the end of this document.  But before we get to that complexity, let's start with how we will use these correlations and conditional probabilities in the simulation.
 
-We hypothesize that there are important "common causes" of nodes in the diagram above.  For example, having a home delivery and having no ANC visits might both be influenced by rurality --- if all health services are offered far away, it is logical that people will be able to access them less.
+[[Causal model diagram goes here]]
+
+Correlated propensities
+-----------------------
+
+This section describes how we will model an "instrisic correlation" of ANC, home delivery, and LBWSG.  In short, we will use a Gaussian copula to model this, which has three parameters capturing the correlation between each pair of the three propensities.
+
+The motivation for these correlations is as follows: we hypothesize that there are important "common causes" that are not shown explicitly in the diagram above.  For example, having a home delivery and having no ANC visits might both be influenced by rurality --- if all health services are offered far away, it is logical that people will be able to access them less.
 Similarly, it is likely that there are social exclusion factors causeing both exposure to LBWSG risk and lack of access to ANC and in-facility birth.
-In a simulation model where we have not included scenarios that change these factors, we do not have to model their effects explicitly.
+In a simulation model where we have not included scenarios that change these common-cause factors, we do not have to model their effects explicitly.
 For our purposes, it is sufficient to capture the correlations between ANC, in-facility birth, and LBWSG risk exposure.
-In Vivarium, this is best accomplished using a Gaussian copula to induce correlations between the propensities of these three nodes.
 
-Conditional probabilities of home delivery when (1) believe preterm and (2) believe full term
----------------------------------------------------------------------------------------------
+In Vivarium, we use values selected uniformly at random from the interval [0,1], which we call propensities, to keep attributes like LBWSG and ANC calibrated at the population level.  This makes it straightforward to represent the correlation in our factors by generating correlated propensities. The `statsmodels.distributions.copula.api.GaussianCopula` implementation can make them::
 
-In addition to correlation, there is an essential theory that a belief about preterm status is influential in the decision to have a home delivery.  We will model this as a conditional probability of home delivery given a belief about preterm status.  
+    from statsmodels.distributions.copula.api import GaussianCopula
+    copula = GaussianCopula([[1., .5, .1],
+                             [.5, 1., .1],
+                             [.1, .1, 1.]])
+    copula.rvs(10)
+
+.. list-table:: Propensity Correlation Stand-in Parameters
+   :header-rows: 1
+   :widths: 20 20 20
+
+   * - Factor A
+     - Factor B
+     - Correlation
+   * - ANC Propensity
+     - In-facility Birth Propensity
+     - 0.50
+   * - ANC Propensity
+     - LBWSG Propensity
+     - 0.10
+   * - In-facility Birth Propensity
+     - LBWSG Propensity
+     - 0.10
+
+Eventually we must put the consistent values in the artifact.
+
+Special ordering of LBWSG categories
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When we calibrate the model, it will help to have an ordering of the LBWSG categories that makes them most likely to correlate with the ANC and home delivery propensities.  To achieve this, we will order them from lowest average RR to highest average RR (averaged across all draws).  [[Perhaps more details to come, such as code or an explicit table.]]
+
+Conditional probabilities of home delivery
+------------------------------------------
+
+In addition to correlation, there is an essential theory that a belief about preterm status is influential in the decision to have a home delivery.  We will model this as a conditional probability of home delivery given a belief about preterm status.  Although deriving consistent values for these conditional probabilities is complex, and described in the final section of this page, *using* the conditional probabilities is simple: simply select the facility type with :math:`\text{Pr}[\text{facility}\mid\text{believed preterm}]` and :math:`\text{Pr}[\text{facility}\mid\text{believed fullterm}]` for the corresponding cases.
+
+.. list-table:: Conditional Probability Stand-in Parameters
+   :header-rows: 1
+   :widths: 20 20 20
+
+   * - Term Belief
+     - Facility Choice
+     - Probability
+   * - Term
+     - Home
+     - 0.25
+   * - 
+     - BeMONC
+     - 0.10
+   * - 
+     - CeMONC
+     - 0.65
+   * - Preterm
+     - Home
+     - 0.05
+   * - 
+     - BeMONC
+     - 0.05
+   * - 
+     - CeMONC
+     - 0.90
 
 Challenge of calibrating the model
 ----------------------------------
@@ -28,6 +98,6 @@ Link to code implementing it, too.
 
 
 Range of propensity and probabilities (and probability gaps) that are consistent with existing data
-----------------------------------------------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 An important result of this optimization was to determine that the system is underdetermined.  With the existing data we have available, there are a range of consistent values for the propensity and probability parameters.  This section explores the tradeoffs between the parameters, to guide us in setting appropriate values.
