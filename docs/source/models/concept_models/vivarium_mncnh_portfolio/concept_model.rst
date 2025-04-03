@@ -153,6 +153,8 @@ A table of contents for all modules in this simulation is included below
 
   This concept model diagram was reorganized in April 2025 after much of wave I had been implemented. A record of the PRs for this reorganization are listed below:
 
+  * Pregnancy component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1615 <https://github.com/ihmeuw/vivarium_research/pull/1615>`_
+
 
 
 **Wave 1 Concept Model Map:**
