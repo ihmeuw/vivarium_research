@@ -93,7 +93,7 @@ defined as a module input in a subsequent row.
     - Outputs
   * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - 
-    - 
+    - * ANC propensity
   * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     - 
     - * Maternal age
@@ -104,8 +104,8 @@ defined as a module input in a subsequent row.
       * Birthweight
       * Pregnancy duration
   * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
-    - 
-    - 
+    - * ANC propensity
+    - * ANC attendance
   * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - 
     - 
@@ -176,11 +176,6 @@ A table of contents for all modules in this simulation is included below
     - Data Value 
     - Source
     - Notes
-  * - 1
-    - ANC1 rates
-    - get_covariate_estimates(location_id=location_id, gbd_round_id=7, year_id=2021, decomp_step='iterative', covariate_id=7)
-    - GBD covariate ID 7
-    - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
   * - 2
     - Ultrasound rate at ANC in baseline scenario
     - Ethiopia: 60.7%, Nigeria: 58.7%, Pakistan: 66.7%
@@ -217,18 +212,12 @@ need this value to be exported so we can check it looks right). For this specifi
   * - Output
     - Data Source
     - Use case 
-  * - ANC attendance (true if attended ANC, false if not)
-    - Decision tree point
-    - Input for later modeling stage & export for V&V
   * - Ultrasound status (AI assisted, standard, none)
     - Decision tree point
     - Input for later modeling stage & export for V&V
   * - Gestational age estimate (weeks)
     - Decision tree point
     - Input for later modeling stage and & export for V&V 
-  * - GBD age group of pregnant simulant
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Export for V&V 
 
 .. note::
 
@@ -238,7 +227,7 @@ Limitations:
 
 * Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
 * Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
-* We are not planning to include ANC timing. The timing of ANC visits impacts the ability to accurately estimate gestational age, so we will use an average instead. 
+* The timing of ANC visits impacts the ability to accurately estimate gestational age, so we will use an average instead. 
 * The current version of the model does not include any false positive rates for pre-term or LBW. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
 
 V&V Checks:
