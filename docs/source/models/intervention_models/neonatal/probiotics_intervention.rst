@@ -114,9 +114,7 @@ This reduces to the previous formula if there are no other interventions, and we
 
    \text{CSMR}^\text{sepsis}_{i, \text{original}} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
 
-While we are searching the literature for an appropriate value for the relative risk, we will use a stand-in value from the `most recent Cochrane review (2014) <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD005496.pub4/full>`_,
-which is actually the mean of the calculated RRs for nosocomial sepsis and necrotizing enterocolitis (NEC is a non-GBD-modeled condition that leads to 
-sepsis).
+
 
 .. list-table:: Risk Effect Parameters for Lack-of-Access-to-probiotics
   :widths: 15 15 15 15
@@ -127,10 +125,10 @@ sepsis).
     - Distribution
     - Notes
   * - Relative Risk
-    - 1.33
-    - :math:`\text{Normal}(1.33,0.08^2)`
-    - Based on placeholder relative risk of 0.65 (95% CI 0.52-0.81) of NEC mortality for neonates with access to probiotics and 0.91 (95% CI 0.80-1.03) 
-      of nosocomial sepsis. 
+    - 1.67
+    - :math:`\text{Normal}(1.67,0.08^2)`
+    - Based on impact table provided to us by BMGF, which stated an RR of 0.60 for B. infantis on 0-7 day old hospitalized infants who are preterm
+      or SGA at any facility.
   * - PAF
     - see below
     - see below
