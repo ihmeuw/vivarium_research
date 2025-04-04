@@ -68,6 +68,83 @@ We plan to complete this work in 3 waves.
 * Wave 2 will add in some antenatal supplements (MMS, IV iron), the hemoglobin risk for birthing parents, and all downstream causes affected by hemoglobin. 
 * Wave 3 will add in gestational blood pressure and relevant causes and risks including pre-eclampsia care and downstream effects of high blood pressure. 
 
+The model is further subdivided into three components:
+
+1. Pregnancy component
+2. Intrapartum component
+3. Neonatal component
+
+Each component will consist of several modules, which will convert certain module 
+inputs to module outputs via decision tree-based instructions. Module outputs may be 
+used as inputs to other modules and/or serve as information for verification and 
+validation and/or simulation results.
+
+The following tables link to each simulation module and provide a summary of module 
+input and output variables. Notably, the ordering of modules in the table is 
+significant: the order of operations for implementation moves from top to bottom. 
+Specically, each variable must be defined as a module output in a row prior to being 
+defined as a module input in a subsequent row.
+
+.. list-table:: Pregnancy Component Modules
+  :header-rows: 1
+
+  * - Module
+    - Inputs
+    - Outputs
+  * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - N/A
+    - 
+  * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+    - 
+    - 
+  * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
+    - 
+    - 
+  * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+    - 
+    - 
+
+.. list-table:: Intrapartum Component Modules
+  :header-rows: 1
+
+  * - Module
+    - Inputs
+    - Outputs
+  * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
+    - 
+    - 
+  * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    - 
+    - 
+  * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
+    - 
+    - 
+
+.. list-table:: Neonatal Component Module
+  :header-rows: 1
+
+  * - Module
+    - Inputs
+    - Outputs
+  * - :ref:`Neonatal interventions <2024_vivarium_mncnh_portfolio_neonatal_interventions_module>`
+    - 
+    - 
+  * - :ref:`Neonatal mortality <2024_vivarium_mncnh_portfolio_neonatal_mortality_module>`
+    - 
+    - 
+
+A table of contents for all modules in this simulation is included below
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   */module_document*
+
+.. todo::
+
+  Move the following information to individual module documents (and maintain a log of changes for future reference)
+
 **Wave 1 Concept Model Map:**
 
 .. image:: wave_1_full.svg
@@ -76,15 +153,6 @@ We plan to complete this work in 3 waves.
 
 3.1 Model Components
 --------------------
-
-Our model will have 3 main "components" that each represent a part of the 
-journey of a parent-child dyad. In this model, the simulants (note: simulant 
-here is a parent-child dyad) will each run through 3 decision tree based "time 
-steps", where future decisions are based on what the simulant previously experienced. 
-
-For each phase of the model, we will provide inputs needed (in the form of  a "state table" of tracked values), 
-outputs that need to be recorded for the next state table, and the decision tree that maps from inputs to outputs. Nodes in the decision trees are 
-all labeled and additional information will be included below.
 
 3.1.1 Wave 1 Model Components
 -----------------------------
