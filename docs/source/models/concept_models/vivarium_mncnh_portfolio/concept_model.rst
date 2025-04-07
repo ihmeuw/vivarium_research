@@ -112,6 +112,10 @@ defined as a module input in a subsequent row.
     - * Ultrasound coverage
       * Believed gestational age
 
+.. note::
+
+  Only full term pregnancies (live or stillbirths, NOT abortions/miscarriages/ectopic pregnancies) will proceed to the intrapartum component. Therefore, pregnancy term length is a de facto input to all modules in the intrapartum component.
+
 .. list-table:: Intrapartum Component Modules
   :header-rows: 1
 
@@ -122,11 +126,19 @@ defined as a module input in a subsequent row.
     - 
     - 
   * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - 
-    - 
+    - * (Pregnancy term duration)
+      * Birth facility
+      * Believed gestational age
+    - * Intrapartum azithromycin coverage
+      * Antenatal corticosteroid coverage
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
+    - * (Pregnancy term duration)
+      * Intrapartum azithromycin coverage
     - 
-    - 
+
+.. note::
+
+  Only live births proceed to the neonatal component. Therefore, birth outcome is a de facto input to all modules in the neonatal component.
 
 .. list-table:: Neonatal Component Module
   :header-rows: 1
@@ -205,21 +217,6 @@ A table of contents for all modules in this simulation is included below
     - Data Value 
     - Source
     - Notes
-  * - 0
-    - Incidence of ectopic pregnancies, abortion or miscarriage
-    - incidence_c374 + incidence_c995
-    - get_draws(gbd_round_id=7, location_id=location_id, gbd_id_type='cause_id', gbd_id=[995,374], source='como', measure_id=6, metric_id=3, age_group_id=24, sex_id=2, year_id=2021, decomp_step='iterative')
-    - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence.
-  * - 1
-    - % of simulants to attend each delivery facility type, based on their propensity
-    - At home (68.3%), in hospital (26.6%), in clinic/low-level facility (5.1%) 
-    - DHS for each location; placeholder values are from `this Ethiopia paper <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_.
-    - Denominator in DHS is all births (live and stillbirths) to interviewed women in the 2 years preceding the survey. The above values are placeholders until we do a more in-depth analysis. We would like this to be location specific, please code accordingly. 
-  * - 2
-    - Need to figure out how we will determine which simulants need a c-section
-    -
-    - 
-    -    
   * - 3
     - % of each facility type have cesarian section capabilities
     - At home (0%), in hospital(94%), in clinic/low-level facility (1%)
