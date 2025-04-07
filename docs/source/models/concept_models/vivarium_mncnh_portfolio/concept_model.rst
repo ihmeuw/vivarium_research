@@ -107,9 +107,11 @@ defined as a module input in a subsequent row.
   * - Module
     - Inputs
     - Outputs
+    - Nested subcomponents
   * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - 
     - * ANC propensity
+    - 
   * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     - 
     - * Maternal age
@@ -119,14 +121,18 @@ defined as a module input in a subsequent row.
       * Gestational age
       * Birthweight
       * Pregnancy duration
+    - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+      * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
   * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
     - * ANC propensity
     - * ANC attendance
+    - 
   * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - * ANC attendance
       * Gestational age
     - * Ultrasound coverage
       * Believed gestational age
+    - 
 
 .. note::
 
@@ -138,19 +144,25 @@ defined as a module input in a subsequent row.
   * - Module
     - Inputs
     - Outputs
+    - Nested subcomponents
   * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
     - * (Pregnancy term duration)
     - * Birth facility
+    - 
   * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - * (Pregnancy term duration)
       * Birth facility
       * Believed gestational age
     - * Intrapartum azithromycin coverage
       * Antenatal corticosteroid coverage
+    - TODO: create/link intervention model documents
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
       * Intrapartum azithromycin coverage
     - * Incident maternal disorders cases
+    - * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+      * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
+      * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
 
 .. note::
 
@@ -162,12 +174,24 @@ defined as a module input in a subsequent row.
   * - Module
     - Inputs
     - Outputs
-  * - :ref:`Neonatal interventions <2024_vivarium_mncnh_portfolio_neonatal_interventions_module>`
-    - 
-    - 
-  * - :ref:`Neonatal mortality <2024_vivarium_mncnh_portfolio_neonatal_mortality_module>`
-    - 
-    - 
+    - Nested subcomponents
+  * - :ref:`Neonatal module <2024_vivarium_mncnh_portfolio_neonatal_module>`
+    - * (Birth outcome)
+      * Birth facility
+      * Birth weight
+      * Gestational age
+    - * Neonatal probiotics coverage
+      * CPAP coverage
+      * Neonatal mortality
+    - * :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`
+      * :ref:`Neonatal Sepsis and Other Infections Model <2021_cause_neonatal_sepsis_mncnh>`
+      * :ref:`Neonatal Encephalopathy Model <2021_cause_neonatal_encephalopathy_mncnh>`
+      * :ref:`Preterm Birth <2021_cause_preterm_birth_mncnh>`
+      * :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
+      * :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
+      * Neonatal probiotics
+      * Antenatal corticosteroids
+      * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
 
 
 **Wave 1 Concept Model Map:**
@@ -189,9 +213,45 @@ defined as a module input in a subsequent row.
     - Ultrasound type
     - Note
   * - 1. Baseline
-    - Ethiopia: 60.7%, Nigeria: 58.7%, Pakistan: 66.7%
-    - 100% standard
-    - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_ (Table 8.12, averaged percentage of women attending ANC 1-3 times and 4+ times), `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_ . These values are extracted from literature (see links in 'Source' column). For Pakistan, we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research. The denominator of these values is: pregnant people who have attended an ANC. 
+    - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+    - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+    - 
+  * - 2. CPAP total scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 3. CPAP CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    -  
+  * - 4. CPAP BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 5. Antibiotics total scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 6. Antibiotics CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 7. Antibiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 8. Probiotics total scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 9. Probiotics CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 10. Probiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
 
 .. _MNCNH intrapartum component scenario table:
 
@@ -206,201 +266,103 @@ defined as a module input in a subsequent row.
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - 
+  * - 2. CPAP total scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 3. CPAP CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    -  
+  * - 4. CPAP BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 5. Antibiotics total scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 6. Antibiotics CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 7. Antibiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 8. Probiotics total scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 9. Probiotics CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 10. Probiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
 
-3.1 Model Components
---------------------
 
-3.1.1 Wave 1 Model Components
------------------------------
-
-**Component 1**: The Pregnancy Model
-
-.. image:: pregnancy_decision_tree_vr.svg
-
-
-**Component 2**: The Intrapartum Model
-
-.. image:: intrapartum_decision_tree_vr.svg
-
-
-**Component 3**: The Neonatal Model
-
-.. image:: neonatal_decision_tree_vr.svg
-
-
-.. list-table:: Neonatal Decision Tree
-  :widths: 3 15 15
+.. list-table:: Neonatal component scenario-dependent variables
   :header-rows: 1
 
-  * - ID
-    - Decision Information 
-    - Notes
-  * - 0
-    - Pregnancy outcome (live birth or not) value from :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Only live birth outcomes continue in the model
-  * - 1
-    - Delivery facility type (home, BEmONC, CEmONC) value from intrapartum model
+  * - Scenario
+    - CPAP coverage
+    - Antibiotics coverage
+    - Probiotics coverage
+    - Note
+  * - 1. Baseline
+    - Defined on the :ref:`CPAP intervention model document <intervention_neonatal_cpap>`
+    - Defined on the :ref:`neonatal antibiotic intervention document <intervention_neonatal_antibiotics>`
+    - TODO: link probiotic model document and baseline coverage
+    - Baseline coverage values are delivery facility-specific
+  * - 2. CPAP total scale-up
+    - 100% availability at BEMONC and CEMONC facilities
+    - Baseline
+    - Baseline
     - 
-  * - 2
-    - Percentage of each facility type that have antibiotics for neonatal sepsis: 76.8% of CEmONC and 30.2% of BEmONC 
-    - These values are from the 2016 EmONC Final Report and are therefore only reflective of Ethiopian health system a decade ago (we also have data on this
-      from SARA, via the Health Systems team). Please use these as a placeholder for now while we try to find reliable values for Nigeria and Pakistan. 
-  * - 3
-    - 0.72 (95% CI 0.64-0.80) relative risk of antibiotics on mortality from sepsis or other neonatal infections
-    - It seems like this relative risk is hard to find in the literature, and we might need to use a sensitivity-analysis approach. 
-      `This meta-analysis for LiST <https://pmc.ncbi.nlm.nih.gov/articles/PMC3231886/>`_ provides an estimate of the RR of antibiotics on neonatal sepsis, 
-      and we could use their methodology to make our own estimate, or use this one (which is currently a placeholder). 
-  * - 4
-    - XX% of each type of facility have probiotics available
-    - Need to determine who recevied probiotics - all newborns, only LBW, only preterm, etc. ; the coverage is probably zero in current practice, and we will model scenarios where it is nonzero.
-  * - 5
-    - XX relative risk on incidence of sepsis or other neonatal infections
-    - Need to confirm this will impact incidence not mortality. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
-  * - 6
-    - XX relative risk on incidence of encephalopathy if birthing parent experiences obstructed labor
-    - Need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
-  * - 7
-    - Percentage of each facility type that have CPAP capabilities: CMONC - 39.3% and BMONC - 7.5% 
-    - These values are from the 2016 EmONC Final Report and are therefore only reflective of Ethiopian health system a decade ago. Please use these as a placeholder for now while we 
-      try to find reliable values for Nigeria and Pakistan. 
-  * - 8
-    - 0.53 (95% CI 0.34-0.83) relative risk on RDS mortality of neonate receiving CPAP
-    - Note that we might want RR for NICU, but this value is for CPAP. The population that this effect size applies to is 
-      preterm infants with "respiratory failure becoming evident soon after birth".
-      Source: `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_
-  * - 9
-    - 0.69 (95% CI 0.59-0.81) relative risk for RDS mortality based on birthing parent receiving antenatal corticosteroids
-    - This value is for RDS mortality, however there is also an RR on RDS incidence (0.66, 95% CI 0.56-0.77). Study recipients
-      of RDS intervention included "women, with a singleton or multiple pregnancy, expected to deliver preterm as a result of either 
-      spontaneous preterm labour, preterm prelabour rupture of the membranes or planned preterm delivery."
-      Source: `2017 Cochrane review <https://pubmed.ncbi.nlm.nih.gov/28321847/>`_
-  * - 10
-    - Percentage of preterm deaths caused by RDS: Ethiopia - 87.1%; Nigeria - 98.1%; Pakistan - 89.7% 
-    - Ethiopia source: `Major causes of death in preterm infants in selected hospitals in Ethiopia <https://www.sciencedirect.com/science/article/pii/S2214109X19302207>`_
-      Nigeria source: `Current Trends in Neonatal Morbidity and Mortality - Experiences from a Tertiary Center in Lagos, Nigeria <https://pmc.ncbi.nlm.nih.gov/articles/PMC9490664/>`_
-      Pakistan source: `Birth asphyxia is under-rated as a cause of preterm neonatal mortality in low- and middle-income countries <https://obgyn.onlinelibrary.wiley.com/doi/10.1111/1471-0528.17220>`_
-      Note about the Pakistan paper: the study provides two estimates of preterm deaths caused by RDS, and the value above is based on physician diagnoses, but the authors also 
-      had a panel of experts review the diagnoses independently, and the panel found RDS to be far less common than the physicians, with 35.6% of preterm deaths attributed to RDS.     
-      
-.. _inputs_to_neonatal_decision_tree_table:
-
-.. list-table:: Inputs to Neonatal Decision Tree
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - Input
-    - Data Source 
-    - Notes
-  * - Birth delivery facility
-    - From intrapartum model
+  * - 3. CPAP CEMONC-only scale-up
+    - 100% at CEMONC, baseline at BEMONC
+    - Baseline
+    - Baseline
+    -  
+  * - 4. CPAP BEMONC-only scale-up
+    - Baseline at CEMONC, 100% at BEMONC
+    - Baseline
+    - Baseline
     - 
-  * - Type of birth
-    - From intrapartum model
-    - E.g., live, still 
-  * - Gestational age at birth
-    - From intrapartum model
+  * - 5. Antibiotics total scale-up
+    - Baseline
+    - 100% availability at BEMONC and CEMONC facilities
+    - Baseline
     - 
-  * - Birthweight
-    - From intrapartum model
+  * - 6. Antibiotics CEMONC-only scale-up
+    - Baseline
+    - 100% at CEMONC, baseline at BEMONC
+    - Baseline
     - 
-  * - If birth parent experienced obstructive labor
-    - From intrapartum model
+  * - 7. Antibiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline at CEMONC, 100% at BEMONC
+    - Baseline
     - 
-  * - If birth parent received antenatal corticosteroids
-    - From intrapartum model
+  * - 8. Probiotics total scale-up
+    - Baseline
+    - Baseline
+    - 100% availability at CEMONC and BEMONC facilities
     - 
-  * - If birth parent received azithromycin
-    - From intrapartum model
+  * - 9. Probiotics CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 100% availability at CEMONC, baseline at BEMONC
+    - 
+  * - 10. Probiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - Baseline at CEMONC, 100% at BEMONC
     - 
 
-.. list-table:: Outputs from Neonatal Decision Tree
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - Input
-    - Data Source 
-    - Notes
-  * - Interventions available (antibiotics, probiotics, RDS treatment)
-    - Decision tree values
-    - 
-  * - Interventions received (antibiotics, probiotics, RDS treatment)
-    - Decision tree values
-    - 
-  * - Count of neonatal deaths by cause
-    - Neonatal disorder models
-    - 
-  * - Burden of Neonatal deaths by cause
-    - Neonatal disorder model
-    - YLLs
-  * - Gestational age at birth
-    - From intrapartum model
-    - 
-  * - Birthweight
-    - From intrapartum model
-    - 
-
-Limitations:
-
-* In GBD, LBWSG impacts all-cause mortality, which overlaps with the other neonatal causes. The method for handling this is complex, since preterm birth is a PAF-of-one cause, that we want to split into preterm with and without RDS, and other causes must have a RR with LBWSG to make the all-cause RR calibrate.
-
-* In this phase of model building, we are not including lung surfactant or kangaroo care which are closely tied to the CPAP/NICU intervention. We might add these to the model in a later phase. 
-
-
-V&V Checks:
-
-* Confirm ACMR in sim matches ACMR in artifact
-* Confirm LBWSG exposure match
-* Confirm LBWSG RR on ACMR matches
-* Confirm CSMR matches for preterm, sepsis, encephalopathy
-* Confirm that RDS incidence and mortality match expectations
-* Confirm that interventions have expected efficacy and coverage rates
-
-
-  
-.. _mncnh_portfolio_3.2:
-
-3.2 Submodels
--------------
-
-1. :ref:`Pregnancy Model <other_models_pregnancy_closed_cohort_mncnh>`
-
-  a. :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
-  b. :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
-  c. :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
-  d. Maternal hypertensive disorders
-
-2. :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`
-
-  a. :ref:`Neonatal Sepsis and Other Infections Model <2021_cause_neonatal_sepsis_mncnh>`
-  b. :ref:`Neonatal Encephalopathy Model <2021_cause_neonatal_encephalopathy_mncnh>`
-  c. :ref:`Preterm Birth <2021_cause_preterm_birth_mncnh>`
-
-    i. with Respiratory Distress Syndrome (RDS)
-    ii. without RDS 
-
-3. Low Birthweight/Short Gestation Risk Exposure
-4. Low Birthweight/Short Gestation Risk Effect on Neonatal Moratlity Model
-5. Hemoglobin Risk Exposure
-6. Hemoglobin Risk Effect on Maternal Hemorrhage
-7. :ref:`Intervention Models <neonatal_intervention_models>`
-
-  a. :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
-  b. :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
-
-
-3.3 Simulation scenarios 
-------------------------
-
-1. **Baseline**: baseline coverage for all maternal and neonatal interventions 
-2. **CPAP total scale-up**: 100% CPAP availability in both BEMONC and CEMONC facilities  
-3. **CPAP CEMONC-only scale-up**: 100% CPAP availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
-4. **CPAP BEMONC-only scale-up**: keep baseline coverage for CEMONC facilities, 100% CPAP availability in BEMONC facilities 
-5. **Antibiotics total scale-up**: 100% antibiotics availability in both BEMONC and CEMONC facilities  
-6. **Antibiotics CEMONC-only scale-up**: 100% antibiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
-7. **Antibiotics BEMONC-only scale-up**: keep baseline coverage for CEMONC facilities, 100% antibiotics availability in BEMONC facilities 
-8. **Probiotics total scale-up**: 100% probiotics availability in both BEMONC and CEMONC facilities  
-9. **Probiotics CEMONC-only scale-up**: 100% probiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
-10. **Probiotics BEMONC-only scale-up**: keep baseline coverage for CEMONC facilities, 100% probiotics availability in BEMONC facilities 
 
 .. _mncnh_portfolio_4.0:
 
@@ -428,11 +390,19 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 
   * - Corticosteroid coverage counts
     - 
-  * - Obstructed labor outcomes (deaths, YLLs, YLDs, incident cases)
+  * - Maternal obstructed labor outcomes (deaths, YLLs, YLDs, incident cases)
     - 
-  * - Hemorrhage outcomes (deaths, YLLs, YLDs, incident cases)
+  * - Maternal hemorrhage outcomes (deaths, YLLs, YLDs, incident cases)
     - 
-  * - Sepsis outcomes (deaths, YLLs, YLDs, incident cases)
+  * - Maternal sepsis outcomes (deaths, YLLs, YLDs, incident cases)
+    - 
+  * - Count of neonatal deaths and YLLs by cause
+    - 
+  * - Neonatal antibioitics availability/coverage counts
+    - 
+  * - Neonatal probiotics availability/coverage counts
+    - 
+  * - CPAP availability/coverage counts
     - 
 
 .. todo::

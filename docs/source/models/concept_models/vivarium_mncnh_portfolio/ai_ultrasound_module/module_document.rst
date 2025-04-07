@@ -91,12 +91,33 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
     - 
   * - 2
     - Receives ultrasound?
-    - Scenario-dependent variable: see the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values
+    - Scenario-dependent variable: see the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values (and baseline coverage section below for baseline coverage)
     - "Yes" if random propensity <= scenario-specific ultrasound coverage defined in table
   * - 3
     - Ultrasound type?
-    - Scenario-dependent variable: :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values
+    - Scenario-dependent variable: :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values (and baseline coverage section below for baseline coverage)
     - 
+
+2.3.1: Baseline coverage
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline. Baseline coverage of ultrasound among those who attend ANC:
+
+.. list-table:: Baseline ultrasound coverage values
+  :header-rows: 1
+
+  * - Location
+    - Value
+    - Note
+  * - Ethiopia
+    - 60.7%
+    - `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_
+  * - Nigeria
+    - 58.7%
+    - `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_ 
+  * - Pakistan
+    - 66.7%
+    - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_ (Table 8.12, averaged percentage of women attending ANC 1-3 times and 4+ times). we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research
 
 2.4 Module Action Points
 ---------------------------

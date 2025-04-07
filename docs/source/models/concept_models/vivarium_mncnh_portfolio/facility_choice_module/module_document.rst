@@ -43,7 +43,7 @@ Facility choice module
 
     - Home: 68.3%
 
-    - Hopsital: 26.6%
+    - Hospital: 26.6%
 
     - Clinic/low-level facility: 5.1%
 
@@ -54,6 +54,8 @@ Facility choice module
   V&V: Confirm attendance rate for each type of delivery facility matches inputs
 
   Limitation: Moving to a higher level care facility during the intrapartum period is common (referred up once labor begins if there is an issue) and the ability to do this is often a result of transport available, distance to clinics, etc. We will not include this and instead have simulants remain at a single facility for the whole intrapartum period. 
+
+  TODO: update to be consistent with BEMONC/CEMONC terminology
 
 
 
