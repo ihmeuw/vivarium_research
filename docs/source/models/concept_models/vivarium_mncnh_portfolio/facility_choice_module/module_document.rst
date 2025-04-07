@@ -51,6 +51,12 @@ Facility choice module
 
   Eventually location-specific values from DHS will be used for this parameter. Note that denominator in DHS is all births (live and stillbirths) to interviewed women in the two years preceeding the survey.
 
+  V&V: Confirm attendance rate for each type of delivery facility matches inputs
+
+  Limitation: Moving to a higher level care facility during the intrapartum period is common (referred up once labor begins if there is an issue) and the ability to do this is often a result of transport available, distance to clinics, etc. We will not include this and instead have simulants remain at a single facility for the whole intrapartum period. 
+
+
+
 .. contents::
   :local:
   :depth: 2

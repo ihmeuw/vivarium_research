@@ -62,6 +62,21 @@ and details on the intrapartum and neonatal time periods.
 3.0 Concept model diagram and submodels
 +++++++++++++++++++++++++++++++++++++++
 
+A table of contents for all modules in this simulation is included below
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   */module_document*
+
+.. note::
+
+  This concept model diagram was reorganized in April 2025 after much of wave I had been implemented. A record of the PRs for this reorganization are listed below:
+
+  * Pregnancy component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1615 <https://github.com/ihmeuw/vivarium_research/pull/1615>`_
+
+
 We plan to complete this work in 3 waves. 
 
 * Wave 1 will include the basic model design, outlines of the healthcare system, and some interventions (AI ultrasound, higher level delivery facility interventions, RDS management). 
@@ -123,8 +138,8 @@ defined as a module input in a subsequent row.
     - Inputs
     - Outputs
   * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
-    - 
-    - 
+    - * (Pregnancy term duration)
+    - * Birth facility
   * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - * (Pregnancy term duration)
       * Birth facility
@@ -134,7 +149,7 @@ defined as a module input in a subsequent row.
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
       * Intrapartum azithromycin coverage
-    - 
+    - * Incident maternal disorders cases
 
 .. note::
 
@@ -152,21 +167,6 @@ defined as a module input in a subsequent row.
   * - :ref:`Neonatal mortality <2024_vivarium_mncnh_portfolio_neonatal_mortality_module>`
     - 
     - 
-
-A table of contents for all modules in this simulation is included below
-
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   */module_document*
-
-.. note::
-
-  This concept model diagram was reorganized in April 2025 after much of wave I had been implemented. A record of the PRs for this reorganization are listed below:
-
-  * Pregnancy component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1615 <https://github.com/ihmeuw/vivarium_research/pull/1615>`_
-
 
 
 **Wave 1 Concept Model Map:**
@@ -187,10 +187,24 @@ A table of contents for all modules in this simulation is included below
     - Ultrasound coverage
     - Ultrasound type
     - Note
-  * - Baseline
+  * - 1. Baseline
     - Ethiopia: 60.7%, Nigeria: 58.7%, Pakistan: 66.7%
     - 100% standard
     - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_ (Table 8.12, averaged percentage of women attending ANC 1-3 times and 4+ times), `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_ . These values are extracted from literature (see links in 'Source' column). For Pakistan, we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research. The denominator of these values is: pregnant people who have attended an ANC. 
+
+.. _MNCNH intrapartum component scenario table:
+
+.. list-table:: Intrapartum component scenario-dependent variables
+  :header-rows: 1
+
+  * - Scenario
+    - Azithromycin coverage
+    - Corticosteroid coverage
+    - Note
+  * - 1. Baseline
+    - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    - 
 
 3.1 Model Components
 --------------------
@@ -207,134 +221,6 @@ A table of contents for all modules in this simulation is included below
 
 .. image:: intrapartum_decision_tree_vr.svg
 
-
-.. list-table:: Intrapartum Decision Tree
-  :widths:  3 5 10 10 15
-  :header-rows: 1
-
-  * - ID
-    - Decision Information 
-    - Data Value 
-    - Source
-    - Notes
-  * - 3
-    - % of each facility type have cesarian section capabilities
-    - At home (0%), in hospital(94%), in clinic/low-level facility (1%)
-    - SARA (Ethiopia; filepath saved `on SharePoint <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B63F98143-C6C3-4CF7-BF62-969344726A87%7D&file=ethiopia_data_received_notes.docx&action=default&mobileredirect=true>`_.) 
-    - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the SARA Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
-  * - 4a
-    - Relative risk of c-section on incidence of hemorrhage
-    - 2.05 (1.84-2.29)
-    - `Pubu et al 2021 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7887994/>`_ 
-    - This value is a stand-in from this population-based study in Tibet (see 'Source' column), in which the authors reported an odds ratio rather than a relative risk. With further research and analysis we will likely update this value. Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
-  * - 5
-    - % of pregnancy receive azithromycin in each delivery facility type
-    - At home (10%), in hospital (67.7%), in clinic/low-level facility (18.5%)
-    - SARA (Ethiopia; Table 3.8.2)
-    - These are placeholder values (percentage of each facility type that have azithromycin, not the percentage of pregnancies that receive it) and will be updated with further analysis. We want these to be location specific, please code accordingly.  
-  * - 6
-    - Relative risk of azithromycin on incidence of sepsis and other infections
-    - 0.65 (0.55, 0.77)
-    - `Tita et al 2023 <https://www.ajog.org/article/S0002-9378(22)02210-4/fulltext#undfig1>`_ 
-    - Outstanding items: how will we implement this with overlaps in total MD impact of facility type 
-  * - 7
-    - % of pre-term or known LBW pregnancies will receive antenatal corticosteroids, split by delivery facility type
-    - At home (1%), in  hospital (12%), in clinic/low-level facility (2%)
-    - EmONC (Ethiopia; Table 10.5.4A)
-    - These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The denominator for these values is LBW and preterm births. Outstanding items: believe this only affected neonatal outcomes, confirm with BMGF
-  * - 8
-    - % of those who receive intrapartum sensors that get identified as needing a c-section
-    - 
-    - 
-    - Outstanding items: which facility types have intrapartum sensors? Is there anything else that an intrapartum sensor should influence (e.g. who receives ACS, can someone be identified as high risk from an intrapartum sensor and be moved to a higher level facility in time for birth)?
-    
-
-
-.. list-table:: Inputs to Intrapartum Decision Tree
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - Input
-    - Data Source 
-    - Notes
-  * - Age 
-    - GBD and fertility model 
-    - Will be the same population generation as used in nutrition optimization pregnancy model 
-  * - Upstream factors
-    - Likely DHS 
-    - Need to decide what if anything we want to include
-  * - Delivery facility Propensity
-    - Likely DHS 
-    - Need to determine correlation if we want to use it 
-  * - ANC attendance
-    - Decision tree point
-    - 
-  * - Gestational age at birth
-    - GBD LBWSG
-    - 
-  * - Gestational age stated
-    - Decision tree value
-    - 
-  * - Low birthweight 
-    - GBD LBWSG
-    - 
-  * - If identified as low birthweight
-    - Decision tree value
-    - 
-  * - Pregnancy end
-    - GBD
-    - Sum of GBD ectopic and abortion and miscarriage rates
-
-
-Requested outputs for V&V from the intrapartum model are described in the following table.
-For these V&V observers we'd like count data, as described. For information on what from the 
-intrapartum model will be used as input to the neonatal model, please see the table
-:ref:`Inputs to neonatal decision tree <inputs_to_neonatal_decision_tree_table>` in the next section.
-
-.. list-table:: V&V Outputs from Intrapartum Decision Tree 
-  :widths: 10 10 10
-  :header-rows: 1
-
-  * - Output
-    - Data Source
-    - Stratifications
-  * - Counts of simulants attending each delivery facility type
-      (BeMONC, CeMONC, home)
-    - Decision tree point
-    - None
-  * - Counts of simulants receiving each intervention (azithromycin, corticosteroids; 
-      c-sections will be added in a later wave)
-    - Decision tree point
-    - Facility type
-  * - Obstructed labor outcomes (deaths, YLLs, YLDs, incident counts)
-    - :ref:`Obstructed labor and uterine rupture model <2021_cause_obstructed_labor_mncnh>`
-    - Facility type, age
-  * - Hemorrhage outcomes (deaths, YLLs, YLDs, incident counts)
-    - :ref:`Maternal hemorrhage model <2021_cause_maternal_hemorrhage_mncnh>`
-    - Facility type, age
-  * - Sepsis outcomes (deaths, YLLs, YLDs, incident counts)
-    - :ref:`Maternal sepsis model <2021_cause_maternal_sepsis_mncnh>`
-    - Facility type, age, whether given azithromycin or not
-
-
-Limitations:
-
-* Only have one cohort, will not allow for downstream effects through pregnancies (c-sections likely to get another c-section in the future, losing a child might impact delivery facility, etc.)
-* Moving to a higher level care facility during the intrapartum period is common (referred up once labor begins if there is an issue) and the ability to do this is often a result of transport available, distance to clinics, etc. We will not include this and instead have simulants remain at a single facility for the whole intrapartum period. 
-* There are many other maternal disorders which we do not plan to individually model. 
-
-V&V Checks:
-
-* Confirm attendance rate for each type of delivery facility matches inputs
-* Confirm rates of simulants receiving azithromycin and corticosteroid matches inputs
-* Confirm outcomes for each maternal disorder (OL, sepsis, and hemorrhage) matches GBD data 
-* Confirm that relative risk of azithromycin on sepsis outcomes matches expectations
-
-.. todo::
-
-  Figure out whether we want any of these count data to be stratified by LBW or preterm status, 
-  and what our V&V plan would be for this if so (e.g., interactive sim to compare risk ratios for OL
-  of people with LBWSG babies or not?).
 
 **Component 3**: The Neonatal Model
 
@@ -517,13 +403,43 @@ V&V Checks:
 
 .. _mncnh_portfolio_4.0:
 
-4.0 Data Inputs
-+++++++++++++++
+4.0 Outputs/Observers
+++++++++++++++++++++++
+
+Specific observer outputs and their stratifications may vary by model run as needs change. Modifications to default will be noted in the model run requests tables. Note that the observers and outputs listed here are different from the module outputs above. The outputs of the module are intended to be intermediate values that may or may not be included as observed simulated outputs.
+
+.. list-table:: Simulation observers
+  :header-rows: 1
+
+  * - Component 
+    - Outcome
+    - Default stratifications
+  * - ANC attendance counts
+    - 
+  * - Ultrasound coverage counts (AI-assisted, standard, none)
+    - 
+  * - Pregnancy term counts (full or partial)
+    - 
+  * - Maternal GBD age group counts
+    - 
+  * - Delivery facility type counts (BeMONC, CeMONC, home)
+    - 
+  * - Azithromycin coverage counts
+    - 
+  * - Corticosteroid coverage counts
+    - 
+  * - Obstructed labor outcomes (deaths, YLLs, YLDs, incident cases)
+    - 
+  * - Hemorrhage outcomes (deaths, YLLs, YLDs, incident cases)
+    - 
+  * - Sepsis outcomes (deaths, YLLs, YLDs, incident cases)
+    - 
 
 .. todo::
 
-  Fill in this section as we continue to work
-
+Figure out whether we want any of these count data to be stratified by LBW or preterm status, 
+and what our V&V plan would be for this if so (e.g., interactive sim to compare risk ratios for OL
+of people with LBWSG babies or not?).
 
 .. _mncnh_portfolio_5.0:
 
