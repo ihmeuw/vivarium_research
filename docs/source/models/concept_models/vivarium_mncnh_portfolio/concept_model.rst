@@ -92,17 +92,25 @@ defined as a module input in a subsequent row.
     - Inputs
     - Outputs
   * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-    - N/A
     - 
+    - * ANC propensity
   * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     - 
-    - 
+    - * Maternal age
+      * Pregnancy term duration
+      * Birth outcome
+      * Child sex
+      * Gestational age
+      * Birthweight
+      * Pregnancy duration
   * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
-    - 
-    - 
+    - * ANC propensity
+    - * ANC attendance
   * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-    - 
-    - 
+    - * ANC attendance
+      * Gestational age
+    - * Ultrasound coverage
+      * Believed gestational age
 
 .. list-table:: Intrapartum Component Modules
   :header-rows: 1
@@ -141,15 +149,36 @@ A table of contents for all modules in this simulation is included below
 
    */module_document*
 
-.. todo::
+.. note::
 
-  Move the following information to individual module documents (and maintain a log of changes for future reference)
+  This concept model diagram was reorganized in April 2025 after much of wave I had been implemented. A record of the PRs for this reorganization are listed below:
+
+  * Pregnancy component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1615 <https://github.com/ihmeuw/vivarium_research/pull/1615>`_
+
+
 
 **Wave 1 Concept Model Map:**
 
 .. image:: wave_1_full.svg
 
 .. _mncnh_portfolio_3.1:
+
+3.1 Scenario information
+--------------------------
+
+.. _MNCNH pregnancy component scenario table:
+
+.. list-table:: Pregnancy component scenario-dependent variables
+  :header-rows: 1
+
+  * - Scenario
+    - Ultrasound coverage
+    - Ultrasound type
+    - Note
+  * - Baseline
+    - Ethiopia: 60.7%, Nigeria: 58.7%, Pakistan: 66.7%
+    - 100% standard
+    - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_ (Table 8.12, averaged percentage of women attending ANC 1-3 times and 4+ times), `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_ . These values are extracted from literature (see links in 'Source' column). For Pakistan, we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research. The denominator of these values is: pregnant people who have attended an ANC. 
 
 3.1 Model Components
 --------------------
@@ -160,110 +189,6 @@ A table of contents for all modules in this simulation is included below
 **Component 1**: The Pregnancy Model
 
 .. image:: pregnancy_decision_tree_vr.svg
-
-.. list-table:: Pregnancy Decision Tree
-  :widths: 3 5 10 10 15
-  :header-rows: 1
-
-  * - ID
-    - Decision Information 
-    - Data Value 
-    - Source
-    - Notes
-  * - 1
-    - ANC1 rates
-    - get_covariate_estimates(location_id=location_id, gbd_round_id=7, year_id=2021, decomp_step='iterative', covariate_id=7)
-    - GBD covariate ID 7
-    - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
-  * - 2
-    - Ultrasound rate at ANC in baseline scenario
-    - Ethiopia: 60.7%, Nigeria: 58.7%, Pakistan: 66.7%
-    - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_ (Table 8.12, averaged percentage of women attending ANC 1-3 times and 4+ times), `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_  
-    - These values are extracted from literature (see links in 'Source' column). For Pakistan, we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research. The denominator of these values is: pregnant people who have attended an ANC. 
-  * - 3
-    - Gestational age (GA) estimate at ANC 
-    - Real GA +/- a value from a normal distribution with a mean of zero and standard deviations of: 5 days for AI ultrasound, 20 days for standard ultrasound, and 45.5 days for no ultrasound 
-    - Need further clarification on outstanding questions from BMGF, see `PR comments <https://github.com/ihmeuw/vivarium_research/pull/1525>`_. `Standard deviation value for no ultrasound <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272718#sec007>`_.
-    - Values should be confirmed with further research and data anlaysis
-
-
-.. list-table:: Inputs to Pregnancy Decision Tree
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - Input
-    - Data Source 
-    - Notes
-  * - Age 
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
-  * - ANC Visit Propensity
-    - Likely DHS 
-    - Need to determine correlation if we want to use it. For now use standard propensity values.
-  * - Gestational age at birth
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
-  * - Birthweight
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
-  * - Pregnancy term (full term or partial term)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - 
-
-The following table details outputs from the pregnancy model. Each row in this table should be a column in the population
-state table outputted by the model. RT will tabulate the population table with the stratifications needed for V&V (e.g., age group, 
-scenario, and input draw). The 'Use case' column in the table denotes what we will be using the output for: either as an input for a later modeling stage
-(i.e., intrapartum or neonatal; this value does not explicitly need to be exported in the population table) or exported for V&V (we explicitly
-need this value to be exported so we can check it looks right). For this specific model, all of the following outputs in the table are needed for V&V. 
-
-.. list-table:: Outputs from Pregnancy Decision Tree
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - Output
-    - Data Source
-    - Use case 
-  * - ANC attendance (true if attended ANC, false if not)
-    - Decision tree point
-    - Input for later modeling stage & export for V&V
-  * - Ultrasound status (AI assisted, standard, none)
-    - Decision tree point
-    - Input for later modeling stage & export for V&V
-  * - Gestational age at birth (weeks)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Input for later modeling stage & export for V&V
-  * - Gestational age estimate (weeks)
-    - Decision tree point
-    - Input for later modeling stage and & export for V&V 
-  * - Birthweight (grams)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Input for later modeling stage & export for V&V  
-  * - Pregnancy term (full term or partial term)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Input for later modeling stage & export for V&V
-  * - GBD age group of pregnant simulant
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Export for V&V 
-
-.. note::
-
-    We should track both the real GA at birth and the believed GA.
-
-Limitations:
-
-* Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
-* Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
-* We are not planning to include ANC timing. The timing of ANC visits impacts the ability to accurately estimate gestational age, so we will use an average instead. 
-* The current version of the model does not include any false positive rates for pre-term or LBW. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
-* We are not planning to include twins or multiple pregnancies, which has limitations as twins are more likely to preterm and have birth complications. 
-
-V&V Checks:
-
-* Confirm ANC visit rate matches expectations 
-* Confirm ultrasound rates matches inputs for all scenarios 
-* Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type 
-* Confirm that rate of identifying low birthweight is correct based on ultrasound type
-* Confirm that all pregnant simulants fall within WHO definition of WRA (15-49yrs)
 
 
 **Component 2**: The Intrapartum Model
@@ -894,10 +819,7 @@ V&V Checks:
 6.0 Limitations
 +++++++++++++++
 
-.. todo::
-
-  Fill in this section as we continue to work
-
+* Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
 
 .. _mncnh_portfolio_7.0:
 
