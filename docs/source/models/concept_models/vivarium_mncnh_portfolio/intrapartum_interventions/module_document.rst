@@ -42,7 +42,7 @@ Intrapartum intervention module
 1.0 Overview
 ++++++++++++
 
-This module determines coverage of intrapartum interventions, including azithromycin and corticosteroids (and eventually intrapartum sensors in wave II). Coverage availability/eligibility will depend on birth facility and believed gestational age.
+This module in the intrapartum component determines coverage of intrapartum interventions, including azithromycin and corticosteroids (and eventually intrapartum sensors in wave II). Coverage availability/eligibility will depend on birth facility and believed gestational age.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -63,15 +63,15 @@ This module determines coverage of intrapartum interventions, including azithrom
     - Application
     - Note
   * - Pregnancy term
-    - Pregnancy
+    - :ref:`Pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     - Partial term pregnancies do not proceed through this module
     - 
   * - Birth facility
-    - Facility choice
+    - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
     - Determines intervention availability
     - 
   * - Believed gestational age
-    - AI ultrasound
+    - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Affects antenatal corticosteroid coverage (decision node #2)
     - Only births believed to be preterm are eligible for coverage
 

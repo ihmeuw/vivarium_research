@@ -42,7 +42,7 @@ Maternal disorders module
 1.0 Overview
 ++++++++++++
 
-This module reads inputs that affect maternal disorders incidence/mortality (such as azithromycin coverage, hemoglobin exposure for wave II) and outputs incident and fatal cases of maternal disorders.
+This module is part of the intrapartum component and reads inputs that affect maternal disorders incidence/mortality (such as azithromycin coverage, hemoglobin exposure for wave II) and outputs incident and fatal cases of maternal disorders.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -64,7 +64,7 @@ There are specific variables that will affect these cause models, summarized in 
     - Instructions
     - Note
   * - Azithromycin coverage
-    - Intrapartum interventions
+    - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Maternal sepsis incidence rate
     - Relative risk: 0.65 (95% CI: 0.55, 0.77)
     - `Tita et al 2023 <https://www.ajog.org/article/S0002-9378(22)02210-4/fulltext#undfig1>`_ 
