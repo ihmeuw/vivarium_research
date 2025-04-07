@@ -9,7 +9,10 @@ Delivery Facility Choice Model
    :local:
    :depth: 2
 
-To capture the complex relationship between home delivery, antenatal care (ANC), and low birth weight small for gestational age (LBWSG) risk exposure, we will include two novel affordances in our simulation: (1) correlated propensities for ANC, home delivery, and LBWSG; and (2) conditional probabilities for home delivery that differ based on the believe pre-term/full-term status when labor begins.
+Background
+----------
+
+To capture the complex relationship between choice of delivery facility (home birth vs a facility with basic emergency obstetric and neonatal care [BEmONC] vs a facility comprehensive care [CEmONC]), the belief about gestational age (believed pre-term vs believed full term), and the related factors of antenatal care (ANC), and low birth weight small for gestational age (LBWSG) risk exposure, we will include two novel affordances in our simulation: (1) correlated propensities for ANC, home delivery, and LBWSG; and (2) conditional probabilities for home delivery that differ based on the believe pre-term/full-term status when labor begins.
 
 Coming up with values for these correlations and conditional probabilities that are consistent with GBD and external evidence is detailed at the end of this document.  But before we get to that complexity, let's start with how we will use these correlations and conditional probabilities in the simulation.
 
@@ -50,7 +53,7 @@ In Vivarium, we use values selected uniformly at random from the interval [0,1],
      - LBWSG Propensity
      - 0.10
 
-Eventually we must put the consistent values in the artifact.
+Eventually we must put draws of consistent values in the artifact.
 
 Special ordering of LBWSG categories
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,32 +63,23 @@ When we calibrate the model, it will help to have an ordering of the LBWSG categ
 Conditional probabilities of home delivery
 ------------------------------------------
 
-In addition to correlation, there is an essential theory that a belief about preterm status is influential in the decision to have a home delivery.  We will model this as a conditional probability of home delivery given a belief about preterm status.  Although deriving consistent values for these conditional probabilities is complex, and described in the final section of this page, *using* the conditional probabilities is simple: simply select the facility type with :math:`\text{Pr}[\text{facility}\mid\text{believed preterm}]` and :math:`\text{Pr}[\text{facility}\mid\text{believed fullterm}]` for the corresponding cases.
+In addition to correlation, we posit that a belief about preterm status is influential in the decision to have a home delivery.  We will model this as a conditional probability of home delivery given a belief about preterm status.  Although deriving consistent values for these conditional probabilities is complex, and described in the final section of this page, *using* the conditional probabilities is simple: simply select the facility type with :math:`\text{Pr}[\text{facility}\mid\text{believed preterm}]` and :math:`\text{Pr}[\text{facility}\mid\text{believed fullterm}]` for the corresponding cases.
 
 .. list-table:: Conditional Probability Stand-in Parameters
    :header-rows: 1
-   :widths: 20 20 20
+   :widths: 20 20 20 20
 
-   * - Term Belief
-     - Facility Choice
-     - Probability
-   * - Term
+   * - Belief
      - Home
-     - 0.25
-   * - 
      - BeMONC
-     - 0.10
-   * - 
      - CeMONC
+   * - Term
+     - 0.25
+     - 0.10
      - 0.65
    * - Preterm
-     - Home
      - 0.05
-   * - 
-     - BeMONC
      - 0.05
-   * - 
-     - CeMONC
      - 0.90
 
 Challenge of calibrating the model
