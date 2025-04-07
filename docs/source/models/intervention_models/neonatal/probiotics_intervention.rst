@@ -1,0 +1,236 @@
+.. _intervention_neonatal_probiotics:
+
+=============================================
+Probiotics for treating bacterial infections
+=============================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+.. list-table:: Abbreviations
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+    - Note
+  * - BEmONC
+    - Basic emergency obstetric and neonatal care
+    - Operationalized as facilities without C-section capabilities
+  * - CEmONC
+    - Comprehensive emergency obstetric and neonatal care
+    - Operationalized as facilities with capabilities to perform  C-section
+  * - PAF
+    - Population Attributable Fraction
+    - 
+
+Intervention Overview
+-----------------------
+
+Probiotics might be used to prevent bacterial infections in neonates, reducing the risk mortality.
+
+This section describes how a probiotic-treatment intervention can be implemented and calibrated for the 
+:ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
+
+.. list-table:: Affected Outcomes
+  :widths: 15 15 15 15
+  :header-rows: 1
+
+  * - Outcome
+    - Effect
+    - Modeled?
+    - Note (ex: is this relationship direct or mediated?)
+  * - Neonatal sepsis and other neonatal infections Mortality Probability :math:`\text{CSMR}_i^\text{sepsis}`
+    - Adjust multiplicatively using RR
+    - Yes
+    - For convenience, we will model this like a dichotomous risk factor; more details below
+
+Baseline Coverage Data
+++++++++++++++++++++++++
+
+Baseline coverage for probiotics availability at health facilities should be 0% for both BEMONC and CEMONC 
+facilities. 
+
+.. list-table:: Baseline Coverage of Neonatal Probiotics (placeholder values)
+  :widths: 15 15 15 15
+  :header-rows: 1
+
+  * - Birth Facility
+    - Coverage Mean (%)
+    - Coverage Distribution (%)
+    - Notes
+  * - Home Birth
+    - 0
+    - N/A
+    - 
+  * - BEmONC Facilities
+    - 0
+    - N/A
+    - 
+  * - CEmONC Facilities
+    - 0
+    - N/A
+    -  
+
+
+Vivarium Modeling Strategy
+--------------------------
+
+This intervention requires adding an attribute to all simulants to specify if a neonate has access to a facility with access to probiotics.  
+Since the neonatal mortality model does not explicitly represent incidence of sepsis, we will not track explicitly if a simulant receives 
+probiotics.  Instead the model will have different cause-specific mortality rates for sepsis for individuals with and without access to probiotics 
+(implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
+
+The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has access to probiotics during the neonatal period, 
+which we assume to be 0.0% regardless of birth facility choice in our baseline scenario.
+births in BEmONC facilities have lower access than CEmONC facilities.
+
+To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "lack of access to probiotics".  
+With this framing, the ``RiskEffect`` component requires data on (1) the relative risk of sepsis mortality for people with lack of access to 
+probiotics, and (2) the population attributable fraction (PAF) of sepsis due to lack of access to probiotics.  We will use the decision tree 
+below to find the probability of sepsis mortality with and without access to probiotics that are logically consistent with the baseline delivery 
+facility rates and baseline probiotics coverage.
+
+In Vivarium, this risk effect will modify the sepsis mortality pipeline, resulting in 
+
+.. math::
+
+   \text{CSMR}_i^\text{sepsis} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i} \cdot (1 - \text{PAF}_\text{no probiotics}) \cdot \text{RR}_i^\text{no probiotics}
+
+where :math:`\text{RR}_i^\text{no probiotics}` is simulant *i*'s individual relative risk for "no probiotics", meaning :math:`\text{RR}_i^\text{no probiotics} = \text{RR}_\text{no probiotics}` 
+if simulant *i* accesses a facility without probiotics, and :math:`\text{RR}_i^\text{no probiotics} = 1` if simulant *i* accesses a facility *with* probiotics.
+
+If there are other interventions also affecting the CSMR of sepsis, the pipeline will combine these effects, and we can write out the math for 
+this risk explicitly as 
+
+.. math::
+
+   \text{CSMR}^\text{sepsis}_{i, \text{updated}} = \text{CSMR}^\text{sepsis}_{i, \text{original}} \cdot (1 - \text{PAF}_\text{no probiotics}) \cdot \text{RR}_i^\text{no probiotics}
+
+This reduces to the previous formula if there are no other interventions, and we would have 
+
+.. math::
+
+   \text{CSMR}^\text{sepsis}_{i, \text{original}} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
+
+
+
+.. list-table:: Risk Effect Parameters for Lack-of-Access-to-probiotics
+  :widths: 15 15 15 15
+  :header-rows: 1
+
+  * - Parameter
+    - Mean
+    - Distribution
+    - Notes
+  * - Relative Risk
+    - 1.67
+    - :math:`\text{Normal}(1.67,0.08^2)`
+    - Based on impact table provided to us by BMGF, which stated an RR of 0.60 for B. infantis on 0-7 day old hospitalized infants who are preterm
+      or SGA at any facility.
+  * - PAF
+    - see below
+    - see below
+    - see `Calibration strategy` section below for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model
+
+Calibration Strategy
+--------------------
+
+The following decision tree shows all of the paths from delivery facility choice to probiotics availability.  Distinct paths in the tree correspond to disjoint events, 
+which we can sum over to find the population probability of sepsis mortality.  The goal here is to use internally consistent conditional probabilities of sepsis mortality 
+for the subpopulations with and without access to probiotics, so that the baseline scenario can track who has access to probiotics and still match the baseline sepsis 
+mortality rate.
+
+.. graphviz::
+
+    digraph probiotics {
+        rankdir = LR;
+        facility [label="Facility type"]
+        home [label="p_sepsis_without_probiotics"]
+        BEmONC [label="probiotics?"]
+        CEmONC [label="probiotics?"]
+        BEmONC_wo [label="p_sepsis_without_probiotics"] 
+        BEmONC_w [label="p_sepsis_with_probiotics"]
+        CEmONC_wo [label="p_sepsis_without_probiotics"] 
+        CEmONC_w [label="p_sepsis_with_probiotics"]
+
+        facility -> home  [label = "home birth"]
+        facility -> BEmONC  [label = "BEmONC"]
+        facility -> CEmONC  [label = "CEmONC"]
+
+        BEmONC -> BEmONC_w  [label = "available"]
+        BEmONC -> BEmONC_wo  [label = "unavailable"]
+
+        CEmONC -> CEmONC_w  [label = "available"]
+        CEmONC -> CEmONC_wo  [label = "unavailable"]
+    }
+
+.. math::
+    \begin{align*}
+        p(\text{sepsis}) 
+        &= \sum_{\text{paths without probiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{no probiotics})\\
+        &+ \sum_{\text{paths with probiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{probiotics})\\[.1in]
+        p(\text{sepsis}|\text{no probiotics}) &= \text{RR}_\text{no probiotics} \cdot p(\text{sepsis}|\text{probiotics})
+    \end{align*}
+
+where :math:`p(\text{sepsis})` is the probability of dying from sepsis in the general population, and :math:`p(\text{sepsis}|\text{probiotics})` 
+and :math:`p(\text{sepsis}|\text{no probiotics})` are the probability of dying from sepsis in setting with and without access to probiotics.  
+For each path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges 
+labeled BEmONC and unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has probiotics 
+available.
+
+When we fill in the location-specific values for delivery facility rates, probiotics coverage, relative risk of mortality with probiotics access, 
+and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{sepsis}|\text{probiotics})` 
+and :math:`p(\text{sepsis}|\text{no probiotics})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
+
+**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that 
+:math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
+
+.. math::
+
+   p(\text{no probiotics}) = \sum_{\text{paths without probiotics}} p(\text{path}),
+
+then can use this to expand the identity
+
+.. math::
+
+   \text{PAF}_\text{no probiotics} = 1 - \frac{1}{\mathbb{E}(\text{RR})}.
+
+Since our risk exposure has two categories,
+
+.. math::
+
+   \mathbb{E}(\text{RR}) = p(\text{no probiotics}) \cdot \text{RR}_\text{no probiotics} + (1 - p(\text{no probiotics})) \cdot 1.
+
+
+
+Scenarios
+---------
+
+.. todo::
+
+  Describe our general approach to scenarios, for example set coverage to different levels in different types of health facilities; then the specific values 
+  for specific scenarios will be specified in the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
+
+
+Assumptions and Limitations
+---------------------------
+
+- We assume that probiotics availability captures actual use, and not simply the treatment being in the facility 
+- We assume that the delivery facility is also the facility where a sick neonate will seek care for sepsis
+- We assume that the relative risk of sepsis mortality with probiotics in practice is a value that we can find in the literature
+- We have excluded the effect of probiotics on pneumonia mortality, because this cause is currently lumped with 'other causes'
+
+Validation and Verification Criteria
+------------------------------------
+
+- Population-level mortality rate should be the same as when this intervention is not included in the model
+- The ratio of sepsis deaths per birth among those without probiotics access divided by those with probiotics access should equal the relative risk parameter used in the model
+- The baseline coverage of probiotics in each facility type should match the values in the artifact
+
+References
+------------
+
+* https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD005496.pub4/full 
+
