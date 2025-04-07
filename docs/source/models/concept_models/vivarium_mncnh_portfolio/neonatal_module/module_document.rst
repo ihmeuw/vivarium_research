@@ -104,7 +104,7 @@ The modeled risk factor in the neonatal module is low birth weight and short ges
 
 * :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
 * :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
-* Probiotics
+* :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
 * Antenatal corticosteroids (coverage determined in intrapartum intervention module)
 
 .. todo::

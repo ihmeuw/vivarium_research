@@ -159,7 +159,7 @@ defined as a module input in a subsequent row.
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
       * Intrapartum azithromycin coverage
-    - * Incident maternal disorders cases
+    - * Maternal disorders outcomes (see outcome table)
     - * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
       * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
       * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
@@ -182,14 +182,14 @@ defined as a module input in a subsequent row.
       * Gestational age
     - * Neonatal probiotics coverage
       * CPAP coverage
-      * Neonatal mortality
+      * Neonatal mortality outcomes (see outcome table)
     - * :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`
       * :ref:`Neonatal Sepsis and Other Infections Model <2021_cause_neonatal_sepsis_mncnh>`
       * :ref:`Neonatal Encephalopathy Model <2021_cause_neonatal_encephalopathy_mncnh>`
       * :ref:`Preterm Birth <2021_cause_preterm_birth_mncnh>`
       * :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
       * :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
-      * Neonatal probiotics
+      * :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
       * Antenatal corticosteroids
       * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
 
@@ -315,7 +315,7 @@ defined as a module input in a subsequent row.
   * - 1. Baseline
     - Defined on the :ref:`CPAP intervention model document <intervention_neonatal_cpap>`
     - Defined on the :ref:`neonatal antibiotic intervention document <intervention_neonatal_antibiotics>`
-    - TODO: link probiotic model document and baseline coverage
+    - Defined on the :ref:`probiotics intervention model document <intervention_neonatal_probiotics>`
     - Baseline coverage values are delivery facility-specific
   * - 2. CPAP total scale-up
     - 100% availability at BEMONC and CEMONC facilities
@@ -362,7 +362,6 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline at CEMONC, 100% at BEMONC
     - 
-
 
 .. _mncnh_portfolio_4.0:
 
