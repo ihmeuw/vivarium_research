@@ -9,7 +9,6 @@ Vivarium Research
 Here you'll find a variety of useful information about working on ``vivarium``
 research projects.
 
-Follow the link to the docs if you would like to learn more.
 The hosted documentation can be found at https://vivarium-research.readthedocs.io/en/latest/.
 
 Information on how to contribute to vivarium research docs can be found at https://vivarium-research.readthedocs.io/en/latest/onboarding_resources/contributing/index.html. 
