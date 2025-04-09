@@ -708,6 +708,14 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Baseline and alternative scenarios 2 - 7 
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.0
+    - Wave I neonatal probiotics with scale-up scenarios 
+    - Incomplete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline and alternative scenarios 2 - 10 
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 7.0
     - Wave I azithromycin 
     - Incomplete
     - N/A
@@ -715,7 +723,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 100,000
     - Baseline
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
-  * - 7.0
+  * - 8.0
     - Wave I misoprostol
     - Incomplete
     - N/A
@@ -723,7 +731,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 100,000
     - Baseline 
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
-  * - 8.0
+  * - 9.0
     - Wave I antenatal corticosteroids
     - Incomplete
     - N/A
