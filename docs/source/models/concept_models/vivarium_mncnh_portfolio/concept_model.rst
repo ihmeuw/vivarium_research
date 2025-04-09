@@ -693,7 +693,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.7
     - Correct pregnancy duration for partial term pregnancies
-    - Incomplete
+    - Complete
     - N/A
     - 10
     - 100,000
@@ -830,6 +830,10 @@ Specific observer outputs and their stratifications may vary by model run as nee
       `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
       `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
 
+  * - 4.7
+    - Validate partial term pregnancy duration is between 6 and 24 weeks and uniformly distributed. 
+    - Validated for all 3 locations
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_07a_vnv_partial_term_preg.ipynb>`__
   * - 5.0
     - Validate RR of antibiotics on sepsis (and confirm other causes are unchanged)
     - Everything is validating - RR on sepsis aligns with expected value; other causes, non-RDS preterm, and encephalopathy all have the expected RRs of 1 from antibiotics.
