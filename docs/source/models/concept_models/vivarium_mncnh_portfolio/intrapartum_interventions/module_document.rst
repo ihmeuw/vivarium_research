@@ -92,32 +92,44 @@ This module in the intrapartum component determines coverage of intrapartum inte
     - Note
   * - 1
     - Receives intrapartum azithromycin?
-    - Baseline coverage:
-
-      * Home birth: 10%
-
-      * Hospital birth: 67.7%
-
-      * Clinic/low-level birth: 18.5%
-    - SARA (Ehtiopia; Table 3.8.2). These are placeholder values (percentage of each facility type that have azithromycin, not the percentage of pregnancies that receive it) and will be updated with further analysis. We want these to be location specific, please code accordingly.
+    - Scenario-dependent variable: :ref:`intrapartum component scenario table <MNCNH intrapartum component scenario table>` for values (and baseline coverage section below for baseline coverage)
+    - 
   * - 2
     - Believed to be preterm?
     - Believed gestational age (from pregnancy module output) < 37 weeks
     - Note necessary unit conversion between days and weeks
   * - 3
     - Receives antenatal corticosteroids
-    - Baseline coverage (of believed preterm births):
+    - Scenario-dependent variable: :ref:`intrapartum component scenario table <MNCNH intrapartum component scenario table>` for values (and baseline coverage section below for baseline coverage)
+    - 
 
-      * Home birth: 1%
+2.3.1 Baseline coverage
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      * Hospital birth: 12%
+**Intrapartum azithromycin:** 
 
-      * Clinic/low-level birth: 2%
-    - EmONC (Ethiopia; Table 10.5.4A). These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The denominator for these values is LBW and preterm births. Outstanding items: believe this only affected neonatal outcomes, confirm with BMGF
+  * Home birth: 10%
+
+  * Hospital birth: 67.7%
+
+  * Clinic/low-level birth: 18.5%
+
+Source: SARA (Ehtiopia; Table 3.8.2). These are placeholder values (percentage of each facility type that have azithromycin, not the percentage of pregnancies that receive it) and will be updated with further analysis. We want these to be location specific, please code accordingly.
+
+
+**Antenatal corticosteroids:** (percentage of believed preterm births)
+
+  * Home birth: 1%
+
+  * Hospital birth: 12%
+
+  * Clinic/low-level birth: 2%
+
+Source: EmONC (Ethiopia; Table 10.5.4A). These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The denominator for these values is LBW and preterm births. Outstanding items: believe this only affected neonatal outcomes, confirm with BMGF
 
 .. todo::
-  
-  Make these parameters (Decision nodes #1 and #3) scenario-specific in separate :ref:`intrapartum component scenario table <MNCNH intrapartum component scenario table>` on main concept model page if we do indeed desire them to be scenario-specific
+
+  Update terminology to be consistent with BEMONC/CEMONC?
 
 2.4 Module Action Points
 ---------------------------
