@@ -137,6 +137,66 @@ defined as a module input in a subsequent row.
 
 .. note::
 
+  Below is a draft of the pregnancy module table for wave II of the simulation. This will remain as a draft/note until wave II is ready for implementation to avoid conflicts with existing wave I documenation currently being used for implementation.  
+
+  .. list-table:: Draft Wave II Pregnancy Component Modules
+    :header-rows: 1
+
+    * - Module
+      - Inputs
+      - Outputs
+      - Nested subcomponents
+      - Note
+    * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+      - 
+      - * ANC propensity, birth facility propensity, LBWSG propensity
+      - 
+      - 
+    * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+      - 
+      - * Maternal age
+        * Pregnancy term duration
+        * Child sex
+      - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+      - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules
+    * - Wave II antenatal care module (TODO: add documentation)
+      - * ANC propensity
+      - * 1st trimester ANC attendance
+        * Later pregnancy ANC attendance
+      - 
+      - Updated module from wave I implementation
+    * - :ref:`Hemoglobin <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+      - * 1st trimester ANC attendance
+        * Later pregnancy ANC attendance
+        * IFA/MMS coverage
+        * IV iron coverage
+      - * Hemoglobin at birth
+        * Anemia outcomes (see output table)
+      - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
+        * :ref:`Anemia impairment <2019_anemia_impairment>`
+        * :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
+        * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
+      - New wave II module
+    * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+      - * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
+        * IV iron coverage (affects birth outcome, gestational age, birthweight)
+      - * Birth outcome
+        * Gestational age
+        * Birthweight
+        * Pregnancy duration
+      - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+        * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
+      - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules other than impacts of IFA/MMS and IV Iron interventions on pregnancy module outputs
+    * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+      - * ANC attendance
+        * Gestational age
+      - * Ultrasound coverage
+        * Believed gestational age
+      - 
+      - No changes from wave I
+
+.. note::
+
   Only full term pregnancies (live or stillbirths, NOT abortions/miscarriages/ectopic pregnancies) will proceed to the intrapartum component. Therefore, pregnancy term length is a de facto input to all modules in the intrapartum component.
 
 .. list-table:: Intrapartum Component Modules
@@ -165,6 +225,51 @@ defined as a module input in a subsequent row.
     - * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
       * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
       * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
+
+.. note::
+
+  .. list-table:: Draft Wave II Intrapartum Component Modules
+    :header-rows: 1
+
+    * - Module
+      - Inputs
+      - Outputs
+      - Nested subcomponents
+      - Note
+    * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
+      - * (Pregnancy term duration)
+      - * Birth facility
+      - 
+      - 
+    * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+      - * (Pregnancy term duration)
+        * Birth facility
+        * Believed gestational age
+      - * Intrapartum azithromycin coverage
+        * Antenatal corticosteroid coverage
+        * Misoprostol coverage
+      - TODO: create/link intervention model documents
+      - 
+    * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
+      - * (Pregnancy term duration)
+        * Intrapartum azithromycin coverage
+        * Hemoglobin at birth
+      - * Maternal disorders outcomes (see outcome table)
+      - * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+        * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
+        * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
+      - Wave II changes: 
+
+        * Hemoglobin at birth as a variable that impacts maternal disorders
+    * - Postpartum hemoglobin (TODO: add documentation)
+      - 
+      - 
+      - 
+      - 
+
+.. todo::
+
+  Remove anemia YLDs from maternal hemorrhage cause model document
 
 .. note::
 
@@ -205,6 +310,10 @@ defined as a module input in a subsequent row.
 3.1 Scenario information
 --------------------------
 
+.. todo::
+
+  Define hemoglobin-related baseline coverage
+
 .. _MNCNH pregnancy component scenario table:
 
 .. list-table:: Pregnancy component scenario-dependent variables
@@ -213,44 +322,77 @@ defined as a module input in a subsequent row.
   * - Scenario
     - Ultrasound coverage
     - Ultrasound type
+    - IFA/MMS coverage
+    - Anemia screening coverage
+    - IV iron coverage
     - Note
   * - 1. Baseline
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+    - XXX
+    - XXX
+    - XXX
     - 
   * - 2. CPAP total scale-up
+    - Baseline
+    - Baseline
+    - Baseline
     - Baseline
     - Baseline
     - 
   * - 3. CPAP CEMONC-only scale-up
     - Baseline
     - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
     -  
   * - 4. CPAP BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - Baseline
     - Baseline
     - Baseline
     - 
   * - 5. Antibiotics total scale-up
     - Baseline
     - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
     - 
   * - 6. Antibiotics CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - Baseline
     - Baseline
     - Baseline
     - 
   * - 7. Antibiotics BEMONC-only scale-up
     - Baseline
     - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
     - 
   * - 8. Probiotics total scale-up
+    - Baseline
+    - Baseline
+    - Baseline
     - Baseline
     - Baseline
     - 
   * - 9. Probiotics CEMONC-only scale-up
     - Baseline
     - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
     - 
   * - 10. Probiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - Baseline
     - Baseline
     - Baseline
     - 
@@ -424,6 +566,13 @@ Specific observer outputs and their stratifications may vary by model run as nee
   Figure out whether we want any of these count data to be stratified by LBW or preterm status, 
   and what our V&V plan would be for this if so (e.g., interactive sim to compare risk ratios for OL
   of people with LBWSG babies or not?).
+
+.. note::
+
+  Additional outputs to add for wave II include:
+
+  * Anemia status at birth counts (none/mild/moderate/severe)
+  * YLDs due to anemia in pregnancy
 
 .. _mncnh_portfolio_5.0:
 
