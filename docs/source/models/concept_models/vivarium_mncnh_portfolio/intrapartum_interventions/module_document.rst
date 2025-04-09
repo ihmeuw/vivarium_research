@@ -42,6 +42,10 @@ Intrapartum intervention module
 1.0 Overview
 ++++++++++++
 
+.. todo::
+
+  Update this page to include the misoprostol intervention
+
 This module in the intrapartum component determines coverage of intrapartum interventions, including azithromycin and corticosteroids (and eventually intrapartum sensors in wave II). Coverage availability/eligibility will depend on birth facility and believed gestational age.
 
 2.0 Module Diagram and Data

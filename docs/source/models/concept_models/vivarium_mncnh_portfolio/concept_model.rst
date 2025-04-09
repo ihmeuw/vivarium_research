@@ -156,6 +156,7 @@ defined as a module input in a subsequent row.
       * Believed gestational age
     - * Intrapartum azithromycin coverage
       * Antenatal corticosteroid coverage
+      * Misoprostol coverage
     - TODO: create/link intervention model documents
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
@@ -262,44 +263,55 @@ defined as a module input in a subsequent row.
   * - Scenario
     - Azithromycin coverage
     - Corticosteroid coverage
+    - Misoprostol coverage
     - Note
   * - 1. Baseline
+    - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - 
   * - 2. CPAP total scale-up
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 3. CPAP CEMONC-only scale-up
+    - Baseline
     - Baseline
     - Baseline
     -  
   * - 4. CPAP BEMONC-only scale-up
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 5. Antibiotics total scale-up
+    - Baseline
     - Baseline
     - Baseline
     - 
   * - 6. Antibiotics CEMONC-only scale-up
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 7. Antibiotics BEMONC-only scale-up
+    - Baseline
     - Baseline
     - Baseline
     - 
   * - 8. Probiotics total scale-up
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 9. Probiotics CEMONC-only scale-up
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 10. Probiotics BEMONC-only scale-up
+    - Baseline
     - Baseline
     - Baseline
     - 
@@ -389,6 +401,8 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - Azithromycin coverage counts
     - 
   * - Corticosteroid coverage counts
+    - 
+  * - Misoprostol coverage counts
     - 
   * - Maternal obstructed labor outcomes (deaths, YLLs, YLDs, incident cases)
     - 
