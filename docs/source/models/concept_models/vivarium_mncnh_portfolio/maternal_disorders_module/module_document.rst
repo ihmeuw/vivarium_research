@@ -79,7 +79,7 @@ There are specific variables that will affect these cause models, summarized in 
     - :ref:`Hemoglobin component <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
     - Maternal sepsis, maternal hemorrhage, maternal depressive disorders, maternal hypertensive disorders
     - See :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>`
-    - 
+    - For wave II
 
 .. todo::
 

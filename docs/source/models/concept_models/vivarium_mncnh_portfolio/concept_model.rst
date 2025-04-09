@@ -560,16 +560,19 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 
   * - CPAP availability/coverage counts
     - 
-  * - Anemia status at birth counts (none/mild/moderate/severe)
-    - 
-  * - YLDs due to anemia in pregnancy
-    - 
 
 .. todo::
 
   Figure out whether we want any of these count data to be stratified by LBW or preterm status, 
   and what our V&V plan would be for this if so (e.g., interactive sim to compare risk ratios for OL
   of people with LBWSG babies or not?).
+
+.. note::
+
+  Additional outputs to add for wave II include:
+
+  * Anemia status at birth counts (none/mild/moderate/severe)
+  * YLDs due to anemia in pregnancy
 
 .. _mncnh_portfolio_5.0:
 

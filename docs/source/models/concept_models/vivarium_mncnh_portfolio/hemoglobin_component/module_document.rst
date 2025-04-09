@@ -32,7 +32,7 @@
 .. _2024_vivarium_mncnh_portfolio_hemoglobin_module:
 
 ======================================
-MNCNH Portfolio: Hemoglobin Module
+Hemoglobin Module
 ======================================
 
 .. contents::
