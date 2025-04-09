@@ -24,7 +24,7 @@ Correlated propensities
 This section describes how we will model an "instrisic correlation" of ANC, home delivery, and LBWSG.  In short, we will use a Gaussian copula to model this, which has three parameters capturing the correlation between each pair of the three propensities.
 
 The motivation for these correlations is as follows: we hypothesize that there are important "common causes" that are not shown explicitly in the diagram above.  For example, having a home delivery and having no ANC visits might both be influenced by rurality --- if all health services are offered far away, it is logical that people will be able to access them less.
-Similarly, it is likely that there are social exclusion factors causeing both exposure to LBWSG risk and lack of access to ANC and in-facility birth.
+Similarly, it is likely that there are social exclusion factors causing both exposure to LBWSG risk and lack of access to ANC and in-facility birth.
 In a simulation model where we have not included scenarios that change these common-cause factors, we do not have to model their effects explicitly.
 For our purposes, it is sufficient to capture the correlations between ANC, in-facility birth, and LBWSG risk exposure.
 
