@@ -147,9 +147,11 @@ defined as a module input in a subsequent row.
       * Believed gestational age
     - * Intrapartum azithromycin coverage
       * Antenatal corticosteroid coverage
+      * Misoprostol coverage
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
       * Intrapartum azithromycin coverage
+      * Misoprostol coverage
     - * Incident maternal disorders cases
 
 .. note::
@@ -201,11 +203,12 @@ defined as a module input in a subsequent row.
   * - Scenario
     - Azithromycin coverage
     - Corticosteroid coverage
+    - Misoprostol coverage
     - Note
   * - 1. Baseline
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - 
+    - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
 
 3.1 Model Components
 --------------------
@@ -427,6 +430,8 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - Azithromycin coverage counts
     - 
   * - Corticosteroid coverage counts
+    - 
+  * - Misoprostol coverage counts
     - 
   * - Obstructed labor outcomes (deaths, YLLs, YLDs, incident cases)
     - 
