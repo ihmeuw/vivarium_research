@@ -18,6 +18,8 @@ Coming up with values for these correlations and conditional probabilities that 
 
 [[Causal model diagram goes here]]
 
+Note that the calibration procedure, and hence the values we're using here (i.e., the correlations and values of P(facility | believed preterm status)) depend critically on the implementations of other pieces of the model that are described elsewhere (most notably, choice of ultrasound type given ANC status, and deriving an estimated gestational age from the true gestational age).
+
 Correlated propensities
 -----------------------
 
@@ -28,7 +30,7 @@ Similarly, it is likely that there are social exclusion factors causeing both ex
 In a simulation model where we have not included scenarios that change these common-cause factors, we do not have to model their effects explicitly.
 For our purposes, it is sufficient to capture the correlations between ANC, in-facility birth, and LBWSG risk exposure.
 
-In Vivarium, we use values selected uniformly at random from the interval [0,1], which we call propensities, to keep attributes like LBWSG and ANC calibrated at the population level.  This makes it straightforward to represent the correlation in our factors by generating correlated propensities. The `statsmodels.distributions.copula.api.GaussianCopula` implementation can make them::
+In Vivarium, we use values selected uniformly at random from the interval [0,1], which we call propensities, to keep attributes like LBWSG and ANC calibrated at the population level.  This makes it straightforward to represent the correlation in our risk factor and healthcare access attributes by generating correlated propensities. The :code:`statsmodels.distributions.copula.api.GaussianCopula` implementation can make them::
 
     from statsmodels.distributions.copula.api import GaussianCopula
     copula = GaussianCopula([[1., .5, .1],
@@ -55,10 +57,17 @@ In Vivarium, we use values selected uniformly at random from the interval [0,1],
 
 Eventually we must put draws of consistent values in the artifact.
 
-Special ordering of LBWSG categories
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Special ordering of the categories
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When we calibrate the model, it will help to have an ordering of the LBWSG categories that makes them most likely to correlate with the ANC and home delivery propensities.  To achieve this, we will order them from lowest average RR to highest average RR (averaged across all draws).  [[Perhaps more details to come, such as code or an explicit table.]]
+Our method of inducing correlations using a Gaussian copula is equivalent to specifying the `polychoric correlation <https://en.wikipedia.org/wiki/Polychoric_correlation>`_ between the variables, and relies on having a known ordering of variable values.
+
+When we calibrate the model, we will use an ordering of the LBWSG categories that makes them most likely to correlate with the ANC and home delivery propensities.  To achieve this, we will order them from lowest average RR to highest average RR (averaged across all draws).  Note that this is sex-specific, and based on the RRs for the early neonatal age group!  This ordering must also be used in the Risk component.
+
+We will also order the ANC and home delivery propensities from lowest to highest risk: some ANC < no ANC; and CEmONC < BEmONC < home birth.
+
+
+[[Perhaps more details to come, such as code or an explicit table.]]
 
 Conditional probabilities of home delivery
 ------------------------------------------
