@@ -82,5 +82,24 @@ Module outputs are summarized in the table below.
     - point value in weeks
     - Equal to gestational age for full term pregnancies
 
+Starting in wave II of the simulation, there will be variables that influence pregnancy module outputs. These variables are listed below.
 
+.. list-table:: Variables that affect pregnancy module outputs
+  :header-rows: 1
 
+  * - Variable
+    - Affected outcome
+    - Instructions for effect
+    - Note
+  * - IFA/MMS coverage (output from hemoglobin module)
+    - * Birth outcome
+      * Gestational age
+      * Birthweight
+    - See the :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`
+    - NOTE: as of 4/9/2025 this intervention model document is not updated and ready for implementation
+  * - IV iron coverage
+    - * Birth outcome
+      * Gestational age
+      * Birthweight
+    - See the :ref:`IV iron intervention document <intervention_iv_iron_antenatal>`
+    - NOTE: as of 4/9/2025 the IV iron intervention model document is not updated and ready for implementation

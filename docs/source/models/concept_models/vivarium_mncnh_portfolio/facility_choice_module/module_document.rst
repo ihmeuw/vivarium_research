@@ -35,6 +35,30 @@
 Facility choice module
 ======================================
 
+.. note::
+
+  This note is a placeholder for future documentation. 
+
+  The placeholder delivery facility probabilities are as follows:
+
+    - Home: 68.3%
+
+    - Hospital: 26.6%
+
+    - Clinic/low-level facility: 5.1%
+
+  The placeholder values are from `this paper on Ethiopia <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_.
+
+  Eventually location-specific values from DHS will be used for this parameter. Note that denominator in DHS is all births (live and stillbirths) to interviewed women in the two years preceeding the survey.
+
+  V&V: Confirm attendance rate for each type of delivery facility matches inputs
+
+  Limitation: Moving to a higher level care facility during the intrapartum period is common (referred up once labor begins if there is an issue) and the ability to do this is often a result of transport available, distance to clinics, etc. We will not include this and instead have simulants remain at a single facility for the whole intrapartum period. 
+
+  TODO: update to be consistent with BEMONC/CEMONC terminology
+
+
+
 .. contents::
   :local:
   :depth: 2
@@ -94,7 +118,7 @@ Facility choice module
 2.4 Module Action Points
 ---------------------------
 
-.. list-table:: Hemoglobin module action point
+.. list-table:: Module action point
   :header-rows: 1
 
   * - Action point
@@ -110,7 +134,7 @@ Facility choice module
     - 
     - 
 
-2.4: Module Outputs
+2.5: Module Outputs
 -----------------------
 
 .. list-table:: Module outputs
