@@ -52,6 +52,8 @@ There is no specific decision tree diagram for this module. Rather, the individu
 * :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
 * :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
 * :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
+* Depressive disorders
+* Maternal hypertension
 
 There are specific variables that will affect these cause models, summarized in the table below. Note that the factors included in this table are required inputs to the maternal disorders module.
 
@@ -68,6 +70,16 @@ There are specific variables that will affect these cause models, summarized in 
     - Maternal sepsis incidence rate
     - Relative risk: 0.65 (95% CI: 0.55, 0.77)
     - `Tita et al 2023 <https://www.ajog.org/article/S0002-9378(22)02210-4/fulltext#undfig1>`_ 
+  * - Misoprostol coverage
+    - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    - Maternal hemorrhage incidence rate
+    - TODO: link intervention documentation
+    - 
+  * - Hemoglobin at birth
+    - :ref:`Hemoglobin component <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+    - Maternal sepsis, maternal hemorrhage, maternal depressive disorders, maternal hypertensive disorders
+    - See :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>`
+    - 
 
 .. todo::
 
@@ -75,20 +87,12 @@ There are specific variables that will affect these cause models, summarized in 
 
 .. note::
 
-  Future factors that will affect maternal disorders in wave II of the simulation will include hemoglobin and cesarean sections
+  Future factors that will affect maternal disorders in wave II of the simulation will include cesarean sections
 
 2.4: Module Outputs
 -----------------------
 
-.. list-table:: Module outputs
-  :header-rows: 1
-
-  * - Output
-    - Value
-    - Note
-  * - A. Maternal disorders incidence
-    - Indication of incident cases of each modeled maternal disorders subcause
-    - Used for V&V and as inputs to future modules (ex: postpartum hemoglobin)
+Incidence, mortality, YLDs, and YLLs due to cause-specific maternal disorders.
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++

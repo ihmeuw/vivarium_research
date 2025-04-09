@@ -128,28 +128,28 @@ This module will:
     - Note
   * - 1
     - Baseline IFA?
-    - Probability equal to baseline IFA coverage values on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`
+    - Baseline IFA coverage is defined in the :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. Probability of "yes" is equal to coverage value.
     - Note baseline IFA calibration limitation
   * - 2
     - ANC in first trimester?
-    - See ANC module (FORTHCOMING, TODO: insert link)
+    - See wave II ANC module (FORTHCOMING, TODO: insert link)
     - 
   * - 3
     - Recieve IFA/MMS at first trimester visit?
-    - Coverage defined by scenario (SCENARIO TABLE FORTHCOMING, TODO: insert link)
-    - Strategy to be compatible with decision nodes 6 and 10 TBD
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
+    - 
   * - 4
     - ANC later in pregnancy?
     - See ANC module (FORTHCOMING, TODO: insert link)
     - 
   * - 5
     - Hemoglobin screen?
-    - Coverage defined by scenario (SCENARIO TABLE FORTHCOMING)
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
     - 
   * - 6
     - Receive IFA/MMS *for the first time* at late pregnancy visit?
-    - Strategy TBD, TODO: update
-    - Answer to decision node #3 must be "no" for answer to #7 to be "yes"
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
+    - 
   * - 7 
     - Hemoglobin <100 g/L (Based on IFA/MMS adjusted exposure)
     - Assess individual hemoglobin exposure *after* action points I, II, and III have been executed (and *before* IV, V, and VI). Assume screening sensitivity of 85% and specificity of 80% -- TODO: add detail for how to apply screening accuracy.
@@ -160,12 +160,12 @@ This module will:
     - 
   * - 9
     - IV iron?
-    - Coverage defined by scenario (SCENARIO TABLE FORTHCOMING, TODO: insert link)
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
     - 
   * - 10
     - Also receive IFA/MMS *for the first time* at late pregnancy visit?
-    - Strategy TBD, TODO: update
-    - Answer to decision node #3 must be "no" for answer to #7 to be "yes"
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
+    - 
 
 2.4 Module Action Points
 ---------------------------
