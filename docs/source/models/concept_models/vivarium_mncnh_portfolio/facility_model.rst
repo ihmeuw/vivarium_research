@@ -28,7 +28,7 @@ Similarly, it is likely that there are social exclusion factors causing both exp
 In a simulation model where we have not included scenarios that change these common-cause factors, we do not have to model their effects explicitly.
 For our purposes, it is sufficient to capture the correlations between ANC, in-facility birth, and LBWSG risk exposure.
 
-In Vivarium, we use values selected uniformly at random from the interval [0,1], which we call propensities, to keep attributes like LBWSG and ANC calibrated at the population level.  This makes it straightforward to represent the correlation in our factors by generating correlated propensities. The `statsmodels.distributions.copula.api.GaussianCopula` implementation can make them::
+In Vivarium, we use values selected uniformly at random from the interval [0,1], which we call propensities, to keep attributes like LBWSG and ANC calibrated at the population level while reducing variance between scenarios at the simulant level.  This makes it straightforward to represent the correlation in our factors by generating correlated propensities. The ``statsmodels.distributions.copula.api.GaussianCopula`` implementation can make them::
 
     from statsmodels.distributions.copula.api import GaussianCopula
     copula = GaussianCopula([[1., .5, .1],
