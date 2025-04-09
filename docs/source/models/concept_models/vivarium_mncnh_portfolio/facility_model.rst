@@ -12,7 +12,7 @@ Delivery Facility Choice Model
 Background
 ----------
 
-To capture the complex relationship between choice of delivery facility (home birth vs a facility with basic emergency obstetric and neonatal care [BEmONC] vs a facility with comprehensive care [CEmONC]), the belief about gestational age (believed pre-term vs believed full term), and the related factors of antenatal care (ANC), and low birth weight and short gestation (LBWSG) risk exposure, we will include two novel affordances in our simulation: (1) correlated propensities for ANC, home delivery, and LBWSG; and (2) conditional probabilities for home delivery that differ based on the believe pre-term/full-term status when labor begins.
+To capture the complex relationship between choice of delivery facility (home birth vs a facility with basic emergency obstetric and neonatal care [BEmONC] vs a facility with comprehensive care [CEmONC]), the belief about gestational age (believed pre-term vs believed full term), and the related factors of antenatal care (ANC), and low birth weight and short gestation (LBWSG) risk exposure, we will include two novel affordances in our simulation: (1) correlated propensities for ANC, home delivery, and LBWSG; and (2) conditional probabilities for home delivery that differ based on the believed pre-term/full-term status when labor begins.
 
 Coming up with values for these correlations and conditional probabilities that are consistent with GBD and external evidence is detailed at the end of this document.  But before we get to that complexity, let's start with how we will use these correlations and conditional probabilities in the simulation.
 
