@@ -62,11 +62,139 @@ and details on the intrapartum and neonatal time periods.
 3.0 Concept model diagram and submodels
 +++++++++++++++++++++++++++++++++++++++
 
+A table of contents for all modules in this simulation is included below
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   */module_document*
+
+.. note::
+
+  This concept model diagram was reorganized in April 2025 after much of wave I had been implemented. A record of the PRs for this reorganization are listed below:
+
+  * Pregnancy component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1615 <https://github.com/ihmeuw/vivarium_research/pull/1615>`_
+  * Intrapartum component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1617 <https://github.com/ihmeuw/vivarium_research/pull/1617>`_
+  * Neonatal component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1619 <https://github.com/ihmeuw/vivarium_research/pull/1619>`_
+
+
 We plan to complete this work in 3 waves. 
 
 * Wave 1 will include the basic model design, outlines of the healthcare system, and some interventions (AI ultrasound, higher level delivery facility interventions, RDS management). 
 * Wave 2 will add in some antenatal supplements (MMS, IV iron), the hemoglobin risk for birthing parents, and all downstream causes affected by hemoglobin. 
 * Wave 3 will add in gestational blood pressure and relevant causes and risks including pre-eclampsia care and downstream effects of high blood pressure. 
+
+The model is further subdivided into three components:
+
+1. Pregnancy component
+2. Intrapartum component
+3. Neonatal component
+
+Each component will consist of several modules, which will convert certain module 
+inputs to module outputs via decision tree-based instructions. Module outputs may be 
+used as inputs to other modules and/or serve as information for verification and 
+validation and/or simulation results.
+
+The following tables link to each simulation module and provide a summary of module 
+input and output variables. Notably, the ordering of modules in the table is 
+significant: the order of operations for implementation moves from top to bottom. 
+Specically, each variable must be defined as a module output in a row prior to being 
+defined as a module input in a subsequent row.
+
+.. list-table:: Pregnancy Component Modules
+  :header-rows: 1
+
+  * - Module
+    - Inputs
+    - Outputs
+    - Nested subcomponents
+  * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - 
+    - * ANC propensity
+    - 
+  * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+    - 
+    - * Maternal age
+      * Pregnancy term duration
+      * Birth outcome
+      * Child sex
+      * Gestational age
+      * Birthweight
+      * Pregnancy duration
+    - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+      * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
+  * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
+    - * ANC propensity
+    - * ANC attendance
+    - 
+  * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+    - * ANC attendance
+      * Gestational age
+    - * Ultrasound coverage
+      * Believed gestational age
+    - 
+
+.. note::
+
+  Only full term pregnancies (live or stillbirths, NOT abortions/miscarriages/ectopic pregnancies) will proceed to the intrapartum component. Therefore, pregnancy term length is a de facto input to all modules in the intrapartum component.
+
+.. list-table:: Intrapartum Component Modules
+  :header-rows: 1
+
+  * - Module
+    - Inputs
+    - Outputs
+    - Nested subcomponents
+  * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
+    - * (Pregnancy term duration)
+    - * Birth facility
+    - 
+  * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    - * (Pregnancy term duration)
+      * Birth facility
+      * Believed gestational age
+    - * Intrapartum azithromycin coverage
+      * Antenatal corticosteroid coverage
+      * Misoprostol coverage
+    - TODO: create/link intervention model documents
+  * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
+    - * (Pregnancy term duration)
+      * Intrapartum azithromycin coverage
+    - * Maternal disorders outcomes (see outcome table)
+    - * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+      * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
+      * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
+
+.. note::
+
+  Only live births proceed to the neonatal component. Therefore, birth outcome is a de facto input to all modules in the neonatal component.
+
+.. list-table:: Neonatal Component Module
+  :header-rows: 1
+
+  * - Module
+    - Inputs
+    - Outputs
+    - Nested subcomponents
+  * - :ref:`Neonatal module <2024_vivarium_mncnh_portfolio_neonatal_module>`
+    - * (Birth outcome)
+      * Birth facility
+      * Birth weight
+      * Gestational age
+    - * Neonatal probiotics coverage
+      * CPAP coverage
+      * Neonatal mortality outcomes (see outcome table)
+    - * :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`
+      * :ref:`Neonatal Sepsis and Other Infections Model <2021_cause_neonatal_sepsis_mncnh>`
+      * :ref:`Neonatal Encephalopathy Model <2021_cause_neonatal_encephalopathy_mncnh>`
+      * :ref:`Preterm Birth <2021_cause_preterm_birth_mncnh>`
+      * :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
+      * :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
+      * :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
+      * Antenatal corticosteroids
+      * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
+
 
 **Wave 1 Concept Model Map:**
 
@@ -74,271 +202,222 @@ We plan to complete this work in 3 waves.
 
 .. _mncnh_portfolio_3.1:
 
-3.1 Model Components
---------------------
+3.1 Scenario information
+--------------------------
 
-Our model will have 3 main "components" that each represent a part of the 
-journey of a parent-child dyad. In this model, the simulants (note: simulant 
-here is a parent-child dyad) will each run through 3 decision tree based "time 
-steps", where future decisions are based on what the simulant previously experienced. 
+.. _MNCNH pregnancy component scenario table:
 
-For each phase of the model, we will provide inputs needed (in the form of  a "state table" of tracked values), 
-outputs that need to be recorded for the next state table, and the decision tree that maps from inputs to outputs. Nodes in the decision trees are 
-all labeled and additional information will be included below.
-
-3.1.1 Wave 1 Model Components
------------------------------
-
-**Component 1**: The Pregnancy Model
-
-.. image:: pregnancy_decision_tree_vr.svg
-
-.. list-table:: Pregnancy Decision Tree
-  :widths: 3 5 10 10 15
+.. list-table:: Pregnancy component scenario-dependent variables
   :header-rows: 1
 
-  * - ID
-    - Decision Information 
-    - Data Value 
-    - Source
-    - Notes
-  * - 1
-    - ANC1 rates
-    - get_covariate_estimates(location_id=location_id, gbd_round_id=7, year_id=2021, decomp_step='iterative', covariate_id=7)
-    - GBD covariate ID 7
-    - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
-  * - 2
-    - Ultrasound rate at ANC in baseline scenario
-    - Ethiopia: 60.7%, Nigeria: 58.7%, Pakistan: 66.7%
-    - `India ultrasound rate <https://dhsprogram.com/pubs/pdf/FR339/FR339.pdf>`_ (Table 8.12, averaged percentage of women attending ANC 1-3 times and 4+ times), `Ethiopia ultrasound rate <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905208/>`_ , `Nigeria ultrasound rate <https://www.researchgate.net/publication/51782476_Awareness_of_information_expectations_and_experiences_among_women_for_obstetric_sonography_in_a_south_east_Nigeria_population>`_  
-    - These values are extracted from literature (see links in 'Source' column). For Pakistan, we currently use ultrasound utilization rates derived from the India DHS 2015-2016 as an imperfect proxy that can hopefully be improved with further research. The denominator of these values is: pregnant people who have attended an ANC. 
-  * - 3
-    - Gestational age (GA) estimate at ANC 
-    - Real GA +/- a value from a normal distribution with a mean of zero and standard deviations of: 5 days for AI ultrasound, 20 days for standard ultrasound, and 45.5 days for no ultrasound 
-    - Need further clarification on outstanding questions from BMGF, see `PR comments <https://github.com/ihmeuw/vivarium_research/pull/1525>`_. `Standard deviation value for no ultrasound <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272718#sec007>`_.
-    - Values should be confirmed with further research and data anlaysis
+  * - Scenario
+    - Ultrasound coverage
+    - Ultrasound type
+    - Note
+  * - 1. Baseline
+    - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+    - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+    - 
+  * - 2. CPAP total scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 3. CPAP CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    -  
+  * - 4. CPAP BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 5. Antibiotics total scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 6. Antibiotics CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 7. Antibiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 8. Probiotics total scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 9. Probiotics CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
+  * - 10. Probiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 
 
+.. _MNCNH intrapartum component scenario table:
 
-.. list-table:: Inputs to Pregnancy Decision Tree
-  :widths: 3 15 15
+.. list-table:: Intrapartum component scenario-dependent variables
   :header-rows: 1
 
-  * - Input
-    - Data Source 
-    - Notes
-  * - Age 
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+  * - Scenario
+    - Azithromycin coverage
+    - Corticosteroid coverage
+    - Misoprostol coverage
+    - Note
+  * - 1. Baseline
+    - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - 
-  * - ANC Visit Propensity
-    - Likely DHS 
-    - Need to determine correlation if we want to use it. For now use standard propensity values.
-  * - Gestational age at birth
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+  * - 2. CPAP total scale-up
+    - Baseline
+    - Baseline
+    - Baseline
     - 
-  * - Birthweight
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+  * - 3. CPAP CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    -  
+  * - 4. CPAP BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - Baseline
     - 
-  * - Pregnancy term (full term or partial term)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
+  * - 5. Antibiotics total scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 6. Antibiotics CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 7. Antibiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 8. Probiotics total scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 9. Probiotics CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 10. Probiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - Baseline
     - 
 
-The following table details outputs from the pregnancy model. Each row in this table should be a column in the population
-state table outputted by the model. RT will tabulate the population table with the stratifications needed for V&V (e.g., age group, 
-scenario, and input draw). The 'Use case' column in the table denotes what we will be using the output for: either as an input for a later modeling stage
-(i.e., intrapartum or neonatal; this value does not explicitly need to be exported in the population table) or exported for V&V (we explicitly
-need this value to be exported so we can check it looks right). For this specific model, all of the following outputs in the table are needed for V&V. 
 
-.. list-table:: Outputs from Pregnancy Decision Tree
-  :widths: 3 15 15
+.. list-table:: Neonatal component scenario-dependent variables
   :header-rows: 1
 
-  * - Output
-    - Data Source
-    - Use case 
-  * - ANC attendance (true if attended ANC, false if not)
-    - Decision tree point
-    - Input for later modeling stage & export for V&V
-  * - Ultrasound status (AI assisted, standard, none)
-    - Decision tree point
-    - Input for later modeling stage & export for V&V
-  * - Gestational age at birth (weeks)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Input for later modeling stage & export for V&V
-  * - Gestational age estimate (weeks)
-    - Decision tree point
-    - Input for later modeling stage and & export for V&V 
-  * - Birthweight (grams)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Input for later modeling stage & export for V&V  
-  * - Pregnancy term (full term or partial term)
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Input for later modeling stage & export for V&V
-  * - GBD age group of pregnant simulant
-    - :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Export for V&V 
+  * - Scenario
+    - CPAP coverage
+    - Antibiotics coverage
+    - Probiotics coverage
+    - Note
+  * - 1. Baseline
+    - Defined on the :ref:`CPAP intervention model document <intervention_neonatal_cpap>`
+    - Defined on the :ref:`neonatal antibiotic intervention document <intervention_neonatal_antibiotics>`
+    - Defined on the :ref:`probiotics intervention model document <intervention_neonatal_probiotics>`
+    - Baseline coverage values are delivery facility-specific
+  * - 2. CPAP total scale-up
+    - 100% availability at BEMONC and CEMONC facilities
+    - Baseline
+    - Baseline
+    - 
+  * - 3. CPAP CEMONC-only scale-up
+    - 100% at CEMONC, baseline at BEMONC
+    - Baseline
+    - Baseline
+    -  
+  * - 4. CPAP BEMONC-only scale-up
+    - Baseline at CEMONC, 100% at BEMONC
+    - Baseline
+    - Baseline
+    - 
+  * - 5. Antibiotics total scale-up
+    - Baseline
+    - 100% availability at BEMONC and CEMONC facilities
+    - Baseline
+    - 
+  * - 6. Antibiotics CEMONC-only scale-up
+    - Baseline
+    - 100% at CEMONC, baseline at BEMONC
+    - Baseline
+    - 
+  * - 7. Antibiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline at CEMONC, 100% at BEMONC
+    - Baseline
+    - 
+  * - 8. Probiotics total scale-up
+    - Baseline
+    - Baseline
+    - 100% availability at CEMONC and BEMONC facilities
+    - 
+  * - 9. Probiotics CEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - 100% availability at CEMONC, baseline at BEMONC
+    - 
+  * - 10. Probiotics BEMONC-only scale-up
+    - Baseline
+    - Baseline
+    - Baseline at CEMONC, 100% at BEMONC
+    - 
 
-.. note::
+.. _mncnh_portfolio_4.0:
 
-    We should track both the real GA at birth and the believed GA.
+4.0 Outputs/Observers
+++++++++++++++++++++++
 
-Limitations:
+Specific observer outputs and their stratifications may vary by model run as needs change. Modifications to default will be noted in the model run requests tables. Note that the observers and outputs listed here are different from the module outputs above. The outputs of the module are intended to be intermediate values that may or may not be included as observed simulated outputs.
 
-* Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
-* Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
-* We are not planning to include ANC timing. The timing of ANC visits impacts the ability to accurately estimate gestational age, so we will use an average instead. 
-* The current version of the model does not include any false positive rates for pre-term or LBW. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
-* We are not planning to include twins or multiple pregnancies, which has limitations as twins are more likely to preterm and have birth complications. 
-
-V&V Checks:
-
-* Confirm ANC visit rate matches expectations 
-* Confirm ultrasound rates matches inputs for all scenarios 
-* Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type 
-* Confirm that rate of identifying low birthweight is correct based on ultrasound type
-* Confirm that all pregnant simulants fall within WHO definition of WRA (15-49yrs)
-
-
-**Component 2**: The Intrapartum Model
-
-.. image:: intrapartum_decision_tree_vr.svg
-
-
-.. list-table:: Intrapartum Decision Tree
-  :widths:  3 5 10 10 15
+.. list-table:: Simulation observers
   :header-rows: 1
 
-  * - ID
-    - Decision Information 
-    - Data Value 
-    - Source
-    - Notes
-  * - 0
-    - Incidence of ectopic pregnancies, abortion or miscarriage
-    - incidence_c374 + incidence_c995
-    - get_draws(gbd_round_id=7, location_id=location_id, gbd_id_type='cause_id', gbd_id=[995,374], source='como', measure_id=6, metric_id=3, age_group_id=24, sex_id=2, year_id=2021, decomp_step='iterative')
-    - These simulants will NOT continue in the model. Use the `total population incidence <Total Population Incidence Rate>`_ rate directly from GBD and do not rescale this parameter to susceptible-population incidence rate using condition prevalence.
-  * - 1
-    - % of simulants to attend each delivery facility type, based on their propensity
-    - At home (68.3%), in hospital (26.6%), in clinic/low-level facility (5.1%) 
-    - DHS for each location; placeholder values are from `this Ethiopia paper <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_.
-    - Denominator in DHS is all births (live and stillbirths) to interviewed women in the 2 years preceding the survey. The above values are placeholders until we do a more in-depth analysis. We would like this to be location specific, please code accordingly. 
-  * - 2
-    - Need to figure out how we will determine which simulants need a c-section
-    -
+  * - Outcome
+    - Default stratifications
+  * - ANC attendance counts
     - 
-    -    
-  * - 3
-    - % of each facility type have cesarian section capabilities
-    - At home (0%), in hospital(94%), in clinic/low-level facility (1%)
-    - SARA (Ethiopia; filepath saved `on SharePoint <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B63F98143-C6C3-4CF7-BF62-969344726A87%7D&file=ethiopia_data_received_notes.docx&action=default&mobileredirect=true>`_.) 
-    - We want these to be location specific, please code accordingly. These are placeholder values for now (extracted from the SARA Final Report, link in 'Source' column; the 'other' value is made-up), hopefully we will be able to find similar data available for Pakistan and Nigeria.   
-  * - 4a
-    - Relative risk of c-section on incidence of hemorrhage
-    - 2.05 (1.84-2.29)
-    - `Pubu et al 2021 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7887994/>`_ 
-    - This value is a stand-in from this population-based study in Tibet (see 'Source' column), in which the authors reported an odds ratio rather than a relative risk. With further research and analysis we will likely update this value. Outstanding items: how does c-section need overlap with hemorrhage/OL, what is the RR, how will we implement this with overlaps in total MD impact of facility type 
-  * - 5
-    - % of pregnancy receive azithromycin in each delivery facility type
-    - At home (10%), in hospital (67.7%), in clinic/low-level facility (18.5%)
-    - SARA (Ethiopia; Table 3.8.2)
-    - These are placeholder values (percentage of each facility type that have azithromycin, not the percentage of pregnancies that receive it) and will be updated with further analysis. We want these to be location specific, please code accordingly.  
-  * - 6
-    - Relative risk of azithromycin on incidence of sepsis and other infections
-    - 0.65 (0.55, 0.77)
-    - `Tita et al 2023 <https://www.ajog.org/article/S0002-9378(22)02210-4/fulltext#undfig1>`_ 
-    - Outstanding items: how will we implement this with overlaps in total MD impact of facility type 
-  * - 7
-    - % of pre-term or known LBW pregnancies will receive antenatal corticosteroids, split by delivery facility type
-    - At home (1%), in  hospital (12%), in clinic/low-level facility (2%)
-    - EmONC (Ethiopia; Table 10.5.4A)
-    - These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The denominator for these values is LBW and preterm births. Outstanding items: believe this only affected neonatal outcomes, confirm with BMGF
-  * - 8
-    - % of those who receive intrapartum sensors that get identified as needing a c-section
+  * - Ultrasound coverage counts (AI-assisted, standard, none)
     - 
+  * - Pregnancy term counts (full or partial)
     - 
-    - Outstanding items: which facility types have intrapartum sensors? Is there anything else that an intrapartum sensor should influence (e.g. who receives ACS, can someone be identified as high risk from an intrapartum sensor and be moved to a higher level facility in time for birth)?
-    
-
-
-.. list-table:: Inputs to Intrapartum Decision Tree
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - Input
-    - Data Source 
-    - Notes
-  * - Age 
-    - GBD and fertility model 
-    - Will be the same population generation as used in nutrition optimization pregnancy model 
-  * - Upstream factors
-    - Likely DHS 
-    - Need to decide what if anything we want to include
-  * - Delivery facility Propensity
-    - Likely DHS 
-    - Need to determine correlation if we want to use it 
-  * - ANC attendance
-    - Decision tree point
+  * - Maternal GBD age group counts
     - 
-  * - Gestational age at birth
-    - GBD LBWSG
+  * - Delivery facility type counts (BeMONC, CeMONC, home)
     - 
-  * - Gestational age stated
-    - Decision tree value
+  * - Azithromycin coverage counts
     - 
-  * - Low birthweight 
-    - GBD LBWSG
+  * - Corticosteroid coverage counts
     - 
-  * - If identified as low birthweight
-    - Decision tree value
+  * - Misoprostol coverage counts
     - 
-  * - Pregnancy end
-    - GBD
-    - Sum of GBD ectopic and abortion and miscarriage rates
-
-
-Requested outputs for V&V from the intrapartum model are described in the following table.
-For these V&V observers we'd like count data, as described. For information on what from the 
-intrapartum model will be used as input to the neonatal model, please see the table
-:ref:`Inputs to neonatal decision tree <inputs_to_neonatal_decision_tree_table>` in the next section.
-
-.. list-table:: V&V Outputs from Intrapartum Decision Tree 
-  :widths: 10 10 10
-  :header-rows: 1
-
-  * - Output
-    - Data Source
-    - Stratifications
-  * - Counts of simulants attending each delivery facility type
-      (BeMONC, CeMONC, home)
-    - Decision tree point
-    - None
-  * - Counts of simulants receiving each intervention (azithromycin, corticosteroids; 
-      c-sections will be added in a later wave)
-    - Decision tree point
-    - Facility type
-  * - Obstructed labor outcomes (deaths, YLLs, YLDs, incident counts)
-    - :ref:`Obstructed labor and uterine rupture model <2021_cause_obstructed_labor_mncnh>`
-    - Facility type, age
-  * - Hemorrhage outcomes (deaths, YLLs, YLDs, incident counts)
-    - :ref:`Maternal hemorrhage model <2021_cause_maternal_hemorrhage_mncnh>`
-    - Facility type, age
-  * - Sepsis outcomes (deaths, YLLs, YLDs, incident counts)
-    - :ref:`Maternal sepsis model <2021_cause_maternal_sepsis_mncnh>`
-    - Facility type, age, whether given azithromycin or not
-
-
-Limitations:
-
-* Only have one cohort, will not allow for downstream effects through pregnancies (c-sections likely to get another c-section in the future, losing a child might impact delivery facility, etc.)
-* Moving to a higher level care facility during the intrapartum period is common (referred up once labor begins if there is an issue) and the ability to do this is often a result of transport available, distance to clinics, etc. We will not include this and instead have simulants remain at a single facility for the whole intrapartum period. 
-* There are many other maternal disorders which we do not plan to individually model. 
-
-V&V Checks:
-
-* Confirm attendance rate for each type of delivery facility matches inputs
-* Confirm rates of simulants receiving azithromycin and corticosteroid matches inputs
-* Confirm outcomes for each maternal disorder (OL, sepsis, and hemorrhage) matches GBD data 
-* Confirm that relative risk of azithromycin on sepsis outcomes matches expectations
+  * - Maternal obstructed labor outcomes (deaths, YLLs, YLDs, incident cases)
+    - 
+  * - Maternal hemorrhage outcomes (deaths, YLLs, YLDs, incident cases)
+    - 
+  * - Maternal sepsis outcomes (deaths, YLLs, YLDs, incident cases)
+    - 
+  * - Count of neonatal deaths and YLLs by cause
+    - 
+  * - Neonatal antibioitics availability/coverage counts
+    - 
+  * - Neonatal probiotics availability/coverage counts
+    - 
+  * - CPAP availability/coverage counts
+    - 
 
 .. todo::
 
@@ -346,211 +425,13 @@ V&V Checks:
   and what our V&V plan would be for this if so (e.g., interactive sim to compare risk ratios for OL
   of people with LBWSG babies or not?).
 
-**Component 3**: The Neonatal Model
-
-.. image:: neonatal_decision_tree_vr.svg
-
-
-.. list-table:: Neonatal Decision Tree
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - ID
-    - Decision Information 
-    - Notes
-  * - 0
-    - Pregnancy outcome (live birth or not) value from :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-    - Only live birth outcomes continue in the model
-  * - 1
-    - Delivery facility type (home, BEmONC, CEmONC) value from intrapartum model
-    - 
-  * - 2
-    - Percentage of each facility type that have antibiotics for neonatal sepsis: 76.8% of CEmONC and 30.2% of BEmONC 
-    - These values are from the 2016 EmONC Final Report and are therefore only reflective of Ethiopian health system a decade ago (we also have data on this
-      from SARA, via the Health Systems team). Please use these as a placeholder for now while we try to find reliable values for Nigeria and Pakistan. 
-  * - 3
-    - 0.72 (95% CI 0.64-0.80) relative risk of antibiotics on mortality from sepsis or other neonatal infections
-    - It seems like this relative risk is hard to find in the literature, and we might need to use a sensitivity-analysis approach. 
-      `This meta-analysis for LiST <https://pmc.ncbi.nlm.nih.gov/articles/PMC3231886/>`_ provides an estimate of the RR of antibiotics on neonatal sepsis, 
-      and we could use their methodology to make our own estimate, or use this one (which is currently a placeholder). 
-  * - 4
-    - XX% of each type of facility have probiotics available
-    - Need to determine who recevied probiotics - all newborns, only LBW, only preterm, etc. ; the coverage is probably zero in current practice, and we will model scenarios where it is nonzero.
-  * - 5
-    - XX relative risk on incidence of sepsis or other neonatal infections
-    - Need to confirm this will impact incidence not mortality. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
-  * - 6
-    - XX relative risk on incidence of encephalopathy if birthing parent experiences obstructed labor
-    - Need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
-  * - 7
-    - Percentage of each facility type that have CPAP capabilities: CMONC - 39.3% and BMONC - 7.5% 
-    - These values are from the 2016 EmONC Final Report and are therefore only reflective of Ethiopian health system a decade ago. Please use these as a placeholder for now while we 
-      try to find reliable values for Nigeria and Pakistan. 
-  * - 8
-    - 0.53 (95% CI 0.34-0.83) relative risk on RDS mortality of neonate receiving CPAP
-    - Note that we might want RR for NICU, but this value is for CPAP. The population that this effect size applies to is 
-      preterm infants with "respiratory failure becoming evident soon after birth".
-      Source: `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_
-  * - 9
-    - 0.69 (95% CI 0.59-0.81) relative risk for RDS mortality based on birthing parent receiving antenatal corticosteroids
-    - This value is for RDS mortality, however there is also an RR on RDS incidence (0.66, 95% CI 0.56-0.77). Study recipients
-      of RDS intervention included "women, with a singleton or multiple pregnancy, expected to deliver preterm as a result of either 
-      spontaneous preterm labour, preterm prelabour rupture of the membranes or planned preterm delivery."
-      Source: `2017 Cochrane review <https://pubmed.ncbi.nlm.nih.gov/28321847/>`_
-  * - 10
-    - Percentage of preterm deaths caused by RDS: Ethiopia - 87.1%; Nigeria - 98.1%; Pakistan - 89.7% 
-    - Ethiopia source: `Major causes of death in preterm infants in selected hospitals in Ethiopia <https://www.sciencedirect.com/science/article/pii/S2214109X19302207>`_
-      Nigeria source: `Current Trends in Neonatal Morbidity and Mortality - Experiences from a Tertiary Center in Lagos, Nigeria <https://pmc.ncbi.nlm.nih.gov/articles/PMC9490664/>`_
-      Pakistan source: `Birth asphyxia is under-rated as a cause of preterm neonatal mortality in low- and middle-income countries <https://obgyn.onlinelibrary.wiley.com/doi/10.1111/1471-0528.17220>`_
-      Note about the Pakistan paper: the study provides two estimates of preterm deaths caused by RDS, and the value above is based on physician diagnoses, but the authors also 
-      had a panel of experts review the diagnoses independently, and the panel found RDS to be far less common than the physicians, with 35.6% of preterm deaths attributed to RDS.     
-      
-.. _inputs_to_neonatal_decision_tree_table:
-
-.. list-table:: Inputs to Neonatal Decision Tree
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - Input
-    - Data Source 
-    - Notes
-  * - Birth delivery facility
-    - From intrapartum model
-    - 
-  * - Type of birth
-    - From intrapartum model
-    - E.g., live, still 
-  * - Gestational age at birth
-    - From intrapartum model
-    - 
-  * - Birthweight
-    - From intrapartum model
-    - 
-  * - If birth parent experienced obstructive labor
-    - From intrapartum model
-    - 
-  * - If birth parent received antenatal corticosteroids
-    - From intrapartum model
-    - 
-  * - If birth parent received azithromycin
-    - From intrapartum model
-    - 
-
-.. list-table:: Outputs from Neonatal Decision Tree
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - Input
-    - Data Source 
-    - Notes
-  * - Interventions available (antibiotics, probiotics, RDS treatment)
-    - Decision tree values
-    - 
-  * - Interventions received (antibiotics, probiotics, RDS treatment)
-    - Decision tree values
-    - 
-  * - Count of neonatal deaths by cause
-    - Neonatal disorder models
-    - 
-  * - Burden of Neonatal deaths by cause
-    - Neonatal disorder model
-    - YLLs
-  * - Gestational age at birth
-    - From intrapartum model
-    - 
-  * - Birthweight
-    - From intrapartum model
-    - 
-
-Limitations:
-
-* In GBD, LBWSG impacts all-cause mortality, which overlaps with the other neonatal causes. The method for handling this is complex, since preterm birth is a PAF-of-one cause, that we want to split into preterm with and without RDS, and other causes must have a RR with LBWSG to make the all-cause RR calibrate.
-
-* In this phase of model building, we are not including lung surfactant or kangaroo care which are closely tied to the CPAP/NICU intervention. We might add these to the model in a later phase. 
-
-
-V&V Checks:
-
-* Confirm ACMR in sim matches ACMR in artifact
-* Confirm LBWSG exposure match
-* Confirm LBWSG RR on ACMR matches
-* Confirm CSMR matches for preterm, sepsis, encephalopathy
-* Confirm that RDS incidence and mortality match expectations
-* Confirm that interventions have expected efficacy and coverage rates
-
-
-  
-.. _mncnh_portfolio_3.2:
-
-3.2 Submodels
--------------
-
-1. :ref:`Pregnancy Model <other_models_pregnancy_closed_cohort_mncnh>`
-
-  a. :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
-  b. :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
-  c. :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
-  d. Maternal hypertensive disorders
-  e. (WAVE II) Hemoglobin component <2024_vivarium_mncnh_portfolio_hemoglobin_module>
-
-2. :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`
-
-  a. :ref:`Neonatal Sepsis and Other Infections Model <2021_cause_neonatal_sepsis_mncnh>`
-  b. :ref:`Neonatal Encephalopathy Model <2021_cause_neonatal_encephalopathy_mncnh>`
-  c. :ref:`Preterm Birth <2021_cause_preterm_birth_mncnh>`
-
-    i. with Respiratory Distress Syndrome (RDS)
-    ii. without RDS 
-
-3. Low Birthweight/Short Gestation Risk Exposure
-4. Low Birthweight/Short Gestation Risk Effect on Neonatal Moratlity Model
-5. Hemoglobin Risk Exposure
-6. Hemoglobin Risk Effect on Maternal Hemorrhage
-7. :ref:`Intervention Models <neonatal_intervention_models>`
-
-  a. :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
-  b. :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
-
-.. note::
-
-  The following TOC has been included to avoid a build warning and will be updated with a larger reorganization of this concept model document.
-
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   */concept_model*
-
-3.3 Simulation scenarios 
-------------------------
-
-1. Baseline: baseline coverage for all maternal and neonatal interventions 
-2. CPAP total scale-up: 100% CPAP availability in both BEMONC and CEMONC facilities  
-3. CPAP CEMONC-only scale-up: 100% CPAP availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
-4. CPAP BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% CPAP availability in BEMONC facilities 
-5. Antibiotics total scale-up: 100% antibiotics availability in both BEMONC and CEMONC facilities  
-6. Antibiotics CEMONC-only scale-up: 100% antibiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
-7. Antibiotics BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% antibiotics availability in BEMONC facilities 
-8. Probiotics total scale-up: 100% probiotics availability in both BEMONC and CEMONC facilities  
-9. Probiotics CEMONC-only scale-up: 100% probiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
-10. Probiotics BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% probiotics availability in BEMONC facilities 
-
-.. _mncnh_portfolio_4.0:
-
-4.0 Data Inputs
-+++++++++++++++
-
-.. todo::
-
-  Fill in this section as we continue to work
-
-
 .. _mncnh_portfolio_5.0:
 
 5.0 Model run requests
 ++++++++++++++++++++++
 
 .. list-table:: Model run plan as of October 4, 2024
+  :widths: 3 3 3 3 3 3 3 15
   :header-rows: 1
 
   * - Number
@@ -559,6 +440,7 @@ V&V Checks:
     - Priority
     - Number of draws
     - Population size per draw
+    - Scenarios
     - Note
   * - 1
     - Wave I Pregnancy V&V
@@ -566,6 +448,7 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 2
     - Wave I Maternal disorders V&V
@@ -573,6 +456,7 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update 
       the Pakistan OL prevalence values from GBD 2021 to GBD 2023. Locations include Pakistan, Nigeria, and Ethiopia. 
       10 seeds * 10,000 simulants = 100,000 total population.
@@ -584,12 +468,14 @@ V&V Checks:
     - 100,000
     - Locations include Pakistan, Nigeria, and Ethiopia. 
       10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline only
   * - 3.1
     - Wave I Neonatal disorders V&V with correct LBWSG distribution
     - Complete
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 3.2
     - Wave I Neonatal disorders V&V with LBWSG component removed
@@ -597,6 +483,7 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    - Baseline only
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 3.3
     - Wave I Neonatal disorders V&V with early NN observer bugfix
@@ -604,11 +491,101 @@ V&V Checks:
     - N/A
     - 10
     - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.1
+    - Wave I CPAP 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.2
+    - Wave I CPAP with observer for counts per facility type
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.3
+    - Wave I CPAP with addition of a delivery facility column in births observer and CPAP availability stratification
+      in neonatal burden observer
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.4
+    - Wave I CPAP with updated determination of delivery facility type
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.5
+    - Wave I CPAP with bugfix for negative other causes mortality rates
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline only
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.6
+    - Wave I CPAP with scale-up scenarios 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline and alternative scenarios 2, 3, and 4
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 4.7
+    - Correct pregnancy duration for partial term pregnancies
+    - Incomplete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline and alternative scenarios 2, 3, and 4
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 5.0
+    - Wave I neonatal antibiotics with scale-up scenarios 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline and alternative scenarios 2 - 7 
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 6.0
+    - Wave I azithromycin 
+    - Incomplete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 7.0
+    - Wave I misoprostol
+    - Incomplete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline 
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 8.0
+    - Wave I antenatal corticosteroids
+    - Incomplete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
 
 .. note:: 
   
-  The above numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_)
+  The above numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_
   that found the appropriate seed and draw count for production runs, then divided in half for V&V runs. 
 
 .. list-table:: V&V tracking 
@@ -655,23 +632,87 @@ V&V Checks:
     - LBWSG distributions in artifact, GBD, and simulation are now matching, but preterm deaths still look too low in the simulation
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/lbwsg_distribution.ipynb>`__
   * - 3.2
-    - Validate all-cause mortality for early and late neonatal age groups with LBWSG component removed 
+    - Validate all-cause mortality for early and late neonatal age groups with LBWSG component removed
     - Early neonatal mortality is still being overestimated in the simulation 
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_26_vnv_neonatal_acmr.ipynb>`__
   * - 3.3
-    - Validate all-cause mortality for early neonatal age group with observer bugfix
+    - 
+      - Validate all-cause mortality for early neonatal age group with observer bugfix
+      - Validate that individual RRs vary with LBWSG exposure 
+      - Validate that individual RRs affect mortality rates appropriately
+      - Validate that no non-preterm babies are dying of preterm
     - Early neonatal mortality is validating now! 
+      Note: Ali noticed in the LBWSG interactive sim that the state table and pipeline values for LBWSG exposure don't match, but engineers confirmed this is okay,
+      the pipeline values refresh after being recorded in the state table (and then are not used again).
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_27_vnv_neonatal_acmr.ipynb>`__
+      `LBWSG interactive sim <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/20250313_lbwsg_effects_interactive_simulation.ipynb>`__
+  * - 4.1
+    - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
+    - Cannot validate, need observer with counts per facility type 
+    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+
+  * - 4.2
+    - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
+    - Cannot validate, need to add delivery facility column in births observer and stratification for CPAP availability 
+    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+
+  * - 4.3
+    - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
+    - Not validating, need to update how we determine which delivery facility type a simulant will go to 
+    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+
+  * - 4.4
+    - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
+    - Not validating, we are seeing negative mortality rates for Other causes 
+    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+
+  * - 4.5
+    - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
+    - CSMRs and ACMR are all validating now, with the bugfix to adjust all negative values to 0 and rescale the rest of the RRs to add up to 1
+    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+
+  * - 5.0
+    - Validate RR of antibiotics on sepsis (and confirm other causes are unchanged)
+    - Everything is validating - RR on sepsis aligns with expected value; other causes, non-RDS preterm, and encephalopathy all have the expected RRs of 1 from antibiotics.
+      There's an RR of 0.78 for antibiotics on preterm with RDS, but we confirmed that when we group this by facility type, there is the expected RR of 1. This is because
+      the probability of a simulant receiving CPAP and the probability of receiving antibiotics are not independent (both related to facility choice).
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_31a_vnv_and_scenario_results_antibiotics.ipynb>`__
+
+
+
+.. list-table:: Outstanding model verification and validation issues
+  :header-rows: 1
+
+  * - Issue
+    - Explanation
+    - Action plan
+    - Timeline
+  * - Pregnancy duration for partial term pregnancies is incorrect
+    - We will end up using pregnancy duration later in the model (to make sure no one shows up for ANC visits 
+      in the second trimester if they never even make it to the second trimester and to calculate anemia YLDs), 
+      so we will want something that defines pregnancy duration for partial term pregnancies.
+    -  Jim is implementing a change: 
+        - Gestational ages for partial term pregnancies are sampled to be uniform between 6 and 24 weeks.
+        - Pregnancy duration pipeline now is just a simple unit converter that will convert the gestational age column to days.
+    -  No current timeline 
+
 
 .. _mncnh_portfolio_6.0:
 
 6.0 Limitations
 +++++++++++++++
 
-.. todo::
-
-  Fill in this section as we continue to work
-
+* Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
 
 .. _mncnh_portfolio_7.0:
 
