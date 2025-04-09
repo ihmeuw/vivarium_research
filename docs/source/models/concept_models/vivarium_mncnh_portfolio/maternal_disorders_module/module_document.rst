@@ -42,73 +42,40 @@ Maternal disorders module
 1.0 Overview
 ++++++++++++
 
-.. todo::
-
-  Provide a brief overview of what this module does and note which component it is a part of
+This module is part of the intrapartum component and reads inputs that affect maternal disorders incidence/mortality (such as azithromycin coverage, hemoglobin exposure for wave II) and outputs incident and fatal cases of maternal disorders.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
 
-2.1 Module Diagram
-----------------------
+There is no specific decision tree diagram for this module. Rather, the individual maternal disorders cause model documents are linked below:
+
+* :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+* :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
+* :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
+
+There are specific variables that will affect these cause models, summarized in the table below. Note that the factors included in this table are required inputs to the maternal disorders module.
+
+.. list-table:: Factors that affect maternal disorders models
+  :header-rows: 1
+
+  * - Variable
+    - Source module
+    - Affected outcome
+    - Instructions
+    - Note
+  * - Azithromycin coverage
+    - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    - Maternal sepsis incidence rate
+    - Relative risk: 0.65 (95% CI: 0.55, 0.77)
+    - `Tita et al 2023 <https://www.ajog.org/article/S0002-9378(22)02210-4/fulltext#undfig1>`_ 
 
 .. todo::
 
-  Insert module decision tree diagram. Use squares for action points (numbered with roman numerals) and rounded boxes for decision nodes (numbered with integers).
+  Make and link separate intervention module document for azithromycin with more specific instructions on how to implement this to replace information directly in this table (new document to include how to calibrate baseline coverage, potential need for stratifying by birth facility in baseline calibration, specific overview and limitations of intervention)
 
-2.2 Module Inputs
----------------------
+.. note::
 
-.. list-table:: Module required inputs
-  :header-rows: 1
-
-  * - Input
-    - Source module
-    - Application
-    - Note
-  * - 
-    - 
-    - 
-    - 
-
-
-2.3 Module Decision Nodes
------------------------------
-
-.. list-table:: Module decision nodes
-  :header-rows: 1
-
-  * - Decision node
-    - Description
-    - Information
-    - Note
-  * - 1
-    - 
-    - 
-    - 
-  * - 2
-    - 
-    - 
-    - 
-
-2.4 Module Action Points
----------------------------
-
-.. list-table:: Hemoglobin module action point
-  :header-rows: 1
-
-  * - Action point
-    - Description
-    - Information
-    - Note
-  * - I
-    - 
-    - 
-    - 
-  * - II
-    - 
-    - 
-    - 
+  Future factors that will affect maternal disorders in wave II of the simulation will include hemoglobin and cesarean sections
 
 2.4: Module Outputs
 -----------------------
@@ -118,28 +85,21 @@ Maternal disorders module
 
   * - Output
     - Value
-    - Dependencies
-  * - A. 
-    - 
-    - 
-  * - B.
-    - 
-    - 
-
+    - Note
+  * - A. Maternal disorders incidence
+    - Indication of incident cases of each modeled maternal disorders subcause
+    - Used for V&V and as inputs to future modules (ex: postpartum hemoglobin)
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-.. todo::
-
-  List module assumptions and limitations
+* There are many other maternal disorders which we do not plan to individually model. 
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-.. todo::
-  
-  List module V&V criteria
+* Confirm outcomes for each maternal disorder (OL, sepsis, and hemorrhage) matches GBD data 
+* Confirm that relative risk of azithromycin on sepsis outcomes matches expectations
 
 5.0 References
 +++++++++++++++

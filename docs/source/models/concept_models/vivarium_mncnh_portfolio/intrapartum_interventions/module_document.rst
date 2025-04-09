@@ -44,7 +44,9 @@ Intrapartum intervention module
 
 .. todo::
 
-  Provide a brief overview of what this module does and note which component it is a part of
+  Update this page to include the misoprostol intervention
+
+This module in the intrapartum component determines coverage of intrapartum interventions, including azithromycin and corticosteroids (and eventually intrapartum sensors in wave II). Coverage availability/eligibility will depend on birth facility and believed gestational age.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -52,9 +54,7 @@ Intrapartum intervention module
 2.1 Module Diagram
 ----------------------
 
-.. todo::
-
-  Insert module decision tree diagram. Use squares for action points (numbered with roman numerals) and rounded boxes for decision nodes (numbered with integers).
+.. image:: intrapartum_intervention_module_diagram.png
 
 2.2 Module Inputs
 ---------------------
@@ -66,10 +66,18 @@ Intrapartum intervention module
     - Source module
     - Application
     - Note
-  * - 
+  * - Pregnancy term
+    - :ref:`Pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+    - Partial term pregnancies do not proceed through this module
     - 
+  * - Birth facility
+    - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
+    - Determines intervention availability
     - 
-    - 
+  * - Believed gestational age
+    - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+    - Affects antenatal corticosteroid coverage (decision node #2)
+    - Only births believed to be preterm are eligible for coverage
 
 
 2.3 Module Decision Nodes
@@ -83,18 +91,38 @@ Intrapartum intervention module
     - Information
     - Note
   * - 1
-    - 
-    - 
-    - 
+    - Receives intrapartum azithromycin?
+    - Baseline coverage:
+
+      * Home birth: 10%
+
+      * Hospital birth: 67.7%
+
+      * Clinic/low-level birth: 18.5%
+    - SARA (Ehtiopia; Table 3.8.2). These are placeholder values (percentage of each facility type that have azithromycin, not the percentage of pregnancies that receive it) and will be updated with further analysis. We want these to be location specific, please code accordingly.
   * - 2
-    - 
-    - 
-    - 
+    - Believed to be preterm?
+    - Believed gestational age (from pregnancy module output) < 37 weeks
+    - Note necessary unit conversion between days and weeks
+  * - 3
+    - Receives antenatal corticosteroids
+    - Baseline coverage (of believed preterm births):
+
+      * Home birth: 1%
+
+      * Hospital birth: 12%
+
+      * Clinic/low-level birth: 2%
+    - EmONC (Ethiopia; Table 10.5.4A). These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The denominator for these values is LBW and preterm births. Outstanding items: believe this only affected neonatal outcomes, confirm with BMGF
+
+.. todo::
+  
+  Make these parameters (Decision nodes #1 and #3) scenario-specific in separate :ref:`intrapartum component scenario table <MNCNH intrapartum component scenario table>` on main concept model page if we do indeed desire them to be scenario-specific
 
 2.4 Module Action Points
 ---------------------------
 
-.. list-table:: Hemoglobin module action point
+.. list-table:: Module action point
   :header-rows: 1
 
   * - Action point
@@ -102,12 +130,12 @@ Intrapartum intervention module
     - Information
     - Note
   * - I
-    - 
-    - 
+    - Record receipt of intrapartum azithromycin
+    - Record to output A
     - 
   * - II
-    - 
-    - 
+    - Record receipt of antenatal corticosteroids
+    - Record to output B
     - 
 
 2.4: Module Outputs
@@ -118,14 +146,13 @@ Intrapartum intervention module
 
   * - Output
     - Value
-    - Dependencies
-  * - A. 
+    - Note
+  * - A. Intrapartum azithromycin coverage
+    - *True* / *False*
     - 
-    - 
-  * - B.
-    - 
-    - 
-
+  * - B. Antenatal corticosteroid coverage
+    - *True* / *False*
+    - Coverage can only be *True* if gestational age is believed to be < 37 weeks
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
@@ -137,9 +164,9 @@ Intrapartum intervention module
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-.. todo::
-  
-  List module V&V criteria
+* Confirm rates of simulants receiving azithromycin and corticosteroid matches inputs
+
+* Confirm no simulants believed to be >37 weeks gestational age at birth recieve corticosteroids
 
 5.0 References
 +++++++++++++++
