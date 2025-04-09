@@ -12,7 +12,7 @@ Delivery Facility Choice Model
 Background
 ----------
 
-To capture the complex relationship between choice of delivery facility (home birth vs a facility with basic emergency obstetric and neonatal care [BEmONC] vs a facility comprehensive care [CEmONC]), the belief about gestational age (believed pre-term vs believed full term), and the related factors of antenatal care (ANC), and low birth weight small for gestational age (LBWSG) risk exposure, we will include two novel affordances in our simulation: (1) correlated propensities for ANC, home delivery, and LBWSG; and (2) conditional probabilities for home delivery that differ based on the believe pre-term/full-term status when labor begins.
+To capture the complex relationship between choice of delivery facility (home birth vs a facility with basic emergency obstetric and neonatal care [BEmONC] vs a facility with comprehensive care [CEmONC]), the belief about gestational age (believed pre-term vs believed full term), and the related factors of antenatal care (ANC), and low birth weight and short gestation (LBWSG) risk exposure, we will include two novel affordances in our simulation: (1) correlated propensities for ANC, home delivery, and LBWSG; and (2) conditional probabilities for home delivery that differ based on the believe pre-term/full-term status when labor begins.
 
 Coming up with values for these correlations and conditional probabilities that are consistent with GBD and external evidence is detailed at the end of this document.  But before we get to that complexity, let's start with how we will use these correlations and conditional probabilities in the simulation.
 
@@ -26,11 +26,11 @@ Correlated propensities
 This section describes how we will model an "instrisic correlation" of ANC, home delivery, and LBWSG.  In short, we will use a Gaussian copula to model this, which has three parameters capturing the correlation between each pair of the three propensities.
 
 The motivation for these correlations is as follows: we hypothesize that there are important "common causes" that are not shown explicitly in the diagram above.  For example, having a home delivery and having no ANC visits might both be influenced by rurality --- if all health services are offered far away, it is logical that people will be able to access them less.
-Similarly, it is likely that there are social exclusion factors causeing both exposure to LBWSG risk and lack of access to ANC and in-facility birth.
+Similarly, it is likely that there are social exclusion factors causing both exposure to LBWSG risk and lack of access to ANC and in-facility birth.
 In a simulation model where we have not included scenarios that change these common-cause factors, we do not have to model their effects explicitly.
 For our purposes, it is sufficient to capture the correlations between ANC, in-facility birth, and LBWSG risk exposure.
 
-In Vivarium, we use values selected uniformly at random from the interval [0,1], which we call propensities, to keep attributes like LBWSG and ANC calibrated at the population level.  This makes it straightforward to represent the correlation in our risk factor and healthcare access attributes by generating correlated propensities. The :code:`statsmodels.distributions.copula.api.GaussianCopula` implementation can make them::
+In Vivarium, we use values selected uniformly at random from the interval [0,1], which we call propensities, to keep attributes like LBWSG and ANC calibrated at the population level while reducing variance between scenarios at the simulant level.  This makes it straightforward to represent the correlation in our factors by generating correlated propensities. The :code:`statsmodels.distributions.copula.api.GaussianCopula` implementation can make them::
 
     from statsmodels.distributions.copula.api import GaussianCopula
     copula = GaussianCopula([[1., .5, .1],
