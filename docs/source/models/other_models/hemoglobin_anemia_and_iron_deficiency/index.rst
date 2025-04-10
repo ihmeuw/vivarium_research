@@ -4,8 +4,13 @@
 Hemoglobin, Anemia, and Iron Deficiency
 =======================================
 
-.. contents::
-  :local:
+The hemoglobin, anemia, and iron deficiency models are complex and related. This page will provide a brief overview of the different components relating to these topics for context. See the below links for quick access to documentation pages for the following components:
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   */index
 
 Topic Overview
 --------------
@@ -34,22 +39,14 @@ levels in the body and a subsequent deficiency of hemoglobin in the blood.
 GBD 2019 Hemoglobin, Anemia, and Iron Deficiency Overview
 ---------------------------------------------------------
 
-The hemoglobin, anemia, and iron deficiency estimates in GBD 2019 are complex and related. This section will provide a brief overview of the different components relating to these topics in GBD 2019 for context.
-
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   */index
-
 Hemoglobin Model
 ^^^^^^^^^^^^^^^^
 
-The hemoglobin model in GBD 2019 is the starting point for both the anemia impairment and iron deficiency risk factor models in GBD 2019. The hemoglobin model estimates the *distribution* of population hemoglobin concentration for each location-, age-, sex-, and year-specific demographic group. This is done by estimation of mean and standard deviation hemoglobin values and a corresponding ensemble distribution fit. 
+The hemoglobin model is the starting point for both the anemia impairment and iron deficiency risk factor models. The hemoglobin model estimates the *distribution* of population hemoglobin concentration for each location-, age-, sex-, and year-specific demographic group. This is done by estimation of mean and standard deviation hemoglobin values and a corresponding ensemble distribution fit. 
 
-This model will allow the assignment of specific hemoglobin concentration values to indiidual simulants and will likely need to be used in order to model either the anemia impairment or iron deficiency risk factor.
+This model will allow the assignment of specific hemoglobin concentration values to individual simulants and will likely need to be used in order to model either the anemia impairment or iron deficiency risk factor.
 
-:ref:`The 2019 GBD Hemoglobin Model Documentation Page can be found here <2019_hemoglobin_model>`.
+:ref:`Hemoglobin Model Documentation can be found here <hemoglobin>`.
 
 Anemia Impaiment
 ^^^^^^^^^^^^^^^^

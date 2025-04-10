@@ -10,11 +10,13 @@ build:
     python: "3.13"
   apt_packages:
     - graphviz
+    - pandoc
 
 python:
   install:
     - requirements: requirements.txt
 
-# Doc builds will fail if there are any warnings
 sphinx:
+  configuration: docs/source/conf.py
+  # Doc builds will fail if there are any warnings
   fail_on_warning: true

@@ -365,11 +365,14 @@ V&V Checks:
     - Delivery facility type (home, BEmONC, CEmONC) value from intrapartum model
     - 
   * - 2
-    - XX% of each type of facility have antibiotics available
-    - 
+    - Percentage of each facility type that have antibiotics for neonatal sepsis: 76.8% of CEmONC and 30.2% of BEmONC 
+    - These values are from the 2016 EmONC Final Report and are therefore only reflective of Ethiopian health system a decade ago (we also have data on this
+      from SARA, via the Health Systems team). Please use these as a placeholder for now while we try to find reliable values for Nigeria and Pakistan. 
   * - 3
-    - XX relative risk on mortality from sepsis or other neonatal infections
-    - It seems like this relative risk will be hard to find in the literature, and we might need to use a sensitivity-analysis approach.
+    - 0.72 (95% CI 0.64-0.80) relative risk of antibiotics on mortality from sepsis or other neonatal infections
+    - It seems like this relative risk is hard to find in the literature, and we might need to use a sensitivity-analysis approach. 
+      `This meta-analysis for LiST <https://pmc.ncbi.nlm.nih.gov/articles/PMC3231886/>`_ provides an estimate of the RR of antibiotics on neonatal sepsis, 
+      and we could use their methodology to make our own estimate, or use this one (which is currently a placeholder). 
   * - 4
     - XX% of each type of facility have probiotics available
     - Need to determine who recevied probiotics - all newborns, only LBW, only preterm, etc. ; the coverage is probably zero in current practice, and we will model scenarios where it is nonzero.
@@ -380,15 +383,28 @@ V&V Checks:
     - XX relative risk on incidence of encephalopathy if birthing parent experiences obstructed labor
     - Need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
   * - 7
-    - XX% of each type of facility have CPAP or NICU capabilities
-    - 
+    - Percentage of each facility type that have CPAP capabilities: CMONC - 39.3% and BMONC - 7.5% 
+    - These values are from the 2016 EmONC Final Report and are therefore only reflective of Ethiopian health system a decade ago. Please use these as a placeholder for now while we 
+      try to find reliable values for Nigeria and Pakistan. 
   * - 8
-    - XX relative risk on RDS mortality of facility having CPAP or NICU capabilities vs. not
-    - Need to confirm this will impact mortality not incidence. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
+    - 0.53 (95% CI 0.34-0.83) relative risk on RDS mortality of neonate receiving CPAP
+    - Note that we might want RR for NICU, but this value is for CPAP. The population that this effect size applies to is 
+      preterm infants with "respiratory failure becoming evident soon after birth".
+      Source: `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_
   * - 9
-    - XX relative risk for RDS incidence based on birthing parent receiving antenatal corticosteroids
-    - Need to confirm this will impact incidence not mortality. Also need to determine how neonatal mortality in general will be modeled and how we will handle overlaps with preterm and LBWSG RR's on all cause mortality
-
+    - 0.69 (95% CI 0.59-0.81) relative risk for RDS mortality based on birthing parent receiving antenatal corticosteroids
+    - This value is for RDS mortality, however there is also an RR on RDS incidence (0.66, 95% CI 0.56-0.77). Study recipients
+      of RDS intervention included "women, with a singleton or multiple pregnancy, expected to deliver preterm as a result of either 
+      spontaneous preterm labour, preterm prelabour rupture of the membranes or planned preterm delivery."
+      Source: `2017 Cochrane review <https://pubmed.ncbi.nlm.nih.gov/28321847/>`_
+  * - 10
+    - Percentage of preterm deaths caused by RDS: Ethiopia - 87.1%; Nigeria - 98.1%; Pakistan - 89.7% 
+    - Ethiopia source: `Major causes of death in preterm infants in selected hospitals in Ethiopia <https://www.sciencedirect.com/science/article/pii/S2214109X19302207>`_
+      Nigeria source: `Current Trends in Neonatal Morbidity and Mortality - Experiences from a Tertiary Center in Lagos, Nigeria <https://pmc.ncbi.nlm.nih.gov/articles/PMC9490664/>`_
+      Pakistan source: `Birth asphyxia is under-rated as a cause of preterm neonatal mortality in low- and middle-income countries <https://obgyn.onlinelibrary.wiley.com/doi/10.1111/1471-0528.17220>`_
+      Note about the Pakistan paper: the study provides two estimates of preterm deaths caused by RDS, and the value above is based on physician diagnoses, but the authors also 
+      had a panel of experts review the diagnoses independently, and the panel found RDS to be far less common than the physicians, with 35.6% of preterm deaths attributed to RDS.     
+      
 .. _inputs_to_neonatal_decision_tree_table:
 
 .. list-table:: Inputs to Neonatal Decision Tree
@@ -489,11 +505,26 @@ V&V Checks:
 4. Low Birthweight/Short Gestation Risk Effect on Neonatal Moratlity Model
 5. Hemoglobin Risk Exposure
 6. Hemoglobin Risk Effect on Maternal Hemorrhage
+7. :ref:`Intervention Models <neonatal_intervention_models>`
 
-.. todo::
+  a. :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
+  b. :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
 
-  * Add in components that Abie missed
-  
+
+3.3 Simulation scenarios 
+------------------------
+
+1. Baseline: baseline coverage for all maternal and neonatal interventions 
+2. CPAP total scale-up: 100% CPAP availability in both BEMONC and CEMONC facilities  
+3. CPAP CEMONC-only scale-up: 100% CPAP availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
+4. CPAP BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% CPAP availability in BEMONC facilities 
+5. Antibiotics total scale-up: 100% antibiotics availability in both BEMONC and CEMONC facilities  
+6. Antibiotics CEMONC-only scale-up: 100% antibiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
+7. Antibiotics BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% antibiotics availability in BEMONC facilities 
+8. Probiotics total scale-up: 100% probiotics availability in both BEMONC and CEMONC facilities  
+9. Probiotics CEMONC-only scale-up: 100% probiotics availability in CEMONC facilities, keep baseline coverage for BEMONC facilities
+10. Probiotics BEMONC-only scale-up: keep baseline coverage for CEMONC facilities, 100% probiotics availability in BEMONC facilities 
+
 .. _mncnh_portfolio_4.0:
 
 4.0 Data Inputs
@@ -521,7 +552,45 @@ V&V Checks:
     - Note
   * - 1
     - Wave I Pregnancy V&V
-    - Incomplete
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 2
+    - Wave I Maternal disorders V&V
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update 
+      the Pakistan OL prevalence values from GBD 2021 to GBD 2023. Locations include Pakistan, Nigeria, and Ethiopia. 
+      10 seeds * 10,000 simulants = 100,000 total population.
+  * - 3
+    - Wave I Neonatal disorders V&V
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Locations include Pakistan, Nigeria, and Ethiopia. 
+      10 seeds * 10,000 simulants = 100,000 total population.
+  * - 3.1
+    - Wave I Neonatal disorders V&V with correct LBWSG distribution
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 3.2
+    - Wave I Neonatal disorders V&V with LBWSG component removed
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 3.3
+    - Wave I Neonatal disorders V&V with early NN observer bugfix
+    - Complete
     - N/A
     - 10
     - 100,000
@@ -544,10 +613,45 @@ V&V Checks:
       - Confirm ANC visit rate matches expectations
       - Confirm ultrasound rates matches inputs for all scenarios
       - Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type
+      - Confirm birth rates (live, still, partial) match GBD
       - Confirm pregnancy population is within expected WRA age group (15-49 years) 
     - All checks passed except last one; RT is updating our observer output requests to add an observer for pregnant person age.
-    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/pregnancy_model.ipynb>`_ 
-
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/pregnancy_model.ipynb>`__ 
+  * - 2.0
+    - 
+       - For each modeled maternal disorder (sepsis, hemorrhage, and OL/uterine rupture), we need to: 
+          - Validate the cause-specific incidence risk and case fatality rate in
+            each age group against the corresponding quantities calculated from
+            GBD data
+          - Validate the number of cause-specific deaths per population against
+            the CSMR from GBD
+          - Validate the total YLDs and YLLs per case
+       - Confirm the overall mortality rate of all maternal disorders lines up with GBD expectations. 
+    - All checks passed except error found in GBD 2021 for Pakistan fistula modeling - need to update the artifact for Pakistan OL prevalence values from 
+      GBD 2021 to GBD 2023. Did not explicitly check YLLs yet.
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/maternal_disorders_refactored.ipynb>`__
+  * - 3.0
+    - For each modeled neonatal disorder (sepsis, hemorrhage, and OL/uterine rupture), we need to: 
+       - Validate the cause-specific incidence risk and case fatality rate in
+          each age group against the corresponding quantities calculated from
+          GBD data
+       - Validate the number of cause-specific deaths per population against
+          the CSMR from GBD 
+    - Found an error in LBWSG distribution in artifact, which might be the cause of some of the other checks that weren't passing, including the ACMR 
+      for the late neonatal group and the CSMR for preterm 
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/neonatal_disorders.ipynb>`__
+  * - 3.1
+    - Validate LBWSG exposure distribution
+    - LBWSG distributions in artifact, GBD, and simulation are now matching, but preterm deaths still look too low in the simulation
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/lbwsg_distribution.ipynb>`__
+  * - 3.2
+    - Validate all-cause mortality for early and late neonatal age groups with LBWSG component removed 
+    - Early neonatal mortality is still being overestimated in the simulation 
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_26_vnv_neonatal_acmr.ipynb>`__
+  * - 3.3
+    - Validate all-cause mortality for early neonatal age group with observer bugfix
+    - Early neonatal mortality is validating now! 
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_27_vnv_neonatal_acmr.ipynb>`__
 
 .. _mncnh_portfolio_6.0:
 

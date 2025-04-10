@@ -258,7 +258,7 @@ the causal diagrams page,
 counterfactual analysis is used to describe the causal relationship between a
 risk factor and an outcome. **The TMRED is a particular choice of counterfactual
 exposure distribution** used for the causal attribution of disease burden to a
-given risk factor in a population (see :ref:`Population Attributable Fraction <pafs>`). 
+given risk factor in a population (see :ref:`Population Attributable Fraction <measures_of_impact>`). 
 Other choices of counterfactual include the *plausible* minimum risk,
 *feasible* minimum risk, and *cost-effective* minimum risk, each of which can
 obviously depend on specific attributes of the population under consideration.

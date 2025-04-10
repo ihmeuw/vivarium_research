@@ -25,7 +25,7 @@ about = {
 # -- Project information -----------------------------------------------------
 
 project = about['__title__']
-copyright = f'2021, {about["__author__"]}'
+copyright = f'2025, {about["__author__"]}'
 author = about["__author__"]
 
 # The short X.Y version.
@@ -55,6 +55,8 @@ extensions = [
     'sphinx.ext.graphviz',
     'matplotlib.sphinxext.plot_directive',
     'sphinx_rtd_theme',
+    'nbsphinx',
+    'IPython.sphinxext.ipython_console_highlighting',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -82,7 +84,10 @@ language = "en"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = []
+exclude_patterns = [
+    # Exclude notebook meant for download only, not rendering
+    "model_design/vivarium_model_components/risk_factors/risk_correlation/bias_quantification.ipynb",
+]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -191,7 +196,10 @@ texinfo_documents = [
 ]
 
 # Other docs we can link to
-intersphinx_mapping = {'python': ('https://docs.python.org/3.8', None),
-                       'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
-                       'tables': ('https://www.pytables.org/', None),
-                       'numpy': ('https://numpy.org/doc/stable/', None)}
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3.11', None),
+    'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
+    'tables': ('https://www.pytables.org/', None),
+    'numpy': ('https://numpy.org/doc/stable/', None),
+    'vivarium_public_health': ('https://vivarium.readthedocs.io/projects/vivarium-public-health/en/latest/', None),
+}

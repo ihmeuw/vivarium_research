@@ -32,16 +32,12 @@ If you want to add or modify documentation, you'll first need to clone and
 install this repository.  As always, you should do this in a clean environment.
 
 Start by opening the terminal of your choosing. If you want more information on 
-this, check out this :ref:`page on terminals <terminal_access>`. Then enter 
+this, check out this :ref:`page on terminals <terminal_access>`.  Then enter 
 the commands below. 
 
-::
-
-   $> conda create -y --name=vivarium_research python=3.13 graphviz
-   $> conda activate vivarium_research
-   (vivarium_research) $> git clone https://github.com/ihmeuw/vivarium_research.git
-   (vivarium_research) $> cd vivarium_research
-   (vivarium_research) $> pip install -r requirements.txt
+.. include:: ../../../../README.rst
+   :start-after: .. _installation:
+   :end-before: .. _end_installation:
 
 At this point, a folder called vivarium_research should be added to your computer and 
 accessible from your file explorer. 

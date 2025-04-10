@@ -113,6 +113,8 @@ Notably, none of the observers currently have integration tests.
   :code:`psimulate`.
   This way, egregious bugs could be caught very quickly.
 
+.. _fuzzy_checking:
+
 Fuzzy checking
 --------------
 
