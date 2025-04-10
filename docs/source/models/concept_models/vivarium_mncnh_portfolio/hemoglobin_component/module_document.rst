@@ -92,29 +92,14 @@ This module will:
     - Application
     - Note
   * - First trimester ANC attendance 
-    - ANC module
+    - :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`
     - Decision node #2
     - (True/False value)
-  * - Gestational age at first trimester ANC visit
-    - ANC module
-    - Anemia YLD calculation (action point XII)
-    - Point value in weeks, N/A for those who do not attend first trimester ANC
   * - Later pregnancy ANC attendance
-    - ANC module
+    - :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`
     - Decision node #4
     - (True/False value)
-  * - Gestational age at later pregnancy ANC visit
-    - ANC module 
-    - Anemia YLD calculation (action point XII)
-    - Point value in weeks, N/A for those who do not attend first trimester ANC
-  * - Pregnancy duration (aka gestational age at birth)
-    - ???
-    - Anemia YLD calculation (action point XII)
-    - Point value in weeks
 
-.. todo::
-  
-  Link to appropriate pages when ready
 
 2.3 Module Decision Nodes
 -----------------------------
@@ -229,11 +214,11 @@ This module will:
 2.4.1: Action point XII - Calculating anemia YLDs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Hemoglobin exposure is used to determine anemia status, which has corresponding disability weights. See the :ref:`anemia impairment document <2019_anemia_impairment>` to see how hemoglobin exposure relates to anemia status, disability weights, and years lived with disability.
-
 .. todo::
 
-  Check to see if there are any updates that need to be made to the anemia impairment document for GBD 2023
+  Move this info to a separate anemia YLD module that comes after the estimation of gestational age at birth. We will also need to assign specific dates to ANC visits
+
+Hemoglobin exposure is used to determine anemia status, which has corresponding disability weights. See the :ref:`anemia impairment document <2019_anemia_impairment>` to see how hemoglobin exposure relates to anemia status, disability weights, and years lived with disability.
 
 We assume that hemoglobin may vary throughout the course of pregnancy at the following distinct points opportunities: (1) following IFA/MMS supplementation at the first trimester ANC visit, and (2) following IFA/MMS supplementation or IV iron administration at the later pregnancy ANC visit. Therefore, we will calculate YLDs due to anemia during pregnancy in this model as a weighted sum over the course of pregnancy stratified by these specified events.
 

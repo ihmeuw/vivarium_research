@@ -159,14 +159,20 @@ defined as a module input in a subsequent row.
         * Child sex
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
       - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules
-    * - Wave II antenatal care module (TODO: add documentation)
+    * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
       - * ANC propensity
-      - * 1st trimester ANC attendance
+      - * ANC attendance
+      - 
+      - No change from wave I
+    * - :ref:`Antenatal care detail <2024_vivarium_mncnh_portfolio_anc_detail_module>`
+      - * ANC attendance
+        * Pregnancy term duration
+      - * First trimester ANC attendance
         * Later pregnancy ANC attendance
       - 
-      - Updated module from wave I implementation
+      - New module in wave II
     * - :ref:`Hemoglobin <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-      - * 1st trimester ANC attendance
+      - * First trimester ANC attendance
         * Later pregnancy ANC attendance
         * IFA/MMS coverage
         * IV iron coverage
@@ -573,6 +579,8 @@ Specific observer outputs and their stratifications may vary by model run as nee
 
   * Anemia status at birth counts (none/mild/moderate/severe)
   * YLDs due to anemia in pregnancy
+  * First trimster ANC attendance (stratified by pregnancy term duration)
+  * Later pregnancy ANC attendance (stratified by pregnancy term duration)
 
 .. _mncnh_portfolio_5.0:
 
