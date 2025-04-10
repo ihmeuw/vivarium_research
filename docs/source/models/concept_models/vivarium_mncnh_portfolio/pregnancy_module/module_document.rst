@@ -52,7 +52,20 @@ This module initializes a maternal age and determines basic pregnancy outcome in
 
 There is no diagram necessary for the pregnancy module. Instead, all instructions are detailed on the :ref:`MNCNH portfolio pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`. This document also contains a list of model assumptions and limitations as well as verification and validation criteria.
 
-Module outputs are summarized in the table below. 
+The inputs and outputs for this module are summarized in the tables below. 
+
+.. list-table:: Module required inputs
+  :header-rows: 1
+
+  * - Input
+    - Source module
+    - Application
+    - Note
+  * - LBWSG propensity
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - Used to sample exposure value from the LBWSG exposure distribution. Ordering of the LBWSG exposure categories matters. see the "Special ordering of the categories" section on the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
+    - 
+
 
 .. list-table:: Module outputs
   :header-rows: 1
@@ -74,10 +87,10 @@ Module outputs are summarized in the table below.
     - 
   * - E. Gestational age
     - point value in days
-    - N/A for partial term pregnancies
+    - N/A for partial term pregnancies. Must be assigned using LBWSG propensity value from the initial attributes module following the ordering rules described on the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
   * - F. Birthweight
     - point value in grams
-    - N/A for partial term pregnancies
+    - N/A for partial term pregnancies. Must be assigned using LBWSG propensity value from the initial attributes module following the ordering rules described on the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
   * - G. Pregnancy duration
     - point value in weeks
     - Equal to gestational age for full term pregnancies

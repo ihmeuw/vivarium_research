@@ -1,13 +1,12 @@
-:orphan:
-
 .. _2024_facility_model_vivarium_mncnh_portfolio:
 
 Delivery Facility Choice Model
 ==============================
 
-..contents::
-   :local:
-   :depth: 2
+.. contents::
+  :local:
+  :depth: 2
+
 
 Background
 ----------
@@ -69,8 +68,8 @@ We will also order the ANC and home delivery propensities from highest to lowest
 To be more explicit about how the ordered categories and propensities work in code, if the categories are ordered from highest risk to lowest risk as :math:`c_1, \dotsc, c_n`, divide the unit interval :math:`[0,1]` into :math:`n` subintervals :math:`I_1, \dotsc, I_n` ordered from left to right, such that the length of :math:`I_j` is :math:`P(c_j)`. Then a uniform propensity :math:`p \in [0,1]` corresponds to category :math:`c_j` precisely when :math:`p \in I_j`. [[A picture would probably help, should we add one here?]]
 
 
-Conditional probabilities of home delivery
-------------------------------------------
+Conditional delivery facility probabilities
+--------------------------------------------
 
 In addition to correlation, we posit that a belief about preterm status is influential in the decision to have a home delivery.  We will model this as a conditional probability of home delivery given a belief about preterm status.  Although deriving consistent values for these conditional probabilities is complex, and described in the final section of this page, *using* the conditional probabilities is simple: simply select the facility type with :math:`\text{Pr}[\text{facility}\mid\text{believed preterm}]` and :math:`\text{Pr}[\text{facility}\mid\text{believed fullterm}]` for the corresponding cases.
 
