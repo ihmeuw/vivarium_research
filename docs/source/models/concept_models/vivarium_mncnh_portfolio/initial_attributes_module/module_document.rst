@@ -56,13 +56,13 @@ There is no need for a diagram for the initial attributes module of this simulat
     - Value
     - Dependencies
   * - A. ANC propensity
-    - See the Correlated Propensities section of the facility choice model document for instructions
+    - See the "Correlated Propensities" section of the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
     - Will be used to determine ANC attendance in ANC module
   * - B. LWBSG propensity
-    - See the Correlated Propensities section of the facility choice model document for instructions
+    - See the "Correlated Propensities" section of the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
     - Will be used to determine LBWSG exposure in pregnancy module
   * - C. Facility choice propensity
-    - See the Correlated Propensities section of the facility choice model document for instructions
+    - See the "Correlated Propensities" section of the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
     - Will be used to determine facility choice in facility choice module
 
 3.0 Assumptions and limitations
