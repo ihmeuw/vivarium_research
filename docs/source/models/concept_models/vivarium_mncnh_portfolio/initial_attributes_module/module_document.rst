@@ -47,11 +47,7 @@ This module assigns initial simulant attributes.
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
 
-There is no need for a diagram for the initial attributes module of this simulation. Eventually, it is expected that we will assign correlated propensity values for ANC attendance, facility choice, and LBWSG exposure. However, that has not yet been implemented or documented. 
-
-.. todo::
-
-  Fill this section in accordingly
+There is no need for a diagram for the initial attributes module of this simulation. Rather, a list of module outputs and instructions for how to apply them are included in the table below.
 
 .. list-table:: Module outputs
   :header-rows: 1
@@ -59,13 +55,15 @@ There is no need for a diagram for the initial attributes module of this simulat
   * - Output
     - Value
     - Dependencies
-  * - A. 
-    - 
-    - 
-  * - B.
-    - 
-    - 
-
+  * - A. ANC propensity
+    - See the Correlated Propensities section of the facility choice model document for instructions
+    - Will be used to determine ANC attendance in ANC module
+  * - B. LWBSG propensity
+    - See the Correlated Propensities section of the facility choice model document for instructions
+    - Will be used to determine LBWSG exposure in pregnancy module
+  * - C. Facility choice propensity
+    - See the Correlated Propensities section of the facility choice model document for instructions
+    - Will be used to determine facility choice in facility choice module
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++

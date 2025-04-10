@@ -83,14 +83,15 @@ This module determines whether or not a simulant attends an antenatal care visit
     - Information
     - Note
   * - 1: Attends ANC?
-    - Value is *True* if ANC propensity value input is <= ANC1 rate
+    - Compare ANC propensity value input to the ANC1 rate. Ordering of the ANC attendence categories matters: see the "Special ordering of the categories
+" section on the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
     - ANC1 rates (GBD covariate ID 7): get_covariate_estimates(location_id=location_id, gbd_round_id=7, year_id=2021, decomp_step='iterative', covariate_id=7)
     - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
 
 2.4 Module Action Points
 ---------------------------
 
-.. list-table:: Hemoglobin module action point
+.. list-table:: Module action point
   :header-rows: 1
 
   * - Action point

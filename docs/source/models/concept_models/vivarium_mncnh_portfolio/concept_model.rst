@@ -112,9 +112,11 @@ defined as a module input in a subsequent row.
   * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - 
     - * ANC propensity
-    - 
+      * LBWSG propensity
+      * Delivery facility propensity
+    - * :ref:`Facility choice propensity correlation <2024_facility_model_vivarium_mncnh_portfolio>`
   * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    - 
+    - * LBWSG propensity
     - * Maternal age
       * Pregnancy term duration
       * Birth outcome
@@ -149,8 +151,10 @@ defined as a module input in a subsequent row.
       - Note
     * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
       - 
-      - * ANC propensity, birth facility propensity, LBWSG propensity
-      - 
+      - * ANC propensity
+        * LBWSG propensity
+        * Delivery facility propensity
+      - * :ref:`Facility choice propensity correlation <2024_facility_model_vivarium_mncnh_portfolio>`
       - 
     * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       - 
@@ -178,7 +182,8 @@ defined as a module input in a subsequent row.
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
       - New wave II module
     * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-      - * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
+      - * LBWSG propensity
+        * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
         * IV iron coverage (affects birth outcome, gestational age, birthweight)
       - * Birth outcome
         * Gestational age
@@ -208,8 +213,10 @@ defined as a module input in a subsequent row.
     - Nested subcomponents
   * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
     - * (Pregnancy term duration)
+      * Delivery facility propensity
+      * Believed gestational age
     - * Birth facility
-    - 
+    - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
   * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - * (Pregnancy term duration)
       * Birth facility
@@ -238,8 +245,10 @@ defined as a module input in a subsequent row.
       - Note
     * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
       - * (Pregnancy term duration)
+        * Delivery facility propensity
+        * Believed gestational age
       - * Birth facility
-      - 
+      - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
       - 
     * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
       - * (Pregnancy term duration)
