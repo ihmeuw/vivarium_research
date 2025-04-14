@@ -191,9 +191,13 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-* The timing of ANC visits impacts the ability to accurately estimate gestational age, but we use an average instead. 
+* The timing of ANC visits impacts the ability to accurately estimate gestational age, but we use an average instead. (Note: BMGF sent us data on the error distribution of ultrasound accuracy
+  based on gestational age so we should be able to address this limitation. We also found `a paper <https://obgyn.onlinelibrary.wiley.com/doi/10.1002/uog.15894>`_ that estimated uncertainty of 
+  GA dating by ultrasound was 6–7 days at 14 weeks' gestation, 12–14 days at 26 weeks' gestation and > 14 days in the third trimester.)
 * The current version of the model does not include any false positive rates for pre-term or LBW. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
 * Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
+* The data for baseline ultrasound utilization at the ANC is non-ideal for all of the locations. Our data for Ethiopia is most aligned with the value we are trying to find, as it comes from `a paper that
+  estimates ultrasound utilization at ANC <https://pmc.ncbi.nlm.nih.gov/articles/PMC8905208/>`_. For Nigeria, our literature value is less trustworthy, coming from a paper that 
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
