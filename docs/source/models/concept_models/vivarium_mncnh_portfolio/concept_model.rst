@@ -228,7 +228,8 @@ defined as a module input in a subsequent row.
     - * (Pregnancy term duration)
       * Intrapartum azithromycin coverage
     - * Maternal disorders outcomes (see outcome table)
-    - * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+    - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
+      * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
       * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
       * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
 
@@ -261,7 +262,8 @@ defined as a module input in a subsequent row.
         * Intrapartum azithromycin coverage
         * Hemoglobin at birth
       - * Maternal disorders outcomes (see outcome table)
-      - * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+      - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
+        * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
       - Wave II changes: 
