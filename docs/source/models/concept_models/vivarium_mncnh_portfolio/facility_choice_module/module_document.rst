@@ -112,7 +112,7 @@ Additionally, we do not currently consider facility transfers, and think of the 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-* Delivery facility exposure distribution stratified by believed preterm status should match expectations.
+* Delivery facility exposure distribution stratified by believed-preterm status should match expectations.
 
 5.0 References
 +++++++++++++++
