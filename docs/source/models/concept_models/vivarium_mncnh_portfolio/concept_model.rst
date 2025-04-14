@@ -736,7 +736,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.0
     - Wave I neonatal probiotics with scale-up scenarios 
-    - Incomplete
+    - Complete
     - N/A
     - 10
     - 100,000
@@ -882,6 +882,11 @@ Specific observer outputs and their stratifications may vary by model run as nee
       `Neonatal disorders notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09b_vnv_neonatal_disorders_refactor.ipynb>`__
       `Antibiotics & ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09c_vnv_neonatal_acmr-w_antibiotics_refactor.ipynb>`__
       `Antibiotics & CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09e_vnv_neonatal_csmr_w_antibiotics_refactor.ipynb>`__
+  * - 5.1
+    - Validate coverage, RR of probiotics on sepsis (and confirm other causes are unchanged)
+    - Everything is validating! 
+    - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10a_vnv_neonatal_acmr-w_probiotics.ipynb>`__
+      `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10b_vnv_and_scenario_results_probiotics.ipynb>`_
 
 
 .. list-table:: Outstanding model verification and validation issues
