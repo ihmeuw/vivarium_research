@@ -107,7 +107,7 @@ There is a significant amount of background research and analysis that has gone 
 
 See the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`.
 
-Additionally, we do not currently consider facility transfers.
+Additionally, we do not currently consider facility transfers, and think of the delivery facility as the *last* location in a delivery where there were transfers between facilities.
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
