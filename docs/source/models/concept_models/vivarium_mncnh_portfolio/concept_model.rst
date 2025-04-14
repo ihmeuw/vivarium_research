@@ -726,6 +726,14 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 100,000
     - Baseline and alternative scenarios 2 - 7 
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 5.1
+    - Wave I neonatal antibiotics with scale-up scenarios; engineer refactor 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline and alternative scenarios 2 - 7 
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.0
     - Wave I neonatal probiotics with scale-up scenarios 
     - Incomplete
@@ -867,7 +875,13 @@ Specific observer outputs and their stratifications may vary by model run as nee
       There's an RR of 0.78 for antibiotics on preterm with RDS, but we confirmed that when we group this by facility type, there is the expected RR of 1. This is because
       the probability of a simulant receiving CPAP and the probability of receiving antibiotics are not independent (both related to facility choice).
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_31a_vnv_and_scenario_results_antibiotics.ipynb>`__
-
+  * - 5.1
+    - Validate maternal and neonatal disorders and intervention effect sizes after refactor
+    - Everything is validating! We noticed the maternal disorders incidence parquet files were mislabeled, the fix for that has already been implemented. 
+    - `Maternal disorders notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09a_vnv_maternal_disorders_refactor.ipynb>`__
+      `Neonatal disorders notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09b_vnv_neonatal_disorders_refactor.ipynb>`__
+      `Antibiotics & ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09c_vnv_neonatal_acmr-w_antibiotics_refactor.ipynb>`__
+      `Antibiotics & CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09e_vnv_neonatal_csmr_w_antibiotics_refactor.ipynb>`__
 
 
 .. list-table:: Outstanding model verification and validation issues
