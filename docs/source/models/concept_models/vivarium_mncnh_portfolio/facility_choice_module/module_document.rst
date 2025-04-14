@@ -97,7 +97,7 @@ There is a significant amount of background research and analysis that has gone 
     - Instructions
     - Note
   * - A. Delivery facility
-    - *home* / *bemonc* / *cemonc*
+    - *home* / *BEmONC* / *CEmONC*
     - Use delivery facility propensity and believed gestational age input values to assign delivery facility exposure as described in the "Application" column of the module input table
     - 
 
