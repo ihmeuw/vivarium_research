@@ -92,12 +92,8 @@ This module builds upon the :ref:`antenatal care attendance module <2024_vivariu
     - "Yes" if input = 'partial', "No" if input = 'full'
   * - 3
     - Attends 4 ANC visits?
-    - Probability equal to ANC4 rates (GBD covariate ID 8): :code:`get_covariate_estimates(location_id=location_id, gbd_round_id=7, year_id=2021, decomp_step='iterative', covariate_id=8)`
+    - Probability equal to ANC4 rates (GBD covariate ID 8): :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=8)` Note GBD 2023 round_id=9 and release_id=16
     - 
-
-.. todo::
-
-  Confirm if we want to be using GBD 2023 values here?? Note we have used GBD 2021 for existing implementation of ANC1 
 
 2.4: Module Outputs
 -----------------------
