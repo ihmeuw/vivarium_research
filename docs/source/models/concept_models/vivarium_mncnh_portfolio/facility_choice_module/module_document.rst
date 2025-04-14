@@ -37,7 +37,7 @@ Facility choice module
 
 .. note::
 
-  The following infomration was implemented as a placeholder prior to completion of the final facility choice model. It is retained in this note for reference.
+  The following information was implemented as a placeholder prior to completion of the final facility choice model. It is retained in this note for reference.
 
   The placeholder delivery facility probabilities are as follows:
 
