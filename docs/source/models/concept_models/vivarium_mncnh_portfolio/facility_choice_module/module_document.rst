@@ -37,15 +37,15 @@ Facility choice module
 
 .. note::
 
-  This note is a placeholder for future documentation. 
+  The following information was implemented as a placeholder prior to completion of the final facility choice model. It is retained in this note for reference.
 
   The placeholder delivery facility probabilities are as follows:
 
     - Home: 68.3%
 
-    - Hospital: 26.6%
+    - Hospital (CEMONC): 26.6%
 
-    - Clinic/low-level facility: 5.1%
+    - Clinic/low-level facility (BEMONC): 5.1%
 
   The placeholder values are from `this paper on Ethiopia <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_.
 
@@ -55,7 +55,7 @@ Facility choice module
 
   Limitation: Moving to a higher level care facility during the intrapartum period is common (referred up once labor begins if there is an issue) and the ability to do this is often a result of transport available, distance to clinics, etc. We will not include this and instead have simulants remain at a single facility for the whole intrapartum period. 
 
-  TODO: update to be consistent with BEMONC/CEMONC terminology
+  TODO: update to be consistent with BEMONC/CEMONC terminology?
 
 
 
@@ -66,22 +66,12 @@ Facility choice module
 1.0 Overview
 ++++++++++++
 
-.. todo::
-
-  Provide a brief overview of what this module does and note which component it is a part of
+This module uses the delivery facility propensity (an output from the initial attributes model that is correlated with propensity values for ANC attendance and LBWSG exposure) as well as believed gestational age to assign a delivery facility exposure in the intrapartum component of the simulation. 
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
 
-2.1 Module Diagram
-----------------------
-
-.. todo::
-
-  Insert module decision tree diagram. Use squares for action points (numbered with roman numerals) and rounded boxes for decision nodes (numbered with integers).
-
-2.2 Module Inputs
----------------------
+There is a significant amount of background research and analysis that has gone into the facility choice model, which is detailed on the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`. The information on this page highlights the necessary information for implementation only, with module inputs and outputs described in the tables below.
 
 .. list-table:: Module required inputs
   :header-rows: 1
@@ -90,80 +80,39 @@ Facility choice module
     - Source module
     - Application
     - Note
-  * - 
+  * - Delivery facility propensity value
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - Used to determine home birth exposure by comparing to the believed gestational age-specific delivery facility probability values located in the "Conditional delivery facility probabilities" section of the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`. Note that ordering of the delivery facilities is important: see the "Special ordering of the categories" section of the facility choice model document.
     - 
+  * - Believed gestational age
+    - :ref:`AI ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+    - Determines which delivery facility probabily values to use (values found in the "Conditional delivery facility probabilities" section of the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`). If <37 weeks, use believed preterm values. If 37+ weeks use the believed term values.
     - 
-    - 
-
-
-2.3 Module Decision Nodes
------------------------------
-
-.. list-table:: Module decision nodes
-  :header-rows: 1
-
-  * - Decision node
-    - Description
-    - Information
-    - Note
-  * - 1
-    - 
-    - 
-    - 
-  * - 2
-    - 
-    - 
-    - 
-
-2.4 Module Action Points
----------------------------
-
-.. list-table:: Module action point
-  :header-rows: 1
-
-  * - Action point
-    - Description
-    - Information
-    - Note
-  * - I
-    - 
-    - 
-    - 
-  * - II
-    - 
-    - 
-    - 
-
-2.5: Module Outputs
------------------------
 
 .. list-table:: Module outputs
   :header-rows: 1
 
   * - Output
     - Value
-    - Dependencies
-  * - A. 
-    - 
-    - 
-  * - B.
-    - 
+    - Instructions
+    - Note
+  * - A. Delivery facility
+    - *home* / *BEmONC* / *CEmONC*
+    - Use delivery facility propensity and believed gestational age input values to assign delivery facility exposure as described in the "Application" column of the module input table
     - 
 
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-.. todo::
+See the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`.
 
-  List module assumptions and limitations
+Additionally, we do not currently consider facility transfers, and think of the delivery facility as the *last* location in a delivery where there were transfers between facilities.
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-.. todo::
-  
-  List module V&V criteria
+* Delivery facility exposure distribution stratified by believed-preterm status should match expectations.
 
 5.0 References
 +++++++++++++++
