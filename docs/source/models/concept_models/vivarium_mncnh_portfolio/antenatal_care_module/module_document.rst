@@ -32,7 +32,7 @@
 .. _2024_vivarium_mncnh_portfolio_anc_module:
 
 ======================================
-Antenatal care module
+Antenatal care attendance module
 ======================================
 
 .. contents::
@@ -43,10 +43,6 @@ Antenatal care module
 ++++++++++++
 
 This module determines whether or not a simulant attends an antenatal care visit according to their ANC visit propensity value.
-
-.. note::
-
-  This module is expecting to go through updates in wave II of the simulation.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -118,7 +114,7 @@ This module determines whether or not a simulant attends an antenatal care visit
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-* This model does not consider timing of ANC visit
+* We assume that partial term pregnancies have the same probability of ANC attendance as full term pregnancies. Notably the ANC1 covariate from DHS is measured among live and stillbirths only. Notably, first trimester ANC attendance tends to be lower than overall pregnancy ANC attendance [Nigeria-DHS]_. Given that partial term pregnancies are by definition <24 weeks in duration, it is possible that they have lower attendance rates than full term pregnancies *prior to the premature end of their pregnancies.* 
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
@@ -127,4 +123,6 @@ This module determines whether or not a simulant attends an antenatal care visit
 
 5.0 References
 +++++++++++++++
+
+.. [Nigeria-DHS] `2018 Nigeria Standard DHS Final Report <https://dhsprogram.com/publications/publication-FR359-DHS-Final-Reports.cfm>`_
 
