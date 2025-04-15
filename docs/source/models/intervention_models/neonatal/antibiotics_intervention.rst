@@ -196,6 +196,12 @@ Assumptions and Limitations
 - We assume that the delivery facility is also the facility where a sick neonate will seek care for sepsis
 - We assume that the relative risk of sepsis mortality with antibiotics in practice is a value that we can find in the literature
 - We have excluded the effect of antibiotics on pneumonia mortality, because this cause is currently lumped with 'other causes'
+- Baseline coverage data for antibiotics in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2018. (These placeholder values come 
+  from two data sources, both for Ethiopia, both identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final 
+  Report found 30.2% of BEmONC facilities and 76.8% of CEmONC facilities have neonatal antibiotics; the 2016-2018 SARA Report 
+  found 52.9% of BEmONC facilities and 97.2% of CEmONC facilities have neonatal antibiotics.  While we plan a data strategy to 
+  fill the gaps we have used a simple average.)
+- We assume that baseline coverage for antibiotics in home births is 5% (this is not data-backed).
 
 Validation and Verification Criteria
 ------------------------------------
