@@ -165,9 +165,8 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
 
 .. note::
   
-   Need further clarification on outstanding questions from BMGF, see `PR comments <https://github.com/ihmeuw/vivarium_research/pull/1525>`_. `Standard deviation value for no ultrasound <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0272718#sec007>`_.
-
-   Values should be confirmed with further research and data anlaysis
+   BMGF sent us data on the error distribution of ultrasound accuracy based on gestational age so we could make this more accurate. 
+   (See first bullet in Limitations list below for more details.)
 
 
 
@@ -197,7 +196,10 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
 * The current version of the model does not include any false positive rates for pre-term or LBW. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
 * Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
 * The data for baseline ultrasound utilization at the ANC is non-ideal for all of the locations. Our data for Ethiopia is most aligned with the value we are trying to find, as it comes from `a paper that
-  estimates ultrasound utilization at ANC <https://pmc.ncbi.nlm.nih.gov/articles/PMC8905208/>`_. For Nigeria, our literature value is less trustworthy, coming from a paper that 
+  estimates ultrasound utilization at ANC <https://pmc.ncbi.nlm.nih.gov/articles/PMC8905208/>`_. For Nigeria, our literature value is less trustworthy, coming from a paper that reports the percentage of 
+  study participants who had previously had an obstetric ultrasound. We were unable to find any value for Pakistan, instead using data from the India DHS 2015-2016 to inform our Pakistan ultrasound coverage.
+  India is probably not a great proxy for Pakistan, as use of ultrasound technology in India is heavily regulated (`see here <https://pmc.ncbi.nlm.nih.gov/articles/PMC5441446/#:~:text=In%20an%20attempt%20to%20curb,to%20facilitate%20sex%E2%80%93selective%20abortions>`__.).
+
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
