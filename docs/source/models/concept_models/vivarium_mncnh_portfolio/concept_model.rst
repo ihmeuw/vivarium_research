@@ -112,9 +112,11 @@ defined as a module input in a subsequent row.
   * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - 
     - * ANC propensity
-    - 
+      * LBWSG propensity
+      * Delivery facility propensity
+    - * :ref:`Facility choice propensity correlation <2024_facility_model_vivarium_mncnh_portfolio>`
   * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    - 
+    - * LBWSG propensity
     - * Maternal age
       * Pregnancy term duration
       * Birth outcome
@@ -149,8 +151,10 @@ defined as a module input in a subsequent row.
       - Note
     * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
       - 
-      - * ANC propensity, birth facility propensity, LBWSG propensity
-      - 
+      - * ANC propensity
+        * LBWSG propensity
+        * Delivery facility propensity
+      - * :ref:`Facility choice propensity correlation <2024_facility_model_vivarium_mncnh_portfolio>`
       - 
     * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       - 
@@ -159,14 +163,20 @@ defined as a module input in a subsequent row.
         * Child sex
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
       - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules
-    * - Wave II antenatal care module (TODO: add documentation)
+    * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
       - * ANC propensity
-      - * 1st trimester ANC attendance
+      - * ANC attendance
+      - 
+      - No change from wave I
+    * - :ref:`Antenatal care detail <2024_vivarium_mncnh_portfolio_anc_detail_module>`
+      - * ANC attendance
+        * Pregnancy term duration
+      - * First trimester ANC attendance
         * Later pregnancy ANC attendance
       - 
-      - Updated module from wave I implementation
+      - New module in wave II
     * - :ref:`Hemoglobin <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-      - * 1st trimester ANC attendance
+      - * First trimester ANC attendance
         * Later pregnancy ANC attendance
         * IFA/MMS coverage
         * IV iron coverage
@@ -178,7 +188,8 @@ defined as a module input in a subsequent row.
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
       - New wave II module
     * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-      - * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
+      - * LBWSG propensity
+        * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
         * IV iron coverage (affects birth outcome, gestational age, birthweight)
       - * Birth outcome
         * Gestational age
@@ -208,8 +219,10 @@ defined as a module input in a subsequent row.
     - Nested subcomponents
   * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
     - * (Pregnancy term duration)
+      * Delivery facility propensity
+      * Believed gestational age
     - * Birth facility
-    - 
+    - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
   * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - * (Pregnancy term duration)
       * Birth facility
@@ -222,7 +235,8 @@ defined as a module input in a subsequent row.
     - * (Pregnancy term duration)
       * Intrapartum azithromycin coverage
     - * Maternal disorders outcomes (see outcome table)
-    - * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+    - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
+      * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
       * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
       * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
 
@@ -238,8 +252,10 @@ defined as a module input in a subsequent row.
       - Note
     * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
       - * (Pregnancy term duration)
+        * Delivery facility propensity
+        * Believed gestational age
       - * Birth facility
-      - 
+      - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
       - 
     * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
       - * (Pregnancy term duration)
@@ -255,7 +271,8 @@ defined as a module input in a subsequent row.
         * Intrapartum azithromycin coverage
         * Hemoglobin at birth
       - * Maternal disorders outcomes (see outcome table)
-      - * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+      - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
+        * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
       - Wave II changes: 
@@ -573,6 +590,8 @@ Specific observer outputs and their stratifications may vary by model run as nee
 
   * Anemia status at birth counts (none/mild/moderate/severe)
   * YLDs due to anemia in pregnancy
+  * First trimster ANC attendance (stratified by pregnancy term duration)
+  * Later pregnancy ANC attendance (stratified by pregnancy term duration)
 
 .. _mncnh_portfolio_5.0:
 
@@ -701,6 +720,14 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 5.0
     - Wave I neonatal antibiotics with scale-up scenarios 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline and alternative scenarios 2 - 7 
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 5.1
+    - Wave I neonatal antibiotics with scale-up scenarios; engineer refactor 
     - Complete
     - N/A
     - 10
@@ -848,7 +875,13 @@ Specific observer outputs and their stratifications may vary by model run as nee
       There's an RR of 0.78 for antibiotics on preterm with RDS, but we confirmed that when we group this by facility type, there is the expected RR of 1. This is because
       the probability of a simulant receiving CPAP and the probability of receiving antibiotics are not independent (both related to facility choice).
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_31a_vnv_and_scenario_results_antibiotics.ipynb>`__
-
+  * - 5.1
+    - Validate maternal and neonatal disorders and intervention effect sizes after refactor
+    - Everything is validating! We noticed the maternal disorders incidence parquet files were mislabeled, the fix for that has already been implemented. 
+    - `Maternal disorders notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09a_vnv_maternal_disorders_refactor.ipynb>`__
+      `Neonatal disorders notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09b_vnv_neonatal_disorders_refactor.ipynb>`__
+      `Antibiotics & ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09c_vnv_neonatal_acmr-w_antibiotics_refactor.ipynb>`__
+      `Antibiotics & CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09e_vnv_neonatal_csmr_w_antibiotics_refactor.ipynb>`__
 
 
 .. list-table:: Outstanding model verification and validation issues
