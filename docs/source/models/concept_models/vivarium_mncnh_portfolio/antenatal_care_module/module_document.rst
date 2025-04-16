@@ -50,7 +50,7 @@ This module determines whether or not a simulant attends an antenatal care visit
 2.1 Module Diagram
 ----------------------
 
-.. image:: antenatal_care_module_diagram.PNG
+.. image:: antenatal_care_module_diagram.png
 
 2.2 Module Inputs
 ---------------------

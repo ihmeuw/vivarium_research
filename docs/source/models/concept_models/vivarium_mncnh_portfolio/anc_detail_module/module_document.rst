@@ -50,7 +50,7 @@ This module builds upon the :ref:`antenatal care attendance module <2024_vivariu
 2.1 Module Diagram
 ----------------------
 
-.. image:: anc_detail_module_diagram.PNG
+.. image:: anc_detail_module_diagram.png
 
 2.2 Module Inputs
 ---------------------
