@@ -202,6 +202,8 @@ Assumptions and Limitations
   found 52.9% of BEmONC facilities and 97.2% of CEmONC facilities have neonatal antibiotics.  While we plan a data strategy to 
   fill the gaps we have used a simple average.)
 - We assume that baseline coverage for antibiotics in home births is 5% (this is not data-backed).
+- We are currently using a placeholder value for the relative risk of Lack-of-Access-to-Antibiotics on neonatal sepsis mortality, which is not 
+  backed by literature. Further research is needed to find an appropriate value.
 
 Validation and Verification Criteria
 ------------------------------------
