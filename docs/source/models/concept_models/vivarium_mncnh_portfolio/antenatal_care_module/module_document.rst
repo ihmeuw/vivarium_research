@@ -50,7 +50,7 @@ This module determines whether or not a simulant attends an antenatal care visit
 2.1 Module Diagram
 ----------------------
 
-.. image:: antenatal_care_module_diagram.png
+.. image:: antenatal_care_module_diagram.PNG
 
 2.2 Module Inputs
 ---------------------
@@ -66,7 +66,10 @@ This module determines whether or not a simulant attends an antenatal care visit
     - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - Used to determine answer to decision node #1
     - 
-
+  * - Pregnancy term duration
+    - :ref:`Pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+    - Used to determine inform ANC attendance probability
+    - 
 
 2.3 Module Decision Nodes
 -----------------------------
@@ -78,10 +81,27 @@ This module determines whether or not a simulant attends an antenatal care visit
     - Description
     - Information
     - Note
-  * - 1: Attends ANC?
-    - Compare ANC propensity value input to the ANC1 rate. Ordering of the ANC attendence categories matters: see the "Special ordering of the categories" section on the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
-    - ANC1 rates (GBD covariate ID 7): get_covariate_estimates(location_id=location_id, gbd_round_id=7, year_id=2021, decomp_step='iterative', covariate_id=7)
-    - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
+  * - 1
+    - Attends ANC?
+    - Compare ANC propensity value input to the ANC attendance rate specific to simulant's pregnancy term duration in the table below. Ordering of the ANC attendence categories matters: see the "Special ordering of the categories" section on the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
+    - 
+
+.. note::
+
+  Pregnancy term duration-specific ANC attendance rates is a wave II implementation. For wave I, all pregnancies were assigned ANC attendance rates according to the full term value in the table below.
+
+.. list-table:: ANC attendance rate by pregnancy term duration
+  :header-rows: 1
+
+  * - Pregnancy term duration
+    - ANC attendance rate
+    - Note
+  * - Full term
+    - ANC1 rate (GBD covariate ID 7): get_covariate_estimates(location_id=location_id, gbd_round_id=7, year_id=2021, decomp_step='iterative', covariate_id=7)
+    - This is location specific, but not age specific. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
+  * - Partial term
+    - TODO: link to generated data value
+    - Location-specific value generated from DHS equal to proportion of DHS respondents with recent live/still births who attend ANC with timing of first visit occuring before 13 weeks gestation. TODO: link to data generation notebook
 
 2.4 Module Action Points
 ---------------------------
@@ -114,15 +134,15 @@ This module determines whether or not a simulant attends an antenatal care visit
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-* We assume that partial term pregnancies have the same probability of ANC attendance as full term pregnancies. Notably the ANC1 covariate from DHS is measured among live and stillbirths only. Notably, first trimester ANC attendance tends to be lower than overall pregnancy ANC attendance [Nigeria-DHS]_. Given that partial term pregnancies are by definition <24 weeks in duration, it is possible that they have lower attendance rates than full term pregnancies *prior to the premature end of their pregnancies.* 
+* We assume that partial term pregnancies have the same probability of first trimester ANC attendance as full term pregnancies as informed from DHS (which collects this information for full term pregnancies only). 
+
+* We inform the partial term pregnancy ANC visit rates according to the ANC attendance rate with a first visit occuring in the first trimester among full term pregnancies. Notably, partial term pregnancy durations may be as long as 24 weeks, so it is possible that there are partial term pregnancies that do not attend ANC in the first trimester, but do later in pregnancy. However, as our model does not include a realistic partial term pregnancy duration distribution (we assume a uniform distribution between 6 and 24 weeks) and the midpoint of our assumed range (15 weeks) is close to the first trimester threshold (13 weeks), we accept this as a reasonable limitation. 
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-* Verify ANC1 coverage proportion
+* Verify ANC1 coverage proportion (stratified by pregnancy term duration for wave II implementation)
 
 5.0 References
 +++++++++++++++
-
-.. [Nigeria-DHS] `2018 Nigeria Standard DHS Final Report <https://dhsprogram.com/publications/publication-FR359-DHS-Final-Reports.cfm>`_
 

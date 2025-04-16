@@ -50,7 +50,7 @@ This module builds upon the :ref:`antenatal care attendance module <2024_vivariu
 2.1 Module Diagram
 ----------------------
 
-.. image:: anc_detail_module_diagram.png
+.. image:: anc_detail_module_diagram.PNG
 
 2.2 Module Inputs
 ---------------------
@@ -71,7 +71,6 @@ This module builds upon the :ref:`antenatal care attendance module <2024_vivariu
     - Used to determine answer to decision node #2
     - 
 
-
 2.3 Module Decision Nodes
 -----------------------------
 
@@ -91,9 +90,24 @@ This module builds upon the :ref:`antenatal care attendance module <2024_vivariu
     - Informed from pregnancy duration input value
     - "Yes" if input = 'partial', "No" if input = 'full'
   * - 3
-    - Attends 4 ANC visits?
-    - Probability equal to ANC4 rates (GBD covariate ID 8): :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=8)` Note GBD 2023 round_id=9 and release_id=16
+    - Attends ANC in first trimester?
+    - TODO: link to probability values generated from DHS
     - 
+  * - 4
+    - Attends more than one total ANC visit?
+    - TODO: link to probability values generated from DHS
+    - 
+
+2.3.1 Notes on data to inform decision nodes 3, 4, and 5
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Probability of "yes" for decision nodes 3 will be equal to the proportion of location-specific DHS respondents with recent live/still births and a timing of first ANC visit before 13 weeks gestation conditional on attending at least one ANC visit.
+
+Probability of "yes" for decision node 4 will be equal to the proportion of location-specific DHS respondents with recent live/still births who attend more than 1 ANC visit conditional on attending first ANC visit prior to 13 weeks gestation. 
+
+.. todo::
+
+  Link to data generation notebook
 
 2.4: Module Outputs
 -----------------------
@@ -114,18 +128,14 @@ This module builds upon the :ref:`antenatal care attendance module <2024_vivariu
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-* We assume that partial term pregnancies have the same probability of ANC coverage as full term pregnancies and assume that these visits occur exclusively during the first trimester given that these pregnancies do not progress late into pregnancy. Note that in effect this makes first trimester ANC attendance rate higher among partial term pregnancies than full term pregnancies, which is not necessarily logical. We accept this as a limitation given that the interventions partial term pregnancies can receive at a first trimester visit (MMS, AI ultrasound) primarily affect outcomes that do not apply to partial term pregnancies (MMS->stillbirth, MMS->LBWSG, MMS->hemoglobin->sepsis/obstructed labor, and ultrasound/facility delivery). However, it is possible that we will overestimate the impact of MMS->hemoglobin on anemia YLDs and depressive disorders among partial term pregnancies as a result of this assumption.
-
-  - Note that an alternative strategy would be to assume the same first trimester ANC attendance rate for partial term pregnancies as full term pregnancies (equal to ANC4 proportion), but this would require us to use different ANC attendance rates for each pregnancy term duration in the already documented and implemented ANC attendance module. Also note that the data on ANC attendance in DHS is collected on live and still births (full term pregnancies) only.
-
-* We assume that simulants with full term pregnancies **only** attend ANC visits in the first trimester if they attend at least 4 ANC visits in total. While this assumption is unlikely to be 100% accurate, we accept it as a limitation given that it will only affect the proportion of the population who receives MMS/IFA prior to being screened for IV iron and will not affect the overall eligible population size for either of these interventions. 
+* We assume that if a simulant attends an ANC visit in the first trimester and attends at least one subsequent ANC visit that the subsequent ANC visit occured during the "later pregnancy" period in the 2nd or 3rd trimester rather than attending two visits during the first trimester.
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
 * Overall ANC attendance should match expected ANC1 values among the overall population as well as stratified by pregnancy term length
 * Confirm no later pregnancy ANC attendance among partial term pregnancies
-* Confirm first trimester ANC attendance rate among full term pregnancies is equal to ANC4 proportion
+* Confirm first trimester and later pregnancy ANC attendance rates among full term pregnancies matches input data values
 
 5.0 References
 +++++++++++++++
