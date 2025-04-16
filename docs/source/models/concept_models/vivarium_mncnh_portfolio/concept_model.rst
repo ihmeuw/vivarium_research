@@ -165,8 +165,9 @@ defined as a module input in a subsequent row.
       - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules
     * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
       - * ANC propensity
+        * Pregnancy term duration
       - * ANC attendance
-      - 
+      - ANC attendance rate made pregnancy term duration-specific in wave II update
       - No change from wave I
     * - :ref:`Antenatal care detail <2024_vivarium_mncnh_portfolio_anc_detail_module>`
       - * ANC attendance
