@@ -136,8 +136,8 @@ This module will:
     - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
     - 
   * - 7 
-    - Hemoglobin <100 g/L (Based on IFA/MMS adjusted exposure)
-    - Assess individual hemoglobin exposure *after* action points I, II, and III have been executed (and *before* IV, V, and VI). Assume screening sensitivity of 85% and specificity of 80% -- TODO: add detail for how to apply screening accuracy.
+    - Hemoglobin screening value <100 g/L? (Based on IFA/MMS adjusted exposure)
+    - Instructions detailed in section 2.3.1 below
     - 
   * - 8
     - Low ferritin?
@@ -151,6 +151,21 @@ This module will:
     - Also receive IFA/MMS *for the first time* at late pregnancy visit?
     - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
     - 
+
+2.3.1 Hemoglobin Screening Accuracy Instructions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For decision node 7, we will assess whether or not the result of a simulant's minimally invasive blood test hemoglobin screening is <100 g/L, which may be different than whether a simulant's *actual* hemoglobin exposure is <100 g/L. We will do this based on assumed sensitivity and specificity levels for the hemoglobin screening test as informed from the Gates Foundation and listed below:
+
+- Sensitivity (percent of true positives that test positive): 85% 
+- Specificity (percent of true negatives that test negative): 80%
+
+Follow the steps below to determine the answer to decision node #7:
+
+1. Assess a simulants "true" low hemoglobin status based on their hemoglobin exposure *after* action points I, II, and III have been executed (and *before* IV, V, and VI). Low hemoglobin status corresponds to values of <100 g/L and adequate hemoglobin status corresponds to values of 100+ g/L.
+2. For simulants that are truly low hemoglobin, assign tests low hemoglobin status to 85% (sensitivity value) and tests adequate hemoglobin status to 15% (100 - sensitivity value of 85)
+3. For simulants that are truly adequate hemoglobin, assign tests adequate hemoglobin status to 80% (specificity) and tests low hemoglobin status to 20% (100 - specificty value of 80)
+4. Use the test hemoglobin status to determine the answer to decision node 7 (answer is "yes" if they have test low hemoglobin status and "no" if they have test adequate hemoglobin status)
 
 2.4 Module Action Points
 ---------------------------
@@ -306,6 +321,8 @@ The following pseudocode outlines how this can be done.
 - We assume complete adherence of oral iron intervention.
 
 - We assume no additional effect of oral iron supplementation when taken following IV iron administration
+
+- We assume a hemoglobin screening sensitivity of 85% and specificity of 80%, as requested by the Gates Foundation
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
