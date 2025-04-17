@@ -285,10 +285,6 @@ defined as a module input in a subsequent row.
       - 
       - 
 
-.. todo::
-
-  Remove anemia YLDs from maternal hemorrhage cause model document
-
 .. note::
 
   Only live births proceed to the neonatal component. Therefore, birth outcome is a de facto input to all modules in the neonatal component.
