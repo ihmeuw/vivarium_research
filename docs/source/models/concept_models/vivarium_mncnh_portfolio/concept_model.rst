@@ -279,10 +279,13 @@ defined as a module input in a subsequent row.
 
         * Hemoglobin at birth as a variable that impacts maternal disorders
     * - Postpartum hemoglobin (TODO: add documentation)
-      - 
-      - 
-      - 
-      - 
+      - * Hemoglobin at birth
+        * Maternal hemorrhage incidence
+      - * Postpartum anemia outcomes (see output table)
+      - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
+        * :ref:`Anemia impairment <2019_anemia_impairment>`
+        * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>` 
+      - New module in wave II
 
 .. todo::
 
