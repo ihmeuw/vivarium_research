@@ -56,6 +56,10 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
 
 .. todo::
 
+  While it appears to be the case based on the values in shared functions, confirm that there are no relevant changes in the maternal hemorrhage severity split model between GBD 2019 and GBD 2023 that will impact the :ref:`maternal hemorrhage risk effects document <2019_risk_effect_maternal_hemorrhage>` when the GBD 2023 methods appendix is published
+
+.. todo::
+
   Confirm whether we want to measure anemia YLDs on a different timescale than the six weeks postpartum that we have used for similar models in the past.
 
 .. list-table:: Module required inputs
