@@ -278,7 +278,7 @@ defined as a module input in a subsequent row.
       - Wave II changes: 
 
         * Hemoglobin at birth as a variable that impacts maternal disorders
-        * Anemia sequelae excluded from maternal hemorrhage YLDs
+        * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
     * - Postpartum hemoglobin (TODO: add documentation)
       - 
       - 
