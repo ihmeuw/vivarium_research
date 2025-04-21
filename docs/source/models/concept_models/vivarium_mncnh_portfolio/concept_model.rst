@@ -278,15 +278,16 @@ defined as a module input in a subsequent row.
       - Wave II changes: 
 
         * Hemoglobin at birth as a variable that impacts maternal disorders
-    * - Postpartum hemoglobin (TODO: add documentation)
-      - 
-      - 
-      - 
-      - 
+        * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
+    * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
+      - * Hemoglobin at birth
+        * Maternal hemorrhage incidence
+      - * Postpartum anemia outcomes (see output table)
+      - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
+        * :ref:`Anemia impairment <2019_anemia_impairment>`
+        * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>` 
+      - New module in wave II
 
-.. todo::
-
-  Remove anemia YLDs from maternal hemorrhage cause model document
 
 .. note::
 
@@ -590,6 +591,8 @@ Specific observer outputs and their stratifications may vary by model run as nee
 
   * Anemia status at birth counts (none/mild/moderate/severe)
   * YLDs due to anemia in pregnancy
+  * Postpartum anemia status counts (non/mild/moderate/severe)
+  * YLDs due to anemia in the postpartum period
   * First trimster ANC attendance (stratified by pregnancy term duration)
   * Later pregnancy ANC attendance (stratified by pregnancy term duration)
 
