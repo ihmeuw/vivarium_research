@@ -540,6 +540,8 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 
   * - Ultrasound coverage counts (AI-assisted, standard, none)
     - 
+  * - Birth counts
+    - Delivery facility type, pregnancy outcome, child sex, scenario, and input draw
   * - Pregnancy term counts (full or partial)
     - 
   * - Maternal GBD age group counts
