@@ -745,7 +745,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 100,000
     - Baseline and alternative scenarios 2 - 10 
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
-  * - 6.1.1
+  * - 6.1
     - Rerun LBWSG PAF calculation for Ethiopia
     - Incomplete
     - N/A
