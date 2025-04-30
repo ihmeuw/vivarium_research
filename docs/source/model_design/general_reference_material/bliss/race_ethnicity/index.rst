@@ -974,3 +974,7 @@ Reporting results accurately
 
 .. [Arias_2016]
     Arias E, Heron MP, Hakes JK. The validity of race and Hispanic origin reporting on death certificates in the United States: an update. https://pubmed.ncbi.nlm.nih.gov/28436642/
+
+.. [Noronha_2024]
+    Noronha V., Budukh A., Chaturvedi P., Anne S., Punjabi A., Bhaskar M., Sahoo T.P., Menon N., Shah M., Batra U., Nathany S., Kumar R., Shetty O., Pai Ghodke T., Mahajan A., Chakrabarty N., Hait S., Tripathi S.C., Chougule A., Chandrani P., Tripathi V.K., Jiwnani S., Tibdewal A., Maheshwari G., Kothari R., Patil V.M., Bhat R.S., Khanderia M., Mahajan V., Prakash R., Sharma S., Jabbar A.A., Yadav B.K., Uddin A.F.M.K., Dutt A., Prabhash K. Uniqueness of lung cancer in Southeast Asia. https://doi.org/10.1016/j.lansea.2024.100430.
+
