@@ -40,11 +40,13 @@ Inclusive Health Metrics: Race and Ethnicity
 Overview
 +++++++++++++++++++++
 
-On this page you will find ...
+On this page you will find our guiding principles,
+an introduction to race and ethnicity from a scientific perspective,
+a glossary of commonly used terms related
+to race and ethnicity, recommendations for how to address race- and ethnicity-related limitations in external data
+sources, discussion of the implications of imperfect proxy measures with regards to race and ethnicity,
+examples of how our team has incorporated BLISS into our work process, and more! 
 
-.. todo::
-
-    Fill out this section to describe what this guide will include.
 
 If you have any questions or comments about the content on this page - please reach out! You can
 contact us directly `on GitHub <https://github.com/ihmeuw/vivarium_research/issues?q=is%3Aopen+is%3Aissue+label%3Abliss>`_ or anonymously
