@@ -190,9 +190,7 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-* The timing of ANC visits impacts the ability to accurately estimate gestational age, but we use an average instead. (Note: BMGF sent us data on the error distribution of ultrasound accuracy
-  based on gestational age so we should be able to address this limitation. We also found `a paper <https://obgyn.onlinelibrary.wiley.com/doi/10.1002/uog.15894>`_ that estimated uncertainty of 
-  GA dating by ultrasound was 6–7 days at 14 weeks' gestation, 12–14 days at 26 weeks' gestation and > 14 days in the third trimester.)
+* The timing of ANC visits impacts the ability to accurately estimate gestational age, but we use an average instead. 
 * The current version of the model does not include any false positive rates for pre-term or LBW. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
 * Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
 * The data for baseline ultrasound utilization at the ANC is non-ideal for all of the locations. Our data for Ethiopia is most aligned with the value we are trying to find, as it comes from `a paper that
@@ -204,6 +202,23 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
 
   If more suitable baseline coverage data for standard ultrasound utilization at ANCs for Nigeria or Pakistan, we should use that data instead and update 
   this documentation accordingly.
+
+.. note:: 
+  BMGF sent us data on the error distribution of ultrasound accuracy based on gestational age so we should be able to address the first limitation.
+  We also found `a paper <https://obgyn.onlinelibrary.wiley.com/doi/10.1002/uog.15894>`_ that estimated uncertainty of GA dating by ultrasound was 6–7 
+  days at 14 weeks' gestation, 12–14 days at 26 weeks' gestation and > 14 days in the third trimester.
+
+  From Nathaniel: 
+  I think the gestational age in the BMGF data and the gestational age in the paper are actually referring to two different things, and we may want to take both types of variation into account:
+
+  The BMGF microdata compares the gestational age at birth estimated by ultrasound (given at some unknown time during the pregnancy) with gestational age at birth estimated by last menstrual period (LMP).
+  I think the paper compares the gestational age estimated by an ultrasound in late pregnancy at the time of the late ultrasound with the "true" gestational age at the time of the late ultrasound, determined 
+  from a combination of LMP and an ultrasound early in the pregnancy.
+  From the BMGF data, I was interested in seeing whether there was bias (nonzero 1st moment) or skew (nonzero 3rd moment) in the error distribution depending on the gestational age at birth. It looks like there is: 
+  For babies born early, you're more likely to overestimate their gestational age, whereas for babies born late, you're more likely to underestimate their gestational age (that is, when using LMP vs. an ultrasound).
+
+  From the literature, I'm interested in how the size of the variance (2nd moment) of the error changes with the timing of when the ultrasound is administered. We know that the variance is higher when the ultrasound 
+  is given later in pregnancy, and the paper quantifies how much higher.
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
