@@ -197,6 +197,13 @@ Assumptions and Limitations
 - We assume that CPAP availability captures actual use, and not simply the machine being in the facility 
 - We assume that the delivery facility is the final facility in the care continum for deliveries that are transferred due to complications
 - We assume that the relative risk of RDS mortality with CPAP in practice is similar to that found in the Cochrane Review meta-analysis
+- Baseline coverage data for CPAP in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2016 based on the EmONC Final Report. 
+  We assume that Nigeria and Pakistan health systems have the same CPAP availability.
+
+.. todo::
+
+  If more suitable baseline coverage data for CPAP availability at BEmONC and CEmONC for Nigeria or Pakistan, we should use that data instead and update 
+  this documentation accordingly.
 
 Validation and Verification Criteria
 ------------------------------------
