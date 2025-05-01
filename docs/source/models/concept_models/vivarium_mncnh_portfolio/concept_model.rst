@@ -604,7 +604,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
 ++++++++++++++++++++++
 
 .. list-table:: Model run plan as of October 4, 2024
-  :widths: 3 3 3 3 3 3 3 15
+  :widths: 3 3 3 3 3 3 3 5 15
   :header-rows: 1
 
   * - Number
