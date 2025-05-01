@@ -112,9 +112,11 @@ defined as a module input in a subsequent row.
   * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - 
     - * ANC propensity
-    - 
+      * LBWSG propensity
+      * Delivery facility propensity
+    - * :ref:`Facility choice propensity correlation <2024_facility_model_vivarium_mncnh_portfolio>`
   * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    - 
+    - * LBWSG propensity
     - * Maternal age
       * Pregnancy term duration
       * Birth outcome
@@ -149,8 +151,10 @@ defined as a module input in a subsequent row.
       - Note
     * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
       - 
-      - * ANC propensity, birth facility propensity, LBWSG propensity
-      - 
+      - * ANC propensity
+        * LBWSG propensity
+        * Delivery facility propensity
+      - * :ref:`Facility choice propensity correlation <2024_facility_model_vivarium_mncnh_portfolio>`
       - 
     * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       - 
@@ -184,7 +188,8 @@ defined as a module input in a subsequent row.
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
       - New wave II module
     * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-      - * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
+      - * LBWSG propensity
+        * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
         * IV iron coverage (affects birth outcome, gestational age, birthweight)
       - * Birth outcome
         * Gestational age
@@ -214,8 +219,10 @@ defined as a module input in a subsequent row.
     - Nested subcomponents
   * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
     - * (Pregnancy term duration)
+      * Delivery facility propensity
+      * Believed gestational age
     - * Birth facility
-    - 
+    - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
   * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - * (Pregnancy term duration)
       * Birth facility
@@ -228,7 +235,8 @@ defined as a module input in a subsequent row.
     - * (Pregnancy term duration)
       * Intrapartum azithromycin coverage
     - * Maternal disorders outcomes (see outcome table)
-    - * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+    - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
+      * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
       * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
       * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
 
@@ -244,8 +252,10 @@ defined as a module input in a subsequent row.
       - Note
     * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
       - * (Pregnancy term duration)
+        * Delivery facility propensity
+        * Believed gestational age
       - * Birth facility
-      - 
+      - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
       - 
     * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
       - * (Pregnancy term duration)
@@ -261,21 +271,23 @@ defined as a module input in a subsequent row.
         * Intrapartum azithromycin coverage
         * Hemoglobin at birth
       - * Maternal disorders outcomes (see outcome table)
-      - * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+      - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
+        * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
       - Wave II changes: 
 
         * Hemoglobin at birth as a variable that impacts maternal disorders
-    * - Postpartum hemoglobin (TODO: add documentation)
-      - 
-      - 
-      - 
-      - 
+        * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
+    * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
+      - * Hemoglobin at birth
+        * Maternal hemorrhage incidence
+      - * Postpartum anemia outcomes (see output table)
+      - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
+        * :ref:`Anemia impairment <2019_anemia_impairment>`
+        * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>` 
+      - New module in wave II
 
-.. todo::
-
-  Remove anemia YLDs from maternal hemorrhage cause model document
 
 .. note::
 
@@ -579,6 +591,8 @@ Specific observer outputs and their stratifications may vary by model run as nee
 
   * Anemia status at birth counts (none/mild/moderate/severe)
   * YLDs due to anemia in pregnancy
+  * Postpartum anemia status counts (non/mild/moderate/severe)
+  * YLDs due to anemia in the postpartum period
   * First trimster ANC attendance (stratified by pregnancy term duration)
   * Later pregnancy ANC attendance (stratified by pregnancy term duration)
 
@@ -715,9 +729,17 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 100,000
     - Baseline and alternative scenarios 2 - 7 
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 5.1
+    - Wave I neonatal antibiotics with scale-up scenarios; engineer refactor 
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline and alternative scenarios 2 - 7 
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.0
     - Wave I neonatal probiotics with scale-up scenarios 
-    - Incomplete
+    - Complete
     - N/A
     - 10
     - 100,000
@@ -856,7 +878,18 @@ Specific observer outputs and their stratifications may vary by model run as nee
       There's an RR of 0.78 for antibiotics on preterm with RDS, but we confirmed that when we group this by facility type, there is the expected RR of 1. This is because
       the probability of a simulant receiving CPAP and the probability of receiving antibiotics are not independent (both related to facility choice).
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_31a_vnv_and_scenario_results_antibiotics.ipynb>`__
-
+  * - 5.1
+    - Validate maternal and neonatal disorders and intervention effect sizes after refactor
+    - Everything is validating! We noticed the maternal disorders incidence parquet files were mislabeled, the fix for that has already been implemented. 
+    - `Maternal disorders notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09a_vnv_maternal_disorders_refactor.ipynb>`__
+      `Neonatal disorders notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09b_vnv_neonatal_disorders_refactor.ipynb>`__
+      `Antibiotics & ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09c_vnv_neonatal_acmr-w_antibiotics_refactor.ipynb>`__
+      `Antibiotics & CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09e_vnv_neonatal_csmr_w_antibiotics_refactor.ipynb>`__
+  * - 6.0
+    - Validate coverage, RR of probiotics on sepsis (and confirm other causes are unchanged)
+    - Everything is validating! 
+    - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10a_vnv_neonatal_acmr-w_probiotics.ipynb>`__
+      `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10b_vnv_and_scenario_results_probiotics.ipynb>`__
 
 
 .. list-table:: Outstanding model verification and validation issues
