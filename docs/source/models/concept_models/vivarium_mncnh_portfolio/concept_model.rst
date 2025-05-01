@@ -981,6 +981,12 @@ Specific observer outputs and their stratifications may vary by model run as nee
       - `Source of truth notebook for testing neonatal disorders ACMR here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_28a_vnv_neonatal_acmr.ipynb>`_
       - `Excel spreadsheet of neonatal ACMR V&V run list here <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B1DCEBE2A-AC51-49D3-8553-B0FBBEA276B1%7D&file=Neonatal%20Disorders%20ACMR%20Model%20Run%20List.xlsx&action=default&mobileredirect=true>`_
 
+.. note:: 
+
+  Some of the notebook URLs for the older runs might be out-of-date. If you click one of these links and it gives
+  you a 404 error, add to your URL `/old_vnv_notebooks/` after `verification_and_validation`, and that should take you
+  to the right place!
+
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
 
