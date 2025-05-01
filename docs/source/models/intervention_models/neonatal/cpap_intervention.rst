@@ -200,6 +200,11 @@ Assumptions and Limitations
 - Baseline coverage data for CPAP in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2016 based on the EmONC Final Report. 
   We assume that Nigeria and Pakistan health systems have the same CPAP availability.
 
+.. todo::
+
+  If more suitable baseline coverage data for CPAP availability at BEmONC and CEmONC for Nigeria or Pakistan, we should use that data instead and update 
+  this documentation accordingly.
+
 Validation and Verification Criteria
 ------------------------------------
 

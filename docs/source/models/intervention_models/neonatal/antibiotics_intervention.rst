@@ -205,6 +205,11 @@ Assumptions and Limitations
 - We are currently using a placeholder value for the relative risk of Lack-of-Access-to-Antibiotics on neonatal sepsis mortality, which is not 
   backed by literature. Further research is needed to find an appropriate value.
 
+  .. todo::
+
+  If more suitable baseline coverage data for antibiotics for neonatal sepsis at all facility types in all 3 locations, we should use that data instead and update 
+  this documentation accordingly. We also need to find a more trustworthy value for the relative risk of antibiotics on neonatal sepsis.
+
 Validation and Verification Criteria
 ------------------------------------
 

@@ -200,6 +200,10 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
   study participants who had previously had an obstetric ultrasound. We were unable to find any value for Pakistan, instead using data from the India DHS 2015-2016 to inform our Pakistan ultrasound coverage.
   India is probably not a great proxy for Pakistan, as use of ultrasound technology in India is heavily regulated (`see here <https://pmc.ncbi.nlm.nih.gov/articles/PMC5441446/#:~:text=In%20an%20attempt%20to%20curb,to%20facilitate%20sex%E2%80%93selective%20abortions>`__.).
 
+.. todo::
+
+  If more suitable baseline coverage data for standard ultrasound utilization at ANCs for Nigeria or Pakistan, we should use that data instead and update 
+  this documentation accordingly.
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
