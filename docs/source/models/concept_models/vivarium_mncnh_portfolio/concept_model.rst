@@ -614,6 +614,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Number of draws
     - Population size per draw
     - Scenarios
+    - File path 
     - Note
   * - 1
     - Wave I Pregnancy V&V
@@ -622,6 +623,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline only
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/pregnancy``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 2
     - Wave I Maternal disorders V&V
@@ -630,6 +632,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline only
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/maternal_disorders``
     - Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update 
       the Pakistan OL prevalence values from GBD 2021 to GBD 2023. Locations include Pakistan, Nigeria, and Ethiopia. 
       10 seeds * 10,000 simulants = 100,000 total population.
@@ -642,6 +645,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Locations include Pakistan, Nigeria, and Ethiopia. 
       10 seeds * 10,000 simulants = 100,000 total population.
     - Baseline only
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/neonatal_disorders``
   * - 3.1
     - Wave I Neonatal disorders V&V with correct LBWSG distribution
     - Complete
@@ -649,6 +653,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline only
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/neonatal_disorders``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 3.2
     - Wave I Neonatal disorders V&V with LBWSG component removed
@@ -657,6 +662,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline only
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/no_lbwsg``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 3.3
     - Wave I Neonatal disorders V&V with early NN observer bugfix
@@ -665,6 +671,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline only
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/risk_effects``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.1
     - Wave I CPAP 
@@ -673,6 +680,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline only
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.2
     - Wave I CPAP with observer for counts per facility type
@@ -681,6 +689,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline only
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap_2``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.3
     - Wave I CPAP with addition of a delivery facility column in births observer and CPAP availability stratification
@@ -690,6 +699,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline only
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap_3``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.4
     - Wave I CPAP with updated determination of delivery facility type
@@ -698,6 +708,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline only
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap_4``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.5
     - Wave I CPAP with bugfix for negative other causes mortality rates
@@ -706,6 +717,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline only
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap_5``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.6
     - Wave I CPAP with scale-up scenarios 
@@ -714,6 +726,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline and alternative scenarios 2, 3, and 4
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap_full_scenarios``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 4.7
     - Correct pregnancy duration for partial term pregnancies
@@ -722,6 +735,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline and alternative scenarios 2, 3, and 4
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/birth_exposure_2``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 5.0
     - Wave I neonatal antibiotics with scale-up scenarios 
@@ -730,6 +744,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline and alternative scenarios 2 - 7 
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/antibiotics``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 5.1
     - Wave I neonatal antibiotics with scale-up scenarios; engineer refactor 
@@ -738,6 +753,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline and alternative scenarios 2 - 7 
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/children_mapped``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.0
     - Wave I neonatal probiotics with scale-up scenarios 
@@ -746,6 +762,43 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline and alternative scenarios 2 - 10 
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/probiotics``
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 6.0.1
+    - Wave I neonatal disorders ACMR with 200k population without interventions
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline 
+    - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/no_interventions/``
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 6.0.2
+    - Wave I neonatal disorders ACMR with 2 million population
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline
+    - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/acmr-2mil/``
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 6.0.3
+    - Wave I neonatal disorders ACMR with rate to probability conversion
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline 
+    - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/rate_conversion/``
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 6.0.4
+    - Wave I neonatal disorders ACMR with raw CMSR
+    - Complete
+    - N/A
+    - 10
+    - 100,000
+    - Baseline
+    - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/raw_csmr/``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 7.0
     - Wave I azithromycin 
@@ -754,6 +807,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/azithromycin``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 8.0
     - Wave I misoprostol
@@ -762,6 +816,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline 
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/misoprostol``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 9.0
     - Wave I antenatal corticosteroids
@@ -770,6 +825,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/acs``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
 
 .. note:: 
@@ -819,7 +875,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 3.1
     - Validate LBWSG exposure distribution
     - LBWSG distributions in artifact, GBD, and simulation are now matching, but preterm deaths still look too low in the simulation
-    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/lbwsg_distribution.ipynb>`__
+    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/old_vnv_notebooks/lbwsg_distribution.ipynb>`__
   * - 3.2
     - Validate all-cause mortality for early and late neonatal age groups with LBWSG component removed
     - Early neonatal mortality is still being overestimated in the simulation 
@@ -833,42 +889,48 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Early neonatal mortality is validating now! 
       Note: Ali noticed in the LBWSG interactive sim that the state table and pipeline values for LBWSG exposure don't match, but engineers confirmed this is okay,
       the pipeline values refresh after being recorded in the state table (and then are not used again).
-    - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_2_27_vnv_neonatal_acmr.ipynb>`__
-      `LBWSG interactive sim <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/20250313_lbwsg_effects_interactive_simulation.ipynb>`__
+    - 
+      - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/old_vnv_notebooks/2025_2_27_vnv_neonatal_acmr.ipynb>`__
+      - `LBWSG interactive sim <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/20250313_lbwsg_effects_interactive_simulation.ipynb>`__
   * - 4.1
     - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
     - Cannot validate, need observer with counts per facility type 
-    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
-      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
-      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+    - 
+      - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      - `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
 
   * - 4.2
     - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
     - Cannot validate, need to add delivery facility column in births observer and stratification for CPAP availability 
-    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
-      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
-      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+    - 
+      - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      - `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
 
   * - 4.3
     - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
     - Not validating, need to update how we determine which delivery facility type a simulant will go to 
-    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
-      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
-      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+    - 
+      - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      - `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
 
   * - 4.4
     - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
     - Not validating, we are seeing negative mortality rates for Other causes 
-    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
-      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
-      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+    - 
+      - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      - `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
 
   * - 4.5
     - Validate RR of CPAP on RDS preterm (and confirm other causes are unchanged)
     - CSMRs and ACMR are all validating now, with the bugfix to adjust all negative values to 0 and rescale the rest of the RRs to add up to 1
-    - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
-      `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
-      `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
+    - 
+      - `Full run notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18a_vnv_cpcp_full_run.ipynb>`__
+      - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18b_vnv_neonatal_acmr-w_cpap.ipynb>`__
+      - `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
 
   * - 4.7
     - Validate partial term pregnancy duration is between 6 and 24 weeks and uniformly distributed. 
@@ -883,16 +945,41 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 5.1
     - Validate maternal and neonatal disorders and intervention effect sizes after refactor
     - Everything is validating! We noticed the maternal disorders incidence parquet files were mislabeled, the fix for that has already been implemented. 
-    - `Maternal disorders notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09a_vnv_maternal_disorders_refactor.ipynb>`__
-      `Neonatal disorders notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09b_vnv_neonatal_disorders_refactor.ipynb>`__
-      `Antibiotics & ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09c_vnv_neonatal_acmr-w_antibiotics_refactor.ipynb>`__
-      `Antibiotics & CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09e_vnv_neonatal_csmr_w_antibiotics_refactor.ipynb>`__
+    - 
+      - `Maternal disorders notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09a_vnv_maternal_disorders_refactor.ipynb>`__
+      - `Neonatal disorders notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09b_vnv_neonatal_disorders_refactor.ipynb>`__
+      - `Antibiotics & ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09c_vnv_neonatal_acmr-w_antibiotics_refactor.ipynb>`__
+      - `Antibiotics & CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09e_vnv_neonatal_csmr_w_antibiotics_refactor.ipynb>`__
   * - 6.0
     - Validate coverage, RR of probiotics on sepsis (and confirm other causes are unchanged)
-    - Everything is validating! 
-    - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10a_vnv_neonatal_acmr-w_probiotics.ipynb>`__
-      `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10b_vnv_and_scenario_results_probiotics.ipynb>`__
-
+    - Neonatal ACMR looks off, residuals have gotten increasingly worse with additional interventions
+    - 
+      - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10a_vnv_neonatal_acmr-w_probiotics.ipynb>`__
+      - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10b_vnv_and_scenario_results_probiotics.ipynb>`__
+  * - 6.0.1
+    - Validate neonatal disorders ACMR with 200k population without interventions
+    - Used the attached notebook and spreadsheet to figure out which runs were validating with ACMR and which were not
+    - 
+      - `Source of truth notebook for testing neonatal disorders ACMR here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_28a_vnv_neonatal_acmr.ipynb>`_
+      - `Excel spreadsheet of neonatal ACMR V&V run list here <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B1DCEBE2A-AC51-49D3-8553-B0FBBEA276B1%7D&file=Neonatal%20Disorders%20ACMR%20Model%20Run%20List.xlsx&action=default&mobileredirect=true>`_
+  * - 6.0.2
+    - Validate neonatal disorders ACMR in baseline scenario with 2 million population
+    - Used the attached notebook and spreadsheet to figure out which runs were validating with ACMR and which were not
+    - 
+      - `Source of truth notebook for testing neonatal disorders ACMR here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_28a_vnv_neonatal_acmr.ipynb>`_
+      - `Excel spreadsheet of neonatal ACMR V&V run list here <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B1DCEBE2A-AC51-49D3-8553-B0FBBEA276B1%7D&file=Neonatal%20Disorders%20ACMR%20Model%20Run%20List.xlsx&action=default&mobileredirect=true>`_
+  * - 6.0.3
+    - Validate neonatal disorders ACMR when reverting the rate to probability conversion for mortality rates when choosing when neonates die
+    - Used the attached notebook and spreadsheet to figure out which runs were validating with ACMR and which were not
+    - 
+      - `Source of truth notebook for testing neonatal disorders ACMR here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_28a_vnv_neonatal_acmr.ipynb>`_
+      - `Excel spreadsheet of neonatal ACMR V&V run list here <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B1DCEBE2A-AC51-49D3-8553-B0FBBEA276B1%7D&file=Neonatal%20Disorders%20ACMR%20Model%20Run%20List.xlsx&action=default&mobileredirect=true>`_
+  * - 6.0.4
+    - Validate neonatal disorders ACMR when using raw CSMRs for the non-preterm neonatal causes, removed LBWSG RRs on those neonatal causes
+    - Used the attached notebook and spreadsheet to figure out which runs were validating with ACMR and which were not
+    - 
+      - `Source of truth notebook for testing neonatal disorders ACMR here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_28a_vnv_neonatal_acmr.ipynb>`_
+      - `Excel spreadsheet of neonatal ACMR V&V run list here <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B1DCEBE2A-AC51-49D3-8553-B0FBBEA276B1%7D&file=Neonatal%20Disorders%20ACMR%20Model%20Run%20List.xlsx&action=default&mobileredirect=true>`_
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
