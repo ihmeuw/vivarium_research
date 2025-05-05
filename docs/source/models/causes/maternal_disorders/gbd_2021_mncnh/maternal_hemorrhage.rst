@@ -314,11 +314,14 @@ calculations as well as for the calculation of YLDs in the next section.
       - rate of maternal hemorrhage YLDs per person-year
       - como
       -
+    * - anemia_yld_rate_c367
+      - rate of YLDs due to anemia caused by maternal hemorrhage per person-year
+      - como, sum of YLDs per person year across sequela 182, 183, and 184
+      - 
     * - ylds_per_case_c367
       - YLDs per case of maternal hemorrhage
-      - yld_rate_c367 / incidence_c367
-      -
-
+      - (yld_rate_c367 - anemia_yld_rate_c367) / incidence_c367
+      - Note that YLDs due to anemia will be calculated in the hemoglobin/anemia model and therefore should not be double-counted in this cause model
 
 Calculating Burden
 ++++++++++++++++++

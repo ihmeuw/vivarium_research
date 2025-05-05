@@ -32,7 +32,7 @@
 .. _2024_vivarium_mncnh_portfolio_anc_module:
 
 ======================================
-Antenatal care module
+Antenatal care attendance module
 ======================================
 
 .. contents::
@@ -43,10 +43,6 @@ Antenatal care module
 ++++++++++++
 
 This module determines whether or not a simulant attends an antenatal care visit according to their ANC visit propensity value.
-
-.. note::
-
-  This module is expecting to go through updates in wave II of the simulation.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -83,14 +79,14 @@ This module determines whether or not a simulant attends an antenatal care visit
     - Information
     - Note
   * - 1: Attends ANC?
-    - Value is *True* if ANC propensity value input is <= ANC1 rate
+    - Compare ANC propensity value input to the ANC1 rate. Ordering of the ANC attendence categories matters: see the "Special ordering of the categories" section on the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
     - ANC1 rates (GBD covariate ID 7): get_covariate_estimates(location_id=location_id, gbd_round_id=7, year_id=2021, decomp_step='iterative', covariate_id=7)
     - This is location specific, but not age specific. Currently assume that there is no correlation of ANC with other factors. Engineers, you can pull these value straight from GBD, but expected values are as follows - Ethiopia: 75.7%, Nigeria: 74.3%, Pakistan: 90.8%
 
 2.4 Module Action Points
 ---------------------------
 
-.. list-table:: Hemoglobin module action point
+.. list-table:: Module action point
   :header-rows: 1
 
   * - Action point
@@ -118,7 +114,7 @@ This module determines whether or not a simulant attends an antenatal care visit
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-* This model does not consider timing of ANC visit
+* We assume that partial term pregnancies have the same probability of ANC attendance as full term pregnancies. Notably the ANC1 covariate from DHS is measured among live and stillbirths only. Notably, first trimester ANC attendance tends to be lower than overall pregnancy ANC attendance [Nigeria-DHS]_. Given that partial term pregnancies are by definition <24 weeks in duration, it is possible that they have lower attendance rates than full term pregnancies *prior to the premature end of their pregnancies.* 
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
@@ -127,4 +123,6 @@ This module determines whether or not a simulant attends an antenatal care visit
 
 5.0 References
 +++++++++++++++
+
+.. [Nigeria-DHS] `2018 Nigeria Standard DHS Final Report <https://dhsprogram.com/publications/publication-FR359-DHS-Final-Reports.cfm>`_
 

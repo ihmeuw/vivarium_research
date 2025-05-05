@@ -92,29 +92,14 @@ This module will:
     - Application
     - Note
   * - First trimester ANC attendance 
-    - ANC module
+    - :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`
     - Decision node #2
     - (True/False value)
-  * - Gestational age at first trimester ANC visit
-    - ANC module
-    - Anemia YLD calculation (action point XII)
-    - Point value in weeks, N/A for those who do not attend first trimester ANC
   * - Later pregnancy ANC attendance
-    - ANC module
+    - :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`
     - Decision node #4
     - (True/False value)
-  * - Gestational age at later pregnancy ANC visit
-    - ANC module 
-    - Anemia YLD calculation (action point XII)
-    - Point value in weeks, N/A for those who do not attend first trimester ANC
-  * - Pregnancy duration (aka gestational age at birth)
-    - ???
-    - Anemia YLD calculation (action point XII)
-    - Point value in weeks
 
-.. todo::
-  
-  Link to appropriate pages when ready
 
 2.3 Module Decision Nodes
 -----------------------------
@@ -132,7 +117,7 @@ This module will:
     - Note baseline IFA calibration limitation
   * - 2
     - ANC in first trimester?
-    - See wave II ANC module (FORTHCOMING, TODO: insert link)
+    - As informed from module input (output from :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`)
     - 
   * - 3
     - Recieve IFA/MMS at first trimester visit?
@@ -140,7 +125,7 @@ This module will:
     - 
   * - 4
     - ANC later in pregnancy?
-    - See ANC module (FORTHCOMING, TODO: insert link)
+    - As informed from module input (output from :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`)
     - 
   * - 5
     - Hemoglobin screen?
@@ -151,8 +136,8 @@ This module will:
     - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
     - 
   * - 7 
-    - Hemoglobin <100 g/L (Based on IFA/MMS adjusted exposure)
-    - Assess individual hemoglobin exposure *after* action points I, II, and III have been executed (and *before* IV, V, and VI). Assume screening sensitivity of 85% and specificity of 80% -- TODO: add detail for how to apply screening accuracy.
+    - Hemoglobin screening value <100 g/L? (Based on IFA/MMS adjusted exposure)
+    - Instructions detailed in section 2.3.1 below
     - 
   * - 8
     - Low ferritin?
@@ -166,6 +151,21 @@ This module will:
     - Also receive IFA/MMS *for the first time* at late pregnancy visit?
     - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
     - 
+
+2.3.1 Hemoglobin Screening Accuracy Instructions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For decision node 7, we will assess whether or not the result of a simulant's minimally invasive blood test hemoglobin screening is <100 g/L, which may be different than whether a simulant's *actual* hemoglobin exposure is <100 g/L. We will do this based on assumed sensitivity and specificity levels for the hemoglobin screening test as informed from the Gates Foundation and listed below:
+
+- Sensitivity (percent of true positives that test positive): 85% 
+- Specificity (percent of true negatives that test negative): 80%
+
+Follow the steps below to determine the answer to decision node #7:
+
+1. Assess a simulants "true" low hemoglobin status based on their hemoglobin exposure *after* action points I, II, and III have been executed (and *before* IV, V, and VI). Low hemoglobin status corresponds to values of <100 g/L and adequate hemoglobin status corresponds to values of 100+ g/L.
+2. For simulants that are truly low hemoglobin, assign tests low hemoglobin status to 85% (sensitivity value) and tests adequate hemoglobin status to 15% (100 - sensitivity value of 85)
+3. For simulants that are truly adequate hemoglobin, assign tests adequate hemoglobin status to 80% (specificity) and tests low hemoglobin status to 20% (100 - specificty value of 80)
+4. Use the test hemoglobin status to determine the answer to decision node 7 (answer is "yes" if they have test low hemoglobin status and "no" if they have test adequate hemoglobin status)
 
 2.4 Module Action Points
 ---------------------------
@@ -229,11 +229,11 @@ This module will:
 2.4.1: Action point XII - Calculating anemia YLDs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Hemoglobin exposure is used to determine anemia status, which has corresponding disability weights. See the :ref:`anemia impairment document <2019_anemia_impairment>` to see how hemoglobin exposure relates to anemia status, disability weights, and years lived with disability.
-
 .. todo::
 
-  Check to see if there are any updates that need to be made to the anemia impairment document for GBD 2023
+  Move this info to a separate anemia YLD module that comes after the estimation of gestational age at birth. We will also need to assign specific dates to ANC visits
+
+Hemoglobin exposure is used to determine anemia status, which has corresponding disability weights. See the :ref:`anemia impairment document <2019_anemia_impairment>` to see how hemoglobin exposure relates to anemia status, disability weights, and years lived with disability.
 
 We assume that hemoglobin may vary throughout the course of pregnancy at the following distinct points opportunities: (1) following IFA/MMS supplementation at the first trimester ANC visit, and (2) following IFA/MMS supplementation or IV iron administration at the later pregnancy ANC visit. Therefore, we will calculate YLDs due to anemia during pregnancy in this model as a weighted sum over the course of pregnancy stratified by these specified events.
 
@@ -321,6 +321,12 @@ The following pseudocode outlines how this can be done.
 - We assume complete adherence of oral iron intervention.
 
 - We assume no additional effect of oral iron supplementation when taken following IV iron administration
+
+- We assume a hemoglobin screening sensitivity of 85% and specificity of 80%, as requested by the Gates Foundation
+
+- Our approach to modeling hemoglobin screening sensitivity and specificity does not vary by hemoglobin exposure. In other words, you are no more likely to have your hemoglobin exposure misclassified by the screening if your exposure is very close to the threshold than if you expsoure is far away from the threshold. This will likely result in more cases of individuals without *any* anemia (high hemoglobin) testing as low hemoglobin and those with very low hemoglobin testing as adequate hemoglobin than may happen in practice. This may cause us to understimate the impact of the IV iron intervention.
+
+  - Note that an alternative to this limited approach we are taking would be to model some error around hemoglobin exposure (sampling from some distribution and adding it to hemoglobin exposure to get test exposure, similar to what is done for gestational age assessment in the :ref:`AI ultrasound model <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`). However, in order to match the desired sensitivity and specificity of the screening test, we would need to solve for the uncertainty distribution, likely via optimization, at the location-specific level (as it will depend on the underlying population hemoglobin exposure distribution).
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
