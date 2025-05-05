@@ -211,8 +211,8 @@ Transitions between these states occur based on defined rates:
 
 Key features and interactions of this submodel include:
 
-- **Interdependence with OUD Status:** Transition rates *within* this Quarters Model (e.g., `pr_uh`, `uh_inc`) may be influenced by the individual's state in the Core Disease Model (susceptible, with condition, on treatment). For example, individuals with untreated OUD might have a higher rate of becoming unhoused.  See below for details on how this is implemented using the :code:`RiskEffect` component.
-- **Influence on OUD Transitions:** Conversely, an individual's state in the Quarters Model can affect transition rates *within* the Core Disease Model. For instance, being unhoused or incarcerated might increase OUD incidence risk (`i`), decrease treatment initiation rates (`ti`), or increase treatment failure rates (`tf`). See below for details on how this is implemented using the :code:`RiskEffect` component.
+- **Interdependence with OUD Status:** Transition rates *within* this Quarters Model (e.g., ``pr_uh``, ``uh_inc``) may be influenced by the individual's state in the Core Disease Model (susceptible, with condition, on treatment). For example, individuals with untreated OUD might have a higher rate of becoming unhoused.  See below for details on how this is implemented using the :code:`RiskEffect` component.
+- **Influence on OUD Transitions:** Conversely, an individual's state in the Quarters Model can affect transition rates *within* the Core Disease Model. For instance, being unhoused or incarcerated might increase OUD incidence risk (``i``), decrease treatment initiation rates (``ti``), or increase treatment failure rates (``tf``). See below for details on how this is implemented using the :code:`RiskEffect` component.
 - **Parameterization:** Rates need to be parameterized using available data sources on housing instability, homelessness, incarceration, and release patterns, potentially stratified by relevant demographic factors and OUD status where data permits.
 
 
@@ -228,28 +228,28 @@ The Core Disease Model requires estimates for:
 
 * **Overall OUD Prevalence:** Sourced from the most recent Global Burden of Disease (GBD) Study, specifying the relevant year and location.
 * **Treatment Coverage Ratios:** Data on the proportion of individuals with OUD who are receiving MOUD. Sources may include national surveys (e.g., NSDUH), jail healthcare system data, and HIV surveillance studies.
-* **Transition Rates:** Estimates for disease incidence (`i`), untreated remission (`r`), treatment initiation (`ti`), treatment failure (`tf`), and treatment success (`ts`).
+* **Transition Rates:** Estimates for disease incidence (``i``), untreated remission (``r``), treatment initiation (``ti``), treatment failure (``tf``), and treatment success (``ts``).
 
-A significant challenge is that not all required transition rates (particularly untreated remission, `r`, as well as all treatment-related rates) are directly available from GBD. We want these rates, and we want them to be be internally consistent over time.
+A significant challenge is that not all required transition rates (particularly untreated remission, ``r``, as well as all treatment-related rates) are directly available from GBD. We want these rates, and we want them to be be internally consistent over time.
 
 To address this, we have used a novel **NumPyro implementation of a DisMod-AT-like model**. DisMod-AT (Disease Model -- Age-and-Time) is a Bayesian meta-analytic tool designed to synthesize diverse epidemiological data (e.g., prevalence, incidence, remission, excess mortality/relative risk) to produce a consistent set of transition rates for compartmental disease models.
 
 * **Process:** The NumPyro/DisMod-AT tool is configured with the OUD state model structure (Susceptible, With Condition, On Treatment). Inputs include location-specific data on OUD prevalence, treatment coverage, and GBD estimates of incidence, prevalence, and excess mortality for OUD, as well as data or assumptions about remission and treatment-related rates.
-* **Output:** The tool solves for a full set of internally consistent prevalence and transition rates (`p`, `i`, `r`, `f`, `ti`, `tf`, `ts`) that best fit the input data constraints according to Bayesian principles. This provides a robust estimate for parameters like the untreated remission rate (`r`).
+* **Output:** The tool solves for a full set of internally consistent prevalence and transition rates (``p``, ``i``, ``r``, ``f``, ``ti``, ``tf``, ``ts``) that best fit the input data constraints according to Bayesian principles. This provides a robust estimate for parameters like the untreated remission rate (``r``).
 
 4.2 Quarters Model Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Quarters Model requires data on the distribution of the population across the three states (Private Residence, Unhoused, Incarcerated) and the transition rates between them (`pr_uh`, `pr_inc`, `uh_pr`, `uh_inc`, `inc_pr`, `inc_uh`).
+The Quarters Model requires data on the distribution of the population across the three states (Private Residence, Unhoused, Incarcerated) and the transition rates between them (``pr_uh``, ``pr_inc``, ``uh_pr``, ``uh_inc``, ``inc_pr``, ``inc_uh``).
 
 * **Population Distribution:**
     * **Private Residence:** Baseline population estimates, potentially stratified by age and sex, are typically derived from U.S. Census Bureau data, particularly the **American Community Survey (ACS)** which provides detailed yearly housing characteristics.
     * **Unhoused:** Estimates often rely on annual **Point-in-Time (PIT) counts** conducted by Continuums of Care (CoCs) and reported to HUD. These provide a snapshot but may undercount the true population. Local **Homelessness Management Information System (HMIS)** data, where available (e.g., for Seattle/King County), can offer more detailed longitudinal information but may have coverage limitations. Specific research studies on local unhoused populations are also valuable.
     * **Incarcerated:** Data on jail and prison populations can be obtained from the **Bureau of Justice Statistics (BJS)** and state/local sources like the Washington State Department of Corrections or county jail dashboards/reports.
 * **Transition Rates:** Estimating the rates of movement *between* these states is complex and often requires synthesizing multiple data sources and making assumptions:
-    * *Incarceration/Release Dynamics (`pr_inc`, `uh_inc`, `inc_pr`, `inc_uh`):* BJS and local corrections data provide information on entries and releases. Determining the housing status upon release (to stable housing vs. homelessness) often requires specialized reports or research studies.
-    * *Housing Instability (`pr_uh`):* Data on eviction rates, housing loss, or entries into homelessness from stable housing can be sourced from local housing authorities, HMIS data, or specific surveys/studies.
-    * *Exits from Homelessness (`uh_pr`, `uh_inc`):* HMIS data and longitudinal studies of unhoused individuals are key sources for estimating transitions back to private residence or into incarceration.
+    * *Incarceration/Release Dynamics (``pr_inc``, ``uh_inc``, ``inc_pr``, ``inc_uh``):* BJS and local corrections data provide information on entries and releases. Determining the housing status upon release (to stable housing vs. homelessness) often requires specialized reports or research studies.
+    * *Housing Instability (``pr_uh``):* Data on eviction rates, housing loss, or entries into homelessness from stable housing can be sourced from local housing authorities, HMIS data, or specific surveys/studies.
+    * *Exits from Homelessness (``uh_pr``, ``uh_inc``):* HMIS data and longitudinal studies of unhoused individuals are key sources for estimating transitions back to private residence or into incarceration.
 * **Stratification and Interaction:** A critical step involves estimating how these population distributions and transition rates differ based on OUD status (from the Core Disease Model) and demographic factors (age, sex). This often requires analyzing linked data sources (if available), applying relative risks derived from literature, or making informed assumptions due to data scarcity linking OUD directly to housing/incarceration transitions at a population level.
 
 4.3 General Considerations
