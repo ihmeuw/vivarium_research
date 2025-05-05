@@ -903,7 +903,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 6.1
     - Check ENN mortality ratio compared to GBD
     - Neonatal mortality ratios are improved based on single draw in Ethiopia. Note that calculation of the mortality ratio of the LNN age group has been updated in this notebook to be [deaths in LNN age group] / [population at the start of the LNN age group], rather than a denominator of live births so that LNN mortality is not dependent on ENN mortality.
-    - `Model 6.1 neonatal mortality validation notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality.ipynb.ipynb>`_
+    - `Model 6.1 neonatal mortality validation notebook for a single draw run <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality.ipynb.ipynb>`_
 
 
 .. list-table:: Outstanding model verification and validation issues
