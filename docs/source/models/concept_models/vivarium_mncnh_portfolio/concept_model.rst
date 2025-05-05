@@ -748,13 +748,13 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Baseline and alternative scenarios 2 - 10 
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.1
-    - Rerun LBWSG PAF calculation for Ethiopia
-    - Incomplete
+    - Rerun with LBWSG PAF changes for Ethiopia: (1) fix sex-specificity bug in LBWSG PAF calculation, and (2) use LBWSG exposure at birth for calculation of the ENN LBWSG PAF
+    - Complete
     - N/A
-    - N/A -- will do verification in the interactive sim to start
-    - N/A -- will do verification in the interactive sim to start
-    - N/A -- will do verification in the interactive sim to start
-    - Rerun LBWSG PAF calculation for Ethiopia using a population size of 389_992 (approximately twice the prior value while still following the relevant requirements) and save to a new artifact to be used in interactive sim V&V.
+    - TBD
+    - TBD
+    - TBD
+    - Results from run for a single draw with a population size of 500,000 are here /mnt/share/homes/abie/vivarium_results/ethiopia/2025_05_02_15_05_19/results/, TBD on whether we will request a larger run with the new LBWSG PAF artifact
   * - 7.0
     - Wave I azithromycin 
     - Incomplete
@@ -900,6 +900,10 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Everything is validating! 
     - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10a_vnv_neonatal_acmr-w_probiotics.ipynb>`__
       `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10b_vnv_and_scenario_results_probiotics.ipynb>`__
+  * - 6.1
+    - Check ENN mortality ratio compared to GBD
+    - Neonatal mortality ratios are improved based on single draw in Ethiopia. Note that calculation of the mortality ratio of the LNN age group has been updated in this notebook to be [deaths in LNN age group] / [population at the start of the LNN age group], rather than a denominator of live births so that LNN mortality is not dependent on ENN mortality.
+    - `Model 6.1 neonatal mortality validation notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality.ipynb.ipynb>`_
 
 
 .. list-table:: Outstanding model verification and validation issues
@@ -917,6 +921,10 @@ Specific observer outputs and their stratifications may vary by model run as nee
         - Gestational ages for partial term pregnancies are sampled to be uniform between 6 and 24 weeks.
         - Pregnancy duration pipeline now is just a simple unit converter that will convert the gestational age column to days.
     -  No current timeline 
+  * - Discrepancy with LBWSG mortality and PAFs
+    - Under investigation. Unknown if model will meet verification criteria for neonatal mortality ratio (deaths per birth in ENN age group) that has been used as a verification target (and that has been met for model 6.1, but not prior) will simultaneously meet verification target for neonatal mortality rate (deaths per person time spent in age group)
+    - Document changes required to add a person-time observer so we can check neonatal mortality rate verification target
+    - 
 
 
 .. _mncnh_portfolio_6.0:
