@@ -610,7 +610,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - Number
     - Run
     - Status
-    - Priority
     - Number of draws
     - Population size per draw
     - Scenarios
@@ -619,7 +618,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 1
     - Wave I Pregnancy V&V
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline only
@@ -628,7 +626,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 2
     - Wave I Maternal disorders V&V
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline only
@@ -639,7 +636,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 3
     - Wave I Neonatal disorders V&V
     - Complete
-    - N/A
     - 10
     - 100,000
     - Locations include Pakistan, Nigeria, and Ethiopia. 
@@ -649,7 +645,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 3.1
     - Wave I Neonatal disorders V&V with correct LBWSG distribution
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline only
@@ -676,7 +671,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 4.1
     - Wave I CPAP 
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline only
@@ -685,7 +679,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 4.2
     - Wave I CPAP with observer for counts per facility type
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline only
@@ -695,7 +688,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Wave I CPAP with addition of a delivery facility column in births observer and CPAP availability stratification
       in neonatal burden observer
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline only
@@ -704,7 +696,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 4.4
     - Wave I CPAP with updated determination of delivery facility type
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline only
@@ -713,7 +704,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 4.5
     - Wave I CPAP with bugfix for negative other causes mortality rates
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline only
@@ -722,7 +712,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 4.6
     - Wave I CPAP with scale-up scenarios 
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline and alternative scenarios 2, 3, and 4
@@ -731,7 +720,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 4.7
     - Correct pregnancy duration for partial term pregnancies
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline and alternative scenarios 2, 3, and 4
@@ -740,7 +728,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 5.0
     - Wave I neonatal antibiotics with scale-up scenarios 
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline and alternative scenarios 2 - 7 
@@ -749,7 +736,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 5.1
     - Wave I neonatal antibiotics with scale-up scenarios; engineer refactor 
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline and alternative scenarios 2 - 7 
@@ -758,7 +744,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 6.0
     - Wave I neonatal probiotics with scale-up scenarios 
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline and alternative scenarios 2 - 10 
@@ -767,7 +752,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 6.0.1
     - Wave I neonatal disorders ACMR with 200k population without interventions
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline 
@@ -776,7 +760,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 6.0.2
     - Wave I neonatal disorders ACMR with 2 million population
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline
@@ -785,7 +768,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 6.0.3
     - Wave I neonatal disorders ACMR with rate to probability conversion
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline 
@@ -794,7 +776,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 6.0.4
     - Wave I neonatal disorders ACMR with raw CMSR
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline
@@ -803,29 +784,26 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 7.0
     - Wave I azithromycin 
     - Incomplete
-    - N/A
     - 10
     - 100,000
     - Baseline
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/azithromycin``
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/7_0``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 8.0
     - Wave I misoprostol
     - Incomplete
-    - N/A
     - 10
     - 100,000
     - Baseline 
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/misoprostol``
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/8_0``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 9.0
     - Wave I antenatal corticosteroids
     - Incomplete
-    - N/A
     - 10
     - 100,000
     - Baseline
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/acs``
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/9_0``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
 
 .. note:: 
@@ -994,14 +972,10 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Explanation
     - Action plan
     - Timeline
-  * - Pregnancy duration for partial term pregnancies is incorrect
-    - We will end up using pregnancy duration later in the model (to make sure no one shows up for ANC visits 
-      in the second trimester if they never even make it to the second trimester and to calculate anemia YLDs), 
-      so we will want something that defines pregnancy duration for partial term pregnancies.
-    -  Jim is implementing a change: 
-        - Gestational ages for partial term pregnancies are sampled to be uniform between 6 and 24 weeks.
-        - Pregnancy duration pipeline now is just a simple unit converter that will convert the gestational age column to days.
-    -  No current timeline 
+  * - 
+    - 
+    -  
+    -  
 
 
 .. _mncnh_portfolio_6.0:
