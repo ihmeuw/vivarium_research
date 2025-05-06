@@ -785,6 +785,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - N/A
     - N/A -- will do verification in the interactive sim to start
     - N/A -- will do verification in the interactive sim to start
+    - N/A -- will do verification in the interactive sim to start
     - Rerun LBWSG PAF calculation for Ethiopia using a population size of 389_992 (approximately twice the prior value while still following the relevant requirements) and save to a new artifact to be used in interactive sim V&V.
   * - 7.0
     - Wave I azithromycin 
