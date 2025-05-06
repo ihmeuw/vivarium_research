@@ -781,6 +781,14 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Baseline
     - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/raw_csmr/``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 6.1
+    - Rerun LBWSG PAF calculation for Ethiopia
+    - Incomplete
+    - N/A
+    - N/A -- will do verification in the interactive sim to start
+    - N/A -- will do verification in the interactive sim to start
+    - N/A -- will do verification in the interactive sim to start
+    - Rerun LBWSG PAF calculation for Ethiopia using a population size of 389_992 (approximately twice the prior value while still following the relevant requirements) and save to a new artifact to be used in interactive sim V&V.
   * - 7.0
     - Wave I azithromycin 
     - Incomplete
