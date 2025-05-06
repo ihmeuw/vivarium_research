@@ -653,7 +653,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 3.2
     - Wave I Neonatal disorders V&V with LBWSG component removed
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline only
@@ -662,7 +661,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 3.3
     - Wave I Neonatal disorders V&V with early NN observer bugfix
     - Complete
-    - N/A
     - 10
     - 100,000
     - Baseline only
@@ -785,7 +783,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Rerun LBWSG PAF calculation for Ethiopia
     - Incomplete
     - N/A
-    - N/A -- will do verification in the interactive sim to start
     - N/A -- will do verification in the interactive sim to start
     - N/A -- will do verification in the interactive sim to start
     - Rerun LBWSG PAF calculation for Ethiopia using a population size of 389_992 (approximately twice the prior value while still following the relevant requirements) and save to a new artifact to be used in interactive sim V&V.
