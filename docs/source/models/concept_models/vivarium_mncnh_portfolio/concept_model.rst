@@ -785,7 +785,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - N/A
     - N/A -- will do verification in the interactive sim to start
     - N/A -- will do verification in the interactive sim to start
-    - N/A -- will do verification in the interactive sim to start
+    - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.1/``
     - Rerun LBWSG PAF calculation for Ethiopia using a population size of 389_992 (approximately twice the prior value while still following the relevant requirements) and save to a new artifact to be used in interactive sim V&V.
   * - 7.0
     - Wave I azithromycin 
@@ -793,7 +793,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/7_0``
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model7.0``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 8.0
     - Wave I misoprostol
@@ -801,7 +801,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline 
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/8_0``
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model8.0``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 9.0
     - Wave I antenatal corticosteroids
@@ -809,7 +809,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 10
     - 100,000
     - Baseline
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/9_0``
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model9.0``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
 
 .. note:: 
