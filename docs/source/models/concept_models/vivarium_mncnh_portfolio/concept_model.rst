@@ -786,6 +786,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 500,000
     - All scenarios
     - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.1``
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 50,000 simulants = 500,000 total population.
   * - 7.0
     - Wave I azithromycin 
     - Incomplete
