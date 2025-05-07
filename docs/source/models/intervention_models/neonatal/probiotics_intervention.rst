@@ -82,7 +82,8 @@ Since the neonatal mortality model does not explicitly represent incidence of se
 probiotics.  Instead the model will have different cause-specific mortality rates for sepsis for individuals with and without access to probiotics 
 (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
 
-In order to be eligible for this intervention, simulants must be in the early neonatal age group and born preterm (<37 weeks old). 
+In order to be eligible for this intervention, simulants must be in the early neonatal age group and born preterm (<37 weeks old). This eligibility
+is based on an impact table for Bifidobacterium infantis (B. infantis) provided to us by the BMGF team. 
 
 .. graphviz::
 
