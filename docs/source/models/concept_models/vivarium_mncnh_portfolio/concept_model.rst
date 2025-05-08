@@ -902,8 +902,8 @@ Specific observer outputs and their stratifications may vary by model run as nee
       `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10b_vnv_and_scenario_results_probiotics.ipynb>`__
   * - 6.1
     - Check ENN mortality ratio compared to GBD
-    - Neonatal mortality ratios are improved based on single draw in Ethiopia. Note that calculation of the mortality ratio of the LNN age group has been updated in this notebook to be [deaths in LNN age group] / [population at the start of the LNN age group], rather than a denominator of live births so that LNN mortality is not dependent on ENN mortality.
-    - `Model 6.1 neonatal mortality validation notebook for a single draw run <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality.ipynb.ipynb>`_
+    - Neonatal mortality ratios are now slightly underestimated (rather than the previous overestimation). Note that calculation of the mortality ratio of the LNN age group has been updated in this notebook to be [deaths in LNN age group] / [population at the start of the LNN age group], rather than a denominator of live births so that LNN mortality is not dependent on ENN mortality.
+    - `Model 6.1 neonatal mortality validation notebook for all locations and draws <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality_full_locations_and_draws.ipynb>`. `Model 6.1 neonatal mortality validation notebook for a single draw run <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality_single_draw.ipynb>`_
 
 
 .. list-table:: Outstanding model verification and validation issues
@@ -921,9 +921,9 @@ Specific observer outputs and their stratifications may vary by model run as nee
         - Gestational ages for partial term pregnancies are sampled to be uniform between 6 and 24 weeks.
         - Pregnancy duration pipeline now is just a simple unit converter that will convert the gestational age column to days.
     -  No current timeline 
-  * - Discrepancy with LBWSG mortality and PAFs
-    - Under investigation. Unknown if model will meet verification criteria for neonatal mortality ratio (deaths per birth in ENN age group) that has been used as a verification target (and that has been met for model 6.1, but not prior) will simultaneously meet verification target for neonatal mortality rate (deaths per person time spent in age group)
-    - Document changes required to add a person-time observer so we can check neonatal mortality rate verification target
+  * - Issues with neonatal mortality ratio V&V
+    - Under investigation. Unknown if model will meet verification criteria for neonatal mortality ratio (deaths per birth in ENN age group) that has been used as a verification target (and that has been met for model 6.1, but not prior) will simultaneously meet verification target for neonatal mortality rate (deaths per person time spent in age group). Also unknown if rate to probability calculation will impact findings.
+    - Run model with differing rate to probability calculations, document changes required to add a person-time observer so we can check neonatal mortality rate verification target
     - 
 
 
