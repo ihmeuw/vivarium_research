@@ -543,49 +543,54 @@ defined as a module input in a subsequent row.
 
 Specific observer outputs and their stratifications may vary by model run as needs change. Modifications to default will be noted in the model run requests tables. Note that the observers and outputs listed here are different from the module outputs above. The outputs of the module are intended to be intermediate values that may or may not be included as observed simulated outputs.
 
+Default stratifications to all observers should include scenario and input draw.
+ 
+.. todo:: 
+
+  Confirm whether we want to continue stratifying by random seed? Currently all of the results dataframes are.
+
 .. list-table:: Simulation observers
   :header-rows: 1
 
-  * - Outcome
+  * - Observer
     - Default stratifications
-  * - ANC attendance counts
-    - 
-  * - Ultrasound coverage counts (AI-assisted, standard, none)
-    - 
-  * - Birth counts
-    - Delivery facility type, pregnancy outcome, child sex, scenario, and input draw
-  * - Pregnancy term counts (full or partial)
-    - 
-  * - Maternal GBD age group counts
-    - 
-  * - Delivery facility type counts (BeMONC, CeMONC, home)
-    - 
-  * - Azithromycin coverage counts
-    - 
-  * - Corticosteroid coverage counts
-    - 
-  * - Misoprostol coverage counts
-    - 
-  * - Maternal obstructed labor outcomes (deaths, YLLs, YLDs, incident cases)
-    - 
-  * - Maternal hemorrhage outcomes (deaths, YLLs, YLDs, incident cases)
-    - 
-  * - Maternal sepsis outcomes (deaths, YLLs, YLDs, incident cases)
-    - 
-  * - Count of neonatal deaths and YLLs by cause
-    - 
-  * - Neonatal antibioitics availability/coverage counts
-    - 
-  * - Neonatal probiotics availability/coverage counts
-    - 
-  * - CPAP availability/coverage counts
-    - 
+    - Note
+  * - Maternal disorders burden: cause-specific cases, deaths, YLLs, and YLDs
+    - * Maternal age group
+      * Pregnancy outcome
+      * Azithromycin coverage
+      * Misoprostol coverage
+    - Included with maternal age group stratification. Additional stratifiers to be added
+  * - Births (this observer includes ALL pregnancy outcomes, including partial term pregnancies that may not typically be considered "births")
+    - * Pregnancy outcome
+      * Child sex
+      * Delivery facility type
+    - Included
+  * - Neonatal deaths (cause-specific)
+    - * Child sex
+      * Child age group
+      * Delivery facility type
+      * CPAP availability
+      * Antibiotics availability
+      * Probiotics availability
+      * Corticosteroid coverage
+    - Included, except for corticosteroid coverage which has yet to be added
+  * - Antibiotics eligible birth counts
+    - * Delivery facility type
+    - Included. Confirm this represents "eligible birth counts"?
+  * - CPAP eligible birth counts
+    - * Delivery facility type
+    - Included. Confirm this represents "eligible birth counts"?
+  * - Probiotics eligible birth counts
+    - * Delivery facility type
+    - Included. Confirm this represents "eligible birth counts"?
+  * - Maternal population counts
+    - * Maternal age group
+      * Pregnancy outcome
+      * ANC attendance
+      * Ultrasound coverage
+    - NOT YET INCLUDED
 
-.. todo::
-
-  Figure out whether we want any of these count data to be stratified by LBW or preterm status, 
-  and what our V&V plan would be for this if so (e.g., interactive sim to compare risk ratios for OL
-  of people with LBWSG babies or not?).
 
 .. note::
 
@@ -603,251 +608,262 @@ Specific observer outputs and their stratifications may vary by model run as nee
 5.0 Model run requests
 ++++++++++++++++++++++
 
-.. list-table:: Model run plan as of October 4, 2024
-  :widths: 3 3 3 3 3 3 5 15
+.. list-table:: Default simulation specifications
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+    - Note
+  * - Location(s)
+    - * Ethiopia (ID: 179)
+      * Nigeria (ID: 214)
+      * Pakistan (ID: 165)
+    -
+  * - Number of draws
+    - 10
+    - Based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_: production run number divided in half for default V&V runs
+  * - Population size per draw
+    - 100,000
+    - Based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_: production run number divided in half for default V&V runs
+  * - Randomness key columns
+    - ['entrance_time','age']
+    - 
+  * - Age start (initialization) 
+    - 10
+    - Applies to pregnant population only
+  * - Age end (initialization)
+    - 54
+    - Applies to pregnant population only
+  * - Age start (observation)
+    - 
+    - 
+  * - Age end (observation)
+    - 
+    - 
+
+.. todo::
+
+  * Confirm that the randomness key columns listed here are adequate for this model (do we need age AND child_age given the "wide" state table?)
+
+  * Confirm whether or not the age start/end parameters are relevant here... how do we handle simulants who are initialized at 54.9 years but then give birth in the 55-59 year age range? We should make sure this behavior is noted.
+
+.. note::
+
+  The "Directory" column in the table below lists the subdirectory nested within ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/`` where results specific to that model run can be found.
+
+.. list-table:: Model runs
   :header-rows: 1
 
   * - Number
     - Run
-    - Status
-    - Number of draws
-    - Population size per draw
     - Scenarios
-    - File path 
-    - Note
+    - Directory
+    - Specification mods
+    - Stratification mods
+    - Observer mods
   * - 1
     - Wave I Pregnancy V&V
-    - Complete
-    - 10
-    - 100,000
-    - Baseline only
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/pregnancy``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline
+    - ``pregnancy``
+    - 
+    -
+    -
   * - 2
     - Wave I Maternal disorders V&V
-    - Complete
-    - 10
-    - 100,000
-    - Baseline only
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/maternal_disorders``
-    - Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update 
-      the Pakistan OL prevalence values from GBD 2021 to GBD 2023. Locations include Pakistan, Nigeria, and Ethiopia. 
-      10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline
+    - ``maternal_disorders``
+    - 
+    - 
+    - 
   * - 3
     - Wave I Neonatal disorders V&V
-    - Complete
-    - 10
-    - 100,000
-    - Baseline only
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/neonatal_disorders``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 
-      10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline
+    - ``neonatal_disorders``
+    - 
+    - 
+    - 
   * - 3.1
     - Wave I Neonatal disorders V&V with correct LBWSG distribution
-    - Complete
-    - 10
-    - 100,000
-    - Baseline only
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/neonatal_disorders``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline
+    - ``neonatal_disorders``
+    - 
+    -
+    -
   * - 3.2
     - Wave I Neonatal disorders V&V with LBWSG component removed
-    - Complete
-    - 10
-    - 100,000
-    - Baseline only
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/no_lbwsg``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline
+    - ``no_lbwsg``
+    - 
+    - 
+    - 
   * - 3.3
     - Wave I Neonatal disorders V&V with early NN observer bugfix
-    - Complete
-    - 10
-    - 100,000
-    - Baseline only
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/risk_effects``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline
+    - ``risk_effects``
+    - 
+    - 
+    - 
   * - 4.1
     - Wave I CPAP 
-    - Complete
-    - 10
-    - 100,000
-    - Baseline only
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline
+    - ``cpap``
+    - 
+    - 
+    - 
   * - 4.2
     - Wave I CPAP with observer for counts per facility type
-    - Complete
-    - 10
-    - 100,000
-    - Baseline only
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap_2``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline
+    - ``cpap_2``
+    - 
+    - 
+    - 
   * - 4.3
     - Wave I CPAP with addition of a delivery facility column in births observer and CPAP availability stratification
       in neonatal burden observer
-    - Complete
-    - 10
-    - 100,000
-    - Baseline only
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap_3``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline
+    - ``cpap_3``
+    - 
+    - 
+    - 
   * - 4.4
     - Wave I CPAP with updated determination of delivery facility type
-    - Complete
-    - 10
-    - 100,000
-    - Baseline only
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap_4``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline
+    - ``cpap_4``
+    - 
+    - 
+    - 
   * - 4.5
     - Wave I CPAP with bugfix for negative other causes mortality rates
-    - Complete
-    - 10
-    - 100,000
-    - Baseline only
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap_5``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - Baseline
+    - ``cpap_5``
+    - 
+    - 
+    - 
   * - 4.6
     - Wave I CPAP with scale-up scenarios 
-    - Complete
-    - 10
-    - 100,000
     - Baseline and alternative scenarios 2, 3, and 4
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/cpap_full_scenarios``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``cpap_full_scenarios``
+    - 
+    - 
+    - 
   * - 4.7
     - Correct pregnancy duration for partial term pregnancies
-    - Complete
-    - 10
-    - 100,000
     - Baseline and alternative scenarios 2, 3, and 4
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/birth_exposure_2``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``birth_exposure_2``
+    - 
+    - 
+    - 
   * - 5.0
     - Wave I neonatal antibiotics with scale-up scenarios 
-    - Complete
-    - 10
-    - 100,000
     - Baseline and alternative scenarios 2 - 7 
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/antibiotics``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``antibiotics``
+    - 
+    - 
+    - 
   * - 5.1
     - Wave I neonatal antibiotics with scale-up scenarios; engineer refactor 
-    - Complete
-    - 10
-    - 100,000
     - Baseline and alternative scenarios 2 - 7 
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/children_mapped``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``children_mapped``
+    - 
+    - 
+    - 
   * - 6.0
     - Wave I neonatal probiotics with scale-up scenarios 
-    - Complete
-    - 10
-    - 100,000
     - Baseline and alternative scenarios 2 - 10 
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/probiotics``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``probiotics``
+    - 
+    - 
+    - 
   * - 6.0.1
     - Wave I neonatal disorders ACMR with 200k population without interventions
-    - Complete
-    - 10
-    - 100,000
     - Baseline 
-    - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/no_interventions/``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``/no_interventions/``
+    - Population increased 10 fold (random seed population size changed from 20k to 200k)
+    - 
+    - 
   * - 6.0.2
     - Wave I neonatal disorders ACMR with 2 million population
-    - Complete
-    - 10
-    - 100,000
     - Baseline
-    - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/acmr-2mil/``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``/acmr-2mil/``
+    - Population increased 100 fold (random seed population size changed from 20k to 2 million)
+    - 
+    - 
   * - 6.0.3
     - Wave I neonatal disorders ACMR with rate to probability conversion
-    - Complete
-    - 10
-    - 100,000
     - Baseline 
-    - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/rate_conversion/``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``/rate_conversion/``
+    - 
+    - 
+    - 
   * - 6.0.4
     - Wave I neonatal disorders ACMR with raw CMSR
-    - Complete
-    - 10
-    - 100,000
     - Baseline
-    - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/raw_csmr/``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``/raw_csmr/``
+    - 
+    - 
+    - 
   * - 6.1
     - Rerun with LBWSG PAF changes for Ethiopia: (1) fix sex-specificity bug in LBWSG PAF calculation, and (2) use LBWSG exposure at birth for calculation of the ENN LBWSG PAF
-    - Complete
-    - 10
-    - 100,000
     - All scenarios
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.1``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 50,000 simulants = 500,000 total population.
+    - ``model6.1``
+    - 
+    - 
+    - 
   * - 6.2
     - Same specifications as model 6.1, but this time with the exponential rate-to-probability conversion (:math:`p= 1 - e^{(-\text{rate} * \text{duration scaling factor})}`) in `this function <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/29fe810c2f1abf5b358a452d3f59ffdda266afe8/src/vivarium_gates_mncnh/utilities.py#L187-L193>`_
-    - Complete
-    - 10
-    - 100,000
     - Baseline
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.2``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``model6.2``
+    - 
+    - 
+    - Birth observer updated from output of state table (single row per simulant) to observer detailed in the observer section for all subsequent model runs
   * - 6.2.1
     - Same as 6.2, but with a fix for `this rate to probability equation transcription error <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_ (add back in the duration_scaling_factor) and include partial term pregnancy fix to bith observer
-    - Complete
-    - 10
-    - 100,000
     - Baseline
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.2.1``
+    - ``model6.2.1``
+    -
+    - 
     - 
   * - 6.3
     - Same specifications as model 6.2 (including the exponential rate-to-probability calculation), but with ENN LBWSG PAF updated to use the ENN LBWSG exposure prevalence rather than the LBWSG exposure at birth
-    - Incomplete
-    - 10
-    - 100,000
     - Baseline
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.3``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``model6.3``
+    -
+    - 
+    - 
   * - 6.4
     - Same specifications as model 6.3 (including the ENN LBWSG PAF using ENN exposure), but with the revision of the rate-to-probability calculation back to :math:`p = \text{rate} * \text{duration scaling factor}`
-    - Incomplete
-    - 10
-    - 100,000
     - Baseline
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.4``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``model6.4``
+    -
+    - 
+    - 
   * - 7.0
     - Wave I azithromycin 
-    - Incomplete
-    - 10
-    - 100,000
     - Baseline
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model7.0``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``model7.0``
+    -
+    - 
+    - 
   * - 8.0
     - Wave I misoprostol
-    - Incomplete
-    - 10
-    - 100,000
     - Baseline 
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model8.0``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``model8.0``
+    -
+    - 
+    - 
   * - 9.0
     - Wave I antenatal corticosteroids
-    - Incomplete
-    - 10
-    - 100,000
     - Baseline
-    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model9.0``
-    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+    - ``model9.0``
+    -
+    - 
+    - 
 
 .. note:: 
-  
-  The above numbers are based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_
-  that found the appropriate seed and draw count for production runs, then divided in half for V&V runs. 
+
+  Some of the notebook URLs for the older runs might be out-of-date. If you click one of these links and it gives
+  you a 404 error, add to your URL `/old_vnv_notebooks/` after `verification_and_validation`, and that should take you
+  to the right place!
 
 .. list-table:: V&V tracking 
   :header-rows: 1
@@ -1011,11 +1027,6 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - * `Model 6.2.1 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.2.1_nn_mortality.ipynb>`_
       * `Notebook comparing model 6.1 and 6.2.1 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
 
-.. note:: 
-
-  Some of the notebook URLs for the older runs might be out-of-date. If you click one of these links and it gives
-  you a 404 error, add to your URL `/old_vnv_notebooks/` after `verification_and_validation`, and that should take you
-  to the right place!
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -1028,6 +1039,10 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Under investigation. Unknown if model will meet verification criteria for neonatal mortality ratio (deaths per birth in ENN age group) that has been used as a verification target (and that has been met for model 6.1, but not prior) will simultaneously meet verification target for neonatal mortality rate (deaths per person time spent in age group). Also unknown if rate to probability calculation will impact findings.
     - Run model with differing rate to probability calculations, document changes required to add a person-time observer so we can check neonatal mortality rate verification target
     - Revisit following V&V of model 6.4
+  * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
+    - 
+    - Revist following GBD 2023 update
+    - On hold until GBD 2023 update
 
 
 .. _mncnh_portfolio_6.0:
