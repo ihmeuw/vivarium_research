@@ -796,12 +796,13 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.2``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.2.1
-    - Same as 6.2, but with a fix for `this rate to probability equation transcription error <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_(add back in the duration_scaling_factor)
+    - Same as 6.2, but with a fix for `this rate to probability equation transcription error <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_ (add back in the duration_scaling_factor)
     - Incomplete
     - 10
     - 100,000
     - Baseline
     - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.2.1``
+    - 
   * - 6.3
     - Same specifications as model 6.2 (including the exponential rate-to-probability calculation), but with ENN LBWSG PAF updated to use the ENN LBWSG exposure prevalence rather than the LBWSG exposure at birth
     - PAUSED
