@@ -796,7 +796,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.2``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.2.1
-    - Same as 6.2, but with a fix for `this rate to probability equation transcription error <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_ (add back in the duration_scaling_factor)
+    - Same as 6.2, but with a fix for `this rate to probability equation transcription error <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_ (add back in the duration_scaling_factor) and include partial term pregnancy fix to bith observer
     - Incomplete
     - 10
     - 100,000
@@ -1002,7 +1002,8 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 6.2
     - Check ENN mortality ratio compared to GBD
     - Neonatal mortality ratios are now dramatically overestimated. Note that while the birth observer has changed between models 6.1 and 6.2, it has been verified that birth counts do not vary between these runs and that greater death count values are driving the difference between neonatal mortality ratios in 6.1 and 6.2
-    - `Model 6.2 neonatal mortality validatio notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.2_nn_mortality.ipynb>`_
+    - * `Model 6.2 neonatal mortality validatio notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.2_nn_mortality.ipynb>`_
+      * Birth observer has zero counts for all partial term pregnancy outcomes
 
 .. note:: 
 
@@ -1017,6 +1018,10 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Explanation
     - Action plan
     - Timeline
+  * - Partial term pregnnacy outcomes all counted as zero in new birth observer
+    - Partial term pregnancies are not assigned birth facilities and the birth observer stratifies by birth facility
+    - Assign "n/a" birth facility exposure to partial term pregnancies
+    - For model 6.2.1
   * - Unexpectedly high neonatal death counts in model 6.2
     - `Suspected rate to probability equation transcription error here <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_
     - Update equation and rerun
