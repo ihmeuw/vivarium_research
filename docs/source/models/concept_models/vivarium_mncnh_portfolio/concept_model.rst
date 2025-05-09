@@ -789,7 +789,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 50,000 simulants = 500,000 total population.
   * - 6.2
     - Same specifications as model 6.1, but this time with the exponential rate-to-probability conversion (:math:`p= 1 - e^(\text{rate} * \text{duration scaling factor}))` in `this function <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/29fe810c2f1abf5b358a452d3f59ffdda266afe8/src/vivarium_gates_mncnh/utilities.py#L187-L193>`_
-    - Incomplete
+    - Complete
     - 10
     - 100,000
     - Baseline
@@ -960,7 +960,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
       - `Antibiotics & CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_09e_vnv_neonatal_csmr_w_antibiotics_refactor.ipynb>`__
   * - 6.0
     - Validate coverage, RR of probiotics on sepsis (and confirm other causes are unchanged)
-    - Everything is validating! 
+    - Neonatal ACMR looks off, residuals have gotten increasingly worse with additional interventions
     - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10a_vnv_neonatal_acmr-w_probiotics.ipynb>`__
       `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10b_vnv_and_scenario_results_probiotics.ipynb>`__
   * - 6.0.1
