@@ -788,7 +788,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.1``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 50,000 simulants = 500,000 total population.
   * - 6.2
-    - Same specifications as model 6.1, but this time with the exponential rate-to-probability conversion (:math:`p= 1 - e^(\text{rate} * \text{duration scaling factor}))` in `this function <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/29fe810c2f1abf5b358a452d3f59ffdda266afe8/src/vivarium_gates_mncnh/utilities.py#L187-L193>`_
+    - Same specifications as model 6.1, but this time with the exponential rate-to-probability conversion (:math:`p= 1 - e^(-\text{rate} * \text{duration scaling factor}))` in `this function <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/29fe810c2f1abf5b358a452d3f59ffdda266afe8/src/vivarium_gates_mncnh/utilities.py#L187-L193>`_
     - Complete
     - 10
     - 100,000
@@ -797,7 +797,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.2.1
     - Same as 6.2, but with a fix for `this rate to probability equation transcription error <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_ (add back in the duration_scaling_factor) and include partial term pregnancy fix to bith observer
-    - Incomplete
+    - Complete
     - 10
     - 100,000
     - Baseline
@@ -805,7 +805,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 
   * - 6.3
     - Same specifications as model 6.2 (including the exponential rate-to-probability calculation), but with ENN LBWSG PAF updated to use the ENN LBWSG exposure prevalence rather than the LBWSG exposure at birth
-    - PAUSED
+    - Incomplete
     - 10
     - 100,000
     - Baseline
@@ -813,7 +813,7 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.4
     - Same specifications as model 6.3 (including the ENN LBWSG PAF using ENN exposure), but with the revision of the rate-to-probability calculation back to :math:`p = \text{rate} * \text{duration scaling factor}`
-    - PAUSED
+    - Incomplete
     - 10
     - 100,000
     - Baseline
@@ -1004,6 +1004,12 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Neonatal mortality ratios are now dramatically overestimated. Note that while the birth observer has changed between models 6.1 and 6.2, it has been verified that birth counts do not vary between these runs and that greater death count values are driving the difference between neonatal mortality ratios in 6.1 and 6.2
     - * `Model 6.2 neonatal mortality validatio notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.2_nn_mortality.ipynb>`_
       * Birth observer has zero counts for all partial term pregnancy outcomes
+  * - 6.2.1
+    - Check ENN mortality ratio compared to GBD, check that birth observer is recording partial term pregnancies 
+    - * neonatal mortality ratios are within the expected range
+      * birth observer is functioning as expected
+    - * `Model 6.2.1 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.2.1_nn_mortality.ipynb>`_
+      * `Notebook comparing model 6.1 and 6.2.1 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
 
 .. note:: 
 
@@ -1018,18 +1024,10 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Explanation
     - Action plan
     - Timeline
-  * - Partial term pregnnacy outcomes all counted as zero in new birth observer
-    - Partial term pregnancies are not assigned birth facilities and the birth observer stratifies by birth facility
-    - Assign "n/a" birth facility exposure to partial term pregnancies
-    - For model 6.2.1
-  * - Unexpectedly high neonatal death counts in model 6.2
-    - `Suspected rate to probability equation transcription error here <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_
-    - Update equation and rerun
-    - For model 6.2.1
   * - Issues with neonatal mortality ratio V&V
     - Under investigation. Unknown if model will meet verification criteria for neonatal mortality ratio (deaths per birth in ENN age group) that has been used as a verification target (and that has been met for model 6.1, but not prior) will simultaneously meet verification target for neonatal mortality rate (deaths per person time spent in age group). Also unknown if rate to probability calculation will impact findings.
     - Run model with differing rate to probability calculations, document changes required to add a person-time observer so we can check neonatal mortality rate verification target
-    - 
+    - Revisit following V&V of model 6.4
 
 
 .. _mncnh_portfolio_6.0:
