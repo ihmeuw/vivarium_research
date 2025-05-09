@@ -555,18 +555,22 @@ Default stratifications to all observers should include scenario and input draw.
   * - Observer
     - Default stratifications
     - Note
-  * - Maternal disorders burden: cause-specific cases, deaths, YLLs, and YLDs
+  * - 1. Maternal disorders burden: cause-specific cases, deaths, YLLs, and YLDs
     - * Maternal age group
       * Pregnancy outcome
       * Azithromycin coverage
       * Misoprostol coverage
     - Included with maternal age group stratification. Additional stratifiers to be added
-  * - Births (this observer includes ALL pregnancy outcomes, including partial term pregnancies that may not typically be considered "births")
+  * - 2. Births (this observer includes ALL pregnancy outcomes, including partial term pregnancies that may not typically be considered "births")
     - * Pregnancy outcome
       * Child sex
       * Delivery facility type
-    - Included
-  * - Neonatal deaths (cause-specific)
+      * Antibiotics availability
+      * Probiotics availability
+      * CPAP availability
+      * Corticosteroid coverage
+    - Included excpet for corticosteroid coverage, which has not yet been added
+  * - 3. Neonatal deaths (cause-specific)
     - * Child sex
       * Child age group
       * Delivery facility type
@@ -575,22 +579,29 @@ Default stratifications to all observers should include scenario and input draw.
       * Probiotics availability
       * Corticosteroid coverage
     - Included, except for corticosteroid coverage which has yet to be added
-  * - Antibiotics eligible birth counts
+  * - 4. Antibiotics eligible birth counts
     - * Delivery facility type
     - Included. Confirm this represents "eligible birth counts"?
-  * - CPAP eligible birth counts
+  * - 5. CPAP eligible birth counts
     - * Delivery facility type
     - Included. Confirm this represents "eligible birth counts"?
-  * - Probiotics eligible birth counts
+  * - 6. Probiotics eligible birth counts
     - * Delivery facility type
     - Included. Confirm this represents "eligible birth counts"?
-  * - Maternal population counts
+  * - 7. Maternal population counts
     - * Maternal age group
       * Pregnancy outcome
       * ANC attendance
       * Ultrasound coverage
     - NOT YET INCLUDED
 
+.. todo::
+
+  Determine whether we want to continue to have duplicate information like:
+
+    - Stratifying the birth observer by neonatal interventions,
+
+    - AND separately observing neonatal intervention counts
 
 .. note::
 
