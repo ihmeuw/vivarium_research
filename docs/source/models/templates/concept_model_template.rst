@@ -273,6 +273,43 @@ This section is intended for tracking the progress of V&V of simulation
 results. 
 
 The below tables can be filled out iteratively as new model runs are requested and later V&V'd. 
+
+.. note::
+
+  **Best Practices for V&V Tracking:**
+
+  Below is a summary of each of the tables in the V&V tracking section and best practices for using them. Generally, every single model run should be included in these tables for a complete record of model versions. This can be very helpful if prior model runs need to be revisited to identify when a particular bug may have arisen.
+
+  .. list-table:: V&V Tracking Table Metadata
+    :header-rows: 1
+
+    * - Table
+      - Purpose
+      - Best practice notes
+    * - Model runs
+      - To log the specifications for each run of the model that is performed
+      - * Details of a particular model run should be posted in a PR *before* the run is launched. This information is meant to communicate desired details of a model run to the engineers (if engineering is running them) or to align on a plan among researchers (if research is running them)
+        * The modification columns should be filled in with "Default" if default behavior is desired rather than leaving them blank (this indicates that they were not erroneously left blank)
+    * - V&V tracking
+      - To detail the V&V criteria and findings for each model run
+      - * V&V criteria for a given model run should be posted *before* the run is launched at the same time as the model run is added to the model runs table. This helps the writer and reviewer evaluate whether the requested model specifications (e.g. observer and scenario requests) are appropriate for the aims of the model run
+        * A summary of V&V conclusions should be listed after completing V&V for the given model run and each finding should link to a notebook that demonstrates that finding
+    * - Outstanding V&V issues
+      - To keep a log of current V&V criteria that are not met so that they are not lost and to communicate the status/plan for addressing each issue to the larger team
+      - Each V&V issue (no matter how small!) should be added to this table when it is identified and can be deleted (or moved to a separate "resolved V&V issue" table if desired) when resolved
+
+  **Best practices in model naming/organization:**
+
+  * Consistency in model versioning names across the concept model, engineering development, artifacts, and V&V notebooks is very helpful. Best practice is to define a model version name in the model runs table (ex: 2.1) and use that model version name across all other instances where that model version is referenced (including the directory where the model results are written, the notebook name where V&V is conducted, etc.).
+
+  * Model version integer increases (1.0 to 2.0, for example) are generally used for major updates to the model (ex: including risks as well as causes or adding intervention)
+
+  * Model version decimal point increases (1.0 to 1.1, for example) are generally used for bugfixes in implementation
+
+  * Model version second decimal point increases (1.1 to 1.1.1, for example) are generally used for trivial changes (like a quick equation fix, or rerunning with a new observer)
+
+  * It is best practice for model versions to generally follow sequential numerical ordering
+
  
 .. list-table:: Model runs
   :header-rows: 1
@@ -286,7 +323,7 @@ The below tables can be filled out iteratively as new model runs are requested a
   * - e.g. 1.0
     - e.g. Baseline concept model updates
     - e.g. Baseline only 
-    - e.g. 50 draws; 200,000 pop size
+    - e.g. Default
     - e.g. Count data results stratified by random seed for optimization
     - e.g. Remove children under 6 months from observers
 
@@ -306,10 +343,6 @@ The below tables can be filled out iteratively as new model runs are requested a
      - e.g. Confirm that there is no variation in person-time quantity between different observers of same measure.
      - e.g. V&V notebooks for model 1.0 can be found here [insert Github link]. V&V criteria satisfied. 
 
-.. note::
-
-  We recommend that you fill out the 'V&V criteria' column in the table above before the model has actually been
-  implemented. Then you can fill in the 'V&V summary' as you go!  
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
