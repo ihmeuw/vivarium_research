@@ -795,6 +795,13 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Baseline
     - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.2``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 6.2.1
+    - Same as 6.2, but with a fix for `this rate to probability equation transcription error <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_(add back in the duration_scaling_factor)
+    - Incomplete
+    - 10
+    - 100,000
+    - Baseline
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.2.1``
   * - 6.3
     - Same specifications as model 6.2 (including the exponential rate-to-probability calculation), but with ENN LBWSG PAF updated to use the ENN LBWSG exposure prevalence rather than the LBWSG exposure at birth
     - PAUSED
@@ -1010,9 +1017,9 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Action plan
     - Timeline
   * - Unexpectedly high neonatal death counts in model 6.2
-    - Unknown - want to confirm this is a true result and not some bug
-    - Research and engineering to investigate code changes between model 6.1 and 6.2
-    - Before running model 6.3 and 6.4
+    - `Suspected rate to probability equation transcription error here <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_
+    - Update equation and rerun
+    - For model 6.2.1
   * - Issues with neonatal mortality ratio V&V
     - Under investigation. Unknown if model will meet verification criteria for neonatal mortality ratio (deaths per birth in ENN age group) that has been used as a verification target (and that has been met for model 6.1, but not prior) will simultaneously meet verification target for neonatal mortality rate (deaths per person time spent in age group). Also unknown if rate to probability calculation will impact findings.
     - Run model with differing rate to probability calculations, document changes required to add a person-time observer so we can check neonatal mortality rate verification target
