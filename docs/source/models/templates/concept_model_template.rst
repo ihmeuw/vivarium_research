@@ -292,7 +292,7 @@ The below tables can be filled out iteratively as new model runs are requested a
         * The modification columns should be filled in with "Default" if default behavior is desired rather than leaving them blank (this indicates that they were not erroneously left blank)
     * - V&V tracking
       - To detail the V&V criteria and findings for each model run
-      - * V&V criteria for a given model run should be posted *before* the run is launched at the same time as the model run is added to the model runs table. This helps the writer and reviewer evaluate whether the requested model specifications (e.g. observer and scenario requests) are appropriate for the aims of the model run
+      - * V&V criteria for a given model run should be posted *before* the run is launched (and ideally at the same time as the model run is added to the model runs table). This helps the writer and reviewer evaluate whether the requested model specifications (e.g. observer and scenario requests) are appropriate for the aims of the model run
         * A summary of V&V conclusions should be listed after completing V&V for the given model run and each finding should link to a notebook that demonstrates that finding
     * - Outstanding V&V issues
       - To keep a log of current V&V criteria that are not met so that they are not lost and to communicate the status/plan for addressing each issue to the larger team
