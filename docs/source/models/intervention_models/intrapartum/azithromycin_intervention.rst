@@ -1,8 +1,8 @@
-.. _intervention_intrapartum_azithromycin:
+.. _azithromycin_intervention:
 
-=============================================
-Antibiotics for treating bacterial infections
-=============================================
+=========================================
+Azithromycin for treating maternal sepsis
+=========================================
 
 .. contents::
    :local:
@@ -28,9 +28,9 @@ Antibiotics for treating bacterial infections
 Intervention Overview
 -----------------------
 
-Antibiotics are used to treat bacterial infections in neonates, reducing the risk mortality.
+Azithromycin is used to treat maternal sepsis in the intrapartum period, reducing the risk incidence.
 
-This section describes how an antibiotic-treatment intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
+This section describes how an azithromycin intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 15
@@ -75,33 +75,42 @@ These placeholder values come from two data sources, both for Ethiopia, both ide
 Vivarium Modeling Strategy
 --------------------------
 
-This intervention requires adding an attribute to all simulants to specify if a neonate has access to a facility with access to antibiotics.  Since the neonatal mortality model does not explicitly represent incidence of sepsis, we will not track explicitly if a simulant receives antibiotics.  Instead the model will have different cause-specific mortality rates for sepsis for individuals with and without access to antibiotics (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
+This intervention requires adding an attribute to all simulants to specify if a pregnant person has access to a facility with access to azithromycin.  We will track if a simulant has access to azithromycin 
+and the model will have different incidence rates for sepsis for individuals with and without access to azithromycin (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` 
+components from ``vivarium_public_health``).
 
-The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has access to antibiotics during the neonatal period, which we assume will be closely related to the facility choice during birth, i.e. home births have much lower access than in-facility births, and births in BEmONC facilities have lower access than CEmONC facilities.
+The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has access to azithromycin during the intrapartum period, which we assume will be closely 
+related to the facility choice during birth, i.e. home births have much lower access than in-facility births, and births in BEmONC facilities have lower access than CEmONC 
+facilities.
 
-To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "lack of access to antibiotics".  With this framing, the ``RiskEffect`` component requires data on (1) the relative risk of sepsis mortality for people with lack of access to antibiotics, and (2) the population attributable fraction (PAF) of sepsis due to lack of access to antibiotics.  We will use the decision tree below to find the probability of sepsis mortality with and without access to antibiotics that are logically consistent with the baseline delivery facility rates and baseline antibiotics coverage.
+To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "lack of access to azithromycin".  With this framing, the ``RiskEffect`` 
+component requires data on (1) the relative risk of sepsis incidence for people with lack of access to azithromycin, and (2) the population attributable fraction (PAF) of sepsis 
+due to lack of access to azithromycin.  We will use the decision tree below to find the probability of sepsis incidence with and without access to azithromycin that are logically 
+consistent with the baseline delivery facility rates and baseline azithromycin coverage.
 
-In Vivarium, this risk effect will modify the sepsis mortality pipeline, resulting in 
+In Vivarium, this risk effect will modify the sepsis incidence pipeline, resulting in 
 
 .. math::
 
-   \text{CSMR}_i^\text{sepsis} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i} \cdot (1 - \text{PAF}_\text{no antibiotics}) \cdot \text{RR}_i^\text{no antibiotics}
+   \text{IR}_i^\text{sepsis} = \text{IR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i} \cdot (1 - \text{PAF}_\text{no azithromycin}) \cdot \text{RR}_i^\text{no azithromycin}
 
-where :math:`\text{RR}_i^\text{no antibiotics}` is simulant *i*'s individual relative risk for "no antibiotics", meaning :math:`\text{RR}_i^\text{no antibiotics} = \text{RR}_\text{no antibiotics}` if simulant *i* accesses a facility without antibiotics, and :math:`\text{RR}_i^\text{no antibiotics} = 1` if simulant *i* accesses a facility *with* antibiotics.
+where :math:`\text{RR}_i^\text{no azithromycin}` is simulant *i*'s individual relative risk for "no azithromycin", meaning :math:`\text{RR}_i^\text{no azithromycin} = \text{RR}_\text{no azithromycin}` 
+if simulant *i* accesses a facility without azithromycin, and :math:`\text{RR}_i^\text{no azithromycin} = 1` if simulant *i* accesses a facility *with* azithromycin.
 
-If there are other interventions also affecting the CSMR of sepsis, the pipeline will combine these effects, and we can write out the math for this risk explicitly as 
+If there are other interventions also affecting the IR of sepsis, the pipeline will combine these effects, and we can write out the math for this risk explicitly as 
 
 .. math::
 
-   \text{CSMR}^\text{sepsis}_{i, \text{updated}} = \text{CSMR}^\text{sepsis}_{i, \text{original}} \cdot (1 - \text{PAF}_\text{no antibiotics}) \cdot \text{RR}_i^\text{no antibiotics}
+   \text{IR}^\text{sepsis}_{i, \text{updated}} = \text{IR}^\text{sepsis}_{i, \text{original}} \cdot (1 - \text{PAF}_\text{no azithromycin}) \cdot \text{RR}_i^\text{no azithromycin}
 
 This reduces to the previous formula if there are no other interventions, and we would have 
 
 .. math::
 
-   \text{CSMR}^\text{sepsis}_{i, \text{original}} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
+   \text{IR}^\text{sepsis}_{i, \text{original}} = \text{IR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
 
-While we are searching the literature for an appropriate value for the relative risk, we will use a stand-in value with an origin I have failed to record.
+The relative risk value we will use is pulled from `this 2024 systematic review/meta-analysis <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_ 
+that investigated the effect of azithromycin during labor.
 
 .. list-table:: Risk Effect Parameters for Lack-of-Access-to-Antibiotics
   :widths: 15 15 15 15
@@ -112,9 +121,9 @@ While we are searching the literature for an appropriate value for the relative 
     - Distribution
     - Notes
   * - Relative Risk
-    - 1.39
+    - 1.54
     - :math:`\text{Normal}(1.39,0.08^2)`
-    - Based on placeholder relative risk of 0.72 (95% CI 0.64-0.80) of sepsis mortality for neonates with access to antibiotics 
+    - Based on placeholder relative risk of 0.65 (95% CI 0.55-0.77) on sepsis incidence for pregnant people with access to azithromycin
   * - PAF
     - see below
     - see below
@@ -123,7 +132,10 @@ While we are searching the literature for an appropriate value for the relative 
 Calibration Strategy
 --------------------
 
-The following decision tree shows all of the paths from delivery facility choice to antibiotics availability.  Distinct paths in the tree correspond to disjoint events, which we can sum over to find the population probability of sepsis mortality.  The goal here is to use internally consistent conditional probabilities of sepsis mortality for the subpopulations with and without access to antibiotics, so that the baseline scenario can track who has access to antibiotics and still match the baseline sepsis mortality rate.
+The following decision tree shows all of the paths from delivery facility choice to antibiotics availability.  Distinct paths in the tree correspond to disjoint events, 
+which we can sum over to find the population probability of sepsis mortality.  The goal here is to use internally consistent conditional probabilities of sepsis mortality 
+for the subpopulations with and without access to antibiotics, so that the baseline scenario can track who has access to antibiotics and still match the baseline sepsis 
+mortality rate.
 
 .. graphviz::
 
