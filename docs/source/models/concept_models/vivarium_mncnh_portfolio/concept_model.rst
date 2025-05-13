@@ -594,6 +594,10 @@ Default stratifications to all observers should include scenario and input draw.
       * ANC attendance
       * Ultrasound coverage
     - NOT YET INCLUDED
+  * - 8. Received probiotics counts
+    - * Gestational age (above/below 37 weeks)
+      * Delivery facility type
+    - NOT YET INCLUDED
 
 .. todo::
 
@@ -852,7 +856,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Wave I neonatal probiotics with scale-up scenarios, same as model 6.0 but with `effective coverage (only preterm neonates receive probiotics) <https://github.com/ihmeuw/vivarium_research/pull/1643>`_ 
     - Baseline and alternative scenarios 2 - 10 
     - ``model7.0``
-    - 
+    - Default
     - 
     - 
   * - 8.0
@@ -1054,6 +1058,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Check ENN mortality ratio compared to GBD and models 6.1-6.4
     - Mortality is overestimated to a degree greater than 6.3
     - `Notebook comparing model 6.4 to 6.1-6.4 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
+  * - 7.0
+    - Check that probiotics are only received by preterm neonates and that coverage at each facility type is as expected
+    - 
+    - 
 
 
 .. list-table:: Outstanding model verification and validation issues
