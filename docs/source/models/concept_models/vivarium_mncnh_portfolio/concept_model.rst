@@ -857,8 +857,8 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and alternative scenarios 2 - 10 
     - ``model7.0``
     - Default
+    - Stratify probiotics observer (#6) with gestational age above/below 37 weeks for V&V
     - Default
-    - Probiotics counts observer added for this run and to be included in all subsequent runs
   * - 8.0
     - Wave I azithromycin 
     - Baseline
