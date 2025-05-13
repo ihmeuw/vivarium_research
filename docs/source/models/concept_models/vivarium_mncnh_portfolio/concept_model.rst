@@ -849,7 +849,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 7.0
-    - Wave I neonatal probiotics with scale-up scenarios 
+    - Wave I neonatal probiotics with scale-up scenarios, same as model 6.0 but with `effective coverage (only preterm neonates receive probiotics) <https://github.com/ihmeuw/vivarium_research/pull/1643>`_ 
     - Baseline and alternative scenarios 2 - 10 
     - ``model7.0``
     - 
@@ -858,21 +858,21 @@ Default stratifications to all observers should include scenario and input draw.
   * - 8.0
     - Wave I azithromycin 
     - Baseline
-    - ``model7.0``
+    - ``model8.0``
     -
     - 
     - 
   * - 9.0
     - Wave I misoprostol
     - Baseline 
-    - ``model8.0``
+    - ``model9.0``
     -
     - 
     - 
   * - 10.0
     - Wave I antenatal corticosteroids
     - Baseline
-    - ``model9.0``
+    - ``model10.0``
     -
     - 
     - 
