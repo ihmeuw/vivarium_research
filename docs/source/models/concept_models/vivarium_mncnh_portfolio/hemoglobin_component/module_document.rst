@@ -140,8 +140,8 @@ This module will:
     - Instructions detailed in section 2.3.1 below
     - 
   * - 8
-    - Low ferritin?
-    - STRATEGY TBD, TODO: update
+    - Low ferritin screening value?
+    - Instructions detailed in section 2.3.2 below
     - 
   * - 9
     - IV iron?
@@ -166,6 +166,29 @@ Follow the steps below to determine the answer to decision node #7:
 2. For simulants that are truly low hemoglobin, assign tests low hemoglobin status to 85% (sensitivity value) and tests adequate hemoglobin status to 15% (100 - sensitivity value of 85)
 3. For simulants that are truly adequate hemoglobin, assign tests adequate hemoglobin status to 80% (specificity) and tests low hemoglobin status to 20% (100 - specificty value of 80)
 4. Use the test hemoglobin status to determine the answer to decision node 7 (answer is "yes" if they have test low hemoglobin status and "no" if they have test adequate hemoglobin status)
+
+2.3.2 Ferritin Screening Instructions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Research background:**
+
+Ferritin is a protein that stores iron within the body and low blood ferritin levels can indicate low iron stores. Pregnancies that have hemoglobin less than 100 g/L based on the hemoglobin screen will also be screened for ferritin levels via a minimally invasive screening (finger prick). Pregnancies that have a hemoglobin level <100 g/L and a blood ferritin level below 15 ug/L (anemic AND iron deficient) are eligible for IV iron.
+
+Notably, the GBD does not have any estimates related to ferritin exposure. However, the GBD assigns specific causes to all cases of anemia. Some of these causes of anemia are considered "iron responsive," indicating that they are iron deficiency anemia. An example of an iron deficiency anemia is anemia caused by maternal hemorrhage (caused by blood loss, decreasing systemic levels of both hemoglobin and iron). An example of a non-iron responsive anemia is sickle cell trait (low hemoglobin is caused to defect in hemoglobin protein rather than low iron levels). Notably, it is possible for non-iron-responsive anemias to also have low iron levels. See the :ref:`anemia impairment document <2019_anemia_impairment>` for a list of iron responsive and non iron responsive causes of anemia in the GBD.
+
+Therefore, in our model we will use the severity-specific fraction of iron responsive anemia among all causes of anemia in GBD as a proxy measure for the fraction of anemia cases with low ferritin. This approach is limited in that we may slightly underestimate total eligibility by not considering the proportion of the population who has low hemoglobin due to an iron-non-responsive cause and also coincidentally has low ferritin.
+
+.. note::
+
+  Chris T. has suggested that we can use the fraction of iron deficiency anemia from the in-progress PRISMA study rather than GBD for this purpose. PRIMSA study results are expected in June or July of 2025.
+
+`The notebook that was used to calculate these values can be found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/fraction_iron_responsive_anemia.ipynb>`_
+
+**Modeling instructions:**
+
+The probability of low ferritin screening is dependent on the simulant's location, age group, and anemia status at the time of screening. Anemia status at the time of screening should be based on their true hemoglobin exposure value *after* action points I, II, and III have been executed (and *before* IV, V, and VI). See the :ref:`anemia/hemoglobin exposure table here for reference <2019_anemia_impairment>` and remember to use the pregnancy-specific values.
+
+`The probability of low ferritin specific to location, age, and anemia status can be found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/iron_responsive_fraction.csv>`_
 
 2.4 Module Action Points
 ---------------------------
