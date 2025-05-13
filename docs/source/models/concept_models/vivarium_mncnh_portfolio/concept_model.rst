@@ -1025,7 +1025,9 @@ Default stratifications to all observers should include scenario and input draw.
   * - 6.1
     - Check ENN mortality ratio compared to GBD
     - Neonatal mortality ratios are now slightly underestimated (rather than the previous overestimation). Note that calculation of the mortality ratio of the LNN age group has been updated in this notebook to be [deaths in LNN age group] / [population at the start of the LNN age group], rather than a denominator of live births so that LNN mortality is not dependent on ENN mortality.
-    - `Model 6.1 neonatal mortality validation notebook for all locations and draws <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality_full_locations_and_draws.ipynb>`_. `Model 6.1 neonatal mortality validation notebook for a single draw run <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality_single_draw.ipynb>`_
+    - * `Model 6.1 neonatal mortality validation notebook for all locations and draws <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality_full_locations_and_draws.ipynb>`_. 
+      * `Model 6.1 neonatal mortality validation notebook for a single draw run <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality_single_draw.ipynb>`_
+      * `Notebook comparing model 6.1 to 6.1-6.4 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
   * - 6.2
     - Check ENN mortality ratio compared to GBD
     - Neonatal mortality ratios are now dramatically overestimated. Note that while the birth observer has changed between models 6.1 and 6.2, it has been verified that birth counts do not vary between these runs and that greater death count values are driving the difference between neonatal mortality ratios in 6.1 and 6.2
@@ -1033,10 +1035,18 @@ Default stratifications to all observers should include scenario and input draw.
       * Birth observer has zero counts for all partial term pregnancy outcomes
   * - 6.2.1
     - Check ENN mortality ratio compared to GBD, check that birth observer is recording partial term pregnancies 
-    - * neonatal mortality ratios are within the expected range
+    - * neonatal mortality ratios are within the expected range (underestimated to a degree greater than 6.1)
       * birth observer is functioning as expected
     - * `Model 6.2.1 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.2.1_nn_mortality.ipynb>`_
       * `Notebook comparing model 6.1 and 6.2.1 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
+  * - 6.3
+    - Check ENN mortality ratio compared to GBD and models 6.1-6.4
+    - Mortality is slightly overestimated. It appears that overestimation in 6.3 is slightly larger in magnitude than the underestimation of 6.1. 
+    - `Notebook comparing model 6.3 to 6.1-6.4 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
+  * - 6.4
+    - Check ENN mortality ratio compared to GBD and models 6.1-6.4
+    - Mortality is overestimated to a degree greater than 6.3
+    - `Notebook comparing model 6.4 to 6.1-6.4 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
 
 
 .. list-table:: Outstanding model verification and validation issues
@@ -1046,10 +1056,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Issues with neonatal mortality ratio V&V
-    - Under investigation. Unknown if model will meet verification criteria for neonatal mortality ratio (deaths per birth in ENN age group) that has been used as a verification target (and that has been met for model 6.1, but not prior) will simultaneously meet verification target for neonatal mortality rate (deaths per person time spent in age group). Also unknown if rate to probability calculation will impact findings.
-    - Run model with differing rate to probability calculations, document changes required to add a person-time observer so we can check neonatal mortality rate verification target
-    - Revisit following V&V of model 6.4
+  * - Miscalibration of neonatal mortality ratios
+    - Using the specifications in model 6.1, we underestimate mortality ratios (believed to be due to having mortality probabilities greater than 1). Using the specifications in model 6.3, we overestimate mortality ratios (believed to be due to difference in mortality ratio verification target rather than mortality rate verification target)
+    - Research team to discuss best approach to resolving issue and will document details. In the meantime, continue running for model versions greater than 6.4 using the specifications from model 6.1 (use birth exposure to calculate the early neonatal LBWSG PAF and use the multiplicative rate to probability calculation) and expect neonatal mortality ratios to be slightly underestimated relative to the GBD verification target.
+    - For all runs after 6.4 until research team provides updated documentation
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revist following GBD 2023 update
