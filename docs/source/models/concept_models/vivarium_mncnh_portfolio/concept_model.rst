@@ -849,20 +849,27 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 7.0
+    - Wave I neonatal probiotics with scale-up scenarios 
+    - Baseline and alternative scenarios 2 - 10 
+    - ``model7.0``
+    - 
+    - 
+    - 
+  * - 8.0
     - Wave I azithromycin 
     - Baseline
     - ``model7.0``
     -
     - 
     - 
-  * - 8.0
+  * - 9.0
     - Wave I misoprostol
     - Baseline 
     - ``model8.0``
     -
     - 
     - 
-  * - 9.0
+  * - 10.0
     - Wave I antenatal corticosteroids
     - Baseline
     - ``model9.0``
