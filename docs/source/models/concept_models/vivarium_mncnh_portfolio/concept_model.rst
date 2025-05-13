@@ -569,7 +569,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Probiotics availability
       * CPAP availability
       * Corticosteroid coverage
-    - Included excpet for corticosteroid coverage, which has not yet been added
+    - Included except for corticosteroid coverage, which has not yet been added
   * - 3. Neonatal deaths (cause-specific)
     - * Child sex
       * Child age group
