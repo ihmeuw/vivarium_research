@@ -856,7 +856,7 @@ Default stratifications to all observers should include scenario and input draw.
     - ``model6.5``
     - Default
     - Default
-    - Default
+    - Maternal population observer added for this run and to be included in all subsequent runs
   * - 7.0
     - Wave I azithromycin 
     - Baseline
