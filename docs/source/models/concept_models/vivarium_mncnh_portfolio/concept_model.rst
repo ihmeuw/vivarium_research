@@ -638,10 +638,10 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Complete
     - 10
     - 100,000
-    - Locations include Pakistan, Nigeria, and Ethiopia. 
-      10 seeds * 10,000 simulants = 100,000 total population.
     - Baseline only
     - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/neonatal_disorders``
+    - Locations include Pakistan, Nigeria, and Ethiopia. 
+      10 seeds * 10,000 simulants = 100,000 total population.
   * - 3.1
     - Wave I Neonatal disorders V&V with correct LBWSG distribution
     - Complete
@@ -780,13 +780,45 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/raw_csmr/``
     - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 6.1
-    - Rerun LBWSG PAF calculation for Ethiopia
+    - Rerun with LBWSG PAF changes for Ethiopia: (1) fix sex-specificity bug in LBWSG PAF calculation, and (2) use LBWSG exposure at birth for calculation of the ENN LBWSG PAF
+    - Complete
+    - 10
+    - 100,000
+    - All scenarios
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.1``
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 50,000 simulants = 500,000 total population.
+  * - 6.2
+    - Same specifications as model 6.1, but this time with the exponential rate-to-probability conversion (:math:`p= 1 - e^{(-\text{rate} * \text{duration scaling factor})}`) in `this function <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/29fe810c2f1abf5b358a452d3f59ffdda266afe8/src/vivarium_gates_mncnh/utilities.py#L187-L193>`_
+    - Complete
+    - 10
+    - 100,000
+    - Baseline
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.2``
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 6.2.1
+    - Same as 6.2, but with a fix for `this rate to probability equation transcription error <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_ (add back in the duration_scaling_factor) and include partial term pregnancy fix to bith observer
+    - Complete
+    - 10
+    - 100,000
+    - Baseline
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.2.1``
+    - 
+  * - 6.3
+    - Same specifications as model 6.2 (including the exponential rate-to-probability calculation), but with ENN LBWSG PAF updated to use the ENN LBWSG exposure prevalence rather than the LBWSG exposure at birth
     - Incomplete
-    - N/A
-    - N/A -- will do verification in the interactive sim to start
-    - N/A -- will do verification in the interactive sim to start
-    - ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.1/``
-    - Rerun LBWSG PAF calculation for Ethiopia using a population size of 389_992 (approximately twice the prior value while still following the relevant requirements) and save to a new artifact to be used in interactive sim V&V.
+    - 10
+    - 100,000
+    - Baseline
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.3``
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
+  * - 6.4
+    - Same specifications as model 6.3 (including the ENN LBWSG PAF using ENN exposure), but with the revision of the rate-to-probability calculation back to :math:`p = \text{rate} * \text{duration scaling factor}`
+    - Incomplete
+    - 10
+    - 100,000
+    - Baseline
+    - ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/model6.4``
+    - Locations include Pakistan, Nigeria, and Ethiopia. 10 seeds * 10,000 simulants = 100,000 total population.
   * - 7.0
     - Wave I azithromycin 
     - Incomplete
@@ -937,9 +969,8 @@ Specific observer outputs and their stratifications may vary by model run as nee
   * - 6.0
     - Validate coverage, RR of probiotics on sepsis (and confirm other causes are unchanged)
     - Neonatal ACMR looks off, residuals have gotten increasingly worse with additional interventions
-    - 
-      - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10a_vnv_neonatal_acmr-w_probiotics.ipynb>`__
-      - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10b_vnv_and_scenario_results_probiotics.ipynb>`__
+    - `ACMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10a_vnv_neonatal_acmr-w_probiotics.ipynb>`__
+      `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_10b_vnv_and_scenario_results_probiotics.ipynb>`__
   * - 6.0.1
     - Validate neonatal disorders ACMR with 200k population without interventions
     - Used the attached notebook and spreadsheet to figure out which runs were validating with ACMR and which were not
@@ -964,6 +995,21 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - 
       - `Source of truth notebook for testing neonatal disorders ACMR here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_28a_vnv_neonatal_acmr.ipynb>`_
       - `Excel spreadsheet of neonatal ACMR V&V run list here <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B1DCEBE2A-AC51-49D3-8553-B0FBBEA276B1%7D&file=Neonatal%20Disorders%20ACMR%20Model%20Run%20List.xlsx&action=default&mobileredirect=true>`_
+  * - 6.1
+    - Check ENN mortality ratio compared to GBD
+    - Neonatal mortality ratios are now slightly underestimated (rather than the previous overestimation). Note that calculation of the mortality ratio of the LNN age group has been updated in this notebook to be [deaths in LNN age group] / [population at the start of the LNN age group], rather than a denominator of live births so that LNN mortality is not dependent on ENN mortality.
+    - `Model 6.1 neonatal mortality validation notebook for all locations and draws <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality_full_locations_and_draws.ipynb>`_. `Model 6.1 neonatal mortality validation notebook for a single draw run <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_nn_mortality_single_draw.ipynb>`_
+  * - 6.2
+    - Check ENN mortality ratio compared to GBD
+    - Neonatal mortality ratios are now dramatically overestimated. Note that while the birth observer has changed between models 6.1 and 6.2, it has been verified that birth counts do not vary between these runs and that greater death count values are driving the difference between neonatal mortality ratios in 6.1 and 6.2
+    - * `Model 6.2 neonatal mortality validatio notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.2_nn_mortality.ipynb>`_
+      * Birth observer has zero counts for all partial term pregnancy outcomes
+  * - 6.2.1
+    - Check ENN mortality ratio compared to GBD, check that birth observer is recording partial term pregnancies 
+    - * neonatal mortality ratios are within the expected range
+      * birth observer is functioning as expected
+    - * `Model 6.2.1 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.2.1_nn_mortality.ipynb>`_
+      * `Notebook comparing model 6.1 and 6.2.1 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
 
 .. note:: 
 
@@ -978,10 +1024,10 @@ Specific observer outputs and their stratifications may vary by model run as nee
     - Explanation
     - Action plan
     - Timeline
-  * - 
-    - 
-    -  
-    -  
+  * - Issues with neonatal mortality ratio V&V
+    - Under investigation. Unknown if model will meet verification criteria for neonatal mortality ratio (deaths per birth in ENN age group) that has been used as a verification target (and that has been met for model 6.1, but not prior) will simultaneously meet verification target for neonatal mortality rate (deaths per person time spent in age group). Also unknown if rate to probability calculation will impact findings.
+    - Run model with differing rate to probability calculations, document changes required to add a person-time observer so we can check neonatal mortality rate verification target
+    - Revisit following V&V of model 6.4
 
 
 .. _mncnh_portfolio_6.0:
