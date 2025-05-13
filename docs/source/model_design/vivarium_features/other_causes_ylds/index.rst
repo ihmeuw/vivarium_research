@@ -92,13 +92,15 @@ sequela prevalence.
 .. note::
 
   The COMO adjustment is run and maintained by IHME central computation. `The 
-  repository can be found here (as of May, 2023) <https://stash.ihme.washington.edu/projects/CCGMAC/repos/como/browse>`_.
+  repository can be found here (as of May, 2025) <https://stash.ihme.washington.edu/projects/CCGMAC/repos/como/browse>`_.
 
-  According to correspondence with a central computation representative: the COMO
-  adjustment ensures that no simulant may simultaneously possess mutually exclusive
-  sequelae (mild AND moderate diarrhea, for instance), nor may they simultaneously
-  possess mutually exclusive impairments (such as mild AND moderate anemia). A 
-  simulant may, however, simultaneously possess more than one sequelae that correspond
+  According to `correspondence with a central computation representative <https://help.ihme.washington.edu/servicedesk/customer/portal/5/CCMHD-22237>`_: the COMO
+  adjustment makes no restriction about the combinations of sequelae a simulant
+  may simultaneously possess.
+  This means a simulant could have mild AND moderate diarrhea, or mild AND moderate anemia,
+  though this is logically impossible in the real world.
+  A 
+  simulant may also simultaneously possess more than one sequelae that correspond
   to the same healthstate (for example: the sequelae ectopic pregnancy and intestinal 
   perforation due to paratyphoid, which are both included in the abdominopelvic problem 
   healthstate. In this case, an individual who simultaneously possesses both of these 
