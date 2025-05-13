@@ -594,10 +594,6 @@ Default stratifications to all observers should include scenario and input draw.
       * ANC attendance
       * Ultrasound coverage
     - NOT YET INCLUDED
-  * - 8. Received probiotics counts
-    - * Gestational age (above/below 37 weeks)
-      * Delivery facility type
-    - NOT YET INCLUDED
 
 .. todo::
 
