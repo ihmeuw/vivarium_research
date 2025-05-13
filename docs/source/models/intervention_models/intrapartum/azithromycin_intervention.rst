@@ -112,7 +112,7 @@ This reduces to the previous formula if there are no other interventions, and we
 The relative risk value we will use is pulled from `this 2024 systematic review/meta-analysis <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_ 
 that investigated the effect of azithromycin during labor.
 
-.. list-table:: Risk Effect Parameters for Lack-of-Access-to-Antibiotics
+.. list-table:: Risk Effect Parameters for Lack-of-Access-to-Azithromycin
   :widths: 15 15 15 15
   :header-rows: 1
 
@@ -122,7 +122,7 @@ that investigated the effect of azithromycin during labor.
     - Notes
   * - Relative Risk
     - 1.54
-    - :math:`\text{Normal}(1.39,0.08^2)`
+    - :math:`\text{Normal}(1.54,0.08^2)`
     - Based on placeholder relative risk of 0.65 (95% CI 0.55-0.77) on sepsis incidence for pregnant people with access to azithromycin
   * - PAF
     - see below
@@ -132,23 +132,23 @@ that investigated the effect of azithromycin during labor.
 Calibration Strategy
 --------------------
 
-The following decision tree shows all of the paths from delivery facility choice to antibiotics availability.  Distinct paths in the tree correspond to disjoint events, 
-which we can sum over to find the population probability of sepsis mortality.  The goal here is to use internally consistent conditional probabilities of sepsis mortality 
-for the subpopulations with and without access to antibiotics, so that the baseline scenario can track who has access to antibiotics and still match the baseline sepsis 
-mortality rate.
+The following decision tree shows all of the paths from delivery facility choice to azithromycin availability.  Distinct paths in the tree correspond to disjoint events, 
+which we can sum over to find the population probability of sepsis incidence.  The goal here is to use internally consistent conditional probabilities of sepsis incidence
+for the subpopulations with and without access to azithromycin, so that the baseline scenario can track who has access to azithromycin and still match the baseline sepsis 
+incidence rate.
 
 .. graphviz::
 
-    digraph antibiotics {
+    digraph azithromycin {
         rankdir = LR;
         facility [label="Facility type"]
-        home [label="p_sepsis_without_antibiotics"]
-        BEmONC [label="antibiotics?"]
-        CEmONC [label="antibiotics?"]
-        BEmONC_wo [label="p_sepsis_without_antibiotics"] 
-        BEmONC_w [label="p_sepsis_with_antibiotics"]
-        CEmONC_wo [label="p_sepsis_without_antibiotics"] 
-        CEmONC_w [label="p_sepsis_with_antibiotics"]
+        home [label="p_sepsis_without_azithromycin"]
+        BEmONC [label="azithromycin?"]
+        CEmONC [label="azithromycin?"]
+        BEmONC_wo [label="p_sepsis_without_azithromycin"] 
+        BEmONC_w [label="p_sepsis_with_azithromycin"]
+        CEmONC_wo [label="p_sepsis_without_azithromycin"] 
+        CEmONC_w [label="p_sepsis_with_azithromycin"]
 
         facility -> home  [label = "home birth"]
         facility -> BEmONC  [label = "BEmONC"]
@@ -164,16 +164,22 @@ mortality rate.
 .. math::
     \begin{align*}
         p(\text{sepsis}) 
-        &= \sum_{\text{paths without antibiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{no antibiotics})\\
-        &+ \sum_{\text{paths with antibiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{antibiotics})\\[.1in]
-        p(\text{sepsis}|\text{no antibiotics}) &= \text{RR}_\text{no antibiotics} \cdot p(\text{sepsis}|\text{antibiotics})
+        &= \sum_{\text{paths without azithromycin}} p(\text{path})\cdot p(\text{sepsis}|\text{no azithromycin})\\
+        &+ \sum_{\text{paths with azithromycin}} p(\text{path})\cdot p(\text{sepsis}|\text{azithromycin})\\[.1in]
+        p(\text{sepsis}|\text{no azithromycin}) &= \text{RR}_\text{no azithromycin} \cdot p(\text{sepsis}|\text{azithromycin})
     \end{align*}
 
-where :math:`p(\text{sepsis})` is the probability of dying from sepsis in the general population, and :math:`p(\text{sepsis}|\text{antibiotics})` and :math:`p(\text{sepsis}|\text{no antibiotics})` are the probability of dying from sepsis in setting with and without access to antibiotics.  For each path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has antibiotics available.
+where :math:`p(\text{sepsis})` is the probability of contracting sepsis in the general population, and :math:`p(\text{sepsis}|\text{azithromycin})` and
+ :math:`p(\text{sepsis}|\text{no azithromycin})` are the probability of contracting sepsis in settings with and without access to azithromycin.  For each 
+ path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and 
+ unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has antibiotics available.
 
-When we fill in the location-specific values for delivery facility rates, antibiotics coverage, relative risk of mortality with antibiotics access, and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{sepsis}|\text{antibiotics})` and :math:`p(\text{sepsis}|\text{no antibiotics})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
+When we fill in the location-specific values for delivery facility rates, azithromycin coverage, relative risk of mortality with azithromycin access, 
+and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{sepsis}|\text{antibiotics})` 
+and :math:`p(\text{sepsis}|\text{no antibiotics})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
 
-**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that :math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
+**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that
+:math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
 
 .. math::
 
