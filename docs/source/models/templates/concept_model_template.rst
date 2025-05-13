@@ -302,7 +302,7 @@ The below tables can be filled out iteratively as new model runs are requested a
 
   * Consistency in model versioning names across the concept model, engineering development, artifacts, and V&V notebooks is very helpful. Best practice is to define a model version name in the model runs table (ex: 2.1) and use that model version name across all other instances where that model version is referenced (including the directory where the model results are written, the notebook name where V&V is conducted, etc.).
 
-  * Model version integer increases (1.0 to 2.0, for example) are generally used for major updates to the model (ex: including risks as well as causes or adding intervention)
+  * Model version integer increases (1.0 to 2.0, for example) are generally used for major updates to the model (ex: including risks as well as causes or adding an intervention)
 
   * Model version decimal point increases (1.0 to 1.1, for example) are generally used for bugfixes in implementation
 
