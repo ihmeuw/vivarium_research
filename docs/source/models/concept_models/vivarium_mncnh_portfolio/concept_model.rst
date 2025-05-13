@@ -848,6 +848,15 @@ Default stratifications to all observers should include scenario and input draw.
     -
     - 
     - 
+  * - 6.5
+    - * Use the birth prevalence to calculate the LBWSG PAF for the early neonatal age group (like in model run 6.1). Use this until otherwise noted.
+      * Use the multiplicative rate to probability equation (like in model run 6.1). Use this until otherwise noted.
+      * Add in observer #7 (maternal population observer)
+    - All scenarios
+    - ``model6.5``
+    - Default
+    - Default
+    - Default
   * - 7.0
     - Wave I azithromycin 
     - Baseline
@@ -1047,7 +1056,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Check ENN mortality ratio compared to GBD and models 6.1-6.4
     - Mortality is overestimated to a degree greater than 6.3
     - `Notebook comparing model 6.4 to 6.1-6.4 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
-
+  * - 6.5
+    - * Check that the neonatal mortality ratio is as expected in line with model 6.1
+      * Check that the new observer #7 is as expected
+      * Check that the pregnant population age structure looks as expected in new observer
+    - 
+    - 
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
