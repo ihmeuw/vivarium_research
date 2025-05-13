@@ -593,7 +593,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Pregnancy outcome
       * ANC attendance
       * Ultrasound coverage
-    - NOT YET INCLUDED
+    - Included
 
 .. todo::
 
@@ -1060,8 +1060,10 @@ Default stratifications to all observers should include scenario and input draw.
     - * Check that the neonatal mortality ratio is as expected in line with model 6.1
       * Check that the new observer #7 is as expected
       * Check that the pregnant population age structure looks as expected in new observer
-    - 
-    - 
+    - * Neonatal mortality ratio in expected range (same as model 6.1)
+      * Maternal population observer looks good!
+      * Age structure looks as expected
+    - `Model 6.5 VV notebook available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.5_nn_mortality_and_observer_check.ipynb>`_
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
