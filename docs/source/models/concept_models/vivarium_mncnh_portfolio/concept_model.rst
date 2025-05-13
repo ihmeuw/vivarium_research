@@ -857,8 +857,8 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and alternative scenarios 2 - 10 
     - ``model7.0``
     - Default
-    - 
-    - 
+    - Default
+    - Probiotics counts observer added for this run and to be included in all subsequent runs
   * - 8.0
     - Wave I azithromycin 
     - Baseline
@@ -1059,7 +1059,8 @@ Default stratifications to all observers should include scenario and input draw.
     - Mortality is overestimated to a degree greater than 6.3
     - `Notebook comparing model 6.4 to 6.1-6.4 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
   * - 7.0
-    - Check that probiotics are only received by preterm neonates and that coverage at each facility type is as expected
+    - * Check that probiotics are only received by preterm neonates
+      * Check that coverage at each facility type is as expected
     - 
     - 
 
