@@ -101,7 +101,12 @@ This reduces to the previous formula if there are no other interventions, and we
 
    \text{CSMR}^\text{sepsis}_{i, \text{original}} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
 
-While we are searching the literature for an appropriate value for the relative risk, we will use a stand-in value with an origin I have failed to record.
+
+Because there are no RCTs that have attempted to quantify the effect size of antibiotics on neonatal mortality due to sepsis (due 
+to significant ethical considerations), we used GBD estimates to calculate an approximated relative risk value. To do this, we looked at 
+the neonatal sepsis mortality rate from all locations from 2015-2021, and divided the 80th percentile value by the 20th percentile. We 
+also conducted a sensitivity analysis by comparing the resulting RR values with 70/30 percentiles and 90/10 percentiles. These calculations
+were done in `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/nn_antibiotics_effect_size.ipynb>`_. 
 
 .. list-table:: Risk Effect Parameters for Lack-of-Access-to-Antibiotics
   :widths: 15 15 15 15
@@ -112,13 +117,18 @@ While we are searching the literature for an appropriate value for the relative 
     - Distribution
     - Notes
   * - Relative Risk
-    - 1.39
+    - 38.0
     - :math:`\text{Normal}(1.39,0.08^2)`
-    - Based on placeholder relative risk of 0.72 (95% CI 0.64-0.80) of sepsis mortality for neonates with access to antibiotics 
+    - Based on relative risk of 0.0263 (95% CI 0.0227-0.0305) of sepsis mortality for neonates with access to antibiotics 
   * - PAF
     - see below
     - see below
     - see `Calibration strategy` section below for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model
+
+
+.. todo:: 
+
+  Check with an expert that this relative risk value seems reasonable - it is a lot higher than any of the other interventions RRs we've used in this simulation so far!
 
 Calibration Strategy
 --------------------
@@ -202,14 +212,15 @@ Assumptions and Limitations
   found 52.9% of BEmONC facilities and 97.2% of CEmONC facilities have neonatal antibiotics.  While we plan a data strategy to 
   fill the gaps we have used a simple average.)
 - We assume that baseline coverage for antibiotics in home births is 5% (this is not data-backed).
-- We are currently using a placeholder value for the relative risk of Lack-of-Access-to-Antibiotics on neonatal sepsis mortality, which is not 
-  backed by literature. Further research is needed to find an appropriate value.
+- Due to significant ethical considerations, there is no relative risk value reported in scientific literature for the effect of antibiotics on 
+  mortality due to neonatal sepsis and other infections. We used GBD estimates of NN sepsis CSMRs from all country-year pairs from 2015 to 2021 to 
+  approximate our own value. We assume that the 20th percentile value is representative of a location with less or no antibiotic access, and the 80th
+  percentile represents locations with more antibiotic access for neonates.
 
 .. todo::
 
   If more suitable baseline coverage data for antibiotics for neonatal sepsis at all facility types in all 3 locations, we should use that data instead and update 
-  this documentation accordingly. We also need to find a more trustworthy value for the relative risk of antibiotics on neonatal sepsis.
-
+  this documentation accordingly. 
 
 Validation and Verification Criteria
 ------------------------------------
