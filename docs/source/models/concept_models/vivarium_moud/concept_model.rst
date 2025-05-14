@@ -247,9 +247,9 @@ The Quarters Model requires data on the distribution of the population across th
     * **Unhoused:** Estimates often rely on annual **Point-in-Time (PIT) counts** conducted by Continuums of Care (CoCs) and reported to HUD. These provide a snapshot but may undercount the true population. Local **Homelessness Management Information System (HMIS)** data, where available (e.g., for Seattle/King County), can offer more detailed longitudinal information but may have coverage limitations. Specific research studies on local unhoused populations are also valuable.
     * **Incarcerated:** Data on jail and prison populations can be obtained from the **Bureau of Justice Statistics (BJS)** and state/local sources like the Washington State Department of Corrections or county jail dashboards/reports.
 * **Transition Rates:** Estimating the rates of movement *between* these states is complex and often requires synthesizing multiple data sources and making assumptions:
-    * *Incarceration/Release Dynamics (``pr_inc``, ``uh_inc``, ``inc_pr``, ``inc_uh``):* BJS and local corrections data provide information on entries and releases. Determining the housing status upon release (to stable housing vs. homelessness) often requires specialized reports or research studies.
-    * *Housing Instability (``pr_uh``):* Data on eviction rates, housing loss, or entries into homelessness from stable housing can be sourced from local housing authorities, HMIS data, or specific surveys/studies.
-    * *Exits from Homelessness (``uh_pr``, ``uh_inc``):* HMIS data and longitudinal studies of unhoused individuals are key sources for estimating transitions back to private residence or into incarceration.
+    * *Incarceration/Release Dynamics* (``pr_inc``, ``uh_inc``, ``inc_pr``, ``inc_uh``): BJS and local corrections data provide information on entries and releases. Determining the housing status upon release (to stable housing vs. homelessness) often requires specialized reports or research studies.
+    * *Housing Instability* (``pr_uh``): Data on eviction rates, housing loss, or entries into homelessness from stable housing can be sourced from local housing authorities, HMIS data, or specific surveys/studies.
+    * *Exits from Homelessness* (``uh_pr``, ``uh_inc``): HMIS data and longitudinal studies of unhoused individuals are key sources for estimating transitions back to private residence or into incarceration.
 * **Stratification and Interaction:** A critical step involves estimating how these population distributions and transition rates differ based on OUD status (from the Core Disease Model) and demographic factors (age, sex). This often requires analyzing linked data sources (if available), applying relative risks derived from literature, or making informed assumptions due to data scarcity linking OUD directly to housing/incarceration transitions at a population level.
 
 4.3 General Considerations
@@ -262,12 +262,14 @@ Data from different sources must be reconciled for the specific simulation timef
 
 .. list-table:: Model runs
   :header-rows: 1
+  :widths: 5 15 10 15 15 5
+  :width: 90%
 
   * - Run
     - Description
     - Scenarios
     - Specification modifications
-    - Stratificaction modifications
+    - Stratification modifications
     - Note
   * - 1
     - MOUD cause model
@@ -284,3 +286,6 @@ TK - Discussion of model limitations and assumptions
 
 7 References/Other
 ++++++++++++++++++
+
+TK
+
