@@ -118,7 +118,7 @@ were done in `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_p
     - Notes
   * - Relative Risk
     - 38.0
-    - :math:`\text{Normal}(1.39,0.08^2)`
+    - :math:`\text{Normal}(38.0,0.88^2)`
     - Based on relative risk of 0.0263 (95% CI 0.0227-0.0305) of sepsis mortality for neonates with access to antibiotics 
   * - PAF
     - see below
