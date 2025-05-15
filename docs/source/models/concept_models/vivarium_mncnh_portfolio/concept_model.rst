@@ -871,7 +871,7 @@ Default stratifications to all observers should include scenario and input draw.
     - * Implement LBWSG RR cap (details to come)
       * Recalculate LBWSG PAFs with capped RRs and updated strategy for the LNN age group (details to come)
     - Baseline
-    - ``model7.1``
+    - ``model7.2``
     - Default
     - Default
     - Default
