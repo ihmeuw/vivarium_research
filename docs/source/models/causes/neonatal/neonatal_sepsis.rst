@@ -143,26 +143,26 @@ Note that these probabilities are not used directly in the model and are include
 Modeling Strategy
 +++++++++++++++++
 
-The Neonatal Sepsis submodel requires only the birth-weight- and gestation-age-stratified cause specific mortality rates for sepsis during the early and late neonatal periods.
+The Neonatal Sepsis submodel requires only the birth-weight- and gestation-age-stratified cause specific mortality risks for sepsis during the early and late neonatal periods.
 
-The way these CSMRs are used is the same for all subcauses, and therefore is included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.  This page describes the birth-weight- and gestational-age-specific cause specific mortality rates that are used for this cause on that page, :math:`\text{CSMR}^{\text{sepsis}}_{\text{BW},\text{GA}}`.
+The way these CMRs are used is the same for all subcauses (except preterm), and therefore is included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.  This page describes the birth-weight- and gestational-age-specific cause specific mortality risks that are used for this cause on that page, :math:`\text{CMR}^{\text{sepsis}}_{\text{BW},\text{GA}}`.
 The formula is:
 
 .. math::
     \begin{align*}
-    \text{CSMR}_{\text{BW},\text{GA}}
+    \text{CMR}_{\text{BW},\text{GA}}
     &=
-    \text{CSMR} \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z
+    \text{CMR} \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z
     \end{align*}
 
 where 
-:math:`\text{CSMR}` is the cause-specific mortality rate for sepsis,
+:math:`\text{CMR}` is the cause-specific mortality risk for sepsis,
 :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`\int_{\text{BW}} \int_{\text{GA}} \text{RR}_{\text{BW},\text{GA}} \cdot Z = 1`.
 
 .. note::
-  the choice to use :math:`\text{RR}_{\text{BW},\text{GA}}` in this equation is essentially arbitrary, and it could be replaced by any other nonnegative "weight function" :math:`w(\text{BW},\text{GA})` as long it doesn't lead to a negative "other causes" mortality hazard.  But with this choice, :math:`Z` is equal to the :math:`1-\text{PAF}` of LBWSG on all-cause mortality.
+  the choice to use :math:`\text{RR}_{\text{BW},\text{GA}}` in this equation is essentially arbitrary, and it could be replaced by any other nonnegative "weight function" :math:`w(\text{BW},\text{GA})` as long it doesn't lead to a negative "other causes" mortality risk.  But with this choice, :math:`Z` is equal to the :math:`1-\text{PAF}` of LBWSG on all-cause mortality.
 
-Each individual simulant :math:`i` has their own :math:`\text{CSMR}_i` that might be different from :math:`\text{CSMR}_{\text{BW}_i,\text{GA}_i}` (meaning the average birth-weight- and gestational-age-specific CSMR for simulants with the birth weight and gestational age matching simulant :math:`i`.  We recommend implementing this as a pipeline eventually because it will be modified by interventions (or access to interventions) relevant to this subcause.  (Until we implement those, we will have :math:`\text{CSMR}_{i} = \text{CSMR}_{\text{BW}_i,\text{GA}_i}`, though.)
+Each individual simulant :math:`i` has their own :math:`\text{CMR}_i` that might be different from :math:`\text{CMR}_{\text{BW}_i,\text{GA}_i}` (meaning the average birth-weight- and gestational-age-specific CMR for simulants with the birth weight and gestational age matching simulant :math:`i`.  We recommend implementing this as a pipeline eventually because it will be modified by interventions (or access to interventions) relevant to this subcause.  (Until we implement those, we will have :math:`\text{CMR}_{i} = \text{CMR}_{\text{BW}_i,\text{GA}_i}`, though.)
 
 The following table shows the data needed for these
 calculations.
@@ -182,10 +182,30 @@ Data Tables
       - Definition
       - Value or source
       - Note
-    * - :math:`\text{CSMR}`
-      - cause-specific mortality rate of neonatal sepsis and other neonatal infections
-      - csmr_c383
-      - from GBD (CodCorrect)
+    * - enn_all_cause_death_count
+      - Count of deaths due to all causes in the early neonatal age group
+      - GBD: source='codcorrect', metric_id=1, cause_id=294
+      - 
+    * - enn_death_count
+      - Count of deaths due to cause neonatal sepsis in the early neonatal age group
+      - GBD: source='codcorrect', metric_id=1, cause_id=383
+      - 
+    * - lnn_death_count
+      - Count of deaths due to cause neonatal sepsis in the late neonatal age group
+      - GBD: source='codcorrect', metric_id=1, cause_id=383
+      - 
+    * - live_birth_count
+      - Count of live births
+      - GBD: covariate_id = 1106
+      - 
+    * - enn_cmr
+      - neonatal sepsis mortality risk in the early neonatal age group
+      - enn_death_count / live_birth_count
+      - 
+    * - lnn_cmr
+      - neonatal sepsis mortality risk in the late neonatal age group
+      - lnn_death_count / (live_birth_count - enn_all_cause_death_count)
+      - 
     * - :math:`\text{RR}_{\text{BW},\text{GA}}`
       - Relative Risk of all-cause mortality for a birth weight of BW and gestational age of GA
       - interpolated from GBD data
