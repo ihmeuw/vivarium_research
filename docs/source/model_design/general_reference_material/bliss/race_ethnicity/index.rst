@@ -283,33 +283,33 @@ throughout this style guide.
    * - Ancestry
      - Broadly, characteristics of one’s ancestors. In this guide we refer to geographic ancestry, where your ancestors are from, or lived approximately 500 years ago.
    * - Racism
-     - The belief that race influences factors outside of the few visible characteristics listed above (skin color, hair, eye color, etc.). Racism often has been used as a justification to see some people as superior or inferior in some dimension of intelligence, abilities, or qualities. 
+     - The belief that race reflects biological factors outside of the few visible characteristics listed above (skin color, hair, eye color, etc.), such as intelligence, abilities, or other qualities. It also refers to the ways in which individuals, communities, and systems of power oppress people in alignment with this belief (whether or not it is explicit or conscious).
    * - Scientific Racism
      - An attempt by scientists to prove racist theories in order to justify discrimination and allow for racist systems of inequality to continue. The science used was blatantly incorrect and has been debunked. These racist theories are especially dangerous as they can appear to be from valid sources, even though they are not valid science. 
    * - Institutional Racism
      - A form of systematic discrimination, based on race or ethnic group, in which societal policies or practices create an advantage for some groups and harm for others. Also known as structural, societal, or systemic racism.  
    * - Ethnic Discrimination
-     - The belief that an ethnic group is inherently superior or inferior in some dimension of intelligence, abilities, or qualities. 
+     - The belief that an ethnic group is inherently superior or inferior in some dimension of intelligence, abilities, or other qualities. 
    * - Unconscious Bias
      - Any biases that people have but are not consciously aware of. This can include things not related to individuals or groups such as confirmation bias, or being more receptive to information that aligns to their prior beliefs, and to biases towards individuals or groups, such as favoring people from their own race or ethnicity group, even if they don’t knowingly think that people who are different are inferior. 
    * - Race-essentialism
      - The belief that racial groups form discrete genetic categories; that individuals of the same racial category are biogenetically similar; and that different races are fundamentally different. 
-   * - Race-based
+   * - Race-based research
      - The use of race as a key marker in research or policy. This is built on a belief in race-essentialism. 
-   * - Race-conscious
+   * - Race-conscious research
      - A new approach to how research can include race. Race-conscious research attempts to be aware of the historic roots and the pervasive, systemic nature of oppression, in touch with social reality, and open to the importance of race, while understanding that race itself is a social construct without biological significance. Instead, it frames discrepancies seen between races as a result of historical context or racism.
    * - Social construct
-     - Any idea or concept that doesn’t have its basis in objective reality but is real because society believes it to be so. Some examples might include the value of money (paper is not inherently valuable, it is valuable because society has collectively agreed that it is), what is fashionable currently (skinny or wide-leg jeans are only better because we believe it to be so), and racial groups. 
+     - Any idea or concept that doesn’t have its basis in objective reality but is real because society believes it to be so. Some examples might include what is fashionable currently (skinny or wide-leg jeans are only better because we believe it to be so) and the value of money (paper is not inherently valuable, it is valuable because society has collectively agreed that it is). Though they have tremendous impacts, racial groupings are social constructs.
    * - Health disparities
      - Differences in health outcomes, such as life expectancy, disease burden, or other adverse health conditions between different groups of people within a population. The term is often used to describe differences seen between racial or ethnic groups, but it can also be applied to differences observed across any individual characteristic including geographies, gender, sexual orientation or socioeconomic status.
    * - Risk factor
-     - Attributes, characteristics, or exposures that increase the likelihood that a person develops a disease or health disorder. Risk factors are diverse and can span attributes such as diet, physical activity, alcohol use, genetics, age, and experiences of discrimination.
+     - Attributes, characteristics, or exposures that biologically increase the likelihood that a person develops a disease or health disorder. Risk factors are diverse and can span attributes such as diet, physical activity, alcohol use, genetics, age, and experiences of discrimination.
    * - Risk marker
-     - Similar to a risk factor but not thought to be causally related to the development of a disease or health disorder. Race and its relationship to cardiovascular disease is an example. Some races have higher rates of cardiovascular disease, and while these might be caused through experiences of racism, race itself is not thought to be causally linked with CVD.
+     - Similar to a risk factor but not thought to biologically cause  the development of a disease or health disorder. Race and its relationship to cardiovascular disease is an example. Some races have higher rates of cardiovascular disease but it is thought this is due to experiences of racism, either interpersonal or societal. Race itself is not thought to be causally linked with CVD except through these societal pathways.
    * - Nativity
      - The general definition refers to the occasion of one’s birth. However, it is used here to mean the country someone was born in. 
    * - Colonialism
-     - The policy or practice of acquiring full or partial political control over another country, occupying it with settlers, and exploiting it economically.
+     - The policy or practice of acquiring full or partial political control over another country, possibly occupying it with settlers, and exploiting it economically.
    * - Segregation
      - The general definition is the action or state of setting someone or something apart from others. However, it is used here to refer to racial or ethnic segregation. While numerous countries have separated individuals along racial, ethnic, or other lines throughout history, segregation in the context of the United States often refers to a period between the Civil War and the Civil Rights Movement when southern states enacted laws to forcibly separate Black and White individuals in all spaces. However, it is worth noting that segregation in other forms has taken place throughout all states and through multiple eras of history including the present. 
    * - Multiracial
