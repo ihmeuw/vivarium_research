@@ -857,6 +857,24 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Stratify probiotics observer (#6) with gestational age above/below 37 weeks for V&V
     - Default
+  * - 7.1
+    - Update neonatal mortality rates to mortality risks 
+      * Update mortality input data and remove rate to probability conversion: see this PR for full details
+      * Use the birth LBWSG exposure for calculation of the ENN LBWSG PAF
+      * Use the LNN LBWSG exposure for calculation of the LNN LBWSG PAF. Note that this is incorrect, but an acceptable placeholder until we update in model run 7.2
+    - Baseline
+    - ``model7.1``
+    - Default
+    - Default
+    - Default
+  * - 7.2
+    - * Implement LBWSG RR cap (details to come)
+      * Recalculate LBWSG PAFs with capped RRs and updated strategy for the LNN age group (details to come)
+    - Baseline
+    - ``model7.1``
+    - Default
+    - Default
+    - Default
   * - 8.0
     - Wave I azithromycin 
     - Baseline
@@ -1059,6 +1077,14 @@ Default stratifications to all observers should include scenario and input draw.
   * - 7.0
     - * Check that probiotics are only received by preterm neonates
       * Check that coverage at each facility type is as expected
+    - 
+    - 
+  * - 7.1
+    - Neonatal mortality is expected to remain slightly underestimated in the baseline scenario (by the same magnitude of model run 6.1). This is expected as we have not yet implemented a strategy to account for known probabilities greater than 1.
+    - 
+    - 
+  * - 7.2
+    - Neonatal mortality is expected to validate to GBD targets (no longer be underestimated!)
     - 
     - 
 
