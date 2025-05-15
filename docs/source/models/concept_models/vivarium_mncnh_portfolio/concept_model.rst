@@ -859,7 +859,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 7.1
     - Update neonatal mortality rates to mortality risks 
-      * Update mortality input data and remove rate to probability conversion: see this PR for full details
+      * Update mortality input data and remove rate to probability conversion: `see this PR for full details and accounting of updates <https://github.com/ihmeuw/vivarium_research/pull/1654>`_
       * Use the birth LBWSG exposure for calculation of the ENN LBWSG PAF
       * Use the LNN LBWSG exposure for calculation of the LNN LBWSG PAF. Note that this is incorrect, but an acceptable placeholder until we update in model run 7.2
     - Baseline
