@@ -53,7 +53,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-We will not model PPD as a dynamic transition model, but rather a probabilistic condition that begins at the time of birth (see the :ref:`pregnancy model document <other_models_pregnancy>`) and persists for some specified duration. The probability of experiencing PPD will be informed by a ratio per birth from the literature. PPD will be modeled as a YLD-only cause, although this is a limitation of our model as PPD may be associated with risk of suicide or infanticide in extreme cases.
+We will not model PPD as a dynamic transition model, but rather a probabilistic condition that begins at the time of birth and persists for some specified duration. The probability of experiencing PPD will be informed by a ratio per birth from the literature. PPD will be modeled as a YLD-only cause, although this is a limitation of our model as PPD may be associated with risk of suicide or infanticide in extreme cases.
 
 Restrictions
 ++++++++++++
@@ -62,7 +62,7 @@ The following table describes any restrictions in the
 effects of this cause (such as being only fatal or only nonfatal), as
 well as restrictions on the ages and sexes to which the cause applies.
 
-.. list-table:: GBD 2021 Cause Restrictions
+.. list-table:: Cause Restrictions
    :widths: 15 15 20
    :header-rows: 1
 
