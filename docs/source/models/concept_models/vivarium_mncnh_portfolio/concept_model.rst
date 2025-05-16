@@ -613,6 +613,15 @@ Default stratifications to all observers should include scenario and input draw.
   * YLDs due to anemia in the postpartum period
   * First trimster ANC attendance (stratified by pregnancy term duration)
   * Later pregnancy ANC attendance (stratified by pregnancy term duration)
+  * Hemoglobin and ferritin screening counts
+  * MMS/IFA intervention counts
+  * IV iron intervention counts
+
+  Measures to check in the interactive sim include:
+
+  * True hemoglobin exposure
+  * Measured hemoglobin exposure
+  * Ferritin exposure
 
 .. _mncnh_portfolio_5.0:
 
