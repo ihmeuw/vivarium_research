@@ -873,6 +873,14 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Stratify probiotics observer (#6) with gestational age above/below 37 weeks for V&V
     - Default
+  * - 7.0.1
+    - Same specifications as 7.0, but with preterm stratification for the probiotics observer included (left out of last run) and fix to the intervention observers to not count stillbirths
+    - ``model7.0.1``
+    - Default
+    - * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
+      * Stratify births observer by gestational age above/below 37 weeks
+      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
+    - Default
   * - 8.0
     - Wave I azithromycin 
     - Baseline
@@ -1085,6 +1093,16 @@ Default stratifications to all observers should include scenario and input draw.
   * - 7.0
     - * Check that probiotics are only received by preterm neonates
       * Check that coverage at each facility type is as expected
+    - * Probiotics observer not stratified by preterm birth, so we will need to rerun or do coverage V&V in the interactive sim
+      * Neonatal intervention observers appear to be counting stillbirths, but should only be counting live births
+      * Neonatal mortality looks as expected (same as model 6.5)
+    - * `Intervention coverage bug for 7.0 here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0_results_check.ipynb>`_
+      * Neonatal mortality check and missing observer stratification notebook for 7.0 available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0_nn_mortality_and_observer_check.ipynb>`_
+  * - 7.0.1
+    - * Check that probiotics are only received by preterm neonates
+      * Check that coverage at each facility type is as expected
+      * Check that intervention observers are no longer counting stillbirths
+      * Check probiotics effect size is as expected among preterm infants
     - 
     - 
 
@@ -1103,6 +1121,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Unknown
     - Research to investigate and come up with plan
     - N/A
+  * - Neonatal intervention observers are counting live and stillbirths rather than just live births
+    - See above
+    - Implement observer fix
+    - For model 7.0.1
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revist following GBD 2023 update
