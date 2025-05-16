@@ -1098,7 +1098,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Neonatal intervention observers appear to be counting stillbirths, but should only be counting live births
       * Neonatal mortality looks as expected (same as model 6.5)
     - * `Intervention coverage bug for 7.0 here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0_results_check.ipynb>`_
-      * Neonatal mortality check and missing observer stratification notebook for 7.0 available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0_nn_mortality_and_observer_check.ipynb>`_
+      * `Neonatal mortality check and missing observer stratification notebook for 7.0 available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0_nn_mortality_and_observer_check.ipynb>`_
   * - 7.0.1
     - * Check that probiotics are only received by preterm neonates
       * Check that coverage at each facility type is as expected
