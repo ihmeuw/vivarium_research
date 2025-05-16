@@ -593,7 +593,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Pregnancy outcome
       * ANC attendance
       * Ultrasound coverage
-    - NOT YET INCLUDED
+    - Included
 
 .. todo::
 
@@ -857,6 +857,15 @@ Default stratifications to all observers should include scenario and input draw.
     -
     - 
     - 
+  * - 6.5
+    - * Use the birth prevalence to calculate the LBWSG PAF for the early neonatal age group (like in model run 6.1). Use this until otherwise noted.
+      * Use the linear rate-to-probability equation (like in model run 6.1). Use this until otherwise noted.
+      * Add in observer #7 (maternal population observer)
+    - All scenarios
+    - ``model6.5``
+    - Default
+    - Default
+    - Maternal population observer added for this run and to be included in all subsequent runs
   * - 7.0
     - Wave I neonatal probiotics with scale-up scenarios, same as model 6.0 but with `effective coverage (only preterm neonates receive probiotics) <https://github.com/ihmeuw/vivarium_research/pull/1643>`_ 
     - Baseline and alternative scenarios 2 - 10 
@@ -1063,12 +1072,21 @@ Default stratifications to all observers should include scenario and input draw.
     - Check ENN mortality ratio compared to GBD and models 6.1-6.4
     - Mortality is overestimated to a degree greater than 6.3
     - `Notebook comparing model 6.4 to 6.1-6.4 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
+  * - 6.5
+    - * Check that the neonatal mortality ratio is as expected in line with model 6.1
+      * Check that the new observer #7 is as expected
+      * Check that the pregnant population age structure looks as expected in new observer
+    - * Neonatal mortality ratio in expected range for all cause mortality (slightly underestimated, same as model 6.1)
+      * Neonatal mortality ratio in expected range for cause-spcific mortality other than preterm birth (slightly underestimated, same as all-cause mortality)
+      * Neonatal mortality ratio due to preterm birth is slightly overestimated
+      * Maternal population observer looks good!
+      * Age structure looks as expected
+    - `Model 6.5 VV notebook available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.5_nn_mortality_and_observer_check.ipynb>`_
   * - 7.0
     - * Check that probiotics are only received by preterm neonates
       * Check that coverage at each facility type is as expected
     - 
     - 
-
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -1081,6 +1099,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Using the specifications in model 6.1, we underestimate mortality ratios (believed to be due to having mortality probabilities greater than 1). Using the specifications in model 6.3, we overestimate mortality ratios (believed to be due to difference in mortality ratio verification target rather than mortality rate verification target)
     - Research team to discuss best approach to resolving issue and will document details. In the meantime, continue running for model versions greater than 6.4 using the specifications from model 6.1 (use birth exposure to calculate the early neonatal LBWSG PAF and use the multiplicative rate to probability calculation) and expect neonatal mortality ratios to be slightly underestimated relative to the GBD verification target.
     - For all runs after 6.4 until research team provides updated documentation
+  * - Neonatal mortality due to preterm birth overestimated
+    - Unknown
+    - Research to investigate and come up with plan
+    - N/A
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revist following GBD 2023 update
