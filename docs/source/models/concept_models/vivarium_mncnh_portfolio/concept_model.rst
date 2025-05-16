@@ -858,23 +858,30 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Maternal population observer added for this run and to be included in all subsequent runs
   * - 7.0
+    - Wave I neonatal probiotics with scale-up scenarios, same as model 6.0 but with `effective coverage (only preterm neonates receive probiotics) <https://github.com/ihmeuw/vivarium_research/pull/1643>`_ 
+    - Baseline and alternative scenarios 2 - 10 
+    - ``model7.0``
+    - Default
+    - Stratify probiotics observer (#6) with gestational age above/below 37 weeks for V&V
+    - Default
+  * - 8.0
     - Wave I azithromycin 
     - Baseline
-    - ``model7.0``
-    -
-    - 
-    - 
-  * - 8.0
-    - Wave I misoprostol
-    - Baseline 
     - ``model8.0``
     -
     - 
     - 
   * - 9.0
+    - Wave I misoprostol
+    - Baseline 
+    - ``model9.0``
+    -
+    - 
+    - 
+  * - 10.0
     - Wave I antenatal corticosteroids
     - Baseline
-    - ``model9.0``
+    - ``model10.0``
     -
     - 
     - 
@@ -1066,6 +1073,11 @@ Default stratifications to all observers should include scenario and input draw.
       * Maternal population observer looks good!
       * Age structure looks as expected
     - `Model 6.5 VV notebook available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.5_nn_mortality_and_observer_check.ipynb>`_
+  * - 7.0
+    - * Check that probiotics are only received by preterm neonates
+      * Check that coverage at each facility type is as expected
+    - 
+    - 
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
