@@ -1123,7 +1123,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Research to investigate and come up with plan
     - N/A
   * - Neonatal intervention observers are counting live and stillbirths rather than just live births
-    - See above
+    - See issue description
     - Implement observer fix
     - For model 7.0.1
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
