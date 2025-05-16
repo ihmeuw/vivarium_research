@@ -275,10 +275,12 @@ defined as a module input in a subsequent row.
         * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
+        * :ref:`Postpartum depression <2019_cause_postpartum_depression>`
       - Wave II changes: 
 
-        * Hemoglobin at birth as a variable that impacts maternal disorders
+        * Hemoglobin at birth as a variable that impacts maternal disorders causes
         * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
+        * Postpartum depression as a new maternal disorders cause
     * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
       - * Hemoglobin at birth
         * Maternal hemorrhage incidence
