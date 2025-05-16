@@ -875,6 +875,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 7.0.1
     - Same specifications as 7.0, but with preterm stratification for the probiotics observer included (left out of last run) and fix to the intervention observers to not count stillbirths
+    - All scenarios
     - ``model7.0.1``
     - Default
     - * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
