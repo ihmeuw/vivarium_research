@@ -850,7 +850,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
   * - 6.5
     - * Use the birth prevalence to calculate the LBWSG PAF for the early neonatal age group (like in model run 6.1). Use this until otherwise noted.
-      * Use the multiplicative rate to probability equation (like in model run 6.1). Use this until otherwise noted.
+      * Use the linear rate-to-probability equation (like in model run 6.1). Use this until otherwise noted.
       * Add in observer #7 (maternal population observer)
     - All scenarios
     - ``model6.5``
