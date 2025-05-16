@@ -379,6 +379,7 @@ The following pseudocode outlines how this can be done.
 - At the individual level, only simulants who attend ANC should receive interventions
 
 - Check that IV iron only given to those with measured low hemoglobin and low ferritin
+- Check that IV iron has the intended effect on hemoglobin when given 
 
 - Check that measured and true hemoglobin exposures vary by the expected degree
 
