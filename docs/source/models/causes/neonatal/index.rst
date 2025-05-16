@@ -221,12 +221,19 @@ To obtain the ACMR for a specific simulant, we subtract off the *population* CSM
 
 .. math::
     \begin{align*}
-    \text{ACMR}_i &= \text{ACMR}_{\text{BW}_i,\text{GA}_i} - \sum_k \text{CSMR}_{\text{BW}_i,\text{GA}_i}^{k}
+    \text{ACMR}_i &= \text{UUMR}_{\text{baseline BW}_i,\text{baseline GA}_i} + \text{UAMR}_{\text{current BW}_i,\text{current GA}_i} - \text{MUMR}_{\text{baseline BW}_i,\text{baseline GA}_i} - \text{MAMR}_{\text{current BW}_i,\text{current GA}_i}
     + \sum_k \text{CSMR}_{i}^{k},
     \end{align*}
 
-where :math:`\text{BW}_i` and :math:`\text{GA}_i` are the birth weight and gestational age for simulant :math:`i`,
-:math:`\text{CSMR}_{\text{BW}_i,\text{GA}_i}^{k}` is the cause-specific mortality rate for subcause :math:`k` for a population with the same gestational age and birth weight as this simulant, 
+Where:
+
+  - :math:`UUMR` is the "unmodeled unaffected mortality rate," equal to the sum of cause-specific mortality rates for all **unmodeled** causes that are **unaffected** by the LBWSG
+  - :math:`UAMR` is the "unmodeled affected mortalty rate," equal to the sum of cause-specific mortality rates for all **unmodeled** causes that are **affected** by the LBWSG risk factor
+  - :math:`MUMR` is the "modeled unaffected mortalty rate," equal to the sum of cause-specific mortality rates for all **modeled** causes that are **unaffected** by the LBWSG risk factor
+  - :math:`MAMR` is the "modeled affected mortalty rate," equal to the sum of cause-specific mortality rates for all **modeled** causes that are **affected** by the LBWSG risk factor
+
+where :math:`\text{BW}_i` and :math:`\text{GA}_i` are the birth weight and gestational age for simulant :math:`i` (:math:`\text{baseline BW}_i` refers to simulant birthweight in the baseline scenario prior to any changes due to interventions such as antenatal interventions. :math:`\text{current BW}_i` refers to simulant birthweight following any changes due to interventions),
+:math:`\text{CSMR}_{\text{BW}_i,\text{GA}_i}^{k}` is the cause-specific mortality rate for modeled subcause :math:`k` for a population with the same gestational age and birth weight as this simulant, 
 and :math:`\text{CSMR}_{i}^{k}` is the cause-specific mortality rate for subcause :math:`k` for simulant :math:`i` (both detailed in the `Modeled Subcauses`_
 linked from this page).
 
