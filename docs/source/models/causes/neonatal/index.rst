@@ -231,7 +231,7 @@ We begin with the population AMR and use the LBWSG PAF to derive a risk-deleted 
     \text{AMR}_{\text{BW},\text{GA}} &= \text{AMR} \times (1 - \text{PAF}_{\text{LBWSG}}) \times \text{RR}_{\text{BW},\text{GA}},
     \end{align*}
 
-where :math:`\text{AMR}_{\text{BW},\text{GA}}` is the all-cause mortality rrisk for a population with birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`, :math:`\text{AMR}` is the all-cause mortality risk for the total population, :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, and :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative mortality risk for a specific birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`.
+where :math:`\text{AMR}_{\text{BW},\text{GA}}` is the all-cause mortality risk for a population with birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`, :math:`\text{AMR}` is the all-cause mortality risk for the total population in one of the neonatal age groups (i.e., :math:`\text{AMR}` equals :math:`\text{AMR}_\text{ENN}` or :math:`\text{AMR}_\text{LNN}` as defined above), :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, and :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative mortality risk for a specific birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`.
 
 To obtain the AMR for a specific simulant, we subtract off the *population* CMRs for each modeled subcause for the birth weight and gestational age of the simulant, and then add back in the (potentially pipeline-modified) *individual* CMRs for the specific simulant, which might differ from baseline due to intervention coverage:
 
