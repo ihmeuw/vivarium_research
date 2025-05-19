@@ -140,8 +140,8 @@ This module will:
     - Instructions detailed in section 2.3.1 below
     - 
   * - 8
-    - Low ferritin?
-    - STRATEGY TBD, TODO: update
+    - Low ferritin screening value?
+    - Instructions detailed in section 2.3.2 below
     - 
   * - 9
     - IV iron?
@@ -166,6 +166,30 @@ Follow the steps below to determine the answer to decision node #7:
 2. For simulants that are truly low hemoglobin, assign tests low hemoglobin status to 85% (sensitivity value) and tests adequate hemoglobin status to 15% (100 - sensitivity value of 85)
 3. For simulants that are truly adequate hemoglobin, assign tests adequate hemoglobin status to 80% (specificity) and tests low hemoglobin status to 20% (100 - specificty value of 80)
 4. Use the test hemoglobin status to determine the answer to decision node 7 (answer is "yes" if they have test low hemoglobin status and "no" if they have test adequate hemoglobin status)
+5. Record true and test hemoglobin exposures at the time of screening to outputs F and G (to be used for V&V in the interactive simulation)
+
+2.3.2 Ferritin Screening Instructions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Research background:**
+
+Ferritin is a protein that stores iron within the body and low blood ferritin levels can indicate low iron stores. Pregnancies that have hemoglobin less than 100 g/L based on the hemoglobin screen will also be screened for ferritin levels via a minimally invasive screening (finger prick). Pregnancies that have a hemoglobin level <100 g/L and a blood ferritin level below 15 ug/L (anemic AND iron deficient) are eligible for IV iron.
+
+Notably, the GBD does not have any estimates related to ferritin exposure. However, the GBD assigns specific causes to all cases of anemia. Some of these causes of anemia are considered "iron responsive," indicating that they are iron deficiency anemia. An example of an iron deficiency anemia is anemia caused by maternal hemorrhage (caused by blood loss, decreasing systemic levels of both hemoglobin and iron). An example of a non-iron responsive anemia is sickle cell trait (low hemoglobin is due to a defect in hemoglobin protein rather than low iron levels). Notably, it is possible for non-iron-responsive anemias to also have low iron levels. See the :ref:`anemia impairment document <2019_anemia_impairment>` for a list of iron responsive and non iron responsive causes of anemia in the GBD.
+
+Therefore, in our model we will use the severity-specific fraction of iron responsive anemia among all causes of anemia in GBD as a proxy measure for the fraction of anemia cases with low ferritin. This approach is limited in that we may slightly underestimate total eligibility by not considering the proportion of the population who has low hemoglobin due to an iron-non-responsive cause and also coincidentally has low ferritin.
+
+.. note::
+
+  Chris T. has suggested that we can use the fraction of iron deficiency anemia from the in-progress PRISMA study rather than GBD for this purpose. PRIMSA study results are expected in June or July of 2025.
+
+`The notebook that was used to calculate these values can be found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/fraction_iron_responsive_anemia.ipynb>`_
+
+**Modeling instructions:**
+
+The probability of low ferritin screening is dependent on the simulant's location, age group, and anemia status at the time of screening. Anemia status at the time of screening should be based on their true hemoglobin exposure value *after* action points I, II, and III have been executed (and *before* IV, V, and VI). See the :ref:`anemia/hemoglobin exposure table here for reference <2019_anemia_impairment>` and remember to use the pregnancy-specific values.
+
+`The probability of low ferritin specific to location, age, and anemia status can be found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/iron_responsive_fraction.csv>`_. Record assigned ferritin exposure to output G to be used for V&V in the interactive simulation.
 
 2.4 Module Action Points
 ---------------------------
@@ -301,15 +325,24 @@ The following pseudocode outlines how this can be done.
   * - B. IV iron
     - `True` / `False`
     - Used for anemia YLD calculation, V&V
-  * - C. Hemoglobin at the beginning of pregnancy 
+  * - C. True hemoglobin at the beginning of pregnancy 
     - point value
     - V&V
-  * - D. Hemoglobin at the end of pregnancy
+  * - D. True hemoglobin at the end of pregnancy
     - point value
     - Value to be used for :ref:`hemoglobin risk effects model <2023_hemoglobin_effects>`, V&V
   * - E. Anemia YLDs
     - Point value
     - Simulation results
+  * - F. True Hemoglobin at screening
+    - point value
+    - V&V
+  * - G. Test hemoglobin at screening
+    - point value
+    - V&V
+  * - H. Ferritin exposure at screening
+    - `low` / `adequate`
+    - V&V
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
@@ -328,6 +361,10 @@ The following pseudocode outlines how this can be done.
 
   - Note that an alternative to this limited approach we are taking would be to model some error around hemoglobin exposure (sampling from some distribution and adding it to hemoglobin exposure to get test exposure, similar to what is done for gestational age assessment in the :ref:`AI ultrasound model <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`). However, in order to match the desired sensitivity and specificity of the screening test, we would need to solve for the uncertainty distribution, likely via optimization, at the location-specific level (as it will depend on the underlying population hemoglobin exposure distribution).
 
+- We use the fraction of iron responsive anemia among total anemia as a proxy for low ferritin given low hemoglobin. This may underestimate the population eligible for IV iron by not considering the iron non responsive anemias that have low ferritin. Note that this may be improved upon by updating to PRIMSA data.
+
+- We assume the IV iron intervention (+23 g/L) to have a greater effect than GBD 2023's implied effect of IV iron used in the estimation of their iron deficiency models (+14.3 g/L(95% UL:3.58 -25.59). Notably, our assumed effect is within the confidence interval of GBD's assumed effect size and the value we assume is specific to the pregnant population (whereas GBD's value is not).
+
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
@@ -341,7 +378,12 @@ The following pseudocode outlines how this can be done.
 
 - At the individual level, only simulants who attend ANC should receive interventions
 
-- We assume the IV iron intervention (+23 g/L) to have a greater effect than GBD 2023's implied effect of IV iron used in the estimation of their iron deficiency models (+14.3 g/L(95% UL:3.58 -25.59). Notably, our assumed effect is within the confidence interval of GBD's assumed effect size and the value we assume is specific to the pregnant population (whereas GBD's value is not).
+- Check that IV iron only given to those with measured low hemoglobin and low ferritin
+- Check that IV iron has the intended effect on hemoglobin when given 
+
+- Check that measured and true hemoglobin exposures vary by the expected degree
+
+- Check that low ferritin values match expectations (specific to anemia status)
 
 5.0 References
 +++++++++++++++
