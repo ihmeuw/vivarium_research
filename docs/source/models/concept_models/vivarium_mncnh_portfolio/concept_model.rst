@@ -1120,7 +1120,7 @@ Default stratifications to all observers should include scenario and input draw.
     - For all runs after 6.4 until research team provides updated documentation
   * - Neonatal mortality due to preterm birth overestimated
     - It could be because the docs specify that the ``p_preterm`` parameter should be the prevalence of preterm AT BIRTH, but the artifact data for this key are for every age group except for death. Using a smaller ``p_preterm`` value (which non-birth age groups would be smaller than the birth age group) would result in overestimation of preterm birth cause-specific mortality
-    - Engineering to check how the ``cause.neonatal_preterm_birth.prevalence`` key is being used and update to be specific to birth prevalence if necessary.
+    - Engineering to check how the ``cause.neonatal_preterm_birth.prevalence`` key is being used and update to be specific to birth prevalence if necessary. Also to confirm that we are using the LBWSG exposure distribution to inform this parameter rather than the preterm birth cause prevalence.
     - TBD: probably for 7.0.2
   * - Neonatal intervention observers are counting live and stillbirths rather than just live births
     - See issue description
