@@ -24,11 +24,17 @@ Azithromycin for treating maternal sepsis
   * - PAF
     - Population Attributable Fraction
     - 
+  * - RR
+    - Relative Risk
+    - 
+  * - SARA
+    - Services Availabiity and Readiness Assessment
+    - 
 
 Intervention Overview
 -----------------------
 
-Azithromycin is used to treat maternal sepsis in the intrapartum period, reducing the risk incidence.
+Azithromycin is used to prevent maternal sepsis in the intrapartum period, reducing the risk incidence.
 
 This section describes how an azithromycin intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 
