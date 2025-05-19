@@ -283,7 +283,7 @@ throughout this style guide.
    * - Ancestry
      - Broadly, characteristics of one’s ancestors. In this guide we refer to geographic ancestry, where your ancestors are from, or lived approximately 500 years ago.
    * - Racism
-     - The belief that race reflects biological factors outside of the few visible characteristics listed above (skin color, hair, eye color, etc.), such as intelligence, abilities, or other qualities. It also refers to the ways in which individuals, communities, and systems of power oppress people in alignment with this belief (whether or not it is explicit or conscious).
+     - The belief that race reflects biological factors outside of the few visible characteristics listed above (skin color, hair, eye color, etc.), such as intelligence, abilities, or other qualities. Racism also refers to the ways in which individuals, communities, and systems of power oppress people in alignment with this belief (whether or not the belief is explicit or conscious).
    * - Scientific Racism
      - An attempt by scientists to prove racist theories in order to justify discrimination and allow for racist systems of inequality to continue. The science used was blatantly incorrect and has been debunked. These racist theories are especially dangerous as they can appear to be from valid sources, even though they are not valid science. 
    * - Institutional Racism
