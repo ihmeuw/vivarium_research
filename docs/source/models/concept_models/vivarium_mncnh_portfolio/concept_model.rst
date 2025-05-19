@@ -275,10 +275,12 @@ defined as a module input in a subsequent row.
         * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
+        * :ref:`Postpartum depression <2019_cause_postpartum_depression>`
       - Wave II changes: 
 
-        * Hemoglobin at birth as a variable that impacts maternal disorders
+        * Hemoglobin at birth as a variable that impacts maternal disorders causes
         * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
+        * Postpartum depression as a new maternal disorders cause
     * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
       - * Hemoglobin at birth
         * Maternal hemorrhage incidence
@@ -1115,6 +1117,8 @@ Default stratifications to all observers should include scenario and input draw.
 +++++++++++++++
 
 * Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
+
+* We currently do not consider the potential impact of pregnancy outcome, mode of delivery, or preterm status on postpartum depression incidence (although we do model the impact of hemoglobin on PPD incidence). This may cause us to underestimate the impact of interventions that work through these mechanisms on postpartum depression burden. 
 
 .. _mncnh_portfolio_7.0:
 
