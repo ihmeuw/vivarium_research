@@ -9,7 +9,9 @@ Postpartum depression
 
 .. note::
 
-  the modeling strategy for this cause may be updated upon release of the GBD 2023 methods appendix, but this is an adequate placeholder strategy until this is determined
+  The modeling strategy for this cause may be updated upon release of the GBD 2023 methods appendix, but this is an adequate placeholder strategy until this is determined
+
+  Additionally, there is evidence that the incidence of PPD may depend on birth outcome, mode of delivery (vaginal vs. cesarean), and/or preterm status [Silverman-et-al-2017]_, which is currently not considered in this cause model. 
 
 .. list-table:: Abbreviations
   :widths: 15 15 15
@@ -152,7 +154,7 @@ lines indicate pieces of the underlying pregnancy model.
         ftp -> alive  [label = "1 - ir"]
         ftp -> PPD [label = "ir"]
         PPD -> alive [label = "1 - cfr"]
-        sepsis -> dead [label = "cfr"]
+        PPD -> dead [label = "cfr"]
         alive -> ftb  [label = "1", style=dashed]
         dead -> ftb  [label = "1", style=dashed]
     }
@@ -273,3 +275,6 @@ References
 
 .. [Shorey-et-al-2018-mncnh]
   Shorey S, Chee CYI, Ng ED, Chan YH, Tam WWS, Chong YS. Prevalence and incidence of postpartum depression among healthy mothers: A systematic review and meta-analysis. J Psychiatr Res. 2018 Sep;104:235-248. doi: 10.1016/j.jpsychires.2018.08.001. Epub 2018 Aug 3. PMID: 30114665.
+
+.. [Silverman-et-al-2017]
+  Silverman ME, Reichenberg A, Savitz DA, Cnattingius S, Lichtenstein P, Hultman CM, Larsson H, Sandin S. The risk factors for postpartum depression: A population-based study. Depress Anxiety. 2017 Feb;34(2):178-187. doi: 10.1002/da.22597. Epub 2017 Jan 18. PMID: 28098957; PMCID: PMC5462547.
