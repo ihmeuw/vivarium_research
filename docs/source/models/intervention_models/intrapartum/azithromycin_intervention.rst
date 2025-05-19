@@ -40,7 +40,7 @@ This section describes how an azithromycin intervention can be implemented and c
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Neonatal sepsis and other neonatal infections Mortality Probability :math:`\text{CSMR}_i^\text{sepsis}`
+  * - Maternal sepsis and other maternal infections Incidence Probability :math:`\text{CSMR}_i^\text{sepsis}`
     - Adjust multiplicatively using RR
     - Yes
     - For convenience, we will model this like a dichotomous risk factor; more details below
@@ -48,9 +48,14 @@ This section describes how an azithromycin intervention can be implemented and c
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-These placeholder values come from two data sources, both for Ethiopia, both identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final Report found 30.2% of BEmONC facilities and 76.8% of CEmONC facilities have neonatal azithromycin; the 2016-2018 SARA Report found 52.9% of BEmONC facilities and 97.2% of CEmONC facilities have neonatal azithromycin.  While we plan a data strategy to fill the gaps we have used a simple average.
+Baseline coverage data for azithromycin in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2018. These 
+placeholder values come from three data sources, all for Ethiopia, all identified by the Health Systems team at IHME: the 2016 
+Ethiopia EmONC Final Report found 39.2% of BEmONC facilities and 90.4% of CEmONC facilities have azithromycin; the 2016 SARA Report 
+found 68.4% of BEmONC facilities and 90.5% of CEmONC facilities have azithromycin; the 2018 SARA Report found 75.9% of BEmONC 
+facilities and 98.0% of CEmONC facilities have azithromycin. While we plan a data strategy to fill the gaps we have used a simple 
+average.
 
-.. list-table:: Baseline Coverage of Neonatal azithromycin (placeholder values)
+.. list-table:: Baseline Coverage of intrapartum azithromycin
   :widths: 15 15 15 15
   :header-rows: 1
 
@@ -61,15 +66,15 @@ These placeholder values come from two data sources, both for Ethiopia, both ide
   * - Home Birth
     - 5
     - :math:`\text{Uniform}(0,10)`
-    - Assumption; need to investigate data sources for care seeking among children born outside of the hospital system 
+    - Assumption; need to investigate data sources for care seeking those giving birth outside of the hospital system 
   * - BEmONC Facilities
-    - 41.55
-    - :math:`\text{Uniform}(30.2,52.9)`
-    - placeholder value based on two data points 
+    - 61.2
+    - :math:`\text{Uniform}(39.2,75.9)`
+    - placeholder value based on three data points 
   * - CEmONC Facilities
-    - 87.0
-    - :math:`\text{Uniform}(76.8,97.2)`
-    - placeholder value based on two data points 
+    - 93.0
+    - :math:`\text{Uniform}(90.4,98.0)`
+    - placeholder value based on three data points 
 
 
 Vivarium Modeling Strategy
@@ -215,6 +220,9 @@ Assumptions and Limitations
 - We assume that the relative risk of sepsis incidence with azithromycin in practice is a value that we can find in the literature (Note: 
   the value we are using is from `this systematic review <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_)
 - We have excluded the effect of azithromycin on pneumonia incidence/mortality, because this cause is currently lumped with 'other causes'
+- We currenty do not model the impact of intrapartum azithromycin on the incidence of preterm births, although there is literature
+  evidence that suggests there may be a significant impact. For reference, this `2021 systematic review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8436060/>`_
+  found an RR of 0.79 (95% CI 0.68-0.93) for LBW and an RR of 0.87 (95% CI 0.78-0.98) for premature births.
 - Baseline coverage data for azithromycin in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2018. These placeholder values come 
   from three data sources, all for Ethiopia, all identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final 
   Report found 39.2% of BEmONC facilities and 90.4% of CEmONC facilities have azithromycin; the 2016 SARA Report 
@@ -225,16 +233,16 @@ Assumptions and Limitations
 .. todo::
 
   If more suitable baseline coverage data for azithromycin for maternal sepsis at all facility types for Nigeria and Pakistan, we should use that data instead and update 
-  this documentation accordingly. We also need to find a more trustworthy value for the relative risk of azithromycin on neonatal sepsis.
-
+  this documentation accordingly. We also need to decide if/how we would model the effect of intrapartum azithromycin on preterm incidence. 
 
 Validation and Verification Criteria
 ------------------------------------
 
-- Population-level mortality rate should be the same as when this intervention is not included in the model
-- The ratio of sepsis deaths per birth among those without azithromycin access divided by those with azithromycin access should equal the relative risk parameter used in the model
+- Population-level incidence rate should be the same as when this intervention is not included in the model
+- The ratio of maternal sepsis incidence among those without azithromycin access divided by those with azithromycin access 
+  should equal the relative risk parameter used in the model
 - The baseline coverage of azithromycin in each facility type should match the values in the artifact
-- Validation: how does the sepsis moratlity rate in a counterfactual scenario with 100% antibiotic access compare to sepsis mortality rates in high-income countries?  They should be close, and the counterfactual should not be lower.
+- Validation: how does the sepsis incidence rate in a counterfactual scenario with 100% antibiotic access compare to sepsis incidence rates in high-income countries?  They should be close, and the counterfactual should not be lower.
 
 References
 ------------
@@ -242,4 +250,6 @@ References
 * https://chatgpt.com/share/67c1c7cf-f294-8010-8e65-261f87039e3b
 * https://chatgpt.com/share/67c1c7f9-8230-8010-9ade-30ed07b06bd0
 * https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.
+* https://pmc.ncbi.nlm.nih.gov/articles/PMC8436060/ 
+
 
