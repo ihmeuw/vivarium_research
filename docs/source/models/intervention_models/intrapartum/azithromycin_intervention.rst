@@ -48,9 +48,9 @@ This section describes how an azithromycin intervention can be implemented and c
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-These placeholder values come from two data sources, both for Ethiopia, both identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final Report found 30.2% of BEmONC facilities and 76.8% of CEmONC facilities have neonatal antibiotics; the 2016-2018 SARA Report found 52.9% of BEmONC facilities and 97.2% of CEmONC facilities have neonatal antibiotics.  While we plan a data strategy to fill the gaps we have used a simple average.
+These placeholder values come from two data sources, both for Ethiopia, both identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final Report found 30.2% of BEmONC facilities and 76.8% of CEmONC facilities have neonatal azithromycin; the 2016-2018 SARA Report found 52.9% of BEmONC facilities and 97.2% of CEmONC facilities have neonatal azithromycin.  While we plan a data strategy to fill the gaps we have used a simple average.
 
-.. list-table:: Baseline Coverage of Neonatal Antibiotics (placeholder values)
+.. list-table:: Baseline Coverage of Neonatal azithromycin (placeholder values)
   :widths: 15 15 15 15
   :header-rows: 1
 
@@ -172,30 +172,30 @@ incidence rate.
 where :math:`p(\text{sepsis})` is the probability of contracting sepsis in the general population, and :math:`p(\text{sepsis}|\text{azithromycin})` and
  :math:`p(\text{sepsis}|\text{no azithromycin})` are the probability of contracting sepsis in settings with and without access to azithromycin.  For each 
  path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and 
- unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has antibiotics available.
+ unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has azithromycin available.
 
-When we fill in the location-specific values for delivery facility rates, azithromycin coverage, relative risk of mortality with azithromycin access, 
-and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{sepsis}|\text{antibiotics})` 
-and :math:`p(\text{sepsis}|\text{no antibiotics})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
+When we fill in the location-specific values for delivery facility rates, azithromycin coverage, relative risk of sepsis incidence with azithromycin access, 
+and sepsis incidence probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{sepsis}|\text{azithromycin})` 
+and :math:`p(\text{sepsis}|\text{no azithromycin})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
 
 **Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that
 :math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
 
 .. math::
 
-   p(\text{no antibiotics}) = \sum_{\text{paths without antibiotics}} p(\text{path}),
+   p(\text{no azithromycin}) = \sum_{\text{paths without azithromycin}} p(\text{path}),
 
 then can use this to expand the identity
 
 .. math::
 
-   \text{PAF}_\text{no antibiotics} = 1 - \frac{1}{\mathbb{E}(\text{RR})}.
+   \text{PAF}_\text{no azithromycin} = 1 - \frac{1}{\mathbb{E}(\text{RR})}.
 
 Since our risk exposure has two categories,
 
 .. math::
 
-   \mathbb{E}(\text{RR}) = p(\text{no antibiotics}) \cdot \text{RR}_\text{no antibiotics} + (1 - p(\text{no antibiotics})) \cdot 1.
+   \mathbb{E}(\text{RR}) = p(\text{no azithromycin}) \cdot \text{RR}_\text{no azithromycin} + (1 - p(\text{no azithromycin})) \cdot 1.
 
 
 
@@ -210,31 +210,30 @@ Scenarios
 Assumptions and Limitations
 ---------------------------
 
-- We assume that antibiotics availability captures actual use, and not simply the treatment being in the facility 
-- We assume that the delivery facility is also the facility where a sick neonate will seek care for sepsis
-- We assume that the relative risk of sepsis mortality with antibiotics in practice is a value that we can find in the literature
-- We have excluded the effect of antibiotics on pneumonia mortality, because this cause is currently lumped with 'other causes'
-- Baseline coverage data for antibiotics in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2018. (These placeholder values come 
-  from two data sources, both for Ethiopia, both identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final 
-  Report found 30.2% of BEmONC facilities and 76.8% of CEmONC facilities have neonatal antibiotics; the 2016-2018 SARA Report 
-  found 52.9% of BEmONC facilities and 97.2% of CEmONC facilities have neonatal antibiotics.  While we plan a data strategy to 
-  fill the gaps we have used a simple average.)
-- We assume that baseline coverage for antibiotics in home births is 5% (this is not data-backed).
-- We are currently using a placeholder value for the relative risk of Lack-of-Access-to-Antibiotics on neonatal sepsis mortality, which is not 
-  backed by literature. Further research is needed to find an appropriate value.
+- We assume that azithromycin availability captures actual use, and not simply the treatment being in the facility 
+- We assume that the delivery facility is also the facility where a mother or birthing person will seek care for sepsis
+- We assume that the relative risk of sepsis incidence with azithromycin in practice is a value that we can find in the literature (Note: 
+  the value we are using is from `this systematic review <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_)
+- We have excluded the effect of azithromycin on pneumonia incidence/mortality, because this cause is currently lumped with 'other causes'
+- Baseline coverage data for azithromycin in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2018. These placeholder values come 
+  from three data sources, all for Ethiopia, all identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final 
+  Report found 39.2% of BEmONC facilities and 90.4% of CEmONC facilities have azithromycin; the 2016 SARA Report 
+  found 68.4% of BEmONC facilities and 90.5% of CEmONC facilities have azithromycin; the 2018 SARA Report found 75.9% of BEmONC facilities
+  and 98.0% of CEmONC facilities have azithromycin. While we plan a data strategy to fill the gaps we have used a simple average.
+- We assume that baseline coverage for azithromycin in home births is 5% (this is not data-backed).
 
 .. todo::
 
-  If more suitable baseline coverage data for antibiotics for neonatal sepsis at all facility types in all 3 locations, we should use that data instead and update 
-  this documentation accordingly. We also need to find a more trustworthy value for the relative risk of antibiotics on neonatal sepsis.
+  If more suitable baseline coverage data for azithromycin for maternal sepsis at all facility types for Nigeria and Pakistan, we should use that data instead and update 
+  this documentation accordingly. We also need to find a more trustworthy value for the relative risk of azithromycin on neonatal sepsis.
 
 
 Validation and Verification Criteria
 ------------------------------------
 
 - Population-level mortality rate should be the same as when this intervention is not included in the model
-- The ratio of sepsis deaths per birth among those without antibiotics access divided by those with antibiotics access should equal the relative risk parameter used in the model
-- The baseline coverage of antibiotics in each facility type should match the values in the artifact
+- The ratio of sepsis deaths per birth among those without azithromycin access divided by those with azithromycin access should equal the relative risk parameter used in the model
+- The baseline coverage of azithromycin in each facility type should match the values in the artifact
 - Validation: how does the sepsis moratlity rate in a counterfactual scenario with 100% antibiotic access compare to sepsis mortality rates in high-income countries?  They should be close, and the counterfactual should not be lower.
 
 References
@@ -242,4 +241,5 @@ References
 
 * https://chatgpt.com/share/67c1c7cf-f294-8010-8e65-261f87039e3b
 * https://chatgpt.com/share/67c1c7f9-8230-8010-9ade-30ed07b06bd0
+* https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.
 
