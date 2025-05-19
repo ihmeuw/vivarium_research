@@ -111,9 +111,9 @@ Note that these probabilities are not used directly in the model and are include
         nn_dead_RDS [label="neonate died\nof preterm with RDS"]
         nn_dead_no_RDS [label="neonate died\nof preterm without RDS"]
 
-        lb -> nn_alive  [label = "1 - mr_w - mr_wo"]
-        lb -> nn_dead_RDS [label = "mr_w"]
-        lb -> nn_dead_no_RDS [label = "mr_wo"]
+        lb -> nn_alive  [label = "1 - csmrisk_w - csmrisk_wo"]
+        lb -> nn_dead_RDS [label = "csmrisk_w"]
+        lb -> nn_dead_no_RDS [label = "csmrisk_wo"]
     }
 
 .. list-table:: State Definitions
@@ -143,10 +143,10 @@ Note that these probabilities are not used directly in the model and are include
     * - Symbol
       - Name
       - Definition
-    * - mr_w
+    * - csmrisk_w
       - Preterm with RDS Mortality Risk
       - The probability that a simulant who was born alive dies from preterm with RDS during the neonatal period
-    * - mr_wo
+    * - csmrisk_wo
       - Preterm without RDS Mortality Risk
       - The probability that a simulant who was born alive dies from preterm without RDS during the neonatal period
 
@@ -158,20 +158,20 @@ The Preterm Birth submodel requires only the birth-weight- and gestation-age-str
 
 Since this is a PAF-of-one cause, the calculation must take into account the "structural zeros" representing no mortality risk for simulants with a gestational age of 37 or more weeks.
 
-The way these CSMRs are used is the same for all subcauses, and therefore is included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.  This page describes the birth-weight- and gestational-age-specific cause specific mortality risks that are used for this cause on that page, :math:`\text{CMR}^{\text{preterm with RDS}}_{\text{BW},\text{GA}}` and :math:`\text{CMR}^{\text{preterm without RDS}}_{\text{BW},\text{GA}}`. In both cases, the formula is:
+The way these CSMRisks are used is the same for all subcauses, and therefore is included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.  This page describes the birth-weight- and gestational-age-specific cause specific mortality risks that are used for this cause on that page, :math:`\text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}}` and :math:`\text{CSMRisk}^{\text{preterm without RDS}}_{\text{BW},\text{GA}}`. In both cases, the formula is:
 
 .. math::
     \begin{align*}
-    \text{CMR}^{k}_{\text{BW},\text{GA}}
+    \text{CSMRisk}^{k}_{\text{BW},\text{GA}}
     &=
     \begin{cases}
-    \text{CMR} / p_\text{preterm} \cdot f_k \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z, & \text{if GA} < 37; \\
+    \text{CSMRisk} / p_\text{preterm} \cdot f_k \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z, & \text{if GA} < 37; \\
     0, & \text{if GA} \geq 37;
     \end{cases}
     \end{align*}
 
 where :math:`k` is the subcause of interest (preterm birth with or without RDS),
-:math:`\text{CMR}` is the cause-specific mortality riskk for preterm birth complications,
+:math:`\text{CSMRisk}` is the cause-specific mortality riskk for preterm birth complications,
 :math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`E[\text{RR}_{\text{BW,GA}} | \text{GA}<37] \cdot Z = 1`. Solving for :math:`Z` gives :math:`Z = 1 / E[\text{RR}_{\text{BW,GA}} | \text{GA}<37]`.
 
 .. note::
@@ -202,7 +202,7 @@ where :math:`k` is the subcause of interest (preterm birth with or without RDS),
   Also, it is possible that the choice of :math:`\text{RR}_{\text{BW},\text{GA}}` might not work for every subcause. Since we're moving all the preterm mortality into the preterm categories, there is less room there for mortality from other causes, so depending on the risks involved, we may need to shift mortality from some other causes into the non-preterm categories in order to avoid making things negative.
   It is even possible that there is no way to make this work consistently, meaning that any choice of weight function would lead to negative mortality risks.  We expect that this will not be an issue, but we haven't actually tried it with the real data yet.
 
-Each individual simulant :math:`i` has their own :math:`\text{CSMR}_i^k` that might be different from :math:`\text{CSMR}^k_{\text{BW}_i,\text{GA}_i}` (meaning the average birth-weight- and gestational-age-specific CSMR for simulants with the birth weight and gestational age matching simulant :math:`i`.  We recommend implementing this as a pipeline eventually because it will be modified by interventions (or access to interventions) relevant to this subcause.  (Until we implement those, we will have :math:`\text{CSMR}_{i}^k = \text{CSMR}^k_{\text{BW}_i,\text{GA}_i}`, though.)
+Each individual simulant :math:`i` has their own :math:`\text{CSMR}_i^k` that might be different from :math:`\text{CSMRisk}^k_{\text{BW}_i,\text{GA}_i}` (meaning the average birth-weight- and gestational-age-specific CSMRisk for simulants with the birth weight and gestational age matching simulant :math:`i`.  We recommend implementing this as a pipeline eventually because it will be modified by interventions (or access to interventions) relevant to this subcause.  (Until we implement those, we will have :math:`\text{CSMRisk}_{i}^k = \text{CSMRisk}^k_{\text{BW}_i,\text{GA}_i}`, though.)
 
 The following table shows the data needed for these
 calculations.
@@ -238,13 +238,17 @@ Data Tables
       - Count of live births
       - GBD: covariate_id = 1106
       - 
-    * - enn_cmr
+    * - csmrisk_enn
       - neonatal preterm birth complications mortality risk in the early neonatal age group
       - enn_death_count / live_birth_count
       - 
-    * - lnn_cmr
+    * - csmrisk_lnn
       - neonatal preterm birth complications mortality risk in the late neonatal age group
       - lnn_death_count / (live_birth_count - enn_all_cause_death_count)
+      - 
+    * - :math:`CSMRisk`
+      - neonatal preterm birth complications mortality risk
+      - either csmrisk_enn or csmrisk_lnn depending on the simulant's age group
       - 
     * - :math:`p_\text{preterm}`
       - Prevalence of gestational age <37 weeks at birth
