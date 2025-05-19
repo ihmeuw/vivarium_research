@@ -1118,6 +1118,8 @@ Default stratifications to all observers should include scenario and input draw.
 
 * Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
 
+* We currently do not consider the potential impact of pregnancy outcome, mode of delivery, or preterm status on postpartum depression incidence (although we do model the impact of hemoglobin on PPD incidence). This may cause us to underestimate the impact of interventions that work through these mechanisms on postpartum depression burden. 
+
 .. _mncnh_portfolio_7.0:
 
 7.0 References/Other
