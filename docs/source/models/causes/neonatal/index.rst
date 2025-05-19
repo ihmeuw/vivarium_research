@@ -230,7 +230,7 @@ The calculation of :math:`\text{ACMRisk}_i` (the all-cause mortality risk for a 
     \text{ACMRisk}_{\text{BW},\text{GA}} &= \text{ACMRisk} \times (1 - \text{PAF}_{\text{LBWSG}}) \times \text{RR}_{\text{BW},\text{GA}},
     \end{align*}
 
-where :math:`\text{ACMRisk}_{\text{BW},\text{GA}}` is the all-cause mortality risk for a population with birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`, :math:`\text{ACMRisk}` is the all-cause mortality risk for the total population, :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, and :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative mortality risk for a specific birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`.
+where :math:`\text{ACMRisk}_{\text{BW},\text{GA}}` is the all-cause mortality risk for a population with birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`, :math:`\text{ACMRisk}` is the all-cause mortality risk for the total population in one of the neonatal age groups (i.e., :math:`\text{ACMRisk}` equals :math:`\text{ACMRisk}_\text{ENN}` or :math:`\text{ACMRisk}_\text{LNN}` as defined above), :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, and :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative mortality risk for a specific birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`.
 
 To obtain the ACMRisk for a specific simulant (:math:`\text{ACMRisk}_i`), we subtract off the *population* CSMRisks for each modeled subcause for the birth weight and gestational age of the simulant, and then add back in the (potentially pipeline-modified) *individual* CSMRisks for the specific simulant, which might differ from baseline due to intervention coverage:
 
