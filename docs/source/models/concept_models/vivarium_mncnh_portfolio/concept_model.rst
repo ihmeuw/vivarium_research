@@ -1108,11 +1108,15 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 7.1
-    - Neonatal mortality is expected to remain slightly underestimated in the baseline scenario (by the same magnitude of model run 6.1). This is expected as we have not yet implemented a strategy to account for known probabilities greater than 1.
+    - * Neonatal mortality (all cause and cause-specific) is expected to remain slightly underestimated in the baseline scenario (by the same magnitude of model run 6.1). This is expected as we have not yet implemented a strategy to account for known probabilities greater than 1.
+      * Recheck LBWSG Effects
+      * Check that intervention effect sizes are maintained
     - 
     - 
   * - 7.2
-    - Neonatal mortality is expected to validate to GBD targets (no longer be underestimated!)
+    - * Neonatal mortality is expected to validate to GBD targets (no longer be underestimated!)
+      * Check that LBWSG effects are updated and functioning as expected
+      * Check that intervention effect sizes are maintained too
     - 
     - 
 
