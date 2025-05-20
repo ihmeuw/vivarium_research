@@ -46,7 +46,7 @@ This section describes how an azithromycin intervention can be implemented and c
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Maternal sepsis and other maternal infections Incidence Probability :math:`\text{IR}_i^\text{sepsis}`
+  * - Maternal sepsis and other maternal infections Incidence Probability :math:`\text{IcR}_i^\text{sepsis}`
     - Adjust multiplicatively using RR
     - Yes
     - For convenience, we will model this like a dichotomous risk factor; more details below
@@ -103,7 +103,7 @@ In Vivarium, this risk effect will modify the sepsis incidence pipeline, resulti
 
 .. math::
 
-   \text{IR}_i^\text{sepsis} = \text{IR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i} \cdot (1 - \text{PAF}_\text{no azithromycin}) \cdot \text{RR}_i^\text{no azithromycin}
+   \text{IR}_i^\text{sepsis} = \text{IR}^\text{sepsis}_ \cdot (1 - \text{PAF}_\text{no azithromycin}) \cdot \text{RR}_i^\text{no azithromycin}
 
 where :math:`\text{RR}_i^\text{no azithromycin}` is simulant *i*'s individual relative risk for "no azithromycin", meaning :math:`\text{RR}_i^\text{no azithromycin} = \text{RR}_\text{no azithromycin}` 
 if simulant *i* accesses a facility without azithromycin, and :math:`\text{RR}_i^\text{no azithromycin} = 1` if simulant *i* accesses a facility *with* azithromycin.
@@ -118,7 +118,8 @@ This reduces to the previous formula if there are no other interventions, and we
 
 .. math::
 
-   \text{IR}^\text{sepsis}_{i, \text{original}} = \text{IR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
+   \text{IR}^\text{sepsis}_{i, \text{original}} = \text{IR}^\text{sepsis}_
+
 
 The relative risk value we will use is pulled from `this 2024 systematic review/meta-analysis <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_ 
 that investigated the effect of azithromycin during labor.
