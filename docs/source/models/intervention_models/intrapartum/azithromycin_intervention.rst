@@ -37,6 +37,7 @@ Intervention Overview
 Azithromycin is used to prevent maternal sepsis in the intrapartum period, reducing the risk incidence.
 
 This section describes how an azithromycin intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
+See the :ref:`MNCNH Portfolio model <2021_cause_maternal_sepsis_mncnh>`.
 
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 15
@@ -48,8 +49,10 @@ This section describes how an azithromycin intervention can be implemented and c
     - Note (ex: is this relationship direct or mediated?)
   * - Maternal sepsis and other maternal infections Incidence Probability :math:`\text{IcR}_i^\text{maternal sepsis}`
     - Adjust multiplicatively using RR
-    - Yes
-    - For convenience, we will model this like a dichotomous risk factor; more details below
+    - Yes 
+    - 
+      - :ref:`Maternal sepsis cause model <2021_cause_maternal_sepsis_mncnh>` 
+      - For convenience, we will model this like a dichotomous risk factor; more details below
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
