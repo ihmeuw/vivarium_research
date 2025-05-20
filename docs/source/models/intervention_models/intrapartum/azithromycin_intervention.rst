@@ -46,7 +46,7 @@ This section describes how an azithromycin intervention can be implemented and c
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Maternal sepsis and other maternal infections Incidence Probability :math:`\text{IcR}_i^\text{sepsis}`
+  * - Maternal sepsis and other maternal infections Incidence Probability :math:`\text{IcR}_i^\text{maternal sepsis}`
     - Adjust multiplicatively using RR
     - Yes
     - For convenience, we will model this like a dichotomous risk factor; more details below
@@ -87,7 +87,7 @@ Vivarium Modeling Strategy
 --------------------------
 
 This intervention requires adding an attribute to all simulants to specify if a pregnant person has access to a facility with access to azithromycin.  We will track if a simulant has access to azithromycin 
-and the model will have different incidence rates for sepsis for individuals with and without access to azithromycin (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` 
+and the model will have different incidence rates for maternal sepsis for individuals with and without access to azithromycin (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` 
 components from ``vivarium_public_health``).
 
 The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has access to azithromycin during the intrapartum period, which we assume will be closely 
@@ -95,30 +95,30 @@ related to the facility choice during birth, i.e. home births have much lower ac
 facilities.
 
 To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "lack of access to azithromycin".  With this framing, the ``RiskEffect`` 
-component requires data on (1) the relative risk of sepsis incidence for people with lack of access to azithromycin, and (2) the population attributable fraction (PAF) of sepsis 
-due to lack of access to azithromycin.  We will use the decision tree below to find the probability of sepsis incidence with and without access to azithromycin that are logically 
+component requires data on (1) the relative risk of maternal sepsis incidence for people with lack of access to azithromycin, and (2) the population attributable fraction (PAF) of maternal sepsis 
+due to lack of access to azithromycin.  We will use the decision tree below to find the probability of maternal sepsis incidence with and without access to azithromycin that are logically 
 consistent with the baseline delivery facility rates and baseline azithromycin coverage.
 
-In Vivarium, this risk effect will modify the sepsis incidence pipeline, resulting in 
+In Vivarium, this risk effect will modify the maternal sepsis incidence pipeline, resulting in 
 
 .. math::
 
-   \text{IR}_i^\text{sepsis} = \text{IR}^\text{sepsis}_ \cdot (1 - \text{PAF}_\text{no azithromycin}) \cdot \text{RR}_i^\text{no azithromycin}
+   \text{IR}_i^\text{maternal sepsis} = \text{IR}^\text{maternal sepsis}_ \cdot (1 - \text{PAF}_\text{no azithromycin}) \cdot \text{RR}_i^\text{no azithromycin}
 
 where :math:`\text{RR}_i^\text{no azithromycin}` is simulant *i*'s individual relative risk for "no azithromycin", meaning :math:`\text{RR}_i^\text{no azithromycin} = \text{RR}_\text{no azithromycin}` 
 if simulant *i* accesses a facility without azithromycin, and :math:`\text{RR}_i^\text{no azithromycin} = 1` if simulant *i* accesses a facility *with* azithromycin.
 
-If there are other interventions also affecting the IR of sepsis, the pipeline will combine these effects, and we can write out the math for this risk explicitly as 
+If there are other interventions also affecting the IR of maternal sepsis, the pipeline will combine these effects, and we can write out the math for this risk explicitly as 
 
 .. math::
 
-   \text{IR}^\text{sepsis}_{i, \text{updated}} = \text{IR}^\text{sepsis}_{i, \text{original}} \cdot (1 - \text{PAF}_\text{no azithromycin}) \cdot \text{RR}_i^\text{no azithromycin}
+   \text{IR}^\text{maternal sepsis}_{i, \text{updated}} = \text{IR}^\text{maternal sepsis}_{i, \text{original}} \cdot (1 - \text{PAF}_\text{no azithromycin}) \cdot \text{RR}_i^\text{no azithromycin}
 
 This reduces to the previous formula if there are no other interventions, and we would have 
 
 .. math::
 
-   \text{IR}^\text{sepsis}_{i, \text{original}} = \text{IR}^\text{sepsis}_
+   \text{IR}^\text{maternal sepsis}_{i, \text{original}} = \text{IR}^\text{maternal sepsis}_
 
 
 The relative risk value we will use is pulled from `this 2024 systematic review/meta-analysis <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_ 
@@ -135,7 +135,7 @@ that investigated the effect of azithromycin during labor.
   * - Relative Risk
     - 1.54
     - :math:`\text{Normal}(1.54,0.08^2)`
-    - Based on placeholder relative risk of 0.65 (95% CI 0.55-0.77) on sepsis incidence for pregnant people with access to azithromycin
+    - Based on placeholder relative risk of 0.65 (95% CI 0.55-0.77) on maternal sepsis incidence for pregnant people with access to azithromycin
   * - PAF
     - see below
     - see below
@@ -145,8 +145,8 @@ Calibration Strategy
 --------------------
 
 The following decision tree shows all of the paths from delivery facility choice to azithromycin availability.  Distinct paths in the tree correspond to disjoint events, 
-which we can sum over to find the population probability of sepsis incidence.  The goal here is to use internally consistent conditional probabilities of sepsis incidence
-for the subpopulations with and without access to azithromycin, so that the baseline scenario can track who has access to azithromycin and still match the baseline sepsis 
+which we can sum over to find the population probability of maternal sepsis incidence.  The goal here is to use internally consistent conditional probabilities of maternal sepsis incidence
+for the subpopulations with and without access to azithromycin, so that the baseline scenario can track who has access to azithromycin and still match the baseline maternal sepsis 
 incidence rate.
 
 .. graphviz::
@@ -154,13 +154,13 @@ incidence rate.
     digraph azithromycin {
         rankdir = LR;
         facility [label="Facility type"]
-        home [label="p_sepsis_without_azithromycin"]
+        home [label="p_maternal_sepsis_without_azithromycin"]
         BEmONC [label="azithromycin?"]
         CEmONC [label="azithromycin?"]
-        BEmONC_wo [label="p_sepsis_without_azithromycin"] 
-        BEmONC_w [label="p_sepsis_with_azithromycin"]
-        CEmONC_wo [label="p_sepsis_without_azithromycin"] 
-        CEmONC_w [label="p_sepsis_with_azithromycin"]
+        BEmONC_wo [label="p_maternal_sepsis_without_azithromycin"] 
+        BEmONC_w [label="p_maternal_sepsis_with_azithromycin"]
+        CEmONC_wo [label="p_maternal_sepsis_without_azithromycin"] 
+        CEmONC_w [label="p_maternal_sepsis_with_azithromycin"]
 
         facility -> home  [label = "home birth"]
         facility -> BEmONC  [label = "BEmONC"]
@@ -175,20 +175,20 @@ incidence rate.
 
 .. math::
     \begin{align*}
-        p(\text{sepsis}) 
-        &= \sum_{\text{paths without azithromycin}} p(\text{path})\cdot p(\text{sepsis}|\text{no azithromycin})\\
-        &+ \sum_{\text{paths with azithromycin}} p(\text{path})\cdot p(\text{sepsis}|\text{azithromycin})\\[.1in]
-        p(\text{sepsis}|\text{no azithromycin}) &= \text{RR}_\text{no azithromycin} \cdot p(\text{sepsis}|\text{azithromycin})
+        p(\text{maternal_sepsis}) 
+        &= \sum_{\text{paths without azithromycin}} p(\text{path})\cdot p(\text{maternal_sepsis}|\text{no azithromycin})\\
+        &+ \sum_{\text{paths with azithromycin}} p(\text{path})\cdot p(\text{maternal_sepsis}|\text{azithromycin})\\[.1in]
+        p(\text{maternal_sepsis}|\text{no azithromycin}) &= \text{RR}_\text{no azithromycin} \cdot p(\text{maternal_sepsis}|\text{azithromycin})
     \end{align*}
 
-where :math:`p(\text{sepsis})` is the probability of contracting sepsis in the general population, and :math:`p(\text{sepsis}|\text{azithromycin})` and
- :math:`p(\text{sepsis}|\text{no azithromycin})` are the probability of contracting sepsis in settings with and without access to azithromycin.  For each 
+where :math:`p(\text{maternal_sepsis})` is the probability of contracting maternal sepsis in the general population, and :math:`p(\text{maternal_sepsis}|\text{azithromycin})` and
+ :math:`p(\text{maternal_sepsis}|\text{no azithromycin})` are the probability of contracting maternal sepsis in settings with and without access to azithromycin.  For each 
  path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and 
  unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has azithromycin available.
 
-When we fill in the location-specific values for delivery facility rates, azithromycin coverage, relative risk of sepsis incidence with azithromycin access, 
-and sepsis incidence probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{sepsis}|\text{azithromycin})` 
-and :math:`p(\text{sepsis}|\text{no azithromycin})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
+When we fill in the location-specific values for delivery facility rates, azithromycin coverage, relative risk of maternal sepsis incidence with azithromycin access, 
+and maternal sepsis incidence probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{maternal_sepsis}|\text{azithromycin})` 
+and :math:`p(\text{maternal_sepsis}|\text{no azithromycin})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
 
 **Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that
 :math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
@@ -223,8 +223,8 @@ Assumptions and Limitations
 ---------------------------
 
 - We assume that azithromycin availability captures actual use, and not simply the treatment being in the facility. 
-- We assume that the delivery facility is also the facility where a mother or birthing person will seek care for sepsis.
-- We assume that the relative risk of sepsis incidence with azithromycin in practice is a value that we can find in the literature (Note: 
+- We assume that the delivery facility is also the facility where a mother or birthing person will seek care for maternal sepsis.
+- We assume that the relative risk of maternal sepsis incidence with azithromycin in practice is a value that we can find in the literature (Note: 
   the value we are using is from `this 2024 systematic review <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_)
 - We have excluded the effect of azithromycin on pneumonia incidence/mortality, because this cause is currently lumped with 'other causes'.
 - We currenty do not model the impact of intrapartum azithromycin on the incidence of preterm births, despite *some* literature
@@ -252,7 +252,7 @@ Validation and Verification Criteria
 - The ratio of maternal sepsis incidence among those without azithromycin access divided by those with azithromycin access 
   should equal the relative risk parameter used in the model
 - The baseline coverage of azithromycin in each facility type should match the values in the artifact
-- Validation: how does the sepsis incidence rate in a counterfactual scenario with 100% antibiotic access compare to sepsis incidence rates in high-income countries?  They should be close, and the counterfactual should not be lower.
+- Validation: how does the maternal sepsis incidence rate in a counterfactual scenario with 100% antibiotic access compare to maternal sepsis incidence rates in high-income countries?  They should be close, and the counterfactual should not be lower.
 
 References
 ------------
