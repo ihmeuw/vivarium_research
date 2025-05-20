@@ -150,15 +150,15 @@ Vivarium Modeling Strategy
      - TBD
      - Modeling strategy for hypertensive disorders cause in the MNCNH model is still outstanding. The risk effects model for this cause may require a custom approach to account for the complexity of pre-eclampsia and related interventions in the MNCNH model.
    * - Maternal disorders
-     - Depressive disorders
+     - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
      - cause
-     - c567
+     - custom
      - :math:`ir`
      - A modeling strategy for maternal depressive disorders in the MNCNH model is still outstanding.
 
 .. todo::
 
-  Update this page with hypertension and depression cause model links when ready
+  Update this page with hypertension cause model links when ready
 
 Maternal disorders
 ++++++++++++++++++++
@@ -168,11 +168,11 @@ Use the modeling strategy described below for the following maternal disorders s
 - :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
 - :ref:`Maternal sepsis and other maternal infections <2021_cause_maternal_sepsis_mncnh>`
 - Maternal hypertensive disorders
-- Maternal depressive disorders
+- :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
 
 .. todo::
 
-  Link hypertension and depressive disorders cause model documents when ready and write custom strategy for hypertensive disorders as necessary
+  Link hypertension cause model documents when ready and write custom strategy for hypertensive disorders as necessary
 
 Use :ref:`hemoglobin exposure in pregnancy model <2023_hemoglobin_exposure>` at the end of the pregnancy section/entrance into the intrapartum section to determine risk effects. There may be individual exposure values assigned that are outside of the defined risk curves in GBD. In this case, for exposures <40, assign the risk corresponding to an exposure value of 40. For exposures >150, assign the risk corresponding to an exposure value of 150.
 
