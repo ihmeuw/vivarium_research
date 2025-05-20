@@ -46,7 +46,7 @@ This section describes how an azithromycin intervention can be implemented and c
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Maternal sepsis and other maternal infections Incidence Probability :math:`\text{CSMR}_i^\text{sepsis}`
+  * - Maternal sepsis and other maternal infections Incidence Probability :math:`\text{IR}_i^\text{sepsis}`
     - Adjust multiplicatively using RR
     - Yes
     - For convenience, we will model this like a dichotomous risk factor; more details below
