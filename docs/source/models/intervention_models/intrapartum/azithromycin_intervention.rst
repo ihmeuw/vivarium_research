@@ -108,19 +108,6 @@ In Vivarium, this risk effect will modify the maternal sepsis incidence pipeline
 where :math:`\text{RR}_i^\text{no azithromycin}` is simulant *i*'s individual relative risk for "no azithromycin", meaning :math:`\text{RR}_i^\text{no azithromycin} = \text{RR}_\text{no azithromycin}` 
 if simulant *i* accesses a facility without azithromycin, and :math:`\text{RR}_i^\text{no azithromycin} = 1` if simulant *i* accesses a facility *with* azithromycin.
 
-If there are other interventions also affecting the IR of maternal sepsis, the pipeline will combine these effects, and we can write out the math for this risk explicitly as 
-
-.. math::
-
-   \text{IR}^\text{maternal sepsis}_{i, \text{updated}} = \text{IR}^\text{maternal sepsis}_{i, \text{original}} \cdot (1 - \text{PAF}_\text{no azithromycin}) \cdot \text{RR}_i^\text{no azithromycin}
-
-This reduces to the previous formula if there are no other interventions, and we would have 
-
-.. math::
-
-   \text{IR}^\text{maternal sepsis}_{i, \text{original}} = \text{IR}^\text{maternal sepsis}_
-
-
 The relative risk value we will use is pulled from `this 2024 systematic review/meta-analysis <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_ 
 that investigated the effect of azithromycin during labor.
 
