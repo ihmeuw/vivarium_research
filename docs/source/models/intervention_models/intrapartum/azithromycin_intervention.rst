@@ -109,7 +109,7 @@ In Vivarium, this risk effect will modify the maternal sepsis incidence pipeline
    \text{IR}_i^\text{maternal sepsis} = \text{IR}^\text{maternal sepsis}_ \cdot (1 - \text{PAF}_\text{no azithromycin}) \cdot \text{RR}_i^\text{no azithromycin}
 
 where :math:`\text{RR}_i^\text{no azithromycin}` is simulant *i*'s individual relative risk for "no azithromycin", meaning :math:`\text{RR}_i^\text{no azithromycin} = \text{RR}_\text{no azithromycin}` 
-if simulant *i* accesses a facility without azithromycin, and :math:`\text{RR}_i^\text{no azithromycin} = 1` if simulant *i* accesses a facility *with* azithromycin.
+if simulant *i* accesses a facility without azithromycin, and :math:`\text{RR}_i^\text{no azithromycin} = 1` if simulant *i* accesses a facility *with* azithromycin. 
 
 The relative risk value we will use is pulled from `this 2024 systematic review/meta-analysis <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_ 
 that investigated the effect of azithromycin during labor.
@@ -246,10 +246,11 @@ Validation and Verification Criteria
 References
 ------------
 
-* https://chatgpt.com/share/67c1c7cf-f294-8010-8e65-261f87039e3b
-* https://chatgpt.com/share/67c1c7f9-8230-8010-9ade-30ed07b06bd0
-* https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.
-* https://pmc.ncbi.nlm.nih.gov/articles/PMC8436060/ 
-* https://link.springer.com/article/10.1007/s40261-022-01203-0
+.. [Ye-et-al-2024-azithromycin-during-labor]
+  Ye, H., Hu, J., Li, B. et al. Can the use of azithromycin during labour reduce the incidence of infection among puerperae and newborns? A systematic review and meta-analysis of randomized controlled trials. BMC Pregnancy Childbirth 24, 200 (2024). `<https://doi.org/10.1186/s12884-024-06390-6>`_
 
+.. [Hume-Nizon-et-al-2021-azithromycin-during-pregnancy]
+  Hume-Nixon M, Quach A, Reyburn R, Nguyen C, Steer A, Russell F. A Systematic Review and meta-analysis of the effect of administration of azithromycin during pregnancy on perinatal and neonatal outcomes. EClinicalMedicine. 2021 Sep 9;40:101123. doi: 10.1016/j.eclinm.2021.101123. PMID: 34541478; PMCID: PMC8436060.
 
+.. [Antonucci-et-al-2022-azithromycin-during-pregnancy]
+  Antonucci, R., Cuzzolin, L., Locci, C. et al. Use of Azithromycin in Pregnancy: More Doubts than Certainties. Clin Drug Investig 42, 921–935 (2022). https://doi.org/10.1007/s40261-022-01203-0
