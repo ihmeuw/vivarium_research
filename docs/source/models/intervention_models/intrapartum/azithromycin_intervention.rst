@@ -201,13 +201,6 @@ Since our risk exposure has two categories,
 
 
 
-Scenarios
----------
-
-.. todo::
-
-  Describe our general approach to scenarios, for example set coverage to different levels in different types of health facilities; then the specific values for specific scenarios will be specified in the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
-
 
 Assumptions and Limitations
 ---------------------------
@@ -217,12 +210,14 @@ Assumptions and Limitations
 - We assume that the relative risk of maternal sepsis incidence with azithromycin in practice is a value that we can find in the literature (Note: 
   the value we are using is from `this 2024 systematic review <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_)
 - We have excluded the effect of azithromycin on pneumonia incidence/mortality, because this cause is currently lumped with 'other causes'.
-- We currenty do not model the impact of intrapartum azithromycin on the incidence of preterm births, despite *some* literature
-  evidence that suggests there may be a significant impact. For reference, this `2021 systematic review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8436060/>`_
+- We currenty do not model the impact of azithromycin taken during pregnancy on the incidence of preterm births, despite *some* literature
+  evidence that suggests there may be a significant impact. Currently, we are ony modeling the impact of azithromycin taken during labor, rather
+  than during pregnancy. We may include in a future iteration of this model the use of azithromycin during pregnancy as a treatment for sexually
+  transmitted infections, in which case we may reassess this limitation. For reference, this `2021 systematic review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8436060/>`_
   found an RR of 0.79 (95% CI 0.68-0.93) for LBW and an RR of 0.87 (95% CI 0.78-0.98) for premature births. They also reported an 
-  increase in stillbirht incidence. However, more recent publications (the 2024 review referenced above and  `this 2022 paper <https://link.springer.com/article/10.1007/s40261-022-01203-0>`_) 
+  increase in stillbirth incidence. However, more recent publications (the 2024 review referenced above and  `this 2022 paper <https://link.springer.com/article/10.1007/s40261-022-01203-0>`_) 
   have reported that there is no conclusive evidence to support that azithromycin use by pregnant women causes adverse 
-  neonatal outcomes.
+  neonatal outcomes. 
 - Baseline coverage data for azithromycin in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2018. These placeholder values come 
   from three data sources, all for Ethiopia, all identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final 
   Report found 39.2% of BEmONC facilities and 90.4% of CEmONC facilities have azithromycin; the 2016 SARA Report 
