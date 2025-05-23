@@ -37,7 +37,7 @@ Intervention Overview
 Azithromycin is used to prevent maternal sepsis in the intrapartum period, reducing the risk incidence.
 
 This section describes how an azithromycin intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
-See the :ref:`MNCNH Portfolio model <2021_cause_maternal_sepsis_mncnh>`.
+See the :ref:`Maternal sepsis and other maternal infections cause model <2021_cause_maternal_sepsis_mncnh>` for relevant details.
 
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 15
@@ -218,6 +218,9 @@ Assumptions and Limitations
   increase in stillbirth incidence. However, more recent publications (the 2024 review referenced above and  `this 2022 paper <https://link.springer.com/article/10.1007/s40261-022-01203-0>`_) 
   have reported that there is no conclusive evidence to support that azithromycin use by pregnant women causes adverse 
   neonatal outcomes. 
+- We also do not currently model the impact intrapartum azithromycin has on preventing maternal sepsis in partial term pregnancies. In our 
+  :ref:`Maternal sepsis and other maternal infections cause model <2021_cause_maternal_sepsis_mncnh>`, we only model full term pregnancies as 
+  at-risk for maternal sepsis.
 - Baseline coverage data for azithromycin in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2018. These placeholder values come 
   from three data sources, all for Ethiopia, all identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final 
   Report found 39.2% of BEmONC facilities and 90.4% of CEmONC facilities have azithromycin; the 2016 SARA Report 
@@ -227,8 +230,9 @@ Assumptions and Limitations
 
 .. todo::
 
-  If more suitable baseline coverage data for azithromycin for maternal sepsis at all facility types for Nigeria and Pakistan, we should use that data instead and update 
-  this documentation accordingly. We also need to decide if/how we would model the effect of intrapartum azithromycin on preterm incidence. 
+  - If more suitable baseline coverage data for azithromycin for maternal sepsis at all facility types for Nigeria and Pakistan, we should use that data instead and update 
+    this documentation accordingly. 
+  - We need to decide if/how we would model the effect of intrapartum azithromycin on preterm incidence. 
 
 Validation and Verification Criteria
 ------------------------------------
