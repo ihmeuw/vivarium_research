@@ -58,33 +58,40 @@ See the :ref:`Maternal sepsis and other maternal infections cause model <2021_ca
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-Baseline coverage data for azithromycin in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2018. These 
-placeholder values come from three data sources, all for Ethiopia, all identified by the Health Systems team at IHME: the 2016 
-Ethiopia EmONC Final Report found 39.2% of BEmONC facilities and 90.4% of CEmONC facilities have azithromycin; the 2016 SARA Report 
-found 68.4% of BEmONC facilities and 90.5% of CEmONC facilities have azithromycin; the 2018 SARA Report found 75.9% of BEmONC 
-facilities and 98.0% of CEmONC facilities have azithromycin. While we plan a data strategy to fill the gaps we have used a simple 
-average.
+It appears rare for prophylactic azithromycin during labor to be offered in African settings, so for both BEmONC and CEmONC in Nigeria and Ethiopia, we will use baseline coverage of 
+0% as a stand-in value while we search for additional evidence. Pakistan BEmONC settings also have a baseline coverage of 0%, but CEmONC settings should have 
+a baseline coverage of 20.3% according to [Saleem-et-al-2025-intrapartum-antibiotic-use]_.
+
 
 .. list-table:: Baseline Coverage of intrapartum azithromycin
-  :widths: 15 15 15 15
+  :widths: 15 15 15 15 15
   :header-rows: 1
 
-  * - Birth Facility
+  * - Location
+    - Birth Facility
     - Coverage Mean (%)
     - Coverage Distribution (%)
     - Notes
-  * - Home Birth
-    - 5
-    - :math:`\text{Uniform}(0,10)`
+  * - All (Ethiopia, Nigeria, Pakistan)
+    - Home Birth
+    - 0
+    - N/A
     - Assumption; need to investigate data sources for care seeking those giving birth outside of the hospital system 
-  * - BEmONC Facilities
-    - 61.2
-    - :math:`\text{Uniform}(39.2,75.9)`
-    - placeholder value based on three data points 
-  * - CEmONC Facilities
-    - 93.0
-    - :math:`\text{Uniform}(90.4,98.0)`
-    - placeholder value based on three data points 
+  * - All (Ethiopia, Nigeria, Pakistan)
+    - BEmONC Facilities
+    - 0
+    - N/A
+    - 
+  * - Ethiopia and Nigeria
+    - CEmONC Facilities
+    - 0
+    - N/A
+    - 
+  * - Pakistan
+    - CEmONC Facilities
+    - 20.3
+    - :math:`\text{Uniform}(15.3,25.3)`
+    - 
 
 
 Vivarium Modeling Strategy
@@ -255,3 +262,6 @@ References
 
 .. [Antonucci-et-al-2022-azithromycin-during-pregnancy]
   Antonucci, R., Cuzzolin, L., Locci, C. et al. Use of Azithromycin in Pregnancy: More Doubts than Certainties. Clin Drug Investig 42, 921–935 (2022). https://doi.org/10.1007/s40261-022-01203-0
+
+.. [Saleem-et-al-2025-intrapartum-antibiotic-use]
+  Saleem S, Yasmin H, Moore JL, Rahim A, Shakeel I, Lokangaka A, et al. Intrapartum and postpartum antibiotic use in seven low- and middle-income countries: Findings from the A-PLUS trial. BJOG. 2025; 132(1): 72–80. https://doi-org.offcampus.lib.washington.edu/10.1111/1471-0528.17930
