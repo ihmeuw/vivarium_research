@@ -111,8 +111,8 @@ In Vivarium, this risk effect will modify the maternal sepsis incidence pipeline
 where :math:`\text{RR}_i^\text{no azithromycin}` is simulant *i*'s individual relative risk for "no azithromycin", meaning :math:`\text{RR}_i^\text{no azithromycin} = \text{RR}_\text{no azithromycin}` 
 if simulant *i* accesses a facility without azithromycin, and :math:`\text{RR}_i^\text{no azithromycin} = 1` if simulant *i* accesses a facility *with* azithromycin. 
 
-The relative risk value we will use is pulled from `this 2024 systematic review/meta-analysis <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_ 
-that investigated the effect of azithromycin during labor.
+The relative risk value we will use is pulled from [Ye-et-al-2024-azithromycin-during-labor]_, a 2024 systematic review that investigated the effect of 
+azithromycin during labor.
 
 .. list-table:: Risk Effect Parameters for Lack-of-Access-to-Azithromycin
   :widths: 15 15 15 15
@@ -208,14 +208,14 @@ Assumptions and Limitations
 - We assume that azithromycin availability captures actual use, and not simply the treatment being in the facility. 
 - We assume that the delivery facility is also the facility where a mother or birthing person will seek care for maternal sepsis.
 - We assume that the relative risk of maternal sepsis incidence with azithromycin in practice is a value that we can find in the literature (Note: 
-  the value we are using is from `this 2024 systematic review <https://bmcpregnancychildbirth.biomedcentral.com/articles/10.1186/s12884-024-06390-6#:~:text=Primary%20outcomes,-Among%20the%20six&text=The%20incidence%20of%20maternal%20sepsis%20was%20significantly%20lower%20in%20the,was%20analysed%20in%20three%20studies.>`_)
+  the value we are using is from [Ye-et-al-2024-azithromycin-during-labor]_.)
 - We have excluded the effect of azithromycin on pneumonia incidence/mortality, because this cause is currently lumped with 'other causes'.
 - We currenty do not model the impact of azithromycin taken during pregnancy on the incidence of preterm births, despite *some* literature
   evidence that suggests there may be a significant impact. Currently, we are ony modeling the impact of azithromycin taken during labor, rather
   than during pregnancy. We may include in a future iteration of this model the use of azithromycin during pregnancy as a treatment for sexually
-  transmitted infections, in which case we may reassess this limitation. For reference, this `2021 systematic review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8436060/>`_
+  transmitted infections, in which case we may reassess this limitation. For reference, [Hume-Nizon-et-al-2021-azithromycin-during-pregnancy]_
   found an RR of 0.79 (95% CI 0.68-0.93) for LBW and an RR of 0.87 (95% CI 0.78-0.98) for premature births. They also reported an 
-  increase in stillbirth incidence. However, more recent publications (the 2024 review referenced above and  `this 2022 paper <https://link.springer.com/article/10.1007/s40261-022-01203-0>`_) 
+  increase in stillbirth incidence. However, more recent publications (the 2024 review referenced above and [Antonucci-et-al-2022-azithromycin-during-pregnancy]_) 
   have reported that there is no conclusive evidence to support that azithromycin use by pregnant women causes adverse 
   neonatal outcomes. 
 - We also do not currently model the impact intrapartum azithromycin has on preventing maternal sepsis in partial term pregnancies. In our 
