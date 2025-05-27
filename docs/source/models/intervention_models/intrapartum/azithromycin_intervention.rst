@@ -47,7 +47,7 @@ See the :ref:`Maternal sepsis and other maternal infections cause model <2021_ca
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Maternal sepsis and other maternal infections Incidence Probability :math:`\text{IcR}_i^\text{maternal sepsis}`
+  * - Maternal sepsis and other maternal infections Incidence Probability :math:`\text{IR}_i^\text{maternal sepsis}`
     - Adjust multiplicatively using RR
     - Yes 
     - 
