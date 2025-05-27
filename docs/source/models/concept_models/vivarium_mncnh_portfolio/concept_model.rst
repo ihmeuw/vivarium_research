@@ -227,13 +227,13 @@ defined as a module input in a subsequent row.
     - * (Pregnancy term duration)
       * Birth facility
       * Believed gestational age
-    - * Intrapartum azithromycin coverage
+    - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
       * Antenatal corticosteroid coverage
       * Misoprostol coverage
     - TODO: create/link intervention model documents
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
-      * Intrapartum azithromycin coverage
+      * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
     - * Maternal disorders outcomes (see outcome table)
     - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
       * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
@@ -261,14 +261,14 @@ defined as a module input in a subsequent row.
       - * (Pregnancy term duration)
         * Birth facility
         * Believed gestational age
-      - * Intrapartum azithromycin coverage
+      - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
         * Antenatal corticosteroid coverage
         * Misoprostol coverage
       - TODO: create/link intervention model documents
       - 
     * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
       - * (Pregnancy term duration)
-        * Intrapartum azithromycin coverage
+        * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
         * Hemoglobin at birth
       - * Maternal disorders outcomes (see outcome table)
       - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
