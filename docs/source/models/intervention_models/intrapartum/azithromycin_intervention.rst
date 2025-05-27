@@ -58,9 +58,9 @@ See the :ref:`Maternal sepsis and other maternal infections cause model <2021_ca
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-It appears rare for prophylactic azithromycin during labor to be offered in African settings, so for both BEmONC and CEmONC in Nigeria and Ethiopia, we will use baseline coverage of 
-0% as a stand-in value while we search for additional evidence. Pakistan BEmONC settings also have a baseline coverage of 0%, but CEmONC settings should have 
-a baseline coverage of 20.3% according to [Saleem-et-al-2025-intrapartum-antibiotic-use]_.
+It appears rare for prophylactic azithromycin during labor to be offered in African settings, so for both BEmONC and CEmONC in Nigeria and Ethiopia, we will use 
+a baseline coverage of 0% as a stand-in value while we search for additional evidence. Pakistan BEmONC settings also have a baseline coverage of 0%, but CEmONC
+settings in Pakistan should have a baseline coverage of 20.3% according to [Saleem-et-al-2025-intrapartum-antibiotic-use]_.
 
 
 .. list-table:: Baseline Coverage of intrapartum azithromycin
@@ -91,7 +91,7 @@ a baseline coverage of 20.3% according to [Saleem-et-al-2025-intrapartum-antibio
     - CEmONC Facilities
     - 20.3
     - :math:`\text{Uniform}(15.3,25.3)`
-    - 
+    - Value pulled from [Saleem-et-al-2025-intrapartum-antibiotic-use]_
 
 
 Vivarium Modeling Strategy
@@ -229,17 +229,16 @@ Assumptions and Limitations
 - We also do not currently model the impact intrapartum azithromycin has on preventing maternal sepsis in partial term pregnancies. In our 
   :ref:`Maternal sepsis and other maternal infections cause model <2021_cause_maternal_sepsis_mncnh>`, we only model full term pregnancies as 
   at-risk for maternal sepsis.
-- Baseline coverage data for azithromycin in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2018. These placeholder values come 
-  from three data sources, all for Ethiopia, all identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final 
-  Report found 39.2% of BEmONC facilities and 90.4% of CEmONC facilities have azithromycin; the 2016 SARA Report 
-  found 68.4% of BEmONC facilities and 90.5% of CEmONC facilities have azithromycin; the 2018 SARA Report found 75.9% of BEmONC facilities
-  and 98.0% of CEmONC facilities have azithromycin. While we plan a data strategy to fill the gaps we have used a simple average.
-- We assume that baseline coverage for azithromycin in home births is 5% (this is not data-backed).
+- We assume that [Saleem-et-al-2025-intrapartum-antibiotic-use]_ provides an accurate overview of prophylactic intrampratum antibiotic use in our locations of interest.
+  As such, we assume baseline coverage of intrapartum azithromycin use in African sites is basically zero (despite EmONC 2016, SARA 2016, and SARA 2018 reporting the
+  presence of intrapartum antibiotics in hospitals to be nonzero - we assume these are given to mothers or birthing parents after delivery, which is not the intervention
+  we are modeling here). There was a baseline coverage of 20.3% for Pakistan hospitals though, which we assume is accurate.
+- We assume that baseline coverage for azithromycin in home births is 0% (this is not data-backed).
 
 .. todo::
 
-  - If more suitable baseline coverage data for azithromycin for maternal sepsis at all facility types for Nigeria and Pakistan, we should use that data instead and update 
-    this documentation accordingly. 
+  - If more suitable baseline coverage data for azithromycin for maternal sepsis in CEmONC settings for Nigeria and Ethiopia or BEmONC settings for all locations, 
+    we will update accordingly.
   - We need to decide if/how we would model the effect of intrapartum azithromycin on preterm incidence. 
 
 Validation and Verification Criteria
