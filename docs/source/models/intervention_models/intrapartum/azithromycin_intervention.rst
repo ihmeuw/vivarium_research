@@ -34,7 +34,8 @@ Azithromycin for treating maternal sepsis
 Intervention Overview
 -----------------------
 
-Azithromycin is used to prevent maternal sepsis in the intrapartum period, reducing the risk incidence.
+Azithomycin is an oral or intravenous single-dose antibiotic taken before labour for the prevention of maternal sepsis and other maternal infections 
+after vaginal delivery and caesarean section, reducing the risk incidence. 
 
 This section describes how an azithromycin intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 See the :ref:`Maternal sepsis and other maternal infections cause model <2021_cause_maternal_sepsis_mncnh>` for relevant details.
