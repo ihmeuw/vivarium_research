@@ -34,10 +34,9 @@ Azithromycin for treating maternal sepsis
 Intervention Overview
 -----------------------
 
-Azithomycin is an oral or intravenous single-dose antibiotic taken before labour for the prevention of maternal sepsis and other maternal infections 
-after vaginal delivery and caesarean section, reducing the risk incidence. 
+Azithomycin is an oral or intravenous single-dose antibiotic that can be taken before or during labour to prevent or reduce incidence of maternal sepsis and other maternal infections. 
 
-This section describes how an azithromycin intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
+This section describes how a prophylactic azithromycin intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 See the :ref:`Maternal sepsis and other maternal infections cause model <2021_cause_maternal_sepsis_mncnh>` for relevant details.
 
 .. list-table:: Affected Outcomes
@@ -182,7 +181,7 @@ incidence rate.
 where :math:`p(\text{maternal_sepsis})` is the probability of contracting maternal sepsis in the general population, and :math:`p(\text{maternal_sepsis}|\text{azithromycin})` and
  :math:`p(\text{maternal_sepsis}|\text{no azithromycin})` are the probability of contracting maternal sepsis in settings with and without receiving prophylactic azithromycin.  For each 
  path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and 
- unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has azithromycin available.
+ unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the simulant receives prophylactic azithromycin.
 
 When we fill in the location-specific values for delivery facility rates, azithromycin coverage, relative risk of maternal sepsis incidence with azithromycin, 
 and maternal sepsis incidence probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{maternal_sepsis}|\text{azithromycin})` 
