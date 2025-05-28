@@ -74,19 +74,18 @@ Our guiding principles for this document can be summarized in three points:
 
 **1. This work is important**
 
-Inclusive language use is important, and we want to begin by acknowledging the potential harm that using 
-reductive and racialized language can create. People from racially and ethnically diverse backgrounds experience 
-harm from oversimplified categorizations and exclusionary language in several ways, including diminished access to 
+Inclusive research practices are important, and we want to begin by acknowledging the potential harm that using 
+reductive and racialized research practices can create. People from racially and ethnically diverse backgrounds experience 
+harm from oversimplified categorizations and other exclusionary research practices in several ways, including diminished access to 
 healthcare, erasure in research, and perpetuation of stereotypes.
 
 An accurate understanding of race and ethnicity improves the validity of our research methods and conclusions about 
-all people, not only racial and ethnic minority groups. For example, studies that homogenize "Asian" 
-populations overlook critical differences in health outcomes across subgroups, such as in lung cancer research, 
-for which studies have found significant disparities between subgroups: East Asians show higher rates of nonsmoking-related lung cancer, 
-particularly adenocarcinomas, potentially linked to genetic mutations like EGFR (epidermal growth factor receptor). South 
-Asian populations may not exhibit these same patterns, and environmental factors like air pollution or smoking prevalence 
-vary widely across subgroups. [Noronha_2024]_
-
+all people, not only racial and ethnic minority groups. One example of the harms from racial categorization is in our 
+understanding of lung cancer rates. If we use the overly homogenized group "Asian", rates of nonsmoking-related lung 
+cancer appear to be low. But by separating this racial group into subcategories, we can see that Southeast Asians show higher 
+rates of nonsmoking-related lung cancer, specifically in adenocarcinomas caused by the EGFR 
+(epidermal growth factor receptor) genetic mutation [Noronha_2024]_. This is important information for cancer screening that otherwise 
+would have been missed.
 
 In an effort to work toward institution-wide Diversity, Equity, and Inclusion (DEI) goals and advance our team’s research 
 and publications, we created this guide to explore the complexities of race and ethnicity in our work. We hope to inspire 
@@ -96,7 +95,7 @@ reasons, we feel this guide is very important.
 
 **2. This work is evolving**
 
-Language is constantly evolving, so there is rarely a single “right” choice and the accepted 
+Research practices are constantly evolving, so there is rarely a single “right” choice and the accepted 
 choice may evolve over time. Therefore, this guide will be a living document that we will 
 regularly review and update. We will hold ourselves accountable for aligning the guide with 
 the current preferred language, terminology and approaches.  
@@ -108,9 +107,9 @@ information that users can understand the spirit of the guide and apply that to 
 
 **3. This is work**
 
-We acknowledge that there may be a cost associated with transitioning to inclusive language practices 
-from standard, homogenized language. Although using inclusive language requires intentional effort, we highlight 
-here that there are many benefits to incorporating more thoughtful language into everyday public health research practices.
+We acknowledge that there may be a cost associated with transitioning to more accurate and inclusive research practices. 
+Although this transition requires intentional effort, we highlight here that there are many benefits to incorporating 
+more thoughtful, equity-focused research practices into everyday public health research practices.
 
 As human beings, we each have a lived experience of race and ethnicity—none of us are neutral outside observers. We have all 
 unconsciously internalized ideas about race and ethnicity from our experiences interacting with other people and with society. 
@@ -118,14 +117,14 @@ These ideas may have helped us make sense of the world but may also have perpetu
 to take a step back and re-examine our assumptions, which requires effort and care.
 
 Inclusive language can often be longer or more nuanced than standard terminology, but we believe specificity is more 
-important than brevity. We seek to include all groups and identities in our language, even if that means using additional words! 
+important than brevity. We seek to include all groups and identities in our language and practices, even if that means using additional words! 
 For example, we would rather use terms like "Black, Indigenous, and People of Color (BIPOC)" while specifying subgroups when relevant 
 than use overly simplistic terms like "minority groups," which can obscure differences and perpetuate stereotypes.
 
 The ever-evolving nature of this work means that this guide is for everyone! You don’t have to be an expert; this is meant to be 
 accessible for all people. Wherever you are in your learning journey, this guide is intended to be a clear and helpful resource. 
 
-We’re not going to put words into other people’s mouths, but we will use our own voice to do the work and use the terms we find 
+We’re not going to put words into other people’s mouths, but we will use our own voice to do the work and use the terms and practices we find 
 most accurate and inclusive.
 
 
