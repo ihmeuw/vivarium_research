@@ -179,9 +179,9 @@ incidence rate.
     \end{align*}
 
 where :math:`p(\text{maternal_sepsis})` is the probability of contracting maternal sepsis in the general population, and :math:`p(\text{maternal_sepsis}|\text{azithromycin})` and
- :math:`p(\text{maternal_sepsis}|\text{no azithromycin})` are the probability of contracting maternal sepsis in settings with and without receiving prophylactic azithromycin.  For each 
- path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and 
- unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the simulant receives prophylactic azithromycin.
+:math:`p(\text{maternal_sepsis}|\text{no azithromycin})` are the probability of contracting maternal sepsis in settings with and without receiving prophylactic azithromycin.  For each 
+path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and 
+unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the simulant receives prophylactic azithromycin.
 
 When we fill in the location-specific values for delivery facility rates, azithromycin coverage, relative risk of maternal sepsis incidence with azithromycin, 
 and maternal sepsis incidence probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{maternal_sepsis}|\text{azithromycin})` 
