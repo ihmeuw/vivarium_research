@@ -218,7 +218,7 @@ and
 
   \text{CSMRisk}_\text{ENN} = \frac{\text{deaths due to cause C in the ENN age group}}{\text{live births}}
 
-  CSMRisk_{LNN} = \frac{\text{deaths due to cause C in the LNN age group}}{\text{live births} - \text{deaths due to all causes in the ENN age group}}
+  \text{CSMRisk}_\text{LNN} = \frac{\text{deaths due to cause C in the LNN age group}}{\text{live births} - \text{deaths due to all causes in the ENN age group}}
 
 
 Note that this strategy was updated in May of 2025 from a prior strategy of converting GBD mortality rates to probabilities. `The pull request that updated this strategy can be found here for reference. <https://github.com/ihmeuw/vivarium_research/pull/1654>`_ This strategy update was pursued following verification and validation issues in neonatal mortality and an exploration of potential solutions in model runs 6.1 through 6.4. Ultimately, a change from mortality rates to mortality risk was preferred given that it is the more policy relevant measure in the context of neonates, and accurately apportioning person time alive within the neonatal age group given the input data available to us was a challenge we judged to be unnecessary.
