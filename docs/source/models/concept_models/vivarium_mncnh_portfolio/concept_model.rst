@@ -884,6 +884,30 @@ Default stratifications to all observers should include scenario and input draw.
       * Stratify births observer by gestational age above/below 37 weeks
       * Stratify neonatal deaths observer by gestational age above/below 37 weeks
     - Default
+  * - 7.1
+    - Update neonatal mortality rates to mortality risks 
+      * Update mortality input data and remove rate to probability conversion: `see this PR for full details and accounting of updates <https://github.com/ihmeuw/vivarium_research/pull/1654>`_
+      * Use the birth LBWSG exposure for calculation of the ENN LBWSG PAF
+      * Use the LNN LBWSG exposure for calculation of the LNN LBWSG PAF. Note that this is incorrect, but an acceptable placeholder until we update in model run 7.2
+    - Baseline
+    - ``model7.1``
+    - Default
+    - Same modifications as run 7.0.1:
+      * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
+      * Stratify births observer by gestational age above/below 37 weeks
+      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
+    - Default
+  * - 7.2
+    - * Implement LBWSG RR cap (details to come)
+      * Recalculate LBWSG PAFs with capped RRs and updated strategy for the LNN age group (details to come)
+    - Baseline
+    - ``model7.2``
+    - Default
+    - Same modifications as run 7.0.1 and 7.1:
+      * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
+      * Stratify births observer by gestational age above/below 37 weeks
+      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
+    - Default
   * - 8.0
     - Wave I azithromycin 
     - Baseline
@@ -1108,6 +1132,18 @@ Default stratifications to all observers should include scenario and input draw.
       * Check probiotics effect size is as expected among preterm infants
     - 
     - 
+  * - 7.1
+    - * Neonatal mortality (all cause and cause-specific) is expected to remain slightly underestimated in the baseline scenario (by the same magnitude of model run 6.1). This is expected as we have not yet implemented a strategy to account for known probabilities greater than 1.
+      * Recheck LBWSG Effects
+      * Check that intervention effect sizes are maintained
+    - 
+    - 
+  * - 7.2
+    - * Neonatal mortality is expected to validate to GBD targets (no longer be underestimated!)
+      * Check that LBWSG effects are updated and functioning as expected
+      * Check that intervention effect sizes are maintained too
+    - 
+    - 
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -1118,8 +1154,8 @@ Default stratifications to all observers should include scenario and input draw.
     - Timeline
   * - Miscalibration of neonatal mortality ratios
     - Using the specifications in model 6.1, we underestimate mortality ratios (believed to be due to having mortality probabilities greater than 1). Using the specifications in model 6.3, we overestimate mortality ratios (believed to be due to difference in mortality ratio verification target rather than mortality rate verification target)
-    - Research team to discuss best approach to resolving issue and will document details. In the meantime, continue running for model versions greater than 6.4 using the specifications from model 6.1 (use birth exposure to calculate the early neonatal LBWSG PAF and use the multiplicative rate to probability calculation) and expect neonatal mortality ratios to be slightly underestimated relative to the GBD verification target.
-    - For all runs after 6.4 until research team provides updated documentation
+    - Update neonatal mortality model to use mortality risk rather than rate input data (as instructed for model 7.1) and implement LBWSG RR capping and LBWSG PAF calculation strategies (details to come for model 7.2)
+    - For runs 7.1 and 7.2. Continue to use parameters from model 7.0 in the meantime for any other runs that come before updating to 7.1.
   * - Neonatal mortality due to preterm birth overestimated
     - It could be because the docs specify that the ``p_preterm`` parameter should be the prevalence of preterm AT BIRTH, but the artifact data for this key are for every age group except for death. Using a smaller ``p_preterm`` value (which non-birth age groups would be smaller than the birth age group) would result in overestimation of preterm birth cause-specific mortality
     - Engineering to check how the ``cause.neonatal_preterm_birth.prevalence`` key is being used and update to be specific to birth prevalence if necessary. Also to confirm that we are using the LBWSG exposure distribution to inform this parameter rather than the preterm birth cause prevalence.
