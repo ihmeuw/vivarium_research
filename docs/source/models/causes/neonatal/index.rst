@@ -312,7 +312,7 @@ Data Tables
       - All-cause mortality risk
       - either acmrisk_enn or acmrisk_lnn depending on the simulant's age group
       - 
-    * - :math:`CSMRisk`
+    * - :math:`\text{CSMRisk}`
       - Cause-specific mortality risk
       - either csmrisk_enn or csmrisk_lnn depending on the simulant's age group
       - 
