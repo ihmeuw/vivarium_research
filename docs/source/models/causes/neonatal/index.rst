@@ -308,7 +308,7 @@ Data Tables
       - Cause-specific mortality risk in the late neonatal age group
       - lnn_cause_specific_death_count / (live_birth_count - enn_all_cause_death_count)
       - 
-    * - :math:`ACMRisk`
+    * - :math:`\text{ACMRisk}`
       - All-cause mortality risk
       - either acmrisk_enn or acmrisk_lnn depending on the simulant's age group
       - 
