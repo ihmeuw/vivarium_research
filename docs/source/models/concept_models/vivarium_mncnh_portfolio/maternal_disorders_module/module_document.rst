@@ -68,10 +68,10 @@ There are specific variables that will affect these cause models, summarized in 
     - Instructions
     - Note
   * - Azithromycin coverage
-    - :ref:`Azithromycin intervention page <azithromycin_intervention>`
+    - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Maternal sepsis incidence rate
-    - Relative risk: 0.65 (95% CI: 0.55, 0.77)
-    - `Tita et al 2023 <https://www.ajog.org/article/S0002-9378(22)02210-4/fulltext#undfig1>`_ 
+    - See the :ref:`Azithromycin intervention page <azithromycin_intervention>`
+    - 
   * - Misoprostol coverage
     - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Maternal hemorrhage incidence rate
