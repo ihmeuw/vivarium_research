@@ -887,6 +887,13 @@ Default stratifications to all observers should include scenario and input draw.
       * Stratify births observer by gestational age above/below 37 weeks
       * Stratify neonatal deaths observer by gestational age above/below 37 weeks
     - Default
+  * - 7.0.2
+    - Update :math:`p_\text{preterm}` parameter used in the :ref:`preterm cause model <2021_cause_preterm_birth_mncnh>` to use birth exposure rather than age-specific exposure 
+    - All scenarios
+    - ``model7.0.2``
+    - Default
+    - Default
+    - Default
   * - 7.1
     - Update neonatal mortality rates to mortality risks 
 
@@ -1138,6 +1145,10 @@ Default stratifications to all observers should include scenario and input draw.
       * Check probiotics effect size is as expected among preterm infants
     - 
     - 
+  * - 7.0.2
+    - Check that preterm birth mortality is as expected: we should change from a slight overestimation to a slight underestimation. A slight underestimation is expected due to known mortality probabilities greater than 1, which will be addressed in future moel runs.
+    - 
+    - 
   * - 7.1
     - * Neonatal mortality (all cause and cause-specific) is expected to remain slightly underestimated in the baseline scenario (by the same magnitude of model run 6.1). This is expected as we have not yet implemented a strategy to account for known probabilities greater than 1.
       * Recheck LBWSG Effects
@@ -1164,8 +1175,8 @@ Default stratifications to all observers should include scenario and input draw.
     - For runs 7.1 and 7.2. Continue to use parameters from model 7.0 in the meantime for any other runs that come before updating to 7.1.
   * - Neonatal mortality due to preterm birth overestimated
     - It could be because the docs specify that the ``p_preterm`` parameter should be the prevalence of preterm AT BIRTH, but the artifact data for this key are for every age group except for death. Using a smaller ``p_preterm`` value (which non-birth age groups would be smaller than the birth age group) would result in overestimation of preterm birth cause-specific mortality
-    - Engineering to check how the ``cause.neonatal_preterm_birth.prevalence`` key is being used and update to be specific to birth prevalence if necessary. Also to confirm that we are using the LBWSG exposure distribution to inform this parameter rather than the preterm birth cause prevalence.
-    - TBD: probably for 7.0.2
+    - Update ``cause.neonatal_preterm_birth.prevalence`` key to use LBWSG risk exposure AT BIRTH rather than age-specific exposures 
+    - 7.0.2
   * - Neonatal intervention observers are counting live and stillbirths rather than just live births
     - See issue description
     - Implement observer fix
