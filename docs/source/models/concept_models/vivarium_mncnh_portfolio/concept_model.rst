@@ -875,6 +875,15 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Stratify probiotics observer (#6) with gestational age above/below 37 weeks for V&V
     - Default
+  * - 7.0.1
+    - Same specifications as 7.0, but with preterm stratification for the probiotics observer included (left out of last run) and fix to the intervention observers to not count stillbirths
+    - All scenarios
+    - ``model7.0.1``
+    - Default
+    - * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
+      * Stratify births observer by gestational age above/below 37 weeks
+      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
+    - Default
   * - 7.1
     - Update neonatal mortality rates to mortality risks 
       * Update mortality input data and remove rate to probability conversion: `see this PR for full details and accounting of updates <https://github.com/ihmeuw/vivarium_research/pull/1654>`_
@@ -883,7 +892,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - ``model7.1``
     - Default
-    - Default
+    - Same modifications as run 7.0.1:
+      * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
+      * Stratify births observer by gestational age above/below 37 weeks
+      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
     - Default
   * - 7.2
     - * Implement LBWSG RR cap (details to come)
@@ -891,7 +903,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - ``model7.2``
     - Default
-    - Default
+    - Same modifications as run 7.0.1 and 7.1:
+      * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
+      * Stratify births observer by gestational age above/below 37 weeks
+      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
     - Default
   * - 8.0
     - Wave I azithromycin 
@@ -1105,6 +1120,16 @@ Default stratifications to all observers should include scenario and input draw.
   * - 7.0
     - * Check that probiotics are only received by preterm neonates
       * Check that coverage at each facility type is as expected
+    - * Probiotics observer not stratified by preterm birth, so we will need to rerun or do coverage V&V in the interactive sim
+      * Neonatal intervention observers appear to be counting stillbirths, but should only be counting live births
+      * Neonatal mortality looks as expected (same as model 6.5)
+    - * `Intervention coverage bug for 7.0 here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0_results_check.ipynb>`_
+      * `Neonatal mortality check and missing observer stratification notebook for 7.0 available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0_nn_mortality_and_observer_check.ipynb>`_
+  * - 7.0.1
+    - * Check that probiotics are only received by preterm neonates
+      * Check that coverage at each facility type is as expected
+      * Check that intervention observers are no longer counting stillbirths
+      * Check probiotics effect size is as expected among preterm infants
     - 
     - 
   * - 7.1
@@ -1132,9 +1157,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Update neonatal mortality model to use mortality risk rather than rate input data (as instructed for model 7.1) and implement LBWSG RR capping and LBWSG PAF calculation strategies (details to come for model 7.2)
     - For runs 7.1 and 7.2. Continue to use parameters from model 7.0 in the meantime for any other runs that come before updating to 7.1.
   * - Neonatal mortality due to preterm birth overestimated
-    - Unknown
-    - Research to investigate and come up with plan
-    - N/A
+    - It could be because the docs specify that the ``p_preterm`` parameter should be the prevalence of preterm AT BIRTH, but the artifact data for this key are for every age group except for death. Using a smaller ``p_preterm`` value (which non-birth age groups would be smaller than the birth age group) would result in overestimation of preterm birth cause-specific mortality
+    - Engineering to check how the ``cause.neonatal_preterm_birth.prevalence`` key is being used and update to be specific to birth prevalence if necessary. Also to confirm that we are using the LBWSG exposure distribution to inform this parameter rather than the preterm birth cause prevalence.
+    - TBD: probably for 7.0.2
+  * - Neonatal intervention observers are counting live and stillbirths rather than just live births
+    - See issue description
+    - Implement observer fix
+    - For model 7.0.1
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revist following GBD 2023 update
