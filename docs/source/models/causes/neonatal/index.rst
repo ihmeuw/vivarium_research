@@ -210,7 +210,7 @@ To avoid confusion with mortality *rates* (typically referred to as the all-caus
 
   \text{ACMRisk}_\text{ENN} = \frac{\text{deaths due to all causes in the ENN age group}}{\text{live births}}
 
-  ACMRisk_{LNN} = \frac{\text{deaths due to all causes in the LNN age group}}{\text{live births} - \text{deaths due to all causes in the ENN age group}}
+  \text{ACMRisk}_\text{LNN} = \frac{\text{deaths due to all causes in the LNN age group}}{\text{live births} - \text{deaths due to all causes in the ENN age group}}
 
 and 
 
