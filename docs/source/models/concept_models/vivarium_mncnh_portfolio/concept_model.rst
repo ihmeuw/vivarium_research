@@ -230,7 +230,7 @@ defined as a module input in a subsequent row.
     - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
       * Antenatal corticosteroid coverage
       * Misoprostol coverage
-    - TODO: create/link intervention model documents
+    - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>` (TODO: link addition intervention model documents)
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
       * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
