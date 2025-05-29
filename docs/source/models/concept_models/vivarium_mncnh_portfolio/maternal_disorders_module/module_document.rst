@@ -70,8 +70,8 @@ There are specific variables that will affect these cause models, summarized in 
   * - Azithromycin coverage
     - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Maternal sepsis incidence rate
-    - Relative risk: 0.65 (95% CI: 0.55, 0.77)
-    - `Tita et al 2023 <https://www.ajog.org/article/S0002-9378(22)02210-4/fulltext#undfig1>`_ 
+    - See the :ref:`Azithromycin intervention page <azithromycin_intervention>`
+    - 
   * - Misoprostol coverage
     - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Maternal hemorrhage incidence rate
@@ -85,7 +85,7 @@ There are specific variables that will affect these cause models, summarized in 
 
 .. todo::
 
-  Make and link separate intervention module document for azithromycin with more specific instructions on how to implement this to replace information directly in this table (new document to include how to calibrate baseline coverage, potential need for stratifying by birth facility in baseline calibration, specific overview and limitations of intervention)
+  Make and link separate intervention module document for misoprostol with more specific instructions on how to implement this to replace information directly in this table (new document to include how to calibrate baseline coverage, potential need for stratifying by birth facility in baseline calibration, specific overview and limitations of intervention)
 
 .. note::
 
@@ -105,7 +105,7 @@ Incidence, mortality, YLDs, and YLLs due to cause-specific maternal disorders.
 +++++++++++++++++++++++++++++++++++++++++
 
 * Confirm outcomes for each maternal disorder (OL, sepsis, and hemorrhage) matches GBD data 
-* Confirm that relative risk of azithromycin on sepsis outcomes matches expectations
+* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` for V&V criteria specific to azithromycin intervention model
 
 5.0 References
 +++++++++++++++

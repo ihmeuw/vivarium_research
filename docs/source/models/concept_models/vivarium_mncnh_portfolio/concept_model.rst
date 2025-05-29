@@ -227,13 +227,13 @@ defined as a module input in a subsequent row.
     - * (Pregnancy term duration)
       * Birth facility
       * Believed gestational age
-    - * Intrapartum azithromycin coverage
+    - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
       * Antenatal corticosteroid coverage
       * Misoprostol coverage
-    - TODO: create/link intervention model documents
+    - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>` (TODO: link addition intervention model documents)
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
-      * Intrapartum azithromycin coverage
+      * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
     - * Maternal disorders outcomes (see outcome table)
     - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
       * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
@@ -261,14 +261,14 @@ defined as a module input in a subsequent row.
       - * (Pregnancy term duration)
         * Birth facility
         * Believed gestational age
-      - * Intrapartum azithromycin coverage
+      - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
         * Antenatal corticosteroid coverage
         * Misoprostol coverage
-      - TODO: create/link intervention model documents
+      - * :ref:`Intrapartum azithromycin <azithromycin_intervention>` (TODO: link addition intervention model documents)
       - 
     * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
       - * (Pregnancy term duration)
-        * Intrapartum azithromycin coverage
+        * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
         * Hemoglobin at birth
       - * Maternal disorders outcomes (see outcome table)
       - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
@@ -561,7 +561,7 @@ Default stratifications to all observers should include scenario and input draw.
     - * Maternal age group
       * Pregnancy outcome
       * Azithromycin coverage
-      * Misoprostol coverage
+      * Misoprostol coverage (not ready for implementation yet) 
     - Included with maternal age group stratification. Additional stratifiers to be added
   * - 2. Births (this observer includes ALL pregnancy outcomes, including partial term pregnancies that may not typically be considered "births")
     - * Pregnancy outcome
@@ -595,6 +595,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Pregnancy outcome
       * ANC attendance
       * Ultrasound coverage
+      * Azithromycin coverage
     - Included
 
 .. todo::
