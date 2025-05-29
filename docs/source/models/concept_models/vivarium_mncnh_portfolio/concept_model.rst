@@ -416,6 +416,13 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
+  * - 11. Azithromycin scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
 
 .. _MNCNH intrapartum component scenario table:
 
@@ -474,6 +481,11 @@ defined as a module input in a subsequent row.
     - 
   * - 10. Probiotics BEMONC-only scale-up
     - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 11. Azithromycin scale-up
+    - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
     - Baseline
     - 
@@ -536,6 +548,11 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline at CEMONC, 100% at BEMONC
+    - 
+  * - 11. Azithromycin scale-up
+    - Baseline
+    - Baseline
+    - Baseline
     - 
 
 .. _mncnh_portfolio_4.0:
@@ -911,11 +928,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 8.0
     - Wave I azithromycin 
-    - Baseline
+    - All scenarios (note new azithromycin scale-up scenario #11)
     - ``model8.0``
-    -
-    - 
-    - 
+    - Default
+    - Azithromycin stratifications added to observers #1 and #7 (maternal burden and maternal population observers) - to be continued as defaults for all future runs
+    - Default
   * - 8.1*
     - * Implement LBWSG RR cap (details to come)
       * Recalculate LBWSG PAFs with capped RRs and updated strategy for the LNN age group (details to come)
@@ -1155,7 +1172,13 @@ Default stratifications to all observers should include scenario and input draw.
       * Check that intervention effect sizes are maintained
     - 
     - 
-  * - 7.2
+  * - 8.0
+    - * Check baseline and intervention coverage of azithromycin intervention
+      * Check that maternal disorders burden (particularly sepsis) still verifies at the population level in the baseline scenario
+      * Check that the effect size of the azithromycin intervention verifies
+    - 
+    - 
+  * - 8.1
     - * Neonatal mortality is expected to validate to GBD targets (no longer be underestimated!)
       * Check that LBWSG effects are updated and functioning as expected
       * Check that intervention effect sizes are maintained too
