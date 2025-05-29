@@ -43,7 +43,7 @@ This section describes how a CPAP intervention can be implemented and calibrated
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Preterm with RDS Mortality Probability :math:`\text{CSMR}_i^\text{RDS}`
+  * - Preterm with RDS Mortality Probability :math:`\text{CSMRisk}_i^\text{RDS}`
     - Adjust multiplicatively using RR
     - Yes
     - For convenience, we will model this like a dichotomous risk factor; more details below
@@ -125,7 +125,7 @@ Where,
   * - :math:`\text{RR}_\text{CPAP}`
     - Relative risk of CPAP intervention on RDS mortality 
     - 0.53 (95% CI 0.34-0.83). Uncertaintly interval implemented as parameter uncertainty following a lognormal distribution
-    - `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`. Note that this effect was measured for all cause mortality.
+    - `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_. Note that this effect was measured for all cause mortality.
 
 .. _cpap_calibration:
 
