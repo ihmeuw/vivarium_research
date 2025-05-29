@@ -904,6 +904,13 @@ Default stratifications to all observers should include scenario and input draw.
       * Stratify births observer by gestational age above/below 37 weeks
       * Stratify neonatal deaths observer by gestational age above/below 37 weeks
     - Default
+  * - 7.0.3
+    - Add parameter uncertainty interval for CPAP effect size
+    - All scenarios
+    - ``model7.0.3``
+    - Default
+    - Same as 7.0.1
+    - Default
   * - 7.1
     - Update neonatal mortality rates to mortality risks 
 

@@ -87,7 +87,45 @@ We will then add an attribute to each simulant indicating whether the birth occu
 
 We will then use the conditional probabilities for simulants with and without access to determine which simulants die from RDS.
 
-A `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_ found a relative risk of 0.53 (95% CI 0.34-0.83) of RDS mortality for neonates with access to CPAP.   (Note that the population that this effect size applies to is preterm infants with "respiratory failure becoming evident soon after birth".)
+A `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_ found a relative risk of 0.53 (95% CI 0.34-0.83) of overall mortality for neonates with access to CPAP.   (Note that the population that this effect size applies to is preterm infants with "respiratory failure becoming evident soon after birth".)
+
+So specifically, the preterm with RDS cause-specific mortality risk for an individual simulant, :math:`i`, as derived from the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>` (:math:`\text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}}`) should be further modified by CPAP intervention access as follows:
+
+.. math::
+
+  \text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}, i} = \text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}} * (1 - \text{PAF}) * \text{RR}_i
+
+Where,
+
+.. list-table:: CPAP intervention parameters
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - :math:`\text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}, i}`
+    - Mortality risk due to preterm with RDS for a given simulant :math:`i` with a specific birth weight and gestational age exposure following modification from the CPAP intervention
+    - See equation above
+    - 
+  * - :math:`\text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}}`
+    - Mortality risk due to preterm with RDS for a simulant with a given birth weight and gestational age exposure before modification from the CPAP intervention
+    - Derived from instruction on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`
+    - 
+  * - :math:`\text{PAF}`
+    - Population attributable fraction of mortality due to preterm with RDS from access to CPAP intervention
+    - See instructions on how to calculate PAF below
+    - 
+  * - :math:`\text{RR}_i`
+    - Relative risk for a given simulant :math:`i`
+    - For simulants without access to CPAP intervention: :math:`1/\text{RR}_\text{CPAP}`
+
+      For simulants with access to CPAP intervention: :math:`1`
+    - 
+  * - :math:`\text{RR}_\text{CPAP}`
+    - Relative risk of CPAP intervention on RDS mortality 
+    - 0.53 (95% CI 0.34-0.83). Uncertaintly interval implemented as parameter uncertainty following a lognormal distribution
+    - `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`. Note that this effect was measured for all cause mortality.
 
 .. _cpap_calibration:
 
@@ -196,7 +234,8 @@ Assumptions and Limitations
 
 - We assume that CPAP availability captures actual use, and not simply the machine being in the facility 
 - We assume that the delivery facility is the final facility in the care continum for deliveries that are transferred due to complications
-- We assume that the relative risk of RDS mortality with CPAP in practice is similar to that found in the Cochrane Review meta-analysis
+- We assume that the relative risk of RDS mortality with CPAP in practice is similar to that found in the Cochrane Review meta-analysis. Given that the review assessed overall mortality rather than RDS mortality, it is likely that we will underestimate the overall impact of CPAP on mortality in our simulation.
+- We do not model effect modification by birthweight as found in the Cochrane review, which found a stronger impact of CPAP on mortality for babies with greater than 1500 gram birthweight and a weaker and non-significant impact among babies with birth weights less than 1500 grams.
 - Baseline coverage data for CPAP in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2016 based on the EmONC Final Report. 
   We assume that Nigeria and Pakistan health systems have the same CPAP availability.
 
