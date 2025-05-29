@@ -561,7 +561,7 @@ Default stratifications to all observers should include scenario and input draw.
     - * Maternal age group
       * Pregnancy outcome
       * Azithromycin coverage
-      * Misoprostol coverage
+      * Misoprostol coverage (not ready for implementation yet) 
     - Included with maternal age group stratification. Additional stratifiers to be added
   * - 2. Births (this observer includes ALL pregnancy outcomes, including partial term pregnancies that may not typically be considered "births")
     - * Pregnancy outcome
@@ -595,6 +595,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Pregnancy outcome
       * ANC attendance
       * Ultrasound coverage
+      * Azithromycin coverage
     - Included
 
 .. todo::
