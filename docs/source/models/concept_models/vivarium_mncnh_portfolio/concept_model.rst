@@ -674,6 +674,8 @@ Default stratifications to all observers should include scenario and input draw.
 
   The "Directory" column in the table below lists the subdirectory nested within ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/`` where results specific to that model run can be found.
 
+  Model numbers with an asterisk indicate planned model runs that are not yet ready to be implemented. 
+
 .. list-table:: Model runs
   :header-rows: 1
 
@@ -887,6 +889,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 7.1
     - Update neonatal mortality rates to mortality risks 
+
       * Update mortality input data and remove rate to probability conversion: `see this PR for full details and accounting of updates <https://github.com/ihmeuw/vivarium_research/pull/1654>`_
       * Use the birth LBWSG exposure for calculation of the ENN LBWSG PAF
       * Use the LNN LBWSG exposure for calculation of the LNN LBWSG PAF. Note that this is incorrect, but an acceptable placeholder until we update in model run 7.2
@@ -894,17 +897,7 @@ Default stratifications to all observers should include scenario and input draw.
     - ``model7.1``
     - Default
     - Same modifications as run 7.0.1:
-      * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
-      * Stratify births observer by gestational age above/below 37 weeks
-      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
-    - Default
-  * - 7.2
-    - * Implement LBWSG RR cap (details to come)
-      * Recalculate LBWSG PAFs with capped RRs and updated strategy for the LNN age group (details to come)
-    - Baseline
-    - ``model7.2``
-    - Default
-    - Same modifications as run 7.0.1 and 7.1:
+
       * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
       * Stratify births observer by gestational age above/below 37 weeks
       * Stratify neonatal deaths observer by gestational age above/below 37 weeks
@@ -916,14 +909,26 @@ Default stratifications to all observers should include scenario and input draw.
     -
     - 
     - 
-  * - 9.0
+  * - 8.1*
+    - * Implement LBWSG RR cap (details to come)
+      * Recalculate LBWSG PAFs with capped RRs and updated strategy for the LNN age group (details to come)
+    - Baseline
+    - ``model8.1``
+    - Default
+    - Same modifications as run 7.0.1 and 7.1:
+    
+      * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
+      * Stratify births observer by gestational age above/below 37 weeks
+      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
+    - Default
+  * - 9.0*
     - Wave I misoprostol
     - Baseline 
     - ``model9.0``
     -
     - 
     - 
-  * - 10.0
+  * - 10.0*
     - Wave I antenatal corticosteroids
     - Baseline
     - ``model10.0``
