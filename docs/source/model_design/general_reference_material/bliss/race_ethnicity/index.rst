@@ -289,7 +289,7 @@ throughout this style guide.
    * - Institutional Racism
      - A form of systematic discrimination, based on race or ethnic group, in which societal policies or practices create an advantage for some groups and harm for others. Also known as structural, societal, or systemic racism.  
    * - Ethnic Discrimination
-     - The belief that an ethnic group is inherently superior or inferior in some dimension of intelligence, abilities, or other qualities. 
+     - The belief that an ethnic group is inherently superior or inferior in some dimension of intelligence, abilities, or other qualities. Ethnic discrimination also refers to the ways in which individuals, communities, and systems of power oppress people in alignment with this belief (whether or not the belief is explicit or conscious).
    * - Unconscious Bias
      - Any biases that people have but are not consciously aware of. This can include things not related to individuals or groups such as confirmation bias, or being more receptive to information that aligns to their prior beliefs, and to biases towards individuals or groups, such as favoring people from their own race or ethnicity group, even if they don’t knowingly think that people who are different are inferior. 
    * - Race-essentialism
