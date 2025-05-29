@@ -82,7 +82,36 @@ Since the neonatal mortality model does not explicitly represent incidence of se
 probiotics.  Instead the model will have different cause-specific mortality rates for sepsis for individuals with and without access to probiotics 
 (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
 
-The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has access to probiotics during the neonatal period, 
+In order to be eligible for this intervention, simulants must be in the early neonatal age group and born preterm (<37 weeks old). This eligibility
+is based on an impact table for Bifidobacterium infantis (B. infantis) provided to us by the BMGF team. 
+
+.. graphviz::
+
+    digraph probiotics {
+        
+        rankdir = LR;
+        nodesep = 1.0;
+        ranksep = 1.2;
+        
+        node [shape=box]
+        rankdir = LR;
+        birth [label="Simulant is born"]
+        preterm [label="Simulant is preterm (<37 weeks)"]
+        not_preterm [label="Simulant is not preterm"]
+        preterm_wo [label="Simulant is eligible but does not have access to probiotics"] 
+        preterm_w [label="Simulant is eligible and has access to probiotics"]
+        not_preterm_wo [label="Simulant is not eligible for probiotics"]
+      
+        birth -> preterm 
+        birth -> not_preterm
+        
+        preterm -> preterm_wo
+        preterm -> preterm_w
+
+        not_preterm -> not_preterm_wo
+    }
+
+The ``Risk`` component adds an attribute to each simulant indicating whether the simulant (if in the target population) has access to probiotics during the neonatal period, 
 which we assume to be 0.0% regardless of birth facility choice in our baseline scenario.
 births in BEmONC facilities have lower access than CEmONC facilities.
 
