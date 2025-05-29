@@ -191,7 +191,7 @@ unit time.
       - The probability that a simulant who was born alive dies during the first 7 days
     * - acmrisk_lnn
       - mortality risk due to all causes during the late neonatal period
-      - The probability that a simulant who was born alive dies between day 8 to 28 of life
+      - The probability that a simulant who survived the first 7 days dies between day 8 to 28 of life
     * - p_k
       - cause-specific mortality fraction
       - The probability that a simulant death was due to cause :math:`k`
