@@ -216,7 +216,7 @@ and
 
 .. math::
 
-  CSMRisk_{ENN} = \frac{\text{deaths due to cause C in the ENN age group}}{\text{live births}}
+  \text{CSMRisk}_\text{ENN} = \frac{\text{deaths due to cause C in the ENN age group}}{\text{live births}}
 
   CSMRisk_{LNN} = \frac{\text{deaths due to cause C in the LNN age group}}{\text{live births} - \text{deaths due to all causes in the ENN age group}}
 
