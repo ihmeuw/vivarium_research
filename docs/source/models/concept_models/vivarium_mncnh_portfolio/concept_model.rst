@@ -1163,7 +1163,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 7.0.2
-    - Check that preterm birth mortality is as expected: we should change from a slight overestimation to a slight underestimation. A slight underestimation is expected due to known mortality probabilities greater than 1, which will be addressed in future moel runs.
+    - Check that preterm birth mortality is as expected: we should change from a slight overestimation to a slight underestimation. A slight underestimation is expected due to known mortality probabilities greater than 1, which will be addressed in future model runs.
     - 
     - 
   * - 7.1
