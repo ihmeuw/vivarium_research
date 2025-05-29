@@ -149,10 +149,10 @@ unit time.
         died_of_subcause_K
         }
 
-        lb -> enn_alive  [label = "1 - enn_mr"]
-        lb -> dead [label = "enn_mr"]
-        enn_alive -> lnn_alive [label = "1 - lnn_mr"]
-        enn_alive -> dead [label = "lnn_mr"]
+        lb -> enn_alive  [label = "1 - acmrisk_enn"]
+        lb -> dead [label = "acmrisk_enn"]
+        enn_alive -> lnn_alive [label = "1 - acmrisk_lnn"]
+        enn_alive -> dead [label = "acmrisk_lnn"]
         dead -> died_of_subcause_0 [label="p_0"]
         dead -> died_of_subcause_1 [label="p_1"]
         dead -> died_of_subcause_K [label="p_K"]
@@ -212,13 +212,13 @@ To avoid confusion with mortality *rates* (typically referred to as the all-caus
 
   \text{ACMRisk}_\text{LNN} = \frac{\text{deaths due to all causes in the LNN age group}}{\text{live births} - \text{deaths due to all causes in the ENN age group}}
 
-and 
+and for a given cause of death:
 
 .. math::
 
-  \text{CSMRisk}_\text{ENN} = \frac{\text{deaths due to cause C in the ENN age group}}{\text{live births}}
+  \text{CSMRisk}_\text{ENN} = \frac{\text{cause-specific deaths in the ENN age group}}{\text{live births}}
 
-  \text{CSMRisk}_\text{LNN} = \frac{\text{deaths due to cause C in the LNN age group}}{\text{live births} - \text{deaths due to all causes in the ENN age group}}
+  \text{CSMRisk}_\text{LNN} = \frac{\text{cause-specific deaths in the LNN age group}}{\text{live births} - \text{deaths due to all causes in the ENN age group}}
 
 
 Note that this strategy was updated in May of 2025 from a prior strategy of converting GBD mortality rates to probabilities. `The pull request that updated this strategy can be found here for reference. <https://github.com/ihmeuw/vivarium_research/pull/1654>`_ This strategy update was pursued following verification and validation issues in neonatal mortality and an exploration of potential solutions in model runs 6.1 through 6.4. Ultimately, a change from mortality rates to mortality risk was preferred given that it is the more policy relevant measure in the context of neonates, and accurately apportioning person time alive within the neonatal age group given the input data available to us was a challenge we judged to be unnecessary.
@@ -352,11 +352,10 @@ Years lived with disability
 
 For simplicity, we will not include YLDs in this model.
 
-
 Validation Criteria
 +++++++++++++++++++
 
-Neonatal deaths per live birth in simulation should match corresponding quantity as derived from GBD estimates.
+Neonatal mortality risk (due to all causes and at the cause-specific level) in simulation should match corresponding quantity as derived from GBD estimates.
 
 Relative Risk of neonatal death at specific categories of LBWSG exposure should be within 10% of same ratio derived from GBD.  (We don't expect it to match exactly because of (1) our interpolation of the RRs, and (2) we use a constant mortality hazard at each BW-GA level, rather than the GBD's more complex model.)
 

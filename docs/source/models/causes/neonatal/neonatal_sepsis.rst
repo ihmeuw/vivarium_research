@@ -206,7 +206,7 @@ Data Tables
       - neonatal sepsis mortality risk in the late neonatal age group
       - lnn_death_count / (live_birth_count - enn_all_cause_death_count)
       - 
-    * - :math:`CSMRisk`
+    * - :math:`\text{CSMRisk}`
       - neonatal sepsis mortality risk
       - either csmrisk_enn or csmrisk_lnn depending on the simulant's age group
       - 
@@ -240,7 +240,7 @@ For simplicity, we will not include YLDs in this model.
 Validation Criteria
 +++++++++++++++++++
 
-* Neonatal Sepsis deaths per live birth in simulation should match GBD estimates.
+* Neonatal Sepsis mortality risk in simulation should match GBD estimates.
 
 * Relative Risk of Neonatal Sepsis death due to LBWSG should match overall neonatal mortality RR.
 

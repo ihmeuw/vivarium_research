@@ -246,7 +246,7 @@ Data Tables
       - neonatal preterm birth complications mortality risk in the late neonatal age group
       - lnn_death_count / (live_birth_count - enn_all_cause_death_count)
       - 
-    * - :math:`CSMRisk`
+    * - :math:`\text{CSMRisk}`
       - neonatal preterm birth complications mortality risk
       - either csmrisk_enn or csmrisk_lnn depending on the simulant's age group
       - 
@@ -293,7 +293,7 @@ For simplicity, we will not include YLDs in this model.
 Validation Criteria
 +++++++++++++++++++
 
-* Preterm deaths per live birth in simulation should match GBD estimates.
+* Preterm mortality risk in simulation should match GBD estimates.
 
 * No preterm deaths for simulants with LBWSG categories for gestational ages of 37 weeks or greater.
 
