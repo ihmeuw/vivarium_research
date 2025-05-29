@@ -678,7 +678,7 @@ Default stratifications to all observers should include scenario and input draw.
     - N/A. All pregnant simulants observed from start of pregnancy. All neonatal simulants observed from birth.
     - 
   * - Age end (observation)
-    - N/A; All pregnant simulants observed through postpartum period. All neonatal simulants observed until 28 days (end of late neonatal age group)
+    - N/A; All pregnant simulants observed through conclusion of relevant modeled outcomes. All neonatal simulants observed until 28 days (end of late neonatal age group)
     - Pregnant/birthing simulants do not age in this simulation
 
 .. note::
