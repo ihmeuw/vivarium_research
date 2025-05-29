@@ -275,10 +275,12 @@ defined as a module input in a subsequent row.
         * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
+        * :ref:`Postpartum depression <2019_cause_postpartum_depression>`
       - Wave II changes: 
 
-        * Hemoglobin at birth as a variable that impacts maternal disorders
+        * Hemoglobin at birth as a variable that impacts maternal disorders causes
         * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
+        * Postpartum depression as a new maternal disorders cause
     * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
       - * Hemoglobin at birth
         * Maternal hemorrhage incidence
@@ -593,7 +595,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Pregnancy outcome
       * ANC attendance
       * Ultrasound coverage
-    - NOT YET INCLUDED
+    - Included
 
 .. todo::
 
@@ -613,6 +615,15 @@ Default stratifications to all observers should include scenario and input draw.
   * YLDs due to anemia in the postpartum period
   * First trimster ANC attendance (stratified by pregnancy term duration)
   * Later pregnancy ANC attendance (stratified by pregnancy term duration)
+  * Hemoglobin and ferritin screening counts
+  * MMS/IFA intervention counts
+  * IV iron intervention counts
+
+  Measures to check in the interactive sim include:
+
+  * True hemoglobin exposure
+  * Measured hemoglobin exposure
+  * Ferritin exposure
 
 .. _mncnh_portfolio_5.0:
 
@@ -848,24 +859,49 @@ Default stratifications to all observers should include scenario and input draw.
     -
     - 
     - 
+  * - 6.5
+    - * Use the birth prevalence to calculate the LBWSG PAF for the early neonatal age group (like in model run 6.1). Use this until otherwise noted.
+      * Use the linear rate-to-probability equation (like in model run 6.1). Use this until otherwise noted.
+      * Add in observer #7 (maternal population observer)
+    - All scenarios
+    - ``model6.5``
+    - Default
+    - Default
+    - Maternal population observer added for this run and to be included in all subsequent runs
   * - 7.0
+    - Wave I neonatal probiotics with scale-up scenarios, same as model 6.0 but with `effective coverage (only preterm neonates receive probiotics) <https://github.com/ihmeuw/vivarium_research/pull/1643>`_ 
+    - Baseline and alternative scenarios 2 - 10 
+    - ``model7.0``
+    - Default
+    - Stratify probiotics observer (#6) with gestational age above/below 37 weeks for V&V
+    - Default
+  * - 7.0.1
+    - Same specifications as 7.0, but with preterm stratification for the probiotics observer included (left out of last run) and fix to the intervention observers to not count stillbirths
+    - All scenarios
+    - ``model7.0.1``
+    - Default
+    - * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
+      * Stratify births observer by gestational age above/below 37 weeks
+      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
+    - Default
+  * - 8.0
     - Wave I azithromycin 
     - Baseline
-    - ``model7.0``
-    -
-    - 
-    - 
-  * - 8.0
-    - Wave I misoprostol
-    - Baseline 
     - ``model8.0``
     -
     - 
     - 
   * - 9.0
+    - Wave I misoprostol
+    - Baseline 
+    - ``model9.0``
+    -
+    - 
+    - 
+  * - 10.0
     - Wave I antenatal corticosteroids
     - Baseline
-    - ``model9.0``
+    - ``model10.0``
     -
     - 
     - 
@@ -1047,7 +1083,31 @@ Default stratifications to all observers should include scenario and input draw.
     - Check ENN mortality ratio compared to GBD and models 6.1-6.4
     - Mortality is overestimated to a degree greater than 6.3
     - `Notebook comparing model 6.4 to 6.1-6.4 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.1_through_6.4_nn_mortality_comparison.ipynb>`_
-
+  * - 6.5
+    - * Check that the neonatal mortality ratio is as expected in line with model 6.1
+      * Check that the new observer #7 is as expected
+      * Check that the pregnant population age structure looks as expected in new observer
+    - * Neonatal mortality ratio in expected range for all cause mortality (slightly underestimated, same as model 6.1)
+      * Neonatal mortality ratio in expected range for cause-spcific mortality other than preterm birth (slightly underestimated, same as all-cause mortality)
+      * Neonatal mortality ratio due to preterm birth is slightly overestimated
+      * Maternal population observer looks good!
+      * Age structure looks as expected
+    - `Model 6.5 VV notebook available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.5_nn_mortality_and_observer_check.ipynb>`_
+  * - 7.0
+    - * Check that probiotics are only received by preterm neonates
+      * Check that coverage at each facility type is as expected
+    - * Probiotics observer not stratified by preterm birth, so we will need to rerun or do coverage V&V in the interactive sim
+      * Neonatal intervention observers appear to be counting stillbirths, but should only be counting live births
+      * Neonatal mortality looks as expected (same as model 6.5)
+    - * `Intervention coverage bug for 7.0 here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0_results_check.ipynb>`_
+      * `Neonatal mortality check and missing observer stratification notebook for 7.0 available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0_nn_mortality_and_observer_check.ipynb>`_
+  * - 7.0.1
+    - * Check that probiotics are only received by preterm neonates
+      * Check that coverage at each facility type is as expected
+      * Check that intervention observers are no longer counting stillbirths
+      * Check probiotics effect size is as expected among preterm infants
+    - 
+    - 
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -1060,6 +1120,14 @@ Default stratifications to all observers should include scenario and input draw.
     - Using the specifications in model 6.1, we underestimate mortality ratios (believed to be due to having mortality probabilities greater than 1). Using the specifications in model 6.3, we overestimate mortality ratios (believed to be due to difference in mortality ratio verification target rather than mortality rate verification target)
     - Research team to discuss best approach to resolving issue and will document details. In the meantime, continue running for model versions greater than 6.4 using the specifications from model 6.1 (use birth exposure to calculate the early neonatal LBWSG PAF and use the multiplicative rate to probability calculation) and expect neonatal mortality ratios to be slightly underestimated relative to the GBD verification target.
     - For all runs after 6.4 until research team provides updated documentation
+  * - Neonatal mortality due to preterm birth overestimated
+    - It could be because the docs specify that the ``p_preterm`` parameter should be the prevalence of preterm AT BIRTH, but the artifact data for this key are for every age group except for death. Using a smaller ``p_preterm`` value (which non-birth age groups would be smaller than the birth age group) would result in overestimation of preterm birth cause-specific mortality
+    - Engineering to check how the ``cause.neonatal_preterm_birth.prevalence`` key is being used and update to be specific to birth prevalence if necessary. Also to confirm that we are using the LBWSG exposure distribution to inform this parameter rather than the preterm birth cause prevalence.
+    - TBD: probably for 7.0.2
+  * - Neonatal intervention observers are counting live and stillbirths rather than just live births
+    - See issue description
+    - Implement observer fix
+    - For model 7.0.1
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revist following GBD 2023 update
@@ -1072,6 +1140,8 @@ Default stratifications to all observers should include scenario and input draw.
 +++++++++++++++
 
 * Unclear if we will be able to include upstream factors, but these are likely correlated with many things such as ANC visit rate, care available, or even outcome rates 
+
+* We currently do not consider the potential impact of pregnancy outcome, mode of delivery, or preterm status on postpartum depression incidence (although we do model the impact of hemoglobin on PPD incidence). This may cause us to underestimate the impact of interventions that work through these mechanisms on postpartum depression burden. 
 
 .. _mncnh_portfolio_7.0:
 
