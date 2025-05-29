@@ -223,7 +223,7 @@ and
 
 Note that this strategy was updated in May of 2025 from a prior strategy of converting GBD mortality rates to probabilities. `The pull request that updated this strategy can be found here for reference. <https://github.com/ihmeuw/vivarium_research/pull/1654>`_ This strategy update was pursued following verification and validation issues in neonatal mortality and an exploration of potential solutions in model runs 6.1 through 6.4. Ultimately, a change from mortality rates to mortality risk was preferred given that it is the more policy relevant measure in the context of neonates, and accurately apportioning person time alive within the neonatal age group given the input data available to us was a challenge we judged to be unnecessary.
 
-The calculation of :math:`\text{ACMRisk}_i` (the all-cause mortality risk for a single simulant) is a bit complicated, however. We begin with a population ACMRisk and use the LBWSG PAF to derive a risk-deleted ACMRisk to which we can then apply the relative risk of LBWSG matching any risk exposure level.  Mathematically this is achieved by the following formula:
+The calculation of :math:`\text{ACMRisk}_i` (the all-cause mortality risk for a single simulant, :math:`i`) is a bit complicated, however. We begin with a population ACMRisk and use the LBWSG PAF to derive a risk-deleted ACMRisk to which we can then apply the relative risk of LBWSG matching any risk exposure level.  Mathematically this is achieved by the following formula:
 
 .. math::
     \begin{align*}
