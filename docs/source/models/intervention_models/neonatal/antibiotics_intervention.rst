@@ -246,6 +246,7 @@ Scenarios
 Assumptions and Limitations
 ---------------------------
 
+- This intervention applies to the first two months of life according to the WHO guideline and we only model the first month of life, so we will not capture any averted deaths in the second month of life due to this intervention, therefore underestimating total impact.
 - We assume that antibiotics availability captures actual use, and not simply the treatment being in the facility 
 - We assume that the delivery facility is also the facility where a sick neonate will seek care for sepsis
 - We assume that the relative risk of sepsis mortality with antibiotics in practice is a value that we can find in the literature
