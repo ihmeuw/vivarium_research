@@ -667,7 +667,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_: production run number divided in half for default V&V runs
   * - Randomness key columns
     - ['entrance_time','age']
-    - 
+    - Note that each row of the population table in this simulation contains a pregnant simulant AND the outcome of that simulant's pregnancy. Therefore, the conversion of a stillbirth to a live birth between simulated scenarios in this simulation will not result in a new row added to the simulation state table and therefore will not change the state table index value of other simulants like occured in the IV iron simulation and resulted in disruptions to common random numbers between scenarios. Therefore, these randomness key columns are expected to be sufficient for this simulation.
   * - Age start (initialization) 
     - 10
     - Applies to pregnant population only
@@ -675,17 +675,11 @@ Default stratifications to all observers should include scenario and input draw.
     - 54
     - Applies to pregnant population only
   * - Age start (observation)
-    - 
+    - N/A. All pregnant simulants observed from start of pregnancy. All neonatal simulants observed from birth.
     - 
   * - Age end (observation)
-    - 
-    - 
-
-.. todo::
-
-  * Confirm that the randomness key columns listed here are adequate for this model (do we need age AND child_age given the "wide" state table?)
-
-  * Confirm whether or not the age start/end parameters are relevant here... how do we handle simulants who are initialized at 54.9 years but then give birth in the 55-59 year age range? We should make sure this behavior is noted.
+    - N/A; All pregnant simulants observed through conclusion of relevant modeled outcomes. All neonatal simulants observed until 28 days (end of late neonatal age group)
+    - Pregnant/birthing simulants do not age in this simulation
 
 .. note::
 
