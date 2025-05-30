@@ -1164,8 +1164,8 @@ Default stratifications to all observers should include scenario and input draw.
     - 
   * - 7.0.2
     - Check that preterm birth mortality is as expected: we should change from a slight overestimation to a slight underestimation. A slight underestimation is expected due to known mortality probabilities greater than 1, which will be addressed in future model runs.
-    - 
-    - 
+    - The overestimation of preterm birth mortality is of lower magnitude than in 7.0.1, indicating that the update of the preterm prevalence term improved the model. However, preterm birth mortality remains slightly overestimated on average rather than the expected slight underestimation.
+    - `Model 7.0.2 neonatal V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0.2_nn_checks.ipynb>`_
   * - 7.1
     - * Neonatal mortality (all cause and cause-specific) is expected to remain slightly underestimated in the baseline scenario (by the same magnitude of model run 6.1). This is expected as we have not yet implemented a strategy to account for known probabilities greater than 1.
       * Recheck LBWSG Effects
@@ -1196,10 +1196,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Using the specifications in model 6.1, we underestimate mortality ratios (believed to be due to having mortality probabilities greater than 1). Using the specifications in model 6.3, we overestimate mortality ratios (believed to be due to difference in mortality ratio verification target rather than mortality rate verification target)
     - Update neonatal mortality model to use mortality risk rather than rate input data (as instructed for model 7.1) and implement LBWSG RR capping and LBWSG PAF calculation strategies (details to come for model 7.2)
     - For runs 7.1 and 7.2. Continue to use parameters from model 7.0 in the meantime for any other runs that come before updating to 7.1.
-  * - Neonatal mortality due to preterm birth overestimated
-    - It could be because the docs specify that the ``p_preterm`` parameter should be the prevalence of preterm AT BIRTH, but the artifact data for this key are for every age group except for death. Using a smaller ``p_preterm`` value (which non-birth age groups would be smaller than the birth age group) would result in overestimation of preterm birth cause-specific mortality
-    - Update ``cause.neonatal_preterm_birth.prevalence`` key to use LBWSG risk exposure AT BIRTH rather than age-specific exposures 
-    - 7.0.2
+  * - Neonatal mortality due to preterm birth slightly overestimated
+    - Unknown -- could be something to do with the neonatal mortality math?
+    - Research team to discuss and consider -- see if it is imporoved after we update to mortality risk and cap LBWSG RRs?
+    - None for now
   * - Neonatal intervention observers are counting live and stillbirths rather than just live births
     - See issue description
     - Implement observer fix
