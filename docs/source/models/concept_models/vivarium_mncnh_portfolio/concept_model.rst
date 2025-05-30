@@ -1160,8 +1160,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Check that coverage at each facility type is as expected
       * Check that intervention observers are no longer counting stillbirths
       * Check probiotics effect size is as expected among preterm infants
-    - 
-    - 
+    - All specified V&V criteria looks great! Did notice that CPAP relative risk in artifact is a point value despite having uncertainty specified in documentation.
+    - `Notebook for model 7.0.1 neonatal V&V found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0.1_nn_checks.ipynb>`_
   * - 7.0.2
     - Check that preterm birth mortality is as expected: we should change from a slight overestimation to a slight underestimation. A slight underestimation is expected due to known mortality probabilities greater than 1, which will be addressed in future model runs.
     - The overestimation of preterm birth mortality is of lower magnitude than in 7.0.1, indicating that the update of the preterm prevalence term improved the model. However, preterm birth mortality remains slightly overestimated on average rather than the expected slight underestimation.
@@ -1200,10 +1200,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Unknown -- could be something to do with the neonatal mortality math?
     - Research team to discuss and consider -- see if it is imporoved after we update to mortality risk and cap LBWSG RRs?
     - None for now
-  * - Neonatal intervention observers are counting live and stillbirths rather than just live births
-    - See issue description
-    - Implement observer fix
-    - For model 7.0.1
+  * - Artifact key for CPAP intervention relative risk is a point value (1/0.53) despite uncertainty being specified in the :ref:`intervention model document <intervention_neonatal_cpap>`
+    - Unclear in docs what effect size parameters is desired
+    - Research to update docs to make it more clear and the engineering to eventually update artifact key
+    - Low priority for now?
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revist following GBD 2023 update
