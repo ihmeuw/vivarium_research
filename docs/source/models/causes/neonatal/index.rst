@@ -296,7 +296,7 @@ Data Tables
       - all-cause mortality risk in the early neonatal age group
       - enn_all_cause_death_count / live_birth_count
       - 
-    * - acmrisk_enn
+    * - acmrisk_lnn
       - all-cause mortality risk in the late neonatal age group
       - lnn_all_cause_death_count / (live_birth_count - enn_all_cause_death_count)
       - 
