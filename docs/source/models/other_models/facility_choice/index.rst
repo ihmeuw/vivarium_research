@@ -11,7 +11,16 @@ Delivery Facility Choice Model
 Background
 ----------
 
-To capture the complex relationship between choice of delivery facility (home birth vs a facility with basic emergency obstetric and neonatal care [BEmONC] vs a facility with comprehensive care [CEmONC]), the belief about gestational age (believed pre-term vs believed full term), and the related factors of antenatal care (ANC), and low birth weight and short gestation (LBWSG) risk exposure, we will include two novel affordances in our simulation: (1) correlated propensities for ANC, home delivery, and LBWSG; and (2) conditional probabilities for home delivery that differ based on the believed term status when labor begins.
+To capture the complex relationship between choice of delivery facility
+(home birth vs a facility with basic emergency obstetric and neonatal
+care [BEmONC] vs a facility with comprehensive care [CEmONC]), the
+belief about gestational age (believed pre-term vs believed full term),
+and the related factors of antenatal care (ANC), and low birth weight
+and short gestation (LBWSG) risk exposure, we will include two novel
+affordances in our simulation: (1) correlated propensities for ANC,
+facility delivery, and LBWSG; and (2) conditional probabilities for home
+delivery that differ based on the believed term status when labor
+begins.
 
 Coming up with values for these correlations and conditional probabilities that are consistent with GBD and external evidence is detailed at the end of this document.  But before we get to that complexity, let's start with how we will use these correlations and conditional probabilities in the simulation.
 
@@ -32,40 +41,100 @@ For our purposes, it is sufficient to capture the correlations between ANC, in-f
 In Vivarium, we use values selected uniformly at random from the interval [0,1], which we call propensities, to keep attributes like LBWSG and ANC calibrated at the population level while reducing variance between scenarios at the simulant level.  This makes it straightforward to represent the correlation in our factors by generating correlated propensities. The :code:`statsmodels.distributions.copula.api.GaussianCopula` implementation can make them::
 
     from statsmodels.distributions.copula.api import GaussianCopula
-    copula = GaussianCopula([[1., .5, .1],
-                             [.5, 1., .1],
-                             [.1, .1, 1.]])
+    copula = GaussianCopula([[1.,   .643, .2],
+                             [.643, 1.,   .2],
+                             [.2,   .2,   1.]])
     copula.rvs(10)
 
-.. list-table:: Propensity Correlation Stand-in Parameters
+The argument of the ``GaussianCopula`` constructor is a `correlation
+matrix`_, whose :math:`(i,j)^\text{th}` entry specifies the correlation
+between variable :math:`i` and variable :math:`j` (note that this
+implies that the matrix is symmetric with 1's on the diagonal).
+
+.. _correlation matrix: https://en.wikipedia.org/wiki/Correlation#Correlation_matrices
+
+We may eventually specify
+draw-level estimates of each model parameter, but for now we will
+specify a single value for each location, representing our best estimate
+or "mean draw."
+
+.. list-table:: Propensity correlations for mean draw
    :header-rows: 1
-   :widths: 20 20 20
+   :widths: 10 10 20 20
 
    * - Factor A
      - Factor B
      - Correlation
+     - Notes
    * - ANC Propensity
-     - Home Delivery Propensity
-     - 0.50
+     - Facility Propensity
+     - * Ethiopia: 0.643
+       * Nigeria: 0.466
+       * Pakistan: 0.406
+
+     - Correlation found from causal model optimization
    * - ANC Propensity
      - LBWSG Propensity
-     - 0.10
-   * - Home Delivery Propensity
+     - 0.2 (all locations)
+     - Chosen arbitrarily -- specify this value in ``model_spec.yaml``
+   * - Facility Propensity
      - LBWSG Propensity
-     - 0.10
+     - 0.2 (all locations)
+     - Chosen arbitrarily -- spefify this value in ``model_spec.yaml``
 
 Eventually we must put draws of consistent values in the artifact.
 
 Special ordering of the categories
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Our method of inducing correlations using a Gaussian copula is equivalent to specifying the `polychoric correlation <https://en.wikipedia.org/wiki/Polychoric_correlation>`_ between the variables, and relies on having a known ordering of variable values.
+Our method of inducing correlations using a Gaussian copula is
+equivalent to specifying the `polychoric correlation
+<https://en.wikipedia.org/wiki/Polychoric_correlation>`_ between ordinal
+variables, and it relies on having a known ordering of each variable's
+values. We will follow the convention of ordering the categories of each
+categorical variable from highest risk to lowest risk (GBD often follows
+this convention for risk factors), so that smaller propensities
+correspond to higher risk and larger propensities correspond to lower
+risk.
 
-When we calibrate the model, we will use an ordering of the LBWSG categories that we hypothesize will makes them have large polychoric correlate with the ANC and home delivery propensities.  To achieve this, we will order them from highest average RR to lower average RR (averaged across all draws).  Note that this is sex-specific, and based on the RRs for the early neonatal age group!  This ordering must also be used in the Risk component.
+When we calibrate the model, we use an ordering of the LBWSG categories
+that we hypothesize will make them have large polychoric correlation
+with the ANC and delivery facility propensities. (The ordering also
+facilitates convergence of the optimization, whose objective function
+involves the conditional probability of preterm status given facility
+choice). Specifically, we order the LBWSG categories **first** by
+preterm status (preterm < full-term), **then** from *highest* average RR
+to *lowest* average RR in the early neonatal age group (averaged across
+all draws, separately for each sex).
 
-We will also order the ANC and home delivery propensities from highest to lowest risk: no ANC < some ANC; and home birth < BEmONC < CEmONC.
+.. important::
 
-To be more explicit about how the ordered categories and propensities work in code, if the categories are ordered from highest risk to lowest risk as :math:`c_1, \dotsc, c_n`, divide the unit interval :math:`[0,1]` into :math:`n` subintervals :math:`I_1, \dotsc, I_n` ordered from left to right, such that the length of :math:`I_j` is :math:`P(c_j)`. Then a uniform propensity :math:`p \in [0,1]` corresponds to category :math:`c_j` precisely when :math:`p \in I_j`. [[A picture would probably help, should we add one here?]]
+  * All preterm categories are ordered **before** all full-term
+    categories
+  * The ordering is **sex-specific** (the ordering is different for
+    males and females)
+  * Within each term status (preterm or full-term), LBWSG categories are
+    ordered in **decreasing** order by (sex-specific) average relative
+    risk across draws
+  * The ordering is based on the RRs for the **early neonatal** age
+    group
+
+  This ordering must be used in the LBWSG Risk component.
+
+We will also order the ANC and facility propensities from highest to
+lowest risk: "no ANC" < "some ANC"; and "home birth" < "in-facility
+birth" (or "home birth" < BEmONC < CEmONC).
+
+To be more explicit about how the ordered categories and propensities
+work in code, if the categories are ordered from highest risk to lowest
+risk as :math:`c_1, \dotsc, c_n`, divide the unit interval :math:`[0,1]`
+into :math:`n` subintervals :math:`I_1, \dotsc, I_n` ordered from left
+to right, such that the length of :math:`I_j` is :math:`P(c_j)`. Then a
+uniform propensity :math:`p \in [0,1]` corresponds to category
+:math:`c_j` precisely when :math:`p \in I_j`. This correspondence
+specifies how each ordinal variable should be initialized from its
+corresponding propensity. [[A picture would probably help, should we add
+one here?]]
 
 
 Conditional delivery facility probabilities
