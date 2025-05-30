@@ -227,13 +227,13 @@ defined as a module input in a subsequent row.
     - * (Pregnancy term duration)
       * Birth facility
       * Believed gestational age
-    - * Intrapartum azithromycin coverage
+    - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
       * Antenatal corticosteroid coverage
       * Misoprostol coverage
-    - TODO: create/link intervention model documents
+    - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>` (TODO: link addition intervention model documents)
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
-      * Intrapartum azithromycin coverage
+      * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
     - * Maternal disorders outcomes (see outcome table)
     - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
       * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
@@ -261,14 +261,14 @@ defined as a module input in a subsequent row.
       - * (Pregnancy term duration)
         * Birth facility
         * Believed gestational age
-      - * Intrapartum azithromycin coverage
+      - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
         * Antenatal corticosteroid coverage
         * Misoprostol coverage
-      - TODO: create/link intervention model documents
+      - * :ref:`Intrapartum azithromycin <azithromycin_intervention>` (TODO: link addition intervention model documents)
       - 
     * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
       - * (Pregnancy term duration)
-        * Intrapartum azithromycin coverage
+        * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
         * Hemoglobin at birth
       - * Maternal disorders outcomes (see outcome table)
       - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
@@ -416,6 +416,13 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
+  * - 11. Azithromycin scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
 
 .. _MNCNH intrapartum component scenario table:
 
@@ -474,6 +481,11 @@ defined as a module input in a subsequent row.
     - 
   * - 10. Probiotics BEMONC-only scale-up
     - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 11. Azithromycin scale-up
+    - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
     - Baseline
     - 
@@ -537,6 +549,11 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline at CEMONC, 100% at BEMONC
     - 
+  * - 11. Azithromycin scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
 
 .. _mncnh_portfolio_4.0:
 
@@ -561,7 +578,7 @@ Default stratifications to all observers should include scenario and input draw.
     - * Maternal age group
       * Pregnancy outcome
       * Azithromycin coverage
-      * Misoprostol coverage
+      * Misoprostol coverage (not ready for implementation yet) 
     - Included with maternal age group stratification. Additional stratifiers to be added
   * - 2. Births (this observer includes ALL pregnancy outcomes, including partial term pregnancies that may not typically be considered "births")
     - * Pregnancy outcome
@@ -595,6 +612,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Pregnancy outcome
       * ANC attendance
       * Ultrasound coverage
+      * Azithromycin coverage
     - Included
 
 .. todo::
@@ -672,6 +690,8 @@ Default stratifications to all observers should include scenario and input draw.
 .. note::
 
   The "Directory" column in the table below lists the subdirectory nested within ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/`` where results specific to that model run can be found.
+
+  Model numbers with an asterisk indicate planned model runs that are not yet ready to be implemented. 
 
 .. list-table:: Model runs
   :header-rows: 1
@@ -886,6 +906,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 7.1
     - Update neonatal mortality rates to mortality risks 
+
       * Update mortality input data and remove rate to probability conversion: `see this PR for full details and accounting of updates <https://github.com/ihmeuw/vivarium_research/pull/1654>`_
       * Use the birth LBWSG exposure for calculation of the ENN LBWSG PAF
       * Use the LNN LBWSG exposure for calculation of the LNN LBWSG PAF. Note that this is incorrect, but an acceptable placeholder until we update in model run 7.2
@@ -893,36 +914,38 @@ Default stratifications to all observers should include scenario and input draw.
     - ``model7.1``
     - Default
     - Same modifications as run 7.0.1:
-      * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
-      * Stratify births observer by gestational age above/below 37 weeks
-      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
-    - Default
-  * - 7.2
-    - * Implement LBWSG RR cap (details to come)
-      * Recalculate LBWSG PAFs with capped RRs and updated strategy for the LNN age group (details to come)
-    - Baseline
-    - ``model7.2``
-    - Default
-    - Same modifications as run 7.0.1 and 7.1:
+
       * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
       * Stratify births observer by gestational age above/below 37 weeks
       * Stratify neonatal deaths observer by gestational age above/below 37 weeks
     - Default
   * - 8.0
     - Wave I azithromycin 
-    - Baseline
+    - All scenarios (note new azithromycin scale-up scenario #11)
     - ``model8.0``
-    -
-    - 
-    - 
-  * - 9.0
+    - Default
+    - Azithromycin stratifications added to observers #1 and #7 (maternal burden and maternal population observers) - to be continued as defaults for all future runs
+    - Default
+  * - 8.1*
+    - * Implement LBWSG RR cap (details to come)
+      * Recalculate LBWSG PAFs with capped RRs and updated strategy for the LNN age group (details to come)
+    - Baseline
+    - ``model8.1``
+    - Default
+    - Same modifications as run 7.0.1 and 7.1:
+    
+      * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
+      * Stratify births observer by gestational age above/below 37 weeks
+      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
+    - Default
+  * - 9.0*
     - Wave I misoprostol
     - Baseline 
     - ``model9.0``
     -
     - 
     - 
-  * - 10.0
+  * - 10.0*
     - Wave I antenatal corticosteroids
     - Baseline
     - ``model10.0``
@@ -1138,7 +1161,13 @@ Default stratifications to all observers should include scenario and input draw.
       * Check that intervention effect sizes are maintained
     - 
     - 
-  * - 7.2
+  * - 8.0
+    - * Check baseline and intervention coverage of azithromycin intervention
+      * Check that maternal disorders burden (particularly sepsis) still verifies at the population level in the baseline scenario
+      * Check that the effect size of the azithromycin intervention verifies
+    - 
+    - 
+  * - 8.1
     - * Neonatal mortality is expected to validate to GBD targets (no longer be underestimated!)
       * Check that LBWSG effects are updated and functioning as expected
       * Check that intervention effect sizes are maintained too

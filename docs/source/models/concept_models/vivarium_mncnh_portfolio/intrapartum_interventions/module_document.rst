@@ -108,14 +108,8 @@ This module in the intrapartum component determines coverage of intrapartum inte
 
 **Intrapartum azithromycin:** 
 
-  * Home birth: 10%
-
-  * Hospital birth: 67.7%
-
-  * Clinic/low-level birth: 18.5%
-
-Source: SARA (Ehtiopia; Table 3.8.2). These are placeholder values (percentage of each facility type that have azithromycin, not the percentage of pregnancies that receive it) and will be updated with further analysis. We want these to be location specific, please code accordingly.
-
+Please see :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` for baseline coverage values for births at 
+home and in BEmONC and CEmONC facilities. 
 
 **Antenatal corticosteroids:** (percentage of believed preterm births)
 
@@ -176,7 +170,7 @@ Source: EmONC (Ethiopia; Table 10.5.4A). These are placeholder values and will b
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-* Confirm rates of simulants receiving azithromycin and corticosteroid matches inputs
+* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` for V&V criteria.
 
 * Confirm no simulants believed to be >37 weeks gestational age at birth recieve corticosteroids
 
