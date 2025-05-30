@@ -51,19 +51,52 @@ Possible severe bacterial infections (PSBIs) in newborns are serious conditions 
   - Convulsions
   - Active bleeding requiring transfusion
 
-Management of PSBI starts with identification of at least one sign (by a family member or health professional) followed by confirmation by a community health worker or other health professional. To facillitate the identification of PSBI, WHO recommends that community health workers counsel families on recognition of danger signs for PSBI and assess infants for signs of PSBI during postnatal care visits. [WHO-PSBI-Guideline]_
+Management of PSBI starts with identification of at least one sign (by a family 
+member or health professional) followed by confirmation by a community health 
+worker or other health professional. To facillitate the identification of PSBI, 
+WHO recommends that community health workers counsel families on recognition of 
+danger signs for PSBI and assess infants for signs of PSBI during postnatal care 
+visits. [WHO-PSBI-Guideline]_
 
-The current WHO guideline on treatment for PSBI in infants less than 59 months old is referral to a hospital for inpatient management and a 7-10 day course of two injectable antibiotics - penicillin or ampicillin plus gentamicin [WHO-PSBI-Guideline]_. There is a separate WHO Guideline on the management of PSBI when hospital referral is not feasible, and recommends that infants of families who do not accept or cannot access hospital care are managed in an outpatient setting with intramuscular gentamicin (once daily for 2 or 7 days) and oral amoxicillin (twice daily for 7 days) [WHO-PSBI-Guideline]_.
+The current WHO guideline on treatment for PSBI in infants less than 59 days old 
+is referral to a hospital for inpatient management and a 7-10 day course of two 
+injectable antibiotics - penicillin or ampicillin plus gentamicin 
+[WHO-PSBI-Guideline]_. There is a separate WHO Guideline on the management of PSBI 
+when hospital referral is not feasible, and recommends that infants of families 
+who do not accept or cannot access hospital care are managed in an outpatient 
+setting with intramuscular gentamicin (once daily for 2 or 7 days) and oral 
+amoxicillin (twice daily for 7 days) [WHO-PSBI-Guideline]_.
 
-The WHO guideline for PSBI management without hospital referral relies heavily on evidence included in a recent Cochrane review of community-based antibiotic management of PSBI [PSBI-Cochrane-Review]_. There has been evidence of successful implementation of outpatient management of PSBI in accordance with the WHO guideline, although not yet at scale [Wammanda-et-al-2020]_. Additionally, some unpublished trials suggest that outpatient management for clinical severe infection and early hospital discharge for non-critical cases is as effective as full hospital management of PSBI. 
+The WHO guideline for PSBI management without hospital referral relies heavily on 
+evidence included in a recent Cochrane review of community-based antibiotic 
+management of PSBI [PSBI-Cochrane-Review]_. There has been evidence of successful 
+implementation of outpatient management of PSBI in accordance with the WHO 
+guideline, although not yet at scale [Wammanda-et-al-2020]_. Additionally, some 
+unpublished trials suggest that outpatient management for clinical severe 
+infection and early hospital discharge for non-critical cases is as effective as 
+full hospital management of PSBI. 
 
 .. todo::
 
   Link unpublished data when it is ready.
 
-Notably, direct observation of mortality rates among a population with PSBI with no intervention (treatment or referral) by researchers is not ethical. As such, trials like those included in the [PSBI-Cochrane-Review]_ are designed so that the control arm is the standard of care hospital referral and the intervention arm is community based antibiotic administration in addition to hospital referral. Notably, some portion of the population in these trials is expected to refuse referral and not receive antibiotics and could serve as a control group in the derivation of the effect of antibiotics on sepsis mortality relative to no antibiotics that we desire for use in our simulation. Unfortunately, however, none of the individual studies included in [PSBI-Cochrane-Review]_ report sufficient information to derive such values.
+Notably, direct observation of mortality rates among a population with PSBI with 
+no intervention (treatment or referral) by researchers is not ethical. As such, 
+trials like those included in the [PSBI-Cochrane-Review]_ are designed so that the 
+control arm is the standard of care hospital referral and the intervention arm is 
+community based antibiotic administration in addition to hospital referral. 
+Notably, some portion of the population in these trials is expected to refuse 
+referral and not receive antibiotics and could serve as a control group in the 
+derivation of the effect of antibiotics on sepsis mortality relative to no 
+antibiotics that we desire for use in our simulation. Unfortunately, however, none 
+of the individual studies included in [PSBI-Cochrane-Review]_ report sufficient 
+information to derive such values.
 
-A review by [Zaidi-et-al-2011]_ attempted to address this challenge of deriving an effect of antibiotics relative to no antibiotics that cannot be directly observed in an experimental study for the Lives Saved Tool (LiST). Through a Delphi process to reach expert consensus, they arrived at the following effects on neonatal sepsis mortality:
+A review by [Zaidi-et-al-2011]_ attempted to address this challenge of deriving an 
+effect of antibiotics relative to no antibiotics that cannot be directly observed 
+in an experimental study for the Lives Saved Tool (LiST). Through a Delphi process 
+to reach expert consensus, they arrived at the following effects on neonatal 
+sepsis mortality:
 
 - RR=0.72 for oral antibiotics in a community setting
 - RR=0.35 for injectable antibiotics is a community/clinic setting
@@ -92,9 +125,18 @@ Baseline Coverage Data
 
 .. todo::
 
-  Update this section. I think rather that making this delivery facility specific we should utilize the GBD covariate for postnatal care visits because most cases will be caught after hospital discharge unless they are hospital acquired. Maybe we could also correlate coverage propensity with ANC or IFD propensity because care seeking behavior here seems really relevant.
+  Update this section. I think rather that making this delivery facility specific 
+  we should utilize the GBD covariate for postnatal care visits because most cases 
+  will be caught after hospital discharge unless they are hospital acquired. Maybe 
+  we could also correlate coverage propensity with ANC or IFD propensity because 
+  care seeking behavior here seems really relevant.
 
-  We should also probably try to use different data than hospitals having antibiotics to inform baseline coverage because it seems like adherence to hospital referral is the more relevant variable here -- the trials in the cochrane review are probably a good place to start. Ideally we will also have some differentiation of outpatient/inpatient coverage as well as whether outpatient management is oral or injectable.
+  We should also probably try to use different data than hospitals having 
+  antibiotics to inform baseline coverage because it seems like adherence to 
+  hospital referral is the more relevant variable here -- the trials in the 
+  cochrane review are probably a good place to start. Ideally we will also have 
+  some differentiation of outpatient/inpatient coverage as well as whether 
+  outpatient management is oral or injectable.
 
 These placeholder values come from two data sources, both for Ethiopia, both identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final Report found 30.2% of BEmONC facilities and 76.8% of CEmONC facilities have neonatal antibiotics; the 2016-2018 SARA Report found 52.9% of BEmONC facilities and 97.2% of CEmONC facilities have neonatal antibiotics.  While we plan a data strategy to fill the gaps we have used a simple average.
 
@@ -153,9 +195,14 @@ While we are searching the literature for an appropriate value for the relative 
 
 .. todo::
 
-  Update this section to use the RR=0.2 rather than 0.72 effect for hospital quality antibiotic management (what we will be scaling up and also some portion of existing baseline coverage). We will also use RR=0.35 and/or RR=0.72 for baseline outpatient antibiotic management that is not yet in line with the new guideline depending on what we find for baseline coverage.
+  Update this section to use the RR=0.2 rather than 0.72 effect for hospital 
+  quality antibiotic management (what we will be scaling up and also some portion 
+  of existing baseline coverage). We will also use RR=0.35 and/or RR=0.72 for 
+  baseline outpatient antibiotic management that is not yet in line with the new 
+  guideline depending on what we find for baseline coverage.
 
-  I really think that this is the best path forward, but am still open to discussion if others disagree!
+  I really think that this is the best path forward, but am still open to 
+  discussion if others disagree!
 
 .. list-table:: Risk Effect Parameters for Lack-of-Access-to-Antibiotics
   :widths: 15 15 15 15
