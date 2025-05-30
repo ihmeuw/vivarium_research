@@ -93,7 +93,7 @@ So specifically, the preterm with RDS cause-specific mortality risk for an indiv
 
 .. math::
 
-  \text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}, i} = \text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}} * (1 - \text{PAF}) * \text{RR}_i
+  \text{CSMRisk}^{\text{preterm with RDS}}_{i} = \text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW}_i,\text{GA}_i} * (1 - \text{PAF}) * \text{RR}_i
 
 Where,
 
@@ -104,12 +104,12 @@ Where,
     - Definition
     - Value
     - Note
-  * - :math:`\text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}, i}`
-    - Mortality risk due to preterm with RDS for a given simulant :math:`i` with a specific birth weight and gestational age exposure following modification from the CPAP intervention
+  * - :math:`\text{CSMRisk}^{\text{preterm with RDS}}_{i}`
+    - Mortality risk due to preterm with RDS for a given simulant :math:`i` following modification from the CPAP intervention
     - See equation above
     - 
-  * - :math:`\text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}}`
-    - Mortality risk due to preterm with RDS for a simulant with a given birth weight and gestational age exposure before modification from the CPAP intervention
+  * - :math:`\text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW}_i,\text{GA}_i}`
+    - Mortality risk due to preterm with RDS for a given simulant :math:`i` with a given birth weight and gestational age exposure before modification from the CPAP intervention
     - Derived from instruction on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`
     - 
   * - :math:`\text{PAF}`
