@@ -40,11 +40,13 @@ Inclusive Health Metrics: Race and Ethnicity
 Overview
 +++++++++++++++++++++
 
-On this page you will find ...
+On this page you will find our guiding principles,
+an introduction to race and ethnicity from a scientific perspective,
+a glossary of commonly used terms related
+to race and ethnicity, recommendations for how to address race- and ethnicity-related limitations in external data
+sources, discussion of the implications of imperfect proxy measures with regards to race and ethnicity,
+examples of how our team has incorporated BLISS into our work process, and more! 
 
-.. todo::
-
-    Fill out this section to describe what this guide will include.
 
 If you have any questions or comments about the content on this page - please reach out! You can
 contact us directly `on GitHub <https://github.com/ihmeuw/vivarium_research/issues?q=is%3Aopen+is%3Aissue+label%3Abliss>`_ or anonymously
@@ -55,15 +57,76 @@ on our `feedback form <https://docs.google.com/forms/d/e/1FAIpQLSeCED9TFQsH-1u4Q
 
    * - This is...
      - This isn't...
-   * -
-     -
+   * - A ‘living’ document which will be regularly reviewed and updated to reflect evolving language and research practices. 
+     - An immutable document that should be treated as all-knowing and final.
+   * - An accessible guide intended for everyone’s use, regardless of your familiarity with inclusive language practices. 
+     - An intimidating guide that is full of jargon and can only be used by DEI experts. 
+   * - A safe space for people to make mistakes, ask questions, and learn new things! 
+     - A space where people need to police what they are saying or how they are speaking for fear of judgment.
+   * - Using our voice on the Simulation Science team to platform the terms we find most accurate and inclusive. 
+     - Putting words into other people’s mouths (such as racial or ethnic categorizations in external data sources). 
+
 
 Guiding principles
 ------------------
 
-.. todo::
+Our guiding principles for this document can be summarized in three points: 
 
-    Fill out table with some guiding principles for this guide. Can refer to same table in the sex and gender guide.
+**1. This work is important**
+
+Inclusive research practices are important, and we want to begin by acknowledging the potential harm that using 
+reductive and racialized research practices can create. People from racially and ethnically diverse backgrounds experience 
+harm from oversimplified categorizations and other exclusionary research practices in several ways, including diminished access to 
+healthcare, erasure in research, and perpetuation of stereotypes.
+
+An accurate understanding of race and ethnicity improves the validity of our research methods and conclusions about 
+all people, not only racial and ethnic minority groups. One example of the harms from racial categorization is in our 
+understanding of lung cancer rates. If we use the overly homogenized group "Asian", rates of nonsmoking-related lung 
+cancer appear to be low. But by separating this racial group into subcategories, we can see that Southeast Asians show higher 
+rates of nonsmoking-related lung cancer, specifically in adenocarcinomas caused by the EGFR 
+(epidermal growth factor receptor) genetic mutation [Noronha_2024]_. This is important information for cancer screening that otherwise 
+would have been missed.
+
+In an effort to work toward institution-wide Diversity, Equity, and Inclusion (DEI) goals and advance our team’s research 
+and publications, we created this guide to explore the complexities of race and ethnicity in our work. We hope to inspire 
+change by presenting our studies with inclusive language and modeling practices we believe in. For all of these 
+reasons, we feel this guide is very important.
+
+
+**2. This work is evolving**
+
+Research practices are constantly evolving, so there is rarely a single “right” choice and the accepted 
+choice may evolve over time. Therefore, this guide will be a living document that we will 
+regularly review and update. We will hold ourselves accountable for aligning the guide with 
+the current preferred language, terminology and approaches.  
+
+While we hope this can be up-to-date and comprehensive, no guide can anticipate every use case, 
+recognize every limitation, or be applicable to every research question. We aim to provide enough 
+information that users can understand the spirit of the guide and apply that to their unique needs.
+
+
+**3. This is work**
+
+We acknowledge that there may be a cost associated with transitioning to more accurate and inclusive research practices. 
+Although this transition requires intentional effort, we highlight here that there are many benefits to incorporating 
+more thoughtful, equity-focused research practices into everyday public health research practices.
+
+As human beings, we each have a lived experience of race and ethnicity—none of us are neutral outside observers. We have all 
+unconsciously internalized ideas about race and ethnicity from our experiences interacting with other people and with society. 
+These ideas may have helped us make sense of the world but may also have perpetuated biases and inequities. This guide asks us 
+to take a step back and re-examine our assumptions, which requires effort and care.
+
+Inclusive language can often be longer or more nuanced than standard terminology, but we believe specificity is more 
+important than brevity. We seek to include all groups and identities in our language and practices, even if that means using additional words! 
+For example, we would rather use terms like "Black, Indigenous, and People of Color (BIPOC)" while specifying subgroups when relevant 
+than use overly simplistic terms like "minority groups," which can obscure differences and perpetuate stereotypes.
+
+The ever-evolving nature of this work means that this guide is for everyone! You don’t have to be an expert; this is meant to be 
+accessible for all people. Wherever you are in your learning journey, this guide is intended to be a clear and helpful resource. 
+
+We’re not going to put words into other people’s mouths, but we will use our own voice to do the work and use the terms and practices we find 
+most accurate and inclusive.
+
 
 Introduction to race and ethnicity
 ----------------------------------
@@ -983,3 +1046,6 @@ Reporting results accurately
 
 .. [Arias_2016]
     Arias E, Heron MP, Hakes JK. The validity of race and Hispanic origin reporting on death certificates in the United States: an update. https://pubmed.ncbi.nlm.nih.gov/28436642/
+    
+.. [Noronha_2024]
+    Noronha V., Budukh A., Chaturvedi P., Anne S., Punjabi A., Bhaskar M., Sahoo T.P., Menon N., Shah M., Batra U., Nathany S., Kumar R., Shetty O., Pai Ghodke T., Mahajan A., Chakrabarty N., Hait S., Tripathi S.C., Chougule A., Chandrani P., Tripathi V.K., Jiwnani S., Tibdewal A., Maheshwari G., Kothari R., Patil V.M., Bhat R.S., Khanderia M., Mahajan V., Prakash R., Sharma S., Jabbar A.A., Yadav B.K., Uddin A.F.M.K., Dutt A., Prabhash K. Uniqueness of lung cancer in Southeast Asia. https://doi.org/10.1016/j.lansea.2024.100430.
