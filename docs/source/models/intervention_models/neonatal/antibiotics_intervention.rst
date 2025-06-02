@@ -53,7 +53,7 @@ Possible severe bacterial infections (PSBIs) in newborns are serious conditions 
 
 Management of PSBI starts with identification of at least one sign (by a family 
 member or health professional) followed by confirmation by a community health 
-worker or other health professional. To facillitate the identification of PSBI, 
+worker or other health professional. To facilitate the identification of PSBI, 
 WHO recommends that community health workers counsel families on recognition of 
 danger signs for PSBI and assess infants for signs of PSBI during postnatal care 
 visits. [WHO-PSBI-Guideline]_
