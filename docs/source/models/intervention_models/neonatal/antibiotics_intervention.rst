@@ -28,7 +28,8 @@ Antibiotics for treating possible severe bacterial infections (PSBI) in newborns
 Intervention Overview
 -----------------------
 
-Possible severe bacterial infections (PSBIs) in newborns are serious conditions that can lead to sepsis and death. According to the [WHO-PSBI-Guideline]_, clinical signs of PSBI include:
+Possible severe bacterial infections (PSBIs) in newborns are serious conditions that can lead 
+to sepsis and death. According to the [WHO-PSBI-Guideline]_, clinical signs of PSBI include:
 
 - Clinical severe infection:
 
@@ -71,7 +72,7 @@ The WHO guideline for PSBI management without hospital referral relies heavily o
 evidence included in a recent Cochrane review of community-based antibiotic 
 management of PSBI [PSBI-Cochrane-Review]_. There has been evidence of successful 
 implementation of outpatient management of PSBI in accordance with the WHO 
-guideline, although not yet at scale [Wammanda-et-al-2020]_. Additionally, some 
+guideline, although not yet at scale [Nisar-et-al-2022]_. Additionally, some 
 unpublished trials suggest that outpatient management for clinical severe 
 infection and early hospital discharge for non-critical cases is as effective as 
 full hospital management of PSBI. 
@@ -332,9 +333,9 @@ References
 
   `Duby J, Lassi ZS, Bhutta ZA. Community-based antibiotic delivery for possible serious bacterial infections in neonates in low- and middle-income countries. Cochrane Database Syst Rev. 2019 Apr 11;4(4):CD007646. doi: 10.1002/14651858.CD007646.pub3. PMID: 30970390; PMCID: PMC6458055. <https://pubmed.ncbi.nlm.nih.gov/30970390/>`_
 
-.. [Wammanda-et-al-2020]
+.. [Nisar-et-al-2022]
 
-  `Wammanda RD, Adamu SA, Joshua HD, Nisar YB, Qazi SA, Aboubaker S, Bahl R. Implementation of the WHO guideline on treatment of young infants with signs of possible serious bacterial infection when hospital referral is not feasible in rural Zaria, Nigeria: Challenges and solutions. PLoS One. 2020 Mar 10;15(3):e0228718. doi: 10.1371/journal.pone.0228718. PMID: 32155155; PMCID: PMC7064229. <https://pubmed.ncbi.nlm.nih.gov/32155155/>`_
+  `Nisar YB, Aboubaker S, Arifeen SE, Ariff S, Arora N, Awasthi S, Ayede AI, Baqui AH, Bavdekar A, Berhane M, Chandola TR, Leul A, Sadruddin S, Tshefu A, Wammanda R, Nigussie A, Pyne-Mercier L, Pearson L, Brandes N, Wall S, Qazi SA, Bahl R. A multi-country implementation research initiative to jump-start scale-up of outpatient management of possible serious bacterial infections (PSBI) when a referral is not feasible: Summary findings and implications for programs. PLoS One. 2022 Jun 13;17(6):e0269524. doi: 10.1371/journal.pone.0269524. PMID: 35696401; PMCID: PMC9191694. <https://pubmed.ncbi.nlm.nih.gov/35696401/>`_
 
 .. [Zaidi-et-al-2011]
 
