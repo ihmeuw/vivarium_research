@@ -54,7 +54,7 @@ to sepsis and death. According to the [WHO-PSBI-Guideline]_, clinical signs of P
 
 Management of PSBI starts with identification of at least one sign (by a family 
 member or health professional) followed by confirmation by a community health 
-worker or other health professional. To facillitate the identification of PSBI, 
+worker or other health professional. To facilitate the identification of PSBI, 
 WHO recommends that community health workers counsel families on recognition of 
 danger signs for PSBI and assess infants for signs of PSBI during postnatal care 
 visits. [WHO-PSBI-Guideline]_
@@ -86,7 +86,7 @@ no intervention (treatment or referral) by researchers is not ethical. As such,
 trials like those included in the [PSBI-Cochrane-Review]_ are designed so that the 
 control arm is the standard of care hospital referral and the intervention arm is 
 community based antibiotic administration in addition to hospital referral. 
-Notably, some portion of the population in these trials is expected to refuse 
+Some portion of the population in these trials is expected to refuse 
 referral and not receive antibiotics and could serve as a control group in the 
 derivation of the effect of antibiotics on sepsis mortality relative to no 
 antibiotics that we desire for use in our simulation. Unfortunately, however, none 
