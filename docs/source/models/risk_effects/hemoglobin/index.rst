@@ -174,21 +174,13 @@ Use the modeling strategy described below for the following maternal disorders s
 
   Link hypertension cause model documents when ready and write custom strategy for hypertensive disorders as necessary
 
-Use :ref:`hemoglobin exposure in pregnancy model <2023_hemoglobin_exposure>` at the end of the pregnancy section/entrance into the intrapartum section to determine risk effects. There may be individual exposure values assigned that are outside of the defined risk curves in GBD. In this case, for exposures <40, assign the risk corresponding to an exposure value of 40. For exposures >150, assign the risk corresponding to an exposure value of 150.
-
-.. todo::
-
-  Clarify timing with MNCNH-specific hemoglobin trajectory documentation (ie after pregnancy hemoglobin subcomponent/application of intervention effects has been completed) when this is available.
+There may be individual exposure values assigned that are outside of the defined risk curves in GBD. In this case, for exposures <40, assign the risk corresponding to an exposure value of 40. For exposures >150, assign the risk corresponding to an exposure value of 150.
 
 Use the population attributable fraction values pulled from GBD shared functions such that the maternal disorder incidence rate for an individual :math:`i` for a given affected maternal disorder subcause is as follows:
 
 .. math::
 
   ir_i = ir * (1 - PAF) * RR_i
-
-.. todo::
-
-  Check with engineers on default behavior of continuous risk curves and if any additional information is needed in order to implement these and/or if we need to do any transformations of RRs to be relative to specific TMREL, in which case we would need to edit PAFs, etc.
 
 The relative risk curves for maternal disorders affected outcomes in GBD shared functions as of March 2025 are shown below for reference. These values have been transformed to be relative to a hemoglobin exposure of 110 g/L (the threshold for anemia in pregnancy) for ease of interpretation. However, they are stored in GBD shared functions as relative to a hemoglobin exposure of 40 g/L.
 
