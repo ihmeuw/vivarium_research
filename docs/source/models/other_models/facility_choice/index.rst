@@ -58,13 +58,24 @@ Similarly, it is likely that there are social exclusion factors causing both exp
 In a simulation model where we have not included scenarios that change these common-cause factors, we do not have to model their effects explicitly.
 For our purposes, it is sufficient to capture the correlations between ANC, in-facility birth, and LBWSG risk exposure.
 
-In Vivarium, we use values selected uniformly at random from the interval [0,1], which we call propensities, to keep attributes like LBWSG and ANC calibrated at the population level while reducing variance between scenarios at the simulant level.  This makes it straightforward to represent the correlation in our factors by generating correlated propensities. The :code:`statsmodels.distributions.copula.api.GaussianCopula` implementation can make them::
+In Vivarium, we use values selected uniformly at random from the interval [0,1], which we call propensities, to keep attributes like LBWSG and ANC calibrated at the population level while reducing variance between scenarios at the simulant level.  This makes it straightforward to represent the correlation in our factors by generating correlated propensities. The :code:`statsmodels.distributions.copula.api.GaussianCopula` implementation can make them:
 
-    from statsmodels.distributions.copula.api import GaussianCopula
-    copula = GaussianCopula([[1.,   .643, .2],
-                             [.643, 1.,   .2],
-                             [.2,   .2,   1.]])
-    copula.rvs(10)
+.. code-block:: pycon
+
+    >>> from statsmodels.distributions.copula.api import GaussianCopula
+    >>> # Input is a correlation matrix
+    >>> copula = GaussianCopula([[1.,   .64, .2],
+    ...                          [.64, 1.,   .2],
+    ...                          [.2,  .2,   1.]])
+    >>> # Each row contains 3 correlated propensities
+    >>> copula.rvs(10_000)
+    array([[0.29591901, 0.46609153, 0.43592752],
+          [0.99152512, 0.94530017, 0.85288664],
+          [0.46295916, 0.02359119, 0.49424445],
+          ...,
+          [0.01641805, 0.05247892, 0.02022793],
+          [0.16978166, 0.27245795, 0.10548769],
+          [0.67100234, 0.83628491, 0.83330358]])
 
 The argument of the ``GaussianCopula`` constructor is a `correlation
 matrix`_, whose :math:`(i,j)^\text{th}` entry specifies the correlation
