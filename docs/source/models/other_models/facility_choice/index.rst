@@ -22,10 +22,21 @@ delivery facility, and LBWSG; and (2) causal conditional probabilities
 for home delivery that differ based on the believed term status when
 labor begins.
 
-Coming up with values for these correlations and causal probabilities that are consistent with GBD and external evidence is detailed at the end of this document.  But before we get to that complexity, let's start with how we will use these correlations and causal probabilities in the simulation.
+As a simplification, we will model the choice of delivery location in
+two steps: First, the birthing person decides whether to deliver at home
+or go to a facility, depending on the believed preterm status at the
+start of labor. Then, among simulants choosing in-facility delivery
+(IFD), we will randomly assign simulants to BEmONC or CEmONC facilities,
+independent of other choices that have been made.
+
+Coming up with values for the needed correlations and causal
+probabilities that are consistent with GBD and external evidence is
+detailed at the end of this document.  But before we get to that
+complexity, let's start with how we will use these correlations and
+causal probabilities in the simulation.
 
 Note that the calibration procedure, and hence the values we're using
-here (i.e., the correlations and values of :math:`\Pr[\text{facility}
+here (i.e., the correlations and values of :math:`\Pr[\text{IFD status}
 \mid \operatorname{do}(\text{believed preterm status})]`) depend
 critically on the implementations of other pieces of the model that are
 described elsewhere (most notably, choice of ultrasound type given ANC
@@ -58,9 +69,10 @@ In Vivarium, we use values selected uniformly at random from the interval [0,1],
 The argument of the ``GaussianCopula`` constructor is a `correlation
 matrix`_, whose :math:`(i,j)^\text{th}` entry specifies the correlation
 between variable :math:`i` and variable :math:`j` (note that this
-implies that the matrix is symmetric with 1's on the diagonal). The
-three "intrinsic correlations" are the values in the upper right (or
-lower left) triangle.
+implies that the matrix is symmetric with 1's on the diagonal, and
+furthermore is positive semidefinite). The three "intrinsic
+correlations" are the values in the upper right (or lower left)
+triangle.
 
 .. _correlation matrix: https://en.wikipedia.org/wiki/Correlation#Correlation_matrices
 
@@ -78,7 +90,7 @@ or "mean draw."
      - Correlation
      - Notes
    * - ANC Propensity
-     - Facility Propensity
+     - IFD Propensity
      - * Ethiopia: 0.643
        * Nigeria: 0.466
        * Pakistan: 0.406
@@ -89,7 +101,7 @@ or "mean draw."
      - LBWSG Propensity
      - 0.2 (all locations)
      - Chosen arbitrarily as a plausible value
-   * - Facility Propensity
+   * - IFD Propensity
      - LBWSG Propensity
      - 0.2 (all locations)
      - Chosen arbitrarily as a plausible value
@@ -105,9 +117,8 @@ equivalent to specifying the `polychoric correlation
 variables, and it relies on having a known ordering of each variable's
 values. We will follow the convention of ordering the categories of all
 categorical variables from "highest risk" to "lowest risk" (GBD often
-follows this convention for risk factors), so that smaller propensities
-correspond to higher risk and larger propensities correspond to lower
-risk.
+follows this convention for risk factors), so that larger propensities
+are generally "better" for the simulant.
 
 We use an ordering of the LBWSG categories that we hypothesize will make
 them have large polychoric correlation with the ANC and delivery
@@ -133,7 +144,7 @@ each sex.
 
   This ordering must be used in the LBWSG Risk component.
 
-We will also order the ANC and facility propensities from highest to
+We will also order the ANC and IFD propensities from highest to
 lowest risk: "no ANC" < "some ANC"; and "home birth" < "in-facility
 birth".
 
@@ -149,8 +160,8 @@ corresponding propensity. [[A picture would probably help, should we add
 one here?]]
 
 
-Causal conditional delivery facility probabilities
---------------------------------------------------
+Causal conditional probabilities for in-facility delivery
+---------------------------------------------------------
 
 In addition to correlation, we posit that a belief about preterm status
 is influential in the decision to have a home delivery.  We will model
@@ -159,10 +170,11 @@ about preterm status.  Although deriving consistent values for these
 probabilities is complex, and described in the final section of this
 page, *using* the causal conditional probabilities is simple: Simply
 select in-facility delivery with probability
-:math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed
-preterm})]` or :math:`\text{Pr}[\text{in-facility}\mid
+:math:`\text{Pr}[\text{in-facility}\mid
+\operatorname{do}(\text{believed preterm})]`
+or :math:`\text{Pr}[\text{in-facility}\mid
 \operatorname{do}(\text{believed full-term})]` for the corresponding
-cases, using the correlated facility propensity defined in the previous
+cases, using the correlated IFD propensity defined in the previous
 section.
 
 .. list-table:: Causal conditional probabilities of in-facility delivery for mean draw
@@ -189,6 +201,38 @@ section.
      - 1 - 0.55
      - 1 - 0.55
      - 1 - 0.29
+
+More explicitly, given the simulant's believed term status (either
+"believed preterm" or "believed full-term") and their IFD propensity,
+:math:`U_\text{IFD}`, the simulant's IFD status is given by the
+following function :math:`f_\text{IFD}`:
+
+.. math::
+
+  \begin{align*}
+  \text{IFD status}
+  &= f_\text{IFD}(\text{believed term status},\ U_\text{IFD}) \\
+  &=  \begin{cases}
+      \text{at-home}, & \text{if}\quad U_\text{IFD}
+          < \text{Pr}[\text{at-home} \mid
+          \operatorname{do}(\text{believed term status})] \\
+      \text{in-facility}, & \text{otherwise}.
+      \end{cases}
+  \end{align*}
+
+Note that, as described in the previous section, the function
+:math:`f_\text{IFD}` is defined so that smaller values of
+:math:`U_\text{IFD}` correspond with home delivery, while larger values
+of :math:`U_\text{IFD}` correspond with in-facility delivery. This
+ordering is important for the model to calibrate using the specified
+correlations.
+
+Choosing BEmONC vs. CEmONC
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Among simulants whose IFD status is "in-facility," choose BEmONC vs.
+CEmONC according to the following probabilities, independently of other
+choices in the model:
 
 Challenge of calibrating the model
 ----------------------------------
