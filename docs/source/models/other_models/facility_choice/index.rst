@@ -18,15 +18,24 @@ belief about gestational age (believed pre-term vs believed full term),
 and the related factors of antenatal care (ANC), and low birth weight
 and short gestation (LBWSG) risk exposure, we will include two novel
 affordances in our simulation: (1) correlated propensities for ANC,
-facility delivery, and LBWSG; and (2) conditional probabilities for home
-delivery that differ based on the believed term status when labor
-begins.
+delivery facility, and LBWSG; and (2) causal conditional probabilities
+for home delivery that differ based on the believed term status when
+labor begins.
 
-Coming up with values for these correlations and conditional probabilities that are consistent with GBD and external evidence is detailed at the end of this document.  But before we get to that complexity, let's start with how we will use these correlations and conditional probabilities in the simulation.
+Coming up with values for these correlations and causal probabilities that are consistent with GBD and external evidence is detailed at the end of this document.  But before we get to that complexity, let's start with how we will use these correlations and causal probabilities in the simulation.
+
+Note that the calibration procedure, and hence the values we're using
+here (i.e., the correlations and values of :math:`\Pr[\text{facility}
+\mid \operatorname{do}(\text{believed preterm status})]`) depend
+critically on the implementations of other pieces of the model that are
+described elsewhere (most notably, choice of ultrasound type given ANC
+status, and deriving an estimated gestational age from the true
+gestational age).
+
+Causal model
+------------
 
 [[Causal model diagram goes here]]
-
-Note that the calibration procedure, and hence the values we're using here (i.e., the correlations and values of P(facility | believed preterm status)) depend critically on the implementations of other pieces of the model that are described elsewhere (most notably, choice of ultrasound type given ANC status, and deriving an estimated gestational age from the true gestational age).
 
 Correlated propensities
 -----------------------
@@ -49,7 +58,9 @@ In Vivarium, we use values selected uniformly at random from the interval [0,1],
 The argument of the ``GaussianCopula`` constructor is a `correlation
 matrix`_, whose :math:`(i,j)^\text{th}` entry specifies the correlation
 between variable :math:`i` and variable :math:`j` (note that this
-implies that the matrix is symmetric with 1's on the diagonal).
+implies that the matrix is symmetric with 1's on the diagonal). The
+three "intrinsic correlations" are the values in the upper right (or
+lower left) triangle.
 
 .. _correlation matrix: https://en.wikipedia.org/wiki/Correlation#Correlation_matrices
 
@@ -72,15 +83,16 @@ or "mean draw."
        * Nigeria: 0.466
        * Pakistan: 0.406
 
-     - Correlation found from causal model optimization
+     - Correlation found from causal model optimization after the other
+       two correlations were fixed
    * - ANC Propensity
      - LBWSG Propensity
      - 0.2 (all locations)
-     - Chosen arbitrarily -- specify this value in ``model_spec.yaml``
+     - Chosen arbitrarily as a plausible value
    * - Facility Propensity
      - LBWSG Propensity
      - 0.2 (all locations)
-     - Chosen arbitrarily -- spefify this value in ``model_spec.yaml``
+     - Chosen arbitrarily as a plausible value
 
 Eventually we must put draws of consistent values in the artifact.
 
@@ -91,21 +103,21 @@ Our method of inducing correlations using a Gaussian copula is
 equivalent to specifying the `polychoric correlation
 <https://en.wikipedia.org/wiki/Polychoric_correlation>`_ between ordinal
 variables, and it relies on having a known ordering of each variable's
-values. We will follow the convention of ordering the categories of each
-categorical variable from highest risk to lowest risk (GBD often follows
-this convention for risk factors), so that smaller propensities
+values. We will follow the convention of ordering the categories of all
+categorical variables from "highest risk" to "lowest risk" (GBD often
+follows this convention for risk factors), so that smaller propensities
 correspond to higher risk and larger propensities correspond to lower
 risk.
 
-When we calibrate the model, we use an ordering of the LBWSG categories
-that we hypothesize will make them have large polychoric correlation
-with the ANC and delivery facility propensities. (The ordering also
-facilitates convergence of the optimization, whose objective function
-involves the conditional probability of preterm status given facility
-choice). Specifically, we order the LBWSG categories **first** by
-preterm status (preterm < full-term), **then** from *highest* average RR
-to *lowest* average RR in the early neonatal age group (averaged across
-all draws, separately for each sex).
+We use an ordering of the LBWSG categories that we hypothesize will make
+them have large polychoric correlation with the ANC and delivery
+facility propensities. Our chosen ordering also facilitates convergence
+of the optimization, whose objective function involves the conditional
+probability of preterm status given facility choice. Specifically, we
+order the LBWSG categories **first** by preterm status (preterm <
+full-term), **then** from *highest* average RR to *lowest* average RR in
+the early neonatal age group (averaged across all draws), separately for
+each sex.
 
 .. important::
 
@@ -117,13 +129,13 @@ all draws, separately for each sex).
     ordered in **decreasing** order by (sex-specific) average relative
     risk across draws
   * The ordering is based on the RRs for the **early neonatal** age
-    group
+    group since we're interested in the risk right after birth
 
   This ordering must be used in the LBWSG Risk component.
 
 We will also order the ANC and facility propensities from highest to
 lowest risk: "no ANC" < "some ANC"; and "home birth" < "in-facility
-birth" (or "home birth" < BEmONC < CEmONC).
+birth".
 
 To be more explicit about how the ordered categories and propensities
 work in code, if the categories are ordered from highest risk to lowest
@@ -137,27 +149,46 @@ corresponding propensity. [[A picture would probably help, should we add
 one here?]]
 
 
-Conditional delivery facility probabilities
---------------------------------------------
+Causal conditional delivery facility probabilities
+--------------------------------------------------
 
-In addition to correlation, we posit that a belief about preterm status is influential in the decision to have a home delivery.  We will model this as a conditional probability of home delivery given a belief about preterm status.  Although deriving consistent values for these conditional probabilities is complex, and described in the final section of this page, *using* the conditional probabilities is simple: simply select the facility type with :math:`\text{Pr}[\text{facility}\mid\text{believed preterm}]` and :math:`\text{Pr}[\text{facility}\mid\text{believed fullterm}]` for the corresponding cases.
+In addition to correlation, we posit that a belief about preterm status
+is influential in the decision to have a home delivery.  We will model
+this as a causal conditional probability of home delivery given a belief
+about preterm status.  Although deriving consistent values for these
+probabilities is complex, and described in the final section of this
+page, *using* the causal conditional probabilities is simple: Simply
+select in-facility delivery with probability
+:math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed
+preterm})]` or :math:`\text{Pr}[\text{in-facility}\mid
+\operatorname{do}(\text{believed full-term})]` for the corresponding
+cases, using the correlated facility propensity defined in the previous
+section.
 
-.. list-table:: Conditional Probability Stand-in Parameters
+.. list-table:: Causal conditional probabilities of in-facility delivery for mean draw
    :header-rows: 1
    :widths: 20 20 20 20
 
-   * - Belief
-     - Home
-     - BeMONC
-     - CeMONC
-   * - Term
-     - 0.25
-     - 0.10
-     - 0.65
-   * - Preterm
-     - 0.05
-     - 0.05
-     - 0.90
+   * - Causal probability
+     - Ethiopia
+     - Nigeria
+     - Pakistan
+   * - :math:`\text{Pr}[\text{at-home}\mid \operatorname{do}(\text{believed preterm})]`
+     - 0.38
+     - 0.27
+     - 0.11
+   * - :math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed preterm})]`
+     - 1 - 0.38
+     - 1 - 0.27
+     - 1 - 0.11
+   * - :math:`\text{Pr}[\text{at-home}\mid \operatorname{do}(\text{believed full-term})]`
+     - 0.55
+     - 0.55
+     - 0.29
+   * - :math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed full-term})]`
+     - 1 - 0.55
+     - 1 - 0.55
+     - 1 - 0.29
 
 Challenge of calibrating the model
 ----------------------------------
