@@ -183,8 +183,9 @@ for each sex.**
     group since we're interested in the risk right after birth
 
   This ordering must be used when initializing the LBWSG category from
-  its (correlated) propensity :math:`u_\text{cat}` as described on the
-  :ref:`LBWSG risk exposure page <2019_risk_exposure_lbwsg>`.
+  its (correlated) propensity :math:`u_\text{cat}`, following the
+  strategy described on the :ref:`LBWSG risk exposure page
+  <2019_risk_exposure_lbwsg>`.
 
 **We will also order the ANC and IFD propensities from highest to lowest
 risk: "no ANC" < "some ANC"; and "home birth" < "in-facility birth".**
@@ -201,8 +202,8 @@ work in code, if the categories are ordered from highest risk to lowest
 risk as :math:`c_1, \dotsc, c_n`, divide the unit interval :math:`[0,1]`
 into :math:`n` subintervals :math:`I_1, \dotsc, I_n` ordered from left
 to right, such that the length of :math:`I_j` is :math:`P(c_j)`. Then a
-uniform propensity :math:`p \in [0,1]` corresponds to category
-:math:`c_j` precisely when :math:`p \in I_j`. This correspondence
+uniform propensity :math:`u \in [0,1]` corresponds to category
+:math:`c_j` precisely when :math:`u \in I_j`. This correspondence
 specifies how each ordinal variable should be initialized from its
 corresponding propensity. [[A picture would probably help, should we add
 one here?]]
@@ -218,12 +219,11 @@ about preterm status.  Although deriving consistent values for these
 probabilities is complex, and described in the final section of this
 page, *using* the causal conditional probabilities is simple: Simply
 select in-facility delivery with probability
-:math:`\text{Pr}[\text{in-facility}\mid
-\operatorname{do}(\text{believed preterm})]`
-or :math:`\text{Pr}[\text{in-facility}\mid
-\operatorname{do}(\text{believed full-term})]` for the corresponding
-cases, using the correlated IFD propensity defined in the previous
-section.
+:math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed preterm})]`
+or
+:math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed full-term})]`
+for the corresponding cases, using the correlated IFD propensity and
+category ordering defined in the previous section.
 
 .. list-table:: Causal conditional probabilities of in-facility delivery for mean draw
    :header-rows: 1
