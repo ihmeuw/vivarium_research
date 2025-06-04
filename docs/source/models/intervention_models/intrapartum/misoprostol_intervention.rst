@@ -42,13 +42,13 @@ Misoprostol is an intramuscular prophylactic prostaglandin that can be taken ora
 misoprostol is stable and water-soluble at ambient temperatures, can be taken orally or sublingually, and is inexpensive, it has been shown to be well-suited 
 for the prevention of maternal hemorrhage in community or at-home settings where injectible conventional uterotonics are not available ([Alfirevic-et-al-2007-pph_prevention]_).
 
-The most up-to-date WHO recommendation ([WHO-2020]_) on misoprostol use for PPH prevention states that "In settings where 
+The most up-to-date WHO recommendation ([WHO-2020]_) on misoprostol use for maternal hemorrhage prevention states that "In settings where 
 women give birth outside of a health facility and in the absence of skilled health personnel, a strategy of antenatal distribution of misoprostol
 to pregnant women for self-administration is recommended for prevention of postpartum haemorrhage, only with targeted monitoring and evaluation." 
 In line with this recommendation, we will model a misoprostol intervention in which women who attend antenatal care (ANC) facilities are eligible to 
 receive an advanced distribution of misoprostol for self-administration during a home birth. Because misoprostol is not as effective as conventional 
 uterotonics (i.e., oxytocin) in prevention of maternal hemorrhage, we will not model the distribution of misoprostol in BEmONC or CEmONC facilities where injectible 
-uterotonics are more widely available ([Tunçalp-2012-Cochrane-Review]_).
+uterotonics are more widely available ([Tunçalp-2012-Cochrane-Review]_). 
 
 This section describes how a misoprostol intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 See the :ref:`Maternal hemorrhage cause model <2021_cause_maternal_hemorrhage_mncnh>` for relevant details.
@@ -109,7 +109,7 @@ This intervention requires adding an attribute to all simulants who attended ANC
 receives misoprostol during labor or not.  We will track this and the model will have different incidence rates for maternal hemorrhage for individuals with and without 
 misoprostol (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
 
-The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has misoprostol during the intrapartum period. Only simulants who attended ANC
+The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has received misoprostol during the intrapartum period. Only simulants who attended ANC
 during pregnancy and who give birth at home are eligible for this intervention.
 
 To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "no misoprostol".  With this framing, the ``RiskEffect`` 
@@ -234,16 +234,15 @@ Assumptions and Limitations
 - We assume that baseline coverage for misoprostol in home births is 5% (this is not data-backed).
 - We do not model use of misoprostol for prevention of maternal hemorrhage in BEmONC and CEmONC facilities based on the [WHO-2020]_ recommendation and with
   the assumption that BEmONC and CEmONC facilities in our locations of interest have injectible uterotonics such as oxytocin widely available for the 
-  prevention of maternal hemorrhage.
-- We assume that the programmes of advanced misoprostol distribution that we are modeling have been appropriately implemeted in accordance with the [WHO-2020]_ recommendation,
-  such that women and birthing parents (or skilled birth attendants) have been properly trained with how to use it (e.g., timing, dosage of 400-600 micrograms).
+  prevention of maternal hemorrhage. (Note: in 2020, our team did a literature review of uterotonic coverage in facility settings in LMICs, the DRC, India, 
+  Kenya, and Nigeria, and found 0-1% of facilities had misoprostol available for PPH prevention and 43-94% of facilities had oxytocin available).
+- We assume that the programmes of advanced misoprostol distribution that we are modeling have been appropriately implemented in accordance with the [WHO-2020]_ recommendation,
+  such that women and birthing parents have been properly trained with how to use it (e.g., timing, dosage of 400-600 micrograms).
 
 .. todo::
 
   - If more suitable baseline coverage data for misoprostol use for maternal hemorrhage in home settings  
-  - Decide if we should model baseline coverage of injectible oxytocin in facility settings? Or some baseline coverage of misoprostol in facility settings? (Note: in 2020, our team 
-    did a literature review of uterotonic coverage in facility settings in LMICs, the DRC, India, Kenya, and Nigeria, and found 0-1% of facilities had misoprostol available for PPH 
-    prevention and 43-94% of facilities had oxytocin available).
+  - Decide if we should model baseline coverage of injectible oxytocin in facility settings? Or some baseline coverage of misoprostol in facility settings? 
 
 Validation and Verification Criteria
 ------------------------------------
