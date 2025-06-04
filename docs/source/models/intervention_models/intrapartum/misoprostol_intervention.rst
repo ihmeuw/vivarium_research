@@ -223,7 +223,7 @@ Assumptions and Limitations
 - We assume that the relative risk of maternal hemorrhage incidence with misoprostol in practice is a value that we can find in the literature (Note: 
   the value we are using is from [Tunçalp-2012-Cochrane-Review]_.)
 - We only consider the use of misoprostol in the prevention of maternal hemorrhage, despite other documented clinical uses of misoprostol,
-  such as for therapeutic abortion, despite our inclusion of partial term pregnancies in this model.
+  such as for therapeutic abortion.
 - We currenty do not model the increased risk of hyperpyrexia due to misoprostol consumption, because this adverse effect is most likely to occur 
   when dosage is higher than the recommended 600 micrograms of misoprostol. (Note: [Hofmeyr-et-al-2013-Cochrane-Review]_ found that "Pyrexia (defined as body temperature over 38°C) was increased with misoprostol compared 
   with controls (56 studies, 2776/25,647 (10.8%) versus 614/26,800 (2.3%); average RR 3.97, 95% CI 3.13 to 5.04; Tau² = 0.47, I² = 80%). The effect 
@@ -240,6 +240,9 @@ Assumptions and Limitations
 .. todo::
 
   - If more suitable baseline coverage data for misoprostol use for maternal hemorrhage in home settings  
+  - Decide if we should model baseline coverage of injectible oxytocin in facility settings? Or some baseline coverage of misoprostol in facility settings? (Note: in 2020, our team 
+    did a literature review of uterotonic coverage in facility settings in LMICs, the DRC, India, Kenya, and Nigeria, and found 0-1% of facilities had misoprostol available for PPH 
+    prevention and 43-94% of facilities had oxytocin available).
 
 Validation and Verification Criteria
 ------------------------------------
