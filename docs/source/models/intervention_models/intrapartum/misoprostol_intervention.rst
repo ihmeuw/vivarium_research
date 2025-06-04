@@ -89,7 +89,8 @@ administration of misoprostol is not data-backed, so we will need to update this
     - Home Birth
     - 5
     - N/A
-    - Assumption; need to investigate data sources for care seeking those giving birth outside of the hospital system 
+    - This is a placeholder value that we will replace after further investigation of data sources for care seeking those giving birth outside of the hospital system.
+      This will be a location-specific value, please code accordingly. 
   * - All (Ethiopia, Nigeria, Pakistan)
     - BEmONC and CEmONC Facilities
     - 0
