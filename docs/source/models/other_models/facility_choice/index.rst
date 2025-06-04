@@ -18,16 +18,16 @@ belief about gestational age (believed pre-term vs believed full term),
 and the related factors of antenatal care (ANC), and low birth weight
 and short gestation (LBWSG) risk exposure, we will include two novel
 affordances in our simulation: (1) correlated propensities for ANC,
-delivery facility, and LBWSG; and (2) causal conditional probabilities
-for home delivery that differ based on the believed term status when
-labor begins.
+in-facility delivery (IFD), and LBWSG category; and (2) causal
+conditional probabilities for in-facility delivery that differ based on
+the believed term status when labor begins.
 
 As a simplification, we will model the choice of delivery location in
 two steps: First, the birthing person decides whether to deliver at home
 or go to a facility, depending on the believed preterm status at the
-start of labor. Then, among simulants choosing in-facility delivery
-(IFD), we will randomly assign simulants to BEmONC or CEmONC facilities,
-independent of other choices that have been made.
+start of labor. Then, among simulants delivering in-facility, we will
+randomly assign simulants to BEmONC or CEmONC facilities, independent of
+other choices that have been made.
 
 Coming up with values for the needed correlations and causal
 probabilities that are consistent with GBD and external evidence is
@@ -36,12 +36,13 @@ complexity, let's start with how we will use these correlations and
 causal probabilities in the simulation.
 
 Note that the calibration procedure, and hence the values we're using
-here (i.e., the correlations and values of :math:`\Pr[\text{IFD status}
-\mid \operatorname{do}(\text{believed preterm status})]`) depend
-critically on the implementations of other pieces of the model that are
-described elsewhere (most notably, choice of ultrasound type given ANC
-status, and deriving an estimated gestational age from the true
-gestational age).
+here (i.e., the correlations and the values of
+:math:`\Pr[\text{IFD status} \mid \operatorname{do}(\text{believed preterm status})]`)
+depend critically on the implementations of other pieces of the model
+that are described elsewhere (most notably, choice of ultrasound type
+given ANC status, and deriving an estimated gestational age from the
+true gestational age -- see the :ref:`AI Ultrasound Module
+<2024_vivarium_mncnh_portfolio_ai_ultrasound_module>` for more details).
 
 Causal model
 ------------
@@ -51,7 +52,12 @@ Causal model
 Correlated propensities
 -----------------------
 
-This section describes how we will model an "instrisic correlation" of ANC, home delivery, and LBWSG.  In short, we will use a Gaussian copula to model this, which has three parameters capturing the correlation between each pair of the three propensities.
+This section describes how we will model an "instrisic correlation" of
+ANC, home delivery, and LBWSG (see also the :ref:`Initial attributes
+module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`). In
+short, we will use a Gaussian copula to model this, which has three
+parameters capturing the correlation between each pair of the three
+propensities.
 
 The motivation for these correlations is as follows: we hypothesize that there are important "common causes" that are not shown explicitly in the diagram above.  For example, having a home delivery and having no ANC visits might both be influenced by rurality --- if all health services are offered far away, it is logical that people will be able to access them less.
 Similarly, it is likely that there are social exclusion factors causing both exposure to LBWSG risk and lack of access to ANC and in-facility birth.
@@ -87,40 +93,63 @@ triangle.
 
 .. _correlation matrix: https://en.wikipedia.org/wiki/Correlation#Correlation_matrices
 
-We may eventually specify
-draw-level estimates of each model parameter, but for now we will
-specify a single value for each location, representing our best estimate
-or "mean draw."
+We may eventually specify draw-level estimates of each model parameter,
+but for now we will specify a single set of consistent parameters for
+each location, representing our best estimate or "mean draw" of the
+parameters.
 
 .. list-table:: Propensity correlations for mean draw
-   :header-rows: 1
-   :widths: 10 10 20 20
+  :header-rows: 1
+  :widths: 10 10 10 10 10 20
 
-   * - Factor A
-     - Factor B
-     - Correlation
-     - Notes
-   * - ANC Propensity
-     - IFD Propensity
-     - * Ethiopia: 0.643
-       * Nigeria: 0.466
-       * Pakistan: 0.406
+  * - Factor A
+    - Factor B
+    - Ethiopia
+    - Nigeria
+    - Pakistan
+    - Notes
+  * - ANC propensity :math:`u_\text{ANC}`
+    - IFD propensity :math:`u_\text{IFD}`
+    - 0.64
+    - 0.47
+    - 0.41
+    - Correlation found from causal model optimization after the other
+      two correlations were fixed
+  * - ANC propensity :math:`u_\text{ANC}`
+    - LBWSG category propensity :math:`u_\text{cat}`
+    - 0.2
+    - 0.2
+    - 0.2
+    - Chosen arbitrarily as a plausible value
+  * - IFD propensity :math:`u_\text{IFD}`
+    - LBWSG category propensity :math:`u_\text{cat}`
+    - 0.2
+    - 0.2
+    - 0.2
+    - Chosen arbitrarily as a plausible value
 
-     - Correlation found from causal model optimization after the other
-       two correlations were fixed
-   * - ANC Propensity
-     - LBWSG Propensity
-     - 0.2 (all locations)
-     - Chosen arbitrarily as a plausible value
-   * - IFD Propensity
-     - LBWSG Propensity
-     - 0.2 (all locations)
-     - Chosen arbitrarily as a plausible value
+.. note::
 
-Eventually we must put draws of consistent values in the artifact.
+  The causal model has 5 independent unknown parameters (3 correlations
+  and 2 causal probabilities), but we have insufficient data to solve
+  for all of them. Consequently, we fix two of the correlations and run
+  the optimization to find the other three parameters (the third
+  correlation and the two causal probabilities). Eventually we will want
+  to run sensitivity analyses where we change the values of the fixed
+  correlations (currently set to 0.2 in the table above), which requires
+  updating the other three parameters to consistent values based on the
+  results of the causal model optimization.
 
-Special ordering of the categories
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  One way to do this would be to specify the two fixed correlations in
+  ``model_spec.yaml`` and use a branches file to run parallel sims with
+  different values, but this would require Vivarium to call the
+  optimization code, which takes 10-15 minutes to run. Alternatively, we
+  could precompute several sets of consistent parameters, and then
+  different scenarios would only have to specify which set of values to
+  use.
+
+Special ordering of the categories for categorical variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Our method of inducing correlations using a Gaussian copula is
 equivalent to specifying the `polychoric correlation
@@ -132,19 +161,19 @@ follows this convention for risk factors), so that larger propensities
 are generally "better" for the simulant.
 
 We use an ordering of the LBWSG categories that we hypothesize will make
-them have large polychoric correlation with the ANC and delivery
-facility propensities. Our chosen ordering also facilitates convergence
-of the optimization, whose objective function involves the conditional
-probability of preterm status given facility choice. Specifically, we
-order the LBWSG categories **first** by preterm status (preterm <
-full-term), **then** from *highest* average RR to *lowest* average RR in
-the early neonatal age group (averaged across all draws), separately for
-each sex.
+them have large polychoric correlation with the ANC and IFD
+propensities. Our chosen ordering also facilitates convergence of the
+causal model optimization, whose objective function involves the
+conditional probability of preterm status given facility choice.
+**Specifically, we order the LBWSG categories first by preterm status
+(preterm < full-term), then from highest average RR to lowest average RR
+in the early neonatal age group (averaged across all draws), separately
+for each sex.**
 
 .. important::
 
-  * All preterm categories are ordered **before** all full-term
-    categories
+  * All preterm categories (:math:`< 37` weeks) are ordered **before** all full-term
+    categories (:math:`\ge 37` weeks)
   * The ordering is **sex-specific** (the ordering is different for
     males and females)
   * Within each term status (preterm or full-term), LBWSG categories are
@@ -153,11 +182,19 @@ each sex.
   * The ordering is based on the RRs for the **early neonatal** age
     group since we're interested in the risk right after birth
 
-  This ordering must be used in the LBWSG Risk component.
+  This ordering must be used when initializing the LBWSG category from
+  its (correlated) propensity :math:`u_\text{cat}` as described on the
+  :ref:`LBWSG risk exposure page <2019_risk_exposure_lbwsg>`.
 
-We will also order the ANC and IFD propensities from highest to
-lowest risk: "no ANC" < "some ANC"; and "home birth" < "in-facility
-birth".
+**We will also order the ANC and IFD propensities from highest to lowest
+risk: "no ANC" < "some ANC"; and "home birth" < "in-facility birth".**
+These orderings must be used when initializing simulants' ANC status and
+IFD status from the corresponding (correlated) propensities
+:math:`u_\text{ANC}` and :math:`u_\text{IFD}`. See the :ref:`Antenatal
+care attendance module <2024_vivarium_mncnh_portfolio_anc_module>` for
+more details on assigning ANC status; see the `Causal conditional
+probabilities for in-facility delivery`_ section below for an explicit
+description of how to assign IFD status.
 
 To be more explicit about how the ordered categories and propensities
 work in code, if the categories are ordered from highest risk to lowest
@@ -253,7 +290,8 @@ For reference when validating the model, the in-facility delivery
 proportions from GBD 2021 (covariate ID 51, "In-Facility Delivery
 (proportion)") are listed below. The observed overall IFD proportions in
 the simulation should match these values, but these probabilities will
-not be used directly in the simulation.
+not be used directly in the simulation (they were used as one of the
+inputs in calibrating the model to find the causal probabilities above).
 
 .. list-table:: Proportion of at-home vs. in-facility deliveries
   :header-rows: 1
