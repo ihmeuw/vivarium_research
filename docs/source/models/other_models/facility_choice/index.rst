@@ -215,28 +215,62 @@ section.
 
 More explicitly, given the simulant's believed term status (either
 "believed preterm" or "believed full-term") and their IFD propensity,
-:math:`U_\text{IFD}`, the simulant's IFD status is given by the
+:math:`u_\text{IFD}`, the simulant's IFD status is given by the
 following function :math:`f_\text{IFD}`:
 
 .. math::
 
   \begin{align*}
   \text{IFD status}
-  &= f_\text{IFD}(\text{believed term status},\ U_\text{IFD}) \\
+  &= f_\text{IFD}(\text{believed term status},\ u_\text{IFD}) \\
   &=  \begin{cases}
-      \text{at-home}, & \text{if}\quad U_\text{IFD}
+      \text{at-home}, & \text{if}\quad u_\text{IFD}
           < \text{Pr}[\text{at-home} \mid
           \operatorname{do}(\text{believed term status})] \\
       \text{in-facility}, & \text{otherwise}.
       \end{cases}
   \end{align*}
 
-Note that, as described in the previous section, the function
-:math:`f_\text{IFD}` is defined so that smaller values of
-:math:`U_\text{IFD}` correspond with home delivery, while larger values
-of :math:`U_\text{IFD}` correspond with in-facility delivery. This
+Note that, as described in the previous section,  smaller values of
+:math:`u_\text{IFD}` correspond with home delivery, while larger values
+of :math:`u_\text{IFD}` correspond with in-facility delivery. This
 ordering is important for the model to calibrate using the specified
-correlations.
+propensity correlations. The function :math:`f_\text{IFD}` is one of the
+`structural equations`_ defining the causal model drawn above.
+
+.. _structural equations: https://en.wikipedia.org/wiki/Structural_equation_modeling
+
+.. note::
+
+  The above probabilities represent the *causal* effect of a simulant's
+  believed term status on their choice of home delivery or in-facility
+  delivery. These will be different from the population's *observed*
+  conditional probabilities of IFD status given the believed term
+  status, because of the correlations of :math:`u_\text{IFD}` with
+  :math:`u_\text{ANC}` and :math:`u_\text{cat}`.
+
+For reference when validating the model, the in-facility delivery
+proportions from GBD 2021 (covariate ID 51, "In-Facility Delivery
+(proportion)") are listed below. The observed overall IFD proportions in
+the simulation should match these values, but these probabilities will
+not be used directly in the simulation.
+
+.. list-table:: Proportion of at-home vs. in-facility deliveries
+  :header-rows: 1
+  :widths: 20 10 10 10
+
+  * - IFD status
+    - Ethiopia
+    - Nigeria
+    - Pakistan
+  * - at-home
+    - 0.507432
+    - 0.479903
+    - 0.228234
+  * - in-facility
+    - 0.492568
+    - 0.520097
+    - 0.771766
 
 Choosing BEmONC vs. CEmONC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -244,6 +278,29 @@ Choosing BEmONC vs. CEmONC
 Among simulants whose IFD status is "in-facility," choose BEmONC vs.
 CEmONC according to the following probabilities, independently of other
 choices in the model:
+
+.. list-table:: Conditional probabilities of BEmONC and CEmONC given in-facility delivery
+  :header-rows: 1
+  :widths: 20 10 10 10
+
+  * - Conditional probability
+    - Ethiopia
+    - Nigeria
+    - Pakistan
+  * - :math:`\text{Pr}[\text{BEmONC}\mid \text{in-facility}]`
+    -
+    -
+    -
+  * - :math:`\text{Pr}[\text{CEmONC}\mid \text{in-facility}]`
+    -
+    -
+    -
+
+.. todo::
+
+  Update the above probabilities once we get better data from Annie's
+  team. The current values are based on an imprecise analysis of DHS
+  data and likely underestimate the proportion of BEmONC facilities.
 
 Challenge of calibrating the model
 ----------------------------------
