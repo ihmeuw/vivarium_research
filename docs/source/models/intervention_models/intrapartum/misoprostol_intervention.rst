@@ -31,21 +31,24 @@ Misoprostol for treating maternal hemorrhage
     - Antenatal Care 
     - 
   * - PPH
-    - Postpartum Hemmorrhage
-    - For consistency with GBD Causes, we use the term 'maternal hemorrhage' instead of PPH throughout the course of this document.
+    - Postpartum Hemorrhage
+    - For consistency with the official GBD Cause list and our :ref:`Maternal hemorrhage cause model <2021_cause_maternal_hemorrhage_mncnh>`,
+      we use the term 'maternal hemorrhage' instead of PPH throughout the course of this document.
 
 Intervention Overview
 -----------------------
 
-Misoprostol is an intramuscular prostaglandin that can be taken orally or sublingually during labor to prevent or reduce incidence of maternal hemorrhage. Because 
-misoprostol is stable at ambient temperatures, can be taken orally or sublingually, and is inexpensive, it has been shown to be well-suited 
-for the prevention of maternal hemorrhage in community or at-home settings where injectible conventional uterotonics are not available.[Alfirevic-et-al-2007-pph_prevention]_
+Misoprostol is an intramuscular prophylactic prostaglandin that can be taken orally or sublingually during labor to prevent or reduce incidence of maternal hemorrhage. Because 
+misoprostol is stable and water-soluble at ambient temperatures, can be taken orally or sublingually, and is inexpensive, it has been shown to be well-suited 
+for the prevention of maternal hemorrhage in community or at-home settings where injectible conventional uterotonics are not available ([Alfirevic-et-al-2007-pph_prevention]_).
 
-In line with the WHO Essential Medicines List which approved misoprostol “for the prevention of PPH in settings where 
-oxytocin is not available or cannot be safely used” ([WHO-2011]_), we will model a misoprostol intervention in which 
-women who attend antenatal care (ANC) facilities are eligible to receive an advanced distribution of misoprostol for self-administration
-during a home birth. Because misoprostol is not as effective as conventional uterotonics in prevention of maternal hemorrhage, we will
-not model the distribution of misoprostol in BEmONC or CEmONC facilities where injectible uterotonics are more widely available.[Tunçalp-2012-Cochrane-Review]_
+The most up-to-date WHO recommendation ([WHO-2020]_) on misoprostol use for PPH prevention states that "In settings where 
+women give birth outside of a health facility and in the absence of skilled health personnel, a strategy of antenatal distribution of misoprostol
+to pregnant women for self-administration is recommended for prevention of postpartum haemorrhage, only with targeted monitoring and evaluation." 
+In line with this recommendation, we will model a misoprostol intervention in which women who attend antenatal care (ANC) facilities are eligible to 
+receive an advanced distribution of misoprostol for self-administration during a home birth. Because misoprostol is not as effective as conventional 
+uterotonics (i.e., oxytocin) in prevention of maternal hemorrhage, we will not model the distribution of misoprostol in BEmONC or CEmONC facilities where injectible 
+uterotonics are more widely available ([Tunçalp-2012-Cochrane-Review]_).
 
 This section describes how a misoprostol intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 See the :ref:`Maternal hemorrhage cause model <2021_cause_maternal_hemorrhage_mncnh>` for relevant details.
@@ -92,7 +95,7 @@ administration of misoprostol is not data-backed, so we will need to update this
     - 0
     - N/A
     - We are only interested in modeling the impact of misoprostol on home births, not in-facility births, where mothers
-    and birthing parents should have access to more effective injectible uterotonics.[Tunçalp-2012-Cochrane-Review]_
+      and birthing parents should have access to more effective injectible uterotonics. [Tunçalp-2012-Cochrane-Review]_
 
 .. todo:: 
 
@@ -184,9 +187,9 @@ incidence rate.
     \end{align*}
 
 where :math:`p(\text{maternal_hemorrhage})` is the probability of contracting maternal hemorrhage in the general population, and :math:`p(\text{maternal_hemorrhage}|\text{misoprostol})` and
-:math:`p(\text{maternal_hemorrhage}|\text{no misoprostol})` are the probability of contracting maternal hemorrhage in settings with and without receiving misoprostol.  For each 
-path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and 
-unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the simulant receives misoprostol.
+:math:`p(\text{maternal_hemorrhage}|\text{no misoprostol})` are the probability of contracting maternal hemorrhage with and without receiving misoprostol.  For each 
+path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled Home and 
+not received occurs with probability that the birth is at home times the probability that the simulant receives misoprostol.
 
 When we fill in the location-specific values for delivery facility rates, misoprostol coverage, relative risk of maternal hemorrhage incidence with misoprostol, 
 and maternal hemorrhage incidence probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{maternal_hemorrhage}|\text{misoprostol})` 
@@ -217,33 +220,26 @@ Since our risk exposure has two categories,
 Assumptions and Limitations
 ---------------------------
 
-- We assume that misoprostol availability captures actual use, and not simply the treatment being in the facility. 
-- We assume that the delivery facility is also the facility where a mother or birthing person will seek care for maternal hemorrhage.
 - We assume that the relative risk of maternal hemorrhage incidence with misoprostol in practice is a value that we can find in the literature (Note: 
-  the value we are using is from [Ye-et-al-2024-misoprostol-during-labor]_.)
-- We have excluded the effect of misoprostol on pneumonia incidence/mortality, because this cause is currently lumped with 'other causes'.
-- We currenty do not model the impact of misoprostol taken during pregnancy on the incidence of preterm births, despite *some* literature
-  evidence that suggests there may be a significant impact. Currently, we are ony modeling the impact of misoprostol taken during labor, rather
-  than during pregnancy. We may include in a future iteration of this model the use of misoprostol during pregnancy as a treatment for sexually
-  transmitted infections, in which case we may reassess this limitation. For reference, [Hume-Nizon-et-al-2021-misoprostol-during-pregnancy]_
-  found an RR of 0.79 (95% CI 0.68-0.93) for LBW and an RR of 0.87 (95% CI 0.78-0.98) for premature births. They also reported an 
-  increase in stillbirth incidence. However, more recent publications (the 2024 review referenced above and [Antonucci-et-al-2022-misoprostol-during-pregnancy]_) 
-  have reported that there is no conclusive evidence to support that misoprostol use by pregnant women causes adverse 
-  neonatal outcomes. 
-- We also do not currently model the impact intrapartum misoprostol has on preventing maternal hemorrhage in partial term pregnancies. In our 
-  :ref:`Maternal hemorrhage and other maternal infections cause model <2021_cause_maternal_hemorrhage_mncnh>`, we only model full term pregnancies as 
-  at-risk for maternal hemorrhage.
-- We assume that [Saleem-et-al-2025-intrapartum-antibiotic-use]_ provides an accurate overview of prophylactic intrampratum antibiotic use in our locations of interest.
-  As such, we assume baseline coverage of intrapartum misoprostol use in African sites is basically zero (despite EmONC 2016, SARA 2016, and SARA 2018 reporting the
-  presence of intrapartum antibiotics in hospitals to be nonzero - we assume these are given to mothers or birthing parents after delivery, which is not the intervention
-  we are modeling here). There was a baseline coverage of 20.3% for Pakistan hospitals though, which we assume is accurate.
-- We assume that baseline coverage for misoprostol in home births is 0% (this is not data-backed).
+  the value we are using is from [Tunçalp-2012-Cochrane-Review]_.)
+- We only consider the use of misoprostol in the prevention of maternal hemorrhage, despite other documented clinical uses of misoprostol,
+  such as for therapeutic abortion, despite our inclusion of partial term pregnancies in this model.
+- We currenty do not model the increased risk of hyperpyrexia due to misoprostol consumption, because this adverse effect is most likely to occur 
+  when dosage is higher than the recommended 600 micrograms of misoprostol. (Note: [Hofmeyr-et-al-2013-Cochrane-Review]_ found that "Pyrexia (defined as body temperature over 38°C) was increased with misoprostol compared 
+  with controls (56 studies, 2776/25,647 (10.8%) versus 614/26,800 (2.3%); average RR 3.97, 95% CI 3.13 to 5.04; Tau² = 0.47, I² = 80%). The effect 
+  was greater for trials using misoprostol 600 µg or more (27 studies; 2197/17,864 (12.3%) versus 422/18,161 (2.3%); average RR 4.64; 95% CI 3.33 to 
+  6.46; Tau² = 0.51, I² = 86%) than for those using misoprostol 400 µg or less (31 studies; 525/6751 (7.8%) versus 185/7668 (2.4%); average RR 3.07; 
+  95% CI 2.25 to 4.18; Tau² = 0.29, I² = 58%)".)
+- We assume that baseline coverage for misoprostol in home births is 5% (this is not data-backed).
+- We do not model use of misoprostol for prevention of maternal hemorrhage in BEmONC and CEmONC facilities based on the [WHO-2020]_ recommendation and with
+  the assumption that BEmONC and CEmONC facilities in our locations of interest have injectible uterotonics such as oxytocin widely available for the 
+  prevention of maternal hemorrhage.
+- We assume that the programmes of advanced misoprostol distribution that we are modeling have been appropriately implemeted in accordance with the [WHO-2020]_ recommendation,
+  such that women and birthing parents (or skilled birth attendants) have been properly trained with how to use it (e.g., timing, dosage of 400-600 micrograms).
 
 .. todo::
 
-  - If more suitable baseline coverage data for misoprostol use for maternal hemorrhage in CEmONC settings for Nigeria and Ethiopia or BEmONC settings for all locations, 
-    we will update accordingly.
-  - We need to decide if/how we would model the effect of intrapartum misoprostol on preterm incidence. 
+  - If more suitable baseline coverage data for misoprostol use for maternal hemorrhage in home settings  
 
 Validation and Verification Criteria
 ------------------------------------
@@ -259,8 +255,11 @@ References
 .. [Alfirevic-et-al-2007-pph_prevention]
   Alfirevic, Z., Blum, J., Walraven, G., Weeks, A. and Winikoff, B. (2007), Prevention of postpartum hemorrhage with misoprostol. International Journal of Gynecology & Obstetrics, 99: S198-S201. https://doi.org/10.1016/j.ijgo.2007.09.012
 
+.. [Hofmeyr-et-al-2013-Cochrane-Review]
+  Hofmeyr GJ, Gülmezoglu AM, Novikova N, Lawrie TA. Postpartum misoprostol for preventing maternal mortality and morbidity. Cochrane Database of Systematic Reviews 2013, Issue 7. Art. No.: CD008982. DOI: 10.1002/14651858.CD008982.pub2. 
+    
 .. [Tunçalp-2012-Cochrane-Review]
-  Tunçalp Ö, Hofmeyr GJ, Gülmezoglu AM. Prostaglandins for preventing postpartum haemorrhage. Cochrane Database of Systematic Reviews 2012, Issue 8. Art. No.: CD000494. DOI: 10.1002/14651858.CD000494.pub4. Accessed 02 June 2025.
-  
-.. [WHO-2011]
-  WHO Expert Committee on Essential Medicines. Unedited report of the 18th Expert Committee on the Selection and Use of Essential Medicines. WHO, 2011.
+  Tunçalp Ö, Hofmeyr GJ, Gülmezoglu AM. Prostaglandins for preventing postpartum haemorrhage. Cochrane Database of Systematic Reviews 2012, Issue 8. Art. No.: CD000494. DOI: 10.1002/14651858.CD000494.pub4.
+
+.. [WHO-2020]
+  WHO recommendation on advance misoprostol distribution to pregnant women for prevention of postpartum haemorrhage. Geneva: World Health Organization; 2020. Licence: CC BY-NC-SA 3.0 IGO. https://iris.who.int/bitstream/handle/10665/336310/9789240013902-eng.pdf?sequence=1 
