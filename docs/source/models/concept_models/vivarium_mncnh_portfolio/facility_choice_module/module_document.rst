@@ -56,7 +56,7 @@ There is a significant amount of background research and analysis that has gone 
     - Source module
     - Application
     - Note
-  * - Delivery facility propensity value
+  * - In-facility delivery (IFD) propensity value
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - Used to determine home birth exposure by comparing to the believed gestational age-specific delivery facility probability values located in the "Conditional delivery facility probabilities" section of the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`. Note that ordering of the delivery facilities is important: see the "Special ordering of the categories" section of the facility choice model document.
     - 
