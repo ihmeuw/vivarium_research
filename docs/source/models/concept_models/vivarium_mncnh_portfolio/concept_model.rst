@@ -943,7 +943,8 @@ Default stratifications to all observers should include scenario and input draw.
     - Same modifications as run 7.0.1
     - Default
   * - 8.1.1*
-    - Age/sex/location/draw-specific LBWSG RR caps
+    - * Implement age/sex/location/draw-specific LBWSG RR caps (details to come)
+      * Update LNN LBWSG PAF calculation to use LBWSG exposure at 7 days of life (details to come)
     - Baseline
     - ``model8.1.1``
     - Default
@@ -1191,7 +1192,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 8.1
-    - * Neonatal mortality is expected to validate to GBD targets (no longer be underestimated!)
+    - * Early neonatal mortality is expected to validate to GBD targets (no longer be underestimated!). Note that LNN mortality may not exactly validate because we have not yet updated the LNN LBWSG PAF calculation to use exposure specific to the population at 7 days of life.
       * Check that LBWSG effects are updated and functioning as expected
       * Check that intervention effect sizes are maintained too
     - 
