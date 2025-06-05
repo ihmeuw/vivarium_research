@@ -1,8 +1,8 @@
 .. _intervention_neonatal_antibiotics:
 
-===================================================================================
-Antibiotics for treating possible severe bacterial infections (PSBI) in newborns
-===================================================================================
+==========================================================================================================
+Program for outpatient antibiotic management of possible severe bacterial infections (PSBI) in newborns
+==========================================================================================================
 
 .. contents::
    :local:
