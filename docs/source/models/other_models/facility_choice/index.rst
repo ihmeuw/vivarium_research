@@ -142,7 +142,7 @@ parameters.
 
   One way to do this would be to specify the two fixed correlations in
   ``model_spec.yaml`` and use a branches file to run parallel sims with
-  different values, but this would require Vivarium to call the
+  different values, but this would require the simulation to call the
   optimization code, which takes 10-15 minutes to run. Alternatively, we
   could precompute several sets of consistent parameters, and then
   different scenarios would only have to specify which set of values to
@@ -172,8 +172,8 @@ for each sex.**
 
 .. important::
 
-  * All preterm categories (:math:`< 37` weeks) are ordered **before** all full-term
-    categories (:math:`\ge 37` weeks)
+  * All preterm categories (< 37 weeks) are ordered **before** all
+    full-term categories (37+ weeks)
   * The ordering is **sex-specific** (the ordering is different for
     males and females)
   * Within each term status (preterm or full-term), LBWSG categories are
