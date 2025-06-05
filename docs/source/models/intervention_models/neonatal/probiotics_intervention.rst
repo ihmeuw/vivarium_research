@@ -28,6 +28,10 @@ Probiotics for treating bacterial infections
 Intervention Overview
 -----------------------
 
+**Research background**
+
+A recent review has evaluated several interventions to prevent and treat infection in newborns []
+
 Probiotics might be used to prevent bacterial infections in neonates, reducing the risk mortality.
 
 This section describes how a probiotic-treatment intervention can be implemented and calibrated for the 
@@ -261,5 +265,10 @@ Validation and Verification Criteria
 References
 ------------
 
-* https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD005496.pub4/full 
+.. [Cochrane-Review-Probiotics]
 
+  `AlFaleh K, Anabrees J. Probiotics for prevention of necrotizing enterocolitis in preterm infants. Cochrane Database of Systematic Reviews 2014, Issue 4. Art. No.: CD005496. DOI: 10.1002/14651858.CD005496.pub4. Accessed 05 June 2025. <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD005496.pub4/full>`_
+
+.. [Lee-Him-et-al-2025]
+
+  `Lee Him R, Rehman S, Sihota D, Yasin R, Azhar M, Masroor T, Naseem HA, Masood L, Hanif S, Harrison L, Vaivada T, Sankar MJ, Dramowski A, Coffin SE, Hamer DH, Bhutta ZA. Prevention and Treatment of Neonatal Infections in Facility and Community Settings of Low- and Middle-Income Countries: A Descriptive Review. Neonatology. 2025;122(Suppl 1):173-208. doi: 10.1159/000541871. Epub 2024 Nov 12. PMID: 39532080; PMCID: PMC11875423. <https://pubmed.ncbi.nlm.nih.gov/39532080/>`_

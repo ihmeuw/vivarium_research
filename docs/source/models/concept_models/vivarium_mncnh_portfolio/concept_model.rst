@@ -1214,10 +1214,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Unknown -- could be something to do with the neonatal mortality math?
     - Research team to discuss and consider -- see if it is imporoved after we update to mortality risk and cap LBWSG RRs?
     - None for now
-  * - Artifact key for CPAP intervention relative risk is a point value (1/0.53) despite uncertainty being specified in the :ref:`intervention model document <intervention_neonatal_cpap>`
-    - Docs were a bit unclear, have since been updated
-    - Engineering to update artifact key to include uncertainty interval and rerun
-    - For 7.0.3
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revist following GBD 2023 update
