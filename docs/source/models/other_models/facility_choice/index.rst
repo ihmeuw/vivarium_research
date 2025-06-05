@@ -110,9 +110,9 @@ parameters.
     - Notes
   * - ANC propensity :math:`u_\text{ANC}`
     - IFD propensity :math:`u_\text{IFD}`
-    - 0.64
-    - 0.47
-    - 0.41
+    - 0.63
+    - 0.46
+    - 0.36
     - Correlation found from causal model optimization after the other
       two correlations were fixed
   * - ANC propensity :math:`u_\text{ANC}`
@@ -326,19 +326,20 @@ choices in the model:
     - Nigeria
     - Pakistan
   * - :math:`\text{Pr}[\text{BEmONC}\mid \text{in-facility}]`
-    -
-    -
-    -
+    - 0.160883
+    - 0.004423
+    - 0.340528
   * - :math:`\text{Pr}[\text{CEmONC}\mid \text{in-facility}]`
-    -
-    -
-    -
+    - 1 - 0.160883
+    - 1 - 0.004423
+    - 1 - 0.340528
 
 .. todo::
 
   Update the above probabilities once we get better data from Annie's
-  team. The current values are based on an imprecise analysis of DHS
-  data and likely underestimate the proportion of BEmONC facilities.
+  team. The current values (except for Pakistan, which is based on
+  microdata from BMGF) are based on an imprecise analysis of DHS data
+  and likely underestimate the proportion of BEmONC facilities.
 
 Challenge of calibrating the model
 ----------------------------------
