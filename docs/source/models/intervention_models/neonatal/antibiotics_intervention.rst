@@ -15,14 +15,8 @@ Antibiotics for treating possible severe bacterial infections (PSBI) in newborns
   * - Abbreviation
     - Definition
     - Note
-  * - BEmONC
-    - Basic emergency obstetric and neonatal care
-    - Operationalized as facilities without C-section capabilities
-  * - CEmONC
-    - Comprehensive emergency obstetric and neonatal care
-    - Operationalized as facilities with capabilities to perform  C-section
-  * - PAF
-    - Population Attributable Fraction
+  * - PSBI
+    - Possible severe bacterial infection
     - 
 
 Intervention Overview
@@ -81,6 +75,16 @@ full hospital management of PSBI.
 
   Link unpublished data when it is ready.
 
+Comparison one of the [PSBI-Cochrane-Review]_ evaluated trials that compared 
+programs to initiate and/or complete community-based antibiotic management of 
+newborn PSBI cases in newborns when hospital
+referral was refused relative to the standard of care of hospital referal only.
+This comparison included five trials and found a summary effect of such 
+outpatient antibiotic programs on overall mortality of RR=0.82 (95% CI: 0.68 to 
+0.99) with a high level of statistical heterogeneity (I^2 = 87%). Only two trials 
+reported effects on sepsis-specific neonatal mortality, resulting in a summary 
+relative risk of 0.78 (95% CI: 0.60 to 1.00).
+
 Notably, direct observation of mortality rates among a population with PSBI with 
 no intervention (treatment or referral) by researchers is not ethical. As such, 
 trials like those included in the [PSBI-Cochrane-Review]_ are designed so that the 
@@ -91,7 +95,8 @@ referral and not receive antibiotics and could serve as a control group in the
 derivation of the effect of antibiotics on sepsis mortality relative to no 
 antibiotics that we desire for use in our simulation. Unfortunately, however, none 
 of the individual studies included in [PSBI-Cochrane-Review]_ report sufficient 
-information to derive such values.
+information to derive such values (although the Bhandari et al. 2012 study comes
+the closest).
 
 A review by [Zaidi-et-al-2011]_ attempted to address this challenge of deriving an 
 effect of antibiotics relative to no antibiotics that cannot be directly observed 
@@ -103,10 +108,13 @@ sepsis mortality:
 - RR=0.35 for injectable antibiotics is a community/clinic setting
 - RR=0.2 for in-patient hospital management with antibiotics
 
+We have conducted our own assessment of alternative strategies to arrive at such
+values, `summarized in a few slides on sharepoint here <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BD2E9E7E0-6310-4F55-B3D5-83B3731A808F%7D&file=Neonatal%20antibiotics%20intervention%20overview.pptx&action=edit&mobileredirect=true>`_
+
 Vivarium Modeling Strategy
 ---------------------------
 
-This section describes how an antibiotic-treatment intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
+This section describes how an outpatient program for newborn PSBI management intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 15
@@ -116,57 +124,64 @@ This section describes how an antibiotic-treatment intervention can be implement
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Neonatal sepsis and other neonatal infections Mortality Probability :math:`\text{CSMR}_i^\text{sepsis}`
+  * - :ref:`Neonatal sepsis and other neonatal infections <2021_cause_neonatal_sepsis_mncnh>` Mortality Probability :math:`\text{CSMRisk}_i^\text{sepsis}`
     - Adjust multiplicatively using RR
     - Yes
-    - For convenience, we will model this like a dichotomous risk factor; more details below
+    - 
+
+**Research background**
+
+Given the limitations of the approaches to estimating the effect of antibiotics
+relative to no antibiotics for the management of PSBI, we have decided to instead
+model the effect of an outpatient antibiotic program relative to the absence of 
+such a program. This allows us to utilize the evidence from the [PSBI-Cochrane-Review]_
+directly and avoids having to obtain specific estimates of antibiotics coverage.
+However, this approach has several limitations, listed in the Assumptions and 
+Limitations section of this page.
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-.. todo::
+Ethiopia has integrated outpatient management of newborn PSBI cases into its national
+health policy. [Tiruneh-et-al-2024]_ reviews the implementation experience of this
+program in Ethiopia. According to this paper, the ability to manage newborn PSBI on 
+an outpatient basis occurs at a national level in Ethiopia; however, between 60-98 
+percent of facilities reporting stockouts of gentamicin or amoxicillin over a three 
+month period.
 
-  Update this section. I think rather that making this delivery facility specific 
-  we should utilize the GBD covariate for postnatal care visits because most cases 
-  will be caught after hospital discharge unless they are hospital acquired. Maybe 
-  we could also correlate coverage propensity with ANC or IFD propensity because 
-  care seeking behavior here seems really relevant.
+According to `this online resource <https://www.aku.edu/mcpk/paeds/Pages/psbi.aspx>`_, 
+Pakistan does not have a national program to manage PSBI in newborns on an outpatient 
+basis.
 
-  We should also probably try to use different data than hospitals having 
-  antibiotics to inform baseline coverage because it seems like adherence to 
-  hospital referral is the more relevant variable here -- the trials in the 
-  cochrane review are probably a good place to start. Ideally we will also have 
-  some differentiation of outpatient/inpatient coverage as well as whether 
-  outpatient management is oral or injectable.
+Based on the multi-country implementation study of outpatient antibiotic management 
+programs for PSBI in newborns that conducted pilot programs [Nisar-et-al-2022]_, we 
+assume that the baseline coverage of this intervention is zero in our modeled 
+locations.
 
-These placeholder values come from two data sources, both for Ethiopia, both identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final Report found 30.2% of BEmONC facilities and 76.8% of CEmONC facilities have neonatal antibiotics; the 2016-2018 SARA Report found 52.9% of BEmONC facilities and 97.2% of CEmONC facilities have neonatal antibiotics.  While we plan a data strategy to fill the gaps we have used a simple average.
-
-.. list-table:: Baseline Coverage of Neonatal Antibiotics (placeholder values)
-  :widths: 15 15 15 15
+.. list-table:: Outpatient neonatal antibiotic intervention baseline coverage
   :header-rows: 1
 
-  * - Birth Facility
-    - Coverage Mean (%)
-    - Coverage Distribution (%)
-    - Notes
-  * - Home Birth
-    - 5
-    - :math:`\text{Uniform}(0,10)`
-    - Assumption; need to investigate data sources for care seeking among children born outside of the hospital system 
-  * - BEmONC Facilities
-    - 41.55
-    - :math:`\text{Uniform}(30.2,52.9)`
-    - placeholder value based on two data points 
-  * - CEmONC Facilities
-    - 87.0
-    - :math:`\text{Uniform}(76.8,97.2)`
-    - placeholder value based on two data points 
-
+  * - Location
+    - Population
+    - Value
+    - Reference
+  * - Pakistan
+    - All newborns (baseline coverage does not vary by delivery facility)
+    - 0
+    - `See Aga Khan University Medical College's seminar here <https://www.aku.edu/mcpk/paeds/Pages/psbi.aspx>`_ indicating no national guideline for PSBI management on an outpatient basis in addition to [Nisar-et-al-2022]_ pilot program implementation in modeled location and lack of scaled-up programs
+  * - Ethiopia
+    - All newborns (baseline coverage does not vary by delivery)
+    - 0.5
+    - Assumption of 50% functional capacity to manage PSBI on an outpatient basis given on findings from [Tiruneh-et-al-2024]_ of frequent stock-outs and limited health worker capacity
+  * - Nigeria
+    - All newborns (baseline coverage does not vary by delivery facility)
+    - 0
+    - Assumption based on [Nisar-et-al-2022]_ pilot program implementation in modeled location and lack of scaled-up programs
 
 Vivarium Modeling Strategy
 --------------------------
 
-This intervention requires adding an attribute to all simulants to specify if a neonate has access to a facility with access to antibiotics.  Since the neonatal mortality model does not explicitly represent incidence of sepsis, we will not track explicitly if a simulant receives antibiotics.  Instead the model will have different cause-specific mortality rates for sepsis for individuals with and without access to antibiotics (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
+This intervention requires adding an attribute to all simulants to specify if a neonate has access to outpatient antibiotic programs for PSBI in newborns.  Since the neonatal mortality model does not explicitly represent incidence of sepsis, we will not track explicitly if a simulant receives antibiotics.  Instead the model will have different cause-specific mortality rates for sepsis for individuals with and without access to antibiotics (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
 
 The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has access to antibiotics during the neonatal period, which we assume will be closely related to the facility choice during birth, i.e. home births have much lower access than in-facility births, and births in BEmONC facilities have lower access than CEmONC facilities.
 
@@ -194,125 +209,49 @@ This reduces to the previous formula if there are no other interventions, and we
 
 While we are searching the literature for an appropriate value for the relative risk, we will use a stand-in value with an origin I have failed to record.
 
-.. todo::
-
-  Update this section to use the RR=0.2 rather than 0.72 effect for hospital 
-  quality antibiotic management (what we will be scaling up and also some portion 
-  of existing baseline coverage). We will also use RR=0.35 and/or RR=0.72 for 
-  baseline outpatient antibiotic management that is not yet in line with the new 
-  guideline depending on what we find for baseline coverage.
-
-  I really think that this is the best path forward, but am still open to 
-  discussion if others disagree!
-
-.. list-table:: Risk Effect Parameters for Lack-of-Access-to-Antibiotics
-  :widths: 15 15 15 15
+.. list-table:: Risk Effect Parameters for Lack-of-Access-to-Intervention
   :header-rows: 1
 
   * - Parameter
-    - Mean
-    - Distribution
+    - Value
     - Notes
-  * - Relative Risk
-    - 1.39
-    - :math:`\text{Normal}(1.39,0.08^2)`
-    - Based on placeholder relative risk of 0.72 (95% CI 0.64-0.80) of sepsis mortality for neonates with access to antibiotics 
+  * - :math:`\text{RR}^\text{no antibiotics}`
+    - :math:`1/\text{RR}_\text{intervention}`
+    - To be used in artifact in accordance with "lack of intervention" risk factor effect
+  * - :math:`\text{RR}_\text{intervention}`
+    - 0.78 (95% CI: 0.60 to 1.00), lognormal distribution of uncertainty (implemented as parameter uncertainty)
+    - [PSBI-Cochrane-Review]_
+  * - mean_rr
+    - :math:`\text{RR} * p_\text{covered at baseline} + (1 - p_\text{covered at baseline})`
+    - :math:`p_\text{covered at baseline}` is baseline coverage proportion defined in the baseline coverage section above
   * - PAF
-    - see below
-    - see below
-    - see `Calibration strategy` section below for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model
-
-Calibration Strategy
---------------------
-
-The following decision tree shows all of the paths from delivery facility choice to antibiotics availability.  Distinct paths in the tree correspond to disjoint events, which we can sum over to find the population probability of sepsis mortality.  The goal here is to use internally consistent conditional probabilities of sepsis mortality for the subpopulations with and without access to antibiotics, so that the baseline scenario can track who has access to antibiotics and still match the baseline sepsis mortality rate.
-
-.. graphviz::
-
-    digraph antibiotics {
-        rankdir = LR;
-        facility [label="Facility type"]
-        home [label="p_sepsis_without_antibiotics"]
-        BEmONC [label="antibiotics?"]
-        CEmONC [label="antibiotics?"]
-        BEmONC_wo [label="p_sepsis_without_antibiotics"] 
-        BEmONC_w [label="p_sepsis_with_antibiotics"]
-        CEmONC_wo [label="p_sepsis_without_antibiotics"] 
-        CEmONC_w [label="p_sepsis_with_antibiotics"]
-
-        facility -> home  [label = "home birth"]
-        facility -> BEmONC  [label = "BEmONC"]
-        facility -> CEmONC  [label = "CEmONC"]
-
-        BEmONC -> BEmONC_w  [label = "available"]
-        BEmONC -> BEmONC_wo  [label = "unavailable"]
-
-        CEmONC -> CEmONC_w  [label = "available"]
-        CEmONC -> CEmONC_wo  [label = "unavailable"]
-    }
-
-.. math::
-    \begin{align*}
-        p(\text{sepsis}) 
-        &= \sum_{\text{paths without antibiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{no antibiotics})\\
-        &+ \sum_{\text{paths with antibiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{antibiotics})\\[.1in]
-        p(\text{sepsis}|\text{no antibiotics}) &= \text{RR}_\text{no antibiotics} \cdot p(\text{sepsis}|\text{antibiotics})
-    \end{align*}
-
-where :math:`p(\text{sepsis})` is the probability of dying from sepsis in the general population, and :math:`p(\text{sepsis}|\text{antibiotics})` and :math:`p(\text{sepsis}|\text{no antibiotics})` are the probability of dying from sepsis in setting with and without access to antibiotics.  For each path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has antibiotics available.
-
-When we fill in the location-specific values for delivery facility rates, antibiotics coverage, relative risk of mortality with antibiotics access, and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{sepsis}|\text{antibiotics})` and :math:`p(\text{sepsis}|\text{no antibiotics})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
-
-**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that :math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
-
-.. math::
-
-   p(\text{no antibiotics}) = \sum_{\text{paths without antibiotics}} p(\text{path}),
-
-then can use this to expand the identity
-
-.. math::
-
-   \text{PAF}_\text{no antibiotics} = 1 - \frac{1}{\mathbb{E}(\text{RR})}.
-
-Since our risk exposure has two categories,
-
-.. math::
-
-   \mathbb{E}(\text{RR}) = p(\text{no antibiotics}) \cdot \text{RR}_\text{no antibiotics} + (1 - p(\text{no antibiotics})) \cdot 1.
-
-
+    - (mean_rr - 1) / mean_rr
+    - 
 
 Scenarios
 ---------
 
-.. todo::
+Scenario-specific coverage of the outpatient neonatal antibiotic intervention for the MNCNH simulation can be found in the :ref:`neonatal component scenario table <MNCNH intrapartum component scenario table>`.
 
-  Describe our general approach to scenarios, for example set coverage to different levels in different types of health facilities; then the specific values for specific scenarios will be specified in the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
+Generally, intervention-scenario coverage of this intervention should be 100%, indicating the presence of a fully functioning outpatient program to manage newborn PSBI with antibiotics. Note that this does not imply that 100% of newborn PSBI cases are treated with antibiotics, but rather that outpatient treatment occurs at the same rate as the trials included in the [PSBI-Cochrane-Review]_.
 
 
 Assumptions and Limitations
 ---------------------------
 
 - This intervention applies to the first two months of life according to the WHO guideline and we only model the first month of life, so we will not capture any averted deaths in the second month of life due to this intervention, therefore underestimating total impact.
-- We assume that antibiotics availability captures actual use, and not simply the treatment being in the facility 
-- We assume that the delivery facility is also the facility where a sick neonate will seek care for sepsis
-- We assume that the relative risk of sepsis mortality with antibiotics in practice is a value that we can find in the literature
-- We have excluded the effect of antibiotics on pneumonia mortality, because this cause is currently lumped with 'other causes'
-- Baseline coverage data for antibiotics in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2018. (These placeholder values come 
-  from two data sources, both for Ethiopia, both identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final 
-  Report found 30.2% of BEmONC facilities and 76.8% of CEmONC facilities have neonatal antibiotics; the 2016-2018 SARA Report 
-  found 52.9% of BEmONC facilities and 97.2% of CEmONC facilities have neonatal antibiotics.  While we plan a data strategy to 
-  fill the gaps we have used a simple average.)
-- We assume that baseline coverage for antibiotics in home births is 5% (this is not data-backed).
-- We are currently using a placeholder value for the relative risk of Lack-of-Access-to-Antibiotics on neonatal sepsis mortality, which is not 
-  backed by literature. Further research is needed to find an appropriate value.
+- We assume 50% functional capacity of the outpatient newborn PSBI management program in Ethiopia in accordance with frequent stock-outs and limited health worker capacity reported in [Tiruneh-et-al-2024]_ and hypoethsize that these issues can be resolved in an intervention scenario
+- We do not model the effect of this intervention on pneumonia mortality (note that according to the WHO guideline these cases do not require inpatient treatment and outpatient management programs are expected to have a different effect n pneumonia mortality than sepsis mortality)
+- Our modeling strategy does not allow for differential impact by location due factors such as existing level of inpatient PSBI treatment rates 
+- There was significant heterogeneity in the effect of the intervention in the [PSBI-Cochrane-Review]_ and we do not model factors that may influence the effectiveness of the intervention
+- Many of the trials in the [PSBI-Cochrane-Review]_ included additional services alongside the ability to treat PSBI on an outpatient basis, which may confound the estimate of the intervention effect (however, we lessen the degree of this bias by using the sepsis-specific mortality estimate rather than the all cause mortality estimate)
+- Although the trials in the [PSBI-Cochrane-Review]_ were measured specifically among the population visited by community health workers participated in the study, we do not limit the intervention effect only to those who receive postnatal care visits. This is because even if a family does not receive a PNC visit, it is possible that they will seek care if/when their newborn displays signs of illness. However, by not modeling decreased coverage among the population who does not receive PNC visits, we may overestimate the effect of the intervention.
 
 .. todo::
 
-  If more suitable baseline coverage data for antibiotics for neonatal sepsis at all facility types in all 3 locations, we should use that data instead and update 
-  this documentation accordingly. We also need to find a more trustworthy value for the relative risk of antibiotics on neonatal sepsis.
+  Consider adding pneumonia as additional affected cause?
 
+  Determine if we want to make the eligible population those who recieve postnatal care visits according to the GBD covariate value. This would require us to add PNC as an additional attribute to the model and would allow us to correlate it with ANC/IFD attributes. 
 
 Validation and Verification Criteria
 ------------------------------------
@@ -320,7 +259,6 @@ Validation and Verification Criteria
 - Population-level mortality rate should be the same as when this intervention is not included in the model
 - The ratio of sepsis deaths per birth among those without antibiotics access divided by those with antibiotics access should equal the relative risk parameter used in the model
 - The baseline coverage of antibiotics in each facility type should match the values in the artifact
-- Validation: how does the sepsis moratlity rate in a counterfactual scenario with 100% antibiotic access compare to sepsis mortality rates in high-income countries?  They should be close, and the counterfactual should not be lower.
 
 References
 ------------
@@ -336,6 +274,10 @@ References
 .. [Nisar-et-al-2022]
 
   `Nisar YB, Aboubaker S, Arifeen SE, Ariff S, Arora N, Awasthi S, Ayede AI, Baqui AH, Bavdekar A, Berhane M, Chandola TR, Leul A, Sadruddin S, Tshefu A, Wammanda R, Nigussie A, Pyne-Mercier L, Pearson L, Brandes N, Wall S, Qazi SA, Bahl R. A multi-country implementation research initiative to jump-start scale-up of outpatient management of possible serious bacterial infections (PSBI) when a referral is not feasible: Summary findings and implications for programs. PLoS One. 2022 Jun 13;17(6):e0269524. doi: 10.1371/journal.pone.0269524. PMID: 35696401; PMCID: PMC9191694. <https://pubmed.ncbi.nlm.nih.gov/35696401/>`_
+
+.. [Tiruneh-et-al-2024]
+
+  `Tiruneh GT, Odwe G, Kamberos AH, K'Oduol K, Fesseha N, Moraa Z, Gwaro H, Emaway D, Magge H, Nisar YB, Hirschhorn LR. Optimizing integration of community-based management of possible serious bacterial infection (PSBI) in young infants into primary healthcare systems in Ethiopia and Kenya: successes and challenges. BMC Health Serv Res. 2024 Mar 5;24(1):280. doi: 10.1186/s12913-024-10679-9. PMID: 38443956; PMCID: PMC10916061. <https://pubmed.ncbi.nlm.nih.gov/38443956/>`_
 
 .. [Zaidi-et-al-2011]
 
