@@ -1179,12 +1179,13 @@ Default stratifications to all observers should include scenario and input draw.
     - * Check that artifact values for the CPAP relative risk have been updated
       * Check that CPAP intervention effect size is as expected
       * Check that preterm birth mortality is as expected
-    - 
-    - 
+    - All looks good except the artifact values for the CPAP relative risk are not quite as expected due to `issue raised in this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/68#discussion_r2130230902>`_
+    - `Model 7.1.1 notebook available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.1.1_nn_checks.ipynb>`_
   * - 8.0
     - * Check baseline and intervention coverage of azithromycin intervention
       * Check that maternal disorders burden (particularly sepsis) still verifies at the population level in the baseline scenario
       * Check that the effect size of the azithromycin intervention verifies
+      * Check that CPAP intervention effect size has been appropriately updated
     - 
     - 
   * - 8.1
@@ -1201,6 +1202,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - Artifact value for the CPAP intervention effect size is slightly miscalibrated
+    - `See this github comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/68#discussion_r2130230902>`_ and `the test at the bottom of this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.1.1_nn_checks.ipynb>`_
+    - Update artifact value accordingly for model run 8.0 
+    - Model 8.0
   * - Miscalibration of neonatal mortality ratios
     - Using the specifications in model 6.1, we underestimate mortality ratios (believed to be due to having mortality probabilities greater than 1). Using the specifications in model 6.3, we overestimate mortality ratios (believed to be due to difference in mortality ratio verification target rather than mortality rate verification target)
     - Update neonatal mortality model to use mortality risk rather than rate input data (as instructed for model 7.1) and implement LBWSG RR capping and LBWSG PAF calculation strategies (details to come for model 7.2)
