@@ -70,18 +70,18 @@ In Vivarium, we use values selected uniformly at random from the interval [0,1],
 
     >>> from statsmodels.distributions.copula.api import GaussianCopula
     >>> # Input is a correlation matrix
-    >>> copula = GaussianCopula([[1.,   .64, .2],
-    ...                          [.64, 1.,   .2],
+    >>> copula = GaussianCopula([[1.,   .63, .2],
+    ...                          [.63, 1.,   .2],
     ...                          [.2,  .2,   1.]])
     >>> # Each row contains 3 correlated propensities
     >>> copula.rvs(10_000)
-    array([[0.29591901, 0.46609153, 0.43592752],
-          [0.99152512, 0.94530017, 0.85288664],
-          [0.46295916, 0.02359119, 0.49424445],
-          ...,
-          [0.01641805, 0.05247892, 0.02022793],
-          [0.16978166, 0.27245795, 0.10548769],
-          [0.67100234, 0.83628491, 0.83330358]])
+    array([[0.29526683, 0.46781445, 0.43541525],
+           [0.99146813, 0.94380918, 0.85479776],
+           [0.46910608, 0.02300572, 0.49231122],
+           ...,
+           [0.01671794, 0.05403445, 0.0198954 ],
+           [0.17063032, 0.27517952, 0.1050379 ],
+           [0.66795735, 0.8360376 , 0.83390585]])
 
 The argument of the ``GaussianCopula`` constructor is a `correlation
 matrix`_, whose :math:`(i,j)^\text{th}` entry specifies the correlation
