@@ -38,7 +38,7 @@ Misoprostol for treating maternal hemorrhage
 Intervention Overview
 -----------------------
 
-Misoprostol is an intramuscular prophylactic prostaglandin that can be taken orally or sublingually during labor to prevent or reduce incidence of maternal hemorrhage. Because 
+Misoprostol is a prophylactic prostaglandin that can be taken orally or sublingually during labor to prevent or reduce incidence of maternal hemorrhage. Because 
 misoprostol is stable and water-soluble at ambient temperatures, can be taken orally or sublingually, and is inexpensive, it has been shown to be well-suited 
 for the prevention of maternal hemorrhage in community or at-home settings where injectible conventional uterotonics are not available ([Alfirevic-et-al-2007-pph_prevention]_).
 
