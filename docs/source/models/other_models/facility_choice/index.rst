@@ -198,11 +198,11 @@ probabilities for in-facility delivery`_ section below for an explicit
 description of how to assign IFD status.
 
 To be more explicit about how the ordered categories and propensities
-work in code, if the categories are ordered from highest risk to lowest
+work in code: If the categories are ordered from highest risk to lowest
 risk as :math:`c_1, \dotsc, c_n`, divide the unit interval :math:`[0,1]`
 into :math:`n` subintervals :math:`I_1, \dotsc, I_n` ordered from left
-to right, such that the length of :math:`I_j` is :math:`P(c_j)`. Then a
-uniform propensity :math:`u \in [0,1]` corresponds to category
+to right, such that the length of :math:`I_j` is :math:`\Pr(c_j)`. Then
+a uniform propensity :math:`u \in [0,1]` corresponds to category
 :math:`c_j` precisely when :math:`u \in I_j`. This correspondence
 specifies how each ordinal variable should be initialized from its
 corresponding propensity. [[A picture would probably help, should we add
