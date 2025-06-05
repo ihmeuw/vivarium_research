@@ -191,7 +191,7 @@ In Vivarium, this risk effect will modify the sepsis mortality pipeline, resulti
 
 .. math::
 
-   \text{CSMR}_i^\text{sepsis} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i} \cdot (1 - \text{PAF}_\text{no antibiotics}) \cdot \text{RR}_i^\text{no antibiotics}
+   \text{CSMRisk}_i^\text{sepsis} = \text{CSMRisk}^\text{sepsis}_{\text{BW}_i, \text{GA}_i} \cdot (1 - \text{PAF}_\text{no antibiotics}) \cdot \text{RR}_i^\text{no antibiotics}
 
 where :math:`\text{RR}_i^\text{no antibiotics}` is simulant *i*'s individual relative risk for "no antibiotics", meaning :math:`\text{RR}_i^\text{no antibiotics} = \text{RR}_\text{no antibiotics}` if simulant *i* accesses a facility without antibiotics, and :math:`\text{RR}_i^\text{no antibiotics} = 1` if simulant *i* accesses a facility *with* antibiotics.
 
@@ -199,15 +199,15 @@ If there are other interventions also affecting the CSMR of sepsis, the pipeline
 
 .. math::
 
-   \text{CSMR}^\text{sepsis}_{i, \text{updated}} = \text{CSMR}^\text{sepsis}_{i, \text{original}} \cdot (1 - \text{PAF}_\text{no antibiotics}) \cdot \text{RR}_i^\text{no antibiotics}
+   \text{CSMRisk}^\text{sepsis}_{i, \text{updated}} = \text{CSMRisk}^\text{sepsis}_{i, \text{original}} \cdot (1 - \text{PAF}_\text{no antibiotics}) \cdot \text{RR}_i^\text{no antibiotics}
 
 This reduces to the previous formula if there are no other interventions, and we would have 
 
 .. math::
 
-   \text{CSMR}^\text{sepsis}_{i, \text{original}} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
+   \text{CSMRisk}^\text{sepsis}_{i, \text{original}} = \text{CSMRisk}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
 
-While we are searching the literature for an appropriate value for the relative risk, we will use a stand-in value with an origin I have failed to record.
+Where:
 
 .. list-table:: Risk Effect Parameters for Lack-of-Access-to-Intervention
   :header-rows: 1
