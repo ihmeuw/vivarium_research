@@ -905,13 +905,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
-  * - 7.0.3
-    - Add parameter uncertainty interval for CPAP effect size
-    - All scenarios
-    - ``model7.0.3``
-    - Default
-    - Same as 7.0.1
-    - Default
   * - 7.1
     - Update neonatal mortality rates to mortality risks 
 
@@ -926,6 +919,13 @@ Default stratifications to all observers should include scenario and input draw.
       * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
       * Stratify births observer by gestational age above/below 37 weeks
       * Stratify neonatal deaths observer by gestational age above/below 37 weeks
+    - Default
+  * - 7.1.1
+    - Add parameter uncertainty interval for CPAP effect size
+    - All scenarios
+    - ``model7.1.1``
+    - Default
+    - Same as 7.0.1
     - Default
   * - 8.0
     - Wave I azithromycin 
@@ -1167,16 +1167,18 @@ Default stratifications to all observers should include scenario and input draw.
     - Check that preterm birth mortality is as expected: we should change from a slight overestimation to a slight underestimation. A slight underestimation is expected due to known mortality probabilities greater than 1, which will be addressed in future model runs.
     - The overestimation of preterm birth mortality is of lower magnitude than in 7.0.1, indicating that the update of the preterm prevalence term improved the model. However, preterm birth mortality remains slightly overestimated on average rather than the expected slight underestimation.
     - `Model 7.0.2 neonatal V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0.2_nn_checks.ipynb>`_
-  * - 7.0.3
-    - * Check that artifact values for the CPAP relative risk have been updated
-      * Check that CPAP intervention effect size is as expected
-      * Check that preterm birth mortality is as expected
-    - 
-    - 
   * - 7.1
     - * Neonatal mortality (all cause and cause-specific) is expected to remain slightly underestimated in the baseline scenario (by the same magnitude of model run 6.1). This is expected as we have not yet implemented a strategy to account for known probabilities greater than 1.
       * Recheck LBWSG Effects
       * Check that intervention effect sizes are maintained
+    - * Neonatal mortality is in expected range
+      * LBWSG risk factor is affecting mortality pipeline values as expected (checked in the interactive sim)
+    - * `Neonatal mortality and intervention notebook for model 7.1 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.1_nn_checks.ipynb>`_
+      * `Recheck of LBWSG effects for model 7.1 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.1_lbwsg_effects_interactive_simulation.ipynb>`_
+  * - 7.1.1
+    - * Check that artifact values for the CPAP relative risk have been updated
+      * Check that CPAP intervention effect size is as expected
+      * Check that preterm birth mortality is as expected
     - 
     - 
   * - 8.0
