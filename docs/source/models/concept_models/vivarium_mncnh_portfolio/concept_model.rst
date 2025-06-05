@@ -934,17 +934,20 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Azithromycin stratifications added to observers #1 and #7 (maternal burden and maternal population observers) - to be continued as defaults for all future runs
     - Default
-  * - 8.1*
-    - * Implement LBWSG RR cap (details to come)
-      * Recalculate LBWSG PAFs with capped RRs and updated strategy for the LNN age group (details to come)
+  * - 8.1
+    - * Implement LBWSG RR caps (applied to both the ENN and LNN age groups)
+      * Recalculate LBWSG PAFs with capped RRs
     - Baseline
     - ``model8.1``
     - Default
-    - Same modifications as run 7.0.1 and 7.1:
-    
-      * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
-      * Stratify births observer by gestational age above/below 37 weeks
-      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
+    - Same modifications as run 7.0.1
+    - Default
+  * - 8.1.1*
+    - Age/sex/location/draw-specific LBWSG RR caps
+    - Baseline
+    - ``model8.1.1``
+    - Default
+    - Same modifications as run 7.0.1
     - Default
   * - 9.0*
     - Wave I misoprostol
