@@ -130,26 +130,31 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
     - Information
     - Note
   * - I
-    - Record :code:`none` ultrasound coverage 
+    - Record :code:`none` for ultrasound type
     - Record to output A
     - 
   * - II
-    - Record :code:`standard` ultrasound coverage
+    - Record :code:`standard` for ultrasound type
     - Record to output A
     - 
   * - III
-    - Record :code:`ai_assisted` ultrasound coverage
+    - Record :code:`ai_assisted` for ultrasound type
     - Record to output A
     - 
   * - IV
-    - Estimate "believed" gestational age
+    - Calculate estimated gestational age
     - See instructions below and record to output B
-    - 
+    -
+  * - V
+    - Record believed term status
+    - Record to output C: *preterm* if estimated gestational age < 37
+      weeks; *full-term* if estimated gestational age is 37+ weeks
+    -
 
-2.4.1 Estimation of "believed" gestational age
+2.4.1 Calculation of estimated gestational age
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-"Believed" gestational age should be estimated by adding a randomly sampled value from a normal distribution with a mean of zero and a standard deviation defined below to the simulant's assigned gestational age at birth exposure (input from the pregnancy module).
+Estimated gestational age should be calculated by adding a randomly sampled value from a normal distribution with a mean of zero and a standard deviation defined below to the simulant's assigned gestational age at birth exposure (input from the pregnancy module).
 
 .. list-table:: Standard deviation values by ultrasound type
   :header-rows: 1
@@ -157,9 +162,9 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
   * - Ultrasound type
     - Standard deviation
   * - None
-    - 45.5 days
+    - 10 days
   * - Standard
-    - 20 days
+    - 6.7 days
   * - AI-assisted ultrasound
     - 5 days
 
@@ -179,12 +184,15 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
   * - Output
     - Value
     - Note
-  * - A. Ultrasound coverage
+  * - A. Type of ultrasound received
     - *none* / *standard* / *AI-assisted*
     - Used for V&V and for estimation of output B
-  * - B. "Believed" gestational age
+  * - B. Estimated gestational age
     - Point values in days
-    - Used for V&V and facility choice module of intrapartum component
+    - Used for V&V and calculation of output C
+  * - C. Believed term status
+    - *preterm* / *full-term*
+    - Used for V&V and for facility choice module in intrapartum component
 
 
 3.0 Assumptions and limitations
