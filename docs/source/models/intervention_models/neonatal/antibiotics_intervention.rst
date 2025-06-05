@@ -1,8 +1,8 @@
 .. _intervention_neonatal_antibiotics:
 
-=============================================
-Antibiotics for treating bacterial infections
-=============================================
+===================================================================================
+Antibiotics for treating possible severe bacterial infections (PSBI) in newborns
+===================================================================================
 
 .. contents::
    :local:
@@ -28,7 +28,83 @@ Antibiotics for treating bacterial infections
 Intervention Overview
 -----------------------
 
-Antibiotics are used to treat bacterial infections in neonates, reducing the risk mortality.
+Possible severe bacterial infections (PSBIs) in newborns are serious conditions that can lead 
+to sepsis and death. According to the [WHO-PSBI-Guideline]_, clinical signs of PSBI include:
+
+- Clinical severe infection:
+
+  - Severe chest indrawing
+  - High body temperature
+  - Low body temperature
+  - Not feeding well
+  - Movement only when stimulated
+
+- Critical illness:
+
+  - Unconscious
+  - Apnoea
+  - Unable to cry
+  - Cyanosis
+  - Bulging fontanelle
+  - Persistent vomiting
+  - No movement at all
+  - Not able to feed at all
+  - Convulsions
+  - Active bleeding requiring transfusion
+
+Management of PSBI starts with identification of at least one sign (by a family 
+member or health professional) followed by confirmation by a community health 
+worker or other health professional. To facilitate the identification of PSBI, 
+WHO recommends that community health workers counsel families on recognition of 
+danger signs for PSBI and assess infants for signs of PSBI during postnatal care 
+visits. [WHO-PSBI-Guideline]_
+
+The current WHO guideline on treatment for PSBI in infants less than 59 days old 
+is referral to a hospital for inpatient management and a 7-10 day course of two 
+injectable antibiotics - penicillin or ampicillin plus gentamicin 
+[WHO-PSBI-Guideline]_. There is a separate WHO Guideline on the management of PSBI 
+when hospital referral is not feasible, and recommends that infants of families 
+who do not accept or cannot access hospital care are managed in an outpatient 
+setting with intramuscular gentamicin (once daily for 2 or 7 days) and oral 
+amoxicillin (twice daily for 7 days) [WHO-PSBI-Guideline]_.
+
+The WHO guideline for PSBI management without hospital referral relies heavily on 
+evidence included in a recent Cochrane review of community-based antibiotic 
+management of PSBI [PSBI-Cochrane-Review]_. There has been evidence of successful 
+implementation of outpatient management of PSBI in accordance with the WHO 
+guideline, although not yet at scale [Nisar-et-al-2022]_. Additionally, some 
+unpublished trials suggest that outpatient management for clinical severe 
+infection and early hospital discharge for non-critical cases is as effective as 
+full hospital management of PSBI. 
+
+.. todo::
+
+  Link unpublished data when it is ready.
+
+Notably, direct observation of mortality rates among a population with PSBI with 
+no intervention (treatment or referral) by researchers is not ethical. As such, 
+trials like those included in the [PSBI-Cochrane-Review]_ are designed so that the 
+control arm is the standard of care hospital referral and the intervention arm is 
+community based antibiotic administration in addition to hospital referral. 
+Some portion of the population in these trials is expected to refuse 
+referral and not receive antibiotics and could serve as a control group in the 
+derivation of the effect of antibiotics on sepsis mortality relative to no 
+antibiotics that we desire for use in our simulation. Unfortunately, however, none 
+of the individual studies included in [PSBI-Cochrane-Review]_ report sufficient 
+information to derive such values.
+
+A review by [Zaidi-et-al-2011]_ attempted to address this challenge of deriving an 
+effect of antibiotics relative to no antibiotics that cannot be directly observed 
+in an experimental study for the Lives Saved Tool (LiST). Through a Delphi process 
+to reach expert consensus, they arrived at the following effects on neonatal 
+sepsis mortality:
+
+- RR=0.72 for oral antibiotics in a community setting
+- RR=0.35 for injectable antibiotics is a community/clinic setting
+- RR=0.2 for in-patient hospital management with antibiotics
+
+Vivarium Modeling Strategy
+---------------------------
 
 This section describes how an antibiotic-treatment intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 
@@ -47,6 +123,21 @@ This section describes how an antibiotic-treatment intervention can be implement
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
+
+.. todo::
+
+  Update this section. I think rather that making this delivery facility specific 
+  we should utilize the GBD covariate for postnatal care visits because most cases 
+  will be caught after hospital discharge unless they are hospital acquired. Maybe 
+  we could also correlate coverage propensity with ANC or IFD propensity because 
+  care seeking behavior here seems really relevant.
+
+  We should also probably try to use different data than hospitals having 
+  antibiotics to inform baseline coverage because it seems like adherence to 
+  hospital referral is the more relevant variable here -- the trials in the 
+  cochrane review are probably a good place to start. Ideally we will also have 
+  some differentiation of outpatient/inpatient coverage as well as whether 
+  outpatient management is oral or injectable.
 
 These placeholder values come from two data sources, both for Ethiopia, both identified by the Health Systems team at IHME: the 2016 Ethiopia EmONC Final Report found 30.2% of BEmONC facilities and 76.8% of CEmONC facilities have neonatal antibiotics; the 2016-2018 SARA Report found 52.9% of BEmONC facilities and 97.2% of CEmONC facilities have neonatal antibiotics.  While we plan a data strategy to fill the gaps we have used a simple average.
 
@@ -102,6 +193,17 @@ This reduces to the previous formula if there are no other interventions, and we
    \text{CSMR}^\text{sepsis}_{i, \text{original}} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
 
 While we are searching the literature for an appropriate value for the relative risk, we will use a stand-in value with an origin I have failed to record.
+
+.. todo::
+
+  Update this section to use the RR=0.2 rather than 0.72 effect for hospital 
+  quality antibiotic management (what we will be scaling up and also some portion 
+  of existing baseline coverage). We will also use RR=0.35 and/or RR=0.72 for 
+  baseline outpatient antibiotic management that is not yet in line with the new 
+  guideline depending on what we find for baseline coverage.
+
+  I really think that this is the best path forward, but am still open to 
+  discussion if others disagree!
 
 .. list-table:: Risk Effect Parameters for Lack-of-Access-to-Antibiotics
   :widths: 15 15 15 15
@@ -192,6 +294,7 @@ Scenarios
 Assumptions and Limitations
 ---------------------------
 
+- This intervention applies to the first two months of life according to the WHO guideline and we only model the first month of life, so we will not capture any averted deaths in the second month of life due to this intervention, therefore underestimating total impact.
 - We assume that antibiotics availability captures actual use, and not simply the treatment being in the facility 
 - We assume that the delivery facility is also the facility where a sick neonate will seek care for sepsis
 - We assume that the relative risk of sepsis mortality with antibiotics in practice is a value that we can find in the literature
@@ -222,6 +325,18 @@ Validation and Verification Criteria
 References
 ------------
 
-* https://chatgpt.com/share/67c1c7cf-f294-8010-8e65-261f87039e3b
-* https://chatgpt.com/share/67c1c7f9-8230-8010-9ade-30ed07b06bd0
+.. [WHO-PSBI-Guideline]
 
+  Guideline: managing possible serious bacterial infection in young infants when referral is not feasible `https://www.who.int/publications/i/item/9789241509268 <https://www.who.int/publications/i/item/9789241509268>`_
+
+.. [PSBI-Cochrane-Review]
+
+  `Duby J, Lassi ZS, Bhutta ZA. Community-based antibiotic delivery for possible serious bacterial infections in neonates in low- and middle-income countries. Cochrane Database Syst Rev. 2019 Apr 11;4(4):CD007646. doi: 10.1002/14651858.CD007646.pub3. PMID: 30970390; PMCID: PMC6458055. <https://pubmed.ncbi.nlm.nih.gov/30970390/>`_
+
+.. [Nisar-et-al-2022]
+
+  `Nisar YB, Aboubaker S, Arifeen SE, Ariff S, Arora N, Awasthi S, Ayede AI, Baqui AH, Bavdekar A, Berhane M, Chandola TR, Leul A, Sadruddin S, Tshefu A, Wammanda R, Nigussie A, Pyne-Mercier L, Pearson L, Brandes N, Wall S, Qazi SA, Bahl R. A multi-country implementation research initiative to jump-start scale-up of outpatient management of possible serious bacterial infections (PSBI) when a referral is not feasible: Summary findings and implications for programs. PLoS One. 2022 Jun 13;17(6):e0269524. doi: 10.1371/journal.pone.0269524. PMID: 35696401; PMCID: PMC9191694. <https://pubmed.ncbi.nlm.nih.gov/35696401/>`_
+
+.. [Zaidi-et-al-2011]
+
+  `Zaidi AK, Ganatra HA, Syed S, Cousens S, Lee AC, Black R, Bhutta ZA, Lawn JE. Effect of case management on neonatal mortality due to sepsis and pneumonia. BMC Public Health. 2011 Apr 13;11 Suppl 3(Suppl 3):S13. doi: 10.1186/1471-2458-11-S3-S13. PMID: 21501430; PMCID: PMC3231886. <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC3231886/>`_
