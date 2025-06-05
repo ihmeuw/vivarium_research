@@ -90,6 +90,11 @@ implementation can make them:
            [0.17063032, 0.27517952, 0.1050379 ],
            [0.66795735, 0.8360376 , 0.83390585]])
 
+..
+  Note: For reproducibility, I actually called
+  copula.rvs(10_000, random_state=numpy.random.default_rng(25))
+  to generate these numbers.
+
 The argument of the ``GaussianCopula`` constructor is a `correlation
 matrix`_, whose :math:`(i,j)^\text{th}` entry specifies the correlation
 between variable :math:`i` and variable :math:`j` (note that this
@@ -360,7 +365,16 @@ Code for running the causal optimization model can be found in the `/facility_ch
 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice>`_
 folder in the `MNCNH Portfolio research repo
 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main>`_.
+The original writeup describing the idea behind the optimization is `on
+Sharepoint`__.
 
+__ `delivery facility strategy document`_
+.. _delivery facility strategy document:
+  https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/MNCNH%20portfolio%20products/01_Planning/facility%20choice%20strategy.docx?d=w7162395b8aec410ca62c63d69ff82255&csf=1&web=1&e=j14aAU
+
+.. todo::
+
+  Add more details about how the calibration works.
 
 Range of propensity and probabilities that are consistent with existing data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
