@@ -344,10 +344,15 @@ choices in the model:
 Challenge of calibrating the model
 ----------------------------------
 
-We have developed a nonlinear optimization model to find a consistent set of parameters for the Gaussian copula and the conditional probabilities.
+We have developed a nonlinear optimization model to find a consistent
+set of parameters for the Gaussian copula and the causal conditional
+probabilities.
 It will be described in detail here.
 
-Link to code implementing it, too.
+Code for running the causal optimization model can be found in the `/facility_choice/
+<https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice>`_
+folder in the `MNCNH Portfolio research repo
+<https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main>`_.
 
 
 Range of propensity and probabilities that are consistent with existing data
