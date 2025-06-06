@@ -951,6 +951,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Same modifications as run 7.0.1
     - Default
+  * - 8.2
+    - Update neonatal probiotics intervention effect size in accordance with `line #183 in this PR <https://github.com/ihmeuw/vivarium_research/pull/1672>`_
+    - All scenarios
+    - ``model8.2``
+    - Default
+    - Same modifications as run 7.0.1
+    - Default
   * - 9.0*
     - Wave I misoprostol
     - Baseline 
@@ -1196,6 +1203,11 @@ Default stratifications to all observers should include scenario and input draw.
     - * Early neonatal mortality is expected to validate to GBD targets (no longer be underestimated!). Note that LNN mortality may not exactly validate because we have not yet updated the LNN LBWSG PAF calculation to use exposure specific to the population at 7 days of life.
       * Check that LBWSG effects are updated and functioning as expected
       * Check that intervention effect sizes are maintained too
+    - 
+    - 
+  * - 8.2
+    - * Check that neonatal mortality remains as expected
+      * Check that probiotics intervention effect is as expected
     - 
     - 
 
