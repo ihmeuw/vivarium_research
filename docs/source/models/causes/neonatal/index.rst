@@ -330,7 +330,7 @@ Data Tables
       - Note that the relative risks used to calculate the PAFs are capped below the :math:`\text{RR}_\text{max}` value
     * - :math:`\text{RR}_{\text{BW},\text{GA}}`
       - relative risk of all-cause mortality for low birth weight and short gestation, capped at the specified maximum value
-      - :math:`max(\text{RR}_\text{max}, \text{RR}_\text{LBWSG})`
+      - :math:`\min(\text{RR}_\text{max}, \text{RR}_\text{LBWSG})`
       - 
     * - :math:`\text{RR}_\text{LBWSG}`
       - relative risk of all-cause mortality for low birth weight and short gestation, as interpolated from GBD
