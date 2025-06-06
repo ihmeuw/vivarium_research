@@ -146,7 +146,7 @@ Ethiopia has integrated outpatient management of newborn PSBI cases into its nat
 health policy. [Tiruneh-et-al-2024]_ reviews the implementation experience of this
 program in Ethiopia. According to this paper, the ability to manage newborn PSBI on 
 an outpatient basis occurs at a national level in Ethiopia; however, between 60-98 
-percent of facilities reporting stockouts of gentamicin or amoxicillin over a three 
+percent of facilities reported stockouts of gentamicin or amoxicillin over a three 
 month period.
 
 According to `this online resource <https://www.aku.edu/mcpk/paeds/Pages/psbi.aspx>`_, 
