@@ -3,4 +3,5 @@ sphinx-autobuild
 sphinx_rtd_theme
 nbsphinx
 ipython
+ipywidgets
 matplotlib
