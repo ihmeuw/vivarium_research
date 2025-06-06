@@ -490,6 +490,7 @@ defined as a module input in a subsequent row.
     - Baseline
     - 
 
+.. _MNCNH neonatal component scenario table:
 
 .. list-table:: Neonatal component scenario-dependent variables
   :header-rows: 1
