@@ -240,7 +240,7 @@ Assumptions and Limitations
 ---------------------------
 
 - This intervention applies to the first two months of life according to the WHO guideline and we only model the first month of life, so we will not capture any averted deaths in the second month of life due to this intervention, therefore underestimating total impact.
-- We assume 50% functional capacity of the outpatient newborn PSBI management program in Ethiopia in accordance with frequent stock-outs and limited health worker capacity reported in [Tiruneh-et-al-2024]_ and hypoethsize that these issues can be resolved in an intervention scenario
+- We assume 50% functional capacity of the outpatient newborn PSBI management program in Ethiopia in accordance with frequent stock-outs and limited health worker capacity reported in [Tiruneh-et-al-2024]_ and hypothesize that these issues can be resolved in an intervention scenario
 - We do not model the effect of this intervention on pneumonia mortality (note that according to the WHO guideline these cases do not require inpatient treatment and outpatient management programs are expected to have a different effect n pneumonia mortality than sepsis mortality)
 - Our modeling strategy does not allow for differential impact by location due factors such as existing level of inpatient PSBI treatment rates 
 - There was significant heterogeneity in the effect of the intervention in the [PSBI-Cochrane-Review]_ and we do not model factors that may influence the effectiveness of the intervention
