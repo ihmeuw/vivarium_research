@@ -47,7 +47,86 @@ true gestational age -- see the :ref:`AI Ultrasound Module
 Causal model
 ------------
 
-[[Causal model diagram goes here]]
+.. graphviz::
+
+  digraph facility_choice {
+
+    sex [label="(S)ex of child"]
+    lbw [label="(LBW) Low birth\nweight status"]
+    anc [label="(ANC) Antenatal\ncare attendance"]
+    preterm [label="(T)erm status"]
+    preterm_guess [label="(T') Believed\nterm status"]
+    ifd [label="(IFD) In-facility\ndelivery status"]
+
+    subgraph categorical {
+        node [color=green2 style=filled]
+        lbwsg_cat [label="LBWSG (cat)egory"]
+        ultrasound [label="(U)ltrasound type"]
+        facility [label="Birth (F)acility"]
+    }
+
+    subgraph continuous {
+        node [color=orange style=filled]
+        ga [label="(GA) Gestational age\nat start of labor"]
+         ga_estimate [
+            label = "(GA') Estimated gestational\nage at start of labor"
+        ]
+        birthweight [label="(BW)\nBirth weight"]
+        error [label="(E)rror in GA\nestimation"]
+    }
+
+    subgraph propensities {
+        node [shape=box color=lightblue3 style=filled]
+        sex_propensity [label="u_S"]
+        anc_propensity [label="u_ANC"]
+        ultrasound_propensity [label="u_U"]
+        error_propensity [label="u_E"]
+        ifd_propensity [label="u_IFD"]
+        facility_propensity [label="u_F"]
+    }
+
+    subgraph cluster_lbwsg_propensities {
+        label="LBWSG exposure propensities"
+        color=lightblue3
+        node [shape=box color=lightblue3 style=filled]
+        bw_propensity [label="u_BW"]
+        cat_propensity [label="u_cat"]
+        ga_propensity [label="u_GA"]
+    }
+
+    subgraph cluster_lbwsg {
+        label="LBWSG exposure"
+        lbwsg_cat -> birthweight
+        lbwsg_cat -> ga
+    }
+
+    sex_propensity -> sex [color=lightblue3]
+    cat_propensity -> lbwsg_cat [color=lightblue3]
+    ga_propensity -> ga [color=lightblue3]
+    bw_propensity -> birthweight [color=lightblue3]
+
+    sex -> lbwsg_cat
+    birthweight -> lbw [color=blue]
+    ga -> error
+    ga -> ga_estimate [color=blue]
+    ga -> preterm [color=blue]
+    ga_estimate -> preterm_guess [color=blue]
+    anc_propensity -> anc [color=lightblue3]
+    anc -> ultrasound
+    ultrasound_propensity -> ultrasound [color=lightblue3]
+    ultrasound -> error
+    error_propensity -> error [color=lightblue3]
+    error -> ga_estimate [color=blue]
+    preterm_guess -> ifd [label="Pr[IFD status | do(T')]"]
+
+    ifd_propensity -> ifd [color=lightblue3]
+    facility_propensity -> facility [color=lightblue3]
+    ifd -> facility
+
+    anc_propensity -> cat_propensity [arrowhead="none" style="dashed"]
+    anc_propensity -> ifd_propensity [arrowhead="none" style="dashed"]
+    cat_propensity -> ifd_propensity [arrowhead="none" style="dashed"]
+  }
 
 Correlated propensities
 -----------------------
