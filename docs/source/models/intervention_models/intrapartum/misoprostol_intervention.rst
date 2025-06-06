@@ -48,7 +48,7 @@ to pregnant women for self-administration is recommended for prevention of postp
 In line with this recommendation, we will model a misoprostol intervention in which women who attend antenatal care (ANC) facilities are eligible to 
 receive an advanced distribution of misoprostol for self-administration during a home birth. Because misoprostol is not as effective as conventional 
 uterotonics (i.e., oxytocin) in prevention of maternal hemorrhage, we will not model the distribution of misoprostol in BEmONC or CEmONC facilities where injectible 
-uterotonics are more widely available ([Tunçalp-2012-Cochrane-Review]_). 
+uterotonics are more widely available ([Gallos-et-al-2018-Cochrane-Review]_). 
 
 This section describes how a misoprostol intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 See the :ref:`Maternal hemorrhage cause model <2021_cause_maternal_hemorrhage_mncnh>` for relevant details.
@@ -87,20 +87,18 @@ administration of misoprostol is not data-backed, so we will need to update this
     - Notes
   * - All (Ethiopia, Nigeria, Pakistan)
     - Home Birth
-    - 5
+    - 0
     - N/A
-    - This is a placeholder value that we will replace after further investigation of data sources for care seeking those giving birth outside of the hospital system.
-      This will be a location-specific value, please code accordingly. 
+    - This is an assumption based on literature evidence that community distribution of oral misoprostol 
+      as not been widely implemented in Nigeria, Ethiopia, or Pakistan. (e.g. [Hobday-et-al-2017-misoprostol-scale-up]_ conducted a narrative 
+      review of the scale-up of community-based misoprostol and found little evidence of scale-up.)
   * - All (Ethiopia, Nigeria, Pakistan)
     - BEmONC and CEmONC Facilities
     - 0
     - N/A
     - We are only interested in modeling the impact of misoprostol on home births, not in-facility births, where mothers
-      and birthing parents should have access to more effective injectible uterotonics. [Tunçalp-2012-Cochrane-Review]_
+      and birthing parents should have access to more effective injectible uterotonics. [Gallos-et-al-2018-Cochrane-Review]_
 
-.. todo:: 
-
-  Replace placeholder baseline coverage with data-backed estimate once we find a better data source. 
 
 Vivarium Modeling Strategy
 --------------------------
@@ -126,7 +124,7 @@ In Vivarium, this risk effect will modify the maternal hemorrhage incidence pipe
 where :math:`\text{RR}_i^\text{no misoprostol}` is simulant *i*'s individual relative risk for "no misoprostol", meaning :math:`\text{RR}_i^\text{no misoprostol} = \text{RR}_\text{no misoprostol}` 
 if simulant *i* does not receive misoprostol, and :math:`\text{RR}_i^\text{no misoprostol} = 1` if simulant *i* receives misoprostol. 
 
-The relative risk value we will use is pulled from [Tunçalp-2012-Cochrane-Review]_, the most recent Cochrane Review of the effect of 
+The relative risk value we will use is pulled from [Gallos-et-al-2018-Cochrane-Review]_, the most recent Cochrane Review of the effect of 
 sublingually received misoprostol during labor on the prevention of maternal hemorrhage.
 
 .. list-table:: Risk Effect Parameters for No Misoprostol
@@ -135,12 +133,16 @@ sublingually received misoprostol during labor on the prevention of maternal hem
 
   * - Parameter
     - Mean
-    - Distribution
+    - Source
     - Notes
-  * - Relative Risk
-    - 1.52
-    - :math:`\text{Normal}(1.52,0.08^2)`
-    - Based on relative risk of 0.66 (95% CI 0.10-0.94) on maternal hemorrhage incidence for pregnant people receiving misoprostol
+  * - :math:`\text{RR}^\text{no misoprostol}`
+    - :math:`1/\text{RR}^\text{misoprostol}`
+    - N/A
+    - Value to be used in sim
+  * - :math:`1/\text{RR}^\text{misoprostol}`
+    - RR = 0.61 (95% CI: 0.50 to 0.74). Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(0.61, 0.50, 0.74S)`
+    - [Gallos-et-al-2018-Cochrane-Review]_
+    - 
   * - PAF
     - see below
     - see below
@@ -222,7 +224,7 @@ Assumptions and Limitations
 ---------------------------
 
 - We assume that the relative risk of maternal hemorrhage incidence with misoprostol in practice is a value that we can find in the literature (Note: 
-  the value we are using is from [Tunçalp-2012-Cochrane-Review]_.)
+  the value we are using is from [Gallos-et-al-2018-Cochrane-Review]_.)
 - We only consider the use of misoprostol in the prevention of maternal hemorrhage, despite other documented clinical uses of misoprostol,
   such as for therapeutic abortion.
 - We currenty do not model the increased risk of hyperpyrexia due to misoprostol consumption, because this adverse effect is most likely to occur 
@@ -267,8 +269,8 @@ References
 .. [Hofmeyr-et-al-2013-Cochrane-Review]
   Hofmeyr GJ, Gülmezoglu AM, Novikova N, Lawrie TA. Postpartum misoprostol for preventing maternal mortality and morbidity. Cochrane Database of Systematic Reviews 2013, Issue 7. Art. No.: CD008982. DOI: 10.1002/14651858.CD008982.pub2. 
     
-.. [Tunçalp-2012-Cochrane-Review]
-  Tunçalp Ö, Hofmeyr GJ, Gülmezoglu AM. Prostaglandins for preventing postpartum haemorrhage. Cochrane Database of Systematic Reviews 2012, Issue 8. Art. No.: CD000494. DOI: 10.1002/14651858.CD000494.pub4.
+.. [Gallos-et-al-2018-Cochrane-Review]
+  Gallos ID, Williams HM, Price MJ, Merriel A, Gee H, Lissauer D, Moorthy V, Tobias A, Deeks JJ, Widmer M, Tunçalp Ö, Gülmezoglu AM, Hofmeyr GJ, Coomarasamy A. Uterotonic agents for preventing postpartum haemorrhage: a network meta-analysis. Cochrane Database Syst Rev. 2018 Apr 25;4(4):CD011689. doi: 10.1002/14651858.CD011689.pub2. Update in: Cochrane Database Syst Rev. 2018 Dec 19;12:CD011689. doi: 10.1002/14651858.CD011689.pub3. PMID: 29693726; PMCID: PMC6494487.
 
 .. [WHO-2020]
   WHO recommendation on advance misoprostol distribution to pregnant women for prevention of postpartum haemorrhage. Geneva: World Health Organization; 2020. Licence: CC BY-NC-SA 3.0 IGO. https://iris.who.int/bitstream/handle/10665/336310/9789240013902-eng.pdf?sequence=1 
