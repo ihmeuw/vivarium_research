@@ -934,17 +934,21 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Azithromycin stratifications added to observers #1 and #7 (maternal burden and maternal population observers) - to be continued as defaults for all future runs
     - Default
-  * - 8.1*
-    - * Implement LBWSG RR cap (details to come)
-      * Recalculate LBWSG PAFs with capped RRs and updated strategy for the LNN age group (details to come)
+  * - 8.1
+    - * Implement LBWSG RR caps (applied to both the ENN and LNN age groups)
+      * Recalculate LBWSG PAFs with capped RRs
     - Baseline
     - ``model8.1``
     - Default
-    - Same modifications as run 7.0.1 and 7.1:
-    
-      * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
-      * Stratify births observer by gestational age above/below 37 weeks
-      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
+    - Same modifications as run 7.0.1
+    - Default
+  * - 8.1.1*
+    - * Implement age/sex/location/draw-specific LBWSG RR caps (details to come)
+      * Update LNN LBWSG PAF calculation to use LBWSG exposure at 7 days of life (details to come)
+    - Baseline
+    - ``model8.1.1``
+    - Default
+    - Same modifications as run 7.0.1
     - Default
   * - 9.0*
     - Wave I misoprostol
@@ -1188,7 +1192,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 8.1
-    - * Neonatal mortality is expected to validate to GBD targets (no longer be underestimated!)
+    - * Early neonatal mortality is expected to validate to GBD targets (no longer be underestimated!). Note that LNN mortality may not exactly validate because we have not yet updated the LNN LBWSG PAF calculation to use exposure specific to the population at 7 days of life.
       * Check that LBWSG effects are updated and functioning as expected
       * Check that intervention effect sizes are maintained too
     - 
