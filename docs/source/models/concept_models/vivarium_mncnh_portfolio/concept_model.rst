@@ -947,7 +947,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Stratify neonatal deaths observer by gestational age above/below 37 weeks
     - Default
   * - 8.2
-    - Update neonatal probiotics intervention effect size
+    - Update neonatal probiotics intervention effect size in accordance with `line #183 in this PR <https://github.com/ihmeuw/vivarium_research/pull/1672>`_
     - All scenarios
     - ``model8.2``
     - Default
