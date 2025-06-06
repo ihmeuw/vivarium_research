@@ -65,7 +65,7 @@ This section describes how a probiotic-treatment intervention can be implemented
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - :ref:`Neonatal sepsis and other neonatal infections <2021_cause_neonatal_sepsis_mncnh>`_ Mortality Probability :math:`\text{CSMRisk}_i^\text{sepsis}`
+  * - :ref:`Neonatal sepsis and other neonatal infections <2021_cause_neonatal_sepsis_mncnh>` Mortality Probability :math:`\text{CSMRisk}_i^\text{sepsis}`
     - Adjust multiplicatively using RR
     - Yes
     - 
