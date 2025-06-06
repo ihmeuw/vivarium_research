@@ -243,7 +243,11 @@ Assumptions and Limitations
 - We assume 50% functional capacity of the outpatient newborn PSBI management program in Ethiopia in accordance with frequent stock-outs and limited health worker capacity reported in [Tiruneh-et-al-2024]_ and hypothesize that these issues can be resolved in an intervention scenario
 - We do not model the effect of this intervention on pneumonia mortality (note that according to the WHO guideline these cases do not require inpatient treatment and outpatient management programs are expected to have a different effect on pneumonia mortality than sepsis mortality)
 - Our modeling strategy does not allow for differential impact by location due to factors such as existing level of inpatient PSBI treatment rates 
+
+  - Notably, of the two trials included in the [PSBI-Cochrane-Review]_  that reported sepsis-specific mortality effects, [Soofi-et-al-2012]_ was performed in rural districts in Pakistan and [Gill-et-al-2014]_ was performed in a rural district in Tanzania with no hospital in the district. Therefore, it is possible we will overestimate the effect of this intervention by applying to the population at large that includes population subgroups that may have greater access to hospitals (such as those in urban areas)
+
 - There was significant heterogeneity in the effect of the intervention in the [PSBI-Cochrane-Review]_ and we do not model factors that may influence the effectiveness of the intervention
+- The evidence in the [PSBI-Cochrane-Review]_ for this intervention was graded as low quality given the significant heterogeneity and the existence of interventions besides antibiotics administered alongside the community distribution of antibiotics interventions
 - Many of the trials in the [PSBI-Cochrane-Review]_ included additional services alongside the ability to treat PSBI on an outpatient basis, which may confound the estimate of the intervention effect (however, we lessen the degree of this bias by using the sepsis-specific mortality estimate rather than the all cause mortality estimate)
 - Although the trials in the [PSBI-Cochrane-Review]_ were measured specifically among the population visited by community health workers participated in the study, we do not limit the intervention effect only to those who receive postnatal care visits. This is because even if a family does not receive a PNC visit, it is possible that they will seek care if/when their newborn displays signs of illness. However, by not modeling decreased coverage among the population who does not receive PNC visits, we may overestimate the effect of the intervention.
 
@@ -271,9 +275,17 @@ References
 
   `Duby J, Lassi ZS, Bhutta ZA. Community-based antibiotic delivery for possible serious bacterial infections in neonates in low- and middle-income countries. Cochrane Database Syst Rev. 2019 Apr 11;4(4):CD007646. doi: 10.1002/14651858.CD007646.pub3. PMID: 30970390; PMCID: PMC6458055. <https://pubmed.ncbi.nlm.nih.gov/30970390/>`_
 
+.. [Gill-et-al-2014]
+
+  `Gill CJ, MacLeod WB, Phiri-Mazala G, Guerina NG, Mirochnick M, Knapp AB, Hamer DH. Can traditional birth attendants be trained to accurately identify septic infants, initiate antibiotics, and refer in a rural African setting? Glob Health Sci Pract. 2014 Aug 31;2(3):318-27. doi: 10.9745/GHSP-D-14-00045. PMID: 25276591; PMCID: PMC4168634. <https://pubmed.ncbi.nlm.nih.gov/25276591/>`_
+
 .. [Nisar-et-al-2022]
 
   `Nisar YB, Aboubaker S, Arifeen SE, Ariff S, Arora N, Awasthi S, Ayede AI, Baqui AH, Bavdekar A, Berhane M, Chandola TR, Leul A, Sadruddin S, Tshefu A, Wammanda R, Nigussie A, Pyne-Mercier L, Pearson L, Brandes N, Wall S, Qazi SA, Bahl R. A multi-country implementation research initiative to jump-start scale-up of outpatient management of possible serious bacterial infections (PSBI) when a referral is not feasible: Summary findings and implications for programs. PLoS One. 2022 Jun 13;17(6):e0269524. doi: 10.1371/journal.pone.0269524. PMID: 35696401; PMCID: PMC9191694. <https://pubmed.ncbi.nlm.nih.gov/35696401/>`_
+
+.. [Soofi-et-al-2012]
+
+  `Soofi S, Ahmed S, Fox MP, MacLeod WB, Thea DM, Qazi SA, Bhutta ZA. Effectiveness of community case management of severe pneumonia with oral amoxicillin in children aged 2-59 months in Matiari district, rural Pakistan: a cluster-randomised controlled trial. Lancet. 2012 Feb 25;379(9817):729-37. doi: 10.1016/S0140-6736(11)61714-5. Epub 2012 Jan 27. PMID: 22285055. <https://pubmed.ncbi.nlm.nih.gov/22285055/>`_
 
 .. [Tiruneh-et-al-2024]
 
