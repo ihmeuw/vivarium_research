@@ -231,11 +231,14 @@ Assumptions and Limitations
   was greater for trials using misoprostol 600 µg or more (27 studies; 2197/17,864 (12.3%) versus 422/18,161 (2.3%); average RR 4.64; 95% CI 3.33 to 
   6.46; Tau² = 0.51, I² = 86%) than for those using misoprostol 400 µg or less (31 studies; 525/6751 (7.8%) versus 185/7668 (2.4%); average RR 3.07; 
   95% CI 2.25 to 4.18; Tau² = 0.29, I² = 58%)".)
-- We assume that baseline coverage for misoprostol in home births is 5% (this is not data-backed).
+- We assume that baseline coverage for misoprostol in home births is 0%, based on literature evidence that community distribution of oral misoprostol 
+  has not been widely implemented in Nigeria, Ethiopia, or Pakistan. (e.g. [Hobday-et-al-2017-misoprostol-scale-up]_ conducted a narrative 
+  review of the scale-up of community-based misoprostol and found little evidence of scale-up.)
 - We do not model use of misoprostol for prevention of maternal hemorrhage in BEmONC and CEmONC facilities based on the [WHO-2020]_ recommendation and with
   the assumption that BEmONC and CEmONC facilities in our locations of interest have injectible uterotonics such as oxytocin widely available for the 
   prevention of maternal hemorrhage. (Note: in 2020, our team did a literature review of uterotonic coverage in facility settings in LMICs, the DRC, India, 
-  Kenya, and Nigeria, and found 0-1% of facilities had misoprostol available for PPH prevention and 43-94% of facilities had oxytocin available).
+  Kenya, and Nigeria, and found 0-1% of facilities had misoprostol available for PPH prevention and 43-94% of facilities had oxytocin available. For more
+  details on the findings of this literature review, see the final technical report saved in ``J:\Project\simulation_science\hsc_pph``.)
 - We assume that the programmes of advanced misoprostol distribution that we are modeling have been appropriately implemented in accordance with the [WHO-2020]_ recommendation,
   such that women and birthing parents have been properly trained with how to use it (e.g., timing, dosage of 400-600 micrograms).
 
@@ -257,6 +260,9 @@ References
 
 .. [Alfirevic-et-al-2007-pph_prevention]
   Alfirevic, Z., Blum, J., Walraven, G., Weeks, A. and Winikoff, B. (2007), Prevention of postpartum hemorrhage with misoprostol. International Journal of Gynecology & Obstetrics, 99: S198-S201. https://doi.org/10.1016/j.ijgo.2007.09.012
+
+.. [Hobday-et-al-2017-misoprostol-scale-up]
+  Hobday, K., Hulme, J., Belton, S., Homer, C. S., & Prata, N. (2017). Community-based misoprostol for the prevention of post-partum haemorrhage: A narrative review of the evidence base, challenges and scale-up. Global Public Health, 13(8), 1081–1097. https://doi.org/10.1080/17441692.2017.1303743
 
 .. [Hofmeyr-et-al-2013-Cochrane-Review]
   Hofmeyr GJ, Gülmezoglu AM, Novikova N, Lawrie TA. Postpartum misoprostol for preventing maternal mortality and morbidity. Cochrane Database of Systematic Reviews 2013, Issue 7. Art. No.: CD008982. DOI: 10.1002/14651858.CD008982.pub2. 
