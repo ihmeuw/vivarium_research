@@ -946,6 +946,13 @@ Default stratifications to all observers should include scenario and input draw.
       * Stratify births observer by gestational age above/below 37 weeks
       * Stratify neonatal deaths observer by gestational age above/below 37 weeks
     - Default
+  * - 8.2
+    - Update neonatal probiotics intervention effect size
+    - All scenarios
+    - ``model8.2``
+    - Default
+    - Same modifications as run 7.0.1
+    - Default
   * - 9.0*
     - Wave I misoprostol
     - Baseline 
@@ -1191,6 +1198,11 @@ Default stratifications to all observers should include scenario and input draw.
     - * Neonatal mortality is expected to validate to GBD targets (no longer be underestimated!)
       * Check that LBWSG effects are updated and functioning as expected
       * Check that intervention effect sizes are maintained too
+    - 
+    - 
+  * - 8.2
+    - * Check that neonatal mortality remains as expected
+      * Check that probiotics intervention effect is as expected
     - 
     - 
 
