@@ -78,7 +78,7 @@ full hospital management of PSBI.
 Comparison one of the [PSBI-Cochrane-Review]_ evaluated trials that compared 
 programs to initiate and/or complete community-based antibiotic management of 
 newborn PSBI cases in newborns when hospital
-referral was refused relative to the standard of care of hospital referal only.
+referral was refused relative to the standard of care of hospital referral only.
 This comparison included five trials and found a summary effect of such 
 outpatient antibiotic programs on overall mortality of RR=0.82 (95% CI: 0.68 to 
 0.99) with a high level of statistical heterogeneity (I^2 = 87%). Only two trials 
