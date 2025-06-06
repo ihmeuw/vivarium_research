@@ -47,6 +47,12 @@ true gestational age -- see the :ref:`AI Ultrasound Module
 Causal model
 ------------
 
+The following `causal diagram`_ shows the simulant attributes needed for
+choosing each simulant's delivery facility, and the causal relationships
+between them that we will simulate:
+
+.. _causal diagram: https://en.wikipedia.org/wiki/Causal_graph
+
 .. graphviz::
 
   digraph facility_choice {
@@ -127,6 +133,27 @@ Causal model
     anc_propensity -> ifd_propensity [arrowhead="none" style="dashed"]
     cat_propensity -> ifd_propensity [arrowhead="none" style="dashed"]
   }
+
+
+.. admonition:: Legend
+
+  Nodes
+
+  :black and white oval: dichotomous variable
+  :green oval: polychotomous variable
+  :orange oval: continuous variable
+  :blue-grey rectangle: propensity :math:`u \sim \operatorname{Uniform}([0,1])`
+
+  Edges
+
+  :dashed line: correlation
+  :black arrow: probabilistic causal relationship
+  :blue arrow: deterministic causal relationship
+  :blue-grey arrow: input a propensity to simulate randomness
+
+..
+    * Light blue-gray arrows represent the input of propensities to
+      simulate randomness in a probabilistic relationship
 
 Correlated propensities
 -----------------------
