@@ -142,7 +142,7 @@ between them that we will simulate:
   :black and white oval: dichotomous variable
   :green oval: polychotomous variable
   :orange oval: continuous variable
-  :blue-grey rectangle: propensity :math:`u \sim \operatorname{Uniform}([0,1])`
+  :blue-grey rectangle: propensity, :math:`u \sim \operatorname{Uniform}([0,1])`
 
   Edges
 
@@ -154,6 +154,42 @@ between them that we will simulate:
 ..
     * Light blue-gray arrows represent the input of propensities to
       simulate randomness in a probabilistic relationship
+
+Note that the only `exogenous variables`_ in the model are the
+propensities, and the simulant attributes in all the ovals are
+endogenous, being completely determined once the propensities are
+specified.
+
+.. _exogenous variables: https://en.wikipedia.org/wiki/Exogenous_and_endogenous_variables
+
+The causal model calibration uses observed data and an optimization
+procedure to find consistent values for the three correlations between
+the propensities :math:`u_\text{ANC}`, :math:`u_\text{IFD}`, and
+:math:`u_\text{cat}`, and the causal probabilities :math:`\Pr[\text{IFD
+status} \mid \operatorname{do}(T')]` for the arrow from believed term
+status to in-facility delivery status. The sections below record the
+values of these correlations and causal probabilities and detail how to
+use them in the Vivarium simulation to assign the final birth facility
+node, :math:`F`.
+
+Related modules
+~~~~~~~~~~~~~~~
+
+The variables in the causal model are spread out across multiple modules
+in our simulation. These include:
+
+Assumptions and limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* The diagram posits a causal relationship of gestational age (GA) on
+  the error (E) in estimating the gestational age. We have some
+  empirical data for this effect from BMGF, but it is currently not
+  modeled. That is, in our current modeling strategy, the arrow from GA
+  to E is a "no-op" relationship, and E depends only on the ultrasound
+  type.
+* The causal model includes birth weight (BW) and low birth weight
+  status (LBW), but these are not used in the causal model optimization
+  due to lack of data.
 
 Correlated propensities
 -----------------------
