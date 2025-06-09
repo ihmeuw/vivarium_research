@@ -283,6 +283,8 @@ At the beginning of pregnancy, it should be determined whether the pregnancy wil
     - 1 - probability_partial_term
     - 
 
+.. _other_models_pregnancy_closed_cohort_mncnh_sex_of_infant:
+
 Sex of infant
 ~~~~~~~~~~~~~~~
 
@@ -305,6 +307,8 @@ For pregnancies that result in live birth or stillbirth outcomes, infant sex sho
     *   - Ethiopia
         - 179
         - 0.514271  
+
+.. _other_models_pregnancy_closed_cohort_mncnh_lbwsg_exposure:
 
 Birthweight, Gestational Age, and LBW Status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -102,6 +102,8 @@ significant: the order of operations for implementation moves from top to bottom
 Specically, each variable must be defined as a module output in a row prior to being 
 defined as a module input in a subsequent row.
 
+.. _mncnh_portfolio_pregnancy_component_modules:
+
 .. list-table:: Pregnancy Component Modules
   :header-rows: 1
 
