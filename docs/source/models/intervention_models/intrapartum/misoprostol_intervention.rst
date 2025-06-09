@@ -119,7 +119,7 @@ In Vivarium, this risk effect will modify the maternal hemorrhage incidence pipe
 
 .. math::
 
-   \text{IR}_i^\text{maternal hemorrhage} = \text{IR}^\text{maternal hemorrhage}_ \cdot (1 - \text{PAF}_\text{no misoprostol}) \cdot \text{RR}_i^\text{no misoprostol}
+   \text{IR}_i^\text{maternal hemorrhage} = \text{IR}^\text{maternal hemorrhage} \cdot (1 - \text{PAF}_\text{no misoprostol}) \cdot \text{RR}_i^\text{no misoprostol}
 
 where :math:`\text{RR}_i^\text{no misoprostol}` is simulant *i*'s individual relative risk for "no misoprostol", meaning :math:`\text{RR}_i^\text{no misoprostol} = \text{RR}_\text{no misoprostol}` 
 if simulant *i* does not receive misoprostol, and :math:`\text{RR}_i^\text{no misoprostol} = 1` if simulant *i* receives misoprostol. 
