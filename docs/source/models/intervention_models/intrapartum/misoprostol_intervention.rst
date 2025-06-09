@@ -140,7 +140,7 @@ sublingually received misoprostol during labor on the prevention of maternal hem
     - N/A
     - Value to be used in sim
   * - :math:`1/\text{RR}^\text{misoprostol}`
-    - RR = 0.61 (95% CI: 0.50 to 0.74). Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(0.61, 0.50, 0.74S)`
+    - RR = 0.61 (95% CI: 0.50 to 0.74). Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(0.61, 0.50, 0.74)`
     - [Gallos-et-al-2018-Cochrane-Review]_
     - 
   * - PAF
