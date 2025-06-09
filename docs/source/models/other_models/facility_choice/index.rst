@@ -165,18 +165,26 @@ specified.
 The causal model calibration uses observed data and an optimization
 procedure to find consistent values for the three correlations between
 the propensities :math:`u_\text{ANC}`, :math:`u_\text{IFD}`, and
-:math:`u_\text{cat}`, and the causal probabilities :math:`\Pr[\text{IFD
-status} \mid \operatorname{do}(T')]` for the arrow from believed term
-status to in-facility delivery status. The sections below record the
-values of these correlations and causal probabilities and detail how to
-use them in the Vivarium simulation to assign the final birth facility
-node, :math:`F`.
+:math:`u_\text{cat}`, and the causal probabilities
+:math:`\Pr[\text{IFD status} \mid \operatorname{do}(T')]`
+for the arrow from believed term status to in-facility delivery status.
+The sections below record the values of these correlations and causal
+probabilities and detail how to use them in the Vivarium simulation to
+assign the final birth facility node, :math:`F`.
 
-Related modules
-~~~~~~~~~~~~~~~
+Related modules and submodels
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The variables in the causal model are spread out across multiple modules
-in our simulation. These include:
+The variables in the causal model are spread out across the pregnancy
+component modules. These include:
+
+* Initial attributes module for the propensities propensities
+  :math:`u_\text{ANC}`, :math:`u_\text{IFD}`, and :math:`u_\text{cat}`
+* Pregnancy model for sex of child and LBWSG exposure, as well as the
+  LBWSG exposure model
+* ANC module for assigning ANC status
+* AI ultrasound module for ultrasound, error in gestational age,
+  estimated gestational age, and believed term status
 
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
