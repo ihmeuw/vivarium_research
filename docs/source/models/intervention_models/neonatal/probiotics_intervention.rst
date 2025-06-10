@@ -30,7 +30,7 @@ Intervention Overview
 
 **Research Background**
 
-Preterm infants are susceptible to a serious disease of the gastrointestinal tract called necrotizing enterocolitis (NEC). While the pathogeneis of NEC is not entirely understood, it is hypothesized that the paucity of normal enteric bacteria and the delayed onset of bacterial colonization in preterm infants relative to term infants leave preterm infants susceptible to NEC infection. Probiotic supplements have been shown to reduce the risk of NEC incidence among preterm infants in a 2014 Cochrance review [Cochrane-Review-Probiotics]_ and a recent meta-analysis from 2025 [Lee-Him-et-al-2025]_. 
+Preterm infants are susceptible to a serious disease of the gastrointestinal tract called necrotizing enterocolitis (NEC). While the pathogenesis of NEC is not entirely understood, it is hypothesized that the paucity of normal enteric bacteria and the delayed onset of bacterial colonization in preterm infants relative to term infants leave preterm infants susceptible to NEC infection. Probiotic supplements have been shown to reduce the risk of NEC incidence among preterm infants in a 2014 Cochrance review [Cochrane-Review-Probiotics]_ and a recent meta-analysis from 2025 [Lee-Him-et-al-2025]_. 
 
 The Cochrane review found that "probiotics supplementation significantly reduced the incidence of severe NEC (stage II or more) (typical relative risk (RR) 0.43, 95% confidence interval (CI) 0.33 to 0.56; 20 studies, 5529 infants) and mortality (typical RR 0.65, 95% CI 0.52 to 0.81; 17 studies, 5112 infants). There was no evidence of significant reduction of nosocomial sepsis (typical RR 0.91, 95% CI 0.80 to 1.03; 19 studies, 5338 infants)." [Cochrane-Review-Probiotics]_
 
