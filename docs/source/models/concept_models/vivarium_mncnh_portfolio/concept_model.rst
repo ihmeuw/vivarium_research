@@ -985,7 +985,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 9.0
     - Wave I misoprostol
-    - Baseline 
+    - Baseline and #12
     - ``model9.0``
     - Default
     - Note misoprostol coverage added as a stratifying variable to maternal disorders burden and maternal population observers
