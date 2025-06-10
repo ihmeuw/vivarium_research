@@ -520,6 +520,7 @@ defined as a module input in a subsequent row.
     - 100% among eligible population (attends ANC and delivers at home)
     - 
 
+.. _MNCNH neonatal component scenario table:
 
 .. list-table:: Neonatal component scenario-dependent variables
   :header-rows: 1
@@ -942,13 +943,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
-  * - 7.0.3
-    - Add parameter uncertainty interval for CPAP effect size
-    - All scenarios
-    - ``model7.0.3``
-    - Default
-    - Same as 7.0.1
-    - Default
   * - 7.1
     - Update neonatal mortality rates to mortality risks 
 
@@ -964,6 +958,13 @@ Default stratifications to all observers should include scenario and input draw.
       * Stratify births observer by gestational age above/below 37 weeks
       * Stratify neonatal deaths observer by gestational age above/below 37 weeks
     - Default
+  * - 7.1.1
+    - Add parameter uncertainty interval for CPAP effect size
+    - All scenarios
+    - ``model7.1.1``
+    - Default
+    - Same as 7.0.1
+    - Default
   * - 8.0
     - Wave I azithromycin 
     - All scenarios (note new azithromycin scale-up scenario #11)
@@ -971,17 +972,21 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Azithromycin stratifications added to observers #1 and #7 (maternal burden and maternal population observers) - to be continued as defaults for all future runs
     - Default
-  * - 8.1*
-    - * Implement LBWSG RR cap (details to come)
-      * Recalculate LBWSG PAFs with capped RRs and updated strategy for the LNN age group (details to come)
+  * - 8.1
+    - * Implement LBWSG RR caps (applied to both the ENN and LNN age groups)
+      * Recalculate LBWSG PAFs with capped RRs
     - Baseline
     - ``model8.1``
     - Default
-    - Same modifications as run 7.0.1 and 7.1:
-    
-      * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
-      * Stratify births observer by gestational age above/below 37 weeks
-      * Stratify neonatal deaths observer by gestational age above/below 37 weeks
+    - Same modifications as run 7.0.1
+    - Default
+  * - 8.1.1*
+    - * Implement age/sex/location/draw-specific LBWSG RR caps (details to come)
+      * Update LNN LBWSG PAF calculation to use LBWSG exposure at 7 days of life (details to come)
+    - Baseline
+    - ``model8.1.1``
+    - Default
+    - Same modifications as run 7.0.1
     - Default
   * - 9.0
     - Wave I misoprostol
@@ -1204,26 +1209,29 @@ Default stratifications to all observers should include scenario and input draw.
     - Check that preterm birth mortality is as expected: we should change from a slight overestimation to a slight underestimation. A slight underestimation is expected due to known mortality probabilities greater than 1, which will be addressed in future model runs.
     - The overestimation of preterm birth mortality is of lower magnitude than in 7.0.1, indicating that the update of the preterm prevalence term improved the model. However, preterm birth mortality remains slightly overestimated on average rather than the expected slight underestimation.
     - `Model 7.0.2 neonatal V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.0.2_nn_checks.ipynb>`_
-  * - 7.0.3
-    - * Check that artifact values for the CPAP relative risk have been updated
-      * Check that CPAP intervention effect size is as expected
-      * Check that preterm birth mortality is as expected
-    - 
-    - 
   * - 7.1
     - * Neonatal mortality (all cause and cause-specific) is expected to remain slightly underestimated in the baseline scenario (by the same magnitude of model run 6.1). This is expected as we have not yet implemented a strategy to account for known probabilities greater than 1.
       * Recheck LBWSG Effects
       * Check that intervention effect sizes are maintained
-    - 
-    - 
+    - * Neonatal mortality is in expected range
+      * LBWSG risk factor is affecting mortality pipeline values as expected (checked in the interactive sim)
+    - * `Neonatal mortality and intervention notebook for model 7.1 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.1_nn_checks.ipynb>`_
+      * `Recheck of LBWSG effects for model 7.1 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.1_lbwsg_effects_interactive_simulation.ipynb>`_
+  * - 7.1.1
+    - * Check that artifact values for the CPAP relative risk have been updated
+      * Check that CPAP intervention effect size is as expected
+      * Check that preterm birth mortality is as expected
+    - All looks good except the artifact values for the CPAP relative risk are not quite as expected due to `issue raised in this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/68#discussion_r2130230902>`_
+    - `Model 7.1.1 notebook available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.1.1_nn_checks.ipynb>`_
   * - 8.0
     - * Check baseline and intervention coverage of azithromycin intervention
       * Check that maternal disorders burden (particularly sepsis) still verifies at the population level in the baseline scenario
       * Check that the effect size of the azithromycin intervention verifies
+      * Check that CPAP intervention effect size has been appropriately updated
     - 
     - 
   * - 8.1
-    - * Neonatal mortality is expected to validate to GBD targets (no longer be underestimated!)
+    - * Early neonatal mortality is expected to validate to GBD targets (no longer be underestimated!). Note that LNN mortality may not exactly validate because we have not yet updated the LNN LBWSG PAF calculation to use exposure specific to the population at 7 days of life.
       * Check that LBWSG effects are updated and functioning as expected
       * Check that intervention effect sizes are maintained too
     - 
@@ -1243,6 +1251,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - Artifact value for the CPAP intervention effect size is slightly miscalibrated
+    - `See this github comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/68#discussion_r2130230902>`_ and `the test at the bottom of this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.1.1_nn_checks.ipynb>`_
+    - Update artifact value accordingly for model run 8.0 
+    - Model 8.0
   * - Miscalibration of neonatal mortality ratios
     - Using the specifications in model 6.1, we underestimate mortality ratios (believed to be due to having mortality probabilities greater than 1). Using the specifications in model 6.3, we overestimate mortality ratios (believed to be due to difference in mortality ratio verification target rather than mortality rate verification target)
     - Update neonatal mortality model to use mortality risk rather than rate input data (as instructed for model 7.1) and implement LBWSG RR capping and LBWSG PAF calculation strategies (details to come for model 7.2)
@@ -1251,10 +1263,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Unknown -- could be something to do with the neonatal mortality math?
     - Research team to discuss and consider -- see if it is imporoved after we update to mortality risk and cap LBWSG RRs?
     - None for now
-  * - Artifact key for CPAP intervention relative risk is a point value (1/0.53) despite uncertainty being specified in the :ref:`intervention model document <intervention_neonatal_cpap>`
-    - Docs were a bit unclear, have since been updated
-    - Engineering to update artifact key to include uncertainty interval and rerun
-    - For 7.0.3
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revist following GBD 2023 update
