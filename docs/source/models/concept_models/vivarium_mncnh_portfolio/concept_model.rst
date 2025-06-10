@@ -612,6 +612,7 @@ Default stratifications to all observers should include scenario and input draw.
   * - 1. Maternal disorders burden: cause-specific cases, deaths, YLLs, and YLDs
     - * Maternal age group
       * Pregnancy outcome
+      * Delivery facility
       * Azithromycin coverage
       * Misoprostol coverage 
     - 
@@ -988,7 +989,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and #12
     - ``model9.0``
     - Default
-    - Note misoprostol coverage added as a stratifying variable to maternal disorders burden and maternal population observers
+    - Note misoprostol coverage added as a stratifying variable to maternal disorders burden and maternal population observers and delivery facility as a stratifying variable for the maternal disorders burden observer
     - Default
   * - 10.0*
     - Wave I antenatal corticosteroids
