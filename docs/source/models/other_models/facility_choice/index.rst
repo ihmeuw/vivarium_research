@@ -178,68 +178,42 @@ Related modules and submodels
 Instructions for assigning the variables in the causal model are spread
 out across the :ref:`pregnancy component modules
 <mncnh_portfolio_pregnancy_component_modules>` and the later sections in
-this document. The documentation corresponding to each model variable is
-as follows:
+this document:
 
-* :ref:`Initial attributes module
-  <2024_vivarium_mncnh_portfolio_initial_attributes_module>` and
-  `Correlated propensities`_ section below
-
-  * ANC propensity (:math:`u_\text{ANC}`), IFD propensity
-    (:math:`u_\text{IFD}`), and LBWSG category propensity
-    (:math:`u_\text{cat}`)
-
-* :ref:`Pregnancy module
-  <2024_vivarium_mncnh_portfolio_pregnancy_module>` and :ref:`LBWSG risk
-  exposure model <2019_risk_exposure_lbwsg>`
-
-  * :ref:`sex of infant
-    <other_models_pregnancy_closed_cohort_mncnh_sex_of_infant>` (S),
-    :ref:`LBWSG exposure
-    <other_models_pregnancy_closed_cohort_mncnh_lbwsg_exposure>` (cat,
-    BW, GA), low birth weight status (LBW), and term status (T)
-
-* :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
-
-  * ANC status
-
-* :ref:`AI ultrasound module
-  <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-
-  * ultrasound type (U), error in gestational age (E), estimated
-    gestational age (GA'), and believed term status (T')
-
-* `Causal conditional probabilities for in-facility delivery`_ section
-  below
-
-  * in-facility delivery status (IFD status) and birth facility (F)
-
-
-.. list-table:: Documentation for causal model variables
+.. list-table:: Location of documentation for causal model variables
   :header-rows: 1
   :widths: 10 10
 
-  * - Documentation
+  * - Documentation section
     - Variables
   * - * :ref:`Initial attributes module
         <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-      * `Correlated propensities`_ section below
-
+      * `Correlated propensities`_ (below)
     - * ANC propensity (:math:`u_\text{ANC}`)
       * IFD propensity (:math:`u_\text{IFD}`)
       * LBWSG category propensity (:math:`u_\text{cat}`)
-
   * - * :ref:`Pregnancy module
         <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       * :ref:`LBWSG risk exposure model <2019_risk_exposure_lbwsg>`
-
-    - * :ref:`sex of infant
+    - * :ref:`Sex of infant
         <other_models_pregnancy_closed_cohort_mncnh_sex_of_infant>` (S)
       *  :ref:`LBWSG exposure
          <other_models_pregnancy_closed_cohort_mncnh_lbwsg_exposure>`
          (cat, BW, GA)
-      * low birth weight status (LBW)
-      * term status (T)
+      * Low birth weight status (LBW)
+      * Term status (T)
+  * - :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
+    - ANC status
+  * - :ref:`AI ultrasound module
+      <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+    - * Ultrasound type (U)
+      * Error in gestational age (E)
+      * Estimated gestational age (GA')
+      * Believed term status (T')
+  * - `Causal conditional probabilities for in-facility delivery`_
+      (below)
+    - * In-facility delivery status (IFD status)
+      * Birth facility (F)
 
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
