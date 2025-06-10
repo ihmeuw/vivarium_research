@@ -275,6 +275,8 @@ Assumptions and Limitations
 - We assume that the delivery facility is also the facility where preterm infants will receive prophylactic probiotic supplementation
 - We assume that the relative risk of sepsis mortality with probiotics in practice is a value that we can find in the literature
 - We do not specifically measure the impact of this intervention on NEC, the condition directly affected by the intervention, because it is not modeled by GBD. We use the less specific neonatal sepsis and other neonatal infections cause in GBD instead.
+- We assume that the effect of probiotics on invasive infection is an appropriate proxy for the effect on sepsis cause-specific mortality.
+- The effect size of probiotics on all-cause mortality is greater in magnitude than the effect on invasive infection from [Lee-Him-et-al-2025]_. This is inconsistent with the causal hypothesis we are modeling in our simulation. However, there is less statistical precision in the effect estimate for all-cause mortality than for invasive infection, so we accept this inconsistency.
 
 Validation and Verification Criteria
 ------------------------------------
@@ -282,6 +284,7 @@ Validation and Verification Criteria
 - Population-level mortality rate should be the same as when this intervention is not included in the model
 - The ratio of sepsis deaths per birth among those without probiotics access divided by those with probiotics access should equal the relative risk parameter used in the model
 - The baseline coverage of probiotics in each facility type should match the values in the artifact
+- Check whether the effect size on all cause mortality is within the confidence interval of the observed effect from [Lee-Him-et-al-2025]_
 
 References
 ------------
