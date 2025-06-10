@@ -184,7 +184,7 @@ this document:
   :header-rows: 1
   :widths: 10 10
 
-  * - Documentation section
+  * - Documentation sections
     - Variables
   * - * :ref:`Initial attributes module
         <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
@@ -195,6 +195,8 @@ this document:
   * - * :ref:`Pregnancy module
         <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       * :ref:`LBWSG risk exposure model <2019_risk_exposure_lbwsg>`
+      * `Special ordering of the categories for categorical variables`_
+        (below)
     - * :ref:`Sex of infant
         <other_models_pregnancy_closed_cohort_mncnh_sex_of_infant>` (S)
       *  :ref:`LBWSG exposure
@@ -202,16 +204,20 @@ this document:
          (cat, BW, GA)
       * Low birth weight status (LBW)
       * Term status (T)
-  * - :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
-    - ANC status
-  * - :ref:`AI ultrasound module
-      <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+  * - * :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
+      * `Special ordering of the categories for categorical variables`_
+        (below)
+    - * ANC status
+  * - * :ref:`AI ultrasound module
+        <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - * Ultrasound type (U)
       * Error in gestational age (E)
       * Estimated gestational age (GA')
       * Believed term status (T')
-  * - `Causal conditional probabilities for in-facility delivery`_
-      (below)
+  * - * `Causal conditional probabilities for in-facility delivery`_
+        (below)
+      * `Special ordering of the categories for categorical variables`_
+        (below)
     - * In-facility delivery status (IFD status)
       * Birth facility (F)
 
