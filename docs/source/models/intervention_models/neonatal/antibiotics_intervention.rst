@@ -222,7 +222,7 @@ Where:
     - 0.78 (95% CI: 0.60 to 1.00), lognormal distribution of uncertainty (implemented as parameter uncertainty)
     - [PSBI-Cochrane-Review]_
   * - mean_rr
-    - :math:`\text{RR}^\text{no antibiotics} * (1 - p_\text{baseline coverage} + p_\text{baseline coverage}`
+    - :math:`\text{RR}^\text{no antibiotics} * (1 - p_\text{baseline coverage}) + p_\text{baseline coverage}`
     - :math:`p_\text{baseline coverage}` is baseline coverage proportion defined in the baseline coverage section above
   * - PAF
     - (mean_rr - 1) / mean_rr
