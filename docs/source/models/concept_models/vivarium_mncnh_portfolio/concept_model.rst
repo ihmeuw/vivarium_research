@@ -1254,6 +1254,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Check that misoprostol coverage is as expected among eligible population in baseline and intervention scenarios
       * Check that only eligible population (attends ANC and delivers at home) receives misoprostol
       * Check effect size of misoprostol on maternal hemorrhage incidence
+    - 
+    - 
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
