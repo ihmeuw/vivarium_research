@@ -988,6 +988,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Same modifications as run 7.0.1
     - Default
+  * - 8.2
+    - Update neonatal probiotics intervention effect size in accordance with `line #183 in this PR <https://github.com/ihmeuw/vivarium_research/pull/1672>`_
+    - All scenarios
+    - ``model8.2``
+    - Default
+    - Same modifications as run 7.0.1
+    - Default
   * - 9.0
     - Wave I misoprostol
     - Baseline and #12
@@ -1236,13 +1243,16 @@ Default stratifications to all observers should include scenario and input draw.
       * Check that intervention effect sizes are maintained too
     - 
     - 
+  * - 8.2
+    - * Check that neonatal mortality remains as expected
+      * Check that probiotics intervention effect is as expected
+    - 
+    - 
   * - 9.0
     - * Check maternal hemorrhage still verifies in baseline scenario
       * Check that misoprostol coverage is as expected among eligible population in baseline and intervention scenarios
       * Check that only eligible population (attends ANC and delivers at home) receives misoprostol
       * Check effect size of misoprostol on maternal hemorrhage incidence
-    - 
-    - 
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
