@@ -211,7 +211,7 @@ this document:
   * - * :ref:`AI ultrasound module
         <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - * Ultrasound type (U)
-      * Error in gestational age (E)
+      * Error in gestational age estimation (E)
       * Estimated gestational age (GA')
       * Believed term status (T')
   * - * `Causal conditional probabilities for in-facility delivery`_
@@ -224,6 +224,12 @@ this document:
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* The causal model was designed to capture the effect of expanded
+  coverage of AI ultrasound on choice of delivery facility, so only the
+  variables deemed important for this effect were included. If in the
+  future we want to intervene on variables besides the ultrasound (U)
+  node (for example, expand ANC coverage), we would likely need to add
+  more nodes and/or edges to the model.
 * The diagram posits a causal relationship of gestational age (GA) on
   the error (E) in estimating the gestational age. We have some
   empirical data for this effect from BMGF, but it is currently not
@@ -231,8 +237,8 @@ Assumptions and limitations
   to E is a "no-op" relationship, and E depends only on the ultrasound
   type.
 * The causal model includes birth weight (BW) and low birth weight
-  status (LBW), but these are not used in the causal model optimization
-  due to lack of data.
+  status (LBW), but these are not currently used in the causal model
+  optimization due to lack of data.
 
 Correlated propensities
 -----------------------
