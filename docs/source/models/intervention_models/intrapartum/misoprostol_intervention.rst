@@ -72,9 +72,9 @@ Baseline Coverage Data
 ++++++++++++++++++++++++
 
 We are only interested in modeling the impact of misoprostol distribution in the prevention of maternal hemorrhage in at-home 
-settings, so baseline coverage of all BEmONC and CEmONC facilities should be zero. Currently our baseline value for at-home
-administration of misoprostol is not data-backed, so we will need to update this once we find better data.
-
+settings, so only simulants who delivery at home are eligible for the intervention. Simulants who delivery at BEmONC and CEmONC facilities 
+are ineligible for ther intervention, as mothers and birthing parents should have access to more effective injectible uterotonics [Gallos-et-al-2018-Cochrane-Review]_. Currently our baseline value for at-home
+administration of misoprostol is not directly data-backed, so we will need to update this once we find better data.
 
 .. list-table:: Baseline Coverage of intrapartum misoprostol
   :widths: 15 15 15 15 15
@@ -92,16 +92,14 @@ administration of misoprostol is not data-backed, so we will need to update this
     - This is an assumption based on literature evidence that community distribution of oral misoprostol 
       as not been widely implemented in Nigeria, Ethiopia, or Pakistan. (e.g. [Hobday-et-al-2017-misoprostol-scale-up]_ conducted a narrative 
       review of the scale-up of community-based misoprostol and found little evidence of scale-up.)
-  * - All (Ethiopia, Nigeria, Pakistan)
-    - BEmONC and CEmONC Facilities
-    - 0
-    - N/A
-    - We are only interested in modeling the impact of misoprostol on home births, not in-facility births, where mothers
-      and birthing parents should have access to more effective injectible uterotonics. [Gallos-et-al-2018-Cochrane-Review]_
-
 
 Vivarium Modeling Strategy
 --------------------------
+
+Intervention eligibility criteria (see :ref:`the intrapartum intervention module document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>` for how to obtain this information in the MNCNH portfolio simulation):
+
+  1. Attended ANC
+  2. Delivers at home
 
 This intervention requires adding an attribute to all simulants who attended ANC facilities during their pregnancy and give birth at home to specify if a pregnant person 
 receives misoprostol during labor or not.  We will track this and the model will have different incidence rates for maternal hemorrhage for individuals with and without 
@@ -132,7 +130,7 @@ sublingually received misoprostol during labor on the prevention of maternal hem
   :header-rows: 1
 
   * - Parameter
-    - Mean
+    - Value
     - Source
     - Notes
   * - :math:`\text{RR}^\text{no misoprostol}`
@@ -143,82 +141,14 @@ sublingually received misoprostol during labor on the prevention of maternal hem
     - RR = 0.61 (95% CI: 0.50 to 0.74). Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(0.61, 0.50, 0.74)`
     - [Gallos-et-al-2018-Cochrane-Review]_
     - 
+  * - mean_rr
+    - :math:`\text{RR}^\text{no misoprostol} * (1 - p_\text{baseline coverage}) + p_\text{baseline_coverage}`
+    - N/A
+    - Despite intervention eligibility criteria of attending ANC, we will use :math:`p_\text{baseline coverage}` defined in the baseline coverage section above among all home births (regardless of ANC attendance) to calculate the mean_rr and PAF values
   * - PAF
-    - see below
-    - see below
-    - see `Calibration strategy` section below for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model
-
-Calibration Strategy
---------------------
-
-The following decision tree shows all of the paths from delivery facility choice to misoprostol use.  Distinct paths in the tree correspond to disjoint events, 
-which we can sum over to find the population probability of maternal hemorrhage incidence.  The goal here is to use internally consistent conditional probabilities of maternal hemorrhage incidence
-for the subpopulations that receive or do not receive misoprostol, so that the baseline scenario can track who receives misoprostol and still match the baseline maternal hemorrhage 
-incidence rate.
-
-.. graphviz::
-
-    digraph misoprostol {
-        rankdir = LR;
-        ANC [label="Attended ANC?"]
-        no [label="p_maternal_hemorrhage_without_misoprostol"]
-        yes [label="Facility type"]
-        home_w [label="p_maternal_hemorrhage_with_misoprostol"]
-        home_wo [label="p_maternal_hemorrhage_without_misoprostol"] 
-        BEmONC [label="p_maternal_hemorrhage_without_misoprostol"] 
-        CEmONC [label="p_maternal_hemorrhage_without_misoprostol"]
-
-        ANC -> yes [label = "Yes"]
-        ANC -> no [label = "No"]
-         
-
-        yes -> home  [label = "home birth"]
-        yes -> BEmONC  [label = "BEmONC"]
-        yes -> CEmONC  [label = "CEmONC"]
-
-        home -> home_w [label = "received"]
-        home -> home_wo [label = "not received"]
-    }
-
-
-.. math::
-    \begin{align*}
-        p(\text{maternal_hemorrhage}) 
-        &= \sum_{\text{paths without misoprostol}} p(\text{path})\cdot p(\text{maternal_hemorrhage}|\text{no misoprostol})\\
-        &+ \sum_{\text{paths with misoprostol}} p(\text{path})\cdot p(\text{maternal_hemorrhage}|\text{misoprostol})\\[.1in]
-        p(\text{maternal_hemorrhage}|\text{no misoprostol}) &= \text{RR}_\text{no misoprostol} \cdot p(\text{maternal_hemorrhage}|\text{misoprostol})
-    \end{align*}
-
-where :math:`p(\text{maternal_hemorrhage})` is the probability of contracting maternal hemorrhage in the general population, and :math:`p(\text{maternal_hemorrhage}|\text{misoprostol})` and
-:math:`p(\text{maternal_hemorrhage}|\text{no misoprostol})` are the probability of contracting maternal hemorrhage with and without receiving misoprostol.  For each 
-path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled Home and 
-not received occurs with probability that the birth is at home times the probability that the simulant receives misoprostol.
-
-When we fill in the location-specific values for delivery facility rates, misoprostol coverage, relative risk of maternal hemorrhage incidence with misoprostol, 
-and maternal hemorrhage incidence probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{maternal_hemorrhage}|\text{misoprostol})` 
-and :math:`p(\text{maternal_hemorrhage}|\text{no misoprostol})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
-
-**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that
-:math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
-
-.. math::
-
-   p(\text{no misoprostol}) = \sum_{\text{paths without misoprostol}} p(\text{path}),
-
-then can use this to expand the identity
-
-.. math::
-
-   \text{PAF}_\text{no misoprostol} = 1 - \frac{1}{\mathbb{E}(\text{RR})}.
-
-Since our risk exposure has two categories,
-
-.. math::
-
-   \mathbb{E}(\text{RR}) = p(\text{no misoprostol}) \cdot \text{RR}_\text{no misoprostol} + (1 - p(\text{no misoprostol})) \cdot 1.
-
-
-
+    - (mean_rr - 1) / mean_rr
+    - N/A
+    - 
 
 Assumptions and Limitations
 ---------------------------
@@ -243,6 +173,7 @@ Assumptions and Limitations
   details on the findings of this literature review, see the final technical report saved in ``J:\Project\simulation_science\hsc_pph``.)
 - We assume that the programmes of advanced misoprostol distribution that we are modeling have been appropriately implemented in accordance with the [WHO-2020]_ recommendation,
   such that women and birthing parents have been properly trained with how to use it (e.g., timing, dosage of 400-600 micrograms).
+- We assume that misoprostol will be administered at ANC visits and that only those who attend ANC are eligible for the misoprostol intervention and that it is not possible to obtain misoprostol through other means.
 
 .. todo::
 
@@ -256,6 +187,7 @@ Validation and Verification Criteria
 - The ratio of maternal hemorrhage incidence among those without misoprostol divided by those with misoprostol
   should equal the relative risk parameter used in the model.
 - The baseline coverage of misoprostol in each facility type should match the values in the artifact.
+- Only simulants who attend ANC and deliver at home receive misoprostol
 
 References
 ------------
