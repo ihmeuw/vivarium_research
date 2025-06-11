@@ -1008,7 +1008,10 @@ Wherever it is, it should include most of the considerations described in earlie
     - *Community engagement and participation*: Where possible, involve in your research process communities affected by health disparities. Instead of *studying about* these communities, health researchers should be *working with* them to identify priorities, interpret findings, and co-create interventions. By doing so, we ensure that research is grounded in the realities of those most impacted by health inequities.
     - *Policy advocacy*: Research informed by CRT should not only aim to understand and document disparities but also to drive change. This involves advocating for policies that address the root causes of racial disparities in health, such as economic inequality, housing, education, and access to healthcare. Researchers can play a role in informing policy, engaging in public discourse, and supporting community-led initiatives.
     - *Reflective practice*:  Engage in ongoing reflection about your own positions, biases, and the power dynamics in your work. This includes being open to critique, actively seeking diverse perspectives, and being committed to anti-racist practices both personally and professionally.
-  
+
+Recommended resources
++++++++++++++++++++++
+
 References
 ++++++++++
 
