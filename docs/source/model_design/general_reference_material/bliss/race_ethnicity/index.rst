@@ -1012,6 +1012,42 @@ Wherever it is, it should include most of the considerations described in earlie
 Recommended resources
 +++++++++++++++++++++
 
+.. list-table:: Resources on race and ethnicity
+  :header-rows: 1
+  :widths: 10 20
+
+  * - Resource
+    - Notes
+  * - `DEI and Research Considerations
+      <https://hub.ihme.washington.edu/spaces/DEI/pages/123840124/DEI+and+Research+Considerations>`_
+    - Created in 2020--2021 by a group of IHME employees seeking to
+      establish a broad set of considerations for those doing research
+      at IHME using a collaborative and bottom-up process. Includes a
+      section on extracting race/ethnicity data, composed of questions
+      that a researcher could ask themselves prior to seeking data. Also
+      includes a list of recommended readings/resources.
+  * - `Use of Race and Ethnicity in Biomedical Publication
+      <https://jamanetwork.com/journals/jama/fullarticle/10.1001/jama.289.20.2709>`_
+    - Referenced by the DEI and Research Considerations guide; outlines
+      guidelines to be used when race and ethnicity are addressed in
+      biomedical publications
+  * - `USHD BRFSS Data Landscape 2020
+      <https://hub.ihme.washington.edu/display/DLSI/USHD+BRFSS+Data+Landscape+2020>`_
+    - Brief overview of race/ethnicity data collection in the US and the
+      racial categories used by the US Counties Heath Disparities Team.
+      **Note:** USHD has also developed an internal taxonomy of racial
+      and ethnic classifications but has not yet shared --- we could
+      inquire further.
+  * - `Race, racism, geographic locations/dynamics, and historical
+      change
+      <https://hub.ihme.washington.edu/spaces/SGT/pages/113068367/Race+racism+geographic+locations+dynamics+and+historical+change>`_
+    - IHME Design team's style guide for writing about race; includes a
+      plethora of other established resources and best practices
+  * - `Conscious Style Guide --- Ethnicity, Race + Nationality
+      <https://consciousstyleguide.com/ethnicity-race-nationality/>`_
+    - Compilation of resources related to writing about racially
+      marginalized groups
+
 References
 ++++++++++
 
