@@ -131,8 +131,8 @@ prophylactic azithromycin during labor.
     - Notes
   * - Relative Risk
     - 1.54
-    - :math:`\text{Normal}(1.54,0.08^2)`
-    - Based on relative risk of 0.65 (95% CI 0.55-0.77) on maternal sepsis incidence for pregnant people receiving prophylactic azithromycin
+    - Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(1.54, 1.30, 1.82)`
+    - Based on relative risk of 0.65 (95% CI 0.55-0.77) on maternal sepsis incidence for pregnant people receiving prophylactic azithromycin [Ye-et-al-2024-azithromycin-during-labor]_
   * - PAF
     - see below
     - see below

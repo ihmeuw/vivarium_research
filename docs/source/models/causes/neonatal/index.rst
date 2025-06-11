@@ -115,11 +115,19 @@ Scope
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-The excluded nonfatal portion of the burden is small (around 10% of the total burden).
+- The excluded nonfatal portion of the burden is small (around 10% of the total burden).
 
-The evidence base for identifying the level 4 subcauses is not as solid as I would like.
+- The evidence base for identifying the level 4 subcauses is not as solid as I would like.
 
-Preterm must be split into with and without respiratory distress syndrome (RDS) outside of GBD, since GBD does not distinguish preterms deaths with and without RDS.
+- Preterm must be split into with and without respiratory distress syndrome (RDS) outside of GBD, since GBD does not distinguish preterms deaths with and without RDS.
+
+We "cap" LBWSG RR values at a certain value in an attempt to eliminate the occurance of individual all-cause mortality risk values greater than 1 on in our simulation (and therefore avoiding an associated underestimation of neonatal mortality) while also maintaining:
+
+- The relative difference in mortality risk values between LBWSG exposures that are not capped, and
+
+- Mortality risk values very close to 1 for the individuals with the highest risk LBWSG exposures
+
+However, in this implementation, we do not consider how modeled interventions may further increase individual-level mortality risk beyond the modifications from the LBWSG risk factor, so it is possible that we continue to have some mortality risk values greater that 1 in our simulation. 
 
 Cause Model Decision Graph
 ++++++++++++++++++++++++++
@@ -318,12 +326,20 @@ Data Tables
       - 
     * - :math:`\text{PAF}_\text{LBWSG}`
       - population attributable fraction of all-cause mortality for low birth weight and short gestation
-      - computed so that PAF = 1 - 1 / E(RR) from the interpolated relative risk function (with expectation taken over the distribution of LBWSG exposure)
-      -
+      - computed so that PAF = 1 - 1 / E(:math:`\text{RR}_{\text{BW},\text{GA}}`) from the interpolated relative risk function (with expectation taken over the distribution of LBWSG exposure)
+      - Note that the relative risks used to calculate the PAFs are capped below the :math:`\text{RR}_\text{max}` value
     * - :math:`\text{RR}_{\text{BW},\text{GA}}`
-      - relative risk of all-cause mortality for low birth weight and short gestation
+      - relative risk of all-cause mortality for low birth weight and short gestation, capped at the specified maximum value
+      - :math:`\min(\text{RR}_\text{max}, \text{RR}_\text{LBWSG})`
+      - 
+    * - :math:`\text{RR}_\text{LBWSG}`
+      - relative risk of all-cause mortality for low birth weight and short gestation, as interpolated from GBD
       - interpolated from GBD values, as described in :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` docs
-      -
+      - 
+    * - :math:`\text{RR}_\text{max}`
+      - Enforced maximum value for LBWSG relative risk 
+      - 100
+      - Capping of LBWSG RRs is intended to guarentee that there will be no individual mortality risk value is greater than 1 in our simulation. 100 has been selected as a first pass value as it satisfies this criteria for all modeled locations and all draws based on the `analysis in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/lbwsg_rr_capping_investigation.ipynb>`_. This value will eventually be updated to be draw/sex/age/location-specific by optimizing a cap value in a manner similar to that used in the linked notebook.
     * - :math:`\text{CSMRisk}^k_{\text{BW},\text{GA}}`
       - cause-specific mortality risk for subcause k, for population with birth weight BW and gestational age GA
       - GBD + assumption about relative risks
