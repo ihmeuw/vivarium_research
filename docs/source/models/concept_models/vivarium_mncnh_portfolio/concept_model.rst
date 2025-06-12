@@ -976,7 +976,21 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Note misoprostol coverage added as a stratifying variable to maternal disorders burden and maternal population observers and delivery facility as a stratifying variable for the maternal disorders burden observer
     - Default
-  * - 10.0*
+  * - 10.0
+    - :ref:`Postpartum depression <2019_cause_postpartum_depression>` added as new maternal disorder cause
+    - Baseline
+    - ``model10.0``
+    - Default
+    - Default
+    - Note that postpartum depression cause should be added to the maternal disorders burden observer
+  * - 11.0
+    - Add :ref:`Hemoglobin risk exposure model <2023_hemoglobin_exposure>`. Note that this will be the starting point for the larger :ref:`wave II hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`, which will be built out in future model runs
+    - Baseline
+    - ``model11.0``
+    - Default
+    - Default
+    - Default (no new hemoglobin observer required)
+  * - 12.0*
     - Wave I antenatal corticosteroids
     - Baseline
     - ``model10.0``
@@ -1233,6 +1247,17 @@ Default stratifications to all observers should include scenario and input draw.
       * Check that misoprostol coverage is as expected among eligible population in baseline and intervention scenarios
       * Check that only eligible population (attends ANC and delivers at home) receives misoprostol
       * Check effect size of misoprostol on maternal hemorrhage incidence
+    - 
+    - 
+  * - 10.0
+    - * Check PPD incidence ratio in baseline scenario matches expectation
+      * Confirm PPD is non-fatal
+      * Confirm PPD YLD rate matches expectation
+    - 
+    - 
+  * - 11.0
+    - * Use the interactive sim to verify the hemoglobin distribution in pregnancy matches expectation
+      * Confirm maternal disorders burden still matches expectation
     - 
     - 
 
