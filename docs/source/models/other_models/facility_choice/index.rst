@@ -27,13 +27,16 @@ two steps: First, the birthing person decides whether to deliver at home
 or go to a facility, depending on the believed preterm status at the
 start of labor. Then, among simulants delivering in-facility, we will
 randomly assign simulants to BEmONC or CEmONC facilities, independent of
-other choices that have been made.
+other choices that have been made. Additionally, we do not currently
+model facility transfers, and we think of the delivery facility as the
+*final* location of the delivery if there were transfers between
+facilities.
 
 Coming up with values for the needed correlations and causal
-probabilities that are consistent with GBD and external evidence is
-detailed at the end of this document.  But before we get to that
-complexity, let's start with how we will use these correlations and
-causal probabilities in the simulation.
+probabilities for facility choice that are consistent with GBD and
+external evidence is detailed at the end of this document.  But before
+we get to that complexity, let's start with how we will use these
+correlations and causal probabilities in the simulation.
 
 Note that the calibration procedure, and hence the values we're using
 here (i.e., the correlations and the values of
@@ -232,6 +235,14 @@ Assumptions and limitations
   future we want to intervene on variables besides the ultrasound (U)
   node (for example, expand ANC coverage), we would likely need to add
   more nodes and/or edges to the model.
+* Moving to a higher level care facility during the intrapartum period
+  is common (referred up once labor begins if there is an issue) and the
+  ability to do this is often a result of available transport, distance
+  to clinics, etc. We currently do not include this level of detail and
+  instead have simulants remain at a single facility for the whole
+  intrapartum period. In the future, we may devise a strategy to model
+  facility transfers, which may necessitate some changes to the facility
+  choice model.
 * The diagram posits a causal relationship of gestational age (GA) on
   the error (E) in estimating the gestational age. Specifically, we have
   some empirical data from BMGF that shows that, in the absence of an
