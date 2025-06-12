@@ -354,9 +354,9 @@ choices in the model:
   and likely underestimate the proportion of BEmONC facilities.
 
 Once BEmONC or CEmONC has been chosen for all in-facility deliveries,
-use this choice in conjunction with the IFD status to assign one of the
-three values "home", "BEmONC", or "CEmONC" as the final birth facility
-(F) of each simulant.
+use this choice in conjunction with the IFD status to **assign one of
+the three values "home", "BEmONC", or "CEmONC" as the final birth
+facility (F) of each simulant.**
 
 .. note::
 
