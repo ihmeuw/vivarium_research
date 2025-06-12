@@ -52,7 +52,7 @@ Causal model
 Correlated propensities
 -----------------------
 
-This section describes how we will model an "instrisic correlation" of
+This section describes how we will model an "intrinsic correlation" of
 ANC, home delivery, and LBWSG (see also the :ref:`Initial attributes
 module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`). In
 short, we will use a Gaussian copula to model this, which has three
