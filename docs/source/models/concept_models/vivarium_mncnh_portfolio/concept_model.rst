@@ -938,6 +938,13 @@ Default stratifications to all observers should include scenario and input draw.
     -
     - 
     - 
+  * - 9.1
+    - Bugfix to scale up neonatal antibiotics intervention among home deliveries as well 
+    - All scenarios
+    - ``model9.1``
+    - Default
+    - Default
+    - Default
   * - 10.0*
     - Wave I antenatal corticosteroids
     - Baseline
@@ -1182,14 +1189,14 @@ Default stratifications to all observers should include scenario and input draw.
   * - 8.2
     - * Check that neonatal mortality remains as expected
       * Check that probiotics intervention effect is as expected
-    - 
-    - 
+    - All looks good!
+    - `Model 8.2 V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_8.2_nn_checks.ipynb>`_
   * - 8.3
     - * Check that baseline neonatal mortality remains as expected
       * Check antibiotics coverage by scenario is as expected (and no longer varies by delivery facility)
       * Check that NN sepsis mortality between the baseline scenario and scenario #5 (full antibiotics scale-up) reflects the RR for the neonatal outpatient antibiotics intervention for Pakistan and Nigeria. For Ethiopia (which has baseline coverage), check that the intervention effect is reflected in the covered and uncovered populations
-    - 
-    - 
+    - All looks good, except antibiotics coverage is not being scaled up among those who deliver at home as it should be
+    - `Model 8.3 V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_8.3_nn_checks.ipynb>`_
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -1198,6 +1205,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - No scale-up of the neonatal antibiotics intervention among home births
+    - We do not scale up any of the other neonatal interventions among home births, so we may need new code for this?
+    - Engineers to update 
+    - Model 9.1
   * - Artifact value for the CPAP intervention effect size is slightly miscalibrated
     - `See this github comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/68#discussion_r2130230902>`_ and `the test at the bottom of this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.1.1_nn_checks.ipynb>`_
     - Update artifact value accordingly for model run 8.0 
