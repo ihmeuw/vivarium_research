@@ -245,7 +245,7 @@ Assumptions and limitations
 Correlated propensities
 -----------------------
 
-This section describes how we will model an "instrisic correlation" of
+This section describes how we will model an "intrinsic correlation" of
 ANC, home delivery, and LBWSG (see also the :ref:`Initial attributes
 module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`). In
 short, we will use a Gaussian copula to model this, which has three
@@ -545,6 +545,48 @@ choices in the model:
   team. The current values (except for Pakistan, which is based on
   microdata from BMGF) are based on an imprecise analysis of DHS data
   and likely underestimate the proportion of BEmONC facilities.
+
+Once BEmONC or CEmONC has been chosen for all in-facility deliveries,
+use this choice in conjunction with the IFD status to **assign one of
+the three values "home", "BEmONC", or "CEmONC" as the final birth
+facility (F) of each simulant.**
+
+.. note::
+
+  The following information was implemented as a placeholder prior to
+  completion of the final facility choice model. It is retained in this
+  note for reference.
+
+  The placeholder delivery facility probabilities were as follows:
+
+    - Home: 68.3%
+
+    - Hospital (CEMONC): 26.6%
+
+    - Clinic/low-level facility (BEMONC): 5.1%
+
+  The placeholder values are from `this paper on Ethiopia
+  <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_,
+  which analyzes DHS data. Note that denominator in DHS is all births
+  (live and stillbirths) to interviewed women in the two years preceding
+  the survey.
+
+  **Note that these placeholder values have been superseded by the
+  values in the table above, from DHS and other sources, and we are
+  planning to update them again with data from the Health Systems
+  team.**
+
+  V&V: Confirm attendance rate for each type of delivery facility
+  matches inputs
+
+  Limitation: Moving to a higher level care facility during the
+  intrapartum period is common (referred up once labor begins if there
+  is an issue) and the ability to do this is often a result of transport
+  available, distance to clinics, etc. We will not include this and
+  instead have simulants remain at a single facility for the whole
+  intrapartum period.
+
+  TODO: update to be consistent with BEMONC/CEMONC terminology?
 
 Challenge of calibrating the model
 ----------------------------------
