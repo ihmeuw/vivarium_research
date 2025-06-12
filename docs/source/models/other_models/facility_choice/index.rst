@@ -233,11 +233,21 @@ Assumptions and limitations
   node (for example, expand ANC coverage), we would likely need to add
   more nodes and/or edges to the model.
 * The diagram posits a causal relationship of gestational age (GA) on
-  the error (E) in estimating the gestational age. We have some
-  empirical data for this effect from BMGF, but it is currently not
-  modeled. That is, in our current modeling strategy, the arrow from GA
-  to E is a "no-op" relationship, and E depends only on the ultrasound
-  type.
+  the error (E) in estimating the gestational age. Specifically, we have
+  some empirical data from BMGF that shows that, in the absence of an
+  accurate ultrasound, larger gestational ages are more likely to be
+  underestimated, while smaller gestational ages are more likely to be
+  overestimated. E.g., if the true GA is 42 when you go into labor, you
+  are more likely to think that the GA is 40 than to think it is 44,
+  since very few pregnancies last 44 weeks. This effect would correspond
+  to having the mean of the distribution of E depend on the value of GA,
+  but for simplicity we do not model this effect, instead assuming that
+  the mean error is 0 regardless of GA. Thus, in our current modeling
+  strategy, the arrow from GA to E is a "no-op" relationship, and E
+  depends only on the ultrasound type. The impact on our results of
+  omitting this effect will likely be small since the effect is more
+  pronounced at the extremes of the GA distribution and not as
+  pronounced near the preterm cutoff of 37 weeks.
 * The causal model includes birth weight (BW) and low birth weight
   status (LBW), but these are not currently used in the causal model
   optimization due to lack of data.
