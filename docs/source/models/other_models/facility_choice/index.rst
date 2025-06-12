@@ -418,7 +418,9 @@ Causal conditional probabilities for in-facility delivery
 ---------------------------------------------------------
 
 In addition to correlation, we posit that a belief about preterm status
-is influential in the decision to have a home delivery.  We will model
+is influential in the decision to have a home delivery (see the
+:ref:`Facility choice module
+<2024_vivarium_mncnh_portfolio_facility_choice_module>`).  We will model
 this as a causal conditional probability of home delivery given a belief
 about preterm status.  Although deriving consistent values for these
 probabilities is complex, and described in the final section of this
