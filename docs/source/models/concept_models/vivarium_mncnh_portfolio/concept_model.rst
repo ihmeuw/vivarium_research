@@ -1226,8 +1226,6 @@ Default stratifications to all observers should include scenario and input draw.
       * Cause-specific mortality still looks a little less than ideal
     - * `Model 8.1 neonatal notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_8.1_nn_checks.ipynb>`_
       * `Model 8.1 LBWSG RR checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_8.1_lbwsg_effects_interactive_simulation.ipynb>`_
-    - 
-    - 
   * - 8.2
     - * Check that neonatal mortality remains as expected
       * Check that probiotics intervention effect is as expected
