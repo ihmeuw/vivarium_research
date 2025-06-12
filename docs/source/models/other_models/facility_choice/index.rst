@@ -140,7 +140,7 @@ between them that we will simulate:
   Nodes
 
   :black and white oval: dichotomous variable
-  :green oval: polychotomous variable
+  :green oval: polytomous variable
   :orange oval: continuous variable
   :blue-grey rectangle: propensity, :math:`u \sim \operatorname{Uniform}([0,1])`
 
