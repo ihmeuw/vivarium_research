@@ -294,7 +294,7 @@ defined as a module input in a subsequent row.
         * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
-        * :ref:`Postpartum depression <2019_cause_postpartum_depression>`
+        * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
       - Wave II changes: 
 
         * Hemoglobin at birth as a variable that impacts maternal disorders causes
@@ -977,7 +977,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Note misoprostol coverage added as a stratifying variable to maternal disorders burden and maternal population observers and delivery facility as a stratifying variable for the maternal disorders burden observer
     - Default
   * - 10.0
-    - :ref:`Postpartum depression <2019_cause_postpartum_depression>` added as new maternal disorder cause
+    - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>` added as new maternal disorder cause
     - Baseline
     - ``model10.0``
     - Default
