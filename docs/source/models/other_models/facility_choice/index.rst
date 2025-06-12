@@ -112,17 +112,17 @@ between them that we will simulate:
     bw_propensity -> birthweight [color=lightblue3]
 
     sex -> lbwsg_cat
-    birthweight -> lbw [color=blue]
+    birthweight -> lbw [color=purple]
     ga -> error
-    ga -> ga_estimate [color=blue]
-    ga -> preterm [color=blue]
-    ga_estimate -> preterm_guess [color=blue]
+    ga -> ga_estimate [color=purple]
+    ga -> preterm [color=purple]
+    ga_estimate -> preterm_guess [color=purple]
     anc_propensity -> anc [color=lightblue3]
     anc -> ultrasound
     ultrasound_propensity -> ultrasound [color=lightblue3]
     ultrasound -> error
     error_propensity -> error [color=lightblue3]
-    error -> ga_estimate [color=blue]
+    error -> ga_estimate [color=purple]
     preterm_guess -> ifd [label="Pr[IFD status | do(T')]"]
 
     ifd_propensity -> ifd [color=lightblue3]
@@ -148,7 +148,7 @@ between them that we will simulate:
 
   :dashed line: correlation
   :black arrow: probabilistic causal relationship
-  :blue arrow: deterministic causal relationship
+  :purple arrow: deterministic causal relationship
   :blue-grey arrow: input a propensity to simulate randomness
 
 ..
