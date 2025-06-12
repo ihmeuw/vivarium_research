@@ -210,6 +210,18 @@ defined as a module input in a subsequent row.
 
   Only full term pregnancies (live or stillbirths, NOT abortions/miscarriages/ectopic pregnancies) will proceed to the intrapartum component. Therefore, pregnancy term length is a de facto input to all modules in the intrapartum component.
 
+.. warning::
+
+  As currently designed, the intrapartum component models an intervention for misoprostol to 
+  prevent postpartum hemorrhage (PPH) in home birth settings only. We do not consider any
+  interventions for PPH prevention at facility settings nor do we model the expected greater
+  incidence of PPH in home settings relative to facility settings. 
+
+  Therefore, as written, the incidence of PPH by delivery setting will be miscalibrated to
+  the expectation in reality. We plan to continue with the implementing the model as written while
+  noting this limitation until we implement a strategy to address this (`see related 
+  ticket here <https://jira.ihme.washington.edu/browse/SSCI-2310>`_)
+
 .. list-table:: Intrapartum Component Modules
   :header-rows: 1
 
@@ -227,13 +239,17 @@ defined as a module input in a subsequent row.
     - * (Pregnancy term duration)
       * Birth facility
       * Believed gestational age
-    - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
+      * ANC attendance
+    - * Intrapartum azithromycin coverage
       * Antenatal corticosteroid coverage
       * Misoprostol coverage
-    - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>` (TODO: link addition intervention model documents)
+    - * :ref:`Intrapartum azithromycin intervention <azithromycin_intervention>` 
+      * :ref:`Misoprostol intervention <misoprostol_intervention>`
+      * Antenatal corticosteroids intervention 
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
-      * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
+      * Intrapartum azithromycin coverage
+      * Misoprostol coverage
     - * Maternal disorders outcomes (see outcome table)
     - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
       * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
@@ -261,10 +277,13 @@ defined as a module input in a subsequent row.
       - * (Pregnancy term duration)
         * Birth facility
         * Believed gestational age
-      - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
+        * ANC attendance
+      - * Intrapartum azithromycin coverage 
         * Antenatal corticosteroid coverage
         * Misoprostol coverage
-      - * :ref:`Intrapartum azithromycin <azithromycin_intervention>` (TODO: link addition intervention model documents)
+      - * :ref:`Intrapartum azithromycin <azithromycin_intervention>` 
+        * :ref:`Misoprostol coverage <misoprostol_intervention>`
+        * Antenatal corticosteroids intervention
       - 
     * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
       - * (Pregnancy term duration)
@@ -289,7 +308,6 @@ defined as a module input in a subsequent row.
         * :ref:`Anemia impairment <2019_anemia_impairment>`
         * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>` 
       - New module in wave II
-
 
 .. note::
 
@@ -381,20 +399,6 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
-  * - 6. Antibiotics CEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 7. Antibiotics BEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
   * - 8. Probiotics total scale-up
     - Baseline
     - Baseline
@@ -417,6 +421,13 @@ defined as a module input in a subsequent row.
     - Baseline
     - 
   * - 11. Azithromycin scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 12. Misoprostol scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -459,16 +470,6 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
-  * - 6. Antibiotics CEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 7. Antibiotics BEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
   * - 8. Probiotics total scale-up
     - Baseline
     - Baseline
@@ -488,6 +489,11 @@ defined as a module input in a subsequent row.
     - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
     - Baseline
+    - 
+  * - 12. Misoprostol scale-up
+    - Baseline
+    - Baseline
+    - 100% among eligible population (attends ANC and delivers at home)
     - 
 
 .. _MNCNH neonatal component scenario table:
@@ -522,17 +528,7 @@ defined as a module input in a subsequent row.
     - 
   * - 5. Antibiotics total scale-up
     - Baseline
-    - 100% availability at BEMONC and CEMONC facilities
-    - Baseline
-    - 
-  * - 6. Antibiotics CEMONC-only scale-up
-    - Baseline
-    - 100% at CEMONC, baseline at BEMONC
-    - Baseline
-    - 
-  * - 7. Antibiotics BEMONC-only scale-up
-    - Baseline
-    - Baseline at CEMONC, 100% at BEMONC
+    - 100% coverage
     - Baseline
     - 
   * - 8. Probiotics total scale-up
@@ -551,6 +547,11 @@ defined as a module input in a subsequent row.
     - Baseline at CEMONC, 100% at BEMONC
     - 
   * - 11. Azithromycin scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 12. Misoprostol scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -580,8 +581,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Pregnancy outcome
       * Delivery facility
       * Azithromycin coverage
-      * Misoprostol coverage (not ready for implementation yet) 
-    - (Pregnancy outcome and delivery facility need to be added as of model 8.0)
+      * Misoprostol coverage 
+    - 
   * - 2. Births (this observer includes ALL pregnancy outcomes, including partial term pregnancies that may not typically be considered "births")
     - * Pregnancy outcome
       * Child sex
@@ -615,8 +616,9 @@ Default stratifications to all observers should include scenario and input draw.
       * ANC attendance
       * Ultrasound coverage
       * Azithromycin coverage
+      * Misoprostol coverage
       * Delivery facility
-    - Included
+    - 
 
 .. todo::
 
@@ -953,13 +955,27 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Same modifications as run 7.0.1
     - Default
-  * - 9.0*
+  * - 8.2
+    - Update neonatal probiotics intervention effect size in accordance with `line #183 in this PR <https://github.com/ihmeuw/vivarium_research/pull/1672>`_
+    - All scenarios
+    - ``model8.2``
+    - Default
+    - Same modifications as run 7.0.1
+    - Default
+  * - 8.3
+    - `Update neonatal antibiotics intervention modeling strategy in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1670>`_
+    - All scenarios (note that scenarios #6 and #7 have been deleted as they are no longer relevant and scenario #5 no longer has delivery facility-specific coverage)
+    - ``model8.3``
+    - Default
+    - Default
+    - Default
+  * - 9.0
     - Wave I misoprostol
-    - Baseline 
+    - Baseline and #12
     - ``model9.0``
-    -
-    - 
-    - 
+    - Default
+    - Note misoprostol coverage added as a stratifying variable to maternal disorders burden and maternal population observers and delivery facility as a stratifying variable for the maternal disorders burden observer
+    - Default
   * - 10.0*
     - Wave I antenatal corticosteroids
     - Baseline
@@ -1210,6 +1226,26 @@ Default stratifications to all observers should include scenario and input draw.
       * Cause-specific mortality still looks a little less than ideal
     - * `Model 8.1 neonatal notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_8.1_nn_checks.ipynb>`_
       * `Model 8.1 LBWSG RR checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_8.1_lbwsg_effects_interactive_simulation.ipynb>`_
+    - 
+    - 
+  * - 8.2
+    - * Check that neonatal mortality remains as expected
+      * Check that probiotics intervention effect is as expected
+    - 
+    - 
+  * - 8.3
+    - * Check that baseline neonatal mortality remains as expected
+      * Check antibiotics coverage by scenario is as expected (and no longer varies by delivery facility)
+      * Check that NN sepsis mortality between the baseline scenario and scenario #5 (full antibiotics scale-up) reflects the RR for the neonatal outpatient antibiotics intervention for Pakistan and Nigeria. For Ethiopia (which has baseline coverage), check that the intervention effect is reflected in the covered and uncovered populations
+    - 
+    - 
+  * - 9.0
+    - * Check maternal hemorrhage still verifies in baseline scenario
+      * Check that misoprostol coverage is as expected among eligible population in baseline and intervention scenarios
+      * Check that only eligible population (attends ANC and delivers at home) receives misoprostol
+      * Check effect size of misoprostol on maternal hemorrhage incidence
+    - 
+    - 
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1

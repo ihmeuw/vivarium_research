@@ -75,17 +75,13 @@ There are specific variables that will affect these cause models, summarized in 
   * - Misoprostol coverage
     - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Maternal hemorrhage incidence rate
-    - TODO: link intervention documentation
+    - See the :ref:`Misoprostol intervention page <misoprostol_intervention>`
     - 
   * - Hemoglobin at birth
     - :ref:`Hemoglobin component <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
     - Maternal sepsis, maternal hemorrhage, maternal depressive disorders, maternal hypertensive disorders
     - See :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>`
     - For wave II
-
-.. todo::
-
-  Make and link separate intervention module document for misoprostol with more specific instructions on how to implement this to replace information directly in this table (new document to include how to calibrate baseline coverage, potential need for stratifying by birth facility in baseline calibration, specific overview and limitations of intervention)
 
 .. note::
 
@@ -105,7 +101,7 @@ Incidence, mortality, YLDs, and YLLs due to cause-specific maternal disorders.
 +++++++++++++++++++++++++++++++++++++++++
 
 * Confirm outcomes for each maternal disorder (OL, sepsis, and hemorrhage) matches GBD data 
-* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` for V&V criteria specific to azithromycin intervention model
+* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` and :ref:`misoprostol intervention documentation page <misoprostol_intervention>` for V&V criteria specific to azithromycin intervention model
 
 5.0 References
 +++++++++++++++
