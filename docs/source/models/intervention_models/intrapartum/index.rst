@@ -8,5 +8,6 @@ Intrapartum Interventions
     :maxdepth: 1
 
     azithromycin_intervention
+    misoprostol_intervention
 
 
