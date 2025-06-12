@@ -983,6 +983,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 9.2
+    - Remove maternal obstructed labor as an affected outcome of the azithromycin intervention
+    - All scenarios
+    - ``model9.2``
+    - Default
+    - Default
+    - Default
   * - 10.0*
     - Wave I antenatal corticosteroids
     - Baseline
@@ -1249,6 +1256,16 @@ Default stratifications to all observers should include scenario and input draw.
       * Check that misoprostol coverage is as expected among eligible population in baseline and intervention scenarios
       * Check that only eligible population (attends ANC and delivers at home) receives misoprostol
       * Check effect size of misoprostol on maternal hemorrhage incidence
+    - 
+    - 
+  * - 9.1
+    - * Confirm neonatal antibiotics intervention coverage is appropriately scaled up in home births
+    - 
+    - 
+  * - 9.2
+    - * Confirm that there is no effect of azithromycin on maternal obstructed labor
+      * Confirm maintained effect of azithromycin on maternal sepsis
+      * Confirm maternal disorders still validate in baseline scenario
     - 
     - 
 
