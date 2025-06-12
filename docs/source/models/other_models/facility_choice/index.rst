@@ -214,7 +214,9 @@ this document:
       * Error in gestational age estimation (E)
       * Estimated gestational age (GA')
       * Believed term status (T')
-  * - * `Causal conditional probabilities for in-facility delivery`_
+  * - * :ref:`Facility choice module
+        <2024_vivarium_mncnh_portfolio_facility_choice_module>`
+      * `Causal conditional probabilities for in-facility delivery`_
         (below)
       * `Special ordering of the categories for categorical variables`_
         (below)
