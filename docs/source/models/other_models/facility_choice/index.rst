@@ -243,6 +243,18 @@ Assumptions and limitations
   intrapartum period. In the future, we may devise a strategy to model
   facility transfers, which may necessitate some changes to the facility
   choice model.
+* The timing of a standard ultrasound affects its accuracy in
+  determining gestational age (ultrasounds in the first trimester are
+  more accurate than ultrasounds in later pregnancy). However, the
+  facility choice model currently uses a dichotomous variable for ANC
+  ("no ANC" vs. "some ANC"), so we are unable to model the timing of the
+  ultrasound, instead defining a single category "standard ultrasound"
+  that uses the average measurement error for ultrasounds taken at any
+  point during pregnancy. In Wave II, we are planning to add more detail
+  to the timing of ANC visits, which should allow us to more accurately
+  model the uncertainty in GA estimation with standard ultrasounds,
+  using the data in `this paper
+  <https://obgyn.onlinelibrary.wiley.com/doi/10.1002/uog.15894>`__.
 * The diagram posits a causal relationship of gestational age (GA) on
   the error (E) in estimating the gestational age. Specifically, we have
   some empirical data from BMGF that shows that, in the absence of an
