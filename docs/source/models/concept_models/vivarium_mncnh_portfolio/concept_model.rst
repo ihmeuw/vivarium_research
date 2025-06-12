@@ -381,20 +381,6 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
-  * - 6. Antibiotics CEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 7. Antibiotics BEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
   * - 8. Probiotics total scale-up
     - Baseline
     - Baseline
@@ -459,16 +445,6 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
-  * - 6. Antibiotics CEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 7. Antibiotics BEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
   * - 8. Probiotics total scale-up
     - Baseline
     - Baseline
@@ -522,17 +498,7 @@ defined as a module input in a subsequent row.
     - 
   * - 5. Antibiotics total scale-up
     - Baseline
-    - 100% availability at BEMONC and CEMONC facilities
-    - Baseline
-    - 
-  * - 6. Antibiotics CEMONC-only scale-up
-    - Baseline
-    - 100% at CEMONC, baseline at BEMONC
-    - Baseline
-    - 
-  * - 7. Antibiotics BEMONC-only scale-up
-    - Baseline
-    - Baseline at CEMONC, 100% at BEMONC
+    - 100% coverage
     - Baseline
     - 
   * - 8. Probiotics total scale-up
@@ -958,6 +924,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Same modifications as run 7.0.1
     - Default
+  * - 8.3
+    - `Update neonatal antibiotics intervention modeling strategy in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1670>`_
+    - All scenarios (note that scenarios #6 and #7 have been deleted as they are no longer relevant and scenario #5 no longer has delivery facility-specific coverage)
+    - ``model8.3``
+    - Default
+    - Default
+    - Default
   * - 9.0*
     - Wave I misoprostol
     - Baseline 
@@ -1209,6 +1182,12 @@ Default stratifications to all observers should include scenario and input draw.
   * - 8.2
     - * Check that neonatal mortality remains as expected
       * Check that probiotics intervention effect is as expected
+    - 
+    - 
+  * - 8.3
+    - * Check that baseline neonatal mortality remains as expected
+      * Check antibiotics coverage by scenario is as expected (and no longer varies by delivery facility)
+      * Check that NN sepsis mortality between the baseline scenario and scenario #5 (full antibiotics scale-up) reflects the RR for the neonatal outpatient antibiotics intervention for Pakistan and Nigeria. For Ethiopia (which has baseline coverage), check that the intervention effect is reflected in the covered and uncovered populations
     - 
     - 
 
