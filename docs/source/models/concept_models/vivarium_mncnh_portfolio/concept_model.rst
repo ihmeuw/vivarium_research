@@ -987,7 +987,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Larger population size to confirm maternal obstructed labor is not affected by azithromycin
     - All scenarios
     - ``model9.2``
-    - 10 time larger population size
+    - 10x larger population size (100 seeds of 20_000 population size each = 2_000_000 population size per draw) and 2x as many draws for a total of 20 draws
     - Default
     - Default
   * - 10.0*
