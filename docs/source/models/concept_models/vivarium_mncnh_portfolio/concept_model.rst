@@ -984,10 +984,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 9.2
-    - Remove maternal obstructed labor as an affected outcome of the azithromycin intervention
+    - Larger population size to confirm maternal obstructed labor is not affected by azithromycin
     - All scenarios
     - ``model9.2``
-    - Default
+    - 10 time larger population size
     - Default
     - Default
   * - 10.0*
