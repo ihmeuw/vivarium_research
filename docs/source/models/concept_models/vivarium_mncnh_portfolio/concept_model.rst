@@ -486,14 +486,14 @@ defined as a module input in a subsequent row.
     - Baseline
     - 
   * - 11. Azithromycin scale-up
-    - 100% at BEmONC and CEmONC, baseline at home
-    - Baseline
-    - Baseline
+    - 50% at BEmONC and CEmONC, baseline at home
+    - 0%
+    - 0%
     - 
   * - 12. Misoprostol scale-up
-    - Baseline
-    - Baseline
-    - 100% among eligible population (attends ANC and delivers at home)
+    - 0%
+    - 0%
+    - 50% among eligible population (attends ANC and delivers at home)
     - 
 
 .. _MNCNH neonatal component scenario table:
@@ -990,6 +990,13 @@ Default stratifications to all observers should include scenario and input draw.
     - 10x larger population size (100 seeds of 20_000 population size each = 2_000_000 population size per draw) and 2x as many draws for a total of 20 draws
     - Default
     - Default
+  * - 9.3
+    - Additional stratifications and updated intervention scenario coverage for intrapartum intervention V&V
+    - All scenarios -- Note changes to scenario numbers 11 and 12
+    - `model9.3``
+    - Same population size as 9.2
+    - Make sure maternal disorders burden is stratified by delivery facility and pregnancy outcome as specified
+    - Default 
   * - 10.0*
     - Wave I antenatal corticosteroids
     - Baseline
@@ -1266,6 +1273,10 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm that there is no effect of azithromycin on maternal obstructed labor
       * Confirm maintained effect of azithromycin on maternal sepsis
       * Confirm maternal disorders still validate in baseline scenario
+    - 
+    - 
+  * - 9.3
+    - Confirm intrapartum interventions are meeting V&V criteria
     - 
     - 
 
