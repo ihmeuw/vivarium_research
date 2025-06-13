@@ -57,6 +57,7 @@ between them that we will simulate:
 .. _causal diagram: https://en.wikipedia.org/wiki/Causal_graph
 
 .. graphviz::
+  :caption: Causal graph showing the variables affecting birth facility
 
   digraph facility_choice {
 
