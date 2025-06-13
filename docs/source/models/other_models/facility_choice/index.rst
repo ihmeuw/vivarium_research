@@ -258,7 +258,7 @@ Assumptions and limitations
   <https://obgyn.onlinelibrary.wiley.com/doi/10.1002/uog.15894>`__.
 * The diagram posits a causal relationship of gestational age (GA) on
   the error (E) in estimating the gestational age. Specifically, we have
-  some empirical data from BMGF that shows that, in the absence of an
+  some empirical data from GF that shows that, in the absence of an
   accurate ultrasound, larger gestational ages are more likely to be
   underestimated, while smaller gestational ages are more likely to be
   overestimated. E.g., if the true GA is 42 when you go into labor, you

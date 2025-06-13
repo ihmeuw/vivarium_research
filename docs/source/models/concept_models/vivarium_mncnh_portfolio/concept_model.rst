@@ -1211,14 +1211,23 @@ Default stratifications to all observers should include scenario and input draw.
       * Check that maternal disorders burden (particularly sepsis) still verifies at the population level in the baseline scenario
       * Check that the effect size of the azithromycin intervention verifies
       * Check that CPAP intervention effect size has been appropriately updated
-    - 
-    - 
+    - * Azithromycin intervention coverage looks good
+      * Maternal sepsis incidence and mortality in the baseline scenario still validates
+      * Can't fully confirm azithromycin coverage by delivery facility and pregnancy outcome due to insufficient stratifications
+      * Azithromycin effect on maternal sepsis looks good
+      * It appears that azithromycin is also affecting maternal obstructed labor, which should not be the case
+      * CPAP intervention effect size looks good
+    - * `Model 8.0 maternal notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_8.0_maternal_checks.ipynb>`_
+      * `Model 8.0 neonatal notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_8.0_nn_checks.ipynb>`_
   * - 8.1
     - * Early neonatal mortality is expected to validate to GBD targets (no longer be underestimated!). Note that LNN mortality may not exactly validate because we have not yet updated the LNN LBWSG PAF calculation to use exposure specific to the population at 7 days of life.
       * Check that LBWSG effects are updated and functioning as expected
       * Check that intervention effect sizes are maintained too
-    - 
-    - 
+    - * All cause mortality in the ENN age group is looking good! Great!
+      * All cause mortality in the LBB age group is a little overestimated, but this is expected to be off because we have not updated the PAFs.
+      * Cause-specific mortality still looks a little less than ideal
+    - * `Model 8.1 neonatal notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_8.1_nn_checks.ipynb>`_
+      * `Model 8.1 LBWSG RR checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_8.1_lbwsg_effects_interactive_simulation.ipynb>`_
   * - 8.2
     - * Check that neonatal mortality remains as expected
       * Check that probiotics intervention effect is as expected
@@ -1245,15 +1254,19 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Artifact value for the CPAP intervention effect size is slightly miscalibrated
-    - `See this github comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/68#discussion_r2130230902>`_ and `the test at the bottom of this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_7.1.1_nn_checks.ipynb>`_
-    - Update artifact value accordingly for model run 8.0 
-    - Model 8.0
+  * - The azithromycin intervention appears to be affecting maternal obstructed labor
+    - Obstructed labor should not be an affected cause of azithromycin intervention
+    - Engineers to investigate why this is happening
+    - Earliest model run that it's ready -- check with Ali
+  * - Maternal observer stratification needs improvement 
+    - Maternal disorder burden observer (observer #1) to be additionally stratified by pregnancy outcome and delivery facility. "ANC" observer (aka maternal population observer, observer #7) should have delivery facility and azithromycin coverage stratification added
+    - Update observer stratification for next model run (8.2)
+    - Model 8.2
   * - Miscalibration of neonatal mortality ratios
-    - Using the specifications in model 6.1, we underestimate mortality ratios (believed to be due to having mortality probabilities greater than 1). Using the specifications in model 6.3, we overestimate mortality ratios (believed to be due to difference in mortality ratio verification target rather than mortality rate verification target)
-    - Update neonatal mortality model to use mortality risk rather than rate input data (as instructed for model 7.1) and implement LBWSG RR capping and LBWSG PAF calculation strategies (details to come for model 7.2)
-    - For runs 7.1 and 7.2. Continue to use parameters from model 7.0 in the meantime for any other runs that come before updating to 7.1.
-  * - Neonatal mortality due to preterm birth slightly overestimated
+    - This is looking largely resolved in model 8.1, but we will wait to confirm once the LBWSG RR capping strategy is updated
+    - Update LBWSG RR caps and PAF calculation strategy for model 8.1.1
+    - For model 8.1.1
+  * - Neonatal mortality due to preterm birth slightly overestimated and remaining cause-specific mortality is generally underestimated despite this being resolved for all-cause mortality
     - Unknown -- could be something to do with the neonatal mortality math?
     - Research team to discuss and consider -- see if it is imporoved after we update to mortality risk and cap LBWSG RRs?
     - None for now
