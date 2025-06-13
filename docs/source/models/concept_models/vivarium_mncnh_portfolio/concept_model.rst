@@ -1281,8 +1281,8 @@ Default stratifications to all observers should include scenario and input draw.
     - `Model 9.2 V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.2_maternal_checks.ipynb>`_
   * - 9.3
     - Confirm intrapartum interventions are meeting V&V criteria
-    - 
-    - 
+    - Intrapartum intervention coverage and effects are looking just as expected :) 
+    - `Model 9.3 V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.3_maternal_checks.ipynb>`_
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -1291,10 +1291,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Need additional observer stratifications to verify intrapartum interventions
-    - Add delivery facility and pregnancy outcome to maternal burden observers
-    - Engineers to update
-    - For model 9.3
   * - Miscalibration of neonatal mortality ratios
     - This is looking largely resolved in model 8.1, but we will wait to confirm once the LBWSG RR capping strategy is updated
     - Update LBWSG RR caps and PAF calculation strategy for model 8.1.1
