@@ -120,11 +120,11 @@ machine, we can draw an analogous directed graph that can be interpreted
 as a (collapsed) decision tree rather than a state transition diagram.
 The main difference is that the values on the transition arrows
 represent decision probabilities rather than rates per unit time. The
-maternal sepsis decision graph drawn below should be inserted on the
+PPD decision graph drawn below should be inserted on the
 "full term pregnancy" branch of the decision graph from the
 :ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`,
 between the intrapartum model and the birth of the child simulant. Solid
-lines are the pieces added by the maternal sepsis model, while dashed
+lines are the pieces added by the PPD model, while dashed
 lines indicate pieces of the underlying pregnancy model.
 
 .. todo::
@@ -148,8 +148,8 @@ lines indicate pieces of the underlying pregnancy model.
         rankdir = LR;
         ftp [label="pregnancy, post\nintrapartum", style=dashed]
         ftb [label="birth", style=dashed]
-        alive [label="parent alive"]
-        dead [label="parent dead"]
+        alive [label="parent does not die due to PPD"]
+        dead [label="parent dies due to PPD"]
 
         ftp -> alive  [label = "1 - ir"]
         ftp -> PPD [label = "ir"]
@@ -193,8 +193,7 @@ lines indicate pieces of the underlying pregnancy model.
       - The probability that a pregnant simulant gets postpartum depression
     * - cfr
       - case fatality rate
-      - The probability that a simulant with sepsis or another maternal
-        infection dies of that infection
+      - The probability that a simulant with PPD dies due to PPD
 
 Data Tables
 +++++++++++
@@ -209,7 +208,7 @@ Data Tables
       - Note
     * - ir
       - postpartum depression incidence risk per birth
-      - 0.12 (95% CI 0.04, 0.20), truncated normal distribution (truncate at 95% CI limits). Apply uncertainty as parameter uncertainty, not individual-level heterogeneity
+      - 0.12 (95% CI 0.04, 0.20), truncated normal distribution (truncate at 0 and 1). Apply uncertainty as parameter uncertainty, not individual-level heterogeneity
       - [Shorey-et-al-2018-mncnh]_
     * - cfr
       - case fatality rate of postpartum depression

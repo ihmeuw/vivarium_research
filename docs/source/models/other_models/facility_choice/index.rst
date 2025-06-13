@@ -27,13 +27,16 @@ two steps: First, the birthing person decides whether to deliver at home
 or go to a facility, depending on the believed preterm status at the
 start of labor. Then, among simulants delivering in-facility, we will
 randomly assign simulants to BEmONC or CEmONC facilities, independent of
-other choices that have been made.
+other choices that have been made. Additionally, we do not currently
+model facility transfers, and we think of the delivery facility as the
+*final* location of the delivery if there were transfers between
+facilities.
 
 Coming up with values for the needed correlations and causal
-probabilities that are consistent with GBD and external evidence is
-detailed at the end of this document.  But before we get to that
-complexity, let's start with how we will use these correlations and
-causal probabilities in the simulation.
+probabilities for facility choice that are consistent with GBD and
+external evidence is detailed at the end of this document.  But before
+we get to that complexity, let's start with how we will use these
+correlations and causal probabilities in the simulation.
 
 Note that the calibration procedure, and hence the values we're using
 here (i.e., the correlations and the values of
@@ -47,7 +50,231 @@ true gestational age -- see the :ref:`AI Ultrasound Module
 Causal model
 ------------
 
-[[Causal model diagram goes here]]
+The following `causal diagram`_ shows the simulant attributes needed for
+choosing each simulant's delivery facility, and the causal relationships
+between them that we will simulate:
+
+.. _causal diagram: https://en.wikipedia.org/wiki/Causal_graph
+
+.. graphviz::
+  :caption: Causal graph showing the variables affecting birth facility
+
+  digraph facility_choice {
+
+    sex [label="(S)ex of infant"]
+    lbw [label="(LBW) Low birth\nweight status"]
+    anc [label="(ANC) Antenatal\ncare attendance"]
+    preterm [label="(T)erm status"]
+    preterm_guess [label="(T') Believed\nterm status"]
+    ifd [label="(IFD status) In-facility\ndelivery status"]
+
+    subgraph categorical {
+        node [color=green2 style=filled]
+        lbwsg_cat [label="LBWSG (cat)egory"]
+        ultrasound [label="(U)ltrasound type"]
+        facility [label="Birth (F)acility"]
+    }
+
+    subgraph continuous {
+        node [color=orange style=filled]
+        ga [label="(GA) Gestational age\nat start of labor"]
+         ga_estimate [
+            label = "(GA') Estimated gestational\nage at start of labor"
+        ]
+        birthweight [label="(BW)\nBirth weight"]
+        error [label="(E)rror in GA\nestimation"]
+    }
+
+    subgraph propensities {
+        node [shape=box color=lightblue3 style=filled]
+        sex_propensity [label="u_S"]
+        anc_propensity [label="u_ANC"]
+        ultrasound_propensity [label="u_U"]
+        error_propensity [label="u_E"]
+        ifd_propensity [label="u_IFD"]
+        facility_propensity [label="u_F"]
+    }
+
+    subgraph cluster_lbwsg_propensities {
+        label="LBWSG exposure propensities"
+        color=lightblue3
+        node [shape=box color=lightblue3 style=filled]
+        bw_propensity [label="u_BW"]
+        cat_propensity [label="u_cat"]
+        ga_propensity [label="u_GA"]
+    }
+
+    subgraph cluster_lbwsg {
+        label="LBWSG exposure"
+        lbwsg_cat -> birthweight
+        lbwsg_cat -> ga
+    }
+
+    sex_propensity -> sex [color=lightblue3]
+    cat_propensity -> lbwsg_cat [color=lightblue3]
+    ga_propensity -> ga [color=lightblue3]
+    bw_propensity -> birthweight [color=lightblue3]
+
+    sex -> lbwsg_cat
+    birthweight -> lbw [color=purple]
+    ga -> error
+    ga -> ga_estimate [color=purple]
+    ga -> preterm [color=purple]
+    ga_estimate -> preterm_guess [color=purple]
+    anc_propensity -> anc [color=lightblue3]
+    anc -> ultrasound
+    ultrasound_propensity -> ultrasound [color=lightblue3]
+    ultrasound -> error
+    error_propensity -> error [color=lightblue3]
+    error -> ga_estimate [color=purple]
+    preterm_guess -> ifd [label="Pr[IFD status | do(T')]"]
+
+    ifd_propensity -> ifd [color=lightblue3]
+    facility_propensity -> facility [color=lightblue3]
+    ifd -> facility
+
+    anc_propensity -> cat_propensity [arrowhead="none" style="dashed"]
+    anc_propensity -> ifd_propensity [arrowhead="none" style="dashed"]
+    cat_propensity -> ifd_propensity [arrowhead="none" style="dashed"]
+  }
+
+
+.. admonition:: Legend
+
+  Nodes
+
+  :black and white oval: dichotomous variable
+  :green oval: polytomous variable
+  :orange oval: continuous variable
+  :blue-grey rectangle: propensity, :math:`u \sim \operatorname{Uniform}([0,1])`
+
+  Edges
+
+  :dashed line: correlation
+  :black arrow: probabilistic causal relationship
+  :purple arrow: deterministic causal relationship
+  :blue-grey arrow: input a propensity to simulate randomness
+
+..
+    * Light blue-gray arrows represent the input of propensities to
+      simulate randomness in a probabilistic relationship
+
+Note that the only `exogenous variables`_ in the model are the
+propensities, and the simulant attributes in all the ovals are
+endogenous, being completely determined once the propensities are
+specified.
+
+.. _exogenous variables: https://en.wikipedia.org/wiki/Exogenous_and_endogenous_variables
+
+The causal model calibration uses observed data and an optimization
+procedure to find consistent values for the three correlations between
+the propensities :math:`u_\text{ANC}`, :math:`u_\text{IFD}`, and
+:math:`u_\text{cat}`, and the causal probabilities
+:math:`\Pr[\text{IFD status} \mid \operatorname{do}(T')]`
+for the arrow from believed term status to in-facility delivery status.
+The sections below record the values of these correlations and causal
+probabilities and detail how to use them in the Vivarium simulation to
+assign the final birth facility node, F.
+
+Related modules and submodels
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Instructions for assigning the variables in the causal model are spread
+out across the :ref:`pregnancy component modules
+<mncnh_portfolio_pregnancy_component_modules>` and the later sections in
+this document:
+
+.. list-table:: Location of documentation for causal model variables
+  :header-rows: 1
+  :widths: 10 10
+
+  * - Documentation sections
+    - Variables
+  * - * :ref:`Initial attributes module
+        <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+      * `Correlated propensities`_ (below)
+    - * ANC propensity (:math:`u_\text{ANC}`)
+      * IFD propensity (:math:`u_\text{IFD}`)
+      * LBWSG category propensity (:math:`u_\text{cat}`)
+  * - * :ref:`Pregnancy module
+        <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+      * :ref:`LBWSG risk exposure model <2019_risk_exposure_lbwsg>`
+      * `Special ordering of the categories for categorical variables`_
+        (below)
+    - * :ref:`Sex of infant
+        <other_models_pregnancy_closed_cohort_mncnh_sex_of_infant>` (S)
+      *  :ref:`LBWSG exposure
+         <other_models_pregnancy_closed_cohort_mncnh_lbwsg_exposure>`
+         (cat, BW, GA)
+      * Low birth weight status (LBW)
+      * Term status (T)
+  * - * :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
+      * `Special ordering of the categories for categorical variables`_
+        (below)
+    - * ANC status
+  * - * :ref:`AI ultrasound module
+        <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+    - * Ultrasound type (U)
+      * Error in gestational age estimation (E)
+      * Estimated gestational age (GA')
+      * Believed term status (T')
+  * - * :ref:`Facility choice module
+        <2024_vivarium_mncnh_portfolio_facility_choice_module>`
+      * `Causal conditional probabilities for in-facility delivery`_
+        (below)
+      * `Special ordering of the categories for categorical variables`_
+        (below)
+    - * In-facility delivery status (IFD status)
+      * Birth facility (F)
+
+Assumptions and limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* The causal model was designed to capture the effect of expanded
+  coverage of AI ultrasound on choice of delivery facility, so only the
+  variables deemed important for this effect were included. If in the
+  future we want to intervene on variables besides the ultrasound (U)
+  node (for example, expand ANC coverage), we would likely need to add
+  more nodes and/or edges to the model.
+* Moving to a higher level care facility during the intrapartum period
+  is common (referred up once labor begins if there is an issue) and the
+  ability to do this is often a result of available transport, distance
+  to clinics, etc. We currently do not include this level of detail and
+  instead have simulants remain at a single facility for the whole
+  intrapartum period. In the future, we may devise a strategy to model
+  facility transfers, which may necessitate some changes to the facility
+  choice model.
+* The timing of a standard ultrasound affects its accuracy in
+  determining gestational age (ultrasounds in the first trimester are
+  more accurate than ultrasounds in later pregnancy). However, the
+  facility choice model currently uses a dichotomous variable for ANC
+  ("no ANC" vs. "some ANC"), so we are unable to model the timing of the
+  ultrasound, instead defining a single category "standard ultrasound"
+  that uses the average measurement error for ultrasounds taken at any
+  point during pregnancy. In Wave II, we are planning to add more detail
+  to the timing of ANC visits, which should allow us to more accurately
+  model the uncertainty in GA estimation with standard ultrasounds,
+  using the data in `this paper
+  <https://obgyn.onlinelibrary.wiley.com/doi/10.1002/uog.15894>`__.
+* The diagram posits a causal relationship of gestational age (GA) on
+  the error (E) in estimating the gestational age. Specifically, we have
+  some empirical data from GF that shows that, in the absence of an
+  accurate ultrasound, larger gestational ages are more likely to be
+  underestimated, while smaller gestational ages are more likely to be
+  overestimated. E.g., if the true GA is 42 when you go into labor, you
+  are more likely to think that the GA is 40 than to think it is 44,
+  since very few pregnancies last 44 weeks. This effect would correspond
+  to having the mean of the distribution of E depend on the value of GA,
+  but for simplicity we do not model this effect, instead assuming that
+  the mean error is 0 regardless of GA. Thus, in our current modeling
+  strategy, the arrow from GA to E is a "no-op" relationship, and E
+  depends only on the ultrasound type. The impact on our results of
+  omitting this effect will likely be small since the effect is more
+  pronounced at the extremes of the GA distribution and not as
+  pronounced near the preterm cutoff of 37 weeks.
+* The causal model includes birth weight (BW) and low birth weight
+  status (LBW), but these are not currently used in the causal model
+  optimization due to lack of data.
 
 Correlated propensities
 -----------------------
@@ -225,7 +452,9 @@ Causal conditional probabilities for in-facility delivery
 ---------------------------------------------------------
 
 In addition to correlation, we posit that a belief about preterm status
-is influential in the decision to have a home delivery.  We will model
+is influential in the decision to have a home delivery (see the
+:ref:`Facility choice module
+<2024_vivarium_mncnh_portfolio_facility_choice_module>`).  We will model
 this as a causal conditional probability of home delivery given a belief
 about preterm status.  Although deriving consistent values for these
 probabilities is complex, and described in the final section of this

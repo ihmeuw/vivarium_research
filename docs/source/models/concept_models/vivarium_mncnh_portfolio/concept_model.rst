@@ -102,6 +102,8 @@ significant: the order of operations for implementation moves from top to bottom
 Specically, each variable must be defined as a module output in a row prior to being 
 defined as a module input in a subsequent row.
 
+.. _mncnh_portfolio_pregnancy_component_modules:
+
 .. list-table:: Pregnancy Component Modules
   :header-rows: 1
 
@@ -294,7 +296,7 @@ defined as a module input in a subsequent row.
         * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
-        * :ref:`Postpartum depression <2019_cause_postpartum_depression>`
+        * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
       - Wave II changes: 
 
         * Hemoglobin at birth as a variable that impacts maternal disorders causes
@@ -997,7 +999,21 @@ Default stratifications to all observers should include scenario and input draw.
     - Same population size as 9.2
     - Make sure maternal disorders burden is stratified by delivery facility and pregnancy outcome as specified
     - Default 
-  * - 10.0*
+  * - 10.0
+    - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>` added as new maternal disorder cause
+    - Baseline
+    - ``model10.0``
+    - Default
+    - Default
+    - Note that postpartum depression cause should be added to the maternal disorders burden observer
+  * - 11.0
+    - Add :ref:`Hemoglobin risk exposure model <2023_hemoglobin_exposure>`. Note that this will be the starting point for the larger :ref:`wave II hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`, which will be built out in future model runs
+    - Baseline
+    - ``model11.0``
+    - Default
+    - Default
+    - Default (no new hemoglobin observer required)
+  * - 12.0*
     - Wave I antenatal corticosteroids
     - Baseline
     - ``model10.0``
@@ -1283,6 +1299,17 @@ Default stratifications to all observers should include scenario and input draw.
     - Confirm intrapartum interventions are meeting V&V criteria
     - Intrapartum intervention coverage and effects are looking just as expected :) 
     - `Model 9.3 V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.3_maternal_checks.ipynb>`_
+  * - 10.0
+    - * Check PPD incidence ratio in baseline scenario matches expectation
+      * Confirm PPD is non-fatal
+      * Confirm PPD YLD rate matches expectation
+    - 
+    - 
+  * - 11.0
+    - * Use the interactive sim to verify the hemoglobin distribution in pregnancy matches expectation
+      * Confirm maternal disorders burden still matches expectation
+    - 
+    - 
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
