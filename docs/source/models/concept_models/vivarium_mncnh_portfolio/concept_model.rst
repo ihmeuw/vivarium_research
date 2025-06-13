@@ -1263,18 +1263,22 @@ Default stratifications to all observers should include scenario and input draw.
       * Check that misoprostol coverage is as expected among eligible population in baseline and intervention scenarios
       * Check that only eligible population (attends ANC and delivers at home) receives misoprostol
       * Check effect size of misoprostol on maternal hemorrhage incidence
-    - 
-    - 
+    - * Intrapartum intervention demonstrated expected behavior in the interactive sim, but unable to verify in simulation outputs
+      * Maternal disorders burden still verifies in baseline scenario
+      * Misoprostol coverage by scenario looks good
+    - * `Model 9.0 maternal V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.0_maternal_checks.ipynb>`_
+      * `Model 9.0 interactive sim V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.0_interactive_sim_maternal_interventions.ipynb>`_
   * - 9.1
     - * Confirm neonatal antibiotics intervention coverage is appropriately scaled up in home births
-    - 
-    - 
+    - * Looks good in the "antibiotics" scenario
+      * No need for the "antibiotics_home" scenario, which can be deleted/removed
+    - `Model 9.1 neonatal V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.1_nn_checks.ipynb>`_
   * - 9.2
     - * Confirm that there is no effect of azithromycin on maternal obstructed labor
       * Confirm maintained effect of azithromycin on maternal sepsis
       * Confirm maternal disorders still validate in baseline scenario
-    - 
-    - 
+    - Same conclusions as 9.0
+    - `Model 9.2 V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.2_maternal_checks.ipynb>`_
   * - 9.3
     - Confirm intrapartum interventions are meeting V&V criteria
     - 
@@ -1287,18 +1291,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - No scale-up of the neonatal antibiotics intervention among home births
-    - We do not scale up any of the other neonatal interventions among home births, so we may need new code for this?
-    - Engineers to update 
-    - Model 9.1
-  * - The azithromycin intervention appears to be affecting maternal obstructed labor
-    - Obstructed labor should not be an affected cause of azithromycin intervention
-    - Engineers to investigate why this is happening
-    - Earliest model run that it's ready -- check with Ali
-  * - Maternal observer stratification needs improvement 
-    - Maternal disorder burden observer (observer #1) to be additionally stratified by pregnancy outcome and delivery facility. "ANC" observer (aka maternal population observer, observer #7) should have delivery facility and azithromycin coverage stratification added
-    - Update observer stratification for next model run (9.0)
-    - Model 9.0
+  * - Need additional observer stratifications to verify intrapartum interventions
+    - Add delivery facility and pregnancy outcome to maternal burden observers
+    - Engineers to update
+    - For model 9.3
   * - Miscalibration of neonatal mortality ratios
     - This is looking largely resolved in model 8.1, but we will wait to confirm once the LBWSG RR capping strategy is updated
     - Update LBWSG RR caps and PAF calculation strategy for model 8.1.1
