@@ -995,7 +995,7 @@ Default stratifications to all observers should include scenario and input draw.
   * - 9.3
     - Additional stratifications and updated intervention scenario coverage for intrapartum intervention V&V
     - All scenarios -- Note changes to scenario numbers 11 and 12
-    - `model9.3``
+    - ``model9.3``
     - Same population size as 9.2
     - Make sure maternal disorders burden is stratified by delivery facility and pregnancy outcome as specified
     - Default 
