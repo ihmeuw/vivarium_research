@@ -326,7 +326,7 @@ Data Tables
       - 
     * - :math:`\text{PAF}_\text{LBWSG}`
       - population attributable fraction of all-cause mortality for low birth weight and short gestation
-      - computed so that PAF = 1 - 1 / E(:math:`\text{RR}_{\text{BW},\text{GA}}`) from the interpolated relative risk function (with expectation taken over the distribution of LBWSG exposure)
+      - See note below for how to calculate
       - Note that the relative risks used to calculate the PAFs are capped below the :math:`\text{RR}_\text{max}` value
     * - :math:`\text{RR}_{\text{BW},\text{GA}}`
       - relative risk of all-cause mortality for low birth weight and short gestation, capped at the specified maximum value
@@ -338,8 +338,8 @@ Data Tables
       - 
     * - :math:`\text{RR}_\text{max}`
       - Enforced maximum value for LBWSG relative risk 
-      - 100
-      - Capping of LBWSG RRs is intended to guarentee that there will be no individual mortality risk value is greater than 1 in our simulation. 100 has been selected as a first pass value as it satisfies this criteria for all modeled locations and all draws based on the `analysis in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/lbwsg_rr_capping_investigation.ipynb>`_. This value will eventually be updated to be draw/sex/age/location-specific by optimizing a cap value in a manner similar to that used in the linked notebook.
+      - Location/draw/age group/sex-specific value `calculated according to process in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/lbwsg_rr_caps.ipynb>`_
+      - Capping of LBWSG RRs is intended to guarentee that there will be no individual mortality risk value is greater than 1 in our simulation 
     * - :math:`\text{CSMRisk}^k_{\text{BW},\text{GA}}`
       - cause-specific mortality risk for subcause k, for population with birth weight BW and gestational age GA
       - GBD + assumption about relative risks
@@ -349,7 +349,26 @@ Data Tables
       - GBD + assumption about relative risks + intervention model effects
       - see subcause models for details
 
+**Details of the** :math:`\text{PAF}_\text{LBWSG}` **calculation:**
 
+As stated in the table above, :math:`\text{PAF}_\text{LBWSG}` is the population attributable fraction of all-cause mortality for low birth weight and short gestation. It is computed so that PAF = 1 - 1 / E(:math:`\text{RR}_{\text{BW},\text{GA}}`) from the capped interpolated relative risk function (with expectation taken over the distribution of LBWSG exposure). 
+
+For the early neonatal age group, the LBWSG exposure at birth is used. For the late neonatal age group, we will use the LBWSG exposure at 8 days of life (start of the late neonatal age group after all early neonatal deaths have occurred). This LBWSG exposure is not directly available from GBD. Therefore, we will need to produce it ourselves according to the following steps:
+
+Using the :ref:`LBWSG PAF calculation simulation <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/lbwsg_paf.yaml>`_:
+
+  * For the calculation of the early neonatal PAF:
+
+    - Population size = use that specified on the :ref:`preterm birth cause model document <2021_cause_preterm_birth_mncnh>` (see note about the calculation of the normalizing constant)
+    - LBWSG exposure specific to birth age group
+    - LBWSG relative risk values are interpolated and capped at the location/draw/age group/sex-specific maximum RR value (:math:`\text{RR}_\text{max}`)
+
+  * For the calculation of the late neonatal PAF:
+
+    1. Assign all-cause mortality risk values to each simulated individual using the early neonatal LBWSG RR values (interpolated and capped), early neonatal LBWSG PAF (as calculated above), and early neonatal all-cause mortality risk
+    2. Take a "time step" of seven days that allows for simulants to die according to their assigned all-cause mortality risk values
+    3. Among the surviving simulants, re-assign LBWSG RR values using the late neonatal interpolated RR values and the late neonatal-specific RR caps
+    4. Use the RR values from step 3 (among surviving simulants only) for the calculation of the late neonatal LBWSG PAF
 
 Calculating Burden
 ++++++++++++++++++
