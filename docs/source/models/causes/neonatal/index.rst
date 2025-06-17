@@ -355,7 +355,7 @@ As stated in the table above, :math:`\text{PAF}_\text{LBWSG}` is the population 
 
 For the early neonatal age group, the LBWSG exposure at birth is used. For the late neonatal age group, we will use the LBWSG exposure at 8 days of life (start of the late neonatal age group after all early neonatal deaths have occurred). This LBWSG exposure is not directly available from GBD. Therefore, we will need to produce it ourselves according to the following steps:
 
-Using the :ref:`LBWSG PAF calculation simulation <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/lbwsg_paf.yaml>`_:
+Using the `LBWSG PAF calculation simulation <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/lbwsg_paf.yaml>`_:
 
   * For the calculation of the early neonatal PAF:
 
