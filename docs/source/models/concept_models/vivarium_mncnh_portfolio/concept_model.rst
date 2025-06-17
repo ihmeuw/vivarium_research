@@ -330,7 +330,6 @@ defined as a module input in a subsequent row.
       * :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
       * Antenatal corticosteroids
       * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
-  * - Postpartum module
 
 .. list-table:: Postpartum Component Modules
   :header-rows: 1
