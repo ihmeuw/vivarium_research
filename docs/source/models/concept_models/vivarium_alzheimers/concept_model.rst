@@ -57,8 +57,12 @@ Alzheimer's Disease Early Detection Simulation
     - Alzheimer's Disease
   * - BBBM
     - Blood-Based Biomarkers
+  * - CSF
+    - Cerebrospinal Fluid
   * - MCI
     - Mild Cognitive Impairment
+  * - PET
+    - Positron Emission Tomography
   * - DALYs
     - Disability-Adjusted Life Years
   * - CSU
@@ -86,7 +90,7 @@ This builds upon existing Vivarium disease progression models while incorporatin
 
 The primary goal is to simulate the impact of early detection strategies for Alzheimer's disease using blood-based biomarkers and subsequent interventions. The model follows established microsimulation approaches for dementia research [Green2017]_ and evaluates three key scenarios:
 
-1. **Reference Scenario:** Present-day conditions with minimal BBBM uptake or disease-modifying therapies, including current CSF and PET-based diagnostic pathways
+1. **Reference Scenario:** Present-day conditions with minimal BBBM uptake or disease-modifying therapies, including current cerebrospinal fluid (CSF) and amyloid-positron emission tomography (PET) diagnostic pathways
 2. **Alternative Scenario 1:** Introduction of BBBM testing for at-risk preclinical populations (no intervention)
 3. **Alternative Scenario 2:** BBBM testing plus hypothetical intervention that prevents, delays, or slows disease progression
 
@@ -308,7 +312,7 @@ These locations provide variation in healthcare systems, demographic structures,
     - Minimal/None
     - Current levels
     - Minimal/None
-    - Current standard of care including CSF and PET-based diagnosis
+    - Current standard of care including CSF and amyloid-PET diagnosis
   * - Alternative 1
     - 5% annual uptake (age 30-44)
     - Current levels

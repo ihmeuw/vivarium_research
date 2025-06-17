@@ -159,10 +159,10 @@ Multi-Modal Testing Framework
 
 **Reference Scenario Testing (CSF and PET):**
 
-In the reference scenario, current diagnostic pathways include cerebrospinal fluid (CSF) and PET-based testing:
+In the reference scenario, current diagnostic pathways include cerebrospinal fluid (CSF) and amyloid-PET testing:
 
 - **CSF Testing:** 70-80% correlation for repeat results over 5-year periods
-- **PET Imaging:** 85-90% correlation for repeat results if initially positive
+- **Amyloid-PET Imaging:** 85-90% correlation for repeat results if initially positive
 - Lower accessibility and higher costs compared to blood biomarkers
 - Used primarily in specialized centers and research settings
 
