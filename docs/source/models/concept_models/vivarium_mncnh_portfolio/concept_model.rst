@@ -1343,6 +1343,10 @@ Default stratifications to all observers should include scenario and input draw.
 
 * Factors such as birth asphyxia have been shown to predisopose infants to infection which can result in sepsis [Tikmani-et-al-2016]_. We do not model a relationship between birth asphyxia and sepsis, so we do not capture any indirect effects of interventions to reduce birth asphyxia (like cesarean sections) on sepsis as mediated through reductions in birth asphyxia. 
 
+* By not modeling mortality due to all maternal disorders, we will overestimate YLDs due to postpartum depression and YLDs due to anemia in the postpartum period as more simulants will survive to the postpartum period in our simulation than would be expected in reality.
+
+* We track certain outcomes among partial term pregnancies (abortion/miscarriage and ectopic pregnancy) in this model, including first trimester ANC attendance and associated interventions, anemia YLDs, and postpartum depression. However, these pregnancies are not given special consideration other than their premature end and we do not consider how this population may differ from pregnancies that end in live or still births in terms of their ANC attendance rates or other attributes. Additionally, we do not model any variation in these attributes by subtype of partial term pregnancy (abortion vs. miscarriage vs. ectopic pregnancy), despite there being expected differences in behavior between these groups.
+
 .. _mncnh_portfolio_7.0:
 
 7.0 References/Other
