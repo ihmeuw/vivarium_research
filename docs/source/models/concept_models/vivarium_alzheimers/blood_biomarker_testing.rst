@@ -31,11 +31,12 @@ Key Modeling Components
 - Specificity: 90% (probability of negative test given no preclinical AD)
 - Performance characteristics may vary by demographic groups, based on validation studies [Janelidze2024]_ and clinical guidelines [GlobalCEO2024]_
 
-**Testing Independence:**
+**Testing Independence and Correlation:**
 
-- Repeated tests are independent events
-- Individual tested in year X has same probability of detection in year X+5
-- No cumulative effect of multiple negative tests
+- **Long-term Test Correlation:** Repeated tests show high correlation over time due to individual biological factors
+- Blood biomarkers: 75-85% chance of same result on repeat testing (influenced by disease progression)
+- Individual tested in year X has correlated probability of same result in year X+5
+- Correlation accounts for stable individual characteristics and measurement error patterns
 
 **Believed AD State Model:**
 
@@ -66,10 +67,13 @@ Implementation Details
    For each eligible simulant in each time step:
    1. Determine if simulant chooses testing (5% probability)
    2. If tested:
-      a. If simulant has preclinical AD: 95% chance positive result
-      b. If simulant has no AD pathology: 10% chance false positive
+      a. Check for previous test result and apply correlation:
+         - If previous test within 5 years: 75-85% chance same result
+         - If no previous test or >5 years: use base sensitivity/specificity
+      b. If simulant has preclinical AD: 95% chance positive result (adjusted for correlation)
+      c. If simulant has no AD pathology: 10% chance false positive (adjusted for correlation)
    3. Route positive tests directly to diagnosed preclinical AD status (includes false positives)
-   4. Record test events for economic analysis
+   4. Record test events and correlation tracking for economic analysis
 
 **State Transitions:**
 
@@ -103,6 +107,10 @@ The testing module interacts with the core disease model by:
     - 100%
     - --
     - All positive tests lead to preclinical AD diagnosis (no confirmation step)
+  * - Test correlation (5-year)
+    - 75-85%
+    - 70-90%
+    - Probability of same result on repeat testing
 
 Expected Outcomes
 -----------------
@@ -133,15 +141,34 @@ Limitations and Assumptions
 
 - Test performance remains constant over time and across populations
 - Uptake rates are uniform within demographic groups
+- Test correlation patterns are stable over 5-year periods
+- Correlation driven by biological factors rather than systematic measurement error
 - No behavioral changes following negative test results
 - Confirmatory testing has perfect accuracy
 
 **Limitations:**
 
-- Does not model repeat testing behavior or test fatigue
+- Test correlation modeling adds complexity but may not capture all biological variation
 - Assumes unlimited testing capacity at specified uptake rates
 - No consideration of test cost or accessibility barriers beyond uptake rates
 - Direct diagnosis without confirmatory testing (includes false positives in diagnosed population)
+- Simplified correlation model may not account for individual heterogeneity in test stability
+
+Multi-Modal Testing Framework
+-----------------------------
+
+**Reference Scenario Testing (CSF and PET):**
+
+In the reference scenario, current diagnostic pathways include cerebrospinal fluid (CSF) and PET-based testing:
+
+- **CSF Testing:** 70-80% correlation for repeat results over 5-year periods
+- **PET Imaging:** 85-90% correlation for repeat results if initially positive
+- Lower accessibility and higher costs compared to blood biomarkers
+- Used primarily in specialized centers and research settings
+
+**Test Correlation Research:**
+
+Detailed analysis of test correlation patterns and biological factors is available in this research summary: https://claude.ai/chat/aa8f154e-fe5e-4fe8-bd99-08da90d8e555
 
 Future Enhancements
 -------------------
@@ -152,6 +179,7 @@ Future Enhancements
 - Learning curves for test implementation and uptake
 - Risk-stratified testing based on family history or genetics
 - Economic feedback effects on testing uptake and availability
+- Cross-modal test correlation modeling (blood vs CSF vs PET)
 
 External Validation References
 -------------------------------

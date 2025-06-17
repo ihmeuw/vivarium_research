@@ -86,7 +86,7 @@ This builds upon existing Vivarium disease progression models while incorporatin
 
 The primary goal is to simulate the impact of early detection strategies for Alzheimer's disease using blood-based biomarkers and subsequent interventions. The model follows established microsimulation approaches for dementia research [Green2017]_ and evaluates three key scenarios:
 
-1. **Reference Scenario:** Present-day conditions with minimal BBBM uptake or disease-modifying therapies, including current PET-based diagnostic pathways
+1. **Reference Scenario:** Present-day conditions with minimal BBBM uptake or disease-modifying therapies, including current CSF and PET-based diagnostic pathways
 2. **Alternative Scenario 1:** Introduction of BBBM testing for at-risk preclinical populations (no intervention)
 3. **Alternative Scenario 2:** BBBM testing plus hypothetical intervention that prevents, delays, or slows disease progression
 
@@ -301,18 +301,22 @@ These locations provide variation in healthcare systems, demographic structures,
 
   * - Scenario
     - BBBM Testing
+    - CSF/PET Testing
     - Intervention
     - Description
   * - Reference
     - Minimal/None
+    - Current levels
     - Minimal/None
-    - Current standard of care including PET-based diagnosis
+    - Current standard of care including CSF and PET-based diagnosis
   * - Alternative 1
     - 5% annual uptake (age 30-44)
+    - Current levels
     - None
     - BBBM testing without intervention
   * - Alternative 2
     - 5% annual uptake (age 30-44)
+    - Current levels
     - 80% initiation, 20% effectiveness
     - BBBM testing plus disease-modifying treatment
 
