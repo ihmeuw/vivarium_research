@@ -171,28 +171,48 @@ The core disease model represents Alzheimer's disease progression through six di
 
 .. graphviz::
 
-  digraph bbbm_testing {
+  digraph biomarker_testing {
       rankdir = TD;
       node [shape=box];
       
       eligible [label="Eligible Population\n(Age 30-44)"];
-      tested [label="Tested\n(5% annual uptake)"];
-      positive [label="Test Positive\n(80% sensitivity)"];
+      
+      // Testing modalities
+      bbbm_test [label="Blood Biomarker Test\n5% uptake\n95% sens, 90% spec"];
+      csf_test [label="CSF Test\n(Reference scenario)\nLower uptake"];
+      pet_test [label="Amyloid-PET\n(Reference scenario)\nLowest uptake"];
+      
+      // Test outcomes
+      positive [label="Test Positive"];
       negative [label="Test Negative"];
       diagnosed [label="Diagnosed\nPreclinical AD"];
       
-      eligible -> tested [label="5% annually"];
-      tested -> positive [label="True positive:\nSens = 0.80"];
-      tested -> negative [label="True/False negative"];
-      positive -> diagnosed [label="Direct diagnosis\n(includes false positives)"];
+      // Correlation tracking
+      correlation [label="Test Correlation\nBlood: 75-85%\nCSF: 70-80%\nPET: 85-90%"];
+      
+      eligible -> bbbm_test [label="Alternative scenarios"];
+      eligible -> csf_test [label="All scenarios"];
+      eligible -> pet_test [label="All scenarios"];
+      
+      bbbm_test -> positive;
+      csf_test -> positive;
+      pet_test -> positive;
+      
+      bbbm_test -> negative;
+      csf_test -> negative;
+      pet_test -> negative;
+      
+      positive -> diagnosed [label="Direct diagnosis"];
+      positive -> correlation [label="Track for\nrepeat testing"];
   }
 
-The biomarker testing component models:
+The biomarker testing component models multiple diagnostic modalities:
 
 - **Eligibility:** Population aged 30-44 years
-- **Uptake:** 5% annual testing rate
-- **Test Performance:** 95% sensitivity and 90% specificity, based on current blood biomarker research [Janelidze2023]_
-- **Independence:** Repeated testing events are independent
+- **Blood Biomarker Testing (Alternative scenarios):** 5% annual uptake, 95% sensitivity, 90% specificity
+- **CSF Testing (All scenarios):** Lower uptake rates, established diagnostic pathway
+- **Amyloid-PET Testing (All scenarios):** Lowest uptake, highest cost, specialized centers
+- **Test Correlation:** Long-term correlation patterns vary by modality (blood: 75-85%, CSF: 70-80%, PET: 85-90%)
 - **Diagnosis Pathway:** Positive tests lead directly to preclinical AD diagnosis (includes false positives)
 
 3.3 Intervention and Treatment Model
@@ -393,7 +413,7 @@ All outputs stratified by:
     - Validate disease progression rates against ADNI cohort data [Jedynak2012]_; confirm 15-year progression span from preclinical to severe AD
     - TBD
   * - 2.0
-    - Confirm testing uptake (5%) and diagnostic accuracy (80% sens/spec) match specifications; compare with real-world blood biomarker performance [Janelidze2023]_
+    - Confirm testing uptake (5%) and diagnostic accuracy (95% sens/90% spec) match specifications; validate test correlation patterns (blood: 75-85%, CSF: 70-80%, amyloid-PET: 85-90%); compare with real-world biomarker performance [Janelidze2023]_
     - TBD
   * - 3.0
     - Verify intervention effects (20% reduction) align with lecanemab trial results [vanDyck2023]_; validate cost-effectiveness against ICER benchmarks [ICER2023]_
