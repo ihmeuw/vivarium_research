@@ -58,12 +58,6 @@ This module will:
     - Services received during pregnancy that relate to hemoglobin (for V&V, cost counting)
 
     - Hemoglobin exposure at the end of pregnancy for hemoglobin risk effect estimation (inputs to downstream models)
-    
-    - YLDs due to anemia throughout pregnancy and immediate postpartum (simulation result)
-
-.. todo::
-  
-  Link ANC module page when it exists
 
 .. note::
 
@@ -247,68 +241,8 @@ The probability of low ferritin screening is dependent on the simulant's locatio
     - 
   * - XII
     - Calculate and record anemia YLDs
-    - See instructions below. Record to output E.
+    - Done in the :ref:`anemia YLDs module <2024_vivarium_mncnh_portfolio_anemia_module>`
     - 
-
-2.4.1: Action point XII - Calculating anemia YLDs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. todo::
-
-  Move this info to a separate anemia YLD module that comes after the estimation of gestational age at birth. We will also need to assign specific dates to ANC visits
-
-Hemoglobin exposure is used to determine anemia status, which has corresponding disability weights. See the :ref:`anemia impairment document <2019_anemia_impairment>` to see how hemoglobin exposure relates to anemia status, disability weights, and years lived with disability.
-
-We assume that hemoglobin may vary throughout the course of pregnancy at the following distinct points opportunities: (1) following IFA/MMS supplementation at the first trimester ANC visit, and (2) following IFA/MMS supplementation or IV iron administration at the later pregnancy ANC visit. Therefore, we will calculate YLDs due to anemia during pregnancy in this model as a weighted sum over the course of pregnancy stratified by these specified events.
-
-The following pseudocode outlines how this can be done.
-
-.. code-block:: python
-
-  # ylds: value of years lived with disability due to anemia during pregnancy
-  # dw(): A function that reads hemoglobin level and returns corresponding disability weight
-  # ga_birth: gestational age at birth in YEARs (note unit change from typical weeks)
-  # ga_oral_iron: gestational age in years at time of oral iron effect on hemoglobin 
-    # this is equal to the timing of first ANC visit where oral iron is received
-  # ga_iv_iron: gestational age in years at time of IV iron effect on hemoglobin
-    # this is equal to the timing of later pregnancy ANC visit where IV iron is administered 
-  # hgb_start_of_pregnancy: output C (defined in output section below)
-  # hgb_end_of_pregnancy: output D (defined in output section below)
-  # oral_iron_effect: IFA/MMS effect on hemoglobin (defined in action point section above)
-  # output_A: indicator of oral iron supplementation status (defined as output A in output section below)
-  # output_B: indicator of IV iron administration status (defined as output B in output section below)
-
-  if output_A == 'none' and output_B == False: # no oral or IV iron in pregnancy
-    ylds = dw(hgb_at_birth) * ga_birth
-  elif output_A is in ['ifa','mms']: # received oral iron
-    if output_B: # also received IV iron
-      if ga_oral_iron < ga_iv_iron: # oral iron was started before receiving IV iron
-        ylds = (dw(hgb_start_of_pregnancy) * ga_oral_iron
-              + dw(hgb_start_of_pregnancy + oral_iron_effect) * (ga_iv_iron - ga_oral_iron)
-              + dw(hgb_end_of_pregnancy) * (ga_birth - ga_iv_iron)
-        )
-      else: # did not receive oral iron before IV iron
-        ylds = (dw(hgb_start_of_pregnancy) * ga_iv_iron
-              + dw(hgb_end_of_pregnancy) * (ga_birth - ga_iv_iron)
-        )
-    else: # received oral but not IV iron
-      ylds = (dw(hgb_start_of_pregnancy) * ga_oral_iron
-            + dw(hgb_end_of_pregnancy) * (ga_birth - ga_oral_iron)
-      )
-  else: # received IV iron and not oral iron
-    ylds = (dw(hgb_start_of_pregnancy) * ga_iv_iron
-          + dw(end_of_pregnancy) * (ga_birth - ga_iv_iron)
-    )
-
-.. todo::
-
-  Decide whether or not we want to model two week delay between start of iron intervention and effect on hemoglobin that we have modeled in the past. If so, then update documentation accordingly.
-
-  The main reason I would like to avoid it is if/when we run into instances of IV iron very late in pregnancy that ends up not impacting pregnancy hemoglobin, but potentially postpartum hemoglobin. This seems like it would be significantly more complicated to model.
-
-.. note::
-
-  We additionally assume that maternal hemorrhage has the potential to decrease *postpartum* hemoglobin (and thereby YLDs due to anemia in the postpartum period). This will affect total YLDs due to anemia in the overall simulation. However, these will be assessed separately as they take place outside of the pregnancy model.
 
 2.4: Module Outputs
 -----------------------
@@ -331,9 +265,6 @@ The following pseudocode outlines how this can be done.
   * - D. True hemoglobin at the end of pregnancy
     - point value
     - Value to be used for :ref:`hemoglobin risk effects model <2023_hemoglobin_effects>`, V&V
-  * - E. Anemia YLDs
-    - Point value
-    - Simulation results
   * - F. True Hemoglobin at screening
     - point value
     - V&V
@@ -367,8 +298,6 @@ The following pseudocode outlines how this can be done.
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
-
-- Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values. TODO: define specifically what these are (do they save pregnancy-specific impairment prevalence in GBD 2023 or do we need to calculate our own targets again?)
 
 - Baseline simulated hemoglobin distribution (mean and standard deviation) should match the GBD 2023 hemoglobin risk exposure distribution
 
