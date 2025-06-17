@@ -39,6 +39,15 @@ Opioid Epidemic  Simulation
   :local:
   :depth: 1
 
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+   
+   evidence_based_treatment
+   recovery_support
+   harm_reduction
+   data_monitoring
+
 
 .. list-table:: Abbreviations
   :header-rows: 1
@@ -65,10 +74,13 @@ The primary goal of this OUD simulation modeling effort is to serve as a tool fo
 
 A central objective is to simulate interventions grouped according to the U.S. Department of Health and Human Services (HHS) framework, which categorizes services into four key areas:
 
-1.  **Enhanced Delivery of Evidence-Based Treatment:** Simulating the expansion or improved delivery of Medications for Opioid Use Disorder (MOUD), such as methadone, buprenorphine, and naltrexone, potentially alongside integrated behavioral therapies and psychosocial support. This involves modeling changes in treatment initiation, adherence, and success rates.
-2.  **Recovery Support:** Modeling the impact of services that facilitate long-term recovery and wellness. This includes simulating the effects of increased access to recovery housing, peer recovery support services, employment assistance programs, and other wraparound services aimed at enhancing stabilization.
-3.  **Integrated Harm Reduction:** Evaluating strategies focused on reducing the immediate risks associated with drug use. This involves modeling the effects of interventions like naloxone distribution for overdose reversal, syringe services programs (SSPs) for preventing infectious disease, fentanyl test strip availability, and potentially low-barrier engagement points for healthcare access.
-4.  **Data Monitoring and Primary Prevention:** Exploring the potential effects of efforts aimed at preventing the initiation of OUD and improving surveillance. This could include modeling the impact of public awareness campaigns, safer prescribing initiatives, or early screening and intervention programs, informed by ongoing data monitoring.
+#.  **Data Monitoring and Primary Prevention** (:ref:`data_monitoring_ref`) Exploring the potential effects of efforts aimed at preventing the initiation of OUD and improving surveillance. This could include modeling the impact of public awareness campaigns, safer prescribing initiatives, or early screening and intervention programs, informed by ongoing data monitoring.
+
+#.  :doc:`Enhanced Delivery of Evidence-Based Treatment: <evidence_based_treatment>` Simulating the expansion or improved delivery of Medications for Opioid Use Disorder (MOUD), such as methadone, buprenorphine, and naltrexone, potentially alongside integrated behavioral therapies and psychosocial support. This involves modeling changes in treatment initiation, adherence, and success rates.
+
+#.  :doc:`Recovery Support: <recovery_support>` Modeling the impact of services that facilitate long-term recovery and wellness. This includes simulating the effects of increased access to recovery housing, peer recovery support services, employment assistance programs, and other wraparound services aimed at enhancing stabilization.
+
+#.  :doc:`Integrated Harm Reduction: <harm_reduction>` Evaluating strategies focused on reducing the immediate risks associated with drug use. This involves modeling the effects of interventions like naloxone distribution for overdose reversal, syringe services programs (SSPs) for preventing infectious disease, fentanyl test strip availability, and potentially low-barrier engagement points for healthcare access.
 
 By allowing the simulation of interventions individually and, crucially, *in combination* across these categories, the model is intended to help understand potential synergies or trade-offs between different approaches. The ultimate aim is to provide insights that can inform strategic planning and resource allocation for efforts addressing the opioid crisis.
 
