@@ -55,10 +55,12 @@ Current WHO guidance ([WHO-2022]_) recommends ACS therapy for women and birthing
   5. Adequate preterm newborn care is available (including infection treatment and CPAP as needed)
 
 [WHO-2022]_ recommends a single dose of intramuscular dexamethasone (for early preterm births in particular - see [Oladapo-et-al-2020]_) or 
-intramuscular betamethasone (for late preterm births in particular - see [Gyamfi-Bannerman-et-al-2023]_) as the ACS regimen of choice.
+intramuscular betamethasone (for late preterm births in particular - see [Gyamfi-Bannerman-et-al-2023]_) as the ACS regimen of choice. In our 
+simulation, we will specifically model the impact of dexamethasone on the mortality of preterm infants with RDS (based on [Brownfoot-et-al-2013]_
+which found that dexamethasone was more effective.)
 
 This section describes how an ACS intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
-See the :ref:`Preterm cause model <2021_cause_preterm_birth_mncnh>` for more information (such as how we are separating the GBD Cause 'preterm' into 'preterm with RDS' and 'preterm
+See the :ref:`Preterm cause model <2021_cause_preterm_birth_mncnh>` for more information (such as how we are separating the GBD cause 'preterm' into 'preterm with RDS' and 'preterm
 without RDS').
 
 .. list-table:: Affected Outcomes
@@ -116,32 +118,36 @@ Systems team has processed and sent to us from a variety of Ethiopian data sourc
 Vivarium Modeling Strategy
 --------------------------
 
-Intervention eligibility criteria (see the intrapartum intervention module document for how to obtain this information in the MNCNH portfolio simulation):
+Intervention eligibility criteria (see :ref:`the intrapartum intervention module document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>` 
+for how to obtain this information in the MNCNH portfolio simulation):
 
-This intervention requires adding an attribute to all simulants to specify if a pregnant person receives ACS during labor or not.  We will track this
-and the model will have different mortality rates for maternal sepsis for individuals with and without ACS (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` 
-components from ``vivarium_public_health``).
+  1. Preterm birth is expected 
+  2. Delivers in facility with CPAP availability
 
-The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has ACS during the intrapartum period, which we assume will be closely 
-related to the facility choice during birth, i.e. home births have much lower access than in-facility births, and births in BEmONC facilities have lower access than CEmONC 
-facilities.
+This intervention requires adding an attribute to all simulants who expect to give birth to a preterm infant (i.e., based on believed gestational age < 37 weeks from pregnancy module output) and who give birth 
+in a facility with CPAP availability (based on ``cpap_availability``; see :ref:`the CPAP intervention document <intervention_neonatal_cpap>`) to specify if a parent-child dyad
+receives ACS or not.  We will track this and the model will have different mortality rates for preterm with RDS for parent-child dyads with and without 
+ACS (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
+
+The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has received ACS during the intrapartum period. Only simulants who expect to 
+give birth to a preterm infant and who give birth in a facility with CPAP availability are eligible for this intervention.
 
 To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "no ACS".  With this framing, the ``RiskEffect`` 
-component requires data on (1) the relative risk of maternal sepsis incidence for people who did not receive ACS before labor began, and (2) the population attributable fraction (PAF) of maternal sepsis 
-due to not receiving ACS.  We will use the decision tree below to estimate the probability of maternal sepsis incidence with and without the use of ACS, ensuring consistency
+component requires data on (1) the relative risk of preterm with RDS mortality for people who did not receive ACS, and (2) the population attributable fraction (PAF) of preterm with
+RDS deaths due to not receiving ACS.  We will use the decision tree below to estimate the probability of preterm with RDS mortality with and without the use of ACS, ensuring consistency
 with the baseline delivery facility rates and baseline ACS coverage.
 
-In Vivarium, this risk effect will modify the maternal sepsis incidence pipeline, resulting in 
+In Vivarium, this risk effect will modify the preterm with RDS mortality pipeline, resulting in 
 
 .. math::
 
-   \text{IR}_i^\text{maternal sepsis} = \text{IR}^\text{maternal sepsis}_ \cdot (1 - \text{PAF}_\text{no ACS}) \cdot \text{RR}_i^\text{no ACS}
+   \text{CSMRisk}_i^\text{preterm with RDS} = \text{CSMRisk}^\text{preterm with RDS} \cdot (1 - \text{PAF}_\text{no ACS}) \cdot \text{RR}_i^\text{no ACS}
 
 where :math:`\text{RR}_i^\text{no ACS}` is simulant *i*'s individual relative risk for "no ACS", meaning :math:`\text{RR}_i^\text{no ACS} = \text{RR}_\text{no ACS}` 
 if simulant *i* does not receive ACS, and :math:`\text{RR}_i^\text{no ACS} = 1` if simulant *i* receives ACS. 
 
-The relative risk value we will use is pulled from [Ye-et-al-2024-ACS-during-labor]_, a 2024 systematic review that investigated the effect of 
-ACS during labor.
+The relative risk value we will use is pulled from [Gallos-et-al-2018-Cochrane-Review]_, the most recent Cochrane Review of the effect of 
+sublingually received ACS during labor on the prevention of preterm with RDS.
 
 .. list-table:: Risk Effect Parameters for No ACS
   :widths: 15 15 15 15
@@ -164,22 +170,21 @@ Calibration Strategy
 --------------------
 
 The following decision tree shows all of the paths from delivery facility choice to ACS use.  Distinct paths in the tree correspond to disjoint events, 
-which we can sum over to find the population probability of maternal sepsis incidence.  The goal here is to use internally consistent conditional probabilities of maternal sepsis incidence
-for the subpopulations that receive or do not receive ACS, so that the baseline scenario can track who receives ACS and still match the baseline maternal sepsis 
-incidence rate.
+which we can sum over to find the population probability of preterm with RDS mortality.  The goal here is to use internally consistent conditional probabilities of preterm with RDS mortality
+for the subpopulations that receive or do not receive ACS, so that the baseline scenario can track who receives ACS and still match the baseline preterm with RDS mortality rate.
 
 .. graphviz::
 
     digraph ACS {
         rankdir = LR;
         facility [label="Facility type"]
-        home [label="p_maternal_sepsis_without_ACS"]
+        home [label="p_preterm_with_rds_without_ACS"]
         BEmONC [label="ACS?"]
         CEmONC [label="ACS?"]
-        BEmONC_wo [label="p_maternal_sepsis_without_ACS"] 
-        BEmONC_w [label="p_maternal_sepsis_with_ACS"]
-        CEmONC_wo [label="p_maternal_sepsis_without_ACS"] 
-        CEmONC_w [label="p_maternal_sepsis_with_ACS"]
+        BEmONC_wo [label="p_preterm_with_rds_without_ACS"] 
+        BEmONC_w [label="p_preterm_with_rds_with_ACS"]
+        CEmONC_wo [label="p_preterm_with_rds_without_ACS"] 
+        CEmONC_w [label="p_preterm_with_rds_with_ACS"]
 
         facility -> home  [label = "home birth"]
         facility -> BEmONC  [label = "BEmONC"]
@@ -194,20 +199,20 @@ incidence rate.
 
 .. math::
     \begin{align*}
-        p(\text{maternal_sepsis}) 
-        &= \sum_{\text{paths without ACS}} p(\text{path})\cdot p(\text{maternal_sepsis}|\text{no ACS})\\
-        &+ \sum_{\text{paths with ACS}} p(\text{path})\cdot p(\text{maternal_sepsis}|\text{ACS})\\[.1in]
-        p(\text{maternal_sepsis}|\text{no ACS}) &= \text{RR}_\text{no ACS} \cdot p(\text{maternal_sepsis}|\text{ACS})
+        p(\text{preterm_with_rds}) 
+        &= \sum_{\text{paths without ACS}} p(\text{path})\cdot p(\text{preterm_with_rds}|\text{no ACS})\\
+        &+ \sum_{\text{paths with ACS}} p(\text{path})\cdot p(\text{preterm_with_rds}|\text{ACS})\\[.1in]
+        p(\text{preterm_with_rds}|\text{no ACS}) &= \text{RR}_\text{no ACS} \cdot p(\text{preterm_with_rds}|\text{ACS})
     \end{align*}
 
-where :math:`p(\text{maternal_sepsis})` is the probability of contracting maternal sepsis in the general population, and :math:`p(\text{maternal_sepsis}|\text{ACS})` and
-:math:`p(\text{maternal_sepsis}|\text{no ACS})` are the probability of contracting maternal sepsis in settings with and without receiving ACS.  For each 
+where :math:`p(\text{preterm_with_rds})` is the probability of a newborn dying due to being preterm with RDS in the general population, and :math:`p(\text{preterm_with_rds}|\text{ACS})` and
+:math:`p(\text{preterm_with_rds}|\text{no ACS})` are the probability of dying due to being preterm with RDS  in settings with and without receiving ACS.  For each 
 path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and 
 unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the simulant receives ACS.
 
-When we fill in the location-specific values for delivery facility rates, ACS coverage, relative risk of maternal sepsis incidence with ACS, 
-and maternal sepsis incidence probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{maternal_sepsis}|\text{ACS})` 
-and :math:`p(\text{maternal_sepsis}|\text{no ACS})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
+When we fill in the location-specific values for delivery facility rates, ACS coverage, relative risk of dying due to being preterm with RDS  with ACS, 
+and preterm with RDS mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{preterm_with_rds}|\text{ACS})` 
+and :math:`p(\text{preterm_with_rds}|\text{no ACS})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
 
 **Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that
 :math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
@@ -235,43 +240,41 @@ Assumptions and Limitations
 ---------------------------
 
 - We assume that ACS availability captures actual use, and not simply the treatment being in the facility. 
-- We assume that the delivery facility is also the facility where a mother or birthing person will seek care for maternal sepsis.
-- We assume that the relative risk of maternal sepsis incidence with ACS in practice is a value that we can find in the literature (Note: 
-  the value we are using is from [Ye-et-al-2024-ACS-during-labor]_.)
-- We have excluded the effect of ACS on pneumonia incidence/mortality, because this cause is currently lumped with 'other causes'.
-- We currenty do not model the impact of ACS taken during pregnancy on the incidence of preterm births, despite *some* literature
-  evidence that suggests there may be a significant impact. Currently, we are ony modeling the impact of ACS taken during labor, rather
-  than during pregnancy. We may include in a future iteration of this model the use of ACS during pregnancy as a treatment for sexually
-  transmitted infections, in which case we may reassess this limitation. For reference, [Hume-Nizon-et-al-2021-ACS-during-pregnancy]_
-  found an RR of 0.79 (95% CI 0.68-0.93) for LBW and an RR of 0.87 (95% CI 0.78-0.98) for premature births. They also reported an 
-  increase in stillbirth incidence. However, more recent publications (the 2024 review referenced above and [Antonucci-et-al-2022-ACS-during-pregnancy]_) 
-  have reported that there is no conclusive evidence to support that ACS use by pregnant women causes adverse 
-  neonatal outcomes. 
-- We also do not currently model the impact intrapartum ACS has on preventing maternal sepsis in partial term pregnancies. In our 
-  :ref:`Maternal sepsis and other maternal infections cause model <2021_cause_maternal_sepsis_mncnh>`, we only model full term pregnancies as 
-  at-risk for maternal sepsis.
-- We assume that [Saleem-et-al-2025-intrapartum-antibiotic-use]_ provides an accurate overview of prophylactic intrampratum antibiotic use in our locations of interest.
-  As such, we assume baseline coverage of intrapartum ACS use in African sites is basically zero (despite EmONC 2016, SARA 2016, and SARA 2018 reporting the
-  presence of intrapartum antibiotics in hospitals to be nonzero - we assume these are given to mothers or birthing parents after delivery, which is not the intervention
-  we are modeling here). There was a baseline coverage of 20.3% for Pakistan hospitals though, which we assume is accurate.
-- We assume that baseline coverage for ACS in home births is 0% (this is not data-backed).
+- We assume that the delivery facility is also the facility where a mother or birthing person will seek care for their preterm infant with RDS.
+- We assume that the relative risk of preterm with RDS mortality with ACS in practice is a value that we can find in the literature. Note: 
+  the value we are using is from [Oladapo-et-al-2020]_, a BMGF-funded multicountry RCT which compared neonatal mortality for women at imminent
+  risk of preterm birth (i.e., expected to give birth in next 48 hours) that received intramuscular dexamethasone (6mg dosage) versus a placebo. 
+  We assume that the observed reduction in neonatal deaths in this RCT are due to a decrease in respiratory distress. We currently use [Oladapo-et-al-2020]_'s 
+  RR value for early neonatal death, but could instead use their RR for severe respiratory distress at 24 hours, which is a significantly more impactful
+  value (0.56, 0.37-0.85), however is not explicitly about mortality, which is what we are modeling. The RR for severe respiratory distress at 1 week is more similar to the value we currently use (0.81, 95% CI 0.37-0.85).
+  This paper also reported a statistically significant effect on neonatal hypoglycemia incidence, but this conflicts with other literature findings (e.g. [Gyamfi-Bannerman-et-al-2023]_), so we 
+  are not including this effect. [Oladapo-et-al-2020]_ also reports country-specific RR values, including Pakistan and Nigeria. For now however,
+  we use the mean value across the 6 countries included in their analysis, for simplicity. Lastly,
+  [Oladapo-et-al-2020]_ provides an effect size for ACS on early preterm birth (26-33 weeks of gestation), but if we want to specifically model the impact on late preterm birth (34-36 weeks 
+  of gestation) we could use the estimates reported in [Gyamfi-Bannerman-et-al-2023]_ which looked at the use of betamethasone instead of dexamethasone.
+- We assume that the Health Systems estimates processed from various Ethiopian healthcare assessments (see Baseline Coverage section
+  for more details) provide an accurate overview of ACS use in our locations of interest.
+- We assume that baseline coverage for ACS in home births is 0% (given the WHO 2022 recommendation that ACS only be administered where adequate
+  preterm childcare is available, including CPAP).
 
 .. todo::
 
-  - If more suitable baseline coverage data for ACS use for maternal sepsis in CEmONC settings for Nigeria and Ethiopia or BEmONC settings for all locations, 
-    we will update accordingly.
-  - We need to decide if/how we would model the effect of intrapartum ACS on preterm incidence. 
+  - If we can find more suitable baseline coverage data for ACS use for Nigeria and Pakistan, we will update accordingly. 
+  - Decide we want to use a different RR value than what we're currently using, we need to update that accordingly.
 
 Validation and Verification Criteria
 ------------------------------------
 
 - Population-level incidence rate should be the same as when this intervention is not included in the model.
-- The ratio of maternal sepsis incidence among those without ACS divided by those with ACS
+- The ratio of preterm with RDS mortality among those without ACS divided by those with ACS
   should equal the relative risk parameter used in the model.
 - The baseline coverage of ACS in each facility type should match the values in the artifact.
 
 References
 ------------
+
+.. [Brownfoot-et-al-2013]
+  Brownfoot FC, Gagliardi DI, Bain E, Middleton P, Crowther CA. Different corticosteroids and regimens for accelerating fetal lung maturation for women at risk of preterm birth. Cochrane Database of Systematic Reviews 2013, Issue 8. Art. No.: CD006764. DOI: 10.1002/14651858.CD006764.pub3.
 
 .. [Gyamfi-Bannerman-et-al-2023]
   Gyamfi-Bannerman C, Thom EA, Blackwell SC, Tita AT, Reddy UM, Saade GR, Rouse DJ, McKenna DS, Clark EA, Thorp JM Jr, Chien EK, Peaceman AM, Gibbs RS, Swamy GK, Norton ME, Casey BM, Caritis SN, Tolosa JE, Sorokin Y, VanDorsten JP, Jain L; NICHD Maternal–Fetal Medicine Units Network. Antenatal Betamethasone for Women at Risk for Late Preterm Delivery. N Engl J Med. 2016 Apr 7;374(14):1311-20. doi: 10.1056/NEJMoa1516783. Epub 2016 Feb 4. Erratum in: N Engl J Med. 2023 May 4;388(18):1728. doi: 10.1056/NEJMx220010. PMID: 26842679; PMCID: PMC4823164.
