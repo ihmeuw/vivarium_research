@@ -256,6 +256,10 @@ Assumptions and Limitations
   for more details) provide an accurate overview of ACS use in our locations of interest.
 - We assume that baseline coverage for ACS in home births is 0% (given the WHO 2022 recommendation that ACS only be administered where adequate
   preterm childcare is available, including CPAP).
+- We use the [WHO-2022]_ recommendations on ACS use for improving preterm births as the basis of ACS eligibility criteria, although there may be 
+  country-specific guidelines that contradict some of the criteria laid out in [WHO-2022]_. Specifically, [Greensides-et-al-2018]_ reviewed country-specific
+  guidelines for ACS use and found that neither Nigeria nor Ethiopia national documents (all 2015 or older) stated that GA must be accurately undertaken 
+  (see Table 4 in their publication).
 
 .. todo::
 
@@ -278,6 +282,9 @@ References
 
 .. [Gyamfi-Bannerman-et-al-2023]
   Gyamfi-Bannerman C, Thom EA, Blackwell SC, Tita AT, Reddy UM, Saade GR, Rouse DJ, McKenna DS, Clark EA, Thorp JM Jr, Chien EK, Peaceman AM, Gibbs RS, Swamy GK, Norton ME, Casey BM, Caritis SN, Tolosa JE, Sorokin Y, VanDorsten JP, Jain L; NICHD Maternal–Fetal Medicine Units Network. Antenatal Betamethasone for Women at Risk for Late Preterm Delivery. N Engl J Med. 2016 Apr 7;374(14):1311-20. doi: 10.1056/NEJMoa1516783. Epub 2016 Feb 4. Erratum in: N Engl J Med. 2023 May 4;388(18):1728. doi: 10.1056/NEJMx220010. PMID: 26842679; PMCID: PMC4823164.
+
+.. [Greensides-et-al-2018]
+  Greensides D, Robb-McCord J, Noriega A, Litch JA. Antenatal Corticosteroids for Women at Risk of Imminent Preterm Birth in 7 sub-Saharan African Countries: A Policy and Implementation Landscape Analysis. Glob Health Sci Pract. 2018 Dec 27;6(4):644-656. doi: 10.9745/GHSP-D-18-00171. PMID: 30573455; PMCID: PMC6370350.
 
 .. [Oladapo-et-al-2020]
   WHO ACTION Trials Collaborators; Oladapo OT, Vogel JP, Piaggio G, Nguyen MH, Althabe F, Gülmezoglu AM, Bahl R, Rao SPN, De Costa A, Gupta S, Baqui AH, Khanam R, Shahidullah M, Chowdhury SB, Ahmed S, Begum N, D Roy A, Shahed MA, Jaben IA, Yasmin F, Rahman MM, Ara A, Khatoon S, Ara G, Akter S, Akhter N, Dey PR, Sabur MA, Azad MT, Choudhury SF, Matin MA, Goudar SS, Dhaded SM, Metgud MC, Pujar YV, Somannavar MS, Vernekar SS, Herekar VR, Bidri SR, Mathapati SS, Patil PG, Patil MM, Gudadinni MR, Bijapure HR, Mallapur AA, Katageri GM, Chikkamath SB, Yelamali BC, Pol RR, Misra SS, Das L, Nanda S, Nayak RB, Singh B, Qureshi Z, Were F, Osoti A, Gwako G, Laving A, Kinuthia J, Mohamed H, Aliyan N, Barassa A, Kibaru E, Mbuga M, Thuranira L, Githua NJ, Lusweti B, Ayede AI, Falade AG, Adesina OA, Agunloye AM, Iyiola OO, Sanni W, Ejinkeonye IK, Idris HA, Okoli CV, Irinyenikan TA, Olubosede OA, Bello O, Omololu OM, Olutekunbi OA, Akintan AL, Owa OO, Oluwafemi RO, Eniowo IP, Fabamwo AO, Disu EA, Agbara JO, Adejuyigbe EA, Kuti O, Anyabolu HC, Awowole IO, Fehintola AO, Kuti BP, Isah AD, Olateju EK, Abiodun O, Dedeke OF, Akinkunmi FB, Oyeneyin L, Adesiyun O, Raji HO, Ande ABA, Okonkwo I, Ariff S, Soofi SB, Sheikh L, Zulfiqar S, Omer S, Sikandar R, Sheikh S, Giordano D, Gamerro H, Carroli G, Carvalho J, Neilson J, Molyneux E, Yunis K, Mugerwa K, Chellani HK. Antenatal Dexamethasone for Early Preterm Birth in Low-Resource Countries. N Engl J Med. 2020 Dec 24;383(26):2514-2525. doi: 10.1056/NEJMoa2022398. Epub 2020 Oct 23. PMID: 33095526; PMCID: PMC7660991.
