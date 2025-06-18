@@ -124,7 +124,7 @@ for how to obtain this information in the MNCNH portfolio simulation):
   1. Preterm birth is expected 
   2. Delivers in facility with CPAP availability
 
-This intervention requires adding an attribute to all simulants who expect to give birth to a preterm infant (i.e., based on believed gestational age < 37 weeks from pregnancy module output) and who give birth 
+This intervention requires adding an attribute to all simulants who expect to give birth to a preterm infant (i.e., based on believed gestational age 34 to 36 weeks from pregnancy module output) and who give birth 
 in a facility with CPAP availability (based on ``cpap_availability``; see :ref:`the CPAP intervention document <intervention_neonatal_cpap>`) to specify if a parent-child dyad
 receives ACS or not.  We will track this and the model will have different mortality rates for preterm with RDS for parent-child dyads with and without 
 ACS (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
@@ -149,92 +149,32 @@ if simulant *i* does not receive ACS, and :math:`\text{RR}_i^\text{no ACS} = 1` 
 The relative risk value we will use is pulled from [Gallos-et-al-2018-Cochrane-Review]_, the most recent Cochrane Review of the effect of 
 sublingually received ACS during labor on the prevention of preterm with RDS.
 
+
 .. list-table:: Risk Effect Parameters for No ACS
   :widths: 15 15 15 15
   :header-rows: 1
 
   * - Parameter
-    - Mean
-    - Distribution
+    - Value
+    - Source
     - Notes
-  * - Relative Risk
-    - 1.19
-    - Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(1.19, 1.03, 1.39)`
-    - Based on relative risk of 0.84 (95% CI 0.72-0.97) on neonatal mortality for parent-child dyads receiving ACS [Oladapo-et-al-2020]_.
+  * - :math:`\text{RR}^\text{no ACS}`
+    - :math:`1/\text{RR}^\text{ACS}`
+    - N/A
+    - Value to be used in sim
+  * - :math:`1/\text{RR}^\text{ACS}`
+    - RR = 0.84 (95% CI 0.72-0.97). Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(0.84, 0.72, 0.97)`
+    - [Oladapo-et-al-2020]_
+    - 
+  * - mean_rr
+    - :math:`\text{RR}^\text{no misoprostol} * (1 - p_\text{baseline coverage}) + p_\text{baseline_coverage}`
+    - N/A
+    - Despite intervention eligibility criteria of CPAP availability and expected preterm status, we will use :math:`p_\text{baseline coverage}`
+      defined in the baseline coverage section above among all in-facility births (regardless of CPAP availability or expected preterm status) to calculate the mean_rr and PAF values
   * - PAF
-    - see below
-    - see below
-    - see `Calibration strategy` section below for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model
-
-Calibration Strategy
---------------------
-
-The following decision tree shows all of the paths from delivery facility choice to ACS use.  Distinct paths in the tree correspond to disjoint events, 
-which we can sum over to find the population probability of preterm with RDS mortality.  The goal here is to use internally consistent conditional probabilities of preterm with RDS mortality
-for the subpopulations that receive or do not receive ACS, so that the baseline scenario can track who receives ACS and still match the baseline preterm with RDS mortality rate.
-
-.. graphviz::
-
-    digraph ACS {
-        rankdir = LR;
-        facility [label="Facility type"]
-        home [label="p_preterm_with_rds_without_ACS"]
-        BEmONC [label="ACS?"]
-        CEmONC [label="ACS?"]
-        BEmONC_wo [label="p_preterm_with_rds_without_ACS"] 
-        BEmONC_w [label="p_preterm_with_rds_with_ACS"]
-        CEmONC_wo [label="p_preterm_with_rds_without_ACS"] 
-        CEmONC_w [label="p_preterm_with_rds_with_ACS"]
-
-        facility -> home  [label = "home birth"]
-        facility -> BEmONC  [label = "BEmONC"]
-        facility -> CEmONC  [label = "CEmONC"]
-
-        BEmONC -> BEmONC_w  [label = "available"]
-        BEmONC -> BEmONC_wo  [label = "unavailable"]
-
-        CEmONC -> CEmONC_w  [label = "available"]
-        CEmONC -> CEmONC_wo  [label = "unavailable"]
-    }
-
-.. math::
-    \begin{align*}
-        p(\text{preterm_with_rds}) 
-        &= \sum_{\text{paths without ACS}} p(\text{path})\cdot p(\text{preterm_with_rds}|\text{no ACS})\\
-        &+ \sum_{\text{paths with ACS}} p(\text{path})\cdot p(\text{preterm_with_rds}|\text{ACS})\\[.1in]
-        p(\text{preterm_with_rds}|\text{no ACS}) &= \text{RR}_\text{no ACS} \cdot p(\text{preterm_with_rds}|\text{ACS})
-    \end{align*}
-
-where :math:`p(\text{preterm_with_rds})` is the probability of a newborn dying due to being preterm with RDS in the general population, and :math:`p(\text{preterm_with_rds}|\text{ACS})` and
-:math:`p(\text{preterm_with_rds}|\text{no ACS})` are the probability of dying due to being preterm with RDS  in settings with and without receiving ACS.  For each 
-path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and 
-unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the simulant receives ACS.
-
-When we fill in the location-specific values for delivery facility rates, ACS coverage, relative risk of dying due to being preterm with RDS  with ACS, 
-and preterm with RDS mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{preterm_with_rds}|\text{ACS})` 
-and :math:`p(\text{preterm_with_rds}|\text{no ACS})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
-
-**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that
-:math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
-
-.. math::
-
-   p(\text{no ACS}) = \sum_{\text{paths without ACS}} p(\text{path}),
-
-then can use this to expand the identity
-
-.. math::
-
-   \text{PAF}_\text{no ACS} = 1 - \frac{1}{\mathbb{E}(\text{RR})}.
-
-Since our risk exposure has two categories,
-
-.. math::
-
-   \mathbb{E}(\text{RR}) = p(\text{no ACS}) \cdot \text{RR}_\text{no ACS} + (1 - p(\text{no ACS})) \cdot 1.
-
-
-
+    - (mean_rr - 1) / mean_rr
+    - N/A
+    - 
 
 Assumptions and Limitations
 ---------------------------
@@ -256,10 +196,11 @@ Assumptions and Limitations
   for more details) provide an accurate overview of ACS use in our locations of interest.
 - We assume that baseline coverage for ACS in home births is 0% (given the WHO 2022 recommendation that ACS only be administered where adequate
   preterm childcare is available, including CPAP).
-- We use the [WHO-2022]_ recommendations on ACS use for improving preterm births as the basis of ACS eligibility criteria, although there may be 
-  country-specific guidelines that contradict some of the criteria laid out in [WHO-2022]_. Specifically, [Greensides-et-al-2018]_ reviewed country-specific
-  guidelines for ACS use and found that neither Nigeria nor Ethiopia national documents (all 2015 or older) stated that GA must be accurately undertaken 
-  (see Table 4 in their publication).
+- We use the [WHO-2022]_ recommendations on ACS use for improving preterm births as the basis of ACS eligibility criteria. However, [Greensides-et-al-2018]_ 
+  reviewed country-specific guidelines for ACS use and found that neither Nigeria nor Ethiopia national documents (all 2015 or older) stated that GA must be accurately undertaken 
+  (see Table 4 in their publication), therefore we simply use the believed GA from the pregnancy module, regardless of how accurate we think the estimate was (i.e. if birthing parent got an ultrasound).
+- Despite the fact that our preterm cause model (based on the GBD cause) considers under 37 weeks of gestation, we will only apply the ACS intervention to simulants with 24-24 weeks of gestation, based
+  on the [WHO-2022]_ recommendations. 
 
 .. todo::
 
