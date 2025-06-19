@@ -147,8 +147,8 @@ In Vivarium, this risk effect will modify the preterm with RDS mortality pipelin
 where :math:`\text{RR}_i^\text{no ACS}` is simulant *i*'s individual relative risk for "no ACS", meaning :math:`\text{RR}_i^\text{no ACS} = \text{RR}_\text{no ACS}` 
 if simulant *i* does not receive ACS, and :math:`\text{RR}_i^\text{no ACS} = 1` if simulant *i* receives ACS. 
 
-The relative risk value we will use is pulled from [Gallos-et-al-2018-Cochrane-Review]_, the most recent Cochrane Review of the effect of 
-sublingually received ACS during labor on the prevention of preterm with RDS.
+The relative risk value we will use is pulled from [Oladapo-et-al-2020]_, a BMGF-funded multicountry RCT which investigated the impact
+of ACS for pregnant women and people at imminent risk of preterm delivery.
 
 
 .. list-table:: Risk Effect Parameters for No ACS
@@ -168,7 +168,7 @@ sublingually received ACS during labor on the prevention of preterm with RDS.
     - [Oladapo-et-al-2020]_
     - 
   * - mean_rr
-    - :math:`\text{RR}^\text{no misoprostol} * (1 - p_\text{baseline coverage}) + p_\text{baseline_coverage}`
+    - :math:`\text{RR}^\text{no ACS} * (1 - p_\text{baseline coverage}) + p_\text{baseline_coverage}`
     - N/A
     - Despite intervention eligibility criteria of CPAP availability and expected preterm status, we will use :math:`p_\text{baseline coverage}`
       defined in the baseline coverage section above among all in-facility births (regardless of CPAP availability or expected preterm status) to calculate the mean_rr and PAF values
@@ -205,7 +205,7 @@ Assumptions and Limitations
 
 .. todo::
 
-  - If we can find more suitable baseline coverage data for ACS use for Nigeria and Pakistan, we will update accordingly. 
+  - If we can find more suitable baseline coverage data for ACS use for all of our locations (particularly Nigeria and Pakistan), we will update accordingly. 
   - Decide we want to use a different RR value than what we're currently using, we need to update that accordingly.
 
 Validation and Verification Criteria
