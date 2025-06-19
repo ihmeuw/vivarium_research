@@ -107,13 +107,14 @@ Systems team has processed and sent to us from a variety of Ethiopian data sourc
     - BEmONC Facilities
     - 12.85
     - :math:`\text{Uniform}(2.19,25.60)`
-    - From Health Systems team estimates saved at ``/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/sim_science_estimates.csv``
+    - From Health Systems team estimates saved at ``/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/sim_science_estimates.csv`` 
+      (as processed in `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/health_systems_team_data.ipynb>`_)
   * - All (Ethiopia, Nigeria, Pakistan)
     - CEmONC Facilities
     - 76.29
     - :math:`\text{Uniform}(66.63,89.23)`
     - From Health Systems team estimates saved at ``/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/sim_science_estimates.csv``
-
+      (as processed in `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/health_systems_team_data.ipynb>`_)
 
 Vivarium Modeling Strategy
 --------------------------
