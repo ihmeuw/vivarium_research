@@ -154,7 +154,9 @@ not a simulant attends an ANC visit at any point during pregnancy and additional
 
 * Overall ANC attendance should match expected ANC1 values among the overall population as well as stratified by pregnancy term length
 * Confirm no later pregnancy ANC attendance among partial term pregnancies
-* Confirm first trimester ANC attendance rate among full term pregnancies is equal to ANC4 proportion
+* Confirm first trimester ANC and later pregnancy ANC attendance rate among full term pregnancies is equal to minimum of ANCfirst and ANC4
+* Confirm first trimester ONLY ANC attendance rate among full term pregnancies is equal to ANCfirst - min(ANCfirst, ANC4)
+* Confirm later pregnancy ONLY ANC attendance rate among full term pregnancies is equal to ANC1 - ANCfirst
 
 5.0 References
 +++++++++++++++
