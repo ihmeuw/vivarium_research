@@ -200,7 +200,7 @@ Assumptions and Limitations
 - We use the [WHO-2022]_ recommendations on ACS use for improving preterm births as the basis of ACS eligibility criteria. However, [Greensides-et-al-2018]_ 
   reviewed country-specific guidelines for ACS use and found that neither Nigeria nor Ethiopia national documents (all 2015 or older) stated that GA must be accurately undertaken 
   (see Table 4 in their publication), therefore we simply use the believed GA from the pregnancy module, regardless of how accurate we think the estimate was (i.e. if birthing parent got an ultrasound).
-- Despite the fact that our preterm cause model (based on the GBD cause) considers under 37 weeks of gestation, we will only apply the ACS intervention to simulants with 24-24 weeks of gestation, based
+- Despite the fact that our preterm cause model (based on the GBD cause) considers under 37 weeks of gestation, we will only apply the ACS intervention to simulants with 24-34 weeks of gestation, based
   on the [WHO-2022]_ recommendations. 
 
 .. todo::
