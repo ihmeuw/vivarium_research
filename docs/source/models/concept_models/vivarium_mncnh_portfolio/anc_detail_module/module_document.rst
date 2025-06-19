@@ -129,19 +129,25 @@ not a simulant attends an ANC visit at any point during pregnancy and additional
 ++++++++++++++++++++++++++++++++
 
 * We assume that partial term pregnancies have the same probability of ANC coverage as full term pregnancies and assume that these visits occur exclusively 
-during the first trimester given that these pregnancies do not progress late into pregnancy. Note that in effect this makes first trimester ANC attendance 
-rate higher among partial term pregnancies than full term pregnancies, which is not necessarily logical. We accept this as a limitation given that the 
-interventions partial term pregnancies can receive at a first trimester visit (MMS, AI ultrasound) primarily affect outcomes that do not apply to partial 
-term pregnancies (MMS->stillbirth, MMS->LBWSG, MMS->hemoglobin->sepsis/obstructed labor, and ultrasound/facility delivery). However, it is possible that 
-we will overestimate the impact of MMS->hemoglobin on anemia YLDs and depressive disorders among partial term pregnancies as a result of this assumption.
+  during the first trimester given that these pregnancies do not progress late into pregnancy. Note that in effect this makes first trimester ANC attendance 
+  rate higher among partial term pregnancies than full term pregnancies, which is not necessarily logical. We accept this as a limitation given that the 
+  interventions partial term pregnancies can receive at a first trimester visit (MMS, AI ultrasound) primarily affect outcomes that do not apply to partial 
+  term pregnancies (MMS->stillbirth, MMS->LBWSG, MMS->hemoglobin->sepsis/obstructed labor, and ultrasound/facility delivery). However, it is possible that 
+  we will overestimate the impact of MMS->hemoglobin on anemia YLDs and depressive disorders among partial term pregnancies as a result of this assumption.
 
   - Note that an alternative strategy would be to assume the same first trimester ANC attendance rate for partial term pregnancies as full term pregnancies 
-  (equal to ANC4 proportion), but this would require us to use different ANC attendance rates for each pregnancy term duration in the already documented and 
-  implemented ANC attendance module. Also note that the data on ANC attendance in DHS is collected on live and still births (full term pregnancies) only.
+    (equal to ANC4 proportion), but this would require us to use different ANC attendance rates for each pregnancy term duration in the already documented and 
+    implemented ANC attendance module. Also note that the data on ANC attendance in DHS is collected on live and still births (full term pregnancies) only.
 
-* We assume that simulants with full term pregnancies **only** attend ANC visits in the first trimester if they attend at least 4 ANC visits in total. While 
-this assumption is unlikely to be 100% accurate, we accept it as a limitation given that it will only affect the proportion of the population who receives MMS/IFA 
-prior to being screened for IV iron and will not affect the overall eligible population size for either of these interventions. 
+* We assume that the prevalence of attending both first trimester and later pregnancy visits is the minimum of ANCfirst (as processed by the HS team) and ANC4 
+  (GBD covariate also processed by HS team). There is non-zero prevalence of first trimester visits only when ANC4 > ANC1 (such as in Pakistan). We are likely
+  overestimating the correlation between first trimester ANC and later pregnancy ANC (i.e., the prevalence of a first trimester ANC visit ONLY is likely non-zero 
+  despite this assertion in our model.) 
+
+.. todo:: 
+
+  If we decide to improve the estimation of timing for ANC visits in our model (see `this JIRA ticket <https://jira.ihme.washington.edu/browse/SSCI-2318>`) we need to
+  update our documentation accordingly.
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
