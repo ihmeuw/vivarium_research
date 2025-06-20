@@ -1022,10 +1022,17 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default (no new hemoglobin observer required)
-  * - 12.0*
+  * - 12.0
+    - Capped LBWSG RRs and new late neonatal LBWSG PAF calculation, in accordance with `vivarium research PR #1681 <https://github.com/ihmeuw/vivarium_research/pull/1681>`_
+    - Baseline
+    - ``model12.0``
+    - Default
+    - Default
+    - Default
+  * - 13.0*
     - Wave I antenatal corticosteroids
     - Baseline
-    - ``model10.0``
+    - ``model13.0``
     -
     - 
     - 
@@ -1317,6 +1324,11 @@ Default stratifications to all observers should include scenario and input draw.
   * - 11.0
     - * Use the interactive sim to verify the hemoglobin distribution in pregnancy matches expectation
       * Confirm maternal disorders burden still matches expectation
+    - 
+    - 
+  * - 12.0
+    - * Confirm neonatal all-cause mortality rates match expectation
+      * Confirm LBWSG risk effects are working as expected
     - 
     - 
 
