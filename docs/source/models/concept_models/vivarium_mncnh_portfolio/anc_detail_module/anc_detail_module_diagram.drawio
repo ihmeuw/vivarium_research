@@ -1,47 +1,59 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.2.9">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.10">
   <diagram name="Page-1" id="Zt5GmzENkRL5VQmMxq5H">
-    <mxGraphModel dx="1169" dy="478" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1375" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-3" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="oHZiX-UfQ4AkxWPcro0O-1" target="oHZiX-UfQ4AkxWPcro0O-2">
+        <mxCell id="oHZiX-UfQ4AkxWPcro0O-3" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="oHZiX-UfQ4AkxWPcro0O-1" target="oHZiX-UfQ4AkxWPcro0O-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-5" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oHZiX-UfQ4AkxWPcro0O-1" target="oHZiX-UfQ4AkxWPcro0O-4">
+        <mxCell id="oHZiX-UfQ4AkxWPcro0O-5" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="oHZiX-UfQ4AkxWPcro0O-1" target="oHZiX-UfQ4AkxWPcro0O-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-1" value="1. Attends ANC?" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="oHZiX-UfQ4AkxWPcro0O-1" value="1. Attends ANC?" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="360" y="200" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-8" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="oHZiX-UfQ4AkxWPcro0O-2" target="oHZiX-UfQ4AkxWPcro0O-7">
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-16" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oHZiX-UfQ4AkxWPcro0O-2" target="F0iW_O8TZzyVdNyc6lmT-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-13" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oHZiX-UfQ4AkxWPcro0O-2" target="oHZiX-UfQ4AkxWPcro0O-9">
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-17" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oHZiX-UfQ4AkxWPcro0O-2" target="F0iW_O8TZzyVdNyc6lmT-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-2" value="2. Partial term pregnancy?" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="oHZiX-UfQ4AkxWPcro0O-2" value="2. Partial term pregnancy?" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="360" y="320" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-4" value="&lt;b&gt;Record False for first trimester and later pregnancy ANC attendance&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="600" y="200" width="140" height="60" as="geometry" />
+        <mxCell id="oHZiX-UfQ4AkxWPcro0O-4" value="&lt;b&gt;Record False for first trimester and False later pregnancy ANC attendance&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="560" y="200" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-7" value="&lt;span&gt;Record True for first trimester ANC attendance, False for later pregnancy ANC attendance&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="600" y="320" width="170" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-12" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oHZiX-UfQ4AkxWPcro0O-9" target="oHZiX-UfQ4AkxWPcro0O-11">
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-9" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="F0iW_O8TZzyVdNyc6lmT-1" target="F0iW_O8TZzyVdNyc6lmT-8">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-15" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oHZiX-UfQ4AkxWPcro0O-9" target="oHZiX-UfQ4AkxWPcro0O-14">
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-18" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F0iW_O8TZzyVdNyc6lmT-1" target="F0iW_O8TZzyVdNyc6lmT-10">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-9" value="3. Attends 4 ANC visits?" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-1" value="3&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;. Attends ANC in first trimester?&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="360" y="440" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-11" value="Record True for first trimester and later pregnancy ANC attendance" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="335" y="560" width="170" height="60" as="geometry" />
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-5" value="&lt;b&gt;Record True for first trimester and False for later pregnancy ANC attendance&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="320" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="oHZiX-UfQ4AkxWPcro0O-14" value="Record False for first trimester and True for later pregnancy ANC attendance" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="600" y="440" width="170" height="60" as="geometry" />
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-14" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F0iW_O8TZzyVdNyc6lmT-8" target="F0iW_O8TZzyVdNyc6lmT-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-15" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="F0iW_O8TZzyVdNyc6lmT-8" target="F0iW_O8TZzyVdNyc6lmT-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-8" value="4. Attends more than one total ANC visit?" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="560" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-10" value="&lt;b&gt;Record False for first trimester and True for later pregnancy ANC attendance&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="440" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-12" value="&lt;b&gt;Record True for first trimester and&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start; text-wrap-mode: nowrap;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%26lt%3Bb%26gt%3BRecord%20False%20for%20first%20trimester%20and%20True%20for%20later%20pregnancy%20ANC%20attendance%26lt%3B%2Fb%26gt%3B%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%2260%22%20y%3D%22440%22%20width%3D%22140%22%20height%3D%2260%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;b&gt;True for later pregnancy ANC attendance&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="680" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="F0iW_O8TZzyVdNyc6lmT-13" value="&lt;b&gt;Record True for first trimester and False for later pregnancy ANC attendance&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="560" width="140" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
