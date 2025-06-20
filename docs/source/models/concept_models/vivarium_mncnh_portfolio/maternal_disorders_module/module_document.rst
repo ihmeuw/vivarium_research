@@ -59,7 +59,7 @@ There is no specific decision tree diagram for this module. Rather, the overall 
 
 .. note::
 
-  There is a specific ordering that the maternal disorders subcauses should follow, specified in the "Subcause ordering" section on the :ref:`cverall maternal disorders document <2021_cause_maternal_disorders_mncnh>`.
+  There is a specific ordering that the maternal disorders subcauses should follow, specified in the "Subcause ordering" section on the :ref:`overall maternal disorders document <2021_cause_maternal_disorders_mncnh>`.
 
 There are specific variables that will affect these cause models, summarized in the table below. Note that the factors included in this table are required inputs to the maternal disorders module.
 
