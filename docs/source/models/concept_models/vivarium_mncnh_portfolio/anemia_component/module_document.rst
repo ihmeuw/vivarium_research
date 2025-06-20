@@ -106,7 +106,7 @@ and YLDs.
     - Note
   * - 1
     - Received IFA/MMS?
-    - Yes if IFA/MMS coverae input value == True
+    - Yes if IFA/MMS coverage input value == True
     - 
   * - 2, 4, 5
     - Received IV iron
@@ -122,7 +122,7 @@ and YLDs.
 
 We assume that hemoglobin may vary throughout the course of pregnancy/postpartum at the following distinct points opportunities: (1) following IFA/MMS supplementation at the first trimester ANC visit, (2) following IFA/MMS supplementation or IV iron administration at the later pregnancy ANC visit, and (3) following an incident case of maternal hemorrhage during labor, which will persist through the end of the postpartum period. Therefore, we will calculate YLDs due to anemia during pregnancy in this model as a weighted sum over the course of pregnancy stratified by these specified events.
 
-Note that for simulants who died during labor should not experience any YLDs due to anemia in the postpartum period. In other words, :math:`\text{DW}(\text{hgb}^\text{pp}_i) * \text{duration}^\text{pp} = 0` for these simulants.
+Note that simulants who died during labor should not experience any YLDs due to anemia in the postpartum period. In other words, :math:`\text{DW}(\text{hgb}^\text{pp}_i) * \text{duration}^\text{pp} = 0` for these simulants.
 
 .. list-table:: Hemoglobin module action point
   :header-rows: 1

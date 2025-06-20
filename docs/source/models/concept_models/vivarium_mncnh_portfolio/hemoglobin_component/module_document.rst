@@ -107,16 +107,18 @@ This module will:
     - Note
   * - 1
     - Baseline IFA?
-    - Baseline IFA coverage is defined in the :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. Probability of "yes" is equal to coverage value.
-    - Note baseline IFA calibration limitation
+    - * Baseline IFA coverage is defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. Probability of "yes" is equal to this coverage value. 
+      * Only simulants who attend at least one ANC visit (according to the module inputs) are eligible for baseline IFA coverage. (Probability of "yes" applies directly to this population and only this population)
+      * The propensity for answering this question should be the same propensity used for answering decision nodes #3, 6, and 10.
+    - 
   * - 2
     - ANC in first trimester?
     - As informed from module input (output from :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`)
     - 
   * - 3
     - Recieve IFA/MMS at first trimester visit?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
-    - 
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
+    - Use same propensity value as decision node #1 to answer this question
   * - 4
     - ANC later in pregnancy?
     - As informed from module input (output from :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`)
@@ -128,7 +130,7 @@ This module will:
   * - 6
     - Receive IFA/MMS *for the first time* at late pregnancy visit?
     - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
-    - 
+    - Use same propensity value as decision node #1 to answer this question
   * - 7 
     - Hemoglobin screening value <100 g/L? (Based on IFA/MMS adjusted exposure)
     - Instructions detailed in section 2.3.1 below
@@ -144,7 +146,7 @@ This module will:
   * - 10
     - Also receive IFA/MMS *for the first time* at late pregnancy visit?
     - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
-    - 
+    - Use same propensity value as decision node #1 to answer this question
 
 2.3.1 Hemoglobin Screening Accuracy Instructions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -200,9 +202,9 @@ The probability of low ferritin screening is dependent on the simulant's locatio
     - See :ref:`hemoglobin risk exposure document <2023_hemoglobin_exposure>`
     - 
   * - II
-    - Remove IFA effect on hemoglobin
-    - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`. Subtract rather than add IFA effect on hemoglobin to hemoglobin exposure for this step. Ignore instructions regarding timeline and baseline coverage on intervention document.
-    - 
+    - Calibrate to and remove effect of baseline IFA coverage
+    - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`. For simulants without baseline coverage of IFA, subtract the value of :code:`baseline_ifa_coverage * ifa_hemoglobin_shift` from their hemoglobin exposure value. For simulants with baseline coverage of IFA, add the value of :code:`(1 - baseline_ifa_coverage) * ifa_hemoglobin_shift - ifa_hemoglobin_shift` to their hemoglobin exposure value. Ignore instructions regarding timeline and baseline coverage on intervention document.
+    - Note that this step both calibrates to baseline coverage AND removes the effect of baseline IFA coverage. The effect of baseline IFA coverage will be added back in later in the decision tree.
   * - III
     - Record hemoglobin exposure at the start of pregnancy
     - Record to output C
@@ -304,6 +306,8 @@ The probability of low ferritin screening is dependent on the simulant's locatio
 - Hemoglobin at the start of pregnancy and end of pregnancy should vary in accordance with intervention receipts
 
 - Intervention coverage should match expected values
+
+- IFA/MMS should have expected effect on hemoglobin
 
 - At the individual level, only simulants who attend ANC should receive interventions
 

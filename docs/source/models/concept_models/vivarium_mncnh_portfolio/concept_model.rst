@@ -198,6 +198,8 @@ defined as a module input in a subsequent row.
         * Pregnancy duration
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
         * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
+        * :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
+        * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
       - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules other than impacts of IFA/MMS and IV Iron interventions on pregnancy module outputs
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
       - * ANC attendance
@@ -1027,6 +1029,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Note that postpartum depression cause should be added to the maternal disorders burden observer
+  * - 10.1
+    - Run with no effect between LBWSG risk factor and Neonatal encephalopathy due to birth asphyxia and birth trauma (but keep LBWSG effects on all other outcomes)
+    - All scenarios
+    - ``model10.1``
+    - Default
+    - Default
+    - Default
   * - 11.0
     - Add :ref:`Hemoglobin risk exposure model <2023_hemoglobin_exposure>`. Note that this will be the starting point for the larger :ref:`wave II hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`, which will be built out in future model runs
     - Baseline

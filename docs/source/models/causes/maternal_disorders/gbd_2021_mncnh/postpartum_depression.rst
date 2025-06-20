@@ -230,7 +230,7 @@ Data Tables
 
   * - Severity
     - Percent of cases
-    - Disability weight
+    - Mean disability weight (95% UI)
   * - Asymptomatic
     - 14
     - 0
@@ -244,6 +244,9 @@ Data Tables
     - 10 
     - 0.658 (0.477, 0.807)
 
+.. note::
+
+  Model uncertainty about the mean estimate of disability weight as parameter uncertainty following a truncated normal distribution with bounds of 0 and 1.
 
 Calculating Burden
 ++++++++++++++++++
