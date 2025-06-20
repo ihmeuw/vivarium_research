@@ -65,6 +65,14 @@ The inputs and outputs for this module are summarized in the tables below.
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - Used to sample exposure value from the LBWSG exposure distribution. Ordering of the LBWSG exposure categories matters. see the "Special ordering of the categories" section on the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
     - 
+  * - IFA/MMS coverage
+    - :ref:`Hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+    - Affects birth outcome, birthweight, and gestational age
+    - Will need to perform baseline calibration
+  * - IV iron coverage
+    - :ref:`Hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+    - Affects birth outcome, birthweight, and gestational age
+    - 
 
 
 .. list-table:: Module outputs
