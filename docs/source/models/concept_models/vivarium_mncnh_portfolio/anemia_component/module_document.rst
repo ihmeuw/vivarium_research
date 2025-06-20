@@ -106,7 +106,7 @@ and YLDs.
     - Note
   * - 1
     - Received IFA/MMS?
-    - Yes if IFA/MMS coverae input value == True
+    - Yes if IFA/MMS coverage input value == True
     - 
   * - 2, 4, 5
     - Received IV iron
