@@ -276,6 +276,8 @@ Assumptions and limitations
   status (LBW), but these are not currently used in the causal model
   optimization due to lack of data.
 
+.. _facility_choice_correlated_propensities_section:
+
 Correlated propensities
 -----------------------
 
@@ -386,6 +388,8 @@ parameters.
   could precompute several sets of consistent parameters, and then
   different scenarios would only have to specify which set of values to
   use.
+
+.. _facility_choice_special_ordering_of_categories_section:
 
 Special ordering of the categories for categorical variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
