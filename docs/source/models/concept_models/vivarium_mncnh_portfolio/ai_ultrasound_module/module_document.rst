@@ -88,7 +88,11 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
   * - 1
     - Attends ANC?
     - Input from antenatal care module (True/False for each simulant)
-    - 
+    - As described in the :ref:`facility choice model document
+      <2024_facility_model_vivarium_mncnh_portfolio>`, the ANC
+      propensity is correlated with other propensities, and the
+      categories must be ordered False < True when sampling ANC
+      attendance from its propensity
   * - 2
     - Receives ultrasound?
     - Scenario-dependent variable: see the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values (and baseline coverage section below for baseline coverage)
@@ -96,7 +100,7 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
   * - 3
     - Ultrasound type?
     - Scenario-dependent variable: :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values (and baseline coverage section below for baseline coverage)
-    - 
+    - Possible values are "none," "standard," and "AI-assisted"
 
 2.3.1: Baseline coverage
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -146,9 +150,9 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
     - See instructions below and record to output B
     -
   * - V
-    - Record believed term status
+    - Record believed preterm status
     - Record to output C: *preterm* if estimated gestational age < 37
-      weeks; *full-term* if estimated gestational age is 37+ weeks
+      weeks; *term* if estimated gestational age is 37+ weeks
     -
 
 2.4.1 Calculation of estimated gestational age
@@ -167,6 +171,10 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
     - 6.7 days
   * - AI-assisted ultrasound
     - 5 days
+
+.. todo::
+
+  Add references for these numbers
 
 .. note::
   
@@ -189,9 +197,10 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
     - Used for V&V and for estimation of output B
   * - B. Estimated gestational age
     - Point values in days
-    - Used for V&V and calculation of output C
+    - Used for V&V, calculation of output C, and determination of
+      eligibility for antenatal corticosteroids
   * - C. Believed term status
-    - *preterm* / *full-term*
+    - *preterm* / *term*
     - Used for V&V and for facility choice module in intrapartum component
 
 
@@ -199,7 +208,13 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
 ++++++++++++++++++++++++++++++++
 
 * The timing of ANC visits impacts the ability to accurately estimate gestational age, but we use an average instead. 
-* The current version of the model does not include any false positive rates for pre-term or LBW. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
+* The current version of the model does not include any false positive
+  rates for pre-term or LBW. [[Is this still true? Since the estimated
+  GA can be greater than or less than the true GA, we'll get some false
+  positives for preterm. And we're not doing anything with LBW as far as
+  I know...]] Since a false positive is unlikely to
+  cause harm, only inclusion in higher level care, this seems
+  sufficient.
 * Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
 * The data for baseline ultrasound utilization at the ANC is non-ideal for all of the locations. Our data for Ethiopia is most aligned with the value we are trying to find, as it comes from `a paper that
   estimates ultrasound utilization at ANC <https://pmc.ncbi.nlm.nih.gov/articles/PMC8905208/>`_, in a specific municipality of Jimma in Ethiopia. For Nigeria, our literature value is less trustworthy, coming from a paper that reports the percentage of 
