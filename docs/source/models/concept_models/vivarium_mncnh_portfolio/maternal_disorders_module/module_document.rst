@@ -54,7 +54,6 @@ There is no specific decision tree diagram for this module. Rather, the individu
   * :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
   * :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
   * :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
-  * :ref:`Depressive disorders <2021_cause_postpartum_depression_mncnh>`
   * Maternal hypertension
 
 There are specific variables that will affect these cause models, summarized in the table below. Note that the factors included in this table are required inputs to the maternal disorders module.

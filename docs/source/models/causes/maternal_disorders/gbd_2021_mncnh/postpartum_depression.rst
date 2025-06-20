@@ -142,6 +142,11 @@ lines indicate pieces of the underlying pregnancy model.
 
     Jira ticket: https://jira.ihme.washington.edu/browse/SSCI-2006
 
+.. note::
+
+  Only simulants who survive birth (do not die of a maternal disorder)
+  are eligible to experience an incident case of postpartum depression
+
 .. graphviz::
 
     digraph ppd_decisions {
@@ -169,11 +174,11 @@ lines indicate pieces of the underlying pregnancy model.
       - Parent simulant has any pregnancy outcome (live, still, or partial term birth) determined by the
         :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
-        already been through the antenatal and intrapartum models
+        already been through and survived the antenatal and intrapartum models
     * - PPD
       - Parent simulant has postpartum depression
     * - parent alive
-      - Parent simulant is still alive
+      - Parent simulant did not die of postpartum depression
     * - parent dead
       - Parent simulant died of postpartum depression
     * - birth
