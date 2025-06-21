@@ -8,7 +8,7 @@ This page details the methodology for translating health outcomes into economic 
 Overview
 --------
 
-The economic impact module converts simulated health outcomes into comprehensive economic measures across the three key scenarios. The analysis captures direct healthcare spending, informal care costs, productivity losses, and broader societal economic impacts associated with Alzheimer's disease progression and early intervention strategies.
+The economic impact module converts simulated health outcomes into comprehensive economic measures across the three key scenarios. Recent research reveals that direct medical spending represents only 20% of total dementia costs. Informal care provided by family and friends accounts for 80% of economic impact, totaling $224 billion annually in unpaid care costs. The analysis captures this full economic burden across disease progression stages and intervention strategies.
 
 Key Economic Components
 -----------------------
@@ -22,10 +22,12 @@ Key Economic Components
 
 **Informal Care Costs:**
 
-- Family caregiver time and opportunity costs
-- Caregiver health impacts and healthcare utilization
-- Lost productivity from caregiving responsibilities
-- Early retirement and career modifications
+Informal care represents the largest component of economic burden, with total costs five times higher than direct medical spending alone. Key impacts include:
+
+- Family caregiver time and opportunity costs (valued at replacement wages)
+- Caregiver workforce impacts: 12% reduce work hours or quit jobs entirely
+- Lost productivity from missed workdays and reduced workplace efficiency  
+- Early retirement and career modifications affecting lifetime earnings
 
 **Productivity Losses:**
 
@@ -196,19 +198,19 @@ Intervention Cost-Effectiveness Analysis
 Location-Specific Economic Parameters
 -------------------------------------
 
-**Healthcare Cost Variations:**
+**Geographic Cost Disparities:** Economic burden varies dramatically by location, with some of the poorest regions experiencing the highest total costs due to limited formal care infrastructure.
 
-- Wage levels and healthcare prices by location
-- Healthcare system efficiency and delivery models
-- Currency conversion and purchasing power adjustments
-- Healthcare financing and reimbursement patterns
+**Cost Variation Drivers:**
+- Formal care availability determines informal care burden
+- Healthcare system capacity affects family caregiver hours
+- Community support programs (adult day care, Meals on Wheels) reduce family costs
+- Wage levels influence opportunity costs of informal care time
 
-**Economic Development Factors:**
-
-- GDP per capita and economic growth rates
-- Labor force participation and employment patterns
-- Social protection systems and disability benefits
-- Healthcare infrastructure and technology adoption
+**Healthcare System Factors:**
+- Healthcare price levels and reimbursement policies
+- Long-term care infrastructure and workforce availability  
+- Technology adoption rates for diagnostic and monitoring tools
+- Cultural attitudes toward family versus institutional care
 
 .. list-table:: Location-Specific Economic Factors
   :header-rows: 1
@@ -317,19 +319,39 @@ Output Specifications
 - Affordability thresholds and financing requirements
 - Equity impacts and accessibility considerations
 
+Cost Data Strategy
+------------------
+
+**Primary Cost Components:** Economic analysis requires comprehensive data spanning formal healthcare costs and informal care valuations.
+
+**Direct Cost Sources:**
+- Healthcare claims and administrative data by disease stage
+- Long-term care facility costs and utilization rates
+- Diagnostic testing costs including blood biomarkers, CSF, and PET
+- Prescription drug costs for disease-modifying therapies
+
+**Informal Care Valuation:**
+- Time-use surveys quantifying care hours by disease severity
+- Wage data for replacement cost method of care valuation  
+- Caregiver workforce participation and productivity impacts
+- Geographic variation in care hours and availability of formal services
+
+**Implementation Team:** IHME provides health outcomes (DALYs) and intermediate model outputs. Amy Lastuka's economic team translates these outputs into comprehensive cost estimates including direct healthcare spending, lost wages for patients and caregivers, and testing/treatment program costs.
+
 Validation and Calibration
 --------------------------
 
 **Calibration Targets:**
 
-- Current Alzheimer's-related healthcare spending by location
-- Published cost-of-illness studies
+- Total economic burden aligning with 5:1 informal-to-medical cost ratio
+- State-specific cost variations reflecting care infrastructure differences
+- Published cost-of-illness studies with comprehensive informal care estimates
 - Healthcare utilization patterns from administrative data
-- Caregiver burden and informal care studies
+- Caregiver burden studies quantifying workforce impacts
 
 **External Validation:**
 
-- Comparison with existing economic evaluations
+- Comparison with Lastuka et al. findings on unpaid care burden ($224B annually)
 - Cross-validation with alternative modeling approaches
 - Expert review and stakeholder feedback
 - Policy maker and payer input on assumptions

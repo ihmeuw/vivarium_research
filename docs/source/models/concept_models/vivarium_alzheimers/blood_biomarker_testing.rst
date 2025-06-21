@@ -21,9 +21,11 @@ Key Modeling Components
 
 **Testing Uptake:**
 
-- 5% annual uptake rate among eligible population
-- Uptake may vary by location, age, sex, and time period
-- Supply-side constraints can be modeled through reduced uptake rates
+- 5% annual uptake rate among eligible population  
+- Client defines uptake flexibly ("20% of at-risk population identified at age 30")
+- Implementation prioritizes simplicity over complex demographic variations
+- Supply-side constraints modeled through reduced uptake rates
+- Family history correlation may increase testing likelihood in future versions
 
 **Test Performance:**
 
@@ -159,12 +161,15 @@ Multi-Modal Testing Framework
 
 **Reference Scenario Testing (CSF and PET):**
 
-In the reference scenario, current diagnostic pathways include cerebrospinal fluid (CSF) and amyloid-PET testing:
+Current diagnostic pathways include cerebrospinal fluid (CSF) and amyloid-PET testing. These expensive, invasive procedures have limited accessibility compared to blood biomarkers.
 
+**Value Proposition for Alternative Scenario 1:** Including existing testing modalities quantifies the number of expensive PET scans and CSF procedures avoided through blood biomarker implementation. This comparison demonstrates economic benefits beyond health outcomes.
+
+**Testing Characteristics:**
 - **CSF Testing:** 70-80% correlation for repeat results over 5-year periods
-- **Amyloid-PET Imaging:** 85-90% correlation for repeat results if initially positive
-- Lower accessibility and higher costs compared to blood biomarkers
-- Used primarily in specialized centers and research settings
+- **Amyloid-PET Imaging:** 85-90% correlation for repeat results if initially positive  
+- Higher costs and specialized center requirements limit population access
+- Blood biomarkers offer comparable accuracy with greater accessibility
 
 **Test Correlation Research:**
 

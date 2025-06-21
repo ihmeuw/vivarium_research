@@ -242,7 +242,37 @@ The intervention model applies to individuals with confirmed preclinical AD diag
 4.0 Data Requirements and Sources
 +++++++++++++++++++++++++++++++++
 
-4.1 Core Epidemiological Parameters
+4.1 Population Forecasting Strategy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Demographic Challenge:** The 80-year simulation period (2020-2100) with simulants aged 30-120 requires fertility modeling to maintain realistic age structures. Unlike cardiovascular disease models that track younger cohorts only, this analysis must model complete population dynamics.
+
+**Solution:** Population-based forecasting is sufficient because age- and sex-specific Alzheimer's disease rates show minimal temporal trends (GBD Compare analysis validates stable incidence patterns). This approach avoids the complexity of Future Health Scenarios integration while maintaining accuracy.
+
+**Data Needs:**
+- Forecasted fertility rates for all 10 locations through 2100
+- Age-specific population projections by sex and location
+- Migration patterns affecting demographic composition
+
+4.2 Alzheimer's-Specific Cause Definition  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**GBD Data Limitation:** Current estimates combine "Alzheimer's and other dementias," requiring separation for disease-specific modeling.
+
+**Evidence Base:** Alzheimer's disease represents 60-80% of dementia cases, with variation by age and sex groups. IHME research by Jaimie Steinmetz on clinical dementia subtypes provides refined estimates.
+
+**Implementation:** Create custom cause definition distinguishing Alzheimer's disease from other dementias. This separation affects all downstream modeling of progression rates, healthcare utilization, and economic impacts.
+
+4.3 Preclinical Disease Definition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Critical Modeling Decision:** Define the population that tests positive on blood-based biomarkers and their progression probability to clinical Alzheimer's disease.
+
+**Approach:** Back-calculate preclinical population size from established clinical progression patterns. Well-documented research exists on preclinical progression rates and biomarker correlations.
+
+**Calibration Target:** Align with GBD prevalence data by disease severity while maintaining realistic durations between disease stages.
+
+4.4 Core Epidemiological Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Primary Data Needs:**

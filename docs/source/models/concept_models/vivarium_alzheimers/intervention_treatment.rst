@@ -8,7 +8,7 @@ This page describes the modeling approach for disease-modifying interventions in
 Overview
 --------
 
-The intervention module simulates hypothetical treatments that prevent, delay, or slow Alzheimer's disease progression. The module captures treatment initiation decisions, adherence patterns, effectiveness profiles, and discontinuation dynamics across the disease spectrum.
+The intervention module simulates hypothetical disease-modifying treatments that prevent, delay, or slow Alzheimer's disease progression. The model excludes symptomatic treatments that improve quality of life but do not affect underlying disease progression. Focus remains on interventions comparable to lecanemab that modify disease trajectory and reduce long-term care burden.
 
 Key Modeling Components
 -----------------------
@@ -27,9 +27,12 @@ Key Modeling Components
 
 **Treatment Effectiveness:**
 
+Disease-modifying therapy reduces progression rates across all disease transitions. This uniform approach reflects limited evidence on stage-specific effectiveness but provides conservative estimates of intervention benefits.
+
 - 20% reduction in disease progression rates, based on clinical trial evidence [vanDyck2023]_
 - Applied uniformly across all transition rates (i_mci, i_mild, i_moderate, i_severe)
 - Effectiveness maintained while on treatment
+- Conservative assumption pending stage-specific efficacy data
 
 **Treatment Adherence:**
 
