@@ -69,8 +69,27 @@ Following U.S. HHS framework:
 - **PDMPs**: Prescription Drug Monitoring Programs
 - **HCV/HIV**: Hepatitis C/Human Immunodeficiency Virus
 
+## Research Focus: LGBT Latino Communities
+
+### Current Documentation Emphasis
+- **Primary prevention** is the intervention area of interest for LGBT Latino communities in Seattle and Yakima
+- Documentation presents research on substance use patterns across different populations
+- Family-centered interventions and culturally-responsive approaches are examined as prevention strategies
+
+### Research Evidence Summary
+- Studies show sexual minority Hispanic adolescents have higher adjusted odds of certain substance use behaviors
+- Research documents associations between acculturation and opioid misuse patterns in Hispanic populations
+- Community-based participatory approaches show promise for intervention development
+- Family acceptance appears to influence social support and health outcomes
+
+### Geographic Context
+- Washington State SOR grant supports prevention through community coalitions and culturally-responsive programming
+- Seattle and Yakima represent urban and rural contexts where prevention approaches may need adaptation
+- Existing LGBTQ+-affirming services provide potential integration points for prevention strategies
+
 ## Model Validation
 - Parameters must align with GBD 2021 estimates
 - Treatment ratios designed for internal consistency
 - State prevalences should match real-world epidemiological data
 - Intervention effects based on published literature and expert consultation
+- **Population-specific considerations**: Incorporate research on substance use patterns across different demographic groups
