@@ -42,25 +42,21 @@ Postpartum hemoglobin module
 1.0 Overview
 ++++++++++++
 
-This module exists to model hemoglobin and anemia outcomes in the postpartum period following birth and is part of the intrapartum component of the simulation. Notably, postpartum hemoglobin is determined from hemoglobin at birth (an output of the pregnancy component hemoglobin module) and whether a simulant experienced postpartum hemorrhage.
+This module exists to model hemoglobin and anemia outcomes in the postpartum period among birthing parents who survive labor and is part of the postpartum component of the simulation. Notably, postpartum hemoglobin is determined from hemoglobin at birth (an output of the pregnancy component hemoglobin module) and whether a simulant experienced postpartum hemorrhage.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
 
 Follow the steps below to model the postpartum hemoglobin module. Module inputs and outputs are summarized in the tables below.
 
-1. Assign postpartum hemoglobin exposure equal to hemoglobin exposure at birth
-2. Scale postpartum hemoglobin exposure for incident cases of maternal hemorrhage according to the :ref:`maternal hemorrhage risk effects document <2019_risk_effect_maternal_hemorrhage>`
-3. Assess postpartum anemia level according to the relationship between hemoglobin and anemia *specific to pregnant individuals* on the :ref:`anemia impairment document <2019_anemia_impairment>`. Note that the pregnant-specific threshold values are used to assess anemia status for the first six weeks postpartum.
-4. Calculate anemia YLDs in the postpartum period by multiplying the anemia severity-specific disability weights found on the :ref:`anemia impairment document <2019_anemia_impairment>` by a six week duration (modeled period for postpartum anemia).
+1. Determine if simulant survived labor and progressed to the postpartum period
+2. Among surviving simulants, assign postpartum hemoglobin exposure equal to hemoglobin exposure at birth
+3. Scale postpartum hemoglobin exposure for incident cases of maternal hemorrhage according to the :ref:`maternal hemorrhage risk effects document <2019_risk_effect_maternal_hemorrhage>`
 
 .. todo::
 
   While it appears to be the case based on the values in shared functions, confirm that there are no relevant changes in the maternal hemorrhage severity split model between GBD 2019 and GBD 2023 that will impact the :ref:`maternal hemorrhage risk effects document <2019_risk_effect_maternal_hemorrhage>` when the GBD 2023 methods appendix is published
 
-.. todo::
-
-  Confirm whether we want to measure anemia YLDs on a different timescale than the six weeks postpartum that we have used for similar models in the past.
 
 .. list-table:: Module required inputs
   :header-rows: 1
@@ -85,10 +81,7 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
   * - Output
     - Value
     - Dependencies
-  * - A. Postpartum anemia YLDs
-    - Point value
-    - Simulation result
-  * - B. Postpartum hemoglobin
+  * - A. Postpartum hemoglobin
     - Point value
     - Used for V&V of maternal hemorrhage effect on postpartum hemoglobin
 
@@ -97,8 +90,6 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
 ++++++++++++++++++++++++++++++++
 
 * We assume the pregnancy-specific hemoglobin thresholds for anemia apply to the first six weeks of the postartum period
-
-* We do not track YLDs due to anemia beyond six weeks postpartum
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
