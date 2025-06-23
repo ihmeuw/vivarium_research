@@ -47,14 +47,18 @@ This module is part of the intrapartum component and reads inputs that affect ma
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
 
-There is no specific decision tree diagram for this module. Rather, the individual maternal disorders cause model documents are linked below:
+There is no specific decision tree diagram for this module. Rather, the overall maternal disorders and subcause cause model documents are linked below:
 
 * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>` and the following subcauses:
 
+  * Maternal hypertensive disorders
+  * :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
   * :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
   * :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
-  * :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
-  * Maternal hypertension
+
+.. note::
+
+  There is a specific ordering that the maternal disorders subcauses should follow, specified in the "Subcause ordering" section on the :ref:`overall maternal disorders document <2021_cause_maternal_disorders_mncnh>`.
 
 There are specific variables that will affect these cause models, summarized in the table below. Note that the factors included in this table are required inputs to the maternal disorders module.
 
