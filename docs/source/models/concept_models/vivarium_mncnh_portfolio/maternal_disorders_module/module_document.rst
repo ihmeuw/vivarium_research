@@ -55,7 +55,6 @@ There is no specific decision tree diagram for this module. Rather, the overall 
   * :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
   * :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
   * :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
-  * :ref:`Depressive disorders <2021_cause_postpartum_depression_mncnh>`
 
 .. note::
 

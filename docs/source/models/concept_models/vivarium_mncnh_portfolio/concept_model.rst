@@ -182,19 +182,18 @@ defined as a module input in a subsequent row.
         * Later pregnancy ANC attendance
         * IFA/MMS coverage
         * IV iron coverage
-      - * Hemoglobin at birth
-        * Anemia outcomes (see output table)
+      - * Hemoglobin at start of pregnancy
+        * Hemoglobin at birth
       - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
-        * :ref:`Anemia impairment <2019_anemia_impairment>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
       - New wave II module
-    * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+    * - :ref:`Pregnancy II <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       - * LBWSG propensity
         * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
         * IV iron coverage (affects birth outcome, gestational age, birthweight)
       - * Birth outcome
-        * Gestational age
+        * Gestational age at birth
         * Birthweight
         * Pregnancy duration
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
@@ -298,26 +297,16 @@ defined as a module input in a subsequent row.
         * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
-        * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
       - Wave II changes: 
 
         * Hemoglobin at birth as a variable that impacts maternal disorders causes
         * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
-        * Postpartum depression as a new maternal disorders cause
-    * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
-      - * Hemoglobin at birth
-        * Maternal hemorrhage incidence
-      - * Postpartum anemia outcomes (see output table)
-      - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
-        * :ref:`Anemia impairment <2019_anemia_impairment>`
-        * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>` 
-      - New module in wave II
 
 .. note::
 
   Only live births proceed to the neonatal component. Therefore, birth outcome is a de facto input to all modules in the neonatal component.
 
-.. list-table:: Neonatal Component Module
+.. list-table:: Neonatal Component Modules
   :header-rows: 1
 
   * - Module
@@ -342,6 +331,38 @@ defined as a module input in a subsequent row.
       * Antenatal corticosteroids
       * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
 
+.. list-table:: Postpartum Component Modules
+  :header-rows: 1
+
+  * - Module
+    - Inputs
+    - Outputs
+    - Nested subcomponents
+    - Wave II updates
+  * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
+    - * Hemoglobin at birth
+      * Maternal hemorrhage incidence
+    - * Postpartum hemoglobin
+    - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
+      * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>` 
+    - New module in wave II
+  * - :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`
+    - * Hemoglobin at start of pregnancy
+      * Hemoglobin at birth
+      * Postpartum hemoglobin
+      * IFA/MMS coverage
+      * IV iron coverage
+      * First trimester ANC attendance
+      * Pregnancy duration
+    - * Anemia YLDs
+    - * :ref:`Anemia impairment <2019_anemia_impairment>`
+    - New module in wave II
+  * - * :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>`
+    - * Hemoglobin at birth
+    - * Maternal disorders outcomes (see outcome table)
+    - * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
+      * :ref:`Hemoglobin risk effects document <2023_hemoglobin_effects>`
+    - New module in wave II
 
 **Wave 1 Concept Model Map:**
 
@@ -1022,10 +1043,17 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default (no new hemoglobin observer required)
-  * - 12.0*
+  * - 12.0
+    - Capped LBWSG RRs and new late neonatal LBWSG PAF calculation, in accordance with `vivarium research PR #1681 <https://github.com/ihmeuw/vivarium_research/pull/1681>`_
+    - Baseline
+    - ``model12.0``
+    - Default
+    - Default
+    - Default
+  * - 13.0*
     - Wave I antenatal corticosteroids
     - Baseline
-    - ``model10.0``
+    - ``model13.0``
     -
     - 
     - 
@@ -1317,6 +1345,11 @@ Default stratifications to all observers should include scenario and input draw.
   * - 11.0
     - * Use the interactive sim to verify the hemoglobin distribution in pregnancy matches expectation
       * Confirm maternal disorders burden still matches expectation
+    - 
+    - 
+  * - 12.0
+    - * Confirm neonatal all-cause mortality rates match expectation
+      * Confirm LBWSG risk effects are working as expected
     - 
     - 
 
