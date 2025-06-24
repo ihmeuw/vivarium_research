@@ -48,10 +48,12 @@ facility choice model
 <2024_vivarium_mncnh_portfolio_facility_choice_module>`: Antenatal care
 (ANC) attendance; Low birthweight and short gestation (LBWSG) category;
 and In-facility delivery (IFD) status. The propensities for these
-attributes should be correlated using a Gaussian copula as described in
-the :ref:`correlated propensities section
+attributes should be correlated using a `Gaussian copula`_ as described
+in the :ref:`correlated propensities section
 <facility_choice_correlated_propensities_section>` of the facility
 choice model document.
+
+.. _Gaussian copula: https://en.wikipedia.org/wiki/Copula_(statistics)#Gaussian_copula
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
