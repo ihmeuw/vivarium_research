@@ -66,7 +66,7 @@ and YLDs.
     - Application
     - Note
   * - First trimester ANC attendance 
-    - :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`
+    - :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
     - Determines anemia YLD calculation equation
     - 
   * - Hemoglobin at the start of pregnancy
