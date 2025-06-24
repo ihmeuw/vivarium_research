@@ -46,7 +46,7 @@ This module determines whether or not a simulant attends an antenatal care visit
 propensity value and the timing of their ANC visit (i.e., during first trimester or later pregnancy). 
 
 ANC visit timing is particularly relevant to the hemoglobin component of this simulation, so for more information 
-on how outputs from this module will be used, refer to :ref:`our hemoglobin module documentation <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+on how outputs from this module will be used, refer to :ref:`our hemoglobin module documentation <2024_vivarium_mncnh_portfolio_hemoglobin_module>`.
 
 2.0 Module Input and Output Data
 ++++++++++++++++++++++++++++++++
@@ -101,6 +101,11 @@ The below table describes what propensity values to use for each exposure option
     - Probability equal to ``ANCfirst – A``  
     - Prevalence of first trimester visit ONLY (and no late pregnancy visit) only occurs if ANCfirst > ANC4
 
+.. note:: 
+
+    As of `pull request #1690 <https://github.com/ihmeuw/vivarium_research/pull/1690>`_ we updated how we assign our ANC propensity 
+    values to include the ANCfirst variable that the HS team processed and shared with us. Please see `these slides <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BADD6223E-9FCA-40BB-BB7F-FE44F377CCDB%7D&file=ANC%20visit%20timing%20data%20strategy%20options.pptx&action=edit&mobileredirect=true>`_ 
+    for more information on this strategy update.
 
 2.2 Module Inputs
 -----------------
@@ -186,4 +191,3 @@ The following outputs for each pregnancy are needed as inputs for our hemoglobin
 
 5.0 References
 ++++++++++++++
-
