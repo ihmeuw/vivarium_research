@@ -55,7 +55,7 @@ and :ref:`our facility choice module documentation <2024_vivarium_mncnh_portfoli
 2.1 Module Description 
 ----------------------
 
-ANC attendance for full term pregnancies will be modeled as a single variable with 4 possible exposure options:
+ANC attendance **for full term pregnancies** will be modeled as a single variable with 4 possible exposure options:
 
 A. Attends ANC during first trimester AND later pregnancy
 B. Attends ANC during first trimester but NOT later pregnancy
@@ -77,7 +77,7 @@ D. Does not attend ANC at all during pregnancy
 
 The below table describes what propensity values to use for each exposure option outlined above.
 
-.. list-table:: ANC exposure propensity values
+.. list-table:: ANC exposure propensity values for full term pregnancies
   :header-rows: 1
 
   * - ANC exposure option
@@ -92,7 +92,7 @@ The below table describes what propensity values to use for each exposure option
   * - B
     - Attends ANC during first trimester but NOT later pregnancy
     - ``ANCfirst - min(ANCfirst, ANC4)``
-    - Prevalence of first trimester visit ONLY can only 
+    - Prevalence of first trimester visit ONLY (and no late pregnancy visit) only occurs if ANCfirst > ANC4
   * - C
     - Attends ANC during later pregnancy but NOT first trimester
     - 
@@ -100,13 +100,41 @@ The below table describes what propensity values to use for each exposure option
   * - D
     - Does not attend ANC at all during pregnancy
     - Probability equal to ``ANCfirst – A``  
-    - Prevalence of first trimester visit ONLY (and no late pregnancy visit) only occurs if ANCfirst > ANC4
+    - 
 
 .. note:: 
 
     As of `pull request #1690 <https://github.com/ihmeuw/vivarium_research/pull/1690>`_ we updated how we assign our ANC propensity 
     values to include the ANCfirst variable that the HS team processed and shared with us. Please see `these slides <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BADD6223E-9FCA-40BB-BB7F-FE44F377CCDB%7D&file=ANC%20visit%20timing%20data%20strategy%20options.pptx&action=edit&mobileredirect=true>`_ 
     for more information on this strategy update.
+
+The above propensity values are to be implemented for full term pregnancies only. Partial term pregnancies are assigned 
+propensity values differently because we assume their pregnancies end before they can attend later pregnancy ANC visits. 
+The below table describes what propensity values to use for each exposure option **for partial term pregnancies**:
+
+.. list-table:: ANC exposure propensity values for partial term pregnancies
+  :header-rows: 1
+
+  * - ANC exposure option
+    - Description
+    - Propensity value
+    - Notes
+  * - A
+    - Attends ANC during first trimester AND later pregnancy
+    - 0
+    - Assumption
+  * - B
+    - Attends ANC during first trimester but NOT later pregnancy
+    - ``ANCfirst``
+  * - C
+    - Attends ANC during later pregnancy but NOT first trimester
+    - 0 
+    - Assumption
+  * - D
+    - Does not attend ANC at all during pregnancy
+    - Probability equal to ``1 – ANCfirst``  
+    - 
+
 
 2.2 Module Inputs
 -----------------
