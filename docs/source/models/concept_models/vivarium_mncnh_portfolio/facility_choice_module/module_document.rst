@@ -60,32 +60,21 @@ There is a significant amount of background research and analysis that has gone 
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - Used to determine home birth exposure by comparing to the
       :ref:`causal conditional probabilities for in-facility delivery
-      <facility_choice_causal_probabilities_section>`. Note that
-      ordering of the delivery facility categories is important when
-      sampling using this propensity: See the :ref:`special ordering of
-      the categories
-      <facility_choice_special_ordering_of_categories_section>` section
-      of the facility choice model document.
-    - 
+      <facility_choice_causal_probabilities_section>`
+    - The ordering of IFD categories (*at-home* < *in-facility*) is
+      important when sampling using this propensity. See :ref:`Special
+      ordering of the categories
+      <facility_choice_special_ordering_of_categories_section>` in the
+      facility choice model document
   * - Believed preterm status
     - :ref:`AI ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Determines which :ref:`causal conditional probabilities for
       in-facility delivery
       <facility_choice_causal_probabilities_section>` to use, either the
-      "believed preterm" values or the "believed term" values. Note that
-      the believed preterm status is *believed preterm* if the estimated
+      "believed preterm" values or the "believed term" values
+    - Believed preterm status is *believed preterm* if the estimated
       gestational age is <37 weeks and is *believed term* if the
-      estimated gestational age is 37+ weeks.
-    -
-
-..
-      Determines which delivery facility probability values to use
-      (values found in the "Conditional delivery facility probabilities"
-      section of the :ref:`facility choice model document
-      <2024_facility_model_vivarium_mncnh_portfolio>`). If <37 weeks,
-      use believed preterm values. If 37+ weeks use the believed term
-      values.
-
+      estimated gestational age is 37+ weeks
 
 .. list-table:: Module outputs
   :header-rows: 1
@@ -96,19 +85,18 @@ There is a significant amount of background research and analysis that has gone 
     - Note
   * - A. IFD status
     - *at-home* / *in-facility*
-    - Use IFD propensity and believed preterm status
-      input values to assign IFD status as described in
-      the "Application" column of the module input table above
+    - Use IFD propensity and believed preterm status to assign IFD
+      status as described in the "Application" column of the module
+      input table above
     -
   * - B. Delivery facility
     - *home* / *BEmONC* / *CEmONC*
-    - Location where the simulant delivers their baby. Assign *home* if
-      IFD status is *at-home*. If IFD status is *in-facility*, assign
-      BEmONC or CEmONC according to the probabilities specified in the
-      :ref:`choosing BEmONC vs. CEmONC section
-      <facility_choice_choosing_bemonc_cemonc_section>` of the facility
-      choice model document.
-    -
+    - Assign *home* if IFD status is *at-home*. If IFD status is
+      *in-facility*, assign BEmONC or CEmONC according to the
+      probabilities specified in the :ref:`choosing BEmONC vs. CEmONC
+      section <facility_choice_choosing_bemonc_cemonc_section>` of the
+      facility choice model document.
+    - Location where the simulant delivers their baby
 
 
 3.0 Assumptions and limitations
