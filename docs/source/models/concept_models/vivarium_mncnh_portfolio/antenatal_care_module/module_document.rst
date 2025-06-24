@@ -126,6 +126,7 @@ The below table describes what propensity values to use for each exposure option
   * - B
     - Attends ANC during first trimester but NOT later pregnancy
     - ``ANCfirst``
+    -
   * - C
     - Attends ANC during later pregnancy but NOT first trimester
     - 0 
