@@ -117,7 +117,7 @@ This module will:
     - Note baseline IFA calibration limitation
   * - 2
     - ANC in first trimester?
-    - As informed from module input (output from :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`)
+    - As informed from module input (output from :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`)
     - 
   * - 3
     - Recieve IFA/MMS at first trimester visit?
@@ -125,7 +125,7 @@ This module will:
     - 
   * - 4
     - ANC later in pregnancy?
-    - As informed from module input (output from :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`)
+    - As informed from module input (output from :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`)
     - 
   * - 5
     - Hemoglobin screen?
