@@ -451,6 +451,7 @@ specifies how each ordinal variable should be initialized from its
 corresponding propensity. [[A picture would probably help, should we add
 one here?]]
 
+.. _facility_choice_causal_probabilities_section:
 
 Causal conditional probabilities for in-facility delivery
 ---------------------------------------------------------
@@ -554,6 +555,8 @@ inputs in calibrating the model to find the causal probabilities above).
     - 0.492568
     - 0.520097
     - 0.771766
+
+.. _facility_choice_choosing_bemonc_cemonc_section:
 
 Choosing BEmONC vs. CEmONC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
