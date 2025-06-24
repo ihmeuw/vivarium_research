@@ -58,12 +58,6 @@ This module will:
     - Services received during pregnancy that relate to hemoglobin (for V&V, cost counting)
 
     - Hemoglobin exposure at the end of pregnancy for hemoglobin risk effect estimation (inputs to downstream models)
-    
-    - YLDs due to anemia throughout pregnancy and immediate postpartum (simulation result)
-
-.. todo::
-  
-  Link ANC module page when it exists
 
 .. note::
 
@@ -113,16 +107,18 @@ This module will:
     - Note
   * - 1
     - Baseline IFA?
-    - Baseline IFA coverage is defined in the :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. Probability of "yes" is equal to coverage value.
-    - Note baseline IFA calibration limitation
+    - * Baseline IFA coverage is defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. Probability of "yes" is equal to this coverage value. 
+      * Only simulants who attend at least one ANC visit (according to the module inputs) are eligible for baseline IFA coverage. (Probability of "yes" applies directly to this population and only this population)
+      * The propensity for answering this question should be the same propensity used for answering decision nodes #3, 6, and 10.
+    - 
   * - 2
     - ANC in first trimester?
     - As informed from module input (output from :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`)
     - 
   * - 3
     - Recieve IFA/MMS at first trimester visit?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
-    - 
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
+    - Use same propensity value as decision node #1 to answer this question
   * - 4
     - ANC later in pregnancy?
     - As informed from module input (output from :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`)
@@ -134,7 +130,7 @@ This module will:
   * - 6
     - Receive IFA/MMS *for the first time* at late pregnancy visit?
     - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
-    - 
+    - Use same propensity value as decision node #1 to answer this question
   * - 7 
     - Hemoglobin screening value <100 g/L? (Based on IFA/MMS adjusted exposure)
     - Instructions detailed in section 2.3.1 below
@@ -150,7 +146,7 @@ This module will:
   * - 10
     - Also receive IFA/MMS *for the first time* at late pregnancy visit?
     - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
-    - 
+    - Use same propensity value as decision node #1 to answer this question
 
 2.3.1 Hemoglobin Screening Accuracy Instructions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -206,9 +202,9 @@ The probability of low ferritin screening is dependent on the simulant's locatio
     - See :ref:`hemoglobin risk exposure document <2023_hemoglobin_exposure>`
     - 
   * - II
-    - Remove IFA effect on hemoglobin
-    - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`. Subtract rather than add IFA effect on hemoglobin to hemoglobin exposure for this step. Ignore instructions regarding timeline and baseline coverage on intervention document.
-    - 
+    - Calibrate to and remove effect of baseline IFA coverage
+    - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`. For simulants without baseline coverage of IFA, subtract the value of :code:`baseline_ifa_coverage * ifa_hemoglobin_shift` from their hemoglobin exposure value. For simulants with baseline coverage of IFA, add the value of :code:`(1 - baseline_ifa_coverage) * ifa_hemoglobin_shift - ifa_hemoglobin_shift` to their hemoglobin exposure value. Ignore instructions regarding timeline and baseline coverage on intervention document.
+    - Note that this step both calibrates to baseline coverage AND removes the effect of baseline IFA coverage. The effect of baseline IFA coverage will be added back in later in the decision tree.
   * - III
     - Record hemoglobin exposure at the start of pregnancy
     - Record to output C
@@ -247,68 +243,8 @@ The probability of low ferritin screening is dependent on the simulant's locatio
     - 
   * - XII
     - Calculate and record anemia YLDs
-    - See instructions below. Record to output E.
+    - Done in the :ref:`anemia YLDs module <2024_vivarium_mncnh_portfolio_anemia_module>`
     - 
-
-2.4.1: Action point XII - Calculating anemia YLDs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. todo::
-
-  Move this info to a separate anemia YLD module that comes after the estimation of gestational age at birth. We will also need to assign specific dates to ANC visits
-
-Hemoglobin exposure is used to determine anemia status, which has corresponding disability weights. See the :ref:`anemia impairment document <2019_anemia_impairment>` to see how hemoglobin exposure relates to anemia status, disability weights, and years lived with disability.
-
-We assume that hemoglobin may vary throughout the course of pregnancy at the following distinct points opportunities: (1) following IFA/MMS supplementation at the first trimester ANC visit, and (2) following IFA/MMS supplementation or IV iron administration at the later pregnancy ANC visit. Therefore, we will calculate YLDs due to anemia during pregnancy in this model as a weighted sum over the course of pregnancy stratified by these specified events.
-
-The following pseudocode outlines how this can be done.
-
-.. code-block:: python
-
-  # ylds: value of years lived with disability due to anemia during pregnancy
-  # dw(): A function that reads hemoglobin level and returns corresponding disability weight
-  # ga_birth: gestational age at birth in YEARs (note unit change from typical weeks)
-  # ga_oral_iron: gestational age in years at time of oral iron effect on hemoglobin 
-    # this is equal to the timing of first ANC visit where oral iron is received
-  # ga_iv_iron: gestational age in years at time of IV iron effect on hemoglobin
-    # this is equal to the timing of later pregnancy ANC visit where IV iron is administered 
-  # hgb_start_of_pregnancy: output C (defined in output section below)
-  # hgb_end_of_pregnancy: output D (defined in output section below)
-  # oral_iron_effect: IFA/MMS effect on hemoglobin (defined in action point section above)
-  # output_A: indicator of oral iron supplementation status (defined as output A in output section below)
-  # output_B: indicator of IV iron administration status (defined as output B in output section below)
-
-  if output_A == 'none' and output_B == False: # no oral or IV iron in pregnancy
-    ylds = dw(hgb_at_birth) * ga_birth
-  elif output_A is in ['ifa','mms']: # received oral iron
-    if output_B: # also received IV iron
-      if ga_oral_iron < ga_iv_iron: # oral iron was started before receiving IV iron
-        ylds = (dw(hgb_start_of_pregnancy) * ga_oral_iron
-              + dw(hgb_start_of_pregnancy + oral_iron_effect) * (ga_iv_iron - ga_oral_iron)
-              + dw(hgb_end_of_pregnancy) * (ga_birth - ga_iv_iron)
-        )
-      else: # did not receive oral iron before IV iron
-        ylds = (dw(hgb_start_of_pregnancy) * ga_iv_iron
-              + dw(hgb_end_of_pregnancy) * (ga_birth - ga_iv_iron)
-        )
-    else: # received oral but not IV iron
-      ylds = (dw(hgb_start_of_pregnancy) * ga_oral_iron
-            + dw(hgb_end_of_pregnancy) * (ga_birth - ga_oral_iron)
-      )
-  else: # received IV iron and not oral iron
-    ylds = (dw(hgb_start_of_pregnancy) * ga_iv_iron
-          + dw(end_of_pregnancy) * (ga_birth - ga_iv_iron)
-    )
-
-.. todo::
-
-  Decide whether or not we want to model two week delay between start of iron intervention and effect on hemoglobin that we have modeled in the past. If so, then update documentation accordingly.
-
-  The main reason I would like to avoid it is if/when we run into instances of IV iron very late in pregnancy that ends up not impacting pregnancy hemoglobin, but potentially postpartum hemoglobin. This seems like it would be significantly more complicated to model.
-
-.. note::
-
-  We additionally assume that maternal hemorrhage has the potential to decrease *postpartum* hemoglobin (and thereby YLDs due to anemia in the postpartum period). This will affect total YLDs due to anemia in the overall simulation. However, these will be assessed separately as they take place outside of the pregnancy model.
 
 2.4: Module Outputs
 -----------------------
@@ -331,9 +267,6 @@ The following pseudocode outlines how this can be done.
   * - D. True hemoglobin at the end of pregnancy
     - point value
     - Value to be used for :ref:`hemoglobin risk effects model <2023_hemoglobin_effects>`, V&V
-  * - E. Anemia YLDs
-    - Point value
-    - Simulation results
   * - F. True Hemoglobin at screening
     - point value
     - V&V
@@ -368,13 +301,13 @@ The following pseudocode outlines how this can be done.
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-- Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values. TODO: define specifically what these are (do they save pregnancy-specific impairment prevalence in GBD 2023 or do we need to calculate our own targets again?)
-
 - Baseline simulated hemoglobin distribution (mean and standard deviation) should match the GBD 2023 hemoglobin risk exposure distribution
 
 - Hemoglobin at the start of pregnancy and end of pregnancy should vary in accordance with intervention receipts
 
 - Intervention coverage should match expected values
+
+- IFA/MMS should have expected effect on hemoglobin
 
 - At the individual level, only simulants who attend ANC should receive interventions
 
