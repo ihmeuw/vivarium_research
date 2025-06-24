@@ -631,8 +631,9 @@ Default stratifications to all observers should include scenario and input draw.
   * - 7. Maternal population counts
     - * Maternal age group
       * Pregnancy outcome
-      * ANC first trimester attendance
-      * ANC later pregnancy attendance
+      * ANC first trimester attendance (dichotomous)
+      * ANC later pregnancy attendance (dichotomous)
+      * ANC attendance (polychotomous)
       * Ultrasound coverage
       * Azithromycin coverage
       * Misoprostol coverage

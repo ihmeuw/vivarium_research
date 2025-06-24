@@ -45,8 +45,9 @@ Antenatal care attendance module
 This module determines whether or not a simulant attends an antenatal care visit according to their ANC visit 
 propensity value and the timing of their ANC visit (i.e., during first trimester or later pregnancy). 
 
-ANC visit timing is particularly relevant to the hemoglobin component of this simulation, so for more information 
-on how outputs from this module will be used, refer to :ref:`our hemoglobin module documentation <2024_vivarium_mncnh_portfolio_hemoglobin_module>`.
+ANC visit timing is particularly relevant to both the hemoglobin and facility choice components of this simulation, so for more information 
+on how outputs from this module will be used, refer to :ref:`our hemoglobin module documentation <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+and :ref:`our facility choice module documentation <2024_vivarium_mncnh_portfolio_facility_choice_module>`.
 
 2.0 Module Input and Output Data
 ++++++++++++++++++++++++++++++++
@@ -138,10 +139,14 @@ The below table describes what propensity values to use for each exposure option
 2.3 Module Outputs
 ++++++++++++++++++
 
-As mentioned earlier, ANC attendance impacts hemoglobin exposure in our model (see :ref:`here <2024_vivarium_mncnh_portfolio_hemoglobin_module>`).
-The following outputs for each pregnancy are needed as inputs for our hemoglobin component:
+As mentioned earlier, ANC attendance impacts hemoglobin exposure and facility choice in our model, and in order for the 
+outputs of this component to be compatible with the data needs of these two downstream components, we will need two different
+outputs, one being dichotomous for the hemoglobin component and the other being polychotomous for the facility choice component. 
 
-.. list-table:: Module outputs
+ANC attendance inputs to the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+are dichotomous for each pregnancy, so we need to observe the following: 
+
+.. list-table:: Module outputs for hemoglobin component
   :header-rows: 1
 
   * - Output
@@ -153,6 +158,14 @@ The following outputs for each pregnancy are needed as inputs for our hemoglobin
   * - Attends ANC in later pregnancy?
     - *True* / *False* 
     - For groups A or C
+
+ANC attendance inputs to the :ref:`facility choice module <2024_vivarium_mncnh_portfolio_facility_choice_module>`
+are polychotomous for each pregnancy with the following 4 categories (ordered from worst to best):
+
+1. No ANC
+2. ANC in later pregnancy only
+3. ANC in 1st trimester only
+4. ANC in 1st trimester and later pregnancy
 
 
 3.0 Assumptions and limitations
