@@ -167,16 +167,9 @@ defined as a module input in a subsequent row.
       - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules
     * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
       - * ANC propensity
-      - * ANC attendance
+      - * ANC attendance and timing
       - 
-      - No change from wave I
-    * - :ref:`Antenatal care detail <2024_vivarium_mncnh_portfolio_anc_detail_module>`
-      - * ANC attendance
-        * Pregnancy term duration
-      - * First trimester ANC attendance
-        * Later pregnancy ANC attendance
-      - 
-      - New module in wave II
+      - Added first trimester and later pregnancy timing of ANC visit in wave 2
     * - :ref:`Hemoglobin <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
       - * First trimester ANC attendance
         * Later pregnancy ANC attendance
@@ -615,7 +608,8 @@ Default stratifications to all observers should include scenario and input draw.
   * - 7. Maternal population counts
     - * Maternal age group
       * Pregnancy outcome
-      * ANC attendance
+      * ANC first trimester attendance
+      * ANC later pregnancy attendance
       * Ultrasound coverage
       * Azithromycin coverage
       * Misoprostol coverage
