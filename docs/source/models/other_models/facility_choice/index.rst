@@ -156,6 +156,9 @@ between them that we will simulate:
   :blue-grey arrow: input a propensity to simulate randomness
 
 ..
+    Documentation for field list syntax used above:
+    https://docutils.sourceforge.io/docs/user/rst/quickref.html#field-lists
+    Original description of propensity arrows:
     * Light blue-gray arrows represent the input of propensities to
       simulate randomness in a probabilistic relationship
 
@@ -300,7 +303,9 @@ between scenarios at the simulant level.  This makes it straightforward
 to represent the correlation in our factors by generating correlated
 propensities. The
 :code:`statsmodels.distributions.copula.api.GaussianCopula`
-implementation can make them:
+`implementation <statsmodels GaussianCopula_>`_ can make them:
+
+.. _statsmodels GaussianCopula: https://www.statsmodels.org/dev/generated/statsmodels.distributions.copula.api.GaussianCopula.html
 
 .. code-block:: pycon
 
