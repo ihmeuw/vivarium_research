@@ -118,7 +118,7 @@ The below table describes what propensity values to use for each exposure option
     - 
   * - ANCfirst
     - ANCfirst is processed by the Health Systems team at IHME and available here:
-     ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc1_first3months_st-gpr_results_aggregates_scaled2025-05-27.csv``
+      ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc1_first3months_st-gpr_results_aggregates_scaled2025-05-27.csv``
     - Used to calculate propensity values for ANC coverage
     - 
   * - ANC1
@@ -186,6 +186,4 @@ The following outputs for each pregnancy are needed as inputs for our hemoglobin
 
 5.0 References
 ++++++++++++++
-
-.. [Nigeria-DHS] `2018 Nigeria Standard DHS Final Report <https://dhsprogram.com/publications/publication-FR359-DHS-Final-Reports.cfm>`_
 
