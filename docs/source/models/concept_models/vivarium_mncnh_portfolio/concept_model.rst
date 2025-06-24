@@ -1335,8 +1335,8 @@ Default stratifications to all observers should include scenario and input draw.
     - * Check PPD incidence ratio in baseline scenario matches expectation
       * Confirm PPD is non-fatal
       * Confirm PPD YLD rate matches expectation
-    - 
-    - 
+    - All looks great!
+    - `Model 10.0 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_10.0_maternal_checks.ipynb>`_
   * - 11.0
     - * Use the interactive sim to verify the hemoglobin distribution in pregnancy matches expectation
       * Confirm maternal disorders burden still matches expectation
