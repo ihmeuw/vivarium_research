@@ -151,8 +151,9 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
     -
   * - V
     - Record believed preterm status
-    - Record to output C: *preterm* if estimated gestational age < 37
-      weeks; *term* if estimated gestational age is 37+ weeks
+    - Record to output C: *believed preterm* if estimated gestational
+      age < 37 weeks; *believed term* if estimated gestational age is
+      37+ weeks
     -
 
 2.4.1 Calculation of estimated gestational age
@@ -174,7 +175,10 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
 
 .. todo::
 
-  Add references for these numbers
+  Add references for these numbers. Here's the `notebook I used to
+  get them
+  <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/facility_choice/2025_04_17a_investigate_ga_error.ipynb>`_,
+  which includes the citations.
 
 .. note::
   
@@ -199,8 +203,8 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
     - Point values in days
     - Used for V&V, calculation of output C, and determination of
       eligibility for antenatal corticosteroids
-  * - C. Believed term status
-    - *preterm* / *term*
+  * - C. Believed preterm status
+    - *believed preterm* / *believed term*
     - Used for V&V and for facility choice module in intrapartum component
 
 
