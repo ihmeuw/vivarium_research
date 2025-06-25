@@ -113,18 +113,19 @@ defined as a module input in a subsequent row.
   * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - 
     - * ANC propensity
-      * LBWSG propensity
-      * Delivery facility propensity
-    - * :ref:`Facility choice propensity correlation <2024_facility_model_vivarium_mncnh_portfolio>`
+      * LBWSG category propensity
+      * IFD propensity
+    - * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
   * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    - * LBWSG propensity
+    - * LBWSG category propensity
     - * Maternal age
-      * Pregnancy term duration
+      * Pregnancy term length
       * Birth outcome
-      * Child sex
+      * Sex of infant
       * Gestational age
       * Birthweight
       * Pregnancy duration
+      * Preterm status
     - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
       * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
   * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
@@ -134,8 +135,9 @@ defined as a module input in a subsequent row.
   * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - * ANC attendance
       * Gestational age
-    - * Ultrasound coverage
-      * Believed gestational age
+    - * Ultrasound type
+      * Estimated gestational age
+      * Believed preterm status
     - 
 
 .. note::
