@@ -72,6 +72,14 @@ The inputs and outputs for this module are summarized in the tables below.
       of the :ref:`facility choice model document
       <2024_facility_model_vivarium_mncnh_portfolio>`.
     - 
+  * - IFA/MMS coverage
+    - :ref:`Hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+    - Affects birth outcome, birthweight, and gestational age
+    - Will need to perform baseline calibration
+  * - IV iron coverage
+    - :ref:`Hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+    - Affects birth outcome, birthweight, and gestational age
+    - 
 
 
 .. list-table:: Module outputs
