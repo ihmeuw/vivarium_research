@@ -229,10 +229,11 @@ defined as a module input in a subsequent row.
     - Outputs
     - Nested subcomponents
   * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
-    - * (Pregnancy term duration)
-      * Delivery facility propensity
-      * Believed gestational age
-    - * Birth facility
+    - * (Pregnancy term length)
+      * IFD propensity
+      * Believed preterm status
+    - * IFD status
+      * Birth facility
     - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
   * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - * (Pregnancy term duration)
@@ -266,10 +267,11 @@ defined as a module input in a subsequent row.
       - Nested subcomponents
       - Note
     * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
-      - * (Pregnancy term duration)
-        * Delivery facility propensity
-        * Believed gestational age
-      - * Birth facility
+      - * (Pregnancy term length)
+        * IFD propensity
+        * Believed preterm status
+      - * IFD status
+        * Birth facility
       - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
       - 
     * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
