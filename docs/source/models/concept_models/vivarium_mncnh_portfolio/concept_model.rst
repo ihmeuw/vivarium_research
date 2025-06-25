@@ -38,6 +38,67 @@ MNCNH Portfolio
 .. contents::
   :local:
 
+.. list-table:: Abbreviations
+  :widths: 5 15
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+  * - ACMR
+    - All-Cause Mortality Rate
+  * - ACS
+    - Antenatal Corticosteroids
+  * - AI ultrasound
+    - Artificial Intelligence assisted ultrasound
+  * - ANC
+    - Antenatal Care
+  * - BEmONC
+    - Basic Emergency Obstetric and Newborn Care
+  * - CEmONC
+    - Comprehensive Emergency Obstetric and Newborn Care
+  * - CPAP
+    - Continuous Positive Airway Pressure
+  * - CSMR
+    - Cause-Specific Mortality Rate
+  * - ENN
+    - Early Neonatal
+  * - GBD
+    - Global Burden of Disease
+  * - IFA
+    - Iron and Folic Acid
+  * - IFD
+    - In-Facility Delivery
+  * - IV iron
+    - Intravenous iron
+  * - LBWSG
+    - Low Birth Weight and Short Gestation
+  * - LNN
+    - Late Neonatal
+  * - MMS
+    - Multiple Micronutrient Supplements
+  * - MNCNH
+    - Maternal, Newborn, and Child Nutrition and Health
+  * - OL
+    - Obstructed Labor
+  * - PAF
+    - Population Attributable Fraction
+  * - PPD
+    - Postpartum Depression
+  * - RDS
+    - Respiratory Distress Syndrome
+  * - RR
+    - Relative Risk
+  * - RT
+    - Research Team
+  * - V&V
+    - Verification and Validation
+  * - WRA
+    - Women of Reproductive Age
+  * - YLDs
+    - Years Lived with Disability
+  * - YLLs
+    - Years of Life Lost
+
 1.0 Overview
 ++++++++++++
 
