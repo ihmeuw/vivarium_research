@@ -213,12 +213,8 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
 
 * The timing of ANC visits impacts the ability to accurately estimate gestational age, but we use an average instead. 
 * The current version of the model does not include any false positive
-  rates for pre-term or LBW. [[Is this still true? Since the estimated
-  GA can be greater than or less than the true GA, we'll get some false
-  positives for preterm. And we're not doing anything with LBW as far as
-  I know...]] Since a false positive is unlikely to
-  cause harm, only inclusion in higher level care, this seems
-  sufficient.
+  rates for LBW. Since a false positive is unlikely to cause harm, only
+  inclusion in higher level care, this seems sufficient.
 * Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
 * The data for baseline ultrasound utilization at the ANC is non-ideal for all of the locations. Our data for Ethiopia is most aligned with the value we are trying to find, as it comes from `a paper that
   estimates ultrasound utilization at ANC <https://pmc.ncbi.nlm.nih.gov/articles/PMC8905208/>`_, in a specific municipality of Jimma in Ethiopia. For Nigeria, our literature value is less trustworthy, coming from a paper that reports the percentage of 
