@@ -155,15 +155,15 @@ defined as a module input in a subsequent row.
     * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
       - 
       - * ANC propensity
-        * LBWSG propensity
-        * Delivery facility propensity
-      - * :ref:`Facility choice propensity correlation <2024_facility_model_vivarium_mncnh_portfolio>`
+        * LBWSG category propensity
+        * IFD propensity
+      - * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
       - 
     * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       - 
       - * Maternal age
-        * Pregnancy term duration
-        * Child sex
+        * Pregnancy term length
+        * Sex of infant
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
       - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules
     * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
@@ -183,13 +183,14 @@ defined as a module input in a subsequent row.
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
       - New wave II module
     * - :ref:`Pregnancy II <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-      - * LBWSG propensity
+      - * LBWSG category propensity
         * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
         * IV iron coverage (affects birth outcome, gestational age, birthweight)
       - * Birth outcome
         * Gestational age at birth
         * Birthweight
         * Pregnancy duration
+        * Preterm status
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
         * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
@@ -198,8 +199,9 @@ defined as a module input in a subsequent row.
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
       - * ANC attendance
         * Gestational age
-      - * Ultrasound coverage
-        * Believed gestational age
+      - * Ultrasound type
+        * Estimated gestational age
+        * Believed preterm status
       - 
       - No changes from wave I
 
