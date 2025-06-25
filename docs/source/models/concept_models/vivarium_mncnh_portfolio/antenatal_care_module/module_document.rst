@@ -43,7 +43,7 @@ Antenatal care attendance module
 ++++++++++++
 
 This module determines whether or not a simulant attends an antenatal care visit according to their ANC visit 
-propensity value and the timing of their ANC visit (i.e., during first trimester or later pregnancy). 
+probability value and the timing of their ANC visit (i.e., during first trimester or later pregnancy). 
 
 ANC visit timing is particularly relevant to both the hemoglobin and facility choice components of this simulation, so for more information 
 on how outputs from this module will be used, refer to :ref:`our hemoglobin module documentation <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
@@ -52,7 +52,41 @@ and :ref:`our facility choice module documentation <2024_vivarium_mncnh_portfoli
 2.0 Module Input and Output Data
 ++++++++++++++++++++++++++++++++
 
-2.1 Module Description 
+2.1 Module Inputs
+-----------------
+
+.. list-table:: Module required inputs
+  :header-rows: 1
+
+  * - Input
+    - Source 
+    - Definition
+    - Application
+    - Note
+  * - Pregnancy term duration 
+    - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+    -
+    - Partial term pregnancies by default should be assigned the probability value of ANCfirst.
+    - 
+  * - ANCfirst
+    - ANCfirst is processed by the Health Systems team at IHME and available here:
+      ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc1_first3months_st-gpr_results_aggregates_scaled2025-05-27.csv``
+    - Proportion of pregnant people attending ANC in the first trimester
+    - Used to calculate probability values for ANC coverage
+    - 
+  * - ANC1
+    - GBD covariate ID 7: :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=7)` 
+    - Proportion of pregnant people receiving any antenatal care from a skilled provider
+    - Used to calculate probability values for ANC coverage
+    - 
+  * - ANC4
+    - GBD covariate ID 8: :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=8)` 
+    - Proportion of pregnant people receiving 4 or more antenatal care visits including 1 or more from a skilled provider
+    - Used to calculate probability values for ANC coverage
+    - 
+
+
+2.2 Module Description 
 ----------------------
 
 ANC attendance **for full term pregnancies** will be modeled as a single variable with 4 possible exposure options:
@@ -75,14 +109,14 @@ D. Does not attend ANC at all during pregnancy
     - C
     - D
 
-The below table describes what propensity values to use for each exposure option outlined above.
+The below table describes what probability values to use for each exposure option outlined above.
 
-.. list-table:: ANC exposure propensity values for full term pregnancies
+.. list-table:: ANC exposure probability values for full term pregnancies
   :header-rows: 1
 
   * - ANC exposure option
     - Description
-    - Propensity value
+    - Probability value
     - Notes
   * - A
     - Attends ANC during first trimester AND later pregnancy
@@ -104,20 +138,20 @@ The below table describes what propensity values to use for each exposure option
 
 .. note:: 
 
-    As of `pull request #1690 <https://github.com/ihmeuw/vivarium_research/pull/1690>`_ we updated how we assign our ANC propensity 
-    values to include the ANCfirst variable that the HS team processed and shared with us. Please see `these slides <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BADD6223E-9FCA-40BB-BB7F-FE44F377CCDB%7D&file=ANC%20visit%20timing%20data%20strategy%20options.pptx&action=edit&mobileredirect=true>`_ 
+    As of `pull request #1690 <https://github.com/ihmeuw/vivarium_research/pull/1690>`_ we updated how we assign our ANC probabilities to 
+    include the ANCfirst variable that the HS team processed and shared with us. Please see `these slides <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BADD6223E-9FCA-40BB-BB7F-FE44F377CCDB%7D&file=ANC%20visit%20timing%20data%20strategy%20options.pptx&action=edit&mobileredirect=true>`_ 
     for more information on this strategy update.
 
-The above propensity values are to be implemented for full term pregnancies only. Partial term pregnancies are assigned 
-propensity values differently because we assume their pregnancies end before they can attend later pregnancy ANC visits. 
-The below table describes what propensity values to use for each exposure option **for partial term pregnancies**:
+The above probabilities are to be implemented for full term pregnancies only. Partial term pregnancies are assigned 
+probabilities differently because we assume their pregnancies end before they can attend later pregnancy ANC visits. 
+The below table describes what probabilities to use for each exposure option **for partial term pregnancies**:
 
-.. list-table:: ANC exposure propensity values for partial term pregnancies
+.. list-table:: ANC exposure probabilities for partial term pregnancies
   :header-rows: 1
 
   * - ANC exposure option
     - Description
-    - Propensity value
+    - Probability value
     - Notes
   * - A
     - Attends ANC during first trimester AND later pregnancy
@@ -137,34 +171,6 @@ The below table describes what propensity values to use for each exposure option
     - 
 
 
-2.2 Module Inputs
------------------
-
-.. list-table:: Module required inputs
-  :header-rows: 1
-
-  * - Input
-    - Source 
-    - Application
-    - Note
-  * - Pregnancy term duration 
-    - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    - Partial term pregnancies by default should be assigned the probability value of ANCfirst.
-    - 
-  * - ANCfirst
-    - ANCfirst is processed by the Health Systems team at IHME and available here:
-      ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc1_first3months_st-gpr_results_aggregates_scaled2025-05-27.csv``
-    - Used to calculate propensity values for ANC coverage
-    - 
-  * - ANC1
-    - GBD covariate ID 7: :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=7)` 
-    - Used to calculate propensity values for ANC coverage
-    - 
-  * - ANC4
-    - GBD covariate ID 8: :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=8)` 
-    - Used to calculate propensity values for ANC coverage
-    - 
-
 2.3 Module Outputs
 ++++++++++++++++++
 
@@ -182,19 +188,29 @@ are dichotomous for each pregnancy, so we need to observe the following:
     - Value
     - Note
   * - Attends ANC in first trimester?
-    - *True* / *False*
-    - For groups B or D 
+    - 
+      - *True*  for groups A and B 
+      - *False* for groups C and D
+    - 
   * - Attends ANC in later pregnancy?
-    - *True* / *False* 
-    - For groups A or C
+    - 
+      - *True*  for groups A and C 
+      - *False* for groups B and D
+    - 
 
 ANC attendance inputs to the :ref:`facility choice module <2024_vivarium_mncnh_portfolio_facility_choice_module>`
-are polychotomous for each pregnancy with the following 4 categories (ordered from worst to best):
+are polytomous for each pregnancy with the following 4 categories (ordered from worst to best):
 
 1. No ANC
 2. ANC in later pregnancy only
 3. ANC in 1st trimester only
 4. ANC in 1st trimester and later pregnancy
+
+.. note::
+
+  These are the same four categories listed above as A-D, but in reverse order, i.e., 1 = D, 2 = C, 3 = B, 4 = A. The output of this module that gets used 
+  by the facility choice module will be a single variable called "ANC attendance," which has one of the four possible values A, B, C, or D as defined above, 
+  and these need to be ordered D < C < B < A when sampling the variable using the correlated propensity for the facility choice model.
 
 
 3.0 Assumptions and limitations
