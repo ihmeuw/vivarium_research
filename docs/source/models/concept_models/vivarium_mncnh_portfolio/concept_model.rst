@@ -37,7 +37,6 @@ MNCNH Portfolio
 
 .. contents::
   :local:
-  :depth: 1
 
 1.0 Overview
 ++++++++++++
