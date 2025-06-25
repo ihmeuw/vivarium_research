@@ -42,7 +42,11 @@ Facility choice module
 1.0 Overview
 ++++++++++++
 
-This module uses the delivery facility propensity (an output from the initial attributes model that is correlated with propensity values for ANC attendance and LBWSG exposure) as well as believed gestational age to assign a delivery facility exposure in the intrapartum component of the simulation. 
+This module uses the in-facility delivery propensity (an output from the
+initial attributes model that is correlated with propensity values for
+ANC attendance and LBWSG exposure) as well as believed preterm status
+(an output from the AI ultrasound module) to assign a delivery facility
+exposure in the intrapartum component of the simulation.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -89,7 +93,7 @@ There is a significant amount of background research and analysis that has gone 
       status as described in the "Application" column of the module
       input table above
     -
-  * - B. Delivery facility
+  * - B. Birth facility
     - *home* / *BEmONC* / *CEmONC*
     - Assign *home* if IFD status is *at-home*. If IFD status is
       *in-facility*, assign BEmONC or CEmONC according to the
