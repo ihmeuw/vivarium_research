@@ -43,7 +43,7 @@ Antenatal care attendance module
 ++++++++++++
 
 This module determines a simulant's antenatal care attendance exposure according to their ANC visit 
-probability value and the timing of their ANC visit (i.e., during first trimester or later pregnancy). 
+propensity value and the distribution of ANC attendance exposure categories specific to their location and pregnancy term length. ANC attendance exposure categories include whether a simulant attends an ANC visit during their first trimester and/or later during their pregnancy. 
 
 ANC visit timing is particularly relevant to both the hemoglobin and facility choice components of this simulation, so for more information 
 on how outputs from this module will be used, refer to :ref:`our hemoglobin module documentation <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
