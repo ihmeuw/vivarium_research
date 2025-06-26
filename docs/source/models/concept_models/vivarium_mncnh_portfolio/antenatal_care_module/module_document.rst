@@ -224,6 +224,7 @@ are polytomous for each pregnancy with the following 4 categories (ordered from 
   we will overestimate the impact of MMS->hemoglobin on anemia YLDs and depressive disorders among partial term pregnancies as a result of this assumption.
 
   - Note that the data on ANC attendance in DHS is collected on live and still births (full term pregnancies) only.
+  - We assume that no partial term pregnancies attend ANC visits after the first trimester. However, as partial term pregnancies may last as long as 24 weeks according to our pregnancy model, it is possible that some may.
 
 * We assume that the prevalence of attending both first trimester and later pregnancy visits is the minimum of ANCfirst (as processed by the HS team) and ANC4 
   (GBD covariate also processed by HS team). There is non-zero prevalence of first trimester visits only when ANC4 > ANC1 (such as in Pakistan). We are likely
