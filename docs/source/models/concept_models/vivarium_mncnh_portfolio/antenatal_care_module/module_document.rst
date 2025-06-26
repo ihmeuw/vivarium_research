@@ -223,9 +223,7 @@ are polytomous for each pregnancy with the following 4 categories (ordered from 
   term pregnancies (MMS->stillbirth, MMS->LBWSG, MMS->hemoglobin->sepsis/obstructed labor, and ultrasound/facility delivery). However, it is possible that 
   we will overestimate the impact of MMS->hemoglobin on anemia YLDs and depressive disorders among partial term pregnancies as a result of this assumption.
 
-  - Note that an alternative strategy would be to assume the same first trimester ANC attendance rate for partial term pregnancies as full term pregnancies 
-    (equal to ANC4 proportion), but this would require us to use different ANC attendance rates for each pregnancy term duration in the already documented and 
-    implemented ANC attendance module. Also note that the data on ANC attendance in DHS is collected on live and still births (full term pregnancies) only.
+  - Note that the data on ANC attendance in DHS is collected on live and still births (full term pregnancies) only.
 
 * We assume that the prevalence of attending both first trimester and later pregnancy visits is the minimum of ANCfirst (as processed by the HS team) and ANC4 
   (GBD covariate also processed by HS team). There is non-zero prevalence of first trimester visits only when ANC4 > ANC1 (such as in Pakistan). We are likely
