@@ -129,11 +129,11 @@ The below table describes what probability values to use for each exposure optio
     - Prevalence of first trimester visit ONLY (and no late pregnancy visit) only occurs if ANCfirst > ANC4
   * - C
     - Attends ANC during later pregnancy but NOT first trimester
-    - 
+    - ``ANC1 - ANCfirst``
     - 
   * - D
     - Does not attend ANC at all during pregnancy
-    - Probability equal to ``ANCfirst – A``  
+    - ``1 - ANC1``  
     - 
 
 .. note:: 
@@ -172,7 +172,7 @@ The below table describes what probabilities to use for each exposure option **f
 
 
 2.3 Module Outputs
-++++++++++++++++++
+------------------
 
 As mentioned earlier, ANC attendance impacts hemoglobin exposure and facility choice in our model, and in order for the 
 outputs of this component to be compatible with the data needs of these two downstream components, we will need two different
