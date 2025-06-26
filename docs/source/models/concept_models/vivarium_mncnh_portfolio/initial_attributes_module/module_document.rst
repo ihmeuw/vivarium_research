@@ -42,7 +42,18 @@ Initial attributes Module
 1.0 Overview
 ++++++++++++
 
-This module assigns initial simulant attributes.
+This module assigns initial simulant attributes. Specifically, it
+assigns the three correlated propensities used for the :ref:`delivery
+facility choice model
+<2024_vivarium_mncnh_portfolio_facility_choice_module>`: Antenatal care
+(ANC) attendance; Low birthweight and short gestation (LBWSG) category;
+and In-facility delivery (IFD) status. The propensities for these
+attributes should be correlated using a `Gaussian copula`_ as described
+in the :ref:`correlated propensities section
+<facility_choice_correlated_propensities_section>` of the facility
+choice model document.
+
+.. _Gaussian copula: https://en.wikipedia.org/wiki/Copula_(statistics)#Gaussian_copula
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -56,14 +67,24 @@ There is no need for a diagram for the initial attributes module of this simulat
     - Value
     - Dependencies
   * - A. ANC propensity
-    - See the "Correlated Propensities" section of the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
+    - See the :ref:`correlated propensities
+      <facility_choice_correlated_propensities_section>` section of the
+      :ref:`facility choice model document
+      <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
     - Will be used to determine ANC attendance in ANC module
-  * - B. LWBSG propensity
-    - See the "Correlated Propensities" section of the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
+  * - B. LWBSG category propensity
+    - See the :ref:`correlated propensities
+      <facility_choice_correlated_propensities_section>` section of the
+      :ref:`facility choice model document
+      <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
     - Will be used to determine LBWSG exposure in pregnancy module
-  * - C. Facility choice propensity
-    - See the "Correlated Propensities" section of the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
-    - Will be used to determine facility choice in facility choice module
+  * - C. In-facility delivery (IFD) propensity
+    - See the :ref:`correlated propensities
+      <facility_choice_correlated_propensities_section>` section of the
+      :ref:`facility choice model document
+      <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
+    - Will be used to determine in-facility delivery status in delivery
+      facility choice module
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
