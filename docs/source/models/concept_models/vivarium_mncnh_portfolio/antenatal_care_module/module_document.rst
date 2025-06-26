@@ -68,6 +68,11 @@ and :ref:`our facility choice module documentation <2024_vivarium_mncnh_portfoli
     -
     - Partial term pregnancies by default should be assigned the probability value of ANCfirst.
     - 
+  * - ANC propensity
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - A random value uniformly distributed in [0, 1], interpreted as the simulant's intrinsic propensity for attending ANC visits, with higher propensity values corresponding to seeking more ANC care.
+    - Use the ANC propensity together with the ANC attendance exposure probabilities below to select one of the ANC exposure categories A, B, C, or D, as described in the :ref:`special ordering of the categories <facility_choice_special_ordering_of_categories_section>` section of the facility choice model document. When sampling, the categories should be ordered D < C < B < A (highest risk to lowest risk in terms of ultrasound timing).
+    - ANC propensity is correlated with LBWSG category propensity and IFD propensity as described in the the :ref:`correlated propensities <facility_choice_correlated_propensities_section>` section of the facility choice model document. Currently we assume that there is no correlation of ANC with other factors.
   * - ANCfirst
     - ANCfirst is processed by the Health Systems team at IHME and available here:
       ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc1_first3months_st-gpr_results_aggregates_scaled2025-05-27.csv``
