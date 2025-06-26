@@ -984,14 +984,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Same modifications as run 7.0.1
     - Default
-  * - 8.1.1*
-    - * Implement age/sex/location/draw-specific LBWSG RR caps (details to come)
-      * Update LNN LBWSG PAF calculation to use LBWSG exposure at 7 days of life (details to come)
-    - Baseline
-    - ``model8.1.1``
-    - Default
-    - Same modifications as run 7.0.1
-    - Default
   * - 8.2
     - Update neonatal probiotics intervention effect size in accordance with `line #183 in this PR <https://github.com/ihmeuw/vivarium_research/pull/1672>`_
     - All scenarios
@@ -1338,8 +1330,10 @@ Default stratifications to all observers should include scenario and input draw.
     - * Intrapartum intervention demonstrated expected behavior in the interactive sim, but unable to verify in simulation outputs
       * Maternal disorders burden still verifies in baseline scenario
       * Misoprostol coverage by scenario looks good
+      * Neonatal all cause mortality reverted to underestimate in this model run after being resolved in last model run of 8.3
     - * `Model 9.0 maternal V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.0_maternal_checks.ipynb>`_
       * `Model 9.0 interactive sim V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.0_interactive_sim_maternal_interventions.ipynb>`_
+      * `Model 9.0 neonatal notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.0_neonatal_checks.ipynb>`_
   * - 9.1
     - * Confirm neonatal antibiotics intervention coverage is appropriately scaled up in home births
     - * Looks good in the "antibiotics" scenario
@@ -1363,12 +1357,14 @@ Default stratifications to all observers should include scenario and input draw.
     - `Model 10.0 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_10.0_maternal_checks.ipynb>`_
   * - 10.1
     - Check if cause-specific neonatal mortality validates
-    - 
-    - 
+    - * NN enceph. mortality severely underestimated
+      * NN other causes and preterm birth tends to be overestimated
+      * NN sepsis mortality tends to be underestimated 
+    - `Model 10.1 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_10.1_neonatal_checks.ipynb>`_
   * - 10.2
     - Confirm baseline mortality is as expected, scenario-specific intervention coverage is as expected
-    - 
-    - 
+    - Looks as expected (including persistent NN mortality underestimation that arose in model 9.0)
+    - `Model 10.2 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_10.2_neonatal_checks.ipynb>`_
   * - 11.0
     - * Use the interactive sim to verify the hemoglobin distribution in pregnancy matches expectation
       * Confirm maternal disorders burden still matches expectation
@@ -1387,13 +1383,17 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - Underestimation of early neonatal mortality between model 8.3 (was resolved) and model 9.0 (misoprostol implementation)
+    - Unknown! It looks like there is no change in the LBWSG RRs or PAF values between the artifacts for model 8.3 and 9.0 and misoprostol implementation should not have any effect on neonatal mortality. Note that this underestimation of neonatal mortality that arises in model 9.0 persists through current models (through 10.2)
+    - Research and engineering to put heads together and see if we can figure out what changed regarding neonatal mortality between models 8.3 and 9.0 (Ali has already confirmed that it is not due to differences in the V&V notebooks... same notebook for different model versions shows different mortality rates)
+    - No model build, but this is a decently high priority
   * - Miscalibration of neonatal mortality ratios
     - This is looking largely resolved in model 8.1, but we will wait to confirm once the LBWSG RR capping strategy is updated
-    - Update LBWSG RR caps and PAF calculation strategy for model 8.1.1
-    - For model 8.1.1
+    - Update LBWSG RR caps and PAF calculation strategy for model 12.0
+    - For model 12.0
   * - Neonatal mortality due to preterm birth slightly overestimated and remaining cause-specific mortality is generally underestimated despite this being resolved for all-cause mortality
-    - Unknown -- could be something to do with the neonatal mortality math?
-    - Research team to discuss and consider -- see if it is imporoved after we update to mortality risk and cap LBWSG RRs?
+    - Unknown -- could be something to do with the neonatal mortality math? Removing the risk effect of LBWSG on NN enceph. did not seem to resolve the issue.
+    - Research team to discuss and consider 
     - None for now
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
