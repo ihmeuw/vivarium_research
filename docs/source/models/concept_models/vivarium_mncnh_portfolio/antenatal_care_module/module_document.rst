@@ -64,7 +64,7 @@ and :ref:`our facility choice module documentation <2024_vivarium_mncnh_portfoli
     - Application
     - Note
   * - Pregnancy term length
-    - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+    - :ref:`Pregnancy I module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     -
     - Partial term pregnancies by default should be assigned the probability value of ANCfirst.
     - 
