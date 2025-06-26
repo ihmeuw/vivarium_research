@@ -42,7 +42,7 @@ Antenatal care attendance module
 1.0 Overview
 ++++++++++++
 
-This module determines whether or not a simulant attends an antenatal care visit according to their ANC visit 
+This module determines a simulant's antenatal care attendance exposure according to their ANC visit 
 probability value and the timing of their ANC visit (i.e., during first trimester or later pregnancy). 
 
 ANC visit timing is particularly relevant to both the hemoglobin and facility choice components of this simulation, so for more information 
