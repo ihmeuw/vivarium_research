@@ -98,7 +98,7 @@ This section describes how the anemia screening intervention (hemoglobin and fer
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-
+Baseline coverage 
 
 .. list-table:: Outpatient neonatal antibiotic intervention baseline coverage
   :header-rows: 1
@@ -110,7 +110,8 @@ Baseline Coverage Data
   * - Pakistan
     - All newborns (baseline coverage does not vary by delivery facility)
     - 0
-    - `See Aga Khan University Medical College's seminar here <https://www.aku.edu/mcpk/paeds/Pages/psbi.aspx>`_ indicating no national guideline for PSBI management on an outpatient basis in addition to [Nisar-et-al-2022]_ pilot program implementation in modeled location and lack of scaled-up programs
+    - `See Aga Khan University Medical College's seminar here <https://www.aku.edu/mcpk/paeds/Pages/psbi.aspx>`_ indicating no national guideline for PSBI management on an outpatient 
+      basis in addition to [Nisar-et-al-2022]_ pilot program implementation in modeled location and lack of scaled-up programs
   * - Ethiopia
     - All newborns (baseline coverage does not vary by delivery)
     - 0.5
@@ -123,11 +124,19 @@ Baseline Coverage Data
 Vivarium Modeling Strategy
 --------------------------
 
-This intervention requires adding an attribute to all simulants to specify if a neonate has access to outpatient antibiotic programs for PSBI in newborns.  Since the neonatal mortality model does not explicitly represent incidence of sepsis, we will not track explicitly if a simulant receives antibiotics.  Instead the model will have different cause-specific mortality rates for sepsis for individuals with and without access to outpatient antibiotic programs (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
+This intervention requires adding an attribute to all simulants to specify if a neonate has access to outpatient antibiotic programs for PSBI in newborns.  
+Since the neonatal mortality model does not explicitly represent incidence of sepsis, we will not track explicitly if a simulant receives antibiotics.  
+Instead the model will have different cause-specific mortality rates for sepsis for individuals with and without access to outpatient antibiotic programs 
+(implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
 
-The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has access to antibiotics during the neonatal period, which we assume will be closely related to the facility choice during birth, i.e. home births have much lower access than in-facility births, and births in BEmONC facilities have lower access than CEmONC facilities.
+The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has access to antibiotics during the neonatal period, which we 
+assume will be closely related to the facility choice during birth, i.e. home births have much lower access than in-facility births, and births in BEmONC 
+facilities have lower access than CEmONC facilities.
 
-To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "lack of access to antibiotics".  With this framing, the ``RiskEffect`` component requires data on (1) the relative risk of sepsis mortality for people with lack of access to antibiotics, and (2) the population attributable fraction (PAF) of sepsis due to lack of access to antibiotics.  We will use the decision tree below to find the probability of sepsis mortality with and without access to antibiotics that are logically consistent with the baseline delivery facility rates and baseline antibiotics coverage.
+To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "lack of access to antibiotics".  With this framing, 
+the ``RiskEffect`` component requires data on (1) the relative risk of sepsis mortality for people with lack of access to antibiotics, and (2) the population 
+attributable fraction (PAF) of sepsis due to lack of access to antibiotics.  We will use the decision tree below to find the probability of sepsis mortality 
+with and without access to antibiotics that are logically consistent with the baseline delivery facility rates and baseline antibiotics coverage.
 
 In Vivarium, this risk effect will modify the sepsis mortality pipeline, resulting in 
 
@@ -135,7 +144,8 @@ In Vivarium, this risk effect will modify the sepsis mortality pipeline, resulti
 
    \text{CSMRisk}_i^\text{sepsis} = \text{CSMRisk}^\text{sepsis}_{\text{BW}_i, \text{GA}_i} \cdot (1 - \text{PAF}_\text{no antibiotics}) \cdot \text{RR}_i^\text{no antibiotics}
 
-where :math:`\text{RR}_i^\text{no antibiotics}` is simulant *i*'s individual relative risk for "no antibiotics", meaning :math:`\text{RR}_i^\text{no antibiotics} = \text{RR}_\text{no antibiotics}` if simulant *i* accesses a facility without antibiotics, and :math:`\text{RR}_i^\text{no antibiotics} = 1` if simulant *i* accesses a facility *with* antibiotics.
+where :math:`\text{RR}_i^\text{no antibiotics}` is simulant *i*'s individual relative risk for "no antibiotics", meaning :math:`\text{RR}_i^\text{no antibiotics} = \text{RR}_\text{no antibiotics}` 
+if simulant *i* accesses a facility without antibiotics, and :math:`\text{RR}_i^\text{no antibiotics} = 1` if simulant *i* accesses a facility *with* antibiotics.
 
 If there are other interventions also affecting the CSMR of sepsis, the pipeline will combine these effects, and we can write out the math for this risk explicitly as 
 
