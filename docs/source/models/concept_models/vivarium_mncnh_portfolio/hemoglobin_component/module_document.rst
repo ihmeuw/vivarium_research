@@ -86,11 +86,11 @@ This module will:
     - Application
     - Note
   * - First trimester ANC attendance 
-    - :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`
+    - :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
     - Decision node #2
     - (True/False value)
   * - Later pregnancy ANC attendance
-    - :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`
+    - :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
     - Decision node #4
     - (True/False value)
 
@@ -113,7 +113,7 @@ This module will:
     - 
   * - 2
     - ANC in first trimester?
-    - As informed from module input (output from :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`)
+    - As informed from module input (output from :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`)
     - 
   * - 3
     - Recieve IFA/MMS at first trimester visit?
@@ -121,7 +121,7 @@ This module will:
     - Use same propensity value as decision node #1 to answer this question
   * - 4
     - ANC later in pregnancy?
-    - As informed from module input (output from :ref:`ANC detail module <2024_vivarium_mncnh_portfolio_anc_detail_module>`)
+    - As informed from module input (output from :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`)
     - 
   * - 5
     - Hemoglobin screen?
