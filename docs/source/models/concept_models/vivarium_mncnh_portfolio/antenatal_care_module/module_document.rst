@@ -94,7 +94,7 @@ and :ref:`our facility choice module documentation <2024_vivarium_mncnh_portfoli
 2.2 Module Description 
 ----------------------
 
-ANC attendance **for full term pregnancies** will be modeled as a single variable with 4 possible exposure options:
+ANC attendance will be modeled as a single variable with 4 possible exposure options:
 
 A. Attends ANC during first trimester AND later pregnancy
 B. Attends ANC during first trimester but NOT later pregnancy
