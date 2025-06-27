@@ -52,6 +52,8 @@ MNCNH Portfolio
     - Artificial Intelligence assisted ultrasound
   * - ANC
     - Antenatal Care
+  * - ASFR
+    - Age-Specific Fertility Rate
   * - BEmONC
     - Basic Emergency Obstetric and Newborn Care
   * - CEmONC
@@ -70,6 +72,8 @@ MNCNH Portfolio
     - In-Facility Delivery
   * - IV iron
     - Intravenous iron
+  * - LBW
+    - Low Birth Weight
   * - LBWSG
     - Low Birth Weight and Short Gestation
   * - LNN
@@ -84,12 +88,16 @@ MNCNH Portfolio
     - Population Attributable Fraction
   * - PPD
     - Postpartum Depression
+  * - PTB
+    - Preterm Birth
   * - RDS
     - Respiratory Distress Syndrome
   * - RR
     - Relative Risk
   * - RT
     - Research Team
+  * - SBR
+    - Stillbirth (to live birth) Ratio
   * - V&V
     - Verification and Validation
   * - WRA
