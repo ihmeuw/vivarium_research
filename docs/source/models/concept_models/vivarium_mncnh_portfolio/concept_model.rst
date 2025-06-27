@@ -512,14 +512,21 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
-  * - 11. Azithromycin scale-up
+  * - 11. Azithromycin V&V
     - Baseline
     - Baseline
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 12. Misoprostol scale-up
+  * - 12. Misoprostol V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 13. Azithromycin results
     - Baseline
     - Baseline
     - Baseline
@@ -577,15 +584,20 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
-  * - 11. Azithromycin scale-up
+  * - 11. Azithromycin V&V
     - 50% at BEmONC and CEmONC, baseline at home
     - 0%
     - 0%
     - 
-  * - 12. Misoprostol scale-up
+  * - 12. Misoprostol V&V
     - 0%
     - 0%
     - 50% among eligible population (attends ANC and delivers at home)
+    - 
+  * - 13. Azithromycin results
+    - 100% at BEmONC and CEmONC, baseline at home
+    - Baseline
+    - Baseline
     - 
 
 .. _MNCNH neonatal component scenario table:
@@ -638,12 +650,17 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline at CEMONC, 100% at BEMONC
     - 
-  * - 11. Azithromycin scale-up
+  * - 11. Azithromycin V&V
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 12. Misoprostol scale-up
+  * - 12. Misoprostol V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 13. Azithromycin Results
     - Baseline
     - Baseline
     - Baseline
@@ -1105,6 +1122,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 10.2
+    - Same as 10.0 but with additional scenario #13 (azithromycin results)
+    - All scenarios
+    - ``model10.2``
+    - Default
+    - Default
+    - Default
   * - 11.0
     - Add :ref:`Hemoglobin risk exposure model <2023_hemoglobin_exposure>`. Note that this will be the starting point for the larger :ref:`wave II hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`, which will be built out in future model runs
     - Baseline
@@ -1411,6 +1435,14 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm PPD YLD rate matches expectation
     - All looks great!
     - `Model 10.0 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_10.0_maternal_checks.ipynb>`_
+  * - 10.1
+    - Check if cause-specific neonatal mortality validates
+    - 
+    - 
+  * - 10.2
+    - Confirm baseline mortality is as expected, scenario-specific intervention coverage is as expected
+    - 
+    - 
   * - 11.0
     - * Use the interactive sim to verify the hemoglobin distribution in pregnancy matches expectation
       * Confirm maternal disorders burden still matches expectation
