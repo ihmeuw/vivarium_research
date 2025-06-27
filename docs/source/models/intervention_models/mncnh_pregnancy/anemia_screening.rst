@@ -25,6 +25,12 @@ Intervention Overview
 Hemoglobin Screening Accuracy Instructions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+**Research background:**
+
+
+
+**Modeling instructions:**
+
 For decision node 7 (see :ref:`<2024_vivarium_mncnh_portfolio_hemoglobin_module>`_ for details), we will assess whether or not the result of a simulant's minimally invasive 
 blood test hemoglobin screening is <100 g/L, which may be different than whether a simulant's *actual* hemoglobin exposure is <100 g/L. We will do this based on assumed 
 sensitivity and specificity levels for the hemoglobin screening test as informed from the Gates Foundation and listed below:
@@ -74,26 +80,6 @@ remember to use the pregnancy-specific values.
 
 `The probability of low ferritin specific to location, age, and anemia status can be found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/iron_responsive_fraction.csv>`_. 
 Record assigned ferritin exposure to output G to be used for V&V in the interactive simulation.
-
-
-Vivarium Modeling Strategy
----------------------------
-
-This section describes how the anemia screening intervention (hemoglobin and ferritin screenings) can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
-
-.. list-table:: Affected Outcomes
-  :widths: 15 15 15 15
-  :header-rows: 1
-
-  * - Outcome
-    - Effect
-    - Modeled?
-    - Note (ex: is this relationship direct or mediated?)
-  * - :ref:`Neonatal sepsis and other neonatal infections <2021_cause_neonatal_sepsis_mncnh>` Mortality Probability :math:`\text{CSMRisk}_i^\text{sepsis}`
-    - Adjust multiplicatively using RR
-    - Yes
-    - 
-
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
