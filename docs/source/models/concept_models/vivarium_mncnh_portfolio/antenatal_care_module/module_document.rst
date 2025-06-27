@@ -114,7 +114,7 @@ D. Does not attend ANC at all during pregnancy
     - C
     - D
 
-The below table describes what probability values to use for each exposure option outlined above.
+The below table describes what probability values to use for each exposure option outlined above, **for full term pregnancies**.
 
 .. list-table:: ANC exposure probability values for full term pregnancies
   :header-rows: 1
