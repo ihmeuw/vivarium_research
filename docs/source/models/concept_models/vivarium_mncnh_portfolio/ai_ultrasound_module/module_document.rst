@@ -50,7 +50,7 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
 2.1 Module Diagram
 ----------------------
 
-.. image:: ai_ultrasound_module_diagram.png
+.. image:: ai_ultrasound_module_diagram.drawio.svg
 
 2.2 Module Inputs
 ---------------------
