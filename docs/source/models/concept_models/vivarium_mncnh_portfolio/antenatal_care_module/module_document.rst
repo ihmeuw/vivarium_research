@@ -59,36 +59,41 @@ and :ref:`our facility choice module documentation <2024_vivarium_mncnh_portfoli
   :header-rows: 1
 
   * - Input
-    - Source 
-    - Definition
+    - Source module
     - Application
     - Note
   * - Pregnancy term length
     - :ref:`Pregnancy I module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    -
-    - Partial term pregnancies by default should be assigned the probability value of ANCfirst.
-    - 
+    - Determines which set of probabilities to use for the ANC exposure categories. 
+    - Full term pregnancies can be assigned any of the values A, B, C, or D, 
+      whereas we assume partial term pregnancies can only attend ANC in the first trimester, so only categories B and D have nonzero probability. 
+      See exposure probability tables below.
   * - ANC propensity
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-    - A random value uniformly distributed in [0, 1], interpreted as the simulant's intrinsic propensity for attending ANC visits, with higher propensity values corresponding to seeking more ANC care.
-    - Use the ANC propensity together with the ANC attendance exposure probabilities below to select one of the ANC exposure categories A, B, C, or D, as described in the :ref:`special ordering of the categories <facility_choice_special_ordering_of_categories_section>` section of the facility choice model document. When sampling, the categories should be ordered D < C < B < A (highest risk to lowest risk in terms of ultrasound timing).
-    - ANC propensity is correlated with LBWSG category propensity and IFD propensity as described in the the :ref:`correlated propensities <facility_choice_correlated_propensities_section>` section of the facility choice model document. Currently we assume that there is no correlation of ANC with other factors.
+    - A random value uniformly distributed in [0, 1], interpreted as the simulant's intrinsic propensity for attending ANC visits, with higher 
+      propensity values corresponding to seeking more ANC care. Use the ANC propensity together with the ANC attendance exposure probabilities below 
+      to select one of the ANC exposure categories A, B, C, or D, as described in the :ref:`special ordering of the categories <facility_choice_special_ordering_of_categories_section>` 
+      section of the facility choice model document. When sampling, the categories should be ordered D < C < B < A (highest risk to lowest risk in terms of ultrasound timing).
+    - ANC propensity is correlated with LBWSG category propensity and IFD propensity as described in the the :ref:`correlated propensities <facility_choice_correlated_propensities_section>` 
+      section of the facility choice model document. Currently we assume that there is no correlation of ANC with other factors.
+
+  
+.. list-table:: Additional input data
+  :header-rows: 1
+
+  * - Input
+    - Source 
+    - Definition
   * - ANCfirst
     - ANCfirst is processed by the Health Systems team at IHME and available here:
       ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc1_first3months_st-gpr_results_aggregates_scaled2025-05-27.csv``
     - Proportion of pregnant people attending ANC in the first trimester
-    - Used to calculate probability values for ANC coverage
-    - 
   * - ANC1
     - GBD covariate ID 7: :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=7)` 
     - Proportion of pregnant people receiving any antenatal care from a skilled provider
-    - Used to calculate probability values for ANC coverage
-    - 
   * - ANC4
     - GBD covariate ID 8: :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=8)` 
     - Proportion of pregnant people receiving 4 or more antenatal care visits including 1 or more from a skilled provider
-    - Used to calculate probability values for ANC coverage
-    - 
 
 
 2.2 Module Description 
