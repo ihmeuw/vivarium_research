@@ -1061,14 +1061,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Same modifications as run 7.0.1
     - Default
-  * - 8.1.1*
-    - * Implement age/sex/location/draw-specific LBWSG RR caps (details to come)
-      * Update LNN LBWSG PAF calculation to use LBWSG exposure at 7 days of life (details to come)
-    - Baseline
-    - ``model8.1.1``
-    - Default
-    - Same modifications as run 7.0.1
-    - Default
   * - 8.2
     - Update neonatal probiotics intervention effect size in accordance with `line #183 in this PR <https://github.com/ihmeuw/vivarium_research/pull/1672>`_
     - All scenarios
@@ -1139,6 +1131,20 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default (no new hemoglobin observer required)
+  * - 11.1
+    - Bugfix to VPH LBWSG refactor to ensure that LBWSG exposure **at birth** (rather than the early neonatal exposure) is used for initializing LBWSG exposures in the simulation. Note that this VPH refactor was introduced between models 8.2/8.3 and 9.0 and persisted until this run.
+    - Baseline
+    - ``model11.1``
+    - Default
+    - Default
+    - Default
+  * - 11.2
+    - `Update draws in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`-
+    - Baseline
+    - ``model11.2``
+    - Default
+    - Default
+    - Default
   * - 12.0
     - Capped LBWSG RRs and new late neonatal LBWSG PAF calculation, in accordance with `vivarium research PR #1681 <https://github.com/ihmeuw/vivarium_research/pull/1681>`_
     - Baseline
@@ -1146,7 +1152,21 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
-  * - 13.0*
+  * - 13.0
+    - `Hemoglobin risk effects on maternal disorders <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_mncnh_portfolio/maternal_disorders_module/module_document.html#id1>`_
+    - Baseline
+    - ``model13.0``
+    - Default
+    - Default
+    - Default
+  * - 14.0*
+    - Wave II updates to the :ref:`antenatal care attendance module <2024_vivarium_mncnh_portfolio_anc_module>`
+    - ``model14.0``
+    - Baseline
+    - Default
+    - Default
+    - Default, note that we would like the 4-category ANC attendance variable observed
+  * - 15.0*
     - Wave I antenatal corticosteroids
     - Baseline
     - ``model13.0``
@@ -1415,8 +1435,10 @@ Default stratifications to all observers should include scenario and input draw.
     - * Intrapartum intervention demonstrated expected behavior in the interactive sim, but unable to verify in simulation outputs
       * Maternal disorders burden still verifies in baseline scenario
       * Misoprostol coverage by scenario looks good
+      * Neonatal all cause mortality reverted to underestimate in this model run after being resolved in last model run of 8.3
     - * `Model 9.0 maternal V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.0_maternal_checks.ipynb>`_
       * `Model 9.0 interactive sim V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.0_interactive_sim_maternal_interventions.ipynb>`_
+      * `Model 9.0 neonatal notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_9.0_neonatal_checks.ipynb>`_
   * - 9.1
     - * Confirm neonatal antibiotics intervention coverage is appropriately scaled up in home births
     - * Looks good in the "antibiotics" scenario
@@ -1440,20 +1462,42 @@ Default stratifications to all observers should include scenario and input draw.
     - `Model 10.0 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_10.0_maternal_checks.ipynb>`_
   * - 10.1
     - Check if cause-specific neonatal mortality validates
-    - 
-    - 
+    - * NN enceph. mortality severely underestimated
+      * NN other causes and preterm birth tends to be overestimated
+      * NN sepsis mortality tends to be underestimated 
+    - `Model 10.1 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_10.1_neonatal_checks.ipynb>`_
   * - 10.2
     - Confirm baseline mortality is as expected, scenario-specific intervention coverage is as expected
-    - 
-    - 
+    - Looks as expected (including persistent NN mortality underestimation that arose in model 9.0)
+    - `Model 10.2 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_10.2_neonatal_checks.ipynb>`_
   * - 11.0
     - * Use the interactive sim to verify the hemoglobin distribution in pregnancy matches expectation
       * Confirm maternal disorders burden still matches expectation
+    - All looks good! However, we are not using the draw numbers `pre-specified in this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`_. The draws that have been run include duplicate hemoglobin exposure values.
+    - * `Model 11.0 interactive sim notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11_interactive_simulation.ipynb>`_
+      * `Model 11.0 maternal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11.0_maternal_checks.ipynb>`_
+  * - 11.1
+    - * Check neonatal all cause mortality (among early neonatal age group) validates
+    - Looks good!
+    - `Model 11.1 neonatal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11.1_neonatal_checks.ipynb>`_ 
+  * - 11.2
+    - Check that draw numbers have been updated
     - 
     - 
   * - 12.0
     - * Confirm neonatal all-cause mortality rates match expectation
       * Confirm LBWSG risk effects are working as expected
+    - 
+    - 
+  * - 13.0
+    - * Confirm baseline maternal disorders burden still validates
+      * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but no case fatality rates
+    - 
+    - 
+  * - 14.0
+    - * Confirm ANC attendance exposure varies as expected by pregnancy term length
+      * Confirm ANC attendance exposure matches expectation
+      * Confirm AI ultrasound exposure categories is consistent with ANC attendance categories (ex: no ultrasound coverage if no ANC coverage)
     - 
     - 
 
@@ -1464,13 +1508,17 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - Duplicate hemoglobin exposure draws
+    - Rather than using the `draw numbers specified in this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`_ and `discussed in this slack thread <https://ihme.slack.com/archives/C02944X688L/p1750973265492859>`_, the model is using randomly generated draws that include duplicate hemoglobin exposure values (346 and 446)
+    - Update draw sampling strategy to align with linked PR
+    - Model 11.2
   * - Miscalibration of neonatal mortality ratios
     - This is looking largely resolved in model 8.1, but we will wait to confirm once the LBWSG RR capping strategy is updated
-    - Update LBWSG RR caps and PAF calculation strategy for model 8.1.1
-    - For model 8.1.1
+    - Update LBWSG RR caps and PAF calculation strategy for model 12.0
+    - For model 12.0
   * - Neonatal mortality due to preterm birth slightly overestimated and remaining cause-specific mortality is generally underestimated despite this being resolved for all-cause mortality
-    - Unknown -- could be something to do with the neonatal mortality math?
-    - Research team to discuss and consider -- see if it is imporoved after we update to mortality risk and cap LBWSG RRs?
+    - Unknown -- could be something to do with the neonatal mortality math? Removing the risk effect of LBWSG on NN enceph. did not seem to resolve the issue.
+    - Research team to discuss and consider 
     - None for now
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
