@@ -220,20 +220,11 @@ outputs, one being dichotomous for the hemoglobin component and the other being 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-* We assume that partial term pregnancies have the same probability of ANC coverage as full term pregnancies and assume that these visits occur exclusively 
-  during the first trimester given that these pregnancies do not progress late into pregnancy. Note that in effect this makes first trimester ANC attendance 
-  rate higher among partial term pregnancies than full term pregnancies, which is not necessarily logical. We accept this as a limitation given that the 
-  interventions partial term pregnancies can receive at a first trimester visit (MMS, AI ultrasound) primarily affect outcomes that do not apply to partial 
-  term pregnancies (MMS->stillbirth, MMS->LBWSG, MMS->hemoglobin->sepsis/obstructed labor, and ultrasound/facility delivery). However, it is possible that 
-  we will overestimate the impact of MMS->hemoglobin on anemia YLDs and depressive disorders among partial term pregnancies as a result of this assumption.
-
-  - Note that the data on ANC attendance in DHS is collected on live and still births (full term pregnancies) only.
-  - We assume that no partial term pregnancies attend ANC visits after the first trimester. However, as partial term pregnancies may last as long as 24 weeks according to our pregnancy model, it is possible that some may.
-
 * We assume that the prevalence of attending both first trimester and later pregnancy visits is the minimum of ANCfirst (as processed by the HS team) and ANC4 
   (GBD covariate also processed by HS team). There is non-zero prevalence of first trimester visits only when ANC4 > ANC1 (such as in Pakistan). We are likely
   overestimating the correlation between first trimester ANC and later pregnancy ANC (i.e., the prevalence of a first trimester ANC visit ONLY is likely non-zero 
-  despite this assertion in our model.) 
+  despite this assertion in our model.) We assume that the DHS data used to produce the ANCfirst, ANC1, and ANC4 covariates applies to partial term pregnancies 
+  as well as full term pregnancies.
 
 .. todo:: 
 
