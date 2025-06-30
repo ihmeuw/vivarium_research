@@ -33,7 +33,7 @@ antenatal care clinics to quickly and accurately measure hemoglobin levels in bl
 
 **Modeling instructions:**
 
-For decision node 7 (see :ref:`the hemoglobin module page <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for details), we will assess whether or not the result of a simulant's minimally invasive 
+For decision node 7 (see the :ref:`hemoglobin module page <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for details), we will assess whether or not the result of a simulant's minimally invasive 
 blood test for hemoglobin screening is <100 g/L, which may be different than whether a simulant's *actual* hemoglobin exposure is <100 g/L. We will do this based on assumed 
 sensitivity and specificity levels for the hemoglobin screening test as informed from the Gates Foundation and listed below:
 

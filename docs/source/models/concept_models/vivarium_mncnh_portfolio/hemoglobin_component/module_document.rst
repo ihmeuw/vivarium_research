@@ -133,11 +133,11 @@ This module will:
     - Use same propensity value as decision node #1 to answer this question
   * - 7 
     - Hemoglobin screening value <100 g/L? (Based on IFA/MMS adjusted exposure)
-    - Instructions detailed on :ref:`the anemia screening intervention page <anemia_screening>`
+    - Instructions detailed on the :ref:`anemia screening intervention page <anemia_screening>`
     - 
   * - 8
     - Low ferritin screening value?
-    - Instructions detailed on :ref:`the anemia screening intervention page <anemia_screening>`
+    - Instructions detailed on the :ref:`anemia screening intervention page <anemia_screening>`
     - 
   * - 9
     - IV iron?
