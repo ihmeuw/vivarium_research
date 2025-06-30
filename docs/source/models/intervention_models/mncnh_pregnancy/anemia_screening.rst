@@ -33,7 +33,7 @@ antenatal care clinics to quickly and accurately measure hemoglobin levels in bl
 
 **Modeling instructions:**
 
-For decision node 7 (see :ref:`<2024_vivarium_mncnh_portfolio_hemoglobin_module>`_ for details), we will assess whether or not the result of a simulant's minimally invasive 
+For decision node 7 (see :ref:`the hemoglobin module page <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for details), we will assess whether or not the result of a simulant's minimally invasive 
 blood test for hemoglobin screening is <100 g/L, which may be different than whether a simulant's *actual* hemoglobin exposure is <100 g/L. We will do this based on assumed 
 sensitivity and specificity levels for the hemoglobin screening test as informed from the Gates Foundation and listed below:
 
@@ -92,7 +92,7 @@ The estimates are available at ``J:\Project\simulation_science\mnch_grant\MNCNH 
 Baseline coverage of ferritin screening is defined in the table below. 
 
 .. list-table:: Baseline Coverage of Ferritin Screening
-  :widths: 15 15 15 15 15
+  :widths: 15 15 15 15
   :header-rows: 1
 
   * - Location
@@ -123,12 +123,12 @@ Assumptions and Limitations
   to the threshold than if you expsoure is far away from the threshold. This will likely result in more cases of individuals 
   without *any* anemia (high hemoglobin) testing as low hemoglobin and those with very low hemoglobin testing as adequate 
   hemoglobin than may happen in practice. This may cause us to understimate the impact of the IV iron intervention.
-  - Note that an alternative to this limited approach we are taking would be to model some error around hemoglobin exposure 
-    (sampling from some distribution and adding it to hemoglobin exposure to get test exposure, similar to what is done for 
-    gestational age assessment in the :ref:`AI ultrasound model <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`). However, 
-    in order to match the desired sensitivity and specificity of the screening test, we would need to solve for the uncertainty 
-    distribution, likely via optimization, at the location-specific level (as it will depend on the underlying population 
-    hemoglobin exposure distribution).
+  Note that an alternative to this limited approach we are taking would be to model some error around hemoglobin exposure 
+  (sampling from some distribution and adding it to hemoglobin exposure to get test exposure, similar to what is done for 
+  gestational age assessment in the :ref:`AI ultrasound model <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`). However, 
+  in order to match the desired sensitivity and specificity of the screening test, we would need to solve for the uncertainty 
+  distribution, likely via optimization, at the location-specific level (as it will depend on the underlying population 
+  hemoglobin exposure distribution).
 
 .. todo:: 
 
@@ -140,6 +140,6 @@ Validation and Verification Criteria
 References
 ------------
 
-..[Teichman-et-al-2021]
+.. [Teichman-et-al-2021]
   Teichman, J., Nisenbaum, R., Lausman, A., Shlozberg, M. Suboptimal iron deficiency screening in pregnancy and the impact of socioeconomic status in a high-resource setting. Blood Adv (2021) 5 (22): 4666–4673. https://doi.org/10.1182/bloodadvances.2021004352
 
