@@ -1054,6 +1054,20 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default (no new hemoglobin observer required)
+  * - 11.1
+    - Bugfix to VPH LBWSG refactor to ensure that LBWSG exposure **at birth** (rather than the early neonatal exposure) is used for initializing LBWSG exposures in the simulation. Note that this VPH refactor was introduced between models 8.2/8.3 and 9.0 and persisted until this run.
+    - Baseline
+    - ``model11.1``
+    - Default
+    - Default
+    - Default
+  * - 11.2
+    - `Update draws in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`-
+    - Baseline
+    - ``model11.2``
+    - Default
+    - Default
+    - Default
   * - 12.0
     - Capped LBWSG RRs and new late neonatal LBWSG PAF calculation, in accordance with `vivarium research PR #1681 <https://github.com/ihmeuw/vivarium_research/pull/1681>`_
     - Baseline
@@ -1061,7 +1075,21 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
-  * - 13.0*
+  * - 13.0
+    - `Hemoglobin risk effects on maternal disorders <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_mncnh_portfolio/maternal_disorders_module/module_document.html#id1>`_
+    - Baseline
+    - ``model13.0``
+    - Default
+    - Default
+    - Default
+  * - 14.0*
+    - Wave II updates to the :ref:`antenatal care attendance module <2024_vivarium_mncnh_portfolio_anc_module>`
+    - ``model14.0``
+    - Baseline
+    - Default
+    - Default
+    - Default, note that we would like the 4-category ANC attendance variable observed
+  * - 15.0*
     - Wave I antenatal corticosteroids
     - Baseline
     - ``model13.0``
@@ -1368,11 +1396,31 @@ Default stratifications to all observers should include scenario and input draw.
   * - 11.0
     - * Use the interactive sim to verify the hemoglobin distribution in pregnancy matches expectation
       * Confirm maternal disorders burden still matches expectation
+    - All looks good! However, we are not using the draw numbers `pre-specified in this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`_. The draws that have been run include duplicate hemoglobin exposure values.
+    - * `Model 11.0 interactive sim notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11_interactive_simulation.ipynb>`_
+      * `Model 11.0 maternal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11.0_maternal_checks.ipynb>`_
+  * - 11.1
+    - * Check neonatal all cause mortality (among early neonatal age group) validates
+    - Looks good!
+    - `Model 11.1 neonatal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11.1_neonatal_checks.ipynb>`_ 
+  * - 11.2
+    - Check that draw numbers have been updated
     - 
     - 
   * - 12.0
     - * Confirm neonatal all-cause mortality rates match expectation
       * Confirm LBWSG risk effects are working as expected
+    - 
+    - 
+  * - 13.0
+    - * Confirm baseline maternal disorders burden still validates
+      * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but no case fatality rates
+    - 
+    - 
+  * - 14.0
+    - * Confirm ANC attendance exposure varies as expected by pregnancy term length
+      * Confirm ANC attendance exposure matches expectation
+      * Confirm AI ultrasound exposure categories is consistent with ANC attendance categories (ex: no ultrasound coverage if no ANC coverage)
     - 
     - 
 
@@ -1383,10 +1431,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Underestimation of early neonatal mortality between model 8.3 (was resolved) and model 9.0 (misoprostol implementation)
-    - Unknown! It looks like there is no change in the LBWSG RRs or PAF values between the artifacts for model 8.3 and 9.0 and misoprostol implementation should not have any effect on neonatal mortality. Note that this underestimation of neonatal mortality that arises in model 9.0 persists through current models (through 10.2)
-    - Research and engineering to put heads together and see if we can figure out what changed regarding neonatal mortality between models 8.3 and 9.0 (Ali has already confirmed that it is not due to differences in the V&V notebooks... same notebook for different model versions shows different mortality rates)
-    - No model build, but this is a decently high priority
+  * - Duplicate hemoglobin exposure draws
+    - Rather than using the `draw numbers specified in this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`_ and `discussed in this slack thread <https://ihme.slack.com/archives/C02944X688L/p1750973265492859>`_, the model is using randomly generated draws that include duplicate hemoglobin exposure values (346 and 446)
+    - Update draw sampling strategy to align with linked PR
+    - Model 11.2
   * - Miscalibration of neonatal mortality ratios
     - This is looking largely resolved in model 8.1, but we will wait to confirm once the LBWSG RR capping strategy is updated
     - Update LBWSG RR caps and PAF calculation strategy for model 12.0
