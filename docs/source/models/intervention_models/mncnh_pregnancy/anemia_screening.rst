@@ -28,7 +28,7 @@ Hemoglobin Screening Accuracy Instructions
 **Research background:**
 
 Anaemia is defined as decreased blood concentration of haemoglobin, irrespective of underlying cause, red blood cell morphology, or red blood cell function. 
-A minimally invasive blood test (using a small, portable device such as a `HemoCue test <https://hemocue.com/us/>`_) can be provided to pregnant people at
+A noninvasive blood test (using a small, portable device such as a `HemoCue test <https://hemocue.com/us/>`_) can be provided to pregnant people at
 antenatal care clinics to quickly and accurately measure hemoglobin levels in blood. 
 
 **Modeling instructions:**
@@ -100,15 +100,23 @@ Baseline coverage of ferritin screening is defined in the table below.
     - Coverage Distribution (%)
     - Notes
   * - All (Ethiopia, Nigeria, Pakistan)
-    - 
-    - 
-    - This is an assumption based on literature evidence...
+    - 0
+    - N/A
+    - This is an assumption based on literature evidence that many ANC programs primarily focus on hemoglobin screening, and ferritin 
+      screening is not widely available at ANCs in Nigeria, Ethiopia, or Pakistan. (e.g. [Teichman-et-al-2021]_ assessed ferritin testing 
+      prevalence in high-resource settings in Ontario and found 59.4% of pregnant patients were ferritin tested during pregnancy but 
+      that this was significantly lower in low-income areas, with only 4.1% in the lowest wealth quintile.)
 
 
 Assumptions and Limitations
 ---------------------------
 
-- We assume that ferritin screening availability captures actual use, and not simply the treatment being in the facility.
+- We assume that the baseline coverage estimates for hemoglobin screening at ANC that we received from the Health Systems team are 
+  reasonable values for the locations included in our simulation, despite the estimates being derived from other country's data.
+- We assume that baseline coverage for ferritin screening at ANC is 0%, based on literature evidence that many ANC programs primarily 
+  focus on hemoglobin screening, and is not widely implemented in Nigeria, Ethiopia, or Pakistan. (e.g. [Teichman-et-al-2021]_ assessed ferritin testing 
+  prevalence in high-resource settings in Ontario and found 59.4% of pregnant patients were ferritin tested during pregnancy but 
+  that this was significantly lower in low-income areas, with only 4.1% in the lowest wealth quintile.)
 - We assume a hemoglobin screening sensitivity of 85% and specificity of 80%, as requested by the Gates Foundation
 - Our approach to modeling hemoglobin screening sensitivity and specificity does not vary by hemoglobin exposure. In other 
   words, you are no more likely to have your hemoglobin exposure misclassified by the screening if your exposure is very close 
@@ -122,9 +130,16 @@ Assumptions and Limitations
     distribution, likely via optimization, at the location-specific level (as it will depend on the underlying population 
     hemoglobin exposure distribution).
 
+.. todo:: 
+
+  If we find more suitable baseline coverage data for ferritin screening in ANCs in our locations of interest, we will update this page accordingly. 
 
 Validation and Verification Criteria
 ------------------------------------
 
 References
 ------------
+
+..[Teichman-et-al-2021]
+  Teichman, J., Nisenbaum, R., Lausman, A., Shlozberg, M. Suboptimal iron deficiency screening in pregnancy and the impact of socioeconomic status in a high-resource setting. Blood Adv (2021) 5 (22): 4666–4673. https://doi.org/10.1182/bloodadvances.2021004352
+
