@@ -190,6 +190,7 @@ outputs, one being dichotomous for the hemoglobin component and the other being 
 
 .. list-table:: Module outputs for hemoglobin component
   :header-rows: 1
+  :widths: 10 15 15
 
   * - Output
     - Value
@@ -212,11 +213,10 @@ outputs, one being dichotomous for the hemoglobin component and the other being 
       2. ANC in later pregnancy only
       3. ANC in 1st trimester only
       4. ANC in 1st trimester and later pregnancy
-    - This output will be used as an input for the :ref:`facility choice module <2024_vivarium_mncnh_portfolio_facility_choice_module>`
+    - This output will be used as an input for the :ref:`facility choice module <2024_vivarium_mncnh_portfolio_facility_choice_module>`.
       The variable is polytomous for each pregnancy with the above 4 categories (ordered from worst to best). These are the same four categories listed above as A-D, 
-      but in reverse order, i.e., 1 = D, 2 = C, 3 = B, 4 = A. The output of this module that gets used by the facility choice module will be a single variable 
-      called "ANC attendance," which has one of the four possible values A, B, C, or D as defined above, and these need to be ordered D < C < B < A when sampling 
-      the variable using the correlated propensity for the facility choice model.
+      but in reverse order, i.e., 1 = D, 2 = C, 3 = B, 4 = A. These need to be ordered D < C < B < A when sampling the variable using the correlated propensity for 
+      the facility choice model.
 
 
 3.0 Assumptions and limitations
