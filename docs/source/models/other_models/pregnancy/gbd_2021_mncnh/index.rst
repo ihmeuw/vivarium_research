@@ -236,9 +236,9 @@ Details for each step are provided in the subsections below.
 #. Assign duration of pregnancy depending on term length and, if
    applicable, sex of the infant. Note that this is the same value as
    "gestational age" in other parts of the documentation (see
-   `Birthweight, Gestational Age, and LBW Status`_ section).
+   `Birthweight, Gestational Age, LBW Status, and Preterm Status`_ section).
 #. Assign birthweight of simulant child and low birthweight status (see
-   `Birthweight, Gestational Age, and LBW Status`_ section)
+   `Birthweight, Gestational Age, LBW Status, and Preterm Status`_ section)
 #. Assign propensity values for ANC and ultrasound 
 #. Begin simulation
 
@@ -310,8 +310,8 @@ For pregnancies that result in live birth or stillbirth outcomes, infant sex sho
 
 .. _other_models_pregnancy_closed_cohort_mncnh_lbwsg_exposure:
 
-Birthweight, Gestational Age, and LBW Status
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Birthweight, Gestational Age, LBW Status, and Preterm Status
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A duration of pregnancy value will need to be assigned to all pregnancies regardless of the pregnancy outcome. This value will inform the duration that the simulant remains in the pregnancy state prior to transitioning to the postpartum state.
 
@@ -323,10 +323,27 @@ For partial term pregnancies (that result in abortion/miscarriage/ectopic pregna
 
 
 For full term pregnancies (that result in live births or stillbirths), a LBWSG exposure value will be assigned that will include both the gestational age and birthweight of the simulant child. For wave 1 of this project, the LBWSG can be assigned using information outlined in the :ref:`LBWSG exposure page <2019_risk_exposure_lbwsg>`. Exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Based on the assigned category, a gestational age and birthweight can be recorded separately.
+The pregnancy duration for full term pregnancies is equal to the
+infant's gestational age defined by their LBWSG exposure.
 
 Based on the LBWSG category, the simulant will also be categorized as either low birth weight or not low birth weight. Low birth weight is defined as less than 2500 grams.
 
+Full term pregnancies should also be assigned a preterm status:
+"preterm" if the gestational age is less than 37 weeks, and "term" if
+the gestational age is 37 weeks or more. All partial term pregnancies
+are preterm by definition.
+
 .. note::
+
+  Our model of :ref:`delivery facility choice
+  <2024_vivarium_mncnh_portfolio_facility_choice_module>` specifies that
+  the LBWSG category is correlated with antenatal care (ANC) attendance
+  and in-facility delivery (IFD) status. These correlations are defined
+  using a specified ordering of the LBWSG categories. The correlation
+  strategy, including the category ordering, is described in more detail
+  in the :ref:`correlated propensities section
+  <facility_choice_correlated_propensities_section>` of the facility
+  choice model documentation.
 
   In later waves of the model, we will make this process more complex by including correlation with other maternal characteristics, similar to what is outlined in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. 
 
