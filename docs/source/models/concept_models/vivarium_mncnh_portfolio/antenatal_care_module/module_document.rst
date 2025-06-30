@@ -213,8 +213,10 @@ outputs, one being dichotomous for the hemoglobin component and the other being 
       3. :code:`first_trimester_only` for group B
       4. :code:`first_trimester_and_later_pregnancy` for group A
     - This output will be used as an input for the :ref:`AI Ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`.
-      The categories of this polytomous variable are listed from highest risk (1) to lowest risk (4) in terms of ultrasound timing, in accordance with the :ref:`special ordering of the categories section <facility_choice_special_ordering_of_categories_section>` of the delivery facility choice model document:
-      The categories need to be ordered D < C < B < A when sampling the ANC attendance variable using the correlated ANC propensity in order to induce the correct correlations for the facility choice model.
+      The categories of this polytomous variable are listed from highest risk (1) to lowest risk (4) in terms of ultrasound timing, 
+      in accordance with the :ref:`special ordering of the categories section <facility_choice_special_ordering_of_categories_section>`
+      of the delivery facility choice model document: The categories need to be ordered D < C < B < A when sampling the ANC attendance 
+      variable using the correlated ANC propensity in order to induce the correct correlations for the facility choice model.
 
 
 3.0 Assumptions and limitations
