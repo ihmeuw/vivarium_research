@@ -52,6 +52,25 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
 
 .. image:: ai_ultrasound_module_diagram.drawio.svg
 
+.. todo::
+
+  Update strategy to use all four categories of ANC attendance instead
+  of treating it as a binary variable. Specifically, change ultrasound
+  type to a 4-category variable by splitting the "standard ultrasound"
+  category into 2 categories, "standard ultrasound in 1st trimester" and
+  "standard ultrasound in later pregnancy", as outlined in this `PR
+  comment
+  <https://github.com/ihmeuw/vivarium_research/pull/1677#discussion_r2138982719>`__,
+  and use the data in this `paper referenced below
+  <https://obgyn.onlinelibrary.wiley.com/doi/10.1002/uog.15894>`__ to
+  have different standard deviations for GA estimation error based on
+  ultrasound timing.
+
+  Note that making these changes will also require updating and
+  recalibrating the :ref:`facility choice model
+  <2024_facility_model_vivarium_mncnh_portfolio>`.
+
+
 2.2 Module Inputs
 ---------------------
 
