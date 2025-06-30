@@ -186,10 +186,7 @@ The below table describes what probabilities to use for each exposure option **f
 
 As mentioned earlier, ANC attendance impacts hemoglobin exposure and facility choice in our model, and in order for the 
 outputs of this component to be compatible with the data needs of these two downstream components, we will need two different
-outputs, one being dichotomous for the hemoglobin component and the other being polychotomous for the facility choice component. 
-
-ANC attendance inputs to the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-are dichotomous for each pregnancy, so we need to observe the following: 
+outputs, one being dichotomous for the hemoglobin component and the other being polychotomous for the facility choice component.  
 
 .. list-table:: Module outputs for hemoglobin component
   :header-rows: 1
@@ -201,26 +198,25 @@ are dichotomous for each pregnancy, so we need to observe the following:
     - 
       - *True*  for groups A and B 
       - *False* for groups C and D
-    - 
+    - This output will be used as an input for the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`.
+      This variable is dichotomous for each pregnancy.
   * - Attends ANC in later pregnancy?
     - 
       - *True*  for groups A and C 
       - *False* for groups B and D
+    - This output will be used as an input for the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`.
+      This variable is dichotomous for each pregnancy.
+  * - ANC attendance 
     - 
-
-ANC attendance inputs to the :ref:`facility choice module <2024_vivarium_mncnh_portfolio_facility_choice_module>`
-are polytomous for each pregnancy with the following 4 categories (ordered from worst to best):
-
-1. No ANC
-2. ANC in later pregnancy only
-3. ANC in 1st trimester only
-4. ANC in 1st trimester and later pregnancy
-
-.. note::
-
-  These are the same four categories listed above as A-D, but in reverse order, i.e., 1 = D, 2 = C, 3 = B, 4 = A. The output of this module that gets used 
-  by the facility choice module will be a single variable called "ANC attendance," which has one of the four possible values A, B, C, or D as defined above, 
-  and these need to be ordered D < C < B < A when sampling the variable using the correlated propensity for the facility choice model.
+      1. No ANC
+      2. ANC in later pregnancy only
+      3. ANC in 1st trimester only
+      4. ANC in 1st trimester and later pregnancy
+    - This output will be used as an input for the :ref:`facility choice module <2024_vivarium_mncnh_portfolio_facility_choice_module>`
+      The variable is polytomous for each pregnancy with the above 4 categories (ordered from worst to best). These are the same four categories listed above as A-D, 
+      but in reverse order, i.e., 1 = D, 2 = C, 3 = B, 4 = A. The output of this module that gets used by the facility choice module will be a single variable 
+      called "ANC attendance," which has one of the four possible values A, B, C, or D as defined above, and these need to be ordered D < C < B < A when sampling 
+      the variable using the correlated propensity for the facility choice model.
 
 
 3.0 Assumptions and limitations
