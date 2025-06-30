@@ -28,12 +28,14 @@ Hemoglobin Screening Accuracy Instructions
 **Research background:**
 
 Anaemia is defined as decreased blood concentration of haemoglobin, irrespective of underlying cause, red blood cell morphology, or red blood cell function. 
-A noninvasive blood test (using a small, portable device such as a `HemoCue test <https://hemocue.com/us/>`_) can be provided to pregnant people at
-antenatal care clinics to quickly and accurately measure hemoglobin levels in blood. 
+A noninvasive blood test (using a small, portable device such as a `HemoCue test <https://hemocue.com/us/>`_) can be provided to pregnant people in their 2nd or 3rd 
+trimester at antenatal care clinics to quickly and accurately measure hemoglobin levels in blood. If a pregnant person is found to have hemoglobin less than 100 g/L based on this
+hemoglobin screening, they will also be screened for ferritin levels, which you can read more about in the following section. This page describes how an anemia
+screening intervention (including hemoglobin and ferritin screenings) can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 
 **Modeling instructions:**
 
-For decision node 7 (see the :ref:`hemoglobin module page <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for details), we will assess whether or not the result of a simulant's minimally invasive 
+For decision node 7 (see the :ref:`hemoglobin module page <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for details), we will assess whether or not the result of a simulant's noninvasive 
 blood test for hemoglobin screening is <100 g/L, which may be different than whether a simulant's *actual* hemoglobin exposure is <100 g/L. We will do this based on assumed 
 sensitivity and specificity levels for the hemoglobin screening test as informed from the Gates Foundation and listed below:
 
