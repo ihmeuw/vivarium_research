@@ -37,7 +37,75 @@ MNCNH Portfolio
 
 .. contents::
   :local:
-  :depth: 1
+
+.. list-table:: Abbreviations
+  :widths: 5 15
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+  * - ACMR
+    - All-Cause Mortality Rate
+  * - ACS
+    - Antenatal Corticosteroids
+  * - AI ultrasound
+    - Artificial Intelligence assisted ultrasound
+  * - ANC
+    - Antenatal Care
+  * - ASFR
+    - Age-Specific Fertility Rate
+  * - BEmONC
+    - Basic Emergency Obstetric and Newborn Care
+  * - CEmONC
+    - Comprehensive Emergency Obstetric and Newborn Care
+  * - CPAP
+    - Continuous Positive Airway Pressure
+  * - CSMR
+    - Cause-Specific Mortality Rate
+  * - ENN
+    - Early Neonatal
+  * - GBD
+    - Global Burden of Disease
+  * - IFA
+    - Iron and Folic Acid
+  * - IFD
+    - In-Facility Delivery
+  * - IV iron
+    - Intravenous iron
+  * - LBW
+    - Low Birth Weight
+  * - LBWSG
+    - Low Birth Weight and Short Gestation
+  * - LNN
+    - Late Neonatal
+  * - MMS
+    - Multiple Micronutrient Supplements
+  * - MNCNH
+    - Maternal, Newborn, and Child Nutrition and Health
+  * - OL
+    - Obstructed Labor
+  * - PAF
+    - Population Attributable Fraction
+  * - PPD
+    - Postpartum Depression
+  * - PTB
+    - Preterm Birth
+  * - RDS
+    - Respiratory Distress Syndrome
+  * - RR
+    - Relative Risk
+  * - RT
+    - Research Team
+  * - SBR
+    - Stillbirth (to live birth) Ratio
+  * - V&V
+    - Verification and Validation
+  * - WRA
+    - Women of Reproductive Age
+  * - YLDs
+    - Years Lived with Disability
+  * - YLLs
+    - Years of Life Lost
 
 1.0 Overview
 ++++++++++++
@@ -114,18 +182,19 @@ defined as a module input in a subsequent row.
   * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - 
     - * ANC propensity
-      * LBWSG propensity
-      * Delivery facility propensity
-    - * :ref:`Facility choice propensity correlation <2024_facility_model_vivarium_mncnh_portfolio>`
+      * LBWSG category propensity
+      * IFD propensity
+    - * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
   * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    - * LBWSG propensity
+    - * LBWSG category propensity
     - * Maternal age
-      * Pregnancy term duration
+      * Pregnancy term length
       * Birth outcome
-      * Child sex
+      * Sex of infant
       * Gestational age
       * Birthweight
       * Pregnancy duration
+      * Preterm status
     - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
       * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
   * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
@@ -135,8 +204,9 @@ defined as a module input in a subsequent row.
   * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - * ANC attendance
       * Gestational age
-    - * Ultrasound coverage
-      * Believed gestational age
+    - * Ultrasound type
+      * Estimated gestational age
+      * Believed preterm status
     - 
 
 .. note::
@@ -154,15 +224,15 @@ defined as a module input in a subsequent row.
     * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
       - 
       - * ANC propensity
-        * LBWSG propensity
-        * Delivery facility propensity
-      - * :ref:`Facility choice propensity correlation <2024_facility_model_vivarium_mncnh_portfolio>`
+        * LBWSG category propensity
+        * IFD propensity
+      - * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
       - 
     * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       - 
       - * Maternal age
-        * Pregnancy term duration
-        * Child sex
+        * Pregnancy term length
+        * Sex of infant
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
       - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules
     * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
@@ -182,13 +252,14 @@ defined as a module input in a subsequent row.
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
       - New wave II module
     * - :ref:`Pregnancy II <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-      - * LBWSG propensity
+      - * LBWSG category propensity
         * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
         * IV iron coverage (affects birth outcome, gestational age, birthweight)
       - * Birth outcome
         * Gestational age at birth
         * Birthweight
         * Pregnancy duration
+        * Preterm status
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
         * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
@@ -197,8 +268,9 @@ defined as a module input in a subsequent row.
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
       - * ANC attendance
         * Gestational age
-      - * Ultrasound coverage
-        * Believed gestational age
+      - * Ultrasound type
+        * Estimated gestational age
+        * Believed preterm status
       - 
       - No changes from wave I
 
@@ -226,10 +298,11 @@ defined as a module input in a subsequent row.
     - Outputs
     - Nested subcomponents
   * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
-    - * (Pregnancy term duration)
-      * Delivery facility propensity
-      * Believed gestational age
-    - * Birth facility
+    - * (Pregnancy term length)
+      * IFD propensity
+      * Believed preterm status
+    - * IFD status
+      * Birth facility
     - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
   * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - * (Pregnancy term duration)
@@ -263,10 +336,11 @@ defined as a module input in a subsequent row.
       - Nested subcomponents
       - Note
     * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
-      - * (Pregnancy term duration)
-        * Delivery facility propensity
-        * Believed gestational age
-      - * Birth facility
+      - * (Pregnancy term length)
+        * IFD propensity
+        * Believed preterm status
+      - * IFD status
+        * Birth facility
       - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
       - 
     * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
