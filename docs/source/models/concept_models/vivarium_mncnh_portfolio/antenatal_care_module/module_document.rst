@@ -188,7 +188,7 @@ As mentioned earlier, ANC attendance impacts hemoglobin exposure and facility ch
 outputs of this component to be compatible with the data needs of these two downstream components, we will need two different
 outputs, one being dichotomous for the hemoglobin component and the other being polychotomous for the facility choice component.  
 
-.. list-table:: Module outputs for hemoglobin component
+.. list-table:: Module outputs
   :header-rows: 1
   :widths: 10 15 15
 
