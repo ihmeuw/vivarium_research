@@ -20,7 +20,7 @@ and short gestation (LBWSG) risk exposure, we will include two novel
 affordances in our simulation: (1) correlated propensities for ANC,
 in-facility delivery (IFD), and LBWSG category; and (2) causal
 conditional probabilities for in-facility delivery that differ based on
-the believed term status when labor begins.
+the believed preterm status when labor begins.
 
 As a simplification, we will model the choice of delivery location in
 two steps: First, the birthing person decides whether to deliver at home
@@ -64,8 +64,8 @@ between them that we will simulate:
     sex [label="(S)ex of infant"]
     lbw [label="(LBW) Low birth\nweight status"]
     anc [label="(ANC) Antenatal\ncare attendance"]
-    preterm [label="(T)erm status"]
-    preterm_guess [label="(T') Believed\nterm status"]
+    preterm [label="(P)reterm status"]
+    preterm_guess [label="(P') Believed\npreterm status"]
     ifd [label="(IFD status) In-facility\ndelivery status"]
 
     subgraph categorical {
@@ -127,7 +127,7 @@ between them that we will simulate:
     ultrasound -> error
     error_propensity -> error [color=lightblue3]
     error -> ga_estimate [color=purple]
-    preterm_guess -> ifd [label="Pr[IFD status | do(T')]"]
+    preterm_guess -> ifd [label="Pr[IFD status | do(P')]"]
 
     ifd_propensity -> ifd [color=lightblue3]
     facility_propensity -> facility [color=lightblue3]
@@ -156,6 +156,9 @@ between them that we will simulate:
   :blue-grey arrow: input a propensity to simulate randomness
 
 ..
+    Documentation for field list syntax used above:
+    https://docutils.sourceforge.io/docs/user/rst/quickref.html#field-lists
+    Original description of propensity arrows:
     * Light blue-gray arrows represent the input of propensities to
       simulate randomness in a probabilistic relationship
 
@@ -170,8 +173,8 @@ The causal model calibration uses observed data and an optimization
 procedure to find consistent values for the three correlations between
 the propensities :math:`u_\text{ANC}`, :math:`u_\text{IFD}`, and
 :math:`u_\text{cat}`, and the causal probabilities
-:math:`\Pr[\text{IFD status} \mid \operatorname{do}(T')]`
-for the arrow from believed term status to in-facility delivery status.
+:math:`\Pr[\text{IFD status} \mid \operatorname{do}(P')]`
+for the arrow from believed preterm status to in-facility delivery status.
 The sections below record the values of these correlations and causal
 probabilities and detail how to use them in the Vivarium simulation to
 assign the final birth facility node, F.
@@ -207,7 +210,7 @@ this document:
          <other_models_pregnancy_closed_cohort_mncnh_lbwsg_exposure>`
          (cat, BW, GA)
       * Low birth weight status (LBW)
-      * Term status (T)
+      * Preterm status (P)
   * - * :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
       * `Special ordering of the categories for categorical variables`_
         (below)
@@ -217,7 +220,7 @@ this document:
     - * Ultrasound type (U)
       * Error in gestational age estimation (E)
       * Estimated gestational age (GA')
-      * Believed term status (T')
+      * Believed preterm status (P')
   * - * :ref:`Facility choice module
         <2024_vivarium_mncnh_portfolio_facility_choice_module>`
       * `Causal conditional probabilities for in-facility delivery`_
@@ -276,6 +279,8 @@ Assumptions and limitations
   status (LBW), but these are not currently used in the causal model
   optimization due to lack of data.
 
+.. _facility_choice_correlated_propensities_section:
+
 Correlated propensities
 -----------------------
 
@@ -298,7 +303,9 @@ between scenarios at the simulant level.  This makes it straightforward
 to represent the correlation in our factors by generating correlated
 propensities. The
 :code:`statsmodels.distributions.copula.api.GaussianCopula`
-implementation can make them:
+`implementation <statsmodels GaussianCopula_>`_ can make them:
+
+.. _statsmodels GaussianCopula: https://www.statsmodels.org/dev/generated/statsmodels.distributions.copula.api.GaussianCopula.html
 
 .. code-block:: pycon
 
@@ -387,6 +394,8 @@ parameters.
   different scenarios would only have to specify which set of values to
   use.
 
+.. _facility_choice_special_ordering_of_categories_section:
+
 Special ordering of the categories for categorical variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -405,17 +414,17 @@ propensities. Our chosen ordering also facilitates convergence of the
 causal model optimization, whose objective function involves the
 conditional probability of preterm status given facility choice.
 **Specifically, we order the LBWSG categories first by preterm status
-(preterm < full-term), then from highest average RR to lowest average RR
+(preterm < term), then from highest average RR to lowest average RR
 in the early neonatal age group (averaged across all draws), separately
 for each sex.**
 
 .. important::
 
   * All preterm categories (< 37 weeks) are ordered **before** all
-    full-term categories (37+ weeks)
+    term categories (37+ weeks)
   * The ordering is **sex-specific** (the ordering is different for
     males and females)
-  * Within each term status (preterm or full-term), LBWSG categories are
+  * Within each preterm status (preterm or term), LBWSG categories are
     ordered in **decreasing** order by (sex-specific) average relative
     risk across draws
   * The ordering is based on the RRs for the **early neonatal** age
@@ -447,6 +456,7 @@ specifies how each ordinal variable should be initialized from its
 corresponding propensity. [[A picture would probably help, should we add
 one here?]]
 
+.. _facility_choice_causal_probabilities_section:
 
 Causal conditional probabilities for in-facility delivery
 ---------------------------------------------------------
@@ -462,7 +472,7 @@ page, *using* the causal conditional probabilities is simple: Simply
 select in-facility delivery with probability
 :math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed preterm})]`
 or
-:math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed full-term})]`
+:math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed term})]`
 for the corresponding cases, using the correlated IFD propensity and
 category ordering defined in the previous section.
 
@@ -482,17 +492,17 @@ category ordering defined in the previous section.
      - 1 - 0.38
      - 1 - 0.27
      - 1 - 0.11
-   * - :math:`\text{Pr}[\text{at-home}\mid \operatorname{do}(\text{believed full-term})]`
+   * - :math:`\text{Pr}[\text{at-home}\mid \operatorname{do}(\text{believed term})]`
      - 0.55
      - 0.55
      - 0.29
-   * - :math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed full-term})]`
+   * - :math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed term})]`
      - 1 - 0.55
      - 1 - 0.55
      - 1 - 0.29
 
-More explicitly, given the simulant's believed term status (either
-"believed preterm" or "believed full-term") and their IFD propensity,
+More explicitly, given the simulant's believed preterm status (either
+"believed preterm" or "believed term") and their IFD propensity,
 :math:`u_\text{IFD}`, the simulant's IFD status is given by the
 following function :math:`f_\text{IFD}`:
 
@@ -500,11 +510,11 @@ following function :math:`f_\text{IFD}`:
 
   \begin{align*}
   \text{IFD status}
-  &= f_\text{IFD}(\text{believed term status},\ u_\text{IFD}) \\
+  &= f_\text{IFD}(\text{believed preterm status},\ u_\text{IFD}) \\
   &=  \begin{cases}
       \text{at-home}, & \text{if}\quad u_\text{IFD}
           < \text{Pr}[\text{at-home} \mid
-          \operatorname{do}(\text{believed term status})] \\
+          \operatorname{do}(\text{believed preterm status})] \\
       \text{in-facility}, & \text{otherwise}.
       \end{cases}
   \end{align*}
@@ -521,9 +531,9 @@ propensity correlations. The function :math:`f_\text{IFD}` is one of the
 .. note::
 
   The above probabilities represent the *causal* effect of a simulant's
-  believed term status on their choice of home delivery or in-facility
+  believed preterm status on their choice of home delivery or in-facility
   delivery. These will be different from the population's *observed*
-  conditional probabilities of IFD status given the believed term
+  conditional probabilities of IFD status given the believed preterm
   status, because of the correlations of :math:`u_\text{IFD}` with
   :math:`u_\text{ANC}` and :math:`u_\text{cat}`.
 
@@ -550,6 +560,8 @@ inputs in calibrating the model to find the causal probabilities above).
     - 0.492568
     - 0.520097
     - 0.771766
+
+.. _facility_choice_choosing_bemonc_cemonc_section:
 
 Choosing BEmONC vs. CEmONC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
