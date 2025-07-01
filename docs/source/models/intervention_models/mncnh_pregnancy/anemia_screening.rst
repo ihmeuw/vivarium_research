@@ -113,8 +113,9 @@ Baseline coverage of ferritin screening is defined in the table below.
 Assumptions and Limitations
 ---------------------------
 
-- We assume that the baseline coverage estimates for hemoglobin screening at ANC that we received from the Health Systems team are 
-  reasonable values for the locations included in our simulation, despite the estimates being derived from other country's data.
+- We assume that if a pregnant person had their blood drawn at the ANC during their pregnancy, their hemoglobin concentration was assessed. We thereby
+  assume that the coverage estimates for blood samples taken at ANC that we received from the Health Systems team are reasonable values
+  for baseline coverage of hemoglobin screening at ANC in our locations of interest.
 - We assume that baseline coverage for ferritin screening at ANC is 0%, based on literature evidence that many ANC programs primarily 
   focus on hemoglobin screening, and is not widely implemented in Nigeria, Ethiopia, or Pakistan. (e.g. [Teichman-et-al-2021]_ assessed ferritin testing 
   prevalence in high-resource settings in Ontario and found 59.4% of pregnant patients were ferritin tested during pregnancy but 
@@ -138,6 +139,10 @@ Assumptions and Limitations
 
 Validation and Verification Criteria
 ------------------------------------
+
+.. todo:: 
+
+  Add relevant V&V criteria here.
 
 References
 ------------
