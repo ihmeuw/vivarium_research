@@ -1139,7 +1139,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 11.2
-    - `Update draws in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`-
+    - `Update draws in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`_
     - Baseline
     - ``model11.2``
     - Default
@@ -1161,15 +1161,15 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 14.0*
     - Wave II updates to the :ref:`antenatal care attendance module <2024_vivarium_mncnh_portfolio_anc_module>`
-    - ``model14.0``
     - Baseline
+    - ``model14.0``
     - Default
     - Default
     - Default, note that we would like the 4-category ANC attendance variable observed
   * - 15.0*
     - Wave I antenatal corticosteroids
     - Baseline
-    - ``model13.0``
+    - ``model15.0``
     -
     - 
     - 
