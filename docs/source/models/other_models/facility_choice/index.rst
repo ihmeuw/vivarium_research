@@ -436,7 +436,15 @@ for each sex.**
   <2019_risk_exposure_lbwsg>`.
 
 **We will also order the ANC and IFD propensities from highest to lowest
-risk: "no ANC" < "some ANC"; and "home birth" < "in-facility birth".**
+risk:**
+
+ANC attendance categories
+  no ANC < ANC in later pregnancy < ANC in 1st trimester <
+  ANC in 1st trimester and later pregnancy
+
+IFD status categories
+  home birth < in-facility birth
+
 These orderings must be used when initializing simulants' ANC status and
 IFD status from the corresponding (correlated) propensities
 :math:`u_\text{ANC}` and :math:`u_\text{IFD}`. See the :ref:`Antenatal
