@@ -89,7 +89,7 @@ Baseline Coverage Data
 ++++++++++++++++++++++++
 
 Baseline coverage of the minimally invasive blood test for hemoglobin screening is defined by estimates processed by the Health Systems team. 
-The estimates are available at ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc_iron_prop_st-gpr_results_aggregates_scaled2025-05-30.csv``.
+The country-specific estimates are available at ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc_iron_prop_st-gpr_results_aggregates_scaled2025-05-30.csv``.
 
 Baseline coverage of ferritin screening is defined in the table below. 
 
