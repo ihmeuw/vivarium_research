@@ -453,6 +453,24 @@ more details on assigning ANC status; see the `Causal conditional
 probabilities for in-facility delivery`_ section below for an explicit
 description of how to assign IFD status.
 
+.. note::
+
+  The facility choice causal optimization model has not yet been updated
+  to make use of all four ANC attendance categories or the corresponding
+  additional detail for ultrasound timing. Accordingly, the
+  :ref:`AI-ultrasound module
+  <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>` currently groups
+  the last three ANC categories together, effectively making ANC
+  attendance a dichotomous variable with categories ordered "no ANC" <
+  "some ANC".
+
+  In a future version of the model, we plan to use the more detailed ANC
+  attendance information to determine whether simulants get a standard
+  ultrasound in the 1st trimester or in later pregnancy, which affects
+  the accuracy of GA estimation. Making these changes will require
+  updating the facility choice causal optimization code and the final
+  outputs used in the Vivarium simulation.
+
 To be more explicit about how the ordered categories and propensities
 work in code: If the categories are ordered from highest risk to lowest
 risk as :math:`c_1, \dotsc, c_n`, divide the unit interval :math:`[0,1]`
