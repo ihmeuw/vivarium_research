@@ -1139,7 +1139,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 11.2
-    - `Update draws in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`-
+    - `Update draws in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`_
     - Baseline
     - ``model11.2``
     - Default
@@ -1159,17 +1159,17 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
-  * - 14.0*
+  * - 14.0
     - Wave II updates to the :ref:`antenatal care attendance module <2024_vivarium_mncnh_portfolio_anc_module>`
-    - ``model14.0``
     - Baseline
+    - ``model14.0``
     - Default
     - Default
     - Default, note that we would like the 4-category ANC attendance variable observed
   * - 15.0*
     - Wave I antenatal corticosteroids
     - Baseline
-    - ``model13.0``
+    - ``model15.0``
     -
     - 
     - 
@@ -1482,8 +1482,8 @@ Default stratifications to all observers should include scenario and input draw.
     - `Model 11.1 neonatal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11.1_neonatal_checks.ipynb>`_ 
   * - 11.2
     - Check that draw numbers have been updated
-    - 
-    - 
+    - Looks good!
+    - `Model 11.2 notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11.2_maternal_checks.ipynb>`_
   * - 12.0
     - * Confirm neonatal all-cause mortality rates match expectation
       * Confirm LBWSG risk effects are working as expected
@@ -1508,10 +1508,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Duplicate hemoglobin exposure draws
-    - Rather than using the `draw numbers specified in this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`_ and `discussed in this slack thread <https://ihme.slack.com/archives/C02944X688L/p1750973265492859>`_, the model is using randomly generated draws that include duplicate hemoglobin exposure values (346 and 446)
-    - Update draw sampling strategy to align with linked PR
-    - Model 11.2
   * - Miscalibration of neonatal mortality ratios
     - This is looking largely resolved in model 8.1, but we will wait to confirm once the LBWSG RR capping strategy is updated
     - Update LBWSG RR caps and PAF calculation strategy for model 12.0
