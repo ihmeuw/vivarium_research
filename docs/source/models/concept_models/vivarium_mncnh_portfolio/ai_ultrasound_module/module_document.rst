@@ -172,13 +172,18 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
     - Record to output A
     - 
   * - IV
-    -
-    -
-    -
+    - Sample random error for estimated gestational age
+    - GA error is normally distributed with mean 0 and standard
+      deviation depending on ultrasound type, as specified in the table
+      below
+    - See instructions in section `2.4.1 Calculation of estimated
+      gestational age`_ below
   * - V
     - Calculate estimated gestational age
-    - See instructions below and record to output B
-    -
+    - Add the random GA error from Action point IV to the gestational
+      age from the pregnancy module, and record to output B
+    - See instructions in section `2.4.1 Calculation of estimated
+      gestational age`_ below
   * - VI
     - Record :code:`believed_preterm` for believed preterm status
     - Record to output C
