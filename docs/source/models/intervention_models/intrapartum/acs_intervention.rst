@@ -164,7 +164,7 @@ of ACS for pregnant women and people at imminent risk of preterm delivery.
     - N/A
     - Value to be used in sim for lack of access to ACS (i.e. for both :math:`\text{RR_ACS_with_CPAP}` and :math:`\text{RR_ACS_without_CPAP}`, for more
       on why we have the assumption that :math:`\text{RR_ACS_with_CPAP} =  \text{RR_ACS_without_CPAP}`, please see the limitations section below.)
-  * - :math:`1/\text{RR}^\text{ACS}`
+  * - :math:`\text{RR}^\text{ACS}`
     - RR = 0.84 (95% CI 0.72-0.97). Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(0.84, 0.72, 0.97)`
     - [Oladapo-et-al-2020]_
     - 
