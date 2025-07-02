@@ -214,7 +214,7 @@ this document:
   * - * :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
       * `Special ordering of the categories for categorical variables`_
         (below)
-    - * ANC status
+    - * ANC attendance
   * - * :ref:`AI ultrasound module
         <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - * Ultrasound type (U)
