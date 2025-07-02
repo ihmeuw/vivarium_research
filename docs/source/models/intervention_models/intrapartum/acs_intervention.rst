@@ -171,8 +171,8 @@ of ACS for pregnant women and people at imminent risk of preterm delivery.
   * - mean_rr
     - :math:`\text{RR}^\text{no ACS} * (1 - p_\text{baseline coverage}) + p_\text{baseline_coverage}`
     - N/A
-    - Despite intervention eligibility criteria of CPAP availability and expected preterm status, we will use :math:`p_\text{baseline coverage}`
-      defined in the baseline coverage section above among all in-facility births (regardless of CPAP availability or expected preterm status) to calculate the mean_rr and PAF values
+    - We will use :math:`p_\text{baseline coverage}` defined in the baseline coverage section above among in-facility births with CPAP availability 
+      and preterm status to calculate the mean_rr and PAF values.
   * - PAF
     - (mean_rr - 1) / mean_rr
     - N/A
@@ -188,21 +188,21 @@ Assumptions and Limitations
   risk of preterm birth (i.e., expected to give birth in next 48 hours) that received intramuscular dexamethasone (6mg dosage) versus a placebo. 
   Both groups (test and control groups) in the trial had access to CPAP, so the effect size reported for ACS is specific to ACS in the presence of
   CPAP, rather than pertaining to the cumulative effect size of ACS and CPAP together. 
-    - We assume that ``(RR_ACS | CPAP) = (RR_ACS | no CPAP)``. This is because of the assumption that ACS affects RDS incidence while CPAP affects RDS 
-      case fatality, so by definition CPAP could not modify the effect of RDS under these assumptions it comes too late in the causal chain.
-    - We assume that ``(RR_CPAP | ACS) = (RR_CPAP | no ACS)`` despite the fact that ACS acts on outcomes that come earlier in the causal chain than CPAP,
-      and could thereby decrease the effect size of CPAP. 
-    - We assume that the observed reduction in neonatal deaths in this RCT are due to a decrease in incidence of respiratory distress. We currently 
-      use [Oladapo-et-al-2020]_'s RR value for early neonatal death, but could instead use their RR for severe respiratory distress at 24 hours, 
-      which is a significantly more impactful value (0.56, 0.37-0.85), however is not explicitly about mortality, which is what we are modeling. 
-      The RR for severe respiratory distress at 1 week is more similar to the value we currently use (0.81, 95% CI 0.37-0.85). 
-    - The effect size we are using from [Oladapo-et-al-2020]_ compares 
-    - This paper also reported a statistically significant effect on neonatal hypoglycemia incidence, but this conflicts with other literature findings 
-      (e.g. [Gyamfi-Bannerman-et-al-2023]_), so we are not including this effect. 
-    - [Oladapo-et-al-2020]_ also reports country-specific RR values, including Pakistan and Nigeria. For now however, we use the mean value across the 
-      6 countries included in their analysis, for simplicity. Lastly, [Oladapo-et-al-2020]_ provides an effect size for ACS on early preterm birth 
-      (26-33 weeks of gestation), but if we want to specifically model the impact on late preterm birth (34-36 weeks of gestation) we could use the 
-      estimates reported in [Gyamfi-Bannerman-et-al-2023]_ which looked at the use of betamethasone instead of dexamethasone.
+- We assume that ``(RR_ACS | CPAP) = (RR_ACS | no CPAP)``. This is because of the assumption that ACS affects RDS incidence while CPAP affects RDS 
+  case fatality, so by definition CPAP could not modify the effect of RDS under these assumptions it comes too late in the causal chain.
+- We assume that ``(RR_CPAP | ACS) = (RR_CPAP | no ACS)`` despite the fact that ACS acts on outcomes that come earlier in the causal chain than CPAP,
+  and could thereby decrease the effect size of CPAP. 
+- We assume that the observed reduction in neonatal deaths in this RCT are due to a decrease in incidence of respiratory distress. We currently 
+  use [Oladapo-et-al-2020]_'s RR value for early neonatal death, but could instead use their RR for severe respiratory distress at 24 hours, 
+  which is a significantly more impactful value (0.56, 0.37-0.85), however is not explicitly about mortality, which is what we are modeling. 
+  The RR for severe respiratory distress at 1 week is more similar to the value we currently use (0.81, 95% CI 0.37-0.85). 
+- The effect size we are using from [Oladapo-et-al-2020]_ compares 
+- This paper also reported a statistically significant effect on neonatal hypoglycemia incidence, but this conflicts with other literature findings 
+  (e.g. [Gyamfi-Bannerman-et-al-2023]_), so we are not including this effect. 
+- [Oladapo-et-al-2020]_ also reports country-specific RR values, including Pakistan and Nigeria. For now however, we use the mean value across the 
+  6 countries included in their analysis, for simplicity. Lastly, [Oladapo-et-al-2020]_ provides an effect size for ACS on early preterm birth 
+  (26-33 weeks of gestation), but if we want to specifically model the impact on late preterm birth (34-36 weeks of gestation) we could use the 
+  estimates reported in [Gyamfi-Bannerman-et-al-2023]_ which looked at the use of betamethasone instead of dexamethasone.
 - We assume that the Health Systems estimates processed from various Ethiopian healthcare assessments (see Baseline Coverage section
   for more details) provide an accurate overview of ACS use in our locations of interest.
 - We assume that baseline coverage for ACS in home births is 0% (given the WHO 2022 recommendation that ACS only be administered where adequate
