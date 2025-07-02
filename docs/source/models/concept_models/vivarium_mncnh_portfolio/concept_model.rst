@@ -730,6 +730,14 @@ Default stratifications to all observers should include scenario and input draw.
       * Misoprostol coverage
       * Delivery facility
     - 
+  * - 8. AI ultrasound observer: Count live births and stillbirths
+    - * Delivery facility type
+      * Birth outcome (live or still)
+      * Preterm status
+      * Believed preterm status
+      * ANC attendance
+      * Ultrasound type
+    -
 
 .. todo::
 
@@ -1166,13 +1174,24 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default, note that we would like the 4-category ANC attendance variable observed
-  * - 15.0*
-    - Wave I antenatal corticosteroids
+  * - 15.0
+    - :ref:`Delivery facility choice model
+      <2024_facility_model_vivarium_mncnh_portfolio>`, including updates
+      to the :ref:`AI Ultrasound module
+      <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Baseline
     - ``model15.0``
+    - Default
+    - Default
+    - AI Ultrasound observer added in this run and to be included in all
+      future runs
+  * - 16.0*
+    - Wave I antenatal corticosteroids
+    - Baseline
+    - ``model16.0``
     -
-    - 
-    - 
+    -
+    -
 
 .. note:: 
 
@@ -1500,6 +1519,29 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm AI ultrasound exposure categories is consistent with ANC attendance categories (ex: no ultrasound coverage if no ANC coverage)
     - 
     - 
+  * - 15.0
+    - * Validate rates of preterm birth given in-facility status against
+        targets (targets are calculated by facility choice code)
+      * Validate rates of in-facility delivery given ANC status against
+        targets (targets are calculated by facility choice code)
+      * Verify rates of in-facility delivery match GBD covariate
+      * Verify preterm birth rates (stratified by sex and overall) match
+        GBD (using LBWSG data and sex ratios)
+      * Verify rates of ANC1 match GBD covariate
+      * Verify rates of BEmONC vs. CEmONC match input data on
+        :ref:`facility choice model page
+        <2024_facility_model_vivarium_mncnh_portfolio>`
+      * Verify rates of standard ultrasound given ANC1 status match
+        baseline coverage from :ref:`AI Ultrasound module
+        <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+      * Validate observed probabilities of IFD given believed preterm
+        status against observed probabilities in facility choice nanosim
+      * Validate confusion matrix of preterm status vs. believed preterm
+        status against facility choice nanosim
+      * Validate P( believed preterm | preterm status, ultrasound type)
+        against facility choice nanosim
+    -
+    -
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
