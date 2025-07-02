@@ -732,6 +732,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
   * - 8. AI ultrasound observer: Count live births and stillbirths
     - * Delivery facility type
+      * Sex of infant
       * Birth outcome (live or still)
       * Preterm status
       * Believed preterm status
