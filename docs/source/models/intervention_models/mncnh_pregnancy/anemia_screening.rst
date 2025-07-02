@@ -143,7 +143,7 @@ Validation and Verification Criteria
 The following V&V criteria should be met: 
 
 - The coverage of each intervention (hemoglobin screening and ferritin screening) by scenario should match the proportions outlined in the :ref:`Scenarios section of the MNCNH
-  Portfolio concept model <_mncnh_portfolio_3.1>`
+  Portfolio concept model <mncnh_portfolio_3.1>`
 - There should be a sensitivity (% of true positives that test positive) of 85% and specifity (% of true negatives that test negative) of 80% for those that received hemoglobin screenings.
 - There should be the expected proportion of simulants with low and high ferritin status for those that received ferritin screenings.
 
