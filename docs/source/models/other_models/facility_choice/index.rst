@@ -468,8 +468,9 @@ description of how to assign IFD status.
   attendance information to determine whether simulants get a standard
   ultrasound in the 1st trimester or in later pregnancy, which affects
   the accuracy of GA estimation. Making these changes will require
-  updating the facility choice causal optimization code and the final
-  outputs used in the Vivarium simulation.
+  updating the `facility choice causal optimization code
+  </facility_choice_>`_ and the final outputs used in the Vivarium
+  simulation.
 
 To be more explicit about how the ordered categories and propensities
 work in code: If the categories are ordered from highest risk to lowest
@@ -670,12 +671,14 @@ set of parameters for the Gaussian copula and the causal conditional
 probabilities.
 It will be described in detail here.
 
-Code for running the causal optimization model can be found in the `/facility_choice/
-<https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice>`_
-folder in the `MNCNH Portfolio research repo
+Code for running the causal optimization model can be found in the
+`/facility_choice`_ folder in the `MNCNH Portfolio research repo
 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main>`_.
 The original writeup describing the idea behind the optimization is `on
 Sharepoint`__.
+
+.. _/facility_choice:
+  https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
 
 __ `delivery facility strategy document`_
 .. _delivery facility strategy document:
