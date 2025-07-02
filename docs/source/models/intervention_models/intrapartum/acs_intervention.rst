@@ -163,7 +163,7 @@ of ACS for pregnant women and people at imminent risk of preterm delivery.
     - :math:`1/\text{RR}^\text{ACS}`
     - N/A
     - Value to be used in sim
-  * - :math:`1/\text{RR}^\text{ACS}`
+  * - :math:`\text{RR}^\text{ACS}`
     - RR = 0.84 (95% CI 0.72-0.97). Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(0.84, 0.72, 0.97)`
     - [Oladapo-et-al-2020]_
     - 
