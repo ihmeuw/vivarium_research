@@ -691,6 +691,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Delivery facility
       * Azithromycin coverage
       * Misoprostol coverage 
+      * Hemoglobin screening coverage
+      * Ferritin screening coverage
     - 
   * - 2. Births (this observer includes ALL pregnancy outcomes, including partial term pregnancies that may not typically be considered "births")
     - * Pregnancy outcome
@@ -728,7 +730,13 @@ Default stratifications to all observers should include scenario and input draw.
       * Ultrasound coverage
       * Azithromycin coverage
       * Misoprostol coverage
+      * Hemoglobin screening coverage
+      * Ferritin screening coverage
+      * True hemoglobin exposure (dichotomous,  'yes' if truly low hemoglobin and 'no' if truly adequate hemoglobin)
+      * Test hemoglobin exposure (dichotomous, 'yes' if tested low hemoglobin,'no' if tested adequate hemoglobin, N/A if not tested)
+      * Ferritin status (dichotomous, 'yes' if low ferritin, 'no' if adequate ferritin, N/A if not tested)
       * Delivery facility
+
     - 
 
 .. todo::
