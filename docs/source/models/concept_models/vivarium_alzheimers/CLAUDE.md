@@ -236,6 +236,8 @@ All outputs stratified by: age group (5-year bands), sex, location, diagnosis st
 - Preclinical AD progression probabilities and durations
 - Stage-specific duration estimates for calibration
 - Testing uptake patterns by demographics and location
+- **Stage-specific cost profiles** - NEW DATA CHALLENGE: Limited data on costs by disease state, especially preclinical AD
+- **Existing AD testing timing and costs** - Need data strategy for current CSF/PET diagnostic pathways
 
 **Modeling Decision Points:**
 - Use population forecasting vs. FHS integration for 80-year horizon
@@ -247,4 +249,6 @@ All outputs stratified by: age group (5-year bands), sex, location, diagnosis st
 - Finalize population forecasting approach
 - Obtain Jaimie Steinmetz dementia subtype estimates  
 - Literature review for preclinical AD progression parameters
+- **Develop data strategy for stage-specific cost modeling** - especially challenging for preclinical AD costs
+- **Design approach for existing testing pathway costs/timing** - CSF, PET diagnostic workflow modeling
 - Coordinate with Amy L's team on economic methodology alignment
