@@ -50,7 +50,26 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
 2.1 Module Diagram
 ----------------------
 
-.. image:: ai_ultrasound_module_diagram.png
+.. image:: ai_ultrasound_module_diagram.drawio.svg
+
+.. todo::
+
+  Update strategy to use all four categories of ANC attendance instead
+  of treating it as a binary variable. Specifically, change ultrasound
+  type to a 4-category variable by splitting the "standard ultrasound"
+  category into 2 categories, "standard ultrasound in 1st trimester" and
+  "standard ultrasound in later pregnancy", as outlined in this `PR
+  comment
+  <https://github.com/ihmeuw/vivarium_research/pull/1677#discussion_r2138982719>`__,
+  and use the data in this `paper referenced below
+  <https://obgyn.onlinelibrary.wiley.com/doi/10.1002/uog.15894>`__ to
+  have different standard deviations for GA estimation error based on
+  ultrasound timing.
+
+  Note that making these changes will also require updating and
+  recalibrating the :ref:`facility choice model
+  <2024_facility_model_vivarium_mncnh_portfolio>`.
+
 
 2.2 Module Inputs
 ---------------------
@@ -65,10 +84,13 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
   * - ANC attendance
     - :ref:`Antenatal care module <2024_vivarium_mncnh_portfolio_anc_module>`
     - Decision node 1
-    - True/False value for each simulant
+    - 4-category exposure variable.  As described in the :ref:`facility
+      choice model document
+      <2024_facility_model_vivarium_mncnh_portfolio>`, ANC attendance is
+      correlated with other model variables.
   * - Gestational age
     - :ref:`Pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    - Action point IV
+    - Action point V
     - Point value in days
 
 .. todo::
@@ -87,12 +109,11 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
     - Note
   * - 1
     - Attends ANC?
-    - Input from antenatal care module (True/False for each simulant)
-    - As described in the :ref:`facility choice model document
-      <2024_facility_model_vivarium_mncnh_portfolio>`, the ANC
-      propensity is correlated with other propensities, and the
-      categories must be ordered False < True when sampling ANC
-      attendance from its propensity
+    - Decide "No" if ANC attendance
+      category is *none*; decide "Yes" otherwise
+    - ANC attendance has four exposure categories: The *none* category
+      corresponds to no ANC attendance, while the other three categories
+      indicate some ANC attendance
   * - 2
     - Receives ultrasound?
     - Scenario-dependent variable: see the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values (and baseline coverage section below for baseline coverage)
@@ -101,6 +122,11 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
     - Ultrasound type?
     - Scenario-dependent variable: :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values (and baseline coverage section below for baseline coverage)
     - Possible values are "none," "standard," and "AI-assisted"
+  * - 4
+    - Is estimated gestational age < 37 weeks?
+    - "Yes" or "No" depending on the estimated gestational age
+      calculated in Action point V
+    -
 
 2.3.1: Baseline coverage
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -146,15 +172,26 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
     - Record to output A
     - 
   * - IV
-    - Calculate estimated gestational age
-    - See instructions below and record to output B
-    -
+    - Sample random error for estimated gestational age
+    - GA error is normally distributed with mean 0 and standard
+      deviation depending on ultrasound type, as specified in the table
+      below
+    - See instructions in section `2.4.1 Calculation of estimated
+      gestational age`_ below
   * - V
-    - Record believed preterm status
-    - Record to output C: *believed preterm* if estimated gestational
-      age < 37 weeks; *believed term* if estimated gestational age is
-      37+ weeks
-    -
+    - Calculate estimated gestational age
+    - Add the random GA error from Action point IV to the gestational
+      age from the pregnancy module, and record to output B
+    - See instructions in section `2.4.1 Calculation of estimated
+      gestational age`_ below
+  * - VI
+    - Record :code:`believed_preterm` for believed preterm status
+    - Record to output C
+    - corresponds to estimated gestational age < 37 weeks
+  * - VII
+    - Record :code:`believed_term` for believed preterm status
+    - Record to output C
+    - corresponds to estimated gestational age 37+ weeks
 
 2.4.1 Calculation of estimated gestational age
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
