@@ -249,7 +249,7 @@ defined as a module input in a subsequent row.
         * Hemoglobin at birth
       - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
-        * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
+        * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
       - New wave II module
     * - :ref:`Pregnancy II <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       - * LBWSG category propensity
