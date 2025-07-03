@@ -90,7 +90,7 @@ The relative risk curves for maternal disorders affected outcomes in GBD shared 
 
 .. image:: maternal_disorders_risk_curve.png
 
-The hemoglobin team has also estimated risk effects for several additional outcomes, which are not available in GBD shared functions due to complications and outstanding work needed in order for the risk effects to be compatible with the existing GBD structure related to the LBWSG risk factor and neonatal disorders. A list of these affected outcomes is shown below:
+The hemoglobin team has also estimated risk effects for several additional outcomes. A list of these affected outcomes is shown below and risk curve values for each of these outcomes can be found at :code:`/mnt/team/anemia/pub/bop/sim_studies/`.
 
 - Low birth weight (Operationalized as categorical for <2,500 grams and additional severities)
 
@@ -105,6 +105,8 @@ The hemoglobin team has also estimated risk effects for several additional outco
 - Neonatal all-cause mortality
 
 - Stillbirth
+
+PAFs and attributable burden for hemoglobin on causes affected by LBWSG as mediated through LBWSG es can be pulled using shared functions with release ID 33 and burdenator ID 393 (`as tracked here <https://hub.ihme.washington.edu/spaces/GBDdirectory/pages/229280354/GBD+2023+PAF+Burdenator+SEV+Calculator+Tracking>`_). These PAFs were calculated `the custom LBWSG PAF calculation <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/custom_pafs.html#mortality-paf-calculation-for-subcauses-of-the-aggregate-lbwsga-outcome>`_ and they did not consider the direct (unmediated) effect of hemoglobin on neonatal sepsis.
 
 Risk curves for selected neonatal outcomes are shown below:
 
