@@ -50,7 +50,35 @@ This module initializes a maternal age and determines basic pregnancy outcome in
 2.1 Module Diagram
 ----------------------
 
-There is no diagram necessary for the pregnancy module. Instead, all instructions are detailed on the :ref:`MNCNH portfolio pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`. This document also contains a list of model assumptions and limitations as well as verification and validation criteria.
+.. graphviz::
+
+    digraph pregnancy {
+      rankdir = LR;
+      p [label="pregnant"]
+      ft [label="full term\npregnancy*"]
+      pt [label="partial term\npregnancy"]
+      data [label="*assign sex,\ngestational age,\nand birthweight\n for full term\npregnancies", shape=box]
+
+      ancipm [label="antenatal & \nintrapartum\nmodels + \nmaternal\ndisorders", shape=box, style=dashed]
+      birth [label="full term\nbirth"]
+      livebirth [label="live\nbirth"]
+      stillbirth [label="stillbirth"]
+      {rank=same; ft; pt; data}
+
+      p -> ft 
+      p -> pt 
+      ft -> ancipm 
+      ancipm -> birth 
+      birth -> livebirth
+      birth -> stillbirth
+    }
+
+.. note:: 
+
+  This diagram does not include modification by other modules (e.g., effect of antenatal interventions on GA and BW).
+
+All instructions are detailed on the :ref:`MNCNH portfolio pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`. This document also 
+contains a list of model assumptions and limitations as well as verification and validation criteria.
 
 The inputs and outputs for this module are summarized in the tables below. 
 
