@@ -143,5 +143,5 @@ Starting in wave II of the simulation, there will be variables that influence pr
     - * Birth outcome
       * Gestational age
       * Birthweight
-    - See the :ref:`IV iron intervention document <intervention_iv_iron_antenatal>`
-    - NOTE: as of 4/9/2025 the IV iron intervention model document is not updated and ready for implementation
+    - See the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>`
+    - 
