@@ -246,7 +246,7 @@ Assumptions and Limitations
   - If more suitable baseline coverage data for CPAP availability at BEmONC and CEmONC for Nigeria or Pakistan, we should use that data instead and update 
     this documentation accordingly.
   - If we find literature evidence or otherwise find reason to model an effect modification of ACS on CPAP (i.e. if we determine ``(RR_CPAP | ACS) =/= (RR_CPAP | no ACS)``),
-    we will need to adjust our modeling strategy and current assumption that ``(RR_CPAP | ACS) =?= (RR_CPAP | no ACS)``.
+    we will need to adjust our modeling strategy and current assumption that ``(RR_CPAP | ACS) == (RR_CPAP | no ACS)``.
 
 Validation and Verification Criteria
 ------------------------------------
