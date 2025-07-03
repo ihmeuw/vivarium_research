@@ -73,6 +73,9 @@ This module initializes a maternal age and determines basic pregnancy outcome in
       birth -> stillbirth
     }
 
+.. note:: 
+
+  This diagram does not include modification by other modules (e.g., antenatal interventions effect on GA and BW).
 
 All instructions are detailed on the :ref:`MNCNH portfolio pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`. This document also 
 contains a list of model assumptions and limitations as well as verification and validation criteria.
