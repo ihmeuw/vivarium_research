@@ -58,25 +58,19 @@ This module initializes a maternal age and determines basic pregnancy outcome in
       ft [label="full term\npregnancy*"]
       pt [label="partial term\npregnancy"]
       data [label="*assign sex,\ngestational age,\nand birthweight\n for full term\npregnancies", shape=box]
-      // anc [label="antenatal\nmodel", shape=box, style=dashed]
-      // ipm [label="intrapartum\nmodel", shape=box, style=dashed]
+
       ancipm [label="antenatal & \nintrapartum\nmodels + \nmaternal\ndisorders", shape=box, style=dashed]
       birth [label="full term\nbirth"]
       livebirth [label="live\nbirth"]
       stillbirth [label="stillbirth"]
       {rank=same; ft; pt; data}
 
-      p -> ft [label="1 - ptf"]
-      p -> pt [label="ptf"]
-      ft -> ancipm [label=1, style=dashed]
-      ancipm -> birth [label=1]
-      // anc -> ipm
-      // ipm -> birth
-      birth -> livebirth [label= "1 / (1 + sbr)"]
-      birth -> stillbirth [label= "sbr / (1 + sbr)"]
-      // a -- b
-      // a -- c
-      // a -- d
+      p -> ft 
+      p -> pt 
+      ft -> ancipm 
+      ancipm -> birth 
+      birth -> livebirth
+      birth -> stillbirth
     }
 
 
