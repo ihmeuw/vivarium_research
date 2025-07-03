@@ -171,8 +171,8 @@ of ACS for pregnant women and people at imminent risk of preterm delivery.
   * - mean_rr
     - :math:`\text{RR}^\text{no ACS} * (1 - p_\text{baseline coverage}) + p_\text{baseline_coverage}`
     - N/A
-    - We will use :math:`p_\text{baseline coverage}` defined in the baseline coverage section above among in-facility births with CPAP availability 
-      and preterm status to calculate the mean_rr and PAF values.
+    - We will use :math:`p_\text{baseline coverage}` defined in the baseline coverage section above for **among the eligible population only** (i.e., in-facility births 
+      with CPAP availability and preterm status) to calculate the mean_rr and PAF values.
   * - PAF
     - see below
     - see below
@@ -238,7 +238,6 @@ Assumptions and Limitations
   use [Oladapo-et-al-2020]_'s RR value for early neonatal death, but could instead use their RR for severe respiratory distress at 24 hours, 
   which is a significantly more impactful value (0.56, 0.37-0.85), however is not explicitly about mortality, which is what we are modeling. 
   The RR for severe respiratory distress at 1 week is more similar to the value we currently use (0.81, 95% CI 0.37-0.85). 
-- The effect size we are using from [Oladapo-et-al-2020]_ compares 
 - This paper also reported a statistically significant effect on neonatal hypoglycemia incidence, but this conflicts with other literature findings 
   (e.g. [Gyamfi-Bannerman-et-al-2023]_), so we are not including this effect. 
 - [Oladapo-et-al-2020]_ also reports country-specific RR values, including Pakistan and Nigeria. For now however, we use the mean value across the 
