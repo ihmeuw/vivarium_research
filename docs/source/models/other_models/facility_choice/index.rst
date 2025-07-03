@@ -214,7 +214,7 @@ this document:
   * - * :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
       * `Special ordering of the categories for categorical variables`_
         (below)
-    - * ANC status
+    - * ANC attendance
   * - * :ref:`AI ultrasound module
         <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - * Ultrasound type (U)
@@ -436,7 +436,15 @@ for each sex.**
   <2019_risk_exposure_lbwsg>`.
 
 **We will also order the ANC and IFD propensities from highest to lowest
-risk: "no ANC" < "some ANC"; and "home birth" < "in-facility birth".**
+risk:**
+
+ANC attendance categories
+  no ANC < ANC in later pregnancy < ANC in 1st trimester <
+  ANC in 1st trimester and later pregnancy
+
+IFD status categories
+  home birth < in-facility birth
+
 These orderings must be used when initializing simulants' ANC status and
 IFD status from the corresponding (correlated) propensities
 :math:`u_\text{ANC}` and :math:`u_\text{IFD}`. See the :ref:`Antenatal
@@ -444,6 +452,25 @@ care attendance module <2024_vivarium_mncnh_portfolio_anc_module>` for
 more details on assigning ANC status; see the `Causal conditional
 probabilities for in-facility delivery`_ section below for an explicit
 description of how to assign IFD status.
+
+.. note::
+
+  The facility choice causal optimization model has not yet been updated
+  to make use of all four ANC attendance categories or the corresponding
+  additional detail for ultrasound timing. Accordingly, the
+  :ref:`AI-ultrasound module
+  <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>` currently groups
+  the last three ANC categories together, effectively making ANC
+  attendance a dichotomous variable with categories ordered "no ANC" <
+  "some ANC".
+
+  In a future version of the model, we plan to use the more detailed ANC
+  attendance information to determine whether simulants get a standard
+  ultrasound in the 1st trimester or in later pregnancy, which affects
+  the accuracy of GA estimation. Making these changes will require
+  updating the `facility choice causal optimization code
+  </facility_choice_>`_ and the final outputs used in the Vivarium
+  simulation.
 
 To be more explicit about how the ordered categories and propensities
 work in code: If the categories are ordered from highest risk to lowest
@@ -644,12 +671,14 @@ set of parameters for the Gaussian copula and the causal conditional
 probabilities.
 It will be described in detail here.
 
-Code for running the causal optimization model can be found in the `/facility_choice/
-<https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice>`_
-folder in the `MNCNH Portfolio research repo
+Code for running the causal optimization model can be found in the
+`/facility_choice`_ folder in the `MNCNH Portfolio research repo
 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main>`_.
 The original writeup describing the idea behind the optimization is `on
 Sharepoint`__.
+
+.. _/facility_choice:
+  https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
 
 __ `delivery facility strategy document`_
 .. _delivery facility strategy document:
