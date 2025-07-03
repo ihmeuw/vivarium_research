@@ -34,11 +34,13 @@ Baseline Coverage Data
 Vivarium Modeling Strategy
 --------------------------
 
+The IV iron intervention is included in the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` of in the pregnancy component of the :ref:`MNCNH porfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>`.
+
 We will model the following eligibility for the antenatal IV iron intervention:
 
-#. Attends later prenancy ANC visit
-#. Test hemoglobin exposure of less than 100 grams per liter
-#. Tests low ferritin exposure
+#. Attends later prenancy ANC visit (according to the :ref:`antenatal care attendance module <2024_vivarium_mncnh_portfolio_anc_module>`)
+#. Test hemoglobin exposure of less than 100 grams per liter (according to the :ref:`anemia screening intervention <anemia_screening>` result tracked in the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`)
+#. Tests low ferritin exposure (according to the :ref:`anemia screening intervention <anemia_screening>` result tracked in the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`)
 
 The IV iron intervention has a direct effect on hemoglobin exposure in pregnancy and indirect effects 100% mediated through hemoglobin on birthweight, gestational age, and stillbirth. The relationship between hemoglobin and birthweight, gestational age, and stillbirth is summarized on the :ref:`hemoglobin risk effects document <>`. This page contains information on the effects specific to IV iron as mediated through hemoglobin.
 
