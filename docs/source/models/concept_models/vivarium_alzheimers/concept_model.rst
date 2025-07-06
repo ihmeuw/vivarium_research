@@ -43,10 +43,12 @@ Alzheimer's Disease Early Detection Simulation
    :maxdepth: 1
    :hidden:
    
-   blood_biomarker_testing
-   intervention_treatment
-   care_pathways
-   economic_impact
+   data_challenges_note
+   alzheimers_disease_model/module_document
+   population_model/module_document
+   testing_diagnosis_model/module_document
+   treatment_model/module_document
+   economic_impact_model/module_document
 
 .. list-table:: Abbreviations
   :header-rows: 1
@@ -71,7 +73,7 @@ Alzheimer's Disease Early Detection Simulation
 1.0 Project Overview
 +++++++++++++++++++++
 
-This project leverages IHME's simulation capabilities to quantify health and economic impacts associated with early detection of pre-clinical Alzheimer's disease. The simulation evaluates scenarios involving blood-based biomarker (BBBM) testing and hypothetical interventions that prevent, delay, or slow disease progression.
+This project leverages IHME's simulation capabilities to quantify health and economic impacts associated with early detection and treatment of pre-clinical Alzheimer's disease. The simulation evaluates scenarios involving blood-based biomarker (BBBM) testing and hypothetical interventions that prevent, delay, or slow disease progression.
 
 **Project Aims:**
 
@@ -80,27 +82,24 @@ This project leverages IHME's simulation capabilities to quantify health and eco
 - Provide evidence for early detection strategies and disease-modifying therapies
 
 **Funder Information:**
-Client Services Unit project with focus on health and economic impact assessment across 10 priority locations.
-
-**Similar Analyses:**
-This builds upon existing Vivarium disease progression models while incorporating novel biomarker testing and early intervention components.
+IHME Client Services Unit (CSU) project with focus on health and economic impact assessment across 10 locations.
 
 2.0 Modeling Aims and Objectives
 +++++++++++++++++++++++++++++++++
 
-The primary goal is to simulate the impact of early detection strategies for Alzheimer's disease using blood-based biomarkers and subsequent interventions. The model follows established microsimulation approaches for dementia research [Green2017]_ and evaluates three key scenarios:
+The primary goal is to simulate the impact of early detection strategies for Alzheimer's disease using blood-based biomarkers and subsequent interventions. The model follows established microsimulation approaches for dementia research and evaluates three key scenarios:
 
 1. **Reference Scenario:** Present-day conditions with minimal BBBM uptake or disease-modifying therapies, including current cerebrospinal fluid (CSF) and amyloid-positron emission tomography (PET) diagnostic pathways
 2. **Alternative Scenario 1:** Introduction of BBBM testing for at-risk preclinical populations (no intervention)
 3. **Alternative Scenario 2:** BBBM testing plus hypothetical intervention that prevents, delays, or slows disease progression
 
-The simulation tracks simulants through health states from age 30 to 120 years (or death), capturing progression through preclinical AD, mild cognitive impairment, and various stages of clinical Alzheimer's disease. Disease progression modeling follows established approaches with approximately 15-year spans from early pathology to severe dementia [Jedynak2012]_.
+The simulation tracks simulants through health states from age 30 to 120 years (or death), capturing progression through preclinical AD, mild cognitive impairment, and various stages of clinical Alzheimer's disease.
 
-3.0 Concept Model and Submodels
-++++++++++++++++++++++++++++++++
+3.0 Core Model Components
++++++++++++++++++++++++++
 
-3.1 Core Disease Progression Model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3.1 Disease Progression Framework
+---------------------------------
 
 .. graphviz::
 
@@ -122,186 +121,94 @@ The simulation tracks simulants through health states from age 30 to 120 years (
       moderate -> severe [label="i_severe"];
   }
 
-The core disease model represents Alzheimer's disease progression through six distinct health states, following established Markov modeling approaches for neurodegenerative diseases [Sukkar2013]_:
+The core disease model represents Alzheimer's disease progression through six distinct health states, following established Markov modeling approaches. Disease progression spans approximately 15 years from early pathology to severe dementia.
 
-.. list-table:: Health State Definitions
-  :widths: 15 30
-  :header-rows: 1
-
-  * - State
-    - Definition
-  * - Susceptible
-    - Individual with no AD pathology, normal cognitive function
-  * - Preclinical AD
-    - Biomarker-positive for AD pathology but cognitively normal
-  * - MCI due to AD
-    - Mild cognitive impairment attributable to Alzheimer's disease
-  * - Mild AD
-    - Early-stage dementia with functional impairment
-  * - Moderate AD
-    - Progressive cognitive and functional decline
-  * - Severe AD
-    - Advanced dementia requiring full-time care
-
-.. list-table:: Transition Rate Definitions
-  :widths: 10 20 30
-  :header-rows: 1
-
-  * - Symbol
-    - Name
-    - Definition
-  * - i_preclinical
-    - Preclinical incidence rate
-    - Rate at which individuals develop AD biomarker positivity
-  * - i_mci
-    - Progression to MCI rate
-    - Rate of progression from preclinical to MCI due to AD
-  * - i_mild
-    - Progression to mild AD rate
-    - Rate of progression from MCI to mild dementia
-  * - i_moderate
-    - Progression to moderate AD rate
-    - Rate of progression from mild to moderate AD
-  * - i_severe
-    - Progression to severe AD rate
-    - Rate of progression from moderate to severe AD
-
-3.2 Blood-Based Biomarker Testing Model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. graphviz::
-
-  digraph biomarker_testing {
-      rankdir = TD;
-      node [shape=box];
-      
-      eligible [label="Eligible Population\n(Age 30-44)"];
-      
-      // Testing modalities
-      bbbm_test [label="Blood Biomarker Test\n5% uptake\n95% sens, 90% spec"];
-      csf_test [label="CSF Test\n(Reference scenario)\nLower uptake"];
-      pet_test [label="Amyloid-PET\n(Reference scenario)\nLowest uptake"];
-      
-      // Test outcomes
-      positive [label="Test Positive"];
-      negative [label="Test Negative"];
-      diagnosed [label="Diagnosed\nPreclinical AD"];
-      
-      // Correlation tracking
-      correlation [label="Test Correlation\nBlood: 75-85%\nCSF: 70-80%\nPET: 85-90%"];
-      
-      eligible -> bbbm_test [label="Alternative scenarios"];
-      eligible -> csf_test [label="All scenarios"];
-      eligible -> pet_test [label="All scenarios"];
-      
-      bbbm_test -> positive;
-      csf_test -> positive;
-      pet_test -> positive;
-      
-      bbbm_test -> negative;
-      csf_test -> negative;
-      pet_test -> negative;
-      
-      positive -> diagnosed [label="Direct diagnosis"];
-      positive -> correlation [label="Track for\nrepeat testing"];
-  }
-
-The biomarker testing component models multiple diagnostic modalities:
-
-- **Eligibility:** Population aged 30-44 years
-- **Blood Biomarker Testing (Alternative scenarios):** 5% annual uptake, 95% sensitivity, 90% specificity
-- **CSF Testing (All scenarios):** Lower uptake rates, established diagnostic pathway
-- **Amyloid-PET Testing (All scenarios):** Lowest uptake, highest cost, specialized centers
-- **Test Correlation:** Long-term correlation patterns vary by modality (blood: 75-85%, CSF: 70-80%, PET: 85-90%)
-- **Diagnosis Pathway:** Positive tests lead directly to preclinical AD diagnosis (includes false positives)
-
-3.3 Intervention and Treatment Model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The intervention model applies to individuals with confirmed preclinical AD diagnosis:
-
-.. list-table:: Intervention Parameters
-  :widths: 15 15 30
-  :header-rows: 1
-
-  * - Parameter
-    - Value
-    - Description
-  * - Treatment Initiation
-    - 80%
-    - Probability of starting treatment upon diagnosis
-  * - Effectiveness
-    - 20% reduction
-    - Reduction in disease progression rates based on lecanemab trials [vanDyck2023]_
-  * - Discontinuation
-    - 10% annually
-    - Rate of treatment discontinuation per year
-
-**Mechanism:** Treatment reduces all progression rates (i_mci, i_mild, i_moderate, i_severe) by 20% for adherent individuals. This effectiveness estimate is derived from recent clinical trials of disease-modifying therapies [vanDyck2023]_, while the economic framework follows established cost-effectiveness methodologies [ICER2023]_.
-
-4.0 Data Requirements and Sources
-+++++++++++++++++++++++++++++++++
-
-4.1 Population Forecasting Strategy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Demographic Challenge:** The 80-year simulation period (2020-2100) with simulants aged 30-120 requires fertility modeling to maintain realistic age structures. Unlike cardiovascular disease models that track younger cohorts only, this analysis must model complete population dynamics.
-
-**Solution:** Population-based forecasting is sufficient because age- and sex-specific Alzheimer's disease rates show minimal temporal trends (GBD Compare analysis validates stable incidence patterns). This approach avoids the complexity of Future Health Scenarios integration while maintaining accuracy.
-
-**Data Needs:**
-- Forecasted fertility rates for all 10 locations through 2100
-- Age-specific population projections by sex and location
-- Migration patterns affecting demographic composition
-
-4.2 Alzheimer's-Specific Cause Definition  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**GBD Data Limitation:** Current estimates combine "Alzheimer's and other dementias," requiring separation for disease-specific modeling.
-
-**Evidence Base:** Alzheimer's disease represents 60-80% of dementia cases, with variation by age and sex groups. IHME research by Jaimie Steinmetz on clinical dementia subtypes provides refined estimates.
-
-**Implementation:** Create custom cause definition distinguishing Alzheimer's disease from other dementias. This separation affects all downstream modeling of progression rates, healthcare utilization, and economic impacts.
-
-4.3 Preclinical Disease Definition
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Critical Modeling Decision:** Define the population that tests positive on blood-based biomarkers and their progression probability to clinical Alzheimer's disease.
-
-**Approach:** Back-calculate preclinical population size from established clinical progression patterns. Well-documented research exists on preclinical progression rates and biomarker correlations.
-
-**Calibration Target:** Align with GBD prevalence data by disease severity while maintaining realistic durations between disease stages.
-
-4.4 Core Epidemiological Parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Primary Data Needs:**
-
-- Alzheimer's-specific incidence, prevalence, and mortality rates (separate from "Alzheimer's and other dementias")
-- Duration of each health state and progression rates between states
+**Key Features:**
+- Six-state progression model (Susceptible → Preclinical AD → MCI → Mild → Moderate → Severe AD)
 - Age-, sex-, and location-specific transition rates
-- Healthcare utilization data by disease stage (see :ref:`Care Pathways <alzheimers_care_pathways>` for detailed requirements)
+- Mortality integration at each stage
+- ~15-year progression span from preclinical to severe stages
 
-**Key Questions for CSU:**
+3.2 Testing and Diagnosis Framework
+-----------------------------------
 
-- Availability of Alzheimer's-only forecasts vs. combined dementia estimates
-- Granularity of available epidemiological data (incidence, prevalence, CSMR vs. DALYs only)
-- State duration estimates for model calibration
+The testing framework incorporates both existing diagnostic methods and blood-based biomarker screening:
 
-4.2 Intervention Parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Blood-Based Biomarker Testing:**
+- Target population: Ages 30-44 years
+- 5% annual uptake rate
+- 95% sensitivity, 90% specificity
+- Direct pathway to preclinical AD diagnosis
 
-**Biomarker Testing:**
+**Existing Diagnostic Pathways:**
+- CSF biomarker testing (reference scenario)
+- Amyloid-PET imaging (reference scenario)
+- Symptomatic diagnosis pathways
 
-- Test performance characteristics by demographic groups
-- Uptake rates considering supply-side constraints, validated against recent cost-effectiveness studies [Fan2024]_
-- Temporal trends in testing availability and performance
+**Testing Correlation:**
+- Blood biomarkers: 75-85% correlation over 5-year periods
+- CSF testing: 70-80% correlation
+- PET imaging: 85-90% correlation
 
-**Treatment Effectiveness:**
+3.3 Treatment Framework
+-----------------------
 
-- Progression rate reductions by disease stage, informed by recent clinical trials [vanDyck2023]_
-- Adherence and discontinuation patterns
-- Heterogeneity by population characteristics
+The intervention model simulates hypothetical disease-modifying therapy:
+
+**Treatment Parameters:**
+- 80% initiation rate among diagnosed individuals
+- 20% reduction in all disease progression rates
+- 10% annual discontinuation rate
+- Immediate effect upon treatment initiation
+
+**Evidence Base:**
+Based on lecanemab clinical trial results showing 27% reduction in cognitive decline, conservatively modeled as 20% progression rate reduction.
+
+3.4 Economic Framework
+----------------------
+
+The economic model captures comprehensive costs across disease stages:
+
+**Cost Components:**
+- Direct healthcare costs (medical services, medications)
+- Long-term care costs (formal care services)
+- Informal care costs (80% of total economic burden)
+- Productivity losses (patient and caregiver)
+- Intervention costs (testing and treatment programs)
+
+**Key Insight:**
+Direct medical spending represents only 20% of total dementia costs. Informal care provided by family and friends accounts for 80% of economic impact, totaling $224 billion annually in unpaid care costs.
+
+4.0 Module Organization
++++++++++++++++++++++++
+
+.. list-table:: Model Component Organization
+  :header-rows: 1
+
+  * - Module
+    - Purpose
+    - Key Features
+    - Dependencies
+  * - :ref:`Alzheimer's Disease Model <2024_vivarium_alzheimers_disease_model>`
+    - Core disease progression
+    - 6-state progression, transition rates, mortality
+    - Population model
+  * - :ref:`Population Model <2024_vivarium_alzheimers_population_model>`
+    - Population forecasting (2020-2100)
+    - Fertility, mortality, migration modeling
+    - None (foundational)
+  * - :ref:`Testing/Diagnosis Model <2024_vivarium_alzheimers_testing_diagnosis_model>`
+    - BBBM and existing testing pathways
+    - Multi-modal testing, correlation modeling
+    - Disease model, population model
+  * - :ref:`Treatment Model <2024_vivarium_alzheimers_treatment_model>`
+    - Hypothetical disease-modifying therapy
+    - Progression rate reduction, adherence
+    - Disease model, testing model
+  * - :ref:`Economic Impact Model <2024_vivarium_alzheimers_economic_impact_model>`
+    - Cost-effectiveness analysis
+    - Comprehensive cost modeling, ICER calculations
+    - All other modules
 
 5.0 Simulation Specifications
 +++++++++++++++++++++++++++++
@@ -314,16 +221,16 @@ The intervention model applies to individuals with confirmed preclinical AD diag
     - Note
   * - Locations
     - 10 priority locations: France, Germany, Italy, Spain, UK, US, China, Japan, Mexico, India
-    - To be confirmed with client
+    - Diverse global regions
   * - Time Horizon
     - 2020-2100
     - 80-year simulation period
   * - Age Range (Initialization)
     - 0-120 years
-    - Open cohort model for long simulation period
+    - Open cohort model
   * - Age Range (Observation)
     - 30-120 years
-    - Focus on ages when testing and intervention relevant
+    - Focus on testing-relevant ages
   * - Population Size per Draw
     - 100,000 simulants
     - Sufficient for rare disease modeling
@@ -332,221 +239,89 @@ The intervention model applies to individuals with confirmed preclinical AD diag
     - Captures parameter uncertainty
   * - Timestep
     - 1 month
-    - Supports precise progression modeling
+    - Precise progression modeling
   * - Randomness Key Columns
     - ['entrance_time', 'age', 'sex']
-    - Ensures reproducibility across scenarios
+    - Ensures reproducibility
 
-5.1 Location Description
-~~~~~~~~~~~~~~~~~~~~~~~~
+6.0 Key Outputs and Stratification
++++++++++++++++++++++++++++++++++++
 
-The simulation covers 10 priority locations representing diverse global regions:
-
-- **High-income countries:** France, Germany, Italy, Spain, UK, US, Japan
-- **Middle-income countries:** China, Mexico, India
-
-These locations provide variation in healthcare systems, demographic structures, and economic contexts relevant to biomarker testing and intervention implementation. The multi-location approach enables validation against international prevention studies [Ngandu2015]_ and global economic assessments [Wimo2023]_.
-
-5.2 Scenario Descriptions
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. list-table:: Simulation Scenarios
-  :header-rows: 1
-
-  * - Scenario
-    - BBBM Testing
-    - CSF/PET Testing
-    - Intervention
-    - Description
-  * - Reference
-    - Minimal/None
-    - Current levels
-    - Minimal/None
-    - Current standard of care including CSF and amyloid-PET diagnosis
-  * - Alternative 1
-    - 5% annual uptake (age 30-44)
-    - Current levels
-    - None
-    - BBBM testing without intervention
-  * - Alternative 2
-    - 5% annual uptake (age 30-44)
-    - Current levels
-    - 80% initiation, 20% effectiveness
-    - BBBM testing plus disease-modifying treatment
-
-6.0 Key Outputs and Observers
-+++++++++++++++++++++++++++++
-
-6.1 Health Outcomes
-~~~~~~~~~~~~~~~~~~~
-
-**Primary Outputs:**
-
+**Primary Health Outcomes:**
 - Cases in each health state by year, age group, sex, and diagnosis status
 - Disease progression rates and transitions between states
 - Disability-adjusted life years (DALYs) by scenario
-- Identified preclinical population size and characteristics
+- Time to diagnosis and treatment metrics
 
-**Economic Inputs for Translation:**
+**Economic Outcomes:**
+- Healthcare spending by service category and payer
+- Informal care costs and caregiver burden
+- Productivity losses by sector and age group
+- Cost-effectiveness ratios and net monetary benefits
 
-- Number of diagnostic tests performed
-- Treatment person-years by state and scenario
-- Healthcare utilization patterns
-- Caregiver burden metrics, which we will compare with existing economic burden estimates [Prada2023]_
+**Stratification Variables:**
+All outputs stratified by age group (5-year bands), sex, location, diagnosis status, scenario, and year.
 
-6.2 Stratification Variables
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-All outputs stratified by:
-
-- Age group (5-year bands)
-- Sex
-- Location
-- Diagnosis status (for preclinical states)
-- Scenario
-- Year
-
-7.0 Verification & Validation (V&V) Tracking
-+++++++++++++++++++++++++++++++++++++++++++++
-
-.. list-table:: Model Runs
-  :header-rows: 1
-
-  * - Run
-    - Description
-    - Scenarios
-    - Specification Modifications
-    - Note
-  * - 1.0
-    - Baseline disease progression model
-    - Reference only
-    - Default
-    - Establish disease natural history
-  * - 2.0
-    - BBBM testing implementation
-    - Reference, Alternative 1
-    - Default
-    - Validate testing pathway
-  * - 3.0
-    - Full intervention model
-    - All scenarios
-    - Default
-    - Complete model validation
+7.0 Verification & Validation Framework
+++++++++++++++++++++++++++++++++++++++++
 
 .. list-table:: Model Verification and Validation Tracking
   :header-rows: 1
 
-  * - Run
+  * - Component
     - V&V Criteria
-    - V&V Summary
-  * - 1.0
-    - Validate disease progression rates against ADNI cohort data [Jedynak2012]_; confirm 15-year progression span from preclinical to severe AD
-    - TBD
-  * - 2.0
-    - Confirm testing uptake (5%) and diagnostic accuracy (95% sens/90% spec) match specifications; validate test correlation patterns (blood: 75-85%, CSF: 70-80%, amyloid-PET: 85-90%); compare with real-world biomarker performance [Janelidze2023]_
-    - TBD
-  * - 3.0
-    - Verify intervention effects (20% reduction) align with lecanemab trial results [vanDyck2023]_; validate cost-effectiveness against ICER benchmarks [ICER2023]_
-    - TBD
+    - External Validation Targets
+  * - Disease Progression
+    - 15-year progression span validation
+    - ADNI cohort data (Jedynak et al. 2012)
+  * - Testing Implementation
+    - 5% uptake, 95%/90% sensitivity/specificity
+    - Clinical validation studies (Janelidze et al. 2024)
+  * - Treatment Effects
+    - 20% progression reduction validation
+    - Lecanemab trial results (van Dyck et al. 2023)
+  * - Economic Outcomes
+    - Cost-effectiveness ratio validation
+    - ICER benchmarks (ICER 2023)
 
-8.0 Links to Model Components
+8.0 Data Challenges and Implementation Notes
++++++++++++++++++++++++++++++++++++++++++++++
+
+**Critical Data Requirements:**
+- Alzheimer's-specific (not combined dementia) epidemiological data
+- Stage-specific cost profiles, especially for preclinical AD
+- Population forecasting data for 80-year time horizon
+- Location-specific healthcare utilization patterns
+
+**Key Implementation Decisions:**
+- Population-based forecasting approach (vs. Future Health Scenarios)
+- Custom Alzheimer's-only cause definition
+- Simplified testing uptake modeling
+- Uniform treatment effectiveness across disease stages
+
+For detailed discussion of data challenges, see :ref:`Data Challenges Note <alzheimers_data_challenges>`.
+
+9.0 Links to Model Components
 +++++++++++++++++++++++++++++
 
-- :ref:`Blood-Based Biomarker Testing <alzheimers_bbbm_testing>`
-- :ref:`Intervention and Treatment <alzheimers_intervention_treatment>`
-- :ref:`Care Pathways <alzheimers_care_pathways>`
-- :ref:`Economic Impact Assessment <alzheimers_economic_impact>`
+- :ref:`Alzheimer's Disease Progression Model <2024_vivarium_alzheimers_disease_model>`
+- :ref:`Population Forecasting Model <2024_vivarium_alzheimers_population_model>`
+- :ref:`Testing and Diagnosis Model <2024_vivarium_alzheimers_testing_diagnosis_model>`
+- :ref:`Treatment Model <2024_vivarium_alzheimers_treatment_model>`
+- :ref:`Economic Impact Model <2024_vivarium_alzheimers_economic_impact_model>`
+- :ref:`Data Challenges Note <alzheimers_data_challenges>`
 
-9.0 Limitations and Assumptions
-++++++++++++++++++++++++++++++++
+10.0 References
++++++++++++++++
 
-**Key Limitations:**
+**Methodology Validation:**
 
-- Assumes independence between repeated biomarker tests
-- Treatment effectiveness modeled as uniform reduction across progression rates
-- Economic analysis requires external cost inputs
-- Limited data on Alzheimer's-specific (vs. all-dementia) epidemiology
+External validation uses established microsimulation approaches for dementia research, ~15-year disease progression timing from ADNI cohort studies, blood biomarker performance from clinical validation studies (90% diagnostic accuracy), and treatment effectiveness from lecanemab trial results (27% cognitive decline reduction).
 
-**Critical Assumptions:**
+**Economic Validation:**
 
-- Biomarker test performance remains constant over time
-- Treatment adherence patterns are homogeneous within populations
-- Disease progression rates are linear and constant within states
-- Healthcare access and quality consistent within locations
+Cost-effectiveness methodology follows ICER standards with validation against established dementia economic burden studies showing informal care represents 80% of total costs.
 
-10.0 References and Literature Review
-++++++++++++++++++++++++++++++++++++++
-
-10.1 Key References for Model Validation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Simulation Modeling and Disease Progression:**
-
-.. [Green2017] Green C, et al. "Machine learning and microsimulation techniques on the prognosis of dementia: A systematic literature review." *BMC Medical Informatics and Decision Making* 2017; 17:88. 
-   
-   **Application:** External validation of our microsimulation approach and disease progression modeling structure. This systematic review provides benchmarks for microsimulation models in dementia and identifies best practices for model validation.
-
-.. [Jedynak2012] Jedynak BM, et al. "A computational neurodegenerative disease progression score: method and results with the Alzheimer's disease neuroimaging initiative cohort." *NeuroImage* 2012; 63(3):1478-86.
-   
-   **Application:** Validation of disease progression timing and trajectory modeling. Their 15-year span from subjective cognitive deficits to severe dementia provides external validation targets for our transition rates.
-
-.. [Sukkar2013] Sukkar R, et al. "Disease progression modeling using Hidden Markov Models." *Conference proceedings : Annual International Conference of the IEEE Engineering in Medicine and Biology Society* 2013; 2013:2845-8.
-   
-   **Application:** Methodological validation of our Markov-based disease progression model structure and parameter estimation approaches.
-
-**Blood Biomarker Testing and Economic Evaluation:**
-
-.. [Janelidze2023] Janelidze S, et al. "Highly accurate blood test for Alzheimer's disease is similar or superior to clinical cerebrospinal fluid tests." *Nature Medicine* 2024; 30:1085–1095.
-   
-   **Application:** Validation of blood biomarker test performance parameters (90% accuracy) and comparison with our assumed 80% sensitivity/specificity. Provides real-world benchmarks for diagnostic accuracy.
-
-.. [Fan2024] Fan LY, et al. "Cost-effectiveness comparison between blood biomarkers and conventional tests in Alzheimer's disease diagnosis." *Current Opinion in Psychiatry* 2024; 37(2):118-124.
-   
-   **Application:** External validation of our economic evaluation framework and cost-effectiveness calculations. Their Monte Carlo simulation approach with 10,000 iterations validates our probabilistic sensitivity analysis methods.
-
-**Early Intervention and Treatment Effects:**
-
-Treatment effectiveness validation uses clinical trial evidence showing 27% reduction in cognitive decline [vanDyck2023]_, providing external validation for our assumed 20% progression rate reduction. Direct methodological validation through simulation modeling [Long2022]_ provides comparative framework for our treatment pathway modeling. Cost-effectiveness benchmarks [ICER2023]_ provide validation for health economic evaluation methods.
-
-**Population Health and Prevention Models:**
-
-Population-level intervention modeling validation uses lifetime Markov model evidence [Wimo2023]_ showing prevention of 1,623 dementia cases per 100,000 people, providing population impact benchmarks.
-
-.. [Ngandu2015] Ngandu T, et al. "A 2 year multidomain intervention of diet, exercise, cognitive training, and vascular risk monitoring versus control to prevent cognitive decline in at-risk elderly people (FINGER): a randomised controlled trial." *The Lancet* 2015; 386(9996):829-840.
-   
-   **Application:** Validation of intervention uptake rates and population-level effectiveness. Provides real-world evidence for multidomain intervention approaches that can inform our treatment uptake assumptions.
-
-**Healthcare Utilization and Economic Burden:**
-
-Healthcare utilization and economic burden validation uses comprehensive cost-of-illness studies [Hurd2013]_ providing baseline cost structure and healthcare utilization patterns by disease stage. Caregiver burden estimates [Prada2023]_ validate our economic impact calculations with $599 billion annually in productivity losses.
+.. [vanDyck2023] van Dyck CH, et al. "Lecanemab in Early Alzheimer's Disease." *New England Journal of Medicine* 2023; 388(1):9-21.
 
 .. [ICER2023] Institute for Clinical and Economic Review. "Lecanemab for Early Alzheimer's Disease: Final Evidence Report." April 2023.
-   
-   **Application:** Validation of intervention cost-effectiveness modeling and health economic evaluation methods. Provides benchmarks for cost per DALY averted calculations.
-
-.. [Prada2023] Prada SI, et al. "Indirect Costs of Alzheimer's Disease: Unpaid Caregiver Burden and Patient Productivity Loss." *Value in Health* 2024; 27(6):759-767.
-   
-   **Application:** Validation of our economic impact calculations, particularly caregiver burden ($599 billion annually) and productivity losses. Provides stage-specific cost validation targets.
-
-10.2 Model Validation Framework
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**External Validation Targets:**
-
-- Disease progression rates from ADNI cohort studies [Jedynak2012]_
-- Blood biomarker performance from clinical validation studies [Janelidze2023]_
-- Treatment effectiveness from RCT evidence [vanDyck2023]_
-- Economic outcomes from published cost-effectiveness studies [ICER2023]_
-- Population health impacts from prevention trials [Wimo2023]_
-
-**Methodological Validation:**
-
-- Microsimulation approach validated against systematic review findings [Green2017]_
-- Economic evaluation methods benchmarked against ICER standards [ICER2023]_
-- Markov modeling structure compared with published AD progression models [Long2022]_
-
-**Cross-Model Comparison:**
-
-- Direct comparison with lecanemab simulation model results [Long2022]_
-- Benchmarking against FINGER trial economic evaluation [Wimo2023]_
-- Validation of cost structures against dementia economic burden studies [Prada2023]_

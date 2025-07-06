@@ -42,84 +42,14 @@ Testing and Diagnosis Status Model
 1.0 Overview
 ++++++++++++
 
-This module models diagnostic testing pathways for Alzheimer's disease, incorporating both existing diagnostic methods (CSF biomarkers, PET imaging) and hypothetical blood-based biomarker (BBBM) testing. The model tracks diagnosis status, test timing, and diagnostic accuracy across different testing modalities to evaluate early detection strategies.
+This module models diagnostic testing pathways for Alzheimer's disease, incorporating both existing diagnostic methods (CSF biomarkers, PET imaging) and blood-based biomarker (BBBM) testing. The model tracks diagnosis status, test timing, and diagnostic accuracy across different testing modalities to evaluate early detection strategies.
 
-2.0 Module Objectives
-+++++++++++++++++++++
+The testing framework captures three distinct diagnostic pathways: current standard of care, blood-based biomarker screening, and integrated testing-treatment programs. Each pathway provides different detection capabilities and healthcare utilization patterns.
 
-**Primary Objectives:**
-- Model patient journey from testing through diagnosis
-- Compare diagnostic pathways across reference and alternative scenarios
-- Evaluate impact of blood-based biomarker testing on early detection
-- Assess diagnostic accuracy and healthcare utilization
+2.0 Module Diagram and Data
++++++++++++++++++++++++++++
 
-**Key Features:**
-- Dual testing pathway modeling (existing vs. BBBM)
-- Age-specific testing propensity (target: ages 30-44 for BBBM)
-- Test performance characteristics (sensitivity/specificity)
-- Test correlation modeling for repeat testing
-- Diagnosis timing and pathway tracking
-
-3.0 Testing Framework Architecture
-+++++++++++++++++++++++++++++++++++
-
-3.1 Testing Modalities
------------------------
-
-.. list-table:: Diagnostic testing modalities
-  :header-rows: 1
-
-  * - Test Type
-    - Target Population
-    - Primary Application
-    - Performance
-    - Cost Category
-  * - **Blood-based biomarkers (BBBM)**
-    - Ages 30-44 (asymptomatic)
-    - Early detection screening
-    - 95% sensitivity, 90% specificity
-    - Low cost, high accessibility
-  * - **CSF biomarkers**
-    - Symptomatic individuals
-    - Clinical diagnosis confirmation
-    - High accuracy (~95%+)
-    - Moderate cost, invasive
-  * - **PET imaging**
-    - Symptomatic individuals
-    - Advanced diagnostic confirmation
-    - High accuracy (~90%+)
-    - High cost, limited access
-  * - **Clinical assessment**
-    - All symptomatic cases
-    - Standard of care diagnosis
-    - Variable accuracy
-    - Standard healthcare cost
-
-3.2 Diagnostic Pathways
------------------------
-
-**Reference Scenario (Current Standard of Care):**
-- Minimal BBBM testing (<1% annual uptake)
-- Existing CSF/PET diagnostic pathways for symptomatic cases
-- Late-stage diagnosis (typically MCI or mild dementia stages)
-- Standard clinical progression to diagnosis
-
-**Alternative Scenario 1 (BBBM Testing Only):**
-- 5% annual BBBM uptake in ages 30-44
-- No disease-modifying intervention
-- Early diagnosis pathway for biomarker-positive cases
-- Direct pathway from BBBM+ to preclinical AD diagnosis
-
-**Alternative Scenario 2 (BBBM Testing + Treatment):**
-- 5% annual BBBM uptake in ages 30-44
-- 80% treatment initiation rate for diagnosed individuals
-- Early intervention for biomarker-positive cases
-- Integrated testing and treatment pathway
-
-4.0 Module Diagram and Data
-+++++++++++++++++++++++++++++++
-
-4.1 Module Inputs
+2.1 Module Inputs
 ------------------
 
 .. list-table:: Module required inputs
@@ -150,7 +80,7 @@ This module models diagnostic testing pathways for Alzheimer's disease, incorpor
     - Testing uptake rates
     - Scenario-specific coverage
 
-4.2 Module Outputs
+2.2 Module Outputs
 -------------------
 
 .. list-table:: Module outputs
@@ -160,74 +90,173 @@ This module models diagnostic testing pathways for Alzheimer's disease, incorpor
     - Value
     - Application
     - Note
-  * - A. Testing status
+  * - Testing status
     - Tested/Not tested by modality
     - Healthcare utilization tracking
     - Time-stamped testing events
-  * - B. Test results
+  * - Test results
     - Positive/Negative by test type
     - Diagnostic accuracy assessment
     - True positive/false positive classification
-  * - C. Diagnosis status
+  * - Diagnosis status
     - Diagnosed/Undiagnosed
     - Treatment eligibility determination
     - Links to intervention module
-  * - D. Diagnosis timing
+  * - Diagnosis timing
     - Age at diagnosis
     - Early detection evaluation
     - Time to diagnosis metrics
-  * - E. Diagnostic pathway
+  * - Diagnostic pathway
     - Route to diagnosis
     - Healthcare system evaluation
     - Pathway efficiency assessment
-  * - F. Test correlation outcomes
+  * - Test correlation outcomes
     - Repeat test concordance
     - Test reliability assessment
     - 75-85% correlation in 5-year window
 
-5.0 Blood-Based Biomarker Testing Module
-+++++++++++++++++++++++++++++++++++++++++
+2.3 Testing Architecture Framework
+-----------------------------------
 
-5.1 Testing Implementation
+.. list-table:: Diagnostic testing modalities
+  :header-rows: 1
+
+  * - Test Type
+    - Target Population
+    - Primary Application
+    - Performance
+    - Cost Category
+  * - **Blood-based biomarkers (BBBM)**
+    - Ages 30-44 (asymptomatic)
+    - Early detection screening
+    - 95% sensitivity, 90% specificity
+    - Low cost, high accessibility
+  * - **CSF biomarkers**
+    - Symptomatic individuals
+    - Clinical diagnosis confirmation
+    - High accuracy (~95%+)
+    - Moderate cost, invasive
+  * - **PET imaging**
+    - Symptomatic individuals
+    - Advanced diagnostic confirmation
+    - High accuracy (~90%+)
+    - High cost, limited access
+  * - **Clinical assessment**
+    - All symptomatic cases
+    - Standard of care diagnosis
+    - Variable accuracy
+    - Standard healthcare cost
+
+3.0 Blood-Based Biomarker Testing Implementation
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+3.1 Eligibility and Uptake
 ---------------------------
 
 **Target Population:**
-- Primary target: Ages 30-44 years
+- Ages 30-44 years
 - Annual testing opportunity for eligible individuals
-- 5% annual uptake rate (range: 3-10% for sensitivity analysis)
-- Equal access across sex and other demographics within age range
+- No exclusions based on family history or risk factors in baseline model
 
-**Test Performance Parameters:**
-- Sensitivity: 95% (range: 90-98%)
-- Specificity: 90% (range: 85-95%)
-- Performance consistent across demographic groups
-- No test performance degradation over time
+**Testing Uptake:**
+- 5% annual uptake rate among eligible population
+- Client defines uptake flexibly ("20% of at-risk population identified at age 30")
+- Implementation prioritizes simplicity over complex demographic variations
+- Supply-side constraints modeled through reduced uptake rates
+
+3.2 Test Performance
+--------------------
+
+**Performance Characteristics:**
+- Sensitivity: 95% (probability of positive test given preclinical AD)
+- Specificity: 90% (probability of negative test given no preclinical AD)
+- Performance characteristics may vary by demographic groups
 
 **Test Correlation Modeling:**
-- 75-85% probability of concordant results on repeat testing
-- 5-year correlation window for test reliability
-- Independent test results outside correlation window
-- Accounts for biomarker progression and test variability
+- **Long-term Test Correlation:** Repeated tests show high correlation over time due to individual biological factors
+- Blood biomarkers: 75-85% chance of same result on repeat testing
+- Individual tested in year X has correlated probability of same result in year X+5
+- Correlation accounts for stable individual characteristics and measurement error patterns
 
-5.2 Diagnostic Pathway Integration
------------------------------------
+3.3 Diagnostic Pathway
+-----------------------
 
-**BBBM-Positive Pathway:**
-- Direct pathway to preclinical AD diagnosis (includes false positives)
-- Immediate eligibility for treatment programs
-- No additional confirmatory testing required in base model
-- Simplified pathway for intervention evaluation
+**Believed AD State Model:**
 
-**BBBM-Negative Pathway:**
-- Return to standard care progression
-- Potential for future testing (outside correlation window)
-- Standard symptomatic diagnosis pathway remains available
-- No immediate intervention eligibility
+.. graphviz::
 
-6.0 Existing Testing Pathways
+  digraph believed_state {
+      rankdir = LR;
+      node [shape=box];
+      
+      unknown [label="Unknown\nAD Status"];
+      believed_negative [label="Believed\nAD Negative"];
+      believed_positive [label="Believed\nAD Positive"];
+      
+      unknown -> believed_negative [label="Negative test"];
+      unknown -> believed_positive [label="Positive test\n(includes false positives)"];
+      believed_negative -> believed_positive [label="Subsequent\npositive test"];
+  }
+
+The believed AD state tracks what individuals and healthcare providers believe about AD status based on test results, which may differ from true biomarker status due to test imperfection.
+
+**Test Decision Algorithm:**
+
+.. code-block:: none
+
+   For each eligible simulant in each time step:
+   1. Determine if simulant chooses testing (5% probability)
+   2. If tested:
+      a. Check for previous test result and apply correlation:
+         - If previous test within 5 years: 75-85% chance same result
+         - If no previous test or >5 years: use base sensitivity/specificity
+      b. If simulant has preclinical AD: 95% chance positive result (adjusted for correlation)
+      c. If simulant has no AD pathology: 10% chance false positive (adjusted for correlation)
+   3. Route positive tests directly to diagnosed preclinical AD status (includes false positives)
+   4. Record test events and correlation tracking for economic analysis
+
+**State Transitions:**
+
+The testing module interacts with the core disease model by:
+- Identifying individuals in preclinical AD state through testing
+- Enabling transition to "diagnosed preclinical AD" status
+- Triggering eligibility for intervention pathways
+
+3.4 Key Parameters
+------------------
+
+.. list-table:: BBBM Testing Parameters
+  :header-rows: 1
+
+  * - Parameter
+    - Baseline Value
+    - Uncertainty Range
+    - Notes
+  * - Annual uptake rate
+    - 5%
+    - 3-10%
+    - May vary by location and time
+  * - Test sensitivity
+    - 95%
+    - 90-98%
+    - Performance for preclinical AD detection
+  * - Test specificity
+    - 90%
+    - 85-95%
+    - Performance for ruling out AD pathology
+  * - Direct diagnosis rate
+    - 100%
+    - --
+    - All positive tests lead to preclinical AD diagnosis (no confirmation step)
+  * - Test correlation (5-year)
+    - 75-85%
+    - 70-90%
+    - Probability of same result on repeat testing
+
+4.0 Existing Testing Pathways
 ++++++++++++++++++++++++++++++
 
-6.1 Symptomatic Testing
+4.1 Symptomatic Testing
 -----------------------
 
 **Clinical Presentation Triggers:**
@@ -242,7 +271,22 @@ This module models diagnostic testing pathways for Alzheimer's disease, incorpor
 - Differential diagnosis consideration
 - Treatment planning and care coordination
 
-6.2 Healthcare System Integration
+4.2 Multi-Modal Testing Framework
+---------------------------------
+
+**Reference Scenario Testing (CSF and PET):**
+
+Current diagnostic pathways include cerebrospinal fluid (CSF) and amyloid-PET testing. These expensive, invasive procedures have limited accessibility compared to blood biomarkers.
+
+**Value Proposition for Alternative Scenarios:** Including existing testing modalities quantifies the number of expensive PET scans and CSF procedures avoided through blood biomarker implementation. This comparison demonstrates economic benefits beyond health outcomes.
+
+**Testing Characteristics:**
+- **CSF Testing:** 70-80% correlation for repeat results over 5-year periods
+- **Amyloid-PET Imaging:** 85-90% correlation for repeat results if initially positive
+- Higher costs and specialized center requirements limit population access
+- Blood biomarkers offer comparable accuracy with greater accessibility
+
+4.3 Healthcare System Integration
 ---------------------------------
 
 **Access Determinants:**
@@ -257,10 +301,10 @@ This module models diagnostic testing pathways for Alzheimer's disease, incorpor
 - Technology availability and implementation
 - Training and experience effects on accuracy
 
-7.0 Scenario Implementation
+5.0 Scenario Implementation
 +++++++++++++++++++++++++++
 
-7.1 Reference Scenario
+5.1 Reference Scenario
 ----------------------
 
 **Testing Characteristics:**
@@ -275,23 +319,82 @@ This module models diagnostic testing pathways for Alzheimer's disease, incorpor
 - Standard care cost and burden
 - Natural disease progression observation
 
-7.2 Alternative Scenarios
--------------------------
+5.2 Alternative Scenario 1 (BBBM Testing Only)
+-----------------------------------------------
 
-**Scenario 1 - BBBM Testing Only:**
 - 5% annual BBBM uptake in target age group
 - Early diagnosis capability without intervention
 - Healthcare system impact of early diagnosis
 - Cost-effectiveness of testing without treatment
 
-**Scenario 2 - BBBM Testing + Treatment:**
+5.3 Alternative Scenario 2 (BBBM Testing + Treatment)
+-----------------------------------------------------
+
 - Combined testing and intervention pathway
 - 80% treatment initiation for BBBM-positive cases
 - Integrated early detection and intervention program
 - Full pathway cost-effectiveness evaluation
 
-8.0 Validation Framework
-++++++++++++++++++++++++
+6.0 Expected Outcomes
++++++++++++++++++++++
+
+**Primary Outputs:**
+
+- Number of tests performed by age, sex, location, year
+- True positive, false positive, true negative, false negative counts
+- Diagnosed preclinical population size and characteristics
+- Time from biomarker positivity to diagnosis
+
+**Economic Inputs:**
+
+- Total testing volume for cost calculations
+- Positive predictive value and diagnostic yield
+- Healthcare utilization for confirmatory testing
+
+**Validation Metrics:**
+
+- Testing uptake rates match specified parameters
+- Test performance characteristics align with input values
+- Diagnosed population prevalence consistent with underlying disease model
+
+7.0 Assumptions and Limitations
++++++++++++++++++++++++++++++++
+
+7.1 Key Assumptions
+-------------------
+
+**Test Performance Assumptions:**
+- Test performance remains constant over time and across populations
+- Uptake rates are uniform within demographic groups
+- Test correlation patterns are stable over 5-year periods
+- Correlation driven by biological factors rather than systematic measurement error
+- No behavioral changes following negative test results
+- Confirmatory testing has perfect accuracy
+
+**Healthcare System Assumptions:**
+- Uniform access within location/demographic groups
+- Consistent diagnostic pathways
+- Stable healthcare provider behavior
+- No capacity constraints or supply limitations
+
+7.2 Known Limitations
+---------------------
+
+**Testing Complexity:**
+- Test correlation modeling adds complexity but may not capture all biological variation
+- Assumes unlimited testing capacity at specified uptake rates
+- No consideration of test cost or accessibility barriers beyond uptake rates
+- Direct diagnosis without confirmatory testing (includes false positives in diagnosed population)
+- Simplified correlation model may not account for individual heterogeneity in test stability
+
+**Behavioral Factors:**
+- Simplified testing uptake modeling
+- No modeling of test anxiety or preferences
+- Limited consideration of healthcare seeking behavior
+- Static uptake rates over time
+
+8.0 V&V Criteria
+++++++++++++++++
 
 8.1 Test Performance Validation
 -------------------------------
@@ -309,7 +412,7 @@ This module models diagnostic testing pathways for Alzheimer's disease, incorpor
 - Healthcare utilization pattern validation
 
 8.2 Pathway Validation
----------------------
+-----------------------
 
 **Testing Uptake Validation:**
 - Actual vs. target uptake rates (5%)
@@ -323,101 +426,19 @@ This module models diagnostic testing pathways for Alzheimer's disease, incorpor
 - Biomarker progression consistency
 - Test-retest validation studies
 
-9.0 Data Requirements
-+++++++++++++++++++++
+9.0 References
+++++++++++++++
 
-9.1 Test Performance Data
--------------------------
+**Test Performance Validation:**
 
-**Blood Biomarker Performance:**
-- Clinical validation study results (Janelidze et al. 2024)
-- Age-specific sensitivity/specificity
-- Population-specific performance variations
-- Longitudinal test reliability data
+Real-world validation studies show 90% diagnostic accuracy [Janelidze2024]_, providing benchmarks for our sensitivity/specificity assumptions. Clinical guidelines recommend ≥90% sensitivity with ≥85% specificity in primary care [GlobalCEO2024]_, validating our test performance parameters.
 
-**Existing Test Performance:**
-- CSF biomarker accuracy in clinical settings
-- PET imaging diagnostic performance
-- Clinical assessment accuracy rates
-- Healthcare setting performance variations
+**Economic Validation:**
 
-9.2 Healthcare Utilization Data
--------------------------------
+Monte Carlo simulation studies (10,000 iterations) show blood biomarkers are cost-effective despite lower accuracy [Fan2024]_, validating our economic modeling approach.
 
-**Testing Patterns:**
-- Current diagnostic testing rates by age and location
-- Healthcare access patterns
-- Specialist referral rates and timing
-- Insurance coverage and cost barriers
+.. [Janelidze2024] Janelidze S, et al. "Highly accurate blood test for Alzheimer's disease is similar or superior to clinical cerebrospinal fluid tests." *Nature Medicine* 2024; 30:1085–1195.
 
-**Diagnostic Timing:**
-- Age at diagnosis distributions
-- Symptom onset to diagnosis intervals
-- Healthcare seeking behavior patterns
-- Diagnostic delay factors and barriers
+.. [GlobalCEO2024] "Acceptable performance of blood biomarker tests of amyloid pathology — recommendations from the Global CEO Initiative on Alzheimer's Disease." *Nature Reviews Neurology* 2024; 20:570-583.
 
-10.0 Model Assumptions and Limitations
-++++++++++++++++++++++++++++++++++++++
-
-10.1 Key Assumptions
--------------------
-
-**Test Performance Assumptions:**
-- Consistent test performance over time
-- Uniform accuracy across demographic groups
-- Independent test results (except correlation modeling)
-- Static technology performance characteristics
-
-**Healthcare System Assumptions:**
-- Uniform access within location/demographic groups
-- Consistent diagnostic pathways
-- Stable healthcare provider behavior
-- No capacity constraints or supply limitations
-
-10.2 Known Limitations
----------------------
-
-**Testing Complexity:**
-- Simplified diagnostic pathways
-- No modeling of differential diagnosis complexity
-- Limited healthcare system capacity constraints
-- Static test performance over time
-
-**Behavioral Factors:**
-- Simplified testing uptake modeling
-- No modeling of test anxiety or preferences
-- Limited consideration of healthcare seeking behavior
-- Static uptake rates over time
-
-11.0 Future Enhancements
-+++++++++++++++++++++++
-
-11.1 Model Sophistication
--------------------------
-
-**Advanced Testing Modeling:**
-- Multi-biomarker testing strategies
-- Sequential testing algorithms
-- Risk-stratified testing approaches
-- Dynamic test performance based on technology advancement
-
-**Healthcare System Integration:**
-- Capacity constraint modeling
-- Healthcare provider training effects
-- Diagnostic pathway optimization
-- Cost-effectiveness of different testing strategies
-
-11.2 Behavioral Integration
----------------------------
-
-**Testing Behavior Modeling:**
-- Patient preference and choice modeling
-- Healthcare seeking behavior variation
-- Socioeconomic factors in testing access
-- Cultural factors affecting testing uptake
-
-**System Dynamics:**
-- Feedback between testing volume and capacity
-- Learning curve effects on diagnostic accuracy
-- Technology adoption and diffusion modeling
-- Policy intervention effects on testing patterns
+.. [Fan2024] Fan LY, et al. "Cost-effectiveness comparison between blood biomarkers and conventional tests in Alzheimer's disease diagnosis." *Current Opinion in Psychiatry* 2024; 37(2):118-124.
