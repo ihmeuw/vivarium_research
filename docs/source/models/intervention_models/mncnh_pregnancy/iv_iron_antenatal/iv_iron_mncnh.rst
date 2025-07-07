@@ -39,8 +39,8 @@ The IV iron intervention is included in the :ref:`hemoglobin module <2024_vivari
 We will model the following eligibility for the antenatal IV iron intervention:
 
 #. Attends later prenancy ANC visit (according to the :ref:`antenatal care attendance module <2024_vivarium_mncnh_portfolio_anc_module>`)
-#. Test hemoglobin exposure of less than 100 grams per liter (according to the :ref:`anemia screening intervention <anemia_screening>` result tracked in the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`)
-#. Tests low ferritin exposure (according to the :ref:`anemia screening intervention <anemia_screening>` result tracked in the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`)
+#. Low hemoglobin exposure according to the :ref:`anemia screening test result <anemia_screening>` tracked in the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+#. Low ferritin exposure according to the :ref:`anemia screening test result <anemia_screening>` tracked in the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
 
 The IV iron intervention has a direct effect on hemoglobin exposure in pregnancy and indirect effects 100% mediated through hemoglobin on birthweight, gestational age, and stillbirth. The relationship between hemoglobin and birthweight, gestational age, and stillbirth is summarized on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>`. This page contains information on the effects specific to IV iron as mediated through hemoglobin.
 
