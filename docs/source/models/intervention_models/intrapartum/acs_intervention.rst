@@ -165,11 +165,6 @@ of ACS for pregnant women and people at imminent risk of preterm delivery.
     - RR = 0.84 (95% CI 0.72-0.97). Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(0.84, 0.72, 0.97)`
     - [Oladapo-et-al-2020]_
     - 
-  * - mean_rr
-    - :math:`\text{RR}^\text{no ACS} * (1 - p_\text{baseline coverage}) + p_\text{baseline_coverage}`
-    - N/A
-    - We will use :math:`p_\text{baseline coverage}` defined in the baseline coverage section above for **among the eligible population only** (i.e., expected births 
-      with preterm status) to calculate the mean_rr and PAF values.
   * - PAF
     - see below
     - see below
