@@ -220,7 +220,7 @@ Since our risk exposure has two categories,
 Assumptions and Limitations
 ---------------------------
 
-- We assume that ACS availability captures actual use of dexamethasone, and not simply the treatment being in the facility. 
+- We assume that ACS availability estimates provided to us by the HS team captures actual use of dexamethasone, and not simply the treatment being in the facility. 
 - We assume that the delivery facility is also the facility where a mother or birthing person will seek care for their preterm infant with RDS.
 - We assume that the relative risk of preterm with RDS mortality with ACS in practice is a value that we can find in the literature. Note: 
   the value we are using is from [Oladapo-et-al-2020]_, a BMGF-funded multicountry RCT which compared neonatal mortality for women at imminent
@@ -229,8 +229,6 @@ Assumptions and Limitations
   CPAP, rather than pertaining to the cumulative effect size of ACS and CPAP together. 
 - We assume that ``(RR_ACS | CPAP) = (RR_ACS | no CPAP)``. This is because of the assumption that ACS affects RDS incidence while CPAP affects RDS 
   case fatality, so by definition CPAP could not modify the effect of RDS under these assumptions it comes too late in the causal chain.
-- We assume that ``(RR_CPAP | ACS) = (RR_CPAP | no ACS)`` despite the fact that ACS acts on outcomes that come earlier in the causal chain than CPAP,
-  and could thereby decrease the effect size of CPAP. 
 - We assume that the observed reduction in neonatal deaths in this RCT are due to a decrease in incidence of respiratory distress. We currently 
   use [Oladapo-et-al-2020]_'s RR value for early neonatal death, but could instead use their RR for severe respiratory distress at 24 hours, 
   which is a significantly more impactful value (0.56, 0.37-0.85), however is not explicitly about mortality, which is what we are modeling. 
@@ -250,6 +248,7 @@ Assumptions and Limitations
 - We use the [WHO-2022]_ recommendations on ACS use for improving preterm births as the basis of ACS eligibility criteria. However, [Greensides-et-al-2018]_ 
   reviewed country-specific guidelines for ACS use and found that neither Nigeria nor Ethiopia national documents (all 2015 or older) stated that GA must be accurately undertaken 
   (see Table 4 in their publication), therefore we simply use the believed GA from the pregnancy module, regardless of how accurate we think the estimate was (i.e. if birthing parent got an ultrasound).
+  We do not consider anything related to ultrasound exposure for the 'accurate GA dating' criteria in the [WHO-2022]_ recommendations.
 - Despite the fact that our preterm cause model (based on the GBD cause) considers under 37 weeks of gestation, and despite the [WHO-2022]_ recommendations 
   that infants with 24-34 weeks of gestation receive ACS, we will only apply the ACS intervention to simulants with 26-33 weeks of gestation, based BMGF assumptions (see email from CT on 6/30/2025).
 
