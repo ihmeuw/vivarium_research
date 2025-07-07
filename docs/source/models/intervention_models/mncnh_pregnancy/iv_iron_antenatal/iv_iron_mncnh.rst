@@ -22,7 +22,7 @@ Antenatal Intravenous Iron - MNCNH Portfolio Model
 Intervention Overview
 -----------------------
 
-The antenatal IV iron intervention is intended to treat moderate and severe iron-deficiency anemia in pregnancy. It is administered those in their 2nd or 3rd trimester of pregnancy who have a hemoglobin level less than 100 grams per liter and low ferritin levels.
+The antenatal IV iron intervention is intended to treat moderate and severe iron-deficiency anemia in pregnancy. It is administered to those in their 2nd or 3rd trimester of pregnancy who have a hemoglobin level less than 100 grams per liter and low ferritin levels.
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
