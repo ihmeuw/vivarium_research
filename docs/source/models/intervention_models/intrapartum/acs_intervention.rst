@@ -119,19 +119,16 @@ Systems team has processed and sent to us from a variety of Ethiopian data sourc
 Vivarium Modeling Strategy
 --------------------------
 
-Intervention eligibility criteria (see :ref:`the intrapartum intervention module document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>` 
-for how to obtain this information in the MNCNH portfolio simulation):
+To be eligible to receive the ACS intervention (see :ref:`the intrapartum intervention module document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>` 
+for how to obtain this information in the MNCNH portfolio simulation), a simulant must be expected to give birth to a preterm infant.
 
-  1. Preterm birth is expected 
-  2. Delivers in facility with CPAP availability
-
-This intervention requires adding an attribute to all simulants who expect to give birth to a preterm infant (i.e., based on believed gestational age 34 to 36 weeks from pregnancy module output) and who give birth 
-in a facility with CPAP availability (based on ``cpap_availability``; see :ref:`the CPAP intervention document <intervention_neonatal_cpap>`) to specify if a parent-child dyad
-receives ACS or not.  We will track this and the model will have different mortality rates for preterm with RDS for parent-child dyads with and without 
-ACS (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
+This intervention requires adding an attribute to all simulants who expect to give birth to a preterm infant (i.e., based on believed gestational 
+age 34 to 36 weeks from pregnancy module output)  to specify if a parent-child dyad receives ACS or not.  We will track this and the model will 
+have different mortality rates for preterm with RDS for parent-child dyads with and without ACS (implemented with a slightly confusing application 
+of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
 
 The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has received ACS during the intrapartum period. Only simulants who expect to 
-give birth to a preterm infant and who give birth in a facility with CPAP availability are eligible for this intervention.
+give birth to a preterm infant are eligible for this intervention.
 
 To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "no ACS".  With this framing, the ``RiskEffect`` 
 component requires data on (1) the relative risk of preterm with RDS mortality for people who did not receive ACS, and (2) the population attributable fraction (PAF) of preterm with
@@ -171,8 +168,8 @@ of ACS for pregnant women and people at imminent risk of preterm delivery.
   * - mean_rr
     - :math:`\text{RR}^\text{no ACS} * (1 - p_\text{baseline coverage}) + p_\text{baseline_coverage}`
     - N/A
-    - We will use :math:`p_\text{baseline coverage}` defined in the baseline coverage section above for **among the eligible population only** (i.e., in-facility births 
-      with CPAP availability and preterm status) to calculate the mean_rr and PAF values.
+    - We will use :math:`p_\text{baseline coverage}` defined in the baseline coverage section above for **among the eligible population only** (i.e., expected births 
+      with preterm status) to calculate the mean_rr and PAF values.
   * - PAF
     - see below
     - see below
