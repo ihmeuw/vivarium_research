@@ -85,6 +85,10 @@ There is no need for a diagram for the initial attributes module of this simulat
       <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
     - Will be used to determine in-facility delivery status in delivery
       facility choice module
+  * - D. RDS intervention propensity
+    - 
+    - 
+    - 
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
