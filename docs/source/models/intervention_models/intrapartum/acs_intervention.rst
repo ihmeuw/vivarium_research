@@ -120,15 +120,15 @@ Vivarium Modeling Strategy
 --------------------------
 
 To be eligible to receive the ACS intervention (see :ref:`the intrapartum intervention module document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>` 
-for how to obtain this information in the MNCNH portfolio simulation), a simulant must be expected to give birth to a preterm infant.
+for how to obtain this information in the MNCNH portfolio simulation), a simulant must be expected to give birth to a early or moderate preterm infant with a believed GA
+of 26 to 33 weeks.
 
-This intervention requires adding an attribute to all simulants who expect to give birth to a preterm infant (i.e., based on believed gestational 
-age 34 to 36 weeks from pregnancy module output)  to specify if a parent-child dyad receives ACS or not.  We will track this and the model will 
+This intervention requires adding an attribute to all simulants who expect to give birth to a preterm infant (i.e., based on believed GA if 26 to 33 weeks from 
+pregnancy module output)  to specify if a parent-child dyad receives ACS or not.  We will track this and the model will 
 have different mortality rates for preterm with RDS for parent-child dyads with and without ACS (implemented with a slightly confusing application 
 of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
 
-The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has received ACS during the intrapartum period. Only simulants who expect to 
-give birth to a preterm infant are eligible for this intervention.
+The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has received ACS during the intrapartum period. 
 
 To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "no ACS".  With this framing, the ``RiskEffect`` 
 component requires data on (1) the relative risk of preterm with RDS mortality for people who did not receive ACS, and (2) the population attributable fraction (PAF) of preterm with
@@ -175,7 +175,7 @@ of ACS for pregnant women and people at imminent risk of preterm delivery.
     - see below
     - see `Calibration strategy` section below for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model
 
-Calibration Strategy
+Calibration Strategyy
 --------------------
 
 .. math::
@@ -194,7 +194,7 @@ available.
 
 When we fill in the location-specific values for delivery facility rates, ACS coverage, relative risk of mortality with ACS access, 
 and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{preterm with RDS}|\text{ACS})` 
-and :math:`p(\text{preterm with RDS}|\text{no ACS})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
+and :math:`p(\text{preterm with RDS}|\text{no ACS})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`. 
 
 **Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that 
 :math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
@@ -215,7 +215,10 @@ Since our risk exposure has two categories,
 
    \mathbb{E}(\text{RR}) = p(\text{no ACS}) \cdot \text{RR}_\text{no ACS} + (1 - p(\text{no ACS})) \cdot 1.
 
+.. note:: 
 
+  Simulants should have the same propensity value for CPAP (see the :ref:`CPAP intervention model page <intervention_neonatal_cpap>`) and ACS, such that the same
+  simulants are exposed to both interventions (i.e., if coverage of both CPAP and ACS is 50%, then the same 50% of simulants will be getting each intevention).
 
 Assumptions and Limitations
 ---------------------------
@@ -245,11 +248,13 @@ Assumptions and Limitations
   for more details) provide an accurate overview of ACS use in our locations of interest.
 - We assume that baseline coverage for ACS in home births is 0% (given the WHO 2022 recommendation that ACS only be administered where adequate
   preterm childcare is available, including CPAP).
+- We use the same propensity values for the CPAP and ACS interventions such that the same simulants will be exposed to both, given the WHO 2022 
+  recommendation that ACS only be administered where adequate preterm childcare is available, including CPAP.
 - We use the [WHO-2022]_ recommendations on ACS use for improving preterm births as the basis of ACS eligibility criteria. However, [Greensides-et-al-2018]_ 
   reviewed country-specific guidelines for ACS use and found that neither Nigeria nor Ethiopia national documents (all 2015 or older) stated that GA must be accurately undertaken 
   (see Table 4 in their publication), therefore we simply use the believed GA from the pregnancy module, regardless of how accurate we think the estimate was (i.e. if birthing parent got an ultrasound).
-- Despite the fact that our preterm cause model (based on the GBD cause) considers under 37 weeks of gestation, we will only apply the ACS intervention to simulants with 24-34 weeks of gestation, based
-  on the [WHO-2022]_ recommendations. 
+- Despite the fact that our preterm cause model (based on the GBD cause) considers under 37 weeks of gestation, and despite the [WHO-2022]_ recommendations 
+  that infants with 24-34 weeks of gestation receive ACS, we will only apply the ACS intervention to simulants with 26-33 weeks of gestation, based BMGF assumptions (see email from CT on 6/30/2025).
 
 .. todo::
 
