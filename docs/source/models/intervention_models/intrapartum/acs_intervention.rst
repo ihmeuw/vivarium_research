@@ -89,6 +89,8 @@ Systems team has processed and sent to us from a variety of Ethiopian data sourc
 - Services Availability and Readiness Assessment (SARA) 2016 and 2018
 - Service Provision Assessment (SPA) 2014 and 2021
 
+The baseline coverage values in the table below represent percentages of facilities with ACS availability.
+
 .. list-table:: Baseline Coverage of ACS
   :widths: 15 15 15 15 15
   :header-rows: 1
@@ -218,7 +220,7 @@ Since our risk exposure has two categories,
 Assumptions and Limitations
 ---------------------------
 
-- We assume that ACS availability captures actual use, and not simply the treatment being in the facility. 
+- We assume that ACS availability captures actual use of dexamethasone, and not simply the treatment being in the facility. 
 - We assume that the delivery facility is also the facility where a mother or birthing person will seek care for their preterm infant with RDS.
 - We assume that the relative risk of preterm with RDS mortality with ACS in practice is a value that we can find in the literature. Note: 
   the value we are using is from [Oladapo-et-al-2020]_, a BMGF-funded multicountry RCT which compared neonatal mortality for women at imminent
