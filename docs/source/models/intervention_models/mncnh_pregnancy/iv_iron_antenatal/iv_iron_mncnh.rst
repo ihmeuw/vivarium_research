@@ -6,7 +6,7 @@ Antenatal Intravenous Iron - MNCNH Portfolio Model
 
 .. contents::
    :local:
-   :depth: 1
+   :depth: 2
 
 .. list-table:: Abbreviations
   :widths: 15 15 15
@@ -58,11 +58,11 @@ The IV iron intervention has a direct effect on hemoglobin exposure in pregnancy
     - Direct effect
   * - Birthweight
     - Shifts population mean (magnitude of effect is dependent on pre-IV iron hemoglobin exposure)
-    - Not yet
+    - Yes
     - 100% mediated through hemoglobin
   * - Gestational age at birth
     - Shifts population mean (magnitude of effect is dependent on pre-IV iron hemoglobin exposure)
-    - Not yet
+    - Yes
     - 100% mediated through hemoglobin
   * - Pregnancy outcome
     - Affected probability of stillbirth (magnitude of effect is dependent on pre-IV iron hemoglobin exposure)
@@ -104,9 +104,51 @@ Validation and Verification Criteria
 - Intervention coverage should be zero among the non-eligible populations
 - Hemoglobin level stratified by intervention coverage should reflect the intervention effect size
 
+Birth weight and gestational age
+++++++++++++++++++++++++++++++++++++
+
+Modeling strategy overview
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We will model the effect of IV iron on both gestational age at birth (GA) and birth weight (BW) exposures (see the :ref:`low birth weight and short gestation risk exposure document <2019_risk_exposure_lbwsg>`) in the :ref:`MNCNH portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`. These effects are 100% mediated through IV iron's effect on `Hemoglobin exposure`_ and :ref:`hemoglobin's effect on preterm birth (PTB) and low birth weight (LBW) <2023_hemoglobin_effects>`. Estimates for the effect of hemoglobin on LBWSG exposure as provided by the IHME hemoglobin team are measured in terms of dichotomous exposures of preterm birth (<37 weeks gestational age at birth) and low birth weight (<2500 grams birth weight) and are continuous risk curves from burden of proof models. Therefore, we must modify these estimates in two key ways to be compatible for use in this model: (1) convert the effects on dichotomous measures of preterm birth and low birth weight to effects on continuous measures of gestational age and birth weight, and (2) transform the effects to be specific to the effect IV iron as 100% mediated by hemoglobin.
+
+Effect size derivation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. todo::
 
-  Include subsections for effects on stillbirth, gestational age, and birth weight
+  Revisit this section once we discuss how we want to assign this task between research and engineering and inside versus outside of the simulation model repository.
+
+A derivation of IV iron's effect on gestational age and birth weight exposures as 100% mediated through hemoglobin is `performed for a single sex/location/draw pair in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/hemoglobin_mediation.ipynb>`_. The calculation for a single sex/location/draw pair for both outcomes took about 2.5 minutes, so about 75 hours of computation time is expected to derive these values for the entire MNCNH portfolio simulation across 3 locations, 2 sexes, and 250 draws. The code to produce these estimates should be included in the MNCNH portfolio simulation repository for transparency. 
+
+The specific details of the code to derive the effects is found in the linked notebook. The general steps of the derivation are summarized here:
+
+1. Load the burden of proof estimates and convert the beta coeficients to relative risks by exponentiating.
+2. Transform the relative risk values to be relative to the hemgolobin TMREL value of 120 g/L by dividing all relative risk values by the exposure level closest to 120 g/L.
+3. In a manner similar to the `GBD custom calculation for the PAF of a risk on the outcome as mediated through LBWSG <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/custom_pafs.html#mortality-paf-calculation-for-subcauses-of-the-aggregate-lbwsga-outcome>`_: for each hemoglobin exposure level, X, use optimization to solve for the shift in continuous GA or BW exposure between X and the hemoglobin TMREL that results in the observed relative risk of dichotomous PTB or LBW between X and the hemoglobin TMREL. This step is performed under the following assumptions:
+
+  - The population at the hemoglobin TMREL exposure has the same LBWSG exposure distribution as the population-level GBD LBWSG exposure distribution
+  - There are no differences in the shape of the LBWSG exposure distribution across hemoglobin exposure levels
+
+4. Using the resulting GA and BW shift values for each hemoglobin exposure level relative to the hemoglobin TMREL from step #3, calculate the difference in shift values specific to each hemoglobin exposure level X and X + the effect size of IV iron on `Hemoglobin exposure`_ to calculate the effect of IV iron on GA and BW exposures specifc to the pre-IV iron hemoglobin exposure level X.
+
+Effect size application
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+For simulants who receive the IV iron intervention, the IV iron effect sizes for gestational age and birth weight specific to the simulant's "true" hemoglobin exposure at the time of anemia screening should be applied additively to the simulant's child's gestational age at birth and birth weight continuous exposures as initially sampled from the :ref:`GBD LBWSG exposure distribution <2019_risk_exposure_lbwsg>`.
+
+Verification and validation criteria
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- The LBWSG exposure distribution should continue to meet V&V criteria in the baseline scenario
+- In the interactive sim: the BW and GA exposures between the same individuals in a scenario with IV iron coverage and a scenario without should verify to the IV iron effect sizes on BW and GA specific to that individual's pre-IV iron hemoglobin exposure
+
+Assumptions and limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- We do not utilize the effect estimates of hemoglobin on additional severities of dichotomous low birth weight and preterm birth outcomes (like "very low birth weight") despite the existence of such estimates
+- We do not consider any correlation between hemoglobin and LBWSG exposures in the derivation of the estimates of IV iron's impact on LBWSG
+- We assume that the GA and BW "shifts" attributable to hemoglobin apply equally to the entire LBWSG exposure distribution (in other words, assume no change in the shape of the LBWSG exposure distribution).
 
 Stillbirth
 +++++++++++++++++++++++++
