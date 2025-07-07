@@ -59,6 +59,12 @@ intramuscular betamethasone (for late preterm births in particular - see [Gyamfi
 simulation, we will specifically model the impact of dexamethasone on the mortality of preterm infants with RDS (based on [Brownfoot-et-al-2013]_
 which found that dexamethasone was more effective.)
 
+.. note:: 
+
+  You may notice in subsequent sections of this document that our eligibility criteria to receive ACS based on GA differs from these WHO guidelines.
+  This is based on clinical insight from BMGF that early or moderate preterm pregnancies (26-33 weeks of GA) are provided ACS. See limitations section 
+  for more details.
+
 This section describes how an ACS intervention can be implemented and calibrated for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 See the :ref:`Preterm cause model <2021_cause_preterm_birth_mncnh>` for more information (such as how we are separating the GBD cause 'preterm' into 'preterm with RDS' and 'preterm
 without RDS').
