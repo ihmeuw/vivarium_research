@@ -249,7 +249,7 @@ defined as a module input in a subsequent row.
         * Hemoglobin at birth
       - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
-        * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
+        * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
       - New wave II module
     * - :ref:`Pregnancy II <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       - * LBWSG category propensity
@@ -1542,6 +1542,10 @@ Default stratifications to all observers should include scenario and input draw.
 * By not modeling mortality due to all maternal disorders, we will overestimate YLDs due to postpartum depression and YLDs due to anemia in the postpartum period as more simulants will survive to the postpartum period in our simulation than would be expected in reality.
 
 * We track certain outcomes among partial term pregnancies (abortion/miscarriage and ectopic pregnancy) in this model, including first trimester ANC attendance and associated interventions, anemia YLDs, and postpartum depression. However, these pregnancies are not given special consideration other than their premature end and we do not consider how this population may differ from pregnancies that end in live or still births in terms of their ANC attendance rates or other attributes. Additionally, we do not model any variation in these attributes by subtype of partial term pregnancy (abortion vs. miscarriage vs. ectopic pregnancy), despite there being expected differences in behavior between these groups.
+
+* We do not model an underlying correlation between hemoglobin exposure and stillbirth rates, despite evidence that such an association exists. Therefore, our IV iron intervention model, which is targeted to those with low hemoglobin, will be misaligned with respect to the stillbirth rate among the IV iron intervention target population.
+  
+  * We could use the GBD risk effects between hemoglobin and stillbirth to model baseline correlation only and not model updates in stillbirth rates in response to changes in hemoglobin exposure to address this limitation (as these effects are captured in the impact of the hemoglobin-affecting interventions IV Iron and IFA/MMS already). However, this model upgrade is not highest priority. `See this backlog JIRA ticket #2343 <https://jira.ihme.washington.edu/browse/SSCI-2343>`_
 
 .. _mncnh_portfolio_7.0:
 
