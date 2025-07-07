@@ -175,7 +175,7 @@ of ACS for pregnant women and people at imminent risk of preterm delivery.
     - see below
     - see `Calibration strategy` section below for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model
 
-Calibration Strategyy
+Calibration Strategy
 --------------------
 
 .. math::
