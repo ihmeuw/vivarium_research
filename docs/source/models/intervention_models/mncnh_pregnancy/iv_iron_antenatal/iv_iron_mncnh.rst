@@ -18,6 +18,21 @@ Antenatal Intravenous Iron - MNCNH Portfolio Model
   * - IV
     - Intravenous
     - 
+  * - LBWSG
+    - Low birth weight and short gestation
+    - Name of the GBD risk factor
+  * - GA
+    - Gestational age
+    - Refers to gestational age at birth in this document
+  * - BW
+    - Birth weight
+    - 
+  * - PTB
+    - Preterm birth
+    - Refers to gestational age at birth < 37 weeks in this document
+  * - LBW
+    - Low birth weight
+    - Refers to birth weight < 2500 grams in this document
 
 Intervention Overview
 -----------------------
