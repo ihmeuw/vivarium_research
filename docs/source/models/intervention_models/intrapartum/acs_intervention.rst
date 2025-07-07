@@ -269,7 +269,7 @@ Assumptions and Limitations
 Validation and Verification Criteria
 ------------------------------------
 
-- Population-level incidence rate should be the same as when this intervention is not included in the model.
+- Population-level neonatal mortality rate of preterm birth with RDS in the baseline scenario should continue to validate.
 - The ratio of preterm with RDS mortality among those without ACS divided by those with ACS
   should equal the relative risk parameter used in the model.
 - The baseline coverage of ACS in each facility type should match the values in the artifact.
