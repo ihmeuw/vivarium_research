@@ -87,7 +87,7 @@ There is no need for a diagram for the initial attributes module of this simulat
       facility choice module
   * - D. RDS intervention propensity
     - Use a random number between 0 and 1
-    - Will be used to determine which simulants receive each RDS intervention (CPAP and ACS).
+    - Will be used to determine which simulants receive each RDS intervention (:ref:`CPAP <intervention_neonatal_cpap>` and :ref:`ACS <acs_intervention>`).
     
 
 3.0 Assumptions and limitations
