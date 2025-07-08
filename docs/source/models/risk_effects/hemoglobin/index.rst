@@ -154,7 +154,7 @@ Note that we will not be modeling direct effects of hemoglobin on the affected o
      - :ref:`Neonatal sepsis <2021_cause_neonatal_sepsis_mncnh>`
      - cause
      - c383
-     - :math:`\text{CSMRisk}`
+     - :math:`\text{CSMRisk}_{i}^\text{neonatal sepsis}` (as opposed to :math:`\text{CSMRisk}_{\text{BW}_i,\text{GA}_i}^{k}`), as defined on the :ref:`MNCNH neonatal mortality page <2021_cause_neonatal_disorders_mncnh>`
      - We will be modeling the direct effect, adjusted for mediation through LBWSG
 
 .. todo::
@@ -256,8 +256,8 @@ Where,
     - Note
   * - :math:`\text{CSMRisk}`
     - Neonatal sepsis cause specific mortality risk
-    - Defined on the :ref:`neonatal sepsis cause model document <>`
-    - 
+    - Defined on the :ref:`neonatal sepsis cause model document <2021_cause_neonatal_sepsis_mncnh>`
+    - As defined on the :ref:`MNCNH neonatal mortality page <2021_cause_neonatal_disorders_mncnh>`, we will use :math:`\text{CSMRisk}_{i}^\text{neonatal sepsis}` (as opposed to :math:`\text{CSMRisk}_{\text{BW}_i,\text{GA}_i}^{k}`)
   * - :math:`\text{CSMRisk}_i`
     - Hemoglobin risk-adjusted neonatal sepsis cause-specific mortality risk for an individual simulated dyad, :math:`i`
     - See equation
