@@ -238,11 +238,17 @@ Assumptions and Limitations
 - We do not model effect modification by birthweight as found in the Cochrane review, which found a stronger impact of CPAP on mortality for babies with greater than 1500 gram birthweight and a weaker and non-significant impact among babies with birth weights less than 1500 grams.
 - Baseline coverage data for CPAP in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2016 based on the EmONC Final Report. 
   We assume that Nigeria and Pakistan health systems have the same CPAP availability.
+- We assume no effect modification by ACS on the effect size of CPAP on mortality due to RDS with preterm (i.e., that ``(RR_CPAP | ACS) = (RR_CPAP | no ACS)``).  
+  Despite the fact that ACS acts on outcomes that come earlier in the causal chain than CPAP, and could thereby decrease the effect size of CPAP, there is a lack 
+  of literature evidence to substantiate including it in our model. Further supporting this assumption, [Abdallah-et-al-2023]_ suggests that ACS use was not 
+  significantly associated with CPAP success in RDS treatment.
 
 .. todo::
 
-  If more suitable baseline coverage data for CPAP availability at BEmONC and CEmONC for Nigeria or Pakistan, we should use that data instead and update 
-  this documentation accordingly.
+  - If more suitable baseline coverage data for CPAP availability at BEmONC and CEmONC for Nigeria or Pakistan, we should use that data instead and update 
+    this documentation accordingly.
+  - If we find literature evidence or otherwise find reason to model an effect modification of ACS on CPAP (i.e. if we determine ``(RR_CPAP | ACS) =/= (RR_CPAP | no ACS)``),
+    we will need to adjust our modeling strategy and current assumption that ``(RR_CPAP | ACS) == (RR_CPAP | no ACS)``.
 
 Validation and Verification Criteria
 ------------------------------------
@@ -256,4 +262,7 @@ References
 
 * https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/
 * https://chatgpt.com/share/67c1c86e-3194-8010-9fe7-aadd3e15c4d0
+
+.. [Abdallah-et-al-2023]
+  Abdallah Y, Mkony M, Noorani M, Moshiro R, Bakari M, Manji K. CPAP failure in the management of preterm neonates with respiratory distress syndrome where surfactant is scarce. A prospective observational study. BMC Pediatr. 2023 May 3;23(1):211. doi: 10.1186/s12887-023-04038-6. PMID: 37138252; PMCID: PMC10155133.
 
