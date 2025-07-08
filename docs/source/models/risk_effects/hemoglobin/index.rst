@@ -248,7 +248,7 @@ Effect application
 Where,
 
 .. list-table:: Parameters
-  :header-row: 1
+  :header-rows: 1
 
   * - Parameter
     - Definition
