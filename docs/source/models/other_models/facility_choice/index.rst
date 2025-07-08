@@ -373,12 +373,6 @@ parameters.
     - 0.2
     - 0.2
     - Chosen arbitrarily as a plausible value
-  * - CPAP propensity :math:`u_\text{CPAP}`
-    - ACS propensity :math:`u_\text{ACS}`
-    - 0.2
-    - 0.2
-    - 0.2
-    - Chosen arbitrarily as a plausible value
 
 .. note::
 
