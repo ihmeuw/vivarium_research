@@ -87,47 +87,18 @@ without RDS').
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-As we continue to seek data for all locations of interest, we will use estimates that the Health
-Systems team has processed and sent to us from a variety of Ethiopian data sources, including: 
+We will model scaling up of the CPAP and ACS interventions together (both target preterm with RDS), based on insight from the BMGF team as well as the WHO guidelines listed above.
+As such, our ACS intervention will have the same baseline coverage values as the CPAP intervention, so please see 
+the :ref:`CPAP intervention baseline coverage section <intervention_neonatal_cpap>` for reference. For more details on our underlying 
+assumption that ACS and CPAP baseline coverage are the same, please see the Assumptions and Limitations section below. 
 
-- Ethiopian Emergency Obstetric and Newborn Care (EmONC) Assessment 2016
-- Performance Monitoring for Action (PMA) 2019-2023
-- Services Availability and Readiness Assessment (SARA) 2016 and 2018
-- Service Provision Assessment (SPA) 2014 and 2021
-
-The baseline coverage values in the table below represent percentages of facilities with ACS availability.
-
-.. list-table:: Baseline Coverage of ACS
-  :widths: 15 15 15 15 15
-  :header-rows: 1
-
-  * - Location
-    - Birth Facility
-    - Coverage Mean (%)
-    - Coverage Distribution (%)
-    - Notes
-  * - All (Ethiopia, Nigeria, Pakistan)
-    - Home Birth
-    - 0
-    - N/A
-    - Assumption based on WHO 2022 recommendation requiring adequate preterm childcare such as CPAP 
-  * - All (Ethiopia, Nigeria, Pakistan)
-    - BEmONC Facilities
-    - 12.85
-    - :math:`\text{Uniform}(2.19,25.60)`
-    - From Health Systems team estimates saved at ``/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/sim_science_estimates.csv`` 
-      (as processed in `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/health_systems_team_data.ipynb>`_)
-  * - All (Ethiopia, Nigeria, Pakistan)
-    - CEmONC Facilities
-    - 76.29
-    - :math:`\text{Uniform}(66.63,89.23)`
-    - From Health Systems team estimates saved at ``/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/sim_science_estimates.csv``
-      (as processed in `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/health_systems_team_data.ipynb>`_)
+To define individual-level coverage of ACS and CPAP (i.e., the RDS intervention bundle), please use the RDS intervention propensity 
+value defined on the :ref:`Initial Attributes module in the concept model <>`...
 
 Vivarium Modeling Strategy
 --------------------------
 
-To be eligible to receive the ACS intervention (see :ref:`the intrapartum intervention module document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>` 
+To be eligible to receive the ACS intervention (see the :ref:`intrapartum intervention module document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>` 
 for how to obtain this information in the MNCNH portfolio simulation), a simulant must be expected to give birth to a early or moderate preterm infant with a believed GA
 of 26 to 33 weeks.
 
@@ -176,47 +147,7 @@ of ACS for pregnant women and people at imminent risk of preterm delivery.
   * - PAF
     - see below
     - see below
-    - see `Calibration strategy` section below for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model
-
-Calibration Strategy
---------------------
-
-.. math::
-    \begin{align*}
-        p(\text{preterm with RDS}) 
-        &= \sum_{\text{paths without ACS}} p(\text{path})\cdot p(\text{preterm with RDS}|\text{no ACS})\\
-        &+ \sum_{\text{paths with ACS}} p(\text{path})\cdot p(\text{preterm with RDS}|\text{ACS})\\[.1in]
-        p(\text{preterm with RDS}|\text{no ACS}) &= \text{RR}_\text{no ACS} \cdot p(\text{preterm with RDS}|\text{ACS})
-    \end{align*}
-
-where :math:`p(\text{preterm with RDS})` is the probability of dying from preterm with RDS in the general population, and :math:`p(\text{preterm with RDS}|\text{ACS})` 
-and :math:`p(\text{preterm with RDS}|\text{no ACS})` are the probability of dying from preterm with RDS in setting with and without access to ACS.  
-For each path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges 
-labeled BEmONC and unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has ACS 
-available.
-
-When we fill in the location-specific values for delivery facility rates, ACS coverage, relative risk of mortality with ACS access, 
-and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{preterm with RDS}|\text{ACS})` 
-and :math:`p(\text{preterm with RDS}|\text{no ACS})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`. 
-
-**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that 
-:math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
-
-.. math::
-
-   p(\text{no ACS}) = \sum_{\text{paths without ACS}} p(\text{path}),
-
-then can use this to expand the identity
-
-.. math::
-
-   \text{PAF}_\text{no ACS} = 1 - \frac{1}{\mathbb{E}(\text{RR})}.
-
-Since our risk exposure has two categories,
-
-.. math::
-
-   \mathbb{E}(\text{RR}) = p(\text{no ACS}) \cdot \text{RR}_\text{no ACS} + (1 - p(\text{no ACS})) \cdot 1.
+    - see the :ref:`CPAP intervention Calibration Strategy <intervention_neonatal_cpap>` for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model
 
 .. note:: 
 

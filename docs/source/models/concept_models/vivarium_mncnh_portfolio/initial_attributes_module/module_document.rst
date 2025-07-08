@@ -86,7 +86,7 @@ There is no need for a diagram for the initial attributes module of this simulat
     - Will be used to determine in-facility delivery status in delivery
       facility choice module
   * - D. RDS intervention propensity
-    - 
+    - Use a random number between 0 and 1
     - Will be used to determine which simulants receive each RDS intervention (CPAP and ACS).
     
 
