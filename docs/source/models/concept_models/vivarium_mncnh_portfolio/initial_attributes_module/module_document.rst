@@ -86,9 +86,12 @@ There is no need for a diagram for the initial attributes module of this simulat
     - Will be used to determine in-facility delivery status in delivery
       facility choice module
   * - D. RDS intervention propensity
-    - 
-    - 
-    - 
+    - See the :ref:`correlated propensities
+      <facility_choice_correlated_propensities_section>` section of the
+      :ref:`facility choice model document
+      <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
+    - Will be used to determine which simulants receive each RDS intervention (CPAP and ACS).
+    
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
