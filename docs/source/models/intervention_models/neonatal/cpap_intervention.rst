@@ -81,7 +81,7 @@ We might be able to borrow strength from other locations and times by predicting
 
 To define individual-level coverage of CPAP and ACS (i.e., the RDS intervention bundle), please use the RDS intervention propensity 
 value defined on the :ref:`Initial Attributes module page <2024_vivarium_mncnh_portfolio_initial_attributes_module>` to ensure the same
-simulants are exposed to both interventions (i.e., if coverage of both CPAP and ACS is *x*%, then the same *x*% of simulants will be getting each intevention).
+simulants are exposed to both interventions (i.e., if coverage of both CPAP and ACS is x%, then the same x% of simulants will be getting each intevention).
 For more information on why we are bundling CPAP and ACS together, please see the :ref:`ACS intervention page <acs_intervention>`.
 
 Vivarium Modeling Strategy

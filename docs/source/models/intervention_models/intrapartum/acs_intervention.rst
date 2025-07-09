@@ -94,7 +94,7 @@ assumption that ACS and CPAP baseline coverage are the same, please see the Assu
 
 To define individual-level coverage of ACS and CPAP (i.e., the RDS intervention bundle), please use the RDS intervention propensity 
 value defined on the :ref:`Initial Attributes module page <2024_vivarium_mncnh_portfolio_initial_attributes_module>` to ensure the same
-simulants are exposed to both interventions (i.e., if coverage of both CPAP and ACS is *x*%, then the same *x*% of simulants will be getting each intevention).
+simulants are exposed to both interventions (i.e., if coverage of both CPAP and ACS is x%, then the same x% of simulants will be getting each intevention).
 
 Vivarium Modeling Strategy
 --------------------------
