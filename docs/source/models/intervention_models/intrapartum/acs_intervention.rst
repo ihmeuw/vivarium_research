@@ -93,7 +93,8 @@ the :ref:`CPAP intervention baseline coverage section <intervention_neonatal_cpa
 assumption that ACS and CPAP baseline coverage are the same, please see the Assumptions and Limitations section below. 
 
 To define individual-level coverage of ACS and CPAP (i.e., the RDS intervention bundle), please use the RDS intervention propensity 
-value defined on the :ref:`Initial Attributes module in the concept model <>`...
+value defined on the :ref:`Initial Attributes module page <2024_vivarium_mncnh_portfolio_initial_attributes_module>` to ensure the same
+simulants are exposed to both interventions (i.e., if coverage of both CPAP and ACS is *x*%, then the same *x*% of simulants will be getting each intevention).
 
 Vivarium Modeling Strategy
 --------------------------
@@ -148,11 +149,6 @@ of ACS for pregnant women and people at imminent risk of preterm delivery.
     - see below
     - see below
     - see the :ref:`CPAP intervention Calibration Strategy <intervention_neonatal_cpap>` for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model
-
-.. note:: 
-
-  Simulants should have the same propensity value for CPAP (see the :ref:`CPAP intervention model page <intervention_neonatal_cpap>`) and ACS, such that the same
-  simulants are exposed to both interventions (i.e., if coverage of both CPAP and ACS is 50%, then the same 50% of simulants will be getting each intevention).
 
 Assumptions and Limitations
 ---------------------------

@@ -25,7 +25,10 @@ CPAP for treating Preterm with RDS
     - Continuous positive airway pressure
     - 
   * - RDS
-    - respiratory distress syndrome
+    - Respiratory distress syndrome
+    - 
+  * - ACS
+    - Antenatal corticosteroids
     - 
 
 Intervention Overview
@@ -75,6 +78,11 @@ We might be able to borrow strength from other locations and times by predicting
     - 39.3
     - :math:`\text{Normal}(39.3,5^2)`
     - placeholder value based on a single data point; uncertainty is an assumption without direct evidence
+
+To define individual-level coverage of CPAP and ACS (i.e., the RDS intervention bundle), please use the RDS intervention propensity 
+value defined on the :ref:`Initial Attributes module page <2024_vivarium_mncnh_portfolio_initial_attributes_module>` to ensure the same
+simulants are exposed to both interventions (i.e., if coverage of both CPAP and ACS is *x*%, then the same *x*% of simulants will be getting each intevention).
+For more information on why we are bundling CPAP and ACS together, please see the :ref:`ACS intervention page <acs_intervention>`.
 
 Vivarium Modeling Strategy
 --------------------------
