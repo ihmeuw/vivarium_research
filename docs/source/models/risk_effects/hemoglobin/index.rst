@@ -50,8 +50,6 @@ GBD 2023 Modeling Strategy
 
   As of March 2025 it is undecided whether the hemoglobin risk factor will be included in the GBD 2023 publication. Regardless, risk effects estimates for the following affected outcomes have been uploaded to GBD shared functions.
 
-  These risk effects are expected to be updated at some point in the future to reflect an expanded date range for the systematic review conducted to inform the risk effects measures, but the structure of the data is not expected to change.
-
 In GBD 2023, the hemoglobin risk effects are modeled as continuous risk curves with 1,000 exposure estimates ranging between values of 40 and 150. Exposure values <40 are assigned a risk value consistent with an exposure of 40 and exposure values >150 are assigned a risk value consistent with an exposure of 150.
 
 .. list-table:: Affected Entities
@@ -88,15 +86,15 @@ In GBD 2023, the hemoglobin risk effects are modeled as continuous risk curves w
 
   Determine how GBD handles the fact that the hemoglobin risk factor is specific to the pregnant population but the depressive disorders cause is not when we get relevant documentation
 
-The hemoglobin team has also estimated risk effects for several additional outcomes, which are not available in GBD shared functions due to complications and outstanding work needed in order for the risk effects to be compatible with the existing GBD structure related to the LBWSG risk factor and neonatal disorders. A list of these affected outcomes is shown below:
+The relative risk curves for maternal disorders affected outcomes in GBD shared functions as of March 2025 are shown below for reference. These values have been transformed to be relative to a hemoglobin exposure of 110 g/L (the threshold for anemia in pregnancy) for ease of interpretation. However, they are stored in GBD shared functions as relative to a hemoglobin exposure of 40 g/L.
 
-- Low birth weight
+.. image:: maternal_disorders_risk_curve.png
 
-  - Will be operationalized as categorical (including effects for very low birth weight and extremely low birth weight when possible) as well as continuous. The estimates for the categorical measure are in progress/complete, but the estimates for the continuous measure have not yet been started as of March 2025.
+The hemoglobin team has also estimated risk effects for several additional outcomes. A list of these affected outcomes is shown below and risk curve values for each of these outcomes can be found at :code:`/mnt/team/anemia/pub/bop/sim_studies/`.
 
-- Preterm birth
-    
-  - Will be operationalized as categorical (including effects for very preterm and extremely preterm when possible) as well as continuous. The estimates for the categorical measure are in progress/complete, but the estimates for the continuous measure have not yet been started as of March 2025.
+- Low birth weight (Operationalized as categorical for <2,500 grams and additional severities)
+
+- Preterm birth (Operationalized as categorical for <37 weeks and additional severities)
 
 - Small for gestational age
 
@@ -108,19 +106,20 @@ The hemoglobin team has also estimated risk effects for several additional outco
 
 - Stillbirth
 
+PAFs and attributable burden for hemoglobin on causes affected by LBWSG as mediated through LBWSG can be pulled using shared functions with release ID 33 and burdenator ID 393 (`as tracked here <https://hub.ihme.washington.edu/spaces/GBDdirectory/pages/229280354/GBD+2023+PAF+Burdenator+SEV+Calculator+Tracking>`_). These PAFs were calculated `the custom LBWSG PAF calculation <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/custom_pafs.html#mortality-paf-calculation-for-subcauses-of-the-aggregate-lbwsga-outcome>`_ and they did not consider the direct (unmediated) effect of hemoglobin on neonatal sepsis.
 
-Vivarium Modeling Strategy
---------------------------
+Risk curves for selected neonatal outcomes are shown below:
+
+.. image:: neonatal_outcome_risk_curves.png
+
+Vivarium Modeling Strategy: MNCNH Portfolio Simulation
+------------------------------------------------------
+
+Note that we will not be modeling direct effects of hemoglobin on the affected outcomes of stillbirth or outcomes related to gestational age or birth weight exposures. Instead, these effects will be implicitly included in the effects of the :ref:`iron-containing antenatal supplementation <maternal_supplementation_intervention>` and :ref:`intravenous iron <intervention_iv_iron_antenatal_mncnh>` interventions, which will affect these outcomes with effect sizes that are inclusive of mediated effects through hemoglobin.
 
 .. todo::
 
-  Add strategy for modeling neonatal outcomes. This must account for the following:
-
-    - Consistency/overlap between effects on PTB and LBW
-
-    - Mediation of effects on neonatal sepsis and neonatal ACMR by effects on PTB/LBW
-
-    - Mediation of MMS effect on LBWSG through MMS->hemoglobin->LBWSG pathway (and consistency with IV, for which we do not model a direct effect on LBWSG)
+  Include details on neonatal sepsis affected outcome 
 
 .. list-table:: Risk Outcome Relationships for Vivarium
    :header-rows: 1
@@ -181,10 +180,6 @@ Use the population attributable fraction values pulled from GBD shared functions
 .. math::
 
   ir_i = ir * (1 - PAF) * RR_i
-
-The relative risk curves for maternal disorders affected outcomes in GBD shared functions as of March 2025 are shown below for reference. These values have been transformed to be relative to a hemoglobin exposure of 110 g/L (the threshold for anemia in pregnancy) for ease of interpretation. However, they are stored in GBD shared functions as relative to a hemoglobin exposure of 40 g/L.
-
-.. image:: maternal_disorders_risk_curve.png
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
