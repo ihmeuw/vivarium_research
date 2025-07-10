@@ -128,15 +128,12 @@ Please see :ref:`the misoprostol intervention documentation page <misoprostol_in
 Please see :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` for baseline coverage values for births at 
 home and in BEmONC and CEmONC facilities. 
 
-**Antenatal corticosteroids:** (percentage of believed preterm births)
+**Antenatal corticosteroids:** 
 
-  * Home birth: 1%
-
-  * Hospital birth: 12%
-
-  * Clinic/low-level birth: 2%
-
-Source: EmONC (Ethiopia; Table 10.5.4A). These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The denominator for these values is LBW and preterm births. Outstanding items: believe this only affected neonatal outcomes, confirm with BMGF
+Please see :ref:`the CPAP intervention documentation page <cpap_intervention>` for baseline coverage values for births at 
+home and in BEmONC and CEmONC facilities. CPAP is a neonatal intervention, but like ACS, it treats RDS and we make the assumption 
+that the coverage of ACS in the delivery facility is the same as the baseline coverage of CPAP in the delivery facility. See the 
+:ref:`ACS intervention documentation page <acs_intervention>` for more information on this assumption.
 
 .. todo::
 
@@ -179,7 +176,7 @@ Source: EmONC (Ethiopia; Table 10.5.4A). These are placeholder values and will b
     - 
   * - B. Antenatal corticosteroid coverage
     - *True* / *False*
-    - Coverage can only be *True* if gestational age is believed to be < 37 weeks
+    - Coverage can only be *True* if gestational age is believed to be between 26 and 33 weeks
   * - C. Misoprostol
     - *True* / *False*
     - Coverage can only be *True* if simulant attended ANC and delivered at home
@@ -196,7 +193,7 @@ Source: EmONC (Ethiopia; Table 10.5.4A). These are placeholder values and will b
 
 * See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` and  :ref:`the misoprostol intervention documentation page <misoprostol_intervention>` for V&V criteria.
 
-* Confirm no simulants believed to be >37 weeks gestational age at birth recieve corticosteroids
+* Confirm no simulants believed to be outside of 26 and 33 weeks of gestational age at birth recieve corticosteroids
 
 5.0 References
 +++++++++++++++
