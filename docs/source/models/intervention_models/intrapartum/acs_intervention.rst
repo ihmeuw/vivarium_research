@@ -147,7 +147,8 @@ of ACS for pregnant women and people at imminent risk of preterm delivery.
   * - PAF
     - see below
     - see below
-    - see the :ref:`CPAP intervention Calibration Strategy <intervention_neonatal_cpap>` for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model
+    - see the :ref:`CPAP intervention Calibration Strategy <intervention_neonatal_cpap>` for details on how to calculate PAF that is consistent with RR, risk exposure, and facility choice model.
+      No adjustments are needed to the PAF calculation for ACS, as it is the same as the CPAP intervention.
 
 Assumptions and Limitations
 ---------------------------
