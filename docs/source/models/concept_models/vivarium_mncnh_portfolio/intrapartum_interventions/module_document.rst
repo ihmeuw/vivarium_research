@@ -130,7 +130,7 @@ home and in BEmONC and CEmONC facilities.
 
 **Antenatal corticosteroids:** 
 
-Please see :ref:`the CPAP intervention documentation page <cpap_intervention>` for baseline coverage values for births at 
+Please see :ref:`the CPAP intervention documentation page <intervention_neonatal_cpap>` for baseline coverage values for births at 
 home and in BEmONC and CEmONC facilities. CPAP is a neonatal intervention, but like ACS, it treats RDS and we make the assumption 
 that the coverage of ACS in the delivery facility is the same as the baseline coverage of CPAP in the delivery facility. See the 
 :ref:`ACS intervention documentation page <acs_intervention>` for more information on this assumption.
