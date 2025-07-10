@@ -89,8 +89,7 @@ Baseline Coverage Data
 
 We will model scaling up of the CPAP and ACS interventions together (both target preterm with RDS), based on insight from the BMGF team as well as the WHO guidelines listed above.
 As such, our ACS intervention will have the same baseline coverage values as the CPAP intervention, so please see 
-the :ref:`CPAP intervention baseline coverage section <intervention_neonatal_cpap>` for reference. For more details on our underlying 
-assumption that ACS and CPAP baseline coverage are the same, please see the Assumptions and Limitations section below. 
+the :ref:`CPAP intervention baseline coverage section <intervention_neonatal_cpap>` for reference. 
 
 To define individual-level coverage of ACS and CPAP (i.e., the RDS intervention bundle), please use the RDS intervention propensity 
 value defined on the :ref:`Initial Attributes module page <2024_vivarium_mncnh_portfolio_initial_attributes_module>` to ensure the same
