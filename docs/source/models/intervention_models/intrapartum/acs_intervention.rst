@@ -162,6 +162,8 @@ Assumptions and Limitations
   CPAP, rather than pertaining to the cumulative effect size of ACS and CPAP together. 
 - We assume that ``(RR_ACS | CPAP) = (RR_ACS | no CPAP)``. This is because of the assumption that ACS affects RDS incidence while CPAP affects RDS 
   case fatality, so by definition CPAP could not modify the effect of RDS under these assumptions it comes too late in the causal chain.
+- We assume that the baseline coverage of ACS in the delivery facility is the same as the baseline coverage of CPAP in the delivery facility, 
+  which is based on the [WHO-2022]_ recommendation that ACS only be administered where adequate preterm childcare is available, including CPAP.
 - We assume that the observed reduction in neonatal deaths in this RCT are due to a decrease in incidence of respiratory distress. We currently 
   use [Oladapo-et-al-2020]_'s RR value for early neonatal death, but could instead use their RR for severe respiratory distress at 24 hours, 
   which is a significantly more impactful value (0.56, 0.37-0.85), however is not explicitly about mortality, which is what we are modeling. 

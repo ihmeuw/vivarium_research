@@ -139,7 +139,7 @@ Where,
   * - :math:`\text{RR}_\text{ACS}`
     - Relative risk of ACS intervention on RDS mortality 
     - Refer to :ref:`ACS intervention page <acs_intervention>` for this effect size.
-    - 
+    - Only to be included in PAF calculation if simulant is within the gestational age range that is eligible for ACS (26-33 weeks).
 
 .. _cpap_calibration:
 
@@ -240,6 +240,12 @@ and the pseudocode would look as follows::
       p_intervention * 1
   )
   PAF_no_CPAP_ACS = 1 - 1 / population_average_RR
+
+The above PAF derivation should only include the effect of ACS on RDS mortality if the simulant is within the gestational age range that is eligible for ACS (26-33 weeks). For 
+preterm infants that fall outside of this range, the PAF should be be calculated using the following equation::
+
+  population_average_RR = RR_no_CPAP * p_no_CPAP + 1 * p_CPAP
+  PAF_no_CPAP = 1 - 1 / population_average_RR
 
 Scenarios
 ---------
