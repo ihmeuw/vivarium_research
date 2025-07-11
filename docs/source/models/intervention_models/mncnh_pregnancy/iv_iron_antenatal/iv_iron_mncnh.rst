@@ -138,7 +138,7 @@ A derivation of IV iron's effect on gestational age and birth weight exposures a
 
 The specific details of the code to derive the effects is found in the linked notebook. The general steps of the derivation are summarized here:
 
-1. Load the burden of proof estimates and convert the beta coeficients to relative risks by exponentiating.
+1. Load the burden of proof estimates and convert the beta coefficients to relative risks by exponentiating.
 2. Transform the relative risk values to be relative to the hemgolobin TMREL value of 120 g/L by dividing all relative risk values by the exposure level closest to 120 g/L.
 3. In a manner similar to the `GBD custom calculation for the PAF of a risk on the outcome as mediated through LBWSG <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/custom_pafs.html#mortality-paf-calculation-for-subcauses-of-the-aggregate-lbwsga-outcome>`_: for each hemoglobin exposure level, X, use optimization to solve for the shift in continuous GA or BW exposure between X and the hemoglobin TMREL that results in the observed relative risk of dichotomous PTB or LBW between X and the hemoglobin TMREL. This step is performed under the following assumptions:
 
