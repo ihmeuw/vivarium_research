@@ -385,6 +385,7 @@ defined as a module input in a subsequent row.
       * Birth facility
       * Birth weight
       * Gestational age
+      * Hemoglobin exposure at birth (affects neonatal sepsis)
     - * Neonatal probiotics coverage
       * CPAP coverage
       * Neonatal mortality outcomes (see outcome table)
@@ -397,6 +398,7 @@ defined as a module input in a subsequent row.
       * :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
       * Antenatal corticosteroids
       * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
+      * :ref:`Hemoglobin risk effects <2023_hemoglobin_effects>`
 
 .. list-table:: Postpartum Component Modules
   :header-rows: 1
