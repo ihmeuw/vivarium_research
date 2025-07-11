@@ -189,7 +189,7 @@ This module will:
     - 
   * - VIII
     - Apply IV iron effect
-    - Effect size on hemoglobin defined on :ref:`intravenous iron intervention document <intervention_iv_iron_antenatal>`
+    - Effect size on hemoglobin defined on :ref:`intravenous iron intervention document <intervention_iv_iron_antenatal_mncnh>`
     - Ignore instructions regarding timing of effect implementation on this document
   * - IX
     - Record IV iron receipt
