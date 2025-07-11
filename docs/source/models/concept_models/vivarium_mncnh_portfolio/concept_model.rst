@@ -1183,9 +1183,9 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - ``model15.0``
     - Default
+    - Added preterm status and believed preterm status to maternal
+      population observer (#7)
     - Default
-    - AI Ultrasound observer added in this run and to be included in all
-      future runs
   * - 16.0*
     - Wave I antenatal corticosteroids
     - Baseline
