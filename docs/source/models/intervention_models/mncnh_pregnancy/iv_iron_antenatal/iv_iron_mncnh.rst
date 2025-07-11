@@ -176,16 +176,21 @@ We will model an effect of IV iron on stillbirth (a birth outcome defined on the
 Relative risk derivation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. todo::
+
+  Revisit this section once we discuss where these derivations should be performed and by whom
+
 Note that the derivation of the IV iron relative risks are dependent on the effect size of IV iron on hemoglobin, as defined in the `Hemoglobin exposure`_ section. The derivation of these RRs as described below should be done in the model repository so that the values can easily be updated if the effect size of IV iron on hemoglobin were to ever change.
 
 The following steps detail how to obtain the IV iron-specific relative risks on stillbirth specific to a given hemoglobin exposure value.
 
-1. Load the relative risk data from :code:`/mnt/team/anemia/pub/bop/sim_studies/stillbirth/inner_draws.csv`
+1. Load and transform the relative risk data from :code:`/mnt/team/anemia/pub/bop/sim_studies/stillbirth/inner_draws.csv`
 
 .. code:: python
 
-  import pandas as pd
+  import pandas as pd, numpy as np
   df = pd.read_csv('/mnt/team/anemia/pub/bop/sim_studies/stillbirth/inner_draws.csv')
+  df = np.exp(df.set_index('risk')).reset_index()
 
 
 2. Calculate the hemoglobin exposure increment between each of the exposure levels stored in the :code:`risk` column of the .csv
