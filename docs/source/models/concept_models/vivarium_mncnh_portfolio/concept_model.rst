@@ -1521,14 +1521,30 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 15.0
-    - * Validate rates of preterm birth given in-facility status against
+    - Note 1
+        For these checks, "verify" means we are comparing the simulation
+        output to a value that was input directly, whereas "validate"
+        means we are expecting the sim to indirectly reproduce a value
+        that was not input directly
+
+      Note 2
+        Several of the validation targets are calculated by
+        Nathaniel's `facility choice code`_ [[I'm planning to put the
+        targets in a .csv file and add a link to it here]]
+
+      **Checks using observer outputs:**
+
+      * Validate rates of preterm birth given in-facility status against
         targets (targets are calculated by facility choice code)
       * Validate rates of in-facility delivery given ANC status against
         targets (targets are calculated by facility choice code)
-      * Verify rates of in-facility delivery match GBD covariate
-      * Verify preterm birth rates (stratified by sex and overall) match
-        GBD (using LBWSG data and sex ratios)
-      * Verify rates of ANC1 match GBD covariate
+      * Validate rates of in-facility delivery against GBD covariate 51
+      * Verify preterm birth rates (overall, not sex-specific) match
+        GBD preterm rates calculated from LBWSG data
+      * Verify proportions of male and female births match GBD (using
+        either the "live births by sex" covariate 1106, or
+        get_population with the "Birth" age group 164)
+      * Verify rates of ANC1 match GBD covariate 7
       * Verify rates of BEmONC vs. CEmONC match input data on
         :ref:`facility choice model page
         <2024_facility_model_vivarium_mncnh_portfolio>`
@@ -1538,11 +1554,27 @@ Default stratifications to all observers should include scenario and input draw.
       * Validate observed probabilities of IFD given believed preterm
         status against observed probabilities in facility choice nanosim
       * Validate confusion matrix of preterm status vs. believed preterm
-        status against facility choice nanosim
+        status against targets from facility choice nanosim
       * Validate P( believed preterm | preterm status, ultrasound type)
-        against facility choice nanosim
+        against targets from facility choice nanosim
+
+      Note 3
+        The following checks in the interactive sim would only be
+        necessary if some of the above checks are failing
+
+      **Checks using interactive sim:**
+
+      * Verify sex-specific LBWSG distribution against GBD
+      * Verify that correlations between the LBWSG category, ANC, and IFD
+        propensities match the correlations specified on the
+        :ref:`facility choice model page
+        <2024_facility_model_vivarium_mncnh_portfolio>`
+      * Verify that the sim is using the specified causal probabilities
+        of IFD given believed preterm status
     -
     -
+
+.. _facility choice code: https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
