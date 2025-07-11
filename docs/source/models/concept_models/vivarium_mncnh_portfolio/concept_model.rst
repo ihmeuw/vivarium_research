@@ -736,16 +736,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Test hemoglobin exposure (dichotomous, 'low' if tested low hemoglobin,'adequate' if tested adequate hemoglobin, N/A if not tested)
       * Ferritin status (dichotomous, 'low' if low ferritin, 'adequate' if adequate ferritin, N/A if not tested)
       * Delivery facility
-
-    - 
-  * - 8. AI ultrasound observer: Count live births and stillbirths
-    - * Delivery facility type
-      * Sex of infant
-      * Birth outcome (live or still)
       * Preterm status
       * Believed preterm status
-      * ANC attendance
-      * Ultrasound type
     -
 
 .. todo::
