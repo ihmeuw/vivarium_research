@@ -357,8 +357,8 @@ parameters.
   * - ANC propensity :math:`u_\text{ANC}`
     - IFD propensity :math:`u_\text{IFD}`
     - 0.63
-    - 0.46
-    - 0.36
+    - 0.41
+    - 0.35
     - Correlation found from causal model optimization after the other
       two correlations were fixed
   * - ANC propensity :math:`u_\text{ANC}`
@@ -513,20 +513,20 @@ category ordering defined in the previous section.
      - Pakistan
    * - :math:`\text{Pr}[\text{at-home}\mid \operatorname{do}(\text{believed preterm})]`
      - 0.38
-     - 0.27
-     - 0.11
+     - 0.38
+     - 0.17
    * - :math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed preterm})]`
      - 1 - 0.38
-     - 1 - 0.27
-     - 1 - 0.11
+     - 1 - 0.38
+     - 1 - 0.17
    * - :math:`\text{Pr}[\text{at-home}\mid \operatorname{do}(\text{believed term})]`
      - 0.55
-     - 0.55
-     - 0.29
+     - 0.51
+     - 0.26
    * - :math:`\text{Pr}[\text{in-facility}\mid \operatorname{do}(\text{believed term})]`
      - 1 - 0.55
-     - 1 - 0.55
-     - 1 - 0.29
+     - 1 - 0.51
+     - 1 - 0.26
 
 More explicitly, given the simulant's believed preterm status (either
 "believed preterm" or "believed term") and their IFD propensity,
