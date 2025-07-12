@@ -113,3 +113,4 @@ venv.bak/
 
 # Mac OS stuff
 .DS_Store
+swc-python/
