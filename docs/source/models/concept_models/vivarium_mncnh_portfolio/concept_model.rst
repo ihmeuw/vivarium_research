@@ -736,8 +736,9 @@ Default stratifications to all observers should include scenario and input draw.
       * Test hemoglobin exposure (dichotomous, 'low' if tested low hemoglobin,'adequate' if tested adequate hemoglobin, N/A if not tested)
       * Ferritin status (dichotomous, 'low' if low ferritin, 'adequate' if adequate ferritin, N/A if not tested)
       * Delivery facility
-
-    - 
+      * Preterm status
+      * Believed preterm status
+    -
 
 .. todo::
 
@@ -1174,13 +1175,24 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default, note that we would like the 4-category ANC attendance variable observed
-  * - 15.0*
-    - Wave I antenatal corticosteroids
+  * - 15.0
+    - :ref:`Delivery facility choice model
+      <2024_facility_model_vivarium_mncnh_portfolio>`, including updates
+      to the :ref:`AI Ultrasound module
+      <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Baseline
     - ``model15.0``
+    - Default
+    - Added preterm status and believed preterm status to maternal
+      population observer (#7)
+    - Default
+  * - 16.0*
+    - Wave I antenatal corticosteroids
+    - Baseline
+    - ``model16.0``
     -
-    - 
-    - 
+    -
+    -
 
 .. note:: 
 
@@ -1508,6 +1520,61 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm AI ultrasound exposure categories is consistent with ANC attendance categories (ex: no ultrasound coverage if no ANC coverage)
     - 
     - 
+  * - 15.0
+    - Note 1
+        For these checks, "verify" means we are comparing the simulation
+        output to a value that was input directly, whereas "validate"
+        means we are expecting the sim to indirectly reproduce a value
+        that was not input directly
+
+      Note 2
+        Several of the validation targets are calculated by
+        Nathaniel's `facility choice code`_ [[I'm planning to put the
+        targets in a .csv file and add a link to it here]]
+
+      **Checks using observer outputs:**
+
+      * Validate rates of preterm birth given in-facility status against
+        targets (targets are calculated by facility choice code)
+      * Validate rates of in-facility delivery given ANC status against
+        targets (targets are calculated by facility choice code)
+      * Validate rates of in-facility delivery against GBD covariate 51
+      * Verify preterm birth rates (overall, not sex-specific) match
+        GBD preterm rates calculated from LBWSG data
+      * Verify proportions of male and female births match GBD (using
+        either the "live births by sex" covariate 1106, or
+        get_population with the "Birth" age group 164)
+      * Verify rates of ANC1 match GBD covariate 7
+      * Verify rates of BEmONC vs. CEmONC match input data on
+        :ref:`facility choice model page
+        <2024_facility_model_vivarium_mncnh_portfolio>`
+      * Verify rates of standard ultrasound given ANC1 status match
+        baseline coverage from :ref:`AI Ultrasound module
+        <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+      * Validate observed probabilities of IFD given believed preterm
+        status against observed probabilities in facility choice nanosim
+      * Validate confusion matrix of preterm status vs. believed preterm
+        status against targets from facility choice nanosim
+      * Validate P( believed preterm | preterm status, ultrasound type)
+        against targets from facility choice nanosim
+
+      Note 3
+        The following checks in the interactive sim would only be
+        necessary if some of the above checks are failing
+
+      **Checks using interactive sim:**
+
+      * Verify sex-specific LBWSG distribution against GBD
+      * Verify that correlations between the LBWSG category, ANC, and IFD
+        propensities match the correlations specified on the
+        :ref:`facility choice model page
+        <2024_facility_model_vivarium_mncnh_portfolio>`
+      * Verify that the sim is using the specified causal probabilities
+        of IFD given believed preterm status
+    -
+    -
+
+.. _facility choice code: https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1

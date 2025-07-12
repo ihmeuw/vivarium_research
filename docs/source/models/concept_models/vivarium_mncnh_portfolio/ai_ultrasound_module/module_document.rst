@@ -37,7 +37,6 @@ AI Ultrasound Module
 
 .. contents::
   :local:
-  :depth: 2
 
 1.0 Overview
 ++++++++++++
