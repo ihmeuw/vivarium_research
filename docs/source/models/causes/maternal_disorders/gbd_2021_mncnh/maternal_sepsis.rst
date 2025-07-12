@@ -174,15 +174,15 @@ lines indicate pieces of the underlying pregnancy model.
         rankdir = LR;
         ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
         ftb [label="full term\nbirth", style=dashed]
-        alive [label="parent alive"]
-        dead [label="parent dead"]
+        survived_sepsis [label="parent did not\ndie of sepsis"]
+        died_of_sepsis [label="parent died\n of sepsis"]
 
-        ftp -> alive  [label = "1 - ir"]
+        ftp -> survived_sepsis  [label = "1 - ir"]
         ftp -> sepsis [label = "ir"]
-        sepsis -> alive [label = "1 - cfr"]
-        sepsis -> dead [label = "cfr"]
-        alive -> ftb  [label = "1", style=dashed]
-        dead -> ftb  [label = "1", style=dashed]
+        sepsis -> survived_sepsis [label = "1 - cfr"]
+        sepsis -> died_of_sepsis [label = "cfr"]
+        survived_sepsis -> ftb  [label = "1", style=dashed]
+        died_of_sepsis -> ftb  [label = "1", style=dashed]
     }
 
 .. list-table:: State Definitions
@@ -199,9 +199,10 @@ lines indicate pieces of the underlying pregnancy model.
     * - sepsis
       - Parent simulant has maternal sepsis or another maternal
         infection
-    * - parent alive
-      - Parent simulant is still alive
-    * - parent dead
+    * - parent did not die of sepsis
+      - Parent simulant did not die of maternal sepsis or another
+        maternal infection
+    * - parent died of sepsis
       - Parent simulant died of maternal sepsis or another maternal
         infection
     * - full term birth

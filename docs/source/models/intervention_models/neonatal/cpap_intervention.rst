@@ -43,7 +43,7 @@ This section describes how a CPAP intervention can be implemented and calibrated
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Preterm with RDS Mortality Probability :math:`\text{CSMR}_i^\text{RDS}`
+  * - Preterm with RDS Mortality Probability :math:`\text{CSMRisk}_i^\text{RDS}`
     - Adjust multiplicatively using RR
     - Yes
     - For convenience, we will model this like a dichotomous risk factor; more details below
@@ -87,7 +87,45 @@ We will then add an attribute to each simulant indicating whether the birth occu
 
 We will then use the conditional probabilities for simulants with and without access to determine which simulants die from RDS.
 
-A `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_ found a relative risk of 0.53 (95% CI 0.34-0.83) of RDS mortality for neonates with access to CPAP.   (Note that the population that this effect size applies to is preterm infants with "respiratory failure becoming evident soon after birth".)
+A `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_ found a relative risk of 0.53 (95% CI 0.34-0.83) of overall mortality for neonates with access to CPAP.   (Note that the population that this effect size applies to is preterm infants with "respiratory failure becoming evident soon after birth".)
+
+So specifically, the preterm with RDS cause-specific mortality risk for an individual simulant, :math:`i`, as derived from the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>` (:math:`\text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}}`) should be further modified by CPAP intervention access as follows:
+
+.. math::
+
+  \text{CSMRisk}^{\text{preterm with RDS}}_{i} = \text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW}_i,\text{GA}_i} * (1 - \text{PAF}) * \text{RR}_i
+
+Where,
+
+.. list-table:: CPAP intervention parameters
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - :math:`\text{CSMRisk}^{\text{preterm with RDS}}_{i}`
+    - Mortality risk due to preterm with RDS for a given simulant :math:`i` following modification from the CPAP intervention
+    - See equation above
+    - 
+  * - :math:`\text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW}_i,\text{GA}_i}`
+    - Mortality risk due to preterm with RDS for a given simulant :math:`i` with a given birth weight and gestational age exposure before modification from the CPAP intervention
+    - Derived from instruction on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`
+    - 
+  * - :math:`\text{PAF}`
+    - Population attributable fraction of mortality due to preterm with RDS from access to CPAP intervention
+    - See instructions on how to calculate PAF below
+    - 
+  * - :math:`\text{RR}_i`
+    - Relative risk for a given simulant :math:`i`
+    - For simulants without access to CPAP intervention: :math:`1/\text{RR}_\text{CPAP}`
+
+      For simulants with access to CPAP intervention: :math:`1`
+    - 
+  * - :math:`\text{RR}_\text{CPAP}`
+    - Relative risk of CPAP intervention on RDS mortality 
+    - 0.53 (95% CI 0.34-0.83). Uncertaintly interval implemented as parameter uncertainty following a lognormal distribution
+    - `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_. Note that this effect was measured for all cause mortality.
 
 .. _cpap_calibration:
 
@@ -196,7 +234,21 @@ Assumptions and Limitations
 
 - We assume that CPAP availability captures actual use, and not simply the machine being in the facility 
 - We assume that the delivery facility is the final facility in the care continum for deliveries that are transferred due to complications
-- We assume that the relative risk of RDS mortality with CPAP in practice is similar to that found in the Cochrane Review meta-analysis
+- We assume that the relative risk of RDS mortality with CPAP in practice is similar to that found in the Cochrane Review meta-analysis. Given that the review assessed overall mortality rather than RDS mortality, it is likely that we will underestimate the overall impact of CPAP on mortality in our simulation.
+- We do not model effect modification by birthweight as found in the Cochrane review, which found a stronger impact of CPAP on mortality for babies with greater than 1500 gram birthweight and a weaker and non-significant impact among babies with birth weights less than 1500 grams.
+- Baseline coverage data for CPAP in CEmONC and BEmONC is only reflective of Ethiopian health systems in 2015-2016 based on the EmONC Final Report. 
+  We assume that Nigeria and Pakistan health systems have the same CPAP availability.
+- We assume no effect modification by ACS on the effect size of CPAP on mortality due to RDS with preterm (i.e., that ``(RR_CPAP | ACS) = (RR_CPAP | no ACS)``).  
+  Despite the fact that ACS acts on outcomes that come earlier in the causal chain than CPAP, and could thereby decrease the effect size of CPAP, there is a lack 
+  of literature evidence to substantiate including it in our model. Further supporting this assumption, [Abdallah-et-al-2023]_ suggests that ACS use was not 
+  significantly associated with CPAP success in RDS treatment.
+
+.. todo::
+
+  - If more suitable baseline coverage data for CPAP availability at BEmONC and CEmONC for Nigeria or Pakistan, we should use that data instead and update 
+    this documentation accordingly.
+  - If we find literature evidence or otherwise find reason to model an effect modification of ACS on CPAP (i.e. if we determine ``(RR_CPAP | ACS) =/= (RR_CPAP | no ACS)``),
+    we will need to adjust our modeling strategy and current assumption that ``(RR_CPAP | ACS) == (RR_CPAP | no ACS)``.
 
 Validation and Verification Criteria
 ------------------------------------
@@ -210,4 +262,7 @@ References
 
 * https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/
 * https://chatgpt.com/share/67c1c86e-3194-8010-9fe7-aadd3e15c4d0
+
+.. [Abdallah-et-al-2023]
+  Abdallah Y, Mkony M, Noorani M, Moshiro R, Bakari M, Manji K. CPAP failure in the management of preterm neonates with respiratory distress syndrome where surfactant is scarce. A prospective observational study. BMC Pediatr. 2023 May 3;23(1):211. doi: 10.1186/s12887-023-04038-6. PMID: 37138252; PMCID: PMC10155133.
 
