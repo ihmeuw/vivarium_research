@@ -366,9 +366,11 @@ Using the `LBWSG PAF calculation simulation <https://github.com/ihmeuw/vivarium_
   * For the calculation of the late neonatal PAF:
 
     1. Assign all-cause mortality risk values to each simulated individual using the early neonatal LBWSG RR values (interpolated and capped), early neonatal LBWSG PAF (as calculated above), and early neonatal all-cause mortality risk
-    2. Take a "time step" of seven days that allows for simulants to die according to their assigned all-cause mortality risk values
-    3. Among the surviving simulants, re-assign LBWSG RR values using the late neonatal interpolated RR values and the late neonatal-specific RR caps
-    4. Use the RR values from step 3 (among surviving simulants only) for the calculation of the late neonatal LBWSG PAF
+    2. Take a "time step" of ~7 days that advances the population past the early neonatal mortality time step, but before late neonatal mortality has been applied. Mortality should be applied (simulants should die) according to their LBWSG-affected all-cause mortality risk values (no need to consider cause-specific mortality and/or interventions in this step).
+    3. Record the number of deaths that occur in each LBWSG exposure category as deaths_cat
+    4. Among the surviving simulants, re-assign LBWSG RR values using the late neonatal interpolated RR values and the late neonatal-specific RR caps
+    5. Use the RR values from step 4 (among surviving simulants only) for the calculation of the mean relative risk among the given LBWSG exposure category
+    6. To calculate the overall population mean RR, take a weighted average of the category-specific mean relative risk values weighted by the category-specific LBWSG exposure prevalence AT BIRTH multiplied by the fraction of simulants who survived past the early neonatal age group, equal to: (n_cat - deaths_cat) / n_cat, where n_cat is the number of simulants initialized into each category before mortality was applied (the number of grid points in each category).
 
 Calculating Burden
 ++++++++++++++++++
