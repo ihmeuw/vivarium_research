@@ -93,7 +93,7 @@ We will use the decision tree below to find the PAF of RDS mortality without acc
 
 We will then add an attribute to each simulant indicating whether the birth occurs at a facility with access to CPAP (which will be dependent on the facility choice, i.e. no access for home births and lower access for BEmONC than CEmONC facilities).
 We will also include the effect of ACS on RDS mortality, which is described on the :ref:`ACS intervention page <acs_intervention>` in our calibration of the PAF for
-this intervention, given that we assume the same simulants have access to (i.e., are exposed to) CPAP and ACS.
+this intervention, given that we assume the same simulants have access to (i.e., are exposed to) CPAP and ACS, so long as the simulants are within the gestational ages eligible for ACS (26-33 weeks).
 
 We will then use the conditional probabilities for simulants with and without access to determine which simulants die from RDS.
 
