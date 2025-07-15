@@ -81,6 +81,10 @@ The neonatal component of the MNCNH portfolio simulation is comprised of one sin
     - Initial attributes module
     - Determines which simulants receive each RDS interventions (CPAP and ACS) 
     - 
+  * - Hemoglobin exposure at birth
+    - Hemoglobin module
+    - Affects neonatal sepsis risk
+    - 
 
 2.2 Cause models
 -----------------
@@ -94,12 +98,19 @@ The neonatal component of the MNCNH portfolio simulation is comprised of one sin
 2.3 Risk models
 ----------------
 
-The modeled risk factor in the neonatal module is low birth weight and short gestation. 
+The following risk factors affect neonatal causes:
 
-- **Risk exposure:** informed as an output from the pregnancy module
+* Low birth weight and short gestation
 
-- **Risk effects:** instructions for how to apply LBWSG risk effects are described on the :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`. Additional information can be found on the :ref:`LBWSG risk effects document <2019_risk_effect_lbwsg>`
+  * **Risk exposure:** informed as an output from the pregnancy module
 
+  * **Risk effects:** instructions for how to apply LBWSG risk effects are described on the :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`. Additional information can be found on the :ref:`LBWSG risk effects document <2019_risk_effect_lbwsg>`
+
+* Hemoglobin at birth
+
+  * **Risk exposure:** informed as an output from the hemoglobin module
+
+  * **Risk effects:** affects neonatal sepsis according to the instructions on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>`
 
 2.4 Intervention models
 ------------------------
