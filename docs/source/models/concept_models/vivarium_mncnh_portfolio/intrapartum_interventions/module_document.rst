@@ -83,6 +83,10 @@ This module in the intrapartum component determines coverage of intrapartum inte
     - :ref:`ANC attendance module <2024_vivarium_mncnh_portfolio_anc_module>`
     - Determines misoprostol intervention eligibility (decision node #4)
     - Only those who attend ANC can receive misoprostol
+  * - RDS intervention propensity
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - Used to determine which simulants receive each RDS intervention (:ref:`CPAP <intervention_neonatal_cpap>` and :ref:`ACS <acs_intervention>`)
+    - 
 
 
 2.3 Module Decision Nodes

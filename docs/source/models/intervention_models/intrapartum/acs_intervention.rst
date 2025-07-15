@@ -118,7 +118,7 @@ In Vivarium, this risk effect will modify the preterm with RDS mortality pipelin
 
 .. math::
 
-   \text{CSMRisk}_i^\text{preterm with RDS} = \text{CSMRisk}^\text{preterm with RDS} \cdot (1 - \text{PAF}_\text{no ACS}) \cdot \text{RR}_i^\text{no ACS}
+   \text{CSMRisk}_i^\text{preterm with RDS} = \text{CSMRisk}^\text{preterm with RDS, modified by the CPAP intervention} \cdot \text{RR}_i^\text{no ACS}
 
 where :math:`\text{RR}_i^\text{no ACS}` is simulant *i*'s individual relative risk for "no ACS", meaning :math:`\text{RR}_i^\text{no ACS} = \text{RR}_\text{no ACS}` 
 if simulant *i* does not receive ACS, and :math:`\text{RR}_i^\text{no ACS} = 1` if simulant *i* receives ACS. 

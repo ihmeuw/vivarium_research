@@ -309,6 +309,7 @@ defined as a module input in a subsequent row.
       * Birth facility
       * Believed gestational age
       * ANC attendance
+      * RDS intervention propensity
     - * Intrapartum azithromycin coverage
       * Antenatal corticosteroid coverage
       * Misoprostol coverage
@@ -385,6 +386,7 @@ defined as a module input in a subsequent row.
       * Birth facility
       * Birth weight
       * Gestational age
+      * RDS intervention propensity
     - * Neonatal probiotics coverage
       * CPAP coverage
       * Neonatal mortality outcomes (see outcome table)
@@ -395,7 +397,7 @@ defined as a module input in a subsequent row.
       * :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
       * :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
       * :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
-      * Antenatal corticosteroids
+      * :ref:`Antenatal corticosteroids <acs_intervention>`
       * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
 
 .. list-table:: Postpartum Component Modules
