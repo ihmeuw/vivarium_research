@@ -1523,21 +1523,28 @@ Default stratifications to all observers should include scenario and input draw.
   * - 15.0
     - Note 1
         For these checks, "verify" means we are comparing the simulation
-        output to a value that was input directly, whereas "validate"
-        means we are expecting the sim to indirectly reproduce a value
-        that was not input directly
+        output to a value that was input directly (e.g., the LBWSG
+        distribution), whereas "validate" means we are expecting the sim
+        to indirectly reproduce a value that was not input directly
+        (e.g., matching GBD's IFD proportion by using the specified
+        causal probabilities for facility choice)
 
       Note 2
-        Several of the validation targets are calculated by
-        Nathaniel's `facility choice code`_ [[I'm planning to put the
-        targets in a .csv file and add a link to it here]]
+        The calculation of several of the validation targets requires
+        running Nathaniel's facility choice nanosim or its
+        data-processing code. The necessary validation targets are
+        computed in the `facility choice validation targets notebook`_
+        and are saved in the `facility choice validation targets .csv
+        file`_
 
       **Checks using observer outputs:**
 
       * Validate rates of preterm birth given in-facility status against
-        targets (targets are calculated by facility choice code)
+        optimization targets (calculated in `facility choice validation
+        targets notebook`_)
       * Validate rates of in-facility delivery given ANC status against
-        targets (targets are calculated by facility choice code)
+        optimization targets (calculated in `facility choice validation
+        targets notebook`_)
       * Validate rates of in-facility delivery against GBD covariate 51
       * Verify preterm birth rates (overall, not sex-specific) match
         GBD preterm rates calculated from LBWSG data
@@ -1552,29 +1559,50 @@ Default stratifications to all observers should include scenario and input draw.
         baseline coverage from :ref:`AI Ultrasound module
         <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
       * Validate observed probabilities of IFD given believed preterm
-        status against observed probabilities in facility choice nanosim
+        status against observed probabilities in `facility choice
+        nanosim`_
       * Validate confusion matrix of preterm status vs. believed preterm
-        status against targets from facility choice nanosim
-      * Validate P( believed preterm | preterm status, ultrasound type)
-        against targets from facility choice nanosim
+        status against observed probabilities in `facility choice
+        nanosim`_
+      * Validate P( believed preterm | preterm status, ultrasound type )
+        against observed probabilities in `facility choice nanosim`_
 
       Note 3
-        The following checks in the interactive sim would only be
-        necessary if some of the above checks are failing
+        The following checks in the interactive sim are probably only
+        necessary if some of the above checks are failing, although it
+        might be a good idea to do at least the first two (LBWSG
+        distribution and GA error distribution) since these components
+        are getting modified for this model run
 
       **Checks using interactive sim:**
 
       * Verify sex-specific LBWSG distribution against GBD
-      * Verify that correlations between the LBWSG category, ANC, and IFD
-        propensities match the correlations specified on the
-        :ref:`facility choice model page
-        <2024_facility_model_vivarium_mncnh_portfolio>`
-      * Verify that the sim is using the specified causal probabilities
-        of IFD given believed preterm status
+      * Verify that the distribution of gestational age estimation
+        errors, stratified by ultrasound type, matches the normal
+        distributions specified in the :ref:`AI Ultrasound module
+        <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
+      * Verify that correlations between the LBWSG category, ANC, and
+        IFD propensities match the :ref:`correlations specified on the
+        facility choice model page
+        <facility_choice_correlated_propensities_section>` (also saved
+        in the `facility choice optimization results .csv file`_)
+      * Verify that the sim is using the specified :ref:`causal
+        probabilities of IFD given believed preterm status
+        <facility_choice_causal_probabilities_section>` (also saved in
+        the `facility choice optimization results .csv file`_)
     -
     -
 
-.. _facility choice code: https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
+.. _facility choice code:
+  https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
+.. _facility choice validation targets notebook:
+  https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/facility_choice/facility_choice_validation_targets.ipynb
+.. _facility choice validation targets .csv file:
+  https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/facility_choice/facility_choice_validation_targets.csv
+.. _facility choice nanosim:
+  `facility choice validation targets notebook`_
+.. _facility choice optimization results .csv file:
+  https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/facility_choice/facility_choice_optimization_results.csv
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
