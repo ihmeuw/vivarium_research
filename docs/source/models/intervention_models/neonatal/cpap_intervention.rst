@@ -123,7 +123,7 @@ Where,
     - Derived from instruction on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`
     - 
   * - :math:`\text{PAF}`
-    - Population attributable fraction of mortality due to preterm with RDS from access to CPAP and ACS interventions
+    - Joint population attributable fraction of mortality due to preterm with RDS from access to CPAP and ACS interventions
     - See instructions on how to calculate PAF below
     - 
   * - :math:`\text{RR}_i`
