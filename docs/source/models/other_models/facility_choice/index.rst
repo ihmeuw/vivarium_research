@@ -374,6 +374,13 @@ parameters.
     - 0.2
     - Chosen arbitrarily as a plausible value
 
+The above correlations were computed in the
+facility_choice_optimization_3_countries_ notebook in the MNCNH
+Portfolio research repository.
+
+.. _facility_choice_optimization_3_countries:
+  https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/facility_choice/facility_choice_optimization_3_countries.ipynb
+
 .. note::
 
   The causal model has 5 independent unknown parameters (3 correlations
@@ -554,6 +561,10 @@ propensity correlations. The function :math:`f_\text{IFD}` is one of the
 `structural equations`_ defining the causal model drawn above.
 
 .. _structural equations: https://en.wikipedia.org/wiki/Structural_equation_modeling
+
+The above causal probabilities were computed in the
+facility_choice_optimization_3_countries_ notebook in the MNCNH
+Portfolio research repository.
 
 .. note::
 
