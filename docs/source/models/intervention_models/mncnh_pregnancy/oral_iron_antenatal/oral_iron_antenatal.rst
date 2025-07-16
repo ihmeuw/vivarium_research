@@ -42,7 +42,7 @@ The two major classes of maternal supplementation regimens that we will be model
 - **Multiple Micronutrient Supplementation (MMS):** MMS is a combination of micronutrients that includes iron and folic acid as well as other nutrients such as vitamin A and zinc. The latest cochrane review on MMS (containing IFA) relative to IFA alone was performed by [Keats-et-al-2019-maternal-supplementation]_.
 
 In August of 2020, the :download:`World Health Organization updated their recommendation <who_guidance_positive_pregnancy_mms_2020.pdf>` on nutritional interventions during pregnancy to include MMS that includes iron and folic acid as part of routine antenatal care. 
-Prior to this update, they recommended only IFA. Additionally, the :download:`WHO recommends BEP supplementation during pregnancy in undernourished populations <who_guidance_positive_pregnancy_2016.pdf>`.
+Prior to this update, they recommended only IFA. 
 
 .. note:: 
 
@@ -202,7 +202,7 @@ Additionally, the code block below walks through how to implement the following 
 
 - Assume a normal distribution of uncertainty when sampling from the effect size parameter confidence intervals
 - Hemoglobin exposure values among PLW need to be calibrated to baseline IFA coverage in the baseline scenario
-- Effect sizes in the table above are NOT relative to no supplementation and are assumed to be *additive* to one another. It is important that they are implemented in the method described below due to their overlapping confidence intervals to ensure that the effect of BEP>MMS/IFA in all draws.
+- Effect sizes in the table above are NOT relative to no supplementation and are assumed to be *additive* to one another. 
 - The effect of MMS in the alternative scenario depends on IFA coverage status in the baseline scenario
 
 .. code-block:: python
@@ -328,7 +328,7 @@ The code block below walks through how to implement the following considerations
 
 - Assume a normal distribution of uncertainty when sampling from the effect size parameter confidence intervals
 - Birthweight exposure values need to be calibrated to baseline IFA coverage in the baseline scenario
-- Effect sizes in the table above are NOT relative to no supplementation and are assumed to be *additive* to one another. It is important that they are implemented in the method described below due to their overlapping confidence intervals to ensure that the effect of BEP>MMN>IFA in all draws.
+- Effect sizes in the table above are NOT relative to no supplementation and are assumed to be *additive* to one another. It is important that they are implemented in the method described below due to their overlapping confidence intervals to ensure that the effect of MMN>IFA in all draws.
 - The effect of MMN in the alternative scenario depends on IFA coverage status in the baseline scenario
 
 .. code-block:: python
