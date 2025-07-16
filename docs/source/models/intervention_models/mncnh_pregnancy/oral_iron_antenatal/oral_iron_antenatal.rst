@@ -1,8 +1,8 @@
 .. _oral_iron_antenatal:
 
-===============================================================================
-MNCNH Antenatal Iron Supplementation: Iron-Folic Acid & Multiple Micronutrients
-===============================================================================
+====================================
+Oral Iron in Pregnancy (IFA and MMS)
+====================================
 
 .. contents::
    :local:
