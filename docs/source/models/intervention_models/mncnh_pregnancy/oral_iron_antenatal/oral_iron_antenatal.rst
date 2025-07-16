@@ -77,8 +77,6 @@ Given the relatively recent recommendation regarding MMS, the coverage of MMS at
     - Yes
     - Non-linear dose response likely. Differential effect by regimen. Effect modification by baseline hemoglobin likely.
 
-.. _`maternal-supplementation-baseline-parameters`:
-
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
