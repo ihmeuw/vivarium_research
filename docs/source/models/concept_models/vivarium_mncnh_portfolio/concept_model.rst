@@ -315,7 +315,7 @@ defined as a module input in a subsequent row.
       * Misoprostol coverage
     - * :ref:`Intrapartum azithromycin intervention <azithromycin_intervention>` 
       * :ref:`Misoprostol intervention <misoprostol_intervention>`
-      * Antenatal corticosteroids intervention 
+      * :ref:`Antenatal corticosteroids <acs_intervention>`
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
       * Intrapartum azithromycin coverage
@@ -354,7 +354,7 @@ defined as a module input in a subsequent row.
         * Misoprostol coverage
       - * :ref:`Intrapartum azithromycin <azithromycin_intervention>` 
         * :ref:`Misoprostol coverage <misoprostol_intervention>`
-        * Antenatal corticosteroids intervention
+        * :ref:`Antenatal corticosteroids <acs_intervention>`
       - 
     * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
       - * (Pregnancy term duration)
