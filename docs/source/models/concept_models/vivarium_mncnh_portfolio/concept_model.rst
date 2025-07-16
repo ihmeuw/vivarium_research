@@ -248,7 +248,7 @@ defined as a module input in a subsequent row.
       - * Hemoglobin at start of pregnancy
         * Hemoglobin at birth
       - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
-        * :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
+        * :ref:`Oral iron supplementation intervention (IFA/MMS) <intervention_oral_iron_antenatal>`
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
       - New wave II module
     * - :ref:`Pregnancy II <2024_vivarium_mncnh_portfolio_pregnancy_module>`
@@ -262,7 +262,7 @@ defined as a module input in a subsequent row.
         * Preterm status
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
         * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
-        * :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
+        * :ref:`Oral iron supplementation intervention (IFA/MMS) <intervention_oral_iron_antenatal>`
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
       - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules other than impacts of IFA/MMS and IV Iron interventions on pregnancy module outputs
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
