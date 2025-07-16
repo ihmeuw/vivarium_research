@@ -357,18 +357,26 @@ For the early neonatal age group, the LBWSG exposure at birth is used. For the l
 
 Using the `LBWSG PAF calculation simulation <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/lbwsg_paf.yaml>`_:
 
-  * For the calculation of the early neonatal PAF:
+  * **For the calculation of the early neonatal PAF:**
 
     - Population size = use that specified on the :ref:`preterm birth cause model document <2021_cause_preterm_birth_mncnh>` (see note about the calculation of the normalizing constant)
     - LBWSG exposure specific to birth age group
     - LBWSG relative risk values are interpolated and capped at the location/draw/age group/sex-specific maximum RR value (:math:`\text{RR}_\text{max}`)
 
-  * For the calculation of the late neonatal PAF:
+  * **For the calculation of the late neonatal PAF:**
 
     1. Assign all-cause mortality risk values to each simulated individual using the early neonatal LBWSG RR values (interpolated and capped), early neonatal LBWSG PAF (as calculated above), and early neonatal all-cause mortality risk
-    2. Take a "time step" of seven days that allows for simulants to die according to their assigned all-cause mortality risk values
-    3. Among the surviving simulants, re-assign LBWSG RR values using the late neonatal interpolated RR values and the late neonatal-specific RR caps
-    4. Use the RR values from step 3 (among surviving simulants only) for the calculation of the late neonatal LBWSG PAF
+    2. Take a "time step" of ~7 days that advances the population past the early neonatal mortality application, but before late neonatal mortality has been applied. Mortality should be applied (simulants should die) according to their LBWSG-affected all-cause mortality risk values (no need to consider cause-specific mortality and/or interventions in this step).
+    3. Record the number of deaths that occur in each LBWSG exposure category :math:`\text{cat}` as :math:`n^\text{deaths}_\text{cat}`
+    4. Among the surviving simulants, re-assign LBWSG RR values using the late neonatal interpolated RR values and the late neonatal-specific RR caps
+    5. Use the RR values from step 4 (among surviving simulants only) for the calculation of the mean relative risk among the given LBWSG exposure category, :math:`E(\text{RR})_\text{cat}`
+    6. To calculate the overall population mean RR (:math:`E(\text{RR})_\text{population}`), take a weighted average of the category-specific mean relative risk values weighted by the category-specific LBWSG exposure prevalence AT BIRTH (:math:`p^\text{birth}_\text{cat}`) multiplied by the fraction of simulants who survived past the early neonatal age group, equal to: :math:`\frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}`, where :math:`n_\text{cat}` is the number of simulants initialized into each category before mortality was applied (the number of grid points in each category). Note that :math:`n_\text{cat}` will not vary by LBWSG exposure category.
+
+So,
+
+.. math::
+
+  E(\text{RR})_\text{population} = \frac{\sum_{\text{cat}} E(\text{RR})_\text{cat} \times p^\text{birth}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}}{\sum_{\text{cat}} p^\text{birth}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}}
 
 Calculating Burden
 ++++++++++++++++++

@@ -387,6 +387,7 @@ defined as a module input in a subsequent row.
       * Birth weight
       * Gestational age
       * RDS intervention propensity
+      * Hemoglobin exposure at birth (affects neonatal sepsis)
     - * Neonatal probiotics coverage
       * CPAP coverage
       * Neonatal mortality outcomes (see outcome table)
@@ -399,6 +400,7 @@ defined as a module input in a subsequent row.
       * :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
       * :ref:`Antenatal corticosteroids <acs_intervention>`
       * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
+      * :ref:`Hemoglobin risk effects <2023_hemoglobin_effects>`
 
 .. list-table:: Postpartum Component Modules
   :header-rows: 1
@@ -1154,7 +1156,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 12.0
-    - Capped LBWSG RRs and new late neonatal LBWSG PAF calculation, in accordance with `vivarium research PR #1681 <https://github.com/ihmeuw/vivarium_research/pull/1681>`_
+    - Capped LBWSG RRs and new late neonatal LBWSG PAF calculation, in accordance with `vivarium research PR #1681 <https://github.com/ihmeuw/vivarium_research/pull/1681>`_ and `subsequent update in PR #1716 <https://github.com/ihmeuw/vivarium_research/pull/1716>`_
     - Baseline
     - ``model12.0``
     - Default
