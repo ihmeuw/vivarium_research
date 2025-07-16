@@ -602,5 +602,5 @@ References
 ------------
 
 .. note::
-   The following citations are defined in the :ref:`Antenatal supplementation document <maternal_supplementation/index.rst>` from Nutrition Optimization project
+   The following citations are defined in the :ref:`Antenatal supplementation document <maternal_supplementation_intervention>` from Nutrition Optimization project
     and should be referenced from there: [Gomes-et-al-2023-antenatal-supplementation], [Keats-et-al-2019-maternal-supplementation], [Lassi-et-al-2020-antenatal-supplementation], [Li-et-al-2019-antenatal-supplementation], [McGovern-et-al-2019-maternal-supplementation], [Nisar-et-al-2020], [Oh-et-al-2020], [Ota-et-al-2015], [Pena-Rosas-et-al-2015]
