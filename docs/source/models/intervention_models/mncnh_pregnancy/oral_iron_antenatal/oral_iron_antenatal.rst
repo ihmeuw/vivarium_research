@@ -603,29 +603,6 @@ Assumptions and limitations
 References
 ------------
 
-.. [Gomes-et-al-2023-antenatal-supplementation]
-  Gomes F, Askari S, Black RE, Christian P, Dewey KG, Mwangi MN, Rana Z, Reed S, Shankar AH, Smith ER, Tumilowicz A. Antenatal multiple micronutrient supplements versus iron-folic acid supplements and birth outcomes: Analysis by gestational age assessment method. Matern Child Nutr. 2023 Jul;19(3):e13509. `https://doi.org/10.1111/mcn.13509 <https://doi.org/10.1111/mcn.13509>`_
-
-.. [Keats-et-al-2019-maternal-supplementation]
-  Keats  EC, Haider  BA, Tam  E, Bhutta  ZA. Multiple‐micronutrient supplementation for women during pregnancy. Cochrane Database of Systematic Reviews 2019, Issue 3. Art. No.: CD004905. DOI: 10.1002/14651858.CD004905.pub6. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full>`_
-
-.. [Lassi-et-al-2020-antenatal-supplementation]
-  Lassi ZS, Padhani ZA, Rabbani A, Rind F, Salam RA, Das JK, Bhutta ZA. Impact of Dietary Interventions during Pregnancy on Maternal, Neonatal, and Child Outcomes in Low- and Middle-Income Countries. Nutrients. 2020 Feb 19;12(2):531. doi: 10.3390/nu12020531. PMID: 32092933; PMCID: PMC7071393.
-
-.. [Li-et-al-2019-antenatal-supplementation]
-  Li, B., Zhang, X., Peng, X., Zhang, S., Wang, X., & Zhu, C. (2019). Folic Acid and Risk of Preterm Birth: A Meta-Analysis. Frontiers in Neuroscience, 13, 1284. https://doi.org/10.3389/fnins.2019.01284
-
-.. [McGovern-et-al-2019-maternal-supplementation]
-  McGovern, M. E. (2019). How much does birth weight matter for child health in developing countries? Estimates from siblings and twins. Health economics, 28(1), 3-22. `https://pubmed.ncbi.nlm.nih.gov/30239053 <https://pubmed.ncbi.nlm.nih.gov/30239053/>`_.
-
-.. [Nisar-et-al-2020]
-  Nisar YB, Aguayo VM, Billah SM, Dibley MJ. Antenatal Iron-Folic Acid Supplementation Is Associated with Improved Linear Growth and Reduced Risk of Stunting or Severe Stunting in South Asian Children Less than Two Years of Age: A Pooled Analysis from Seven Countries. Nutrients. 2020 Aug 28;12(9):2632. doi: 10.3390/nu12092632. `https://pubmed.ncbi.nlm.nih.gov/32872329/ <https://pubmed.ncbi.nlm.nih.gov/32872329/>`_
-
-.. [Oh-et-al-2020]
-  Oh, C., Keats, E. C., & Bhutta, Z. A. (2020). Vitamin and Mineral Supplementation During Pregnancy on Maternal, Birth, Child Health and Development Outcomes in Low- and Middle-Income Countries: A Systematic Review and Meta-Analysis. Nutrients, 12(2), 491. https://doi.org/10.3390/nu12020491
-
-.. [Ota-et-al-2015]
-  Ota  E, Hori  H, Mori  R, Tobe‐Gai  R, Farrar  D. Antenatal dietary education and supplementation to increase energy and protein intake. Cochrane Database of Systematic Reviews 2015, Issue 6. Art. No.: CD000032. DOI: 10.1002/14651858.CD000032.pub3. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD000032.pub3/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD000032.pub3/full>`_
-
-.. [Pena-Rosas-et-al-2015]
-  Peña‐Rosas  JP, De‐Regil  LM, Gomez Malave  H, Flores‐Urrutia  MC, Dowswell  T. Intermittent oral iron supplementation during pregnancy. Cochrane Database of Systematic Reviews 2015, Issue 10. Art. No.: CD009997. DOI: 10.1002/14651858.CD009997.pub2. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD009997.pub2/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD009997.pub2/full>`
+.. note::
+   The following citations are defined in `maternal_supplementation/index.rst` and should be referenced from there:
+   [Gomes-et-al-2023-antenatal-supplementation], [Keats-et-al-2019-maternal-supplementation], [Lassi-et-al-2020-antenatal-supplementation], [Li-et-al-2019-antenatal-supplementation], [McGovern-et-al-2019-maternal-supplementation], [Nisar-et-al-2020], [Oh-et-al-2020], [Ota-et-al-2015], [Pena-Rosas-et-al-2015]
