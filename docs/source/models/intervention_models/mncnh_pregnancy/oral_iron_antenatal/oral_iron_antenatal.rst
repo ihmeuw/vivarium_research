@@ -31,6 +31,10 @@ Oral Iron in Pregnancy (IFA and MMS)
 Intervention Overview
 -----------------------
  
+.. note::
+
+  This document is for use in the :ref:`MNCNH Portfolio <2024_concept_model_vivarium_mncnh_portfolio>` project. This intervention has been modeled before, see the :ref:`Antenatal supplementation intervention <maternal_supplementation_intervention>` documentation from the Nutrition Optimization project for reference.
+  We will not be modeling Balanced Energy Protein (BEP) supplementation in this simulation, nor the impact BEP and MMS have on child growth failure. 
 
 Maternal supplementataion during the prenatal period is a critical intervention to support the increased nutritional demands due to the mother's changing physiology and fetal growth. 
 Maternal supplementation in low and middle income country settings are often accessed through antenatal care (ANC) services and early initiation of supplementation has been associated with improved outcomes. 
@@ -100,7 +104,7 @@ Coverage algorithms
 Individual product coverage algorithms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For use in the :ref:`nutrition optimization simulation <2021_concept_model_vivarium_nutrition_optimization>`.
+For use in the :ref:`MNCNH Portfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>`.
 
 For our purposes, each individual antenatal supplementation product (IFA and MMS) are mutually exclusive; in other words, a given simulant can only be covered by one of these two products for any given pregnancy. We do not consider changing antenatal supplementation products during a single pregnancy. Supplementation product coverage may depend on other simulant characteristics, such as antenatal care visit attendance.
 
