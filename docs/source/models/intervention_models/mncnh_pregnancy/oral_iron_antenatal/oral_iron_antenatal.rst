@@ -48,13 +48,6 @@ The two major classes of maternal supplementation regimens that we will be model
 In August of 2020, the :download:`World Health Organization updated their recommendation <who_guidance_positive_pregnancy_mms_2020.pdf>` on nutritional interventions during pregnancy to include MMS that includes iron and folic acid as part of routine antenatal care. 
 Prior to this update, they recommended only IFA. 
 
-.. note:: 
-
-  According to the :download:`2016 WHO recommendations <who_guidance_positive_pregnancy_2016.pdf>`: Undernourishment is usually defined by a low BMI (i.e. being underweight). 
-  For adults, a 20–39% prevalence of underweight women is considered a high prevalence of underweight and 40% or higher is considered a very high prevalence (46). 
-  Mid-upper arm circumference (MUAC) may also be useful to identify protein–energy malnutrition in individual pregnant women and to determine its prevalence in this population (31). 
-  However, the optimal cut-off points may need to be determined for individual countries based on context-specific cost–benefit analyses (31).
-
 IFA is widely used as a prenatal supplement in most areas of the world and is recommended by the WHO as part of routine antenatal care, although coverage and adherence levels vary. 
 Given the relatively recent recommendation regarding MMS, the coverage of MMS at a wide scale is believed to be substantially lower.
 
@@ -120,11 +113,6 @@ Targeted intervention package coverage algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For use in the :ref:`MNCNH Portfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>`.
-
-For the implementation of the intervention in alterative scenarios, we will model MMS supplementation among adequately nourished mothers rather than IFA supplementation alone, as demonstrated in the following decision tree. 
-
-.. image:: coverage_decision_tree.svg
-
 
 .. list-table:: Modeled Outcomes
   :widths: 15 15 15 15 15 15 15
