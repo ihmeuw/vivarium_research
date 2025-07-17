@@ -258,8 +258,6 @@ Additionally, the code block below walks through how to implement the following 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- We assume that pregnant women begin taking the supplementation intervention six weeks into their pregnancy. In reality, the average person may begin taking oral iron supplementation closer to the start of the second trimester. However, we have chosen six weeks in order to be conservative as the comparison intervention for the assessment of the impact of the intravenous iron intervention.
-- We assume that the effect of the intervention persists for six weeks postpartum at which point hemoglobin returns to its pre-pregnancy value
 - We assume no effect modification by baseline hemoglobin level. In reality, the individual hemoglobin shifts are likely greater among those who are anemic at baseline.
 
 Verification and validation criteria
