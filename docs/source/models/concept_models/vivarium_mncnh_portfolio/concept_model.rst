@@ -184,6 +184,7 @@ defined as a module input in a subsequent row.
     - * ANC propensity
       * LBWSG category propensity
       * IFD propensity
+      * RDS intervention propensity
     - * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
   * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     - * LBWSG category propensity
