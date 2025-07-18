@@ -144,6 +144,10 @@ For use in the :ref:`MNCNH Portfolio simulation <2024_concept_model_vivarium_mnc
     - Varies by supplement regimen
     - Assume no difference in gestational age
 
+.. todo::
+
+    Add rows to this table for gestational age and birth outcomes/stillbirth (or remove table altogether).
+
 Maternal Hemoglobin
 +++++++++++++++++++++
 
