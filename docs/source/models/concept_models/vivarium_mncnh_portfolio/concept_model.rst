@@ -1186,6 +1186,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Added preterm status and believed preterm status to maternal
       population observer (#7)
     - Default
+  * - 15.1
+    - Bugfix to calculation of prevalence of preterm, to ensure we include categories with an upper bound of 37 weeks
+    - Baseline
+    - ``model15.1``
+    - Default
+    - Default
+    - Default
   * - 16.0*
     - Wave I antenatal corticosteroids
     - Baseline
