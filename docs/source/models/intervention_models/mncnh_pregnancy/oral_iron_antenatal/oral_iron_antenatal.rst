@@ -187,9 +187,6 @@ Notably, the intervention will not affect the hemoglobin level of women of repro
 
 **How to sample and apply effect sizes:**
 
-The intervention hemoglobin shifts should be applied at **eight weeks gestation** (assume pregnancy identification occurs at six weeks, intervention coverage begins at the time of pregnancy identification, and intervention effect on hemoglobin occurs two weeks after initiation of the intervention). 
-The intervention hemoglobin shift should persist until six weeks postpartum, at which point the simulant's hemoglobin level should return to the pre-pregnancy value.
-
 Additionally, the code block below walks through how to implement the following considerations:
 
 - Assume a normal distribution of uncertainty when sampling from the effect size parameter confidence intervals
