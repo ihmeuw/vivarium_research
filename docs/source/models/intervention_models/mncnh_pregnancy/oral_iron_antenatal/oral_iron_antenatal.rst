@@ -546,17 +546,4 @@ Assumptions and limitations
 References
 ------------
 
-.. [Gomes-et-al-2023-antenatal-supplementation]
-  Gomes F, Askari S, Black RE, Christian P, Dewey KG, Mwangi MN, Rana Z, Reed S, Shankar AH, Smith ER, Tumilowicz A. Antenatal multiple micronutrient supplements versus iron-folic acid supplements and birth outcomes: Analysis by gestational age assessment method. Matern Child Nutr. 2023 Jul;19(3):e13509. `https://doi.org/10.1111/mcn.13509 <https://doi.org/10.1111/mcn.13509>`_
-
-.. [Keats-et-al-2019-maternal-supplementation]
-  Keats  EC, Haider  BA, Tam  E, Bhutta  ZA. Multiple‐micronutrient supplementation for women during pregnancy. Cochrane Database of Systematic Reviews 2019, Issue 3. Art. No.: CD004905. DOI: 10.1002/14651858.CD004905.pub6. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full>`_
-
-.. [Li-et-al-2019-antenatal-supplementation]
-  Li, B., Zhang, X., Peng, X., Zhang, S., Wang, X., & Zhu, C. (2019). Folic Acid and Risk of Preterm Birth: A Meta-Analysis. Frontiers in Neuroscience, 13, 1284. https://doi.org/10.3389/fnins.2019.01284
-
-.. [Oh-et-al-2020]
-  Oh, C., Keats, E. C., & Bhutta, Z. A. (2020). Vitamin and Mineral Supplementation During Pregnancy on Maternal, Birth, Child Health and Development Outcomes in Low- and Middle-Income Countries: A Systematic Review and Meta-Analysis. Nutrients, 12(2), 491. https://doi.org/10.3390/nu12020491
-
-.. [Pena-Rosas-et-al-2015]
-  Peña‐Rosas  JP, De‐Regil  LM, Gomez Malave  H, Flores‐Urrutia  MC, Dowswell  T. Intermittent oral iron supplementation during pregnancy. Cochrane Database of Systematic Reviews 2015, Issue 10. Art. No.: CD009997. DOI: 10.1002/14651858.CD009997.pub2. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD009997.pub2/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD009997.pub2/full>`
+The following citations are defined in the :ref:`Antenatal supplementation document <maternal_supplementation_intervention>` from Nutrition Optimization project and should be referenced from there: [Gomes-et-al-2023-antenatal-supplementation], [Keats-et-al-2019-maternal-supplementation], [Li-et-al-2019-antenatal-supplementation], [Oh-et-al-2020], [Pena-Rosas-et-al-2015]
