@@ -55,7 +55,7 @@ Prior to this update, they recommended only IFA.
   Mid-upper arm circumference (MUAC) may also be useful to identify protein–energy malnutrition in individual pregnant women and to determine its prevalence in this population (31). 
   However, the optimal cut-off points may need to be determined for individual countries based on context-specific cost–benefit analyses (31).
 
-IFA is widely used as a prenatal supplement in most areas of the world and is recommended by the WHO as part of routine antenatal care, although coverage and adherence levels vary. 
+IFA is widely used as a prenatal supplement in most areas of the world and has been recommended by the WHO as part of routine antenatal care for quite some time, although coverage and adherence levels vary. 
 Given the relatively recent recommendation regarding MMS, the coverage of MMS at a wide scale is believed to be substantially lower.
 
 .. todo::
