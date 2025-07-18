@@ -25,7 +25,10 @@ CPAP for treating Preterm with RDS
     - Continuous positive airway pressure
     - 
   * - RDS
-    - respiratory distress syndrome
+    - Respiratory distress syndrome
+    - 
+  * - ACS
+    - Antenatal corticosteroids
     - 
 
 Intervention Overview
@@ -76,6 +79,11 @@ We might be able to borrow strength from other locations and times by predicting
     - :math:`\text{Normal}(39.3,5^2)`
     - placeholder value based on a single data point; uncertainty is an assumption without direct evidence
 
+To define individual-level coverage of CPAP and ACS (i.e., the RDS intervention bundle), please use the RDS intervention propensity 
+value defined on the :ref:`Initial Attributes module page <2024_vivarium_mncnh_portfolio_initial_attributes_module>` to ensure the same
+simulants are exposed to both interventions (i.e., if coverage of both CPAP and ACS is x%, then the same x% of simulants will be getting each intevention).
+For more information on why we are bundling CPAP and ACS together, please see the :ref:`ACS intervention page <acs_intervention>`.
+
 Vivarium Modeling Strategy
 --------------------------
 
@@ -84,6 +92,8 @@ This intervention requires adding an attribute to all simulants to specify if a 
 We will use the decision tree below to find the PAF of RDS mortality without access to CPAP that is logically consistent with the baseline delivery facility rates and baseline CPAP coverage.
 
 We will then add an attribute to each simulant indicating whether the birth occurs at a facility with access to CPAP (which will be dependent on the facility choice, i.e. no access for home births and lower access for BEmONC than CEmONC facilities).
+We will also include the effect of ACS on RDS mortality, which is described on the :ref:`ACS intervention page <acs_intervention>` in our calibration of the PAF for
+this intervention, given that we assume the same simulants have access to (i.e., are exposed to) CPAP and ACS, so long as the simulants are within the gestational ages eligible for ACS (26-33 weeks).
 
 We will then use the conditional probabilities for simulants with and without access to determine which simulants die from RDS.
 
@@ -113,7 +123,7 @@ Where,
     - Derived from instruction on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`
     - 
   * - :math:`\text{PAF}`
-    - Population attributable fraction of mortality due to preterm with RDS from access to CPAP intervention
+    - Joint population attributable fraction of mortality due to preterm with RDS from access to CPAP and ACS interventions
     - See instructions on how to calculate PAF below
     - 
   * - :math:`\text{RR}_i`
@@ -126,13 +136,20 @@ Where,
     - Relative risk of CPAP intervention on RDS mortality 
     - 0.53 (95% CI 0.34-0.83). Uncertaintly interval implemented as parameter uncertainty following a lognormal distribution
     - `2020 Cochrane review <https://pmc.ncbi.nlm.nih.gov/articles/PMC8094155/>`_. Note that this effect was measured for all cause mortality.
+  * - :math:`\text{RR}_\text{ACS}`
+    - Relative risk of ACS intervention on RDS mortality 
+    - Refer to :ref:`ACS intervention page <acs_intervention>` for this effect size.
+    - Only to be included in PAF calculation if simulant is within the gestational age range that is eligible for ACS (26-33 weeks).
 
 .. _cpap_calibration:
 
 Calibration Strategy
 --------------------
 
-The following decision tree shows all of the paths from delivery facility choice to CPAP availability.  Distinct paths in the tree correspond to disjoint events, which we can sum over to find the population probability of RDS mortality.  The goal here is to find internally consistent probabilities of RDS mortality for the subpopulations with and without access to CPAP, so that the baseline scenario can track who has access to CPAP and still match the baseline RDS mortality rate.
+The following decision tree shows all of the paths from delivery facility choice to CPAP availability.  Distinct paths in the tree correspond to 
+disjoint events, which we can sum over to find the population probability of RDS mortality.  The goal here is to find internally consistent probabilities 
+of RDS mortality for the subpopulations with and without access to CPAP and ACS, so that the baseline scenario can track who has access to CPAP and still match 
+the baseline RDS mortality rate.
 
 .. graphviz::
 
@@ -215,9 +232,20 @@ Here is some pseudocode for deriving the PAF and RR of "lack of access to CPAP" 
 The math for this can be found :ref:`on the antibiotics page <intervention_neonatal_antibiotics>`
 and the pseudocode would look as follows::
   
+  p_intervention = p_CPAP = p_ACS  
+  p_no_intervention = 1 - p_intervention
+
+  population_average_RR = (
+      p_no_intervention * RR_no_CPAP * RR_no_ACS +
+      p_intervention * 1
+  )
+  PAF_no_CPAP_ACS = 1 - 1 / population_average_RR
+
+The above PAF derivation should only include the effect of ACS on RDS mortality if the simulant is within the gestational age range that is eligible for ACS (26-33 weeks). For 
+preterm infants that fall outside of this range, the PAF should be be calculated using the following equation::
+
   population_average_RR = RR_no_CPAP * p_no_CPAP + 1 * p_CPAP
   PAF_no_CPAP = 1 - 1 / population_average_RR
-
 
 Scenarios
 ---------
