@@ -14,18 +14,141 @@ Observer background
 
 Observers are components in :code:`vivarium_public_health` and several standard observer packages are included in this repository (`see the documentation for these here <https://vivarium.readthedocs.io/projects/vivarium-public-health/en/latest/api_reference/results/index.html#module-vivarium_public_health.results>`_), but custom observers can also be written and included in vivarium simulations as well.
 
-.. todo::
-
-  Discuss if there is a better way to introduce the concept of an observer? Are they actually VPH components?
-
-  Do we think they need a mathematical definition? Or is this description sufficient?
-
 Two key features of vivarium simulation observers include:
 
-- Observers record event **counts**, and
-- Observer counts can be stratified by key variables
+- Observers record quantities that aggregate as sums (such as the sum of deaths or the sum of person time), and
+- Observer counts can be stratified by key variables (such as simulant sex or age group)
 
 An example of a standard vivarium observer is a mortality observer that records death counts statified by simulant sex and age group. Generally, sex and age group are standard stratifications for vivarium observers, but stratifications can easily be added and removed in the model spec file by following the instructions on the :ref:`common model changes page <common_model_changes>`.
+
+An example
+-------------
+
+To illustrate how Vivarium simulation observers work, we will step through an example. A population table for a hypothetical vivarium simulation that includes six simulants with assined values for age, sex, and vital status at the beginning of the simulation (1/1/2025) is shown below. All simulants start the simulation alive.
+
+.. list-table:: Population table, time 1/1/2025
+  :header-rows: 1
+
+  * - Simulant
+    - Sex
+    - Age
+    - Vital status
+  * - 1
+    - Male
+    - 25
+    - Alive
+  * - 2
+    - Male
+    - 76
+    - Alive
+  * - 3
+    - Female
+    - 51
+    - Alive
+  * - 4
+    - Male
+    - 98
+    - Alive
+  * - 5
+    - Female
+    - 71
+    - Alive
+  * - 6
+    - Female
+    - 37
+    - Alive
+
+After running the simulation for one year, the updated population table at 1/1/2026 is shown below. We can see that all simulants have aged one year and that three simulants have died.
+
+.. todo::
+
+  Determine if it is confusing to have simulants who died also age by one year? I think this is actually not how it works in vivarium, but I'd actually rather not get into that detail here?
+
+  Or maybe actually it is important to cover? I am not sure.
+
+.. list-table:: Population table, time 1/1/2026
+  :header-rows: 1
+
+  * - Simulant
+    - Sex
+    - Age
+    - Vital status
+  * - 1
+    - Male
+    - 26
+    - Alive
+  * - 2
+    - Male
+    - 77
+    - **Dead**
+  * - 3
+    - Female
+    - 52
+    - Alive
+  * - 4
+    - Male
+    - 99
+    - **Dead**
+  * - 5
+    - Female
+    - 72
+    - **Dead**
+  * - 6
+    - Female
+    - 38
+    - Alive
+
+Now let's advance one additional year to 1/1/2027. Here we see that simulants who were alive on 1/1/2026 have aged by one year and one additional simulant (simulant #3) has died.
+
+.. list-table:: Population table, time 1/1/2027
+  :header-rows: 1
+
+  * - Simulant
+    - Sex
+    - Age
+    - Vital status
+  * - 1
+    - Male
+    - 27
+    - Alive
+  * - 2
+    - Male
+    - 77
+    - **Dead**
+  * - 3
+    - Female
+    - 53
+    - **Dead**
+  * - 4
+    - Male
+    - 99
+    - **Dead**
+  * - 5
+    - Female
+    - 72
+    - **Dead**
+  * - 6
+    - Female
+    - 39
+    - Alive
+
+While it is fairly easy for us to track information about deaths among our simulants in this example by comparing the two population tables, you can see how this would quickly become inefficient as the number of simulants, timesteps, and quantities to track increases. To avoid having to save out the entire population table at various timepoints to track what is happening in the simulation, observers can more efficiently track specific information for us.
+
+An observer to track mortality that occured during the entire simulation (1/1/2025-1/1/2027) would record the total number of deaths that occurred across all timesteps: equal to 4 deaths in this example.
+
+If we would like to examine deaths specific to any of our additional simulated attributes, we could stratify our mortality observer by these factors.
+
+  * For instance, a mortality observer stratified by sex would return:
+
+    - Males: 2 deaths
+    - Females: 2 deaths
+
+  * A mortality observer stratified by sex and year would return:
+
+    * Males, 2025: 2 
+    * Males, 2026: 0
+    * Females, 2025: 1
+    * Females, 2026: 1
 
 General guidelines
 ------------------
@@ -49,18 +172,18 @@ There are specific measures that may not obviously lend themselves well to count
 
     \text{Mean}_Y = \text{First moment}_Y / \text{person time}
 
-    \text{Standard Deviation}_Y = \text{Second moment}_Y / \text{person time}
+    \text{Standard Deviation}_Y = \sqrt{\text{Second moment}_Y / \text{person time}}
 
 Determining stratifying variables
 ++++++++++++++++++++++++++++++++++
 
 Stratification of observers will likely be necessary for most simulations. However, adding many stratifications to simulation observers causes computation time to increase, so it is not ideal to add stratification variables that are not needed. 
 
-Common observer stratifications include age and sex, since GBD measures are often age- and sex-specific and so we typically perform V&V at the age- and sex-specific level. So in order to observer age- and sex-specific ACMR in a vivarium simulation, we would stratify both the death and person time observers by sex and age-group.
+Common observer stratifications include age and sex, since GBD measures are often age- and sex-specific and so we typically perform V&V at the age- and sex-specific level. So in order to observe age- and sex-specific ACMR in a vivarium simulation, we would stratify both the death and person time observers by sex and age-group.
 
 Additionally, intervention coverage is another common observer stratification. Stratifying population-related observers (such as births or person time) by intervention coverage will enable calculating intervention coverage for V&V and stratifying outcome-related observers (such as deaths) will allow for calculating intervention-specific outcome rates to verify intervention effects.
 
-There are certain variables that may not lend themselves well as observer stratifications. For instance, the LBWSG risk factor has 52 exposure categories and stratifying births and/or person time observers by LBWSG exposure category may result in slower than desired performance. In such cases, utilizing the :ref:`interactive context <vivarium_interactive_simulation>` to obtain such stratified results may be preferable.
+There are certain variables that may not lend themselves well as observer stratifications. For instance, the :ref:`LBWSG risk factor <risk_exposure_lbwsg>` has 58 exposure categories and stratifying births and/or person time observers by LBWSG exposure category may result in slower than desired performance. In such cases, utilizing the :ref:`interactive context <vivarium_interactive_simulation>` to obtain such stratified results may be preferable, as it allows for
 
 Documenting simulation obsserver requests
 -----------------------------------------------
