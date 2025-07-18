@@ -37,7 +37,7 @@ Intervention Overview
   We will not be modeling Balanced Energy Protein (BEP) supplementation in this simulation, nor the impact BEP and MMS have on child growth failure. 
 
 Maternal supplementation during the prenatal period is a critical intervention to support the increased nutritional demands due to the mother's changing physiology and fetal growth. 
-Maternal supplementation in low and middle income country settings are often accessed through antenatal care (ANC) services and early initiation of supplementation has been associated with improved outcomes. 
+Maternal supplementation in low and middle income country settings is often accessed through antenatal care (ANC) services and early initiation of supplementation has been associated with improved outcomes. 
 There are various maternal supplementation regimens that provide varying combinations of micro- and macro-nutrients and therefore have varying impacts on both maternal and child health. 
 The two major classes of maternal supplementation regimens that we will be modeling are outlined in the table below.
 
