@@ -184,6 +184,7 @@ defined as a module input in a subsequent row.
     - * ANC propensity
       * LBWSG category propensity
       * IFD propensity
+      * RDS intervention propensity
     - * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
   * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     - * LBWSG category propensity
@@ -309,12 +310,13 @@ defined as a module input in a subsequent row.
       * Birth facility
       * Believed gestational age
       * ANC attendance
+      * RDS intervention propensity
     - * Intrapartum azithromycin coverage
       * Antenatal corticosteroid coverage
       * Misoprostol coverage
     - * :ref:`Intrapartum azithromycin intervention <azithromycin_intervention>` 
       * :ref:`Misoprostol intervention <misoprostol_intervention>`
-      * Antenatal corticosteroids intervention 
+      * :ref:`Antenatal corticosteroids <acs_intervention>`
   * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
     - * (Pregnancy term duration)
       * Intrapartum azithromycin coverage
@@ -353,7 +355,7 @@ defined as a module input in a subsequent row.
         * Misoprostol coverage
       - * :ref:`Intrapartum azithromycin <azithromycin_intervention>` 
         * :ref:`Misoprostol coverage <misoprostol_intervention>`
-        * Antenatal corticosteroids intervention
+        * :ref:`Antenatal corticosteroids <acs_intervention>`
       - 
     * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
       - * (Pregnancy term duration)
@@ -385,6 +387,7 @@ defined as a module input in a subsequent row.
       * Birth facility
       * Birth weight
       * Gestational age
+      * RDS intervention propensity
       * Hemoglobin exposure at birth (affects neonatal sepsis)
     - * Neonatal probiotics coverage
       * CPAP coverage
@@ -396,7 +399,7 @@ defined as a module input in a subsequent row.
       * :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
       * :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
       * :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
-      * Antenatal corticosteroids
+      * :ref:`Antenatal corticosteroids <acs_intervention>`
       * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
       * :ref:`Hemoglobin risk effects <2023_hemoglobin_effects>`
 
