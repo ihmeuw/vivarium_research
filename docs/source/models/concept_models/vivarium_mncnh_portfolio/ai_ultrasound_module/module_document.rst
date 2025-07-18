@@ -37,7 +37,6 @@ AI Ultrasound Module
 
 .. contents::
   :local:
-  :depth: 2
 
 1.0 Overview
 ++++++++++++
@@ -50,7 +49,26 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
 2.1 Module Diagram
 ----------------------
 
-.. image:: ai_ultrasound_module_diagram.png
+.. image:: ai_ultrasound_module_diagram.drawio.svg
+
+.. todo::
+
+  Update strategy to use all four categories of ANC attendance instead
+  of treating it as a binary variable. Specifically, change ultrasound
+  type to a 4-category variable by splitting the "standard ultrasound"
+  category into 2 categories, "standard ultrasound in 1st trimester" and
+  "standard ultrasound in later pregnancy", as outlined in this `PR
+  comment
+  <https://github.com/ihmeuw/vivarium_research/pull/1677#discussion_r2138982719>`__,
+  and use the data in this `paper referenced below
+  <https://obgyn.onlinelibrary.wiley.com/doi/10.1002/uog.15894>`__ to
+  have different standard deviations for GA estimation error based on
+  ultrasound timing.
+
+  Note that making these changes will also require updating and
+  recalibrating the :ref:`facility choice model
+  <2024_facility_model_vivarium_mncnh_portfolio>`.
+
 
 2.2 Module Inputs
 ---------------------
@@ -65,10 +83,13 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
   * - ANC attendance
     - :ref:`Antenatal care module <2024_vivarium_mncnh_portfolio_anc_module>`
     - Decision node 1
-    - True/False value for each simulant
+    - 4-category exposure variable.  As described in the :ref:`facility
+      choice model document
+      <2024_facility_model_vivarium_mncnh_portfolio>`, ANC attendance is
+      correlated with other model variables.
   * - Gestational age
     - :ref:`Pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    - Action point IV
+    - Action point V
     - Point value in days
 
 .. todo::
@@ -87,8 +108,11 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
     - Note
   * - 1
     - Attends ANC?
-    - Input from antenatal care module (True/False for each simulant)
-    - 
+    - Decide "No" if ANC attendance
+      category is *none*; decide "Yes" otherwise
+    - ANC attendance has four exposure categories: The *none* category
+      corresponds to no ANC attendance, while the other three categories
+      indicate some ANC attendance
   * - 2
     - Receives ultrasound?
     - Scenario-dependent variable: see the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values (and baseline coverage section below for baseline coverage)
@@ -96,7 +120,12 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
   * - 3
     - Ultrasound type?
     - Scenario-dependent variable: :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` for values (and baseline coverage section below for baseline coverage)
-    - 
+    - Possible values are "none," "standard," and "AI-assisted"
+  * - 4
+    - Is estimated gestational age < 37 weeks?
+    - "Yes" or "No" depending on the estimated gestational age
+      calculated in Action point V
+    -
 
 2.3.1: Baseline coverage
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -130,26 +159,43 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
     - Information
     - Note
   * - I
-    - Record :code:`none` ultrasound coverage 
+    - Record :code:`none` for ultrasound type
     - Record to output A
     - 
   * - II
-    - Record :code:`standard` ultrasound coverage
+    - Record :code:`standard` for ultrasound type
     - Record to output A
     - 
   * - III
-    - Record :code:`ai_assisted` ultrasound coverage
+    - Record :code:`ai_assisted` for ultrasound type
     - Record to output A
     - 
   * - IV
-    - Estimate "believed" gestational age
-    - See instructions below and record to output B
-    - 
+    - Sample random error for estimated gestational age
+    - GA error is normally distributed with mean 0 and standard
+      deviation depending on ultrasound type, as specified in the table
+      below
+    - See instructions in section `2.4.1 Calculation of estimated
+      gestational age`_ below
+  * - V
+    - Calculate estimated gestational age
+    - Add the random GA error from Action point IV to the gestational
+      age from the pregnancy module, and record to output B
+    - See instructions in section `2.4.1 Calculation of estimated
+      gestational age`_ below
+  * - VI
+    - Record :code:`believed_preterm` for believed preterm status
+    - Record to output C
+    - corresponds to estimated gestational age < 37 weeks
+  * - VII
+    - Record :code:`believed_term` for believed preterm status
+    - Record to output C
+    - corresponds to estimated gestational age 37+ weeks
 
-2.4.1 Estimation of "believed" gestational age
+2.4.1 Calculation of estimated gestational age
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-"Believed" gestational age should be estimated by adding a randomly sampled value from a normal distribution with a mean of zero and a standard deviation defined below to the simulant's assigned gestational age at birth exposure (input from the pregnancy module).
+Estimated gestational age should be calculated by adding a randomly sampled value from a normal distribution with a mean of zero and a standard deviation defined below to the simulant's assigned gestational age at birth exposure (input from the pregnancy module).
 
 .. list-table:: Standard deviation values by ultrasound type
   :header-rows: 1
@@ -157,11 +203,18 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
   * - Ultrasound type
     - Standard deviation
   * - None
-    - 45.5 days
+    - 10 days
   * - Standard
-    - 20 days
+    - 6.7 days
   * - AI-assisted ultrasound
     - 5 days
+
+.. todo::
+
+  Add references for these numbers. Here's the `notebook I used to
+  get them
+  <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/facility_choice/2025_04_17a_investigate_ga_error.ipynb>`_,
+  which includes the citations.
 
 .. note::
   
@@ -179,19 +232,25 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
   * - Output
     - Value
     - Note
-  * - A. Ultrasound coverage
+  * - A. Type of ultrasound received
     - *none* / *standard* / *AI-assisted*
     - Used for V&V and for estimation of output B
-  * - B. "Believed" gestational age
+  * - B. Estimated gestational age
     - Point values in days
-    - Used for V&V and facility choice module of intrapartum component
+    - Used for V&V, calculation of output C, and determination of
+      eligibility for antenatal corticosteroids
+  * - C. Believed preterm status
+    - *believed preterm* / *believed term*
+    - Used for V&V and for facility choice module in intrapartum component
 
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
 * The timing of ANC visits impacts the ability to accurately estimate gestational age, but we use an average instead. 
-* The current version of the model does not include any false positive rates for pre-term or LBW. Since a false positive is unlikely to cause harm, only inclusion in higher level care, this seems sufficient. 
+* The current version of the model does not include any false positive
+  rates for LBW. Since a false positive is unlikely to cause harm, only
+  inclusion in higher level care, this seems sufficient.
 * Single cohort of pregnancies does not allow for cyclic effects such as improved ANC visit rates due to ultrasound presence 
 * The data for baseline ultrasound utilization at the ANC is non-ideal for all of the locations. Our data for Ethiopia is most aligned with the value we are trying to find, as it comes from `a paper that
   estimates ultrasound utilization at ANC <https://pmc.ncbi.nlm.nih.gov/articles/PMC8905208/>`_, in a specific municipality of Jimma in Ethiopia. For Nigeria, our literature value is less trustworthy, coming from a paper that reports the percentage of 

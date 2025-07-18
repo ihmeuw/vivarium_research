@@ -115,11 +115,19 @@ Scope
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-The excluded nonfatal portion of the burden is small (around 10% of the total burden).
+- The excluded nonfatal portion of the burden is small (around 10% of the total burden).
 
-The evidence base for identifying the level 4 subcauses is not as solid as I would like.
+- The evidence base for identifying the level 4 subcauses is not as solid as I would like.
 
-Preterm must be split into with and without respiratory distress syndrome (RDS) outside of GBD, since GBD does not distinguish preterms deaths with and without RDS.
+- Preterm must be split into with and without respiratory distress syndrome (RDS) outside of GBD, since GBD does not distinguish preterms deaths with and without RDS.
+
+We "cap" LBWSG RR values at a certain value in an attempt to eliminate the occurance of individual all-cause mortality risk values greater than 1 on in our simulation (and therefore avoiding an associated underestimation of neonatal mortality) while also maintaining:
+
+- The relative difference in mortality risk values between LBWSG exposures that are not capped, and
+
+- Mortality risk values very close to 1 for the individuals with the highest risk LBWSG exposures
+
+However, in this implementation, we do not consider how modeled interventions may further increase individual-level mortality risk beyond the modifications from the LBWSG risk factor, so it is possible that we continue to have some mortality risk values greater that 1 in our simulation. 
 
 Cause Model Decision Graph
 ++++++++++++++++++++++++++
@@ -318,12 +326,20 @@ Data Tables
       - 
     * - :math:`\text{PAF}_\text{LBWSG}`
       - population attributable fraction of all-cause mortality for low birth weight and short gestation
-      - computed so that PAF = 1 - 1 / E(RR) from the interpolated relative risk function (with expectation taken over the distribution of LBWSG exposure)
-      -
+      - See note below for how to calculate
+      - Note that the relative risks used to calculate the PAFs are capped below the :math:`\text{RR}_\text{max}` value
     * - :math:`\text{RR}_{\text{BW},\text{GA}}`
-      - relative risk of all-cause mortality for low birth weight and short gestation
+      - relative risk of all-cause mortality for low birth weight and short gestation, capped at the specified maximum value
+      - :math:`\min(\text{RR}_\text{max}, \text{RR}_\text{LBWSG})`
+      - 
+    * - :math:`\text{RR}_\text{LBWSG}`
+      - relative risk of all-cause mortality for low birth weight and short gestation, as interpolated from GBD
       - interpolated from GBD values, as described in :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` docs
-      -
+      - 
+    * - :math:`\text{RR}_\text{max}`
+      - Enforced maximum value for LBWSG relative risk 
+      - Location/draw/age group/sex-specific value `calculated according to process in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/lbwsg_rr_caps.ipynb>`_
+      - Capping of LBWSG RRs is intended to guarentee that there will be no individual mortality risk value is greater than 1 in our simulation 
     * - :math:`\text{CSMRisk}^k_{\text{BW},\text{GA}}`
       - cause-specific mortality risk for subcause k, for population with birth weight BW and gestational age GA
       - GBD + assumption about relative risks
@@ -333,7 +349,34 @@ Data Tables
       - GBD + assumption about relative risks + intervention model effects
       - see subcause models for details
 
+**Details of the** :math:`\text{PAF}_\text{LBWSG}` **calculation:**
 
+As stated in the table above, :math:`\text{PAF}_\text{LBWSG}` is the population attributable fraction of all-cause mortality for low birth weight and short gestation. It is computed so that PAF = 1 - 1 / E(:math:`\text{RR}_{\text{BW},\text{GA}}`) from the capped interpolated relative risk function (with expectation taken over the distribution of LBWSG exposure). 
+
+For the early neonatal age group, the LBWSG exposure at birth is used. For the late neonatal age group, we will use the LBWSG exposure at 8 days of life (start of the late neonatal age group after all early neonatal deaths have occurred). This LBWSG exposure is not directly available from GBD. Therefore, we will need to produce it ourselves according to the following steps:
+
+Using the `LBWSG PAF calculation simulation <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/lbwsg_paf.yaml>`_:
+
+  * **For the calculation of the early neonatal PAF:**
+
+    - Population size = use that specified on the :ref:`preterm birth cause model document <2021_cause_preterm_birth_mncnh>` (see note about the calculation of the normalizing constant)
+    - LBWSG exposure specific to birth age group
+    - LBWSG relative risk values are interpolated and capped at the location/draw/age group/sex-specific maximum RR value (:math:`\text{RR}_\text{max}`)
+
+  * **For the calculation of the late neonatal PAF:**
+
+    1. Assign all-cause mortality risk values to each simulated individual using the early neonatal LBWSG RR values (interpolated and capped), early neonatal LBWSG PAF (as calculated above), and early neonatal all-cause mortality risk
+    2. Take a "time step" of ~7 days that advances the population past the early neonatal mortality application, but before late neonatal mortality has been applied. Mortality should be applied (simulants should die) according to their LBWSG-affected all-cause mortality risk values (no need to consider cause-specific mortality and/or interventions in this step).
+    3. Record the number of deaths that occur in each LBWSG exposure category :math:`\text{cat}` as :math:`n^\text{deaths}_\text{cat}`
+    4. Among the surviving simulants, re-assign LBWSG RR values using the late neonatal interpolated RR values and the late neonatal-specific RR caps
+    5. Use the RR values from step 4 (among surviving simulants only) for the calculation of the mean relative risk among the given LBWSG exposure category, :math:`E(\text{RR})_\text{cat}`
+    6. To calculate the overall population mean RR (:math:`E(\text{RR})_\text{population}`), take a weighted average of the category-specific mean relative risk values weighted by the category-specific LBWSG exposure prevalence AT BIRTH (:math:`p^\text{birth}_\text{cat}`) multiplied by the fraction of simulants who survived past the early neonatal age group, equal to: :math:`\frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}`, where :math:`n_\text{cat}` is the number of simulants initialized into each category before mortality was applied (the number of grid points in each category). Note that :math:`n_\text{cat}` will not vary by LBWSG exposure category.
+
+So,
+
+.. math::
+
+  E(\text{RR})_\text{population} = \frac{\sum_{\text{cat}} E(\text{RR})_\text{cat} \times p^\text{birth}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}}{\sum_{\text{cat}} p^\text{birth}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}}
 
 Calculating Burden
 ++++++++++++++++++
