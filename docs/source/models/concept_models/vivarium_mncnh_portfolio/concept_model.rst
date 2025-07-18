@@ -1201,13 +1201,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Added preterm status and believed preterm status to maternal
       population observer (#7)
     - Default
-  * - 16.0*
+  * - 16.0
     - Wave I antenatal corticosteroids
     - Baseline
     - ``model16.0``
-    -
-    -
-    -
+    - Default
+    - Default
+    - Default
 
 .. note:: 
 
