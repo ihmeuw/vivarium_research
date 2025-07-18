@@ -1613,6 +1613,15 @@ Default stratifications to all observers should include scenario and input draw.
         the `facility choice optimization results .csv file`_)
     -
     -
+  * - 16.0
+    - * Use the interactive sim to confirm RDS and all-cause mortality rates between 33 weeks with ACS coverage and 34 weeks (no ACS coverage due to ineligibility).
+      * Confirm neonatal mortality rate of preterm birth with RDS in baseline scenraio still validates.
+      * Confirm ratio of preterm with RDS mortality among those without ACS divided by those with ACS equals the relative risk parameter specified in the :ref:`ACS intervention page <acs_intervention>`.
+      * Confirm that baseline coverage of ACS is equal to that of CPAP as specified in the :ref:`CPAP intervention page <intervention_neonatal_cpap>`.
+      * Confirm that the same propensity value is used for ACS and CPAP.
+      * Use the interactive sim to confirm there is no coverage of ACS outside of the eligible gestational age range.
+    - 
+    - 
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
