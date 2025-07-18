@@ -165,7 +165,7 @@ Starting in wave II of the simulation, there will be variables that influence pr
     - * Birth outcome
       * Gestational age
       * Birthweight
-    - See the :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`
+    - See the :ref:`maternal supplementation intervention document <oral_iron_antenatal>`
     - NOTE: as of 4/9/2025 this intervention model document is not updated and ready for implementation
   * - IV iron coverage
     - * Birth outcome
