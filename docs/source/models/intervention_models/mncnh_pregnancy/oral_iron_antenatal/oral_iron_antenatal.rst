@@ -36,8 +36,8 @@ Intervention Overview
   This document is for use in the :ref:`MNCNH Portfolio <2024_concept_model_vivarium_mncnh_portfolio>` project. This intervention has been modeled before, see the :ref:`Antenatal supplementation intervention <maternal_supplementation_intervention>` documentation from the Nutrition Optimization project for reference.
   We will not be modeling Balanced Energy Protein (BEP) supplementation in this simulation, nor the impact BEP and MMS have on child growth failure. 
 
-Maternal supplementataion during the prenatal period is a critical intervention to support the increased nutritional demands due to the mother's changing physiology and fetal growth. 
-Maternal supplementation in low and middle income country settings are often accessed through antenatal care (ANC) services and early initiation of supplementation has been associated with improved outcomes. 
+Maternal supplementation during the prenatal period is a critical intervention to support the increased nutritional demands due to the mother's changing physiology and fetal growth. 
+Maternal supplementation in low and middle income country settings is often accessed through antenatal care (ANC) services and early initiation of supplementation has been associated with improved outcomes. 
 There are various maternal supplementation regimens that provide varying combinations of micro- and macro-nutrients and therefore have varying impacts on both maternal and child health. 
 The two major classes of maternal supplementation regimens that we will be modeling are outlined in the table below.
 
@@ -48,7 +48,7 @@ The two major classes of maternal supplementation regimens that we will be model
 In August of 2020, the :download:`World Health Organization updated their recommendation <who_guidance_positive_pregnancy_mms_2020.pdf>` on nutritional interventions during pregnancy to include MMS that includes iron and folic acid as part of routine antenatal care. 
 Prior to this update, they recommended only IFA. 
 
-IFA is widely used as a prenatal supplement in most areas of the world and is recommended by the WHO as part of routine antenatal care, although coverage and adherence levels vary. 
+IFA is widely used as a prenatal supplement in most areas of the world and has been recommended by the WHO as part of routine antenatal care for quite some time, although coverage and adherence levels vary. 
 Given the relatively recent recommendation regarding MMS, the coverage of MMS at a wide scale is believed to be substantially lower.
 
 .. todo::
@@ -243,8 +243,6 @@ Additionally, the code block below walks through how to implement the following 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- We assume that pregnant women begin taking the supplementation intervention six weeks into their pregnancy. In reality, the average person may begin taking oral iron supplementation closer to the start of the second trimester. However, we have chosen six weeks in order to be conservative as the comparison intervention for the assessment of the impact of the intravenous iron intervention.
-- We assume that the effect of the intervention persists for six weeks postpartum at which point hemoglobin returns to its pre-pregnancy value
 - We assume no effect modification by baseline hemoglobin level. In reality, the individual hemoglobin shifts are likely greater among those who are anemic at baseline.
 
 Verification and validation criteria
@@ -422,7 +420,7 @@ The antenatal supplementation products affect child gestational age at birth exp
 
 In order to make these effects compatible with our continuous exposure modeling strategy for LBWSG, we have converted these relative risks of dichotomous outcomes to continuous gestational age "shifts" that result in preterm (and very preterm, if applicable) birth prevalence that replicates the appropriate dichotomous measure of effect. 
 
-The methodology for this conversion was inspired in part by the methodology of the air pollution GBD team in calculating the impact of the risk on LWBSG exposures. As with GBD, we assume that these shifts are independent of any shifts in birth weight. However, rather than implement the conversion using the LBWSG exposure distribution specific to the individual study included in a meta-analysis of the overall effect to find a global shift as GBD did, we used the meta-analyzed global relative risks and applied the conversion for each of our modeled locations, resulting in location-specific continuous shifts that replicate the global dichotomous effect.
+The methodology for this conversion was inspired in part by the methodology of the air pollution GBD team in calculating the impact of the risk on LBWSG exposures. As with GBD, we assume that these shifts are independent of any shifts in birth weight. However, rather than implement the conversion using the LBWSG exposure distribution specific to the individual study included in a meta-analysis of the overall effect to find a global shift as GBD did, we used the meta-analyzed global relative risks and applied the conversion for each of our modeled locations, resulting in location-specific continuous shifts that replicate the global dichotomous effect.
 In the case of birth weight shifts, it may be more accurate to assume that the relative risks are generalizable across locations.
 
 Additionally, our methods differ from GBD's in that we estimated two separate GA shifts, conditional on baseline GA exposure, for the effect of MMS relative to IFA rather than a single shift applied equally to the entire distribution. This approach allowed us to replicate the literature-reported relative risks of MMS on both preterm birth (<37 weeks) as well as very preterm birth (<32 weeks). This "dual shift" approach follows these steps:
