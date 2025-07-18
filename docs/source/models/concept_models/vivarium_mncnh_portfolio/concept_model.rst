@@ -466,7 +466,7 @@ defined as a module input in a subsequent row.
   * - 1. Baseline
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-    - XXX
+    - Defined in the baseline coverage section of the :ref:`oral iron supplementation page <oral_iron_antenatal>`
     - XXX
     - XXX
     - 
