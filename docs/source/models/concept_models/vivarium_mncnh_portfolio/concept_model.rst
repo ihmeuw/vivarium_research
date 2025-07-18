@@ -446,6 +446,11 @@ defined as a module input in a subsequent row.
 
   Define hemoglobin-related baseline coverage
 
+.. todo::
+
+  When designing our intervention coverage across scenarios, we will need to account for the mutually exclusive nature of the :ref:`IFA and MMS interventions <oral_iron_antenatal>`.
+
+
 .. _MNCNH pregnancy component scenario table:
 
 .. list-table:: Pregnancy component scenario-dependent variables

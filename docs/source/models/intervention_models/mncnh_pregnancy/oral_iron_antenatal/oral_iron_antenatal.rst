@@ -114,6 +114,10 @@ Targeted intervention package coverage algorithm
 
 For use in the :ref:`MNCNH Portfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>`.
 
+.. todo::
+
+  When designing our intervention coverage across scenarios, we will need to account for the mutually exclusive nature of the IFA and MMS interventions.
+
 .. list-table:: Modeled Outcomes
   :widths: 15 15 15 15 15 15 15
   :header-rows: 1
@@ -187,58 +191,8 @@ Notably, the intervention will not affect the hemoglobin level of women of repro
 
 **How to sample and apply effect sizes:**
 
-Additionally, the code block below walks through how to implement the following considerations:
-
-- Assume a normal distribution of uncertainty when sampling from the effect size parameter confidence intervals
-- Hemoglobin exposure values among PLW need to be calibrated to baseline IFA coverage in the baseline scenario
+- Assume a normal distribution of uncertainty when sampling from the effect size parameter confidence intervals.
 - Effect sizes in the table above are NOT relative to no supplementation and are assumed to be *additive* to one another. 
-- The effect of MMS in the alternative scenario depends on IFA coverage status in the baseline scenario
-
-.. code-block:: python
-
-  from scipy.stats import norm
-
-  def sample_from_normal_distribution(mean, lower, upper):
-      """Instructions on how to sample from a normal distribution given a mean value and
-      95% confidence interval for a parameter"""
-      std = (upper - lower) / 2 / 1.96
-      dist = norm(mean, std)
-      return dist.rvs()
-
-  """A hemoglobin shift for each supplement regimen should be sampled independently
-  for each simulation draw assuming a normal distribution of uncertainty"""
-  for draw in draws:    
-      for supplement in ['ifa','mmn']:
-          {supplement}_shift_draw = sample_from_normal_distribution({supplement}_mean, 
-                                                                    {supplement}_lower, 
-                                                                    {supplement}_upper)
-      
-      for i in simulants:
-
-      """In the baseline scenario, we need to calibrate baseline coverage of IFA
-      so that the difference between IFA supplemented and unsupplemented babies, on 
-      average, equals to the ifa_shift AND that the population mean hemoglobin value
-      among PLW from GBD is approximately unchanged.
-
-      * hgb_{i} represents the assigned continuous hemoglobin exposure value for a 
-      simulant sampled from GBD, after the application of the pregnancy adjustment factor
-      and BEFORE consideration of the impact of maternal supplementation.
-
-      * baseline_ifa_coverage represents the coverage proportion of IFA for a location and
-      specific simulation draw"""
-          if baseline_maternal_supplement_{i} == 'none':
-              baseline_supplemented_hgb_{i} = hgb_{i} - baseline_ifa_coverage_draw * ifa_shift_draw
-          elif baseline_maternal_supplement_i == 'ifa':
-              baseline_supplemented_hgb_{i} = hgb_{i} + (1 - baseline_ifa_coverage_draw) * ifa_shift_draw
-
-      """In the alternative scenario, the amount to shift a simulant's hemoglobin (if they are
-      covered by MMS in the alternative scenario) depends on if they were already covered 
-      by IFA in the baseline scenario"""
-          alternative_supplemented_hgb_{i} = baseline_supplemented_hgb_{i}
-          if alternative_maternal_supplement_{i} is in ['ifa', 'mmn'] and baseline_maternal_supplement_{i} == 'none':
-              alternative_supplemented_hgb_{i} =+ ifa_shift_draw
-          if alternative_maternal_supplement_{i} is in ['mmn']:
-              alternative_supplemented_hgb_{i} =+ mmn_shift_draw
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -588,4 +542,17 @@ Assumptions and limitations
 References
 ------------
 
-The following citations are defined in the :ref:`Antenatal supplementation document <maternal_supplementation_intervention>` from Nutrition Optimization project and should be referenced from there: [Gomes-et-al-2023-antenatal-supplementation], [Keats-et-al-2019-maternal-supplementation], [Lassi-et-al-2020-antenatal-supplementation], [Li-et-al-2019-antenatal-supplementation], [McGovern-et-al-2019-maternal-supplementation], [Nisar-et-al-2020], [Oh-et-al-2020], [Ota-et-al-2015], [Pena-Rosas-et-al-2015]
+.. [Gomes-et-al-2023-antenatal-supplementation]
+  Gomes F, Askari S, Black RE, Christian P, Dewey KG, Mwangi MN, Rana Z, Reed S, Shankar AH, Smith ER, Tumilowicz A. Antenatal multiple micronutrient supplements versus iron-folic acid supplements and birth outcomes: Analysis by gestational age assessment method. Matern Child Nutr. 2023 Jul;19(3):e13509. `https://doi.org/10.1111/mcn.13509 <https://doi.org/10.1111/mcn.13509>`_
+
+.. [Keats-et-al-2019-maternal-supplementation]
+  Keats  EC, Haider  BA, Tam  E, Bhutta  ZA. Multiple‐micronutrient supplementation for women during pregnancy. Cochrane Database of Systematic Reviews 2019, Issue 3. Art. No.: CD004905. DOI: 10.1002/14651858.CD004905.pub6. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full>`_
+
+.. [Li-et-al-2019-antenatal-supplementation]
+  Li, B., Zhang, X., Peng, X., Zhang, S., Wang, X., & Zhu, C. (2019). Folic Acid and Risk of Preterm Birth: A Meta-Analysis. Frontiers in Neuroscience, 13, 1284. https://doi.org/10.3389/fnins.2019.01284
+
+.. [Oh-et-al-2020]
+  Oh, C., Keats, E. C., & Bhutta, Z. A. (2020). Vitamin and Mineral Supplementation During Pregnancy on Maternal, Birth, Child Health and Development Outcomes in Low- and Middle-Income Countries: A Systematic Review and Meta-Analysis. Nutrients, 12(2), 491. https://doi.org/10.3390/nu12020491
+
+.. [Pena-Rosas-et-al-2015]
+  Peña‐Rosas  JP, De‐Regil  LM, Gomez Malave  H, Flores‐Urrutia  MC, Dowswell  T. Intermittent oral iron supplementation during pregnancy. Cochrane Database of Systematic Reviews 2015, Issue 10. Art. No.: CD009997. DOI: 10.1002/14651858.CD009997.pub2. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD009997.pub2/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD009997.pub2/full>`
