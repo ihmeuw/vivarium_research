@@ -201,7 +201,7 @@ Note that simulants who died during labor should not experience any YLDs due to 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-- Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values (see the 'Pregnancy-specific anemia prevalence and YLD in GBD 2023' section of `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/gbd_data_pulling.ipynb>` in the research repo for how to pull these data.
+- Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values (see the 'Pregnancy-specific anemia prevalence and YLD in GBD 2023' section of `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/gbd_data_pulling.ipynb>`_ in the research repo for how to pull these data.
   Note: you need to make sure you have the latest version of db_queries to use the ``population_group_id=16`` argument in the get_outputs() call.)
 
 5.0 References
