@@ -1161,6 +1161,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 12.1
+    - Bugfix to calculation of prevalence of preterm, to ensure we include categories with an upper bound of 37 weeks
+    - Baseline
+    - ``model12.1``
+    - Default
+    - Default
+    - Default
   * - 13.0
     - `Hemoglobin risk effects on maternal disorders <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_mncnh_portfolio/maternal_disorders_module/module_document.html#id1>`_
     - Baseline
@@ -1185,13 +1192,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Added preterm status and believed preterm status to maternal
       population observer (#7)
-    - Default
-  * - 15.1
-    - Bugfix to calculation of prevalence of preterm, to ensure we include categories with an upper bound of 37 weeks
-    - Baseline
-    - ``model15.1``
-    - Default
-    - Default
     - Default
   * - 16.0*
     - Wave I antenatal corticosteroids
@@ -1514,6 +1514,12 @@ Default stratifications to all observers should include scenario and input draw.
   * - 12.0
     - * Confirm neonatal all-cause mortality rates match expectation
       * Confirm LBWSG risk effects are working as expected
+    - 
+    - 
+  * - 12.1
+    - * Confirm neonatal cause-specific mortality risks match expectation for each preterm subcause
+      * Confirm LBWSG risk effects are working as expected
+      * Check whether neonatal cause-specific mortality risks match expectation for non-preterm causes
     - 
     - 
   * - 13.0
