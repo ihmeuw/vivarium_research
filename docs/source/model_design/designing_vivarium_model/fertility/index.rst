@@ -78,31 +78,44 @@ The key challenge for using CBR in a fertility component in Vivarium is determin
 
 Since the population represented in the sim might be only a fraction of the total population used as the denominator of the CBR, we need to find the fraction of the total population being simulated.
 
-.. math::
+First let's define the "initially represented population" as the GDB population we will represent in our simulation.
+This population is a subset of the total GBD population used as the denominator of the CBR, but is full-scale version of the simulant population in our model.
+In other words it is the GBD population corresponding to the age and sex restrictions we place on the simulants to be initialized.
 
-   \text{simulated_fraction} = \frac{
-       \int_{a=\text{age_start}}^{\text{age_end}} \text{total_population}(a) \, da
-   }{
-       \int_{a=0}^{125} \text{total_population}(a) \, da
-   }
+We'll call the simulants we initialize the "initial simulated population size".
 
-where :math:`\int_{a=\text{age_start}}^{\text{age_end}} \text{total_population}(a) \, da` is the portion of the total population that is represented initially in the sim.
+There are two ways to calculate the number of simulants to add in each time step -- the "epidemiology way" using the CBR, and the "model way".
+Both ways give the same result, but we will explain each for clarity.
 
-With this quantity, the simulants to add per year is equal to
+Epidemiology way
+++++++++++++++++
 
-.. math::
+Let's define :math:`\text{initially represented fraction} = \frac{\text{initially represented population size}}{\text{total GBD population size}}`
 
-   \text{simulants_to_add_rate} = \frac{\text{initial_population}}{\text{simulated_fraction}} \times \frac{\text{CBR}}{1000}
+In the case where there are no age or sex restrictions on the simulants we initialize, this value is 1.
 
-Note that :math:`\text{initial_population}` is in the model spec as ``configuration.population.population_size``.  This is the number of simulants in the sim at the start of the simulation.
+So, :math:`\text{simulants_to_add_per_year} = \frac{\text{initial simulated population size}}{\text{initially represented fraction}} \times \frac{\text{CBR}}{1000}`
 
-Adding these simulants can be accomplished elegantly by adding a random number of simulants each time step with Poisson parameter of :math:`\text{simulants_to_add}\times \text{time_step}/365`.
+When the initially represented fraction is 1, this is just :math:`\text{initial simulated population size} \times \frac{\text{CBR}}{1000}`.
 
-Examples with different ``age_start`` and ``age_end`` parameters:
+Model scale way
++++++++++++++++
 
-age_start = 0, age_end = 125 --- simulated_fraction = 1.0
+We can also think about it in terms of a "model scale", like a model train set which is a replica of the real train, but at a certain scale ratio.
 
-age_start = 0, age_end = 1 --- simulated_fraction = fraction of population born in last year
+We'll define :math:`\text{model scale} = \frac{\text{initial simulated population size}}{\text{initially represented population size}}`.
+
+So, :math:`\text{simulants_to_add_per_year} = \text{model scale} \times \text{live births}`.
+
+The model scale way of representing :math:`\text{simulants_to_add_per_year}` is algebraically equivalent to the epidemiology way. 
+Since :math:`\text{model scale} = \frac{\text{initial simulated population size}}{\text{total GBD population size} \times \text{initially represented fraction}}`, 
+then 
+
+:math:`\text{simulants_to_add_per_year} = \frac{\text{initial simulated population size}}{\text{total GBD population size} \times \text{initially represented fraction}} \times \text{live births}`,
+
+which simplifies to the epidemiology representation.
+
+A model scale perspective can also be useful in scaling other values, such as DALY results from the sim back up to the "real world".
 
 .. list-table:: Parameters
   :header-rows: 1
@@ -110,8 +123,8 @@ age_start = 0, age_end = 1 --- simulated_fraction = fraction of population born 
   * - Parameter
     - Value
     - Note
-  * - 
-    - 
+  * - simulants_to_add_per_timestep
+    - :math:`\frac{\text{initial simulated population size}}{\int_{a=\text{age start}}^{\text{age end}} \text{GBD total population}(a) \, da} \times \text{Live births} \times \text{time step}/365`
     - 
 
 .. list-table:: Data values
