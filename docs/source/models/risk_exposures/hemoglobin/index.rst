@@ -41,13 +41,6 @@ Hemoglobin exposure will be modeled as a continuous exposure that follows an ens
 
   Determine if we want hemoglobin exposure propensity to be correlated with any other risks for the MNCNH model, such as BMI and/or hypertensive disorders
 
-Anemia attribution
-++++++++++++++++++
-
-.. todo::
-
-  Write strategy for how to classify anemia status and YLDs in the MNCNH simulation due to timestep difficulty
-
 Restrictions
 ++++++++++++
 

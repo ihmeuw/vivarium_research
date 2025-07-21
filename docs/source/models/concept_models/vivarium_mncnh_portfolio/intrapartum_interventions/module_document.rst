@@ -70,14 +70,23 @@ This module in the intrapartum component determines coverage of intrapartum inte
     - :ref:`Pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     - Partial term pregnancies do not proceed through this module
     - 
-  * - Birth facility
+  * - Delivery facility
     - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
     - Determines intervention availability
-    - 
+    - * Coverage of azithromycin and antenatal corticosteroids is delivery facility-specific (see decision nodes #1 and #3)
+      * Only home births are eligible for misoprostol intervention (decision node #5)
   * - Believed gestational age
     - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Affects antenatal corticosteroid coverage (decision node #2)
     - Only births believed to be preterm are eligible for coverage
+  * - ANC attendance
+    - :ref:`ANC attendance module <2024_vivarium_mncnh_portfolio_anc_module>`
+    - Determines misoprostol intervention eligibility (decision node #4)
+    - Only those who attend ANC can receive misoprostol
+  * - RDS intervention propensity
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - Used to determine which simulants receive each RDS intervention (:ref:`CPAP <intervention_neonatal_cpap>` and :ref:`ACS <acs_intervention>`)
+    - 
 
 
 2.3 Module Decision Nodes
@@ -102,30 +111,33 @@ This module in the intrapartum component determines coverage of intrapartum inte
     - Receives antenatal corticosteroids
     - Scenario-dependent variable: :ref:`intrapartum component scenario table <MNCNH intrapartum component scenario table>` for values (and baseline coverage section below for baseline coverage)
     - 
+  * - 4
+    - Attends ANC?
+    - ANC attendance == True based on module input
+    - 
+  * - 5
+    - Delivers at home?
+    - Delivery facility == home based on module input
+    - 
 
 2.3.1 Baseline coverage
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+**Misoprostol:**
+
+Please see :ref:`the misoprostol intervention documentation page <misoprostol_intervention>` for baseline coverage values.
+
 **Intrapartum azithromycin:** 
 
-  * Home birth: 10%
+Please see :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` for baseline coverage values for births at 
+home and in BEmONC and CEmONC facilities. 
 
-  * Hospital birth: 67.7%
+**Antenatal corticosteroids:** 
 
-  * Clinic/low-level birth: 18.5%
-
-Source: SARA (Ehtiopia; Table 3.8.2). These are placeholder values (percentage of each facility type that have azithromycin, not the percentage of pregnancies that receive it) and will be updated with further analysis. We want these to be location specific, please code accordingly.
-
-
-**Antenatal corticosteroids:** (percentage of believed preterm births)
-
-  * Home birth: 1%
-
-  * Hospital birth: 12%
-
-  * Clinic/low-level birth: 2%
-
-Source: EmONC (Ethiopia; Table 10.5.4A). These are placeholder values and will be updated with further analysis. We want these to be location specific, please code accordingly. The denominator for these values is LBW and preterm births. Outstanding items: believe this only affected neonatal outcomes, confirm with BMGF
+Please see :ref:`the CPAP intervention documentation page <intervention_neonatal_cpap>` for baseline coverage values for births at 
+home and in BEmONC and CEmONC facilities. CPAP is a neonatal intervention, but like ACS, it treats RDS and we make the assumption 
+that the coverage of ACS in the delivery facility is the same as the baseline coverage of CPAP in the delivery facility. See the 
+:ref:`ACS intervention documentation page <acs_intervention>` for more information on this assumption.
 
 .. todo::
 
@@ -149,6 +161,10 @@ Source: EmONC (Ethiopia; Table 10.5.4A). These are placeholder values and will b
     - Record receipt of antenatal corticosteroids
     - Record to output B
     - 
+  * - III
+    - Record receipt of misoprostol
+    - Record to output C
+    - 
 
 2.4: Module Outputs
 -----------------------
@@ -164,7 +180,10 @@ Source: EmONC (Ethiopia; Table 10.5.4A). These are placeholder values and will b
     - 
   * - B. Antenatal corticosteroid coverage
     - *True* / *False*
-    - Coverage can only be *True* if gestational age is believed to be < 37 weeks
+    - Coverage can only be *True* if gestational age is believed to be between 26 and 33 weeks
+  * - C. Misoprostol
+    - *True* / *False*
+    - Coverage can only be *True* if simulant attended ANC and delivered at home
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
@@ -176,9 +195,9 @@ Source: EmONC (Ethiopia; Table 10.5.4A). These are placeholder values and will b
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-* Confirm rates of simulants receiving azithromycin and corticosteroid matches inputs
+* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` and  :ref:`the misoprostol intervention documentation page <misoprostol_intervention>` for V&V criteria.
 
-* Confirm no simulants believed to be >37 weeks gestational age at birth recieve corticosteroids
+* Confirm no simulants believed to be outside of 26 and 33 weeks of gestational age at birth recieve corticosteroids
 
 5.0 References
 +++++++++++++++

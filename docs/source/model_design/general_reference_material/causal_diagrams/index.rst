@@ -579,12 +579,10 @@ This shows us that the rate ratios for the effect of asbestos on lung cancer
 vary according to smoking status: the rate ratio is :math:`40.1/11.3\approx 3.5` 
 for non-smokers and :math:`901.6/122.6\approx 7.3` for smokers.
 
-.. todo:: add citation to Nicole's textbook. Graphs below were reproduced from http://osctr.ouhsc.edu/sites/default/files/2020-02/Module8PartVNotes.pdf
+The graphs below were reproduced from educational materials on effect modification [Banack]_.
 
 We include below a graphical representation of a risk outcome stratified by sex, and by age. On the y-axis we have incidence of some outcome such as high blood pressure, and on the x-axis we have an exposure such as obesity.
 
-.. todo::
-   Format citations.
 
 .. image:: without_em_illustration.svg
   :width: 400
@@ -596,7 +594,7 @@ Observe that the difference in incidence of high blood pressure, between people 
 
 Here, we see that the risk attributable to our exposure is higher in our older group than in our younger group; thus age is an effect modifier for this risk outcome.
 
-Finally, we emphasize that when dealing with a confounding variable, in order to best understand the effects of our exposure, we seek to *remove* the influence of the confounder. By contrast, if variable B is an effect modifier for exposure A, then this interaction is an important property of the relationship between A and B, and their influence on the disease. Rather than remove, we thus try to *capture and describe* effect modification in the greatest detail possible. (Cite Nicole's textbook)
+Finally, we emphasize that when dealing with a confounding variable, in order to best understand the effects of our exposure, we seek to *remove* the influence of the confounder. By contrast, if variable B is an effect modifier for exposure A, then this interaction is an important property of the relationship between A and B, and their influence on the disease. Rather than remove, we thus try to *capture and describe* effect modification in the greatest detail possible [Banack]_.
 
 
 **Effect modification in GBD**
@@ -723,5 +721,10 @@ of the relationship of the risk-outcome pair through MR-BRT analyses.
 
   This information was obtained from a science seminar presented by Ryan 
   Barber and Chris Murray on March 11, 2020; a recording is available `here <https://hub.ihme.washington.edu/display/GBD2020/GBD+Science+Seminar+series>`__. Documentation for GBD's evidence scoring system is available `here <https://hub.ihme.washington.edu/display/GBD2020/Evidence+score>`__.
+
+References
+----------
+
+.. [Banack] Banack, H. "Lecture 14: EMM and interaction v2." https://haileybanack.com/wp-content/uploads/2024/07/Lecture-14-EMM-and-interaction-v2.pdf. Local copy: :download:`Banack_EMM_interaction_lecture.pdf`
 
 
