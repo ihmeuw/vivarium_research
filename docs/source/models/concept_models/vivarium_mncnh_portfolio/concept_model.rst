@@ -1528,8 +1528,9 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm neonatal cause-specific mortality risks match expectation for each preterm subcause
       * Confirm LBWSG risk effects are working as expected
       * Check whether neonatal cause-specific mortality risks match expectation for non-preterm causes
-    - 
-    - 
+    - Neonatal cause-specific mortality risks match expectation for both preterm and non-preterm causes *in the early neonatal period*.
+      We appear to be systematically underestimating preterm CSMRisks in the late neonatal period.
+    - `Model 12.1 neonatal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/c8d568f37906732b6d2f3a630d8ec6be6b591fe7/verification_and_validation/model_12.1_nn_checks.ipynb>`_ 
   * - 13.0
     - * Confirm baseline maternal disorders burden still validates
       * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but no case fatality rates
