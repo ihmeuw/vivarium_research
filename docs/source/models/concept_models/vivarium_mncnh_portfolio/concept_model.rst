@@ -1527,9 +1527,9 @@ Default stratifications to all observers should include scenario and input draw.
     - Looks good!
     - `Model 11.2 notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11.2_maternal_checks.ipynb>`_
   * - 12.0
-    - * Confirm neonatal all-cause mortality rates match expectation
+    - * Confirm neonatal all-cause mortality risks match expectation
       * Confirm LBWSG risk effects are working as expected
-    - * Neonatal all cause mortality rates are within "10% target range," but late neonatal all cause mortality varies more than early neonatal
+    - * Neonatal all cause mortality risks are within "10% target range," but late neonatal all cause mortality varies more than early neonatal
       * LBWSG Risk effects and PAF values yet to be directly verified
     - * `Model 12.0 neonatal notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_12.0_neonatal_checks.ipynb>`_
   * - 12.1
@@ -1539,7 +1539,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 12.1.1
-    - * Confirm neonatal all-cause mortality rates match expectation
+    - * Confirm neonatal all-cause mortality risks match expectation
       * Confirm that neonatal cause-specific mortality matches expectation
       * Confirm LBWSG risk effects are working as expected
       * Confirm that LBWSG PAF values match expectation through independent replication
