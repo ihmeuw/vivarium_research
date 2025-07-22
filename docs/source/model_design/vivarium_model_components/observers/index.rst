@@ -235,7 +235,7 @@ Let's say we are designing observers for the tutorial simulation, which is linke
         diarrheal_diseases -> fatal [lhead=cluster_burden];
     }
 
-So let's start by listing all of the measures we would like to output as results from this simulation. Measures marked with an asterisk (*) indicate that they are top-level results for the simulation wheras measures without an asterisk indicate that they will be used for model verification and validation.
+So let's start by listing all of the measures we would like to output as results from this simulation. Measures marked with an asterisk (*) indicate that they are top-level results for the simulation wheras measures without an asterisk indicate that they will be used for model verification and validation. For tips on how to generate this list, see the :ref:`Vivarium V&V and results processing page <vivarium_best_practices_results_processing>` that contains a general list of things to verify as well as the specific "Verification and Validation criteria" sections of the documents for all of the model components included in a simulation. 
 
 - SQ-LNS coverage
 - Child wasting exposure
