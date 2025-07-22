@@ -1538,7 +1538,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Check whether neonatal cause-specific mortality risks match expectation for non-preterm causes
     - 
     - 
-  * - 12.0
+  * - 12.1.1
     - * Confirm neonatal all-cause mortality rates match expectation
       * Confirm LBWSG risk effects are working as expected
       * Confirm that LBWSG PAF values match expectation through independent replication
