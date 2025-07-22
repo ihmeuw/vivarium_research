@@ -1646,6 +1646,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - Issue with LBWSG PAF calculation for the late neonatal age group
+    - See the summary in the model 12.1.1 run request
+    - Hussain to update and rerun, Ali to do independent replication of PAF calculation verification
+    - Model 12.1.1
   * - Neonatal mortality due to preterm birth slightly overestimated and remaining cause-specific mortality is generally underestimated despite this being resolved for all-cause mortality
     - Unknown -- could be something to do with the neonatal mortality math? Removing the risk effect of LBWSG on NN enceph. did not seem to resolve the issue.
     - Research team to discuss and consider 
