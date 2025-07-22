@@ -29,7 +29,7 @@
   And then add it to the list of decorators above.
 
 ====================================
-GBD 2023 Hemoglobin Risk Effects
+Hemoglobin Risk Effects (GBD 2023)
 ====================================
 
 .. contents::
@@ -139,17 +139,17 @@ Note that we will not be modeling direct effects of hemoglobin on the affected o
      - :math:`ir`
      - 
    * - Maternal disorders
+     - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
+     - cause
+     - custom
+     - :math:`ir`
+     - 
+   * - Maternal disorders
      - Maternal hypertensive disorders
      - cause
      - c369
      - TBD
      - Modeling strategy for hypertensive disorders cause in the MNCNH model is still outstanding. The risk effects model for this cause may require a custom approach to account for the complexity of pre-eclampsia and related interventions in the MNCNH model.
-   * - Maternal disorders
-     - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
-     - cause
-     - custom
-     - :math:`ir`
-     - A modeling strategy for maternal depressive disorders in the MNCNH model is still outstanding.
    * - Neonatal outcomes
      - :ref:`Neonatal sepsis <2021_cause_neonatal_sepsis_mncnh>`
      - cause
@@ -168,8 +168,8 @@ Use the modeling strategy described below for the following maternal disorders s
 
 - :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
 - :ref:`Maternal sepsis and other maternal infections <2021_cause_maternal_sepsis_mncnh>`
-- Maternal hypertensive disorders
 - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
+- Maternal hypertensive disorders
 
 .. todo::
 
@@ -182,6 +182,48 @@ Use the population attributable fraction values pulled from GBD shared functions
 .. math::
 
   ir_i = ir * (1 - PAF) * RR_i
+
+.. todo::
+
+  Address the todo items noted in the code below
+
+Relative risk PAF values can be accessed via shared functions with the following call:
+
+.. code:: python
+
+  # return age- and cause-specific relative risk estimates for the hemoglobin risk factor
+  get_draws(release_id=33, # GBD 2023 for topic-specific work
+              # TODO: confirm whether we should use release ID 16 or 33 here (both return data)
+              # Decided to use 33 for now to be compatible with ID in the PAF call below
+            source='rr',
+            gbd_id_type='rei_id',
+            gbd_id=376, # hemoglobin
+            sex_id=2, # female for maternal disorders causes
+            year_id=2022, # NOTE: this call returns only one value for year ID, which is 2022. You do not need to specify a year_id, but specifying any value besides 2022 will result in a failed call
+            location_id=1, # NOTE: you do not need to specify a location_id. Specifying any location ID will return results specific to location_id=1
+            ) 
+
+  # return age- and cause-specific PAF estimates for the hemoglobin risk factor
+  paf = get_draws(release_id=33, # GBD 2023 for topic-specific work
+              source='burdenator',
+              version_id=393, # obtained from: https://hub.ihme.washington.edu/spaces/GBDdirectory/pages/229280354/GBD+2023+PAF+Burdenator+SEV+Calculator+Tracking
+              gbd_id_type='rei_id',
+              gbd_id=376, # hemoglobin
+              sex_id=2, # female for maternal disorders causes
+              year_id=2023, # specify year_id=2023 to match 2023 exposure distribution
+              location_id=location_ids, # specify location_id to match exposure distribution for that location
+              metric_id=2, # metric=percent (returns PAF rather than attributable counts)
+              measure_id=1, # deaths (filter to single measure)
+                # TODO: figure out why PAFs are different for YLLs and YLDs depsite no difference in RRs between fatal and nonfatal outcomes
+                # decided to go with deaths for now because those values are less likely to be complicated by sequela-level detail
+              )
+  # filter down to relevant most detailed causes
+  paf = paf.loc[paf.cause_id.isin([367, # maternal hemorrhage
+                                  368, # maternal sepsis
+                                  369, # maternal hypertensive disorders
+                                  #567, # depressive disorders
+                                    # TODO: determine why there are no PAFs for depressive disorders
+                                  ])]
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
