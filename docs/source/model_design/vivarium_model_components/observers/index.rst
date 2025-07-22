@@ -174,6 +174,10 @@ There are specific measures that may not obviously lend themselves well to count
 
     \text{Standard Deviation}_Y = \sqrt{\text{Second moment}_Y / \text{person time}}
 
+.. todo::
+
+  Confirm standard deviation/second moment definitions
+
 Determining stratifying variables
 ++++++++++++++++++++++++++++++++++
 
@@ -183,10 +187,14 @@ Common observer stratifications include age and sex, since GBD measures are ofte
 
 Additionally, intervention coverage is another common observer stratification. Stratifying population-related observers (such as births or person time) by intervention coverage will enable calculating intervention coverage for V&V and stratifying outcome-related observers (such as deaths) will allow for calculating intervention-specific outcome rates to verify intervention effects.
 
-There are certain variables that may not lend themselves well as observer stratifications. For instance, the :ref:`LBWSG risk factor <risk_exposure_lbwsg>` has 58 exposure categories and stratifying births and/or person time observers by LBWSG exposure category may result in slower than desired performance. In such cases, utilizing the :ref:`interactive context <vivarium_interactive_simulation>` to obtain such stratified results may be preferable, as it allows for
+There are certain variables that may not lend themselves well as observer stratifications. For instance, the :ref:`LBWSG risk factor <risk_exposure_lbwsg>` has 58 exposure categories and stratifying births and/or person time observers by LBWSG exposure category may result in slower than desired performance. In such cases, utilizing the :ref:`interactive context <vivarium_interactive_simulation>` to obtain such stratified results may be preferable, as it enables evaluation for a single draw/seed/timestep rather than repeating the same stratified observation for every draw/seed/timestep in a given simulation without having to modify the simulation model specifications to do.
 
 An example of determining appropriate observers and stratifications
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. todo::
+
+  Figure out how to link directly to the tutorial (which is a jupyter notebook rather than .rst file)
 
 Let's say we are designing observers for the tutorial simulation, which is linked on the :ref:`onboarding resources page <onboarding_resources>`. The concept model for the tutorial simulation is copied here for easy reference.
 
