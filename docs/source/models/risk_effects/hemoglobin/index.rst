@@ -187,6 +187,10 @@ Use the population attributable fraction values pulled from GBD shared functions
 
   Address the todo items noted in the code below
 
+  Also, investigate compatibility between RRs with 250 draws and PAfs with 100 draws. Should we limit RRs to the first 100 draws only? Should we calculate our own PAFs for draws 100-249? 
+
+    To avoid blocking implementation, for now, let's use the first 100 draws for hemoglobin relative risks and PAFs and then copy them 5 times to get to a total of 500 draws like we have already done for hemoglobin exposure.
+
 Relative risk PAF values can be accessed via shared functions with the following call:
 
 .. code:: python
