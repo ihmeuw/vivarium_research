@@ -1637,13 +1637,13 @@ Default stratifications to all observers should include scenario and input draw.
     - This is looking largely resolved in model 8.1, but we will wait to confirm once the LBWSG RR capping strategy is updated
     - Update LBWSG RR caps and PAF calculation strategy for model 12.0
     - For model 12.0
-  * - Neonatal mortality due to preterm birth slightly overestimated and remaining cause-specific mortality is generally underestimated despite this being resolved for all-cause mortality
-    - Unknown -- could be something to do with the neonatal mortality math? Removing the risk effect of LBWSG on NN enceph. did not seem to resolve the issue.
-    - Research team to discuss and consider 
+  * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
+    - Possibly a PAF issue?
+    - Re-check when other known PAF issues are addressed
     - None for now
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
-    - Revist following GBD 2023 update
+    - Revisit following GBD 2023 update
     - On hold until GBD 2023 update
 
 
