@@ -21,8 +21,8 @@ Two key features of vivarium simulation observers include:
 
 An example of a standard vivarium observer is a mortality observer that records death counts statified by simulant sex and age group. Generally, sex and age group are standard stratifications for vivarium observers, but stratifications can easily be added and removed in the model spec file by following the instructions on the :ref:`common model changes page <common_model_changes>`.
 
-An example
--------------
+An example of observer behavior
+++++++++++++++++++++++++++++++++
 
 To illustrate how Vivarium simulation observers work, we will step through an example. A population table for a hypothetical vivarium simulation that includes six simulants with assined values for age, sex, and vital status at the beginning of the simulation (1/1/2025) is shown below. All simulants start the simulation alive.
 
@@ -168,7 +168,7 @@ There are specific measures that may not obviously lend themselves well to count
 
     \text{Second moment}_Y = \sum_{i}Y_i^2 \times \text{person time}_i
 
-    \text{person time} = \sum_{i} \text(person time)_i
+    \text{person time} = \sum_{i} \text{person time}_i
 
     \text{Mean}_Y = \text{First moment}_Y / \text{person time}
 
@@ -184,6 +184,199 @@ Common observer stratifications include age and sex, since GBD measures are ofte
 Additionally, intervention coverage is another common observer stratification. Stratifying population-related observers (such as births or person time) by intervention coverage will enable calculating intervention coverage for V&V and stratifying outcome-related observers (such as deaths) will allow for calculating intervention-specific outcome rates to verify intervention effects.
 
 There are certain variables that may not lend themselves well as observer stratifications. For instance, the :ref:`LBWSG risk factor <risk_exposure_lbwsg>` has 58 exposure categories and stratifying births and/or person time observers by LBWSG exposure category may result in slower than desired performance. In such cases, utilizing the :ref:`interactive context <vivarium_interactive_simulation>` to obtain such stratified results may be preferable, as it allows for
+
+An example of determining appropriate observers and stratifications
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Let's say we are designing observers for the tutorial simulation, which is linked on the :ref:`onboarding resources page <onboarding_resources>`. The concept model for the tutorial simulation is copied here for easy reference.
+
+.. graphviz::
+
+    digraph {
+        // https://stackoverflow.com/a/2012106/
+        compound=true;
+        rankdir=LR;
+        bgcolor="transparent";
+        node [shape=box]; // Default shape for most nodes
+
+        // Define styles for risk and cause categories
+        // Note: DOT does not have class definitions like MermaidJS, so we apply styles individually
+
+        // Intervention node
+        SQ_LNS [label="SQ-LNS"];
+
+        // Risk node
+        child_wasting [label="child wasting", style=filled, fillcolor="#17B9CF", fontcolor=black];
+
+        // Cause node
+        diarrheal_diseases [label="diarrheal diseases", style=filled, fillcolor="#32CA81", fontcolor=black];
+
+        // Default style for burden
+        node [style="", color=black, fillcolor=""];
+        nonfatal [label="nonfatal (YLDs)"];
+        fatal [label="fatal (YLLs)"];
+
+        subgraph cluster_burden {
+            label="burden";
+            color=black;
+            nonfatal;
+            fatal;
+        }
+
+        SQ_LNS -> child_wasting -> diarrheal_diseases;
+        diarrheal_diseases -> fatal [lhead=cluster_burden];
+    }
+
+So let's start by listing all of the measures we would like to output as results from this simulation. Measures marked with an asterisk (*) indicate that they are top-level results for the simulation wheras measures without an asterisk indicate that they will be used for model verification and validation.
+
+- SQ-LNS coverage
+- Child wasting exposure
+- Diarrheal diseases data, including:
+
+  * Prevalence
+  * Incidence rate
+  * Remission rate
+  * Excess mortality rate
+  * Cause-specific mortality rate
+  * Years lived with disability*
+  * Years of life lost
+
+- All cause mortality rate*
+- Years of life lost due to all causes*
+- SQ-LNS effect on child wasting
+- Child wasting effect on diarrheal diseases
+ 
+Now, let's decompose these measures into their numerators and denominators that can be observed in the simulation:
+
+.. list-table::
+  :header-rows: 1
+
+  * - Measure
+    - Numerator
+    - Denominator
+    - Note
+  * - SQ-LNS coverage
+    - Person time spent covered by SQ-LNS
+    - Overall person time
+    - 
+  * - Child wasting exposure
+    - Person time spent in a given child wasting exposure category
+    - Overall person time
+    - 
+  * - Diarrheal diseases prevalence
+    - Person time spent infected with diarrheal diseases
+    - Overall person time
+    - 
+  * - Diarrheal diseases incidence rate
+    - Incident cases of diarrheal diseases
+    - Person time spent not infected with diarrheal diseases
+    - Note suspectible population incidence rate is being calculated here (rather than total population incidence rate)
+  * - Diarrheal diseases remission rate
+    - Transitions from the infected to suspectible states of the diarrheal diseases cause model
+    - Person time spent infected with diarrheal diseases
+    - 
+  * - Diarrheal diseases excess mortality rate
+    - Deaths due to diarrheal diseases
+    - Person time spent infected with diarrheal diseases
+    - 
+  * - Diarrheal diseases cause-specific mortality rate
+    - Deaths due to diarrheal diseases
+    - Overall person time
+    - 
+  * - Years lived with disability due to diarrheal diseases (rate)
+    - Years lived with disability due to diarrheal diseases (simulation count)
+    - Overall person time
+    - 
+  * - Years of life lost due to diarrheal diseases (rate)
+    - Years of life lost due to diarrheal diseases (simulation count)
+    - Overall person time
+    - 
+  * - All cause mortality rate
+    - Deaths due to all causes
+    - Overall person time
+    - 
+  * - Years of life lost due to all causes (rate)
+    - Years of life lost due to all causes (simulation count)
+    - Overall person time
+    - 
+  * - Effect of SQ-LNS on child wasting exposure
+    - Child wasting exposure among the population covered by SQ-LNS
+    - Child wasting exposure among the population uncovered by SQ-LNS
+    - 
+  * - Effect of child wasting on diarrheal diseases incidence rate
+    - Incidence rate of diarrheal diseases among a given child wasting exposure category
+    - Incidence rate of diarrheal diseases among the child wasting TMREL category
+    - Note that the incidence rate of diarrheal diseases is comprised of incidence diarrheal disease cases (numerator) and person time spent susceptible to diarrheal diseases (denominator)
+  * - Effect of child wasting on diarrheal diseases mortality
+    - Cause-specific mortality rate of diarrheal diseases among a given child wasting exposure category
+    - Cause-specific mortality rate of diarrheal diseases among the child wasting TMREL category
+    - Note that the cause-specific mortality rate of diarrheal diseases is comprised of deaths due to diarrheal disease (numerator) and person time (denominator)
+
+Finally, let's create a list of simulation observers and their stratifications for use in the simulation that will provide sufficient information to calculate our desired measures:
+
+.. list-table:: Observers and their strata
+  :header-rows: 1
+
+  * - Observer
+    - Strata
+    - Note
+  * - Deaths
+    - * Age group
+      * Sex
+      * Cause of death (diarrheal diseases, other causes)
+      * Child wasting exposure category
+    - 
+  * - YLLs
+    - * Age group
+      * Sex
+      * Cause of death (diarrheal diseases, other causes)
+    - 
+  * - YLDs
+    - * Age group
+      * Sex
+    - No need to stratify by cause of disability because we only have a single cause of disability in this model. If we had more than one, we would need to add cause of disability as a stratum to this observer in order to examine cause-specific YLDs
+  * - Person time
+    - * Age group
+      * Sex
+      * Diarrheal diseases status (infected versus susceptible)
+      * SQ-LNS coverage 
+      * Child wasting exposure category
+    - 
+  * - Diarrheal diseases transitions
+    - * Age group
+      * Sex
+      * Transition type (susceptible to infected versus infected to susceptible)
+      * Child wasting exposure category
+    - 
+
+.. note::
+
+  There is not one unique solution to the designing the set of simulation observers and stratifications that are sufficient for producing desired simulation results. For instance, rather than specify an observer for "Diarrheal diseases transitions" that is stratified by "transition type," we could have specified two different observers: one for incident counts and one for recovered counts. This change would allow us to specify different stratifying variables for the different transition types as desired -- for instance, while it is not directly necessary for model results or V&V, perhaps we are interested to see the diarrheal diseases incidence rate stratified by SQ-LNS coverage. Having separate observers for incident and recovery transition counts would allow us to stratify incident counts without also stratifying recovery counts, thus saving computation time and resources.
+
+  Selecting the appropriate balance between fewer observers with more stratification and more observers with fewer stratifications may depend on the computational expense of your simulation, developmental lift of design, and results processeing convenience and may be a topic of open discussion amongst and between the research and engineering teams for a given project.
+
+See the pseudo code below for examples on how the results from the observers/strata listed above can be used to calculate measures of interest for this simulation:
+
+.. code-block:: python
+  
+  # get age- and sex-specific all-cause mortality rate by aggregating the deaths and person time observers over other stratifying variables
+  age_and_sex_specific_acmr = deaths.groupby(['age_group','sex']).sum() / person_time.groupby(['age_group','sex']).sum()
+
+  # get age- and sex-specific diarrheal diseases cause-specific mortality rate by filtering to deaths due to diarrheal diseases and aggregatin over other variables
+  age_and_sex_specific_dd_csmr = deaths.loc[deaths.cause=='diarrheal_diseases'].groupby(['age_group','sex']).sum() / person_time.groupby(['age_group','sex']).sum()
+
+  # get overall population SQ-LNS coverage:
+  sqlns_coverage = person_time.loc[person_time.sqlns=='covered'].sum() / person_time.sum()
+
+  # get relative risks of child wasting on diarrheal diseases incidence rates
+  # first, calculate wasting category-specific diarrheal diseases incidence rates
+  dd_incidence_by_wasting_category = (dd_transitions.loc[dd_transitions.transition=='suspectible_to_infected'].groupby(['age_group','sex','wasting_category']).sum()
+                                      / person_time.loc[person_time.diarrheal_diseases=='susceptible'].groupby(['age_group','sex','wasting_category']).sum())
+  # next, get diarrheal diseases incidence among the wasting TMREL
+  dd_incidence_wasting_tmrel = dd_incidence_by_wasting_category.loc[dd_incidence_by_wasting_category=='tmrel'].drop(columns='wasting_category')
+  # now calculate diarrheal diseases incidence rate relative to wasting TMREL
+  dd_incidence_rrs = dd_incidence_by_wasting_category / dd_incidence_wasting_tmrel
+
 
 Documenting simulation obsserver requests
 -----------------------------------------------
