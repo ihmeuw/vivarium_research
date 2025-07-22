@@ -201,8 +201,28 @@ Note that simulants who died during labor should not experience any YLDs due to 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-- Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values (see the 'Pregnancy-specific anemia prevalence and YLD in GBD 2023' section of `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/gbd_data_pulling.ipynb>`_ in the research repo for how to pull these data.
-  Note: you need to make sure you have the latest version of db_queries to use the ``population_group_id=16`` argument in the get_outputs() call.)
+- Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values. Run the following command to load the data from GBD 2023:
+
+.. code-block:: python
+
+   get_outputs(
+       location_id=[165,179,214],
+       topic='rei',
+       rei_id=[206,206,207], # We also have rei_id=192 for all anemia and rei_id=432 for moderate and severe combined
+       population_group_id=16,
+       sex_id=2,
+       year_id=2023,
+       release_id=33,
+       compare_version_id=8306,
+       measure_id=[3,5],
+       age_group_id=[7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 169]
+   )
+
+.. note::
+
+   Make sure you have the latest version of ``db_queries`` to be able to use the ``population_group_id`` argument. To get pregnancy-specific results, the population group and the age groups need to be specified, because the default is all ages.
+   As of the time of writing (July 2025), we can only use ``population_group_id=16`` with ``get_outputs()``. There were a few EPIC/COMO runs with pregnancy this GBD round, which are noted in the `tracking HUB page <https://hub.ihme.washington.edu/spaces/GBDdirectory/pages/229280352/GBD+2023+EPIC+COMO+tracking>`_.
+
 
 5.0 References
 +++++++++++++++
