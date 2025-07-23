@@ -800,7 +800,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Preterm status
       * Believed preterm status
       * Believed gestational age
-    -
+    - We need both believed preterm status and gestational age because those eligible for ACS and those with believed preterm status do not exactly align. 
 
 .. todo::
 
