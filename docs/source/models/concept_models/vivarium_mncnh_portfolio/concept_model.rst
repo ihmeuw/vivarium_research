@@ -1230,6 +1230,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 12.1.1
+    - Update to LBWSG PAF calculation for the late neonatal age group. In model 12.0, the PAF calculation for the late neonatal age group did not use the PAF as calculated for the early neonatal age group in the determination of mortality among the early neonatal age group (the PAF using capped and interpolated RRs), as specified in the documentation. This model run will update the LNN LBWSG PAF calculation to utilize the custom calculated ENN LBWSG PAF as specified in the documentation.
+    - Baseline
+    - ``model12.1.1``
+    - Default
+    - Default
+    - Default
   * - 13.0
     - `Hemoglobin risk effects on maternal disorders <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_mncnh_portfolio/maternal_disorders_module/module_document.html#id1>`_
     - Baseline
@@ -1574,14 +1581,22 @@ Default stratifications to all observers should include scenario and input draw.
     - Looks good!
     - `Model 11.2 notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11.2_maternal_checks.ipynb>`_
   * - 12.0
-    - * Confirm neonatal all-cause mortality rates match expectation
+    - * Confirm neonatal all-cause mortality risks match expectation
       * Confirm LBWSG risk effects are working as expected
-    - 
-    - 
+    - * Neonatal all cause mortality risks are within "10% target range," but late neonatal all cause mortality varies more than early neonatal
+      * LBWSG Risk effects and PAF values yet to be directly verified
+    - * `Model 12.0 neonatal notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_12.0_neonatal_checks.ipynb>`_
   * - 12.1
     - * Confirm neonatal cause-specific mortality risks match expectation for each preterm subcause
       * Confirm LBWSG risk effects are working as expected
       * Check whether neonatal cause-specific mortality risks match expectation for non-preterm causes
+    - 
+    - 
+  * - 12.1.1
+    - * Confirm neonatal all-cause mortality risks match expectation
+      * Confirm that neonatal cause-specific mortality matches expectation
+      * Confirm LBWSG risk effects are working as expected
+      * Confirm that LBWSG PAF values match expectation through independent replication
     - 
     - 
   * - 13.0
@@ -1695,10 +1710,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Miscalibration of neonatal mortality ratios
-    - This is looking largely resolved in model 8.1, but we will wait to confirm once the LBWSG RR capping strategy is updated
-    - Update LBWSG RR caps and PAF calculation strategy for model 12.0
-    - For model 12.0
+  * - Issue with LBWSG PAF calculation for the late neonatal age group
+    - See the summary in the model 12.1.1 run request
+    - Hussain to update and rerun, Ali to do independent replication of PAF calculation verification
+    - Model 12.1.1
   * - Neonatal mortality due to preterm birth slightly overestimated and remaining cause-specific mortality is generally underestimated despite this being resolved for all-cause mortality
     - Unknown -- could be something to do with the neonatal mortality math? Removing the risk effect of LBWSG on NN enceph. did not seem to resolve the issue.
     - Research team to discuss and consider 
