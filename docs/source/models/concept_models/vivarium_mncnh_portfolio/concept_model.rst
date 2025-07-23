@@ -543,6 +543,27 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
+  * - 14. No ACS and total CPAP V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 15. Total ACS and CPAP V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 16. Total ACS and no CPAP V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
 
 .. _MNCNH intrapartum component scenario table:
 
@@ -604,11 +625,26 @@ defined as a module input in a subsequent row.
     - 0%
     - 50% among eligible population (attends ANC and delivers at home)
     - 
-  * - 13. Azithromycin results
-    - 100% at BEmONC and CEmONC, baseline at home
+  * - 13. Azithromycin Results
+    - Baseline
     - Baseline
     - Baseline
     - 
+  * - 14. No ACS and total CPAP V&V
+    - Baseline
+    - 0% coverage at all delivery location types 
+    - Baseline
+    - CPAP should have 100% coverage at BEmONC and CEmONC facilities, baseline at home
+  * - 15. Total ACS and CPAP V&V
+    - Baseline
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - CPAP should also have 100% coverage at BEmONC and CEmONC facilities, baseline at home
+  * - 16. Total ACS and no CPAP V&V
+    - Baseline
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - CPAP should have 0% coverage at all delivery location types      
 
 .. _MNCNH neonatal component scenario table:
 
@@ -675,6 +711,21 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
+  * - 14. No ACS and total CPAP V&V
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - Baseline
+    - ACS should have 0% coverage at all delivery location types 
+  * - 15. Total ACS and CPAP V&V
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - Baseline
+    - ACS should also have 100% coverage at BEmONC and CEmONC facilities, baseline at home
+  * - 16. Total ACS and no CPAP V&V
+    - 0% coverage at all delivery location types 
+    - Baseline
+    - Baseline
+    - ACS should have 100% coverage at BEmONC and CEmONC facilities, baseline at home  
 
 .. _mncnh_portfolio_4.0:
 
