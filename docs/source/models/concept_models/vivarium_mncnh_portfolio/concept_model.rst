@@ -761,7 +761,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Probiotics availability
       * CPAP availability
       * Corticosteroid coverage
-    - Included except for corticosteroid coverage, which has not yet been added
+      * Believed gestational age
+    - Included, except for corticosteroid coverage which has yet to be added
   * - 3. Neonatal deaths (cause-specific)
     - * Child sex
       * Child age group
@@ -770,6 +771,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Antibiotics availability
       * Probiotics availability
       * Corticosteroid coverage
+      * Believed gestational age
     - Included, except for corticosteroid coverage which has yet to be added
   * - 4. Antibiotics eligible birth counts
     - * Delivery facility type
@@ -797,6 +799,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Delivery facility
       * Preterm status
       * Believed preterm status
+      * Believed gestational age
     -
 
 .. todo::
