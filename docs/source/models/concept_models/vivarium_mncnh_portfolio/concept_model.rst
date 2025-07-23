@@ -625,8 +625,8 @@ defined as a module input in a subsequent row.
     - 0%
     - 50% among eligible population (attends ANC and delivers at home)
     - 
-  * - 13. Azithromycin Results
-    - Baseline
+  * - 13. Azithromycin results
+    - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
     - Baseline
     - 
