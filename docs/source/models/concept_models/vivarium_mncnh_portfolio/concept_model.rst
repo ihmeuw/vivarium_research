@@ -1257,7 +1257,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - ``model16.0``
     - Default
-    - Default
+    - Default, note that we would like additional stratifications based on believed gestational age in the maternal population, births, and neonatal burden observers
     - Default
 
 .. note:: 
