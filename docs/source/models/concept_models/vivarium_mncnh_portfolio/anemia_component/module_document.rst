@@ -212,7 +212,7 @@ Note that simulants who died during labor should not experience any YLDs due to 
        population_group_id=16,
        sex_id=2,
        year_id=2023,
-       release_id=33,
+       release_id=16, # release_id=33 also works
        compare_version_id=8306,
        measure_id=[3,5],
        age_group_id=[7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 169]
