@@ -135,28 +135,31 @@ Things to include:
 3.0 Simulation Components
 ++++++++++++++++++++++++++++++++++++
 
-.. list-table:: Model Component Organization
+.. list-table:: Simulation Components
   :header-rows: 1
 
-  * - Module
+  * - Component
     - Purpose
-    - Key Features
+    - Main Features
     - Dependencies
   * - :ref:`Population Model <2024_vivarium_alzheimers_population_model>`
-    - Population forecasting (2020-2100)
-    - Fertility, mortality, migration modeling
-    - None (foundational)
+    - Evolution of simulant demographics over time
+    - Influx of incident cases of preclinical AD, aging of simulants,
+      all-cause mortality
+    - Forecasted population data, age-specific incidence rates of
+      preclinical AD
   * - :ref:`Alzheimer's Disease Model <2024_vivarium_alzheimers_disease_model>`
-    - Core disease progression
-    - 6-state progression, transition rates, mortality
+    - Disease progression
+    - Transition rates through 6 stages of AD, cause-specific mortality
     - Population model
   * - :ref:`Testing/Diagnosis Model <2024_vivarium_alzheimers_testing_diagnosis_model>`
     - BBBM and existing testing pathways
-    - Multi-modal testing, correlation modeling
+    - Multi-modal testing, correlation between testing and disease
+      progression
     - Disease model, population model
   * - :ref:`Treatment Model <2024_vivarium_alzheimers_treatment_model>`
     - Hypothetical disease-modifying therapy
-    - Progression rate reduction, adherence
+    - Reduction in progression rate, adherence
     - Disease model, testing model
   * - :ref:`Economic Impact Model <2024_vivarium_alzheimers_economic_impact_model>`
     - Cost-effectiveness analysis
@@ -176,29 +179,32 @@ Things to include:
     - Value
     - Note
   * - Locations
-    - 10 priority locations: France, Germany, Italy, Spain, UK, US, China, Japan, Mexico, India
-    - Diverse global regions
+    - Sweden, US, China, Japan, Brazil, UK, Germany, France, Italy,
+      Spain
+    - 10 locations of interest
   * - Time Horizon
     - 2020-2100
     - 80-year simulation period
   * - Age Range (Initialization)
-    - 0-120 years
-    - Open cohort model
+    - ~30-125 years
+    - Open cohort of simulants who are in any of the 5 stages of
+      Alzheimer's disease
   * - Age Range (Observation)
-    - 30-120 years
-    - Focus on testing-relevant ages
+    - ~30-125 years
+    - All simulants are observed since all have AD or its precursors
   * - Population Size per Draw
     - 100,000 simulants
-    - Sufficient for rare disease modeling
+    -
   * - Number of Draws
-    - 100 draws
-    - Captures parameter uncertainty
+    - 25 draws
+    -
   * - Timestep
-    - 1 month
-    - Precise progression modeling
+    - 6 months
+    - Twice a year is sufficient to capture frequency of testing and
+      disease progression
   * - Randomness Key Columns
     - ['entrance_time', 'age', 'sex']
-    - Ensures reproducibility
+    - There should be no need to modify the standard key columns
 
 4.2 Scenario Details
 ------------------------
@@ -206,8 +212,8 @@ Things to include:
 4.3 Outputs and Observers
 --------------------------
 
-5.0 Model Runs, Verification & Validation
-++++++++++++++++++++++++++++++++++++++++++
+5.0 Model Runs and Verification & Validation
++++++++++++++++++++++++++++++++++++++++++++++
 
 5.1 Model Runs
 ------------------------
