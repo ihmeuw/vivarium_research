@@ -169,7 +169,7 @@ Things to include:
 4.0 Specifications
 ++++++++++++++++++
 
-4.1 Default Simulation Parameters
+4.1 Default Parameter Specifications
 ------------------------------------
 
 .. list-table:: Default Simulation Parameter Specifications
@@ -209,8 +209,34 @@ Things to include:
 4.2 Scenario Details
 ------------------------
 
+.. list-table:: Scenario details
+  :header-rows: 1
+
+  * - Scenario
+    - Columns with more details go here
+    - Note
+  * - 0. Reference
+    -
+    -
+  * - 1. Alternative 1 (Testing scale-up)
+    -
+    -
+  * - 2. Alternative 2 (Treatment scale-up)
+    -
+    -
+
 4.3 Outputs and Observers
 --------------------------
+
+.. list-table:: Outputs of simulation observers
+  :header-rows: 1
+
+  * - Observation
+    - Default stratifications
+    - Note
+  * -
+    -
+    -
 
 5.0 Model Runs and Verification & Validation
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -218,5 +244,35 @@ Things to include:
 5.1 Model Runs
 ------------------------
 
+.. list-table:: Model run requests
+  :header-rows: 1
+
+  * - Number
+    - Description
+    - Scenarios
+    - Directory
+    - Specification mods
+    - Stratification mods
+    - Observer mods
+  * - 0.0
+    - Mock-up run with full population to test runtime
+    -
+    -
+    -
+    -
+    -
+
 5.2 V & V Tracking
 ------------------------
+
+.. list-table:: V&V Tracking
+  :header-rows: 1
+
+  * - Model number
+    - V&V plan
+    - V&V summary
+    - Link to notebook
+  * -
+    -
+    -
+    -
