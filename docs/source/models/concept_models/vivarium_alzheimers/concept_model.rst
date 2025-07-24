@@ -90,7 +90,7 @@ for Alzheimer's disease using blood-based biomarkers and subsequent
 interventions. The simulation tracks simulants through health states
 from age ~30 to 125 years (or death), capturing progression through
 preclinical AD, mild cognitive impairment (MCI) due to AD, and various
-stages of clinical Alzheimer's disease.
+stages of dementia due to Alzheimer's disease.
 
 2.1 Scenarios
 -------------
@@ -107,20 +107,27 @@ stages of clinical Alzheimer's disease.
 2.2 General Modeling Strategy
 ------------------------------
 
-Things to include:
+Some key points:
 
-- Six-state progression model
+- Based on literature and GBD, we conceive of Alzheimer's disease (AD)
+  as comprising a six-state progression:
 
-  - Susceptible → Preclinical AD → MCI due to AD → Mild AD → Moderate AD
-    → Severe AD
-  - Only the last 3 stages will have data from GBD
+  - **Susceptible → Preclinical AD → MCI due to AD → Mild AD → Moderate AD
+    → Severe AD**
+  - Only the last 3 stages (dementia due to AD) will have data from GBD
   - From the GBD data, we will have to separate AD out from other
     dementias
+  - Reality seems a bit more complicated than this simple linear
+    progression, but assumption of no recovery, etc., might be
+    sufficient for our purposes
 
 - Use forecasted population
 
   - We have data on 'population', 'deaths', 'migration', and 'births'
     from FHS that can inform the population structure
+  - Based on GBD data, the incidence of AD within each age group is
+    pretty stable over time, so we are **not** planning on using
+    forecasted data for Alzheimer's disease
 
 - Only simulate people who will eventually get AD
 
@@ -128,6 +135,9 @@ Things to include:
   - We will need to "work backwards" from GBD's Alzheimer's estimates
     and the population forecasts to
     determine how many people to add on each time step
+  - We will need to do some calculations outside the simulation to
+    account for false positive tests and people who don't progress from
+    preclinical AD or MCI to dementia due to AD
 
 - We're doing a test run with mock-ups of all components and a full
   population (not just simulants with AD) to get an idea of runtime
