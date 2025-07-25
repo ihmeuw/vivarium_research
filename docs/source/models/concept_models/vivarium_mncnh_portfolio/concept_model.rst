@@ -1563,8 +1563,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Difference between RRs pulled from GBD and RRs in artifact
       * RR values for hemoglobin exposures <40 g/L are not as expected: they taper down rather than being equal to the RR value for a hemoglobin level of 40
       * It appears that RR=1 for all exposure values above the TMREL value of 120 rather than following the risk curve that allows for risks below 1
-    - * `Model 13.0 maternal checks notebook <>`_
-      * `Model 13.0 interactive sim notebook (for hemoglobin effects) <>`_
+    - * `Model 13.0 maternal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_13.0_maternal_checks.ipynb>`_
+      * `Model 13.0 interactive sim notebook (for hemoglobin effects) <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_13.0_interactive_simulation_hemoglobin.ipynb>`_
   * - 13.1
     - * Confirm baseline maternal disorders validates
       * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but not case fatality rates
