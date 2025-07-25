@@ -1560,7 +1560,6 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but not case fatality rates
     - * Maternal hemorrhage and sepsis incidence rates are not quite calibrated to targets, expected to be due to using global rather than location-specific PAF values
       * Hemoglobin RRs are being applied as expected to hemorrhage and sepsis incidence risks
-      * Difference between RRs pulled from GBD and RRs in artifact
       * RR values for hemoglobin exposures <40 g/L are not as expected: they taper down rather than being equal to the RR value for a hemoglobin level of 40
       * It appears that RR=1 for all exposure values above the TMREL value of 120 rather than following the risk curve that allows for risks below 1
     - * `Model 13.0 maternal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_13.0_maternal_checks.ipynb>`_
@@ -1670,10 +1669,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Discrepancy between hemoglobin RRs on maternal disorders pulled from get draws and those in the artifact
-    - Unknown -- RRs could have been updated? Or some weird transformation happening in artifact building
-    - Hussain to rebuild artifact and see if they match again
-    - For 13.1
   * - RR values for hemoglobin < 40 g/L not as expected
     - All hemoglobin exposures less than 40 g/L should be assigned the RR for the 40 g/L exposure
     - Hussain to update implementation accordingly
