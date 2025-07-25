@@ -1670,6 +1670,22 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - Discrepancy between hemoglobin RRs on maternal disorders pulled from get draws and those in the artifact
+    - Unknown -- RRs could have been updated? Or some weird transformation happening in artifact building
+    - Hussain to rebuild artifact and see if they match again
+    - For 13.1
+  * - RR values for hemoglobin < 40 g/L not as expected
+    - All hemoglobin exposures less than 40 g/L should be assigned the RR for the 40 g/L exposure
+    - Hussain to update implementation accordingly
+    - For 13.1
+  * - RR values for hemoglobin exposures above the TMREL all equal 1
+    - They should be able to match input data for values not equal to 1 (greater than lower than one are both okay)
+    - Hussain to update implementation accordingly
+    - For 13.1
+  * - Miscalibration of maternal hemorrhage and sepsis incidence rates
+    - Due to non-location-specific hemoglobin PAF value
+    - Hussain to update
+    - For 13.1
   * - Issue with LBWSG PAF calculation for the late neonatal age group
     - See the summary in the model 12.1.1 run request
     - Hussain to update and rerun, Ali to do independent replication of PAF calculation verification
