@@ -41,7 +41,7 @@ Maternal supplementation in low and middle income country settings is often acce
 There are various maternal supplementation regimens that provide varying combinations of micro- and macro-nutrients and therefore have varying impacts on both maternal and child health. 
 The two major classes of maternal supplementation regimens that we will be modeling are outlined in the table below.
 
-- **Iron and Folic Acid (IFA):** IFA affects outcomes including maternal anemia (which is a risk factor for maternal mortality) and infant birthweight (a risk factor for infant mortality). Additionally, folic acid deficiency is associated with haematological consequences and congenital malformations, however the effect on congenital malformations is sensitive to timing of administration relative to conception. The latest cochrane review of IFA trials was performed by [Pena-Rosas-et-al-2015]_; notably, as IFA is considered the current standard of care, there are few studies that compare IFA to placebo or no treatment.
+- **Iron and Folic Acid (IFA):** IFA affects outcomes including maternal anemia (which is a risk factor for maternal mortality) and infant birthweight (a risk factor for infant mortality). Additionally, folic acid deficiency is associated with haematological consequences and congenital malformations, however the effect on congenital malformations is sensitive to timing of administration relative to conception. The latest cochrane review of IFA trials was performed by [Finkelstein-et-al-2024]_; notably, as IFA is considered the current standard of care, there are few studies that compare IFA to placebo or no treatment.
 
 - **Multiple Micronutrient Supplementation (MMS):** MMS is a combination of micronutrients that includes iron and folic acid as well as other nutrients such as vitamin A and zinc. The latest cochrane review on MMS (containing IFA) relative to IFA alone was performed by [Keats-et-al-2019-maternal-supplementation]_.
 
@@ -260,7 +260,7 @@ We assume changes in simulant birthweight are independent from changes in their 
   * - IFA supplemented mothers (overall)
     - +57.73 g (7.66 to 107.79)
     - Relative to no supplementation 
-    - [Pena-Rosas-et-al-2015]_
+    - [Finkelstein-et-al-2024]_
   * - MMN supplemented mothers (overall)
     - +45.16 (32.31 to 58.02) 
     - Relative to IFA
@@ -546,4 +546,8 @@ Assumptions and limitations
 References
 ------------
 
-The following citations are defined in the :ref:`Antenatal supplementation document <maternal_supplementation_intervention>` from Nutrition Optimization project and should be referenced from there: [Gomes-et-al-2023-antenatal-supplementation], [Keats-et-al-2019-maternal-supplementation], [Li-et-al-2019-antenatal-supplementation], [Oh-et-al-2020], [Pena-Rosas-et-al-2015]
+.. [Finkelstein-et-al-2024]
+
+  Finkelstein JL, Cuthbert A, Weeks J, Venkatramanan S, Larvie DY, De-Regil LM, Garcia-Casal MN. Daily oral iron supplementation during pregnancy. Cochrane Database of Systematic Reviews 2024, Issue 8. Art. No.: CD004736. DOI: 10.1002/14651858.CD004736.pub6.
+
+The following citations are defined in the :ref:`Antenatal supplementation document <maternal_supplementation_intervention>` from Nutrition Optimization project and should be referenced from there: [Gomes-et-al-2023-antenatal-supplementation], [Keats-et-al-2019-maternal-supplementation], [Li-et-al-2019-antenatal-supplementation], [Oh-et-al-2020]
