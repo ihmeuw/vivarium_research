@@ -1190,6 +1190,16 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 13.1
+    - * Update hemoglobin on maternal disorders PAF values to be location specific (rather than using location_id=1)
+      * Resolve discrepancy between RR values in artifact and RR values in get_draws
+      * Allow for RRs <1 for values above (and below) the hemoglobin TMREL value
+      * Assign RR values equal to the RR value at 40 g/L for all hemoglobin exposures less than 40 g/L
+    - Baseline
+    - ``model13.1``
+    - Default
+    - Default
+    - Default
   * - 14.0
     - Wave II updates to the :ref:`antenatal care attendance module <2024_vivarium_mncnh_portfolio_anc_module>`
     - Baseline
@@ -1547,7 +1557,20 @@ Default stratifications to all observers should include scenario and input draw.
     - 
   * - 13.0
     - * Confirm baseline maternal disorders burden still validates
-      * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but no case fatality rates
+      * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but not case fatality rates
+    - * Maternal hemorrhage and sepsis incidence rates are not quite calibrated to targets, expected to be due to using global rather than location-specific PAF values
+      * Hemoglobin RRs are being applied as expected to hemorrhage and sepsis incidence risks
+      * Difference between RRs pulled from GBD and RRs in artifact
+      * RR values for hemoglobin exposures <40 g/L are not as expected: they taper down rather than being equal to the RR value for a hemoglobin level of 40
+      * It appears that RR=1 for all exposure values above the TMREL value of 120 rather than following the risk curve that allows for risks below 1
+    - * `Model 13.0 maternal checks notebook <>`_
+      * `Model 13.0 interactive sim notebook (for hemoglobin effects) <>`_
+  * - 13.1
+    - * Confirm baseline maternal disorders validates
+      * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but not case fatality rates
+      * Confirm RR values for hemoglobin exposures <40 are equal to the RR value for a hemoglobin exposure of 40
+      * Confirm that artifact RR values match expectation
+      * Confirm that RR values for hemoglobin exposures above the TMREL vary according to the input data
     - 
     - 
   * - 14.0
