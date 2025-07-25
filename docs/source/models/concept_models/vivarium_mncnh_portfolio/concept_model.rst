@@ -634,17 +634,17 @@ defined as a module input in a subsequent row.
     - Baseline
     - 0% coverage at all delivery location types 
     - Baseline
-    - CPAP should have 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - see neonatal table for CPAP coverage
   * - 15. Total ACS and CPAP V&V
     - Baseline
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
-    - CPAP should also have 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - see neonatal table for CPAP coverage
   * - 16. Total ACS and no CPAP V&V
     - Baseline
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
-    - CPAP should have 0% coverage at all delivery location types      
+    - see neonatal table for CPAP coverage     
 
 .. _MNCNH neonatal component scenario table:
 
@@ -715,17 +715,17 @@ defined as a module input in a subsequent row.
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
     - Baseline
-    - ACS should have 0% coverage at all delivery location types 
+    - See intrapartum table for ACS coverage
   * - 15. Total ACS and CPAP V&V
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
     - Baseline
-    - ACS should also have 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - See intrapartum table for ACS coverage
   * - 16. Total ACS and no CPAP V&V
     - 0% coverage at all delivery location types 
     - Baseline
     - Baseline
-    - ACS should have 100% coverage at BEmONC and CEmONC facilities, baseline at home  
+    - See intrapartum table for ACS coverage 
 
 .. _mncnh_portfolio_4.0:
 
