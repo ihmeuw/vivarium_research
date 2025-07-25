@@ -761,7 +761,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Probiotics availability
       * CPAP availability
       * Corticosteroid coverage
-      * Believed gestational age
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
     - Included, except for corticosteroid coverage which has yet to be added
   * - 3. Neonatal deaths (cause-specific)
     - * Child sex
@@ -771,7 +771,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Antibiotics availability
       * Probiotics availability
       * Corticosteroid coverage
-      * Believed gestational age
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
     - Included, except for corticosteroid coverage which has yet to be added
   * - 4. Antibiotics eligible birth counts
     - * Delivery facility type
@@ -799,8 +799,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Delivery facility
       * Preterm status
       * Believed preterm status
-      * Believed gestational age
-    - We need both believed preterm status and gestational age because those eligible for ACS and those with believed preterm status do not exactly align. 
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+    - 
 
 .. todo::
 
