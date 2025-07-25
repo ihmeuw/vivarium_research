@@ -1680,6 +1680,8 @@ Default stratifications to all observers should include scenario and input draw.
   
   * We could use the GBD risk effects between hemoglobin and stillbirth to model baseline correlation only and not model updates in stillbirth rates in response to changes in hemoglobin exposure to address this limitation (as these effects are captured in the impact of the hemoglobin-affecting interventions IV Iron and IFA/MMS already). However, this model upgrade is not highest priority. `See this backlog JIRA ticket #2343 <https://jira.ihme.washington.edu/browse/SSCI-2343>`_
 
+* [Finkelstein-et-al-2024]_ primarily includes RCTs from high-income countries, so the effect size for IFA on maternal hemoglobin may be overestimated for Sub-Saharan African countries (including Ethiopia and Nigeria) with typically higher rates of non-iron deficiency anemias.
+
 .. _mncnh_portfolio_7.0:
 
 7.0 References/Other
