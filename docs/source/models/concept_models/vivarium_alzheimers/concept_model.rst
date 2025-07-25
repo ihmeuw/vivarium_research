@@ -152,26 +152,26 @@ Some key points:
     - Purpose
     - Main Features
     - Dependencies
-  * - :ref:`Population Model <2024_vivarium_alzheimers_population_model>`
+  * - :ref:`Population Model <other_models_alzheimers_population>`
     - Evolution of simulant demographics over time
     - Influx of incident cases of preclinical AD, aging of simulants,
       all-cause mortality
     - Forecasted population data, age-specific incidence rates of
       preclinical AD
-  * - :ref:`Alzheimer's Disease Model <2024_vivarium_alzheimers_disease_model>`
+  * - :ref:`Alzheimer's Disease Model <2021_cause_alzheimers_disease>`
     - Disease progression
     - Transition rates through 6 stages of AD, cause-specific mortality
     - Population model
-  * - :ref:`Testing/Diagnosis Model <2024_vivarium_alzheimers_testing_diagnosis_model>`
+  * - :ref:`Testing/Diagnosis Model <intervention_alzheimers_testing_diagnosis>`
     - BBBM and existing testing pathways
     - Multi-modal testing, correlation between testing and disease
       progression
     - Disease model, population model
-  * - :ref:`Treatment Model <2024_vivarium_alzheimers_treatment_model>`
+  * - :ref:`Treatment Model <intervention_hypothetical_alzheimers_treatment>`
     - Hypothetical disease-modifying therapy
     - Reduction in progression rate, adherence
     - Disease model, testing model
-  * - :ref:`Economic Impact Model <2024_vivarium_alzheimers_economic_impact_model>`
+  * - Economic Impact model
     - Cost-effectiveness analysis
     - Comprehensive cost modeling, ICER calculations
     - All other modules
