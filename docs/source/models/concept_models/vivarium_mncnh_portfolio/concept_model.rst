@@ -1685,7 +1685,7 @@ Default stratifications to all observers should include scenario and input draw.
   * - 16.0
     - * Use the interactive sim to confirm RDS and all-cause mortality rates between 33 weeks with ACS coverage and 34 weeks (no ACS coverage due to ineligibility).
       * Confirm neonatal mortality rate of preterm birth with RDS in baseline scenario still validates.
-      * Confirm ratio of preterm with RDS mortality among those without ACS divided by those with ACS equals the relative risk parameter specified in the :ref:`ACS intervention page <acs_intervention>`.
+      * Confirm ratio of preterm with RDS mortality among those without ACS who are eligible for ACS divided by those with ACS equals the relative risk parameter specified in the :ref:`ACS intervention page <acs_intervention>`.
       * Confirm that baseline coverage of ACS is equal to that of CPAP as specified in the :ref:`CPAP intervention page <intervention_neonatal_cpap>`.
       * Confirm that the same propensity value is used for ACS and CPAP.
       * Use the interactive sim to confirm there is no coverage of ACS outside of the eligible gestational age range.
