@@ -1176,6 +1176,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 12.1.1
+    - Update to LBWSG PAF calculation for the late neonatal age group. In model 12.0, the PAF calculation for the late neonatal age group did not use the PAF as calculated for the early neonatal age group in the determination of mortality among the early neonatal age group (the PAF using capped and interpolated RRs), as specified in the documentation. This model run will update the LNN LBWSG PAF calculation to utilize the custom calculated ENN LBWSG PAF as specified in the documentation.
+    - Baseline
+    - ``model12.1.1``
+    - Default
+    - Default
+    - Default
   * - 13.0
     - `Hemoglobin risk effects on maternal disorders <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_mncnh_portfolio/maternal_disorders_module/module_document.html#id1>`_
     - Baseline
@@ -1520,10 +1527,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Looks good!
     - `Model 11.2 notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11.2_maternal_checks.ipynb>`_
   * - 12.0
-    - * Confirm neonatal all-cause mortality rates match expectation
+    - * Confirm neonatal all-cause mortality risks match expectation
       * Confirm LBWSG risk effects are working as expected
-    - 
-    - 
+    - * Neonatal all cause mortality risks are within "10% target range," but late neonatal all cause mortality varies more than early neonatal
+      * LBWSG Risk effects and PAF values yet to be directly verified
+    - * `Model 12.0 neonatal notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_12.0_neonatal_checks.ipynb>`_
   * - 12.1
     - * Confirm neonatal cause-specific mortality risks match expectation for each preterm subcause
       * Confirm LBWSG risk effects are working as expected
@@ -1531,6 +1539,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Neonatal cause-specific mortality risks match expectation for both preterm and non-preterm causes *in the early neonatal period*.
       We appear to be systematically underestimating preterm CSMRisks in the late neonatal period.
     - `Model 12.1 neonatal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/c8d568f37906732b6d2f3a630d8ec6be6b591fe7/verification_and_validation/model_12.1_nn_checks.ipynb>`_ 
+  * - 12.1.1
+    - * Confirm neonatal all-cause mortality risks match expectation
+      * Confirm that neonatal cause-specific mortality matches expectation
+      * Confirm LBWSG risk effects are working as expected
+      * Confirm that LBWSG PAF values match expectation through independent replication
+    - 
+    - 
   * - 13.0
     - * Confirm baseline maternal disorders burden still validates
       * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but no case fatality rates
@@ -1633,12 +1648,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Miscalibration of neonatal mortality ratios
-    - This is looking largely resolved in model 8.1, but we will wait to confirm once the LBWSG RR capping strategy is updated
-    - Update LBWSG RR caps and PAF calculation strategy for model 12.0
-    - For model 12.0
+  * - Issue with LBWSG PAF calculation for the late neonatal age group
+    - See the summary in the model 12.1.1 run request
+    - Hussain to update and rerun, Ali to do independent replication of PAF calculation verification
+    - Model 12.1.1
   * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
-    - Possibly a PAF issue?
+    - Possibly related to the above PAF issue?
     - Re-check when other known PAF issues are addressed
     - None for now
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
