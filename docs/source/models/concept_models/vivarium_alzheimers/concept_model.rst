@@ -228,10 +228,10 @@ Some key points:
   * - 0. Reference
     -
     -
-  * - 1. Alternative 1 (Testing scale-up)
+  * - 1. Testing scale-up (Alternative 1)
     -
     -
-  * - 2. Alternative 2 (Treatment scale-up)
+  * - 2. Treatment scale-up (Alternative 2)
     -
     -
 
@@ -265,7 +265,7 @@ Some key points:
     - Stratification mods
     - Observer mods
   * - 0.0
-    - Mock-up run with full population to test runtime
+    - Mock-up run with full population and fake data to test runtime
     -
     -
     -
