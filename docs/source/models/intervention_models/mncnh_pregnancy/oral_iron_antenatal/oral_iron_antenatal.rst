@@ -185,9 +185,9 @@ Notably, the intervention will not affect the hemoglobin level of women of repro
     - Note
     - Source
   * - IFA
-    - +7.8 g/L (4.08, 11.52)
+    - +9.53 g/L (6.99 to 12.06)
     - Relative to no supplementation 
-    - [Oh-et-al-2020]_
+    - [Finkelstein-et-al-2024]_
   * - MMS
     - +0 g/L
     - Relative to IFA
@@ -550,4 +550,4 @@ References
 
   Finkelstein JL, Cuthbert A, Weeks J, Venkatramanan S, Larvie DY, De-Regil LM, Garcia-Casal MN. Daily oral iron supplementation during pregnancy. Cochrane Database of Systematic Reviews 2024, Issue 8. Art. No.: CD004736. DOI: 10.1002/14651858.CD004736.pub6.
 
-The following citations are defined in the :ref:`Antenatal supplementation document <maternal_supplementation_intervention>` from Nutrition Optimization project and should be referenced from there: [Gomes-et-al-2023-antenatal-supplementation], [Keats-et-al-2019-maternal-supplementation], [Li-et-al-2019-antenatal-supplementation], [Oh-et-al-2020]
+The following citations are defined in the :ref:`Antenatal supplementation document <maternal_supplementation_intervention>` from Nutrition Optimization project and should be referenced from there: [Gomes-et-al-2023-antenatal-supplementation], [Keats-et-al-2019-maternal-supplementation], [Li-et-al-2019-antenatal-supplementation]
