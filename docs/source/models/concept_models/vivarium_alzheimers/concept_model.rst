@@ -78,9 +78,9 @@ intervention that slows disease progression.
 We are designing this simulation in conjunction with IHME's Client
 Services Unit (CSU) with a focus on health and economic impact. Our team
 will focus on simulating the the health impacts of preclinical AD
-testing and the hypothetical intervention, and a different team at IHME
-will use our results to estimate the economic impacts. We will be using
-population forecasts from the Future Health Scenarios (FHS) team.
+testing and the hypothetical intervention, and the Resource Tracking
+team will use our results to estimate the economic impacts. We will be
+using population forecasts from the Future Health Scenarios (FHS) team.
 
 2.0 Modeling Aims and Objectives
 +++++++++++++++++++++++++++++++++
@@ -89,7 +89,7 @@ The primary goal is to simulate the impact of early detection strategies
 for Alzheimer's disease using blood-based biomarkers and subsequent
 interventions. The simulation tracks simulants through health states
 from age ~30 to 125 years (or death), capturing progression through
-preclinical AD, mild cognitive impairment (MCI) due to AD, and various
+preclinical AD, mild cognitive impairment (MCI) due to AD, and three
 stages of dementia due to Alzheimer's disease.
 
 2.1 Scenarios
@@ -107,24 +107,28 @@ stages of dementia due to Alzheimer's disease.
 2.2 General Modeling Strategy
 ------------------------------
 
-Some key points:
+Based on literature and GBD, we conceive of Alzheimer's disease (AD) as
+comprising a six-stage progression:
 
-- Based on literature and GBD, we conceive of Alzheimer's disease (AD)
-  as comprising a six-state progression:
+  **Susceptible → Preclinical AD → MCI due to AD → Mild AD → Moderate AD
+  → Severe AD**
 
-  - **Susceptible → Preclinical AD → MCI due to AD → Mild AD → Moderate AD
-    → Severe AD**
-  - Only the last 3 stages (dementia due to AD) will have data from GBD
-  - From the GBD data, we will have to separate AD out from other
-    dementias
-  - Reality seems a bit more complicated than this simple linear
-    progression, but assumption of no recovery, etc., might be
-    sufficient for our purposes
+The last three stages correspond to the three sequelae (mild, moderate,
+severe) of the GBD cause "Alzheimer's disease and other dementias." We
+will have to separate AD out from other dementias in the GBD data, and
+we will need non-GBD data sources to inform our modeling of preclinical
+AD and MCI due to AD. Furthermore, reality may be a bit more complicated
+than the simple one-directional progression depicted above, but the
+assumption of no recovery from any state might be sufficient for our
+purposes.
 
-- Use forecasted population
+The basic plan for the design of the simulation is as follows:
+
+- Use forecasted population estimates
 
   - We have data on 'population', 'deaths', 'migration', and 'births'
-    from FHS that can inform the population structure
+    from FHS that can inform the age structure in the population out to
+    year 2100
   - Based on GBD data, the incidence of AD within each age group is
     pretty stable over time, so we are **not** planning on using
     forecasted data for Alzheimer's disease
@@ -139,8 +143,13 @@ Some key points:
     account for false positive tests and people who don't progress from
     preclinical AD or MCI to dementia due to AD
 
+- On top of the population model, we will add an Alzheimer's disease
+  progression model, a testing and diagnosis model, and a treatment
+  model, as detailed in the next section
+
 - We're doing a test run with mock-ups of all components and a full
-  population (not just simulants with AD) to get an idea of runtime
+  population (not just simulants with AD) to get an idea of the runtime
+  for simulating 80 years in 10 locations
 
 3.0 Simulation Components
 ++++++++++++++++++++++++++++++++++++
