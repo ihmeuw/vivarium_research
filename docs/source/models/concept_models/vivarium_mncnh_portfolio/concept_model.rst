@@ -1590,8 +1590,9 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm neonatal cause-specific mortality risks match expectation for each preterm subcause
       * Confirm LBWSG risk effects are working as expected
       * Check whether neonatal cause-specific mortality risks match expectation for non-preterm causes
-    - 
-    - 
+    - Neonatal cause-specific mortality risks match expectation for both preterm and non-preterm causes *in the early neonatal period*.
+      We appear to be systematically underestimating preterm CSMRisks in the late neonatal period.
+    - `Model 12.1 neonatal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/c8d568f37906732b6d2f3a630d8ec6be6b591fe7/verification_and_validation/model_12.1_nn_checks.ipynb>`_ 
   * - 12.1.1
     - * Confirm neonatal all-cause mortality risks match expectation
       * Confirm that neonatal cause-specific mortality matches expectation
@@ -1714,13 +1715,13 @@ Default stratifications to all observers should include scenario and input draw.
     - See the summary in the model 12.1.1 run request
     - Hussain to update and rerun, Ali to do independent replication of PAF calculation verification
     - Model 12.1.1
-  * - Neonatal mortality due to preterm birth slightly overestimated and remaining cause-specific mortality is generally underestimated despite this being resolved for all-cause mortality
-    - Unknown -- could be something to do with the neonatal mortality math? Removing the risk effect of LBWSG on NN enceph. did not seem to resolve the issue.
-    - Research team to discuss and consider 
+  * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
+    - Possibly related to the above PAF issue?
+    - Re-check when other known PAF issues are addressed
     - None for now
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
-    - Revist following GBD 2023 update
+    - Revisit following GBD 2023 update
     - On hold until GBD 2023 update
 
 
