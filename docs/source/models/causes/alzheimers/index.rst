@@ -52,5 +52,46 @@ Disease Overview
 GBD 2021 Modeling Strategy
 ++++++++++++++++++++++++++
 
+For Model 1 of the Alzheimer's simulation, we will model Alzheimer's
+disease as a simple SI model using GBD data for the cause "Alzheimer's
+disease and other dementias" (cause ID 543).
+
+Cause Model Diagram
+-------------------
+
+.. graphviz::
+
+  digraph AlzheimersDisease {
+    rankdir=LR;
+    S -> AD [label=i_alz]
+
+  }
+
+.. list-table:: State Definitions
+  :widths: 5 5 20
+  :header-rows: 1
+
+  * - State
+    - State Name
+    - Definition
+  * - S
+    - Susceptible
+    - Simulant does not have Alzheimer's disease or another dementia
+  * - AD
+    - Alzheimer's Disease
+    - Simulant has Alzheimer's disease or another dementia
+
+.. list-table:: Transition Definitions
+  :widths: 5 5 20
+  :header-rows: 1
+
+  * - Transition
+    - Transition Name
+    - Definition
+  * - i_alz
+    - Alzheimer's Incidence
+    - Incidence rate of Alzheimer's disease and other dementias (incident cases per
+      susceptible person-year)
+
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
