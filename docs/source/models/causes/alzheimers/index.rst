@@ -52,6 +52,9 @@ Disease Overview
 GBD 2021 Modeling Strategy
 ++++++++++++++++++++++++++
 
+Vivarium Modeling Strategy
+++++++++++++++++++++++++++
+
 For Model 1 of the Alzheimer's simulation, we will model Alzheimer's
 disease as a simple SI model using GBD data for the cause "Alzheimer's
 disease and other dementias" (cause ID 543).
@@ -92,6 +95,3 @@ Cause Model Diagram
     - Alzheimer's Incidence
     - Incidence rate of Alzheimer's disease and other dementias (incident cases per
       susceptible person-year)
-
-Vivarium Modeling Strategy
-++++++++++++++++++++++++++
