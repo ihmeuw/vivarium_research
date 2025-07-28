@@ -349,7 +349,8 @@ Data Tables
       - GBD + assumption about relative risks + intervention model effects
       - see subcause models for details
 
-**Details of the** :math:`\text{PAF}_\text{LBWSG}` **calculation:**
+Details of the LBWSG PAF calculation
+++++++++++++++++++++++++++++++++++++
 
 As stated in the table above, :math:`\text{PAF}_\text{LBWSG}` is the population attributable fraction of all-cause mortality for low birth weight and short gestation. It is computed so that PAF = 1 - 1 / E(:math:`\text{RR}_{\text{BW},\text{GA}}`) from the capped interpolated relative risk function (with expectation taken over the distribution of LBWSG exposure). 
 
