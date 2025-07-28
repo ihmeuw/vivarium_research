@@ -28,6 +28,29 @@
 
 .. _2021_cause_alzheimers_disease:
 
-=====================
-Alzheimer's Disease
-=====================
+==============================
+Alzheimer's Disease (GBD 2021)
+==============================
+
+.. contents::
+  :local:
+
+.. list-table:: Abbreviations
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+    - Note
+  * - AD
+    - Alzheimer's Disease
+    -
+
+Disease Overview
+++++++++++++++++
+
+GBD 2021 Modeling Strategy
+++++++++++++++++++++++++++
+
+Vivarium Modeling Strategy
+++++++++++++++++++++++++++
