@@ -201,17 +201,35 @@ The basic plan for the design of the simulation is as follows:
     - Sweden, US, China, Japan, Brazil, UK, Germany, France, Italy,
       Spain
     - 10 locations of interest
-  * - Time Horizon
-    - 2020-2100
-    - 80-year simulation period
-  * - Age Range (Initialization)
-    - ~30-125 years
-    - Open cohort of simulants who are in any of the 5 stages of
+  * - Simulation start date
+    - 2020-01-01
+    -
+  * - Simulation end date
+    - 2100-12-31
+    - 81-year simulation period (forecasted data goes through year 2100)
+  * - Observation start date
+    - 2020-01-01
+    - No burn-in period
+  * - Cohort type
+    - Open
+    - Cohort consists of simulants who are in any of the 5 stages of
       Alzheimer's disease
-  * - Age Range (Observation)
-    - ~30-125 years
+  * - Sex
+    - Males & Females
+    -
+  * - Age start (Initialization)
+    - Age at which preclinical AD starts (~30 years or later)
+    - Age start is simulant-dependent
+  * - Age end (Initialization)
+    - 125 years
+    - End of oldest age group
+  * - Age start (Observation)
+    - Age at which preclinical AD starts (~30 years or later)
     - All simulants are observed since all have AD or its precursors
-  * - Population Size per Draw
+  * - Age end (Observation)
+    - 125 years or death
+    -
+  * - Population size per draw
     - 100,000 simulants
     -
   * - Number of Draws
@@ -221,7 +239,7 @@ The basic plan for the design of the simulation is as follows:
     - 6 months
     - Twice a year is sufficient to capture frequency of testing and
       disease progression
-  * - Randomness Key Columns
+  * - Randomness key columns
     - ['entrance_time', 'age', 'sex']
     - There should be no need to modify the standard key columns
 
