@@ -45,12 +45,57 @@ Alzheimer's Disease (GBD 2021)
   * - AD
     - Alzheimer's Disease
     -
+  * - YLD
+    - Years Lived with Disability
+    -
+  * - YLL
+    - Years of Life Lost
+    -
 
 Disease Overview
 ++++++++++++++++
 
 GBD 2021 Modeling Strategy
 ++++++++++++++++++++++++++
+
+Restrictions
+------------
+
+The following table describes any restrictions in GBD 2021 on the
+effects of this cause (such as being only fatal or only nonfatal), as
+well as restrictions on the ages and sexes to which the cause applies.
+
+.. list-table:: GBD 2021 Cause Restrictions
+  :widths: 15 15 20
+  :header-rows: 1
+
+  * - Restriction Type
+    - Value
+    - Notes
+  * - Male only
+    - False
+    -
+  * - Female only
+    - False
+    -
+  * - YLL only
+    - False
+    -
+  * - YLD only
+    - False
+    -
+  * - YLL age group start
+    - 40 to 44
+    - age_group_id = 13
+  * - YLL age group end
+    - 95 plus
+    - age_group_id = 235
+  * - YLD age group start
+    - 40 to 44
+    - age_group_id = 13
+  * - YLD age group end
+    - 95 plus
+    - age_group_id = 235
 
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
