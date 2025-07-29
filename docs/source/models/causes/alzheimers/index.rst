@@ -100,9 +100,10 @@ well as restrictions on the ages and sexes to which the cause applies.
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-For Model 1 of the Alzheimer's simulation, we will model Alzheimer's
-disease as a simple SI model using GBD data for the cause "Alzheimer's
-disease and other dementias" (cause ID 543).
+For :ref:`Model 1 <2025_alzheimers_model_runs_table>` of the
+:ref:`Alzheimer's simulation <2025_concept_model_vivarium_alzheimers>`,
+we will model Alzheimer's disease as a simple SI model using GBD data
+for the cause "Alzheimer's disease and other dementias" (cause ID 543).
 
 Cause Model Diagram
 -------------------
