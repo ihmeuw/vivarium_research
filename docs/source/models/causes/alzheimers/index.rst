@@ -99,39 +99,47 @@ Cause Model Diagram
 Data Tables
 -----------
 
-All data values are defined for a specified year, age group, sex and
-location.
+All data values are defined for a specified year, location, age group,
+and sex.
 
 .. list-table:: Data Sources
   :widths: 20 25 25 25
   :header-rows: 1
 
   * - Variable
-    - Source or value
     - Definition
+    - Source or value
     - Notes
   * - prevalence_c543
-    - como
     - Prevalence of Alzheimer's disease and other dementias
+    - como
     -
   * - deaths_c543
-    - codcorrect
     - Deaths from Alzheimer's disease and other dementias
+    - codcorrect
     -
   * - population
-    - get_population
     - Average population during specified year
+    - get_population
     -
   * - incidence_rate_c543
-    - como
-    - GBD's "total population" incidence rate for Alzheimer's disease
+    - GBD's "total population incidence rate" for Alzheimer's disease
       and other dementias
+    - como
     -
   * - csmr_c543
-    - :math:`\frac{\text{deaths_c543}}{\text{population}}`
     - Cause-specific mortality rate for Alzheimer's disease and other
       dementias
+    - :math:`\frac{\text{deaths_c543}}{(\text{population}) \cdot (\text{1 year})}`
     -
+  * - emr_c543
+    - Excess mortality rate for Alzheimer's disease and other dementias
+    - :math:`\frac{\text{csmr_c543}}{\text{prevalence_c543}}`
+    -
+
+The following two tables describe the data needed for the cause model
+drawn in the previous section in terms of the data values in the above
+table.
 
 .. list-table:: State Data
   :widths: 20 25 30 30
@@ -152,11 +160,11 @@ location.
   * - S
     - excess mortality rate
     - 0
-    -
+    - Added onto mortality hazard for susceptible simulants
   * - S
     - disability weight
     - 0
-    -
+    - Used to calculate YLDs
   * - AD
     - prevalence
     - prevalence_c543
@@ -167,8 +175,8 @@ location.
     - Used for simulants born into the simulation
   * - AD
     - excess mortality rate
-    - :math:`\frac{\text{deaths_c543}}{\text{population} \times \text{prevalence_c543}}`
-    - = (cause-specific mortality rate) / prevalence
+    - emr_c543
+    - Added onto mortality hazard for simulants with AD
   * - AD
     - disability weight
     - 0.2
@@ -177,8 +185,8 @@ location.
       the sequelae separately in a future model version
   * - ALL
     - cause specific mortality rate
-    - :math:`\frac{\text{deaths_c543}}{\text{population}}`
-    -
+    - csmr_c543
+    - Subtracted from all-cause mortality hazard in all cause states
 
 .. list-table:: Transition Data
   :widths: 10 10 10 20 30
@@ -195,4 +203,4 @@ location.
     - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
     - Compute susceptible population incidence rate from GBD's "total
       population incidence rate." Conversion is automatic when using
-      load_standard_data function in Vivarium Public Health package.
+      load_standard_data function in Vivarium Public Health.
