@@ -289,17 +289,24 @@ The basic plan for the design of the simulation is as follows:
   * - Number
     - Description
     - Scenarios
-    - Directory
     - Specification mods
     - Stratification mods
     - Observer mods
   * - 0.0
-    - Mock-up run with full population and fake data to test runtime
-    -
-    -
-    -
-    -
-    -
+    - Mock-up run with fake data but full population and mock-ups of all
+      components to test runtime
+    - ?
+    - Open cohort including all susceptible simulants (not just
+      simulants who will get AD) in all age groups; simulants enter at
+      age = 0 using crude birth rate
+    - Default
+    - ?
+  * - 1.0
+    - Simple SI model of AD using GBD data for AD and other dementias
+    - Baseline
+    - Same as Model 0
+    - Default
+    - ?
 
 5.2 V & V Tracking
 ------------------------
