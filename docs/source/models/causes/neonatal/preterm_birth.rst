@@ -184,7 +184,7 @@ where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 
   We will use a **population size of 195_112** for this calculation. This number was selected in order to satisfy the following criteria:
 
-  - The population size per LWBSG exposure category is required to be a perfect square to be compatible with our strategy of initializing individual exposures on a grid within each LBWSG exposure category
+  - The population size per LBWSG exposure category is required to be a perfect square to be compatible with our strategy of initializing individual exposures on a grid within each LBWSG exposure category
   
   - The total population size of the PAF calculation pipeline must be divisible by the product of the number of LBWSG exposure categories (58), the number of sexes (2), and the number of age groups (2) used in the PAF calculation
   
