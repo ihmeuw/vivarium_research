@@ -281,6 +281,8 @@ The basic plan for the design of the simulation is as follows:
 5.1 Model Runs
 ------------------------
 
+.. _2025_alzheimers_model_runs_table:
+
 .. list-table:: Model run requests
   :header-rows: 1
 
