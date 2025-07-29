@@ -271,7 +271,7 @@ The basic plan for the design of the simulation is as follows:
   * - Observation
     - Default stratifications
     - Note
-  * -
+  * - TODO: Add rows to table
     -
     -
 
@@ -296,9 +296,9 @@ The basic plan for the design of the simulation is as follows:
     - Mock-up run with fake data but full population and mock-ups of all
       components to test runtime
     - ?
-    - Open cohort including all susceptible simulants (not just
-      simulants who will get AD) in all age groups; simulants enter at
-      age = 0 using crude birth rate
+    - Open cohort simulating entire population (including susceptible
+      simulants, not just simulants who will get AD) in all age groups;
+      simulants enter at age = 0 using crude birth rate
     - Default
     - ?
   * - 1.0
@@ -318,7 +318,11 @@ The basic plan for the design of the simulation is as follows:
     - V&V plan
     - V&V summary
     - Link to notebook
-  * -
+  * - 0.0
+    -
+    -
+    -
+  * - 1.0
     -
     -
     -
