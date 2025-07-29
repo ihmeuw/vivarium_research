@@ -375,6 +375,8 @@ Using the `LBWSG PAF calculation simulation <https://github.com/ihmeuw/vivarium_
 
 So,
 
+.. _details_of_the_lbwsg_paf_calculation_equation:
+
 .. math::
 
   E(\text{RR})_\text{population} = \frac{\sum_{\text{cat}} E(\text{RR})_\text{cat} \times p^\text{birth}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}}{\sum_{\text{cat}} p^\text{birth}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}}

@@ -1255,7 +1255,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 13.2
-    - Update to correct bugs in the LBWSG PAF calculation's implementation of `this equation <../../causes/neonatal/index.rst#details-of-the-lbwsg-paf-calculation>`_.
+    - Update to correct bugs in the LBWSG PAF calculation's implementation of :ref:`this equation <details_of_the_lbwsg_paf_calculation_equation>`.
       
       In earlier model runs, the PAF calculation for late neonates began from
       `age-specific LBWSG prevalence <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ad3ced96b6b497f9566b2e7c8e568328c613a69a/src/vivarium_gates_mncnh/components/lbwsg.py#L406-L409>`_
