@@ -47,15 +47,18 @@ This module is part of the intrapartum component and reads inputs that affect ma
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
 
-There is no specific decision tree diagram for this module. Rather, the individual maternal disorders cause model documents are linked below:
+There is no specific decision tree diagram for this module. Rather, the overall maternal disorders and subcause cause model documents are linked below:
 
 * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>` and the following subcauses:
 
+  * Maternal hypertensive disorders
+  * :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
   * :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
   * :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
-  * :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
-  * Depressive disorders
-  * Maternal hypertension
+
+.. note::
+
+  There is a specific ordering that the maternal disorders subcauses should follow, specified in the "Subcause ordering" section on the :ref:`overall maternal disorders document <2021_cause_maternal_disorders_mncnh>`.
 
 There are specific variables that will affect these cause models, summarized in the table below. Note that the factors included in this table are required inputs to the maternal disorders module.
 
@@ -70,22 +73,18 @@ There are specific variables that will affect these cause models, summarized in 
   * - Azithromycin coverage
     - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Maternal sepsis incidence rate
-    - Relative risk: 0.65 (95% CI: 0.55, 0.77)
-    - `Tita et al 2023 <https://www.ajog.org/article/S0002-9378(22)02210-4/fulltext#undfig1>`_ 
+    - See the :ref:`Azithromycin intervention page <azithromycin_intervention>`
+    - 
   * - Misoprostol coverage
     - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Maternal hemorrhage incidence rate
-    - TODO: link intervention documentation
+    - See the :ref:`Misoprostol intervention page <misoprostol_intervention>`
     - 
   * - Hemoglobin at birth
     - :ref:`Hemoglobin component <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
     - Maternal sepsis, maternal hemorrhage, maternal depressive disorders, maternal hypertensive disorders
     - See :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>`
     - For wave II
-
-.. todo::
-
-  Make and link separate intervention module document for azithromycin with more specific instructions on how to implement this to replace information directly in this table (new document to include how to calibrate baseline coverage, potential need for stratifying by birth facility in baseline calibration, specific overview and limitations of intervention)
 
 .. note::
 
@@ -105,7 +104,7 @@ Incidence, mortality, YLDs, and YLLs due to cause-specific maternal disorders.
 +++++++++++++++++++++++++++++++++++++++++
 
 * Confirm outcomes for each maternal disorder (OL, sepsis, and hemorrhage) matches GBD data 
-* Confirm that relative risk of azithromycin on sepsis outcomes matches expectations
+* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` and :ref:`misoprostol intervention documentation page <misoprostol_intervention>` for V&V criteria specific to azithromycin intervention model
 
 5.0 References
 +++++++++++++++

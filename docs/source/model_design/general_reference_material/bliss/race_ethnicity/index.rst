@@ -40,11 +40,13 @@ Inclusive Health Metrics: Race and Ethnicity
 Overview
 +++++++++++++++++++++
 
-On this page you will find ...
+On this page you will find our guiding principles,
+an introduction to race and ethnicity from a scientific perspective,
+a glossary of commonly used terms related
+to race and ethnicity, recommendations for how to address race- and ethnicity-related limitations in external data
+sources, discussion of the implications of imperfect proxy measures with regards to race and ethnicity,
+examples of how our team has incorporated BLISS into our work process, and more! 
 
-.. todo::
-
-    Fill out this section to describe what this guide will include.
 
 If you have any questions or comments about the content on this page - please reach out! You can
 contact us directly `on GitHub <https://github.com/ihmeuw/vivarium_research/issues?q=is%3Aopen+is%3Aissue+label%3Abliss>`_ or anonymously
@@ -55,15 +57,76 @@ on our `feedback form <https://docs.google.com/forms/d/e/1FAIpQLSeCED9TFQsH-1u4Q
 
    * - This is...
      - This isn't...
-   * -
-     -
+   * - A ‘living’ document which will be regularly reviewed and updated to reflect evolving language and research practices. 
+     - An immutable document that should be treated as all-knowing and final.
+   * - An accessible guide intended for everyone’s use, regardless of your familiarity with inclusive language practices. 
+     - An intimidating guide that is full of jargon and can only be used by DEI experts. 
+   * - A safe space for people to make mistakes, ask questions, and learn new things! 
+     - A space where people need to police what they are saying or how they are speaking for fear of judgment.
+   * - Using our voice on the Simulation Science team to platform the terms we find most accurate and inclusive. 
+     - Putting words into other people’s mouths (such as racial or ethnic categorizations in external data sources). 
+
 
 Guiding principles
 ------------------
 
-.. todo::
+Our guiding principles for this document can be summarized in three points: 
 
-    Fill out table with some guiding principles for this guide. Can refer to same table in the sex and gender guide.
+**1. This work is important**
+
+Inclusive research practices are important, and we want to begin by acknowledging the potential harm that using 
+reductive and racialized research practices can create. People from racially and ethnically diverse backgrounds experience 
+harm from oversimplified categorizations and other exclusionary research practices in several ways, including diminished access to 
+healthcare, erasure in research, and perpetuation of stereotypes.
+
+An accurate understanding of race and ethnicity improves the validity of our research methods and conclusions about 
+all people, not only racial and ethnic minority groups. One example of the harms from racial categorization is in our 
+understanding of lung cancer rates. If we use the overly homogenized group "Asian", rates of nonsmoking-related lung 
+cancer appear to be low. But by separating this racial group into subcategories, we can see that Southeast Asians show higher 
+rates of nonsmoking-related lung cancer, specifically in adenocarcinomas caused by the EGFR 
+(epidermal growth factor receptor) genetic mutation [Noronha_2024]_. This is important information for cancer screening that otherwise 
+would have been missed.
+
+In an effort to work toward institution-wide Diversity, Equity, and Inclusion (DEI) goals and advance our team’s research 
+and publications, we created this guide to explore the complexities of race and ethnicity in our work. We hope to inspire 
+change by presenting our studies with inclusive language and modeling practices we believe in. For all of these 
+reasons, we feel this guide is very important.
+
+
+**2. This work is evolving**
+
+Research practices are constantly evolving, so there is rarely a single “right” choice and the accepted 
+choice may evolve over time. Therefore, this guide will be a living document that we will 
+regularly review and update. We will hold ourselves accountable for aligning the guide with 
+the current preferred language, terminology and approaches.  
+
+While we hope this can be up-to-date and comprehensive, no guide can anticipate every use case, 
+recognize every limitation, or be applicable to every research question. We aim to provide enough 
+information that users can understand the spirit of the guide and apply that to their unique needs.
+
+
+**3. This is work**
+
+We acknowledge that there may be a cost associated with transitioning to more accurate and inclusive research practices. 
+Although this transition requires intentional effort, we highlight here that there are many benefits to incorporating 
+more thoughtful, equity-focused research practices into everyday public health research practices.
+
+As human beings, we each have a lived experience of race and ethnicity—none of us are neutral outside observers. We have all 
+unconsciously internalized ideas about race and ethnicity from our experiences interacting with other people and with society. 
+These ideas may have helped us make sense of the world but may also have perpetuated biases and inequities. This guide asks us 
+to take a step back and re-examine our assumptions, which requires effort and care.
+
+Inclusive language can often be longer or more nuanced than standard terminology, but we believe specificity is more 
+important than brevity. We seek to include all groups and identities in our language and practices, even if that means using additional words! 
+For example, we would rather use terms like "Black, Indigenous, and People of Color (BIPOC)" while specifying subgroups when relevant 
+than use overly simplistic terms like "minority groups," which can obscure differences and perpetuate stereotypes.
+
+The ever-evolving nature of this work means that this guide is for everyone! You don’t have to be an expert; this is meant to be 
+accessible for all people. Wherever you are in your learning journey, this guide is intended to be a clear and helpful resource. 
+
+We’re not going to put words into other people’s mouths, but we will use our own voice to do the work and use the terms and practices we find 
+most accurate and inclusive.
+
 
 Introduction to race and ethnicity
 ----------------------------------
@@ -264,6 +327,77 @@ and **immigration status**.
 While these are out of scope for the present guide,
 that doesn't mean they are less important than race, ethnicity, and ancestry.
 We may address these concepts in a future guide.
+
+Glossary of General Terminology
+-------------------------------
+In this section, you will find a glossary of general terminology and acronyms that will be used 
+throughout this style guide. 
+
+
+.. list-table:: **Glossary**
+   :header-rows: 1
+
+   * - Term
+     - Definition
+   * - Race
+     - A social construct with no inherent biological meaning that categorizes people primarily based on a few visible characteristics such as skin and eye color, hair, and facial features. 
+   * - Ethnicity
+     - Broad cultural group identities. These groups can share language, food, art, religion, social norms, and so on. 
+   * - Ancestry
+     - Broadly, characteristics of one’s ancestors. In this guide we refer to geographic ancestry, where your ancestors are from, or lived approximately 500 years ago.
+   * - Racism
+     - The belief that race reflects biological factors outside of the few visible characteristics listed above (skin color, hair, eye color, etc.), such as intelligence, abilities, or other qualities. Racism also refers to the ways in which individuals, communities, and systems of power oppress people in alignment with this belief (whether or not the belief is explicit or conscious).
+   * - Scientific Racism
+     - An attempt by scientists to prove racist theories in order to justify discrimination and allow for racist systems of inequality to continue. The science used was blatantly incorrect and has been debunked. These racist theories are especially dangerous as they can appear to be from valid sources, even though they are not valid science. 
+   * - Institutional Racism
+     - A form of systematic discrimination, based on race or ethnic group, in which societal policies or practices create an advantage for some groups and harm for others. Also known as structural, societal, or systemic racism.  
+   * - Ethnic Discrimination
+     - The belief that an ethnic group is inherently superior or inferior in some dimension of intelligence, abilities, or other qualities. Ethnic discrimination also refers to the ways in which individuals, communities, and systems of power oppress people in alignment with this belief (whether or not the belief is explicit or conscious).
+   * - Unconscious Bias
+     - Any biases that people have but are not consciously aware of. This can include things not related to individuals or groups such as confirmation bias, or being more receptive to information that aligns to their prior beliefs, and to biases towards individuals or groups, such as favoring people from their own race or ethnicity group, even if they don’t knowingly think that people who are different are inferior. 
+   * - Race-essentialism
+     - The belief that racial groups form discrete genetic categories; that individuals of the same racial category are biogenetically similar; and that different races are fundamentally different. 
+   * - Race-based research
+     - The use of race as a key marker in research or policy. This is built on a belief in race-essentialism. 
+   * - Race-conscious research
+     - A new approach to how research can include race. Race-conscious research attempts to be aware of the historic roots and the pervasive, systemic nature of oppression, in touch with social reality, and open to the importance of race, while understanding that race itself is a social construct without biological significance. Instead, it frames discrepancies seen between races as a result of historical context or racism.
+   * - Social construct
+     - Any idea or concept that doesn’t have its basis in objective reality but is real because society believes it to be so. Some examples might include what is fashionable currently (skinny or wide-leg jeans are only better because we believe it to be so) and the value of money (paper is not inherently valuable, it is valuable because society has collectively agreed that it is). Though they have tremendous impacts, racial groupings are social constructs.
+   * - Health disparities
+     - Differences in health outcomes, such as life expectancy, disease burden, or other adverse health conditions between different groups of people within a population. The term is often used to describe differences seen between racial or ethnic groups, but it can also be applied to differences observed across any individual characteristic including geographies, gender, sexual orientation or socioeconomic status.
+   * - Risk factor
+     - Attributes, characteristics, or exposures that biologically increase the likelihood that a person develops a disease or health disorder. Risk factors are diverse and can span attributes such as diet, physical activity, alcohol use, genetics, age, and experiences of discrimination.
+   * - Risk marker
+     - Similar to a risk factor but not thought to biologically cause  the development of a disease or health disorder. Race and its relationship to cardiovascular disease is an example. Some races have higher rates of cardiovascular disease but it is thought this is due to experiences of racism, either interpersonal or societal. Race itself is not thought to be causally linked with CVD except through these societal pathways.
+   * - Nativity
+     - The general definition refers to the occasion of one’s birth. However, it is used here to mean the country someone was born in. 
+   * - Colonialism
+     - The policy or practice of acquiring full or partial political control over another country, possibly occupying it with settlers, and exploiting it economically.
+   * - Segregation
+     - The general definition is the action or state of setting someone or something apart from others. However, it is used here to refer to racial or ethnic segregation. While numerous countries have separated individuals along racial, ethnic, or other lines throughout history, segregation in the context of the United States often refers to a period between the Civil War and the Civil Rights Movement when southern states enacted laws to forcibly separate Black and White individuals in all spaces. However, it is worth noting that segregation in other forms has taken place throughout all states and through multiple eras of history including the present. 
+   * - Multiracial
+     - People who have ancestors from more than one racial group. This can also be called biracial (specifically having ancestors in two racial groups) or mixed race.
+   * - Multi-ethnic
+     - People who have ancestors from more than one ethnic group.
+   * - Critical race theory
+     - A set of ideas holding that racial bias is inherent in many parts of western society, especially in its legal and social institutions, on the basis of those institutions having been primarily designed for and implemented by White people.
+
+.. list-table:: **Acronyms Used**
+   :header-rows: 1
+
+   * - Acronym
+     - Definition
+   * - OMB
+     - The Federal Office of Management and Budget. The federal organization that claimed authority over race and ethnic definitions and categories in US statistics and is in charge of these as of early 2025.
+   * - MENA
+     - Middle Eastern or North African
+   * - BIPOC
+     - Black, Indigenous, and People of Color
+   * - AAPI
+     - Asian American and Pacific Islander
+   * - CRT
+     - Critical Race Theory, definition included above. 
+
 
 US Government Definitions
 -------------------------
@@ -912,3 +1046,6 @@ Reporting results accurately
 
 .. [Arias_2016]
     Arias E, Heron MP, Hakes JK. The validity of race and Hispanic origin reporting on death certificates in the United States: an update. https://pubmed.ncbi.nlm.nih.gov/28436642/
+    
+.. [Noronha_2024]
+    Noronha V., Budukh A., Chaturvedi P., Anne S., Punjabi A., Bhaskar M., Sahoo T.P., Menon N., Shah M., Batra U., Nathany S., Kumar R., Shetty O., Pai Ghodke T., Mahajan A., Chakrabarty N., Hait S., Tripathi S.C., Chougule A., Chandrani P., Tripathi V.K., Jiwnani S., Tibdewal A., Maheshwari G., Kothari R., Patil V.M., Bhat R.S., Khanderia M., Mahajan V., Prakash R., Sharma S., Jabbar A.A., Yadav B.K., Uddin A.F.M.K., Dutt A., Prabhash K. Uniqueness of lung cancer in Southeast Asia. https://doi.org/10.1016/j.lansea.2024.100430.

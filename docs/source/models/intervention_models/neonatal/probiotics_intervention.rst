@@ -28,7 +28,31 @@ Probiotics for treating bacterial infections
 Intervention Overview
 -----------------------
 
-Probiotics might be used to prevent bacterial infections in neonates, reducing the risk mortality.
+**Research Background**
+
+Preterm infants are susceptible to a serious disease of the gastrointestinal tract called necrotizing enterocolitis (NEC). While the pathogenesis of NEC is not entirely understood, it is hypothesized that the paucity of normal enteric bacteria and the delayed onset of bacterial colonization in preterm infants relative to term infants leave preterm infants susceptible to NEC infection. Probiotic supplements have been shown to reduce the risk of NEC incidence among preterm infants in a 2014 Cochrance review [Cochrane-Review-Probiotics]_ and a recent meta-analysis from 2025 [Lee-Him-et-al-2025]_. 
+
+The Cochrane review found that "probiotics supplementation significantly reduced the incidence of severe NEC (stage II or more) (typical relative risk (RR) 0.43, 95% confidence interval (CI) 0.33 to 0.56; 20 studies, 5529 infants) and mortality (typical RR 0.65, 95% CI 0.52 to 0.81; 17 studies, 5112 infants). There was no evidence of significant reduction of nosocomial sepsis (typical RR 0.91, 95% CI 0.80 to 1.03; 19 studies, 5338 infants)." [Cochrane-Review-Probiotics]_
+
+The 2025 review found: "Probiotic supplementation reduced the risk of NEC by
+61% (95% CI: 51–69%), the risk of all-cause neonatal
+mortality by 25%(95% CI: 8–39%), and the risk of invasive
+infection by 19% (95% CI: 9–28%) in preterm newborns,
+when compared to control. There were significant subgroup
+differences in the risk of NEC by probiotic type. The
+risk of NEC was reduced by all types of probiotics;
+however, the greatest reduction was found for Bifidobacteriumspp.
+by 84% (95% CI: 69–92%), and the smallest
+reduction was found for Saccharomyces spp. by 7% (95%
+CI: 55% reduction to 94% increase), though this was not
+statistically significant when compared to control or placebo.
+However, there were no significant differences in
+mortality or invasive infection by probiotic type."" [Lee-Him-et-al-2025]_
+
+The Gates Foundation has specifically been interested in probiotic supplementation with *Bifidobacterium infantis* (*B. infantis*), which has been found to be a particularly effective probiotic strain for reducing NEC incidence [Lee-Him-et-al-2025]_. However, given there were no significant differences in effect on invasive infection by probiotic type, we will use the summary effect of all probiotics on invasive infection as our modeled effect of probiotic supplementation on sepsis mortality among preterm infants for our simulation.
+
+Vivarium Modeling Strategy
+----------------------------
 
 This section describes how a probiotic-treatment intervention can be implemented and calibrated for the 
 :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
@@ -41,10 +65,10 @@ This section describes how a probiotic-treatment intervention can be implemented
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Neonatal sepsis and other neonatal infections Mortality Probability :math:`\text{CSMR}_i^\text{sepsis}`
+  * - :ref:`Neonatal sepsis and other neonatal infections <2021_cause_neonatal_sepsis_mncnh>` Mortality Probability :math:`\text{CSMRisk}_i^\text{sepsis}`
     - Adjust multiplicatively using RR
     - Yes
-    - For convenience, we will model this like a dichotomous risk factor; more details below
+    - 
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
@@ -82,7 +106,36 @@ Since the neonatal mortality model does not explicitly represent incidence of se
 probiotics.  Instead the model will have different cause-specific mortality rates for sepsis for individuals with and without access to probiotics 
 (implemented with a slightly confusing application of our ``Risk`` and ``RiskEffect`` components from ``vivarium_public_health``).
 
-The ``Risk`` component adds an attribute to each simulant indicating whether the simulant has access to probiotics during the neonatal period, 
+In order to be eligible for this intervention, simulants must be in the early neonatal age group and born preterm (<37 weeks old). This eligibility
+is based on an impact table for Bifidobacterium infantis (B. infantis) provided to us by the BMGF team. 
+
+.. graphviz::
+
+    digraph probiotics {
+        
+        rankdir = LR;
+        nodesep = 1.0;
+        ranksep = 1.2;
+        
+        node [shape=box]
+        rankdir = LR;
+        birth [label="Simulant is born"]
+        preterm [label="Simulant is preterm (<37 weeks)"]
+        not_preterm [label="Simulant is not preterm"]
+        preterm_wo [label="Simulant is eligible but does not have access to probiotics"] 
+        preterm_w [label="Simulant is eligible and has access to probiotics"]
+        not_preterm_wo [label="Simulant is not eligible for probiotics"]
+      
+        birth -> preterm 
+        birth -> not_preterm
+        
+        preterm -> preterm_wo
+        preterm -> preterm_w
+
+        not_preterm -> not_preterm_wo
+    }
+
+The ``Risk`` component adds an attribute to each simulant indicating whether the simulant (if in the target population) has access to probiotics during the neonatal period, 
 which we assume to be 0.0% regardless of birth facility choice in our baseline scenario.
 births in BEmONC facilities have lower access than CEmONC facilities.
 
@@ -96,7 +149,7 @@ In Vivarium, this risk effect will modify the sepsis mortality pipeline, resulti
 
 .. math::
 
-   \text{CSMR}_i^\text{sepsis} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i} \cdot (1 - \text{PAF}_\text{no probiotics}) \cdot \text{RR}_i^\text{no probiotics}
+   \text{CSMRisk}_i^\text{sepsis} = \text{CSMRisk}^\text{sepsis}_{\text{BW}_i, \text{GA}_i} \cdot (1 - \text{PAF}_\text{no probiotics}) \cdot \text{RR}_i^\text{no probiotics}
 
 where :math:`\text{RR}_i^\text{no probiotics}` is simulant *i*'s individual relative risk for "no probiotics", meaning :math:`\text{RR}_i^\text{no probiotics} = \text{RR}_\text{no probiotics}` 
 if simulant *i* accesses a facility without probiotics, and :math:`\text{RR}_i^\text{no probiotics} = 1` if simulant *i* accesses a facility *with* probiotics.
@@ -106,15 +159,13 @@ this risk explicitly as
 
 .. math::
 
-   \text{CSMR}^\text{sepsis}_{i, \text{updated}} = \text{CSMR}^\text{sepsis}_{i, \text{original}} \cdot (1 - \text{PAF}_\text{no probiotics}) \cdot \text{RR}_i^\text{no probiotics}
+   \text{CSMRisk}^\text{sepsis}_{i, \text{updated}} = \text{CSMRisk}^\text{sepsis}_{i, \text{original}} \cdot (1 - \text{PAF}_\text{no probiotics}) \cdot \text{RR}_i^\text{no probiotics}
 
 This reduces to the previous formula if there are no other interventions, and we would have 
 
 .. math::
 
-   \text{CSMR}^\text{sepsis}_{i, \text{original}} = \text{CSMR}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
-
-
+   \text{CSMRisk}^\text{sepsis}_{i, \text{original}} = \text{CSMRisk}^\text{sepsis}_{\text{BW}_i, \text{GA}_i}
 
 .. list-table:: Risk Effect Parameters for Lack-of-Access-to-probiotics
   :widths: 15 15 15 15
@@ -122,13 +173,16 @@ This reduces to the previous formula if there are no other interventions, and we
 
   * - Parameter
     - Mean
-    - Distribution
+    - Source
     - Notes
-  * - Relative Risk
-    - 1.67
-    - :math:`\text{Normal}(1.67,0.08^2)`
-    - Based on impact table provided to us by BMGF, which stated an RR of 0.60 for B. infantis on 0-7 day old hospitalized infants who are preterm
-      or SGA at any facility.
+  * - :math:`\text{RR}^\text{no probiotics}`
+    - :math:`1/\text{RR}^\text{probiotics}`
+    - N/A
+    - Value to be used in sim
+  * - :math:`1/\text{RR}^\text{probiotics}`
+    - RR = 0.81 (95% CI: 0.72 to 0.91). Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(0.81, 0.72, 0.91)`
+    - [Lee-Him-et-al-2025]_
+    - 
   * - PAF
     - see below
     - see below
@@ -218,9 +272,11 @@ Assumptions and Limitations
 ---------------------------
 
 - We assume that probiotics availability captures actual use, and not simply the treatment being in the facility 
-- We assume that the delivery facility is also the facility where a sick neonate will seek care for sepsis
+- We assume that the delivery facility is also the facility where preterm infants will receive prophylactic probiotic supplementation
 - We assume that the relative risk of sepsis mortality with probiotics in practice is a value that we can find in the literature
-- We have excluded the effect of probiotics on pneumonia mortality, because this cause is currently lumped with 'other causes'
+- We do not specifically measure the impact of this intervention on NEC, the condition directly affected by the intervention, because it is not modeled by GBD. We use the less specific neonatal sepsis and other neonatal infections cause in GBD instead.
+- We assume that the effect of probiotics on invasive infection is an appropriate proxy for the effect on sepsis cause-specific mortality.
+- The effect size of probiotics on all-cause mortality is greater in magnitude than the effect on invasive infection from [Lee-Him-et-al-2025]_. This is inconsistent with the causal hypothesis we are modeling in our simulation. However, there is less statistical precision in the effect estimate for all-cause mortality than for invasive infection, so we accept this inconsistency.
 
 Validation and Verification Criteria
 ------------------------------------
@@ -228,9 +284,16 @@ Validation and Verification Criteria
 - Population-level mortality rate should be the same as when this intervention is not included in the model
 - The ratio of sepsis deaths per birth among those without probiotics access divided by those with probiotics access should equal the relative risk parameter used in the model
 - The baseline coverage of probiotics in each facility type should match the values in the artifact
+- Check whether the effect size on all cause mortality is within the confidence interval of the observed effect from [Lee-Him-et-al-2025]_
 
 References
 ------------
 
-* https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD005496.pub4/full 
+.. [Cochrane-Review-Probiotics]
+
+  `AlFaleh K, Anabrees J. Probiotics for prevention of necrotizing enterocolitis in preterm infants. Cochrane Database of Systematic Reviews 2014, Issue 4. Art. No.: CD005496. DOI: 10.1002/14651858.CD005496.pub4. Accessed 05 June 2025. <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD005496.pub4/full>`_
+
+.. [Lee-Him-et-al-2025]
+
+  `Lee Him R, Rehman S, Sihota D, Yasin R, Azhar M, Masroor T, Naseem HA, Masood L, Hanif S, Harrison L, Vaivada T, Sankar MJ, Dramowski A, Coffin SE, Hamer DH, Bhutta ZA. Prevention and Treatment of Neonatal Infections in Facility and Community Settings of Low- and Middle-Income Countries: A Descriptive Review. Neonatology. 2025;122(Suppl 1):173-208. doi: 10.1159/000541871. Epub 2024 Nov 12. PMID: 39532080; PMCID: PMC11875423. <https://pubmed.ncbi.nlm.nih.gov/39532080/>`_
 

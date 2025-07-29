@@ -35,30 +35,6 @@
 Facility choice module
 ======================================
 
-.. note::
-
-  The following information was implemented as a placeholder prior to completion of the final facility choice model. It is retained in this note for reference.
-
-  The placeholder delivery facility probabilities are as follows:
-
-    - Home: 68.3%
-
-    - Hospital (CEMONC): 26.6%
-
-    - Clinic/low-level facility (BEMONC): 5.1%
-
-  The placeholder values are from `this paper on Ethiopia <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_.
-
-  Eventually location-specific values from DHS will be used for this parameter. Note that denominator in DHS is all births (live and stillbirths) to interviewed women in the two years preceeding the survey.
-
-  V&V: Confirm attendance rate for each type of delivery facility matches inputs
-
-  Limitation: Moving to a higher level care facility during the intrapartum period is common (referred up once labor begins if there is an issue) and the ability to do this is often a result of transport available, distance to clinics, etc. We will not include this and instead have simulants remain at a single facility for the whole intrapartum period. 
-
-  TODO: update to be consistent with BEMONC/CEMONC terminology?
-
-
-
 .. contents::
   :local:
   :depth: 2
@@ -66,7 +42,11 @@ Facility choice module
 1.0 Overview
 ++++++++++++
 
-This module uses the delivery facility propensity (an output from the initial attributes model that is correlated with propensity values for ANC attendance and LBWSG exposure) as well as believed gestational age to assign a delivery facility exposure in the intrapartum component of the simulation. 
+This module uses the in-facility delivery propensity (an output from the
+initial attributes model that is correlated with propensity values for
+ANC attendance and LBWSG exposure) as well as believed preterm status
+(an output from the AI ultrasound module) to assign a delivery facility
+exposure in the intrapartum component of the simulation.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -80,14 +60,25 @@ There is a significant amount of background research and analysis that has gone 
     - Source module
     - Application
     - Note
-  * - Delivery facility propensity value
+  * - In-facility delivery (IFD) propensity value
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-    - Used to determine home birth exposure by comparing to the believed gestational age-specific delivery facility probability values located in the "Conditional delivery facility probabilities" section of the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`. Note that ordering of the delivery facilities is important: see the "Special ordering of the categories" section of the facility choice model document.
-    - 
-  * - Believed gestational age
+    - Used to determine home birth exposure by comparing to the
+      :ref:`causal conditional probabilities for in-facility delivery
+      <facility_choice_causal_probabilities_section>`
+    - The ordering of IFD categories (*at-home* < *in-facility*) is
+      important when sampling using this propensity. See :ref:`Special
+      ordering of the categories
+      <facility_choice_special_ordering_of_categories_section>` in the
+      facility choice model document
+  * - Believed preterm status
     - :ref:`AI ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-    - Determines which delivery facility probabily values to use (values found in the "Conditional delivery facility probabilities" section of the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`). If <37 weeks, use believed preterm values. If 37+ weeks use the believed term values.
-    - 
+    - Determines which :ref:`causal conditional probabilities for
+      in-facility delivery
+      <facility_choice_causal_probabilities_section>` to use, either the
+      "believed preterm" values or the "believed term" values
+    - Believed preterm status is *believed preterm* if the estimated
+      gestational age is <37 weeks and is *believed term* if the
+      estimated gestational age is 37+ weeks
 
 .. list-table:: Module outputs
   :header-rows: 1
@@ -96,10 +87,20 @@ There is a significant amount of background research and analysis that has gone 
     - Value
     - Instructions
     - Note
-  * - A. Delivery facility
+  * - A. IFD status
+    - *at-home* / *in-facility*
+    - Use IFD propensity and believed preterm status to assign IFD
+      status as described in the "Application" column of the module
+      input table above
+    -
+  * - B. Birth facility
     - *home* / *BEmONC* / *CEmONC*
-    - Use delivery facility propensity and believed gestational age input values to assign delivery facility exposure as described in the "Application" column of the module input table
-    - 
+    - Assign *home* if IFD status is *at-home*. If IFD status is
+      *in-facility*, assign BEmONC or CEmONC according to the
+      probabilities specified in the :ref:`choosing BEmONC vs. CEmONC
+      section <facility_choice_choosing_bemonc_cemonc_section>` of the
+      facility choice model document.
+    - Location where the simulant delivers their baby
 
 
 3.0 Assumptions and limitations
