@@ -98,7 +98,7 @@ stages of dementia due to Alzheimer's disease.
 1. **Reference Scenario:** Present-day conditions with minimal BBBM
    uptake or disease-modifying therapies, including current
    cerebrospinal fluid (CSF) and amyloid-positron emission tomography
-   (PET) diagnostic pathways
+   (PET) diagnostic pathways after clinical disease develops
 2. **Alternative Scenario 1:** Introduction of BBBM testing for at-risk
    preclinical populations (no intervention)
 3. **Alternative Scenario 2:** BBBM testing plus hypothetical
@@ -117,7 +117,7 @@ The last three stages correspond to the three sequelae (mild, moderate,
 severe) of the GBD cause "Alzheimer's disease and other dementias." We
 will have to separate AD out from other dementias in the GBD data, and
 we will need non-GBD data sources to inform our modeling of preclinical
-AD and MCI due to AD. Furthermore, reality may be a bit more complicated
+AD and (possibly) MCI due to AD. Furthermore, reality may be a bit more complicated
 than the simple one-directional progression depicted above, but the
 assumption of no recovery from any state might be sufficient for our
 purposes.
@@ -133,7 +133,7 @@ The basic plan for the design of the simulation is as follows:
     pretty stable over time, so we are **not** planning on using
     forecasted data for Alzheimer's disease
 
-- Only simulate people who will eventually get AD
+- Only simulate people who will eventually get AD (and other dementias (?))
 
   - This drastically reduces population size and hence compute resources
   - We will need to "work backwards" from GBD's Alzheimer's estimates
@@ -202,13 +202,13 @@ The basic plan for the design of the simulation is as follows:
       Spain
     - 10 locations of interest
   * - Simulation start date
-    - 2020-01-01
+    - 2025-01-01
     -
   * - Simulation end date
     - 2100-12-31
     - 81-year simulation period (forecasted data goes through year 2100)
   * - Observation start date
-    - 2020-01-01
+    - 2025-01-01
     - No burn-in period
   * - Cohort type
     - Open
