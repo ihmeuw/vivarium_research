@@ -206,7 +206,7 @@ The basic plan for the design of the simulation is as follows:
     -
   * - Simulation end date
     - 2100-12-31
-    - 81-year simulation period (forecasted data goes through year 2100)
+    - 76-year simulation period (forecasted data goes through year 2100)
   * - Observation start date
     - 2025-01-01
     - No burn-in period
