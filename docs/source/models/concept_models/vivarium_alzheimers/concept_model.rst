@@ -128,7 +128,8 @@ The basic plan for the design of the simulation is as follows:
 
   - We have data on 'population', 'deaths', 'migration', and 'births'
     from FHS that can inform the age structure in the population out to
-    year 2100
+    year 2100; we plan to use population and deaths forecasts, but not
+    migration or births
   - Based on GBD data, the incidence of AD within each age group is
     pretty stable over time, so we are **not** planning on using
     forecasted data for Alzheimer's disease
