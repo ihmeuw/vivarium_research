@@ -1271,7 +1271,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 13.3
-    - Update to use end-of-ENN LBWSG prevalence for the :math:`p_\text{preterm}` for the LNN age group in :ref:`this equation <preterm_csmrisk_equation>`.
+    - Update to use end-of-ENN LBWSG prevalence for the :math:`p_\text{preterm}` for the LNN age group in :ref:`this equation <preterm_csmrisk_equation>`. Details can be found in the diff of `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1732/files>`_.
     - Baseline
     - ``model13.3``
     - Default
