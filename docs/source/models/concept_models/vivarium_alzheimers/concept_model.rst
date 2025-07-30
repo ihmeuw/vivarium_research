@@ -95,10 +95,10 @@ stages of dementia due to Alzheimer's disease.
 2.1 Scenarios
 -------------
 
-1. **Reference Scenario:** Present-day conditions with minimal BBBM
-   uptake or disease-modifying therapies, including current
+1. **Reference Scenario:** Present-day conditions, including current
    cerebrospinal fluid (CSF) and amyloid-positron emission tomography
-   (PET) diagnostic pathways after clinical disease develops
+   (PET) diagnostic pathways after clinical disease develops, but with
+   no BBBM uptake or disease-modifying therapies.
 2. **Alternative Scenario 1:** Introduction of BBBM testing for at-risk
    preclinical populations (no intervention)
 3. **Alternative Scenario 2:** BBBM testing plus hypothetical
@@ -128,7 +128,8 @@ The basic plan for the design of the simulation is as follows:
 
   - We have data on 'population', 'deaths', 'migration', and 'births'
     from FHS that can inform the age structure in the population out to
-    year 2100
+    year 2100; we plan to use population and deaths forecasts, but not
+    migration or births
   - Based on GBD data, the incidence of AD within each age group is
     pretty stable over time, so we are **not** planning on using
     forecasted data for Alzheimer's disease
@@ -206,7 +207,7 @@ The basic plan for the design of the simulation is as follows:
     -
   * - Simulation end date
     - 2100-12-31
-    - 81-year simulation period (forecasted data goes through year 2100)
+    - 76-year simulation period (forecasted data goes through year 2100)
   * - Observation start date
     - 2025-01-01
     - No burn-in period
