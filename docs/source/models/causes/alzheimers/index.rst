@@ -149,7 +149,7 @@ All data values are defined for a specified year, location, age group,
 and sex.
 
 .. list-table:: Data Sources
-  :widths: 20 25 25 25
+  :widths: 20 30 25 25
   :header-rows: 1
 
   * - Variable
@@ -181,6 +181,24 @@ and sex.
   * - emr_c543
     - Excess mortality rate for Alzheimer's disease and other dementias
     - :math:`\frac{\text{csmr_c543}}{\text{prevalence_c543}}`
+    -
+  * - sequelae_c543
+    - Sequelae of Alzheimer's disease and other dementias
+    - Set of 3 sequelae: s452, s453, s454
+    - Obtained from gbd_mapping.
+      Sequela names are "Mild," "Moderate," or "Severe Alzheimer's
+      disease and other dementias," respectively.
+  * - :math:`\text{disability_weight}_s`
+    - Disability weight of sequela :math:`s`
+    - YLD Appendix
+    - For reference, the values are:
+
+      - s452: 0.069 (0.046-0.099)
+      - s453: 0.377 (0.252-0.508)
+      - s454: 0.449 (0.304-0.595)
+  * - :math:`\text{prevalence}_s`
+    - Prevalence of sequela :math:`s`
+    - como
     -
 
 The following two tables describe the data needed for the cause model
@@ -225,10 +243,9 @@ table.
     - Added onto mortality hazard for simulants with AD
   * - AD
     - disability weight
-    - 0.2
-    - This is a made-up disability weight -- don't bother computing the
-      average of the real disability weights because we will be modeling
-      the sequelae separately in a future model version
+    - :math:`\sum_\limits{s\in \text{sequelae_c543}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+    - Prevalence-weighted average disability weight over sequelae, used
+      to calculate YLDs
   * - ALL
     - cause specific mortality rate
     - csmr_c543
