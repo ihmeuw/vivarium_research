@@ -95,10 +95,10 @@ stages of dementia due to Alzheimer's disease.
 2.1 Scenarios
 -------------
 
-1. **Reference Scenario:** Present-day conditions with minimal BBBM
-   uptake or disease-modifying therapies, including current
+1. **Reference Scenario:** Present-day conditions, including current
    cerebrospinal fluid (CSF) and amyloid-positron emission tomography
-   (PET) diagnostic pathways after clinical disease develops
+   (PET) diagnostic pathways after clinical disease develops, but with
+   no BBBM uptake or disease-modifying therapies.
 2. **Alternative Scenario 1:** Introduction of BBBM testing for at-risk
    preclinical populations (no intervention)
 3. **Alternative Scenario 2:** BBBM testing plus hypothetical
