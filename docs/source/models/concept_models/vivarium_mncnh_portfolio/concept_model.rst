@@ -1224,7 +1224,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 12.1
-    - Bugfix to calculation of prevalence of preterm, to ensure we include categories with an upper bound of 37 weeks
+    - Bugfix to calculation of prevalence of preterm in :ref:`this equation <preterm_csmrisk_equation>`, to ensure we include categories with an upper bound of 37 weeks
     - Baseline
     - ``model12.1``
     - Default
@@ -1267,6 +1267,13 @@ Default stratifications to all observers should include scenario and input draw.
       and properly apply the mortality-based weighting, as documented.
     - Baseline
     - ``model13.2``
+    - Default
+    - Default
+    - Default
+  * - 13.3
+    - Update to use end-of-ENN LBWSG prevalence for the :math:`p_\text{preterm}` for the LNN age group in :ref:`this equation <preterm_csmrisk_equation>`.
+    - Baseline
+    - ``model13.3``
     - Default
     - Default
     - Default
