@@ -58,8 +58,8 @@ while an analytical approach would develop a system of equations which could sol
 Example: Multiple Myeloma
 =========================
 
-Let's make this more concrete using our `Multiple Myeloma (MM) model <https://vivarium-research.readthedocs.io/en/latest/models/causes/neoplasms/multiple_myeloma/gbd_2019_phase_2/cancer_model.html>`_ 
-as an example. The MM model has `two disease states <https://vivarium-research.readthedocs.io/en/latest/models/causes/neoplasms/multiple_myeloma/gbd_2019_phase_2/cancer_model.html#cause-model-diagram>`_, 
+Let's make this more concrete using our :ref:`Multiple Myeloma (MM) model <2019_cancer_model_multiple_myeloma>`
+as an example. The MM model has :ref:`two disease states <2019_cancer_model_multiple_myeloma_cause_model_diagram>`, 
 one for newly-diagnosed multiple myeloma (NDMM) and one for relapsed and/or refractory multiple myeloma (RRMM), which consists of stages corresponding to the 
 number of relapses. 
 
@@ -78,23 +78,19 @@ must last.
 
 Example: CVD
 ============
-We can also take a look at our `Cardiovascular Disease (CVD) model 
-<https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_us_cvd/concept_model.html>`_ 
-as another example. The CVD model has `several parameters 
-<https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_us_cvd/concept_model.html#initialization-parameters>`_ 
-which are initialized using a burn-in period of `two years 
-<https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_us_cvd/concept_model.html#simulation-timeframe-and-intervention-start-dates>`_.
+We can also take a look at our :ref:`Cardiovascular Disease (CVD) model <us_cvd_concept_model>` 
+as another example. The CVD model has :ref:`several parameters <uscvd4.5>` 
+which are initialized using a burn-in period of :ref:`two years <uscvd3.2>`.
 
 Medication buckets
 ------------------
 Two of these are medication buckets for treatments for the Systolic Blood Pressure (SBP) and Low Density 
 Lipoprotein Cholestorol (LDL-C) Risk Factors. 
 
-`Blood pressure treatments <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_us_cvd/concept_model.html#treatment-effects>`_ 
+:ref:`Blood pressure treatments <uscvd4.4_treatment_effects>`
 are split into 6 buckets based on the number of medications and dosage. However, we only had data 
 informing the ratio of people on one medication versus two or more medications. So, we used only these two buckets
-at the initalization of our burn-in period, and allowed our `Treatment ramp 
-<https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_us_cvd/concept_model.html#healthcare-system-modeling>`_, 
+at the initalization of our burn-in period, and allowed our :ref:`treatment ramp <uscvd4.3>`, 
 which models how people move through the healthcare system and change medications,
 to determine how people fall into the more granular medication buckets. 
 
@@ -118,7 +114,7 @@ More information
 ================
 
 For more information on burn-in periods in our Simulation Science Vivarium models, you can read about other models with 
-burn-in periods such as `Acute Malnutrition <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_ciff_sam/concept_model.html>`_.
+burn-in periods such as :ref:`Acute Malnutrition <2019_concept_model_vivarium_ciff_sam>`.
 
 Additionally, for a more hands-on introduction, you could try adding on to the `Vivarium simulation tutorial <https://vivarium-research.readthedocs.io/en/latest/onboarding_resources/tutorial/index.html>`_
 and creating your own burn-in period. For example, you could model a second risk factor, besides child wasting, for the diarrheal diseases cause, and you 
