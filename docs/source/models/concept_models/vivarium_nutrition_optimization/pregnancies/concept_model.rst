@@ -62,7 +62,7 @@ Documents that contain information specific to the overall model and the child s
 
 **Questions:**
 
-- For stillbirths that become live births due to intervention impact, what should their LWBSG exposure be? Hypothetically near-stillbirths should have lower birth weights than others. Ask Nick K.! GBD may be estimating these outcomes directly? Current assumption is that they will have randomly sampled exposure. 
+- For stillbirths that become live births due to intervention impact, what should their LBWSG exposure be? Hypothetically near-stillbirths should have lower birth weights than others. Ask Nick K.! GBD may be estimating these outcomes directly? Current assumption is that they will have randomly sampled exposure. 
 
 - How should we handle averted stillbirths in our optimization objectives? Note that because stillbirths do not accumulate any DALYs, an objective to minimize DALYs could disincentivize averting stillbirths, which would be inconsistent with improving outcomes. 
 

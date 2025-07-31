@@ -248,7 +248,7 @@ Note that the z-score ranges from -7 to +7. If we limit ourselves to Z-scores
 between -4 and +4, we will be excluding a lot of kids.
 
 .. note::
-  In the paper that Ryan (GBD modeller for CGF and LWBSG) is working on right 
+  In the paper that Ryan (GBD modeller for CGF and LBWSG) is working on right 
   now, he presents the first results ever for "extreme" stunting which we define 
   as kids with stunting Z scores below -4. For Ethiopia, that's about 7% of kids. 
   So it's non-trivial!

@@ -194,6 +194,8 @@ appropriate location IDs for the model you're working on):
     (sex_id=[1,2]) since we will be initializing our population using GBD's
     population data and stratifying by sex.
 
+.. _rescaling_lbwsg_exposure_data_pulled_from_gbd_2019:
+
 Rescaling LBWSG exposure data pulled from GBD 2019
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
