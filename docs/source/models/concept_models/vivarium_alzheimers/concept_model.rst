@@ -56,6 +56,18 @@ Alzheimer's Disease Early Detection Simulation
     - Client Services Unit
   * - FHS
     - Future Health Scenarios
+  * - ACMR
+    - All-Cause Mortality Rate
+  * - CSMR
+    - Cause-Specific Mortality Rate
+  * - EMR
+    - Excess Mortality Rate
+  * - CBR
+    - Crude Birth Rate
+  * - YLD
+    - Years Lived with Disability
+  * - YLL
+    - Years of Life Lost
 
 1.0 Overview
 ++++++++++++
@@ -266,13 +278,35 @@ The basic plan for the design of the simulation is as follows:
 4.3 Outputs and Observers
 --------------------------
 
+Default stratifications for all observations:
+
+* Year
+* Sex
+* Age group
+
+Additionally, all output should automatically be stratified by location,
+scenario, and input draw.
+
 .. list-table:: Outputs of simulation observers
   :header-rows: 1
 
   * - Observation
-    - Default stratifications
+    - Stratification modifications
     - Note
-  * -
+  * - Number of new simulants each year
+    -
+    - Either births or new Alzheimer's cases, depending on population
+      model
+  * - Deaths and YLLs (cause-specific)
+    -
+    -
+  * - YLDs (cause-specific)
+    -
+    -
+  * - Transition counts between Alzheimer's cause states
+    -
+    -
+  * - Person-time in each Alzheimer's cause state
     -
     -
 
@@ -282,23 +316,38 @@ The basic plan for the design of the simulation is as follows:
 5.1 Model Runs
 ------------------------
 
+.. _2025_alzheimers_model_runs_table:
+
 .. list-table:: Model run requests
   :header-rows: 1
 
-  * - Number
+  * - Run
     - Description
     - Scenarios
-    - Directory
     - Specification mods
     - Stratification mods
     - Observer mods
   * - 0.0
-    - Mock-up run with full population and fake data to test runtime
-    -
-    -
-    -
-    -
-    -
+    - Mock-up run with fake data but full population and mock-ups of all
+      components to test runtime
+    - Custom scenario including three types of Alzheimer's testing and a
+      hypothetical treatment
+    - Open cohort simulating entire population (including susceptible
+      simulants, not just simulants who will get AD) in all age groups;
+      simulants enter at age = 0 using crude birth rate
+    - Default
+    - Use (mostly) standard VPH observers:
+
+      - Mortality and Disability observers
+      - Disease observer for Alzheimers
+      - Custom observer for Alzheimer's testing (based on DiseaseObserver)
+      - CategoricalInterventionObserver for Alzheimer's treatment
+  * - 1.0
+    - Simple SI model of AD using GBD data for AD and other dementias
+    - Reference
+    - Same as Model 0
+    - Default
+    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -306,11 +355,23 @@ The basic plan for the design of the simulation is as follows:
 .. list-table:: V&V Tracking
   :header-rows: 1
 
-  * - Model number
+  * - Run
     - V&V plan
     - V&V summary
     - Link to notebook
-  * -
+  * - 0.0
+    - None, since data was fake and we just cared about runtime
     -
+    -
+  * - 1.0
+    - * Verify crude birth rate (CBR) against GBD
+      * Verify ACMR against GBD
+      * Validate Alzheimer's CSMR against GBD
+      * Verify Alzheimer's incidence rate against GBD
+      * Validate Alzheimer's prevalence against GBD
+      * Validate Alzheimer's EMR against GBD
+      * Validate Alzheimer's YLLs and YLDs against GBD
+      * Check whether overall population remains stable over time
+      * Check whether Alzheimer's prevalence remains stable over time
     -
     -
