@@ -279,8 +279,12 @@ scenario, and input draw.
   :header-rows: 1
 
   * - Observation
-    - Additional stratifications
+    - Stratification modifications
     - Note
+  * - Number of new simulants each year
+    -
+    - Either births or new Alzheimer's cases, depending on population
+      model
   * - Deaths and YLLs (cause-specific)
     -
     -
@@ -343,11 +347,13 @@ scenario, and input draw.
     -
     -
   * - 1.0
-    - * Confirm ACMR matches GBD
-      * Confirm Alzheimer's CSMR matches GBD
-      * Confirm Alzheimer's incidence rate matches GBD
-      * Confirm Alzheimer's prevalence matches GBD
-      * Confirm Alzheimer's YLLs and YLDs match GBD
+    - * Verify crude birth rate (CBR) against GBD
+      * Verify ACMR against GBD
+      * Validate Alzheimer's CSMR against GBD
+      * Verify Alzheimer's incidence rate against GBD
+      * Validate Alzheimer's prevalence against GBD
+      * Validate Alzheimer's EMR against GBD
+      * Validate Alzheimer's YLLs and YLDs against GBD
       * Check whether overall population remains stable over time
       * Check whether Alzheimer's prevalence remains stable over time
     -
