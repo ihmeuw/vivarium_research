@@ -266,13 +266,31 @@ The basic plan for the design of the simulation is as follows:
 4.3 Outputs and Observers
 --------------------------
 
+Default stratifications for all observations:
+
+* Year
+* Sex
+* Age group
+
+Additionally, all output should automatically be stratified by location,
+scenario, and input draw.
+
 .. list-table:: Outputs of simulation observers
   :header-rows: 1
 
   * - Observation
-    - Default stratifications
+    - Additional stratifications
     - Note
-  * - TODO: Add rows to table
+  * - Deaths and YLLs (cause-specific)
+    -
+    -
+  * - YLDs (cause-specific)
+    -
+    -
+  * - Transition counts between Alzheimer's cause states
+    -
+    -
+  * - Person-time in each Alzheimer's cause state
     -
     -
 
