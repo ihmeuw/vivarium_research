@@ -209,7 +209,7 @@ Modeling Strategy
 +++++++++++++++++
 
 The neonatal death model requires only the probability of death (aka "mortality risk") for the early and late neonatal time periods.
-These risks are age-group-, sex-, and location-specific.
+These mortality risks are age-group-, sex-, and location-specific.
 For brevity, sex and location subscripts are omitted in all equations.
 
 Rather than using GBD mortality rates and converting them into probability of deaths, we will use mortality risk as direct input data into our model. We will calculate mortality risk input data as age-specific death counts divided by live birth counts from GBD.
