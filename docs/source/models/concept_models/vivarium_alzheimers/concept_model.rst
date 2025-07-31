@@ -56,6 +56,18 @@ Alzheimer's Disease Early Detection Simulation
     - Client Services Unit
   * - FHS
     - Future Health Scenarios
+  * - ACMR
+    - All-Cause Mortality Rate
+  * - CSMR
+    - Cause-Specific Mortality Rate
+  * - EMR
+    - Excess Mortality Rate
+  * - CBR
+    - Crude Birth Rate
+  * - YLD
+    - Years Lived with Disability
+  * - YLL
+    - Years of Life Lost
 
 1.0 Overview
 ++++++++++++
