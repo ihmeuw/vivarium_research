@@ -336,7 +336,12 @@ scenario, and input draw.
       simulants, not just simulants who will get AD) in all age groups;
       simulants enter at age = 0 using crude birth rate
     - Default
-    - Default
+    - Use (mostly) standard VPH observers:
+
+      - Mortality and Disability observers
+      - Disease observer for Alzheimers
+      - Custom observer for Alzheimer's testing (based on DiseaseObserver)
+      - CategoricalInterventionObserver for Alzheimer's treatment
   * - 1.0
     - Simple SI model of AD using GBD data for AD and other dementias
     - Reference
