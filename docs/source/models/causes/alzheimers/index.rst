@@ -167,7 +167,10 @@ and sex.
   * - population
     - Average population during specified year
     - get_population
-    -
+    - Numerically equal to person-years. Often interpreted as population
+      at year's midpoint (which is approximately equal to person-years
+      if we think the midpoint rule with a single rectangle gives a good
+      estimate of the area under the population curve).
   * - incidence_rate_c543
     - GBD's "total population incidence rate" for Alzheimer's disease
       and other dementias
@@ -244,7 +247,8 @@ table.
     - Added onto mortality hazard for simulants with AD
   * - AD
     - disability weight
-    - :math:`\sum_\limits{s\in \text{sequelae_c543}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+    - :math:`\sum_\limits{s\in \text{sequelae_c543}}
+      \text{disability_weight}_s \cdot \text{prevalence}_s`
     - Prevalence-weighted average disability weight over sequelae,
       computed automatically by Vivarium Inputs. Used to calculate
       YLDs.
