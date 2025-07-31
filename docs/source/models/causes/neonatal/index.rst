@@ -208,7 +208,11 @@ unit time.
 Modeling Strategy
 +++++++++++++++++
 
-The neonatal death model requires only the probability of death (aka "mortality risk") for the early and late neonatal time periods. Rather than using GBD mortality rates and converting them into probability of deaths, we will use mortality risk as direct input data into our model. We will calculate mortality risk input data as age-specific death counts divided by live birth counts from GBD.
+The neonatal death model requires only the probability of death (aka "mortality risk") for the early and late neonatal time periods.
+These risks are age-group-, sex-, and location-specific.
+For brevity, sex and location subscripts are omitted in all equations.
+
+Rather than using GBD mortality rates and converting them into probability of deaths, we will use mortality risk as direct input data into our model. We will calculate mortality risk input data as age-specific death counts divided by live birth counts from GBD.
 
 Note that this strategy does not require any conversion between rates to probabilities NOR does it require any scaling to the duration of the age group. The mortality risk calculated as described below already represents the probability of dying within a neonatal age group and can be used directly as such in the simulation.
 
@@ -232,7 +236,7 @@ and for a given cause of death:
 Note that this strategy was updated in May of 2025 from a prior strategy of converting GBD mortality rates to probabilities. `The pull request that updated this strategy can be found here for reference. <https://github.com/ihmeuw/vivarium_research/pull/1654>`_ This strategy update was pursued following verification and validation issues in neonatal mortality and an exploration of potential solutions in model runs 6.1 through 6.4. Ultimately, a change from mortality rates to mortality risk was preferred given that it is the more policy relevant measure in the context of neonates, and accurately apportioning person time alive within the neonatal age group given the input data available to us was a challenge we judged to be unnecessary.
 
 The calculation of :math:`\text{ACMRisk}_i` (the all-cause mortality risk for a single simulant, :math:`i`) is a bit complicated, however. We begin with a population ACMRisk and use the LBWSG PAF to derive a risk-deleted ACMRisk to which we can then apply the relative risk of LBWSG matching any risk exposure level. Mathematically this is achieved by the following formula.
-Starting with this equation, we omit age group and sex subscripts for brevity; all quantities are age- and sex-specific.
+Starting with this equation, we omit age group subscripts for brevity; all quantities are still age-, sex-, and location-specific.
 
 .. math::
     \begin{align*}
