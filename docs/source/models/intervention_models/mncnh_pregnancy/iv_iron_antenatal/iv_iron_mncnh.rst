@@ -42,9 +42,8 @@ The antenatal IV iron intervention is intended to treat moderate and severe iron
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-.. todo::
-
-  Update baseline coverage data 
+IV iron treatment for iron-definiciency anemia pregnancy remains a relatively new intervention, and as such, coverage remains relatively low in low- and middle-income countries, such as Nigeria (see [Akinajo-et-al-2024]_). 
+As such, we will assume a baseline coverage of 0% for all locations for the IV iron intervention. 
 
 Vivarium Modeling Strategy
 --------------------------
@@ -274,3 +273,7 @@ Assumptions and limitations
 
 References
 ------------
+
+.. [Akinajo-et-al-2024]
+
+    Akinajo, O.R., Babah, O.A., Banke-Thomas, A. et al. Acceptability of IV iron treatment for iron deficiency anaemia in pregnancy in Nigeria: a qualitative study with pregnant women, domestic decision-makers, and health care providers. Reprod Health 21, 22 (2024). https://doi.org/10.1186/s12978-024-01743-y
