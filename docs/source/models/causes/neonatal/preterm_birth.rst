@@ -241,7 +241,7 @@ age less than 37 weeks:
 where :math:`\text{lbwsg_birth_prevalence}` can be pulled from GBD with minor transformations,
 as detailed in the table below.
 
-For LNN the situation is more complicated, because we need to account
+For LNN, the situation is more complicated, because we need to account
 for differential mortality in the ENN period.
 Therefore, the easiest way to calculate :math:`p_{\text{preterm},\text{LNN}}` is to get the end-of-ENN preterm
 prevalence from the same LBWSG PAF calculation pipeline used for :math:`Z`
