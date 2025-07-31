@@ -172,16 +172,17 @@ and sex.
     - GBD's "total population incidence rate" for Alzheimer's disease
       and other dementias
     - como
-    -
+    - Raw GBD value, different from "susceptible incidence rate"
+      automatically calculated by Vivarium Inputs
   * - csmr_c543
     - Cause-specific mortality rate for Alzheimer's disease and other
       dementias
     - :math:`\frac{\text{deaths_c543}}{(\text{population}) \cdot (\text{1 year})}`
-    -
+    - Calculated automatically by Vivarium Inputs
   * - emr_c543
     - Excess mortality rate for Alzheimer's disease and other dementias
     - :math:`\frac{\text{csmr_c543}}{\text{prevalence_c543}}`
-    -
+    - Calculated automatically by Vivarium Inputs
   * - sequelae_c543
     - Sequelae of Alzheimer's disease and other dementias
     - Set of 3 sequelae: s452, s453, s454
@@ -244,8 +245,9 @@ table.
   * - AD
     - disability weight
     - :math:`\sum_\limits{s\in \text{sequelae_c543}} \text{disability_weight}_s \cdot \text{prevalence}_s`
-    - Prevalence-weighted average disability weight over sequelae, used
-      to calculate YLDs
+    - Prevalence-weighted average disability weight over sequelae,
+      computed automatically by Vivarium Inputs. Used to calculate
+      YLDs.
   * - ALL
     - cause specific mortality rate
     - csmr_c543
@@ -266,4 +268,4 @@ table.
     - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
     - Compute susceptible population incidence rate from GBD's "total
       population incidence rate." Conversion is automatic when using
-      load_standard_data function in Vivarium Public Health.
+      the get_measure function in Vivarium Inputs.
