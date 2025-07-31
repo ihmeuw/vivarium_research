@@ -305,7 +305,7 @@ scenario, and input draw.
 .. list-table:: Model run requests
   :header-rows: 1
 
-  * - Number
+  * - Run
     - Description
     - Scenarios
     - Specification mods
@@ -314,18 +314,19 @@ scenario, and input draw.
   * - 0.0
     - Mock-up run with fake data but full population and mock-ups of all
       components to test runtime
-    - ?
+    - Custom scenario including three types of Alzheimer's testing and a
+      hypothetical treatment
     - Open cohort simulating entire population (including susceptible
       simulants, not just simulants who will get AD) in all age groups;
       simulants enter at age = 0 using crude birth rate
     - Default
-    - ?
+    - Default
   * - 1.0
     - Simple SI model of AD using GBD data for AD and other dementias
-    - Baseline
+    - Reference
     - Same as Model 0
     - Default
-    - ?
+    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -333,15 +334,21 @@ scenario, and input draw.
 .. list-table:: V&V Tracking
   :header-rows: 1
 
-  * - Model number
+  * - Run
     - V&V plan
     - V&V summary
     - Link to notebook
   * - 0.0
-    -
+    - None, since data was fake and we just cared about runtime
     -
     -
   * - 1.0
-    -
+    - * Confirm ACMR matches GBD
+      * Confirm Alzheimer's CSMR matches GBD
+      * Confirm Alzheimer's incidence rate matches GBD
+      * Confirm Alzheimer's prevalence matches GBD
+      * Confirm Alzheimer's YLLs and YLDs match GBD
+      * Check whether overall population remains stable over time
+      * Check whether Alzheimer's prevalence remains stable over time
     -
     -
