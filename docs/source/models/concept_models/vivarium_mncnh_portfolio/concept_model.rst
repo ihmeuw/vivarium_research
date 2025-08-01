@@ -470,8 +470,8 @@ defined as a module input in a subsequent row.
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Defined in the baseline coverage section of the :ref:`oral iron supplementation page <oral_iron_antenatal>`
-    - XXX
-    - XXX
+    - Defined in the baseline coverage section of the :ref:`anemia screening page <anemia_screening>`
+    - Defined in the baseline coverage section of the :ref:`IV iron page <intervention_iv_iron_antenatal_mncnh>`
     - 
   * - 2. CPAP total scale-up
     - Baseline
