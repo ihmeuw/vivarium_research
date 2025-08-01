@@ -88,22 +88,30 @@ Hemoglobin exposure
 
 .. todo::
 
-  Update IV iron effect size to be consistent with new data from Chris T. when it becomes available: https://pmc.ncbi.nlm.nih.gov/articles/PMC8459820/
+  Update IV iron effect size to be consistent with new data from Chris T.
   Also, assume no individual level heterogeneity despite having some data on this. (We chose not to model this in order to simplify the data prep for this model)
 
 .. list-table:: Maternal hemoglobin effect size
   :header-rows: 1
 
   * - Population
+    - Location
     - Effect size
     - Parameter uncertainty
     - Stochastic uncertainty
     - Note
   * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
+    - Nigeria and Ethiopia
     - +20.2 g/L
     - 
     - 
     - From the REVAMP study [Pasricha-et-al-2023]_
+  * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
+    - Pakistan
+    - +23 g/L
+    - 
+    - 
+    - From the RAPID study [Derman-et-al-2025]_
 
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -277,6 +285,10 @@ References
 .. [Akinajo-et-al-2024]
 
   Akinajo, O.R., Babah, O.A., Banke-Thomas, A. et al. Acceptability of IV iron treatment for iron deficiency anaemia in pregnancy in Nigeria: a qualitative study with pregnant women, domestic decision-makers, and health care providers. Reprod Health 21, 22 (2024). https://doi.org/10.1186/s12978-024-01743-y
+
+.. [Derman-et-al-2025]
+
+  Derman RJ, Bellad MB, Somannavar MS, Bhandari S, Mehta S, Mehta S, Sharma DK, Yogeshkumar S, Charantimath U, Patil AP, Mallapur AA, Ramadurg U, Sangavi R, Patil PS, Roy S, Vastrad P, Shekhar C, Leiby BE, Hartman RL, Georgieff M, Mennemeyer S, Aghai Z, Thind S, Boelig RC; RAPIDIRON Trial Group (Appendix). Single-dose intravenous iron vs oral iron for treatment of maternal iron deficiency anemia: a randomized clinical trial. Am J Obstet Gynecol. 2025 Aug;233(2):120.e1-120.e18. doi: 10.1016/j.ajog.2025.01.037. Epub 2025 Feb 3. PMID: 39909327.
 
 .. [Pasricha-et-al-2023]
 
