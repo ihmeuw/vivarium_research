@@ -88,7 +88,7 @@ Hemoglobin exposure
 
 .. todo::
 
-  Update IV iron effect size to be consistent with new data from Chris T.
+  Update IV iron effect size to be consistent with new data from Chris T. when it becomes available: https://pmc.ncbi.nlm.nih.gov/articles/PMC8459820/
   Also, assume no individual level heterogeneity despite having some data on this. (We chose not to model this in order to simplify the data prep for this model)
 
 .. list-table:: Maternal hemoglobin effect size
