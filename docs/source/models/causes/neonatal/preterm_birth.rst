@@ -226,7 +226,9 @@ The LNN CSMRisk is:
 
 .. math::
 
-  \text{CSMRisk}_\text{LNN} = \frac{\text{lnn_death_count}}{\text{live_birth_count} - \text{enn_all_cause_death_count}}
+  \text{CSMRisk}_\text{LNN} = \frac{\text{lnn_death_count}}{\text{live_birth_count} - \text{enn_all_cause_death_count}},
+
+where, again, all quantities are pulled from GBD as detailed in the table below.
 
 :math:`p_{\text{preterm}}`, as mentioned above, represents the prevalence/exposure
 of preterm (gestational age < 37 weeks) at the *beginning* of the age group.
