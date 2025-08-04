@@ -1246,7 +1246,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 13.1
     - * Update hemoglobin on maternal disorders PAF values to be location specific (rather than using location_id=1)
-      * Resolve discrepancy between RR values in artifact and RR values in get_draws
       * Allow for RRs <1 for values above (and below) the hemoglobin TMREL value
       * Assign RR values equal to the RR value at 40 g/L for all hemoglobin exposures less than 40 g/L
     - Baseline
@@ -1631,8 +1630,13 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that neonatal cause-specific mortality matches expectation
       * Confirm LBWSG risk effects are working as expected
       * Confirm that LBWSG PAF values match expectation through independent replication
-    - 
-    - 
+    - * Reasonably confident that the LNN PAF values in the artifact are correct based on this `artifact verification notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_artifact_check.ipynb/>`_
+      * LBWSG risk effects are working as expected based on this `interactive simulation notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_lbwsg_effects_interactive_simulation.ipynb/>`_
+      * All cause mortality risk is within 10% of target, but particularly for late neonatal females, there appears to be some slight miscalibration (although the direction varies by location)
+      * Preterm birth mortality risk is slightly underestimated in late neonatal age group. Other cause specific mortality risks look generally acceptable, with other causes mortalty risks trending towards overestimation
+    - * `Model 12.1.1 artifact checking notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_artifact_check.ipynb/>`_
+      * `Model 12.1.1 LBWSG effect interactive sim notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_lbwsg_effects_interactive_simulation.ipynb/>`_
+      * `Model 12.1.1 neonatal checks <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_nn_checks.ipynb/>`_
   * - 13.0
     - * Confirm baseline maternal disorders burden still validates
       * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but not case fatality rates
@@ -1648,6 +1652,11 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm RR values for hemoglobin exposures <40 are equal to the RR value for a hemoglobin exposure of 40
       * Confirm that artifact RR values match expectation
       * Confirm that RR values for hemoglobin exposures above the TMREL vary according to the input data
+    - 
+    -
+  * - 13.2
+    - * Check late neonatal all-cause mortality risk and cause-specific mortality risks;
+        expected change is small but should be in the direction of better verification to GBD
     - 
     - 
   * - 14.0
@@ -1772,9 +1781,13 @@ Default stratifications to all observers should include scenario and input draw.
     - See the summary in the model 12.1.1 run request
     - Hussain to update and rerun, Ali to do independent replication of PAF calculation verification
     - Model 12.1.1
+  * - Some miscalibration of all-cause mortality for late neonatal females
+    - Could be due to random noise given that this is the demographic with the lowest mortality rates and therefore smallest counts
+    - Rerun with larger population size?
+    - TBD
   * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
-    - Possibly related to the above PAF issue?
-    - Re-check when other known PAF issues are addressed
+    - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria. Check that we only have a single parameter for preterm prevalence and that this is not defined differently in the simulation versus the PAF calculation simulation
+    - Research to brainstorm
     - None for now
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
