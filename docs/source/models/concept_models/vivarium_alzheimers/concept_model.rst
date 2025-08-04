@@ -129,7 +129,7 @@ The last three stages correspond to the three sequelae (mild, moderate,
 severe) of the GBD cause "Alzheimer's disease and other dementias." We
 will have to separate AD out from other dementias in the GBD data, and
 we will need non-GBD data sources to inform our modeling of preclinical
-AD and (possibly) MCI due to AD. Furthermore, reality may be a bit more complicated
+AD and MCI due to AD. Furthermore, reality may be a bit more complicated
 than the simple one-directional progression depicted above, but the
 assumption of no recovery from any state might be sufficient for our
 purposes.

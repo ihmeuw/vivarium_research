@@ -154,11 +154,17 @@ Note that these probabilities are not used directly in the model and are include
 Modeling Strategy
 +++++++++++++++++
 
-The Preterm Birth submodel requires only the birth-weight- and gestation-age-stratified cause specific mortality risks for preterm birth complications with and without respiratory distress syndrome during the early and late neonatal periods.
+The Preterm Birth submodel only needs to produce the birth-weight- and gestation-age-stratified cause specific mortality risks for preterm birth complications with and without respiratory distress syndrome during the early and late neonatal periods.
+(These risks are also implicitly stratified by age group, sex, and location.)
 
 Since this is a PAF-of-one cause, the calculation must take into account the "structural zeros" representing no mortality risk for simulants with a gestational age of 37 or more weeks.
 
-The way these CSMRisks are used is the same for all subcauses, and therefore is included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.  This page describes the birth-weight- and gestational-age-specific cause specific mortality risks that are used for this cause on that page, :math:`\text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}}` and :math:`\text{CSMRisk}^{\text{preterm without RDS}}_{\text{BW},\text{GA}}`. In both cases, the formula is:
+The way these CSMRisks are used is the same for all subcauses, and therefore is included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.  This page describes how to calculate the birth-weight- and gestational-age-specific cause specific mortality risks that are used for the preterm subcauses on that page, namely :math:`\text{CSMRisk}^{\text{preterm with RDS}}_{\text{BW},\text{GA}}` and :math:`\text{CSMRisk}^{\text{preterm without RDS}}_{\text{BW},\text{GA}}`.
+As in the equations on the overall neonatal disorders model page, all quantities here
+are age-group-, sex-, and location-specific; these subscripts are omitted for brevity.
+For both preterm subcauses, the formula is:
+
+.. _preterm_csmrisk_equation:
 
 .. math::
     \begin{align*}
@@ -171,7 +177,8 @@ The way these CSMRisks are used is the same for all subcauses, and therefore is 
     \end{align*}
 
 where :math:`k` is the subcause of interest (preterm birth with or without RDS),
-:math:`\text{CSMRisk}` is the cause-specific mortality riskk for preterm birth complications,
+:math:`\text{CSMRisk}` is the cause-specific mortality risk for preterm birth complications,
+:math:`p_{\text{preterm}}` is the prevalence of preterm (gestational age < 37 weeks) at the *beginning* of the age group,
 :math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`E[\text{RR}_{\text{BW,GA}} | \text{GA}<37] \cdot Z = 1`. Solving for :math:`Z` gives :math:`Z = 1 / E[\text{RR}_{\text{BW,GA}} | \text{GA}<37]`.
 
 .. note::
@@ -184,7 +191,7 @@ where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 
   We will use a **population size of 195_112** for this calculation. This number was selected in order to satisfy the following criteria:
 
-  - The population size per LWBSG exposure category is required to be a perfect square to be compatible with our strategy of initializing individual exposures on a grid within each LBWSG exposure category
+  - The population size per LBWSG exposure category is required to be a perfect square to be compatible with our strategy of initializing individual exposures on a grid within each LBWSG exposure category
   
   - The total population size of the PAF calculation pipeline must be divisible by the product of the number of LBWSG exposure categories (58), the number of sexes (2), and the number of age groups (2) used in the PAF calculation
   
@@ -202,7 +209,73 @@ where :math:`k` is the subcause of interest (preterm birth with or without RDS),
   Also, it is possible that the choice of :math:`\text{RR}_{\text{BW},\text{GA}}` might not work for every subcause. Since we're moving all the preterm mortality into the preterm categories, there is less room there for mortality from other causes, so depending on the risks involved, we may need to shift mortality from some other causes into the non-preterm categories in order to avoid making things negative.
   It is even possible that there is no way to make this work consistently, meaning that any choice of weight function would lead to negative mortality risks.  We expect that this will not be an issue, but we haven't actually tried it with the real data yet.
 
-Each individual simulant :math:`i` has their own :math:`\text{CSMR}_i^k` that might be different from :math:`\text{CSMRisk}^k_{\text{BW}_i,\text{GA}_i}` (meaning the average birth-weight- and gestational-age-specific CSMRisk for simulants with the birth weight and gestational age matching simulant :math:`i`.  We recommend implementing this as a pipeline eventually because it will be modified by interventions (or access to interventions) relevant to this subcause.  (Until we implement those, we will have :math:`\text{CSMRisk}_{i}^k = \text{CSMRisk}^k_{\text{BW}_i,\text{GA}_i}`, though.)
+:math:`\text{CSMRisk}` and :math:`p_{\text{preterm}}` are calculated differently for the ENN and LNN age groups.
+For clarity of notation, in what follows we will again make explicit the age group
+subscripts that have been implicit on every quantity to this point.
+(Sex and location remain implicit.)
+We define the ENN CSMRisk as:
+
+.. math::
+
+  \text{CSMRisk}_\text{ENN} = \frac{\text{enn_death_count}}{\text{live_birth_count}},
+
+where the :math:`\text{enn_death_count}` and :math:`\text{live_birth_count}` are
+quantities pulled from GBD, as detailed in the table below.
+
+The LNN CSMRisk is:
+
+.. math::
+
+  \text{CSMRisk}_\text{LNN} = \frac{\text{lnn_death_count}}{\text{live_birth_count} - \text{enn_all_cause_death_count}},
+
+where, again, all quantities are pulled from GBD as detailed in the table below.
+
+:math:`p_{\text{preterm}}`, as mentioned above, represents the prevalence/exposure
+of preterm (gestational age < 37 weeks) at the *beginning* of the age group.
+For ENN, the beginning of the age group is birth, so the prevalence of preterm
+at birth is a sum of the birth prevalence for all LBWSG categories with gestational
+age less than 37 weeks:
+
+.. math::
+
+  p_{\text{preterm},\text{ENN}} = \sum_{\{\text{cat}: \text{GA}<37\}} \text{lbwsg_birth_prevalence}_\text{cat},
+
+where :math:`\text{lbwsg_birth_prevalence}` can be pulled from GBD with minor transformations,
+as detailed in the table below.
+
+For LNN, the situation is more complicated, because we need to account
+for differential mortality in the ENN period.
+Therefore, the easiest way to calculate :math:`p_{\text{preterm},\text{LNN}}` is to get the end-of-ENN preterm
+prevalence from the same LBWSG PAF calculation pipeline used for :math:`Z`
+above.
+As detailed at :ref:`details_of_the_lbwsg_paf_calculation` on the neonatal all-cause
+mortality page, there are two iterative steps using microsimulation, with the late neonatal calculations
+using the result of the early neonatal calculations.
+Similarly to the LNN PAF, *after* the early neonatal calculations are complete, the prevalence of
+preterm at the end of the ENN age group should be calculated.
+This value should be used as :math:`p_{\text{preterm},\text{LNN}}` for the purposes
+of the CSMRisk equation.
+
+Determining the prevalence of preterm is a bit more complex than it sounds, because in the PAF calculation pipeline,
+the same number of simulants are assigned to each LBWSG category, rather than assigning each simulant
+to a random category with probability equal to that category's prevalence at birth.
+Due to this initialization strategy, all quantities calculated in the pipeline must use *weights*
+to account for the fact that the simulants in the categories with higher birth prevalence represent more people.
+Therefore, :math:`p_{\text{preterm},\text{LNN}}` is calculated as follows:
+
+.. math::
+
+  p_{\text{preterm},\text{LNN}} = \frac{
+    \sum_{\{\text{cat}: \text{GA}<37\}} \text{lbwsg_birth_prevalence}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}
+  }{
+    \sum_{\text{cat}} \text{lbwsg_birth_prevalence}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}
+  },
+
+where :math:`n_\text{cat}` is the number of simulants initialized into each LBWSG category at birth
+and :math:`n^\text{deaths}_\text{cat}` is the number of deaths in each category when ENN mortality was applied.
+Note that :math:`n_\text{cat}` will not vary by LBWSG exposure category under the current approach of assigning the same number of simulants to each LBWSG category.
+
+Each individual simulant :math:`i` has their own :math:`\text{CSMR}_i^k` that might be different from :math:`\text{CSMRisk}^k_{\text{BW}_i,\text{GA}_i}` (meaning the average birth-weight- and gestational-age-specific CSMRisk for simulants with the birth weight and gestational age matching simulant :math:`i`).  We recommend implementing this as a Vivarium pipeline eventually because it will be modified by interventions (or access to interventions) relevant to this subcause.  (Until we implement those, we will have :math:`\text{CSMRisk}_{i}^k = \text{CSMRisk}^k_{\text{BW}_i,\text{GA}_i}`, though.)
 
 The following table shows the data needed for these
 calculations.
@@ -212,8 +285,9 @@ Data Tables
 
 .. note::
 
-  All quantities pulled from GBD in the following table are for a
-  specific year, sex, age group, and location.
+  All quantities pulled from GBD in the following table are pulled
+  for all modeled years, sexes, age groups, and locations,
+  except when the age group is explicitly specified.
 
 .. list-table:: Data values and sources
     :header-rows: 1
@@ -224,36 +298,24 @@ Data Tables
       - Note
     * - enn_all_cause_death_count
       - Count of deaths due to all causes in the early neonatal age group
-      - GBD: source='codcorrect', metric_id=1, cause_id=294
+      - GBD: source='codcorrect', metric_id=1, cause_id=294, age_group_id=2
       - 
     * - enn_death_count
       - Count of deaths due to cause neonatal preterm birth complications in the early neonatal age group
-      - GBD: source='codcorrect', metric_id=1, cause_id=381
+      - GBD: source='codcorrect', metric_id=1, cause_id=381, age_group_id=2
       - 
     * - lnn_death_count
       - Count of deaths due to cause neonatal preterm birth complications in the late neonatal age group
-      - GBD: source='codcorrect', metric_id=1, cause_id=381
+      - GBD: source='codcorrect', metric_id=1, cause_id=381, age_group_id=3
       - 
     * - live_birth_count
       - Count of live births
       - GBD: covariate_id = 1106
       - 
-    * - csmrisk_enn
-      - neonatal preterm birth complications mortality risk in the early neonatal age group
-      - enn_death_count / live_birth_count
+    * - lbwsg_birth_prevalence
+      - Birth prevalence of low birthweight and short gestation risk factor
+      - GBD with post-processing: rei_id = 339, then remove the extraneous category and rescale prevalence :ref:`as described here <rescaling_lbwsg_exposure_data_pulled_from_gbd_2019>`.
       - 
-    * - csmrisk_lnn
-      - neonatal preterm birth complications mortality risk in the late neonatal age group
-      - lnn_death_count / (live_birth_count - enn_all_cause_death_count)
-      - 
-    * - :math:`\text{CSMRisk}`
-      - neonatal preterm birth complications mortality risk
-      - either csmrisk_enn or csmrisk_lnn depending on the simulant's age group
-      - 
-    * - :math:`p_\text{preterm}`
-      - Prevalence of gestational age <37 weeks at birth
-      - Derived from :ref:`GBD LBWSG exposure <risk_exposure_lbwsg>`
-      - Equal to the sum of exposures for all categories with gestational age at birth <37 weeks. A list of such categories can be generated in a manner similar to `this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/LBW%20categories.ipynb>`_ 
     * - :math:`f_\text{preterm w RDS}`
       - fraction of preterm deaths with RDS
       - 85%
