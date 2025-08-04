@@ -255,7 +255,8 @@ table.
   * - ALL
     - cause specific mortality rate
     - csmr_c543
-    - Subtracted from all-cause mortality hazard in all cause states
+    - Subtracted from all-cause mortality hazard to get cause-deleted
+      mortality hazard in all cause states
 
 .. list-table:: Transition Data
   :widths: 10 10 10 20 30
