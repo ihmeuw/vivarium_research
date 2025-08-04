@@ -332,9 +332,11 @@ scenario, and input draw.
       components to test runtime
     - Custom scenario including three types of Alzheimer's testing and a
       hypothetical treatment
-    - Open cohort simulating entire population (including susceptible
-      simulants, not just simulants who will get AD) in all age groups;
-      simulants enter at age = 0 using crude birth rate
+    - * Locations: United States (US)
+      * Cohort: Open cohort simulating entire population (including
+        susceptible simulants, not just simulants who will get AD) in
+        all age groups; simulants enter at age = 0 using crude birth
+        rate
     - Default
     - Use (mostly) standard VPH observers:
 
@@ -345,7 +347,8 @@ scenario, and input draw.
   * - 1.0
     - Simple SI model of AD using GBD data for AD and other dementias
     - Reference
-    - Same as Model 0
+    - * Locations: US, China
+      * Cohort: Same population model as Model 0.0
     - Default
     - Default
 
