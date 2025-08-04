@@ -34,7 +34,6 @@ Pregnancy: GBD 2021, Closed Cohort, MNCNH
 
 .. contents::
    :local:
-   :depth: 1
 
 .. list-table:: Abbreviations
   :widths: 15 15 15

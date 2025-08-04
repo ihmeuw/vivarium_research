@@ -77,6 +77,10 @@ The neonatal component of the MNCNH portfolio simulation is comprised of one sin
     - Intrapartum intervention module
     - 
     - 
+  * - RDS intervention propensity
+    - Initial attributes module
+    - Determines which simulants receive each RDS interventions (CPAP and ACS) 
+    - 
   * - Hemoglobin exposure at birth
     - Hemoglobin module
     - Affects neonatal sepsis risk
@@ -111,22 +115,10 @@ The following risk factors affect neonatal causes:
 2.4 Intervention models
 ------------------------
 
-:ref:`Intervention Models <neonatal_intervention_models>`
-
 * :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
 * :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
 * :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
-* Antenatal corticosteroids (coverage determined in intrapartum intervention module)
-
-.. todo::
-
-  Incorporate the following information into an intervention model document for antenatal corticosteroids
-
-    - 0.69 (95% CI 0.59-0.81) relative risk for RDS mortality based on birthing parent receiving antenatal corticosteroids
-    - This value is for RDS mortality, however there is also an RR on RDS incidence (0.66, 95% CI 0.56-0.77). Study recipients
-      of RDS intervention included "women, with a singleton or multiple pregnancy, expected to deliver preterm as a result of either 
-      spontaneous preterm labour, preterm prelabour rupture of the membranes or planned preterm delivery."
-      Source: `2017 Cochrane review <https://pubmed.ncbi.nlm.nih.gov/28321847/>`_
+* Antenatal corticosteroids (coverage assumed equal to CPAP coverage, see below)
 
 
 2.5: Module Outputs
