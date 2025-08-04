@@ -238,7 +238,7 @@ age less than 37 weeks:
 
 .. math::
 
-  p_{\text{preterm},\text{ENN}} = \sum_{\{\text{cat}: \text{GA}<37\}} \text{lbwsg_birth_prevalence}_\text{cat}
+  p_{\text{preterm},\text{ENN}} = \sum_{\{\text{cat}: \text{GA}<37\}} \text{lbwsg_birth_prevalence}_\text{cat},
 
 where :math:`\text{lbwsg_birth_prevalence}` can be pulled from GBD with minor transformations,
 as detailed in the table below.
@@ -255,8 +255,13 @@ Similarly to the LNN PAF, *after* the early neonatal calculations are complete, 
 preterm at the end of the ENN age group should be calculated.
 This value should be used as :math:`p_{\text{preterm},\text{LNN}}` for the purposes
 of the CSMRisk equation.
-Concretely, in the PAF calculation pipeline, in which LBWSG categories have not been assigned using the birth prevalence (currently exactly equally between categories),
-the prevalence is calculated as follows:
+
+Determining the prevalence of preterm is a bit more complex than it sounds, because in the PAF calculation pipeline,
+the same number of simulants are assigned to each LBWSG category, rather than assigning each simulant
+to a random category with probability equal to that category's prevalence at birth.
+Due to this initialization strategy, all quantities calculated in the pipeline must use *weights*
+to account for the fact that the simulants in the categories with higher birth prevalence represent more people.
+Therefore, :math:`p_{\text{preterm},\text{LNN}}` is calculated as follows:
 
 .. math::
 
@@ -264,9 +269,11 @@ the prevalence is calculated as follows:
     \sum_{\{\text{cat}: \text{GA}<37\}} \text{lbwsg_birth_prevalence}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}
   }{
     \sum_{\text{cat}} \text{lbwsg_birth_prevalence}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}
-  }
+  },
 
-where :math:`n_\text{cat}` is the number of simulants initialized into each category before mortality was applied (the number of grid points in each category) and :math:`n^\text{deaths}_\text{cat}` is the number of deaths in each category when ENN mortality was applied in the PAF calculation pipeline. Note that :math:`n_\text{cat}` will not vary by LBWSG exposure category under the current approach of assigning LBWSG exactly equally between categories.
+where :math:`n_\text{cat}` is the number of simulants initialized into each LBWSG category at birth
+and :math:`n^\text{deaths}_\text{cat}` is the number of deaths in each category when ENN mortality was applied.
+Note that :math:`n_\text{cat}` will not vary by LBWSG exposure category under the current approach of assigning the same number of simulants to each LBWSG category.
 
 Each individual simulant :math:`i` has their own :math:`\text{CSMR}_i^k` that might be different from :math:`\text{CSMRisk}^k_{\text{BW}_i,\text{GA}_i}` (meaning the average birth-weight- and gestational-age-specific CSMRisk for simulants with the birth weight and gestational age matching simulant :math:`i`).  We recommend implementing this as a Vivarium pipeline eventually because it will be modified by interventions (or access to interventions) relevant to this subcause.  (Until we implement those, we will have :math:`\text{CSMRisk}_{i}^k = \text{CSMRisk}^k_{\text{BW}_i,\text{GA}_i}`, though.)
 
