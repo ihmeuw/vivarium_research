@@ -543,6 +543,27 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
+  * - 14. No ACS and total CPAP V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 15. Total ACS and CPAP V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 16. Total ACS and no CPAP V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
 
 .. _MNCNH intrapartum component scenario table:
 
@@ -609,6 +630,21 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
+  * - 14. No ACS and total CPAP V&V
+    - Baseline
+    - 0% coverage at all delivery location types 
+    - Baseline
+    - see neonatal table for CPAP coverage
+  * - 15. Total ACS and CPAP V&V
+    - Baseline
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - see neonatal table for CPAP coverage
+  * - 16. Total ACS and no CPAP V&V
+    - Baseline
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - see neonatal table for CPAP coverage     
 
 .. _MNCNH neonatal component scenario table:
 
@@ -675,6 +711,21 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
+  * - 14. No ACS and total CPAP V&V
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - Baseline
+    - See intrapartum table for ACS coverage
+  * - 15. Total ACS and CPAP V&V
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - Baseline
+    - See intrapartum table for ACS coverage
+  * - 16. Total ACS and no CPAP V&V
+    - 0% coverage at all delivery location types 
+    - Baseline
+    - Baseline
+    - See intrapartum table for ACS coverage 
 
 .. _mncnh_portfolio_4.0:
 
@@ -710,7 +761,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Probiotics availability
       * CPAP availability
       * Corticosteroid coverage
-    - Included except for corticosteroid coverage, which has not yet been added
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+    - Included, except for corticosteroid coverage which has yet to be added
   * - 3. Neonatal deaths (cause-specific)
     - * Child sex
       * Child age group
@@ -719,6 +771,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Antibiotics availability
       * Probiotics availability
       * Corticosteroid coverage
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
     - Included, except for corticosteroid coverage which has yet to be added
   * - 4. Antibiotics eligible birth counts
     - * Delivery facility type
@@ -746,7 +799,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Delivery facility
       * Preterm status
       * Believed preterm status
-    -
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+    - 
 
 .. todo::
 
@@ -1208,13 +1262,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Added preterm status and believed preterm status to maternal
       population observer (#7)
     - Default
-  * - 16.0*
+  * - 16.0
     - Wave I antenatal corticosteroids
     - Baseline
     - ``model16.0``
-    -
-    -
-    -
+    - Default
+    - Default, note that we would like additional stratifications based on believed gestational age in the maternal population, births, and neonatal burden observers
+    - Default
 
 .. note:: 
 
@@ -1634,6 +1688,15 @@ Default stratifications to all observers should include scenario and input draw.
         the `facility choice optimization results .csv file`_)
     -
     -
+  * - 16.0
+    - * Use the interactive sim to confirm RDS and all-cause mortality rates between 33 weeks with ACS coverage and 34 weeks (no ACS coverage due to ineligibility).
+      * Confirm neonatal mortality rate of preterm birth with RDS in baseline scenario still validates.
+      * Confirm ratio of preterm with RDS mortality among the eligible population of those without ACS divided by those with ACS equals the relative risk parameter specified in the :ref:`ACS intervention page <acs_intervention>`.
+      * Confirm that baseline coverage of ACS is equal to that of CPAP as specified in the :ref:`CPAP intervention page <intervention_neonatal_cpap>`.
+      * Confirm that the same propensity value is used for ACS and CPAP.
+      * Use the interactive sim to confirm there is no coverage of ACS outside of the eligible gestational age range.
+    - 
+    - 
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
@@ -1685,6 +1748,8 @@ Default stratifications to all observers should include scenario and input draw.
 * We do not model an underlying correlation between hemoglobin exposure and stillbirth rates, despite evidence that such an association exists. Therefore, our IV iron intervention model, which is targeted to those with low hemoglobin, will be misaligned with respect to the stillbirth rate among the IV iron intervention target population.
   
   * We could use the GBD risk effects between hemoglobin and stillbirth to model baseline correlation only and not model updates in stillbirth rates in response to changes in hemoglobin exposure to address this limitation (as these effects are captured in the impact of the hemoglobin-affecting interventions IV Iron and IFA/MMS already). However, this model upgrade is not highest priority. `See this backlog JIRA ticket #2343 <https://jira.ihme.washington.edu/browse/SSCI-2343>`_
+
+* [Finkelstein-et-al-2024]_ primarily includes RCTs from high-income countries, so the effect size for IFA on maternal hemoglobin may be overestimated for Sub-Saharan African countries (including Ethiopia and Nigeria) with typically higher rates of non-iron deficiency anemias.
 
 .. _mncnh_portfolio_7.0:
 
