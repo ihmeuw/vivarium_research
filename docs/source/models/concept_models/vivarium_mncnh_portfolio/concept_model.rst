@@ -1646,6 +1646,11 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that artifact RR values match expectation
       * Confirm that RR values for hemoglobin exposures above the TMREL vary according to the input data
     - 
+    -
+  * - 13.2
+    - * Check late neonatal all-cause mortality risk and cause-specific mortality risks;
+        expected change is small but should be in the direction of better verification to GBD
+    - 
     - 
   * - 14.0
     - * Confirm ANC attendance exposure varies as expected by pregnancy term length
