@@ -217,7 +217,7 @@ We define the ENN CSMRisk as:
 
 .. math::
 
-  \text{CSMRisk}_\text{ENN} = \frac{\text{enn_death_count}}{\text{live_birth_count}}
+  \text{CSMRisk}_\text{ENN} = \frac{\text{enn_death_count}}{\text{live_birth_count}},
 
 where the :math:`\text{enn_death_count}` and :math:`\text{live_birth_count}` are
 quantities pulled from GBD, as detailed in the table below.
