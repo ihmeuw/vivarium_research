@@ -1246,7 +1246,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 13.1
     - * Update hemoglobin on maternal disorders PAF values to be location specific (rather than using location_id=1)
-      * Resolve discrepancy between RR values in artifact and RR values in get_draws
       * Allow for RRs <1 for values above (and below) the hemoglobin TMREL value
       * Assign RR values equal to the RR value at 40 g/L for all hemoglobin exposures less than 40 g/L
     - Baseline
