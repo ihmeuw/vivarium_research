@@ -328,7 +328,7 @@ scenario, and input draw.
     - Stratification mods
     - Observer mods
   * - 0.0
-    - Mock-up run with fake data but full population and mock-ups of all
+    - Speed test with fake data but full population and mock-ups of all
       components to test runtime
     - Custom scenario including three types of Alzheimer's testing and a
       hypothetical treatment
@@ -364,9 +364,11 @@ scenario, and input draw.
     - V&V summary
     - Link to notebook
   * - 0.0
-    - None, since data was fake and we just cared about runtime
-    -
-    -
+    - Check runtime of simulation. No other V&V since data was fake.
+    - ~15 minutes to complete parallel runs of 100 jobs with 20K
+      simulants each (2 million total simulants, equivalent to 20 draws
+      with 100K simulants each)
+    - None
   * - 1.0
     - * Verify crude birth rate (CBR) against GBD
       * Verify ACMR against GBD
