@@ -1659,6 +1659,11 @@ Default stratifications to all observers should include scenario and input draw.
         expected change is small but should be in the direction of better verification to GBD
     - 
     - 
+  * - 13.3
+    - * Check that neonatal all-cause mortality risks match expectation
+      * Check that neonatal cause-specific mortality risks match expectation
+    - 
+    - 
   * - 14.0
     - * Confirm ANC attendance exposure varies as expected by pregnancy term length
       * Confirm ANC attendance exposure matches expectation
