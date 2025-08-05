@@ -88,8 +88,11 @@ Hemoglobin exposure
 
 .. todo::
 
-  Update IV iron effect size to be consistent with new data from Chris T.
-  Also, assume no individual level heterogeneity despite having some data on this. (We chose not to model this in order to simplify the data prep for this model)
+  - Decide how we want to model uncertainty in the effect size of IV iron on hemoglobin concentrations.
+  - Decide which REVAMP study we should use for Nigeria and Ethiopia - one study looks at second trimester and one looks at third trimester IV iron administration (the latter [Pasricha-et-al-2025]_ reported a smaller effect size of 17.5g/dL). Currently we are using the second trimester study.
+  - [Pasricha-et-al-2023]_ reports ferritin as an outcome of their RCT, but ferritin was not included as an eligibility criterium for receiving IV iron.
+    This contradicts our assumption that IV iron is only administered to those with low ferritin levels and we need to decide how we want to handle this discrepancy.
+  - Assume no individual level heterogeneity despite having some data on this. (We chose not to model this in order to simplify the data prep for this model)
 
 .. list-table:: Maternal hemoglobin effect size
   :header-rows: 1
@@ -105,19 +108,26 @@ Hemoglobin exposure
     - +20.2 g/L
     - 
     - 
-    - From the REVAMP study [Pasricha-et-al-2023]_
+    - From the REVAMP study (second trimester) [Pasricha-et-al-2023]_
   * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
     - Pakistan
-    - +23 g/L
+    - +26.3 g/L
     - 
     - 
-    - From the RAPID study [Derman-et-al-2025]_
+    - From the RAPID study [Derman-et-al-2025]_. Unlike the REVAMP study, this study did include ferritin levels (serum ferritin <30 ng/mL) as an eligibility criterium for receiving IV iron, which is consistent with our assumption that IV iron is only administered to those with low ferritin levels.
+
+.. note::
+
+  [Derman-et-al-2025]_ and [Pasricha-et-al-2023]_ report values of ferritin assessments done in tandem with hemoglobin assessments, but ferritin was not included as an eligibility criterium for receiving IV iron.
+  This contradicts our assumption that IV iron is only administered to those with low ferritin levels. 
+
 
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - We assume the effect of the intervention persists through the end of the period for which we track hemoglobin status
 - We do not consider effect modification by baseline hemoglobin status. In reality, the effect of IV iron may be greater among women with lower baseline hemoglobin levels.
+- We assume that the effect size of IV iron on hemoglobin concentrations as reported in the REVAMP study (which took place in Malawi) is representative of the effect size in Nigeria and Ethiopia, and that the value reported by the RAPID study (which took place in India) is representative of the effect size in Pakistan.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -293,3 +303,7 @@ References
 .. [Pasricha-et-al-2023]
 
   Pasricha, S.R., Mwangi, M.N., Moya, E., Ataide, R., Mzembe, G., Harding, R., et al. (2023). Ferric carboxymaltose versus standard-of-care oral iron to treat second-trimester anaemia in Malawian pregnant women: a randomised controlled trial. The Lancet 401, 10388, P1595-1609 (2023). https://doi.org/10.1016/S0140-6736(23)00278-7 
+
+.. [Pasricha-et-al-2025]
+
+  Pasricha, SR., Moya, E., Ataíde, R. et al. Ferric carboxymaltose for anemia in late pregnancy: a randomized controlled trial. Nat Med 31, 197–206 (2025). https://doi.org/10.1038/s41591-024-03385-w
