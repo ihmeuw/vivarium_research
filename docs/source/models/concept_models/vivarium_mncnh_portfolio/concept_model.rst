@@ -463,17 +463,20 @@ defined as a module input in a subsequent row.
     - Ultrasound coverage
     - Ultrasound type
     - IFA/MMS coverage
-    - Anemia screening coverage
+    - Hemoglobin screening coverage
+    - Ferritin screening coverage
     - IV iron coverage
     - Note
   * - 1. Baseline
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Defined in the baseline coverage section of the :ref:`oral iron supplementation page <oral_iron_antenatal>`
-    - Defined in the baseline coverage section of the :ref:`anemia screening page <anemia_screening>`
+    - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
+    - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
     - Defined in the baseline coverage section of the :ref:`IV iron page <intervention_iv_iron_antenatal_mncnh>`
     - 
   * - 2. CPAP total scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -486,8 +489,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     -  
   * - 4. CPAP BEMONC-only scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -500,8 +505,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 8. Probiotics total scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -514,8 +521,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 10. Probiotics BEMONC-only scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -528,8 +537,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 12. Misoprostol V&V
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -542,8 +553,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 14. No ACS and total CPAP V&V
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -556,8 +569,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 16. Total ACS and no CPAP V&V
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -1224,7 +1239,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 12.1
-    - Bugfix to calculation of prevalence of preterm, to ensure we include categories with an upper bound of 37 weeks
+    - Bugfix to calculation of prevalence of preterm in :ref:`this equation <preterm_csmrisk_equation>`, to ensure we include categories with an upper bound of 37 weeks
     - Baseline
     - ``model12.1``
     - Default
@@ -1241,6 +1256,38 @@ Default stratifications to all observers should include scenario and input draw.
     - `Hemoglobin risk effects on maternal disorders <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_mncnh_portfolio/maternal_disorders_module/module_document.html#id1>`_
     - Baseline
     - ``model13.0``
+    - Default
+    - Default
+    - Default
+  * - 13.1
+    - * Update hemoglobin on maternal disorders PAF values to be location specific (rather than using location_id=1)
+      * Allow for RRs <1 for values above (and below) the hemoglobin TMREL value
+      * Assign RR values equal to the RR value at 40 g/L for all hemoglobin exposures less than 40 g/L
+    - Baseline
+    - ``model13.1``
+    - Default
+    - Default
+    - Default
+  * - 13.2
+    - Update to correct bugs in the LBWSG PAF calculation's implementation of :ref:`this equation <details_of_the_lbwsg_paf_calculation_equation>`.
+      
+      In earlier model runs, the PAF calculation for late neonates began from
+      `age-specific LBWSG prevalence <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ad3ced96b6b497f9566b2e7c8e568328c613a69a/src/vivarium_gates_mncnh/components/lbwsg.py#L406-L409>`_
+      and the mortality-based weighting
+      `implemented <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ad3ced96b6b497f9566b2e7c8e568328c613a69a/src/vivarium_gates_mncnh/components/lbwsg.py#L412-L426>`_
+      did not work due to
+      `all deaths being excluded by population filters <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ad3ced96b6b497f9566b2e7c8e568328c613a69a/src/vivarium_gates_mncnh/components/lbwsg.py#L378>`_.
+      Instead, in this run, the PAF calculation for late neonates should begin from birth prevalence
+      and properly apply the mortality-based weighting, as documented.
+    - Baseline
+    - ``model13.2``
+    - Default
+    - Default
+    - Default
+  * - 13.3
+    - Update to use end-of-ENN LBWSG prevalence for the :math:`p_\text{preterm}` for the LNN age group in :ref:`this equation <preterm_csmrisk_equation>`. Details can be found in the diff of `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1732/files>`_.
+    - Baseline
+    - ``model13.3``
     - Default
     - Default
     - Default
@@ -1598,11 +1645,38 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that neonatal cause-specific mortality matches expectation
       * Confirm LBWSG risk effects are working as expected
       * Confirm that LBWSG PAF values match expectation through independent replication
-    - 
-    - 
+    - * Reasonably confident that the LNN PAF values in the artifact are correct based on this `artifact verification notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_artifact_check.ipynb/>`_
+      * LBWSG risk effects are working as expected based on this `interactive simulation notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_lbwsg_effects_interactive_simulation.ipynb/>`_
+      * All cause mortality risk is within 10% of target, but particularly for late neonatal females, there appears to be some slight miscalibration (although the direction varies by location)
+      * Preterm birth mortality risk is slightly underestimated in late neonatal age group. Other cause specific mortality risks look generally acceptable, with other causes mortalty risks trending towards overestimation
+    - * `Model 12.1.1 artifact checking notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_artifact_check.ipynb/>`_
+      * `Model 12.1.1 LBWSG effect interactive sim notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_lbwsg_effects_interactive_simulation.ipynb/>`_
+      * `Model 12.1.1 neonatal checks <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_nn_checks.ipynb/>`_
   * - 13.0
     - * Confirm baseline maternal disorders burden still validates
-      * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but no case fatality rates
+      * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but not case fatality rates
+    - * Maternal hemorrhage and sepsis incidence rates are not quite calibrated to targets, expected to be due to using global rather than location-specific PAF values
+      * Hemoglobin RRs are being applied as expected to hemorrhage and sepsis incidence risks
+      * RR values for hemoglobin exposures <40 g/L are not as expected: they taper down rather than being equal to the RR value for a hemoglobin level of 40
+      * It appears that RR=1 for all exposure values above the TMREL value of 120 rather than following the risk curve that allows for risks below 1
+    - * `Model 13.0 maternal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_13.0_maternal_checks.ipynb>`_
+      * `Model 13.0 interactive sim notebook (for hemoglobin effects) <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_13.0_interactive_simulation_hemoglobin.ipynb>`_
+  * - 13.1
+    - * Confirm baseline maternal disorders validates
+      * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but not case fatality rates
+      * Confirm RR values for hemoglobin exposures <40 are equal to the RR value for a hemoglobin exposure of 40
+      * Confirm that artifact RR values match expectation
+      * Confirm that RR values for hemoglobin exposures above the TMREL vary according to the input data
+    - 
+    -
+  * - 13.2
+    - * Check late neonatal all-cause mortality risk and cause-specific mortality risks;
+        expected change is small but should be in the direction of better verification to GBD
+    - 
+    - 
+  * - 13.3
+    - * Check that neonatal all-cause mortality risks match expectation
+      * Check that neonatal cause-specific mortality risks match expectation
     - 
     - 
   * - 14.0
@@ -1711,13 +1785,29 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - RR values for hemoglobin < 40 g/L not as expected
+    - All hemoglobin exposures less than 40 g/L should be assigned the RR for the 40 g/L exposure
+    - Hussain to update implementation accordingly
+    - For 13.1
+  * - RR values for hemoglobin exposures above the TMREL all equal 1
+    - They should be able to match input data for values not equal to 1 (greater than lower than one are both okay)
+    - Hussain to update implementation accordingly
+    - For 13.1
+  * - Miscalibration of maternal hemorrhage and sepsis incidence rates
+    - Due to non-location-specific hemoglobin PAF value
+    - Hussain to update
+    - For 13.1
   * - Issue with LBWSG PAF calculation for the late neonatal age group
     - See the summary in the model 12.1.1 run request
     - Hussain to update and rerun, Ali to do independent replication of PAF calculation verification
     - Model 12.1.1
+  * - Some miscalibration of all-cause mortality for late neonatal females
+    - Could be due to random noise given that this is the demographic with the lowest mortality rates and therefore smallest counts
+    - Rerun with larger population size?
+    - TBD
   * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
-    - Possibly related to the above PAF issue?
-    - Re-check when other known PAF issues are addressed
+    - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria. Check that we only have a single parameter for preterm prevalence and that this is not defined differently in the simulation versus the PAF calculation simulation
+    - Research to brainstorm
     - None for now
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
