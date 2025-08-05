@@ -114,8 +114,11 @@ Hemoglobin exposure
     - +26.3 g/L
     - 
     - 
-    - From the RAPID study [Derman-et-al-2025]_. Unlike the REVAMP study, this study did include ferritin levels (serum ferritin <30 ng/mL) as an eligibility criterium for receiving IV iron, which is consistent with our assumption that IV iron is only administered to those with low ferritin levels.
+    - From the RAPID study [Derman-et-al-2025]_ 
 
+.. note::
+
+  Unlike the REVAMP study, this study did include ferritin levels (serum ferritin <30 ng/mL) as an eligibility criterium for receiving IV iron, which is consistent with our assumption that IV iron is only administered to those with low ferritin levels.
 
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -123,6 +126,7 @@ Assumptions and limitations
 - We assume the effect of the intervention persists through the end of the period for which we track hemoglobin status
 - We do not consider effect modification by baseline hemoglobin status. In reality, the effect of IV iron may be greater among women with lower baseline hemoglobin levels.
 - We assume that the effect size of IV iron on hemoglobin concentrations as reported in the REVAMP study (which took place in Malawi) is representative of the effect size in Nigeria and Ethiopia, and that the value reported by the RAPID study (which took place in India) is representative of the effect size in Pakistan.
+- We assume that IV iron is only administered to those with low ferritin levels, which is consistent with the RAPID study [Derman-et-al-2025] eligibility criteria but not the REVAMP study [Pasricha-et-al-2023]_ (see todo in Hemoglobin exposure section).
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
