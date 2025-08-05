@@ -105,10 +105,8 @@ to get the total simulants to add per timestep, as shown in the below table.
 
   * - Parameter
     - Value
-    - Note
   * - simulants_to_add_per_timestep
     - :math:`\frac{\text{initial simulated population size}}{\int_{a=\text{age start}}^{\text{age end}} \text{GBD total population}(a) \, da} \times \text{Live births} \times \text{time step}/365`
-    - 
 
 .. list-table:: Data values
   :header-rows: 1
