@@ -223,7 +223,7 @@ Scope
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-- For each of our maternal disorders subcauses, we have taken a strategy
+For each of our maternal disorders subcauses, we have taken a strategy
 of calculating the amount of YLDs per incident case and assigning that 
 number of YLDs to each incident case regardless of whether or not that 
 simulant dies in the simulation (see the individual subcause model
@@ -238,6 +238,7 @@ averting maternal deaths (averting YLLs) in an intervention scenario leading to
 *increases* in maternal disorders YLDs. This will cause us to slightly overestimate
 the impact of interventions on total DALYs averted due to maternal disorders for
 interventions that reduce maternal disorders mortality.
+
 
 Cause Model Diagram
 +++++++++++++++++++
