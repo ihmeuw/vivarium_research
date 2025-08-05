@@ -463,17 +463,20 @@ defined as a module input in a subsequent row.
     - Ultrasound coverage
     - Ultrasound type
     - IFA/MMS coverage
-    - Anemia screening coverage
+    - Hemoglobin screening coverage
+    - Ferritin screening coverage
     - IV iron coverage
     - Note
   * - 1. Baseline
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Defined in the baseline coverage section of the :ref:`oral iron supplementation page <oral_iron_antenatal>`
-    - XXX
+    - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
+    - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
     - XXX
     - 
   * - 2. CPAP total scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -486,8 +489,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     -  
   * - 4. CPAP BEMONC-only scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -500,8 +505,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 8. Probiotics total scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -514,8 +521,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 10. Probiotics BEMONC-only scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -528,8 +537,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 12. Misoprostol V&V
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -542,8 +553,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 14. No ACS and total CPAP V&V
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -556,8 +569,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 16. Total ACS and no CPAP V&V
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
