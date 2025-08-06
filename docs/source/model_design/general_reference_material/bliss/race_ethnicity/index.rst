@@ -909,13 +909,6 @@ would be placed in a single racial group - either "Black or African
 American" or "Asian" based on their other data. If this is
 feasible based on the data present, it is also a reasonable approach.
 
-2.2 Considering prior adjustment for race and ethnicity
--------------------------------------------------------
-
-.. todo::
-
-    In this section we'll discuss the question "How do our data sources adjust for race and ethnicity and how does that affect how we adjust in our own models?" and how a health
-    metrics researcher would answer this question and use that answer to inform their methods.
 
 3.0 Results
 +++++++++++
