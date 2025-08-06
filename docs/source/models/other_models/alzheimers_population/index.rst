@@ -81,6 +81,7 @@ with and without Alzheiemer's disease, of which those with Alzheimer's
 are the ones who appear in our simulation. Putting everything together,
 
 .. math::
+  :label: model_scale_eq
 
   S = \frac{P_{t_0}}{p_\text{Alz}\cdot \hat{P}^\text{GBD}_{t_0}},
 
@@ -125,6 +126,7 @@ among the above quantities are:
 Therefore, at time :math:`t_0`,
 
 .. math::
+  :label: initial_pop_eq
 
   P_{g,t_0}
   = S \cdot P^\text{real}_{g,t_0}
@@ -132,23 +134,42 @@ Therefore, at time :math:`t_0`,
   = P_{t_0} \cdot \frac{p_{g,t_0}}{p_\text{Alz}}
     \cdot \frac{\hat P^\text{GBD}_{g,t_0}}{\hat P^\text{GBD}_{t_0}},
 
-where the final equality follows from plugging in the formula for the
-model scale :math:`S` from the previous section. This equation tells us
-how many simulants to initialize in each demographic group based on
+where the final equality follows from plugging in formula
+:eq:`model_scale_eq` for the model scale :math:`S`. This equation tells
+us how many simulants to initialize into each demographic group based on
 known parameters.
 
+.. note::
 
+  Another way to write :eq:`initial_pop_eq` is
 
+  .. math::
 
-let :math:`P_{g,t}` be
-the number of simulants in group :math:`g` at time :math:`t` :math:`P^\text{GBD}_{g,t_0}`
+    P_{g,t_0} = P_{t_0}
+    \cdot \frac{\text{# of real people in subgroup $g$ with Alzheimer's}}
+      {\text{# of real people in whole population with Alzheimer's}}.
 
+  Thus, we could compute :math:`P_{g,t_0}` using prevalence counts from
+  GBD instead of prevalence rates.
 
-Let :math:`p_g`
-be the prevalence of Alzheimer's disease and other dementias for
-demographic group :math:`g` in the starting year of our simulation, for
-a given location. Then the number of simulants to initialize in group
-:math:`g` is :math:`p_g \hat P_{g,t_0} = p_g S \hat P^\text{GBD}_{g,t_0}`.
+  To verify that :eq:`initial_pop_eq` gives us the correct total number of
+  initial simulants, note that
+
+  .. math::
+
+    \begin{align*}
+    \sum_g P_{g,t_0}
+    = \sum_g P_{t_0}
+      \cdot \frac{p_{g,t_0} \cdot \hat P^\text{GBD}_{g,t_0}}
+      {p_\text{Alz} \cdot \hat P^\text{GBD}_{t_0}}
+    &= P_{t_0} \cdot \sum_g
+      \frac{P^\text{real}_{g,t_0}}{P^\text{real}_{t_0}} \\
+    &= P_{t_0} \cdot
+      \frac{\sum_g P^\text{real}_{g,t_0}}{P^\text{real}_{t_0}}
+    = P_{t_0} \cdot
+      \frac{P^\text{real}_{t_0}}{P^\text{real}_{t_0}}
+    = P_{t_0}.
+    \end{align*}
 
 Adding New Simulants
 ++++++++++++++++++++
