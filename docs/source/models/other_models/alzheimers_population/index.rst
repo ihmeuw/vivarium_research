@@ -76,9 +76,10 @@ where :math:`\hat{P}^\text{GBD}_{t_0}` is the total population at time
 dementias across all age groups and sexes in that location. Note that
 the model scale can also be computed as :math:`S = \hat P_{t_0} / \hat
 P^\text{GBD}_{t_0}`, where :math:`\hat P_{t_0} = P_{t_0} / p_\text{Alz}`
-is the size of an **imagined total population** including all people
-with and without Alzheiemer's disease, of which those with Alzheimer's
-are the ones who appear in our simulation. Putting everything together,
+is the size of an **imagined total model population** including all
+people with and without Alzheiemer's disease, of which those with
+Alzheimer's are the ones who appear in our simulation. Putting
+everything together,
 
 .. math::
   :label: model_scale_eq
@@ -100,9 +101,9 @@ populations in demographic group :math:`g` at time :math:`t`:
   :math:`t`
 * :math:`P^\text{real}_{g,t}` = the real population corresponding to our
   simulated population :math:`P_{g,t}`
-* :math:`\hat P_{g,t}` = the imagined total population including people
-  with and without AD, of which :math:`P_{g,t}` represents the subset
-  with AD
+* :math:`\hat P_{g,t}` = the imagined total model population in group
+  :math:`g`, including people with and without AD, of which
+  :math:`P_{g,t}` counts the subset with AD
 * :math:`\hat P^\text{GBD}_{g,t}` = the total real population in group
   :math:`g` at time :math:`t` according to GBD
 
