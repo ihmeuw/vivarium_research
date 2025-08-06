@@ -174,3 +174,24 @@ known parameters.
 
 Adding New Simulants
 ++++++++++++++++++++
+
+Let :math:`N_{g,t}` denote the number of new simulants in demographic
+group :math:`g` that we want to add to the simulation at time :math:`t`.
+We will assume that :math:`N_{g,t}` is a Poisson random variable with
+mean
+:math:`\lambda_{g,t} \cdot \Delta t \cdot 1_{\{\text{simulation step times}\}}(t)`,
+where :math:`\lambda_{g,t}` is the entrance rate of new simulants
+(measured in count of simulants per unit time) at time :math:`t`,
+:math:`\Delta t` is the length of a simulation time step, and
+:math:`1_A` is the indicator function of the set :math:`A`.
+
+Let :math:`I_{g,t}` denote the **total population incidence rate** of
+Alzheimer's disease and other dementias in demographic group :math:`g`
+at time :math:`t`, i.e.,
+
+.. math::
+
+  I_{g,y} = \frac{\text{# of incident cases of AD}}
+    {\text{person-years in total population}}.
+
+Then the entrance rate of new
