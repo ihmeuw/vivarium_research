@@ -52,30 +52,30 @@ Model Scale
 ---------------------
 
 Let :math:`t_0` be the starting time of our simulation, let
-:math:`P_{t_0}` be the size of our simulated population at
+:math:`X_{t_0}` be the size of our simulated population at
 initialization (i.e., the initial population size per draw specified in
-the concept model), and let :math:`P^\text{real}_{t_0}` be the
+the concept model), and let :math:`X^\text{real}_{t_0}` be the
 corresponding real-world population at time :math:`t_0` that our
 simulation is supposed to represent. The **model scale**, :math:`S`, of
-our simulation is defined to be :math:`S = P_{t_0} /
-P^\text{real}_{t_0}`. We will use the model scale
+our simulation is defined to be :math:`S = X_{t_0} /
+X^\text{real}_{t_0}`. We will use the model scale
 both for initializing our simulated population and for adding new
 simulants.
 
-In our case, :math:`P^\text{real}_{t_0}` is the population of people
+In our case, :math:`X^\text{real}_{t_0}` is the population of people
 with Alzheimer's disease and other dementias at time :math:`t_0` in a
 particular country. We can compute this as
 
 .. math::
 
-  P^\text{real}_{t_0} = p_\text{Alz} \cdot \hat{P}^\text{GBD}_{t_0},
+  X^\text{real}_{t_0} = p_\text{Alz} \cdot \hat{X}^\text{GBD}_{t_0},
 
-where :math:`\hat{P}^\text{GBD}_{t_0}` is the total population at time
+where :math:`\hat{X}^\text{GBD}_{t_0}` is the total population at time
 :math:`t_0` in our simulated location according to GBD, and
 :math:`p_\text{Alz}` is the prevalence of Alzheimer's disease and other
 dementias across all age groups and sexes in that location. Note that
-the model scale can also be computed as :math:`S = \hat P_{t_0} / \hat
-P^\text{GBD}_{t_0}`, where :math:`\hat P_{t_0} = P_{t_0} / p_\text{Alz}`
+the model scale can also be computed as :math:`S = \hat X_{t_0} / \hat
+X^\text{GBD}_{t_0}`, where :math:`\hat X_{t_0} = X_{t_0} / p_\text{Alz}`
 is the size of an **imagined total model population** including all
 people with and without Alzheiemer's disease, of which those with
 Alzheimer's are the ones who appear in our simulation. Putting
@@ -84,7 +84,7 @@ everything together,
 .. math::
   :label: model_scale_eq
 
-  S = \frac{P_{t_0}}{p_\text{Alz}\cdot \hat{P}^\text{GBD}_{t_0}},
+  S = \frac{X_{t_0}}{p_\text{Alz}\cdot \hat{X}^\text{GBD}_{t_0}},
 
 which computes the model scale in terms of known parameters.
 
@@ -97,18 +97,18 @@ demographic group :math:`g` and time :math:`t`, we generalize the
 notation in the previous section to define the following
 populations in demographic group :math:`g` at time :math:`t`:
 
-* :math:`P_{g,t}` = the number of simulants in group :math:`g` at time
+* :math:`X_{g,t}` = the number of simulants in group :math:`g` at time
   :math:`t`
-* :math:`P^\text{real}_{g,t}` = the real population corresponding to our
-  simulated population :math:`P_{g,t}`
-* :math:`\hat P_{g,t}` = the imagined total model population in group
+* :math:`X^\text{real}_{g,t}` = the real population corresponding to our
+  simulated population :math:`X_{g,t}`
+* :math:`\hat X_{g,t}` = the imagined total model population in group
   :math:`g`, including people with and without AD, of which
-  :math:`P_{g,t}` counts the subset with AD
-* :math:`\hat P^\text{GBD}_{g,t}` = the total real population in group
+  :math:`X_{g,t}` counts the subset with AD
+* :math:`\hat X^\text{GBD}_{g,t}` = the total real population in group
   :math:`g` at time :math:`t` according to GBD
 
 
-We need to determine :math:`P_{g,t_0}` (the initial simulated
+We need to determine :math:`X_{g,t_0}` (the initial simulated
 population) for each demographic group :math:`g`. Let :math:`p_{g,t}` be
 the prevalence of Alzheimer's disease and other dementias in demographic
 group :math:`g` at time :math:`t,` for a given location. Two relations
@@ -117,11 +117,11 @@ among the above quantities are:
 .. math::
 
   \begin{align*}
-  P_{g,t} = S \cdot P^\text{real}_{g,t}
+  X_{g,t} = S \cdot X^\text{real}_{g,t}
   \quad\text{and}\quad
-  P^\text{real}_{g,t} = p_{g,t} \cdot \hat P^\text{GBD}_{g,t}.
-  % P_{g,t} &= p_g \cdot \hat P_{g,t} \\
-  % \hat P_{g,t} & = S \cdot \hat P^\text{GBD}_{g,t}
+  X^\text{real}_{g,t} = p_{g,t} \cdot \hat X^\text{GBD}_{g,t}.
+  % X_{g,t} &= p_g \cdot \hat X_{g,t} \\
+  % \hat X_{g,t} & = S \cdot \hat X^\text{GBD}_{g,t}
   \end{align*}
 
 Therefore, at time :math:`t_0`,
@@ -129,11 +129,11 @@ Therefore, at time :math:`t_0`,
 .. math::
   :label: initial_pop_eq
 
-  P_{g,t_0}
-  = S \cdot P^\text{real}_{g,t_0}
-  = S\cdot p_{g,t_0} \cdot \hat P^\text{GBD}_{g,t_0}
-  = P_{t_0} \cdot \frac{p_{g,t_0}}{p_\text{Alz}}
-    \cdot \frac{\hat P^\text{GBD}_{g,t_0}}{\hat P^\text{GBD}_{t_0}},
+  X_{g,t_0}
+  = S \cdot X^\text{real}_{g,t_0}
+  = S\cdot p_{g,t_0} \cdot \hat X^\text{GBD}_{g,t_0}
+  = X_{t_0} \cdot \frac{p_{g,t_0}}{p_\text{Alz}}
+    \cdot \frac{\hat X^\text{GBD}_{g,t_0}}{\hat X^\text{GBD}_{t_0}},
 
 where the final equality follows from plugging in formula
 :eq:`model_scale_eq` for the model scale :math:`S`. This equation tells
@@ -146,11 +146,11 @@ known parameters.
 
   .. math::
 
-    P_{g,t_0} = P_{t_0}
+    X_{g,t_0} = X_{t_0}
     \cdot \frac{\text{# of real people in subgroup $g$ with Alzheimer's}}
       {\text{# of real people in whole population with Alzheimer's}}.
 
-  Thus, we could compute :math:`P_{g,t_0}` using prevalence counts from
+  Thus, we could compute :math:`X_{g,t_0}` using prevalence counts from
   GBD instead of prevalence rates.
 
   To verify that :eq:`initial_pop_eq` gives us the correct total number of
@@ -159,17 +159,17 @@ known parameters.
   .. math::
 
     \begin{align*}
-    \sum_g P_{g,t_0}
-    = \sum_g P_{t_0}
-      \cdot \frac{p_{g,t_0} \cdot \hat P^\text{GBD}_{g,t_0}}
-      {p_\text{Alz} \cdot \hat P^\text{GBD}_{t_0}}
-    &= P_{t_0} \cdot \sum_g
-      \frac{P^\text{real}_{g,t_0}}{P^\text{real}_{t_0}} \\
-    &= P_{t_0} \cdot
-      \frac{\sum_g P^\text{real}_{g,t_0}}{P^\text{real}_{t_0}}
-    = P_{t_0} \cdot
-      \frac{P^\text{real}_{t_0}}{P^\text{real}_{t_0}}
-    = P_{t_0}.
+    \sum_g X_{g,t_0}
+    = \sum_g X_{t_0}
+      \cdot \frac{p_{g,t_0} \cdot \hat X^\text{GBD}_{g,t_0}}
+      {p_\text{Alz} \cdot \hat X^\text{GBD}_{t_0}}
+    &= X_{t_0} \cdot \sum_g
+      \frac{X^\text{real}_{g,t_0}}{X^\text{real}_{t_0}} \\
+    &= X_{t_0} \cdot
+      \frac{\sum_g X^\text{real}_{g,t_0}}{X^\text{real}_{t_0}}
+    = X_{t_0} \cdot
+      \frac{X^\text{real}_{t_0}}{X^\text{real}_{t_0}}
+    = X_{t_0}.
     \end{align*}
 
 Adding New Simulants
