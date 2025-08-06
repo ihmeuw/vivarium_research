@@ -219,7 +219,7 @@ The basic plan for the design of the simulation is as follows:
     -
   * - Simulation end date
     - 2100-12-31
-    - 76-year simulation period (forecasted data goes through year 2100)
+    - 76-year simulation period
   * - Observation start date
     - 2025-01-01
     - No burn-in period
@@ -242,7 +242,7 @@ The basic plan for the design of the simulation is as follows:
   * - Age end (Observation)
     - 125 years or death
     -
-  * - Population size per draw
+  * - Initial population size per draw
     - 100,000 simulants
     -
   * - Number of Draws
