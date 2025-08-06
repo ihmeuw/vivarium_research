@@ -938,11 +938,36 @@ research may be attempting to elucidate and alleviate. Race-conscious research, 
 focus from race to racism as a key determinant of illness and health. For examples of outdated race-based practices in medicine, 
 and their race-conscious alternatives, see Table 1 from Cerdeña et al.’s 2020 paper [Cerdeña_2020]_. 
 
+
+Reporting results accurately
+----------------------------
+
+We often need to be very concise, and can’t surface all the complexity of race and ethnicity every time we reference them. 
+So, we take the following approach:
+
+Somewhere in the paper/report, we explain in a fair amount of detail the race and ethnicity categorizations we used, why we used them that way, etc. 
+For example, this could be in a methods appendix (as in the VEHSS papers) or a technical report that accompanies a PowerPoint presentation of results.
+
+In each part that “stands alone” (e.g. each document or presentation; see next paragraph) we either:
+
+- Define our resulting indicator the first time we reference it, then abbreviate it; the abbreviation does not need to entirely capture what the indicator means, but it should not be a common word/phrase that someone would likely assume has a different meaning.
+- If the previous is not possible (e.g. in an abstract where words are extremely limited), we use the shortest term for our resulting indicator that both conveys its main limitations and does not need a definition.
+
+A part “stands alone” if it is likely to be viewed/read separately from other parts, and a reader would expect it to be self-contained: referencing other resources where necessary, but not using terms or ideas from elsewhere without reference or explanation. 
+Think of acronyms: it is acceptable to use an acronym in the discussion section of a journal article that was introduced in the methods section of that article, because it is part of the same document. 
+But a journal editor would not allow you to use an acronym in the discussion section of a journal article that is only introduced in the supplementary material. 
+Most journal editors also consider tables and figures to stand alone in this way (i.e. they cannot use acronyms from the main text), so we follow that convention with our race and ethnicity terminology.
+
+The following section gives more concrete recommendations for the more detailed description of the race and ethnicity categorizations used in our research.
+
 Key recommendations from other sources
 --------------------------------------
 
 Here we have collected recommendations from various experts and guides advocating for new standards of communication 
-regarding racial health disparities.
+regarding racial health disparities. 
+The detailed description of our methods regarding race and ethnicity can be centralized in one place, or spread throughout the paper or report. 
+Wherever it is, it should include most of the considerations described in earlier sections of this guide: defining the variables of interest for our research question and noting the difficulty of disentangling factors from each other, giving details about the categorizations of race and ethnicity in the data sources used.
+
 
 1. **Use a health equity lens when framing information about health disparities** [Calanan_2023]_.
 
@@ -963,6 +988,9 @@ regarding racial health disparities.
 3. **Cite the experts, particularly scholars of color whose work forms the basis of the field’s knowledge on racism and its effects** 
 [Boyd_2020]_.
 
+  If we are not able to present quantitative results for racially and/or ethnically marginalized populations, but have reason to believe that (any) racial and/or ethnic groups are especially impacted by the health issues we are studying, we can cite relevant quantitative or qualitative research about disparities, for example about a similar condition, risk factors, or healthcare access. 
+  Unfortunately, we will have reason to believe this for just about any health condition in a US context, since, as described elsewhere on this page, there are well-documented racial and ethnic disparities across various outcomes and healthcare access. 
+  If we can, cite some of the research that is cited in this guide! This gives curious readers a starting point to learn more, and gives credit to the researchers whose ideas we are building on.
 
 4. **Explicitly define race during \[study\] design, and specify the reason for its use in the study** [Boyd_2020]_. 
     
@@ -985,14 +1013,6 @@ regarding racial health disparities.
     - *Policy advocacy*: Research informed by CRT should not only aim to understand and document disparities but also to drive change. This involves advocating for policies that address the root causes of racial disparities in health, such as economic inequality, housing, education, and access to healthcare. Researchers can play a role in informing policy, engaging in public discourse, and supporting community-led initiatives.
     - *Reflective practice*:  Engage in ongoing reflection about your own positions, biases, and the power dynamics in your work. This includes being open to critique, actively seeking diverse perspectives, and being committed to anti-racist practices both personally and professionally.
   
-
-Reporting results accurately
-----------------------------
-
-    Use recommendations from sex/gender guide to fill out this section. This section should include 
-    a. Outline goals when we present our race/ethnicity-related findings
-    b. General strategy (ie explain fully in standalone parts of paper, otherwise use shorthand) - Recs for detailed description of methods with examples and recs for abbreviated description with examples 
-
 4.0 References
 ++++++++++++++
 
