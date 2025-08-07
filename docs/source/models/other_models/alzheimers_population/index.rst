@@ -229,51 +229,31 @@ which is the **total population incidence rate**:
 
 This is the raw AD incidence rate we pull from GBD (*not* the susceptible
 population incidence rate usually calculated by Vivarium Inputs).
-If we assume that the population :math:`X^\text{real}_{g,t}` is
+If we assume that the population :math:`\hat X^\text{real}_{g,t}` is
 constant throughout the year :math:`y(t)`, then it is equal to its
 time-average over the year:
 
 .. math::
 
-  X^\text{real}_{g,t}
+  \hat X^\text{real}_{g,t}
   = \text{average population in group $g$ during the year $y(t)$}.
 
-This is the population we pull from GBD using get_population.
+This is the population we pull from GBD using get_population. Thus,
+:eq:`AD_entrance_rate_eq` expresses the entrance rate
+:math:`\lambda_{g,t}` in terms of quantities we can estimate from data.
 
-Recall from the previous section that :math:`X^\text{real}_{g,t}` is the
-number of people with AD in the real population (i.e., the population
-our simulation represents). Since our simulation is scaled down by a
-factor of :math:`S`, the rate at which we want to add simulants
-is
+.. note::
 
-.. math::
+  Based on plots from GBD compare, we will make the simplifying
+  assumption that for each demographic group :math:`g`, the Alzheimer's
+  incidence rate :math:`i_{g,t}` does not change over time. Thus, we
+  will use GBD 2021 data and assume that :math:`i_{g,t}` equals the AD
+  incidence rate in 2021 from for all times :math:`t`.
 
-  \lambda_{g,t} = S \cdot \frac{d X^\text{real}_{g,t}}{dt}.
-
-
-Let :math:`y(t)` denote the year containing the time :math:`t`, and let
-:math:`\hat X^{GBD}_{y(t)}` denote the average population in the year
-:math:`y(t)`.
-
-Let :math:`I_{g,t}` denote the **total population
-incidence hazard** of
-Alzheimer's disease and other dementias in demographic group :math:`g`
-in the year :math:`y(t)`, i.e., :math:`I_{g,t} = A_g'(t) / \hat
-X^\text{real}_{g,t}`, where :math:`A_g(t)` is the number of people with AD in
-group group :math:`g` at time :math:`t`.
-
-
-.. math::
-
-  I_{g,t}
-  = \frac{\text{# of incident cases of AD in year } y(t)}
-    {\text{total person-years in in year $y(t)$}}
-  = \frac{\text{# of incident cases of AD in year } y(t)}
-    {\hat X^\text{real}_{y(t)}}.
-
-Then the entrance rate of new simulants is:
-
-.. math::
-
-  \lambda_{g,t}
-  = S \cdot I_{g,t} \cdot \hat X^\text{real}_{g, y(t)}.
+  For Model 2 of the Alzheimer's simulation, we will use GBD 2021 data
+  and assume that the total population :math:`\hat X^\text{real}_{g,t}`
+  equals the average population in 2021 for all times :math:`t`. For
+  Models 3 and higher, we will use forecasted data from FHS to estimate
+  :math:`\hat X^\text{real}_{g,t}` as the average population in year
+  :math:`y(t)` for years 2025 through 2050, then assume the total
+  population remains constant thereafter.
