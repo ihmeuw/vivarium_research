@@ -68,23 +68,22 @@ particular country. We can compute this as
 
 .. math::
 
-  X^\text{real}_{t_0} = p_\text{Alz} \cdot \hat{X}^\text{real}_{t_0},
+  X^\text{real}_{t_0} = p_\text{Alz} \cdot Y^\text{real}_{t_0},
 
-where :math:`\hat{X}^\text{real}_{t_0}` is the total population at time
+where :math:`Y^\text{real}_{t_0}` is the total population at time
 :math:`t_0` in our simulated location according to GBD, and
 :math:`p_\text{Alz}` is the prevalence of Alzheimer's disease and other
 dementias across all age groups and sexes in that location. Note that
-the model scale can also be computed as :math:`S = \hat X_{t_0} / \hat
-X^\text{real}_{t_0}`, where :math:`\hat X_{t_0} = X_{t_0} / p_\text{Alz}`
-is the size of an **imagined total model population** including all
-people with and without Alzheiemer's disease, of which those with
-Alzheimer's are the ones who appear in our simulation. Putting
-everything together,
+the model scale can also be computed as :math:`S = Y_{t_0} /
+Y^\text{real}_{t_0}`, where :math:`Y_{t_0} = X_{t_0} / p_\text{Alz}` is
+the size of an **imagined total model population** including all people
+with and without Alzheiemer's disease, of which those with Alzheimer's
+are the ones who appear in our simulation. Putting everything together,
 
 .. math::
   :label: model_scale_eq
 
-  S = \frac{X_{t_0}}{p_\text{Alz}\cdot \hat{X}^\text{real}_{t_0}},
+  S = \frac{X_{t_0}}{p_\text{Alz}\cdot Y^\text{real}_{t_0}},
 
 which computes the model scale in terms of known parameters.
 
@@ -101,10 +100,10 @@ populations in demographic group :math:`g` at time :math:`t`:
   :math:`t`
 * :math:`X^\text{real}_{g,t}` = the real population corresponding to our
   simulated population :math:`X_{g,t}`
-* :math:`\hat X_{g,t}` = the imagined total model population in group
+* :math:`Y_{g,t}` = the imagined total model population in group
   :math:`g`, including people with and without AD, of which
   :math:`X_{g,t}` counts the subset with AD
-* :math:`\hat X^\text{real}_{g,t}` = the total real population in group
+* :math:`Y^\text{real}_{g,t}` = the total real population in group
   :math:`g` at time :math:`t` according to GBD
 
 
@@ -119,9 +118,9 @@ among the above quantities are:
   \begin{align*}
   X_{g,t} = S \cdot X^\text{real}_{g,t}
   \quad\text{and}\quad
-  X^\text{real}_{g,t} = p_{g,t} \cdot \hat X^\text{real}_{g,t}.
-  % X_{g,t} &= p_g \cdot \hat X_{g,t} \\
-  % \hat X_{g,t} & = S \cdot \hat X^\text{real}_{g,t}
+  X^\text{real}_{g,t} = p_{g,t} \cdot Y^\text{real}_{g,t}.
+  % X_{g,t} &= p_g \cdot Y_{g,t} \\
+  % Y_{g,t} & = S \cdot Y^\text{real}_{g,t}
   \end{align*}
 
 (For :math:`t\ne t_0`, the first relation assumes that our simulated
@@ -133,9 +132,9 @@ Therefore, at time :math:`t_0`,
 
   X_{g,t_0}
   = S \cdot X^\text{real}_{g,t_0}
-  = S\cdot p_{g,t_0} \cdot \hat X^\text{real}_{g,t_0}
+  = S\cdot p_{g,t_0} \cdot Y^\text{real}_{g,t_0}
   = X_{t_0} \cdot \frac{p_{g,t_0}}{p_\text{Alz}}
-    \cdot \frac{\hat X^\text{real}_{g,t_0}}{\hat X^\text{real}_{t_0}},
+    \cdot \frac{Y^\text{real}_{g,t_0}}{Y^\text{real}_{t_0}},
 
 where the final equality follows from plugging in formula
 :eq:`model_scale_eq` for the model scale :math:`S`. This equation tells
@@ -163,8 +162,8 @@ known parameters.
     \begin{align*}
     \sum_g X_{g,t_0}
     = \sum_g X_{t_0}
-      \cdot \frac{p_{g,t_0} \cdot \hat X^\text{real}_{g,t_0}}
-      {p_\text{Alz} \cdot \hat X^\text{real}_{t_0}}
+      \cdot \frac{p_{g,t_0} \cdot Y^\text{real}_{g,t_0}}
+      {p_\text{Alz} \cdot Y^\text{real}_{t_0}}
     &= X_{t_0} \cdot \sum_g
       \frac{X^\text{real}_{g,t_0}}{X^\text{real}_{t_0}} \\
     &= X_{t_0} \cdot
@@ -213,15 +212,16 @@ available data:
 
   \lambda_{g,t}
   = S \cdot A_g'(t)
-  = S \cdot \frac{A_g'(t)}{\hat X^\text{real}_{g,t}}
-    \cdot \hat X^\text{real}_{g,t}
-  = S \cdot i_{g,t} \cdot \hat X^\text{real}_{g,t},
+  = S \cdot \frac{A_g'(t)}{Y^\text{real}_{g,t}}
+    \cdot Y^\text{real}_{g,t}
+  = S \cdot i_{g,t} \cdot Y^\text{real}_{g,t},
 
-where :math:`i_{g,t} = A_g'(t) /\hat X^\text{real}_{g,t}` is the **total
+where :math:`i_{g,t} = A_g'(t) /Y^\text{real}_{g,t}` is the **total
 population incidence hazard** of AD in demographic group :math:`g` at
 time :math:`t`. We know the model scale :math:`S` from
 :eq:`model_scale_eq` above, and we can estimate the quantities
-:math:`i_{g,t}` and :math:`X^\text{real}_{g,t}` from GBD as follows.
+:math:`i_{g,t}` and :math:`Y^\text{real}_{g,t}` from GBD as
+follows.
 
 Let :math:`y(t)` denote the year to which time :math:`t` belongs. If we
 assume that the hazard :math:`i_{g,t}` is constant throughout the year
@@ -236,13 +236,13 @@ which is the **total population incidence rate**:
 
 This is the raw AD incidence rate we pull from GBD (*not* the susceptible
 population incidence rate usually calculated by Vivarium Inputs).
-If we assume that the population :math:`\hat X^\text{real}_{g,t}` is
+If we assume that the population :math:`Y^\text{real}_{g,t}` is
 constant throughout the year :math:`y(t)`, then it is equal to its
 time-average over the year:
 
 .. math::
 
-  \hat X^\text{real}_{g,t}
+  Y^\text{real}_{g,t}
   = \text{average population in group $g$ during the year $y(t)$}.
 
 This is the population we pull from GBD using get_population. Thus,
@@ -258,10 +258,10 @@ This is the population we pull from GBD using get_population. Thus,
   incidence rate in 2021 from for all times :math:`t`.
 
   For Model 2 of the Alzheimer's simulation, we will use GBD 2021 data
-  and assume that the total population :math:`\hat X^\text{real}_{g,t}`
+  and assume that the total population :math:`Y^\text{real}_{g,t}`
   equals the average population in 2021 for all times :math:`t`. For
   Models 3 and higher, we will use forecasted data from FHS to estimate
-  :math:`\hat X^\text{real}_{g,t}` as the average population in year
+  :math:`Y^\text{real}_{g,t}` as the average population in year
   :math:`y(t)` for years 2025 through 2050, then assume the total
   population remains constant thereafter.
 
