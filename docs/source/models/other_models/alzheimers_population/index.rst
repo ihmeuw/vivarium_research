@@ -205,8 +205,8 @@ the entrance rate :math:`\lambda_{g,t}`.
 Calculating entrance rate via AD incidence rate
 -----------------------------------------------
 
-We rewrite this in terms of quantities that we can estimate from the
-available data:
+To calculate :math:`\lambda_{g,t}`, we rewrite it in terms of quantities
+that we can estimate from the available data:
 
 .. math::
   :label: AD_entrance_rate_eq
@@ -267,7 +267,7 @@ This is the population we pull from GBD using get_population. Thus,
   population remains constant thereafter.
 
 To summarize, here is the algorithm for adding new simulants at time
-:math:`t`, assuming that :math:`t` is a step time of the simulation:
+:math:`t`, assuming that :math:`t` is a step time of the simulation: ...
 
 Alternative view using incidence count
 --------------------------------------
@@ -283,6 +283,9 @@ assume :math:`A_g'(t)` is constant during the year :math:`y(t)`, then
   = \frac{\text{# of incident cases of AD in group $g$ in year $y(t)$}}
     {\text{1 year}}.
 
-Therefore, the expected number of simulants we want...
-
-We can pull the number of incident cases of AD from GBD.
+This ends up being equivalent to the method using incidence rates above,
+but whereas the *count* of incident cases is likely to vary considerably
+due to changing demographics, the incidence *rate* of AD is likely to
+remain fairly stable over time. Thus, using using the incidence rate and
+the total population is a more appropriate way to use the available
+data.
