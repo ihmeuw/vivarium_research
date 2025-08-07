@@ -252,11 +252,11 @@ This is the population we pull from GBD using get_population. Thus,
 
 .. note::
 
-  Based on plots from GBD compare, we will make the simplifying
-  assumption that for each demographic group :math:`g`, the Alzheimer's
-  incidence rate :math:`i_{g,t}` does not change over time. Thus, we
-  will use GBD 2021 data and assume that :math:`i_{g,t}` equals the AD
-  incidence rate in 2021 from for all times :math:`t`.
+  Based on `plots of AD incidence from GBD Compare`_, we will make the
+  simplifying assumption that for each demographic group :math:`g`, the
+  Alzheimer's incidence rate :math:`i_{g,t}` does not change over time.
+  Thus, we will use GBD 2021 data and assume that :math:`i_{g,t}` equals
+  the AD incidence rate in 2021 from for all times :math:`t`.
 
   For Model 2 of the Alzheimer's simulation, we will use GBD 2021 data
   and assume that the total population :math:`Y^\text{real}_{g,t}`
@@ -265,6 +265,8 @@ This is the population we pull from GBD using get_population. Thus,
   :math:`Y^\text{real}_{g,t}` as the average population in year
   :math:`y(t)` for years 2025 through 2050, then assume the total
   population remains constant thereafter.
+
+.. _plots of AD incidence from GBD Compare: http://ihmeuw.org/739c
 
 Implementation and data tables
 --------------------------------------
