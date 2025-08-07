@@ -126,7 +126,8 @@ Assumptions and limitations
 - We assume the effect of the intervention persists through the end of the period for which we track hemoglobin status
 - We do not consider effect modification by baseline hemoglobin status. In reality, the effect of IV iron may be greater among women with lower baseline hemoglobin levels.
 - We assume that the effect size of IV iron on hemoglobin concentrations as reported in the REVAMP study (which took place in Malawi) is representative of the effect size in Nigeria and Ethiopia, and that the value reported by the RAPID study (which took place in India) is representative of the effect size in Pakistan.
-- We assume that IV iron is only administered to those with low ferritin levels, which is consistent with the RAPID study [Derman-et-al-2025] eligibility criteria but not the REVAMP study [Pasricha-et-al-2023]_ (see todo in Hemoglobin exposure section).
+- For the countries where our effect size is informed by the REVAMP study, we assume that the effect of IV iron among those with low ferritin levels (those eligible in our simulation) is the same as the effect of IV iron among people not screened for ferritin (the REVAMP study population). 
+  In reality, we'd expect that people with low ferritin would benefit more, so we may underestimate the impact of the intervention.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
