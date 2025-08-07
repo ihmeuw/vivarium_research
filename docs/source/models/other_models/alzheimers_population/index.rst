@@ -68,14 +68,14 @@ particular country. We can compute this as
 
 .. math::
 
-  X^\text{real}_{t_0} = p_\text{Alz} \cdot Y^\text{real}_{t_0},
+  X^\text{real}_{t_0} = p_\text{AD} \cdot Y^\text{real}_{t_0},
 
 where :math:`Y^\text{real}_{t_0}` is the total population at time
 :math:`t_0` in our simulated location according to GBD, and
-:math:`p_\text{Alz}` is the prevalence of Alzheimer's disease and other
+:math:`p_\text{AD}` is the prevalence of Alzheimer's disease and other
 dementias across all age groups and sexes in that location. Note that
 the model scale can also be computed as :math:`S = Y_{t_0} /
-Y^\text{real}_{t_0}`, where :math:`Y_{t_0} = X_{t_0} / p_\text{Alz}` is
+Y^\text{real}_{t_0}`, where :math:`Y_{t_0} = X_{t_0} / p_\text{AD}` is
 the size of an **imagined total model population** including all people
 with and without Alzheiemer's disease, of which those with Alzheimer's
 are the ones who appear in our simulation. Putting everything together,
@@ -83,7 +83,7 @@ are the ones who appear in our simulation. Putting everything together,
 .. math::
   :label: model_scale_eq
 
-  S = \frac{X_{t_0}}{p_\text{Alz}\cdot Y^\text{real}_{t_0}},
+  S = \frac{X_{t_0}}{p_\text{AD}\cdot Y^\text{real}_{t_0}},
 
 which computes the model scale in terms of known parameters.
 
@@ -133,7 +133,7 @@ Therefore, at time :math:`t_0`,
   X_{g,t_0}
   = S \cdot X^\text{real}_{g,t_0}
   = S\cdot p_{g,t_0} \cdot Y^\text{real}_{g,t_0}
-  = X_{t_0} \cdot \frac{p_{g,t_0}}{p_\text{Alz}}
+  = X_{t_0} \cdot \frac{p_{g,t_0}}{p_\text{AD}}
     \cdot \frac{Y^\text{real}_{g,t_0}}{Y^\text{real}_{t_0}},
 
 where the final equality follows from plugging in formula
@@ -163,7 +163,7 @@ known parameters.
     \sum_g X_{g,t_0}
     = \sum_g X_{t_0}
       \cdot \frac{p_{g,t_0} \cdot Y^\text{real}_{g,t_0}}
-      {p_\text{Alz} \cdot Y^\text{real}_{t_0}}
+      {p_\text{AD} \cdot Y^\text{real}_{t_0}}
     &= X_{t_0} \cdot \sum_g
       \frac{X^\text{real}_{g,t_0}}{X^\text{real}_{t_0}} \\
     &= X_{t_0} \cdot
@@ -196,10 +196,11 @@ at which we want to add simulants is
 
 .. math::
 
-  \lambda_{g,t} = S \cdot A_g'(t).
+  \lambda_{g,t} = S \cdot A_g'(t),
 
-The following subsection describes how we will calculate the entrance
-rate.
+where :math:`A_g'(t)` is the derivative of :math:`A_g(t)` with respect
+to :math:`t`. The following subsection describes how we will calculate
+the entrance rate :math:`\lambda_{g,t}`.
 
 Calculating entrance rate via AD incidence rate
 -----------------------------------------------
