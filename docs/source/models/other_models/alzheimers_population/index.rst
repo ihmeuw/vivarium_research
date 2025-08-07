@@ -235,11 +235,11 @@ which is the **total population incidence rate**:
   = \frac{\text{# of incident cases of AD in group $g$ in year $y(t)$}}
     {\text{total person-years in group $g$ in year $y(t)$}}.
 
-This is the raw AD incidence rate we pull from GBD (*not* the susceptible
-population incidence rate usually calculated by Vivarium Inputs).
-If we assume that the population :math:`Y^\text{real}_{g,t}` is
-constant throughout the year :math:`y(t)`, then it is equal to its
-time-average over the year:
+This is the :ref:`raw AD incidence rate we pull from GBD <total
+population incidence rate>` (*not* the susceptible population incidence
+rate usually calculated by Vivarium Inputs). If we assume that the
+population :math:`Y^\text{real}_{g,t}` is constant throughout the year
+:math:`y(t)`, then it is equal to its time-average over the year:
 
 .. math::
 
