@@ -118,7 +118,7 @@ Hemoglobin exposure
 
 .. note::
 
-  Unlike the REVAMP study, the RAPID study did include ferritin levels (serum ferritin <30 ng/mL) as an eligibility criterium for receiving IV iron, which is consistent with our assumption that IV iron is only administered to those with low ferritin levels.
+  Unlike the REVAMP study, the RAPID study did include ferritin levels (serum ferritin <30 ng/mL) as an eligibility criterion for receiving IV iron, which is consistent with our assumption that IV iron is only administered to those with low ferritin levels.
 
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
