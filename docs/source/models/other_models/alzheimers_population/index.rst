@@ -68,14 +68,14 @@ particular country. We can compute this as
 
 .. math::
 
-  X^\text{real}_{t_0} = p_\text{Alz} \cdot \hat{X}^\text{GBD}_{t_0},
+  X^\text{real}_{t_0} = p_\text{Alz} \cdot \hat{X}^\text{real}_{t_0},
 
-where :math:`\hat{X}^\text{GBD}_{t_0}` is the total population at time
+where :math:`\hat{X}^\text{real}_{t_0}` is the total population at time
 :math:`t_0` in our simulated location according to GBD, and
 :math:`p_\text{Alz}` is the prevalence of Alzheimer's disease and other
 dementias across all age groups and sexes in that location. Note that
 the model scale can also be computed as :math:`S = \hat X_{t_0} / \hat
-X^\text{GBD}_{t_0}`, where :math:`\hat X_{t_0} = X_{t_0} / p_\text{Alz}`
+X^\text{real}_{t_0}`, where :math:`\hat X_{t_0} = X_{t_0} / p_\text{Alz}`
 is the size of an **imagined total model population** including all
 people with and without Alzheiemer's disease, of which those with
 Alzheimer's are the ones who appear in our simulation. Putting
@@ -84,7 +84,7 @@ everything together,
 .. math::
   :label: model_scale_eq
 
-  S = \frac{X_{t_0}}{p_\text{Alz}\cdot \hat{X}^\text{GBD}_{t_0}},
+  S = \frac{X_{t_0}}{p_\text{Alz}\cdot \hat{X}^\text{real}_{t_0}},
 
 which computes the model scale in terms of known parameters.
 
@@ -104,7 +104,7 @@ populations in demographic group :math:`g` at time :math:`t`:
 * :math:`\hat X_{g,t}` = the imagined total model population in group
   :math:`g`, including people with and without AD, of which
   :math:`X_{g,t}` counts the subset with AD
-* :math:`\hat X^\text{GBD}_{g,t}` = the total real population in group
+* :math:`\hat X^\text{real}_{g,t}` = the total real population in group
   :math:`g` at time :math:`t` according to GBD
 
 
@@ -119,9 +119,9 @@ among the above quantities are:
   \begin{align*}
   X_{g,t} = S \cdot X^\text{real}_{g,t}
   \quad\text{and}\quad
-  X^\text{real}_{g,t} = p_{g,t} \cdot \hat X^\text{GBD}_{g,t}.
+  X^\text{real}_{g,t} = p_{g,t} \cdot \hat X^\text{real}_{g,t}.
   % X_{g,t} &= p_g \cdot \hat X_{g,t} \\
-  % \hat X_{g,t} & = S \cdot \hat X^\text{GBD}_{g,t}
+  % \hat X_{g,t} & = S \cdot \hat X^\text{real}_{g,t}
   \end{align*}
 
 (For :math:`t\ne t_0`, the first relation assumes that our simulated
@@ -133,9 +133,9 @@ Therefore, at time :math:`t_0`,
 
   X_{g,t_0}
   = S \cdot X^\text{real}_{g,t_0}
-  = S\cdot p_{g,t_0} \cdot \hat X^\text{GBD}_{g,t_0}
+  = S\cdot p_{g,t_0} \cdot \hat X^\text{real}_{g,t_0}
   = X_{t_0} \cdot \frac{p_{g,t_0}}{p_\text{Alz}}
-    \cdot \frac{\hat X^\text{GBD}_{g,t_0}}{\hat X^\text{GBD}_{t_0}},
+    \cdot \frac{\hat X^\text{real}_{g,t_0}}{\hat X^\text{real}_{t_0}},
 
 where the final equality follows from plugging in formula
 :eq:`model_scale_eq` for the model scale :math:`S`. This equation tells
@@ -163,8 +163,8 @@ known parameters.
     \begin{align*}
     \sum_g X_{g,t_0}
     = \sum_g X_{t_0}
-      \cdot \frac{p_{g,t_0} \cdot \hat X^\text{GBD}_{g,t_0}}
-      {p_\text{Alz} \cdot \hat X^\text{GBD}_{t_0}}
+      \cdot \frac{p_{g,t_0} \cdot \hat X^\text{real}_{g,t_0}}
+      {p_\text{Alz} \cdot \hat X^\text{real}_{t_0}}
     &= X_{t_0} \cdot \sum_g
       \frac{X^\text{real}_{g,t_0}}{X^\text{real}_{t_0}} \\
     &= X_{t_0} \cdot
@@ -259,7 +259,7 @@ Let :math:`I_{g,t}` denote the **total population
 incidence hazard** of
 Alzheimer's disease and other dementias in demographic group :math:`g`
 in the year :math:`y(t)`, i.e., :math:`I_{g,t} = A_g'(t) / \hat
-X^\text{GBD}_{g,t}`, where :math:`A_g(t)` is the number of people with AD in
+X^\text{real}_{g,t}`, where :math:`A_g(t)` is the number of people with AD in
 group group :math:`g` at time :math:`t`.
 
 
@@ -269,11 +269,11 @@ group group :math:`g` at time :math:`t`.
   = \frac{\text{# of incident cases of AD in year } y(t)}
     {\text{total person-years in in year $y(t)$}}
   = \frac{\text{# of incident cases of AD in year } y(t)}
-    {\hat X^\text{GBD}_{y(t)}}.
+    {\hat X^\text{real}_{y(t)}}.
 
 Then the entrance rate of new simulants is:
 
 .. math::
 
   \lambda_{g,t}
-  = S \cdot I_{g,t} \cdot \hat X^\text{GBD}_{g, y(t)}.
+  = S \cdot I_{g,t} \cdot \hat X^\text{real}_{g, y(t)}.
