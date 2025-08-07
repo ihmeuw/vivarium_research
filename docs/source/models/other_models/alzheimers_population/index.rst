@@ -124,6 +124,8 @@ among the above quantities are:
   % \hat X_{g,t} & = S \cdot \hat X^\text{GBD}_{g,t}
   \end{align*}
 
+(For :math:`t\ne t_0`, the first relation assumes that our simulated
+population accurately tracks the real-world population over time.)
 Therefore, at time :math:`t_0`,
 
 .. math::
@@ -178,20 +180,100 @@ Adding New Simulants
 Let :math:`N_{g,t}` denote the number of new simulants in demographic
 group :math:`g` that we want to add to the simulation at time :math:`t`.
 We will assume that :math:`N_{g,t}` is a Poisson random variable with
-mean
-:math:`\lambda_{g,t} \cdot \Delta t \cdot 1_{\{\text{simulation step times}\}}(t)`,
-where :math:`\lambda_{g,t}` is the entrance rate of new simulants
-(measured in count of simulants per unit time) at time :math:`t`,
-:math:`\Delta t` is the length of a simulation time step, and
-:math:`1_A` is the indicator function of the set :math:`A`.
+mean :math:`\lambda_{g,t} \cdot \Delta t \cdot 1_{\{\text{simulation
+step times}\}}(t)`, where :math:`\lambda_{g,t}` is the entrance rate of
+new simulants (measured in count of simulants per unit time) at time
+:math:`t`, :math:`\Delta t` is the length of a simulation time step, and
+:math:`1_A` is the indicator function of the set :math:`A` (the
+indicator function zeros out the entrance rate at times when the
+simulation is not taking a step). Our goal is to determine the entrance
+rate :math:`\lambda_{g,t}` for each :math:`g` and :math:`t`.
 
-Let :math:`I_{g,t}` denote the **total population incidence rate** of
-Alzheimer's disease and other dementias in demographic group :math:`g`
-at time :math:`t`, i.e.,
+Let :math:`A_g(t)` be the cumulative number of incident cases of AD by
+time :math:`t` in demographic group :math:`g` in the real population.
+Since our simulation is scaled down by a factor of :math:`S`, the rate
+at which we want to add simulants is
 
 .. math::
 
-  I_{g,y} = \frac{\text{# of incident cases of AD}}
-    {\text{person-years in total population}}.
+  \lambda_{g,t} = S \cdot A_g'(t).
 
-Then the entrance rate of new
+We rewrite this in terms of quantities that we can estimate from the
+available data:
+
+.. math::
+  :label: AD_entrance_rate_eq
+
+  \lambda_{g,t}
+  = S \cdot A_g'(t)
+  = S \cdot \frac{A_g'(t)}{\hat X^\text{real}_{g,t}}
+    \cdot \hat X^\text{real}_{g,t}
+  = S \cdot i_{g,t} \cdot \hat X^\text{real}_{g,t},
+
+where :math:`i_{g,t} = A_g'(t) /\hat X^\text{real}_{g,t}` is the **total
+population incidence hazard** of AD in demographic group :math:`g` at
+time :math:`t`. We know the model scale :math:`S` from
+:eq:`model_scale_eq` above, and we can estimate the quantities
+:math:`i_{g,t}` and :math:`X^\text{real}_{g,t}` from GBD as follows.
+
+Let :math:`y(t)` denote the year in which time :math:`t` occurs. If we
+assume that the hazard :math:`i_{g,t}` is constant throughout the year
+:math:`y(t)`, then it is equal to its person-time-average over the year,
+which is the **total population incidence rate**:
+
+.. math::
+
+  i_{g,t}
+  = \frac{\text{# of incident cases of AD in group $g$ in year $y(t)$}}
+    {\text{total person-years in group $g$ in year $y(t)$}}.
+
+This is the raw AD incidence rate we pull from GBD (*not* the susceptible
+population incidence rate usually calculated by Vivarium Inputs).
+If we assume that the population :math:`X^\text{real}_{g,t}` is
+constant throughout the year :math:`y(t)`, then it is equal to its
+time-average over the year:
+
+.. math::
+
+  X^\text{real}_{g,t}
+  = \text{average population in group $g$ during the year $y(t)$}.
+
+This is the population we pull from GBD using get_population.
+
+Recall from the previous section that :math:`X^\text{real}_{g,t}` is the
+number of people with AD in the real population (i.e., the population
+our simulation represents). Since our simulation is scaled down by a
+factor of :math:`S`, the rate at which we want to add simulants
+is
+
+.. math::
+
+  \lambda_{g,t} = S \cdot \frac{d X^\text{real}_{g,t}}{dt}.
+
+
+Let :math:`y(t)` denote the year containing the time :math:`t`, and let
+:math:`\hat X^{GBD}_{y(t)}` denote the average population in the year
+:math:`y(t)`.
+
+Let :math:`I_{g,t}` denote the **total population
+incidence hazard** of
+Alzheimer's disease and other dementias in demographic group :math:`g`
+in the year :math:`y(t)`, i.e., :math:`I_{g,t} = A_g'(t) / \hat
+X^\text{GBD}_{g,t}`, where :math:`A_g(t)` is the number of people with AD in
+group group :math:`g` at time :math:`t`.
+
+
+.. math::
+
+  I_{g,t}
+  = \frac{\text{# of incident cases of AD in year } y(t)}
+    {\text{total person-years in in year $y(t)$}}
+  = \frac{\text{# of incident cases of AD in year } y(t)}
+    {\hat X^\text{GBD}_{y(t)}}.
+
+Then the entrance rate of new simulants is:
+
+.. math::
+
+  \lambda_{g,t}
+  = S \cdot I_{g,t} \cdot \hat X^\text{GBD}_{g, y(t)}.
