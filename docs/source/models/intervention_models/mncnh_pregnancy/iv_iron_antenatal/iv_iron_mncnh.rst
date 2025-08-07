@@ -90,7 +90,7 @@ Hemoglobin exposure
 
   - Decide how we want to model uncertainty in the effect size of IV iron on hemoglobin concentrations.
   - Decide which REVAMP study we should use for Nigeria and Ethiopia - one study looks at second trimester and one looks at third trimester IV iron administration (the latter [Pasricha-et-al-2025]_ reported a smaller effect size of 17.5g/dL). Currently we are using the second trimester study.
-  - [Pasricha-et-al-2023]_ reports ferritin as an outcome of their RCT, but ferritin was not included as an eligibility criterium for receiving IV iron.
+  - [Pasricha-et-al-2023]_ reports ferritin as an outcome of their RCT, but ferritin was not included as an eligibility criterion for receiving IV iron.
     This contradicts our assumption that IV iron is only administered to those with low ferritin levels and we need to decide how we want to handle this discrepancy.
   - Assume no individual level heterogeneity despite having some data on this. (We chose not to model this in order to simplify the data prep for this model)
 
