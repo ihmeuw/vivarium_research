@@ -180,10 +180,11 @@ Adding New Simulants
 Let :math:`N_{g,t}` denote the number of new simulants in demographic
 group :math:`g` that we want to add to the simulation at time :math:`t`.
 We will assume that :math:`N_{g,t}` is a Poisson random variable with
-mean :math:`\lambda_{g,t} \cdot \Delta t \cdot 1_{\{\text{simulation
-step times}\}}(t)`, where :math:`\lambda_{g,t}` is the entrance rate of
-new simulants (measured in count of simulants per unit time) at time
-:math:`t`, :math:`\Delta t` is the length of a simulation time step, and
+mean
+:math:`\lambda_{g,t} \cdot \Delta t \cdot 1_{\{\text{simulation step times}\}}(t)`,
+where :math:`\lambda_{g,t}` is the entrance rate of new simulants
+(measured in count of simulants per unit time) at time :math:`t`,
+:math:`\Delta t` is the length of a simulation time step, and
 :math:`1_A` is the indicator function of the set :math:`A` (the
 indicator function zeros out the entrance rate at times when the
 simulation is not taking a step). Our goal is to determine the entrance
@@ -197,6 +198,12 @@ at which we want to add simulants is
 .. math::
 
   \lambda_{g,t} = S \cdot A_g'(t).
+
+The following subsection describes how we will calculate the entrance
+rate.
+
+Calculating entrance rate via AD incidence rate
+-----------------------------------------------
 
 We rewrite this in terms of quantities that we can estimate from the
 available data:
@@ -216,7 +223,7 @@ time :math:`t`. We know the model scale :math:`S` from
 :eq:`model_scale_eq` above, and we can estimate the quantities
 :math:`i_{g,t}` and :math:`X^\text{real}_{g,t}` from GBD as follows.
 
-Let :math:`y(t)` denote the year in which time :math:`t` occurs. If we
+Let :math:`y(t)` denote the year to which time :math:`t` belongs. If we
 assume that the hazard :math:`i_{g,t}` is constant throughout the year
 :math:`y(t)`, then it is equal to its person-time-average over the year,
 which is the **total population incidence rate**:
@@ -257,3 +264,24 @@ This is the population we pull from GBD using get_population. Thus,
   :math:`\hat X^\text{real}_{g,t}` as the average population in year
   :math:`y(t)` for years 2025 through 2050, then assume the total
   population remains constant thereafter.
+
+To summarize, here is the algorithm for adding new simulants at time
+:math:`t`, assuming that :math:`t` is a step time of the simulation:
+
+Alternative view using incidence count
+--------------------------------------
+
+The most direct way to estimate :math:`A_g'(t)` is to assume it is
+constant, in which case it equals its time-average.  For example, if
+:math:`y(t)` denotes the year to which time :math:`t` belongs, and we
+assume :math:`A_g'(t)` is constant during the year :math:`y(t)`, then
+
+.. math::
+
+  A_g(t)
+  = \frac{\text{# of incident cases of AD in group $g$ in year $y(t)$}}
+    {\text{1 year}}.
+
+Therefore, the expected number of simulants we want...
+
+We can pull the number of incident cases of AD from GBD.
