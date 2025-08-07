@@ -266,8 +266,23 @@ This is the population we pull from GBD using get_population. Thus,
   :math:`y(t)` for years 2025 through 2050, then assume the total
   population remains constant thereafter.
 
-To summarize, here is the algorithm for adding new simulants at time
-:math:`t`, assuming that :math:`t` is a step time of the simulation: ...
+Implementation and data tables
+--------------------------------------
+
+..
+  To summarize, here is the algorithm for adding new simulants at time
+  :math:`t`, assuming that :math:`t` is a step time of the simulation: ...
+
+Things to include:
+
+* Specification of exactly what data to use (data tables)
+* Reiterate equation for entrance rate, using notation consistent with
+  cause model page
+* Make sure to spell out how the length of the time step is involved
+* Reiterate that we need to sample a Poisson count with the specified
+  mean
+* Strategy for sampling continuous ages uniformly within age bins, including
+  capping the oldest age bin (95+) at 100 when adding new simulants
 
 Alternative view using incidence count
 --------------------------------------
@@ -279,7 +294,7 @@ assume :math:`A_g'(t)` is constant during the year :math:`y(t)`, then
 
 .. math::
 
-  A_g(t)
+  A_g'(t)
   = \frac{\text{# of incident cases of AD in group $g$ in year $y(t)$}}
     {\text{1 year}}.
 
