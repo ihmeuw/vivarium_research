@@ -211,7 +211,7 @@ The basic plan for the design of the simulation is as follows:
     - Value
     - Note
   * - Locations
-    - Sweden, US, China, Japan, Brazil, UK, Germany, France, Italy,
+    - Sweden, USA, China, Japan, Brazil, UK, Germany, France, Italy,
       Spain
     - 10 locations of interest
   * - Simulation start date
@@ -265,7 +265,7 @@ The basic plan for the design of the simulation is as follows:
   * - Scenario
     - Columns with more details go here
     - Note
-  * - 0. Reference
+  * - 0. Baseline (Reference)
     -
     -
   * - 1. Testing scale-up (Alternative 1)
@@ -332,7 +332,7 @@ scenario, and input draw.
       components to test runtime
     - Custom scenario including three types of Alzheimer's testing and a
       hypothetical treatment
-    - * Locations: United States (US)
+    - * Locations: United States (USA)
       * Cohort: Open cohort simulating entire population (including
         susceptible simulants, not just simulants who will get AD) in
         all age groups; simulants enter at age = 0 using crude birth
@@ -347,8 +347,8 @@ scenario, and input draw.
       * CategoricalInterventionObserver for Alzheimer's treatment
   * - 1.0
     - Simple SI model of AD using GBD data for AD and other dementias
-    - Reference
-    - * Locations: US, China
+    - Baseline
+    - * Locations: USA, China
       * Cohort: Same population model as Model 0.0
     - Default
     - Default
@@ -357,8 +357,8 @@ scenario, and input draw.
       Alzheimer's population component
       <other_models_alzheimers_population>` to model only population
       with AD
-    - Reference
-    - * Locations: US, China
+    - Baseline
+    - * Locations: USA, China
     - Default
     - Default
 
