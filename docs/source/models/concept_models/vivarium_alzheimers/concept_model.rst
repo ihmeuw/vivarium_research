@@ -383,7 +383,11 @@ scenario, and input draw.
       with 100K simulants each)
     - None
   * - 1.0
-    - * Verify crude birth rate (CBR) against GBD
+    - **Note:** All these checks can be done separately for each age
+      group and sex, but due to the large number of age groups, it may
+      be more prudent to start by looking at aggregated results.
+
+      * Verify crude birth rate (CBR) against GBD
       * Verify ACMR against GBD
       * Validate Alzheimer's CSMR against GBD
       * Verify Alzheimer's incidence rate against GBD
@@ -393,12 +397,45 @@ scenario, and input draw.
       * Check whether overall population remains stable over time
       * Check whether Alzheimer's prevalence remains stable over time
       * For comparison with model 2, calculate total "real world"
-        Alzheimer's population over time as :math:`p_\text{AD} \cdot X_t
-        / S`, where :math:`p_\text{AD}` is prevalence of AD, :math:`X_t`
-        is the simulated population at time :math:`t`, and :math:`S =
-        X_{2025}` / (real population in 2025) is the model scale.
+        Alzheimer's population over time as :math:`p_\text{AD}(t) \cdot
+        X_t / S`, where :math:`p_\text{AD}(t)` is prevalence of AD at
+        time :math:`t`, :math:`X_t` is the simulated population at time
+        :math:`t`, and :math:`S = X_{2025}` / (real total population in
+        2025) is the model scale
     - * Birth observer was missing, so we couldn't verify CBR
+      * Total population per draw was 200k instead of 100k, and there
+        were 10 draws instead of 25
       * Timestep was 182 days, resulting in 3 timesteps in 2025, making
-        population counts 1.5 times what they should be; we'll change
-        timestep to 183 days for future models
+        population counts 1.5 times what they should be in 2025; we'll
+        change the timestep to 183 days for future models
+      * Total population decreased monotonically during the 76 years of
+        the sim from 200k to about 170k in USA and about 125k in China
+    -
+  * - 2.0
+    - **Note:** All these checks can be done separately for each age
+      group and sex, but it may be more prudent to start by looking at
+      aggregated results.
+
+      * Verify the number of new simulants per year against the :ref:`AD
+        population model <other_models_alzheimers_population>`
+      * Use interactive sim to verify initial population structure
+        against the :ref:`AD population model
+        <other_models_alzheimers_population>`
+      * Verify that all simulants in the model have AD (i.e., all
+        recorded person-time is in the "AD" state, not the "susceptible"
+        state)
+      * Verify that there are no transitions between AD states during
+        the simulation (since it's an SI model and all simulants should
+        be in the I state the whole time)
+      * Verify ACMR against GBD
+      * Validate Alzheimer's CSMR against GBD
+      * Validate Alzheimer's EMR against GBD
+      * Validate Alzheimer's YLLs and YLDs against GBD
+      * For comparison with model 1, calculate total "real world"
+        Alzheimer's population over time as :math:`X_t / S`, where
+        :math:`X_t` is the simulated population at time :math:`t`, and
+        :math:`S = X_{2025}` / (real population with AD in 2025) is the
+        model scale (I'm not sure how closely we expect this to match
+        model 1)
+    -
     -
