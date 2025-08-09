@@ -35,6 +35,18 @@ Alzheimer's Population Model
 .. contents::
   :local:
 
+.. list-table:: Abbreviations
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+  * - AD
+    - Alzheimer's Disease
+  * - GBD
+    - Global Burden of Disease
+  * - FHS
+    - Future Health Scenarios
+
 Overview
 ++++++++
 
