@@ -352,6 +352,15 @@ scenario, and input draw.
       * Cohort: Same population model as Model 0.0
     - Default
     - Default
+  * - 2.0
+    - Replace standard population components with :ref:`custom
+      Alzheimer's population component
+      <other_models_alzheimers_population>` to model only population
+      with AD
+    - Reference
+    - * Locations: US, China
+    - Default
+    - Default
 
 5.2 V & V Tracking
 ------------------------
