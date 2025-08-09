@@ -206,6 +206,7 @@ The basic plan for the design of the simulation is as follows:
 
 .. list-table:: Default Simulation Parameter Specifications
   :header-rows: 1
+  :widths: 5 7 7
 
   * - Parameter
     - Value
@@ -249,9 +250,12 @@ The basic plan for the design of the simulation is as follows:
     - 25 draws
     -
   * - Timestep
-    - 6 months
+    - 183 days (~6 months)
     - Twice a year is sufficient to capture frequency of testing and
-      disease progression
+      disease progression. Model 1 used a timestep of 182 days,
+      resulting in 3 timesteps the first year, so we increased to 183 to
+      guarantee exactly 2 timesteps per year for all 76 simulation
+      years.
   * - Randomness key columns
     - ['entrance_time', 'age', 'sex']
     - There should be no need to modify the standard key columns
@@ -388,5 +392,13 @@ scenario, and input draw.
       * Validate Alzheimer's YLLs and YLDs against GBD
       * Check whether overall population remains stable over time
       * Check whether Alzheimer's prevalence remains stable over time
-    -
+      * For comparison with model 2, calculate total "real world"
+        Alzheimer's population over time as :math:`p_\text{AD} \cdot X_t
+        / S`, where :math:`p_\text{AD}` is prevalence of AD, :math:`X_t`
+        is the simulated population at time :math:`t`, and :math:`S =
+        X_{2025}` / (real population in 2025) is the model scale.
+    - * Birth observer was missing, so we couldn't verify CBR
+      * Timestep was 182 days, resulting in 3 timesteps in 2025, making
+        population counts 1.5 times what they should be; we'll change
+        timestep to 183 days for future models
     -
