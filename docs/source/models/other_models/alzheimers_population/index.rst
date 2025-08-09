@@ -275,16 +275,30 @@ Implementation and data tables
   To summarize, here is the algorithm for adding new simulants at time
   :math:`t`, assuming that :math:`t` is a step time of the simulation: ...
 
-Things to include:
 
-* Specification of exactly what data to use (data tables)
-* Reiterate equation for entrance rate, using notation consistent with
-  cause model page
-* Make sure to spell out how the length of the time step is involved
-* Reiterate that we need to sample a Poisson count with the specified
-  mean
-* Strategy for sampling continuous ages uniformly within age bins, including
-  capping the oldest age bin (95+) at 100 when adding new simulants
+.. todo::
+
+  Write up more concrete, direct instructions for implementation,
+  including:
+
+  * Specification of exactly what data to use (data tables)
+  * Reiterate equation for entrance rate, using notation consistent with
+    cause model page
+  * Make sure to spell out how the length of the time step is involved
+  * Reiterate that we need to sample a Poisson count with the specified
+    mean
+  * Strategy for sampling continuous ages uniformly within age bins,
+    including capping the oldest age bin (95+) at 100 when adding new
+    simulants
+
+  Also, maybe this should go in another top-level section and include
+  instructions for initialization as well, instead of being a subsection
+  of the "adding new simulants" section.
+
+  Note that the engineers said that the number of simulants initialized
+  into each age group at time :math:`t_0` is also random, but I'm not
+  sure exactly how it works (e.g., is the number of *initial* simulants
+  in each group also a Poisson random variable?).
 
 Alternative view using incidence count
 --------------------------------------
