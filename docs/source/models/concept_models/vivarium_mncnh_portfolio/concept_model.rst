@@ -1681,7 +1681,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Check that neonatal cause-specific mortality risks match expectation
     - * All-cause mortality risks unchanged from 13.2, as expected
       * Substantial improvement (reduction) in late neonatal overestimation of other-causes mortality risk and underestimation of preterm mortality risk in all locations;
-      however, there still appears to be systematic bias in this direction
+        however, there still appears to be systematic bias in this direction
     - `Model 13.3 neonatal checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/d8dce03ab1de546d6af5719c59e344d77384d93f/verification_and_validation/model_13.3_nn_checks.ipynb>`_
   * - 14.0
     - * Confirm ANC attendance exposure varies as expected by pregnancy term length
