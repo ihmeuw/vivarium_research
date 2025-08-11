@@ -195,6 +195,12 @@ Graphically, the component breakdown looks like this:
 
 .. image:: component_overview_diagram.drawio.png
 
+.. note::
+
+  Do not interpret the x-axis in this diagram as time, since e.g. the duration of pregnancy is not at all
+  constant.
+  Also, if misinterpreted this way, the x-axis would be wildly not to scale.
+
 However, the only situation in which all components are actually reached for a given simulant
 dyad is the case in which the pregnancy results in a live birth and the birthing person survives
 childbirth.
