@@ -202,4 +202,5 @@ intersphinx_mapping = {
     'tables': ('https://www.pytables.org/', None),
     'numpy': ('https://numpy.org/doc/stable/', None),
     'vivarium_public_health': ('https://vivarium.readthedocs.io/projects/vivarium-public-health/en/latest/', None),
+    'vivarium': ('https://vivarium.readthedocs.io/en/latest/', None),
 }
