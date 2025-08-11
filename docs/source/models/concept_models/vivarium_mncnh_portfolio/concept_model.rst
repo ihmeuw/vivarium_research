@@ -1792,7 +1792,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Timeline
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
-    - Update to custom-calculated PAF and reasses
+    - Update to custom-calculated PAF and reassess
     - TBD
   * - Issue with LBWSG PAF calculation for the late neonatal age group
     - See the summary in the model 12.1.1 run request
