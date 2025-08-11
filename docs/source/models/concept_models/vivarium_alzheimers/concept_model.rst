@@ -206,12 +206,13 @@ The basic plan for the design of the simulation is as follows:
 
 .. list-table:: Default Simulation Parameter Specifications
   :header-rows: 1
+  :widths: 5 7 7
 
   * - Parameter
     - Value
     - Note
   * - Locations
-    - Sweden, US, China, Japan, Brazil, UK, Germany, France, Italy,
+    - Sweden, USA, China, Japan, Brazil, UK, Germany, France, Italy,
       Spain
     - 10 locations of interest
   * - Simulation start date
@@ -219,7 +220,7 @@ The basic plan for the design of the simulation is as follows:
     -
   * - Simulation end date
     - 2100-12-31
-    - 76-year simulation period (forecasted data goes through year 2100)
+    - 76-year simulation period
   * - Observation start date
     - 2025-01-01
     - No burn-in period
@@ -242,16 +243,19 @@ The basic plan for the design of the simulation is as follows:
   * - Age end (Observation)
     - 125 years or death
     -
-  * - Population size per draw
+  * - Initial population size per draw
     - 100,000 simulants
     -
   * - Number of Draws
     - 25 draws
     -
   * - Timestep
-    - 6 months
+    - 183 days (~6 months)
     - Twice a year is sufficient to capture frequency of testing and
-      disease progression
+      disease progression. Model 1 used a timestep of 182 days,
+      resulting in 3 timesteps the first year, so we increased to 183 to
+      guarantee exactly 2 timesteps per year for all 76 simulation
+      years.
   * - Randomness key columns
     - ['entrance_time', 'age', 'sex']
     - There should be no need to modify the standard key columns
@@ -265,7 +269,7 @@ The basic plan for the design of the simulation is as follows:
   * - Scenario
     - Columns with more details go here
     - Note
-  * - 0. Reference
+  * - 0. Baseline (Reference)
     -
     -
   * - 1. Testing scale-up (Alternative 1)
@@ -332,7 +336,7 @@ scenario, and input draw.
       components to test runtime
     - Custom scenario including three types of Alzheimer's testing and a
       hypothetical treatment
-    - * Locations: United States (US)
+    - * Locations: United States (USA)
       * Cohort: Open cohort simulating entire population (including
         susceptible simulants, not just simulants who will get AD) in
         all age groups; simulants enter at age = 0 using crude birth
@@ -347,9 +351,18 @@ scenario, and input draw.
       * CategoricalInterventionObserver for Alzheimer's treatment
   * - 1.0
     - Simple SI model of AD using GBD data for AD and other dementias
-    - Reference
-    - * Locations: US, China
+    - Baseline
+    - * Locations: USA, China
       * Cohort: Same population model as Model 0.0
+    - Default
+    - Default
+  * - 2.0
+    - Replace standard population components with :ref:`custom
+      Alzheimer's population component
+      <other_models_alzheimers_population>` to model only population
+      with AD
+    - Baseline
+    - * Locations: USA, China
     - Default
     - Default
 
@@ -370,7 +383,11 @@ scenario, and input draw.
       with 100K simulants each)
     - None
   * - 1.0
-    - * Verify crude birth rate (CBR) against GBD
+    - **Note:** All these checks can be done separately for each age
+      group and sex, but due to the large number of age groups, it may
+      be more prudent to start by looking at aggregated results.
+
+      * Verify crude birth rate (CBR) against GBD
       * Verify ACMR against GBD
       * Validate Alzheimer's CSMR against GBD
       * Verify Alzheimer's incidence rate against GBD
@@ -379,5 +396,46 @@ scenario, and input draw.
       * Validate Alzheimer's YLLs and YLDs against GBD
       * Check whether overall population remains stable over time
       * Check whether Alzheimer's prevalence remains stable over time
+      * For comparison with model 2, calculate total "real world"
+        Alzheimer's population over time as :math:`p_\text{AD}(t) \cdot
+        X_t / S`, where :math:`p_\text{AD}(t)` is prevalence of AD at
+        time :math:`t`, :math:`X_t` is the simulated population at time
+        :math:`t`, and :math:`S = X_{2025}` / (real total population in
+        2025) is the model scale
+    - * Birth observer was missing, so we couldn't verify CBR
+      * Total population per draw was 200k instead of 100k, and there
+        were 10 draws instead of 25
+      * Timestep was 182 days, resulting in 3 timesteps in 2025, making
+        population counts 1.5 times what they should be in 2025; we'll
+        change the timestep to 183 days for future models
+      * Total population decreased monotonically during the 76 years of
+        the sim from 200k to about 170k in USA and about 125k in China
+    -
+  * - 2.0
+    - **Note:** All these checks can be done separately for each age
+      group and sex, but it may be more prudent to start by looking at
+      aggregated results.
+
+      * Verify the number of new simulants per year against the :ref:`AD
+        population model <other_models_alzheimers_population>`
+      * Use interactive sim to verify initial population structure
+        against the :ref:`AD population model
+        <other_models_alzheimers_population>`
+      * Verify that all simulants in the model have AD (i.e., all
+        recorded person-time is in the "AD" state, not the "susceptible"
+        state)
+      * Verify that there are no transitions between AD states during
+        the simulation (since it's an SI model and all simulants should
+        be in the I state the whole time)
+      * Verify ACMR against GBD
+      * Validate Alzheimer's CSMR against GBD
+      * Validate Alzheimer's EMR against GBD
+      * Validate Alzheimer's YLLs and YLDs against GBD
+      * For comparison with model 1, calculate total "real world"
+        Alzheimer's population over time as :math:`X_t / S`, where
+        :math:`X_t` is the simulated population at time :math:`t`, and
+        :math:`S = X_{2025}` / (real population with AD in 2025) is the
+        model scale (I'm not sure how closely we expect this to match
+        model 1)
     -
     -
