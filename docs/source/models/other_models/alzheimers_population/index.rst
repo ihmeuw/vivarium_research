@@ -332,3 +332,27 @@ due to changing demographics, the incidence *rate* of AD is likely to
 remain fairly stable over time. Thus, using using the incidence rate and
 the total population is a more appropriate way to use the available
 data.
+
+Data Tables
+-----------
+
+All data values are defined for a specified year, location, age group,
+and sex.
+
+.. list-table:: Data Sources
+  :widths: 20 30 25 25
+  :header-rows: 1
+
+  * - Variable
+    - Definition
+    - Source or value
+    - Notes
+  * - population
+    - Draw-level age-specific population forecast
+    - GBD 2021 Forecasting Capstone
+    - in `population_agg.nc` file
+  * - deaths
+    - Draw-level age-specific deaths saved by cause, for cause==all
+    - GBD 2021 Forecasting Capstone
+    - in `_all.nc` file
+

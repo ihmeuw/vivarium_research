@@ -46,6 +46,8 @@ Alzheimer's Disease Early Detection Simulation
     - Blood-Based Biomarkers
   * - CSF
     - Cerebrospinal Fluid
+  * - computed tomography
+    - CT
   * - MCI
     - Mild Cognitive Impairment
   * - PET
@@ -97,18 +99,18 @@ using population forecasts from the Future Health Scenarios (FHS) team.
 2.0 Modeling Aims and Objectives
 +++++++++++++++++++++++++++++++++
 
-The primary goal is to simulate the impact of early detection strategies
+The primary goal is to simulate the impact of early detection and treatment strategies
 for Alzheimer's disease using blood-based biomarkers and subsequent
 interventions. The simulation tracks simulants through health states
 from age ~30 to 125 years (or death), capturing progression through
 preclinical AD, mild cognitive impairment (MCI) due to AD, and three
-stages of dementia due to Alzheimer's disease.
+stages of dementia.
 
 2.1 Scenarios
 -------------
 
 1. **Reference Scenario:** Present-day conditions, including current
-   cerebrospinal fluid (CSF) and amyloid-positron emission tomography
+   cerebrospinal fluid (CSF), computed tomography (CT), amyloid-positron emission tomography
    (PET) diagnostic pathways after clinical disease develops, but with
    no BBBM uptake or disease-modifying therapies.
 2. **Alternative Scenario 1:** Introduction of BBBM testing for at-risk
@@ -125,7 +127,7 @@ comprising a six-stage progression:
   **Susceptible → Preclinical AD → MCI due to AD → Mild AD → Moderate AD
   → Severe AD**
 
-The last three stages correspond to the three sequelae (mild, moderate,
+The last three stages correspond to a fraction of the three sequelae (mild, moderate,
 severe) of the GBD cause "Alzheimer's disease and other dementias." We
 will have to separate AD out from other dementias in the GBD data, and
 we will need non-GBD data sources to inform our modeling of preclinical
@@ -146,7 +148,7 @@ The basic plan for the design of the simulation is as follows:
     pretty stable over time, so we are **not** planning on using
     forecasted data for Alzheimer's disease
 
-- Only simulate people who will eventually get AD (and other dementias (?))
+- Only simulate people who will eventually get AD and other dementias
 
   - This drastically reduces population size and hence compute resources
   - We will need to "work backwards" from GBD's Alzheimer's estimates
@@ -159,10 +161,6 @@ The basic plan for the design of the simulation is as follows:
 - On top of the population model, we will add an Alzheimer's disease
   progression model, a testing and diagnosis model, and a treatment
   model, as detailed in the next section
-
-- We're doing a test run with mock-ups of all components and a full
-  population (not just simulants with AD) to get an idea of the runtime
-  for simulating 80 years in 10 locations
 
 3.0 Simulation Components
 ++++++++++++++++++++++++++++++++++++
@@ -365,6 +363,12 @@ scenario, and input draw.
     - * Locations: USA, China
     - Default
     - Default
+  * - 2.0
+    - Replace population and mortality data with forecasts from IHME's FHS team
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -437,5 +441,14 @@ scenario, and input draw.
         :math:`S = X_{2025}` / (real population with AD in 2025) is the
         model scale (I'm not sure how closely we expect this to match
         model 1)
+    -
+    -
+  * - 3.0
+    - **Note:** All these checks can be done separately for each age
+      group and sex, but it may be more prudent to start by looking at
+      aggregated results.
+
+      * Everything from 2.0, except verify ACMR against GBD
+      * Verify ACMR against FHS
     -
     -
