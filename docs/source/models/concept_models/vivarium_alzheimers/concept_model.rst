@@ -410,7 +410,11 @@ scenario, and input draw.
         change the timestep to 183 days for future models
       * Total population decreased monotonically during the 76 years of
         the sim from 200k to about 170k in USA and about 125k in China
-    -
+      * Prevalence, incidence, EMR, CSMR, ACMR, and YLLs all validated to 
+        artifact values and remained stable over time  
+      * YLDs were above GBD values for both locations. We should look into 
+        disability weights to see if there is a bug. 
+    -   https://github.com/ihmeuw/vivarium_research_alzheimers/blob/b84ad4c959ad6a0ef5957250c17ef36dba23b190/verification_and_validation/2025_08_12_model1_vv.ipynb 
   * - 2.0
     - **Note:** All these checks can be done separately for each age
       group and sex, but it may be more prudent to start by looking at
