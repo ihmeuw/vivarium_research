@@ -212,8 +212,7 @@ The basic plan for the design of the simulation is as follows:
     - Value
     - Note
   * - Locations
-    - Sweden, USA, China, Japan, Brazil, UK, Germany, France, Italy,
-      Spain
+    - Sweden, US, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan
     - 10 locations of interest
   * - Simulation start date
     - 2025-01-01
