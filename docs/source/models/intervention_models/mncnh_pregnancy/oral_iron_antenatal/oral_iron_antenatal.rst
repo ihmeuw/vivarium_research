@@ -473,7 +473,7 @@ Where,
 
 .. todo:: 
 
-  The values in these CSVs rely on the GBD 2021 LBWSG exposure distribution and therefore will need to be updated when the GBD 2023 estimates are available.
+  The values in these CSVs rely on the GBD 2021 LBWSG exposure distribution and ANC1 covariates and therefore will need to be updated when the GBD 2023 estimates are available.
 
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
