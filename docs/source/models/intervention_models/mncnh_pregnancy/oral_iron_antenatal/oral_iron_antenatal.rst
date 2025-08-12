@@ -471,6 +471,9 @@ Where,
   * - MMS_SHIFT_2
     - `Location-specific .csv files of MMS_SHIFT_2 values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/4c1bf4cef1f2c9d630d41e77ef891b786c5e24d3/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/updated_mms_shifts.csv>`_
 
+.. todo:: 
+
+  The values in these CSVs rely on the GBD 2021 LBWSG exposure distribution and therefore will need to be updated when the GBD 2023 estimates are available.
 
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
