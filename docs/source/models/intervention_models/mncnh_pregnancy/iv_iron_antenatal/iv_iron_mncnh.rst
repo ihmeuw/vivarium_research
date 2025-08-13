@@ -110,7 +110,7 @@ Hemoglobin exposure
     - Pakistan
     - +26.3 mg/L
     - 95% CI: [25.7, 26.9] mg/L
-    - N/A
+    - Assumed to be zero for simplicity
     - From the RAPID study [Derman-et-al-2025]_ 
 
 .. note::
