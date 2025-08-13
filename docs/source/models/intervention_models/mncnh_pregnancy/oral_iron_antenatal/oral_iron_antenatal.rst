@@ -387,7 +387,7 @@ Additionally, our methods differ from GBD's in that we estimated two separate GA
 
 2. Find and apply a second shift that replicates the preterm birth dichotomous effect when applied only to the portion of the distribution with baseline gestational age exposures that are *greater* than 32 (the very preterm birth threshold) *minus* this second shift. Note that the second shift will be negative in direction.
 
-`The estimation of the antenatal supplementation gestational age shifts as described was performed in this notebook <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/095c9f6119ec823260395a357d432dc30cf2c886/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/ifa_gestational_age_shifts.ipynb>`_
+`The estimation of the antenatal supplementation gestational age shifts as described was performed in this notebook <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/ifa_gestational_age_shifts.ipynb>`_
 
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -465,11 +465,11 @@ Where,
   * - Parameter
     - Value
   * - IFA_SHIFT
-    - `Location-specific IFA_SHIFT values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/5b4522ac4c8effbb5c6fad7417b6dba858e6b818/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/ifa_ga_shifts.csv>`_
+    - `Location-specific IFA_SHIFT values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/ifa_ga_shifts.csv>`_
   * - MMS_SHIFT_1
-    - `Location-specific .csv files of MMS_SHIFT_1 values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/4c1bf4cef1f2c9d630d41e77ef891b786c5e24d3/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/updated_mms_shifts.csv>`_
+    - `Location-specific .csv files of MMS_SHIFT_1 values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/updated_mms_shifts.csv>`_
   * - MMS_SHIFT_2
-    - `Location-specific .csv files of MMS_SHIFT_2 values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/4c1bf4cef1f2c9d630d41e77ef891b786c5e24d3/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/updated_mms_shifts.csv>`_
+    - `Location-specific .csv files of MMS_SHIFT_2 values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/updated_mms_shifts.csv>`_
 
 .. todo:: 
 
