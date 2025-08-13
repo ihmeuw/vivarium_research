@@ -104,13 +104,13 @@ Hemoglobin exposure
     - Nigeria and Ethiopia
     - +20.2 mg/L
     - 95% CI: [18.9, 21.5] mg/L
-    - N/A
+    - Assumed to be zero for simplicity
     - From the REVAMP study (second trimester) [Pasricha-et-al-2023]_
   * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
     - Pakistan
     - +26.3 mg/L
     - 95% CI: [25.7, 26.9] mg/L
-    - N/A
+    - Assumed to be zero for simplicity
     - From the RAPID study [Derman-et-al-2025]_ 
 
 .. note::
