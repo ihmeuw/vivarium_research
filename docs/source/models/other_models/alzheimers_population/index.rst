@@ -362,7 +362,7 @@ and sex.
 All-cause Mortality Forecasts
 +++++++++++++++++++++++++++++
 
-Since this is the model 
+Since this is the model that
 includes details on how to use forecasts of population size, we have also
 included information on how to use forecasts of all-cause mortality rate.
 This is not really part of the Alzheimer's Population Model, however, and
