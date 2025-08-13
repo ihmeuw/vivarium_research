@@ -370,6 +370,12 @@ scenario, and input draw.
     - * Locations: USA, China
     - Default
     - Default
+  * - 2.2
+    - Fix incidence to be based on full population instead of suscpetible population in fertility
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -472,6 +478,40 @@ scenario, and input draw.
       * Validate Alzheimer's CSMR against GBD
       * Validate Alzheimer's EMR against GBD
       * Validate Alzheimer's YLLs and YLDs against GBD
+      * For comparison with model 1, calculate total "real world"
+        Alzheimer's population over time as :math:`X_t / S`, where
+        :math:`X_t` is the simulated population at time :math:`t`, and
+        :math:`S = X_{2025}` / (real population with AD in 2025) is the
+        model scale (I'm not sure how closely we expect this to match
+        model 1)
+    - * No simulants were susceptible or transitioned as expected
+      * EMR validated, but CSMR and ACMR did not which was expected, 
+        see below for new mortality metrics to validate against
+      * Similarly, YLLs and YLDs did not match as expected, 
+        remove these moving forward
+      * The number of new simulants entering the sim is correct in younger 
+        age groups but incorrect in later ages. This is thought to be an 
+        issue with incidence used in the sim.
+      * Prevalence and real world pop have not been evaluated
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/232bab04fff9591b4fb4a543199ce50091087d95/verification_and_validation/2025_08_12_model2.1_vv.ipynb
+  * - 2.2
+    - **Note:** All these checks can be done separately for each age
+      group and sex, but it may be more prudent to start by looking at
+      aggregated results.
+
+      * Verify the number of new simulants per year against the :ref:`AD
+        population model <other_models_alzheimers_population>`
+      * Use interactive sim to verify initial population structure
+        against the :ref:`AD population model
+        <other_models_alzheimers_population>`
+      * Verify that all simulants in the model have AD (i.e., all
+        recorded person-time is in the "AD" state, not the "susceptible"
+        state)
+      * Verify that there are no transitions between AD states during
+        the simulation (since it's an SI model and all simulants should
+        be in the I state the whole time)
+      * Validate Alzheimer's EMR against artifact
+      * Validate overall mortality (ACMR - CSMR + EMR) vs artifact
       * For comparison with model 1, calculate total "real world"
         Alzheimer's population over time as :math:`X_t / S`, where
         :math:`X_t` is the simulated population at time :math:`t`, and
