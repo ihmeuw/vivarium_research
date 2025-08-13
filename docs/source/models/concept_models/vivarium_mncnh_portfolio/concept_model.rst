@@ -1835,6 +1835,14 @@ Default stratifications to all observers should include scenario and input draw.
 
 * [Finkelstein-et-al-2024]_ primarily includes RCTs from high-income countries, so the effect size for IFA on maternal hemoglobin may be overestimated for Sub-Saharan African countries (including Ethiopia and Nigeria) with typically higher rates of non-iron deficiency anemias.
 
+* We do not currently model an oral iron treatment intervention, despite the recommendation by WHO to treat all pregnancies with IFA and all anemic pregnancies with oral iron treatment (essentially a higher dosage of iron than IFA).
+  We have a `JIRA ticket <https://jira.ihme.washington.edu/browse/SSCI-2376>`_ to add this intervention in the future, but it is not currently prioritized. 
+  There are some individuals who receive oral iron treatment at baseline and we want to model the replacement of that oral iron treatment with IV iron treatment. 
+  However, we are not subtracting out the effect of oral iron treatment prior to modeling the scale up of IV iron treatment. This will result in the following limitations:
+  
+    * For individuals who received oral iron treatment at baseline and still remain eligible for IV iron following their oral iron treatment: we will double count the impact of the interventions, thus overestimating the potential scale-up of IV iron.
+    * For individuals who received oral iron treatment at baseline and no longer remain eligible for IV iron following their oral iron treatment: there will be essentially no difference in impact for this population given that IV and oral iron treatment have basically equal impacts, however, we will be underestimating the size of the population requiring treatment and therefore underestimating the cost required to achieve the health outcomes seen in these scenarios.
+
 .. _mncnh_portfolio_7.0:
 
 7.0 References/Other
