@@ -104,7 +104,7 @@ for Alzheimer's disease using blood-based biomarkers and subsequent
 interventions. The simulation tracks simulants through health states
 from age ~30 to 125 years (or death), capturing progression through
 preclinical AD, mild cognitive impairment (MCI) due to AD, and three
-stages of dementia.
+stages of dementia due to Alzheimer's disease.
 
 2.1 Scenarios
 -------------
@@ -127,7 +127,7 @@ comprising a six-stage progression:
   **Susceptible → Preclinical AD → MCI due to AD → Mild AD → Moderate AD
   → Severe AD**
 
-The last three stages correspond to a fraction of the three sequelae (mild, moderate,
+The last three stages correspond to a portion of the three sequelae (mild, moderate,
 severe) of the GBD cause "Alzheimer's disease and other dementias." We
 will have to separate AD out from other dementias in the GBD data, and
 we will need non-GBD data sources to inform our modeling of preclinical
@@ -148,7 +148,7 @@ The basic plan for the design of the simulation is as follows:
     pretty stable over time, so we are **not** planning on using
     forecasted data for Alzheimer's disease
 
-- Only simulate people who will eventually get AD and other dementias
+- Only simulate people who will eventually get AD (and other dementias (?))
 
   - This drastically reduces population size and hence compute resources
   - We will need to "work backwards" from GBD's Alzheimer's estimates
