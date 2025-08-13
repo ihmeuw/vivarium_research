@@ -1690,13 +1690,20 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm RR values for hemoglobin exposures <40 are equal to the RR value for a hemoglobin exposure of 40
       * Confirm that artifact RR values match expectation
       * Confirm that RR values for hemoglobin exposures above the TMREL vary according to the input data
-    - 
-    -
+    - * Slight overestimation of maternal sepsis incidence, particularly in Nigeria. Mean values are generally within 10% of target otherwise. Significant draw-level variation, with underestimation of lower draws and overestimation of higher draws.
+      * Hemoglobin exposure appropriately modifies maternal disorder incidence but not mortality
+      * RR values for hemoglobin exposures <40 equal that of hemoglobin exposure equal to 40
+      * Artifact RR values match expectation
+      * RR values for hemoglobin exposures >TMREL vary according to input data 
+    - * `Model 13.1 maternal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_13.1_maternal_checks.ipynb>`_
+      * `Model 13.1 interactive sim notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_13.1_interactive_simulation_hemoglobin.ipynb>`_
   * - 13.2
     - * Check late neonatal all-cause mortality risk and cause-specific mortality risks;
         expected change is small but should be in the direction of better verification to GBD
-    - 
-    - 
+    - * As expected, no change to early neonatal mortality risks
+      * Late neonatal all-cause mortality risks closer than in model 12.1.1 (already within 10%, now well within 5% for all locations and sexes)
+      * Late neonatal cause-specific mortality risks pretty similar to model 12.1.1, as expected (maybe a bit closer to GBD targets, but hard to tell)
+    - `Model 13.2 neonatal checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/5d9d726cbb58438fc21091e6baddf0a2bd9140d7/verification_and_validation/model_13.2_nn_checks.ipynb>`_
   * - 13.3
     - * Check that neonatal all-cause mortality risks match expectation
       * Check that neonatal cause-specific mortality risks match expectation
@@ -1808,18 +1815,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - RR values for hemoglobin < 40 g/L not as expected
-    - All hemoglobin exposures less than 40 g/L should be assigned the RR for the 40 g/L exposure
-    - Hussain to update implementation accordingly
-    - For 13.1
-  * - RR values for hemoglobin exposures above the TMREL all equal 1
-    - They should be able to match input data for values not equal to 1 (greater than lower than one are both okay)
-    - Hussain to update implementation accordingly
-    - For 13.1
-  * - Miscalibration of maternal hemorrhage and sepsis incidence rates
-    - Due to non-location-specific hemoglobin PAF value
-    - Hussain to update
-    - For 13.1
+  * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
+    - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
+    - Update to custom-calculated PAF and reassess
+    - TBD
   * - Issue with LBWSG PAF calculation for the late neonatal age group
     - See the summary in the model 12.1.1 run request
     - Hussain to update and rerun, Ali to do independent replication of PAF calculation verification
@@ -1829,9 +1828,9 @@ Default stratifications to all observers should include scenario and input draw.
     - Rerun with larger population size?
     - TBD
   * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
-    - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria. Check that we only have a single parameter for preterm prevalence and that this is not defined differently in the simulation versus the PAF calculation simulation
-    - Research to brainstorm
-    - None for now
+    - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
+    - One possible cause addressed in model 13.3
+    - For 13.3
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revisit following GBD 2023 update
