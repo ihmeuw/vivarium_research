@@ -141,6 +141,9 @@ Assumptions and limitations
   Therefore, if we used the difference between the arms we would be underestimating the total effect of IV iron among this population unless we updated our model of IFA. 
   So we use the difference between endline and baseline to more closely model the total effect of IV iron on hemoglobin. 
   The resulting limitation from this approach is that we will attribute some of the impact that actually comes from the standard-of-care intervention (IFA) to the IV iron intervention in our model, resulting in an overestimation of the impact of IV iron and an underestimation of the impact of MMS. 
+- We do not consider effect modification by timing of IV iron administration, and thereby assume that pregnant people that receive IV iron in the second trimester of their pregnancy have the same effect size as those who receive it in the third trimester (despite [Pasricha-et-al-2025]_ reporting a lower effect size for the latter group).
+  As such, we are likely overestimating the effect of IV iron for those who don't receive it until their third trimester. 
+  Because we are not currently modeling (a) the timing of "later pregnancy" ANC visits or (b) the hemoglobin trajectory throughout pregnancy in enough detail to figure out exactly when the IV iron is administered to a simulant, we assume that we will get to them early (i.e., administer IV iron during second trimester) with the new minimally invasive screening protocol being scaled up in this simulation.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
