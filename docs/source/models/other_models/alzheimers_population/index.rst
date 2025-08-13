@@ -28,9 +28,9 @@
 
 .. _other_models_alzheimers_population:
 
-===============================
-Alzheimer's Population Model
-===============================
+=======================================================
+Alzheimer's Population Model with Demographic Forecasts
+=======================================================
 
 .. contents::
   :local:
@@ -55,7 +55,10 @@ Alzheimer's disease (and other dementias), in order to reduce the
 necessary population size for the :ref:`CSU Alzheiemer's simulation
 <2025_concept_model_vivarium_alzheimers>`. The model document is split
 into two parts: 1) initializing the population, and 2) adding new
-simulants during the simulated timeframe.
+simulants during the simulated timeframe.  Since this is the model that
+includes details on how to use forecasts of population size, we have also
+included information on how to use forecasts of all-cause mortality rate
+(this is not really part of the Alzheimer's Population Model however).
 
 Initializing the Population
 +++++++++++++++++++++++++++
@@ -351,8 +354,25 @@ and sex.
     - Draw-level age-specific population forecast
     - GBD 2021 Forecasting Capstone
     - in `population_agg.nc` file
-  * - deaths
-    - Draw-level age-specific deaths saved by cause, for cause==all
+  * - all-cause mortality rate
+    - Draw-level age-specific mortality rates saved by cause, for cause==all
     - GBD 2021 Forecasting Capstone
     - in `_all.nc` file
+
+All-cause Mortality Forecasts
++++++++++++++++++++++++++++++
+
+Since this is the model 
+includes details on how to use forecasts of population size, we have also
+included information on how to use forecasts of all-cause mortality rate.
+This is not really part of the Alzheimer's Population Model, however, and
+perhaps a better place to include this information will emerge as we continue
+to work on this model.
+
+By including draw-level, age-specific mortality rates forecasted for future years,
+the competing mortality from causes other than Alzheimer's Disease will change over time
+as predicted by our IHME colleagues.
+
+The :ref:`all_cause_mortality` docs have more details on how the ACMR forecasts are used
+when they are included in the artifact.
 
