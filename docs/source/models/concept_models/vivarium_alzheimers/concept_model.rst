@@ -363,7 +363,7 @@ scenario, and input draw.
     - * Locations: USA, China
     - Default
     - Default
-  * - 2.0
+  * - 3.0
     - Replace population and mortality data with forecasts from IHME's FHS team
     - Baseline
     - * Locations: USA, China
