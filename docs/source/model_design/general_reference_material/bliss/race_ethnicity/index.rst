@@ -938,7 +938,7 @@ Reporting results accurately
 We often need to be very concise, and can’t surface all the complexity of race and ethnicity every time we reference them. 
 So, we take the following approach:
 
-Somewhere in the paper/report, we explain in a fair amount of detail the race and ethnicity categorizations we used, why we used them that way, etc. 
+Somewhere in the paper/report, we explain in a fair amount of detail the race and ethnicity categorizations we used, why we used them that way, the race and ethnicity groups used in input data, how we completed our analysis across different datasets, etc. 
 For example, this could be in a methods appendix (as in the VEHSS papers) or a technical report that accompanies a PowerPoint presentation of results.
 
 In each part that “stands alone” (e.g. each document or presentation; see next paragraph) we either:
@@ -946,7 +946,7 @@ In each part that “stands alone” (e.g. each document or presentation; see ne
 - Define our resulting indicator the first time we reference it, then abbreviate it; the abbreviation does not need to entirely capture what the indicator means, but it should not be a common word/phrase that someone would likely assume has a different meaning.
 - If the previous is not possible (e.g. in an abstract where words are extremely limited), we use the shortest term for our resulting indicator that both conveys its main limitations and does not need a definition.
 
-A part is “stands alone” if it is likely to be viewed/read separately from other parts, and a reader would expect it to be self-contained: referencing other resources where necessary, but not using terms or ideas from elsewhere without reference or explanation. 
+A part is “stand alone” if it is likely to be viewed/read separately from other parts, and a reader would expect it to be self-contained: referencing other resources where necessary, but not using terms or ideas from elsewhere without reference or explanation. 
 Think of acronyms: it is acceptable to use an acronym in the discussion section of a journal article that was introduced in the methods section of that article, because it is part of the same document. 
 But a journal editor would not allow you to use an acronym in the discussion section of a journal article that is only introduced in the supplementary material. 
 Most journal editors also consider tables and figures to stand alone in this way (i.e. they cannot use acronyms from the main text), so we follow that convention with our race and ethnicity terminology.
