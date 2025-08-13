@@ -212,8 +212,7 @@ The basic plan for the design of the simulation is as follows:
     - Value
     - Note
   * - Locations
-    - Sweden, USA, China, Japan, Brazil, UK, Germany, France, Italy,
-      Spain
+    - Sweden, US, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan
     - 10 locations of interest
   * - Simulation start date
     - 2025-01-01
@@ -365,6 +364,12 @@ scenario, and input draw.
     - * Locations: USA, China
     - Default
     - Default
+  * - 2.1
+    - Replace old Alzhiemer's disease model with one where everyone is infected
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -410,7 +415,11 @@ scenario, and input draw.
         change the timestep to 183 days for future models
       * Total population decreased monotonically during the 76 years of
         the sim from 200k to about 170k in USA and about 125k in China
-    -
+      * Prevalence, incidence, EMR, CSMR, ACMR, and YLLs all validated to 
+        artifact values and remained stable over time  
+      * YLDs were above GBD values for both locations. We should look into 
+        disability weights to see if there is a bug. 
+    -   https://github.com/ihmeuw/vivarium_research_alzheimers/blob/b84ad4c959ad6a0ef5957250c17ef36dba23b190/verification_and_validation/2025_08_12_model1_vv.ipynb 
   * - 2.0
     - **Note:** All these checks can be done separately for each age
       group and sex, but it may be more prudent to start by looking at
@@ -437,5 +446,37 @@ scenario, and input draw.
         :math:`S = X_{2025}` / (real population with AD in 2025) is the
         model scale (I'm not sure how closely we expect this to match
         model 1)
-    -
-    -
+    - * There are simulants in susceptible and who transition from susceptible 
+        to infected. This is incorrect.
+      * Because of this, incidence and prevalence have not been evaluated 
+      * ACMR, CSMR, EMR, YLLs are all correct 
+      * The issues with YLDs is still present, as expected
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/28c884aa7628819fe5ee03248c9a488d5c7eb340/verification_and_validation/2025_08_12_model2_vv.ipynb
+  * - 2.1
+    - **Note:** All these checks can be done separately for each age
+      group and sex, but it may be more prudent to start by looking at
+      aggregated results.
+
+      * Verify the number of new simulants per year against the :ref:`AD
+        population model <other_models_alzheimers_population>`
+      * Use interactive sim to verify initial population structure
+        against the :ref:`AD population model
+        <other_models_alzheimers_population>`
+      * Verify that all simulants in the model have AD (i.e., all
+        recorded person-time is in the "AD" state, not the "susceptible"
+        state)
+      * Verify that there are no transitions between AD states during
+        the simulation (since it's an SI model and all simulants should
+        be in the I state the whole time)
+      * Verify ACMR against GBD
+      * Validate Alzheimer's CSMR against GBD
+      * Validate Alzheimer's EMR against GBD
+      * Validate Alzheimer's YLLs and YLDs against GBD
+      * For comparison with model 1, calculate total "real world"
+        Alzheimer's population over time as :math:`X_t / S`, where
+        :math:`X_t` is the simulated population at time :math:`t`, and
+        :math:`S = X_{2025}` / (real population with AD in 2025) is the
+        model scale (I'm not sure how closely we expect this to match
+        model 1)
+    - 
+    - 
