@@ -484,8 +484,6 @@ scenario, and input draw.
         model 1)
     - 
     - 
-    -
-    -
   * - 3.0
     - **Note:** All these checks can be done separately for each age
       group and sex, but it may be more prudent to start by looking at
