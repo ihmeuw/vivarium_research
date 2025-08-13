@@ -448,7 +448,7 @@ scenario, and input draw.
       group and sex, but it may be more prudent to start by looking at
       aggregated results.
 
-      * Everything from 2.0, except verify ACMR against GBD
+      * Everything from 2.0, except do not verify ACMR against GBD here
       * Verify ACMR against FHS
     -
     -
