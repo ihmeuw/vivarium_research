@@ -179,8 +179,21 @@ There may be individual exposure values assigned that are outside of the defined
 
 To model the low hemoglobin risk factor on maternal disorders, we will be calculating our own population attributable fractions (PAFs) for each affected maternal disorder subcause. 
 This is because although there are PAFs saved in the Burdenator for hemoglobin's effect on maternal hemorrhage and sepsis, there is not for depressive disorders. 
-The hemoglobin team did calculate PAFs for depressive disorders, but they found that because cause_id=567 (Depressive disorderS) is not the most-detailed cause, it is dropped by the Burdenator. 
+The hemoglobin team did calculate PAFs for depressive disorders, but they found that because cause_id=567 (Depressive disorders) is not the most-detailed cause, it is dropped by the Burdenator. 
 They noted that there has been discussion about whether to save these PAFs for one of the parent causes, but no decision has been made yet. 
+
+Relative risk values to calculate custom PAFs for maternal disorders can be accessed via shared functions with the following call:
+
+.. code:: python
+  # return age- and cause-specific relative risk estimates for the hemoglobin risk factor
+  rr = get_draws(release_id=33, # GBD 2023 for topic-specific work
+            source='rr',
+            gbd_id_type='rei_id',
+            gbd_id=376, # hemoglobin
+            sex_id=2, # female for maternal disorders causes
+            year_id=2022, # NOTE: this call returns only one value for year ID, which is 2022. You do not need to specify a year_id, but specifying any value besides 2022 will result in a failed call
+            location_id=1, # NOTE: you do not need to specify a location_id. Specifying any location ID will return results specific to location_id=1
+            ) 
 
 Use the custom-calculated PAF values such that the maternal disorder incidence rate for an individual :math:`i` for a given affected maternal disorder subcause is as follows:
 
@@ -193,7 +206,7 @@ Use the custom-calculated PAF values such that the maternal disorder incidence r
   Calculate custom PAFs for maternal disorders and link to relevant files when ready.
 
   Hemoglobin RRs have 250 draws and PAfs have 100 draws. To avoid blocking implementation, for now, let's use the first 100 draws for hemoglobin relative risks and calculate PAFs for draws 0-99 then copy them 5 times to get to a total of 500 draws like we have already done for hemoglobin exposure.
-
+  The hemoglobin team shared a link to their `custom PAF codes <https://stash.ihme.washington.edu/projects/MNCH/repos/paf_custom/browse>`_.
 
 
 Validation and Verification Criteria
