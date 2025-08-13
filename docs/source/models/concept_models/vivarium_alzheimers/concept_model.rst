@@ -450,5 +450,6 @@ scenario, and input draw.
 
       * Everything from 2.0, except do not verify ACMR against GBD here
       * Verify ACMR against FHS
+      * Since there are so many (age groups, years, locations, sex) combinations that might be tested, it will be good enough to confirm that new simulant counts and all-cause mortality rates line up for 2030, 2060, and 2090, and for two locations.
     -
     -
