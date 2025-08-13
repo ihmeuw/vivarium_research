@@ -46,6 +46,8 @@ Alzheimer's Disease Early Detection Simulation
     - Blood-Based Biomarkers
   * - CSF
     - Cerebrospinal Fluid
+  * - computed tomography
+    - CT
   * - MCI
     - Mild Cognitive Impairment
   * - PET
@@ -97,7 +99,7 @@ using population forecasts from the Future Health Scenarios (FHS) team.
 2.0 Modeling Aims and Objectives
 +++++++++++++++++++++++++++++++++
 
-The primary goal is to simulate the impact of early detection strategies
+The primary goal is to simulate the impact of early detection and treatment strategies
 for Alzheimer's disease using blood-based biomarkers and subsequent
 interventions. The simulation tracks simulants through health states
 from age ~30 to 125 years (or death), capturing progression through
@@ -108,7 +110,7 @@ stages of dementia due to Alzheimer's disease.
 -------------
 
 1. **Reference Scenario:** Present-day conditions, including current
-   cerebrospinal fluid (CSF) and amyloid-positron emission tomography
+   cerebrospinal fluid (CSF), computed tomography (CT), amyloid-positron emission tomography
    (PET) diagnostic pathways after clinical disease develops, but with
    no BBBM uptake or disease-modifying therapies.
 2. **Alternative Scenario 1:** Introduction of BBBM testing for at-risk
@@ -125,7 +127,7 @@ comprising a six-stage progression:
   **Susceptible → Preclinical AD → MCI due to AD → Mild AD → Moderate AD
   → Severe AD**
 
-The last three stages correspond to the three sequelae (mild, moderate,
+The last three stages correspond to a portion of the three sequelae (mild, moderate,
 severe) of the GBD cause "Alzheimer's disease and other dementias." We
 will have to separate AD out from other dementias in the GBD data, and
 we will need non-GBD data sources to inform our modeling of preclinical
@@ -159,10 +161,6 @@ The basic plan for the design of the simulation is as follows:
 - On top of the population model, we will add an Alzheimer's disease
   progression model, a testing and diagnosis model, and a treatment
   model, as detailed in the next section
-
-- We're doing a test run with mock-ups of all components and a full
-  population (not just simulants with AD) to get an idea of the runtime
-  for simulating 80 years in 10 locations
 
 3.0 Simulation Components
 ++++++++++++++++++++++++++++++++++++
@@ -212,8 +210,7 @@ The basic plan for the design of the simulation is as follows:
     - Value
     - Note
   * - Locations
-    - Sweden, USA, China, Japan, Brazil, UK, Germany, France, Italy,
-      Spain
+    - Sweden, US, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan
     - 10 locations of interest
   * - Simulation start date
     - 2025-01-01
@@ -365,6 +362,18 @@ scenario, and input draw.
     - * Locations: USA, China
     - Default
     - Default
+  * - 2.1
+    - Replace old Alzhiemer's disease model with one where everyone is infected
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
+  * - 3.0
+    - Replace population and mortality data with forecasts from IHME's FHS team
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -410,7 +419,11 @@ scenario, and input draw.
         change the timestep to 183 days for future models
       * Total population decreased monotonically during the 76 years of
         the sim from 200k to about 170k in USA and about 125k in China
-    -
+      * Prevalence, incidence, EMR, CSMR, ACMR, and YLLs all validated to 
+        artifact values and remained stable over time  
+      * YLDs were above GBD values for both locations. We should look into 
+        disability weights to see if there is a bug. 
+    -   https://github.com/ihmeuw/vivarium_research_alzheimers/blob/b84ad4c959ad6a0ef5957250c17ef36dba23b190/verification_and_validation/2025_08_12_model1_vv.ipynb 
   * - 2.0
     - **Note:** All these checks can be done separately for each age
       group and sex, but it may be more prudent to start by looking at
@@ -437,5 +450,47 @@ scenario, and input draw.
         :math:`S = X_{2025}` / (real population with AD in 2025) is the
         model scale (I'm not sure how closely we expect this to match
         model 1)
+    - * There are simulants in susceptible and who transition from susceptible 
+        to infected. This is incorrect.
+      * Because of this, incidence and prevalence have not been evaluated 
+      * ACMR, CSMR, EMR, YLLs are all correct 
+      * The issues with YLDs is still present, as expected
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/28c884aa7628819fe5ee03248c9a488d5c7eb340/verification_and_validation/2025_08_12_model2_vv.ipynb
+  * - 2.1
+    - **Note:** All these checks can be done separately for each age
+      group and sex, but it may be more prudent to start by looking at
+      aggregated results.
+
+      * Verify the number of new simulants per year against the :ref:`AD
+        population model <other_models_alzheimers_population>`
+      * Use interactive sim to verify initial population structure
+        against the :ref:`AD population model
+        <other_models_alzheimers_population>`
+      * Verify that all simulants in the model have AD (i.e., all
+        recorded person-time is in the "AD" state, not the "susceptible"
+        state)
+      * Verify that there are no transitions between AD states during
+        the simulation (since it's an SI model and all simulants should
+        be in the I state the whole time)
+      * Verify ACMR against GBD
+      * Validate Alzheimer's CSMR against GBD
+      * Validate Alzheimer's EMR against GBD
+      * Validate Alzheimer's YLLs and YLDs against GBD
+      * For comparison with model 1, calculate total "real world"
+        Alzheimer's population over time as :math:`X_t / S`, where
+        :math:`X_t` is the simulated population at time :math:`t`, and
+        :math:`S = X_{2025}` / (real population with AD in 2025) is the
+        model scale (I'm not sure how closely we expect this to match
+        model 1)
+    - 
+    - 
+  * - 3.0
+    - **Note:** All these checks can be done separately for each age
+      group and sex, but it may be more prudent to start by looking at
+      aggregated results.
+
+      * Everything from 2.0, except do not verify ACMR against GBD here
+      * Verify ACMR against FHS
+      * Since there are so many (age groups, years, locations, sex) combinations that might be tested, it will be good enough to confirm that new simulant counts and all-cause mortality rates line up for 2030, 2060, and 2090, and for two locations.
     -
     -
