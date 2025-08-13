@@ -184,16 +184,17 @@ They noted that there has been discussion about whether to save these PAFs for o
 
 Relative risk values to calculate custom PAFs for maternal disorders can be accessed via shared functions with the following call:
 
-.. code:: python
-  # return age- and cause-specific relative risk estimates for the hemoglobin risk factor
-  rr = get_draws(release_id=33, # GBD 2023 for topic-specific work
-            source='rr',
-            gbd_id_type='rei_id',
-            gbd_id=376, # hemoglobin
-            sex_id=2, # female for maternal disorders causes
-            year_id=2022, # NOTE: this call returns only one value for year ID, which is 2022. You do not need to specify a year_id, but specifying any value besides 2022 will result in a failed call
-            location_id=1, # NOTE: you do not need to specify a location_id. Specifying any location ID will return results specific to location_id=1
-            ) 
+.. code-block:: python
+
+   # return age- and cause-specific relative risk estimates for the hemoglobin risk factor
+   rr = get_draws(release_id=33, # GBD 2023 for topic-specific work
+               source='rr',
+               gbd_id_type='rei_id',
+               gbd_id=376, # hemoglobin
+               sex_id=2, # female for maternal disorders causes
+               year_id=2022, # NOTE: this call returns only one value for year ID, which is 2022. You do not need to specify a year_id, but specifying any value besides 2022 will result in a failed call
+               location_id=1, # NOTE: you do not need to specify a location_id. Specifying any location ID will return results specific to location_id=1
+               ) 
 
 Use the custom-calculated PAF values such that the maternal disorder incidence rate for an individual :math:`i` for a given affected maternal disorder subcause is as follows:
 
