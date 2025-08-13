@@ -177,7 +177,12 @@ Use the modeling strategy described below for the following maternal disorders s
 
 There may be individual exposure values assigned that are outside of the defined risk curves in GBD. In this case, for exposures <40, assign the risk corresponding to an exposure value of 40. For exposures >150, assign the risk corresponding to an exposure value of 150.
 
-Use the population attributable fraction values pulled from GBD shared functions such that the maternal disorder incidence rate for an individual :math:`i` for a given affected maternal disorder subcause is as follows:
+To model the low hemoglobin risk factor on maternal disorders, we will be calculating our own population attributable fractions (PAFs) for each affected maternal disorder subcause. 
+This is because although there are PAFs saved in the Burdenator for hemoglobin's effect on maternal hemorrhage and sepsis, there is not for depressive disorders. 
+The hemoglobin team did calculate PAFs for depressive disorders, but they found that because cause_id=567 (Depressive disorderS) is not the most-detailed cause, it is dropped by the Burdenator. 
+They noted that there has been discussion about whether to save these PAFs for one of the parent causes, but no decision has been made yet. 
+
+Use the custom-calculated PAF values such that the maternal disorder incidence rate for an individual :math:`i` for a given affected maternal disorder subcause is as follows:
 
 .. math::
 
@@ -185,49 +190,11 @@ Use the population attributable fraction values pulled from GBD shared functions
 
 .. todo::
 
-  Address the todo items noted in the code below
+  Calculate custom PAFs for maternal disorders and link to relevant files when ready.
 
-  Also, investigate compatibility between RRs with 250 draws and PAfs with 100 draws. Should we limit RRs to the first 100 draws only? Should we calculate our own PAFs for draws 100-249? 
+  Hemoglobin RRs have 250 draws and PAfs have 100 draws. To avoid blocking implementation, for now, let's use the first 100 draws for hemoglobin relative risks and calculate PAFs for draws 0-99 then copy them 5 times to get to a total of 500 draws like we have already done for hemoglobin exposure.
 
-    To avoid blocking implementation, for now, let's use the first 100 draws for hemoglobin relative risks and PAFs and then copy them 5 times to get to a total of 500 draws like we have already done for hemoglobin exposure.
 
-Relative risk PAF values can be accessed via shared functions with the following call:
-
-.. code:: python
-
-  # return age- and cause-specific relative risk estimates for the hemoglobin risk factor
-  get_draws(release_id=33, # GBD 2023 for topic-specific work
-              # TODO: confirm whether we should use release ID 16 or 33 here (both return data)
-              # Decided to use 33 for now to be compatible with ID in the PAF call below
-            source='rr',
-            gbd_id_type='rei_id',
-            gbd_id=376, # hemoglobin
-            sex_id=2, # female for maternal disorders causes
-            year_id=2022, # NOTE: this call returns only one value for year ID, which is 2022. You do not need to specify a year_id, but specifying any value besides 2022 will result in a failed call
-            location_id=1, # NOTE: you do not need to specify a location_id. Specifying any location ID will return results specific to location_id=1
-            ) 
-
-  # return age- and cause-specific PAF estimates for the hemoglobin risk factor
-  paf = get_draws(release_id=33, # GBD 2023 for topic-specific work
-              source='burdenator',
-              version_id=393, # obtained from: https://hub.ihme.washington.edu/spaces/GBDdirectory/pages/229280354/GBD+2023+PAF+Burdenator+SEV+Calculator+Tracking
-              gbd_id_type='rei_id',
-              gbd_id=376, # hemoglobin
-              sex_id=2, # female for maternal disorders causes
-              year_id=2023, # specify year_id=2023 to match 2023 exposure distribution
-              location_id=location_ids, # specify location_id to match exposure distribution for that location
-              metric_id=2, # metric=percent (returns PAF rather than attributable counts)
-              measure_id=1, # deaths (filter to single measure)
-                # TODO: figure out why PAFs are different for YLLs and YLDs depsite no difference in RRs between fatal and nonfatal outcomes
-                # decided to go with deaths for now because those values are less likely to be complicated by sequela-level detail
-              )
-  # filter down to relevant most detailed causes
-  paf = paf.loc[paf.cause_id.isin([367, # maternal hemorrhage
-                                  368, # maternal sepsis
-                                  369, # maternal hypertensive disorders
-                                  #567, # depressive disorders
-                                    # TODO: determine why there are no PAFs for depressive disorders
-                                  ])]
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
