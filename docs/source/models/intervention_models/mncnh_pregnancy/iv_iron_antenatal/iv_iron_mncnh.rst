@@ -89,9 +89,6 @@ Hemoglobin exposure
 .. todo::
 
   - Decide how we want to model uncertainty in the effect size of IV iron on hemoglobin concentrations.
-  - Decide which REVAMP study we should use for Nigeria and Ethiopia - one study looks at second trimester and one looks at third trimester IV iron administration (the latter [Pasricha-et-al-2025]_ reported a smaller effect size of 17.5g/dL). Currently we are using the second trimester study.
-  - [Pasricha-et-al-2023]_ reports ferritin as an outcome of their RCT, but ferritin was not included as an eligibility criterion for receiving IV iron.
-    This contradicts our assumption that IV iron is only administered to those with low ferritin levels and we need to decide how we want to handle this discrepancy.
   - Assume no individual level heterogeneity despite having some data on this. (We chose not to model this in order to simplify the data prep for this model)
 
 .. list-table:: Maternal hemoglobin effect size
@@ -105,20 +102,31 @@ Hemoglobin exposure
     - Note
   * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
     - Nigeria and Ethiopia
-    - +20.2 g/L
-    - 
-    - 
+    - +20.2 mg/L
+    - 95% CI: [18.9, 21.5] mg/L
+    - N/A
     - From the REVAMP study (second trimester) [Pasricha-et-al-2023]_
   * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
     - Pakistan
-    - +26.3 g/L
-    - 
-    - 
+    - +26.3 mg/L
+    - 95% CI: [25.7, 26.9] mg/L
+    - N/A
     - From the RAPID study [Derman-et-al-2025]_ 
 
 .. note::
 
   Unlike the REVAMP study, the RAPID study did include ferritin levels (serum ferritin <30 ng/mL) as an eligibility criterion for receiving IV iron, which is consistent with our assumption that IV iron is only administered to those with low ferritin levels.
+  However, the RAPID study still has the same limitation regarding pre-intervention ferritin status (see Assumptions and limitations section below), because low ferritin OR low hemoglobin was used to determine if a pregnant person was eligible for the intervention.
+
+.. note::
+
+  We calculated the 95% confidence intervals for the effect size of IV iron on hemoglobin concentrations using the following method: 
+  
+    1. SE = SD / sqrt(n)
+    2. LCL = mean – 1.96 * SE
+    3. UCL = mean + 1.96 * SE
+
+  For the REVAMP trial, SD = 14.1 and n=430, and for the RAPID trial, SD = 12.0 and n=1462.
 
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -126,8 +134,13 @@ Assumptions and limitations
 - We assume the effect of the intervention persists through the end of the period for which we track hemoglobin status
 - We do not consider effect modification by baseline hemoglobin status. In reality, the effect of IV iron may be greater among women with lower baseline hemoglobin levels.
 - We assume that the effect size of IV iron on hemoglobin concentrations as reported in the REVAMP study (which took place in Malawi) is representative of the effect size in Nigeria and Ethiopia, and that the value reported by the RAPID study (which took place in India) is representative of the effect size in Pakistan.
-- For the countries where our effect size is informed by the REVAMP study, we assume that the effect of IV iron among those with low ferritin levels (those eligible in our simulation) is the same as the effect of IV iron among people not screened for ferritin (the REVAMP study population). 
+- We assume that the effect of IV iron among those with low ferritin levels (those eligible in our simulation) is the same as the effect of IV iron among people not screened for ferritin (the study population for both the RAPID and REVAMP studies). 
   In reality, we'd expect that people with low ferritin would benefit more, so we may underestimate the impact of the intervention.
+- We assume that the change in hemoglobin concentrations from baseline to endline in the RAPID and REVAMP studies is more appropriate to use for our simulation than the comparison between the IV iron arm and the standard-of-care arm.
+  This is because our standard of care (IFA) model in our simulation does not appropriately include the effect modification of IFA for the population eligible for IV iron (our model underestimates the effect of IFA among this population). 
+  Therefore, if we used the difference between the arms we would be underestimating the total effect of IV iron among this population unless we updated our model of IFA. 
+  So we use the difference between endline and baseline to more closely model the total effect of IV iron on hemoglobin. 
+  The resulting limitation from this approach is that we will attribute some of the impact that actually comes from the standard-of-care intervention (IFA) to the IV iron intervention in our model, resulting in an overestimation of the impact of IV iron and an underestimation of the impact of MMS. 
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
