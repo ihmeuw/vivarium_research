@@ -831,6 +831,9 @@ Default stratifications to all observers should include scenario and input draw.
       * Misoprostol coverage
       * Hemoglobin screening coverage
       * Ferritin screening coverage
+      * IFA coverage
+      * MMS coverage
+      * IV iron coverage
       * True hemoglobin exposure (dichotomous,  'low' if truly low hemoglobin and 'adequate' if truly adequate hemoglobin)
       * Test hemoglobin exposure (dichotomous, 'low' if tested low hemoglobin,'adequate' if tested adequate hemoglobin, N/A if not tested)
       * Ferritin status (dichotomous, 'low' if low ferritin, 'adequate' if adequate ferritin, N/A if not tested)
@@ -1816,16 +1819,24 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm that baseline coverage of IFA matches the health systems team estimates of IFA at ANC as specified in the :ref:`oral iron supplementation intervention page <oral_iron_antenatal>`.
       * Confirm that baseline coverage of MMS is 0 in all locations.
       * Confirm that only simulants who attend ANC receive IFA in all scenarios.
-      * Confirm that in the baseline scenario, the exposure distribution of hemoglobin and anemia among PLW and WRA as well as the morbidity and mortality rates of each maternal disorder matches that of GBD.
-      * Confirm that maternal hemoglobin exposures stratified by IFA coverage match supplementation effect sizes.
-      * Confirm that in the baseline scenario, the exposure distribution of LBWSG as well as the mortality rates of each neonatal disorder among both neonatal age groups matches that of GBD.
-      * Confirm that the rate of each birth outcome continues to validate to GBD estimates.
+      * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of hemoglobin and anemia among PLW and WRA as well as the morbidity and mortality rates of each maternal disorder matches that of GBD.
+      * Use the interactive sim to confirm that maternal hemoglobin exposures stratified by IFA coverage match supplementation effect sizes.
+      * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of LBWSG matches that of GBD.
+      * Confirm that in the baseline scenario, the mortality rates of each neonatal disorder among both neonatal age groups continue to match that of GBD.
+      * Confirm that the rate of each birth outcome in the baseline scenario continues to validate to GBD estimates.
       * Confirm that the birth outcome rates stratified by coverage of each supplementation regimen matches the expected supplementation effect sizes.
-      * Confirm that birthweight differences between regimens match the effect sizes of each supplementation regimen (i.e., none, only IFA, both IFA and MMS).
+      * Use the interactive sim to confirm that birthweight differences between regimens match the effect sizes of each supplementation regimen (i.e., none, only IFA, both IFA and MMS).
     - 
     -
   * - 18.0
-    - * 
+    - * Confirm that coverage of IV iron among the eligible population verifies to the scenario-specific level.
+      * Confirm that coverage of IV iron is 0 among the non-eligible population.
+      * Confirm that hemoglobin level stratified by IV iron coverage matches the expected effect size.
+      * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of LBWSG matches that of GBD.
+      * Use the interactive sim to confirm that LWBSG exposures between the same individuals in a scenario with IV iron and a scenario without verifies to the IV iron effect sizes on BW and GA specific to that individual's pre-IV iron hemoglobin exposure.
+      * Confirm that the rate of each birth outcome in the baseline scenario continues to validate to GBD estimates.
+      * Confirm that the birth outcome rates stratified by coverage of IV iron matches the expected supplementation effect sizes.
+      * Use the interactive sim to confirm that rates of stillbirth binned by hemoglobin exposure match the expected shape of the relationship.
     - 
     - 
 
