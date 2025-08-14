@@ -505,9 +505,8 @@ scenario, and input draw.
 
       * Verify the number of new simulants per year against the :ref:`AD
         population model <other_models_alzheimers_population>`
-      * Use interactive sim to verify initial population structure
-        against the :ref:`AD population model
-        <other_models_alzheimers_population>`
+      * Verify the prevalent simulants per year against the 
+        :ref:`AD population model <other_models_alzheimers_population>`
       * Verify that all simulants in the model have AD (i.e., all
         recorded person-time is in the "AD" state, not the "susceptible"
         state)
@@ -516,21 +515,36 @@ scenario, and input draw.
         be in the I state the whole time)
       * Validate Alzheimer's EMR against artifact
       * Validate overall mortality (ACMR - CSMR + EMR) vs artifact
-      * For comparison with model 1, calculate total "real world"
-        Alzheimer's population over time as :math:`X_t / S`, where
-        :math:`X_t` is the simulated population at time :math:`t`, and
-        :math:`S = X_{2025}` / (real population with AD in 2025) is the
-        model scale (I'm not sure how closely we expect this to match
-        model 1)
-    - 
-    - 
+    - * No simulants were susceptible or transitioned as expected
+      * EMR, total mortality rate and new sim incidence counts validated
+      * Prevalence was correct on initialization but total sim pop and 
+        prevalence increases for about 10 years before stabilizing. This 
+        is thought to be due to issues with misalignment of incidence and 
+        mortality in GBD data. We are moving to model 3 as pop values change 
+        with forecasting in that sim.
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/b042cdee74149371425c001cedb022e7f6b6a0c4/verification_and_validation/2025_08_14_model2.2_vv.ipynb
   * - 3.0
     - **Note:** All these checks can be done separately for each age
       group and sex, but it may be more prudent to start by looking at
       aggregated results.
 
-      * Everything from 2.0, except do not verify ACMR against GBD here
-      * Verify ACMR against FHS
-      * Since there are so many (age groups, years, locations, sex) combinations that might be tested, it will be good enough to confirm that new simulant counts and all-cause mortality rates line up for 2030, 2060, and 2090, and for two locations.
+      * Everything from 2.0, except use FHS values for ACMR in the total mortality calculation
+      * Since there are so many (age groups, years, locations, sex) combinations that might be tested, it will be good enough to confirm that new simulant counts and total mortality rates line up for 2030, 2060, and 2090, and for two locations.
     -
     -
+
+.. list-table:: Outstanding model verification and validation issues
+  :header-rows: 1
+
+  * - Issue
+    - Explanation
+    - Action plan
+    - Timeline
+  * - YLDs rates do not match in model 1
+    - Thought to be due to incorrect disability weight aggregation
+    - Will be updated when we add severity levels, recheck then
+    - Model 5
+  * - Total simulation population increasing in model 2
+    - Thought to be due to GBD mismatch in mortality and incidence
+    - Population and ACMR's change in model 3 to use FHS data, reassess then
+    - Model 3
