@@ -674,6 +674,8 @@ Severity Splits
 Mortality Impacts
 +++++++++++++++++
 
+.. _all_cause_mortality:
+
 All-Cause Mortality
 ^^^^^^^^^^^^^^^^^^^
 
