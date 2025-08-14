@@ -518,7 +518,7 @@ scenario, and input draw.
     - * No simulants were susceptible or transitioned as expected
       * EMR, total mortality rate and new sim incidence counts validated
       * Prevalence was correct on initialization but total sim pop and 
-        prevalence increases for about 10 years before stabalizing. This 
+        prevalence increases for about 10 years before stabilizing. This 
         is thought to be due to issues with misalignment of incidence and 
         mortality in GBD data. We are moving to model 3 as pop values change 
         with forecasting in that sim.
