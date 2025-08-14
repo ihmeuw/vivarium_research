@@ -86,11 +86,6 @@ The IV iron intervention has a direct effect on hemoglobin exposure in pregnancy
 Hemoglobin exposure
 +++++++++++++++++++++
 
-.. todo::
-
-  - Decide how we want to model uncertainty in the effect size of IV iron on hemoglobin concentrations.
-  - Assume no individual level heterogeneity despite having some data on this. (We chose not to model this in order to simplify the data prep for this model)
-
 .. list-table:: Maternal hemoglobin effect size
   :header-rows: 1
 
@@ -146,6 +141,8 @@ Assumptions and limitations
   Because we are not currently modeling (a) the timing of "later pregnancy" ANC visits or (b) the hemoglobin trajectory throughout pregnancy in enough detail to figure out exactly when the IV iron is administered to a simulant, we assume that we will get to them early (i.e., administer IV iron during second trimester) with the new minimally invasive screening protocol being scaled up in this simulation.
     
     * We have a `JIRA ticket to address this limitation <https://jira.ihme.washington.edu/browse/SSCI-2377>`_ if we choose to do so.
+- We assume that there is no individual-level heterogeneity in the effect of IV iron on hemoglobin concentrations, despite having some data that could inform this. 
+  We chose not to include stochastic uncertainty in order to simplify the data prep needed for this intervention model.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
