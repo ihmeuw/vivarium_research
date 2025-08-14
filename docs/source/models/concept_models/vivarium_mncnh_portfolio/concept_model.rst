@@ -1861,7 +1861,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that in the baseline scenario, the mortality rates of each neonatal disorder among both neonatal age groups continue to match that of GBD.
       * Confirm that the rate of each birth outcome in the baseline scenario continues to validate to GBD estimates.
       * Confirm that the birth outcome rates stratified by coverage of each supplementation regimen matches the expected supplementation effect sizes.
-      * Use the interactive sim to confirm that birthweight differences between regimens match the effect sizes of each supplementation regimen (i.e., none, only IFA, both IFA and MMS).
+      * Use the interactive sim to confirm that GA and BW differences between regimens match the effect sizes of each supplementation regimen (i.e., none, only IFA, both IFA and MMS).
     - 
     -
   * - 18.0
