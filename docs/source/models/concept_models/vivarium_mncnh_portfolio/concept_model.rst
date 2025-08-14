@@ -496,7 +496,7 @@ Postpartum component
     - Defined in the baseline coverage section of the :ref:`oral iron supplementation page <oral_iron_antenatal>`
     - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
     - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
-    - XXX
+    - Defined in the baseline coverage section of the :ref:`IV iron page <intervention_iv_iron_antenatal_mncnh>`
     - 
   * - 2. CPAP total scale-up
     - Baseline
