@@ -602,6 +602,22 @@ Postpartum component
     - Baseline
     - Baseline
     - 
+  * - 17. IFA/MMS total scale-up V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - 100% scale-up of both IFA and MMS at ANC
+    - Baseline
+    - Baseline
+    - 
+  * - 18. IV iron total scale-up V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 100% scale-up of IV iron at ANC
+    - 
 
 .. _MNCNH intrapartum component scenario table:
 
@@ -682,7 +698,17 @@ Postpartum component
     - Baseline
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
-    - see neonatal table for CPAP coverage     
+    - see neonatal table for CPAP coverage    
+  * - 17. IFA/MMS total scale-up V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    -        
+  * - 18. IV iron total scale-up V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    -        
 
 .. _MNCNH neonatal component scenario table:
 
@@ -764,6 +790,16 @@ Postpartum component
     - Baseline
     - Baseline
     - See intrapartum table for ACS coverage 
+  * - 17. IFA/MMS total scale-up V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 18. IV iron total scale-up V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
 
 .. _mncnh_portfolio_4.0:
 
@@ -1829,7 +1865,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     -
   * - 18.0
-    - * Confirm that coverage of IV iron among the eligible population verifies to the scenario-specific level.
+    - * Confirm that coverage of IV iron among the eligible population verifies to the scenario-specific level as specified in the :ref:`IV iron intervention page <intervention_iv_iron_antenatal_mncnh>`.
       * Confirm that coverage of IV iron is 0 among the non-eligible population.
       * Confirm that hemoglobin level stratified by IV iron coverage matches the expected effect size.
       * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of LBWSG matches that of GBD.
