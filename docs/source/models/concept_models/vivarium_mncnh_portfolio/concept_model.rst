@@ -1707,8 +1707,10 @@ Default stratifications to all observers should include scenario and input draw.
   * - 13.3
     - * Check that neonatal all-cause mortality risks match expectation
       * Check that neonatal cause-specific mortality risks match expectation
-    - 
-    - 
+    - * All-cause mortality risks unchanged from 13.2, as expected
+      * Substantial improvement (reduction) in late neonatal overestimation of other-causes mortality risk and underestimation of preterm mortality risk in all locations;
+        however, there still appears to be systematic bias in this direction
+    - `Model 13.3 neonatal checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/d8dce03ab1de546d6af5719c59e344d77384d93f/verification_and_validation/model_13.3_nn_checks.ipynb>`_
   * - 14.0
     - * Confirm ANC attendance exposure varies as expected by pregnancy term length
       * Confirm ANC attendance exposure matches expectation
@@ -1829,8 +1831,8 @@ Default stratifications to all observers should include scenario and input draw.
     - TBD
   * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
     - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
-    - One possible cause addressed in model 13.3
-    - For 13.3
+    - Research to debug further
+    - TBD
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revisit following GBD 2023 update
