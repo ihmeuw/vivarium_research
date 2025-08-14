@@ -206,7 +206,7 @@ Use the custom-calculated PAF values such that the maternal disorder incidence r
 
   Calculate custom PAFs for maternal disorders and link to relevant files when ready.
 
-  Hemoglobin RRs have 250 draws and PAfs have 100 draws. To avoid blocking implementation, for now, let's use the first 100 draws for hemoglobin relative risks and calculate PAFs for draws 0-99 then copy them 5 times to get to a total of 500 draws like we have already done for hemoglobin exposure.
+  Hemoglobin RRs have 250 draws, while hemoglobin exposure has only 100 draws. Like we have already done for hemoglobin exposure, we'll use only the first 100 draws for hemoglobin relative risks and copy them 5 times to get a total of 500 draws.
   The hemoglobin team shared a link to their `custom PAF codes <https://stash.ihme.washington.edu/projects/MNCH/repos/paf_custom/browse>`_.
 
 
