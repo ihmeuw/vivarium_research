@@ -112,7 +112,7 @@ Cause Model Diagram
 
   digraph AlzheimersDisease {
     rankdir=LR;
-    S -> AD [label=i_alz]
+    S -> AD [label=i_AD]
 
   }
 
@@ -137,7 +137,7 @@ Cause Model Diagram
   * - Transition
     - Transition Name
     - Definition
-  * - i_alz
+  * - i_AD
     - Alzheimer's Incidence
     - Incidence rate of Alzheimer's disease and other dementias
       (incident cases per susceptible person-year)
@@ -267,7 +267,7 @@ table.
     - Sink State
     - Value
     - Notes
-  * - i_alz
+  * - i_AD
     - S
     - AD
     - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
