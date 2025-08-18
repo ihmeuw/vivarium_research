@@ -219,7 +219,11 @@ table.
     - Notes
   * - S
     - prevalence
-    - 1 - prevalence_c543
+    - * 1 - prevalence_c543 (if modeling entire population including
+        susceptible simulants), or
+      * 0 (if modeling only simulants with AD as described in the
+        :ref:`Alzheimer's population model
+        <other_models_alzheimers_population>`)
     - Used for initial population at start of simulation
   * - S
     - birth prevalence
@@ -235,7 +239,11 @@ table.
     - Used to calculate YLDs
   * - AD
     - prevalence
-    - prevalence_c543
+    - * prevalence_c543 (if modeling entire population including
+        susceptible simulants), or
+      * 1 (if modeling only simulants with AD as described in the
+        :ref:`Alzheimer's population model
+        <other_models_alzheimers_population>`)
     - Used for initial population at start of simulation
   * - AD
     - birth prevalence
