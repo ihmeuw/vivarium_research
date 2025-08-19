@@ -148,6 +148,12 @@ Data Tables
 All data values are defined for a specified year, location, age group,
 and sex.
 
+The ``population_agg.nc`` file from the Future Health Scenarios (FHS)
+team is located in the following folder:
+
+``/mnt/share/forecasting/data/9/future/population/
+20240320_daly_capstone_resubmission_squeeze_soft_round_shifted_hiv_shocks_covid_all_who_reagg/``
+
 .. list-table:: Data Sources
   :widths: 20 30 25 25
   :header-rows: 1
@@ -166,7 +172,9 @@ and sex.
     -
   * - population
     - Average population during specified year
-    - loaded from `population_agg.nc` file provided by FHS Team
+    - * get_population (if using standard GBD data), or
+      * loaded from ``population_agg.nc`` file provided by FHS Team (if
+        using forecasted data)
     - Numerically equal to person-years. Often interpreted as population
       at year's midpoint (which is approximately equal to person-years
       if we think the midpoint rule with a single rectangle gives a good
