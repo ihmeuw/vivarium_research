@@ -1854,19 +1854,22 @@ Default stratifications to all observers should include scenario and input draw.
   * - 17.0
     - * Confirm that baseline coverage of IFA matches the health systems team estimates of IFA at ANC as specified in the :ref:`oral iron supplementation intervention page <oral_iron_antenatal>`.
       * Confirm that baseline coverage of MMS is 0 in all locations.
+      * Confirm that the coverage of IFA and MMS match the scenario-specific levels specified in the :ref:`Pregnancy component scenario table <MNCNH pregnancy component scenario table>`.
       * Confirm that only simulants who attend ANC receive IFA in all scenarios.
-      * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of hemoglobin and anemia among PLW and WRA as well as the morbidity and mortality rates of each maternal disorder matches that of GBD.
+      * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of low hemoglobin among pregnant simulants matches that of GBD.
+      * Confirm that the morbidity and mortality risks of each maternal disorder in the baseline scenario matches that of GBD.
       * Use the interactive sim to confirm that maternal hemoglobin exposures stratified by IFA coverage match supplementation effect sizes.
       * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of LBWSG matches that of GBD.
-      * Confirm that in the baseline scenario, the mortality rates of each neonatal disorder among both neonatal age groups continue to match that of GBD.
+      * Confirm that in the baseline scenario, the mortality risks of each neonatal disorder among both neonatal age groups match the values of model 16 unless the bug described in the table below.
       * Confirm that the rate of each birth outcome in the baseline scenario continues to validate to GBD estimates.
       * Confirm that the birth outcome rates stratified by coverage of each supplementation regimen matches the expected supplementation effect sizes.
       * Use the interactive sim to confirm that GA and BW differences between regimens match the effect sizes of each supplementation regimen (i.e., none, only IFA, both IFA and MMS).
     - 
     -
   * - 18.0
-    - * Confirm that coverage of IV iron among the eligible population verifies to the scenario-specific level as specified in the :ref:`IV iron intervention page <intervention_iv_iron_antenatal_mncnh>`.
-      * Confirm that coverage of IV iron is 0 among the non-eligible population.
+    - * Confirm that baseline coverage of IV iron is 0.
+      * Confirm that coverage of IV iron among the eligible population verifies to the scenario-specific level as specified in the :ref:`Pregnancy component scenario table <MNCNH pregnancy component scenario table>`.
+      * Confirm that coverage of IV iron is 0 among the non-eligible population (using the hemoglobin screening column in the maternal population observer).
       * Confirm that hemoglobin level stratified by IV iron coverage matches the expected effect size.
       * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of LBWSG matches that of GBD.
       * Use the interactive sim to confirm that LWBSG exposures between the same individuals in a scenario with IV iron and a scenario without verifies to the IV iron effect sizes on BW and GA specific to that individual's pre-IV iron hemoglobin exposure.
@@ -1875,6 +1878,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Use the interactive sim to confirm that rates of stillbirth binned by hemoglobin exposure match the expected shape of the relationship.
     - 
     - 
+
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
