@@ -1869,8 +1869,8 @@ Default stratifications to all observers should include scenario and input draw.
   * - 18.0
     - * Confirm that baseline coverage of IV iron is 0.
       * Confirm that coverage of IV iron among the eligible population verifies to the scenario-specific level as specified in the :ref:`Pregnancy component scenario table <MNCNH pregnancy component scenario table>`.
-      * Confirm that coverage of IV iron is 0 among the non-eligible population (using the hemoglobin screening column in the maternal population observer).
-      * Confirm that hemoglobin level stratified by IV iron coverage matches the expected effect size.
+      * Confirm that coverage of IV iron is 0 among the non-eligible population (using the anemia screening/'test hemoglobin exposure' column in the maternal population observer).
+      * Confirm that hemoglobin level (using the true hemogobin exposure column in the maternal population observer) stratified by IV iron coverage matches the expected location-specific effect sizes as specified in the :ref:`IV iron intervention page <intervention_iv_iron_antenatal_mncnh>`.
       * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of LBWSG matches that of GBD.
       * Use the interactive sim to confirm that LWBSG exposures between the same individuals in a scenario with IV iron and a scenario without verifies to the IV iron effect sizes on BW and GA specific to that individual's pre-IV iron hemoglobin exposure.
       * Confirm that the rate of each birth outcome in the baseline scenario continues to validate to GBD estimates.
