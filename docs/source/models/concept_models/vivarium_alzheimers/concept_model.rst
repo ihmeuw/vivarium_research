@@ -46,6 +46,8 @@ Alzheimer's Disease Early Detection Simulation
     - Blood-Based Biomarkers
   * - CSF
     - Cerebrospinal Fluid
+  * - computed tomography
+    - CT
   * - MCI
     - Mild Cognitive Impairment
   * - PET
@@ -97,7 +99,7 @@ using population forecasts from the Future Health Scenarios (FHS) team.
 2.0 Modeling Aims and Objectives
 +++++++++++++++++++++++++++++++++
 
-The primary goal is to simulate the impact of early detection strategies
+The primary goal is to simulate the impact of early detection and treatment strategies
 for Alzheimer's disease using blood-based biomarkers and subsequent
 interventions. The simulation tracks simulants through health states
 from age ~30 to 125 years (or death), capturing progression through
@@ -108,7 +110,7 @@ stages of dementia due to Alzheimer's disease.
 -------------
 
 1. **Reference Scenario:** Present-day conditions, including current
-   cerebrospinal fluid (CSF) and amyloid-positron emission tomography
+   cerebrospinal fluid (CSF), computed tomography (CT), amyloid-positron emission tomography
    (PET) diagnostic pathways after clinical disease develops, but with
    no BBBM uptake or disease-modifying therapies.
 2. **Alternative Scenario 1:** Introduction of BBBM testing for at-risk
@@ -125,7 +127,7 @@ comprising a six-stage progression:
   **Susceptible → Preclinical AD → MCI due to AD → Mild AD → Moderate AD
   → Severe AD**
 
-The last three stages correspond to the three sequelae (mild, moderate,
+The last three stages correspond to a portion of the three sequelae (mild, moderate,
 severe) of the GBD cause "Alzheimer's disease and other dementias." We
 will have to separate AD out from other dementias in the GBD data, and
 we will need non-GBD data sources to inform our modeling of preclinical
@@ -159,10 +161,6 @@ The basic plan for the design of the simulation is as follows:
 - On top of the population model, we will add an Alzheimer's disease
   progression model, a testing and diagnosis model, and a treatment
   model, as detailed in the next section
-
-- We're doing a test run with mock-ups of all components and a full
-  population (not just simulants with AD) to get an idea of the runtime
-  for simulating 80 years in 10 locations
 
 3.0 Simulation Components
 ++++++++++++++++++++++++++++++++++++
@@ -370,6 +368,18 @@ scenario, and input draw.
     - * Locations: USA, China
     - Default
     - Default
+  * - 2.2
+    - Fix incidence to be based on full population instead of suscpetible population in fertility
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
+  * - 3.0
+    - Replace population and mortality data with forecasts from IHME's FHS team
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -478,5 +488,63 @@ scenario, and input draw.
         :math:`S = X_{2025}` / (real population with AD in 2025) is the
         model scale (I'm not sure how closely we expect this to match
         model 1)
-    - 
-    - 
+    - * No simulants were susceptible or transitioned as expected
+      * EMR validated, but CSMR and ACMR did not which was expected, 
+        see below for new mortality metrics to validate against
+      * Similarly, YLLs and YLDs did not match as expected, 
+        remove these moving forward
+      * The number of new simulants entering the sim is correct in younger 
+        age groups but incorrect in later ages. This is thought to be an 
+        issue with incidence used in the sim.
+      * Prevalence and real world pop have not been evaluated
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/232bab04fff9591b4fb4a543199ce50091087d95/verification_and_validation/2025_08_12_model2.1_vv.ipynb
+  * - 2.2
+    - **Note:** All these checks can be done separately for each age
+      group and sex, but it may be more prudent to start by looking at
+      aggregated results.
+
+      * Verify the number of new simulants per year against the :ref:`AD
+        population model <other_models_alzheimers_population>`
+      * Verify the prevalent simulants per year against the 
+        :ref:`AD population model <other_models_alzheimers_population>`
+      * Verify that all simulants in the model have AD (i.e., all
+        recorded person-time is in the "AD" state, not the "susceptible"
+        state)
+      * Verify that there are no transitions between AD states during
+        the simulation (since it's an SI model and all simulants should
+        be in the I state the whole time)
+      * Validate Alzheimer's EMR against artifact
+      * Validate overall mortality (ACMR - CSMR + EMR) vs artifact
+    - * No simulants were susceptible or transitioned as expected
+      * EMR, total mortality rate and new sim incidence counts validated
+      * Prevalence was correct on initialization but total sim pop and 
+        prevalence increases for about 10 years before stabilizing. This 
+        is thought to be due to issues with misalignment of incidence and 
+        mortality in GBD data. We are moving to model 3 as pop values change 
+        with forecasting in that sim.
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/b042cdee74149371425c001cedb022e7f6b6a0c4/verification_and_validation/2025_08_14_model2.2_vv.ipynb
+  * - 3.0
+    - **Note:** All these checks can be done separately for each age
+      group and sex, but it may be more prudent to start by looking at
+      aggregated results.
+
+      * Everything from 2.0, except use FHS values for ACMR in the total mortality calculation
+      * Since there are so many (age groups, years, locations, sex) combinations that might be tested, it will be good enough to confirm that new simulant counts and total mortality rates line up for 2030, 2060, and 2090, and for two locations.
+    -
+    -
+
+.. list-table:: Outstanding model verification and validation issues
+  :header-rows: 1
+
+  * - Issue
+    - Explanation
+    - Action plan
+    - Timeline
+  * - YLDs rates do not match in model 1
+    - Thought to be due to incorrect disability weight aggregation
+    - Will be updated when we add severity levels, recheck then
+    - Model 5
+  * - Total simulation population increasing in model 2
+    - Thought to be due to GBD mismatch in mortality and incidence
+    - Population and ACMR's change in model 3 to use FHS data, reassess then
+    - Model 3

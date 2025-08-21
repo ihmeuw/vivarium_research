@@ -166,7 +166,7 @@ and sex.
     -
   * - population
     - Average population during specified year
-    - get_population
+    - loaded from `population_agg.nc` file provided by FHS Team
     - Numerically equal to person-years. Often interpreted as population
       at year's midpoint (which is approximately equal to person-years
       if we think the midpoint rule with a single rectangle gives a good

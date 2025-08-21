@@ -110,7 +110,7 @@ MNCNH Portfolio
 1.0 Overview
 ++++++++++++
 
-This document is the overall page for the MNCNH Portfolio simulation and 
+This document is the overall page for the Maternal, Newborn, and Child Nutrition and Health (MNCNH) Portfolio simulation and
 contains information that relates to all modeled subcomponents included in 
 the simulation.
 
@@ -119,109 +119,157 @@ the simulation.
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-**Objective:** Expand on prior MNCH simulation work to be able to include 
-all MNCNH portfolio products. Compare health gains and costs for each 
-intervention set and help in determining prioritization. Expand the capabilities of 
-the simulation to include more risks and causes, more details on healthcare systems, 
-and details on the intrapartum and neonatal time periods.
+The MNCNH Portfolio simulation builds on work our team has done in other simulations
+of pregnancy and early childhood.
+The most recent was the :ref:`Nutrition Optimization (NO) <2021_concept_model_vivarium_nutrition_optimization>` simulation,
+which (as the name suggests) focused particularly on nutrition interventions.
+That simulation allowed us to estimate the impacts of each intervention, and crucially also
+how the interventions might *interact*, for example due to prevention
+reducing the need for treatment down the line.
+"Optimization" refers to the fact that we used the output of the NO sim to calculate
+*optimal* allocation of money to have the biggest impact given a budget,
+taking all these interactions into account.
+
+Nutrition interventions continue to be included in the MNCNH portfolio sim, but the "portfolio" is
+broader; the intervention space includes more products.
+These products, like the nutrition interventions in the NO project,
+interact in complex ways, and an aim of this simulation is to estimate the impact
+of different *combinations* of these interventions.
+As before, we also plan to estimate costs and calculate optimal budget allocation,
+possibly with improved costing methodology.
+This page serves as documentation for the simulation part of the project, which is focused
+on estimating burden under a variety of scenarios designed to surface all the relevant product interactions.
+
+Simulating more interventions means simulating more risks and causes for those interventions
+to act on, simulating more details of the healthcare system to model how those interventions
+would be delivered, and including more detail in the intrapartum (labor and delivery) and neonatal time periods.
+
+We plan to complete this work in 3 waves. 
+
+* Wave 1 will include the basic model design, outlines of the healthcare system, and some interventions (AI ultrasound, RDS management).
+* Wave 2 will add in some antenatal supplements (MMS, IV iron), the hemoglobin risk for birthing parents, all downstream causes affected by hemoglobin, and higher level delivery facility interventions.
+* Wave 3 will add in gestational blood pressure and relevant causes and risks including pre-eclampsia care and downstream effects of high blood pressure.
+
+As of August 2025, Wave 1 is mostly complete in both documentation and implementation, and Wave 2 is partially documented and has just started implementation.
 
 .. _mncnh_portfolio_3.0:
 
 3.0 Concept model diagram and submodels
 +++++++++++++++++++++++++++++++++++++++
 
-A table of contents for all modules in this simulation is included below
+As in the NO simulation, rather than simulate an entire population of all ages and sexes,
+this simulation includes only pregnant people and the neonates they give birth to.
+We start the simulation with a cohort of simulants all at the beginning of pregnancy, and move
+them in lockstep through their pregnancies.
+For those pregnancies that result in a live birth, we then simulate a neonate (we do not model twins)
+through the first month of life.
+In this way, our simulation represents all the people who may benefit from the interventions of interest,
+without wasting computational resources on simulating irrelevant people, such as adult males.
+We call the potential simulant pair we follow through the simulation (pregnant person and neonate) a
+"simulant dyad."
+
+This model is different than NO and other simulations we've done in that it follows a decision-tree-like
+format in which we jump directly to from one decision point to the next rather than taking equal-sized steps
+through time.
+For this reason, throughout this model we calculate and express events in terms of probabilities,
+rather than rates per person-time or similar.
+
+The overall simulation model is divided into four "components," which are differentiated by the timespan
+and the simulant that they model.
+
+* The :ref:`Pregnancy component <mncnh_portfolio_pregnancy_component>`, which models
+  from the beginning of pregnancy until the start of labor.
+* The :ref:`Intrapartum component <mncnh_portfolio_intrapartum_component>`, which models
+  labor and delivery, including delivery complications.
+* The :ref:`Neonatal component <mncnh_portfolio_neonatal_component>`, which models the
+  first month of life for newborns.
+* The :ref:`Postpartum component <mncnh_portfolio_postpartum_component>`, which models the
+  six weeks after the end of pregnancy for the pregnant person.
+
+.. warning::
+
+  When we say "component" here, we mean something distinct from a
+  :ref:`Vivarium component <vivarium:components_concept>`.
+
+Graphically, the component breakdown looks like this:
+
+.. image:: component_overview_diagram.drawio.png
+
+.. note::
+
+  Do not interpret the x-axis in this diagram as time, since e.g. the duration of pregnancy is not at all
+  constant.
+  Also, if misinterpreted this way, the x-axis would be wildly not to scale.
+
+However, the only situation in which all components are actually reached for a given simulant
+dyad is the case in which the pregnancy results in a live birth and the birthing person survives
+childbirth.
+In other situations, some components will not be reached.
+The rules by which components flow into other components are as follows:
+
+* All simulant dyads start at the pregnancy component.
+* If the birth outcome from the pregnancy component is a "full-term pregnancy" (live or stillbirth, NOT abortion/miscarriage/ectopic pregnancy), proceed to the intrapartum component.
+  Otherwise, skip to the postpartum component.
+* At the end of the intrapartum component, if the birth outcome from the pregnancy component is a live birth,
+  proceed to the neonatal component.
+  Otherwise, if the birth parent survives childbirth, proceed to the postpartum component.
+* At the end of the neonatal component, if the birth parent survived childbirth in the intrapartum component,
+  proceed to the postpartum component.
+
+Here is a graphic representation of the same information:
+
+.. image:: component_flow_diagram.drawio.png
+
+Each component is further subdivided into "modules,"
+which are organized by topic (rather than by time/simulant as in the components).
+Each module may have some simulant dyad attributes as input (values it needs)
+and some simulant dyad attributes as output (values it initializes).
+Module outputs may be 
+used as inputs to other modules and/or serve as information for verification and 
+validation and/or simulation results.
+For clarity, in the tables below we will write the modules in an order that satisfies the following property:
+each variable is defined as a module output prior to being 
+used as a module input.
+This helps us make sure we aren't creating any cyclic dependencies.
+Technically, any order satisfying this property is an equivalent, valid order in which
+the modules could be run in the simulation.
+
+.. note::
+
+  There is :ref:`a template <2024_vivarium_mncnh_portfolio_module_template>` to use when creating new module pages.
+
+..
+  The below toctree, which used to be rendered (not :hidden:), shows all the modules in a flat list in alphabetical order.
+  This didn't seem to add much beyond the tables below, and in fact was kind of confusing since all the components'
+  modules were listed together and interspersed.
 
 .. toctree::
    :maxdepth: 1
    :glob:
+   :hidden:
 
    */module_document*
+  
+.. _mncnh_portfolio_pregnancy_component:
 
-.. note::
+Pregnancy component
+-------------------
 
-  This concept model diagram was reorganized in April 2025 after much of wave I had been implemented. A record of the PRs for this reorganization are listed below:
+.. todo::
 
-  * Pregnancy component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1615 <https://github.com/ihmeuw/vivarium_research/pull/1615>`_
-  * Intrapartum component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1617 <https://github.com/ihmeuw/vivarium_research/pull/1617>`_
-  * Neonatal component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1619 <https://github.com/ihmeuw/vivarium_research/pull/1619>`_
-
-
-We plan to complete this work in 3 waves. 
-
-* Wave 1 will include the basic model design, outlines of the healthcare system, and some interventions (AI ultrasound, higher level delivery facility interventions, RDS management). 
-* Wave 2 will add in some antenatal supplements (MMS, IV iron), the hemoglobin risk for birthing parents, and all downstream causes affected by hemoglobin. 
-* Wave 3 will add in gestational blood pressure and relevant causes and risks including pre-eclampsia care and downstream effects of high blood pressure. 
-
-The model is further subdivided into three components:
-
-1. Pregnancy component
-2. Intrapartum component
-3. Neonatal component
-
-Each component will consist of several modules, which will convert certain module 
-inputs to module outputs via decision tree-based instructions. Module outputs may be 
-used as inputs to other modules and/or serve as information for verification and 
-validation and/or simulation results.
-
-The following tables link to each simulation module and provide a summary of module 
-input and output variables. Notably, the ordering of modules in the table is 
-significant: the order of operations for implementation moves from top to bottom. 
-Specically, each variable must be defined as a module output in a row prior to being 
-defined as a module input in a subsequent row.
+  Split the pregnancy module page into two to reflect the split here, which was necessary to get the right ordering of
+  inputs and outputs
 
 .. _mncnh_portfolio_pregnancy_component_modules:
 
 .. list-table:: Pregnancy Component Modules
-  :header-rows: 1
-
-  * - Module
-    - Inputs
-    - Outputs
-    - Nested subcomponents
-  * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-    - 
-    - * ANC propensity
-      * LBWSG category propensity
-      * IFD propensity
-      * RDS intervention propensity
-    - * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
-  * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    - * LBWSG category propensity
-    - * Maternal age
-      * Pregnancy term length
-      * Birth outcome
-      * Sex of infant
-      * Gestational age
-      * Birthweight
-      * Pregnancy duration
-      * Preterm status
-    - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-      * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
-  * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
-    - * ANC propensity
-    - * ANC attendance
-    - 
-  * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-    - * ANC attendance
-      * Gestational age
-    - * Ultrasound type
-      * Estimated gestational age
-      * Believed preterm status
-    - 
-
-.. note::
-
-  Below is a draft of the pregnancy module table for wave II of the simulation. This will remain as a draft/note until wave II is ready for implementation to avoid conflicts with existing wave I documenation currently being used for implementation.  
-
-  .. list-table:: Draft Wave II Pregnancy Component Modules
     :header-rows: 1
 
     * - Module
       - Inputs
       - Outputs
       - Nested subcomponents
-      - Note
+      - Wave II changes vs Wave I
     * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
       - 
       - * ANC propensity
@@ -275,6 +323,11 @@ defined as a module input in a subsequent row.
       - 
       - No changes from wave I
 
+.. _mncnh_portfolio_intrapartum_component:
+
+Intrapartum component
+---------------------
+
 .. note::
 
   Only full term pregnancies (live or stillbirths, NOT abortions/miscarriages/ectopic pregnancies) will proceed to the intrapartum component. Therefore, pregnancy term length is a de facto input to all modules in the intrapartum component.
@@ -291,52 +344,14 @@ defined as a module input in a subsequent row.
   noting this limitation until we implement a strategy to address this (`see related 
   ticket here <https://jira.ihme.washington.edu/browse/SSCI-2310>`_)
 
-.. list-table:: Intrapartum Component Modules
-  :header-rows: 1
-
-  * - Module
-    - Inputs
-    - Outputs
-    - Nested subcomponents
-  * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
-    - * (Pregnancy term length)
-      * IFD propensity
-      * Believed preterm status
-    - * IFD status
-      * Birth facility
-    - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
-  * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - * (Pregnancy term duration)
-      * Birth facility
-      * Believed gestational age
-      * ANC attendance
-      * RDS intervention propensity
-    - * Intrapartum azithromycin coverage
-      * Antenatal corticosteroid coverage
-      * Misoprostol coverage
-    - * :ref:`Intrapartum azithromycin intervention <azithromycin_intervention>` 
-      * :ref:`Misoprostol intervention <misoprostol_intervention>`
-      * :ref:`Antenatal corticosteroids <acs_intervention>`
-  * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
-    - * (Pregnancy term duration)
-      * Intrapartum azithromycin coverage
-      * Misoprostol coverage
-    - * Maternal disorders outcomes (see outcome table)
-    - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
-      * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
-      * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
-      * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
-
-.. note::
-
-  .. list-table:: Draft Wave II Intrapartum Component Modules
+.. list-table:: Draft Wave II Intrapartum Component Modules
     :header-rows: 1
 
     * - Module
       - Inputs
       - Outputs
       - Nested subcomponents
-      - Note
+      - Wave II changes vs Wave I
     * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
       - * (Pregnancy term length)
         * IFD propensity
@@ -366,10 +381,13 @@ defined as a module input in a subsequent row.
         * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
-      - Wave II changes: 
-
-        * Hemoglobin at birth as a variable that impacts maternal disorders causes
+      - * Hemoglobin at birth as a variable that impacts maternal disorders causes
         * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
+
+.. _mncnh_portfolio_neonatal_component:
+
+Neonatal component
+------------------
 
 .. note::
 
@@ -403,6 +421,11 @@ defined as a module input in a subsequent row.
       * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
       * :ref:`Hemoglobin risk effects <2023_hemoglobin_effects>`
 
+.. _mncnh_portfolio_postpartum_component:
+
+Postpartum component
+--------------------
+
 .. list-table:: Postpartum Component Modules
   :header-rows: 1
 
@@ -429,14 +452,14 @@ defined as a module input in a subsequent row.
     - * Anemia YLDs
     - * :ref:`Anemia impairment <2019_anemia_impairment>`
     - New module in wave II
-  * - * :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>`
+  * - :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>`
     - * Hemoglobin at birth
     - * Maternal disorders outcomes (see outcome table)
     - * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
       * :ref:`Hemoglobin risk effects document <2023_hemoglobin_effects>`
     - New module in wave II
 
-**Wave 1 Concept Model Map:**
+**Wave 1 Concept Model Map (has not been updated recently):**
 
 .. image:: wave_1_full.svg
 
@@ -473,7 +496,7 @@ defined as a module input in a subsequent row.
     - Defined in the baseline coverage section of the :ref:`oral iron supplementation page <oral_iron_antenatal>`
     - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
     - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
-    - XXX
+    - Defined in the baseline coverage section of the :ref:`IV iron page <intervention_iv_iron_antenatal_mncnh>`
     - 
   * - 2. CPAP total scale-up
     - Baseline
@@ -1684,8 +1707,10 @@ Default stratifications to all observers should include scenario and input draw.
   * - 13.3
     - * Check that neonatal all-cause mortality risks match expectation
       * Check that neonatal cause-specific mortality risks match expectation
-    - 
-    - 
+    - * All-cause mortality risks unchanged from 13.2, as expected
+      * Substantial improvement (reduction) in late neonatal overestimation of other-causes mortality risk and underestimation of preterm mortality risk in all locations;
+        however, there still appears to be systematic bias in this direction
+    - `Model 13.3 neonatal checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/d8dce03ab1de546d6af5719c59e344d77384d93f/verification_and_validation/model_13.3_nn_checks.ipynb>`_
   * - 14.0
     - * Confirm ANC attendance exposure varies as expected by pregnancy term length
       * Confirm ANC attendance exposure matches expectation
@@ -1806,8 +1831,8 @@ Default stratifications to all observers should include scenario and input draw.
     - TBD
   * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
     - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
-    - One possible cause addressed in model 13.3
-    - For 13.3
+    - Research to debug further
+    - TBD
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revisit following GBD 2023 update
@@ -1835,6 +1860,14 @@ Default stratifications to all observers should include scenario and input draw.
 
 * [Finkelstein-et-al-2024]_ primarily includes RCTs from high-income countries, so the effect size for IFA on maternal hemoglobin may be overestimated for Sub-Saharan African countries (including Ethiopia and Nigeria) with typically higher rates of non-iron deficiency anemias.
 
+* We do not currently model an oral iron treatment intervention, despite the recommendation by WHO to treat all pregnancies with IFA and all anemic pregnancies with oral iron treatment (essentially a higher dosage of iron than IFA).
+  We have a `JIRA ticket <https://jira.ihme.washington.edu/browse/SSCI-2376>`_ to add this intervention in the future, but it is not currently prioritized. 
+  There are some individuals who receive oral iron treatment at baseline and we want to model the replacement of that oral iron treatment with IV iron treatment. 
+  However, we are not subtracting out the effect of oral iron treatment prior to modeling the scale up of IV iron treatment. This will result in the following limitations:
+  
+    * For individuals who received oral iron treatment at baseline and still remain eligible for IV iron following their oral iron treatment: we will double count the impact of the interventions, thus overestimating the potential scale-up of IV iron.
+    * For individuals who received oral iron treatment at baseline and no longer remain eligible for IV iron following their oral iron treatment: there will be essentially no difference in impact for this population given that IV and oral iron treatment have basically equal impacts, however, we will be underestimating the size of the population requiring treatment and therefore underestimating the cost required to achieve the health outcomes seen in these scenarios.
+
 .. _mncnh_portfolio_7.0:
 
 7.0 References/Other
@@ -1843,3 +1876,11 @@ Default stratifications to all observers should include scenario and input draw.
 .. [Tikmani-et-al-2016]
 
   See the "("Darmstadt 2011" reference in: Tikmani SS, Muhammad AA, Shafiq Y, Shah S, Kumar N, Ahmed I, Azam I, Pasha O, Zaidi AK. Ambulatory Treatment of Fast Breathing in Young Infants Aged <60 Days: A Double-Blind, Randomized, Placebo-Controlled Equivalence Trial in Low-Income Settlements of Karachi. Clin Infect Dis. 2017 Jan 15;64(2):184-189. doi: 10.1093/cid/ciw690. Epub 2016 Oct 19. PMID: 27941119; PMCID: PMC5853586.
+
+.. note::
+
+  This concept model was reorganized in April 2025 after much of wave I had been implemented. A record of the PRs for this reorganization are listed below:
+
+  * Pregnancy component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1615 <https://github.com/ihmeuw/vivarium_research/pull/1615>`_
+  * Intrapartum component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1617 <https://github.com/ihmeuw/vivarium_research/pull/1617>`_
+  * Neonatal component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1619 <https://github.com/ihmeuw/vivarium_research/pull/1619>`_

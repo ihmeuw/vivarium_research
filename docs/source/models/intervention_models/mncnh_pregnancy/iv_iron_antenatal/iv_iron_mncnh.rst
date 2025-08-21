@@ -42,9 +42,8 @@ The antenatal IV iron intervention is intended to treat moderate and severe iron
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-.. todo::
-
-  Update baseline coverage data 
+IV iron treatment for iron-definiciency anemia pregnancy remains a relatively new intervention, and as such, coverage remains relatively low in low- and middle-income countries, such as Nigeria (see [Akinajo-et-al-2024]_). 
+As such, we will assume a baseline coverage of 0% for all locations for the IV iron intervention. 
 
 Vivarium Modeling Strategy
 --------------------------
@@ -87,30 +86,63 @@ The IV iron intervention has a direct effect on hemoglobin exposure in pregnancy
 Hemoglobin exposure
 +++++++++++++++++++++
 
-.. todo::
-
-  Update IV iron effect size to be consistent with new data from Chris T.
-  Also, assume no individual level heterogeneity despite having some data on this. (We chose not to model this in order to simplify the data prep for this model)
-
 .. list-table:: Maternal hemoglobin effect size
   :header-rows: 1
 
   * - Population
+    - Location
     - Effect size
     - Parameter uncertainty
     - Stochastic uncertainty
     - Note
   * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
-    - 
-    - 
-    - 
-    - 
+    - Nigeria and Ethiopia
+    - +20.2 mg/L
+    - 95% CI: [18.9, 21.5] mg/L
+    - Assumed to be zero for simplicity
+    - From the REVAMP study (second trimester) [Pasricha-et-al-2023]_
+  * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
+    - Pakistan
+    - +26.3 mg/L
+    - 95% CI: [25.7, 26.9] mg/L
+    - Assumed to be zero for simplicity
+    - From the RAPID study [Derman-et-al-2025]_ 
+
+.. note::
+
+  Unlike the REVAMP study, the RAPID study did include ferritin levels (serum ferritin <30 ng/mL) as an eligibility criterion for receiving IV iron, but it is still not consistent with our assumption that IV iron is only administered to those with low ferritin levels, because low ferritin OR low hemoglobin was used to determine if a pregnant person was eligible for the intervention.
+  The RAPID study therefore still has the same limitation regarding pre-intervention ferritin status (see Assumptions and limitations section below)
+
+.. note::
+
+  We calculated the 95% confidence intervals for the effect size of IV iron on hemoglobin concentrations using the following method: 
+  
+    1. SE = SD / sqrt(n)
+    2. LCL = mean – 1.96 * SE
+    3. UCL = mean + 1.96 * SE
+
+  For the REVAMP trial, SD = 14.1 and n=430, and for the RAPID trial, SD = 12.0 and n=1462.
 
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - We assume the effect of the intervention persists through the end of the period for which we track hemoglobin status
 - We do not consider effect modification by baseline hemoglobin status. In reality, the effect of IV iron may be greater among women with lower baseline hemoglobin levels.
+- We assume that the effect size of IV iron on hemoglobin concentrations as reported in the REVAMP study (which took place in Malawi) is representative of the effect size in Nigeria and Ethiopia, and that the value reported by the RAPID study (which took place in India) is representative of the effect size in Pakistan.
+- We assume that the effect of IV iron among those with low ferritin levels (those eligible in our simulation) is the same as the effect of IV iron among people not screened for ferritin (the study population for both the RAPID and REVAMP studies). 
+  In reality, we'd expect that people with low ferritin would benefit more, so we may underestimate the impact of the intervention.
+- We assume that the change in hemoglobin concentrations from baseline to endline in the RAPID and REVAMP studies is more appropriate to use for our simulation than the comparison between the IV iron arm and the standard-of-care arm.
+  This is because our standard of care (IFA) model in our simulation does not appropriately include the effect modification of IFA for the population eligible for IV iron (our model underestimates the effect of IFA among this population). 
+  Therefore, if we used the difference between the arms we would be underestimating the total effect of IV iron among this population unless we updated our model of IFA. 
+  So we use the difference between endline and baseline to more closely model the total effect of IV iron on hemoglobin. 
+  The resulting limitation from this approach is that we will attribute some of the impact that actually comes from the standard-of-care intervention (IFA) to the IV iron intervention in our model, resulting in an overestimation of the impact of IV iron and an underestimation of the impact of MMS. 
+- We do not consider effect modification by timing of IV iron administration, and thereby assume that pregnant people that receive IV iron in the second trimester of their pregnancy have the same effect size as those who receive it in the third trimester (despite [Pasricha-et-al-2025]_ reporting a lower effect size for the latter group).
+  As such, we are likely overestimating the effect of IV iron for those who don't receive it until their third trimester. 
+  Because we are not currently modeling (a) the timing of "later pregnancy" ANC visits or (b) the hemoglobin trajectory throughout pregnancy in enough detail to figure out exactly when the IV iron is administered to a simulant, we assume that we will get to them early (i.e., administer IV iron during second trimester) with the new minimally invasive screening protocol being scaled up in this simulation.
+    
+    * We have a `JIRA ticket to address this limitation <https://jira.ihme.washington.edu/browse/SSCI-2377>`_ if we choose to do so.
+- We assume that there is no individual-level heterogeneity in the effect of IV iron on hemoglobin concentrations, despite having some data that could inform this. 
+  We chose not to include stochastic uncertainty in order to simplify the data prep needed for this intervention model.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -274,3 +306,19 @@ Assumptions and limitations
 
 References
 ------------
+
+.. [Akinajo-et-al-2024]
+
+  Akinajo, O.R., Babah, O.A., Banke-Thomas, A. et al. Acceptability of IV iron treatment for iron deficiency anaemia in pregnancy in Nigeria: a qualitative study with pregnant women, domestic decision-makers, and health care providers. Reprod Health 21, 22 (2024). https://doi.org/10.1186/s12978-024-01743-y
+
+.. [Derman-et-al-2025]
+
+  Derman RJ, Bellad MB, Somannavar MS, Bhandari S, Mehta S, Mehta S, Sharma DK, Yogeshkumar S, Charantimath U, Patil AP, Mallapur AA, Ramadurg U, Sangavi R, Patil PS, Roy S, Vastrad P, Shekhar C, Leiby BE, Hartman RL, Georgieff M, Mennemeyer S, Aghai Z, Thind S, Boelig RC; RAPIDIRON Trial Group (Appendix). Single-dose intravenous iron vs oral iron for treatment of maternal iron deficiency anemia: a randomized clinical trial. Am J Obstet Gynecol. 2025 Aug;233(2):120.e1-120.e18. doi: 10.1016/j.ajog.2025.01.037. Epub 2025 Feb 3. PMID: 39909327.
+
+.. [Pasricha-et-al-2023]
+
+  Pasricha, S.R., Mwangi, M.N., Moya, E., Ataide, R., Mzembe, G., Harding, R., et al. (2023). Ferric carboxymaltose versus standard-of-care oral iron to treat second-trimester anaemia in Malawian pregnant women: a randomised controlled trial. The Lancet 401, 10388, P1595-1609 (2023). https://doi.org/10.1016/S0140-6736(23)00278-7 
+
+.. [Pasricha-et-al-2025]
+
+  Pasricha, SR., Moya, E., Ataíde, R. et al. Ferric carboxymaltose for anemia in late pregnancy: a randomized controlled trial. Nat Med 31, 197–206 (2025). https://doi.org/10.1038/s41591-024-03385-w
