@@ -28,9 +28,9 @@
 
 .. _2021_cause_alzheimers_disease:
 
-==============================
-Alzheimer's Disease (GBD 2021)
-==============================
+==================================================
+Alzheimer's disease and other dementias (GBD 2021)
+==================================================
 
 .. contents::
   :local:
