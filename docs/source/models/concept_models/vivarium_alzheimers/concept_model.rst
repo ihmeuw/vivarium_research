@@ -178,7 +178,7 @@ The basic plan for the design of the simulation is as follows:
       all-cause mortality
     - Forecasted population data, age-specific incidence rates of
       preclinical AD
-  * - :ref:`Alzheimer's Disease Model <2021_cause_alzheimers_disease>`
+  * - :ref:`Alzheimer's Disease Model <cause_alzheimers_disease>`
     - Disease progression
     - Transition rates through 6 stages of AD, cause-specific mortality
     - Population model
