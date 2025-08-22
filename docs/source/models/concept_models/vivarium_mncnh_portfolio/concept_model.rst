@@ -1408,14 +1408,14 @@ Default stratifications to all observers should include scenario and input draw.
     - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
     - Default
   * - 20.0*
-    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>`_ (data on effect have yet to be calculated as of 8/22/25)
+    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data on effect have yet to be calculated as of 8/22/25)
     - Baseline and IV iron scale-up scenarios
     - ``model20.0``
     - Default
     - Default
     - Default
   * - 21.0*
-    - Hemoglobin effect on neonatal sepsis as defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>`_ (data for effects and PAFs have yet to be calculated as of 8/22/25)
+    - Hemoglobin effect on neonatal sepsis as defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (data for effects and PAFs have yet to be calculated as of 8/22/25)
     - Baseline and IV iron scale-up scenarios
     - ``model21.0``
     - Default
