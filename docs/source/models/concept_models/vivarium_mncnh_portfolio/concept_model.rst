@@ -606,8 +606,8 @@ Postpartum component
   * - 17. MMS total scale-up
     - Baseline
     - Baseline
-    - Baseline
     - 100% MMS
+    - Baseline
     - Baseline
     - Baseline
     - 
@@ -814,7 +814,7 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 19.0 IV iron scale-up
+  * - 19. IV iron scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -1395,29 +1395,29 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 18.0
     - :ref:`Anemia screening implementation <anemia_screening>` (including hemoglobin and ferritin screenings), see also the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-    - ``model18.0``
     - Baseline, MMS scale-up, and anemia screening scale-up scenarios
+    - ``model18.0``
     - Default
     - Default, note hemoglobin and ferritin screening coverage and results added as stratifying variables to maternal population observer
     - Default
   * - 19.0
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
-    - ``model19.0``
     - Baseline and IV iron scale-up scenarios
+    - ``model19.0``
     - Default
     - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
     - Default
   * - 20.0*
     - IV iron effects on birth weight, gestational age, and stillbirth
-    - ``model20.0``
     - Baseline and IV iron scale-up scenarios
+    - ``model20.0``
     - Default
     - Default
     - Default
   * - 21.0*
     - Hemoglobin effect on neonatal sepsis
-    - ``model21.0``
     - Baseline and IV iron scale-up scenarios
+    - ``model21.0``
     - Default
     - Default
     - Default
