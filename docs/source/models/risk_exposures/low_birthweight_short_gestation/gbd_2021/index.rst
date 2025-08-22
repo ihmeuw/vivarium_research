@@ -26,10 +26,10 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _2019_risk_exposure_lbwsg:
+.. _2021_risk_exposure_lbwsg:
 
 =============================================
-Low Birthweight and Short Gestation: GBD 2019
+Low Birthweight and Short Gestation: GBD 2021
 =============================================
 
 .. contents::
@@ -38,12 +38,17 @@ Low Birthweight and Short Gestation: GBD 2019
 Risk Exposure Overview
 ----------------------
 
-.. todo::
+Parameters related to gestational age (time since the start of pregnancy) and infant
+size at birth are highly relevant to infant health and can be measured in several ways.
+Gestational age at birth and birthweight are continuous measures that each have widely
+used cut-offs to define preterm birth (less than 37 weeks gestational age at birth) and
+low birth weight (less than 2,500 grams). Notably, these measures are expected to be 
+highly correlated as babies who are born prematurely will be, on average, smaller than
+babies born at a later gestational age as they have not had as much time to grow.
 
-  Include here a clinical background and overview of the risk exposure you're
-  modeling. Note that this is only for the exposure; you will include
-  information on the relative risk of the relevant outcomes, and the cause
-  models for those outcomes, in a different document.
+There are additional meaures such as "small for gestational age" attempt to classify when 
+a particular infant is born at a smaller weight than expected for their particular gestational 
+age at birth, but these measures are not in scope of this risk factor.
 
 Risk Exposures Description in GBD
 ---------------------------------
@@ -61,17 +66,17 @@ Risk Exposures Description in GBD
 
     - TMREL? (This should be a very high level overview. Namely, does the TMREL vary by outcome? The details of the TMREL will be included in the *Risk Outcome Relationship Model* section)
 
-  See [GBD-2019-Risk-Factors-Appendix-LBWSG]_
+  See [GBD-2021-Risk-Factors-Appendix-LBWSG]_
 
 Vivarium Modeling Strategy
 --------------------------
 
-Our strategy for modeling exposure will be the same as for the :ref:`GBD 2017 Low Birth Weight and Short Gestation Model <2017_risk_lbwsg>`.
+Our strategy for modeling exposure will be the same as for the :ref:`GBD 2019 Low Birth Weight and Short Gestation Model <2019_risk_lbwsg>`.
 
 Converting GBD's categorical exposure distribution to a continuous exposure distribution
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-In GBD 2019, LBWSG exposure is modeled as an ordered polytomous distribution
+In GBD 2021, LBWSG exposure is modeled as an ordered polytomous distribution
 specifying the prevalence of births in each 500g x 2week
 birthweight--gestational-age bin/category. We first convert this discrete
 exposure distribution into a continuous joint exposure distribution of
@@ -110,7 +115,7 @@ GBD. Example Python code for achieving these transformations can be found here:
 Restrictions
 ++++++++++++
 
-.. list-table:: GBD 2019 Risk Exposure Restrictions
+.. list-table:: GBD 2021 Risk Exposure Restrictions
    :widths: 15 15 20
    :header-rows: 1
 
@@ -118,21 +123,17 @@ Restrictions
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
-     -
+     - False
      -
    * - Age group start
-     -
-     -
+     - 164
+     - Birth
    * - Age group end
-     -
-     -
-
-..	todo::
-
-	Determine if there's something analogous to "YLL/YLD only" for this section
+     - 3
+     - Late neonatal
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -143,20 +144,13 @@ Assumptions and Limitations
   and the limitations these assumptions impose on the applicability of the
   model.
 
-Risk Exposure Model Diagram
-+++++++++++++++++++++++++++
-
-.. todo::
-
-  Include diagram of Vivarium risk exposure model.
-
 Data Description
 ++++++++++++++++
 
-Pulling LBWSG exposure data from GBD 2019
+Pulling LBWSG exposure data from GBD 2021
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can pull GBD 2019 exposure data for Low Birthweight and Short Gestation
+You can pull GBD 2021 exposure data for Low Birthweight and Short Gestation
 using the following call to ``get_draws`` (replace :code:`ETHIOPIA_ID` with the
 appropriate location IDs for the model you're working on):
 
@@ -164,19 +158,17 @@ appropriate location IDs for the model you're working on):
 
   LBWSG_REI_ID = 339
   ETHIOPIA_ID = 179
-  GBD_2019_ROUND_ID = 6
+  GBD_2021_RELEASE_ID = 16
 
   lbwsg_exposure = get_draws(
         gbd_id_type='rei_id',
         gbd_id=LBWSG_REI_ID,
         source='exposure',
         location_id=ETHIOPIA_ID,
-        year_id=2019,
+        year_id=2021,
   #       age_group_id = [164,2,3], # Pulls all three age groups by default
   #       sex_id=[1,2], # Pulls sex_id=[1,2] by default, but data for sex_id=3 also exists
-        gbd_round_id=GBD_2019_ROUND_ID,
-        status='best',
-        decomp_step='step4',
+        release_id=GBD_2021_RELEASE_ID
   )
 
 .. note::
@@ -194,23 +186,32 @@ appropriate location IDs for the model you're working on):
     (sex_id=[1,2]) since we will be initializing our population using GBD's
     population data and stratifying by sex.
 
-.. _rescaling_lbwsg_exposure_data_pulled_from_gbd_2019:
+.. _rescaling_lbwsg_exposure_data_pulled_from_gbd_2021:
 
-Rescaling LBWSG exposure data pulled from GBD 2019
+Rescaling LBWSG exposure data pulled from GBD 2021
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. note::
+  
+  The following information has been copied from the GBD 2019 LBWSG exposure
+  document. `The notebook linked here <https://github.com/ihmeuw/vivarium_research_lsff_by_wealth_quintile/blob/main/lbwsg_notebooks/2024_07_12_pull_gbd_2021_lbwsg_data.ipynb>`_ 
+  demonstrates that the same issue present
+  in GBD 2019 that is addressed below is also present in GBD 2021.
 
 .. important::
 
-  **The GBD 2019 exposure data for Low Birthweight and Short Gestation is potentially misleading as currently stored!**
+  **As was the case for GBD 2019, the GBD 2021 exposure data for Low Birthweight**
+  **and Short Gestation is potentially misleading as currently stored!**
 
-  Namely, the prevalences of the LBWSG categories returned by ``get_draws`` do **not** add up to 1! To fix the problem, follow these steps:
+  Namely, the prevalences of the LBWSG categories returned by ``get_draws`` 
+  do **not** add up to 1! To fix the problem, follow these steps:
 
   1.  Drop rows of the exposure data with ``'parameter' == 'cat125'`` (these
       are precisely the rows with ``'modelable_entity_id' == NaN``). cat125 is
       not a modeled category but rather a residual category automatically added
       by ``get_draws`` because the prevalences that the LBWSG modelers gave to
       central comp did not add up to 1 in each draw (see details :ref:`below
-      <details of GBD 2019 LBWSG exposure data issue>`).
+      <details of GBD 2021 LBWSG exposure data issue>`).
 
   2.  For each draw, divide the prevalence of each of the 58 remaining LBWSG
       exposure categories by the sum of the prevalences for that draw. This
@@ -250,7 +251,7 @@ Rescaling LBWSG exposure data pulled from GBD 2019
   We should double-check with the LBWSG modelers that rescaling the prevalences
   is a reasonable way to adjust the GBD data for use in our simulations.
 
-.. _details of GBD 2019 LBWSG exposure data issue:
+.. _details of GBD 2021 LBWSG exposure data issue:
 
 .. todo::
 
@@ -310,51 +311,27 @@ distribution of birthweights and gestational ages is uniform within each
 category. Once a simulant's LBWSG category, birthweight, and gestational age
 have been assigned, these values remain the same throughout the simulation.
 
-.. todo::
-
-  As of 02/10/2020: follow the template created by Ali for Iron Deficiency,
-  copied below. If we discover it's not general enough to accommodate all
-  exposure types, we need to revise the format in coworking.
-
-.. list-table:: Constants
-	:widths: 10, 5, 15
-	:header-rows: 1
-
-	* - Constant
-	  - Value
-	  - Note
-	* -
-	  -
-	  -
-
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
-
-	* - Parameter
-	  - Value
-	  - Note
-	* -
-	  -
-	  -
-
 Validation Criteria
 +++++++++++++++++++
 
-..	todo::
-	Fill in directives for this section
+- Verification: when the assigned continuous birthweight and gestational age at birth exposure values are converted to their corresponding GBD LBWSG exposure categories, the sex/location/draw/year-specific categorical exposure prevalence assigned at birth should match the GBD distribution.
+
+  - See `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/old_vnv_notebooks/lbwsg_distribution.ipynb>` as example that utilizes the interactive simulation and various plotting strategies to evaluate this verification criteria
+
+- Verification: the assigned continuous birthweight and gestational age exposures assigned at birth should not change as simulants age.
+
+- Validation: when the assigned continuous birthweight and gestational age at birth exposure values are converted to their corresponding GBD LBWSG exposure categories, the sex/location/draw/year-specific categorical exposure prevalence among the early and late neonatal age groups (as simulants age past birth) should match the GBD distribution.
+
+  - Meeting this validation criteria is dependent on the models of LBWSG risk effects and neonatal mortality among these age groups.
 
 References
 ----------
 
-.. [GBD-2019-Risk-Factors-Appendix-LBWSG]
+.. [GBD-2021-Risk-Factors-Appendix-LBWSG]
 
- Pages 167-177 in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
+ Pages 326-338 in `Supplementary appendix 1 to the GBD 2021 Risk Factors Capstone <2021_risk_factors_methods_appendix_>`_:
 
-   **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factors Collaborators.
-   :title:`Global burden of 87 risk factors in 204 countries and territories,
-   1990–2019: a systematic analysis for the Global Burden of Disease Study
-   2019`. Lancet 2020; **396:** 1223–49. DOI:
-   https://doi.org/10.1016/S0140-6736(20)30752-2
+   **(GBD 2021 Risk Factors Capstone)** GBD 2021 Risk Factors Collaborators.
+   :title:`Global burden and strength of evidence for 88 risk factors in 204 countries and 811 subnational locations, 1990–2021: a systematic analysis for the Global Burden of Disease Study 2021`. Lancet 2024; **403:** 2162-2203. DOI: https://doi.org/10.1016/s0140-6736(24)00933-4
 
-.. _2019_risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
+.. _2021_risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(24)00933-4/attachment/e175b500-3467-4cc5-aff8-ded0c0eea399/mmc1.pdf
