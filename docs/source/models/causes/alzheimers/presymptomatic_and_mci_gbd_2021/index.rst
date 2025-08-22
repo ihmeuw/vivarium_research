@@ -268,7 +268,7 @@ table.
     - Notes
   * - S
     - prevalence
-    - * 1 - prevalence_BBBM - prevalence_MCI - prevalence_c543 (if
+    - * 1 - prevalence_all_AD_stages (if
         modeling entire population including susceptible simulants), or
       * 0 (if modeling only simulants with AD as described in the
         :ref:`Alzheimer's population model
@@ -288,9 +288,10 @@ table.
     - Used to calculate YLDs
   * - BBBM-Presymptomatic
     - prevalence
-    - * XXX (if modeling entire population including
+    - * prevalence_BBBM (if modeling entire population including
         susceptible simulants), or
-      * YYY (if modeling only simulants with AD as described in the
+      * prevalence_BBBM / prevalence_all_AD_stages (if modeling only
+        simulants with AD or pre-dementia AD as described in the
         :ref:`Alzheimer's population model
         <other_models_alzheimers_population>`)
     - Used for initial population at start of simulation
@@ -301,16 +302,17 @@ table.
   * - BBBM-Presymptomatic
     - excess mortality rate
     - 0
-    - Added onto mortality hazard for susceptible simulants
+    - Added onto mortality hazard for BBBM-Presymptomatic simulants
   * - BBBM-Presymptomatic
     - disability weight
     - 0
     - Used to calculate YLDs
   * - MCI-AD
     - prevalence
-    - * XXXX (if modeling entire population including
+    - * prevalence_MCI (if modeling entire population including
         susceptible simulants), or
-      * YYYY (if modeling only simulants with AD as described in the
+      * prevalence_MCI / prevalence_all_AD_stages (if modeling only
+        simulants with AD or pre-dementia AD as described in the
         :ref:`Alzheimer's population model
         <other_models_alzheimers_population>`)
     - Used for initial population at start of simulation
@@ -321,16 +323,18 @@ table.
   * - MCI-AD
     - excess mortality rate
     - 0
-    - Added onto mortality hazard for susceptible simulants
+    - Added onto mortality hazard for simulants with MCI-AD
   * - MCI-AD
     - disability weight
-    - 0
-    - Used to calculate YLDs
+    - disability_weight_MCI
+    - Custom disability weight (see data sources table above). Used to
+      calculate YLDs.
   * - AD
     - prevalence
     - * prevalence_c543 (if modeling entire population including
         susceptible simulants), or
-      * 1 (if modeling only simulants with AD as described in the
+      * prevalence_c543 / prevalence_all_AD_stages (if modeling only
+        simulants with AD or pre-dementia AD as described in the
         :ref:`Alzheimer's population model
         <other_models_alzheimers_population>`)
     - Used for initial population at start of simulation
@@ -364,8 +368,18 @@ table.
     - Sink State
     - Value
     - Notes
-  * - i_AD
+  * - i_BBBM
     - S
+    - BBBM-Presymptomatic
+    -
+    -
+  * - i_MCI
+    - BBBM-Presymptomatic
+    - MCI-AD
+    -
+    -
+  * - i_AD
+    - MCI-AD
     - AD
     - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
     - Compute susceptible population incidence rate from GBD's "total
