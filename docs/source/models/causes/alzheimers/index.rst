@@ -112,7 +112,7 @@ Cause Model Diagram
 
   digraph AlzheimersDisease {
     rankdir=LR;
-    S -> AD [label=i_alz]
+    S -> AD [label=i_AD]
 
   }
 
@@ -137,7 +137,7 @@ Cause Model Diagram
   * - Transition
     - Transition Name
     - Definition
-  * - i_alz
+  * - i_AD
     - Alzheimer's Incidence
     - Incidence rate of Alzheimer's disease and other dementias
       (incident cases per susceptible person-year)
@@ -147,6 +147,12 @@ Data Tables
 
 All data values are defined for a specified year, location, age group,
 and sex.
+
+The ``population_agg.nc`` file from the Future Health Scenarios (FHS)
+team is located in the following folder:
+
+``/mnt/share/forecasting/data/9/future/population/
+20240320_daly_capstone_resubmission_squeeze_soft_round_shifted_hiv_shocks_covid_all_who_reagg/``
 
 .. list-table:: Data Sources
   :widths: 20 30 25 25
@@ -166,7 +172,9 @@ and sex.
     -
   * - population
     - Average population during specified year
-    - loaded from `population_agg.nc` file provided by FHS Team
+    - * get_population (if using standard GBD data), or
+      * loaded from ``population_agg.nc`` file provided by FHS Team (if
+        using forecasted data)
     - Numerically equal to person-years. Often interpreted as population
       at year's midpoint (which is approximately equal to person-years
       if we think the midpoint rule with a single rectangle gives a good
@@ -219,7 +227,11 @@ table.
     - Notes
   * - S
     - prevalence
-    - 1 - prevalence_c543
+    - * 1 - prevalence_c543 (if modeling entire population including
+        susceptible simulants), or
+      * 0 (if modeling only simulants with AD as described in the
+        :ref:`Alzheimer's population model
+        <other_models_alzheimers_population>`)
     - Used for initial population at start of simulation
   * - S
     - birth prevalence
@@ -235,7 +247,11 @@ table.
     - Used to calculate YLDs
   * - AD
     - prevalence
-    - prevalence_c543
+    - * prevalence_c543 (if modeling entire population including
+        susceptible simulants), or
+      * 1 (if modeling only simulants with AD as described in the
+        :ref:`Alzheimer's population model
+        <other_models_alzheimers_population>`)
     - Used for initial population at start of simulation
   * - AD
     - birth prevalence
@@ -267,7 +283,7 @@ table.
     - Sink State
     - Value
     - Notes
-  * - i_alz
+  * - i_AD
     - S
     - AD
     - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
