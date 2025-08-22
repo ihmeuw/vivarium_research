@@ -174,3 +174,6 @@ Cause Model Diagram
     - Alzheimer's incidence hazard
     - Incidence hazard of Alzheimer's disease
     - We will define this as a constant hazard rate for simulants in MCI
+
+Data Tables
+-----------
