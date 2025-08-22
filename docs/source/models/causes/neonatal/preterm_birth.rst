@@ -72,7 +72,7 @@ and sex of simulants to which different aspects of the cause model apply.
 Vivarium Modeling Strategy
 --------------------------
 
-Preterm birth is a PAF-of-one cause, meaning it is 100% attributable to the :ref:`Low Birth Weight and Short Gestation (LBWSG) <2021_risk_effect_lbwsg>` risk factor.  It is important that only simulants with a gestational age of less than 37 weeks are able to accrue DALYs from this cause.
+Preterm birth is a PAF-of-one cause, meaning it is 100% attributable to the :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` risk factor.  It is important that only simulants with a gestational age of less than 37 weeks are able to accrue DALYs from this cause.
 
 Key interventions in the MNCNH portfolio are expected to be relevant to preterm birth **with RDS** and therefore we further need to decompose preterm birth burden into "with RDS" and "without RDS" components.
 
