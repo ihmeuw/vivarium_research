@@ -36,27 +36,22 @@ Alzheimer's disease  with preclinical and MCI stages (GBD 2021)
   :local:
 
 .. list-table:: Abbreviations
-  :widths: 15 15 15
   :header-rows: 1
 
   * - Abbreviation
     - Definition
-    - Note
   * - AD
     - Alzheimer's Disease
-    -
   * - BBBM
     - Blood-Based Biomarker
-    -
+  * - CSU
+    - Client Services Unit
   * - MCI
     - Mild Cognitive Impairment
-    -
   * - YLD
     - Years Lived with Disability
-    -
   * - YLL
     - Years of Life Lost
-    -
 
 Disease Overview
 ++++++++++++++++
@@ -163,7 +158,7 @@ Cause Model Diagram
   * - Transition
     - Transition Name
     - Definition
-    - Note
+    - Notes
   * - i_BBBM
     - BBBM incidence hazard
     - Incidence hazard of BBBM-Preclinical AD
@@ -171,10 +166,10 @@ Cause Model Diagram
       and other dementias
   * - i_MCI
     - MCI incidence hazard
-    - Incidence rate of MCI due to AD
-    - This will be a **time-dependent hazard rate**, depending on the
-      time in which a simulant has been in the BBBM-Preclinical state,
-      not a constant hazard like we usually use
+    - Incidence hazard of MCI due to AD
+    - This will be a **time-dependent hazard rate**, depending on how
+      long a simulant has been in the BBBM-Preclinical state, not a
+      constant hazard like we usually use
   * - i_AD
     - Alzheimer's incidence hazard
     - Incidence hazard of Alzheimer's disease
