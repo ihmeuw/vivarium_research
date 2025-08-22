@@ -299,6 +299,7 @@ Pregnancy component
       - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <oral_iron_antenatal>`
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
+        * :ref:`Anemia screening intervention <anemia_screening>`
       - New wave II module
     * - :ref:`Pregnancy II <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       - * LBWSG category propensity
@@ -602,21 +603,29 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 17. IFA/MMS total scale-up V&V
+  * - 17. MMS total scale-up
     - Baseline
     - Baseline
     - Baseline
-    - 100% scale-up of both IFA and MMS at ANC
+    - 100% MMS
     - Baseline
     - Baseline
     - 
-  * - 18. IV iron total scale-up V&V
+  * - 18. Anemia screening scale-up
     - Baseline
     - Baseline
     - Baseline
+    - 100%
+    - 100%
+    - Baseline
+    - 
+  * - 19. IV iron scale-up
     - Baseline
     - Baseline
-    - 100% scale-up of IV iron at ANC
+    - Baseline
+    - 100%
+    - 100%
+    - 100%
     - 
 
 .. _MNCNH intrapartum component scenario table:
@@ -699,16 +708,21 @@ Postpartum component
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
     - see neonatal table for CPAP coverage    
-  * - 17. IFA/MMS total scale-up V&V
+  * - 17. MMS scale-up
     - Baseline
     - Baseline
     - Baseline
     -        
-  * - 18. IV iron total scale-up V&V
+  * - 18. Anemia screening scale-up
     - Baseline
     - Baseline
     - Baseline
     -        
+  * - 19. IV iron scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
 
 .. _MNCNH neonatal component scenario table:
 
@@ -790,12 +804,17 @@ Postpartum component
     - Baseline
     - Baseline
     - See intrapartum table for ACS coverage 
-  * - 17. IFA/MMS total scale-up V&V
+  * - 17. MMS scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 18. IV iron total scale-up V&V
+  * - 18. Anemia screening scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 19.0 IV iron scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -895,17 +914,6 @@ Default stratifications to all observers should include scenario and input draw.
   * YLDs due to anemia in pregnancy
   * Postpartum anemia status counts (non/mild/moderate/severe)
   * YLDs due to anemia in the postpartum period
-  * First trimster ANC attendance (stratified by pregnancy term duration)
-  * Later pregnancy ANC attendance (stratified by pregnancy term duration)
-  * Hemoglobin and ferritin screening counts
-  * MMS/IFA intervention counts
-  * IV iron intervention counts
-
-  Measures to check in the interactive sim include:
-
-  * True hemoglobin exposure
-  * Measured hemoglobin exposure
-  * Ferritin exposure
 
 .. _mncnh_portfolio_5.0:
 
@@ -1379,18 +1387,39 @@ Default stratifications to all observers should include scenario and input draw.
     - Default, note that we would like additional stratifications based on believed gestational age in the maternal population, births, and neonatal burden observers
     - Default
   * - 17.0
-    - :ref:`Wave II oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`
-    - Baseline
+    - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
+    - Baseline and MMS scale-up scenarios 
     - ``model17.0``
     - Default
     - Default, note IFA/MMS coverage added as a stratifying variable to maternal disorders burden and maternal population observers
     - Default
   * - 18.0
-    - :ref:`Wave II IV iron <intervention_iv_iron_antenatal_mncnh>`
-    - Baseline
+    - :ref:`Anemia screening implementation <anemia_screening>` (including hemoglobin and ferritin screenings), see also the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
     - ``model18.0``
+    - Baseline, MMS scale-up, and anemia screening scale-up scenarios
     - Default
-    - Default, note IV iron coverage added as a stratifying variable to maternal disorders burden and maternal population observers
+    - Default
+    - Default
+  * - 19.0
+    - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
+    - ``model19.0``
+    - Baseline and IV iron scale-up scenarios
+    - Default
+    - Default
+    - Default
+  * - 20.0*
+    - IV iron effects on birth weight, gestational age, and stillbirth
+    - ``model20.0``
+    - Baseline and IV iron scale-up scenarios
+    - Default
+    - Default
+    - Default
+  * - 21.0*
+    - Hemoglobin effect on neonatal sepsis
+    - ``model21.0``
+    - Baseline and IV iron scale-up scenarios
+    - Default
+    - Default
     - Default
 
 .. note:: 
@@ -1852,30 +1881,54 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 17.0
-    - * Confirm that baseline coverage of IFA matches the health systems team estimates of IFA at ANC as specified in the :ref:`oral iron supplementation intervention page <oral_iron_antenatal>`.
-      * Confirm that baseline coverage of MMS is 0 in all locations.
-      * Confirm that the coverage of IFA and MMS match the scenario-specific levels specified in the :ref:`Pregnancy component scenario table <MNCNH pregnancy component scenario table>`.
-      * Confirm that only simulants who attend ANC receive IFA in all scenarios.
-      * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of low hemoglobin among pregnant simulants matches that of GBD.
-      * Confirm that the morbidity and mortality risks of each maternal disorder in the baseline scenario matches that of GBD.
-      * Use the interactive sim to confirm that maternal hemoglobin exposures stratified by IFA coverage match supplementation effect sizes.
-      * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of LBWSG matches that of GBD.
-      * Confirm that in the baseline scenario, the mortality risks of each neonatal disorder among both neonatal age groups match the values of model 16 unless the bug described in the table below.
-      * Confirm that the rate of each birth outcome in the baseline scenario continues to validate to GBD estimates.
-      * Confirm that the birth outcome rates stratified by coverage of each supplementation regimen matches the expected supplementation effect sizes.
-      * Use the interactive sim to confirm that GA and BW differences between regimens match the effect sizes of each supplementation regimen (i.e., none, only IFA, both IFA and MMS).
+    - * Confirm scenario-specific coverage (verification with sim outputs)
+      * Confirm only simulants who attend ANC receive IFA/MMS (verification with sim outputs)
+      * Confirm that baseline verification targets are still met for the following parameters:
+
+        * Baseline hemoglobin exposure (verification with interactive sim)
+        * Maternal disorders outcomes (verification with sim outputs, noting existing slight deviation in maternal sepsis incidence rates from model 13.1)
+        * LBWSG exposure (verification with interactive sim)
+        * Neonatal mortality risk (verification with sim outputs, noting exiting deviations from model 13.3)
+        * Birth outcome rates (verification with sim outputs)
+      
+      * Confirm expected effect on all affected outcomes. For each affected outcome, the effect of IFA should be examined in the baseline scenario. Then, for each affected outcome, values should be compared between the baseline and MMS scale-up scenarios for identical simulants and we should verify separately the effect of transitioning from baseline IFA coverage to MMS and the transition from no baseline IFA coverage to MMS.
+      
+        * Hemoglobin exposure 
+        * Gestational age
+        * Birthweight
+        * Birth outcomes (MMS reduces rate of stillbirth, increases rate of live birth, no change to "partial term" outcomes)
     - 
-    -
+    - 
   * - 18.0
-    - * Confirm that baseline coverage of IV iron is 0.
-      * Confirm that coverage of IV iron among the eligible population verifies to the scenario-specific level as specified in the :ref:`Pregnancy component scenario table <MNCNH pregnancy component scenario table>`.
-      * Confirm that coverage of IV iron is 0 among the non-eligible population (using the anemia screening/'test hemoglobin exposure' column in the maternal population observer).
-      * Confirm that hemoglobin level (using the true hemogobin exposure column in the maternal population observer) stratified by IV iron coverage matches the expected location-specific effect sizes as specified in the :ref:`IV iron intervention page <intervention_iv_iron_antenatal_mncnh>`.
-      * Use the interactive sim to confirm that in the baseline scenario, the exposure distribution of LBWSG matches that of GBD.
-      * Use the interactive sim to confirm that LBWSG exposures between the same individuals in a scenario with IV iron and a scenario without verifies to the IV iron effect sizes on BW and GA specific to that individual's pre-IV iron hemoglobin exposure.
-      * Confirm that the rate of each birth outcome in the baseline scenario continues to validate to GBD estimates.
-      * Confirm that the birth outcome rates stratified by coverage of IV iron matches the expected supplementation effect sizes.
-      * Use the interactive sim to confirm that rates of stillbirth binned by hemoglobin exposure match the expected shape of the relationship.
+    - * Confirm scenario-specific anemia screening coverage rates (verification with sim outputs)
+      * Confirm only simulants who attend ANC are covered by hemoglobin screening (verification with sim outputs)
+      * Confirm only simulants who attend ANC AND test low hemoglobin are covered by ferritin screening (verification with sim outputs)
+      * Confirm sensitivity and specificity of hemoglobin screening test by comparing true versus test hemoglobin screening results (verification with sim outputs)
+      * Confirm "true" low hemoglobin rate matches corresponding GBD anemia impairment prevalence in pregnancy estimate (verification with sim outputs)
+      * Confirm low ferriting screening result matches expectation (verification with sim outputs)
+      * Validation: confirm that there are lower rates of true/test low hemoglobin status in the MMS scale-up scenario than the baseline scenario
+    - 
+    - 
+  * - 19.0
+    - * Confirm scenario-specific IV iron and anemia screening coverage rates (verification with sim outputs)
+      * Confirm only simulants who attend ANC, who test low hemoglobin AND test low ferritin receive IV iron (verification with interactive sim)
+      * Confirm IV iron has the expected effect on hemoglobin (verification in the interactive simulation)
+      * Confirm that hemoglobin exposure (using the interactive simulation) and maternal disorders outcomes (using sim outputs) still meet expectations
+    - 
+    - 
+  * - 20.0
+    - * Confirm the baseline outcomes still meet expectations, including:
+
+        * LBWSG exposure (in the interactive simulation)
+        * Neonatal mortality risk
+        * Birth outcome rates
+
+      * Confirm expected effects of IV iron on birth weight, gestational age, and birth outcome rates using the interactive simulation
+    - 
+    - 
+  * - 21.0
+    - * Confirm that neonatal mortality (particularly for neonatal sepsis) still matches expectation in the baseline scenario
+      * Using the interactive simulation, confirm effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. The total effect should be evaluated by stepping through the simulation and observing the rate of mortality due to neonatal sepsis stratified by maternal hemoglobin exposure.
     - 
     - 
 
