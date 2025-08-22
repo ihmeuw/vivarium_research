@@ -316,7 +316,7 @@ Validation Criteria
 
 - Verification: when the assigned continuous birthweight and gestational age at birth exposure values are converted to their corresponding GBD LBWSG exposure categories, the sex/location/draw/year-specific categorical exposure prevalence assigned at birth should match the GBD distribution.
 
-  - See `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/old_vnv_notebooks/lbwsg_distribution.ipynb>` as example that utilizes the interactive simulation and various plotting strategies to evaluate this verification criteria
+  - See `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/old_vnv_notebooks/lbwsg_distribution.ipynb>`_ as example that utilizes the interactive simulation and various plotting strategies to evaluate this verification criteria
 
 - Verification: the assigned continuous birthweight and gestational age exposures assigned at birth should not change as simulants age.
 
