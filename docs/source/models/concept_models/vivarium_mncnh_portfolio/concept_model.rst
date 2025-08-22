@@ -1715,8 +1715,8 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm ANC attendance exposure varies as expected by pregnancy term length
       * Confirm ANC attendance exposure matches expectation
       * Confirm AI ultrasound exposure categories is consistent with ANC attendance categories (ex: no ultrasound coverage if no ANC coverage)
-    - 
-    - 
+    - All V&V criteria met!
+    - `Model 14.0 maternal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/760c91b03cb60f15c3dbb38e015b746be8434fb3/verification_and_validation/model_14.0_maternal_checks.ipynb>`_
   * - 15.0
     - Note 1
         For these checks, "verify" means we are comparing the simulation
