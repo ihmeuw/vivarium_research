@@ -26,11 +26,11 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _2021_cause_alzheimers_preclinical_mci:
+.. _2021_cause_alzheimers_presymptomatic_mci:
 
-===============================================================
-Alzheimer's disease  with preclinical and MCI stages (GBD 2021)
-===============================================================
+==================================================================
+Alzheimer's disease  with presymptomatic and MCI stages (GBD 2021)
+==================================================================
 
 .. contents::
   :local:
@@ -122,10 +122,11 @@ Cause Model Diagram
 
   digraph AlzheimersDisease {
     rankdir=LR;
-    bbbm_preclinical [label="BBBM-Preclinical"]
-    S -> bbbm_preclinical [label="i_BBBM"]
-    bbbm_preclinical -> MCI [label="i_MCI"]
-    MCI -> AD [label=i_AD]
+    bbbm_presymptomatic [label="BBBM-Presymptomatic"]
+    mci [label="MCI-AD"]
+    S -> bbbm_presymptomatic [label="i_BBBM"]
+    bbbm_presymptomatic -> mci [label="i_MCI"]
+    mci -> AD [label=i_AD]
   }
 
 .. list-table:: State Definitions
@@ -139,12 +140,12 @@ Cause Model Diagram
     - Susceptible
     - Simulant does not have Alzheimer's disease or any of its
       precursors
-  * - BBBM-Preclinical
-    - Blood-Based-Biomarker-Preclinical
-    - Simulant has preclinical Alzheimer's disease that is detectable
+  * - BBBM-Presymptomatic
+    - Blood-Based-Biomarker-Presymptomatic
+    - Simulant has presymptomatic Alzheimer's disease that is detectable
       using blood-based biomarkers
-  * - MCI
-    - Mild Cognitive Impiarment
+  * - MCI-AD
+    - Mild Cognitive Impairment due to Alzheimer's Disease
     - Simulant has mild cognitive impairment due to Alzheimer's disease
   * - AD
     - Alzheimer's Disease
@@ -161,19 +162,20 @@ Cause Model Diagram
     - Notes
   * - i_BBBM
     - BBBM incidence hazard
-    - Incidence hazard of BBBM-Preclinical AD
+    - Incidence hazard of BBBM-Presymptomatic AD
     - This will be equal to GBD's incidence rate of Alzheimer's disease
       and other dementias
   * - i_MCI
     - MCI incidence hazard
     - Incidence hazard of MCI due to AD
     - This will be a **time-dependent hazard rate**, depending on how
-      long a simulant has been in the BBBM-Preclinical state, not a
+      long a simulant has been in the BBBM-Presymptomatic state, not a
       constant hazard like we usually use
   * - i_AD
     - Alzheimer's incidence hazard
     - Incidence hazard of Alzheimer's disease
-    - We will define this as a constant hazard rate for simulants in MCI
+    - We will define this as a constant hazard rate for simulants in
+      MCI-AD
 
 Data Tables
 -----------
