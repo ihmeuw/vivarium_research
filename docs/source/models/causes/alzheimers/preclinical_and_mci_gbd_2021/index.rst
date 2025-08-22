@@ -65,7 +65,8 @@ Restrictions
 The following table describes any restrictions in GBD 2021 on the
 effects of the cause "Alzheimer's disease and other dementias" (such as
 being only fatal or only nonfatal), as well as restrictions on the ages
-and sexes to which the cause applies.
+and sexes to which the cause applies. We also list the implied age
+restriction on YLDs for the MCI-AD state of the cause model below.
 
 .. list-table:: GBD 2021 Cause Restrictions
   :widths: 15 15 20
@@ -93,8 +94,13 @@ and sexes to which the cause applies.
     - 95 plus
     - age_group_id = 235
   * - YLD age group start
-    - 40 to 44
-    - age_group_id = 13
+    - * 40 to 44 for AD cause state
+      * 30 to 34 for MCI-AD cause state
+    - * Restriction to age_group_id = 13 (40 to 44) for AD cause state
+        is from GBD
+      * Restriction to age_group_id = 11 (30 to 34) for MCI-AD cause
+        state is because we will be adding simulants at most 7 years
+        before AD incidence (so 40 - 7 = 33, in the 30-34 age group)
   * - YLD age group end
     - 95 plus
     - age_group_id = 235
