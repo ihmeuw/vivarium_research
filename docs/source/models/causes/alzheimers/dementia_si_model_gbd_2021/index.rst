@@ -26,7 +26,7 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _2021_cause_alzheimers_disease:
+.. _2021_cause_alzheimers_and_dementia:
 
 ==================================================
 Alzheimer's disease and other dementias (GBD 2021)
