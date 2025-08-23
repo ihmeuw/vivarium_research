@@ -183,101 +183,109 @@ Cause Model Diagram
     - We will define this as a constant hazard rate for simulants in
       MCI-AD
 
-Data Tables
------------
+State and Transition Data
+-------------------------
 
-All data values are defined for a specified year, location, age group,
-and sex.
+The tables in this section describe the data needed for the cause model
+drawn in the `Cause Model Diagram`_ section above. The variables in the
+tables are defined in the the `Data Values and Sources`_ section below.
 
-The ``population_agg.nc`` file from the Future Health Scenarios (FHS)
-team is located in the following folder:
+The following table describes the data for each state if modeling only simulants
+with AD or pre-dementia AD as described in the :ref:`Alzheimer's
+population model <other_models_alzheimers_population>`:
 
-``/mnt/share/forecasting/data/9/future/population/
-20240320_daly_capstone_resubmission_squeeze_soft_round_shifted_hiv_shocks_covid_all_who_reagg/``
-
-.. list-table:: Data Sources
-  :widths: 20 30 25 25
+.. list-table:: State data when modeling only simulants with AD or pre-dementia AD
   :header-rows: 1
 
-  * - Variable
-    - Definition
-    - Source or value
+  * - State
+    - Initial prevalence
+    - Entrance prevalence
+    - Excess mortality rate
+    - Disability weight
+  * - S
+    - 0
+    - 0
+    - 0
+    - 0
+  * - BBBM-AD
+    - :math:`\Delta_\text{BBBM} / \Delta_\text{(all AD states)}`
+    - 1
+    - 0
+    - 0
+  * - MCI-AD
+    - :math:`\Delta_\text{MCI} / \Delta_\text{(all AD states)}`
+    - 0
+    - 0
+    - :math:`\text{DW}_\text{MCI}`
+  * - AD-dementia
+    - :math:`\Delta_\text{AD} / \Delta_\text{(all AD states)}`
+    - 0
+    - emr_c543
+    - :math:`\text{DW}_\text{c543}`
+
+On the other hand, if we model the entire population including
+susceptible simulants, the following state data should be used:
+
+.. list-table:: State Data if modeling entire population including susceptible simulants
+  :header-rows: 1
+
+  * - State
+    - Initial prevalence
+    - Birth prevalence
+    - Excess mortality rate
+    - Disability weight
+  * - S
+    - :math:`1 - \left( \frac{\Delta_\text{BBBM}}{\Delta_\text{AD}}
+      + \frac{\Delta_\text{MCI}}{\Delta_\text{AD}} + 1\right)
+      \cdot \text{prevalence_c543}`
+    - 1
+    - 0
+    - 0
+  * - BBBM-AD
+    - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+    - 0
+    - 0
+    - 0
+  * - MCI-AD
+    - :math:`\frac{\Delta_\text{MCI}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+    - 0
+    - 0
+    - :math:`\text{DW}_\text{MCI}`
+  * - AD-dementia
+    - :math:`\text{prevalence_c543}`
+    - 0
+    - emr_c543
+    - :math:`\text{DW}_\text{c543}`
+
+.. list-table:: Transition Data
+  :widths: 10 10 10 20 30
+  :header-rows: 1
+
+  * - Transition
+    - Source State
+    - Sink State
+    - Value
     - Notes
-  * - prevalence_c543
-    - Prevalence of Alzheimer's disease and other dementias
-    - como
-    -
-  * - prevalence_MCI
-    - Prevalence of MCI due to AD
-    -
-    -
-  * - prevalence_BBBM
-    - Prevalence of BBBM-presymptomatic AD
+  * - i_BBBM
+    - S
+    - BBBM-Presymptomatic
+    - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
+    - Not correct yet
+  * - i_MCI
+    - BBBM-Presymptomatic
+    - MCI-AD
     -
     -
-  * - prevalence_all_AD_stages
-    - Combined prevalence of all stages of AD
-    - prevalence_c543 + prevalence_MCI + prevalence_BBBM
-    -
-  * - prevalence_S
-    - Prevalence of susceptible state
-    - 1 - prevalence_all_AD_stages
-    -
-  * - deaths_c543
-    - Deaths from Alzheimer's disease and other dementias
-    - codcorrect
-    -
-  * - population
-    - Average population during specified year
-    - * get_population (if using standard GBD data), or
-      * loaded from ``population_agg.nc`` file provided by FHS Team (if
-        using forecasted data)
-    - Numerically equal to person-years. Often interpreted as population
-      at year's midpoint (which is approximately equal to person-years
-      if we think the midpoint rule with a single rectangle gives a good
-      estimate of the area under the population curve).
-  * - incidence_rate_c543
-    - GBD's "total population incidence rate" for Alzheimer's disease
-      and other dementias
-    - como
-    - Raw GBD value, different from "susceptible incidence rate"
-      automatically calculated by Vivarium Inputs
-  * - csmr_c543
-    - Cause-specific mortality rate for Alzheimer's disease and other
-      dementias
-    - :math:`\frac{\text{deaths_c543}}{(\text{population}) \cdot (\text{1 year})}`
-    - Calculated automatically by Vivarium Inputs
-  * - emr_c543
-    - Excess mortality rate for Alzheimer's disease and other dementias
-    - :math:`\frac{\text{csmr_c543}}{\text{prevalence_c543}}`
-    - Calculated automatically by Vivarium Inputs
-  * - sequelae_c543
-    - Sequelae of Alzheimer's disease and other dementias
-    - Set of 3 sequelae: s452, s453, s454
-    - Obtained from gbd_mapping.
-      Sequela names are "Mild," "Moderate," or "Severe Alzheimer's
-      disease and other dementias," respectively.
-  * - :math:`\text{prevalence}_s`
-    - Prevalence of sequela :math:`s`
-    - como
-    -
-  * - :math:`\text{disability_weight}_s`
-    - Disability weight of sequela :math:`s`
-    - YLD Appendix
-    - For reference, the values are:
+  * - i_AD
+    - MCI-AD
+    - AD
+    - 1 / (3.25 years)
+    - Constant hazard corresponding to an annual probability of 0.735 of
+      staying in MCI-AD (or returning to asymptomatic), based on this
+      source [[cite]], since :math:`\exp(-1 / 3.25) \approx 0.735`
 
-      - s452: 0.069 (0.046-0.099)
-      - s453: 0.377 (0.252-0.508)
-      - s454: 0.449 (0.304-0.595)
-  * - disability_weight_MCI
-    - Disability weight of mild cognitive impairment
-    -
-    -
-
-The following two tables describe the data needed for the cause model
-drawn in the previous section in terms of the data values in the above
-table.
-
+Old version
+-----------
 .. list-table:: State Data
   :widths: 20 25 30 30
   :header-rows: 1
@@ -379,94 +387,93 @@ table.
     - Subtracted from all-cause mortality hazard to get cause-deleted
       mortality hazard in all cause states
 
-The following table describes the data for each state if modeling only simulants
-with AD or pre-dementia AD as described in the :ref:`Alzheimer's
-population model <other_models_alzheimers_population>`:
+Data Values and Sources
+-----------------------
 
-.. list-table:: State data when modeling only simulants with AD or pre-dementia AD
+All data values are defined for a specified year, location, age group,
+and sex.
+
+The ``population_agg.nc`` file from the Future Health Scenarios (FHS)
+team is located in the following folder:
+
+``/mnt/share/forecasting/data/9/future/population/
+20240320_daly_capstone_resubmission_squeeze_soft_round_shifted_hiv_shocks_covid_all_who_reagg/``
+
+.. list-table:: Data Sources
+  :widths: 20 30 25 25
   :header-rows: 1
 
-  * - State
-    - Initial prevalence
-    - Entrance prevalence
-    - Excess mortality rate
-    - Disability weight
-  * - S
-    - 0
-    - 0
-    - 0
-    - 0
-  * - BBBM-AD
-    - :math:`\Delta_\text{BBBM} / \Delta_\text{(all AD states)}`
-    - 1
-    - 0
-    - 0
-  * - MCI-AD
-    - mean_duration_MCI / mean_duration_all_AD_stages
-    - 0
-    - 0
-    - disability_weight_MCI
-  * - AD-dementia
-    -
-    - 0
-    - emr_c543
-    - disability_weight_c543
-
-On the other hand, if we model the entire population including
-susceptible simulants, the following state data should be used:
-
-.. list-table:: State Data if modeling entire population including susceptible simulants
-  :header-rows: 1
-
-  * - State
-    - Initial prevalence
-    - Birth prevalence
-    - Excess mortality rate
-    - Disability weight
-  * - S
-    - ?
-    - 1
-    - 0
-    - 0
-  * - BBBM-AD
-    - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
-    - 0
-    - 0
-    - 0
-  * - MCI-AD
-    - (mean_duration_MCI / mean_duration_AD) * prevalence_c543
-    - 0
-    - 0
-    - disability_weight_MCI
-  * - AD-dementia
-    -
-    - 0
-    - emr_c543
-    - disability_weight_c543
-
-.. list-table:: Transition Data
-  :widths: 10 10 10 20 30
-  :header-rows: 1
-
-  * - Transition
-    - Source State
-    - Sink State
-    - Value
+  * - Variable
+    - Definition
+    - Source or value
     - Notes
-  * - i_BBBM
-    - S
-    - BBBM-Presymptomatic
-    - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
-    - Not correct yet
-  * - i_MCI
-    - BBBM-Presymptomatic
-    - MCI-AD
+  * - prevalence_c543
+    - Prevalence of Alzheimer's disease and other dementias
+    - como
+    -
+  * - prevalence_MCI
+    - Prevalence of MCI due to AD
     -
     -
-  * - i_AD
-    - MCI-AD
-    - AD
-    - 1 / (3.25 years)
-    - Constant hazard corresponding to an annual probability of 0.735 of
-      staying in MCI-AD (or returning to asymptomatic), based on this
-      source [[cite]], since :math:`\exp(-1 / 3.25) \approx 0.735`
+  * - prevalence_BBBM
+    - Prevalence of BBBM-presymptomatic AD
+    -
+    -
+  * - prevalence_all_AD_stages
+    - Combined prevalence of all stages of AD
+    - prevalence_c543 + prevalence_MCI + prevalence_BBBM
+    -
+  * - prevalence_S
+    - Prevalence of susceptible state
+    - 1 - prevalence_all_AD_stages
+    -
+  * - deaths_c543
+    - Deaths from Alzheimer's disease and other dementias
+    - codcorrect
+    -
+  * - population
+    - Average population during specified year
+    - * get_population (if using standard GBD data), or
+      * loaded from ``population_agg.nc`` file provided by FHS Team (if
+        using forecasted data)
+    - Numerically equal to person-years. Often interpreted as population
+      at year's midpoint (which is approximately equal to person-years
+      if we think the midpoint rule with a single rectangle gives a good
+      estimate of the area under the population curve).
+  * - incidence_rate_c543
+    - GBD's "total population incidence rate" for Alzheimer's disease
+      and other dementias
+    - como
+    - Raw GBD value, different from "susceptible incidence rate"
+      automatically calculated by Vivarium Inputs
+  * - csmr_c543
+    - Cause-specific mortality rate for Alzheimer's disease and other
+      dementias
+    - :math:`\frac{\text{deaths_c543}}{(\text{population}) \cdot (\text{1 year})}`
+    - Calculated automatically by Vivarium Inputs
+  * - emr_c543
+    - Excess mortality rate for Alzheimer's disease and other dementias
+    - :math:`\frac{\text{csmr_c543}}{\text{prevalence_c543}}`
+    - Calculated automatically by Vivarium Inputs
+  * - sequelae_c543
+    - Sequelae of Alzheimer's disease and other dementias
+    - Set of 3 sequelae: s452, s453, s454
+    - Obtained from gbd_mapping.
+      Sequela names are "Mild," "Moderate," or "Severe Alzheimer's
+      disease and other dementias," respectively.
+  * - :math:`\text{prevalence}_s`
+    - Prevalence of sequela :math:`s`
+    - como
+    -
+  * - :math:`\text{disability_weight}_s`
+    - Disability weight of sequela :math:`s`
+    - YLD Appendix
+    - For reference, the values are:
+
+      - s452: 0.069 (0.046-0.099)
+      - s453: 0.377 (0.252-0.508)
+      - s454: 0.449 (0.304-0.595)
+  * - disability_weight_MCI
+    - Disability weight of mild cognitive impairment
+    -
+    -
