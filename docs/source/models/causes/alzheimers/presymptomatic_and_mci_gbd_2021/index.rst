@@ -207,6 +207,22 @@ team is located in the following folder:
     - Prevalence of Alzheimer's disease and other dementias
     - como
     -
+  * - prevalence_MCI
+    - Prevalence of MCI due to AD
+    -
+    -
+  * - prevalence_BBBM
+    - Prevalence of BBBM-presymptomatic AD
+    -
+    -
+  * - prevalence_all_AD_stages
+    - Combined prevalence of all stages of AD
+    - prevalence_c543 + prevalence_MCI + prevalence_BBBM
+    -
+  * - prevalence_S
+    - Prevalence of susceptible state
+    - 1 - prevalence_all_AD_stages
+    -
   * - deaths_c543
     - Deaths from Alzheimer's disease and other dementias
     - codcorrect
@@ -241,6 +257,10 @@ team is located in the following folder:
     - Obtained from gbd_mapping.
       Sequela names are "Mild," "Moderate," or "Severe Alzheimer's
       disease and other dementias," respectively.
+  * - :math:`\text{prevalence}_s`
+    - Prevalence of sequela :math:`s`
+    - como
+    -
   * - :math:`\text{disability_weight}_s`
     - Disability weight of sequela :math:`s`
     - YLD Appendix
@@ -249,9 +269,9 @@ team is located in the following folder:
       - s452: 0.069 (0.046-0.099)
       - s453: 0.377 (0.252-0.508)
       - s454: 0.449 (0.304-0.595)
-  * - :math:`\text{prevalence}_s`
-    - Prevalence of sequela :math:`s`
-    - como
+  * - disability_weight_MCI
+    - Disability weight of mild cognitive impairment
+    -
     -
 
 The following two tables describe the data needed for the cause model
@@ -267,7 +287,7 @@ table.
     - Value
     - Notes
   * - S
-    - prevalence
+    - initial prevalence
     - * 1 - prevalence_all_AD_stages (if
         modeling entire population including susceptible simulants), or
       * 0 (if modeling only simulants with AD as described in the
@@ -287,7 +307,7 @@ table.
     - 0
     - Used to calculate YLDs
   * - BBBM-Presymptomatic
-    - prevalence
+    - initial prevalence
     - * prevalence_BBBM (if modeling entire population including
         susceptible simulants), or
       * prevalence_BBBM / prevalence_all_AD_stages (if modeling only
@@ -308,7 +328,7 @@ table.
     - 0
     - Used to calculate YLDs
   * - MCI-AD
-    - prevalence
+    - initial prevalence
     - * prevalence_MCI (if modeling entire population including
         susceptible simulants), or
       * prevalence_MCI / prevalence_all_AD_stages (if modeling only
@@ -330,7 +350,7 @@ table.
     - Custom disability weight (see data sources table above). Used to
       calculate YLDs.
   * - AD
-    - prevalence
+    - initial prevalence
     - * prevalence_c543 (if modeling entire population including
         susceptible simulants), or
       * prevalence_c543 / prevalence_all_AD_stages (if modeling only
@@ -359,6 +379,30 @@ table.
     - Subtracted from all-cause mortality hazard to get cause-deleted
       mortality hazard in all cause states
 
+.. list-table:: State Data
+  :header-rows: 1
+
+  * - State
+    - Initial prevalence
+    - Excess mortality rate
+    - Disability weight
+  * - S
+    -
+    -
+    -
+  * - BBBM-AD
+    -
+    -
+    -
+  * - MCI-AD
+    -
+    -
+    -
+  * - AD-dementia
+    -
+    -
+    -
+
 .. list-table:: Transition Data
   :widths: 10 10 10 20 30
   :header-rows: 1
@@ -371,8 +415,8 @@ table.
   * - i_BBBM
     - S
     - BBBM-Presymptomatic
-    -
-    -
+    - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
+    - Not correct yet
   * - i_MCI
     - BBBM-Presymptomatic
     - MCI-AD
@@ -381,7 +425,7 @@ table.
   * - i_AD
     - MCI-AD
     - AD
-    - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
-    - Compute susceptible population incidence rate from GBD's "total
-      population incidence rate." Conversion is automatic when using
-      the get_measure function in Vivarium Inputs.
+    - 1 / (3.25 years)
+    - Constant hazard corresponding to an annual probability of 0.735 of
+      staying in MCI-AD (or returning to asymptomatic), based on this
+      source [[cite]], since :math:`\exp(-1 / 3.25) \approx 0.735`
