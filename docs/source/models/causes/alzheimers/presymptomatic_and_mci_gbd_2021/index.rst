@@ -379,29 +379,70 @@ table.
     - Subtracted from all-cause mortality hazard to get cause-deleted
       mortality hazard in all cause states
 
-.. list-table:: State Data
+The following table describes the data for each state if modeling only simulants
+with AD or pre-dementia AD as described in the :ref:`Alzheimer's
+population model <other_models_alzheimers_population>`:
+
+.. list-table:: State data when modeling only simulants with AD or pre-dementia AD
   :header-rows: 1
 
   * - State
     - Initial prevalence
+    - Entrance prevalence
     - Excess mortality rate
     - Disability weight
   * - S
-    -
-    -
-    -
+    - 0
+    - 0
+    - 0
+    - 0
   * - BBBM-AD
-    -
-    -
-    -
+    - :math:`\Delta_\text{BBBM} / \Delta_\text{(all AD states)}`
+    - 1
+    - 0
+    - 0
   * - MCI-AD
-    -
-    -
-    -
+    - mean_duration_MCI / mean_duration_all_AD_stages
+    - 0
+    - 0
+    - disability_weight_MCI
   * - AD-dementia
     -
+    - 0
+    - emr_c543
+    - disability_weight_c543
+
+On the other hand, if we model the entire population including
+susceptible simulants, the following state data should be used:
+
+.. list-table:: State Data if modeling entire population including susceptible simulants
+  :header-rows: 1
+
+  * - State
+    - Initial prevalence
+    - Birth prevalence
+    - Excess mortality rate
+    - Disability weight
+  * - S
+    - ?
+    - 1
+    - 0
+    - 0
+  * - BBBM-AD
+    - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+    - 0
+    - 0
+    - 0
+  * - MCI-AD
+    - (mean_duration_MCI / mean_duration_AD) * prevalence_c543
+    - 0
+    - 0
+    - disability_weight_MCI
+  * - AD-dementia
     -
-    -
+    - 0
+    - emr_c543
+    - disability_weight_c543
 
 .. list-table:: Transition Data
   :widths: 10 10 10 20 30
