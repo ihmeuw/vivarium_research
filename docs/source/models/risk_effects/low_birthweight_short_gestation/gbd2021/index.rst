@@ -852,7 +852,7 @@ In the implementation of GBD 2021 LBWSG risk effects for the MNCNH Portfolio Sim
 which models mortality risks in the neonatal period rather than mortality rates, we 
 discovered that the calculated all-cause mortality risk according to the GBD all-cause
 mortality risk, LBWSG PAF, and LBWSG RR values for some LBWSG exposure category/sex/age/location/draw
-pairs was greater than 1, which is an illogical value for such a measure, which should 
+combinations was greater than 1, which is an illogical value for such a measure, which should 
 have a maximum value of 1. While we believe this issue is present in the GBD's model of
 LBWSG and mortality, it is not surfaced in their model as they do not report LBWSG exposure
 category-specific mortality.
@@ -1302,7 +1302,7 @@ neonatal mortality.
   all-cause mortality data not to all causes of mortality, but instead to a subset 
   of causes that are thought to be biologically plausible in their relation to 
   LBWSG and without concern for reverse causality, thereby decreasing the 
-  exaggerated effect of LBWSG on neonatalm mortality that would otherwise result 
+  exaggerated effect of LBWSG on neonatal mortality that would otherwise result 
   from the application of these RR estimates to all causes of neonatal mortality.
 
 An additional limitation of this model related to the lack of cause-specificity
