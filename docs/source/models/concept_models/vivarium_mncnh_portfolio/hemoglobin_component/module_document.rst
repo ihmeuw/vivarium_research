@@ -71,7 +71,7 @@ This module will:
 
 .. note::
   
-  As discussed on the :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`, IFA and MMS have equivalent effects on hemoglobin. This diagram treats them as equivalent for this reason. However, we will need track which product was received as they have differences that will apply to other downstream modules of this simulation. 
+  As discussed on the :ref:`maternal supplementation intervention document <oral_iron_antenatal>`, IFA and MMS have equivalent effects on hemoglobin. This diagram treats them as equivalent for this reason. However, we will need track which product was received as they have differences that will apply to other downstream modules of this simulation. 
 
 .. image:: hemoglobin_component.png
 
@@ -147,6 +147,7 @@ This module will:
     - Use same propensity value as decision node #2 and #5 to answer this question
 
 
+
 2.4 Module Action Points
 ---------------------------
 
@@ -165,13 +166,14 @@ This module will:
     - Calibrate to and remove effect of baseline IFA coverage
     - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`. We assume no one receives baseline IFA prior to their first ANC visit. Since we are initializing hemoglobin exposure at the start of pregnancy prior to anyone receiving IFA, we subtract the value of :code:`baseline_ifa_coverage * ifa_hemoglobin_shift` from the hemoglobin exposure value of all simulants. 
     - The effect of baseline IFA will be added back in later in the decision tree when simulants receive it at their ANC visits.
+
   * - III
     - Record hemoglobin exposure at the start of pregnancy
     - Record to output C
     - 
   * - IV
     - Apply IFA/MMS effect
-    - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`
+    - Effect size on hemoglobin defined on :ref:`antenatal supplementation intervention document <oral_iron_antenatal>`
     - Use effect size from this page only (ignore instructions for how to apply effects regarding timeline and baseline coverage). Note that IFA and MMS effectively have the same effect on maternal hemoglobin
   * - V
     - Record IFA/MMS receipt
@@ -179,7 +181,7 @@ This module will:
     - 
   * - VI
     - Apply IFA/MMS effect
-    - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`
+    - Effect size on hemoglobin defined on :ref:`antenatal supplementation intervention document <oral_iron_antenatal>`
     - Use effect size from this page only (ignore instructions for how to apply effects regarding timeline and baseline coverage). Note that IFA and MMS effectively have the same effect on maternal hemoglobin
   * - VII
     - Record IFA/MMS receipt
