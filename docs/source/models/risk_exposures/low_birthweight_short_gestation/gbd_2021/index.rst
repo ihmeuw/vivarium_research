@@ -46,7 +46,7 @@ low birth weight (less than 2,500 grams). Notably, these measures are expected t
 highly correlated as babies who are born prematurely will be, on average, smaller than
 babies born at a later gestational age as they have not had as much time to grow.
 
-There are additional meaures such as "small for gestational age" attempt to classify when 
+There are additional meaures such as "small for gestational age" that attempt to classify when 
 a particular infant is born at a smaller weight than expected for their particular gestational 
 age at birth, but these measures are not in scope of this risk factor.
 
