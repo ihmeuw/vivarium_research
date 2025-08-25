@@ -123,7 +123,7 @@ This module will:
     - 
   * - 5
     - Receive IFA/MMS *for the first time* at late pregnancy visit?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Answer can only be yes if ANC attendance==ANC in later pregnancy ONLY. Then, probability of "yes" is equal to scenario-specific coverage.
     - Use same propensity value as decision node #2 and #9 to answer this question
   * - 6 
     - Hemoglobin screening value <100 g/L? (Based on IFA/MMS adjusted exposure)
@@ -143,7 +143,7 @@ This module will:
     - 
   * - 10
     - Also receive IFA/MMS *for the first time* at late pregnancy visit?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Answer can only be yes if ANC attendance==ANC in later pregnancy ONLY. Then, probability of "yes" is equal to scenario-specific coverage.
     - Use same propensity value as decision node #2 and #5 to answer this question
 
 
