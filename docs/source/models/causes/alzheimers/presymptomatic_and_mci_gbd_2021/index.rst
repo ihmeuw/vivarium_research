@@ -128,11 +128,12 @@ Cause Model Diagram
 
   digraph AlzheimersDisease {
     rankdir=LR;
-    bbbm_presymptomatic [label="BBBM-Presymptomatic"]
+    bbbm [label="BBBM-AD"]
     mci [label="MCI-AD"]
-    S -> bbbm_presymptomatic [label="i_BBBM"]
-    bbbm_presymptomatic -> mci [label="i_MCI"]
-    mci -> AD [label=i_AD]
+    ad [label="AD-dementia"]
+    S -> bbbm [label="i_BBBM"]
+    bbbm -> mci [label="i_MCI"]
+    mci -> ad [label=i_AD]
   }
 
 .. list-table:: State Definitions
@@ -146,15 +147,15 @@ Cause Model Diagram
     - Susceptible
     - Simulant does not have Alzheimer's disease or any of its
       precursors
-  * - BBBM-Presymptomatic
-    - Blood-Based-Biomarker-Presymptomatic
+  * - BBBM-AD
+    - Blood-Based-Biomarker-presymptomatic Alzheimer's Disease
     - Simulant has presymptomatic Alzheimer's disease that is detectable
       using blood-based biomarkers
   * - MCI-AD
     - Mild Cognitive Impairment due to Alzheimer's Disease
     - Simulant has mild cognitive impairment due to Alzheimer's disease
-  * - AD
-    - Alzheimer's Disease
+  * - AD-dementia
+    - Alzheimer's Disease dementia
     - Simulant has mild, moderate, or severe dementia due to Alzheimer's
       disease
 
@@ -168,7 +169,7 @@ Cause Model Diagram
     - Notes
   * - i_BBBM
     - BBBM incidence hazard
-    - Incidence hazard of BBBM-Presymptomatic AD
+    - Incidence hazard of BBBM-AD
     - This will be equal to GBD's incidence rate of Alzheimer's disease
       and other dementias
   * - i_MCI
@@ -178,8 +179,8 @@ Cause Model Diagram
       long a simulant has been in the BBBM-Presymptomatic state, not a
       constant hazard like we usually use
   * - i_AD
-    - Alzheimer's incidence hazard
-    - Incidence hazard of Alzheimer's disease
+    - AD dementia incidence hazard
+    - Incidence hazard of Alzheimer's disease dementia
     - We will define this as a constant hazard rate for simulants in
       MCI-AD
 
