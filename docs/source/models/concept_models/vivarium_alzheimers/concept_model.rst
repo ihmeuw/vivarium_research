@@ -178,7 +178,7 @@ The basic plan for the design of the simulation is as follows:
       all-cause mortality
     - Forecasted population data, age-specific incidence rates of
       preclinical AD
-  * - :ref:`Alzheimer's Disease Model <2021_cause_alzheimers_disease>`
+  * - :ref:`Alzheimer's Disease Model <cause_alzheimers_disease>`
     - Disease progression
     - Transition rates through 6 stages of AD, cause-specific mortality
     - Population model
@@ -347,7 +347,8 @@ scenario, and input draw.
         DiseaseObserver)
       * CategoricalInterventionObserver for Alzheimer's treatment
   * - 1.0
-    - Simple SI model of AD using GBD data for AD and other dementias
+    - :ref:`Simple SI model of AD <2021_cause_alzheimers_and_dementia>`
+      using GBD data for AD and other dementias
     - Baseline
     - * Locations: USA, China
       * Cohort: Same population model as Model 0.0
@@ -357,7 +358,9 @@ scenario, and input draw.
     - Replace standard population components with :ref:`custom
       Alzheimer's population component
       <other_models_alzheimers_population>` to model only population
-      with AD
+      with AD; use same :ref:`simple SI model of AD
+      <2021_cause_alzheimers_and_dementia>` as Model 1.0, but with
+      initial prevalence of AD equal to 1
     - Baseline
     - * Locations: USA, China
     - Default

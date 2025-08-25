@@ -314,7 +314,7 @@ Data Tables
       - 
     * - lbwsg_birth_prevalence
       - Birth prevalence of low birthweight and short gestation risk factor
-      - GBD with post-processing: rei_id = 339, then remove the extraneous category and rescale prevalence :ref:`as described here <rescaling_lbwsg_exposure_data_pulled_from_gbd_2019>`.
+      - GBD with post-processing: rei_id = 339, then remove the extraneous category and rescale prevalence :ref:`as described here <rescaling_lbwsg_exposure_data_pulled_from_gbd_2021>`.
       - 
     * - :math:`f_\text{preterm w RDS}`
       - fraction of preterm deaths with RDS

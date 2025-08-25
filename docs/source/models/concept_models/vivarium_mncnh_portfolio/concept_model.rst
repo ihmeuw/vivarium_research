@@ -311,7 +311,7 @@ Pregnancy component
         * Pregnancy duration
         * Preterm status
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-        * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
+        * :ref:`LBWSG exposure <2021_risk_exposure_lbwsg>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <oral_iron_antenatal>`
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
       - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules other than impacts of IFA/MMS and IV Iron interventions on pregnancy module outputs

@@ -321,7 +321,7 @@ For partial term pregnancies (that result in abortion/miscarriage/ectopic pregna
    As we figure out YLDs and how they will relate to pregnancy duration, assess if the uniform distribution is a significant limitation and how it might be improved if needed. 
 
 
-For full term pregnancies (that result in live births or stillbirths), a LBWSG exposure value will be assigned that will include both the gestational age and birthweight of the simulant child. For wave 1 of this project, the LBWSG can be assigned using information outlined in the :ref:`LBWSG exposure page <2019_risk_exposure_lbwsg>`. Exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Based on the assigned category, a gestational age and birthweight can be recorded separately.
+For full term pregnancies (that result in live births or stillbirths), a LBWSG exposure value will be assigned that will include both the gestational age and birthweight of the simulant child. For wave 1 of this project, the LBWSG can be assigned using information outlined in the :ref:`LBWSG exposure page <2021_risk_exposure_lbwsg>`. Exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Based on the assigned category, a gestational age and birthweight can be recorded separately.
 The pregnancy duration for full term pregnancies is equal to the
 infant's gestational age defined by their LBWSG exposure.
 
