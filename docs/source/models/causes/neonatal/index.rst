@@ -121,13 +121,17 @@ Assumptions and Limitations
 
 - Preterm must be split into with and without respiratory distress syndrome (RDS) outside of GBD, since GBD does not distinguish preterms deaths with and without RDS.
 
-We "cap" LBWSG RR values at a certain value in an attempt to eliminate the occurance of individual all-cause mortality risk values greater than 1 on in our simulation (and therefore avoiding an associated underestimation of neonatal mortality) while also maintaining:
+- We assume the LBWSG RR values represent both the correlation between LBWSG exposure and all-cause neonatal mortality at baseline as well as the causal impact of LBWSG on cause-specific mortality for causes affected by LBWSG
 
-- The relative difference in mortality risk values between LBWSG exposures that are not capped, and
+- We assume that the LBWSG exposure distribution prior to applying intervention effects is the same as the LBWSG exposure distribution at baseline. These distributions will slightly diverge due to the baseline calibration of the :ref:`oral iron intervention <oral_iron_antenatal>` (and any other future modeled interventions that are present at baseline and affect LBWSG exposure), but should be roughly similar.
 
-- Mortality risk values very close to 1 for the individuals with the highest risk LBWSG exposures
+- We "cap" LBWSG RR values at a certain value in an attempt to eliminate the occurance of individual all-cause mortality risk values greater than 1 on in our simulation (and therefore avoiding an associated underestimation of neonatal mortality) while also maintaining:
 
-However, in this implementation, we do not consider how modeled interventions may further increase individual-level mortality risk beyond the modifications from the LBWSG risk factor, so it is possible that we continue to have some mortality risk values greater that 1 in our simulation. 
+  - The relative difference in mortality risk values between LBWSG exposures that are not capped, and
+
+  - Mortality risk values very close to 1 for the individuals with the highest risk LBWSG exposures
+
+  However, in this implementation, we do not consider how modeled interventions may further increase individual-level mortality risk beyond the modifications from the LBWSG risk factor, so it is possible that we continue to have some mortality risk values greater that 1 in our simulation. 
 
 Cause Model Decision Graph
 ++++++++++++++++++++++++++
@@ -240,6 +244,8 @@ The calculation of :math:`\text{ACMRisk}_i` (the all-cause mortality risk for a 
   - apply the change in mortality risk to the causes affected by LBWSG associated with intervention impact on LBWSG exposures that is in line with GBD assumptions,
   - and also reflect the expected correlation between LBWSG exposures and mortality at baseline (improving the accuracy of background mortality rates across the LBWSG exposure distribution, which may influence our estimates of impact for interventions that are targeted by LBWSG exposure).
 
+To avoid the need to write out data between simulated scenarios for ease of implementation, we will assume that pre-intervention modified LBWSG exposure represents baseline LBWSG exposure.
+
 Mathematically this is achieved by the following formula.
 Starting with this equation, we omit age group subscripts for brevity; all quantities are still age-, sex-, and location-specific.
 
@@ -251,7 +257,7 @@ Starting with this equation, we omit age group subscripts for brevity; all quant
 
 Where:
 
-- :math:`\text{ACMRisk}_{\text{BW},\text{GA}}^{\text{BW}^0,\text{GA}^0}` is the all-cause mortality risk for a population with a baseline birth weight of :math:`\text{BW}^0` and gestational age :math:`\text{GA}^0` and a current scenario birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`,
+- :math:`\text{ACMRisk}_{\text{BW},\text{GA}}^{\text{BW}^0,\text{GA}^0}` is the all-cause mortality risk for a population with a pre-intervention-modified birth weight of :math:`\text{BW}^0` and gestational age :math:`\text{GA}^0` and a post-intervention-modified birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`,
 - :math:`\sum_{\text{c} \in \text{affected}} \text{CSMRisk}_c` is the sum of the cause-specific mortality risk values of all causes affected by LBWSG (see the :ref:`LBWSG risk effects document for a list of affected causes <2021_risk_effect_lbwsg>`)
 - :math:`\text{ACMRisk}` is the all-cause mortality risk for the total population in one of the neonatal age groups (i.e., :math:`\text{ACMRisk}` equals :math:`\text{ACMRisk}_\text{ENN}` or :math:`\text{ACMRisk}_\text{LNN}` as defined above), 
 - :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, 
@@ -269,7 +275,7 @@ To obtain the ACMRisk for a specific simulant (:math:`\text{ACMRisk}_i`), we sub
 
 where:
 
-- :math:`\text{BW}_i` and :math:`\text{GA}_i` are the birth weight and gestational age for simulant :math:`i` in the current scenario after intervention effects have been applied to LBWSG exposure,
+- :math:`\text{BW}_i` and :math:`\text{GA}_i` are the birth weight and gestational age for simulant :math:`i` after intervention effects have been applied to LBWSG exposure,
 - :math:`\text{BW}_i^0` and :math:`\text{GA}_i^0` are the birth weight and gestational age for simulant :math:`i` prior to intervention effects being applied to LBWSG exposure,
 - :math:`\text{CSMRisk}_{\text{BW}_i,\text{GA}_i}^{k}` is the cause-specific mortality risk for subcause :math:`k` that is affected by LBWSG (according to the :ref:`LBWSG risk effects document <2021_risk_effect_lbwsg>`) for a population with the same gestational age and birth weight as this simulant (after intervention effects have been applied to that simulant's BW and GA exposures), 
 
@@ -430,6 +436,8 @@ Validation Criteria
 Neonatal mortality risk (due to all causes and at the cause-specific level) in simulation should match corresponding quantity as derived from GBD estimates.
 
 Relative Risk of neonatal death at specific categories of LBWSG exposure should be within 10% of same ratio derived from GBD.  (We don't expect it to match exactly because of (1) our interpolation of the RRs, and (2) we use a constant mortality hazard at each BW-GA level, rather than the GBD's more complex model.)
+
+Using the interactive simulation, verify that other causes mortality (and/or any future modeled unaffected subcauses) varies by LBWSG exposure but does not change in a scenario with added coverage of a LBWSG-affecting intervention such as IFA/MMS or IV iron. Additionally, verify that mortality due to modeled affected causes (including preterm, sepsis, and encephalopathy) varies as expected according to LBWSG exposure and is appropriately modified by new LBWSG-affecting intervention coverage.
 
 References
 ----------
