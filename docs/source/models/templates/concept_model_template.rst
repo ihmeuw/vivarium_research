@@ -263,6 +263,41 @@ Please add here links to the different components of your model, including:
   - Risk correlation model(s)
   - Other 
 
+.. _{YOUR_MODEL_SHORT_NAME}2.5:
+
+2.5 Simulation Observers
+-------------------------
+
+Specific observer outputs and their stratifications may vary by model run as needs change. Modifications to default will be noted in the model run requests tables. Note that the observers and outputs listed here are different from the module outputs above. The outputs of the module are intended to be intermediate values that may or may not be included as observed simulated outputs.
+
+Default stratifications for all observers should include:
+
+  - Input draw
+  - Scenario
+
+.. todo:: 
+
+  Update default stratifications for all observers accordingly
+
+.. list-table:: Simulation observers
+  :header-rows: 1
+
+  * - Number 
+    - Observer
+    - Default stratifications
+    - Note
+  * - 1
+    - Person time
+    - age group, sex
+    - 
+  * - 2
+    - Death counts
+    - cause of death, age group, sex
+    - 
+
+.. todo::
+
+  Update simulation observer table to fit the needs of your simulation
 
 .. _{YOUR_MODEL_SHORT_NAME}3.0:
 
