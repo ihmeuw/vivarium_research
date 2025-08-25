@@ -28,9 +28,9 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-================================================
-Low Birthweight and Short Gestation Risk Effects
-================================================
+==========================================================
+GBD 2019 Low Birthweight and Short Gestation Risk Effects
+==========================================================
 
 .. contents::
    :local:

@@ -1,4 +1,4 @@
-.. _2019_risk_effect_lbwsg:
+.. _2021_risk_effect_lbwsg:
 
 ..
   Section title decorators for this document:
@@ -28,9 +28,16 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-================================================
-Low Birthweight and Short Gestation Risk Effects
-================================================
+=========================================================
+GBD 2021 Low Birthweight and Short Gestation Risk Effects
+=========================================================
+
+.. note::
+
+  This page was copied from the :ref:`GBD 2019 LBWSG risk effects document <2019_risk_effect_lbwsg>`. There were no changes in the GBD or vivarium modeling strategies between these GBD rounds except for: 
+
+    - Minor changes in how to access the relative risk estimates via shared functions, as shown in the :ref:`get_draws call in the code block linked here <get_draws_call>`
+    - An update to our LBWSG risk effects modeling strategy used for the MNCNH Portfolio simulation related to impossibly high all-cause mortality rates for some LBWSG exposure categories in some age/sex/location/draw-specific instances, as discussed in the `Mortality Rate Inconsistencies`_ section
 
 .. contents::
    :local:
@@ -43,14 +50,14 @@ Risk Overview
 
 	Provide a brief description of the risk, including potential opportunities for confounding (factors that may cause or be associated with the risk exposure), effect modification/generalizability, etc. by any relevant variables. Note that literature reviews and speaking with the GBD risk modeler will be good resources for this.
 
-GBD 2019 Modeling Strategy
+GBD 2021 Modeling Strategy
 --------------------------
 
 .. note::
 
    This section will describe the GBD modeling strategy for risk effects. For a
    description of GBD modeling strategy for risk exposure, see the :ref:`Low
-   Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>` page.
+   Birthweight and Short Gestation (GBD 2021) <2021_risk_exposure_lbwsg>` page.
 
 **The available data for deriving relative risk was only for all-cause
 mortality.**
@@ -61,7 +68,7 @@ except for the USA, sex-specific data were combined to maximise sample size. The
 USA analyses were sex-specific.
 **Relative risks of all-cause mortality were calculated for each 500g and 2wk
 category of birthweight and gestational age.**
-[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
+[GBD-2021-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
 
 .. note::
 
@@ -108,18 +115,18 @@ regression and then converted into mortality risk.
 To calculate mortality relative risks, the risk of each joint two-week
 gestational age and 500-gram birthweight category were divided by the risk of
 mortality in the joint gestational age and birthweight category with the lowest
-mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
+mortality risk. [GBD-2021-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 337)
 
 .. note::
 
-  Although the above description from the GBD 2019 risk appendix sometimes
-  refers to location-specific mortality risks, the relative risks in GBD 2019
+  Although the above description from the GBD 2021 risk appendix sometimes
+  refers to location-specific mortality risks, the relative risks in GBD 2021
   are the same for all locations. Pulling LBWSG RR's with ``get_draws`` for any
   location returns RR's with location_id = 1 (Global), and they are stratified
   by year/age_group/sex. If we need clarification on exactly how the relative
   risks were calculated, we should consult the GBD modelers.
 
-Affected Outcomes in GBD 2019
+Affected Outcomes in GBD 2021
 +++++++++++++++++++++++++++++
 
 The available data for deriving relative risk was only for *all-cause mortality*
@@ -133,11 +140,11 @@ across all available sources and selected outcomes based on criteria of
 biological plausibility. **Some causes, most notably congenital birth defects,
 haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria
 that reverse causality could not be excluded.**
-[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
+[GBD-2021-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 336)
 
-.. _lbwsg_affected_causes_table_gbd_2019:
+.. _lbwsg_affected_causes_table_gbd_2021:
 
-.. list-table:: Entities Affected by LBWSG in GBD 2019
+.. list-table:: Entities Affected by LBWSG in GBD 2021
    :widths: 5 5 5 5 5
    :header-rows: 1
 
@@ -209,16 +216,16 @@ that reverse causality could not be excluded.**
 
 .. note::
 
-  There are 12 causes affected by LBWSG in GBD 2019, whereas GBD 2017 included
+  There are 12 causes affected by LBWSG in GBD 2019 and 2021, whereas GBD 2017 included
   15 affected causes. The only difference is that meningitis (c332) had four
   subcauses in GBD 2017 (c333, c334, c335, c336, corresponding to different
-  etiologies), whereas in GBD 2019, c332 is the most detailed cause, and the
+  etiologies), whereas in GBD 2019 and 2021, c332 is the most detailed cause, and the
   subcauses have been removed.
 
 Restrictions
 ++++++++++++
 
-.. list-table:: Age, Sex, and Outcome Restrictions for LBWSG Relative Risks in GBD 2019
+.. list-table:: Age, Sex, and Outcome Restrictions for LBWSG Relative Risks in GBD 2021
   :widths: 15 15 20
   :header-rows: 1
 
@@ -288,7 +295,7 @@ draw (recall that the relative risks are the same for all locations):
 - cat56 (40-42 weeks, 4000-4500 g)
 
 Here is the description of the modeling procedure for the TMREL in
-[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 177):
+[GBD-2021-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 337):
 
   For each of the country-derived relative risk surfaces, the 500-gram and
   two-week gestational age joint bin with the lowest risk was identified. This
@@ -306,7 +313,7 @@ Here is the description of the modeling procedure for the TMREL in
 
   The above description from the risk appendix indicates that there are only
   **three** universal TMREL categories (cat54, cat53, and cat56), whereas the RR
-  data in GBD 2019 indicates that cat55 is also a TMREL category.
+  data in GBD 2021 indicates that cat55 is also a TMREL category.
 
   Moreover, digging further into the RR data reveals that in addition to the 4 categories that have RR=1 for all sexes, age groups, and draws (cat53, cat54, cat55, cat56):
 
@@ -330,10 +337,10 @@ Vivarium Modeling Strategy
 
    This section will describe the Vivarium modeling strategy for risk effects.
    For a description of Vivarium modeling strategy for risk exposure, see the
-   :ref:`Low Birthweight and Short Gestation (GBD 2019)
-   <2019_risk_exposure_lbwsg>` page.
+   :ref:`Low Birthweight and Short Gestation (GBD 2021)
+   <2021_risk_exposure_lbwsg>` page.
 
-.. _lbwsg_2019_rr_interpolation_section:
+.. _lbwsg_2021_rr_interpolation_section:
 
 Interpolation of LBWSG Relative Risks
 +++++++++++++++++++++++++++++++++++++
@@ -584,6 +591,8 @@ Omitting some of the helper functions, here is the relevant interpolation code
 from the self-contained notebook, including the correct call to pull LBWSG RRs
 using ``get_draws``:
 
+.. _get_draws_call:
+
 .. code-block:: Python
 
   import pandas as pd, numpy as np
@@ -618,18 +627,18 @@ using ``get_draws``:
     elif source == 'get_draws':
         # Call get draws
         LBWSG_REI_ID = 339
-        DIARRHEAL_DISEASES_CAUSE_ID = 302 # Can be any most-detailed cause affected by LBWSG
+        CAUSE_ID = 1061 # Low birth weight and short gestation outcomes
+          # Note that this a new cause ID to represent all affected causes of the LBWSG risk factor rather than copying the RRs for each affected outcome
+          # Specifying a cause ID of a cause affected by LBWSG (such as diarrheal diseases) will not return data
         GLOBAL_LOCATION_ID = 1 # Passing any location will return RRs for Global
-        GBD_2019_ROUND_ID = 6
+        GBD_2021_RELEASE_ID = 9
         rr = get_draws(
-            gbd_id_type=('rei_id','cause_id'),
-            gbd_id=(LBWSG_REI_ID, DIARRHEAL_DISEASES_CAUSE_ID),
+            gbd_id_type=('rei_id','cause_id'), # specifying cause_id is optional
+            gbd_id=(LBWSG_REI_ID, CAUSE_ID), # specifying a cause ID is optional (cause_id=1061 is returned by default)
             source='rr',
-            location_id=GLOBAL_LOCATION_ID,
-            year_id=2019,
-            gbd_round_id=GBD_2019_ROUND_ID,
-            status='best',
-            decomp_step='step4',
+            location_id=GLOBAL_LOCATION_ID, # specifying a location ID is optional (location_id=1 is returned by default)
+            year_id=2021,
+            gbd_release_id=GBD_2021_RELEASE_ID,
         )
     else:
         # Assume source is a string representing a filepath, a Path object,
@@ -836,14 +845,38 @@ using ``get_draws``:
 .. _Notebook comparing 2-step interpolations: https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_16a_lbwsg_compare_two_step_interpolation_plots.ipynb
 .. _LBWSGRiskEffectRBVSpline class: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg.py#L722
 
+Mortality Rate Inconsistencies
+++++++++++++++++++++++++++++++
+
+In the implementation of GBD 2021 LBWSG risk effects for the MNCNH Portfolio Simulation,
+which models mortality risks in the neonatal period rather than mortality rates, we 
+discovered that the calculated all-cause mortality risk according to the GBD all-cause
+mortality risk, LBWSG PAF, and LBWSG RR values for some LBWSG exposure category/sex/age/location/draw
+pairs was greater than 1, which is an illogical value for such a measure, which should 
+have a maximum value of 1. While we believe this issue is present in the GBD's model of
+LBWSG and mortality, it is not surfaced in their model as they do not report LBWSG exposure
+category-specific mortality.
+
+To address this issue in our simulation, we enforced maximum values of the LBWSG relative
+risk values that would ensure no LBWSG exposure category for a given sex/age/location/draw
+pair would exceed 1. Details of this strategy are discussed on the 
+:ref:`MNCNH neonatal mortality cause model document <2021_cause_neonatal_disorders_mncnh>`.
+This strategy should be generalized to future simulations that utilize the GBD LBWSG risk 
+effects model (and perhaps integrated into this document).
+
 PAF Calculation for Interpolated Relative Risks
 +++++++++++++++++++++++++++++++++++++++++++++++
+
+.. note::
+
+  The PAF calculation should utilize the "capped" relative risk values as 
+  discussed in the `Mortality Rate Inconsistencies`_ section above.
 
 The Population Attributable Fraction (PAF) is used to compute "risk-deleted"
 transiton rates in our simulations. In the present context, the deleted risk
 will be LBWSG, and the affected rate will be the simulants' mortality hazard.
 Since the interpolated relative risk function described :ref:`above
-<lbwsg_2019_rr_interpolation_section>` is different from the piecewise constant
+<lbwsg_2021_rr_interpolation_section>` is different from the piecewise constant
 relative risk function used by GBD, we will need to compute our own PAF for the
 interpolated relative risks rather than using the PAF calculated by GBD.
 
@@ -876,8 +909,8 @@ gestational age :math:`x \in \mathrm{GA}` and birthweight :math:`y \in
 Note that the above formula employs the notation ":math:`d\rho`" from measure
 theory. If the exposure distribution :math:`\rho` is absolutely continuous with
 density function :math:`p` (e.g., if :math:`\rho` is defined by the piecewise
-constant density function described on the :ref:`GBD 2019 LBWSG exposure page
-<2019_risk_exposure_lbwsg>`), we can rewrite :math:`d\rho(x,y)` in terms of the
+constant density function described on the :ref:`GBD 2021 LBWSG exposure page
+<2021_risk_exposure_lbwsg>`), we can rewrite :math:`d\rho(x,y)` in terms of the
 probability density function :math:`p` for the LBWSG exposure distribution
 :math:`\rho`:
 
@@ -951,9 +984,9 @@ code above:
     # LBWSG exposure data from GBD.
     # The main thing it needs to do is convet the categorical LBWSG
     # distribution from GBD into a continuous joint distribution of
-    # (birthweight, gestational_age). See the GBD 2019 LBWSG Risk Exposure
+    # (birthweight, gestational_age). See the GBD 2021 LBWSG Risk Exposure
     # documentation here:
-    # https://vivarium-research.readthedocs.io/en/latest/gbd2019_models/risk_exposures/low_birthweight_short_gestation/index.html
+    # https://vivarium-research.readthedocs.io/en/latest/models/risk_exposures/low_birthweight_short_gestation/gbd_2021/index.html
     ...
 
   def paf_from_mean_rr(mean_rr: float)->float:
@@ -1055,7 +1088,7 @@ interpolated RRs rather than using the PAF from GBD.
 The relative risk of each LBWSG category in GBD is for *all-cause mortality* in
 the early and late neonatal periods. However, GBD identifies only a *subset* of
 causes (not *all* causes) that are affected by LBWSG, listed in the
-:ref:`affected entities table above <lbwsg_affected_causes_table_gbd_2019>`.
+:ref:`affected entities table above <lbwsg_affected_causes_table_gbd_2021>`.
 Therefore, despite the RR's being measured for *all*-cause mortality, **we are
 interested in applying the relative risks only to the cause-specific mortality
 rates of the causes that GBD considers to be affected by LBWSG.**
@@ -1143,57 +1176,8 @@ following table.
      - CSMR if unmodeled, EMR if modeled
      -
 
-Risk Outcome Pair #1
-++++++++++++++++++++
-
-.. todo::
-
-	Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
-
-.. todo::
-
-  Link to existing cause model document or other documentation of the outcome in the risk outcome pair.
-
-.. todo::
-
-  Describe which entitity the relative risks apply to (incidence rate, prevalence, excess mortality rate, etc.) and *how* to apply them (e.g. :code:`affected_measure * (1 - PAF) * RR`).
-
-  Be sure to specify the exact PAF that should be used in the above equation and either how to calculate it (see the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document) or pull it (:code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'population_attributable_fraction')`, noting which affected entity and measure should be used)
-
-.. todo::
-
-  Complete the following table to list the relative risks for each risk exposure category on the outcome. Note that if there are many exposure categories, another format may be preferable.
-
-  Relative risks for a risk factor may be pulled from GBD at the draw-level using :code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'relative_risk')`. You can then calculate the mean value as well as 2.5th, and 97.5th percentiles across draws.
-
-  The relative risks in the table below should be included for easy reference and should match the relative risks pulled from GBD using the above code. In this case, update the :code:`Note` below to include the appropriate :code:`{risk_name}`.
-
-  If for any reason the modeling strategy uses non-GBD relative risks, update the :code:`Note` below to explain that the relative risks in the table are a custom, non-GBD data source and include a sampling strategy.
-
-.. note::
-
-  The following relative risks are displayed below for convenient reference. The relative risks in the table below should match the relative risks that can be pulled at the draw level using :code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'relative_risk')`.
-
-.. list-table:: Relative Risks
-   :widths: 5 5 5
-   :header-rows: 1
-
-   * - Exposure Category
-     - Relative Risk
-     - Note
-   * -
-     -
-     -
-
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. todo::
-
-  List validation and verification criteria, including a list of variables that will need to be tracked and reported in the Vivarium simulation to ensure that the risk outcome relationship is modeled correctly
-
-Validation of Mortality Rates, Relative Risks, and Change in Exposure
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here is a validation that can be run in isolation prior to putting the LBWSG model into a full simulation with other model components:
 
@@ -1261,7 +1245,7 @@ for each project that uses LBWSG, depending on which causes are modeled.
 
   We should ask the GBD modelers exactly how to interpret the ENN and LNN
   prevalences pulled from GBD. According to
-  [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 175), the final step
+  [GBD-2021-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 335), the final step
   of modeling LBWSG exposure is:
 
     **Step C: Model joint distributions from birth to the end of the neonatal period, by l/y/s**
@@ -1302,35 +1286,58 @@ for each project that uses LBWSG, depending on which causes are modeled.
   The answers to these questions may dictate some adjuststments to the
   validation strategy outlined above.
 
-
-
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+This model of LBWSG risk effects is limited in that the LBWSG RRs are derived from 
+all-cause mortality data. Given that there are concerns around reverse causality
+between some causes of neonatal mortality and LBWSG (such as congenital abnormalities
+with high mortality rates *causing* preterm birth/low birth weight rather than preterm
+birth/low birth weight causing mortality due to congenital abnormalities), these RR
+estimates are likely somewhat exaggerated from the true causal impact of LBWSG on 
+neonatal mortality.
 
-	List assumptions and limitations of this modeling strategy, including any potential issues regarding confounding, mediation, effect modification, and/or generalizability with the risk-outcome pair.
+  The GBD modeling strategy (and the compatible vivarium modeling strategy)
+  attempts to address this limitation by applying these RR values derived from 
+  all-cause mortality data not to all causes of mortality, but instead to a subset 
+  of causes that are thought to be biologically plausible in their relation to 
+  LBWSG and without concern for reverse causality, thereby decreasing the 
+  exaggerated effect of LBWSG on neonatalm mortality that would otherwise result 
+  from the application of these RR estimates to all causes of neonatal mortality.
+
+An additional limitation of this model related to the lack of cause-specificity
+of the LBWSG RR estimates is that there is not a clear way to reconcile the LBWSG
+RR values with the 100% PAF value that GBD applies to the neonatal preterm cause
+of death, which by definition is experienced by the preterm (GA<37 weeks) population 
+only.
+
+  As a result, we can conclude that the effect of LBWSG as informed from the GBD RR 
+  values among the population with gestational ages less than 37 weeks is underestimated 
+  for the preterm birth complications cause and overestimated on average for the 
+  remaining causes affected by LBWSG. This will affect our estimates of impact on 
+  neonatal mortality from any interventions that act on neonatal mortality at the
+  cause-specific level and that are targeted on the basis of LBWSG exposure.
+
+    Note that we are able to make conclusions on the direction of bias due to
+    the lack of cause-specific effects of LBWSG in the case of the preterm birth 
+    cause of death due to the special circumstance that the preterm birth cause of
+    death is definitionally related to LBWSG exposure. A similar bias almost 
+    certainly exists for the remaining causes affected by LBWSG (and possibly
+    additional causes that are not considered as affected outcomes of LBWSG in GBD);
+    however, we are not able to make conclusions about the direction of this bias
+    without additional data in these cases. 
 
 Bias in the Population Attributable Fraction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As noted in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document, using a relative risk adjusted for confounding to compute a population attributable fraction at the population level will introduce bias.
-
-.. todo::
-
-	Outline the potential direction and magnitude of the potential PAF bias in GBD based on what is understood about the relationship of confounding between the risk and outcome pair using the framework discussed in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document.
+If we assume that measures such as low socioeconomic status and/or lack of access to health care is a confounding factor between LBWSG and neonatal mortality, then there will be an underestimation of the LBWSG PAF on neonatal mortality according to the framework detailed on the :ref:`measure of risk reference document <measures_of_risk>`.
 
 References
 ----------
 
-.. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]
 
- Pages 167-177 in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
-
-   **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factors Collaborators.
-   :title:`Global burden of 87 risk factors in 204 countries and territories,
-   1990–2019: a systematic analysis for the Global Burden of Disease Study
-   2019`. Lancet 2020; **396:** 1223–49. DOI:
-   https://doi.org/10.1016/S0140-6736(20)30752-2
-
-.. _2019_risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
+.. [GBD-2021-Risk-Factors-Appendix-LBWSG-Risk-Effects]
+ Pages 326-338 in `Supplementary appendix 1 to the GBD 2021 Risk Factors Capstone <2021_risk_factors_methods_appendix_>`_:
+   **(GBD 2021 Risk Factors Capstone)** GBD 2021 Risk Factors Collaborators.
+   :title:`Global burden and strength of evidence for 88 risk factors in 204 countries and 811 subnational locations, 1990–2021: a systematic analysis for the Global Burden of Disease Study 2021`. Lancet 2024; **403:** 2162-2203. DOI: https://doi.org/10.1016/s0140-6736(24)00933-4
+.. _2021_risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(24)00933-4/attachment/e175b500-3467-4cc5-aff8-ded0c0eea399/mmc1.pdf
