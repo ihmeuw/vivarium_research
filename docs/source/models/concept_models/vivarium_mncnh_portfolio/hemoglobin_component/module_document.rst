@@ -164,7 +164,7 @@ This module will:
     - 
   * - II
     - Calibrate to and remove effect of baseline IFA coverage
-    - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`. We assume no one receives baseline IFA prior to their first ANC visit. Since we are initializing hemoglobin exposure at the start of pregnancy prior to anyone receiving IFA, we subtract the value of :code:`baseline_ifa_coverage * ifa_hemoglobin_shift` from the hemoglobin exposure value of all simulants. 
+    - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <oral_iron_antenatal>`. We assume no one receives baseline IFA prior to their first ANC visit. Since we are initializing hemoglobin exposure at the start of pregnancy prior to anyone receiving IFA, we subtract the value of :code:`baseline_ifa_coverage * ifa_hemoglobin_shift` from the hemoglobin exposure value of all simulants. 
     - The effect of baseline IFA will be added back in later in the decision tree when simulants receive it at their ANC visits.
 
   * - III
