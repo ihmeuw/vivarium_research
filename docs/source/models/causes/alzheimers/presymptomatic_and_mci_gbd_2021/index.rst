@@ -224,39 +224,44 @@ population model <other_models_alzheimers_population>`:
     - emr_c543
     - :math:`\text{DW}_\text{c543}`
 
-On the other hand, if we model the entire population including
-susceptible simulants, the following state data should be used:
+.. note::
 
-.. list-table:: State Data if modeling entire population including susceptible simulants
-  :header-rows: 1
+  On the other hand, if we model the entire population including
+  susceptible simulants, the following state data should be used:
 
-  * - State
-    - Initial prevalence
-    - Birth prevalence
-    - Excess mortality rate
-    - Disability weight
-  * - S
-    - :math:`1 - \left( \frac{\Delta_\text{BBBM}}{\Delta_\text{AD}}
-      + \frac{\Delta_\text{MCI}}{\Delta_\text{AD}} + 1\right)
-      \cdot \text{prevalence_c543}`
-    - 1
-    - 0
-    - 0
-  * - BBBM-AD
-    - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
-    - 0
-    - 0
-    - 0
-  * - MCI-AD
-    - :math:`\frac{\Delta_\text{MCI}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
-    - 0
-    - 0
-    - :math:`\text{DW}_\text{MCI}`
-  * - AD-dementia
-    - :math:`\text{prevalence_c543}`
-    - 0
-    - emr_c543
-    - :math:`\text{DW}_\text{c543}`
+  .. list-table:: State Data if modeling entire population including susceptible simulants
+    :header-rows: 1
+
+    * - State
+      - Initial prevalence
+      - Birth prevalence
+      - Excess mortality rate
+      - Disability weight
+    * - S
+      - :math:`1 - \left( \frac{\Delta_\text{BBBM}}{\Delta_\text{AD}}
+        + \frac{\Delta_\text{MCI}}{\Delta_\text{AD}} + 1\right)
+        \cdot \text{prevalence_c543}`
+      - 1
+      - 0
+      - 0
+    * - BBBM-AD
+      - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+      - 0
+      - 0
+      - 0
+    * - MCI-AD
+      - :math:`\frac{\Delta_\text{MCI}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+      - 0
+      - 0
+      - :math:`\text{DW}_\text{MCI}`
+    * - AD-dementia
+      - :math:`\text{prevalence_c543}`
+      - 0
+      - emr_c543
+      - :math:`\text{DW}_\text{c543}`
+
+  We will not need this table for Model 4, but we may want to try
+  running the model with the full population at some point.
 
 .. list-table:: Transition Data
   :widths: 10 10 10 20 30
@@ -269,13 +274,14 @@ susceptible simulants, the following state data should be used:
     - Notes
   * - i_BBBM
     - S
-    - BBBM-Presymptomatic
+    - BBBM-AD
     - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
     - Not correct yet
   * - i_MCI
-    - BBBM-Presymptomatic
+    - BBBM-AD
     - MCI-AD
-    -
+    - :math:`h_\text{MCI}(T)`, where :math:`T` is the time the simulant
+      has spent in the BBBM-AD state
     -
   * - i_AD
     - MCI-AD
@@ -412,22 +418,6 @@ team is located in the following folder:
     - Prevalence of Alzheimer's disease and other dementias
     - como
     -
-  * - prevalence_MCI
-    - Prevalence of MCI due to AD
-    -
-    -
-  * - prevalence_BBBM
-    - Prevalence of BBBM-presymptomatic AD
-    -
-    -
-  * - prevalence_all_AD_stages
-    - Combined prevalence of all stages of AD
-    - prevalence_c543 + prevalence_MCI + prevalence_BBBM
-    -
-  * - prevalence_S
-    - Prevalence of susceptible state
-    - 1 - prevalence_all_AD_stages
-    -
   * - deaths_c543
     - Deaths from Alzheimer's disease and other dementias
     - codcorrect
@@ -466,7 +456,7 @@ team is located in the following folder:
     - Prevalence of sequela :math:`s`
     - como
     -
-  * - :math:`\text{disability_weight}_s`
+  * - :math:`\text{DW}_s`
     - Disability weight of sequela :math:`s`
     - YLD Appendix
     - For reference, the values are:
@@ -474,7 +464,30 @@ team is located in the following folder:
       - s452: 0.069 (0.046-0.099)
       - s453: 0.377 (0.252-0.508)
       - s454: 0.449 (0.304-0.595)
-  * - disability_weight_MCI
+  * - :math:`\text{DW}_\text{c543}`
+    - Average disability weight of AD-dementia
+    - :math:`\sum_\limits{s\in \text{sequelae_c543}}
+      \text{DW}_s \cdot \text{prevalence}_s`
+    - Prevalence-weighted average disability weight over sequelae,
+      computed automatically by Vivarium Inputs. Used to calculate
+      YLDs.
+  * - :math:`\text{DW}_\text{MCI}`
     - Disability weight of mild cognitive impairment
     -
+    -
+  * - :math:`\Delta_\text{MCI}`
+    - Average duration of MCI due to AD
+    -
+    -
+  * - :math:`\Delta_\text{BBBM}`
+    - Average duration of BBBM-presymptomatic AD
+    -
+    -
+  * - :math:`\Delta_\text{AD}`
+    - Average duration of AD-dementia
+    -
+    -
+  * - :math:`\Delta_\text{(all AD states)}`
+    - Average duration of all stages of AD combined
+    - :math:`\Delta_\text{MCI} + \Delta_\text{BBBM} + \Delta_\text{AD}`
     -
