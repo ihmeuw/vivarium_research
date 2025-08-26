@@ -383,12 +383,6 @@ scenario, and input draw.
     - * Locations: USA, China
     - Default
     - Default
-  * - 3.1
-    - Fix incidence to be based on full population instead of susceptible population and change approach to random seed for poisson draws
-    - Baseline
-    - * Locations: USA, China
-    - Default
-    - Default
 
 
 5.2 V & V Tracking
@@ -538,11 +532,11 @@ scenario, and input draw.
       group and sex, but it may be more prudent to start by looking at
       aggregated results.
 
-      * Everything from 2.0, except use FHS values for ACMR in the total mortality calculation
+      * Everything from 2.0, except use FHS values for ACMR in the overall mortality (ACMR - CSMR + EMR) vs artifact comparison
       * Verify that ACMR decreases slightly from 2025 to 2050 and then levels off
       * Since there are so many (age groups, years, locations, sex) combinations that might be tested, it will be good enough to confirm that new simulant counts and total mortality rates line up for 2030, 2060, and 2090, and for two locations.
     - * The number of new simulants entering the sim matches the target number, which leads to a prevalence counts higher than estimated by GBD/FHS, but closer than in Model 2.
-    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/7f26e2fc9776a80f622dfc46fca4fbf04d3d5e70/verification_and_validation/2025_08_25b_model3.0_vv.ipynb
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/32e7d3d44f540a9b9620b21b5a137f626631475c/verification_and_validation/2025_08_25b_model3.0_vv.ipynb
   
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
