@@ -67,43 +67,58 @@ In a simulation where we do not model births by identifying which simulants give
 to determine how many simulants to add in each time step.
 We will scale down the live births of the total GBD population by the same "model scale"  we use in our simulation.
 
-For example, imagine that country A has a GBD population of 1000, and we are modeling this total population, but only need to initialize children age 5 and under 
-(e.g. because they are the only ones susceptible to the disease we are modeling).
-Imagine there are 100 such children living in A, and we plan to initialize 20 children in our model. 
+While we always scale down total GBD population live births when **adding** simulants,
+the number of simulants we **initialize** may be less than the scaled down total GBD population due to 
+restrictions on variables such as age.
+For example, for a child nutrition simulation, we may only simulate children under 5.
 
-In this example, our initialized population is :math:`\frac{1}{5}` the size of the age-restricted GBD population it corresponds to. 
-This means that the simulated population implied by our model scenario (which includes people over the age of 5 even though they are not initialized) is also :math:`\frac{1}{5}` 
-the size of the total unrestricted GBD population. 
-This is our "model scale". We want :math:`\frac{1}{5}` as many children to be born in our simulation as are born in the total GBD population.
+Considering both model scale and population restrictions, we can define four different populations 
+which will be useful in this discussion:
 
-.. note::
-  Even though our number of simulants is much less than :math:`\frac{1}{5}` of the **total** GBD population of 1000 (since we only need to model children), we still want
-  :math:`\frac{1}{5}` as many births to occur in our simulation as in the total GBD population. 
-  
-  The reason is that all ages of people still exist in the scenario we are modeling, despite the fact that we are only 
-  explicitly initializing simulants corresponding to children under 5 -- otherwise, there would be no parents to give birth!
-  Therefore, our model scale must reflect the total GBD population even if we are only initializing a subset of that population in our model. 
-  
-  In other words, the initialized population is different from the population that exists within the simulation scenario. 
-  The ratio of the (age-restricted) initialized population to the age-restricted GBD population gives us our model scale.
-  The ratio of the simulation scenario population to the total GBD population is also equal to the model scale 
-  (in this example the ratio would be 200 to 1000). 
+  * Restricted GBD (full-scale)  
+  * Unrestricted/total GBD (full-scale) 
+  * Restricted "simulated" (model-scale)
+  * Unrestricted/total "model-implied" (model-scale)
+
+Note that we differentiate model-scale populations as either "simulated" or "model-implied" 
+depending on whether they are restricted or not. 
+"Simulated" reflects that the restiction defines the population that we create simulants for.
+"Model-implied" means that the lack of restriction includes people who exist in the context of the model but 
+are not simulated. For example, even if we are only simulating children under 5, people of other ages 
+are still implied to exist, otherwise there would be no one to give birth to new simulants!
+
+The model scale will be equal to the ratio between the restricted simulated 
+population and the restricted GBD population, as well as to the ratio between the 
+unrestricted model-implied population and the unrestricted GBD population. 
+
+For example, imagine that country A has a GBD population of one million ("unrestricted/total GBD population), 
+but only need to simulate children under 5 (age-restriction).
+Imagine there are 100K such children living in A ("restricted GBD population"), 
+and we plan to initialize 20K children in our model ("restricted simulated population"). 
+
+In this example, our model scale is :math:`\frac{20,000}{100,000} = \frac{1}{5}`. 
+(And our "unrestricted/total model-implied population" must be 
+:math:`1,000,000 * \frac{1}{5} = 200,000`).
+
+So, we want :math:`\frac{1}{5}` as many children to be born in our simulation 
+as are born in the total GBD population.
 
 To represent model scale in general we can define the below equation:
 
-:math:`\text{model scale} = \frac{\text{Initialized population size}}{\int_{a=\text{age start}}^{\text{age end}} \text{GBD total population}(a) \, da}`
+:math:`\text{model scale} = \frac{\text{Initialized simulated population size}}{\sum_{a=\text{age start}}^{\text{age end}} \text{GBD total population at age }a}`
 
-:math:`\text{Initialized population size}` is the number of simulants we will initialize. 
-The integral limits indicate the age restrictions of the GBD population represented by our initialized simulants - e.g. 5 and under. 
+"Initialized simulated population size" is the age-restricted, simulated population size -- the number of simulants we will initialize. 
+The summation limits indicate the age restrictions of the GBD population represented by our initialized simulants - e.g. under 5. 
 This can be generalized to models of populations restricted for other variables, such as sex. 
 
 .. note::
   To use live births in the current year to determine the rate at which we should add new simulants, we must have :math:`\text{age start} = 0`.
 
-  Also note that with no age restrictions, the initialized population in the numerator will be the same as the simulation scenario population, 
+  Also note that with no age restrictions, the simulated population size in the numerator 
+  will be the same as the model-implied population size, 
   and the integral value will simply be the total GBD population. 
 
-We multiply our model scale by the number of live births in the total GBD population and the fraction of a year which passes in each simulated time step 
+We multiply our model scale by the number of live births per year in the total GBD population and the length of each simulated time step 
 to get the total simulants to add per timestep, as shown in the below table.
 
 .. list-table:: Parameters
@@ -112,7 +127,7 @@ to get the total simulants to add per timestep, as shown in the below table.
   * - Parameter
     - Value
   * - simulants_to_add_per_timestep
-    - :math:`\frac{\text{initial simulated population size}}{\int_{a=\text{age start}}^{\text{age end}} \text{GBD total population}(a) \, da} \times \text{Live births} \times \text{time step in days}/365.25`
+    - :math:`\frac{\text{initial simulated population size}}{\int_{a=\text{age start}}^{\text{age end}} \text{GBD total population}(a) \, da} \times \text{Live births per year} \times \text{time step in years}`
 
 .. list-table:: Data values
   :header-rows: 1
