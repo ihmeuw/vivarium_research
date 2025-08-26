@@ -158,6 +158,9 @@ Cause Model Diagram
     - Alzheimer's Disease dementia
     - Simulant has mild, moderate, or severe dementia due to Alzheimer's
       disease
+  * - Death (not pictured)
+    - Death
+    - Simulant has died
 
 .. list-table:: Transition Definitions
   :widths: 5 5 10 10
@@ -183,6 +186,10 @@ Cause Model Diagram
     - Incidence hazard of Alzheimer's disease dementia
     - We will define this as a constant hazard rate for simulants in
       MCI-AD
+  * - m_X (not pictured)
+    - Mortality hazard in state X
+    - Total mortality hazard for simulants in cause state X
+    - X is a variable representing an arbitrary cause state
 
 State and Transition Data
 -------------------------
@@ -206,22 +213,22 @@ population model <other_models_alzheimers_population>`:
   * - S
     - 0
     - 0
-    - 0
+    - emr_S = 0
     - 0
   * - BBBM-AD
     - :math:`\Delta_\text{BBBM} / \Delta_\text{(all AD states)}`
     - 1
-    - 0
+    - emr_BBBM = 0
     - 0
   * - MCI-AD
     - :math:`\Delta_\text{MCI} / \Delta_\text{(all AD states)}`
     - 0
-    - 0
+    - emr_MCI = 0
     - :math:`\text{DW}_\text{MCI}`
   * - AD-dementia
     - :math:`\Delta_\text{AD} / \Delta_\text{(all AD states)}`
     - 0
-    - emr_c543
+    - emr_AD = emr_c543
     - :math:`\text{DW}_\text{c543}`
 
 .. note::
@@ -275,8 +282,9 @@ population model <other_models_alzheimers_population>`:
   * - i_BBBM
     - S
     - BBBM-AD
-    - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
-    - Not correct yet
+    - Not explicitly used because we're not modeling susceptible
+      simulants
+    -
   * - i_MCI
     - BBBM-AD
     - MCI-AD
@@ -286,10 +294,15 @@ population model <other_models_alzheimers_population>`:
   * - i_AD
     - MCI-AD
     - AD
-    - 1 / (3.25 years)
-    - Constant hazard corresponding to an annual probability of 0.735 of
-      staying in MCI-AD (or returning to asymptomatic), based on this
-      source [[cite]], since :math:`\exp(-1 / 3.25) \approx 0.735`
+    - :math:`1 / \Delta_\text{MCI}`
+    -
+  * - m_X
+    - X
+    - Death
+    - acmr - csmr_c543 + emr_X
+    - Computed by mortality component. X is a variable representing an
+      arbitrary cause state.
+
 
 Data Values and Sources
 -----------------------
@@ -311,14 +324,6 @@ team is located in the following folder:
     - Definition
     - Source or value
     - Notes
-  * - prevalence_c543
-    - Prevalence of Alzheimer's disease and other dementias
-    - como
-    -
-  * - deaths_c543
-    - Deaths from Alzheimer's disease and other dementias
-    - codcorrect
-    -
   * - population
     - Average population during specified year
     - * get_population (if using standard GBD data), or
@@ -328,12 +333,28 @@ team is located in the following folder:
       at year's midpoint (which is approximately equal to person-years
       if we think the midpoint rule with a single rectangle gives a good
       estimate of the area under the population curve).
+  * - deaths
+    - Deaths due to all causes
+    - codcorrect or FHS data
+    -
+  * - deaths_c543
+    - Deaths from Alzheimer's disease and other dementias
+    - codcorrect
+    -
+  * - prevalence_c543
+    - Prevalence of Alzheimer's disease and other dementias
+    - como
+    -
   * - incidence_rate_c543
     - GBD's "total population incidence rate" for Alzheimer's disease
       and other dementias
     - como
     - Raw GBD value, different from "susceptible incidence rate"
       automatically calculated by Vivarium Inputs
+  * - acmr
+    - All-cause mortality rate
+    - deaths / population
+    -
   * - csmr_c543
     - Cause-specific mortality rate for Alzheimer's disease and other
       dementias
@@ -372,17 +393,28 @@ team is located in the following folder:
     - Disability weight of mild cognitive impairment
     -
     -
-  * - :math:`\Delta_\text{MCI}`
-    - Average duration of MCI due to AD
-    -
-    -
+  * - :math:`\alpha`, :math:`\lambda`
+    - Shape and rate parameters, respectively, of gamma distribution for
+      waiting time :math:`T` in BBBM-AD
+    - * :math:`\alpha = 468.75`
+      * :math:`\lambda = 125`
+    - Chosen so that :math:`P(3.5 < T < 4) \approx 0.9` because client
+      said, "The BBBM+ state lasts about 3.5-4 years before
+      transitioning to MCI."
   * - :math:`\Delta_\text{BBBM}`
     - Average duration of BBBM-presymptomatic AD
-    -
-    -
+    - :math:`\alpha / \lambda`
+    - Mean of gamma distribution for waiting time :math:`T` in BBBM-AD
+  * - :math:`\Delta_\text{MCI}`
+    - Average duration of MCI due to AD
+    - 3.25 years
+    - Value from [[cite source]], assuming a constant hazard rate.
+      Corresponds to an annual probability of 0.735 of staying in MCI-AD
+      (or returning to asymptomatic), since :math:`\exp(-1 / 3.25)
+      \approx 0.735`
   * - :math:`\Delta_\text{AD}`
     - Average duration of AD-dementia
-    -
+    - 1 / m_AD
     -
   * - :math:`\Delta_\text{(all AD states)}`
     - Average duration of all stages of AD combined
