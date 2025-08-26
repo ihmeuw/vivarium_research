@@ -1386,6 +1386,14 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default, note that we would like additional stratifications based on believed gestational age in the maternal population, births, and neonatal burden observers
     - Default
+  * - 16.1
+    - Updates to 15.0 to (1) add preterm and believed preterm status to maternal population count observer and (2) fix bug that results in 0% ANC attendance
+    - Baseline
+    - ``model16.1``
+    - Default
+    - Added preterm status and believed preterm status to maternal
+      population observer (#7)
+    - Default
   * - 17.0
     - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
     - Baseline and MMS scale-up scenarios 
@@ -1972,19 +1980,19 @@ Default stratifications to all observers should include scenario and input draw.
   * - Zero ANC coverage (100% of simulants classified as with ANC coverage == 'none')
     - Unknown - maybe something related to prior typo in artifact key name for ANC covariates (missing "t" in antenatal)
     - Hussain to investigate
-    - For model 15.1
+    - For model 16.1
   * - Missing preterm and believed preterm status stratifications from maternal population observer
     - Didn't get added
     - Hussain to investigate/update
-    - For model 15.1
+    - For model 16.1
   * - Slightly overestimated in-facility delivery proportion 
     - Unknown
     - Hussain and Ali to investigate
-    - Future run (doesn't need to block 15.1)
+    - Future run (doesn't need to block 16.1)
   * - Potentially increased overestimation of all-cause neonatal mortality relative to model 13.3
     - Unknown - possibly related to changes in LBWSG exposure distribution
     - Ali to check LBWSG exposure distribution in the interactive sim
-    - TBD - not blocking for 15.1 
+    - TBD - not blocking for 16.1 
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
     - Update to custom-calculated PAF and reassess
