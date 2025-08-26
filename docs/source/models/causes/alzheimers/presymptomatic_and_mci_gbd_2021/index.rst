@@ -46,6 +46,8 @@ Alzheimer's disease  with presymptomatic and MCI stages (GBD 2021)
     - Blood-Based Biomarker
   * - CSU
     - Client Services Unit
+  * - FHS
+    - Future Health Scenarios
   * - MCI
     - Mild Cognitive Impairment
   * - YLD
@@ -213,26 +215,25 @@ population model <other_models_alzheimers_population>`:
   * - S
     - 0
     - 0
-    - emr_S = 0
+    - 0
     - 0
   * - BBBM-AD
     - :math:`\Delta_\text{BBBM} / \Delta_\text{(all AD states)}`
     - 1
-    - emr_BBBM = 0
+    - 0
     - 0
   * - MCI-AD
     - :math:`\Delta_\text{MCI} / \Delta_\text{(all AD states)}`
     - 0
-    - emr_MCI = 0
+    - 0
     - :math:`\text{DW}_\text{MCI}`
   * - AD-dementia
     - :math:`\Delta_\text{AD} / \Delta_\text{(all AD states)}`
     - 0
-    - emr_AD = emr_c543
+    - emr_c543
     - :math:`\text{DW}_\text{c543}`
 
-.. note::
-
+..
   On the other hand, if we model the entire population including
   susceptible simulants, the following state data should be used:
 
@@ -288,8 +289,9 @@ population model <other_models_alzheimers_population>`:
   * - i_MCI
     - BBBM-AD
     - MCI-AD
-    - :math:`h_\text{MCI}(T)`, where :math:`T` is the time the simulant
-      has spent in the BBBM-AD state
+    - :math:`h_\text{MCI}(t - T_\text{BBBM})`, where :math:`t` is the
+      current time in the simulation, and :math:`T_\text{BBBM}` is the
+      time the simulant entered the BBBM-AD state
     -
   * - i_AD
     - MCI-AD
@@ -299,7 +301,7 @@ population model <other_models_alzheimers_population>`:
   * - m_X
     - X
     - Death
-    - acmr - csmr_c543 + emr_X
+    - acmr --- csmr_c543 + emr_X
     - Computed by mortality component. X is a variable representing an
       arbitrary cause state.
 
@@ -326,17 +328,11 @@ team is located in the following folder:
     - Notes
   * - population
     - Average population during specified year
-    - * get_population (if using standard GBD data), or
-      * loaded from ``population_agg.nc`` file provided by FHS Team (if
-        using forecasted data)
+    - loaded from ``population_agg.nc`` file provided by FHS Team
     - Numerically equal to person-years. Often interpreted as population
       at year's midpoint (which is approximately equal to person-years
       if we think the midpoint rule with a single rectangle gives a good
       estimate of the area under the population curve).
-  * - deaths
-    - Deaths due to all causes
-    - codcorrect or FHS data
-    -
   * - deaths_c543
     - Deaths from Alzheimer's disease and other dementias
     - codcorrect
@@ -353,7 +349,7 @@ team is located in the following folder:
       automatically calculated by Vivarium Inputs
   * - acmr
     - All-cause mortality rate
-    - deaths / population
+    - loaded from ``_all.nc`` file provided by FHS Team
     -
   * - csmr_c543
     - Cause-specific mortality rate for Alzheimer's disease and other
@@ -364,6 +360,14 @@ team is located in the following folder:
     - Excess mortality rate for Alzheimer's disease and other dementias
     - :math:`\frac{\text{csmr_c543}}{\text{prevalence_c543}}`
     - Calculated automatically by Vivarium Inputs
+  * - emr_X
+    - Excess mortality rate in cause state X
+    - Values listed in state data table above
+    -
+  * - m_X
+    - Mortality hazard in cause state X
+    - acmr --- csmr_c543 + emr_X
+    -
   * - sequelae_c543
     - Sequelae of Alzheimer's disease and other dementias
     - Set of 3 sequelae: s452, s453, s454
@@ -391,7 +395,15 @@ team is located in the following folder:
       YLDs.
   * - :math:`\text{DW}_\text{MCI}`
     - Disability weight of mild cognitive impairment
+    - ?
     -
+  * - :math:`t`
+    - The current time in the simulation
+    - Changes with simulation clock
+    -
+  * - :math:`T_\text{BBBM}`
+    - The time at which the simulant enters the BBBM-AD state
+    - Random variable for each simulant
     -
   * - :math:`\alpha`, :math:`\lambda`
     - Shape and rate parameters, respectively, of gamma distribution for
@@ -399,7 +411,7 @@ team is located in the following folder:
     - * :math:`\alpha = 468.75`
       * :math:`\lambda = 125`
     - Chosen so that :math:`P(3.5 < T < 4) \approx 0.9` because client
-      said, "The BBBM+ state lasts about 3.5-4 years before
+      said, "The BBBM+ state lasts about 3.5--4 years before
       transitioning to MCI."
   * - :math:`\Delta_\text{BBBM}`
     - Average duration of BBBM-presymptomatic AD
