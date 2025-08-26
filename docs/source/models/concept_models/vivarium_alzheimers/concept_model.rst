@@ -383,6 +383,13 @@ scenario, and input draw.
     - * Locations: USA, China
     - Default
     - Default
+  * - 3.1
+    - Fix incidence to be based on full population instead of susceptible population and change approach to random seed for poisson draws
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
+
 
 5.2 V & V Tracking
 ------------------------
@@ -532,6 +539,14 @@ scenario, and input draw.
       aggregated results.
 
       * Everything from 2.0, except use FHS values for ACMR in the total mortality calculation
+      * Since there are so many (age groups, years, locations, sex) combinations that might be tested, it will be good enough to confirm that new simulant counts and total mortality rates line up for 2030, 2060, and 2090, and for two locations.
+    - * The number of new simulants entering the sim is correct in younger 
+        age groups but incorrect in later ages. This is thought to be an 
+        issue with incidence used in the sim.
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/f716d0396c44a161fabe20a81b6f67c600dea47c/verification_and_validation/2025_08_25b_model3.0_vv.ipynb
+  * - 3.1
+    - 
+      * Everything from 3.0, special attention on the incidence in older ages
       * Since there are so many (age groups, years, locations, sex) combinations that might be tested, it will be good enough to confirm that new simulant counts and total mortality rates line up for 2030, 2060, and 2090, and for two locations.
     -
     -
