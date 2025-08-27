@@ -397,38 +397,63 @@ team is located in the following folder:
     - Disability weight of mild cognitive impairment
     - ?
     -
-  * - :math:`t`
-    - The current time in the simulation
-    - Changes with simulation clock
-    -
-  * - :math:`T_\text{BBBM}`
-    - The time at which the simulant enters the BBBM-AD state
+  * - :math:`T_X`
+    - The time at which the simulant enters the cause state :math:`X`
     - Random variable for each simulant
     -
+  * - :math:`D_\text{BBBM}`
+    - Dwell time in cause state BBBM-AD
+    - :math:`T_\text{MCI} - T_\text{BBBM}`
+    - Random variable for each simulant, constructed implicitly through
+      simulation dynamics to have a `gamma distribution`_ with shape
+      parameter :math:`\alpha` and rate parameter :math:`\lambda`
   * - :math:`\alpha`, :math:`\lambda`
     - Shape and rate parameters, respectively, of gamma distribution for
-      waiting time :math:`T` in BBBM-AD
+      :math:`D_\text{BBBM}`
     - * :math:`\alpha = 468.75`
       * :math:`\lambda = 125`
-    - Chosen so that :math:`P(3.5 < T < 4) \approx 0.9` because client
-      said, "The BBBM+ state lasts about 3.5--4 years before
-      transitioning to MCI."
+    - Chosen so that :math:`P(3.5 < D_\text{BBBM} < 4) \approx 0.9`
+      because client said, "The BBBM+ state lasts about 3.5--4 years
+      before transitioning to MCI."
+  * - gamma_dist
+    - Python object representing the gamma distribution for
+      :math:`D_\text{BBBM}`
+    - scipy.stats.gamma(𝛼, scale=1/λ)
+    - An instance of `SciPy's gamma distribution class`_
+  * - :math:`h_\text{MCI}(t)`
+    - Hazard function for transitioning into the MCI-AD state from BBBM-AD
+    - gamma_dist.pdf(t) / gamma_dist.sf(t)
+    - Equal to :math:`\frac{t^{\alpha-1}e^{-\lambda t}}{\int_t^\infty
+      u^{\alpha-1} e^{-\lambda u}\, du}`, but can be computed more
+      easily as the ratio of the probability density function to the
+      survival function, using the methods of `SciPy's gamma
+      distribution class`_
   * - :math:`\Delta_\text{BBBM}`
     - Average duration of BBBM-presymptomatic AD
     - :math:`\alpha / \lambda`
-    - Mean of gamma distribution for waiting time :math:`T` in BBBM-AD
+    - Mean of gamma distribution for :math:`D_\text{BBBM}`
   * - :math:`\Delta_\text{MCI}`
     - Average duration of MCI due to AD
     - 3.25 years
-    - Value from [[cite source]], assuming a constant hazard rate.
-      Corresponds to an annual probability of 0.735 of staying in MCI-AD
-      (or returning to asymptomatic), since :math:`\exp(-1 / 3.25)
-      \approx 0.735`
+    - Value from `Potashman et al.`_, assuming a constant hazard rate.
+      Corresponds to an annual probability of 0.735 of staying in
+      MCI-AD, since :math:`\exp(-1 / 3.25) \approx 0.735`.  **Note:**
+      The paper reports a 68.2% of staying in MCI and a 5.3% chance or
+      returning to asymptomatic---these probabilities have been combined
+      since our model assumes that a backwards transition is not
+      possible.
   * - :math:`\Delta_\text{AD}`
     - Average duration of AD-dementia
     - 1 / m_AD
     -
   * - :math:`\Delta_\text{(all AD states)}`
     - Average duration of all stages of AD combined
-    - :math:`\Delta_\text{MCI} + \Delta_\text{BBBM} + \Delta_\text{AD}`
+    - :math:`\Delta_\text{BBBM} + \Delta_\text{MCI} + \Delta_\text{AD}`
     -
+
+.. _gamma distribution:
+  https://en.wikipedia.org/wiki/Gamma_distribution
+.. _SciPy's gamma distribution class:
+  https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html
+.. _Potashman et al.:
+  https://doi.org/10.1007/s40120-021-00272-1
