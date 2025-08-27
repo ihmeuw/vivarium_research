@@ -283,8 +283,29 @@ This is the population we pull from GBD using get_population. Thus,
 
 .. _plots of AD incidence from GBD Compare: http://ihmeuw.org/739c
 
-Implementation and data tables
+Alternative view using incidence count
 --------------------------------------
+
+The most direct way to estimate :math:`A_g'(t)` is to assume it is
+constant, in which case it equals its time-average.  For example, if
+:math:`y(t)` denotes the year to which time :math:`t` belongs, and we
+assume :math:`A_g'(t)` is constant during the year :math:`y(t)`, then
+
+.. math::
+
+  A_g'(t)
+  = \frac{\text{# of incident cases of AD in group $g$ in year $y(t)$}}
+    {\text{1 year}}.
+
+This ends up being equivalent to the method using incidence rates above,
+but whereas the *count* of incident cases is likely to vary considerably
+due to changing demographics, the incidence *rate* of AD is likely to
+remain fairly stable over time. Thus, using using the incidence rate and
+the total population is a more appropriate way to use the available
+data.
+
+Implementation and data tables
++++++++++++++++++++++++++++++++
 
 ..
   To summarize, here is the algorithm for adding new simulants at time
@@ -314,27 +335,6 @@ Implementation and data tables
   into each age group at time :math:`t_0` is also random, but I'm not
   sure exactly how it works (e.g., is the number of *initial* simulants
   in each group also a Poisson random variable?).
-
-Alternative view using incidence count
---------------------------------------
-
-The most direct way to estimate :math:`A_g'(t)` is to assume it is
-constant, in which case it equals its time-average.  For example, if
-:math:`y(t)` denotes the year to which time :math:`t` belongs, and we
-assume :math:`A_g'(t)` is constant during the year :math:`y(t)`, then
-
-.. math::
-
-  A_g'(t)
-  = \frac{\text{# of incident cases of AD in group $g$ in year $y(t)$}}
-    {\text{1 year}}.
-
-This ends up being equivalent to the method using incidence rates above,
-but whereas the *count* of incident cases is likely to vary considerably
-due to changing demographics, the incidence *rate* of AD is likely to
-remain fairly stable over time. Thus, using using the incidence rate and
-the total population is a more appropriate way to use the available
-data.
 
 Data Tables
 -----------
