@@ -673,7 +673,7 @@ in the artifact:
     - Directly used in assigning a delivery facility in the facility choice model
   * - :code:`in_facility_delivery_proportion`
     - Proportion of all births that occur in facility settings (including both BEmONC and CEmONC)
-    - GBD covariate 51
+    - mean_value of GBD covariate 51 (do NOT include any parameter uncertainty in this parameter as only the mean_value was used as an input to the delivery facility model calibration)
     - Used in the calculation of the following parameters
   * - :code:`p_home`
     - Proportion of all births that occur at home
