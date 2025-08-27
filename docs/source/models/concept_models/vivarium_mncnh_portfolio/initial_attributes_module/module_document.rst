@@ -72,7 +72,7 @@ There is no need for a diagram for the initial attributes module of this simulat
       :ref:`facility choice model document
       <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
     - Will be used to determine ANC attendance in ANC module
-  * - B. LWBSG category propensity
+  * - B. LBWSG category propensity
     - See the :ref:`correlated propensities
       <facility_choice_correlated_propensities_section>` section of the
       :ref:`facility choice model document

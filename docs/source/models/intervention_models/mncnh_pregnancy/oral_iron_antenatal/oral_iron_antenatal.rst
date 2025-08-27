@@ -41,7 +41,7 @@ Maternal supplementation in low and middle income country settings is often acce
 There are various maternal supplementation regimens that provide varying combinations of micro- and macro-nutrients and therefore have varying impacts on both maternal and child health. 
 The two major classes of maternal supplementation regimens that we will be modeling are outlined in the table below.
 
-- **Iron and Folic Acid (IFA):** IFA affects outcomes including maternal anemia (which is a risk factor for maternal mortality) and infant birthweight (a risk factor for infant mortality). Additionally, folic acid deficiency is associated with haematological consequences and congenital malformations, however the effect on congenital malformations is sensitive to timing of administration relative to conception. The latest cochrane review of IFA trials was performed by [Pena-Rosas-et-al-2015]_; notably, as IFA is considered the current standard of care, there are few studies that compare IFA to placebo or no treatment.
+- **Iron and Folic Acid (IFA):** IFA affects outcomes including maternal anemia (which is a risk factor for maternal mortality) and infant birthweight (a risk factor for infant mortality). Additionally, folic acid deficiency is associated with haematological consequences and congenital malformations, however the effect on congenital malformations is sensitive to timing of administration relative to conception. The latest cochrane review of IFA trials was performed by [Finkelstein-et-al-2024]_; notably, as IFA is considered the current standard of care, there are few studies that compare IFA to placebo or no treatment.
 
 - **Multiple Micronutrient Supplementation (MMS):** MMS is a combination of micronutrients that includes iron and folic acid as well as other nutrients such as vitamin A and zinc. The latest cochrane review on MMS (containing IFA) relative to IFA alone was performed by [Keats-et-al-2019-maternal-supplementation]_.
 
@@ -185,9 +185,9 @@ Notably, the intervention will not affect the hemoglobin level of women of repro
     - Note
     - Source
   * - IFA
-    - +7.8 g/L (4.08, 11.52)
+    - +9.53 g/L (6.99 to 12.06)
     - Relative to no supplementation 
-    - [Oh-et-al-2020]_
+    - [Finkelstein-et-al-2024]_
   * - MMS
     - +0 g/L
     - Relative to IFA
@@ -260,7 +260,7 @@ We assume changes in simulant birthweight are independent from changes in their 
   * - IFA supplemented mothers (overall)
     - +57.73 g (7.66 to 107.79)
     - Relative to no supplementation 
-    - [Pena-Rosas-et-al-2015]_
+    - [Finkelstein-et-al-2024]_
   * - MMN supplemented mothers (overall)
     - +45.16 (32.31 to 58.02) 
     - Relative to IFA
@@ -387,7 +387,7 @@ Additionally, our methods differ from GBD's in that we estimated two separate GA
 
 2. Find and apply a second shift that replicates the preterm birth dichotomous effect when applied only to the portion of the distribution with baseline gestational age exposures that are *greater* than 32 (the very preterm birth threshold) *minus* this second shift. Note that the second shift will be negative in direction.
 
-`The estimation of the antenatal supplementation gestational age shifts as described was performed in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/Gestational%20age%20shifts.ipynb>`_
+`The estimation of the antenatal supplementation gestational age shifts as described was performed in this notebook <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/ifa_gestational_age_shifts.ipynb>`_
 
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -465,17 +465,15 @@ Where,
   * - Parameter
     - Value
   * - IFA_SHIFT
-    - `Location-specific .csv files of IFA_SHIFT values can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/data_prep/antenatal_interventions/ifa_gestational_age_shifts>`_
+    - `Location-specific IFA_SHIFT values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/ifa_ga_shifts.csv>`_
   * - MMS_SHIFT_1
-    - `Location-specific .csv files of MMS_SHIFT_1 values can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/updated_mms_shifts.csv>`_
+    - `Location-specific .csv files of MMS_SHIFT_1 values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/updated_mms_shifts.csv>`_
   * - MMS_SHIFT_2
-    - `Location-specific .csv files of MMS_SHIFT_2 values can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/antenatal_interventions/updated_mms_shifts.csv>`_
+    - `Location-specific .csv files of MMS_SHIFT_2 values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/updated_mms_shifts.csv>`_
 
-.. todo::
+.. todo:: 
 
-  These notebooks are outdated from the Nutrition Optimization project, so we need to update the above notebook links once we update to new GBD rounds
-  and to the locations of interest for the :ref:`MNCNH Portfolio <2024_concept_model_vivarium_mncnh_portfolio>` simulation. 
-  Here is the relevant `JIRA ticket <https://jira.ihme.washington.edu/browse/SSCI-2209>`_.
+  The values in these CSVs rely on the GBD 2021 LBWSG exposure distribution and ANC1 covariates and therefore will need to be updated when the GBD 2023 estimates are available.
 
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -546,4 +544,8 @@ Assumptions and limitations
 References
 ------------
 
-The following citations are defined in the :ref:`Antenatal supplementation document <maternal_supplementation_intervention>` from Nutrition Optimization project and should be referenced from there: [Gomes-et-al-2023-antenatal-supplementation], [Keats-et-al-2019-maternal-supplementation], [Li-et-al-2019-antenatal-supplementation], [Oh-et-al-2020], [Pena-Rosas-et-al-2015]
+.. [Finkelstein-et-al-2024]
+
+  Finkelstein JL, Cuthbert A, Weeks J, Venkatramanan S, Larvie DY, De-Regil LM, Garcia-Casal MN. Daily oral iron supplementation during pregnancy. Cochrane Database of Systematic Reviews 2024, Issue 8. Art. No.: CD004736. DOI: 10.1002/14651858.CD004736.pub6.
+
+The following citations are defined in the :ref:`Antenatal supplementation document <maternal_supplementation_intervention>` from Nutrition Optimization project and should be referenced from there: [Gomes-et-al-2023-antenatal-supplementation], [Keats-et-al-2019-maternal-supplementation], [Li-et-al-2019-antenatal-supplementation]

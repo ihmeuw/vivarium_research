@@ -29,7 +29,7 @@
   And then add it to the list of decorators above.
 
 ====================================
-GBD 2023 Hemoglobin Risk Effects
+Hemoglobin Risk Effects (GBD 2023)
 ====================================
 
 .. contents::
@@ -139,17 +139,17 @@ Note that we will not be modeling direct effects of hemoglobin on the affected o
      - :math:`ir`
      - 
    * - Maternal disorders
+     - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
+     - cause
+     - custom
+     - :math:`ir`
+     - 
+   * - Maternal disorders
      - Maternal hypertensive disorders
      - cause
      - c369
      - TBD
      - Modeling strategy for hypertensive disorders cause in the MNCNH model is still outstanding. The risk effects model for this cause may require a custom approach to account for the complexity of pre-eclampsia and related interventions in the MNCNH model.
-   * - Maternal disorders
-     - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
-     - cause
-     - custom
-     - :math:`ir`
-     - A modeling strategy for maternal depressive disorders in the MNCNH model is still outstanding.
    * - Neonatal outcomes
      - :ref:`Neonatal sepsis <2021_cause_neonatal_sepsis_mncnh>`
      - cause
@@ -168,8 +168,8 @@ Use the modeling strategy described below for the following maternal disorders s
 
 - :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
 - :ref:`Maternal sepsis and other maternal infections <2021_cause_maternal_sepsis_mncnh>`
-- Maternal hypertensive disorders
 - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
+- Maternal hypertensive disorders
 
 .. todo::
 
@@ -177,11 +177,38 @@ Use the modeling strategy described below for the following maternal disorders s
 
 There may be individual exposure values assigned that are outside of the defined risk curves in GBD. In this case, for exposures <40, assign the risk corresponding to an exposure value of 40. For exposures >150, assign the risk corresponding to an exposure value of 150.
 
-Use the population attributable fraction values pulled from GBD shared functions such that the maternal disorder incidence rate for an individual :math:`i` for a given affected maternal disorder subcause is as follows:
+To model the low hemoglobin risk factor on maternal disorders, we will be calculating our own population attributable fractions (PAFs) for each affected maternal disorder subcause. 
+This is because although there are PAFs saved in the Burdenator for hemoglobin's effect on maternal hemorrhage and sepsis, there is not for depressive disorders. 
+The hemoglobin team did calculate PAFs for depressive disorders, but they found that because cause_id=567 (Depressive disorders) is not the most-detailed cause, it is dropped by the Burdenator. 
+They noted that there has been discussion about whether to save these PAFs for one of the parent causes, but no decision has been made yet. 
+
+Relative risk values to calculate custom PAFs for maternal disorders can be accessed via shared functions with the following call:
+
+.. code-block:: python
+
+   # return age- and cause-specific relative risk estimates for the hemoglobin risk factor
+   rr = get_draws(release_id=33, # GBD 2023 for topic-specific work
+               source='rr',
+               gbd_id_type='rei_id',
+               gbd_id=376, # hemoglobin
+               sex_id=2, # female for maternal disorders causes
+               year_id=2022, # NOTE: this call returns only one value for year ID, which is 2022. You do not need to specify a year_id, but specifying any value besides 2022 will result in a failed call
+               location_id=1, # NOTE: you do not need to specify a location_id. Specifying any location ID will return results specific to location_id=1
+               ) 
+
+Use the custom-calculated PAF values such that the maternal disorder incidence rate for an individual :math:`i` for a given affected maternal disorder subcause is as follows:
 
 .. math::
 
   ir_i = ir * (1 - PAF) * RR_i
+
+.. todo::
+
+  Calculate custom PAFs for maternal disorders and link to relevant files when ready.
+
+  Hemoglobin RRs have 250 draws, while hemoglobin exposure has only 100 draws. Like we have already done for hemoglobin exposure, we'll use only the first 100 draws for hemoglobin relative risks and copy them 5 times to get a total of 500 draws.
+  The hemoglobin team shared a link to their `custom PAF codes <https://stash.ihme.washington.edu/projects/MNCH/repos/paf_custom/browse>`_.
+
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
