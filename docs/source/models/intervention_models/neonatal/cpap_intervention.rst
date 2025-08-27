@@ -146,7 +146,7 @@ Where,
 Calibration Strategy
 --------------------
 
-**PAF Derivation**: The mathematical derivation for this PAF calculation can be found on the :ref:`on the neonatal probiotics intervention page <intervention_neonatal_antibiotics>`
+**PAF Derivation**: The mathematical derivation for this PAF calculation can be found on the :ref:`on the neonatal probiotics intervention page <intervention_neonatal_probiotics>`
 and the pseudocode for the population eligible for ACS would look as follows::
   
   p_intervention = p_CPAP = p_ACS  # note that this value is a weighted average of intervention coverage across all modeled delivery settings among the eligible population according to their gestational age
