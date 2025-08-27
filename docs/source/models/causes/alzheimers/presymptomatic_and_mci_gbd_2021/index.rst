@@ -237,6 +237,9 @@ population model <other_models_alzheimers_population>`:
     - emr_c543
     - :math:`\text{DW}_\text{c543}`
 
+**Note:** The variable :math:`\Delta_\text{X}` denotes the average duration in
+cause state X, as defined in the data sources table below.
+
 ..
   On the other hand, if we model the entire population including
   susceptible simulants, the following state data should be used:
@@ -298,11 +301,19 @@ population model <other_models_alzheimers_population>`:
   * - i_AD
     - MCI-AD
     - AD
-    - :math:`1 / \Delta_\text{MCI}`
+    - :math:`1 / \Delta_\text{MCI}` --- m_MCI
   * - m_X
     - X
     - Death
     - acmr --- csmr_c543 + emr_X
+
+Because i_MCI is defined in terms of a nonconstant hazard function
+:math:`h_\text{MCI}` (defined in the data sources table below),
+simulants initialized into the BBBM-AD state will need to be assigned a
+value for :math:`T_\text{BBBM}` to determine how long they have been in
+that state. For simulants in BBBM-AD at time :math:`t=0`, assign
+:math:`T_\text{BBBM}` uniformly in the interval
+:math:`[-\Delta_\text{BBBM},\, 0]`.
 
 Data Values and Sources
 -----------------------
@@ -424,8 +435,9 @@ team is located in the following folder:
     - Dwell time in cause state BBBM-AD
     - :math:`T_\text{MCI} - T_\text{BBBM}`
     - Random variable for each simulant, constructed implicitly through
-      simulation dynamics to have a `gamma distribution`_ with shape
-      parameter :math:`\alpha` and rate parameter :math:`\lambda`
+      simulation dynamics to have approximately a `gamma distribution`_
+      with shape parameter :math:`\alpha` and rate parameter
+      :math:`\lambda`
   * - :math:`\alpha`, :math:`\lambda`
     - Shape and rate parameters, respectively, of gamma distribution for
       :math:`D_\text{BBBM}`
@@ -452,7 +464,12 @@ team is located in the following folder:
   * - :math:`\Delta_\text{BBBM}`
     - Average duration of BBBM-presymptomatic AD
     - :math:`\alpha / \lambda`
-    - Mean of gamma distribution for :math:`D_\text{BBBM}`
+    - Mean of gamma distribution for :math:`D_\text{BBBM}`.
+
+      **Note:** This will slightly overestimate the true average
+      duration because we are not taking mortality into account. We
+      think this will not be too much of an issue because BBBM will be
+      mostly in younger age groups so mortality is relatively small.
   * - :math:`\Delta_\text{MCI}`
     - Average duration of MCI due to AD
     - 3.25 years
@@ -467,7 +484,9 @@ team is located in the following folder:
   * - :math:`\Delta_\text{AD}`
     - Average duration of AD-dementia
     - 1 / m_AD
-    -
+    - Death is the only way to leave the AD-dementia state, and the
+      average duration is the reciprocal of the (constant) hazard rate
+      out of the state
   * - :math:`\Delta_\text{(all AD states)}`
     - Average duration of all stages of AD combined
     - :math:`\Delta_\text{BBBM} + \Delta_\text{MCI} + \Delta_\text{AD}`
