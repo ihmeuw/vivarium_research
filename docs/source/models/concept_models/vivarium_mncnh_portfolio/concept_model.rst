@@ -110,7 +110,7 @@ MNCNH Portfolio
 1.0 Overview
 ++++++++++++
 
-This document is the overall page for the MNCNH Portfolio simulation and 
+This document is the overall page for the Maternal, Newborn, and Child Nutrition and Health (MNCNH) Portfolio simulation and
 contains information that relates to all modeled subcomponents included in 
 the simulation.
 
@@ -119,109 +119,157 @@ the simulation.
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-**Objective:** Expand on prior MNCH simulation work to be able to include 
-all MNCNH portfolio products. Compare health gains and costs for each 
-intervention set and help in determining prioritization. Expand the capabilities of 
-the simulation to include more risks and causes, more details on healthcare systems, 
-and details on the intrapartum and neonatal time periods.
+The MNCNH Portfolio simulation builds on work our team has done in other simulations
+of pregnancy and early childhood.
+The most recent was the :ref:`Nutrition Optimization (NO) <2021_concept_model_vivarium_nutrition_optimization>` simulation,
+which (as the name suggests) focused particularly on nutrition interventions.
+That simulation allowed us to estimate the impacts of each intervention, and crucially also
+how the interventions might *interact*, for example due to prevention
+reducing the need for treatment down the line.
+"Optimization" refers to the fact that we used the output of the NO sim to calculate
+*optimal* allocation of money to have the biggest impact given a budget,
+taking all these interactions into account.
+
+Nutrition interventions continue to be included in the MNCNH portfolio sim, but the "portfolio" is
+broader; the intervention space includes more products.
+These products, like the nutrition interventions in the NO project,
+interact in complex ways, and an aim of this simulation is to estimate the impact
+of different *combinations* of these interventions.
+As before, we also plan to estimate costs and calculate optimal budget allocation,
+possibly with improved costing methodology.
+This page serves as documentation for the simulation part of the project, which is focused
+on estimating burden under a variety of scenarios designed to surface all the relevant product interactions.
+
+Simulating more interventions means simulating more risks and causes for those interventions
+to act on, simulating more details of the healthcare system to model how those interventions
+would be delivered, and including more detail in the intrapartum (labor and delivery) and neonatal time periods.
+
+We plan to complete this work in 3 waves. 
+
+* Wave 1 will include the basic model design, outlines of the healthcare system, and some interventions (AI ultrasound, RDS management).
+* Wave 2 will add in some antenatal supplements (MMS, IV iron), the hemoglobin risk for birthing parents, all downstream causes affected by hemoglobin, and higher level delivery facility interventions.
+* Wave 3 will add in gestational blood pressure and relevant causes and risks including pre-eclampsia care and downstream effects of high blood pressure.
+
+As of August 2025, Wave 1 is mostly complete in both documentation and implementation, and Wave 2 is partially documented and has just started implementation.
 
 .. _mncnh_portfolio_3.0:
 
 3.0 Concept model diagram and submodels
 +++++++++++++++++++++++++++++++++++++++
 
-A table of contents for all modules in this simulation is included below
+As in the NO simulation, rather than simulate an entire population of all ages and sexes,
+this simulation includes only pregnant people and the neonates they give birth to.
+We start the simulation with a cohort of simulants all at the beginning of pregnancy, and move
+them in lockstep through their pregnancies.
+For those pregnancies that result in a live birth, we then simulate a neonate (we do not model twins)
+through the first month of life.
+In this way, our simulation represents all the people who may benefit from the interventions of interest,
+without wasting computational resources on simulating irrelevant people, such as adult males.
+We call the potential simulant pair we follow through the simulation (pregnant person and neonate) a
+"simulant dyad."
+
+This model is different than NO and other simulations we've done in that it follows a decision-tree-like
+format in which we jump directly to from one decision point to the next rather than taking equal-sized steps
+through time.
+For this reason, throughout this model we calculate and express events in terms of probabilities,
+rather than rates per person-time or similar.
+
+The overall simulation model is divided into four "components," which are differentiated by the timespan
+and the simulant that they model.
+
+* The :ref:`Pregnancy component <mncnh_portfolio_pregnancy_component>`, which models
+  from the beginning of pregnancy until the start of labor.
+* The :ref:`Intrapartum component <mncnh_portfolio_intrapartum_component>`, which models
+  labor and delivery, including delivery complications.
+* The :ref:`Neonatal component <mncnh_portfolio_neonatal_component>`, which models the
+  first month of life for newborns.
+* The :ref:`Postpartum component <mncnh_portfolio_postpartum_component>`, which models the
+  six weeks after the end of pregnancy for the pregnant person.
+
+.. warning::
+
+  When we say "component" here, we mean something distinct from a
+  :ref:`Vivarium component <vivarium:components_concept>`.
+
+Graphically, the component breakdown looks like this:
+
+.. image:: component_overview_diagram.drawio.png
+
+.. note::
+
+  Do not interpret the x-axis in this diagram as time, since e.g. the duration of pregnancy is not at all
+  constant.
+  Also, if misinterpreted this way, the x-axis would be wildly not to scale.
+
+However, the only situation in which all components are actually reached for a given simulant
+dyad is the case in which the pregnancy results in a live birth and the birthing person survives
+childbirth.
+In other situations, some components will not be reached.
+The rules by which components flow into other components are as follows:
+
+* All simulant dyads start at the pregnancy component.
+* If the birth outcome from the pregnancy component is a "full-term pregnancy" (live or stillbirth, NOT abortion/miscarriage/ectopic pregnancy), proceed to the intrapartum component.
+  Otherwise, skip to the postpartum component.
+* At the end of the intrapartum component, if the birth outcome from the pregnancy component is a live birth,
+  proceed to the neonatal component.
+  Otherwise, if the birth parent survives childbirth, proceed to the postpartum component.
+* At the end of the neonatal component, if the birth parent survived childbirth in the intrapartum component,
+  proceed to the postpartum component.
+
+Here is a graphic representation of the same information:
+
+.. image:: component_flow_diagram.drawio.png
+
+Each component is further subdivided into "modules,"
+which are organized by topic (rather than by time/simulant as in the components).
+Each module may have some simulant dyad attributes as input (values it needs)
+and some simulant dyad attributes as output (values it initializes).
+Module outputs may be 
+used as inputs to other modules and/or serve as information for verification and 
+validation and/or simulation results.
+For clarity, in the tables below we will write the modules in an order that satisfies the following property:
+each variable is defined as a module output prior to being 
+used as a module input.
+This helps us make sure we aren't creating any cyclic dependencies.
+Technically, any order satisfying this property is an equivalent, valid order in which
+the modules could be run in the simulation.
+
+.. note::
+
+  There is :ref:`a template <2024_vivarium_mncnh_portfolio_module_template>` to use when creating new module pages.
+
+..
+  The below toctree, which used to be rendered (not :hidden:), shows all the modules in a flat list in alphabetical order.
+  This didn't seem to add much beyond the tables below, and in fact was kind of confusing since all the components'
+  modules were listed together and interspersed.
 
 .. toctree::
    :maxdepth: 1
    :glob:
+   :hidden:
 
    */module_document*
+  
+.. _mncnh_portfolio_pregnancy_component:
 
-.. note::
+Pregnancy component
+-------------------
 
-  This concept model diagram was reorganized in April 2025 after much of wave I had been implemented. A record of the PRs for this reorganization are listed below:
+.. todo::
 
-  * Pregnancy component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1615 <https://github.com/ihmeuw/vivarium_research/pull/1615>`_
-  * Intrapartum component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1617 <https://github.com/ihmeuw/vivarium_research/pull/1617>`_
-  * Neonatal component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1619 <https://github.com/ihmeuw/vivarium_research/pull/1619>`_
-
-
-We plan to complete this work in 3 waves. 
-
-* Wave 1 will include the basic model design, outlines of the healthcare system, and some interventions (AI ultrasound, higher level delivery facility interventions, RDS management). 
-* Wave 2 will add in some antenatal supplements (MMS, IV iron), the hemoglobin risk for birthing parents, and all downstream causes affected by hemoglobin. 
-* Wave 3 will add in gestational blood pressure and relevant causes and risks including pre-eclampsia care and downstream effects of high blood pressure. 
-
-The model is further subdivided into three components:
-
-1. Pregnancy component
-2. Intrapartum component
-3. Neonatal component
-
-Each component will consist of several modules, which will convert certain module 
-inputs to module outputs via decision tree-based instructions. Module outputs may be 
-used as inputs to other modules and/or serve as information for verification and 
-validation and/or simulation results.
-
-The following tables link to each simulation module and provide a summary of module 
-input and output variables. Notably, the ordering of modules in the table is 
-significant: the order of operations for implementation moves from top to bottom. 
-Specically, each variable must be defined as a module output in a row prior to being 
-defined as a module input in a subsequent row.
+  Split the pregnancy module page into two to reflect the split here, which was necessary to get the right ordering of
+  inputs and outputs
 
 .. _mncnh_portfolio_pregnancy_component_modules:
 
 .. list-table:: Pregnancy Component Modules
-  :header-rows: 1
-
-  * - Module
-    - Inputs
-    - Outputs
-    - Nested subcomponents
-  * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-    - 
-    - * ANC propensity
-      * LBWSG category propensity
-      * IFD propensity
-      * RDS intervention propensity
-    - * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
-  * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    - * LBWSG category propensity
-    - * Maternal age
-      * Pregnancy term length
-      * Birth outcome
-      * Sex of infant
-      * Gestational age
-      * Birthweight
-      * Pregnancy duration
-      * Preterm status
-    - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-      * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
-  * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
-    - * ANC propensity
-    - * ANC attendance
-    - 
-  * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-    - * ANC attendance
-      * Gestational age
-    - * Ultrasound type
-      * Estimated gestational age
-      * Believed preterm status
-    - 
-
-.. note::
-
-  Below is a draft of the pregnancy module table for wave II of the simulation. This will remain as a draft/note until wave II is ready for implementation to avoid conflicts with existing wave I documenation currently being used for implementation.  
-
-  .. list-table:: Draft Wave II Pregnancy Component Modules
     :header-rows: 1
 
     * - Module
       - Inputs
       - Outputs
       - Nested subcomponents
-      - Note
+      - Wave II changes vs Wave I
     * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
       - 
       - * ANC propensity
@@ -251,6 +299,7 @@ defined as a module input in a subsequent row.
       - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <oral_iron_antenatal>`
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
+        * :ref:`Anemia screening intervention <anemia_screening>`
       - New wave II module
     * - :ref:`Pregnancy II <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       - * LBWSG category propensity
@@ -262,7 +311,7 @@ defined as a module input in a subsequent row.
         * Pregnancy duration
         * Preterm status
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-        * :ref:`LBWSG exposure <2019_risk_exposure_lbwsg>`
+        * :ref:`LBWSG exposure <2021_risk_exposure_lbwsg>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <oral_iron_antenatal>`
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
       - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules other than impacts of IFA/MMS and IV Iron interventions on pregnancy module outputs
@@ -274,6 +323,11 @@ defined as a module input in a subsequent row.
         * Believed preterm status
       - 
       - No changes from wave I
+
+.. _mncnh_portfolio_intrapartum_component:
+
+Intrapartum component
+---------------------
 
 .. note::
 
@@ -291,52 +345,14 @@ defined as a module input in a subsequent row.
   noting this limitation until we implement a strategy to address this (`see related 
   ticket here <https://jira.ihme.washington.edu/browse/SSCI-2310>`_)
 
-.. list-table:: Intrapartum Component Modules
-  :header-rows: 1
-
-  * - Module
-    - Inputs
-    - Outputs
-    - Nested subcomponents
-  * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
-    - * (Pregnancy term length)
-      * IFD propensity
-      * Believed preterm status
-    - * IFD status
-      * Birth facility
-    - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
-  * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - * (Pregnancy term duration)
-      * Birth facility
-      * Believed gestational age
-      * ANC attendance
-      * RDS intervention propensity
-    - * Intrapartum azithromycin coverage
-      * Antenatal corticosteroid coverage
-      * Misoprostol coverage
-    - * :ref:`Intrapartum azithromycin intervention <azithromycin_intervention>` 
-      * :ref:`Misoprostol intervention <misoprostol_intervention>`
-      * :ref:`Antenatal corticosteroids <acs_intervention>`
-  * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
-    - * (Pregnancy term duration)
-      * Intrapartum azithromycin coverage
-      * Misoprostol coverage
-    - * Maternal disorders outcomes (see outcome table)
-    - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
-      * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
-      * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
-      * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
-
-.. note::
-
-  .. list-table:: Draft Wave II Intrapartum Component Modules
+.. list-table:: Draft Wave II Intrapartum Component Modules
     :header-rows: 1
 
     * - Module
       - Inputs
       - Outputs
       - Nested subcomponents
-      - Note
+      - Wave II changes vs Wave I
     * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
       - * (Pregnancy term length)
         * IFD propensity
@@ -366,10 +382,13 @@ defined as a module input in a subsequent row.
         * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
-      - Wave II changes: 
-
-        * Hemoglobin at birth as a variable that impacts maternal disorders causes
+      - * Hemoglobin at birth as a variable that impacts maternal disorders causes
         * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
+
+.. _mncnh_portfolio_neonatal_component:
+
+Neonatal component
+------------------
 
 .. note::
 
@@ -403,6 +422,11 @@ defined as a module input in a subsequent row.
       * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
       * :ref:`Hemoglobin risk effects <2023_hemoglobin_effects>`
 
+.. _mncnh_portfolio_postpartum_component:
+
+Postpartum component
+--------------------
+
 .. list-table:: Postpartum Component Modules
   :header-rows: 1
 
@@ -429,14 +453,14 @@ defined as a module input in a subsequent row.
     - * Anemia YLDs
     - * :ref:`Anemia impairment <2019_anemia_impairment>`
     - New module in wave II
-  * - * :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>`
+  * - :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>`
     - * Hemoglobin at birth
     - * Maternal disorders outcomes (see outcome table)
     - * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
       * :ref:`Hemoglobin risk effects document <2023_hemoglobin_effects>`
     - New module in wave II
 
-**Wave 1 Concept Model Map:**
+**Wave 1 Concept Model Map (has not been updated recently):**
 
 .. image:: wave_1_full.svg
 
@@ -463,17 +487,20 @@ defined as a module input in a subsequent row.
     - Ultrasound coverage
     - Ultrasound type
     - IFA/MMS coverage
-    - Anemia screening coverage
+    - Hemoglobin screening coverage
+    - Ferritin screening coverage
     - IV iron coverage
     - Note
   * - 1. Baseline
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Defined in the baseline coverage section of the :ref:`oral iron supplementation page <oral_iron_antenatal>`
-    - XXX
-    - XXX
+    - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
+    - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
+    - Defined in the baseline coverage section of the :ref:`IV iron page <intervention_iv_iron_antenatal_mncnh>`
     - 
   * - 2. CPAP total scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -486,8 +513,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     -  
   * - 4. CPAP BEMONC-only scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -500,8 +529,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 8. Probiotics total scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -514,8 +545,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 10. Probiotics BEMONC-only scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -528,8 +561,10 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 12. Misoprostol V&V
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -542,6 +577,55 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
+    - 
+  * - 14. No ACS and total CPAP V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 15. Total ACS and CPAP V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 16. Total ACS and no CPAP V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 17. MMS total scale-up
+    - Baseline
+    - Baseline
+    - 100% MMS
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 18. Anemia screening scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 100%
+    - 100%
+    - Baseline
+    - 
+  * - 19. IV iron scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 100%
+    - 100%
+    - 100%
     - 
 
 .. _MNCNH intrapartum component scenario table:
@@ -606,6 +690,36 @@ defined as a module input in a subsequent row.
     - 
   * - 13. Azithromycin results
     - 100% at BEmONC and CEmONC, baseline at home
+    - Baseline
+    - Baseline
+    - 
+  * - 14. No ACS and total CPAP V&V
+    - Baseline
+    - 0% coverage at all delivery location types 
+    - Baseline
+    - see neonatal table for CPAP coverage
+  * - 15. Total ACS and CPAP V&V
+    - Baseline
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - see neonatal table for CPAP coverage
+  * - 16. Total ACS and no CPAP V&V
+    - Baseline
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - see neonatal table for CPAP coverage    
+  * - 17. MMS scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    -        
+  * - 18. Anemia screening scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    -        
+  * - 19. IV iron scale-up
+    - Baseline
     - Baseline
     - Baseline
     - 
@@ -675,6 +789,36 @@ defined as a module input in a subsequent row.
     - Baseline
     - Baseline
     - 
+  * - 14. No ACS and total CPAP V&V
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - Baseline
+    - See intrapartum table for ACS coverage
+  * - 15. Total ACS and CPAP V&V
+    - 100% coverage at BEmONC and CEmONC facilities, baseline at home
+    - Baseline
+    - Baseline
+    - See intrapartum table for ACS coverage
+  * - 16. Total ACS and no CPAP V&V
+    - 0% coverage at all delivery location types 
+    - Baseline
+    - Baseline
+    - See intrapartum table for ACS coverage 
+  * - 17. MMS scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 18. Anemia screening scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 19. IV iron scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
 
 .. _mncnh_portfolio_4.0:
 
@@ -710,7 +854,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Probiotics availability
       * CPAP availability
       * Corticosteroid coverage
-    - Included except for corticosteroid coverage, which has not yet been added
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+    - Included, except for corticosteroid coverage which has yet to be added
   * - 3. Neonatal deaths (cause-specific)
     - * Child sex
       * Child age group
@@ -719,6 +864,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Antibiotics availability
       * Probiotics availability
       * Corticosteroid coverage
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
     - Included, except for corticosteroid coverage which has yet to be added
   * - 4. Antibiotics eligible birth counts
     - * Delivery facility type
@@ -740,13 +886,17 @@ Default stratifications to all observers should include scenario and input draw.
       * Misoprostol coverage
       * Hemoglobin screening coverage
       * Ferritin screening coverage
+      * IFA coverage
+      * MMS coverage
+      * IV iron coverage
       * True hemoglobin exposure (dichotomous,  'low' if truly low hemoglobin and 'adequate' if truly adequate hemoglobin)
       * Test hemoglobin exposure (dichotomous, 'low' if tested low hemoglobin,'adequate' if tested adequate hemoglobin, N/A if not tested)
       * Ferritin status (dichotomous, 'low' if low ferritin, 'adequate' if adequate ferritin, N/A if not tested)
       * Delivery facility
       * Preterm status
       * Believed preterm status
-    -
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+    - 
 
 .. todo::
 
@@ -764,17 +914,6 @@ Default stratifications to all observers should include scenario and input draw.
   * YLDs due to anemia in pregnancy
   * Postpartum anemia status counts (non/mild/moderate/severe)
   * YLDs due to anemia in the postpartum period
-  * First trimster ANC attendance (stratified by pregnancy term duration)
-  * Later pregnancy ANC attendance (stratified by pregnancy term duration)
-  * Hemoglobin and ferritin screening counts
-  * MMS/IFA intervention counts
-  * IV iron intervention counts
-
-  Measures to check in the interactive sim include:
-
-  * True hemoglobin exposure
-  * Measured hemoglobin exposure
-  * Ferritin exposure
 
 .. _mncnh_portfolio_5.0:
 
@@ -1170,9 +1309,16 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 12.1
-    - Bugfix to calculation of prevalence of preterm, to ensure we include categories with an upper bound of 37 weeks
+    - Bugfix to calculation of prevalence of preterm in :ref:`this equation <preterm_csmrisk_equation>`, to ensure we include categories with an upper bound of 37 weeks
     - Baseline
     - ``model12.1``
+    - Default
+    - Default
+    - Default
+  * - 12.1.1
+    - Update to LBWSG PAF calculation for the late neonatal age group. In model 12.0, the PAF calculation for the late neonatal age group did not use the PAF as calculated for the early neonatal age group in the determination of mortality among the early neonatal age group (the PAF using capped and interpolated RRs), as specified in the documentation. This model run will update the LNN LBWSG PAF calculation to utilize the custom calculated ENN LBWSG PAF as specified in the documentation.
+    - Baseline
+    - ``model12.1.1``
     - Default
     - Default
     - Default
@@ -1180,6 +1326,38 @@ Default stratifications to all observers should include scenario and input draw.
     - `Hemoglobin risk effects on maternal disorders <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_mncnh_portfolio/maternal_disorders_module/module_document.html#id1>`_
     - Baseline
     - ``model13.0``
+    - Default
+    - Default
+    - Default
+  * - 13.1
+    - * Update hemoglobin on maternal disorders PAF values to be location specific (rather than using location_id=1)
+      * Allow for RRs <1 for values above (and below) the hemoglobin TMREL value
+      * Assign RR values equal to the RR value at 40 g/L for all hemoglobin exposures less than 40 g/L
+    - Baseline
+    - ``model13.1``
+    - Default
+    - Default
+    - Default
+  * - 13.2
+    - Update to correct bugs in the LBWSG PAF calculation's implementation of :ref:`this equation <details_of_the_lbwsg_paf_calculation_equation>`.
+      
+      In earlier model runs, the PAF calculation for late neonates began from
+      `age-specific LBWSG prevalence <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ad3ced96b6b497f9566b2e7c8e568328c613a69a/src/vivarium_gates_mncnh/components/lbwsg.py#L406-L409>`_
+      and the mortality-based weighting
+      `implemented <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ad3ced96b6b497f9566b2e7c8e568328c613a69a/src/vivarium_gates_mncnh/components/lbwsg.py#L412-L426>`_
+      did not work due to
+      `all deaths being excluded by population filters <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ad3ced96b6b497f9566b2e7c8e568328c613a69a/src/vivarium_gates_mncnh/components/lbwsg.py#L378>`_.
+      Instead, in this run, the PAF calculation for late neonates should begin from birth prevalence
+      and properly apply the mortality-based weighting, as documented.
+    - Baseline
+    - ``model13.2``
+    - Default
+    - Default
+    - Default
+  * - 13.3
+    - Update to use end-of-ENN LBWSG prevalence for the :math:`p_\text{preterm}` for the LNN age group in :ref:`this equation <preterm_csmrisk_equation>`. Details can be found in the diff of `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1732/files>`_.
+    - Baseline
+    - ``model13.3``
     - Default
     - Default
     - Default
@@ -1201,13 +1379,48 @@ Default stratifications to all observers should include scenario and input draw.
     - Added preterm status and believed preterm status to maternal
       population observer (#7)
     - Default
-  * - 16.0*
+  * - 16.0
     - Wave I antenatal corticosteroids
     - Baseline
     - ``model16.0``
-    -
-    -
-    -
+    - Default
+    - Default, note that we would like additional stratifications based on believed gestational age in the maternal population, births, and neonatal burden observers
+    - Default
+  * - 17.0
+    - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
+    - Baseline and MMS scale-up scenarios 
+    - ``model17.0``
+    - Default
+    - Default, note IFA/MMS coverage added as a stratifying variable to maternal population observer
+    - Default
+  * - 18.0
+    - :ref:`Anemia screening implementation <anemia_screening>` (including hemoglobin and ferritin screenings), see also the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+    - Baseline, MMS scale-up, and anemia screening scale-up scenarios
+    - ``model18.0``
+    - Default
+    - Default, note hemoglobin and ferritin screening coverage and results added as stratifying variables to maternal population observer
+    - Default
+  * - 19.0
+    - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
+    - Baseline and IV iron scale-up scenarios
+    - ``model19.0``
+    - Default
+    - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
+    - Default
+  * - 20.0*
+    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data on effect have yet to be calculated as of 8/22/25)
+    - Baseline and IV iron scale-up scenarios
+    - ``model20.0``
+    - Default
+    - Default
+    - Default
+  * - 21.0*
+    - Hemoglobin effect on neonatal sepsis as defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (data for effects and PAFs have yet to be calculated as of 8/22/25)
+    - Baseline and IV iron scale-up scenarios
+    - ``model21.0``
+    - Default
+    - Default
+    - Default
 
 .. note:: 
 
@@ -1520,27 +1733,72 @@ Default stratifications to all observers should include scenario and input draw.
     - Looks good!
     - `Model 11.2 notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_11.2_maternal_checks.ipynb>`_
   * - 12.0
-    - * Confirm neonatal all-cause mortality rates match expectation
+    - * Confirm neonatal all-cause mortality risks match expectation
       * Confirm LBWSG risk effects are working as expected
-    - 
-    - 
+    - * Neonatal all cause mortality risks are within "10% target range," but late neonatal all cause mortality varies more than early neonatal
+      * LBWSG Risk effects and PAF values yet to be directly verified
+    - * `Model 12.0 neonatal notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_12.0_neonatal_checks.ipynb>`_
   * - 12.1
     - * Confirm neonatal cause-specific mortality risks match expectation for each preterm subcause
       * Confirm LBWSG risk effects are working as expected
       * Check whether neonatal cause-specific mortality risks match expectation for non-preterm causes
-    - 
-    - 
+    - Neonatal cause-specific mortality risks match expectation for both preterm and non-preterm causes *in the early neonatal period*.
+      We appear to be systematically underestimating preterm CSMRisks in the late neonatal period.
+    - `Model 12.1 neonatal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/c8d568f37906732b6d2f3a630d8ec6be6b591fe7/verification_and_validation/model_12.1_nn_checks.ipynb>`_ 
+  * - 12.1.1
+    - * Confirm neonatal all-cause mortality risks match expectation
+      * Confirm that neonatal cause-specific mortality matches expectation
+      * Confirm LBWSG risk effects are working as expected
+      * Confirm that LBWSG PAF values match expectation through independent replication
+    - * Reasonably confident that the LNN PAF values in the artifact are correct based on this `artifact verification notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_artifact_check.ipynb/>`_
+      * LBWSG risk effects are working as expected based on this `interactive simulation notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_lbwsg_effects_interactive_simulation.ipynb/>`_
+      * All cause mortality risk is within 10% of target, but particularly for late neonatal females, there appears to be some slight miscalibration (although the direction varies by location)
+      * Preterm birth mortality risk is slightly underestimated in late neonatal age group. Other cause specific mortality risks look generally acceptable, with other causes mortalty risks trending towards overestimation
+    - * `Model 12.1.1 artifact checking notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_artifact_check.ipynb/>`_
+      * `Model 12.1.1 LBWSG effect interactive sim notebook <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_lbwsg_effects_interactive_simulation.ipynb/>`_
+      * `Model 12.1.1 neonatal checks <https://app.reviewnb.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/12.1.1/verification_and_validation/model_12.1.1_nn_checks.ipynb/>`_
   * - 13.0
     - * Confirm baseline maternal disorders burden still validates
-      * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but no case fatality rates
-    - 
-    - 
+      * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but not case fatality rates
+    - * Maternal hemorrhage and sepsis incidence rates are not quite calibrated to targets, expected to be due to using global rather than location-specific PAF values
+      * Hemoglobin RRs are being applied as expected to hemorrhage and sepsis incidence risks
+      * RR values for hemoglobin exposures <40 g/L are not as expected: they taper down rather than being equal to the RR value for a hemoglobin level of 40
+      * It appears that RR=1 for all exposure values above the TMREL value of 120 rather than following the risk curve that allows for risks below 1
+    - * `Model 13.0 maternal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_13.0_maternal_checks.ipynb>`_
+      * `Model 13.0 interactive sim notebook (for hemoglobin effects) <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_13.0_interactive_simulation_hemoglobin.ipynb>`_
+  * - 13.1
+    - * Confirm baseline maternal disorders validates
+      * Confirm hemoglobin exposure appropriately modifies maternal disorders incidence ratios (using the interactive sim), but not case fatality rates
+      * Confirm RR values for hemoglobin exposures <40 are equal to the RR value for a hemoglobin exposure of 40
+      * Confirm that artifact RR values match expectation
+      * Confirm that RR values for hemoglobin exposures above the TMREL vary according to the input data
+    - * Slight overestimation of maternal sepsis incidence, particularly in Nigeria. Mean values are generally within 10% of target otherwise. Significant draw-level variation, with underestimation of lower draws and overestimation of higher draws.
+      * Hemoglobin exposure appropriately modifies maternal disorder incidence but not mortality
+      * RR values for hemoglobin exposures <40 equal that of hemoglobin exposure equal to 40
+      * Artifact RR values match expectation
+      * RR values for hemoglobin exposures >TMREL vary according to input data 
+    - * `Model 13.1 maternal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_13.1_maternal_checks.ipynb>`_
+      * `Model 13.1 interactive sim notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_13.1_interactive_simulation_hemoglobin.ipynb>`_
+  * - 13.2
+    - * Check late neonatal all-cause mortality risk and cause-specific mortality risks;
+        expected change is small but should be in the direction of better verification to GBD
+    - * As expected, no change to early neonatal mortality risks
+      * Late neonatal all-cause mortality risks closer than in model 12.1.1 (already within 10%, now well within 5% for all locations and sexes)
+      * Late neonatal cause-specific mortality risks pretty similar to model 12.1.1, as expected (maybe a bit closer to GBD targets, but hard to tell)
+    - `Model 13.2 neonatal checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/5d9d726cbb58438fc21091e6baddf0a2bd9140d7/verification_and_validation/model_13.2_nn_checks.ipynb>`_
+  * - 13.3
+    - * Check that neonatal all-cause mortality risks match expectation
+      * Check that neonatal cause-specific mortality risks match expectation
+    - * All-cause mortality risks unchanged from 13.2, as expected
+      * Substantial improvement (reduction) in late neonatal overestimation of other-causes mortality risk and underestimation of preterm mortality risk in all locations;
+        however, there still appears to be systematic bias in this direction
+    - `Model 13.3 neonatal checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/d8dce03ab1de546d6af5719c59e344d77384d93f/verification_and_validation/model_13.3_nn_checks.ipynb>`_
   * - 14.0
     - * Confirm ANC attendance exposure varies as expected by pregnancy term length
       * Confirm ANC attendance exposure matches expectation
       * Confirm AI ultrasound exposure categories is consistent with ANC attendance categories (ex: no ultrasound coverage if no ANC coverage)
-    - 
-    - 
+    - All V&V criteria met!
+    - `Model 14.0 maternal checks notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/760c91b03cb60f15c3dbb38e015b746be8434fb3/verification_and_validation/model_14.0_maternal_checks.ipynb>`_
   * - 15.0
     - Note 1
         For these checks, "verify" means we are comparing the simulation
@@ -1613,6 +1871,67 @@ Default stratifications to all observers should include scenario and input draw.
         the `facility choice optimization results .csv file`_)
     -
     -
+  * - 16.0
+    - * Use the interactive sim to confirm RDS and all-cause mortality rates between 33 weeks with ACS coverage and 34 weeks (no ACS coverage due to ineligibility).
+      * Confirm neonatal mortality rate of preterm birth with RDS in baseline scenario still validates.
+      * Confirm ratio of preterm with RDS mortality among the eligible population of those without ACS divided by those with ACS equals the relative risk parameter specified in the :ref:`ACS intervention page <acs_intervention>`.
+      * Confirm that baseline coverage of ACS is equal to that of CPAP as specified in the :ref:`CPAP intervention page <intervention_neonatal_cpap>`.
+      * Confirm that the same propensity value is used for ACS and CPAP.
+      * Use the interactive sim to confirm there is no coverage of ACS outside of the eligible gestational age range.
+    - 
+    - 
+  * - 17.0
+    - * Confirm scenario-specific coverage (verification with sim outputs)
+      * Confirm only simulants who attend ANC receive IFA/MMS (verification with sim outputs)
+      * Confirm that baseline verification targets are still met for the following parameters:
+
+        * Baseline hemoglobin exposure (verification with interactive sim)
+        * Maternal disorders outcomes (verification with sim outputs, noting existing slight deviation in maternal sepsis incidence rates from model 13.1)
+        * LBWSG exposure (verification with interactive sim)
+        * Neonatal mortality risk (verification with sim outputs, noting exiting deviations from model 13.3)
+        * Birth outcome rates (verification with sim outputs)
+      
+      * Confirm expected effect on all affected outcomes. For each affected outcome, the effect of IFA should be examined in the baseline scenario. Then, for each affected outcome, values should be compared between the baseline and MMS scale-up scenarios for identical simulants and we should verify separately the effect of transitioning from baseline IFA coverage to MMS and the transition from no baseline IFA coverage to MMS.
+      
+        * Hemoglobin exposure 
+        * Gestational age
+        * Birthweight
+        * Birth outcomes (MMS reduces rate of stillbirth, increases rate of live birth, no change to "partial term" outcomes)
+    - 
+    - 
+  * - 18.0
+    - * Confirm scenario-specific anemia screening coverage rates (verification with sim outputs)
+      * Confirm only simulants who attend ANC are covered by hemoglobin screening (verification with sim outputs)
+      * Confirm only simulants who attend ANC AND test low hemoglobin are covered by ferritin screening (verification with sim outputs)
+      * Confirm sensitivity and specificity of hemoglobin screening test by comparing true versus test hemoglobin screening results (verification with sim outputs)
+      * Confirm "true" low hemoglobin rate matches corresponding GBD anemia impairment prevalence in pregnancy estimate (verification with sim outputs)
+      * Confirm low ferriting screening result matches expectation (verification with sim outputs)
+      * Validation: confirm that there are lower rates of true/test low hemoglobin status in the MMS scale-up scenario than the baseline scenario
+    - 
+    - 
+  * - 19.0
+    - * Confirm scenario-specific IV iron and anemia screening coverage rates (verification with sim outputs)
+      * Confirm only simulants who attend ANC, who test low hemoglobin AND test low ferritin receive IV iron (verification with interactive sim)
+      * Confirm IV iron has the expected effect on hemoglobin (verification in the interactive simulation)
+      * Confirm that hemoglobin exposure (using the interactive simulation) and maternal disorders outcomes (using sim outputs) still meet expectations
+    - 
+    - 
+  * - 20.0
+    - * Confirm the baseline outcomes still meet expectations, including:
+
+        * LBWSG exposure (in the interactive simulation)
+        * Neonatal mortality risk
+        * Birth outcome rates
+
+      * Confirm expected effects of IV iron on birth weight, gestational age, and birth outcome rates using the interactive simulation
+    - 
+    - 
+  * - 21.0
+    - * Confirm that neonatal mortality (particularly for neonatal sepsis) still matches expectation in the baseline scenario
+      * Using the interactive simulation, confirm effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. The total effect should be evaluated by stepping through the simulation and observing the rate of mortality due to neonatal sepsis stratified by maternal hemoglobin exposure.
+    - 
+    - 
+
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
@@ -1632,17 +1951,25 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Miscalibration of neonatal mortality ratios
-    - This is looking largely resolved in model 8.1, but we will wait to confirm once the LBWSG RR capping strategy is updated
-    - Update LBWSG RR caps and PAF calculation strategy for model 12.0
-    - For model 12.0
-  * - Neonatal mortality due to preterm birth slightly overestimated and remaining cause-specific mortality is generally underestimated despite this being resolved for all-cause mortality
-    - Unknown -- could be something to do with the neonatal mortality math? Removing the risk effect of LBWSG on NN enceph. did not seem to resolve the issue.
-    - Research team to discuss and consider 
-    - None for now
+  * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
+    - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
+    - Update to custom-calculated PAF and reassess
+    - TBD
+  * - Issue with LBWSG PAF calculation for the late neonatal age group
+    - See the summary in the model 12.1.1 run request
+    - Hussain to update and rerun, Ali to do independent replication of PAF calculation verification
+    - Model 12.1.1
+  * - Some miscalibration of all-cause mortality for late neonatal females
+    - Could be due to random noise given that this is the demographic with the lowest mortality rates and therefore smallest counts
+    - Rerun with larger population size?
+    - TBD
+  * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
+    - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
+    - Research to debug further
+    - TBD
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
-    - Revist following GBD 2023 update
+    - Revisit following GBD 2023 update
     - On hold until GBD 2023 update
 
 
@@ -1665,6 +1992,16 @@ Default stratifications to all observers should include scenario and input draw.
   
   * We could use the GBD risk effects between hemoglobin and stillbirth to model baseline correlation only and not model updates in stillbirth rates in response to changes in hemoglobin exposure to address this limitation (as these effects are captured in the impact of the hemoglobin-affecting interventions IV Iron and IFA/MMS already). However, this model upgrade is not highest priority. `See this backlog JIRA ticket #2343 <https://jira.ihme.washington.edu/browse/SSCI-2343>`_
 
+* [Finkelstein-et-al-2024]_ primarily includes RCTs from high-income countries, so the effect size for IFA on maternal hemoglobin may be overestimated for Sub-Saharan African countries (including Ethiopia and Nigeria) with typically higher rates of non-iron deficiency anemias.
+
+* We do not currently model an oral iron treatment intervention, despite the recommendation by WHO to treat all pregnancies with IFA and all anemic pregnancies with oral iron treatment (essentially a higher dosage of iron than IFA).
+  We have a `JIRA ticket <https://jira.ihme.washington.edu/browse/SSCI-2376>`_ to add this intervention in the future, but it is not currently prioritized. 
+  There are some individuals who receive oral iron treatment at baseline and we want to model the replacement of that oral iron treatment with IV iron treatment. 
+  However, we are not subtracting out the effect of oral iron treatment prior to modeling the scale up of IV iron treatment. This will result in the following limitations:
+  
+    * For individuals who received oral iron treatment at baseline and still remain eligible for IV iron following their oral iron treatment: we will double count the impact of the interventions, thus overestimating the potential scale-up of IV iron.
+    * For individuals who received oral iron treatment at baseline and no longer remain eligible for IV iron following their oral iron treatment: there will be essentially no difference in impact for this population given that IV and oral iron treatment have basically equal impacts, however, we will be underestimating the size of the population requiring treatment and therefore underestimating the cost required to achieve the health outcomes seen in these scenarios.
+
 .. _mncnh_portfolio_7.0:
 
 7.0 References/Other
@@ -1673,3 +2010,11 @@ Default stratifications to all observers should include scenario and input draw.
 .. [Tikmani-et-al-2016]
 
   See the "("Darmstadt 2011" reference in: Tikmani SS, Muhammad AA, Shafiq Y, Shah S, Kumar N, Ahmed I, Azam I, Pasha O, Zaidi AK. Ambulatory Treatment of Fast Breathing in Young Infants Aged <60 Days: A Double-Blind, Randomized, Placebo-Controlled Equivalence Trial in Low-Income Settlements of Karachi. Clin Infect Dis. 2017 Jan 15;64(2):184-189. doi: 10.1093/cid/ciw690. Epub 2016 Oct 19. PMID: 27941119; PMCID: PMC5853586.
+
+.. note::
+
+  This concept model was reorganized in April 2025 after much of wave I had been implemented. A record of the PRs for this reorganization are listed below:
+
+  * Pregnancy component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1615 <https://github.com/ihmeuw/vivarium_research/pull/1615>`_
+  * Intrapartum component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1617 <https://github.com/ihmeuw/vivarium_research/pull/1617>`_
+  * Neonatal component reorganization: `https://github.com/ihmeuw/vivarium_research/pull/1619 <https://github.com/ihmeuw/vivarium_research/pull/1619>`_

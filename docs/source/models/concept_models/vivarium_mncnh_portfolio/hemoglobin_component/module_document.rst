@@ -71,7 +71,7 @@ This module will:
 
 .. note::
   
-  As discussed on the :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`, IFA and MMS have equivalent effects on hemoglobin. This diagram treats them as equivalent for this reason. However, we will need track which product was received as they have differences that will apply to other downstream modules of this simulation. 
+  As discussed on the :ref:`maternal supplementation intervention document <oral_iron_antenatal>`, IFA and MMS have equivalent effects on hemoglobin. This diagram treats them as equivalent for this reason. However, we will need track which product was received as they have differences that will apply to other downstream modules of this simulation. 
 
 .. image:: hemoglobin_component.png
 
@@ -125,27 +125,31 @@ This module will:
     - 
   * - 5
     - Hemoglobin screen?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
     - 
   * - 6
     - Receive IFA/MMS *for the first time* at late pregnancy visit?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Answer can only be yes if ANC attendance==ANC in later pregnancy ONLY. Then, probability of "yes" is equal to scenario-specific coverage.
     - Use same propensity value as decision node #1 to answer this question
   * - 7 
     - Hemoglobin screening value <100 g/L? (Based on IFA/MMS adjusted exposure)
     - Instructions detailed on the :ref:`anemia screening intervention page <anemia_screening>`
     - 
   * - 8
+    - Ferritin screen?
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. Probability of "yes" is equal to scenario-specific coverage
+    - 
+  * - 9
     - Low ferritin screening value?
     - Instructions detailed on the :ref:`anemia screening intervention page <anemia_screening>`
     - 
-  * - 9
-    - IV iron?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
-    - 
   * - 10
+    - IV iron?
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
+    - 
+  * - 11
     - Also receive IFA/MMS *for the first time* at late pregnancy visit?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Otherwise, probability of "yes" is equal to scenario-specific coverage.
+    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH intrapartum component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Answer can only be yes if ANC attendance==ANC in later pregnancy ONLY. Then, probability of "yes" is equal to scenario-specific coverage.
     - Use same propensity value as decision node #1 to answer this question
 
 
@@ -165,7 +169,7 @@ This module will:
     - 
   * - II
     - Calibrate to and remove effect of baseline IFA coverage
-    - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`. For simulants without baseline coverage of IFA, subtract the value of :code:`baseline_ifa_coverage * ifa_hemoglobin_shift` from their hemoglobin exposure value. For simulants with baseline coverage of IFA, add the value of :code:`(1 - baseline_ifa_coverage) * ifa_hemoglobin_shift - ifa_hemoglobin_shift` to their hemoglobin exposure value. Ignore instructions regarding timeline and baseline coverage on intervention document.
+    - Effect size on hemoglobin defined on :ref:`antenatal supplementation intervention document <oral_iron_antenatal>`. For simulants without baseline coverage of IFA, subtract the value of :code:`baseline_ifa_coverage * ifa_hemoglobin_shift` from their hemoglobin exposure value. For simulants with baseline coverage of IFA, add the value of :code:`(1 - baseline_ifa_coverage) * ifa_hemoglobin_shift - ifa_hemoglobin_shift` to their hemoglobin exposure value. Ignore instructions regarding timeline and baseline coverage on intervention document.
     - Note that this step both calibrates to baseline coverage AND removes the effect of baseline IFA coverage. The effect of baseline IFA coverage will be added back in later in the decision tree.
   * - III
     - Record hemoglobin exposure at the start of pregnancy
@@ -173,7 +177,7 @@ This module will:
     - 
   * - IV
     - Apply IFA/MMS effect
-    - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`
+    - Effect size on hemoglobin defined on :ref:`antenatal supplementation intervention document <oral_iron_antenatal>`
     - Use effect size from this page only (ignore instructions for how to apply effects regarding timeline and baseline coverage). Note that IFA and MMS effectively have the same effect on maternal hemoglobin
   * - V
     - Record IFA/MMS receipt
@@ -181,7 +185,7 @@ This module will:
     - 
   * - VI
     - Apply IFA/MMS effect
-    - Effect size on hemoglobin defined on :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`
+    - Effect size on hemoglobin defined on :ref:`antenatal supplementation intervention document <oral_iron_antenatal>`
     - Use effect size from this page only (ignore instructions for how to apply effects regarding timeline and baseline coverage). Note that IFA and MMS effectively have the same effect on maternal hemoglobin
   * - VII
     - Record IFA/MMS receipt
