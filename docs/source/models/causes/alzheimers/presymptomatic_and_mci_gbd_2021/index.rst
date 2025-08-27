@@ -46,6 +46,8 @@ Alzheimer's disease  with presymptomatic and MCI stages (GBD 2021)
     - Blood-Based Biomarker
   * - CSU
     - Client Services Unit
+  * - DW
+    - Disability Weight
   * - FHS
     - Future Health Scenarios
   * - MCI
@@ -176,13 +178,15 @@ Cause Model Diagram
     - BBBM incidence hazard
     - Incidence hazard of BBBM-AD
     - This will be equal to GBD's incidence rate of Alzheimer's disease
-      and other dementias
+      and other dementias, but with the age group and year shifted
+      backward by the average duration of the BBBM-AD and MCI-AD states
+      combined
   * - i_MCI
     - MCI incidence hazard
     - Incidence hazard of MCI due to AD
     - This will be a **time-dependent hazard rate**, depending on how
-      long a simulant has been in the BBBM-Presymptomatic state, not a
-      constant hazard like we usually use
+      long a simulant has been in the BBBM-AD state, not a constant
+      hazard like we usually use
   * - i_AD
     - AD dementia incidence hazard
     - Incidence hazard of Alzheimer's disease dementia
@@ -272,39 +276,33 @@ population model <other_models_alzheimers_population>`:
   running the model with the full population at some point.
 
 .. list-table:: Transition Data
-  :widths: 10 10 10 20 30
   :header-rows: 1
 
   * - Transition
     - Source State
     - Sink State
     - Value
-    - Notes
   * - i_BBBM
     - S
     - BBBM-AD
     - Not explicitly used because we're not modeling susceptible
-      simulants
-    -
+      simulants. Defined implicitly in the :ref:`Alzheimer's population
+      model <other_models_alzheimers_population>`, which computes how
+      many simulants to add into the BBBM-AD state on each time step.
   * - i_MCI
     - BBBM-AD
     - MCI-AD
     - :math:`h_\text{MCI}(t - T_\text{BBBM})`, where :math:`t` is the
       current time in the simulation, and :math:`T_\text{BBBM}` is the
       time the simulant entered the BBBM-AD state
-    -
   * - i_AD
     - MCI-AD
     - AD
     - :math:`1 / \Delta_\text{MCI}`
-    -
   * - m_X
     - X
     - Death
     - acmr --- csmr_c543 + emr_X
-    - Computed by mortality component. X is a variable representing an
-      arbitrary cause state.
-
 
 Data Values and Sources
 -----------------------
@@ -380,7 +378,7 @@ team is located in the following folder:
     -
   * - :math:`\text{DW}_s`
     - Disability weight of sequela :math:`s`
-    - YLD Appendix
+    - ``dw_full.csv``
     - For reference, the values are:
 
       - s452: 0.069 (0.046-0.099)
@@ -393,14 +391,35 @@ team is located in the following folder:
     - Prevalence-weighted average disability weight over sequelae,
       computed automatically by Vivarium Inputs. Used to calculate
       YLDs.
+  * - :math:`\text{DW}_\text{motor}`
+    - Disability weight for health state "motor impairment, mild"
+    - ``dw_full.csv``
+    - Disability weights are stored as draws. See `Abie's disability
+      weight notebook`_ for details.
+  * - :math:`\text{DW}_\text{motor+cog}`
+    - Disability weight for  health state "motor plus cognitive
+      impairments, mild"
+    - ``dw_full.csv``
+    - Disability weights are stored as draws. See `Abie's disability
+      weight notebook`_ for details.
   * - :math:`\text{DW}_\text{MCI}`
     - Disability weight of mild cognitive impairment
-    - ?
-    -
+    - :math:`\frac{\text{DW}_\text{motor+cog} -
+      \text{DW}_\text{motor}} {1 - \text{DW}_\text{motor}}`
+    - For reference, the value is
+
+      * 0.021 (0.013, 0.032)
+
+      Obtained by removing DW of "motor impairment, mild" from DW of
+      "motor plus cognitive impairments, mild," at the draw level. See
+      `Abie's disability weight notebook`_ for details, and see below
+      for further explanation.
   * - :math:`T_X`
-    - The time at which the simulant enters the cause state :math:`X`
+    - The time at which a simulant enters the cause state :math:`X`
     - Random variable for each simulant
-    -
+    - :math:`T_\text{BBBM}` is used to determine how long a simulant has
+      been in the BBBM-AD state, in order to compute the hazard rate of
+      transitioning to MCI-AD at a given simulation time :math:`t`
   * - :math:`D_\text{BBBM}`
     - Dwell time in cause state BBBM-AD
     - :math:`T_\text{MCI} - T_\text{BBBM}`
@@ -419,14 +438,16 @@ team is located in the following folder:
     - Python object representing the gamma distribution for
       :math:`D_\text{BBBM}`
     - scipy.stats.gamma(𝛼, scale=1/λ)
-    - An instance of `SciPy's gamma distribution class`_
+    - An instance of `SciPy's gamma distribution class`_. Note that
+      SciPy accepts a scale parameter, which is the reciprocal of the
+      rate parameter.
   * - :math:`h_\text{MCI}(t)`
     - Hazard function for transitioning into the MCI-AD state from BBBM-AD
     - gamma_dist.pdf(t) / gamma_dist.sf(t)
     - Equal to :math:`\frac{t^{\alpha-1}e^{-\lambda t}}{\int_t^\infty
       u^{\alpha-1} e^{-\lambda u}\, du}`, but can be computed more
       easily as the ratio of the probability density function to the
-      survival function, using the methods of `SciPy's gamma
+      survival function, using the methods defined in `SciPy's gamma
       distribution class`_
   * - :math:`\Delta_\text{BBBM}`
     - Average duration of BBBM-presymptomatic AD
@@ -435,13 +456,14 @@ team is located in the following folder:
   * - :math:`\Delta_\text{MCI}`
     - Average duration of MCI due to AD
     - 3.25 years
-    - Value from `Potashman et al.`_, assuming a constant hazard rate.
-      Corresponds to an annual probability of 0.735 of staying in
-      MCI-AD, since :math:`\exp(-1 / 3.25) \approx 0.735`.  **Note:**
-      The paper reports a 68.2% of staying in MCI and a 5.3% chance or
-      returning to asymptomatic---these probabilities have been combined
-      since our model assumes that a backwards transition is not
-      possible.
+    - Obtained from Table 3 in `Potashman et al.`_, assuming a constant
+      hazard rate. Corresponds to an annual probability of 0.735 of
+      staying in MCI-AD, since :math:`\exp(-1 / 3.25) \approx 0.735`.
+
+      **Note:** The paper reports a 68.2% chance of staying in MCI and a 5.3%
+      chance of returning to asymptomatic---these probabilities have
+      been combined since our model assumes that a backwards transition
+      is not possible.
   * - :math:`\Delta_\text{AD}`
     - Average duration of AD-dementia
     - 1 / m_AD
@@ -451,6 +473,8 @@ team is located in the following folder:
     - :math:`\Delta_\text{BBBM} + \Delta_\text{MCI} + \Delta_\text{AD}`
     -
 
+.. _Abie's disability weight notebook:
+  https://github.com/ihmeuw/vivarium_research_alzheimers/blob/4d5dde0b74eb09ea997af7c2de88b81670ba7d61/2025_08_03a_alz_dw_explore.ipynb
 .. _gamma distribution:
   https://en.wikipedia.org/wiki/Gamma_distribution
 .. _SciPy's gamma distribution class:
