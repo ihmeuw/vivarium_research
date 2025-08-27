@@ -180,7 +180,7 @@ Cause Model Diagram
     - This will be equal to GBD's incidence rate of Alzheimer's disease
       and other dementias, but with the age group and year shifted
       backward by the average duration of the BBBM-AD and MCI-AD states
-      combined
+      combined, and inflated to account for deaths in those two states
   * - i_MCI
     - MCI incidence hazard
     - Incidence hazard of MCI due to AD
