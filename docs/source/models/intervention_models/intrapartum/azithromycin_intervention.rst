@@ -205,23 +205,24 @@ in the :code:`RiskEffect` component, we solve for :math:`\text{PAF}_\text{no int
 
 .. math::
     \text{PAF}_{\text{no intervention}} = 1 - \frac{p(\text{outcome}|\text{intervention})}{p(\text{outcome})}
+
 where the terms on the right hand side can be obtained by solving the system of equations above.
 
 Here is some pseudocode for deriving the PAF and RR of "lack of access to the intervention"::
 
-.. code::
+.. code:: python
+  
   p_sepsis = maternal_sepsis_incidence_rate
   relative_risk = 1/RR_azithromycin # this represents the RR of lack of access to azithromycin
-
   p_sepsis_azith = p_sepsis / (
-        (p_home * (1 - p_azith_home) * relative_risk)
-        + (p_home * p_azith_home)
-        + (p_BEmONC * (1 - p_azith_BEmONC) * relative_risk)
-        + (p_CEmONC * (1 - p_azith_CEmONC) * relative_risk)
-        + (p_BEmONC * p_azith_BEmONC)
-        + (p_CEmONC * p_azith_CEmONC)
-    )
-    paf_no_azith = 1 - (p_sepsis_azith / p_sepsis)
+  (p_home * (1 - p_azith_home) * relative_risk)
+  + (p_home * p_azith_home)
+  + (p_BEmONC * (1 - p_azith_BEmONC) * relative_risk)
+  + (p_CEmONC * (1 - p_azith_CEmONC) * relative_risk)
+  + (p_BEmONC * p_azith_BEmONC)
+  + (p_CEmONC * p_azith_CEmONC))
+  paf_no_azith = 1 - (p_sepsis_azith / p_sepsis)
+
 
 .. note::
 
