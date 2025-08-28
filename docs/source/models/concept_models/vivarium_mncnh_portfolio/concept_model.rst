@@ -1379,20 +1379,20 @@ Default stratifications to all observers should include scenario and input draw.
     - Added preterm status and believed preterm status to maternal
       population observer (#7)
     - Default
+  * - 15.1
+    - Updates to 15.0 to (1) add preterm and believed preterm status to maternal population count observer and (2) fix bug that results in 0% ANC attendance
+    - Baseline
+    - ``model15.1``
+    - Default
+    - Added preterm status and believed preterm status to maternal
+      population observer (#7)
+    - Default
   * - 16.0
     - Wave I antenatal corticosteroids
     - Baseline
     - ``model16.0``
     - Default
     - Default, note that we would like additional stratifications based on believed gestational age in the maternal population, births, and neonatal burden observers
-    - Default
-  * - 16.1
-    - Updates to 15.0 to (1) add preterm and believed preterm status to maternal population count observer and (2) fix bug that results in 0% ANC attendance
-    - Baseline
-    - ``model16.1``
-    - Default
-    - Added preterm status and believed preterm status to maternal
-      population observer (#7)
     - Default
   * - 17.0
     - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
@@ -1897,6 +1897,10 @@ Default stratifications to all observers should include scenario and input draw.
       * Preterm status vs. believed preterm status (need additional stratifications)
       * Believed preterm | preterm status and ultrasound type (need additional statifications and non-zero ANC/US coverage)
     - `See model 15.0 V&V notebooks here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/120>`_
+  * - 15.1
+    - Same as 15.0
+    - 
+    - 
   * - 16.0
     - * Use the interactive sim to confirm RDS and all-cause mortality rates between 33 weeks with ACS coverage and 34 weeks (no ACS coverage due to ineligibility).
       * Confirm neonatal mortality rate of preterm birth with RDS in baseline scenario still validates.
