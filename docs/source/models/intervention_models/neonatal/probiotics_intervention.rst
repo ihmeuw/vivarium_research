@@ -236,28 +236,76 @@ available.
 
 When we fill in the location-specific values for delivery facility rates, probiotics coverage, relative risk of mortality with probiotics access, 
 and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{sepsis}|\text{probiotics})` 
-and :math:`p(\text{sepsis}|\text{no probiotics})`), which we can solve analytically using the same approach as in the :ref:`cpap calibration <cpap_calibration>`.
+and :math:`p(\text{sepsis}|\text{no probiotics})`), which we can solve analytically.
 
-**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that 
-:math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.  If we define 
+As mentioned above, it is convenient to model this intervention like a dichotomous risk factor, so that we can reuse the
+:class:`Risk<vivarium_public_health.risks.base_risk.Risk>`
+and :class:`RiskEffect<vivarium_public_health.risks.effect.RiskEffect>` components in Vivarium Public Health,
+rather than having to write new components from scratch.
+Calling the intervention a risk factor can sound a bit confusing because intervention access is a good thing, so it doesn't sound "risky."
+Instead, we flip it so the risk factor is "*lack* of access to the intervention."
+The :code:`RiskEffect` component expects a relative risk (RR) and a population-attributable fraction (PAF).
+Because we are flipping the direction of the risk factor, we need to use the inverse of our original RR, so:
+
+.. math::
+    \text{RR}_{\text{no intervention}} = \frac{1}{\text{RR}_{\text{intervention}}}
+
+The PAF is the proportion of deaths due to the outcome that would not occur if all births had access to the intervention.
+Since we use the equation :math:`p(\text{outcome}|\text{intervention}) = (1 - \text{PAF}_\text{no intervention}) \cdot p(\text{outcome})`
+in the :code:`RiskEffect` component, we solve for :math:`\text{PAF}_\text{no intervention}` as follows:
+
+.. math::
+    \text{PAF}_{\text{no intervention}} = 1 - \frac{p(\text{outcome}|\text{intervention})}{p(\text{outcome})}
+where the terms on the right hand side can be obtained by solving the system of equations above.
+
+Here is some pseudocode for deriving the PAF and RR of "lack of access to the intervention"::
+
+.. code::
+  p_sepsis = neonatal_sepsis_mortality_risk
+  relative_risk = 1/RR_probiotics # this represents the RR of lack of access to probiotics
+
+  p_sepsis_probiotic = p_sepsis / (
+        (p_home * (1 - p_probiotic_home) * relative_risk)
+        + (p_home * p_probiotic_home)
+        + (p_BEmONC * (1 - p_probiotic_BEmONC) * relative_risk)
+        + (p_CEmONC * (1 - p_probiotic_CEmONC) * relative_risk)
+        + (p_BEmONC * p_probiotic_BEmONC)
+        + (p_CEmONC * p_probiotic_CEmONC)
+    )
+  paf_no_probiotic = 1 - (p_sepsis_probiotic / p_sepsis)
+
+.. note::
+
+  The above strategy was used for the implementation of this intervention model in the MNCNH portfolio. Documentation for the implemented strategy above and an alternative simpler strategy below (including links to relevant parameters used in the above strategy) are both included here for reference.
+
+**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model is shown below:
 
 .. math::
 
-   p(\text{no probiotics}) = \sum_{\text{paths without probiotics}} p(\text{path}),
+  p_\text{intervention} = \sum_\text{facility type} p_\text{facility type} * p_{\text{intervention} | \text{facility type}}
 
-then can use this to expand the identity
+  E(\text{RR}) = p_\text{intervention} + (1 - p_\text{intervention}) * \text{RR}_\text{no intervention} 
 
-.. math::
-
-   \text{PAF}_\text{no probiotics} = 1 - \frac{1}{\mathbb{E}(\text{RR})}.
-
-Since our risk exposure has two categories,
-
-.. math::
-
-   \mathbb{E}(\text{RR}) = p(\text{no probiotics}) \cdot \text{RR}_\text{no probiotics} + (1 - p(\text{no probiotics})) \cdot 1.
+  \text{PAF}_\text{no intervention} = \frac{E(\text{RR}) - 1}{E(\text{RR})}
 
 
+Where,
+
+.. list-table:: PAF calculation parameters
+  :header-rows: 1 
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - :math:`p_\text{facility type}`
+    - Proportion of population that delivers in a given facility type
+    - Defined in the :ref:`Overall delivery setting rate section <facility_setting_rates>` of the :ref:`Facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
+    - 
+  * - :math:`p_{\text{intervention} | \text{facility type}}`
+    - Proportion of eligible population in a giving facility type that receives the intervention at baseline 
+    - Defined in the `Baseline Coverage Data`_ section of this document
+    - 
 
 Scenarios
 ---------
