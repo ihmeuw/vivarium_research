@@ -256,22 +256,24 @@ in the :code:`RiskEffect` component, we solve for :math:`\text{PAF}_\text{no int
 
 .. math::
     \text{PAF}_{\text{no intervention}} = 1 - \frac{p(\text{outcome}|\text{intervention})}{p(\text{outcome})}
+
 where the terms on the right hand side can be obtained by solving the system of equations above.
 
 Here is some pseudocode for deriving the PAF and RR of "lack of access to the intervention"::
 
 .. code::
+
   p_sepsis = neonatal_sepsis_mortality_risk
   relative_risk = 1/RR_probiotics # this represents the RR of lack of access to probiotics
 
   p_sepsis_probiotic = p_sepsis / (
-        (p_home * (1 - p_probiotic_home) * relative_risk)
-        + (p_home * p_probiotic_home)
-        + (p_BEmONC * (1 - p_probiotic_BEmONC) * relative_risk)
-        + (p_CEmONC * (1 - p_probiotic_CEmONC) * relative_risk)
-        + (p_BEmONC * p_probiotic_BEmONC)
-        + (p_CEmONC * p_probiotic_CEmONC)
-    )
+  (p_home * (1 - p_probiotic_home) * relative_risk)
+  + (p_home * p_probiotic_home)
+  + (p_BEmONC * (1 - p_probiotic_BEmONC) * relative_risk)
+  + (p_CEmONC * (1 - p_probiotic_CEmONC) * relative_risk)
+  + (p_BEmONC * p_probiotic_BEmONC)
+  + (p_CEmONC * p_probiotic_CEmONC)
+  )
   paf_no_probiotic = 1 - (p_sepsis_probiotic / p_sepsis)
 
 .. note::
