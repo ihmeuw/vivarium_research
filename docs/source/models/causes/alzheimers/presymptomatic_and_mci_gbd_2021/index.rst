@@ -383,6 +383,15 @@ team is located in the following folder:
     - Prevalence of Alzheimer's disease and other dementias
     - como
     -
+  * - :math:`p_\textsf{X}`
+    - Prevalence of cause state X in total population
+    - Defined in :ref:`Attention box above
+      <alzheimers_cause_state_data_including_susceptible_note>`
+    -
+  * - :math:`p_\text{(all AD states)}`
+    - Prevalence of all stages of AD combined
+    - :math:`p_\textsf{BBBM} + p_\textsf{MCI} + p_\textsf{AD}`
+    -
   * - incidence_rate_c543
     - GBD's "total population incidence rate" for Alzheimer's disease
       and other dementias
