@@ -125,7 +125,7 @@ Assumptions and Limitations
 
 - We assume that the LBWSG exposure distribution prior to applying intervention effects is the same as the LBWSG exposure distribution at baseline. These distributions will slightly diverge due to the baseline calibration of the :ref:`oral iron intervention <oral_iron_antenatal>` (and any other future modeled interventions that are present at baseline and affect LBWSG exposure), but should be roughly similar.
 
-- We "cap" LBWSG RR values at a certain value in an attempt to eliminate the occurance of individual all-cause mortality risk values greater than 1 on in our simulation (and therefore avoiding an associated underestimation of neonatal mortality) while also maintaining:
+- We "cap" LBWSG RR values at a certain value in an attempt to eliminate the occurrence of individual all-cause mortality risk values greater than 1 on in our simulation (and therefore avoiding an associated underestimation of neonatal mortality) while also maintaining:
 
   - The relative difference in mortality risk values between LBWSG exposures that are not capped, and
 
