@@ -209,6 +209,27 @@ known parameters.
 Including presymptomatic and MCI stages
 ----------------------------------------
 
+Starting in Model 4 of the CSU Alzheimer's simulation, the Alzheimer's
+cause model includes two pre-dementia stages, BBBM-AD, and MCI-AD, in
+addition to the dementia stage AD-dementia. When computing the model
+scale and initializing demographic subgroups, :math:`p_\text{AD}` should
+be replaced by :math:`p_\text{(all AD states)}`, the combined prevalence
+of the three states BBBM-AD, MCI-AD, and AD-dementia, across all
+demographic groups at time :math:`t_0`. Similarly, :math:`p_{g,t}`
+should now refer to the combined prevalence of all three AD stages in
+demographic group :math:`g` at time :math:`t`. The value of
+:math:`p_{g,t}` is defined [[here, add link]] on the Alzheimer's cause
+model page. With these updated definitions, the model scale and initial
+population size in each group are defined the same as above:
+
+.. math::
+
+  S = \frac{X_{t_0}}{p_\text{(all AD states)}\cdot Y^\text{real}_{t_0}}
+    = \frac{X_{t_0}}{\sum_g p_{g,t_0}\cdot Y^\text{real}_{g,t_0}},
+  \qquad
+  X_{g,t_0} = X_{t_0} \cdot \frac{p_{g,t_0} \cdot Y^\text{real}_{g,t_0}}
+    {\sum_g p_{g,t_0} \cdot Y^\text{real}_{g,t_0}}.
+
 Adding New Simulants
 ++++++++++++++++++++
 
