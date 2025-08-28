@@ -42,10 +42,14 @@ Alzheimer's Population Model with Demographic Forecasts
     - Definition
   * - AD
     - Alzheimer's Disease
+  * - BBBM
+    - Blood-Based Biomarker
   * - GBD
     - Global Burden of Disease
   * - FHS
     - Future Health Scenarios
+  * - MCI
+    - Mild Cognitive Impairment
 
 Overview
 ++++++++
@@ -55,13 +59,27 @@ Alzheimer's disease (and other dementias), in order to reduce the
 necessary population size for the :ref:`CSU Alzheiemer's simulation
 <2025_concept_model_vivarium_alzheimers>`. The model document is split
 into two parts: 1) initializing the population, and 2) adding new
-simulants during the simulated timeframe.  Since this is the model that
+simulants during the simulated timeframe. We will also describe two
+different versions of the population model, corresponding to
+progressive model version of the CSU Alzheiemer's simulation:
+
+#. **Models 2 and 3:** Modeling simulants with Alzheimer's disease (AD)
+   and other dementias as defined by GBD
+#. **Model 4 and above:** Modeling simulants with presymptomatic AD,
+   MCI, or AD dementia
+
+Since this is the model that
 includes details on how to use forecasts of population size, we have also
 included information on how to use forecasts of all-cause mortality rate
 (this is not really part of the Alzheimer's Population Model however).
 
 Initializing the Population
 +++++++++++++++++++++++++++
+
+We will first describe how to initialize the population for AD and other
+dementias ad defined by GBD, then we will explain how to modify the
+initialization strategy when including the presymptomatic and MCI stages
+of AD.
 
 Model Scale
 ---------------------
@@ -187,6 +205,9 @@ known parameters.
       \frac{X^\text{real}_{t_0}}{X^\text{real}_{t_0}}
     = X_{t_0}.
     \end{align*}
+
+Including presymptomatic and MCI stages
+----------------------------------------
 
 Adding New Simulants
 ++++++++++++++++++++
