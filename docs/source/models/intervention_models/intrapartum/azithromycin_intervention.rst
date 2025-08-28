@@ -225,7 +225,7 @@ Here is some pseudocode for deriving the PAF and RR of "lack of access to the in
 
 .. note::
 
-  The above strategy was used for the implementation of this intervention model in the MNCNH portfolio. Documentation for the implemented strategy above and an alternative simpler strategy below (including links to relevant parameters used in the above strategy) are both included here for reference.
+  The above strategy was used for the implementation of this intervention model in the MNCNH portfolio. Note that the value of "p_sepsis" is arbitrary and does not directly affect the resulting PAF value. Documentation for the implemented strategy above and an alternative simpler strategy below (including links to relevant parameters used in the above strategy) are both included here for reference.
 
 **Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model is shown below:
 
@@ -233,7 +233,7 @@ Here is some pseudocode for deriving the PAF and RR of "lack of access to the in
 
   p_\text{intervention} = \sum_\text{facility type} p_\text{facility type} * p_{\text{intervention} | \text{facility type}}
 
-  E(\text{RR}) = p_\text{intervention} + (1 - p_\text{intervention}) * \text{RR}_\text{no intervention} 
+  E(\text{RR}_\text{no intervention}) = p_\text{intervention} + (1 - p_\text{intervention}) * \text{RR}_\text{no intervention} 
 
   \text{PAF}_\text{no intervention} = \frac{E(\text{RR}) - 1}{E(\text{RR})}
 
