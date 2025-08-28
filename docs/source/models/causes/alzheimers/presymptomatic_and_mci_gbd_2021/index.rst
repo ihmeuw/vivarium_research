@@ -525,15 +525,14 @@ team is located in the following folder:
       is not possible.
   * - :math:`\Delta_\text{AD}`
     - Average duration of AD-dementia
-    - :math:`\min \{1 / \textsf{m_AD},\, \text{5 years} \}`
-    - This is an approximation to ensure we have an average duration that is of
-      the same order of magnitude as :math:`\Delta_\text{BBBM}` and
-      :math:`\Delta_\text{MCI}` for younger age groups (rather than having an
-      exorbitantly long duration of :math:`\Delta_\text{AD}`). The only ways to
-      leave the AD-dementia state are through death or aging into the next age
-      bin. Since the age bins are 5 years, the average duration within an age
-      bin can be at most 5 years. If the death rate is high, the duration wil
-      be shorter.
+    - prevalence_c543 / incidence_rate_c543
+    - Follows from the steady-state equation (prevalent cases) = (incident
+      cases) x (average duration). Note that the denominator is the **raw
+      total-population incidence rate from GBD**, not the
+      susceptible-population incidence rate usually returned by Vivarium
+      Inputs. This is because we want the total-population person-time in the
+      denominators of prevalence and incidence to cancel out, leaving a ratio
+      of counts.
   * - :math:`\Delta_\text{(all AD states)}`
     - Average duration of all stages of AD combined
     - :math:`\Delta_\text{BBBM} + \Delta_\text{MCI} + \Delta_\text{AD}`
