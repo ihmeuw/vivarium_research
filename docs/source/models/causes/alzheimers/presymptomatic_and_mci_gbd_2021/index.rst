@@ -204,11 +204,12 @@ The tables in this section describe the data needed for the cause model
 drawn in the `Cause Model Diagram`_ section above. The variables in the
 tables are defined in the the `Data Values and Sources`_ section below.
 
-The following table describes the data for each state if modeling only simulants
-with AD or pre-dementia AD as described in the :ref:`Alzheimer's
-population model <other_models_alzheimers_population>`:
+The following tables describe the data for each state and transition if
+modeling only simulants with AD dementia or pre-dementia AD as described
+in the :ref:`Alzheimer's population model
+<other_models_alzheimers_population>`:
 
-.. list-table:: State data when modeling only simulants with AD or pre-dementia AD
+.. list-table:: State data when modeling only simulants with AD dementia or pre-dementia AD
   :header-rows: 1
 
   * - State
@@ -237,46 +238,8 @@ population model <other_models_alzheimers_population>`:
     - emr_c543
     - :math:`\text{DW}_\text{c543}`
 
-**Note:** The variable :math:`\Delta_\text{X}` denotes the average duration in
-cause state X, as defined in the data sources table below.
-
-..
-  On the other hand, if we model the entire population including
-  susceptible simulants, the following state data should be used:
-
-  .. list-table:: State Data if modeling entire population including susceptible simulants
-    :header-rows: 1
-
-    * - State
-      - Initial prevalence
-      - Birth prevalence
-      - Excess mortality rate
-      - Disability weight
-    * - S
-      - :math:`1 - \left( \frac{\Delta_\text{BBBM}}{\Delta_\text{AD}}
-        + \frac{\Delta_\text{MCI}}{\Delta_\text{AD}} + 1\right)
-        \cdot \text{prevalence_c543}`
-      - 1
-      - 0
-      - 0
-    * - BBBM-AD
-      - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
-      - 0
-      - 0
-      - 0
-    * - MCI-AD
-      - :math:`\frac{\Delta_\text{MCI}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
-      - 0
-      - 0
-      - :math:`\text{DW}_\text{MCI}`
-    * - AD-dementia
-      - :math:`\text{prevalence_c543}`
-      - 0
-      - emr_c543
-      - :math:`\text{DW}_\text{c543}`
-
-  We will not need this table for Model 4, but we may want to try
-  running the model with the full population at some point.
+**Note:** The variable :math:`\Delta_\textsf{X}` denotes the average duration
+in cause state X, as defined in the Data Sources table below.
 
 .. list-table:: Transition Data
   :header-rows: 1
@@ -307,13 +270,83 @@ cause state X, as defined in the data sources table below.
     - Death
     - acmr --- csmr_c543 + emr_X
 
-Because i_MCI is defined in terms of a nonconstant hazard function
-:math:`h_\text{MCI}` (defined in the data sources table below),
-simulants initialized into the BBBM-AD state will need to be assigned a
-value for :math:`T_\text{BBBM}` to determine how long they have been in
-that state. For simulants in BBBM-AD at time :math:`t=0`, assign
-:math:`T_\text{BBBM}` uniformly in the interval
-:math:`[-\Delta_\text{BBBM},\, 0]`.
+**Note:** :math:`h_\text{MCI}` is the time-dependent hazard function for
+transitioning into MCI-AD, defined in the Data Sources table below.
+
+Because i_MCI is defined in terms of a non-constant hazard function
+:math:`h_\text{MCI}`, simulants initialized into the BBBM-AD state will need to
+be assigned a value for :math:`T_\text{BBBM}` to determine how long they have
+been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
+:math:`T_\text{BBBM}` uniformly in the interval :math:`[-\Delta_\text{BBBM},\,
+0]`.
+
+.. _alzheimers_cause_state_data_including_susceptible_note:
+
+.. attention::
+
+  If we model the entire population including susceptible simulants, the
+  state data should be modified as follows.
+
+  Define :math:`p_\textsf{X}` to be the prevalence of cause state X in
+  the total population including susceptible simulants, and define
+  :math:`p_\text{(all AD states)}` to be the sum of :math:`p_\textsf{X}`
+  for the three AD cause states X. Then multiplying the prevalence of
+  each AD state in the above state data table by
+  :math:`p_\text{(all AD states)}`
+  gives the prevalence of that state in the entire population. Since we
+  know that :math:`p_\text{AD} = \text{prevalence_c543}` (the GBD
+  prevalence of Alzheimer's disease and other dementias), we can solve
+  to obtain
+
+  .. math::
+    :label: prevalence_all_AD_states_eq
+
+    p_\text{(all AD states)}
+    = \frac{\Delta_\text{(all AD states)}}{\Delta_\text{AD}}
+      \cdot \text{prevalence_c543}.
+
+  Note that since the GBD prevalence applies to a given demographic
+  group, so does the formula for :math:`p_\text{(all AD states)}`. The
+  following state data table shows the resulting initial prevalences
+  when modeling the total population, as well as the birth prevalences,
+  which replace the entrance prevalences. The excess mortality rate and
+  disability weight of each state remain the same.
+
+  .. list-table:: State data when modeling entire population including susceptible simulants
+    :header-rows: 1
+
+    * - State
+      - Initial prevalence
+      - Birth prevalence
+    * - S
+      - :math:`1 - \frac{\Delta_\text{(all AD states)}}
+        {\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+      - 1
+    * - BBBM-AD
+      - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+      - 0
+    * - MCI-AD
+      - :math:`\frac{\Delta_\text{MCI}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+      - 0
+    * - AD-dementia
+      - :math:`\text{prevalence_c543}`
+      - 0
+
+  .. note::
+
+    Although we will not need all the values in this table for Model 4, the
+    value of :math:`p_\text{(all AD states)}` defined in
+    :eq:`prevalence_all_AD_states_eq` **will be needed in order to compute the
+    model scale and initialize the correct number of simulants in each
+    demographic subgroup.** Note that in the notation on the :ref:`Alzheimer's
+    population model page <other_models_alzheimers_population>`,
+    :math:`p_\text{(all AD states)}` refers to the prevalence within the entire
+    population of a location, including all age groups and sexes. On the other
+    hand, if we pull prevalence_c543 for a specific demographic subgroup
+    :math:`g` (e.g., a single age group and sex) and year :math:`t`, then
+    :math:`p_\text{(all AD states)}` as computed in
+    :eq:`prevalence_all_AD_states_eq` corresponds to :math:`p_{g,t}` on the
+    Alzheimer's population model page.
 
 Data Values and Sources
 -----------------------
@@ -469,7 +502,7 @@ team is located in the following folder:
       **Note:** This will slightly overestimate the true average
       duration because we are not taking mortality into account. We
       think this will not be too much of an issue because BBBM will be
-      mostly in younger age groups so mortality is relatively small.
+      mostly in younger age groups where mortality is relatively small.
   * - :math:`\Delta_\text{MCI}`
     - Average duration of MCI due to AD
     - 3.25 years
