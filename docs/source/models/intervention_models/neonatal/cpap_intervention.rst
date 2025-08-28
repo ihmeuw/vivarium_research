@@ -150,21 +150,27 @@ For the population eligible for ACS:
 
 .. math::
 
-  p_\text{CPAP} = \sum_\text{facility type} p_\text{facility type} * p_{\text{CPAP} | \text{facility type}
+  p_\text{CPAP} = \sum_\text{facility type} p_\text{facility type} * p_{\text{CPAP} | \text{facility type}}
 
   E(\text{RR}) = p_\text{CPAP} + (1 - p_\text{CPAP}) * \text{RR}_\text{no CPAP} * \text{RR}_\text{no ACS}
 
-  \text{PAF}_\text{CPAP,ACS} = (E(\text{RR}) - 1) / E(\text{RR})
+  \text{PAF}_\text{CPAP,ACS} = \frac{E(\text{RR}) - 1}{E(\text{RR})}
+
+.. note::
+
+  :math:`p_\text{CPAP}` is used here as a proxy for :math:`p_\text{CPAP and ACS}` given our assumption
+  that ACS has the same baseline coverage as CPAP and that the correlation between them is 100%.
+  See the :ref:`ACS model document <acs_intervention>` for more details.
 
 For the population not eligible for ACS:
 
 .. math::
 
-  p_\text{CPAP} = \sum_\text{facility type} p_\text{facility type} * p_{\text{CPAP} | \text{facility type}
+  p_\text{CPAP} = \sum_\text{facility type} p_\text{facility type} * p_{\text{CPAP} | \text{facility type}}
 
   E(\text{RR}) = p_\text{CPAP} + (1 - p_\text{CPAP}) * \text{RR}_\text{no CPAP} 
 
-  \text{PAF}_\text{CPAP} = (E(\text{RR}) - 1) / E(\text{RR})
+  \text{PAF}_\text{CPAP} = \frac{E(\text{RR}) - 1}{E(\text{RR})}
 
 
 Where,
@@ -178,11 +184,15 @@ Where,
     - Note
   * - :math:`p_\text{facility type}`
     - Proportion of population that delivers in a given facility type
-    - Defined on the :ref:`Facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
+    - Defined in the :ref:`Overall delivery setting rate section <facility_setting_rates>` of the :ref:`Facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
     - 
-  * - :math:`p_{\text{intervention} | \text{facility type}`
+  * - :math:`p_{\text{CPAP} | \text{facility type}}`
     - Proportion of eligible population in a giving facility type that receives the intervention at baseline 
     - Defined in the `Baseline Coverage and RR Data`_ section 
+    - 
+  * - :math:`\text{RR}_\text{no ACS}`
+    - Risk of no ACS access relative to ACS treatment
+    - Defined on the :ref:`ACS intervention model document <acs_intervention>`
     - 
 
 Assumptions and Limitations
