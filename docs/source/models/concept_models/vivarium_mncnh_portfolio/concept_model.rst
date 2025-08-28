@@ -1379,6 +1379,14 @@ Default stratifications to all observers should include scenario and input draw.
     - Added preterm status and believed preterm status to maternal
       population observer (#7)
     - Default
+  * - 15.1
+    - Updates to 15.0 to (1) add preterm and believed preterm status to maternal population count observer and (2) fix bug that results in 0% ANC attendance
+    - Baseline
+    - ``model15.1``
+    - Default
+    - Added preterm status and believed preterm status to maternal
+      population observer (#7)
+    - Default
   * - 16.0
     - Wave I antenatal corticosteroids
     - Baseline
@@ -1869,8 +1877,30 @@ Default stratifications to all observers should include scenario and input draw.
         probabilities of IFD given believed preterm status
         <facility_choice_causal_probabilities_section>` (also saved in
         the `facility choice optimization results .csv file`_)
-    -
-    -
+    - Measures meeting V&V criteria:
+
+      * BEmONC fraction of in-facility deliveries
+      * Sex ratio at birth
+      * Preterm prevalence
+
+      V&V issues:
+
+      * IFD slightly overestimated
+      * Not meeting ANC attendance targets (100% anc_coverage == 'none')
+      * Delivery facility by ANC attendance (rates are way high among those who do not attend ANC, but this could be a ripple effect of the ANC bug?)
+
+      Not able to be checked:
+
+      * Ultrasound coverage (ultrasound coverage is dependent on ANC attendance, which is not functioning in this model)
+      * Preterm birth rates by delivery setting (need additional stratifications)
+      * IFD | believed preterm status (need additional stratifications)
+      * Preterm status vs. believed preterm status (need additional stratifications)
+      * Believed preterm | preterm status and ultrasound type (need additional statifications and non-zero ANC/US coverage)
+    - `See model 15.0 V&V notebooks here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/120>`_
+  * - 15.1
+    - Same as 15.0
+    - 
+    - 
   * - 16.0
     - * Use the interactive sim to confirm RDS and all-cause mortality rates between 33 weeks with ACS coverage and 34 weeks (no ACS coverage due to ineligibility).
       * Confirm neonatal mortality rate of preterm birth with RDS in baseline scenario still validates.
@@ -1951,6 +1981,22 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - Zero ANC coverage (100% of simulants classified as with ANC coverage == 'none')
+    - Unknown - maybe something related to prior typo in artifact key name for ANC covariates (missing "t" in antenatal)
+    - Hussain to investigate
+    - For model 16.1
+  * - Missing preterm and believed preterm status stratifications from maternal population observer
+    - Didn't get added
+    - Hussain to investigate/update
+    - For model 16.1
+  * - Slightly overestimated in-facility delivery proportion 
+    - Unknown
+    - Hussain and Ali to investigate
+    - Future run (doesn't need to block 16.1)
+  * - Potentially increased overestimation of all-cause neonatal mortality relative to model 13.3
+    - Unknown - possibly related to changes in LBWSG exposure distribution
+    - Ali to check LBWSG exposure distribution in the interactive sim
+    - TBD - not blocking for 16.1 
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
     - Update to custom-calculated PAF and reassess
