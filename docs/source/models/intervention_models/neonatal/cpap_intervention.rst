@@ -146,23 +146,44 @@ Where,
 Calibration Strategy
 --------------------
 
-**PAF Derivation**: The mathematical derivation for this PAF calculation can be found on the :ref:`on the neonatal probiotics intervention page <intervention_neonatal_probiotics>`
-and the pseudocode for the population eligible for ACS would look as follows::
-  
-  p_intervention = p_CPAP = p_ACS  # note that this value is a weighted average of intervention coverage across all modeled delivery settings among the eligible population according to their gestational age
-  p_no_intervention = 1 - p_intervention
+For the population eligible for ACS:
 
-  population_average_RR = (
-      p_no_intervention * RR_no_CPAP * RR_no_ACS +
-      p_intervention * 1
-  )
-  PAF_no_CPAP_ACS = 1 - 1 / population_average_RR
+.. math::
 
-The above PAF derivation should only include the effect of ACS on RDS mortality if the simulant is within the gestational age range that is eligible for ACS (26-33 weeks). For 
-preterm infants that fall outside of this range, the PAF should be be calculated using the following equation::
+  p_\text{CPAP} = \sum_\text{facility type} p_\text{facility type} * p_{\text{CPAP} | \text{facility type}
 
-  population_average_RR = RR_no_CPAP * p_no_CPAP + 1 * p_CPAP
-  PAF_no_CPAP = 1 - 1 / population_average_RR
+  E(\text{RR}) = p_\text{CPAP} + (1 - p_\text{CPAP}) * \text{RR}_\text{no CPAP} * \text{RR}_\text{no ACS}
+
+  \text{PAF}_\text{CPAP,ACS} = (E(\text{RR}) - 1) / E(\text{RR})
+
+For the population not eligible for ACS:
+
+.. math::
+
+  p_\text{CPAP} = \sum_\text{facility type} p_\text{facility type} * p_{\text{CPAP} | \text{facility type}
+
+  E(\text{RR}) = p_\text{CPAP} + (1 - p_\text{CPAP}) * \text{RR}_\text{no CPAP} 
+
+  \text{PAF}_\text{CPAP} = (E(\text{RR}) - 1) / E(\text{RR})
+
+
+Where,
+
+.. list-table:: PAF calculation parameters
+  :header-rows: 1 
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - :math:`p_\text{facility type}`
+    - Proportion of population that delivers in a given facility type
+    - Defined on the :ref:`Facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
+    - 
+  * - :math:`p_{\text{intervention} | \text{facility type}`
+    - Proportion of eligible population in a giving facility type that receives the intervention at baseline 
+    - Defined in the `Baseline Coverage and RR Data`_ section 
+    - 
 
 Assumptions and Limitations
 ---------------------------
