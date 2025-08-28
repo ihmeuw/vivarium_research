@@ -146,116 +146,54 @@ Where,
 Calibration Strategy
 --------------------
 
-The following decision tree shows all of the paths from delivery facility choice to CPAP availability.  Distinct paths in the tree correspond to 
-disjoint events, which we can sum over to find the population probability of RDS mortality.  The goal here is to find internally consistent probabilities 
-of RDS mortality for the subpopulations with and without access to CPAP and ACS, so that the baseline scenario can track who has access to CPAP and still match 
-the baseline RDS mortality rate.
-
-.. graphviz::
-
-    digraph CPAP {
-        rankdir = LR;
-        facility [label="Facility type"]
-        home [label="p_RDS_without_CPAP"]
-        BEmONC [label="CPAP"]
-        CEmONC [label="CPAP"]
-        BEmONC_wo [label="p_RDS_without_CPAP"] 
-        BEmONC_w [label="p_RDS_with_CPAP"]
-        CEmONC_wo [label="p_RDS_without_CPAP"] 
-        CEmONC_w [label="p_RDS_with_CPAP"]
-
-        facility -> home  [label = "home birth"]
-        facility -> BEmONC  [label = "BEmONC"]
-        facility -> CEmONC  [label = "CEmONC"]
-
-        BEmONC -> BEmONC_w  [label = "available"]
-        BEmONC -> BEmONC_wo  [label = "unavailable"]
-
-        CEmONC -> CEmONC_w  [label = "available"]
-        CEmONC -> CEmONC_wo  [label = "unavailable"]
-    }
+For the population eligible for ACS:
 
 .. math::
-    \begin{align*}
-        p(\text{RDS})
-        &= \sum_{\text{paths without CPAP}} p(\text{path})\cdot p(\text{RDS}|\text{no CPAP})\\
-        &+ \sum_{\text{paths with CPAP}} p(\text{path})\cdot p(\text{RDS}|\text{CPAP})\\[.1in]
-        p(\text{RDS}|\text{CPAP}) &= \text{RR}_\text{CPAP} \cdot p(\text{RDS}|\text{no CPAP})
-    \end{align*}
 
-where :math:`p(\text{RDS})` is the probability of dying from Preterm with RDS in the general population, and :math:`p(\text{RDS}|\text{CPAP})` and :math:`p(\text{RDS}|\text{no CPAP})` are the probability of dying from Preterm with RDS in setting with and without access to CPAP.  For each path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the facility has CPAP available (7.5% in Ethiopia in 2016)
+  p_\text{CPAP} = \sum_\text{facility type} p_\text{facility type} * p_{\text{CPAP} | \text{facility type}}
 
-When we fill in the location-specific values for delivery facility rates, CPAP coverage by facility type, relative risk of mortality with CPAP access, and mortality probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{RDS}|\text{CPAP})` and :math:`p(\text{RDS}|\text{no CPAP})`), which we can solve analytically.
+  E(\text{RR}) = p_\text{CPAP} + (1 - p_\text{CPAP}) * \text{RR}_\text{no CPAP} * \text{RR}_\text{no ACS}
 
-As mentioned above, it is convenient to model this intervention like a dichotomous risk factor, so that we can reuse the
-:class:`Risk<vivarium_public_health.risks.base_risk.Risk>`
-and :class:`RiskEffect<vivarium_public_health.risks.effect.RiskEffect>` components in Vivarium Public Health,
-rather than having to write new components from scratch.
-Calling CPAP a risk factor can sound a bit confusing because CPAP access is a good thing, so it doesn't sound "risky."
-Instead, we flip it so the risk factor is "*lack* of access to CPAP."
+  \text{PAF}_\text{CPAP,ACS} = \frac{E(\text{RR}) - 1}{E(\text{RR})}
 
-The :code:`RiskEffect` component expects a relative risk (RR) and a population-attributable fraction (PAF).
-Because we are flipping the direction of the risk factor, we need to use the inverse of our original RR, so:
+.. note::
+
+  :math:`p_\text{CPAP}` is used here as a proxy for :math:`p_\text{CPAP and ACS}` given our assumption
+  that ACS has the same baseline coverage as CPAP and that the correlation between them is 100%.
+  See the :ref:`ACS model document <acs_intervention>` for more details.
+
+For the population not eligible for ACS:
 
 .. math::
-    \text{RR}_{\text{no CPAP}} = \frac{1}{\text{RR}_{\text{CPAP}}}
 
-The PAF is the proportion of deaths due to preterm with RDS that would not occur if all births had access to CPAP.
-Since we use the equation :math:`p(\text{RDS}|\text{CPAP}) = (1 - \text{PAF}_\text{no CPAP}) \cdot p(\text{RDS})`
-in the :code:`RiskEffect` component, we solve for :math:`\text{PAF}_\text{no CPAP}` as follows:
+  p_\text{CPAP} = \sum_\text{facility type} p_\text{facility type} * p_{\text{CPAP} | \text{facility type}}
 
-.. math::
-    \text{PAF}_{\text{no CPAP}} = 1 - \frac{p(\text{RDS}|\text{CPAP})}{p(\text{RDS})}
+  E(\text{RR}) = p_\text{CPAP} + (1 - p_\text{CPAP}) * \text{RR}_\text{no CPAP} 
 
-where the terms on the right hand side can be obtained by solving the system of equations above.
+  \text{PAF}_\text{CPAP} = \frac{E(\text{RR}) - 1}{E(\text{RR})}
 
-Here is some pseudocode for deriving the PAF and RR of "lack of access to CPAP" from data::
 
-  # TODO: replace these stand-in values
-  # with appropriate artifact draws
-  p_RDS = .1
-  p_home = .5
-  p_BEmONC = .1
-  p_CEmONC = .4
-  p_CPAP_BEmONC = 0.075
-  p_CPAP_CEmONC = 0.393
-  RR_CPAP = 0.53
+Where,
 
-  p_RDS_w_CPAP = ... # solve system of equations from previous section
-  p_RDS_wo_CPAP = # TODO: fill this in explicitly
+.. list-table:: PAF calculation parameters
+  :header-rows: 1 
 
-  RR_no_CPAP = 1 / RR_CPAP
-  # p_RDS_w_CPAP = (1 - PAF_no_CPAP) * p_RDS
-  PAF_no_CPAP = 1 - p_RDS_w / p_RDS # solved equation in previous line for PAF
-
-**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model comes from the observation that :math:`\text{PAF} = 1 - \frac{1}{\mathbb{E}(\text{RR})}`.
-The math for this can be found :ref:`on the antibiotics page <intervention_neonatal_antibiotics>`
-and the pseudocode would look as follows::
-  
-  p_intervention = p_CPAP = p_ACS  
-  p_no_intervention = 1 - p_intervention
-
-  population_average_RR = (
-      p_no_intervention * RR_no_CPAP * RR_no_ACS +
-      p_intervention * 1
-  )
-  PAF_no_CPAP_ACS = 1 - 1 / population_average_RR
-
-The above PAF derivation should only include the effect of ACS on RDS mortality if the simulant is within the gestational age range that is eligible for ACS (26-33 weeks). For 
-preterm infants that fall outside of this range, the PAF should be be calculated using the following equation::
-
-  population_average_RR = RR_no_CPAP * p_no_CPAP + 1 * p_CPAP
-  PAF_no_CPAP = 1 - 1 / population_average_RR
-
-Scenarios
----------
-
-.. todo::
-
-  Describe our general approach to scenarios, for example set coverage to different levels in different types of health facilities; then the specific values for specific scenarios will be specified in the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
-  
-  This is because specific scenarios might combine interventions, such as scaling up both an intervention like Antenatal corticosteroids (ACS) that lowers the prevalence of RDS together with increased coverage of CPAP.
-
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - :math:`p_\text{facility type}`
+    - Proportion of population that delivers in a given facility type
+    - Defined in the :ref:`Overall delivery setting rate section <facility_setting_rates>` of the :ref:`Facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`
+    - 
+  * - :math:`p_{\text{CPAP} | \text{facility type}}`
+    - Proportion of eligible population in a giving facility type that receives the intervention at baseline 
+    - Defined in the `Baseline Coverage and RR Data`_ section 
+    - 
+  * - :math:`\text{RR}_\text{no ACS}`
+    - Risk of no ACS access relative to ACS treatment
+    - Defined on the :ref:`ACS intervention model document <acs_intervention>`
+    - 
 
 Assumptions and Limitations
 ---------------------------
