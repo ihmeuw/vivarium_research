@@ -355,8 +355,8 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
 Data Values and Sources
 -----------------------
 
-All data values are defined for a specified year, location, age group,
-and sex.
+Unless otherwise noted, all data values depend on year, location, age group,
+and sex, as defined by GBD.
 
 The population (:file:`population_agg.nc`) and mortality rates
 (:file:`_all.nc`) files from the Future Health Scenarios (FHS) team and the
@@ -444,7 +444,8 @@ are located at the following paths on the cluster:
     - set of 3 sequelae: s452, s453, s454
     - Obtained from gbd_mapping.
       Sequela names are "Mild," "Moderate," or "Severe Alzheimer's
-      disease and other dementias," respectively.
+      disease and other dementias," respectively. Same for all years,
+      locations, age groups, and sexes.
   * - :math:`\text{prevalence}_s`
     - Prevalence of sequela :math:`s`
     - como
@@ -452,7 +453,8 @@ are located at the following paths on the cluster:
   * - :math:`\text{DW}_s`
     - Disability weight of sequela :math:`s`
     - :file:`all.hdf` disability weight file in our team's auxiliary data
-    - For reference, the values are:
+    - Disability weights are stored as draws and do not vary by year, location,
+      age group, or sex. For reference, the values are:
 
       - s452: 0.069 (0.046-0.099)
       - s453: 0.377 (0.252-0.508)
@@ -467,19 +469,22 @@ are located at the following paths on the cluster:
   * - :math:`\text{DW}_\text{motor}`
     - Disability weight for health state "motor impairment, mild"
     - :file:`all.hdf` disability weight file in our team's auxiliary data
-    - Disability weights are stored as draws. See `Abie's disability
-      weight notebook`_ for details.
+    - Disability weights are stored as draws and do not vary by year, location,
+      age group, or sex. See `Abie's disability weight notebook`_ for details
+      on pulling the correct value.
   * - :math:`\text{DW}_\text{motor+cog}`
     - Disability weight for  health state "motor plus cognitive
       impairments, mild"
     - :file:`all.hdf` disability weight file in our team's auxiliary data
-    - Disability weights are stored as draws. See `Abie's disability
-      weight notebook`_ for details.
+    - Disability weights are stored as draws and do not vary by year, location,
+      age group, or sex. See `Abie's disability weight notebook`_ for details
+      on pulling the correct value.
   * - :math:`\text{DW}_\text{MCI}`
     - Disability weight of mild cognitive impairment
     - :math:`\frac{\text{DW}_\text{motor+cog} -
       \text{DW}_\text{motor}} {1 - \text{DW}_\text{motor}}`
-    - For reference, the value is
+    - Disability weights are stored as draws and do not vary by location, age
+      group, or sex. For reference, the value is
 
       * 0.021 (0.013, 0.032)
 
@@ -490,10 +495,11 @@ are located at the following paths on the cluster:
       explanation.
   * - :math:`T_X`
     - The time at which a simulant enters the cause state :math:`X`
-    - random variable for each simulant
-    - :math:`T_\text{BBBM}` is used to determine how long a simulant has
-      been in the BBBM-AD state, in order to compute the hazard rate of
-      transitioning to MCI-AD at a given simulation time :math:`t`
+    - determined within the simulation
+    - Random variable for each simulant. :math:`T_\text{BBBM}` is used to
+      determine how long a simulant has been in the BBBM-AD state, in order to
+      compute the hazard rate of transitioning to MCI-AD at a given simulation
+      time :math:`t`.
   * - :math:`D_\text{BBBM}`
     - Dwell time in cause state BBBM-AD
     - :math:`T_\text{MCI} - T_\text{BBBM}`
@@ -508,7 +514,8 @@ are located at the following paths on the cluster:
       * :math:`\lambda = 125`
     - Chosen so that :math:`P(3.5 < D_\text{BBBM} < 4) \approx 0.9`
       because client said, "The BBBM+ state lasts about 3.5--4 years
-      before transitioning to MCI."
+      before transitioning to MCI." Use the same parameters for all years,
+      locations, age groups, and sexes.
   * - gamma_dist
     - Python object representing the gamma distribution for
       :math:`D_\text{BBBM}`
@@ -527,7 +534,8 @@ are located at the following paths on the cluster:
   * - :math:`\Delta_\text{BBBM}`
     - Average duration of BBBM-presymptomatic AD
     - :math:`\alpha / \lambda`
-    - Mean of gamma distribution for :math:`D_\text{BBBM}`.
+    - Mean of gamma distribution for :math:`D_\text{BBBM}`. Does not vary by
+      year, location, age group, or sex.
 
       **Note:** This will slightly overestimate the true average
       duration because we are not taking mortality into account. We
@@ -536,9 +544,10 @@ are located at the following paths on the cluster:
   * - :math:`\Delta_\text{MCI}`
     - Average duration of MCI due to AD
     - 3.25 years
-    - Obtained from Table 3 in `Potashman et al.`_, assuming a constant
-      hazard rate. Corresponds to an annual probability of 0.735 of
-      staying in MCI-AD, since :math:`\exp(-1 / 3.25) \approx 0.735`.
+    - Obtained from Table 3 in `Potashman et al.`_, assuming a constant hazard
+      rate. Corresponds to an annual probability of 0.735 of staying in MCI-AD,
+      since :math:`\exp(-1 / 3.25) \approx 0.735`. Does not vary by year,
+      location, age group, or sex.
 
       **Note:** The paper reports a 68.2% chance of staying in MCI and a 5.3%
       chance of returning to asymptomatic---these probabilities have
