@@ -209,6 +209,8 @@ modeling only simulants with AD dementia or pre-dementia AD as described
 in the :ref:`Alzheimer's population model
 <other_models_alzheimers_population>`:
 
+.. _2021_cause_alzheimers_presymptomatic_mci_state_data_table:
+
 .. list-table:: State data when modeling only simulants with AD dementia or pre-dementia AD
   :header-rows: 1
 
@@ -239,7 +241,8 @@ in the :ref:`Alzheimer's population model
     - :math:`\text{DW}_\text{c543}`
 
 **Note:** The variable :math:`\Delta_\textsf{X}` denotes the average duration
-in cause state X, as defined in the Data Sources table below.
+in cause state X, as defined in the :ref:`data values and sources table below
+<2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`.
 
 .. list-table:: Transition Data
   :header-rows: 1
@@ -271,7 +274,8 @@ in cause state X, as defined in the Data Sources table below.
     - acmr --- csmr_c543 + emr_X
 
 **Note:** :math:`h_\text{MCI}` is the time-dependent hazard function for
-transitioning into MCI-AD, defined in the Data Sources table below.
+transitioning into MCI-AD, defined in the :ref:`data values and sources table
+below <2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`.
 
 Because i_MCI is defined in terms of a non-constant hazard function
 :math:`h_\text{MCI}`, simulants initialized into the BBBM-AD state will need to
@@ -287,16 +291,16 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
   If we model the entire population including susceptible simulants, the
   state data should be modified as follows.
 
-  Define :math:`p_\textsf{X}` to be the prevalence of cause state X in
-  the total population including susceptible simulants, and define
-  :math:`p_\text{(all AD states)}` to be the sum of :math:`p_\textsf{X}`
-  for the three AD cause states X. Then multiplying the prevalence of
-  each AD state in the above state data table by
-  :math:`p_\text{(all AD states)}`
-  gives the prevalence of that state in the entire population. Since we
-  know that :math:`p_\text{AD} = \text{prevalence_c543}` (the GBD
-  prevalence of Alzheimer's disease and other dementias), we can solve
-  to obtain
+  Define :math:`p_\textsf{X}` to be the prevalence of cause state X in the
+  total population including susceptible simulants, and define
+  :math:`p_\text{(all AD states)}` to be the sum of :math:`p_\textsf{X}` for
+  the three AD cause states X. Then multiplying the prevalence of each AD state
+  in the :ref:`above state data table
+  <2021_cause_alzheimers_presymptomatic_mci_state_data_table>` by
+  :math:`p_\text{(all AD states)}` gives the prevalence of that state in the
+  entire population. Since we know that :math:`p_\text{AD} =
+  \text{prevalence_c543}` (the GBD prevalence of Alzheimer's disease and other
+  dementias), we can solve to obtain
 
   .. math::
     :label: prevalence_all_AD_states_eq
@@ -370,6 +374,8 @@ are located at the following paths on the cluster:
   # Disability weights saved by Simscience team:
   /mnt/team/simulation_science/costeffectiveness/auxiliary_data/GBD_2021/02_processed_data/disability_weight/sequela/all/all.hdf
 
+.. _2021_cause_alzheimers_presymptomatic_mci_data_sources_table:
+
 .. list-table:: Data values and sources
   :widths: 20 30 25 25
   :header-rows: 1
@@ -414,7 +420,7 @@ are located at the following paths on the cluster:
     - All-cause mortality rate
     - loaded from :file:`_all.nc` file provided by FHS Team
     - See `Abie's population and mortality forecasts notebook`_ for a
-      demonstration of how to load and transform the ``.nc`` file.
+      demonstration of how to load and transform the ``.nc`` file
   * - csmr_c543
     - Cause-specific mortality rate for Alzheimer's disease and other
       dementias
@@ -426,7 +432,8 @@ are located at the following paths on the cluster:
     - Calculated automatically by Vivarium Inputs
   * - emr_X
     - Excess mortality rate in cause state X
-    - values listed in state data table above
+    - values listed in :ref:`state data table above
+      <2021_cause_alzheimers_presymptomatic_mci_state_data_table>`
     -
   * - m_X
     - Mortality hazard in cause state X
@@ -476,10 +483,11 @@ are located at the following paths on the cluster:
 
       * 0.021 (0.013, 0.032)
 
-      Obtained by removing DW of "motor impairment, mild" from DW of
-      "motor plus cognitive impairments, mild," at the draw level. See
-      `Abie's disability weight notebook`_ for details, and see below
-      for further explanation.
+      Obtained by removing DW of "motor impairment, mild" from DW of "motor
+      plus cognitive impairments, mild," at the draw level. See `Abie's
+      disability weight notebook`_ for details, and see the :ref:`derivation
+      below <alzheimers_mci_disability_weight_derivation>` for further
+      explanation.
   * - :math:`T_X`
     - The time at which a simulant enters the cause state :math:`X`
     - random variable for each simulant
@@ -561,3 +569,13 @@ are located at the following paths on the cluster:
   https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html
 .. _Potashman et al.:
   https://doi.org/10.1007/s40120-021-00272-1
+
+.. _alzheimers_mci_disability_weight_derivation:
+
+Deriving a disability weight for MCI
+------------------------------------
+
+.. todo::
+
+  Derive the formula for the disability weight of MCI, and include Abie's plot
+  comparing DWs of various relevant health states.
