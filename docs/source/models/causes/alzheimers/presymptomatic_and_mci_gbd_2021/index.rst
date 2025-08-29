@@ -354,13 +354,23 @@ Data Values and Sources
 All data values are defined for a specified year, location, age group,
 and sex.
 
-The ``population_agg.nc`` file from the Future Health Scenarios (FHS)
-team is located in the following folder:
+The population (:file:`population_agg.nc`) and mortality rates
+(:file:`_all.nc`) files from the Future Health Scenarios (FHS) team and the
+disability weights file (:file:`all.hdf`) saved by the Simulation Science team
+are located at the following paths on the cluster:
 
-``/mnt/share/forecasting/data/9/future/population/
-20240320_daly_capstone_resubmission_squeeze_soft_round_shifted_hiv_shocks_covid_all_who_reagg/``
+.. code-block:: bash
 
-.. list-table:: Data Sources
+  # Age-specific population from FHS team:
+  /mnt/share/forecasting/data/9/future/population/20240320_daly_capstone_resubmission_squeeze_soft_round_shifted_hiv_shocks_covid_all_who_reagg/population_agg.nc
+
+  # Deaths rates from FHS team:
+  /snfs1/Project/forecasting/results/7/future/death/20240320_daly_capstone_resubmission_squeeze_soft_round_shifted_hiv_shocks_covid_all_who_reagg/_all.nc
+
+  # Disability weights saved by Simscience team:
+  /mnt/team/simulation_science/costeffectiveness/auxiliary_data/GBD_2021/02_processed_data/disability_weight/sequela/all/all.hdf
+
+.. list-table:: Data values and sources
   :widths: 20 30 25 25
   :header-rows: 1
 
@@ -370,11 +380,13 @@ team is located in the following folder:
     - Notes
   * - population
     - Average population during specified year
-    - loaded from ``population_agg.nc`` file provided by FHS Team
-    - Numerically equal to person-years. Often interpreted as population
-      at year's midpoint (which is approximately equal to person-years
-      if we think the midpoint rule with a single rectangle gives a good
-      estimate of the area under the population curve).
+    - loaded from :file:`population_agg.nc` file provided by FHS Team
+    - Numerically equal to person-years. Often interpreted as population at
+      year's midpoint (which is approximately equal to person-years if we think
+      the midpoint rule with a single rectangle gives a good estimate of the
+      area under the population curve). See `Abie's population and mortality
+      forecasts notebook`_ for a demonstration of how to load and transform the
+      ``.nc`` file.
   * - deaths_c543
     - Deaths from Alzheimer's disease and other dementias
     - codcorrect
@@ -385,12 +397,12 @@ team is located in the following folder:
     -
   * - :math:`p_\textsf{X}`
     - Prevalence of cause state X in total population
-    - Defined in :ref:`Attention box above
+    - defined in :ref:`Attention box above
       <alzheimers_cause_state_data_including_susceptible_note>`
     -
   * - :math:`p_\text{(all AD states)}`
     - Prevalence of all stages of AD combined
-    - :math:`p_\textsf{BBBM} + p_\textsf{MCI} + p_\textsf{AD}`
+    - :math:`p_\text{BBBM} + p_\text{MCI} + p_\text{AD}`
     -
   * - incidence_rate_c543
     - GBD's "total population incidence rate" for Alzheimer's disease
@@ -400,8 +412,9 @@ team is located in the following folder:
       automatically calculated by Vivarium Inputs
   * - acmr
     - All-cause mortality rate
-    - loaded from ``_all.nc`` file provided by FHS Team
-    -
+    - loaded from :file:`_all.nc` file provided by FHS Team
+    - See `Abie's population and mortality forecasts notebook`_ for a
+      demonstration of how to load and transform the ``.nc`` file.
   * - csmr_c543
     - Cause-specific mortality rate for Alzheimer's disease and other
       dementias
@@ -413,7 +426,7 @@ team is located in the following folder:
     - Calculated automatically by Vivarium Inputs
   * - emr_X
     - Excess mortality rate in cause state X
-    - Values listed in state data table above
+    - values listed in state data table above
     -
   * - m_X
     - Mortality hazard in cause state X
@@ -421,7 +434,7 @@ team is located in the following folder:
     -
   * - sequelae_c543
     - Sequelae of Alzheimer's disease and other dementias
-    - Set of 3 sequelae: s452, s453, s454
+    - set of 3 sequelae: s452, s453, s454
     - Obtained from gbd_mapping.
       Sequela names are "Mild," "Moderate," or "Severe Alzheimer's
       disease and other dementias," respectively.
@@ -431,7 +444,7 @@ team is located in the following folder:
     -
   * - :math:`\text{DW}_s`
     - Disability weight of sequela :math:`s`
-    - ``dw_full.csv``
+    - :file:`all.hdf` disability weight file in our team's auxiliary data
     - For reference, the values are:
 
       - s452: 0.069 (0.046-0.099)
@@ -446,13 +459,13 @@ team is located in the following folder:
       YLDs.
   * - :math:`\text{DW}_\text{motor}`
     - Disability weight for health state "motor impairment, mild"
-    - ``dw_full.csv``
+    - :file:`all.hdf` disability weight file in our team's auxiliary data
     - Disability weights are stored as draws. See `Abie's disability
       weight notebook`_ for details.
   * - :math:`\text{DW}_\text{motor+cog}`
     - Disability weight for  health state "motor plus cognitive
       impairments, mild"
-    - ``dw_full.csv``
+    - :file:`all.hdf` disability weight file in our team's auxiliary data
     - Disability weights are stored as draws. See `Abie's disability
       weight notebook`_ for details.
   * - :math:`\text{DW}_\text{MCI}`
@@ -469,7 +482,7 @@ team is located in the following folder:
       for further explanation.
   * - :math:`T_X`
     - The time at which a simulant enters the cause state :math:`X`
-    - Random variable for each simulant
+    - random variable for each simulant
     - :math:`T_\text{BBBM}` is used to determine how long a simulant has
       been in the BBBM-AD state, in order to compute the hazard rate of
       transitioning to MCI-AD at a given simulation time :math:`t`
@@ -538,6 +551,8 @@ team is located in the following folder:
     - :math:`\Delta_\text{BBBM} + \Delta_\text{MCI} + \Delta_\text{AD}`
     -
 
+.. _Abie's population and mortality forecasts notebook:
+  https://github.com/ihmeuw/vivarium_csu_alzheimers/blob/39fe76203a8031da7983bcb5d8824216a61b5d43/src/vivarium_csu_alzheimers/data/population_forecasts/2025_08_12a_alz_artifact_forecast_population_and_mortality.ipynb
 .. _Abie's disability weight notebook:
   https://github.com/ihmeuw/vivarium_research_alzheimers/blob/4d5dde0b74eb09ea997af7c2de88b81670ba7d61/2025_08_03a_alz_dw_explore.ipynb
 .. _gamma distribution:
