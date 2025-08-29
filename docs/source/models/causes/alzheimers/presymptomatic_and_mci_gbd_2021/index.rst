@@ -98,10 +98,10 @@ restriction on YLDs for the MCI-AD state of the cause model below.
     - 95 plus
     - age_group_id = 235
   * - YLD age group start
-    - * 40 to 44 for AD cause state
+    - * 40 to 44 for AD-dementia cause state
       * No *a priori* age restriction for MCI-AD cause state
-    - * Restriction to age_group_id = 13 (40 to 44) for AD cause state
-        is from GBD
+    - * Restriction to age_group_id = 13 (40 to 44) for AD-dementia
+        cause state is from GBD
       * In practice, the age start for MCI-AD will be age_group_id = 11
         (30 to 34) because we will be adding simulants at most 7 years
         before AD incidence (so 40 - 7 = 33, in the 30-34 age group)
