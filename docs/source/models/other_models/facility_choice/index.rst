@@ -575,30 +575,6 @@ Portfolio research repository.
   status, because of the correlations of :math:`u_\text{IFD}` with
   :math:`u_\text{ANC}` and :math:`u_\text{cat}`.
 
-For reference when validating the model, the in-facility delivery
-proportions from GBD 2021 (covariate ID 51, "In-Facility Delivery
-(proportion)") are listed below. The observed overall IFD proportions in
-the simulation should match these values, but these probabilities will
-not be used directly in the simulation (they were used as one of the
-inputs in calibrating the model to find the causal probabilities above).
-
-.. list-table:: Proportion of at-home vs. in-facility deliveries
-  :header-rows: 1
-  :widths: 20 10 10 10
-
-  * - IFD status
-    - Ethiopia
-    - Nigeria
-    - Pakistan
-  * - at-home
-    - 0.507432
-    - 0.479903
-    - 0.228234
-  * - in-facility
-    - 0.492568
-    - 0.520097
-    - 0.771766
-
 .. _facility_choice_choosing_bemonc_cemonc_section:
 
 Choosing BEmONC vs. CEmONC
@@ -673,6 +649,44 @@ facility (F) of each simulant.**
   intrapartum period.
 
   TODO: update to be consistent with BEMONC/CEMONC terminology?
+
+Overall delivery setting rates
+-------------------------------
+
+While these values will not be used as direct inputs in assigning a 
+delivery setting to simulants in the simulation, the population-level
+delivery setting rates will still be relevant in calculating PAFs for
+interventions that vary by delivery setting as well as for verification
+and validation. Therefore, the following parameters should be included
+in the artifact:
+
+.. list-table:: Delivery setting rate parameters to be included in the artifact
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Use
+  * - :code:`bemonc_facility_fraction`
+    - Proportion of births that occur in facility settings (inclusive of both BEmONC and CEmONC facilities) that occur in BEmONC facilities
+    - Defined in the `Choosing BEmONC vs. CEmONC`_ section
+    - Directly used in assigning a delivery facility in the facility choice model
+  * - :code:`in_facility_delivery_proportion`
+    - Proportion of all births that occur in facility settings (including both BEmONC and CEmONC)
+    - mean_value of GBD covariate 51 (do NOT include any parameter uncertainty in this parameter as only the mean_value was used as an input to the delivery facility model calibration)
+    - Used in the calculation of the following parameters
+  * - :code:`p_home`
+    - Proportion of all births that occur at home
+    - :code:`1 - in_facility_delivery_proportion`
+    - Used in calculating total population intervention coverage as a weighted average across delivery settings for intervention with coverage that varies by delivery facility at baseline and for V&V
+  * - :code:`p_bemonc`
+    - Proportion of all births that occur in BEmONC facilities
+    - :code:`in_facility_delivery_proportion * bemonc_facility_fraction`
+    - Used in calculating total population intervention coverage as a weighted average across delivery settings for intervention with coverage that varies by delivery facility at baseline and for V&V
+  * - :code:`p_cemonc`
+    - Proportion of all births that occur in CEmONC facilities
+    - :code:`in_facility_delivery_proportion * (1 - bemonc_facility_fraction)`
+    - Used in calculating total population intervention coverage as a weighted average across delivery settings for intervention with coverage that varies by delivery facility at baseline and for V&V
 
 Challenge of calibrating the model
 ----------------------------------
