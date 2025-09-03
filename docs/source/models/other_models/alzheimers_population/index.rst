@@ -378,7 +378,7 @@ time :math:`t + \Delta` should be
       \left( Y^\text{real}_{g + (n+1)w,\, t+\Delta} \right).
 
 For example, if we write :math:`g = (F,\,70)` for females aged 70 - 74,
-:math:`g + 5 = (F,\,75)` for females aged 75 - 79, etc. the number of
+:math:`g + 5 = (F,\,75)` for females aged 75 - 79, etc., the number of
 females aged 70 - 74 who enter the BBBM-AD state in 2025 is calculated
 as
 
@@ -399,8 +399,9 @@ Note that we are assuming that the incidence rate
 In order to get the correct number of people transitioning into the
 AD-dementia state at time :math:`t+\Delta`, we need to account for
 people who will die during the BBBM-AD and MCI-AD stages. The number of
-deaths among people in demographic group :math:`g` at time :math:`t`
-that occur between times :math:`t` and :math:`t+\Delta` should be
+deaths that occur between times :math:`t` and :math:`t+\Delta` among
+people who are in demographic group :math:`g` at time :math:`t` should
+be
 
 .. math::
 
