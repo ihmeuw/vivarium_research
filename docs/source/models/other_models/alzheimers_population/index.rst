@@ -363,9 +363,9 @@ such that
 With our current parameters, :math:`\Delta = 7` years and :math:`w=5`
 years , so :math:`n = 1` and :math:`r = 2`.
 
-The number of real-world people in demographic group :math:`g` who enter the
-BBBM-AD state at time :math:`t` and transition to AD-dementia at time
-:math:`t + \Delta` should be
+The number of real-world people in demographic group :math:`g` who enter
+the BBBM-AD state at time :math:`t` and transition to AD-dementia at
+time :math:`t + \Delta` should be
 
 .. math::
 
@@ -377,9 +377,30 @@ BBBM-AD state at time :math:`t` and transition to AD-dementia at time
     \left(i_{g + (n+1)w,\, t+\Delta}^\text{AD}\right)
       \left( Y^\text{real}_{g + (n+1)w,\, t+\Delta} \right).
 
-The number of deaths among people in demographic group :math:`g` at time
-:math:`t` that occur between times :math:`t` and :math:`t+\Delta` should
-be
+For example, if we write :math:`g = (F,\,70)` for females aged 70 - 74,
+:math:`g + 5 = (F,\,75)` for females aged 75 - 79, etc. the number of
+females aged 70 - 74 who enter the BBBM-AD state in 2025 is calculated
+as
+
+.. math::
+
+  I_{(F,\,70),\, 2025}^\text{BBBM}
+  = \left(\frac{3}{5}\right)
+    \left(i_{(F, 75)}^\text{AD}\right)
+     \left(Y^\text{real}_{(F,75),\, 2032}\right)
+  + \left(\frac{2}{5}\right)
+    \left(i_{(F,80)}^\text{AD}\right)
+      \left( Y^\text{real}_{(F,80),\, 2032} \right).
+
+Note that we are assuming that the incidence rate
+:math:`i_{g,t}^\text{AD}` of AD-dementia does not depend on the time
+:math:`t`.
+
+In order to get the correct number of people transitioning into the
+AD-dementia state at time :math:`t+\Delta`, we need to account for
+people who will die during the BBBM-AD and MCI-AD stages. The number of
+deaths among people in demographic group :math:`g` at time :math:`t`
+that occur between times :math:`t` and :math:`t+\Delta` should be
 
 .. math::
 
@@ -392,6 +413,17 @@ be
   \end{align*}
 
 (still figuring out how to write this down...)
+
+The total number of real-world people in demographic group :math:`g` who
+will be entering the BBBM-AD state at time :math:`t` should then be
+:math:`I_{g,t}^\text{BBBM} + D_{g,t}`. The rate at which we want
+to add simulants into the BBBM-AD state is then
+
+.. math::
+
+  \lambda_{g,t} = S \cdot \left(I_{g,t}^\text{BBBM} + D_{g,t}\right),
+
+where :math:`S` is the model scale defined above.
 
 Implementation and data tables
 +++++++++++++++++++++++++++++++
