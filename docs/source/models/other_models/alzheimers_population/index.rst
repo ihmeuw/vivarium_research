@@ -350,6 +350,49 @@ data.
 Calculating entrance rate with  presymptomatic and MCI stages
 -------------------------------------------------------------
 
+Let :math:`\Delta = \Delta_\text{BBBM} + \Delta_\text{MCI}` be the total
+duration of pre-dementia AD, and let :math:`w` be the width of an
+age group (i.e., 5 years for GBD age groups). There exists a unique
+integer :math:`n` and real number :math:`r` with :math:`0\le r < w`
+such that
+
+.. math::
+
+  \Delta = n w + r.
+
+With our current parameters, :math:`\Delta = 7` years and :math:`w=5`
+years , so :math:`n = 1` and :math:`r = 2`.
+
+The number of real-world people in demographic group :math:`g` who enter the
+BBBM-AD state at time :math:`t` and transition to AD-dementia at time
+:math:`t + \Delta` should be
+
+.. math::
+
+  I_{g,t}^\text{BBBM}
+  = \left(1 - \frac{r}{w}\right)
+    \left(i_{g + nw,\, t+\Delta}^\text{AD}\right)
+     \left(Y^\text{real}_{g + nw,\, t+\Delta}\right)
+  + \left(\frac{r}{w}\right)
+    \left(i_{g + (n+1)w,\, t+\Delta}^\text{AD}\right)
+      \left( Y^\text{real}_{g + (n+1)w,\, t+\Delta} \right).
+
+The number of deaths among people in demographic group :math:`g` at time
+:math:`t` that occur between times :math:`t` and :math:`t+\Delta` should
+be
+
+.. math::
+
+  \begin{align*}
+  D_{g,t}
+  &= \left(\frac{w}{2}\right)
+    \left(m_{g,\, t}^\text{AD}\right)
+     \left(Y^\text{real}_{g,\, t}\right)
+    + \dotsb
+  \end{align*}
+
+(still figuring out how to write this down...)
+
 Implementation and data tables
 +++++++++++++++++++++++++++++++
 
