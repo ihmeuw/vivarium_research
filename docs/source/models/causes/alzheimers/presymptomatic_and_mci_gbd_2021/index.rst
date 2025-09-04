@@ -313,13 +313,13 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
   Note that since the GBD prevalence applies to a given demographic
   group, so does the formula for :math:`p_\text{(all AD states)}`. The
   above formula applies to age groups 40+ since this is where
-  prevalence_c543 is nonzero. For ages 30--39, use the value of
-  :math:`p_\text{(all AD states)}` for age group 40--44; for ages <30,
-  set :math:`p_\text{(all AD states)} = 0`. The following state data
-  table shows the resulting initial prevalences when modeling the total
-  population, as well as the birth prevalences, which replace the
-  entrance prevalences. The excess mortality rate and disability weight
-  of each state remain the same.
+  prevalence_c543 and :math:`\Delta_\text{AD}` are nonzero. For ages
+  30--39, use the value of :math:`p_\text{(all AD states)}` for age
+  group 40--44; for ages <30, set :math:`p_\text{(all AD states)} = 0`.
+  The following state data table shows the resulting initial prevalences
+  when modeling the total population, as well as the birth prevalences,
+  which replace the entrance prevalences. The excess mortality rate and
+  disability weight of each state remain the same.
 
   .. list-table:: State data when modeling entire population including susceptible simulants
     :header-rows: 1
