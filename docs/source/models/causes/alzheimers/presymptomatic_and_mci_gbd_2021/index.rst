@@ -240,9 +240,15 @@ in the :ref:`Alzheimer's population model
     - emr_c543
     - :math:`\text{DW}_\text{c543}`
 
-**Note:** The variable :math:`\Delta_\textsf{X}` denotes the average duration
-in cause state X, as defined in the :ref:`data values and sources table below
-<2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`.
+**Note:** The variable :math:`\Delta_\textsf{X}` denotes the average
+duration in cause state X, as defined in the :ref:`data values and
+sources table below
+<2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`. If
+necessary, for age groups in which :math:`\Delta_\text{(all AD states)}
+= 0`, the ratio :math:`\Delta_\textsf{X} / \Delta_\text{(all AD
+states)}` may be defined (arbitrarily) to be 1/3 for all three AD-states
+X to avoid division by zero errors in code and to have prevalences that
+still add up to 1.
 
 .. list-table:: Transition Data
   :header-rows: 1
