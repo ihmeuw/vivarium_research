@@ -384,6 +384,7 @@ scenario, and input draw.
     - Default
     - Default
 
+
 5.2 V & V Tracking
 ------------------------
 
@@ -531,11 +532,12 @@ scenario, and input draw.
       group and sex, but it may be more prudent to start by looking at
       aggregated results.
 
-      * Everything from 2.0, except use FHS values for ACMR in the total mortality calculation
+      * Everything from 2.0, except use FHS values for ACMR in the overall mortality (ACMR - CSMR + EMR) vs artifact comparison
+      * Verify that (ACMR - CSMR + EMR) decreases slightly from 2025 to 2050 and then levels off
       * Since there are so many (age groups, years, locations, sex) combinations that might be tested, it will be good enough to confirm that new simulant counts and total mortality rates line up for 2030, 2060, and 2090, and for two locations.
-    -
-    -
-
+    - * The number of new simulants entering the sim matches the target number, which leads to a prevalence counts higher than estimated by GBD/FHS, but closer than in Model 2.
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/32e7d3d44f540a9b9620b21b5a137f626631475c/verification_and_validation/2025_08_25b_model3.0_vv.ipynb
+  
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
 
@@ -547,7 +549,7 @@ scenario, and input draw.
     - Thought to be due to incorrect disability weight aggregation
     - Will be updated when we add severity levels, recheck then
     - Model 5
-  * - Total simulation population increasing in model 2
+  * - Total simulation population increasing in model 3
     - Thought to be due to GBD mismatch in mortality and incidence
-    - Population and ACMR's change in model 3 to use FHS data, reassess then
-    - Model 3
+    - Review again when we split AD and OD 
+    - Model 6
