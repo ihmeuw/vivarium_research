@@ -307,14 +307,19 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
 
     p_\text{(all AD states)}
     = \frac{\Delta_\text{(all AD states)}}{\Delta_\text{AD}}
-      \cdot \text{prevalence_c543}.
+      \cdot \text{prevalence_c543}
+    \quad\text{(for ages 40+)}.
 
   Note that since the GBD prevalence applies to a given demographic
   group, so does the formula for :math:`p_\text{(all AD states)}`. The
-  following state data table shows the resulting initial prevalences
-  when modeling the total population, as well as the birth prevalences,
-  which replace the entrance prevalences. The excess mortality rate and
-  disability weight of each state remain the same.
+  above formula applies to age groups 40+ since this is where
+  prevalence_c543 is nonzero. For ages 30--39, use the value of
+  :math:`p_\text{(all AD states)}` for age group 40--44; for ages <30,
+  set :math:`p_\text{(all AD states)} = 0`. The following state data
+  table shows the resulting initial prevalences when modeling the total
+  population, as well as the birth prevalences, which replace the
+  entrance prevalences. The excess mortality rate and disability weight
+  of each state remain the same.
 
   .. list-table:: State data when modeling entire population including susceptible simulants
     :header-rows: 1
@@ -323,17 +328,19 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
       - Initial prevalence
       - Birth prevalence
     * - S
-      - :math:`1 - \frac{\Delta_\text{(all AD states)}}
-        {\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+      - :math:`1 - p_\text{(all AD states)}`
       - 1
     * - BBBM-AD
-      - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+      - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{(all AD states)}}
+        \cdot p_\text{(all AD states)}`
       - 0
     * - MCI-AD
-      - :math:`\frac{\Delta_\text{MCI}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+      - :math:`\frac{\Delta_\text{MCI}}{\Delta_\text{(all AD states)}}
+        \cdot p_\text{(all AD states)}`
       - 0
     * - AD-dementia
-      - :math:`\text{prevalence_c543}`
+      - :math:`\frac{\Delta_\text{AD}}{\Delta_\text{(all AD states)}}
+        \cdot p_\text{(all AD states)}`
       - 0
 
   .. note::
@@ -555,7 +562,8 @@ are located at the following paths on the cluster:
       is not possible.
   * - :math:`\Delta_\text{AD}`
     - Average duration of AD-dementia
-    - prevalence_c543 / incidence_rate_c543
+    - * prevalence_c543 / incidence_rate_c543 for ages 40+
+      * 0 for ages under 40
     - Follows from the steady-state equation (prevalent cases) = (incident
       cases) x (average duration). Note that the denominator is the **raw
       total-population incidence rate from GBD**, not the
