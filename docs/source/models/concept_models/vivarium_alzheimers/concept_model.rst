@@ -383,6 +383,12 @@ scenario, and input draw.
     - * Locations: USA, China
     - Default
     - Default
+  * - 3.1
+    - Use draws from forecasted population structure data rather than mean value
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
 
 
 5.2 V & V Tracking
