@@ -276,11 +276,7 @@ Here is some pseudocode for deriving the PAF and RR of "lack of access to the in
   )
   paf_no_probiotic = 1 - (p_sepsis_probiotic / p_sepsis)
 
-.. note::
-
-  The above strategy was used for the implementation of this intervention model in the MNCNH portfolio. Note that the value of "p_sepsis" is arbitrary and does not directly affect the resulting PAF value. Documentation for the implemented strategy above and an alternative simpler strategy below (including links to relevant parameters used in the above strategy) are both included here for reference.
-
-**Alternative PAF Derivation**: An alternative, and possibly simpler derivation of the PAF that will calibrate this model is shown below:
+The above strategy was used for the implementation of this intervention model in the MNCNH portfolio. Note that the value of "p_sepsis" is arbitrary and does not directly affect the resulting PAF value. Documentation for the implemented strategy above and the simplified versiow below (including links to relevant parameters used) are both shown for reference.
 
 .. math::
 
