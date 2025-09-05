@@ -42,10 +42,14 @@ Alzheimer's Population Model with Demographic Forecasts
     - Definition
   * - AD
     - Alzheimer's Disease
+  * - BBBM
+    - Blood-Based Biomarker
   * - GBD
     - Global Burden of Disease
   * - FHS
     - Future Health Scenarios
+  * - MCI
+    - Mild Cognitive Impairment
 
 Overview
 ++++++++
@@ -55,13 +59,27 @@ Alzheimer's disease (and other dementias), in order to reduce the
 necessary population size for the :ref:`CSU Alzheiemer's simulation
 <2025_concept_model_vivarium_alzheimers>`. The model document is split
 into two parts: 1) initializing the population, and 2) adding new
-simulants during the simulated timeframe.  Since this is the model that
+simulants during the simulated timeframe. We will also describe two
+different versions of the population model, corresponding to
+progressive model version of the CSU Alzheiemer's simulation:
+
+#. **Models 2 and 3:** Modeling simulants with Alzheimer's disease (AD)
+   and other dementias as defined by GBD
+#. **Model 4 and above:** Modeling simulants with presymptomatic AD,
+   MCI, or AD dementia
+
+Since this is the model that
 includes details on how to use forecasts of population size, we have also
 included information on how to use forecasts of all-cause mortality rate
 (this is not really part of the Alzheimer's Population Model however).
 
 Initializing the Population
 +++++++++++++++++++++++++++
+
+We will first describe how to initialize the population for AD and other
+dementias ad defined by GBD, then we will explain how to modify the
+initialization strategy when including the presymptomatic and MCI stages
+of AD.
 
 Model Scale
 ---------------------
@@ -188,6 +206,31 @@ known parameters.
     = X_{t_0}.
     \end{align*}
 
+Initializing simulants with  presymptomatic and MCI stages
+----------------------------------------------------------
+
+Starting in Model 4 of the CSU Alzheimer's simulation, the Alzheimer's
+cause model includes two pre-dementia stages, BBBM-AD, and MCI-AD, in
+addition to the dementia stage AD-dementia. When computing the model
+scale and initializing demographic subgroups, :math:`p_\text{AD}` should
+be replaced by :math:`p_\text{(all AD states)}`, the combined prevalence
+of the three states BBBM-AD, MCI-AD, and AD-dementia, across all
+demographic groups at time :math:`t_0`. Similarly, :math:`p_{g,t}`
+should now refer to the combined prevalence of all three AD stages in
+demographic group :math:`g` at time :math:`t`. The value of
+:math:`p_{g,t}` is :ref:`defined on the Alzheimer's cause model page
+<alzheimers_cause_state_data_including_susceptible_note>`. With these
+updated definitions, the model scale and initial population size in each
+group are defined the same as above:
+
+.. math::
+
+  S = \frac{X_{t_0}}{p_\text{(all AD states)}\cdot Y^\text{real}_{t_0}}
+    = \frac{X_{t_0}}{\sum_g p_{g,t_0}\cdot Y^\text{real}_{g,t_0}},
+  \qquad
+  X_{g,t_0} = X_{t_0} \cdot \frac{p_{g,t_0} \cdot Y^\text{real}_{g,t_0}}
+    {\sum_g p_{g,t_0} \cdot Y^\text{real}_{g,t_0}}.
+
 Adding New Simulants
 ++++++++++++++++++++
 
@@ -283,8 +326,107 @@ This is the population we pull from GBD using get_population. Thus,
 
 .. _plots of AD incidence from GBD Compare: http://ihmeuw.org/739c
 
-Implementation and data tables
+Alternative view using incidence count
 --------------------------------------
+
+The most direct way to estimate :math:`A_g'(t)` is to assume it is
+constant, in which case it equals its time-average.  For example, if
+:math:`y(t)` denotes the year to which time :math:`t` belongs, and we
+assume :math:`A_g'(t)` is constant during the year :math:`y(t)`, then
+
+.. math::
+
+  A_g'(t)
+  = \frac{\text{# of incident cases of AD in group $g$ in year $y(t)$}}
+    {\text{1 year}}.
+
+This ends up being equivalent to the method using incidence rates above,
+but whereas the *count* of incident cases is likely to vary considerably
+due to changing demographics, the incidence *rate* of AD is likely to
+remain fairly stable over time. Thus, using using the incidence rate and
+the total population is a more appropriate way to use the available
+data.
+
+Calculating entrance rate with  presymptomatic and MCI stages
+-------------------------------------------------------------
+
+Let :math:`\Delta = \Delta_\text{BBBM} + \Delta_\text{MCI}` be the total
+duration of pre-dementia AD, and let :math:`w` be the width of an
+age group (i.e., 5 years for GBD age groups). There exists a unique
+integer :math:`n` and real number :math:`r` with :math:`0\le r < w`
+such that
+
+.. math::
+
+  \Delta = n w + r.
+
+With our current parameters, :math:`\Delta = 7` years and :math:`w=5`
+years , so :math:`n = 1` and :math:`r = 2`.
+
+The number of real-world people in demographic group :math:`g` who enter
+the BBBM-AD state at time :math:`t` and transition to AD-dementia at
+time :math:`t + \Delta` should be
+
+.. math::
+
+  I_{g,t}^\text{BBBM}
+  = \left(1 - \frac{r}{w}\right)
+    \left(i_{g + nw,\, t+\Delta}^\text{AD}\right)
+     \left(Y^\text{real}_{g + nw,\, t+\Delta}\right)
+  + \left(\frac{r}{w}\right)
+    \left(i_{g + (n+1)w,\, t+\Delta}^\text{AD}\right)
+      \left( Y^\text{real}_{g + (n+1)w,\, t+\Delta} \right).
+
+For example, if we write :math:`g = (F,\,70)` for females aged 70 - 74,
+:math:`g + 5 = (F,\,75)` for females aged 75 - 79, etc. the number of
+females aged 70 - 74 who enter the BBBM-AD state in 2025 is calculated
+as
+
+.. math::
+
+  I_{(F,\,70),\, 2025}^\text{BBBM}
+  = \left(\frac{3}{5}\right)
+    \left(i_{(F, 75)}^\text{AD}\right)
+     \left(Y^\text{real}_{(F,75),\, 2032}\right)
+  + \left(\frac{2}{5}\right)
+    \left(i_{(F,80)}^\text{AD}\right)
+      \left( Y^\text{real}_{(F,80),\, 2032} \right).
+
+Note that we are assuming that the incidence rate
+:math:`i_{g,t}^\text{AD}` of AD-dementia does not depend on the time
+:math:`t`.
+
+In order to get the correct number of people transitioning into the
+AD-dementia state at time :math:`t+\Delta`, we need to account for
+people who will die during the BBBM-AD and MCI-AD stages. The number of
+deaths among people in demographic group :math:`g` at time :math:`t`
+that occur between times :math:`t` and :math:`t+\Delta` should be
+
+.. math::
+
+  \begin{align*}
+  D_{g,t}
+  &= \left(\frac{w}{2}\right)
+    \left(m_{g,\, t}^\text{AD}\right)
+     \left(Y^\text{real}_{g,\, t}\right)
+    + \dotsb
+  \end{align*}
+
+(still figuring out how to write this down...)
+
+The total number of real-world people in demographic group :math:`g` who
+will be entering the BBBM-AD state at time :math:`t` should then be
+:math:`I_{g,t}^\text{BBBM} + D_{g,t}`. The rate at which we want
+to add simulants into the BBBM-AD state is then
+
+.. math::
+
+  \lambda_{g,t} = S \cdot \left(I_{g,t}^\text{BBBM} + D_{g,t}\right),
+
+where :math:`S` is the model scale defined above.
+
+Implementation and data tables
++++++++++++++++++++++++++++++++
 
 ..
   To summarize, here is the algorithm for adding new simulants at time
@@ -314,27 +456,6 @@ Implementation and data tables
   into each age group at time :math:`t_0` is also random, but I'm not
   sure exactly how it works (e.g., is the number of *initial* simulants
   in each group also a Poisson random variable?).
-
-Alternative view using incidence count
---------------------------------------
-
-The most direct way to estimate :math:`A_g'(t)` is to assume it is
-constant, in which case it equals its time-average.  For example, if
-:math:`y(t)` denotes the year to which time :math:`t` belongs, and we
-assume :math:`A_g'(t)` is constant during the year :math:`y(t)`, then
-
-.. math::
-
-  A_g'(t)
-  = \frac{\text{# of incident cases of AD in group $g$ in year $y(t)$}}
-    {\text{1 year}}.
-
-This ends up being equivalent to the method using incidence rates above,
-but whereas the *count* of incident cases is likely to vary considerably
-due to changing demographics, the incidence *rate* of AD is likely to
-remain fairly stable over time. Thus, using using the incidence rate and
-the total population is a more appropriate way to use the available
-data.
 
 Data Tables
 -----------
