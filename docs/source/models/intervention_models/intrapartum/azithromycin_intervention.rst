@@ -185,7 +185,7 @@ unavailable occurs with probability that the birth is in a BEmONC facility times
 
 When we fill in the location-specific values for delivery facility rates, azithromycin coverage, relative risk of maternal sepsis incidence with azithromycin, 
 and maternal sepsis incidence probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{maternal_sepsis}|\text{azithromycin})` 
-and :math:`p(\text{maternal_sepsis}|\text{no azithromycin})`), , which we can solve analytically.
+and :math:`p(\text{maternal_sepsis}|\text{no azithromycin})`), which we can solve analytically.
 
 As mentioned above, it is convenient to model this intervention like a dichotomous risk factor, so that we can reuse the
 :class:`Risk<vivarium_public_health.risks.base_risk.Risk>`
