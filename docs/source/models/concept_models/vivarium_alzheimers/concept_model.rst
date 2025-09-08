@@ -543,7 +543,12 @@ scenario, and input draw.
       * Since there are so many (age groups, years, locations, sex) combinations that might be tested, it will be good enough to confirm that new simulant counts and total mortality rates line up for 2030, 2060, and 2090, and for two locations.
     - * The number of new simulants entering the sim matches the target number, which leads to a prevalence counts higher than estimated by GBD/FHS, but closer than in Model 2.
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/32e7d3d44f540a9b9620b21b5a137f626631475c/verification_and_validation/2025_08_25b_model3.0_vv.ipynb
+  * - 3.1
+    - Same as 3.0 (notebook copied)
+    - * Results are consistent with 3.0 results
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2025_09_05a_model3.1_vv.ipynb
   
+
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
 
