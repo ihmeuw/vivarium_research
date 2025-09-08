@@ -629,7 +629,7 @@ Postpartum component
     - 
   * - 20. Ultrasound V&V
     - 100% at ANC (no ultrasound among those who do not attend ANC)
-    - 50% standard US, 50% AI-assited US 
+    - 50% standard US, 50% AI-assisted US 
     - Baseline
     - Baseline
     - Baseline
