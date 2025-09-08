@@ -650,6 +650,8 @@ facility (F) of each simulant.**
 
   TODO: update to be consistent with BEMONC/CEMONC terminology?
 
+.. _facility_setting_rates:
+
 Overall delivery setting rates
 -------------------------------
 
