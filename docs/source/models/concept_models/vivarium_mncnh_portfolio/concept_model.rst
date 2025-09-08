@@ -1417,7 +1417,7 @@ Default stratifications to all observers should include scenario and input draw.
 
       * Believed preterm status added to maternal population (ANC) observer
       * Updated ANC, IFD, and LBWSG propensity values
-      * TBD updates to gestational age estimation error values
+      * Updates to `gestational age estimation error values <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/bc7f99565db6b7867ec417e099b0f8da22ed0a07/src/vivarium_gates_mncnh/constants/data_values.py#L169>`_ to match :ref:`documentation <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Baseline and Ultrasound V&V scenario (scenario #20)
     - ``model16.1``
     - Default
@@ -2047,8 +2047,8 @@ Default stratifications to all observers should include scenario and input draw.
     - Hussain to investigate
     - For model 16.1
   * - Gestational age estimation error values differ between the :ref:`documentation <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>` and `simulation <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/bc7f99565db6b7867ec417e099b0f8da22ed0a07/src/vivarium_gates_mncnh/constants/data_values.py#L169>`_
-    - Unknown
-    - Wait to hear back from Nathaniel about which values were used in the facility choice data generation simulation and then update either the values in the simulation or the docs accordingly
+    - Simulation values are out of date 
+    - Update simulation values to match docs
     - For model 16.1
   * - Various facility choice model V&V targets not met, including:
       * IFD slightly overestimated
