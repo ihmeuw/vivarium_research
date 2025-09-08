@@ -2042,7 +2042,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Didn't get added
     - Hussain to investigate/update
     - For model 16.1
-  * - Identical values for ANC, IFD, and LBWSG proensities
+  * - Identical values for ANC, IFD, and LBWSG propensities
     - Unknown
     - Hussain to investigate
     - For model 16.1
