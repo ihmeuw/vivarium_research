@@ -158,7 +158,7 @@ appropriate location IDs for the model you're working on):
 
   LBWSG_REI_ID = 339
   ETHIOPIA_ID = 179
-  GBD_2021_RELEASE_ID = 16
+  GBD_2021_RELEASE_ID = 9
 
   lbwsg_exposure = get_draws(
         gbd_id_type='rei_id',
