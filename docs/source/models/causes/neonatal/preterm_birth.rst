@@ -195,7 +195,7 @@ where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 
   - The population size per LBWSG exposure category per sex is required to be a perfect square to be compatible with our strategy of initializing individual exposures on a grid within each LBWSG exposure category
   
-  - :math:`23^2` (529) was determined to be an adequate population size per LBWSG exposure category per sex in a `previous analysis <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/LBWSG%20PAF%20population%20size%20check.ipynb>`_ of the PAF using all 59 LBWSG exposure categories
+  - :math:`23^2` (529) was determined to be an adequate population size per LBWSG exposure category per sex in a `previous analysis <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/LBWSG%20PAF%20population%20size%20check.ipynb>`_ of the PAF using all 58 LBWSG exposure categories
   
   - We would like to increase the population size per category relative to the previous analysis by a factor of at least 58/38, as we will be performing this calculation on the 38 preterm categories among of the 58 total categories. We've actually increased it by a factor of :math:`41^2 \div 23^2 \approx 3`, so substantially more.
 
