@@ -351,23 +351,46 @@ data.
 Calculating entrance rate with  presymptomatic and MCI stages
 -------------------------------------------------------------
 
-Let :math:`B_g(t)` be the cumulative number of incident cases of BBBM-AD by
-time :math:`t` in demographic group :math:`g` in the real population.
-When including the presymptomatic and MCI stages of AD, the rate
-at which we want to add simulants is now
+Let :math:`B_g(t)` be the cumulative number of incident cases of
+BBBM-presymptomatic AD by time :math:`t` in demographic group :math:`g`
+in the real population. When including the presymptomatic and MCI stages
+of AD, instead of defining :math:`\lambda_{g,t}` in terms of
+:math:`A_g'(t)`, the rate at which we want to add simulants is now
 
 .. math::
 
   \lambda_{g,t} = S \cdot B_g'(t),
 
-where :math:`B_g'(t)` is the derivative of :math:`B_g(t)` with respect
-to :math:`t`.
+where :math:`S` is the model scale and :math:`B_g'(t)` is the derivative
+of :math:`B_g(t)` with respect to :math:`t`. We can decompose
+:math:`B_g(t)` into two components:
+
+.. math::
+
+  B_g(t) = B_g^\text{AD}(t) + B_g^\text{die}(t),
+
+where, at time :math:`t`,
+
+* :math:`B_g^\text{AD}(t)` = the cumulative number of incident cases of BBBM-AD in
+  group :math:`g` that will eventually progress to AD-dementia,
+* :math:`B_g^\text{die}(t)` = the cumulative number of incident cases of BBBM-AD in
+  group :math:`g` that will die before they progress to AD-dementia.
+
+Note that :math:`B_g^\text{AD}` and :math:`B_g^\text{die}` are defined in terms of *future*
+events with respect to the time :math:`t`, but that's fine.
+
+We will estimate :math:`B_g'(t) = \frac{d}{dt}B_g^\text{AD}(t) +
+\frac{d}{dt}B_g^\text{die}(t)` by making the simplifying assumption that
+**everyone's duration of pre-dementia AD is exactly equal to the average
+duration of BBBM-AD plus MCI-AD**. This will simplify our calculations
+and will hopefully give a good enough approximation to closely match the
+values of :math:`A_g'(t)` calculated as above.
 
 Let :math:`\Delta = \Delta_\text{BBBM} + \Delta_\text{MCI}` be the total
-duration of pre-dementia AD, and let :math:`w` be the width of an
-age group (i.e., 5 years for GBD age groups). There exists a unique
-integer :math:`n` and real number :math:`r` with :math:`0\le r < w`
-such that
+average duration of pre-dementia AD, and let :math:`w` be the width of
+an age group (i.e., 5 years for GBD age groups). There exists a unique
+integer :math:`n` and real number :math:`r` with :math:`0\le r < w` such
+that
 
 .. math::
 
@@ -390,9 +413,9 @@ time :math:`t + \Delta` should be
     \left(i_{g + (n+1)w,\, t+\Delta}^\text{AD}\right)
       \left( Y^\text{real}_{g + (n+1)w,\, t+\Delta} \right).
 
-For example, if we write :math:`g = (F,\,70)` for females aged 70 - 74,
-:math:`g + 5 = (F,\,75)` for females aged 75 - 79, etc., the number of
-females aged 70 - 74 who enter the BBBM-AD state in 2025 and enter
+For example, if we write :math:`g = (F,\,70)` for females aged 70--74,
+:math:`g + 5 = (F,\,75)` for females aged 75--79, etc., the number of
+females aged 70--74 who enter the BBBM-AD state in 2025 and enter
 AD-dementia on average :math:`\Delta` years later is calculated
 as
 
@@ -417,10 +440,10 @@ people who will die during the BBBM-AD and MCI-AD stages. Let
 demographic group :math:`g` entering the BBBM-AD state at time
 :math:`t`, and let :math:`\gamma_{g,t}` be the probability of one of
 these people dying before they reach the AD-dementia state. Then the
-total number of people who die during the interval :math:`[t, t+\Delta]`
-is :math:`\gamma_{g,t} J_{g,t}^\text{BBBM}`. Adding this to the number
-:math:`I_{g,t}^\text{BBBM}` who survive and transition to AD-dementia,
-we have the equation
+expected number of people who die during the interval :math:`[t,
+t+\Delta]` is :math:`\gamma_{g,t} J_{g,t}^\text{BBBM}`. Adding this to
+the number :math:`I_{g,t}^\text{BBBM}` who survive and transition to
+AD-dementia, we have the equation
 
 .. math::
 
