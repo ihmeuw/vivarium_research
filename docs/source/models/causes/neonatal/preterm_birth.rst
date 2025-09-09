@@ -189,17 +189,15 @@ where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 
   We will utilize this same LBWSG PAF calculation pipeline to calculate the normalizing constant :math:`Z` for the preterm birth cause of death. To do this, we will follow the same LBWSG PAF calculation steps, but perform it only among LBWSG exposures that have gestational ages less than 37 weeks. This pipeline then outputs a "PAF" value which is difficult/counterintuitive to interpret as a PAF, calculated as :math:`\frac{E[\text{RR}_{\text{BW,GA}} | \text{GA}<37] - 1}{E[\text{RR}_{\text{BW,GA}} | \text{GA}<37]}`, which is equal to :math:`Z + 1`. Therefore, we can use (1 - "PAF") as the :math:`Z` term for the preterm birth cause of death (with "PAF" equal to the value output from the PAF calculation pipeline).
 
-  We will use a **population size of 195_112** for this calculation. This number was selected in order to satisfy the following criteria:
-
-  - The population size per LBWSG exposure category is required to be a perfect square to be compatible with our strategy of initializing individual exposures on a grid within each LBWSG exposure category
+  We will use a population size of :math:`41^2 \times 58 \times 2 =` **194,996** for this calculation. This number was selected in order to satisfy the following criteria.
   
-  - The total population size of the PAF calculation pipeline must be divisible by the product of the number of LBWSG exposure categories (58), the number of sexes (2), and the number of age groups (2) used in the PAF calculation
-  
-  - 529 was determined to be an adequate population size per LBWSG exposure category in a `previous analysis <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/LBWSG%20PAF%20population%20size%20check.ipynb>`_ of the PAF using all 59 LBWSG exposure categories
-  
-  - We would like to increase the population size per category by a factor of at least 58/38, as we will be performing this calculation on the 38 preterm categories among of the 58 total categories
+  - The total population size of the PAF calculation pipeline must be divisible by the product of the number of LBWSG exposure categories (58) and the number of sexes (2) used in the PAF calculation
 
-
+  - The population size per LBWSG exposure category per sex is required to be a perfect square to be compatible with our strategy of initializing individual exposures on a grid within each LBWSG exposure category
+  
+  - :math:`23^2` (529) was determined to be an adequate population size per LBWSG exposure category per sex in a `previous analysis <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/LBWSG%20PAF%20population%20size%20check.ipynb>`_ of the PAF using all 59 LBWSG exposure categories
+  
+  - We would like to increase the population size per category relative to the previous analysis by a factor of at least 58/38, as we will be performing this calculation on the 38 preterm categories among of the 58 total categories. We've actually increased it by a factor of :math:`41^2 \div 23^2 \approx 3`, so substantially more.
 
 .. note::
   the choice to use :math:`\text{RR}_{\text{BW},\text{GA}}` in this equation is essentially arbitrary, and it could be replaced by any other nonnegative "weight function" :math:`w(\text{BW},\text{GA})` as long it doesn't lead to a negative "other causes" mortality risk.
