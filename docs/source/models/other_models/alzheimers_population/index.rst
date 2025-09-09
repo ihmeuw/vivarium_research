@@ -273,23 +273,23 @@ that we can estimate from the available data:
   = S \cdot A_g'(t)
   = S \cdot \frac{A_g'(t)}{Y^\text{real}_{g,t}}
     \cdot Y^\text{real}_{g,t}
-  = S \cdot i_{g,t} \cdot Y^\text{real}_{g,t},
+  = S \cdot i_{g,t}^\text{AD} \cdot Y^\text{real}_{g,t},
 
-where :math:`i_{g,t} = A_g'(t) /Y^\text{real}_{g,t}` is the **total
-population incidence hazard** of AD in demographic group :math:`g` at
-time :math:`t`. We know the model scale :math:`S` from
+where :math:`i_{g,t}^\text{AD} = A_g'(t) /Y^\text{real}_{g,t}` is the
+**total population incidence hazard** of AD in demographic group
+:math:`g` at time :math:`t`. We know the model scale :math:`S` from
 :eq:`model_scale_eq` above, and we can estimate the quantities
-:math:`i_{g,t}` and :math:`Y^\text{real}_{g,t}` from GBD as
+:math:`i_{g,t}^\text{AD}` and :math:`Y^\text{real}_{g,t}` from GBD as
 follows.
 
 Let :math:`y(t)` denote the year to which time :math:`t` belongs. If we
-assume that the hazard :math:`i_{g,t}` is constant throughout the year
-:math:`y(t)`, then it is equal to its person-time-average over the year,
-which is the **total population incidence rate**:
+assume that the hazard :math:`i_{g,t}^\text{AD}` is constant throughout
+the year :math:`y(t)`, then it is equal to its person-time-average over
+the year, which is the **total population incidence rate**:
 
 .. math::
 
-  i_{g,t}
+  i_{g,t}^\text{AD}
   = \frac{\text{# of incident cases of AD in group $g$ in year $y(t)$}}
     {\text{total person-years in group $g$ in year $y(t)$}}.
 
@@ -312,9 +312,10 @@ This is the population we pull from GBD using get_population. Thus,
 
   Based on `plots of AD incidence from GBD Compare`_, we will make the
   simplifying assumption that for each demographic group :math:`g`, the
-  Alzheimer's incidence rate :math:`i_{g,t}` does not change over time.
-  Thus, we will use GBD 2021 data and assume that :math:`i_{g,t}` equals
-  the AD incidence rate in 2021 from for all times :math:`t`.
+  Alzheimer's incidence rate :math:`i_{g,t}^\text{AD}` does not change
+  over time. Thus, we will use GBD 2021 data and assume that
+  :math:`i_{g,t}^\text{AD}` equals the AD incidence rate in 2021 from
+  for all times :math:`t`.
 
   For Model 2 of the Alzheimer's simulation, we will use GBD 2021 data
   and assume that the total population :math:`Y^\text{real}_{g,t}`
@@ -349,6 +350,18 @@ data.
 
 Calculating entrance rate with  presymptomatic and MCI stages
 -------------------------------------------------------------
+
+Let :math:`B_g(t)` be the cumulative number of incident cases of BBBM-AD by
+time :math:`t` in demographic group :math:`g` in the real population.
+When including the presymptomatic and MCI stages of AD, the rate
+at which we want to add simulants is now
+
+.. math::
+
+  \lambda_{g,t} = S \cdot B_g'(t),
+
+where :math:`B_g'(t)` is the derivative of :math:`B_g(t)` with respect
+to :math:`t`.
 
 Let :math:`\Delta = \Delta_\text{BBBM} + \Delta_\text{MCI}` be the total
 duration of pre-dementia AD, and let :math:`w` be the width of an
@@ -493,7 +506,8 @@ BBBM-AD state is then
 
 .. math::
 
-  \lambda_{g,t} = S \cdot I_{g,t}^\text{BBBM} \cdot (1 + \gamma_{g,t}),
+  \lambda_{g,t} = S \cdot I_{g,t}^\text{BBBM}
+  \cdot \frac{1}{1 - \gamma_{g,t}},
 
 where :math:`S` is the model scale defined above. If :math:`t` is a
 step time of the simulation, the number of simulants to add at time
