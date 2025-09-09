@@ -398,31 +398,41 @@ Note that we are assuming that the incidence rate
 
 In order to get the correct number of people transitioning into the
 AD-dementia state at time :math:`t+\Delta`, we need to account for
-people who will die during the BBBM-AD and MCI-AD stages. The number of
-deaths that occur between times :math:`t` and :math:`t+\Delta` among
-people who are in demographic group :math:`g` at time :math:`t` should
-be
+people who will die during the BBBM-AD and MCI-AD stages. The average
+mortality rate among people who are in demographic group :math:`g` at
+time :math:`t` between times :math:`t` and :math:`t+\Delta`  should be
+(or is this an estimate of the average probability of death?)
 
 .. math::
 
   \begin{align*}
-  D_{g,t}
-  &= \left(\frac{w}{2}\right)
-    \left(m_{g,\, t}^\text{AD}\right)
-     \left(Y^\text{real}_{g,\, t}\right)
-    + \dotsb
+  \gamma_{g,t}
+    = \frac{w}{2} \cdot m_{g,\, t}
+  &+ w \cdot m_{g+w,\, t+w} \\
+  &+ \dotsb \\
+  &+ w \cdot  m_{g+(n-1)w,\, t+(n-1)w} \\
+  &+ \left(\frac{w}{2} + \frac{r^2}{2w} + r\right)
+    \cdot  m_{g+nw,\, t+nw} \\
+  &+ \frac{r^2}{2w}
+    \cdot  m_{g+(n+1)w,\, t+(n+1)w}.
   \end{align*}
 
 (still figuring out how to write this down...)
 
-The total number of real-world people in demographic group :math:`g` who
-will be entering the BBBM-AD state at time :math:`t` should then be
-:math:`I_{g,t}^\text{BBBM} + D_{g,t}`. The rate at which we want
-to add simulants into the BBBM-AD state is then
+..
+  The number of deaths that occur between times :math:`t` and
+  :math:`t+\Delta` among people who are in demographic group :math:`g` at
+  time :math:`t` should then be
+
+Adjusting for the mortality rate, the total number of real-world people
+in demographic group :math:`g` who will be entering the BBBM-AD state at
+time :math:`t` should then be :math:`I_{g,t}^\text{BBBM} \cdot (1 +
+\gamma_{g,t})`. The rate at which we want to add simulants into the
+BBBM-AD state is then
 
 .. math::
 
-  \lambda_{g,t} = S \cdot \left(I_{g,t}^\text{BBBM} + D_{g,t}\right),
+  \lambda_{g,t} = S \cdot I_{g,t}^\text{BBBM} \cdot (1 + \gamma_{g,t}),
 
 where :math:`S` is the model scale defined above.
 
