@@ -510,17 +510,18 @@ year. For example :math:`(F,70) + 3.5` represents females aged
 73.5--78.5 (i.e., :math:`[73.5, 78.5)`), so we round to the nearest age
 group of 75--79 (i.e., :math:`[75, 80)`). With :math:`\Delta = 7` years
 and :math:`w = 5` years, :math:`g+ \Delta/2` should always get rounded
-to :math:`g + 5`. For the year, 2025 + 3.5 = 28.5, and I've arbitrarily
-rounded up instead of down since it's right at the midpoint.
+to :math:`g + 5`. For the year, 2025 + 3.5 = 28.5, and, since this is
+right at the year's midpoint, I've arbitrarily rounded up instead of
+down.
 
 .. note::
 
-  We can get a better approximation as follows:
+  We can get a better approximation of :math:`\gamma_{g,t}` as follows:
 
   The average
   probability of death among people who are in demographic group :math:`g` at
   time :math:`t` between times :math:`t` and :math:`t+\Delta`  should be
-  (approximately?)
+  approximately
 
   .. math::
 
@@ -549,7 +550,7 @@ rounded up instead of down since it's right at the midpoint.
   .. math::
 
     \gamma_{(F, 70),\, 2025}
-    = 2.5 \cdot m_{(F, 70),\, 2025}
+    \approx 2.5 \cdot m_{(F, 70),\, 2025}
     + 4.1 \cdot m_{(F, 75),\, 2030}
     + 0.4 \cdot m_{(F, 80),\, 2035}.
 
