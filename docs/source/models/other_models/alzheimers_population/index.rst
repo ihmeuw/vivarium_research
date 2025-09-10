@@ -400,14 +400,14 @@ that
   \Delta = n w + r.
 
 With our current parameters, :math:`\Delta = 7` years and :math:`w=5`
-years , so :math:`n = 1` and :math:`r = 2`.
+years , so :math:`n = 1` and :math:`r = 2` years.
 
 Under our simplifying assumption, everyone who enters the count
-:math:`B_{g,t}^\text{AD}` at time :math:`t` will transition to AD-dementia at
-time :math:`t + \Delta`.
-Assuming that ages are uniformly distributed within the group :math:`g`,
-the rate at which the count :math:`B_{g,t}^\text{AD}` is increasing
-should be
+:math:`B_{g,t}^\text{AD}` at time :math:`t` will transition to
+AD-dementia at time :math:`t + \Delta`. Working backwards from our
+calculation of :math:`A_g'(t)` above, and assuming that ages are
+uniformly distributed within the group :math:`g`, the rate at which the
+count :math:`B_{g,t}^\text{AD}` is increasing should be
 
 .. math::
 
@@ -448,7 +448,10 @@ people who will die during the BBBM-AD and MCI-AD stages.
 
 * :math:`J_{g,t}^\text{BBBM} = B_g'(t)`
 * :math:`I_{g,t}^\text{BBBM} = \frac{d}{dt} B_{g,t}^\text{AD}`
-* :math:`\gamma_{g,t} J_{g,t}^\text{BBBM} = \frac{d}{dt} B_{g,t}^\text{die}`
+* :math:`\gamma_{g,t} J_{g,t}^\text{BBBM} = \frac{d}{dt}
+  B_{g,t}^\text{die}`
+* :math:`m_{g,t} =` mortality rate in the BBBM and MCI states in group
+  :math:`g` at time :math:`t`, equal to acmr --- csmr_c543
 
 Let
 :math:`J_{g,t}^\text{BBBM}` denote the total number of people in
@@ -515,9 +518,9 @@ rounded up instead of down since it's right at the midpoint.
   We can get a better approximation as follows:
 
   The average
-  mortality rate among people who are in demographic group :math:`g` at
+  probability of death among people who are in demographic group :math:`g` at
   time :math:`t` between times :math:`t` and :math:`t+\Delta`  should be
-  (or is this an estimate of the average probability of death?)
+  (approximately?)
 
   .. math::
 
@@ -535,6 +538,20 @@ rounded up instead of down since it's right at the midpoint.
 
   (Note that the weights add up to :math:`\Delta`, showing that this is
   is a refinement of the approximation above.)
+
+  With :math:`\Delta = 7` years and :math:`w = 5` years, we have
+  :math:`n = 1`, so there are only three terms in the sum, corresponding
+  to :math:`g`, :math:`g + 5`, and :math:`g + 10`, and the coefficients
+  for these three terms are the three special cases in the above sum
+  (the generic coefficient of :math:`w` never appears). Using our
+  running example,
+
+  .. math::
+
+    \gamma_{(F, 70),\, 2025}
+    = 2.5 \cdot m_{(F, 70),\, 2025}
+    + 4.1 \cdot m_{(F, 75),\, 2030}
+    + 0.4 \cdot m_{(F, 80),\, 2035}.
 
 ..
   The number of deaths that occur between times :math:`t` and
