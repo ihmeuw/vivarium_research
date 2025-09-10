@@ -77,7 +77,7 @@ Initializing the Population
 +++++++++++++++++++++++++++
 
 We will first describe how to initialize the population for AD and other
-dementias ad defined by GBD, then we will explain how to modify the
+dementias as defined by GBD, then we will explain how to modify the
 initialization strategy when including the presymptomatic and MCI stages
 of AD.
 
@@ -206,8 +206,8 @@ known parameters.
     = X_{t_0}.
     \end{align*}
 
-Initializing simulants with  presymptomatic and MCI stages
-----------------------------------------------------------
+Initializing simulants with presymptomatic and MCI stages
+---------------------------------------------------------
 
 Starting in Model 4 of the CSU Alzheimer's simulation, the Alzheimer's
 cause model includes two pre-dementia stages, BBBM-AD, and MCI-AD, in
