@@ -359,7 +359,7 @@ of AD, instead of defining :math:`\lambda_{g,t}` in terms of
 
 .. math::
 
-  \lambda_{g,t} = S \cdot B_g'(t),
+  \lambda_{g,t} = S \cdot B_g(t),
 
 where :math:`S` is the model scale and :math:`B_g'(t)` is the derivative
 of :math:`B_g(t)` with respect to :math:`t`. We can decompose
@@ -367,20 +367,22 @@ of :math:`B_g(t)` with respect to :math:`t`. We can decompose
 
 .. math::
 
-  B_g(t) = B_g^\text{AD}(t) + B_g^\text{die}(t),
+  B_g(t) = B_{g,t}^\text{AD} + B_{g,t}^\text{die},
 
 where, at time :math:`t`,
 
-* :math:`B_g^\text{AD}(t)` = the cumulative number of incident cases of BBBM-AD in
-  group :math:`g` that will eventually progress to AD-dementia,
-* :math:`B_g^\text{die}(t)` = the cumulative number of incident cases of BBBM-AD in
-  group :math:`g` that will die before they progress to AD-dementia.
+* :math:`B_{g,t}^\text{AD}` = the cumulative number of incident cases of
+  BBBM-AD in group :math:`g` that will eventually progress to
+  AD-dementia,
+* :math:`B_{g,t}^\text{die}` = the cumulative number of incident cases
+  of BBBM-AD in group :math:`g` that will die before they progress to
+  AD-dementia.
 
 Note that :math:`B_g^\text{AD}` and :math:`B_g^\text{die}` are defined in terms of *future*
 events with respect to the time :math:`t`, but that's fine.
 
-We will estimate :math:`B_g'(t) = \frac{d}{dt}B_g^\text{AD}(t) +
-\frac{d}{dt}B_g^\text{die}(t)` by making the simplifying assumption that
+We will estimate :math:`B_g'(t) = \frac{d}{dt}B_{g,t}^\text{AD} +
+\frac{d}{dt}B_{g,t}^\text{die}` by making the simplifying assumption that
 **everyone's duration of pre-dementia AD is exactly equal to the average
 duration of BBBM-AD plus MCI-AD**. This will simplify our calculations
 and will hopefully give a good enough approximation to closely match the
@@ -403,9 +405,16 @@ The number of real-world people in demographic group :math:`g` who enter
 the BBBM-AD state at time :math:`t` and transition to AD-dementia at
 time :math:`t + \Delta` should be
 
+Under our simplifying assumption, everyone who enters the count
+:math:`B_{g,t}^\text{AD}` at time :math:`t` will transition to AD-dementia at
+time :math:`t + \Delta`.
+Assuming that ages are uniformly distributed within the group :math:`g`,
+the rate at which the count :math:`B_{g,t}^\text{AD}` is increasing
+should be
+
 .. math::
 
-  I_{g,t}^\text{BBBM}
+  \frac{d}{dt} B_{g,t}^\text{AD}
   = \left(1 - \frac{r}{w}\right)
     \left(i_{g + nw,\, t+\Delta}^\text{AD}\right)
      \left(Y^\text{real}_{g + nw,\, t+\Delta}\right)
@@ -414,14 +423,15 @@ time :math:`t + \Delta` should be
       \left( Y^\text{real}_{g + (n+1)w,\, t+\Delta} \right).
 
 For example, if we write :math:`g = (F,\,70)` for females aged 70--74,
-:math:`g + 5 = (F,\,75)` for females aged 75--79, etc., the number of
-females aged 70--74 who enter the BBBM-AD state in 2025 and enter
-AD-dementia on average :math:`\Delta` years later is calculated
-as
+:math:`g + 5 = (F,\,75)` for females aged 75--79, etc., the rate of
+increase in 2025 of the number of females aged 70--74 who are entering
+the BBBM-AD state and will enter the AD-dementia state :math:`\Delta`
+years later is calculated as
 
 .. math::
 
-  I_{(F,\,70),\, 2025}^\text{BBBM}
+  % I_{(F,\,70),\, 2025}^\text{BBBM}
+  \frac{d}{dt} B_{(F,\,70),\, 2025}^\text{AD}
   = \left(\frac{3}{5}\right)
     \left(i_{(F, 75)}^\text{AD}\right)
      \left(Y^\text{real}_{(F,75),\, 2032}\right)
