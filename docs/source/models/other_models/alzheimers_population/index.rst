@@ -378,8 +378,9 @@ where, at time :math:`t`,
   of BBBM-AD in group :math:`g` that will die before they progress to
   AD-dementia.
 
-Note that :math:`B_g^\text{AD}` and :math:`B_g^\text{die}` are defined in terms of *future*
-events with respect to the time :math:`t`, but that's fine.
+Note that :math:`B_g^\text{AD}` and :math:`B_g^\text{die}` are defined
+in terms of *future* events with respect to the time :math:`t`, but
+that's fine.
 
 We will estimate :math:`B_g'(t) = \frac{d}{dt}B_{g,t}^\text{AD} +
 \frac{d}{dt}B_{g,t}^\text{die}` by making the simplifying assumption that
@@ -400,10 +401,6 @@ that
 
 With our current parameters, :math:`\Delta = 7` years and :math:`w=5`
 years , so :math:`n = 1` and :math:`r = 2`.
-
-The number of real-world people in demographic group :math:`g` who enter
-the BBBM-AD state at time :math:`t` and transition to AD-dementia at
-time :math:`t + \Delta` should be
 
 Under our simplifying assumption, everyone who enters the count
 :math:`B_{g,t}^\text{AD}` at time :math:`t` will transition to AD-dementia at
@@ -445,7 +442,15 @@ Note that we are assuming that the incidence rate
 
 In order to get the correct number of people transitioning into the
 AD-dementia state at time :math:`t+\Delta`, we need to account for
-people who will die during the BBBM-AD and MCI-AD stages. Let
+people who will die during the BBBM-AD and MCI-AD stages.
+
+**Note:** I'm currently updating notation. The translations are:
+
+* :math:`J_{g,t}^\text{BBBM} = B_g'(t)`
+* :math:`I_{g,t}^\text{BBBM} = \frac{d}{dt} B_{g,t}^\text{AD}`
+* :math:`\gamma_{g,t} J_{g,t}^\text{BBBM} = \frac{d}{dt} B_{g,t}^\text{die}`
+
+Let
 :math:`J_{g,t}^\text{BBBM}` denote the total number of people in
 demographic group :math:`g` entering the BBBM-AD state at time
 :math:`t`, and let :math:`\gamma_{g,t}` be the probability of one of
@@ -476,8 +481,8 @@ during these two stages. We can estimate this probability as
 (average mortality rate in group :math:`g` during the interval
 :math:`[t, t+\Delta]`). The average time in the two states is
 :math:`\Delta`. We can estimate the average mortality rate as the
-average mortality rate in the group :math:`g` at time :math:`t + \Delta
-/ 2`, the midpoint of the interval. Thus,
+average mortality rate in the group :math:`g` at the midpoint of the
+interval, :math:`t + \Delta / 2`. Thus,
 
 .. math::
 
@@ -498,7 +503,12 @@ approximately
 
 Note that since we have estimates of mortality rates for 5-year age
 groups and single years, we have rounded to the nearest age group and
-year.
+year. For example :math:`(F,70) + 3.5` represents females aged
+73.5--78.5 (i.e., :math:`[73.5, 78.5)`), so we round to the nearest age
+group of 75--79 (i.e., :math:`[75, 80)`). With :math:`\Delta = 7` years
+and :math:`w = 5` years, :math:`g+ \Delta/2` should always get rounded
+to :math:`g + 5`. For the year, 2025 + 3.5 = 28.5, and I've arbitrarily
+rounded up instead of down since it's right at the midpoint.
 
 .. note::
 
@@ -533,9 +543,9 @@ year.
 
 Adjusting for the mortality rate, the total number of real-world people
 in demographic group :math:`g` who will be entering the BBBM-AD state at
-time :math:`t` should then be :math:`I_{g,t}^\text{BBBM} \cdot (1 +
-\gamma_{g,t})`. The rate at which we want to add simulants into the
-BBBM-AD state is then
+time :math:`t` should then be :math:`I_{g,t}^\text{BBBM} \cdot
+\frac{1}{1 - \gamma_{g,t}}`. The rate at which we want to add simulants
+into the BBBM-AD state is then
 
 .. math::
 
