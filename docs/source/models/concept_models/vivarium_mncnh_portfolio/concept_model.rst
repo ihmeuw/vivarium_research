@@ -1437,6 +1437,20 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default, but with noted stratifications added
     - Default
+  * - 16.3
+    - Neonatal mortality bugfixes:
+
+      * Ensure all simulants initialized in the LBWSG PAF calculation sim are assigned to the early neonatal age group;
+        previously some were being assigned to the stillbirth "age group".
+        More details in `this pull request <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/138>`_.
+      * When we `subtract deaths in the denominator of mortality risk in artifact-building <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/loader.py#L805>`_,
+        subtract all-cause deaths rather than cause-specific deaths.
+        This bug reduced our CSMRisk for preterm by ~1-1.5% in LNN.
+    - Baseline
+    - ``model16.3``
+    - Default
+    - Default
+    - Default
   * - 17.0
     - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
     - Baseline and MMS scale-up scenarios 
@@ -1843,7 +1857,10 @@ Default stratifications to all observers should include scenario and input draw.
     - * All-cause mortality risks unchanged from 13.2, as expected
       * Substantial improvement (reduction) in late neonatal overestimation of other-causes mortality risk and underestimation of preterm mortality risk in all locations;
         however, there still appears to be systematic bias in this direction
+      * Noticed bug in PAF sim population (see Model 16.3 for fix)
+      * Identified miscalibration in late neonatal CPAP PAF on preterm with RDS (see known issues)
     - `Model 13.3 neonatal checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/d8dce03ab1de546d6af5719c59e344d77384d93f/verification_and_validation/model_13.3_nn_checks.ipynb>`_
+      `Model 13.3 interactive sim neonatal mortality checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/a2f00672cfe9762b83f6d05f15a4ca5be050750c/verification_and_validation/model_13.3_interactive_simulation_neonatal_mortality.ipynb>`_
   * - 14.0
     - * Confirm ANC attendance exposure varies as expected by pregnancy term length
       * Confirm ANC attendance exposure matches expectation
@@ -1991,6 +2008,11 @@ Default stratifications to all observers should include scenario and input draw.
   * - 16.2
     - Same as 16.1 and 16.0
     - 
+    -
+  * - 16.3
+    - * Check that neonatal all-cause mortality risks match expectation, except for slight LNN miscalibration after preterm with RDS CSMRisk is applied
+      * Check that neonatal cause-specific mortality risks match expectation, except for slight LNN miscalibration in preterm with RDS after CPAP PAF is applied
+    - 
     - 
   * - 17.0
     - * Confirm scenario-specific coverage (verification with sim outputs)
@@ -2081,24 +2103,20 @@ Default stratifications to all observers should include scenario and input draw.
     - For model 16.2
   * - Potentially increased overestimation of all-cause neonatal mortality relative to model 13.3
     - Unknown - possibly related to changes in LBWSG exposure distribution
-    - Ali to check LBWSG exposure distribution in the interactive sim
+    - Zeb to re-run interactive sim neonatal mortality V&V on model 16+
     - TBD - not blocking for 16.1 
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
     - Update to custom-calculated PAF and reassess
     - TBD
-  * - Issue with LBWSG PAF calculation for the late neonatal age group
-    - See the summary in the model 12.1.1 run request
-    - Hussain to update and rerun, Ali to do independent replication of PAF calculation verification
-    - Model 12.1.1
-  * - Some miscalibration of all-cause mortality for late neonatal females
-    - Could be due to random noise given that this is the demographic with the lowest mortality rates and therefore smallest counts
-    - Rerun with larger population size?
-    - TBD
   * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
     - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
-    - Research to debug further
+    - Zeb to debug further in interactive sim and possibly request an observer for negative other causes mortality
     - TBD
+  * - Late neonatal mortality due to preterm birth with RDS slightly (~2%) underestimated
+    - The PAF of CPAP on preterm birth with RDS CSMRisk is calculated with delivery facility proportions at birth, not at 7 days
+    - Accept this limitation, until/unless there are other reasons to revamp PAF calculation, since this would require many components not currently present in PAF sim
+    - N/A
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
     - Revisit following GBD 2023 update
