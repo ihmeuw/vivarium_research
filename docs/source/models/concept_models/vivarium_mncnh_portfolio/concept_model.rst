@@ -1442,8 +1442,8 @@ Default stratifications to all observers should include scenario and input draw.
 
       * Ensure all simulants initialized in the LBWSG PAF calculation sim are assigned to the early neonatal age group;
         previously some were being assigned to the stillbirth "age group".
-        More details in `this pull request <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/138>`_.
-      * When we `subtract deaths in the denominator of mortality risk in artifact-building <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/loader.py#L805>`_,
+        More details in `this pull request <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/138>`__.
+      * When we `subtract deaths in the denominator of mortality risk in artifact-building <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/loader.py#L805>`__,
         subtract all-cause deaths rather than cause-specific deaths.
         This bug reduced our CSMRisk for preterm by ~1-1.5% in LNN.
     - Baseline
