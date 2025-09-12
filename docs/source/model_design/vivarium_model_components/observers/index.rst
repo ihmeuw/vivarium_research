@@ -12,7 +12,7 @@ Simulation observers are unlike other types of Vivarium model components in that
 Observer background
 -------------------
 
-Observers are components in :code:`vivarium_public_health` and several standard observer packages are included in this repository (`see the documentation for these here <https://vivarium.readthedocs.io/projects/vivarium-public-health/en/latest/api_reference/results/index.html#module-vivarium_public_health.results>`_), but custom observers can also be written and included in vivarium simulations as well. As of August of 2025, the following table summarizes the standard observers available in :code:`vivarium_public_health` and the measures that they observe (termed observations).
+Observers are components in Vivarium and several standard observer packages are included in :code:`vivarium_public_health` (`see the documentation for these here <https://vivarium.readthedocs.io/projects/vivarium-public-health/en/latest/api_reference/results/index.html#module-vivarium_public_health.results>`_), but custom observers can also be written and included in vivarium simulations as well. As of August of 2025, the following table summarizes the standard observers available in :code:`vivarium_public_health` and the measures that they observe (termed observations).
 
 .. list-table:: Vivarium Public Health Observers
   :header-rows: 1
@@ -203,9 +203,7 @@ Let's say we are designing observers for the `tutorial simulation`_. The concept
 
 .. _tutorial simulation: ../../../onboarding_resources/tutorial/index.ipynb
 
-.. include:: ../../../onboarding_resources/tutorial/index.ipynb
-  :start-after: .. _concept_model:
-  :end-before: .. _end_concept_model:
+.. graphviz:: ../../../onboarding_resources/tutorial/concept_model.dot
 
 Let's say that in addition to modeling the child wasting risk exposure as a categorical variable, we also model the underlying continuous measure of weight-for-height z-score (WHZ). This will allow us to step through an example of observing the mean of a continuous variable.
 
