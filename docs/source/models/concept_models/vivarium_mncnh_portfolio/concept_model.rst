@@ -2105,6 +2105,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Missing value in the :code:`neonatal_preterm_birth_with_rds.csmr` pipeline value for ACS eligible simulants
     - Hussain/Ali to investigate and update
     - For model 16.4
+  * - Scenario with increased ultrasound coverage leads to (very slightly) lower IFD
+    - Does not appear to be an implementation bug (all facility choice model V&V criteria are met), but is not the expected result
+    - Ali to investigate the rates of false positive and false negatives by scenario to determine if ultrasound improvements is reducing false positives among term babies more than it is reducing false negatives among preterm babies, which could explain this result
+    - TBD
   * - Potentially increased overestimation of all-cause neonatal mortality relative to model 13.3
     - Unknown - possibly related to changes in LBWSG exposure distribution
     - Zeb to re-run interactive sim neonatal mortality V&V on model 16+
