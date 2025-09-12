@@ -4,7 +4,7 @@
 Simulation Observers
 ======================
 
-Simulation observers are unlike other types of vivarium model components in that rather than adding to what is included in a vivarium simulation, simulation observers simply record what is already modeled in the simulation. Simulation observers do just what their name implies: they "observe" specific quantities within the simulation and record those values so that the results of a simulation can be analyzed. It is important that we design simulation observers carefully so that we have the results that we need from each simulation run. This page discusses general guidelines in the design of simulation observers and how to structure observer documentation.
+Simulation observers are unlike other types of Vivarium model components in that rather than adding to what is included in a Vivarium simulation, simulation observers simply record what is already modeled in the simulation. Simulation observers do just what their name implies: they "observe" specific quantities within the simulation and record those values so that the results of a simulation can be analyzed. It is important that we design simulation observers carefully so that we have the results that we need from each simulation run. This page discusses general guidelines in the design of simulation observers and how to structure observer documentation.
 
 .. contents::
   :local:
