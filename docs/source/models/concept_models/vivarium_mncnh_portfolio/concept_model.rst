@@ -914,6 +914,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Preterm status
       * Believed preterm status
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+      * ACS coverage 2
     - 
 
 .. todo::
@@ -1422,6 +1423,19 @@ Default stratifications to all observers should include scenario and input draw.
     - ``model16.1``
     - Default
     - Default, but add believed preterm stratification to maternal population observer
+    - Default
+  * - 16.2
+    - Facility choice model bugfixes. Same as model 16.1, but with:
+
+      * Believed preterm status stratification added to the maternal population (ANC) observer
+      * Antenatal corticosteroid stratifications added to the maternal population (ANC), births, and neonatal mortality observers (see observer table above!)
+      * Location-specific values for correlation coefficient between delivery facility and ANC propensities
+      * Scenario # 20 added to run
+      * Bugfix for "no ACS" effects being applied to simulants outside of the eligible believed gestational age range
+    - Baseline and ultrasound V&V scenario (scenario #20)
+    - ``model16.2``
+    - Default
+    - Default, but with noted stratifications added
     - Default
   * - 17.0
     - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
@@ -1958,13 +1972,24 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that baseline coverage of ACS is equal to that of CPAP as specified in the :ref:`CPAP intervention page <intervention_neonatal_cpap>`.
       * Confirm that the same propensity value is used for ACS and CPAP.
       * Use the interactive sim to confirm there is no coverage of ACS outside of the eligible gestational age range.
-    - 
-    - 
+    - * In the interactive sim, confirmed that ACS coverage was in the expected believed gestational age range, was at the expected rate conditional on delivery facility, and had the expected correlation with CPAP coverage. 
+      * Interactive sim shows suspicious behavior of the CPAP and ACS intervention effects and unable to verify behavior in simulation results without additional stratifications
+      * Neonatal mortality due to preterm birth with RDS underestimated in simulation results
+    - `Notebooks for model 16.0 V&V here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/123>`_
   * - 16.1
     - * Same as 15.0
       * Confirm expected correlation of IFD, ANC, and LBWSG propensities
       * Confirm expected gestational age estimation error of different ultrasound types (including AI-assisted US in scenario #20)
       * Confirm that there are slight increases in IFD rate between the baseline scenario and scenario #20 (with improved US coverage)
+    - All V&V criteria met except for:
+      
+      * Correlation between delivery facility and antenatal care propensities are not as expected for Nigeria or Pakistan
+      * Distribution of in-facility delivery stratified by ANC1 attendance not meeting target (except for Ethiopia)
+
+      (Note that scenario #20 was not included in this run, so related V&V will be performed in 16.2 instead)
+    - `Notebooks for model 16.1 V&V here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/123>`_
+  * - 16.2
+    - Same as 16.1 and 16.0
     - 
     - 
   * - 17.0
@@ -2038,28 +2063,22 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Missing believed preterm status stratifications from maternal population observer
+  * - Missing stratifications in simulation observers
     - Didn't get added
     - Hussain to investigate/update
-    - For model 16.1
-  * - Identical values for ANC, IFD, and LBWSG propensities
-    - Unknown
-    - Hussain to investigate
-    - For model 16.1
-  * - Gestational age estimation error values differ between the :ref:`documentation <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>` and `simulation <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/bc7f99565db6b7867ec417e099b0f8da22ed0a07/src/vivarium_gates_mncnh/constants/data_values.py#L169>`_
-    - Simulation values are out of date 
-    - Update simulation values to match docs
-    - For model 16.1
-  * - Various facility choice model V&V targets not met, including:
-      * IFD slightly overestimated
-      * Delivery facility by preterm status
-      * Delivery facility by believed preterm status
-      * Delivery facility by ANC attendance
-      * Confusion matrix of preterm vs. believed preterm status
-      * Rates of believed preterm status by preterm status and ultrasound coverage
-    - Thought to be due to issues identified above (identical propensity values and/or gestational age error data issue)
-    - Run model 16.1 and re-evaluate
+    - For model 16.2
+  * - Value for correlation coefficient between delivery facility and antenatal care attendance `not implemented at the location-specific level in the simulation <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/627a797c3eb07911640312f0cb35adba63866a83/src/vivarium_gates_mncnh/constants/data_values.py#L463>`_, as indicated in the :ref:`facility choice documentation <2024_facility_model_vivarium_mncnh_portfolio>`
+    - Coded as a single value
+    - Update to location-specific values in the docs 
+    - For model 16.2
+  * - Delivery facility by ANC attendance not meeting target
+    - Thought to be due non-location-specific ANC and IFD correlation values
+    - Run model 16.2 and re-evaluate
     -   
+  * - Underestimation of neonatal preterm birth with RDS mortality
+    - Thought to be due to "no ACS" effects being applied to simulants outside of the eligible believed gestational age range
+    - Hussain to update
+    - For model 16.2
   * - Potentially increased overestimation of all-cause neonatal mortality relative to model 13.3
     - Unknown - possibly related to changes in LBWSG exposure distribution
     - Ali to check LBWSG exposure distribution in the interactive sim
