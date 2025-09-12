@@ -205,7 +205,7 @@ Let's say we are designing observers for the `tutorial simulation`_. The concept
 
 .. graphviz:: ../../../onboarding_resources/tutorial/concept_model.dot
 
-Let's say that in addition to modeling the child wasting risk exposure as a categorical variable, we also model the underlying continuous measure of weight-for-height z-score (WHZ). This will allow us to step through an example of observing the mean of a continuous variable.
+Let's say that in addition to modeling the child wasting risk exposure as a categorical variable, we also model an underlying continuous measure of weight-for-height z-score (WHZ). While this is not done in the tutorial and is not easily achieved using GBD data, we include it here as it will allow us to step through an example of observing the mean of a continuous variable.
 
 Let's start by listing all of the measures we would like to output as results from this simulation. Measures marked with an asterisk (*) indicate that they are top-level results for the simulation whereas measures without an asterisk indicate that they will be used only for model verification and validation. For tips on how to generate this list, see the :ref:`Vivarium V&V and results processing page <vivarium_best_practices_results_processing>` that contains a general list of things to verify as well as the specific "Verification and Validation criteria" sections of the documents for all of the model components included in a simulation. 
 
