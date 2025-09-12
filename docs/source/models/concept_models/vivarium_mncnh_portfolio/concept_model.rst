@@ -2012,7 +2012,11 @@ Default stratifications to all observers should include scenario and input draw.
   * - 16.3
     - * Check that neonatal all-cause mortality risks match expectation, except for slight LNN miscalibration after preterm with RDS CSMRisk is applied
       * Check that neonatal cause-specific mortality risks match expectation, except for slight LNN miscalibration in preterm with RDS after CPAP PAF is applied
-    - 
+    - * All delivery facility choice V&V targets met!
+      * ACS coverage by scenario, eligibility, and CPAP coverage looks good 
+      * Zero observered deaths among the ACS eligible and ACS/CPAP covered population -- possible observer issue
+      * Effect of CPAP and ACS cannot be properly assessed without preterm birth stratification
+      * Neonatal mortality underestimated
     - 
   * - 17.0
     - * Confirm scenario-specific coverage (verification with sim outputs)
@@ -2085,22 +2089,14 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Missing stratifications in simulation observers
-    - Didn't get added
-    - Hussain to investigate/update
-    - For model 16.2
-  * - Value for correlation coefficient between delivery facility and antenatal care attendance `not implemented at the location-specific level in the simulation <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/627a797c3eb07911640312f0cb35adba63866a83/src/vivarium_gates_mncnh/constants/data_values.py#L463>`_, as indicated in the :ref:`facility choice documentation <2024_facility_model_vivarium_mncnh_portfolio>`
-    - Coded as a single value
-    - Update to location-specific values in the docs 
-    - For model 16.2
-  * - Delivery facility by ANC attendance not meeting target
-    - Thought to be due non-location-specific ANC and IFD correlation values
-    - Run model 16.2 and re-evaluate
-    -   
-  * - Underestimation of neonatal preterm birth with RDS mortality
-    - Thought to be due to "no ACS" effects being applied to simulants outside of the eligible believed gestational age range
+  * - Missing preterm birth stratifications in neonatal deaths observer
+    - Removed in observer rework?
     - Hussain to update
-    - For model 16.2
+    - For model 16.4
+  * - Underestimation of neonatal preterm birth with RDS mortality
+    - Possibly due to zero observed deaths among the ACS eligible and ACS/CPAP covered population
+    - Hussain/Ali to investigate and update
+    - For model 16.4
   * - Potentially increased overestimation of all-cause neonatal mortality relative to model 13.3
     - Unknown - possibly related to changes in LBWSG exposure distribution
     - Zeb to re-run interactive sim neonatal mortality V&V on model 16+
