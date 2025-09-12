@@ -2024,8 +2024,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Zero observered deaths among the ACS eligible and ACS/CPAP covered population -- looks to be a result of missing values in the :code:`neonatal_preterm_birth_with_rds.csmr` pipeline for simulants eligible for ACS
       * Effect of CPAP and ACS cannot be properly assessed inwithout preterm birth stratification in the neonatal deaths observer
       * Neonatal mortality underestimated. More specific neonatal mortality V&V checks will be performed on model 16.4 when the missing pipeline values bug is resolved
-    - * `Model 16.3 facility choice V&V notebooks <>`_
-      * `Model 16.3 ACS intervention V&V notebooks <>`_
+    - * `Model 16.3 facility choice V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/125>`_
+      * `Model 16.3 ACS intervention V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/126>`_
   * - 17.0
     - * Confirm scenario-specific coverage (verification with sim outputs)
       * Confirm only simulants who attend ANC receive IFA/MMS (verification with sim outputs)
