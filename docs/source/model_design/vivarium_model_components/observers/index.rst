@@ -40,7 +40,7 @@ Two key features of vivarium simulation observers include:
 - Observers record quantities that aggregate as sums (such as the sum of deaths or the sum of person time), and
 - Observer counts can be stratified by key variables (such as simulant sex or age group)
 
-An example of a standard vivarium observer is a mortality observer that records counts of deaths and years of life lost stratified by simulant sex and age group. Generally, sex and age group are standard strata for vivarium observers, but strata can easily be added and removed in the model specification file by following the instructions on the :ref:`common model changes page <common_model_changes>`.
+An example of a standard vivarium observer is a mortality observer that records counts of deaths and years of life lost stratified by simulant sex and age group. Generally, sex and age group are standard stratifications for vivarium observers, but stratifications can easily be added and removed in the model specification file by following the instructions on the :ref:`common model changes page <common_model_changes>`.
 
 An example of observer behavior
 ++++++++++++++++++++++++++++++++
@@ -151,7 +151,7 @@ While it is fairly easy for us to track information about deaths among our simul
 
 An observer to track deaths that occurred during the entire simulation (1/1/2025-1/1/2027) would record the total number of deaths that occurred across all timesteps: equal to 4 deaths in this example.
 
-Age and sex are standard strata for vivarium observers. However, if we would like to examine observed data specific to any of our additional simulated attributes, we can stratify our them by such factors.
+Age and sex are standard stratifications for vivarium observers. However, if we would like to examine observed data specific to any of our additional simulated attributes, we can stratify our them by such factors.
 
   * For instance, a death observer stratified by sex would return:
 
@@ -188,15 +188,15 @@ There are specific measures that may not obviously lend themselves well to count
 Determining stratifying variables
 ++++++++++++++++++++++++++++++++++
 
-Stratification of observers will likely be necessary for most simulations. However, adding many strata to simulation observers causes computation time to increase, so it is not ideal to add stratifying variables that are not needed. 
+Stratification of observers will likely be necessary for most simulations. However, adding many stratifications to simulation observers causes computation time to increase, so it is not ideal to add stratifying variables that are not needed. 
 
-Common observer strata include age and sex, since GBD measures are often age- and sex-specific and we typically perform V&V at the age- and sex-specific level. So in order to observe age- and sex-specific ACMR in a vivarium simulation, we would stratify both the mortality and person time observers by sex and age-group.
+Common observer stratifications include age and sex, since GBD measures are often age- and sex-specific and we typically perform V&V at the age- and sex-specific level. So in order to observe age- and sex-specific ACMR in a vivarium simulation, we would stratify both the mortality and person time observers by sex and age-group.
 
 Additionally, intervention coverage is another common observer stratification. Stratifying population-related observations (such as births or person time) by intervention coverage will enable calculating intervention coverage for V&V and stratifying outcome-related observations (such as deaths) will allow for calculating intervention-specific outcome rates to verify intervention effects.
 
-There are certain variables that may not lend themselves well as observer strata. For instance, the :ref:`LBWSG risk factor <risk_exposure_lbwsg>` has 58 exposure categories and stratifying births and/or person time observers by LBWSG exposure category may result in slower than desired performance. In such cases, utilizing the :ref:`interactive context <vivarium_interactive_simulation>` to obtain such stratified results may be preferable, as it enables evaluation for a single draw/seed/timestep rather than repeating the same stratified observation for every draw/seed/timestep in a given simulation without having to modify the simulation model specifications to do.
+There are certain variables that may not lend themselves well as observer stratifications. For instance, the :ref:`LBWSG risk factor <risk_exposure_lbwsg>` has 58 exposure categories and stratifying births and/or person time observers by LBWSG exposure category may result in slower than desired performance. In such cases, utilizing the :ref:`interactive context <vivarium_interactive_simulation>` to obtain such stratified results may be preferable, as it enables evaluation for a single draw/seed/timestep rather than repeating the same stratified observation for every draw/seed/timestep in a given simulation without having to modify the simulation model specifications to do.
 
-An example of determining appropriate observers and strata
+An example of determining appropriate observers and stratifications
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Let's say we are designing observers for the `tutorial simulation`_. The concept model for the tutorial simulation is copied here for easy reference.
@@ -270,14 +270,14 @@ The next step is decomposing these measures into their numerators and denominato
     - Overall person time
     - First moment measure is defined in the `Determining which measures to observe`_ section
 
-Finally, let's create a list of simulation observers and their strata for use in the simulation that will provide sufficient information to calculate our desired measures:
+Finally, let's create a list of simulation observers and their stratifications for use in the simulation that will provide sufficient information to calculate our desired measures:
 
-.. list-table:: Observations and their strata
+.. list-table:: Observations and their stratifications
   :header-rows: 1
 
   * - Observation
     - Vivarium observer
-    - Strata
+    - stratifications
     - Note
   * - Deaths
     - MortalityObserver
@@ -325,11 +325,11 @@ Finally, let's create a list of simulation observers and their strata for use in
 
 .. note::
 
-  There is not one unique solution to the designing the set of simulation observers and strata that are sufficient for producing desired simulation results. For instance, here we used the standard DiseaseObserver to return both diarrheal disease transition types, both of which will be stratified by child wasting exposure. However, could also use two custom observers: one to observe incident counts and the other to observe remission counts. This change would allow us to specify different stratifying variables for the different transition types as desired -- for instance, while it is not directly necessary for model results or V&V, perhaps we are interested to see the diarrheal diseases incidence rate stratified by SQ-LNS coverage. Having separate observers for incident and recovery transition counts would allow us to stratify incident counts without also stratifying recovery counts, thus saving computation time and resources.
+  There is not one unique solution to the designing the set of simulation observers and stratifications that are sufficient for producing desired simulation results. For instance, here we used the standard DiseaseObserver to return both diarrheal disease transition types, both of which will be stratified by child wasting exposure. However, could also use two custom observers: one to observe incident counts and the other to observe remission counts. This change would allow us to specify different stratifying variables for the different transition types as desired -- for instance, while it is not directly necessary for model results or V&V, perhaps we are interested to see the diarrheal diseases incidence rate stratified by SQ-LNS coverage. Having separate observers for incident and recovery transition counts would allow us to stratify incident counts without also stratifying recovery counts, thus saving computation time and resources.
 
-  Selecting the appropriate balance between fewer observers with more stratification and more observers with fewer strata may depend on the computational expense of your simulation, developmental lift of design, and results processing convenience and may be a topic of open discussion among and between the research and engineering teams for a given project.
+  Selecting the appropriate balance between fewer observers with more stratification and more observers with fewer stratifications may depend on the computational expense of your simulation, developmental lift of design, and results processing convenience and may be a topic of open discussion among and between the research and engineering teams for a given project.
 
-See the pseudo code below for examples on how the results from the observers/strata listed above can be used to calculate measures of interest for this simulation:
+See the pseudo code below for examples on how the results from the observers/stratifications listed above can be used to calculate measures of interest for this simulation:
 
 .. code-block:: python
   
@@ -378,11 +378,11 @@ Documentation of simulation observers will occur in the concept model document f
 
 - In :ref:`section 2.5 in the concept model template <{YOUR_MODEL_SHORT_NAME}2.5>`, you will document:
 
-  - The default strata for all observers in your simulation, and 
-  - The list of all observers to be included in your simulation and and default strata for those observers that are different from the global defaults
+  - The default stratifications for all observers in your simulation, and 
+  - The list of all observers to be included in your simulation and and default stratifications for those observers that are different from the global defaults
 
 - Then for each model run request included in the :ref:`model run request table of the concept model template <{YOUR_MODEL_SHORT_NAME}3.0>`, you can note:
 
   - Any which observers need to be added or removed for a specific model run (for example: for model 1.0, "Add the death observer, to be included for all future model runs") in the "Observer modifications" column, and 
-  - Any changes to observer strata for a specific model run (for example: for model 5.0, "Add intervention coverage stratification to the death observer for V&V") in the "Stratification modifications" column
+  - Any changes to observer stratifications for a specific model run (for example: for model 5.0, "Add intervention coverage stratification to the death observer for V&V") in the "Stratification modifications" column
 
