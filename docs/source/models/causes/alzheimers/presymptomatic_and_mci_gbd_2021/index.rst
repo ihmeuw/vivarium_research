@@ -517,12 +517,12 @@ are located at the following paths on the cluster:
   * - :math:`\alpha`, :math:`\lambda`
     - Shape and rate parameters, respectively, of gamma distribution for
       :math:`D_\text{BBBM}`
-    - * :math:`\alpha = 468.75`
-      * :math:`\lambda = 125`
-    - Chosen so that :math:`P(3.5 < D_\text{BBBM} < 4) \approx 0.9`
+    - * :math:`\alpha = 14.0625`
+      * :math:`\lambda = 3.75`
+    - Chosen so that :math:`D_\text{BBBM}` has mean 3.75 and variance 1
       because client said, "The BBBM+ state lasts about 3.5--4 years
-      before transitioning to MCI." Use the same parameters for all years,
-      locations, age groups, and sexes.
+      before transitioning to MCI." Use the same parameters for all
+      years, locations, age groups, and sexes.
   * - gamma_dist
     - Python object representing the gamma distribution for
       :math:`D_\text{BBBM}`
@@ -532,7 +532,9 @@ are located at the following paths on the cluster:
       rate parameter.
   * - :math:`h_\text{MCI}(t)`
     - Hazard function for transitioning into the MCI-AD state from BBBM-AD
-    - gamma_dist.pdf(t) / gamma_dist.sf(t)
+    - * gamma_dist.pdf(t) / gamma_dist.sf(t), or
+      * exp( gamma_dist.logpdf(t) --- gamma_dist.logsf(t) ), an
+        equivalent expression that may help avoid underflow
     - Equal to :math:`\frac{t^{\alpha-1}e^{-\lambda t}}{\int_t^\infty
       u^{\alpha-1} e^{-\lambda u}\, du}`, but can be computed more
       easily as the ratio of the probability density function to the
