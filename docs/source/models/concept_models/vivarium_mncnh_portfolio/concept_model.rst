@@ -883,6 +883,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Probiotics availability
       * Corticosteroid coverage
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+      * Preterm status (dichotomous at 37 weeks)
     - Included, except for corticosteroid coverage which has yet to be added
   * - 4. Antibiotics eligible birth counts
     - * Delivery facility type
@@ -911,10 +912,10 @@ Default stratifications to all observers should include scenario and input draw.
       * Test hemoglobin exposure (dichotomous, 'low' if tested low hemoglobin,'adequate' if tested adequate hemoglobin, N/A if not tested)
       * Ferritin status (dichotomous, 'low' if low ferritin, 'adequate' if adequate ferritin, N/A if not tested)
       * Delivery facility
-      * Preterm status
-      * Believed preterm status
+      * Preterm status (dichotomous at 37 weeks)
+      * Believed preterm status (dichotomous at 37 weeks)
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
-      * ACS coverage 2
+      * ACS coverage
     - 
 
 .. todo::
@@ -1449,6 +1450,13 @@ Default stratifications to all observers should include scenario and input draw.
     - ``model16.3``
     - Default
     - Default, but with noted stratifications added
+    - Default
+  * - 16.4
+    - Bugfix to resolve missing values for the :code:`neonatal_preterm_birth_with_rds.csmr` pipeline for ACS-eligible simulants and to add back the preterm birth status stratification to the neonatal deaths observer
+    - Baseline
+    - ``model16.4``
+    - Default
+    - Default, but with preterm birth status stratification of neonatal deaths observers
     - Default
   * - 17.0
     - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
@@ -2011,8 +2019,14 @@ Default stratifications to all observers should include scenario and input draw.
 
       * Check that neonatal all-cause mortality risks match expectation, except for slight LNN miscalibration after preterm with RDS CSMRisk is applied
       * Check that neonatal cause-specific mortality risks match expectation, except for slight LNN miscalibration in preterm with RDS after CPAP PAF is applied
-    - 
-    - 
+    - * All delivery facility choice V&V targets met! Note unexpected *validation* of decrease of IFD rate in the ultrasound V&V scenario that is being discussed on the research team
+      * ACS coverage by scenario, eligibility, and CPAP coverage looks good 
+      * Ultrasound coverage by scenario and ANC coverage looks good
+      * Zero observered deaths among the ACS eligible and ACS/CPAP covered population -- looks to be a result of missing values in the :code:`neonatal_preterm_birth_with_rds.csmr` pipeline for simulants eligible for ACS
+      * Effect of CPAP and ACS cannot be properly assessed without preterm birth stratification in the neonatal deaths observer
+      * Neonatal mortality underestimated. More specific neonatal mortality V&V checks will be performed on model 16.4 when the missing pipeline values bug is resolved
+    - * `Model 16.3 facility choice V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/125>`_
+      * `Model 16.3 ACS intervention V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/126>`_
   * - 17.0
     - * Confirm scenario-specific coverage (verification with sim outputs)
       * Confirm only simulants who attend ANC receive IFA/MMS (verification with sim outputs)
@@ -2084,22 +2098,18 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Missing stratifications in simulation observers
-    - Didn't get added
-    - Hussain to investigate/update
-    - For model 16.3
-  * - Value for correlation coefficient between delivery facility and antenatal care attendance `not implemented at the location-specific level in the simulation <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/627a797c3eb07911640312f0cb35adba63866a83/src/vivarium_gates_mncnh/constants/data_values.py#L463>`_, as indicated in the :ref:`facility choice documentation <2024_facility_model_vivarium_mncnh_portfolio>`
-    - Coded as a single value
-    - Update to location-specific values in the docs 
-    - For model 16.3
-  * - Delivery facility by ANC attendance not meeting target
-    - Thought to be due non-location-specific ANC and IFD correlation values
-    - Run model 16.3 and re-evaluate
-    -   
-  * - Underestimation of neonatal preterm birth with RDS mortality
-    - Thought to be due to "no ACS" effects being applied to simulants outside of the eligible believed gestational age range
+  * - Missing preterm birth stratifications in neonatal deaths observer
+    - Removed in observer rework?
     - Hussain to update
-    - For model 16.3
+    - For model 16.4
+  * - Underestimation of neonatal mortality
+    - Missing value in the :code:`neonatal_preterm_birth_with_rds.csmr` pipeline value for ACS eligible simulants
+    - Hussain/Ali to investigate and update
+    - For model 16.4
+  * - Scenario with increased ultrasound coverage leads to (very slightly) lower IFD
+    - Does not appear to be an implementation bug (all facility choice model V&V criteria are met), but is not the expected result
+    - Ali to investigate the rates of false positive and false negatives by scenario to determine if ultrasound improvements is reducing false positives among term babies more than it is reducing false negatives among preterm babies, which could explain this result
+    - TBD
   * - Potentially increased overestimation of all-cause neonatal mortality relative to model 13.3
     - Unknown - possibly related to changes in LBWSG exposure distribution
     - Zeb to re-run interactive sim neonatal mortality V&V on model 16+
