@@ -542,11 +542,11 @@ are located at the following paths on the cluster:
   * - :math:`\Delta_\text{BBBM}`
     - Average duration of BBBM-presymptomatic AD in the absence of
       mortality
-    - :math:`\lambda \Gamma(1 + 1/k)`, where :math:`\Gamma` is the
-      `gamma function`_
-    - Mean of gamma distribution for :math:`D_\text{BBBM}`. The gamma
-      function can be computed using `scipy.special.gamma`_, or the mean
-      can be computed as bbbm_dist.mean(). Does not vary by year,
+    - bbbm_dist.mean()
+    - Equal to :math:`\lambda \Gamma(1 + 1/k)`, where :math:`\Gamma` is
+      the `gamma function`_.  Can be computed using
+      `scipy.special.gamma`_, but using bbbm_dist.mean() is more general
+      if we update the underlying distribution. Does not vary by year,
       location, age group, or sex.
   * - :math:`\Delta_\text{MCI}`
     - Average duration of MCI due to AD in the absence of mortality
