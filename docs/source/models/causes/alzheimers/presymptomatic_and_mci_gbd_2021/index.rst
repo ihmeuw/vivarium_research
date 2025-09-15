@@ -511,41 +511,43 @@ are located at the following paths on the cluster:
     - Dwell time in cause state BBBM-AD
     - :math:`T_\text{MCI} - T_\text{BBBM}`
     - Random variable for each simulant, constructed implicitly through
-      simulation dynamics to have approximately a `gamma distribution`_
-      with shape parameter :math:`\alpha` and rate parameter
+      simulation dynamics to have approximately a `Weibull
+      distribution`_ with shape parameter :math:`k` and scale parameter
       :math:`\lambda`
-  * - :math:`\alpha`, :math:`\lambda`
-    - Shape and rate parameters, respectively, of gamma distribution for
+  * - :math:`k`, :math:`\lambda`
+    - Shape and scale parameters, respectively, of Weibull distribution for
       :math:`D_\text{BBBM}`
-    - * :math:`\alpha = 14.0625`
-      * :math:`\lambda = 3.75`
-    - Chosen so that :math:`D_\text{BBBM}` has mean 3.75 and variance 1
-      because client said, "The BBBM+ state lasts about 3.5--4 years
-      before transitioning to MCI." Use the same parameters for all
+    - * :math:`k = 1.22`
+      * :math:`\lambda = 6.76`
+    - Chosen to match clien't specification for :math:`D_\text{BBBM}`:
+      The probability of progression from BBBM-AD to MCI-AD is about 50%
+      at 5 years and 80% at 10 years, corresponding to approximately a
+      15% annual rate of progression. Use the same parameters for all
       years, locations, age groups, and sexes.
-  * - gamma_dist
-    - Python object representing the gamma distribution for
+  * - bbbm_dist
+    - Python object representing the Weibull distribution for
       :math:`D_\text{BBBM}`
-    - scipy.stats.gamma(𝛼, scale=1/λ)
-    - An instance of `SciPy's gamma distribution class`_. Note that
-      SciPy accepts a scale parameter, which is the reciprocal of the
-      rate parameter.
+    - scipy.stats.weibull_min(k, scale=λ)
+    - An instance of `SciPy's Weibull distribution class`_.
   * - :math:`h_\text{MCI}(t)`
     - Hazard function for transitioning into the MCI-AD state from BBBM-AD
-    - * gamma_dist.pdf(t) / gamma_dist.sf(t), or
-      * exp( gamma_dist.logpdf(t) --- gamma_dist.logsf(t) ), an
+    - * bbbm_dist.pdf(t) / bbbm_dist.sf(t), or
+      * exp( bbbm_dist.logpdf(t) --- bbbm_dist.logsf(t) ), an
         equivalent expression that may help avoid underflow
-    - Equal to :math:`\frac{t^{\alpha-1}e^{-\lambda t}}{\int_t^\infty
-      u^{\alpha-1} e^{-\lambda u}\, du}`, but can be computed more
-      easily as the ratio of the probability density function to the
-      survival function, using the methods defined in `SciPy's gamma
+    - Equal to :math:`\frac{k}{\lambda}
+      \left(\frac{t}{\lambda}\right)^{k-1}`, but can also be computed as
+      the ratio of the probability density function to the survival
+      function, using the methods defined in `SciPy's Weibull
       distribution class`_
   * - :math:`\Delta_\text{BBBM}`
     - Average duration of BBBM-presymptomatic AD in the absence of
       mortality
-    - :math:`\alpha / \lambda`
-    - Mean of gamma distribution for :math:`D_\text{BBBM}`. Does not vary by
-      year, location, age group, or sex.
+    - :math:`\lambda \Gamma(1 + 1/k)`, where :math:`\Gamma` is the
+      `gamma function`_
+    - Mean of gamma distribution for :math:`D_\text{BBBM}`. The gamma
+      function can be computed using `scipy.special.gamma`_, or the mean
+      can be computed as bbbm_dist.mean(). Does not vary by year,
+      location, age group, or sex.
   * - :math:`\Delta_\text{MCI}`
     - Average duration of MCI due to AD in the absence of mortality
     - 3.85 years
@@ -586,8 +588,16 @@ are located at the following paths on the cluster:
   https://github.com/ihmeuw/vivarium_research_alzheimers/blob/4d5dde0b74eb09ea997af7c2de88b81670ba7d61/2025_08_03a_alz_dw_explore.ipynb
 .. _gamma distribution:
   https://en.wikipedia.org/wiki/Gamma_distribution
+.. _Weibull distribution:
+  https://en.wikipedia.org/wiki/Weibull_distribution
 .. _SciPy's gamma distribution class:
   https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html
+.. _SciPy's Weibull distribution class:
+  https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html
+.. _gamma function:
+  https://en.wikipedia.org/wiki/Gamma_function
+.. _scipy.special.gamma:
+  https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gamma.html
 .. _Potashman et al.:
   https://doi.org/10.1007/s40120-021-00272-1
 
