@@ -1458,6 +1458,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default, but with preterm birth status stratification of neonatal deaths observers
     - Default
+  * - 16.5
+    - Inclusion of low hemoglobin RR for depressive disorders. No need to actually re-run the model, we just need this RR value active in the interactive context for our custom PAF calculations.
+    - Baseline
+    - ``model16.5``
+    - Default
+    - Default
+    - Default
   * - 17.0
     - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
     - Baseline and MMS scale-up scenarios 
