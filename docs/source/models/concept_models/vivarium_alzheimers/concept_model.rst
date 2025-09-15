@@ -563,10 +563,10 @@ scenario, and input draw.
     - All checks from 3.0, but instead of verifying all-cause mortality rate, use other-cause mortality rate, which is easier to compute; also confirm that there are person-years of BBBM-AD and MCI-AD for all age groups and years.
     - * AD-dementia Incidence counts in simulation exceed artifact values for younger ages
       * Zero incidence and prevalence of AD-dementia at oldest ages (due to bug with negative transition rates)
-    - 
-  * - 4.1
-    - Same as 4.0, and expect there to be more similarity between AD-dementia incidence counts in simulation and GBD/FHS.  Still expect zero incidence and prevalence at oldest ages; that will be fixed in model 4.2.
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/8f7f48009ee36b65763d8103cc4c4182b52908f1/verification_and_validation/2025_09_05a_model4.0_vv.ipynb
+  * - 4.1
+    - Same as 4.0, but also look at durations of BBBM-AD, MCI-AD to make sure they match expectation.  Anticipate there to be more similarity between AD-dementia incidence counts in simulation and GBD/FHS.
+    - 
     - 
   
 
