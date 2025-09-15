@@ -2034,6 +2034,11 @@ Default stratifications to all observers should include scenario and input draw.
       * Neonatal mortality underestimated. More specific neonatal mortality V&V checks will be performed on model 16.4 when the missing pipeline values bug is resolved
     - * `Model 16.3 facility choice V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/125>`_
       * `Model 16.3 ACS intervention V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/126>`_
+  * - 16.4
+    - Same as 16.3
+    - * Bug that caused zero observed deaths among the ACS eligible and covered population has been resolved. Neonatal mortality is looking improved and is ready for additional review
+      * Effect of CPAP and ACS believed to be functioning as expected
+    - * `Notebooks for model 16.4 ACS V&V available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/127>`
   * - 17.0
     - * Confirm scenario-specific coverage (verification with sim outputs)
       * Confirm only simulants who attend ANC receive IFA/MMS (verification with sim outputs)
@@ -2109,14 +2114,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Removed in observer rework?
     - Hussain to update
     - For model 16.4
-  * - Underestimation of neonatal mortality
-    - Missing value in the :code:`neonatal_preterm_birth_with_rds.csmr` pipeline value for ACS eligible simulants
-    - Hussain/Ali to investigate and update
-    - For model 16.4
-  * - Scenario with increased ultrasound coverage leads to (very slightly) lower IFD
-    - Does not appear to be an implementation bug (all facility choice model V&V criteria are met), but is not the expected result
-    - Ali to investigate the rates of false positive and false negatives by scenario to determine if ultrasound improvements is reducing false positives among term babies more than it is reducing false negatives among preterm babies, which could explain this result
-    - TBD
   * - Potentially increased overestimation of all-cause neonatal mortality relative to model 13.3
     - Unknown - possibly related to changes in LBWSG exposure distribution
     - Zeb to re-run interactive sim neonatal mortality V&V on model 16+
@@ -2129,6 +2126,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
     - Zeb to debug further in interactive sim and possibly request an observer for negative other causes mortality
     - TBD
+  * - Scenario with increased ultrasound coverage leads to (very slightly) lower IFD
+    - Does not appear to be an implementation bug (all facility choice model V&V criteria are met), but is not the expected result
+    - Ali to investigate the rates of false positive and false negatives by scenario to determine if ultrasound improvements is reducing false positives among term babies more than it is reducing false negatives among preterm babies, which could explain this result
+    - Tabled for now. `See ticket here <https://jira.ihme.washington.edu/browse/SSCI-2409>`_
   * - Late neonatal mortality due to preterm birth with RDS slightly (~2%) underestimated
     - The PAF of CPAP on preterm birth with RDS CSMRisk is calculated with delivery facility proportions at birth, not at 7 days
     - Accept this limitation, until/unless there are other reasons to revamp PAF calculation, since this would require many components not currently present in PAF sim
