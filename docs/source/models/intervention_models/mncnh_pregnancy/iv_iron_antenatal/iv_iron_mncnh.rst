@@ -45,6 +45,10 @@ Baseline Coverage Data
 IV iron treatment for iron-definiciency anemia pregnancy remains a relatively new intervention, and as such, coverage remains relatively low in low- and middle-income countries, such as Nigeria (see [Akinajo-et-al-2024]_). 
 As such, we will assume a baseline coverage of 0% for all locations for the IV iron intervention. 
 
+.. note::
+
+  As there is no modeled baseline coverage of this intervention in our simulation, we have written the modeling strategy without instructions for baseline calibration (via a PAF or otherwise). If we are to eventually update the baseline coverage of this intervention to be non-zero, we will need to update the modeling strategy below accordingly to include a strategy for baseline calibration.
+
 Vivarium Modeling Strategy
 --------------------------
 
