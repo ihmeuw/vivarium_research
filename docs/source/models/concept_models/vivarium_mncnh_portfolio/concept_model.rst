@@ -1459,7 +1459,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default, but with preterm birth status stratification of neonatal deaths observers
     - Default
   * - 16.5
-    - Artifact update to include low hemoglobin RR for depressive disorders. No need to actually re-run the model, we just need this RR value for our custom PAF calculations.
+    - Inclusion of low hemoglobin RR for depressive disorders. No need to actually re-run the model, we just need this RR value active in the interactive context for our custom PAF calculations.
     - Baseline
     - ``model16.5``
     - Default
