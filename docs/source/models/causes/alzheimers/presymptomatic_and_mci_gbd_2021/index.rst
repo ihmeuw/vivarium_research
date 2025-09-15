@@ -240,15 +240,9 @@ in the :ref:`Alzheimer's population model
     - emr_c543
     - :math:`\text{DW}_\text{c543}`
 
-**Note:** The variable :math:`\Delta_\textsf{X}` denotes the average
-duration in cause state X, as defined in the :ref:`data values and
-sources table below
-<2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`. If
-necessary, for age groups in which :math:`\Delta_\text{(all AD states)}
-= 0`, the ratio :math:`\Delta_\textsf{X} / \Delta_\text{(all AD
-states)}` may be defined (arbitrarily) to be 1/3 for all three AD-states
-X to avoid division by zero errors in code and to have prevalences that
-still add up to 1.
+**Note:** The variable :math:`\Delta_\textsf{X}` denotes the average duration
+in cause state X, as defined in the :ref:`data values and sources table below
+<2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`.
 
 .. list-table:: Transition Data
   :header-rows: 1
@@ -273,7 +267,7 @@ still add up to 1.
   * - i_AD
     - MCI-AD
     - AD
-    - :math:`1 / \Delta_\text{MCI}` --- m_MCI
+    - :math:`1 / \Delta_\text{MCI}`
   * - m_X
     - X
     - Death
@@ -523,12 +517,12 @@ are located at the following paths on the cluster:
   * - :math:`\alpha`, :math:`\lambda`
     - Shape and rate parameters, respectively, of gamma distribution for
       :math:`D_\text{BBBM}`
-    - * :math:`\alpha = 468.75`
-      * :math:`\lambda = 125`
-    - Chosen so that :math:`P(3.5 < D_\text{BBBM} < 4) \approx 0.9`
+    - * :math:`\alpha = 14.0625`
+      * :math:`\lambda = 3.75`
+    - Chosen so that :math:`D_\text{BBBM}` has mean 3.75 and variance 1
       because client said, "The BBBM+ state lasts about 3.5--4 years
-      before transitioning to MCI." Use the same parameters for all years,
-      locations, age groups, and sexes.
+      before transitioning to MCI." Use the same parameters for all
+      years, locations, age groups, and sexes.
   * - gamma_dist
     - Python object representing the gamma distribution for
       :math:`D_\text{BBBM}`
@@ -538,34 +532,37 @@ are located at the following paths on the cluster:
       rate parameter.
   * - :math:`h_\text{MCI}(t)`
     - Hazard function for transitioning into the MCI-AD state from BBBM-AD
-    - gamma_dist.pdf(t) / gamma_dist.sf(t)
+    - * gamma_dist.pdf(t) / gamma_dist.sf(t), or
+      * exp( gamma_dist.logpdf(t) --- gamma_dist.logsf(t) ), an
+        equivalent expression that may help avoid underflow
     - Equal to :math:`\frac{t^{\alpha-1}e^{-\lambda t}}{\int_t^\infty
       u^{\alpha-1} e^{-\lambda u}\, du}`, but can be computed more
       easily as the ratio of the probability density function to the
       survival function, using the methods defined in `SciPy's gamma
       distribution class`_
   * - :math:`\Delta_\text{BBBM}`
-    - Average duration of BBBM-presymptomatic AD
+    - Average duration of BBBM-presymptomatic AD in the absence of
+      mortality
     - :math:`\alpha / \lambda`
     - Mean of gamma distribution for :math:`D_\text{BBBM}`. Does not vary by
       year, location, age group, or sex.
-
-      **Note:** This will slightly overestimate the true average
-      duration because we are not taking mortality into account. We
-      think this will not be too much of an issue because BBBM will be
-      mostly in younger age groups where mortality is relatively small.
   * - :math:`\Delta_\text{MCI}`
-    - Average duration of MCI due to AD
-    - 3.25 years
-    - Obtained from Table 3 in `Potashman et al.`_, assuming a constant hazard
-      rate. Corresponds to an annual probability of 0.735 of staying in MCI-AD,
-      since :math:`\exp(-1 / 3.25) \approx 0.735`. Does not vary by year,
-      location, age group, or sex.
+    - Average duration of MCI due to AD in the absence of mortality
+    - 3.85 years
+    - Obtained from Table 3 in `Potashman et al.`_, assuming a constant
+      hazard rate of transitioning to AD-dementia. Corresponds to an
+      annual conditional probability of 0.771 of staying in MCI-AD given
+      that you don't die within one year, since :math:`\exp(-1 / 3.85)
+      \approx 0.771`. Does not vary by year, location, age group, or
+      sex.
 
-      **Note:** The paper reports a 68.2% chance of staying in MCI and a 5.3%
-      chance of returning to asymptomatic---these probabilities have
-      been combined since our model assumes that a backwards transition
-      is not possible.
+      **Note:** The paper reports a 68.2% chance of staying in MCI and a
+      5.3% chance of returning to asymptomatic---these probabilities
+      have been combined to get an annual probability of 73.5% of
+      staying in MCI since our model assumes that a backwards transition
+      is not possible. The conditional probability above is computed as
+      :math:`0.771 = 0.735 / (1 - 0.047)` since the paper reports a 4.7%
+      chance of dying within a year when starting in the MCI state.
   * - :math:`\Delta_\text{AD}`
     - Average duration of AD-dementia
     - * prevalence_c543 / incidence_rate_c543 for ages 40+
@@ -578,7 +575,8 @@ are located at the following paths on the cluster:
       denominators of prevalence and incidence to cancel out, leaving a ratio
       of counts.
   * - :math:`\Delta_\text{(all AD states)}`
-    - Average duration of all stages of AD combined
+    - Average duration of all stages of AD combined if there is no
+      mortality in the BBBM-AD and MCI-AD stages
     - :math:`\Delta_\text{BBBM} + \Delta_\text{MCI} + \Delta_\text{AD}`
     -
 
