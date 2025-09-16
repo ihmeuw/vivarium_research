@@ -2152,7 +2152,7 @@ Default stratifications to all observers should include scenario and input draw.
   * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
     - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
     - Zeb to request an observer for negative other causes mortality
-    - TBD
+    - Model 16.6
   * - Scenario with increased ultrasound coverage leads to (very slightly) lower IFD
     - Does not appear to be an implementation bug (all facility choice model V&V criteria are met), but is not the expected result
     - Ali to investigate the rates of false positive and false negatives by scenario to determine if ultrasound improvements is reducing false positives among term babies more than it is reducing false negatives among preterm babies, which could explain this result
