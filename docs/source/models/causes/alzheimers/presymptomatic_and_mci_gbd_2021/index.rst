@@ -519,11 +519,11 @@ are located at the following paths on the cluster:
       :math:`D_\text{BBBM}`
     - * :math:`k = 1.22`
       * :math:`\lambda = 6.76`
-    - Chosen to match clien't specification for :math:`D_\text{BBBM}`:
+    - Chosen to match client's specification for :math:`D_\text{BBBM}`:
       The probability of progression from BBBM-AD to MCI-AD is about 50%
-      at 5 years and 80% at 10 years, corresponding to approximately a
-      15% annual rate of progression. Use the same parameters for all
-      years, locations, age groups, and sexes.
+      at 5 years and 80% at 10 years, corresponding to an average annual
+      rate of progression of approximately 15% . Use the same parameters
+      for all years, locations, age groups, and sexes.
   * - bbbm_dist
     - Python object representing the Weibull distribution for
       :math:`D_\text{BBBM}`
