@@ -79,7 +79,7 @@ as well as abortion/miscarriage maternal disorders subcauses.
 Summary of modeling strategy
 ++++++++++++++++++++++++++++
 
-Given that the :ref:`pregnancy model <>` used in the MNCNH simulation already assigns
+Given that the :ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>` used in the MNCNH simulation already assigns
 partial term pregnancy outcomes according to the incidence rates of the GBD causes of
 ectopic pregnancy and abortion/miscarriage, we assume that 100% of partial term pregnancies
 in the MNCNH simulation are "incident cases" and therefore all partial term pregnancies
