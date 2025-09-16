@@ -27,6 +27,7 @@
   And then add it to the list of decorators above.
 
 .. sectnum::
+  :depth: 3
 
 .. _sex_gender:
 
