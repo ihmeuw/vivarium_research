@@ -580,13 +580,15 @@ Portfolio research repository.
 Choosing BEmONC vs. CEmONC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Among simulants whose IFD status is "in-facility," choose BEmONC vs.
-CEmONC according to the location-specific probabilities in the
-`CSV saved here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/991b7d99caf175449a26858e6ed5f053e89a9781/data_prep/hospital_ifd_estimates.csv>_`.
-The probabilities are given to us by the Health Systems team, and are 
-estimates of the proportion of in-facility deliveries that occur in 
-hospitals, which we are using as a proxy for CEmONC facilities. We 
-currently use the most recent year available, 2024, for all locations.
+Among simulants whose IFD status is "in-facility," choose CEmONC according 
+to the location-specific probabilities in the `CSV saved here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/991b7d99caf175449a26858e6ed5f053e89a9781/data_prep/hospital_ifd_estimates.csv>_`.
+Since in-facility deliveries occur in either BEmONC or CEmONC facilities, 
+the probability of delivering in a BEmONC facility is the complement of 
+the CEmONC probability (i.e., 1 - P(CEmONC)). These estimates are from 
+the Health Systems team, representing the proportion of in-facility 
+deliveries that occur in hospitals, which we are using as a proxy for 
+CEmONC facilities. We currently use the most recent year available, 2024, 
+for all locations.
 The decision of whether a simulant who gives birth in-facility delivers
 in a BEmONC or CEmONC facility should be independent from other choices 
 in the model.
