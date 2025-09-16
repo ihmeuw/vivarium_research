@@ -918,11 +918,48 @@ Default stratifications to all observers should include scenario and input draw.
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
       * ACS coverage
     - 
-  * - 8. Impossible neonatal CSMRisk
+  * - 8. Neonatal all-cause mortality risk
     - * Child sex
       * Child age group
       * Delivery facility type
       * CPAP availability
+      * Antibiotics availability
+      * Probiotics availability
+      * Corticosteroid coverage
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+      * Preterm status (dichotomous at 37 weeks)
+    - Observe the following statistics about the ACMRisk pipeline used to sample for deaths:
+
+      * The number of values (equal to the number of living simulants)
+      * The sum of the values
+      * The sum of the squares of the values
+
+      All of these quantities can aggregate across seeds in the normal way (summation).
+  * - 9. Neonatal cause-specific mortality risks (per cause)
+    - * Child sex
+      * Child age group
+      * Delivery facility type
+      * CPAP availability
+      * Antibiotics availability
+      * Probiotics availability
+      * Corticosteroid coverage
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+      * Preterm status (dichotomous at 37 weeks)
+    - Observe the following statistics about the CSMRisk pipelines just *before* they are normalized 
+      so their sum does not exceed 1:
+
+      * The number of values (equal to the number of living simulants)
+      * The sum of the values
+      * The sum of the squares of the values
+
+      All of these quantities can aggregate across seeds in the normal way (summation).
+  * - 10. Impossible neonatal CSMRisk
+    - * Child sex
+      * Child age group
+      * Delivery facility type
+      * CPAP availability
+      * Antibiotics availability
+      * Probiotics availability
       * Corticosteroid coverage
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
       * Preterm status (dichotomous at 37 weeks)
@@ -1485,12 +1522,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 16.6
-    - Larger run for neonatal mortality V&V with "impossible neonatal CSMRisk" observer.
+    - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Baseline
     - ``model16.6``
     - For this run only, 10,000,000 population size per draw
     - Default
-    - Default, note addition of "Impossible neonatal CSMRisk" observer.
+    - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
   * - 17.0
     - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
     - Baseline and MMS scale-up scenarios 
