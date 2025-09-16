@@ -2113,10 +2113,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Missing preterm birth stratifications in neonatal deaths observer
-    - Removed in observer rework?
-    - Hussain to update
-    - For model 16.4
   * - Potentially increased overestimation of all-cause neonatal mortality relative to model 13.3
     - Unknown - possibly related to changes in LBWSG exposure distribution
     - Zeb to re-run interactive sim neonatal mortality V&V on model 16+
