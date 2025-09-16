@@ -207,9 +207,9 @@ Cause Model Diagram
         rankdir = LR;
         ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
         ftb [label="full term\nbirth", style=dashed]
-        alive [label="parent did not die of residual maternal disorders"]
-        dead [label="parent died of residual maternal disorders"]
-        RMD [label="affected with residual maternal disorders"]
+        alive [label="parent did not\ndie of residual maternal\ndisorders"]
+        dead [label="parent died of residual\nmaternal disorders"]
+        RMD [label="affected with residual\nmaternal disorders"]
 
         ftp -> alive  [label = "1 - ir"]
         ftp -> RMD [label = "ir"]

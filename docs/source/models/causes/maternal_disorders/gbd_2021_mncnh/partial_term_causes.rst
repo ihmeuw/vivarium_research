@@ -99,9 +99,9 @@ Cause Model Diagram
     digraph hemorrhage_decisions {
         rankdir = LR;
         ptp [label="partial term\npregnancy, post\nantenatal models", style=dashed]
-        alive [label="parent did not die of partial term pregnancy maternal disorders"]
-        dead [label="parent died of partial term pregnancy maternal disorders"]
-        PTPMD [label="affected with partial term pregnancy maternal disorders"]
+        alive [label="parent did not die\nof partial term pregnancy\nmaternal disorders"]
+        dead [label="parent died of partial\nterm pregnancy maternal disorders"]
+        PTPMD [label="affected with\mpartial term pregnancy\nmaternal disorders"]
 
         ptp -> alive  [label = "1 - ir"]
         ptp -> PTPMD [label = "ir"]
