@@ -2057,6 +2057,8 @@ Default stratifications to all observers should include scenario and input draw.
         * Gestational age
         * Birthweight
         * Birth outcomes (MMS reduces rate of stillbirth, increases rate of live birth, no change to "partial term" outcomes)
+
+      * Additional confirmation of effect of CPAP/ACS interventions with newly added preterm birth stratification to the births observer (as was done in the neonatal checks notebook for model 16.4)
     - 
     - 
   * - 18.0
