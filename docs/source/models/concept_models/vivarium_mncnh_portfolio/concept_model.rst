@@ -873,6 +873,7 @@ Default stratifications to all observers should include scenario and input draw.
       * CPAP availability
       * Corticosteroid coverage
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+      * Preterm status (dichotomous at 37 weeks)
     - Included, except for corticosteroid coverage which has yet to be added
   * - 3. Neonatal deaths (cause-specific)
     - * Child sex
@@ -1470,7 +1471,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and MMS scale-up scenarios 
     - ``model17.0``
     - Default
-    - Default, note IFA/MMS coverage added as a stratifying variable to maternal population observer
+    - Default, note IFA/MMS coverage added as a stratifying variable to maternal population observer. Also add preterm birth stratification to the births observer.
     - Default
   * - 18.0
     - :ref:`Anemia screening implementation <anemia_screening>` (including hemoglobin and ferritin screenings), see also the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
@@ -2037,7 +2038,7 @@ Default stratifications to all observers should include scenario and input draw.
   * - 16.4
     - Same as 16.3
     - * Bug that caused zero observed deaths among the ACS eligible and covered population has been resolved. Neonatal mortality is looking improved and is ready for additional review
-      * Effect of CPAP and ACS believed to be functioning as expected
+      * Effect of CPAP and ACS believed to be functioning as expected. We will do a final confirmation once preterm stratification is added to the births observer, but based on the interactive sim there is no reason to believe there is a bug
     - * `Notebooks for model 16.4 ACS V&V available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/127>`
   * - 17.0
     - * Confirm scenario-specific coverage (verification with sim outputs)
