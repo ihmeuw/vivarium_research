@@ -28,28 +28,27 @@ Modeled Subcauses
 The following maternal disorders subcauses will be modeled individually,
 in the indicated model-building wave:
 
-Wave 1
-++++++
-
 .. toctree::
     :maxdepth: 1
 
     maternal_hemorrhage
     maternal_sepsis
     obstructed_labor
+    postpartum_depression
+    residual_maternal_disorders
+    partial_term_causes
 
-Wave 2
-++++++
+Note that the postpartum depression caues model is outside of the GBD maternal disorders
+hierarchy (implemented using custom rather than GBD data) and also differs from the remaining
+maternal disorders causes in that only simulants who do not die due to any maternal disorder
+cause are eligible to become "infected" with postpartum depression.
+
+Additional maternal disorders causes to be included in a future version of the model:
 
 .. toctree::
     :maxdepth: 1
 
-    postpartum_depression
-
-Wave 3
-++++++
-
-* Maternal hypertensive disorders
+    maternal_hypertensive_disorders
 
 The remainder of this document describes maternal disorders overall,
 describes the strategy for capturing the burden of the maternal
@@ -293,15 +292,23 @@ future waves, the simulation should make decisions about incidence of
 the different subcauses in the order of the suspected causal
 relationships. The specified order is:
 
+#. Partial term pregnancy maternal disorders
 #. Maternal hypertensive disorders
 #. Obstructed labor and uterine rupture
 #. Maternal hemorrhage
 #. Maternal sepsis and other maternal infections
 #. Residual maternal disorders
+#. Postpartum depression
 
 The current plan is to have a separate "incidence timestep" for each of the
 modeled subcauses, ordered as above, and the simulation will decide
 which simulants experience each subcause on the corresponding timestep.
+
+Note that the residual maternal disorders cause includes a subcause of 
+"late maternal deaths." Therefore, it is possible in reality that an
+individual could experience postpartum depression prior to dying of a 
+late maternal death. However, we do not allow for that possibility in 
+our model.
 
 Mortality component
 """""""""""""""""""

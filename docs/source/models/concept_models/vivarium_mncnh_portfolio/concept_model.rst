@@ -382,8 +382,11 @@ Intrapartum component
         * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
+        * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
+        * :ref:`Partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>`
       - * Hemoglobin at birth as a variable that impacts maternal disorders causes
         * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
+        * New causes of residual and partial term pregnancy maternal disorders
 
 .. _mncnh_portfolio_neonatal_component:
 
@@ -1500,6 +1503,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 22.0
+    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` cause models
+    - Baseline
+    - ``model22.0``
+    - Default
+    - Default
+    - Default
 
 .. note:: 
 
@@ -2083,6 +2093,10 @@ Default stratifications to all observers should include scenario and input draw.
   * - 21.0
     - * Confirm that neonatal mortality (particularly for neonatal sepsis) still matches expectation in the baseline scenario
       * Using the interactive simulation, confirm effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. The total effect should be evaluated by stepping through the simulation and observing the rate of mortality due to neonatal sepsis stratified by maternal hemoglobin exposure.
+    - 
+    - 
+  * - 22.0
+    - Confirm expected rates of cause-specifc and overall maternal disorders causes
     - 
     - 
 
