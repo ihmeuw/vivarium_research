@@ -76,7 +76,8 @@ Guiding Principles
 
 Our guiding principles for this document can be summarized in three points:  
 
-**1. This work is important**
+This work is important
+~~~~~~~~~~~~~~~~~~~~~~
 
 Inclusive language use is important, and we want to begin by acknowledging the 
 potential harm that using simplistic and gendered language can create.
@@ -102,7 +103,8 @@ We hope to inspire change in other researchers by presenting our studies with ge
 inclusive language and model practices we believe in. For all of these reasons, we feel this 
 guide is very important.
 
-**2. This work is evolving**
+This work is evolving
+~~~~~~~~~~~~~~~~~~~~~
 
 Language is constantly evolving, so there is rarely a single “right” choice and the accepted 
 choice may evolve over time. Therefore, this guide will be a living document that we will 
@@ -113,7 +115,8 @@ While we hope this can be up-to-date and comprehensive, no guide can anticipate 
 recognize every limitation, or be applicable to every research question. We aim to provide enough 
 information that users can understand the spirit of the guide and apply that to their unique needs.  
 
-**3. This is work**
+This is work
+~~~~~~~~~~~~
 
 We acknowledge that there is a cost associated with a transition to gender inclusive language 
 practices from standard, gendered language. Although using gender inclusive language is work, 
