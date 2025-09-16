@@ -581,32 +581,16 @@ Choosing BEmONC vs. CEmONC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Among simulants whose IFD status is "in-facility," choose BEmONC vs.
-CEmONC according to the following probabilities, independently of other
-choices in the model:
+CEmONC according to the location-specific probabilities saved in the
+`CSV saved here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/991b7d99caf175449a26858e6ed5f053e89a9781/data_prep/hospital_ifd_estimates.csv>_`.
+The probabilities are given to us by the Health Systems team, and are 
+estimates of the proportion of in-facility deliveries that occur in 
+hospitals, which we are using as a proxy for CEmONC facilities. We 
+currently use the most recent year available, 2024, for all locations.
+The decision of whether a simulant who gives birth in-facility delivers
+in a BEmONC or CEmONC facility should be independent from other choices 
+in the model.
 
-.. list-table:: Conditional probabilities of BEmONC and CEmONC given in-facility delivery
-  :header-rows: 1
-  :widths: 20 10 10 10
-
-  * - Conditional probability
-    - Ethiopia
-    - Nigeria
-    - Pakistan
-  * - :math:`\text{Pr}[\text{BEmONC}\mid \text{in-facility}]`
-    - 0.160883
-    - 0.004423
-    - 0.340528
-  * - :math:`\text{Pr}[\text{CEmONC}\mid \text{in-facility}]`
-    - 1 - 0.160883
-    - 1 - 0.004423
-    - 1 - 0.340528
-
-.. todo::
-
-  Update the above probabilities once we get better data from Annie's
-  team. The current values (except for Pakistan, which is based on
-  microdata from BMGF) are based on an imprecise analysis of DHS data
-  and likely underestimate the proportion of BEmONC facilities.
 
 Once BEmONC or CEmONC has been chosen for all in-facility deliveries,
 use this choice in conjunction with the IFD status to **assign one of
