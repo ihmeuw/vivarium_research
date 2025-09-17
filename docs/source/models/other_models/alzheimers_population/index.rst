@@ -359,9 +359,9 @@ of AD, instead of defining :math:`\lambda_{g,t}` in terms of
 
 .. math::
 
-  \lambda_{g,t} = S \cdot B_g(t),
+  \lambda_{g,t} = S \cdot \dot B_g(t),
 
-where :math:`S` is the model scale and :math:`B_g'(t)` is the derivative
+where :math:`S` is the model scale and :math:`\dot B_g(t)` is the derivative
 of :math:`B_g(t)` with respect to :math:`t`. We can decompose
 :math:`B_g(t)` into two components:
 
@@ -382,8 +382,8 @@ Note that :math:`B_g^\text{AD}` and :math:`B_g^\text{die}` are defined
 in terms of *future* events with respect to the time :math:`t`, but
 that's fine.
 
-We will estimate :math:`B_g'(t) = \frac{d}{dt}B_{g,t}^\text{AD} +
-\frac{d}{dt}B_{g,t}^\text{die}` by making the simplifying assumption that
+We will estimate :math:`\dot B_g(t) = \dot B_{g,t}^\text{AD} +
+\dot B_{g,t}^\text{die}` by making the simplifying assumption that
 **everyone's duration of pre-dementia AD is exactly equal to the average
 duration of BBBM-AD plus MCI-AD**. This will simplify our calculations
 and will hopefully give a good enough approximation to closely match the
@@ -411,7 +411,7 @@ count :math:`B_{g,t}^\text{AD}` is increasing should be
 
 .. math::
 
-  \frac{d}{dt} B_{g,t}^\text{AD}
+  \dot B_{g,t}^\text{AD}
   = \left(1 - \frac{r}{w}\right)
     \left(i_{g + nw,\, t+\Delta}^\text{AD}\right)
      \left(Y^\text{real}_{g + nw,\, t+\Delta}\right)
@@ -428,7 +428,7 @@ years later is calculated as
 .. math::
 
   % I_{(F,\,70),\, 2025}^\text{BBBM}
-  \frac{d}{dt} B_{(F,\,70),\, 2025}^\text{AD}
+  \dot B_{(F,\,70),\, 2025}^\text{AD}
   = \left(\frac{3}{5}\right)
     \left(i_{(F, 75)}^\text{AD}\right)
      \left(Y^\text{real}_{(F,75),\, 2032}\right)
