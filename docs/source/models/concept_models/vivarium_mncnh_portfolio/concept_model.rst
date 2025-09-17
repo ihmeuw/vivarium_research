@@ -1501,10 +1501,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
-  * - 22.0*
+  * - 23.0*
     - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`
     - Baseline 
-    - ``model22.0``
+    - ``model23.0``
     - Default
     - Default
     - Default
@@ -2100,7 +2100,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Using the interactive simulation, confirm effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. The total effect should be evaluated by stepping through the simulation and observing the rate of mortality due to neonatal sepsis stratified by maternal hemoglobin exposure.
     - 
     - 
-  * - 22.0
+  * - 23.0
     - * Confirm that the proportion of in-facility deliveries in CEmONC and BEmONC facilities matches the location-specific estimates from the HS team.
     -
     -
