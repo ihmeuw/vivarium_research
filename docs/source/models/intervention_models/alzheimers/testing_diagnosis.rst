@@ -59,10 +59,6 @@ as defined in :ref:`Reference Scenario and Alternative Scenario 1 <alz_scenarios
     - PET scanners measure brain protein levels are only available at specialized medical facilities
 
 
-.. todo::
-
-  Fill out table with any abbreviations and their definitions used in this document.
-
 Intervention Overview
 -----------------------
 
