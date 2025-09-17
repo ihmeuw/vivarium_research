@@ -229,13 +229,15 @@ The basic plan for the design of the simulation is as follows:
     - Males & Females
     -
   * - Age start (Initialization)
-    - Age at which preclinical AD starts (~30 years or later)
+    - Age at which preclinical AD starts (currently set to 25 years to
+      accommodate the youngest preclinical AD incident cases)
     - Age start is simulant-dependent
   * - Age end (Initialization)
     - 125 years
     - End of oldest age group
   * - Age start (Observation)
-    - Age at which preclinical AD starts (~30 years or later)
+    - Age at which preclinical AD starts (currently set to 25 years to
+      accommodate the youngest preclinical AD incident cases)
     - All simulants are observed since all have AD or its precursors
   * - Age end (Observation)
     - 125 years or death
