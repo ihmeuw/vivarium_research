@@ -581,7 +581,7 @@ Choosing BEmONC vs. CEmONC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Among simulants whose IFD status is "in-facility," choose CEmONC according 
-to the location-specific probabilities in the `CSV saved here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/991b7d99caf175449a26858e6ed5f053e89a9781/data_prep/hospital_ifd_estimates.csv>_`.
+to the location-specific probabilities in the `CSV saved here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/991b7d99caf175449a26858e6ed5f053e89a9781/data_prep/hospital_ifd_estimates.csv>`__.
 Since in-facility deliveries occur in either BEmONC or CEmONC facilities, 
 the probability of delivering in a BEmONC facility is the complement of 
 the CEmONC probability (i.e., 1 - P(CEmONC)). These estimates are from 
