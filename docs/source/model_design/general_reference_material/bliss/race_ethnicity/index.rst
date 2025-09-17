@@ -840,7 +840,9 @@ reflect the difference between, and complexity of, those concepts.
 For self-reported data, the typical survey questions used
 (including those standardized by the US Federal government as described above)
 are unclear about which dimensions they are asking.
-US death certificates record an undifferentiated mixture of perceived race
+To make matters worse, how survey respondents interpret such questions may be in the process
+of changing due to the proliferation of consumer genetic ancestry tests. [Johfre_2021]_
+Beyond just self-reported data, US death certificates record an undifferentiated mixture of perceived race
 and family-reported REA, due to the complex process by which they are filled out
 (typically by funeral directors). [Arias_2016]_
 
@@ -1186,3 +1188,6 @@ References
 
 .. [Mills_2019]
     Mills G., Heimel S., Buchanan A. Response Consistency between the Detailed Race and Hispanic Origin Questions from the 2016 ACS Content Test and the Ancestry Question. https://www.census.gov/content/dam/Census/library/working-papers/2019/acs/2019_Mills_01.pdf
+
+.. [Johfre_2021]
+    Sasha Shen Johfre, Aliya Saperstein, Jill A. Hollenbach; Measuring Race and Ancestry in the Age of Genetic Testing. Demography 1 June 2021; 58 (3): 785–810. doi: https://doi.org/10.1215/00703370-9142013
