@@ -88,7 +88,7 @@ understanding of lung cancer rates. If we only use the overly homogenized racial
 cancer appear to be low. But by separating this racial group into ancestry subcategories, we can see that Southeast Asians show higher 
 rates of nonsmoking-related lung cancer, specifically in adenocarcinomas caused by the EGFR 
 (epidermal growth factor receptor) genetic mutation [Noronha_2024]_. This is important information for cancer screening that otherwise 
-would have been missed, and lets us begin to untangle the impacts of ancestry from the impacts of race.
+would have been missed, and lets us begin to (imperfectly!) untangle the impacts of ancestry from the impacts of race.
 
 In an effort to work toward institution-wide Diversity, Equity, and Inclusion (DEI) goals and advance our team’s research 
 and publications, we created this guide to explore the complexities of race and ethnicity in our work. We hope to inspire 
@@ -131,8 +131,8 @@ We’re not going to put words into other people’s mouths, but we will use our
 most accurate and inclusive.
 
 
-Introduction to race and ethnicity
-----------------------------------
+Introduction to race, ethnicity, and ancestry
+---------------------------------------------
 
 Why is this important?
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -289,9 +289,16 @@ Though racial "categories" originally were based on visible characteristics,
 racial prejudice extends beyond these, to things like names, dialect, or fashion,
 when these are used by an observer to "categorize" someone into a racial group. [Bertrand_2004]_
 This makes it difficult to distinguish in practice between racial and ethnic discrimination;
-in principle, the difference is that ethnic discrimination is based on (conscious or unconscious) negative beliefs about
-culture itself, while racial discrimination is based on (conscious or unconscious) negative beliefs about populations that differ
+in principle, the difference is that ethnic discrimination is based on or originates from (conscious, unconscious, or systemic)
+belief systems about culture itself,
+while racial discrimination is based on (conscious, unconscious, or systemic) belief systems about populations that differ
 on visible characteristics.
+To add to the difficulty in disentangling these factors, both can be occurring at once:
+in the Bertrand et al. study cited above, job application reviewers could plausibly be *both*
+discriminating against Black people as a whole relative to White people,
+and discriminating against African-Americans even *more*
+than they would discriminate against people they perceived to be Black but not African-American,
+such as Nigerian-Americans.
 
 The history and origins of racism are complex,
 and sometimes contentious, topics.
@@ -343,7 +350,7 @@ While these are out of scope for the present guide,
 that doesn't mean they are less important than race, ethnicity, and ancestry.
 We may address these concepts in a future guide.
 
-Glossary of General Terminology
+Glossary of general terminology
 -------------------------------
 In this section, you will find a glossary of general terminology and acronyms that will be used 
 throughout this style guide. 
@@ -418,7 +425,7 @@ throughout this style guide.
      - Critical Race Theory, definition included above.
 
 
-US Government Definitions
+US government definitions
 -------------------------
 
 The definitions of REA described above are intended to be global,
@@ -557,7 +564,7 @@ if they also marked Brazil as their specific "Hispanic or Latino" origin.
 From the perspective of the scientific definitions introduced above,
 this confusion is a result of not precisely defining the constructs being measured,
 a mismatch between the definitions and popular perception,
-or not acknowledging that dimensions of race, ethnicity, and ancestry
+and not acknowledging that dimensions of race, ethnicity, and ancestry
 can be conceptually distinct even when they are highly correlated.
 
 Language is an aspect of ethnicity, and there are forms of discrimination
@@ -854,8 +861,12 @@ Instead, we should trace these variables back to their source when it is
 feasible to do so.
 
 Data sources might mislabel their data (race vs ethnicity vs ancestry), might use misleading or 
-difficult questions ("Are you Hispanic or Latino?" might be interpreted as asking about language spoken or perceived race, among other things),
-or might conflate different aspects of REA (ancestry might differ from perceived race).
+difficult questions,
+or might conflate different aspects of REA
+(e.g. "Are you Hispanic or Latino?" might be interpreted as asking about language spoken or perceived race, among other things).
+
+.. todo::
+  Add a figure here showing some example data sources and some of the common pitfalls.
 
 There are some cases, however, where a more exact and defined metric is used.
 For example, questions about "perceived" or "socially assigned" race
@@ -863,13 +874,8 @@ For example, questions about "perceived" or "socially assigned" race
 directly address the potential for racial discrimination based on appearance.
 These have been used in a number of surveys, [White_2020]_
 and when they are fielded alongside questions on self-identified race,
-can be used to understand the interplay between identity and perception. [Vargas_2016]_ [Stepanikova_2016]_
+can be used to understand the interplay between identity and (meta-)perception. [Vargas_2016]_ [Stepanikova_2016]_
 Genetic ancestry can be analyzed in combination with race to tease apart the importance of different factors. [Cole_2021]_
-
-This figure shows some example data sources and some of the common pitfalls.
-
-.. todo::
-  Figure!
 
 When it is not feasible to trace an REA variable back to its source,
 either because we are many steps removed from the original data or because
@@ -882,7 +888,7 @@ labeled either "race" or "ethnicity" actually represents a non-differentiated RE
 
 .. todo::
 
-  Measurement error section?
+  Adapt measurement error section from sex and gender?
 
 Terminology
 ~~~~~~~~~~~
@@ -904,36 +910,36 @@ REA categories
 As noted above, the government provides standardized REA
 categories, though these do change over time. Currently,
 there are two dimensions the government calls "race" and "ethnicity"
-(though as noted these terms do not align with our definitions).
-The former has categories of American Indian or Alaska Native, Asian, Black or African American,
+(though as noted the way the government uses these terms does not align with our definitions).
+"Race" has categories of American Indian or Alaska Native, Asian, Black or African American,
 Native Hawaiian or Other Pacific Islander, and White.
-The latter has categories of Hispanic or Latino and Not Hispanic or Latino.
+"Ethnicity" has categories of Hispanic or Latino and Not Hispanic or Latino.
 
-By having a set standard,
-it improves the chance that multiple data sources will have the same
-categories. However, this is not guaranteed.
+Having a set standard
+improves the chance that multiple data sources will have the same
+categories. However, this is never guaranteed.
 Ancestry categories, which have no government standard, are likely to be even more discordant.
 Here, we will go through
 a few scenarios of how REA categories might be misaligned
 between datasets and the options for handling each.
 
-Nested Categories
+Nested categories
 ~~~~~~~~~~~~~~~~~
 
 In this guide, we use nested categories to mean that one dataset has more granular
-categories than another. For example, one dataset might report a race group
+categories than another. For example, one dataset might report an REA group
 as simply "Asian" whereas another might have many categories that fit within
 this group like Chinese, Filipino, Japanese, or Korean. In fact, the US goverment
 often collects both the more granular and rolled up categories of data.
 
-Granular data is usually better, as different groups within a single race
-category can have very different experiences and needs. Try to keep the
+Granular data is usually better, as different groups within a single
+broad category can have very different experiences and needs. Try to keep the
 most granular data possible. However, granular data can sometimes create
 issues with statistical power or small sample size. Weigh the different
 pros and cons as they relate to your project, centering people's
 identities and needs in the conversation.
 
-Non-Nested Categories
+Non-nested categories
 ~~~~~~~~~~~~~~~~~~~~~
 
 If you need to combine multiple datasets, you will likely have to combine
@@ -953,69 +959,73 @@ Another option is to attempt a crosswalking approach if one or more of your
 input datasets use different categories than the standard. This would allow
 you to retain all of the data inputs, while keeping some granularity in categories.
 
-Multiracial Groups
+Overlapping groups
 ~~~~~~~~~~~~~~~~~~
 
-Part of the US standard approach is allowing people to select as many race and
-ethnicity categories as they identify with. Many people have multiracial
+The OMB standard, and other survey questions, allow people to select as many race and
+ethnicity categories as they identify with. Many people have multiple REA-related
 identities and capturing this is important. However, it creates a statistical
 issue without an easy answer - how do you handle overlapping groups?
 
 Often, someone will have made the decision about how to handle
-race/ethnicity categories and multiracial individuals before you
+REA categories and individuals reporting multiple REA identities before you
 receive the data. In this case, try to find out what was assumed
 and note it appropriately in your limitations as needed.
 
-Below we outline some options for how to handle multiracial data.
+Below we outline some options for how to handle overlapping groups.
 To understand them more clearly, let's provide an example of a single
-person who selected both "Black or African American" and "Asian" for
-their race.
+person who selected both "Black or African American" and "Asian" on
+the "race" question of the OMB standard.
 
 The first option is to include all
-combinations of race/ethnicity groups. So for this example, you would have
+combinations of REA groups. So for this example, you would have
 groups for "Black or African American alone", "Asian alone", and "Both Black or African
 American and Asian". If your dataset is large
 enough to support having this level of granularity in groups, this
 approach can work well. However, often this leads to issues with
 small sample sizes.
 
-The second option is to exclude everyone who selected multiple race
-or ethnicity groups. So we would just not count our example individual. We do not
+The second option is to exclude everyone who selected multiple REA
+groups. So we would just not count our example individual. We do not
 recommend this approach.
 
-The third is to create a large, "multiracial" group. The resulting
-groups would then be "Black or African American", "Asian", and "Multiracial". We also do
+The third is to create a large, "multi-REA" group. The resulting
+groups would then be "Black or African American", "Asian", and "multi-REA". We also do
 not recommend this approach as the resulting group is generally
 too diverse to have any meaningful conclusions about.
 
-The fourth is to count people in all race/ethnicity groups they
+The fourth is to count people in all REA groups they
 selected. Therefore in our example, the individual would be
 counted twice - once in "Black or African American" and once in "Asian". This
 can lead to double counting in the data which might be more or
-less important depending on the size of the multiracial group
+less important depending on the size of the multi-REA group
 in the dataset and the type of analysis. This might be a reasonable option.
 
 The fifth option is to run analyses with
 both a more limited race/ethnicity group, and then with a larger,
-multiracial group. For example, you would have categories of "Asian"
+multi-REA group. For example, you would have categories of "Asian"
 and "Asian alone" both existing. "Asian" would include anyone who
-selected Asian, including the multiracial person in our example,
+selected Asian, including the person in our example,
 and "Asian alone" would be people who only identify as
 Asian, excluding the example individual. Often people will present
 anlyses for both of these groups. This is also a reasonable
 option.
 
 Last, you can attempt to crosswalk individuals into a single
-race/ethnicity group. There have been multiple attempts to do
+group. There have been multiple attempts to do
 this based on studies that allow respondents to select all racial
 categories they identify with and then to pick a single one they
 most identify with. [Liebler_2008]_ Therefore, the example individual
-would be placed in a single racial group - either "Black or African
-American" or "Asian" based on their other data. If this is
+would be placed in a single group -- either "Black or African
+American" or "Asian" -- based on their other data. If this is
 feasible based on the data present, it is also a reasonable approach.
 
 Results
 +++++++
+
+.. todo::
+
+  Adapt more content from the sex and gender guide into this section.
 
 Communication of results
 ------------------------
