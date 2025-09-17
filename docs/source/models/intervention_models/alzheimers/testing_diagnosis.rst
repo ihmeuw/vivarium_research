@@ -83,33 +83,68 @@ by the introduction of BBBM tests in :ref:`Alternative Scenario 1 <alz_scenarios
 Location-specific testing rates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 US testing rates among patients who are diagnosed with MCI or dementia are given 
-in Figure 3 `here <https://pmc.ncbi.nlm.nih.gov/articles/PMC12321507/>`_ (overall cohort).
+in Figure 3 in [Yan-et-al-2025-Medicare-Diagnostics]_ (overall cohort).
 
 We adjust these US CSF and PET testing rates upwards (2x) due to subsequent 
 increases in coverage by Medicare, and add substantial uncertainty (-50% for the lower 
-bound and +50% for the upper bound).
+bound and +50% for the upper bound) to create a 95% confidence interval.
 
 To reach CSF and PET testing rates for other countries, we adjust the (increased) US test rates based on 
-per capita `Alzheimer's pharmaceutical spending <https://brainhealthatlas.org/data/economic-impact/bar>`_.
+per capita Alzheimer's pharmaceutical spending from [Brain-Health-Atlas]_.
 For example, a country spending 10% of the US would have CSF and PET testing rates equal to 
 10% of the US.
 
-Due to a 
-`high perentage of CSF testing <https://www.sciencedirect.com/science/article/pii/S2274580724001195?via%3Dihub#bib22>`_
-in Sweden, we further adjust Sweden's CSF rate to be 9x its PET rate from the previous step.
+Due to a high perentage of CSF testing in Sweden [Mattke-et-al-2024-Sweden-Capacity]_, 
+we further adjust Sweden's CSF rate to be 9x its PET rate from the previous step.
 
 We use these location-specific test rates to determine how likely a simulant with 
 MCI is to receieve a CSF or PET test, and which test they should receive.
 
-.. todo::
+.. list-table:: Location-specific test rates
+  :widths: 15 15 15
+  :header-rows: 1
 
-  Distribution for draws with test rate upper/lower bounds?
+  * - Location
+    - CSF mean % (Confidence)
+    - PET mean % (Confidence)
+  * - US
+    - 4.4 (2.2, 6.6)
+    - 1.4 (.70, 2.1)
+  * - Germany
+    - 2.8 (1.4, 4.2)
+    - .89 (.44, 1.3)
+  * - Spain
+    - 1.4 (.70, 2.1)
+    - .45 (.22, .67)
+  * - Sweden
+    - 3.8 (1.9, 5.7)
+    - .42 (.21, .63)
+  * - UK
+    - 1.3 (.65, 2.0)
+    - .41 (.21, .62)
+  * - Japan
+    - 1.3 (.65, 1.9)
+    - .41 (.21, .62)
+  * - Israel
+    - .43 (.21, .64)
+    - .14 (.07, .20)
+  * - Taiwan
+    - .42 (.21, .63)
+    - .13 (.07, .20)
+  * - Brazil
+    - .12 (.06, .18)
+    - .04 (.02, .06)
+  * - China
+    - .08 (.04, .12)
+    - .02 (.01, .04)
 
 Implementation
 ^^^^^^^^^^^^^^
-Each simulant will be assigned a propensity (0 to 1) for receiving a test. The propensity will apply for the 
+Each simulant will be assigned a propensity (0/high to 1/low) for receiving a test. The propensity will apply for the 
 simulant's lifetime.
 
+On timestep
+'''''''''''
 On each timestep, use the following steps to assign CSF and PET tests:
 
 1. Assess eligibility based on the following requirements:
@@ -118,23 +153,13 @@ On each timestep, use the following steps to assign CSF and PET tests:
   - Simulant age is >=60 and <80
   - Simulant has never recieved a CSF or PET test before
   - Simulant has never recieved a positive BBBM test before
-  - Propensity is higher than location-specific testing rate
+  - Propensity is higher than location-specific testing rate (CSF rate plus PET rate)
 
 2. If eligible (meets all requirements), give test. If not, do not give test. Do not assign a diagnosis.
-3. Assign if it was a CSF or PET test based on location-specific rates.
+3. Assign if it was a CSF or PET test based on location-specific rates. If propensity is higher than CSF testing rate: give a CSF test. Otherwise, propensity must be lower than CSF testing rate but higher than CSF + PET rate: give a PET test.
 
-Assumptions and Limitations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- Uses same age limits as BBBM testing due to similar assumptions that tests
-  are not useful at the younger/older ages 
-- A simulant with an eligible propensity will be tested at the first time step 
-  they satisfy the MCI and age criteria, and then can never be tested again, 
-  so propensity does not need to be re-assigned at any point
-- Assume no testing in pre-clinical or AD dementia states
-- Not used to assign treatment (no diagnosis)
-
-Initialization of test history
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+On initialization
+'''''''''''''''''
 To avoid large numbers of simulants being tested on the first simulation time step,
 we must initialize simulant test history status so that some number of simulants
 have already been tested at simulation start. Only simulants who were not eligible 
@@ -145,6 +170,19 @@ To accomplish this, simulant eligibility should be checked at simulation initial
 and simulants who satisfy all eligibility requirements at that time should be marked as having 
 previously recieved a CSF/PET test. These simulants will be ineligible for future 
 CSF/PET testing.
+
+Assumptions and Limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Uses same age limits as BBBM testing due to similar assumptions that tests
+  are not useful at the younger/older ages 
+- A simulant with an eligible propensity will be tested at the first time step 
+  they satisfy the MCI and age criteria, and then can never be tested again, 
+  so propensity does not need to be re-assigned at any point
+- Assume no testing in pre-clinical or AD dementia states
+- Not used to assign treatment (no diagnosis)
+- Eligibility requirements impact the number of tests. The earlier the stage simulants
+  are tested in, the more tests will be conducted (eg MCI vs mild stage). The wider 
+  the age range, the more tests will be conducted. 
 
 BBBM testing
 ~~~~~~~~~~~~
@@ -165,6 +203,9 @@ Implementation
 ^^^^^^^^^^^^^^
 The simulant's baseline testing propensity will also be used as their BBBM testing propensity.
 
+
+On timestep
+'''''''''''
 On each timestep, use the following steps to assign CSF and PET tests:
 
 1. Assess eligibility based on the following requirements:
@@ -172,18 +213,23 @@ On each timestep, use the following steps to assign CSF and PET tests:
   - Simulant is in pre-clinical stage
   - Simulant age is >=60 and <80
   - Simulant has not received a BBBM test in the last three years
-  - Simulant has never recieved a positive BBBM test
+  - Simulant has never received a positive BBBM test
   - Propensity is higher than year-specific testing rate
 
 2. If eligible (meets all requirements), give test. If not, do not give test.
 3. If given test, assign positive diagnosis to 90% of people and negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, eg people who test negative still have a 90% chance of being positive on a re-test.
 4. Record time of last test, yes/no diagnosis for future testing eligibility.
 
+On initialization
+'''''''''''''''''
+On initialization no one will have been tested. Due to test coverage jumping from 0% to 10% in 2030,
+we would expect a large group to be immediately tested and then a drop-off in testing counts.
+
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 - Since BBBM testing eligibility is pre-clinical stage and CSF/PET is MCI stage, 
   and simulants cannot move backwards, CSF/PET test history is irrelevant to BBBM 
-  test elibibility 
+  test eligibility  
 - The same simulants undergo repeat testing to reflect ongoing issues with access or insurance,
   so propensity does not need to be re-assigned at any point.
 - Since BBBM uses the same propensity as baseline testing, BBBM should mostly replace CSF and PET
@@ -193,22 +239,13 @@ Assumptions and Limitations
   People who are not simulated (will not develop AD dementia) will also be tested, and these tests,
   including false positives, will need to be counted (outside the simulation).
 
-Initialization of test history
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-On initialization no one will have been tested. Due to test coverage jumping from 0% to 10% in 2030,
-we would expect a large group to be immediately tested and then a drop-off in testing counts.
 
-Observer
-~~~~~~~~
-Need an observer with test counts by location, age, sex, year, and diagnosis provided 
+References
+----------
 
-Validation and Verification Criteria
-------------------------------------
-
-.. todo::
-  How should we V&V this?
-    - Diagnosis rate of 90%
-    - Number of tests in each year – but this is more complicated? 
-    - Should this happen in an interactive sim? 
-
-      - Could look at individual eligibility more closely and see that the right people get tested 
+.. [Brain-Health-Atlas]
+  Brain Health Atlas. Accessed September 17, 2025. https://brainhealthatlas.org/data/economic-impact/bar
+.. [Mattke-et-al-2024-Sweden-Capacity]
+  Mattke S, Gustavsson A, Jacobs L, et al. Estimates of Current Capacity for Diagnosing Alzheimer’s Disease in Sweden and the Need to Expand Specialist Numbers. The Journal of Prevention of Alzheimer’s Disease. 2024;11(1):155-161. doi:10.14283/jpad.2023.94
+.. [Yan-et-al-2025-Medicare-Diagnostics]
+  Yan JT, Dillon A, Meng T, et al. Real‐world use of diagnostic tests for mild cognitive impairment, Alzheimer’s disease, and other dementias in Medicare fee‐for‐service beneficiaries. Alzheimers Dement (Amst). 2025;17(3):e70156. doi:10.1002/dad2.70156

@@ -314,6 +314,9 @@ scenario, and input draw.
   * - Person-time in each Alzheimer's cause state
     -
     -
+  * - Test counts (CSF, PET, BBBM)
+    - By diagnosis provided (for BBBM tests)
+    -
 
 5.0 Model Runs and Verification & Validation
 +++++++++++++++++++++++++++++++++++++++++++++
