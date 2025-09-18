@@ -400,7 +400,28 @@ scenario, and input draw.
   * - 4.1
     - Updated artifacts to reflect updated MCI duration
     - Baseline
-    - * Locations: All (Sweden, US, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
+    - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
+    - Default
+    - Default
+  * - 4.2
+    - Switch BBBM → MCI hazard to Weibull distribution
+    - Baseline
+    - * Locations: USA
+    - Default
+    - Default
+  * - 4.3
+    - Set population and AD-dementia incidence rates to zero on
+      nonexistent older age groups instead of forward filling
+    - Baseline
+    - * Locations: USA
+    - Default
+    - Default
+  * - 4.4
+    - Use total-population incidence rate of AD-dementia in calculation
+      of BBBM-AD incidence (we had been incorrectly using
+      susceptible-population incidence)
+    - Baseline
+    - * Locations: USA
     - Default
     - Default
 
