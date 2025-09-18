@@ -928,7 +928,9 @@ Default stratifications to all observers should include scenario and input draw.
       * Corticosteroid coverage
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
       * Preterm status (dichotomous at 37 weeks)
-    - Observe the following statistics about the ACMRisk pipeline used to sample for deaths:
+    - Observe the following statistics about the :math:`\text{ACMRisk}_i` value described on the :ref:`neonatal mortality page <2021_cause_neonatal_disorders_mncnh>`,
+      which is implemented as the :code:`death_in_age_group_probability` pipeline in the simulation
+      (`see code <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/b9f8d0d8a4b5562178fd84d364952d48524b744a/src/vivarium_gates_mncnh/constants/data_values.py#L259>`__):
 
       * The number of values (equal to the number of living simulants)
       * The sum of the values
@@ -945,8 +947,10 @@ Default stratifications to all observers should include scenario and input draw.
       * Corticosteroid coverage
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
       * Preterm status (dichotomous at 37 weeks)
-    - Observe the following statistics about the CSMRisk pipelines just *before* they are normalized 
-      so their sum does not exceed 1:
+    - Observe the following statistics about the :math:`\text{CSMRisk}^k_i` value described on the :ref:`neonatal mortality page <2021_cause_neonatal_disorders_mncnh>`,
+      which is implemented as the :code:`csmr` pipeline on each cause in the simulation --
+      not to be confused with the :code:`cause_specific_mortality_risk` pipeline which does not include intervention effects
+      (`see code <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/b9f8d0d8a4b5562178fd84d364952d48524b744a/src/vivarium_gates_mncnh/constants/data_values.py#L263>`__):
 
       * The number of values (equal to the number of living simulants)
       * The sum of the values
@@ -963,8 +967,11 @@ Default stratifications to all observers should include scenario and input draw.
       * Corticosteroid coverage
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
       * Preterm status (dichotomous at 37 weeks)
-    - For each living simulant, take the sum of their modeled-cause CSMRisks and subtract 1.
+    - For each living simulant, take the modeled-cause CSMRisks (same pipelines as used in the previous observer),
+      divide them each by the ACMRisk (same pipeline as observer #8), sum them and then subtract 1.
       If negative, clip this value to zero.
+      This emulates the factor by which `the modeled-cause CSMRisk exceeds ACMRisk, requiring a hack to prevent other-causes CSMRisk from being negative <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/b9f8d0d8a4b5562178fd84d364952d48524b744a/src/vivarium_gates_mncnh/components/mortality.py#L325-L345>`__.
+
       Then observe:
 
       * The number of values (equal to the number of living simulants)
