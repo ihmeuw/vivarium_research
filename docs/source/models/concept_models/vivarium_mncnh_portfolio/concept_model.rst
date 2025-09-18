@@ -1512,7 +1512,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
     - Default
   * - 20.0*
-    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data on effect have yet to be calculated as of 8/22/25)
+    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data on effect have yet to be calculated as of 8/22/25). Also, update `list of draws used in simulation in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1795>`__
     - Baseline and IV iron scale-up scenarios
     - ``model20.0``
     - Default
@@ -2117,6 +2117,7 @@ Default stratifications to all observers should include scenario and input draw.
         * Birth outcome rates
 
       * Confirm expected effects of IV iron on birth weight, gestational age, and birth outcome rates using the interactive simulation
+      * Confirm list of draws has been updated (will need to look in sim repo rather than results as we don't routinely run all 20 draws)
     - 
     - 
   * - 21.0
