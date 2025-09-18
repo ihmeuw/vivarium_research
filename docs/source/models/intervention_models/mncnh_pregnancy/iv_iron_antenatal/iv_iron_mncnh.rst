@@ -45,6 +45,10 @@ Baseline Coverage Data
 IV iron treatment for iron-definiciency anemia pregnancy remains a relatively new intervention, and as such, coverage remains relatively low in low- and middle-income countries, such as Nigeria (see [Akinajo-et-al-2024]_). 
 As such, we will assume a baseline coverage of 0% for all locations for the IV iron intervention. 
 
+.. note::
+
+  As there is no modeled baseline coverage of this intervention in our simulation, we have written the modeling strategy without instructions for baseline calibration (via a PAF or otherwise). If we are to eventually update the baseline coverage of this intervention to be non-zero, we will need to update the modeling strategy below accordingly to include a strategy for baseline calibration.
+
 Vivarium Modeling Strategy
 --------------------------
 
@@ -162,22 +166,19 @@ We will model the effect of IV iron on both gestational age at birth (GA) and bi
 Effect size derivation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+The code to derive of IV iron's effect on gestational age and birth weight exposures as 100% mediated through hemoglobin is `hosted here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/hgb_birth_effect_generation.py>`_ and a `notebook that steps through these functions can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/function_tester.ipynb>`_. 
 
-  Revisit this section once we discuss how we want to assign this task between research and engineering and inside versus outside of the simulation model repository.
-
-A derivation of IV iron's effect on gestational age and birth weight exposures as 100% mediated through hemoglobin is `performed for a single sex/location/draw pair in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/hemoglobin_mediation.ipynb>`_. The calculation for a single sex/location/draw pair for both outcomes took about 2.5 minutes, so about 75 hours of computation time is expected to derive these values for the entire MNCNH portfolio simulation across 3 locations, 2 sexes, and 250 draws. The code to produce these estimates should be included in the MNCNH portfolio simulation repository for transparency. 
-
-The specific details of the code to derive the effects is found in the linked notebook. The general steps of the derivation are summarized here:
+The general steps of the derivation are summarized here:
 
 1. Load the burden of proof estimates and convert the beta coefficients to relative risks by exponentiating.
-2. Transform the relative risk values to be relative to the hemgolobin TMREL value of 120 g/L by dividing all relative risk values by the exposure level closest to 120 g/L.
-3. In a manner similar to the `GBD custom calculation for the PAF of a risk on the outcome as mediated through LBWSG <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/custom_pafs.html#mortality-paf-calculation-for-subcauses-of-the-aggregate-lbwsga-outcome>`_: for each hemoglobin exposure level, X, use optimization to solve for the shift in continuous GA or BW exposure between X and the hemoglobin TMREL that results in the observed relative risk of dichotomous PTB or LBW between X and the hemoglobin TMREL. This step is performed under the following assumptions:
+2. Interpolate the RR values as a function of exposure and store the function with exposure values that are the same as those used in the :ref:`GBD hemoglobin risk effects model for maternal disorders <2023_hemoglobin_effects>`. Note that if we have to extrapolate beyond the bounds of the burden of proof exposure values, we assume "piecewise constant extrapolation" where the RRs for the exposure values beyond the bounds are equal to the RR value for the nearest exposure boundary value.
+3. Transform the relative risk values to be relative to the hemgolobin TMREL value of 120 g/L by dividing all relative risk values by the exposure level closest to 120 g/L.
+4. In a manner similar to the `GBD custom calculation for the PAF of a risk on the outcome as mediated through LBWSG <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/custom_pafs.html#mortality-paf-calculation-for-subcauses-of-the-aggregate-lbwsga-outcome>`_: for each hemoglobin exposure level, X, use optimization to solve for the shift in continuous GA or BW exposure between X and the hemoglobin TMREL that results in the observed relative risk of dichotomous PTB or LBW between X and the hemoglobin TMREL. This step is performed under the following assumptions:
 
   - The population at the hemoglobin TMREL exposure has the same LBWSG exposure distribution as the population-level GBD LBWSG exposure distribution
   - There are no differences in the shape of the LBWSG exposure distribution across hemoglobin exposure levels
 
-4. Using the resulting GA and BW shift values for each hemoglobin exposure level relative to the hemoglobin TMREL from step #3, calculate the difference in shift values specific to each hemoglobin exposure level X and X + the effect size of IV iron on `Hemoglobin exposure`_ to calculate the effect of IV iron on GA and BW exposures specifc to the pre-IV iron hemoglobin exposure level X.
+5. Using the resulting GA and BW shift values for each hemoglobin exposure level relative to the hemoglobin TMREL from step #3, calculate the difference in shift values specific to each hemoglobin exposure level X and X + the effect size of IV iron on `Hemoglobin exposure`_ to calculate the effect of IV iron on GA and BW exposures specifc to the pre-IV iron hemoglobin exposure level X.
 
 Effect size application
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -195,7 +196,7 @@ Assumptions and limitations
 
 - We do not utilize the effect estimates of hemoglobin on additional severities of dichotomous low birth weight and preterm birth outcomes (like "very low birth weight") despite the existence of such estimates
 - We do not consider any correlation between hemoglobin and LBWSG exposures in the derivation of the estimates of IV iron's impact on LBWSG
-- We assume that the GA and BW "shifts" attributable to hemoglobin apply equally to the entire LBWSG exposure distribution (in other words, assume no change in the shape of the LBWSG exposure distribution).
+- We assume that the GA and BW "shifts" attributable to hemoglobin apply equally to the entire LBWSG exposure distribution (in other words, assume no change in the shape of the LBWSG exposure distribution)
 
 Stillbirth
 +++++++++++++++++++++++++
@@ -208,63 +209,16 @@ We will model an effect of IV iron on stillbirth (a birth outcome defined on the
 Relative risk derivation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+Similar to the derivation of the effect of IV iron on birth weight and gestational age, the code to derive of IV iron's effect on stillbirth as 100% mediated through hemoglobin is `hosted here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/hgb_birth_effect_generation.py>`_ and a `notebook that steps through these functions can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/function_tester.ipynb>`_. 
 
-  Revisit this section once we discuss where these derivations should be performed and by whom
+The general steps of this derivation are summarized below:
 
-Note that the derivation of the IV iron relative risks are dependent on the effect size of IV iron on hemoglobin, as defined in the `Hemoglobin exposure`_ section. The derivation of these RRs as described below should be done in the model repository so that the values can easily be updated if the effect size of IV iron on hemoglobin were to ever change.
+1. Follow steps #1 and #2 listed in the "Effect size derivation" section for the `Birth weight and gestational age`_ outcomes
 
-The following steps detail how to obtain the IV iron-specific relative risks on stillbirth specific to a given hemoglobin exposure value.
-
-1. Load and transform the relative risk data from :code:`/mnt/team/anemia/pub/bop/sim_studies/stillbirth/inner_draws.csv`
-
-.. code:: python
-
-  import pandas as pd, numpy as np
-  df = pd.read_csv('/mnt/team/anemia/pub/bop/sim_studies/stillbirth/inner_draws.csv')
-  df = np.exp(df.set_index('risk')).reset_index()
-
-
-2. Calculate the hemoglobin exposure increment between each of the exposure levels stored in the :code:`risk` column of the .csv
-
-.. code:: python
-
-  exposure_levels = df.risk.unique()
-  exposure_increment = exposure_levels[1] - exposure_levels[0]
-
-3. Calculate the number of hemoglobin exposure levels stored in the :code:`risk` columns of the .csv that correspond to IV iron's effect on hemoglobin exposure (:code:`iv_iron_mean_difference`), found in the `Hemoglobin exposure`_ section of this document.
-
-.. code:: python
-
-    iv_iron_exposure_increment = (iv_iron_mean_difference / exposure_increment).round(0).astype(int)
-
-4. For each draw, n, calculate the IV iron effect on stillbirth for a given exposure level, i, by dividing the stillbirth RR value specific to the IV iron-shifted hemoglobin exposure by still birth RR value specific to the un-shifted hemoglobin exposure value.
-
-.. code:: python
-    
-    iv_iron_stillbirth_rrs = []
-    for i in df.index:
-        iv_iron_stillbirth_rrs.append(df.iloc[i + iv_iron_exposure_increment].draw_n. / df.iloc[i].draw_n)
-
-.. note::
-
-    Feel free to find a more efficient way to do this than looping over index values and draws!
-
-5. Now you have stillbirth relative risk values for IV iron, specific to pre-IV iron hemoglobin exposure values.
-
-PAF calculation
-~~~~~~~~~~~~~~~~~
-
-.. todo::
-
-    Add details on PAF calculation if it is determined that we have non-zero baseline coverage
+2. Similar to step #5 in the "Effect size derivation" section for the `Birth weight and gestational age`_ outcomes, calculate the risk of stillbirth for each hemoglobin exposure level X + the effect size of IV iron on `Hemoglobin exposure`_ relative to that unadjusted hemoglobin exposure level X. This value represents the relative risk of stillbirth following IV iron administration specific to the pre-IV iron hemoglobin exposure level X.
 
 Effect application
 ~~~~~~~~~~~~~~~~~~~
-
-.. todo::
-
-  Incorporate PAF strategy if PAF is determined to be non-zero
 
 The relative risk for this risk factor will apply to the probability of experiencing still birth such that for a given hemoglobin exposure, :math:`\text{x}`:
 
