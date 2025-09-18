@@ -168,7 +168,7 @@ Data Tables
     * - ir
       - partial term pregnancy maternal disorders incidence risk per partial term pregnancy
       - 1
-      - Artifact of the modeling strategy that assings partial term pregnancy outcomes (in the :ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`) according to the incidence of the GBD causes included in this cause model document
+      - Artifact of the modeling strategy that assigns partial term pregnancy outcomes (in the :ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`) according to the incidence of the GBD causes included in this cause model document
     * - cfr
       - case fatality rate of maternal hemorrhage
       - (csmr_c374 + csmr_c995) / (incidence_c374 + incidence_c995)
