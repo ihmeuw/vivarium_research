@@ -190,7 +190,7 @@ maternal disorders incident cases.
 
 Notably, this strategy will apply morbidity due to subcauses of residual maternal disorders equally across
 all full term pregnancies rather than applying the value of YLDs per incident case to a subset of incident 
-cases. However, this stratey does allow us to model YLDs due to the "other direct maternal disorders" subcause
+cases. However, this strategy does allow us to model YLDs due to the "other direct maternal disorders" subcause
 which has YLD estimates but not incidence estimates.
 
 Assumptions and Limitations
