@@ -424,6 +424,13 @@ scenario, and input draw.
     - * Locations: USA
     - Default
     - Default
+  * - 4.5
+    - `Don't round age at before finding age group of midpoint
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/39/files>`_
+    - Baseline
+    - * Locations: USA
+    - Default
+    - Default
 
 
 5.2 V & V Tracking
@@ -603,6 +610,10 @@ scenario, and input draw.
     - Same as 4.3
     -
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_18c_model4.4_vv.ipynb
+  * - 4.5
+    - Same as 4.4
+    -
+    -
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
