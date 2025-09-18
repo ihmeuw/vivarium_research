@@ -1502,7 +1502,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 23.0*
-    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`
+    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`
     - Baseline 
     - ``model23.0``
     - Default
