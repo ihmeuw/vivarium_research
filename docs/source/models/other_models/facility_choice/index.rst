@@ -727,3 +727,10 @@ Range of propensity and probabilities that are consistent with existing data
 An important result of this optimization was to determine that the system is underdetermined.  With the existing data we have available, there are a range of consistent values for the propensity and probability parameters.  This section explores the tradeoffs between the parameters, to guide us in setting appropriate values.
 
 It might be easier to think about "probability gaps", meaning the difference between the conditional probabilities conditioned on believed full term and believed preterm than to think about the absolute magnitude of these probabilities.
+
+References
+----------
+
+..[UNICEF_2009]:
+
+  UNICEF. (2009). Monitoring emergency obstetric care: a handbook. https://www.who.int/publications/i/item/9789241547734
