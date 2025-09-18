@@ -442,7 +442,21 @@ Note that we are assuming that the incidence rate
 
 In order to get the correct number of people transitioning into the
 AD-dementia state at time :math:`t+\Delta`, we need to account for
-people who will die during the BBBM-AD and MCI-AD stages.
+people who will die during the BBBM-AD and MCI-AD stages. If
+:math:`\delta t` is the step size of the simulation, then the total
+number of people in demographic group :math:`g` entering the BBBM-AD
+state at time :math:`t` is :math:`\dot B_g(t) \delta t`. Let
+:math:`\gamma_{g,t}` be the probability of one of these people dying
+before they reach the AD-dementia state. Then the expected number of
+people who die during the interval :math:`[t, t+\Delta]` is
+:math:`\gamma_{g,t} \dot B_g(t) \delta t`. Adding this to the number
+:math:`\dot B_{g,t}^\text{AD} \delta t` who survive and transition to
+AD-dementia, we have the equation
+
+.. math::
+
+  \dot B_g(t) \delta t = \dot B_{g,t}^\text{AD}
+  + \gamma_{g,t} \dot B_g(t) \delta t,
 
 **Note:** I'm currently updating notation. The translations are:
 
