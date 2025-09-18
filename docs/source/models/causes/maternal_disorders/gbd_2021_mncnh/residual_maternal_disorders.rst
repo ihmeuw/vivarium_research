@@ -184,8 +184,8 @@ available for each cause).
 Summary of modeling strategy
 ++++++++++++++++++++++++++++
 
-We will model morbidity and mortality due to residual maternal disorders causes (maternal disorders
-causes that are not related to partial term pregnancies and are otherwise unmodeled in our simulation) that
+We will model morbidity and mortality due to residual maternal disorders (inclusive of all maternal disorders
+subcauses that are otherwise unmodeled in our simulation) that
 occurs at an equal probability among all pregnancies that end in live or still birth ("full term pregnancies"
 according to the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`). 
 We do not require tracking incident cases of residual maternal disorders, nor any quantities specific to 
