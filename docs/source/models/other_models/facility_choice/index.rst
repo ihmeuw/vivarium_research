@@ -32,8 +32,7 @@ facilities and all other delivery facilities (not including home births)
 are BEmONC facilities.
 
 To capture the complex relationship between choice of delivery facility
-(home birth vs a facility with basic emergency obstetric and neonatal
-care [BEmONC] vs a facility with comprehensive care [CEmONC]), the
+(home birth vs a BEmONC facility vs a CEmONC facility), the
 belief about gestational age (believed pre-term vs believed full term),
 and the related factors of antenatal care (ANC), and low birth weight
 and short gestation (LBWSG) risk exposure, we will include two novel
