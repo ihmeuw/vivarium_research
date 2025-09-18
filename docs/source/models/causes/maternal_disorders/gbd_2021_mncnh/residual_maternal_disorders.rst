@@ -90,9 +90,8 @@ Scope
 The goal of the residual maternal disorders model is to capture YLLs and YLDs due to
 maternal disorders subcauses other than those included in the
 :ref:`partial term pregnancy maternal disorders subcauses <2021_cause_partial_term_pregnancy_causes_mncnh>`
- that are not otherwise modeled in the MNCNH simulation.
-Given that the maternal disorders subcauses specific to partial term pregnancies are 
-separately modeled 
+that are not otherwise modeled in the MNCNH simulation.
+Given that the maternal disorders subcauses specific to partial term pregnancies are separately modeled 
 (:ref:`partial term pregnancy maternal disorders document <2021_cause_partial_term_pregnancy_causes_mncnh>`), 
 we will only model residual maternal disorders among simulants who give (live or still) 
 birth after a full term pregnancy.
