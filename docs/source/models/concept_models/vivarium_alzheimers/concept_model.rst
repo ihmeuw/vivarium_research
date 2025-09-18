@@ -590,8 +590,19 @@ scenario, and input draw.
   * - 4.1
     - Same as 4.0, but also look at durations of BBBM-AD, MCI-AD to make sure they match expectation.  Anticipate there to be more similarity between AD-dementia incidence counts in simulation and GBD/FHS.
     - 
-    - 
-  
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_13a_model4.1_vv.ipynb
+  * - 4.2
+    - Same as 4.1
+    -
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_15a_model4.2_vv.ipynb
+  * - 4.3
+    - Same as 4.2
+    -
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_18b_model4.3_vv.ipynb
+  * - 4.4
+    - Same as 4.3
+    -
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_18c_model4.4_vv.ipynb
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
