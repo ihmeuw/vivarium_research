@@ -88,7 +88,9 @@ Scope
 +++++
 
 The goal of the residual maternal disorders model is to capture YLLs and YLDs due to
-maternal disorders subcauses that are not otherwise modeled in the MNCNH simulation.
+maternal disorders subcauses other than those included in the
+:ref:`partial term pregnancy maternal disorders subcauses <2021_cause_partial_term_pregnancy_causes_mncnh>`
+ that are not otherwise modeled in the MNCNH simulation.
 Given that the maternal disorders subcauses specific to partial term pregnancies are 
 separately modeled 
 (:ref:`partial term pregnancy maternal disorders document <2021_cause_partial_term_pregnancy_causes_mncnh>`), 
@@ -149,6 +151,12 @@ available for each cause).
     - YLDs
     - Incidence
     - Note
+  * - Maternal hypertensive disorders
+    - 369
+    - True
+    - True
+    - True
+    - Note this cause will eventually be excluded from the residual maternal disorders cause model
   * - Indirect maternal deaths
     - 375
     - True
@@ -173,12 +181,6 @@ available for each cause).
     - False
     - False
     - 
-  * - Maternal hypertensive disorders
-    - 369
-    - True
-    - True
-    - True
-    - Note this cause will eventually be excluded from the residual maternal disorders cause model
 
 Summary of modeling strategy
 ++++++++++++++++++++++++++++
