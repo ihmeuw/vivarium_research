@@ -11,9 +11,28 @@ Delivery Facility Choice Model
 Background
 ----------
 
+The care that a birthing person receives during labor and delivery
+depends on where the delivery took place, as not all facilities have the
+same access to resources and personnel. Healthcare providers trained in 
+emergency obstetric and newborn care (EmONC) are crucial for reducing 
+maternal and neonatal deaths, especially in high-burden settings. 
+
+Seven essential obstetric services, known as "signal functions," have been 
+designated as fundamental to basic emergency obstetric and newborn care (BEmONC): 
+parenteral antibiotic administration; parenteral anticonvulsant administration; 
+parenteral uterotonic administration; manual removal of retained products 
+(manual vacuum aspiration); assisted vaginal delivery; manual placental 
+removal; and newborn resuscitation.[UNICEF_2009]_ Comprehensive emergency 
+obstetric and newborn care (CEmONC) encompasses all BEmONC services plus 
+surgical capability (e.g., for c-sections) and blood transfusion capacity. 
+These critical services determine a health facility's capability to manage 
+obstetric and newborn emergencies.[UNICEF_2009]_ Due to data constraints 
+and for simplicity, in our model we assume that all hospitals are CEmONC
+facilities and all other delivery facilities (not including home births) 
+are BEmONC facilities.
+
 To capture the complex relationship between choice of delivery facility
-(home birth vs a facility with basic emergency obstetric and neonatal
-care [BEmONC] vs a facility with comprehensive care [CEmONC]), the
+(home birth vs a BEmONC facility vs a CEmONC facility), the
 belief about gestational age (believed pre-term vs believed full term),
 and the related factors of antenatal care (ANC), and low birth weight
 and short gestation (LBWSG) risk exposure, we will include two novel
@@ -580,33 +599,19 @@ Portfolio research repository.
 Choosing BEmONC vs. CEmONC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Among simulants whose IFD status is "in-facility," choose BEmONC vs.
-CEmONC according to the following probabilities, independently of other
-choices in the model:
+Among simulants whose IFD status is "in-facility," choose CEmONC according 
+to the location-specific probabilities in the `CSV saved here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/991b7d99caf175449a26858e6ed5f053e89a9781/data_prep/hospital_ifd_estimates.csv>`__.
+Since in-facility deliveries occur in either BEmONC or CEmONC facilities, 
+the probability of delivering in a BEmONC facility is the complement of 
+the CEmONC probability (i.e., 1 - P(CEmONC)). These estimates are from 
+the Health Systems team, representing the proportion of in-facility 
+deliveries that occur in hospitals, which we are using as a proxy for 
+CEmONC facilities. We currently use the most recent year available, 2024, 
+for all locations.
+The decision of whether a simulant who gives birth in-facility delivers
+in a BEmONC or CEmONC facility should be independent from other choices 
+in the model.
 
-.. list-table:: Conditional probabilities of BEmONC and CEmONC given in-facility delivery
-  :header-rows: 1
-  :widths: 20 10 10 10
-
-  * - Conditional probability
-    - Ethiopia
-    - Nigeria
-    - Pakistan
-  * - :math:`\text{Pr}[\text{BEmONC}\mid \text{in-facility}]`
-    - 0.160883
-    - 0.004423
-    - 0.340528
-  * - :math:`\text{Pr}[\text{CEmONC}\mid \text{in-facility}]`
-    - 1 - 0.160883
-    - 1 - 0.004423
-    - 1 - 0.340528
-
-.. todo::
-
-  Update the above probabilities once we get better data from Annie's
-  team. The current values (except for Pakistan, which is based on
-  microdata from BMGF) are based on an imprecise analysis of DHS data
-  and likely underestimate the proportion of BEmONC facilities.
 
 Once BEmONC or CEmONC has been chosen for all in-facility deliveries,
 use this choice in conjunction with the IFD status to **assign one of
@@ -721,3 +726,10 @@ Range of propensity and probabilities that are consistent with existing data
 An important result of this optimization was to determine that the system is underdetermined.  With the existing data we have available, there are a range of consistent values for the propensity and probability parameters.  This section explores the tradeoffs between the parameters, to guide us in setting appropriate values.
 
 It might be easier to think about "probability gaps", meaning the difference between the conditional probabilities conditioned on believed full term and believed preterm than to think about the absolute magnitude of these probabilities.
+
+References
+----------
+
+..[UNICEF_2009]:
+
+  UNICEF. (2009). Monitoring emergency obstetric care: a handbook. https://www.who.int/publications/i/item/9789241547734
