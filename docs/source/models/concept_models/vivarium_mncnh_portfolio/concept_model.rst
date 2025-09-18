@@ -382,8 +382,11 @@ Intrapartum component
         * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
+        * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
+        * :ref:`Partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>`
       - * Hemoglobin at birth as a variable that impacts maternal disorders causes
         * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
+        * New causes of residual and partial term pregnancy maternal disorders
 
 .. _mncnh_portfolio_neonatal_component:
 
@@ -873,6 +876,7 @@ Default stratifications to all observers should include scenario and input draw.
       * CPAP availability
       * Corticosteroid coverage
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+      * Preterm status (dichotomous at 37 weeks)
     - Included, except for corticosteroid coverage which has yet to be added
   * - 3. Neonatal deaths (cause-specific)
     - * Child sex
@@ -1470,7 +1474,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and MMS scale-up scenarios 
     - ``model17.0``
     - Default
-    - Default, note IFA/MMS coverage added as a stratifying variable to maternal population observer
+    - Default, note IFA/MMS coverage added as a stratifying variable to maternal population observer. Also add preterm birth stratification to the births observer.
     - Default
   * - 18.0
     - :ref:`Anemia screening implementation <anemia_screening>` (including hemoglobin and ferritin screenings), see also the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
@@ -1497,6 +1501,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Hemoglobin effect on neonatal sepsis as defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (data for effects and PAFs have yet to be calculated as of 8/22/25)
     - Baseline and IV iron scale-up scenarios
     - ``model21.0``
+    - Default
+    - Default
+    - Default
+  * - 22.0
+    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` cause models
+    - Baseline
+    - ``model22.0``
     - Default
     - Default
     - Default
@@ -2034,6 +2045,11 @@ Default stratifications to all observers should include scenario and input draw.
       * Neonatal mortality underestimated. More specific neonatal mortality V&V checks will be performed on model 16.4 when the missing pipeline values bug is resolved
     - * `Model 16.3 facility choice V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/125>`_
       * `Model 16.3 ACS intervention V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/126>`_
+  * - 16.4
+    - Same as 16.3
+    - * Bug that caused zero observed deaths among the ACS eligible and covered population has been resolved. Neonatal mortality is looking improved and is ready for additional review
+      * Effect of CPAP and ACS believed to be functioning as expected. We will do a final confirmation once preterm stratification is added to the births observer, but based on the interactive sim there is no reason to believe there is a bug
+    - * `Notebooks for model 16.4 ACS V&V available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/127>`
   * - 17.0
     - * Confirm scenario-specific coverage (verification with sim outputs)
       * Confirm only simulants who attend ANC receive IFA/MMS (verification with sim outputs)
@@ -2051,6 +2067,8 @@ Default stratifications to all observers should include scenario and input draw.
         * Gestational age
         * Birthweight
         * Birth outcomes (MMS reduces rate of stillbirth, increases rate of live birth, no change to "partial term" outcomes)
+
+      * Additional confirmation of effect of CPAP/ACS interventions with newly added preterm birth stratification to the births observer (as was done in the neonatal checks notebook for model 16.4)
     - 
     - 
   * - 18.0
@@ -2085,6 +2103,10 @@ Default stratifications to all observers should include scenario and input draw.
       * Using the interactive simulation, confirm effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. The total effect should be evaluated by stepping through the simulation and observing the rate of mortality due to neonatal sepsis stratified by maternal hemoglobin exposure.
     - 
     - 
+  * - 22.0
+    - Confirm expected rates of cause-specifc and overall maternal disorders causes
+    - 
+    - 
 
 
 .. _facility choice code:
@@ -2105,18 +2127,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Missing preterm birth stratifications in neonatal deaths observer
-    - Removed in observer rework?
-    - Hussain to update
-    - For model 16.4
-  * - Underestimation of neonatal mortality
-    - Missing value in the :code:`neonatal_preterm_birth_with_rds.csmr` pipeline value for ACS eligible simulants
-    - Hussain/Ali to investigate and update
-    - For model 16.4
-  * - Scenario with increased ultrasound coverage leads to (very slightly) lower IFD
-    - Does not appear to be an implementation bug (all facility choice model V&V criteria are met), but is not the expected result
-    - Ali to investigate the rates of false positive and false negatives by scenario to determine if ultrasound improvements is reducing false positives among term babies more than it is reducing false negatives among preterm babies, which could explain this result
-    - TBD
   * - Potentially increased overestimation of all-cause neonatal mortality relative to model 13.3
     - Unknown - possibly related to changes in LBWSG exposure distribution
     - Zeb to re-run interactive sim neonatal mortality V&V on model 16+
@@ -2129,6 +2139,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
     - Zeb to debug further in interactive sim and possibly request an observer for negative other causes mortality
     - TBD
+  * - Scenario with increased ultrasound coverage leads to (very slightly) lower IFD
+    - Does not appear to be an implementation bug (all facility choice model V&V criteria are met), but is not the expected result
+    - Ali to investigate the rates of false positive and false negatives by scenario to determine if ultrasound improvements is reducing false positives among term babies more than it is reducing false negatives among preterm babies, which could explain this result
+    - Tabled for now. `See ticket here <https://jira.ihme.washington.edu/browse/SSCI-2409>`_
   * - Late neonatal mortality due to preterm birth with RDS slightly (~2%) underestimated
     - The PAF of CPAP on preterm birth with RDS CSMRisk is calculated with delivery facility proportions at birth, not at 7 days
     - Accept this limitation, until/unless there are other reasons to revamp PAF calculation, since this would require many components not currently present in PAF sim
@@ -2150,9 +2164,9 @@ Default stratifications to all observers should include scenario and input draw.
 
 * Factors such as birth asphyxia have been shown to predisopose infants to infection which can result in sepsis [Tikmani-et-al-2016]_. We do not model a relationship between birth asphyxia and sepsis, so we do not capture any indirect effects of interventions to reduce birth asphyxia (like cesarean sections) on sepsis as mediated through reductions in birth asphyxia. 
 
-* By not modeling mortality due to all maternal disorders, we will overestimate YLDs due to postpartum depression and YLDs due to anemia in the postpartum period as more simulants will survive to the postpartum period in our simulation than would be expected in reality.
+* We assume that all maternal deaths occur at the conclusion of the intrapartum period and prior to the start of the postpartum period. Therefore, we assume it is not possible for any simulants who die of a maternal disorder to experience postpartum YLDs (such as those due to postpartum depression and/or postpartum anemia). However, this may be possible in reality, particularly for those who die of "late maternal deaths."
 
-* We track certain outcomes among partial term pregnancies (abortion/miscarriage and ectopic pregnancy) in this model, including first trimester ANC attendance and associated interventions, anemia YLDs, and postpartum depression. However, these pregnancies are not given special consideration other than their premature end and we do not consider how this population may differ from pregnancies that end in live or still births in terms of their ANC attendance rates or other attributes. Additionally, we do not model any variation in these attributes by subtype of partial term pregnancy (abortion vs. miscarriage vs. ectopic pregnancy), despite there being expected differences in behavior between these groups.
+* We track certain outcomes among partial term pregnancies (abortion/miscarriage and ectopic pregnancy) in this model, including first trimester ANC attendance and associated interventions, anemia YLDs, and postpartum depression. However, these pregnancies are not given special consideration other than their premature end and we do not consider how this population may differ from pregnancies that end in live or still births in terms of their ANC attendance rates or other attributes beyond maternal disorders burden. Additionally, we do not model any variation in these attributes by subtype of partial term pregnancy (abortion vs. miscarriage vs. ectopic pregnancy), despite there being expected differences in behavior between these groups.
 
 * We do not model an underlying correlation between hemoglobin exposure and stillbirth rates, despite evidence that such an association exists. Therefore, our IV iron intervention model, which is targeted to those with low hemoglobin, will be misaligned with respect to the stillbirth rate among the IV iron intervention target population.
   
