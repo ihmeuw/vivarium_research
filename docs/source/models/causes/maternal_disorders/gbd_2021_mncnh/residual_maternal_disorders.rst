@@ -201,6 +201,8 @@ Cause Model Diagram
 
 Conceptually, the modeling strategy for the residual maternal disorders cause can be summarized with the diagram below. All full term pregnancies will be assigned an amount of YLDs due to residual maternal disorders at the conclusion of the intrapartum period. Some of these pregnancies will die from residual maternal disorders in accordance with the calculated fatality rate (fr) of residual maternal disorders. Regardless of whether the parent dies due to residual maternal disorders, the intrapartum period will conclude with a full term birth (live or still birth outcome). 
 
+**Conceptual cause model diagram**
+
 .. graphviz::
 
     digraph hemorrhage_decisions {
@@ -220,7 +222,7 @@ Conceptually, the modeling strategy for the residual maternal disorders cause ca
 
 Where,
 
-.. list-table:: Cause Dodel Diagram Definitions
+.. list-table:: Conceptual Cause Model Diagram Parameter Definitions
     :widths: 7 20
     :header-rows: 1
 
@@ -247,6 +249,8 @@ Where,
 
 While the above diagram represents the conceptual aims of the residual maternal disorders cause model, there are some convenient adjustments we can make to this diagram so that it continues to achieve the aims of our cause model while also achieving compatibility with the existing implementation of the `MaternalDisorders component <http://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/components/maternal_disorders.py>`_ used in the MNCNH simulation that has been used to model other maternal disorders subcauses such as :ref:`maternal sepsis <2021_cause_maternal_sepsis_mncnh>`. Specifically, although our modeling strategy for maternal disorders does not involve modeling incident cases, we can implement :code:`MaternalDisorders` component model as represented in the diagram below with an incidence risk (ir) value equal to 1.
 
+**Implementation-driven cause model diagram:**
+
 .. graphviz::
 
     digraph hemorrhage_decisions {
@@ -265,7 +269,7 @@ While the above diagram represents the conceptual aims of the residual maternal 
         dead -> ftb  [label = "1", style=dashed]
     }
 
-.. list-table:: Cause Dodel Diagram Definitions
+.. list-table:: Implementation-Driven Cause Model Diagram Parameter Definitions
     :widths: 7 20
     :header-rows: 1
 
@@ -326,7 +330,7 @@ Data Tables
     * - cfr
       - "case" fatality rate of residual maternal disorders
       - csmr / birth_rate
-      - The value of cfr is a probabiity in [0,1]. Note that this value of the cfr is equivalent to the fr parameter shown in the first diagram on this page.
+      - The value of cfr is a probabiity in [0,1]. Note that this value of the cfr (shown in the "implementation-driven cause model diagram") is equivalent to the fr parameter shown in the "conceptual cause model diagram" 
     * - csmr
       - cause-specific mortality rate of residual maternal disorders
       - sum of cause-specific mortality rates across causes [375, 379, 376, 741, 369]
