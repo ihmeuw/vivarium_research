@@ -204,7 +204,7 @@ Data Tables
       - (yld_rate_c374 + yld_rate_c995) / (incidence_c374 + incidence_c995)
       - 
 
-- The ylds_per_case parameter should be applied to all simulants affected by residual maternal disorders (all full term pregnancies)
+- The ylds_per_case parameter should be applied to all simulants affected by partial term maternal disorders (all partial term pregnancies)
 
 Validation Criteria
 +++++++++++++++++++
