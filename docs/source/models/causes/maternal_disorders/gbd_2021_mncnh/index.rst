@@ -38,7 +38,7 @@ in the indicated model-building wave:
     residual_maternal_disorders
     partial_term_causes
 
-Note that the postpartum depression caues model is outside of the GBD maternal disorders
+Note that the postpartum depression cause model is outside of the GBD maternal disorders
 hierarchy (implemented using custom rather than GBD data) and also differs from the remaining
 maternal disorders causes in that only simulants who do not die due to any maternal disorder
 cause are eligible to become "infected" with postpartum depression.
