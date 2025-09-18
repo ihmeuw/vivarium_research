@@ -11,6 +11,26 @@ Delivery Facility Choice Model
 Background
 ----------
 
+The care that a birthing person receives during labor and delivery
+depends on where the delivery took place, as not all facilities have the
+same access to resources and personnel. Healthcare providers trained in 
+emergency obstetric and newborn care (EmONC) are crucial for reducing 
+maternal and neonatal deaths, especially in high-burden settings. 
+
+Seven essential obstetric services, known as "signal functions," have been 
+designated as fundamental to basic emergency obstetric and newborn care (BEmONC): 
+parenteral antibiotic administration; parenteral anticonvulsant administration; 
+parenteral uterotonic administration; manual removal of retained products 
+(manual vacuum aspiration); assisted vaginal delivery; manual placental 
+removal; and newborn resuscitation.[UNICEF_2009]_ Comprehensive emergency 
+obstetric and newborn care (CEmONC) encompasses all BEmONC services plus 
+surgical capability (e.g., for c-sections) and blood transfusion capacity. 
+These critical services determine a health facility's capability to manage 
+obstetric and newborn emergencies.[UNICEF_2009]_ Due to data constraints 
+and for simplicity, in our model we assume that all hospitals are CEmONC
+facilities and all other delivery facilities (not including home births) 
+are BEmONC facilities.
+
 To capture the complex relationship between choice of delivery facility
 (home birth vs a facility with basic emergency obstetric and neonatal
 care [BEmONC] vs a facility with comprehensive care [CEmONC]), the
