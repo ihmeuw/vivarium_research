@@ -1,7 +1,7 @@
 .. _2021_cause_residual_maternal_disorders_mncnh:
 
 ============================
-Residual Maternal Disorders
+Residual maternal disorders
 ============================
 
 The residual maternal disorders cause is meant to capture outcomes due to 
