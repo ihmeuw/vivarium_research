@@ -413,16 +413,18 @@ scenario, and input draw.
     - Default
     - Default
   * - 4.3
-    - Set population and AD-dementia incidence rates to zero on
+    - `Set population and AD-dementia incidence rates to zero on
       nonexistent older age groups instead of forward filling
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/37>`_
     - Baseline
     - * Locations: USA
     - Default
     - Default
   * - 4.4
-    - Use total-population incidence rate of AD-dementia in calculation
-      of BBBM-AD incidence (we had been incorrectly using
-      susceptible-population incidence)
+    - `Use total-population incidence rate of AD-dementia in calculation
+      of BBBM-AD incidence
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/38>`_  (we
+      had been incorrectly using susceptible-population incidence)
     - Baseline
     - * Locations: USA
     - Default
