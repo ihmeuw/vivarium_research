@@ -442,10 +442,39 @@ Note that we are assuming that the incidence rate
 
 In order to get the correct number of people transitioning into the
 AD-dementia state at time :math:`t+\Delta`, we need to account for
-people who will die during the BBBM-AD and MCI-AD stages. If
-:math:`\delta t` is the step size of the simulation, then the total
+people who will die during the BBBM-AD and MCI-AD stages. That is, we
+need to estimate :math:`\dot B_{g,t}^\text{die}`. To do this, let
+:math:`\gamma_{g,t}` be the probability that a person in group :math:`g`
+who enters the BBBM-AD state at time :math:`t` dies before they reach
+the AD-dementia state. Then for a large population,
+
+.. math::
+
+  \dot B_{g,t}^\text{die} \approx \gamma_{g,t} \dot B_g(t),
+
+so we have
+
+.. math::
+
+  \dot B_g(t) \approx \dot B_{g,t}^\text{AD} + \gamma_{g,t} \dot B_g(t).
+
+Then we can solve for :math:`\dot B_g(t)` to get
+
+.. math::
+
+  \dot B_g(t) \approx \dot B_{g,t}^\text{AD}
+  \cdot \frac{1}{1 - \gamma_{g,t}}.
+
+Thus, instead of estimating :math:`\dot B_{g,t}^\text{die}` directly, we
+can estimate the probability :math:`\gamma_{g,t}` and combine it with
+our calculation of :math:`\dot B_{g,t}^\text{AD}` above to directly
+estimate the total rate :math:`\dot B_g(t)` at which people are entering
+the BBBM-AD state.
+
+If
+:math:`\delta` is a small interval of time, the total
 number of people in demographic group :math:`g` entering the BBBM-AD
-state at time :math:`t` is :math:`\dot B_g(t) \delta t`. Let
+state time at time :math:`t` is :math:`\dot B_g(t)`. Let
 :math:`\gamma_{g,t}` be the probability of one of these people dying
 before they reach the AD-dementia state. Then the expected number of
 people who die during the interval :math:`[t, t+\Delta]` is
