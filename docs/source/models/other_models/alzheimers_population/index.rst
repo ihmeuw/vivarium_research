@@ -475,7 +475,8 @@ Thus, instead of estimating :math:`\dot B_{g,t}^\text{die}` directly, we
 can estimate the probability :math:`\gamma_{g,t}` and combine it with
 our calculation of :math:`\dot B_{g,t}^\text{AD}` above to directly
 estimate the total rate :math:`\dot B_g(t)` at which people are entering
-the BBBM-AD state.
+the BBBM-AD state. To finish the calculation, we need to estimate
+:math:`\gamma_{g,t}`.
 
 **Note:** I'm currently updating notation. The translations are:
 
@@ -486,6 +487,39 @@ the BBBM-AD state.
 * :math:`m_{g,t} =` mortality rate in the BBBM and MCI states in group
   :math:`g` at time :math:`t`, equal to acmr --- csmr_c543
 
+To estimate the mortality probability :math:`\gamma_{g,t}`, let
+:math:`m_{g,t}` denote the background mortality hazard for people in
+group :math:`g` at time :math:`t`. This is the mortality hazard
+experienced by people in the BBBM and MCI states and is equal to the
+all-cause mortality rate minus the cause-specific mortality rate for
+AD-dementia. Using our assumption that the duration of
+pre-AD dementia is exactly :math:`\Delta`, plus the definition of
+mortality hazard,
+
+.. math::
+
+  \begin{align*}
+  \gamma_{g,t}
+  &\approx P \left(
+    \text{a person in group $g$ at time $t$ dies during the interval
+    $[t, t+\Delta]$} \right) \\
+  &= 1 - \exp \left(
+    -\int_0^\Delta m_{g + \tau,\,t+\tau}\, d\tau \right) \\
+  &= 1 - \exp (-\bar m_{g,t} \cdot \Delta),
+  \end{align*}
+
+where :math:`\bar m_{g,t} = \frac{1}{\Delta} \int_0^\Delta m_{g +
+\tau,\,t+\tau}\, d\tau` is the time-average of the mortality hazard over
+the interval :math:`[t, t+\Delta]`.
+
+.. admonition:: Aside
+
+  **Question:** If we want to replace :math:`m_{g,t}` with a constant
+  average hazard, why is it that here we use a time-average, whereas in
+  other situations (incidence rates, mortality rates) we use a
+  person-time average? Because hazard x time = probability, whereas
+  hazard x person-time = count of people. In this case we're computing a
+  probability, not a count of people.
 
 For someone in demographic group :math:`g` who enters BBBM-AD at time
 :math:`t`, write :math:`\gamma_{g,t}` for the probability of dying
