@@ -425,7 +425,7 @@ scenario, and input draw.
     - Default
     - Default
   * - 4.5
-    - `Don't round age at before finding age group of midpoint
+    - `Don't double round age before finding age group of midpoint
       <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/39/files>`_
     - Baseline
     - * Locations: USA
