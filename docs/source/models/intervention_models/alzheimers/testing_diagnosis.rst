@@ -100,6 +100,11 @@ we further adjust Sweden's CSF rate to be 9x its PET rate from the previous step
 We use these location-specific test rates to determine how likely a simulant with 
 MCI is to receieve a CSF or PET test, and which test they should receive.
 
+As mentioned above, the US testing rates are among patients who are diagnosed with MCI 
+or dementia (study counts tests performed within the 12 months before the diagnosis).
+So, the denominator of these values is MCI or AD dementia positive people. These test rates
+will be used to determine which MCI or AD dementia stage simulants are given CSF/PET tests.
+
 .. list-table:: Location-specific test rates
   :widths: 15 15 15
   :header-rows: 1
@@ -140,8 +145,10 @@ MCI is to receieve a CSF or PET test, and which test they should receive.
 
 Implementation
 ^^^^^^^^^^^^^^
-Each simulant will be assigned a propensity (0/high to 1/low) for receiving a test. The propensity will apply for the 
-simulant's lifetime.
+Each simulant will be assigned a propensity for receiving a test (0 to 1). 
+A low propensity value means the simulant is likely to receieve a test, 
+while a high propensity value means the simulant is unlikely to receive a test.
+The propensity will apply for the simulant's lifetime.
 
 On timestep
 '''''''''''
@@ -149,14 +156,13 @@ On each timestep, use the following steps to assign CSF and PET tests:
 
 1. Assess eligibility based on the following requirements:
 
-  - Simulant is in MCI stage
-  - Simulant age is >=60 and <80
+  - Simulant is in MCI stage or AD dementia stage
   - Simulant has never recieved a CSF or PET test before
   - Simulant has never recieved a positive BBBM test before
-  - Propensity is higher than location-specific testing rate (CSF rate plus PET rate)
+  - Propensity value is lower (likely test recipient) than the location-specific testing rate, which is equal to CSF rate plus PET rate
 
 2. If eligible (meets all requirements), give test. If not, do not give test. Do not assign a diagnosis.
-3. Assign if it was a CSF or PET test based on location-specific rates. If propensity is higher than CSF testing rate: give a CSF test. Otherwise, propensity must be lower than CSF testing rate but higher than CSF + PET rate: give a PET test.
+3. Assign if it was a CSF or PET test based on location-specific rates. If propensity value is lower than CSF testing rate: give a CSF test. Otherwise, propensity value must be higher than CSF testing rate but lower than CSF + PET rate: give a PET test.
 
 On initialization
 '''''''''''''''''
@@ -173,16 +179,14 @@ CSF/PET testing.
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- Uses same age limits as BBBM testing due to similar assumptions that tests
-  are not useful at the younger/older ages 
 - A simulant with an eligible propensity will be tested at the first time step 
-  they satisfy the MCI and age criteria, and then can never be tested again, 
+  they satisfy the stage and age criteria, and then can never be tested again, 
   so propensity does not need to be re-assigned at any point
-- Assume no testing in pre-clinical or AD dementia states
+- Assume no testing in pre-clinical state
 - Not used to assign treatment (no diagnosis)
 - Eligibility requirements impact the number of tests. The earlier the stage simulants
-  are tested in, the more tests will be conducted (eg MCI vs mild stage). The wider 
-  the age range, the more tests will be conducted. 
+  are tested in, the more tests will be conducted (eg mild stage compared to MCI). The wider 
+  the age range, the more tests will be conducted (eg no age requirements vs 60-80 year olds). 
 
 BBBM testing
 ~~~~~~~~~~~~
@@ -206,7 +210,7 @@ The simulant's baseline testing propensity will also be used as their BBBM testi
 
 On timestep
 '''''''''''
-On each timestep, use the following steps to assign CSF and PET tests:
+On each timestep, use the following steps to assign BBBM tests:
 
 1. Assess eligibility based on the following requirements:
 
@@ -214,7 +218,7 @@ On each timestep, use the following steps to assign CSF and PET tests:
   - Simulant age is >=60 and <80
   - Simulant has not received a BBBM test in the last three years
   - Simulant has never received a positive BBBM test
-  - Propensity is higher than year-specific testing rate
+  - Propensity is lower than year-specific testing rate
 
 2. If eligible (meets all requirements), give test. If not, do not give test.
 3. If given test, assign positive diagnosis to 90% of people and negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, eg people who test negative still have a 90% chance of being positive on a re-test.
@@ -227,15 +231,15 @@ we would expect a large group to be immediately tested and then a drop-off in te
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- Since BBBM testing eligibility is pre-clinical stage and CSF/PET is MCI stage, 
+- Since BBBM testing eligibility is pre-clinical stage and CSF/PET is MCI or AD dementia stage, 
   and simulants cannot move backwards, CSF/PET test history is irrelevant to BBBM 
   test eligibility  
 - The same simulants undergo repeat testing to reflect ongoing issues with access or insurance,
   so propensity does not need to be re-assigned at any point.
-- Since BBBM uses the same propensity as baseline testing, BBBM should mostly replace CSF and PET
-  testing, though some simulants may reach age 60 in the MCI stage, or get a BBBM false negative.
+- Since BBBM uses the same propensity as baseline testing, BBBM should replace many CSF and PET
+  tests, though some simulants may not qualify for BBBM tests due to age requirements, or may get a BBBM false negative.
 
-.. todo::
+.. note::
   People who are not simulated (will not develop AD dementia) will also be tested, and these tests,
   including false positives, will need to be counted (outside the simulation).
 
