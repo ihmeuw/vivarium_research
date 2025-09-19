@@ -399,8 +399,8 @@ that
 
   \Delta = n w + r.
 
-With our current parameters, :math:`\Delta = 7` years and :math:`w=5`
-years , so :math:`n = 1` and :math:`r = 2` years.
+For example, if :math:`\Delta = 7` years and :math:`w=5` years , then
+:math:`n = 1` and :math:`r = 2` years.
 
 Under our simplifying assumption, everyone who enters the count
 :math:`B_{g,t}^\text{AD}` at time :math:`t` will transition to
@@ -457,12 +457,14 @@ the AD-dementia state. Then for a large population,
 .. math::
 
   \dot B_{g,t}^\text{die} \approx \gamma_{g,t} \dot B_g(t),
-
-so we have
-
-.. math::
-
+  \quad\text{and hence}\quad
   \dot B_g(t) \approx \dot B_{g,t}^\text{AD} + \gamma_{g,t} \dot B_g(t).
+
+.. so we have
+
+.. .. math::
+
+..   \dot B_g(t) \approx \dot B_{g,t}^\text{AD} + \gamma_{g,t} \dot B_g(t).
 
 Then we can solve for :math:`\dot B_g(t)` to get
 
@@ -478,23 +480,22 @@ estimate the total rate :math:`\dot B_g(t)` at which people are entering
 the BBBM-AD state. To finish the calculation, we need to estimate
 :math:`\gamma_{g,t}`.
 
-**Note:** I'm currently updating notation. The translations are:
+.. **Note:** I'm currently updating notation. The translations are:
 
-* :math:`J_{g,t}^\text{BBBM} = B_g'(t)`
-* :math:`I_{g,t}^\text{BBBM} = \frac{d}{dt} B_{g,t}^\text{AD}`
-* :math:`\gamma_{g,t} J_{g,t}^\text{BBBM} = \frac{d}{dt}
-  B_{g,t}^\text{die}`
-* :math:`m_{g,t} =` mortality rate in the BBBM and MCI states in group
-  :math:`g` at time :math:`t`, equal to acmr --- csmr_c543
+.. * :math:`J_{g,t}^\text{BBBM} = B_g'(t)`
+.. * :math:`I_{g,t}^\text{BBBM} = \frac{d}{dt} B_{g,t}^\text{AD}`
+.. * :math:`\gamma_{g,t} J_{g,t}^\text{BBBM} = \frac{d}{dt}
+..   B_{g,t}^\text{die}`
+.. * :math:`m_{g,t} =` mortality rate in the BBBM and MCI states in group
+..   :math:`g` at time :math:`t`, equal to acmr --- csmr_c543
 
 To estimate the mortality probability :math:`\gamma_{g,t}`, let
 :math:`m_{g,t}` denote the background mortality hazard for people in
 group :math:`g` at time :math:`t`. This is the mortality hazard
 experienced by people in the BBBM and MCI states and is equal to the
 all-cause mortality rate minus the cause-specific mortality rate for
-AD-dementia. Using our assumption that the duration of
-pre-AD dementia is exactly :math:`\Delta`, plus the definition of
-mortality hazard,
+AD-dementia. Using our assumption that the duration of pre-dementia AD
+is exactly :math:`\Delta`, plus the definition of mortality hazard,
 
 .. math::
 
@@ -505,7 +506,7 @@ mortality hazard,
     $[t, t+\Delta]$} \right) \\
   &= 1 - \exp \left(
     -\int_0^\Delta m_{g + \tau,\,t+\tau}\, d\tau \right) \\
-  &= 1 - \exp (-\bar m_{g,t} \cdot \Delta),
+  &= 1 - \exp (-\Delta \cdot \bar m_{g,t}),
   \end{align*}
 
 where :math:`\bar m_{g,t} = \frac{1}{\Delta} \int_0^\Delta m_{g +
@@ -521,20 +522,30 @@ the interval :math:`[t, t+\Delta]`.
   hazard x person-time = count of people. In this case we're computing a
   probability, not a count of people.
 
-For someone in demographic group :math:`g` who enters BBBM-AD at time
-:math:`t`, write :math:`\gamma_{g,t}` for the probability of dying
-during these two stages. We can estimate this probability as
-:math:`\gamma_{g,t} \approx` (average time in pre-dementia AD states) x
-(average mortality rate in group :math:`g` during the interval
-:math:`[t, t+\Delta]`). The average time in the two states is
-:math:`\Delta`. We can estimate the average mortality rate as the
-average mortality rate in the group :math:`g` at the midpoint of the
-interval, :math:`t + \Delta / 2`. Thus,
+.. For someone in demographic group :math:`g` who enters BBBM-AD at time
+.. :math:`t`, write :math:`\gamma_{g,t}` for the probability of dying
+.. during these two stages. We can estimate this probability as
+.. :math:`\gamma_{g,t} \approx` (average time in pre-dementia AD states) x
+.. (average mortality rate in group :math:`g` during the interval
+.. :math:`[t, t+\Delta]`). The average time in the two states is
+.. :math:`\Delta`.
+
+To make things simple, we can estimate the average mortality hazard
+:math:`\bar m_{g,t}` as the mortality rate at the midpoint of the time
+interval, :math:`t + \Delta / 2`. That is,
+
+.. math::
+
+  \bar m_{g,t} \approx m_{g + \frac{\Delta}{2} ,\, t +
+  \frac{\Delta}{2}},
+
+and hence
 
 .. math::
 
   \gamma_{g,t} \approx
-  \Delta \cdot m_{g + \frac{\Delta}{2} ,\, t + \frac{\Delta}{2}}.
+  1 - \exp \left( -\Delta
+    \cdot m_{g + \frac{\Delta}{2} ,\, t + \frac{\Delta}{2}} \right).
 
 .. where :math:`a_g` is the age at the start of the age group :math`g`.
 
@@ -544,9 +555,12 @@ approximately
 
 .. math::
 
-  \gamma_{g,t} \approx
-  \Delta \cdot m_{(F,70) + 3.5,\, 2025 + 3.5}
-  = \Delta \cdot m_{(F,75),\, 2029}.
+  \begin{align*}
+  \gamma_{g,t}
+  &\approx 1 - \exp \left(-\Delta
+    \cdot m_{(F,70) + 3.5,\, 2025 + 3.5} \right) \\
+  &= 1 - \exp \left(-\Delta \cdot m_{(F,75),\, 2029} \right).
+  \end{align*}
 
 Note that since we have estimates of mortality rates for 5-year age
 groups and single years, we have rounded to the nearest age group and
@@ -560,17 +574,18 @@ down.
 
 .. note::
 
-  We can get a better approximation of :math:`\gamma_{g,t}` as follows:
+  We can get a better approximation of :math:`\gamma_{g,t}` by making a
+  more careful approximation of the integral in the exponent:
 
-  The average
-  probability of death among people who are in demographic group :math:`g` at
-  time :math:`t` between times :math:`t` and :math:`t+\Delta`  should be
-  approximately
+  .. The average
+  .. probability of death among people who are in demographic group :math:`g` at
+  .. time :math:`t` between times :math:`t` and :math:`t+\Delta`  should be
+  .. approximately
 
   .. math::
 
     \begin{align*}
-    \gamma_{g,t}
+    \Delta \cdot \bar m_{g,t}
       \approx \frac{w}{2} \cdot m_{g,\, t}
     &+ w \cdot m_{g+w,\, t+w} \\
     &+ \dotsb \\
@@ -581,8 +596,9 @@ down.
       \cdot  m_{g+(n+1)w,\, t+(n+1)w}.
     \end{align*}
 
-  (Note that the weights add up to :math:`\Delta`, showing that this is
-  is a refinement of the approximation above.)
+  Note that the weights add up to :math:`\Delta`, showing that this is
+  is a refinement of the approximation :math:`\Delta \cdot m_{g +
+  \frac{\Delta}{2} ,\, t + \frac{\Delta}{2}}`.
 
   With :math:`\Delta = 7` years and :math:`w = 5` years, we have
   :math:`n = 1`, so there are only three terms in the sum, corresponding
@@ -603,20 +619,20 @@ down.
   :math:`t+\Delta` among people who are in demographic group :math:`g` at
   time :math:`t` should then be
 
-Adjusting for the mortality rate, the total number of real-world people
-in demographic group :math:`g` who will be entering the BBBM-AD state at
-time :math:`t` should then be :math:`I_{g,t}^\text{BBBM} \cdot
-\frac{1}{1 - \gamma_{g,t}}`. The rate at which we want to add simulants
-into the BBBM-AD state is then
+Finally, as noted above, the rate at which real-world people in
+demographic group :math:`g` are entering the BBBM-AD state at time
+:math:`t` is approximately :math:`\dot B_{g,t}^\text{AD} \cdot
+\frac{1}{1 - \gamma_{g,t}}`. Multiplying by the model scale :math:`S`,
+the rate at which we want to add simulants into the BBBM-AD state is
+then
 
 .. math::
 
-  \lambda_{g,t} = S \cdot I_{g,t}^\text{BBBM}
-  \cdot \frac{1}{1 - \gamma_{g,t}},
+  \lambda_{g,t} = S \cdot \dot B_{g,t}^\text{AD}
+  \cdot \frac{1}{1 - \gamma_{g,t}}.
 
-where :math:`S` is the model scale defined above. If :math:`t` is a
-step time of the simulation, the number of simulants to add at time
-:math:`t` is then
+If :math:`t` is a step time of the simulation, the number of simulants
+to add at time :math:`t` is then
 
 .. math::
 
