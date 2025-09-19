@@ -471,17 +471,6 @@ our calculation of :math:`\dot B_{g,t}^\text{AD}` above to directly
 estimate the total rate :math:`\dot B_g(t)` at which people are entering
 the BBBM-AD state.
 
-If
-:math:`\delta` is a small interval of time, the total
-number of people in demographic group :math:`g` entering the BBBM-AD
-state time at time :math:`t` is :math:`\dot B_g(t)`. Let
-:math:`\gamma_{g,t}` be the probability of one of these people dying
-before they reach the AD-dementia state. Then the expected number of
-people who die during the interval :math:`[t, t+\Delta]` is
-:math:`\gamma_{g,t} \dot B_g(t) \delta t`. Adding this to the number
-:math:`\dot B_{g,t}^\text{AD} \delta t` who survive and transition to
-AD-dementia, we have the equation
-
 .. math::
 
   \dot B_g(t) \delta t = \dot B_{g,t}^\text{AD}
@@ -495,29 +484,6 @@ AD-dementia, we have the equation
   B_{g,t}^\text{die}`
 * :math:`m_{g,t} =` mortality rate in the BBBM and MCI states in group
   :math:`g` at time :math:`t`, equal to acmr --- csmr_c543
-
-Let
-:math:`J_{g,t}^\text{BBBM}` denote the total number of people in
-demographic group :math:`g` entering the BBBM-AD state at time
-:math:`t`, and let :math:`\gamma_{g,t}` be the probability of one of
-these people dying before they reach the AD-dementia state. Then the
-expected number of people who die during the interval :math:`[t,
-t+\Delta]` is :math:`\gamma_{g,t} J_{g,t}^\text{BBBM}`. Adding this to
-the number :math:`I_{g,t}^\text{BBBM}` who survive and transition to
-AD-dementia, we have the equation
-
-.. math::
-
-  J_{g,t}^\text{BBBM} = I_{g,t}^\text{BBBM}
-  + \gamma_{g,t} J_{g,t}^\text{BBBM},
-
-and solving for :math:`J_{g,t}^\text{BBBM}`, we have
-
-.. math::
-
-  J_{g,t}^\text{BBBM} = I_{g,t}^\text{BBBM}
-  \cdot \frac{1}{1 - \gamma_{g,t}}.
-
 
 
 For someone in demographic group :math:`g` who enters BBBM-AD at time
