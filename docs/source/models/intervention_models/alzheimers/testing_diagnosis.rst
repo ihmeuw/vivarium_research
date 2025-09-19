@@ -82,28 +82,17 @@ by the introduction of BBBM tests in :ref:`Alternative Scenario 1 <alz_scenarios
 
 Location-specific testing rates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-US testing rates among patients who are diagnosed with MCI or dementia are given 
-in Figure 3 in [Yan-et-al-2025-Medicare-Diagnostics]_ (overall cohort).
+CSF and PET testing rates in the US, Germany, Spain, the UK and China are given by [Roth-et-al-2023-Diagnostic-Pathways]_.
+The paper surveys health care providers about patients presenting with cognitive complains.
 
-We adjust these US CSF and PET testing rates upwards (2x) due to subsequent 
-increases in coverage by Medicare, and add substantial uncertainty (-50% for the lower 
-bound and +50% for the upper bound) to create a 95% confidence interval.
+Swedish CSF testing rate is from [Mattke-et-al-2024-Sweden-Capacity]_, and PET comes from that value and the relative CSF vs PET test proportion (90% CSF, 10% PET)
+given by [Falahati-et-al-2015-SveDem]_. 
 
-To reach CSF and PET testing rates for other countries, we adjust the (increased) US test rates based on 
-per capita Alzheimer's pharmaceutical spending from [Brain-Health-Atlas]_.
-For example, a country spending 10% of the US would have CSF and PET testing rates equal to 
-10% of the US.
+For Japan, Israel, Taiwan and Brazil, because we have not yet found CSF and PET testing rates for these locations,
+we use the total CSF and PET testing rates across all countries. 
 
-Due to a high perentage of CSF testing in Sweden [Mattke-et-al-2024-Sweden-Capacity]_, 
-we further adjust Sweden's CSF rate to be 9x its PET rate from the previous step.
+After choosing these mean values, we subract 50% for a lower confidence bound and add 50% for an upper confidence bound to reflect substantial uncertainty.
 
-We use these location-specific test rates to determine how likely a simulant with 
-MCI is to receieve a CSF or PET test, and which test they should receive.
-
-As mentioned above, the US testing rates are among patients who are diagnosed with MCI 
-or dementia (study counts tests performed within the 12 months before the diagnosis).
-So, the denominator of these values is MCI or AD dementia positive people. These test rates
-will be used to determine which MCI or AD dementia stage simulants are given CSF/PET tests.
 
 .. list-table:: Location-specific test rates
   :widths: 15 15 15
@@ -113,35 +102,36 @@ will be used to determine which MCI or AD dementia stage simulants are given CSF
     - CSF mean % (Confidence)
     - PET mean % (Confidence)
   * - US
-    - 4.4 (2.2, 6.6)
-    - 1.4 (.70, 2.1)
+    - 10.8 (5.4, 16.1)	
+    - 15.0 (7.5, 22.5)
   * - Germany
-    - 2.8 (1.4, 4.2)
-    - .89 (.44, 1.3)
+    - 18.7 (9.4, 28.1)	
+    - 16.0 (8.0, 24.0)
   * - Spain
-    - 1.4 (.70, 2.1)
-    - .45 (.22, .67)
+    - 24.6 (12.3, 36.9)	
+    - 25.9 (12.9, 38.8)
   * - Sweden
-    - 3.8 (1.9, 5.7)
-    - .42 (.21, .63)
+    - 40.5 (20.3, 60.8)	
+    - 4.5 (2.3, 6.8)
   * - UK
-    - 1.3 (.65, 2.0)
-    - .41 (.21, .62)
+    - 9.5 (4.7, 14.2)	
+    - 10.7 (5.3, 16)
   * - Japan
-    - 1.3 (.65, 1.9)
-    - .41 (.21, .62)
+    - 13.3 (6.7, 20)	
+    - 14.9 (7.5, 22.4)
   * - Israel
-    - .43 (.21, .64)
-    - .14 (.07, .20)
+    - 13.3 (6.7, 20)	
+    - 14.9 (7.5, 22.4)
   * - Taiwan
-    - .42 (.21, .63)
-    - .13 (.07, .20)
+    - 13.3 (6.7, 20)	
+    - 14.9 (7.5, 22.4)
   * - Brazil
-    - .12 (.06, .18)
-    - .04 (.02, .06)
+    - 13.3 (6.7, 20)	
+    - 14.9 (7.5, 22.4)
   * - China
-    - .08 (.04, .12)
-    - .02 (.01, .04)
+    - 4.4 (2.2, 6.6)
+    - 6.1 (3, 9.1)
+
 
 Implementation
 ^^^^^^^^^^^^^^
@@ -247,9 +237,9 @@ Assumptions and Limitations
 References
 ----------
 
-.. [Brain-Health-Atlas]
-  Brain Health Atlas. Accessed September 17, 2025. https://brainhealthatlas.org/data/economic-impact/bar
+.. [Roth-et-al-2023-Diagnostic-Pathways]
+  Roth S, Burnie N, Suridjan I, Yan JT, Carboni M. Current Diagnostic Pathways for Alzheimer’s Disease: A Cross-Sectional Real-World Study Across Six Countries. J Alzheimers Dis Rep. 7(1):659-674. doi:10.3233/ADR230007
 .. [Mattke-et-al-2024-Sweden-Capacity]
-  Mattke S, Gustavsson A, Jacobs L, et al. Estimates of Current Capacity for Diagnosing Alzheimer’s Disease in Sweden and the Need to Expand Specialist Numbers. The Journal of Prevention of Alzheimer’s Disease. 2024;11(1):155-161. doi:10.14283/jpad.2023.94
-.. [Yan-et-al-2025-Medicare-Diagnostics]
-  Yan JT, Dillon A, Meng T, et al. Real‐world use of diagnostic tests for mild cognitive impairment, Alzheimer’s disease, and other dementias in Medicare fee‐for‐service beneficiaries. Alzheimers Dement (Amst). 2025;17(3):e70156. doi:10.1002/dad2.70156
+  Mattke S, Gustavsson A, Jacobs L, et al. Estimates of Current Capacity for Diagnosing Alzheimer’s Disease in Sweden and the Need to Expand Specialist Numbers. J Prev Alzheimers Dis. 2024;11(1):155-161. doi:10.14283/jpad.2023.94
+.. [Falahati-et-al-2015-SveDem]
+  Falahati F, Fereshtehnejad SM, Religa D, Wahlund LO, Westman E, Eriksdotter M. The Use of MRI, CT and Lumbar Puncture in Dementia Diagnostics: Data from the SveDem Registry. Dementia and Geriatric Cognitive Disorders. 2015;39(1-2):81-92. doi:10.1159/000366194
