@@ -206,6 +206,11 @@ known parameters.
     = X_{t_0}.
     \end{align*}
 
+.. todo::
+
+  Add a note about how the initial values in each subgroup are related
+  to the "population structure" of the simulation.
+
 Initializing simulants with presymptomatic and MCI stages
 ---------------------------------------------------------
 
@@ -406,6 +411,15 @@ that
 For example, if :math:`\Delta = 7` years and :math:`w=5` years , then
 :math:`n = 1` and :math:`r = 2` years.
 
+.. todo::
+
+  In model 4.2 we updated the disease state durations so that
+  :math:`\Delta` is now about 10.2 instead of 7, so it would be good to
+  update these example numbers using the new value. In a future model
+  version, we may further update these durations to take mortality into
+  account, making them age-dependent. This might require additional
+  changes to how we describe things here.
+
 Under our simplifying assumption, everyone who enters the count
 :math:`B_{g,t}^\text{AD}` at time :math:`t` will transition to
 AD-dementia at time :math:`t + \Delta`. Working backwards from our
@@ -590,28 +604,29 @@ down.
 Entrance rate into the BBBM state in the simulation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Finally, as noted above, the rate at which real-world people in
-demographic group :math:`g` are entering the BBBM-AD state at time
-:math:`t` is approximately :math:`\dot B_{g,t}^\text{AD} \cdot
-\frac{1}{1 - \gamma_{g,t}}`. Multiplying by the model scale :math:`S`,
-the rate at which we want to add simulants into the BBBM-AD state is
-then
+As noted above, the rate at which real-world people in demographic group
+:math:`g` are entering the BBBM-AD state at time :math:`t` is
+approximately :math:`\dot B_{g,t}^\text{AD} \cdot \frac{1}{1 -
+\gamma_{g,t}}`. Multiplying by the model scale :math:`S`, the rate at
+which we want to add simulants into the BBBM-AD state is then
 
 .. math::
 
   \lambda_{g,t} = S \cdot \dot B_{g,t}^\text{AD}
   \cdot \frac{1}{1 - \gamma_{g,t}}.
 
-If :math:`t` is a step time of the simulation, the number of simulants
-to add at time :math:`t` is then
+If :math:`t` is a step time of the simulation, the average number of
+simulants we want to add at time :math:`t` is then
 
 .. math::
 
-  \text{Number of simulants to add at time t}
+  \text{Average number of simulants to add at time t}
   = \lambda_{g,t} \cdot \Delta t,
 
 where :math:`\Delta t` is the step size of the simulation (currently
-defined as 183 days).
+defined as 183 days). Finally, the number of simulants actually added at
+time :math:`t` will be a Poisson-distributed random variable with mean
+:math:`\lambda_{g,t} \cdot \Delta t`.
 
 Implementation and data tables
 +++++++++++++++++++++++++++++++
