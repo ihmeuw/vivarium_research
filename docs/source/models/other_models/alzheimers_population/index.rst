@@ -390,6 +390,9 @@ duration of BBBM-AD plus MCI-AD**. This will simplify our calculations
 and will hopefully give a good enough approximation to closely match the
 values of :math:`\dot A_g(t)` calculated as above.
 
+Estimating BBBM cases that progress to AD-dementia
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Let :math:`\Delta = \Delta_\text{BBBM} + \Delta_\text{MCI}` be the total
 average duration of pre-dementia AD, and let :math:`w` be the width of
 an age group (i.e., 5 years for GBD age groups). There exists a unique
@@ -446,6 +449,9 @@ Note that we are assuming that the incidence rate
   Recall that :math:`i_{g,t}^\text{AD}` is the **total-population
   incidence rate** of AD-dementia, with *total* population in the
   denominator instead of susceptible population.
+
+Estimating BBBM cases that die during pre-dementia AD
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In order to get the correct number of people transitioning into the
 AD-dementia state at time :math:`t+\Delta`, we need to account for
