@@ -587,6 +587,9 @@ down.
     + 4.1 \cdot m_{(F, 75),\, 2030}
     + 0.4 \cdot m_{(F, 80),\, 2035}.
 
+Entrance rate into the BBBM state in the simulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Finally, as noted above, the rate at which real-world people in
 demographic group :math:`g` are entering the BBBM-AD state at time
 :math:`t` is approximately :math:`\dot B_{g,t}^\text{AD} \cdot
