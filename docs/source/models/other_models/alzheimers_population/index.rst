@@ -461,12 +461,6 @@ the AD-dementia state. Then for a large population,
   \quad\text{and hence}\quad
   \dot B_g(t) \approx \dot B_{g,t}^\text{AD} + \gamma_{g,t} \dot B_g(t).
 
-.. so we have
-
-.. .. math::
-
-..   \dot B_g(t) \approx \dot B_{g,t}^\text{AD} + \gamma_{g,t} \dot B_g(t).
-
 Then we can solve for :math:`\dot B_g(t)` to get
 
 .. math::
@@ -480,15 +474,6 @@ our calculation of :math:`\dot B_{g,t}^\text{AD}` above to directly
 estimate the total rate :math:`\dot B_g(t)` at which people are entering
 the BBBM-AD state. To finish the calculation, we need to estimate
 :math:`\gamma_{g,t}`.
-
-.. **Note:** I'm currently updating notation. The translations are:
-
-.. * :math:`J_{g,t}^\text{BBBM} = B_g'(t)`
-.. * :math:`I_{g,t}^\text{BBBM} = \frac{d}{dt} B_{g,t}^\text{AD}`
-.. * :math:`\gamma_{g,t} J_{g,t}^\text{BBBM} = \frac{d}{dt}
-..   B_{g,t}^\text{die}`
-.. * :math:`m_{g,t} =` mortality rate in the BBBM and MCI states in group
-..   :math:`g` at time :math:`t`, equal to acmr --- csmr_c543
 
 To estimate the mortality probability :math:`\gamma_{g,t}`, let
 :math:`m_{g,t}` denote the background mortality hazard for people in
@@ -523,14 +508,6 @@ the interval :math:`[t, t+\Delta]`.
   hazard x person-time = count of people. In this case we're computing a
   probability, not a count of people.
 
-.. For someone in demographic group :math:`g` who enters BBBM-AD at time
-.. :math:`t`, write :math:`\gamma_{g,t}` for the probability of dying
-.. during these two stages. We can estimate this probability as
-.. :math:`\gamma_{g,t} \approx` (average time in pre-dementia AD states) x
-.. (average mortality rate in group :math:`g` during the interval
-.. :math:`[t, t+\Delta]`). The average time in the two states is
-.. :math:`\Delta`.
-
 To make things simple, we can estimate the average mortality hazard
 :math:`\bar m_{g,t}` as the mortality rate at the midpoint of the time
 interval, :math:`t + \Delta / 2`. That is,
@@ -539,16 +516,10 @@ interval, :math:`t + \Delta / 2`. That is,
 
   \bar m_{g,t} \approx m_{g + \frac{\Delta}{2} ,\, t +
   \frac{\Delta}{2}},
-
-and hence
-
-.. math::
-
+  \quad\text{and hence}\quad
   \gamma_{g,t} \approx
   1 - \exp \left( -\Delta
     \cdot m_{g + \frac{\Delta}{2} ,\, t + \frac{\Delta}{2}} \right).
-
-.. where :math:`a_g` is the age at the start of the age group :math`g`.
 
 Continuing the example from above, the probability of death among
 females aged 70--74 who enter the BBBM-AD state in 2025 is
@@ -577,11 +548,6 @@ down.
 
   We can get a better approximation of :math:`\gamma_{g,t}` by making a
   more careful approximation of the integral in the exponent:
-
-  .. The average
-  .. probability of death among people who are in demographic group :math:`g` at
-  .. time :math:`t` between times :math:`t` and :math:`t+\Delta`  should be
-  .. approximately
 
   .. math::
 
@@ -614,11 +580,6 @@ down.
     \approx 2.5 \cdot m_{(F, 70),\, 2025}
     + 4.1 \cdot m_{(F, 75),\, 2030}
     + 0.4 \cdot m_{(F, 80),\, 2035}.
-
-..
-  The number of deaths that occur between times :math:`t` and
-  :math:`t+\Delta` among people who are in demographic group :math:`g` at
-  time :math:`t` should then be
 
 Finally, as noted above, the rate at which real-world people in
 demographic group :math:`g` are entering the BBBM-AD state at time
