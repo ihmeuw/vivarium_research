@@ -89,7 +89,7 @@ Swedish CSF testing rate is from [Mattke-et-al-2024-Sweden-Capacity]_, and PET c
 given by [Falahati-et-al-2015-SveDem]_. 
 
 For Japan, Israel, Taiwan and Brazil, because we have not yet found CSF and PET testing rates for these locations,
-we use the total CSF and PET testing rates across all countries. 
+we use the total CSF and PET testing rates across all countries from [Roth-et-al-2023-Diagnostic-Pathways]_. 
 
 After choosing these mean values, we subract 50% for a lower confidence bound and add 50% for an upper confidence bound to reflect substantial uncertainty.
 
