@@ -600,19 +600,19 @@ scenario, and input draw.
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_13a_model4.1_vv.ipynb
   * - 4.2
     - Same as 4.1
-    -
+    - Not much positive change to the AD-dementia incidence (still off in young ages, and now further off in old ages)
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_15a_model4.2_vv.ipynb
   * - 4.3
     - Same as 4.2
-    -
+    - Big improvement in AD-dementia incidence for older ages, still off for younger ages
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_18b_model4.3_vv.ipynb
   * - 4.4
     - Same as 4.3
-    -
+    - Some improvement in AD-dementia incidence for younger ages; we think that the duration we have used is off by a little since we did not include mortality in our duration estimate
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_18c_model4.4_vv.ipynb
   * - 4.5
     - Same as 4.4
-    -
+    - AD-dementia incidence looks identical to 4.4, so the double rounding was perhaps not a problem after all
     -
 
 .. list-table:: Outstanding model verification and validation issues
