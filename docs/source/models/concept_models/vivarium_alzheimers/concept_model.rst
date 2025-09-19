@@ -398,13 +398,16 @@ scenario, and input draw.
     - Default
     - Default
   * - 4.1
-    - Updated artifacts to reflect updated MCI duration
+    - `Update MCI duration and MCI → AD transition rate to avoid
+      negatives in older age groups
+      <https://github.com/ihmeuw/vivarium_research/pull/1778>`_
     - Baseline
     - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
     - Default
     - Default
   * - 4.2
-    - Switch BBBM → MCI hazard to Weibull distribution
+    - `Switch BBBM → MCI hazard to Weibull distribution
+      <https://github.com/ihmeuw/vivarium_research/pull/1785>`_
     - Baseline
     - * Locations: USA
     - Default
