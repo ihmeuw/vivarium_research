@@ -613,7 +613,7 @@ scenario, and input draw.
   * - 4.5
     - Same as 4.4
     - AD-dementia incidence looks identical to 4.4, so the double rounding was perhaps not a problem after all
-    -
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/9fef98e6cc61f4eb6dec96c2cd477e64cc084d3f/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
