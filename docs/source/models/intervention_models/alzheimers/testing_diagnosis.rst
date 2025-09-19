@@ -83,16 +83,19 @@ by the introduction of BBBM tests in :ref:`Alternative Scenario 1 <alz_scenarios
 Location-specific testing rates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 CSF and PET testing rates in the US, Germany, Spain, the UK and China are given by [Roth-et-al-2023-Diagnostic-Pathways]_.
-The paper surveys health care providers about patients presenting with cognitive complains.
+The paper surveys health care providers about patients presenting with cognitive complains. 
+Patients with cognitive complaints presenting to a health care provider is the denominator for these test rates.
 
-Swedish CSF testing rate is from [Mattke-et-al-2024-Sweden-Capacity]_, and PET comes from that value and the relative CSF vs PET test proportion (90% CSF, 10% PET)
-given by [Falahati-et-al-2015-SveDem]_. 
+Swedish CSF testing rate is from [Falahati-et-al-2015-SveDem]_, and PET comes from that value and the relative CSF vs PET test proportion (90% CSF, 10% PET)
+given by [Mattke-et-al-2024-Sweden-Capacity]_. The cohorts for these studies are incident AD dementia cases and patients with confirmed MCI respectively.
 
 For Japan, Israel, Taiwan and Brazil, because we have not yet found CSF and PET testing rates for these locations,
 we use the total CSF and PET testing rates across all countries from [Roth-et-al-2023-Diagnostic-Pathways]_. 
 
 After choosing these mean values, we subract 50% for a lower confidence bound and add 50% for an upper confidence bound to reflect substantial uncertainty.
 
+Note that the three sources for these test rates have slightly different cohorts and therefore test rate denominators.
+These test rates will be applied to simulants with MCI or AD dementia.
 
 .. list-table:: Location-specific test rates
   :widths: 15 15 15
