@@ -396,6 +396,18 @@ scenario, and input draw.
     - * Locations: USA, China
     - Default
     - Default
+  * - 4.0
+    - Include BBBM-AD and MCI-AD states
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
+  * - 4.1
+    - Updated artifacts to reflect updated MCI duration
+    - Baseline
+    - * Locations: All (Sweden, US, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
+    - Default
+    - Default
 
 
 5.2 V & V Tracking
@@ -554,6 +566,15 @@ scenario, and input draw.
     - Same as 3.0 (notebook copied)
     - * Results are consistent with 3.0 results
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2025_09_05a_model3.1_vv.ipynb
+  * - 4.0
+    - All checks from 3.0, but instead of verifying all-cause mortality rate, use other-cause mortality rate, which is easier to compute; also confirm that there are person-years of BBBM-AD and MCI-AD for all age groups and years.
+    - * AD-dementia Incidence counts in simulation exceed artifact values for younger ages
+      * Zero incidence and prevalence of AD-dementia at oldest ages (due to bug with negative transition rates)
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/8f7f48009ee36b65763d8103cc4c4182b52908f1/verification_and_validation/2025_09_05a_model4.0_vv.ipynb
+  * - 4.1
+    - Same as 4.0, but also look at durations of BBBM-AD, MCI-AD to make sure they match expectation.  Anticipate there to be more similarity between AD-dementia incidence counts in simulation and GBD/FHS.
+    - 
+    - 
   
 
 .. list-table:: Outstanding model verification and validation issues
@@ -571,3 +592,8 @@ scenario, and input draw.
     - Thought to be due to GBD mismatch in mortality and incidence
     - Review again when we split AD and OD 
     - Model 6
+  * - AD-dementia incidence counts too far from target
+    - Currently too high in younger ages, and zero in older ages, likely due to inconsistent MCI-AD duration and negative transition rates from MCI-AD to AD-dementia in oldest ages
+    - Update durations and rates in Model 4.1 and 4.2
+    - Immediately
+
