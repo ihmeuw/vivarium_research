@@ -425,7 +425,8 @@ scenario, and input draw.
     - Default
     - Default
   * - 4.5
-    - `Don't double round age before finding age group of midpoint
+    - `Don't double round age when finding age group at midpoint of
+      interval
       <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/39/files>`_
     - Baseline
     - * Locations: USA
@@ -596,11 +597,17 @@ scenario, and input draw.
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/8f7f48009ee36b65763d8103cc4c4182b52908f1/verification_and_validation/2025_09_05a_model4.0_vv.ipynb
   * - 4.1
     - Same as 4.0, but also look at durations of BBBM-AD, MCI-AD to make sure they match expectation.  Anticipate there to be more similarity between AD-dementia incidence counts in simulation and GBD/FHS.
-    - 
+    - * AD-dementia incidence counts still too high in younger ages
+      * AD-dementia incidence counts now extremely high in older ages,
+        likely due to forward filling BBBM incidence data for
+        nonexistent age groups above 95--100
+      * Plot of BBBM → MCI transition rate looks very weird
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_13a_model4.1_vv.ipynb
   * - 4.2
     - Same as 4.1
-    - Not much positive change to the AD-dementia incidence (still off in young ages, and now further off in old ages)
+    - * Not much positive change to the AD-dementia incidence (still off
+        in young ages, and now further off in old ages)
+      * Plot of BBBM → MCI transition rate is somewhat improved
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_15a_model4.2_vv.ipynb
   * - 4.3
     - Same as 4.2
