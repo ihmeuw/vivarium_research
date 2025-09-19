@@ -440,6 +440,12 @@ Note that we are assuming that the incidence rate
 :math:`i_{g,t}^\text{AD}` of AD-dementia does not depend on the time
 :math:`t`.
 
+.. important::
+
+  Recall that :math:`i_{g,t}^\text{AD}` is the **total-population
+  incidence rate** of AD-dementia, with *total* population in the
+  denominator instead of susceptible population.
+
 In order to get the correct number of people transitioning into the
 AD-dementia state at time :math:`t+\Delta`, we need to account for
 people who will die during the BBBM-AD and MCI-AD stages. That is, we
@@ -470,11 +476,6 @@ can estimate the probability :math:`\gamma_{g,t}` and combine it with
 our calculation of :math:`\dot B_{g,t}^\text{AD}` above to directly
 estimate the total rate :math:`\dot B_g(t)` at which people are entering
 the BBBM-AD state.
-
-.. math::
-
-  \dot B_g(t) \delta t = \dot B_{g,t}^\text{AD}
-  + \gamma_{g,t} \dot B_g(t) \delta t,
 
 **Note:** I'm currently updating notation. The translations are:
 
