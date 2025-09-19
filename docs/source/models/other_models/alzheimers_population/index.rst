@@ -247,22 +247,23 @@ indicator function zeros out the entrance rate at times when the
 simulation is not taking a step). Our goal is to determine the entrance
 rate :math:`\lambda_{g,t}` for each :math:`g` and :math:`t`.
 
-Let :math:`A_g(t)` be the cumulative number of incident cases of AD by
-time :math:`t` in demographic group :math:`g` in the real population.
-Since our simulation is scaled down by a factor of :math:`S`, the rate
-at which we want to add simulants is
+Calculating entrance rate when simulating AD-dementia only
+----------------------------------------------------------
+
+First we describe how to calculate the entrance rate in the case where
+we are modeling only simulants with AD-dementia (i.e., we are not
+modeling the presymptomatic or MCI statges). Let :math:`A_g(t)` be the
+cumulative number of incident cases of AD by time :math:`t` in
+demographic group :math:`g` in the real population. Since our simulation
+is scaled down by a factor of :math:`S`, the rate at which we want to
+add simulants is
 
 .. math::
 
   \lambda_{g,t} = S \cdot \dot A_g(t),
 
 where :math:`\dot A_g(t)` is the derivative of :math:`A_g(t)` with respect
-to :math:`t`. The following subsection describes how we will calculate
-the entrance rate :math:`\lambda_{g,t}`.
-
-Calculating entrance rate via AD incidence rate
------------------------------------------------
-
+to :math:`t`.
 To calculate :math:`\lambda_{g,t}`, we rewrite it in terms of quantities
 that we can estimate from the available data:
 
