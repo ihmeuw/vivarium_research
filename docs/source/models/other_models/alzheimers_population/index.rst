@@ -254,9 +254,9 @@ at which we want to add simulants is
 
 .. math::
 
-  \lambda_{g,t} = S \cdot A_g'(t),
+  \lambda_{g,t} = S \cdot \dot A_g(t),
 
-where :math:`A_g'(t)` is the derivative of :math:`A_g(t)` with respect
+where :math:`\dot A_g(t)` is the derivative of :math:`A_g(t)` with respect
 to :math:`t`. The following subsection describes how we will calculate
 the entrance rate :math:`\lambda_{g,t}`.
 
@@ -270,12 +270,12 @@ that we can estimate from the available data:
   :label: AD_entrance_rate_eq
 
   \lambda_{g,t}
-  = S \cdot A_g'(t)
-  = S \cdot \frac{A_g'(t)}{Y^\text{real}_{g,t}}
+  = S \cdot \dot A_g(t)
+  = S \cdot \frac{\dot A_g(t)}{Y^\text{real}_{g,t}}
     \cdot Y^\text{real}_{g,t}
   = S \cdot i_{g,t}^\text{AD} \cdot Y^\text{real}_{g,t},
 
-where :math:`i_{g,t}^\text{AD} = A_g'(t) /Y^\text{real}_{g,t}` is the
+where :math:`i_{g,t}^\text{AD} = \dot A_g(t) /Y^\text{real}_{g,t}` is the
 **total population incidence hazard** of AD in demographic group
 :math:`g` at time :math:`t`. We know the model scale :math:`S` from
 :eq:`model_scale_eq` above, and we can estimate the quantities
@@ -330,14 +330,14 @@ This is the population we pull from GBD using get_population. Thus,
 Alternative view using incidence count
 --------------------------------------
 
-The most direct way to estimate :math:`A_g'(t)` is to assume it is
+The most direct way to estimate :math:`\dot A_g(t)` is to assume it is
 constant, in which case it equals its time-average.  For example, if
 :math:`y(t)` denotes the year to which time :math:`t` belongs, and we
-assume :math:`A_g'(t)` is constant during the year :math:`y(t)`, then
+assume :math:`\dot A_g(t)` is constant during the year :math:`y(t)`, then
 
 .. math::
 
-  A_g'(t)
+  \dot A_g(t)
   = \frac{\text{# of incident cases of AD in group $g$ in year $y(t)$}}
     {\text{1 year}}.
 
@@ -355,7 +355,7 @@ Let :math:`B_g(t)` be the cumulative number of incident cases of
 BBBM-presymptomatic AD by time :math:`t` in demographic group :math:`g`
 in the real population. When including the presymptomatic and MCI stages
 of AD, instead of defining :math:`\lambda_{g,t}` in terms of
-:math:`A_g'(t)`, the rate at which we want to add simulants is now
+:math:`\dot A_g(t)`, the rate at which we want to add simulants is now
 
 .. math::
 
@@ -387,7 +387,7 @@ We will estimate :math:`\dot B_g(t) = \dot B_{g,t}^\text{AD} +
 **everyone's duration of pre-dementia AD is exactly equal to the average
 duration of BBBM-AD plus MCI-AD**. This will simplify our calculations
 and will hopefully give a good enough approximation to closely match the
-values of :math:`A_g'(t)` calculated as above.
+values of :math:`\dot A_g(t)` calculated as above.
 
 Let :math:`\Delta = \Delta_\text{BBBM} + \Delta_\text{MCI}` be the total
 average duration of pre-dementia AD, and let :math:`w` be the width of
@@ -405,7 +405,7 @@ For example, if :math:`\Delta = 7` years and :math:`w=5` years , then
 Under our simplifying assumption, everyone who enters the count
 :math:`B_{g,t}^\text{AD}` at time :math:`t` will transition to
 AD-dementia at time :math:`t + \Delta`. Working backwards from our
-calculation of :math:`A_g'(t)` above, and assuming that ages are
+calculation of :math:`\dot A_g(t)` above, and assuming that ages are
 uniformly distributed within the group :math:`g`, the rate at which the
 count :math:`B_{g,t}^\text{AD}` is increasing should be
 
