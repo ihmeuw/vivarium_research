@@ -632,13 +632,26 @@ scenario, and input draw.
   * - YLDs rates do not match in model 1
     - Thought to be due to incorrect disability weight aggregation
     - Will be updated when we add severity levels, recheck then
-    - Model 5
+    - Model 9
   * - Total simulation population increasing in model 3
     - Thought to be due to GBD mismatch in mortality and incidence
-    - Review again when we split AD and OD 
-    - Model 6
-  * - AD-dementia incidence counts too far from target
-    - Currently too high in younger ages, and zero in older ages, likely due to inconsistent MCI-AD duration and negative transition rates from MCI-AD to AD-dementia in oldest ages
-    - Update durations and rates in Model 4.1 and 4.2
-    - Immediately
+    - Review again after we reduce to AD only, and when we add in mixed
+      dementias
+    - Models 5 and 8
+  * - AD-dementia incidence counts are still a bit off in model 4
+    - * AD-incidence by age appears shifted to the left by about 2.5
+        years, making it too high in younger ages and too low in older
+        ages. We think this is due to our average durations being too
+        long because they don't account for mortality.
+      * Also, AD incidence counts in 2025 are too high, likely because
+        of our initialization strategy for the durations in BBBM-AD at
+        time 0.
+    - * Update durations of BBBM-AD and MCI-AD to account for mortality
+        during those stages
+      * Try using an exponential distribution instead of a uniform
+        distribution when initializing durations
+
+      Jira ticket: `SSCI-2411
+      <https://jira.ihme.washington.edu/browse/SSCI-2411>`_
+    - After model 8 or model 9
 
