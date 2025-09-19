@@ -101,10 +101,12 @@ restriction on YLDs for the MCI-AD state of the cause model below.
     - * 40 to 44 for AD-dementia cause state
       * No *a priori* age restriction for MCI-AD cause state
     - * Restriction to age_group_id = 13 (40 to 44) for AD-dementia
-        cause state is from GBD
-      * In practice, the age start for MCI-AD will be age_group_id = 11
-        (30 to 34) because we will be adding simulants at most 7 years
-        before AD incidence (so 40 - 7 = 33, in the 30-34 age group)
+        cause state is from GBD. However, due to simulation dynamics, it is
+        possible for simulants to enter this state before age 40.
+      * In practice, the age start for MCI-AD will be age_group_id = 10
+        (25 to 29) because we will be adding simulants at most 10.2
+        years before AD incidence (so 40 -- 10.2 = 29.8, in the 25-29
+        age group)
   * - YLD age group end
     - 95 plus
     - age_group_id = 235
@@ -267,7 +269,7 @@ in cause state X, as defined in the :ref:`data values and sources table below
   * - i_AD
     - MCI-AD
     - AD
-    - :math:`1 / \Delta_\text{MCI}` --- m_MCI
+    - :math:`1 / \Delta_\text{MCI}`
   * - m_X
     - X
     - Death
@@ -307,11 +309,16 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
 
     p_\text{(all AD states)}
     = \frac{\Delta_\text{(all AD states)}}{\Delta_\text{AD}}
-      \cdot \text{prevalence_c543}.
+      \cdot \text{prevalence_c543}
+    \quad\text{(for ages 40+)}.
 
   Note that since the GBD prevalence applies to a given demographic
   group, so does the formula for :math:`p_\text{(all AD states)}`. The
-  following state data table shows the resulting initial prevalences
+  above formula applies to age groups 40+ since this is where
+  prevalence_c543 and :math:`\Delta_\text{AD}` are nonzero. For ages
+  30--39, use the value of :math:`p_\text{(all AD states)}` for age
+  group 40--44; for ages <30, set :math:`p_\text{(all AD states)} = 0`.
+  The following state data table shows the resulting initial prevalences
   when modeling the total population, as well as the birth prevalences,
   which replace the entrance prevalences. The excess mortality rate and
   disability weight of each state remain the same.
@@ -323,17 +330,19 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
       - Initial prevalence
       - Birth prevalence
     * - S
-      - :math:`1 - \frac{\Delta_\text{(all AD states)}}
-        {\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+      - :math:`1 - p_\text{(all AD states)}`
       - 1
     * - BBBM-AD
-      - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+      - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{(all AD states)}}
+        \cdot p_\text{(all AD states)}`
       - 0
     * - MCI-AD
-      - :math:`\frac{\Delta_\text{MCI}}{\Delta_\text{AD}} \cdot \text{prevalence_c543}`
+      - :math:`\frac{\Delta_\text{MCI}}{\Delta_\text{(all AD states)}}
+        \cdot p_\text{(all AD states)}`
       - 0
     * - AD-dementia
-      - :math:`\text{prevalence_c543}`
+      - :math:`\frac{\Delta_\text{AD}}{\Delta_\text{(all AD states)}}
+        \cdot p_\text{(all AD states)}`
       - 0
 
   .. note::
@@ -504,58 +513,64 @@ are located at the following paths on the cluster:
     - Dwell time in cause state BBBM-AD
     - :math:`T_\text{MCI} - T_\text{BBBM}`
     - Random variable for each simulant, constructed implicitly through
-      simulation dynamics to have approximately a `gamma distribution`_
-      with shape parameter :math:`\alpha` and rate parameter
+      simulation dynamics to have approximately a `Weibull
+      distribution`_ with shape parameter :math:`k` and scale parameter
       :math:`\lambda`
-  * - :math:`\alpha`, :math:`\lambda`
-    - Shape and rate parameters, respectively, of gamma distribution for
+  * - :math:`k`, :math:`\lambda`
+    - Shape and scale parameters, respectively, of Weibull distribution for
       :math:`D_\text{BBBM}`
-    - * :math:`\alpha = 468.75`
-      * :math:`\lambda = 125`
-    - Chosen so that :math:`P(3.5 < D_\text{BBBM} < 4) \approx 0.9`
-      because client said, "The BBBM+ state lasts about 3.5--4 years
-      before transitioning to MCI." Use the same parameters for all years,
-      locations, age groups, and sexes.
-  * - gamma_dist
-    - Python object representing the gamma distribution for
+    - * :math:`k = 1.22`
+      * :math:`\lambda = 6.76`
+    - Chosen to match client's specification for :math:`D_\text{BBBM}`:
+      The probability of progression from BBBM-AD to MCI-AD is about 50%
+      at 5 years and 80% at 10 years, corresponding to an average annual
+      rate of progression of approximately 15% . Use the same parameters
+      for all years, locations, age groups, and sexes.
+  * - bbbm_dist
+    - Python object representing the Weibull distribution for
       :math:`D_\text{BBBM}`
-    - scipy.stats.gamma(𝛼, scale=1/λ)
-    - An instance of `SciPy's gamma distribution class`_. Note that
-      SciPy accepts a scale parameter, which is the reciprocal of the
-      rate parameter.
+    - scipy.stats.weibull_min(k, scale=λ)
+    - An instance of `SciPy's Weibull distribution class`_.
   * - :math:`h_\text{MCI}(t)`
     - Hazard function for transitioning into the MCI-AD state from BBBM-AD
-    - gamma_dist.pdf(t) / gamma_dist.sf(t)
-    - Equal to :math:`\frac{t^{\alpha-1}e^{-\lambda t}}{\int_t^\infty
-      u^{\alpha-1} e^{-\lambda u}\, du}`, but can be computed more
-      easily as the ratio of the probability density function to the
-      survival function, using the methods defined in `SciPy's gamma
+    - * bbbm_dist.pdf(t) / bbbm_dist.sf(t), or
+      * exp( bbbm_dist.logpdf(t) --- bbbm_dist.logsf(t) ), an
+        equivalent expression that may help avoid underflow
+    - Equal to :math:`\frac{k}{\lambda}
+      \left(\frac{t}{\lambda}\right)^{k-1}`, but can also be computed as
+      the ratio of the probability density function to the survival
+      function, using the methods defined in `SciPy's Weibull
       distribution class`_
   * - :math:`\Delta_\text{BBBM}`
-    - Average duration of BBBM-presymptomatic AD
-    - :math:`\alpha / \lambda`
-    - Mean of gamma distribution for :math:`D_\text{BBBM}`. Does not vary by
-      year, location, age group, or sex.
-
-      **Note:** This will slightly overestimate the true average
-      duration because we are not taking mortality into account. We
-      think this will not be too much of an issue because BBBM will be
-      mostly in younger age groups where mortality is relatively small.
-  * - :math:`\Delta_\text{MCI}`
-    - Average duration of MCI due to AD
-    - 3.25 years
-    - Obtained from Table 3 in `Potashman et al.`_, assuming a constant hazard
-      rate. Corresponds to an annual probability of 0.735 of staying in MCI-AD,
-      since :math:`\exp(-1 / 3.25) \approx 0.735`. Does not vary by year,
+    - Average duration of BBBM-presymptomatic AD in the absence of
+      mortality
+    - bbbm_dist.mean()
+    - Equal to :math:`\lambda \Gamma(1 + 1/k)`, where :math:`\Gamma` is
+      the `gamma function`_.  Can be computed using
+      `scipy.special.gamma`_, but using bbbm_dist.mean() is more general
+      if we update the underlying distribution. Does not vary by year,
       location, age group, or sex.
+  * - :math:`\Delta_\text{MCI}`
+    - Average duration of MCI due to AD in the absence of mortality
+    - 3.85 years
+    - Obtained from Table 3 in `Potashman et al.`_, assuming a constant
+      hazard rate of transitioning to AD-dementia. Corresponds to an
+      annual conditional probability of 0.771 of staying in MCI-AD given
+      that you don't die within one year, since :math:`\exp(-1 / 3.85)
+      \approx 0.771`. Does not vary by year, location, age group, or
+      sex.
 
-      **Note:** The paper reports a 68.2% chance of staying in MCI and a 5.3%
-      chance of returning to asymptomatic---these probabilities have
-      been combined since our model assumes that a backwards transition
-      is not possible.
+      **Note:** The paper reports a 68.2% chance of staying in MCI and a
+      5.3% chance of returning to asymptomatic---these probabilities
+      have been combined to get an annual probability of 73.5% of
+      staying in MCI since our model assumes that a backwards transition
+      is not possible. The conditional probability above is computed as
+      :math:`0.771 = 0.735 / (1 - 0.047)` since the paper reports a 4.7%
+      chance of dying within a year when starting in the MCI state.
   * - :math:`\Delta_\text{AD}`
     - Average duration of AD-dementia
-    - prevalence_c543 / incidence_rate_c543
+    - * prevalence_c543 / incidence_rate_c543 for ages 40+
+      * 0 for ages under 40
     - Follows from the steady-state equation (prevalent cases) = (incident
       cases) x (average duration). Note that the denominator is the **raw
       total-population incidence rate from GBD**, not the
@@ -564,7 +579,8 @@ are located at the following paths on the cluster:
       denominators of prevalence and incidence to cancel out, leaving a ratio
       of counts.
   * - :math:`\Delta_\text{(all AD states)}`
-    - Average duration of all stages of AD combined
+    - Average duration of all stages of AD combined if there is no
+      mortality in the BBBM-AD and MCI-AD stages
     - :math:`\Delta_\text{BBBM} + \Delta_\text{MCI} + \Delta_\text{AD}`
     -
 
@@ -574,8 +590,16 @@ are located at the following paths on the cluster:
   https://github.com/ihmeuw/vivarium_research_alzheimers/blob/4d5dde0b74eb09ea997af7c2de88b81670ba7d61/2025_08_03a_alz_dw_explore.ipynb
 .. _gamma distribution:
   https://en.wikipedia.org/wiki/Gamma_distribution
+.. _Weibull distribution:
+  https://en.wikipedia.org/wiki/Weibull_distribution
 .. _SciPy's gamma distribution class:
   https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html
+.. _SciPy's Weibull distribution class:
+  https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.weibull_min.html
+.. _gamma function:
+  https://en.wikipedia.org/wiki/Gamma_function
+.. _scipy.special.gamma:
+  https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gamma.html
 .. _Potashman et al.:
   https://doi.org/10.1007/s40120-021-00272-1
 
