@@ -622,6 +622,13 @@ model is described in the code below.
     (hosp_any.year_id == 2024) # Use most recent year available
     ].drop(columns=['mean', 'lower', 'upper'])
 
+.. note::
+
+  Before switching to using the HS team data, we used microdata-based
+  estimates of the proportion of in-facility deliveries occurring in
+  CEmONC facilities in Pakistan from BMGF. These estimates are not 
+  alarmingly different from the HS team estimates: 34% from the BMGF
+  data vs. ~27% from the HS team data.
 
 Once BEmONC or CEmONC has been chosen for all in-facility deliveries,
 use this choice in conjunction with the IFD status to **assign one of
