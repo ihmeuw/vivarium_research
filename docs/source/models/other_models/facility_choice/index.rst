@@ -609,8 +609,9 @@ the CEmONC probability (i.e., 1 - P(CEmONC)). The decision of whether a simulant
 who gives birth in-facility delivers in a BEmONC or CEmONC facility should be 
 independent from other choices in the model.
 
-The procedure for retrieving and processing the HS team estimates for our 
-model is described in the code below.
+We have copied the HS team estimates to our J drive as-is.
+Before use in the simulation, we subset to our modeled locations and the latest year (2024)
+and retain only the draw columns.
 
 .. code::
 
