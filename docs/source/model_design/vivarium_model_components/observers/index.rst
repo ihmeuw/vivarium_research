@@ -175,7 +175,7 @@ A good place to start in determining what observations you will need for a given
 
 Once you have this list, remember that simulation observers record event **counts** rather than rates, so decompose all of the rates into the count measures of the numerators and denominators. For instance, in order to obtain the all-cause mortality rate (ACMR) in a simulation, you will need observations of death counts (the ACMR numerator) and person time counts (the ACMR denominator).
 
-There are specific measures that may not obviously lend themselves well to count-type observation. For example, you may wish to observe information related the distribution of a continuous risk exposure included in your simulation. It may be that utilizing the :ref:`interactive context <vivarium_interactive_simulation>` will be a better tool to do this than simulation observers. However, if you do wish to observe the mean value of a continuous risk factor exposure, you can do so using the first moment of that continuous measure as defined below.
+There are specific measures that may not obviously lend themselves well to count-type observation. For example, you may wish to observe information related the distribution of a continuous risk exposure included in your simulation. It may be that utilizing the :ref:`interactive context <vivarium_interactive_simulation>` will be a better tool to do this than simulation observers. However, if you do wish to observe the mean value of a continuous risk factor exposure over time, you can do so using the first moment of that continuous measure with respect to person-time, as defined below.
 
 .. math::
 
