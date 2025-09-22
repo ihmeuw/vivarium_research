@@ -262,7 +262,7 @@ The next step is decomposing these measures into their numerators and denominato
   * - Effect of child wasting on diarrheal diseases incidence rate
     - Incidence rate of diarrheal diseases among a given child wasting exposure category
     - Incidence rate of diarrheal diseases among the child wasting TMREL category
-    - Note that the incidence rate of diarrheal diseases is comprised of incidence diarrheal disease cases (numerator) and person time spent susceptible to diarrheal diseases (denominator)
+    - Note that the incidence rate of diarrheal diseases is comprised of incident diarrheal disease cases (numerator) and person time spent susceptible to diarrheal diseases (denominator)
   * - Mean WHZ
     - First moment of WHZ
     - Overall person time
