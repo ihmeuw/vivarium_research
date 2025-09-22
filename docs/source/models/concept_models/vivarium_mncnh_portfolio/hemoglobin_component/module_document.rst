@@ -227,13 +227,13 @@ This module will:
     - Value to be used for :ref:`hemoglobin risk effects model <2023_hemoglobin_effects>`, used for anemia YLD calculation, V&V (via interactive context)
   * - F. True Hemoglobin at screening
     - `low` / `adequate`
-    - V&V (via observed)
+    - V&V (via observation)
   * - G. Tests hemoglobin exposure
     - `low` / `adequate`
-    - V&V (via observed)
+    - V&V (via observation)
   * - H. Ferritin exposure at screening
     - `low` / `adequate`
-    - V&V (via observed)
+    - V&V (via observation)
 
 2.5: Pseudocode implementation summary
 ---------------------------------------
