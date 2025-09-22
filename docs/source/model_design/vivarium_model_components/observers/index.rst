@@ -23,7 +23,7 @@ Observers are components in Vivarium and several standard observer packages are 
   * - MortalityObserver
     - * Deaths
       * Years of life lost (YLLs)
-    - By default, this counts cause-specific deaths and years of life lost over the full course of the simulation.
+    - By default, this counts cause-specific deaths (of all modeled causes of death as well as "other causes," which is the sum of all unmodeled GBD causes of death) and years of life lost over the full course of the simulation.
   * - DisabilityObserver
     - * Years lived with disability (YLDs)
     - By default, this counts both aggregate and cause-specific years lived with disability over the full course of the simulation.
@@ -40,7 +40,7 @@ Two key features of vivarium simulation observers include:
 - Observers record quantities that aggregate as sums (such as the sum of deaths or the sum of person time), and
 - Observer counts can be stratified by key variables (such as simulant sex or age group)
 
-An example of a standard vivarium observer is a mortality observer that records counts of deaths and years of life lost stratified by simulant sex and age group. Generally, sex and age group are standard stratifications for vivarium observers, but stratifications can easily be added and removed in the model specification file by following the instructions on the :ref:`common model changes page <common_model_changes>`.
+An example of a standard vivarium observer is a mortality observer that records counts of deaths and years of life lost stratified by simulant sex and age group. Generally, sex, age group, and year are standard stratifications for vivarium observers, but stratifications can easily be added and removed in the model specification file by following the instructions on the :ref:`common model changes page <common_model_changes>`.
 
 An example of observer behavior
 ++++++++++++++++++++++++++++++++
@@ -151,7 +151,7 @@ While it is fairly easy for us to track information about deaths among our simul
 
 An observer to track deaths that occurred during the entire simulation (1/1/2025-1/1/2027) would record the total number of deaths that occurred across all timesteps: equal to 4 deaths in this example.
 
-Age and sex are standard stratifications for vivarium observers. However, if we would like to examine observed data specific to any of our additional simulated attributes, we can stratify our them by such factors.
+Age, sex, and year are standard stratifications for vivarium observers. However, if we would like to examine observed data specific to any of our additional simulated attributes, we can stratify our them by such factors.
 
   * For instance, a death observer stratified by sex would return:
 
