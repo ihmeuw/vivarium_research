@@ -305,7 +305,7 @@ Finally, let's create a list of simulation observers and their stratifications f
     - DiseaseObserver
     - * Age group
       * Sex
-      * Transition type (susceptible->infected, infected->susceptible)
+      * Transition type (susceptible → infected, infected → susceptible)
       * Child wasting exposure category
     - Note that the standard DiseaseObserver stratifies results by transition type be default
   * - Diarrheal diseases state person time
