@@ -203,10 +203,6 @@ This module will:
     - Record hemoglobin value at end of pregnancy
     - Record to output D
     - 
-  * - XII
-    - Calculate and record anemia YLDs
-    - Done in the :ref:`anemia YLDs module <2024_vivarium_mncnh_portfolio_anemia_module>`
-    - 
 
 2.4: Module Outputs
 -----------------------
@@ -219,25 +215,67 @@ This module will:
     - Dependencies
   * - A. Maternal supplementation
     - `ifa` / `mms` / `none`
-    - Used for anemia YLD calculation, V&V
+    - Used for anemia YLD calculation, V&V, simulation result 
   * - B. IV iron
     - `True` / `False`
-    - Used for anemia YLD calculation, V&V
+    - Used for anemia YLD calculation, V&V, simulation result 
   * - C. True hemoglobin at the beginning of pregnancy 
     - point value
-    - V&V
+    - Used for anemia YLD calculation, V&V (via interactive context)
   * - D. True hemoglobin at the end of pregnancy
     - point value
-    - Value to be used for :ref:`hemoglobin risk effects model <2023_hemoglobin_effects>`, V&V
+    - Value to be used for :ref:`hemoglobin risk effects model <2023_hemoglobin_effects>`, used for anemia YLD calculation, V&V (via interactive context)
   * - F. True Hemoglobin at screening
-    - point value
-    - V&V
-  * - G. Test hemoglobin at screening
-    - point value
-    - V&V
+    - `low` / `adequate`
+    - V&V (via observed)
+  * - G. Tests hemoglobin exposure
+    - `low` / `adequate`
+    - V&V (via observed)
   * - H. Ferritin exposure at screening
     - `low` / `adequate`
-    - V&V
+    - V&V (via observed)
+
+2.5: Pseudocode implementation summary
+---------------------------------------
+
+The pseudocode below shows possible implementation steps that are compatible with the diagram defined above. 
+
+.. code-block:: 
+
+  # step 1: remove effect of baseline IFA from everyone
+  hgb_start_of_pregnancy = gbd_hgb_exposure – ifa_effect_size * baseline_coverage_ifa
+
+  # step 2: apply first trimester oral iron effect
+  hgb_after_first_trimester_anc = (
+    if (anc_attendance in ['first_trimester_only', 'later_pregnancy_and_first_trimester']) and oral_iron_covered:
+      = hgb_start_of_pregnancy + ifa_effect_size
+    else:
+      = hgb_start_of_pregnancy
+  ) 
+
+  # step 3: assess IV iron coverage based on hgb_after_first_trimester_anc exposure and other attributes
+  received_iv_iron = (anc_attendance in ['later_pregnancy_only', 'first_trimester_and_later_pregnancy']
+                      and hemoglobin_screen_covered 
+                      and test_low_hemoglobin # according to hgb_after_first_trimester_anc exposure
+                      and low_ferritin_exposure 
+                      and iv_iron_covered
+  )
+
+  # step 4: apply later pregnancy ANC oral iron effects effects
+  hgb_at_after_later_pregnancy = (
+    if (anc_attendance == 'later_pregnancy_only') and (oral_iron_covered==True) and (received_iv_iron==False):
+      = hgb_after_first_trimester_anc + ifa_effect_size
+    else:
+      = hgb_after_first_trimester_anc 
+  )
+
+  # step 5: apply IV iron effect size
+  hgb_at_birth = (
+    if received_iv_iron:
+      = hgb_at_after_later_pregnancy + iv_iron_effect_size
+    else:
+      = hgb_at_after_later_pregnancy
+  )
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
