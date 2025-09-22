@@ -106,6 +106,8 @@ from age ~30 to 125 years (or death), capturing progression through
 preclinical AD, mild cognitive impairment (MCI) due to AD, and three
 stages of dementia due to Alzheimer's disease.
 
+.. _alz_scenarios:
+
 2.1 Scenarios
 -------------
 
@@ -229,13 +231,15 @@ The basic plan for the design of the simulation is as follows:
     - Males & Females
     -
   * - Age start (Initialization)
-    - Age at which preclinical AD starts (~30 years or later)
+    - Age at which preclinical AD starts (currently set to 25 years to
+      accommodate the youngest preclinical AD incident cases)
     - Age start is simulant-dependent
   * - Age end (Initialization)
     - 125 years
     - End of oldest age group
   * - Age start (Observation)
-    - Age at which preclinical AD starts (~30 years or later)
+    - Age at which preclinical AD starts (currently set to 25 years to
+      accommodate the youngest preclinical AD incident cases)
     - All simulants are observed since all have AD or its precursors
   * - Age end (Observation)
     - 125 years or death
@@ -309,6 +313,9 @@ scenario, and input draw.
     -
   * - Person-time in each Alzheimer's cause state
     -
+    -
+  * - Test counts (CSF, PET, BBBM)
+    - By diagnosis provided (for BBBM tests)
     -
 
 5.0 Model Runs and Verification & Validation
@@ -387,6 +394,18 @@ scenario, and input draw.
     - Use draws from forecasted population structure data rather than mean value
     - Baseline
     - * Locations: USA, China
+    - Default
+    - Default
+  * - 4.0
+    - Include BBBM-AD and MCI-AD states
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
+  * - 4.1
+    - Updated artifacts to reflect updated MCI duration
+    - Baseline
+    - * Locations: All (Sweden, US, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
     - Default
     - Default
 
@@ -547,6 +566,15 @@ scenario, and input draw.
     - Same as 3.0 (notebook copied)
     - * Results are consistent with 3.0 results
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2025_09_05a_model3.1_vv.ipynb
+  * - 4.0
+    - All checks from 3.0, but instead of verifying all-cause mortality rate, use other-cause mortality rate, which is easier to compute; also confirm that there are person-years of BBBM-AD and MCI-AD for all age groups and years.
+    - * AD-dementia Incidence counts in simulation exceed artifact values for younger ages
+      * Zero incidence and prevalence of AD-dementia at oldest ages (due to bug with negative transition rates)
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/8f7f48009ee36b65763d8103cc4c4182b52908f1/verification_and_validation/2025_09_05a_model4.0_vv.ipynb
+  * - 4.1
+    - Same as 4.0, but also look at durations of BBBM-AD, MCI-AD to make sure they match expectation.  Anticipate there to be more similarity between AD-dementia incidence counts in simulation and GBD/FHS.
+    - 
+    - 
   
 
 .. list-table:: Outstanding model verification and validation issues
@@ -564,3 +592,8 @@ scenario, and input draw.
     - Thought to be due to GBD mismatch in mortality and incidence
     - Review again when we split AD and OD 
     - Model 6
+  * - AD-dementia incidence counts too far from target
+    - Currently too high in younger ages, and zero in older ages, likely due to inconsistent MCI-AD duration and negative transition rates from MCI-AD to AD-dementia in oldest ages
+    - Update durations and rates in Model 4.1 and 4.2
+    - Immediately
+
