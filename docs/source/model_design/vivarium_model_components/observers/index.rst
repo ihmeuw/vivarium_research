@@ -381,6 +381,6 @@ Documentation of simulation observers will occur in the concept model document f
 
 - Then for each model run request included in the :ref:`model run request table of the concept model template <{YOUR_MODEL_SHORT_NAME}3.0>`, you can note:
 
-  - Any which observers need to be added or removed for a specific model run (for example: for model 1.0, "Add the death observer, to be included for all future model runs") in the "Observer modifications" column, and 
+  - Any observers which need to be added or removed for a specific model run (for example: for model 1.0, "Add the death observer, to be included for all future model runs") in the "Observer modifications" column, and 
   - Any changes to observer stratifications for a specific model run (for example: for model 5.0, "Add intervention coverage stratification to the death observer for V&V") in the "Stratification modifications" column
 
