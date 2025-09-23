@@ -877,7 +877,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Corticosteroid coverage
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
       * Preterm status (dichotomous at 37 weeks)
-    - Included, except for corticosteroid coverage which has yet to be added
+    -
   * - 3. Neonatal deaths (cause-specific)
     - * Child sex
       * Child age group
@@ -888,7 +888,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Corticosteroid coverage
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
       * Preterm status (dichotomous at 37 weeks)
-    - Included, except for corticosteroid coverage which has yet to be added
+    -
   * - 4. Antibiotics eligible birth counts
     - * Delivery facility type
     - Included. Confirm this represents "eligible birth counts"?
@@ -921,6 +921,68 @@ Default stratifications to all observers should include scenario and input draw.
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
       * ACS coverage
     - 
+  * - 8. Neonatal all-cause mortality risk
+    - * Child sex
+      * Child age group
+      * Delivery facility type
+      * CPAP availability
+      * Antibiotics availability
+      * Probiotics availability
+      * Corticosteroid coverage
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+      * Preterm status (dichotomous at 37 weeks)
+    - Observe the following statistics about the :math:`\text{ACMRisk}_i` value described on the :ref:`neonatal mortality page <2021_cause_neonatal_disorders_mncnh>`,
+      which is implemented as the :code:`death_in_age_group_probability` pipeline in the simulation
+      (`see code <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/b9f8d0d8a4b5562178fd84d364952d48524b744a/src/vivarium_gates_mncnh/constants/data_values.py#L259>`__):
+
+      * The number of values (equal to the number of living simulants)
+      * The sum of the values
+      * The sum of the squares of the values
+
+      All of these quantities can aggregate across seeds in the normal way (summation).
+  * - 9. Neonatal cause-specific mortality risks (per cause)
+    - * Child sex
+      * Child age group
+      * Delivery facility type
+      * CPAP availability
+      * Antibiotics availability
+      * Probiotics availability
+      * Corticosteroid coverage
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+      * Preterm status (dichotomous at 37 weeks)
+    - Observe the following statistics about the :math:`\text{CSMRisk}^k_i` value described on the :ref:`neonatal mortality page <2021_cause_neonatal_disorders_mncnh>`,
+      which is implemented as the :code:`csmr` pipeline on each cause in the simulation --
+      not to be confused with the :code:`cause_specific_mortality_risk` pipeline which does not include intervention effects
+      (`see code <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/b9f8d0d8a4b5562178fd84d364952d48524b744a/src/vivarium_gates_mncnh/constants/data_values.py#L263>`__):
+
+      * The number of values (equal to the number of living simulants)
+      * The sum of the values
+      * The sum of the squares of the values
+
+      All of these quantities can aggregate across seeds in the normal way (summation).
+  * - 10. Impossible neonatal CSMRisk
+    - * Child sex
+      * Child age group
+      * Delivery facility type
+      * CPAP availability
+      * Antibiotics availability
+      * Probiotics availability
+      * Corticosteroid coverage
+      * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
+      * Preterm status (dichotomous at 37 weeks)
+    - For each living simulant, take the modeled-cause CSMRisks (same pipelines as used in the previous observer),
+      divide them each by the ACMRisk (same pipeline as observer #8), sum them and then subtract 1.
+      If negative, clip this value to zero.
+      This emulates the factor by which `the modeled-cause CSMRisk exceeds ACMRisk, requiring a hack to prevent other-causes CSMRisk from being negative <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/b9f8d0d8a4b5562178fd84d364952d48524b744a/src/vivarium_gates_mncnh/components/mortality.py#L325-L345>`__.
+
+      Then observe:
+
+      * The number of values (equal to the number of living simulants)
+      * The number of nonzero values
+      * The sum of the values
+      * The sum of the squares of the values
+
+      All of these quantities can aggregate across seeds in the normal way (summation).
 
 .. todo::
 
@@ -959,8 +1021,8 @@ Default stratifications to all observers should include scenario and input draw.
     - 10
     - See next row for which specific draws to be used. Based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_: production run number divided in half for default V&V runs
   * - Draw numbers
-    - 115, 60, 368, 197, 79, 244, 272, 167, 146, 71, 278, 406, 94, 420, 109, 26, 35, 114, 428, 170
-    - The :ref:`hemoglobin exposure <2023_hemoglobin_exposure>` model only has 100 draws. The standard number of draws for other models in this simulation is 500. To resolve this discrepancy, we have repeated the hemoglobin exposure draws five times so that draw 1, 101, 201, 301, and 401 all have the same value, etc. To ensure that we do not sample multiple draws that have the same values for hemoglobin exposure, we will pre-specify which draws to select according to the numbers listed here. This list of numbers was generated by sampling a random number between 0 and 499 and resampling when a number was generated that had the same remainder after dividing by 100 as a number that was already in the list. 20 draws have been listed although the default number of draws for V&V model runs is 10 - the first 10 numbers in this list should be used for V&V runs. Note that draws were not pre-specified according to this list prior to model version 11.0.
+    - 115, 60, 368, 197, 79, 244, 272, 167, 146, 71, 278, 406, 94, 420, 109, 26, 35, 114, 428, 218
+    - While the standard number of draws for most of our model input parameters from GBD for this model is 500, there are a few instances where our input data have different numbers of draws available. Those instances are summarized in the table following this one. To account for the varying number of draws available for our input data, we will pre-specify which draws to select according to the numbers listed here. This list of numbers was generated by sampling a random number between 0 and 499 and resampling when a number was generated that had the same remainder after dividing by 100 or 250 as a number that was already in the list. This strategy ensures that we do not run multiple draws that have identical data for any parameter in our model. 20 draws have been listed although the default number of draws for V&V model runs is 10 - the first 10 numbers in this list should be used for V&V runs. Note that draws were not pre-specified according to this list prior to model version 11.0 and the final number in the list (218) was updated from (170) in September of 2025 to account for new input data with 250 draws.
   * - Population size per draw
     - 100,000
     - Based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_: production run number divided in half for default V&V runs
@@ -979,6 +1041,27 @@ Default stratifications to all observers should include scenario and input draw.
   * - Age end (observation)
     - N/A; All pregnant simulants observed through conclusion of relevant modeled outcomes. All neonatal simulants observed until 28 days (end of late neonatal age group)
     - Pregnant/birthing simulants do not age in this simulation
+
+
+.. list-table:: Summary of draw metadata by input parameter
+  :header-rows: 1
+
+  * - Parameter
+    - Number of draws
+    - Strategy
+    - Note/reference
+  * - GBD 2021 standard
+    - 500
+    - Use as-is
+    - `See HUB reference here <https://hub.ihme.washington.edu/spaces/GBD2020/pages/74520808/GBD+2021+Home>`_
+  * - :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>` (using GBD 2023 data)
+    - 100
+    - Copy 5 times so that draw 1, 101, 201, 301, and 401 all have the same value, etc.
+    - 
+  * - :ref:`Hemoglobin risk effects <2023_hemoglobin_effects>`, including those on stillbirth, gestational age, and birthweight that are modeled through the :ref:`IV iron intervention model <intervention_iv_iron_antenatal_mncnh>`
+    - 250
+    - Copy twice so that draw 1 and 251 have the same value, etc.
+    - Note that we have ordered the draws for hemoglobin RRs on gestational age, birth weight, and neonatal sepsis in the same order as we are modeling mediation by gestational age and birthweight in the effect of hemoglobin on neonatal sepsis and therefore expect that these draws will be correlated.
 
 .. note::
 
@@ -1469,6 +1552,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 16.6
+    - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
+    - Baseline
+    - ``model16.6``
+    - For this run only, 10,000,000 population size per draw
+    - Default
+    - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
   * - 17.0
     - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
     - Baseline and MMS scale-up scenarios 
@@ -1491,7 +1581,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
     - Default
   * - 20.0*
-    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data on effect have yet to be calculated as of 8/22/25)
+    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data on effect have yet to be calculated as of 8/22/25). Also, update `list of draws used in simulation in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1795>`__
     - Baseline and IV iron scale-up scenarios
     - ``model20.0``
     - Default
@@ -2047,9 +2137,16 @@ Default stratifications to all observers should include scenario and input draw.
       * `Model 16.3 ACS intervention V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/126>`_
   * - 16.4
     - Same as 16.3
-    - * Bug that caused zero observed deaths among the ACS eligible and covered population has been resolved. Neonatal mortality is looking improved and is ready for additional review
+    - * Bug that caused zero observed deaths among the ACS eligible and covered population has been resolved. Neonatal mortality is looking improved
       * Effect of CPAP and ACS believed to be functioning as expected. We will do a final confirmation once preterm stratification is added to the births observer, but based on the interactive sim there is no reason to believe there is a bug
+      * ENN preterm birth with RDS CSMRisk overestimated by approximately 1.5% (only checked one draw in Ethiopia) due to LBWSG
+        correlation with CPAP and ACS induced by facility choice model (was calibrated in 13.3)
+      * LNN ACMRisk underestimated by approximately 0.75% (only checked one draw in Ethiopia) due to the previous bullet causing
+        differential mortality miscalibration by LBWSG, with corresponding impacts on each CSMRisk, including preterm birth
+        with RDS which was already underestimated by approximately 2% due to the lack of age-specific delivery facility exposure in
+        PAF calculation
     - * `Notebooks for model 16.4 ACS V&V available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/127>`
+      * `Model 16.4 interactive sim neonatal mortality checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/2a39aa123008fb48bb69c0f0d84bb729ccd2a030/verification_and_validation/model_16.4_interactive_simulation_neonatal_mortality.ipynb>`__
   * - 17.0
     - * Confirm scenario-specific coverage (verification with sim outputs)
       * Confirm only simulants who attend ANC receive IFA/MMS (verification with sim outputs)
@@ -2096,6 +2193,7 @@ Default stratifications to all observers should include scenario and input draw.
         * Birth outcome rates
 
       * Confirm expected effects of IV iron on birth weight, gestational age, and birth outcome rates using the interactive simulation
+      * Confirm list of draws has been updated (will need to look in sim repo rather than results as we don't routinely run all 20 draws)
     - 
     - 
   * - 21.0
@@ -2127,25 +2225,31 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Potentially increased overestimation of all-cause neonatal mortality relative to model 13.3
-    - Unknown - possibly related to changes in LBWSG exposure distribution
-    - Zeb to re-run interactive sim neonatal mortality V&V on model 16+
-    - TBD - not blocking for 16.1 
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
     - Update to custom-calculated PAF and reassess
     - TBD
   * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
     - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
-    - Zeb to debug further in interactive sim and possibly request an observer for negative other causes mortality
-    - TBD
+    - Zeb to request an observer for negative other causes mortality
+    - Model 16.6
   * - Scenario with increased ultrasound coverage leads to (very slightly) lower IFD
     - Does not appear to be an implementation bug (all facility choice model V&V criteria are met), but is not the expected result
     - Ali to investigate the rates of false positive and false negatives by scenario to determine if ultrasound improvements is reducing false positives among term babies more than it is reducing false negatives among preterm babies, which could explain this result
     - Tabled for now. `See ticket here <https://jira.ihme.washington.edu/browse/SSCI-2409>`_
   * - Late neonatal mortality due to preterm birth with RDS slightly (~2%) underestimated
-    - The PAF of CPAP on preterm birth with RDS CSMRisk is calculated with delivery facility proportions at birth, not at 7 days
+    - The PAF of ACS and CPAP on preterm birth with RDS CSMRisk is calculated with delivery facility proportions at birth, not at 7 days
     - Accept this limitation, until/unless there are other reasons to revamp PAF calculation, since this would require many components not currently present in PAF sim
+    - N/A
+  * - Early neonatal mortality due to preterm birth with RDS slightly (~1.5%) overestimated and
+      late neonatal mortality slightly (~0.75%) underestimated across all causes
+    - The PAF of ACS and CPAP on preterm birth with RDS CSMRisk is calculated without accounting for
+      correlation between LBWSG and CPAP/ACS, which is induced by the facility choice model.
+      The miscalibration in ENN causes miscalibration of LBWSG exposure for LNN.
+    - Accept these limitations, until/unless there are other reasons to revamp PAF calculation,
+      since this would require many components not currently present in PAF sim.
+      Note that the LNN limitation stacks with the previous limitation for preterm birth with RDS to result in
+      a nearly 3% underestimate in that LNN CSMRisk.
     - N/A
   * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
     - 
