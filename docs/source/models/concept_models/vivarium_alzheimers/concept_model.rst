@@ -106,6 +106,8 @@ from age ~30 to 125 years (or death), capturing progression through
 preclinical AD, mild cognitive impairment (MCI) due to AD, and three
 stages of dementia due to Alzheimer's disease.
 
+.. _alz_scenarios:
+
 2.1 Scenarios
 -------------
 
@@ -311,6 +313,9 @@ scenario, and input draw.
     -
   * - Person-time in each Alzheimer's cause state
     -
+    -
+  * - Test counts (CSF, PET, BBBM)
+    - By diagnosis provided (for BBBM tests)
     -
 
 5.0 Model Runs and Verification & Validation
