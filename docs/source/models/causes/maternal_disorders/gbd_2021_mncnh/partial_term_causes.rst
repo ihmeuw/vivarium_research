@@ -71,7 +71,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-The goal of the residual maternal disorders model is to capture YLLs and YLDs due to
+The goal of the partial term pregnancy maternal disorders model is to capture YLLs and YLDs due to
 maternal disorders subcauses that are specific to pregnancies that end in outcomes
 other than a live or still birth, including YLDs and YLLs due to ectopic pregnancy
 as well as abortion/miscarriage maternal disorders subcauses.
@@ -93,6 +93,14 @@ Assumptions and Limitations
 
 Cause Model Diagram
 +++++++++++++++++++
+
+.. note::
+
+  The cause model diagram shown below and used in this modeling strategy has been designed to have a consistent structure with the existing implementation of the `MaternalDisorder component <http://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/components/maternal_disorders.py>`_ used in the MNCNH simulation that has been used to model other maternal disorders subcauses such as :ref:`maternal sepsis <2021_cause_maternal_sepsis_mncnh>`. 
+
+  Notably, as the incidence risk (ir) used for the partial term pregnancy maternal disorders cause model is set to a value of 1, there are no simulants who will travel through the "1 - ir" arrow between the "Partial term pregnancy, post antenatal models" and the "parent did not die of partial term pregnancy maternal disorders" states. While it may be confusing to include an arrow in this diagram that will not apply to any simulants in our model, we include it for consistency with other cause models that utilize the `MaternalDisorder component <http://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/components/maternal_disorders.py>`_. Additionally, if we ever decide that we would like to model the subcauses of this cause model separately, we could more easily update this cause model to handle ir values that do not equal 1.
+
+  For a conceptual respresentation of a similar cause modeling strategy that does not include the "1 - ir" arrow, see the :ref:`residual maternal disorders cause model document <2021_cause_residual_maternal_disorders_mncnh>`.
 
 .. graphviz::
 
