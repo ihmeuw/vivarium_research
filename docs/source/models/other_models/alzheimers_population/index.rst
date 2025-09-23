@@ -414,28 +414,32 @@ For example, if :math:`\Delta = 7` years and :math:`w=5` years , then
 .. todo::
 
   In model 4.2 we updated the disease state durations so that
-  :math:`\Delta` is now about 10.2 instead of 7, so it would be good to
-  update these example numbers using the new value. In a future model
-  version, we may further update these durations to take mortality into
-  account, making them age-dependent. This might require additional
-  changes to how we describe things here.
+  :math:`\Delta` is now about 10.2 years instead of 7 years, so it would
+  be good to update these example numbers using the new value. In a
+  future model version, we may further update these durations to take
+  mortality into account, making them age-dependent. This might require
+  additional changes to how we describe things here.
 
 Under our simplifying assumption, everyone who enters the count
 :math:`B_{g,t}^\text{AD}` at time :math:`t` will transition to
-AD-dementia at time :math:`t + \Delta`. Working backwards from our
-calculation of :math:`\dot A_g(t)` above, and assuming that ages are
-uniformly distributed within the group :math:`g`, the rate at which the
-count :math:`B_{g,t}^\text{AD}` is increasing should be
+AD-dementia at time :math:`t + \Delta`. Assuming that ages are uniformly
+distributed within the group :math:`g`, and working backwards from our
+calculation of :math:`\dot A_g(t)` above, the rate at which the count
+:math:`B_{g,t}^\text{AD}` is increasing should be
 
 .. math::
 
+  \begin{align*}
   \dot B_{g,t}^\text{AD}
-  = \left(1 - \frac{r}{w}\right)
+  &= \left(1 - \frac{r}{w}\right) \dot A_{g + nw}(t+\Delta)
+    + \left(\frac{r}{w}\right) \dot A_{g + (n+1)w}(t+\Delta) \\
+  &= \left(1 - \frac{r}{w}\right)
     \left(i_{g + nw,\, t+\Delta}^\text{AD}\right)
      \left(Y^\text{real}_{g + nw,\, t+\Delta}\right)
   + \left(\frac{r}{w}\right)
     \left(i_{g + (n+1)w,\, t+\Delta}^\text{AD}\right)
       \left( Y^\text{real}_{g + (n+1)w,\, t+\Delta} \right).
+  \end{align*}
 
 For example, if we write :math:`g = (F,\,70)` for females aged 70--74,
 :math:`g + 5 = (F,\,75)` for females aged 75--79, etc., the rate of
