@@ -422,6 +422,11 @@ are located at the following paths on the cluster:
       area under the population curve). See `Abie's population and mortality
       forecasts notebook`_ for a demonstration of how to load and transform the
       ``.nc`` file.
+  * - proportion_AD
+    - The proportion of the dementia envelope that is Alzheimer's
+      disease dementia
+    - :file:`squeezed_proportions_to_sim_sci.csv`
+    -
   * - deaths_c543
     - Deaths from Alzheimer's disease and other dementias
     - codcorrect
@@ -429,22 +434,35 @@ are located at the following paths on the cluster:
   * - prevalence_c543
     - Prevalence of Alzheimer's disease and other dementias
     - como
+    - Used only for calculation of emr_c543 by Vivarium Inputs
+  * - prevalence_m24351
+    - Prevalence of dementia envelope
+    - epi
+    -
+  * - prevalence_AD
+    - Prevalence of AD dementia in total population
+    - prevalence_m24351 :math:`\times` proportion_AD
     -
   * - :math:`p_\textsf{X}`
     - Prevalence of cause state X in total population
     - defined in :ref:`Attention box above
       <alzheimers_cause_state_data_including_susceptible_note>`
-    -
+    - Note that :math:`p_\text{AD} =` prevalence_AD by definition, and
+      :math:`p_\text{BBBM}` and :math:`p_\text{MCI}` are derived from
+      this
   * - :math:`p_\text{(all AD states)}`
     - Prevalence of all stages of AD combined
     - :math:`p_\text{BBBM} + p_\text{MCI} + p_\text{AD}`
     -
-  * - incidence_rate_c543
-    - GBD's "total population incidence rate" for Alzheimer's disease
-      and other dementias
-    - como
-    - Raw GBD value, different from "susceptible incidence rate"
-      automatically calculated by Vivarium Inputs
+  * - incidence_m24351
+    - GBD's "total population incidence rate" for dementia envelope
+    - epi
+    - Raw value from get_draws, different from "susceptible incidence
+      rate" automatically calculated by Vivarium Inputs
+  * - incidence_AD
+    - Total-population incidence rate of AD dementia
+    - incidence_m24351 :math:`\times` proportion_AD
+    -
   * - acmr
     - All-cause mortality rate
     - loaded from :file:`_all.nc` file provided by FHS Team
@@ -589,7 +607,7 @@ are located at the following paths on the cluster:
       chance of dying within a year when starting in the MCI state.
   * - :math:`\Delta_\text{AD}`
     - Average duration of AD-dementia
-    - * prevalence_c543 / incidence_rate_c543 for ages 40+
+    - * prevalence_AD / incidence_AD for ages 40+
       * 0 for ages under 40
     - Follows from the steady-state equation (prevalent cases) = (incident
       cases) x (average duration). Note that the denominator is the **raw
