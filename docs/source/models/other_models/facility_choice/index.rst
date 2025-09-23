@@ -617,11 +617,24 @@ and retain only the draw columns.
 
   import pandas as pd
   hosp_any = pd.read_csv('/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/hosp_any_st-gpr_results_weighted_aggregates_2025-06-06.csv')
-  location_ids = [165,179,214]
+  location_ids = [165,179,214] # Pakistan, Ethiopia, Nigeria (modeled locations in the MNCNH portfolio simulation)
+    # improvement: include some function to get location IDs for the locations used in the simulation
+    # location_ids = get_location_ids(metadata.LOCATIONS) 
+
   hosp_ifd_proportion = hosp_any.loc[
     (hosp_any.location_id.isin(location_ids)) &
     (hosp_any.year_id == 2024) # Use most recent year available
     ].drop(columns=['mean', 'lower', 'upper'])
+
+This data is specific to a given location ID and has 100 draws. To
+add the required 500 draws to the artifact for the MNCNH simulation, 
+duplicate the data five times such that draw 0 has the same value as 
+draw 100, 200, 300, 400, etc.
+
+Once BEmONC or CEmONC has been chosen for all in-facility deliveries,
+use this choice in conjunction with the IFD status to **assign one of
+the three values "home", "BEmONC", or "CEmONC" as the final birth
+facility (F) of each simulant.**
 
 .. note::
 
@@ -630,11 +643,6 @@ and retain only the draw columns.
   CEmONC facilities in Pakistan from BMGF. These estimates are not 
   alarmingly different from the HS team estimates: 34% from the BMGF
   data vs. ~27% from the HS team data.
-
-Once BEmONC or CEmONC has been chosen for all in-facility deliveries,
-use this choice in conjunction with the IFD status to **assign one of
-the three values "home", "BEmONC", or "CEmONC" as the final birth
-facility (F) of each simulant.**
 
 .. note::
 
