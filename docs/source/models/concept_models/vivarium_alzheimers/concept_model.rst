@@ -106,6 +106,8 @@ from age ~30 to 125 years (or death), capturing progression through
 preclinical AD, mild cognitive impairment (MCI) due to AD, and three
 stages of dementia due to Alzheimer's disease.
 
+.. _alz_scenarios:
+
 2.1 Scenarios
 -------------
 
@@ -312,6 +314,9 @@ scenario, and input draw.
   * - Person-time in each Alzheimer's cause state
     -
     -
+  * - Test counts (CSF, PET, BBBM)
+    - By diagnosis provided (for BBBM tests)
+    -
 
 5.0 Model Runs and Verification & Validation
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -389,6 +394,52 @@ scenario, and input draw.
     - Use draws from forecasted population structure data rather than mean value
     - Baseline
     - * Locations: USA, China
+    - Default
+    - Default
+  * - 4.0
+    - Include BBBM-AD and MCI-AD states
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
+  * - 4.1
+    - `Update MCI duration and MCI → AD transition rate to avoid
+      negatives in older age groups
+      <https://github.com/ihmeuw/vivarium_research/pull/1778>`_
+    - Baseline
+    - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
+    - Default
+    - Default
+  * - 4.2
+    - `Switch BBBM → MCI hazard to Weibull distribution
+      <https://github.com/ihmeuw/vivarium_research/pull/1785>`_
+    - Baseline
+    - * Locations: USA
+    - Default
+    - Default
+  * - 4.3
+    - `Set population and AD-dementia incidence rates to zero on
+      nonexistent older age groups instead of forward filling
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/37>`_
+    - Baseline
+    - * Locations: USA
+    - Default
+    - Default
+  * - 4.4
+    - `Use total-population incidence rate of AD-dementia in calculation
+      of BBBM-AD incidence
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/38>`_  (we
+      had been incorrectly using susceptible-population incidence)
+    - Baseline
+    - * Locations: USA
+    - Default
+    - Default
+  * - 4.5
+    - `Don't double round age when finding age group at midpoint of
+      interval
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/39/files>`_
+    - Baseline
+    - * Locations: USA
     - Default
     - Default
 
@@ -549,7 +600,37 @@ scenario, and input draw.
     - Same as 3.0 (notebook copied)
     - * Results are consistent with 3.0 results
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2025_09_05a_model3.1_vv.ipynb
-  
+  * - 4.0
+    - All checks from 3.0, but instead of verifying all-cause mortality rate, use other-cause mortality rate, which is easier to compute; also confirm that there are person-years of BBBM-AD and MCI-AD for all age groups and years.
+    - * AD-dementia Incidence counts in simulation exceed artifact values for younger ages
+      * Zero incidence and prevalence of AD-dementia at oldest ages (due to bug with negative transition rates)
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/8f7f48009ee36b65763d8103cc4c4182b52908f1/verification_and_validation/2025_09_05a_model4.0_vv.ipynb
+  * - 4.1
+    - Same as 4.0, but also look at durations of BBBM-AD, MCI-AD to make sure they match expectation.  Anticipate there to be more similarity between AD-dementia incidence counts in simulation and GBD/FHS.
+    - * AD-dementia incidence counts still too high in younger ages
+      * AD-dementia incidence counts now extremely high in older ages,
+        likely due to forward filling BBBM incidence data for
+        nonexistent age groups above 95--100
+      * Plot of BBBM → MCI transition rate looks very weird
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_13a_model4.1_vv.ipynb
+  * - 4.2
+    - Same as 4.1
+    - * Not much positive change to the AD-dementia incidence (still off
+        in young ages, and now further off in old ages)
+      * Plot of BBBM → MCI transition rate is somewhat improved
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_15a_model4.2_vv.ipynb
+  * - 4.3
+    - Same as 4.2
+    - Big improvement in AD-dementia incidence for older ages, still off for younger ages
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_18b_model4.3_vv.ipynb
+  * - 4.4
+    - Same as 4.3
+    - Some improvement in AD-dementia incidence for younger ages; we think that the duration we have used is off by a little since we did not include mortality in our duration estimate
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_18c_model4.4_vv.ipynb
+  * - 4.5
+    - Same as 4.4
+    - AD-dementia incidence looks identical to 4.4, so the double rounding was perhaps not a problem after all
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/9fef98e6cc61f4eb6dec96c2cd477e64cc084d3f/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -561,8 +642,26 @@ scenario, and input draw.
   * - YLDs rates do not match in model 1
     - Thought to be due to incorrect disability weight aggregation
     - Will be updated when we add severity levels, recheck then
-    - Model 5
+    - Model 9
   * - Total simulation population increasing in model 3
     - Thought to be due to GBD mismatch in mortality and incidence
-    - Review again when we split AD and OD 
-    - Model 6
+    - Review again after we reduce to AD only, and when we add in mixed
+      dementias
+    - Models 5 and 8
+  * - AD-dementia incidence counts are still a bit off in model 4
+    - * AD-incidence by age appears shifted to the left by about 2.5
+        years, making it too high in younger ages and too low in older
+        ages. We think this is due to our average durations being too
+        long because they don't account for mortality.
+      * Also, AD incidence counts in 2025 are too high, likely because
+        of our initialization strategy for the durations in BBBM-AD at
+        time 0.
+    - * Update durations of BBBM-AD and MCI-AD to account for mortality
+        during those stages
+      * Try using an exponential distribution instead of a uniform
+        distribution when initializing durations
+
+      Jira ticket: `SSCI-2411
+      <https://jira.ihme.washington.edu/browse/SSCI-2411>`_
+    - After model 8 or model 9
+
