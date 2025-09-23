@@ -63,6 +63,10 @@ Disease Overview
 GBD 2021 Modeling Strategy
 ++++++++++++++++++++++++++
 
+The IHME dementia modelers first use DisMod to estimate a "dementia
+envelope" to get the prevalence and incidence of all types of
+dementia.
+
 Restrictions
 ------------
 
@@ -119,6 +123,22 @@ Alzheimer's simulation <2025_concept_model_vivarium_alzheimers>`, we
 will add two pre-dementia states to the Alzheimer's disease model. The
 model still functions similar to an SI model, but now there are multiple
 with-condition states, with unidirectional progression between them.
+
+Since this cause model only includes Alzheimer's disease and its
+precursors, not other types of dementia, we do not want to directly use
+the prevalence and incidence data from
+
+Since the most relevant GBD cause for this model is "Alzheimer's disease
+and other dementias" (cause ID 543), we need a way to separate out
+Alzheimer's disease from other dementias in the data. The dementia team
+has made estimates (unpublished as of September 2025) of the proportion
+of total dementia
+
+The recommendation
+from IHME's dementia team was to not use the published GBD data
+directly, but to start with the "dementia envelope" data from
+DisMod, and multiply by the.
+
 
 Conceptually, this cause model only includes Alzheimer's disease and its
 precursors, not other types of dementia. However, for now we are still
