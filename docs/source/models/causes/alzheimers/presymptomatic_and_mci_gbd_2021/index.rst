@@ -413,28 +413,16 @@ are located at the following paths on the cluster:
     - Definition
     - Source or value
     - Notes
-  * - population
-    - Average population during specified year
-    - loaded from :file:`population_agg.nc` file provided by FHS Team
-    - Numerically equal to person-years. Often interpreted as population at
-      year's midpoint (which is approximately equal to person-years if we think
-      the midpoint rule with a single rectangle gives a good estimate of the
-      area under the population curve). See `Abie's population and mortality
-      forecasts notebook`_ for a demonstration of how to load and transform the
-      ``.nc`` file.
   * - proportion_AD
     - The proportion of the dementia envelope that is Alzheimer's
       disease dementia
     - :file:`squeezed_proportions_to_sim_sci.csv`
-    -
-  * - deaths_c543
-    - Deaths from Alzheimer's disease and other dementias
-    - codcorrect
-    -
-  * - prevalence_c543
-    - Prevalence of Alzheimer's disease and other dementias
-    - como
-    - Used only for calculation of emr_c543 by Vivarium Inputs
+    - Point estimate stratified by age group and sex for ages 40+.
+      Filter to type_label == "Alzheimer's disease".
+
+      **Note:** These estimates were provided by the dementia modelers
+      and are not yet published, so they should not be stored directly
+      in the Artifact or any other public location.
   * - prevalence_m24351
     - Prevalence of dementia envelope
     - epi
@@ -447,7 +435,7 @@ are located at the following paths on the cluster:
     - Prevalence of cause state X in total population
     - defined in :ref:`Attention box above
       <alzheimers_cause_state_data_including_susceptible_note>`
-    - Note that :math:`p_\text{AD} =` prevalence_AD by definition, and
+    - By definition, :math:`p_\text{AD} =` prevalence_AD, and
       :math:`p_\text{BBBM}` and :math:`p_\text{MCI}` are derived from
       this
   * - :math:`p_\text{(all AD states)}`
@@ -466,17 +454,42 @@ are located at the following paths on the cluster:
   * - acmr
     - All-cause mortality rate
     - loaded from :file:`_all.nc` file provided by FHS Team
-    - See `Abie's population and mortality forecasts notebook`_ for a
-      demonstration of how to load and transform the ``.nc`` file
+    - Draw-level, age-specific forecasts. See `Abie's population and
+      mortality forecasts notebook`_ for a demonstration of how to load
+      and transform the ``.nc`` file
+  * - population_forecast
+    - Forecasted average population during specified year
+    - loaded from :file:`population_agg.nc` file provided by FHS Team
+    - Draw-level, age-specific forecasts. Numerically equal to
+      person-years. Used to calculate BBBM-AD incidence counts in AD
+      population model. See `Abie's population and mortality forecasts
+      notebook`_ for a demonstration of how to load and transform the
+      ``.nc`` file.
+  * - :math:`\text{population}_{2021}`
+    - Average population during the year 2021
+    - get_population
+    - Point estimate. Used only for the calculation of csmr_c543 by
+      Vivarium Inputs
+  * - :math:`\text{deaths_c543}_{2021}`
+    - Deaths from Alzheimer's disease and other dementias in 2021
+    - codcorrect
+    - Used only for the calculation of csmr_c543 by Vivarium Inputs
   * - csmr_c543
     - Cause-specific mortality rate for Alzheimer's disease and other
       dementias
-    - :math:`\frac{\text{deaths_c543}}{(\text{population}) \cdot (\text{1 year})}`
-    - Calculated automatically by Vivarium Inputs
+    - :math:`\frac{\text{deaths_c543}_{2021}}{(\text{population}_{2021})
+      \cdot (\text{1 year})}`
+    - Calculated automatically by Vivarium Inputs. Assumed to remain
+      constant over time in each demographic group.
+  * - :math:`\text{prevalence_c543}_{2021}`
+    - Prevalence of Alzheimer's disease and other dementias in 2021
+    - como
+    - Used only for calculation of emr_c543 by Vivarium Inputs
   * - emr_c543
     - Excess mortality rate for Alzheimer's disease and other dementias
-    - :math:`\frac{\text{csmr_c543}}{\text{prevalence_c543}}`
-    - Calculated automatically by Vivarium Inputs
+    - :math:`\frac{\text{csmr_c543}}{\text{prevalence_c543}_{2021}}`
+    - Calculated automatically by Vivarium Inputs. Assumed to remain
+      constant over time in each demographic group.
   * - emr_X
     - Excess mortality rate in cause state X
     - values listed in :ref:`state data table above
