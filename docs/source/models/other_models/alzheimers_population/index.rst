@@ -468,6 +468,19 @@ Note that we are assuming that the incidence rate
   incidence rate** of AD-dementia, with *total* population in the
   denominator instead of susceptible population.
 
+.. attention::
+
+  The last age group we model is 95--100, and for the oldest age groups
+  :math:`g`, there will be no data for the age groups :math:`g + nw` or
+  :math:`g + (n+1)w` to plug into the formula for :math:`\dot
+  B_{g,t}^\text{AD}`. In this case, set :math:`Y^\text{real}_{g + nw,\,
+  t+\Delta}` and/or :math:`Y^\text{real}_{g + (n+1)w,\, t+\Delta}` to
+  zero, because we don't expect people to live long enough to transition
+  into AD-dementia in these age groups. The value of
+  :math:`i_{g+nw,t}^\text{AD}` and/or :math:`i_{g+(n+1)w,t}^\text{AD}`
+  can be filled in with any finite value in this case since it will be
+  getting multiplied by zero.
+
 Estimating BBBM cases that die during pre-dementia AD
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -567,6 +580,13 @@ and :math:`w = 5` years, :math:`g+ \Delta/2` should always get rounded
 to :math:`g + 5`. For the year, 2025 + 3.5 = 28.5, and, since this is
 right at the year's midpoint, I've arbitrarily rounded up instead of
 down.
+
+.. attention::
+
+  If :math:`g+ \Delta/2` has an age range beyond the oldest age group of
+  95--100, use the corresponding mortality rate for the 95--100 age
+  group, since we expect mortality rates to stay at least this high for
+  older ages.
 
 .. note::
 
