@@ -591,7 +591,9 @@ down.
 .. note::
 
   We can get a better approximation of :math:`\gamma_{g,t}` by making a
-  more careful approximation of the integral in the exponent:
+  more careful approximation of the integral in the exponent (see this
+  `GitHub comment for an explanation
+  <https://github.com/ihmeuw/vivarium_research/pull/1768#discussion_r2376525190>`__):
 
   .. math::
 
