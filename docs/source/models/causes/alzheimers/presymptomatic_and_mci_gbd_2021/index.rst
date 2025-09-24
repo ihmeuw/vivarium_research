@@ -313,29 +313,40 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
   If we model the entire population including susceptible simulants, the
   state data should be modified as follows.
 
-  Define :math:`p_\textsf{X}` to be the prevalence of cause state X in the
-  total population including susceptible simulants, and define
-  :math:`p_\text{(all AD states)}` to be the sum of :math:`p_\textsf{X}` for
-  the three AD cause states X. Then multiplying the prevalence of each AD state
-  in the :ref:`above state data table
+  Define :math:`p_\textsf{X}` to be the prevalence of cause state X in
+  the total population including susceptible simulants, and define
+  :math:`p_\text{(all AD states)}` to be the sum of :math:`p_\textsf{X}`
+  for the three AD cause states X. Then multiplying the prevalence of
+  each AD state in the :ref:`above state data table
   <2021_cause_alzheimers_presymptomatic_mci_state_data_table>` by
-  :math:`p_\text{(all AD states)}` gives the prevalence of that state in the
-  entire population. Since we know that :math:`p_\text{AD} =
-  \text{prevalence_c543}` (the GBD prevalence of Alzheimer's disease and other
-  dementias), we can solve to obtain
+  :math:`p_\text{(all AD states)}` gives the prevalence of that state in
+  the entire population. Since we know that
+
+  .. math::
+
+    \begin{align*}
+    p_\text{AD}
+    &= \text{prevalence_AD} \\
+    &= \text{prevalence_m24351} \times \text{proportion_AD},
+    \end{align*}
+
+  the prevalence of AD dementia computed from GBD's dementia envelope
+  (see :ref:`data values and sources table below
+  <2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`), we
+  can solve to obtain
 
   .. math::
     :label: prevalence_all_AD_states_eq
 
     p_\text{(all AD states)}
     = \frac{\Delta_\text{(all AD states)}}{\Delta_\text{AD}}
-      \cdot \text{prevalence_c543}
+      \cdot \text{prevalence_AD}
     \quad\text{(for ages 40+)}.
 
   Note that since the GBD prevalence applies to a given demographic
   group, so does the formula for :math:`p_\text{(all AD states)}`. The
   above formula applies to age groups 40+ since this is where
-  prevalence_c543 and :math:`\Delta_\text{AD}` are nonzero. For ages
+  prevalence_AD and :math:`\Delta_\text{AD}` are nonzero. For ages
   30--39, use the value of :math:`p_\text{(all AD states)}` for age
   group 40--44; for ages <30, set :math:`p_\text{(all AD states)} = 0`.
   The following state data table shows the resulting initial prevalences
@@ -375,7 +386,7 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
     population model page <other_models_alzheimers_population>`,
     :math:`p_\text{(all AD states)}` refers to the prevalence within the entire
     population of a location, including all age groups and sexes. On the other
-    hand, if we pull prevalence_c543 for a specific demographic subgroup
+    hand, if we compute prevalence_AD for a specific demographic subgroup
     :math:`g` (e.g., a single age group and sex) and year :math:`t`, then
     :math:`p_\text{(all AD states)}` as computed in
     :eq:`prevalence_all_AD_states_eq` corresponds to :math:`p_{g,t}` on the
