@@ -418,15 +418,20 @@ are located at the following paths on the cluster:
       disease dementia
     - :file:`squeezed_proportions_to_sim_sci.csv`
     - Point estimate stratified by age group and sex for ages 40+.
-      Filter to type_label == "Alzheimer's disease".
+      Includes proportions for all subtypes of dementia --- filter to
+      type_label == "Alzheimer's disease".
 
       **Note:** These estimates were provided by the dementia modelers
       and are not yet published, so they should not be stored directly
       in the Artifact or any other public location.
   * - prevalence_m24351
-    - Prevalence of dementia envelope
-    - epi
-    -
+    - Prevalence of GBD 2023 dementia envelope
+    - get_draws( source="epi", gbd_id_type = "modelable_entity_id",
+      gbd_id=24351, release_id=16, year_id=2023, measure_id=5 )
+    - The dementia envelope represents the combined prevalence all types
+      of dementia. By contrast, the GBD cause "Alzheimer's disease and
+      other dementias" (c543) does not include certain dementias that
+      result from other modeled GBD causes.
   * - prevalence_AD
     - Prevalence of AD dementia in total population
     - prevalence_m24351 :math:`\times` proportion_AD
@@ -443,14 +448,18 @@ are located at the following paths on the cluster:
     - :math:`p_\text{BBBM} + p_\text{MCI} + p_\text{AD}`
     -
   * - incidence_m24351
-    - GBD's "total population incidence rate" for dementia envelope
-    - epi
-    - Raw value from get_draws, different from "susceptible incidence
-      rate" automatically calculated by Vivarium Inputs
+    - Total-population incidence rate for GBD 2023 dementia envelope
+    - get_draws( source="epi", gbd_id_type = "modelable_entity_id",
+      gbd_id=24351, release_id=16, year_id=2023, measure_id=6 )
+    - Raw value from get_draws, different from susceptible-population
+      incidence rate automatically calculated by Vivarium Inputs
   * - incidence_AD
     - Total-population incidence rate of AD dementia
     - incidence_m24351 :math:`\times` proportion_AD
-    -
+    - Used in AD population model to calculate BBBM-AD incidence. We are
+      assuming the prevalence proportions can be applied to
+      incidence. We are assuming the AD-dementia incidence rate is
+      constant over time in each demographic group.
   * - acmr
     - All-cause mortality rate
     - loaded from :file:`_all.nc` file provided by FHS Team
@@ -461,8 +470,8 @@ are located at the following paths on the cluster:
     - Forecasted average population during specified year
     - loaded from :file:`population_agg.nc` file provided by FHS Team
     - Draw-level, age-specific forecasts. Numerically equal to
-      person-years. Used to calculate BBBM-AD incidence counts in AD
-      population model. See `Abie's population and mortality forecasts
+      person-years. Used in AD population model to calculate BBBM-AD
+      incidence counts. See `Abie's population and mortality forecasts
       notebook`_ for a demonstration of how to load and transform the
       ``.nc`` file.
   * - :math:`\text{population}_{2021}`
@@ -492,7 +501,8 @@ are located at the following paths on the cluster:
       constant over time in each demographic group.
   * - emr_X
     - Excess mortality rate in cause state X
-    - values listed in :ref:`state data table above
+    - values listed in "Excess mortality rate" column of :ref:`state
+      data table above
       <2021_cause_alzheimers_presymptomatic_mci_state_data_table>`
     -
   * - m_X
