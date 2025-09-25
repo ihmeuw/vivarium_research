@@ -689,8 +689,9 @@ Implementation and data tables
 Data Tables
 -----------
 
-All data values are defined for a specified year, location, age group,
-and sex.
+The following table shows the variables that come directly from our data
+sources. Other quantities needed for the simulation are defined above in
+terms of these values.
 
 .. list-table:: Data Sources
   :widths: 20 30 25 25
@@ -700,26 +701,50 @@ and sex.
     - Definition
     - Source or value
     - Notes
-  * - population
-    - Draw-level age-specific population forecast
-    - GBD 2021 Forecasting Capstone
-    - in `population_agg.nc` file
-  * - all-cause mortality rate
-    - Draw-level age-specific mortality rates saved by cause, for cause==all
-    - GBD 2021 Forecasting Capstone
-    - in `_all.nc` file
+  * - :math:`X_{t_0}`
+    - The initial size of our simulated population
+    - "Initial population size per draw" in the simulation parameter
+      specifications table in the concept model
+    - Includes all demographic groups
   * - :math:`Y^\text{real}_{g,t}`
     - Draw-level age-specific total population forecast in demographic
       group :math:`g` at time :math:`t`
-    - population_forecast in data sources table
+    - population_forecast in AD cause model data sources table
     - From GBD 2021 Forecasting Capstone. Available for years 2021-2050.
+  * - :math:`p_{g,t}`
+    - The combined prevalence of all AD stages in demographic
+      group :math:`g` at time :math:`t`
+    - :math:`p_\text{(All AD states)}` in the Attention box on the AD
+      cause model page
+    - Calculated from the GBD 2023 dementia envelope using the
+      dementia subtype proportions provided by the dementia modelers.
+      We will only need the value for the single year :math:`t_0`.
   * - :math:`i^\text{AD}_{g,t}`
     - Total-population incidence rate of AD dementia in demographic
       group :math:`g` at time :math:`t`
-    - incidence_AD in data sources table
+    - incidence_AD in AD cause model data sources table
     - Calculated from the GBD 2023 dementia envelope using the
       dementia subtype proportions provided by the dementia modelers.
       Assumed to be independent of :math:`t`.
+  * - :math:`m_{g,t}`
+    - Background mortality hazard in demographic group :math:`g` at time
+      :math:`t`
+    - m_BBBM or m_MCI in the AD cause model data sources table
+    - Equal to all-cause mortality rate minus cause-specific mortality
+      rate for AD-dementia. Uses all-cause mortality rate forecasts for
+      2021--2050 from GBD 2021 Forecasting Capstone.
+  * - :math:`\Delta_\text{BBBM}`, :math:`\Delta_\text{MCI}`
+    - Average duration of the BBBM-AD state or MCI-AD state,
+      respectively
+    - :math:`\Delta_\text{BBBM}` and :math:`\Delta_\text{MCI}` in the AD
+      cause model data sources table
+    -
+  * - :math:`w`
+    - The width of a standard GBD age bin
+    - 5 years
+    - We are not modeling the youngest age goups, which have smaller age
+      bins, and we are capping the 95+ age bin at 100, making it a
+      standard 5-year age bin
 
 All-cause Mortality Forecasts
 +++++++++++++++++++++++++++++
