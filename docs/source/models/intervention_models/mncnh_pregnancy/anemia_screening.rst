@@ -44,8 +44,7 @@ sensitivity and specificity levels for the hemoglobin screening test as informed
 
 Follow the steps below to determine the answer to decision node #7:
 
-1. Assess a simulants "true" low hemoglobin status based on their hemoglobin exposure *after* action points I, II, and III have been executed (and *before* IV, V, and VI). Low hemoglobin 
-    status corresponds to values of <100 g/L and adequate hemoglobin status corresponds to values of 100+ g/L.
+1. Assess a simulants "true" low hemoglobin status based on their hemoglobin exposure *after* action points I, II, and III have been executed (and *before* IV, V, and VI). Low hemoglobin status corresponds to values of <100 g/L and adequate hemoglobin status corresponds to values of 100+ g/L.
 2. For simulants that are truly low hemoglobin, assign tests low hemoglobin status to 85% (sensitivity value) and tests adequate hemoglobin status to 15% (100 - sensitivity value of 85)
 3. For simulants that are truly adequate hemoglobin, assign tests adequate hemoglobin status to 80% (specificity) and tests low hemoglobin status to 20% (100 - specificty value of 80)
 4. Use the test hemoglobin status to determine the answer to decision node 7 (answer is "yes" if they have test low hemoglobin status and "no" if they have test adequate hemoglobin status)
@@ -74,6 +73,12 @@ also coincidentally has low ferritin.
 
   Chris T. has suggested that we can use the fraction of iron deficiency anemia from the in-progress PRISMA study rather than GBD for this purpose. PRIMSA study results are expected in June or July of 2025.
 
+.. todo::
+
+  Update the data used for this parameter... the notebook linked below was not tracked properly in git and we have erroneously used location ID 169 rather than 179 in the generation of the original file. For now Hussain is using the data for location ID 169 as a stand-in for 179/Ethiopia.
+
+  Ali will make a PR to the simulation repo and follow-up with documentation when that is complete.
+
 `The notebook that was used to calculate these values can be found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/fraction_iron_responsive_anemia.ipynb>`_
 
 **Modeling instructions:**
@@ -89,7 +94,7 @@ Baseline Coverage Data
 ++++++++++++++++++++++++
 
 Baseline coverage of the minimally invasive blood test for hemoglobin screening is defined by estimates processed by the Health Systems team. 
-The country-specific estimates are available at ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc_iron_prop_st-gpr_results_aggregates_scaled2025-05-30.csv``.
+The country-specific estimates are available at ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc_bloodsample_prop_st-gpr_results_aggregates_scaled2025-05-29.csv``.
 
 Baseline coverage of ferritin screening is defined in the table below. 
 
