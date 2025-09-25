@@ -398,18 +398,18 @@ Data Values and Sources
 Unless otherwise noted, all data values depend on year, location, age group,
 and sex, as defined by GBD.
 
-The population (:file:`population_agg.nc`) and mortality rates
-(:file:`_all.nc`) files from the Future Health Scenarios (FHS) team and the
-disability weights file (:file:`all.hdf`) saved by the Simulation Science team
-are located at the following paths on the cluster:
+The following paths on the cluster contain the data files listed in the
+table below:
+
+* :file:`population_agg.nc` and :file:`mortality_all.nc` from FHS team
+* :file:`squeezed_proportions_to_sim_sci.csv` from dementia modelers
+* :file:`all.hdf` disability weight file saved by Simulation Science team
 
 .. code-block:: bash
 
-  # Age-specific population from FHS team:
-  /mnt/share/forecasting/data/9/future/population/20240320_daly_capstone_resubmission_squeeze_soft_round_shifted_hiv_shocks_covid_all_who_reagg/population_agg.nc
-
-  # Deaths rates from FHS team:
-  /snfs1/Project/forecasting/results/7/future/death/20240320_daly_capstone_resubmission_squeeze_soft_round_shifted_hiv_shocks_covid_all_who_reagg/_all.nc
+  # Data folder for Alzheimer's sim, including data from FHS team and
+  # dementia modelers (see README.txt for data provenance)
+  /mnt/team/simulation_science/pub/models/vivarium_csu_alzheimers/data
 
   # Disability weights saved by Simscience team:
   /mnt/team/simulation_science/costeffectiveness/auxiliary_data/GBD_2021/02_processed_data/disability_weight/sequela/all/all.hdf
@@ -449,7 +449,8 @@ are located at the following paths on the cluster:
     -
   * - :math:`p_\textsf{X}`
     - Prevalence of cause state X in total population
-    - defined in :ref:`Attention box above
+    - Defined in the "Initial prevalence" column of the state data table
+      in the :ref:`Attention box above
       <alzheimers_cause_state_data_including_susceptible_note>`
     - By definition, :math:`p_\text{AD} =` prevalence_AD, and
       :math:`p_\text{BBBM}` and :math:`p_\text{MCI}` are derived from
@@ -473,18 +474,19 @@ are located at the following paths on the cluster:
       constant over time in each demographic group.
   * - acmr
     - All-cause mortality rate
-    - loaded from :file:`_all.nc` file provided by FHS Team
-    - Draw-level, age-specific forecasts. See `Abie's population and
-      mortality forecasts notebook`_ for a demonstration of how to load
-      and transform the ``.nc`` file
+    - :file:`mortality_all.nc`
+    - Draw-level, age-specific forecasts from GBD 2021 Forecasting
+      Capstone. See `Abie's population and mortality forecasts
+      notebook`_ for a demonstration of how to load and transform the
+      ``.nc`` file
   * - population_forecast
     - Forecasted average population during specified year
-    - loaded from :file:`population_agg.nc` file provided by FHS Team
-    - Draw-level, age-specific forecasts. Numerically equal to
-      person-years. Used in AD population model to calculate BBBM-AD
-      incidence counts. See `Abie's population and mortality forecasts
-      notebook`_ for a demonstration of how to load and transform the
-      ``.nc`` file.
+    - :file:`population_agg.nc`
+    - Draw-level, age-specific forecasts from GBD 2021 Forecasting
+      Capstone. Numerically equal to person-years. Used in AD population
+      model to calculate BBBM-AD incidence counts. See `Abie's
+      population and mortality forecasts notebook`_ for a demonstration
+      of how to load and transform the ``.nc`` file.
   * - :math:`\text{population}_{2021}`
     - Average population during the year 2021
     - get_population
@@ -512,7 +514,7 @@ are located at the following paths on the cluster:
       constant over time in each demographic group.
   * - emr_X
     - Excess mortality rate in cause state X
-    - values listed in "Excess mortality rate" column of :ref:`state
+    - Values listed in "Excess mortality rate" column of :ref:`state
       data table above
       <2021_cause_alzheimers_presymptomatic_mci_state_data_table>`
     -
@@ -522,7 +524,7 @@ are located at the following paths on the cluster:
     -
   * - sequelae_c543
     - Sequelae of Alzheimer's disease and other dementias
-    - set of 3 sequelae: s452, s453, s454
+    - Set of 3 sequelae: s452, s453, s454
     - Obtained from gbd_mapping.
       Sequela names are "Mild," "Moderate," or "Severe Alzheimer's
       disease and other dementias," respectively. Same for all years,
@@ -576,7 +578,7 @@ are located at the following paths on the cluster:
       explanation.
   * - :math:`T_X`
     - The time at which a simulant enters the cause state :math:`X`
-    - determined within the simulation
+    - Determined within the simulation
     - Random variable for each simulant. :math:`T_\text{BBBM}` is used to
       determine how long a simulant has been in the BBBM-AD state, in order to
       compute the hazard rate of transitioning to MCI-AD at a given simulation
