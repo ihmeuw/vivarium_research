@@ -703,41 +703,41 @@ terms of these values.
     - Notes
   * - :math:`X_{t_0}`
     - The initial size of our simulated population
-    - "Initial population size per draw" in the simulation parameter
-      specifications table in the concept model
+    - "Initial population size per draw" in the |simulation parameter
+      specifications table in the concept model|
     - Includes all demographic groups
   * - :math:`Y^\text{real}_{g,t}`
     - Draw-level age-specific total population forecast in demographic
       group :math:`g` at time :math:`t`
-    - population_forecast in AD cause model data sources table
+    - population_forecast in |AD cause model data sources table|
     - From GBD 2021 Forecasting Capstone. Available for years 2021-2050.
   * - :math:`p_{g,t}`
     - The combined prevalence of all AD stages in demographic
       group :math:`g` at time :math:`t`
-    - :math:`p_\text{(All AD states)}` in the Attention box on the AD
-      cause model page
+    - :math:`p_\text{(All AD states)}` in the |Attention box on the AD
+      cause model page|
     - Calculated from the GBD 2023 dementia envelope using the
       dementia subtype proportions provided by the dementia modelers.
       We will only need the value for the single year :math:`t_0`.
   * - :math:`i^\text{AD}_{g,t}`
     - Total-population incidence rate of AD dementia in demographic
       group :math:`g` at time :math:`t`
-    - incidence_AD in AD cause model data sources table
+    - incidence_AD in |AD cause model data sources table|
     - Calculated from the GBD 2023 dementia envelope using the
       dementia subtype proportions provided by the dementia modelers.
       Assumed to be independent of :math:`t`.
   * - :math:`m_{g,t}`
     - Background mortality hazard in demographic group :math:`g` at time
       :math:`t`
-    - m_BBBM or m_MCI in the AD cause model data sources table
+    - m_BBBM or m_MCI in the |AD cause model data sources table|
     - Equal to all-cause mortality rate minus cause-specific mortality
       rate for AD-dementia. Uses all-cause mortality rate forecasts for
       2021--2050 from GBD 2021 Forecasting Capstone.
   * - :math:`\Delta_\text{BBBM}`, :math:`\Delta_\text{MCI}`
     - Average duration of the BBBM-AD state or MCI-AD state,
       respectively
-    - :math:`\Delta_\text{BBBM}` and :math:`\Delta_\text{MCI}` in the AD
-      cause model data sources table
+    - :math:`\Delta_\text{BBBM}` and :math:`\Delta_\text{MCI}` in the |AD
+      cause model data sources table|
     -
   * - :math:`w`
     - The width of a standard GBD age bin
@@ -745,6 +745,18 @@ terms of these values.
     - We are not modeling the youngest age goups, which have smaller age
       bins, and we are capping the 95+ age bin at 100, making it a
       standard 5-year age bin
+
+.. |simulation parameter specifications table in the concept model| replace::
+  :ref:`simulation parameter specifications table in the concept model
+  <2025_concept_model_vivarium_alzheimers_sim_parameter_specs>`
+
+.. |AD cause model data sources table| replace::
+  :ref:`AD cause model data sources table
+  <2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`
+
+.. |Attention box on the AD cause model page| replace::
+  :ref:`Attention box on the AD cause model page
+  <alzheimers_cause_state_data_including_susceptible_note>`
 
 All-cause Mortality Forecasts
 +++++++++++++++++++++++++++++
