@@ -708,6 +708,18 @@ and sex.
     - Draw-level age-specific mortality rates saved by cause, for cause==all
     - GBD 2021 Forecasting Capstone
     - in `_all.nc` file
+  * - :math:`Y^\text{real}_{g,t}`
+    - Draw-level age-specific total population forecast in demographic
+      group :math:`g` at time :math:`t`
+    - population_forecast in data sources table
+    - From GBD 2021 Forecasting Capstone. Available for years 2021-2050.
+  * - :math:`i^\text{AD}_{g,t}`
+    - Total-population incidence rate of AD dementia in demographic
+      group :math:`g` at time :math:`t`
+    - incidence_AD in data sources table
+    - Calculated from the GBD 2023 dementia envelope using the
+      dementia subtype proportions provided by the dementia modelers.
+      Assumed to be independent of :math:`t`.
 
 All-cause Mortality Forecasts
 +++++++++++++++++++++++++++++
