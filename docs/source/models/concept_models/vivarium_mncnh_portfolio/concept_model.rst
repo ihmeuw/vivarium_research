@@ -1588,7 +1588,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 21.0*
-    - Hemoglobin effect on neonatal sepsis as defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (data for effects and PAFs have yet to be calculated as of 8/22/25)
+    - Hemoglobin effect on neonatal sepsis as defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (data for PAFs have yet to be calculated as of 9/26/25)
     - Baseline and IV iron scale-up scenarios
     - ``model21.0``
     - Default
