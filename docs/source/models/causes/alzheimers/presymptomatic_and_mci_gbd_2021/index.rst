@@ -144,30 +144,20 @@ For :ref:`Model 4 <2025_alzheimers_model_runs_table>` of the :ref:`CSU
 Alzheimer's simulation <2025_concept_model_vivarium_alzheimers>`, we
 will add two pre-dementia states to the Alzheimer's disease model. The
 model still functions similar to an SI model, but now there are multiple
-with-condition states, with unidirectional progression between them.
+with-condition states, with unidirectional progression between them. In
+Model 4 we used the incidence and prevalence for GBD's "Alzheimer's disease
+and other dementias" (cause ID 543), so our numbers were inflated by
+the "other dementias" part.
 
-Since this cause model only includes Alzheimer's disease and its
-precursors, not other types of dementia, we do not want to directly use
-the prevalence and incidence data from
-
-Since the most relevant GBD cause for this model is "Alzheimer's disease
-and other dementias" (cause ID 543), we need a way to separate out
-Alzheimer's disease from other dementias in the data. The dementia team
-has made estimates (unpublished as of September 2025) of the proportion
-of total dementia
-
-The recommendation
-from IHME's dementia team was to not use the published GBD data
-directly, but to start with the "dementia envelope" data from
-DisMod, and multiply by the.
-
-
-Conceptually, this cause model only includes Alzheimer's disease and its
-precursors, not other types of dementia. However, for now we are still
-using the total incidence and prevalence for GBD's "Alzheimer's disease
-and other dementias" (cause ID 543), so our numbers will be inflated by
-the "other dementias" part. In a future model version we will remove the
-"other dementias" portion  to correct this issue.
+In :ref:`Model 5 <2025_alzheimers_model_runs_table>`, we remove the
+"other dementias" from the disease model. To do this, the dementia
+modelers recommended *not* using the published GBD data directly, but to
+start with the GBD 2023 "dementia envelope" data from DisMod, and
+multiply by proportion of the envelope due to Alzheimer's disease. The
+estimates of the proportions of the envelope due to each dementia
+subtype are unpublished as of September 2025, but the modelers shared a
+.csv file we can use as long as we don't expose the raw numbers. See the
+`Data Values and Sources`_ section below for details.
 
 Cause Model Diagram
 -------------------
