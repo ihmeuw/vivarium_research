@@ -314,9 +314,21 @@ scenario, and input draw.
   * - Person-time in each Alzheimer's cause state
     -
     -
-  * - Test counts (CSF, PET, BBBM)
-    - By diagnosis provided (for BBBM tests)
+  * - Test counts
+    - * Test type (CSF, PET, BBBM). 
+      * Diagnosis provided (for BBBM tests). 
+      * Disease state at time of test (BBBM, MCI, AD). 
+      * Age at time of test. 
+      * CSF/PET status (has simulant received CSF/PET test before). 
+      * *Positive* BBBM test status (has simulant recieved positive BBBM test before).
+      * Years since last BBBM test before this test.
     -
+  * - Test-eligibility
+    - Test type (CSF/PET, BBBM)
+    - Number of simulants who are eligible for both baseline (CSF/PET) and BBBM testing, based on the
+      :ref:`PET/CSF <petcsf_requirements>` and :ref:`BBBM <bbbm_requirements>` eligibilty requirements 
+      listed in step 1 for each section (do not include propensity as a requirement). 
+      Will be used to check that eligible simulants * test rate = test count, for each test type and location.
 
 5.0 Model Runs and Verification & Validation
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -631,6 +643,13 @@ scenario, and input draw.
     - Same as 4.4
     - AD-dementia incidence looks identical to 4.4, so the double rounding was perhaps not a problem after all
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/9fef98e6cc61f4eb6dec96c2cd477e64cc084d3f/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
+  * - 5.0
+    - * Only eligible simulants are tested based on :ref:`PET/CSF <petcsf_requirements>` and :ref:`BBBM <bbbm_requirements>` testing requirements.
+      * Location-specific CSF vs PET testing rates (CSF tests / PET tests = CSF rate / PET rate)
+      * 90% diagnostic rate for BBBM tests
+      * Eligible simulants * test rate = test count, for each test type (baseline, BBBM) and location- or year-specific rate
+      * CSF/PET tests initialized properly - no testing spike for first time step
+    - 
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
