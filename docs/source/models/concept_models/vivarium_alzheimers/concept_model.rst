@@ -314,21 +314,21 @@ scenario, and input draw.
   * - Person-time in each Alzheimer's cause state
     -
     -
-  * - Test counts
-    - * Test type (CSF, PET, BBBM). 
-      * Diagnosis provided (for BBBM tests). 
-      * Disease state at time of test (BBBM, MCI, AD). 
-      * Age at time of test. 
-      * CSF/PET status (has simulant received CSF/PET test before). 
-      * *Positive* BBBM test status (has simulant recieved positive BBBM test before).
-      * Years since last BBBM test before this test.
+  * - Baseline (CSF/PET) test counts
+    - * Eligiblity of person recieving test, based on the :ref:`PET/CSF eligibility requirements <petcsf_requirements>` (list in step 1).
     -
-  * - Test-eligibility
-    - Test type (CSF/PET, BBBM)
-    - Number of simulants who are eligible for both baseline (CSF/PET) and BBBM testing, based on the
-      :ref:`PET/CSF <petcsf_requirements>` and :ref:`BBBM <bbbm_requirements>` eligibilty requirements 
-      listed in step 1 for each section (do not include propensity as a requirement). 
-      Will be used to check that eligible simulants * test rate = test count, for each test type and location.
+  * - BBBM test counts
+    - * Diagnosis provided
+      * Eligiblity of person recieving test, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
+    -
+  * - Baseline (CSF/PET) test-eligibile simulants
+    - 
+    - Number of simulants who are eligible for baseline (CSF/PET) testing, based on the :ref:`PET/CSF eligibility requirements <petcsf_requirements>` (list in step 1).
+      Will be used to check that eligible simulants * test rate = test count, for each location-specific test rate.
+  * - BBBM test-eligibile simulants
+    - 
+    - Number of simulants who are eligible for BBBM testing, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
+      Will be used to check that eligible simulants * test rate = test count, for each year-specific test rate.
 
 5.0 Model Runs and Verification & Validation
 +++++++++++++++++++++++++++++++++++++++++++++
