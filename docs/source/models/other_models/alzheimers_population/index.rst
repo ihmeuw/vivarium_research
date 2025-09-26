@@ -60,18 +60,14 @@ necessary population size for the :ref:`CSU Alzheiemer's simulation
 <2025_concept_model_vivarium_alzheimers>`. The model document is split
 into two parts: 1) initializing the population, and 2) adding new
 simulants during the simulated timeframe. We will also describe two
-different versions of the population model, corresponding to
-progressive model version of the CSU Alzheiemer's simulation:
+different versions of the population model, corresponding to progressive
+:ref:`model versions <2025_alzheimers_model_runs_table>` of the CSU
+Alzheiemer's simulation:
 
 #. **Models 2 and 3:** Modeling simulants with Alzheimer's disease (AD)
    and other dementias as defined by GBD
 #. **Model 4 and above:** Modeling simulants with presymptomatic AD,
    MCI, or AD dementia
-
-Since this is the model that
-includes details on how to use forecasts of population size, we have also
-included information on how to use forecasts of all-cause mortality rate
-(this is not really part of the Alzheimer's Population Model however).
 
 Initializing the Population
 +++++++++++++++++++++++++++
@@ -707,8 +703,7 @@ terms of these values.
       specifications table in the concept model|
     - Includes all demographic groups
   * - :math:`Y^\text{real}_{g,t}`
-    - Draw-level age-specific total population forecast in demographic
-      group :math:`g` at time :math:`t`
+    - Total population of demographic group :math:`g` at time :math:`t`
     - population_forecast in |AD cause model data sources table|
     - From GBD 2021 Forecasting Capstone. Available for years 2021-2050.
   * - :math:`p_{g,t}`
@@ -757,21 +752,3 @@ terms of these values.
 .. |Attention box on the AD cause model page| replace::
   :ref:`Attention box on the AD cause model page
   <alzheimers_cause_state_data_including_susceptible_note>`
-
-All-cause Mortality Forecasts
-+++++++++++++++++++++++++++++
-
-Since this is the model that
-includes details on how to use forecasts of population size, we have also
-included information on how to use forecasts of all-cause mortality rate.
-This is not really part of the Alzheimer's Population Model, however, and
-perhaps a better place to include this information will emerge as we continue
-to work on this model.
-
-By including draw-level, age-specific mortality rates forecasted for future years,
-the competing mortality from causes other than Alzheimer's Disease will change over time
-as predicted by our IHME colleagues.
-
-The :ref:`all_cause_mortality` docs have more details on how the ACMR forecasts are used
-when they are included in the artifact.
-
