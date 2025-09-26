@@ -454,6 +454,12 @@ scenario, and input draw.
     - * Locations: USA
     - Default
     - Default
+  * - 6.0
+    - Add testing (CSF/PET, BBBM) intervention
+    - Baseline, Alternative Scenario 1
+    - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
+    - Default
+    - Add test counts and testing eligibility observers
 
 
 5.2 V & V Tracking
@@ -643,13 +649,14 @@ scenario, and input draw.
     - Same as 4.4
     - AD-dementia incidence looks identical to 4.4, so the double rounding was perhaps not a problem after all
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/9fef98e6cc61f4eb6dec96c2cd477e64cc084d3f/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
-  * - 5.0
+  * - 6.0
     - * Only eligible simulants are tested based on :ref:`PET/CSF <petcsf_requirements>` and :ref:`BBBM <bbbm_requirements>` testing requirements.
       * Location-specific CSF vs PET testing rates (CSF tests / PET tests = CSF rate / PET rate)
       * 90% diagnostic rate for BBBM tests
       * Eligible simulants * test rate = test count, for each test type (baseline, BBBM) and location- or year-specific rate
       * CSF/PET tests initialized properly - no testing spike for first time step
     - 
+    -
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
