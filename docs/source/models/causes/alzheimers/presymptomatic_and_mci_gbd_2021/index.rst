@@ -63,9 +63,31 @@ Disease Overview
 GBD 2021 Modeling Strategy
 ++++++++++++++++++++++++++
 
-The IHME dementia modelers first use DisMod to estimate a "dementia
-envelope" to get the prevalence and incidence of all types of
-dementia.
+The IHME dementia modelers use DisMod to estimate the prevalence and
+incidence of a "dementia envelope" comprising all types of dementia
+combined, and then they estimate what proportion of the envelope
+corresponds to each subtype of dementia. The proportions of dementia due
+to stroke, Parkinson's disease, Down's syndrome, and traumatic brain
+injury are attributed to those GBD causes, and the remaining dementia in
+the envelope is attributed to the GBD cause "Alzheimer's disease and
+other dementias" (cause ID 543).
+
+For further information, see the methods appendices and HUB page:
+
+* `Alzheimer's disease and other dementias in the GBD 2021 fatal methods
+  appendix <ADOD_2021_fatal_methods_appendix_>`_
+* `Alzheimer's disease and other dementias in the GBD 2021 nonfatal
+  methods appendix <ADOD_2021_nonfatal_methods_appendix_>`_
+* `Alzheimer's/Dementia HUB page <ADOD_HUB_page_>`_
+
+.. _ADOD_2021_fatal_methods_appendix:
+  https://www.healthdata.org/gbd/methods-appendices-2021/alzheimers-disease-and-other-dementias
+
+.. _ADOD_2021_nonfatal_methods_appendix:
+  https://www.healthdata.org/gbd/methods-appendices-2021/alzheimers-disease-and-other-dementias-0
+
+.. _ADOD_HUB_page:
+  https://hub.ihme.washington.edu/spaces/BIRDS/pages/123831566/Alzheimers+Dementia
 
 Restrictions
 ------------
