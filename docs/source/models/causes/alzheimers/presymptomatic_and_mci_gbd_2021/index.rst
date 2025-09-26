@@ -457,8 +457,8 @@ table below:
       this
   * - :math:`p_\text{(all AD states)}`
     - Prevalence of all stages of AD combined
-    - :math:`p_\text{BBBM} + p_\text{MCI} + p_\text{AD}`
-    -
+    - Defined in :eq:`prevalence_all_AD_states_eq` above
+    - Equals :math:`p_\text{BBBM} + p_\text{MCI} + p_\text{AD}`
   * - incidence_m24351
     - Total-population incidence rate for GBD 2023 dementia envelope
     - get_draws( source="epi", gbd_id_type = "modelable_entity_id",
@@ -468,10 +468,11 @@ table below:
   * - incidence_AD
     - Total-population incidence rate of AD dementia
     - incidence_m24351 :math:`\times` proportion_AD
-    - Used in AD population model to calculate BBBM-AD incidence. We are
-      assuming the prevalence proportions can be applied to
-      incidence. We are assuming the AD-dementia incidence rate is
-      constant over time in each demographic group.
+    - Used in :ref:`AD population model
+      <other_models_alzheimers_population>` to calculate BBBM-AD
+      incidence. We are assuming the prevalence proportions can be
+      applied to incidence. We are assuming the AD-dementia incidence
+      rate is constant over time in each demographic group.
   * - acmr
     - All-cause mortality rate
     - :file:`mortality_all.nc`
@@ -483,10 +484,11 @@ table below:
     - Forecasted average population during specified year
     - :file:`population_agg.nc`
     - Draw-level, age-specific forecasts from GBD 2021 Forecasting
-      Capstone. Numerically equal to person-years. Used in AD population
-      model to calculate BBBM-AD incidence counts. See `Abie's
-      population and mortality forecasts notebook`_ for a demonstration
-      of how to load and transform the ``.nc`` file.
+      Capstone. Numerically equal to person-years. Used in :ref:`AD
+      population model <other_models_alzheimers_population>` to
+      calculate BBBM-AD incidence counts. See `Abie's population and
+      mortality forecasts notebook`_ for a demonstration of how to load
+      and transform the ``.nc`` file.
   * - :math:`\text{population}_{2021}`
     - Average population during the year 2021
     - get_population
@@ -517,11 +519,13 @@ table below:
     - Values listed in "Excess mortality rate" column of :ref:`state
       data table above
       <2021_cause_alzheimers_presymptomatic_mci_state_data_table>`
-    -
+    - * emr_S, emr_BBBM, emr_MCI, emr_AD
   * - m_X
     - Mortality hazard in cause state X
     - acmr --- csmr_c543 + emr_X
-    -
+    - * m_S, m_BBBM, m_MCI, m_AD
+      * See :ref:`Mortality Impacts <models_cause_mortality_impacts>`
+        section of cause model design page
   * - sequelae_c543
     - Sequelae of Alzheimer's disease and other dementias
     - Set of 3 sequelae: s452, s453, s454
