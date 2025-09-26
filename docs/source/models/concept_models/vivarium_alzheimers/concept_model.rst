@@ -204,6 +204,8 @@ The basic plan for the design of the simulation is as follows:
 4.1 Default Parameter Specifications
 ------------------------------------
 
+.. _2025_concept_model_vivarium_alzheimers_sim_parameter_specs:
+
 .. list-table:: Default Simulation Parameter Specifications
   :header-rows: 1
   :widths: 5 7 7
