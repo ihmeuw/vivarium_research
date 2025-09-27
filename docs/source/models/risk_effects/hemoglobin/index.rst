@@ -257,6 +257,10 @@ Generally, in order to derive the direct (mediation-adjusted) effects of hemoglo
 
 3. Calculate the direct effect (:math:`RR_\text{R1→O,direct}`) as :math:`RR_\text{R1→O,total} / RR_\text{R1→R2→O}` using the equation :math:`RR_\text{R1→O,total} = RR_\text{R1→O,direct} \times RR_\text{R1→R2→O}`.
 
+`Effects can be found in .csv files here <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/direct_sepsis_effects>`_. Each csv file contains data specific to a given draw and each file is stratified by location, sex, and hemoglobin "exposure" in grams per liter.
+
+Data was only generated for the specific draws used in the MNCNH portfolio simulation. In generating the artifact, values for draws not used in the MNCNH portfolio simulation should ideally be filled with missing values or some illogical number like infinity so that we will notice an error if we attempt to run for a draw that does not contain valid data.
+
 Effect application
 ^^^^^^^^^^^^^^^^^^^
 
@@ -287,7 +291,7 @@ Where,
     - Note that the PAF is calculated according to direct (not total) effects of hemoglobin on neonatal sepsis. We utilize this PAF rather than a joint PAF with the effect of LBWSG since we are not modeling correlation between hemoglobin and LBWSG in the MNCNH portfolio simulation.
   * - :math:`\text{RR}_\text{hemoglobin}_i`
     - Relative risk value for the direct effect of hemoglobin on neonatal sepsis, specific to that individual simulated dyad's hemoglobin exposure level at birth
-    - Values derived as detailed in the `Effect derivation`_ section
+    - Defined in the `Effect derivation`_ section
     - 
   * - mean_rr
     - Population mean relative risk value (for the direct effect of hemoglobin on neonatal sepsis)
