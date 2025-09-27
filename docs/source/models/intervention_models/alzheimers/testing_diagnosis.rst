@@ -72,6 +72,8 @@ Scenario 2.
 Vivarium Modeling Strategy
 --------------------------
 
+Note that disease model will take timestep before testing model, so simulants can be tested on incidence to new stage.
+
 Baseline testing - CSF and PET
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -92,7 +94,7 @@ given by [Mattke-et-al-2024-Sweden-Capacity]_. The cohorts for these studies are
 For Japan, Israel, Taiwan and Brazil, because we have not yet found CSF and PET testing rates for these locations,
 we use the total CSF and PET testing rates across all countries from [Roth-et-al-2023-Diagnostic-Pathways]_. 
 
-After choosing these mean values, we subract 50% for a lower confidence bound and add 50% for an upper confidence bound to reflect substantial uncertainty.
+After choosing these mean values, we subract 50% for a lower confidence bound and add 50% for an upper confidence bound to reflect substantial uncertainty (to be used in artifact draws).
 
 Note that the three sources for these test rates have slightly different cohorts and therefore test rate denominators.
 These test rates will be applied to simulants with MCI or AD dementia.
@@ -147,15 +149,18 @@ On timestep
 '''''''''''
 On each timestep, use the following steps to assign CSF and PET tests:
 
+.. _petcsf_requirements:
+
 1. Assess eligibility based on the following requirements:
 
-  - Simulant is in MCI stage or AD dementia stage
+  - Simulant is in MCI stage or AD dementia stage (though due to lack of age requirement, no simulants should be tested in AD dementia stage - only on MCI incidence)
   - Simulant has never recieved a CSF or PET test before
   - Simulant has never recieved a positive BBBM test before
-  - Propensity value is lower (likely test recipient) than the location-specific testing rate, which is equal to CSF rate plus PET rate
 
-2. If eligible (meets all requirements), give test. If not, do not give test. Do not assign a diagnosis.
-3. Assign if it was a CSF or PET test based on location-specific rates. If propensity value is lower than CSF testing rate: give a CSF test. Otherwise, propensity value must be higher than CSF testing rate but lower than CSF + PET rate: give a PET test.
+2. If eligible (meets all requirements), check propensity.
+   If propensity value is < (likely test recipient) the location-specific testing rate (CSF rate plus PET rate),
+   give test. If not, do not give test. Do not assign a diagnosis.
+3. Assign if it was a CSF or PET test based on location-specific rates. If propensity value < CSF testing rate: give a CSF test. Otherwise, from step 2, propensity value must be >= CSF testing rate but < CSF + PET rate: give a PET test.
 
 On initialization
 '''''''''''''''''
@@ -180,6 +185,7 @@ Assumptions and Limitations
 - Eligibility requirements impact the number of tests. The earlier the stage simulants
   are tested in, the more tests will be conducted (eg mild stage compared to MCI). The wider 
   the age range, the more tests will be conducted (eg no age requirements vs 60-80 year olds). 
+- Assumes no one gets both a CSF and PET test.
 
 BBBM testing
 ~~~~~~~~~~~~
@@ -191,7 +197,7 @@ assign positive/negative diagnosis which will inform treatment in :ref:`Alternat
 Year-specific testing rates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Testing rates do not vary by location, age or sex. 
-In 2020, 0% of eligible simulants are tested annually. This increases to 10% in 2030, 
+In 2020, 0% of eligible simulants are tested annually. This increases (instantly) to 10% at year 2030, 
 then increases linearly over time in each six-month period to reach 20% in 2035, to 40% in 2040 
 and then maxes out at 60% in 2045. 
 
@@ -205,16 +211,18 @@ On timestep
 '''''''''''
 On each timestep, use the following steps to assign BBBM tests:
 
+.. _bbbm_requirements:
+
 1. Assess eligibility based on the following requirements:
 
   - Simulant is in pre-clinical stage
   - Simulant age is >=60 and <80
   - Simulant has not received a BBBM test in the last three years
   - Simulant has never received a positive BBBM test
-  - Propensity is lower than year-specific testing rate
 
-2. If eligible (meets all requirements), give test. If not, do not give test.
-3. If given test, assign positive diagnosis to 90% of people and negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, eg people who test negative still have a 90% chance of being positive on a re-test.
+2. If eligible (meets all requirements), check propensity. 
+   If propensity value is < year-specific testing rate: give test. If not, do not give test.
+3. Assign positive diagnosis to 90% of people and negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, eg people who test negative still have a 90% chance of being positive on a re-test.
 4. Record time of last test, yes/no diagnosis for future testing eligibility.
 
 On initialization
