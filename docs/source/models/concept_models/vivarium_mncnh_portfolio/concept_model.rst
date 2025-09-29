@@ -1581,8 +1581,12 @@ Default stratifications to all observers should include scenario and input draw.
   * - 18.1
     - Model 17.0 bugfixes:
       * Update so that only those who attend ANC are eligible for IFA/MMS
+
+        * Include corresponding update in the baseline IFA calibration `laid out in this PR <https://github.com/ihmeuw/vivarium_research/pull/1803>`__
+
       * Confirm that cat1/cat2 are defined consistently for IFA and MMS coverage and consider updating to covered/uncovered
     - No run necessary, all V&V done in the interactive simulation
+    - N/A
     - N/A
     - N/A
     - N/A
@@ -1592,6 +1596,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Update hemoglobin risk effects to use intervention-affected hemoglobin exposure rather than raw hemoglobin exposure
     - No run necessary, all V&V done in the interactive simulation
     - N/A
+    - N
     - N/A
     - N/A
   * - 19.0
