@@ -1062,6 +1062,11 @@ Default stratifications to all observers should include scenario and input draw.
     - 250
     - Copy twice so that draw 1 and 251 have the same value, etc.
     - Note that we have ordered the draws for hemoglobin RRs on gestational age, birth weight, and neonatal sepsis in the same order as we are modeling mediation by gestational age and birthweight in the effect of hemoglobin on neonatal sepsis and therefore expect that these draws will be correlated.
+  * - :ref:`Delivery facility type probabilities <facility_choice_choosing_bemonc_cemonc_section>`
+    - 100
+    - Copy 5 times so that draw 1, 101, 201, 301, and 401 all have the same value, etc.
+    - 
+  
 
 .. note::
 
@@ -1598,6 +1603,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` cause models
     - Baseline
     - ``model22.0``
+    - Default
+    - Default
+    - Default
+  * - 23.0
+    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`
+    - Baseline 
+    - ``model23.0``
     - Default
     - Default
     - Default
@@ -2205,7 +2217,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Confirm expected rates of cause-specifc and overall maternal disorders causes
     - 
     - 
-
+  * - 23.0
+    - * Confirm that the proportion of in-facility deliveries in CEmONC and BEmONC facilities matches the location-specific estimates from the HS team.
+    -
+    -
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
