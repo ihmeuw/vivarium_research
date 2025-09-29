@@ -83,32 +83,6 @@ The country-specific estimates are available at ``/snfs1/Project/simulation_scie
 *of ANC attendees* who are covered by oral iron supplementation.
 
 A summary of relevant baseline coverage parameters is included below:
-<<<<<<< HEAD
-
-.. list-table:: Oral iron baseline coverage parameters
-  :header-rows: 1
-
-  * - Parameter
-    - Definition
-    - Value
-    - Application
-    - Note
-  * - baseline_ifa_at_anc
-    - Proportion of ANC attendees who are covered by IFA at baseline
-    - ``/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/anc_iron_prop_st-gpr_results_aggregates_scaled2025-05-30.csv``
-    - Used to assign baseline IFA coverage among simulants who attend an ANC visit
-    - Values stored for all GBD locations. Use data specific to year 2023
-  * - ANC1
-    - Proportion of all pregnancies that attend at least one ANC visit
-    - GBD covariate ID 7: :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=7)` 
-    - Used in calculation of baseline_ifa_overall
-    - 
-  * - baseline_ifa_overall
-    - Proportion of all pregnancies that are covered by IFA at baseline
-    - baseline_ifa_at_anc * ANC1
-    - Used for baseline calibration of outcomes affected by IFA
-    - 
-=======
 
 .. list-table:: Oral iron baseline coverage parameters
   :header-rows: 1
