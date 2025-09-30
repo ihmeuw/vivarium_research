@@ -74,7 +74,7 @@ Vivarium Modeling Strategy
 
 Note that disease model will take timestep before testing model, so simulants can be tested on incidence to new stage.
 
-Baseline testing - CSF and PET
+Existing testing - CSF and PET
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 CSF and PET are existing biomarker tests which can identify cases of Alzheimer's disease.

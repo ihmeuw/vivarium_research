@@ -320,7 +320,7 @@ scenario, and input draw.
   * - BBBM test counts
     - * Diagnosis provided
     -
-  * - Baseline (CSF/PET) test-eligibile simulants
+  * - Existing (CSF/PET) test-eligibile simulants
     - 
     - Number of simulants who are eligible for existing (CSF/PET) testing, based on the :ref:`PET/CSF eligibility requirements <petcsf_requirements>` (list in step 1).
       Will be used to check that eligible simulants * test rate = test count, for each location-specific test rate.
@@ -652,7 +652,7 @@ scenario, and input draw.
     - * Only eligible simulants are tested based on :ref:`PET/CSF <petcsf_requirements>` and :ref:`BBBM <bbbm_requirements>` testing requirements.
       * Location-specific CSF vs PET testing rates (CSF tests / PET tests = CSF rate / PET rate)
       * 90% sensitivity rate for BBBM tests (meaning 90% of simulants test positive, since they all have preclinical AD)
-      * Eligible simulants * test rate = test count, for each test type (baseline, BBBM) and location- or year-specific rate
+      * Eligible simulants * test rate = test count, for each test type (existing, BBBM) and location- or year-specific rate
       * CSF/PET tests initialized properly - no testing spike for first time step
     - 
     -
