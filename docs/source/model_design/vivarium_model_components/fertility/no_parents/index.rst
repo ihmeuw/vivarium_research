@@ -82,7 +82,7 @@ which will be useful in this discussion:
 
 Note that we differentiate model-scale populations as either "initialized" or "model-implied" 
 depending on whether they are restricted or not. 
-"Initialized" reflects that the restiction defines the population that we create simulants for.
+"Initialized" reflects that the restriction defines the population that we create simulants for.
 "Model-implied" means that the lack of restriction includes people who exist in the context of the model but 
 are not simulated. For example, even if we are only simulating children under 5, people of other ages 
 are still implied to exist, otherwise there would be no one to give birth to new simulants!
