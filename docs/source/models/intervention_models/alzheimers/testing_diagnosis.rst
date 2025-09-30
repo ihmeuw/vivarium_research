@@ -94,7 +94,7 @@ given by [Mattke-et-al-2024-Sweden-Capacity]_. The cohorts for these studies are
 For Japan, Israel, Taiwan and Brazil, because we have not yet found CSF and PET testing rates for these locations,
 we use the total CSF and PET testing rates across all countries from [Roth-et-al-2023-Diagnostic-Pathways]_. 
 
-After choosing these mean values, we subract 50% for a lower confidence bound and add 50% for an upper confidence bound to reflect substantial uncertainty (to be used in artifact draws).
+After choosing these mean values, we subract 50% for a lower confidence bound and add 50% for an upper confidence bound to reflect substantial uncertainty (to be used in parameter uncertainty draws).
 
 Note that the three sources for these test rates have slightly different cohorts and therefore test rate denominators.
 These test rates will be applied to simulants with MCI or AD dementia.
