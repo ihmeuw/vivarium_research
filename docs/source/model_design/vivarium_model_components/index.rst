@@ -41,7 +41,7 @@ them in our simulations.
    impairments/index
    interventions/index
    risk_factors/*
-   fertility/index
+   fertility/*
 
 To document a new component or an entirely new simulation, you should
 start with one of the following templates (if applicable), referring to
