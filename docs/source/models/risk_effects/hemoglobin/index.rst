@@ -204,11 +204,9 @@ Use the custom-calculated PAF values such that the maternal disorder incidence r
 
 .. todo::
 
-  Calculate custom PAFs for maternal disorders and link to relevant files when ready.
+  Calculate custom PAFs for maternal disorders and link to relevant files when ready. The hemoglobin team shared a link to their `custom PAF codes <https://stash.ihme.washington.edu/projects/MNCH/repos/paf_custom/browse>`_
 
-  Hemoglobin RRs have 250 draws, while hemoglobin exposure has only 100 draws. Like we have already done for hemoglobin exposure, we'll use only the first 100 draws for hemoglobin relative risks and copy them 5 times to get a total of 500 draws.
-  The hemoglobin team shared a link to their `custom PAF codes <https://stash.ihme.washington.edu/projects/MNCH/repos/paf_custom/browse>`_.
-
+  Also, document details of how to handle the fact that hemoglobin RRs are only available for 250 draws (we will need to confirm that the artifact matches what we want here!)
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -248,15 +246,9 @@ The effect estimates of hemoglobin on neonatal sepsis mortality as we receive th
 Effect derivation
 ^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+Generally, in order to derive the direct (mediation-adjusted) effects of hemoglobin on neonatal sepsis for use in our simulation, we will use the following steps for each hemoglobin exposure level as well as each location/sex/draw pair. The code that performs these steps `is hosted here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/hgb_nn_sepsis_effect_generation.py>`__, with a `notebook that steps through the functions found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/function_tester.ipynb>`__.
 
-  Revisit this section once we discuss who/where we should perform the derivation
-
-  Investigate and document logical pairings of draws between hemoglobin and LBWSG relative risk values
-
-Generally, in order to derive the direct (mediation-adjusted) effects of hemoglobin on neonatal sepsis for use in our simulation, we will use the following steps for each hemoglobin exposure level as well as each location/sex/draw pair, `as has been done for a single pair in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/hemoglobin_mediation.ipynb>`_:
-
-1. Load the estimates of the total effect of hemoglobin on neonatal sepsis (:math:`RR_\text{R1→O,total}`) as obtained from the hemoglobin team
+1. Load the estimates of the total effect of hemoglobin on neonatal sepsis (:math:`RR_\text{R1→O,total}`) as obtained from the hemoglobin team. There are 250 draws available, so we duplicate them so that draw 0 has the same values as draw 250, etc.
 2. Solve for the indirect (mediated) effect of hemoglobin on neonatal sepsis (:math:`RR_\text{R1→R2→O}`). This will be done in multiple sub-steps:
 
   a. Calculate the effect between hemoglobin and (separately) birth weight and gestational age at birth exposures. This will be done in a manner similar to the `GBD custom calculation for the PAF of a risk on the outcome as mediated through LBWSG <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/custom_pafs.html#mortality-paf-calculation-for-subcauses-of-the-aggregate-lbwsga-outcome>`_ where we optimize for the delta value that results in the relative effect of hemoglobin on dichotomous low birth weight (LBW) and preterm birth (PTB) outcomes as estimated by the hemoglobin team. Note that these estimates are also utilized in the :ref:`derivation of the effects of IV iron on GA and BW outcomes <intervention_iv_iron_antenatal_mncnh>`.
@@ -264,6 +256,10 @@ Generally, in order to derive the direct (mediation-adjusted) effects of hemoglo
   b. Calculate :math:`RR_\text{R1→R2→O}` as the mean quotient of LBWSG relative risk on neonatal sepsis following application of the hemoglobin effects on birth weight and short gestation relative to the baseline value of LBWSG relative risk on neonatal sepsis. This will be done utilizing the Vivarium Interactive Context.
 
 3. Calculate the direct effect (:math:`RR_\text{R1→O,direct}`) as :math:`RR_\text{R1→O,total} / RR_\text{R1→R2→O}` using the equation :math:`RR_\text{R1→O,total} = RR_\text{R1→O,direct} \times RR_\text{R1→R2→O}`.
+
+`Effects can be found in .csv files here <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/direct_sepsis_effects>`_. Each csv file contains data specific to a given draw and each file is stratified by location, sex, and hemoglobin "exposure" in grams per liter.
+
+Data was only generated for the specific draws used in the MNCNH portfolio simulation. In generating the artifact, values for draws not used in the MNCNH portfolio simulation should ideally be filled with missing values or some illogical number like infinity so that we will notice an error if we attempt to run for a draw that does not contain valid data.
 
 Effect application
 ^^^^^^^^^^^^^^^^^^^
@@ -295,7 +291,7 @@ Where,
     - Note that the PAF is calculated according to direct (not total) effects of hemoglobin on neonatal sepsis. We utilize this PAF rather than a joint PAF with the effect of LBWSG since we are not modeling correlation between hemoglobin and LBWSG in the MNCNH portfolio simulation.
   * - :math:`\text{RR}_\text{hemoglobin}_i`
     - Relative risk value for the direct effect of hemoglobin on neonatal sepsis, specific to that individual simulated dyad's hemoglobin exposure level at birth
-    - Values derived as detailed in the `Effect derivation`_ section
+    - Defined in the `Effect derivation`_ section
     - 
   * - mean_rr
     - Population mean relative risk value (for the direct effect of hemoglobin on neonatal sepsis)
@@ -304,7 +300,7 @@ Where,
 
 .. todo::
   
-  Revisit "mean_rr" section once we discuss who/where should generate these types of values
+  Revisit "mean_rr" section once we discuss who/where should generate these types of values. Note that is is expected that the PAF for this outcome will be calculated as part of the custom hemoglobin PAF calculation for maternal disorders.
 
 Verification and validation criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

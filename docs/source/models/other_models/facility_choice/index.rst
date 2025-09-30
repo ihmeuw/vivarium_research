@@ -11,9 +11,28 @@ Delivery Facility Choice Model
 Background
 ----------
 
+The care that a birthing person receives during labor and delivery
+depends on where the delivery took place, as not all facilities have the
+same access to resources and personnel. Healthcare providers trained in 
+emergency obstetric and newborn care (EmONC) are crucial for reducing 
+maternal and neonatal deaths, especially in high-burden settings. 
+
+Seven essential obstetric services, known as "signal functions," have been 
+designated as fundamental to basic emergency obstetric and newborn care (BEmONC): 
+parenteral antibiotic administration; parenteral anticonvulsant administration; 
+parenteral uterotonic administration; manual removal of retained products 
+(manual vacuum aspiration); assisted vaginal delivery; manual placental 
+removal; and newborn resuscitation.[UNICEF_2009]_ Comprehensive emergency 
+obstetric and newborn care (CEmONC) encompasses all BEmONC services plus 
+surgical capability (e.g., for c-sections) and blood transfusion capacity. 
+These critical services determine a health facility's capability to manage 
+obstetric and newborn emergencies.[UNICEF_2009]_ Due to data constraints 
+and for simplicity, in our model we assume that all hospitals are CEmONC
+facilities and all other delivery facilities (not including home births) 
+are BEmONC facilities.
+
 To capture the complex relationship between choice of delivery facility
-(home birth vs a facility with basic emergency obstetric and neonatal
-care [BEmONC] vs a facility with comprehensive care [CEmONC]), the
+(home birth vs a BEmONC facility vs a CEmONC facility), the
 belief about gestational age (believed pre-term vs believed full term),
 and the related factors of antenatal care (ANC), and low birth weight
 and short gestation (LBWSG) risk exposure, we will include two novel
@@ -575,67 +594,55 @@ Portfolio research repository.
   status, because of the correlations of :math:`u_\text{IFD}` with
   :math:`u_\text{ANC}` and :math:`u_\text{cat}`.
 
-For reference when validating the model, the in-facility delivery
-proportions from GBD 2021 (covariate ID 51, "In-Facility Delivery
-(proportion)") are listed below. The observed overall IFD proportions in
-the simulation should match these values, but these probabilities will
-not be used directly in the simulation (they were used as one of the
-inputs in calibrating the model to find the causal probabilities above).
-
-.. list-table:: Proportion of at-home vs. in-facility deliveries
-  :header-rows: 1
-  :widths: 20 10 10 10
-
-  * - IFD status
-    - Ethiopia
-    - Nigeria
-    - Pakistan
-  * - at-home
-    - 0.507432
-    - 0.479903
-    - 0.228234
-  * - in-facility
-    - 0.492568
-    - 0.520097
-    - 0.771766
-
 .. _facility_choice_choosing_bemonc_cemonc_section:
 
 Choosing BEmONC vs. CEmONC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Among simulants whose IFD status is "in-facility," choose BEmONC vs.
-CEmONC according to the following probabilities, independently of other
-choices in the model:
+For simulants whose IFD status is "in-facility," we assign CEmONC
+facility delivery using location-specific probabilities provided by the Health Systems 
+team. These estimates represent the proportion of in-facility deliveries 
+occurring in hospitals, which we are using as a proxy for CEmONC facilities.
+Since all in-facility deliveries occur in either BEmONC or CEmONC facilities, 
+the probability of delivering in a BEmONC facility equals the complement of 
+the CEmONC probability (i.e., 1 - P(CEmONC)). The decision of whether a simulant 
+who gives birth in-facility delivers in a BEmONC or CEmONC facility should be 
+independent from other choices in the model.
 
-.. list-table:: Conditional probabilities of BEmONC and CEmONC given in-facility delivery
-  :header-rows: 1
-  :widths: 20 10 10 10
+We have copied the HS team estimates to our J drive as-is.
+Before use in the simulation, we subset to our modeled locations and the latest year (2024)
+and retain only the draw columns.
 
-  * - Conditional probability
-    - Ethiopia
-    - Nigeria
-    - Pakistan
-  * - :math:`\text{Pr}[\text{BEmONC}\mid \text{in-facility}]`
-    - 0.160883
-    - 0.004423
-    - 0.340528
-  * - :math:`\text{Pr}[\text{CEmONC}\mid \text{in-facility}]`
-    - 1 - 0.160883
-    - 1 - 0.004423
-    - 1 - 0.340528
+.. code::
 
-.. todo::
+  import pandas as pd
+  hosp_any = pd.read_csv('/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/hosp_any_st-gpr_results_weighted_aggregates_2025-06-06.csv')
+  location_ids = [165,179,214] # Pakistan, Ethiopia, Nigeria (modeled locations in the MNCNH portfolio simulation)
+    # improvement: include some function to get location IDs for the locations used in the simulation
+    # location_ids = get_location_ids(metadata.LOCATIONS) 
 
-  Update the above probabilities once we get better data from Annie's
-  team. The current values (except for Pakistan, which is based on
-  microdata from BMGF) are based on an imprecise analysis of DHS data
-  and likely underestimate the proportion of BEmONC facilities.
+  hosp_ifd_proportion = hosp_any.loc[
+    (hosp_any.location_id.isin(location_ids)) &
+    (hosp_any.year_id == 2024) # Use most recent year available
+    ].drop(columns=['mean', 'lower', 'upper'])
+
+This data is specific to a given location ID and has 100 draws. To
+add the required 500 draws to the artifact for the MNCNH simulation, 
+duplicate the data five times such that draw 0 has the same value as 
+draw 100, 200, 300, 400, etc.
 
 Once BEmONC or CEmONC has been chosen for all in-facility deliveries,
 use this choice in conjunction with the IFD status to **assign one of
 the three values "home", "BEmONC", or "CEmONC" as the final birth
 facility (F) of each simulant.**
+
+.. note::
+
+  Before switching to using the HS team data, we used microdata-based
+  estimates of the proportion of in-facility deliveries occurring in
+  CEmONC facilities in Pakistan from BMGF. These estimates are not 
+  alarmingly different from the HS team estimates: 34% from the BMGF
+  data vs. ~27% from the HS team data.
 
 .. note::
 
@@ -674,6 +681,46 @@ facility (F) of each simulant.**
 
   TODO: update to be consistent with BEMONC/CEMONC terminology?
 
+.. _facility_setting_rates:
+
+Overall delivery setting rates
+-------------------------------
+
+While these values will not be used as direct inputs in assigning a 
+delivery setting to simulants in the simulation, the population-level
+delivery setting rates will still be relevant in calculating PAFs for
+interventions that vary by delivery setting as well as for verification
+and validation. Therefore, the following parameters should be included
+in the artifact:
+
+.. list-table:: Delivery setting rate parameters to be included in the artifact
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Use
+  * - :code:`bemonc_facility_fraction`
+    - Proportion of births that occur in facility settings (inclusive of both BEmONC and CEmONC facilities) that occur in BEmONC facilities
+    - Defined in the `Choosing BEmONC vs. CEmONC`_ section
+    - Directly used in assigning a delivery facility in the facility choice model
+  * - :code:`in_facility_delivery_proportion`
+    - Proportion of all births that occur in facility settings (including both BEmONC and CEmONC)
+    - mean_value of GBD covariate 51 (do NOT include any parameter uncertainty in this parameter as only the mean_value was used as an input to the delivery facility model calibration)
+    - Used in the calculation of the following parameters
+  * - :code:`p_home`
+    - Proportion of all births that occur at home
+    - :code:`1 - in_facility_delivery_proportion`
+    - Used in calculating total population intervention coverage as a weighted average across delivery settings for intervention with coverage that varies by delivery facility at baseline and for V&V
+  * - :code:`p_bemonc`
+    - Proportion of all births that occur in BEmONC facilities
+    - :code:`in_facility_delivery_proportion * bemonc_facility_fraction`
+    - Used in calculating total population intervention coverage as a weighted average across delivery settings for intervention with coverage that varies by delivery facility at baseline and for V&V
+  * - :code:`p_cemonc`
+    - Proportion of all births that occur in CEmONC facilities
+    - :code:`in_facility_delivery_proportion * (1 - bemonc_facility_fraction)`
+    - Used in calculating total population intervention coverage as a weighted average across delivery settings for intervention with coverage that varies by delivery facility at baseline and for V&V
+
 Challenge of calibrating the model
 ----------------------------------
 
@@ -705,3 +752,10 @@ Range of propensity and probabilities that are consistent with existing data
 An important result of this optimization was to determine that the system is underdetermined.  With the existing data we have available, there are a range of consistent values for the propensity and probability parameters.  This section explores the tradeoffs between the parameters, to guide us in setting appropriate values.
 
 It might be easier to think about "probability gaps", meaning the difference between the conditional probabilities conditioned on believed full term and believed preterm than to think about the absolute magnitude of these probabilities.
+
+References
+----------
+
+..[UNICEF_2009]:
+
+  UNICEF. (2009). Monitoring emergency obstetric care: a handbook. https://www.who.int/publications/i/item/9789241547734

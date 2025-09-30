@@ -305,11 +305,15 @@ these are related to V&V. For more general information and best practices on V&V
     - Examples: 
 
       - `Finding common random number error <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/b1ca9e95f40942a92a9c8ed544d8adef6dc68695/validation/child/interactive_simulations/20221003%20Common%20random%20numbers%20investigation.ipynb>`_. 
-      - The `propensity drift notebook above <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Old_VV_unresolved/Interactive_Sim_Tests_06.18.2023_testing_propensity.ipynb>`_ was also an effort at debugging using the interactive sim. 
+      - The `propensity drift notebook above <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/6108f8076e4cb9d79991be618b660c00c887515a/Old_VV_unresolved/Interactive_Sim_Tests_06.18.2023_testing_propensity.ipynb>`_ was also an effort at debugging using the interactive sim.
+      - `This notebook debugging neonatal mortality <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/4409af4858c071350f04f3fa30949ae86dae7cc3/verification_and_validation/model_13.3_interactive_simulation_neonatal_mortality.ipynb>`__ steps through the process of determining neonatal mortality risks to determine exactly where
+        miscalibrations are introduced.
+        Also used a bigger population size (for a single location/draw) than our actual V&V runs to reduce stochastic uncertainty.
     - Concept Models:
 
       - :ref:`IV iron model<2019_concept_model_vivarium_iv_iron>`
       - :ref:`CVD model<us_cvd_concept_model>`
+      - :ref:`MNCNH portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`
   * - Primary Output Graphs 
     - Creating visualizations when individual data is needed - such as simulant interactions with healthcare or continuous risk factor spreads over time. 
     - Examples: 

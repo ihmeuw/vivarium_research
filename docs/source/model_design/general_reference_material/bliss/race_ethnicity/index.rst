@@ -32,6 +32,9 @@
 Inclusive Health Metrics: Race and Ethnicity
 ============================================
 
+.. sectnum::
+  :depth: 3
+
 .. contents::
    :depth: 2
    :local:
@@ -72,7 +75,8 @@ Guiding principles
 
 Our guiding principles for this document can be summarized in three points: 
 
-**1. This work is important**
+This work is important
+~~~~~~~~~~~~~~~~~~~~~~
 
 Inclusive research practices are important, and we want to begin by acknowledging the potential harm that using 
 reductive and racialized research practices can create. People from racially and ethnically diverse backgrounds experience 
@@ -92,8 +96,8 @@ and publications, we created this guide to explore the complexities of race and 
 change by presenting our studies with inclusive language and modeling practices we believe in. For all of these 
 reasons, we feel this guide is very important.
 
-
-**2. This work is evolving**
+This work is evolving
+~~~~~~~~~~~~~~~~~~~~~
 
 Research practices are constantly evolving, so there is rarely a single “right” choice and the accepted 
 choice may evolve over time. Therefore, this guide will be a living document that we will 
@@ -104,8 +108,8 @@ While we hope this can be up-to-date and comprehensive, no guide can anticipate 
 recognize every limitation, or be applicable to every research question. We aim to provide enough 
 information that users can understand the spirit of the guide and apply that to their unique needs.
 
-
-**3. This is work**
+This is work
+~~~~~~~~~~~~
 
 We acknowledge that there may be a cost associated with transitioning to more accurate and inclusive research practices. 
 Although this transition requires intentional effort, we highlight here that there are many benefits to incorporating 
@@ -554,8 +558,8 @@ in the phrase "Hispanic or Latino,"
 nor clarify the distinctions between race, ethnicity, and ancestry for survey respondents
 or data analysts.
 
-1.0 Research considerations
-++++++++++++++++++++++++++++
+Research considerations
++++++++++++++++++++++++
 
 Before beginning with your research, there are some crucial considerations to
 take as you read through our recommendations. Determining precisely how
@@ -597,8 +601,8 @@ is not only respectful and sensitive to the complexities of race and ethnicity
 but also adherent to relevant guidelines and meaningful to your intended
 audience.
 
-1.1 Research question
----------------------
+Research question
+-----------------
 
 When you’re designing a research question, it’s important to consider both if race,
 ethnicity, and/or ancestry are relevant, and, if so, what the causal pathways might be. Spending
@@ -768,19 +772,19 @@ racism in healthcare, or others as the primary focus of our study, rather than u
 race which can include all or none of these.
 
 
-1.2 Risk factors vs. risk markers
----------------------------------
+Risk factors vs. risk markers
+-----------------------------
 
 .. todo::
 
     In this section we'll discuss the question "Does/should my research look at race and ethnicity as risk factors or as risk markers?" and how a health
     metrics researcher would answer this question and use that answer to inform their research question.
 
-2.0 Methodology
-+++++++++++++++
+Methodology
++++++++++++
 
-2.1 Data sources
-----------------
+Data sources
+------------
 
 For self-reported data, the typical survey questions used
 (including those standardized by the US Federal government as described above)
@@ -909,9 +913,8 @@ would be placed in a single racial group - either "Black or African
 American" or "Asian" based on their other data. If this is
 feasible based on the data present, it is also a reasonable approach.
 
-
-3.0 Results
-+++++++++++
+Results
++++++++
 
 Communication of results
 ------------------------
@@ -987,7 +990,7 @@ Wherever it is, it should include most of the considerations described in earlie
 
 4. **Explicitly define race during \[study\] design, and specify the reason for its use in the study** [Boyd_2020]_. 
     
-    As is described in our earlier section, `1.1 Research question`_, you should review all relevant 
+    As is described in our earlier section, `Research question`_, you should review all relevant 
     social, environmental, and structural factors for which race may serve as a proxy measure when defining 
     race as it pertains to your research. "For the reader, these additional details enable careful interpretation 
     of study results and implications. But for authors, it engenders critical thinking about racial constructs that 
@@ -1006,8 +1009,8 @@ Wherever it is, it should include most of the considerations described in earlie
     - *Policy advocacy*: Research informed by CRT should not only aim to understand and document disparities but also to drive change. This involves advocating for policies that address the root causes of racial disparities in health, such as economic inequality, housing, education, and access to healthcare. Researchers can play a role in informing policy, engaging in public discourse, and supporting community-led initiatives.
     - *Reflective practice*:  Engage in ongoing reflection about your own positions, biases, and the power dynamics in your work. This includes being open to critique, actively seeking diverse perspectives, and being committed to anti-racist practices both personally and professionally.
   
-4.0 References
-++++++++++++++
+References
+++++++++++
 
 .. [AMA_2021]
     American Medical Assiociation. Advancing Health Equity: A Guide to Language, Narrative and Concepts. 2021. https://www.ama-assn.org/system/files/ama-aamc-equity-guide.pdf
