@@ -1,4 +1,4 @@
-.. _fertility_live_births:
+.. _fertility_no_parents:
 
 ..
   Section title decorators for this document:
@@ -28,9 +28,9 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-==============================================
-Fertility Component that uses Live Births data
-==============================================
+==========================================
+Simulating births without modeling parents
+==========================================
 
 .. contents::
    :local:
@@ -70,31 +70,31 @@ We will scale down the live births of the total GBD population by the same "mode
 While we always scale down total GBD population live births when **adding** simulants,
 the number of simulants we **initialize** may be less than the scaled down total GBD population due to 
 restrictions on variables such as age.
-For example, for a child nutrition simulation, we may only simulate children under 5.
+For example, for a child nutrition simulation, we may only initialize children under 5.
 
 Considering both model scale and population restrictions, we can define four different populations 
 which will be useful in this discussion:
 
   * Restricted GBD (full-scale)  
   * Unrestricted/total GBD (full-scale) 
-  * Restricted "simulated" (model-scale)
+  * Restricted "initialized" (model-scale)
   * Unrestricted/total "model-implied" (model-scale)
 
-Note that we differentiate model-scale populations as either "simulated" or "model-implied" 
+Note that we differentiate model-scale populations as either "initialized" or "model-implied" 
 depending on whether they are restricted or not. 
-"Simulated" reflects that the restiction defines the population that we create simulants for.
+"Initialized" reflects that the restiction defines the population that we create simulants for.
 "Model-implied" means that the lack of restriction includes people who exist in the context of the model but 
 are not simulated. For example, even if we are only simulating children under 5, people of other ages 
 are still implied to exist, otherwise there would be no one to give birth to new simulants!
 
-The model scale will be equal to the ratio between the restricted simulated 
+The model scale will be equal to the ratio between the restricted initialized 
 population and the restricted GBD population, as well as to the ratio between the 
 unrestricted model-implied population and the unrestricted GBD population. 
 
-For example, imagine that country A has a GBD population of one million ("unrestricted/total GBD population), 
+For example, imagine that country A has a GBD population of one million ("unrestricted/total" GBD population), 
 but only need to simulate children under 5 (age-restriction).
 Imagine there are 100K such children living in A ("restricted GBD population"), 
-and we plan to initialize 20K children in our model ("restricted simulated population"). 
+and we plan to initialize 20K children in our model ("restricted initialized population"). 
 
 In this example, our model scale is :math:`\frac{20,000}{100,000} = \frac{1}{5}`. 
 (And our "unrestricted/total model-implied population" must be 
@@ -107,8 +107,8 @@ To represent model scale in general we can define the below equation:
 
 :math:`\text{model scale} = \frac{\text{Initialized simulated population size}}{\sum_{a=\text{age start}}^{\text{age end}} \text{GBD total population at age }a}`
 
-"Initialized simulated population size" is the age-restricted, simulated population size -- the number of simulants we will initialize. 
-The summation limits indicate the age restrictions of the GBD population represented by our initialized simulants - e.g. under 5. 
+"Initialized simulated population size" is the age-restricted, initialized population size -- the number of simulants we will create. 
+The summation limits indicate the age restrictions (at initialization) of the GBD population represented by our initialized simulants - e.g. under 5. 
 This can be generalized to models of populations restricted for other variables, such as sex. 
 
 .. note::
@@ -116,7 +116,7 @@ This can be generalized to models of populations restricted for other variables,
 
   Also note that with no age restrictions, the simulated population size in the numerator 
   will be the same as the model-implied population size, 
-  and the integral value will simply be the total GBD population. 
+  and the sum will simply be the total GBD population. 
 
 We multiply our model scale by the number of live births per year in the total GBD population and the length of each simulated time step 
 to get the total simulants to add per timestep, as shown in the below table.
@@ -127,7 +127,7 @@ to get the total simulants to add per timestep, as shown in the below table.
   * - Parameter
     - Value
   * - simulants_to_add_per_timestep
-    - :math:`\frac{\text{initial simulated population size}}{\int_{a=\text{age start}}^{\text{age end}} \text{GBD total population}(a) \, da} \times \text{Live births per year} \times \text{time step in years}`
+    - :math:`\frac{\text{initial simulated population size}}{\sum_{a=\text{age start}}^{\text{age end}} \text{GBD total population at age }a} \times \text{Live births per year} \times \text{time step in years}`
 
 .. list-table:: Data values
   :header-rows: 1
