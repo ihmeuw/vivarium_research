@@ -60,18 +60,14 @@ necessary population size for the :ref:`CSU Alzheiemer's simulation
 <2025_concept_model_vivarium_alzheimers>`. The model document is split
 into two parts: 1) initializing the population, and 2) adding new
 simulants during the simulated timeframe. We will also describe two
-different versions of the population model, corresponding to
-progressive model version of the CSU Alzheiemer's simulation:
+different versions of the population model, corresponding to progressive
+:ref:`model versions <2025_alzheimers_model_runs_table>` of the CSU
+Alzheiemer's simulation:
 
 #. **Models 2 and 3:** Modeling simulants with Alzheimer's disease (AD)
    and other dementias as defined by GBD
 #. **Model 4 and above:** Modeling simulants with presymptomatic AD,
    MCI, or AD dementia
-
-Since this is the model that
-includes details on how to use forecasts of population size, we have also
-included information on how to use forecasts of all-cause mortality rate
-(this is not really part of the Alzheimer's Population Model however).
 
 Initializing the Population
 +++++++++++++++++++++++++++
@@ -689,8 +685,9 @@ Implementation and data tables
 Data Tables
 -----------
 
-All data values are defined for a specified year, location, age group,
-and sex.
+The following table shows the variables that come directly from our data
+sources. Other quantities needed for the simulation are defined above in
+terms of these values.
 
 .. list-table:: Data Sources
   :widths: 20 30 25 25
@@ -700,29 +697,58 @@ and sex.
     - Definition
     - Source or value
     - Notes
-  * - population
-    - Draw-level age-specific population forecast
-    - GBD 2021 Forecasting Capstone
-    - in `population_agg.nc` file
-  * - all-cause mortality rate
-    - Draw-level age-specific mortality rates saved by cause, for cause==all
-    - GBD 2021 Forecasting Capstone
-    - in `_all.nc` file
+  * - :math:`X_{t_0}`
+    - The initial size of our simulated population
+    - "Initial population size per draw" in the |simulation parameter
+      specifications table in the concept model|
+    - Includes all demographic groups
+  * - :math:`Y^\text{real}_{g,t}`
+    - Total population of demographic group :math:`g` at time :math:`t`
+    - population_forecast in |AD cause model data sources table|
+    - From GBD 2021 Forecasting Capstone. Available for years 2021-2050.
+  * - :math:`p_{g,t}`
+    - The combined prevalence of all AD stages in demographic
+      group :math:`g` at time :math:`t`
+    - :math:`p_\text{(All AD states)}` in the |Attention box on the AD
+      cause model page|
+    - Calculated from the GBD 2023 dementia envelope using the
+      dementia subtype proportions provided by the dementia modelers.
+      We will only need the value for the single year :math:`t_0`.
+  * - :math:`i^\text{AD}_{g,t}`
+    - Total-population incidence rate of AD dementia in demographic
+      group :math:`g` at time :math:`t`
+    - incidence_AD in |AD cause model data sources table|
+    - Calculated from the GBD 2023 dementia envelope using the
+      dementia subtype proportions provided by the dementia modelers.
+      Assumed to be independent of :math:`t`.
+  * - :math:`m_{g,t}`
+    - Background mortality hazard in demographic group :math:`g` at time
+      :math:`t`
+    - m_BBBM or m_MCI in the |AD cause model data sources table|
+    - Equal to all-cause mortality rate minus cause-specific mortality
+      rate for AD-dementia. Uses all-cause mortality rate forecasts for
+      2021--2050 from GBD 2021 Forecasting Capstone.
+  * - :math:`\Delta_\text{BBBM}`, :math:`\Delta_\text{MCI}`
+    - Average duration of the BBBM-AD state or MCI-AD state,
+      respectively
+    - :math:`\Delta_\text{BBBM}` and :math:`\Delta_\text{MCI}` in the |AD
+      cause model data sources table|
+    -
+  * - :math:`w`
+    - The width of a standard GBD age bin
+    - 5 years
+    - We are not modeling the youngest age goups, which have smaller age
+      bins, and we are capping the 95+ age bin at 100, making it a
+      standard 5-year age bin
 
-All-cause Mortality Forecasts
-+++++++++++++++++++++++++++++
+.. |simulation parameter specifications table in the concept model| replace::
+  :ref:`simulation parameter specifications table in the concept model
+  <2025_concept_model_vivarium_alzheimers_sim_parameter_specs>`
 
-Since this is the model that
-includes details on how to use forecasts of population size, we have also
-included information on how to use forecasts of all-cause mortality rate.
-This is not really part of the Alzheimer's Population Model, however, and
-perhaps a better place to include this information will emerge as we continue
-to work on this model.
+.. |AD cause model data sources table| replace::
+  :ref:`AD cause model data sources table
+  <2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`
 
-By including draw-level, age-specific mortality rates forecasted for future years,
-the competing mortality from causes other than Alzheimer's Disease will change over time
-as predicted by our IHME colleagues.
-
-The :ref:`all_cause_mortality` docs have more details on how the ACMR forecasts are used
-when they are included in the artifact.
-
+.. |Attention box on the AD cause model page| replace::
+  :ref:`Attention box on the AD cause model page
+  <alzheimers_cause_state_data_including_susceptible_note>`
