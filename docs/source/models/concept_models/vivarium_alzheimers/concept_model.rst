@@ -327,7 +327,7 @@ scenario, and input draw.
   * - BBBM test-eligibile simulants
     - 
     - Number of simulants who are eligible for BBBM testing, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
-      Will be used to check that eligible simulants * test rate = test count, for each year-specific test rate.
+      Will be used to check that eligible simulants * test rate = test count, for each time-specific test rate.
 
 5.0 Model Runs and Verification & Validation
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -652,7 +652,7 @@ scenario, and input draw.
     - * Only eligible simulants are tested based on :ref:`PET/CSF <petcsf_requirements>` and :ref:`BBBM <bbbm_requirements>` testing requirements.
       * Location-specific CSF vs PET testing rates (CSF tests / PET tests = CSF rate / PET rate)
       * 90% sensitivity rate for BBBM tests (meaning 90% of simulants test positive, since they all have preclinical AD)
-      * Eligible simulants * test rate = test count, for each test type (existing, BBBM) and location- or year-specific rate
+      * Eligible simulants * test rate = test count, for each test type (existing, BBBM) and location- or time-specific rate
       * CSF/PET tests initialized properly - no testing spike for first time step
     - 
     -
