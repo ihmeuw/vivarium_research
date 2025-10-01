@@ -185,6 +185,10 @@ Effect size application
 
 For simulants who receive the IV iron intervention, the IV iron effect sizes for gestational age and birth weight specific to the simulant's "true" hemoglobin exposure at the time of anemia screening should be applied additively to the simulant's child's gestational age at birth and birth weight continuous exposures as initially sampled from the :ref:`GBD LBWSG exposure distribution <2019_risk_exposure_lbwsg>`.
 
+`Effects can be found in .csv files here <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/iv_iron_lbwsg_shifts>`_. Each csv file contains data specific to a given draw and each file is stratified by outcome (gestational age, birth weight), location, sex, and hemoglobin "exposure" in grams per liter.
+
+Data was only generated for the specific draws used in the MNCNH portfolio simulation. In generating the artifact, values for draws not used in the MNCNH portfolio simulation should ideally be filled with missing values or some illogical number like infinity so that we will notice an error if we attempt to run for a draw that does not contain valid data.
+
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -241,6 +245,8 @@ And the probabilities of experiencing the remaining birth outcomes are as follow
   \text{live birth probability}_\text{IV iron, x} = 1 - \text{stillbirth probability}_\text{IV iron, x} - \text{other probability}_\text{overall}
 
 Where, :math:`\text{stillbirth probability}_{overall}`, :math:`\text{live birth probability}_{overall}`, and :math:`\text{other probability}_{overall}` are defined on the :ref:`MNCNH pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>` and :math:`RR_\text{IV iron, x}` is the IV iron relative risk of stillbirth for a given hemoglobin exposure :math:`\text{x}`.
+
+`Effects can be found in .csv file here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/iv_iron_stillbirth_rrs.csv>`_. This csv file contains values for 250 draws stratified by location and hemoglobin "exposure" in grams per liter. To obtain values for the 500 draws to be added to the MNCNH simulation artifact, duplicate the values twice such that draw 0 has the same values as draw 250, etc.
 
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
