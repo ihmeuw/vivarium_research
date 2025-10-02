@@ -849,10 +849,10 @@ Postpartum component
 Specific observer outputs and their stratifications may vary by model run as needs change. Modifications to default will be noted in the model run requests tables. Note that the observers and outputs listed here are different from the module outputs above. The outputs of the module are intended to be intermediate values that may or may not be included as observed simulated outputs.
 
 Default stratifications to all observers should include scenario and input draw.
- 
-.. todo:: 
 
-  Confirm whether we want to continue stratifying by random seed? Currently all of the results dataframes are.
+.. note::
+  
+  Observers cannot support more than 15 stratifications. Design of simulation observers should take this into account.
 
 .. list-table:: Simulation observers
   :header-rows: 1
@@ -898,15 +898,10 @@ Default stratifications to all observers should include scenario and input draw.
   * - 6. Probiotics eligible birth counts
     - * Delivery facility type
     - Included. Confirm this represents "eligible birth counts"?
-  * - 7. Maternal population counts
+  * - 7a. Maternal population counts: hemoglobin-related parameters
     - * Maternal age group
       * Pregnancy outcome
-      * ANC first trimester attendance (dichotomous)
-      * ANC later pregnancy attendance (dichotomous)
       * ANC attendance (polychotomous)
-      * Ultrasound coverage
-      * Azithromycin coverage
-      * Misoprostol coverage
       * Hemoglobin screening coverage
       * Ferritin screening coverage
       * IFA coverage
@@ -915,11 +910,20 @@ Default stratifications to all observers should include scenario and input draw.
       * True hemoglobin exposure (dichotomous,  'low' if truly low hemoglobin and 'adequate' if truly adequate hemoglobin)
       * Test hemoglobin exposure (dichotomous, 'low' if tested low hemoglobin,'adequate' if tested adequate hemoglobin, N/A if not tested)
       * Ferritin status (dichotomous, 'low' if low ferritin, 'adequate' if adequate ferritin, N/A if not tested)
+      * Preterm status (dichotomous at 37 weeks)
+    - 
+  * - 7b. Maternal population counts: other parameters
+    - * Maternal age group
+      * Pregnancy outcome
+      * ANC attendance (polychotomous)
+      * Ultrasound coverage
       * Delivery facility
       * Preterm status (dichotomous at 37 weeks)
       * Believed preterm status (dichotomous at 37 weeks)
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
       * ACS coverage
+      * Azithromycin coverage
+      * Misoprostol coverage
     - 
   * - 8. Neonatal all-cause mortality risk
     - * Child sex
@@ -1592,6 +1596,7 @@ Default stratifications to all observers should include scenario and input draw.
     - N/A
   * - 18.2
     - Model 17.0 bugfixes, continued:
+
       * Updated artifact key for excess shift of IFA on birthweight
       * Update hemoglobin risk effects to use intervention-affected hemoglobin exposure rather than raw hemoglobin exposure
     - No run necessary, all V&V done in the interactive simulation
@@ -1599,6 +1604,13 @@ Default stratifications to all observers should include scenario and input draw.
     - N
     - N/A
     - N/A
+  * - 18.3
+    - Model 18.0 with updated observer requests to avoid >15 stratifications 
+    - Baseline, MMS scale-up, and anemia screening scale-up scenarios
+    - ``model18.3``
+    - Default
+    - Default
+    - Default (note that observer 7 has been broken up into 7a and 7b)
   * - 19.0
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
@@ -1628,7 +1640,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 23.0
-    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`
+    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
     - Baseline 
     - ``model23.0``
     - Default
