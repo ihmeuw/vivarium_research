@@ -1578,6 +1578,27 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default, note hemoglobin and ferritin screening coverage and results added as stratifying variables to maternal population observer
     - Default
+  * - 18.1
+    - Model 17.0 bugfixes:
+      * Update so that only those who attend ANC are eligible for IFA/MMS
+
+        * Include corresponding update in the baseline IFA calibration `laid out in this PR <https://github.com/ihmeuw/vivarium_research/pull/1803>`__
+
+      * Confirm that cat1/cat2 are defined consistently for IFA and MMS coverage and consider updating to covered/uncovered
+    - No run necessary, all V&V done in the interactive simulation
+    - N/A
+    - N/A
+    - N/A
+    - N/A
+  * - 18.2
+    - Model 17.0 bugfixes, continued:
+      * Updated artifact key for excess shift of IFA on birthweight
+      * Update hemoglobin risk effects to use intervention-affected hemoglobin exposure rather than raw hemoglobin exposure
+    - No run necessary, all V&V done in the interactive simulation
+    - N/A
+    - N
+    - N/A
+    - N/A
   * - 19.0
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
@@ -2178,8 +2199,14 @@ Default stratifications to all observers should include scenario and input draw.
         * Birth outcomes (MMS reduces rate of stillbirth, increases rate of live birth, no change to "partial term" outcomes)
 
       * Additional confirmation of effect of CPAP/ACS interventions with newly added preterm birth stratification to the births observer (as was done in the neonatal checks notebook for model 16.4)
-    - 
-    - 
+    - * There is IFA coverage among those who do not attend ANC
+      * Suspicious that cat1/cat2 for IFA/MMS coverage are not being defined consistently
+      * Effect of IFA on birthweight in the excess shift data key is low -- maybe it's reading in data from the effect on hemoglobin?
+      * Appears that the "raw" hemoglobin exposure is modifying the risk of hemoglobin affected outcomes rather than the intervention-affected hemoglobin exposure 
+      * Unable to verify effect of IFA and MMS on gestational age or birthweight, intervention effect on preterm birth in simulation results does not meet verification target
+      * Potential common random numbers issues between scenarios... individual differences between BW and GA exposures have a very large range and the mean is not the expected value
+      * Hemoglobin exposure does not update as expected between baseline and MMS scenarios at the individual level (some simulants who should have no change have increases and some have decreases, some who should have a chane have no change)
+    - `Model 17.0 V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/134>`__
   * - 18.0
     - * Confirm scenario-specific anemia screening coverage rates (verification with sim outputs)
       * Confirm only simulants who attend ANC are covered by hemoglobin screening (verification with sim outputs)
@@ -2240,6 +2267,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - Various V&V issues with oral iron intervention identified in model 17.0 V&V summary
+    - Various issues to be worked through
+    - Make updates specified in models 18.1 and 18.2 and re-evaluate
+    - 18.2, 18.3, TBD
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
     - Update to custom-calculated PAF and reassess
