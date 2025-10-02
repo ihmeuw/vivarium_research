@@ -1621,21 +1621,21 @@ Default stratifications to all observers should include scenario and input draw.
     - For this run only, 10,000,000 population size per draw
     - Default
     - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-  * - 21.0
+  * - 21.0 (can be moved to before GBD 2023 update/19.0 if needed)
     - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` cause models
     - Baseline
     - ``model21.0``
     - Default
     - Default
     - Default
-  * - 22.0
+  * - 22.0 (can be moved to before GBD 2023 update/19.0 if needed)
     - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
     - Baseline 
     - ``model22.0``
     - Default
     - Default
     - Default
-  * - 23.0
+  * - 23.0 (can be moved to before GBD 2023 update/19.0 if needed)
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
     - ``model23.0``
