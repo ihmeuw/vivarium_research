@@ -1046,6 +1046,9 @@ Default stratifications to all observers should include scenario and input draw.
     - N/A; All pregnant simulants observed through conclusion of relevant modeled outcomes. All neonatal simulants observed until 28 days (end of late neonatal age group)
     - Pregnant/birthing simulants do not age in this simulation
 
+.. todo::
+
+  Update the following table for the GBD 2023 update (model 19.0)
 
 .. list-table:: Summary of draw metadata by input parameter
   :header-rows: 1
@@ -1561,13 +1564,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
-  * - 16.6
-    - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-    - Baseline
-    - ``model16.6``
-    - For this run only, 10,000,000 population size per draw
-    - Default
-    - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
   * - 17.0
     - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
     - Baseline and MMS scale-up scenarios 
@@ -1612,37 +1608,55 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default (note that observer 7 has been broken up into 7a and 7b)
   * - 19.0
-    - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
-    - Baseline and IV iron scale-up scenarios
+    - GBD 2023 Update
+    - All
     - ``model19.0``
     - Default
-    - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
+    - Default
     - Default
   * - 20.0
-    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data on effect have yet to be calculated as of 8/22/25). Also, update `list of draws used in simulation in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1795>`__
-    - Baseline and IV iron scale-up scenarios
+    - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
+    - Baseline
     - ``model20.0``
+    - For this run only, 10,000,000 population size per draw
     - Default
-    - Default
-    - Default
-  * - 21.0*
-    - Hemoglobin effect on neonatal sepsis as defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (data for PAFs have yet to be calculated as of 9/26/25)
-    - Baseline and IV iron scale-up scenarios
+    - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
+  * - 21.0
+    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` cause models
+    - Baseline
     - ``model21.0``
     - Default
     - Default
     - Default
   * - 22.0
-    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` cause models
-    - Baseline
+    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
+    - Baseline 
     - ``model22.0``
     - Default
     - Default
     - Default
   * - 23.0
-    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
-    - Baseline 
+    - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
+    - Baseline and IV iron scale-up scenarios
     - ``model23.0``
+    - Default
+    - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
+    - Default
+  * - 24.0*
+    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data specific to GBD 2023 has yet to be generated)
+    - Baseline and IV iron scale-up scenarios
+    - ``model24.0``
+    - Default
+    - Default
+    - Default
+  * - 25.0*
+    - Updated hemoglobin effects as defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (Custom PAFs and neonatal sepsis effects have yet to be calculated for GBD 2023)
+
+      * Updated custom PAF values for maternal hemorrhage and maternal sepsis outcomes (paired with existing implementation of GBD RRs)
+      * New risk effect (using GBD RRs and custom PAFs) for depressive disorders
+      * New risk effect (using custom RRs and PAFs) for neonatal sepsis
+    - Baseline and IV iron scale-up scenarios
+    - ``model25.0``
     - Default
     - Default
     - Default
