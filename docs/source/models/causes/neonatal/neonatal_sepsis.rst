@@ -157,7 +157,7 @@ The formula is:
 
 where 
 :math:`\text{CSMRisk}` is the cause-specific mortality risk for sepsis,
-:math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`\int_{\text{BW}} \int_{\text{GA}} \text{RR}_{\text{BW},\text{GA}} \cdot Z = 1`.
+:math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}` (after intervention effects have been applied), and :math:`Z` is a normalizing constant selected so that :math:`\int_{\text{BW}} \int_{\text{GA}} \text{RR}_{\text{BW},\text{GA}} \cdot Z = 1`.
 
 .. note::
   the choice to use :math:`\text{RR}_{\text{BW},\text{GA}}` in this equation is essentially arbitrary, and it could be replaced by any other nonnegative "weight function" :math:`w(\text{BW},\text{GA})` as long it doesn't lead to a negative "other causes" mortality risk.  But with this choice, :math:`Z` is equal to the :math:`1-\text{PAF}` of LBWSG on all-cause mortality.
