@@ -246,6 +246,8 @@ in the :ref:`Alzheimer's population model
 in cause state X, as defined in the :ref:`data values and sources table below
 <2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`.
 
+.. _2021_cause_alzheimers_presymptomatic_mci_transition_data_table:
+
 .. list-table:: Transition Data
   :header-rows: 1
 
@@ -263,9 +265,10 @@ in cause state X, as defined in the :ref:`data values and sources table below
   * - i_MCI
     - BBBM-AD
     - MCI-AD
-    - :math:`h_\text{MCI}(t - T_\text{BBBM})`, where :math:`t` is the
-      current time in the simulation, and :math:`T_\text{BBBM}` is the
-      time the simulant entered the BBBM-AD state
+    - :math:`h_\text{MCI}(t - T_\text{BBBM}) * R_h`, where :math:`t` is the
+      current time in the simulation, :math:`T_\text{BBBM}` is the
+      time the simulant entered the BBBM-AD state, and :math:`R_h` is the 
+      :ref:`effect hazard ratio <alzheimers_intervention_treatment_data_table>`
   * - i_AD
     - MCI-AD
     - AD
