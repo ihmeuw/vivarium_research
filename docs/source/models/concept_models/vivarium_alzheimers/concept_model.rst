@@ -314,21 +314,16 @@ scenario, and input draw.
   * - Person-time in each Alzheimer's cause state
     -
     -
-  * - Baseline (CSF/PET) test counts
-    - * Eligiblity of person recieving test, based on the :ref:`PET/CSF eligibility requirements <petcsf_requirements>` (list in step 1).
-    -
+  * - Existing (CSF/PET) eligible person-time
+    - Test states (not tested, BBBM, CSF, PET)
+    - Observe eligible simulants and stratify by test states to get test counts
   * - BBBM test counts
-    - * Diagnosis provided
-      * Eligiblity of person recieving test, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
+    - Diagnosis provided
     -
-  * - Baseline (CSF/PET) test-eligibile simulants
+  * - BBBM test-eligibile person-time
     - 
-    - Number of simulants who are eligible for baseline (CSF/PET) testing, based on the :ref:`PET/CSF eligibility requirements <petcsf_requirements>` (list in step 1).
-      Will be used to check that eligible simulants * test rate = test count, for each location-specific test rate.
-  * - BBBM test-eligibile simulants
-    - 
-    - Number of simulants who are eligible for BBBM testing, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
-      Will be used to check that eligible simulants * test rate = test count, for each year-specific test rate.
+    - Person-time of simulants who are eligible for BBBM testing, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
+      Will be used to check that simulation test rates match time-specific test rates.
 
 5.0 Model Runs and Verification & Validation
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -652,8 +647,8 @@ scenario, and input draw.
   * - 6.0
     - * Only eligible simulants are tested based on :ref:`PET/CSF <petcsf_requirements>` and :ref:`BBBM <bbbm_requirements>` testing requirements.
       * Location-specific CSF vs PET testing rates (CSF tests / PET tests = CSF rate / PET rate)
-      * 90% diagnostic rate for BBBM tests
-      * Eligible simulants * test rate = test count, for each test type (baseline, BBBM) and location- or year-specific rate
+      * 90% sensitivity rate for BBBM tests (meaning 90% of simulants test positive, since they all have preclinical AD)
+      * Simulation test rate matches artifact test rate, for each test type (existing, BBBM) and location- or time-specific rate
       * CSF/PET tests initialized properly - no testing spike for first time step
     - 
     -

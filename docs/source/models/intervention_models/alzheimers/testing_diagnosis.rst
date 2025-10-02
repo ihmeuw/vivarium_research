@@ -62,10 +62,10 @@ as defined in :ref:`Reference Scenario and Alternative Scenario 1 <alz_scenarios
 Intervention Overview
 -----------------------
 
-Alzheimer's testing is classified into two groups - baseline (CSF and PET) testing, 
-and BBBM testing. Baseline testing already exists in present-day conditions, before the 
+Alzheimer's testing is classified into two groups - existing (CSF and PET) testing, 
+and BBBM testing. Existing testing already exists in present-day conditions, before the 
 hypothetical introduction of BBBM testing in :ref:`Alternative Scenario 1 <alz_scenarios>`.
-The introduction of BBBM testing will replace some number of the baseline tests in 
+The introduction of BBBM testing will replace some number of the existing tests in 
 Alternative Scenario 1, and will also be used to inform treatment in Alternative 
 Scenario 2. 
 
@@ -74,7 +74,7 @@ Vivarium Modeling Strategy
 
 Note that disease model will take timestep before testing model, so simulants can be tested on incidence to new stage.
 
-Baseline testing - CSF and PET
+Existing testing - CSF and PET
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 CSF and PET are existing biomarker tests which can identify cases of Alzheimer's disease.
@@ -94,7 +94,7 @@ given by [Mattke-et-al-2024-Sweden-Capacity]_. The cohorts for these studies are
 For Japan, Israel, Taiwan and Brazil, because we have not yet found CSF and PET testing rates for these locations,
 we use the total CSF and PET testing rates across all countries from [Roth-et-al-2023-Diagnostic-Pathways]_. 
 
-After choosing these mean values, we subract 50% for a lower confidence bound and add 50% for an upper confidence bound to reflect substantial uncertainty (to be used in artifact draws).
+After choosing these mean values, we subract 50% for a lower confidence bound and add 50% for an upper confidence bound to reflect substantial uncertainty (to be used in parameter uncertainty draws).
 
 Note that the three sources for these test rates have slightly different cohorts and therefore test rate denominators.
 These test rates will be applied to simulants with MCI or AD dementia.
@@ -194,7 +194,7 @@ BBBM testing is a hypothetical biomarker test which we will model in
 :ref:`Alternative Scenario 1 <alz_scenarios>`. It will replace some CSF/PET testing and 
 assign positive/negative diagnosis which will inform treatment in :ref:`Alternative Scenario 2 <alz_scenarios>`.
 
-Year-specific testing rates
+Time-specific testing rates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Testing rates do not vary by location, age or sex. 
 In 2020, 0% of eligible simulants are tested annually. This increases (instantly) to 10% at year 2030, 
@@ -204,7 +204,7 @@ and then maxes out at 60% in 2045.
 
 Implementation
 ^^^^^^^^^^^^^^
-The simulant's baseline testing propensity will also be used as their BBBM testing propensity.
+The simulant's existing testing propensity will also be used as their BBBM testing propensity.
 
 
 On timestep
@@ -215,13 +215,13 @@ On each timestep, use the following steps to assign BBBM tests:
 
 1. Assess eligibility based on the following requirements:
 
-  - Simulant is in pre-clinical stage
+  - Simulant is not in MCI or AD dementia state (only susceptible, or pre-clinical)
   - Simulant age is >=60 and <80
   - Simulant has not received a BBBM test in the last three years
   - Simulant has never received a positive BBBM test
 
 2. If eligible (meets all requirements), check propensity. 
-   If propensity value is < year-specific testing rate: give test. If not, do not give test.
+   If propensity value is < time-specific testing rate: give test. If not, do not give test.
 3. Assign positive diagnosis to 90% of people and negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, eg people who test negative still have a 90% chance of being positive on a re-test.
 4. Record time of last test, yes/no diagnosis for future testing eligibility.
 
@@ -237,7 +237,7 @@ Assumptions and Limitations
   test eligibility  
 - The same simulants undergo repeat testing to reflect ongoing issues with access or insurance,
   so propensity does not need to be re-assigned at any point.
-- Since BBBM uses the same propensity as baseline testing, BBBM should replace many CSF and PET
+- Since BBBM uses the same propensity as existing testing, BBBM should replace many CSF and PET
   tests, though some simulants may not qualify for BBBM tests due to age requirements, or may get a BBBM false negative.
 
 .. note::
