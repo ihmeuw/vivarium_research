@@ -322,13 +322,23 @@ scenario, and input draw.
       received a negative BBBM test), since any CSF/PET eligible simulants with propensities < (CSF testing rate + PET testing rate)  
       will be immediately given one of those tests.
   * - BBBM test counts
-    - Diagnosis provided
-    -
+    - Diagnosis provided (positive, negative). Treatement initiation decision (yes, no).
+    - Diagnosis and treatment initiation both stratified under test count because they both happen immediately on test.
   * - BBBM newly test-eligibile simulant count
     - 
     - Count of simulants who are newly eligible for BBBM testing, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
       Newly eligible simulants could be incident to pre-clinical, turning 60, or reaching 3 years since their last test.
       Will be used to check simulation test counts per newly eligible simulant match Lilly annual year-specific test rates.
+  * - Treatment status transition counts
+    - State transitioned to (`Full treatment effect`, `Waning treatment effect`, `No treatment effect`), 
+      treatment completion (completed, discontinued)
+    - Treatment completion stratification for transitions to `Full treatment effect` state allows us to validate the 10% discontinuation rate.
+      Note that the diagram states `Full treatment effect LONG` and `Full treatment effect SHORT` are both considered the same status (`Full treatment effect`),
+      but are stratified by completion status.
+  * - Treatment status person-time
+    - Status (`In treatment/ Waiting for treatment`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect`).
+      Also stratify by treatment completion (completed, discontinuated) from transition observer
+    - Treatment completion stratification allows us to validate the different sized durations for completed/discontinued `Full` and `Waning` treatment statuses
 
 5.0 Model Runs and Verification & Validation
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -460,6 +470,12 @@ scenario, and input draw.
     - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
     - Default
     - Add test counts and testing eligibility observers
+  * - 7.0
+    - Add treatment (full, waning) intervention
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
+    - Default
+    - Add treatment status transition and person-time observers
 
 
 5.2 V & V Tracking
@@ -657,6 +673,15 @@ scenario, and input draw.
       * Year-stratified BBBM test count per newly eligible person count match time-specific rates
       * CSF/PET tests initialized properly - no testing spike for first time step
     - 
+    -
+  * - 7.0
+    - * Positive BBBM tests result in 90% treatment initiation and 10% no treatment
+      * 10% of transitions to `Full treatment effect` status are by simulants who discontinue treatment
+      * Full/Waning durations are accurate (use person-time ratios between states?)
+      * "In treatment/waiting for treatment" duration is accurate (use person-time ratios between states?)
+      * Interactive sim verification spot checking a simulant's durations in treatment statuses as they move through 
+        `BBBM test negative`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect` statuses (for both completed and discontinued treatments)
+    -
     -
 
 .. list-table:: Outstanding model verification and validation issues

@@ -32,10 +32,6 @@
 Hypothetical Alzheimer's Treatment
 ========================================
 
-.. todo::
-
-  Add a brief introductory paragraph for this document.
-
 .. contents::
    :local:
    :depth: 1
@@ -47,13 +43,12 @@ Hypothetical Alzheimer's Treatment
   * - Abbreviation
     - Definition
     - Note
-  * - 
-    - 
-    - 
-
-.. todo::
-
-  Fill out table with any abbreviations and their definitions used in this document.
+  * - BBBM
+    - Blood-based biomarker
+    - BBBM tests measure blood plasma protein levels and are less invasive than CSF (Cerebrospinal Fluid) or PET (Positron Emission Topography) tests
+  * - MCI
+    - Mild cognitive impairment
+    -
 
 Intervention Overview
 -----------------------
@@ -65,11 +60,6 @@ This effect can wane over time (udpated each time step) and when the effect full
 
 This treatment is hypothetical and we don't have confirmed information about the mechanism.
 
-.. todo::
-
-  Fill out the following table with a list of known outcomes affected by the intervention, regardless of if they will be included in the simulation model or not, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
-
-  The table below provides example entries for large scale food fortification with iron.
 
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 15
@@ -79,7 +69,7 @@ This treatment is hypothetical and we don't have confirmed information about the
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Hypothetical/unconfirmed
+  * - Hypothetical treatment effect
     - Slows progression to MCI (time-dependent effect size)
     - Yes
     - 
@@ -116,8 +106,8 @@ Vivarium Modeling Strategy
         test -> neg [label = "(10%)", style=dashed]
         neg -> el [label = "test re-eligible"]
 
-        pos -> wait [label = "initiates treatment (I)", style=dashed]
-        pos -> no_treat [label = "does not initiate treatment (1 - I)", style=dashed]
+        pos -> wait [label = "decides to initiate treatment (I)", style=dashed]
+        pos -> no_treat [label = "decides not to initiate treatment (1 - I)", style=dashed]
 
         wait -> treat [label = "completes (90%)"]
         wait -> treat_short [label = "discontinues (10%)"]
@@ -162,7 +152,7 @@ to be equal to :math:`h_{adj} = h_{MCI} * R_h`.
     - Notes
   * - :math:`\text{prop}_I`
     - Simulant lifetime testing "initiation propensity"
-    - Randomly drawn from :math:`[0,1)`
+    - Drawn uniformly from :math:`[0,1)`
     - Lower value means more likely to initiate testing
   * - :math:`I`
     - Time- and location-specific testing initiation rate
@@ -242,7 +232,7 @@ Outcomes
 ~~~~~~~~
 
 .. list-table:: Modeled Outcomes
-  :widths: 15 15 15 15 15 15 15
+  :widths: 15 15 15 15
   :header-rows: 1
 
   * - Outcome
@@ -269,6 +259,3 @@ Assumptions and Limitations
   following two Lilly specifications: "The treatment takes immediate full effect in the first 6-month time step" and 
   "There is an average of 6 months between a positive BBBM test result and initiating treatment". We simplify 
   average of 6 months to fixed 6 month duration for all simulants.
-
-.. todo::
-  V&V, observers, model runs
