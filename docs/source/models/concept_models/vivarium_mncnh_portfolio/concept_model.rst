@@ -497,7 +497,7 @@ Postpartum component
   * - 1. Baseline
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Defined in the baseline coverage section of the :ref:`AI ultrasound module page <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-    - Defined in the baseline coverage section of the :ref:`oral iron supplementation page <oral_iron_antenatal>`
+    - Defined in the baseline coverage section of the :ref:`oral iron supplementation page <oral_iron_antenatal>` (use the :code:`baseline_ifa_at_anc` parameter to determine individual coverage among simulants who attend ANC)
     - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
     - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
     - Defined in the baseline coverage section of the :ref:`IV iron page <intervention_iv_iron_antenatal_mncnh>`
@@ -849,10 +849,10 @@ Postpartum component
 Specific observer outputs and their stratifications may vary by model run as needs change. Modifications to default will be noted in the model run requests tables. Note that the observers and outputs listed here are different from the module outputs above. The outputs of the module are intended to be intermediate values that may or may not be included as observed simulated outputs.
 
 Default stratifications to all observers should include scenario and input draw.
- 
-.. todo:: 
 
-  Confirm whether we want to continue stratifying by random seed? Currently all of the results dataframes are.
+.. note::
+  
+  Observers cannot support more than 15 stratifications. Design of simulation observers should take this into account.
 
 .. list-table:: Simulation observers
   :header-rows: 1
@@ -898,15 +898,10 @@ Default stratifications to all observers should include scenario and input draw.
   * - 6. Probiotics eligible birth counts
     - * Delivery facility type
     - Included. Confirm this represents "eligible birth counts"?
-  * - 7. Maternal population counts
+  * - 7a. Maternal population counts: hemoglobin-related parameters
     - * Maternal age group
       * Pregnancy outcome
-      * ANC first trimester attendance (dichotomous)
-      * ANC later pregnancy attendance (dichotomous)
       * ANC attendance (polychotomous)
-      * Ultrasound coverage
-      * Azithromycin coverage
-      * Misoprostol coverage
       * Hemoglobin screening coverage
       * Ferritin screening coverage
       * IFA coverage
@@ -915,11 +910,20 @@ Default stratifications to all observers should include scenario and input draw.
       * True hemoglobin exposure (dichotomous,  'low' if truly low hemoglobin and 'adequate' if truly adequate hemoglobin)
       * Test hemoglobin exposure (dichotomous, 'low' if tested low hemoglobin,'adequate' if tested adequate hemoglobin, N/A if not tested)
       * Ferritin status (dichotomous, 'low' if low ferritin, 'adequate' if adequate ferritin, N/A if not tested)
+      * Preterm status (dichotomous at 37 weeks)
+    - 
+  * - 7b. Maternal population counts: other parameters
+    - * Maternal age group
+      * Pregnancy outcome
+      * ANC attendance (polychotomous)
+      * Ultrasound coverage
       * Delivery facility
       * Preterm status (dichotomous at 37 weeks)
       * Believed preterm status (dichotomous at 37 weeks)
       * ACS eligibility (dichotomous, 'eligible' if believed gestational age is between 26-33 weeks, 'not eligible' if gestational age is outside of this range)
       * ACS coverage
+      * Azithromycin coverage
+      * Misoprostol coverage
     - 
   * - 8. Neonatal all-cause mortality risk
     - * Child sex
@@ -1042,6 +1046,9 @@ Default stratifications to all observers should include scenario and input draw.
     - N/A; All pregnant simulants observed through conclusion of relevant modeled outcomes. All neonatal simulants observed until 28 days (end of late neonatal age group)
     - Pregnant/birthing simulants do not age in this simulation
 
+.. todo::
+
+  Update the following table for the GBD 2023 update (model 19.0)
 
 .. list-table:: Summary of draw metadata by input parameter
   :header-rows: 1
@@ -1557,13 +1564,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
-  * - 16.6
-    - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-    - Baseline
-    - ``model16.6``
-    - For this run only, 10,000,000 population size per draw
-    - Default
-    - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
   * - 17.0
     - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
     - Baseline and MMS scale-up scenarios 
@@ -1578,38 +1578,85 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default, note hemoglobin and ferritin screening coverage and results added as stratifying variables to maternal population observer
     - Default
+  * - 18.1
+    - Model 17.0 bugfixes:
+      * Update so that only those who attend ANC are eligible for IFA/MMS
+
+        * Include corresponding update in the baseline IFA calibration `laid out in this PR <https://github.com/ihmeuw/vivarium_research/pull/1803>`__
+
+      * Confirm that cat1/cat2 are defined consistently for IFA and MMS coverage and consider updating to covered/uncovered
+    - No run necessary, all V&V done in the interactive simulation
+    - N/A
+    - N/A
+    - N/A
+    - N/A
+  * - 18.2
+    - Model 17.0 bugfixes, continued:
+
+      * Updated artifact key for excess shift of IFA on birthweight
+      * Update hemoglobin risk effects to use intervention-affected hemoglobin exposure rather than raw hemoglobin exposure
+    - No run necessary, all V&V done in the interactive simulation
+    - N/A
+    - N
+    - N/A
+    - N/A
+  * - 18.3
+    - Model 18.0 with updated observer requests to avoid >15 stratifications 
+    - Baseline, MMS scale-up, and anemia screening scale-up scenarios
+    - ``model18.3``
+    - Default
+    - Default
+    - Default (note that observer 7 has been broken up into 7a and 7b)
   * - 19.0
-    - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
-    - Baseline and IV iron scale-up scenarios
+    - GBD 2023 Update
+    - All
     - ``model19.0``
     - Default
-    - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
     - Default
-  * - 20.0*
-    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data on effect have yet to be calculated as of 8/22/25). Also, update `list of draws used in simulation in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1795>`__
-    - Baseline and IV iron scale-up scenarios
+    - Default
+  * - 20.0
+    - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
+    - Baseline
     - ``model20.0``
+    - For this run only, 10,000,000 population size per draw
     - Default
-    - Default
-    - Default
-  * - 21.0*
-    - Hemoglobin effect on neonatal sepsis as defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (data for effects and PAFs have yet to be calculated as of 8/22/25)
-    - Baseline and IV iron scale-up scenarios
+    - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
+  * - 21.0 (can be moved to before GBD 2023 update/19.0 if needed)
+    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` cause models
+    - Baseline
     - ``model21.0``
     - Default
     - Default
     - Default
-  * - 22.0
-    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` cause models
-    - Baseline
+  * - 22.0 (can be moved to before GBD 2023 update/19.0 if needed)
+    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
+    - Baseline 
     - ``model22.0``
     - Default
     - Default
     - Default
-  * - 23.0
-    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`
-    - Baseline 
+  * - 23.0 (can be moved to before GBD 2023 update/19.0 if needed)
+    - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
+    - Baseline and IV iron scale-up scenarios
     - ``model23.0``
+    - Default
+    - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
+    - Default
+  * - 24.0*
+    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data specific to GBD 2023 has yet to be generated)
+    - Baseline and IV iron scale-up scenarios
+    - ``model24.0``
+    - Default
+    - Default
+    - Default
+  * - 25.0*
+    - Updated hemoglobin effects as defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (Custom PAFs and neonatal sepsis effects have yet to be calculated for GBD 2023)
+
+      * Updated custom PAF values for maternal hemorrhage and maternal sepsis outcomes (paired with existing implementation of GBD RRs)
+      * New risk effect (using GBD RRs and custom PAFs) for depressive disorders
+      * New risk effect (using custom RRs and PAFs) for neonatal sepsis
+    - Baseline and IV iron scale-up scenarios
+    - ``model25.0``
     - Default
     - Default
     - Default
@@ -2178,8 +2225,14 @@ Default stratifications to all observers should include scenario and input draw.
         * Birth outcomes (MMS reduces rate of stillbirth, increases rate of live birth, no change to "partial term" outcomes)
 
       * Additional confirmation of effect of CPAP/ACS interventions with newly added preterm birth stratification to the births observer (as was done in the neonatal checks notebook for model 16.4)
-    - 
-    - 
+    - * There is IFA coverage among those who do not attend ANC
+      * Suspicious that cat1/cat2 for IFA/MMS coverage are not being defined consistently
+      * Effect of IFA on birthweight in the excess shift data key is low -- maybe it's reading in data from the effect on hemoglobin?
+      * Appears that the "raw" hemoglobin exposure is modifying the risk of hemoglobin affected outcomes rather than the intervention-affected hemoglobin exposure 
+      * Unable to verify effect of IFA and MMS on gestational age or birthweight, intervention effect on preterm birth in simulation results does not meet verification target
+      * Potential common random numbers issues between scenarios... individual differences between BW and GA exposures have a very large range and the mean is not the expected value
+      * Hemoglobin exposure does not update as expected between baseline and MMS scenarios at the individual level (some simulants who should have no change have increases and some have decreases, some who should have a chane have no change)
+    - `Model 17.0 V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/134>`__
   * - 18.0
     - * Confirm scenario-specific anemia screening coverage rates (verification with sim outputs)
       * Confirm only simulants who attend ANC are covered by hemoglobin screening (verification with sim outputs)
@@ -2240,6 +2293,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - Various V&V issues with oral iron intervention identified in model 17.0 V&V summary
+    - Various issues to be worked through
+    - Make updates specified in models 18.1 and 18.2 and re-evaluate
+    - 18.2, 18.3, TBD
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
     - Update to custom-calculated PAF and reassess
