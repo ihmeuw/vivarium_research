@@ -79,11 +79,34 @@ Baseline Coverage Data
 
 Given the low utilization of MMS relative to IFA, we assume that baseline coverage of MMS is zero. 
 Baseline coverage of IFA varies by location, and we will be using estimates processed by the Health Systems team to inform this. 
-The country-specific estimates are available at ``/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/anc_iron_prop_st-gpr_results_aggregates_scaled2025-05-30.csv``.
+The country-specific estimates are available at ``/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/anc_iron_prop_st-gpr_results_aggregates_scaled2025-05-30.csv``. These estimates are specific to the proportion
+*of ANC attendees* who are covered by oral iron supplementation.
 
-.. warning::
+A summary of relevant baseline coverage parameters is included below:
 
-  Maternal supplementation interventions are typically delivered through antenatal care (ANC) visits. Therefore, maximum alternative scenario coverage should be considered to be equal to the proportion of pregnant women who attend ANC visits in the absence of an intervention to increase ANC attendance or an alternative maternal supplementation delivery program. 
+.. list-table:: Oral iron baseline coverage parameters
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Application
+    - Note
+  * - baseline_ifa_at_anc
+    - Proportion of ANC attendees who are covered by IFA at baseline
+    - ``/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/anc_iron_prop_st-gpr_results_aggregates_scaled2025-05-30.csv``
+    - Used to assign baseline IFA coverage among simulants who attend an ANC visit
+    - Values stored for all GBD locations. Use data specific to year 2023
+  * - ANC1
+    - Proportion of all pregnancies that attend at least one ANC visit
+    - GBD covariate ID 7: :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=7)` 
+    - Used in calculation of baseline_ifa_overall
+    - 
+  * - baseline_ifa_overall
+    - Proportion of all pregnancies that are covered by IFA at baseline
+    - baseline_ifa_at_anc * ANC1
+    - Used for baseline calibration of outcomes affected by IFA
+    - 
 
 Vivarium Modeling Strategy
 --------------------------
@@ -94,10 +117,7 @@ To model the impact on maternal mortality, a maternal hemoglobin exposure value 
 Coverage algorithms
 +++++++++++++++++++
 
-Individual product coverage algorithms
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For use in the :ref:`MNCNH Portfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>`.
+In determining individual simulant coverage of the oral iron intervention for the :ref:`MNCNH Portfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>`, see the details on the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>`. Notably, only simulants who attend ANC are eligible to receive oral iron interventions. 
 
 For our purposes, each individual antenatal supplementation product (IFA and MMS) are mutually exclusive; in other words, a given simulant can only be covered by one of these two products for any given pregnancy. We do not consider changing antenatal supplementation products during a single pregnancy. Supplementation product coverage may depend on other simulant characteristics, such as antenatal care visit attendance.
 
@@ -108,45 +128,6 @@ For our purposes, each individual antenatal supplementation product (IFA and MMS
 
   Therefore, the intervention impacts of each intervention product "stack" upon one another such that the effect of MMS includes the effect of IFA relative to no supplementation. 
   Specific instructions and details are provided in the following sections. 
-
-Targeted intervention package coverage algorithm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For use in the :ref:`MNCNH Portfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>`.
-
-.. todo::
-
-  When designing our intervention coverage across scenarios, we will need to account for the mutually exclusive nature of the IFA and MMS interventions.
-
-.. list-table:: Modeled Outcomes
-  :widths: 15 15 15 15 15 15 15
-  :header-rows: 1
-
-  * - Outcome
-    - Outcome type
-    - Outcome ID
-    - Affected measure
-    - Effect size measure
-    - Effect size
-    - Note 
-  * - Hemoglobin
-    - Modelable entity
-    - 10487
-    - Population mean hemoglobin concentration (as continuous measure)
-    - Mean difference
-    - Varies by supplement regimen
-    - Related effect on anemia reduction
-  * - Birthweight
-    - Risk exposure
-    - 339
-    - Population mean birthweight (as continuous measure)
-    - Mean difference
-    - Varies by supplement regimen
-    - Assume no difference in gestational age
-
-.. todo::
-
-    Add rows to this table for gestational age and birth outcomes/stillbirth (or remove table altogether).
 
 Maternal Hemoglobin
 +++++++++++++++++++++
@@ -202,6 +183,7 @@ Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - We assume no effect modification by baseline hemoglobin level. In reality, the individual hemoglobin shifts are likely greater among those who are anemic at baseline.
+- Our baseline calibration preserves the population mean value of hemoglobin concentration, but only approximates the overall exposure distribution.
 
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -307,12 +289,13 @@ The code block below walks through how to implement the following considerations
       factors such as maternal BMI, etc. BEFORE consideration of the impact of 
       maternal supplementation.
 
-      * baseline_ifa_coverage represents the coverage proportion of IFA for a location and
+      * baseline_ifa_overall represents the coverage proportion of IFA among the entire population
+      (as opposed to the population that attends at least one ANC visit) for a location and
       specific simulation draw"""
           if baseline_maternal_supplement_{i} == 'none':
-              baseline_supplemented_bw_{i} = bw_{i} - baseline_ifa_coverage_draw * ifa_shift_draw
+              baseline_supplemented_bw_{i} = bw_{i} - baseline_ifa_overall_draw * ifa_shift_draw
           elif baseline_maternal_supplement_i == 'ifa':
-              baseline_supplemented_bw_{i} = bw_{i} + (1 - baseline_ifa_coverage_draw) * ifa_shift_draw
+              baseline_supplemented_bw_{i} = bw_{i} + (1 - baseline_ifa_overall_draw) * ifa_shift_draw
 
       """In the alternative scenario, the amount to shift a simulant's birthweight (if they are
       covered by MMS in the alternative scenario) depends on if they were already covered 
@@ -332,6 +315,8 @@ Assumptions and Limitations
 
 - For the :ref:`MNCNH portfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>` that uses the baseline coverage value of women that took any antenatal iron: We assume that taking any iron supplement is equally as effective as taking daily a iron supplement in the baseline scenario. If it is in fact less effective, we will overestimate the impact of the baseline IFA coverage and therefore underestimate the impact of the MMS interventions.
 
+- Our baseline calibration preserves the population mean value of birthweight, but only approximates the overall exposure distribution.
+
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -342,15 +327,10 @@ If birthweight exposures are stratified by supplementation regimen and maternal 
 Gestational age
 +++++++++++++++++++
 
-.. note::
-
-  This outcome was added in June of 2023, and was first incorporated into the :ref:`nutrition optimization <2021_concept_model_vivarium_nutrition_optimization>` model.
-  We have already incorporated it into the :ref:`MNCNH portfolio <2024_concept_model_vivarium_mncnh_portfolio>` simulation.
-
 Research background
 ~~~~~~~~~~~~~~~~~~~
 
-The antenatal supplementation products affect child gestational age at birth exposures, :ref:`which are documented here <2019_risk_exposure_lbwsg>`. While we measure LBWSG exposures at the continuous level (including a joint birth weight and gestational age at birth value), the literature tends to report the effect of antenatal supplementation products on gestational age at birth in terms of a relative risk of preterm birth (less than 37 weeks gestational age at birth) or very preterm birth (less than 32 weeks gestational age at birth), which are summarized in the table below.
+The antenatal supplementation products affect child gestational age at birth exposures, :ref:`which are documented here <2021_risk_exposure_lbwsg>`. While we measure LBWSG exposures at the continuous level (including a joint birth weight and gestational age at birth value), the literature tends to report the effect of antenatal supplementation products on gestational age at birth in terms of a relative risk of preterm birth (less than 37 weeks gestational age at birth) or very preterm birth (less than 32 weeks gestational age at birth), which are summarized in the table below.
 
 .. list-table:: Dichotomous effect of antenatal supplementation on preterm birth
   :header-rows: 1
@@ -394,6 +374,10 @@ Assumptions and limitations
 
 - In the case of IFA, we assume that the entire distribution experiences the same constant shift in gestational age. It is more likely that the lower end of the distribution experiences a greater shift and that the upper end experiences little to no shift (as supported from the MMS evidence). This limitation will result in an underestimation of the impact of the lower end of the distribution (which has a high magnitude of risk, but a low overall exposure) and an overestimation of the impact on the upper end of the distribution (which has lower risk magnitude, but higher overall exposure). However, we have limited data on how to better apply such a shift.
 
+- Our calculation of the IFA and MMS gestational age shifts does not take into account the correlation between ANC attendance (and therefore the population eligible to receive these interventions) and gestational age exposure that is induced through the correlated propensities used in the :ref:`facility choice model <2024_facility_model_vivarium_mncnh_portfolio>` in the MNCNH portfolio simulation. Given that there is a positive modeled correlation between these variables, there will be slightly less preterm birth among the population eligible for these interventions than among the population overall in our simulation. Therefore, our estimates of the gestational age shifts are likely less than they would be if they were calculated with consideration to this underyling correlation. Additionally, the modeled correlation in our simulation not considered in the calculation of the shifts may cause us to not exactly replicate the observed intervention RR on preterm birth that our modeling strategy aims to replicate.
+
+- Our baseline calibration preserves the population mean value of gestational age at birth, but only approximates the overall exposure distribution.
+
 - In the case of MMS, although we have improved the assumption of a single shift applied to the entire distribution through our "dual shift" strategy, it is still limited in that the true shift is likely more of a continuous function with baseline gestational age rather than two conditional values. In particular, a limitation of this approach is the illogical implication that the effect of treatment on a birth that would have been 31.9 weeks without treatment leads to a longer gestation than the effect of the same treatment on a birth that would have been 32.1 weeks without treatment.
 
   We have some ideas for how we might improve this limitation, including:
@@ -407,9 +391,13 @@ Assumptions and limitations
 Modeling strategy
 ~~~~~~~~~~~~~~~~~
 
-The supplementation intervention (all regimens) affects infant gestational age at birth exposures, :ref:`which are documented here <2019_risk_exposure_lbwsg>`. 
+The supplementation intervention (all regimens) affects infant gestational age at birth exposures, :ref:`which are documented here <2021_risk_exposure_lbwsg>`. Antenatal supplementation intervention should result in an **additive change to a simulant's continuous gestational age exposure value at birth.** We assume changes in simulant gestational age exposure values are independent from changes in their birth weight exposure values.
 
-Antenatal supplementation intervention should result in an **additive change to a simulant's continuous gestational age exposure value at birth (or upon initialization into the early or late neonatal age groups).** :ref:`The LBWSG risk exposure document can be found here <2019_risk_exposure_lbwsg>`. We assume changes in simulant gestational age exposure values are independent from changes in their birth weight exposure values.
+Similar to the effects on the birth weight outcome, we will need to:
+- Perform a baseline calibration of the effects of IFA on gestational age (using the baseline_ifa_overall parameter rather than the baseline_ifa_at_anc parameter), and
+- Account for the fact that the effects of MMS are relative to IFA rather than relative to no oral iron supplemenation.
+
+The same instructions written in pseduocode in the Birthweight_ section can be followed for the gestational age affected outcome as well.
 
 .. list-table:: Restrictions for intervention effect on birthweight
   :header-rows: 1
