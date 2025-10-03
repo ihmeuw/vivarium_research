@@ -320,11 +320,11 @@ scenario, and input draw.
   * - BBBM test counts
     - Diagnosis provided
     -
-  * - BBBM newly test-eligibile person-time
+  * - BBBM newly test-eligibile simulant count
     - 
-    - Person-time of simulants who are newly eligible for BBBM testing, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
+    - Count of simulants who are newly eligible for BBBM testing, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
       Newly eligible simulants could be incident to pre-clinical, turning 60, or reaching 3 years since their last test.
-      Will be used to check simulation test counts per newly eligible person-year match Lilly annual year-specific test rates.
+      Will be used to check simulation test counts per newly eligible simulant match Lilly annual year-specific test rates.
 
 5.0 Model Runs and Verification & Validation
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -650,8 +650,7 @@ scenario, and input draw.
       * Location-specific CSF vs PET testing rates (CSF tests / PET tests = CSF rate / PET rate)
       * 90% sensitivity rate for BBBM tests (meaning 90% of simulants test positive, since they all have preclinical AD)
       * Year-stratified CSF/PET test counts per CSF/PET eligible person-year match location and time-specific rates
-      * Year-stratified BBBM test count per newly eligible person-year match time-specific rates
-      * Simulation test rate matches artifact test rate, for each test type (existing, BBBM) and location- or time-specific rate
+      * Year-stratified BBBM test count per newly eligible person count match time-specific rates
       * CSF/PET tests initialized properly - no testing spike for first time step
     - 
     -
