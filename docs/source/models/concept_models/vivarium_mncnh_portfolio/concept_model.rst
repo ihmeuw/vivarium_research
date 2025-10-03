@@ -1067,6 +1067,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 100
     - Copy 5 times so that draw 1, 101, 201, 301, and 401 all have the same value, etc.
     - Copy 2.5 times so that draw 1, 101, and 201 all have the same value. Note that draws 0-49 will be used three times and draws 50-99 will be used twice.
+    - 
   * - :ref:`Hemoglobin risk effects <2023_hemoglobin_effects>`, including those on stillbirth, gestational age, and birthweight that are modeled through the :ref:`IV iron intervention model <intervention_iv_iron_antenatal_mncnh>`
     - 250
     - Copy twice so that draw 1 and 251 have the same value, etc.
@@ -1076,6 +1077,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 100
     - Copy 5 times so that draw 1, 101, 201, 301, and 401 all have the same value, etc.
     - Copy 2.5 times so that draw 1, 101, and 201 all have the same value. Note that draws 0-49 will be used three times and draws 50-99 will be used twice.
+    -
   
 .. note::
 
