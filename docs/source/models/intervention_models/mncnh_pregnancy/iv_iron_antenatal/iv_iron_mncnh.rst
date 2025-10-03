@@ -166,6 +166,10 @@ We will model the effect of IV iron on both gestational age at birth (GA) and bi
 Effect size derivation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. todo::
+
+  Perform GBD 2023 update for effect size calculations (dependent on GBD 2023 LBWSG exposure and draw availability strategy will change)
+
 The code to derive of IV iron's effect on gestational age and birth weight exposures as 100% mediated through hemoglobin is `hosted here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/hgb_birth_effect_generation.py>`_ and a `notebook that steps through these functions can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/function_tester.ipynb>`_. 
 
 The general steps of the derivation are summarized here:
