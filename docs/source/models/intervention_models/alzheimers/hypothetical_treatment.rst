@@ -116,8 +116,8 @@ Vivarium Modeling Strategy
         test -> neg [label = "(10%)", style=dashed]
         neg -> el [label = "test re-eligible"]
 
-        pos -> wait [label = "initiates treatment (propensity < time/location-specific initiation rate I)", style=dashed]
-        pos -> no_treat [label = "does not initiate treatment (propensity >= I)", style=dashed]
+        pos -> wait [label = "initiates treatment (I)", style=dashed]
+        pos -> no_treat [label = "does not initiate treatment (1 - I)", style=dashed]
 
         wait -> treat [label = "completes (90%)"]
         wait -> treat_short [label = "discontinues (10%)"]
@@ -164,7 +164,7 @@ to be equal to :math:`h_{adj} = h_{MCI} * R_h`.
     - Simulant lifetime testing "initiation propensity"
     - Randomly drawn from :math:`[0,1)`
     - Lower value means more likely to initiate testing
-  * - :math:`r_I`
+  * - :math:`I`
     - Time- and location-specific testing initiation rate
     - Lilly: "The percent of patients with a positive BBBM test who initiate treatment will vary by location and over time – but will not vary by age or sex. In the US: 30% of eligible patients initiate (constant 2030-2100); Japan: 80% of eligible patients initiate (constant 2030-2100); all other countries: 40% of eligible patients initiate in 2030, increasing linearly to 70% by 2035, remaining constant at 70% until 2100.""
     - 
@@ -204,7 +204,7 @@ to be equal to :math:`h_{adj} = h_{MCI} * R_h`.
     - Immediate, random draw
   * - BBBM test positive
     -
-    - :math:`\text{prop}_I < r_I`\: initiate. :math:`\text{prop}_I >= r_I`\: don't initiate.
+    - :math:`\text{prop}_I < I`\: initiate. :math:`\text{prop}_I >=  I`\: don't initiate.
   * - BBBM test negative
     -
     - Fixed duration
@@ -231,102 +231,32 @@ to be equal to :math:`h_{adj} = h_{MCI} * R_h`.
   * - No treatment effect
     - 
     - :math:`R_h` should equal 1 on the first time step the simulant spends in this state.
-     So :math:`h_{adj} = h_{MCI}`
-    -
+      So :math:`h_{adj} = h_{MCI}`
 
-.. todo::
-  Initialization?
+Initialization
+~~~~~~~~~~~~~~
 
-.. todo::
+Since :math:`I` is 0 until 2030, on simulation initialization no simulants have received treatment.
 
-  Fill out the following table with all of the affected measures that have vivarium modeling strategies documented
+Outcomes
+~~~~~~~~
 
 .. list-table:: Modeled Outcomes
   :widths: 15 15 15 15 15 15 15
   :header-rows: 1
 
   * - Outcome
-    - Outcome type
-    - Outcome ID
-    - Affected measure
     - Effect size measure
     - Effect size
     - Note
-  * - Lung cancer
-    - GBD cause
-    - c426
-    - Preclinical incidence rate
-    - Relative risk
-    - 0.8 (95% CI: 0.7, 1.01)
-    - 
-
-Affected Outcome #1
-+++++++++++++++++++++
-
-.. important::
-
-  Copy and paste this section for each affected outcome included in this document
-
-.. todo::
-
-  Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
-
-.. todo::
-
-  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
-
-.. todo::
-
-  Describe exactly what measure the intervention will affect
-
-.. todo::
-
-  Fill out the tables below
-
-.. list-table:: Affected Outcome #1 Restrictions
-  :widths: 15 15 15
-  :header-rows: 1
-
-  * - Restriction
-    - Value
-    - Note
-  * - Male only
-    - 
-    - 
-  * - Female only
-    - 
-    - 
-  * - Age group start
-    - 
-    - 
-  * - Age group end
-    - 
-    - 
-  * - Other
-    - 
-    - 
-
-.. list-table:: Affected Outcome #1 Effect Size
-  :widths: 15 15 15 
-  :header-rows: 1
-
-  * - Population
-    - Effect size
-    - Note
-  * - Malnourished women
-    - +50 g birthweight
-    - 
-  * - Adequately nourished women
-    - +10 g birthweight
-    - 
-
-.. todo::
-
-  Describe exactly *how* to apply the effect sizes to the affected measures documented above
-
-.. todo::
-
-  Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_literature>`.
+  * - Full treatment effect
+    - Hazard ratio
+    - Uniform distribution in [.4, .6]
+    - Duration depends on if simulant completes or discontinues treatment
+  * - Waning treatment effect
+    - Hazard ratio
+    - Linear increase during duration from full treatment effect hazard ratio to 1
+    - Duration depends on if simulant completes or discontinues treatment
 
 .. _alzheimers_intervention_treatment_assumptions:
 
