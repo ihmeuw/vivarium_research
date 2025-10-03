@@ -314,9 +314,13 @@ scenario, and input draw.
   * - Person-time in each Alzheimer's cause state
     -
     -
-  * - Existing (CSF/PET) eligible person-time
-    - Test states (not tested, BBBM, CSF, PET)
-    - Observe eligible simulants and stratify by test states to get test counts
+  * - CSF/PET-eligible simulant count
+    - Test state: CSF test received, PET test received, no test received, (negative) BBBM test received
+    - Observe only simulants eligible for CSF/PET tests and stratify by test states to get test counts. 
+      Simulants who are CSF/PET-eligible but whose test propensity value is >= (CSF testing rate + PET testing rate) will be 
+      in either the no test received stratification or BBBM test received stratification (depending whether or not they have 
+      received a negative BBBM test), since any CSF/PET eligible simulants with propensities < (CSF testing rate + PET testing rate)  
+      will be immediately given one of those tests.
   * - BBBM test counts
     - Diagnosis provided
     -
