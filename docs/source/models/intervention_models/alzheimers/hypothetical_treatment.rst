@@ -127,14 +127,14 @@ Most states have a fixed duration (a multiple of the
 time step length) where simulants will transition after :math:`\text{duration} / \text{time step}` time steps. 
 The duration is marked in the state node in brackets eg [6 mo]. As desribed in the :ref:`testing intervention <alzheimers_testing_intervention_bbbm>`, 
 some simulants in the `BBBM test eligible` state may transition to tested immediately (low propensity value), some may always self-transition
-transition (high propensity value), and some may self-transition for some number of time steps but eventually transition to tested
+(ie, never get tested, high propensity value), and some may self-transition for some number of time steps but eventually transition to tested
 as a result of the time-specific testing rate increasing.
 
 Some states have zero duration, illustrated with a dashed box (rather than the solid ovals for states with nonzero durations). 
 Transitions from a state with zero duration are illustrated with a dashed line. If a simulant transitions to a zero-duration state 
 on a time step, they should also immediately continue to the next state during that same time step, as a part of the same transition.
 For example, a simulant in `BBBM test eligible` who is tested and moves to `BBBM test received` would then immediately move to one of 
-that state's two sinks, and might even move to the `In treatment` state during the same transition/ time step.
+that state's two sinks, and would even move directly to another state during the same transition/ time step on a positive test.
 
 Below are tables with details on how to model these states and transitions, and necessary data values. 
 The value of :math:`i_{MCI}` in the :ref:`cause model <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>` is now updated
@@ -151,9 +151,9 @@ to be equal to :math:`h_{adj} = h_{MCI} * R_h`.
     - Source or value
     - Notes
   * - :math:`\text{prop}_I`
-    - Simulant lifetime testing "initiation propensity"
+    - Simulant lifetime treatment "initiation propensity"
     - Drawn uniformly from :math:`[0,1)`
-    - Lower value means more likely to initiate testing
+    - Lower value means more likely to initiate testing. Independent from testing propensities.
   * - :math:`I`
     - Time- and location-specific testing initiation rate
     - Lilly: "The percent of patients with a positive BBBM test who initiate treatment will vary by location and over time – but will not vary by age or sex. In the US: 30% of eligible patients initiate (constant 2030-2100); Japan: 80% of eligible patients initiate (constant 2030-2100); all other countries: 40% of eligible patients initiate in 2030, increasing linearly to 70% by 2035, remaining constant at 70% until 2100.""
@@ -163,8 +163,8 @@ to be equal to :math:`h_{adj} = h_{MCI} * R_h`.
     - :math:`R_h * h_{MCI}`
     -
   * - :math:`h_{MCI}`
-    - The :ref:`time-dependent hazard function <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`
-    - See link
+    - The time-dependent hazard function
+    - See :ref:`hazard function docs <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`
     - Depends on time simulant has been in state
   * - :math:`R_h`
     - Effect hazard ratio
@@ -199,7 +199,7 @@ to be equal to :math:`h_{adj} = h_{MCI} * R_h`.
     -
     - Fixed duration
   * - In treatment/ Waiting for treatment
-    - see :ref:`alzheimers_intervention_treatment_assumptions`
+    - see :ref:`alzheimers_intervention_treatment_assumptions` for info about treatment/discontinuation timing
     - Immediate, random draw
   * - Full treatment effect LONG
     -
@@ -258,4 +258,6 @@ Assumptions and Limitations
 - Treatment occurs instantaneously, with a six-month waiting period after BBBM testing. This interprets the 
   following two Lilly specifications: "The treatment takes immediate full effect in the first 6-month time step" and 
   "There is an average of 6 months between a positive BBBM test result and initiating treatment". We simplify 
-  average of 6 months to fixed 6 month duration for all simulants.
+  average of 6 months to fixed 6 month duration for all simulants. 
+  Discontinuation occurs during this instantaneous treatment 
+  (or, think of the "In treatment/ Waiting" step as a 6 month treatment period during which some patients may discontinue).
