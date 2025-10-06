@@ -1580,6 +1580,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 18.1
     - Model 17.0 bugfixes:
+
       * Update so that only those who attend ANC are eligible for IFA/MMS
 
         * Include corresponding update in the baseline IFA calibration `laid out in this PR <https://github.com/ihmeuw/vivarium_research/pull/1803>`__
@@ -1595,13 +1596,15 @@ Default stratifications to all observers should include scenario and input draw.
 
       * Updated artifact key for excess shift of IFA on birthweight
       * Update hemoglobin risk effects to use intervention-affected hemoglobin exposure rather than raw hemoglobin exposure
+      * Update baseline calibration to use coverage among total pop rather than at ANC
+      * Fix common random numbers between scenarios with regard to ANC attendance
     - No run necessary, all V&V done in the interactive simulation
     - N/A
     - N
     - N/A
     - N/A
   * - 18.3
-    - Model 18.0 with updated observer requests to avoid >15 stratifications 
+    - Run with updated observer requests to avoid >15 stratifications and multiple bugfixes laid out in the outstanding V&V issues table `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1809>`__ 
     - Baseline, MMS scale-up, and anemia screening scale-up scenarios
     - ``model18.3``
     - Default
@@ -2241,6 +2244,32 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm "true" low hemoglobin rate matches corresponding GBD anemia impairment prevalence in pregnancy estimate (verification with sim outputs)
       * Confirm low ferriting screening result matches expectation (verification with sim outputs)
       * Validation: confirm that there are lower rates of true/test low hemoglobin status in the MMS scale-up scenario than the baseline scenario
+    - * Baseline coverage of hemoglobin screening test does not vary by ANC attendance and is equal to 100% rather than expected baseline coverage value
+      * Coverage of ferritin screening does not vary by ANC attendance or by tests low hemoglobin exposure as expected
+      * Hemoglobin screening test is not reading in the expected hemoglobin measure: `see this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/149/files#r2403444540>`__
+      * Hemoglobin sensitivity and specificity are not being applied to hemoglobin screening results
+      * Anemia status during pregnancy assessment is not reading in the expected hemoglobin measure: `see this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/149/files#r2403448860>`__
+    - `Interactive simulation notebook for model 18.0 found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_18.0_interactive_simulation_anemia_screening.ipynb>`__. Note that simulation results for this run were not generated due to too many observer stratifications.
+  * - 18.1
+    - * Same as 17.0
+    - * IFA coverage varies by ANC attendance as expected
+      * Coverage of baseline IFA is equal to 1 - the expected value (reading in cat1 exposure rather than cat2)
+      * Baseline calibration of IFA on hemoglobin is using the value of IFA coverage among ANC attendees rather than among the entire population
+      * Hemoglobin relative risk values vary according to non-intervention affected hemoglobin exposure
+      * Common random numbers not applied appropriately to ANC attendance between scenarios
+    - 
+  * - 18.2
+    - Same as 17.0
+    - * Baseline IFA coverage, calibration, and effects on hemoglobin are all functioning as expected
+      * Coverage and effects of MMS on hemoglobin is functioning as expected
+      * Hemoglobin RR values vary according to intervention-affected hemoglobin exposure, as desired
+      * Common random numbers functioning as expected between scenarios with respect to ANC attendance and oral iron intervention coverage
+      * Pipeline values for ``iron_folic_acid_supplementation_on_birth_weight.effect`` and ``iron_folic_acid_supplementation_on_gestational_age.effect`` contain the expected values, but cannot verify how these are being applied to LBWSG exposures.
+      * Cannot verify that common random numbers are functioning as expected with regard to LBWSG exposure between scenarios
+    - * `18.2 interactive sim for hemoglobin <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_18.2_interactive_simulation_hemoglobin.ipynb>`__
+      * `18.2 interactive sim for LBWSG <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_18.2_interactive_simulation_lbwsg.ipynb>`__
+  * - 18.3
+    - Same as 17.0 and 18.0
     - 
     - 
   * - 19.0
@@ -2293,10 +2322,30 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Various V&V issues with oral iron intervention identified in model 17.0 V&V summary
-    - Various issues to be worked through
-    - Make updates specified in models 18.1 and 18.2 and re-evaluate
-    - 18.2, 18.3, TBD
+  * - Pipeline values for ``iron_folic_acid_supplementation_on_birth_weight.effect`` and ``iron_folic_acid_supplementation_on_gestational_age.effect`` contain the expected values, but cannot verify how these are being applied to LBWSG exposures
+    - Unknown
+    - Hussain to investigate
+    - For model 18.3
+  * - Cannot verify that common random numbers are functioning as expected with regard to LBWSG exposure between scenarios
+    - Unknown
+    - Hussain to investigate
+    - For model 18.3
+  * - Baseline coverage of hemoglobin screening test does not vary by ANC attendance and is equal to 100% rather than expected baseline coverage value
+    - Unknown
+    - Hussain to update
+    - For model 18.3
+  * - Coverage of ferritin screening does not vary by ANC attendance or by tests low hemoglobin exposure as expected
+    - Unknown
+    - Hussain to update
+    - For model 18.3
+  * - Hemoglobin screening test is not reading in the expected hemoglobin measure: `see this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/149/files#r2403444540>`__. Likewise, anemia status during pregnancy assessment is not reading in the expected hemoglobin measure: `see this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/149/files#r2403448860>`__
+    - See linked comments
+    - Hussain to update
+    - For model 18.3
+  * - Hemoglobin sensitivity and specificity are not being applied to hemoglobin screening results
+    - Unknown
+    - Hussain to update
+    - For model 18.3
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
     - Update to custom-calculated PAF and reassess
