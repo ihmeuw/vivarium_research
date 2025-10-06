@@ -32,6 +32,10 @@
 Hemoglobin Risk Effects (GBD 2023)
 ====================================
 
+.. todo::
+
+  Update all instances of ``TODO: POST LINK`` with appropriate links once they are ready following the GBD 2023 update to the MNCNH portfolio simulation
+
 .. contents::
    :local:
    :depth: 2
@@ -191,11 +195,12 @@ Relative risk values to calculate custom PAFs for maternal disorders can be acce
 
 Before being applied in the simulation, these relative risk values are first re-scaled to be relative to the TMREL exposure value of 120 g/L. We used linear interpolation to assign RR values for exposures between points provided by the GBD risk curve. For exposure values that fall outside of the range provided by the GBD risk curve, we assign the same RR value as the nearest point on the curve. `See the custom hemoglobin risk effect implementation used in the MNCNH simulation for specific details <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/components/hemoglobin.py>`__
 
-We calculate custom PAFs for hemoglobin on maternal disorders outcome for use in the MNCNH simulation. Code to generate these PAFs can be found here ``TODO: POST LINK``. We utilize the interactive context to initialize a population with assigned hemoglobin exposure values, assign relative risk values in accordance with observed exposure, and calculate PAFs among the population as (mean_rr - 1) / mean_rr among the age-stratified population. This PAF calculation process is limited in the following ways:
+We calculate custom PAFs for hemoglobin on maternal disorders outcome for use in the MNCNH simulation. Code to generate these PAFs can be found here ``TODO: POST LINK``. We utilize the interactive context to initialize a population with assigned hemoglobin exposure values, assign relative risk values in accordance with observed exposure, and calculate PAFs among the population as (mean_rr - 1) / mean_rr among the age-stratified population (note that the hemoglobin risk factor data as well as maternal disorders outcome data are both already specific to ``sex=='female'``). This PAF calculation process is limited in the following ways:
 
-- The simulated population does not have a uniform distribution of maternal ages. The PAF values for age groups with less person time have less statistical precision than age groups with more person time represented in our simulation.
 - The PAF calculation does not take detailed correlation with other factors that affect maternal hemorrhage and maternal sepsis risk into account. For instance, the correlation between ANC attendance and in-facility delivery in our simulation will induce a correlation between hemoglobin (as a result of baseline IFA coverage distributed at ANC) and misoprostol coverage (available at home deliveries only), both of which affect maternal hemorrhage risk. We hypothesize that the impact of ignoring this sort of correlation will be small enough for our model to calibrate, but we can revisit this assumption if the model calibrates poorly.
 - We use the hemoglobin exposure distribution during pregnancy to calculate the PAF on postpartum depression rather than the hemoglobin exposure distribution among simulants who survive to the postpartum period. Given that maternal mortality is a rare event, we assume this limitation will be small, but it can be revisited if the model calibrates poorly.
+
+Also note that the simulated population does not have a uniform distribution of maternal ages. The PAF values for age groups with less person time have less statistical precision than age groups with more person time represented in our simulation.
 
 PAF values from our custom calculations can be found here ``TODO: POST LINK``
 
@@ -285,11 +290,18 @@ Where,
   * - :math:`PAF`
     - Population attributable fraction of hemoglobin on neonatal sepsis
     - Custom-calculated PAF values available here ``TODO: POST LINK``
-    - Note that the PAF is calculated according to direct (not total) effects of hemoglobin on neonatal sepsis. We utilize this PAF rather than a joint PAF with the effect of LBWSG since we are not modeling correlation between hemoglobin and LBWSG in the MNCNH portfolio simulation. Code used to generate these PAF values can be found here ``TODO: POST LINK``
+    - See details on the PAF calculation below 
   * - :math:`\text{RR}_\text{hemoglobin}_i`
     - Relative risk value for the direct effect of hemoglobin on neonatal sepsis, specific to that individual simulated dyad's hemoglobin exposure level at birth
     - Defined in the `Effect derivation`_ section
     - 
+
+Notes on the PAF calculation of hemoglobin on neonatal sepsis:
+
+* The PAF of hemoglobin on neonatal sepsis is calculated according to direct (not total) effects of hemoglobin on neonatal sepsis (description of these effects found in the above section) 
+* We do not calculate a joint PAF of hemoglobin and LBWSG on neonatal sepsis since we are not modeling correlation between hemoglobin and LBWSG in the MNCNH portfolio simulation
+* We use the exposure distribution of parental hemoglobin among all live and still births (not specific to parental age group) paired with the neonatal sex and age group (early neonatal and late neonatal) specific relative risk values (derivation described in the above section) for calculation of the PAF of hemoglobin on neonatal sepsis.
+* Code used to generate these PAF values can be found here ``TODO: POST LINK``
 
 Verification and validation criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
