@@ -1604,7 +1604,7 @@ Default stratifications to all observers should include scenario and input draw.
     - N/A
     - N/A
   * - 18.3
-    - Run with updated observer requests to avoid >15 stratifications and multiple bugfixes laid out in this PR: 
+    - Run with updated observer requests to avoid >15 stratifications and multiple bugfixes laid out in the outstanding V&V issues table `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1809>`__ 
     - Baseline, MMS scale-up, and anemia screening scale-up scenarios
     - ``model18.3``
     - Default
@@ -2269,7 +2269,7 @@ Default stratifications to all observers should include scenario and input draw.
     - * `18.2 interactive sim for hemoglobin <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_18.2_interactive_simulation_hemoglobin.ipynb>`__
       * `18.2 interactive sim for LBWSG <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_18.2_interactive_simulation_lbwsg.ipynb>`__
   * - 18.3
-    - 
+    - Same as 17.0 and 18.0
     - 
     - 
   * - 19.0
