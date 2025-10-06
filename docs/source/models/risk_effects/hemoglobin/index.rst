@@ -195,7 +195,7 @@ We calculate custom PAFs for hemoglobin on maternal disorders outcome for use in
 
 - The simulated population does not have a uniform distribution of maternal ages. The PAF values for age groups with less person time have less statistical precision than age groups with more person time represented in our simulation.
 - The PAF calculation does not take detailed correlation with other factors that affect maternal hemorrhage and maternal sepsis risk into account. For instance, the correlation between ANC attendance and in-facility delivery in our simulation will induce a correlation between hemoglobin (as a result of baseline IFA coverage distributed at ANC) and misoprostol coverage (available at home deliveries only), both of which affect maternal hemorrhage risk. We hypothesize that the impact of ignoring this sort of correlation will be small enough for our model to calibrate, but we can revisit this assumption if the model calibrates poorly.
-- We use the hemoglobin exposure distribution during pregnancy to calculate the PAF on postpartum depression rather than the hemoglobin exposure distribution amon simulants who survive to the postpartum period. Given that maternal mortality is a rare event, we assume this limitation will be small, but it can be revisited if the model calibrates poorly.
+- We use the hemoglobin exposure distribution during pregnancy to calculate the PAF on postpartum depression rather than the hemoglobin exposure distribution among simulants who survive to the postpartum period. Given that maternal mortality is a rare event, we assume this limitation will be small, but it can be revisited if the model calibrates poorly.
 
 PAF values from our custom calculations can be found here ``TODO: POST LINK``
 
