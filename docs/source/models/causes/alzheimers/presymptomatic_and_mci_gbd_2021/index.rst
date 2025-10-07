@@ -297,10 +297,10 @@ in cause state X, as defined in the :ref:`data values and sources table below
   * - i_MCI
     - BBBM-AD
     - MCI-AD
-    - :math:`h_\text{MCI}(t - T_\text{BBBM}) * R_h`, where :math:`t` is the
-      current time in the simulation, :math:`T_\text{BBBM}` is the
-      time the simulant entered the BBBM-AD state, and :math:`R_h` is the 
-      :ref:`effect hazard ratio <alzheimers_intervention_treatment_data_table>`
+    - :math:`h_\text{MCI}(t - T_\text{BBBM})`, where :math:`t` is the
+      current time in the simulation, and :math:`T_\text{BBBM}` is the
+      time the simulant entered the BBBM-AD state. 
+      Adjusted in :ref:`intervention_hypothetical_alzheimers_treatment` scenario.
   * - i_AD
     - MCI-AD
     - AD

@@ -54,9 +54,10 @@ Intervention Overview
 -----------------------
 
 The hypothetical treatment intervention is triggered by a positive BBBM test, and has the effect slowing the progression
-from pre-clinical to MCI state. This progression rate is set by a :ref:`time-dependent hazard function <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`
-which is multiplied by a hazard ratio H < 1 when a simulant has an active treatment effect in order to slow the progression.
-This effect can wane over time (udpated each time step) and when the effect fully expires, H returns to 1. 
+from pre-clinical to MCI state via the BBBM to MCI transition hazard rate (:ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`). 
+In the baseline scenario, i_MCI equals the time-dependent hazard function :math:`h_MCI`,
+which in the treatment scenario is multiplied by a hazard ratio :math:`R_h` < 1 when a simulant has an active treatment effect in order to slow the progression.
+This effect can wane over time (udpated each time step) and when the effect fully expires, :math:`R_h` returns to 1. 
 
 This treatment is hypothetical and we don't have confirmed information about the mechanism.
 
@@ -68,11 +69,11 @@ This treatment is hypothetical and we don't have confirmed information about the
   * - Outcome
     - Effect
     - Modeled?
-    - Note (ex: is this relationship direct or mediated?)
-  * - Hypothetical treatment effect
-    - Slows progression to MCI (time-dependent effect size)
+    - Note
+  * - BBBM to MCI transition hazard rate (:ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`)
+    - Adjust multiplicatively using hazard ratio :ref:`R_h <alzheimers_intervention_treatment_data_table>`
     - Yes
-    - 
+    -
 
 
 
@@ -133,12 +134,13 @@ as a result of the time-specific testing rate increasing.
 Some states have zero duration, illustrated with a dashed box (rather than the solid ovals for states with nonzero durations). 
 Transitions from a state with zero duration are illustrated with a dashed line. If a simulant transitions to a zero-duration state 
 on a time step, they should also immediately continue to the next state during that same time step, as a part of the same transition.
+
 For example, a simulant in `BBBM test eligible` who is tested and moves to `BBBM test received` would then immediately move to one of 
-that state's two sinks, and would even move directly to another state during the same transition/ time step on a positive test.
+that state's two sinks, and would even move directly to another state during the same transition/ time step on a positive test. 
 
 Below are tables with details on how to model these states and transitions, and necessary data values. 
 The value of :math:`i_{MCI}` in the :ref:`cause model <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>` is now updated
-to be equal to :math:`h_{adj} = h_{MCI} * R_h`.
+to be equal to :math:`h_{adj} = h_{MCI} \cdot R_h`.
 
 .. _alzheimers_intervention_treatment_data_table:
 
@@ -155,23 +157,23 @@ to be equal to :math:`h_{adj} = h_{MCI} * R_h`.
     - Drawn uniformly from :math:`[0,1)`
     - Lower value means more likely to initiate testing. Independent from testing propensities.
   * - :math:`I`
-    - Time- and location-specific testing initiation rate
+    - Time- and location-specific treatment initiation rate
     - Lilly: "The percent of patients with a positive BBBM test who initiate treatment will vary by location and over time – but will not vary by age or sex. In the US: 30% of eligible patients initiate (constant 2030-2100); Japan: 80% of eligible patients initiate (constant 2030-2100); all other countries: 40% of eligible patients initiate in 2030, increasing linearly to 70% by 2035, remaining constant at 70% until 2100.""
     - 
   * - :math:`h_{adj}`
     - Intervention-adjusted hazard used for progression to MCI
     - :math:`R_h * h_{MCI}`
-    -
+    - In treatment scenario, this is the value for :ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`.
   * - :math:`h_{MCI}`
     - The time-dependent hazard function
     - See :ref:`hazard function docs <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`
-    - Depends on time simulant has been in state
+    - Depends on time simulant has been in state. In baseline scenario, this is the value for :ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`.
   * - :math:`R_h`
     - Effect hazard ratio
     - 1 if simulant has never recieved treatment or has transitioned to the `No treatment effect` state after completing or discontinuing treatment.
       Set to `R_d` on transition to a `Full treatment effect` state, and adjusted linearly during `Waning treatment effect` states.
       See below table for waning value details. 
-    - :math:`R_h * h_{MCI} = h_{adj}`
+    - :math:`R_h * h_{MCI} = h_{adj}`, adjusting :ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`.
   * - :math:`R_d`
     - Draw-specific effect size value
     - Drawn uniformly from [.4, .6]
@@ -202,7 +204,7 @@ to be equal to :math:`h_{adj} = h_{MCI} * R_h`.
     - see :ref:`alzheimers_intervention_treatment_assumptions` for info about treatment/discontinuation timing
     - Immediate, random draw
   * - Full treatment effect LONG
-    -
+    - Treatment effect begins exactly 6 months after recieving a positive BBBM test if :math:`\text{prop}_I < I`
     - On transition to this state, :math:`R_h = R_d`. Set :math:`h_{adj} = R_h * h_{MCI}`, slowing progression to MCI.
       Transition from this state after the fixed duration.
   * - Full treatment effect SHORT
