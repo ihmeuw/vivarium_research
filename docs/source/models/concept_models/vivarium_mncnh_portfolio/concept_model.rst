@@ -472,13 +472,9 @@ Postpartum component
 3.1 Scenario information
 --------------------------
 
-.. todo::
+.. note::
 
-  Define hemoglobin-related baseline coverage
-
-.. todo::
-
-  When designing our intervention coverage across scenarios, we will need to account for the mutually exclusive nature of the :ref:`IFA and MMS interventions <oral_iron_antenatal>`.
+  Scenarios were reworked for model version 18.X. To see the definition of scenarios used for prior models, see the record in this pull request.
 
 
 .. _MNCNH pregnancy component scenario table:
@@ -489,7 +485,7 @@ Postpartum component
   * - Scenario
     - Ultrasound coverage
     - Ultrasound type
-    - IFA/MMS coverage
+    - Oral iron coverage
     - Hemoglobin screening coverage
     - Ferritin screening coverage
     - IV iron coverage
@@ -502,7 +498,7 @@ Postpartum component
     - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
     - Defined in the baseline coverage section of the :ref:`IV iron page <intervention_iv_iron_antenatal_mncnh>`
     - 
-  * - 2. CPAP total scale-up
+  * - 2. CPAP and ACS scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -510,23 +506,15 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 3. CPAP CEMONC-only scale-up
+  * - 3. CPAP, ACS, and AI-ulstrasound scale-up
+    - 100%
+    - 100% AI-assisted
     - Baseline
     - Baseline
     - Baseline
     - Baseline
-    - Baseline
-    - Baseline
-    -  
-  * - 4. CPAP BEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 5. Antibiotics total scale-up
+    - When compared to 2a, shows how AI ultrasound-->facility choice pathway can improve outcomes by having more preterm deliveries deliver in facility settings
+  * - 4. Neonatal antibiotics scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -534,7 +522,7 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 8. Probiotics total scale-up
+  * - 5. Neonatal probiotics scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -542,7 +530,7 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 9. Probiotics CEMONC-only scale-up
+  * - 6. Azithromycin scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -550,7 +538,47 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 10. Probiotics BEMONC-only scale-up
+  * - 7. AI ultrasound scale-up
+    - 100% at ANC (no ultrasound among those who do not attend ANC)
+    - 100% AI-assisted
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 8. Standard ultrasound scale-up
+    - 100% at ANC (no ultrasound among those who do not attend ANC)
+    - 100% standard
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    -
+  * - 9. Full product scale-up, October 2025
+    - 100% at ANC (no ultrasound among those who do not attend ANC)
+    - 100% AI-assisted
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Not including anemia related interventions in this run as implementation of all model components is incomplete as of October 2025
+  * - 10. MMS scale-up
+    - Baseline
+    - Baseline
+    - 100% MMS
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 11. Anemia screening and IV iron scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 100%
+    - 100%
+    - 100%
+    - 
+  * - 12. Azithromycin V&V
     - Baseline
     - Baseline
     - Baseline
@@ -558,23 +586,7 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 11. Azithromycin V&V
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 12. Misoprostol V&V
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 13. Azithromycin results
+  * - 13. Misoprostol V&V
     - Baseline
     - Baseline
     - Baseline
@@ -606,36 +618,20 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 17. MMS total scale-up
-    - Baseline
-    - Baseline
-    - 100% MMS
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 18. Anemia screening scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 100%
-    - 100%
-    - Baseline
-    - 
-  * - 19. IV iron scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 100%
-    - 100%
-    - 100%
-    - 
-  * - 20. Ultrasound V&V
+  * - 17. Ultrasound V&V
     - 100% at ANC (no ultrasound among those who do not attend ANC)
     - 50% standard US, 50% AI-assisted US 
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
+    - 
+  * - 18. Anemia screening V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - 100% of eligible population
+    - 100% of eligible population
     - Baseline
     - 
 
@@ -654,55 +650,65 @@ Postpartum component
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - 
-  * - 2. CPAP total scale-up
+  * - 2. CPAP and ACS scale-up
     - Baseline
-    - Baseline
+    - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
     - 
-  * - 3. CPAP CEMONC-only scale-up
+  * - 3. CPAP, ACS, and AI-assisted ultrasound scale-up
     - Baseline
-    - Baseline
+    - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
     -  
-  * - 4. CPAP BEMONC-only scale-up
+  * - 4. Neonatal antibiotics scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 5. Antibiotics total scale-up
+  * - 5. Neonatal probiotics scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 8. Probiotics total scale-up
+  * - 6. Azithromycin scale-up
+    - 100% at BEmONC and CEmONC, baseline at home
+    - Baseline
+    - Baseline
+    - 
+  * - 7. AI-assisted ultrasound scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 9. Probiotics CEMONC-only scale-up
+  * - 8. Standard ultrasound scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 10. Probiotics BEMONC-only scale-up
+  * - 9. Full product scale-up, October 2025
+    - 100% at BEmONC and CEmONC, baseline at home
+    - 100% at BEmONC and CEmONC, baseline at home
+    - Baseline
+    - Not including misoprostol scale-up in this run because as of October 2025 we have known calibration issues with our hemorrhage model by delivery facility setting
+  * - 10. MMS scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 11. Azithromycin V&V
+  * - 11. Anemia screening and IV iron scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    -
+  * - 12. Azithromycin V&V
     - 50% at BEmONC and CEmONC, baseline at home
     - 0%
     - 0%
     - 
-  * - 12. Misoprostol V&V
+  * - 13. Misoprostol V&V
     - 0%
     - 0%
     - 50% among eligible population (attends ANC and delivers at home)
-    - 
-  * - 13. Azithromycin results
-    - 100% at BEmONC and CEmONC, baseline at home
-    - Baseline
-    - Baseline
     - 
   * - 14. No ACS and total CPAP V&V
     - Baseline
@@ -719,22 +725,12 @@ Postpartum component
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
     - see neonatal table for CPAP coverage    
-  * - 17. MMS scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    -        
-  * - 18. Anemia screening scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    -        
-  * - 19. IV iron scale-up
+  * - 17. Ultrasound V&V
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 20. Ultrasound V&V
+  * - 18. Anemia screening V&V
     - Baseline
     - Baseline
     - Baseline
@@ -755,52 +751,62 @@ Postpartum component
     - Defined on the :ref:`neonatal antibiotic intervention document <intervention_neonatal_antibiotics>`
     - Defined on the :ref:`probiotics intervention model document <intervention_neonatal_probiotics>`
     - Baseline coverage values are delivery facility-specific
-  * - 2. CPAP total scale-up
-    - 100% availability at BEMONC and CEMONC facilities
+  * - 2. CPAP and ACS scale-up
+    - 100% at BEMONC and CEMONC, baseline at home
     - Baseline
     - Baseline
     - 
-  * - 3. CPAP CEMONC-only scale-up
-    - 100% at CEMONC, baseline at BEMONC
+  * - 3. CPAP, ACS, and AI-assisted ultrasound scale-up
+    - 100% at BEMONC and CEMONC, baseline at home
     - Baseline
     - Baseline
     -  
-  * - 4. CPAP BEMONC-only scale-up
-    - Baseline at CEMONC, 100% at BEMONC
-    - Baseline
-    - Baseline
-    - 
-  * - 5. Antibiotics total scale-up
+  * - 4. Neonatal antibiotics scale-up
     - Baseline
     - 100% coverage
     - Baseline
     - 
-  * - 8. Probiotics total scale-up
+  * - 5. Probiotics total scale-up
     - Baseline
     - Baseline
-    - 100% availability at CEMONC and BEMONC facilities
+    - 100% at CEMONC and BEMONC, baseline at home
     - 
-  * - 9. Probiotics CEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - 100% availability at CEMONC, baseline at BEMONC
-    - 
-  * - 10. Probiotics BEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline at CEMONC, 100% at BEMONC
-    - 
-  * - 11. Azithromycin V&V
+  * - 6. Azithromycin scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 12. Misoprostol V&V
+  * - 7. AI-assisted ultrasound scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 13. Azithromycin Results
+  * - 8. Standard ultrasound scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 9. Full product scale-up
+    - 100% at BEMONC and CEMONC, baseline at home
+    - 100%
+    - 100% at BEMONC and CEMONC, baseline at home
+    - 
+  * - 10. MMS scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 11. Anemia screening and IV iron scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 12. Azithromycin V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 13. Misoprostol V&V
     - Baseline
     - Baseline
     - Baseline
@@ -820,22 +826,12 @@ Postpartum component
     - Baseline
     - Baseline
     - See intrapartum table for ACS coverage 
-  * - 17. MMS scale-up
+  * - 17. Ultrasound V&V
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 18. Anemia screening scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 19. IV iron scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 20. Ultrasound V&V
+  * - 18. Anemia screening V&V
     - Baseline
     - Baseline
     - Baseline
@@ -1610,6 +1606,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default (note that observer 7 has been broken up into 7a and 7b)
+  * - 18.4
+    - Updated scenarios (this run to be used for presentation to GF and for record of results pre-GBD 2023 update for comparison)
+    - Scenario numbers 1-9 (all scale-up scenarios for implemented interventions other than misoprostol and hemoglobin-related interventions)
+    - ``model18.4``
+    - Default
+    - Default
+    - Default
   * - 19.0
     - GBD 2023 Update
     - All
