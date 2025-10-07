@@ -32,6 +32,18 @@
 Pregnancy: GBD 2021, Closed Cohort, MNCNH
 =========================================
 
+.. todo::
+
+  Create an updated page for this model document specific to GBD 2023 modeling strategy. 
+
+  Until this is complete, we have implemented a the following (stand-in) changes to the modeling strategy documented on this page for the GBD 2023 update of the MNCNH simulation: 
+
+    * use covariate ID #2541 (Stillbirth to live birth ratio, with stillbirths defined as death of a fetus at 20+ weeks gestation) instead of #2267 (Stillbirth to live birth ratio, with stillbirths defined as death of a fetus at 28+ weeks). 
+
+    * use the uncertainty interval for covariate ID #2541 to generate draw-level estimates for this parameter rather than just using the mean value as we did for GBD 2021 given that there was no parameter uncertainty provided in GBD 2021
+
+  Note that GBD 2023 has new stillbirth rate and count covariates available for both the 20 and 28 week definitions in addition to ratios relative to live births.
+
 .. contents::
    :local:
 
@@ -82,9 +94,12 @@ Pregnancy and births are not explicit outcomes in the GBD study. However, there 
   * - Live births by sex and maternal age
     - 2298
     - 
-  * - Stillbirth to live birth ratio
+  * - Stillbirth to live birth ratio (GBD 2021)
     - 2267
     - Not specific to maternal age. Upper and lower bound estimates are equal to mean estimate (no uncertainty interval)
+  * - Stillbirth to live birth ratio (using stillbirth threshold of 20 weeks, GBD 2023
+    - 2541
+    - Not specific to maternal age. Uncertainty intervals provided.
   * - Age-specific fertility rate
     - 13
     - 
@@ -186,8 +201,8 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Assume lognormal distribution of uncertainty.
   * - SBR
     - Covariate
-    - 2267
-    - get_covariate_estimates: decomp_step='iterative' for GBD 2021
+    - For GBD 2021: 2267, For GBD 2023: 2541
+    - get_covariate_estimates: decomp_step='iterative' for GBD 2021, no need to specify a decomp_step for GBD 2023
     - Parameter is not age specific and has no draw-level uncertainty. Use mean_value as location-specific point parameter.
   * - incidence_c995
     - Incidence rate of abortion and miscarriage cause
