@@ -42,7 +42,7 @@ Pregnancy: GBD 2021, Closed Cohort, MNCNH
 
     * use the uncertainty interval for covariate ID #2541 to generate draw-level estimates for this parameter rather than just using the mean value as we did for GBD 2021 given that there was no parameter uncertainty provided in GBD 2021
 
-  Note that GBD 2023 has new stillbirth rate and count covariates available for both the 20 and 28 week definitions in addition to ratios relative to live births.
+  Note that GBD 2023 has new stillbirth rate and count covariates available for both the 20 and 28 week definitions in addition to ratios relative to live births and that we will likely be revisiting our stillbirth modeling strategy for the MNCNH simulation as part of our incorporation of intrapartum sensors and c-sections into our simulation.
 
 .. contents::
    :local:
