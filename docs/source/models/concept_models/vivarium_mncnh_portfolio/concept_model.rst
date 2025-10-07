@@ -474,7 +474,7 @@ Postpartum component
 
 .. note::
 
-  Scenarios were reworked for model version 18.X. To see the definition of scenarios used for prior models, see the record in this pull request.
+  Scenarios were reworked for model version 18.4. To see the definition of scenarios used for prior models, see the record in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1811>`__. Note that scenario design for this simulation is expected to undergo an additional future rework to achieve compatibility with an "emulator" design.
 
 
 .. _MNCNH pregnancy component scenario table:
@@ -506,7 +506,7 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 3. CPAP, ACS, and AI-ulstrasound scale-up
+  * - 3. CPAP, ACS, and AI-ultrasound scale-up
     - 100%
     - 100% AI-assisted
     - Baseline
