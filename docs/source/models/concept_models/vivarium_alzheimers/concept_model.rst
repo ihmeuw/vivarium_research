@@ -316,7 +316,7 @@ scenario, and input draw.
   * - Person-time in each Alzheimer's cause state
     -
     -
-  * - Existing (CSF/PET) eligible person-time
+  * - Existing (CSF/PET) eligible simulant counts
     - Test states (not tested, BBBM, CSF, PET)
     - Observe eligible simulants and stratify by test states to get test counts
   * - BBBM test counts
