@@ -53,9 +53,9 @@ Hypothetical Alzheimer's Treatment
 Intervention Overview
 -----------------------
 
-The hypothetical treatment intervention is triggered by a positive BBBM test, and has the effect slowing the progression
-from pre-clinical to MCI state via the BBBM to MCI transition hazard rate (:ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`). 
-In the baseline scenario, i_MCI equals the time-dependent hazard function :math:`h_MCI`,
+The hypothetical treatment intervention is triggered by a positive BBBM test, and has the effect of slowing the progression
+from pre-clinical to MCI state via the :ref:`BBBM to MCI transition hazard rate i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`. 
+In the baseline scenario, i_MCI equals the time-dependent hazard function :math:`h_{MCI}`,
 which in the treatment scenario is multiplied by a hazard ratio :math:`R_h` < 1 when a simulant has an active treatment effect in order to slow the progression.
 This effect can wane over time (udpated each time step) and when the effect fully expires, :math:`R_h` returns to 1. 
 
