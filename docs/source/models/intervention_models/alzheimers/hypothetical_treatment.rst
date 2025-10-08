@@ -90,7 +90,8 @@ Vivarium Modeling Strategy
         pos [label="BBBM test positive", style=dashed, shape=box]
         neg [label="BBBM test negative [3 y]"]
 
-        wait [label="In treatment/ Waiting for treatment [6 mo]"]
+        wait [label="Waiting for treatment [6 mo]"]
+        in_treat [label="Receiving treatment", style=dashed, shape=box]
         no_treat [label="No treatment effect [permanent]"]
 
         treat [label="Full treatment effect LONG [5 y]"]
@@ -110,8 +111,9 @@ Vivarium Modeling Strategy
         pos -> wait [label = "decides to initiate treatment (I)", style=dashed]
         pos -> no_treat [label = "decides not to initiate treatment (1 - I)", style=dashed]
 
-        wait -> treat [label = "completes (90%)"]
-        wait -> treat_short [label = "discontinues (10%)"]
+        wait -> in_treat [label = "begins treatment"]
+        in_treat -> treat [label = "completes (90%)", style=dashed]
+        in_treat -> treat_short [label = "discontinues (10%)", style=dashed]
 
         treat_short -> wane_short
         wane_short -> no_treat
@@ -140,7 +142,9 @@ that state's two sinks, and would even move directly to another state during the
 
 Below are tables with details on how to model these states and transitions, and necessary data values. 
 The value of :math:`i_{MCI}` in the :ref:`cause model <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>` is now updated
-to be equal to :math:`h_{adj} = h_{MCI} \cdot R_h`.
+to be equal to :math:`h_{adj} = h_{MCI} \cdot R_h`, where :math:`h_{adj}` is the intervention-adjusted hazard rate used for progression to MCI,
+:math:`h_{MCI}` is the :ref:`time-dependent hazard function <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>` and :math:`R_h`
+is defined below.
 
 .. _alzheimers_intervention_treatment_data_table:
 
@@ -160,20 +164,12 @@ to be equal to :math:`h_{adj} = h_{MCI} \cdot R_h`.
     - Time- and location-specific treatment initiation rate
     - Lilly: "The percent of patients with a positive BBBM test who initiate treatment will vary by location and over time – but will not vary by age or sex. In the US: 30% of eligible patients initiate (constant 2030-2100); Japan: 80% of eligible patients initiate (constant 2030-2100); all other countries: 40% of eligible patients initiate in 2030, increasing linearly to 70% by 2035, remaining constant at 70% until 2100.""
     - 
-  * - :math:`h_{adj}`
-    - Intervention-adjusted hazard used for progression to MCI
-    - :math:`R_h * h_{MCI}`
-    - In treatment scenario, this is the value for :ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`.
-  * - :math:`h_{MCI}`
-    - The time-dependent hazard function
-    - See :ref:`hazard function docs <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`
-    - Depends on time simulant has been in state. In baseline scenario, this is the value for :ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`.
   * - :math:`R_h`
     - Effect hazard ratio
     - 1 if simulant has never recieved treatment or has transitioned to the `No treatment effect` state after completing or discontinuing treatment.
       Set to `R_d` on transition to a `Full treatment effect` state, and adjusted linearly during `Waning treatment effect` states.
       See below table for waning value details. 
-    - :math:`R_h * h_{MCI} = h_{adj}`, adjusting :ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`.
+    - :math:`R_h \cdot h_{MCI} = h_{adj}`, adjusting :ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`.
   * - :math:`R_d`
     - Draw-specific effect size value
     - Drawn uniformly from [.4, .6]
@@ -193,19 +189,22 @@ to be equal to :math:`h_{adj} = h_{MCI} \cdot R_h`.
     - See :ref:`testing intervention <intervention_alzheimers_testing_diagnosis>`
   * - BBBM test received
     -
-    - Immediate, random draw
+    - Zero duration. Random draw
   * - BBBM test positive
     -
-    - :math:`\text{prop}_I < I`\: initiate. :math:`\text{prop}_I >=  I`\: don't initiate.
+    - Zero duration. :math:`\text{prop}_I < I`\: initiate. :math:`\text{prop}_I >=  I`\: don't initiate.
   * - BBBM test negative
     -
     - Fixed duration
-  * - In treatment/ Waiting for treatment
-    - see :ref:`alzheimers_intervention_treatment_assumptions` for info about treatment/discontinuation timing
-    - Immediate, random draw
+  * - Waiting for treatment
+    - 
+    - Fixed duration
+  * - Receiving treatment
+    - Treatment period is instantaneous. See :ref:`alzheimers_intervention_treatment_assumptions` for info about treatment/discontinuation timing.
+    - Zero duration. Random draw
   * - Full treatment effect LONG
-    - Treatment effect begins exactly 6 months after recieving a positive BBBM test if :math:`\text{prop}_I < I`
-    - On transition to this state, :math:`R_h = R_d`. Set :math:`h_{adj} = R_h * h_{MCI}`, slowing progression to MCI.
+    - Treatment takes effect exactly 6 months after recieving a positive BBBM test (if :math:`\text{prop}_I < I`)
+    - On transition to this state, :math:`R_h = R_d`. Set :math:`h_{adj} = R_h \cdot h_{MCI}`, slowing progression to MCI.
       Transition from this state after the fixed duration.
   * - Full treatment effect SHORT
     -
@@ -215,7 +214,7 @@ to be equal to :math:`h_{adj} = h_{MCI} \cdot R_h`.
     - On every time step where the simulant started the time step in this state (ie, don't do it on the initial transition),
       increase :math:`R_h` by :math:`\frac{(1 - R_d)}{s}`, where :math:`s` is the number of time steps in this state's duration.
       This will decrease the effect size linearly until reaching :math:`R_h = 1` on transition to the `No treatment effect` state.
-      Set :math:`h_{adj} = R_h * h_{MCI}`.
+      Set :math:`h_{adj} = R_h \cdot h_{MCI}`.
       Transition from this state after the fixed duration.
   * - Waning treatment effect SHORT
     -
@@ -257,9 +256,9 @@ Assumptions and Limitations
 
 - Those who do not initiate treatment following their first positive BBBM test result, or those who discontinue, 
   will never take the intervention, so propensity can be assigned for simulant lifetime
-- Treatment occurs instantaneously, with a six-month waiting period after BBBM testing. This interprets the 
-  following two Lilly specifications: "The treatment takes immediate full effect in the first 6-month time step" and 
+- Treatment occurs instantaneously (ie, the duration of the treatment period is zero), following a six-month waiting period from time of BBBM test. 
+  So, treatment takes effect exactly six months after BBBM testing. 
+  This interprets the following two Lilly specifications: "The treatment takes immediate full effect in the first 6-month time step" and 
   "There is an average of 6 months between a positive BBBM test result and initiating treatment". We simplify 
   average of 6 months to fixed 6 month duration for all simulants. 
-  Discontinuation occurs during this instantaneous treatment 
-  (or, think of the "In treatment/ Waiting" step as a 6 month treatment period during which some patients may discontinue).
+  Discontinuation occurs during this instantaneous treatment period.
