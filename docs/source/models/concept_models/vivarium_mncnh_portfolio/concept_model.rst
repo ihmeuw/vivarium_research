@@ -513,7 +513,7 @@ Postpartum component
     - Baseline
     - Baseline
     - Baseline
-    - When compared to 2a, shows how AI ultrasound-->facility choice pathway can improve outcomes by having more preterm deliveries deliver in facility settings
+    - When compared to 2, shows how AI ultrasound-->facility choice pathway can improve outcomes by having more preterm deliveries deliver in facility settings
   * - 4. Neonatal antibiotics scale-up
     - Baseline
     - Baseline
