@@ -1611,7 +1611,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default (note that observer 7 has been broken up into 7a and 7b)
   * - 19.0
-    - GBD 2023 Update
+    - GBD 2023 Update. Note that as described on the GBD 2023 LBWSG risk exposure document, we will continue to use GBD 2021 data for the LBWSG risk factor exposures and RR values. However, we will still need to re-run the LBWSG RR cap and PAF calculations as they depend on updated mortality risk data.
     - All
     - ``model19.0``
     - Default
@@ -1624,7 +1624,7 @@ Default stratifications to all observers should include scenario and input draw.
     - For this run only, 10,000,000 population size per draw
     - Default
     - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-  * - 21.0 (can be moved to before GBD 2023 update/19.0 if needed)
+  * - 21.0* (can be moved to before GBD 2023 update/19.0 if needed following an update of the cause IDs to be compatible with GBD 2023)
     - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` cause models
     - Baseline
     - ``model21.0``
