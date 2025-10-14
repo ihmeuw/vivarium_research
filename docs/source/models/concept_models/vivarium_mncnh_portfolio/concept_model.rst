@@ -2349,6 +2349,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Unknown
     - Hussain to update
     - For model 18.3
+  * - Ferritin exposure model needs updating
+    - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
+    - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy to be determined in discussion with the Gates Foundation
+    - TBD
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
     - Update to custom-calculated PAF and reassess
