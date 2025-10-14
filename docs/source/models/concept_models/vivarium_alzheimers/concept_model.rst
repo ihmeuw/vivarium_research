@@ -495,7 +495,7 @@ scenario, and input draw.
     - Add treatment (full, waning) intervention
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
-    - Stratify all BBB testing and treatment observations by semester
+    - Stratify all BBBM testing and treatment observations by semester
     - Add treatment status transition and person-time observers
 
 
@@ -685,11 +685,14 @@ scenario, and input draw.
   * - 4.5
     - Same as 4.4
     - AD-dementia incidence looks identical to 4.4, so the double rounding was perhaps not a problem after all
-    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/9fef98e6cc61f4eb6dec96c2cd477e64cc084d3f/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
   * - 5.0
     - Same as 4.5
     -
-    -
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_09_24_model5.0_vv.ipynb>`__
+      * `Disability weights
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_01_model5.0_vv_dws.ipynb>`__
   * - 6.0
     - * Only eligible simulants are tested based on :ref:`PET/CSF <petcsf_requirements>` and :ref:`BBBM <bbbm_requirements>` testing requirements.
       * Location-specific CSF vs PET testing rates (CSF tests / PET tests = CSF rate / PET rate)
@@ -698,11 +701,11 @@ scenario, and input draw.
       * Year-stratified BBBM test count per newly eligible person count match time-specific rates
       * CSF/PET tests initialized properly - no testing spike for first time step
     - 
-    -
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_03_model6.0_vv_testing.ipynb
   * - 6.1
     -
     -
-    -
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_08_model6.1_vv_testing.ipynb
   * - 7.0
     - * Positive BBBM tests result in 90% treatment initiation and 10% no treatment
       * 10% of transitions to `Full treatment effect` status are by simulants who discontinue treatment
