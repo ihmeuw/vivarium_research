@@ -316,9 +316,31 @@ scenario, and input draw.
   * - Person-time in each Alzheimer's cause state
     -
     -
-  * - Test counts (CSF, PET, BBBM)
-    - By diagnosis provided (for BBBM tests)
-    -
+  * - CSF/PET-eligible simulant count
+    - Test state: CSF test received, PET test received, no test received, (negative) BBBM test received
+    - Observe only simulants eligible for CSF/PET tests and stratify by test states to get test counts. 
+      Simulants who are CSF/PET-eligible but whose test propensity value is >= (CSF testing rate + PET testing rate) will be 
+      in either the no test received stratification or BBBM test received stratification (depending whether or not they have 
+      received a negative BBBM test), since any CSF/PET eligible simulants with propensities < (CSF testing rate + PET testing rate)  
+      will be immediately given one of those tests.
+  * - BBBM test counts
+    - Diagnosis provided (positive, negative). Treatement initiation decision (yes, no).
+    - Diagnosis and treatment initiation both stratified under test count because they both happen immediately on test.
+  * - BBBM newly test-eligibile simulant count
+    - 
+    - Count of simulants who are newly eligible for BBBM testing, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
+      Newly eligible simulants could be incident to pre-clinical, turning 60, or reaching 3 years since their last test.
+      Will be used to check simulation test counts per newly eligible simulant match Lilly annual year-specific test rates.
+  * - Treatment status transition counts
+    - State transitioned to (`Full treatment effect`, `Waning treatment effect`, `No treatment effect`), 
+      treatment completion (completed, discontinued)
+    - Treatment completion stratification for transitions to `Full treatment effect` state allows us to validate the 10% discontinuation rate.
+      Note that the diagram states `Full treatment effect LONG` and `Full treatment effect SHORT` are both considered the same status (`Full treatment effect`),
+      but are stratified by completion status.
+  * - Treatment status person-time
+    - Status (`In treatment/ Waiting for treatment`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect`).
+      Also stratify by treatment completion (completed, discontinuated) from transition observer
+    - Treatment completion stratification allows us to validate the different sized durations for completed/discontinued `Full` and `Waning` treatment statuses
 
 5.0 Model Runs and Verification & Validation
 +++++++++++++++++++++++++++++++++++++++++++++
@@ -444,6 +466,18 @@ scenario, and input draw.
     - * Locations: USA
     - Default
     - Default
+  * - 6.0
+    - Add testing (CSF/PET, BBBM) intervention
+    - Baseline, Alternative Scenario 1
+    - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
+    - Default
+    - Add test counts and testing eligibility observers
+  * - 7.0
+    - Add treatment (full, waning) intervention
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
+    - Default
+    - Add treatment status transition and person-time observers
 
 
 5.2 V & V Tracking
@@ -633,6 +667,24 @@ scenario, and input draw.
     - Same as 4.4
     - AD-dementia incidence looks identical to 4.4, so the double rounding was perhaps not a problem after all
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/9fef98e6cc61f4eb6dec96c2cd477e64cc084d3f/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
+  * - 6.0
+    - * Only eligible simulants are tested based on :ref:`PET/CSF <petcsf_requirements>` and :ref:`BBBM <bbbm_requirements>` testing requirements.
+      * Location-specific CSF vs PET testing rates (CSF tests / PET tests = CSF rate / PET rate)
+      * 90% sensitivity rate for BBBM tests (meaning 90% of simulants test positive, since they all have preclinical AD)
+      * Year-stratified CSF/PET test counts per CSF/PET eligible person-year match location and time-specific rates
+      * Year-stratified BBBM test count per newly eligible person count match time-specific rates
+      * CSF/PET tests initialized properly - no testing spike for first time step
+    - 
+    -
+  * - 7.0
+    - * Positive BBBM tests result in 90% treatment initiation and 10% no treatment
+      * 10% of transitions to `Full treatment effect` status are by simulants who discontinue treatment
+      * Full/Waning durations are accurate (use person-time ratios between states?)
+      * "In treatment/waiting for treatment" duration is accurate (use person-time ratios between states?)
+      * Interactive sim verification spot checking a simulant's durations in treatment statuses as they move through 
+        `BBBM test negative`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect` statuses (for both completed and discontinued treatments)
+    -
+    -
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
