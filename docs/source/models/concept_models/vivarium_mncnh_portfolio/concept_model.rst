@@ -1612,7 +1612,8 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default (note that observer 7 has been broken up into 7a and 7b)
   * - 19.0
-    - GBD 2023 Update
+    - GBD 2023 Update.
+      * `See update in draw-level modeling strategy in this PR <https://github.com/ihmeuw/vivarium_research/pull/1808>`__
     - All
     - ``model19.0``
     - Default
