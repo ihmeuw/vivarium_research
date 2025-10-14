@@ -467,8 +467,9 @@ scenario, and input draw.
     - Default
     - Default
   * - 5.0
-    - Replace incidence and prevalence with AD proportion of GBD 2023
+    - `Replace incidence and prevalence with AD proportion of GBD 2023
       dementia envelope
+      <https://github.com/ihmeuw/vivarium_research/pull/1800>`_
     - Baseline
     - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany,
         Spain, Israel, Taiwan)
@@ -480,11 +481,21 @@ scenario, and input draw.
     - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
     - Default
     - Add test counts and testing eligibility observers
+  * - 6.1
+    - Add person-time observers for BBBM testing
+    - Baseline, Alternative Scenario 1
+    - * Locations: USA
+    - Stratify BBBM testing observers by semester so that we have one
+      observation for every time step
+    - * `Observe person-time of simulants eligible for BBBM testing
+        <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/48>`_
+      * `Observe person-time of simulants ever eligible for BBBM testing
+        <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/49>`_
   * - 7.0
     - Add treatment (full, waning) intervention
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
-    - Default
+    - Stratify all BBB testing and treatment observations by semester
     - Add treatment status transition and person-time observers
 
 
@@ -687,6 +698,10 @@ scenario, and input draw.
       * Year-stratified BBBM test count per newly eligible person count match time-specific rates
       * CSF/PET tests initialized properly - no testing spike for first time step
     - 
+    -
+  * - 6.1
+    -
+    -
     -
   * - 7.0
     - * Positive BBBM tests result in 90% treatment initiation and 10% no treatment
