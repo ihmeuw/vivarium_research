@@ -627,9 +627,12 @@ and retain only the draw columns.
     ].drop(columns=['mean', 'lower', 'upper'])
 
 This data is specific to a given location ID and has 100 draws. To
-add the required 500 draws to the artifact for the MNCNH simulation, 
+add the required 500 draws to the artifact for the MNCNH simulation for GBD 2021, 
 duplicate the data five times such that draw 0 has the same value as 
-draw 100, 200, 300, 400, etc.
+draw 100, 200, 300, 400, etc. For GBD 2023, duplicate the data 2.5
+times such that draw 0 has the same value as draw 100 and 200 and that draw 100 
+has the same value as draw 200 (data for draws 0-49 will be used three
+times as data for draws 50-99 will be used twice).
 
 Once BEmONC or CEmONC has been chosen for all in-facility deliveries,
 use this choice in conjunction with the IFD status to **assign one of
