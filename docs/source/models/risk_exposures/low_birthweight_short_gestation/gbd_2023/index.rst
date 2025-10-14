@@ -37,7 +37,7 @@ The LBWSG risk factor was "out of rotation" for GBD 2023, meaning that the expos
 Utilizing the GBD 2023 (year_id==2023) estimates for LBWSG exposure would require several custom data generation tasks, including (but not necessarily limited to):
 
 - Duplicating the GBD process of forward filling exposure distributions and applying it to birth exposures
-- Performing custom aggregation of birth exposures according to BGD population estimates of live births by sex
+- Performing custom aggregation of birth exposures according to GBD population estimates of live births by sex
 - Performing updated data generation for all custom generated parameters in out model, including (but not necessarily limited to):
   
   - Gestational age shifts for IFA and MMS interventions
