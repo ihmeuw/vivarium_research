@@ -38,7 +38,7 @@ Utilizing the GBD 2023 (year_id==2023) estimates for LBWSG exposure would requir
 
 - Duplicating the GBD process of forward filling exposure distributions and applying it to birth exposures
 - Performing custom aggregation of birth exposures according to GBD population estimates of live births by sex
-- Performing updated data generation for all custom generated parameters in out model, including (but not necessarily limited to):
+- Performing updated data generation for all custom generated parameters in our model, including (but not necessarily limited to):
   
   - Gestational age shifts for IFA and MMS interventions
   - Effect of IV iron on birth weight and gestational age
