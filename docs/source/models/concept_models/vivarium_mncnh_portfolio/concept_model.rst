@@ -2257,7 +2257,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     -
   * - 21.0
-    - Confirm expected rates of cause-specifc and overall maternal disorders causes
+    - Confirm expected rates of cause-specific and overall maternal disorders causes
     - 
     - 
   * - 22.0
