@@ -472,13 +472,9 @@ Postpartum component
 3.1 Scenario information
 --------------------------
 
-.. todo::
+.. note::
 
-  Define hemoglobin-related baseline coverage
-
-.. todo::
-
-  When designing our intervention coverage across scenarios, we will need to account for the mutually exclusive nature of the :ref:`IFA and MMS interventions <oral_iron_antenatal>`.
+  Scenarios were reworked for model version 18.4. To see the definition of scenarios used for prior models, see the record in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1811>`__. Note that scenario design for this simulation is expected to undergo an additional future rework to achieve compatibility with an "emulator" design.
 
 
 .. _MNCNH pregnancy component scenario table:
@@ -489,7 +485,7 @@ Postpartum component
   * - Scenario
     - Ultrasound coverage
     - Ultrasound type
-    - IFA/MMS coverage
+    - Oral iron coverage
     - Hemoglobin screening coverage
     - Ferritin screening coverage
     - IV iron coverage
@@ -502,7 +498,7 @@ Postpartum component
     - Defined in the baseline coverage section of the :ref:`anemia screening intervention page <anemia_screening>`
     - Defined in the baseline coverage section of the :ref:`IV iron page <intervention_iv_iron_antenatal_mncnh>`
     - 
-  * - 2. CPAP total scale-up
+  * - 2. CPAP and ACS scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -510,23 +506,15 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 3. CPAP CEMONC-only scale-up
+  * - 3. CPAP, ACS, and AI-ultrasound scale-up
+    - 100%
+    - 100% AI-assisted
     - Baseline
     - Baseline
     - Baseline
     - Baseline
-    - Baseline
-    - Baseline
-    -  
-  * - 4. CPAP BEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 5. Antibiotics total scale-up
+    - When compared to 2, shows how AI ultrasound-->facility choice pathway can improve outcomes by having more preterm deliveries deliver in facility settings
+  * - 4. Neonatal antibiotics scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -534,7 +522,7 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 8. Probiotics total scale-up
+  * - 5. Neonatal probiotics scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -542,7 +530,7 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 9. Probiotics CEMONC-only scale-up
+  * - 6. Azithromycin scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -550,7 +538,47 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 10. Probiotics BEMONC-only scale-up
+  * - 7. AI ultrasound scale-up
+    - 100% at ANC (no ultrasound among those who do not attend ANC)
+    - 100% AI-assisted
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 8. Standard ultrasound scale-up
+    - 100% at ANC (no ultrasound among those who do not attend ANC)
+    - 100% standard
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    -
+  * - 9. Full product scale-up, October 2025
+    - 100% at ANC (no ultrasound among those who do not attend ANC)
+    - 100% AI-assisted
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Not including anemia related interventions in this run as implementation of all model components is incomplete as of October 2025
+  * - 10. MMS scale-up
+    - Baseline
+    - Baseline
+    - 100% MMS
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 11. Anemia screening and IV iron scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 100%
+    - 100%
+    - 100%
+    - 
+  * - 12. Azithromycin V&V
     - Baseline
     - Baseline
     - Baseline
@@ -558,23 +586,7 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 11. Azithromycin V&V
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 12. Misoprostol V&V
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 13. Azithromycin results
+  * - 13. Misoprostol V&V
     - Baseline
     - Baseline
     - Baseline
@@ -606,36 +618,20 @@ Postpartum component
     - Baseline
     - Baseline
     - 
-  * - 17. MMS total scale-up
-    - Baseline
-    - Baseline
-    - 100% MMS
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 18. Anemia screening scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 100%
-    - 100%
-    - Baseline
-    - 
-  * - 19. IV iron scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 100%
-    - 100%
-    - 100%
-    - 
-  * - 20. Ultrasound V&V
+  * - 17. Ultrasound V&V
     - 100% at ANC (no ultrasound among those who do not attend ANC)
     - 50% standard US, 50% AI-assisted US 
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
+    - 
+  * - 18. Anemia screening V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - 100% of eligible population
+    - 100% of eligible population
     - Baseline
     - 
 
@@ -654,55 +650,65 @@ Postpartum component
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - 
-  * - 2. CPAP total scale-up
+  * - 2. CPAP and ACS scale-up
     - Baseline
-    - Baseline
+    - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
     - 
-  * - 3. CPAP CEMONC-only scale-up
+  * - 3. CPAP, ACS, and AI-assisted ultrasound scale-up
     - Baseline
-    - Baseline
+    - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
     -  
-  * - 4. CPAP BEMONC-only scale-up
+  * - 4. Neonatal antibiotics scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 5. Antibiotics total scale-up
+  * - 5. Neonatal probiotics scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 8. Probiotics total scale-up
+  * - 6. Azithromycin scale-up
+    - 100% at BEmONC and CEmONC, baseline at home
+    - Baseline
+    - Baseline
+    - 
+  * - 7. AI-assisted ultrasound scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 9. Probiotics CEMONC-only scale-up
+  * - 8. Standard ultrasound scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 10. Probiotics BEMONC-only scale-up
+  * - 9. Full product scale-up, October 2025
+    - 100% at BEmONC and CEmONC, baseline at home
+    - 100% at BEmONC and CEmONC, baseline at home
+    - Baseline
+    - Not including misoprostol scale-up in this run because as of October 2025 we have known calibration issues with our hemorrhage model by delivery facility setting
+  * - 10. MMS scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 11. Azithromycin V&V
+  * - 11. Anemia screening and IV iron scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    -
+  * - 12. Azithromycin V&V
     - 50% at BEmONC and CEmONC, baseline at home
     - 0%
     - 0%
     - 
-  * - 12. Misoprostol V&V
+  * - 13. Misoprostol V&V
     - 0%
     - 0%
     - 50% among eligible population (attends ANC and delivers at home)
-    - 
-  * - 13. Azithromycin results
-    - 100% at BEmONC and CEmONC, baseline at home
-    - Baseline
-    - Baseline
     - 
   * - 14. No ACS and total CPAP V&V
     - Baseline
@@ -719,22 +725,12 @@ Postpartum component
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
     - see neonatal table for CPAP coverage    
-  * - 17. MMS scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    -        
-  * - 18. Anemia screening scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    -        
-  * - 19. IV iron scale-up
+  * - 17. Ultrasound V&V
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 20. Ultrasound V&V
+  * - 18. Anemia screening V&V
     - Baseline
     - Baseline
     - Baseline
@@ -755,52 +751,62 @@ Postpartum component
     - Defined on the :ref:`neonatal antibiotic intervention document <intervention_neonatal_antibiotics>`
     - Defined on the :ref:`probiotics intervention model document <intervention_neonatal_probiotics>`
     - Baseline coverage values are delivery facility-specific
-  * - 2. CPAP total scale-up
-    - 100% availability at BEMONC and CEMONC facilities
+  * - 2. CPAP and ACS scale-up
+    - 100% at BEMONC and CEMONC, baseline at home
     - Baseline
     - Baseline
     - 
-  * - 3. CPAP CEMONC-only scale-up
-    - 100% at CEMONC, baseline at BEMONC
+  * - 3. CPAP, ACS, and AI-assisted ultrasound scale-up
+    - 100% at BEMONC and CEMONC, baseline at home
     - Baseline
     - Baseline
     -  
-  * - 4. CPAP BEMONC-only scale-up
-    - Baseline at CEMONC, 100% at BEMONC
-    - Baseline
-    - Baseline
-    - 
-  * - 5. Antibiotics total scale-up
+  * - 4. Neonatal antibiotics scale-up
     - Baseline
     - 100% coverage
     - Baseline
     - 
-  * - 8. Probiotics total scale-up
+  * - 5. Probiotics total scale-up
     - Baseline
     - Baseline
-    - 100% availability at CEMONC and BEMONC facilities
+    - 100% at CEMONC and BEMONC, baseline at home
     - 
-  * - 9. Probiotics CEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - 100% availability at CEMONC, baseline at BEMONC
-    - 
-  * - 10. Probiotics BEMONC-only scale-up
-    - Baseline
-    - Baseline
-    - Baseline at CEMONC, 100% at BEMONC
-    - 
-  * - 11. Azithromycin V&V
+  * - 6. Azithromycin scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 12. Misoprostol V&V
+  * - 7. AI-assisted ultrasound scale-up
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 13. Azithromycin Results
+  * - 8. Standard ultrasound scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 9. Full product scale-up
+    - 100% at BEMONC and CEMONC, baseline at home
+    - 100%
+    - 100% at BEMONC and CEMONC, baseline at home
+    - 
+  * - 10. MMS scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 11. Anemia screening and IV iron scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 12. Azithromycin V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 13. Misoprostol V&V
     - Baseline
     - Baseline
     - Baseline
@@ -820,22 +826,12 @@ Postpartum component
     - Baseline
     - Baseline
     - See intrapartum table for ACS coverage 
-  * - 17. MMS scale-up
+  * - 17. Ultrasound V&V
     - Baseline
     - Baseline
     - Baseline
     - 
-  * - 18. Anemia screening scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 19. IV iron scale-up
-    - Baseline
-    - Baseline
-    - Baseline
-    - 
-  * - 20. Ultrasound V&V
+  * - 18. Anemia screening V&V
     - Baseline
     - Baseline
     - Baseline
@@ -1584,6 +1580,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 18.1
     - Model 17.0 bugfixes:
+
       * Update so that only those who attend ANC are eligible for IFA/MMS
 
         * Include corresponding update in the baseline IFA calibration `laid out in this PR <https://github.com/ihmeuw/vivarium_research/pull/1803>`__
@@ -1599,21 +1596,31 @@ Default stratifications to all observers should include scenario and input draw.
 
       * Updated artifact key for excess shift of IFA on birthweight
       * Update hemoglobin risk effects to use intervention-affected hemoglobin exposure rather than raw hemoglobin exposure
+      * Update baseline calibration to use coverage among total pop rather than at ANC
+      * Fix common random numbers between scenarios with regard to ANC attendance
     - No run necessary, all V&V done in the interactive simulation
     - N/A
     - N
     - N/A
     - N/A
   * - 18.3
-    - Model 18.0 with updated observer requests to avoid >15 stratifications 
+    - Run with updated observer requests to avoid >15 stratifications and multiple bugfixes laid out in the outstanding V&V issues table `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1809>`__ 
     - Baseline, MMS scale-up, and anemia screening scale-up scenarios
     - ``model18.3``
     - Default
     - Default
     - Default (note that observer 7 has been broken up into 7a and 7b)
+  * - 18.4
+    - Updated scenarios (this run to be used for presentation to GF and for record of results pre-GBD 2023 update for comparison)
+    - Scenario numbers 1-9 (all scale-up scenarios for implemented interventions other than misoprostol and hemoglobin-related interventions)
+    - ``model18.4``
+    - Default
+    - Default
+    - Default
   * - 19.0
     - GBD 2023 Update.
       * `See update in draw-level modeling strategy in this PR <https://github.com/ihmeuw/vivarium_research/pull/1808>`__
+      * Note that as described on the GBD 2023 LBWSG risk exposure document, we will continue to use GBD 2021 data for the LBWSG risk factor exposures and RR values. However, we will still need to re-run the LBWSG RR cap and PAF calculations as they depend on updated mortality risk data.
     - All
     - ``model19.0``
     - Default
@@ -1626,7 +1633,7 @@ Default stratifications to all observers should include scenario and input draw.
     - For this run only, 10,000,000 population size per draw
     - Default
     - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-  * - 21.0 (can be moved to before GBD 2023 update/19.0 if needed)
+  * - 21.0* (can be moved to before GBD 2023 update/19.0 if needed following an update of the cause IDs to be compatible with GBD 2023)
     - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` cause models
     - Baseline
     - ``model21.0``
@@ -2246,6 +2253,32 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm "true" low hemoglobin rate matches corresponding GBD anemia impairment prevalence in pregnancy estimate (verification with sim outputs)
       * Confirm low ferriting screening result matches expectation (verification with sim outputs)
       * Validation: confirm that there are lower rates of true/test low hemoglobin status in the MMS scale-up scenario than the baseline scenario
+    - * Baseline coverage of hemoglobin screening test does not vary by ANC attendance and is equal to 100% rather than expected baseline coverage value
+      * Coverage of ferritin screening does not vary by ANC attendance or by tests low hemoglobin exposure as expected
+      * Hemoglobin screening test is not reading in the expected hemoglobin measure: `see this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/149/files#r2403444540>`__
+      * Hemoglobin sensitivity and specificity are not being applied to hemoglobin screening results
+      * Anemia status during pregnancy assessment is not reading in the expected hemoglobin measure: `see this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/149/files#r2403448860>`__
+    - `Interactive simulation notebook for model 18.0 found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_18.0_interactive_simulation_anemia_screening.ipynb>`__. Note that simulation results for this run were not generated due to too many observer stratifications.
+  * - 18.1
+    - * Same as 17.0
+    - * IFA coverage varies by ANC attendance as expected
+      * Coverage of baseline IFA is equal to 1 - the expected value (reading in cat1 exposure rather than cat2)
+      * Baseline calibration of IFA on hemoglobin is using the value of IFA coverage among ANC attendees rather than among the entire population
+      * Hemoglobin relative risk values vary according to non-intervention affected hemoglobin exposure
+      * Common random numbers not applied appropriately to ANC attendance between scenarios
+    - 
+  * - 18.2
+    - Same as 17.0
+    - * Baseline IFA coverage, calibration, and effects on hemoglobin are all functioning as expected
+      * Coverage and effects of MMS on hemoglobin is functioning as expected
+      * Hemoglobin RR values vary according to intervention-affected hemoglobin exposure, as desired
+      * Common random numbers functioning as expected between scenarios with respect to ANC attendance and oral iron intervention coverage
+      * Pipeline values for ``iron_folic_acid_supplementation_on_birth_weight.effect`` and ``iron_folic_acid_supplementation_on_gestational_age.effect`` contain the expected values, but cannot verify how these are being applied to LBWSG exposures.
+      * Cannot verify that common random numbers are functioning as expected with regard to LBWSG exposure between scenarios
+    - * `18.2 interactive sim for hemoglobin <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_18.2_interactive_simulation_hemoglobin.ipynb>`__
+      * `18.2 interactive sim for LBWSG <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_18.2_interactive_simulation_lbwsg.ipynb>`__
+  * - 18.3
+    - Same as 17.0 and 18.0
     - 
     - 
   * - 19.0
@@ -2306,10 +2339,34 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Various V&V issues with oral iron intervention identified in model 17.0 V&V summary
-    - Various issues to be worked through
-    - Make updates specified in models 18.1 and 18.2 and re-evaluate
-    - 18.2, 18.3, TBD
+  * - Pipeline values for ``iron_folic_acid_supplementation_on_birth_weight.effect`` and ``iron_folic_acid_supplementation_on_gestational_age.effect`` contain the expected values, but cannot verify how these are being applied to LBWSG exposures
+    - Unknown
+    - Hussain to investigate
+    - For model 18.3
+  * - Cannot verify that common random numbers are functioning as expected with regard to LBWSG exposure between scenarios
+    - Unknown
+    - Hussain to investigate
+    - For model 18.3
+  * - Baseline coverage of hemoglobin screening test does not vary by ANC attendance and is equal to 100% rather than expected baseline coverage value
+    - Unknown
+    - Hussain to update
+    - For model 18.3
+  * - Coverage of ferritin screening does not vary by ANC attendance or by tests low hemoglobin exposure as expected
+    - Unknown
+    - Hussain to update
+    - For model 18.3
+  * - Hemoglobin screening test is not reading in the expected hemoglobin measure: `see this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/149/files#r2403444540>`__. Likewise, anemia status during pregnancy assessment is not reading in the expected hemoglobin measure: `see this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/149/files#r2403448860>`__
+    - See linked comments
+    - Hussain to update
+    - For model 18.3
+  * - Hemoglobin sensitivity and specificity are not being applied to hemoglobin screening results
+    - Unknown
+    - Hussain to update
+    - For model 18.3
+  * - Ferritin exposure model needs updating
+    - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
+    - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy to be determined in discussion with the Gates Foundation
+    - TBD
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
     - Update to custom-calculated PAF and reassess
