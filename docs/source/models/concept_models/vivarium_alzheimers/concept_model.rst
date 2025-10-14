@@ -330,7 +330,23 @@ scenario, and input draw.
     - 
     - Count of simulants who are newly eligible for BBBM testing, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
       Newly eligible simulants could be incident to pre-clinical, turning 60, or reaching 3 years since their last test.
-      Will be used to check simulation test counts per newly eligible simulant match Lilly annual year-specific test rates.
+      Will be used to check simulation test counts per newly eligible
+      simulant match Lilly annual year-specific test rates.
+  * - Person-time eligible for BBBM testing
+    - BBBM test result (positive, negative, not tested)
+    -
+  * - Person-time ever eligible for BBBM testing
+    - Alzheimer's cause state (BBBM-AD, MCI-AD, AD-dementia); BBBM test
+      result (positive, negative, not tested)
+    - A simulant contributes to this person-time if they have ever been
+      eligible for BBBM testing. We will use this observer to calculate
+      (person-time ever BBBM tested) / (person-time ever BBBM
+      test-eligible) among simulants between 60-80 in the BBBM-AD
+      disease state. The numerator is obtained from the BBBM test result
+      stratification by summing the person-time for simulants with
+      positive or negative BBBM test results, and the denominator is the
+      person-time summed over all test result strata including not
+      tested.
   * - Treatment status transition counts
     - State transitioned to (`Full treatment effect`, `Waning treatment effect`, `No treatment effect`), 
       treatment completion (completed, discontinued)
