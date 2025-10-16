@@ -710,11 +710,18 @@ scenario, and input draw.
     - Some improvement in AD-dementia incidence for younger ages; we think that the duration we have used is off by a little since we did not include mortality in our duration estimate
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_18c_model4.4_vv.ipynb
   * - 4.5
-    - Same as 4.4
+    - Same as 4.4, except add this check that we should have been doing
+      previously:
+
+      * Compute prevalence of AD-dementia state alone (in addition to
+        combined prevalence of all 3 disease states)
     - AD-dementia incidence looks identical to 4.4, so the double rounding was perhaps not a problem after all
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
   * - 5.0
-    - Same as 4.5
+    - Same as 4.5, except add this check that we should have been doing
+      previously:
+
+      * Check disability weights of MCI and AD-dementia
     -
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_09_24_model5.0_vv.ipynb>`__
@@ -730,7 +737,10 @@ scenario, and input draw.
     - 
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_03_model6.0_vv_testing.ipynb
   * - 6.1
-    -
+    - * Compute BBBM test rate as (count of tests) / (eligible
+        person-time)
+      * Compute fraction of simulants who have had BBBM tests as
+        (person-time ever tested) / (person-time ever eligible)
     -
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_08_model6.1_vv_testing.ipynb
   * - 7.0
