@@ -252,13 +252,18 @@ The basic plan for the design of the simulation is as follows:
   * - Number of Draws
     - 25 draws
     -
-  * - Timestep
-    - 183 days (~6 months)
+  * - Step size
+    - 182 days (~6 months)
     - Twice a year is sufficient to capture frequency of testing and
-      disease progression. Model 1 used a timestep of 182 days,
-      resulting in 3 timesteps the first year, so we increased to 183 to
-      guarantee exactly 2 timesteps per year for all 76 simulation
-      years.
+      disease progression. Model 1 used a step size of 182 days,
+      resulting in 3 timesteps the first year, so we increased to 183
+      days in model 2 to guarantee exactly 2 timesteps per year for all
+      76 simulation years. In model 6.1, we switched back to 182 days
+      but recorded "event time" in the observers instead of "current
+      time." This effectively makes the first observation 182 days after
+      the start of the simulation, so the first "timestep" on Jan 1,
+      2025 doesn't count, and all simulation years are again guaranteed
+      to contain exactly 2 timesteps.
   * - Randomness key columns
     - ['entrance_time', 'age', 'sex']
     - There should be no need to modify the standard key columns
@@ -410,6 +415,7 @@ scenario, and input draw.
       initial prevalence of AD equal to 1
     - Baseline
     - * Locations: USA, China
+      * Change  step size from 182 days to 183 days
     - Default
     - Default
   * - 2.1
@@ -501,8 +507,13 @@ scenario, and input draw.
     - Add person-time observers for BBBM testing
     - Baseline, Alternative Scenario 1
     - * Locations: USA
+      * Record "event time" in observers instead of "current time,"
+        effectively making the first timestep 6 months after the
+        simulation start date instead of on the start date, and change
+        the step size back to 182 days to guarantee 2 timesteps per
+        year
     - Stratify BBBM testing observers by semester so that we have one
-      observation for every time step
+      row of observation for every time step
     - * `Observe person-time of simulants eligible for BBBM testing
         <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/48>`_
       * `Observe person-time of simulants ever eligible for BBBM testing
