@@ -677,12 +677,13 @@ scenario, and input draw.
     - 
     -
   * - 7.0
-    - * Positive BBBM tests result in 90% treatment initiation and 10% no treatment
+    - * Positive BBBM tests result in treatment initiation rates that match the year/location specific rates from :math:`I` in the :ref:`treatment intervention data table <alzheimers_intervention_treatment_data_table>`
       * 10% of transitions to `Full treatment effect` status are by simulants who discontinue treatment
       * Full/Waning durations are accurate (use person-time ratios between states?)
       * "In treatment/waiting for treatment" duration is accurate (use person-time ratios between states?)
       * Interactive sim verification spot checking a simulant's durations in treatment statuses as they move through 
         `BBBM test negative`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect` statuses (for both completed and discontinued treatments)
+      * Check hazard ratios for simulants who begin treatment and those who transition to `No treatment effect`
     -
     -
 
