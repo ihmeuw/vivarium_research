@@ -457,7 +457,7 @@ Postpartum component
     - * :ref:`Anemia impairment <2019_anemia_impairment>`
     - New module in wave II
   * - :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>`
-    - * Hemoglobin at birth
+    - * Hemoglobin at end of pregnancy
     - * Maternal disorders outcomes (see outcome table)
     - * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
       * :ref:`Hemoglobin risk effects document <2023_hemoglobin_effects>`
