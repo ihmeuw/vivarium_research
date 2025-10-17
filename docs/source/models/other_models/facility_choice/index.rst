@@ -22,11 +22,11 @@ designated as fundamental to basic emergency obstetric and newborn care (BEmONC)
 parenteral antibiotic administration; parenteral anticonvulsant administration; 
 parenteral uterotonic administration; manual removal of retained products 
 (manual vacuum aspiration); assisted vaginal delivery; manual placental 
-removal; and newborn resuscitation.[UNICEF_2009]_ Comprehensive emergency 
+removal; and newborn resuscitation. [UNICEF_2009]_ Comprehensive emergency 
 obstetric and newborn care (CEmONC) encompasses all BEmONC services plus 
 surgical capability (e.g., for c-sections) and blood transfusion capacity. 
 These critical services determine a health facility's capability to manage 
-obstetric and newborn emergencies.[UNICEF_2009]_ Due to data constraints 
+obstetric and newborn emergencies. [UNICEF_2009]_ Due to data constraints 
 and for simplicity, in our model we assume that all hospitals are CEmONC
 facilities and all other delivery facilities (not including home births) 
 are BEmONC facilities.
@@ -647,43 +647,6 @@ facility (F) of each simulant.**
   alarmingly different from the HS team estimates: 34% from the BMGF
   data vs. ~27% from the HS team data.
 
-.. note::
-
-  The following information was implemented as a placeholder prior to
-  completion of the final facility choice model. It is retained in this
-  note for reference.
-
-  The placeholder delivery facility probabilities were as follows:
-
-    - Home: 68.3%
-
-    - Hospital (CEMONC): 26.6%
-
-    - Clinic/low-level facility (BEMONC): 5.1%
-
-  The placeholder values are from `this paper on Ethiopia
-  <https://link.springer.com/article/10.1186/s12884-020-03002-x#Tab2>`_,
-  which analyzes DHS data. Note that denominator in DHS is all births
-  (live and stillbirths) to interviewed women in the two years preceding
-  the survey.
-
-  **Note that these placeholder values have been superseded by the
-  values in the table above, from DHS and other sources, and we are
-  planning to update them again with data from the Health Systems
-  team.**
-
-  V&V: Confirm attendance rate for each type of delivery facility
-  matches inputs
-
-  Limitation: Moving to a higher level care facility during the
-  intrapartum period is common (referred up once labor begins if there
-  is an issue) and the ability to do this is often a result of transport
-  available, distance to clinics, etc. We will not include this and
-  instead have simulants remain at a single facility for the whole
-  intrapartum period.
-
-  TODO: update to be consistent with BEMONC/CEMONC terminology?
-
 .. _facility_setting_rates:
 
 Overall delivery setting rates
@@ -759,6 +722,6 @@ It might be easier to think about "probability gaps", meaning the difference bet
 References
 ----------
 
-..[UNICEF_2009]:
+.. [UNICEF_2009]
 
   UNICEF. (2009). Monitoring emergency obstetric care: a handbook. https://www.who.int/publications/i/item/9789241547734

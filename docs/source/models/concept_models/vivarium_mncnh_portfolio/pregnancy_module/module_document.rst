@@ -151,25 +151,3 @@ The inputs and outputs for this module are summarized in the tables below.
       pregnancy duration is 37+ weeks. Preterm status will be used for
       validation of the :ref:`facility choice model
       <2024_facility_model_vivarium_mncnh_portfolio>`.
-
-Starting in wave II of the simulation, there will be variables that influence pregnancy module outputs. These variables are listed below.
-
-.. list-table:: Variables that affect pregnancy module outputs
-  :header-rows: 1
-
-  * - Variable
-    - Affected outcome
-    - Instructions for effect
-    - Note
-  * - IFA/MMS coverage (output from hemoglobin module)
-    - * Birth outcome
-      * Gestational age
-      * Birthweight
-    - See the :ref:`oral iron supplementation intervention document <oral_iron_antenatal>`
-    - NOTE: as of 4/9/2025 this intervention model document is not updated and ready for implementation
-  * - IV iron coverage
-    - * Birth outcome
-      * Gestational age
-      * Birthweight
-    - See the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>`
-    - 
