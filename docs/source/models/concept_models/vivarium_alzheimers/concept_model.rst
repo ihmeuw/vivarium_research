@@ -525,14 +525,22 @@ scenario, and input draw.
     - Stratify all BBBM testing and treatment observations by semester
     - Add treatment status transition and person-time observers
   * - 7.1
-    - Fix bug with 80-year-olds entering "waiting for treatment" state;
-      fix usage of propensities for testing; stratify disease observers
+    - Fix usage of propensities for testing; stratify disease observers
       by treatment status
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: USA, Spain
+    - * Stratify disease state transitions and person-time by treatment
+        status (with 5 categories: "full effect long," "full effect
+        short," "waning effect long," "waning effect short," "no
+        effect")
+      * Stratify all BBBM testing and treatment observations by semester
+    - Default
+  * - 7.2
+    - Fix bug with 80-year-olds entering "waiting for treatment" state
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA
     - Stratify disease state transitions and person-time by treatment
-      status, with categories "full effect long," "full effect short,"
-      "waning effect long," "waning effect short," "no effect"
+      status
     - Default
 
 
@@ -768,11 +776,16 @@ scenario, and input draw.
 
       * Check relative risk of treatment on BBBM → MCI transition in
         observer output now that we have the necessary stratifications
-      * Check that the 80-84 year-old age group has no transitions into
-        the "waiting for treatment" state
       * Check that CSF and PET testing start decreasing at the same time
         when increasing BBBM testing, rather than CSF testing always
         decreasing first
+    -
+    -
+  * - 7.2
+    - Same as model 7.1, but add:
+
+      * Check that the 80-84 year-old age group has no transitions into
+        the "waiting for treatment" state
     -
     -
 
