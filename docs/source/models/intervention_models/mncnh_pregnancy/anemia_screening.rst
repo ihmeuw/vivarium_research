@@ -44,8 +44,8 @@ sensitivity and specificity levels for the hemoglobin screening test as informed
 
 Follow the steps below to determine the answer to decision node #7:
 
-1. Assess a simulants "true" low hemoglobin status based on their hemoglobin exposure *after* action points I, II, and III have been executed (and *before* IV, V, and VI). Low hemoglobin 
-    status corresponds to values of <100 g/L and adequate hemoglobin status corresponds to values of 100+ g/L.
+1. Assess a simulants "true" low hemoglobin status based on their hemoglobin exposure at the time of screening, which should be based on their true 
+hemoglobin exposure value *after* effects from oral iron received at the first trimester ANC visit and *before* any effects from interventions received at the second trimester have been applied. In other words, use oral iron-affected hemoglobin exposure for those who attend ANC during the first trimester and "ifa-deleted" hemoglobin exposure for those who do not attend ANC during the first trimester (but do later in pregnancy). Low hemoglobin status corresponds to values of <100 g/L and adequate hemoglobin status corresponds to values of 100+ g/L.
 2. For simulants that are truly low hemoglobin, assign tests low hemoglobin status to 85% (sensitivity value) and tests adequate hemoglobin status to 15% (100 - sensitivity value of 85)
 3. For simulants that are truly adequate hemoglobin, assign tests adequate hemoglobin status to 80% (specificity) and tests low hemoglobin status to 20% (100 - specificty value of 80)
 4. Use the test hemoglobin status to determine the answer to decision node 7 (answer is "yes" if they have test low hemoglobin status and "no" if they have test adequate hemoglobin status)
@@ -74,22 +74,78 @@ also coincidentally has low ferritin.
 
   Chris T. has suggested that we can use the fraction of iron deficiency anemia from the in-progress PRISMA study rather than GBD for this purpose. PRIMSA study results are expected in June or July of 2025.
 
-`The notebook that was used to calculate these values can be found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/fraction_iron_responsive_anemia.ipynb>`_
-
 **Modeling instructions:**
 
 The probability of low ferritin screening is dependent on the simulant's location, age group, and anemia status at the time of screening. Anemia status at the time of screening should be based on their true 
-hemoglobin exposure value *after* action points I, II, and III have been executed (and *before* IV, V, and VI). See the :ref:`anemia/hemoglobin exposure table here for reference <2019_anemia_impairment>` and 
+hemoglobin exposure value *after* effects from oral iron received at the first trimester ANC visit and *before* any effects from interventions received at the second trimester have been applied. In other words, use oral iron-affected hemoglobin exposure for those who attend ANC during the first trimester and "ifa-deleted" hemoglobin exposure for those who do not attend ANC during the first trimester (but do later in pregnancy). See the :ref:`anemia/hemoglobin exposure table here for reference <2019_anemia_impairment>` and 
 remember to use the pregnancy-specific values.
 
-`The probability of low ferritin specific to location, age, and anemia status can be found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/iron_responsive_fraction.csv>`_. 
-Record assigned ferritin exposure to output G to be used for V&V in the interactive simulation.
+The probability of low ferritin specific to location, age, and anemia status (termed exp_among_{SEVERITY} in the table below) can be calculated according to the parameters defined in the table below.
+
+.. list-table:: Ferritin parameters
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - exp_among_non_anemic
+    - Rate of low ferritin exposure among the population without anemia
+    - exp_among_mild / 2 
+    - Model assumption given that it is definitionally expected to have a lower rate than mild anemia, but also should be >0 as it is possible to have low ferritin and adequate hemoglobin
+  * - exp_among_{SEVERITY}
+    - Rate of low ferritin exposure among the population with a given anemia severity of mild, moderate, or severe
+    - prev_{SEVERITY}_iron_responsive_anemia_sequelae / prev_{SEVERITY}_anemia_impairment
+    - 
+  * - prev_{SEVERITY}_iron_responsive_anemia_sequelae
+    - Sum of sequela-level prevalence for specified list of sequela IDs that represent anemia severity-specific iron responsive anemia
+    - See ``get_draws`` call below this table
+    - 
+  * - prev_{SEVERITY}_anemia_impairment
+    - Severity-specific anemia impairment prevalence
+    - from GBD: source='como', mild anemia REI = 205, moderate anemia REI = 206, severe anemia REI = 207
+    - 
+  * - mild_ira_sids
+    - List of sequela IDs that represent all mild iron responsive anemias
+    - [144, 172, 177, 240, 182, 5393, 23030, 23034, 23038, 23046, 23042, 7202, 4976, 4952, 4955, 5627, 7214, 5009, 4985, 4988, 5678, 5567, 5579, 22989, 5225, 5249, 5273, 22990, 5228, 5252, 5276, 22991, 1016, 1421, 1373, 22992, 1024, 1433, 1385, 22993, 1032, 1445, 1397, 1106, 525, 23187, 23179, 23162, 23488, 206] 
+    - `List generated in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/137>`__
+  * - moderate_ira_sids
+    - List of sequela IDs that represent all moderate iron responsive anemias
+    - [145, 173, 178, 241, 183, 5396, 23031, 23035, 23039, 23047, 23043, 7205, 4979, 4958, 4961, 5630, 7217, 5012, 4991, 4994, 5681, 5570, 5582, 22999, 5219, 5243, 5267, 23000, 5222, 5246, 5270, 23001, 1017, 1424, 1376, 23002, 1025, 1436, 1388, 23003, 1033, 1448, 1400, 1107, 526, 23188, 23180, 23163, 23489, 207]
+    - `List generated in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/137>`__
+  * - severe_ira_sids
+    - List of sequela IDs that represent all severe iron responsive anemias
+    - [146, 174, 179, 242, 184, 5399, 23032, 23036, 23040, 23048, 23044, 7208, 4982, 4964, 4967, 5633, 7220, 5015, 4997, 5000, 5684, 5573, 5585, 23009, 5213, 5237, 5261, 23010, 5216, 5240, 5264, 23011, 1018, 1427, 1379, 23012, 1026, 1439, 1391, 23013, 1034, 1451, 1403, 1108, 527, 23189, 23181, 23164, 23490, 208]
+    - `List generated in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/137>`__
+
+
+.. code-block::
+
+  from get_draws.api import get_draws
+  year_id = 2023
+  gbd_release_id = 16 # gbd 2023
+
+  {SEVERITY}_sequela_data = get_draws(release_id=gbd_release_id,
+            year_id=year_id,
+            sex_id=sex_id,
+            age_group_id=age_group_id,
+            source='como',
+            gbd_id_type='sequela_id',
+            gbd_id={SEVERITY}_ira_sids,
+            measure_id=5, # prevalence
+            sex_id=2, # female (only need female for the MNCNH simulation)
+            # location_id = location_ids, # specify according to modeled locations
+            # age_group_id = age_group_ids # specific according to modeled age groups
+            )
+  prev_{SEVERITY}_iron_responsive_anemias = ({SEVERITY}_sequela_data.groupby(['location_id','age_group_id','sex_id'])
+                                              [[x for x in {SEVERITY}_sequela_data.columns if 'draw' in x]].sum())
+
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
 Baseline coverage of the minimally invasive blood test for hemoglobin screening is defined by estimates processed by the Health Systems team. 
-The country-specific estimates are available at ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc_iron_prop_st-gpr_results_aggregates_scaled2025-05-30.csv``.
+The country-specific estimates are available at ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc_bloodsample_prop_st-gpr_results_aggregates_scaled2025-05-29.csv``.
 
 Baseline coverage of ferritin screening is defined in the table below. 
 
@@ -132,6 +188,8 @@ Assumptions and Limitations
   in order to match the desired sensitivity and specificity of the screening test, we would need to solve for the uncertainty 
   distribution, likely via optimization, at the location-specific level (as it will depend on the underlying population 
   hemoglobin exposure distribution).
+- We use the severity-specific fraction of iron responsive anemia among all causes of anemia in GBD as a proxy measure for the fraction of anemia cases with low ferritin. This approach is limited in that we may slightly underestimate total eligibility by not considering the proportion of the population who has low hemoglobin due to an iron-non-responsive cause and also coincidentally has low ferritin.
+- In the absence of data to directly inform otherwise, we assume that the population without anemia has half the rate of low ferritin exposure as the population with mild anemia. We made this assumption given that the population without anemia is expected to have a low ferritin exposure level that is greater than zero but less than that of the population with mild anemia.
 
 .. todo:: 
 

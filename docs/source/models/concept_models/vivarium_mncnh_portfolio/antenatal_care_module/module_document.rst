@@ -84,8 +84,8 @@ and :ref:`our facility choice module documentation <2024_vivarium_mncnh_portfoli
     - Source 
     - Definition
   * - ANCfirst
-    - ANCfirst is processed by the Health Systems team at IHME and available here:
-      ``J:\Project\simulation_science\mnch_grant\MNCNH portfolio\anc1_first3months_st-gpr_results_aggregates_scaled2025-05-27.csv``
+    - ANCfirst is processed by the Health Systems team at IHME and available on the J drive here:
+      ``/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/anc1_first3months_st-gpr_results_aggregates_scaled2025-05-27.csv``. We have implemented this so that we will use data specific to the ``year_start`` value in the artifact (2021 when using GBD 2021 data and 2023 when using GBD 2023 data). `Relevant code is shown here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/210015c31a9ed8ac6bd80dbc169beb9f13877044/src/vivarium_gates_mncnh/data/loader.py#L295>`__)
     - Proportion of pregnant people attending ANC in the first trimester
   * - ANC1
     - GBD covariate ID 7: :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=7)` 
@@ -230,7 +230,7 @@ outputs, one being dichotomous for the hemoglobin component and the other being 
 
 .. todo:: 
 
-  If we decide to improve the estimation of timing for ANC visits in our model (see `this JIRA ticket <https://jira.ihme.washington.edu/browse/SSCI-2318>`) we need to
+  If we decide to improve the estimation of timing for ANC visits in our model (see `this JIRA ticket <https://jira.ihme.washington.edu/browse/SSCI-2318>`__) we need to
   update our documentation accordingly.
 
 4.0 Verification and Validation Criteria
