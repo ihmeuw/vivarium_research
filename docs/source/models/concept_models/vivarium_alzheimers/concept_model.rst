@@ -252,13 +252,18 @@ The basic plan for the design of the simulation is as follows:
   * - Number of Draws
     - 25 draws
     -
-  * - Timestep
-    - 183 days (~6 months)
+  * - Step size
+    - 182 days (~6 months)
     - Twice a year is sufficient to capture frequency of testing and
-      disease progression. Model 1 used a timestep of 182 days,
-      resulting in 3 timesteps the first year, so we increased to 183 to
-      guarantee exactly 2 timesteps per year for all 76 simulation
-      years.
+      disease progression. Model 1 used a step size of 182 days,
+      resulting in 3 timesteps the first year, so we increased to 183
+      days in model 2 to guarantee exactly 2 timesteps per year for all
+      76 simulation years. In model 6.1, we switched back to 182 days
+      but recorded "event time" in the observers instead of "current
+      time." This effectively makes the first observation 182 days after
+      the start of the simulation, so the first "timestep" on Jan 1,
+      2025 doesn't count, and all simulation years are again guaranteed
+      to contain exactly 2 timesteps.
   * - Randomness key columns
     - ['entrance_time', 'age', 'sex']
     - There should be no need to modify the standard key columns
@@ -330,7 +335,23 @@ scenario, and input draw.
     - 
     - Count of simulants who are newly eligible for BBBM testing, based on the :ref:`BBBM eligibility requirements <bbbm_requirements>` (list in step 1).
       Newly eligible simulants could be incident to pre-clinical, turning 60, or reaching 3 years since their last test.
-      Will be used to check simulation test counts per newly eligible simulant match Lilly annual year-specific test rates.
+      Will be used to check simulation test counts per newly eligible
+      simulant match Lilly annual year-specific test rates.
+  * - Person-time eligible for BBBM testing
+    - BBBM test result (positive, negative, not tested)
+    -
+  * - Person-time ever eligible for BBBM testing
+    - Alzheimer's cause state (BBBM-AD, MCI-AD, AD-dementia); BBBM test
+      result (positive, negative, not tested)
+    - A simulant contributes to this person-time if they have ever been
+      eligible for BBBM testing. We will use this observer to calculate
+      (person-time ever BBBM tested) / (person-time ever BBBM
+      test-eligible) among simulants between 60-80 in the BBBM-AD
+      disease state. The numerator is obtained from the BBBM test result
+      stratification by summing the person-time for simulants with
+      positive or negative BBBM test results, and the denominator is the
+      person-time summed over all test result strata including not
+      tested.
   * - Treatment status transition counts
     - State transitioned to (`Full treatment effect`, `Waning treatment effect`, `No treatment effect`), 
       treatment completion (completed, discontinued)
@@ -394,6 +415,7 @@ scenario, and input draw.
       initial prevalence of AD equal to 1
     - Baseline
     - * Locations: USA, China
+      * Change  step size from 182 days to 183 days
     - Default
     - Default
   * - 2.1
@@ -466,17 +488,41 @@ scenario, and input draw.
     - * Locations: USA
     - Default
     - Default
+  * - 5.0
+    - `Replace incidence and prevalence with AD proportion of GBD 2023
+      dementia envelope
+      <https://github.com/ihmeuw/vivarium_research/pull/1800>`_
+    - Baseline
+    - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany,
+        Spain, Israel, Taiwan)
+    - Default
+    - Default
   * - 6.0
     - Add testing (CSF/PET, BBBM) intervention
     - Baseline, Alternative Scenario 1
     - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
     - Default
     - Add test counts and testing eligibility observers
+  * - 6.1
+    - Add person-time observers for BBBM testing
+    - Baseline, Alternative Scenario 1
+    - * Locations: USA
+      * Record "event time" in observers instead of "current time,"
+        effectively making the first timestep 6 months after the
+        simulation start date instead of on the start date, and change
+        the step size back to 182 days to guarantee 2 timesteps per
+        year
+    - Stratify BBBM testing observers by semester so that we have one
+      row of observation for every time step
+    - * `Observe person-time of simulants eligible for BBBM testing
+        <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/48>`_
+      * `Observe person-time of simulants ever eligible for BBBM testing
+        <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/49>`_
   * - 7.0
     - Add treatment (full, waning) intervention
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
-    - Default
+    - Stratify all BBBM testing and treatment observations by semester
     - Add treatment status transition and person-time observers
 
 
@@ -664,9 +710,23 @@ scenario, and input draw.
     - Some improvement in AD-dementia incidence for younger ages; we think that the duration we have used is off by a little since we did not include mortality in our duration estimate
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/290165c8190b2030db735f812cf2b0c02733ac30/verification_and_validation/2025_09_18c_model4.4_vv.ipynb
   * - 4.5
-    - Same as 4.4
+    - Same as 4.4, except add this check that we should have been doing
+      previously:
+
+      * Compute prevalence of AD-dementia state alone (in addition to
+        combined prevalence of all 3 disease states)
     - AD-dementia incidence looks identical to 4.4, so the double rounding was perhaps not a problem after all
-    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/9fef98e6cc61f4eb6dec96c2cd477e64cc084d3f/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
+  * - 5.0
+    - Same as 4.5, except add this check that we should have been doing
+      previously:
+
+      * Check disability weights of MCI and AD-dementia
+    -
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_09_24_model5.0_vv.ipynb>`__
+      * `Disability weights
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_01_model5.0_vv_dws.ipynb>`__
   * - 6.0
     - * Only eligible simulants are tested based on :ref:`PET/CSF <petcsf_requirements>` and :ref:`BBBM <bbbm_requirements>` testing requirements.
       * Location-specific CSF vs PET testing rates (CSF tests / PET tests = CSF rate / PET rate)
@@ -675,7 +735,14 @@ scenario, and input draw.
       * Year-stratified BBBM test count per newly eligible person count match time-specific rates
       * CSF/PET tests initialized properly - no testing spike for first time step
     - 
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_03_model6.0_vv_testing.ipynb
+  * - 6.1
+    - * Compute BBBM test rate as (count of tests) / (eligible
+        person-time)
+      * Compute fraction of simulants who have had BBBM tests as
+        (person-time ever tested) / (person-time ever eligible)
     -
+    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_08_model6.1_vv_testing.ipynb
   * - 7.0
     - * Positive BBBM tests result in treatment initiation rates that match the year/location specific rates from :math:`I` in the :ref:`treatment intervention data table <alzheimers_intervention_treatment_data_table>`
       * 10% of transitions to `Full treatment effect` status are by simulants who discontinue treatment
