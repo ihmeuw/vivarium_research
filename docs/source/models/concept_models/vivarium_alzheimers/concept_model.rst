@@ -529,15 +529,13 @@ scenario, and input draw.
       by treatment status
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: USA, Spain
-    - * Stratify disease state transitions and person-time by treatment
-        status (with 5 categories: "full effect long," "full effect
-        short," "waning effect long," "waning effect short," "no
-        effect")
-      * Stratify all BBBM testing and treatment observations by semester
+    - Stratify disease state transitions and person-time by treatment
+      status (with 5 categories: "full effect long," "full effect
+      short," "waning effect long," "waning effect short," "no effect")
     - Default
   * - 7.2
     - Fix bug with 80-year-olds entering "waiting for treatment" state
-    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - Baseline, Alternative Scenario 2
     - * Locations: USA
     - Stratify disease state transitions and person-time by treatment
       status
@@ -782,7 +780,7 @@ scenario, and input draw.
     -
     -
   * - 7.2
-    - Same as model 7.1, but add:
+    - Same as model 7.0, but add:
 
       * Check that the 80-84 year-old age group has no transitions into
         the "waiting for treatment" state
