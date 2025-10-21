@@ -93,16 +93,13 @@ There is no need for a diagram for the initial attributes module of this simulat
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-.. todo::
-
-  List module assumptions and limitations
+See the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`.
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-.. todo::
-  
-  List module V&V criteria
+None.
+Correlated propensities V&Ved as part of facility choice.
 
 5.0 References
 +++++++++++++++

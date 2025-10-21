@@ -230,7 +230,7 @@ outputs, one being dichotomous for the hemoglobin component and the other being 
 
 .. todo:: 
 
-  If we decide to improve the estimation of timing for ANC visits in our model (see `this JIRA ticket <https://jira.ihme.washington.edu/browse/SSCI-2318>`) we need to
+  If we decide to improve the estimation of timing for ANC visits in our model (see `this JIRA ticket <https://jira.ihme.washington.edu/browse/SSCI-2318>`__) we need to
   update our documentation accordingly.
 
 4.0 Verification and Validation Criteria
