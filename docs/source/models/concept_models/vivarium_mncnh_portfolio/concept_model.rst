@@ -2363,10 +2363,14 @@ Default stratifications to all observers should include scenario and input draw.
     - Unknown
     - Hussain to update
     - For model 18.3
-  * - Ferritin exposure model needs updating
+  * - `Ferritin exposure model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2439>`__
     - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
-    - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy to be determined in discussion with the Gates Foundation
-    - TBD
+    - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy using PRISMA data shared by the Gates foundation
+    - Will decide how to proceed when we receive PRISMA data
+  * - `Peripartum depression model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2415>`__
+    - Current implementation is based off of an adaptation of the assumptions used in the GBD 2021 major depressive disorders cause model
+    - We will need to either (1) update our model to be in line with the GBD 2023 model and consider updating our PAF calculation strategy as described in this ticket, or (2) update to the extra-GBD data on peripartum depression obtained from the mental disorders modelers
+    - Will decide how to proceed after discussing with the mental disorders modelers 
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
     - Update to custom-calculated PAF and reassess
