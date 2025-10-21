@@ -48,9 +48,9 @@ jobs:
           username: ${{ secrets.NOTIFY_EMAIL }}
           password: ${{ secrets.NOTIFY_PASSWORD }}
           # email subject
-          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          subject: ${{ github.repository }} has ${{ job.status }} in ${{ github.ref_name }}
           # email body as text
-          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+          body: ${{ github.repository }} has ${{ job.status }} in ${{ github.ref_name }}
           # comma-separated string, send email to
           to: uw_ihme_simulationscience@uw.edu
           # from email name
