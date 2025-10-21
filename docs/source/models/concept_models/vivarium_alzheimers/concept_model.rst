@@ -524,6 +524,16 @@ scenario, and input draw.
     - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
     - Stratify all BBBM testing and treatment observations by semester
     - Add treatment status transition and person-time observers
+  * - 7.1
+    - Fix bug with 80-year-olds entering "waiting for treatment" state;
+      fix usage of propensities for testing; stratify disease observers
+      by treatment status
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA, Spain
+    - Stratify disease state transitions and person-time by treatment
+      status, with categories "full effect long," "full effect short,"
+      "waning effect long," "waning effect short," "no effect"
+    - Default
 
 
 5.2 V & V Tracking
