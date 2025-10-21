@@ -295,7 +295,7 @@ Pregnancy component
         * IFA/MMS coverage
         * IV iron coverage
       - * Hemoglobin at start of pregnancy
-        * Hemoglobin at birth
+        * Hemoglobin at end of pregnancy
       - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <oral_iron_antenatal>`
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
@@ -376,7 +376,7 @@ Intrapartum component
     * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
       - * (Pregnancy term duration)
         * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
-        * Hemoglobin at birth
+        * Hemoglobin at end of pregnancy
       - * Maternal disorders outcomes (see outcome table)
       - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
         * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
@@ -384,7 +384,7 @@ Intrapartum component
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
         * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
         * :ref:`Partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>`
-      - * Hemoglobin at birth as a variable that impacts maternal disorders causes
+      - * Hemoglobin at end of pregnancy as a variable that impacts maternal disorders causes
         * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
         * New causes of residual and partial term pregnancy maternal disorders
 
@@ -439,7 +439,7 @@ Postpartum component
     - Nested subcomponents
     - Wave II updates
   * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
-    - * Hemoglobin at birth
+    - * Hemoglobin at end of pregnancy
       * Maternal hemorrhage incidence
     - * Postpartum hemoglobin
     - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
@@ -447,7 +447,7 @@ Postpartum component
     - New module in wave II
   * - :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`
     - * Hemoglobin at start of pregnancy
-      * Hemoglobin at birth
+      * Hemoglobin at end of pregnancy
       * Postpartum hemoglobin
       * IFA/MMS coverage
       * IV iron coverage
@@ -457,7 +457,7 @@ Postpartum component
     - * :ref:`Anemia impairment <2019_anemia_impairment>`
     - New module in wave II
   * - :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>`
-    - * Hemoglobin at birth
+    - * Hemoglobin at end of pregnancy
     - * Maternal disorders outcomes (see outcome table)
     - * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
       * :ref:`Hemoglobin risk effects document <2023_hemoglobin_effects>`

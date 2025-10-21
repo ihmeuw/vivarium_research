@@ -87,7 +87,7 @@ Plasma volume during pregnancy has been shown to increase by approximately 50% i
 
   We are assuming that the increase in plasma volume during pregnancy as observed by [Aguree-and_Gernand-2019]_ is equivalent to the increase in blood volume.
 
-Additionally we will assume blood loss of 0.75 L for moderate hemorrhage (0.5 - 1 L blood loss) and 1.25 L for severe hemorrhage (>1 L blood loss). Therefore, we will model a reduction in hemoglobin equal to 10% of hemoglobin at birth for moderate hemorrhage (0.75 / 7.5) and 16.7% reduction for severe hemorrhage (1.25 / 7.5).
+Additionally we will assume blood loss of 0.75 L for moderate hemorrhage (0.5 - 1 L blood loss) and 1.25 L for severe hemorrhage (>1 L blood loss). Therefore, we will model a reduction in hemoglobin equal to 10% of hemoglobin at end of pregnancy for moderate hemorrhage (0.75 / 7.5) and 16.7% reduction for severe hemorrhage (1.25 / 7.5).
 
 For simulants who experience an incident case of maternal hemorrhage as determined in the :ref:`maternal hemorrhage incidence cause mode document<2019_cause_maternal_hemorrhage_incidence>`:
 
