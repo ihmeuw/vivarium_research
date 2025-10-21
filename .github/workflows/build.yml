@@ -38,8 +38,7 @@ jobs:
         run: |
           make html -C docs/ SPHINXOPTS="-W --keep-going -n"
       - name: Send mail
-        # Notify when cron job fails
-        if: failure()
+        if: failure() && github.ref_name == 'send_email_on_failure'
         uses: dawidd6/action-send-mail@v2
         with:
           # mail server settings

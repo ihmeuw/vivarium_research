@@ -236,6 +236,8 @@ the modules could be run in the simulation.
 
 .. note::
 
+.. note::
+
   There is :ref:`a template <2024_vivarium_mncnh_portfolio_module_template>` to use when creating new module pages.
 
 ..
