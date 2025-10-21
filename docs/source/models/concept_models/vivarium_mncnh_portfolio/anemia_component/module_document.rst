@@ -73,7 +73,7 @@ and YLDs.
     - :ref:`Hemoglobin module<2024_vivarium_mncnh_portfolio_hemoglobin_module>`
     - Used to calculate anemia YLDs
     - 
-  * - Hemoglobin at birth
+  * - Hemoglobin at end of pregnancy
     - :ref:`Hemoglobin module<2024_vivarium_mncnh_portfolio_hemoglobin_module>`
     - Used to calculate anemia YLDs
     - 
