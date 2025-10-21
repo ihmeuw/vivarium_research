@@ -763,6 +763,18 @@ scenario, and input draw.
       * Check hazard ratios for simulants who begin treatment and those who transition to `No treatment effect`
     -
     -
+  * - 7.1
+    - Same as model 7.0, but add:
+
+      * Check relative risk of treatment on BBBM → MCI transition in
+        observer output now that we have the necessary stratifications
+      * Check that the 80-84 year-old age group has no transitions into
+        the "waiting for treatment" state
+      * Check that CSF and PET testing start decreasing at the same time
+        when increasing BBBM testing, rather than CSF testing always
+        decreasing first
+    -
+    -
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
