@@ -525,8 +525,9 @@ scenario, and input draw.
     - Stratify all BBBM testing and treatment observations by semester
     - Add treatment status transition and person-time observers
   * - 7.1
-    - Fix usage of propensities for testing; stratify disease observers
-      by treatment status
+    - `Fix usage of propensities for testing, and stratify disease
+      observers by treatment status
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/54>`_
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: USA, Spain
     - Stratify disease state transitions and person-time by treatment
@@ -534,7 +535,10 @@ scenario, and input draw.
       short," "waning effect long," "waning effect short," "no effect")
     - Default
   * - 7.2
-    - Fix bug with 80-year-olds entering "waiting for treatment" state
+    - `Fix bug with 80-year-olds entering "waiting for treatment" state
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/53>`_, and
+      `fix bug in BBBM → MCI hazard rate
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/55>`_
     - Baseline, Alternative Scenario 2
     - * Locations: USA
     - Stratify disease state transitions and person-time by treatment
@@ -780,10 +784,14 @@ scenario, and input draw.
     -
     -
   * - 7.2
-    - Same as model 7.0, but add:
+    - Same as model 7.1, but add:
 
       * Check that the 80-84 year-old age group has no transitions into
         the "waiting for treatment" state
+      * Check BBBM → MCI hazard rate in observer output and interactive
+        sim
+      * Re-run V&V from models 4 and 5 to check disease state
+        incidence, prevalence, etc.
     -
     -
 
