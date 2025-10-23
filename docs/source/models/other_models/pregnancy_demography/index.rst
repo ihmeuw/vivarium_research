@@ -72,6 +72,14 @@ Pregnancy and births are not explicit outcomes in the GBD study. However, there 
 Vivarium Modeling Strategy
 ----------------------------
 
+.. todo::
+
+  We should clarify here exactly what pregnancies are included and excluded in this demography.
+  Not every person who becomes pregnant gets included in this cohort, for example chemical pregnancies
+  that are undetected.
+  Also, pregnancies that *are* detected but miscarry without medical complications or need for medical care
+  are excluded, so it isn't quite right even to say that this is a cohort of all detected pregnancies.
+
 While the default population structure of Vivarium simulations is determined according to the age/sex/location/year-specific GBD population count estimates, this custom demography model will be determined instead by the product of the age/sex/location/year-specific GBD population count estimates multiplied by the pregnancy incidence rate for that demographic group.
 
 Relevant parameters are defined below:
