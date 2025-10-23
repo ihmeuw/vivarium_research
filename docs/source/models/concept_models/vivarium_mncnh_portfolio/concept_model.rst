@@ -2028,7 +2028,7 @@ Default stratifications to all observers should include scenario and input draw.
     - `Model 13.3 neonatal checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/d8dce03ab1de546d6af5719c59e344d77384d93f/verification_and_validation/model_13.3_nn_checks.ipynb>`_
       `Model 13.3 interactive sim neonatal mortality checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/a2f00672cfe9762b83f6d05f15a4ca5be050750c/verification_and_validation/model_13.3_interactive_simulation_neonatal_mortality.ipynb>`_
   * - 14.0
-    - * Confirm ANC attendance exposure varies as expected by broad pregnancy outcome (f.k.a. "pregnancy term length")
+    - * Confirm ANC attendance exposure varies as expected by broad pregnancy outcome
       * Confirm ANC attendance exposure matches expectation
       * Confirm AI ultrasound exposure categories is consistent with ANC attendance categories (ex: no ultrasound coverage if no ANC coverage)
     - All V&V criteria met!
