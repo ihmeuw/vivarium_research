@@ -122,8 +122,8 @@ Scope
 
 The goal of the maternal hemorrhage model is to capture YLLs and YLDs due to
 maternal hemorrhage among women of reproductive age. We only model maternal 
-hemorrhage among simulants who give (live or still) birth after a full term 
-pregnancy. This page documents how to model the baseline burden of maternal 
+hemorrhage among simulants who give (live or still) birth.
+This page documents how to model the baseline burden of maternal 
 hemorrhage. Other simulation components such as c-sections will affect the 
 rates of maternal hemorrhage; such effects will be described on the pages 
 for the corresponding :ref:`intervention <intervention_models>` or 
@@ -132,9 +132,8 @@ for the corresponding :ref:`intervention <intervention_models>` or
 Summary of modeling strategy
 ++++++++++++++++++++++++++++
 
-Since the :ref:`MNCNH Portfolio project
-<2024_concept_model_vivarium_mncnh_portfolio>` does not model the
-passage of time, we will not model maternal hemorrhage as a state machine
+Because we can assume incident cases of maternal hemorrhage all occur at the end of pregnancy,
+we will not model maternal hemorrhage as a state machine
 with dynamic state transitions like our typical cause models. Rather,
 all "transitions" in the model will be modeled as decisions made during
 a single timestep. To obtain the decision probabilities of each incident
@@ -154,29 +153,23 @@ Although we're not modeling hemorrhage dynamically as a finite state
 machine, we can draw an analogous directed graph that can be interpreted
 as a (collapsed) decision tree rather than a state transition diagram.
 The main difference is that the values on the transition arrows
-represent decision probabilities rather than rates per unit time. The
-maternal hemorrhage decision graph drawn below should be inserted on the
-"full term pregnancy" branch of the decision graph from the
-:ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`,
-between the intrapartum model and the birth of the child simulant. Solid
-lines are the pieces added by the maternal hemorrhage model, while dashed
-lines indicate pieces of the underlying pregnancy model.
+represent decision probabilities rather than rates per unit time.
 
 .. graphviz::
 
     digraph hemorrhage_decisions {
         rankdir = LR;
-        ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
-        ftb [label="full term\nbirth", style=dashed]
+        start [label="start"]
+        end [label="end"]
         alive [label="parent did not die of hemorrhage"]
         dead [label="parent died of hemorrhage"]
 
-        ftp -> alive  [label = "1 - ir"]
-        ftp -> hemorrhage [label = "ir"]
+        start -> alive  [label = "1 - ir"]
+        start -> hemorrhage [label = "ir"]
         hemorrhage -> alive [label = "1 - cfr"]
         hemorrhage -> dead [label = "cfr"]
-        alive -> ftb  [label = "1", style=dashed]
-        dead -> ftb  [label = "1", style=dashed]
+        alive -> end  [label = "1"]
+        dead -> end  [label = "1"]
     }
 
 .. list-table:: State Definitions
@@ -185,22 +178,18 @@ lines indicate pieces of the underlying pregnancy model.
 
     * - State
       - Definition
-    * - full term pregnancy, post intrapartum
-      - Parent simulant has a full term pregnancy as determined by the
+    * - start
+      - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
-        already been through the antenatal and intrapartum models
+        <other_models_pregnancy_closed_cohort_mncnh>` (due to condition on the overall intrapartum component)
     * - hemorrhage
       - Parent simulant has maternal hemorrhage
     * - parent not dead of maternal hemorrhage
       - Parent simulant did not die of maternal hemorrhage
     * - parent died of maternal hemorrhage
       - Parent simulant died of maternal hemorrhage
-    * - full term birth
-      - The parent simulant has given birth to a child simulant (which
-        may be a live birth or a still birth, to be determined in the
-        next step of the :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>`)
+    * - end
+      -
 
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20

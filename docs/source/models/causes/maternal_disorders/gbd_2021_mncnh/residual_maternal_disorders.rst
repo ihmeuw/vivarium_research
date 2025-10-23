@@ -93,12 +93,12 @@ Scope
 
 The goal of the residual maternal disorders model is to capture YLLs and YLDs due to
 maternal disorders subcauses other than those included in the
-:ref:`partial term pregnancy maternal disorders subcauses <2021_cause_partial_term_pregnancy_causes_mncnh>`
+:ref:`abortion/miscarriage/ectopic pregnancy maternal disorders subcauses <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
 that are not otherwise modeled in the MNCNH simulation.
-Given that the maternal disorders subcauses specific to partial term pregnancies are separately modeled 
-(:ref:`partial term pregnancy maternal disorders document <2021_cause_partial_term_pregnancy_causes_mncnh>`), 
+Given that the maternal disorders subcauses specific to abortion/miscarriage/ectopic pregnancies are separately modeled 
+(:ref:`abortion/miscarriage/ectopic pregnancy maternal disorders document <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`), 
 we will only model residual maternal disorders among simulants who give (live or still) 
-birth after a full term pregnancy.
+birth.
 
 A list of maternal disorders subcauses and whether they are modeled elsewhere or will
 be covered as part of the residual maternal disorders cause modeling strategy in this
@@ -124,10 +124,10 @@ document is included in the table below.
     - :ref:`Maternal obstructed labor and uterine rupture docs <2021_cause_obstructed_labor_mncnh>`
   * - Ectopic pregnancy (c_374)
     - Modeled
-    - Included in the :ref:`partial term pregnancy cause docs <2021_cause_partial_term_pregnancy_causes_mncnh>`
+    - Included in the :ref:`abortion/miscarriage/ectopic pregnancy cause docs <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
   * - Maternal abortion and miscarriage (c_995)
     - Modeled
-    - Included in the :ref:`partial term pregnancy cause docs <2021_cause_partial_term_pregnancy_causes_mncnh>`
+    - Included in the :ref:`abortion/miscarriage/ectopic pregnancy cause docs <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
   * - Other direct maternal disorders (c_379)
     - **Unmodeled**
     - Covered in this document
@@ -190,38 +190,38 @@ Summary of modeling strategy
 
 We will model morbidity and mortality due to residual maternal disorders (inclusive of all maternal disorders
 subcauses that are otherwise unmodeled in our simulation) that
-occurs at an equal probability among all pregnancies that end in live or still birth ("full term pregnancies"
-according to the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`). 
+occurs at an equal probability among all pregnancies that end in live or still birth (according to the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`). 
 We do not require tracking incident cases of residual maternal disorders, nor any quantities specific to 
 subcauses included in the residual maternal disorders cause model.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-- We apply morbidity due to subcauses of residual maternal disorders equally across all full term pregnancies rather than applying the value of YLDs per incident case to a subset of incident cases
+- We apply morbidity due to subcauses of residual maternal disorders equally across all live/stillbirth pregnancies rather than applying the value of YLDs per incident case to a subset of incident cases
 
 Cause Model Diagram
 +++++++++++++++++++
 
-Conceptually, the modeling strategy for the residual maternal disorders cause can be summarized with the diagram below. All full term pregnancies will be assigned an amount of YLDs due to residual maternal disorders at the conclusion of the intrapartum period. Some of these pregnancies will die from residual maternal disorders in accordance with the calculated fatality rate (fr) of residual maternal disorders. Regardless of whether the parent dies due to residual maternal disorders, the intrapartum period will conclude with a full term birth (live or still birth outcome). 
+Conceptually, the modeling strategy for the residual maternal disorders cause can be summarized with the diagram below. All live/stillbirth pregnancies will be assigned an amount of YLDs due to residual maternal disorders at the conclusion of the intrapartum period. Some of these pregnancies will die from residual maternal disorders in accordance with the calculated fatality rate (fr) of residual maternal disorders. Regardless of whether the parent dies due to residual maternal disorders, the intrapartum period will conclude with a live or still birth outcome.
 
 **Conceptual cause model diagram**
 
 .. graphviz::
 
-    digraph hemorrhage_decisions {
+    digraph RMD_decisions {
         rankdir = LR;
-        ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
-        ftb [label="full term\nbirth", style=dashed]
+        start [label="start"]
+        end [label="end"]
         alive [label="parent did not\ndie of residual maternal\ndisorders"]
         dead [label="parent died of residual\nmaternal disorders"]
         RMD [label="assign YLDs due to\nresidual maternal disorders"]
 
-        ftp -> RMD [label = "1"]
-        RMD -> alive [label = "1 - fr"]
-        RMD -> dead [label = "fr"]
-        alive -> ftb  [label = "1", style=dashed]
-        dead -> ftb  [label = "1", style=dashed]
+        start -> alive  [label = "1 - ir"]
+        start -> RMD [label = "ir"]
+        RMD -> alive [label = "1 - cfr"]
+        RMD -> dead [label = "cfr"]
+        alive -> end  [label = "1"]
+        dead -> end  [label = "1"]
     }
 
 Where,
@@ -232,24 +232,21 @@ Where,
 
     * - State
       - Definition
-    * - full term pregnancy, post intrapartum
-      - Parent simulant has a full term pregnancy as determined by the
+    * - start
+      - Parent simulant has a live birth or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
-        already been through the antenatal and intrapartum models
+        already been through the pregnancy and intrapartum components (this is handled by the setup of the postpartum component)
     * - assign YLDs due to residual maternal disorders
       - state in which YLDs due to residual maternal disorders are accrued
     * - parent did not die of residual maternal disorders
       - Parent simulant did not die of residual maternal disorders
     * - parent died of residual maternal disorders
       - Parent simulant died of residual maternal disorders
-    * - full term birth
-      - The parent simulant has given birth to a child simulant (which
-        may be a live birth or a still birth, to be determined in the
-        next step of the :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>`)
+    * - end
+      -
     * - fr (fatality rate)
-      - The rate of death due to residual maternal disorders among all pregnancies with full term outcomes (live or still births) 
+      - The rate of death due to residual maternal disorders among all pregnancies resulting in live or still births 
 
 While the above diagram represents the conceptual aims of the residual maternal disorders cause model, there are some convenient adjustments we can make to this diagram so that it continues to achieve the aims of our cause model while also achieving compatibility with the existing implementation of the `MaternalDisorder component <http://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/components/maternal_disorders.py>`_ used in the MNCNH simulation that has been used to model other maternal disorders subcauses such as :ref:`maternal sepsis <2021_cause_maternal_sepsis_mncnh>`. Specifically, although our modeling strategy for maternal disorders does not involve modeling incident cases, we can implement a :code:`MaternalDisorder` component model as represented in the diagram below with an incidence risk (ir) value equal to 1.
 
@@ -279,30 +276,28 @@ While the above diagram represents the conceptual aims of the residual maternal 
 
     * - State
       - Definition
-    * - full term pregnancy, post intrapartum
-      - Parent simulant has a full term pregnancy as determined by the
+    * - live birth or stillbirth pregnancy, post intrapartum
+      - Parent simulant has a live birth or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
-        already been through the antenatal and intrapartum models
+        already been through the pregnancy and intrapartum components
     * - affected with residual maternal disorders
       - Parent is "affected with" residual maternal disorders 
     * - parent did not die of residual maternal disorders
       - Parent simulant did not die of residual maternal disorders
     * - parent died of residual maternal disorders
       - Parent simulant died of residual maternal disorders
-    * - full term birth
+    * - live birth or stillbirth
       - The parent simulant has given birth to a child simulant (which
-        may be a live birth or a still birth, to be determined in the
-        next step of the :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>`)
+        may be a live birth or a still birth)
     * - ir (incidence risk)
-      - The probability that a pregnancy with a full term outcome (live or still birth) becomes "affected with" residual maternal disorders and experiences associated morbidity
+      - The probability that a pregnancy resulting in live or still birth becomes "affected with" residual maternal disorders and experiences associated morbidity
     * - cfr (case fatality rate)
       - The rate of death due to residual maternal disorders among those "affected with" residual maternal disorders
 
 .. note::
 
-  The concept of being "affected with" residual maternal disorders as shown in this diagram does exists only for convenience of implementation, as we do not have relevant data to inform the incidence of residual maternal disorders. Setting the ir parameter to 1 allows all full term pregnancies to be subject to equal rates of morbidity and mortality due to residual maternal disorders, which is the aim of our modeling strategy for this cause.
+  The concept of being "affected with" residual maternal disorders as shown in this diagram does exists only for convenience of implementation, as we do not have relevant data to inform the incidence of residual maternal disorders. Setting the ir parameter to 1 allows all pregnancies resulting in live or still birth to be subject to equal rates of morbidity and mortality due to residual maternal disorders, which is the aim of our modeling strategy for this cause.
 
 Data Tables
 +++++++++++
@@ -328,7 +323,7 @@ Data Tables
       - Value or source
       - Note
     * - ir
-      - the probability that a simulant who experiences a full term pregnancy outcome is eligible for residual maternal disorders burden
+      - the probability that a simulant whose pregnancy results in live or stillbirth is eligible for residual maternal disorders burden
       - 1
       - model assumption
     * - cfr
@@ -341,7 +336,7 @@ Data Tables
       - note that cause-specific mortality rates are a measure of deaths (from source='codcorrect') divided by population
     * - birth_rate
       - birth rate (live or still)
-      - (1 + SBR) ASFR
+      - ASFR + ASFR * SBR
       - Units are total births (live or still) per person-year
     * - ASFR
       - Age-specific fertility rate
@@ -358,12 +353,12 @@ Data Tables
       - sum of cause-specific mortality rates across causes [375, 379, 376, 741, 369]. Note that only causes 379 and 369 have YLDs.
       - source=como
     * - ylds_per_case
-      - YLDs accumulated due to residual maternal disorders per case of residual maternal disorders (full term pregnancy)
+      - YLDs accumulated due to residual maternal disorders per case of residual maternal disorders (live/stillbirth pregnancy)
       - yld_rate / birth_rate
       - 
 
-- The ylds_per_case parameter should be applied to all simulants affected by residual maternal disorders (equivalent to all full term pregnancies)
-- The cfr (case fatality rate) parameter should be applied to all simulants affected by residual maternal disorders (equivalent to all full term pregnancies)
+- The ylds_per_case parameter should be applied to all simulants affected by residual maternal disorders (equivalent to all live or still birth pregnancies)
+- The cfr (case fatality rate) parameter should be applied to all simulants affected by residual maternal disorders (equivalent to all live or still birth pregnancies)
 
 Validation Criteria
 +++++++++++++++++++

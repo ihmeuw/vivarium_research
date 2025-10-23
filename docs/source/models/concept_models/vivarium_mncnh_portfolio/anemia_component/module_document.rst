@@ -53,7 +53,7 @@ and YLDs.
 2.1 Module Diagram
 ----------------------
 
-.. image:: anemia_ylds_module_diagram.png
+.. image:: anemia_ylds_module_diagram.drawio.png
 
 2.2 Module Inputs
 ---------------------
@@ -186,7 +186,7 @@ Note that simulants who died during labor should not experience any YLDs due to 
   * - Output
     - Value
     - Dependencies
-  * - A. Anemia YLDs
+  * - Anemia YLDs
     - Point value
     - Simulation result
 
