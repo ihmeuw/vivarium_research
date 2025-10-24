@@ -269,8 +269,8 @@ Assumptions and Limitations
   increase in stillbirth incidence. However, more recent publications (the 2024 review referenced above and [Antonucci-et-al-2022-azithromycin-during-pregnancy]_) 
   have reported that there is no conclusive evidence to support that azithromycin use by pregnant women causes adverse 
   neonatal outcomes. 
-- We also do not currently model the impact intrapartum azithromycin has on preventing maternal sepsis in partial term pregnancies. In our 
-  :ref:`Maternal sepsis and other maternal infections cause model <2021_cause_maternal_sepsis_mncnh>`, we only model full term pregnancies as 
+- We also do not currently model the impact intrapartum azithromycin has on preventing maternal sepsis in abortion/miscarriage/ectopic pregnancies. In our 
+  :ref:`Maternal sepsis and other maternal infections cause model <2021_cause_maternal_sepsis_mncnh>`, we only model live/stillbirth pregnancies as 
   at-risk for maternal sepsis.
 - We assume that [Saleem-et-al-2025-intrapartum-antibiotic-use]_ provides an accurate overview of prophylactic intrampratum antibiotic use in our locations of interest.
   As such, we assume baseline coverage of intrapartum azithromycin use in African sites is basically zero (despite EmONC 2016, SARA 2016, and SARA 2018 reporting the

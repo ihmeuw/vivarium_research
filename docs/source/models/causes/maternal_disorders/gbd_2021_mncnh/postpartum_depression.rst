@@ -109,7 +109,7 @@ Assumptions and Limitations
 
 - We assume that the onset of PPD occurs immediately following birth. However, the onset of PPD may peak around two or three months postpartum [Shorey-et-al-2018-mncnh]_.
 
-- We assume that the incidence of PPD does not vary by pregnancy outcome (incidence is constant across partial term pregnancy loss, stillbirth, and live births)
+- We assume that the incidence of PPD does not vary by pregnancy outcome (incidence is constant across abortion/miscarriage/ectopic pregnancy, stillbirth, and live births)
 
 
 Cause Model Decision Graph
@@ -119,13 +119,7 @@ Although we're not modeling PPD dynamically as a finite state
 machine, we can draw an analogous directed graph that can be interpreted
 as a (collapsed) decision tree rather than a state transition diagram.
 The main difference is that the values on the transition arrows
-represent decision probabilities rather than rates per unit time. The
-PPD decision graph drawn below should be inserted on the
-"full term pregnancy" branch of the decision graph from the
-:ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`,
-between the intrapartum model and the birth of the child simulant. Solid
-lines are the pieces added by the PPD model, while dashed
-lines indicate pieces of the underlying pregnancy model.
+represent decision probabilities rather than rates per unit time.
 
 .. todo::
 
@@ -147,21 +141,22 @@ lines indicate pieces of the underlying pregnancy model.
   Only simulants who survive birth (do not die of a maternal disorder)
   are eligible to experience an incident case of postpartum depression
 
+
 .. graphviz::
 
     digraph ppd_decisions {
         rankdir = LR;
-        ftp [label="pregnancy, post\nintrapartum", style=dashed]
-        ftb [label="birth", style=dashed]
-        alive [label="parent does not die due to PPD"]
-        dead [label="parent dies due to PPD"]
+        start [label="start"]
+        end [label="end"]
+        alive [label="parent did not die of PPD"]
+        dead [label="parent died of PPD"]
 
-        ftp -> alive  [label = "1 - ir"]
-        ftp -> PPD [label = "ir"]
+        start -> alive  [label = "1 - ir"]
+        start -> PPD [label = "ir"]
         PPD -> alive [label = "1 - cfr"]
         PPD -> dead [label = "cfr"]
-        alive -> ftb  [label = "1", style=dashed]
-        dead -> ftb  [label = "1", style=dashed]
+        alive -> end  [label = "1"]
+        dead -> end  [label = "1"]
     }
 
 .. list-table:: State Definitions
@@ -170,21 +165,17 @@ lines indicate pieces of the underlying pregnancy model.
 
     * - State
       - Definition
-    * - pregnancy, post intrapartum
-      - Parent simulant has any pregnancy outcome (live, still, or partial term birth) determined by the
-        :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
-        already been through and survived the antenatal and intrapartum models
+    * - start
+      - Parent simulant has
+        already been through and survived the pregnancy and intrapartum components
     * - PPD
       - Parent simulant has postpartum depression
     * - parent alive
       - Parent simulant did not die of postpartum depression
     * - parent dead
       - Parent simulant died of postpartum depression
-    * - birth
-      - The parent simulant pregnancy has ended with any outcome (live, still, or partial term birth) as be determined in the
-        next step of the :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>`)
+    * - end
+      -
 
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20

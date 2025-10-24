@@ -226,7 +226,7 @@ this document:
     - * :ref:`Sex of infant
         <other_models_pregnancy_closed_cohort_mncnh_sex_of_infant>` (S)
       *  :ref:`LBWSG exposure
-         <other_models_pregnancy_closed_cohort_mncnh_lbwsg_exposure>`
+         <2021_risk_exposure_lbwsg>`
          (cat, BW, GA)
       * Low birth weight status (LBW)
       * Preterm status (P)

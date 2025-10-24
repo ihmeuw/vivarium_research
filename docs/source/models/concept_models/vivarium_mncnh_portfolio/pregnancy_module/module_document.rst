@@ -42,7 +42,7 @@ Pregnancy module
 1.0 Overview
 ++++++++++++
 
-This module initializes a maternal age and determines basic pregnancy outcome information such as term length, child sex, etc.
+This module determines basic pregnancy outcome information such as pregnancy duration, child sex, etc.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -50,32 +50,35 @@ This module initializes a maternal age and determines basic pregnancy outcome in
 2.1 Module Diagram
 ----------------------
 
+.. If you are editing the following diagram,
+  you probably want to edit the one on the pregnancy *model* page as well (other_models_pregnancy_closed_cohort_mncnh)
+
 .. graphviz::
 
-    digraph pregnancy {
-      rankdir = LR;
-      p [label="pregnant"]
-      ft [label="full term\npregnancy*"]
-      pt [label="partial term\npregnancy"]
-      data [label="*assign sex,\ngestational age,\nand birthweight\n for full term\npregnancies", shape=box]
+  digraph pregnancy {
+    bgcolor="transparent";
+    node [shape=box];
 
-      ancipm [label="antenatal & \nintrapartum\nmodels + \nmaternal\ndisorders", shape=box, style=dashed]
-      birth [label="full term\nbirth"]
-      livebirth [label="live\nbirth"]
-      stillbirth [label="stillbirth"]
-      {rank=same; ft; pt; data}
+    start;
+    choice [label="Pregnancy results in either a live birth or a stillbirth?"];
+    birth_outcome [label=< <B>Assign birth outcome<br/>(live birth vs stillbirth)</B> >];
+    gestational_age [label=< <B>Assign gestational age at end of pregnancy</B> >];
+    sex [label=< <B>Assign sex of infant</B> >];
+    lbwsg [label=< <B>Assign birthweight and gestational age at end of pregnancy</B> >];
+    preterm [label=< <B>Assign preterm status</B> >]
+    pregnancy_outcome [label=< <B>Assign pregnancy outcome<br/>(live birth vs stillbirth vs abortion/miscarriage/ectopic)</B> >]
+    end;
 
-      p -> ft 
-      p -> pt 
-      ft -> ancipm 
-      ancipm -> birth 
-      birth -> livebirth
-      birth -> stillbirth
-    }
-
-.. note:: 
-
-  This diagram does not include modification by other modules (e.g., effect of antenatal interventions on GA and BW).
+    start -> choice;
+    choice -> birth_outcome [label="Yes"];
+    choice -> gestational_age [label="No"];
+    gestational_age -> preterm;
+    birth_outcome -> sex;
+    sex -> lbwsg;
+    lbwsg -> preterm;
+    preterm -> pregnancy_outcome;
+    pregnancy_outcome -> end;
+  }
 
 All instructions are detailed on the :ref:`MNCNH portfolio pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`. This document also 
 contains a list of model assumptions and limitations as well as verification and validation criteria.
@@ -89,6 +92,10 @@ The inputs and outputs for this module are summarized in the tables below.
     - Source module
     - Application
     - Note
+  * - Broad pregnancy outcome
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - Affects pregnancy outcome (which is just a refinement of this input), gestational age
+    -
   * - LBWSG category propensity
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - Used to sample exposure value from the LBWSG exposure
@@ -116,38 +123,29 @@ The inputs and outputs for this module are summarized in the tables below.
   * - Output
     - Value
     - Note
-  * - A. Maternal age
-    - point value in years
-    - 
-  * - B. Pregnancy term length
-    - *partial* / *full*
-    - 
-  * - C. Birth outcome
-    - *other* / *live_birth* / *stillbirth*
-    - "Other" is equivalent to partial term pregnancies
-  * - D. Sex of infant
-    - *male* / *female*
-    - 
-  * - E. Gestational age
-    - point value in days
-    - N/A for partial term pregnancies. Assigned based on LBWSG
-      category, which is correlated with other model variables as
-      described in the :ref:`correlated propensities section
-      <facility_choice_correlated_propensities_section>` of the facility
-      choice model documentation.
-  * - F. Birthweight
-    - point value in grams
-    - N/A for partial term pregnancies. Assigned based on LBWSG
-      category, which is correlated with other model variables as
-      described in the :ref:`correlated propensities section
-      <facility_choice_correlated_propensities_section>` of the facility
-      choice model documentation.
-  * - G. Pregnancy duration
+  * - Pregnancy outcome
+    - "live_birth", "stillbirth", or "abortion/miscarriage/ectopic"
+    -
+  * - Gestational age at end of pregnancy
     - point value in weeks
-    - Equal to gestational age for full term pregnancies
-  * - H. Preterm status
-    - *preterm* / *term*
-    - Equals *preterm* if pregnancy duration is < 37 weeks, *term* if
-      pregnancy duration is 37+ weeks. Preterm status will be used for
+    - For live birth and stillbirth pregnancies, this is assigned based on LBWSG
+      category, which is correlated with other model variables as
+      described in the :ref:`correlated propensities section
+      <facility_choice_correlated_propensities_section>` of the facility
+      choice model documentation.
+  * - Preterm status
+    - "preterm" or "term"
+    - Equals "preterm" if gestational age at end of pregnancy is < 37 weeks, "term" if
+      gestational age at end of pregnancy is 37+ weeks. Preterm status will be used for
       validation of the :ref:`facility choice model
       <2024_facility_model_vivarium_mncnh_portfolio>`.
+  * - Sex of infant
+    - "male" or "female"
+    - N/A for pregnancies resulting in abortion/miscarriage/ectopic pregnancy
+  * - Birthweight
+    - point value in grams
+    - N/A for pregnancies resulting in abortion/miscarriage/ectopic pregnancy. Assigned based on LBWSG
+      category, which is correlated with other model variables as
+      described in the :ref:`correlated propensities section
+      <facility_choice_correlated_propensities_section>` of the facility
+      choice model documentation.

@@ -73,7 +73,7 @@ This module will:
   
   As discussed on the :ref:`maternal supplementation intervention document <oral_iron_antenatal>`, IFA and MMS have equivalent effects on hemoglobin. This diagram treats them as equivalent for this reason. However, we will need track which product was received as they have differences that will apply to other downstream modules of this simulation. 
 
-.. image:: hemoglobin_component.png
+.. image:: hemoglobin_module.drawio.png
 
 2.2 Module Inputs
 ---------------------
@@ -85,6 +85,10 @@ This module will:
     - Source module
     - Application
     - Note
+  * - Maternal age at end of pregnancy
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - Action point I
+    -
   * - First trimester ANC attendance 
     - :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
     - Decision node #2
@@ -161,14 +165,14 @@ This module will:
   * - I
     - Assign hemoglobin exposure based on GBD
     - See :ref:`hemoglobin risk exposure document <2023_hemoglobin_exposure>`
-    - 
+    - Uses maternal age at end of pregnancy
   * - II
     - Calibrate to and remove effect of baseline IFA coverage
     - Effect size on hemoglobin and baseline coverage defined on :ref:`maternal supplementation intervention document <oral_iron_antenatal>`. We assume no one receives baseline IFA prior to their first ANC visit. Since we are initializing hemoglobin exposure at the start of pregnancy prior to anyone receiving IFA, we subtract the value of :code:`baseline_ifa_overall * ifa_hemoglobin_shift` from the hemoglobin exposure value of all simulants. Use the :code:`baseline_ifa_overall` parameter rather than :code:`baseline_ifa_at_anc`
     - The effect of baseline IFA will be added back in later in the decision tree when simulants receive it at their ANC visits. 
   * - III
     - Record hemoglobin exposure at the start of pregnancy
-    - Record to output C
+    - Record to output
     - 
   * - IV
     - Apply IFA/MMS effect
@@ -176,7 +180,7 @@ This module will:
     - Note that IFA and MMS effectively have the same effect on maternal hemoglobin
   * - V
     - Record IFA/MMS receipt
-    - Record to output A
+    - Record to output
     - 
   * - VI
     - Apply IFA/MMS effect
@@ -184,7 +188,7 @@ This module will:
     - Note that IFA and MMS effectively have the same effect on maternal hemoglobin
   * - VII
     - Record IFA/MMS receipt
-    - Record to output A
+    - Record to output
     - 
   * - VIII
     - Apply IV iron effect
@@ -192,15 +196,15 @@ This module will:
     - Ignore instructions regarding timing of effect implementation on this document
   * - IX
     - Record IV iron receipt
-    - Record to output B
+    - Record to output
     - 
   * - X
     - Record receipt of IFA/MMS
-    - Record to output A
+    - Record to output
     - Note that IFA/MMS hemoglobin effect is not applied on top of IV iron effect
   * - XI
     - Record hemoglobin value at end of pregnancy
-    - Record to output D
+    - Record to output
     - 
 
 2.4: Module Outputs
@@ -212,74 +216,95 @@ This module will:
   * - Output
     - Value
     - Dependencies
-  * - A. Maternal supplementation
-    - `ifa` / `mms` / `none`
+  * - IFA/MMS coverage
+    - "ifa" or "mms" or "none"
     - Used for anemia YLD calculation, V&V, simulation result 
-  * - B. IV iron
-    - `True` / `False`
+  * - IV iron coverage
+    - "True" or "False"
     - Used for anemia YLD calculation, V&V, simulation result 
-  * - C. True hemoglobin at the beginning of pregnancy 
+  * - True hemoglobin at the beginning of pregnancy 
     - point value
     - Used for anemia YLD calculation, V&V (via interactive context)
-  * - D. True hemoglobin at the end of pregnancy
+  * - True hemoglobin at the end of pregnancy
     - point value
     - Value to be used for :ref:`hemoglobin risk effects model <2023_hemoglobin_effects>`, used for anemia YLD calculation, V&V (via interactive context)
-  * - F. True Hemoglobin at screening
-    - `low` / `adequate`
+  * - True hemoglobin at screening
+    - "low" or "adequate"
     - V&V (via observation)
-  * - G. Tests hemoglobin exposure
-    - `low` / `adequate`
+  * - Tests hemoglobin exposure
+    - "low" or "adequate"
     - V&V (via observation)
-  * - H. Ferritin exposure at screening
-    - `low` / `adequate`
+  * - Ferritin exposure at screening
+    - "low" or "adequate"
     - V&V (via observation)
 
-2.5: Pseudocode implementation summary
----------------------------------------
+2.5: Python implementation summary
+----------------------------------
 
-The pseudocode below shows possible implementation steps that are compatible with the diagram defined above. 
+The Python below shows possible implementation steps that are compatible with the diagram defined above. 
 
-.. code-block:: 
+.. code-block:: python 
 
   # step 1: remove effect of baseline IFA from everyone
-  hgb_start_of_pregnancy = gbd_hgb_exposure – ifa_effect_size * baseline_ifa_overall
+  hgb_start_of_pregnancy = gbd_hgb_exposure - ifa_effect_size * baseline_ifa_overall
 
   # step 2: apply first trimester oral iron effect
   hgb_after_first_trimester_anc = (
-    if (anc_attendance in ['first_trimester_only', 'later_pregnancy_and_first_trimester']) and oral_iron_covered:
-      = hgb_start_of_pregnancy + ifa_effect_size
-    else:
-      = hgb_start_of_pregnancy
-  ) 
+    hgb_start_of_pregnancy + ifa_effect_size
+    if (anc_attendance in ['first_trimester_only', 'later_pregnancy_and_first_trimester'])
+      and oral_iron_covered
+    else
+    hgb_start_of_pregnancy
+  )
 
   # step 3: assess IV iron coverage based on hgb_after_first_trimester_anc exposure and other attributes
-  received_iv_iron = (anc_attendance in ['later_pregnancy_only', 'first_trimester_and_later_pregnancy']
-                      and hemoglobin_screen_covered 
-                      and test_low_hemoglobin # according to hgb_after_first_trimester_anc exposure
-                      and low_ferritin_exposure 
-                      and iv_iron_covered
+
+  # anemia screening: see anemia screening page for documentation
+  # note that we use hgb_after_first_trimester_anc for this
+  actual_low_hemoglobin = hgb_after_first_trimester_anc < 100
+  probability_test_low_hemoglobin = (
+    HEMOGLOBIN_SCREENING_SENSITIVITY
+    if actual_low_hemoglobin
+    else
+    1 - HEMOGLOBIN_SCREENING_SPECIFICITY
+  )
+  test_low_hemoglobin = np.random.choice(
+    [True, False],
+    p=[probability_test_low_hemoglobin, 1 - probability_test_low_hemoglobin]
+  )
+  # end anemia screening
+
+  received_iv_iron = (
+    anc_attendance in ['later_pregnancy_only', 'first_trimester_and_later_pregnancy']
+      and hemoglobin_screen_covered 
+      and test_low_hemoglobin
+      and low_ferritin_exposure 
+      and iv_iron_covered
   )
 
   # step 4: apply later pregnancy ANC oral iron effects effects
-  hgb_at_after_later_pregnancy = (
-    if (anc_attendance == 'later_pregnancy_only') and (oral_iron_covered==True) and (received_iv_iron==False):
-      = hgb_after_first_trimester_anc + ifa_effect_size
-    else:
-      = hgb_after_first_trimester_anc 
+  hgb_at_after_later_pregnancy = hgb_after_first_trimester_anc + (
+    ifa_effect_size
+    if (anc_attendance == 'later_pregnancy_only')
+      and oral_iron_covered
+      and not received_iv_iron
+    else
+    0
   )
 
   # step 5: apply IV iron effect size
-  hgb_at_birth = (
-    if received_iv_iron:
-      = hgb_at_after_later_pregnancy + iv_iron_effect_size
-    else:
-      = hgb_at_after_later_pregnancy
+  hgb_at_birth = hgb_at_after_later_pregnancy + (
+    iv_iron_effect_size
+    if received_iv_iron
+    else
+    0
   )
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-- We assume there are no changes in natural history hemoglobin trajectory throughout pregnancy. 
+- We assume there are no changes in natural history hemoglobin trajectory throughout pregnancy,
+  including when a pregnancy spans GBD age groups (we use the age group at the *end* of pregnancy to determine hemoglobin).
 
 - We assume immediate effect of oral and IV iron interventions on hemoglobin from intervention receipt.
 
@@ -287,9 +312,9 @@ The pseudocode below shows possible implementation steps that are compatible wit
 
 - We assume no additional effect of oral iron supplementation when taken following IV iron administration
 
-- We use the fraction of iron responsive anemia among total anemia as a proxy for low ferritin given low hemoglobin. This may underestimate the population eligible for IV iron by not considering the iron non responsive anemias that have low ferritin. Note that this may be improved upon by updating to PRIMSA data.
+- We use the fraction of iron responsive anemia among total anemia as a proxy for low ferritin given low hemoglobin. This may underestimate the population eligible for IV iron by not considering the iron non responsive anemias that have low ferritin. Note that this may be improved upon by updating to PRISMA data.
 
-- We assume the IV iron intervention (+23 g/L) to have a greater effect than GBD 2023's implied effect of IV iron used in the estimation of their iron deficiency models (+14.3 g/L(95% UL:3.58 -25.59). Notably, our assumed effect is within the confidence interval of GBD's assumed effect size and the value we assume is specific to the pregnant population (whereas GBD's value is not).
+- We assume the IV iron intervention (+23 g/L) to have a greater effect than GBD 2023's implied effect of IV iron used in the estimation of their iron deficiency models, +14.3 g/L(95% UI: 3.58 -25.59). Notably, our assumed effect is within the uncertainty interval of GBD's assumed effect size and the value we assume is specific to the pregnant population (whereas GBD's value is not).
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
