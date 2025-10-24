@@ -256,18 +256,18 @@ While the above diagram represents the conceptual aims of the residual maternal 
 
     digraph hemorrhage_decisions {
         rankdir = LR;
-        ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
-        ftb [label="full term\nbirth", style=dashed]
+        start;
+        end;
         alive [label="parent did not\ndie of residual maternal\ndisorders"]
         dead [label="parent died of residual\nmaternal disorders"]
         RMD [label="affected with residual\nmaternal disorders"]
 
-        ftp -> alive  [label = "1 - ir"]
-        ftp -> RMD [label = "ir"]
+        start -> alive  [label = "1 - ir"]
+        start -> RMD [label = "ir"]
         RMD -> alive [label = "1 - cfr"]
         RMD -> dead [label = "cfr"]
-        alive -> ftb  [label = "1", style=dashed]
-        dead -> ftb  [label = "1", style=dashed]
+        alive -> end  [label = "1", style=dashed]
+        dead -> end  [label = "1", style=dashed]
     }
 
 .. list-table:: Implementation-Driven Cause Model Diagram Parameter Definitions
@@ -276,20 +276,19 @@ While the above diagram represents the conceptual aims of the residual maternal 
 
     * - State
       - Definition
-    * - live birth or stillbirth pregnancy, post intrapartum
+    * - start
       - Parent simulant has a live birth or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
-        already been through the pregnancy and intrapartum components
+        already been through the pregnancy and intrapartum components (this is handled by the setup of the postpartum component)
     * - affected with residual maternal disorders
       - Parent is "affected with" residual maternal disorders 
     * - parent did not die of residual maternal disorders
       - Parent simulant did not die of residual maternal disorders
     * - parent died of residual maternal disorders
       - Parent simulant died of residual maternal disorders
-    * - live birth or stillbirth
-      - The parent simulant has given birth to a child simulant (which
-        may be a live birth or a still birth)
+    * - end
+      -
     * - ir (incidence risk)
       - The probability that a pregnancy resulting in live or still birth becomes "affected with" residual maternal disorders and experiences associated morbidity
     * - cfr (case fatality rate)

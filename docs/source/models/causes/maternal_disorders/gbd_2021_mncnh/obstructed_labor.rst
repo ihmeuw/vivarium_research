@@ -395,7 +395,7 @@ Validation Criteria
 In order to verify and validate the model, we should record at least the
 following information:
 
-- Number of simulants with full term pregnancies in each age group
+- Number of simulants with live/stillbirth pregnancies in each age group
   before the OL and uterine rupture model is run
 - Number of OL and uterine rupture cases and OL and uterine rupture deaths in each age
   group
