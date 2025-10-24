@@ -121,7 +121,7 @@ In this closed cohort, all simulants start the simulation at the beginning of a 
 The steps to follow are summarized by the diagram below:
 
 .. If you are editing the following diagram,
-  you probably want to edit the one on the pregnancy *module* page as well.
+  you probably want to edit the one on the pregnancy *module* page as well (2024_vivarium_mncnh_portfolio_pregnancy_module).
 
 .. graphviz::
 
@@ -130,13 +130,14 @@ The steps to follow are summarized by the diagram below:
     node [shape=box];
 
     start;
-    broad_pregnancy_outcome [label=< <B>Assign broad pregnancy outcome</B> >];
-    choice [label="Pregnancy results in a live birth or stillbirth?"];
-    birth_outcome [label=< <B>Assign birth outcome</B> >];
+    broad_pregnancy_outcome [label=< <B>Assign broad pregnancy outcome<br/>(live/stillbirth vs abortion/miscarriage/ectopic pregnancy)</B> >];
+    choice [label="Pregnancy results in either a live birth or a stillbirth?"];
+    birth_outcome [label=< <B>Assign birth outcome<br/>(live birth vs stillbirth)</B> >];
     gestational_age [label=< <B>Assign gestational age at end of pregnancy</B> >];
     sex [label=< <B>Assign sex of infant</B> >];
     lbwsg [label=< <B>Assign birthweight and gestational age at end of pregnancy</B> >];
     preterm [label=< <B>Assign preterm status</B> >]
+    pregnancy_outcome [label=< <B>Assign pregnancy outcome<br/>(live birth vs stillbirth vs abortion/miscarriage/ectopic)</B> >]
     end;
 
     start -> broad_pregnancy_outcome;
@@ -147,7 +148,8 @@ The steps to follow are summarized by the diagram below:
     birth_outcome -> sex;
     sex -> lbwsg;
     lbwsg -> preterm;
-    preterm -> end;
+    preterm -> pregnancy_outcome;
+    pregnancy_outcome -> end;
   }
 
 .. note::
@@ -259,7 +261,8 @@ For pregnancies that result in live birth or stillbirth outcomes, infant sex sho
 These sex ratios were calculated using the live births by sex GBD 2021 covariate (ID 1106) for the year 2021, `shown here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/Live%20births%20by%20sex.ipynb>`_. Note that there is no variation by draw in this parameter.
 
 .. todo::
-  Move this notebook into the simulation repository and update it.
+  Replace this notebook with logic in :code:`loader.py` in the simulation repo, and run it for 2023.
+  See `this ticket <https://jira.ihme.washington.edu/browse/SSCI-2448>`__.
 
 .. _sex_ratio_table_mncnh:
 
@@ -284,24 +287,6 @@ Assign birthweight and gestational age at end of pregnancy (live births and stil
 
 For pregnancies that result in live births or stillbirths, a LBWSG exposure value will be assigned that will include both the gestational age and birthweight of the simulant child. The LBWSG can be assigned using information outlined in the :ref:`LBWSG exposure page <2021_risk_exposure_lbwsg>`. Exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Based on the assigned category, a gestational age and birthweight can be recorded separately.
 
-Assign gestational age at end of pregnancy (abortion/miscarriage/ectopic pregnancies)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-All pregnancies *not* resulting in live births or stillbirths,
-which are those resulting in an abortion, miscarriage, or ectopic pregnancy,
-should be assigned a gestational age at end of pregnancy sampled from a uniform distribution beween 6 and 24 weeks (individual heterogeneity with no parameter uncertainty).
-
-.. todo::
-
-   As we figure out YLDs and how they will relate to pregnancy duration, assess if the uniform distribution is a significant limitation and how it might be improved if needed.
-
-Assign preterm status
-~~~~~~~~~~~~~~~~~~~~~
-
-Finally, we assign preterm status "preterm" if gestational age at end of pregnancy is
-less than 37 weeks, and "term" if
-the gestational age is 37 weeks or more.
-
 .. note::
 
   Our model of :ref:`delivery facility choice
@@ -317,6 +302,32 @@ the gestational age is 37 weeks or more.
   In later waves of the model, we will make this process more complex by including correlation with other maternal characteristics, similar to what is outlined in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. 
 
   Additionally, the LBWSG exposure distribution may be modified by :ref:`antenatal supplementation intervention coverage <maternal_supplementation_intervention>` in later waves of the project. 
+
+Assign gestational age at end of pregnancy (abortion/miscarriage/ectopic pregnancies)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+All pregnancies *not* resulting in live births or stillbirths,
+which are those resulting in an abortion, miscarriage, or ectopic pregnancy,
+should be assigned a gestational age at end of pregnancy sampled from a uniform distribution beween 6 and 24 weeks (individual heterogeneity with no parameter uncertainty).
+
+.. todo::
+
+   As we figure out YLDs and how they will relate to pregnancy duration, assess if the uniform distribution is a significant limitation and how it might be improved if needed.
+
+Assign preterm status
+~~~~~~~~~~~~~~~~~~~~~
+
+We assign the binary preterm status "preterm" if gestational age at end of pregnancy is
+less than 37 weeks, and "term" if
+the gestational age is 37 weeks or more.
+
+Assign pregnancy outcome
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Finally, we assign the "pregnancy outcome" variable, which is a simple combination
+of "broad pregnancy outcome" and "birth outcome."
+For simulants with a broad pregnancy outcome of "abortion/miscarriage/ectopic", that is also their (non-broad) pregnancy outcome.
+For all other simulants, their pregnancy outcome is their birth outcome.
 
 Assumptions and limitations
 ++++++++++++++++++++++++++++

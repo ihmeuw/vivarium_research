@@ -267,7 +267,7 @@ Pregnancy component
     * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
       - 
       - * Maternal age at end of pregnancy
-        * Broad pregnancy outcome
+        * Broad pregnancy outcome (live/stillbirth vs abortion/miscarriage/ectopic)
         * ANC propensity
         * LBWSG category propensity
         * IFD propensity
@@ -294,10 +294,11 @@ Pregnancy component
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
         * :ref:`Anemia screening intervention <anemia_screening>`
     * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-      - * LBWSG category propensity
+      - * Broad pregnancy outcome
+        * LBWSG category propensity
         * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
         * IV iron coverage (affects birth outcome, gestational age, birthweight)
-      - * Birth outcome
+      - * Pregnancy outcome (live birth vs stillbirth vs abortion/miscarriage/ectopic)
         * Gestational age at end of pregnancy
         * Preterm status
         * Sex of infant

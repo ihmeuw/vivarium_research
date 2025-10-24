@@ -50,6 +50,9 @@ This module determines basic pregnancy outcome information such as pregnancy dur
 2.1 Module Diagram
 ----------------------
 
+.. If you are editing the following diagram,
+  you probably want to edit the one on the pregnancy *model* page as well (other_models_pregnancy_closed_cohort_mncnh)
+
 .. graphviz::
 
   digraph pregnancy {
@@ -57,12 +60,13 @@ This module determines basic pregnancy outcome information such as pregnancy dur
     node [shape=box];
 
     start;
-    choice [label="Pregnancy results in a live birth or stillbirth?"];
-    birth_outcome [label=< <B>Assign birth outcome</B> >];
+    choice [label="Pregnancy results in either a live birth or a stillbirth?"];
+    birth_outcome [label=< <B>Assign birth outcome<br/>(live birth vs stillbirth)</B> >];
     gestational_age [label=< <B>Assign gestational age at end of pregnancy</B> >];
     sex [label=< <B>Assign sex of infant</B> >];
     lbwsg [label=< <B>Assign birthweight and gestational age at end of pregnancy</B> >];
     preterm [label=< <B>Assign preterm status</B> >]
+    pregnancy_outcome [label=< <B>Assign pregnancy outcome<br/>(live birth vs stillbirth vs abortion/miscarriage/ectopic)</B> >]
     end;
 
     start -> choice;
@@ -72,7 +76,8 @@ This module determines basic pregnancy outcome information such as pregnancy dur
     birth_outcome -> sex;
     sex -> lbwsg;
     lbwsg -> preterm;
-    preterm -> end;
+    preterm -> pregnancy_outcome;
+    pregnancy_outcome -> end;
   }
 
 All instructions are detailed on the :ref:`MNCNH portfolio pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`. This document also 
@@ -87,6 +92,10 @@ The inputs and outputs for this module are summarized in the tables below.
     - Source module
     - Application
     - Note
+  * - Broad pregnancy outcome
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - Affects pregnancy outcome (which is just a refinement of this input), gestational age
+    -
   * - LBWSG category propensity
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - Used to sample exposure value from the LBWSG exposure
@@ -114,8 +123,8 @@ The inputs and outputs for this module are summarized in the tables below.
   * - Output
     - Value
     - Note
-  * - Birth outcome
-    - "live_birth", or "stillbirth" (N/A for pregnancies resulting in abortion/miscarriage/ectopic pregnancy)
+  * - Pregnancy outcome
+    - "live_birth", "stillbirth", or "abortion/miscarriage/ectopic"
     -
   * - Gestational age at end of pregnancy
     - point value in weeks
