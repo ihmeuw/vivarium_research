@@ -898,14 +898,11 @@ Default stratifications to all observers should include scenario and input draw.
     - * Maternal age group
       * Pregnancy outcome
       * ANC attendance (polychotomous)
-      * Hemoglobin screening coverage
-      * Ferritin screening coverage
-      * IFA coverage
-      * MMS coverage
+      * Oral iron coverage (ifa/mms/none)
       * IV iron coverage
-      * True hemoglobin exposure (dichotomous,  'low' if truly low hemoglobin and 'adequate' if truly adequate hemoglobin)
-      * Test hemoglobin exposure (dichotomous, 'low' if tested low hemoglobin,'adequate' if tested adequate hemoglobin, N/A if not tested)
-      * Ferritin status (dichotomous, 'low' if low ferritin, 'adequate' if adequate ferritin, N/A if not tested)
+      * True hemoglobin exposure ('low' if truly low hemoglobin and 'adequate' if truly adequate hemoglobin at time of screening)
+      * Test hemoglobin exposure ('low' if tested low hemoglobin,'adequate' if tested adequate hemoglobin, 'not_tested' if not tested)
+      * Ferritin status (dichotomous, 'low' if low ferritin, 'adequate' if adequate ferritin, 'not_tested' if not tested)
       * Preterm status (dichotomous at 37 weeks)
     - 
   * - 7b. Maternal population counts: other parameters
@@ -2279,8 +2276,30 @@ Default stratifications to all observers should include scenario and input draw.
       * `18.2 interactive sim for LBWSG <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_18.2_interactive_simulation_lbwsg.ipynb>`__
   * - 18.3
     - Same as 17.0 and 18.0
-    - 
-    - 
+    - Meeting the following criteria:
+
+      * Oral iron coverage looks good by ANC and scenario
+      * Effect of IFA and MMS on hemoglobin looks good (both in the interactive sim and sim results)
+      * The 'first_anc_hemoglobin.exposure' pipeline value looks as expected (IFA-affected for those who are covered by IFA and attend ANC during their first trimester)
+      * Hemoglobin screening is among those who attend ANC only, as expected and scales up by scenario as expected
+      * Ferritin screening is among those who test low hemoglobin only
+      * Neonatal mortality appears in line with previous versions
+      * Maternal disorders burden appears in line with previous versions
+
+
+      Partially meeting the following criteria:
+
+      * Effects of IFA and MMS on gestational age, birth weight, and stillbirth looks as expected in the interactive sim, but no evidence of effect in simulation results
+      * No observed difference in maternal hemorrhage incidence by scenario in the simulation results despite differences in hemoglobin exposure by scenario and despite that hemoglobin appears to be affecting maternal hemorrhage incidence in the interactive sim
+
+      Not meeting the following criteria:
+
+      * Bug in the implementation of MMS effects on gestational age. `In the code here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/8ded26c7b55876890582ef86fce5ced298fcf775/src/vivarium_gates_mncnh/components/intervention.py#L575>`__ we are rescaling "mms_shift_2" before using it to find the relevant subpopulations. We should not add the shifts together before using them to assess subpopulations
+      * Anemia status during pregnancy appears to be reading in inappropriate hemoglobin exposure measure (IFA-deleted rather than first ANC)
+      * Hemoglobin screening test appears to be reading in inappropriate hemoglobin exposure measure (IFA-deleted rather than first ANC). Note that this is expected to be causing the following two issues as well: no change in test hemoglobin exposure by scenario (despite changes in true hemoglobin exposure by scenario), and an underestimation of hemoglobin test specificity
+      * Less than 100% ferritin screening coverage among those who test low hemoglobin. It appears that there may be an additional requirement to have truly low hemoglobin in order to test for ferritin, but this should not be the case.
+
+    - `See all 18.3 V&V notebooks here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/144>`__
   * - 19.0
     - * Confirm all parameters continue to meet V&V criteria in the baseline scenario
       * Confirm list of draws has been updated in accordance with GBD 2023 strategy
@@ -2339,33 +2358,49 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Pipeline values for ``iron_folic_acid_supplementation_on_birth_weight.effect`` and ``iron_folic_acid_supplementation_on_gestational_age.effect`` contain the expected values, but cannot verify how these are being applied to LBWSG exposures
-    - Unknown
-    - Hussain to investigate
-    - For model 18.3
-  * - Cannot verify that common random numbers are functioning as expected with regard to LBWSG exposure between scenarios
-    - Unknown
-    - Hussain to investigate
-    - For model 18.3
-  * - Baseline coverage of hemoglobin screening test does not vary by ANC attendance and is equal to 100% rather than expected baseline coverage value
-    - Unknown
-    - Hussain to update
-    - For model 18.3
-  * - Coverage of ferritin screening does not vary by ANC attendance or by tests low hemoglobin exposure as expected
-    - Unknown
-    - Hussain to update
-    - For model 18.3
-  * - Hemoglobin screening test is not reading in the expected hemoglobin measure: `see this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/149/files#r2403444540>`__. Likewise, anemia status during pregnancy assessment is not reading in the expected hemoglobin measure: `see this comment <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/149/files#r2403448860>`__
-    - See linked comments
-    - Hussain to update
-    - For model 18.3
-  * - Hemoglobin sensitivity and specificity are not being applied to hemoglobin screening results
-    - Unknown
-    - Hussain to update
-    - For model 18.3
+  * - Observer updates
+    - For hemoglobin and ferritin, we have a column for coverage (true/false) and a column for test result (low/adequate/not_tested). We can delete the coverage columns and reduce the amount of stratification present in our results. However, the ferritin screening columns contradict one another (ferritin low/adequate results for those with ferritin screening coverage == False), so this should be investigated before we update to make sure we don't hide a bug.
+
+      Also, stratification by ultrasound type is present in the anc_hemoglobin observer and can be removed
+
+      We can condense our oral iron coverage results into a single column with values ifa/mms/none to reduce the total number of stratifications
+    - Engineers to investigate and update
+    - Anemia screening bugfix run, version number TBD
+  * - Bug in the implementation of MMS effects on gestational age
+    - `In the code here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/8ded26c7b55876890582ef86fce5ced298fcf775/src/vivarium_gates_mncnh/components/intervention.py#L575>`__ we are rescaling "mms_shift_2" before using it to find the relevant subpopulations. We should not add the shifts together before using them to assess subpopulations
+    - Engineers to update
+    - Anemia screening bugfix run, version number TBD
+  * - Maternal disorders burden does not vary by scenario despite increased coverage of the oral iron intervention affecting hemoglobin exposure
+    - Unknown... it is verifying in the interactive simulation, so perhaps an observer issue?
+    - Engineers and research to investigate
+    - Anemia screening bugfix run, version number TBD
+  * - No impact of MMS on stillbirth, no impact of IFA or MMS on preterm birth
+    - Unknown, this was previously meeting verification criteria and appears to have expected effects in interactive sim. Could we have accidentally left these risk effects commented out (as we did for the updated scenarios run)?
+    - Engineers to investigate and update
+    - Anemia screening bugfix run, version number TBD
+  * - Ferritin screening rate < 100% among eligible population in scale-up scenario
+    - We are only testing ferritin among those who have low exposure values for their tested hemoglobin AND their true hemoglobin. Everyone who has a low tested hemoglobin exposure should be screened for ferritin regardless of their true hemoglobin exposure
+    - Engineers to update
+    - Anemia screening bugfix run, version number TBD
+  * - Hemoglobin screening test and anemia status during pregnancy appear to be reading in an inappropriate hemoglobin exposure measure
+    - See linked comments (it appears we  created a new measure to be used in these instances, but did not actually update it as the input variables)
+    - Engineers to update
+    - Anemia screening bugfix run, version number TBD
+  * - Propensity for LBWSG category remains constant across timesteps, but propensity for continuous BW and GA values reset at each timestep
+    - This should not cause significant bias in our results, but it is not logical to have a different birth weight at different ages and unnecessarily increases stochastic uncertainty in our simulation
+    - Low priority to update (sometime when engineers have the capacity)
+    - TBD
+  * - There is non-zero coverage of hemoglobin screening among those who attend first trimester screening ONLY
+    - Unclear if we would like to perform hemoglobin screening tests during the first trimester visit as it is only actionable in our model to screen at 2nd trimester visit to determine IV Iron eligibility, but in practice screening may be done in the first trimester as well to inform oral iron adherence/dose (although we will not model the impact of this in our sim)
+    - Discuss desired behavior for costing purposes with the Gates Foundation at our next interaction
+    - TBD
   * - Ferritin exposure model needs updating
     - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
     - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy to be determined in discussion with the Gates Foundation
+    - TBD
+  * - Unable to verify ferritin screening results among those who are not anemic according to hemoglobin level at the time of testing
+    - Re-address when we update ferritin exposure model
+    - Maintain existing behavior for now
     - TBD
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
