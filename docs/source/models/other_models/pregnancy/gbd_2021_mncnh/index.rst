@@ -257,30 +257,11 @@ This probability is modified by the :ref:`antenatal supplementation intervention
 Assign sex of infant (live births and stillbirths only)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For pregnancies that result in live birth or stillbirth outcomes, infant sex should be determined and recorded acording to the probability of male sex shown in the table below (probability of female birth is equal to 1 minus the probability of male birth).
-These sex ratios were calculated using the live births by sex GBD 2021 covariate (ID 1106) for the year 2021, `shown here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/Live%20births%20by%20sex.ipynb>`_. Note that there is no variation by draw in this parameter.
-
-.. todo::
-  Replace this notebook with logic in :code:`loader.py` in the simulation repo, and run it for 2023.
-  See `this ticket <https://jira.ihme.washington.edu/browse/SSCI-2448>`__.
-
-.. _sex_ratio_table_mncnh:
-
-.. list-table:: Probability of male birth
-    :header-rows: 1
-
-    *   - Location
-        - Location ID
-        - Value
-    *   - Pakistan 
-        - 165
-        - 0.514583
-    *   - Nigeria
-        - 214
-        - 0.511785 
-    *   - Ethiopia
-        - 179
-        - 0.514271  
+For pregnancies that result in live birth or stillbirth outcomes, infant sex should be determined and recorded acording to the probability of male sex,
+using the live births by sex GBD 2021 covariate (ID 1106).
+Note that there is no uncertainty estimated for the infant sex proportions at birth.
+(There is uncertainty estimated for the count of births for each sex individually, but the upper and lower bounds give identical proportions,
+and we assume uncertainty is perfectly correlated).
 
 Assign birthweight and gestational age at end of pregnancy (live births and stillbirths)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
