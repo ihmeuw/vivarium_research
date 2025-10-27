@@ -2389,14 +2389,18 @@ Default stratifications to all observers should include scenario and input draw.
     - Unclear if we would like to perform hemoglobin screening tests during the first trimester visit as it is only actionable in our model to screen at 2nd trimester visit to determine IV Iron eligibility, but in practice screening may be done in the first trimester as well to inform oral iron adherence/dose (although we will not model the impact of this in our sim)
     - Discuss desired behavior for costing purposes with the Gates Foundation at our next interaction
     - TBD
-  * - Ferritin exposure model needs updating
+  * - `Ferritin exposure model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2439>`__
     - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
-    - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy to be determined in discussion with the Gates Foundation
-    - TBD
+    - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy using PRISMA data shared by the Gates foundation
+    - Will decide how to proceed when we receive PRISMA data
   * - Unable to verify ferritin screening results among those who are not anemic according to hemoglobin level at the time of testing
     - Re-address when we update ferritin exposure model
     - Maintain existing behavior for now
     - TBD
+  * - `Peripartum depression model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2415>`__
+    - Current implementation is based off of an adaptation of the assumptions used in the GBD 2021 major depressive disorders cause model
+    - We will need to either (1) update our model to be in line with the GBD 2023 model and consider updating our PAF calculation strategy as described in this ticket, or (2) update to the extra-GBD data on peripartum depression obtained from the mental disorders modelers
+    - Will decide how to proceed after discussing with the mental disorders modelers 
   * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
     - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
     - Update to custom-calculated PAF and reassess
