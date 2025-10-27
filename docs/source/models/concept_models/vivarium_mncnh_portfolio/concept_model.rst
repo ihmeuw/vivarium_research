@@ -2294,7 +2294,6 @@ Default stratifications to all observers should include scenario and input draw.
 
       Not meeting the following criteria:
 
-      * Bug in the implementation of MMS effects on gestational age. `In the code here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/8ded26c7b55876890582ef86fce5ced298fcf775/src/vivarium_gates_mncnh/components/intervention.py#L575>`__ we are rescaling "mms_shift_2" before using it to find the relevant subpopulations. We should not add the shifts together before using them to assess subpopulations
       * Anemia status during pregnancy appears to be reading in inappropriate hemoglobin exposure measure (IFA-deleted rather than first ANC)
       * Hemoglobin screening test appears to be reading in inappropriate hemoglobin exposure measure (IFA-deleted rather than first ANC). Note that this is expected to be causing the following two issues as well: no change in test hemoglobin exposure by scenario (despite changes in true hemoglobin exposure by scenario), and an underestimation of hemoglobin test specificity
       * Less than 100% ferritin screening coverage among those who test low hemoglobin. It appears that there may be an additional requirement to have truly low hemoglobin in order to test for ferritin, but this should not be the case.
@@ -2365,10 +2364,6 @@ Default stratifications to all observers should include scenario and input draw.
 
       We can condense our oral iron coverage results into a single column with values ifa/mms/none to reduce the total number of stratifications
     - Engineers to investigate and update
-    - Anemia screening bugfix run, version number TBD
-  * - Bug in the implementation of MMS effects on gestational age
-    - `In the code here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/8ded26c7b55876890582ef86fce5ced298fcf775/src/vivarium_gates_mncnh/components/intervention.py#L575>`__ we are rescaling "mms_shift_2" before using it to find the relevant subpopulations. We should not add the shifts together before using them to assess subpopulations
-    - Engineers to update
     - Anemia screening bugfix run, version number TBD
   * - Maternal disorders burden does not vary by scenario despite increased coverage of the oral iron intervention affecting hemoglobin exposure
     - Unknown... it is verifying in the interactive simulation, so perhaps an observer issue?
