@@ -43,7 +43,7 @@ Antenatal care attendance module
 ++++++++++++
 
 This module determines a simulant's antenatal care attendance exposure according to their ANC visit 
-propensity value and the distribution of ANC attendance exposure categories specific to their location and pregnancy term length. ANC attendance exposure categories include whether a simulant attends an ANC visit during their first trimester and/or later during their pregnancy. 
+propensity value and the distribution of ANC attendance exposure categories specific to their location and broad pregnancy outcome. ANC attendance exposure categories include whether a simulant attends an ANC visit during their first trimester and/or later during their pregnancy. 
 
 ANC visit timing is particularly relevant to both the hemoglobin and facility choice components of this simulation, so for more information 
 on how outputs from this module will be used, refer to :ref:`our hemoglobin module documentation <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
@@ -62,11 +62,11 @@ and :ref:`our facility choice module documentation <2024_vivarium_mncnh_portfoli
     - Source module
     - Application
     - Note
-  * - Pregnancy term length
-    - :ref:`Pregnancy I module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+  * - Broad pregnancy outcome
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - Determines which set of probabilities to use for the ANC exposure categories. 
-    - Full term pregnancies can be assigned any of the values A, B, C, or D, 
-      whereas we assume partial term pregnancies can only attend ANC in the first trimester, so only categories B and D have nonzero probability. 
+    - Live birth or stillbirth pregnancies can be assigned any of the values A, B, C, or D, 
+      whereas we assume abortion/miscarriage/ectopic pregnancies can only attend ANC in the first trimester, so only categories B and D have nonzero probability. 
       See exposure probability tables below.
   * - ANC propensity
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
@@ -118,9 +118,9 @@ D. Does not attend ANC at all during pregnancy
     - C
     - D
 
-The below table describes what probability values to use for each exposure option outlined above, **for full term pregnancies**.
+The below table describes what probability values to use for each exposure option outlined above, **for pregnancies resulting in live birth or stillbirth**.
 
-.. list-table:: ANC exposure probability values for full term pregnancies
+.. list-table:: ANC exposure probability values for pregnancies resulting in live birth or stillbirth
   :header-rows: 1
 
   * - ANC exposure option
@@ -151,11 +151,12 @@ The below table describes what probability values to use for each exposure optio
     include the ANCfirst variable that the HS team processed and shared with us. Please see `these slides <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BADD6223E-9FCA-40BB-BB7F-FE44F377CCDB%7D&file=ANC%20visit%20timing%20data%20strategy%20options.pptx&action=edit&mobileredirect=true>`_ 
     for more information on this strategy update.
 
-The above probabilities are to be implemented for full term pregnancies only. Partial term pregnancies are assigned 
+The above probabilities are to be implemented pregnancies resulting in live birth or stillbirth only.
+Abortion/miscarriage/ectopic pregnancies are assigned 
 probabilities differently because we assume their pregnancies end before they can attend later pregnancy ANC visits. 
-The below table describes what probabilities to use for each exposure option **for partial term pregnancies**:
+The below table describes what probabilities to use for each exposure option **for abortion/miscarriage/ectopic pregnancies**:
 
-.. list-table:: ANC exposure probabilities for partial term pregnancies
+.. list-table:: ANC exposure probabilities for abortion/miscarriage/ectopic pregnancies
   :header-rows: 1
 
   * - ANC exposure option
@@ -193,30 +194,31 @@ outputs, one being dichotomous for the hemoglobin component and the other being 
 
   * - Output
     - Value
-    - Note
-  * - Attends ANC in first trimester?
+    - Dependencies
+  * - First trimester ANC attendance
     - 
       - *True*  for groups A and B 
       - *False* for groups C and D
-    - This output will be used as an input for the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`.
+    - Used as an input for the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`.
       This variable is dichotomous for each pregnancy.
-  * - Attends ANC in later pregnancy?
+  * - Late pregnancy ANC attendance
     - 
       - *True*  for groups A and C 
       - *False* for groups B and D
-    - This output will be used as an input for the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`.
+    - Used as an input for the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`.
       This variable is dichotomous for each pregnancy.
-  * - ANC attendance 
+  * - ANC attendance category 
     - 
       1. :code:`none` for group D
       2. :code:`later_pregnancy_only` for group C
       3. :code:`first_trimester_only` for group B
       4. :code:`first_trimester_and_later_pregnancy` for group A
-    - This output will be used as an input for the :ref:`AI Ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`.
+
       The categories of this polytomous variable are listed from highest risk (1) to lowest risk (4) in terms of ultrasound timing, 
       in accordance with the :ref:`special ordering of the categories section <facility_choice_special_ordering_of_categories_section>`
       of the delivery facility choice model document: The categories need to be ordered D < C < B < A when sampling the ANC attendance 
       variable using the correlated ANC propensity in order to induce the correct correlations for the facility choice model.
+    - Used as an input for the :ref:`AI Ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`.
 
 
 3.0 Assumptions and limitations
@@ -225,8 +227,8 @@ outputs, one being dichotomous for the hemoglobin component and the other being 
 * We assume that the prevalence of attending both first trimester and later pregnancy visits is the minimum of ANCfirst (as processed by the HS team) and ANC4 
   (GBD covariate also processed by HS team). There is non-zero prevalence of first trimester visits only when ANC4 > ANC1 (such as in Pakistan). We are likely
   overestimating the correlation between first trimester ANC and later pregnancy ANC (i.e., the prevalence of a first trimester ANC visit ONLY is likely non-zero 
-  despite this assertion in our model.) We assume that the DHS data used to produce the ANCfirst, ANC1, and ANC4 covariates applies to partial term pregnancies 
-  as well as full term pregnancies.
+  despite this assertion in our model.) We assume that the DHS data used to produce the ANCfirst, ANC1, and ANC4 covariates applies to abortion/miscarriage/ectopic pregnancies 
+  as well as pregnancies resulting in live birth or stillbirth.
 
 .. todo:: 
 
@@ -236,11 +238,11 @@ outputs, one being dichotomous for the hemoglobin component and the other being 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-* Overall ANC attendance should match expected ANC1 values among the overall population as well as stratified by pregnancy term length
-* Confirm no later pregnancy ANC attendance among partial term pregnancies
-* Confirm first trimester ANC and later pregnancy ANC attendance rate among full term pregnancies is equal to minimum of ANCfirst and ANC4
-* Confirm first trimester ONLY ANC attendance rate among full term pregnancies is equal to ANCfirst - min(ANCfirst, ANC4)
-* Confirm later pregnancy ONLY ANC attendance rate among full term pregnancies is equal to ANC1 - ANCfirst
+* Overall ANC attendance should match expected ANC1 values among the overall population as well as stratified by broad pregnancy outcome
+* Confirm no later pregnancy ANC attendance among abortion/miscarriage/ectopic pregnancies
+* Confirm first trimester ANC and later pregnancy ANC attendance rate among live birth and stillbirth pregnancies is equal to minimum of ANCfirst and ANC4
+* Confirm first trimester ONLY ANC attendance rate among live birth and stillbirth pregnancies is equal to ANCfirst - min(ANCfirst, ANC4)
+* Confirm later pregnancy ONLY ANC attendance rate among live birth and stillbirth pregnancies is equal to ANC1 - ANCfirst
 
 
 5.0 References

@@ -256,7 +256,7 @@ Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - The rate of each birth outcome should continue to validate to input data in the baseline scenario
-- Still birth rates should be lower, live birth rates should be higher, and partial term pregnancy rates should be unchanged in a scenario with IV iron coverage relative to a scenario without
+- Still birth rates should be lower, live birth rates should be higher, and abortion/miscarriage/ectopic pregnancy rates should be unchanged in a scenario with IV iron coverage relative to a scenario without
 - In the interactive simulation, rates of stillbirth binned by hemoglobin exposure should match expected shape of the relationship 
 
 Assumptions and limitations

@@ -40,7 +40,16 @@ in the indicated model-building wave:
     obstructed_labor
     postpartum_depression
     residual_maternal_disorders
-    partial_term_causes
+    abortion_miscarriage_ectopic_pregnancy_causes
+
+.. todo::
+
+  The intrapartum component (which contains this model) says in
+  :ref:`the concept model <2024_concept_model_vivarium_mncnh_portfolio>`
+  that abortion/miscarriage/ectopic pregnancies skip it altogether.
+  That contradicts this page, in which we apply :ref:`abortion/miscarriage/ectopic
+  pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`.
+  This should be resolved by moving that cause model to a module in the pregnancy component.
 
 Note that the postpartum depression cause model is outside of the GBD maternal disorders
 hierarchy (implemented using custom rather than GBD data) and also differs from the remaining
@@ -280,10 +289,10 @@ subcauses together:
 To deal with the above two issues, we will
 
 * Split incidence and mortality into separate timesteps
-* Have a single timestep that handles mortality from all the maternal
-  disorders subcauses together
 * Have a separate incidence timestep for each of the modeled maternal
   disorders subcauses
+* Have a single timestep that handles mortality from all the maternal
+  disorders subcauses together
 
 More details are in the following two subsections.
 
@@ -291,14 +300,14 @@ Subcause ordering
 """""""""""""""""
 
 We anticipate that there are correlations and perhaps causal
-relationships between various maternal disorders subcauses. In Wave 1,
+relationships between various maternal disorders subcauses. For now,
 we are ignoring such interactions and treating the different subcauses
 as independent. However, to be able to handle such interactions in
 future waves, the simulation should make decisions about incidence of
 the different subcauses in the order of the suspected causal
 relationships. The specified order is:
 
-#. Partial term pregnancy maternal disorders
+#. Abortion/miscarriage/ectopic pregnancy maternal disorders
 #. Maternal hypertensive disorders
 #. Obstructed labor and uterine rupture
 #. Maternal hemorrhage
@@ -322,18 +331,8 @@ Mortality component
 We will have a single simulation timestep that handles mortality from
 all the maternal disorders subcauses together. The mortality timestep
 should happen after the incidence timesteps of all the maternal
-disorders subcauses. The mortlity timestep will work similarly to the
+disorders subcauses. The mortality timestep will work similarly to the
 mortality component in a standard Vivarium simulation.
-
-.. note::
-
-    We may need to adjust the strategy for deciding mortality after
-    implementing the "residual" maternal disorders subcause to capture
-    DALYs from maternal disorders that are not explicitly modeled. In
-    particular, some of the un-modeled subcauses are YLL only, so we
-    will not have incidence rate data, so we'll have to assign deaths
-    among the entire pregnant population rather than among incident
-    cases.
 
 On the mortality timestep, first we will determine whether the simulant
 dies of *any* of the maternal disorders subcauses. Then, if the simulant
