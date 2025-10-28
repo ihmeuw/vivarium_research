@@ -1,11 +1,11 @@
-.. _2021_cause_partial_term_pregnancy_causes_mncnh:
+.. _2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh:
 
-================================================
-Partial term pregnancy maternal disorders causes
-================================================
+======================================================================
+Abortion, miscarriage, and ectopic pregnancy maternal disorders causes
+======================================================================
 
 
-The partial term pregnancy maternal disorders cause is meant to capture morbidity and mortality specifically among "partial term pregnancies" (pregnancies that do not end in live or still births according to the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`) in the MNCNH portfolio simulation. Relevant causes of morbidity and mortality among this group as modeled in GBD include "maternal abortion and miscarriage" (c_995) and "ectopic pregnancy" (c_374).
+This model is meant to capture morbidity and mortality specifically among pregnancies that do not end in live or still births according to the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>` in the MNCNH portfolio simulation. Relevant causes of morbidity and mortality among this group as modeled in GBD are "maternal abortion and miscarriage" (c_995) and "ectopic pregnancy" (c_374).
 
 Disease Overview
 ----------------
@@ -71,7 +71,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-The goal of the partial term pregnancy maternal disorders model is to capture YLLs and YLDs due to
+The goal of this model is to capture YLLs and YLDs due to
 maternal disorders subcauses that are specific to pregnancies that end in outcomes
 other than a live or still birth, including YLDs and YLLs due to ectopic pregnancy
 as well as abortion/miscarriage maternal disorders subcauses.
@@ -80,11 +80,11 @@ Summary of modeling strategy
 ++++++++++++++++++++++++++++
 
 Given that the :ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>` used in the MNCNH simulation already assigns
-partial term pregnancy outcomes according to the incidence rates of the GBD causes of
-ectopic pregnancy and abortion/miscarriage, we assume that 100% of partial term pregnancies
-in the MNCNH simulation are "incident cases" and therefore all partial term pregnancies
-are subject to the case fatality rate and YLD rate associated with the partial term 
-pregnancy maternal disorders cause as defined below.
+a broad pregnancy outcome according to the incidence rates of the GBD causes of
+ectopic pregnancy and abortion/miscarriage, we assume that 100% of
+pregnancies with the "abortion/miscarriage/ectopic" broad pregnancy outcome
+in the MNCNH simulation are "incident cases" and therefore all are
+are subject to the case fatality rate and YLD rate associated with this cause as defined below.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -98,7 +98,7 @@ Cause Model Diagram
 
   The cause model diagram shown below and used in this modeling strategy has been designed to have a consistent structure with the existing implementation of the `MaternalDisorder component <http://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/components/maternal_disorders.py>`_ used in the MNCNH simulation that has been used to model other maternal disorders subcauses such as :ref:`maternal sepsis <2021_cause_maternal_sepsis_mncnh>`. 
 
-  Notably, as the incidence risk (ir) used for the partial term pregnancy maternal disorders cause model is set to a value of 1, there are no simulants who will travel through the "1 - ir" arrow between the "Partial term pregnancy, post antenatal models" and the "parent did not die of partial term pregnancy maternal disorders" states. While it may be confusing to include an arrow in this diagram that will not apply to any simulants in our model, we include it for consistency with other cause models that utilize the `MaternalDisorder component <http://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/components/maternal_disorders.py>`_. Additionally, if we ever decide that we would like to model the subcauses of this cause model separately, we could more easily update this cause model to handle ir values that do not equal 1.
+  Notably, as the incidence risk (ir) used for the abortion/miscarriage/ectopic maternal disorders cause model is set to a value of 1, there are no simulants who will travel through the "1 - ir" arrow between the "Abortion/miscarriage/ectopic pregnancy" and the "parent did not die of abortion/miscarriage/ectopic pregnancy maternal disorders" states. While it may be confusing to include an arrow in this diagram that will not apply to any simulants in our model, we include it for consistency with other cause models that utilize the `MaternalDisorder component <http://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/components/maternal_disorders.py>`_. Additionally, if we ever decide that we would like to model the subcauses of this cause model separately, we could more easily update this cause model to handle ir values that do not equal 1.
 
   For a conceptual respresentation of a similar cause modeling strategy that does not include the "1 - ir" arrow, see the :ref:`residual maternal disorders cause model document <2021_cause_residual_maternal_disorders_mncnh>`.
 
@@ -106,10 +106,10 @@ Cause Model Diagram
 
     digraph hemorrhage_decisions {
         rankdir = LR;
-        ptp [label="partial term\npregnancy, post\nantenatal models", style=dashed]
-        alive [label="parent did not die\nof partial term pregnancy\nmaternal disorders"]
-        dead [label="parent died of partial\nterm pregnancy maternal disorders"]
-        PTPMD [label="affected with\npartial term pregnancy\nmaternal disorders"]
+        ptp [label="abortion/miscarriage/ectopic\npregnancy", style=dashed]
+        alive [label="parent did not die\nof abortion/miscarriage/ectopic pregnancy\nmaternal disorders"]
+        dead [label="parent died of abortion/miscarriage/ectopic\npregnancy maternal disorders"]
+        PTPMD [label="affected with\nabortion/miscarriage/ectopic pregnancy\nmaternal disorders"]
 
         ptp -> alive  [label = "1 - ir"]
         ptp -> PTPMD [label = "ir"]
@@ -124,17 +124,17 @@ Cause Model Diagram
 
     * - State
       - Definition
-    * - partial term pregnancy
-      - Parent simulant has a partial term pregnancy as determined by the
+    * - abortion/miscarriage/ectopic pregnancy
+      - Parent simulant has an abortion/miscarriage/ectopic pregnancy as determined by the
         :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
-        already been through the antenatal model
-    * - affected with partial term pregnancy maternal disorders
-      - Parent simulant has is affected with maternal disorders of partial term pregnancies
-    * - parent not dead of partial term pregnancy maternal disorders
-      - Parent simulant did not die of partial term pregnancy maternal disorders
-    * - parent died of partial term pregnancy maternal disorders
-      - Parent simulant died of partial term pregnancy maternal disorders
+        already been through the pregnancy component
+    * - affected with abortion/miscarriage/ectopic pregnancy maternal disorders
+      - Parent simulant has is affected with maternal disorders of abortion/miscarriage/ectopic pregnancies
+    * - parent did not die of abortion/miscarriage/ectopic pregnancy maternal disorders
+      - Parent simulant did not die of abortion/miscarriage/ectopic pregnancy maternal disorders
+    * - parent died of abortion/miscarriage/ectopic pregnancy maternal disorders
+      - Parent simulant died of abortion/miscarriage/ectopic pregnancy maternal disorders
 
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20
@@ -145,10 +145,10 @@ Cause Model Diagram
       - Definition
     * - ir
       - incidence risk
-      - The probability that a pregnant simulant gets partial term pregnancy maternal disorders
+      - The probability that a pregnant simulant gets abortion/miscarriage/ectopic pregnancy maternal disorders
     * - cfr
       - case fatality rate
-      - The probability that a simulant with partial term pregnancy maternal disorders dies of that partial term pregnancy maternal disorders
+      - The probability that a simulant with abortion/miscarriage/ectopic pregnancy maternal disorders dies of the abortion/miscarriage/ectopic pregnancy maternal disorders
 
 Data Tables
 +++++++++++
@@ -174,15 +174,15 @@ Data Tables
       - Value or source
       - Note
     * - ir
-      - partial term pregnancy maternal disorders incidence risk per partial term pregnancy
+      - abortion/miscarriage/ectopic pregnancy maternal disorders incidence risk per abortion/miscarriage/ectopic pregnancy
       - 1
-      - Artifact of the modeling strategy that assigns partial term pregnancy outcomes (in the :ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`) according to the incidence of the GBD causes included in this cause model document
+      - Artifact of the modeling strategy that assigns broad pregnancy outcomes (in the :ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`) according to the incidence of the GBD causes included in this cause model document
     * - cfr
-      - case fatality rate of maternal hemorrhage
+      - case fatality rate of abortion/miscarriage/ectopic pregnancy maternal disorders
       - (csmr_c374 + csmr_c995) / (incidence_c374 + incidence_c995)
       - The value of cfr is a probabiity in [0,1]
     * - incidence_c374, incidence_c995
-      - incidence rate of ectopic pregnancy, abortion/miscarriage
+      - incidence rate of ectopic pregnancy, abortion/miscarriage (respectively)
       - como
       - Use the :ref:`total population incidence rate <total population
         incidence rate>` directly from GBD and do not rescale this
@@ -191,11 +191,11 @@ Data Tables
         the denominator in order to cancel out with the person-time in
         the cause-specific mortality rate denominator.
     * - csmr_c374, csmr_c995
-      - cause-specific mortality rate of ectopic pregnancy, abortion/miscarriage
+      - cause-specific mortality rate of ectopic pregnancy, abortion/miscarriage (respectively)
       - deaths_c374 / population, deaths_c995 / population
       - Note that deaths / (average population for year) = deaths / person-time
     * - deaths_c374, deaths_c995
-      - count of deaths due to ectopic pregnancy, abortion/miscarriage
+      - count of deaths due to ectopic pregnancy, abortion/miscarriage (respectively)
       - codcorrect
       -
     * - population
@@ -204,21 +204,21 @@ Data Tables
       - Specific to age/sex/location/year demographic group. Numerically
         equal to person-time for the year.
     * - yld_rate_c374, yld_rate_995
-      - rate of ectopic pregnancy, abortion/miscarriage YLDs per person-year
+      - rate of ectopic pregnancy, abortion/miscarriage (respectively) YLDs per person-year
       - como
       -
     * - ylds_per_case
-      - YLDs per case of partial term pregnancy maternal disorders
+      - YLDs per case of abortion/miscarriage/ectopic pregnancy maternal disorders
       - (yld_rate_c374 + yld_rate_c995) / (incidence_c374 + incidence_c995)
       - 
 
-- The ylds_per_case parameter should be applied to all simulants affected by partial term maternal disorders (all partial term pregnancies)
+- The ylds_per_case parameter should be applied to all simulants affected by abortion/miscarriage/ectopic maternal disorders (all abortion/miscarriage/ectopic pregnancies)
 
 Validation Criteria
 +++++++++++++++++++
 
-- Deaths due to partial term pregnancy maternal disorders should occur among partial term pregnancies only
-- Rate of partial term pregnancy maternal disorders incidence, death, YLLs, and YLDs should match expectation in the baseline scenario
+- Deaths due to abortion/miscarriage/ectopic pregnancy maternal disorders should occur among abortion/miscarriage/ectopic pregnancies only
+- Rate of abortion/miscarriage/ectopic pregnancy maternal disorders incidence, death, YLLs, and YLDs should match expectation in the baseline scenario
 
 References
 ----------

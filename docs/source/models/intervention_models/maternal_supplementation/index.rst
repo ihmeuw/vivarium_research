@@ -637,7 +637,7 @@ The dichotomous measures of effects should also replicate the intended values.
 Birth outcomes
 ++++++++++++++++++
 
-Antenatal supplementation interventions will affect the risk of stillbirth for full term pregnancies (NOTE: not necessary to apply to partial term pregnancies), as described in the :ref:`pregnancy model document <other_models_pregnancy>`. Notably, it is assumed that increased risk of stillbirth will result in decreased risk of live birth and vise versa, with no impact on the risk of abortion/miscarriage or ectopic pregnancy.
+Antenatal supplementation interventions will affect the risk of stillbirth for live/stillbrith pregnancies (NOTE: not necessary to apply to abortion/miscarriage/ectopic pregnancies), as described in the :ref:`pregnancy model document <other_models_pregnancy>`. Notably, it is assumed that increased risk of stillbirth will result in decreased risk of live birth and vise versa, with no impact on the risk of abortion/miscarriage or ectopic pregnancy.
 
 The observed effect of each antenatal supplementation product on the risk of stillbirth is summarized below:
 
