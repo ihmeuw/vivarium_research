@@ -56,7 +56,7 @@ There is no specific decision tree diagram for this module. Rather, the overall 
   * :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
   * :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
   * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
-  * :ref:`Partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>`
+  * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
 
 .. note::
 
@@ -101,8 +101,8 @@ Incidence, mortality, YLDs, and YLLs due to cause-specific maternal disorders.
 ++++++++++++++++++++++++++++++++
 
 * We assume that all deaths due to maternal disorders occur during the intrapartum period prior to the postpartum period although especially for causes of deaths such as "late maternal deaths," this may not be the case.
-* We assume that YLDs due to subcauses in the :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` cause is spread evenly across all full term pregnanices rather than modeling YLDs-per-case among incident cases specifically.
-* We assume that partial term pregnancies may not experience any maternal disorders subcauses except for those included in the :ref:`Partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` caues model
+* We assume that YLDs due to subcauses in the :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` cause is spread evenly across all live/stillbirth pregnanices rather than modeling YLDs-per-case among incident cases specifically.
+* We assume that abortion/miscarriage/ectopic pregnancies may not experience any maternal disorders subcauses except for those included in the :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause model
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++

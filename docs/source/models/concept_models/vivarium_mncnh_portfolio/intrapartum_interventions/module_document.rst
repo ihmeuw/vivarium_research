@@ -54,7 +54,7 @@ This module in the intrapartum component determines coverage of intrapartum inte
 2.1 Module Diagram
 ----------------------
 
-.. image:: intrapartum_intervention_module_diagram.png
+.. image:: intrapartum_intervention_module_diagram.drawio.png
 
 2.2 Module Inputs
 ---------------------
@@ -66,10 +66,6 @@ This module in the intrapartum component determines coverage of intrapartum inte
     - Source module
     - Application
     - Note
-  * - Pregnancy term
-    - :ref:`Pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-    - Partial term pregnancies do not proceed through this module
-    - 
   * - Delivery facility
     - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
     - Determines intervention availability
@@ -155,15 +151,15 @@ that the coverage of ACS in the delivery facility is the same as the baseline co
     - Note
   * - I
     - Record receipt of intrapartum azithromycin
-    - Record to output A
+    - Record to output
     - 
   * - II
     - Record receipt of antenatal corticosteroids
-    - Record to output B
+    - Record to output
     - 
   * - III
     - Record receipt of misoprostol
-    - Record to output C
+    - Record to output
     - 
 
 2.4: Module Outputs
@@ -175,13 +171,13 @@ that the coverage of ACS in the delivery facility is the same as the baseline co
   * - Output
     - Value
     - Note
-  * - A. Intrapartum azithromycin coverage
+  * - Intrapartum azithromycin coverage
     - *True* / *False*
     - 
-  * - B. Antenatal corticosteroid coverage
+  * - Antenatal corticosteroid coverage
     - *True* / *False*
     - Coverage can only be *True* if gestational age is believed to be between 26 and 33 weeks
-  * - C. Misoprostol
+  * - Misoprostol
     - *True* / *False*
     - Coverage can only be *True* if simulant attended ANC and delivered at home
 

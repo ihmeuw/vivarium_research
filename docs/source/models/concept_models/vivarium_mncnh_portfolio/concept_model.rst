@@ -208,7 +208,7 @@ In other situations, some components will not be reached.
 The rules by which components flow into other components are as follows:
 
 * All simulant dyads start at the pregnancy component.
-* If the birth outcome from the pregnancy component is a "full-term pregnancy" (live or stillbirth, NOT abortion/miscarriage/ectopic pregnancy), proceed to the intrapartum component.
+* If the birth outcome from the pregnancy component is a live or stillbirth (NOT abortion/miscarriage/ectopic pregnancy), proceed to the intrapartum component.
   Otherwise, skip to the postpartum component.
 * At the end of the intrapartum component, if the birth outcome from the pregnancy component is a live birth,
   proceed to the neonatal component.
@@ -255,11 +255,6 @@ the modules could be run in the simulation.
 Pregnancy component
 -------------------
 
-.. todo::
-
-  Split the pregnancy module page into two to reflect the split here, which was necessary to get the right ordering of
-  inputs and outputs
-
 .. _mncnh_portfolio_pregnancy_component_modules:
 
 .. list-table:: Pregnancy Component Modules
@@ -269,60 +264,55 @@ Pregnancy component
       - Inputs
       - Outputs
       - Nested subcomponents
-      - Wave II changes vs Wave I
     * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
       - 
-      - * ANC propensity
+      - * Maternal age at end of pregnancy
+        * Broad pregnancy outcome (live/stillbirth vs abortion/miscarriage/ectopic)
+        * ANC propensity
         * LBWSG category propensity
         * IFD propensity
-      - * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
-      - 
-    * - :ref:`Pregnancy I <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-      - 
-      - * Maternal age
-        * Pregnancy term length
-        * Sex of infant
-      - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-      - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules
+      - * :ref:`Pregnancy demography <other_models_pregnancy_demography>`
+        * :ref:`Broad pregnancy outcome <pregnancy_broad_outcome_section>`
+        * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
     * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
-      - * ANC propensity
-      - * ANC attendance and timing
-      - 
-      - Added first trimester and later pregnancy timing of ANC visit in wave 2
-    * - :ref:`Hemoglobin <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+      - * Broad pregnancy outcome
+        * ANC propensity
       - * First trimester ANC attendance
         * Later pregnancy ANC attendance
-        * IFA/MMS coverage
+        * ANC attendance category
+      - 
+    * - :ref:`Hemoglobin <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+      - * Maternal age at end of pregnancy
+        * First trimester ANC attendance
+        * Later pregnancy ANC attendance
+      - * IFA/MMS coverage
         * IV iron coverage
-      - * Hemoglobin at start of pregnancy
-        * Hemoglobin at end of pregnancy
+        * True hemoglobin at start of pregnancy
+        * True hemoglobin at end of pregnancy
       - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <oral_iron_antenatal>`
         * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
         * :ref:`Anemia screening intervention <anemia_screening>`
-      - New wave II module
-    * - :ref:`Pregnancy II <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-      - * LBWSG category propensity
+    * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+      - * Broad pregnancy outcome
+        * LBWSG category propensity
         * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
         * IV iron coverage (affects birth outcome, gestational age, birthweight)
-      - * Birth outcome
-        * Gestational age at birth
-        * Birthweight
-        * Pregnancy duration
+      - * Pregnancy outcome (live birth vs stillbirth vs abortion/miscarriage/ectopic)
+        * Gestational age at end of pregnancy
         * Preterm status
+        * Sex of infant
+        * Birthweight
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-        * :ref:`LBWSG exposure <2021_risk_exposure_lbwsg>`
-        * :ref:`Oral iron supplementation intervention (IFA/MMS) <oral_iron_antenatal>`
-        * :ref:`IV iron intervention <intervention_iv_iron_antenatal>`
-      - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules other than impacts of IFA/MMS and IV Iron interventions on pregnancy module outputs
+          
+          * :ref:`LBWSG exposure <2021_risk_exposure_lbwsg>`
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-      - * ANC attendance
-        * Gestational age
+      - * ANC attendance category
+        * Gestational age at end of pregnancy
       - * Ultrasound type
         * Estimated gestational age
         * Believed preterm status
       - 
-      - No changes from wave I
 
 .. _mncnh_portfolio_intrapartum_component:
 
@@ -331,7 +321,8 @@ Intrapartum component
 
 .. note::
 
-  Only full term pregnancies (live or stillbirths, NOT abortions/miscarriages/ectopic pregnancies) will proceed to the intrapartum component. Therefore, pregnancy term length is a de facto input to all modules in the intrapartum component.
+  Only live births or stillbirths (NOT abortions/miscarriages/ectopic pregnancies) will proceed to the intrapartum component,
+  as described above.
 
 .. warning::
 
@@ -345,25 +336,21 @@ Intrapartum component
   noting this limitation until we implement a strategy to address this (`see related 
   ticket here <https://jira.ihme.washington.edu/browse/SSCI-2310>`_)
 
-.. list-table:: Draft Wave II Intrapartum Component Modules
+.. list-table:: Intrapartum Component Modules
     :header-rows: 1
 
     * - Module
       - Inputs
       - Outputs
       - Nested subcomponents
-      - Wave II changes vs Wave I
     * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
-      - * (Pregnancy term length)
-        * IFD propensity
+      - * IFD propensity
         * Believed preterm status
       - * IFD status
         * Birth facility
       - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
-      - 
     * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-      - * (Pregnancy term duration)
-        * Birth facility
+      - * Birth facility
         * Believed gestational age
         * ANC attendance
       - * Intrapartum azithromycin coverage 
@@ -372,10 +359,8 @@ Intrapartum component
       - * :ref:`Intrapartum azithromycin <azithromycin_intervention>` 
         * :ref:`Misoprostol coverage <misoprostol_intervention>`
         * :ref:`Antenatal corticosteroids <acs_intervention>`
-      - 
     * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
-      - * (Pregnancy term duration)
-        * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
+      - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
         * Hemoglobin at end of pregnancy
       - * Maternal disorders outcomes (see outcome table)
       - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
@@ -383,10 +368,7 @@ Intrapartum component
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
         * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
-        * :ref:`Partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>`
-      - * Hemoglobin at end of pregnancy as a variable that impacts maternal disorders causes
-        * Anemia sequelae excluded from maternal hemorrhage YLDs (see `vivarium research PR#1633 <https://github.com/ihmeuw/vivarium_research/pull/1633>`_)
-        * New causes of residual and partial term pregnancy maternal disorders
+        * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
 
 .. _mncnh_portfolio_neonatal_component:
 
@@ -395,7 +377,7 @@ Neonatal component
 
 .. note::
 
-  Only live births proceed to the neonatal component. Therefore, birth outcome is a de facto input to all modules in the neonatal component.
+  Only live births proceed to the neonatal component, as described above.
 
 .. list-table:: Neonatal Component Modules
   :header-rows: 1
@@ -405,8 +387,7 @@ Neonatal component
     - Outputs
     - Nested subcomponents
   * - :ref:`Neonatal module <2024_vivarium_mncnh_portfolio_neonatal_module>`
-    - * (Birth outcome)
-      * Birth facility
+    - * Birth facility
       * Birth weight
       * Gestational age
       * RDS intervention propensity
@@ -465,7 +446,7 @@ Postpartum component
 
 **Wave 1 Concept Model Map (has not been updated recently):**
 
-.. image:: wave_1_full.svg
+.. image:: wave_1_full.drawio.png
 
 .. _mncnh_portfolio_3.1:
 
@@ -863,7 +844,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Azithromycin coverage
       * Misoprostol coverage
     - 
-  * - 2. Births (this observer includes ALL pregnancy outcomes, including partial term pregnancies that may not typically be considered "births")
+  * - 2. Births (this observer includes ALL pregnancy outcomes, including abortion/miscarriage/ectopic pregnancies that may not typically be considered "births")
     - * Pregnancy outcome
       * Child sex
       * Delivery facility type
@@ -1177,7 +1158,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 4.7
-    - Correct pregnancy duration for partial term pregnancies
+    - Correct pregnancy duration for abortion/miscarriage/ectopic pregnancies
     - Baseline and alternative scenarios 2, 3, and 4
     - ``birth_exposure_2``
     - 
@@ -1247,7 +1228,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - Birth observer updated from output of state table (single row per simulant) to observer detailed in the observer section for all subsequent model runs
   * - 6.2.1
-    - Same as 6.2, but with a fix for `this rate to probability equation transcription error <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_ (add back in the duration_scaling_factor) and include partial term pregnancy fix to bith observer
+    - Same as 6.2, but with a fix for `this rate to probability equation transcription error <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_ (add back in the duration_scaling_factor) and include abortion/miscarriage/ectopic pregnancy fix to birth observer
     - Baseline
     - ``model6.2.1``
     -
@@ -1634,7 +1615,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
   * - 21.0* (can be moved to before GBD 2023 update/19.0 if needed following an update of the cause IDs to be compatible with GBD 2023)
-    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`partial term pregnancy maternal disorders <2021_cause_partial_term_pregnancy_causes_mncnh>` cause models
+    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
     - Baseline
     - ``model21.0``
     - Default
@@ -1779,7 +1760,7 @@ Default stratifications to all observers should include scenario and input draw.
       - `CSMR notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_03_18c_vnv_neonatal_csmr_w_cpap.ipynb>`__
 
   * - 4.7
-    - Validate partial term pregnancy duration is between 6 and 24 weeks and uniformly distributed. 
+    - Validate abortion/miscarriage/ectopic pregnancy duration is between 6 and 24 weeks and uniformly distributed. 
     - Validated for all 3 locations
     - `Notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/2025_04_07a_vnv_partial_term_preg.ipynb>`__
   * - 5.0
@@ -1835,9 +1816,9 @@ Default stratifications to all observers should include scenario and input draw.
     - Check ENN mortality ratio compared to GBD
     - Neonatal mortality ratios are now dramatically overestimated. Note that while the birth observer has changed between models 6.1 and 6.2, it has been verified that birth counts do not vary between these runs and that greater death count values are driving the difference between neonatal mortality ratios in 6.1 and 6.2
     - * `Model 6.2 neonatal mortality validatio notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.2_nn_mortality.ipynb>`_
-      * Birth observer has zero counts for all partial term pregnancy outcomes
+      * Birth observer has zero counts for all abortion/miscarriage/ectopic pregnancy outcomes
   * - 6.2.1
-    - Check ENN mortality ratio compared to GBD, check that birth observer is recording partial term pregnancies 
+    - Check ENN mortality ratio compared to GBD, check that birth observer is recording abortion/miscarriage/ectopic pregnancies 
     - * neonatal mortality ratios are within the expected range (underestimated to a degree greater than 6.1)
       * birth observer is functioning as expected
     - * `Model 6.2.1 vv notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_6.2.1_nn_mortality.ipynb>`_
@@ -2048,7 +2029,7 @@ Default stratifications to all observers should include scenario and input draw.
     - `Model 13.3 neonatal checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/d8dce03ab1de546d6af5719c59e344d77384d93f/verification_and_validation/model_13.3_nn_checks.ipynb>`_
       `Model 13.3 interactive sim neonatal mortality checks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/a2f00672cfe9762b83f6d05f15a4ca5be050750c/verification_and_validation/model_13.3_interactive_simulation_neonatal_mortality.ipynb>`_
   * - 14.0
-    - * Confirm ANC attendance exposure varies as expected by pregnancy term length
+    - * Confirm ANC attendance exposure varies as expected by broad pregnancy outcome
       * Confirm ANC attendance exposure matches expectation
       * Confirm AI ultrasound exposure categories is consistent with ANC attendance categories (ex: no ultrasound coverage if no ANC coverage)
     - All V&V criteria met!
@@ -2234,7 +2215,7 @@ Default stratifications to all observers should include scenario and input draw.
         * Hemoglobin exposure 
         * Gestational age
         * Birthweight
-        * Birth outcomes (MMS reduces rate of stillbirth, increases rate of live birth, no change to "partial term" outcomes)
+        * Birth outcomes (MMS reduces rate of stillbirth, increases rate of live birth, no change to abortion/miscarriage/ectopic outcomes)
 
       * Additional confirmation of effect of CPAP/ACS interventions with newly added preterm birth stratification to the births observer (as was done in the neonatal checks notebook for model 16.4)
     - * There is IFA coverage among those who do not attend ANC
@@ -2416,7 +2397,7 @@ Default stratifications to all observers should include scenario and input draw.
 
 * We assume that all maternal deaths occur at the conclusion of the intrapartum period and prior to the start of the postpartum period. Therefore, we assume it is not possible for any simulants who die of a maternal disorder to experience postpartum YLDs (such as those due to postpartum depression and/or postpartum anemia). However, this may be possible in reality, particularly for those who die of "late maternal deaths."
 
-* We track certain outcomes among partial term pregnancies (abortion/miscarriage and ectopic pregnancy) in this model, including first trimester ANC attendance and associated interventions, anemia YLDs, and postpartum depression. However, these pregnancies are not given special consideration other than their premature end and we do not consider how this population may differ from pregnancies that end in live or still births in terms of their ANC attendance rates or other attributes beyond maternal disorders burden. Additionally, we do not model any variation in these attributes by subtype of partial term pregnancy (abortion vs. miscarriage vs. ectopic pregnancy), despite there being expected differences in behavior between these groups.
+* We track certain outcomes among abortion/miscarriage/ectopic pregnancies in this model, including first trimester ANC attendance and associated interventions, anemia YLDs, and postpartum depression. However, these pregnancies are not given special consideration other than their premature end and we do not consider how this population may differ from pregnancies that end in live or still births in terms of their ANC attendance rates or other attributes beyond maternal disorders burden. Additionally, we do not model any variation in these attributes by subtype (abortion vs. miscarriage vs. ectopic pregnancy), despite there being expected differences in behavior between these groups.
 
 * We do not model an underlying correlation between hemoglobin exposure and stillbirth rates, despite evidence that such an association exists. Therefore, our IV iron intervention model, which is targeted to those with low hemoglobin, will be misaligned with respect to the stillbirth rate among the IV iron intervention target population.
   

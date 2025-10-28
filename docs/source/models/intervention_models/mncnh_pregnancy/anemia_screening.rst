@@ -27,7 +27,7 @@ Hemoglobin Screening Accuracy Instructions
 
 **Research background:**
 
-Anaemia is defined as decreased blood concentration of haemoglobin, irrespective of underlying cause, red blood cell morphology, or red blood cell function. 
+Anemia is defined as decreased blood concentration of hemoglobin, irrespective of underlying cause, red blood cell morphology, or red blood cell function. 
 A noninvasive blood test (using a small, portable device such as a `HemoCue test <https://hemocue.com/us/>`_) can be provided to pregnant people in their 2nd or 3rd 
 trimester at antenatal care clinics to quickly and accurately measure hemoglobin levels in blood. If a pregnant person is found to have hemoglobin less than 100 g/L based on this
 hemoglobin screening, they will also be screened for ferritin levels, which you can read more about in the following section. This page describes how an anemia
@@ -35,21 +35,22 @@ screening intervention (including hemoglobin and ferritin screenings) can be imp
 
 **Modeling instructions:**
 
-For decision node 7 (see the :ref:`hemoglobin module page <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for details), we will assess whether or not the result of a simulant's noninvasive 
+For the "Hemoglobin screening value <100 g/L?" decision node in the :ref:`hemoglobin module page <2024_vivarium_mncnh_portfolio_hemoglobin_module>`, we will assess whether or not the result of a simulant's noninvasive 
 blood test for hemoglobin screening is <100 g/L, which may be different than whether a simulant's *actual* hemoglobin exposure is <100 g/L. We will do this based on assumed 
 sensitivity and specificity levels for the hemoglobin screening test as informed from the Gates Foundation and listed below:
 
 - Sensitivity (percent of true positives that test positive): 85% 
 - Specificity (percent of true negatives that test negative): 80%
 
-Follow the steps below to determine the answer to decision node #7:
+Follow the steps below to determine the answer to the decision node:
 
-1. Assess a simulants "true" low hemoglobin status based on their hemoglobin exposure at the time of screening, which should be based on their true 
-hemoglobin exposure value *after* effects from oral iron received at the first trimester ANC visit and *before* any effects from interventions received at the second trimester have been applied. In other words, use oral iron-affected hemoglobin exposure for those who attend ANC during the first trimester and "ifa-deleted" hemoglobin exposure for those who do not attend ANC during the first trimester (but do later in pregnancy). Low hemoglobin status corresponds to values of <100 g/L and adequate hemoglobin status corresponds to values of 100+ g/L.
+1. Assess a simulant's "true" low hemoglobin status based on their hemoglobin exposure at the time of screening, which should be based on their true hemoglobin exposure value *after* effects from oral iron received at the first trimester ANC visit and *before* any effects from interventions received at the second trimester have been applied. In other words, use oral iron-affected hemoglobin exposure for those who attend ANC during the first trimester and "IFA-deleted" hemoglobin exposure for those who do not attend ANC during the first trimester (but do later in pregnancy). Low hemoglobin status corresponds to values of <100 g/L and adequate hemoglobin status corresponds to values of 100+ g/L.
 2. For simulants that are truly low hemoglobin, assign tests low hemoglobin status to 85% (sensitivity value) and tests adequate hemoglobin status to 15% (100 - sensitivity value of 85)
 3. For simulants that are truly adequate hemoglobin, assign tests adequate hemoglobin status to 80% (specificity) and tests low hemoglobin status to 20% (100 - specificty value of 80)
-4. Use the test hemoglobin status to determine the answer to decision node 7 (answer is "yes" if they have test low hemoglobin status and "no" if they have test adequate hemoglobin status)
-5. Record true and test hemoglobin exposures at the time of screening to outputs F and G (to be used for V&V in the interactive simulation)
+4. Use the test hemoglobin status to determine the answer to the decision node (answer is "yes" if they have test low hemoglobin status and "no" if they have test adequate hemoglobin status)
+5. Record true and test hemoglobin exposures at the time of screening to the relevant outputs (to be used for V&V in the interactive simulation)
+
+Example Python code implementing these steps is available on the :ref:`hemoglobin module page <2024_vivarium_mncnh_portfolio_hemoglobin_module>`.
 
 Ferritin Screening Instructions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -77,7 +78,7 @@ also coincidentally has low ferritin.
 **Modeling instructions:**
 
 The probability of low ferritin screening is dependent on the simulant's location, age group, and anemia status at the time of screening. Anemia status at the time of screening should be based on their true 
-hemoglobin exposure value *after* effects from oral iron received at the first trimester ANC visit and *before* any effects from interventions received at the second trimester have been applied. In other words, use oral iron-affected hemoglobin exposure for those who attend ANC during the first trimester and "ifa-deleted" hemoglobin exposure for those who do not attend ANC during the first trimester (but do later in pregnancy). See the :ref:`anemia/hemoglobin exposure table here for reference <2019_anemia_impairment>` and 
+hemoglobin exposure value *after* effects from oral iron received at the first trimester ANC visit and *before* any effects from interventions received at the second trimester have been applied. In other words, use oral iron-affected hemoglobin exposure for those who attend ANC during the first trimester and "IFA-deleted" hemoglobin exposure for those who do not attend ANC during the first trimester (but do later in pregnancy). See the :ref:`anemia/hemoglobin exposure table here for reference <2019_anemia_impairment>` and 
 remember to use the pregnancy-specific values.
 
 The probability of low ferritin specific to location, age, and anemia status (termed exp_among_{SEVERITY} in the table below) can be calculated according to the parameters defined in the table below.
@@ -202,7 +203,7 @@ The following V&V criteria should be met:
 
 - The coverage of each intervention (hemoglobin screening and ferritin screening) by scenario should match the proportions outlined in the :ref:`Scenarios section of the MNCNH
   Portfolio concept model <mncnh_portfolio_3.1>`
-- There should be a sensitivity (% of true positives that test positive) of 85% and specifity (% of true negatives that test negative) of 80% for those that received hemoglobin screenings.
+- There should be a sensitivity (% of true positives that test positive) of 85% and specificity (% of true negatives that test negative) of 80% for those that received hemoglobin screenings.
 - There should be the expected proportion of simulants with low and high ferritin status for those that received ferritin screenings.
 
 References

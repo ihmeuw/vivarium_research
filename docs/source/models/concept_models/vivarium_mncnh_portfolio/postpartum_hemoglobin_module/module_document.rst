@@ -81,7 +81,7 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
   * - Output
     - Value
     - Dependencies
-  * - A. Postpartum hemoglobin
+  * - Postpartum hemoglobin
     - Point value
     - Used for V&V of maternal hemorrhage effect on postpartum hemoglobin
 

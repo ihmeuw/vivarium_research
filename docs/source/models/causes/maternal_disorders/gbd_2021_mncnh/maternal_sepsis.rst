@@ -113,7 +113,7 @@ Scope
 The goal of the maternal sepsis model is to capture YLLs and YLDs due to
 maternal sepsis (and other maternal infections) among women of
 reproductive age. We only model maternal sepsis among simulants who give
-(live or still) birth after a full term pregnancy. This page documents
+(live or still) birth. This page documents
 how to model the baseline burden of maternal sepsis. Other simulation
 components such as azithromycin and c-sections will affect the rates of
 maternal sepsis; such effects will be described on the pages for the
@@ -123,9 +123,8 @@ effects <risk_effects_models>` model.
 Summary of modeling strategy
 ++++++++++++++++++++++++++++
 
-Since the :ref:`MNCNH Portfolio project
-<2024_concept_model_vivarium_mncnh_portfolio>` does not model the
-passage of time, we will not model maternal sepsis as a state machine
+Because we can assume incident cases of maternal sepsis all occur at the end of pregnancy,
+we will not model maternal sepsis as a state machine
 with dynamic state transitions like our typical cause models. Rather,
 all "transitions" in the model will be modeled as decisions made during
 a single timestep. To obtain the decision probabilities of each incident
@@ -145,13 +144,7 @@ Although we're not modeling sepsis dynamically as a finite state
 machine, we can draw an analogous directed graph that can be interpreted
 as a (collapsed) decision tree rather than a state transition diagram.
 The main difference is that the values on the transition arrows
-represent decision probabilities rather than rates per unit time. The
-maternal sepsis decision graph drawn below should be inserted on the
-"full term pregnancy" branch of the decision graph from the
-:ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`,
-between the intrapartum model and the birth of the child simulant. Solid
-lines are the pieces added by the maternal sepsis model, while dashed
-lines indicate pieces of the underlying pregnancy model.
+represent decision probabilities rather than rates per unit time.
 
 .. todo::
 
@@ -172,17 +165,17 @@ lines indicate pieces of the underlying pregnancy model.
 
     digraph sepsis_decisions {
         rankdir = LR;
-        ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
-        ftb [label="full term\nbirth", style=dashed]
-        survived_sepsis [label="parent did not\ndie of sepsis"]
-        died_of_sepsis [label="parent died\n of sepsis"]
+        start [label="start"]
+        end [label="end"]
+        alive [label="parent did not die of sepsis"]
+        dead [label="parent died of sepsis"]
 
-        ftp -> survived_sepsis  [label = "1 - ir"]
-        ftp -> sepsis [label = "ir"]
-        sepsis -> survived_sepsis [label = "1 - cfr"]
-        sepsis -> died_of_sepsis [label = "cfr"]
-        survived_sepsis -> ftb  [label = "1", style=dashed]
-        died_of_sepsis -> ftb  [label = "1", style=dashed]
+        start -> alive  [label = "1 - ir"]
+        start -> sepsis [label = "ir"]
+        sepsis -> alive [label = "1 - cfr"]
+        sepsis -> dead [label = "cfr"]
+        alive -> end  [label = "1"]
+        dead -> end  [label = "1"]
     }
 
 .. list-table:: State Definitions
@@ -191,25 +184,18 @@ lines indicate pieces of the underlying pregnancy model.
 
     * - State
       - Definition
-    * - full term pregnancy, post intrapartum
-      - Parent simulant has a full term pregnancy as determined by the
+    * - start
+      - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
-        already been through the antenatal and intrapartum models
+        <other_models_pregnancy_closed_cohort_mncnh>` (due to condition on the overall intrapartum component)
     * - sepsis
-      - Parent simulant has maternal sepsis or another maternal
-        infection
-    * - parent did not die of sepsis
-      - Parent simulant did not die of maternal sepsis or another
-        maternal infection
-    * - parent died of sepsis
-      - Parent simulant died of maternal sepsis or another maternal
-        infection
-    * - full term birth
-      - The parent simulant has given birth to a child simulant (which
-        may be a live birth or a still birth, to be determined in the
-        next step of the :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>`)
+      - Parent simulant has maternal sepsis
+    * - parent not dead of maternal sepsis
+      - Parent simulant did not die of maternal sepsis
+    * - parent died of maternal sepsis
+      - Parent simulant died of maternal sepsis
+    * - end
+      -
 
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20
@@ -421,7 +407,7 @@ Validation Criteria
 In order to verify and validate the model, we should record at least the
 following information:
 
-- Number of simulants with full term pregnancies in each age group
+- Number of simulants with live/stillbirth pregnancies in each age group
   before the maternal sepsis model is run
 - Number of maternal sepsis cases and maternal sepsis deaths in each age
   group
