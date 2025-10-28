@@ -2289,8 +2289,8 @@ Default stratifications to all observers should include scenario and input draw.
 
       Partially meeting the following criteria:
 
-      * Effects of IFA and MMS on gestational age and birth weight looks as expected in the interactive sim, but no evidence of effect in simulation results
-      * No observed difference in maternal hemorrhage incidence by scenario in the simulation results despite differences in hemoglobin exposure by scenario and despite that hemoglobin appears to be affecting maternal hemorrhage incidence in the interactive sim in the baseline scenario
+      * Effects of IFA and MMS on gestational age and birth weight looks as expected in the interactive sim, but no evidence of effect in simulation results (confirmed no effect on simulation results generated using the same model_spec file and environment used for the interactive simulation investigation)
+      * No observed difference in maternal hemorrhage incidence by scenario in the simulation results despite differences in hemoglobin exposure by scenario and despite that hemoglobin appears to be affecting maternal hemorrhage incidence in the interactive sim in the baseline scenario (confirmed no effect on simulation results generated using the same model_spec file and environment used for the interactive simulation investigation)
 
       Not meeting the following criteria:
 
@@ -2298,6 +2298,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Hemoglobin screening test appears to be reading in inappropriate hemoglobin exposure measure (IFA-deleted rather than first ANC). Note that this is expected to be causing the following two issues as well: no change in test hemoglobin exposure by scenario (despite changes in true hemoglobin exposure by scenario), and an underestimation of hemoglobin test specificity
       * Less than 100% ferritin screening coverage among those who test low hemoglobin. It appears that there may be an additional requirement to have truly low hemoglobin in order to test for ferritin, but this should not be the case.
       * No impact of MMS on stillbirth, either in simulation results or interactive sim (despite meeting verification criteria in previous model versions)
+      * No difference in neonatal deaths between the baseline and MMS scale-up scenarios despite increased coverage of MMS and effects on LBWSG exposure
+      * No difference in preterm birth counts between the baseline and MMS scale-up scenarios despite increased coverage of MMS and effects on gestational age
 
     - `See all 18.3 V&V notebooks here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/144>`__
   * - 19.0
