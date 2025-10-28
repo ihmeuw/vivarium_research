@@ -2289,14 +2289,15 @@ Default stratifications to all observers should include scenario and input draw.
 
       Partially meeting the following criteria:
 
-      * Effects of IFA and MMS on gestational age, birth weight, and stillbirth looks as expected in the interactive sim, but no evidence of effect in simulation results
-      * No observed difference in maternal hemorrhage incidence by scenario in the simulation results despite differences in hemoglobin exposure by scenario and despite that hemoglobin appears to be affecting maternal hemorrhage incidence in the interactive sim
+      * Effects of IFA and MMS on gestational age and birth weight looks as expected in the interactive sim, but no evidence of effect in simulation results
+      * No observed difference in maternal hemorrhage incidence by scenario in the simulation results despite differences in hemoglobin exposure by scenario and despite that hemoglobin appears to be affecting maternal hemorrhage incidence in the interactive sim in the baseline scenario
 
       Not meeting the following criteria:
 
       * Anemia status during pregnancy appears to be reading in inappropriate hemoglobin exposure measure (IFA-deleted rather than first ANC)
       * Hemoglobin screening test appears to be reading in inappropriate hemoglobin exposure measure (IFA-deleted rather than first ANC). Note that this is expected to be causing the following two issues as well: no change in test hemoglobin exposure by scenario (despite changes in true hemoglobin exposure by scenario), and an underestimation of hemoglobin test specificity
       * Less than 100% ferritin screening coverage among those who test low hemoglobin. It appears that there may be an additional requirement to have truly low hemoglobin in order to test for ferritin, but this should not be the case.
+      * No impact of MMS on stillbirth, either in simulation results or interactive sim (despite meeting verification criteria in previous model versions)
 
     - `See all 18.3 V&V notebooks here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/144>`__
   * - 19.0
@@ -2366,11 +2367,19 @@ Default stratifications to all observers should include scenario and input draw.
     - Engineers to investigate and update
     - Anemia screening bugfix run, version number TBD
   * - Maternal disorders burden does not vary by scenario despite increased coverage of the oral iron intervention affecting hemoglobin exposure
-    - Unknown... it is verifying in the interactive simulation, so perhaps an observer issue?
-    - Engineers and research to investigate
+    - It appears that the :code:`hemoglobin_exposure` column in the state table matches the :code:`hemoglobin.exposure` pipeline value at the pregnancy timestep. However, after progressing to the timesteps where maternal disorders burden is assigned, this is no longer the case. The state table value is used to assess maternal disorders risk and does not reflect the appropriate intervention-affected hemoglobin exposure.
+    - Engineers to investigate and update
     - Anemia screening bugfix run, version number TBD
-  * - No impact of MMS on stillbirth, no impact of IFA or MMS on preterm birth
-    - Unknown, this was previously meeting verification criteria and appears to have expected effects in interactive sim. Could we have accidentally left these risk effects commented out (as we did for the updated scenarios run)?
+  * - Neonatal deaths do not vary by scenario despite increased coverage of the oral iron intervention that should affect BW and GA exposures (and therefore child mortality)
+    - Unknown, verified impacts of oral iron intervention of birth weight and gestational age pipeline values in the interactive simulation. Ali suspects that this issue is related to LBWSG RRs being assigned either based on the state table exposure values (that are not affected by the interventions) or after LBWSG exposures get reset in pipeline values and maybe lose the impact of the interventions
+    - Engineers to investigate and update
+    - Anemia screening bugfix run, version number TBD
+  * - No impact of IFA or MMS on observed preterm birth counts
+    - Ali is verifying expected effects of IFA and MMS on preterm birth assessed by the gestational age pipeline values in the interactive simulation. Ali suspects that while we have the interventions modifying the pipeline values for these exposures, we are observing preterm birth based on the state table values that are not being modified by interventions.
+    - Engineers to investigate and update
+    - Anemia screening bugfix run, version number TBD
+  * - No impact of MMS on stillbirth
+    - Unknown, was previously meeting verification criteria. No impact in the interactive sim or in the simulation results
     - Engineers to investigate and update
     - Anemia screening bugfix run, version number TBD
   * - Ferritin screening rate < 100% among eligible population in scale-up scenario
