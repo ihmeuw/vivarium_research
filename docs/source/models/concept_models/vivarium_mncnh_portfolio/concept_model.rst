@@ -1599,11 +1599,21 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 19.0
-    - GBD 2023 Update.
+    - GBD 2023 Update, part 1: data directly from GBD.
+
       * `See update in draw-level modeling strategy in this PR <https://github.com/ihmeuw/vivarium_research/pull/1808>`__
       * Note that as described on the GBD 2023 LBWSG risk exposure document, we will continue to use GBD 2021 data for the LBWSG risk factor exposures and RR values. However, we will still need to re-run the LBWSG RR cap and PAF calculations as they depend on updated mortality risk data.
+
+      This is an artifact only; the model will not run with this artifact, because it is missing required keys.
     - All
     - ``model19.0``
+    - Default
+    - Default
+    - Default
+  * - 19.1
+    - GBD 2023 Update, part 2: data derived from GBD through more complex, research-owned processes.
+    - All
+    - ``model19.1``
     - Default
     - Default
     - Default
