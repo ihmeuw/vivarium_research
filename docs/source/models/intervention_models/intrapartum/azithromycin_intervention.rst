@@ -208,7 +208,7 @@ in the :code:`RiskEffect` component, we solve for :math:`\text{PAF}_\text{no int
 
 where the terms on the right hand side can be obtained by solving the system of equations above.
 
-Here is some pseudocode for deriving the PAF and RR of "lack of access to the intervention"::
+Here is some pseudocode for deriving the PAF and RR of "lack of access to the intervention":
 
 .. code:: python
   
