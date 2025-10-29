@@ -1628,6 +1628,9 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 19.1
     - GBD 2023 Update, part 2: data derived from GBD through more complex, research-owned processes.
+
+      Also includes the update to reflect :ref:`these docs <facility_choice_choosing_bemonc_cemonc_section>` about using health systems team estimates
+      for BEmONC vs CEmONC fraction.
     - All
     - ``model19.1``
     - Default
