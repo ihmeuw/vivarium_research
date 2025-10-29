@@ -1607,6 +1607,25 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 19.0.1
+    - Artifact tweaks and bug-fixes:
+
+      * Sex ratio at birth had been research-team-owned in the past, but this was a simple calculation from a GBD
+        covariate and has been transferred to the engineering side.
+        See `this PR <https://github.com/ihmeuw/vivarium_research/pull/1823>`__ for the documentation update.
+      * Effect sizes of oral iron supplementation on hemoglobin were erroneously marked as research-team-owned
+        and slated for 19.1; those should be added back unchanged from the 18.X artifacts.
+      * The MMS relative risk on stillbirth was incorrect, in both the code and the docs;
+        see `this PR <https://github.com/ihmeuw/vivarium_research/pull/1826>`__ for the corrected value.
+      * There was some ambiguity about where truncated normal distributions were truncated.
+        This has been clarified in `this docs PR <https://github.com/ihmeuw/vivarium_research/pull/1827>`__.
+
+      Note this is still just an artifact, and not a model run.
+    - All
+    - ``model19.0.1``
+    - Default
+    - Default
+    - Default
   * - 19.1
     - GBD 2023 Update, part 2: data derived from GBD through more complex, research-owned processes.
     - All
