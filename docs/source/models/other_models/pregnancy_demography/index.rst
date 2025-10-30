@@ -121,6 +121,7 @@ Relevant parameters are defined below:
     - get_covariate_estimates: decomp_step=iterative'
     - Parameter is not age-specific.
       Use a truncated normal distribution of uncertainty replicating the 95% UI from the database, truncated at 0 only.
+      Note that in GBD 2021 this parameter had no uncertainty (the mean, lower bound, and upper bound were all the same).
   * - incidence_c995
     - Incidence rate of abortion and miscarriage cause
     - c995
