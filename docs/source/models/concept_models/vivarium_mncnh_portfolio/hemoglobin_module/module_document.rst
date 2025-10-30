@@ -278,6 +278,12 @@ This module applies the effect of the IV iron intervention for those who receive
   * - Scenario-specific IFA/MMS coverage
     - Defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`
     - 
+  * - Oral iron effect on hemoglobin
+    - Defined on the :ref:`oral iron intervention model document <oral_iron_antenatal>`
+    - 
+  * - IV iron effect on hemoglobin
+    - Defined on the :ref:`IV iron intervention model document <intervention_iv_iron_antenatal_mncnh>`
+    - 
 
 .. list-table:: End of pregnancy hemoglobin module decision nodes
   :header-rows: 1
