@@ -2429,10 +2429,10 @@ Default stratifications to all observers should include scenario and input draw.
       Note that the LNN limitation stacks with the previous limitation for preterm birth with RDS to result in
       a nearly 3% underestimate in that LNN CSMRisk.
     - N/A
-  * - In model 2: Found an error in GBD 2021 for Pakistan fistula modeling - need to come back in a future V&V run after we update the Pakistan OL prevalence values from GBD 2021 to GBD 2023. 
-    - 
-    - Revisit following GBD 2023 update
-    - On hold until GBD 2023 update
+  * - In GBD data (for both GBD 2021 and 2023 rounds) the values for incidence, prevalence, and YLDs of rectovaginal fistula (s_189) and vesicovaginal fistula (s_190) sequelae of the maternal obstructed labor and uterine rupture cause (c_370) are zero, causing unexpectedly low YLDs for this cause (~10 times fewer YLDs than India despite incidence being only about twice as low)
+    - Unknown, appears to be an issue with the GBD model
+    - Research to consider how to handle this: remain consistent with GBD  or use similar location (India?) as a proxy location for YLDs per obstructed labor case?
+    - TBD
 
 
 .. _mncnh_portfolio_6.0:
@@ -2463,6 +2463,7 @@ Default stratifications to all observers should include scenario and input draw.
   
     * For individuals who received oral iron treatment at baseline and still remain eligible for IV iron following their oral iron treatment: we will double count the impact of the interventions, thus overestimating the potential scale-up of IV iron.
     * For individuals who received oral iron treatment at baseline and no longer remain eligible for IV iron following their oral iron treatment: there will be essentially no difference in impact for this population given that IV and oral iron treatment have basically equal impacts, however, we will be underestimating the size of the population requiring treatment and therefore underestimating the cost required to achieve the health outcomes seen in these scenarios.
+
 
 .. _mncnh_portfolio_7.0:
 

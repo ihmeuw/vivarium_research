@@ -4,6 +4,10 @@
 Obstructed labor and uterine rupture
 ====================================
 
+.. note::
+
+  There were no updates to this modeling strategy between GBD 2021 and GBD 2023, so this document can be used for both rounds
+
 Disease Overview
 ----------------
 

@@ -4,6 +4,10 @@
 Maternal sepsis and other maternal infections
 =============================================
 
+.. note::
+
+  There were no updates to this modeling stretegy between GBD 2021 and GBD 2023 so this document can be used for both GBD rounds
+
 .. contents::
     :local:
 
