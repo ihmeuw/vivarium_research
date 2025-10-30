@@ -1628,37 +1628,33 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 19.1
     - GBD 2023 Update, part 2: data derived from GBD through more complex, research-owned processes.
-
-      Also includes the update to reflect :ref:`these docs <facility_choice_choosing_bemonc_cemonc_section>` about using health systems team estimates
-      for BEmONC vs CEmONC fraction.
-      (See `this PR <https://github.com/ihmeuw/vivarium_research/pull/1792>`__ for what changed.)
     - All
     - ``model19.1``
     - Default
     - Default
     - Default
   * - 20.0
+    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
+    - Baseline 
+    - ``model20.0``
+    - Default
+    - Default
+    - Default
+  * - 21.0
     - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Baseline
-    - ``model20.0``
+    - ``model21.0``
     - For this run only, 10,000,000 population size per draw
     - Default
     - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-  * - 21.0* (can be moved to before GBD 2023 update/19.0 if needed following an update of the cause IDs to be compatible with GBD 2023)
+  * - 22.0*
     - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
     - Baseline
-    - ``model21.0``
-    - Default
-    - Default
-    - Default
-  * - 22.0 (can be moved to before GBD 2023 update/19.0 if needed)
-    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
-    - Baseline 
     - ``model22.0``
     - Default
     - Default
     - Default
-  * - 23.0 (can be moved to before GBD 2023 update/19.0 if needed)
+  * - 23.0*
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
     - ``model23.0``
