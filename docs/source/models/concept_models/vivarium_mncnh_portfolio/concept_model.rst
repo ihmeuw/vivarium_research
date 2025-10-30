@@ -2429,7 +2429,7 @@ Default stratifications to all observers should include scenario and input draw.
       Note that the LNN limitation stacks with the previous limitation for preterm birth with RDS to result in
       a nearly 3% underestimate in that LNN CSMRisk.
     - N/A
-  * - In GBD data (for both GBD 2021 and 2023 rounds) the values for incidence, prevalence, and YLDs of rectovaginal fistula (s_189) and vesicovaginal fistula (s_190) sequelae of the maternal obstructed labor and uterine rupture cause (c_370) are zero, causing unexpectedly low YLDs for this cause (~10 times fewer YLDs than India despite incidence being only about twice as low)
+  * - In GBD data for Pakistan (for both GBD 2021 and 2023 rounds) the values for incidence, prevalence, and YLDs of rectovaginal fistula (s_189) and vesicovaginal fistula (s_190) sequelae of the maternal obstructed labor and uterine rupture cause (c_370) are zero, causing unexpectedly low YLDs for the obstructed labor and uterine rupture cause (~10 times fewer YLDs than India despite incidence being only about twice as low)
     - Unknown, appears to be an issue with the GBD model
     - Research to consider how to handle this: remain consistent with GBD  or use similar location (India?) as a proxy location for YLDs per obstructed labor case?
     - TBD
