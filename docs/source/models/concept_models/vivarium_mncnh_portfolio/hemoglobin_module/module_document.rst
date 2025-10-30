@@ -364,11 +364,14 @@ This module applies the effect of the IV iron intervention for those who receive
 - At the individual level, only simulants who attend ANC should receive interventions
 
 - Check that IV iron only given to those with measured low hemoglobin and low ferritin
+
 - Check that IV iron has the intended effect on hemoglobin when given 
 
-- Check that measured and true hemoglobin exposures vary by the expected degree
+- Check that test and true hemoglobin exposures vary by the expected degree
 
 - Check that low ferritin values match expectations (specific to anemia status)
+
+- Confirm that interventions share coverage propensity (ex: if intervention A has greater coverage than intervention B, there should be no one who is eligible for both interventions who receives intervention B and not intervention A)
 
 5.0 References
 +++++++++++++++
