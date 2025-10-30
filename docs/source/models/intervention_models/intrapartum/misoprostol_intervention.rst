@@ -1,8 +1,8 @@
 .. _misoprostol_intervention:
 
-============================================
-Misoprostol for treating maternal hemorrhage
-============================================
+==================================================================
+Misoprostol for prevention of maternal hemorrhage in home settings
+==================================================================
 
 .. contents::
    :local:
