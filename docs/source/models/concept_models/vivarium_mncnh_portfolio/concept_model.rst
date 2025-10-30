@@ -1631,6 +1631,7 @@ Default stratifications to all observers should include scenario and input draw.
 
       Also includes the update to reflect :ref:`these docs <facility_choice_choosing_bemonc_cemonc_section>` about using health systems team estimates
       for BEmONC vs CEmONC fraction.
+      (See `this PR <https://github.com/ihmeuw/vivarium_research/pull/1792>`__ for what changed.)
     - All
     - ``model19.1``
     - Default
