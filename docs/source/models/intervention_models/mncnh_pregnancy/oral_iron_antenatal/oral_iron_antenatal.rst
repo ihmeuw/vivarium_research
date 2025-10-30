@@ -490,7 +490,7 @@ The observed effect of each antenatal supplementation product on the risk of sti
     - 1
     - Lack of evidence
   * - MMS
-    - 0.91 (95% CI: 0.71, 0.93), lognormal distribution of uncertainty
+    - 0.91 (95% CI: 0.86, 0.98), lognormal distribution of uncertainty
     - Relative to no supplementation/IFA [Oh-et-al-2020]_
 
 Because there is no effect of IFA on stillbirths and we assume there is no baseline coverage of MMS, there is no differentiation in stillbirth rate due to baseline coverage of antenatal supplementation products in our modeled populations. 
