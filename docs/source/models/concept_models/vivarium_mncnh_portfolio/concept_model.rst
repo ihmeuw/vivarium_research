@@ -271,6 +271,7 @@ Pregnancy component
         * ANC propensity
         * LBWSG category propensity
         * IFD propensity
+        * Anemia intervention propensity
       - * :ref:`Pregnancy demography <other_models_pregnancy_demography>`
         * :ref:`Broad pregnancy outcome <pregnancy_broad_outcome_section>`
         * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
@@ -281,23 +282,41 @@ Pregnancy component
         * Later pregnancy ANC attendance
         * ANC attendance category
       - 
-    * - :ref:`Hemoglobin <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+    * - :ref:`Hemoglobin at the start of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
       - * Maternal age at end of pregnancy
-        * First trimester ANC attendance
-        * Later pregnancy ANC attendance
-      - * IFA/MMS coverage
-        * IV iron coverage
-        * True hemoglobin at start of pregnancy
-        * True hemoglobin at end of pregnancy
+      - * Hemoglobin at the start of pregnancy
       - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
+    * - :ref:`First trimester hemoglobin <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+      - * Hemoglobin at the start of pregnancy
+        * First trimester ANC attendance
+        * Anemia intervention propensity
+      - * Hemoglobin after first trimester ANC visit
+        * Coverage of IFA/MMS at first trimester ANC visit
+      - * :ref:`Oral iron supplementation intervention (IFA/MMS) <oral_iron_antenatal>`
+    * - :ref:`Anemia screening <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+      - * Hemoglobin after first trimester ANC visit
+        * Later pregnancy ANC attendance
+        * Anemia intervention propensity
+      - * Hemoglobin screening (test hemoglobin) coverage/result
+        * Ferritin screening coverage/result
+        * True hemoglobin exposure (dichotomous)
+      - * :ref:`Anemia screening interventions <anemia_screening>`
+    * - :ref:`Hemoglobin at the end of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+      - * Hemoglobin after first trimester ANC visit
+        * Later pregnancy ANC attendance
+        * Hemoglobin screening coverage/result
+        * Ferritin screening coverage/result
+        * Receipt of IFA/MMS at first trimester ANC visit
+      - * Hemoglobin at end of pregnancy
+        * Coverage of IFA/MMS at any time in pregnancy
+        * Coverage of IV iron 
+      - * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
         * :ref:`Oral iron supplementation intervention (IFA/MMS) <oral_iron_antenatal>`
-        * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
-        * :ref:`Anemia screening intervention <anemia_screening>`
     * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
       - * Broad pregnancy outcome
         * LBWSG category propensity
-        * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
-        * IV iron coverage (affects birth outcome, gestational age, birthweight)
+        * Coverage of IFA/MMS at any time in pregnancy (affects birth outcome, gestational age, birthweight)
+        * Coverage of IV iron (affects birth outcome, gestational age, birthweight)
       - * Pregnancy outcome (live birth vs stillbirth vs abortion/miscarriage/ectopic)
         * Gestational age at end of pregnancy
         * Preterm status
