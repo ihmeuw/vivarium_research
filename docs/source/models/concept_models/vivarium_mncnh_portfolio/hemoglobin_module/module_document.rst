@@ -42,33 +42,17 @@ Hemoglobin Module
 1.0 Overview
 ++++++++++++
 
-This document is the page for the hemoglobin module of the pregnancy component
-in the MNCNH Portfolio simulation.
+This document page contains information for the following hemoglobin-related
+modules in the pregnancy component on the MNCNH portfolio simulation:
 
-This module will:
-
-  1. Assign starting point hemoglobin exposure based on GBD
-
-  2. Read-in necessary information from ANC module
-
-  3. Modify hemoglobin exposure according to services received during pregnancy
-
-  4. Output the following information:
-
-    - Services received during pregnancy that relate to hemoglobin (for V&V, cost counting)
-
-    - Hemoglobin exposure at the end of pregnancy for hemoglobin risk effect estimation (inputs to downstream models)
-
-To increase ease in modeling, it has been broken into the following submodules
-
-- `Hemoglobin at the Start of Pregnancy Module`_
-- `First Trimester Hemoglobin Module`_
-- `Anemia Screening Module`_
-- `End of Pregnancy Hemoglobin Module`_
+#. `Hemoglobin at the Start of Pregnancy Module`_
+#. `First Trimester Hemoglobin Module`_
+#. `Anemia Screening Module`_
+#. `End of Pregnancy Hemoglobin Module`_
 
 .. note::
 
-  This module may have potential dependencies with the hypertension/pre-eclampsia model that have not yet been thought through. Model structure is subject to change in order to accomodate these dependencies.
+  These modules may have potential dependencies with the hypertension/pre-eclampsia model that have not yet been thought through. Model structure is subject to change in order to accomodate these dependencies.
 
 2.0 Modules
 ++++++++++++++
@@ -87,6 +71,13 @@ This module will assign a hemoglobin exposure based on the :ref:`GBD hemoglobin 
   * - Maternal age at end of pregnancy
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     -
+
+.. list-table:: Hemoglobin at the start of pregnancy module data values
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+    - Note
   * - :code:`baseline_ifa_overall`
     - Defined on :ref:`maternal supplementation intervention document <oral_iron_antenatal>`.  
     - Use the :code:`baseline_ifa_overall` parameter rather than :code:`baseline_ifa_at_anc`
@@ -133,6 +124,13 @@ This module adds the effect of oral iron supplementation received at a first tri
   * - First trimester ANC attendance
     - :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
     - 
+
+.. list-table:: First trimester hemoglobin module data values
+  :header-rows: 1 
+
+  * - Parameter
+    - Value
+    - Note
   * - Scenario-specific IFA/MMS coverage
     - :ref:`Pregnancy component scenario table <MNCNH pregnancy component scenario table>`
     - 
@@ -192,11 +190,18 @@ This module performs the anemia screening interventions, including hemoglobin an
   * - Anemia intervention propensity
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - 
-  * - Hemoglobin screening coverage
-    - N/A, defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`
+
+.. list-table:: Anemia screening module data values
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+    - Note
+  * - Scenario-specific hemoglobin screening coverage
+    - Defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`
     - 
-  * - Ferritin screening coverage
-    - N/A, defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`
+  * - Scenario-specific ferritin screening coverage
+    - Defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`
     - 
 
 .. list-table:: Anemia screening module decision nodes
@@ -272,6 +277,13 @@ This module applies the effect of the IV iron intervention for those who receive
   * - Ferritin screening test result
     - `Anemia Screening Module`_ output
     - 
+
+.. list-table:: End of pregnancy hemoglobin module data values
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+    - Note
   * - Scenario-specific IFA/MMS coverage
     - Defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`
     - 
