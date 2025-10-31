@@ -4,8 +4,11 @@
 Abortion, miscarriage, and ectopic pregnancy maternal disorders causes
 ======================================================================
 
-
 This model is meant to capture morbidity and mortality specifically among pregnancies that do not end in live or still births according to the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>` in the MNCNH portfolio simulation. Relevant causes of morbidity and mortality among this group as modeled in GBD are "maternal abortion and miscarriage" (c_995) and "ectopic pregnancy" (c_374).
+
+.. note::
+
+  There were no updates to this model between GBD 2021 and GBD 2023 so this document can be used for both GBD rounds
 
 Disease Overview
 ----------------
@@ -29,11 +32,11 @@ Disease Overview
 Restrictions
 ++++++++++++
 
-The following table describes any restrictions in GBD 2021 on the
+The following table describes any restrictions in GBD 2023 on the
 effects of this cause (such as being only fatal or only nonfatal), as
 well as restrictions on the ages and sexes to which the cause applies.
 
-.. list-table:: GBD 2021 Cause Restrictions
+.. list-table:: GBD 2023 Cause Restrictions
    :widths: 15 15 20
    :header-rows: 1
 

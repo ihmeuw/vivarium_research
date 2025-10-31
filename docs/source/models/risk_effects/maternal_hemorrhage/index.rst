@@ -32,6 +32,10 @@
 Maternal Hemorrhage
 ===========================
 
+.. todo::
+
+  Create new document for this modeling strategy for use in the MNCNH simulation that reads in severity fraction from GBD 2023 data rather than using the data from the flat file here
+
 .. contents::
    :local:
    :depth: 2

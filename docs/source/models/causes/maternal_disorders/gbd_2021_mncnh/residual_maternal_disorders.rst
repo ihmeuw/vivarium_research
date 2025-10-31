@@ -4,12 +4,12 @@
 Residual maternal disorders
 ============================
 
-.. todo::
-
-  Update this model to include the new cause IDs for GBD 2023
-
 The residual maternal disorders cause is meant to capture outcomes due to 
 maternal disorders that are not otherwise modeled in our simulation.
+
+.. note::
+
+  This modeling strategy is specific to the GBD 2023 computation hierarchy. A modeling strategy compatible with the GBD 2021 round or the GBD 2023 reporting hierarchy would exclude causes 1118 (gestational diabetes, new to GBD 2023 computation, absent in GBD reporting), 1119 (peripartum cardiomyopathy, new to GBD 2023 computation, absent in GBD 2023 reporting), and 379 (other direct maternal disorders, internal. Excludes burden due to gestational diabetes and peripartum cardiomyopathy) from the list of cause IDs to be covered in this document and replace them with cause ID 1160 (other direct maternal disorders inclusive of gestational diabetes and peripartum cardiomyopathy burden).
 
 Disease Overview
 ----------------
@@ -34,6 +34,10 @@ The cause model hierarchy in GBD is also included here for reference.
 
         - Maternal obstructed labor and uterine rupture (c_370)
 
+        - Gestational diabetes (c_1118)
+
+        - Peripartum cardiomyopathy (c_1119)
+
         - Ectopic pregnancy (c_374)
 
         - Maternal abortion and miscarriage (c_995)
@@ -49,7 +53,7 @@ The cause model hierarchy in GBD is also included here for reference.
 Restrictions
 ++++++++++++
 
-The following table describes any restrictions in GBD 2021 on the
+The following table describes any restrictions in GBD 2023 on the
 effects of this cause (such as being only fatal or only nonfatal), as
 well as restrictions on the ages and sexes to which the cause applies.
 
@@ -122,6 +126,12 @@ document is included in the table below.
   * - Maternal obstructed labor and uterine rupture (c_370)
     - Modeled
     - :ref:`Maternal obstructed labor and uterine rupture docs <2021_cause_obstructed_labor_mncnh>`
+  * - Gestational diabetes (c_1118)
+    - **Unmodeled**
+    - Covered in this document
+  * - Peripartum cardiomyopathy (c_1119)
+    - **Unmodeled**
+    - Covered in this document
   * - Ectopic pregnancy (c_374)
     - Modeled
     - Included in the :ref:`abortion/miscarriage/ectopic pregnancy cause docs <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
@@ -160,6 +170,18 @@ available for each cause).
     - True
     - True
     - Note this cause will eventually be excluded from the residual maternal disorders cause model
+  * - Gestational diabetes
+    - 1118
+    - True
+    - True
+    - True
+    - 
+  * - Peripartum cardiomyopathy
+    - 1119
+    - True
+    - True
+    - True
+    - 
   * - Indirect maternal deaths
     - 375
     - True
@@ -331,7 +353,7 @@ Data Tables
       - The value of cfr is a probabiity in [0,1]. Note that this value of the cfr (shown in the "implementation-driven cause model diagram") is equivalent to the fr parameter shown in the "conceptual cause model diagram" 
     * - csmr
       - cause-specific mortality rate of residual maternal disorders
-      - sum of cause-specific mortality rates across causes [375, 379, 376, 741, 369]
+      - sum of cause-specific mortality rates across causes [375, 1118, 1119, 379, 376, 741, 369]
       - note that cause-specific mortality rates are a measure of deaths (from source='codcorrect') divided by population
     * - birth_rate
       - birth rate (live or still)
@@ -349,7 +371,7 @@ Data Tables
         Use mean_value as location-specific point parameter.
     * - yld_rate
       - Rate of YLDs due to all residual maternal disorders subcauses among the total population
-      - sum of cause-specific mortality rates across causes [375, 379, 376, 741, 369]. Note that only causes 379 and 369 have YLDs.
+      - sum of cause-specific mortality rates across causes [375, 1118, 1119, 379, 376, 741, 369]. Note that only causes 379 and 369 have YLDs.
       - source=como
     * - ylds_per_case
       - YLDs accumulated due to residual maternal disorders per case of residual maternal disorders (live/stillbirth pregnancy)

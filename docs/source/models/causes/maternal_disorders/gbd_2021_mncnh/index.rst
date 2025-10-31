@@ -1,12 +1,8 @@
 .. _2021_cause_maternal_disorders_mncnh:
 
 ===================================
-Maternal disorders: GBD 2021, MNCNH
+Maternal disorders: GBD 2023, MNCNH
 ===================================
-
-.. todo::
-
-  Update this page for GBD 2023
 
 .. note::
 
@@ -22,6 +18,11 @@ Maternal disorders: GBD 2021, MNCNH
     remaining maternal disorders subcauses that are not explicitly
     modeled, as well as the strategy for dealing with interactions
     between the different subcauses.
+
+    This page was originally written to be compatible with GBD 2021
+    and was updated to reflect the maternal disorders cause 
+    hierarchy for GBD 2023 in October of 2025. This was the only
+    change relevant for this model between GBD rounds. 
 
 .. contents::
    :local:
@@ -71,7 +72,7 @@ how to incorporate multiple modeled subcauses into the same simulation.
 Disease Overview
 ----------------
 
-GBD 2021 Modeling Strategy
+GBD 2023 Modeling Strategy
 --------------------------
 
 Cause Hierarchy
@@ -99,11 +100,17 @@ Cause Hierarchy
 
         - Maternal sepsis and other maternal infections (c_368)
 
-          - Puerperal sepsis (s_937)
+          - Puerperal sepsis without anemia (s_937)
 
           - Other maternal infections (s_938)
 
           - Infertility due to puerperal sepsis (s_675)
+
+          - Puerperal sepsis with mild anemia (s_23488)
+
+          - Puerperal sepsis with moderate anemia (s_23489)
+
+          - Puerperal sepsis with severe anemia (s_23490)
 
         - Maternal hypertensive disorders (c_369)
 
@@ -125,6 +132,20 @@ Cause Hierarchy
 
           - Vesicovaginal fistula (s_190)
 
+        - Gestational diabetes (c_1118)
+
+            - Gestational diabetes mellitus (s_23468)
+
+        - Peripartum cardiomyopathy (c_1119)
+
+            - Mild heart failure due to peripartum cardiomyopathy (s_23464)
+
+            - Moderate heart failure due to peripartum cardiomyopathy (s_23465)
+
+            - Severe heart failure due to peripartum cardiomyopathy (s_23466)
+
+            - Controlled, medicalled managed heart failure due to peripartum cardiomyopathy (s_23467)
+
         - Ectopic pregnancy (c_374)
 
           - Ectopic pregnancy (s_5165)
@@ -133,7 +154,7 @@ Cause Hierarchy
 
           - Maternal abortive outcome (s_191)
 
-        - Other direct maternal disorders (c_379)
+        - Other direct maternal disorders, internal (c_379)
 
           - Other maternal disorders (s_192)
 
@@ -142,6 +163,13 @@ Cause Hierarchy
         - Late maternal deaths (c_376)
 
         - Maternal deaths aggravated by HIV/AIDs (c_741)
+
+
+.. note::
+
+    Anemia-specific sepsis sequelae are new to GBD 2023.
+
+    Additionally, peripartum cardiomyopathy (c_1119) and gestational diabetes (c_1118) are new causes to GBD 2023. However, they are only present in the computation hierarchy (cause_set_id==2) and not the reporting hierarchy (cause_set_id==3). Cause ID #1160 (other direct maternal disorders, inclusive of gestational diabetes and peripartum cardiomyopathy) is the cause used in the reporting hierarchy that is analogous cause to cause ID #379 that is used in the computation hiearchy (and excludes burden due to peripartum cardiomyopathy and gestational diabetes).
 
 Subcause case definitions
 """"""""""""""""""""""""""""
