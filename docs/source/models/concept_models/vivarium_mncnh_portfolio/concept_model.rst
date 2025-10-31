@@ -1644,7 +1644,7 @@ Default stratifications to all observers should include scenario and input draw.
     - For this run only, 10,000,000 population size per draw
     - Default
     - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-  * - 22.0*
+  * - 22.0
     - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
     - Baseline
     - ``model22.0``
