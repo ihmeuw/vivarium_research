@@ -102,6 +102,9 @@ There is no need for a diagram for the initial attributes module of this simulat
   * - RDS intervention propensity
     - Use a random number between 0 and 1
     - Will be used to determine which simulants receive each RDS intervention (:ref:`CPAP <intervention_neonatal_cpap>` and :ref:`ACS <acs_intervention>`).
+  * - Anemia intervention propensity
+    - Use a random number between 0 and 1
+    - Will be used to determine coverage of the :ref:`oral iron <oral_iron_antenatal>`, :ref:`anemia screening <anemia_screening>`, and :ref:`IV iron <intervention_iv_iron_antenatal_mncnh>` interventions, as described in the :ref:`hemoglobin modeules <2024_vivarium_mncnh_portfolio_hemoglobin_module>` 
     
 
 3.0 Assumptions and limitations

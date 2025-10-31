@@ -42,67 +42,103 @@ Hemoglobin Module
 1.0 Overview
 ++++++++++++
 
-This document is the page for the hemoglobin module of the pregnancy component
-in the MNCNH Portfolio simulation.
+This document page contains information for the following hemoglobin-related
+modules in the pregnancy component on the MNCNH portfolio simulation:
 
-This module will:
-
-  1. Assign starting point hemoglobin exposure based on GBD
-
-  2. Read-in necessary information from ANC module
-
-  3. Modify hemoglobin exposure according to services received during pregnancy
-
-  4. Output the following information:
-
-    - Services received during pregnancy that relate to hemoglobin (for V&V, cost counting)
-
-    - Hemoglobin exposure at the end of pregnancy for hemoglobin risk effect estimation (inputs to downstream models)
+#. `Hemoglobin at the Start of Pregnancy Module`_
+#. `First Trimester Hemoglobin Module`_
+#. `Anemia Screening Module`_
+#. `End of Pregnancy Hemoglobin Module`_
 
 .. note::
 
-  This module may have potential dependencies with the hypertension/pre-eclampsia model that have not yet been thought through. Model structure is subject to change in order to accomodate these dependencies.
+  These modules may have potential dependencies with the hypertension/pre-eclampsia model that have not yet been thought through. Model structure is subject to change in order to accomodate these dependencies.
 
-2.0 Module Diagram and Data
-+++++++++++++++++++++++++++++++
+2.0 Modules
+++++++++++++++
 
-2.1 Module Diagram
-----------------------
+Hemoglobin at the Start of Pregnancy Module 
+--------------------------------------------
 
-.. note::
-  
-  As discussed on the :ref:`maternal supplementation intervention document <oral_iron_antenatal>`, IFA and MMS have equivalent effects on hemoglobin. This diagram treats them as equivalent for this reason. However, we will need track which product was received as they have differences that will apply to other downstream modules of this simulation. 
+This module will assign a hemoglobin exposure based on the :ref:`GBD hemoglobin risk exposure model <2023_hemoglobin_exposure>` and adjust these exposure to remove the effect of the :ref:`baseline coverage of oral iron supplementation <oral_iron_antenatal>` as we assume that there is zero coverage or oral iron *at the start of pregnancy.* The effect of oral iron supplementation (including baseline coverage) will be added back in subsequent hemoglobin modules on this page.
 
-.. image:: hemoglobin_module.drawio.png
-
-2.2 Module Inputs
----------------------
-
-.. list-table:: Hemoglobin module required inputs
+.. list-table:: Hemoglobin at the start of pregnancy module inputs
   :header-rows: 1
 
   * - Input
-    - Source module
-    - Application
+    - Source 
     - Note
   * - Maternal age at end of pregnancy
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-    - Action point I
     -
-  * - First trimester ANC attendance 
+
+.. list-table:: Hemoglobin at the start of pregnancy module data values
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+    - Note
+  * - :code:`baseline_ifa_overall`
+    - Defined on :ref:`maternal supplementation intervention document <oral_iron_antenatal>`.  
+    - Use the :code:`baseline_ifa_overall` parameter rather than :code:`baseline_ifa_at_anc`
+  * - :code:`ifa_hemoglobin_shift`
+    - Defined on :ref:`maternal supplementation intervention document <oral_iron_antenatal>`
+    - 
+
+Complete the following steps for the Hemoglobin at the Start of Pregnancy Module:
+
+1. Assign :code:`gbd_hemoglobin_exposure` according to the :ref:`hemoglobin risk exposure document <2023_hemoglobin_exposure>` at the age-specific level according to maternal age at the end of prenancy as assigned in the :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`.
+
+2. Record :code:`hemoglobin_at_the_start_of_pregnancy` as a module output equal to :code:`gbd_hemoglobin_exposure - baseline_ifa_overall * ifa_hemoglobin_shift`
+
+
+.. list-table:: Hemoglobin at the start of pregnancy module inputs
+  :header-rows: 1
+
+  * - Output
+    - Value
+    - Dependencies
+  * - Hemoglobin at the start of pregnancy
+    - point value
+    - Used as an in input to the :ref:`anemia YLD module <2024_vivarium_mncnh_portfolio_anemia_module>` and `First Trimester Hemoglobin Module`_
+    
+First Trimester Hemoglobin Module
+------------------------------------
+
+This module adds the effect of oral iron supplementation received at a first trimester ANC visit to hemoglobin exposure and records coverage of oral iron supplementation at that first trimester visit as well as hemoglobin exposure modified by coverage of the intervention.
+
+.. image:: first_trimester_diagram.drawio.png
+
+.. list-table:: First trimester hemoglobin module inputs
+  :header-rows: 1
+
+  * - Input
+    - Source 
+    - Note
+  * - Hemoglobin at the start of pregnancy
+    - `Hemoglobin at the Start of Pregnancy Module`_
+    -
+  * - Anemia intervention propensity
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - 
+  * - First trimester ANC attendance
     - :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
-    - Decision node #2
-    - (True/False value)
-  * - Later pregnancy ANC attendance
-    - :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
-    - Decision node #4
-    - (True/False value)
+    - 
 
+.. list-table:: First trimester hemoglobin module data values
+  :header-rows: 1 
 
-2.3 Module Decision Nodes
------------------------------
+  * - Parameter
+    - Value
+    - Note
+  * - Scenario-specific IFA/MMS coverage
+    - :ref:`Pregnancy component scenario table <MNCNH pregnancy component scenario table>`
+    - 
+  * - :code:`ifa_hemoglobin_shift`
+    - Defined on :ref:`maternal supplementation intervention document <oral_iron_antenatal>`
+    - 
 
-.. list-table:: Hemoglobin module decision nodes
+.. list-table:: First trimester hemoglobin module decision nodes
   :header-rows: 1
 
   * - Decision node
@@ -111,194 +147,204 @@ This module will:
     - Note
   * - 1
     - ANC in first trimester?
-    - As informed from module input (output from :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`)
-    - 
+    - Direct input from :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
+    - "True for ANC attendance exposures in ['first_trimester_only', 'first_trimester_and_later_pregnancy']. False for exposures in ['later_pregnancy_only','none']
   * - 2
-    - Recieve IFA/MMS at first trimester visit?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
-    - Use same propensity value as decision node #5 and #9 to answer this question
-  * - 3
-    - ANC later in pregnancy?
-    - As informed from module input (output from :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`)
-    - 
-  * - 4
-    - Hemoglobin screen?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
-    - 
-  * - 5
-    - Receive IFA/MMS *for the first time* at late pregnancy visit?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Answer can only be yes if ANC attendance==ANC in later pregnancy ONLY. Then, probability of "yes" is equal to scenario-specific coverage.
-    - Use same propensity value as decision node #2 and #9 to answer this question
-  * - 6 
-    - Hemoglobin screening value <100 g/L? (Based on IFA/MMS adjusted exposure)
-    - Instructions detailed on the :ref:`anemia screening intervention page <anemia_screening>`
-    - 
-  * - 7
-    - Ferritin screen?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. Probability of "yes" is equal to scenario-specific coverage
-    - 
-  * - 8
-    - Low ferritin screening value?
-    - Instructions detailed on the :ref:`anemia screening intervention page <anemia_screening>`
-    - 
-  * - 9
-    - IV iron?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. Probability of "yes" is equal to scenario-specific coverage.
-    - 
-  * - 10
-    - Also receive IFA/MMS *for the first time* at late pregnancy visit?
-    - Coverage defined by scenario, see :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`. If answer to decision node #3 is no, then answer to this decision node is also no. Answer can only be yes if ANC attendance==ANC in later pregnancy ONLY. Then, probability of "yes" is equal to scenario-specific coverage.
-    - Use same propensity value as decision node #2 and #5 to answer this question
-
-
-
-2.4 Module Action Points
----------------------------
-
-.. list-table:: Hemoglobin module action point
-  :header-rows: 1
-
-  * - Action point
-    - Description
-    - Information
-    - Note
-  * - I
-    - Assign hemoglobin exposure based on GBD
-    - See :ref:`hemoglobin risk exposure document <2023_hemoglobin_exposure>`
-    - Uses maternal age at end of pregnancy
-  * - II
-    - Calibrate to and remove effect of baseline IFA coverage
-    - Effect size on hemoglobin and baseline coverage defined on :ref:`maternal supplementation intervention document <oral_iron_antenatal>`. We assume no one receives baseline IFA prior to their first ANC visit. Since we are initializing hemoglobin exposure at the start of pregnancy prior to anyone receiving IFA, we subtract the value of :code:`baseline_ifa_overall * ifa_hemoglobin_shift` from the hemoglobin exposure value of all simulants. Use the :code:`baseline_ifa_overall` parameter rather than :code:`baseline_ifa_at_anc`
-    - The effect of baseline IFA will be added back in later in the decision tree when simulants receive it at their ANC visits. 
-  * - III
-    - Record hemoglobin exposure at the start of pregnancy
-    - Record to output
-    - 
-  * - IV
-    - Apply IFA/MMS effect
-    - Effect size on hemoglobin defined on :ref:`antenatal supplementation intervention document <oral_iron_antenatal>`
-    - Note that IFA and MMS effectively have the same effect on maternal hemoglobin
-  * - V
-    - Record IFA/MMS receipt
-    - Record to output
-    - 
-  * - VI
-    - Apply IFA/MMS effect
-    - Effect size on hemoglobin defined on :ref:`antenatal supplementation intervention document <oral_iron_antenatal>`
-    - Note that IFA and MMS effectively have the same effect on maternal hemoglobin
-  * - VII
-    - Record IFA/MMS receipt
-    - Record to output
-    - 
-  * - VIII
-    - Apply IV iron effect
-    - Effect size on hemoglobin defined on :ref:`intravenous iron intervention document <intervention_iv_iron_antenatal_mncnh>`
-    - Ignore instructions regarding timing of effect implementation on this document
-  * - IX
-    - Record IV iron receipt
-    - Record to output
-    - 
-  * - X
-    - Record receipt of IFA/MMS
-    - Record to output
-    - Note that IFA/MMS hemoglobin effect is not applied on top of IV iron effect
-  * - XI
-    - Record hemoglobin value at end of pregnancy
-    - Record to output
+    - Receive IFA/MMS at first trimester visit?
+    - Use the :ref:`anemia intervention propensity <2024_vivarium_mncnh_portfolio_initial_attributes_module>` and the scenario-specific IFA/MMS coverage value defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` to determine if an individual simulant is screened for hemoglobin
     - 
 
-2.4: Module Outputs
------------------------
-
-.. list-table:: Hemoglobin module outputs
+.. list-table:: First trimester hemoglobin module outputs
   :header-rows: 1
 
   * - Output
     - Value
     - Dependencies
-  * - IFA/MMS coverage
-    - "ifa" or "mms" or "none"
-    - Used for anemia YLD calculation, V&V, simulation result 
+  * - Oral iron coverage in first trimester
+    - :code:`none` / :code:`ifa` / :code:`mms`
+    - Input to `End of Pregnancy Hemoglobin Module`_
+  * - First trimester hemoglobin
+    - point value
+    - Input to `Anemia Screening Module`_
+
+
+Anemia Screening Module
+-------------------------
+
+This module performs the anemia screening interventions, including hemoglobin and ferritin screening tests, at the late pregnancy ANC visit. Anemia exposures should be assessed according to first trimester hemoglobin as output from the `First Trimester Hemoglobin Module`_. The results of the anemia screening tests will be used in subsequent modules to determine eligibility for the IV iron intervention. Additionally, a measure of "true first trimester hemoglobin exposure" is an additional output of this module and will be used to assess the sensitivity and specificity of the hemoglobin screening test and a convenient stratifying variable for certain observed outputs for V&V, but this measure will not be used as an input for any subsequent modules.
+
+.. image:: anemia_screening_diagram.drawio.png
+
+.. list-table:: Anemia screening module inputs
+  :header-rows: 1
+
+  * - Input
+    - Source
+    - Note
+  * - First trimester hemolobin
+    - `First Trimester Hemoglobin Module`_
+    - 
+  * - Later pregnancy ANC attendance
+    - :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
+    - True for ANC attendance exposures in ['later_pregnancy_only', 'first_trimester_and_later_pregnancy']. False for exposures in ['first_trimester_only','none']
+  * - Anemia intervention propensity
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - 
+
+.. list-table:: Anemia screening module data values
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+    - Note
+  * - Scenario-specific hemoglobin screening coverage
+    - Defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`
+    - 
+  * - Scenario-specific ferritin screening coverage
+    - Defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`
+    - 
+
+.. list-table:: Anemia screening module decision nodes
+  :header-rows: 1
+
+  * - Decision node
+    - Description
+    - Information
+    - Note
+  * - 1
+    - ANC later in pregnancy?
+    - Direct input from :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
+    - "Yes" for ANC attendance exposures in ['later_pregnancy_only', 'first_trimester_and_later_pregnancy']. "No" for exposures in ['first_trimester_only','none']
+  * - 2
+    - Hemoglobin screen?
+    - Use the :ref:`anemia intervention propensity <2024_vivarium_mncnh_portfolio_initial_attributes_module>` and the scenario-specific hemoglobin screening coverage value defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` to determine if an individual simulant is screened for hemoglobin
+    - 
+  * - 3
+    - Hemoglobin screening test result
+    - Use the instructions detailed on the :ref:`anemia screening intervention page <anemia_screening>` to determine hemoglobin screening test result based on first trimester hemolobin exposure output from the `First Trimester Hemoglobin Module`_
+    - 
+  * - 4
+    - Ferritin screen?
+    - Use the :ref:`anemia intervention propensity <2024_vivarium_mncnh_portfolio_initial_attributes_module>` and the scenario-specific ferritin screening coverage value defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` to determine if an individual simulant is screened for hemoglobin.
+    - 
+  * - 5
+    - Ferritin screening test result
+    - Use the instructions detailed on the :ref:`anemia screening intervention page <anemia_screening>`. Anemia status should be assessed according to first trimester hemolobin exposure output from the `First Trimester Hemoglobin Module`_.
+    - 
+
+.. list-table:: Anemia screening module outputs
+  :header-rows: 1
+
+  * - Output
+    - Value
+    - Dependencies
+  * - Hemoglobin screening result
+    - :code:`not_tested` / :code:`low` / :code:`adequate`
+    - V&V (via observation), simulation result
+  * - Ferritin screening result
+    - :code:`not_tested` / :code:`low` / :code:`adequate`
+    - V&V (via observation), simulation result
+  * - True first trimester hemoglobin exposure 
+    - :code:`low` if first trimester hemoglobin <100 g/L, :code:`adequate if first trimester hemoglobin 100+ g/L`
+    - Used for V&V (via observation) to assess sensitivity and specificity of the hemoglobin screening test and as a convenient stratifying variable for specific observed outcomes. Not used as an input to any other module.
+
+
+End of Pregnancy Hemoglobin Module
+-------------------------------------------
+
+This module applies the effect of the IV iron intervention for those who received it and applies the effect of oral iron intervention for those who have not already received the effect from their earlier first trimester ANC visit. Only those who have "low" test results for both the hemoglobin and ferritin screenings are eligible for IV iron. We assume that among those who receive both IV and oral iron interventions at the later pregnancy ANC visit, they receive only the effect of IV iron on their hemoglobin exposure rather than the additive impact of both interventions.
+
+.. image:: end_of_pregnancy_diagram.drawio.png
+
+.. list-table:: End of pregnancy hemoglobin module inputs
+  :header-rows: 1
+
+  * - Input
+    - Source
+    - Note
+  * - First trimester hemolobin
+    - `First Trimester Hemoglobin Module`_
+    - 
+  * - Later pregnancy ANC attendance
+    - :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
+    - True for ANC attendance exposures in ['later_pregnancy_only', 'first_trimester_and_later_pregnancy']. False for exposures in ['first_trimester_only','none']
+  * - Anemia intervention propensity
+    - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
+    - 
+  * - Hemoglobin screening test result
+    - `Anemia Screening Module`_ output
+    - 
+  * - Ferritin screening test result
+    - `Anemia Screening Module`_ output
+    - 
+
+.. list-table:: End of pregnancy hemoglobin module data values
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+    - Note
+  * - Scenario-specific IFA/MMS coverage
+    - Defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`
+    - 
+  * - Scenario-specific IFA/MMS coverage
+    - Defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>`
+    - 
+  * - Oral iron effect on hemoglobin
+    - Defined on the :ref:`oral iron intervention model document <oral_iron_antenatal>`
+    - 
+  * - IV iron effect on hemoglobin
+    - Defined on the :ref:`IV iron intervention model document <intervention_iv_iron_antenatal_mncnh>`
+    - 
+
+.. list-table:: End of pregnancy hemoglobin module decision nodes
+  :header-rows: 1
+
+  * - Decision node
+    - Description
+    - Information
+    - Note
+  * - 1
+    - ANC later in pregnancy?
+    - Direct input from :ref:`ANC module <2024_vivarium_mncnh_portfolio_anc_module>`
+    - "Yes" for ANC attendance exposures in ['later_pregnancy_only', 'first_trimester_and_later_pregnancy']. "No" for exposures in ['first_trimester_only','none']
+  * - 2
+    - Eligible for IV iron?
+    - True for thoes with hemoglobin_screening_test_result==True AND ferritin_screening_test_result==True. False for all other simulants
+    - Hemoglobin and ferritin screening test results output from the `Anemia Screening Module`_
+  * - 3
+    - Covered by IV iron?
+    - Use the :ref:`anemia intervention propensity <2024_vivarium_mncnh_portfolio_initial_attributes_module>` and the scenario-specific IV Iron coverage value defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` to determine if an individual simulant is screened for hemoglobin.
+    - 
+  * - 4
+    - Covered by IFA/MMS?
+    - Use the :ref:`anemia intervention propensity <2024_vivarium_mncnh_portfolio_initial_attributes_module>` and the scenario-specific IFA/MMS coverage value defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` to determine if an individual simulant is screened for hemoglobin.
+    - 
+  * - 5
+    - Covered by IFA/MMS?
+    - Use the :ref:`anemia intervention propensity <2024_vivarium_mncnh_portfolio_initial_attributes_module>` and the scenario-specific IFA/MMS coverage value defined in the :ref:`pregnancy component scenario table <MNCNH pregnancy component scenario table>` to determine if an individual simulant is screened for hemoglobin.
+    - 
+  * - 6
+    - Received IFA/MMS at first trimester ANC visit?
+    - Direct input from the `First Trimester Hemoglobin Module`_
+    - Note that another way to answer this question would be if ANC attendance == 'first_trimester_and_later_pregnancy'
+
+.. list-table:: End of pregnancy hemoglobin module outputs
+  :header-rows: 1
+
+  * - Output
+    - Value
+    - Dependencies
   * - IV iron coverage
-    - "True" or "False"
-    - Used for anemia YLD calculation, V&V, simulation result 
-  * - True hemoglobin at the beginning of pregnancy 
+    - :code:`covered` / :code:`uncovered`
+    - V&V (via observation), simulation result
+  * - Oral iron coverage at any time in pregnancy
+    - :code:`none` / :code:`ifa` / :code:`mms`
+    - V&V (via observation), simulation result
+  * - Hemoglobin at the end of pregnancy
     - point value
-    - Used for anemia YLD calculation, V&V (via interactive context)
-  * - True hemoglobin at the end of pregnancy
-    - point value
-    - Value to be used for :ref:`hemoglobin risk effects model <2023_hemoglobin_effects>`, used for anemia YLD calculation, V&V (via interactive context)
-  * - True hemoglobin at screening
-    - "low" or "adequate"
-    - V&V (via observation)
-  * - Tests hemoglobin exposure
-    - "low" or "adequate"
-    - V&V (via observation)
-  * - Ferritin exposure at screening
-    - "low" or "adequate"
-    - V&V (via observation)
+    - Used to inform the risk effects of the hemoglobin risk factor (as an input to the :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`, :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`, and the :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>` modules. Also used as an input to the :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`.
 
-2.5: Python implementation summary
-----------------------------------
-
-The Python below shows possible implementation steps that are compatible with the diagram defined above. 
-
-.. code-block:: python 
-
-  # step 1: remove effect of baseline IFA from everyone
-  hgb_start_of_pregnancy = gbd_hgb_exposure - ifa_effect_size * baseline_ifa_overall
-
-  # step 2: apply first trimester oral iron effect
-  hgb_after_first_trimester_anc = (
-    hgb_start_of_pregnancy + ifa_effect_size
-    if (anc_attendance in ['first_trimester_only', 'later_pregnancy_and_first_trimester'])
-      and oral_iron_covered
-    else
-    hgb_start_of_pregnancy
-  )
-
-  # step 3: assess IV iron coverage based on hgb_after_first_trimester_anc exposure and other attributes
-
-  # anemia screening: see anemia screening page for documentation
-  # note that we use hgb_after_first_trimester_anc for this
-  actual_low_hemoglobin = hgb_after_first_trimester_anc < 100
-  probability_test_low_hemoglobin = (
-    HEMOGLOBIN_SCREENING_SENSITIVITY
-    if actual_low_hemoglobin
-    else
-    1 - HEMOGLOBIN_SCREENING_SPECIFICITY
-  )
-  test_low_hemoglobin = np.random.choice(
-    [True, False],
-    p=[probability_test_low_hemoglobin, 1 - probability_test_low_hemoglobin]
-  )
-  # end anemia screening
-
-  received_iv_iron = (
-    anc_attendance in ['later_pregnancy_only', 'first_trimester_and_later_pregnancy']
-      and hemoglobin_screen_covered 
-      and test_low_hemoglobin
-      and low_ferritin_exposure 
-      and iv_iron_covered
-  )
-
-  # step 4: apply later pregnancy ANC oral iron effects effects
-  hgb_at_after_later_pregnancy = hgb_after_first_trimester_anc + (
-    ifa_effect_size
-    if (anc_attendance == 'later_pregnancy_only')
-      and oral_iron_covered
-      and not received_iv_iron
-    else
-    0
-  )
-
-  # step 5: apply IV iron effect size
-  hgb_at_birth = hgb_at_after_later_pregnancy + (
-    iv_iron_effect_size
-    if received_iv_iron
-    else
-    0
-  )
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
@@ -330,11 +376,14 @@ The Python below shows possible implementation steps that are compatible with th
 - At the individual level, only simulants who attend ANC should receive interventions
 
 - Check that IV iron only given to those with measured low hemoglobin and low ferritin
+
 - Check that IV iron has the intended effect on hemoglobin when given 
 
-- Check that measured and true hemoglobin exposures vary by the expected degree
+- Check that test and true hemoglobin exposures vary by the expected degree
 
 - Check that low ferritin values match expectations (specific to anemia status)
+
+- Confirm that interventions share coverage propensity (ex: if intervention A has greater coverage than intervention B, there should be no one who is eligible for both interventions who receives intervention B and not intervention A)
 
 5.0 References
 +++++++++++++++
