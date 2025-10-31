@@ -317,7 +317,7 @@ The Python below shows possible implementation steps that are compatible with th
 
 - We assume there are no changes in natural history hemoglobin trajectory throughout pregnancy, including when a pregnancy spans GBD age groups (we use the age group at the *end* of pregnancy to determine hemoglobin). The natural history of hemoglobin throughout pregnancy among "frequent" and "infrequent" users of oral iron supplements was assessed by [Yefet-et-al-2021]_, with a figure included below for easy reference. Rather than modeling a decreasing hemoglobin over the first two trimesters followed by a rebound in the third trimester, we assume that hemoglobin is constant at the approximate average exposure over the course of pregnancy for the entirety of that pregnancy. This limits our model in the following ways:
 
-.. image:: hemoglobin_trajectory.PNG
+.. image:: hemoglobin_trajectory.png
 
 - By not modeling the "dip" in hemoglobin observered  the 28 weeks of gestation we will underestimate the portion of the population that meets the eligibility criteria for IV iron at any point in their pregnancy.
 
