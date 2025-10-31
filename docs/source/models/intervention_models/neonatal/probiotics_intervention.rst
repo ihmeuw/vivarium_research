@@ -1,8 +1,8 @@
 .. _intervention_neonatal_probiotics:
 
-=============================================
-Probiotics for treating bacterial infections
-=============================================
+=======================================================
+Probiotics for infection prevention in preterm neonates
+=======================================================
 
 .. contents::
    :local:

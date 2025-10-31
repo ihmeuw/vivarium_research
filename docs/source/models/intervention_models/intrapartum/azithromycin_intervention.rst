@@ -1,8 +1,8 @@
 .. _azithromycin_intervention:
 
-=========================================
-Azithromycin for treating maternal sepsis
-=========================================
+=======================================================
+Intrapartum azithromycin for maternal sepsis prevention
+=======================================================
 
 .. contents::
    :local:

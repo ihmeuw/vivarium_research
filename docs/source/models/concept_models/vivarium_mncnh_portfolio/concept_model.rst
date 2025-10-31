@@ -392,6 +392,7 @@ Neonatal component
       * Gestational age
       * RDS intervention propensity
       * Hemoglobin exposure at birth (affects neonatal sepsis)
+      * Sex of infant (determines sex-specific mortality rates)
     - * Neonatal probiotics coverage
       * CPAP coverage
       * Neonatal mortality outcomes (see outcome table)
