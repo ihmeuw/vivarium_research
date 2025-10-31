@@ -418,14 +418,12 @@ Postpartum component
     - Inputs
     - Outputs
     - Nested subcomponents
-    - Wave II updates
   * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
     - * Hemoglobin at end of pregnancy
       * Maternal hemorrhage incidence
     - * Postpartum hemoglobin
     - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
       * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>` 
-    - New module in wave II
   * - :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`
     - * Hemoglobin at start of pregnancy
       * Hemoglobin at end of pregnancy
@@ -436,13 +434,11 @@ Postpartum component
       * Pregnancy duration
     - * Anemia YLDs
     - * :ref:`Anemia impairment <2019_anemia_impairment>`
-    - New module in wave II
   * - :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>`
     - * Hemoglobin at end of pregnancy
     - * Maternal disorders outcomes (see outcome table)
     - * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
       * :ref:`Hemoglobin risk effects document <2023_hemoglobin_effects>`
-    - New module in wave II
 
 **Wave 1 Concept Model Map (has not been updated recently):**
 
