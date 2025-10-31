@@ -392,6 +392,7 @@ Neonatal component
       * Gestational age
       * RDS intervention propensity
       * Hemoglobin exposure at birth (affects neonatal sepsis)
+      * Sex of infant (determines sex-specific mortality rates)
     - * Neonatal probiotics coverage
       * CPAP coverage
       * Neonatal mortality outcomes (see outcome table)
@@ -418,14 +419,12 @@ Postpartum component
     - Inputs
     - Outputs
     - Nested subcomponents
-    - Wave II updates
   * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
     - * Hemoglobin at end of pregnancy
       * Maternal hemorrhage incidence
     - * Postpartum hemoglobin
     - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
       * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>` 
-    - New module in wave II
   * - :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`
     - * Hemoglobin at start of pregnancy
       * Hemoglobin at end of pregnancy
@@ -436,13 +435,11 @@ Postpartum component
       * Pregnancy duration
     - * Anemia YLDs
     - * :ref:`Anemia impairment <2019_anemia_impairment>`
-    - New module in wave II
   * - :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>`
     - * Hemoglobin at end of pregnancy
     - * Maternal disorders outcomes (see outcome table)
     - * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
       * :ref:`Hemoglobin risk effects document <2023_hemoglobin_effects>`
-    - New module in wave II
 
 **Wave 1 Concept Model Map (has not been updated recently):**
 
@@ -1607,6 +1604,25 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 19.0.1
+    - Artifact tweaks and bug-fixes:
+
+      * Sex ratio at birth had been research-team-owned in the past, but this was a simple calculation from a GBD
+        covariate and has been transferred to the engineering side.
+        See `this PR <https://github.com/ihmeuw/vivarium_research/pull/1823>`__ for the documentation update.
+      * Effect sizes of oral iron supplementation on hemoglobin were erroneously marked as research-team-owned
+        and slated for 19.1; those should be added back unchanged from the 18.X artifacts.
+      * The MMS relative risk on stillbirth was incorrect, in both the code and the docs;
+        see `this PR <https://github.com/ihmeuw/vivarium_research/pull/1826>`__ for the corrected value.
+      * There was some ambiguity about where truncated normal distributions were truncated.
+        This has been clarified in `this docs PR <https://github.com/ihmeuw/vivarium_research/pull/1827>`__.
+
+      Note this is still just an artifact, and not a model run.
+    - All
+    - ``model19.0.1``
+    - Default
+    - Default
+    - Default
   * - 19.1
     - GBD 2023 Update, part 2: data derived from GBD through more complex, research-owned processes.
     - All
@@ -1615,27 +1631,27 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 20.0
+    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
+    - Baseline 
+    - ``model20.0``
+    - Default
+    - Default
+    - Default
+  * - 21.0
     - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Baseline
-    - ``model20.0``
+    - ``model21.0``
     - For this run only, 10,000,000 population size per draw
     - Default
     - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-  * - 21.0* (can be moved to before GBD 2023 update/19.0 if needed following an update of the cause IDs to be compatible with GBD 2023)
+  * - 22.0*
     - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
     - Baseline
-    - ``model21.0``
-    - Default
-    - Default
-    - Default
-  * - 22.0 (can be moved to before GBD 2023 update/19.0 if needed)
-    - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
-    - Baseline 
     - ``model22.0``
     - Default
     - Default
     - Default
-  * - 23.0 (can be moved to before GBD 2023 update/19.0 if needed)
+  * - 23.0
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
     - ``model23.0``

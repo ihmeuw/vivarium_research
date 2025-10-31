@@ -211,9 +211,9 @@ Data Tables
       - 0
       - assumption
     * - case duration
-      - amount of time "infectedd" with PPD, in years
-      - 0.65 years (95% UI: 0.59, 0.70; truncated normal distribution). Apply uncertainty as parameter uncertainty, not individual-level heterogeneity
-      - GBD 2019 methods appendix for major depressive disorder [GBD-2019-Capstone-Appendix-PPD-mncnh]_
+      - amount of time "infected" with PPD, in years
+      - 0.65 years (95% UI: 0.59, 0.70) truncated normal distribution truncated at 0 only. Apply uncertainty as parameter uncertainty, not individual-level heterogeneity
+      - GBD 2019, 2021, and 2023 methods appendices for major depressive disorder [GBD-2019-Capstone-Appendix-PPD-mncnh]_ [GBD-2021-Capstone-Appendix-PPD-mncnh]_ [GBD-2023-Capstone-Appendix-PPD-mncnh]_
 
 
 .. list-table:: Major depressive disorder sequelae
@@ -234,6 +234,12 @@ Data Tables
   * - Severe
     - 10 
     - 0.658 (0.477, 0.807)
+
+The above values all come from the GBD methods appendix for major depressive disorder,
+and have not changed between [GBD-2019-Capstone-Appendix-PPD-mncnh]_, [GBD-2021-Capstone-Appendix-PPD-mncnh]_ and [GBD-2023-Capstone-Appendix-PPD-mncnh]_.
+However, we did change the prevalence of asymptomatic from 13% to 14% to make the numbers
+add to 100 (presumably they only didn't due to rounding error)
+and we have not used uncertainty for the severity split.
 
 .. note::
 
@@ -269,7 +275,13 @@ References
   Appendix to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of
   369 diseases and injuries in 204 countries and territories, 1990–2019: a 
   systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
-  17 Oct 2020;396:1204-1222` 
+  17 Oct 2020;396:1204-1222`
+
+.. [GBD-2021-Capstone-Appendix-PPD-mncnh]
+  Appendix to: `Global incidence, prevalence, years lived with disability (YLDs), disability-adjusted life-years (DALYs), and healthy life expectancy (HALE) for 371 diseases and injuries in 204 countries and territories and 811 subnational locations, 1990–2021: a systematic analysis for the Global Burden of Disease Study 2021, The Lancet, Volume 403, Issue 10440, 2024, Pages 2133-2161, ISSN 0140-6736, https://doi.org/10.1016/S0140-6736(24)00757-8.`
+
+.. [GBD-2023-Capstone-Appendix-PPD-mncnh]
+  Appendix to: `Burden of 375 diseases and injuries, risk-attributable burden of 88 risk factors, and healthy life expectancy in 204 countries and territories, including 660 subnational locations, 1990–2023: a systematic analysis for the Global Burden of Disease Study 2023. The Lancet, Volume 406, Issue 10513, 1873 - 1922`
 
 .. [Shorey-et-al-2018-mncnh]
   Shorey S, Chee CYI, Ng ED, Chan YH, Tam WWS, Chong YS. Prevalence and incidence of postpartum depression among healthy mothers: A systematic review and meta-analysis. J Psychiatr Res. 2018 Sep;104:235-248. doi: 10.1016/j.jpsychires.2018.08.001. Epub 2018 Aug 3. PMID: 30114665.

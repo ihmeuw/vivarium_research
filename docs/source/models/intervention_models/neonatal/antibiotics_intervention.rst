@@ -250,12 +250,17 @@ Assumptions and Limitations
 - The evidence in the [PSBI-Cochrane-Review]_ for this intervention was graded as low quality given the significant heterogeneity and the existence of interventions besides antibiotics administered alongside the community distribution of antibiotics interventions
 - Many of the trials in the [PSBI-Cochrane-Review]_ included additional services alongside the ability to treat PSBI on an outpatient basis, which may confound the estimate of the intervention effect (however, we lessen the degree of this bias by using the sepsis-specific mortality estimate rather than the all cause mortality estimate)
 - Although the trials in the [PSBI-Cochrane-Review]_ were measured specifically among the population visited by community health workers participated in the study, we do not limit the intervention effect only to those who receive postnatal care visits. This is because even if a family does not receive a PNC visit, it is possible that they will seek care if/when their newborn displays signs of illness. However, by not modeling decreased coverage among the population who does not receive PNC visits, we may overestimate the effect of the intervention.
+- We apply the effect of this intervention to the neonatal sepsis cause-specific mortality risk among the entire neonatal population in our model. However, babies who are hospitalized from birth through the end of the neonatal period cannot directly benefit from an outpatient intervention. While it is possible that reduced demand for inpatient antibiotic management due to the intervention will decrease capacity demand for NICUs and therefore increase quality of care among existing inpatient neonates, we do not have specific data to inform this effect. Therefore we are likely overestimating the impact of this intervention by applying its effect the entire population including hospitalized neonates (who are likely to be preterm and therefore at greatest risk of sepsis mortality in the first place).
 
 .. todo::
 
   Consider adding pneumonia as additional affected cause?
 
   Determine if we want to make the eligible population those who recieve postnatal care visits according to the GBD covariate value. This would require us to add PNC as an additional attribute to the model and would allow us to correlate it with ANC/IFD attributes. 
+
+  Consider adding a NICU variable to our model so that we can apply the intervention effect to non-hospitalized neonates only. Note that a NICU variable would also be helpful for tracking CPAP use.
+
+  Consider modeling incidence risk for neonatal sepsis to aid in costing this intervention
 
 Validation and Verification Criteria
 ------------------------------------
