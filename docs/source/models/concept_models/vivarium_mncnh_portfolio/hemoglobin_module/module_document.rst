@@ -173,7 +173,7 @@ This module adds the effect of oral iron supplementation received at a first tri
 Anemia Screening Module
 -------------------------
 
-This module performs the anemia screening interventions, including hemoglobin and ferriting screening testes, at the late pregnancy ANC visit. Anemia exposures should be assessed according to first trimester hemoglobin as output from the `First Trimester Hemoglobin Module`_. The results of the anemia screening tests will be used in subsequent modules to determine eligibility for the IV iron intervention. Additionally, a measure of "true hemoglobin exposure" is an additional output of this module and will be used to assess the sensitivity and specificity of the hemoglobin screening test and a convenient stratifying variable for certain observed outputs for V&V, but this measure will not be used as an input for any subsequent modules.
+This module performs the anemia screening interventions, including hemoglobin and ferritin screening tests, at the late pregnancy ANC visit. Anemia exposures should be assessed according to first trimester hemoglobin as output from the `First Trimester Hemoglobin Module`_. The results of the anemia screening tests will be used in subsequent modules to determine eligibility for the IV iron intervention. Additionally, a measure of "true hemoglobin exposure" is an additional output of this module and will be used to assess the sensitivity and specificity of the hemoglobin screening test and a convenient stratifying variable for certain observed outputs for V&V, but this measure will not be used as an input for any subsequent modules.
 
 .. image:: anemia_screening_diagram.drawio.png
 
