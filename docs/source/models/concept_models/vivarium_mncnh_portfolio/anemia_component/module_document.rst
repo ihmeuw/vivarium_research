@@ -150,7 +150,7 @@ Note that simulants who died during labor should not experience any YLDs due to 
     - Value
     - Source/Note
   * - :math:`\text{DW}(\text{hgb})`
-    - Function that returns the anemia disability weight for a given hemoglobin level
+    - Function that returns the anemia disability weight for a given hemoglobin level. Note that as written this function will need to be able to handle simulants who have died in the intrapartum component and did not progress to the postpartum period (i.e. return zero for these simulants)
     - See the :ref:`anemia impairment document<2019_anemia_impairment>` for anemia hemoglobin thresholds (use the pregnancy-specific values) and disability weights
   * - :math:`\text{hgb}^\text{start}_i`
     - Hemoglobin exposure at the start of pregnancy for individual simulant
@@ -160,7 +160,7 @@ Note that simulants who died during labor should not experience any YLDs due to 
     - :ref:`Hemoglobin module<2024_vivarium_mncnh_portfolio_hemoglobin_module>`
   * - :math:`\text{hgb}^\text{pp}_i`
     - Postpartum hemoglobin for individual simulant
-    - :ref:`Postpartum hemoglobin module<2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
+    - :ref:`Postpartum hemoglobin module<2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`. Note that there are some simulants who will not survive to the postpartum period and will have undefined postpartum hemoglobin.
   * - :math:`\text{duration}^\text{preg}_i`
     - Pregnancy duration in years for individual simulant
     - :ref:`Pregnancy II module <2024_vivarium_mncnh_portfolio_pregnancy_module>`, note a unit conversion to years may be necessary
