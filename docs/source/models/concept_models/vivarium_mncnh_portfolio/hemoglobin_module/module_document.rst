@@ -325,6 +325,8 @@ The Python below shows possible implementation steps that are compatible with th
 
 - Our model assumes that the effect of iron interventions in pregnancy is not modified by gestational age at birth. Additionally, we assume that there is no association between gestational age at birth and hemoglobin exposure at birth, which is also implied from these findings. The findings from [Yefet-et-al-2021]_ imply that both of these dynamics are present.
 
+- Our calibration of anemia YLDs throughout pregnancy will be off to what is expected in reality. However, our model remains in line with GBD methodology and its associated limitations with respect to anemia YLDs in pregnancy.
+
 - By applying the effect of oral iron supplementation given in the first trimester to hemoglobin exposure immediately, we will likely overestimate the impact of this intervention on hemoglobin exposure in the second trimester. This will cause us to overestimate the reduction in anemia YLDs in the first and second trimesters. We will also overestimate the reduction that oral iron supplementation has on the population eligible for IV iron that is assessed during the second trimester (although less so when assessed during the third trimester). However, as we are not modeling the number or timing of ANC visits in the second and third trimesters, we do not have the modeling resolution to address these issues.
 
 - We do not allow for the possibility that oral iron received early in the second trimester may prevent IV iron eligibility at a subsequent ANC visit later in the second or third trimester.
