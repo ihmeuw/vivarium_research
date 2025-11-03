@@ -977,6 +977,9 @@ Default stratifications to all observers should include scenario and input draw.
       * The sum of the squares of the values
 
       All of these quantities can aggregate across seeds in the normal way (summation).
+  * - 11. Anemia YLDs
+    - * Maternal age group
+    - Inclusive of anemia YLDs accrued during pregnancy and the postpartum period
 
 .. todo::
 
@@ -985,15 +988,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Stratifying the birth observer by neonatal interventions,
 
     - AND separately observing neonatal intervention counts
-
-.. note::
-
-  Additional outputs to add for wave II include:
-
-  * Anemia status at birth counts (none/mild/moderate/severe)
-  * YLDs due to anemia in pregnancy
-  * Postpartum anemia status counts (non/mild/moderate/severe)
-  * YLDs due to anemia in the postpartum period
 
 .. _mncnh_portfolio_5.0:
 
@@ -1664,34 +1658,62 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
   * - 22.0
-    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
-    - Baseline
-    - ``model22.0``
+    - Pregnancy model refactor, bringing model up to date with the `updated hemoglobin module docs <https://github.com/ihmeuw/vivarium_research/pull/1830>`__ and fixing model 18.3 bugs related to multiple instances of hemoglobin and LBWSG variables that were being inconsistently referenced by different simulation components (See outstanding model verification and validation issues table for full list)
+    - Baseline, MMS scaleup, and anemia screening scaleup scenarios
+    - `model22.0`
     - Default
     - Default
     - Default
   * - 23.0
-    - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
-    - Baseline and IV iron scale-up scenarios
+    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
+    - Baseline
     - ``model23.0``
     - Default
-    - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
     - Default
-  * - 24.0*
-    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data specific to GBD 2023 has yet to be generated)
+    - Default
+  * - 24.0
+    - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
     - ``model24.0``
     - Default
-    - Default
+    - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
     - Default
   * - 25.0*
+    - IV iron effects on birth weight, gestational age, and stillbirth as defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data specific to GBD 2023 has yet to be generated)
+    - Baseline and IV iron scale-up scenarios
+    - ``model25.0``
+    - Default
+    - Default
+    - Default
+  * - 26.0*
     - Updated hemoglobin effects as defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (Custom PAFs and neonatal sepsis effects have yet to be calculated for GBD 2023)
 
       * Updated custom PAF values for maternal hemorrhage and maternal sepsis outcomes (paired with existing implementation of GBD RRs)
       * New risk effect (using GBD RRs and custom PAFs) for depressive disorders
       * New risk effect (using custom RRs and PAFs) for neonatal sepsis
     - Baseline and IV iron scale-up scenarios
-    - ``model25.0``
+    - ``model26.0``
+    - Default
+    - Default
+    - Default
+  * - 27.0
+    - Postpartum hemoglobin
+    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - ``model27.0``
+    - Default
+    - Default
+    - Default
+  * - 28.0
+    - Anemia YLDs
+    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - ``model28.0``
+    - Default
+    - Default
+    - Default, note new anemia YLD observer
+  * - 29.0* 
+    - Effects of maternal hemorrhage (and possibly maternal sepsis) on postpartum hemoglobin. Model run is blocked by the following research tickets (1) `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__
+    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - ``model29.0``
     - Default
     - Default
     - Default
@@ -2333,26 +2355,31 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm list of draws has been updated in accordance with GBD 2023 strategy
     - 
     - 
-  * - 20.0
-    - 
+  * - 20.0 (CEMONC data update)
+    - * Confirm expected delivery facility attendance rates
+      * Confirm neonatal mortality still matches expectation and that our neonatal intervention PAF calculations have not been thrown out of calibration
     - 
     -
-  * - 21.0
+  * - 21.0 (neonatal mortality V&V)
     - Confirm expected rates of cause-specific and overall maternal disorders causes
     - 
     - 
-  * - 22.0
+  * - 22.0 (pregnancy refector)
+    - Same as 18.3
+    - 
+    - 
+  * - 23.0 (residual and other maternal disorders causes)
     - * Confirm that the proportion of in-facility deliveries in CEmONC and BEmONC facilities matches the location-specific estimates from the HS team.
     -
     -
-  * - 23.0
+  * - 24.0 (IV iron coverage and effect on hemoglobin)
     - * Confirm scenario-specific IV iron and anemia screening coverage rates (verification with sim outputs)
       * Confirm only simulants who attend ANC, who test low hemoglobin AND test low ferritin receive IV iron (verification with interactive sim)
       * Confirm IV iron has the expected effect on hemoglobin (verification in the interactive simulation)
       * Confirm that hemoglobin exposure (using the interactive simulation) and maternal disorders outcomes (using sim outputs) still meet expectations
     - 
     - 
-  * - 24.0
+  * - 25.0 (IV iron effects on BW, GA, SB)
     - * Confirm the baseline outcomes still meet expectations, including:
 
         * LBWSG exposure (in the interactive simulation)
@@ -2362,9 +2389,23 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm expected effects of IV iron on birth weight, gestational age, and birth outcome rates using the interactive simulation
     - 
     - 
-  * - 25.0
+  * - 26.0 (updated hemoglobin effects)
     - * Confirm that neonatal mortality (particularly for neonatal sepsis) still matches expectation in the baseline scenario
       * Using the interactive simulation, confirm effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. The total effect should be evaluated by stepping through the simulation and observing the rate of mortality due to neonatal sepsis stratified by maternal hemoglobin exposure.
+    - 
+    - 
+  * - 27.0 (postpartum hemoglobin)
+    - In the interactive simulation, confirm postpartum hemoglobin exposure matches hemoglobin exposure at the end of pregnancy for simulants who survive to the postpartum period
+    - 
+    - 
+  * - 28.0 (anemia YLDs)
+    - * Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values
+      * Anemia YLDs should decrease in MMS/IV iron scale-up scenarios 
+    - 
+    - 
+  * - 29.0 (maternal disorders effects on postpartum hemoglobin)
+    - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident maternal disorders
+      * Note that the baseline value of anemia YLDs should slightly increase relative to the value in model 28.0
     - 
     - 
 
@@ -2386,46 +2427,38 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Observer updates
-    - For hemoglobin and ferritin, we have a column for coverage (true/false) and a column for test result (low/adequate/not_tested). We can delete the coverage columns and reduce the amount of stratification present in our results. However, the ferritin screening columns contradict one another (ferritin low/adequate results for those with ferritin screening coverage == False), so this should be investigated before we update to make sure we don't hide a bug.
-
-      Also, stratification by ultrasound type is present in the anc_hemoglobin observer and can be removed
-
-      We can condense our oral iron coverage results into a single column with values ifa/mms/none to reduce the total number of stratifications
-    - Engineers to investigate and update
-    - Anemia screening bugfix run, version number TBD
   * - Maternal disorders burden does not vary by scenario despite increased coverage of the oral iron intervention affecting hemoglobin exposure
     - It appears that the :code:`hemoglobin_exposure` column in the state table matches the :code:`hemoglobin.exposure` pipeline value at the pregnancy timestep. However, after progressing to the timesteps where maternal disorders burden is assigned, this is no longer the case. The state table value is used to assess maternal disorders risk and does not reflect the appropriate intervention-affected hemoglobin exposure.
-    - Engineers to investigate and update
-    - Anemia screening bugfix run, version number TBD
+    - Engineers to address during pregnancy model refactor
+    - Pregnancy refactor model 22.0
   * - Neonatal deaths do not vary by scenario despite increased coverage of the oral iron intervention that should affect BW and GA exposures (and therefore child mortality)
     - Unknown, verified impacts of oral iron intervention of birth weight and gestational age pipeline values in the interactive simulation. Ali suspects that this issue is related to LBWSG RRs being assigned either based on the state table exposure values (that are not affected by the interventions) or after LBWSG exposures get reset in pipeline values and maybe lose the impact of the interventions
-    - Engineers to investigate and update
-    - Anemia screening bugfix run, version number TBD
+    - Engineers to address during pregnancy model refactor
+    - Pregnancy refactor model 22.0
   * - No impact of IFA or MMS on observed preterm birth counts
     - Ali is verifying expected effects of IFA and MMS on preterm birth assessed by the gestational age pipeline values in the interactive simulation. Ali suspects that while we have the interventions modifying the pipeline values for these exposures, we are observing preterm birth based on the state table values that are not being modified by interventions.
-    - Engineers to investigate and update
-    - Anemia screening bugfix run, version number TBD
+    - Engineers to address during pregnancy model refactor
+    - Pregnancy refactor model 22.0
   * - No impact of MMS on stillbirth
     - Unknown, was previously meeting verification criteria. No impact in the interactive sim or in the simulation results
     - Engineers to investigate and update
     - Anemia screening bugfix run, version number TBD
   * - Ferritin screening rate < 100% among eligible population in scale-up scenario
     - We are only testing ferritin among those who have low exposure values for their tested hemoglobin AND their true hemoglobin. Everyone who has a low tested hemoglobin exposure should be screened for ferritin regardless of their true hemoglobin exposure
-    - Engineers to update
-    - Anemia screening bugfix run, version number TBD
+    - Engineers to address during pregnancy model refactor
+    - Pregnancy refactor model 22.0
   * - Hemoglobin screening test and anemia status during pregnancy appear to be reading in an inappropriate hemoglobin exposure measure
     - See linked comments (it appears we  created a new measure to be used in these instances, but did not actually update it as the input variables)
-    - Engineers to update
-    - Anemia screening bugfix run, version number TBD
+    - Engineers to address during pregnancy model refactor
+    - Pregnancy refactor model 22.0
   * - Propensity for LBWSG category remains constant across timesteps, but propensity for continuous BW and GA values reset at each timestep
     - This should not cause significant bias in our results, but it is not logical to have a different birth weight at different ages and unnecessarily increases stochastic uncertainty in our simulation
-    - Low priority to update (sometime when engineers have the capacity)
-    - TBD
+    - Engineers to address during pregnancy model refactor
+    - Pregnancy refactor model 22.0
   * - There is non-zero coverage of hemoglobin screening among those who attend first trimester screening ONLY
-    - Unclear if we would like to perform hemoglobin screening tests during the first trimester visit as it is only actionable in our model to screen at 2nd trimester visit to determine IV Iron eligibility, but in practice screening may be done in the first trimester as well to inform oral iron adherence/dose (although we will not model the impact of this in our sim)
-    - Discuss desired behavior for costing purposes with the Gates Foundation at our next interaction
-    - TBD
+    - This is inconsistent with documentation (hemoglobin screening should occur at later pregnancy ANC visit only)
+    - Engineers to address during pregnancy model refactor
+    - Pregnancy refactor model 22.0
   * - `Ferritin exposure model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2439>`__
     - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
     - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy using PRISMA data shared by the Gates foundation
