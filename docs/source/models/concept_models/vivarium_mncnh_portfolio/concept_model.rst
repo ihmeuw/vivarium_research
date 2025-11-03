@@ -1650,6 +1650,15 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 20.1
+    - Sensitivity analysis run: to get an upper bound on the potential impact of AI ultrasound,
+      set the standard deviation of gestational age error to 70 days for "no ultrasound", 30 days for "standard ultrasound", and 2 days for "AI ultrasound".
+      **Note that this change should be a one-off, and not built on top of for the next model run.**
+    - Baseline; AI-assisted ultrasound scale-up; CPAP and ACS scale-up; CPAP, ACS, and AI-ultrasound scale-up 
+    - ``model20.1``
+    - Default
+    - Default
+    - Default
   * - 21.0
     - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Baseline
