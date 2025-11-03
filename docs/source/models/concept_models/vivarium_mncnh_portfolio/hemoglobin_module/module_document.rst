@@ -365,7 +365,7 @@ This module applies the effect of the IV iron intervention for those who receive
 
 .. image:: hemoglobin_trajectory.png
 
-- By not modeling the "dip" in hemoglobin observered  the 28 weeks of gestation we will underestimate the portion of the population that meets the eligibility criteria for IV iron at any point in their pregnancy.
+- By not modeling the "dip" in hemoglobin observed at 28 weeks of gestation we will underestimate the portion of the population that meets the eligibility criteria for IV iron at any point in their pregnancy.
 
 - Our model does not consider the interaction between ANC attendance timing and hemoglobin exposure trajectory throughout pregnancy as it relates to assessment of IV iron eligibility by anemia screening. For instance, a given pregnancy would be assessed as eligible for IV iron if screened at 28 weeks gestation, but not if they were screened at 15 or 35 weeks. We assume that simulants have an equal likelihood of IV iron eligibility at any point in their second or third trimester.
 
