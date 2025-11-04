@@ -2378,8 +2378,11 @@ Default stratifications to all observers should include scenario and input draw.
     - `Model 19.1 V&V notebooks found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/148>`__
   * - 19.1.1
     - Same as 19.1 and confirm specific issues from 19.1 are resolved
-    - 
-    - 
+    - * Issue of zero neonatal deaths in Nigeria and Ethiopia resolved
+      * Maternal disorders burden and all facility choice results are meeting expectations
+      * Underestimation of neonatal mortality risk for all causes as well as cause-specific mortality for all modeled causes with the exception of other causes in Pakistan
+      * Mortality risk in the late neonatal age group is closer to target than for the early neonatal age group, although with some variation
+    - `Model 19.1.1 V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/149>`__
   * - 20.0 (CEMONC data update)
     - * Confirm expected delivery facility attendance rates
       * Confirm neonatal mortality still matches expectation and that our neonatal intervention PAF calculations have not been thrown out of calibration
