@@ -62,7 +62,7 @@ Demography for a closed cohort of pregnancies
 Overview
 -------------
 
-This document is intended to represent the demography model for a simulation of a closed cohort of (most; see note below) pregnancies. This population structure differs from the typical default Vivarium population structure delineated by age, sex, location, and year only (roughly speaking, it differs in that it excludes all non-pregnant people). The closed cohort of pregnancies model for use in the :ref:`Nutrition optimization pregnancy model <2021_concept_model_vivarium_nutrition_optimization>` will initialize a population that consists of female simulants who are all at the beginning of a pregnancy.Because of this, we must implement a custom age structure of the initialized population to be representative of the relevant subpopulation in any location and year.
+This document is intended to represent the demography model for a simulation of a closed cohort of (most; see note below) pregnancies. This population structure differs from the typical default Vivarium population structure delineated by age, sex, location, and year only (roughly speaking, it differs in that it excludes all non-pregnant people). The closed cohort of pregnancies model for use in the :ref:`Nutrition optimization pregnancy model <2021_concept_model_vivarium_nutrition_optimization>` will initialize a population that consists of female simulants who are all at the beginning of a pregnancy. Because of this, we must implement a custom age structure of the initialized population to be representative of the relevant subpopulation in any location and year.
 
 .. note::
 
