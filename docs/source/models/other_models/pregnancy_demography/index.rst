@@ -62,7 +62,24 @@ Demography for a closed cohort of pregnancies
 Overview
 -------------
 
-This document is intended to represent the demography model for a simulation of a closed cohort of pregnancies. This population structure differs from the typical default Vivarium population structure delineated by age, sex, location, and year only. The closed cohort of pregnancies model for use in the :ref:`Nutrition optimization pregnancy model <2021_concept_model_vivarium_nutrition_optimization>` will initialize a population that consists of pregnant female simulants only rather than initializing a population of women of reproductive age generally and tracking their pregnancy status over time. Because of this, we must implement a custom age structure of the initialized population to be representative of the pregnant population in any location and year.
+This document is intended to represent the demography model for a simulation of a closed cohort of (most; see note below) pregnancies. This population structure differs from the typical default Vivarium population structure delineated by age, sex, location, and year only (roughly speaking, it differs in that it excludes all non-pregnant people). The closed cohort of pregnancies model for use in the :ref:`Nutrition optimization pregnancy model <2021_concept_model_vivarium_nutrition_optimization>` will initialize a population that consists of female simulants who are all at the beginning of a pregnancy. Because of this, we must implement a custom age structure of the initialized population to be representative of the relevant subpopulation in any location and year.
+
+.. note::
+
+  The actual *beginning* of a pregnancy (conception) is difficult to observe, and most people aren't aware it has happened right away.
+  This means that while in theory a cohort of "all" pregnancies would start with every conception event (in a given time period/year),
+  we (a) don't have a very precise estimate of how many that is and (b) all our data *about* the pregnancies will also be conditional on
+  some later requirement (e.g. the pregnancy reaching X weeks of gestation, or something).
+
+  The actual cohort we simulate here is of all pregnancies with a "medically-relevant outcome," which we define as a live birth,
+  stillbirth, or other pregnancy outcome requiring medical care.
+  As described below, this cohort can be constructed from GBD estimates of live births and stillbirths combined with GBD incidence estimates
+  for abortion and miscarriage (miscarriages included are only those that require medical care, and abortions need medical care by definition)
+  and ectopic pregnancy (ectopic pregnancies need medical care by definition).
+  This is a bit confusing to think about because it is an example of "fortune-telling" -- inclusion in our cohort at the *beginning* of pregnancy depends on what happens at the *end*.
+  We may write more about this general kind of thing in the future (as it is very common in the MNCNH simulation)
+  but in this specific case, we know it is fine to fortune-tell because we don't have any interventions that
+  causally impact whether pregnancies have a medically-relevant outcome.
 
 GBD Modeling Strategy
 ----------------------

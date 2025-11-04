@@ -180,12 +180,19 @@ categories each simulant's pregnancy will fall into:
    or ectopic pregnancy.
 2. Pregnancies that result in live births or stillbirths.
 
+.. note::
+
+  Abortions and miscarriages differ only by gestational age, and there is not a universal standard
+  for the dividing line.
+  In accordance with GBD we define miscarriage as <24 weeks gestation, and therefore
+  we *should* define stillbirth as >=24 weeks gestation, though we currently do not (see TODO below).
+
 .. todo::
 
-  We should formalize how we define the difference between a miscarriage and a stillbirth.
-  Right now we are using estimates for somewhat discordant definitions, because miscarriage in GBD
-  is less than 24 weeks but the stillbirth covariate we are using is greater than 20 weeks.
-  See `this ticket <https://jira.ihme.washington.edu/browse/SSCI-2441>`__.
+  Update to use GBD 2023 estimates of stillbirth ratio based on the >=24 week definition, rather than
+  the covariate based on the >=20 week definition listed below.
+  Note that in the GBD 2021 version of this model we used >=20 weeks gestation for stillbirth
+  as the SBR for >=24 weeks was not estimated in that round.
 
 GBD cause ID 995 represents abortions and miscarriages requiring medical care (lumped together).
 GBD cause ID 374 represents ectopic pregnancies.
