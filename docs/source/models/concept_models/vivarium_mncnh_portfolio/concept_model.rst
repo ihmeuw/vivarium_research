@@ -1643,6 +1643,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 19.1.1
+    - Rerun of 19.1 with artifacts that resolved data issue in keys dependent on the BEMONC/CEMONC fraction (that were accidentally run on data specific to model 20.0)
+    - Baseline
+    - ``model19.1.1``
+    - Default
+    - Default
+    - Default
   * - 20.0
     - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
     - Baseline 
@@ -2350,9 +2357,18 @@ Default stratifications to all observers should include scenario and input draw.
       * No difference in preterm birth counts between the baseline and MMS scale-up scenarios despite increased coverage of MMS and effects on gestational age
 
     - `See all 18.3 V&V notebooks here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/144>`__
-  * - 19.0
+  * - 19.1
     - * Confirm all parameters continue to meet V&V criteria in the baseline scenario
       * Confirm list of draws has been updated in accordance with GBD 2023 strategy
+    - * Zero neonatal deaths in Ethiopia and Nigeria (`related to issue addressed in this PR <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/174#event-20687662095>`__)
+      * In Pakistan, neonatal mortality risk appears to has greater miscalibration than previous models (thought to be related to same issue linked in the above PR)
+      * BEMONC and CEMONC delivery rates are not meeting generated verification criteria (likewise thought to be a result of BEMONC/CEMONC data versions used inconsistently)
+      * Confirmed list of draws has been updated as expected
+      * Maternal disorders burden and all facility choice targets other than BEMONC/CEMONC fraction are matching expectations
+      * Note that the portion of all pregnancies that result in abortion/miscarriage/ectopic pregnancy has increased for Nigeria and Ethiopia and decreased for Pakistan such that the difference in this parameter between these locations is now fairly large and fairly high in Nigeria/Ethiopia (<10% and ~45% respectively)
+    - `Model 19.1 V&V notebooks found here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/148>`__
+  * - 19.1.1
+    - Same as 19.1 and confirm specific issues from 19.1 are resolved
     - 
     - 
   * - 20.0 (CEMONC data update)
