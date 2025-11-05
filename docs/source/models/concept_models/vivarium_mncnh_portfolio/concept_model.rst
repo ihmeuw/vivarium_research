@@ -1666,6 +1666,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 20.2
+    - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__.
+    - Baseline 
+    - ``model20.2``
+    - Default
+    - Default
+    - Default
   * - 21.0
     - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Baseline

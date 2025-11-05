@@ -28,21 +28,17 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-=========================================
-Pregnancy: GBD 2021, Closed Cohort, MNCNH
-=========================================
+==============================================
+Pregnancy: GBD 2021/2023, Closed Cohort, MNCNH
+==============================================
 
 .. todo::
 
   Create an updated page for this model document specific to GBD 2023 modeling strategy. 
 
-  Until this is complete, we have implemented a the following (stand-in) changes to the modeling strategy documented on this page for the GBD 2023 update of the MNCNH simulation: 
+  We will likely be revisiting our stillbirth modeling strategy for the MNCNH simulation as part of our incorporation of intrapartum sensors and c-sections into our simulation.
 
-    * use covariate ID #2541 (Stillbirth to live birth ratio, with stillbirths defined as death of a fetus at 20+ weeks gestation) instead of #2267 (Stillbirth to live birth ratio, with stillbirths defined as death of a fetus at 28+ weeks). 
-
-    * use the uncertainty interval for covariate ID #2541 to generate draw-level estimates for this parameter rather than just using the mean value as we did for GBD 2021 given that there was no parameter uncertainty provided in GBD 2021
-
-  Note that GBD 2023 has new stillbirth rate and count covariates available for both the 20 and 28 week definitions in addition to ratios relative to live births and that we will likely be revisiting our stillbirth modeling strategy for the MNCNH simulation as part of our incorporation of intrapartum sensors and c-sections into our simulation.
+  For now we use this page for both GBD 2021 and GBD 2023 versions.
 
 .. contents::
    :local:
@@ -185,14 +181,7 @@ categories each simulant's pregnancy will fall into:
   Abortions and miscarriages differ only by gestational age, and there is not a universal standard
   for the dividing line.
   In accordance with GBD we define miscarriage as <24 weeks gestation, and therefore
-  we *should* define stillbirth as >=24 weeks gestation, though we currently do not (see TODO below).
-
-.. todo::
-
-  Update to use GBD 2023 estimates of stillbirth ratio based on the >=24 week definition, rather than
-  the covariate based on the >=20 week definition listed below.
-  Note that in the GBD 2021 version of this model we used >=20 weeks gestation for stillbirth
-  as the SBR for >=24 weeks was not estimated in that round.
+  we define stillbirth as >=24 weeks gestation, though we did not in the GBD 2021 version of this model.
 
 GBD cause ID 995 represents abortions and miscarriages requiring medical care (lumped together).
 GBD cause ID 374 represents ectopic pregnancies.
@@ -222,9 +211,11 @@ are age-group-specific.
     - get_covariate_estimates: decomp_step='iterative' for GBD 2021
     - Assume lognormal distribution of uncertainty.
   * - SBR
-    - Covariate
-    - For GBD 2021: 2267, For GBD 2023: 2541
-    - get_covariate_estimates: decomp_step='iterative' for GBD 2021, no need to specify a decomp_step for GBD 2023
+    - For GBD 2021: Covariate.
+      For GBD 2023: Flat-file estimate not in covariate database.
+    - For GBD 2021: 2267.
+    - For GBD 2021: get_covariate_estimates: decomp_step='iterative'
+      For GBD 2023, flat file can be accessed at ``/snfs1/Project/simulation_science/mnch_grant/MNCNH\ portfolio/stillbirth_livebirth_ratio_24wks.csv``, copied from ``/mnt/team/mortality/pub/covariates/run_versions/2025-10-16-11-03/stillbirth_livebirth_ratio_24wks.csv`` where the GBD modelers made it available to us.
     - Parameter is not age-specific.
       Use a truncated normal distribution of uncertainty replicating the 95% UI from the database, truncated at 0 only.
       Note that in GBD 2021 this parameter had no uncertainty (the mean, lower bound, and upper bound were all the same).

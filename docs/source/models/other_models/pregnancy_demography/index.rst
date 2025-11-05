@@ -133,9 +133,11 @@ Relevant parameters are defined below:
     - get_covariate_estimates: decomp_step='iterative'
     - Assume lognormal distribution of uncertainty  
   * - SBR
-    - Covariate
-    - 2267
-    - get_covariate_estimates: decomp_step=iterative'
+    - For GBD 2021: Covariate.
+      For GBD 2023: Flat-file estimate not in covariate database.
+    - For GBD 2021: 2267.
+    - For GBD 2021: get_covariate_estimates: decomp_step='iterative'
+      For GBD 2023, flat file can be accessed at ``/snfs1/Project/simulation_science/mnch_grant/MNCNH\ portfolio/stillbirth_livebirth_ratio_24wks.csv``, copied from ``/mnt/team/mortality/pub/covariates/run_versions/2025-10-16-11-03/stillbirth_livebirth_ratio_24wks.csv`` where the GBD modelers made it available to us.
     - Parameter is not age-specific.
       Use a truncated normal distribution of uncertainty replicating the 95% UI from the database, truncated at 0 only.
       Note that in GBD 2021 this parameter had no uncertainty (the mean, lower bound, and upper bound were all the same).
