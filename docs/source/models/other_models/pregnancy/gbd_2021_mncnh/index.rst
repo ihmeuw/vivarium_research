@@ -266,7 +266,9 @@ and we assume uncertainty is perfectly correlated).
 Assign birthweight and gestational age at end of pregnancy (live births and stillbirths)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For pregnancies that result in live births or stillbirths, a LBWSG exposure value will be assigned that will include both the gestational age and birthweight of the simulant child. The LBWSG can be assigned using information outlined in the :ref:`LBWSG exposure page <2021_risk_exposure_lbwsg>`. Exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Based on the assigned category, a gestational age and birthweight can be recorded separately.
+For pregnancies that result in live births, a LBWSG exposure value will be assigned that will include both the gestational age and birthweight of the simulant child. The LBWSG can be assigned using information outlined in the :ref:`LBWSG exposure page <2021_risk_exposure_lbwsg>`. Exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Based on the assigned category, a gestational age and birthweight can be recorded separately.
+
+For pregnancies that result in stillbirths, birth weight and gestational age at the end of pregnancy values should be assigned according to the :ref:`LBWSG exposure page <2021_risk_exposure_lbwsg>` in the same way as for live births, but with an enforced minimum gestational age at birth exposure value of 24.15 weeks (24 weeks and one day). This should be achieved by taking the maximum assigned gestational age at birth value between the sampled value according to the :ref:`LBWSG exposure page <2021_risk_exposure_lbwsg>` and 24.15 weeks. This strategy was chosen to be consistent with the gestational age at birth threshold used to distinguish between stillbirths and miscarriages of 24 weeks.
 
 .. note::
 
@@ -282,7 +284,8 @@ For pregnancies that result in live births or stillbirths, a LBWSG exposure valu
 
   In later waves of the model, we will make this process more complex by including correlation with other maternal characteristics, similar to what is outlined in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. 
 
-  Additionally, the LBWSG exposure distribution may be modified by :ref:`antenatal supplementation intervention coverage <maternal_supplementation_intervention>` in later waves of the project. 
+  Additionally, the LBWSG exposures are modified by interventions in pregnancy
+  as detailed on the :ref:`MNCNH portfolio concept model document <2024_concept_model_vivarium_mncnh_portfolio>`.
 
 Assign gestational age at end of pregnancy (abortion/miscarriage/ectopic pregnancies)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

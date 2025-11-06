@@ -50,6 +50,8 @@ modules in the pregnancy component on the MNCNH portfolio simulation:
 #. `Anemia Screening Module`_
 #. `End of Pregnancy Hemoglobin Module`_
 
+Importantly, in the simulation implementation, YLDs due to anemia are accrued throughout the progression of these hemoglobin modules (despite the docs indicatin that they are accrued as a lump sum in a separate "Anemia YLDs" module). See the :ref:`anemia YLDs input module document <2024_vivarium_mncnh_portfolio_anemia_module>` for specific details.
+
 .. note::
 
   These modules may have potential dependencies with the hypertension/pre-eclampsia model that have not yet been thought through. Model structure is subject to change in order to accomodate these dependencies.
