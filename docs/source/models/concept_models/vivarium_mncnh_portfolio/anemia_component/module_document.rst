@@ -66,7 +66,7 @@ strategy can be summarized as follows:
 
     3. Progress to the later pregnancy ANC visit hemoglobin timestep.
 
-      - For simulants who attend that visit and attended the first trimester visit as well, update thier anemia YLD values according to their hemoglobin exposure going into that visit (intervention modified if covered) and the duration equal to the gestational timing of their later pregnancy visit minus the gestational timin of their first trimester visit (as defined in the paraemter table on this document).
+      - For simulants who attend that visit and attended the first trimester visit as well, update their anemia YLD values according to their hemoglobin exposure going into that visit (intervention modified if covered) and the duration equal to the gestational timing of their later pregnancy visit minus the gestational timing of their first trimester visit (as defined in the parameter table on this document).
 
         - Update hemoglobin and LBWSG exposures according to interventions received at that visit
 
