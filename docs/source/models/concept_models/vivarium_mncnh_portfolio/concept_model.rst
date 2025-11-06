@@ -1697,6 +1697,7 @@ Default stratifications to all observers should include scenario and input draw.
   * - 22.0.1
     - Add in dichotomous measure of "true first trimester hemoglobin exposure" for V&V of the hemoglobin screening sensitivity and specificity
     - ``model22.0.1``
+    - Baseline, MMS scaleup, and anemia screening scaleup scenarios
     - Default
     - Default
     - Include dichotomous output of true first trimester hemoglobin exposure as a stratification in the anc_hemoglobin observer  
