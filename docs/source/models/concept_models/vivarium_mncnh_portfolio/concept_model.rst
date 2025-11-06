@@ -1650,6 +1650,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 19.1.2
+    - Rerun of 19.1.1 with LBWSG PAFs recalculated using capped RRs
+    - Baseline
+    - ``model19.1.2``
+    - Default
+    - Default
+    - Default
   * - 20.0
     - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
     - Baseline 
@@ -2380,9 +2387,16 @@ Default stratifications to all observers should include scenario and input draw.
     - Same as 19.1 and confirm specific issues from 19.1 are resolved
     - * Issue of zero neonatal deaths in Nigeria and Ethiopia resolved
       * Maternal disorders burden and all facility choice results are meeting expectations
-      * Underestimation of neonatal mortality risk for all causes as well as cause-specific mortality for all modeled causes with the exception of other causes in Pakistan
+      * Underestimation in sim results of neonatal mortality risk for all causes as well as cause-specific mortality for all modeled causes with the exception of other causes in Pakistan
+      * **No** underestimation of neonatal all-cause mortality risk in interactive simulation with recalculated LBWSG PAFs -- upon investigation, can only replicate the LBWSG PAFs in
+        the artifact by using uncapped RRs 
       * Mortality risk in the late neonatal age group is closer to target than for the early neonatal age group, although with some variation
     - `Model 19.1.1 V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/149>`__
+      `Model 19.1.1 interactive sim neonatal mortality V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/150>`__
+  * - 19.1.2
+    - Same as 19.1.1 and confirm specific issues from 19.1.1 are resolved
+    - 
+    - 
   * - 20.0 (CEMONC data update)
     - * Confirm expected delivery facility attendance rates
       * Confirm neonatal mortality still matches expectation and that our neonatal intervention PAF calculations have not been thrown out of calibration
