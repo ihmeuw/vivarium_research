@@ -1703,10 +1703,6 @@ Default stratifications to all observers should include scenario and input draw.
   * - 22.1
     - Remaining pregnancy model component refactor (specifically with regard to LBWSG exposure)
     - All
-    - ``model22.0.1``
-    - Default
-    - Default
-    - Default
     - ``model22.1``
     - Default
     - Default
@@ -2419,6 +2415,11 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm neonatal mortality still matches expectation and that our neonatal intervention PAF calculations have not been thrown out of calibration
     - 
     -
+  * - 20.3 (GA floors)
+    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
+      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
+    - 
+    - 
   * - 21.0 (neonatal mortality V&V)
     - Confirm expected rates of cause-specific and overall maternal disorders causes
     - 
@@ -2428,7 +2429,12 @@ Default stratifications to all observers should include scenario and input draw.
       * Additionally, wait to verify hemoglobin screening and sensitivity until a future model version
     - 
     - 
-  * - 22.0 (pregnancy refactor)
+  * - 22.0.1 (dichotomous true hemoglobin output)
+    - * Confirm hemoglobin screening sensitivity and specificity
+      * Confirm that scenario-specific results did not change after adding this measure (indicates that we are not accidentally referencing this hemoglobin exposure measure in our risk effect models)
+    - 
+    - 
+  * - 22.1 (pregnancy refactor)
     - * Confirm that stillbirths, preterm birth counts, and neonatal deaths now vary between the baseline and MMS scale-up scenarios
       * Confirm that baseline calibration still looks appropriate
       * In the interactive simulation, confirm that the ultrasound gestational age dating is based on intervention-modified gestational age at birth exposure
@@ -2496,35 +2502,35 @@ Default stratifications to all observers should include scenario and input draw.
   * - Maternal disorders burden does not vary by scenario despite increased coverage of the oral iron intervention affecting hemoglobin exposure
     - It appears that the :code:`hemoglobin_exposure` column in the state table matches the :code:`hemoglobin.exposure` pipeline value at the pregnancy timestep. However, after progressing to the timesteps where maternal disorders burden is assigned, this is no longer the case. The state table value is used to assess maternal disorders risk and does not reflect the appropriate intervention-affected hemoglobin exposure.
     - Engineers to address during pregnancy model refactor
-    - Pregnancy refactor model 22.0
+    - Hemoglobin refactor model 22.0
   * - Neonatal deaths do not vary by scenario despite increased coverage of the oral iron intervention that should affect BW and GA exposures (and therefore child mortality)
     - Unknown, verified impacts of oral iron intervention of birth weight and gestational age pipeline values in the interactive simulation. Ali suspects that this issue is related to LBWSG RRs being assigned either based on the state table exposure values (that are not affected by the interventions) or after LBWSG exposures get reset in pipeline values and maybe lose the impact of the interventions
     - Engineers to address during pregnancy model refactor
-    - Pregnancy refactor model 22.0
+    - Pregnancy refactor model 22.1
   * - No impact of IFA or MMS on observed preterm birth counts
     - Ali is verifying expected effects of IFA and MMS on preterm birth assessed by the gestational age pipeline values in the interactive simulation. Ali suspects that while we have the interventions modifying the pipeline values for these exposures, we are observing preterm birth based on the state table values that are not being modified by interventions.
     - Engineers to address during pregnancy model refactor
-    - Pregnancy refactor model 22.0
+    - Pregnancy refactor model 22.1
   * - No impact of MMS on stillbirth
     - Unknown, was previously meeting verification criteria. No impact in the interactive sim or in the simulation results
     - Engineers to investigate and update
-    - Anemia screening bugfix run, version number TBD
+    - Pregnancy refactor model 22.1
   * - Ferritin screening rate < 100% among eligible population in scale-up scenario
     - We are only testing ferritin among those who have low exposure values for their tested hemoglobin AND their true hemoglobin. Everyone who has a low tested hemoglobin exposure should be screened for ferritin regardless of their true hemoglobin exposure
     - Engineers to address during pregnancy model refactor
-    - Pregnancy refactor model 22.0
+    - Hemoglobin refactor model 22.0
   * - Hemoglobin screening test and anemia status during pregnancy appear to be reading in an inappropriate hemoglobin exposure measure
     - See linked comments (it appears we  created a new measure to be used in these instances, but did not actually update it as the input variables)
     - Engineers to address during pregnancy model refactor
-    - Pregnancy refactor model 22.0
+    - Hemoglobin refactor model 22.0
   * - Propensity for LBWSG category remains constant across timesteps, but propensity for continuous BW and GA values reset at each timestep
     - This should not cause significant bias in our results, but it is not logical to have a different birth weight at different ages and unnecessarily increases stochastic uncertainty in our simulation
     - Engineers to address during pregnancy model refactor
-    - Pregnancy refactor model 22.0
+    - Pregnancy refactor model 22.1
   * - There is non-zero coverage of hemoglobin screening among those who attend first trimester screening ONLY
     - This is inconsistent with documentation (hemoglobin screening should occur at later pregnancy ANC visit only)
     - Engineers to address during pregnancy model refactor
-    - Pregnancy refactor model 22.0
+    - Hemoglobin refactor model 22.0
   * - `Ferritin exposure model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2439>`__
     - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
     - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy using PRISMA data shared by the Gates foundation

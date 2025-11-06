@@ -54,8 +54,38 @@ strategy can be summarized as follows:
 
   In order to keep single definition of hemoglobin exposure throughout entire sim (as opposed to separate measures such as "hemoglobin at the start of pregnancy" and "hemoglobin at the end of pregnancy" as documented), we have multiple hemoglobin-related timesteps and update hemoglobin exposure and assess anemia YLDs across those timesteps rather than assess anemia YLDs as a lump sum from different hemoglobin values at different timepoints. Anemia YLDs are estimated according to the following steps:
   
-    - Initialize anemia YLDs at 0. 
-    - Each time there is a hemoglobin-affecting "event" (ANC visit attendance or the end of pregnancy), update anemia YLDs among those who are "active" for that event (i.e. attend that ANC visit) according to the hemoglobin exposure going into that event and the simulant-specific gestational timing of that event (first trimester ANC visit can occur at different weeks during the first trimester for different simulants, end of pregnancy timing is specific to gestational age). Each event only accrues YLDs between that event and the most recent "active" event for that simulant (at the end of pregnancy: a simulant who attends the later pregnancy ANC visit will receive YLDs between that visit and the end of pregnancy and a simulant who never attended ANC will receive YLDs for their entire pregnancy).
+    1. Initialize anemia YLDs at 0. 
+
+    2. Progress to the first trimester ANC visit hemoglobin timestep. 
+
+      - For simulants who attend that visit, update their anemia YLD values according to their hemoglobin exposure going into the visit and a duration equal to the gestational timing of their first trimester ANC visit (as defined in the parameter table on this document)
+
+        - Update hemoglobin and LBWSG exposures according to interventions received at that visit
+
+      - For simulants who do not attend that visit, do not update their anemia YLDs. 
+
+    3. Progress to the later pregnancy ANC visit hemoglobin timestep.
+
+      - For simulants who attend that visit and attended the first trimester visit as well, update thier anemia YLD values according to their hemoglobin exposure going into that visit (intervention modified if covered) and the duration equal to the gestational timing of their later pregnancy visit minus the gestational timin of their first trimester visit (as defined in the paraemter table on this document).
+
+        - Update hemoglobin and LBWSG exposures according to interventions received at that visit
+
+      - For simulants who attend that visit but not the first trimester visit update their anemia YLD values according to their hemoglobin exposure going into the visit (not intervention modified, even if covered at the later pregnancy visit) and a duration equal to the gestational timing of their later pregnancy ANC visit (as defined in the parameter table on this document)
+
+        - Update hemoglobin and LBWSG exposures according to interventions received at that visit
+
+      - For simulants who do not attend that visit, do not update their anemia YLDs
+
+    4. Progress to the end of pregnancy hemoglobin timestep
+
+      - Update anemia YLDs according to hemoglobin exposure going into this timestep and the simulant-specific gestational time elapsed since the last time anemia YLDs were updated
+
+        - Pregnancy duration (according to intervention-modified gestational age) for those who never attended any ANC visits
+
+        - Pregnancy duration (according to intervention-modified gestational age) - gestational timing of later pregnancy ANC visit for those who attended later pregnancy ANC 
+
+        - Pregnancy duration (according to intervention-modified gestational age) - gestational timing of first trimester ANC visit for those who attended the first trimester but not later pregnancy ANC visit
+
 
 .. todo::
 
@@ -185,14 +215,14 @@ Note that simulants who died during labor should not experience any YLDs due to 
     - Effect of IFA/MMS on hemoglobin
     - :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
   * - :math:`T^\text{first trimester}_i`
-    - Randomly sample a different value for each simulant. Use the distribution corresponding to the simulant's assigned pregnancy duration:
+    - Randomly sample a different value for each simulant who attends a first trimester ANC visit. Use the distribution corresponding to the simulant's assigned pregnancy duration:
 
         - Pregnancy duration > 12 weeks: uniform distribution between 8 and 12 weeks 
         - Pregnancy duration between 8 and 12 weeks: uniform distribution between 8 weeks and the simulant's pregnancy duration
         - Pregnancy duration < 8 weeks: uniform distribution between 6 and the simulant's pregnancy duration
     - Note that we define minimum pregnancy duration/gestational age at birth values of 20 weeks for live births, 24 weeks for stillbirths, and 6 weeks for abortion/miscarriage/ectopic pregnancies (see details on the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`)
   * - :math:`T^\text{later pregnancy}_i`
-    - Uniform distribution between 12/52 and :math:`\text{duration}^\text{pregnancy}_i - 2/52` 
+    - Randomly sample a different value for each simulant who attends the later pregnancy ANC visit from a uniform distribution between 12/52 and :math:`\text{duration}^\text{pregnancy}_i - 2/52` 
     - Note that abortion/miscarriage/ectopic pregnancies cannot attend later pregnancy ANC visits according to the :ref:`ANC attendance module <2024_vivarium_mncnh_portfolio_anc_module>`. The minimum gestational age at birth for the remaining relevant pregnancy outcomes is 20 weeks for live births and 24 weeks for stillbirth, so we will not encounter later pregnancy ANC attendance among pregnancies that end prior to 14 weeks of gestation, which would result in an inverted distribution for this parameter.
   * - pregnancy duration
     - Duration of pregnancy for a given simulant, output from the :ref:`pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
