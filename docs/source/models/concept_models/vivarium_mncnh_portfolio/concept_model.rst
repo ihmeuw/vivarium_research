@@ -1674,7 +1674,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 20.3
-    - Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See `pull request <>`__ Note that this update will require re-running the LBWSG PAF calculation.
+    - Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See the changes made to the pregnancy and LBWSG exposure model documents in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1840>`__ Note that this update will require re-running the LBWSG PAF calculation.
     - Baseline
     - ``model20.3``
     - Default
