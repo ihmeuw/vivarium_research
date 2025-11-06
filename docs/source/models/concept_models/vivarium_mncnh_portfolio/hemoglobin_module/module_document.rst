@@ -349,9 +349,6 @@ This module applies the effect of the IV iron intervention for those who receive
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-- We assume there are no changes in natural history hemoglobin trajectory throughout pregnancy,
-  including when a pregnancy spans GBD age groups (we use the age group at the *end* of pregnancy to determine hemoglobin).
-
 - We assume immediate effect of oral and IV iron interventions on hemoglobin from intervention receipt.
 
 - We assume complete adherence of oral iron intervention.
@@ -361,6 +358,36 @@ This module applies the effect of the IV iron intervention for those who receive
 - We use the fraction of iron responsive anemia among total anemia as a proxy for low ferritin given low hemoglobin. This may underestimate the population eligible for IV iron by not considering the iron non responsive anemias that have low ferritin. Note that this may be improved upon by updating to PRISMA data.
 
 - We assume the IV iron intervention (+23 g/L) to have a greater effect than GBD 2023's implied effect of IV iron used in the estimation of their iron deficiency models, +14.3 g/L(95% UI: 3.58 -25.59). Notably, our assumed effect is within the uncertainty interval of GBD's assumed effect size and the value we assume is specific to the pregnant population (whereas GBD's value is not).
+
+- GBD assesses pregnancy-specific anemia burden among live births and stillbirths only and not among pregnancies that result in abortion/miscarriage/ectopic pregnancy. We apply the pregnancy hemoglobin adjustment factor to all pregnancies regardless of outcome. 
+
+- We assume there are no changes in natural history hemoglobin trajectory throughout pregnancy, including when a pregnancy spans GBD age groups (we use the age group at the *end* of pregnancy to determine hemoglobin). The natural history of hemoglobin throughout pregnancy among "frequent" and "infrequent" users of oral iron supplements was assessed by [Yefet-et-al-2021]_, with a figure included below for easy reference. Rather than modeling a decreasing hemoglobin over the first two trimesters followed by a rebound in the third trimester, we assume that hemoglobin is constant at the approximate average exposure over the course of pregnancy for the entirety of that pregnancy. This limits our model in the following ways:
+
+.. image:: hemoglobin_trajectory.png
+
+- By not modeling the "dip" in hemoglobin observed at 28 weeks of gestation we will underestimate the portion of the population that meets the eligibility criteria for IV iron at any point in their pregnancy.
+
+- Our model does not consider the interaction between ANC attendance timing and hemoglobin exposure trajectory throughout pregnancy as it relates to assessment of IV iron eligibility by anemia screening. For instance, a given pregnancy would be assessed as eligible for IV iron if screened at 28 weeks gestation, but not if they were screened at 15 or 35 weeks. We assume that simulants have an equal likelihood of IV iron eligibility at any point in their second or third trimester.
+
+- Our model assumes that the effect of iron interventions in pregnancy is not modified by gestational age at birth. Additionally, we assume that there is no association between gestational age at birth and hemoglobin exposure at birth, which is also implied from these findings. The findings from [Yefet-et-al-2021]_ imply that both of these dynamics are present.
+
+- Our calibration of anemia YLDs throughout pregnancy will be off to what is expected in reality. However, our model remains in line with GBD methodology and its associated limitations with respect to anemia YLDs in pregnancy.
+
+- By applying the effect of oral iron supplementation given in the first trimester to hemoglobin exposure immediately, we will likely overestimate the impact of this intervention on hemoglobin exposure in the second trimester. This will cause us to overestimate the reduction in anemia YLDs in the first and second trimesters. We will also overestimate the reduction that oral iron supplementation has on the population eligible for IV iron that is assessed during the second trimester (although less so when assessed during the third trimester). However, as we are not modeling the number or timing of ANC visits in the second and third trimesters, we do not have the modeling resolution to address these issues.
+
+- We do not allow for the possibility that oral iron received early in the second trimester may prevent IV iron eligibility at a subsequent ANC visit later in the second or third trimester.
+
+.. todo::
+
+  Note that the most comprehensive strategy here would be to:
+
+    - Model hemoglobin trajectory throughout pregnancy as informed from evidence from sources such as [Yefet-et-al-2021]_
+
+    - Model gestational week-specific effects of our oral iron intervention (from sources such as [Yefet-et-al-2021]_)
+
+    - Model adherence-specific effects of oral iron supplementation (from sources such as [Yefet-et-al-2021]_)
+
+    - Model more detailed ANC visit patterns (including timing and frequency) to reflect a more realistic opportunity to detect pregnancies that are eligible for IV iron (DHS and the health system team have more information on the number of ANC visits per pregnancy)
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
@@ -388,3 +415,6 @@ This module applies the effect of the IV iron intervention for those who receive
 5.0 References
 +++++++++++++++
 
+.. [Yefet-et-al-2021]
+
+  Yefet, E., Yossef, A. & Nachum, Z. Prediction of anemia at delivery. Sci Rep 11, 6309 (2021). `https://doi.org/10.1038/s41598-021-85622-7 <https://doi.org/10.1038/s41598-021-85622-7>`__
