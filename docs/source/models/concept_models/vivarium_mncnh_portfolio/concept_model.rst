@@ -1664,6 +1664,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 20.0.1
+    - Bugfixes from 20.0 (non-zero neonatal deaths and updated intrapartum azithromycin intervention PAF values)
+    - Baseline
+    - ``model20.0.1``
+    - Default
+    - Default
+    - Default
   * - 20.1
     - Sensitivity analysis run: to get an upper bound on the potential impact of AI ultrasound,
       set the standard deviation of gestational age error to 70 days for "no ultrasound", 30 days for "standard ultrasound", and 2 days for "AI ultrasound".
@@ -2407,8 +2414,14 @@ Default stratifications to all observers should include scenario and input draw.
   * - 20.0 (CEMONC data update)
     - * Confirm expected delivery facility attendance rates
       * Confirm neonatal mortality still matches expectation and that our neonatal intervention PAF calculations have not been thrown out of calibration
+    - * BEMONC fraction of facility deliveries is updated from model 19 and the simulation result matches the artifact value
+      * Zero neonatal deaths in all locations
+      * Maternal sepsis incidence (and mortality) overestimated in all locations. Appears to be due to intrapartum azithromycin PAF values in the model 20.0 artifact equal to zero for all locations. PAF values for this intervention are expected to be non-zero (even Ethiopia and Nigeria that have zero baseline coverage because we have implemented the intervention as the "lack of intervention" risk factor, which has an RR>1 and 100% coverage in these locations).
+    - `Model 20.0 V&V notebooks here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/152>`__
+  * - 20.0.1
+    - * Same as 20.0/confirm specific issues from 20.0 have been resolved
     - 
-    -
+    - 
   * - 21.0 (neonatal mortality V&V)
     - Confirm expected rates of cause-specific and overall maternal disorders causes
     - 
