@@ -2402,8 +2402,8 @@ Default stratifications to all observers should include scenario and input draw.
       `Model 19.1.1 interactive sim neonatal mortality V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/150>`__
   * - 19.1.2
     - Same as 19.1.1 and confirm specific issues from 19.1.1 are resolved
-    - 
-    - 
+    - * Neonatal mortality improved from model 19.1.1, (qualitatively) within expected margin from known issues
+    - `Model 19.1.2 neonatal V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/151>`__
   * - 20.0 (CEMONC data update)
     - * Confirm expected delivery facility attendance rates
       * Confirm neonatal mortality still matches expectation and that our neonatal intervention PAF calculations have not been thrown out of calibration
