@@ -1671,6 +1671,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 20.0.2
+    - Fixes to issues in delivery facility model from 20.0.1
+    - Baseline
+    - ``model20.0.2``
+    - Default
+    - Default
+    - Default
   * - 20.1
     - Sensitivity analysis run: to get an upper bound on the potential impact of AI ultrasound,
       set the standard deviation of gestational age error to 70 days for "no ultrasound", 30 days for "standard ultrasound", and 2 days for "AI ultrasound".
@@ -2420,6 +2427,19 @@ Default stratifications to all observers should include scenario and input draw.
     - `Model 20.0 V&V notebooks here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/152>`__
   * - 20.0.1
     - * Same as 20.0/confirm specific issues from 20.0 have been resolved
+    - * Issues with zeros for neonatal deaths and azithromycin PAFs have been resolved
+
+      * Issues with delivery facility V&V criteria:
+
+        * Underestimating in facility delivery rate
+        * Overestimating the prevalence of preterm births (and we see an underestimating of preterm at home births and an overestimation at facility births relative to validation targets)
+        * Home delivery rate underestimated among believed preterm babies and overestimated among believed term babies
+      
+      * All cause neonatal mortality appears systematically overestimated in Nigeria and Pakistan, although still within the 10% margin of error - perhaps a result of the miscalibrated delivery facilities? 
+      * Maternal sepsis incidence overestimation has been reduced to the level that was present in model 19.1.1 (~10% rather than the 60% seen in model 20.0). Remaining overestimation hoped to be resolved with the hemoglobin PAF update.
+    - `Model 20.0.1 V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/153>`__
+  * - 20.0.2
+    - * Confirm issues from 20.0.1 are resolved
     - 
     - 
   * - 21.0 (neonatal mortality V&V)
