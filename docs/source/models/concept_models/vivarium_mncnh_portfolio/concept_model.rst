@@ -1650,10 +1650,31 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 19.1.2
+    - Rerun of 19.1.1 with LBWSG PAFs recalculated using capped RRs
+    - Baseline
+    - ``model19.1.2``
+    - Default
+    - Default
+    - Default
   * - 20.0
     - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
     - Baseline 
     - ``model20.0``
+    - Default
+    - Default
+    - Default
+  * - 20.0.1
+    - Bugfixes from 20.0 (non-zero neonatal deaths and updated intrapartum azithromycin intervention PAF values)
+    - Baseline
+    - ``model20.0.1``
+    - Default
+    - Default
+    - Default
+  * - 20.0.2
+    - Fixes to issues in delivery facility model from 20.0.1
+    - Baseline
+    - ``model20.0.2``
     - Default
     - Default
     - Default
@@ -2408,12 +2429,38 @@ Default stratifications to all observers should include scenario and input draw.
     - Same as 19.1 and confirm specific issues from 19.1 are resolved
     - * Issue of zero neonatal deaths in Nigeria and Ethiopia resolved
       * Maternal disorders burden and all facility choice results are meeting expectations
-      * Underestimation of neonatal mortality risk for all causes as well as cause-specific mortality for all modeled causes with the exception of other causes in Pakistan
+      * Underestimation in sim results of neonatal mortality risk for all causes as well as cause-specific mortality for all modeled causes with the exception of other causes in Pakistan
+      * **No** underestimation of neonatal all-cause mortality risk in interactive simulation with recalculated LBWSG PAFs -- upon investigation, can only replicate the LBWSG PAFs in
+        the artifact by using uncapped RRs 
       * Mortality risk in the late neonatal age group is closer to target than for the early neonatal age group, although with some variation
     - `Model 19.1.1 V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/149>`__
+      `Model 19.1.1 interactive sim neonatal mortality V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/150>`__
+  * - 19.1.2
+    - Same as 19.1.1 and confirm specific issues from 19.1.1 are resolved
+    - * Neonatal mortality improved from model 19.1.1, (qualitatively) within expected margin from known issues
+    - `Model 19.1.2 neonatal V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/151>`__
   * - 20.0 (CEMONC data update)
     - * Confirm expected delivery facility attendance rates
       * Confirm neonatal mortality still matches expectation and that our neonatal intervention PAF calculations have not been thrown out of calibration
+    - * BEMONC fraction of facility deliveries is updated from model 19 and the simulation result matches the artifact value
+      * Zero neonatal deaths in all locations
+      * Maternal sepsis incidence (and mortality) overestimated in all locations. Appears to be due to intrapartum azithromycin PAF values in the model 20.0 artifact equal to zero for all locations. PAF values for this intervention are expected to be non-zero (even Ethiopia and Nigeria that have zero baseline coverage because we have implemented the intervention as the "lack of intervention" risk factor, which has an RR>1 and 100% coverage in these locations).
+    - `Model 20.0 V&V notebooks here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/152>`__
+  * - 20.0.1
+    - * Same as 20.0/confirm specific issues from 20.0 have been resolved
+    - * Issues with zeros for neonatal deaths and azithromycin PAFs have been resolved
+
+      * Issues with delivery facility V&V criteria:
+
+        * Underestimating in facility delivery rate
+        * Overestimating the prevalence of preterm births (and we see an underestimating of preterm at home births and an overestimation at facility births relative to validation targets)
+        * Home delivery rate underestimated among believed preterm babies and overestimated among believed term babies
+      
+      * All cause neonatal mortality appears systematically overestimated in Nigeria and Pakistan, although still within the 10% margin of error - perhaps a result of the miscalibrated delivery facilities? 
+      * Maternal sepsis incidence overestimation has been reduced to the level that was present in model 19.1.1 (~10% rather than the 60% seen in model 20.0). Remaining overestimation hoped to be resolved with the hemoglobin PAF update.
+    - `Model 20.0.1 V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/153>`__
+  * - 20.0.2
+    - * Confirm issues from 20.0.1 are resolved
     - 
     -
   * - 20.3 (GA floors)
