@@ -243,7 +243,7 @@ Assumptions and Limitations
   so propensity does not need to be re-assigned at any point;
 - Since BBBM uses the same propensity as existing testing, BBBM should replace many CSF and PET
   tests, though some simulants may not qualify for BBBM tests due to age requirements, or may get a BBBM false negative;
-- The determination of whether a test is a false positive is independent for healthy individuals, and precludes the possibility that individual characteristics like protein expression levels or chronic kidney disease is driving heterogeneity in false positive rate. 
+- The determination of whether a test is a false positive is independent for healthy individuals, and precludes the possibility that individual characteristics like protein expression levels or chronic kidney disease are driving heterogeneity in false positive rate. 
 
 .. note::
   People who are not simulated (will not develop AD dementia) will also be tested, and these tests,
