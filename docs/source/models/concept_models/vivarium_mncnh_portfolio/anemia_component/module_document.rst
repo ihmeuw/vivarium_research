@@ -44,8 +44,52 @@ Anemia Module
 
 This document is the page for the anemia YLDs module of the MNCNH Portfolio simulation.
 The anemia module will process information related to simulants' hemoglobin exposure
-throughtout the course of the simulation and calculate corresponding anemia exposure
+throughout the course of the simulation and calculate corresponding anemia exposure
 and YLDs.
+
+Note that the simulation implementation of anemia YLDs as it relates to the 
+:ref:`hemoglobin exposure modules <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+has been performed slightly differently than written on these pages. The implementation
+strategy can be summarized as follows:
+
+  In order to keep a single definition of hemoglobin exposure throughout entire sim (as opposed to separate measures such as "hemoglobin at the start of pregnancy" and "hemoglobin at the end of pregnancy" as documented), we have multiple hemoglobin-related timesteps and update hemoglobin exposure and assess anemia YLDs across those timesteps rather than assess anemia YLDs as a lump sum from different hemoglobin values at different timepoints. Anemia YLDs are estimated according to the following steps:
+  
+    1. Initialize anemia YLDs at 0. 
+
+    2. Progress to the first trimester ANC visit hemoglobin timestep. 
+
+      - For simulants who attend that visit, update their anemia YLD values according to their hemoglobin exposure going into the visit and a duration equal to the gestational timing of their first trimester ANC visit (as defined in the parameter table on this document)
+
+        - Update hemoglobin and LBWSG exposures according to interventions received at that visit
+
+      - For simulants who do not attend that visit, do not update their anemia YLDs. 
+
+    3. Progress to the later pregnancy ANC visit hemoglobin timestep.
+
+      - For simulants who attend that visit and attended the first trimester visit as well, update their anemia YLD values according to their hemoglobin exposure going into that visit (intervention modified if covered) and the duration equal to the gestational timing of their later pregnancy visit minus the gestational timing of their first trimester visit (as defined in the parameter table on this document).
+
+        - Update hemoglobin and LBWSG exposures according to interventions received at that visit
+
+      - For simulants who attend that visit but not the first trimester visit update their anemia YLD values according to their hemoglobin exposure going into the visit (not intervention modified, even if covered at the later pregnancy visit) and a duration equal to the gestational timing of their later pregnancy ANC visit (as defined in the parameter table on this document)
+
+        - Update hemoglobin and LBWSG exposures according to interventions received at that visit
+
+      - For simulants who do not attend that visit, do not update their anemia YLDs
+
+    4. Progress to the end of pregnancy hemoglobin timestep
+
+      - Update anemia YLDs according to hemoglobin exposure going into this timestep and the simulant-specific gestational time elapsed since the last time anemia YLDs were updated
+
+        - Pregnancy duration for those who never attended any ANC visits
+
+        - Pregnancy duration (according to intervention-modified gestational age) - gestational timing of later pregnancy ANC visit for those who attended later pregnancy ANC 
+
+        - Pregnancy duration (according to intervention-modified gestational age) - gestational timing of first trimester ANC visit for those who attended the first trimester but not later pregnancy ANC visit
+
+
+.. todo::
+
+  Include summary of the strategy for accruing postpartum anemia YLDs once implementation plan is formed
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -171,11 +215,25 @@ Note that simulants who died during labor should not experience any YLDs due to 
     - Effect of IFA/MMS on hemoglobin
     - :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
   * - :math:`T^\text{first trimester}_i`
-    - Uniform distribution between 8/52 and 12/52 (8 to 12 weeks, represented as a fraction of a year)
-    - Randomly sample a different value for each simulant
+    - Randomly sample a different value for each simulant who attends a first trimester ANC visit. Use the distribution corresponding to the simulant's assigned pregnancy duration:
+
+        - Pregnancy duration > 12 weeks: uniform distribution between 8 and 12 weeks 
+        - Pregnancy duration between 8 and 12 weeks: uniform distribution between 8 weeks and the simulant's pregnancy duration
+        - Pregnancy duration < 8 weeks: uniform distribution between 6 and the simulant's pregnancy duration
+    - Note that we define minimum pregnancy duration/gestational age at birth values of 20 weeks for live births, 24 weeks for stillbirths, and 6 weeks for abortion/miscarriage/ectopic pregnancies (see details on the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`)
   * - :math:`T^\text{later pregnancy}_i`
-    - Uniform distribution between 12/52 and :math:`\text{duration}^\text{pregnancy}_i - 2/52` 
-    - Randomly sample a different value for each simulant
+    - Randomly sample a different value for each simulant who attends the later pregnancy ANC visit from a uniform distribution between 12/52 and :math:`\text{duration}^\text{pregnancy}_i - 2/52` 
+    - Note that abortion/miscarriage/ectopic pregnancies cannot attend later pregnancy ANC visits according to the :ref:`ANC attendance module <2024_vivarium_mncnh_portfolio_anc_module>`. The minimum gestational age at birth for the remaining relevant pregnancy outcomes is 20 weeks for live births and 24 weeks for stillbirth, so we will not encounter later pregnancy ANC attendance among pregnancies that end prior to 14 weeks of gestation, which would result in a negative value.
+  * - pregnancy duration
+    - Duration of pregnancy for a given simulant, output from the :ref:`pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
+    - Pregnancy duration is equal to gestational age at birth for live and stillbirths. Note that pregnancy duration as defined here should be intervention-modified. 
+
+.. note::
+
+  Assumptions surrounding the timing of antenatal care visits as defined in the table above were informed by the following:
+
+  - In the U.S., pregnancy providers generally don't book first ANC visits until 8 weeks of gestation, which earliest time when pregnancy can be reliably confirmed as intrauterine/vitals assessed via ultrasound, unless there are concerning symptoms before then. Papers such as [Endawkie-et-al-2024]_ show pretty low rates of first ANC visit prior to 8 weeks for our modeled locations. Since the minimum pregnancy duration in our model for ectopic/abortion/miscarriage pregnancies is 6 weeks (see the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`), we needed to allow for first trimester ANC visits as early as 6 weeks to avoid assigning first trimester ANC visit attendance after a pregnancy has ended among this group. Therefore, we assume that the ectopic/abortion/miscarriage pregnancies in our model represent the small portion of pregnancies with early concerning symptoms that attend ANC visits prior to 8 weeks and assume all other pregnancies do not attend ANC prior to 8 weeks of gestation.
+  - Note that we assume the later pregnancy ANC visit occurs at least two weeks prior to the end of pregnancy. This was an arbitrary decision to avoid administration of IV iron very close to the onset of the intrapartum period.
 
 2.4: Module Outputs
 -----------------------
@@ -193,8 +251,7 @@ Note that simulants who died during labor should not experience any YLDs due to 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-- We assume that first trimester ANC visits occur uniformly between 8 weeks (earliest appointments) and 12 weeks (end of first trimester) of gestation
-- We assume that later pregnancy ANC visits occur uniformly between 12 weeks (end of first trimester) and two weeks prior to the time of birth
+- We assume uniform distribution across assumed plausible ranges for timing of ANC visits as well as timing of pregnancies that end in ectopic pregnancy/miscarriage/abortion (as detailed on the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`) rather than informing these parameters with data
 - We assume that interventions affect anemia YLDs at the time of administration at ANC (as according to the timed assumptions in the two prior bullets) with no additional delay 
 - We only track anemia YLDs for six weeks postpartum
 
@@ -227,3 +284,6 @@ Note that simulants who died during labor should not experience any YLDs due to 
 5.0 References
 +++++++++++++++
 
+.. [Endawkie-et-al-2024]
+
+  Endawkie A, Kebede SD, Abera KM, Abeje ET, Enyew EB, Daba C, Asmare L, Bayou FD, Arefaynie M, Mohammed A, Tareke AA, Keleb A, Kebede N, Tsega Y. Time to antenatal care booking and its predictors among pregnant women in East Africa: a Weibull gamma shared frailty model using a recent demographic and health survey. Front Glob Womens Health. 2024 Nov 27;5:1457350. doi: 10.3389/fgwh.2024.1457350. PMID: 39664654; PMCID: PMC11631944. `https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC11631944/ <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC11631944/>`__

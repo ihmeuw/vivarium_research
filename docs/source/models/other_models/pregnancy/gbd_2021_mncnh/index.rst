@@ -266,7 +266,13 @@ and we assume uncertainty is perfectly correlated).
 Assign birthweight and gestational age at end of pregnancy (live births and stillbirths)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For pregnancies that result in live births or stillbirths, a LBWSG exposure value will be assigned that will include both the gestational age and birthweight of the simulant child. The LBWSG can be assigned using information outlined in the :ref:`LBWSG exposure page <2021_risk_exposure_lbwsg>`. Exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Based on the assigned category, a gestational age and birthweight can be recorded separately.
+For pregnancies that result in live births, a LBWSG exposure value will be assigned that will include both the gestational age and birthweight of the simulant child. The LBWSG can be assigned using information outlined in the :ref:`LBWSG exposure page <2021_risk_exposure_lbwsg>`. Exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Based on the assigned category, a gestational age and birthweight can be recorded separately.
+
+For pregnancies that result in stillbirths, birth weight and gestational age at the end of pregnancy values should be assigned according to the :ref:`LBWSG exposure page <2021_risk_exposure_lbwsg>` in the same way as for live births, but with a LBWSG exposure distribution that has been truncated at 24 weeks (the gestational age threshold at which stillbirths are distinguished from miscarriages). To generate the truncated exposure distribution, divide the exposure value for all LBWSG exposure categories with gestational age at birth > 24 by the sum of all categories with gestational ages at birth < 24 weeks and then set the exposure value for the categories with gestational ages at birth < 24 weeks to zero. Then use this truncated exposure distribution to assign GA and BW exposures in the same way as is done with live births using the raw LBWSG exposure distribution.
+
+.. note::
+
+  The baseline calibration of our LBWSG exposures with respect to interventions such as iron and folic acid may result in shifting gestational age at birth values to slightly less than 24 weeks for stillbirths. This is a limitation of our current modeling strategy.
 
 .. note::
 
@@ -282,7 +288,8 @@ For pregnancies that result in live births or stillbirths, a LBWSG exposure valu
 
   In later waves of the model, we will make this process more complex by including correlation with other maternal characteristics, similar to what is outlined in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. 
 
-  Additionally, the LBWSG exposure distribution may be modified by :ref:`antenatal supplementation intervention coverage <maternal_supplementation_intervention>` in later waves of the project. 
+  Additionally, the LBWSG exposures are modified by interventions in pregnancy
+  as detailed on the :ref:`MNCNH portfolio concept model document <2024_concept_model_vivarium_mncnh_portfolio>`.
 
 Assign gestational age at end of pregnancy (abortion/miscarriage/ectopic pregnancies)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
