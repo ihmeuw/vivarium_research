@@ -1679,16 +1679,26 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
   * - 20.1
-    - Sensitivity analysis run: to get an upper bound on the potential impact of AI ultrasound,
-      set the standard deviation of gestational age error to 70 days for "no ultrasound", 30 days for "standard ultrasound", and 2 days for "AI ultrasound".
-      **Note that this change should be a one-off, and not built on top of for the next model run.**
+    - Sensitivity analysis run comparator: same as previous, but **without oral iron effects** (to sidestep known issues that will be resolved in 22.1), and with more scenarios
     - Baseline; AI-assisted ultrasound scale-up; CPAP and ACS scale-up; CPAP, ACS, and AI-ultrasound scale-up 
     - ``model20.1``
     - Default
     - Default
     - Default
+  * - 20.1.1
+    - Sensitivity analysis run: to get an upper bound on the potential impact of AI ultrasound,
+      same as the previous, but set the standard deviation of gestational age error to 70 days for "no ultrasound", 30 days for "standard ultrasound", and 2 days for "AI ultrasound".
+    - Baseline; AI-assisted ultrasound scale-up; CPAP and ACS scale-up; CPAP, ACS, and AI-ultrasound scale-up 
+    - ``model20.1.1``
+    - Default
+    - Default
+    - Default
   * - 20.2
     - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__.
+
+      Run **without oral iron effects** (to sidestep known issues that will be resolved in 22.1).
+
+      **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
     - Baseline 
     - ``model20.2``
     - Default
@@ -1696,18 +1706,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
   * - 20.3
     - Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See the changes made to the pregnancy and LBWSG exposure model documents in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1840>`__ Note that this update will require re-running the LBWSG PAF calculation.
+
+      Run **without oral iron effects** (to sidestep known issues that will be resolved in 22.1).
     - Baseline
     - ``model20.3``
     - Default
     - Default
     - Default
-  * - 21.0
-    - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-    - Baseline
-    - ``model21.0``
-    - For this run only, 10,000,000 population size per draw
-    - Default
-    - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
   * - 22.0
     - Hemoglobin model refactor, bringing model up to date with the `updated hemoglobin module docs <https://github.com/ihmeuw/vivarium_research/pull/1830>`__ and fixing model 18.3 bugs related to multiple instances of hemoglobin variables that were being inconsistently referenced by different simulation components (See outstanding model verification and validation issues table for full list)
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
@@ -1729,6 +1734,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Default
+  * - 22.2
+    - Larger run for neonatal mortality V&V with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
+    - Baseline
+    - ``model22.2``
+    - For this run only, 10,000,000 population size per draw
+    - Default
+    - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
   * - 23.0
     - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
     - Baseline
@@ -2463,13 +2475,18 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm issues from 20.0.1 are resolved
     - 
     -
+  * - 20.1
+    - * Regression testing
+      * Confirm AI ultrasound impact similar to model 18.4
+    - 
+    -
+  * - 20.1.1
+    - * Confirm AI ultrasound impact larger than model 20.1
+    - 
+    -
   * - 20.3 (GA floors)
     - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
       * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
-    - 
-    - 
-  * - 21.0 (neonatal mortality V&V)
-    - Confirm expected rates of cause-specific and overall maternal disorders causes
     - 
     - 
   * - 22.0 (hemoglobin refactor)
@@ -2486,6 +2503,10 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm that stillbirths, preterm birth counts, and neonatal deaths now vary between the baseline and MMS scale-up scenarios
       * Confirm that baseline calibration still looks appropriate
       * In the interactive simulation, confirm that the ultrasound gestational age dating is based on intervention-modified gestational age at birth exposure
+    - 
+    - 
+  * - 22.2 (neonatal mortality V&V)
+    - Confirm expected rates of cause-specific and overall maternal disorders causes
     - 
     - 
   * - 23.0 (residual and other maternal disorders causes)
@@ -2552,11 +2573,15 @@ Default stratifications to all observers should include scenario and input draw.
     - Engineers to address during pregnancy model refactor
     - Hemoglobin refactor model 22.0
   * - Neonatal deaths do not vary by scenario despite increased coverage of the oral iron intervention that should affect BW and GA exposures (and therefore child mortality)
-    - Unknown, verified impacts of oral iron intervention of birth weight and gestational age pipeline values in the interactive simulation. Ali suspects that this issue is related to LBWSG RRs being assigned either based on the state table exposure values (that are not affected by the interventions) or after LBWSG exposures get reset in pipeline values and maybe lose the impact of the interventions
+    - Impacts of oral iron intervention of birth weight and gestational age pipeline values are working, but LBWSG RRs are being assigned based on the state table exposure values (that are recorded on the first timestep).
     - Engineers to address during pregnancy model refactor
     - Pregnancy refactor model 22.1
   * - No impact of IFA or MMS on observed preterm birth counts
-    - Ali is verifying expected effects of IFA and MMS on preterm birth assessed by the gestational age pipeline values in the interactive simulation. Ali suspects that while we have the interventions modifying the pipeline values for these exposures, we are observing preterm birth based on the state table values that are not being modified by interventions.
+    - While we have the interventions modifying the pipeline values for these exposures, we are observing preterm birth based on the state table values that are recorded on the first timestep.
+    - Engineers to address during pregnancy model refactor
+    - Pregnancy refactor model 22.1
+  * - Preterm birth appears overestimated in observers
+    - Same cause as previous; the recorded (and observed) BW and GA exposures are from the first timestep, after baseline IFA deletion but before oral iron intervention effects are added back in.
     - Engineers to address during pregnancy model refactor
     - Pregnancy refactor model 22.1
   * - No impact of MMS on stillbirth
