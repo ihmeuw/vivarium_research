@@ -1612,7 +1612,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default, but add believed preterm stratification to maternal population observer
     - Default
     - 
-  * - 16.3
+  * - 16.3 (16.2 was skipped because we originally planned to separate the two sets of changes in this model, but did not run them separately)
     - ``model16.3``
     - Facility choice and neonatal mortality bugfixes
     - Same as previous, but with bugfixes.
