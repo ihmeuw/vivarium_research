@@ -80,7 +80,7 @@ strategy can be summarized as follows:
 
       - Update anemia YLDs according to hemoglobin exposure going into this timestep and the simulant-specific gestational time elapsed since the last time anemia YLDs were updated
 
-        - Pregnancy duration (according to intervention-modified gestational age) for those who never attended any ANC visits
+        - Pregnancy duration for those who never attended any ANC visits
 
         - Pregnancy duration (according to intervention-modified gestational age) - gestational timing of later pregnancy ANC visit for those who attended later pregnancy ANC 
 
@@ -223,10 +223,17 @@ Note that simulants who died during labor should not experience any YLDs due to 
     - Note that we define minimum pregnancy duration/gestational age at birth values of 20 weeks for live births, 24 weeks for stillbirths, and 6 weeks for abortion/miscarriage/ectopic pregnancies (see details on the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`)
   * - :math:`T^\text{later pregnancy}_i`
     - Randomly sample a different value for each simulant who attends the later pregnancy ANC visit from a uniform distribution between 12/52 and :math:`\text{duration}^\text{pregnancy}_i - 2/52` 
-    - Note that abortion/miscarriage/ectopic pregnancies cannot attend later pregnancy ANC visits according to the :ref:`ANC attendance module <2024_vivarium_mncnh_portfolio_anc_module>`. The minimum gestational age at birth for the remaining relevant pregnancy outcomes is 20 weeks for live births and 24 weeks for stillbirth, so we will not encounter later pregnancy ANC attendance among pregnancies that end prior to 14 weeks of gestation, which would result in an inverted distribution for this parameter.
+    - Note that abortion/miscarriage/ectopic pregnancies cannot attend later pregnancy ANC visits according to the :ref:`ANC attendance module <2024_vivarium_mncnh_portfolio_anc_module>`. The minimum gestational age at birth for the remaining relevant pregnancy outcomes is 20 weeks for live births and 24 weeks for stillbirth, so we will not encounter later pregnancy ANC attendance among pregnancies that end prior to 14 weeks of gestation, which would result in a negative value.
   * - pregnancy duration
     - Duration of pregnancy for a given simulant, output from the :ref:`pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     - Pregnancy duration is equal to gestational age at birth for live and stillbirths. Note that pregnancy duration as defined here should be intervention-modified. 
+
+.. note::
+
+  Assumptions surrounding the timing of antenatal care visits as defined in the table above were informed by the following:
+
+  - In the U.S., pregnancy providers generally don't book first ANC visits until 8 weeks of gestation, which earliest time when pregnancy can be reliably confirmed as intrauterine/vitals assessed via ultrasound, unless there are concerning symptoms before then. Papers such as [Endawkie-et-al-2024]_ show pretty low rates of first ANC visit prior to 8 weeks for our modeled locations. Since the minimum pregnancy duration in our model for ectopic/abortion/miscarriage pregnancies is 6 weeks (see the :ref:`pregnancy model document <>`), we needed to allow for first trimester ANC visits as early as 6 weeks to avoid assigning first trimester ANC visit attendance after a pregnancy has ended among this group. Therefore, we assume that the ectopic/abortion/miscarriage pregnancies in our model represent the small portion of pregnancies with early concerning symptoms that attend ANC visits prior to 8 weeks and assume all other pregnancies do not attend ANC prior to 8 weeks of gestation.
+  - Note that we assume the later pregnancy ANC visit occurs at least two weeks prior to the end of pregnancy. This was an arbitrary decision to avoid administration of IV iron very close to the onset of the intrapartum period.
 
 2.4: Module Outputs
 -----------------------
@@ -277,3 +284,6 @@ Note that simulants who died during labor should not experience any YLDs due to 
 5.0 References
 +++++++++++++++
 
+.. [Endawkie-et-al-2024]
+
+  Endawkie A, Kebede SD, Abera KM, Abeje ET, Enyew EB, Daba C, Asmare L, Bayou FD, Arefaynie M, Mohammed A, Tareke AA, Keleb A, Kebede N, Tsega Y. Time to antenatal care booking and its predictors among pregnant women in East Africa: a Weibull gamma shared frailty model using a recent demographic and health survey. Front Glob Womens Health. 2024 Nov 27;5:1457350. doi: 10.3389/fgwh.2024.1457350. PMID: 39664654; PMCID: PMC11631944. `https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC11631944/ <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC11631944/>`__
