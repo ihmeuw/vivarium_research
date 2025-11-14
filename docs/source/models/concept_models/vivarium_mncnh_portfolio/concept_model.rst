@@ -2489,20 +2489,49 @@ Default stratifications to all observers should include scenario and input draw.
     - 
   * - 
     - Hemoglobin refactor
-    - * Same as 18.3, but with the expectation that there will still be no difference in stillbirths, preterm birth counts, or neonatal deaths between the baseline and MMS scale-up scenarios (this is expected to be resolved in a future model version)
-      * Additionally, wait to verify hemoglobin screening and sensitivity until a future model version
+    - Using simulation outputs:
+
+      * Confirm hemoglobin screening occurs among those who attend later pregnancy ANC only and occurs at the expected scenario-specific coverage rate among this population
+      * Confirm ferritin screening occurs among those who with low hemoglobin screening test result only and occurs at the expected scenario-specific coverage rate among this population
+      * Confirm that IFA and MMS coverage only occurs among those who attend ANC and matches scenario-specific expected values
+      * Confirm that the number of "low" hemoglobin screening results is lower in the MMS scale-up than baseline scenario
+      * Confirm that incident cases of maternal hemorrhage and maternal sepsis are lower in the MMS scale-up than baseline scenario
+      
+      In the interactive simulation:
+
+      * Confirm hemoglobin exposure at the start of pregnancy reflects expected "IFA-deleted value"
+      * Confirm expected magnitude of IFA and MMS effects on hemoglobin for those covered who attend the first trimester ANC visit at the first trimester hemoglobin timestep
+      * Confirm that there are no changes to hemoglobin exposure between the first trimester ANC visit and anemia screening timesteps
+      * Confirm expected magnitude of IFA and MMS effects on hemoglobin for those covered who attend the later pregnancy ANC visit at the later pregnancy ANC visit hemoglobin timestep, making sure those who attend both ANC visits do not receive the effect of IFA/MMS twice
+      * Confirm that "anemia status during pregnancy" (which affects ferritin exposure) is assigned in accordance with hemoglobin exposure at the anemia screening timestep and the pregnancy-specific anemia impairment thresholds 
+      * Confirm that ferritin exposure among those tested matches input data expectation. Note that we have assumed low ferritin exposure among those without anemia to be 50% of the value among those with mild anemia.
+      * Confirm that sensitivity and specificity of the hemoglobin screening test matches expectation based on hemoglobin exposure at the anemia screening timestep
+      * Confirm that hemoglobin exposure values do not change between the later pregnancy ANC hemoglobin timestep and the end of pregnancy hemoglobin timestep
+      * Confirm that incidence risk of maternal sepsis and maternal hemorrhage vary in accordance with hemoglobin exposure at the end of pregnancy timestep and hemoglobin RR values
+
+      Note that the effects of hemoglobin on LBWSG exposure or pregnancy outcome are not yet expected to meet V&V criteria. 
     - 
     - 
   * - 
     - Add dichotomous true hemoglobin output
-    - * Confirm hemoglobin screening sensitivity and specificity
-      * Confirm that scenario-specific results did not change after adding this measure (indicates that we are not accidentally referencing this hemoglobin exposure measure in our risk effect models)
+    - * Confirm hemoglobin screening sensitivity and specificity in simulation outputs
+      * Confirm that scenario-specific counts of maternal sepsis and hemorrhage did not change after adding this measure (indicates that we are not accidentally referencing this hemoglobin exposure measure in our risk effect models)
+      * Confirm that true "low" hemoglobin exposure counts are lower in the MMS scenario than the baseline scenario
+      * Confirm that "true" low hemoglobin rate matches corresponding GBD anemia impairment prevalence in pregnancy estimate (note that we expect to slightly overestimate anemia prevalence since we have not yet applied full impact of baseline IFA at the time that we observe this measure) 
     - 
     - 
   * - 
     - Remaining pregnancy model refactor
-    - * Confirm that stillbirths, preterm birth counts, and neonatal deaths now vary between the baseline and MMS scale-up scenarios
-      * Confirm that baseline calibration still looks appropriate
+    - In the simulation outputs:
+
+      * Confirm expected effects of IFA and MMS on pregnancy outcomes (note this will be confounded by ANC attendance in the simulation outputs, so RRs should be calculated stratified by ANC attendance exposure)
+      * Confirm expected effects of IFA and MMS on preterm birth outputs (note this will be confounded by ANC in the sim outputs, so RRs should be calculated stratified by ANC attendance exposure)
+      * Confirm that stillbirths, preterm birth counts, and neonatal deaths now vary between the baseline and MMS scale-up scenarios
+      * Confirm that baseline calibration still looks appropriate, particularly with respect to preterm birth counts, neonatal mortality, pregnancy outcomes, and facility choice (effect of baseline IFA on GA may have throw off our preterm/ANC correlation from the calibration)
+
+      In the interactive simulation:
+
+      * In the interactive simulation, confirm the expected magnitude of GA and BW shifts due to IFA and MMS
       * In the interactive simulation, confirm that the ultrasound gestational age dating is based on intervention-modified gestational age at birth exposure
     - 
     - 
