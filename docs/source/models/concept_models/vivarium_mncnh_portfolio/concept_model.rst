@@ -2576,7 +2576,8 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm that YLDs due to obstructed labor in Pakistan have been updated and our simulated values match input expectations
     - 
     - 
-  * - Separate LBWSG affected causes
+  * - 
+    - Separate LBWSG affected causes
     - * Confirm that neonatal mortality continues to validate in the baseline scenario
       * Confirm that deaths averted between the baseline and MMS scale-up scenarios have decreased between this model run and the previous
       * In the interactive simulation, confirm that mortality due to both LBWSG-affected and LBWSG-unaffected causes vary in accordance with baseline LBWSG exposures
