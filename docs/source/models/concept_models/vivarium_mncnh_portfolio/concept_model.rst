@@ -305,8 +305,10 @@ Pregnancy component
         * IFA/MMS coverage (affects birth outcome, gestational age, birthweight)
         * IV iron coverage (affects birth outcome, gestational age, birthweight)
       - * Birth outcome
-        * Gestational age at birth
-        * Birthweight
+        * Gestational age at birth, modified by interventions (including oral and IV iron)
+        * Gestational age at birth, unmodified by interventions
+        * Birthweight, modified by interventions (including oral and IV iron)
+        * Birthweight, unmodified by interventions
         * Pregnancy duration
         * Preterm status
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
@@ -316,7 +318,7 @@ Pregnancy component
       - No changes to pregnancy module in wave I other than defining specified outputs at different points in ordering of modules other than impacts of IFA/MMS and IV Iron interventions on pregnancy module outputs
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
       - * ANC attendance
-        * Gestational age
+        * Gestational age, modified by interventions
       - * Ultrasound type
         * Estimated gestational age
         * Believed preterm status
@@ -403,8 +405,10 @@ Neonatal component
   * - :ref:`Neonatal module <2024_vivarium_mncnh_portfolio_neonatal_module>`
     - * (Birth outcome)
       * Birth facility
-      * Birth weight
-      * Gestational age
+      * Gestational age at birth, modified by interventions (including oral and IV iron)
+      * Gestational age at birth, unmodified by interventions
+      * Birthweight, modified by interventions (including oral and IV iron)
+      * Birthweight, unmodified by interventions
       * RDS intervention propensity
       * Hemoglobin exposure at birth (affects neonatal sepsis)
     - * Neonatal probiotics coverage
