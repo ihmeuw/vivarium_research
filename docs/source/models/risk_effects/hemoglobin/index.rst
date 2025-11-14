@@ -272,7 +272,7 @@ Effect application
 
 .. math::
 
-  \text{CSMRisk}_i = \text{CSMRisk} \times (1 - \text{PAF}) \times \text{RR}_\text{hemoglobin}_i
+  \text{CSMRisk}_i = \text{CSMRisk} \times (1 - \text{PAF}) \times \text{RR}_{\text{hemoglobin}_i}
 
 Where,
 
@@ -295,7 +295,7 @@ Where,
     - Population attributable fraction of hemoglobin on neonatal sepsis
     - Custom-calculated PAF values available here ``TODO: POST LINK``
     - See details on the PAF calculation below 
-  * - :math:`\text{RR}_\text{hemoglobin}_i`
+  * - :math:`\text{RR}_{\text{hemoglobin}_i}`
     - Relative risk value for the direct effect of hemoglobin on neonatal sepsis, specific to that individual simulated dyad's hemoglobin exposure level at birth
     - Defined in the `Effect derivation`_ section
     - 
