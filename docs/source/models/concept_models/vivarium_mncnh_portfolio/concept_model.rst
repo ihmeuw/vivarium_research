@@ -2531,8 +2531,8 @@ Default stratifications to all observers should include scenario and input draw.
 
       In the interactive simulation:
 
-      * In the interactive simulation, confirm the expected magnitude of GA and BW shifts due to IFA and MMS
-      * In the interactive simulation, confirm that the ultrasound gestational age dating is based on intervention-modified gestational age at birth exposure
+      * Confirm the expected magnitude of GA and BW shifts due to IFA and MMS
+      * Confirm that the ultrasound gestational age dating is based on intervention-modified gestational age at birth exposure
     - 
     - 
   * - 
