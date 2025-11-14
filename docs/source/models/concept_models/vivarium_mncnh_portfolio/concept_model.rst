@@ -1085,7 +1085,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Description
     - Scenarios
     - Spec. modifications
-    - Blocked on
+    - Blocked by
   * - 1
     - ``pregnancy``
     - Wave I Pregnancy V&V
@@ -1637,35 +1637,35 @@ Default stratifications to all observers should include scenario and input draw.
     - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
     - Baseline 
     - Default
-    - 
+    - None
   * -
     -
     - GA floors
     - Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See the changes made to the pregnancy and LBWSG exposure model documents in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1840>`__ Note that this update will require re-running the LBWSG PAF calculation. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor").
     - Baseline
     - Default
-    - 
+    - None
   * -
     -
     - Hemoglobin refactor
     - Bringing model up to date with the `updated hemoglobin module docs <https://github.com/ihmeuw/vivarium_research/pull/1830>`__ and fixing bugs in "Fix observer stratifications and multiple bugfixes" related to multiple instances of hemoglobin variables that were being inconsistently referenced by different simulation components (See outstanding model verification and validation issues table for full list)
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
     - Do not define a measure of "true first trimester hemoglobin exposure" in this version of the model. Otherwise, default.
-    - 
+    - None
   * -
     -
     - Add dichotomous true hemoglobin output
     - Add in dichotomous measure of "true first trimester hemoglobin exposure" for V&V of the hemoglobin screening sensitivity and specificity
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
     - Include dichotomous output of true first trimester hemoglobin exposure as a stratification in the anc_hemoglobin observer  
-    - Hemoglobin refactor
+    - Hemoglobin refactor run
   * -
     -
     - Remaining pregnancy model refactor
     - Specifically with regard to LBWSG exposure
     - All
     - Default
-    - Add dichotomous true hemoglobin output
+    - Add dichotomous true hemoglobin output run
   * -
     -
     - Larger run for neonatal mortality V&V
@@ -1673,56 +1673,57 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - * For this run only, 10,000,000 population size per draw
       * Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-    - Remaining pregnancy model refactor
+    - Remaining pregnancy model refactor run
   * -
     -
     - Add residual and other maternal disorders
     - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
     - Baseline
     - Default
-    - 
+    - None
   * -
     -
     - IV iron coverage and effect on hemoglobin
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
     - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
-    - Hemoglobin refactor
+    - Hemoglobin refactor run
   * -
     -
     - IV iron effects on BW, GA, and stillbirth
     - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data specific to GBD 2023 has yet to be generated)
     - Baseline and IV iron scale-up scenarios
     - Default
-    - RT-owned data generation, IV iron coverage and effect on hemoglobin
+    - RT-owned data generation, IV iron coverage and effect on hemoglobin run
   * -
     -
     - Update hemoglobin effects
     - As defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (Custom PAFs and neonatal sepsis effects have yet to be calculated for GBD 2023): Updated custom PAF values for maternal hemorrhage and maternal sepsis outcomes (paired with existing implementation of GBD RRs); New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
     - Baseline and IV iron scale-up scenarios
     - Default
-    - RT-owned data generation
+    - RT-owned data generation that is blocked by neonatal mortality V&V run
   * -
     -
     - Postpartum hemoglobin
     - 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
-    - Hemoglobin refactor
+    - Hemoglobin refactor run
   * -
     -
     - Anemia YLDs
     - 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default, note new anemia YLD observer
-    - Postpartum hemoglobin
+    - Postpartum hemoglobin run
   * -
     -
     - Effects of maternal disorders on postpartum hemoglobin
     - Effects of maternal hemorrhage (and possibly maternal sepsis) on postpartum hemoglobin. Model run is blocked by 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
-    - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__, postpartum hemoglobin
+    - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__, postpartum hemoglobin run
+
 
 .. note:: 
 
