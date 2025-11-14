@@ -1067,7 +1067,7 @@ Default stratifications to all observers should include scenario and input draw.
 
   The "Directory" column in the table below lists the subdirectory nested within ``mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/results/`` where results specific to that model run can be found.
 
-  "Number" and "directory" are only listed here for models that have already been run.
+  "Number" and "directory" are only listed here for models that have already been run. When a model is run, its number is assigned in this `excel run tracker <https://uwnetid.sharepoint.com/:x:/s/ihme_simulation_science_team/ERyWpil0FLNDl4wfiEOns1EBnTbGctKsKzSKY_iKDTOmxw>`_. The directory and number will be added to this table when V&V results are posted. 
 
   The "blocked on" column only applies to models that have not yet been run.
   When there is nothing in this column, a model is unblocked and can be implemented.
