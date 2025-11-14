@@ -2564,7 +2564,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
     - 
     -
-  * - Pakistan fistula update
+  * - 
+    - Pakistan fistula update
     - * Confirm that YLDs due to obstructed labor in Pakistan have been updated and our simulated values match input expectations
     - 
     - 
