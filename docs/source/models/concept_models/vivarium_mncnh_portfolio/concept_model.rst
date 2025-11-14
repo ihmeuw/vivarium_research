@@ -1900,6 +1900,15 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - Default
     - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__, postpartum hemoglobin
+  * - 
+    - 
+    - Pakistan fistula update
+    - Update YLDs due to obstructed labor according to the custom data values specified in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1847>`__
+    - Baseline 
+    - Default
+    - Default
+    - Default
+    - None
 
 .. note:: 
 
@@ -2650,6 +2659,10 @@ Default stratifications to all observers should include scenario and input draw.
       * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
     - 
     -
+  * - Pakistan fistula update
+    - * Confirm that YLDs due to obstructed labor in Pakistan have been updated and our simulated values match input expectations
+    - 
+    - 
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
