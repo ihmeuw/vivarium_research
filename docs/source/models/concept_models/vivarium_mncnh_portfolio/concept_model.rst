@@ -1084,9 +1084,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Short name
     - Description
     - Scenarios
-    - Specification mods
-    - Stratification mods
-    - Observer mods
+    - Spec. modifications
     - Blocked on
   * - 1
     - ``pregnancy``
@@ -1095,15 +1093,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - 
     -
-    -
-    -
   * - 2
     - ``maternal_disorders``
     - Wave I Maternal disorders V&V
     - 
     - Baseline
-    - 
-    - 
     - 
     - 
   * - 3
@@ -1113,24 +1107,18 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - 
     - 
-    - 
-    - 
   * - 3.1
     - ``neonatal_disorders``
     - Wave I Neonatal disorders V&V with correct LBWSG distribution
     - 
     - Baseline
     - 
-    -
-    -
     - 
   * - 3.2
     - ``no_lbwsg``
     - Wave I Neonatal disorders V&V with LBWSG component removed
     - 
     - Baseline
-    - 
-    - 
     - 
     - 
   * - 3.3
@@ -1140,15 +1128,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - 
     - 
-    - 
-    - 
   * - 4.1
     - ``cpap``
     - Wave I CPAP
     -  
     - Baseline
-    - 
-    - 
     - 
     - 
   * - 4.2
@@ -1158,15 +1142,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - 
     - 
-    - 
-    - 
   * - 4.3
     - ``cpap_3``
     - Wave I CPAP with addition of a delivery facility column
     - Addition of a delivery facility column in births observer and CPAP availability stratification in neonatal burden observer
     - Baseline
-    - 
-    - 
     - 
     - 
   * - 4.4
@@ -1176,15 +1156,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - 
     - 
-    - 
-    - 
   * - 4.5
     - ``cpap_5``
     - Wave I CPAP with mortality bugfix
     - Bugfix for negative other causes mortality rates
     - Baseline
-    - 
-    - 
     - 
     - 
   * - 4.6
@@ -1194,15 +1170,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and alternative scenarios 2, 3, and 4
     - 
     - 
-    - 
-    - 
   * - 4.7
     - ``birth_exposure_2``
     - Correct pregnancy duration for abortion/miscarriage/ectopic pregnancies
     -
     - Baseline and alternative scenarios 2, 3, and 4
-    - 
-    - 
     - 
     - 
   * - 5.0
@@ -1212,15 +1184,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and alternative scenarios 2 - 7 
     - 
     - 
-    - 
-    - 
   * - 5.1
     - ``children_mapped``
     - Wave I neonatal antibiotics refactor
     - Engineer refactor
     - Baseline and alternative scenarios 2 - 7 
-    - 
-    - 
     - 
     - 
   * - 6.0
@@ -1230,16 +1198,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and alternative scenarios 2 - 10 
     - 
     - 
-    - 
-    - 
   * - 6.0.1
     - ``no_interventions``
     - Wave I neonatal disorders ACMR 200k
     - 200k population without interventions
     - Baseline 
     - Population increased 10 fold (random seed population size changed from 20k to 200k)
-    - 
-    - 
     - 
   * - 6.0.2
     - ``acmr-2mil``
@@ -1248,15 +1212,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - Population increased 100 fold (random seed population size changed from 20k to 2 million)
     - 
-    - 
-    - 
   * - 6.0.3
     - ``rate_conversion``
     - Wave I neonatal disorders ACMR with rate conversion
     - Rate to probability conversion
     - Baseline 
-    - 
-    - 
     - 
     - 
   * - 6.0.4
@@ -1266,8 +1226,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - 
     - 
-    - 
-    - 
   * - 6.1
     - ``model6.1``
     - LBWSG PAF changes for Ethiopia
@@ -1275,15 +1233,11 @@ Default stratifications to all observers should include scenario and input draw.
     - All scenarios
     - 
     - 
-    - 
-    - 
   * - 6.2
     - ``model6.2``
     - Exponential rate-to-probability conversion
     - Same specifications as model 6.1, but this time with the exponential rate-to-probability conversion (:math:`p= 1 - e^{(-\text{rate} * \text{duration scaling factor})}`) in `this function <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/29fe810c2f1abf5b358a452d3f59ffdda266afe8/src/vivarium_gates_mncnh/utilities.py#L187-L193>`_
     - Baseline
-    - 
-    - 
     - Birth observer updated from output of state table (single row per simulant) to observer detailed in the observer section for all subsequent model runs
     - 
   * - 6.2.1
@@ -1291,8 +1245,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Fix rate-to-probability equation
     - Same as 6.2, but with a fix for `this rate to probability equation transcription error <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/fc12ab5063dc363a4b8d14e5b85ecb794cd19598>`_ (add back in the duration_scaling_factor) and include abortion/miscarriage/ectopic pregnancy fix to birth observer
     - Baseline
-    -
-    - 
     - 
     - 
   * - 6.3
@@ -1302,15 +1254,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     -
     - 
-    - 
-    - 
   * - 6.4
     - ``model6.4``
     - Revert to linear rate-to-probability
     - Same specifications as model 6.3 (including the ENN LBWSG PAF using ENN exposure), but with the revision of the rate-to-probability calculation back to :math:`p = \text{rate} * \text{duration scaling factor}`
     - Baseline
-    - 
-    - 
     - 
     - 
   * - 6.5
@@ -1320,8 +1268,6 @@ Default stratifications to all observers should include scenario and input draw.
       * Use the linear rate-to-probability equation (like in model run 6.1). Use this until otherwise noted.
       * Add in observer #7 (maternal population observer)
     - All scenarios
-    - Default
-    - Default
     - Maternal population observer added for this run and to be included in all subsequent runs
     - 
   * - 7.0
@@ -1329,20 +1275,16 @@ Default stratifications to all observers should include scenario and input draw.
     - Wave I neonatal probiotics with effective coverage
     - Same as model 6.0 but with `effective coverage (only preterm neonates receive probiotics) <https://github.com/ihmeuw/vivarium_research/pull/1643>`_ 
     - Baseline and alternative scenarios 2 - 10 
-    - Default
     - Stratify probiotics observer (#6) with gestational age above/below 37 weeks for V&V
-    - Default
     - 
   * - 7.0.1
     - ``model7.0.1``
     - Add preterm stratification and fix observers
     - Same specifications as 7.0, but with preterm stratification for the probiotics observer included (left out of last run) and fix to the intervention observers to not count stillbirths
     - All scenarios
-    - Default
     - * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
       * Stratify births observer by gestational age above/below 37 weeks
       * Stratify neonatal deaths observer by gestational age above/below 37 weeks
-    - Default
     - 
   * - 7.0.2
     - ``model7.0.2``
@@ -1350,39 +1292,31 @@ Default stratifications to all observers should include scenario and input draw.
     - Update :math:`p_\text{preterm}` parameter used in the :ref:`preterm cause model <2021_cause_preterm_birth_mncnh>` to use birth exposure rather than age-specific exposure 
     - All scenarios
     - Default
-    - Default
-    - Default
     - 
   * - 7.1
     - ``model7.1``
     - Update neonatal mortality to risks
     - Update mortality input data and remove rate to probability conversion: `see this PR for full details and accounting of updates <https://github.com/ihmeuw/vivarium_research/pull/1654>`_. Use the birth LBWSG exposure for calculation of the ENN LBWSG PAF. Use the LNN LBWSG exposure for calculation of the LNN LBWSG PAF. Note that this is incorrect, but an acceptable placeholder until we update in model run 7.2
     - Baseline
-    - Default
     - Same modifications as run 7.0.1:
 
       * Stratify probiotics observer (#6) by gestational age above/below 37 weeks for V&V
       * Stratify births observer by gestational age above/below 37 weeks
       * Stratify neonatal deaths observer by gestational age above/below 37 weeks
-    - Default
     - 
   * - 7.1.1
     - ``model7.1.1``
     - Add CPAP parameter uncertainty
     - Add parameter uncertainty interval for CPAP effect size
     - All scenarios
-    - Default
     - Same as 7.0.1
-    - Default
     - 
   * - 8.0
     - ``model8.0``
     - Wave I azithromycin
     - 
     - All scenarios (note new azithromycin scale-up scenario #11)
-    - Default
     - Azithromycin stratifications added to observers #1 and #7 (maternal burden and maternal population observers) - to be continued as defaults for all future runs
-    - Default
     - 
   * - 8.1
     - ``model8.1``
@@ -1390,18 +1324,14 @@ Default stratifications to all observers should include scenario and input draw.
     - * Implement LBWSG RR caps (applied to both the ENN and LNN age groups)
       * Recalculate LBWSG PAFs with capped RRs
     - Baseline
-    - Default
     - Same modifications as run 7.0.1
-    - Default
     - 
   * - 8.2
     - ``model8.2``
     - Update neonatal probiotics effect size
     - Update intervention effect size in accordance with `line #183 in this PR <https://github.com/ihmeuw/vivarium_research/pull/1672>`_
     - All scenarios
-    - Default
     - Same modifications as run 7.0.1
-    - Default
     - 
   * - 8.3
     - ``model8.3``
@@ -1409,25 +1339,19 @@ Default stratifications to all observers should include scenario and input draw.
     - `Update intervention modeling strategy in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1670>`_
     - All scenarios (note that scenarios #6 and #7 have been deleted as they are no longer relevant and scenario #5 no longer has delivery facility-specific coverage)
     - Default
-    - Default
-    - Default
     - 
   * - 9.0
     - ``model9.0``
     - Wave I misoprostol
     - 
     - Baseline and #12
-    - Default
     - Note misoprostol coverage added as a stratifying variable to maternal disorders burden and maternal population observers and delivery facility as a stratifying variable for the maternal disorders burden observer
-    - Default
     - 
   * - 9.1
     - ``model9.1``
     - Antibiotics bugfix for home deliveries
     - Bugfix to scale up intervention among home deliveries as well 
     - All scenarios
-    - Default
-    - Default
     - Default
     - 
   * - 9.2
@@ -1436,25 +1360,21 @@ Default stratifications to all observers should include scenario and input draw.
     - Larger population size to confirm maternal obstructed labor is not affected by azithromycin
     - All scenarios
     - 10x larger population size (100 seeds of 20_000 population size each = 2_000_000 population size per draw) and 2x as many draws for a total of 20 draws
-    - Default
-    - Default
     - 
   * - 9.3
     - ``model9.3``
     - Additional stratifications for intrapartum V&V
     - Updated intervention scenario coverage for intrapartum intervention V&V
     - All scenarios -- Note changes to scenario numbers 11 and 12
-    - Same population size as previous
-    - Make sure maternal disorders burden is stratified by delivery facility and pregnancy outcome as specified
-    - Default 
+    - * Same population size as previous
+
+      * Make sure maternal disorders burden is stratified by delivery facility and pregnancy outcome as specified
     - 
   * - 10.0
     - ``model10.0``
     - Add postpartum depression
     - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>` added as new maternal disorder cause
     - Baseline
-    - Default
-    - Default
     - Note that postpartum depression cause should be added to the maternal disorders burden observer
     - 
   * - 10.1
@@ -1463,8 +1383,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Run with no effect between LBWSG risk factor and Neonatal encephalopathy due to birth asphyxia and birth trauma (but keep LBWSG effects on all other outcomes)
     - All scenarios
     - Default
-    - Default
-    - Default
     - 
   * - 10.2
     - ``model10.2``
@@ -1472,16 +1390,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Additional scenario #13 (azithromycin results)
     - All scenarios
     - Default
-    - Default
-    - Default
     - 
   * - 11.0
     - ``model11.0``
     - Add hemoglobin risk exposure model
     - Add :ref:`Hemoglobin risk exposure model <2023_hemoglobin_exposure>`. Note that this will be the starting point for the larger :ref:`wave II hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`, which will be built out in future model runs
     - Baseline
-    - Default
-    - Default
     - Default (no new hemoglobin observer required)
     - 
   * - 11.1
@@ -1490,16 +1404,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Bugfix to VPH LBWSG refactor to ensure that LBWSG exposure **at birth** (rather than the early neonatal exposure) is used for initializing LBWSG exposures in the simulation. Note that this VPH refactor was introduced between models 8.2/8.3 and 9.0 and persisted until this run.
     - Baseline
     - Default
-    - Default
-    - Default
     - 
   * - 11.2
     - ``model11.2``
     - Update draws for GBD 2021
     - `Update draws in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1697>`_
     - Baseline
-    - Default
-    - Default
     - Default
     - 
   * - 12.0
@@ -1508,16 +1418,12 @@ Default stratifications to all observers should include scenario and input draw.
     - New late neonatal LBWSG PAF calculation, in accordance with `vivarium research PR #1681 <https://github.com/ihmeuw/vivarium_research/pull/1681>`_ and `subsequent update in PR #1716 <https://github.com/ihmeuw/vivarium_research/pull/1716>`_
     - Baseline
     - Default
-    - Default
-    - Default
     - 
   * - 12.1
     - ``model12.1``
     - Preterm prevalence calculation bugfix
     - Bugfix to calculation of prevalence of preterm in :ref:`this equation <preterm_csmrisk_equation>`, to ensure we include categories with an upper bound of 37 weeks
     - Baseline
-    - Default
-    - Default
     - Default
     - 
   * - 12.1.1
@@ -1526,16 +1432,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Update to LBWSG PAF calculation for the late neonatal age group. In model 12.0, the PAF calculation for the late neonatal age group did not use the PAF as calculated for the early neonatal age group in the determination of mortality among the early neonatal age group (the PAF using capped and interpolated RRs), as specified in the documentation. This model run will update the LNN LBWSG PAF calculation to utilize the custom calculated ENN LBWSG PAF as specified in the documentation.
     - Baseline
     - Default
-    - Default
-    - Default
     - 
   * - 13.0
     - ``model13.0``
     - Hemoglobin risk effects on maternal disorders
     - `Effects on maternal disorders <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_mncnh_portfolio/maternal_disorders_module/module_document.html#id1>`_
     - Baseline
-    - Default
-    - Default
     - Default
     - 
   * - 13.1
@@ -1546,16 +1448,12 @@ Default stratifications to all observers should include scenario and input draw.
       * Assign RR values equal to the RR value at 40 g/L for all hemoglobin exposures less than 40 g/L
     - Baseline
     - Default
-    - Default
-    - Default
     - 
   * - 13.2
     - ``model13.2``
     - Fix LBWSG PAF calculation bugs
     - Update to correct bugs in the LBWSG PAF calculation's implementation of :ref:`this equation <details_of_the_lbwsg_paf_calculation_equation>`. In earlier model runs, the PAF calculation for late neonates began from `age-specific LBWSG prevalence <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ad3ced96b6b497f9566b2e7c8e568328c613a69a/src/vivarium_gates_mncnh/components/lbwsg.py#L406-L409>`_ and the mortality-based weighting `implemented <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ad3ced96b6b497f9566b2e7c8e568328c613a69a/src/vivarium_gates_mncnh/components/lbwsg.py#L412-L426>`_ did not work due to `all deaths being excluded by population filters <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ad3ced96b6b497f9566b2e7c8e568328c613a69a/src/vivarium_gates_mncnh/components/lbwsg.py#L378>`_. Instead, in this run, the PAF calculation for late neonates should begin from birth prevalence and properly apply the mortality-based weighting, as documented.
     - Baseline
-    - Default
-    - Default
     - Default
     - 
   * - 13.3
@@ -1564,16 +1462,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Update to use end-of-ENN LBWSG prevalence for the :math:`p_\text{preterm}` for the LNN age group in :ref:`this equation <preterm_csmrisk_equation>`. Details can be found in the diff of `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1732/files>`_.
     - Baseline
     - Default
-    - Default
-    - Default
     - 
   * - 14.0
     - ``model14.0``
     - Wave II antenatal care attendance
     - Updates to the :ref:`antenatal care attendance module <2024_vivarium_mncnh_portfolio_anc_module>`
     - Baseline
-    - Default
-    - Default
     - Default, note that we would like the 4-category ANC attendance variable observed
     - 
   * - 15.0
@@ -1581,54 +1475,42 @@ Default stratifications to all observers should include scenario and input draw.
     - Delivery facility choice model
     - :ref:`Delivery facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`, including updates to the :ref:`AI Ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Baseline
-    - Default
     - Added preterm status and believed preterm status to maternal population observer (#7)
-    - Default
     - 
   * - 15.1
     - ``model15.1``
     - Fix ANC attendance bug and add stratifications
     - (1) add preterm and believed preterm status to maternal population count observer and (2) fix bug that results in 0% ANC attendance
     - Baseline
-    - Default
     - Added preterm status and believed preterm status to maternal population observer (#7)
-    - Default
     - 
   * - 16.0
     - ``model16.0``
     - Wave I antenatal corticosteroids
     - 
     - Baseline
-    - Default
     - Default, note that we would like additional stratifications based on believed gestational age in the maternal population, births, and neonatal burden observers
-    - Default
     - 
   * - 16.1
     - ``model16.1``
     - Facility choice model bugfixes
     - Same as previous, but with: believed preterm status added to maternal population (ANC) observer; updated ANC, IFD, and LBWSG propensity values; updates to `gestational age estimation error values <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/bc7f99565db6b7867ec417e099b0f8da22ed0a07/src/vivarium_gates_mncnh/constants/data_values.py#L169>`_ to match :ref:`documentation <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Baseline and Ultrasound V&V scenario (scenario #20)
-    - Default
     - Default, but add believed preterm stratification to maternal population observer
-    - Default
     - 
   * - 16.3 (16.2 was skipped because we originally planned to separate the two sets of changes in this model, but did not run them separately)
     - ``model16.3``
     - Facility choice and neonatal mortality bugfixes
     - Same as previous, but with bugfixes.
     - Baseline and ultrasound V&V scenario (scenario #20)
-    - Default
     - Default, but with noted stratifications added
-    - Default
     - 
   * - 16.4
     - ``model16.4``
     - Fix ACS pipeline and add preterm stratification
     - Bugfix to resolve missing values for the :code:`neonatal_preterm_birth_with_rds.csmr` pipeline for ACS-eligible simulants and to add back the preterm birth status stratification to the neonatal deaths observer
     - Baseline
-    - Default
     - Default, but with preterm birth status stratification of neonatal deaths observers
-    - Default
     - 
   * - 16.5
     - ``model16.5``
@@ -1636,26 +1518,20 @@ Default stratifications to all observers should include scenario and input draw.
     - Inclusion of low hemoglobin RR for depressive disorders. No need to actually re-run the model, we just need this RR value active in the interactive context for our custom PAF calculations.
     - Baseline
     - Default
-    - Default
-    - Default
     - 
   * - 17.0
     - ``model17.0``
     - Oral iron antenatal supplementation (IFA/MMS)
     - :ref:`Oral iron antenatal supplementation (IFA/MMS) <oral_iron_antenatal>`, including effects on hemoglobin, birth weight, gestational age, and stillbirth. See the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for additional detail. Note this intervention has been implemented in previous models such as nutrition optimization. 
     - Baseline and MMS scale-up scenarios 
-    - Default
     - Default, note IFA/MMS coverage added as a stratifying variable to maternal population observer. Also add preterm birth stratification to the births observer.
-    - Default
     - 
   * - 18.0
     - ``model18.0``
     - Anemia screening implementation
     - :ref:`Anemia screening implementation <anemia_screening>` (including hemoglobin and ferritin screenings), see also the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
     - Baseline, MMS scale-up, and anemia screening scale-up scenarios
-    - Default
     - Default, note hemoglobin and ferritin screening coverage and results added as stratifying variables to maternal population observer
-    - Default
     - 
   * - 18.1
     - N/A
@@ -1663,16 +1539,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Update so that only those who attend ANC are eligible for IFA/MMS; Include corresponding update in the baseline IFA calibration `laid out in this PR <https://github.com/ihmeuw/vivarium_research/pull/1803>`__; Confirm that cat1/cat2 are defined consistently for IFA and MMS coverage and consider updating to covered/uncovered
     - No run necessary, all V&V done in the interactive simulation
     - N/A
-    - N/A
-    - N/A
     - 
   * - 18.2
     - N/A
     - Oral iron antenatal supplementation (IFA/MMS) bugfixes continued (interactive sim only)
     - Updated artifact key for excess shift of IFA on birthweight; Update hemoglobin risk effects to use intervention-affected hemoglobin exposure rather than raw hemoglobin exposure; Update baseline calibration to use coverage among total pop rather than at ANC; Fix common random numbers between scenarios with regard to ANC attendance
     - No run necessary, all V&V done in the interactive simulation
-    - N
-    - N/A
     - N/A
     - 
   * - 18.3
@@ -1680,8 +1552,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Fix observer stratifications and multiple bugfixes
     - Updated observer requests to avoid >15 stratifications and multiple bugfixes laid out in the outstanding V&V issues table `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1809>`__ 
     - Baseline, MMS scale-up, and anemia screening scale-up scenarios
-    - Default
-    - Default
     - Default (note that observer 7 has been broken up into 7a and 7b)
     - 
   * - 18.4
@@ -1690,16 +1560,12 @@ Default stratifications to all observers should include scenario and input draw.
     - This run to be used for presentation to GF and for record of results pre-GBD 2023 update for comparison
     - Scenario numbers 1-9 (all scale-up scenarios for implemented interventions other than misoprostol and hemoglobin-related interventions)
     - Default
-    - Default
-    - Default
     - 
   * - 19.0
     - ``model19.0``
     - GBD 2023 Update part 1 (artifact only)
     - Data directly from GBD. `See update in draw-level modeling strategy in this PR <https://github.com/ihmeuw/vivarium_research/pull/1808>`__. Note that as described on the GBD 2023 LBWSG risk exposure document, we will continue to use GBD 2021 data for the LBWSG risk factor exposures and RR values. However, we will still need to re-run the LBWSG RR cap and PAF calculations as they depend on updated mortality risk data. This is an artifact only; the model will not run with this artifact, because it is missing required keys.
     - All
-    - Default
-    - Default
     - Default
     - 
   * - 19.0.1
@@ -1708,16 +1574,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Sex ratio at birth had been research-team-owned in the past, but this was a simple calculation from a GBD covariate and has been transferred to the engineering side. See `this PR <https://github.com/ihmeuw/vivarium_research/pull/1823>`__ for the documentation update. Effect sizes of oral iron supplementation on hemoglobin were erroneously marked as research-team-owned and slated for 19.1; those should be added back unchanged from the 18.X artifacts. The MMS relative risk on stillbirth was incorrect, in both the code and the docs; see `this PR <https://github.com/ihmeui/vivarium_research/pull/1826>`__ for the corrected value. There was some ambiguity about where truncated normal distributions were truncated. This has been clarified in `this docs PR <https://github.com/ihmeuw/vivarium_research/pull/1827>`__. Note this is still just an artifact, and not a model run.
     - All
     - Default
-    - Default
-    - Default
     - 
   * - 19.1
     - ``model19.1``
     - GBD 2023 Update part 2
     - Data derived from GBD through more complex, research-owned processes.
     - All
-    - Default
-    - Default
     - Default
     - 
   * - 19.1.1
@@ -1726,16 +1588,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Rerun of GBD 2023 Update part 2 with artifacts that resolved data issue in keys dependent on the BEMONC/CEMONC fraction (that were accidentally run on data for the next major model)
     - Baseline
     - Default
-    - Default
-    - Default
     - 
   * - 19.1.2
     - ``model19.1.2``
     - Recalculate LBWSG PAFs with capped RRs
     - Rerun of previous with LBWSG PAFs recalculated using capped RRs
     - Baseline
-    - Default
-    - Default
     - Default
     - 
   * - 20.0
@@ -1744,16 +1602,12 @@ Default stratifications to all observers should include scenario and input draw.
     - :ref:`In-hospital (CEmONC) delivery estimates from HS team <facility_choice_choosing_bemonc_cemonc_section>`. See `PR with diff here <https://github.com/ihmeuw/vivarium_research/pull/1792/>`__
     - Baseline 
     - Default
-    - Default
-    - Default
     - 
   * - 20.0.1
     - ``model20.0.1``
     - Bugfixes from "In-hospital (CEmONC) delivery estimates from HS team"
     - Non-zero neonatal deaths and updated intrapartum azithromycin intervention PAF values
     - Baseline
-    - Default
-    - Default
     - Default
     - 
   * - 20.0.2
@@ -1762,16 +1616,12 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - Baseline
     - Default
-    - Default
-    - Default
     - 
   * - 20.1
     - ``model20.1``
     - Sensitivity analysis baseline run without oral iron
     - Sensitivity analysis run comparator: same as previous, but **without oral iron effects** (to sidestep known issues that will be resolved in "remaining pregnancy refactor"), and with more scenarios
     - Baseline; AI-assisted ultrasound scale-up; CPAP and ACS scale-up; CPAP, ACS, and AI-ultrasound scale-up 
-    - Default
-    - Default
     - Default
     - 
   * - 20.1.1
@@ -1780,16 +1630,12 @@ Default stratifications to all observers should include scenario and input draw.
     - To get an upper bound on the potential impact of AI ultrasound, same as the previous, but set the standard deviation of gestational age error to 70 days for "no ultrasound", 30 days for "standard ultrasound", and 2 days for "AI ultrasound".
     - Baseline; AI-assisted ultrasound scale-up; CPAP and ACS scale-up; CPAP, ACS, and AI-ultrasound scale-up 
     - Default
-    - Default
-    - Default
     - 
   * -
     -
     - Update SBR to >=24 weeks
     - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
     - Baseline 
-    - Default
-    - Default
     - Default
     - 
   * -
@@ -1798,16 +1644,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See the changes made to the pregnancy and LBWSG exposure model documents in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1840>`__ Note that this update will require re-running the LBWSG PAF calculation. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor").
     - Baseline
     - Default
-    - Default
-    - Default
     - 
   * -
     -
     - Hemoglobin refactor
     - Bringing model up to date with the `updated hemoglobin module docs <https://github.com/ihmeuw/vivarium_research/pull/1830>`__ and fixing bugs in "Fix observer stratifications and multiple bugfixes" related to multiple instances of hemoglobin variables that were being inconsistently referenced by different simulation components (See outstanding model verification and validation issues table for full list)
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
-    - Default
-    - Default
     - Do not define a measure of "true first trimester hemoglobin exposure" in this version of the model. Otherwise, default.
     - 
   * -
@@ -1815,8 +1657,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Add dichotomous true hemoglobin output
     - Add in dichotomous measure of "true first trimester hemoglobin exposure" for V&V of the hemoglobin screening sensitivity and specificity
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
-    - Default
-    - Default
     - Include dichotomous output of true first trimester hemoglobin exposure as a stratification in the anc_hemoglobin observer  
     - Hemoglobin refactor
   * -
@@ -1825,17 +1665,14 @@ Default stratifications to all observers should include scenario and input draw.
     - Specifically with regard to LBWSG exposure
     - All
     - Default
-    - Default
-    - Default
     - Add dichotomous true hemoglobin output
   * -
     -
     - Larger run for neonatal mortality V&V
     - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Baseline
-    - For this run only, 10,000,000 population size per draw
-    - Default
-    - Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
+    - * For this run only, 10,000,000 population size per draw
+      * Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Remaining pregnancy model refactor
   * -
     -
@@ -1843,25 +1680,19 @@ Default stratifications to all observers should include scenario and input draw.
     - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
     - Baseline
     - Default
-    - Default
-    - Default
     - 
   * -
     -
     - IV iron coverage and effect on hemoglobin
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
-    - Default
     - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
-    - Default
     - Hemoglobin refactor
   * -
     -
     - IV iron effects on BW, GA, and stillbirth
     - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data specific to GBD 2023 has yet to be generated)
     - Baseline and IV iron scale-up scenarios
-    - Default
-    - Default
     - Default
     - RT-owned data generation, IV iron coverage and effect on hemoglobin
   * -
@@ -1870,8 +1701,6 @@ Default stratifications to all observers should include scenario and input draw.
     - As defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (Custom PAFs and neonatal sepsis effects have yet to be calculated for GBD 2023): Updated custom PAF values for maternal hemorrhage and maternal sepsis outcomes (paired with existing implementation of GBD RRs); New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
     - Baseline and IV iron scale-up scenarios
     - Default
-    - Default
-    - Default
     - RT-owned data generation
   * -
     -
@@ -1879,16 +1708,12 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
-    - Default
-    - Default
     - Hemoglobin refactor
   * -
     -
     - Anemia YLDs
     - 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
-    - Default
-    - Default
     - Default, note new anemia YLD observer
     - Postpartum hemoglobin
   * -
@@ -1896,8 +1721,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Effects of maternal disorders on postpartum hemoglobin
     - Effects of maternal hemorrhage (and possibly maternal sepsis) on postpartum hemoglobin. Model run is blocked by 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
-    - Default
-    - Default
     - Default
     - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__, postpartum hemoglobin
 
