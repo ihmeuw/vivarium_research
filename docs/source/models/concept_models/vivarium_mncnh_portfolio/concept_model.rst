@@ -2481,19 +2481,24 @@ Default stratifications to all observers should include scenario and input draw.
   * - 20.0.2
     - Fix delivery facility model issues
     - * Confirm issues from 20.0.1 are resolved
-    - 
-    - 
+    - * Specific issues from 20.0.1 are resolved. 
+      * However, preterm birth is overestimated in this model run. This is related to known bugs in the oral iron intervention model as it interacts with the LBWSG model across timesteps in the simulation. Run 20.0.2 was run after merging with a branch containing the oral iron intervention implementation whereas model 20.0.1 was run on a separate branch.
+    - * `20.0.2 facility choice V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_20.0.2_facility_choice.ipynb>`__
+      * `20.0.2 neonatal V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_20.0.2_nn_checks.ipynb>`__
+      * `20.0.2 maternal V&V notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/verification_and_validation/model_20.0.2_maternal_checks.ipynb>`__
   * - 20.1
     - Sensitivity analysis baseline run without oral iron
     - * Regression testing
       * Confirm AI ultrasound impact similar to model 18.4
-    - 
-    - 
+    - Outputs looks as expected!
+    - * `20.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/156/files>`__
+      * `20.1 results available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/157>`__
   * - 20.1.1
     - Sensitivity analysis with extreme US error values
     - * Confirm AI ultrasound impact larger than model 20.1
-    - 
-    - 
+    - Outputs look as expected!
+    - * `20.1.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/158>`__
+      * `20.1.1 results available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/159>`__
   * - 
     - GA floors
     - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
@@ -2689,10 +2694,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
     - Neonatal mortality observers
     - Larger run for neonatal mortality V&V
-  * - Scenario with increased ultrasound coverage leads to (very slightly) lower IFD
-    - Does not appear to be an implementation bug (all facility choice model V&V criteria are met), but is not the expected result
-    - Ali to investigate the rates of false positive and false negatives by scenario to determine if ultrasound improvements is reducing false positives among term babies more than it is reducing false negatives among preterm babies, which could explain this result
-    - Tabled for now. `See ticket here <https://jira.ihme.washington.edu/browse/SSCI-2409>`_
   * - Late neonatal mortality due to preterm birth with RDS slightly (~2%) underestimated
     - The PAF of ACS and CPAP on preterm birth with RDS CSMRisk is calculated with delivery facility proportions at birth, not at 7 days
     - Accept this limitation, until/unless there are other reasons to revamp PAF calculation, since this would require many components not currently present in PAF sim
@@ -2708,9 +2709,9 @@ Default stratifications to all observers should include scenario and input draw.
       a nearly 3% underestimate in that LNN CSMRisk.
     - N/A
   * - In GBD data for Pakistan (for both GBD 2021 and 2023 rounds) the values for incidence, prevalence, and YLDs of rectovaginal fistula (s_189) and vesicovaginal fistula (s_190) sequelae of the maternal obstructed labor and uterine rupture cause (c_370) are zero, causing unexpectedly low YLDs for the obstructed labor and uterine rupture cause (~10 times fewer YLDs than India despite incidence being only about twice as low)
-    - Unknown, appears to be an issue with the GBD model
-    - Research to consider how to handle this: remain consistent with GBD  or use similar location (India?) as a proxy location for YLDs per obstructed labor case?
-    - TBD
+    - Issue with GBD fistula model in which Pakistan burden was erroneously set to zero 
+    - `Update model in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1847>`__
+    - "Pakistan fistula update" model run
 
 
 .. _mncnh_portfolio_6.0:
