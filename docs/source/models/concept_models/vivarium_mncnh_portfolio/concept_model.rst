@@ -1726,8 +1726,21 @@ Default stratifications to all observers should include scenario and input draw.
     - Effects of maternal hemorrhage (and possibly maternal sepsis) on postpartum hemoglobin. Model run is blocked by 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
-    - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__, postpartum hemoglobin run
-
+    - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__, postpartum hemoglobin
+  * - 
+    - 
+    - Pakistan fistula update
+    - Update YLDs due to obstructed labor according to the custom data values specified in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1847>`__
+    - Baseline 
+    - Default
+    - None
+  * - 
+    - 
+    - Separate LBWSG affected causes
+    - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__
+    - All
+    - Default
+    - Larger run for neonatal mortality V&V run
 
 .. note:: 
 
@@ -2592,6 +2605,19 @@ Default stratifications to all observers should include scenario and input draw.
       * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
     - 
     -
+  * - 
+    - Pakistan fistula update
+    - * Confirm that YLDs due to obstructed labor in Pakistan have been updated and our simulated values match input expectations
+    - 
+    - 
+  * - 
+    - Separate LBWSG affected causes
+    - * Confirm that neonatal mortality continues to validate in the baseline scenario
+      * Confirm that deaths averted between the baseline and MMS scale-up scenarios have decreased between this model run and the previous
+      * In the interactive simulation, confirm that mortality due to both LBWSG-affected and LBWSG-unaffected causes vary in accordance with baseline LBWSG exposures
+      * In the interactive simulation, confirm that mortality due to LBWSG-affected causes varies in accordance with intervention modified LBWSG exposure and that mortality due to LBWSG-unaffected causes varies in accordance with pre-intervention modified LBWSG exposure
+    - 
+    - 
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
