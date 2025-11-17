@@ -637,7 +637,7 @@ The dichotomous measures of effects should also replicate the intended values.
 Birth outcomes
 ++++++++++++++++++
 
-Antenatal supplementation interventions will affect the risk of stillbirth for full term pregnancies (NOTE: not necessary to apply to partial term pregnancies), as described in the :ref:`pregnancy model document <other_models_pregnancy>`. Notably, it is assumed that increased risk of stillbirth will result in decreased risk of live birth and vise versa, with no impact on the risk of abortion/miscarriage or ectopic pregnancy.
+Antenatal supplementation interventions will affect the risk of stillbirth for live/stillbrith pregnancies (NOTE: not necessary to apply to abortion/miscarriage/ectopic pregnancies), as described in the :ref:`pregnancy model document <other_models_pregnancy>`. Notably, it is assumed that increased risk of stillbirth will result in decreased risk of live birth and vise versa, with no impact on the risk of abortion/miscarriage or ectopic pregnancy.
 
 The observed effect of each antenatal supplementation product on the risk of stillbirth is summarized below:
 
@@ -656,6 +656,12 @@ The observed effect of each antenatal supplementation product on the risk of sti
   * - BEP
     - 0.39 (95% CI: 0.19, 0.80), lognormal distribution of uncertainty
     - Relative to no supplementation/IFA, [Lassi-et-al-2020-antenatal-supplementation]_
+
+.. warning::
+
+  The above MMS effect should say 0.91 (95% CI: 0.86, 0.98); the CI is a copy-paste error from
+  the MMS effect on very preterm birth in [Keats-et-al-2019-maternal-supplementation]_.
+  However, it was implemented as written in the nutrition optimization simulation.
 
 Because there is no effect of IFA on stillbirths and we assume there is no baseline coverage of MMS or BEP, there is no differentiation in stillbirth rate due to baseline coverage of antenatal supplementation products in our modeled populations. Therefore, we can simply apply the relative risk of stillbirth directly to the baseline stillbirth rate without accounting for calibration of baseline coverage (in other words, the PAF of antenatal supplementation on stillbirths is equal to 0).
 

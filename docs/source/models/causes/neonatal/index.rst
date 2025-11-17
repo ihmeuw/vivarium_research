@@ -369,6 +369,12 @@ Data Tables
     * - :math:`\text{RR}_\text{max}`
       - Enforced maximum value for LBWSG relative risk 
       - Location/draw/age group/sex-specific value `calculated according to process in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/lbwsg_rr_caps.ipynb>`_
+
+        Note that the calculation of these values depends on the following artifact keys, which will need to be generated for the GBD 2023 update prior to calculating the RR cap values for GBD 2023 (which are themselves an input to the LBWSG PAF calculation simulation)
+
+          * ``'cause.all_causes.all_cause_mortality_risk'``
+          * ``'risk_factor.low_birth_weight_and_short_gestation.birth_exposure'``
+          * ``'risk_factor.low_birth_weight_and_short_gestation.relative_risk'``
       - Capping of LBWSG RRs is intended to guarentee that there will be no individual mortality risk value is greater than 1 in our simulation 
     * - :math:`\text{CSMRisk}^k_{\text{BW},\text{GA}}`
       - cause-specific mortality risk for subcause k, for population with birth weight BW and gestational age GA

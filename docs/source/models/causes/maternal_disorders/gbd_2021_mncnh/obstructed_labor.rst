@@ -4,6 +4,10 @@
 Obstructed labor and uterine rupture
 ====================================
 
+.. note::
+
+  There were no updates to this modeling strategy between GBD 2021 and GBD 2023, so this document can be used for both rounds
+
 Disease Overview
 ----------------
 
@@ -116,7 +120,7 @@ Scope
 The goal of the obstructed labor (OL) model is to capture YLLs and YLDs due to
 obstructed labor and uterine rupture among women of
 reproductive age. We only model obstructed labor and uterine rupture among 
-simulants who give (live or still) birth after a full term pregnancy. This 
+simulants who give (live or still) birth. This 
 page documents how to model the baseline burden of obstructed labor and 
 uterine rupture. Other simulation components such as c-sections will affect 
 the rates of obstructed labor; such effects will be described on the pages for the corresponding :ref:`intervention <intervention_models>`
@@ -125,9 +129,8 @@ or :ref:`risk effects <risk_effects_models>` model.
 Summary of modeling strategy
 ++++++++++++++++++++++++++++
 
-Since the :ref:`MNCNH Portfolio project
-<2024_concept_model_vivarium_mncnh_portfolio>` does not model the
-passage of time, we will not model obstructed labor and uterine rupture
+Because we can assume incident cases of obstructed labor all occur at the end of pregnancy,
+we will not model obstructed labor and uterine rupture
 as a state machine with dynamic state transitions like our typical cause 
 models. Rather, all "transitions" in the model will be modeled as decisions 
 made during a single timestep. To obtain the decision probabilities of each 
@@ -148,28 +151,23 @@ dynamically as a finite state machine, we can draw an analogous directed
 graph that can be interpreted as a (collapsed) decision tree rather than 
 a state transition diagram. The main difference is that the values on the 
 transition arrows represent decision probabilities rather than rates per 
-unit time. The obstructed labor and uterine rupture decision graph drawn 
-below should be inserted on the "full term pregnancy" branch of the decision 
-graph from the :ref:`pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`,
-between the intrapartum model and the birth of the child simulant. Solid
-lines are the pieces added by the obstructed labor and uterine rupture model, 
-while dashed lines indicate pieces of the underlying pregnancy model.
+unit time.
 
 .. graphviz::
 
     digraph OL_decisions {
         rankdir = LR;
-        ftp [label="full term\npregnancy, post\nintrapartum", style=dashed]
-        ftb [label="full term\nbirth", style=dashed]
-        alive [label="parent did not\ndie of OL"]
-        dead [label="parent died\nof OL"]
+        start [label="start"]
+        end [label="end"]
+        alive [label="parent did not die of OL"]
+        dead [label="parent died of OL"]
 
-        ftp -> alive  [label = "1 - ir"]
-        ftp -> OL [label = "ir"]
+        start -> alive  [label = "1 - ir"]
+        start -> OL [label = "ir"]
         OL -> alive [label = "1 - cfr"]
         OL -> dead [label = "cfr"]
-        alive -> ftb  [label = "1", style=dashed]
-        dead -> ftb  [label = "1", style=dashed]
+        alive -> end  [label = "1"]
+        dead -> end  [label = "1"]
     }
 
 .. list-table:: State Definitions
@@ -178,22 +176,18 @@ while dashed lines indicate pieces of the underlying pregnancy model.
 
     * - State
       - Definition
-    * - full term pregnancy, post intrapartum
-      - Parent simulant has a full term pregnancy as determined by the
+    * - start
+      - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>`, **and** has
-        already been through the antenatal and intrapartum models
+        <other_models_pregnancy_closed_cohort_mncnh>` (due to condition on the overall intrapartum component)
     * - OL
-      - Parent simulant experiences obstructed labor or uterine rupture
-    * - parent did not die of OL 
-      - Parent simulant did not die of obstructed labor or uterine rupture
-    * - parent died of OL
-      - Parent simulant died of obstructed labor or uterine rupture
-    * - full term birth
-      - The parent simulant has given birth to a child simulant (which
-        may be a live birth or a still birth, to be determined in the
-        next step of the :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>`)
+      - Parent simulant has maternal OL
+    * - parent not dead of maternal OL
+      - Parent simulant did not die of maternal heOLmorrhage
+    * - parent died of maternal OL
+      - Parent simulant died of maternal OL
+    * - end
+      -
 
 .. list-table:: Transition Probability Definitions
     :widths: 1 5 20
@@ -220,14 +214,16 @@ incidence risk (ir) per birth and the case fatality rate (cfr), for use
 in the decision graph. The incidence risk per birth will be computed as
 
 .. math::
+
     \text{ir} = \frac{\text{OL cases}}{\text{births}}
         = \frac{\text{(OL cases) / person-time}}
             {\text{births / person-time}}
         = \frac{\text{OL incidence rate}}{\text{birth rate}}.
 
-  The case fatality rate will be computed as
+The case fatality rate will be computed as
 
 .. math::
+
     \begin{align*}
     \text{cfr} &= \frac{\text{OL deaths}}{\text{OL cases}} \\
         &= \frac{\text{(OL deaths) / person-time}}
@@ -236,8 +232,8 @@ in the decision graph. The incidence risk per birth will be computed as
             {\text{OL incidence rate}}.
     \end{align*}
 
-  The following table shows the data needed from GBD for these
-  calculations as well as for the calculation of YLDs in the next section.
+The following table shows the data needed from GBD for these
+calculations as well as for the calculation of YLDs in the next section.
 
 .. note::
 
@@ -403,7 +399,7 @@ Validation Criteria
 In order to verify and validate the model, we should record at least the
 following information:
 
-- Number of simulants with full term pregnancies in each age group
+- Number of simulants with live/stillbirth pregnancies in each age group
   before the OL and uterine rupture model is run
 - Number of OL and uterine rupture cases and OL and uterine rupture deaths in each age
   group
