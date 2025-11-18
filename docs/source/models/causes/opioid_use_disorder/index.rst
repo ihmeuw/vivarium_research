@@ -52,8 +52,8 @@ Opioid Use Disorder
   * - MOUD
     - Medications for Opioid Use Disorder
     -
-  * - DSM-5
-    - Diagnostic and Statistical Manual of Mental Disorders, 5th Edition
+  * - DSM-IV-TR
+    - Diagnostic and Statistical Manual of Mental Disorders, 4th Edition, Text Revision
     -
   * - ICD-10
     - International Classification of Diseases, 10th Revision
@@ -64,7 +64,9 @@ Disease Overview
 
 Opioid Use Disorder (OUD) is a chronic, relapsing substance use disorder characterized by a problematic pattern of opioid use leading to clinically significant impairment or distress. Opioids include prescription pain relievers (e.g., oxycodone, hydrocodone), synthetic opioids (e.g., fentanyl), and illicit drugs (e.g., heroin).
 
-OUD is defined by the presence of at least 2 of 11 criteria within a 12-month period according to the DSM-5, including:
+**Clinical Definitions**: Clinical practice has evolved from DSM-IV-TR (which distinguishes "opioid abuse" from "opioid dependence") to DSM-5 (which combines these into a single "opioid use disorder" with severity levels). However, GBD 2023 modeling continues to use DSM-IV-TR criteria for consistency with historical data and international diagnostic standards.
+
+**DSM-5 Criteria** (for reference): DSM-5 defines OUD by the presence of at least 2 of 11 criteria within a 12-month period, including:
 
 - Taking opioids in larger amounts or over a longer period than intended
 - Persistent desire or unsuccessful efforts to cut down or control opioid use
@@ -78,7 +80,11 @@ OUD is defined by the presence of at least 2 of 11 criteria within a 12-month pe
 - Tolerance (need for increased amounts to achieve desired effect)
 - Withdrawal symptoms when opioids are discontinued
 
-The severity of OUD is classified as mild (2-3 criteria), moderate (4-5 criteria), or severe (6 or more criteria). OUD is a chronic condition with a relapsing and remitting nature, where individuals may cycle between periods of active use, treatment, recovery, and relapse.
+The severity of OUD is classified as mild (2-3 criteria), moderate (4-5 criteria), or severe (6 or more criteria) in DSM-5.
+
+**DSM-IV-TR Criteria** (used in GBD 2023): Requires at least 3 of 7 criteria for opioid dependence (see GBD 2023 Modeling Strategy section for full criteria).
+
+OUD is a chronic condition with a relapsing and remitting nature, where individuals may cycle between periods of active use, treatment, recovery, and relapse.
 
 Clinical Course and Natural History
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -111,19 +117,32 @@ GBD 2023 Modeling Strategy
 GBD 2023 Definition and Diagnostic Criteria
 ++++++++++++++++++++++++++++++++++++++++++++
 
-The Global Burden of Disease (GBD) 2023 study defines opioid use disorders based on the International Classification of Diseases, 10th revision (ICD-10) and the Diagnostic and Statistical Manual of Mental Disorders, 5th edition (DSM-5) criteria for opioid use disorder.
+The Global Burden of Disease (GBD) 2023 study defines opioid use disorders as "a maladaptive pattern of opioid abuse, leading to clinically significant impairment or distress that includes symptoms of dependence, such as withdrawal symptoms or progressive tolerance." The GBD disease modeling includes cases that meet the diagnostic criteria for opioid dependence as defined by the Diagnostic and Statistical Manual of Mental Disorders, 4th edition, text revision (DSM-IV-TR) and the International Classification of Diseases (ICD-9 and ICD-10).
 
-**Note on Diagnostic Criteria Evolution**: Earlier GBD iterations (through GBD 2019) primarily used DSM-IV-TR criteria, which distinguished between "substance abuse" and "substance dependence" as separate disorders. DSM-5 (published 2013) combined these into a single "substance use disorder" with severity levels (mild, moderate, severe) based on the number of criteria met (2-3 criteria = mild; 4-5 = moderate; 6+ = severe). DSM-5 also removed the "legal problems" criterion and added "craving" as a new criterion. GBD 2023 likely incorporates DSM-5 criteria, though the core epidemiological estimates remain comparable to earlier iterations as the underlying diagnostic constructs are similar.
+**Diagnostic Codes**: DSM-IV and ICD-9 codes (304.0, 305.5, 965.0, 970.1, E850.0, E935, E940.1) and ICD-10 codes (F11.2, T14.0, Z79.8), excluding cases attributed to a general medical condition.
 
-The GBD definition includes:
+**DSM-IV-TR Diagnostic Criteria**: To meet the DSM-IV-TR criteria for opioid dependence, at least **three of the following seven symptoms** must be experienced within the same 12-month period:
 
-- **Opioid dependence**: A cluster of behavioral, cognitive, and physiological phenomena developing after repeated opioid use, including a strong desire to use opioids, difficulties controlling use, withdrawal symptoms, tolerance, neglect of alternative activities, and persistent use despite harmful consequences
-- **Harmful use of opioids**: A pattern of opioid use causing damage to physical or mental health in the absence of dependence
+1. **Tolerance**, characterized by either:
+
+   - A need for increased amounts of the substance to achieve intoxication; or
+   - Markedly diminished effect with continued use of the same amount of the substance
+
+2. **Withdrawal**, characterized by either:
+
+   - Withdrawal symptoms characteristic to dependence; or
+   - The same (or similar) substance is taken to avoid withdrawal symptoms
+
+3. Substance taken in progressively larger amounts or for longer period
+4. Persistent desire or unsuccessful efforts to reduce substance use
+5. Disproportionate time dedicated to obtaining the substance
+6. Other important activities are given up because of the substance use
+7. Substance use is continued despite knowledge of physical or psychological problems occurring as a result of the substance
 
 GBD 2023 Non-Fatal Modeling Strategy
 +++++++++++++++++++++++++++++++++++++
 
-The GBD 2023 study uses DisMod-MR 2.1, a Bayesian meta-regression tool, to estimate the epidemiology of opioid use disorder. DisMod-MR 2.1 integrates diverse data sources to produce internally consistent estimates of key epidemiological parameters. The methodological approach in GBD 2023 is largely consistent with GBD 2021, continuing to use the same core modeling framework while incorporating updated data through 2023.
+The GBD 2023 study uses DisMod-MR 2.1, a Bayesian meta-regression tool, to estimate the epidemiology of opioid use disorder. DisMod-MR 2.1 integrates diverse data sources to produce internally consistent estimates of key epidemiological parameters.
 
 **Key Epidemiological Parameters**
 
@@ -136,33 +155,56 @@ DisMod-MR 2.1 estimates the following parameters for opioid use disorder:
 
 These parameters are estimated by age, sex, location, and year (1990-2023) and are constrained to be internally consistent through the DisMod-MR 2.1 modeling framework.
 
+**DisMod Prior Settings**
+
+Key modeling assumptions in GBD 2023 include:
+
+- **No incidence or excess mortality before age 15**: Minimum age of onset assumption based on expert feedback and literature
+- **No incidence after age 64**: Supported by data from the European Monitoring Centre for Drugs and Drug Addiction
+- **Remission upper limit of 0.2**: Consistent with limits in the dataset
+- **Country-level covariates**:
+
+  - Age-standardized prevalence of intravenous drug use (IDU)
+  - Log-transformed estimates of defined daily doses for statistical purposes (SDDD) of prescribed opioid analgesics (consumption per day per million population)
+  - Intravenous drug use as covariate for excess mortality rate (EMR), with influence restricted to range 0-2
+
 **Data Sources**
 
-The GBD 2023 estimates incorporate data from:
+The GBD 2023 estimates incorporate data from systematic reviews and multiple sources:
 
-- Population-based surveys and epidemiological studies
-- Treatment records and registry data
-- Published literature on OUD prevalence and incidence
-- Mortality data from vital registration systems
-- Verbal autopsy studies
+- **Direct methods**: Population surveys that ask respondents if they use or are dependent on opioids
+- **Indirect methods**: Multiplier methods, back-projection, and capture-recapture methods to indirectly estimate total number of opioid users
+- **IHME-indirect data**: Created by matching government records of people in opioid substitution therapy with literature sources on percentage of people with opioid dependence in treatment, using spatiotemporal Gaussian process regression (ST-GPR) to estimate coverage
+- **Treatment records**: Number of individuals with opioid dependence in substitution therapy (primarily from government sources)
+- **Published literature**: OUD prevalence, incidence, and treatment coverage estimates
+- **Mortality data**: Vital registration systems and verbal autopsy studies
+
+**Data Adjustment**: Direct survey estimates are adjusted using MR-BRT (meta-regression—Bayesian, regularized, trimmed) crosswalk to IHME-indirect data. The adjustment factor for direct methods is 0.25 (logit beta coefficient = -1.07, gamma = 0.24), indicating that direct surveys are adjusted upward to match indirect estimates, as surveys tend to underestimate the most harmful and stigmatized forms of illicit drug use.
 
 **Severity Distribution**
 
-GBD 2023 estimates the proportion of OUD cases that are asymptomatic (assigned a disability weight of 0) versus symptomatic. Disability weights for symptomatic OUD reflect the impact on health-related quality of life.
+GBD 2023 estimates the proportion of individuals with opioid use disorder across three severity levels based on data from the US National Epidemiological Survey on Alcohol and Related Conditions (NESARC) and the Comorbidity and Trauma Study. The severity distribution is: asymptomatic 16% (13-19%), mild 37% (20-55%), and moderate/severe 47% (29-64%).
 
 .. list-table:: Severity Distribution for Opioid Use Disorder
-   :widths: 20 40 15
+   :widths: 15 15 45 15
    :header-rows: 1
 
    * - Severity Level
+     - Proportion (95% UI)
      - Lay Description
      - Disability Weight (95% CI)
    * - Asymptomatic
+     - 16% (13-19%)
      - Individual meets diagnostic criteria but experiences no current symptoms
      - 0
-   * - Opioid Dependence
-     - Has an intense and constant craving for opioids and has severe problems with personal relationships and work
-     - 0.549 (0.368-0.713)
+   * - Mild
+     - 37% (20-55%)
+     - Uses heroin (or methadone) daily and has difficulty controlling the habit. When not using, the person functions normally.
+     - 0.335 (0.221-0.473)
+   * - Moderate to Severe
+     - 47% (29-64%)
+     - Uses heroin daily and has difficulty controlling the habit. When the effects wear off, the person feels severe nausea, agitation, vomiting, and fever. The person has a lot of difficulty in daily activities.
+     - 0.697 (0.510-0.843)
 
 GBD 2023 Fatal Modeling Strategy
 +++++++++++++++++++++++++++++++++
@@ -180,7 +222,11 @@ The Cause of Death Ensemble model (CODEm) is used to estimate cause-specific mor
 
 **Excess Mortality Rate (EMR)**
 
-The excess mortality rate for OUD is calculated as the ratio of cause-specific mortality to prevalence, representing the elevated risk of death among individuals with OUD compared to the general population.
+GBD 2023 generates excess mortality rate (EMR) data using the MR-BRT method, stratified by age and sex, with a prior assumption that the Healthcare Access and Quality (HAQ) Index has a negative association with EMR. However, the MR-BRT analysis did not find evidence to support this assumed negative relationship, indicating that the HAQ Index did not significantly impact EMR. As a result, EMR predictions are consistent across locations with both high and low HAQ Index values.
+
+**Covariates for EMR**: Intravenous drug use (IDU) is included as a country-level covariate for EMR, with its influence restricted to a range between 0 and 2. The exponentiated beta coefficient for IDU on EMR is 6.84 (95% UI: 6.12-7.36), indicating substantially elevated mortality risk among people who inject opioids.
+
+The excess mortality rate for OUD represents the elevated risk of death among individuals with OUD compared to the general population.
 
 Restrictions
 ++++++++++++
@@ -450,11 +496,11 @@ Data Sources
    * - Disability weights
      - GBD 2023 (YLD Appendix)
      - Disability weights for OUD sequelae
-     - Asymptomatic (0) and symptomatic OUD (0.549)
+     - Asymptomatic (0), mild (0.335), moderate/severe (0.697)
    * - sequelae_c562
      - GBD 2023 (GBD Mapping)
      - Sequelae for opioid use disorder
-     - Asymptomatic and symptomatic opioid dependence
+     - Asymptomatic, mild, and moderate/severe opioid dependence
 
 Estimation of Transition Rates Using NumPyro/DisMod-AT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -669,15 +715,15 @@ The model can be extended to capture polysubstance use, particularly the co-occu
 
 **Casual Use and Subclinical States**
 
-The base model focuses on opioid use disorder (OUD) as defined by DSM-5 criteria (≥2 symptoms). However, the model can be extended to capture casual/recreational opioid use that does not meet diagnostic criteria for OUD:
+The base model focuses on opioid use disorder (OUD) as defined by DSM-IV-TR criteria (≥3 of 7 symptoms for dependence; see GBD 2023 definition above). However, the model can be extended to capture casual/recreational opioid use that does not meet diagnostic criteria for OUD. Note that while GBD 2023 uses DSM-IV-TR, clinical extensions may reference DSM-5 criteria (≥2 of 11 symptoms) which is now standard in clinical practice:
 
 **Extension Approaches for Casual Use**:
 
 1. **Four-State Model**: Add a "casual use" state representing non-disordered opioid use:
 
    - **Susceptible/Never Used**: No history of opioid use
-   - **Casual Use**: Recreational/occasional opioid use without meeting OUD criteria (<2 DSM-5 symptoms)
-   - **OUD (Untreated)**: Meets diagnostic criteria for OUD (≥2 symptoms), not receiving treatment
+   - **Casual Use**: Recreational/occasional opioid use without meeting OUD criteria (<3 DSM-IV-TR symptoms or 0-1 DSM-5 symptoms)
+   - **OUD (Untreated)**: Meets diagnostic criteria for OUD (≥3 DSM-IV-TR symptoms or ≥2 DSM-5 symptoms), not receiving treatment
    - **OUD (On Treatment)**: Receiving MOUD
 
 2. **Transition Pathways**:
@@ -707,9 +753,11 @@ The base model focuses on opioid use disorder (OUD) as defined by DSM-5 criteria
 
 **Methodological Considerations**:
 
-- The distinction between casual use (DSM-5 0-1 symptoms), mild OUD (2-3 symptoms), moderate OUD (4-5 symptoms), and severe OUD (6+ symptoms) can be operationalized using ordinal severity states
+- GBD 2023 uses DSM-IV-TR criteria (≥3 of 7 symptoms), but clinical extensions may use DSM-5 criteria
+- DSM-5 provides finer severity gradations: casual use (0-1 symptoms), mild OUD (2-3 symptoms), moderate OUD (4-5 symptoms), and severe OUD (6+ symptoms) that can be operationalized using ordinal severity states
 - DSM-5's elimination of the abuse/dependence distinction and creation of a unified disorder with severity levels supports a continuous or graded state representation
 - Modeling casual use requires data on non-clinical populations, which may be underrepresented in treatment-seeking samples used to parameterize traditional models
+- When extending the model beyond GBD 2023 definitions, researchers should clearly specify which diagnostic criteria (DSM-IV-TR, DSM-5, or ICD-10) are used for each state
 
 **Integration with Other Models**
 
