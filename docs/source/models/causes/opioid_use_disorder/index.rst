@@ -772,43 +772,43 @@ References
 ++++++++++
 
 .. [GBD-2023-Overview]
-   GBD 2023 Disease and Injury and Risk Factor Collaborators. Burden of 375 diseases and injuries, risk-attributable burden of 88 risk factors, and healthy life expectancy in 204 countries and territories, including 660 subnational locations, 1990-2023: a systematic analysis for the Global Burden of Disease Study 2023. Lancet. 2025;406(10513):1873-1922. doi:10.1016/S0140-6736(25)01637-X.
+   GBD 2023 Disease and Injury and Risk Factor Collaborators. Burden of 375 diseases and injuries, risk-attributable burden of 88 risk factors, and healthy life expectancy in 204 countries and territories, including 660 subnational locations, 1990-2023: a systematic analysis for the Global Burden of Disease Study 2023. Lancet. 2025;406(10513):1873-1922. doi:10.1016/S0140-6736(25)01637-X. Available at: https://doi.org/10.1016/S0140-6736(25)01637-X
 
 .. [DisMod-Methods]
-   James SL, Abate D, Abate KH, et al. Global, regional, and national incidence, prevalence, and years lived with disability for 354 diseases and injuries for 195 countries and territories, 1990–2017: a systematic analysis for the Global Burden of Disease Study 2017. Lancet. 2018;392(10159):1789-1858.
+   GBD 2017 Disease and Injury Incidence and Prevalence Collaborators. Global, regional, and national incidence, prevalence, and years lived with disability for 354 diseases and injuries for 195 countries and territories, 1990–2017: a systematic analysis for the Global Burden of Disease Study 2017. Lancet. 2018;392(10159):1789-1858. doi:10.1016/S0140-6736(18)32279-7. Available at: https://doi.org/10.1016/S0140-6736(18)32279-7
 
 .. [Degenhardt-2019]
-   Degenhardt L, Grebely J, Stone J, et al. Global patterns of opioid use and dependence: harms to populations, interventions, and future action. Lancet. 2019;394(10208):1560-1579.
+   Degenhardt L, Grebely J, Stone J, et al. Global patterns of opioid use and dependence: harms to populations, interventions, and future action. Lancet. 2019;394(10208):1560-1579. doi:10.1016/S0140-6736(19)32229-9. Available at: https://doi.org/10.1016/S0140-6736(19)32229-9
 
 .. [SAMHSA-MOUD]
-   Substance Abuse and Mental Health Services Administration. Medications for Opioid Use Disorder. Treatment Improvement Protocol (TIP) Series 63. HHS Publication No. PEP21-02-01-002. Rockville, MD: Substance Abuse and Mental Health Services Administration; 2021.
+   Substance Abuse and Mental Health Services Administration. Medications for Opioid Use Disorder. Treatment Improvement Protocol (TIP) Series 63. HHS Publication No. PEP21-02-01-002. Rockville, MD: Substance Abuse and Mental Health Services Administration; 2021. Available at: https://library.samhsa.gov/product/tip-63-medications-opioid-use-disorder/pep21-02-01-002 (Full text via NCBI Bookshelf: https://www.ncbi.nlm.nih.gov/books/NBK574910/)
 
 .. [Wakeman-2020]
-   Wakeman SE, Larochelle MR, Ameli O, et al. Comparative Effectiveness of Different Treatment Pathways for Opioid Use Disorder. JAMA Netw Open. 2020;3(2):e1920622.
+   Wakeman SE, Larochelle MR, Ameli O, et al. Comparative Effectiveness of Different Treatment Pathways for Opioid Use Disorder. JAMA Netw Open. 2020;3(2):e1920622. doi:10.1001/jamanetworkopen.2019.20622. Available at: https://doi.org/10.1001/jamanetworkopen.2019.20622
 
 .. [Sordo-2017]
-   Sordo L, Barrio G, Bravo MJ, et al. Mortality risk during and after opioid substitution treatment: systematic review and meta-analysis of cohort studies. BMJ. 2017;357:j1550.
+   Sordo L, Barrio G, Bravo MJ, et al. Mortality risk during and after opioid substitution treatment: systematic review and meta-analysis of cohort studies. BMJ. 2017;357:j1550. doi:10.1136/bmj.j1550. Available at: https://doi.org/10.1136/bmj.j1550
 
 .. [Santo-2021]
-   Santo T Jr, Clark B, Hickman M, et al. Association of Opioid Agonist Treatment With All-Cause Mortality and Specific Causes of Death Among People With Opioid Dependence: A Systematic Review and Meta-analysis. JAMA Psychiatry. 2021;78(9):979-993.
+   Santo T Jr, Clark B, Hickman M, et al. Association of Opioid Agonist Treatment With All-Cause Mortality and Specific Causes of Death Among People With Opioid Dependence: A Systematic Review and Meta-analysis. JAMA Psychiatry. 2021;78(9):979-993. doi:10.1001/jamapsychiatry.2021.0976. Available at: https://doi.org/10.1001/jamapsychiatry.2021.0976
 
 .. [DSM-5]
-   American Psychiatric Association. Diagnostic and Statistical Manual of Mental Disorders. 5th ed. Arlington, VA: American Psychiatric Publishing; 2013.
+   American Psychiatric Association. Diagnostic and Statistical Manual of Mental Disorders. 5th ed. Washington, DC: American Psychiatric Publishing; 2013. Overview at: https://www.psychiatry.org/psychiatrists/practice/dsm
 
 .. [Cerda-2022]
-   Cerdá M, Jalali MS, Hamilton AD, et al. A Systematic Review of Simulation Models to Track and Address the Opioid Crisis. Epidemiol Rev. 2022;43(1):147-165. doi:10.1093/epirev/mxab013.
+   Cerdá M, Jalali MS, Hamilton AD, et al. A Systematic Review of Simulation Models to Track and Address the Opioid Crisis. Epidemiol Rev. 2022;43(1):147-165. doi:10.1093/epirev/mxab013. Available at: https://doi.org/10.1093/epirev/mxab013
 
 .. [Ciccarone-2019]
-   Ciccarone D. The triple wave epidemic: Supply and demand drivers of the US opioid overdose crisis. Int J Drug Policy. 2019;71:183-188.
+   Ciccarone D. The triple wave epidemic: Supply and demand drivers of the US opioid overdose crisis. Int J Drug Policy. 2019;71:183-188. doi:10.1016/j.drugpo.2019.01.010. Available at: https://doi.org/10.1016/j.drugpo.2019.01.010
 
 .. [Jones-2020]
-   Jones CM, Olsen EO, O'Donnell J, Mustaquim D. Resurgent methamphetamine use at treatment admission in the United States, 2008-2017. Am J Public Health. 2020;110(4):509-516.
+   Jones CM, Olsen EO, O'Donnell J, Mustaquim D. Resurgent methamphetamine use at treatment admission in the United States, 2008-2017. Am J Public Health. 2020;110(4):509-516. doi:10.2105/AJPH.2019.305527. Available at: https://doi.org/10.2105/AJPH.2019.305527
 
 .. [Ellis-2018]
-   Ellis MS, Kasper ZA, Cicero TJ. Twin epidemics: The surging rise of methamphetamine use in chronic opioid users. Drug Alcohol Depend. 2018;193:14-20.
+   Ellis MS, Kasper ZA, Cicero TJ. Twin epidemics: The surging rise of methamphetamine use in chronic opioid users. Drug Alcohol Depend. 2018;193:14-20. doi:10.1016/j.drugalcdep.2018.08.029. Available at: https://doi.org/10.1016/j.drugalcdep.2018.08.029
 
 .. [Anthony-1994]
-   Anthony JC, Warner LA, Kessler RC. Comparative epidemiology of dependence on tobacco, alcohol, controlled substances, and inhalants: basic findings from the National Comorbidity Survey. Exp Clin Psychopharmacol. 1994;2(3):244-268.
+   Anthony JC, Warner LA, Kessler RC. Comparative epidemiology of dependence on tobacco, alcohol, controlled substances, and inhalants: basic findings from the National Comorbidity Survey. Exp Clin Psychopharmacol. 1994;2(3):244-268. doi:10.1037/1064-1297.2.3.244. Available at: https://doi.org/10.1037/1064-1297.2.3.244
 
 .. [Lopez-Quintero-2011]
-   Lopez-Quintero C, Pérez de los Cobos J, Hasin DS, et al. Probability and predictors of transition from first use to dependence on nicotine, alcohol, cannabis, and cocaine: results of the National Epidemiologic Survey on Alcohol and Related Conditions (NESARC). Drug Alcohol Depend. 2011;115(1-2):120-130.
+   Lopez-Quintero C, Pérez de los Cobos J, Hasin DS, et al. Probability and predictors of transition from first use to dependence on nicotine, alcohol, cannabis, and cocaine: results of the National Epidemiologic Survey on Alcohol and Related Conditions (NESARC). Drug Alcohol Depend. 2011;115(1-2):120-130. doi:10.1016/j.drugalcdep.2010.11.004. Available at: https://pubmed.ncbi.nlm.nih.gov/21145178/
