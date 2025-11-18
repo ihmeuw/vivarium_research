@@ -60,7 +60,7 @@ Opioid Use Disorder
     -
 
 Disease Overview
-----------------
+++++++++++++++++
 
 Opioid Use Disorder (OUD) is a chronic, relapsing substance use disorder characterized by a problematic pattern of opioid use leading to clinically significant impairment or distress. Opioids include prescription pain relievers (e.g., oxycodone, hydrocodone), synthetic opioids (e.g., fentanyl), and illicit drugs (e.g., heroin).
 
@@ -87,7 +87,7 @@ The severity of OUD is classified as mild (2-3 criteria), moderate (4-5 criteria
 OUD is a chronic condition with a relapsing and remitting nature, where individuals may cycle between periods of active use, treatment, recovery, and relapse.
 
 Clinical Course and Natural History
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------
 
 OUD typically follows a chronic course characterized by:
 
@@ -112,10 +112,10 @@ OUD typically follows a chronic course characterized by:
 **Relapse**: OUD has a high relapse rate, with many individuals experiencing multiple cycles of recovery and return to active use. Relapse risk is elevated during periods of stress, environmental triggers, co-occurring mental health symptoms, and following treatment discontinuation.
 
 GBD 2023 Modeling Strategy
----------------------------
++++++++++++++++++++++++++++
 
 GBD 2023 Definition and Diagnostic Criteria
-++++++++++++++++++++++++++++++++++++++++++++
+--------------------------------------------
 
 The Global Burden of Disease (GBD) 2023 study defines opioid use disorders as "a maladaptive pattern of opioid abuse, leading to clinically significant impairment or distress that includes symptoms of dependence, such as withdrawal symptoms or progressive tolerance." The GBD disease modeling includes cases that meet the diagnostic criteria for opioid dependence as defined by the Diagnostic and Statistical Manual of Mental Disorders, 4th edition, text revision (DSM-IV-TR) and the International Classification of Diseases (ICD-9 and ICD-10).
 
@@ -140,7 +140,7 @@ The Global Burden of Disease (GBD) 2023 study defines opioid use disorders as "a
 7. Substance use is continued despite knowledge of physical or psychological problems occurring as a result of the substance
 
 GBD 2023 Non-Fatal Modeling Strategy
-+++++++++++++++++++++++++++++++++++++
+-------------------------------------
 
 The GBD 2023 study uses DisMod-MR 2.1, a Bayesian meta-regression tool, to estimate the epidemiology of opioid use disorder. DisMod-MR 2.1 integrates diverse data sources to produce internally consistent estimates of key epidemiological parameters.
 
@@ -207,7 +207,7 @@ GBD 2023 estimates the proportion of individuals with opioid use disorder across
      - 0.697 (0.510-0.843)
 
 GBD 2023 Fatal Modeling Strategy
-+++++++++++++++++++++++++++++++++
+---------------------------------
 
 Fatal burden from OUD is estimated through two pathways:
 
@@ -229,7 +229,7 @@ GBD 2023 generates excess mortality rate (EMR) data using the MR-BRT method, str
 The excess mortality rate for OUD represents the elevated risk of death among individuals with OUD compared to the general population.
 
 Restrictions
-++++++++++++
+------------
 
 .. list-table:: GBD 2023 Cause Restrictions for Opioid Use Disorder
    :widths: 15 15 20
@@ -264,10 +264,10 @@ Restrictions
      - [95, 125 years), age_group_id=235
 
 Vivarium Modeling Strategy
----------------------------
++++++++++++++++++++++++++++
 
 Scope
-+++++
+-----
 
 This cause model represents opioid use disorder as a three-state compartmental model capturing susceptibility, active disorder, and treatment states. The model is designed to be compatible with GBD 2023 estimates while allowing for simulation of treatment interventions (Medications for Opioid Use Disorder, or MOUD).
 
@@ -281,7 +281,7 @@ The model captures:
 - Excess mortality associated with untreated and treated OUD states
 
 State Definitions
-+++++++++++++++++
+-----------------
 
 The model includes three mutually exclusive states:
 
@@ -320,7 +320,7 @@ The model includes three mutually exclusive states:
   - May discontinue treatment (transition back to untreated state) or achieve recovery (transition to susceptible state)
 
 Cause Model Diagram
-+++++++++++++++++++
+-------------------
 
 .. graphviz::
 
@@ -340,7 +340,7 @@ Cause Model Diagram
   }
 
 Transitions
-+++++++++++
+-----------
 
 .. list-table:: Transition Rate Definitions
    :widths: 5 15 40
@@ -366,7 +366,7 @@ Transitions
      - Rate at which individuals receiving MOUD achieve sustained recovery and transition to the susceptible state. This represents successful treatment outcomes.
 
 State and Transition Data Tables
-+++++++++++++++++++++++++++++++++
+---------------------------------
 
 States Data
 ~~~~~~~~~~~
@@ -544,7 +544,7 @@ DisMod-AT (Disease Model – Age-and-Time) is a Bayesian meta-analytic tool desi
 - Provides transparent, reproducible parameter estimation
 
 Risk Factor Interactions
-+++++++++++++++++++++++++
+-------------------------
 
 The OUD cause model interacts with several risk factors and exposures:
 
@@ -585,7 +585,7 @@ Several factors may modify transition rates in the OUD model:
   - Stable housing and employment
 
 Assumptions and Limitations
-++++++++++++++++++++++++++++
+----------------------------
 
 **Key Assumptions**
 
@@ -622,7 +622,7 @@ Assumptions and Limitations
 Results from this model should be interpreted as population-level estimates capturing average dynamics across heterogeneous individuals. Scenario analyses and interventions should be evaluated based on their effects on transition rates, with careful attention to the assumptions embedded in those rate changes. Uncertainty in parameter estimates (particularly treatment-related transitions) should be thoroughly characterized and propagated through model outputs.
 
 Validation Criteria
-+++++++++++++++++++
+-------------------
 
 Model validation should compare simulated outputs to reference data:
 
@@ -639,7 +639,7 @@ Model validation should compare simulated outputs to reference data:
 6. **Temporal Trends**: If simulating multiple years, trends in prevalence, incidence, and mortality should match observed temporal patterns
 
 Extensions and Modifications
-+++++++++++++++++++++++++++++
+-----------------------------
 
 This base model can be extended to represent additional complexity:
 
@@ -769,7 +769,7 @@ This OUD cause model can be integrated with other simulation components:
 - **Treatment System Capacity**: Explicit capacity constraints on treatment availability
 
 References
-----------
+++++++++++
 
 .. [GBD-2023-Capstone-Opioid]
    Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2023 (GBD 2023).
