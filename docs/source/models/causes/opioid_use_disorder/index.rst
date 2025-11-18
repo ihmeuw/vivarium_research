@@ -62,7 +62,7 @@ Opioid Use Disorder
 Disease Overview
 ++++++++++++++++
 
-Opioid Use Disorder (OUD) is a chronic, relapsing substance use disorder characterized by a problematic pattern of opioid use leading to clinically significant impairment or distress. [Friedman-2022]_ Opioids include prescription pain relievers (e.g., oxycodone, hydrocodone), synthetic opioids (e.g., fentanyl), and illicit drugs (e.g., heroin).
+Opioid Use Disorder (OUD) is a chronic, relapsing substance use disorder characterized by a problematic pattern of opioid use leading to clinically significant impairment or distress. [DSM-5]_ Opioids include prescription pain relievers (e.g., oxycodone, hydrocodone), synthetic opioids (e.g., fentanyl), and illicit drugs (e.g., heroin).
 
 **Clinical Definitions**: Clinical practice has evolved from DSM-IV-TR (which distinguishes "opioid abuse" from "opioid dependence") to DSM-5 (which combines these into a single "opioid use disorder" with severity levels). However, GBD 2023 modeling continues to use DSM-IV-TR criteria for consistency with historical data and international diagnostic standards.
 
@@ -117,9 +117,9 @@ GBD 2023 Modeling Strategy
 GBD 2023 Definition and Diagnostic Criteria
 --------------------------------------------
 
-The Global Burden of Disease (GBD) 2023 study defines opioid use disorders as "a maladaptive pattern of opioid abuse, leading to clinically significant impairment or distress that includes symptoms of dependence, such as withdrawal symptoms or progressive tolerance." [GBD-2023-Capstone-Opioid]_ The GBD disease modeling includes cases that meet the diagnostic criteria for opioid dependence as defined by the Diagnostic and Statistical Manual of Mental Disorders, 4th edition, text revision (DSM-IV-TR) and the International Classification of Diseases (ICD-9 and ICD-10).
+The Global Burden of Disease (GBD) 2023 study defines opioid use disorders as "a maladaptive pattern of opioid abuse, leading to clinically significant impairment or distress that includes symptoms of dependence, such as withdrawal symptoms or progressive tolerance." [GBD-2023-Overview]_ The GBD disease modeling includes cases that meet the diagnostic criteria for opioid dependence as defined by the Diagnostic and Statistical Manual of Mental Disorders, 4th edition, text revision (DSM-IV-TR) and the International Classification of Diseases (ICD-9 and ICD-10).
 
-**Diagnostic Codes**: DSM-IV and ICD-9 codes (304.0, 305.5, 965.0, 970.1, E850.0, E935, E940.1) and ICD-10 codes (F11.2, T14.0, Z79.8), excluding cases attributed to a general medical condition.
+**Diagnostic Codes**: The GBD disease modeling includes cases that meet the diagnostic criteria for opioid dependence as defined by DSM-IV-TR and ICD-9/ICD-10 substance use codes, primarily ICD-9 304.0 (opioid dependence) and 305.5 (opioid abuse) and ICD-10 F11.x (mental and behavioral disorders due to use of opioids). Opioid poisoning codes (e.g., ICD-9 965.0, E850.0-E850.2; ICD-10 T40.x) are used in overdose models rather than the chronic OUD cause.
 
 **DSM-IV-TR Diagnostic Criteria**: To meet the DSM-IV-TR criteria for opioid dependence, at least **three of the following seven symptoms** must be experienced within the same 12-month period:
 
@@ -160,13 +160,13 @@ These parameters are estimated by age, sex, location, and year (1990-2023) and a
 Key modeling assumptions in GBD 2023 include:
 
 - **No incidence or excess mortality before age 15**: Minimum age of onset assumption based on expert feedback and literature
-- **No incidence after age 64**: Supported by data from the European Monitoring Centre for Drugs and Drug Addiction
+- **No incidence after age 64**: Modeling assumption based on the very low incidence observed at older ages in EMCDDA and other surveillance data
 - **Remission upper limit of 0.2**: Consistent with limits in the dataset
 - **Country-level covariates**:
 
   - Age-standardized prevalence of intravenous drug use (IDU)
   - Log-transformed estimates of defined daily doses for statistical purposes (SDDD) of prescribed opioid analgesics (consumption per day per million population)
-  - Intravenous drug use as covariate for excess mortality rate (EMR), with influence restricted to range 0-2
+  - Intravenous drug use as covariate for excess mortality rate (EMR)
 
 **Data Sources**
 
@@ -179,7 +179,7 @@ The GBD 2023 estimates incorporate data from systematic reviews and multiple sou
 - **Published literature**: OUD prevalence, incidence, and treatment coverage estimates
 - **Mortality data**: Vital registration systems and verbal autopsy studies
 
-**Data Adjustment**: Direct survey estimates are adjusted using MR-BRT (meta-regression—Bayesian, regularized, trimmed) crosswalk to IHME-indirect data. The adjustment factor for direct methods is 0.25 (logit beta coefficient = -1.07, gamma = 0.24), indicating that direct surveys are adjusted upward to match indirect estimates, as surveys tend to underestimate the most harmful and stigmatized forms of illicit drug use.
+**Data Adjustment**: Direct survey estimates are adjusted upward using MR-BRT (meta-regression—Bayesian, regularized, trimmed) crosswalk to account for under-ascertainment of highly stigmatized opioid use, based on cross-walks to treatment-based estimates. Surveys tend to underestimate the most harmful and stigmatized forms of illicit drug use.
 
 **Severity Distribution**
 
@@ -224,7 +224,7 @@ The Cause of Death Ensemble model (CODEm) is used to estimate cause-specific mor
 
 GBD 2023 generates excess mortality rate (EMR) data using the MR-BRT method, stratified by age and sex, with a prior assumption that the Healthcare Access and Quality (HAQ) Index has a negative association with EMR. However, the MR-BRT analysis did not find evidence to support this assumed negative relationship, indicating that the HAQ Index did not significantly impact EMR. As a result, EMR predictions are consistent across locations with both high and low HAQ Index values.
 
-**Covariates for EMR**: Intravenous drug use (IDU) is included as a country-level covariate for EMR, with its influence restricted to a range between 0 and 2. The exponentiated beta coefficient for IDU on EMR is 6.84 (95% UI: 6.12-7.36), indicating substantially elevated mortality risk among people who inject opioids.
+**Covariates for EMR**: Intravenous drug use (IDU) is included as a country-level covariate for EMR, indicating substantially elevated mortality risk among people who inject opioids.
 
 The excess mortality rate for OUD represents the elevated risk of death among individuals with OUD compared to the general population.
 
@@ -406,7 +406,7 @@ States Data
    * - T
      - Excess mortality rate (EMR)
      - 0 or reduced value
-     - MOUD substantially reduces mortality risk [Sordo-2017]_ [Santo-2021]_; may be set to 0 to reflect protective effect of treatment
+     - MOUD substantially reduces mortality risk [Sordo-2017]_ [Santo-2021]_; EMR in the treatment state is assumed to be substantially reduced relative to untreated OUD. In some base-case scenarios we set it to 0 to represent the protective effect of treatment, with sensitivity analyses using non-zero EMR values
    * - S
      - Disability weight
      - 0
@@ -418,7 +418,7 @@ States Data
    * - T
      - Disability weight
      - 0 or reduced value
-     - MOUD substantially reduces disability [Wakeman-2020]_; may be set to 0 to reflect treatment effectiveness
+     - MOUD substantially reduces disability [Wakeman-2020]_; disability weight in the treatment state is assumed to be substantially reduced relative to untreated OUD. In some base-case scenarios we set it to 0 to represent an optimistic upper bound on treatment effectiveness, with sensitivity analyses using non-zero disability weights
 
 Transition Data
 ~~~~~~~~~~~~~~~
@@ -706,7 +706,7 @@ The model can be extended to capture polysubstance use, particularly the co-occu
 
 4. **Treatment Effectiveness Modification**: MOUD effectiveness may differ for individuals with polysubstance use, requiring different parameterization of treatment success/discontinuation rates.
 
-**Modeling Framework Options**: [Jalal-2020]_
+**Modeling Framework Options**: [Cerda-2022]_
 
 - **Compartmental models**: Most commonly used (36% of opioid epidemic models) for tracking population flows
 - **Markov models**: Account for state transitions with memory (20% of models)
@@ -741,7 +741,7 @@ The base model focuses on opioid use disorder (OUD) as defined by DSM-IV-TR crit
 
 4. **Clinical Significance**:
 
-   - **Prevalence**: Among lifetime drug users, only ~15-68% (varies by substance) develop dependence [Anthony-2005]_
+   - **Prevalence**: Among lifetime drug users, only ~15-68% (varies by substance) develop dependence [Anthony-1994]_
    - **Intervention Targeting**: Casual use states may benefit from harm reduction and early intervention rather than intensive treatment
    - **Overdose Risk**: Casual users face overdose risk (especially with fentanyl contamination) despite not meeting diagnostic criteria
 
@@ -771,10 +771,8 @@ This OUD cause model can be integrated with other simulation components:
 References
 ++++++++++
 
-.. [GBD-2023-Capstone-Opioid]
-   Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2023 (GBD 2023).
-   Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2025.
-   Available at: https://www.healthdata.org/research-analysis/gbd
+.. [GBD-2023-Overview]
+   GBD 2023 Disease and Injury and Risk Factor Collaborators. Burden of 375 diseases and injuries, risk-attributable burden of 88 risk factors, and healthy life expectancy in 204 countries and territories, including 660 subnational locations, 1990-2023: a systematic analysis for the Global Burden of Disease Study 2023. Lancet. 2025;406(10513):1873-1922. doi:10.1016/S0140-6736(25)01637-X.
 
 .. [DisMod-Methods]
    James SL, Abate D, Abate KH, et al. Global, regional, and national incidence, prevalence, and years lived with disability for 354 diseases and injuries for 195 countries and territories, 1990–2017: a systematic analysis for the Global Burden of Disease Study 2017. Lancet. 2018;392(10159):1789-1858.
@@ -783,7 +781,7 @@ References
    Degenhardt L, Grebely J, Stone J, et al. Global patterns of opioid use and dependence: harms to populations, interventions, and future action. Lancet. 2019;394(10208):1560-1579.
 
 .. [SAMHSA-MOUD]
-   Substance Abuse and Mental Health Services Administration. Medications for Opioid Use Disorder. Treatment Improvement Protocol (TIP) Series 63. Publication No. PEP20-02-01-006. Rockville, MD: Substance Abuse and Mental Health Services Administration, 2021.
+   Substance Abuse and Mental Health Services Administration. Medications for Opioid Use Disorder. Treatment Improvement Protocol (TIP) Series 63. HHS Publication No. PEP21-02-01-002. Rockville, MD: Substance Abuse and Mental Health Services Administration; 2021.
 
 .. [Wakeman-2020]
    Wakeman SE, Larochelle MR, Ameli O, et al. Comparative Effectiveness of Different Treatment Pathways for Opioid Use Disorder. JAMA Netw Open. 2020;3(2):e1920622.
@@ -794,11 +792,11 @@ References
 .. [Santo-2021]
    Santo T Jr, Clark B, Hickman M, et al. Association of Opioid Agonist Treatment With All-Cause Mortality and Specific Causes of Death Among People With Opioid Dependence: A Systematic Review and Meta-analysis. JAMA Psychiatry. 2021;78(9):979-993.
 
-.. [Friedman-2022]
-   Friedman J, Beletsky L. The Opioid Epidemic: Prevention, Treatment, and Recovery. Annu Rev Public Health. 2022;43:311-337.
+.. [DSM-5]
+   American Psychiatric Association. Diagnostic and Statistical Manual of Mental Disorders. 5th ed. Arlington, VA: American Psychiatric Publishing; 2013.
 
-.. [Jalal-2020]
-   Jalal H, Buchanich JM, Roberts MS, et al. A Systematic Review of Simulation Models to Track and Address the Opioid Crisis. JAMA Netw Open. 2022;5(4):e2237541.
+.. [Cerda-2022]
+   Cerdá M, Jalali MS, Hamilton AD, et al. A Systematic Review of Simulation Models to Track and Address the Opioid Crisis. Epidemiol Rev. 2022;43(1):147-165. doi:10.1093/epirev/mxab013.
 
 .. [Ciccarone-2019]
    Ciccarone D. The triple wave epidemic: Supply and demand drivers of the US opioid overdose crisis. Int J Drug Policy. 2019;71:183-188.
@@ -809,7 +807,7 @@ References
 .. [Ellis-2018]
    Ellis MS, Kasper ZA, Cicero TJ. Twin epidemics: The surging rise of methamphetamine use in chronic opioid users. Drug Alcohol Depend. 2018;193:14-20.
 
-.. [Anthony-2005]
+.. [Anthony-1994]
    Anthony JC, Warner LA, Kessler RC. Comparative epidemiology of dependence on tobacco, alcohol, controlled substances, and inhalants: basic findings from the National Comorbidity Survey. Exp Clin Psychopharmacol. 1994;2(3):244-268.
 
 .. [Lopez-Quintero-2011]
