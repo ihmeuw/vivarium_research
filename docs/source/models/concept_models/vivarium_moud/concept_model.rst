@@ -75,68 +75,26 @@ By allowing the simulation of interventions individually and, crucially, *in com
 3 Concept model and submodels
 +++++++++++++++++++++++++++++
 
-3.1 Core Disease Model
-~~~~~~~~~~~~~~~~~~~~~~
+3.1 Opioid Use Disorder Cause Model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. graphviz::
+The core of this simulation is the Opioid Use Disorder (OUD) cause model, which represents the epidemiology and natural history of OUD using a three-state compartmental model. This model captures the states of **susceptible** (no OUD), **with_condition** (untreated OUD), and **on_treatment** (receiving Medications for Opioid Use Disorder, or MOUD).
 
-  digraph moud_model {
-      rankdir = LR;
-      susceptible [label="susceptible"]
-      with_condition [label="with condition"]
-      on_treatment [label="on treatment"]
+For complete documentation of the OUD cause model, including detailed state definitions, transition rates, GBD 2021 alignment, parameter estimation methodology, and data sources, please see:
 
-      susceptible -> with_condition [label="i"]
-      with_condition -> susceptible [label="r"]
-      with_condition -> on_treatment [label="ti"] 
-      on_treatment -> with_condition [label="tf"]
-      on_treatment -> susceptible [label="ts"]
-  }
+:ref:`Opioid Use Disorder Cause Model <2021_cause_opioid_use_disorder>`
 
+**Key Model Features**
 
-The core disease model represents opioid use disorder as a state machine with three states:
+The OUD cause model is a compartmental state-transition model with:
 
-.. list-table:: State Definitions
-  :widths: 7 20
-  :header-rows: 1
+- **Three states**: susceptible, with_condition (untreated OUD), and on_treatment (receiving MOUD)
+- **Five transitions**: incidence (i), natural remission (r), treatment initiation (ti), treatment discontinuation (tf), and treatment-associated recovery (ts)
+- **GBD 2021 alignment**: Parameterization consistent with Global Burden of Disease 2021 estimates for OUD prevalence, incidence, remission, and excess mortality
+- **Treatment representation**: Explicit modeling of MOUD engagement and outcomes
+- **DisMod-AT methodology**: Transition rates estimated using a NumPyro implementation of DisMod-AT-like Bayesian inference to ensure internal consistency
 
-  * - State
-    - Definition
-  * - susceptible
-    - Individual does not have opioid use disorder
-  * - with condition
-    - Individual has opioid use disorder but is not receiving medication treatment
-  * - on treatment
-    - Individual has opioid use disorder and is receiving medication treatment (MOUD)
-
-.. list-table:: Transition Rate Definitions
-  :widths: 1 5 20
-  :header-rows: 1
-
-  * - Symbol
-    - Name
-    - Definition
-  * - i
-    - incidence rate
-    - Rate at which individuals develop opioid use disorder
-  * - r
-    - remission rate  
-    - Rate at which individuals with untreated OUD naturally recover
-  * - ti
-    - treatment initiation rate
-    - Rate at which individuals with OUD begin medication treatment
-  * - tf
-    - treatment failure rate
-    - Rate at which individuals on MOUD discontinue or fail treatment
-  * - ts
-    - treatment success rate
-    - Rate at which individuals on MOUD achieve sustained recovery/remission
-    
-Key features of the model include:
-
-- The "with_condition" state can be used as a risk exposure
-- Treatment state has no excess mortality or disability weight relative to susceptible
-- State membership is determined by prevalence data and treatment ratios designed to be internally consistent and to match GBD 2021 estimates
+The "with_condition" and "on_treatment" states serve as risk exposures that affect outcomes in other model components (e.g., overdose risk, mortality, infectious disease transmission, housing stability, incarceration risk).
 
 3.2 Quarters Model
 ~~~~~~~~~~~~~~~~~~
