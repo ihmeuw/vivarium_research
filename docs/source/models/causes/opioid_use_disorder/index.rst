@@ -335,7 +335,7 @@ Cause Model Diagram
       susceptible -> with_condition [label="Incidence\n(i)"]
       with_condition -> susceptible [label="Natural Remission\n(r)"]
       with_condition -> on_treatment [label="Treatment\nInitiation\n(ti)"]
-      on_treatment -> with_condition [label="Treatment\nDiscontinuation\n(tf)"]
+      on_treatment -> with_condition [label="Treatment\nDiscontinuation\n(td)"]
       on_treatment -> susceptible [label="Treatment-\nAssociated\nRecovery\n(ts)"]
   }
 
@@ -358,7 +358,7 @@ Transitions
    * - ti
      - Treatment initiation rate
      - Rate at which individuals with untreated OUD begin medication treatment (MOUD: methadone, buprenorphine, or naltrexone). This transition represents engagement with formal treatment services.
-   * - tf
+   * - td
      - Treatment discontinuation/failure rate
      - Rate at which individuals receiving MOUD discontinue treatment and return to untreated OUD status. This may occur due to medication side effects, loss of access to treatment, patient choice, or other factors.
    * - ts
@@ -389,11 +389,11 @@ States Data
      - Complement of total OUD prevalence
    * - C
      - Prevalence
-     - :math:`\text{prevalence}_{\text{c562}} \times (1 - \text{treatment\_coverage})`
+     - :math:`\text{prevalence}_{\text{c562}} \times (1 - \text{treatment_coverage})`
      - Untreated OUD prevalence (total prevalence × proportion not on treatment)
    * - T
      - Prevalence
-     - :math:`\text{prevalence}_{\text{c562}} \times \text{treatment\_coverage}`
+     - :math:`\text{prevalence}_{\text{c562}} \times \text{treatment_coverage}`
      - Treated OUD prevalence (total prevalence × proportion on treatment)
    * - S
      - Excess mortality rate (EMR)
@@ -401,7 +401,7 @@ States Data
      - No excess mortality in susceptible state
    * - C
      - Excess mortality rate (EMR)
-     - :math:`\text{emr}_{\text{base}} \times (1 + \text{emr\_multiplier}_{\text{untreated}})`
+     - :math:`\text{emr}_{\text{base}} \times (1 + \text{emr_multiplier}_{\text{untreated}})`
      - Elevated EMR for untreated OUD, accounting for increased overdose and other mortality risks
    * - T
      - Excess mortality rate (EMR)
@@ -413,7 +413,7 @@ States Data
      - No disability burden in susceptible state
    * - C
      - Disability weight
-     - :math:`\frac{1}{\text{prevalence}_{\text{c562}}} \times \sum\limits_{s \in \text{sequelae}} \text{disability\_weight}_s \times \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence}_{\text{c562}}} \times \sum\limits_{s \in \text{sequelae}} \text{disability_weight}_s \times \text{prevalence}_s`
      - Weighted average of symptomatic and asymptomatic OUD disability weights
    * - T
      - Disability weight
@@ -447,7 +447,7 @@ Transition Data
      - T
      - Derived from DisMod-AT/NumPyro model and treatment access data
      - Treatment initiation rate. Estimated based on treatment coverage ratios and population-level treatment access data. May vary by setting (community, jail, etc.) and be modified by intervention scenarios.
-   * - tf
+   * - td
      - T
      - C
      - Derived from DisMod-AT/NumPyro model and treatment retention studies
@@ -485,7 +485,7 @@ Data Sources
      - National surveys (NSDUH), treatment records, published studies
      - Proportion of individuals with OUD receiving MOUD
      - May vary by location, age, sex, and setting (community vs. incarcerated)
-   * - Transition rates (i, r, ti, tf, ts)
+   * - Transition rates (i, r, ti, td, ts)
      - NumPyro DisMod-AT-like model
      - Internally consistent transition rates
      - Estimated using Bayesian model that integrates GBD prevalence, treatment coverage, and other available data to solve for consistent set of transition rates
@@ -505,7 +505,7 @@ Data Sources
 Estimation of Transition Rates Using NumPyro/DisMod-AT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A key challenge in parameterizing this model is that GBD 2023 does not directly provide all required transition rates (particularly natural remission *r*, treatment initiation *ti*, treatment discontinuation *tf*, and treatment-associated recovery *ts*). To address this, we use a **NumPyro implementation of a DisMod-AT-like model**.
+A key challenge in parameterizing this model is that GBD 2023 does not directly provide all required transition rates (particularly natural remission *r*, treatment initiation *ti*, treatment discontinuation *td*, and treatment-associated recovery *ts*). To address this, we use a **NumPyro implementation of a DisMod-AT-like model**.
 
 **Methodology**
 
@@ -528,7 +528,7 @@ DisMod-AT (Disease Model – Age-and-Time) is a Bayesian meta-analytic tool desi
    - Internal consistency constraints (prevalence, incidence, remission, and mortality must be mutually consistent in steady-state or dynamic equilibrium)
    - Prior distributions based on literature and expert knowledge
 
-4. **Output**: Produces full posterior distributions for all transition rates (*i*, *r*, *ti*, *tf*, *ts*) that:
+4. **Output**: Produces full posterior distributions for all transition rates (*i*, *r*, *ti*, *td*, *ts*) that:
 
    - Are internally consistent across all model states
    - Match observed prevalence and treatment coverage patterns
@@ -577,7 +577,7 @@ Several factors may modify transition rates in the OUD model:
   - Outreach and engagement services
   - May be decreased by barriers to treatment (stigma, transportation, cost)
 
-- **Treatment Discontinuation (tf)**: May be reduced by:
+- **Treatment Discontinuation (td)**: May be reduced by:
 
   - Interventions improving treatment retention
   - Integrated behavioral health services
