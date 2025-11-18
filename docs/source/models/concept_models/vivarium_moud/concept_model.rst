@@ -80,9 +80,9 @@ By allowing the simulation of interventions individually and, crucially, *in com
 
 The core of this simulation is the Opioid Use Disorder (OUD) cause model, which represents the epidemiology and natural history of OUD using a three-state compartmental model. This model captures the states of **susceptible** (no OUD), **with_condition** (untreated OUD), and **on_treatment** (receiving Medications for Opioid Use Disorder, or MOUD).
 
-For complete documentation of the OUD cause model, including detailed state definitions, transition rates, GBD 2021 alignment, parameter estimation methodology, and data sources, please see:
+For complete documentation of the OUD cause model, including detailed state definitions, transition rates, GBD 2023 alignment, parameter estimation methodology, and data sources, please see:
 
-:ref:`Opioid Use Disorder Cause Model <2021_cause_opioid_use_disorder>`
+:ref:`Opioid Use Disorder Cause Model <2023_cause_opioid_use_disorder>`
 
 **Key Model Features**
 
@@ -90,7 +90,7 @@ The OUD cause model is a compartmental state-transition model with:
 
 - **Three states**: susceptible, with_condition (untreated OUD), and on_treatment (receiving MOUD)
 - **Five transitions**: incidence (i), natural remission (r), treatment initiation (ti), treatment discontinuation (tf), and treatment-associated recovery (ts)
-- **GBD 2021 alignment**: Parameterization consistent with Global Burden of Disease 2021 estimates for OUD prevalence, incidence, remission, and excess mortality
+- **GBD 2023 alignment**: Parameterization consistent with Global Burden of Disease 2023 estimates for OUD prevalence, incidence, remission, and excess mortality
 - **Treatment representation**: Explicit modeling of MOUD engagement and outcomes
 - **DisMod-AT methodology**: Transition rates estimated using a NumPyro implementation of DisMod-AT-like Bayesian inference to ensure internal consistency
 

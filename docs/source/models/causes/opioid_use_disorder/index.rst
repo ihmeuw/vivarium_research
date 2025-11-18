@@ -29,7 +29,7 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _2021_cause_opioid_use_disorder:
+.. _2023_cause_opioid_use_disorder:
 
 =======================
 Opioid Use Disorder
@@ -105,23 +105,25 @@ OUD typically follows a chronic course characterized by:
 
 **Relapse**: OUD has a high relapse rate, with many individuals experiencing multiple cycles of recovery and return to active use. Relapse risk is elevated during periods of stress, environmental triggers, co-occurring mental health symptoms, and following treatment discontinuation.
 
-GBD 2021 Modeling Strategy
+GBD 2023 Modeling Strategy
 ---------------------------
 
-GBD 2021 Definition and Diagnostic Criteria
+GBD 2023 Definition and Diagnostic Criteria
 ++++++++++++++++++++++++++++++++++++++++++++
 
-The Global Burden of Disease (GBD) 2021 study defines opioid use disorders based on the International Classification of Diseases, 10th revision (ICD-10) and the Diagnostic and Statistical Manual of Mental Disorders, 4th edition, text revision (DSM-IV-TR) criteria for opioid dependence and harmful use.
+The Global Burden of Disease (GBD) 2023 study defines opioid use disorders based on the International Classification of Diseases, 10th revision (ICD-10) and the Diagnostic and Statistical Manual of Mental Disorders, 5th edition (DSM-5) criteria for opioid use disorder.
+
+**Note on Diagnostic Criteria Evolution**: Earlier GBD iterations (through GBD 2019) primarily used DSM-IV-TR criteria, which distinguished between "substance abuse" and "substance dependence" as separate disorders. DSM-5 (published 2013) combined these into a single "substance use disorder" with severity levels (mild, moderate, severe) based on the number of criteria met (2-3 criteria = mild; 4-5 = moderate; 6+ = severe). DSM-5 also removed the "legal problems" criterion and added "craving" as a new criterion. GBD 2023 likely incorporates DSM-5 criteria, though the core epidemiological estimates remain comparable to earlier iterations as the underlying diagnostic constructs are similar.
 
 The GBD definition includes:
 
 - **Opioid dependence**: A cluster of behavioral, cognitive, and physiological phenomena developing after repeated opioid use, including a strong desire to use opioids, difficulties controlling use, withdrawal symptoms, tolerance, neglect of alternative activities, and persistent use despite harmful consequences
 - **Harmful use of opioids**: A pattern of opioid use causing damage to physical or mental health in the absence of dependence
 
-GBD 2021 Non-Fatal Modeling Strategy
+GBD 2023 Non-Fatal Modeling Strategy
 +++++++++++++++++++++++++++++++++++++
 
-The GBD 2021 study uses DisMod-MR 2.1, a Bayesian meta-regression tool, to estimate the epidemiology of opioid use disorder. DisMod-MR 2.1 integrates diverse data sources to produce internally consistent estimates of key epidemiological parameters.
+The GBD 2023 study uses DisMod-MR 2.1, a Bayesian meta-regression tool, to estimate the epidemiology of opioid use disorder. DisMod-MR 2.1 integrates diverse data sources to produce internally consistent estimates of key epidemiological parameters. The methodological approach in GBD 2023 is largely consistent with GBD 2021, continuing to use the same core modeling framework while incorporating updated data through 2023.
 
 **Key Epidemiological Parameters**
 
@@ -132,11 +134,11 @@ DisMod-MR 2.1 estimates the following parameters for opioid use disorder:
 3. **Remission**: The rate at which individuals with OUD transition to a non-disorder state
 4. **Excess mortality**: The elevated mortality risk associated with OUD beyond background mortality
 
-These parameters are estimated by age, sex, location, and year (1990-2021) and are constrained to be internally consistent through the DisMod-MR 2.1 modeling framework.
+These parameters are estimated by age, sex, location, and year (1990-2023) and are constrained to be internally consistent through the DisMod-MR 2.1 modeling framework.
 
 **Data Sources**
 
-The GBD 2021 estimates incorporate data from:
+The GBD 2023 estimates incorporate data from:
 
 - Population-based surveys and epidemiological studies
 - Treatment records and registry data
@@ -146,7 +148,7 @@ The GBD 2021 estimates incorporate data from:
 
 **Severity Distribution**
 
-GBD 2021 estimates the proportion of OUD cases that are asymptomatic (assigned a disability weight of 0) versus symptomatic. Disability weights for symptomatic OUD reflect the impact on health-related quality of life.
+GBD 2023 estimates the proportion of OUD cases that are asymptomatic (assigned a disability weight of 0) versus symptomatic. Disability weights for symptomatic OUD reflect the impact on health-related quality of life.
 
 .. list-table:: Severity Distribution for Opioid Use Disorder
    :widths: 20 40 15
@@ -162,7 +164,7 @@ GBD 2021 estimates the proportion of OUD cases that are asymptomatic (assigned a
      - Has an intense and constant craving for opioids and has severe problems with personal relationships and work
      - 0.549 (0.368-0.713)
 
-GBD 2021 Fatal Modeling Strategy
+GBD 2023 Fatal Modeling Strategy
 +++++++++++++++++++++++++++++++++
 
 Fatal burden from OUD is estimated through two pathways:
@@ -183,7 +185,7 @@ The excess mortality rate for OUD is calculated as the ratio of cause-specific m
 Restrictions
 ++++++++++++
 
-.. list-table:: GBD 2021 Cause Restrictions for Opioid Use Disorder
+.. list-table:: GBD 2023 Cause Restrictions for Opioid Use Disorder
    :widths: 15 15 20
    :header-rows: 1
 
@@ -221,7 +223,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-This cause model represents opioid use disorder as a three-state compartmental model capturing susceptibility, active disorder, and treatment states. The model is designed to be compatible with GBD 2021 estimates while allowing for simulation of treatment interventions (Medications for Opioid Use Disorder, or MOUD).
+This cause model represents opioid use disorder as a three-state compartmental model capturing susceptibility, active disorder, and treatment states. The model is designed to be compatible with GBD 2023 estimates while allowing for simulation of treatment interventions (Medications for Opioid Use Disorder, or MOUD).
 
 The model captures:
 
@@ -422,15 +424,15 @@ Data Sources
      - Description
      - Notes
    * - prevalence_c562
-     - GBD 2021 (COMO)
+     - GBD 2023 (COMO)
      - Total prevalence of opioid use disorder
      - Includes both treated and untreated OUD
    * - deaths_c562
-     - GBD 2021 (CoDCorrect)
+     - GBD 2023 (CoDCorrect)
      - Deaths attributed to opioid use disorder
      - Direct OUD deaths; excludes opioid overdose deaths coded separately
    * - population
-     - GBD 2021 (Demography)
+     - GBD 2023 (Demography)
      - Mid-year population by age/sex/location/year
      - Standard GBD population estimates
    * - treatment_coverage
@@ -442,22 +444,22 @@ Data Sources
      - Internally consistent transition rates
      - Estimated using Bayesian model that integrates GBD prevalence, treatment coverage, and other available data to solve for consistent set of transition rates
    * - emr_base
-     - GBD 2021 (DisMod-MR 2.1)
+     - GBD 2023 (DisMod-MR 2.1)
      - Base excess mortality rate for OUD
      - :math:`\text{EMR} = \frac{\text{CSMR}_{\text{c562}}}{\text{prevalence}_{\text{c562}}}`
    * - Disability weights
-     - GBD 2021 (YLD Appendix)
+     - GBD 2023 (YLD Appendix)
      - Disability weights for OUD sequelae
      - Asymptomatic (0) and symptomatic OUD (0.549)
    * - sequelae_c562
-     - GBD 2021 (GBD Mapping)
+     - GBD 2023 (GBD Mapping)
      - Sequelae for opioid use disorder
      - Asymptomatic and symptomatic opioid dependence
 
 Estimation of Transition Rates Using NumPyro/DisMod-AT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A key challenge in parameterizing this model is that GBD 2021 does not directly provide all required transition rates (particularly natural remission *r*, treatment initiation *ti*, treatment discontinuation *tf*, and treatment-associated recovery *ts*). To address this, we use a **NumPyro implementation of a DisMod-AT-like model**.
+A key challenge in parameterizing this model is that GBD 2023 does not directly provide all required transition rates (particularly natural remission *r*, treatment initiation *ti*, treatment discontinuation *tf*, and treatment-associated recovery *ts*). To address this, we use a **NumPyro implementation of a DisMod-AT-like model**.
 
 **Methodology**
 
@@ -467,10 +469,10 @@ DisMod-AT (Disease Model – Age-and-Time) is a Bayesian meta-analytic tool desi
 
 2. **Input Data**: Incorporates:
 
-   - GBD 2021 prevalence estimates for OUD
+   - GBD 2023 prevalence estimates for OUD
    - Treatment coverage ratios (proportion of OUD cases receiving MOUD)
-   - GBD 2021 incidence estimates (as prior/constraint)
-   - Excess mortality estimates from GBD 2021
+   - GBD 2023 incidence estimates (as prior/constraint)
+   - Excess mortality estimates from GBD 2023
    - Literature-based estimates or assumptions about remission and treatment rates
 
 3. **Bayesian Inference**: Uses Markov Chain Monte Carlo (MCMC) sampling to estimate the posterior distribution of all transition rates conditional on:
@@ -578,13 +580,13 @@ Validation Criteria
 
 Model validation should compare simulated outputs to reference data:
 
-1. **Prevalence**: Total OUD prevalence in the simulation (C + T states) should match GBD 2021 prevalence estimates within uncertainty bounds
+1. **Prevalence**: Total OUD prevalence in the simulation (C + T states) should match GBD 2023 prevalence estimates within uncertainty bounds
 
 2. **Treatment Coverage**: The proportion of individuals with OUD in the treatment state (T / (C + T)) should match observed treatment coverage ratios
 
-3. **Cause-Specific Mortality**: Deaths attributed to OUD in the simulation should match GBD 2021 CSMR estimates
+3. **Cause-Specific Mortality**: Deaths attributed to OUD in the simulation should match GBD 2023 CSMR estimates
 
-4. **Incidence**: Population incidence rate (transitions from S to C) should be consistent with GBD 2021 incidence estimates
+4. **Incidence**: Population incidence rate (transitions from S to C) should be consistent with GBD 2023 incidence estimates
 
 5. **Age Patterns**: Age-specific prevalence and incidence should follow observed patterns from GBD and epidemiological studies
 
@@ -630,6 +632,85 @@ Excess mortality can be stratified by:
 - Treatment status
 - Time since treatment discontinuation (elevated risk immediately post-treatment)
 
+**Polysubstance Use Modeling**
+
+The model can be extended to capture polysubstance use, particularly the co-occurring use of opioids with other substances such as methamphetamine, cocaine, benzodiazepines, or alcohol. This is epidemiologically and clinically important, as:
+
+- Between 1992 and 2017, treatment admissions involving opioid/methamphetamine co-use increased by 10.1 percentage points
+- From 1999 to 2020, overdose deaths from combined psychostimulants (primarily methamphetamine) and opioids increased from 187 to 14,777 deaths
+- Polysubstance use is associated with treatment discontinuation, increased overdose risk, and distinct patterns of healthcare utilization
+
+**Extension Approaches for Polysubstance Use**:
+
+1. **Joint State Space**: Create a multidimensional state space capturing OUD status (susceptible, with_condition, on_treatment) crossed with other substance use disorders (e.g., methamphetamine use disorder states). This allows modeling of transitions between substance use patterns (e.g., opioid-only use → concurrent opioid-methamphetamine use).
+
+2. **Risk Stratification**: Stratify the "with_condition" and "on_treatment" states by polysubstance use status:
+
+   - Opioid use only
+   - Opioid + stimulant use (methamphetamine, cocaine)
+   - Opioid + sedative use (benzodiazepines, alcohol)
+   - Multiple substance combinations
+
+3. **Modified Transition Rates**: Polysubstance use affects transition rates:
+
+   - **Incidence**: Higher risk of developing OUD among individuals already using other substances
+   - **Treatment initiation**: May be lower due to increased severity/complexity
+   - **Treatment discontinuation**: Higher rates with concurrent stimulant use
+   - **Mortality**: Substantially elevated with concurrent use (especially opioids + benzodiazepines or opioids + stimulants)
+
+4. **Treatment Effectiveness Modification**: MOUD effectiveness may differ for individuals with polysubstance use, requiring different parameterization of treatment success/discontinuation rates.
+
+**Modeling Framework Options**:
+
+- **Compartmental models**: Most commonly used (36% of opioid epidemic models) for tracking population flows
+- **Markov models**: Account for state transitions with memory (20% of models)
+- **System dynamics models**: Capture feedback loops between substance use patterns (16% of models)
+- **Agent-based models**: Allow individual-level heterogeneity in polysubstance trajectories (16% of models)
+
+**Casual Use and Subclinical States**
+
+The base model focuses on opioid use disorder (OUD) as defined by DSM-5 criteria (≥2 symptoms). However, the model can be extended to capture casual/recreational opioid use that does not meet diagnostic criteria for OUD:
+
+**Extension Approaches for Casual Use**:
+
+1. **Four-State Model**: Add a "casual use" state representing non-disordered opioid use:
+
+   - **Susceptible/Never Used**: No history of opioid use
+   - **Casual Use**: Recreational/occasional opioid use without meeting OUD criteria (<2 DSM-5 symptoms)
+   - **OUD (Untreated)**: Meets diagnostic criteria for OUD (≥2 symptoms), not receiving treatment
+   - **OUD (On Treatment)**: Receiving MOUD
+
+2. **Transition Pathways**:
+
+   - Susceptible → Casual Use (initiation of non-disordered use)
+   - Casual Use → Susceptible (cessation before developing disorder)
+   - Casual Use → OUD Untreated (escalation/transition to disorder)
+   - OUD Untreated → Casual Use (partial recovery/harm reduction)
+
+3. **Frequency-Dependent Modeling**: Use continuous or ordinal measures of use frequency as predictors of transition to dependence:
+
+   - Research shows a **sigmoid pattern** of dependence probability as a function of use frequency
+   - Empirical dependence probabilities can be estimated using Hill functions with governing parameters (PD50 = frequency at which 50% develop dependence)
+   - This approach allows modeling the transition from first use → regular use → dependence onset
+
+4. **Clinical Significance**:
+
+   - **Prevalence**: Among lifetime drug users, only ~15-68% (varies by substance) develop dependence
+   - **Intervention Targeting**: Casual use states may benefit from harm reduction and early intervention rather than intensive treatment
+   - **Overdose Risk**: Casual users face overdose risk (especially with fentanyl contamination) despite not meeting diagnostic criteria
+
+5. **Data Requirements**:
+
+   - National surveys (e.g., NSDUH) distinguish between "use in past year," "use disorder," and intermediate levels
+   - Transition probabilities from casual use to disorder are substance-specific and poorly characterized for opioids
+   - Age of initiation, frequency of use, and route of administration are key predictors of transition to disorder
+
+**Methodological Considerations**:
+
+- The distinction between casual use (DSM-5 0-1 symptoms), mild OUD (2-3 symptoms), moderate OUD (4-5 symptoms), and severe OUD (6+ symptoms) can be operationalized using ordinal severity states
+- DSM-5's elimination of the abuse/dependence distinction and creation of a unified disorder with severity levels supports a continuous or graded state representation
+- Modeling casual use requires data on non-clinical populations, which may be underrepresented in treatment-seeking samples used to parameterize traditional models
+
 **Integration with Other Models**
 
 This OUD cause model can be integrated with other simulation components:
@@ -642,9 +723,10 @@ This OUD cause model can be integrated with other simulation components:
 References
 ----------
 
-.. [GBD-2021-Capstone-Opioid]
-   Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2021 (GBD 2021).
-   Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2024.
+.. [GBD-2023-Capstone-Opioid]
+   Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2023 (GBD 2023).
+   Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2025.
+   Available at: https://www.healthdata.org/research-analysis/gbd
 
 .. [DisMod-Methods]
    James SL, Abate D, Abate KH, et al. Global, regional, and national incidence, prevalence, and years lived with disability for 354 diseases and injuries for 195 countries and territories, 1990–2017: a systematic analysis for the Global Burden of Disease Study 2017. Lancet. 2018;392(10159):1789-1858.
@@ -666,3 +748,21 @@ References
 
 .. [Friedman-2022]
    Friedman J, Beletsky L. The Opioid Epidemic: Prevention, Treatment, and Recovery. Annu Rev Public Health. 2022;43:311-337.
+
+.. [Jalal-2020]
+   Jalal H, Buchanich JM, Roberts MS, et al. A Systematic Review of Simulation Models to Track and Address the Opioid Crisis. JAMA Netw Open. 2022;5(4):e2237541.
+
+.. [Ciccarone-2019]
+   Ciccarone D. The triple wave epidemic: Supply and demand drivers of the US opioid overdose crisis. Int J Drug Policy. 2019;71:183-188.
+
+.. [Jones-2020]
+   Jones CM, Olsen EO, O'Donnell J, Mustaquim D. Resurgent methamphetamine use at treatment admission in the United States, 2008-2017. Am J Public Health. 2020;110(4):509-516.
+
+.. [Ellis-2018]
+   Ellis MS, Kasper ZA, Cicero TJ. Twin epidemics: The surging rise of methamphetamine use in chronic opioid users. Drug Alcohol Depend. 2018;193:14-20.
+
+.. [Anthony-2005]
+   Anthony JC, Warner LA, Kessler RC. Comparative epidemiology of dependence on tobacco, alcohol, controlled substances, and inhalants: basic findings from the National Comorbidity Survey. Exp Clin Psychopharmacol. 1994;2(3):244-268.
+
+.. [Lopez-Quintero-2011]
+   Lopez-Quintero C, Pérez de los Cobos J, Hasin DS, et al. Probability and predictors of transition from first use to dependence on nicotine, alcohol, cannabis, and cocaine: results of the National Epidemiologic Survey on Alcohol and Related Conditions (NESARC). Drug Alcohol Depend. 2011;115(1-2):120-130.
