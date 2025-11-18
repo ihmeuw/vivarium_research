@@ -62,7 +62,7 @@ Opioid Use Disorder
 Disease Overview
 ++++++++++++++++
 
-Opioid Use Disorder (OUD) is a chronic, relapsing substance use disorder characterized by a problematic pattern of opioid use leading to clinically significant impairment or distress. Opioids include prescription pain relievers (e.g., oxycodone, hydrocodone), synthetic opioids (e.g., fentanyl), and illicit drugs (e.g., heroin).
+Opioid Use Disorder (OUD) is a chronic, relapsing substance use disorder characterized by a problematic pattern of opioid use leading to clinically significant impairment or distress. [Friedman-2022]_ Opioids include prescription pain relievers (e.g., oxycodone, hydrocodone), synthetic opioids (e.g., fentanyl), and illicit drugs (e.g., heroin).
 
 **Clinical Definitions**: Clinical practice has evolved from DSM-IV-TR (which distinguishes "opioid abuse" from "opioid dependence") to DSM-5 (which combines these into a single "opioid use disorder" with severity levels). However, GBD 2023 modeling continues to use DSM-IV-TR criteria for consistency with historical data and international diagnostic standards.
 
@@ -93,7 +93,7 @@ OUD typically follows a chronic course characterized by:
 
 **Initiation**: Initial opioid exposure may occur through legitimate medical use (prescription opioids for pain management) or recreational/illicit use. The transition from initial use to regular use and dependence varies considerably among individuals based on genetic, environmental, and social factors.
 
-**Active Use**: Characterized by regular opioid consumption, development of tolerance, and potential physiological dependence. Individuals may experience escalating use patterns, switching between different opioid types (e.g., from prescription opioids to heroin or fentanyl), and transitions from non-injection to injection use.
+**Active Use**: Characterized by regular opioid consumption, development of tolerance, and potential physiological dependence. Individuals may experience escalating use patterns, switching between different opioid types (e.g., from prescription opioids to heroin or fentanyl), and transitions from non-injection to injection use. [Ciccarone-2019]_
 
 **Complications**: OUD is associated with significant morbidity and mortality, including:
 
@@ -102,10 +102,10 @@ OUD typically follows a chronic course characterized by:
 - Mental health comorbidities (depression, anxiety, post-traumatic stress disorder)
 - Social consequences (housing instability, incarceration, unemployment, family disruption)
 
-**Recovery**: Recovery from OUD can occur through various pathways:
+**Recovery**: Recovery from OUD can occur through various pathways: [Degenhardt-2019]_
 
 - Spontaneous or natural recovery (remission without formal treatment)
-- Medication-assisted treatment (also called Medications for Opioid Use Disorder or MOUD) using buprenorphine, methadone, or naltrexone
+- Medication-assisted treatment (also called Medications for Opioid Use Disorder or MOUD) using buprenorphine, methadone, or naltrexone [SAMHSA-MOUD]_
 - Behavioral therapies and psychosocial support
 - Integrated treatment combining medications and behavioral interventions
 
@@ -117,7 +117,7 @@ GBD 2023 Modeling Strategy
 GBD 2023 Definition and Diagnostic Criteria
 --------------------------------------------
 
-The Global Burden of Disease (GBD) 2023 study defines opioid use disorders as "a maladaptive pattern of opioid abuse, leading to clinically significant impairment or distress that includes symptoms of dependence, such as withdrawal symptoms or progressive tolerance." The GBD disease modeling includes cases that meet the diagnostic criteria for opioid dependence as defined by the Diagnostic and Statistical Manual of Mental Disorders, 4th edition, text revision (DSM-IV-TR) and the International Classification of Diseases (ICD-9 and ICD-10).
+The Global Burden of Disease (GBD) 2023 study defines opioid use disorders as "a maladaptive pattern of opioid abuse, leading to clinically significant impairment or distress that includes symptoms of dependence, such as withdrawal symptoms or progressive tolerance." [GBD-2023-Capstone-Opioid]_ The GBD disease modeling includes cases that meet the diagnostic criteria for opioid dependence as defined by the Diagnostic and Statistical Manual of Mental Disorders, 4th edition, text revision (DSM-IV-TR) and the International Classification of Diseases (ICD-9 and ICD-10).
 
 **Diagnostic Codes**: DSM-IV and ICD-9 codes (304.0, 305.5, 965.0, 970.1, E850.0, E935, E940.1) and ICD-10 codes (F11.2, T14.0, Z79.8), excluding cases attributed to a general medical condition.
 
@@ -142,7 +142,7 @@ The Global Burden of Disease (GBD) 2023 study defines opioid use disorders as "a
 GBD 2023 Non-Fatal Modeling Strategy
 -------------------------------------
 
-The GBD 2023 study uses DisMod-MR 2.1, a Bayesian meta-regression tool, to estimate the epidemiology of opioid use disorder. DisMod-MR 2.1 integrates diverse data sources to produce internally consistent estimates of key epidemiological parameters.
+The GBD 2023 study uses DisMod-MR 2.1, a Bayesian meta-regression tool, to estimate the epidemiology of opioid use disorder. [DisMod-Methods]_ DisMod-MR 2.1 integrates diverse data sources to produce internally consistent estimates of key epidemiological parameters.
 
 **Key Epidemiological Parameters**
 
@@ -406,7 +406,7 @@ States Data
    * - T
      - Excess mortality rate (EMR)
      - 0 or reduced value
-     - MOUD substantially reduces mortality risk; may be set to 0 to reflect protective effect of treatment
+     - MOUD substantially reduces mortality risk [Sordo-2017]_ [Santo-2021]_; may be set to 0 to reflect protective effect of treatment
    * - S
      - Disability weight
      - 0
@@ -418,7 +418,7 @@ States Data
    * - T
      - Disability weight
      - 0 or reduced value
-     - MOUD substantially reduces disability; may be set to 0 to reflect treatment effectiveness
+     - MOUD substantially reduces disability [Wakeman-2020]_; may be set to 0 to reflect treatment effectiveness
 
 Transition Data
 ~~~~~~~~~~~~~~~
@@ -680,9 +680,9 @@ Excess mortality can be stratified by:
 
 **Polysubstance Use Modeling**
 
-The model can be extended to capture polysubstance use, particularly the co-occurring use of opioids with other substances such as methamphetamine, cocaine, benzodiazepines, or alcohol. This is epidemiologically and clinically important, as:
+The model can be extended to capture polysubstance use, particularly the co-occurring use of opioids with other substances such as methamphetamine, cocaine, benzodiazepines, or alcohol. This is epidemiologically and clinically important, as: [Ellis-2018]_
 
-- Between 1992 and 2017, treatment admissions involving opioid/methamphetamine co-use increased by 10.1 percentage points
+- Between 1992 and 2017, treatment admissions involving opioid/methamphetamine co-use increased by 10.1 percentage points [Jones-2020]_
 - From 1999 to 2020, overdose deaths from combined psychostimulants (primarily methamphetamine) and opioids increased from 187 to 14,777 deaths
 - Polysubstance use is associated with treatment discontinuation, increased overdose risk, and distinct patterns of healthcare utilization
 
@@ -706,7 +706,7 @@ The model can be extended to capture polysubstance use, particularly the co-occu
 
 4. **Treatment Effectiveness Modification**: MOUD effectiveness may differ for individuals with polysubstance use, requiring different parameterization of treatment success/discontinuation rates.
 
-**Modeling Framework Options**:
+**Modeling Framework Options**: [Jalal-2020]_
 
 - **Compartmental models**: Most commonly used (36% of opioid epidemic models) for tracking population flows
 - **Markov models**: Account for state transitions with memory (20% of models)
@@ -741,14 +741,14 @@ The base model focuses on opioid use disorder (OUD) as defined by DSM-IV-TR crit
 
 4. **Clinical Significance**:
 
-   - **Prevalence**: Among lifetime drug users, only ~15-68% (varies by substance) develop dependence
+   - **Prevalence**: Among lifetime drug users, only ~15-68% (varies by substance) develop dependence [Anthony-2005]_
    - **Intervention Targeting**: Casual use states may benefit from harm reduction and early intervention rather than intensive treatment
    - **Overdose Risk**: Casual users face overdose risk (especially with fentanyl contamination) despite not meeting diagnostic criteria
 
 5. **Data Requirements**:
 
    - National surveys (e.g., NSDUH) distinguish between "use in past year," "use disorder," and intermediate levels
-   - Transition probabilities from casual use to disorder are substance-specific and poorly characterized for opioids
+   - Transition probabilities from casual use to disorder are substance-specific and poorly characterized for opioids [Lopez-Quintero-2011]_
    - Age of initiation, frequency of use, and route of administration are key predictors of transition to disorder
 
 **Methodological Considerations**:
