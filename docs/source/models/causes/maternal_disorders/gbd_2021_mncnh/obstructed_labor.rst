@@ -303,11 +303,39 @@ calculations as well as for the calculation of YLDs in the next section.
     * - yld_rate_c370
       - rate of obstructed labor and uterine rupture YLDs per person-year
       - como
-      -
+      - Use this standard value for all locations except Pakistan. For Pakistan, rather than loading GBD data, use the values in the csv file here ``/mnt/team/simulation_science/pub/models/vivarium_gates_mncnh/data/pakistan_obstructed_labor_yld_rate.csv``. See note below this table for a detailed explanation.
     * - ylds_per_case_c370
       - YLDs per case of obstructed labor and uterine rupture
       - yld_rate_c370 / incidence_c370
-      -
+      - 
+
+The GBD model of the maternal obstructed labor and uterine rupture cause involves estimation 
+of fistula impairment burden (inclusive of both rectovaginal and vesicovaginal fistulas). The 
+burden of fistula is estimated for all GBD locations in DISMOD and prior to being run through 
+GBD processes such as COMO, the burden values are overwritten with zeros for a select set of 
+locations that are expected to have zero/negligible burden of fistula (due to prompt surgical 
+correction). In GBD 2021 and GBD 2023, according to a correspondence with the GBD modelers 
+(including Mae Dirac), Pakistan was erroneously included in the list of locations assigned 
+zero burden. This error arose as a result of adding Pakistan subnational locations to the GBD 
+location hierarchy and neglecting to add these new subnational location IDs to the list of 
+locations with non-zero burden (the national Pakistan location ID was on the list, but it was 
+no longer the most detailed location for which burden is directly estimated). Therefore, the 
+GBD estimates of YLDs due to the maternal obstructed labor and uterine rupture cause is 
+underestimated.
+
+To address this, we have examined the typical age-specific ratio of YLDs due to maternal 
+obstructed labor and uterine rupture cause relative to the fistula prevalence from DISMOD 
+prior to overwriting certain locations with zeros (representing the prevalence-weighted 
+average COMO-adjusted disability weight of rectovaginal and vesicovaginal fistulas). We then 
+multiply these values by the DISMOD prevalence of fistula in Pakistan to achieve an estimate 
+of YLDs due to fistula (s189 and s190) per person-year. We then add this to the YLD rate for 
+the remaining sequela of maternal obstructed labor and uterine rupture (obstructed labor, 
+acute event, s188) to obtain the yld_rate_c370 parameter value. 
+
+The calculations to obtain these values are performed in the `notebook linked here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/fistula_in_pakistan.ipynb>`__. 
+Note that this notebook is housed in the research repository rather than simulation 
+repository because this calculation is not expected to be generalized or repeated for other 
+locations or GBD rounds, etc.
 
 Calculating Burden
 ++++++++++++++++++
