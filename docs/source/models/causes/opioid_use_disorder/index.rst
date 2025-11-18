@@ -111,6 +111,21 @@ OUD typically follows a chronic course characterized by:
 
 **Relapse**: OUD has a high relapse rate, with many individuals experiencing multiple cycles of recovery and return to active use. Relapse risk is elevated during periods of stress, environmental triggers, co-occurring mental health symptoms, and following treatment discontinuation.
 
+Simulation Modeling Approaches for OUD
+---------------------------------------
+
+The opioid overdose crisis is driven by an intersecting set of social, structural, and economic forces. Simulation models are a valuable tool to help us understand and address this complex, dynamic, and nonlinear social phenomenon. [Cerda-2022]_ A systematic review of simulation models for opioid use and overdose identified several modeling frameworks used in this domain:
+
+- **Compartmental models** (36% of opioid epidemic models): Track population flows between defined health states (e.g., susceptible, with OUD, on treatment). Most commonly used approach for modeling OUD dynamics at the population level.
+
+- **Markov models** (20% of models): Account for state transitions with memory, allowing transition probabilities to depend on prior states or time spent in current state.
+
+- **System dynamics models** (16% of models): Capture feedback loops and dynamic interactions between substance use patterns, treatment capacity, and policy responses.
+
+- **Agent-based models** (16% of models): Represent individual-level heterogeneity in trajectories, allowing for complex interactions and emergent population-level patterns.
+
+The modeling framework described in this documentation uses a **compartmental model** approach (three-state model: Susceptible, With Condition, On Treatment), which is well-suited for integrating with GBD 2023 estimates and simulating population-level intervention effects. Key methodological considerations for all opioid simulation models include investment in model calibration and validation, transparency in assumptions and mechanics to facilitate reproducibility, and careful attention to potential bias in the choice of parameter inputs.
+
 GBD 2023 Modeling Strategy
 +++++++++++++++++++++++++++
 
@@ -276,7 +291,7 @@ The model captures:
 - Incidence of new OUD cases in the susceptible population
 - Natural remission from untreated OUD
 - Treatment initiation and engagement with MOUD
-- Treatment discontinuation/failure
+- Treatment discontinuation
 - Treatment-associated recovery
 - Excess mortality associated with untreated and treated OUD states
 
@@ -359,7 +374,7 @@ Transitions
      - Treatment initiation rate
      - Rate at which individuals with untreated OUD begin medication treatment (MOUD: methadone, buprenorphine, or naltrexone). This transition represents engagement with formal treatment services.
    * - td
-     - Treatment discontinuation/failure rate
+     - Treatment discontinuation rate
      - Rate at which individuals receiving MOUD discontinue treatment and return to untreated OUD status. This may occur due to medication side effects, loss of access to treatment, patient choice, or other factors.
    * - ts
      - Treatment-associated recovery rate
@@ -705,13 +720,6 @@ The model can be extended to capture polysubstance use, particularly the co-occu
    - **Mortality**: Substantially elevated with concurrent use (especially opioids + benzodiazepines or opioids + stimulants)
 
 4. **Treatment Effectiveness Modification**: MOUD effectiveness may differ for individuals with polysubstance use, requiring different parameterization of treatment success/discontinuation rates.
-
-**Modeling Framework Options**: [Cerda-2022]_
-
-- **Compartmental models**: Most commonly used (36% of opioid epidemic models) for tracking population flows
-- **Markov models**: Account for state transitions with memory (20% of models)
-- **System dynamics models**: Capture feedback loops between substance use patterns (16% of models)
-- **Agent-based models**: Allow individual-level heterogeneity in polysubstance trajectories (16% of models)
 
 **Casual Use and Subclinical States**
 
