@@ -174,7 +174,7 @@ These parameters are estimated by age, sex, location, and year (1990-2023) and a
 Key modeling assumptions in GBD 2023 include:
 
 - **No incidence or excess mortality before age 15**: Minimum age of onset assumption based on expert feedback and literature
-- **No incidence after age 64**: Modeling assumption based on the very low incidence observed at older ages in EMCDDA and other surveillance data
+- **No incidence after age 64**: Modeling assumption based on the very low incidence observed at older ages in  data from the European Monitoring Centre for Drugs and Drug Addiction
 - **Remission upper limit of 0.2**: Consistent with limits in the dataset
 - **Country-level covariates**:
 
