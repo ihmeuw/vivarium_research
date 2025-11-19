@@ -496,7 +496,7 @@ Data Sources
      - Mid-year population by age/sex/location/year
      - Standard GBD population estimates
    * - treatment_coverage
-     - National surveys (NSDUH), treatment records, published studies
+     - ST-GPR model of percentage of dependents in treatment (if we can find it!)
      - Proportion of individuals with OUD receiving MOUD
      - May vary by location, age, sex, and setting (community vs. incarcerated)
    * - Transition rates (i, r, ti, td, ts)
