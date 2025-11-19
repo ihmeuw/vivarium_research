@@ -498,7 +498,7 @@ Data Sources
    * - treatment_coverage
      - ST-GPR model of percentage of dependents in treatment (if we can find it!)
      - Proportion of individuals with OUD receiving MOUD
-     - May vary by location, age, sex, and setting (community vs. incarcerated)
+     - This covariate is mentioned in the description of the IHME-indirect data creation in the Supplementary Appendix section on OUD
    * - Transition rates (i, r, ti, td, ts)
      - NumPyro DisMod-AT-like model
      - Internally consistent transition rates
