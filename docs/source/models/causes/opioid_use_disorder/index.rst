@@ -650,7 +650,7 @@ Model validation should compare simulated outputs to reference data:
 
 5. **Age Patterns**: Age-specific prevalence and incidence should follow observed patterns from GBD and epidemiological studies
 
-6. **Temporal Trends**: If simulating multiple years, trends in prevalence, incidence, and mortality should match observed temporal patterns
+6. **Temporal Trends**: Trends in prevalence, incidence, and mortality should match observed temporal patterns
 
 Extensions and Modifications
 -----------------------------
