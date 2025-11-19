@@ -134,7 +134,6 @@ GBD 2023 Definition and Diagnostic Criteria
 
 The Global Burden of Disease (GBD) 2023 study defines opioid use disorders as "a maladaptive pattern of opioid abuse, leading to clinically significant impairment or distress that includes symptoms of dependence, such as withdrawal symptoms or progressive tolerance." [GBD-2023-Overview]_ The GBD disease modeling includes cases that meet the diagnostic criteria for opioid dependence as defined by the Diagnostic and Statistical Manual of Mental Disorders, 4th edition, text revision (DSM-IV-TR) and the International Classification of Diseases (ICD-9 and ICD-10).
 
-**Diagnostic Codes**: The GBD disease modeling includes cases that meet the diagnostic criteria for opioid dependence as defined by DSM-IV-TR and ICD-9/ICD-10 substance use codes, primarily ICD-9 304.0 (opioid dependence) and 305.5 (opioid abuse) and ICD-10 F11.x (mental and behavioral disorders due to use of opioids). Opioid poisoning codes (e.g., ICD-9 965.0, E850.0-E850.2; ICD-10 T40.x) are used in overdose models rather than the chronic OUD cause.
 
 **DSM-IV-TR Diagnostic Criteria**: To meet the DSM-IV-TR criteria for opioid dependence, at least **three of the following seven symptoms** must be experienced within the same 12-month period:
 
