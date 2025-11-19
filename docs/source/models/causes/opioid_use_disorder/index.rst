@@ -179,7 +179,7 @@ Key modeling assumptions in GBD 2023 include:
 - **Country-level covariates**:
 
   - Age-standardized prevalence of intravenous drug use (IDU) for prevalence
-  - Log-transformed estimates of defined daily doses for statistical purposes (SDDD) of prescribed opioid analgesics (consumption per day per million population)
+  - Log-transformed estimates of defined daily doses for statistical purposes (SDDD) of prescribed opioid analgesics (consumption per day per million population) for prevalence
   - Intravenous drug use as covariate for excess mortality rate (EMR)
 
 **Data Sources**
