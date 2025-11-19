@@ -89,7 +89,7 @@ For complete documentation of the OUD cause model, including detailed state defi
 The OUD cause model is a compartmental state-transition model with:
 
 - **Three states**: susceptible, with_condition (untreated OUD), and on_treatment (receiving MOUD)
-- **Five transitions**: incidence (i), natural remission (r), treatment initiation (ti), treatment discontinuation (tf), and treatment-associated recovery (ts)
+- **Five transitions**: incidence (i), natural remission (r), treatment initiation (ti), treatment discontinuation (td), and treatment-associated recovery (ts)
 - **GBD 2023 alignment**: Parameterization consistent with Global Burden of Disease 2023 estimates for OUD prevalence, incidence, remission, and excess mortality
 - **Treatment representation**: Explicit modeling of MOUD engagement and outcomes
 - **DisMod-AT methodology**: Transition rates estimated using a NumPyro implementation of DisMod-AT-like Bayesian inference to ensure internal consistency
@@ -170,32 +170,18 @@ Transitions between these states occur based on defined rates:
 Key features and interactions of this submodel include:
 
 - **Interdependence with OUD Status:** Transition rates *within* this Quarters Model (e.g., ``pr_uh``, ``uh_inc``) may be influenced by the individual's state in the Core Disease Model (susceptible, with condition, on treatment). For example, individuals with untreated OUD might have a higher rate of becoming unhoused.  See below for details on how this is implemented using the :code:`RiskEffect` component.
-- **Influence on OUD Transitions:** Conversely, an individual's state in the Quarters Model can affect transition rates *within* the Core Disease Model. For instance, being unhoused or incarcerated might increase OUD incidence risk (``i``), decrease treatment initiation rates (``ti``), or increase treatment failure rates (``tf``). See below for details on how this is implemented using the :code:`RiskEffect` component.
+- **Influence on OUD Transitions:** Conversely, an individual's state in the Quarters Model can affect transition rates *within* the Core Disease Model. For instance, being unhoused or incarcerated might increase OUD incidence risk (``i``), decrease treatment initiation rates (``ti``), or increase treatment discontinuation rates (``td``). See below for details on how this is implemented using the :code:`RiskEffect` component.
 - **Parameterization:** Rates need to be parameterized using available data sources on housing instability, homelessness, incarceration, and release patterns, potentially stratified by relevant demographic factors and OUD status where data permits.
 
 
 4 Data Notes
 ++++++++++++
 
-Parameterizing the MOUD simulation requires integrating data from various sources to define initial population states and the transition rates governing movement between states in both the Core Disease Model and the Quarters Model. Key data requirements and methodologies include:
+Parameterizing the MOUD simulation requires integrating data from various sources to define initial population states and the transition rates governing movement between states in both the Core Disease Model and the Quarters Model. For details on Core Disease Model parameters (OUD prevalence, treatment coverage, transition rates, and the NumPyro/DisMod-AT methodology), see the :ref:`Opioid Use Disorder Cause Model <2023_cause_opioid_use_disorder>` documentation.
 
-4.1 Core Disease Model Parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Key data requirements and methodologies for the simulation include:
 
-The Core Disease Model requires estimates for:
-
-* **Overall OUD Prevalence:** Sourced from the most recent Global Burden of Disease (GBD) Study, specifying the relevant year and location.
-* **Treatment Coverage Ratios:** Data on the proportion of individuals with OUD who are receiving MOUD. Sources may include national surveys (e.g., NSDUH), jail healthcare system data, and HIV surveillance studies.
-* **Transition Rates:** Estimates for disease incidence (``i``), untreated remission (``r``), treatment initiation (``ti``), treatment failure (``tf``), and treatment success (``ts``).
-
-A significant challenge is that not all required transition rates (particularly untreated remission, ``r``, as well as all treatment-related rates) are directly available from GBD. We want these rates, and we want them to be be internally consistent over time.
-
-To address this, we have used a novel **NumPyro implementation of a DisMod-AT-like model**. DisMod-AT (Disease Model -- Age-and-Time) is a Bayesian meta-analytic tool designed to synthesize diverse epidemiological data (e.g., prevalence, incidence, remission, excess mortality/relative risk) to produce a consistent set of transition rates for compartmental disease models.
-
-* **Process:** The NumPyro/DisMod-AT tool is configured with the OUD state model structure (Susceptible, With Condition, On Treatment). Inputs include location-specific data on OUD prevalence, treatment coverage, and GBD estimates of incidence, prevalence, and excess mortality for OUD, as well as data or assumptions about remission and treatment-related rates.
-* **Output:** The tool solves for a full set of internally consistent prevalence and transition rates (``p``, ``i``, ``r``, ``f``, ``ti``, ``tf``, ``ts``) that best fit the input data constraints according to Bayesian principles. This provides a robust estimate for parameters like the untreated remission rate (``r``).
-
-4.2 Quarters Model Parameters
+4.1 Quarters Model Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Quarters Model requires data on the distribution of the population across the three states (Private Residence, Unhoused, Incarcerated) and the transition rates between them (``pr_uh``, ``pr_inc``, ``uh_pr``, ``uh_inc``, ``inc_pr``, ``inc_uh``).
@@ -210,7 +196,7 @@ The Quarters Model requires data on the distribution of the population across th
     * *Exits from Homelessness (``uh_pr``, ``uh_inc``):* HMIS data and longitudinal studies of unhoused individuals are key sources for estimating transitions back to private residence or into incarceration.
 * **Stratification and Interaction:** A critical step involves estimating how these population distributions and transition rates differ based on OUD status (from the Core Disease Model) and demographic factors (age, sex). This often requires analyzing linked data sources (if available), applying relative risks derived from literature, or making informed assumptions due to data scarcity linking OUD directly to housing/incarceration transitions at a population level.
 
-4.3 General Considerations
+4.2 General Considerations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Data from different sources must be reconciled for the specific simulation timeframe, location (e.g., Seattle, King County, Washington State), and population demographics. Significant data processing, harmonization, and potentially imputation may be necessary, particularly for deriving transition rates and stratifying them appropriately. Assumptions made due to data limitations should be clearly documented alongside the model specifications.
