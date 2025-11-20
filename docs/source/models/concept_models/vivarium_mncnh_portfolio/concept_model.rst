@@ -1560,7 +1560,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline; AI-assisted ultrasound scale-up; CPAP and ACS scale-up; CPAP, ACS, and AI-ultrasound scale-up 
     - Default
     - 
-  * - 20.1
+  * - 21.0
     - Hemoglobin refactor
     - Bringing model up to date with the `updated hemoglobin module docs <https://github.com/ihmeuw/vivarium_research/pull/1830>`__ and fixing bugs in "Fix observer stratifications and multiple bugfixes" related to multiple instances of hemoglobin variables that were being inconsistently referenced by different simulation components (See outstanding model verification and validation issues table for full list)
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
@@ -1568,7 +1568,7 @@ Default stratifications to all observers should include scenario and input draw.
     -
   * -
     - Hemoglobin refactor run correction
-    - Same as 20.1 but with specific artifact/code discrepancies described in V&V table addressed
+    - Same as 21.0 but with specific artifact/code discrepancies described in V&V table addressed
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
     - Do not define a measure of "true first trimester hemoglobin exposure" in this version of the model. Otherwise, default.
     - None
@@ -2419,7 +2419,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Outputs look as expected!
     - * `20.1.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/158>`__
       * `20.1.1 results available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/159>`__
-  * - 20.1
+  * - 21.0
     - Hemoglobin refactor
     - Using simulation outputs:
 
@@ -2447,7 +2447,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
   * -
     - Hemoglobin refactor run correction
-    - Same as 20.1
+    - Same as 21.0
     - 
     - 
   * - 
