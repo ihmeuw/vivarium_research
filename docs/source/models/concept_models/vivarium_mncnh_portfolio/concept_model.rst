@@ -318,16 +318,18 @@ Pregnancy component
         * Coverage of IFA/MMS at any time in pregnancy (affects birth outcome, gestational age, birthweight)
         * Coverage of IV iron (affects birth outcome, gestational age, birthweight)
       - * Pregnancy outcome (live birth vs stillbirth vs abortion/miscarriage/ectopic)
-        * Gestational age at end of pregnancy
+        * Gestational age at end of pregnancy, unmodified by interventions
+        * Gestational age at end of pregnancy, modified by interventions
         * Preterm status
         * Sex of infant
-        * Birthweight
+        * Birthweight, unmodified by interventions
+        * Birthweight, modified by interventions
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
           
           * :ref:`LBWSG exposure <2021_risk_exposure_lbwsg>`
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
       - * ANC attendance category
-        * Gestational age at end of pregnancy
+        * Gestational age at end of pregnancy, modified by interventions
       - * Ultrasound type
         * Estimated gestational age
         * Believed preterm status
@@ -407,8 +409,10 @@ Neonatal component
     - Nested subcomponents
   * - :ref:`Neonatal module <2024_vivarium_mncnh_portfolio_neonatal_module>`
     - * Birth facility
-      * Birth weight
-      * Gestational age
+      * Birthweight, modified by interventions
+      * Birthweight, unmodified by interventions
+      * Gestational age at end of pregnancy, modified by interventions
+      * Gestational age at end of pregnancy, unmodified by interventions 
       * RDS intervention propensity
       * Hemoglobin exposure at birth (affects neonatal sepsis)
       * Sex of infant (determines sex-specific mortality rates)
