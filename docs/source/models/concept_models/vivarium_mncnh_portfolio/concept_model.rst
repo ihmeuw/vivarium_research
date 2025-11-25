@@ -328,7 +328,7 @@ Pregnancy component
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
       - * ANC attendance category
         * Gestational age at end of pregnancy
-      - * Ultrasound type
+      - * Ultrasound summary
         * Estimated gestational age
         * Believed preterm status
       - 
