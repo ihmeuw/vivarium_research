@@ -683,7 +683,7 @@ The observed effect of each antenatal supplementation product on the risk of sti
     
     x = np.linspace(0.7, 1.2, 100)
     plt.plot(x, dist.pdf(x), label='Correct distribution')
-    plt.plot(x, dist_alt.pdf(x), label='Errorneous distribution')
+    plt.plot(x, dist_alt.pdf(x), label='Erroneous distribution')
     plt.axvline(dist.mean(), color='tab:blue', linestyle='--')
     plt.axvline(dist_alt.mean(), color='tab:orange', linestyle='--')
     y_val = 13.5
