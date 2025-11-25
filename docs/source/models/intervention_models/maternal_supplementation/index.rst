@@ -663,7 +663,7 @@ The observed effect of each antenatal supplementation product on the risk of sti
   the MMS effect on very preterm birth in [Keats-et-al-2019-maternal-supplementation]_.
   However, it was implemented as written in the nutrition optimization simulation.
 
-  Notably, the function that generates the lognormal distribution (``get_lognorm_from_quantiles``) uses the quantiles to calculate a standard deviation and apply that about the mean rather than use the quantiles directly. Therefore, the transcription error in the confidence interval of the effect of MMS resulted in an overestimation of the uncertainty of this parameter, but did not significantly bias the mean value of the distribution. A comparison of the intended versus errorneous distribution that was used in the simulation and the code used to create it is shown below.
+  Notably, the function that generates the lognormal distribution (``get_lognorm_from_quantiles``) uses the quantiles to calculate a standard deviation and apply that about the mean rather than use the quantiles directly. Therefore, the transcription error in the confidence interval of the effect of MMS resulted in an overestimation of the uncertainty of this parameter, but did not significantly bias the mean value of the distribution. A comparison of the intended versus erroneous distribution that was used in the simulation and the code used to create it is shown below.
 
   .. image:: mms_sb_ci.png
 
