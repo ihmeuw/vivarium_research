@@ -41,7 +41,7 @@ AI Ultrasound Module
 1.0 Overview
 ++++++++++++
 
-This module assesses whether a simulant receives an ultrasound during antenatal care, tracks the details of that care, and outputs a "believed" gestational age for that simulant based on the simulant's real gestational age and the measurement error of the gestational age dating care they recieved. Notably, coverage and type of ultrasounds offered at ANC visits will be scenario-dependent.
+This module assesses whether a simulant receives an ultrasound during antenatal care, tracks the details of that care, and outputs a "believed" gestational age at the end of pregnancy for that simulant based on the simulant's real gestational age at the end of pregnancy and the measurement error of the gestational age dating care they recieved. Notably, coverage and type of ultrasounds offered at ANC visits will be scenario-dependent.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -49,7 +49,7 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
 2.1 Module Diagram
 ----------------------
 
-.. image:: ai_ultrasound_module_diagram.drawio.svg
+.. image:: ai_ultrasound_module_diagram.drawio.png
 
 .. todo::
 
@@ -80,21 +80,17 @@ This module assesses whether a simulant receives an ultrasound during antenatal 
     - Source module
     - Application
     - Note
-  * - ANC attendance
+  * - ANC attendance category
     - :ref:`Antenatal care module <2024_vivarium_mncnh_portfolio_anc_module>`
     - Decision node 1
     - 4-category exposure variable.  As described in the :ref:`facility
       choice model document
       <2024_facility_model_vivarium_mncnh_portfolio>`, ANC attendance is
       correlated with other model variables.
-  * - Gestational age
+  * - Gestational age at end of pregnancy
     - :ref:`Pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     - Action point V
     - Point value in days
-
-.. todo::
-
-  Determine if partial term pregnancies are totally excluded from this decision tree or if we should use pregnancy duration instead of gestational age here
 
 2.3 Module Decision Nodes
 -----------------------------
@@ -160,15 +156,15 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
     - Note
   * - I
     - Record :code:`none` for ultrasound type
-    - Record to output A
+    - Record to output
     - 
   * - II
     - Record :code:`standard` for ultrasound type
-    - Record to output A
+    - Record to output
     - 
   * - III
     - Record :code:`ai_assisted` for ultrasound type
-    - Record to output A
+    - Record to output
     - 
   * - IV
     - Sample random error for estimated gestational age
@@ -180,16 +176,16 @@ We assume 100% of ultrasounds are standard (and 0% are AI-assisted) at baseline.
   * - V
     - Calculate estimated gestational age
     - Add the random GA error from Action point IV to the gestational
-      age from the pregnancy module, and record to output B
+      age from the pregnancy module, and record to output
     - See instructions in section `2.4.1 Calculation of estimated
       gestational age`_ below
   * - VI
     - Record :code:`believed_preterm` for believed preterm status
-    - Record to output C
+    - Record to output
     - corresponds to estimated gestational age < 37 weeks
   * - VII
     - Record :code:`believed_term` for believed preterm status
-    - Record to output C
+    - Record to output
     - corresponds to estimated gestational age 37+ weeks
 
 2.4.1 Calculation of estimated gestational age
@@ -232,15 +228,15 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
   * - Output
     - Value
     - Note
-  * - A. Type of ultrasound received
-    - *none* / *standard* / *AI-assisted*
-    - Used for V&V and for estimation of output B
-  * - B. Estimated gestational age
+  * - Ultrasound type
+    - "none" or "standard" or "AI-assisted"
+    - Used for V&V
+  * - Estimated gestational age
     - Point values in days
-    - Used for V&V, calculation of output C, and determination of
+    - Used for V&V, and determination of
       eligibility for antenatal corticosteroids
-  * - C. Believed preterm status
-    - *believed preterm* / *believed term*
+  * - Believed preterm status
+    - "believed preterm" or "believed term"
     - Used for V&V and for facility choice module in intrapartum component
 
 
@@ -255,7 +251,7 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
 * The data for baseline ultrasound utilization at the ANC is non-ideal for all of the locations. Our data for Ethiopia is most aligned with the value we are trying to find, as it comes from `a paper that
   estimates ultrasound utilization at ANC <https://pmc.ncbi.nlm.nih.gov/articles/PMC8905208/>`_, in a specific municipality of Jimma in Ethiopia. For Nigeria, our literature value is less trustworthy, coming from a paper that reports the percentage of 
   study participants who had previously had an obstetric ultrasound. We were unable to find any value for Pakistan, instead using data from the India DHS 2015-2016 to inform our Pakistan ultrasound coverage.
-  India is probably not a great proxy for Pakistan, as use of ultrasound technology in India is heavily regulated (`see here <https://pmc.ncbi.nlm.nih.gov/articles/PMC5441446/#:~:text=In%20an%20attempt%20to%20curb,to%20facilitate%20sex%E2%80%93selective%20abortions>`__.).
+  India is probably not a great proxy for Pakistan, as use of ultrasound technology in India is heavily regulated (`see here <https://pmc.ncbi.nlm.nih.gov/articles/PMC5441446/#:~:text=In%20an%20attempt%20to%20curb,to%20facilitate%20sex%E2%80%93selective%20abortions>`__).
 
 .. todo::
 

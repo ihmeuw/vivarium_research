@@ -43,7 +43,10 @@ Initial attributes Module
 ++++++++++++
 
 This module assigns initial simulant attributes. Specifically, it
-assigns the three correlated propensities used for the :ref:`delivery
+assigns the pregnant person's age at the end of pregnancy
+and the broad outcome of the pregnancy,
+as well as
+three correlated propensities used for the :ref:`delivery
 facility choice model
 <2024_vivarium_mncnh_portfolio_facility_choice_module>`: Antenatal care
 (ANC) attendance; Low birthweight and short gestation (LBWSG) category;
@@ -54,6 +57,10 @@ in the :ref:`correlated propensities section
 choice model document.
 
 .. _Gaussian copula: https://en.wikipedia.org/wiki/Copula_(statistics)#Gaussian_copula
+
+.. note::
+
+  In later waves of the model, we will add further items that will need to be assigned at initialization including pre-pregnancy BMI, blood pressure and/or hemoglobin levels. We will add further documentation covering how to assign these items at that time. 
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -66,43 +73,50 @@ There is no need for a diagram for the initial attributes module of this simulat
   * - Output
     - Value
     - Dependencies
-  * - A. ANC propensity
+  * - Maternal age at end of pregnancy
+    - See the :ref:`pregnancy demography model document <other_models_pregnancy_demography>` for instructions
+    - Will be used for rates of maternal disorders
+  * - Broad pregnancy outcome
+    - One of "abortion/miscarriage/ectopic" or "live birth/stillbirth", see :ref:`Broad pregnancy outcome <pregnancy_broad_outcome_section>` for instructions
+      on how to choose
+    - Will be used to assign ANC visit, birth outcome (which is the same as broad pregnancy outcome but with live and still births differentiated)
+  * - ANC propensity
     - See the :ref:`correlated propensities
       <facility_choice_correlated_propensities_section>` section of the
       :ref:`facility choice model document
       <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
     - Will be used to determine ANC attendance in ANC module
-  * - B. LBWSG category propensity
+  * - LBWSG category propensity
     - See the :ref:`correlated propensities
       <facility_choice_correlated_propensities_section>` section of the
       :ref:`facility choice model document
       <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
     - Will be used to determine LBWSG exposure in pregnancy module
-  * - C. In-facility delivery (IFD) propensity
+  * - In-facility delivery (IFD) propensity
     - See the :ref:`correlated propensities
       <facility_choice_correlated_propensities_section>` section of the
       :ref:`facility choice model document
       <2024_facility_model_vivarium_mncnh_portfolio>` for instructions
     - Will be used to determine in-facility delivery status in delivery
       facility choice module
-  * - D. RDS intervention propensity
+  * - RDS intervention propensity
     - Use a random number between 0 and 1
     - Will be used to determine which simulants receive each RDS intervention (:ref:`CPAP <intervention_neonatal_cpap>` and :ref:`ACS <acs_intervention>`).
+  * - Anemia intervention propensity
+    - Use a random number between 0 and 1
+    - Will be used to determine coverage of the :ref:`oral iron <oral_iron_antenatal>`, :ref:`anemia screening <anemia_screening>`, and :ref:`IV iron <intervention_iv_iron_antenatal_mncnh>` interventions, as described in the :ref:`hemoglobin modeules <2024_vivarium_mncnh_portfolio_hemoglobin_module>` 
     
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-.. todo::
-
-  List module assumptions and limitations
+See the :ref:`facility choice model document <2024_facility_model_vivarium_mncnh_portfolio>`.
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-.. todo::
-  
-  List module V&V criteria
+None.
+Correlated propensities V&Ved as part of facility choice.
 
 5.0 References
 +++++++++++++++

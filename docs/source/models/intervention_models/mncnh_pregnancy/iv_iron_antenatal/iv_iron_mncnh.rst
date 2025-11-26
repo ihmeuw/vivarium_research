@@ -102,13 +102,13 @@ Hemoglobin exposure
   * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
     - Nigeria and Ethiopia
     - +20.2 mg/L
-    - 95% CI: [18.9, 21.5] mg/L
+    - Assumed normal distribution with 95% CI: [18.9, 21.5] mg/L
     - Assumed to be zero for simplicity
     - From the REVAMP study (second trimester) [Pasricha-et-al-2023]_
   * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
     - Pakistan
     - +26.3 mg/L
-    - 95% CI: [25.7, 26.9] mg/L
+    - Assumed normal distribution with 95% CI: [25.7, 26.9] mg/L
     - Assumed to be zero for simplicity
     - From the RAPID study [Derman-et-al-2025]_ 
 
@@ -165,6 +165,10 @@ We will model the effect of IV iron on both gestational age at birth (GA) and bi
 
 Effect size derivation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+
+  Perform GBD 2023 update for effect size calculations (dependent on GBD 2023 LBWSG exposure and draw availability strategy will change)
 
 The code to derive of IV iron's effect on gestational age and birth weight exposures as 100% mediated through hemoglobin is `hosted here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/hgb_birth_effect_generation.py>`_ and a `notebook that steps through these functions can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/function_tester.ipynb>`_. 
 
@@ -252,7 +256,7 @@ Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - The rate of each birth outcome should continue to validate to input data in the baseline scenario
-- Still birth rates should be lower, live birth rates should be higher, and partial term pregnancy rates should be unchanged in a scenario with IV iron coverage relative to a scenario without
+- Still birth rates should be lower, live birth rates should be higher, and abortion/miscarriage/ectopic pregnancy rates should be unchanged in a scenario with IV iron coverage relative to a scenario without
 - In the interactive simulation, rates of stillbirth binned by hemoglobin exposure should match expected shape of the relationship 
 
 Assumptions and limitations

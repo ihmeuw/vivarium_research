@@ -34,6 +34,8 @@ GBD 2021 Low Birthweight and Short Gestation Risk Effects
 
 .. note::
 
+  The LBWSG risk factor was "out of rotation" for GBD 2023. This means that there were no changes to the risk effects model between GBD 2021 and GBD 2023. This page can be used for GBD 2023 risk effects model as well as the GBD 2021 risk effects model for LBWSG.
+
   This page was copied from the :ref:`GBD 2019 LBWSG risk effects document <2019_risk_effect_lbwsg>`. There were no changes in the GBD or vivarium modeling strategies between these GBD rounds except for: 
 
     - Minor changes in how to access the relative risk estimates via shared functions, as shown in the :ref:`get_draws call in the code block linked here <get_draws_call>`

@@ -248,6 +248,10 @@ The effect estimates of hemoglobin on neonatal sepsis mortality as we receive th
 Effect derivation
 ^^^^^^^^^^^^^^^^^^^
 
+.. todo::
+
+  Perform GBD 2023 update for effect size calculations (dependent on GBD 2023 LBWSG exposure and draw availability strategy will change)
+
 Generally, in order to derive the direct (mediation-adjusted) effects of hemoglobin on neonatal sepsis for use in our simulation, we will use the following steps for each hemoglobin exposure level as well as each location/sex/draw pair. The code that performs these steps `is hosted here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/hgb_nn_sepsis_effect_generation.py>`__, with a `notebook that steps through the functions found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/function_tester.ipynb>`__.
 
 1. Load the estimates of the total effect of hemoglobin on neonatal sepsis (:math:`RR_\text{R1→O,total}`) as obtained from the hemoglobin team. There are 250 draws available, so we duplicate them so that draw 0 has the same values as draw 250, etc.
@@ -268,7 +272,7 @@ Effect application
 
 .. math::
 
-  \text{CSMRisk}_i = \text{CSMRisk} \times (1 - \text{PAF}) \times \text{RR}_\text{hemoglobin}_i
+  \text{CSMRisk}_i = \text{CSMRisk} \times (1 - \text{PAF}) \times \text{RR}_{\text{hemoglobin}_i}
 
 Where,
 
@@ -291,7 +295,7 @@ Where,
     - Population attributable fraction of hemoglobin on neonatal sepsis
     - Custom-calculated PAF values available here ``TODO: POST LINK``
     - See details on the PAF calculation below 
-  * - :math:`\text{RR}_\text{hemoglobin}_i`
+  * - :math:`\text{RR}_{\text{hemoglobin}_i}`
     - Relative risk value for the direct effect of hemoglobin on neonatal sepsis, specific to that individual simulated dyad's hemoglobin exposure level at birth
     - Defined in the `Effect derivation`_ section
     - 

@@ -84,7 +84,13 @@ birthweight and gestational age by assuming a uniform distribution of
 birthweights and gestational ages within each bin/category. In this way, each
 simulant can be assigned a continuously distributed birthweight and gestational
 age, which can then be easily mapped back to the appropriate risk category in
-GBD. Example Python code for achieving these transformations can be found here:
+GBD. 
+
+For the :ref:`MNCNH portfolio simulation model <2024_concept_model_vivarium_mncnh_portfolio>`, 
+we will implement an "exposure floor" for continuous gestational age of 20 weeks. That is, for the
+LBWSG exposure categories with the lowest possible gestational age range (cat2 and cat8), rather than assigning continuous gestational age at birth values according to a uniform distribution of 0-24 weeks, we will use a uniform distribution of 20-24 weeks. This strategy to is avoid illogically short pregnancies for live birth outcomes. Note that the decision of which value to use for the floor is somewhat arbitrary as it is unclear what the earliest possible gestational age would be for a baby to survive delivery. Notably, the shortest gestational age at birth among babies who survived to age one worldwide `is 21 weeks (as of 2024) <https://stories.uiowa.edu/tiniest-us-preemie-goes-home-after-life-saving-care-ui-health-care>`__, so we chose a value smaller than that by an arbitrary margin of one week.
+
+Example Python code (that does not reflect the updated gestational age exposure floor used in the MNCNH portfolio model) for achieving these transformations can be found here:
 
 * `Abie's LBWSG cat-to-continuous notebook
   <abie_lbwsg_cat_to_continuous_notebook_>`_ in the ``vivarium_data_analysis``
@@ -110,7 +116,6 @@ GBD. Example Python code for achieving these transformations can be found here:
     ages. For example, in the 0-500g category, most babies are probably pretty
     close to 500g, not equally likely to be <1 gram versus 499-500 grams.
     A limitation of this approach is therefore to overestimate the severity of the risk exposure distribution.  Since these extremely high risk categories are quite rare, we expect that the impact of this will be small.  In future work, we could use a more complex transformation to derive continuous values from the risk categories, but we should not pursue this until we have an application where it is clear that this limitation is a risk to the validity of our results.
-
 
 Restrictions
 ++++++++++++

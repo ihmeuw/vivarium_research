@@ -1,8 +1,8 @@
 .. _acs_intervention:
 
-=======================================================
-Antenatal corticosteroids for treating preterm with RDS
-=======================================================
+======================================================================
+Antenatal corticosteroids for respiratory distress syndrome prevention
+======================================================================
 
 .. contents::
    :local:

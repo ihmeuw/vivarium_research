@@ -522,7 +522,7 @@ These methods contain a few limitations:
 - More broadly, GBD does not attempt to include any category other than male or female. 
 - Since there are so many different input data sources and they vary by country, it would be very difficult for GBD to have anything other than "undifferentiated sex/gender" in their final results. However, GBD still uses the language "sex" for its variable. 
 
-More information on the methods can be found in the `demographics methods appendix <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30977-6/fulltext#supplementaryMaterial>`_
+More information on the methods can be found in the `demographics methods appendix <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30977-6/fulltext#supplementaryMaterial>`__.
 
 Results
 +++++++

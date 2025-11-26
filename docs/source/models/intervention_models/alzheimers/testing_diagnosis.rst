@@ -63,9 +63,10 @@ Intervention Overview
 -----------------------
 
 Alzheimer's testing is classified into two groups - existing (CSF and PET) testing, 
-and BBBM testing. Existing testing already exists in present-day conditions, before the 
-hypothetical introduction of BBBM testing in :ref:`Alternative Scenario 1 <alz_scenarios>`.
-The introduction of BBBM testing will replace some number of the existing tests in 
+and a hypothetical BBBM testing. Existing testing already exists in present-day conditions, 
+and our simulation will investigate the potential impact of the
+introduction of a novel BBBM test in :ref:`Alternative Scenario 1 <alz_scenarios>`.
+The introduction of BBBM testing will replace some of the existing tests in 
 Alternative Scenario 1, and will also be used to inform treatment in Alternative 
 Scenario 2. 
 
@@ -94,7 +95,7 @@ given by [Mattke-et-al-2024-Sweden-Capacity]_. The cohorts for these studies are
 For Japan, Israel, Taiwan and Brazil, because we have not yet found CSF and PET testing rates for these locations,
 we use the total CSF and PET testing rates across all countries from [Roth-et-al-2023-Diagnostic-Pathways]_. 
 
-After choosing these mean values, we subract 50% for a lower confidence bound and add 50% for an upper confidence bound to reflect substantial uncertainty (to be used in parameter uncertainty draws).
+After choosing these mean values, we subtract 50% for a lower confidence bound and add 50% for an upper confidence bound to reflect substantial uncertainty (to be used in parameter uncertainty draws).
 
 Note that the three sources for these test rates have slightly different cohorts and therefore test rate denominators.
 These test rates will be applied to simulants with MCI or AD dementia.
@@ -141,7 +142,7 @@ These test rates will be applied to simulants with MCI or AD dementia.
 Implementation
 ^^^^^^^^^^^^^^
 Each simulant will be assigned a propensity for receiving a test (0 to 1). 
-A low propensity value means the simulant is likely to receieve a test, 
+A low propensity value means the simulant is likely to receive a test, 
 while a high propensity value means the simulant is unlikely to receive a test.
 The propensity will apply for the simulant's lifetime.
 
@@ -179,13 +180,14 @@ Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 - A simulant with an eligible propensity will be tested at the first time step 
   they satisfy the stage and age criteria, and then can never be tested again, 
-  so propensity does not need to be re-assigned at any point
-- Assume no testing in pre-clinical state
-- Not used to assign treatment (no diagnosis)
+  so propensity does not need to be re-assigned at any point;
+- Assume no testing in pre-clinical state;
+- Not used to assign treatment (no diagnosis);
 - Eligibility requirements impact the number of tests. The earlier the stage simulants
   are tested in, the more tests will be conducted (eg mild stage compared to MCI). The wider 
-  the age range, the more tests will be conducted (eg no age requirements vs 60-80 year olds). 
-- Assumes no one gets both a CSF and PET test.
+  the age range, the more tests will be conducted (eg no age requirements vs 60-80 year olds);
+- Assumes no one gets both a CSF and PET test;
+- The testing happens quite rapidly, during the first six months of MCI; a future enhancement to this model might include a random chance of testing among those with propensity for getting tested, so that some fraction of testing happens later in the progression of the disease.
 
 .. _alzheimers_testing_intervention_bbbm:
 
@@ -236,15 +238,16 @@ Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 - Since BBBM testing eligibility is pre-clinical stage and CSF/PET is MCI or AD dementia stage, 
   and simulants cannot move backwards, CSF/PET test history is irrelevant to BBBM 
-  test eligibility  
+  test eligibility;
 - The same simulants undergo repeat testing to reflect ongoing issues with access or insurance,
-  so propensity does not need to be re-assigned at any point.
+  so propensity does not need to be re-assigned at any point;
 - Since BBBM uses the same propensity as existing testing, BBBM should replace many CSF and PET
-  tests, though some simulants may not qualify for BBBM tests due to age requirements, or may get a BBBM false negative.
+  tests, though some simulants may not qualify for BBBM tests due to age requirements, or may get a BBBM false negative;
+- The determination of whether a test is a false positive is independent for healthy individuals, and precludes the possibility that individual characteristics like protein expression levels or chronic kidney disease are driving heterogeneity in false positive rate. 
 
 .. note::
   People who are not simulated (will not develop AD dementia) will also be tested, and these tests,
-  including false positives, will need to be counted (outside the simulation).
+  including false positives, were counted outside the simulation using a multistate life table model.
 
 
 References

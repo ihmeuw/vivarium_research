@@ -37,3 +37,21 @@ jobs:
       - name: Doc build
         run: |
           make html -C docs/ SPHINXOPTS="-W --keep-going -n"
+      - name: Send mail
+        if: failure() && github.ref_name == 'main'
+        uses: dawidd6/action-send-mail@v2
+        with:
+          # mail server settings
+          server_address: smtp.gmail.com
+          server_port: 465
+          # user credentials
+          username: ${{ secrets.NOTIFY_EMAIL }}
+          password: ${{ secrets.NOTIFY_PASSWORD }}
+          # email subject
+          subject: ${{ github.repository }} has ${{ job.status }} in ${{ github.ref_name }}
+          # email body as text
+          body: ${{ github.repository }} has ${{ job.status }} in ${{ github.ref_name }}
+          # comma-separated string, send email to
+          to: uw_ihme_simulationscience@uw.edu
+          # from email name
+          from: Vivarium Notifications
