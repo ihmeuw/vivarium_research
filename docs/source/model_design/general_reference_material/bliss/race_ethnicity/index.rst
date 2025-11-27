@@ -1129,10 +1129,18 @@ Wherever it is, it should include most of the considerations described in earlie
 Recommended resources
 +++++++++++++++++++++
 
+.. list-table:: **Recommended papers on race, ethnicity, and/or ancestry-related topics**
+  :header-rows: 1
+
+  * - You want to know more about...
+    - So we recommend you check out...
+  * -
+    -
+
 Other REA-inclusive guides
 --------------------------
 
-.. list-table:: Resources on race and ethnicity
+.. list-table:: Resources on race, ethnicity, and ancestry
   :header-rows: 1
   :widths: 10 20
 
@@ -1140,8 +1148,16 @@ Other REA-inclusive guides
     - Notes
   * - `BLISS Page on the HUB
       <https://hub.ihme.washington.edu/spaces/COS/pages/204219073/BLISS+Building+Language+Inclusivity+into+Simulation+Science>`_
-    - Simulation Science team's internal inclusive health metrics
-      resource page, including links to additional IHME resources
+    - Simulation Science Team's internal inclusive health metrics
+      resource page, including links to additional internal IHME
+      resources
+  * - `Updated Guidance on the Reporting of Race and Ethnicity in
+      Medical and Science Journals
+      <https://jamanetwork-com/journals/jama/fullarticle/2783090>`_
+    - Guidelines from the editors of the JAMA Network
+  * - `Race and National Origin
+      <https://www.nih.gov/nih-style-guide/race-national-origin>`_
+    - Section of the NIH Style Guide
   * - `Use of Race and Ethnicity in Biomedical Publication
       <https://jamanetwork.com/journals/jama/fullarticle/10.1001/jama.289.20.2709>`_
     - Outlines guidelines to be used when race and ethnicity are
@@ -1150,6 +1166,15 @@ Other REA-inclusive guides
       <https://consciousstyleguide.com/ethnicity-race-nationality/>`_
     - Compilation of resources related to writing about racially
       marginalized groups
+  * - `On Racism: A New Standard For Publishing On Racial Health
+      Inequities
+      <https://www.healthaffairs.org/content/forefront/racism-new-standard-publishing-racial-health-inequities>`_
+    - Advocates for identifying racism as a critical driver of racial
+      health inequities
+  * - `How (not) to write about global health
+      <https://gh.bmj.com/content/bmjgh/5/7/e003164.full.pdf>`_
+    - Satirical article illuminating many problematic practices that
+      show up in global health research and writing
 
 References
 ++++++++++
