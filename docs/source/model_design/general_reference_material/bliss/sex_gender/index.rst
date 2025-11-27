@@ -837,10 +837,33 @@ Recommended Resources
 Other Gender-Inclusive Guides
 -----------------------------
 
-- DEI Research Guide
-- Design team guidelines for discussing gender, sex, and sexuality
-- Gates Foundation
-- World Health Organization
+.. list-table:: Resources on sex and gender
+  :header-rows: 1
+  :widths: 10 20
+
+  * - Resource
+    - Notes
+  * - `BLISS Page on the HUB
+      <https://hub.ihme.washington.edu/spaces/COS/pages/204219073/BLISS+Building+Language+Inclusivity+into+Simulation+Science>`_
+    - Simulation Science Team's internal inclusive health metrics
+      resource page, including links to additional internal IHME
+      resources
+  * - `Conscious Style Guide --- Gender, Sex + Sexuality
+      <https://consciousstyleguide.com/gender-sex-sexuality/>`_
+    - Compilation of resources related to writing about gender, sex, and
+      sexuality
+  * - `Trans Journalists Association Stylebook and Coverage Guide
+      <https://styleguide.transjournalists.org/>`_
+    - A a tool reporters, editors, and other journalists can use to
+      improve news coverage of trans people and the stories that affect
+      them
+  * - `The Radical Copyeditor's Style Guide for Writing About
+      Transgender People
+      <https://radicalcopyeditor.com/2020/10/20/update-to-transgender-style-guide-sex-versus-gender-and-more/>`_
+    -
+
+- Gates Foundation?
+- World Health Organization?
 
 
 References
