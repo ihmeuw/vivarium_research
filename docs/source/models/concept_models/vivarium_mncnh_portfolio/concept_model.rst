@@ -328,7 +328,7 @@ Pregnancy component
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
       - * ANC attendance category
         * Gestational age at end of pregnancy
-      - * Ultrasound type
+      - * Ultrasound summary
         * Estimated gestational age
         * Believed preterm status
       - 
@@ -1560,6 +1560,18 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline; AI-assisted ultrasound scale-up; CPAP and ACS scale-up; CPAP, ACS, and AI-ultrasound scale-up 
     - Default
     - 
+  * - 21.0
+    - Hemoglobin refactor
+    - Bringing model up to date with the `updated hemoglobin module docs <https://github.com/ihmeuw/vivarium_research/pull/1830>`__ and fixing bugs in "Fix observer stratifications and multiple bugfixes" related to multiple instances of hemoglobin variables that were being inconsistently referenced by different simulation components (See outstanding model verification and validation issues table for full list)
+    - Baseline, MMS scaleup, and anemia screening scaleup scenarios
+    - Do not define a measure of "true first trimester hemoglobin exposure" in this version of the model. Otherwise, default.
+    -
+  * -
+    - Hemoglobin refactor run correction
+    - Same as 21.0 but with specific artifact/code discrepancies described in V&V table addressed
+    - Baseline, MMS scaleup, and anemia screening scaleup scenarios
+    - Do not define a measure of "true first trimester hemoglobin exposure" in this version of the model. Otherwise, default.
+    - None
   * -
     - Update SBR to >=24 weeks
     - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
@@ -1573,17 +1585,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - None
   * -
-    - Hemoglobin refactor
-    - Bringing model up to date with the `updated hemoglobin module docs <https://github.com/ihmeuw/vivarium_research/pull/1830>`__ and fixing bugs in "Fix observer stratifications and multiple bugfixes" related to multiple instances of hemoglobin variables that were being inconsistently referenced by different simulation components (See outstanding model verification and validation issues table for full list)
-    - Baseline, MMS scaleup, and anemia screening scaleup scenarios
-    - Do not define a measure of "true first trimester hemoglobin exposure" in this version of the model. Otherwise, default.
-    - None
-  * -
     - Add dichotomous true hemoglobin output
     - Add in dichotomous measure of "true first trimester hemoglobin exposure" for V&V of the hemoglobin screening sensitivity and specificity
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
     - Include dichotomous output of true first trimester hemoglobin exposure as a stratification in the anc_hemoglobin observer  
-    - Hemoglobin refactor run
+    - Hemoglobin refactor run correction
   * -
     - Remaining pregnancy model refactor
     - Specifically with regard to LBWSG exposure
@@ -1608,7 +1614,7 @@ Default stratifications to all observers should include scenario and input draw.
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
     - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
-    - Hemoglobin refactor run
+    - Hemoglobin refactor run correction
   * -
     - IV iron effects on BW, GA, and stillbirth
     - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data specific to GBD 2023 has yet to be generated)
@@ -1626,7 +1632,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
-    - Hemoglobin refactor run
+    - Hemoglobin refactor run correction
   * -
     - Anemia YLDs
     - 
@@ -1651,6 +1657,12 @@ Default stratifications to all observers should include scenario and input draw.
     - All
     - Default
     - Larger run for neonatal mortality V&V run
+  * - 
+    - Trimester-specific ultrasound
+    - Update ultrasound model to include gestational age estimation error specific to timing of ultrasound in addition to ultrasound type. :ref:`See the ultrasound module document <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>` for details
+    - All
+    - Default, note that observed value for ultrasound is now "ultrasound summary" rather than "ultrasound type" with this update
+    - Updated data values for trimester-specific GA error values, updated facility choice model and values that reflect the updated GA error values, Remaining pregnancy model refactor run
 
 .. note:: 
 
@@ -2413,13 +2425,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Outputs look as expected!
     - * `20.1.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/158>`__
       * `20.1.1 results available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/159>`__
-  * - 
-    - GA floors
-    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
-      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
-    - 
-    - 
-  * - 
+  * - 21.0
     - Hemoglobin refactor
     - Using simulation outputs:
 
@@ -2442,6 +2448,18 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that incidence risk of maternal sepsis and maternal hemorrhage vary in accordance with hemoglobin exposure at the end of pregnancy timestep and hemoglobin RR values
 
       Note that the effects of hemoglobin on LBWSG exposure or pregnancy outcome are not yet expected to meet V&V criteria. 
+    - Could not run facility choice V&V because `PR exposing the V&V targets <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/186>`__ had not been integrated into the branch this was run from.
+      On further inspection, artifact had been based on 20.1.1 (which was for sensitivity analysis only).
+    - 
+  * -
+    - Hemoglobin refactor run correction
+    - Same as 21.0
+    - 
+    - 
+  * - 
+    - GA floors
+    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
+      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
     - 
     - 
   * - 
@@ -2531,6 +2549,15 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that deaths averted between the baseline and MMS scale-up scenarios have decreased between this model run and the previous
       * In the interactive simulation, confirm that mortality due to both LBWSG-affected and LBWSG-unaffected causes vary in accordance with baseline LBWSG exposures
       * In the interactive simulation, confirm that mortality due to LBWSG-affected causes varies in accordance with intervention modified LBWSG exposure and that mortality due to LBWSG-unaffected causes varies in accordance with pre-intervention modified LBWSG exposure
+    - 
+    - 
+  * - 
+    - Trimester-specific ultrasound
+    - * Confirm that all facility choice model targets are met (see list for model 15.0)
+      * Confirm ultrasound coverage matches inputs for all scenarios 
+      * Confirm that ratio between ultrasound timing categories matches the expected ratio between first trimester ANC attendance and later pregnancy only ANC attendance. More specifically, the following should be true ``standard_first_trimester / standard_later_pregnancy == ai_assisted_first_trimester / ai_assisted_later_pregnancy == (anc_first_trimester_only + anc_first_trimester_and_later_pregnancy) / anc_later_pregnancy_only``
+      * Confirm that ultrasounds performed in the first trimester occur only among those who attend ANC in the first trimester according to their ANC attendance category (and likewise for later pregnancy)
+      * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type and timing (specific distribution of errors assessed in the interactive simulation and summary "confusion matrix" assessed as part of the facility choice model V&V targets)
     - 
     - 
 
