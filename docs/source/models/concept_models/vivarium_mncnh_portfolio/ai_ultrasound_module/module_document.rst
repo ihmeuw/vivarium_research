@@ -189,7 +189,7 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
     - 6.7 days
     - 
   * - Standard
-    - 2nd or 3rd trimester
+    - Later pregnancy
     - XXX days
     - 
   * - AI-assisted ultrasound
@@ -197,9 +197,13 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
     - 5 days
     - 
   * - AI-assisted ultrasound
-    - 2nd or 3rd trimester
+    - Later pregnancy
     - XXX days
     - 
+
+.. note::
+
+  The "Later pregnancy" ultrasound timing corresponds with our :ref:`Antenatal Care Attendance model <2024_vivarium_mncnh_portfolio_anc_module>` "later pregnancy visit." Attendance of the later pregnancy ANC visit is a dichotomous variable in our model that is True if a simulant attends an ANC visit at any time during their second or third trimester and false otherwise. Our model does not consider the timing or frequency with which ANC visits are attended in the second or third trimesters.
 
 .. todo::
 
@@ -288,7 +292,7 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
 * Confirm ANC visit rate matches expectations 
 * Confirm ultrasound rates matches inputs for all scenarios 
 * Confirm that ratio between ultrasound timing categories matches the expected ratio between first trimester ANC attendance and later pregnancy only ANC attendance. More specifically, the following should be true ``standard_first_trimester / standard_later_pregnancy == ai_assisted_first_trimester / ai_assisted_later_pregnancy == (anc_first_trimester_only + anc_first_trimester_and_later_pregnancy) / anc_later_pregnancy_only``
-* Confirm that ultrasounds performed in the first trimester occur only among those who attend ANC in the first trimester according to their ANC attendance category (and likewise for later pregnancy).
+* Confirm that ultrasounds performed in the first trimester occur only among those who attend ANC in the first trimester according to their ANC attendance category (and likewise for later pregnancy)
 * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type and timing
 
 5.0 References
