@@ -2642,6 +2642,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Issue with GBD fistula model in which Pakistan burden was erroneously set to zero 
     - `Update model in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1847>`__
     - "Pakistan fistula update" model run
+  * - Anemia screening coverage is inverted
+    - Coverage is one minus the correct value
+    - Engineers have already implemented a fix in `this PR <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/199>`__.
+      Research to check that fix worked.
+    - Next model run
 
 
 .. _mncnh_portfolio_6.0:
