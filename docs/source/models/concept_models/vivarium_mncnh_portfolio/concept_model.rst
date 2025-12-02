@@ -1566,12 +1566,24 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
     - Do not define a measure of "true first trimester hemoglobin exposure" in this version of the model. Otherwise, default.
     -
-  * -
+  * - 21.0.1
     - Hemoglobin refactor run correction
     - Same as 21.0 but with specific artifact/code discrepancies described in V&V table addressed
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
     - Do not define a measure of "true first trimester hemoglobin exposure" in this version of the model. Otherwise, default.
-    - None
+    -
+  * - 21.1
+    - Add dichotomous true hemoglobin output
+    - Add in dichotomous measure of "true first trimester hemoglobin exposure" for V&V of the hemoglobin screening sensitivity and specificity
+    - Baseline, MMS scaleup, and anemia screening scaleup scenarios
+    - Include dichotomous output of true first trimester hemoglobin exposure as a stratification in the anc_hemoglobin observer  
+    -
+  * - 21.1.1
+    - Hemoglobin refactor: more bugfixes
+    - Same as previous but with specific bugs described in V&V table addressed
+    - Baseline, MMS scaleup, and anemia screening scaleup scenarios
+    - Default
+    -
   * -
     - Update SBR to >=24 weeks
     - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
@@ -1584,12 +1596,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - Default
     - None
-  * -
-    - Add dichotomous true hemoglobin output
-    - Add in dichotomous measure of "true first trimester hemoglobin exposure" for V&V of the hemoglobin screening sensitivity and specificity
-    - Baseline, MMS scaleup, and anemia screening scaleup scenarios
-    - Include dichotomous output of true first trimester hemoglobin exposure as a stratification in the anc_hemoglobin observer  
-    - Hemoglobin refactor run correction
   * -
     - Remaining pregnancy model refactor
     - Specifically with regard to LBWSG exposure
@@ -2445,23 +2451,34 @@ Default stratifications to all observers should include scenario and input draw.
     - Could not run facility choice V&V because `PR exposing the V&V targets <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/186>`__ had not been integrated into the branch this was run from.
       On further inspection, artifact had been based on 20.1.1 (which was for sensitivity analysis only).
     - 
-  * -
+  * - 21.0.1
     - Hemoglobin refactor run correction
     - Same as 21.0
-    - 
-    - 
-  * - 
-    - GA floors
-    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
-      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
-    - 
-    - 
-  * - 
+    - 21.0.1 was only partially V&Ved, checking criteria that did not require an interactive sim.
+      This partial V&V surfaced two bugs: believed preterm was always false, and ACS eligibility was always false.
+    - `21.0.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/162>`__
+  * - 21.1
     - Add dichotomous true hemoglobin output
     - * Confirm hemoglobin screening sensitivity and specificity in simulation outputs
       * Confirm that scenario-specific counts of maternal sepsis and hemorrhage did not change after adding this measure (indicates that we are not accidentally referencing this hemoglobin exposure measure in our risk effect models)
       * Confirm that true "low" hemoglobin exposure counts are lower in the MMS scenario than the baseline scenario
       * Confirm that "true" low hemoglobin rate matches corresponding GBD anemia impairment prevalence in pregnancy estimate (note that we expect to slightly overestimate anemia prevalence since we have not yet applied full impact of baseline IFA at the time that we observe this measure) 
+    - Not V&Ved before next model was run.
+    - 
+  * - 21.1.1
+    - Hemoglobin refactor: more bug fixes
+    - Combination of 21.0 and 21.1.
+    - * Newly-noticed bug that `had been present since 18.3 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/9e6d51aac72a3d60dcceee559087c923f5331238/verification_and_validation/model_18.3_anemic_screening.ipynb>`__:
+        anemia screening coverage is inverted (one minus the correct value). 
+      * Interactive sim criteria from 21.0 are met; ``ferritin_screening_coverage`` and ``anemia_status_during_pregnancy`` columns are not updated appropriately, and the ``hemoglobin_exposure`` column is updated one time step after the hemoglobin exposure changes, but it seems like neither is causing real issues.
+      * Bugs from 21.0.1 fixed successfully.
+      * 21.1 V&V criteria met.
+      * Note: we can't check azithromycin, misoprostol, ACS, or CPAP RRs in simulation results. Need to add scenarios for this.
+    - `21.1.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/163>`__
+  * - 
+    - GA floors
+    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
+      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
     - 
     - 
   * - 
