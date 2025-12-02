@@ -524,6 +524,96 @@ scenario, and input draw.
     - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
     - Stratify all BBBM testing and treatment observations by semester
     - Add treatment status transition and person-time observers
+  * - 7.1
+    -
+    -
+    -
+    -
+    -
+  * - 7.2
+    -
+    -
+    -
+    -
+    -
+  * - 7.3
+    -
+    -
+    -
+    -
+    -
+  * - 7.4
+    -
+    -
+    -
+    -
+    -
+  * - 7.5
+    -
+    -
+    -
+    -
+    -
+  * - 7.6
+    -
+    -
+    -
+    -
+    -
+  * - 8.0
+    -
+    -
+    -
+    -
+    -
+  * - 8.1
+    -
+    -
+    -
+    -
+    -
+  * - 8.2
+    -
+    -
+    -
+    -
+    -
+  * - 8.3
+    -
+    -
+    -
+    -
+    -
+  * - 8.4
+    -
+    -
+    -
+    -
+    -
+  * - 8.5
+    -
+    -
+    -
+    -
+    -
+  * - 8.6
+    -
+    -
+    -
+    -
+    -
+  * - 8.7
+    -
+    -
+    -
+    -
+    -
+  * - 9.0
+    -
+    -
+    -
+    -
+    -
 
 
 5.2 V & V Tracking
@@ -751,6 +841,66 @@ scenario, and input draw.
       * Interactive sim verification spot checking a simulant's durations in treatment statuses as they move through 
         `BBBM test negative`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect` statuses (for both completed and discontinued treatments)
       * Check hazard ratios for simulants who begin treatment and those who transition to `No treatment effect`
+    -
+    -
+  * - 7.1
+    -
+    -
+    -
+  * - 7.2
+    -
+    -
+    -
+  * - 7.3
+    -
+    -
+    -
+  * - 7.4
+    -
+    -
+    -
+  * - 7.5
+    -
+    -
+    -
+  * - 7.6
+    -
+    -
+    -
+  * - 8.0
+    -
+    -
+    -
+  * - 8.1
+    -
+    -
+    -
+  * - 8.2
+    -
+    -
+    -
+  * - 8.3
+    -
+    -
+    -
+  * - 8.4
+    -
+    -
+    -
+  * - 8.5
+    -
+    -
+    -
+  * - 8.6
+    -
+    -
+    -
+  * - 8.7
+    -
+    -
+    -
+  * - 9.0
+    -
     -
     -
 
