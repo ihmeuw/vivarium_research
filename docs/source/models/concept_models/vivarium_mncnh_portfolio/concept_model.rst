@@ -2584,10 +2584,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Maternal disorders burden does not vary by scenario despite increased coverage of the oral iron intervention affecting hemoglobin exposure
-    - It appears that the :code:`hemoglobin_exposure` column in the state table matches the :code:`hemoglobin.exposure` pipeline value at the pregnancy timestep. However, after progressing to the timesteps where maternal disorders burden is assigned, this is no longer the case. The state table value is used to assess maternal disorders risk and does not reflect the appropriate intervention-affected hemoglobin exposure.
-    - Engineers to address during pregnancy model refactor
-    - Hemoglobin refactor
   * - Neonatal deaths do not vary by scenario despite increased coverage of the oral iron intervention that should affect BW and GA exposures (and therefore child mortality)
     - Impacts of oral iron intervention of birth weight and gestational age pipeline values are working, but LBWSG RRs are being assigned based on the state table exposure values (that are recorded on the first timestep).
     - Engineers to address during pregnancy model refactor
@@ -2604,22 +2600,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Unknown, was previously meeting verification criteria. No impact in the interactive sim or in the simulation results
     - Engineers to investigate and update
     - Remaining pregnancy refactor
-  * - Ferritin screening rate < 100% among eligible population in scale-up scenario
-    - We are only testing ferritin among those who have low exposure values for their tested hemoglobin AND their true hemoglobin. Everyone who has a low tested hemoglobin exposure should be screened for ferritin regardless of their true hemoglobin exposure
-    - Engineers to address during pregnancy model refactor
-    - Hemoglobin refactor
-  * - Hemoglobin screening test and anemia status during pregnancy appear to be reading in an inappropriate hemoglobin exposure measure
-    - See linked comments (it appears we  created a new measure to be used in these instances, but did not actually update it as the input variables)
-    - Engineers to address during pregnancy model refactor
-    - Hemoglobin refactor
   * - Propensity for LBWSG category remains constant across timesteps, but propensity for continuous BW and GA values reset at each timestep
     - This should not cause significant bias in our results, but it is not logical to have a different birth weight at different ages and unnecessarily increases stochastic uncertainty in our simulation
     - Engineers to address during pregnancy model refactor
     - Remaining pregnancy refactor
-  * - There is non-zero coverage of hemoglobin screening among those who attend first trimester screening ONLY
-    - This is inconsistent with documentation (hemoglobin screening should occur at later pregnancy ANC visit only)
-    - Engineers to address during pregnancy model refactor
-    - Hemoglobin refactor
   * - `Ferritin exposure model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2439>`__
     - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
     - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy using PRISMA data shared by the Gates foundation
