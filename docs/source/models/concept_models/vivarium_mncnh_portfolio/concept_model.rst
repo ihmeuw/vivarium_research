@@ -328,7 +328,7 @@ Pregnancy component
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
       - * ANC attendance category
         * Gestational age at end of pregnancy
-      - * Ultrasound type
+      - * Ultrasound summary
         * Estimated gestational age
         * Believed preterm status
       - 
@@ -1663,6 +1663,12 @@ Default stratifications to all observers should include scenario and input draw.
     - All
     - Default
     - Larger run for neonatal mortality V&V run
+  * - 
+    - Trimester-specific ultrasound
+    - Update ultrasound model to include gestational age estimation error specific to timing of ultrasound in addition to ultrasound type. :ref:`See the ultrasound module document <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>` for details
+    - All
+    - Default, note that observed value for ultrasound is now "ultrasound summary" rather than "ultrasound type" with this update
+    - Updated data values for trimester-specific GA error values, updated facility choice model and values that reflect the updated GA error values, Remaining pregnancy model refactor run
 
 .. note:: 
 
@@ -2563,6 +2569,15 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that deaths averted between the baseline and MMS scale-up scenarios have decreased between this model run and the previous
       * In the interactive simulation, confirm that mortality due to both LBWSG-affected and LBWSG-unaffected causes vary in accordance with baseline LBWSG exposures
       * In the interactive simulation, confirm that mortality due to LBWSG-affected causes varies in accordance with intervention modified LBWSG exposure and that mortality due to LBWSG-unaffected causes varies in accordance with pre-intervention modified LBWSG exposure
+    - 
+    - 
+  * - 
+    - Trimester-specific ultrasound
+    - * Confirm that all facility choice model targets are met (see list for model 15.0)
+      * Confirm ultrasound coverage matches inputs for all scenarios 
+      * Confirm that ratio between ultrasound timing categories matches the expected ratio between first trimester ANC attendance and later pregnancy only ANC attendance. More specifically, the following should be true ``standard_first_trimester / standard_later_pregnancy == ai_assisted_first_trimester / ai_assisted_later_pregnancy == (anc_first_trimester_only + anc_first_trimester_and_later_pregnancy) / anc_later_pregnancy_only``
+      * Confirm that ultrasounds performed in the first trimester occur only among those who attend ANC in the first trimester according to their ANC attendance category (and likewise for later pregnancy)
+      * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type and timing (specific distribution of errors assessed in the interactive simulation and summary "confusion matrix" assessed as part of the facility choice model V&V targets)
     - 
     - 
 
