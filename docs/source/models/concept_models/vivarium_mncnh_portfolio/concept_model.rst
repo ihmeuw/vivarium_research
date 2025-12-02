@@ -2487,7 +2487,10 @@ Default stratifications to all observers should include scenario and input draw.
     - 
   * - 
     - Add residual and other maternal disorders
-    - * Confirm that the proportion of in-facility deliveries in CEmONC and BEmONC facilities matches the location-specific estimates from the HS team.
+    - * Confirm incidence and mortality risk of existing cause-specific maternal disorders matches expectation (we don't expect them to be exactly the same due to changes in stochastic uncertainty, but same trends as before, noting that sepsis and hemorrhage are slightly miscalibrated due to the hemoglobin PAFs we are using)
+      * Confirm expected mortality ratios of (1) residual and (2) abortion/ectopic/miscarriage causes
+      * Confirm expected YLDs due to (1) residual and (2) abortion/ectopic/miscarriage causes
+      * Confirm that mortality and morbidity due to residual maternal disorders happens among live and stillbirths only and that abortion/ectopic/miscarriage mortality does not
     -
     -
   * - 
