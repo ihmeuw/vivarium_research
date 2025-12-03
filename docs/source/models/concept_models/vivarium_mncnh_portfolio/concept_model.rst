@@ -1584,6 +1584,18 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
     - Default
     -
+  * - 22.0.0
+    - Add residual and other maternal disorders
+    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
+    - Baseline
+    - Default
+    - 
+  * - 23.0
+    - Remaining pregnancy model refactor
+    - Specifically with regard to LBWSG exposure. Note that intervention effects on stillbirth are not expected to be resolved in this run. Additionally, include `bugfix for inverted baseline anemia screening coverage <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/199>`__
+    - All
+    - Default
+    - 
   * -
     - Update SBR to >=24 weeks
     - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
@@ -1596,25 +1608,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - Default
     - None
-  * - 
-    - Remaining pregnancy model refactor
-    - Specifically with regard to LBWSG exposure. Note that intervention effects on stillbirth are not expected to be resolved in this run. Additionally, include `bugfix for inverted baseline anemia screening coverage <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/199>`__
-    - All
-    - Default
-    - Add dichotomous true hemoglobin output run
   * -
     - Larger run for neonatal mortality V&V
     - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Baseline
     - * For this run only, 10,000,000 population size per draw
       * Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-    - Remaining pregnancy model refactor run
-  * -
-    - Add residual and other maternal disorders
-    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
-    - Baseline
-    - Default
-    - None
+    - Remaining pregnancy model refactor run (model 23) V&V
   * -
     - IV iron coverage and effect on hemoglobin
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
@@ -2672,9 +2672,9 @@ Default stratifications to all observers should include scenario and input draw.
     - "Pakistan fistula update" model run
   * - Anemia screening coverage is inverted
     - Coverage is one minus the correct value
-    - Engineers have already implemented a fix in `this PR <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/199>`__.
+    - Engineers have already implemented a fix in `this PR <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/199>`__ that was run in model 23.0
       Research to check that fix worked.
-    - Next model run
+    - Model 23.0 V&V
 
 
 .. _mncnh_portfolio_6.0:
