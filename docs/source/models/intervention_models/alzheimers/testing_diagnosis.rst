@@ -196,6 +196,8 @@ BBBM testing is a hypothetical biomarker test which we will model in
 :ref:`Alternative Scenario 1 <alz_scenarios>`. It will replace some CSF/PET testing and 
 assign positive/negative diagnosis which will inform treatment in :ref:`Alternative Scenario 2 <alz_scenarios>`.
 
+.. _bbbm_rates:
+
 Time-specific testing rates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Testing rates do not vary by location, age or sex. 
@@ -203,6 +205,7 @@ In 2020, 0% of eligible simulants are tested annually. This increases (instantly
 then increases linearly over time in each six-month period to reach 20% in 2035, to 40% in 2040 
 and then maxes out at 60% in 2045. 
 
+.. _bbbm_propensity:
 
 Implementation
 ^^^^^^^^^^^^^^

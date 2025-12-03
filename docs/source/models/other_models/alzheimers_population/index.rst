@@ -26,6 +26,8 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
+.. _other_models_alzheimers_population_model:
+
 .. _other_models_alzheimers_population:
 
 =======================================================
