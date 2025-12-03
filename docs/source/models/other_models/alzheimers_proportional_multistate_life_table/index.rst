@@ -156,7 +156,7 @@ Each blank cell represents a subpopulation with a stored count.
       on each time step that the test rate increases. The fraction corresponds to the magnitude of the increase.
   * - Positive
     - Simulants who test positive remain in this state until they age out. Continuing to track these simulants
-      is important to match the Vivarium simulation, which uses a :ref:`"person-time ever eligible" <_alz_observer_outputs>`
+      is important to match the Vivarium simulation, which uses a :ref:`"person-time ever eligible" <alz_observer_outputs>`
       observer to validate test rates.
   * - Negative (0 y ago)
     - Tested simulants move either to the positive state or this state. On the next time step they will move to
