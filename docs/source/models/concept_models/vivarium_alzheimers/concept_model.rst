@@ -526,6 +526,26 @@ scenario, and input draw.
     - * Locations: All (Sweden, USA, China, Japan, Brazil, UK, Germany, Spain, Israel, Taiwan)
     - Stratify all BBBM testing and treatment observations by semester
     - Add treatment status transition and person-time observers
+  * - 7.1
+    - `Fix usage of propensities for testing, and stratify disease
+      observers by treatment status
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/54>`_
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA, Spain
+    - Stratify disease state transitions and person-time by treatment
+      status (with 5 categories: "full effect long," "full effect
+      short," "waning effect long," "waning effect short," "no effect")
+    - Default
+  * - 7.2
+    - `Fix bug with 80-year-olds entering "waiting for treatment" state
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/53>`_, and
+      `fix bug in BBBM → MCI hazard rate
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/55>`_
+    - Baseline, Alternative Scenario 2
+    - * Locations: USA
+    - Stratify disease state transitions and person-time by treatment
+      status
+    - Default
 
 
 5.2 V & V Tracking
@@ -753,6 +773,27 @@ scenario, and input draw.
       * Interactive sim verification spot checking a simulant's durations in treatment statuses as they move through 
         `BBBM test negative`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect` statuses (for both completed and discontinued treatments)
       * Check hazard ratios for simulants who begin treatment and those who transition to `No treatment effect`
+    -
+    -
+  * - 7.1
+    - Same as model 7.0, but add:
+
+      * Check relative risk of treatment on BBBM → MCI transition in
+        observer output now that we have the necessary stratifications
+      * Check that CSF and PET testing start decreasing at the same time
+        when increasing BBBM testing, rather than CSF testing always
+        decreasing first
+    -
+    -
+  * - 7.2
+    - Same as model 7.1, but add:
+
+      * Check that the 80-84 year-old age group has no transitions into
+        the "waiting for treatment" state
+      * Check BBBM → MCI hazard rate in observer output and interactive
+        sim
+      * Re-run V&V from models 4 and 5 to check disease state
+        incidence, prevalence, etc.
     -
     -
 
