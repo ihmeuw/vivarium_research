@@ -1600,8 +1600,13 @@ Default stratifications to all observers should include scenario and input draw.
     - MMS stillbirth effects
     - * Update simulation to appropriately apply effects of MMS on stillbirth by determining "broad pregnancy outcome" (abortion/ectopic/miscarriage versus live/still birth) at initialization (prior to administration of MMS) and then later, after MMS administration, determine live versus stillbirth outcomes
       * Add misoprostol and azithromycin scenarios to runs
-      * Fix issue of state table hemoglobin exposure variable lagging behind pipeline value by one timestep
     - All, including newly re-added scenarios #12 Azithromycin V&V and #13 Misoprostol V&V (note that scenarios #12 and #13 have been run before, but have been dropped from the branches file)
+    - Default
+    - None
+  * - 
+    - Hemoglobin lag fix
+    - Fix issue of state table hemoglobin exposure variable lagging behind pipeline value by one timestep
+    - All
     - Default
     - None
   * -
@@ -2601,7 +2606,12 @@ Default stratifications to all observers should include scenario and input draw.
     - MMS stillbirth effects
     - * Confirm expected effects of IFA and MMS on pregnancy outcomes (note this will be confounded by ANC attendance in the simulation outputs, so RRs should be calculated stratified by ANC attendance exposure)
       * Confirm expected effects of misoprostol and azithromycin interventions on maternal disorders using scenarios #12 and #13
-      * In the interactive simulation: confirm that hemoglobin exposure variable in the state table no loner lags behind the pipeline value by a timestep
+    - 
+    - 
+  * - Hemoglobin lag fix
+    - * In the interactive simulation: confirm that hemoglobin exposure variable in the state table no loner lags behind the pipeline value by a timestep
+      * Confirm maternal disorders still meet expectation
+      * Confirm risk effect of hemoglobin on affected maternal disorders still looks as expected
     - 
     - 
 
