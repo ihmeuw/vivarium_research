@@ -531,8 +531,7 @@ scenario, and input draw.
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: USA, Spain
     - Stratify disease state transitions and person-time by treatment
-      status (with 5 categories: "full effect long," "full effect
-      short," "waning effect long," "waning effect short," "no effect")
+      status
     - Default
   * - 7.2
     - `Fix bug with 80-year-olds entering "waiting for treatment" state
@@ -545,25 +544,30 @@ scenario, and input draw.
       status
     - Default
   * - 7.3
-    -
+    - `Add BBBM testing history
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/57>`_
     -
     -
     -
     -
   * - 7.4
-    -
+    - `Bugfix: Use conditional prevalence to initialize AD dementia state
+      instead of unconditional prevalence
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/58>`_
     -
     -
     -
     -
   * - 7.5
-    -
+    - `Bugfix: Don't initialize BBBM testing history in baseline
+      scenario <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/60>`_
     -
     -
     -
     -
   * - 7.6
-    -
+    - `Additional bug fixes for BBBM testing
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/60>`_
     -
     -
     -
@@ -873,7 +877,16 @@ scenario, and input draw.
     -
   * - 7.3
     -
-    -
+    - There were several problems with the BBBM test history:
+
+      * The baseline scenario had people entering with BBBM test history
+      * The sensitivity now appears to be 80% instead of 90% (unless
+        something needs to change about the way I'm computing it)
+      * Our original idea of measuring the testing rate as (# tests) /
+        (# newly eligible) or (# tests) / (eligible person-time) look
+        closer to the mark of 60%
+      * Our graphs of (person-time ever tested) / (person-time ever
+        eligible) look way different
     -
   * - 7.4
     -
