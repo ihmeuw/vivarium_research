@@ -2483,7 +2483,14 @@ Default stratifications to all observers should include scenario and input draw.
     - Combination of 21.0 and 21.1.
     - * Newly-noticed bug that `had been present since 18.3 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/9e6d51aac72a3d60dcceee559087c923f5331238/verification_and_validation/model_18.3_anemic_screening.ipynb>`__:
         anemia screening coverage is inverted (one minus the correct value). 
-      * Interactive sim criteria from 21.0 are met; ``ferritin_screening_coverage`` and ``anemia_status_during_pregnancy`` columns are not updated appropriately, and the ``hemoglobin_exposure`` column is updated one time step after the hemoglobin exposure changes, but it seems like neither is causing real issues.
+      * Interactive sim criteria from 21.0 are met; ``ferritin_screening_coverage`` and ``anemia_status_during_pregnancy`` columns are not updated appropriately, and the ``hemoglobin_exposure`` column is updated one time step after the hemoglobin exposure changes, but it seems like neither is causing real issues. Specifically:
+
+        * ``ferritin_screening_coverage`` appears to not be used and can be removed from the simulation
+
+        * ``anemia_status_during_pregnancy`` is always null
+
+        * the ``hemoglobin_exposure`` variable in the state table lags behind the hemoglobin exposure pipeline value by one timestep
+
       * Bugs from 21.0.1 fixed successfully.
       * 21.1 V&V criteria met.
       * Note: we can't check azithromycin, misoprostol, ACS, or CPAP RRs in simulation results. Need to add scenarios for this.
