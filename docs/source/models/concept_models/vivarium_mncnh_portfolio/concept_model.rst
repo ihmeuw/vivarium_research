@@ -2608,7 +2608,8 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm expected effects of misoprostol and azithromycin interventions on maternal disorders using scenarios #12 and #13
     - 
     - 
-  * - Hemoglobin lag fix
+  * - 
+    - Hemoglobin lag fix
     - * In the interactive simulation: confirm that hemoglobin exposure variable in the state table no loner lags behind the pipeline value by a timestep
       * Confirm maternal disorders still meet expectation
       * Confirm risk effect of hemoglobin on affected maternal disorders still looks as expected
