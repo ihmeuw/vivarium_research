@@ -1596,6 +1596,14 @@ Default stratifications to all observers should include scenario and input draw.
     - All
     - Default
     - 
+  * - 
+    - MMS stillbirth effects
+    - * Update simulation to appropriately apply effects of MMS on stillbirth by determining "broad pregnancy outcome" (abortion/ectopic/miscarriage versus live/still birth) at initialization (prior to administration of MMS) and then later, after MMS administration, determine live versus stillbirth outcomes
+      * Add misoprostol and azithromycin scenarios to runs
+      * Fix issue of state table hemoglobin exposure variable lagging behind pipeline value by one timestep
+    - All, including newly re-added scenarios #12 Azithromycin V&V and #13 Misoprostol V&V (note that scenarios #12 and #13 have been run before, but have been dropped from the branches file)
+    - Default
+    - None
   * -
     - Update SBR to >=24 weeks
     - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
@@ -1620,13 +1628,13 @@ Default stratifications to all observers should include scenario and input draw.
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
     - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
-    - Hemoglobin refactor run correction
+    - None
   * -
     - IV iron effects on BW, GA, and stillbirth
     - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data specific to GBD 2023 has yet to be generated)
     - Baseline and IV iron scale-up scenarios
     - Default
-    - RT-owned data generation, IV iron coverage and effect on hemoglobin run
+    - RT-owned data generation, IV iron coverage and effect on hemoglobin run, MMS stillbirth effects 
   * -
     - Update hemoglobin effects
     - As defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (Custom PAFs and neonatal sepsis effects have yet to be calculated for GBD 2023): Updated custom PAF values for maternal hemorrhage and maternal sepsis outcomes (paired with existing implementation of GBD RRs); New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
@@ -1638,7 +1646,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
-    - Hemoglobin refactor run correction
+    - None
   * -
     - Anemia YLDs
     - 
@@ -1669,13 +1677,7 @@ Default stratifications to all observers should include scenario and input draw.
     - All
     - Default, note that observed value for ultrasound is now "ultrasound summary" rather than "ultrasound type" with this update
     - Updated data values for trimester-specific GA error values, updated facility choice model and values that reflect the updated GA error values, Remaining pregnancy model refactor run
-  * - 
-    - MMS stillbirth effects
-    - * Update simulation to appropriately apply effects of MMS on stillbirth by determining "broad pregnancy outcome" (abortion/ectopic/miscarriage versus live/still birth) at initialization (prior to administration of MMS) and then later, after MMS administration, determine live versus stillbirth outcomes
-      * Add misoprostol and azithromycin scenarios to runs
-    - All, including newly re-added scenarios #12 Azithromycin V&V and #13 Misoprostol V&V (note that scenarios #12 and #13 have been run before, but have been dropped from the branches file)
-    - Default
-    - None
+
 
 .. note:: 
 
@@ -2564,6 +2566,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Anemia YLDs
     - * Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values
       * Anemia YLDs should decrease in MMS/IV iron scale-up scenarios 
+      * Confirm that ferritin screening results are unchanged
     - 
     - 
   * - 
@@ -2598,6 +2601,7 @@ Default stratifications to all observers should include scenario and input draw.
     - MMS stillbirth effects
     - * Confirm expected effects of IFA and MMS on pregnancy outcomes (note this will be confounded by ANC attendance in the simulation outputs, so RRs should be calculated stratified by ANC attendance exposure)
       * Confirm expected effects of misoprostol and azithromycin interventions on maternal disorders using scenarios #12 and #13
+      * In the interactive simulation: confirm that hemoglobin exposure variable in the state table no loner lags behind the pipeline value by a timestep
     - 
     - 
 
