@@ -546,32 +546,36 @@ scenario, and input draw.
   * - 7.3
     - `Add BBBM testing history
       <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/57>`_
-    -
-    -
-    -
-    -
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA
+    - Stratify disease state transitions and person-time by treatment
+      status
+    - Default
   * - 7.4
     - `Bugfix: Use conditional prevalence to initialize AD dementia state
       instead of unconditional prevalence
       <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/58>`_
-    -
-    -
-    -
-    -
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA
+    - Stratify disease state transitions and person-time by treatment
+      status
+    - Default
   * - 7.5
     - `Bugfix: Don't initialize BBBM testing history in baseline
       scenario <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/60>`_
-    -
-    -
-    -
-    -
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA
+    - Stratify disease state transitions and person-time by treatment
+      status
+    - Default
   * - 7.6
     - `Additional bug fixes for BBBM testing
       <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/60>`_
-    -
-    -
-    -
-    -
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA
+    - Stratify disease state transitions and person-time by treatment
+      status
+    - Default
   * - 8.0
     -
     -
@@ -890,11 +894,12 @@ scenario, and input draw.
     -
   * - 7.4
     -
-    -
+    - Not checking directly since Abie included these changes; check
+      model 8.1 instead
     -
   * - 7.5
     -
-    -
+    - Not checking since fixes were incomplete; check model 7.6 instead
     -
   * - 7.6
     -
