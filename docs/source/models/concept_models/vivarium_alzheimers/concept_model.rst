@@ -840,14 +840,16 @@ scenario, and input draw.
       * Year-stratified BBBM test count per newly eligible person count match time-specific rates
       * CSF/PET tests initialized properly - no testing spike for first time step
     - 
-    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_03_model6.0_vv_testing.ipynb
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_03_model6.0_vv_testing.ipynb>`__
   * - 6.1
     - * Compute BBBM test rate as (count of tests) / (eligible
         person-time)
       * Compute fraction of simulants who have had BBBM tests as
         (person-time ever tested) / (person-time ever eligible)
     -
-    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_08_model6.1_vv_testing.ipynb
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_08_model6.1_vv_testing.ipynb>`__
   * - 7.0
     - * Positive BBBM tests result in treatment initiation rates that match the year/location specific rates from :math:`I` in the :ref:`treatment intervention data table <alzheimers_intervention_treatment_data_table>`
       * 10% of transitions to `Full treatment effect` status are by simulants who discontinue treatment
@@ -857,7 +859,10 @@ scenario, and input draw.
         `BBBM test negative`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect` statuses (for both completed and discontinued treatments)
       * Check hazard ratios for simulants who begin treatment and those who transition to `No treatment effect`
     -
-    -
+    - * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_14_model7.0_vv_treatment.ipynb>`__
+      * `Interactive sim
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_20_model7.0_interactive_sim.ipynb>`__
   * - 7.1
     - Same as model 7.0, but add:
 
@@ -867,7 +872,10 @@ scenario, and input draw.
         when increasing BBBM testing, rather than CSF testing always
         decreasing first
     -
-    -
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_22_model7.1_vv_testing.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_22_model7.1_vv_treatment.ipynb>`__
   * - 7.2
     - Same as model 7.1, but add:
 
@@ -878,7 +886,10 @@ scenario, and input draw.
       * Re-run V&V from models 4 and 5 to check disease state
         incidence, prevalence, etc.
     -
-    -
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_24_model7.2_vv.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_24_model7.2_vv_treatment.ipynb>`__
   * - 7.3
     -
     - There were several problems with the BBBM test history:
@@ -891,20 +902,22 @@ scenario, and input draw.
         closer to the mark of 60%
       * Our graphs of (person-time ever tested) / (person-time ever
         eligible) look way different
-    -
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_28_model7.3_vv_testing.ipynb>`__
   * - 7.4
     -
     - Not checking directly since Abie included these changes; check
       model 8.1 instead
-    -
+    - N/A
   * - 7.5
     -
     - Not checking since fixes were incomplete; check model 7.6 instead
-    -
+    - N/A
   * - 7.6
     -
     -
-    -
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_29_model7.6_vv_testing.ipynb>`__
   * - 8.0
     -
     -
