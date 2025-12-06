@@ -820,14 +820,24 @@ scenario, and input draw.
 
       * Compute prevalence of AD-dementia state alone (in addition to
         combined prevalence of all 3 disease states)
-    - AD-dementia incidence looks identical to 4.4, so the double rounding was perhaps not a problem after all
+    - * AD-dementia incidence looks identical to 4.4, so the double
+        rounding was perhaps not a problem after all
+      * Prevalence counts of all 3 states combined look pretty good
+      * The prevalence counts of the AD-dementia state alone is too low
+        at the start of the sim, then becomes too high as time goes on
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
   * - 5.0
     - Same as 4.5, except add this check that we should have been doing
       previously:
 
-      * Check disability weights of MCI and AD-dementia
-    -
+      * Check disability weights of MCI and AD-dementia by computing
+        YLDs/person-time for each sex and age group
+    - * AD-dementia incidence is still close but a bit off, similar to
+        model 4.5
+      * Prevalence of AD-dementia still starts off too low and then
+        becomes too high
+      * Disability weights computed from the sim are virtually identical
+        to those stored in the artifact
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_09_24_model5.0_vv.ipynb>`__
       * `Disability weights
@@ -839,7 +849,25 @@ scenario, and input draw.
       * Year-stratified CSF/PET test counts per CSF/PET eligible person-year match location and time-specific rates
       * Year-stratified BBBM test count per newly eligible person count match time-specific rates
       * CSF/PET tests initialized properly - no testing spike for first time step
-    - 
+    - * CSF and PET testing rates in baseline scenario match artifact
+        values
+      * Baseline CSF and PET testing rates match between concept model
+        and artifact
+      * CSF and PET testing rates in BBBM testing scenario decrease as
+        expected as BBBM tests scale up, but CSF tests always start
+        decreasing **before** PET tests, which is likely due to the way
+        the testing propensity was implemented (the desired behavior is
+        that CSF and PET tests would be independent of each other and
+        would start decreasing **simultaneously**)
+      * BBBM tests only occur from ages 60 - 79 as expected
+      * BBBM test rate, calculated as (count of BBBM tests) / (count of
+        newly eligible simulants), spikes in 2030 as expected and then
+        increases until 2045 as expected, but it levels off between 0.1
+        and 0.2 in all countries, which is not close to our target value
+        of 0.6. This is likely due to the lifetime propensities for
+        testing, and we think we need to compute the test rate in a
+        different way to validate the eventual testing coverage of 60%.
+      * BBBM test sensitivity is 90% as expected
     - * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_03_model6.0_vv_testing.ipynb>`__
   * - 6.1
@@ -847,7 +875,25 @@ scenario, and input draw.
         person-time)
       * Compute fraction of simulants who have had BBBM tests as
         (person-time ever tested) / (person-time ever eligible)
-    -
+    - * The means of CSF and PET testing rates in baseline still look
+        good, but the uncertainty intervals look off (I didn't check the
+        uncertainty in model 6.0)
+      * Plots of (BBBM tests) / (eligible person-time) look similar to
+        plots of (BBBM tests) / (counts of eligible simulants), so not
+        vey helpful
+      * Plots of (person-time ever tested) / (person-time ever eligible)
+        look good when stratified by age group:
+
+        * For each age group above age 60, the coverage increases
+          monotonically and levels off at 60% coverage, which is the
+          target
+        * Age groups from 60 - 79 all have an immediate jump in 2030 as
+          expected and follow identical patterns
+        * Age groups above age 80 follow a similar pattern but have a
+          time lag and don't show the initial jump -- this is also
+          expected
+
+      * Other checks look the same as in model 6.0
     - * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_08_model6.1_vv_testing.ipynb>`__
   * - 7.0
