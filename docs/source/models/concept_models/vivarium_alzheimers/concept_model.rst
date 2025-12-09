@@ -573,6 +573,7 @@ scenario, and input draw.
       <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/60>`_
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: USA
+      * Simulation end date: 2065-12-31
     - Stratify disease state transitions and person-time by treatment
       status
     - Default
@@ -937,31 +938,58 @@ scenario, and input draw.
       * `Treatment
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_24_model7.2_vv_treatment.ipynb>`__
   * - 7.3
-    -
+    - Re-run testing notebook from model 7.1. Things should look
+      similar, but testing should ramp up slightly slower
     - There were several problems with the BBBM test history:
 
       * The baseline scenario had people entering with BBBM test history
-      * The sensitivity now appears to be 80% instead of 90% (unless
-        something needs to change about the way I'm computing it)
+      * The sensitivity now appears to be 80% instead of 90% -- it looks
+        like negative tests from before the sim are getting counted by
+        the observer, but we want to count just tests that occur
+        *during* the sim
       * Our original idea of measuring the testing rate as (# tests) /
         (# newly eligible) or (# tests) / (eligible person-time) look
         closer to the mark of 60%
       * Our graphs of (person-time ever tested) / (person-time ever
-        eligible) look way different
+        eligible) look very different from model 7.1, and I'm not sure
+        why
     - * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_28_model7.3_vv_testing.ipynb>`__
   * - 7.4
-    -
-    - Not checking directly since Abie included these changes; check
-      model 8.1 instead
+    - * Check initial prevalence of all three AD states
+      * Re-check the other health metrics (incidence, prevalence,
+        mortality, etc.) in the baseline scenario
+    - Not checking directly since Abie's run included these changes;
+      check model 8.1 instead
     - N/A
   * - 7.5
-    -
+    - Skip, check 7.6 instead
     - Not checking since fixes were incomplete; check model 7.6 instead
     - N/A
   * - 7.6
-    -
-    -
+    - Re-run testing notebook from model 7.3 to see if things look more
+      like they did in 7.1
+    - Things look good now, more like they did in model 7.1:
+
+      * Baseline scenario no longer includes BBBM testing history
+      * Sensitivity is back to 90% as expected
+      * Plots of (person-time ever tested) / (person-time ever eligible)
+        look very similar to how they did in model 7.1
+
+      There are a few minor differences with model 7.1 that I'm not sure
+      how to explain:
+
+      * The BBBM testing rate measured as (# tests) / (# newly eligible)
+        levels off just under 50%, compared to around 15% in model 7.1,
+        and there's a similar pattern for (# tests) / (eligible
+        person-time)
+      * The number of newly eligible simulants remains flatter after the
+        first couple years, and the number of new BBBM tests per year
+        levels off at a higher value than in model 7.1
+      * The fraction of newly eligible simulants with negative BBBM
+        tests remains much smaller now, under 5% compared with leveling
+        off at almost 15% in model 7.1
+
     - * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_29_model7.6_vv_testing.ipynb>`__
   * - 8.0
