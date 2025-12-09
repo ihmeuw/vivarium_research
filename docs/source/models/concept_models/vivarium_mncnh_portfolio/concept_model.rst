@@ -2502,34 +2502,7 @@ Default stratifications to all observers should include scenario and input draw.
       * 21.1 V&V criteria met.
       * Note: we can't check azithromycin, misoprostol, ACS, or CPAP RRs in simulation results. Need to add scenarios for this.
     - `21.1.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/163>`__
-  * - 
-    - GA floors
-    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
-      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
-    - 
-    - 
-  * - 
-    - Remaining pregnancy model refactor
-    - In the simulation outputs:
-
-      * Confirm inverted anemia screening baseline coverage bug has been resolved
-      * Confirm expected effects of IFA and MMS on preterm birth outputs (note this will be confounded by ANC in the sim outputs, so RRs should be calculated stratified by ANC attendance exposure)
-      * Confirm that stillbirths, preterm birth counts, and neonatal deaths now vary between the baseline and MMS scale-up scenarios
-      * Confirm that baseline calibration still looks appropriate, particularly with respect to preterm birth counts, neonatal mortality, pregnancy outcomes, and facility choice (effect of baseline IFA on GA may have throw off our preterm/ANC correlation from the calibration)
-
-      In the interactive simulation:
-
-      * Confirm the expected magnitude of GA and BW shifts due to IFA and MMS
-      * Confirm that neonatal mortality varies by the intervention-modified GA and BW exposures
-      * Confirm that the ultrasound gestational age dating is based on intervention-modified gestational age at birth exposure
-    - 
-    - 
-  * - 
-    - Larger run for neonatal mortality V&V
-    - Confirm expected rates of cause-specific and overall maternal disorders causes
-    - 
-    - 
-  * - 
+  * - 22.0.1
     - Add residual and other maternal disorders
     - * Confirm incidence and mortality risk of existing cause-specific maternal disorders matches expectation (we don't expect them to be exactly the same due to changes in stochastic uncertainty, but same trends as before, noting that sepsis and hemorrhage are slightly miscalibrated due to the hemoglobin PAFs we are using)
       * Confirm expected mortality ratios of (1) residual and (2) abortion/ectopic/miscarriage causes
@@ -2537,6 +2510,39 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that mortality and morbidity due to residual maternal disorders happens among live and stillbirths only and that abortion/ectopic/miscarriage mortality does not
     -
     -
+  * - 23.0
+    - Remaining pregnancy model refactor
+    - In the simulation outputs:
+
+      * Confirm inverted anemia screening baseline coverage bug has been resolved
+      * Confirm expected effects of IFA and MMS on preterm birth outputs (note this will be confounded by ANC in the sim outputs, so RRs should be calculated stratified by ANC attendance exposure)
+      * Confirm that preterm birth counts, and neonatal deaths now vary between the baseline and MMS scale-up scenarios
+      * Confirm that baseline calibration still looks appropriate, particularly with respect to preterm birth counts, neonatal mortality, pregnancy outcomes, and facility choice (effect of baseline IFA on GA may have throw off our preterm/ANC correlation from the calibration)
+
+      In the interactive simulation:
+
+      * Confirm the expected magnitude of GA and BW shifts due to IFA and MMS
+      * Confirm that neonatal mortality varies by the intervention-modified GA and BW exposures
+      * Confirm that the ultrasound gestational age dating is based on intervention-modified gestational age at birth exposure
+    - * Anemia screening baseline coverage resolved
+      * Effect of IFA on preterm birth appears overestimated in Nigeria and Ethiopia, but looks okay for Pakistan in simulation results
+      * In the interactive simulation, the birth weight and gestational age pipeline values appear to maintain constant LBWSG exposure category across timestep, but continuous exposure values within that category reset each timestep (intervention effects are maintained across the changes to the continuous values). A consistent value is maintained in the state table, and this appears to be the value that is used for downstream impacts of BW and GA values, so it does not appear to be causing any direct issues. However, it is confusing and seems more likely to cause a future error and makes it more challenging to perform V&V on the effect of baseline IFA.
+      * Early neonatal other causes mortality risk in Pakistan is overestimated in our simulation relative to GBD.
+      * Preterm birth prevalence overestimated 
+      * Overestimating believed term status among truly preterm infants
+      * Otherwise all criteria are met
+    - 
+  * - 
+    - GA floors
+    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
+      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
+    - 
+    - 
+  * - 
+    - Larger run for neonatal mortality V&V
+    - Confirm expected rates of cause-specific and overall maternal disorders causes
+    - 
+    - 
   * - 
     - IV iron coverage and effect on hemoglobin
     - * Confirm scenario-specific IV iron and anemia screening coverage rates (verification with sim outputs)
