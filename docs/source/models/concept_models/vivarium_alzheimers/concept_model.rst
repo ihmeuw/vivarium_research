@@ -905,7 +905,45 @@ scenario, and input draw.
       * Interactive sim verification spot checking a simulant's durations in treatment statuses as they move through 
         `BBBM test negative`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect` statuses (for both completed and discontinued treatments)
       * Check hazard ratios for simulants who begin treatment and those who transition to `No treatment effect`
-    -
+    - Things that look good:
+
+      * Treatment coverage ramps up as expected
+      * 10% of simulants discontinue treatment as expected
+      * Ratio of person-time between disease states looks good, given
+        that we can't predict exactly what this will look like in the
+        observers (the person-time for the "waning effect long" state
+        looks a bit low, but this is likely because a significant number
+        of people die before they reach the end of this state)
+      * Average treatment state durations for people entering or exiting
+        each state look good (again, we can't predict these exactly
+        because of deaths)
+      * Averted deaths, YLLs, and YLDs all seem reasonable
+      * In the interactive sim, the hazard ratio (RR) for the treatment
+        effect looks correct
+      * Treatment state durations look good in the interactive sim, but
+        I didn't run it long enough to check the "waning effect long"
+        state
+
+      Things that look wrong:
+
+      * I can't check the hazard ratio in the sim outputs because we
+        didn't stratify disease state person-time or transitions by
+        treatment status
+      * Simulants in the 80-84 age group are entering the
+        "start treatment" state (aka "waiting for treatment") when they
+        shouldn't be
+      * In the interactive sim, the MCI incidence probability looks like
+        it's about half as big as it should be (we determined that the
+        hazard rate was getting multiplied by the time step of ~0.5
+        *twice* instead of once)
+      * In the interactive sim, some simulants have an RR of 1.0 on the
+        last time step of the "waning treatment effect" state, whereas
+        the docs specify that this should not happen until the "no
+        effect" state on the next time step (this was determined to be
+        an off-by-one error due to a misinterpretation of the docs, but
+        we decided to leave it as is to err on the side of less
+        effective treatment)
+
     - * `Treatment
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_14_model7.0_vv_treatment.ipynb>`__
       * `Interactive sim
