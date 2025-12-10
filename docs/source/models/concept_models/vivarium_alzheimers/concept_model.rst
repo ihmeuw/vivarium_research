@@ -578,55 +578,63 @@ scenario, and input draw.
       status
     - Default
   * - 8.0
-    -
+    - Steve's run of `Abie's consistent rates model
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/44>`_
     -
     -
     -
     -
   * - 8.1
-    -
+    - Consistent rates model with AD prevalence bug fix from model 7.4
     -
     -
     -
     -
   * - 8.2
-    -
+    - Model 8.1, but one draw with 500 seeds, for estimating population
+      size for final run
     -
     -
     -
     -
   * - 8.3
-    -
+    - Model 8.1 + use EMR from DisMod
     -
     -
     -
     -
   * - 8.4
-    -
+    - Final runs for 10/31 deadline: Model 8.3 + merge in changes
+      through model 7.6
     -
     -
     -
     -
   * - 8.5
-    -
-    -
-    -
+    - `Bugfix: Ensure all new simulants enter the sim in the BBBM state
+      after time zero
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/62>`_
+      (previously, new simulants had been continuing to enter all 3
+      states according to the initial prevalences)
+    - Baseline
+    - * Locations: USA, Sweden
     -
     -
   * - 8.6
-    -
-    -
-    -
+    - Run model 8.5 for all three scenarios
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA, Sweden
     -
     -
   * - 8.7
-    -
+    - New final runs, same as models 8.5/8.6, but with more random seeds
     -
     -
     -
     -
   * - 9.0
-    -
+    - `Split AD dementia into mild, moderate, severe
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/59>`_
     -
     -
     -
