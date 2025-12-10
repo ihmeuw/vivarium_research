@@ -299,6 +299,8 @@ Default stratifications for all observations:
 Additionally, all output should automatically be stratified by location,
 scenario, and input draw.
 
+.. _alz_observer_outputs:
+
 .. list-table:: Outputs of simulation observers
   :header-rows: 1
 
