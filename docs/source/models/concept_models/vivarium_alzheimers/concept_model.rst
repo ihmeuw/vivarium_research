@@ -956,7 +956,12 @@ scenario, and input draw.
       * Check that CSF and PET testing start decreasing at the same time
         when increasing BBBM testing, rather than CSF testing always
         decreasing first
-    -
+    - * The relative risk of treatment on BBBM → MCI transition looks
+        about right for the "treatment effect long" state, but is
+        strangely wiggly in the "treatment effect short" state --- this
+        may be an artifact of how the observers work
+      * CSF and PET tests now decrease simultaneously as BBBM testing
+        ramps up, as desired
     - * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_22_model7.1_vv_testing.ipynb>`__
       * `Treatment
@@ -970,7 +975,16 @@ scenario, and input draw.
         sim
       * Re-run V&V from models 4 and 5 to check disease state
         incidence, prevalence, etc.
-    -
+    - * Transitions into the "waiting for treatment" state are now
+        restricted to the age range 60-79 as desired
+      * The BBBM → MCI hazard rate and the RR of treatment on this
+        hazard both look reasonable in the observer output; I didn't
+        check these in the interactive sim
+      * The results of running the model 5 V&V notebook seem reasonable,
+        but it's hard to tell exactly because the notebook was designed
+        for the baseline scenario only and is probably adding together
+        results from all three scenarios (I didn't have time to fix this
+        yet)
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_24_model7.2_vv.ipynb>`__
       * `Treatment
