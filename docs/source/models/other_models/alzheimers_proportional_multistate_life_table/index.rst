@@ -63,7 +63,7 @@ AD dementia stages. This choice improves runtime by decreasing the simulation si
 However, since the susceptible population still undergoes BBBM testing, for complete BBBM testing results 
 we must model those persons and observe
 the number of BBBM tests conducted, the number of positive BBBM tests (false positives),
-and the number of treatments initiated (unessecary treatments).
+and the number of treatments initiated (unnessecary treatments).
 
 See the :ref:`intervention_alzheimers_testing_diagnosis` docs for more details on BBBM testing.
 
@@ -144,29 +144,6 @@ Each blank cell represents a subpopulation with a stored count.
     - 
     - 
 
-.. list-table:: Testing States
-  :header-rows: 1
-
-  * - State
-    - Description
-  * - Untested
-    - MSLT simulants do not receive a BBBM test unless their lifetime :ref:`propensity <bbbm_propensity>`
-      is less than the current time-specific :ref:`test rate <bbbm_rates>`, which is monotonic increasing.
-      We avoid modeling individual propensities by testing a certain fraction of the untested subpopulation
-      on each time step that the test rate increases. The fraction corresponds to the magnitude of the increase.
-  * - Positive
-    - Simulants who test positive remain in this state until they age out. Continuing to track these simulants
-      is important to match the Vivarium simulation, which uses a :ref:`"person-time ever eligible" <alz_observer_outputs>`
-      observer to validate test rates.
-  * - Negative (0 y ago)
-    - Tested simulants move either to the positive state or this state. On the next time step they will move to
-      the "one year ago" state.
-  * - Neg (1 y)
-    - 
-  * - Neg (2 y)
-    - On the next time step simulants will move to either the positive or negative 0 years ago state.
-
-
 
 Initializing the Population
 +++++++++++++++++++++++++++
@@ -200,12 +177,38 @@ tests and treatments.
 We use an annual time step in order to best reflect our annual test rate targets. 
 
 On each time step, new simulants must be added to the MSLT. The only way to enter the MSLT is to turn 
-60 years old, since it models all 60-80 year-olds who are not in the Vivarium simulation.
+60 years old, since it models all 60-80 year-olds who are not in the Vivarium simulation (see below for more details).
 
 The existing populations must be aged one year, and those who transition to preclinical AD or die must 
 be removed.
 
 Finally, test states must be updated, testing and treatments must be given, and observers updated.
+
+The below table summarizes the test states and how simulants transition between them, with more detail 
+in the following sections.
+
+.. list-table:: Testing States
+  :header-rows: 1
+
+  * - State
+    - Description
+  * - Untested
+    - MSLT simulants do not receive a BBBM test unless their lifetime :ref:`propensity <bbbm_propensity>`
+      is less than the current time-specific :ref:`test rate <bbbm_rates>`, which is monotonic increasing.
+      We avoid modeling individual propensities by testing a certain fraction of the untested subpopulation
+      on each time step that the test rate increases. The fraction corresponds to the magnitude of the increase.
+  * - Positive
+    - Simulants who test positive remain in this state until they age out. Continuing to track these simulants
+      is important to match the Vivarium simulation, which uses a :ref:`"person-time ever eligible" <alz_observer_outputs>`
+      observer to validate test rates.
+  * - Negative (0 y ago)
+    - Tested simulants move either to the positive state or this state. On the next time step they will move to
+      the "one year ago" state.
+  * - Neg (1 y)
+    - On the next time step simulants will move to the negative 2 years ago state.
+  * - Neg (2 y)
+    - On the next time step simulants will move to either the positive state or negative 0 years ago state.
+
 
 Adding New Simulants
 --------------------
@@ -233,14 +236,14 @@ Some fraction of the susceptible, 60-79 year old population dies each year. We c
 age, year, sex and location specific background mortality rate from the year-specific forecasted ACMR 
 and 2021 CSMR from the artifact. ACMR forecasts end in 2050.
 
-:math:`\text{mortality} = \text{ACMR} - \text{CSMR}`
+:math:`\text{mortality}_{\text{age}, \text{year}} = \text{ACMR}_{\text{age}, \text{year}} - \text{CSMR}_{\text{age}, \text{2021}}`
 
 On each time step we apply this background mortality rate to all 
 subpopulations in our table of susceptible 60-79 year olds, without varying by test or treatment status.
 
 
-Removing Simulants who Enter the simulation
--------------------------------------------
+Removing Simulants Incident to Alzheimer's
+------------------------------------------
 
 Some fraction of the susceptible, 60-79 year old population transitions from the susceptible state to the preclinical
 state each year. We use the ``cause.alzheimers.susceptible_to_bbbm_transition_count`` artifact key as our source for 
@@ -269,7 +272,7 @@ Once the total number of people selected for testing on the time step is determi
 (incident 60 year olds, negative 2 years ago and untested), tests are conducted.
 
 Per the test parameters from the client, the BBBM test has a 90% specificity. We move 90% of the simulants to the negative
-2 years ago state and 10% to the positive state.
+0 years ago state and 10% to the positive state.
 
 Based on the location- and year-specific :ref:`treatment initiation rate <alzheimers_intervention_treatment_data_table>`, 
 we observe the number of treatment initations.
