@@ -1590,6 +1590,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - Default
     - 
+  * - 22.0.1
+    - Residual maternal disorders observer
+    - Bug fix to include residual maternal disorders in observation
+    - Baseline
+    - Default
+    - 
   * - 23.0
     - Remaining pregnancy model refactor
     - Specifically with regard to LBWSG exposure. Note that intervention effects on stillbirth are not expected to be resolved in this run. Additionally, include `bugfix for inverted baseline anemia screening coverage <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/199>`__
@@ -2509,8 +2515,13 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm expected mortality ratios of (1) residual and (2) abortion/ectopic/miscarriage causes
       * Confirm expected YLDs due to (1) residual and (2) abortion/ectopic/miscarriage causes
       * Confirm that mortality and morbidity due to residual maternal disorders happens among live and stillbirths only and that abortion/ectopic/miscarriage mortality does not
+    - Residual maternal disorders not included in observation
+    - No notebooks due to lack of observers, see 22.0.1
+  * - 22.0.1
+    - Residual maternal disorders observer
+    - Same as 22.0.0
     - Everything matches, except that cause ID 1160 rather than 379 was included in "residual maternal disorders"
-    - `22.0.0 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/165>`__
+    - `22.0.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/165>`__
   * - 23.0
     - Remaining pregnancy model refactor
     - In the simulation outputs:
