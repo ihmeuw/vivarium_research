@@ -1636,7 +1636,7 @@ Default stratifications to all observers should include scenario and input draw.
     - None
   * -
     - IV iron effects on BW, GA, and stillbirth
-    - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data specific to GBD 2023 has yet to be generated)
+    - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` 
     - Baseline and IV iron scale-up scenarios
     - Default
     - IV iron coverage and effect on hemoglobin run, MMS stillbirth effects 
