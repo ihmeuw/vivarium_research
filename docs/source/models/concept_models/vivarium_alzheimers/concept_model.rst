@@ -578,23 +578,27 @@ scenario, and input draw.
       status
     - Default
   * - 8.0
-    - Steve's run of `Abie's consistent rates model
+    - `Abie's consistent rates model
       <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/44>`_
-    -
-    -
+    - Baseline
+    - * Locations: Sweden, USA
     -
     -
   * - 8.1
     - Consistent rates model with AD prevalence bug fix from model 7.4
-    -
-    -
+    - Baseline
+    - * Locations: Sweden, USA
     -
     -
   * - 8.2
     - Model 8.1, but one draw with 500 seeds, for estimating population
       size for final run
-    -
-    -
+    - Baseline, Alternative Scenario 2
+    - * Locations: USA
+      * Simulation end date: 2060-12-31
+      * Number of Draws: 1
+      * Population size per draw: 10 million (500 seeds of 20,000
+        simulants each)
     -
     -
   * - 8.3
@@ -1055,15 +1059,26 @@ scenario, and input draw.
   * - 8.0
     -
     -
-    -
+    - * `Disease transition rates, mortality, incidence, prevalence
+        (Sweden) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_23a_consistent_model_prototype_vv.ipynb>`__
+      * `Disease transition rates, mortality, incidence, prevalence
+        (USA) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27_model8.0_vv.ipynb>`__
   * - 8.1
     -
     -
-    -
+    - * `Disease transition rates, mortality, incidence, prevalence
+        (Sweden)
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_24b_consistent_model_prototype_vv-3-M8.1.ipynb>`__
+      * `Disease transition rates, mortality, incidence, prevalence
+        (USA) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.1_vv.ipynb>`__
   * - 8.2
     -
     -
-    -
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.2_vv.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_28_model8.2_vv_treatment.ipynb>`__
+      * Abie's notebook estimating variance of scale-up?
   * - 8.3
     -
     -
