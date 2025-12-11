@@ -2706,7 +2706,7 @@ Default stratifications to all observers should include scenario and input draw.
     - `Update model in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1847>`__
     - "Pakistan fistula update" model run
   * - In GBD 2023 data for Pakistan the mortality values for the abortion and miscarriage cause (c_995) are very small (nearly the lowest of any national location globally),
-      causing unexpectedly low YLLs (~100 times fewer YLDs than India)
+      causing unexpectedly low YLLs (~100 times fewer than India)
     - Possible issue with ST-GPR model reacting to an all-zero datapoint added in GBD 2023 for Pakistan
     - Determine cause of issue with GBD modeling team, decide whether to leave as-is or use a proxy location
     - TBD
