@@ -199,13 +199,22 @@ Affected Outcome #1
 
   * - Population
     - Effect size
+    - Uncertainty
     - Note
   * - Malnourished women
-    - +50 g birthweight
+    - Mean difference: +50 g birthweight 
+    - No parameter uncertainty or individual-level stochastic uncertainty in effect
     - 
-  * - Adequately nourished women
-    - +10 g birthweight
+  * - Total eligible population
+    - Relative risk of outcome: 0.9, CI: 0.86 to 0.93
+    - Use the specified RR estimate and confidence interval bounds to generate a lognormal distribution and randomly sample values to generate draw-level values to represent parameter uncertainty. No individual-level stochastic uncertainty in effect.
     - 
+
+.. note::
+
+  The "Uncertainty" column in this table should provide instructions on how to represent parameter and/or individual-level stocastic uncertainty in the effect size. 
+
+  When specifying a lognormal distribution of uncertainty, be aware that the `code routinely used in vivarium simulations <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/83b8c9991319843c749e9fadbe828087ef38fdf2/src/vivarium_gates_mncnh/utilities.py#L148>`__ to implement such a distribution uses the specified RR value as the distribution median and uses the confidence interval bounds to calculate a standard deviation that is then applied about that median. Care should be taken to confirm that the mean and confidence intervals in your simulation results match your desired behavior. Otherwise, you may provide custom instructions for how to generate and sample from a distribution according to your desired specifications.
 
 .. todo::
 
