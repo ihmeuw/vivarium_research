@@ -194,7 +194,6 @@ Affected Outcome #1
     - 
 
 .. list-table:: Affected Outcome #1 Effect Size
-  :widths: 15 15 15 
   :header-rows: 1
 
   * - Population
