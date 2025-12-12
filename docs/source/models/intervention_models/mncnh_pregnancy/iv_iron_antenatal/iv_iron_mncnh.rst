@@ -166,15 +166,11 @@ We will model the effect of IV iron on both gestational age at birth (GA) and bi
 Effect size derivation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
-
-  Perform GBD 2023 update for effect size calculations (dependent on GBD 2023 LBWSG exposure and draw availability strategy will change)
-
 The code to derive of IV iron's effect on gestational age and birth weight exposures as 100% mediated through hemoglobin is `hosted here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/hgb_birth_effect_generation.py>`_ and a `notebook that steps through these functions can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/function_tester.ipynb>`_. 
 
 The general steps of the derivation are summarized here:
 
-1. Load the burden of proof estimates and convert the beta coefficients to relative risks by exponentiating. Duplicate the 250 draws available from the BoP model so that we have 500 working draws such that draw 0 has the same values as 250, etc.
+1. Load the burden of proof estimates and convert the beta coefficients to relative risks by exponentiating. 
 2. Interpolate the RR values as a function of exposure and store the function with exposure values that are the same as those used in the :ref:`GBD hemoglobin risk effects model for maternal disorders <2023_hemoglobin_effects>`. Note that if we have to extrapolate beyond the bounds of the burden of proof exposure values, we assume "piecewise constant extrapolation" where the RRs for the exposure values beyond the bounds are equal to the RR value for the nearest exposure boundary value.
 3. Transform the relative risk values to be relative to the hemgolobin TMREL value of 120 g/L by dividing all relative risk values by the exposure level closest to 120 g/L.
 4. In a manner similar to the `GBD custom calculation for the PAF of a risk on the outcome as mediated through LBWSG <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/custom_pafs.html#mortality-paf-calculation-for-subcauses-of-the-aggregate-lbwsga-outcome>`_: for each hemoglobin exposure level, X, use optimization to solve for the shift in continuous GA or BW exposure between X and the hemoglobin TMREL that results in the observed relative risk of dichotomous PTB or LBW between X and the hemoglobin TMREL. This step is performed under the following assumptions:
@@ -250,7 +246,7 @@ And the probabilities of experiencing the remaining birth outcomes are as follow
 
 Where, :math:`\text{stillbirth probability}_{overall}`, :math:`\text{live birth probability}_{overall}`, and :math:`\text{other probability}_{overall}` are defined on the :ref:`MNCNH pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>` and :math:`RR_\text{IV iron, x}` is the IV iron relative risk of stillbirth for a given hemoglobin exposure :math:`\text{x}`.
 
-`Effects can be found in .csv file here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/iv_iron_stillbirth_rrs.csv>`_. This csv file contains values for 250 draws stratified by location and hemoglobin "exposure" in grams per liter. To obtain values for the 500 draws to be added to the MNCNH simulation artifact, duplicate the values twice such that draw 0 has the same values as draw 250, etc.
+`Effects can be found in .csv file here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/iv_iron_stillbirth_rrs.csv>`_. This csv file contains values for 250 draws stratified by location and hemoglobin "exposure" in grams per liter. 
 
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
