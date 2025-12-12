@@ -1622,12 +1622,19 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - None
   * -
+    - Refactor updates
+    - * Update observed values for preterm birth, believed preterm, and ACS eligibility to be null for pregnancies that end in abortion/miscarriage/ectopic pregnancies ("partial term" pregnancies)
+      * Use updated values for IFA and MMS effects on gestational age that account for correlation between LBWSG exposure and ANC attendance
+    - All
+    - Default
+    - RT-owned data generation and doc updates
+  * -
     - Larger run for neonatal mortality V&V
     - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Baseline
     - * For this run only, 10,000,000 population size per draw
       * Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-    - Remaining pregnancy model refactor run (model 23) V&V
+    - Refactor updates run
   * -
     - IV iron coverage and effect on hemoglobin
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
@@ -1645,7 +1652,7 @@ Default stratifications to all observers should include scenario and input draw.
     - As defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (Custom PAFs and neonatal sepsis effects have yet to be calculated for GBD 2023): Updated custom PAF values for maternal hemorrhage and maternal sepsis outcomes (paired with existing implementation of GBD RRs); New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
     - Baseline and IV iron scale-up scenarios
     - Default
-    - RT-owned data generation that is blocked by neonatal mortality V&V run
+    - RT-owned data generation that is blocked by Separate LBWSG affected causes run
   * -
     - Postpartum hemoglobin
     - 
@@ -2525,17 +2532,47 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that neonatal mortality varies by the intervention-modified GA and BW exposures
       * Confirm that the ultrasound gestational age dating is based on intervention-modified gestational age at birth exposure
     - * Anemia screening baseline coverage resolved
-      * Effect of IFA on preterm birth appears overestimated in Nigeria and Ethiopia, but looks okay for Pakistan in simulation results
-      * In the interactive simulation, the birth weight and gestational age pipeline values appear to maintain constant LBWSG exposure category across timestep, but continuous exposure values within that category reset each timestep (intervention effects are maintained across the changes to the continuous values). A consistent value is maintained in the state table, and this appears to be the value that is used for downstream impacts of BW and GA values, so it does not appear to be causing any direct issues. However, it is confusing and seems more likely to cause a future error and makes it more challenging to perform V&V on the effect of baseline IFA.
+      * Application of IFA and MMS effects on gestational age and birthweight is functioning as expected
+      * In the interactive simulation, the effect of IFA on preterm birth appears overestimated in Nigeria and Ethiopia, but looks okay for Pakistan in simulation results
+      * In the interactive simulation, the birth weight and gestational age pipeline values appear to maintain constant LBWSG exposure category across timestep, but continuous exposure values within that category reset each timestep (intervention effects are maintained across the changes to the continuous values). A consistent value is maintained in the state table, and this appears to be the value that is used for downstream impacts of BW and GA values, so it does not appear to be causing any direct issues. However, it is confusing and seems more likely to cause a future error and makes it more challenging to perform V&V on the effect of baseline IFA. (Note this behavior is demonstrated in the model 23.0 interactive_simulation_lbwsg notebook)
+
+        * NOTE: this issue was addressed in `this engineering PR <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/212>`__. It's successful implementation was verified in the "23.0_bugfix" interactive_simulation_lbwsg notebook 
+
       * Early neonatal other causes mortality risk in Pakistan is overestimated in our simulation relative to GBD.
-      * Preterm birth prevalence overestimated 
-      * Overestimating believed term status among truly preterm infants
-      * Otherwise all criteria are met
-    - 
+      * The following issues are thought to be related to a failure to account for the correlation between LBWSG exposure and ANC attendance in the calculation of IFA gestational age shifts:
+
+        * Effect of IFA on preterm birth appears overestimated in Nigeria and Ethiopia, but looks okay for Pakistan in simulation results
+        * Preterm birth prevalence overestimated 
+        * Overestimating believed term status among truly preterm infants
+
+      * The following parameters are non-null for partial term pregnancies, which is unexpected
+
+        * In the interactive simulation
+
+          * Birth weight and gestational age
+          * Child sex
+          * Child mortality risk
+
+        * In observed simulation results
+
+          * Preterm birth
+          * Believed preterm birth
+          * ACS eligible
+
+      * There is zero coverage of "ACS availability" for stillbirths. This should not be the case.
+    - `Model 23.0 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/166>`__
   * - 
     - GA floors
     - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
       * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
+    - 
+    - 
+  * - 
+    - Refactor updates
+    - * Confirm partial term pregnancies now have null values for observed measures of preterm birth, believed preterm, and ACS eligibility
+      * Confirm expected effect of IFA and MMS on preterm birth in simulation outputs
+      * Confirm expected rate of preterm birth at baseline
+      * Confirm delivery facility choice targets related to preterm birth are met
     - 
     - 
   * - 
@@ -2640,25 +2677,25 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Neonatal deaths do not vary by scenario despite increased coverage of the oral iron intervention that should affect BW and GA exposures (and therefore child mortality)
-    - Impacts of oral iron intervention of birth weight and gestational age pipeline values are working, but LBWSG RRs are being assigned based on the state table exposure values (that are recorded on the first timestep).
-    - Engineers to address during pregnancy model refactor
-    - Remaining pregnancy refactor
-  * - No impact of IFA or MMS on observed preterm birth counts
-    - While we have the interventions modifying the pipeline values for these exposures, we are observing preterm birth based on the state table values that are recorded on the first timestep.
-    - Engineers to address during pregnancy model refactor
-    - Remaining pregnancy refactor
-  * - Preterm birth appears overestimated in observers
-    - Same cause as previous; the recorded (and observed) BW and GA exposures are from the first timestep, after baseline IFA deletion but before oral iron intervention effects are added back in.
-    - Engineers to address during pregnancy model refactor
-    - Remaining pregnancy refactor
+  * - Effect of IFA on preterm birth appears to be overestimated and failure to calibrate to expected preterm birth prevalence and related measures in model 23.0 
+    - Thought to be due to the failure to account for the failure to account for the correlation between LBWSG exposure and ANC attendance in the calculation of the IFA and MMS gestational age shifts 
+    - Research to recalculate IFA and MMS gestational age shifts to account for correlation
+    - Refactor updates
+  * - Early neonatal other causes mortality risk in Pakistan overestimated
+    - Unknown
+    - Assess whether this is due to the negative other causes mortality rate issue in the neonatal mortality V&V run
+    - Neonatal mortality V&V run
+  * - Abortion/miscarriage/ectopic pregnancies have non-null values for preterm birth, believed preterm, ACS eligibility in observed simulation results. While we can filter these results out, it presents opportunity for error in analyzing results and these values should be updated to N/A for partial term pregnancies
+    - Partial term pregnancies are assigned LBWSG exposures in the interactive sim and therefore are observed for these outputs
+    - Engineers to update
+    - Refactor updates
+  * - There is zero coverage of "ACS availability" among stillbirths even though stillbirths should be eligible and covered by this intervention.
+    - Likely a result of there being null coverage for CPAP availability for stillbirths (because they are not alive to receive CPAP). However, stillbirths should receive ACS coverage if they are in the relevant believed gestational age range and delivering in a facility that has CPAP access.
+    - Wait until we split stillbirths into antepartum and intrapartum before we address this issue, as only intrapartum stillbirths should receive ACS coverage
+    - TBD
   * - No impact of MMS on stillbirth
     - Unknown, was previously meeting verification criteria. No impact in the interactive sim or in the simulation results
     - Engineers to investigate and update
-    - Remaining pregnancy refactor
-  * - Propensity for LBWSG category remains constant across timesteps, but propensity for continuous BW and GA values reset at each timestep
-    - This should not cause significant bias in our results, but it is not logical to have a different birth weight at different ages and unnecessarily increases stochastic uncertainty in our simulation
-    - Engineers to address during pregnancy model refactor
     - Remaining pregnancy refactor
   * - `Ferritin exposure model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2439>`__
     - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
@@ -2698,11 +2735,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Issue with GBD fistula model in which Pakistan burden was erroneously set to zero 
     - `Update model in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1847>`__
     - "Pakistan fistula update" model run
-  * - Anemia screening coverage is inverted
-    - Coverage is one minus the correct value
-    - Engineers have already implemented a fix in `this PR <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/199>`__ that was run in model 23.0
-      Research to check that fix worked.
-    - Model 23.0 V&V
 
 
 .. _mncnh_portfolio_6.0:
