@@ -2692,7 +2692,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Action plan
     - Timeline
   * - Effect of IFA on preterm birth appears to be overestimated and failure to calibrate to expected preterm birth prevalence and related measures in model 23.0 
-    - Thought to be due to the failure to account for the failure to account for the correlation between LBWSG exposure and ANC attendance in the calculation of the IFA and MMS gestational age shifts 
+    - Thought to be due to the failure to account for the correlation between LBWSG exposure and ANC attendance in the calculation of the IFA and MMS gestational age shifts 
     - Research to recalculate IFA and MMS gestational age shifts to account for correlation
     - Refactor updates
   * - Early neonatal other causes mortality risk in Pakistan overestimated
