@@ -1590,17 +1590,30 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - Default
     - 
+  * - 22.0.1
+    - Residual maternal disorders observer
+    - Bug fix to include residual maternal disorders in observation
+    - Baseline
+    - Default
+    - 
   * - 23.0
     - Remaining pregnancy model refactor
     - Specifically with regard to LBWSG exposure. Note that intervention effects on stillbirth are not expected to be resolved in this run. Additionally, include `bugfix for inverted baseline anemia screening coverage <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/199>`__
     - All
     - Default
     - 
-  * - 
-    - MMS stillbirth effects
+  * - 24.0
+    - MMS stillbirth effects and GA floors
     - * Update simulation to appropriately apply effects of MMS on stillbirth by determining "broad pregnancy outcome" (abortion/ectopic/miscarriage versus live/still birth) at initialization (prior to administration of MMS) and then later, after MMS administration, determine live versus stillbirth outcomes
       * Add misoprostol and azithromycin scenarios to runs
+      * Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See the changes made to the pregnancy and LBWSG exposure model documents in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1840>`__ Note that this update will require re-running the LBWSG PAF calculation. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor").
     - All, including newly re-added scenarios #12 Azithromycin V&V and #13 Misoprostol V&V (note that scenarios #12 and #13 have been run before, but have been dropped from the branches file)
+    - Default
+    - None
+  * - 
+    - Residual maternal disorders bugfix
+    - Fix issue of use of cause ID 1160 rather than cause ID 379 for indirect maternal deaths
+    - Baseline
     - Default
     - None
   * - 
@@ -1612,12 +1625,6 @@ Default stratifications to all observers should include scenario and input draw.
   * -
     - Update SBR to >=24 weeks
     - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
-    - Baseline 
-    - Default
-    - None
-  * -
-    - GA floors
-    - Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See the changes made to the pregnancy and LBWSG exposure model documents in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1840>`__ Note that this update will require re-running the LBWSG PAF calculation. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor").
     - Baseline
     - Default
     - None
@@ -2502,13 +2509,20 @@ Default stratifications to all observers should include scenario and input draw.
       * 21.1 V&V criteria met.
       * Note: we can't check azithromycin, misoprostol, ACS, or CPAP RRs in simulation results. Need to add scenarios for this.
     - `21.1.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/163>`__
-  * - 
-    - GA floors
-    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
-      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
-    - 
-    - 
-  * - 
+  * - 22.0.0
+    - Add residual and other maternal disorders
+    - * Confirm incidence and mortality risk of existing cause-specific maternal disorders matches expectation (we don't expect them to be exactly the same due to changes in stochastic uncertainty, but same trends as before, noting that sepsis and hemorrhage are slightly miscalibrated due to the hemoglobin PAFs we are using)
+      * Confirm expected mortality ratios of (1) residual and (2) abortion/ectopic/miscarriage causes
+      * Confirm expected YLDs due to (1) residual and (2) abortion/ectopic/miscarriage causes
+      * Confirm that mortality and morbidity due to residual maternal disorders happens among live and stillbirths only and that abortion/ectopic/miscarriage mortality does not
+    - Residual maternal disorders not included in observation
+    - No notebooks due to lack of observers, see 22.0.1
+  * - 22.0.1
+    - Residual maternal disorders observer
+    - Same as 22.0.0
+    - Everything matches, except that cause ID 1160 rather than 379 was included in "residual maternal disorders"
+    - `22.0.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/165>`__
+  * - 23.0
     - Remaining pregnancy model refactor
     - In the simulation outputs:
 
@@ -2524,17 +2538,17 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that the ultrasound gestational age dating is based on intervention-modified gestational age at birth exposure
     - 
     - 
+  * - 24.0
+    - MMS stillbirth effects and GA floors
+    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
+      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
+      * Confirm expected effects of IFA and MMS on pregnancy outcomes (note this will be confounded by ANC attendance in the simulation outputs, so RRs should be calculated stratified by ANC attendance exposure)
+      * Confirm expected effects of misoprostol and azithromycin interventions on maternal disorders using scenarios #12 and #13
+    - 
+    - 
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
-    - 
-    - 
-  * - 
-    - Add residual and other maternal disorders
-    - * Confirm incidence and mortality risk of existing cause-specific maternal disorders matches expectation (we don't expect them to be exactly the same due to changes in stochastic uncertainty, but same trends as before, noting that sepsis and hemorrhage are slightly miscalibrated due to the hemoglobin PAFs we are using)
-      * Confirm expected mortality ratios of (1) residual and (2) abortion/ectopic/miscarriage causes
-      * Confirm expected YLDs due to (1) residual and (2) abortion/ectopic/miscarriage causes
-      * Confirm that mortality and morbidity due to residual maternal disorders happens among live and stillbirths only and that abortion/ectopic/miscarriage mortality does not
     -
     -
   * - 
@@ -2600,12 +2614,6 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that ratio between ultrasound timing categories matches the expected ratio between first trimester ANC attendance and later pregnancy only ANC attendance. More specifically, the following should be true ``standard_first_trimester / standard_later_pregnancy == ai_assisted_first_trimester / ai_assisted_later_pregnancy == (anc_first_trimester_only + anc_first_trimester_and_later_pregnancy) / anc_later_pregnancy_only``
       * Confirm that ultrasounds performed in the first trimester occur only among those who attend ANC in the first trimester according to their ANC attendance category (and likewise for later pregnancy)
       * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type and timing (specific distribution of errors assessed in the interactive simulation and summary "confusion matrix" assessed as part of the facility choice model V&V targets)
-    - 
-    - 
-  * - 
-    - MMS stillbirth effects
-    - * Confirm expected effects of IFA and MMS on pregnancy outcomes (note this will be confounded by ANC attendance in the simulation outputs, so RRs should be calculated stratified by ANC attendance exposure)
-      * Confirm expected effects of misoprostol and azithromycin interventions on maternal disorders using scenarios #12 and #13
     - 
     - 
   * - 
