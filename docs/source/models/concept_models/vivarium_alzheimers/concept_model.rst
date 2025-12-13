@@ -26,6 +26,12 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
+.. Define a substitution to create manual line breaks using HTML:
+
+.. |br| raw:: html
+
+  <br />
+
 .. _2025_concept_model_vivarium_alzheimers:
 
 ===============================================
@@ -926,7 +932,14 @@ scenario, and input draw.
       * Interactive sim verification spot checking a simulant's durations in treatment statuses as they move through 
         `BBBM test negative`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect` statuses (for both completed and discontinued treatments)
       * Check hazard ratios for simulants who begin treatment and those who transition to `No treatment effect`
-    - Things that look good:
+    - `V&V summary in PR 19
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/19>`_
+
+      .. add manual line break for extra vertical space:
+
+      |br|
+
+      Things that look good:
 
       * Treatment coverage ramps up as expected
       * 10% of simulants discontinue treatment as expected
@@ -964,10 +977,9 @@ scenario, and input draw.
         an off-by-one error due to a misinterpretation of the docs, but
         we decided to leave it as is to err on the side of less
         effective treatment)
-
     - * `Treatment
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_14_model7.0_vv_treatment.ipynb>`__
-      * `Interactive sim
+      * `Interactive sim (hazard rates)
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_20_model7.0_interactive_sim.ipynb>`__
   * - 7.1
     - Same as model 7.0, but add:
@@ -1091,19 +1103,32 @@ scenario, and input draw.
   * - 8.3
     -
     -
-    -
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_29_model8.3_vv_testing.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_29_model8.3_vv_treatment.ipynb>`__
   * - 8.4
     -
     -
-    -
+    - * `Notebooks generating results tables in PR 28
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/28>`_
   * - 8.5
     -
-    -
-    -
+    - `V&V summary in PR 31
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/31>`_
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.5_vv.ipynb>`__
+      * `Interactive sim (hazard rates)
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.5_interactive_sim_hazard_rates.ipynb>`__
+      * `Interactive sim (testing)
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_05_model8.5_interactive_sim_testing.ipynb>`__
   * - 8.6
     -
-    -
-    -
+    - `V&V summary in PR 31`_
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.6_vv_testing.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.6_vv_treatment.ipynb>`__
   * - 8.7
     -
     -
