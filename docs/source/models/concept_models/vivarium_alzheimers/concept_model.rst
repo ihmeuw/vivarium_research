@@ -580,40 +580,44 @@ scenario, and input draw.
   * - 8.0
     - `Abie's consistent rates model
       <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/44>`_
-    - Baseline
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: Sweden, USA
-    -
-    -
+    - Stratify disease state transitions and person-time by treatment
+    - Default
   * - 8.1
     - Consistent rates model with AD prevalence bug fix from model 7.4
-    - Baseline
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: Sweden, USA
-    -
-    -
+    - Stratify disease state transitions and person-time by treatment
+    - Default
   * - 8.2
     - Model 8.1, but one draw with 500 seeds, for estimating population
       size for final run
     - Baseline, Alternative Scenario 2
     - * Locations: USA
       * Simulation end date: 2060-12-31
-      * Number of Draws: 1
+      * Number of draws: 1
       * Population size per draw: 10 million (500 seeds of 20,000
         simulants each)
-    -
-    -
+    - Stratify disease state transitions and person-time by treatment
+    - Default
   * - 8.3
     - Model 8.1 + use EMR from DisMod
-    -
-    -
-    -
-    -
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: All
+      * Simulation end date: 2060-12-31
+      * Number of draws: 5
+    - Stratify disease state transitions and person-time by treatment
+    - Default
   * - 8.4
     - Final runs for 10/31 deadline: Model 8.3 + merge in changes
       through model 7.6
-    -
-    -
-    -
-    -
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: All
+      * Population size per draw: 2 million (100 seeds of 20,000
+        simulants each)
+    - Stratify disease state transitions and person-time by treatment
+    - Default
   * - 8.5
     - `Bugfix: Ensure all new simulants enter the sim in the BBBM state
       after time zero
@@ -622,27 +626,32 @@ scenario, and input draw.
       states according to the initial prevalences)
     - Baseline
     - * Locations: USA, Sweden
-    -
-    -
+    - Stratify disease state transitions and person-time by treatment
+    - Default
   * - 8.6
     - Run model 8.5 for all three scenarios
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: USA, Sweden
-    -
-    -
+    - Stratify disease state transitions and person-time by treatment
+    - Default
   * - 8.7
     - New final runs, same as models 8.5/8.6, but with more random seeds
-    -
-    -
-    -
-    -
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: All
+      * Population size per draw: 2 million (100 seeds of 20,000
+        simulants each)
+    - Stratify disease state transitions and person-time by treatment
+    - Default
   * - 9.0
     - `Split AD dementia into mild, moderate, severe
       <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/59>`_
-    -
-    -
-    -
-    -
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: China
+      * Number of draws: 3
+      * Population size per draw: 2 million (100 seeds of 20,000
+        simulants each)
+    - Stratify disease state transitions and person-time by treatment
+    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -1078,7 +1087,7 @@ scenario, and input draw.
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.2_vv.ipynb>`__
       * `Treatment
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_28_model8.2_vv_treatment.ipynb>`__
-      * Abie's notebook estimating variance of scale-up?
+      * Abie's notebook estimating variance when scaling up?
   * - 8.3
     -
     -
