@@ -1610,12 +1610,12 @@ Default stratifications to all observers should include scenario and input draw.
     - All, including newly re-added scenarios #12 Azithromycin V&V and #13 Misoprostol V&V (note that scenarios #12 and #13 have been run before, but have been dropped from the branches file)
     - Default
     - None
-  * - 
+  * - 22.0.2
     - Residual maternal disorders bugfix
     - Fix issue of use of cause ID 1160 rather than cause ID 379 for indirect maternal deaths
     - Baseline
     - Default
-    - None
+    -
   * - 
     - Hemoglobin lag fix
     - Fix issue of state table hemoglobin exposure variable lagging behind pipeline value by one timestep
@@ -2529,6 +2529,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Same as 22.0.0
     - Everything matches, except that cause ID 1160 rather than 379 was included in "residual maternal disorders"
     - `22.0.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/165>`__
+  * - 22.0.2
+    - Residual maternal disorders bugfix
+    - Same as 22.0.0
+    - Everything matches
+    - `22.0.2 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/167>`__
   * - 23.0
     - Remaining pregnancy model refactor
     - In the simulation outputs:
@@ -2749,6 +2754,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Issue with GBD fistula model in which Pakistan burden was erroneously set to zero 
     - `Update model in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1847>`__
     - "Pakistan fistula update" model run
+  * - In GBD 2023 data for Pakistan the mortality values for the abortion and miscarriage cause (c_995) are very small (nearly the lowest of any national location globally),
+      causing unexpectedly low YLLs (~100 times fewer than India)
+    - Possible issue with ST-GPR model reacting to an all-zero datapoint added in GBD 2023 for Pakistan
+    - Determine cause of issue with GBD modeling team, decide whether to leave as-is or use a proxy location
+    - TBD
+
 
 
 .. _mncnh_portfolio_6.0:
