@@ -527,7 +527,7 @@ The antenatal supplementation products affect child gestational age at birth exp
 
 In order to make these effects compatible with our continuous exposure modeling strategy for LBWSG, we have converted these relative risks of dichotomous outcomes to continuous gestational age "shifts" that result in preterm (and very preterm, if applicable) birth prevalence that replicates the appropriate dichotomous measure of effect. 
 
-The methodology for this conversion was inspired in part by the methodology of the air pollution GBD team in calculating the impact of the risk on LWBSG exposures. As with GBD, we assume that these shifts are independent of any shifts in birth weight. However, rather than implement the conversion using the LBWSG exposure distribution specific to the individual study included in a meta-analysis of the overall effect to find a global shift as GBD did, we used the meta-analyzed global relative risks and applied the conversion for each of our modeled locations, resulting in location-specific continuous shifts that replicate the global dichotomous effect.
+The methodology for this conversion was inspired in part by the methodology of the air pollution GBD team in calculating the impact of the risk on LBWSG exposures. As with GBD, we assume that these shifts are independent of any shifts in birth weight. However, rather than implement the conversion using the LBWSG exposure distribution specific to the individual study included in a meta-analysis of the overall effect to find a global shift as GBD did, we used the meta-analyzed global relative risks and applied the conversion for each of our modeled locations, resulting in location-specific continuous shifts that replicate the global dichotomous effect.
 In the case of birth weight shifts, it may be more accurate to assume that the relative risks are generalizable across locations.
 
 Additionally, our methods differ from GBD's in that we estimated two separate GA shifts, conditional on baseline GA exposure, for the effect of MMS relative to IFA rather than a single shift applied equally to the entire distribution. This approach allowed us to replicate the literature-reported relative risks of MMS on both preterm birth (<37 weeks) as well as very preterm birth (<32 weeks). This "dual shift" approach follows these steps:
@@ -637,7 +637,7 @@ The dichotomous measures of effects should also replicate the intended values.
 Birth outcomes
 ++++++++++++++++++
 
-Antenatal supplementation interventions will affect the risk of stillbirth for full term pregnancies (NOTE: not necessary to apply to partial term pregnancies), as described in the :ref:`pregnancy model document <other_models_pregnancy>`. Notably, it is assumed that increased risk of stillbirth will result in decreased risk of live birth and vise versa, with no impact on the risk of abortion/miscarriage or ectopic pregnancy.
+Antenatal supplementation interventions will affect the risk of stillbirth for live/stillbrith pregnancies (NOTE: not necessary to apply to abortion/miscarriage/ectopic pregnancies), as described in the :ref:`pregnancy model document <other_models_pregnancy>`. Notably, it is assumed that increased risk of stillbirth will result in decreased risk of live birth and vise versa, with no impact on the risk of abortion/miscarriage or ectopic pregnancy.
 
 The observed effect of each antenatal supplementation product on the risk of stillbirth is summarized below:
 
@@ -656,6 +656,44 @@ The observed effect of each antenatal supplementation product on the risk of sti
   * - BEP
     - 0.39 (95% CI: 0.19, 0.80), lognormal distribution of uncertainty
     - Relative to no supplementation/IFA, [Lassi-et-al-2020-antenatal-supplementation]_
+
+.. warning::
+
+  The above MMS effect should say 0.91 (95% CI: 0.86, 0.98); the CI is a copy-paste error from
+  the MMS effect on very preterm birth in [Keats-et-al-2019-maternal-supplementation]_.
+  However, it was implemented as written in the nutrition optimization simulation.
+
+  Notably, the function that generates the lognormal distribution (``get_lognorm_from_quantiles``) uses the quantiles to calculate a standard deviation and apply that about the mean rather than use the quantiles directly. Therefore, the transcription error in the confidence interval of the effect of MMS resulted in an overestimation of the uncertainty of this parameter, but did not significantly bias the mean value of the distribution. A comparison of the intended versus erroneous distribution that was used in the simulation and the code used to create it is shown below.
+
+  .. image:: mms_sb_ci.png
+
+  .. code::
+
+    import matplotlib.pyplot as plt
+    from vivarium_gates_mncnh.utilities import get_lognorm_from_quantiles
+
+    mn = 0.92
+    lcl = 0.86
+    ucl = 0.98
+    lcl_alt = 0.71
+    ucl_alt = 0.93
+    
+    dist = get_lognorm_from_quantiles(mn, lcl, ucl)
+    dist_alt = get_lognorm_from_quantiles(mn, lcl_alt, ucl_alt)
+    
+    x = np.linspace(0.7, 1.2, 100)
+    plt.plot(x, dist.pdf(x), label='Correct distribution')
+    plt.plot(x, dist_alt.pdf(x), label='Erroneous distribution')
+    plt.axvline(dist.mean(), color='tab:blue', linestyle='--')
+    plt.axvline(dist_alt.mean(), color='tab:orange', linestyle='--')
+    y_val = 13.5
+    plt.fill_between([dist.ppf(0.025), dist.ppf(0.975)], [0, 0], [y_val, y_val], color='tab:blue', alpha=0.1)
+    plt.fill_between([dist_alt.ppf(0.025), dist_alt.ppf(0.975)], [0, 0], [y_val, y_val], color='tab:orange', alpha=0.1)
+    plt.legend()
+    plt.ylim(ymax=y_val)
+    plt.xlabel('Relative risk')
+    plt.title('MMS and stillbirth RR distributions')
+    plt.grid()
 
 Because there is no effect of IFA on stillbirths and we assume there is no baseline coverage of MMS or BEP, there is no differentiation in stillbirth rate due to baseline coverage of antenatal supplementation products in our modeled populations. Therefore, we can simply apply the relative risk of stillbirth directly to the baseline stillbirth rate without accounting for calibration of baseline coverage (in other words, the PAF of antenatal supplementation on stillbirths is equal to 0).
 

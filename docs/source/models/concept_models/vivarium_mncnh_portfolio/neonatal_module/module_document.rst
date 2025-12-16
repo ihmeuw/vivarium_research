@@ -106,7 +106,7 @@ The following risk factors affect neonatal causes:
 
   * **Risk effects:** instructions for how to apply LBWSG risk effects are described on the :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`. Additional information can be found on the :ref:`LBWSG risk effects document <2019_risk_effect_lbwsg>`
 
-* Hemoglobin at birth
+* Hemoglobin at end of pregnancy
 
   * **Risk exposure:** informed as an output from the hemoglobin module
 

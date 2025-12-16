@@ -42,9 +42,12 @@ The antenatal IV iron intervention is intended to treat moderate and severe iron
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-.. todo::
+IV iron treatment for iron-definiciency anemia pregnancy remains a relatively new intervention, and as such, coverage remains relatively low in low- and middle-income countries, such as Nigeria (see [Akinajo-et-al-2024]_). 
+As such, we will assume a baseline coverage of 0% for all locations for the IV iron intervention. 
 
-  Update baseline coverage data 
+.. note::
+
+  As there is no modeled baseline coverage of this intervention in our simulation, we have written the modeling strategy without instructions for baseline calibration (via a PAF or otherwise). If we are to eventually update the baseline coverage of this intervention to be non-zero, we will need to update the modeling strategy below accordingly to include a strategy for baseline calibration.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -87,30 +90,63 @@ The IV iron intervention has a direct effect on hemoglobin exposure in pregnancy
 Hemoglobin exposure
 +++++++++++++++++++++
 
-.. todo::
-
-  Update IV iron effect size to be consistent with new data from Chris T.
-  Also, assume no individual level heterogeneity despite having some data on this. (We chose not to model this in order to simplify the data prep for this model)
-
 .. list-table:: Maternal hemoglobin effect size
   :header-rows: 1
 
   * - Population
+    - Location
     - Effect size
     - Parameter uncertainty
     - Stochastic uncertainty
     - Note
   * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
-    - 
-    - 
-    - 
-    - 
+    - Nigeria and Ethiopia
+    - +20.2 mg/L
+    - Assumed normal distribution with 95% CI: [18.9, 21.5] mg/L
+    - Assumed to be zero for simplicity
+    - From the REVAMP study (second trimester) [Pasricha-et-al-2023]_
+  * - Pregnant simulants who attend later pregnancy ANC with test hemoglobin levels less than 100 g/L and test low ferritin levels
+    - Pakistan
+    - +26.3 mg/L
+    - Assumed normal distribution with 95% CI: [25.7, 26.9] mg/L
+    - Assumed to be zero for simplicity
+    - From the RAPID study [Derman-et-al-2025]_ 
+
+.. note::
+
+  Unlike the REVAMP study, the RAPID study did include ferritin levels (serum ferritin <30 ng/mL) as an eligibility criterion for receiving IV iron, but it is still not consistent with our assumption that IV iron is only administered to those with low ferritin levels, because low ferritin OR low hemoglobin was used to determine if a pregnant person was eligible for the intervention.
+  The RAPID study therefore still has the same limitation regarding pre-intervention ferritin status (see Assumptions and limitations section below)
+
+.. note::
+
+  We calculated the 95% confidence intervals for the effect size of IV iron on hemoglobin concentrations using the following method: 
+  
+    1. SE = SD / sqrt(n)
+    2. LCL = mean – 1.96 * SE
+    3. UCL = mean + 1.96 * SE
+
+  For the REVAMP trial, SD = 14.1 and n=430, and for the RAPID trial, SD = 12.0 and n=1462.
 
 Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - We assume the effect of the intervention persists through the end of the period for which we track hemoglobin status
 - We do not consider effect modification by baseline hemoglobin status. In reality, the effect of IV iron may be greater among women with lower baseline hemoglobin levels.
+- We assume that the effect size of IV iron on hemoglobin concentrations as reported in the REVAMP study (which took place in Malawi) is representative of the effect size in Nigeria and Ethiopia, and that the value reported by the RAPID study (which took place in India) is representative of the effect size in Pakistan.
+- We assume that the effect of IV iron among those with low ferritin levels (those eligible in our simulation) is the same as the effect of IV iron among people not screened for ferritin (the study population for both the RAPID and REVAMP studies). 
+  In reality, we'd expect that people with low ferritin would benefit more, so we may underestimate the impact of the intervention.
+- We assume that the change in hemoglobin concentrations from baseline to endline in the RAPID and REVAMP studies is more appropriate to use for our simulation than the comparison between the IV iron arm and the standard-of-care arm.
+  This is because our standard of care (IFA) model in our simulation does not appropriately include the effect modification of IFA for the population eligible for IV iron (our model underestimates the effect of IFA among this population). 
+  Therefore, if we used the difference between the arms we would be underestimating the total effect of IV iron among this population unless we updated our model of IFA. 
+  So we use the difference between endline and baseline to more closely model the total effect of IV iron on hemoglobin. 
+  The resulting limitation from this approach is that we will attribute some of the impact that actually comes from the standard-of-care intervention (IFA) to the IV iron intervention in our model, resulting in an overestimation of the impact of IV iron and an underestimation of the impact of MMS. 
+- We do not consider effect modification by timing of IV iron administration, and thereby assume that pregnant people that receive IV iron in the second trimester of their pregnancy have the same effect size as those who receive it in the third trimester (despite [Pasricha-et-al-2025]_ reporting a lower effect size for the latter group).
+  As such, we are likely overestimating the effect of IV iron for those who don't receive it until their third trimester. 
+  Because we are not currently modeling (a) the timing of "later pregnancy" ANC visits or (b) the hemoglobin trajectory throughout pregnancy in enough detail to figure out exactly when the IV iron is administered to a simulant, we assume that we will get to them early (i.e., administer IV iron during second trimester) with the new minimally invasive screening protocol being scaled up in this simulation.
+    
+    * We have a `JIRA ticket to address this limitation <https://jira.ihme.washington.edu/browse/SSCI-2377>`_ if we choose to do so.
+- We assume that there is no individual-level heterogeneity in the effect of IV iron on hemoglobin concentrations, despite having some data that could inform this. 
+  We chose not to include stochastic uncertainty in order to simplify the data prep needed for this intervention model.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -130,27 +166,28 @@ We will model the effect of IV iron on both gestational age at birth (GA) and bi
 Effect size derivation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+The code to derive of IV iron's effect on gestational age and birth weight exposures as 100% mediated through hemoglobin is `hosted here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/hgb_birth_effect_generation.py>`_ and a `notebook that steps through these functions can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/function_tester.ipynb>`_. 
 
-  Revisit this section once we discuss how we want to assign this task between research and engineering and inside versus outside of the simulation model repository.
+The general steps of the derivation are summarized here:
 
-A derivation of IV iron's effect on gestational age and birth weight exposures as 100% mediated through hemoglobin is `performed for a single sex/location/draw pair in this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/data_prep/hemoglobin_mediation.ipynb>`_. The calculation for a single sex/location/draw pair for both outcomes took about 2.5 minutes, so about 75 hours of computation time is expected to derive these values for the entire MNCNH portfolio simulation across 3 locations, 2 sexes, and 250 draws. The code to produce these estimates should be included in the MNCNH portfolio simulation repository for transparency. 
-
-The specific details of the code to derive the effects is found in the linked notebook. The general steps of the derivation are summarized here:
-
-1. Load the burden of proof estimates and convert the beta coefficients to relative risks by exponentiating.
-2. Transform the relative risk values to be relative to the hemgolobin TMREL value of 120 g/L by dividing all relative risk values by the exposure level closest to 120 g/L.
-3. In a manner similar to the `GBD custom calculation for the PAF of a risk on the outcome as mediated through LBWSG <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/custom_pafs.html#mortality-paf-calculation-for-subcauses-of-the-aggregate-lbwsga-outcome>`_: for each hemoglobin exposure level, X, use optimization to solve for the shift in continuous GA or BW exposure between X and the hemoglobin TMREL that results in the observed relative risk of dichotomous PTB or LBW between X and the hemoglobin TMREL. This step is performed under the following assumptions:
+1. Load the burden of proof estimates and convert the beta coefficients to relative risks by exponentiating. 
+2. Interpolate the RR values as a function of exposure and store the function with exposure values that are the same as those used in the :ref:`GBD hemoglobin risk effects model for maternal disorders <2023_hemoglobin_effects>`. Note that if we have to extrapolate beyond the bounds of the burden of proof exposure values, we assume "piecewise constant extrapolation" where the RRs for the exposure values beyond the bounds are equal to the RR value for the nearest exposure boundary value.
+3. Transform the relative risk values to be relative to the hemgolobin TMREL value of 120 g/L by dividing all relative risk values by the exposure level closest to 120 g/L.
+4. In a manner similar to the `GBD custom calculation for the PAF of a risk on the outcome as mediated through LBWSG <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/custom_pafs.html#mortality-paf-calculation-for-subcauses-of-the-aggregate-lbwsga-outcome>`_: for each hemoglobin exposure level, X, use optimization to solve for the shift in continuous GA or BW exposure between X and the hemoglobin TMREL that results in the observed relative risk of dichotomous PTB or LBW between X and the hemoglobin TMREL. This step is performed under the following assumptions:
 
   - The population at the hemoglobin TMREL exposure has the same LBWSG exposure distribution as the population-level GBD LBWSG exposure distribution
   - There are no differences in the shape of the LBWSG exposure distribution across hemoglobin exposure levels
 
-4. Using the resulting GA and BW shift values for each hemoglobin exposure level relative to the hemoglobin TMREL from step #3, calculate the difference in shift values specific to each hemoglobin exposure level X and X + the effect size of IV iron on `Hemoglobin exposure`_ to calculate the effect of IV iron on GA and BW exposures specifc to the pre-IV iron hemoglobin exposure level X.
+5. Using the resulting GA and BW shift values for each hemoglobin exposure level relative to the hemoglobin TMREL from step #3, calculate the difference in shift values specific to each hemoglobin exposure level X and X + the effect size of IV iron on `Hemoglobin exposure`_ to calculate the effect of IV iron on GA and BW exposures specifc to the pre-IV iron hemoglobin exposure level X.
 
 Effect size application
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 For simulants who receive the IV iron intervention, the IV iron effect sizes for gestational age and birth weight specific to the simulant's "true" hemoglobin exposure at the time of anemia screening should be applied additively to the simulant's child's gestational age at birth and birth weight continuous exposures as initially sampled from the :ref:`GBD LBWSG exposure distribution <2019_risk_exposure_lbwsg>`.
+
+`Effects can be found in .csv files here <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/iv_iron_lbwsg_shifts>`_. Each csv file contains data specific to a given draw and each file is stratified by outcome (gestational age, birth weight), location, sex, and hemoglobin "exposure" in grams per liter.
+
+Data was only generated for the specific draws used in the MNCNH portfolio simulation. In generating the artifact, values for draws not used in the MNCNH portfolio simulation should ideally be filled with missing values or some illogical number like infinity so that we will notice an error if we attempt to run for a draw that does not contain valid data.
 
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -163,7 +200,7 @@ Assumptions and limitations
 
 - We do not utilize the effect estimates of hemoglobin on additional severities of dichotomous low birth weight and preterm birth outcomes (like "very low birth weight") despite the existence of such estimates
 - We do not consider any correlation between hemoglobin and LBWSG exposures in the derivation of the estimates of IV iron's impact on LBWSG
-- We assume that the GA and BW "shifts" attributable to hemoglobin apply equally to the entire LBWSG exposure distribution (in other words, assume no change in the shape of the LBWSG exposure distribution).
+- We assume that the GA and BW "shifts" attributable to hemoglobin apply equally to the entire LBWSG exposure distribution (in other words, assume no change in the shape of the LBWSG exposure distribution)
 
 Stillbirth
 +++++++++++++++++++++++++
@@ -176,63 +213,16 @@ We will model an effect of IV iron on stillbirth (a birth outcome defined on the
 Relative risk derivation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+Similar to the derivation of the effect of IV iron on birth weight and gestational age, the code to derive of IV iron's effect on stillbirth as 100% mediated through hemoglobin is `hosted here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/hgb_birth_effect_generation.py>`_ and a `notebook that steps through these functions can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/function_tester.ipynb>`_. 
 
-  Revisit this section once we discuss where these derivations should be performed and by whom
+The general steps of this derivation are summarized below:
 
-Note that the derivation of the IV iron relative risks are dependent on the effect size of IV iron on hemoglobin, as defined in the `Hemoglobin exposure`_ section. The derivation of these RRs as described below should be done in the model repository so that the values can easily be updated if the effect size of IV iron on hemoglobin were to ever change.
+1. Follow steps #1 and #2 listed in the "Effect size derivation" section for the `Birth weight and gestational age`_ outcomes
 
-The following steps detail how to obtain the IV iron-specific relative risks on stillbirth specific to a given hemoglobin exposure value.
-
-1. Load and transform the relative risk data from :code:`/mnt/team/anemia/pub/bop/sim_studies/stillbirth/inner_draws.csv`
-
-.. code:: python
-
-  import pandas as pd, numpy as np
-  df = pd.read_csv('/mnt/team/anemia/pub/bop/sim_studies/stillbirth/inner_draws.csv')
-  df = np.exp(df.set_index('risk')).reset_index()
-
-
-2. Calculate the hemoglobin exposure increment between each of the exposure levels stored in the :code:`risk` column of the .csv
-
-.. code:: python
-
-  exposure_levels = df.risk.unique()
-  exposure_increment = exposure_levels[1] - exposure_levels[0]
-
-3. Calculate the number of hemoglobin exposure levels stored in the :code:`risk` columns of the .csv that correspond to IV iron's effect on hemoglobin exposure (:code:`iv_iron_mean_difference`), found in the `Hemoglobin exposure`_ section of this document.
-
-.. code:: python
-
-    iv_iron_exposure_increment = (iv_iron_mean_difference / exposure_increment).round(0).astype(int)
-
-4. For each draw, n, calculate the IV iron effect on stillbirth for a given exposure level, i, by dividing the stillbirth RR value specific to the IV iron-shifted hemoglobin exposure by still birth RR value specific to the un-shifted hemoglobin exposure value.
-
-.. code:: python
-    
-    iv_iron_stillbirth_rrs = []
-    for i in df.index:
-        iv_iron_stillbirth_rrs.append(df.iloc[i + iv_iron_exposure_increment].draw_n. / df.iloc[i].draw_n)
-
-.. note::
-
-    Feel free to find a more efficient way to do this than looping over index values and draws!
-
-5. Now you have stillbirth relative risk values for IV iron, specific to pre-IV iron hemoglobin exposure values.
-
-PAF calculation
-~~~~~~~~~~~~~~~~~
-
-.. todo::
-
-    Add details on PAF calculation if it is determined that we have non-zero baseline coverage
+2. Similar to step #5 in the "Effect size derivation" section for the `Birth weight and gestational age`_ outcomes, calculate the risk of stillbirth for each hemoglobin exposure level X + the effect size of IV iron on `Hemoglobin exposure`_ relative to that unadjusted hemoglobin exposure level X. This value represents the relative risk of stillbirth following IV iron administration specific to the pre-IV iron hemoglobin exposure level X.
 
 Effect application
 ~~~~~~~~~~~~~~~~~~~
-
-.. todo::
-
-  Incorporate PAF strategy if PAF is determined to be non-zero
 
 The relative risk for this risk factor will apply to the probability of experiencing still birth such that for a given hemoglobin exposure, :math:`\text{x}`:
 
@@ -256,11 +246,13 @@ And the probabilities of experiencing the remaining birth outcomes are as follow
 
 Where, :math:`\text{stillbirth probability}_{overall}`, :math:`\text{live birth probability}_{overall}`, and :math:`\text{other probability}_{overall}` are defined on the :ref:`MNCNH pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>` and :math:`RR_\text{IV iron, x}` is the IV iron relative risk of stillbirth for a given hemoglobin exposure :math:`\text{x}`.
 
+`Effects can be found in .csv file here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/iv_iron_stillbirth_rrs.csv>`_. This csv file contains values for 250 draws stratified by location and hemoglobin "exposure" in grams per liter. 
+
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - The rate of each birth outcome should continue to validate to input data in the baseline scenario
-- Still birth rates should be lower, live birth rates should be higher, and partial term pregnancy rates should be unchanged in a scenario with IV iron coverage relative to a scenario without
+- Still birth rates should be lower, live birth rates should be higher, and abortion/miscarriage/ectopic pregnancy rates should be unchanged in a scenario with IV iron coverage relative to a scenario without
 - In the interactive simulation, rates of stillbirth binned by hemoglobin exposure should match expected shape of the relationship 
 
 Assumptions and limitations
@@ -274,3 +266,19 @@ Assumptions and limitations
 
 References
 ------------
+
+.. [Akinajo-et-al-2024]
+
+  Akinajo, O.R., Babah, O.A., Banke-Thomas, A. et al. Acceptability of IV iron treatment for iron deficiency anaemia in pregnancy in Nigeria: a qualitative study with pregnant women, domestic decision-makers, and health care providers. Reprod Health 21, 22 (2024). https://doi.org/10.1186/s12978-024-01743-y
+
+.. [Derman-et-al-2025]
+
+  Derman RJ, Bellad MB, Somannavar MS, Bhandari S, Mehta S, Mehta S, Sharma DK, Yogeshkumar S, Charantimath U, Patil AP, Mallapur AA, Ramadurg U, Sangavi R, Patil PS, Roy S, Vastrad P, Shekhar C, Leiby BE, Hartman RL, Georgieff M, Mennemeyer S, Aghai Z, Thind S, Boelig RC; RAPIDIRON Trial Group (Appendix). Single-dose intravenous iron vs oral iron for treatment of maternal iron deficiency anemia: a randomized clinical trial. Am J Obstet Gynecol. 2025 Aug;233(2):120.e1-120.e18. doi: 10.1016/j.ajog.2025.01.037. Epub 2025 Feb 3. PMID: 39909327.
+
+.. [Pasricha-et-al-2023]
+
+  Pasricha, S.R., Mwangi, M.N., Moya, E., Ataide, R., Mzembe, G., Harding, R., et al. (2023). Ferric carboxymaltose versus standard-of-care oral iron to treat second-trimester anaemia in Malawian pregnant women: a randomised controlled trial. The Lancet 401, 10388, P1595-1609 (2023). https://doi.org/10.1016/S0140-6736(23)00278-7 
+
+.. [Pasricha-et-al-2025]
+
+  Pasricha, SR., Moya, E., Ataíde, R. et al. Ferric carboxymaltose for anemia in late pregnancy: a randomized controlled trial. Nat Med 31, 197–206 (2025). https://doi.org/10.1038/s41591-024-03385-w

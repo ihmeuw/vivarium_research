@@ -13,6 +13,9 @@
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
+import os
+import sys
+sys.path.insert(0, os.path.abspath('.'))
 
 about = {
     '__title__': 'Vivarium Research',
@@ -57,6 +60,7 @@ extensions = [
     'sphinx_rtd_theme',
     'nbsphinx',
     'IPython.sphinxext.ipython_console_highlighting',
+    'fix-secnum',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -202,4 +206,5 @@ intersphinx_mapping = {
     'tables': ('https://www.pytables.org/', None),
     'numpy': ('https://numpy.org/doc/stable/', None),
     'vivarium_public_health': ('https://vivarium.readthedocs.io/projects/vivarium-public-health/en/latest/', None),
+    'vivarium': ('https://vivarium.readthedocs.io/en/latest/', None),
 }

@@ -671,8 +671,12 @@ Progression Transitions
 Severity Splits
 ^^^^^^^^^^^^^^^
 
+.. _models_cause_mortality_impacts:
+
 Mortality Impacts
 +++++++++++++++++
+
+.. _all_cause_mortality:
 
 All-Cause Mortality
 ^^^^^^^^^^^^^^^^^^^
