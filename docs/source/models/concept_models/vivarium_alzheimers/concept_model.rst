@@ -877,7 +877,14 @@ scenario, and input draw.
       * Year-stratified CSF/PET test counts per CSF/PET eligible person-year match location and time-specific rates
       * Year-stratified BBBM test count per newly eligible person count match time-specific rates
       * CSF/PET tests initialized properly - no testing spike for first time step
-    - * CSF and PET testing rates in baseline scenario match artifact
+    - `V&V summary in PR 14
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/14>`_
+
+      .. add manual line break for extra vertical space:
+
+      |br|
+
+      * CSF and PET testing rates in baseline scenario match artifact
         values
       * Baseline CSF and PET testing rates match between concept model
         and artifact
@@ -903,7 +910,12 @@ scenario, and input draw.
         person-time)
       * Compute fraction of simulants who have had BBBM tests as
         (person-time ever tested) / (person-time ever eligible)
-    - * The means of CSF and PET testing rates in baseline still look
+    - `V&V summary in PR 15
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/15>`_
+
+      |br|
+
+      * The means of CSF and PET testing rates in baseline still look
         good, but the uncertainty intervals look off (I didn't check the
         uncertainty in model 6.0)
       * Plots of (BBBM tests) / (eligible person-time) look similar to
@@ -934,8 +946,6 @@ scenario, and input draw.
       * Check hazard ratios for simulants who begin treatment and those who transition to `No treatment effect`
     - `V&V summary in PR 19
       <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/19>`_
-
-      .. add manual line break for extra vertical space:
 
       |br|
 
@@ -1078,14 +1088,17 @@ scenario, and input draw.
     - * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_29_model7.6_vv_testing.ipynb>`__
   * - 8.0
-    -
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
     -
     - * `Disease transition rates, mortality, incidence, prevalence
         (Sweden) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_23a_consistent_model_prototype_vv.ipynb>`__
       * `Disease transition rates, mortality, incidence, prevalence
         (USA) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27_model8.0_vv.ipynb>`__
   * - 8.1
-    -
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * See how initial prevalence looks after bugfix from model 7.4
     -
     - * `Disease transition rates, mortality, incidence, prevalence
         (Sweden)
@@ -1093,7 +1106,8 @@ scenario, and input draw.
       * `Disease transition rates, mortality, incidence, prevalence
         (USA) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.1_vv.ipynb>`__
   * - 8.2
-    -
+    - * See how variance and uncertainty in averted deaths scale with
+        population size
     -
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.2_vv.ipynb>`__
@@ -1101,19 +1115,38 @@ scenario, and input draw.
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_28_model8.2_vv_treatment.ipynb>`__
       * Abie's notebook estimating variance when scaling up?
   * - 8.3
-    -
-    -
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Make sure EMR matches new EMR from DisMod
+      * Re-run testing and treatment V&V notebooks
+    - `V&V summary in PR 27
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/27>`_
+
+      |br|
+
+      * Testing results have the same bugs as model 7.3, as expected
+      * Treatment results look like those in model 7.2, which is good
     - * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_29_model8.3_vv_testing.ipynb>`__
       * `Treatment
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_29_model8.3_vv_treatment.ipynb>`__
   * - 8.4
-    -
-    -
-    - * `Notebooks generating results tables in PR 28
+    - No V&V (due to lack of time), just generate results tables
+
+      * Model 5.0 V&V notebook (incidence, prevalence, mortality, etc.)
+        should look like model 8.3 in baseline scenario
+      * Testing notebook should look like model 7.6
+      * Treatment notebook should look similar to models 8.3 and 7.2
+    - N/A
+    - * `Results tables in PR 28
         <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/28>`_
   * - 8.5
-    -
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Check whether prevalence of AD dementia still increases faster
+        than the other two states, or if it looks more reasonable
+      * In the interactive sim, check that new simulants are only
+        entering in the BBBM state
     - `V&V summary in PR 31
       <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/31>`_
     - * `Disease transition rates, mortality, incidence, prevalence
@@ -1123,20 +1156,44 @@ scenario, and input draw.
       * `Interactive sim (testing)
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_05_model8.5_interactive_sim_testing.ipynb>`__
   * - 8.6
-    -
+    - * Re-run testing and treatment V&V notebooks
     - `V&V summary in PR 31`_
     - * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.6_vv_testing.ipynb>`__
       * `Treatment
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.6_vv_treatment.ipynb>`__
   * - 8.7
-    -
-    -
-    -
+    - No V&V (model is identical to 8.5/8.6), just generate results
+      tables
+    - N/A
+    - * `Preliminary results tables in PR 32
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/32>`_
+      * Final results tables in PR Y
   * - 9.0
-    -
-    -
-    -
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Make sure incidence, prevalence, etc. still look good
+      * Check that the prevalence of the different dementia severities
+        looks reasonable
+    - `V&V summary in PR 33
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/33>`_
+
+      |br|
+
+      * AD dementia incidence and prevalence are looking generally good,
+        except they're a bit too high in the younger ages, likely
+        because Abie didn't solve the differential equations for age <
+        45.
+      * AD dementia incidence and prevalence are a bit low at the
+        beginning of the sim. The same problem appears in model
+        8.5/8.6/8.7, but it looks slightly worse here.
+      * The prevalence of all disease states (including severities)
+        follows the expected pattern, and we can see slight changes in
+        prevalence between the baseline and treatment scenarios
+      * These results are only for 3 draws, so they could be affected by
+        parameter uncertainty.
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/8d0339e3ac748c5eed213a3a98e40b11a3aabffa/verification_and_validation/2025_11_19_model9.0_vv.ipynb>`__
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
