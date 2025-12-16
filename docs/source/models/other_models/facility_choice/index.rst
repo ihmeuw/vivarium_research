@@ -674,6 +674,8 @@ facility (F) of each simulant.**
 
   TODO: update to be consistent with BEMONC/CEMONC terminology?
 
+.. _facility_choice_calibration:
+
 Challenge of calibrating the model
 ----------------------------------
 
