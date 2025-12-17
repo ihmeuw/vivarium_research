@@ -1090,7 +1090,16 @@ scenario, and input draw.
   * - 8.0
     - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
         etc.)
-    -
+    - * EMR appears to be correct
+      * AD dementia incidence by age no longer looks obviously shifted
+        to the left like in model 5.0; it starts off a bit too high,
+        then gets closer to its target as tim goes on
+      * AD dementia prevalence starts off too low, then becomes a bit
+        too high as the sim progresses
+      * The relative prevalence of the three disease states over time
+        still looks weird: AD dementia prevalence starts off too low,
+        then increases much more quickly than the other two states,
+        which doesn't seem right
     - * `Disease transition rates, mortality, incidence, prevalence
         (Sweden) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_23a_consistent_model_prototype_vv.ipynb>`__
       * `Disease transition rates, mortality, incidence, prevalence
@@ -1099,7 +1108,15 @@ scenario, and input draw.
     - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
         etc.)
       * See how initial prevalence looks after bugfix from model 7.4
-    -
+    - * EMR appears to be correct
+      * AD dementia incidence now looks slightly underestimated,
+        particularly in older ages
+      * AD dementia prevalence now matches its target at the beginning
+        of the sim, but still becomes too high as the sim progresses
+      * The relative prevalence of the three disease states over time
+        still looks weird: Even though AD dementia prevalence now starts
+        off correctly, it still increases much more quickly than the
+        other two states and becomes too high
     - * `Disease transition rates, mortality, incidence, prevalence
         (Sweden)
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_24b_consistent_model_prototype_vv-3-M8.1.ipynb>`__
@@ -1108,7 +1125,7 @@ scenario, and input draw.
   * - 8.2
     - * See how variance and uncertainty in averted deaths scale with
         population size
-    -
+    - See linked notebooks →
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.2_vv.ipynb>`__
       * `Treatment
@@ -1184,7 +1201,7 @@ scenario, and input draw.
 
       |br|
 
-      * The number of tests, treatments, and deaths averted all
+      * The number of tests, treatments, and averted deaths all
         increased, by approximately a factor of 2
     - * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.6_vv_testing.ipynb>`__
