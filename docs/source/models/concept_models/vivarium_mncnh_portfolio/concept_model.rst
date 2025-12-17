@@ -1590,19 +1590,32 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - Default
     - 
+  * - 22.0.1
+    - Residual maternal disorders observer
+    - Bug fix to include residual maternal disorders in observation
+    - Baseline
+    - Default
+    - 
   * - 23.0
     - Remaining pregnancy model refactor
     - Specifically with regard to LBWSG exposure. Note that intervention effects on stillbirth are not expected to be resolved in this run. Additionally, include `bugfix for inverted baseline anemia screening coverage <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/199>`__
     - All
     - Default
     - 
-  * - 
-    - MMS stillbirth effects
+  * - 24.0
+    - MMS stillbirth effects and GA floors
     - * Update simulation to appropriately apply effects of MMS on stillbirth by determining "broad pregnancy outcome" (abortion/ectopic/miscarriage versus live/still birth) at initialization (prior to administration of MMS) and then later, after MMS administration, determine live versus stillbirth outcomes
       * Add misoprostol and azithromycin scenarios to runs
+      * Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See the changes made to the pregnancy and LBWSG exposure model documents in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1840>`__ Note that this update will require re-running the LBWSG PAF calculation. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor").
     - All, including newly re-added scenarios #12 Azithromycin V&V and #13 Misoprostol V&V (note that scenarios #12 and #13 have been run before, but have been dropped from the branches file)
     - Default
     - None
+  * - 22.0.2
+    - Residual maternal disorders bugfix
+    - Fix issue of use of cause ID 1160 rather than cause ID 379 for indirect maternal deaths
+    - Baseline
+    - Default
+    -
   * - 
     - Hemoglobin lag fix
     - Fix issue of state table hemoglobin exposure variable lagging behind pipeline value by one timestep
@@ -1612,12 +1625,6 @@ Default stratifications to all observers should include scenario and input draw.
   * -
     - Update SBR to >=24 weeks
     - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
-    - Baseline 
-    - Default
-    - None
-  * -
-    - GA floors
-    - Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See the changes made to the pregnancy and LBWSG exposure model documents in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1840>`__ Note that this update will require re-running the LBWSG PAF calculation. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor").
     - Baseline
     - Default
     - None
@@ -1642,10 +1649,10 @@ Default stratifications to all observers should include scenario and input draw.
     - None
   * -
     - IV iron effects on BW, GA, and stillbirth
-    - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data specific to GBD 2023 has yet to be generated)
+    - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` 
     - Baseline and IV iron scale-up scenarios
     - Default
-    - RT-owned data generation, IV iron coverage and effect on hemoglobin run, MMS stillbirth effects 
+    - IV iron coverage and effect on hemoglobin run, MMS stillbirth effects 
   * -
     - Update hemoglobin effects
     - As defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (Custom PAFs and neonatal sepsis effects have yet to be calculated for GBD 2023): Updated custom PAF values for maternal hemorrhage and maternal sepsis outcomes (paired with existing implementation of GBD RRs); New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
@@ -2508,14 +2515,24 @@ Default stratifications to all observers should include scenario and input draw.
       * 21.1 V&V criteria met.
       * Note: we can't check azithromycin, misoprostol, ACS, or CPAP RRs in simulation results. Need to add scenarios for this.
     - `21.1.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/163>`__
-  * - 22.0.1
+  * - 22.0.0
     - Add residual and other maternal disorders
     - * Confirm incidence and mortality risk of existing cause-specific maternal disorders matches expectation (we don't expect them to be exactly the same due to changes in stochastic uncertainty, but same trends as before, noting that sepsis and hemorrhage are slightly miscalibrated due to the hemoglobin PAFs we are using)
       * Confirm expected mortality ratios of (1) residual and (2) abortion/ectopic/miscarriage causes
       * Confirm expected YLDs due to (1) residual and (2) abortion/ectopic/miscarriage causes
       * Confirm that mortality and morbidity due to residual maternal disorders happens among live and stillbirths only and that abortion/ectopic/miscarriage mortality does not
-    -
-    -
+    - Residual maternal disorders not included in observation
+    - No notebooks due to lack of observers, see 22.0.1
+  * - 22.0.1
+    - Residual maternal disorders observer
+    - Same as 22.0.0
+    - Everything matches, except that cause ID 1160 rather than 379 was included in "residual maternal disorders"
+    - `22.0.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/165>`__
+  * - 22.0.2
+    - Residual maternal disorders bugfix
+    - Same as 22.0.0
+    - Everything matches
+    - `22.0.2 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/167>`__
   * - 23.0
     - Remaining pregnancy model refactor
     - In the simulation outputs:
@@ -2571,11 +2588,19 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm partial term pregnancies now have null values for observed measures of preterm birth, believed preterm, and ACS eligibility
     - 
     - 
+  * - 24.0
+    - MMS stillbirth effects and GA floors
+    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
+      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
+      * Confirm expected effects of IFA and MMS on pregnancy outcomes (note this will be confounded by ANC attendance in the simulation outputs, so RRs should be calculated stratified by ANC attendance exposure)
+      * Confirm expected effects of misoprostol and azithromycin interventions on maternal disorders using scenarios #12 and #13
+    - 
+    - 
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
-    - 
-    - 
+    -
+    -
   * - 
     - IV iron coverage and effect on hemoglobin
     - * Confirm scenario-specific IV iron and anemia screening coverage rates (verification with sim outputs)
@@ -2642,12 +2667,6 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 
-    - MMS stillbirth effects
-    - * Confirm expected effects of IFA and MMS on pregnancy outcomes (note this will be confounded by ANC attendance in the simulation outputs, so RRs should be calculated stratified by ANC attendance exposure)
-      * Confirm expected effects of misoprostol and azithromycin interventions on maternal disorders using scenarios #12 and #13
-    - 
-    - 
-  * - 
     - Hemoglobin lag fix
     - * In the interactive simulation: confirm that hemoglobin exposure variable in the state table no loner lags behind the pipeline value by a timestep
       * Confirm maternal disorders still meet expectation
@@ -2674,7 +2693,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Action plan
     - Timeline
   * - Effect of IFA on preterm birth appears to be overestimated and failure to calibrate to expected preterm birth prevalence and related measures in model 23.0 
-    - Thought to be due to the failure to account for the failure to account for the correlation between LBWSG exposure and ANC attendance in the calculation of the IFA and MMS gestational age shifts 
+    - Thought to be due to the failure to account for the correlation between LBWSG exposure and ANC attendance in the calculation of the IFA and MMS gestational age shifts 
     - Research to recalculate IFA and MMS gestational age shifts to account for correlation. See slack thread for additional details
     - TBD
   * - Overestimating proportion of believed term given preterm fraction
@@ -2735,6 +2754,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Issue with GBD fistula model in which Pakistan burden was erroneously set to zero 
     - `Update model in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1847>`__
     - "Pakistan fistula update" model run
+  * - In GBD 2023 data for Pakistan the mortality values for the abortion and miscarriage cause (c_995) are very small (nearly the lowest of any national location globally),
+      causing unexpectedly low YLLs (~100 times fewer than India)
+    - Possible issue with ST-GPR model reacting to an all-zero datapoint added in GBD 2023 for Pakistan
+    - Determine cause of issue with GBD modeling team, decide whether to leave as-is or use a proxy location
+    - TBD
+
 
 
 .. _mncnh_portfolio_6.0:
