@@ -1624,7 +1624,6 @@ Default stratifications to all observers should include scenario and input draw.
   * -
     - Refactor updates
     - * Update observed values for preterm birth, believed preterm, and ACS eligibility to be null for pregnancies that end in abortion/miscarriage/ectopic pregnancies ("partial term" pregnancies)
-      * Use updated values for IFA and MMS effects on gestational age that account for correlation between LBWSG exposure and ANC attendance
     - All
     - Default
     - RT-owned data generation and doc updates
@@ -1634,7 +1633,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - * For this run only, 10,000,000 population size per draw
       * Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-    - Refactor updates run
+    - Oral iron GA shift optimization and facility choice model interaction resolution?
   * -
     - IV iron coverage and effect on hemoglobin
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
@@ -2570,9 +2569,6 @@ Default stratifications to all observers should include scenario and input draw.
   * - 
     - Refactor updates
     - * Confirm partial term pregnancies now have null values for observed measures of preterm birth, believed preterm, and ACS eligibility
-      * Confirm expected effect of IFA and MMS on preterm birth in simulation outputs
-      * Confirm expected rate of preterm birth at baseline
-      * Confirm delivery facility choice targets related to preterm birth are met
     - 
     - 
   * - 
@@ -2679,8 +2675,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Timeline
   * - Effect of IFA on preterm birth appears to be overestimated and failure to calibrate to expected preterm birth prevalence and related measures in model 23.0 
     - Thought to be due to the failure to account for the failure to account for the correlation between LBWSG exposure and ANC attendance in the calculation of the IFA and MMS gestational age shifts 
-    - Research to recalculate IFA and MMS gestational age shifts to account for correlation
-    - Refactor updates
+    - Research to recalculate IFA and MMS gestational age shifts to account for correlation. See slack thread for additional details
+    - TBD
+  * - Overestimating proportion of believed term given preterm fraction
+    - Thought to be related to failure to account for additional correlation induced by the baseline IFA calibration with respect to gestational age
+    - Wait and see if this is improved following resolution of above issue. If not, account for this and move facility choice model pipeline into the simulation repository to increase ease of future updates
+    - TBD
   * - Early neonatal other causes mortality risk in Pakistan overestimated
     - Unknown
     - Assess whether this is due to the negative other causes mortality rate issue in the neonatal mortality V&V run
