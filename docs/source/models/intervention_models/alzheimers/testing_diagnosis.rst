@@ -161,7 +161,12 @@ On each timestep, use the following steps to assign CSF and PET tests:
 2. If eligible (meets all requirements), check propensity.
    If propensity value is < (likely test recipient) the location-specific testing rate (CSF rate plus PET rate),
    give test. If not, do not give test. Do not assign a diagnosis.
-3. Assign if it was a CSF or PET test based on location-specific rates. If propensity value < CSF testing rate: give a CSF test. Otherwise, from step 2, propensity value must be >= CSF testing rate but < CSF + PET rate: give a PET test.
+3. If simulant receives a test, assign whether it is a CSF or PET test
+   based on location-specific rates, independently of the testing
+   propensity and other choices. More explicitly, given that a simulant
+   receives a test, the probability of getting a CSF test should be (CSF
+   rate) / (CSF rate + PET rate), and the probability of getting a PET
+   test should be (PET rate) / (CSF rate + PET rate).
 
 On initialization
 '''''''''''''''''
