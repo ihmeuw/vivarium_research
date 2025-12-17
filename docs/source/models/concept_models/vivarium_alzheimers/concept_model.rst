@@ -1149,6 +1149,29 @@ scenario, and input draw.
         entering in the BBBM state
     - `V&V summary in PR 31
       <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/31>`_
+
+      |br|
+
+      * The plot of AD dementia incidence by age is no longer shifted to
+        the left like in model 5.0 and seems to be pretty closely
+        matching its target, but it is now slightly low at the beginning
+        of the sim rather than slightly high
+      * Prevalence of AD dementia by age is also a bit low at the start
+        of the sim, but it now looks much closer to its target at later
+        times rather than becoming too high
+      * Prevalence of the three states over time now looks much better:
+        Namely, the relative proportions of the 3 states remains pretty
+        constant as opposed to the AD dementia prevalence increasing
+        much faster than preclinical and MCI
+      * I confirmed in the interactive sim that the new simulants added
+        on each time step are always only in the BBBM state (at least
+        for the four time steps I checked)
+      * I confirmed in the interactive sim that the displacement of PET
+        and CSF tests by BBBM tests seems to be working as expected
+      * The interactive sim showed that we still have the same
+        off-by-one error in the waning effect of treatment as in model
+        7.0, but we decided to leave this as is (and update the docs
+        instead) to err on the side of making a conservative estimate
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.5_vv.ipynb>`__
       * `Interactive sim (hazard rates)
@@ -1158,6 +1181,11 @@ scenario, and input draw.
   * - 8.6
     - * Re-run testing and treatment V&V notebooks
     - `V&V summary in PR 31`_
+
+      |br|
+
+      * The number of tests, treatments, and deaths averted all
+        increased, by approximately a factor of 2
     - * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.6_vv_testing.ipynb>`__
       * `Treatment
