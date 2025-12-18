@@ -163,10 +163,10 @@ On each timestep, use the following steps to assign CSF and PET tests:
    give test. If not, do not give test. Do not assign a diagnosis.
 3. If simulant receives a test, assign whether it is a CSF or PET test
    based on location-specific rates, independently of the testing
-   propensity and other choices. More explicitly, given that a simulant
-   receives a test, the probability of getting a CSF test should be (CSF
-   rate) / (CSF rate + PET rate), and the probability of getting a PET
-   test should be (PET rate) / (CSF rate + PET rate).
+   propensity and other random choices. More explicitly, given that a
+   simulant receives a test, the probability of getting a CSF test
+   should be (CSF rate) / (CSF rate + PET rate), and the probability of
+   getting a PET test should be (PET rate) / (CSF rate + PET rate).
 
 On initialization
 '''''''''''''''''
@@ -229,7 +229,8 @@ On each timestep, use the following steps to assign BBBM tests:
 
   - Simulant is not in MCI or AD dementia state (only susceptible, or pre-clinical)
   - Simulant age is >=60 and <80
-  - Simulant has not received a BBBM test in the last three years
+  - Simulant has not received a BBBM test in the last three years (or
+    six time steps)
   - Simulant has never received a positive BBBM test
 
 2. If eligible (meets all requirements), check propensity. 
@@ -239,8 +240,26 @@ On each timestep, use the following steps to assign BBBM tests:
 
 On initialization
 '''''''''''''''''
-On initialization no one will have been tested. Due to test coverage jumping from 0% to 10% in 2030,
-we would expect a large group to be immediately tested and then a drop-off in testing counts.
+
+On initialization, each simulant who is eligible for a BBBM test will be
+assigned a BBBM testing history. Since simulants are only eligible for
+testing every three years (more precisely, every 6 time steps), we want
+to assign a random test date within the last three years so that not all
+eligible simulants will be tested immediately upon entering the
+simulation. For each eligible simulant, choose uniformly at random from
+one of the last 6 time steps when they could have been tested, omitting
+any time steps before 2030 when testing is not yet available. If there
+are no such time steps (i.e., all 6 are before 2030), assign "not a
+time" (NaT) for the simulant's previous test date. Otherwise, the first
+time the simulant could be eligible for testing again is 6 time steps
+after the chosen previous test date. We assume for simplicity that there
+were no prior false positive tests among simulants entering the
+simulation, so all previous BBBM tests are negative. See the assumptions
+and limitations below for further limitations of this approach.
+
+Even with prior BBBM testing history in place, due to test coverage
+jumping from 0% to 10% in 2030, we expect a large group to be
+immediately tested and then a drop-off in testing counts.
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
