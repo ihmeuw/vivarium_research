@@ -1629,12 +1629,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - None
   * -
-    - Refactor updates
-    - * Update observed values for preterm birth, believed preterm, and ACS eligibility to be null for pregnancies that end in abortion/miscarriage/ectopic pregnancies ("partial term" pregnancies)
-    - All
-    - Default
-    - RT-owned data generation and doc updates
-  * -
     - Larger run for neonatal mortality V&V
     - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Baseline
@@ -2583,11 +2577,6 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
     - 
     - 
-  * - 
-    - Refactor updates
-    - * Confirm partial term pregnancies now have null values for observed measures of preterm birth, believed preterm, and ACS eligibility
-    - 
-    - 
   * - 24.0
     - MMS stillbirth effects and GA floors
     - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
@@ -2692,6 +2681,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
+  * - Unnecessary data assigned to abortion/miscarriage/ectopic pregnancy in the interactive simulation
+    - Including gestational age/birth weight exposures as well as neonatal mortality risk
+    - Engineers to update at their convenience
+    - TBD
   * - Effect of IFA on preterm birth appears to be overestimated and failure to calibrate to expected preterm birth prevalence and related measures in model 23.0 
     - Thought to be due to the failure to account for the correlation between LBWSG exposure and ANC attendance in the calculation of the IFA and MMS gestational age shifts 
     - Research to recalculate IFA and MMS gestational age shifts to account for correlation. See slack thread for additional details
@@ -2706,8 +2699,8 @@ Default stratifications to all observers should include scenario and input draw.
     - Neonatal mortality V&V run
   * - Abortion/miscarriage/ectopic pregnancies have non-null values for preterm birth, believed preterm, ACS eligibility in observed simulation results. While we can filter these results out, it presents opportunity for error in analyzing results and these values should be updated to N/A for partial term pregnancies
     - Partial term pregnancies are assigned LBWSG exposures in the interactive sim and therefore are observed for these outputs
-    - Engineers to update
-    - Refactor updates
+    - Engineers to update at the same time as implementing observer revamp (:ref:`not yet documented as of 12/18/25 <https://jira.ihme.washington.edu/browse/SSCI-2517>`__)
+    - TBD
   * - There is zero coverage of "ACS availability" among stillbirths even though stillbirths should be eligible and covered by this intervention.
     - Likely a result of there being null coverage for CPAP availability for stillbirths (because they are not alive to receive CPAP). However, stillbirths should receive ACS coverage if they are in the relevant believed gestational age range and delivering in a facility that has CPAP access.
     - Wait until we split stillbirths into antepartum and intrapartum before we address this issue, as only intrapartum stillbirths should receive ACS coverage
