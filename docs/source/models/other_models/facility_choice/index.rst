@@ -687,6 +687,8 @@ in the artifact:
     - :code:`in_facility_delivery_proportion * (1 - bemonc_facility_fraction)`
     - Used in calculating total population intervention coverage as a weighted average across delivery settings for intervention with coverage that varies by delivery facility at baseline and for V&V
 
+.. _facility_choice_calibration:
+
 Challenge of calibrating the model
 ----------------------------------
 

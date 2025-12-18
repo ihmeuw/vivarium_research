@@ -168,6 +168,7 @@ Model Assumptions and Limitations
    we will not calculate progress-free survival among simulants with fourth or 
    higher relapse of RRMM.
 
+.. _2019_cancer_model_multiple_myeloma_cause_model_diagram:
 
 Cause Model Diagram
 +++++++++++++++++++
