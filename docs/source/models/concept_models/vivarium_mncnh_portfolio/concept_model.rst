@@ -2699,7 +2699,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Neonatal mortality V&V run
   * - Abortion/miscarriage/ectopic pregnancies have non-null values for preterm birth, believed preterm, ACS eligibility in observed simulation results. While we can filter these results out, it presents opportunity for error in analyzing results and these values should be updated to N/A for partial term pregnancies
     - Partial term pregnancies are assigned LBWSG exposures in the interactive sim and therefore are observed for these outputs
-    - Engineers to update at the same time as implementing observer revamp (:ref:`not yet documented as of 12/18/25 <https://jira.ihme.washington.edu/browse/SSCI-2517>`__)
+    - Engineers to update at the same time as implementing observer revamp (`not yet documented as of 12/18/25 <https://jira.ihme.washington.edu/browse/SSCI-2517>`__)
     - TBD
   * - There is zero coverage of "ACS availability" among stillbirths even though stillbirths should be eligible and covered by this intervention.
     - Likely a result of there being null coverage for CPAP availability for stillbirths (because they are not alive to receive CPAP). However, stillbirths should receive ACS coverage if they are in the relevant believed gestational age range and delivering in a facility that has CPAP access.
