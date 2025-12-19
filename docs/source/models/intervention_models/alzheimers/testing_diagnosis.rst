@@ -254,12 +254,17 @@ time" (NaT) for the simulant's previous test date. Otherwise, the first
 time the simulant could be eligible for testing again is 6 time steps
 after the chosen previous test date. We assume for simplicity that there
 were no prior false positive tests among simulants entering the
-simulation, so all previous BBBM tests are negative. See the assumptions
-and limitations below for further limitations of this approach.
+simulation, so all previous BBBM tests are negative.
 
 Even with prior BBBM testing history in place, due to test coverage
 jumping from 0% to 10% in 2030, we expect a large group to be
 immediately tested and then a drop-off in testing counts.
+
+.. note::
+
+  People who are not simulated (will not develop AD dementia) will also
+  be tested, and these tests, including false positives, were counted
+  outside the simulation using a multistate life table (MSLT) model.
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -270,11 +275,30 @@ Assumptions and Limitations
   so propensity does not need to be re-assigned at any point;
 - Since BBBM uses the same propensity as existing testing, BBBM should replace many CSF and PET
   tests, though some simulants may not qualify for BBBM tests due to age requirements, or may get a BBBM false negative;
-- The determination of whether a test is a false positive is independent for healthy individuals, and precludes the possibility that individual characteristics like protein expression levels or chronic kidney disease are driving heterogeneity in false positive rate. 
-
-.. note::
-  People who are not simulated (will not develop AD dementia) will also be tested, and these tests,
-  including false positives, were counted outside the simulation using a multistate life table model.
+- The determination of whether a test is a false positive in the MSLT is
+  independent for healthy individuals, and precludes the possibility
+  that individual characteristics like protein expression levels or
+  chronic kidney disease are driving heterogeneity in false positive
+  rate;
+- We assume a false positive rate of zero among people who are simulated
+  (will eventually develop AD dementia), which is inconsistent with our
+  calculations in the MSLT; if the false positive rate were nonzero,
+  some people would have prematurely started treatment before entering
+  the simulation;
+- The strategy for assigning BBBM test history does not account for the
+  fact that simulants may not have been eligible for BBBM testing on all
+  of the previous 6 time steps prior to entering the simulation; for
+  example, a 60-year-old entering the simulation after 2030 will be
+  assigned a previous BBBM test date even though they wouldn't have been
+  eligible; the effects of this are likely small because improper
+  testing can only happen during the first 3 years of the 20 years of
+  eligible ages;
+- The strategy of choosing the prior BBBM testing date uniformly over
+  the last 3 years is a simplification that doesn't align perfectly with
+  our assumption that there will be a cyclical pattern in the number of
+  people getting tested each year (with the first peak in 2030 when the
+  test first becomes available); the uniformity assumption will likely
+  smooth out this cyclical pattern somewhat;
 
 
 References
