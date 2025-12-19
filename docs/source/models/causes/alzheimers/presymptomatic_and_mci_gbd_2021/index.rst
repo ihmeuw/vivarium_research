@@ -128,7 +128,7 @@ pre-dementia states: BBBM-AD (pre-clinical AD detectable via blood-based
 biomarkers) and MCI-AD (mild cognitive impairment due to AD). GBD does not
 model these pre-dementia states, so we calibrate transition rates and
 prevalences using GBD data combined
-with additional evidence on state durations. See :ref:`below for details <2021_cause_alzheimers_rate_calibration>`.
+with additional evidence on state durations. See :ref:`below for details <cause_alzheimers_rate_calibration>`.
 
 To obtain Alzheimer's-specific estimates (excluding "other dementias"), we
 multiply the GBD 2023 dementia envelope by the proportion due to Alzheimer's
@@ -151,9 +151,9 @@ Cause Model Diagram
     bbbm [label="BBBM-AD"]
     mci [label="MCI-AD"]
     ad [label="AD-dementia"]
-    S -> bbbm [label="i_BBBM"]
-    bbbm -> mci [label="i_MCI"]
-    mci -> ad [label=i_AD]
+    S -> bbbm [label="h_S→BBBM"]
+    bbbm -> mci [label="h_BBBM→MCI"]
+    mci -> ad [label="h_MCI→D"]
   }
 
 .. list-table:: State Definitions
@@ -183,35 +183,29 @@ Cause Model Diagram
     - Simulant has died
 
 .. list-table:: Transition Definitions
-  :widths: 5 5 10 10
+  :widths: 10 15 25
   :header-rows: 1
 
   * - Transition
-    - Transition Name
     - Definition
     - Notes
-  * - i_BBBM
-    - BBBM incidence hazard
-    - Incidence hazard of BBBM-AD
-    - This will be equal to GBD's incidence rate of Alzheimer's disease
-      and other dementias, but with the age group and year shifted
-      backward by the average duration of the BBBM-AD and MCI-AD states
-      combined, and inflated to account for deaths in those two states
-  * - i_MCI
-    - MCI incidence hazard
-    - Incidence hazard of MCI due to AD
-    - This will be a **time-dependent hazard rate**, depending on how
-      long a simulant has been in the BBBM-AD state, not a constant
-      hazard like we usually use
-  * - i_AD
-    - AD dementia incidence hazard
-    - Incidence hazard of Alzheimer's disease dementia
-    - We will define this as a constant hazard rate for simulants in
-      MCI-AD
-  * - m_X (not pictured)
-    - Mortality hazard in state X
-    - Total mortality hazard for simulants in cause state X
-    - X is a variable representing an arbitrary cause state
+  * - :math:`h_{S \to \text{BBBM}}`
+    - Hazard rate of transitioning from susceptible to BBBM-AD
+    - Obtained from :ref:`rate calibration <cause_alzheimers_rate_calibration>`
+  * - :math:`h_{\text{BBBM} \to \text{MCI}}`
+    - Hazard rate of transitioning from BBBM-AD to MCI-AD
+    - Time-dependent hazard based on dwell time in BBBM-AD state;
+      see :math:`h_\text{MCI}(t)` in `Data Values and Sources`_
+  * - :math:`h_{\text{MCI} \to D}`
+    - Hazard rate of transitioning from MCI-AD to AD-dementia
+    - Constant hazard: :math:`1 / \Delta_\text{MCI}`
+  * - :math:`m`
+    - Background mortality rate (non-AD mortality)
+    - Applies to all states, derived from forecasts of all-cause mortality
+  * - :math:`f`
+    - Excess mortality rate due to AD-dementia
+    - Obtained from :ref:`rate calibration <cause_alzheimers_rate_calibration>`;
+      applies only to AD-dementia state
 
 State and Transition Data
 -------------------------
@@ -253,13 +247,13 @@ in the :ref:`Alzheimer's population model
   * - AD-dementia
     - :math:`1 - \delta_\text{BBBM} - \delta_\text{MCI}`
     - 0
-    - emr_c543
+    - :math:`f`
     - :math:`\text{DW}_\text{c543}`
 
 **Note:** The conditional prevalences :math:`\delta_\text{BBBM}` and
-:math:`\delta_\text{MCI}` are obtained from the :ref:`rate calibration
-<2021_cause_alzheimers_rate_calibration>` and represent the proportion of
-all AD cases in each state.
+:math:`\delta_\text{MCI}`, and the excess mortality rate :math:`f`,
+are obtained from the :ref:`rate calibration
+<cause_alzheimers_rate_calibration>`.
 
 .. _2021_cause_alzheimers_presymptomatic_mci_transition_data_table:
 
@@ -270,39 +264,42 @@ all AD cases in each state.
     - Source State
     - Sink State
     - Value
-  * - i_BBBM
+  * - :math:`h_{S \to \text{BBBM}}`
     - S
     - BBBM-AD
-    - Not explicitly used because we're not modeling susceptible
-      simulants. Defined implicitly in the :ref:`Alzheimer's population
-      model <other_models_alzheimers_population>`, which computes how
-      many simulants to add into the BBBM-AD state on each time step.
-  * - i_MCI
+    - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`.
+      When modeling only AD simulants, this is used implicitly by the
+      :ref:`Alzheimer's population model <other_models_alzheimers_population>`
+      to compute how many simulants to add to BBBM-AD each time step.
+  * - :math:`h_{\text{BBBM} \to \text{MCI}}`
     - BBBM-AD
     - MCI-AD
     - :math:`h_\text{MCI}(t - T_\text{BBBM})`, where :math:`t` is the
-      current time in the simulation, and :math:`T_\text{BBBM}` is the
-      time the simulant entered the BBBM-AD state. 
+      current simulation time and :math:`T_\text{BBBM}` is when the
+      simulant entered BBBM-AD.
       Adjusted in :ref:`intervention_hypothetical_alzheimers_treatment` scenario.
-  * - i_AD
+  * - :math:`h_{\text{MCI} \to D}`
     - MCI-AD
-    - AD
+    - AD-dementia
     - :math:`1 / \Delta_\text{MCI}`
-  * - m_X
-    - X
+  * - :math:`m`
+    - Any state
     - Death
-    - acmr --- csmr_c543 + emr_X
+    - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`
+  * - :math:`f`
+    - AD-dementia
+    - Death
+    - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`;
+      total mortality in AD-dementia state is :math:`m + f`
 
-**Note:** :math:`h_\text{MCI}` is the time-dependent hazard function for
-transitioning into MCI-AD, defined in the :ref:`data values and sources table
-below <2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`.
+**Note:** :math:`h_\text{MCI}(t)` is the time-dependent hazard function for
+transitioning from BBBM-AD to MCI-AD, defined in the :ref:`data values and
+sources table below <2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`.
 
-Because i_MCI is defined in terms of a non-constant hazard function
-:math:`h_\text{MCI}`, simulants initialized into the BBBM-AD state will need to
-be assigned a value for :math:`T_\text{BBBM}` to determine how long they have
-been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
-:math:`T_\text{BBBM}` uniformly in the interval :math:`[-\Delta_\text{BBBM},\,
-0]`.
+Simulants initialized into the BBBM-AD state need an assigned value for
+:math:`T_\text{BBBM}` to determine their dwell time. For simulants in BBBM-AD
+at time :math:`t=0`, assign :math:`T_\text{BBBM}` uniformly in the interval
+:math:`[-\Delta_\text{BBBM}, 0]`.
 
 .. _alzheimers_cause_state_data_including_susceptible_note:
 
@@ -311,7 +308,7 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
   If we model the entire population including susceptible simulants, the
   state data should be modified as follows.
 
-  The :ref:`rate calibration <2021_cause_alzheimers_rate_calibration>` provides
+  The :ref:`rate calibration <cause_alzheimers_rate_calibration>` provides
   :math:`p`, the total prevalence of any AD state (BBBM + MCI + dementia) in
   the total population, along with conditional prevalences
   :math:`\delta_\text{BBBM}` and :math:`\delta_\text{MCI}`. The prevalence of
@@ -407,12 +404,12 @@ table below:
   * - :math:`p`
     - Total prevalence of any AD state (BBBM + MCI + dementia) in total
       population
-    - From :ref:`rate calibration <2021_cause_alzheimers_rate_calibration>`,
+    - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
       artifact key ``cause.alzheimers_consistent.prevalence_any``
     -
   * - :math:`\delta_\text{BBBM}`, :math:`\delta_\text{MCI}`
     - Conditional prevalences of BBBM and MCI states among all AD cases
-    - From :ref:`rate calibration <2021_cause_alzheimers_rate_calibration>`,
+    - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
       artifact keys ``cause.alzheimers_consistent.bbbm_conditional_prevalence``
       and ``cause.alzheimers_consistent.mci_conditional_prevalence``
     - Prevalence of each state in the total population is :math:`p` times
@@ -447,43 +444,17 @@ table below:
       calculate BBBM-AD incidence counts. See `Abie's population and
       mortality forecasts notebook`_ for a demonstration of how to load
       and transform the ``.nc`` file.
-  * - :math:`\text{population}_{2021}`
-    - Average population during the year 2021
-    - get_population
-    - Point estimate. Used only for the calculation of csmr_c543 by
-      Vivarium Inputs
-  * - :math:`\text{deaths_c543}_{2021}`
-    - Deaths from Alzheimer's disease and other dementias in 2021
-    - codcorrect
-    - Used only for the calculation of csmr_c543 by Vivarium Inputs
-  * - csmr_c543
-    - Cause-specific mortality rate for Alzheimer's disease and other
-      dementias
-    - :math:`\frac{\text{deaths_c543}_{2021}}{(\text{population}_{2021})
-      \cdot (\text{1 year})}`
-    - Calculated automatically by Vivarium Inputs. Assumed to remain
-      constant over time in each demographic group.
-  * - :math:`\text{prevalence_c543}_{2021}`
-    - Prevalence of Alzheimer's disease and other dementias in 2021
-    - como
-    - Used only for calculation of emr_c543 by Vivarium Inputs
-  * - emr_c543
-    - Excess mortality rate for Alzheimer's disease and other dementias
-    - :math:`\frac{\text{csmr_c543}}{\text{prevalence_c543}_{2021}}`
-    - Calculated automatically by Vivarium Inputs. Assumed to remain
-      constant over time in each demographic group.
-  * - emr_X
-    - Excess mortality rate in cause state X
-    - Values listed in "Excess mortality rate" column of :ref:`state
-      data table above
-      <2021_cause_alzheimers_presymptomatic_mci_state_data_table>`
-    - * emr_S, emr_BBBM, emr_MCI, emr_AD
-  * - m_X
-    - Mortality hazard in cause state X
-    - acmr --- csmr_c543 + emr_X
-    - * m_S, m_BBBM, m_MCI, m_AD
-      * See :ref:`Mortality Impacts <models_cause_mortality_impacts>`
-        section of cause model design page
+  * - :math:`m`
+    - Background mortality rate (non-AD mortality)
+    - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
+      artifact key ``cause.alzheimers_consistent.background_mortality_rate``
+    - Applies to all states. Derived from forecasts of all-cause mortality.
+  * - :math:`f`
+    - Excess mortality rate due to AD-dementia
+    - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
+      artifact key ``cause.alzheimers_consistent.excess_mortality_rate``
+    - Applies only to AD-dementia state; total mortality in that state is
+      :math:`m + f`
   * - sequelae_c543
     - Sequelae of Alzheimer's disease and other dementias
     - Set of 3 sequelae: s452, s453, s454
@@ -639,7 +610,7 @@ table below:
 .. _Potashman et al.:
   https://doi.org/10.1007/s40120-021-00272-1
 
-.. _2021_cause_alzheimers_rate_calibration:
+.. _cause_alzheimers_rate_calibration:
 
 Calibrating Consistent Rates
 ----------------------------
@@ -679,12 +650,40 @@ weighted by dementia prevalence:
   m_\text{all}(a) = m(a) + f(a) \cdot p_\text{dementia}(a)
 
 **ODE Consistency Constraints.** The calibration enforces consistency by
-solving a 5-compartment ODE system (S, BBBM, MCI, D, cumulative incident
-dementia) from age :math:`a` to :math:`a + 5` and penalizing deviations between
-ODE-predicted values and calibrated parameters. The transition rates
-:math:`h_{\text{BBBM} \to \text{MCI}} = 1 / \Delta_\text{BBBM}` and
-:math:`h_{\text{MCI} \to \text{dementia}} = 1 / \Delta_\text{MCI}` are fixed based on
+solving a 5-compartment ODE system from age :math:`a` to :math:`a + 5` and
+penalizing deviations between ODE-predicted values and calibrated parameters.
+The state variables are S (susceptible), BBBM, MCI, D (dementia), and
+:math:`D_\text{new}` (cumulative incident dementia). The ODE system is:
+
+.. math::
+
+  \frac{dS}{dt} &= -m \cdot S - h_{S \to \text{BBBM}} \cdot S \\
+  \frac{d(\text{BBBM})}{dt} &= h_{S \to \text{BBBM}} \cdot S - m \cdot \text{BBBM} - h_{\text{BBBM} \to \text{MCI}} \cdot \text{BBBM} \\
+  \frac{d(\text{MCI})}{dt} &= h_{\text{BBBM} \to \text{MCI}} \cdot \text{BBBM} - m \cdot \text{MCI} - h_{\text{MCI} \to D} \cdot \text{MCI} \\
+  \frac{dD}{dt} &= h_{\text{MCI} \to D} \cdot \text{MCI} - (m + f) \cdot D \\
+  \frac{dD_\text{new}}{dt} &= h_{\text{MCI} \to D} \cdot \text{MCI}
+
+The transition rates :math:`h_{\text{BBBM} \to \text{MCI}} = 1 / \Delta_\text{BBBM}`
+and :math:`h_{\text{MCI} \to D} = 1 / \Delta_\text{MCI}` are fixed based on
 literature values in the data values table above.
+
+**Loss Function.** After solving the ODE from age :math:`a` to :math:`a + 5`,
+the calibration computes the root-sum-squared log-difference between ODE
+predictions and parameter values:
+
+.. math::
+
+  \epsilon(a) = \sqrt{
+    \left(\log \hat\delta_\text{BBBM} - \log \delta_\text{BBBM}(a+5)\right)^2 +
+    \left(\log \hat\delta_\text{MCI} - \log \delta_\text{MCI}(a+5)\right)^2 +
+    \left(\log \hat p_\text{dementia} - \log p_\text{dementia}(a+5)\right)^2 +
+    \left(\log \hat\imath - \log i(a+2.5)\right)^2
+  }
+
+where :math:`\hat\delta_\text{BBBM}`, :math:`\hat\delta_\text{MCI}`,
+:math:`\hat p_\text{dementia}`, and :math:`\hat\imath` are derived from the ODE
+solution. The calibration applies a normal penalty :math:`\epsilon(a) \sim
+\mathcal{N}(0, \sigma)` with :math:`\sigma = 0.005`.
 
 **Numerical Methods.** We solve the ODE using diffrax (Dopri5) and sample using
 NUTS with 500 warmup and 500 sample iterations.
@@ -707,8 +706,8 @@ NUTS with 500 warmup and 500 sample iterations.
     - 2023
   * - f
     - Excess mortality rate for dementia
-    - ``cause.alzheimers_disease_and_other_dementias.excess_mortality_rate``
-    - 2021
+    - ``cause.alzheimers.excess_mortality_rate``
+    - 2023
   * - m_all
     - All-cause mortality rate
     - ``cause.all_causes.cause_specific_mortality_rate``
