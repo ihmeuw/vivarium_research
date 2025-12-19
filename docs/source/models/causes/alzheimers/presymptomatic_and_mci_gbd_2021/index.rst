@@ -137,7 +137,7 @@ disease. See the `Data Values and Sources`_ section for details.
 .. note::
 
   The dementia envelope also includes "mixed" dementias, which involve two or
-  more causes---often Alzheimer's disease combined with another etiology. We
+  more causes, often Alzheimer's disease combined with another etiology. We
   hypothesize that the modeled treatment will not help these mixed dementias,
   so we exclude them by using only the Alzheimer's-only proportion.
 
