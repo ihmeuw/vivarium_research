@@ -211,11 +211,14 @@ is defined below.
     - Same effect size as in `Full treatment effect LONG` but with a shorter fixed duration
   * - Waning treatment effect LONG
     -
-    - On every time step where the simulant started the time step in this state (ie, don't do it on the initial transition),
-      increase :math:`R_h` by :math:`\frac{(1 - R_d)}{s}`, where :math:`s` is the number of time steps in this state's duration.
-      This will decrease the effect size linearly until reaching :math:`R_h = 1` on transition to the `No treatment effect` state.
-      Set :math:`h_{adj} = R_h \cdot h_{MCI}`.
-      Transition from this state after the fixed duration.
+    - On every time step where the simulant ends the time step in this
+      state (i.e., don't do it on the final transition to the `No
+      treatment effect` state), increase :math:`R_h` by :math:`\frac{(1
+      - R_d)}{s}`, where :math:`s` is the number of time steps in this
+      state's duration. This will decrease the effect size linearly
+      until reaching :math:`R_h = 1` on the last time step in this
+      state. Set :math:`h_{adj} = R_h \cdot h_{MCI}`. Transition from
+      this state after the fixed duration.
   * - Waning treatment effect SHORT
     -
     - Same effect size as in `Waning treatment effect LONG` but with a shorter fixed duration
