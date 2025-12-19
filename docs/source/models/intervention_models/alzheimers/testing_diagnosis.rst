@@ -264,7 +264,8 @@ immediately tested and then a drop-off in testing counts.
 
   People who are not simulated (will not develop AD dementia) will also
   be tested. We counted these tests, including false positives, outside
-  the simulation using a multistate life table (MSLT) model.
+  the simulation using a :ref:`multistate life table (MSLT) model
+  <other_models_alzheimers_mslt>`.
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
