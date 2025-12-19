@@ -241,20 +241,22 @@ On each timestep, use the following steps to assign BBBM tests:
 On initialization
 '''''''''''''''''
 
-On initialization, we assign a BBBM testing history to each simulant who
-is eligible for a BBBM test. Since simulants are only eligible for
-testing every three years (more precisely, every 6 time steps), we assign
-a random test date within the last three years so that not all eligible
-simulants will be tested immediately upon entering the simulation. For
-each eligible simulant, choose uniformly at random from one of the
+On initialization, we will assign a BBBM testing history to each
+simulant who is eligible for a BBBM test. Since simulants are only
+eligible for testing every three years (more precisely, every 6 time
+steps), we assign a random test date within the last three years so that
+not all eligible simulants will be tested immediately upon entering the
+simulation.
+
+For each eligible simulant, choose uniformly at random from one of the
 last 6 time steps when they could have been tested, omitting any time
-steps before 2030 when testing is not yet available. If there
-are no such time steps (i.e., all 6 are before 2030), assign "not a
-time" (NaT) for the simulant's previous test date. Otherwise, the first
-time the simulant could be eligible for testing again is 6 time steps
-after the chosen previous test date. We assume for simplicity that there
-were no prior false positive tests among simulants entering the
-simulation, so all previous BBBM tests are negative.
+steps before 2030 when testing is not yet available. If there are no
+such time steps (i.e., all 6 are before 2030), assign "not a time" (NaT)
+for the simulant's previous test date. Otherwise, the first time the
+simulant could be eligible for testing again is 6 time steps after the
+chosen previous test date. We assume for simplicity that there were no
+prior false positive tests among simulants entering the simulation, so
+all previous BBBM tests are negative.
 
 Even with prior BBBM testing history in place, due to test coverage
 jumping from 0% to 10% in 2030, we expect a large group to be
