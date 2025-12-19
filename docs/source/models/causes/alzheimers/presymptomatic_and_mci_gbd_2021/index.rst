@@ -29,7 +29,7 @@
 .. _2021_cause_alzheimers_presymptomatic_mci:
 
 ==================================================================
-Alzheimer's disease  with presymptomatic and MCI stages (GBD 2021)
+Alzheimer's disease  with presymptomatic and MCI stages (GBD 2023)
 ==================================================================
 
 .. contents::
@@ -60,45 +60,33 @@ Alzheimer's disease  with presymptomatic and MCI stages (GBD 2021)
 Disease Overview
 ++++++++++++++++
 
-GBD 2021 Modeling Strategy
+GBD 2023 Modeling Strategy
 ++++++++++++++++++++++++++
 
-The IHME dementia modelers use DisMod to estimate the prevalence and
-incidence of a "dementia envelope" comprising all types of dementia
-combined, and then they estimate what proportion of the envelope
-corresponds to each subtype of dementia. The proportions of dementia due
-to stroke, Parkinson's disease, Down's syndrome, and traumatic brain
-injury are attributed to those GBD causes, and the remaining dementia in
-the envelope is attributed to the GBD cause "Alzheimer's disease and
+The IHME dementia modelers use DisMod to estimate the incidence, prevalence and
+excess mortality of a "dementia envelope" (modelable entity ID 24351) comprising
+all types of dementia combined, and then they estimate what proportion of
+the envelope corresponds to each subtype of dementia. They attribute the proportions of
+dementia due to stroke, Parkinson's disease, Down's syndrome, and traumatic
+brain injury to those GBD causes, and then they use the remaining dementia
+in the envelope for the GBD cause "Alzheimer's disease and
 other dementias" (cause ID 543).
 
-For further information, see the methods appendices and HUB page:
-
-* `Alzheimer's disease and other dementias in the GBD 2021 fatal methods
-  appendix <ADOD_2021_fatal_methods_appendix_>`_
-* `Alzheimer's disease and other dementias in the GBD 2021 nonfatal
-  methods appendix <ADOD_2021_nonfatal_methods_appendix_>`_
-* `Alzheimer's/Dementia HUB page <ADOD_HUB_page_>`_
-
-.. _ADOD_2021_fatal_methods_appendix:
-  https://www.healthdata.org/gbd/methods-appendices-2021/alzheimers-disease-and-other-dementias
-
-.. _ADOD_2021_nonfatal_methods_appendix:
-  https://www.healthdata.org/gbd/methods-appendices-2021/alzheimers-disease-and-other-dementias-0
-
-.. _ADOD_HUB_page:
-  https://hub.ihme.washington.edu/spaces/BIRDS/pages/123831566/Alzheimers+Dementia
+For this simulation, we use the dementia envelope prevalence and incidence
+from GBD 2023 (release ID 16) and multiply by the proportion due to
+Alzheimer's disease to obtain AD-specific estimates. See the
+`Data Values and Sources`_ section for details.
 
 Restrictions
 ------------
 
-The following table describes any restrictions in GBD 2021 on the
-effects of the cause "Alzheimer's disease and other dementias" (such as
-being only fatal or only nonfatal), as well as restrictions on the ages
-and sexes to which the cause applies. We also list the implied age
-restriction on YLDs for the MCI-AD state of the cause model below.
+The following table describes restrictions in GBD 2023 on the effects of
+the cause "Alzheimer's disease and other dementias" (such as being only
+fatal or only nonfatal), as well as restrictions on the ages and sexes to
+which the cause applies. We also list the implied age restriction on YLDs
+for the MCI-AD state of the cause model below.
 
-.. list-table:: GBD 2021 Cause Restrictions
+.. list-table:: GBD 2023 Cause Restrictions
   :widths: 15 15 20
   :header-rows: 1
 
@@ -140,24 +128,16 @@ restriction on YLDs for the MCI-AD state of the cause model below.
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-For :ref:`Model 4 <2025_alzheimers_model_runs_table>` of the :ref:`CSU
-Alzheimer's simulation <2025_concept_model_vivarium_alzheimers>`, we
-will add two pre-dementia states to the Alzheimer's disease model. The
-model still functions similar to an SI model, but now there are multiple
-with-condition states, with unidirectional progression between them. In
-Model 4 we used the incidence and prevalence for GBD's "Alzheimer's disease
-and other dementias" (cause ID 543), so our numbers were inflated by
-the "other dementias" part.
+This cause model extends GBD's Alzheimer's disease dementia with two
+pre-dementia states: BBBM-AD (pre-clinical AD detectable via blood-based
+biomarkers) and MCI-AD (mild cognitive impairment due to AD). GBD does not
+model these pre-dementia states, so we :ref:`calibrate transition rates and
+prevalences <2021_cause_alzheimers_rate_calibration>` using GBD data combined
+with additional evidence on state durations.
 
-In :ref:`Model 5 <2025_alzheimers_model_runs_table>`, we remove the
-"other dementias" from the disease model. To do this, the dementia
-modelers recommended *not* using the published GBD data directly, but to
-start with the GBD 2023 "dementia envelope" data from DisMod, and
-multiply by proportion of the envelope due to Alzheimer's disease. The
-estimates of the proportions of the envelope due to each dementia
-subtype are unpublished as of September 2025, but the modelers shared a
-.csv file we can use as long as we don't expose the raw numbers. See the
-`Data Values and Sources`_ section below for details.
+To obtain Alzheimer's-specific estimates (excluding "other dementias"), we
+multiply the GBD 2023 dementia envelope by the proportion due to Alzheimer's
+disease. See the `Data Values and Sources`_ section for details.
 
 Cause Model Diagram
 -------------------
@@ -259,24 +239,25 @@ in the :ref:`Alzheimer's population model
     - 0
     - 0
   * - BBBM-AD
-    - :math:`\Delta_\text{BBBM} / \Delta_\text{(all AD states)}`
+    - :math:`\delta_\text{BBBM}`
     - 1
     - 0
     - 0
   * - MCI-AD
-    - :math:`\Delta_\text{MCI} / \Delta_\text{(all AD states)}`
+    - :math:`\delta_\text{MCI}`
     - 0
     - 0
     - :math:`\text{DW}_\text{MCI}`
   * - AD-dementia
-    - :math:`\Delta_\text{AD} / \Delta_\text{(all AD states)}`
+    - :math:`1 - \delta_\text{BBBM} - \delta_\text{MCI}`
     - 0
     - emr_c543
     - :math:`\text{DW}_\text{c543}`
 
-**Note:** The variable :math:`\Delta_\textsf{X}` denotes the average duration
-in cause state X, as defined in the :ref:`data values and sources table below
-<2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`.
+**Note:** The conditional prevalences :math:`\delta_\text{BBBM}` and
+:math:`\delta_\text{MCI}` are obtained from the :ref:`rate calibration
+<2021_cause_alzheimers_rate_calibration>` and represent the proportion of
+all AD cases in each state.
 
 .. _2021_cause_alzheimers_presymptomatic_mci_transition_data_table:
 
@@ -328,46 +309,15 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
   If we model the entire population including susceptible simulants, the
   state data should be modified as follows.
 
-  Define :math:`p_\textsf{X}` to be the prevalence of cause state X in
-  the total population including susceptible simulants, and define
-  :math:`p_\text{(all AD states)}` to be the sum of :math:`p_\textsf{X}`
-  for the three AD cause states X. Then multiplying the prevalence of
-  each AD state in the :ref:`above state data table
-  <2021_cause_alzheimers_presymptomatic_mci_state_data_table>` by
-  :math:`p_\text{(all AD states)}` gives the prevalence of that state in
-  the entire population. Since we know that
-
-  .. math::
-
-    \begin{align*}
-    p_\text{AD}
-    &= \text{prevalence_AD} \\
-    &= \text{prevalence_m24351} \times \text{proportion_AD},
-    \end{align*}
-
-  the prevalence of AD dementia computed from GBD's dementia envelope
-  (see :ref:`data values and sources table below
-  <2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`), we
-  can solve to obtain
-
-  .. math::
-    :label: prevalence_all_AD_states_eq
-
-    p_\text{(all AD states)}
-    = \frac{\Delta_\text{(all AD states)}}{\Delta_\text{AD}}
-      \cdot \text{prevalence_AD}
-    \quad\text{(for ages 40+)}.
-
-  Note that since the GBD prevalence applies to a given demographic
-  group, so does the formula for :math:`p_\text{(all AD states)}`. The
-  above formula applies to age groups 40+ since this is where
-  prevalence_AD and :math:`\Delta_\text{AD}` are nonzero. For ages
-  30--39, use the value of :math:`p_\text{(all AD states)}` for age
-  group 40--44; for ages <30, set :math:`p_\text{(all AD states)} = 0`.
-  The following state data table shows the resulting initial prevalences
-  when modeling the total population, as well as the birth prevalences,
-  which replace the entrance prevalences. The excess mortality rate and
-  disability weight of each state remain the same.
+  The :ref:`rate calibration <2021_cause_alzheimers_rate_calibration>` provides
+  :math:`p`, the total prevalence of any AD state (BBBM + MCI + dementia) in
+  the total population, along with conditional prevalences
+  :math:`\delta_\text{BBBM}` and :math:`\delta_\text{MCI}`. The prevalence of
+  each AD state in the total population is then :math:`p` multiplied by the
+  corresponding conditional prevalence. The following table shows the resulting
+  initial prevalences when modeling the total population, as well as the birth
+  prevalences, which replace the entrance prevalences. The excess mortality rate
+  and disability weight of each state remain the same.
 
   .. list-table:: State data when modeling entire population including susceptible simulants
     :header-rows: 1
@@ -376,36 +326,26 @@ been in that state. For simulants in BBBM-AD at time :math:`t=0`, assign
       - Initial prevalence
       - Birth prevalence
     * - S
-      - :math:`1 - p_\text{(all AD states)}`
+      - :math:`1 - p`
       - 1
     * - BBBM-AD
-      - :math:`\frac{\Delta_\text{BBBM}}{\Delta_\text{(all AD states)}}
-        \cdot p_\text{(all AD states)}`
+      - :math:`p \cdot \delta_\text{BBBM}`
       - 0
     * - MCI-AD
-      - :math:`\frac{\Delta_\text{MCI}}{\Delta_\text{(all AD states)}}
-        \cdot p_\text{(all AD states)}`
+      - :math:`p \cdot \delta_\text{MCI}`
       - 0
     * - AD-dementia
-      - :math:`\frac{\Delta_\text{AD}}{\Delta_\text{(all AD states)}}
-        \cdot p_\text{(all AD states)}`
+      - :math:`p \cdot (1 - \delta_\text{BBBM} - \delta_\text{MCI})`
       - 0
 
   .. note::
 
-    Although we will not need all the values in this table for Model 4, the
-    value of :math:`p_\text{(all AD states)}` defined in
-    :eq:`prevalence_all_AD_states_eq` **will be needed in order to compute the
-    model scale and initialize the correct number of simulants in each
-    demographic subgroup.** Note that in the notation on the :ref:`Alzheimer's
-    population model page <other_models_alzheimers_population>`,
-    :math:`p_\text{(all AD states)}` refers to the prevalence within the entire
-    population of a location, including all age groups and sexes. On the other
-    hand, if we compute prevalence_AD for a specific demographic subgroup
-    :math:`g` (e.g., a single age group and sex) and year :math:`t`, then
-    :math:`p_\text{(all AD states)}` as computed in
-    :eq:`prevalence_all_AD_states_eq` corresponds to :math:`p_{g,t}` on the
-    Alzheimer's population model page.
+    The calibrated value of :math:`p` (total prevalence of any AD state) **is
+    needed to compute the model scale and initialize the correct number of
+    simulants in each demographic subgroup.** In the notation on the
+    :ref:`Alzheimer's population model page <other_models_alzheimers_population>`,
+    :math:`p` for a specific demographic subgroup :math:`g` and year :math:`t`
+    corresponds to :math:`p_{g,t}` on that page.
 
 Data Values and Sources
 -----------------------
@@ -462,18 +402,19 @@ table below:
     - Prevalence of AD dementia in total population
     - prevalence_m24351 :math:`\times` proportion_AD
     -
-  * - :math:`p_\textsf{X}`
-    - Prevalence of cause state X in total population
-    - Defined in the "Initial prevalence" column of the state data table
-      in the :ref:`Attention box above
-      <alzheimers_cause_state_data_including_susceptible_note>`
-    - By definition, :math:`p_\text{AD} =` prevalence_AD, and
-      :math:`p_\text{BBBM}` and :math:`p_\text{MCI}` are derived from
-      this
-  * - :math:`p_\text{(all AD states)}`
-    - Prevalence of all stages of AD combined
-    - Defined in :eq:`prevalence_all_AD_states_eq` above
-    - Equals :math:`p_\text{BBBM} + p_\text{MCI} + p_\text{AD}`
+  * - :math:`p`
+    - Total prevalence of any AD state (BBBM + MCI + dementia) in total
+      population
+    - From :ref:`rate calibration <2021_cause_alzheimers_rate_calibration>`,
+      artifact key ``cause.alzheimers_consistent.prevalence_any``
+    -
+  * - :math:`\delta_\text{BBBM}`, :math:`\delta_\text{MCI}`
+    - Conditional prevalences of BBBM and MCI states among all AD cases
+    - From :ref:`rate calibration <2021_cause_alzheimers_rate_calibration>`,
+      artifact keys ``cause.alzheimers_consistent.bbbm_conditional_prevalence``
+      and ``cause.alzheimers_consistent.mci_conditional_prevalence``
+    - Prevalence of each state in the total population is :math:`p` times
+      the conditional prevalence
   * - incidence_m24351
     - Total-population incidence rate for GBD 2023 dementia envelope
     - get_draws( source="epi", gbd_id_type = "modelable_entity_id",
@@ -695,6 +636,112 @@ table below:
   https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gamma.html
 .. _Potashman et al.:
   https://doi.org/10.1007/s40120-021-00272-1
+
+.. _2021_cause_alzheimers_rate_calibration:
+
+Calibrating Consistent Rates
+----------------------------
+
+GBD provides dementia prevalence, incidence, and mortality, but our model
+includes presymptomatic states (BBBM-AD and MCI-AD) not directly measured by
+GBD. To derive internally consistent rates for these states, we use Bayesian
+inference with NumPyro/JAX to fit disease progression rates to GBD data while
+enforcing ODE-based consistency constraints.
+
+The calibration is implemented in ``consistent_rates.py`` in the
+vivarium_csu_alzheimers repository. We fit separate models for males and
+females.
+
+**Model Parameters.** The NumPyro model defines 7 age-varying parameters, each
+with truncated normal priors on :math:`[0, 1]`:
+
+- :math:`p`: Total prevalence of any AD state
+- :math:`\delta_\text{BBBM}`, :math:`\delta_\text{MCI}`: Conditional
+  prevalences of BBBM and MCI states among AD cases
+- :math:`h_{S \to \text{BBBM}}`: Transition rate from susceptible to BBBM
+- :math:`i`: Population incidence rate of dementia
+- :math:`f`: Excess mortality rate
+- :math:`m`: Background (non-AD) mortality rate
+
+**Key Relationships.** Dementia prevalence derives from total AD prevalence:
+
+.. math::
+
+  p_\text{dementia}(a) = p(a) \cdot \left(1 - \delta_\text{BBBM}(a) - \delta_\text{MCI}(a)\right)
+
+All-cause mortality combines background mortality with excess mortality
+weighted by dementia prevalence:
+
+.. math::
+
+  m_\text{all}(a) = m(a) + f(a) \cdot p_\text{dementia}(a)
+
+**ODE Consistency Constraints.** The calibration enforces consistency by
+solving a 5-compartment ODE system (S, BBBM, MCI, D, cumulative incident
+dementia) from age :math:`a` to :math:`a + 5` and penalizing deviations between
+ODE-predicted values and calibrated parameters. The transition rates
+:math:`h_{\text{BBBM} \to \text{MCI}} = 1 / \Delta_\text{BBBM}` and
+:math:`h_{\text{MCI} \to \text{dementia}} = 1 / \Delta_\text{MCI}` are fixed based on
+literature values in the data values table above.
+
+**Numerical Methods.** We solve the ODE using diffrax (Dopri5) and sample using
+NUTS with 500 warmup and 500 sample iterations.
+
+.. list-table:: Calibration Input Data
+  :widths: 15 35 30 20
+  :header-rows: 1
+
+  * - Variable
+    - Definition
+    - Artifact key
+    - Year
+  * - p_dementia
+    - Prevalence of Alzheimer's disease dementia
+    - ``cause.alzheimers.prevalence``
+    - 2023
+  * - i_dementia
+    - Population incidence rate of dementia
+    - ``cause.alzheimers.population_incidence_rate``
+    - 2023
+  * - f
+    - Excess mortality rate for dementia
+    - ``cause.alzheimers_disease_and_other_dementias.excess_mortality_rate``
+    - 2021
+  * - m_all
+    - All-cause mortality rate
+    - ``cause.all_causes.cause_specific_mortality_rate``
+    - 2025
+
+.. list-table:: Calibrated Outputs (written to artifact for year 2025)
+  :widths: 25 75
+  :header-rows: 1
+
+  * - Artifact key
+    - Description
+  * - ``cause.alzheimers_consistent.population_incidence_any``
+    - :math:`h_{S \to \text{BBBM}}`: S to BBBM transition rate
+  * - ``cause.alzheimers_consistent.prevalence_any``
+    - :math:`p`: Total prevalence of any AD state
+  * - ``cause.alzheimers_consistent.population_incidence_dementia``
+    - :math:`i`: Population incidence rate of dementia
+  * - ``cause.alzheimers_consistent.excess_mortality_rate``
+    - :math:`f`: Excess mortality rate
+  * - ``cause.alzheimers_consistent.bbbm_conditional_prevalence``
+    - :math:`\delta_\text{BBBM}`: Proportion of AD cases in BBBM state
+  * - ``cause.alzheimers_consistent.mci_conditional_prevalence``
+    - :math:`\delta_\text{MCI}`: Proportion of AD cases in MCI state
+  * - ``cause.alzheimers_consistent.ode_errors``
+    - ODE consistency residuals (should be < 0.01)
+
+**Running the Calibration:**
+
+.. code-block:: python
+
+  from vivarium.framework.artifact import Artifact
+  from vivarium_csu_alzheimers.data.consistent_rates import generate_consistent_rates
+
+  art = Artifact("path/to/artifact.hdf")
+  generate_consistent_rates(art)  # Takes several minutes
 
 .. _alzheimers_mci_disability_weight_derivation:
 
