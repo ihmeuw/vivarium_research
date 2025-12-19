@@ -29,7 +29,7 @@
 .. _2021_cause_alzheimers_presymptomatic_mci:
 
 ==================================================================
-Alzheimer's disease  with presymptomatic and MCI stages (GBD 2023)
+Alzheimer's disease  with pre-clinical and MCI stages (GBD 2023)
 ==================================================================
 
 .. contents::
@@ -72,8 +72,8 @@ brain injury to those GBD causes, and then they use the remaining dementia
 in the envelope for the GBD cause "Alzheimer's disease and
 other dementias" (cause ID 543).
 
-For this simulation, we use the dementia envelope prevalence and incidence
-from GBD 2023 (release ID 16) and multiply by the proportion due to
+For this simulation, we use the dementia envelope incidence, prevalence, and excess mortality
+from GBD 2023 (release ID 16) and multiply incidence and prevalence by the proportion due to
 Alzheimer's disease to obtain AD-specific estimates. See the
 `Data Values and Sources`_ section for details.
 
@@ -83,8 +83,7 @@ Restrictions
 The following table describes restrictions in GBD 2023 on the effects of
 the cause "Alzheimer's disease and other dementias" (such as being only
 fatal or only nonfatal), as well as restrictions on the ages and sexes to
-which the cause applies. We also list the implied age restriction on YLDs
-for the MCI-AD state of the cause model below.
+which the cause applies.
 
 .. list-table:: GBD 2023 Cause Restrictions
   :widths: 15 15 20
@@ -117,10 +116,6 @@ for the MCI-AD state of the cause model below.
     - * Restriction to age_group_id = 13 (40 to 44) for AD-dementia
         cause state is from GBD. However, due to simulation dynamics, it is
         possible for simulants to enter this state before age 40.
-      * In practice, the age start for MCI-AD will be age_group_id = 10
-        (25 to 29) because we will be adding simulants at most 10.2
-        years before AD incidence (so 40 -- 10.2 = 29.8, in the 25-29
-        age group)
   * - YLD age group end
     - 95 plus
     - age_group_id = 235
@@ -131,13 +126,20 @@ Vivarium Modeling Strategy
 This cause model extends GBD's Alzheimer's disease dementia with two
 pre-dementia states: BBBM-AD (pre-clinical AD detectable via blood-based
 biomarkers) and MCI-AD (mild cognitive impairment due to AD). GBD does not
-model these pre-dementia states, so we :ref:`calibrate transition rates and
-prevalences <2021_cause_alzheimers_rate_calibration>` using GBD data combined
-with additional evidence on state durations.
+model these pre-dementia states, so we calibrate transition rates and
+prevalences using GBD data combined
+with additional evidence on state durations. See :ref:`below for details <2021_cause_alzheimers_rate_calibration>`.
 
 To obtain Alzheimer's-specific estimates (excluding "other dementias"), we
 multiply the GBD 2023 dementia envelope by the proportion due to Alzheimer's
 disease. See the `Data Values and Sources`_ section for details.
+
+.. note::
+
+  The dementia envelope also includes "mixed" dementias, which involve two or
+  more causes---often Alzheimer's disease combined with another etiology. We
+  hypothesize that the modeled treatment will not help these mixed dementias,
+  so we exclude them by using only the Alzheimer's-only proportion.
 
 Cause Model Diagram
 -------------------
@@ -166,9 +168,9 @@ Cause Model Diagram
     - Simulant does not have Alzheimer's disease or any of its
       precursors
   * - BBBM-AD
-    - Blood-Based-Biomarker-presymptomatic Alzheimer's Disease
-    - Simulant has presymptomatic Alzheimer's disease that is detectable
-      using blood-based biomarkers
+    - Blood-Based-Biomarker-pre-clinical Alzheimer's Disease
+    - Simulant has pre-clinical Alzheimer's disease that is detectable
+      using blood-based biomarkers but causes no cognitive impairment
   * - MCI-AD
     - Mild Cognitive Impairment due to Alzheimer's Disease
     - Simulant has mild cognitive impairment due to Alzheimer's disease
