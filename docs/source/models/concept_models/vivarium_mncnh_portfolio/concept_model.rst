@@ -1609,23 +1609,53 @@ Default stratifications to all observers should include scenario and input draw.
       * Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See the changes made to the pregnancy and LBWSG exposure model documents in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1840>`__ Note that this update will require re-running the LBWSG PAF calculation. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor").
     - All, including newly re-added scenarios #12 Azithromycin V&V and #13 Misoprostol V&V (note that scenarios #12 and #13 have been run before, but have been dropped from the branches file)
     - Default
-    - None
+    -
   * - 22.0.2
     - Residual maternal disorders bugfix
     - Fix issue of use of cause ID 1160 rather than cause ID 379 for indirect maternal deaths
     - Baseline
     - Default
     -
+  * - 24.1
+    - MMS stillbirth effects and GA floors with neonatal deaths bugfix
+    - Fix bug causing zero neonatal deaths
+    - All
+    - Default
+    -
+  * - 24.2
+    - MMS stillbirth effects and GA floors with neonatal deaths bugfix and re-generated RR caps
+    - Same as 24.1 but with re-generated LBWSG RR caps
+    - All
+    - Default
+    -
+  * - 25.0
+    - Update SBR to >=24 weeks
+    - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
+    - Baseline
+    - Default
+    -
+  * - 26.0
+    - IV iron coverage and effect on hemoglobin
+    - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
+    - Baseline and IV iron scale-up scenarios
+    - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
+    - None
+  * - 
+    - GA floor fixes
+    - Ensure GA floor varies by pregnancy outcome in alignment with docs
+    - All
+    - Default
+    - None
+  * - 
+    - Update SBR to >=24 weeks run bugfixes
+    - Fix bug in 25.0 causing zero neonatal deaths, ensure run is complete (no failed jobs)
+    - All
+    - Default
+    - None
   * - 
     - Hemoglobin lag fix
     - Fix issue of state table hemoglobin exposure variable lagging behind pipeline value by one timestep
     - All
-    - Default
-    - None
-  * -
-    - Update SBR to >=24 weeks
-    - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
-    - Baseline
     - Default
     - None
   * -
@@ -1635,12 +1665,6 @@ Default stratifications to all observers should include scenario and input draw.
     - * For this run only, 10,000,000 population size per draw
       * Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Remaining pregnancy model refactor run (model 23) V&V
-  * -
-    - IV iron coverage and effect on hemoglobin
-    - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
-    - Baseline and IV iron scale-up scenarios
-    - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
-    - None
   * -
     - IV iron effects on BW, GA, and stillbirth
     - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` 
@@ -2549,8 +2573,43 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
       * Confirm expected effects of IFA and MMS on pregnancy outcomes (note this will be confounded by ANC attendance in the simulation outputs, so RRs should be calculated stratified by ANC attendance exposure)
       * Confirm expected effects of misoprostol and azithromycin interventions on maternal disorders using scenarios #12 and #13
-    - 
-    - 
+    - * Zero neonatal deaths
+      * Did not yet check other criteria
+    - V&V notebooks included in `this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/168>`__
+  * - 24.1
+    - MMS stillbirth effects and GA floors with neonatal deaths bugfix
+    - Same as 24.0
+    - * Neonatal mortality looks good again
+      * GA floors do not appear to vary by pregnancy outcome
+      * Did not yet check other criteria
+    - V&V notebooks included in `this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/168>`__
+  * - 24.2
+    - MMS stillbirth effects and GA floors with neonatal deaths bugfix and re-generated RR caps
+    - Same as 24.0
+    - * Neonatal mortality unchanged from 24.1 -- this run was unnecessary, we hadn't realized that the RR cap calculation doesn't use interpolated relative risks
+      * MMS on stillbirth effects appear correct
+      * Misoprostol and azithromycin effects appear correct
+      * GA floors still not fixed (as expected)
+    - V&V notebooks included in `this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/168>`__
+  * - 25.0
+    - Update SBR to >=24 weeks
+    - * Stillbirth ratio in simulation still matches artifact
+      * Stillbirth ratio slightly decreased relative to previous model
+    - * Zero neonatal deaths
+      * Run appears to have had some failed jobs
+      * Stillbirth criteria look good
+    - `V&V notebooks in this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/171>`__
+  * - 
+    - GA floor fixes
+    - GA floors by pregnancy outcome match expectations
+    -
+    -
+  * - 
+    - Update SBR to >=24 weeks run bugfixes
+    - * Neonatal mortality matches expectation
+      * Regression tests pass (no CRN issues due to failed jobs)
+    -
+    -
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
