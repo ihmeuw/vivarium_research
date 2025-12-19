@@ -203,7 +203,7 @@ is defined below.
     - Treatment period is instantaneous. See :ref:`alzheimers_intervention_treatment_assumptions` for info about treatment/discontinuation timing.
     - Zero duration. Random draw
   * - Full treatment effect LONG
-    - Treatment takes effect exactly 6 months after recieving a positive BBBM test (if :math:`\text{prop}_I < I`)
+    - Treatment takes effect exactly 6 months after receiving a positive BBBM test (if :math:`\text{prop}_I < I`)
     - On transition to this state, :math:`R_h = R_d`. Set :math:`h_{adj} = R_h \cdot h_{MCI}`, slowing progression to MCI.
       Transition from this state after the fixed duration.
   * - Full treatment effect SHORT
