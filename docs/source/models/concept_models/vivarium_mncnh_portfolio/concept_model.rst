@@ -1639,7 +1639,7 @@ Default stratifications to all observers should include scenario and input draw.
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
     - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
-    - None
+    -
   * - 
     - GA floor fixes
     - Ensure GA floor varies by pregnancy outcome in alignment with docs
@@ -2599,6 +2599,15 @@ Default stratifications to all observers should include scenario and input draw.
       * Run appears to have had some failed jobs
       * Stillbirth criteria look good
     - `V&V notebooks in this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/171>`__
+  * - 26.0
+    - IV iron coverage and effect on hemoglobin
+    - * Confirm scenario-specific IV iron and anemia screening coverage rates (verification with sim outputs)
+      * Confirm only simulants who attend ANC, who test low hemoglobin AND test low ferritin receive IV iron (verification with interactive sim)
+      * Confirm IV iron has the expected effect on hemoglobin (verification in the interactive simulation)
+      * Confirm that hemoglobin exposure (using the interactive simulation) and maternal disorders outcomes (using sim outputs) still meet expectations
+    - * All new criteria passing
+      * IFA coverage looking inverted, as in pre-23.0 runs
+    - `V&V notebooks in this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/171>`__
   * - 
     - GA floor fixes
     - GA floors by pregnancy outcome match expectations
@@ -2615,14 +2624,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Confirm expected rates of cause-specific and overall maternal disorders causes
     -
     -
-  * - 
-    - IV iron coverage and effect on hemoglobin
-    - * Confirm scenario-specific IV iron and anemia screening coverage rates (verification with sim outputs)
-      * Confirm only simulants who attend ANC, who test low hemoglobin AND test low ferritin receive IV iron (verification with interactive sim)
-      * Confirm IV iron has the expected effect on hemoglobin (verification in the interactive simulation)
-      * Confirm that hemoglobin exposure (using the interactive simulation) and maternal disorders outcomes (using sim outputs) still meet expectations
-    - 
-    - 
   * - 
     - IV iron effects on BW, GA, and stillbirth
     - * Confirm the baseline outcomes still meet expectations, including:
