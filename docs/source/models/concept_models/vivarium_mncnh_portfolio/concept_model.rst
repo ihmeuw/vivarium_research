@@ -2607,7 +2607,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that hemoglobin exposure (using the interactive simulation) and maternal disorders outcomes (using sim outputs) still meet expectations
     - * All new criteria passing
       * IFA coverage looking inverted, as in pre-23.0 runs
-    - `V&V notebooks in this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/171>`__
+    - `V&V notebooks in this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/172>`__
   * - 
     - GA floor fixes
     - GA floors by pregnancy outcome match expectations
