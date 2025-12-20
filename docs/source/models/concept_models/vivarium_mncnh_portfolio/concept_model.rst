@@ -2594,7 +2594,7 @@ Default stratifications to all observers should include scenario and input draw.
   * - 25.0
     - Update SBR to >=24 weeks
     - * Stillbirth ratio in simulation still matches artifact
-      * Stillbirth ratio slightly decreased relative to previous model
+      * Stillbirth ratio should be slightly decreased relative to previous model
     - * Zero neonatal deaths
       * Run appears to have had some failed jobs
       * Stillbirth criteria look good
