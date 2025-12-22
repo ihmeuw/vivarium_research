@@ -67,8 +67,8 @@ which gestational age is assessed. A summary of these methods is included below.
 1.1.1 Method overviews
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Ultrasound
-^^^^^^^^^^^^^
+1.1.1.1 Ultrasound
+^^^^^^^^^^^^^^^^^^^
 
 Ultrasound is a technology that uses sound waves to create images of a fetus. Gestational age 
 can be informed via ultrasound by measuring fetal size and using that to inform the maturity 
@@ -83,8 +83,8 @@ circumference, femur length, and abdominal circumference to assess gestational a
 Ultrasound gestational age dating performed in the first trimester is typically considered 
 the gold standard method in gestational age dating.
 
-Last menstrual period
-^^^^^^^^^^^^^^^^^^^^^^^
+1.1.1.2 Last menstrual period
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Gestational age dating by LMP is limited for several reasons, outlined below:
 - Some women may not have experienced a recent LMP due to becoming pregnant following amenorrhea induced by lactation, birth control, or some other cause
@@ -111,7 +111,7 @@ embedded references):
   system that captured more than 250,000 births over a 6 year period in Lusaka, suggests an 
   impossibly high preterm birth rate of 35% when LMP is used to determine GA.[11, 42, 43] "
 
-  Additionally, as summarized by [Moore-et-al-2019]_, "LMP is less well recalled in late 
+  Additionally, as summarized by [Moore-et-al-2015]_, "LMP is less well recalled in late 
   attenders [16–19], and determination of LMP can be impeded by low literacy rates and 
   cultural factors [7,8]."
 
@@ -119,9 +119,9 @@ Furthermore, there are reports that LMP dates cannot be reported in significant 
 pregnancies in LMIC settings. See the following references:
 
 - `More than two thirds of pregnancies assessed in a refugee camp on the Thai–Burmese border could not report an LMP date due to illiteracy and unfamiliarity with the Gregorian calendar <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC3438883/>`__
-- `Approximately 25% of women in a South African study were not able to report an LMP date. Of those who did report, 67.2% felt certain about the date. <- https://obgyn-onlinelibrary-wiley-com.offcampus.lib.washington.edu/doi/10.1111/jog.13801>`__
+- `Approximately 25% of women in a South African study were not able to report an LMP date. Of those who did report, 67.2% felt certain about the date. <https://obgyn-onlinelibrary-wiley-com.offcampus.lib.washington.edu/doi/10.1111/jog.13801>`__
 - `8.3% of women in a Nigerian study could not report the date of their LMP <https://journalijtdh.com/index.php/IJTDH/article/view/536>`__
-- `At the time of birth, it was reported that only 45% of women presenting to a hospital in Ethiopia recalled their LMP date <chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://ecronicon.net/assets/ecgy/pdf/ECGY-08-00438.pdf`__
+- `At the time of birth, it was reported that only 45% of women presenting to a hospital in Ethiopia recalled their LMP date <https://repository.ju.edu.et/handle/123456789/4041>`__
 
 .. todo::
 
@@ -152,8 +152,8 @@ pregnancies in LMIC settings. See the following references:
   resource settings, we should aim to have the accuracy of LMP GA dating informed from 
   studies performed in populations similar to the ones we are modeling.
 
-Fundal height measurements
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1.1.1.3 Fundal height measurements
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Measurements of fundal height, the distance between the pubic bone and umbillicus can be used 
 to approximate fetal growth after 20 weeks of gestation, with an expected centimeter for 
@@ -166,8 +166,8 @@ becomes less reliable in late pregnancy when the fetus "drops" into the pelvis
 to provider skill and resources (it is reported to be measured with fingers if measuring 
 tapes are not available).
 
-Newborn assessment
-^^^^^^^^^^^^^^^^^^^
+1.1.1.4 Newborn assessment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In cases in which a reliable estimate of gestational age is not available at the onset of 
 labor, gestational age at birth can be assessed by evaluating the newborn according to 
@@ -189,7 +189,7 @@ time. In instances when LMP is unknown and ultrasound is unavailable, fundal hei
 measurements will be used to assess gestational age (as reported as common practice in Kenya 
 in [Oluoch-et-al-2015]_).
 
-1.2 Modeling stratey overview
+1.2 Modeling strategy overview
 ---------------------------------
 
 Our modeling strategy will follow the steps below:
@@ -535,8 +535,7 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
 
 .. [Oluoch-et-al-2015]
 
-  `Oluoch DA, Mwangome N, Kemp B, Seale AC, Koech A, Papageorghiou AT, Berkley JA, Kennedy SH, Jones CO. "You cannot know if it's a baby or not a baby": uptake, provision and perceptions of antenatal care and routine antenatal ultrasound scanning in rural Kenya. BMC Pregnancy Childbirth. 2015 May 29;15:127. doi: 10.1186/s12884-015-0565-5. PMID: 26021564; PMCID: PMC4446960. <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC4446960/
-  >`__
+  `Oluoch DA, Mwangome N, Kemp B, Seale AC, Koech A, Papageorghiou AT, Berkley JA, Kennedy SH, Jones CO. "You cannot know if it's a baby or not a baby": uptake, provision and perceptions of antenatal care and routine antenatal ultrasound scanning in rural Kenya. BMC Pregnancy Childbirth. 2015 May 29;15:127. doi: 10.1186/s12884-015-0565-5. PMID: 26021564; PMCID: PMC4446960. <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC4446960/>`__
 
 .. [Lee-et-al-2017]
 
@@ -548,4 +547,4 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
 
 .. [Moore-et-al-2015]
 
-  `Moore KA, Simpson JA, Thomas KH, Rijken MJ, White LJ, Dwell SL, Paw MK, Wiladphaingern J, Pukrittayakamee S, Nosten F, Fowkes FJ, McGready R. Estimating Gestational Age in Late Presenters to Antenatal Care in a Resource-Limited Setting on the Thai-Myanmar Border. PLoS One. 2015 Jun 26;10(6):e0131025. doi: 10.1371/journal.pone.0131025. PMID: 26114295; PMCID: PMC4482646. < https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC4482646/>`__
+  `Moore KA, Simpson JA, Thomas KH, Rijken MJ, White LJ, Dwell SL, Paw MK, Wiladphaingern J, Pukrittayakamee S, Nosten F, Fowkes FJ, McGready R. Estimating Gestational Age in Late Presenters to Antenatal Care in a Resource-Limited Setting on the Thai-Myanmar Border. PLoS One. 2015 Jun 26;10(6):e0131025. doi: 10.1371/journal.pone.0131025. PMID: 26114295; PMCID: PMC4482646. <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC4482646/>`__
