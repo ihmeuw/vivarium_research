@@ -155,13 +155,18 @@ On each timestep, use the following steps to assign CSF and PET tests:
 1. Assess eligibility based on the following requirements:
 
   - Simulant is in MCI stage or AD dementia stage (though due to lack of age requirement, no simulants should be tested in AD dementia stage - only on MCI incidence)
-  - Simulant has never recieved a CSF or PET test before
-  - Simulant has never recieved a positive BBBM test before
+  - Simulant has never received a CSF or PET test before
+  - Simulant has never received a positive BBBM test before
 
 2. If eligible (meets all requirements), check propensity.
-   If propensity value is < (likely test recipient) the location-specific testing rate (CSF rate plus PET rate),
-   give test. If not, do not give test. Do not assign a diagnosis.
-3. Assign if it was a CSF or PET test based on location-specific rates. If propensity value < CSF testing rate: give a CSF test. Otherwise, from step 2, propensity value must be >= CSF testing rate but < CSF + PET rate: give a PET test.
+   If the propensity value is less than the location-specific testing rate (CSF rate plus PET rate),
+   give the test. If not, do not give the test. Do not assign a diagnosis.
+3. If the simulant receives a test, assign whether it is a CSF or PET test
+   based on location-specific rates, independently of the testing
+   propensity and other random choices. More explicitly, given that a
+   simulant receives a test, the probability of getting a CSF test
+   should be (CSF rate) / (CSF rate + PET rate), and the probability of
+   getting a PET test should be (PET rate) / (CSF rate + PET rate).
 
 On initialization
 '''''''''''''''''
@@ -224,18 +229,45 @@ On each timestep, use the following steps to assign BBBM tests:
 
   - Simulant is not in MCI or AD dementia state (only susceptible, or pre-clinical)
   - Simulant age is >=60 and <80
-  - Simulant has not received a BBBM test in the last three years
+  - Simulant has not received a BBBM test in the last three years (or
+    six time steps)
   - Simulant has never received a positive BBBM test
 
 2. If eligible (meets all requirements), check propensity. 
-   If propensity value is < time-specific testing rate: give test. If not, do not give test.
-3. Assign positive diagnosis to 90% of people and negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, eg people who test negative still have a 90% chance of being positive on a re-test.
+   If the propensity value is less than the time-specific testing rate, give the test. If not, do not give the test.
+3. Assign a positive diagnosis to 90% of people and a negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, e.g., people who test negative still have a 90% chance of being positive on a re-test.
 4. Record time of last test, yes/no diagnosis for future testing eligibility.
 
 On initialization
 '''''''''''''''''
-On initialization no one will have been tested. Due to test coverage jumping from 0% to 10% in 2030,
-we would expect a large group to be immediately tested and then a drop-off in testing counts.
+
+In order to avoid having all eligible simulants be tested immediately
+upon entering the simulation, we will assign a BBBM testing history to
+each initialized simulant who is eligible for a BBBM test. Since
+simulants are only eligible for testing every three years (more
+precisely, every 6 time steps), we will assign a random test date within
+the last three years before entering the simulation, as follows.
+
+On initialization of each eligible simulant, choose uniformly at random
+from one of the last 6 time steps when they could have been tested,
+omitting any time steps before 2030 when testing is not yet available.
+If there are no such time steps (i.e., all 6 are before 2030), assign
+"not a time" (NaT) for the simulant's previous test date. Otherwise, the
+first time the simulant could be eligible for testing again is 6 time
+steps after the chosen previous test date. We assume for simplicity that
+there were no prior false positive tests among simulants entering the
+simulation, so all previous BBBM tests are negative.
+
+Even with prior BBBM testing history in place, due to test coverage
+jumping from 0% to 10% in 2030, we expect a large group to be
+immediately tested and then a drop-off in testing counts.
+
+.. note::
+
+  People who are not simulated (will not develop AD dementia) will also
+  be tested. We counted these tests, including false positives, outside
+  the simulation using a :ref:`multistate life table (MSLT) model
+  <other_models_alzheimers_mslt>`.
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -246,11 +278,29 @@ Assumptions and Limitations
   so propensity does not need to be re-assigned at any point;
 - Since BBBM uses the same propensity as existing testing, BBBM should replace many CSF and PET
   tests, though some simulants may not qualify for BBBM tests due to age requirements, or may get a BBBM false negative;
-- The determination of whether a test is a false positive is independent for healthy individuals, and precludes the possibility that individual characteristics like protein expression levels or chronic kidney disease are driving heterogeneity in false positive rate. 
-
-.. note::
-  People who are not simulated (will not develop AD dementia) will also be tested, and these tests,
-  including false positives, were counted outside the simulation using a multistate life table model.
+- We determine whether a test is a false positive in the MSLT
+  independently for healthy individuals, which precludes the possibility
+  that individual characteristics like protein expression levels or
+  chronic kidney disease drive heterogeneity in false positive rate;
+- We assume a false positive rate of zero among people who are simulated
+  (will eventually develop AD dementia), which is inconsistent with our
+  calculations in the MSLT; if the false positive rate were nonzero,
+  some people would have prematurely started treatment before entering
+  the simulation;
+- The strategy for assigning BBBM test history does not account for the
+  fact that simulants may not have been eligible for BBBM testing on all
+  of the previous 6 time steps prior to entering the simulation; for
+  example, we will assign a previous BBBM test date to a 60-year-old
+  entering the simulation after 2030 even though they wouldn't have been
+  eligible; the effects of this are likely small because improper
+  testing can only happen during the first 3 years of the 20 years of
+  eligible ages;
+- The strategy of choosing the prior BBBM testing date uniformly over
+  the last 3 years is a simplification that doesn't align perfectly with
+  our assumption that there will be a cyclical pattern in the number of
+  people getting tested each year (with the first peak in 2030 when the
+  test first becomes available); the uniformity assumption will likely
+  smooth out this cyclical pattern somewhat;
 
 
 References
