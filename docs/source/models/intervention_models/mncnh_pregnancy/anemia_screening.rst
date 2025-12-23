@@ -198,7 +198,7 @@ Assumptions and Limitations
 - We use the severity-specific fraction of iron responsive anemia among all causes of anemia in GBD as a proxy measure for the fraction of anemia cases with low ferritin test results.
   This approach is limited in that we may slightly underestimate total eligibility by not considering the proportion of the population who has low hemoglobin due to an iron-non-responsive cause and also coincidentally has low ferritin.
   It is also limited in that we may overstate the differences between anemia severities with respect to ferritin *test* results
-due to testing inaccuracies (false positives and false negatives).
+  due to testing inaccuracies (false positives and false negatives).
 - In the absence of data to directly inform otherwise, we assume that the population without anemia has half the rate of low ferritin test results as the population with mild anemia. We made this assumption given that the population without anemia is expected to have a low ferritin exposure level that is greater than zero but less than that of the population with mild anemia.
 
 .. todo:: 
