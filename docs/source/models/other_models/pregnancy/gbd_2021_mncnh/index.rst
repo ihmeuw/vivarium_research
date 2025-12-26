@@ -247,8 +247,8 @@ Assign timing of stillbirth (stillbirths only)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For pregnancies that result in stillbirths, we assign the timing of the stillbirth as either antepartum or intrapartum.
-Location-specific probability of intrapartum stillbirth is extracted from a 2018 Lancet Global Health report.[Ahmed_et_al_2018]_
 The probability of intrapartum stillbirth will be affected by the intrapartum sensors -> C-section -> obstructed labor -> intrapartum stillbirth pathway once implemented.
+Location-specific probability of intrapartum stillbirth is extracted from a 2018 Lancet Global Health report. [Ahmed_et_al_2018]_
 
 .. note::
 
@@ -264,7 +264,7 @@ The probability of intrapartum stillbirth will be affected by the intrapartum se
 
   * - Location
     - Data value (proportion)
-  * - Ethiopia or Nigeria
+  * - Ethiopia & Nigeria
     - 0.37 (0.27-0.47)
   * - Pakistan
     - 0.48 (0.39-0.57)
