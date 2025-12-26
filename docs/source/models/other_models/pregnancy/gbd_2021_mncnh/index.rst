@@ -243,14 +243,31 @@ Among such pregnancies, the base probability of a live birth is ASFR / (ASFR + A
 with the remainder being stillbirths.
 This probability is modified by the :ref:`antenatal supplementation intervention <maternal_supplementation_intervention>`.
 
-.. note::
+Assign timing of stillbirth (stillbirths only)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  When we implement the intrapartum sensors -> C-section -> obstructed labor -> intrapartum stillbirth pathway, we'll need to assign only
-  antepartum stillbirths here.
+For pregnancies that result in stillbirths, we assign the timing of the stillbirth as either antepartum or intrapartum.
+Location-specific probability of intrapartum stillbirth is extracted from a 2018 Lancet Global Health report.[Ahmed_et_al_2018]_
+The probability of intrapartum stillbirth will be affected by the intrapartum sensors -> C-section -> obstructed labor -> intrapartum stillbirth pathway once implemented.
 
 .. note::
 
   We assume that live births and stillbirths have the same gestational age. There is ongoing work at IHME to estimate gestational age at birth distributions among stillbirths. 
+
+.. note::
+
+  We assume that everything that affects stillbirth (IFA, MMS, hemoglobin) affects the overall probability of stillbirth but has no effect on the type of stillbirth. 
+  We will have all antepartum stillbirths still proceed to the intrapartum component, even though it is possible that a stillbirth could be detected and addressed through D&E without labor. 
+
+.. list-table:: Data values for antepartum stillbirth rates
+  :header-rows: 1
+
+  * - Location
+    - Data value (proportion)
+  * - Ethiopia or Nigeria
+    - 0.37 (0.27-0.47)
+  * - Pakistan
+    - 0.48 (0.39-0.57)
 
 .. _other_models_pregnancy_closed_cohort_mncnh_sex_of_infant:
 
@@ -342,3 +359,7 @@ The following should validate:
 References
 -----------
 
+.. [Ahmed_et_al_2018]
+
+  Ahmed, Imran et al. 2018. Population-based rates, timing, and causes of maternal deaths, stillbirths, and neonatal deaths in south Asia and sub-Saharan Africa: a multi-country prospective cohort study.
+  The Lancet Global Health, Volume 6, Issue 12, e1297 - e1308
