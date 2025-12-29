@@ -2469,13 +2469,13 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm AI ultrasound impact much smaller than model 20.1.1
     - Outputs look as expected!
     - * `20.2 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/169>`__
-      * `20.2 results available here <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/217>`__
+      * `20.2 results available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/58e6fd50bda22f961860b2dff0e12f20fb16f51d/october_results.ipynb>`__
   * - 20.3
     - Sensitivity analysis with upper bound US error values
     - * Confirm AI ultrasound impact larger than model 20.2, much smaller than model 20.1.1
     - Outputs look as expected!
     - * `20.3 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/169>`__
-      * `20.3 results available here <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/223>`__
+      * `20.3 results available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/520e17fc56c551dfb81ab3d32c5a44cde8c8be27/october_results.ipynb>`__
   * - 21.0
     - Hemoglobin refactor
     - Using simulation outputs:
