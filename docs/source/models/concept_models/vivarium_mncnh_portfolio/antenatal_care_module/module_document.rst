@@ -166,8 +166,8 @@ The data we have are as follows:
 The use of ANC1 is straightforward: it determines how many people *never* attend ANC, vs attend ANC at all.
 Similarly, ANCfirst determines how many people should attend in the first trimester.
 Lastly, we use ANC4 as a proxy measure for attending ANC *throughout pregnancy*, though this could miss in both directions:
-someone could attend only a few visits and have these spread across time (more likely),
-or they could attend many visits all during one phase of pregnancy (less likely).
+someone could attend only 2-3 visits and have these spread across time (more likely),
+or they could attend 4+ visits all during one phase of pregnancy (less likely).
 Due to the imperfectness of this proxy measure, we decided to treat it as an upper bound on attending throughout pregnancy,
 which means it is only impactful when it is *lower* than ANCfirst (see next section for details).
 In practice, in our modeled locations, this only occurs in Pakistan.
