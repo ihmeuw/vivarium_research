@@ -247,7 +247,7 @@ pregnancy ANC visits, resulting in the following (simpler) probabilities:
 
 * We use ANC4 as an upper bound on attending ANC throughout pregnancy in Pakistan, though strictly speaking this isn't logically necessary,
   but represents our assumption that this proxy measure is an underestimate.
-  This assumption could be wrong if many people attend many visits all during one phase of pregnancy.
+  This assumption could be wrong if many people attend 4+ visits all during one phase of pregnancy.
 * We assume that the DHS data used to produce the ANCfirst, ANC1, and ANC4 covariates applies to abortion/miscarriage/ectopic pregnancies 
   as well as pregnancies resulting in live birth or stillbirth.
 * We assume that abortion/miscarriage/ectopic pregnancies can only attend ANC in the first trimester (though in fact abortions and miscarriages in particular can happen beyond this point).
