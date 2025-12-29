@@ -1130,7 +1130,8 @@ scenario, and input draw.
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.2_vv.ipynb>`__
       * `Treatment
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_28_model8.2_vv_treatment.ipynb>`__
-      * Abie's notebook estimating variance when scaling up?
+      * Abie's notebook estimating variance when scaling up [[Add link
+        once uploaded]]
   * - 8.3
     - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
         etc.)
@@ -1213,7 +1214,7 @@ scenario, and input draw.
     - N/A
     - * `Preliminary results tables in PR 32
         <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/32>`_
-      * Final results tables in PR Y
+      * Final results tables in PR XXX [[Add link once it exists]]
   * - 9.0
     - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
         etc.)
