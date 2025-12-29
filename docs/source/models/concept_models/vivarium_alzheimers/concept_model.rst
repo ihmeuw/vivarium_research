@@ -26,6 +26,12 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
+.. Define a substitution to create manual line breaks using HTML:
+
+.. |br| raw:: html
+
+  <br />
+
 .. _2025_concept_model_vivarium_alzheimers:
 
 ===============================================
@@ -533,8 +539,7 @@ scenario, and input draw.
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: USA, Spain
     - Stratify disease state transitions and person-time by treatment
-      status (with 5 categories: "full effect long," "full effect
-      short," "waning effect long," "waning effect short," "no effect")
+      status
     - Default
   * - 7.2
     - `Fix bug with 80-year-olds entering "waiting for treatment" state
@@ -546,7 +551,115 @@ scenario, and input draw.
     - Stratify disease state transitions and person-time by treatment
       status
     - Default
-
+  * - 7.3
+    - `Add BBBM testing history
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/57>`_
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA
+    - Stratify disease state transitions and person-time by treatment
+      status
+    - Default
+  * - 7.4
+    - `Bugfix: Use conditional prevalence to initialize AD dementia state
+      instead of unconditional prevalence
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/58>`_
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA
+    - Stratify disease state transitions and person-time by treatment
+      status
+    - Default
+  * - 7.5
+    - `Bugfix: Don't initialize BBBM testing history in baseline
+      scenario <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/60>`_
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA
+    - Stratify disease state transitions and person-time by treatment
+      status
+    - Default
+  * - 7.6
+    - `Additional bug fixes for BBBM testing
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/60>`_
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA
+      * Simulation end date: 2065-12-31
+    - Stratify disease state transitions and person-time by treatment
+      status
+    - Default
+  * - 8.0
+    - `Abie's consistent rates model
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/44>`_
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: Sweden, USA
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 8.1
+    - Consistent rates model with AD prevalence bug fix from model 7.4
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: Sweden, USA
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 8.2
+    - Model 8.1, but one draw with 500 seeds, for estimating population
+      size for final run
+    - Baseline, Alternative Scenario 2
+    - * Locations: USA
+      * Simulation end date: 2060-12-31
+      * Number of draws: 1
+      * Population size per draw: 10 million (500 seeds of 20,000
+        simulants each)
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 8.3
+    - Model 8.1 + use EMR from DisMod
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: All
+      * Simulation end date: 2060-12-31
+      * Number of draws: 5
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 8.4
+    - Final runs for 10/31 deadline: Model 8.3 + merge in changes
+      through model 7.6
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: All
+      * Population size per draw: 2 million (100 seeds of 20,000
+        simulants each)
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 8.5
+    - `Bugfix: Ensure all new simulants enter the sim in the BBBM state
+      after time zero
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/62>`_
+      (previously, new simulants had been continuing to enter all 3
+      states according to the initial prevalences)
+    - Baseline
+    - * Locations: USA, Sweden
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 8.6
+    - Run model 8.5 for all three scenarios
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA, Sweden
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 8.7
+    - New final runs, same as models 8.5/8.6, but with more random seeds
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: All
+      * Population size per draw: 2 million (100 seeds of 20,000
+        simulants each)
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 9.0
+    - `Split AD dementia into mild, moderate, severe
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/59>`_
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: China
+      * Number of draws: 3
+      * Population size per draw: 2 million (100 seeds of 20,000
+        simulants each)
+    - Stratify disease state transitions and person-time by treatment
+    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -737,14 +850,24 @@ scenario, and input draw.
 
       * Compute prevalence of AD-dementia state alone (in addition to
         combined prevalence of all 3 disease states)
-    - AD-dementia incidence looks identical to 4.4, so the double rounding was perhaps not a problem after all
+    - * AD-dementia incidence looks identical to 4.4, so the double
+        rounding was perhaps not a problem after all
+      * Prevalence counts of all 3 states combined look pretty good
+      * The prevalence counts of the AD-dementia state alone is too low
+        at the start of the sim, then becomes too high as time goes on
     - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_09_18d_model4.5_vv.ipynb
   * - 5.0
     - Same as 4.5, except add this check that we should have been doing
       previously:
 
-      * Check disability weights of MCI and AD-dementia
-    -
+      * Check disability weights of MCI and AD-dementia by computing
+        YLDs/person-time for each sex and age group
+    - * AD-dementia incidence is still close but a bit off, similar to
+        model 4.5
+      * Prevalence of AD-dementia still starts off too low and then
+        becomes too high
+      * Disability weights computed from the sim are virtually identical
+        to those stored in the artifact
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_09_24_model5.0_vv.ipynb>`__
       * `Disability weights
@@ -756,15 +879,65 @@ scenario, and input draw.
       * Year-stratified CSF/PET test counts per CSF/PET eligible person-year match location and time-specific rates
       * Year-stratified BBBM test count per newly eligible person count match time-specific rates
       * CSF/PET tests initialized properly - no testing spike for first time step
-    - 
-    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_03_model6.0_vv_testing.ipynb
+    - `V&V summary in PR 14
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/14>`_
+
+      .. add manual line break for extra vertical space:
+
+      |br|
+
+      * CSF and PET testing rates in baseline scenario match artifact
+        values
+      * Baseline CSF and PET testing rates match between concept model
+        and artifact
+      * CSF and PET testing rates in BBBM testing scenario decrease as
+        expected as BBBM tests scale up, but CSF tests always start
+        decreasing **before** PET tests, which is likely due to the way
+        the testing propensity was implemented (the desired behavior is
+        that CSF and PET tests would be independent of each other and
+        would start decreasing **simultaneously**)
+      * BBBM tests only occur from ages 60 - 79 as expected
+      * BBBM test rate, calculated as (count of BBBM tests) / (count of
+        newly eligible simulants), spikes in 2030 as expected and then
+        increases until 2045 as expected, but it levels off between 0.1
+        and 0.2 in all countries, which is not close to our target value
+        of 0.6. This is likely due to the lifetime propensities for
+        testing, and we think we need to compute the test rate in a
+        different way to validate the eventual testing coverage of 60%.
+      * BBBM test sensitivity is 90% as expected
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_03_model6.0_vv_testing.ipynb>`__
   * - 6.1
     - * Compute BBBM test rate as (count of tests) / (eligible
         person-time)
       * Compute fraction of simulants who have had BBBM tests as
         (person-time ever tested) / (person-time ever eligible)
-    -
-    - https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_08_model6.1_vv_testing.ipynb
+    - `V&V summary in PR 15
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/15>`_
+
+      |br|
+
+      * The means of CSF and PET testing rates in baseline still look
+        good, but the uncertainty intervals look off (I didn't check the
+        uncertainty in model 6.0)
+      * Plots of (BBBM tests) / (eligible person-time) look similar to
+        plots of (BBBM tests) / (counts of eligible simulants), so not
+        vey helpful
+      * Plots of (person-time ever tested) / (person-time ever eligible)
+        look good when stratified by age group:
+
+        * For each age group above age 60, the coverage increases
+          monotonically and levels off at 60% coverage, which is the
+          target
+        * Age groups from 60 - 79 all have an immediate jump in 2030 as
+          expected and follow identical patterns
+        * Age groups above age 80 follow a similar pattern but have a
+          time lag and don't show the initial jump -- this is also
+          expected
+
+      * Other checks look the same as in model 6.0
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/1fdfff314c3abb0088a919dd9cdfa7bb8766710b/verification_and_validation/2025_10_08_model6.1_vv_testing.ipynb>`__
   * - 7.0
     - * Positive BBBM tests result in treatment initiation rates that match the year/location specific rates from :math:`I` in the :ref:`treatment intervention data table <alzheimers_intervention_treatment_data_table>`
       * 10% of transitions to `Full treatment effect` status are by simulants who discontinue treatment
@@ -773,8 +946,53 @@ scenario, and input draw.
       * Interactive sim verification spot checking a simulant's durations in treatment statuses as they move through 
         `BBBM test negative`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect` statuses (for both completed and discontinued treatments)
       * Check hazard ratios for simulants who begin treatment and those who transition to `No treatment effect`
-    -
-    -
+    - `V&V summary in PR 19
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/19>`_
+
+      |br|
+
+      Things that look good:
+
+      * Treatment coverage ramps up as expected
+      * 10% of simulants discontinue treatment as expected
+      * Ratio of person-time between disease states looks good, given
+        that we can't predict exactly what this will look like in the
+        observers (the person-time for the "waning effect long" state
+        looks a bit low, but this is likely because a significant number
+        of people die before they reach the end of this state)
+      * Average treatment state durations for people entering or exiting
+        each state look good (again, we can't predict these exactly
+        because of deaths)
+      * Averted deaths, YLLs, and YLDs all seem reasonable
+      * In the interactive sim, the hazard ratio (RR) for the treatment
+        effect looks correct
+      * Treatment state durations look good in the interactive sim, but
+        I didn't run it long enough to check the "waning effect long"
+        state
+
+      Things that look wrong:
+
+      * I can't check the hazard ratio in the sim outputs because we
+        didn't stratify disease state person-time or transitions by
+        treatment status
+      * Simulants in the 80-84 age group are entering the
+        "start treatment" state (aka "waiting for treatment") when they
+        shouldn't be
+      * In the interactive sim, the MCI incidence probability looks like
+        it's about half as big as it should be (we determined that the
+        hazard rate was getting multiplied by the time step of ~0.5
+        *twice* instead of once)
+      * In the interactive sim, some simulants have an RR of 1.0 on the
+        last time step of the "waning treatment effect" state, whereas
+        the docs specify that this should not happen until the "no
+        effect" state on the next time step (this was determined to be
+        an off-by-one error due to a misinterpretation of the docs, but
+        we decided to leave it as is to err on the side of less
+        effective treatment)
+    - * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_14_model7.0_vv_treatment.ipynb>`__
+      * `Interactive sim (hazard rates)
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_20_model7.0_interactive_sim.ipynb>`__
   * - 7.1
     - Same as model 7.0, but add:
 
@@ -783,8 +1001,16 @@ scenario, and input draw.
       * Check that CSF and PET testing start decreasing at the same time
         when increasing BBBM testing, rather than CSF testing always
         decreasing first
-    -
-    -
+    - * The relative risk of treatment on BBBM → MCI transition looks
+        about right for the "treatment effect long" state, but is
+        strangely wiggly in the "treatment effect short" state --- this
+        may be an artifact of how the observers work
+      * CSF and PET tests now decrease simultaneously as BBBM testing
+        ramps up, as desired
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_22_model7.1_vv_testing.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_22_model7.1_vv_treatment.ipynb>`__
   * - 7.2
     - Same as model 7.1, but add:
 
@@ -794,8 +1020,228 @@ scenario, and input draw.
         sim
       * Re-run V&V from models 4 and 5 to check disease state
         incidence, prevalence, etc.
-    -
-    -
+    - * Transitions into the "waiting for treatment" state are now
+        restricted to the age range 60-79 as desired
+      * The BBBM → MCI hazard rate and the RR of treatment on this
+        hazard both look reasonable in the observer output; I didn't
+        check these in the interactive sim
+      * The results of running the model 5 V&V notebook seem reasonable,
+        but it's hard to tell exactly because the notebook was designed
+        for the baseline scenario only and is probably adding together
+        results from all three scenarios (I didn't have time to fix this
+        yet)
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_24_model7.2_vv.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_24_model7.2_vv_treatment.ipynb>`__
+  * - 7.3
+    - Re-run testing notebook from model 7.1. Things should look
+      similar, but testing should ramp up slightly slower
+    - There were several problems with the BBBM test history:
+
+      * The baseline scenario had people entering with BBBM test history
+      * The sensitivity now appears to be 80% instead of 90% -- it looks
+        like negative tests from before the sim are getting counted by
+        the observer, but we want to count just tests that occur
+        *during* the sim
+      * Our original idea of measuring the testing rate as (# tests) /
+        (# newly eligible) or (# tests) / (eligible person-time) look
+        closer to the mark of 60%
+      * Our graphs of (person-time ever tested) / (person-time ever
+        eligible) look very different from model 7.1, and I'm not sure
+        why
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_28_model7.3_vv_testing.ipynb>`__
+  * - 7.4
+    - * Check initial prevalence of all three AD states
+      * Re-check the other health metrics (incidence, prevalence,
+        mortality, etc.) in the baseline scenario
+    - Not checking directly since Abie's run included these changes;
+      check model 8.1 instead
+    - N/A
+  * - 7.5
+    - Skip, check 7.6 instead
+    - Not checking since fixes were incomplete; check model 7.6 instead
+    - N/A
+  * - 7.6
+    - Re-run testing notebook from model 7.3 to see if things look more
+      like they did in 7.1
+    - Things look good now, more like they did in model 7.1:
+
+      * Baseline scenario no longer includes BBBM testing history
+      * Sensitivity is back to 90% as expected
+      * Plots of (person-time ever tested) / (person-time ever eligible)
+        look very similar to how they did in model 7.1
+
+      There are a few minor differences with model 7.1 that I'm not sure
+      how to explain:
+
+      * The BBBM testing rate measured as (# tests) / (# newly eligible)
+        levels off just under 50%, compared to around 15% in model 7.1,
+        and there's a similar pattern for (# tests) / (eligible
+        person-time)
+      * The number of newly eligible simulants remains flatter after the
+        first couple years, and the number of new BBBM tests per year
+        levels off at a higher value than in model 7.1
+      * The fraction of newly eligible simulants with negative BBBM
+        tests remains much smaller now, under 5% compared with leveling
+        off at almost 15% in model 7.1
+
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_29_model7.6_vv_testing.ipynb>`__
+  * - 8.0
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+    - * EMR appears to be correct
+      * AD dementia incidence by age no longer looks obviously shifted
+        to the left like in model 5.0; it starts off a bit too high,
+        then gets closer to its target as tim goes on
+      * AD dementia prevalence starts off too low, then becomes a bit
+        too high as the sim progresses
+      * The relative prevalence of the three disease states over time
+        still looks weird: AD dementia prevalence starts off too low,
+        then increases much more quickly than the other two states,
+        which doesn't seem right
+    - * `Disease transition rates, mortality, incidence, prevalence
+        (Sweden) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_23a_consistent_model_prototype_vv.ipynb>`__
+      * `Disease transition rates, mortality, incidence, prevalence
+        (USA) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27_model8.0_vv.ipynb>`__
+  * - 8.1
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * See how initial prevalence looks after bugfix from model 7.4
+    - * EMR appears to be correct
+      * AD dementia incidence now looks slightly underestimated,
+        particularly in older ages
+      * AD dementia prevalence now matches its target at the beginning
+        of the sim, but still becomes too high as the sim progresses
+      * The relative prevalence of the three disease states over time
+        still looks weird: Even though AD dementia prevalence now starts
+        off correctly, it still increases much more quickly than the
+        other two states and becomes too high
+    - * `Disease transition rates, mortality, incidence, prevalence
+        (Sweden)
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_24b_consistent_model_prototype_vv-3-M8.1.ipynb>`__
+      * `Disease transition rates, mortality, incidence, prevalence
+        (USA) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.1_vv.ipynb>`__
+  * - 8.2
+    - * See how variance and uncertainty in averted deaths scale with
+        population size
+    - See linked notebooks →
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.2_vv.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_28_model8.2_vv_treatment.ipynb>`__
+      * Abie's notebook estimating variance when scaling up [[Add link
+        once uploaded]]
+  * - 8.3
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Make sure EMR matches new EMR from DisMod
+      * Re-run testing and treatment V&V notebooks
+    - `V&V summary in PR 27
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/27>`_
+
+      |br|
+
+      * Testing results have the same bugs as model 7.3, as expected
+      * Treatment results look like those in model 7.2, which is good
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_29_model8.3_vv_testing.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_29_model8.3_vv_treatment.ipynb>`__
+  * - 8.4
+    - No V&V (due to lack of time), just generate results tables
+
+      * Model 5.0 V&V notebook (incidence, prevalence, mortality, etc.)
+        should look like model 8.3 in baseline scenario
+      * Testing notebook should look like model 7.6
+      * Treatment notebook should look similar to models 8.3 and 7.2
+    - N/A
+    - * `Results tables in PR 28
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/28>`_
+  * - 8.5
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Check whether prevalence of AD dementia still increases faster
+        than the other two states, or if it looks more reasonable
+      * In the interactive sim, check that new simulants are only
+        entering in the BBBM state
+    - `V&V summary in PR 31
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/31>`_
+
+      |br|
+
+      * The plot of AD dementia incidence by age is no longer shifted to
+        the left like in model 5.0 and seems to be pretty closely
+        matching its target, but it is now slightly low at the beginning
+        of the sim rather than slightly high
+      * Prevalence of AD dementia by age is also a bit low at the start
+        of the sim, but it now looks much closer to its target at later
+        times rather than becoming too high
+      * Prevalence of the three states over time now looks much better:
+        Namely, the relative proportions of the 3 states remains pretty
+        constant as opposed to the AD dementia prevalence increasing
+        much faster than preclinical and MCI
+      * I confirmed in the interactive sim that the new simulants added
+        on each time step are always only in the BBBM state (at least
+        for the four time steps I checked)
+      * I confirmed in the interactive sim that the displacement of PET
+        and CSF tests by BBBM tests seems to be working as expected
+      * The interactive sim showed that we still have the same
+        off-by-one error in the waning effect of treatment as in model
+        7.0, but we decided to leave this as is (and update the docs
+        instead) to err on the side of making a conservative estimate
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.5_vv.ipynb>`__
+      * `Interactive sim (hazard rates)
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.5_interactive_sim_hazard_rates.ipynb>`__
+      * `Interactive sim (testing)
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_05_model8.5_interactive_sim_testing.ipynb>`__
+  * - 8.6
+    - * Re-run testing and treatment V&V notebooks
+    - `V&V summary in PR 31`_
+
+      |br|
+
+      * The number of tests, treatments, and averted deaths all
+        increased, by approximately a factor of 2
+    - * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.6_vv_testing.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_11_04_model8.6_vv_treatment.ipynb>`__
+  * - 8.7
+    - No V&V (model is identical to 8.5/8.6), just generate results
+      tables
+    - N/A
+    - * `Preliminary results tables in PR 32
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/32>`_
+      * Final results tables in PR XXX [[Add link once it exists]]
+  * - 9.0
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Make sure incidence, prevalence, etc. still look good
+      * Check that the prevalence of the different dementia severities
+        looks reasonable
+    - `V&V summary in PR 33
+      <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/33>`_
+
+      |br|
+
+      * AD dementia incidence and prevalence are looking generally good,
+        except they're a bit too high in the younger ages, likely
+        because Abie didn't solve the differential equations for age <
+        45.
+      * AD dementia incidence and prevalence are a bit low at the
+        beginning of the sim. The same problem appears in model
+        8.5/8.6/8.7, but it looks slightly worse here.
+      * The prevalence of all disease states (including severities)
+        follows the expected pattern, and we can see slight changes in
+        prevalence between the baseline and treatment scenarios
+      * These results are only for 3 draws, so they could be affected by
+        parameter uncertainty.
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/8d0339e3ac748c5eed213a3a98e40b11a3aabffa/verification_and_validation/2025_11_19_model9.0_vv.ipynb>`__
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
