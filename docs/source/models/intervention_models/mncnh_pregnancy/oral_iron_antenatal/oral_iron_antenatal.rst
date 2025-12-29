@@ -183,6 +183,7 @@ Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - We assume no effect modification by baseline hemoglobin level. In reality, the individual hemoglobin shifts are likely greater among those who are anemic at baseline.
+- We assume no effect modification by when in pregnancy oral iron is received. In reality, the effect on hemoglobin (particularly at the end of pregnancy) is likely greater for those who have taken oral iron for longer.
 - Our baseline calibration preserves the population mean value of hemoglobin concentration, but only approximates the overall exposure distribution.
 
 Verification and validation criteria
@@ -313,6 +314,8 @@ Assumptions and Limitations
 
 - We do not consider effect modification by maternal anemia status.
 
+- We assume no effect modification by when in pregnancy oral iron is received. In reality, the effect on birthweight is likely greater for those who have taken oral iron for longer.
+
 - For the :ref:`MNCNH portfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>` that uses the baseline coverage value of women that took any antenatal iron: We assume that taking any iron supplement is equally as effective as taking daily a iron supplement in the baseline scenario. If it is in fact less effective, we will overestimate the impact of the baseline IFA coverage and therefore underestimate the impact of the MMS interventions.
 
 - Our baseline calibration preserves the population mean value of birthweight, but only approximates the overall exposure distribution.
@@ -375,6 +378,8 @@ Assumptions and limitations
 - In the case of IFA, we assume that the entire distribution experiences the same constant shift in gestational age. It is more likely that the lower end of the distribution experiences a greater shift and that the upper end experiences little to no shift (as supported from the MMS evidence). This limitation will result in an underestimation of the impact of the lower end of the distribution (which has a high magnitude of risk, but a low overall exposure) and an overestimation of the impact on the upper end of the distribution (which has lower risk magnitude, but higher overall exposure). However, we have limited data on how to better apply such a shift.
 
 - Our calculation of the IFA and MMS gestational age shifts does not take into account the correlation between ANC attendance (and therefore the population eligible to receive these interventions) and gestational age exposure that is induced through the correlated propensities used in the :ref:`facility choice model <2024_facility_model_vivarium_mncnh_portfolio>` in the MNCNH portfolio simulation. Given that there is a positive modeled correlation between these variables, there will be slightly less preterm birth among the population eligible for these interventions than among the population overall in our simulation. Therefore, our estimates of the gestational age shifts are likely less than they would be if they were calculated with consideration to this underyling correlation. Additionally, the modeled correlation in our simulation not considered in the calculation of the shifts may cause us to not exactly replicate the observed intervention RR on preterm birth that our modeling strategy aims to replicate.
+
+- We assume no effect modification by when in pregnancy oral iron is received. In reality, the effect on gestational age is likely greater for those who have taken oral iron for longer.
 
 - Our baseline calibration preserves the population mean value of gestational age at birth, but only approximates the overall exposure distribution.
 
@@ -528,6 +533,8 @@ Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - There is an observed association between severe anemia during pregnancy and stillbirth, as shown in [Young-et-al-2019]_. Therefore, there should hypothetically be some effect of IFA on stillbirth given that it improves hemoglobin concentration during pregnancy; however, we do not consider this effect due to lack of evidence that shows a direct effect of IFA on stillbirth outcomes.
+
+- We assume no effect modification by when in pregnancy oral iron is received. In reality, the effect on stillbirth is likely greater for those who have taken oral iron for longer.
 
 References
 ------------
