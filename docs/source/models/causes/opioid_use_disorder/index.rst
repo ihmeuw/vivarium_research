@@ -55,6 +55,9 @@ Opioid Use Disorder
   * - DSM-IV-TR
     - Diagnostic and Statistical Manual of Mental Disorders, 4th Edition, Text Revision
     -
+  * - DSM-5
+    - Diagnostic and Statistical Manual of Mental Disorders, 5th Edition
+    -
   * - ICD-10
     - International Classification of Diseases, 10th Revision
     -
@@ -62,7 +65,7 @@ Opioid Use Disorder
 Disease Overview
 ++++++++++++++++
 
-Opioid Use Disorder (OUD) is a chronic, relapsing substance use disorder characterized by a problematic pattern of opioid use leading to clinically significant impairment or distress. [DSM-5]_ Opioids include prescription pain relievers (e.g., oxycodone, hydrocodone), synthetic opioids (e.g., fentanyl), and illicit drugs (e.g., heroin).
+Opioid Use Disorder (OUD) is a chronic, relapsing substance use disorder characterized by a problematic pattern of opioid use leading to clinically significant impairment or distress. [DSM-5]_ Opioids can be natural (e.g. morphine, heroin), semi-synthetic (e.g., oxycodone, hydrocodone), or fully synthetic (e.g., fentanyl) and may be prescription pain relievers or be used as illicit drugs.
 
 **Clinical Definitions**: Clinical practice has evolved from DSM-IV-TR (which distinguishes "opioid abuse" from "opioid dependence") to DSM-5 (which combines these into a single "opioid use disorder" with severity levels). However, GBD 2023 modeling continues to use DSM-IV-TR criteria for consistency with historical data and international diagnostic standards.
 
@@ -109,7 +112,7 @@ OUD typically follows a chronic course characterized by:
 - Behavioral therapies and psychosocial support
 - Integrated treatment combining medications and behavioral interventions
 
-**Relapse**: OUD has a high relapse rate, with many individuals experiencing multiple cycles of recovery and return to active use. Relapse risk is elevated during periods of stress, environmental triggers, co-occurring mental health symptoms, and following treatment discontinuation.
+**Relapse**: OUD has a high relapse rate, with many individuals experiencing multiple cycles of recovery and return to active use.
 
 Simulation Modeling Approaches for OUD
 ---------------------------------------
@@ -124,7 +127,6 @@ The opioid overdose crisis is driven by an intersecting set of social, structura
 
 - **Agent-based models** (16% of models): Represent individual-level heterogeneity in trajectories, allowing for complex interactions and emergent population-level patterns.
 
-The modeling framework described in this documentation uses a **compartmental model** approach (three-state model: Susceptible, With Condition, On Treatment), which is well-suited for integrating with GBD 2023 estimates and simulating population-level intervention effects. Key methodological considerations for all opioid simulation models include investment in model calibration and validation, transparency in assumptions and mechanics to facilitate reproducibility, and careful attention to potential bias in the choice of parameter inputs.
 
 GBD 2023 Modeling Strategy
 +++++++++++++++++++++++++++
@@ -175,12 +177,11 @@ Key modeling assumptions in GBD 2023 include:
 
 - **No incidence or excess mortality before age 15**: Minimum age of onset assumption based on expert feedback and literature
 - **No incidence after age 64**: Modeling assumption based on the very low incidence observed at older ages in data from the European Monitoring Centre for Drugs and Drug Addiction
-- **Remission upper limit of 0.2**: Consistent with limits in the dataset
+- **Remission upper limit of 0.2**: Consistent with limits in the DisMod input data
 - **Country-level covariates**:
 
-  - Age-standardized prevalence of intravenous drug use (IDU) for prevalence
+  - Age-standardized prevalence of intravenous drug use (IDU) for prevalence and excess mortality rate (EMR)
   - Log-transformed estimates of defined daily doses for statistical purposes (SDDD) of prescribed opioid analgesics (consumption per day per million population) for prevalence
-  - Intravenous drug use as covariate for excess mortality rate (EMR)
 
 **Data Sources**
 
@@ -197,7 +198,7 @@ The GBD 2023 estimates incorporate data from systematic reviews and multiple sou
 
 **Severity Distribution**
 
-GBD 2023 estimates the proportion of individuals with opioid use disorder across three severity levels based on data from the US National Epidemiological Survey on Alcohol and Related Conditions (NESARC) and the Comorbidity and Trauma Study. The severity distribution is: asymptomatic 16% (13-19%), mild 37% (20-55%), and moderate/severe 47% (29-64%).
+GBD 2023 estimates the proportion of individuals with opioid use disorder across three severity levels based on data from the US National Epidemiological Survey on Alcohol and Related Conditions (NESARC) and the Comorbidity and Trauma Study.
 
 .. list-table:: Severity Distribution for Opioid Use Disorder
    :widths: 15 15 45 15
@@ -219,6 +220,12 @@ GBD 2023 estimates the proportion of individuals with opioid use disorder across
      - 47% (29-64%)
      - Uses heroin daily and has difficulty controlling the habit. When the effects wear off, the person feels severe nausea, agitation, vomiting, and fever. The person has a lot of difficulty in daily activities.
      - 0.697 (0.510-0.843)
+     
+
+.. note::
+
+    The lay descriptions refer specifically to heroin, but we assume that these disability weights are the same for other opioids.
+
 
 GBD 2023 Fatal Modeling Strategy
 ---------------------------------
@@ -236,11 +243,11 @@ The Cause of Death Ensemble model (CODEm) is used to estimate cause-specific mor
 
 **Excess Mortality Rate (EMR)**
 
-GBD 2023 generates excess mortality rate (EMR) data using the MR-BRT method, stratified by age and sex, with a prior assumption that the Healthcare Access and Quality (HAQ) Index has a negative association with EMR. However, the MR-BRT analysis did not find evidence to support this assumed negative relationship, indicating that the HAQ Index did not significantly impact EMR. As a result, EMR predictions are consistent across locations with both high and low HAQ Index values.
+The excess mortality rate (EMR) for OUD represents the elevated risk of death among individuals with OUD compared to the general population.
+GBD 2023 generates EMR estimates using the MR-BRT method, stratified by age and sex, with a prior assumption that the Healthcare Access and Quality (HAQ) Index has a negative association with EMR. However, the MR-BRT analysis did not find evidence to support this assumed negative relationship, indicating that the HAQ Index did not significantly impact EMR. As a result, EMR predictions are consistent across locations with both high and low HAQ Index values.
 
 **Covariates for EMR**: Intravenous drug use (IDU) is included as a country-level covariate for EMR, indicating substantially elevated mortality risk among people who inject opioids.
 
-The excess mortality rate for OUD represents the elevated risk of death among individuals with OUD compared to the general population.
 
 Restrictions
 ------------
@@ -283,14 +290,14 @@ Vivarium Modeling Strategy
 Scope
 -----
 
-This cause model represents opioid use disorder as a three-state compartmental model capturing susceptibility, active disorder, and treatment states. The model is designed to be compatible with GBD 2023 estimates while allowing for simulation of treatment interventions (Medications for Opioid Use Disorder, or MOUD).
+This cause model represents opioid use disorder as a four-state compartmental model capturing susceptible, active disorder, on treatment, and recovery states. The model is designed to be compatible with GBD 2023 estimates while allowing for simulation of treatment interventions (Medications for Opioid Use Disorder, or MOUD).
 
 The model captures:
 
 - Incidence of new OUD cases in the susceptible population
-- Natural remission from untreated OUD
+- Transitioning from from OUD to Recovery without treatment
 - Treatment initiation and engagement with MOUD
-- Treatment discontinuation
+- Treatment failure
 - Treatment-associated recovery
 - Excess mortality associated with untreated and treated OUD states
 
@@ -431,8 +438,13 @@ States Data
      - Weighted average of symptomatic and asymptomatic OUD disability weights
    * - T
      - Disability weight
-     - 0 or reduced value
+     - \text{disability_weight}_{mild}
      - MOUD substantially reduces disability [Wakeman-2020]_; disability weight in the treatment state is assumed to be substantially reduced relative to untreated OUD. In some base-case scenarios we set it to 0 to represent an optimistic upper bound on treatment effectiveness, with sensitivity analyses using non-zero disability weights
+
+.. note::
+
+       - Check with GBD modelers, maybe is should be lower
+       
 
 Transition Data
 ~~~~~~~~~~~~~~~
