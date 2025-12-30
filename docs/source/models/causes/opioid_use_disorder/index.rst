@@ -112,7 +112,7 @@ OUD typically follows a chronic course characterized by:
 - Behavioral therapies and psychosocial support
 - Integrated treatment combining medications and behavioral interventions
 
-**Relapse**: OUD has a high relapse rate, with many individuals experiencing multiple cycles of recovery and return to active use. Relapse risk is elevated during periods of stress, environmental triggers, co-occurring mental health symptoms, and following treatment discontinuation.
+**Relapse**: OUD has a high relapse rate, with many individuals experiencing multiple cycles of recovery and return to active use.
 
 Simulation Modeling Approaches for OUD
 ---------------------------------------
