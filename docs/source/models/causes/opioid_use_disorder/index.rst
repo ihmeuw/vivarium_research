@@ -55,6 +55,9 @@ Opioid Use Disorder
   * - DSM-IV-TR
     - Diagnostic and Statistical Manual of Mental Disorders, 4th Edition, Text Revision
     -
+  * - DSM-5
+    - Diagnostic and Statistical Manual of Mental Disorders, 5th Edition
+    -
   * - ICD-10
     - International Classification of Diseases, 10th Revision
     -
