@@ -1640,33 +1640,39 @@ Default stratifications to all observers should include scenario and input draw.
     - All
     - Default
     -
+  * - 24.3
+    - GA floor fixes
+    - Ensure GA floor varies by pregnancy outcome in alignment with docs
+    - All
+    - Default
+    -
   * - 25.0
     - Update SBR to >=24 weeks
     - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
     - Baseline
     - Default
     -
+  * - 25.0.1
+    - Update SBR to >=24 weeks run bugfixes
+    - Fix bug in 25.0 causing zero neonatal deaths, ensure run is complete (no failed jobs)
+    - All
+    - Default
+    - None
   * - 26.0
     - IV iron coverage and effect on hemoglobin
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
     - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
     -
-  * - 
+  * - 24.3
     - GA floor fixes
     - Ensure GA floor varies by pregnancy outcome in alignment with docs
     - All
     - Default
-    - None
-  * - 
-    - Update SBR to >=24 weeks run bugfixes
-    - Fix bug in 25.0 causing zero neonatal deaths, ensure run is complete (no failed jobs)
-    - All
-    - Default
-    - None
-  * - 
-    - Hemoglobin lag fix
-    - Fix issue of state table hemoglobin exposure variable lagging behind pipeline value by one timestep
+    -
+  * -
+    - GA floor fixes 2
+    - Fix issue with stillbirth GA floor
     - All
     - Default
     - None
@@ -2619,15 +2625,9 @@ Default stratifications to all observers should include scenario and input draw.
 
       * There is zero coverage of "ACS availability" for stillbirths. This should not be the case.
     - `Model 23.0 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/166>`__
-  * - 
-    - GA floors
-    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
-      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
-    - 
-    - 
   * - 24.0
     - MMS stillbirth effects and GA floors
-    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
+    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match floors documented, minus baseline IFA calibration shift
       * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
       * Confirm expected effects of IFA and MMS on pregnancy outcomes (note this will be confounded by ANC attendance in the simulation outputs, so RRs should be calculated stratified by ANC attendance exposure)
       * Confirm expected effects of misoprostol and azithromycin interventions on maternal disorders using scenarios #12 and #13
@@ -2649,6 +2649,14 @@ Default stratifications to all observers should include scenario and input draw.
       * Misoprostol and azithromycin effects appear correct
       * GA floors still not fixed (as expected)
     - V&V notebooks included in `this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/168>`__
+  * - 24.3
+    - 
+    - Same as 24.0
+    - * No regressions noted
+      * GA floors are a bit lower than we realized due to baseline IFA calibration (not a bug; clarified V&V criteria)
+      * GA floor for stillbirth does not appear to be working
+      * Hemoglobin screening coverage still inverted
+    - V&V notebooks included in `this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/174>`__
   * - 25.0
     - Update SBR to >=24 weeks
     - * Stillbirth ratio in simulation still matches artifact
@@ -2657,6 +2665,14 @@ Default stratifications to all observers should include scenario and input draw.
       * Run appears to have had some failed jobs
       * Stillbirth criteria look good
     - `V&V notebooks in this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/171>`__
+  * - 25.0.1
+    - Update SBR to >=24 weeks run bugfixes
+    - Same as 25.0
+    - * Issues noted in 25.0 resolved
+      * Stillbirth criteria still look good
+      * Hemoglobin screening coverage looking inverted, as in pre-23.0 runs
+      * No noted regressions
+    - `V&V notebooks in this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/176>`__
   * - 26.0
     - IV iron coverage and effect on hemoglobin
     - * Confirm scenario-specific IV iron and anemia screening coverage rates (verification with sim outputs)
@@ -2664,11 +2680,11 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm IV iron has the expected effect on hemoglobin (verification in the interactive simulation)
       * Confirm that hemoglobin exposure (using the interactive simulation) and maternal disorders outcomes (using sim outputs) still meet expectations
     - * All new criteria passing
-      * IFA coverage looking inverted, as in pre-23.0 runs
+      * Hemoglobin screening coverage looking inverted, as in pre-23.0 runs
     - `V&V notebooks in this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/172>`__
   * - 
-    - GA floor fixes
-    - GA floors by pregnancy outcome match expectations
+    - GA floor fixes 2
+    - In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match floors documented, minus baseline IFA calibration shift
     -
     -
   * - 
@@ -2739,13 +2755,6 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type and timing (specific distribution of errors assessed in the interactive simulation and summary "confusion matrix" assessed as part of the facility choice model V&V targets)
     - 
     - 
-  * - 
-    - Hemoglobin lag fix
-    - * In the interactive simulation: confirm that hemoglobin exposure variable in the state table no loner lags behind the pipeline value by a timestep
-      * Confirm maternal disorders still meet expectation
-      * Confirm risk effect of hemoglobin on affected maternal disorders still looks as expected
-    - 
-    - 
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
@@ -2789,10 +2798,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Likely a result of there being null coverage for CPAP availability for stillbirths (because they are not alive to receive CPAP). However, stillbirths should receive ACS coverage if they are in the relevant believed gestational age range and delivering in a facility that has CPAP access.
     - Wait until we split stillbirths into antepartum and intrapartum before we address this issue, as only intrapartum stillbirths should receive ACS coverage
     - TBD
-  * - No impact of MMS on stillbirth
-    - Unknown, was previously meeting verification criteria. No impact in the interactive sim or in the simulation results
-    - Engineers to investigate and update
-    - Remaining pregnancy refactor
   * - `Ferritin exposure model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2439>`__
     - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
     - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy using PRISMA data shared by the Gates foundation
@@ -2836,7 +2841,15 @@ Default stratifications to all observers should include scenario and input draw.
     - Possible issue with ST-GPR model reacting to an all-zero datapoint added in GBD 2023 for Pakistan
     - Determine cause of issue with GBD modeling team, decide whether to leave as-is or use a proxy location
     - TBD
-
+  * - Hemoglobin screening coverage inverted (again) after model 24
+    - Due to incorrect merge conflict resolution `here <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/5ec7be1d7b924c8e21429c986f200926fce1f1e8#diff-00be43841d2d3685affadba19259e1c7e06db62ed24e32adbf9d06391483da24>`__.
+    - Engineering to fix bundled with upcoming run
+    - TBD
+  * - Stillbirth gestational age floor not working
+    - `This concat <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/230/changes#diff-d5a4bbdfa0930cd8c3796282feaa16360dde4aa9e789552f17f575fe2ce72f62R160>`__
+      means stillbirths have the cat2 and cat8 columns, which are NaN, and those NaNs get propagated through the cumsum operation leading to weirdness
+    - Engineering to fix
+    - GA floor fixes 2
 
 
 .. _mncnh_portfolio_6.0:
