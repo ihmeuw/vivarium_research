@@ -155,10 +155,16 @@ The Global Burden of Disease (GBD) 2023 study defines opioid use disorders as "a
 6. Other important activities are given up because of the substance use
 7. Substance use is continued despite knowledge of physical or psychological problems occurring as a result of the substance
 
+.. todo::
+
+  Describe ICD-9 and ICD-10 criteria here in similar detail.
+
+
+
 GBD 2023 Non-Fatal Modeling Strategy
 -------------------------------------
 
-The GBD 2023 study uses DisMod-MR 2.1, a Bayesian meta-regression tool, to estimate the epidemiology of opioid use disorder. [DisMod-Methods]_ DisMod-MR 2.1 integrates diverse data sources to produce internally consistent estimates of key epidemiological parameters.
+The GBD 2023 study uses DisMod-MR 2.1, a Bayesian meta-regression tool, to estimate the epidemiology of opioid use disorder. [DisMod-Methods]_ DisMod-MR 2.1 integrates diverse data sources to produce internally consistent estimates of key epidemiological parameters (meaning the incidence, prevalence, remission, and excess mortality satisfy the DisMod equations with respect to age, assuming the changes over time are minimal).
 
 **Key Epidemiological Parameters**
 
@@ -176,7 +182,6 @@ These parameters are estimated by age, sex, location, and year (1990-2023) and a
 Key modeling assumptions in GBD 2023 include:
 
 - **No incidence or excess mortality before age 15**: Minimum age of onset assumption based on expert feedback and literature
-- **No incidence after age 64**: Modeling assumption based on the very low incidence observed at older ages in data from the European Monitoring Centre for Drugs and Drug Addiction
 - **Remission upper limit of 0.2**: Consistent with limits in the DisMod input data
 - **Country-level covariates**:
 
@@ -462,7 +467,7 @@ Transition Data
      - S
      - C
      - Derived from DisMod-AT/NumPyro model
-     - Incidence rate of OUD. Estimated using NumPyro implementation of DisMod-AT-like model to ensure internal consistency with prevalence, treatment coverage, and other epidemiological parameters.
+     - Incidence rate of OUD. Estimated using NumPyro implementation of DisMod-AT-like model to ensure internal consistency with prevalence, treatment coverage, and other epidemiological parameters. [[change lingo so it does not say "internal consistency" and link to section below on how this is accomplished.]]
    * - r
      - C
      - S
@@ -551,101 +556,32 @@ DisMod-AT (Disease Model – Age-and-Time) is a Bayesian meta-analytic tool desi
 
    - Observed prevalence matching GBD estimates
    - Treatment coverage matching available data
-   - Internal consistency constraints (prevalence, incidence, remission, and mortality must be mutually consistent in steady-state or dynamic equilibrium)
-   - Prior distributions based on literature and expert knowledge
-
-4. **Output**: Produces full posterior distributions for all transition rates (*i*, *r*, *ti*, *td*, *ts*) that:
-
-   - Are internally consistent across all model states
-   - Match observed prevalence and treatment coverage patterns
-   - Respect biological and epidemiological constraints
-   - Include uncertainty quantification
-
-**Advantages of This Approach**
-
-- Ensures internal consistency of all epidemiological parameters
-- Allows estimation of parameters not directly measured in GBD
-- Propagates uncertainty through all model parameters
-- Enables sensitivity analysis and scenario testing
-- Provides transparent, reproducible parameter estimation
-
-Risk Factor Interactions
--------------------------
-
-The OUD cause model interacts with several risk factors and exposures:
-
-**Risk Exposures**
-
-- **With Condition State as Risk Exposure**: The "with_condition" (C) and "on_treatment" (T) states can be used as binary or categorical risk exposures for outcomes such as:
-
-  - Infectious diseases (HIV, hepatitis C)
-  - Overdose mortality
-  - Incarceration
-  - Housing instability
-  - Other health and social outcomes
-
-**Effect Modification of Transitions**
-
-Several factors may modify transition rates in the OUD model:
-
-- **Incidence (i)**: May be increased by:
-
-  - Exposure to prescription opioids
-  - History of substance use
-  - Mental health conditions
-  - Adverse childhood experiences
-  - Social determinants (poverty, housing instability, incarceration)
-
-- **Treatment Initiation (ti)**: May be increased by:
-
-  - Interventions expanding treatment access
-  - Low-barrier treatment programs
-  - Outreach and engagement services
-  - May be decreased by barriers to treatment (stigma, transportation, cost)
-
-- **Treatment Discontinuation (td)**: May be reduced by:
-
-  - Interventions improving treatment retention
-  - Integrated behavioral health services
-  - Peer support and recovery services
-  - Stable housing and employment
+   - Internal consistency constraints (prevalence, incidence, remission, and mortality must be mutually consistent in dynamic equilibrium)
+   - Weakly informative prior distributions to help with convergence
 
 Assumptions and Limitations
 ----------------------------
 
 **Key Assumptions**
 
-1. **Three-State Model**: The model simplifies the complex heterogeneity of OUD into three discrete states. In reality, OUD severity exists on a continuum, and individuals may have varying levels of use, dependence, and treatment engagement.
+1. **Four-State Model**: The model simplifies the complex heterogeneity of OUD into four discrete states. In reality, OUD severity exists on a continuum, and individuals may have varying levels of use, dependence, and treatment engagement.
 
 2. **MOUD as Single Treatment State**: The "on_treatment" state aggregates all forms of MOUD (methadone, buprenorphine, naltrexone) despite important differences in effectiveness, retention, and accessibility across these medications.
 
 3. **No Differential Opioid Types**: The model does not distinguish between different opioid types (prescription vs. illicit; heroin vs. fentanyl) or routes of administration (oral vs. injection), which have different risk profiles.
 
-4. **Treatment Effectiveness**: The model assumes that MOUD substantially reduces disability and mortality, potentially to zero in the base case. Actual treatment effectiveness varies by medication type, dosage, adherence, and individual factors.
+4. **Treatment Effectiveness**: The model assumes that MOUD substantially reduces disability and mortality. Actual treatment effectiveness varies by medication type, dosage, adherence, and individual factors.
 
-5. **Steady-State Assumption**: Parameter estimation using DisMod-AT assumes approximate steady state or smooth temporal trends. Rapid changes in the opioid epidemic (e.g., fentanyl emergence) may violate this assumption.
-
-6. **Natural Remission**: The natural remission rate (*r*) represents spontaneous recovery without formal treatment. This is poorly characterized in the literature and is primarily identified through model calibration to match observed prevalence.
+5. **Transition to Recovery without Medication**: The non-medication remission rate (*r*) represents transition to recovery without medication treatment. This is poorly characterized in the literature and is primarily identified through model calibration to match observed prevalence.
 
 **Limitations**
 
 1. **Treatment Coverage Data**: Estimates of the proportion of individuals with OUD receiving MOUD are highly uncertain and vary considerably across settings, populations, and data sources.
 
-2. **Remission Measurement**: Natural remission from OUD is difficult to measure directly, as individuals who recover without treatment are unlikely to be captured in treatment or surveillance systems.
-
-3. **Relapse Dynamics**: The model does not explicitly capture multiple cycles of treatment and relapse, which are common in OUD. Individuals may transition multiple times between states.
-
-4. **Comorbidities**: The model does not explicitly represent common comorbidities (mental health disorders, polysubstance use, infectious diseases) that influence OUD progression and treatment outcomes.
-
-5. **Heterogeneity**: Important sources of heterogeneity (age of onset, severity, social determinants, genetic factors) are not explicitly represented in the basic three-state model.
+2. **Comorbidities**: The model does not explicitly represent common comorbidities (mental health disorders, polysubstance use, infectious diseases) that influence OUD progression and treatment outcomes.
 
 6. **Overdose Mortality**: While the model includes excess mortality associated with OUD, overdose deaths may be coded separately in mortality data and require careful reconciliation with OUD-attributed deaths.
 
-7. **Intervention Effects**: Estimating the effect of specific interventions on transition rates (e.g., how much does a particular treatment expansion program increase *ti*?) requires additional assumptions and calibration.
-
-**Implications for Interpretation**
-
-Results from this model should be interpreted as population-level estimates capturing average dynamics across heterogeneous individuals. Scenario analyses and interventions should be evaluated based on their effects on transition rates, with careful attention to the assumptions embedded in those rate changes. Uncertainty in parameter estimates (particularly treatment-related transitions) should be thoroughly characterized and propagated through model outputs.
 
 Validation Criteria
 -------------------
@@ -658,134 +594,14 @@ Model validation should compare simulated outputs to reference data:
 
 3. **Cause-Specific Mortality**: Deaths attributed to OUD in the simulation should match GBD 2023 CSMR estimates
 
+TODO: add YLD, disability weights, and DALYs.  Figure out if there is something meaningful to check about EMR.
+
 4. **Incidence**: Population incidence rate (transitions from S to C) should be consistent with GBD 2023 incidence estimates
 
 5. **Age Patterns**: Age-specific prevalence and incidence should follow observed patterns from GBD and epidemiological studies
 
 6. **Temporal Trends**: Trends in prevalence, incidence, and mortality should match observed temporal patterns
 
-Extensions and Modifications
------------------------------
-
-This base model can be extended to represent additional complexity:
-
-**Treatment Type Stratification**
-
-The "on_treatment" state can be stratified into subtypes:
-
-- Methadone maintenance treatment
-- Buprenorphine/naloxone
-- Extended-release naltrexone
-- Detoxification only
-
-Each treatment type would have distinct transition rates for treatment discontinuation and recovery.
-
-**Severity Stratification**
-
-The "with_condition" state can be stratified by:
-
-- Route of administration (oral, injection)
-- Severity level (mild, moderate, severe)
-- Opioid type (prescription, heroin, synthetic opioids)
-
-**Dynamic Treatment Access**
-
-Treatment initiation rates can be made time-varying to reflect:
-
-- Policy changes (e.g., Medicaid expansion, increased treatment funding)
-- Programmatic interventions (e.g., jail-based MOUD, low-barrier access programs)
-- Healthcare system changes
-
-**Mortality Refinement**
-
-Excess mortality can be stratified by:
-
-- Cause (overdose vs. other causes)
-- Treatment status
-- Time since treatment discontinuation (elevated risk immediately post-treatment)
-
-**Polysubstance Use Modeling**
-
-The model can be extended to capture polysubstance use, particularly the co-occurring use of opioids with other substances such as methamphetamine, cocaine, benzodiazepines, or alcohol. This is epidemiologically and clinically important, as: [Ellis-2018]_
-
-- Between 1992 and 2017, treatment admissions involving opioid/methamphetamine co-use increased by 10.1 percentage points [Jones-2020]_
-- From 1999 to 2020, overdose deaths from combined psychostimulants (primarily methamphetamine) and opioids increased from 187 to 14,777 deaths
-- Polysubstance use is associated with treatment discontinuation, increased overdose risk, and distinct patterns of healthcare utilization
-
-**Extension Approaches for Polysubstance Use**:
-
-1. **Joint State Space**: Create a multidimensional state space capturing OUD status (susceptible, with_condition, on_treatment) crossed with other substance use disorders (e.g., methamphetamine use disorder states). This allows modeling of transitions between substance use patterns (e.g., opioid-only use → concurrent opioid-methamphetamine use).
-
-2. **Risk Stratification**: Stratify the "with_condition" and "on_treatment" states by polysubstance use status:
-
-   - Opioid use only
-   - Opioid + stimulant use (methamphetamine, cocaine)
-   - Opioid + sedative use (benzodiazepines, alcohol)
-   - Multiple substance combinations
-
-3. **Modified Transition Rates**: Polysubstance use affects transition rates:
-
-   - **Incidence**: Higher risk of developing OUD among individuals already using other substances
-   - **Treatment initiation**: May be lower due to increased severity/complexity
-   - **Treatment discontinuation**: Higher rates with concurrent stimulant use
-   - **Mortality**: Substantially elevated with concurrent use (especially opioids + benzodiazepines or opioids + stimulants)
-
-4. **Treatment Effectiveness Modification**: MOUD effectiveness may differ for individuals with polysubstance use, requiring different parameterization of treatment success/discontinuation rates.
-
-**Casual Use and Subclinical States**
-
-The base model focuses on opioid use disorder (OUD) as defined by DSM-IV-TR criteria (≥3 of 7 symptoms for dependence; see GBD 2023 definition above). However, the model can be extended to capture casual/recreational opioid use that does not meet diagnostic criteria for OUD. Note that while GBD 2023 uses DSM-IV-TR, clinical extensions may reference DSM-5 criteria (≥2 of 11 symptoms) which is now standard in clinical practice:
-
-**Extension Approaches for Casual Use**:
-
-1. **Four-State Model**: Add a "casual use" state representing non-disordered opioid use:
-
-   - **Susceptible/Never Used**: No history of opioid use
-   - **Casual Use**: Recreational/occasional opioid use without meeting OUD criteria (<3 DSM-IV-TR symptoms or 0-1 DSM-5 symptoms)
-   - **OUD (Untreated)**: Meets diagnostic criteria for OUD (≥3 DSM-IV-TR symptoms or ≥2 DSM-5 symptoms), not receiving treatment
-   - **OUD (On Treatment)**: Receiving MOUD
-
-2. **Transition Pathways**:
-
-   - Susceptible → Casual Use (initiation of non-disordered use)
-   - Casual Use → Susceptible (cessation before developing disorder)
-   - Casual Use → OUD Untreated (escalation/transition to disorder)
-   - OUD Untreated → Casual Use (partial recovery/harm reduction)
-
-3. **Frequency-Dependent Modeling**: Use continuous or ordinal measures of use frequency as predictors of transition to dependence:
-
-   - Research shows a **sigmoid pattern** of dependence probability as a function of use frequency
-   - Empirical dependence probabilities can be estimated using Hill functions with governing parameters (PD50 = frequency at which 50% develop dependence)
-   - This approach allows modeling the transition from first use → regular use → dependence onset
-
-4. **Clinical Significance**:
-
-   - **Prevalence**: Among lifetime drug users, only ~15-68% (varies by substance) develop dependence [Anthony-1994]_
-   - **Intervention Targeting**: Casual use states may benefit from harm reduction and early intervention rather than intensive treatment
-   - **Overdose Risk**: Casual users face overdose risk (especially with fentanyl contamination) despite not meeting diagnostic criteria
-
-5. **Data Requirements**:
-
-   - National surveys (e.g., NSDUH) distinguish between "use in past year," "use disorder," and intermediate levels
-   - Transition probabilities from casual use to disorder are substance-specific and poorly characterized for opioids [Lopez-Quintero-2011]_
-   - Age of initiation, frequency of use, and route of administration are key predictors of transition to disorder
-
-**Methodological Considerations**:
-
-- GBD 2023 uses DSM-IV-TR criteria (≥3 of 7 symptoms), but clinical extensions may use DSM-5 criteria
-- DSM-5 provides finer severity gradations: casual use (0-1 symptoms), mild OUD (2-3 symptoms), moderate OUD (4-5 symptoms), and severe OUD (6+ symptoms) that can be operationalized using ordinal severity states
-- DSM-5's elimination of the abuse/dependence distinction and creation of a unified disorder with severity levels supports a continuous or graded state representation
-- Modeling casual use requires data on non-clinical populations, which may be underrepresented in treatment-seeking samples used to parameterize traditional models
-- When extending the model beyond GBD 2023 definitions, researchers should clearly specify which diagnostic criteria (DSM-IV-TR, DSM-5, or ICD-10) are used for each state
-
-**Integration with Other Models**
-
-This OUD cause model can be integrated with other simulation components:
-
-- **Quarters Model**: Housing status (private residence, unhoused, incarcerated) affecting transition rates
-- **Overdose Model**: Explicit representation of fatal and non-fatal overdose events
-- **Infectious Disease Models**: Co-modeling of HIV, hepatitis C transmission among people who inject opioids
-- **Treatment System Capacity**: Explicit capacity constraints on treatment availability
 
 References
 ++++++++++
@@ -819,15 +635,3 @@ References
 
 .. [Ciccarone-2019]
    Ciccarone D. The triple wave epidemic: Supply and demand drivers of the US opioid overdose crisis. Int J Drug Policy. 2019;71:183-188. doi:10.1016/j.drugpo.2019.01.010. `(full text) <https://doi.org/10.1016/j.drugpo.2019.01.010>`__
-
-.. [Jones-2020]
-   Jones CM, Olsen EO, O'Donnell J, Mustaquim D. Resurgent methamphetamine use at treatment admission in the United States, 2008-2017. Am J Public Health. 2020;110(4):509-516. doi:10.2105/AJPH.2019.305527. `(full text) <https://doi.org/10.2105/AJPH.2019.305527>`__
-
-.. [Ellis-2018]
-   Ellis MS, Kasper ZA, Cicero TJ. Twin epidemics: The surging rise of methamphetamine use in chronic opioid users. Drug Alcohol Depend. 2018;193:14-20. doi:10.1016/j.drugalcdep.2018.08.029. `(full text) <https://doi.org/10.1016/j.drugalcdep.2018.08.029>`__
-
-.. [Anthony-1994]
-   Anthony JC, Warner LA, Kessler RC. Comparative epidemiology of dependence on tobacco, alcohol, controlled substances, and inhalants: basic findings from the National Comorbidity Survey. Exp Clin Psychopharmacol. 1994;2(3):244-268. doi:10.1037/1064-1297.2.3.244. `(full text) <https://doi.org/10.1037/1064-1297.2.3.244>`__
-
-.. [Lopez-Quintero-2011]
-   Lopez-Quintero C, Pérez de los Cobos J, Hasin DS, et al. Probability and predictors of transition from first use to dependence on nicotine, alcohol, cannabis, and cocaine: results of the National Epidemiologic Survey on Alcohol and Related Conditions (NESARC). Drug Alcohol Depend. 2011;115(1-2):120-130. doi:10.1016/j.drugalcdep.2010.11.004. `(PubMed) <https://pubmed.ncbi.nlm.nih.gov/21145178/>`__
