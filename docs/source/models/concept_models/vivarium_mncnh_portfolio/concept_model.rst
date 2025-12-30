@@ -1016,8 +1016,8 @@ Default stratifications to all observers should include scenario and input draw.
 
       This list was later updated for GBD 2023 data starting in model 19.0 by taking the remainder of each number in the GBD 2021 list after dividing by 250 and re-sampling a new value for 218 (which had a duplicate value % 100 as another number in the list).
   * - Population size per draw
-    - 100,000
-    - Based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_: production run number divided in half for default V&V runs
+    - 200,000
+    - Based on calculations from the `Nutrition Optimization project <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_nutrition_optimization/kids/concept_model.html#production-run-specifications>`_
   * - Randomness key columns
     - ['entrance_time','age']
     - Note that each row of the population table in this simulation contains a pregnant simulant AND the outcome of that simulant's pregnancy. Therefore, the conversion of a stillbirth to a live birth between simulated scenarios in this simulation will not result in a new row added to the simulation state table and therefore will not change the state table index value of other simulants like occured in the IV iron simulation and resulted in disruptions to common random numbers between scenarios. Therefore, these randomness key columns are expected to be sufficient for this simulation.
@@ -1566,61 +1566,87 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
     - Do not define a measure of "true first trimester hemoglobin exposure" in this version of the model. Otherwise, default.
     -
-  * -
+  * - 21.0.1
     - Hemoglobin refactor run correction
     - Same as 21.0 but with specific artifact/code discrepancies described in V&V table addressed
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
     - Do not define a measure of "true first trimester hemoglobin exposure" in this version of the model. Otherwise, default.
-    - None
-  * -
-    - Update SBR to >=24 weeks
-    - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
-    - Baseline 
-    - Default
-    - None
-  * -
-    - GA floors
-    - Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See the changes made to the pregnancy and LBWSG exposure model documents in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1840>`__ Note that this update will require re-running the LBWSG PAF calculation. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor").
-    - Baseline
-    - Default
-    - None
-  * -
+    -
+  * - 21.1
     - Add dichotomous true hemoglobin output
     - Add in dichotomous measure of "true first trimester hemoglobin exposure" for V&V of the hemoglobin screening sensitivity and specificity
     - Baseline, MMS scaleup, and anemia screening scaleup scenarios
     - Include dichotomous output of true first trimester hemoglobin exposure as a stratification in the anc_hemoglobin observer  
-    - Hemoglobin refactor run correction
-  * -
+    -
+  * - 21.1.1
+    - Hemoglobin refactor: more bugfixes
+    - Same as previous but with specific bugs described in V&V table addressed
+    - Baseline, MMS scaleup, and anemia screening scaleup scenarios
+    - Default
+    -
+  * - 22.0.0
+    - Add residual and other maternal disorders
+    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
+    - Baseline
+    - Default
+    - 
+  * - 22.0.1
+    - Residual maternal disorders observer
+    - Bug fix to include residual maternal disorders in observation
+    - Baseline
+    - Default
+    - 
+  * - 23.0
     - Remaining pregnancy model refactor
-    - Specifically with regard to LBWSG exposure
+    - Specifically with regard to LBWSG exposure. Note that intervention effects on stillbirth are not expected to be resolved in this run. Additionally, include `bugfix for inverted baseline anemia screening coverage <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/199>`__
     - All
     - Default
-    - Add dichotomous true hemoglobin output run
+    - 
+  * - 24.0
+    - MMS stillbirth effects and GA floors
+    - * Update simulation to appropriately apply effects of MMS on stillbirth by determining "broad pregnancy outcome" (abortion/ectopic/miscarriage versus live/still birth) at initialization (prior to administration of MMS) and then later, after MMS administration, determine live versus stillbirth outcomes
+      * Add misoprostol and azithromycin scenarios to runs
+      * Implement gestational age at birth exposure minimum values for live and stillbirth outcomes. See the changes made to the pregnancy and LBWSG exposure model documents in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1840>`__ Note that this update will require re-running the LBWSG PAF calculation. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor").
+    - All, including newly re-added scenarios #12 Azithromycin V&V and #13 Misoprostol V&V (note that scenarios #12 and #13 have been run before, but have been dropped from the branches file)
+    - Default
+    - None
+  * - 22.0.2
+    - Residual maternal disorders bugfix
+    - Fix issue of use of cause ID 1160 rather than cause ID 379 for indirect maternal deaths
+    - Baseline
+    - Default
+    -
+  * - 
+    - Hemoglobin lag fix
+    - Fix issue of state table hemoglobin exposure variable lagging behind pipeline value by one timestep
+    - All
+    - Default
+    - None
+  * -
+    - Update SBR to >=24 weeks
+    - Update to >=24 week stillbirth estimates for SBR. See `pull request <https://github.com/ihmeuw/vivarium_research/pull/1836>`__. Run **without oral iron effects** (to sidestep known issues and not block this model on "remaining pregnancy refactor"). **Note that this should build on top of 20.0.x, not 20.1.x (which was only for sensitivity analysis).**
+    - Baseline
+    - Default
+    - None
   * -
     - Larger run for neonatal mortality V&V
     - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Baseline
     - * For this run only, 10,000,000 population size per draw
       * Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-    - Remaining pregnancy model refactor run
-  * -
-    - Add residual and other maternal disorders
-    - Inclusion of the :ref:`residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` and :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause models
-    - Baseline
-    - Default
-    - None
+    - Remaining pregnancy model refactor run (model 23) V&V
   * -
     - IV iron coverage and effect on hemoglobin
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>` coverage and effect on hemoglobin. See the :ref:`hemoglobin module document <2024_vivarium_mncnh_portfolio_hemoglobin_module>` for more detail.
     - Baseline and IV iron scale-up scenarios
     - Default, note IV iron coverage as a new stratifying variable to the maternal population observer
-    - Hemoglobin refactor run correction
+    - None
   * -
     - IV iron effects on BW, GA, and stillbirth
-    - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` (data specific to GBD 2023 has yet to be generated)
+    - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` 
     - Baseline and IV iron scale-up scenarios
     - Default
-    - RT-owned data generation, IV iron coverage and effect on hemoglobin run
+    - IV iron coverage and effect on hemoglobin run, MMS stillbirth effects 
   * -
     - Update hemoglobin effects
     - As defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (Custom PAFs and neonatal sepsis effects have yet to be calculated for GBD 2023): Updated custom PAF values for maternal hemorrhage and maternal sepsis outcomes (paired with existing implementation of GBD RRs); New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
@@ -1632,7 +1658,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
-    - Hemoglobin refactor run correction
+    - None
   * -
     - Anemia YLDs
     - 
@@ -1663,6 +1689,7 @@ Default stratifications to all observers should include scenario and input draw.
     - All
     - Default, note that observed value for ultrasound is now "ultrasound summary" rather than "ultrasound type" with this update
     - Updated data values for trimester-specific GA error values, updated facility choice model and values that reflect the updated GA error values, Remaining pregnancy model refactor run
+
 
 .. note:: 
 
@@ -2451,30 +2478,60 @@ Default stratifications to all observers should include scenario and input draw.
     - Could not run facility choice V&V because `PR exposing the V&V targets <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/186>`__ had not been integrated into the branch this was run from.
       On further inspection, artifact had been based on 20.1.1 (which was for sensitivity analysis only).
     - 
-  * -
+  * - 21.0.1
     - Hemoglobin refactor run correction
     - Same as 21.0
-    - 
-    - 
-  * - 
-    - GA floors
-    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
-      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
-    - 
-    - 
-  * - 
+    - 21.0.1 was only partially V&Ved, checking criteria that did not require an interactive sim.
+      This partial V&V surfaced two bugs: believed preterm was always false, and ACS eligibility was always false.
+    - `21.0.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/162>`__
+  * - 21.1
     - Add dichotomous true hemoglobin output
     - * Confirm hemoglobin screening sensitivity and specificity in simulation outputs
       * Confirm that scenario-specific counts of maternal sepsis and hemorrhage did not change after adding this measure (indicates that we are not accidentally referencing this hemoglobin exposure measure in our risk effect models)
       * Confirm that true "low" hemoglobin exposure counts are lower in the MMS scenario than the baseline scenario
       * Confirm that "true" low hemoglobin rate matches corresponding GBD anemia impairment prevalence in pregnancy estimate (note that we expect to slightly overestimate anemia prevalence since we have not yet applied full impact of baseline IFA at the time that we observe this measure) 
+    - Not V&Ved before next model was run.
     - 
-    - 
-  * - 
+  * - 21.1.1
+    - Hemoglobin refactor: more bug fixes
+    - Combination of 21.0 and 21.1.
+    - * Newly-noticed bug that `had been present since 18.3 <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/9e6d51aac72a3d60dcceee559087c923f5331238/verification_and_validation/model_18.3_anemic_screening.ipynb>`__:
+        anemia screening coverage is inverted (one minus the correct value). 
+      * Interactive sim criteria from 21.0 are met; ``ferritin_screening_coverage`` and ``anemia_status_during_pregnancy`` columns are not updated appropriately, and the ``hemoglobin_exposure`` column is updated one time step after the hemoglobin exposure changes, but it seems like neither is causing real issues. Specifically:
+
+        * ``ferritin_screening_coverage`` appears to not be used and can be removed from the simulation
+
+        * ``anemia_status_during_pregnancy`` is always null
+
+        * the ``hemoglobin_exposure`` variable in the state table lags behind the hemoglobin exposure pipeline value by one timestep
+
+      * Bugs from 21.0.1 fixed successfully.
+      * 21.1 V&V criteria met.
+      * Note: we can't check azithromycin, misoprostol, ACS, or CPAP RRs in simulation results. Need to add scenarios for this.
+    - `21.1.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/163>`__
+  * - 22.0.0
+    - Add residual and other maternal disorders
+    - * Confirm incidence and mortality risk of existing cause-specific maternal disorders matches expectation (we don't expect them to be exactly the same due to changes in stochastic uncertainty, but same trends as before, noting that sepsis and hemorrhage are slightly miscalibrated due to the hemoglobin PAFs we are using)
+      * Confirm expected mortality ratios of (1) residual and (2) abortion/ectopic/miscarriage causes
+      * Confirm expected YLDs due to (1) residual and (2) abortion/ectopic/miscarriage causes
+      * Confirm that mortality and morbidity due to residual maternal disorders happens among live and stillbirths only and that abortion/ectopic/miscarriage mortality does not
+    - Residual maternal disorders not included in observation
+    - No notebooks due to lack of observers, see 22.0.1
+  * - 22.0.1
+    - Residual maternal disorders observer
+    - Same as 22.0.0
+    - Everything matches, except that cause ID 1160 rather than 379 was included in "residual maternal disorders"
+    - `22.0.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/165>`__
+  * - 22.0.2
+    - Residual maternal disorders bugfix
+    - Same as 22.0.0
+    - Everything matches
+    - `22.0.2 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/167>`__
+  * - 23.0
     - Remaining pregnancy model refactor
     - In the simulation outputs:
 
-      * Confirm expected effects of IFA and MMS on pregnancy outcomes (note this will be confounded by ANC attendance in the simulation outputs, so RRs should be calculated stratified by ANC attendance exposure)
+      * Confirm inverted anemia screening baseline coverage bug has been resolved
       * Confirm expected effects of IFA and MMS on preterm birth outputs (note this will be confounded by ANC in the sim outputs, so RRs should be calculated stratified by ANC attendance exposure)
       * Confirm that stillbirths, preterm birth counts, and neonatal deaths now vary between the baseline and MMS scale-up scenarios
       * Confirm that baseline calibration still looks appropriate, particularly with respect to preterm birth counts, neonatal mortality, pregnancy outcomes, and facility choice (effect of baseline IFA on GA may have throw off our preterm/ANC correlation from the calibration)
@@ -2486,14 +2543,17 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that the ultrasound gestational age dating is based on intervention-modified gestational age at birth exposure
     - 
     - 
+  * - 24.0
+    - MMS stillbirth effects and GA floors
+    - * In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match expectation
+      * Confirm that neonatal mortality calibration was not worsened relative to prior model run (as this change may affect the LBWSG PAF values)
+      * Confirm expected effects of IFA and MMS on pregnancy outcomes (note this will be confounded by ANC attendance in the simulation outputs, so RRs should be calculated stratified by ANC attendance exposure)
+      * Confirm expected effects of misoprostol and azithromycin interventions on maternal disorders using scenarios #12 and #13
+    - 
+    - 
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
-    - 
-    - 
-  * - 
-    - Add residual and other maternal disorders
-    - * Confirm that the proportion of in-facility deliveries in CEmONC and BEmONC facilities matches the location-specific estimates from the HS team.
     -
     -
   * - 
@@ -2530,6 +2590,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Anemia YLDs
     - * Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values
       * Anemia YLDs should decrease in MMS/IV iron scale-up scenarios 
+      * Confirm that ferritin screening results are unchanged
     - 
     - 
   * - 
@@ -2560,6 +2621,13 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type and timing (specific distribution of errors assessed in the interactive simulation and summary "confusion matrix" assessed as part of the facility choice model V&V targets)
     - 
     - 
+  * - 
+    - Hemoglobin lag fix
+    - * In the interactive simulation: confirm that hemoglobin exposure variable in the state table no loner lags behind the pipeline value by a timestep
+      * Confirm maternal disorders still meet expectation
+      * Confirm risk effect of hemoglobin on affected maternal disorders still looks as expected
+    - 
+    - 
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
@@ -2579,10 +2647,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Explanation
     - Action plan
     - Timeline
-  * - Maternal disorders burden does not vary by scenario despite increased coverage of the oral iron intervention affecting hemoglobin exposure
-    - It appears that the :code:`hemoglobin_exposure` column in the state table matches the :code:`hemoglobin.exposure` pipeline value at the pregnancy timestep. However, after progressing to the timesteps where maternal disorders burden is assigned, this is no longer the case. The state table value is used to assess maternal disorders risk and does not reflect the appropriate intervention-affected hemoglobin exposure.
-    - Engineers to address during pregnancy model refactor
-    - Hemoglobin refactor
   * - Neonatal deaths do not vary by scenario despite increased coverage of the oral iron intervention that should affect BW and GA exposures (and therefore child mortality)
     - Impacts of oral iron intervention of birth weight and gestational age pipeline values are working, but LBWSG RRs are being assigned based on the state table exposure values (that are recorded on the first timestep).
     - Engineers to address during pregnancy model refactor
@@ -2599,22 +2663,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Unknown, was previously meeting verification criteria. No impact in the interactive sim or in the simulation results
     - Engineers to investigate and update
     - Remaining pregnancy refactor
-  * - Ferritin screening rate < 100% among eligible population in scale-up scenario
-    - We are only testing ferritin among those who have low exposure values for their tested hemoglobin AND their true hemoglobin. Everyone who has a low tested hemoglobin exposure should be screened for ferritin regardless of their true hemoglobin exposure
-    - Engineers to address during pregnancy model refactor
-    - Hemoglobin refactor
-  * - Hemoglobin screening test and anemia status during pregnancy appear to be reading in an inappropriate hemoglobin exposure measure
-    - See linked comments (it appears we  created a new measure to be used in these instances, but did not actually update it as the input variables)
-    - Engineers to address during pregnancy model refactor
-    - Hemoglobin refactor
   * - Propensity for LBWSG category remains constant across timesteps, but propensity for continuous BW and GA values reset at each timestep
     - This should not cause significant bias in our results, but it is not logical to have a different birth weight at different ages and unnecessarily increases stochastic uncertainty in our simulation
     - Engineers to address during pregnancy model refactor
     - Remaining pregnancy refactor
-  * - There is non-zero coverage of hemoglobin screening among those who attend first trimester screening ONLY
-    - This is inconsistent with documentation (hemoglobin screening should occur at later pregnancy ANC visit only)
-    - Engineers to address during pregnancy model refactor
-    - Hemoglobin refactor
   * - `Ferritin exposure model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2439>`__
     - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
     - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy using PRISMA data shared by the Gates foundation
@@ -2653,6 +2705,16 @@ Default stratifications to all observers should include scenario and input draw.
     - Issue with GBD fistula model in which Pakistan burden was erroneously set to zero 
     - `Update model in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1847>`__
     - "Pakistan fistula update" model run
+  * - In GBD 2023 data for Pakistan the mortality values for the abortion and miscarriage cause (c_995) are very small (nearly the lowest of any national location globally),
+      causing unexpectedly low YLLs (~100 times fewer than India)
+    - Possible issue with ST-GPR model reacting to an all-zero datapoint added in GBD 2023 for Pakistan
+    - Determine cause of issue with GBD modeling team, decide whether to leave as-is or use a proxy location
+    - TBD
+  * - Anemia screening coverage is inverted
+    - Coverage is one minus the correct value
+    - Engineers have already implemented a fix in `this PR <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/199>`__ that was run in model 23.0
+      Research to check that fix worked.
+    - Model 23.0 V&V
 
 
 .. _mncnh_portfolio_6.0:
