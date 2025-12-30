@@ -180,9 +180,8 @@ Key modeling assumptions in GBD 2023 include:
 - **Remission upper limit of 0.2**: Consistent with limits in the DisMod input data
 - **Country-level covariates**:
 
-  - Age-standardized prevalence of intravenous drug use (IDU) for prevalence
+  - Age-standardized prevalence of intravenous drug use (IDU) for prevalence and excess mortality rate (EMR)
   - Log-transformed estimates of defined daily doses for statistical purposes (SDDD) of prescribed opioid analgesics (consumption per day per million population) for prevalence
-  - Intravenous drug use as covariate for excess mortality rate (EMR)
 
 **Data Sources**
 
@@ -199,7 +198,7 @@ The GBD 2023 estimates incorporate data from systematic reviews and multiple sou
 
 **Severity Distribution**
 
-GBD 2023 estimates the proportion of individuals with opioid use disorder across three severity levels based on data from the US National Epidemiological Survey on Alcohol and Related Conditions (NESARC) and the Comorbidity and Trauma Study. The severity distribution is: asymptomatic 16% (13-19%), mild 37% (20-55%), and moderate/severe 47% (29-64%).
+GBD 2023 estimates the proportion of individuals with opioid use disorder across three severity levels based on data from the US National Epidemiological Survey on Alcohol and Related Conditions (NESARC) and the Comorbidity and Trauma Study.
 
 .. list-table:: Severity Distribution for Opioid Use Disorder
    :widths: 15 15 45 15
@@ -221,6 +220,12 @@ GBD 2023 estimates the proportion of individuals with opioid use disorder across
      - 47% (29-64%)
      - Uses heroin daily and has difficulty controlling the habit. When the effects wear off, the person feels severe nausea, agitation, vomiting, and fever. The person has a lot of difficulty in daily activities.
      - 0.697 (0.510-0.843)
+     
+
+.. note::
+
+    The lay descriptions refer specifically to heroin, but we assume that these disability weights are the same for other opioids.
+
 
 GBD 2023 Fatal Modeling Strategy
 ---------------------------------
@@ -238,11 +243,11 @@ The Cause of Death Ensemble model (CODEm) is used to estimate cause-specific mor
 
 **Excess Mortality Rate (EMR)**
 
-GBD 2023 generates excess mortality rate (EMR) data using the MR-BRT method, stratified by age and sex, with a prior assumption that the Healthcare Access and Quality (HAQ) Index has a negative association with EMR. However, the MR-BRT analysis did not find evidence to support this assumed negative relationship, indicating that the HAQ Index did not significantly impact EMR. As a result, EMR predictions are consistent across locations with both high and low HAQ Index values.
+The excess mortality rate (EMR) for OUD represents the elevated risk of death among individuals with OUD compared to the general population.
+GBD 2023 generates EMR estimates using the MR-BRT method, stratified by age and sex, with a prior assumption that the Healthcare Access and Quality (HAQ) Index has a negative association with EMR. However, the MR-BRT analysis did not find evidence to support this assumed negative relationship, indicating that the HAQ Index did not significantly impact EMR. As a result, EMR predictions are consistent across locations with both high and low HAQ Index values.
 
 **Covariates for EMR**: Intravenous drug use (IDU) is included as a country-level covariate for EMR, indicating substantially elevated mortality risk among people who inject opioids.
 
-The excess mortality rate for OUD represents the elevated risk of death among individuals with OUD compared to the general population.
 
 Restrictions
 ------------
@@ -285,14 +290,14 @@ Vivarium Modeling Strategy
 Scope
 -----
 
-This cause model represents opioid use disorder as a three-state compartmental model capturing susceptibility, active disorder, and treatment states. The model is designed to be compatible with GBD 2023 estimates while allowing for simulation of treatment interventions (Medications for Opioid Use Disorder, or MOUD).
+This cause model represents opioid use disorder as a four-state compartmental model capturing susceptible, active disorder, on treatment, and recovery states. The model is designed to be compatible with GBD 2023 estimates while allowing for simulation of treatment interventions (Medications for Opioid Use Disorder, or MOUD).
 
 The model captures:
 
 - Incidence of new OUD cases in the susceptible population
-- Natural remission from untreated OUD
+- Transitioning from from OUD to Recovery without treatment
 - Treatment initiation and engagement with MOUD
-- Treatment discontinuation
+- Treatment failure
 - Treatment-associated recovery
 - Excess mortality associated with untreated and treated OUD states
 
@@ -433,8 +438,13 @@ States Data
      - Weighted average of symptomatic and asymptomatic OUD disability weights
    * - T
      - Disability weight
-     - 0 or reduced value
+     - \text{disability_weight}_{mild}
      - MOUD substantially reduces disability [Wakeman-2020]_; disability weight in the treatment state is assumed to be substantially reduced relative to untreated OUD. In some base-case scenarios we set it to 0 to represent an optimistic upper bound on treatment effectiveness, with sensitivity analyses using non-zero disability weights
+
+.. note::
+
+       - Check with GBD modelers, maybe is should be lower
+       
 
 Transition Data
 ~~~~~~~~~~~~~~~
