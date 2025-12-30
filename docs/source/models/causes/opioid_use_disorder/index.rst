@@ -127,7 +127,6 @@ The opioid overdose crisis is driven by an intersecting set of social, structura
 
 - **Agent-based models** (16% of models): Represent individual-level heterogeneity in trajectories, allowing for complex interactions and emergent population-level patterns.
 
-The modeling framework described in this documentation uses a **compartmental model** approach (three-state model: Susceptible, With Condition, On Treatment), which is well-suited for integrating with GBD 2023 estimates and simulating population-level intervention effects. Key methodological considerations for all opioid simulation models include investment in model calibration and validation, transparency in assumptions and mechanics to facilitate reproducibility, and careful attention to potential bias in the choice of parameter inputs.
 
 GBD 2023 Modeling Strategy
 +++++++++++++++++++++++++++
