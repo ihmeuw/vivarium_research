@@ -65,7 +65,7 @@ Opioid Use Disorder
 Disease Overview
 ++++++++++++++++
 
-Opioid Use Disorder (OUD) is a chronic, relapsing substance use disorder characterized by a problematic pattern of opioid use leading to clinically significant impairment or distress. [DSM-5]_ Opioids include prescription pain relievers (e.g., oxycodone, hydrocodone), synthetic opioids (e.g., fentanyl), and illicit drugs (e.g., heroin).
+Opioid Use Disorder (OUD) is a chronic, relapsing substance use disorder characterized by a problematic pattern of opioid use leading to clinically significant impairment or distress. [DSM-5]_ Opioids can be natural (e.g. morphine, heroin), semi-synthetic (e.g., oxycodone, hydrocodone), or fully synthetic (e.g., fentanyl) and may be prescription pain relievers or be used as illicit drugs.
 
 **Clinical Definitions**: Clinical practice has evolved from DSM-IV-TR (which distinguishes "opioid abuse" from "opioid dependence") to DSM-5 (which combines these into a single "opioid use disorder" with severity levels). However, GBD 2023 modeling continues to use DSM-IV-TR criteria for consistency with historical data and international diagnostic standards.
 
