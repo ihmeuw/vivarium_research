@@ -218,7 +218,7 @@ Estimated gestational age should be calculated by adding a randomly sampled valu
 
   Add references for these numbers. Here's the `notebook I used to
   get them
-  <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/facility_choice/2025_04_17a_investigate_ga_error.ipynb>`_,
+  <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/21553cec52f351d910d90ae3647cb59d83886592/facility_choice/2025_04_17a_investigate_ga_error.ipynb>`_,
   which includes the citations.
 
 .. note::
