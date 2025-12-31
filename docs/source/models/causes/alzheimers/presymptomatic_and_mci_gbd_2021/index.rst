@@ -549,7 +549,7 @@ table below:
       function, using the methods defined in `SciPy's Weibull
       distribution class`_
   * - :math:`\Delta_\text{BBBM}`
-    - Average duration of BBBM-presymptomatic AD in the absence of
+    - Average duration of BBBM-pre-clinical AD in the absence of
       mortality
     - bbbm_dist.mean()
     - Equal to :math:`\lambda \Gamma(1 + 1/k)`, where :math:`\Gamma` is
