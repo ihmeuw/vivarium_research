@@ -1562,6 +1562,18 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline; AI-assisted ultrasound scale-up; CPAP and ACS scale-up; CPAP, ACS, and AI-ultrasound scale-up 
     - Default
     - 
+  * - 20.2
+    - Sensitivity analysis with lower bound US error values
+    - To get a lower bound on the potential impact of AI ultrasound for 12/15 Gates meeting, same as the previous, but set the standard deviation of gestational age error to 5 days for "no ultrasound", 3.5 days for "standard ultrasound", and 2 days for "AI ultrasound".
+    - Baseline; AI-assisted ultrasound scale-up; CPAP and ACS scale-up; CPAP, ACS, and AI-ultrasound scale-up 
+    - Default
+    - 
+  * - 20.3
+    - Sensitivity analysis with upper bound US error values
+    - To get an upper bound on the potential impact of AI ultrasound for 12/15 Gates meeting based on additional data seeking, same as the previous, but set the standard deviation of gestational age error to 14 days for "no ultrasound", 10 days for "standard ultrasound", and 2 days for "AI ultrasound".
+    - Baseline; AI-assisted ultrasound scale-up; CPAP and ACS scale-up; CPAP, ACS, and AI-ultrasound scale-up 
+    - Default
+    - 
   * - 21.0
     - Hemoglobin refactor
     - Bringing model up to date with the `updated hemoglobin module docs <https://github.com/ihmeuw/vivarium_research/pull/1830>`__ and fixing bugs in "Fix observer stratifications and multiple bugfixes" related to multiple instances of hemoglobin variables that were being inconsistently referenced by different simulation components (See outstanding model verification and validation issues table for full list)
@@ -2478,6 +2490,18 @@ Default stratifications to all observers should include scenario and input draw.
     - Outputs look as expected!
     - * `20.1.1 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/158>`__
       * `20.1.1 results available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/159>`__
+  * - 20.2
+    - Sensitivity analysis with lower bound US error values
+    - * Confirm AI ultrasound impact much smaller than model 20.1.1
+    - Outputs look as expected!
+    - * `20.2 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/169>`__
+      * `20.2 results available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/58e6fd50bda22f961860b2dff0e12f20fb16f51d/october_results.ipynb>`__
+  * - 20.3
+    - Sensitivity analysis with upper bound US error values
+    - * Confirm AI ultrasound impact larger than model 20.2, much smaller than model 20.1.1
+    - Outputs look as expected!
+    - * `20.3 V&V notebooks available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/169>`__
+      * `20.3 results available here <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/520e17fc56c551dfb81ab3d32c5a44cde8c8be27/october_results.ipynb>`__
   * - 21.0
     - Hemoglobin refactor
     - Using simulation outputs:
