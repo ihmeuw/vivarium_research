@@ -616,7 +616,7 @@ Calibrating Consistent Rates
 ----------------------------
 
 GBD provides dementia prevalence, incidence, and mortality, but our model
-includes presymptomatic states (BBBM-AD and MCI-AD) not directly measured by
+includes pre-dementia states (BBBM-AD and MCI-AD) not directly measured by
 GBD. To derive internally consistent rates for these states, we use Bayesian
 inference with NumPyro/JAX to fit disease progression rates to GBD data while
 enforcing ODE-based consistency constraints.
