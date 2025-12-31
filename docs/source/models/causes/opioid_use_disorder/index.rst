@@ -108,9 +108,8 @@ OUD typically follows a chronic course characterized by:
 **Recovery**: Recovery from OUD can occur through various pathways: [Degenhardt-2019]_
 
 - Spontaneous or natural recovery (remission without formal treatment)
-- Medication-assisted treatment (also called Medications for Opioid Use Disorder or MOUD) using buprenorphine, methadone, or naltrexone [SAMHSA-MOUD]_
 - Behavioral therapies and psychosocial support
-- Integrated treatment combining medications and behavioral interventions
+- Medication-assisted treatment (also called Medications for Opioid Use Disorder or MOUD) using buprenorphine, methadone, or naltrexone [SAMHSA-MOUD]_, possibly integrated with behavioral interventions
 
 **Relapse**: OUD has a high relapse rate, with many individuals experiencing multiple cycles of recovery and return to active use.
 
@@ -237,8 +236,8 @@ GBD 2023 Fatal Modeling Strategy
 
 Fatal burden from OUD is estimated through two pathways:
 
-1. **Direct deaths**: Deaths directly attributed to opioid use disorder (e.g., coded as opioid dependence or harmful use in vital registration data)
-2. **Opioid overdose deaths**: Deaths from opioid poisoning/overdose, which are modeled separately and contribute to the overall burden
+1. **Coded to OUD**: Deaths directly attributed to OUD (e.g., coded as F11.20 [Opioid dependence, uncomplicated] or 304.0 [Opioid type dependence])
+2. **Opioid overdose deaths**: Deaths from opioid poisoning/overdose, which might not include coding for OUD
 
 The Cause of Death Ensemble model (CODEm) is used to estimate cause-specific mortality from OUD, incorporating:
 
@@ -295,21 +294,21 @@ Vivarium Modeling Strategy
 Scope
 -----
 
-This cause model represents opioid use disorder as a four-state compartmental model capturing susceptible, active disorder, on treatment, and recovery states. The model is designed to be compatible with GBD 2023 estimates while allowing for simulation of treatment interventions (Medications for Opioid Use Disorder, or MOUD).
+This cause model represents opioid use disorder as a four-state compartmental model capturing susceptible, active disorder, on treatment, and recovery states. The model is designed to be compatible with GBD 2023 estimates while allowing for simulation of medication treatment interventions (Medications for Opioid Use Disorder, or MOUD).
 
 The model captures:
 
 - Incidence of new OUD cases in the susceptible population
-- Transitioning from from OUD to Recovery without treatment
+- Transitioning from from OUD to Recovery without MOUD
 - Treatment initiation and engagement with MOUD
-- Treatment failure
-- Treatment-associated recovery
+- MOUD Treatment failure
+- MOUD Treatment recovery
 - Excess mortality associated with untreated and treated OUD states
 
 State Definitions
 -----------------
 
-The model includes three mutually exclusive states:
+The model includes four mutually exclusive states:
 
 .. list-table:: State Definitions
    :widths: 5 10 30
@@ -327,23 +326,32 @@ The model includes three mutually exclusive states:
    * - T
      - **T**\reatment (On Treatment)
      - Individual has opioid use disorder and is receiving medication treatment for OUD (MOUD: methadone, buprenorphine, or naltrexone)
+   * - R
+     - **R**\ecovery (Recovery)
+     - Individual is in recovery from opioid use disorder and is not currently receiving MOUD treatment
 
 **State Characteristics**
 
-- **Susceptible (S)**: This state includes individuals who have never had OUD as well as those who have achieved sustained remission/recovery. These individuals face the baseline population risk of developing OUD.
+- **Susceptible (S)**: This state includes individuals who have never had OUD. These individuals face the baseline population risk of developing OUD.
 
 - **With Condition (C)**: This state represents individuals with active, untreated OUD. Individuals in this state:
 
   - Experience the disability burden associated with symptomatic OUD
   - Face elevated mortality risk (excess mortality)
   - Are at risk for complications including overdose, infectious diseases, and social harms
-  - May transition to treatment (MOUD) or achieve natural remission
+  - May transition to MOUD or achieve recovery through non-medical treatment or natural remission
 
 - **On Treatment (T)**: This state represents individuals receiving MOUD (methadone, buprenorphine, or naltrexone). Individuals in this state:
 
-  - Have reduced or eliminated disability burden (consistent with treatment effectiveness)
+  - Have reduced disability burden
+  - Have reduced mortality risk compared to untreated OUD
+  - May discontinue treatment either through treatment failure (transition back to untreated state) or treatment-assisted  recovery (transition to recovery state)
+
+- **Recovery (R)**: This state represents individuals who are in recovery and are not receiving MOUD. Individuals in this state:
+
+  - Have eliminated disability burden (consistent with treatment effectiveness)
   - Have substantially reduced mortality risk compared to untreated OUD
-  - May discontinue treatment (transition back to untreated state) or achieve recovery (transition to susceptible state)
+  - May transition back to with condition state
 
 Cause Model Diagram
 -------------------
@@ -355,14 +363,16 @@ Cause Model Diagram
       node [shape=box, style=rounded];
 
       susceptible [label="Susceptible\n(S)"]
-      with_condition [label="With Condition\n(Untreated OUD)\n(C)"]
+      with_condition [label="With Condition\n(Not receiving MOUD)\n(C)"]
       on_treatment [label="On Treatment\n(Receiving MOUD)\n(T)"]
+      recovery [label="Recovery state\n(Not receiving MOUD)\n(R)"]
 
       susceptible -> with_condition [label="Incidence\n(i)"]
-      with_condition -> susceptible [label="Natural Remission\n(r)"]
+      with_condition -> recovery [label="Untreated\nRecovery\n(r1)"]
       with_condition -> on_treatment [label="Treatment\nInitiation\n(ti)"]
-      on_treatment -> with_condition [label="Treatment\nDiscontinuation\n(td)"]
-      on_treatment -> susceptible [label="Treatment-\nAssociated\nRecovery\n(ts)"]
+      on_treatment -> with_condition [label="Treatment\nFailure\n(tf)"]
+      on_treatment -> recovery [label="Treatment-\nAssociated\nRecovery\n(ts)"]
+      recovery -> with_condition [label="Relapse\n(r2)"]
   }
 
 Transitions
@@ -377,19 +387,19 @@ Transitions
      - Definition
    * - i
      - Incidence rate
-     - Rate at which susceptible individuals develop opioid use disorder. This represents new cases of OUD arising in the population.
-   * - r
-     - Natural remission rate
-     - Rate at which individuals with untreated OUD achieve remission/recovery without formal treatment. Natural remission may occur through spontaneous behavior change, informal social support, or other mechanisms.
+     - Rate at which susceptible individuals develop opioid use disorder. This represents new cases of OUD arising in the susceptible population.
+   * - r1
+     - Untreated recovery rate
+     - Rate at which individuals without MOUD transition to recovery. Untreated recovery may occur through spontaneous behavior change, informal social support, or other mechanisms.
    * - ti
      - Treatment initiation rate
-     - Rate at which individuals with untreated OUD begin medication treatment (MOUD: methadone, buprenorphine, or naltrexone). This transition represents engagement with formal treatment services.
-   * - td
-     - Treatment discontinuation rate
-     - Rate at which individuals receiving MOUD discontinue treatment and return to untreated OUD status. This may occur due to medication side effects, loss of access to treatment, patient choice, or other factors.
+     - Rate at which individuals with OUD begin medication treatment (MOUD: methadone, buprenorphine, or naltrexone).
+   * - tf
+     - Treatment failure rate
+     - Rate at which individuals receiving MOUD discontinue treatment and return to "With Condition" status. This may occur due to medication side effects, loss of access to treatment, patient choice, or other factors.
    * - ts
      - Treatment-associated recovery rate
-     - Rate at which individuals receiving MOUD achieve sustained recovery and transition to the susceptible state. This represents successful treatment outcomes.
+     - Rate at which individuals receiving MOUD achieve sustained recovery and transition to the Recovery state. This represents successful treatment outcomes.
 
 State and Transition Data Tables
 ---------------------------------
@@ -411,8 +421,8 @@ States Data
      - Post-CoDCorrect cause-level CSMR for opioid use disorder (cause_id=562)
    * - S
      - Prevalence
-     - :math:`1 - \text{prevalence}_{\text{c562}}`
-     - Complement of total OUD prevalence
+     - :math:`1 - \text{prevalence}_{\text{lifetime}}`
+     - Complement of lifetime OUD prevalence
    * - C
      - Prevalence
      - :math:`\text{prevalence}_{\text{c562}} \times (1 - \text{treatment_coverage})`
@@ -421,6 +431,10 @@ States Data
      - Prevalence
      - :math:`\text{prevalence}_{\text{c562}} \times \text{treatment_coverage}`
      - Treated OUD prevalence (total prevalence × proportion on treatment)
+   * - R
+     - Prevalence
+     - :math:`\text{prevalence}_{\text{lifetime}} - \text{prevalence}_{\text{c562}}`
+     - Lifetime OUD prevalence less current OUD prevalence (treated and untreated)
    * - S
      - Excess mortality rate (EMR)
      - 0
@@ -433,6 +447,10 @@ States Data
      - Excess mortality rate (EMR)
      - 0 or reduced value
      - MOUD substantially reduces mortality risk [Sordo-2017]_ [Santo-2021]_; EMR in the treatment state is assumed to be substantially reduced relative to untreated OUD. In some base-case scenarios we set it to 0 to represent the protective effect of treatment, with sensitivity analyses using non-zero EMR values
+   * - R
+     - Excess mortality rate (EMR)
+     - 0
+     - No excess mortality in Recovery state
    * - S
      - Disability weight
      - 0
@@ -445,10 +463,14 @@ States Data
      - Disability weight
      - \text{disability_weight}_{mild}
      - MOUD substantially reduces disability [Wakeman-2020]_; disability weight in the treatment state is assumed to be substantially reduced relative to untreated OUD. In some base-case scenarios we set it to 0 to represent an optimistic upper bound on treatment effectiveness, with sensitivity analyses using non-zero disability weights
+   * - R
+     - Disability weight
+     - 0
+     - No disability burden in recovery state
 
 .. note::
 
-       - Check with GBD modelers, maybe is should be lower
+       - Check with GBD modelers, it is unclear if mild disability is appropriate for treatment state
        
 
 Transition Data
@@ -467,27 +489,32 @@ Transition Data
      - S
      - C
      - Derived from DisMod-AT/NumPyro model
-     - Incidence rate of OUD. Estimated using NumPyro implementation of DisMod-AT-like model to ensure internal consistency with prevalence, treatment coverage, and other epidemiological parameters. [[change lingo so it does not say "internal consistency" and link to section below on how this is accomplished.]]
-   * - r
+     - Incidence rate of OUD. Estimated using NumPyro implementation of DisMod-AT-like model.
+   * - r1
      - C
-     - S
+     - R
      - Derived from DisMod-AT/NumPyro model
-     - Natural remission rate for untreated OUD. Not directly available from GBD; estimated using DisMod-AT/NumPyro model to ensure consistency with observed prevalence and treatment patterns.
+     - Non-MOUD recovery rate for OUD. Not directly available from GBD; estimated using DisMod-AT/NumPyro model.
    * - ti
      - C
      - T
      - Derived from DisMod-AT/NumPyro model and treatment access data
      - Treatment initiation rate. Estimated based on treatment coverage ratios and population-level treatment access data. May vary by setting (community, jail, etc.) and be modified by intervention scenarios.
-   * - td
+   * - tf
      - T
      - C
      - Derived from DisMod-AT/NumPyro model and treatment retention studies
-     - Treatment discontinuation rate. Estimated from treatment retention/discontinuation studies and calibrated to match observed treatment coverage. Represents a key target for interventions aimed at improving treatment retention.
+     - Treatment failure rate. Estimated from treatment retention/discontinuation studies and calibrated to match observed treatment coverage. Represents a key target for interventions aimed at improving treatment retention.
    * - ts
      - T
-     - S
+     - R
      - Derived from DisMod-AT/NumPyro model and treatment outcome studies
      - Treatment-associated recovery rate. Estimated from literature on MOUD outcomes and long-term recovery rates. Represents transition to sustained recovery while on treatment.
+   * - r2
+     - R
+     - C
+     - Derived from DisMod-AT/NumPyro model
+     - Relapse rate. 
 
 Data Sources
 ~~~~~~~~~~~~
@@ -503,11 +530,11 @@ Data Sources
    * - prevalence_c562
      - GBD 2023 (COMO)
      - Total prevalence of opioid use disorder
-     - Includes both treated and untreated OUD
+     - Includes both treated and untreated OUD, does not include recovery state
    * - deaths_c562
      - GBD 2023 (CoDCorrect)
      - Deaths attributed to opioid use disorder
-     - Direct OUD deaths; excludes opioid overdose deaths coded separately
+     - Direct OUD deaths; excludes opioid overdose deaths coded separately (Double check this!)
    * - population
      - GBD 2023 (Demography)
      - Mid-year population by age/sex/location/year
@@ -516,14 +543,14 @@ Data Sources
      - ST-GPR model of percentage of dependents in treatment (if we can find it!)
      - Proportion of individuals with OUD receiving MOUD
      - This covariate is mentioned in the description of the IHME-indirect data creation in the Supplementary Appendix section on OUD
-   * - Transition rates (i, r, ti, td, ts)
+   * - Transition rates (i, r1, ti, td, ts, r2)
      - NumPyro DisMod-AT-like model
      - Internally consistent transition rates
      - Estimated using Bayesian model that integrates GBD prevalence, treatment coverage, and other available data to solve for consistent set of transition rates
    * - emr_base
      - GBD 2023 (DisMod-MR 2.1)
      - Base excess mortality rate for OUD
-     - :math:`\text{EMR} = \frac{\text{CSMR}_{\text{c562}}}{\text{prevalence}_{\text{c562}}}`
+     - Does this satisfy :math:`\text{EMR} = \frac{\text{CSMR}_{\text{c562}}}{\text{prevalence}_{\text{c562}}}`??  Maybe there is a distinction between "direct" OUD deaths and opioid overdose deaths.
    * - Disability weights
      - GBD 2023 (YLD Appendix)
      - Disability weights for OUD sequelae
@@ -536,13 +563,13 @@ Data Sources
 Estimation of Transition Rates Using NumPyro/DisMod-AT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A key challenge in parameterizing this model is that GBD 2023 does not directly provide all required transition rates (particularly natural remission *r*, treatment initiation *ti*, treatment discontinuation *td*, and treatment-associated recovery *ts*). To address this, we use a **NumPyro implementation of a DisMod-AT-like model**.
+A key challenge in parameterizing this model is that GBD 2023 does not directly provide all required transition rates (particularly non-MOUD recovery *r1*, treatment initiation *ti*, treatment failure *tf*, treatment-associated recovery *ts*, and relapse *r2*). To address this, we use a **NumPyro implementation of a DisMod-AT-like model**.
 
 **Methodology**
 
 DisMod-AT (Disease Model – Age-and-Time) is a Bayesian meta-analytic tool designed to synthesize diverse epidemiological data to produce internally consistent transition rates for compartmental disease models. Our NumPyro implementation:
 
-1. **Model Structure**: Configures a three-state compartmental model (Susceptible, With Condition, On Treatment) matching the structure defined above
+1. **Model Structure**: Configures a four-state compartmental model (Susceptible, With Condition, On Treatment, Recovery) matching the structure defined above
 
 2. **Input Data**: Incorporates:
 
