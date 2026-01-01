@@ -33,7 +33,7 @@ Alzheimer's Testing and Diagnosis
 ==========================================
 
 Alzheimer's testing will be modeled as an intervention with no affected outcomes
-which introduces PET, CSF, and BBBM testing for eligible pre-dementia populations, 
+which introduces PET, CSF, and BBBM testing for eligible predementia populations, 
 as defined in :ref:`Reference Scenario and Alternative Scenario 1 <alz_scenarios>`.
 
 
