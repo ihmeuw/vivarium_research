@@ -400,6 +400,9 @@ Transitions
    * - ts
      - Treatment-associated recovery rate
      - Rate at which individuals receiving MOUD achieve sustained recovery and transition to the Recovery state. This represents successful treatment outcomes.
+   * - r2
+     - Relapse rate
+     - Rate at which individuals in recovery transition back to "With Condition". 
 
 State and Transition Data Tables
 ---------------------------------
