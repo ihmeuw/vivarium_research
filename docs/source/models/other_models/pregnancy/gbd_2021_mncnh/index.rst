@@ -243,7 +243,7 @@ Among pregnancies that result in births, the base probability of a live birth is
 with the remainder being stillbirths.
 This probability is modified by the :ref:`antenatal supplementation intervention <maternal_supplementation_intervention>`.
 
-For pregnancies that result in stillbirths, we assign the timing of the stillbirth as either antepartum or intrapartum.
+For pregnancies that result in stillbirths, we assign the timing of the stillbirth as either antepartum (fetal deaths occurring before the onset of labor) or intrapartum (fetal death occurring during labor and before birth).
 The timing of stillbirth will affect the eligibility of the simulant dyad for certain intrapartum interventions (i.e., antepartum
 stillbirths will not be eligible for ACS, but intrapartum stillbirths may be).
 The probability of intrapartum stillbirth will be affected by the intrapartum sensors -> C-section -> obstructed labor -> intrapartum stillbirth pathway once implemented,
