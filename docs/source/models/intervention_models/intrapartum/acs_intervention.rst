@@ -100,7 +100,7 @@ Vivarium Modeling Strategy
 
 To be eligible to receive the ACS intervention (see the :ref:`intrapartum intervention module document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>` 
 for how to obtain this information in the MNCNH portfolio simulation), a simulant must be expected to give birth to a early or moderate preterm infant with a believed GA
-of 26 to 33 weeks. Pregnancies that end in intrapartum stillbirth will be eligible for ACS if believed GA is within this range, however antepartum stillbirths will not be eligible.
+of 26 to 33 weeks. Pregnancies that end in live births or intrapartum stillbirth will be eligible for ACS if believed GA is within this range, however antepartum stillbirths will not be eligible.
 
 This intervention requires adding an attribute to all simulants who expect to give birth to a preterm infant (i.e., based on believed GA if 26 to 33 weeks from 
 pregnancy module output)  to specify if a parent-child dyad receives ACS or not.  We will track this and the model will 
