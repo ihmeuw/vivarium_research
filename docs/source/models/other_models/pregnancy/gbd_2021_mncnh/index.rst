@@ -244,11 +244,18 @@ with the remainder being stillbirths.
 This probability is modified by the :ref:`antenatal supplementation intervention <maternal_supplementation_intervention>`.
 
 For pregnancies that result in stillbirths, we assign the timing of the stillbirth as either antepartum (fetal deaths occurring before the onset of labor) or intrapartum (fetal death occurring during labor and before birth).
-The timing of stillbirth will affect the eligibility of the simulant dyad for certain intrapartum interventions (i.e., antepartum
-stillbirths will not be eligible for ACS, but intrapartum stillbirths may be).
+Both antepartum and intrapartum stillbirths will proceed to the intrapartum component. The timing of stillbirth will affect the eligibility of the simulant dyad for certain intrapartum interventions.
+Specifically, antepartum stillbirths will only be eligible for intrapartum interventions that act on maternal health (such as misoprostol and azithromycin) and will not be eligible for intrapartum interventions intended for neonatal health (such as antenatal corticosteroids) as the fetus will have already passed prior to the onset of labor, but delivery of the fetal remains will still be necessary.
+Intrapartum stillbirths will remain eligible for all intrapartum interventions. 
+
 The probability of intrapartum stillbirth will be affected by the intrapartum sensors -> C-section -> obstructed labor -> intrapartum stillbirth pathway once implemented,
-but baseline values for rates of antepartum stillbirth rates are outlined in the table below.
+but baseline values for rates of antepartum stillbirth rates are outlined in the table below. Antepartum stillbirths may still receive c-sections if the stillbirth is undetected and spontaneous labor occurs - we will need to consider this potential limitation of our c-section modeling strategy once developed.
 Location-specific probability of intrapartum stillbirth is extracted from a 2018 Lancet Global Health report. [Ahmed_et_al_2018]_
+
+
+.. note::
+
+  The antepartum stillbirth rates extracted from [Ahmed_et_al_2018]_ below are specific to Sub-Saharan Africa and South Asia, and therefore apply to our modeled locations.
 
 .. note::
 
@@ -257,7 +264,6 @@ Location-specific probability of intrapartum stillbirth is extracted from a 2018
 
 .. note::
 
-  We assume that everything that affects stillbirth (IFA, MMS, hemoglobin) affects the overall probability of stillbirth but has no effect on the type of stillbirth. 
   We will have all antepartum stillbirths still proceed to the intrapartum component, even though it is possible that a stillbirth could be detected and addressed through D&E without labor. 
 
 .. list-table:: Data values for antepartum stillbirth rates
@@ -265,11 +271,14 @@ Location-specific probability of intrapartum stillbirth is extracted from a 2018
 
   * - Location
     - Data value (proportion)
+    - Uncertainty distribution
   * - Ethiopia & Nigeria
-    - 0.37 (0.27-0.47)
+    - 0.37 (95% CI 0.27-0.47)
+    - Truncated normal distribution truncated at 0 only.
   * - Pakistan
-    - 0.48 (0.39-0.57)
-
+    - 0.48 (95% CI 0.39-0.57)
+    - Truncated normal distribution truncated at 0 only.
+    
 .. _other_models_pregnancy_closed_cohort_mncnh_sex_of_infant:
 
 Assign sex of infant (live births and stillbirths only)
