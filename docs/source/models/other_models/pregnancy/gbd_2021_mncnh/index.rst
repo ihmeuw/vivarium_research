@@ -248,8 +248,8 @@ Both antepartum and intrapartum stillbirths will proceed to the intrapartum comp
 Specifically, antepartum stillbirths will only be eligible for intrapartum interventions that act on maternal health (such as misoprostol and azithromycin) and will not be eligible for intrapartum interventions intended for neonatal health (such as antenatal corticosteroids) as the fetus will have already passed prior to the onset of labor, but delivery of the fetal remains will still be necessary.
 Intrapartum stillbirths will remain eligible for all intrapartum interventions. 
 
-The probability of intrapartum stillbirth will be affected by the intrapartum sensors -> C-section -> obstructed labor -> intrapartum stillbirth pathway once implemented,
-but baseline values for rates of antepartum stillbirth rates are outlined in the table below. Antepartum stillbirths may still receive c-sections if the stillbirth is undetected and spontaneous labor occurs - we will need to consider this potential limitation of our c-section modeling strategy once developed.
+The probability of intrapartum stillbirth will be affected by the intrapartum sensors -> C-section -> obstructed labor -> intrapartum stillbirth pathway once implemented, but baseline values for rates of antepartum stillbirth rates are outlined in the table below. 
+Antepartum stillbirths still require delivery of the deceased fetus, which may occur via dilation and evacuation without labor (for smaller fetuses), spontaneous or induced vaginal delivery, or c-section - we will need to consider this possibility of our c-section modeling strategy once developed. 
 Location-specific probability of intrapartum stillbirth is extracted from a 2018 Lancet Global Health report. [Ahmed_et_al_2018]_
 
 .. todo:: 
