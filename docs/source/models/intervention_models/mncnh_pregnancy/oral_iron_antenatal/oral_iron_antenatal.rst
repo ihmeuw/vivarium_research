@@ -533,8 +533,8 @@ Assumptions and limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - There is an observed association between severe anemia during pregnancy and stillbirth, as shown in [Young-et-al-2019]_. Therefore, there should hypothetically be some effect of IFA on stillbirth given that it improves hemoglobin concentration during pregnancy; however, we do not consider this effect due to lack of evidence that shows a direct effect of IFA on stillbirth outcomes.
-
 - We assume no effect modification by when in pregnancy oral iron is received. In reality, the effect on stillbirth is likely greater for those who have taken oral iron for longer.
+- We assume that the effect of MMS on probability of stillbirth applies equally to both types of stillbirth (intrapartum and antepartum).
 
 References
 ------------

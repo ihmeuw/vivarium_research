@@ -341,7 +341,7 @@ Intrapartum component
 .. note::
 
   Only live births or stillbirths (NOT abortions/miscarriages/ectopic pregnancies) will proceed to the intrapartum component,
-  as described above.
+  as described above. Both antepartum and intrapartum stillbirths will proceed to the intrapartum component. However, antepartum stillbirths will only be eligible for intrapartum interventions that act on maternal health (such as misoprostol and azithromycin) and will not be eligible for intrapartum interventions intended for neonatal health (such as antenatal corticosteroids) as the fetus will have already passed prior to the onset of labor, but delivery of the fetal remains will still be necessary. Intrapartum stillbirths will remain eligible for all intrapartum interventions. 
 
 .. warning::
 

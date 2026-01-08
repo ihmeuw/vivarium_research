@@ -237,21 +237,51 @@ Assign birth outcome (live births and stillbirths only)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For pregnancies that were determined to result in either a live birth or a stillbirth,
-we choose which of these occurs.
+we choose whether the birth outcome is a live birth, antepartum stillbirth or intrapartum stillbirth.
 
-Among such pregnancies, the base probability of a live birth is ASFR / (ASFR + ASFR * SBR),
+Among pregnancies that result in births, the base probability of a live birth is ASFR / (ASFR + ASFR * SBR),
 with the remainder being stillbirths.
 This probability is modified by the :ref:`antenatal supplementation intervention <maternal_supplementation_intervention>`.
 
+For pregnancies that result in stillbirths, we assign the timing of the stillbirth as either antepartum (fetal deaths occurring before the onset of labor) or intrapartum (fetal death occurring during labor and before birth).
+Both antepartum and intrapartum stillbirths will proceed to the intrapartum component. The timing of stillbirth will affect the eligibility of the simulant dyad for certain intrapartum interventions.
+Specifically, antepartum stillbirths will only be eligible for intrapartum interventions that act on maternal health (such as misoprostol and azithromycin) and will not be eligible for intrapartum interventions intended for neonatal health (such as antenatal corticosteroids) as the fetus will have already passed prior to the onset of labor, but delivery of the fetal remains will still be necessary.
+Intrapartum stillbirths will remain eligible for all intrapartum interventions. 
+
+The probability of intrapartum stillbirth will be affected by the intrapartum sensors -> C-section -> obstructed labor -> intrapartum stillbirth pathway once implemented, but baseline values for rates of antepartum stillbirth rates are outlined in the table below. 
+Antepartum stillbirths still require delivery of the deceased fetus, which may occur via dilation and evacuation without labor (for smaller fetuses), spontaneous or induced vaginal delivery, or c-section - we will need to consider this possibility of our c-section modeling strategy once developed. 
+Location-specific probability of intrapartum stillbirth is extracted from a 2018 Lancet Global Health report. [Ahmed_et_al_2018]_
+
+.. todo:: 
+
+  When we implement the intrapartum sensors -> C-section -> obstructed labor -> intrapartum stillbirth pathway, we'll need to delay determination of intrapartum stillbirth. 
+
 .. note::
 
-  When we implement the intrapartum sensors -> C-section -> obstructed labor -> intrapartum stillbirth pathway, we'll need to assign only
-  antepartum stillbirths here.
+  The antepartum stillbirth rates extracted from [Ahmed_et_al_2018]_ below are specific to Sub-Saharan Africa and South Asia, and therefore apply to our modeled locations.
 
 .. note::
 
   We assume that live births and stillbirths have the same gestational age. There is ongoing work at IHME to estimate gestational age at birth distributions among stillbirths. 
+  Additionally, we assume that intrapartum and antepartum stillbirths have the same gestational age distribution. [Madhi_et_al_2019]_ indicates this is likely a reasonable assumption (see Table 2).
 
+.. note::
+
+  We will have all antepartum stillbirths still proceed to the intrapartum component, even though it is possible that a stillbirth could be detected and addressed through D&E without labor. 
+
+.. list-table:: Data values for antepartum stillbirth rates
+  :header-rows: 1
+
+  * - Location
+    - Data value (proportion)
+    - Uncertainty distribution
+  * - Ethiopia & Nigeria
+    - 0.37 (95% CI 0.27-0.47)
+    - Truncated normal distribution truncated at 0-1.
+  * - Pakistan
+    - 0.48 (95% CI 0.39-0.57)
+    - Truncated normal distribution truncated at 0-1.
+    
 .. _other_models_pregnancy_closed_cohort_mncnh_sex_of_infant:
 
 Assign sex of infant (live births and stillbirths only)
@@ -342,3 +372,12 @@ The following should validate:
 References
 -----------
 
+.. [Ahmed_et_al_2018]
+
+  Ahmed, Imran et al. 2018. Population-based rates, timing, and causes of maternal deaths, stillbirths, and neonatal deaths in south Asia and sub-Saharan Africa: a multi-country prospective cohort study.
+  The Lancet Global Health, Volume 6, Issue 12, e1297 - e1308
+
+.. [Madhi_et_al_2019]
+
+  Madhi, Shabir A., et al. 2019. An Observational Pilot Study Evaluating the Utility of Minimally Invasive Tissue Sampling to Determine the Cause of Stillbirths in South African Women.
+  Clin Infect Dis. 2019 Oct 9;69(Suppl 4):S342–S350. doi: 10.1093/cid/ciz573

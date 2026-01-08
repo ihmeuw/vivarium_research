@@ -147,6 +147,7 @@ Assumptions and limitations
     * We have a `JIRA ticket to address this limitation <https://jira.ihme.washington.edu/browse/SSCI-2377>`_ if we choose to do so.
 - We assume that there is no individual-level heterogeneity in the effect of IV iron on hemoglobin concentrations, despite having some data that could inform this. 
   We chose not to include stochastic uncertainty in order to simplify the data prep needed for this intervention model.
+- We assume that the effect of IV iron on probability of stillbirth (as mediated through hemoglobin concentration) applies equally to both types of stillbirth (intrapartum and antepartum).
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
