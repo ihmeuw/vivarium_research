@@ -252,6 +252,9 @@ The probability of intrapartum stillbirth will be affected by the intrapartum se
 but baseline values for rates of antepartum stillbirth rates are outlined in the table below. Antepartum stillbirths may still receive c-sections if the stillbirth is undetected and spontaneous labor occurs - we will need to consider this potential limitation of our c-section modeling strategy once developed.
 Location-specific probability of intrapartum stillbirth is extracted from a 2018 Lancet Global Health report. [Ahmed_et_al_2018]_
 
+.. todo:: 
+
+  When we implement the intrapartum sensors -> C-section -> obstructed labor -> intrapartum stillbirth pathway, we'll need to delay determination of intrapartum stillbirth. 
 
 .. note::
 
