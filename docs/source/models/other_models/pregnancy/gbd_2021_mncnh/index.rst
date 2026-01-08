@@ -277,10 +277,10 @@ Location-specific probability of intrapartum stillbirth is extracted from a 2018
     - Uncertainty distribution
   * - Ethiopia & Nigeria
     - 0.37 (95% CI 0.27-0.47)
-    - Truncated normal distribution truncated at 0 only.
+    - Truncated normal distribution truncated at 0-1.
   * - Pakistan
     - 0.48 (95% CI 0.39-0.57)
-    - Truncated normal distribution truncated at 0 only.
+    - Truncated normal distribution truncated at 0-1.
     
 .. _other_models_pregnancy_closed_cohort_mncnh_sex_of_infant:
 
