@@ -660,6 +660,13 @@ scenario, and input draw.
         simulants each)
     - Stratify disease state transitions and person-time by treatment
     - Default
+  * - 10.0
+    - Add mixed dementia cases that include AD instead of modeling AD
+      only
+    - Baseline
+    - * Locations: USA, China
+    - Default
+    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -1242,6 +1249,15 @@ scenario, and input draw.
         parameter uncertainty.
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/8d0339e3ac748c5eed213a3a98e40b11a3aabffa/verification_and_validation/2025_11_19_model9.0_vv.ipynb>`__
+  * - 10.0
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Check that incidence and prevalence increase by an amount that
+        corresponds to the proportions in
+        :file:`squeezed_proportions_to_sim_sci.csv`; I predict
+        approximately a 69% increase in the all-ages prevalence
+    -
+    -
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
