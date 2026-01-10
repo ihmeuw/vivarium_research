@@ -1133,14 +1133,15 @@ scenario, and input draw.
         (USA) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.1_vv.ipynb>`__
   * - 8.2
     - * See how variance and uncertainty in averted deaths scale with
-        population size
+        population size, and use the results to choose a population size
+        for final runs
     - See linked notebooks →
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.2_vv.ipynb>`__
       * `Treatment
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_28_model8.2_vv_treatment.ipynb>`__
-      * Abie's notebook estimating variance when scaling up [[Add link
-        once uploaded]]
+      * `Abie's notebook estimating variance when scaling up population
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/5c20610b43d9c560dfafd487a89af6c5f7672a9f/verification_and_validation/2025_10_29c_model_8.2_monte_carlo_error_calc.ipynb>`_
   * - 8.3
     - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
         etc.)
@@ -1221,9 +1222,8 @@ scenario, and input draw.
     - No V&V (model is identical to 8.5/8.6), just generate results
       tables
     - N/A
-    - * `Preliminary results tables in PR 32
-        <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/32>`_
-      * Final results tables in PR XXX [[Add link once it exists]]
+    - * `Results tables in PR 34
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/34>`_
   * - 9.0
     - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
         etc.)
