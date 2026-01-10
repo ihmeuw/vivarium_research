@@ -1253,9 +1253,9 @@ scenario, and input draw.
     - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
         etc.)
       * Check that incidence and prevalence increase by an amount that
-        corresponds to the proportions in
-        :file:`squeezed_proportions_to_sim_sci.csv`; I predict
-        approximately a 69% increase in the all-ages prevalence
+        corresponds to the proportions in the .csv file from the
+        dementia modelers; I predict approximately a 69% increase in the
+        all-ages prevalence
     -
     -
 
