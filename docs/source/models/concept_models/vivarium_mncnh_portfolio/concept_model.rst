@@ -1670,6 +1670,20 @@ Default stratifications to all observers should include scenario and input draw.
     - All
     - Default
     -
+  * - 27.0
+    - IV iron effects on BW, GA, and stillbirth
+    - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` 
+    - Baseline and IV iron scale-up scenarios
+    - Default
+    -  
+  * - 
+    - IV iron neonatal effects bugfixes
+    - * Update so that IV iron effects are based on first trimester ANC hemoglobin exposure rather than later pregnancy intervention hemoglobin exposure
+      * Update so that LBWSG propensities do not reset between scenarios for those whose pregnancy outcome changes between scenarios
+      * Update so that hemoglobin exposure in the state table is non-null prior to the later pregnancy intervention timestep
+    - Baseline and IV iron scale-up scenarios
+    - Default
+    - 
   * -
     - GA floor fixes 2
     - Fix issue with stillbirth GA floor
@@ -1683,12 +1697,6 @@ Default stratifications to all observers should include scenario and input draw.
     - * For this run only, 10,000,000 population size per draw
       * Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
     - Oral iron GA shift optimization and facility choice model interaction resolution?
-  * -
-    - IV iron effects on BW, GA, and stillbirth
-    - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` 
-    - Baseline and IV iron scale-up scenarios
-    - Default
-    - IV iron coverage and effect on hemoglobin run, MMS stillbirth effects 
   * -
     - Update hemoglobin effects
     - As defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (Custom PAFs and neonatal sepsis effects have yet to be calculated for GBD 2023): Updated custom PAF values for maternal hemorrhage and maternal sepsis outcomes (paired with existing implementation of GBD RRs); New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
@@ -2682,6 +2690,19 @@ Default stratifications to all observers should include scenario and input draw.
     - * All new criteria passing
       * Hemoglobin screening coverage looking inverted, as in pre-23.0 runs
     - `V&V notebooks in this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/172>`__
+  * - 27.0
+    - IV iron effects on BW, GA, and stillbirth
+    - * Confirm the baseline outcomes still meet expectations, including:
+
+        * LBWSG exposure (in the interactive simulation)
+        * Neonatal mortality risk
+        * Birth outcome rates
+
+      * Confirm expected effects of IV iron on birth weight, gestational age, and birth outcome rates using the interactive simulation
+    - * Effects of IV iron on stillbirth, gestational age, and birthweight are based on hemoglobin exposure at the later pregnancy intervention timestep rather than the first trimester ANC timestep as intended
+      * LBWSG exposures appear to reset between scenarios for simulants whose birth outcomes change between scenarios. LBWSG exposures should remain consistent between scenarios for these simulants to avoid noise in the intervention effects of IV iron
+      * Hemoglobin exposure in the state table is missing until the later pregnancy intervention timestep (although the pipeline value appears to be functioning correctly for the earlier timesteps, it does interfere with some tests we've written)
+    - `Model 27.0 V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/178/files>`__
   * - 
     - GA floor fixes 2
     - In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match floors documented, minus baseline IFA calibration shift
@@ -2698,17 +2719,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Confirm expected rates of cause-specific and overall maternal disorders causes
     -
     -
-  * - 
-    - IV iron effects on BW, GA, and stillbirth
-    - * Confirm the baseline outcomes still meet expectations, including:
-
-        * LBWSG exposure (in the interactive simulation)
-        * Neonatal mortality risk
-        * Birth outcome rates
-
-      * Confirm expected effects of IV iron on birth weight, gestational age, and birth outcome rates using the interactive simulation
-    - 
-    - 
   * - 
     - Update hemoglobin effects
     - * Confirm that neonatal mortality (particularly for neonatal sepsis) still matches expectation in the baseline scenario
@@ -2850,7 +2860,18 @@ Default stratifications to all observers should include scenario and input draw.
       means stillbirths have the cat2 and cat8 columns, which are NaN, and those NaNs get propagated through the cumsum operation leading to weirdness
     - Engineering to fix
     - GA floor fixes 2
-
+  * - Hemoglobin exposure in the state table is null until the later pregnancy intervention timestep
+    - Arose starting in model 27.0
+    - Engineering to fix
+    - IV iron neonatal effects bugfixes
+  * - IV iron effects based on hemoglobin exposure based on the later pregnancy ANC visit rather than the first trimester ANC visit as intended
+    - IV iron effects are based on pre-IV iron hemoglobin exposure
+    - Engineering to update
+    - IV iron neonatal effects bugfixes
+  * - LBWSG exposures change between scenarios for simulants whose birth outcome changes between scenarios
+    - Perhaps due to different exposure distributions used for stillbirths vs. livebirths? Given the different floors. Ideally the propensity would remain constant despite this. The noise introduced by this issue skews the effect of IV iron in our simulation.
+    - Engineering to fix
+    - IV iron neonatal effects bugfixes
 
 .. _mncnh_portfolio_6.0:
 
