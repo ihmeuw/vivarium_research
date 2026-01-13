@@ -1679,7 +1679,7 @@ Default stratifications to all observers should include scenario and input draw.
   * - 
     - IV iron neonatal effects bugfixes
     - * Update so that IV iron effects are based on first trimester ANC hemoglobin exposure rather than later pregnancy intervention hemoglobin exposure
-      * Update so that LBWSG exposures do not reset between scenarios for those whose pregnancy outcome changes between scenarios
+      * Update so that LBWSG propensities do not reset between scenarios for those whose pregnancy outcome changes between scenarios
       * Update so that hemoglobin exposure in the state table is non-null prior to the later pregnancy intervention timestep
     - Baseline and IV iron scale-up scenarios
     - Default
