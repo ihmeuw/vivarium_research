@@ -98,8 +98,8 @@ Vivarium Modeling Strategy
         wane [label="Waning treatment effect LONG (update each step) [11 y]"]
 
         discon_time [label = "Months to discontinuation :math:`D_t`", style=dashed, shape=box]
-        treat_short [label = "Full treatment effect SHORT [Months on Treatment * (6/9) y]"]
-        wane_short [label = "Waning treatment effect SHORT (update each step) [Months on Treatment * (11/9) y]"]
+        treat_short [label = "Full treatment effect SHORT [(Months on Treatment/9) * 6 y]"]
+        wane_short [label = "Waning treatment effect SHORT (update each step) [(Months on Treatment/9) * 11 y]"]
 
         el -> test [label = "tested"]
         el -> el [label = "not tested"]
@@ -144,7 +144,7 @@ that state's two sinks, and would even move directly to another state during the
 
 The "Months to discontinuation" state randomly assigns a number of months the simulant will be on treatment
 before discontinuing. The number of months then determines the duration of time with full and waning treatment effect.
-For example, if a simulant discontinues after 4 months, they would have 4 * (6/9) years of
+For example, if a simulant discontinues after 4 months, they would have (4/9) * 6 years of
 full effect, or 2.67 which we round to the nearest 6 month interval, which is 2.5 years.
 
 Below are tables with details on how to model these states and transitions, and necessary data values. 
