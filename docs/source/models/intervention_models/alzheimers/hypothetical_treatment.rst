@@ -94,12 +94,12 @@ Vivarium Modeling Strategy
         in_treat [label="Receiving treatment", style=dashed, shape=box]
         no_treat [label="No treatment effect [permanent]"]
 
-        treat [label="Full treatment effect LONG [5 y]"]
-        wane [label="Waning treatment effect LONG (update each step) [9 y]"]
+        treat [label="Full treatment effect LONG [6 y]"]
+        wane [label="Waning treatment effect LONG (update each step) [11 y]"]
 
-        treat_short [label = "Full treatment effect SHORT [6 mo]"]
-        wane_short [label = "Waning treatment effect SHORT (update each step) [2.5 y]"]
-
+        discon_time [label = "Months to discontinuation :math:`D_t`", style=dashed, shape=box]
+        treat_short [label = "Full treatment effect SHORT [Months on Treatment * (6/9) y]"]
+        wane_short [label = "Waning treatment effect SHORT (update each step) [Months on Treatment * (11/9) y]"]
 
         el -> test [label = "tested"]
         el -> el [label = "not tested"]
@@ -113,7 +113,9 @@ Vivarium Modeling Strategy
 
         wait -> in_treat [label = "begins treatment"]
         in_treat -> treat [label = "completes (90%)", style=dashed]
-        in_treat -> treat_short [label = "discontinues (10%)", style=dashed]
+
+        in_treat -> discon_time [label = "discontinues (10%)", style=dashed]
+        discon_time -> treat_short
 
         treat_short -> wane_short
         wane_short -> no_treat
@@ -140,6 +142,11 @@ on a time step, they should also immediately continue to the next state during t
 For example, a simulant in `BBBM test eligible` who is tested and moves to `BBBM test received` would then immediately move to one of 
 that state's two sinks, and would even move directly to another state during the same transition/ time step on a positive test. 
 
+The "Months to discontinuation" state randomly assigns a number of months the simulant will be on treatment
+before discontinuing. The number of months then determines the duration of time with full and waning treatment effect.
+For example, if a simulant discontinues after 4 months, they would have 4 * (6/9) years of
+full effect, or 2.67 which we round to the nearest 6 month interval, which is 2.5 years.
+
 Below are tables with details on how to model these states and transitions, and necessary data values. 
 The value of :math:`i_{MCI}` in the :ref:`cause model <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>` is now updated
 to be equal to :math:`h_{adj} = h_{MCI} \cdot R_h`, where :math:`h_{adj}` is the intervention-adjusted hazard rate used for progression to MCI,
@@ -162,7 +169,11 @@ is defined below.
     - Lower value means more likely to initiate testing. Independent from testing propensities.
   * - :math:`I`
     - Time- and location-specific treatment initiation rate
-    - Lilly: "The percent of patients with a positive BBBM test who initiate treatment will vary by location and over time – but will not vary by age or sex. In the US: 30% of eligible patients initiate (constant 2030-2100); Japan: 80% of eligible patients initiate (constant 2030-2100); all other countries: 40% of eligible patients initiate in 2030, increasing linearly to 70% by 2035, remaining constant at 70% until 2100.""
+    - Lilly: "The percent of patients with a positive BBBM test who initiate treatment will vary over time – but will not vary by age, sex, or location. 30% of eligible patients initiate in 2035, increasing linearly to 80% by 2100".
+    - 
+  * - :math:`D_t`
+    - Months to discontinuation
+    - A full course of treatment is 9 months. We assume simulants discontinue evenly for each monthly injection. The months to discontinuation will be assigned from a uniform distribution between 1 and 8 inclusive.
     - 
   * - :math:`R_h`
     - Effect hazard ratio
@@ -202,13 +213,16 @@ is defined below.
   * - Receiving treatment
     - Treatment period is instantaneous. See :ref:`alzheimers_intervention_treatment_assumptions` for info about treatment/discontinuation timing.
     - Zero duration. Random draw
+  * - Months to discontinuation
+    - Period is instantaneous. See above notes for selection of months to discontinuation.
+    - Zero duration. Random draw.
   * - Full treatment effect LONG
     - Treatment takes effect exactly 6 months after receiving a positive BBBM test (if :math:`\text{prop}_I < I`)
     - On transition to this state, :math:`R_h = R_d`. Set :math:`h_{adj} = R_h \cdot h_{MCI}`, slowing progression to MCI.
       Transition from this state after the fixed duration.
   * - Full treatment effect SHORT
     -
-    - Same effect size as in `Full treatment effect LONG` but with a shorter fixed duration
+    - Same effect size as in `Full treatment effect LONG` but with a shorter fixed duration. The duration is dependent on the time of discontinuation, as outlined above. 
   * - Waning treatment effect LONG
     -
     - On every time step where the simulant ends the time step in this
@@ -221,7 +235,7 @@ is defined below.
       this state after the fixed duration.
   * - Waning treatment effect SHORT
     -
-    - Same effect size as in `Waning treatment effect LONG` but with a shorter fixed duration
+    - Same effect size as in `Waning treatment effect LONG` but with a shorter fixed duration. The duration is dependent on the time of discontinuation, as outlined above.
   * - No treatment effect
     - 
     - :math:`R_h` should equal 1 on the first time step the simulant spends in this state.
