@@ -366,6 +366,9 @@ scenario, and input draw.
     - Treatment completion stratification for transitions to `Full treatment effect` state allows us to validate the 10% discontinuation rate.
       Note that the diagram states `Full treatment effect LONG` and `Full treatment effect SHORT` are both considered the same status (`Full treatment effect`),
       but are stratified by completion status.
+  * - Months on treatment
+    - 
+    - Only needed for simulants who discontinue treatment as others are definitionally 0 or 9.
   * - Treatment status person-time
     - Status (`In treatment/ Waiting for treatment`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect`).
       Also stratify by treatment completion (completed, discontinuated) from transition observer
