@@ -97,7 +97,7 @@ Vivarium Modeling Strategy
         treat [label="Full treatment effect LONG [6 y]"]
         wane [label="Waning treatment effect LONG (update each step) [11 y]"]
 
-        discon_time [label = "Months to discontinuation :math:`D_t`", style=dashed, shape=box]
+        discon_time [label = "Months to discontinuation D_t", style=dashed, shape=box]
         treat_short [label = "Full treatment effect SHORT [(Months on Treatment/9) * 6 y]"]
         wane_short [label = "Waning treatment effect SHORT (update each step) [(Months on Treatment/9) * 11 y]"]
 
@@ -169,11 +169,11 @@ is defined below.
     - Lower value means more likely to initiate testing. Independent from testing propensities.
   * - :math:`I`
     - Time- and location-specific treatment initiation rate
-    - Lilly: "The percent of patients with a positive BBBM test who initiate treatment will vary over time – but will not vary by age, sex, or location. 30% of eligible patients initiate in 2035, increasing linearly to 80% by 2100".
+    - The percent of patients with a positive BBBM test who initiate treatment will vary over time – but will not vary by age, sex, or location. We will use a piecewise linear ramp-up with knots at the following (year, level) values: `(2022.0, 0), (2027.0, 0), (2035.5, 30), (2100.0, 80), (2101.0, 80)`.
     - 
   * - :math:`D_t`
     - Months to discontinuation
-    - A full course of treatment is 9 months. We assume simulants discontinue evenly for each monthly injection. The months to discontinuation will be assigned from a uniform distribution between 1 and 8 inclusive.
+    - A full course of treatment is 9 months. We assume simulants discontinue evenly for each monthly injection. The months to discontinuation will be assigned a uniformly distributed whole number between 1 and 8 inclusive.
     - 
   * - :math:`R_h`
     - Effect hazard ratio
