@@ -213,7 +213,7 @@ Initializing simulants with presymptomatic and MCI stages
 ---------------------------------------------------------
 
 Starting in Model 4 of the CSU Alzheimer's simulation, the Alzheimer's
-cause model includes two pre-dementia stages, BBBM-AD, and MCI-AD, in
+cause model includes two predementia stages, BBBM-AD, and MCI-AD, in
 addition to the dementia stage AD-dementia. When computing the model
 scale and initializing demographic subgroups, :math:`p_\text{AD}` should
 be replaced by :math:`p_\text{(all AD states)}`, the combined prevalence
@@ -388,7 +388,7 @@ that's fine.
 
 We will estimate :math:`\dot B_g(t) = \dot B_{g,t}^\text{AD} +
 \dot B_{g,t}^\text{die}` by making the simplifying assumption that
-**everyone's duration of pre-dementia AD is exactly equal to the average
+**everyone's duration of predementia AD is exactly equal to the average
 duration of BBBM-AD plus MCI-AD**. This will simplify our calculations
 and will hopefully give a good enough approximation to closely match the
 values of :math:`\dot A_g(t)` calculated as above.
@@ -397,7 +397,7 @@ Estimating BBBM cases that progress to AD-dementia
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Let :math:`\Delta = \Delta_\text{BBBM} + \Delta_\text{MCI}` be the total
-average duration of pre-dementia AD, and let :math:`w` be the width of
+average duration of predementia AD, and let :math:`w` be the width of
 an age group (i.e., 5 years for GBD age groups). There exists a unique
 integer :math:`n` and real number :math:`r` with :math:`0\le r < w` such
 that
@@ -479,7 +479,7 @@ Note that we are assuming that the incidence rate
   can be filled in with any finite value in this case since it will be
   getting multiplied by zero.
 
-Estimating BBBM cases that die during pre-dementia AD
+Estimating BBBM cases that die during predementia AD
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In order to get the correct number of people transitioning into the
@@ -515,7 +515,7 @@ To estimate the mortality probability :math:`\gamma_{g,t}`, let
 group :math:`g` at time :math:`t`. This is the mortality hazard
 experienced by people in the BBBM and MCI states and is equal to the
 all-cause mortality rate minus the cause-specific mortality rate for
-AD-dementia. Using our assumption that the duration of pre-dementia AD
+AD-dementia. Using our assumption that the duration of predementia AD
 is exactly :math:`\Delta`, plus the definition of mortality hazard,
 
 .. math::
