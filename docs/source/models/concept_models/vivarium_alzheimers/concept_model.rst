@@ -661,11 +661,14 @@ scenario, and input draw.
     - Stratify disease state transitions and person-time by treatment
     - Default
   * - 10.0
-    - Add mixed dementia cases that include AD instead of modeling AD
-      only
-    - Baseline
+    - Add mixed dementia cases that include AD (instead of modeling AD
+      only, as we have been since model 5.0)
+    - Baseline, Alternative Scenario 2
     - * Locations: USA, China
-    - Default
+      * Population size per draw: 2 million (100 seeds of 20,000
+        simulants each). **Note:** We did not actually need this big of a
+        run, it just happened to be what was already on ``main``
+    - Stratify disease state transitions and person-time by treatment
     - Default
 
 5.2 V & V Tracking
