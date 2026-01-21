@@ -450,6 +450,17 @@ table below:
       **Note:** These estimates were provided by the dementia modelers
       and are not yet published, so they should not be stored directly
       in the Artifact or any other public location.
+  * - proportion_mixed
+    - The proportion of the dementia envelope that is due to mixed
+      dementia (i.e. more than one type of dementia simultaneously)
+    - :file:`squeezed_proportions_to_sim_sci.csv`
+    - Point estimate stratified by age group and sex for ages 40+.
+      Includes proportions for all subtypes of dementia --- filter to
+      type_label == "Mixed dementia".
+
+      **Note:** These estimates were provided by the dementia modelers
+      and are not yet published, so they should not be stored directly
+      in the Artifact or any other public location.
   * - prevalence_m24351
     - Prevalence of GBD 2023 dementia envelope
     - get_draws( source="epi", gbd_id_type = "modelable_entity_id",
@@ -460,8 +471,11 @@ table below:
       result from other modeled GBD causes.
   * - prevalence_AD
     - Prevalence of AD dementia in total population
-    - prevalence_m24351 :math:`\times` proportion_AD
-    -
+    - prevalence_m24351 :math:`\cdot` (proportion_AD + 0.94
+      :math:`\cdot` proportion_mixed)
+    - We assume that 94% of mixed dementias include Alzheimer's disease,
+      based on this `mixed dementias presentation`_ from the dementia
+      modelers
   * - :math:`p_\textsf{X}`
     - Prevalence of cause state X in total population
     - Defined in the "Initial prevalence" column of the state data table
@@ -482,12 +496,15 @@ table below:
       incidence rate automatically calculated by Vivarium Inputs
   * - incidence_AD
     - Total-population incidence rate of AD dementia
-    - incidence_m24351 :math:`\times` proportion_AD
+    - incidence_m24351 :math:`\cdot` (proportion_AD + 0.94
+      :math:`\cdot` proportion_mixed)
     - Used in :ref:`AD population model
       <other_models_alzheimers_population>` to calculate BBBM-AD
       incidence. We are assuming the prevalence proportions can be
       applied to incidence. We are assuming the AD-dementia incidence
-      rate is constant over time in each demographic group.
+      rate is constant over time in each demographic group. We assume
+      94% of mixed dementias include Alzheimer's, based on this `mixed
+      dementias presentation`_ from the dementia modelers.
   * - acmr
     - All-cause mortality rate
     - :file:`mortality_all.nc`
@@ -677,6 +694,8 @@ table below:
     - :math:`\Delta_\text{BBBM} + \Delta_\text{MCI} + \Delta_\text{AD}`
     -
 
+.. _mixed dementias presentation:
+  https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/Alzheimer%27s%20CSU/01_planning/Mixed%20Dementia%20GV%20Follow-Up%20TV%20EN%20-%20to%20Sim%20Sci.pptx?d=wdc4e17c5661f40a7816768c2fd0c1e2d&csf=1&web=1&e=vhPSJa
 .. _Abie's population and mortality forecasts notebook:
   https://github.com/ihmeuw/vivarium_csu_alzheimers/blob/39fe76203a8031da7983bcb5d8824216a61b5d43/src/vivarium_csu_alzheimers/data/population_forecasts/2025_08_12a_alz_artifact_forecast_population_and_mortality.ipynb
 .. _Abie's disability weight notebook:
