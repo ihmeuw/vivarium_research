@@ -673,6 +673,12 @@ scenario, and input draw.
         run, it just happened to be what was already on ``main``
     - Stratify disease state transitions and person-time by treatment
     - Default
+  * - 11.0
+    - Updates to treatment model
+    - Baseline, Alternative Scenario 2
+    - * Locations: USA, China
+    - Stratify disease state transitions and person-time by treatment
+    - Default
 
 5.2 V & V Tracking
 ------------------------
