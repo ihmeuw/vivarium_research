@@ -168,8 +168,17 @@ is defined below.
     - Drawn uniformly from :math:`[0,1)`
     - Lower value means more likely to initiate testing. Independent from testing propensities.
   * - :math:`I`
-    - Time- and location-specific treatment initiation rate
-    - The percent of patients with a positive BBBM test who initiate treatment will vary over time – but will not vary by age, sex, or location. We will use a piecewise linear ramp-up with knots at the following (year, level) values: `(2022.0, 0), (2027.0, 0), (2035.5, 30), (2100.0, 80), (2101.0, 80)`.
+    - Time-varying treatment initiation rate
+    - The percent of patients with a positive BBBM test who initiate
+      treatment will vary over time – but will not vary by age, sex, or
+      location. We will use a piecewise linear ramp-up with knots at the
+      following (year, level) values: `(2022.0, 0), (2027.0, 0),
+      (2035.5, 30), (2100.0, 80), (2101.0, 80)`.
+
+      This captures Lilly's specification that "30% of eligible patients
+      initiate by 2035, with a steady increase to 80% by 2100, for all
+      countries," and that treatment should first be available in 2027,
+      slowly ramping up to 30% in 2035.
     - 
   * - :math:`D_t`
     - Months to discontinuation
@@ -200,7 +209,8 @@ is defined below.
     - See :ref:`testing intervention <intervention_alzheimers_testing_diagnosis>`
   * - BBBM test received
     -
-    - Zero duration. Random draw
+    - Zero duration. Independent random draw to determine whether test
+      is positive or negative
   * - BBBM test positive
     -
     - Zero duration. :math:`\text{prop}_I < I`\: initiate. :math:`\text{prop}_I >=  I`\: don't initiate.
@@ -211,11 +221,14 @@ is defined below.
     - 
     - Fixed duration
   * - Receiving treatment
-    - Treatment period is instantaneous. See :ref:`alzheimers_intervention_treatment_assumptions` for info about treatment/discontinuation timing.
-    - Zero duration. Random draw
+    - Treatment effect is instantaneous. See :ref:`alzheimers_intervention_treatment_assumptions` for info about treatment/discontinuation timing.
+    - Zero duration. Independent random draw to determine whether
+      simulant completes or discontinues treatment.
   * - Months to discontinuation
-    - Period is instantaneous. See above notes for selection of months to discontinuation.
-    - Zero duration. Random draw.
+    - See :math:`D_t` in the `Data values and sources` table above for
+      instructions on assigning the number of months to discontinuation
+    - Zero duration. Independent random draw to determine how many
+      months of treatment simulant receives before discontinuation.
   * - Full treatment effect LONG
     - Treatment takes effect exactly 6 months after receiving a positive BBBM test (if :math:`\text{prop}_I < I`)
     - On transition to this state, :math:`R_h = R_d`. Set :math:`h_{adj} = R_h \cdot h_{MCI}`, slowing progression to MCI.
