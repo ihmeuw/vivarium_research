@@ -268,26 +268,23 @@ the 5 time steps at 3, 3.5, 4, 4.5, 5) is :math:`(1-0.5)^5 = 3.125\%`.
 On initialization
 '''''''''''''''''
 
-In order to avoid having all eligible simulants be tested immediately
-upon entering the simulation, we will assign a BBBM testing history to
-each initialized simulant who is eligible for a BBBM test. Since
-simulants are only eligible for testing every three years (more
-precisely, every 6 time steps), we will assign a random test date within
-the last three years before entering the simulation, as follows.
+In order to avoid having a large fraction of eligible simulants be
+tested immediately upon entering the simulation, we will assign a BBBM
+testing history to each initialized simulant who is eligible for a BBBM
+test. Since simulants are only eligible for testing every three years
+(more precisely, every 6 time steps) and are likely to be tested at most
+every five years (10 time steps), we will assign a random test date
+within the last five years before entering the simulation, as follows.
 
 On initialization of each eligible simulant, choose uniformly at random
-from one of the last 6 time steps when they could have been tested,
-omitting any time steps before 2030 when testing is not yet available.
-If there are no such time steps (i.e., all 6 are before 2030), assign
-"not a time" (NaT) for the simulant's previous test date. Otherwise, the
-first time the simulant could be eligible for testing again is 6 time
-steps after the chosen previous test date. We assume for simplicity that
-there were no prior false positive tests among simulants entering the
-simulation, so all previous BBBM tests are negative.
-
-Even with prior BBBM testing history in place, due to test coverage
-jumping from 0% to 10% in 2030, we expect a large group to be
-immediately tested and then a drop-off in testing counts.
+from one of the last 10 time steps when they could have been tested. If
+the chosen time step occurs before the first date in 2027 when testing
+becomes available, assign "not a time" (NaT) for the simulant's previous
+test date. Otherwise, the first time the simulant could be eligible for
+testing again is 6 time steps after the chosen previous test date. We
+assume for simplicity that there were no prior false positive tests
+among simulants entering the simulation, so all previous BBBM tests are
+negative.
 
 .. note::
 
