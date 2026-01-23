@@ -286,9 +286,16 @@ Assumptions and Limitations
 
 - Those who do not initiate treatment following their first positive BBBM test result, or those who discontinue, 
   will never take the intervention, so propensity can be assigned for simulant lifetime
-- Treatment occurs instantaneously (ie, the duration of the treatment period is zero), following a six-month waiting period from time of BBBM test. 
-  So, treatment takes effect exactly six months after BBBM testing. 
-  This interprets the following two Lilly specifications: "The treatment takes immediate full effect in the first 6-month time step" and 
-  "There is an average of 6 months between a positive BBBM test result and initiating treatment". We simplify 
-  average of 6 months to fixed 6 month duration for all simulants. 
-  Discontinuation occurs during this instantaneous treatment period.
+- Treatment occurs instantaneously (i.e., the duration of the "receiving
+  treatment" period is zero), following a six-month waiting period from
+  time of BBBM test. So, treatment takes effect exactly six months after
+  BBBM testing. This interprets the following two Lilly specifications:
+  "The treatment takes immediate full effect in the first 6-month time
+  step" and "There is an average of 6 months between a positive BBBM
+  test result and initiating treatment". We simplify "average of 6
+  months" to a fixed 6 month duration for all simulants. Treatment
+  discontinuation only affects the duration of time the treatment will
+  last, not the immediate effect size, so it is consistent with Lilly's
+  assumptions to model discontinuation occurring instantaneously during
+  the transient "receiving treatment" and "months to discontinuation"
+  states as above.
