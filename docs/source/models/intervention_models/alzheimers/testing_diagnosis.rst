@@ -208,9 +208,20 @@ assign positive/negative diagnosis which will inform treatment in :ref:`Alternat
 Time-specific testing rates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Testing rates do not vary by location, age or sex. 
-In 2020, 0% of eligible simulants are tested annually. This increases (instantly) to 10% at year 2030, 
-then increases linearly over time in each six-month period to reach 20% in 2035, to 40% in 2040 
-and then maxes out at 60% in 2045. 
+In 2020, 0% of eligible simulants are tested annually. This becomes
+nonzero in 2027, increasing to 10% at year 2030,
+then increases linearly for awhile, then levels off and eventually maxes
+out at 60% after 2045. We will model this as a piecewise linear function
+with knots at the following (year, coverage) values:
+
+* (2020.0, 0%)
+* (2027.0, 0%) -- Note that this is 0% at the *beginning* of 2027, but
+  coverage will become positive on the second time step that year
+* (2030.5, 10%) -- Note that this is 10% at **mid**-year
+* (2045.0, 50%)
+* (2050.0, 57%)
+* (2055.0, 60%)
+* (2100.0, 60%)
 
 .. _bbbm_propensity:
 
