@@ -678,7 +678,7 @@ scenario, and input draw.
     - Baseline, Alternative Scenario 2
     - * Locations: USA, China
     - Stratify disease state transitions and person-time by treatment
-    - Default
+    - Add observer for months on treatment
 
 5.2 V & V Tracking
 ------------------------
