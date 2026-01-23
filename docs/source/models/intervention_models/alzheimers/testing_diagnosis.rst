@@ -236,18 +236,34 @@ On each timestep, use the following steps to assign BBBM tests:
 
 .. _bbbm_requirements:
 
-1. Assess eligibility based on the following requirements:
+#. Assess eligibility based on the following requirements:
 
-  - Simulant is not in MCI or AD dementia state (only susceptible, or pre-clinical)
-  - Simulant age is >=60 and <80
-  - Simulant has not received a BBBM test in the last three years (or
-    six time steps)
-  - Simulant has never received a positive BBBM test
+   - Simulant is not in MCI or AD dementia state (only susceptible, or pre-clinical)
+   - Simulant age is :math:`\ge 60` and :math:`< 80`
+   - Simulant has not received a BBBM test in the last three years (or
+     six time steps)
+   - Simulant has never received a positive BBBM test
 
-2. If eligible (meets all requirements), check propensity. 
-   If the propensity value is less than the time-specific testing rate, give the test. If not, do not give the test.
-3. Assign a positive diagnosis to 90% of people and a negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, e.g., people who test negative still have a 90% chance of being positive on a re-test.
-4. Record time of last test, yes/no diagnosis for future testing eligibility.
+#. If eligible (meets all requirements), check testing propensity. If
+   the propensity value is less than the time-specific testing rate, the
+   simulant has the opportunity to get tested on this time step (but may
+   not be). If not, the simulant won't be tested.
+#. If the simulant has the opportunity to be tested on this time step
+   (their propensity is less than the testing rate), give them a BBBM
+   test with probability 0.5, independently of other random choices
+   (see explanation below).
+#. For those who get tested, assign a positive diagnosis to 90% of people and a negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, e.g., people who test negative still have a 90% chance of being positive on a re-test.
+#. Record time of last test and yes/no diagnosis for determining future testing eligibility.
+
+The strategy of giving eligible simulants a test with probability 0.5 on
+each time step is to introduce randomness to the time between testing,
+rather than having all simulants be retested at a fixed interval of 3
+years (which caused oscillations in the number of tests over time). The
+probability 0.5 was chosen as a convenient value that will guarantee
+that most people will get retested within 5 years (Lilly requested that
+tests occur every 3-5 years). Specifically, the probability that a
+simulant *doesn't* get retested between 3 and 5 years (i.e., on one of
+the 5 time steps at 3, 3.5, 4, 4.5, 5) is :math:`(1-0.5)^5 = 3.125\%`.
 
 On initialization
 '''''''''''''''''
