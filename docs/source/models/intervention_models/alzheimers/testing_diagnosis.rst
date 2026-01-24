@@ -234,6 +234,15 @@ On timestep
 '''''''''''
 On each timestep, use the following steps to assign BBBM tests:
 
+#. Check eligibility. If simulant is not eligible, they won't get a test.
+#. If simulant is eligible, assign them a random test date in the in the
+   interval :math:`[t, t+2]`, where :math:`t` is the current time in
+   years, and let :math:`t' = \delta \lfloor t / \delta \rceil` be the
+   time step nearest to :math:`t`. The simulant will get their test at
+   time :math:`t'` if they are eligible at that time.
+#. Check if simulant has a test scheduled for this time step. If yes,
+   give test and proceed to step X to determine positive or negative. If not go to next step.
+
 .. _bbbm_requirements:
 
 #. Assess eligibility based on the following requirements:
@@ -248,10 +257,14 @@ On each timestep, use the following steps to assign BBBM tests:
    the propensity value is less than the time-specific testing rate, the
    simulant has the opportunity to get tested on this time step (but may
    not be). If not, the simulant won't be tested.
-#. If the simulant has the opportunity to be tested on this time step
-   (their propensity is less than the testing rate), give them a BBBM
-   test with probability 0.5, independently of other random choices
-   (see explanation below).
+#. If an eligible simulant has the opportunity to be tested on this time
+   step (their propensity is less than the testing rate), give them a
+   BBBM test with probability :math:`1/(11 - k)`, where :math:`k` is the
+   number of time steps since the simulant's last BBBM test (this
+   guarantees that time of the next test is uniformly distributed
+   between 3 and 5 years since the last test---see explanation below).
+   This choice should be independent of other random choices in the
+   model.
 #. For those who get tested, assign a positive diagnosis to 90% of people and a negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, e.g., people who test negative still have a 90% chance of being positive on a re-test.
 #. Record time of last test and yes/no diagnosis for determining future testing eligibility.
 
