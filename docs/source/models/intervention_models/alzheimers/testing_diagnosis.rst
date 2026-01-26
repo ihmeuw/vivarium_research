@@ -223,36 +223,78 @@ with knots at the following (year, coverage) values:
 * (2055.0, 60%)
 * (2100.0, 60%)
 
+.. _bbbm_requirements:
+
+Eligibility
+^^^^^^^^^^^
+A simulant is eligible for a BBBM test if they meet the following
+requirements:
+
+- Simulant is not in MCI or AD dementia state (they can only be in
+  susceptible or preclinical)
+- Simulant age is :math:`\ge 60` and :math:`< 80`
+- Simulant has not received a BBBM test in the last three years (or
+  six time steps)
+- Simulant has never received a positive BBBM test
+
 .. _bbbm_propensity:
 
 Implementation
 ^^^^^^^^^^^^^^
-The simulant's existing testing propensity will also be used as their BBBM testing propensity.
+The simulant's existing CSF/PET testing propensity will also be used as
+their BBBM testing propensity. At the client's request, we will retest
+simulants every 3-5 years, rather than having all simulants be retested
+at a fixed interval of 3 years (which can cause unrealistic oscillations
+in the number of tests over time). In the implementation below, we
+choose the next test date uniformly in the interval :math:`[3, 5]`
+years.
+
+On initialization
+'''''''''''''''''
+..
+  In order to avoid having a large fraction of eligible simulants be
+  tested immediately upon entering the simulation, we will assign a BBBM
+  testing history to each initialized simulant who is eligible for a BBBM
+  test.
+
+In order to implement the randomized testing algorithm below, we need to
+assign a BBBM testing history to every simulant who enters the
+simulation. Since simulants are only eligible for testing every three
+years (more precisely, every 6 time steps) and must be retested at most
+every five years (10 time steps), we will assign a random test date
+within the last five years before entering the simulation, as follows.
+
+On initialization of each simulant, assign a previous test date uniformly at random
+from one of the last 10 time steps before they entered the simulation. If
+the chosen time step occurs before the first date in 2027 when testing
+becomes available, *resample* the time step uniformly at random from
+between 3 years (6 time steps) and 5 years (10 time steps) prior to the
+simulant's entrance time. This resampled test date does not represent a
+real test that occurred, but is merely an implementation detail to
+randomize the simulant's first test date after entering the simulation.
+
+The first time the simulant could be eligible for testing again is 6
+time steps after the chosen previous test date. We assume for simplicity
+that there were no prior false positive tests among simulants entering
+the simulation, so all previous BBBM tests are negative.
 
 
 On timestep
 '''''''''''
 On each timestep, use the following steps to assign BBBM tests:
 
-#. Check eligibility. If simulant is not eligible, they won't get a test.
-#. If simulant is eligible, assign them a random test date in the in the
-   interval :math:`[t, t+2]`, where :math:`t` is the current time in
-   years, and let :math:`t' = \delta \lfloor t / \delta \rceil` be the
-   time step nearest to :math:`t`. The simulant will get their test at
-   time :math:`t'` if they are eligible at that time.
-#. Check if simulant has a test scheduled for this time step. If yes,
-   give test and proceed to step X to determine positive or negative. If not go to next step.
+..
+  #. Check eligibility. If simulant is not eligible, they won't get a test.
+  #. If simulant is eligible, assign them a random test date in the in the
+    interval :math:`[t, t+2]`, where :math:`t` is the current time in
+    years, and let :math:`t' = \delta \lfloor t / \delta \rceil` be the
+    time step nearest to :math:`t`. The simulant will get their test at
+    time :math:`t'` if they are eligible at that time.
+  #. Check if simulant has a test scheduled for this time step. If yes,
+    give test and proceed to step X to determine positive or negative. If not go to next step.
 
-.. _bbbm_requirements:
-
-#. Assess eligibility based on the following requirements:
-
-   - Simulant is not in MCI or AD dementia state (only susceptible, or pre-clinical)
-   - Simulant age is :math:`\ge 60` and :math:`< 80`
-   - Simulant has not received a BBBM test in the last three years (or
-     six time steps)
-   - Simulant has never received a positive BBBM test
-
+#. Assess eligibility based on the :ref:`eligibility requirements
+   <bbbm_requirements>`.
 #. If eligible (meets all requirements), check testing propensity. If
    the propensity value is less than the time-specific testing rate, the
    simulant has the opportunity to get tested on this time step (but may
@@ -277,27 +319,6 @@ that most people will get retested within 5 years (Lilly requested that
 tests occur every 3-5 years). Specifically, the probability that a
 simulant *doesn't* get retested between 3 and 5 years (i.e., on one of
 the 5 time steps at 3, 3.5, 4, 4.5, 5) is :math:`(1-0.5)^5 = 3.125\%`.
-
-On initialization
-'''''''''''''''''
-
-In order to avoid having a large fraction of eligible simulants be
-tested immediately upon entering the simulation, we will assign a BBBM
-testing history to each initialized simulant who is eligible for a BBBM
-test. Since simulants are only eligible for testing every three years
-(more precisely, every 6 time steps) and are likely to be tested at most
-every five years (10 time steps), we will assign a random test date
-within the last five years before entering the simulation, as follows.
-
-On initialization of each eligible simulant, choose uniformly at random
-from one of the last 10 time steps when they could have been tested. If
-the chosen time step occurs before the first date in 2027 when testing
-becomes available, assign "not a time" (NaT) for the simulant's previous
-test date. Otherwise, the first time the simulant could be eligible for
-testing again is 6 time steps after the chosen previous test date. We
-assume for simplicity that there were no prior false positive tests
-among simulants entering the simulation, so all previous BBBM tests are
-negative.
 
 .. note::
 
