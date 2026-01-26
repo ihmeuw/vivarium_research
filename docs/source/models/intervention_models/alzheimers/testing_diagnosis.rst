@@ -219,7 +219,6 @@ with knots at the following (year, coverage) values:
   coverage will become positive on the second time step that year
 * (2030.5, 10%) -- Note that this is 10% at **mid**-year
 * (2045.0, 50%)
-* (2050.0, 57%)
 * (2055.0, 60%)
 * (2100.0, 60%)
 
