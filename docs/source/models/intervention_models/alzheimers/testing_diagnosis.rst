@@ -225,16 +225,17 @@ with knots at the following (year, coverage) values:
 
 .. _bbbm_requirements:
 
-Eligibility
-^^^^^^^^^^^
+Eligibility for BBBM testing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 A simulant is eligible for a BBBM test if they meet the following
 requirements:
 
 - Simulant is not in MCI or AD dementia state (they can only be in
   susceptible or preclinical)
 - Simulant age is :math:`\ge 60` and :math:`< 80`
-- Simulant has not received a BBBM test in the last three years (or
-  six time steps)
+- Simulant has not received a BBBM test in the last three years (more
+  precisely, they have not had a BBBM test on any of the previous five
+  time steps)
 - Simulant has never received a positive BBBM test
 
 .. _bbbm_propensity:
@@ -264,14 +265,15 @@ years (more precisely, every 6 time steps) and must be retested at most
 every five years (10 time steps), we will assign a random test date
 within the last five years before entering the simulation, as follows.
 
-On initialization of each simulant, assign a previous test date uniformly at random
-from one of the last 10 time steps before they entered the simulation. If
-the chosen time step occurs before the first date in 2027 when testing
-becomes available, *resample* the time step uniformly at random from
-between 3 years (6 time steps) and 5 years (10 time steps) prior to the
-simulant's entrance time. This resampled test date does not represent a
-real test that occurred, but is merely an implementation detail to
-randomize the simulant's first test date after entering the simulation.
+On initialization of each simulant, assign a previous test date
+uniformly at random from one of the last 10 time steps before they
+entered the simulation. If the chosen time step occurs before the first
+date in 2027 when testing becomes available, *resample* the time step
+uniformly at random from between 3 years (6 time steps, inclusive) and 5
+years (10 time steps, inclusive) prior to the simulant's entrance time.
+This resampled test date does not represent a real test that occurred,
+but is merely an implementation detail to randomize the simulant's first
+test date after entering the simulation.
 
 The first time the simulant could be eligible for testing again is 6
 time steps after the chosen previous test date. We assume for simplicity
