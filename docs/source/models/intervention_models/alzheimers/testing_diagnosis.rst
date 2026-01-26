@@ -283,18 +283,8 @@ On timestep
 '''''''''''
 On each timestep, use the following steps to assign BBBM tests:
 
-..
-  #. Check eligibility. If simulant is not eligible, they won't get a test.
-  #. If simulant is eligible, assign them a random test date in the in the
-    interval :math:`[t, t+2]`, where :math:`t` is the current time in
-    years, and let :math:`t' = \delta \lfloor t / \delta \rceil` be the
-    time step nearest to :math:`t`. The simulant will get their test at
-    time :math:`t'` if they are eligible at that time.
-  #. Check if simulant has a test scheduled for this time step. If yes,
-    give test and proceed to step X to determine positive or negative. If not go to next step.
-
-#. Assess eligibility based on the :ref:`eligibility requirements
-   <bbbm_requirements>`.
+#. Assess eligibility based on the :ref:`eligibility requirements for
+   BBBM testing <bbbm_requirements>`.
 #. If eligible (meets all requirements), check testing propensity. If
    the propensity value is less than the time-specific testing rate, the
    simulant has the opportunity to get tested on this time step (but may
@@ -310,15 +300,10 @@ On each timestep, use the following steps to assign BBBM tests:
 #. For those who get tested, assign a positive diagnosis to 90% of people and a negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, e.g., people who test negative still have a 90% chance of being positive on a re-test.
 #. Record time of last test and yes/no diagnosis for determining future testing eligibility.
 
-The strategy of giving eligible simulants a test with probability 0.5 on
-each time step is to introduce randomness to the time between testing,
-rather than having all simulants be retested at a fixed interval of 3
-years (which caused oscillations in the number of tests over time). The
-probability 0.5 was chosen as a convenient value that will guarantee
-that most people will get retested within 5 years (Lilly requested that
-tests occur every 3-5 years). Specifically, the probability that a
-simulant *doesn't* get retested between 3 and 5 years (i.e., on one of
-the 5 time steps at 3, 3.5, 4, 4.5, 5) is :math:`(1-0.5)^5 = 3.125\%`.
+.. todo::
+
+  Explain why using probability :math:`1/(11 - k)` results in the
+  uniform distribution we want.
 
 .. note::
 
