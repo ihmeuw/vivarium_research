@@ -251,12 +251,6 @@ years.
 
 On initialization
 '''''''''''''''''
-..
-  In order to randomize the timing of simulants' first BBBM tests after
-  they enter the simulation, we will assign a BBBM testing history to
-  every simulant who may have an opportunity to get tested upon entering
-  the simulation.
-
 In order to avoid having an unreasonably large fraction of eligible
 simulants be tested immediately upon entering the simulation, we will
 assign a BBBM testing history to each initialized simulant who would
@@ -314,31 +308,31 @@ On each timestep, use the following steps to assign BBBM tests:
 #. For those who get tested, assign a positive diagnosis to 90% of people and a negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, e.g., people who test negative still have a 90% chance of being positive on a re-test.
 #. Record time of last test and yes/no diagnosis for determining future testing eligibility.
 
-Alternate, equivalent strategy avoiding "fake previous tests":
+.. Alternate, equivalent strategy avoiding "fake previous tests":
 
-On initialization: For each simulant who is eligible and has a
-propensity below the current testing threshold, assign a previous test
-date uniformly in the 5 years prior to entering the sim, then assign
-them a future test date uniformly 3-5 years from their previous test
-date. Assign NaT for both the previous and future dates if (a) the
-simulant is ineligible, or (b) their propensity is too high, or (c) the
-selected prior test date is before testing starts in 2027.
+.. On initialization: For each simulant who is eligible and has a
+.. propensity below the current testing threshold, assign a previous test
+.. date uniformly in the 5 years prior to entering the sim, then assign
+.. them a future test date uniformly 3-5 years from their previous test
+.. date. Assign NaT for both the previous and future dates if (a) the
+.. simulant is ineligible, or (b) their propensity is too high, or (c) the
+.. selected prior test date is before testing starts in 2027.
 
-On timestep:
+.. On timestep:
 
-#. Assess eligibility.
-#. If eligible, check propensity. If propensity is too large, stop.
-#. If eligible and propensity is low enough, check whether simulant has
-   a future test date assigned. If not, assign one uniformly in the next
-   two years.
-#. At this point, simulant is guaranteed to have a future test date
-   assigned. Check whether the simulant's future test date corresponds
-   to this time step. If yes, give the test; if not, don't.
-#. Assign a positive diagnosis to 90% of tests and a negative diagnosis
-   to 10% of tests.
-#. Record time of last test and yes/no diagnosis.
-#. For those who got a negative test, reassign their future test date
-   uniformly 3-5 years in the future.
+.. #. Assess eligibility.
+.. #. If eligible, check propensity. If propensity is too large, stop.
+.. #. If eligible and propensity is low enough, check whether simulant has
+..    a future test date assigned. If not, assign one uniformly in the next
+..    two years.
+.. #. At this point, simulant is guaranteed to have a future test date
+..    assigned. Check whether the simulant's future test date corresponds
+..    to this time step. If yes, give the test; if not, don't.
+.. #. Assign a positive diagnosis to 90% of tests and a negative diagnosis
+..    to 10% of tests.
+.. #. Record time of last test and yes/no diagnosis.
+.. #. For those who got a negative test, reassign their future test date
+..    uniformly 3-5 years in the future.
 
 .. todo::
 
