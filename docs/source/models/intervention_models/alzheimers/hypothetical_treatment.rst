@@ -295,7 +295,7 @@ Assumptions and Limitations
   test result and initiating treatment". We simplify "average of 6
   months" to a fixed 6 month duration for all simulants. Treatment
   discontinuation only affects the duration of time the treatment will
-  last, not the immediate effect size, so it is consistent with Lilly's
+  last, not the immediate effect size, so it is consistent with the client's
   assumptions to model discontinuation occurring instantaneously during
   the transient "receiving treatment" and "months to discontinuation"
   states as above.
