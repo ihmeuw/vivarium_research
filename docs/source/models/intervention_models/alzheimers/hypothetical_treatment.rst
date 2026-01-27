@@ -289,7 +289,7 @@ Assumptions and Limitations
 - Treatment occurs instantaneously (i.e., the duration of the "receiving
   treatment" period is zero), following a six-month waiting period from
   time of BBBM test. So, treatment takes effect exactly six months after
-  BBBM testing. This interprets the following two Lilly specifications:
+  BBBM testing. This interprets the following two client specifications:
   "The treatment takes immediate full effect in the first 6-month time
   step" and "There is an average of 6 months between a positive BBBM
   test result and initiating treatment". We simplify "average of 6
