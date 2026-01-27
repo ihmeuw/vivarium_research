@@ -334,10 +334,45 @@ On each timestep, use the following steps to assign BBBM tests:
 .. #. For those who got a negative test, reassign their future test date
 ..    uniformly 3-5 years in the future.
 
-.. todo::
 
-  Explain why using probability :math:`1/(11 - k)` results in the
-  uniform distribution we want.
+The above formula :math:`1/(11 - k)` results in a uniformly distributed population
+between 6 and 10 time steps, or 3 to 5 years. To conceptualize
+why this works, please see the table below outlining the time step value :math:`k`,
+the resulting probability of testing and how a hypothetical population of
+100 simulants is distributed over the time steps.
+
+.. list-table:: Simulation Components
+  :header-rows: 1
+
+  * - Time Step :math:`k`
+    - Testing Probability
+    - People Tested
+    - Remaining Untested Population
+  * - 0-5
+    - 0% (ineligible)
+    - 100 * 0% = 0
+    - 100 - 0 = 100
+  * - 6
+    - 1/(11-6) = 20%
+    - 100 * 20% = 20
+    - 100 - 20 = 80
+  * - 7
+    - 1/(11-7) = 25%
+    - 80 * 25% = 20
+    - 80 - 20 = 60
+  * - 8
+    - 1/(11-8) = 33%
+    - 60 * 33% = 20
+    - 60 - 20 = 40
+  * - 9
+    - 1/(11-9) = 50%
+    - 40 * 50% = 20
+    - 40 - 20 = 20
+  * - 10
+    - 1/(11-10) = 100%
+    - 20 * 100% = 20
+    - 20 - 20 = 0
+
 
 .. note::
 
@@ -364,20 +399,11 @@ Assumptions and Limitations
   calculations in the MSLT; if the false positive rate were nonzero,
   some people would have prematurely started treatment before entering
   the simulation;
-- The strategy for assigning BBBM test history does not account for the
-  fact that simulants may not have been eligible for BBBM testing on all
-  of the previous 6 time steps prior to entering the simulation; for
-  example, we will assign a previous BBBM test date to a 60-year-old
-  entering the simulation after 2030 even though they wouldn't have been
-  eligible; the effects of this are likely small because improper
-  testing can only happen during the first 3 years of the 20 years of
-  eligible ages;
-- The strategy of choosing the prior BBBM testing date uniformly over
-  the last 3 years is a simplification that doesn't align perfectly with
-  our assumption that there will be a cyclical pattern in the number of
-  people getting tested each year (with the first peak in 2030 when the
-  test first becomes available); the uniformity assumption will likely
-  smooth out this cyclical pattern somewhat;
+- Assigning retesting dates for newly eligible simulants at 3 years
+  in the past will cause some newly eligible simulants to not start testing
+  for 2 years. While this is plausible, it is different than the current
+  implementation in the MSLT.
+
 
 
 References
