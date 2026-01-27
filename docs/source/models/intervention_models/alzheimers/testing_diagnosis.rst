@@ -290,13 +290,8 @@ On each timestep, use the following steps to assign BBBM tests:
 #. If a simulant is eligible and has a propensity below the testing
    threshold, check whether they have a previous test date recorded. If
    so, proceed to the next step. If not (i.e., if their previous test
-   date is NaT), this must be the first time the simulant has the
-   opportunity to get tested; in this case, assign their previous test
-   date to be exactly 6 time steps (:math:`\approx 3` years) before the
-   current time step. Note that this newly assigned "previous test date"
-   does not represent a real test that occurred, but is merely an
-   implementation detail to randomize the timing of the simulant's first
-   test.
+   date is NaT), this is the first time the simulant has the
+   opportunity to get tested; in this case, test them immediately.
 #. If an eligible simulant has the opportunity to be tested on this time
    step (their propensity is less than the testing rate), give them a
    BBBM test with probability :math:`1/(11 - k)`, where :math:`k` is the
