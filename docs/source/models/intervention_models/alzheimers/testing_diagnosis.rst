@@ -252,33 +252,36 @@ years.
 On initialization
 '''''''''''''''''
 ..
-  In order to avoid having a large fraction of eligible simulants be
-  tested immediately upon entering the simulation, we will assign a BBBM
-  testing history to each initialized simulant who is eligible for a BBBM
-  test.
+  In order to randomize the timing of simulants' first BBBM tests after
+  they enter the simulation, we will assign a BBBM testing history to
+  every simulant who may have an opportunity to get tested upon entering
+  the simulation.
 
-In order to implement the randomized testing algorithm below, we need to
-assign a BBBM testing history to every simulant who enters the
-simulation. Since simulants are only eligible for testing every three
-years (more precisely, every 6 time steps) and must be retested at most
-every five years (10 time steps), we will assign a random test date
-within the last five years before entering the simulation, as follows.
+In order to avoid having an unreasonably large fraction of eligible
+simulants be tested immediately upon entering the simulation, we will
+assign a BBBM testing history to each initialized simulant who would
+have an opportunity for BBBM testing on their first time step. Since
+simulants are only eligible for testing every three years (more
+precisely, every 6 time steps) and must be retested at most every five
+years (10 time steps), we will assign a random test date within the last
+five years before entering the simulation, as follows.
 
-On initialization of each simulant, assign a previous test date
-uniformly at random from one of the last 10 time steps before they
-entered the simulation. If the chosen time step occurs before the first
-date in 2027 when testing becomes available, *resample* the time step
-uniformly at random from between 3 years (6 time steps, inclusive) and 5
-years (10 time steps, inclusive) prior to the simulant's entrance time.
-This resampled test date does not represent a real test that occurred,
-but is merely an implementation detail to randomize the simulant's first
-test date after entering the simulation.
+On initialization of each simulant, check whether (1) the simulant meets
+the :ref:`eligibility requirements for BBBM testing
+<bbbm_requirements>`, and (2) their testing propensity is less than the
+current BBBM testing rate. If both conditions are met, assign a previous
+BBBM test date uniformly at random from one of the last 10 time steps
+before they entered the simulation. If either (a) the chosen time step
+occurs before the first date in 2027 when testing becomes available, or
+(b) the simulant fails either the eligibility requirement or the
+propensity requirement, assign "not a time" (NaT) for the simulant's
+previous BBBM test date.
 
-The first time the simulant could be eligible for testing again is 6
-time steps after the chosen previous test date. We assume for simplicity
-that there were no prior false positive tests among simulants entering
-the simulation, so all previous BBBM tests are negative.
-
+We assume for simplicity that there were no prior false positive tests
+among simulants entering the simulation, so all previous BBBM tests are
+negative. For simulants who are assigned a previous test date, the first
+time they could become eligible for testing again is 6 time steps after
+the chosen previous test date.
 
 On timestep
 '''''''''''
@@ -311,14 +314,15 @@ On each timestep, use the following steps to assign BBBM tests:
 #. For those who get tested, assign a positive diagnosis to 90% of people and a negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, e.g., people who test negative still have a 90% chance of being positive on a re-test.
 #. Record time of last test and yes/no diagnosis for determining future testing eligibility.
 
-Alternate, equivalent strategy:
+Alternate, equivalent strategy avoiding "fake previous tests":
 
-On initialization: Assign each eligible simulant a previous test date
-uniformly in the 5 years prior to entering the sim, then assign them a
-future test date uniformly 3-5 years from their previous test date.
-Assign NaT for both the previous and future dates if the simulant is
-ineligible or if the selected prior test date is before testing starts
-in 2027.
+On initialization: For each simulant who is eligible and has a
+propensity below the current testing threshold, assign a previous test
+date uniformly in the 5 years prior to entering the sim, then assign
+them a future test date uniformly 3-5 years from their previous test
+date. Assign NaT for both the previous and future dates if (a) the
+simulant is ineligible, or (b) their propensity is too high, or (c) the
+selected prior test date is before testing starts in 2027.
 
 On timestep:
 
