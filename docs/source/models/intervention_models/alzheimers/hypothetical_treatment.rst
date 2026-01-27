@@ -175,7 +175,7 @@ is defined below.
       following (year, level) values: `(2022.0, 0), (2027.0, 0),
       (2035.5, 30), (2100.0, 80), (2101.0, 80)`.
 
-      This captures Lilly's specification that "30% of eligible patients
+      This captures the CSU client's specification that "30% of eligible patients
       initiate by 2035, with a steady increase to 80% by 2100, for all
       countries," and that treatment should first be available in 2027,
       slowly ramping up to 30% in 2035.
@@ -289,13 +289,13 @@ Assumptions and Limitations
 - Treatment occurs instantaneously (i.e., the duration of the "receiving
   treatment" period is zero), following a six-month waiting period from
   time of BBBM test. So, treatment takes effect exactly six months after
-  BBBM testing. This interprets the following two Lilly specifications:
+  BBBM testing. This interprets the following two client specifications:
   "The treatment takes immediate full effect in the first 6-month time
   step" and "There is an average of 6 months between a positive BBBM
   test result and initiating treatment". We simplify "average of 6
   months" to a fixed 6 month duration for all simulants. Treatment
   discontinuation only affects the duration of time the treatment will
-  last, not the immediate effect size, so it is consistent with Lilly's
+  last, not the immediate effect size, so it is consistent with the client's
   assumptions to model discontinuation occurring instantaneously during
   the transient "receiving treatment" and "months to discontinuation"
   states as above.
