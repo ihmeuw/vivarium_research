@@ -367,8 +367,10 @@ scenario, and input draw.
       Note that the diagram states `Full treatment effect LONG` and `Full treatment effect SHORT` are both considered the same status (`Full treatment effect`),
       but are stratified by completion status.
   * - Months on treatment
-    - 
-    - Only needed for simulants who discontinue treatment as others are definitionally 0 or 9.
+    - Number of months on treatment (integer between 0 and 9, inclusive)
+    - Count the number of simulants in each (year, sex, age group,
+      months on treatment) stratum. This will be used for cost
+      estimates.
   * - Treatment status person-time
     - Status (`In treatment/ Waiting for treatment`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect`).
       Also stratify by treatment completion (completed, discontinuated) from transition observer
@@ -673,6 +675,12 @@ scenario, and input draw.
         run, it just happened to be what was already on ``main``
     - Stratify disease state transitions and person-time by treatment
     - Default
+  * - 11.0
+    - Updates to treatment model
+    - Baseline, Alternative Scenario 2
+    - * Locations: USA, China, Brazil
+    - Stratify disease state transitions and person-time by treatment
+    - Add observer for months on treatment
 
 5.2 V & V Tracking
 ------------------------
