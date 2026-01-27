@@ -678,7 +678,7 @@ scenario, and input draw.
   * - 11.0
     - Updates to treatment model
     - Baseline, Alternative Scenario 2
-    - * Locations: USA, China
+    - * Locations: USA, China, Brazil
     - Stratify disease state transitions and person-time by treatment
     - Add observer for months on treatment
 
