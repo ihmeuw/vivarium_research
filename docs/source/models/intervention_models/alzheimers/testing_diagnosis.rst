@@ -287,19 +287,16 @@ On each timestep, use the following steps to assign BBBM tests:
    the propensity value is less than the time-specific testing rate, the
    simulant has the opportunity to get tested on this time step (but may
    not be). If not, the simulant won't be tested.
-#. If a simulant is eligible and has a propensity below the testing
-   threshold, check whether they have a previous test date recorded. If
-   so, proceed to the next step. If not (i.e., if their previous test
-   date is NaT), this is the first time the simulant has the
-   opportunity to get tested; in this case, test them immediately.
 #. If an eligible simulant has the opportunity to be tested on this time
-   step (their propensity is less than the testing rate), give them a
-   BBBM test with probability :math:`1/(11 - k)`, where :math:`k` is the
-   number of time steps since the simulant's last BBBM test (this
-   guarantees that time of the next test is uniformly distributed
-   between 3 and 5 years since the last test---see explanation below).
-   This choice should be independent of other random choices in the
-   model.
+   step (their propensity is less than the testing rate), check whether
+   they have a previous test date recorded. If so, give them a BBBM test
+   with probability :math:`1/(11 - k)`, where :math:`k` is the number of
+   time steps since the simulant's last BBBM test (this guarantees that
+   time of the next test is uniformly distributed between 3 and 5 years
+   since the last test---see explanation below). This choice should be
+   independent of other random choices in the model. If the simulant's
+   previous test date is NaT, this is the first time the simulant has
+   the opportunity to get tested; in this case, test them immediately.
 #. For those who get tested, assign a positive diagnosis to 90% of people and a negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, e.g., people who test negative still have a 90% chance of being positive on a re-test.
 #. Record time of last test and yes/no diagnosis for determining future testing eligibility.
 
@@ -318,11 +315,11 @@ On each timestep, use the following steps to assign BBBM tests:
 .. #. Assess eligibility.
 .. #. If eligible, check propensity. If propensity is too large, stop.
 .. #. If eligible and propensity is low enough, check whether simulant has
-..    a future test date assigned. If not, assign one uniformly in the next
-..    two years.
-.. #. At this point, simulant is guaranteed to have a future test date
-..    assigned. Check whether the simulant's future test date corresponds
-..    to this time step. If yes, give the test; if not, don't.
+..    a future test date assigned. If not, this is the simulant's first
+..    opportunity for testing; test them immediately. If the simulant does
+..    have a future test date assigned, check whether the simulant's future
+..    test date corresponds to this time step. If yes, give the test; if
+..    not, don't.
 .. #. Assign a positive diagnosis to 90% of tests and a negative diagnosis
 ..    to 10% of tests.
 .. #. Record time of last test and yes/no diagnosis.
@@ -394,10 +391,14 @@ Assumptions and Limitations
   calculations in the MSLT; if the false positive rate were nonzero,
   some people would have prematurely started treatment before entering
   the simulation;
-- Assigning retesting dates for newly eligible simulants at 3 years
-  in the past will cause some newly eligible simulants to not start testing
-  for 2 years. While this is plausible, it is different than the current
-  implementation in the MSLT.
+- The strategy for assigning BBBM test history does not account for the
+  fact that simulants may not have been eligible for BBBM testing on all
+  of the previous 10 time steps prior to entering the simulation; for
+  example, we will assign a previous BBBM test date to a 60-year-old
+  entering the simulation in, say, 2035 even though they wouldn't have
+  been eligible; the effects of this are hopefully small because
+  improper testing can only happen during the first 5 years of the 20
+  years of eligible ages;
 
 
 
