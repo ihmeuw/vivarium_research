@@ -208,59 +208,163 @@ assign positive/negative diagnosis which will inform treatment in :ref:`Alternat
 Time-specific testing rates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Testing rates do not vary by location, age or sex. 
-In 2020, 0% of eligible simulants are tested annually. This increases (instantly) to 10% at year 2030, 
-then increases linearly over time in each six-month period to reach 20% in 2035, to 40% in 2040 
-and then maxes out at 60% in 2045. 
+In 2020, 0% of eligible simulants are tested annually. This becomes
+nonzero in 2027, increasing to 10% at year 2030,
+then increases linearly for awhile, then levels off and eventually maxes
+out at 60% after 2045. We will model this as a piecewise linear function
+with knots at the following (year, coverage) values:
+
+* (2020.0, 0%)
+* (2027.0, 0%) -- Note that this is 0% at the *beginning* of 2027, but
+  coverage will become positive on the second time step that year
+* (2030.5, 10%) -- Note that this is 10% at **mid**-year
+* (2045.0, 50%)
+* (2055.0, 60%)
+* (2100.0, 60%)
+
+.. _bbbm_requirements:
+
+Eligibility for BBBM testing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+A simulant is eligible for a BBBM test if they meet the following
+requirements:
+
+- Simulant is not in MCI or AD dementia state (they can only be in
+  susceptible or preclinical)
+- Simulant age is :math:`\ge 60` and :math:`< 80`
+- Simulant has not received a BBBM test in the last three years (more
+  precisely, they have not had a BBBM test on any of the previous five
+  time steps)
+- Simulant has never received a positive BBBM test
 
 .. _bbbm_propensity:
 
 Implementation
 ^^^^^^^^^^^^^^
-The simulant's existing testing propensity will also be used as their BBBM testing propensity.
+The simulant's existing CSF/PET testing propensity will also be used as
+their BBBM testing propensity. At the client's request, we will retest
+simulants every 3-5 years, rather than having all simulants be retested
+at a fixed interval of 3 years (which can cause unrealistic oscillations
+in the number of tests over time). In the implementation below, we
+choose the next test date uniformly in the interval :math:`[3, 5]`
+years.
 
+On initialization
+'''''''''''''''''
+In order to avoid having an unreasonably large fraction of eligible
+simulants be tested immediately upon entering the simulation, we will
+assign a BBBM testing history to each initialized simulant who would
+have an opportunity for BBBM testing on their first time step. Since
+simulants are only eligible for testing every three years (more
+precisely, every 6 time steps) and must be retested at most every five
+years (10 time steps), we will assign a random test date within the last
+five years before entering the simulation, as follows.
+
+On initialization of each simulant, check whether (1) the simulant meets
+the :ref:`eligibility requirements for BBBM testing
+<bbbm_requirements>`, and (2) their testing propensity is less than the
+current BBBM testing rate. If both conditions are met, assign a previous
+BBBM test date uniformly at random from one of the last 10 time steps
+before they entered the simulation. If either (a) the chosen time step
+occurs before the first date in 2027 when testing becomes available, or
+(b) the simulant fails either the eligibility requirement or the
+propensity requirement, assign "not a time" (NaT) for the simulant's
+previous BBBM test date.
+
+We assume for simplicity that there were no prior false positive tests
+among simulants entering the simulation, so all previous BBBM tests are
+negative. For simulants who are assigned a previous test date, the first
+time they could become eligible for testing again is 6 time steps after
+the chosen previous test date.
 
 On timestep
 '''''''''''
 On each timestep, use the following steps to assign BBBM tests:
 
-.. _bbbm_requirements:
+#. Assess eligibility based on the :ref:`eligibility requirements for
+   BBBM testing <bbbm_requirements>`.
+#. If eligible (meets all requirements), check testing propensity. If
+   the propensity value is less than the time-specific testing rate, the
+   simulant has the opportunity to get tested on this time step (but may
+   not be). If not, the simulant won't be tested.
+#. If an eligible simulant has the opportunity to be tested on this time
+   step (their propensity is less than the testing rate), check whether
+   they have a previous test date recorded. If so, give them a BBBM test
+   with probability :math:`1/(11 - k)`, where :math:`k` is the number of
+   time steps since the simulant's last BBBM test (this guarantees that
+   time of the next test is uniformly distributed between 3 and 5 years
+   since the last test---see explanation below). This choice should be
+   independent of other random choices in the model. If the simulant's
+   previous test date is NaT, this is the first time the simulant has
+   the opportunity to get tested; in this case, test them immediately.
+#. For those who get tested, assign a positive diagnosis to 90% of people and a negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, e.g., people who test negative still have a 90% chance of being positive on a re-test.
+#. Record time of last test and yes/no diagnosis for determining future testing eligibility.
 
-1. Assess eligibility based on the following requirements:
+.. Alternate, equivalent strategy avoiding "fake previous tests":
 
-  - Simulant is not in MCI or AD dementia state (only susceptible, or pre-clinical)
-  - Simulant age is >=60 and <80
-  - Simulant has not received a BBBM test in the last three years (or
-    six time steps)
-  - Simulant has never received a positive BBBM test
+.. On initialization: For each simulant who is eligible and has a
+.. propensity below the current testing threshold, assign a previous test
+.. date uniformly in the 5 years prior to entering the sim, then assign
+.. them a future test date uniformly 3-5 years from their previous test
+.. date. Assign NaT for both the previous and future dates if (a) the
+.. simulant is ineligible, or (b) their propensity is too high, or (c) the
+.. selected prior test date is before testing starts in 2027.
 
-2. If eligible (meets all requirements), check propensity. 
-   If the propensity value is less than the time-specific testing rate, give the test. If not, do not give the test.
-3. Assign a positive diagnosis to 90% of people and a negative diagnosis to 10% of people. This 90% draw should be independent of any previous draws, e.g., people who test negative still have a 90% chance of being positive on a re-test.
-4. Record time of last test, yes/no diagnosis for future testing eligibility.
+.. On timestep:
 
-On initialization
-'''''''''''''''''
+.. #. Assess eligibility.
+.. #. If eligible, check propensity. If propensity is too large, stop.
+.. #. If eligible and propensity is low enough, check whether simulant has
+..    a future test date assigned. If not, this is the simulant's first
+..    opportunity for testing; test them immediately. If the simulant does
+..    have a future test date assigned, check whether the simulant's future
+..    test date corresponds to this time step. If yes, give the test; if
+..    not, don't.
+.. #. Assign a positive diagnosis to 90% of tests and a negative diagnosis
+..    to 10% of tests.
+.. #. Record time of last test and yes/no diagnosis.
+.. #. For those who got a negative test, reassign their future test date
+..    uniformly 3-5 years in the future.
 
-In order to avoid having all eligible simulants be tested immediately
-upon entering the simulation, we will assign a BBBM testing history to
-each initialized simulant who is eligible for a BBBM test. Since
-simulants are only eligible for testing every three years (more
-precisely, every 6 time steps), we will assign a random test date within
-the last three years before entering the simulation, as follows.
 
-On initialization of each eligible simulant, choose uniformly at random
-from one of the last 6 time steps when they could have been tested,
-omitting any time steps before 2030 when testing is not yet available.
-If there are no such time steps (i.e., all 6 are before 2030), assign
-"not a time" (NaT) for the simulant's previous test date. Otherwise, the
-first time the simulant could be eligible for testing again is 6 time
-steps after the chosen previous test date. We assume for simplicity that
-there were no prior false positive tests among simulants entering the
-simulation, so all previous BBBM tests are negative.
+The above formula :math:`1/(11 - k)` results in a uniformly distributed population
+between 6 and 10 time steps, or 3 to 5 years. To conceptualize
+why this works, please see the table below outlining the time step value :math:`k`,
+the resulting probability of testing and how a hypothetical population of
+100 simulants is distributed over the time steps.
 
-Even with prior BBBM testing history in place, due to test coverage
-jumping from 0% to 10% in 2030, we expect a large group to be
-immediately tested and then a drop-off in testing counts.
+.. list-table:: Simulation Components
+  :header-rows: 1
+
+  * - Time Step :math:`k`
+    - Testing Probability
+    - People Tested
+    - Remaining Untested Population
+  * - 0-5
+    - 0% (ineligible)
+    - 100 * 0% = 0
+    - 100 - 0 = 100
+  * - 6
+    - 1/(11-6) = 20%
+    - 100 * 20% = 20
+    - 100 - 20 = 80
+  * - 7
+    - 1/(11-7) = 25%
+    - 80 * 25% = 20
+    - 80 - 20 = 60
+  * - 8
+    - 1/(11-8) = 33%
+    - 60 * 33% = 20
+    - 60 - 20 = 40
+  * - 9
+    - 1/(11-9) = 50%
+    - 40 * 50% = 20
+    - 40 - 20 = 20
+  * - 10
+    - 1/(11-10) = 100%
+    - 20 * 100% = 20
+    - 20 - 20 = 0
+
 
 .. note::
 
@@ -289,18 +393,13 @@ Assumptions and Limitations
   the simulation;
 - The strategy for assigning BBBM test history does not account for the
   fact that simulants may not have been eligible for BBBM testing on all
-  of the previous 6 time steps prior to entering the simulation; for
+  of the previous 10 time steps prior to entering the simulation; for
   example, we will assign a previous BBBM test date to a 60-year-old
-  entering the simulation after 2030 even though they wouldn't have been
-  eligible; the effects of this are likely small because improper
-  testing can only happen during the first 3 years of the 20 years of
-  eligible ages;
-- The strategy of choosing the prior BBBM testing date uniformly over
-  the last 3 years is a simplification that doesn't align perfectly with
-  our assumption that there will be a cyclical pattern in the number of
-  people getting tested each year (with the first peak in 2030 when the
-  test first becomes available); the uniformity assumption will likely
-  smooth out this cyclical pattern somewhat;
+  entering the simulation in, say, 2035 even though they wouldn't have
+  been eligible; the effects of this are hopefully small because
+  improper testing can only happen during the first 5 years of the 20
+  years of eligible ages;
+
 
 
 References

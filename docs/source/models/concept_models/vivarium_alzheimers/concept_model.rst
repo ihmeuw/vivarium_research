@@ -681,6 +681,13 @@ scenario, and input draw.
     - * Locations: USA, China, Brazil
     - Stratify disease state transitions and person-time by treatment
     - Add observer for months on treatment
+  * - 12.0
+    - Updates to testing model
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA, China, Brazil
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+
 
 5.2 V & V Tracking
 ------------------------
