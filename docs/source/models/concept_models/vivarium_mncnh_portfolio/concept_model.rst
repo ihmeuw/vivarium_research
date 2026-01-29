@@ -1670,13 +1670,19 @@ Default stratifications to all observers should include scenario and input draw.
     - All
     - Default
     -
+  * - 24.4
+    - GA floor fixes 2
+    - Fix issue with stillbirth GA floor
+    - All
+    - Default
+    - None
   * - 27.0
     - IV iron effects on BW, GA, and stillbirth
     - As defined on the :ref:`IV iron intervention document <intervention_iv_iron_antenatal_mncnh>` 
     - Baseline and IV iron scale-up scenarios
     - Default
     -  
-  * - 
+  * - 27.1
     - IV iron neonatal effects bugfixes
     - * Update so that IV iron effects are based on first trimester ANC hemoglobin exposure rather than later pregnancy intervention hemoglobin exposure
       * Update so that LBWSG propensities do not reset between scenarios for those whose pregnancy outcome changes between scenarios
@@ -1684,12 +1690,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and IV iron scale-up scenarios
     - Default
     - 
-  * -
-    - GA floor fixes 2
-    - Fix issue with stillbirth GA floor
-    - All
+  * - 28.0
+    - Pakistan fistula update
+    - Update YLDs due to obstructed labor according to the custom data values specified in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1847>`__
+    - Baseline 
     - Default
-    - None
+    -
   * -
     - Larger run for neonatal mortality V&V
     - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
@@ -1721,12 +1727,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
     - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__, postpartum hemoglobin
-  * - 
-    - Pakistan fistula update
-    - Update YLDs due to obstructed labor according to the custom data values specified in `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1847>`__
-    - Baseline 
-    - Default
-    - None
   * - 
     - Separate LBWSG affected causes
     - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__
@@ -2665,6 +2665,13 @@ Default stratifications to all observers should include scenario and input draw.
       * GA floor for stillbirth does not appear to be working
       * Hemoglobin screening coverage still inverted
     - V&V notebooks included in `this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/174>`__
+  * - 24.4
+    - GA floor fixes 2
+    - In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match floors documented, minus baseline IFA calibration shift
+    - * No regressions noted
+      * GA floor for stillbirth corrected
+      * Hemoglobin screening coverage corrected
+    - V&V notebooks included in `this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/177>`__
   * - 25.0
     - Update SBR to >=24 weeks
     - * Stillbirth ratio in simulation still matches artifact
@@ -2675,7 +2682,9 @@ Default stratifications to all observers should include scenario and input draw.
     - `V&V notebooks in this PR <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/171>`__
   * - 25.0.1
     - Update SBR to >=24 weeks run bugfixes
-    - Same as 25.0
+    - Same as 25.0, plus:
+      * Neonatal mortality matches expectation
+      * Regression tests pass (no CRN issues due to failed jobs)
     - * Issues noted in 25.0 resolved
       * Stillbirth criteria still look good
       * Hemoglobin screening coverage looking inverted, as in pre-23.0 runs
@@ -2703,17 +2712,16 @@ Default stratifications to all observers should include scenario and input draw.
       * LBWSG exposures appear to reset between scenarios for simulants whose birth outcomes change between scenarios. LBWSG exposures should remain consistent between scenarios for these simulants to avoid noise in the intervention effects of IV iron
       * Hemoglobin exposure in the state table is missing until the later pregnancy intervention timestep (although the pipeline value appears to be functioning correctly for the earlier timesteps, it does interfere with some tests we've written)
     - `Model 27.0 V&V notebooks <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/178/files>`__
-  * - 
-    - GA floor fixes 2
-    - In the interactive simulation, confirm that minimum gestational age values stratified by pregnancy outcome match floors documented, minus baseline IFA calibration shift
-    -
-    -
-  * - 
-    - Update SBR to >=24 weeks run bugfixes
-    - * Neonatal mortality matches expectation
-      * Regression tests pass (no CRN issues due to failed jobs)
-    -
-    -
+  * - 27.1
+    - IV iron effects on BW, GA, and stillbirth bugfixes
+    - Same as 27.0, with issues noted there fixed
+    - All checks passed
+    - Model 27.1 V&V notebooks are spread across two PRs: `here <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/252>`__ and `here <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/256>`__
+  * - 28.0
+    - Pakistan fistula update
+    - * Confirm that YLDs due to obstructed labor in Pakistan have been updated and our simulated values match input expectations
+    - All checks passed
+    - `Model 28.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/257>`__ 
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
@@ -2743,11 +2751,6 @@ Default stratifications to all observers should include scenario and input draw.
       * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
     - 
     -
-  * - 
-    - Pakistan fistula update
-    - * Confirm that YLDs due to obstructed labor in Pakistan have been updated and our simulated values match input expectations
-    - 
-    - 
   * - 
     - Separate LBWSG affected causes
     - * Confirm that neonatal mortality continues to validate in the baseline scenario
