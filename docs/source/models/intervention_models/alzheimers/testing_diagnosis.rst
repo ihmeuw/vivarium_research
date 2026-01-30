@@ -246,7 +246,7 @@ their BBBM testing propensity. At the client's request, we will retest
 simulants every 3-5 years, rather than having all simulants be retested
 at a fixed interval of 3 years (which can cause unrealistic oscillations
 in the number of tests over time). In the implementation below, we
-choose the next test date uniformly in the interval :math:`[3, 5]`
+use a formula for testing that creates uniform testing in the interval :math:`[3, 5]`
 years.
 
 On initialization
