@@ -18,9 +18,12 @@ Risk Exposures Description in GBD
 
 In GBD, estimation of the hemoglobin exposure distribution serves two purposes:
 
-1. To estimate the prevalence envelope of the anemia impairment (and to perform anemia causal attribution). This is done for all age/sex groups and data is stored as modelable entities.
+1. To estimate the prevalence envelope of the anemia impairment (and to perform anemia causal attribution). This is done for all age/sex groups and data is stored as several modelable entities, which are split by pregnancy status.
 
-2. To serve as the risk exposure estimate of the hemoglobin risk factor. For GBD 2023, this is specific to the pregnant population and data is stored as the low hemoglobin risk factor (REI ID 376).
+2. To serve as the risk exposure estimate of the hemoglobin risk factor. The hemoglobin *risk factor* only affects pregnancy-related outcomes in GBD, so the exposure is only combined with
+   relative risk for the pregnant population.
+   As a result, the exposure stored in the risk factor (REI ID 376) is from modelable entity 28869, "Mean hemoglobin for risk modelling".
+   The description of the GBD 2023 model marked "best" for this entity states that it is specific to the pregnant population, though it includes estimates for all ages/sexes (the non-WRA estimates are presumed to be non-pregnant exposures).
 
 The remainder of this page is specific to the second application of hemoglobin as a risk factor exposure specifically among the pregnant population.
 
