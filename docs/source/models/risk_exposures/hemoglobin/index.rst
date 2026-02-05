@@ -26,9 +26,13 @@ The remainder of this page is specific to the second application of hemoglobin a
 
 Starting in GBD 2023, hemoglobin exposure among the pregnant population is estimated directly. This is an update from the previous approach of estimating the hemoglobin exposure among the non-pregnant population and then applying a "pregnancy adjustment factor" to obtain an exposure estimate among the pregnant population.
 
-.. todo::
+.. note::
 
-  Update this page with more detail when we receive it.
+  See `this notebook <https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/pull/179>`__ that demonstrates the risk exposure data for the low hemoglobin risk factor is consistent with the MEID for hemoglobin exposure data among the pregnant population.
+
+  More details on the risk exposure model can be found in the anemia impairment portion of the GBD 2023 methods appendix.
+
+  Finally, the :ref:`risk effects document for the low hemoglobin risk factor can be found here <2023_hemoglobin_effects>`.
 
 Vivarium Modeling Strategy
 --------------------------
