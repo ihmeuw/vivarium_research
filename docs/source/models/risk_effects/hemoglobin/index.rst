@@ -43,16 +43,16 @@ Hemoglobin Risk Effects (GBD 2023)
 Risk Overview
 -------------
 
-.. todo::
-
-  Provide overview and references for hemoglobin team's efforts for the hemoglobin burden of proof models when they are available
+`See the pre-print for the GBD burden of proof model of low hemoglobin publication here <https://www.researchsquare.com/article/rs-7567885/v1>`__
 
 GBD 2023 Modeling Strategy
 --------------------------
 
 .. note::
 
-  As of March 2025 it is undecided whether the hemoglobin risk factor will be included in the GBD 2023 publication. Regardless, risk effects estimates for the following affected outcomes have been uploaded to GBD shared functions.
+  The low hemoglobin risk factor was NOT included in the GBD 2023 risk factors capstone publication (release ID 16). However, estimates specific to the low hemoglobin risk factor that were used to inform the low hemoglobin burden of proof publication are available within release ID 33 (`see details here <https://hub.ihme.washington.edu/spaces/GBDdirectory/pages/171583888/Releases+rounds+and+versioning>`__). Release ID 33 should be used to pull all data related to the low hemoglobin risk factor -- note that release ID 16 may return data, but it is expected to be outdated.
+
+  See `the pre-print for the GBD burden of proof model of low hemoglobin publication here <https://www.researchsquare.com/article/rs-7567885/v1>`__ for all details on the low hemoglobin risk modeling strategy.
 
 In GBD 2023, the hemoglobin risk effects are modeled as continuous risk curves with 1,000 exposure estimates ranging between values of 40 and 150. Exposure values <40 are assigned a risk value consistent with an exposure of 40 and exposure values >150 are assigned a risk value consistent with an exposure of 150.
 
@@ -94,7 +94,7 @@ The relative risk curves for maternal disorders affected outcomes in GBD shared 
 
 .. image:: maternal_disorders_risk_curve.png
 
-The hemoglobin team has also estimated risk effects for several additional outcomes. A list of these affected outcomes is shown below and risk curve values for each of these outcomes can be found at :code:`/mnt/team/anemia/pub/bop/sim_studies/`.
+The hemoglobin team has also estimated risk effects for several additional outcomes. A list of these affected outcomes is shown below and risk curve values for each of these outcomes can be found at :code:`/mnt/team/anemia/pub/bop/sim_studies/`. These risk curves were provided by the low hemoglobin risk modeller Ditha Nanditha in July of 2025.
 
 - Low birth weight (Operationalized as categorical for <2,500 grams and additional severities)
 
