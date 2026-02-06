@@ -228,7 +228,7 @@ The case fatality rate will be computed as
 .. math::
 
     \begin{align*}
-    \text{cfr} &= \frac{\text{hemorrhage deaths}}{\text{hemorrhage cases}} \\
+    \text{cfr} &= \frac{\text{hemorrhage deaths}}{\text{hemorrhage cases}} \\\\
         &= \frac{\text{(hemorrhage deaths) / person-time}}
             {\text{(hemorrhage cases) / person-time}}
         = \frac{\text{hemorrhage cause specific mortality rate}}
