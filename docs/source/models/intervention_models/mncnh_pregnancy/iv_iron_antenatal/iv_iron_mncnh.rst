@@ -42,7 +42,7 @@ The antenatal IV iron intervention is intended to treat moderate and severe iron
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-IV iron treatment for iron-definiciency anemia pregnancy remains a relatively new intervention, and as such, coverage remains relatively low in low- and middle-income countries, such as Nigeria (see [Akinajo-et-al-2024]_). 
+IV iron treatment for iron-definiciency anemia pregnancy remains a relatively new intervention, and as such, coverage remains relatively low in low- and middle-income countries, such as Nigeria (see [Balogun-et-al-2026]_, [Akinajo-et-al-2024]_). 
 As such, we will assume a baseline coverage of 0% for all locations for the IV iron intervention. 
 
 .. note::
@@ -272,6 +272,10 @@ References
 
   Akinajo, O.R., Babah, O.A., Banke-Thomas, A. et al. Acceptability of IV iron treatment for iron deficiency anaemia in pregnancy in Nigeria: a qualitative study with pregnant women, domestic decision-makers, and health care providers. Reprod Health 21, 22 (2024). https://doi.org/10.1186/s12978-024-01743-y
 
+.. [Balogun-et-al-2026]
+
+  Balogun M, Kumah EA, Adaramoye VO, Eboreime E, Ameh C, Afolabi BB. Implementation strategies and outcomes of intravenous iron use for treatment of anaemia during and after pregnancy in low- and middle-income countries: A scoping review. PLOS Glob Public Health. 2026 Jan 9;6(1):e0004858. doi: 10.1371/journal.pgph.0004858. PMID: 41512006; PMCID: PMC12788625.
+
 .. [Derman-et-al-2025]
 
   Derman RJ, Bellad MB, Somannavar MS, Bhandari S, Mehta S, Mehta S, Sharma DK, Yogeshkumar S, Charantimath U, Patil AP, Mallapur AA, Ramadurg U, Sangavi R, Patil PS, Roy S, Vastrad P, Shekhar C, Leiby BE, Hartman RL, Georgieff M, Mennemeyer S, Aghai Z, Thind S, Boelig RC; RAPIDIRON Trial Group (Appendix). Single-dose intravenous iron vs oral iron for treatment of maternal iron deficiency anemia: a randomized clinical trial. Am J Obstet Gynecol. 2025 Aug;233(2):120.e1-120.e18. doi: 10.1016/j.ajog.2025.01.037. Epub 2025 Feb 3. PMID: 39909327.
@@ -283,3 +287,4 @@ References
 .. [Pasricha-et-al-2025]
 
   Pasricha, SR., Moya, E., Ataíde, R. et al. Ferric carboxymaltose for anemia in late pregnancy: a randomized controlled trial. Nat Med 31, 197–206 (2025). https://doi.org/10.1038/s41591-024-03385-w
+
