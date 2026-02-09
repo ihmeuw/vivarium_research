@@ -979,6 +979,7 @@ Default stratifications to all observers should include scenario and input draw.
       All of these quantities can aggregate across seeds in the normal way (summation).
   * - 11. Anemia YLDs
     - * Maternal age group
+      * Pregnancy outcome
     - Inclusive of anemia YLDs accrued during pregnancy and the postpartum period
 
 .. todo::
@@ -1709,7 +1710,7 @@ Default stratifications to all observers should include scenario and input draw.
 
       **Note: this model is for sensitivity analysis only and future models should not be based on it.**
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
-    - Default
+    - Default, note new stratification by pregnancy outcome in anemia YLDs observer
     - None
   * -
     - Larger run for neonatal mortality V&V
