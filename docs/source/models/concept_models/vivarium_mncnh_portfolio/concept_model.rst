@@ -1696,6 +1696,21 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline 
     - Default
     -
+  * - 29.0
+    - Anemia YLDs and postpartum hemoglobin
+    - 
+    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - Default, note new anemia YLD observer
+    -
+  * -
+    - Anemia YLDs run without oral iron effects on hemoglobin
+    - Same as previous, but without oral iron effects on hemoglobin to eliminate baseline IFA calibration contribution
+      to anemia YLDs difference from GBD.
+
+      **Note: this model is for sensitivity analysis only and future models should not be based on it.**
+    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - Default
+    - None
   * -
     - Larger run for neonatal mortality V&V
     - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
@@ -1709,18 +1724,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and IV iron scale-up scenarios
     - Default
     - RT-owned data generation that is blocked by Separate LBWSG affected causes run
-  * -
-    - Postpartum hemoglobin
-    - 
-    - Baseline, MMS scale-up, and IV iron scale-up scenarios
-    - Default
-    - None
-  * -
-    - Anemia YLDs
-    - 
-    - Baseline, MMS scale-up, and IV iron scale-up scenarios
-    - Default, note new anemia YLD observer
-    - Postpartum hemoglobin run
   * -
     - Effects of maternal disorders on postpartum hemoglobin
     - Effects of maternal hemorrhage (and possibly maternal sepsis) on postpartum hemoglobin. Model run is blocked by 
@@ -2722,6 +2725,20 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm that YLDs due to obstructed labor in Pakistan have been updated and our simulated values match input expectations
     - All checks passed
     - `Model 28.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/257>`__ 
+  * - 29.0
+    - Anemia YLDs and postpartum hemoglobin
+    - * In the interactive simulation, confirm postpartum hemoglobin exposure matches hemoglobin exposure at the end of pregnancy for simulants who survive to the postpartum period
+      * In the interactive simulation, confirm that anemia YLDs at each relevant timestep match recalculated values based on the hemoglobin exposure at that timestep and the pregnancy-specific anemia impairment thresholds
+      * Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values
+      * Anemia YLDs should decrease in MMS/IV iron scale-up scenarios 
+      * Confirm that ferritin screening results are unchanged
+    - Interactive simulation checks passed, but anemia YLDs are overestimated relative to GBD.
+    - `Model 29.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/270>`__
+  * - 
+    - Anemia YLDs run without oral iron effects on hemoglobin
+    - Same as 29.0, but should *not* see oral iron effects on hemoglobin; hope to see improvement in anemia YLD estimates relative to GBD as a result of this change 
+    - 
+    - 
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
@@ -2732,19 +2749,7 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm that neonatal mortality (particularly for neonatal sepsis) still matches expectation in the baseline scenario
       * Using the interactive simulation, confirm effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. The total effect should be evaluated by stepping through the simulation and observing the rate of mortality due to neonatal sepsis stratified by maternal hemoglobin exposure.
     - 
-    - 
-  * - 
-    - Postpartum hemoglobin
-    - In the interactive simulation, confirm postpartum hemoglobin exposure matches hemoglobin exposure at the end of pregnancy for simulants who survive to the postpartum period
-    - 
-    - 
-  * - 
-    - Anemia YLDs
-    - * Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values
-      * Anemia YLDs should decrease in MMS/IV iron scale-up scenarios 
-      * Confirm that ferritin screening results are unchanged
-    - 
-    - 
+    -  
   * - 
     - Effects of maternal disorders on postpartum hemoglobin
     - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident maternal disorders
