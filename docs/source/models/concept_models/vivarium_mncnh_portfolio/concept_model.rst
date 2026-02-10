@@ -1746,6 +1746,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     -
 
+
 .. note:: 
 
   Some of the notebook URLs for the older runs might be out-of-date. If you click one of these links and it gives
