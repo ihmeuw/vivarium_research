@@ -1739,8 +1739,12 @@ Default stratifications to all observers should include scenario and input draw.
     - All
     - Default, note that observed value for ultrasound is now "ultrasound summary" rather than "ultrasound type" with this update
     - Updated data values for trimester-specific GA error values, updated facility choice model and values that reflect the updated GA error values, Remaining pregnancy model refactor run
-
-
+  * -
+    - Oral iron GA shift refactor
+    - Uses different IFA shifts for ANC and non-ANC attendees and recalibrates MMS shifts
+    - Baseline and MMS scale-up scenarios
+    - Default
+    -
 .. note:: 
 
   Some of the notebook URLs for the older runs might be out-of-date. If you click one of these links and it gives
@@ -2768,6 +2772,15 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type and timing (specific distribution of errors assessed in the interactive simulation and summary "confusion matrix" assessed as part of the facility choice model V&V targets)
     - 
     - 
+  * - 
+    - Oral iron GA shift refactor
+    - * Checks from 17.0
+      * Regression testing
+      * Confirm that updated shifts were implemented correctly based on the ANC and IFA categories
+      * Confirm that oral iron effect on preterm birth in simulation results meets verification target (was not met in 17.0), verify effect on GA and BW
+    - 
+    - 
+
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
