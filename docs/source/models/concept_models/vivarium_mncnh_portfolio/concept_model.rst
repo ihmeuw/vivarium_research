@@ -2778,7 +2778,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Oral iron GA shift refactor
     - * Checks from 17.0
       * Regression testing
-      * Confirm that updated shifts were implemented correctly based on the ANC and IFA categories
+      * Confirm that updated shifts were implemented correctly based on the ANC and IFA categories (in interactive sim)
       * Confirm that oral iron effect on preterm birth in simulation results meets verification target (was not met in 17.0), verify effect on GA and BW
     - 
     - 
