@@ -1745,6 +1745,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and MMS scale-up scenarios
     - Default
     -
+
 .. note:: 
 
   Some of the notebook URLs for the older runs might be out-of-date. If you click one of these links and it gives
@@ -2780,7 +2781,6 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that oral iron effect on preterm birth in simulation results meets verification target (was not met in 17.0), verify effect on GA and BW
     - 
     - 
-
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
