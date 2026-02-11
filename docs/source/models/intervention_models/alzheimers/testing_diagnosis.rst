@@ -253,21 +253,17 @@ On initialization
 '''''''''''''''''
 In order to avoid having an unreasonably large fraction of eligible
 simulants be tested immediately upon entering the simulation, we will
-assign a BBBM testing history to each initialized simulant who would
-have an opportunity for BBBM testing on their first time step. 
+assign a future BBBM test date to each initialized simulant who otherwise would
+have an opportunity for BBBM testing on their first time step.
 
-For this BBBM test history assignment, we must meet the following requirements:
+For this future BBBM test date assignment, we must meet the following requirements:
 
-#. Test history is assigned to simulants who meet
+#. Test date is assigned to simulants who meet
    the :ref:`eligibility requirements for BBBM testing
    <bbbm_requirements>` and has a testing propensity is less than the
    current BBBM testing rate.
-#. The BBBM historical test date should mirror the future testing scheme of uniformly random 
+#. The BBBM test date should mirror the future testing scheme of uniformly random 
    retesting between 3-5 years.
-#. If either the chosen time step occurs before the first date in 2027 when 
-   testing becomes available, or the simulant fails either the eligibility 
-   requirement or the propensity requirement, assign "not a time" (NaT) for 
-   the simulant's previous BBBM test date.
 
 .. note::
 
