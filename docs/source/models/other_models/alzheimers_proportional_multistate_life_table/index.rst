@@ -260,7 +260,7 @@ Removing the same number of simulants, but proportionally from all the states co
 
 Updating Testing States 
 -----------------------
-On each time step, simulants in the negative test states are advanced to the next negative test state or receive testing. Simulants get repeat testing uniformly between 3 and 5 years after their first test. To implement this, we have 33% of simulants in the negative 2 year group move to testing and the rest move to the negative 3 year bucket. Then 50% of people in the negative 3 year bucket are tested and the rest more to negative 4 years. All simulants in negative 4 years are tested.
+On each time step, simulants in the negative test states are advanced to the next negative test state or receive testing. Simulants get repeat testing uniformly between 3 and 5 years after their first test. To implement this, we have 33% of simulants in the negative 2 year group move to testing and the rest move to the negative 3 year bucket. Then 50% of people in the negative 3 year bucket are tested and the rest move to negative 4 years. All simulants in negative 4 years are tested.
 
 A fraction of 
 incident 65 year olds that are selected for testing based on the current test rate. Additionally, a number :math:`U` of the untested state simualants are also
