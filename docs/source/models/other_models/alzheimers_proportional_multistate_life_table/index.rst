@@ -266,7 +266,7 @@ A fraction of
 incident 65 year olds that are selected for testing based on the current test rate. Additionally, a number :math:`U` of the untested state simualants are also
 selected for testing based on the increase in test rate compared to last year, :math:`\Delta_{\text{test\_rates}}`:
 
-:math:`U = \Delta_{\text{test_rates}} * \text{total_age_pop}`, where :math:`\text{total_age_pop}` is the sum of all simulants 
+:math:`U = \Delta_{\text{test\_rates}} * \text{total\_age\_pop}`, where :math:`\text{total\_age\_pop}` is the sum of all simulants 
 in the age/sex group (among all states- untested, positive and negative).
 
 
