@@ -180,7 +180,6 @@ treated simulants.
 This is where any relationship between prescription, adherence, and
 outcomes can be described precisely, as well.
 
-
 The treatment algorithm
 +++++++++++++++++++++++
 
@@ -198,6 +197,10 @@ from other models.)
 
 Example: somebody goes to the doctor (start of treatment algorithm) ;
 treatment changes or doesn't change (end of treatment algorithm).
+
+.. note::
+
+  For interventions that apply additive shifts to an outcome and are implemented using the `AdditiveRiskEffect <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/c76ea50a5dc063b0cb851bacf179f702205a9da4/src/vivarium_gates_mncnh/components/intervention.py#L567>`__ class, the "risk_specific_shift" and "excess_shift" measures are named to be analogous to cause-specific and excess mortality rates used in the calculation of mortality hazards (as discussed on the :ref:`Modelling Causes document <models_cause>`). In the calculation of mortality rates, the population-level cause-specific mortality rate is subtracted and the excess mortality rate value specific to a given attribute (with or without the cause condition) is added. In the same way, interventions implemented as additive risk effects will have the risk-specific shift subtracted off from the affected outcome and the excess shift value specific to the risk exposure category (covered vs. uncovered, for example) added back on.
 
 Assumptions and limitations
 +++++++++++++++++++++++++++
