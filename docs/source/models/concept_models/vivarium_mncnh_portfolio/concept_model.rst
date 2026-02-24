@@ -119,22 +119,26 @@ the simulation.
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
+This simulation aims to answer the research question:
+**What impacts would different (combinations of) interventions have on maternal, newborn, and child nutrition and health outcomes?**
+We model three locations currently: Nigeria, Ethiopia, and Pakistan.
+We aim to incorporate quite an expansive list of interventions in various stages of development
+that are under consideration by the Gates Foundation.
+The "combinations of" part of the research question is crucial -- interventions might *interact*, for example due to prevention
+reducing the need for treatment down the line.
+
 The MNCNH Portfolio simulation builds on work our team has done in other simulations
 of pregnancy and early childhood.
 The most recent was the :ref:`Nutrition Optimization (NO) <2021_concept_model_vivarium_nutrition_optimization>` simulation,
 which (as the name suggests) focused particularly on nutrition interventions.
 That simulation allowed us to estimate the impacts of each intervention, and crucially also
-how the interventions might *interact*, for example due to prevention
-reducing the need for treatment down the line.
+how the interventions interacted.
 "Optimization" refers to the fact that we used the output of the NO sim to calculate
 *optimal* allocation of money to have the biggest impact given a budget,
 taking all these interactions into account.
 
-Nutrition interventions continue to be included in the MNCNH portfolio sim, but the "portfolio" is
-broader; the intervention space includes more products.
-These products, like the nutrition interventions in the NO project,
-interact in complex ways, and an aim of this simulation is to estimate the impact
-of different *combinations* of these interventions.
+Nutrition interventions continue to be included in the MNCNH portfolio sim, but the "portfolio" is broader,
+including non-nutrition interventions as well.
 As before, we also plan to estimate costs and calculate optimal budget allocation,
 possibly with improved costing methodology.
 This page serves as documentation for the simulation part of the project, which is focused
@@ -150,7 +154,7 @@ We plan to complete this work in 3 waves.
 * Wave 2 will add in some antenatal supplements (MMS, IV iron), the hemoglobin risk for birthing parents, all downstream causes affected by hemoglobin, and higher level delivery facility interventions.
 * Wave 3 will add in gestational blood pressure and relevant causes and risks including pre-eclampsia care and downstream effects of high blood pressure.
 
-As of August 2025, Wave 1 is mostly complete in both documentation and implementation, and Wave 2 is partially documented and has just started implementation.
+As of February 2026, Wave 1 is complete in both documentation and implementation and Wave 2 is mostly documented and partly implemented.
 
 .. _mncnh_portfolio_3.0:
 
@@ -173,6 +177,33 @@ format in which we jump directly to from one decision point to the next rather t
 through time.
 For this reason, throughout this model we calculate and express events in terms of probabilities,
 rather than rates per person-time or similar.
+
+In part because of this unusual handling of time, this model also contains much more "fortune-telling" than a typical sim:
+instances in which the order that decisions are made in the simulation does not correspond to the real-life
+order in which events occur.
+For example, one of the first attributes assigned to each pregnant person, in :ref:`the initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`,
+is their broad pregnancy outcome: whether their pregnancy will result in a live/stillbirth, or an abortion/miscarriage/ectopic pregnancy.
+In real life, however, this doesn't all get determined at the same time.
+Whether a pregnancy is ectopic, for example, is determined at the time of implantation (around 3-4 weeks gestation).
+A full-term pregnancy and one that will end in miscarriage are indistinguishable until the miscarriage occurs, which is much later (up to 24 weeks gestation).
+Our simulation makes all of these decisions at once by choosing broad pregnancy outcome.
+The broad pregnancy outcome then informs the attribute of whether and when the pregnant person will attend antenatal care (ANC).
+This leads to the strange situation that, in our simulation,
+simulants attending early ANC are already "fated" to have, or not have, a miscarriage,
+hence the term "fortune-telling."
+While odd, this is okay as long as we don't need to simulate a *causal* relationship between broad pregnancy outcome and ANC attendance.
+We have to simulate *causal* relationships for each step in the pathways between our interventions and outcomes,
+and these have to be in temporal order; otherwise something an intervention will avert from happening
+could already have occurred before the intervention has a chance to act.
+For all relationships between attributes that aren't in a pathway between an intervention and an outcome,
+however, the order doesn't matter.
+We can choose according to convenience, most commonly what data are available,
+though we should keep in mind that "fortune-telling" does make the model a bit harder to reason about
+and less intuitive.
+In the case of broad pregnancy outcome and ANC attendance, we currently don't model interventions that
+impact either of these attributes.
+Even in the future if we modeled an intervention that increased ANC attendance, that intervention
+wouldn't act through changing broad pregnancy outcome, hence there is no need to model a causal relationship.
 
 The overall simulation model is divided into four "components," which are differentiated by the timespan
 and the simulant that they model.
