@@ -191,7 +191,7 @@ The broad pregnancy outcome then informs the attribute of whether and when the p
 This leads to the strange situation that, in our simulation,
 simulants attending early ANC are already "fated" to have, or not have, a miscarriage,
 hence the term "fortune-telling."
-While odd, this is okay as long as we don't need to simulate a *causal* relationship between broad pregnancy outcome and ANC attendance.
+While odd to think through, this is a valid approach as long as we don't need to simulate a *causal* relationship between broad pregnancy outcome and ANC attendance.
 We have to simulate *causal* relationships for each step in the pathways between our interventions and outcomes,
 and these have to be in temporal order; otherwise something an intervention will avert from happening
 could already have occurred before the intervention has a chance to act.
