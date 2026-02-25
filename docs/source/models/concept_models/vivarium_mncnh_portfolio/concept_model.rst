@@ -1696,6 +1696,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline 
     - Default
     -
+  * - 30.0
+    - Oral iron GA shift refactor
+    - Uses different IFA shifts for ANC and non-ANC attendees and recalibrates MMS shifts as described in `this PR <https://github.com/ihmeuw/vivarium_research/pull/1896>`__
+    - Baseline and MMS scale-up scenarios
+    - Default
+    -
   * -
     - Larger run for neonatal mortality V&V
     - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
@@ -1739,12 +1745,6 @@ Default stratifications to all observers should include scenario and input draw.
     - All
     - Default, note that observed value for ultrasound is now "ultrasound summary" rather than "ultrasound type" with this update
     - Updated data values for trimester-specific GA error values, updated facility choice model and values that reflect the updated GA error values, Remaining pregnancy model refactor run
-  * -
-    - Oral iron GA shift refactor
-    - Uses different IFA shifts for ANC and non-ANC attendees and recalibrates MMS shifts
-    - Baseline and MMS scale-up scenarios
-    - Default
-    -
 
 
 .. note:: 
@@ -2728,6 +2728,15 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm that YLDs due to obstructed labor in Pakistan have been updated and our simulated values match input expectations
     - All checks passed
     - `Model 28.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/257>`__ 
+  * - 30.0
+    - Oral iron GA shift refactor
+    - * Checks from 17.0
+      * Regression testing
+      * Confirm that updated shifts were implemented correctly based on the ANC and IFA categories (in interactive sim)
+      * Confirm that oral iron effect on preterm birth in simulation results meets verification target (was not met in 17.0), verify effect on GA and BW
+      * Facility choice model targets (checks from 15.0)
+    - 
+    - 
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
@@ -2772,14 +2781,6 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that ratio between ultrasound timing categories matches the expected ratio between first trimester ANC attendance and later pregnancy only ANC attendance. More specifically, the following should be true ``standard_first_trimester / standard_later_pregnancy == ai_assisted_first_trimester / ai_assisted_later_pregnancy == (anc_first_trimester_only + anc_first_trimester_and_later_pregnancy) / anc_later_pregnancy_only``
       * Confirm that ultrasounds performed in the first trimester occur only among those who attend ANC in the first trimester according to their ANC attendance category (and likewise for later pregnancy)
       * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type and timing (specific distribution of errors assessed in the interactive simulation and summary "confusion matrix" assessed as part of the facility choice model V&V targets)
-    - 
-    - 
-  * - 
-    - Oral iron GA shift refactor
-    - * Checks from 17.0
-      * Regression testing
-      * Confirm that updated shifts were implemented correctly based on the ANC and IFA categories (in interactive sim)
-      * Confirm that oral iron effect on preterm birth in simulation results meets verification target (was not met in 17.0), verify effect on GA and BW
     - 
     - 
 
