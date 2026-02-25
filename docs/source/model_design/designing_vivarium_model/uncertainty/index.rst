@@ -21,64 +21,65 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_best_practices_monte_carlo_uncertainty:
+.. _vivarium_best_practices_uncertainty:
 
-=========================================================
-Monte Carlo Uncertainty in Vivarium
-=========================================================
+=======================
+Uncertainty in Vivarium
+=======================
 
 .. contents::
    :local:
    :depth: 2
 
-What is Monte Carlo Uncertainty
---------------------------------
+Following `Briggs et al. <https://www.sciencedirect.com/science/article/pii/S1098301512016592>`__ we classify uncertainty
+into the following types:
 
-`See this resource for an overview of Monte Carlo Uncertainty Propagation <https://pubs.acs.org/doi/10.1021/acs.jchemed.0c00096#:~:text=Monte%20Carlo%20simulations%20for%20uncertainty,distributions%20of%20the%20input%20variables>`_
+- **Parameter uncertainty**: uncertainty about simulation inputs (parameters)
+- **Stochastic uncertainty**: uncertainty due to limited size of the simulation
+- **Structural or model uncertainty**: uncertainty about the model structure itself
 
-Uncertainty Parameterization in Vivarium
------------------------------------------
+Parameter uncertainty
+---------------------
 
-What is a draw?
-++++++++++++++++
+We use `Monte Carlo methods <https://en.wikipedia.org/wiki/Monte_Carlo_method>`__ for quantifying parameter uncertainty.
+Monte Carlo methods use repeated random sampling.
+In our case, that means repeatedly running the simulation with different input parameters.
 
-A draw is a sample from a probability distribution. We use the 1,000 draws/samples (or some other :math:`n` number of draws) to represent the distribution, instead of using a continuous density function from which each individual draw was sampled.
+The GBD uses Monte Carlo methods, calling the resulting samples "draws" -- you can learn more about draws `here <https://hub.ihme.washington.edu/pages/viewpage.action?pageId=406389120&spaceKey=ICKB&title=Draws>`__.
+We use these directly for GBD parameters.
+For example, draw 0 of our simulation will utilize the draw 0 value for all GBD parameters used in the simulation.
 
-Draws in GBD
-~~~~~~~~~~~~~
+For non-GBD parameters from literature sources or for GBD covariate estimates, it is unlikely that draw-level estimates will be available and that results are reported as mean estimates with 95% confidence intervals instead. In these cases, we must specify *how* to sample from within a distribution of uncertainty about the parameter values. To do this, we must define some distribution of uncertainty (:ref:`discussed on this page <vivarium_best_practices_statistical_distributions>`) including the type of distribution (such as normal, uniform, lognormal, etc.) and distribution parameters (such as mean/standard deviation, min/max, etc.). Then, for each draw of the Vivarium simulation, a single value will be randomly sampled from this distribution of uncertainty.
 
-With the exception of covariate and population size estimates, the GBD calculates 1,000 draw-level estimates for each outcome value and then reports the mean, 2.5th percentile, and 97.5th percentile across those draw-level values as the final estimate and 95% uncertainty interval for each outcome. The 1,000 draw-level estimates for each outcome are estimated by performing the calculation required to produce that estimate 1,000 times using 1,000 draws of each parameter used in that calculation.  
+We calculate simulation results at the draw-specific level.
+We only summarize final results across all draws as the *last* step before visualization/reporting (see also the :ref:`results processing tips page <vivarium_best_practices_results_processing>`).
 
-.. todo::
+Stochastic uncertainty
+----------------------
 
-  Provide some documentation on if there is any draw-level continuity in the GBD. I've never known but always wondered how this works! Are there any good GBD resources here?
-
-  Also, I believe that future GBD rounds may use 500 draws instead of 1,000. Need to confirm this.
-
-Draws for non-GBD parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For non-GBD parameters from literature sources or for GBD covariate estimates, it is unlikely that draw-level estimates will be available and that results are reported as mean estimates with 95% confidence intervals instead. In these cases, we must specify *how* to sample a given point value from within a distribution of uncertainty about the parameter values. To do this, we must define some distribution of uncertainty (:ref:`discussed on this page <vivarium_best_practices_statistical_distributions>`) including the type of distribution (such as normal, uniform, lognormal, etc.) and distribution parameters (such as mean/standard deviation, min/max, etc.). Then, for each draw of the Vivarium simulation, a single value will be randomly sampled from this distribution of uncertainty.
-
-.. todo::
-
-  Link to some description of (and discuss) the difference between parameter uncertainty and individual-level uncertainty in Vivarium (need to create this page)
-
-Draws in Vivarium
-~~~~~~~~~~~~~~~~~
-
-Vivarium models utilize Monte Carlo uncertainty propagation and are run for some specified number of draws, selecting a different value from within each parameter uncertainty interval for each draw. Notably, input draws for Vivarium simulations will generally be numbered 0-999 such that Vivarium simulation draw 0 will utilize the draw 0 value for all GBD parameters used in the simulation. Then, we calculate simulation results at the draw-specific level and then summarize final results across all draws (see the :ref:`results processing tips page <vivarium_best_practices_results_processing>`).
+Stochastic uncertainty is created by the limited sample size of random events in the simulation.
+Unlike parameter uncertainty which we want to propagate, stochastic uncertainty is something we generally want to minimize.
+We can do this by increasing the number of simulants in our simulation, **per draw** (remember, we need to run a simulation for each draw).
+The only downside of more simulants is more computational cost.
+Vivarium also utilizes a technique called :ref:`common random numbers <vivarium:crn_concept>` to reduce stochastic uncertainty (for a given population size).
 
 What is a random seed?
 ++++++++++++++++++++++
 
-Vivarium utilizes random numbers to determine whether probabilistic events occur or not within a simulation. To read more about how and why Vivarium utilizes random numbers, see the `Vivarium documentation on common random numbers <https://vivarium.readthedocs.io/en/latest/concepts/crn.html>`_. Generally, random seeds serve two practical purposes for us:
+A `random seed <https://en.wikipedia.org/wiki/Random_seed>`__ is a number used to initialize a (pseudo-)random number generator.
+Given the same seed, the same sequence of random numbers will be generated.
+Random seeds serve two practical purposes for us:
 
 1. Ensure that we can reproduce random events (multiple times for the same scenario as well as across scenarios, as discussed in the Vivarium documentation)
 
 2. Act as a tool that enables us to run subsets of a simulated Vivarium population in parallel on the cluster
 
-For details on the first point, please read the Vivarium documentation on common random numbers. With respect to the second point, imagine we have a simulated population of 100,000 individuals. It may take a lot of time to calculate and record what happens to all 100,000 simulants at each timestep of the simulation in a single cluster job. Therefore, it may be preferable to split this population into 10 groups of 10,000 individuals and run each group in its own cluster job *in parallel.* This could allow us to finish calculating and recording what happens to all 100,000 simulants in approximately 1/10th of the time! As we split our simulated population size into subgroups, each subgroup will utilize a different random seed (we would functionally be simulating the *same* simulants if all subgroups shared the same random seed!).
+With respect to the second point, imagine we have a simulated population of 100,000 individuals.
+It may take a lot of time to calculate and record what happens to all 100,000 simulants at each timestep of the simulation in a single cluster job.
+Therefore, *as long as individuals don't interact*, it may be preferable to split this population into 10 groups of 10,000 individuals and run each group in its own cluster job *in parallel.*
+This could allow us to finish calculating and recording what happens to all 100,000 simulants in approximately 1/10th of the time!
+As we split our simulated population size into subgroups, each subgroup will utilize a different random seed
+(we would functionally be simulating the *same* simulants if all subgroups shared the same random seed!).
 
 Therefore, you may hear software engineers or researchers discussing "how many seeds" to include in a given simulation run *per draw*. While this is useful shorthand from a simulation implementation standpoint, researchers should always consider it in tandem with **simulated population size per draw**.
 
@@ -97,8 +98,16 @@ Generally, as the number of random seeds increases and the associated population
 
 Decisions on the degree of parallelization will depend on cluster availability, intensity of resource requirements to run the simulation, and project timelines. For example, if there is not much space on the cluster and a simulation is launched at the end of the day and will be run over night and not checked until morning, it may be preferable to run over fewer random seeds for a longer duration of time. However, if there is a lot of available space on the cluster and the model will be launched in the morning, it may be preferable to run over more random seeds so that it will be ready to view in a shorter amount of time.
 
+Structural or model uncertainty
+-------------------------------
+
+This source of uncertainty is the hardest to quantify.
+It refers to the uncertainty in the model structure itself, including the assumptions and simplifications made during model development.
+This can include the choice of model parameters, the functional forms of relationships between variables, and the inclusion or exclusion of certain attributes or causal effects.
+Generally, all we can do here is list our limitations.
+
 Specifying Vivarium Uncertainty Parameters
-+++++++++++++++++++++++++++++++++++++++++++
+------------------------------------------
 
 The appropriate population size and number of draws may vary between simulations based on:
 
@@ -120,6 +129,6 @@ Signs that the simulation has too few draws:
 Some potentially reasonable starting points:
 
 - 50 input draws
-- 100,000 population size
+- 100,000 population size per draw
 
 To reduce computational intensity throughout model development, it may be desirable to run with a smaller population size and/or smaller number of draws (say 25) throughout the iterative V&V process and then increase these parameters for final production runs.
