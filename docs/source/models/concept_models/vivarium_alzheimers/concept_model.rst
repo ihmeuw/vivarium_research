@@ -681,6 +681,24 @@ scenario, and input draw.
     - * Locations: USA, China, Brazil
     - Stratify disease state transitions and person-time by treatment
     - Add observer for months on treatment
+  * - 11.1
+    - Bugfix: change to new artifact, observer bugfix
+    - Baseline, Alternative Scenario 2
+    - * Locations: USA, China, Brazil
+    - Stratify disease state transitions and person-time by treatment
+    - Add observer for months on treatment
+  * - 12.0
+    - Updates to testing model
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA, China, Brazil
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 12.1
+    - Updates to testing constants: sensitivity and elgibility age
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA, China, Brazil
+    - Stratify disease state transitions and person-time by treatment
+    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -1270,6 +1288,42 @@ scenario, and input draw.
         corresponds to the proportions in the .csv file from the
         dementia modelers; I predict approximately a 69% increase in the
         all-ages prevalence
+    - * V&V checks still passing for mortality, comparison to artifact
+      * Increased prevalence and incidence by expected factor
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2026_01_12_model10.0_vv.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2026_01_12_model10.0_vv_treatment.ipynb>`__
+  * - 11.0
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Check that the new observer for months on treatment works as expected and the months on treatment is uniformly distributed between 1 and 8
+      * Check that changes in treatment ramp and efficacy are implemented
+    - * Incidence, prevalence, mortality all look as expected. Artifact used was incorrect, need to update to Model 10.0 artifact data. 
+      * Observer for months to discontinuation has a bug, need to fix
+      * Efficacy looks as expected 
+      * Treatment ramp up is unknown if changes are correct as changes to testing have not been implemented yet 
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2026_01_26_model11.0_vv.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2026_01_27_model11.0_vv_treatment.ipynb>`__
+  * - 11.1
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Confirm updates to the new observer for months on treatment work as expected
+    - 
+    - 
+  * - 12.0
+    - * NOT running V&V on Model 12.0, will instead run on Model 12.1 
+    - * N/A
+    - * N/A
+  * - 12.1
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Check that testing and treatment only start at age 65
+      * Check that ramp up for testing and treatment is aligned to new input values
+      * Check that the new sensitivity value (50%) is implemented correctly
+      * Check that simulants are being retested every 3-5 years instead of every 3 years 
     -
     -
 
