@@ -60,7 +60,7 @@ There is a significant amount of background research and analysis that has gone 
     - Source module
     - Application
     - Note
-  * - In-facility delivery (IFD) propensity value
+  * - In-facility delivery (IFD) propensity
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
     - Used to determine home birth exposure by comparing to the
       :ref:`causal conditional probabilities for in-facility delivery
@@ -87,13 +87,13 @@ There is a significant amount of background research and analysis that has gone 
     - Value
     - Instructions
     - Note
-  * - A. IFD status
+  * - IFD status
     - *at-home* / *in-facility*
     - Use IFD propensity and believed preterm status to assign IFD
       status as described in the "Application" column of the module
       input table above
     -
-  * - B. Birth facility
+  * - Birth facility
     - *home* / *BEmONC* / *CEmONC*
     - Assign *home* if IFD status is *at-home*. If IFD status is
       *in-facility*, assign BEmONC or CEmONC according to the

@@ -55,6 +55,8 @@ There is no specific decision tree diagram for this module. Rather, the overall 
   * :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
   * :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
   * :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
+  * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
+  * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
 
 .. note::
 
@@ -80,7 +82,7 @@ There are specific variables that will affect these cause models, summarized in 
     - Maternal hemorrhage incidence rate
     - See the :ref:`Misoprostol intervention page <misoprostol_intervention>`
     - 
-  * - Hemoglobin at birth
+  * - Hemoglobin at end of pregnancy
     - :ref:`Hemoglobin component <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
     - Maternal sepsis, maternal hemorrhage, maternal depressive disorders, maternal hypertensive disorders
     - See :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>`
@@ -98,7 +100,10 @@ Incidence, mortality, YLDs, and YLLs due to cause-specific maternal disorders.
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-* There are many other maternal disorders which we do not plan to individually model. 
+* We assume that all deaths due to maternal disorders occur during the intrapartum period prior to the postpartum period although especially for causes of deaths such as "late maternal deaths," this may not be the case.
+* We assume that YLDs due to subcauses in the :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>` cause is spread evenly across all live/stillbirth pregnanices rather than modeling YLDs-per-case among incident cases specifically.
+* We assume that abortion/miscarriage/ectopic pregnancies may not experience any maternal disorders subcauses except for those included in the :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>` cause model
+* We assume there is no direct correlation between maternal disorders and LBWSG exposure apart from that induced through the iron interventions that affect maternal disorders via hemoglobin and also act on LBWSG exposure. However, maternal complications are likely to vary in frequency with gestational age. Obstructed labor incidence is more common among term than preterm births, while hemorrhage is more common among preterm and post-term than term births, for instance.
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++

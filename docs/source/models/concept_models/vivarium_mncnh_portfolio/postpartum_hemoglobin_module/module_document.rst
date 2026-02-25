@@ -42,7 +42,7 @@ Postpartum hemoglobin module
 1.0 Overview
 ++++++++++++
 
-This module exists to model hemoglobin and anemia outcomes in the postpartum period among birthing parents who survive labor and is part of the postpartum component of the simulation. Notably, postpartum hemoglobin is determined from hemoglobin at birth (an output of the pregnancy component hemoglobin module) and whether a simulant experienced postpartum hemorrhage.
+This module exists to model hemoglobin and anemia outcomes in the postpartum period among birthing parents who survive labor and is part of the postpartum component of the simulation. Notably, postpartum hemoglobin is determined from hemoglobin at end of pregnancy (an output of the pregnancy component hemoglobin module) and whether a simulant experienced postpartum hemorrhage.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -65,7 +65,7 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
     - Source module
     - Application
     - Note
-  * - Hemoglobin at birth
+  * - Hemoglobin at end of pregnancy
     - :ref:`Hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
     - Informs postpartum hemoglobin exposure
     - 
@@ -81,7 +81,7 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
   * - Output
     - Value
     - Dependencies
-  * - A. Postpartum hemoglobin
+  * - Postpartum hemoglobin
     - Point value
     - Used for V&V of maternal hemorrhage effect on postpartum hemoglobin
 

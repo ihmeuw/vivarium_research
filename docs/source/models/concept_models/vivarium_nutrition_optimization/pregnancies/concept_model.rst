@@ -373,7 +373,7 @@ Specific outputs for specific models are specified in the following section.
     - N/A
     - Note closed cohort change from IV iron pregnancy model. Custom observer exit at the end of postpartum period? (Bonus ask)
   * - 1.1 
-    - Term length outputs (separation of full and partial term births). For now, full term pregnancies all have 40 weeks duration and partial term births have duration as specified in docs. 
+    - "Term length" outputs (separation of live/stillbirth and abortion/miscarriage/ectopic pregnancies). For now, live/stillbirth pregnancies all have 40 weeks duration and abortion/miscarriage/ectopic pregnancies have duration as specified in docs. 
     - Baseline
     - None
     - * Deaths
@@ -381,10 +381,10 @@ Specific outputs for specific models are specified in the following section.
       * Pregnancy state person-time
       * Pregnancy transition counts
       * Counts of births stratified by pregnancy term lengths
-    - Full term births paired with maternal_ids
+    - Live/stillbirths paired with maternal_ids
     -  
   * - 1.2
-    - LBWSG outputs. Update pregnancy duration to reflect sex-specific LBWSG exposures and separate full term births into live birth and stillbirth outcomes.
+    - LBWSG outputs. Update pregnancy duration to reflect sex-specific LBWSG exposures and separate "live/stillbirths" into live birth and stillbirth outcomes.
     - Baseline
     - None
     - * Deaths
@@ -631,7 +631,7 @@ Specific outputs for specific models are specified in the following section.
     - Confirm pregnancy transitions occurring and at the expected intervals. For this model, all pregnancies hard coded for duration of 40 weeks. Postpartum period duration of 6 weeks.
     - Looks great! Note that pregnancy duration skews when evaluated at age-specific level, but this is not a bug in implementation, rather in analysis. `Model 1.0 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.0.ipynb>`_
   * - 1.1
-    - Confirm that relative distribution of partial versus full term pregnancies is as expected, that partial term pregnancy duration implemented as expected, and that child data looks good
+    - Confirm that relative distribution of abortion/miscarriage/ectopic pregnancies versus live/stillbirth pregnancies is as expected, that abortion/miscarriage/ectopic pregnancy duration implemented as expected, and that child data looks good
     - Looks great! `Model 1.1 V&V notebook can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_1.1.ipynb>`_
   * - 1.2
     - * Check that average duration of "other" birth outcomes is 15 weeks in maternal outputs
@@ -782,7 +782,7 @@ While described in more detail on the individual model documents, the main strat
 
   - We took this strategy because the maternal disorders YLDs as calculated above are already COMO adjusted. Therefore, we do not wish to further adjust these YLDs for comorbid causes that a simulant may possess.
 
-    - Note that this causes underestimation of YLDs due to causes other than maternal disorders from the start of pregnancy until six weeks postpartum by roughly a factor of 1/38 (~2.16 percent) for this simulation given a timestep of one week and an average pregnancy + postpartum combined duration of approximately 38 weeks (6 weeks postpartum + 32 weeks of pregnancy, weighted average of full and partial term pregnancies).
+    - Note that this causes underestimation of YLDs due to causes other than maternal disorders from the start of pregnancy until six weeks postpartum by roughly a factor of 1/38 (~2.16 percent) for this simulation given a timestep of one week and an average pregnancy + postpartum combined duration of approximately 38 weeks (6 weeks postpartum + 32 weeks of pregnancy, weighted average of live/stillbirth and abortion/miscarriage/ectopic pregnancies).
       - We have addressed this limitation during post-processing for the IV iron simulation by multiplying YLDs due to anemia accrued during the postpartum state by :code:`6/5` given that the duration of the maternal disorders state was one week and the duration of the postpartum state was 5 weeks. 
 
 .. todo:: 

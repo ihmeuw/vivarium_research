@@ -27,6 +27,7 @@
   And then add it to the list of decorators above.
 
 .. sectnum::
+  :depth: 3
 
 .. _sex_gender:
 
@@ -75,7 +76,8 @@ Guiding Principles
 
 Our guiding principles for this document can be summarized in three points:  
 
-**1. This work is important**
+This work is important
+~~~~~~~~~~~~~~~~~~~~~~
 
 Inclusive language use is important, and we want to begin by acknowledging the 
 potential harm that using simplistic and gendered language can create.
@@ -101,7 +103,8 @@ We hope to inspire change in other researchers by presenting our studies with ge
 inclusive language and model practices we believe in. For all of these reasons, we feel this 
 guide is very important.
 
-**2. This work is evolving**
+This work is evolving
+~~~~~~~~~~~~~~~~~~~~~
 
 Language is constantly evolving, so there is rarely a single “right” choice and the accepted 
 choice may evolve over time. Therefore, this guide will be a living document that we will 
@@ -112,7 +115,8 @@ While we hope this can be up-to-date and comprehensive, no guide can anticipate 
 recognize every limitation, or be applicable to every research question. We aim to provide enough 
 information that users can understand the spirit of the guide and apply that to their unique needs.  
 
-**3. This is work**
+This is work
+~~~~~~~~~~~~
 
 We acknowledge that there is a cost associated with a transition to gender inclusive language 
 practices from standard, gendered language. Although using gender inclusive language is work, 
@@ -518,7 +522,7 @@ These methods contain a few limitations:
 - More broadly, GBD does not attempt to include any category other than male or female. 
 - Since there are so many different input data sources and they vary by country, it would be very difficult for GBD to have anything other than "undifferentiated sex/gender" in their final results. However, GBD still uses the language "sex" for its variable. 
 
-More information on the methods can be found in the `demographics methods appendix <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30977-6/fulltext#supplementaryMaterial>`_
+More information on the methods can be found in the `demographics methods appendix <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30977-6/fulltext#supplementaryMaterial>`__.
 
 Results
 +++++++

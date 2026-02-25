@@ -191,6 +191,9 @@ Possible coverage values include:
 
 - **Uncovered:** Not supplemented by SQ-LNS currently or in the past. Simulants aged 6 months to 5 years are eligible for this category.
 - **Covered:** Actively receiving SQ-LNS supplementation. Simulants aged 6 months to 18 months are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on wasting and stunting.
+
+  - NOTE: our model assumes that SQ-LNS coverage is not interrupted if/when a child is being :ref:`treated for acute malnutrition <intervention_wasting_tx_combined_protocol>`
+
 - **Received:** No longer actively receiving SQ-LNS supplementation, but did receive SQ-LNS supplementation before the age of 18 months. Simulants aged 18 months to 5 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on stunting, but not wasting.
 
 **2. Utilization:** *use* of the intervention (actually taking the supplements and receiving the effects). This will be determined by the utilization algorithms below.
@@ -496,6 +499,8 @@ Assumptions and Limitations
 - We assume a constant effect of SQ-LNS wasting transition rates. This means that wasting prevalence ratios will equal 1 at the start of supplementation and progress towards the measured prevalence ratios until they reach a level of stability at some later point. We make this assumption in the absence of measured prevalence ratios as mutliple follow-up points.
 
 - We assume that these effect generalize from the populations included in the meta-analysis of SQ-LNS trials to our simulated populations.
+
+- Our model assumes that SQ-LNS coverage is not interrupted while a child is being treated for acute malnutrition. This runs counter to protocols such as the one in [Huybregts-et-al-2019-sqlns]_ that states that SQ-LNS was only distributed to children who were assessed as without acute malnutrition at the CMAM screening. Therefore, we assume that the effects on stunting exposure are maintained regardless of wasting exposure or wasting treatment and additionally assume that SQ-LNS effects on the transition rate from MAM to SAM are maintained regardless of MAM treatment status despite there not being direct evidence to support this modeling decision. Note that our costing model of SQ-LNS could be designed to pause costs associated with SQ-LNS coverage while on active AM treatment (although this was notably not done for the `Nutrition Optimization methods publication <https://link-springer-com.offcampus.lib.washington.edu/article/10.1186/s44263-024-00120-y>`__)
 
 Validation and Verification Criteria
 +++++++++++++++++++++++++++++++++++++

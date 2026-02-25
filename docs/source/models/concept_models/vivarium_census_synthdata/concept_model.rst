@@ -3807,7 +3807,7 @@ simulation. We will need this value for further calculations.
   this 1.45% number was calculated.
   In the pseudopeople tests, we address this issue by including a 95% uncertainty
   interval spanning +/- 3 percentage points from the user-requested noise level
-  on our :ref:`target value for fuzzy checking <fuzzy_checking>`.
+  on our target value for fuzzy checking.
 
 Currently, an individual probability of omission is found for each simulant
 based on their age, sex and race/ethnicity. To allow for higher or lower rates

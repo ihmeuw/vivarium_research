@@ -1,0 +1,34 @@
+digraph {
+    // https://stackoverflow.com/a/2012106/
+    compound=true;
+    rankdir=LR;
+    bgcolor="transparent";
+    node [shape=box]; // Default shape for most nodes
+
+    // Define styles for risk and cause categories
+    // Note: DOT does not have class definitions like MermaidJS, so we apply styles individually
+
+    // Intervention node
+    SQ_LNS [label="SQ-LNS"];
+
+    // Risk node
+    child_wasting [label="child wasting", style=filled, fillcolor="#17B9CF", fontcolor=black];
+
+    // Cause node
+    diarrheal_diseases [label="diarrheal diseases", style=filled, fillcolor="#32CA81", fontcolor=black];
+
+    // Default style for burden
+    node [style="", color=black, fillcolor=""];
+    nonfatal [label="nonfatal (YLDs)"];
+    fatal [label="fatal (YLLs)"];
+
+    subgraph cluster_burden {
+        label="burden";
+        color=black;
+        nonfatal;
+        fatal;
+    }
+
+    SQ_LNS -> child_wasting -> diarrheal_diseases;
+    diarrheal_diseases -> fatal [lhead=cluster_burden];
+}
