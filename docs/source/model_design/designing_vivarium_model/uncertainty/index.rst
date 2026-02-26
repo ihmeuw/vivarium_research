@@ -45,7 +45,7 @@ We use `Monte Carlo methods <https://en.wikipedia.org/wiki/Monte_Carlo_method>`_
 Monte Carlo methods use repeated random sampling.
 In our case, that means repeatedly running the simulation with different input parameters.
 
-The GBD uses Monte Carlo methods, calling the resulting samples "draws" -- you can learn more about draws `here <https://hub.ihme.washington.edu/pages/viewpage.action?pageId=406389120&spaceKey=ICKB&title=Draws>`__.
+The GBD also uses Monte Carlo methods, calling the resulting samples "draws" -- you can learn more about draws `here <https://hub.ihme.washington.edu/pages/viewpage.action?pageId=406389120&spaceKey=ICKB&title=Draws>`__.
 We use these directly for GBD parameters.
 For example, draw 0 of our simulation will utilize the draw 0 value for all GBD parameters used in the simulation.
 
@@ -62,6 +62,14 @@ Unlike parameter uncertainty which we want to propagate, stochastic uncertainty 
 We can do this by increasing the number of simulants in our simulation, **per draw** (remember, we need to run a simulation for each draw).
 The only downside of more simulants is more computational cost.
 Vivarium also utilizes a technique called :ref:`common random numbers <vivarium:crn_concept>` to reduce stochastic uncertainty (for a given population size).
+
+Because we *also* use different randomness between draws in addition to different parameter values,
+we can use the variability in simulation outputs across draws to capture both parameter and stochastic uncertainty.
+However, this overstates our stochastic uncertainty because each draw has a smaller population size
+than the total population size across all draws.
+A simulation that splits its population across more draws will appear to have more stochastic uncertainty
+than a simulation that splits the same total population across fewer draws,
+even though the total number of random events informing our estimate is the same.
 
 What is a random seed?
 ++++++++++++++++++++++
@@ -104,7 +112,14 @@ Structural or model uncertainty
 This source of uncertainty is the hardest to quantify.
 It refers to the uncertainty in the model structure itself, including the assumptions and simplifications made during model development.
 This can include the choice of model parameters, the functional forms of relationships between variables, and the inclusion or exclusion of certain attributes or causal effects.
-Generally, all we can do here is list our limitations.
+
+Strategies we use to address structural uncertainty include:
+
+* Listing our assumptions and limitations in the model documentation and in any publications describing the model
+* Conducting sensitivity analyses to explore how changes in model structure or assumptions affect simulation results
+* Comparing our results to those of other models in the literature to qualitatively assess how differences in model structure may be impacting results
+
+We typically do not include this category of uncertainty in our uncertainty intervals.
 
 Specifying Vivarium Uncertainty Parameters
 ------------------------------------------
