@@ -355,7 +355,13 @@ Since the effect of SQ-LNS on child wasting was measured in prevalence ratios, i
 
 Additionally, due to the multi-compartment transition model of child wasting used in our simulation, we cannot apply the observed prevalence ratios directly to wasting transition rates to replicate the intended prevalence ratios. Rather, we solved for specific transition rate ratios (separately for incidence and recovery rates) that resulted in the intended prevalence ratios of SQ-LNS. Due to the finding by [Huybregts-et-al-2019-sqlns]_ that "the difference between study arms in the probability of developing the first AM episode mainly occurred during the first 4 months of follow-up and then remained constant" (p. 19), we decided to implement age-specific effects such that for those who begin SQ-LNS supplementation at six months of age, the prevalence ratios from the meta-analysis are achieved at 12 months of age and maintained through 23 months of age. 
 
-For standard SQ-LNS effects for which we have data measured in standard prevalence ratios, we calibrated incidence rate effects to replicate prevalence ratios. Howvever, for the SQ-LNS effects modified by wasting burden, we only have the custom ratio-based measures of effects. In these cases, we calibrated the incidence rate effects to replicate these ratio-based measures. Note that we will need to structure our V&V of SQLNS effects so that we evaluate the prevalence-based impacts for standard effects and the ratio-based impacts for modified effects. `See an example here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/64e46a3d0758a10492435b4c8e07dfe5c9981c60/data_prep/sqlns/subnational_effect_vv.ipynb>`__.
+For standard SQ-LNS effects for which we have data measured in standard prevalence ratios, we calibrated incidence rate effects to replicate prevalence ratios. Howvever, for the SQ-LNS effects modified by wasting burden, we only have the custom ratio-based measures of effects. In these cases, we calibrated the incidence rate effects among 6-10 month olds to replicate these ratio-based measures. However, we did NOT account for the ratio-based nature of these effects in the analytic portion of our SQ-LNS effect generation. 
+
+.. todo::
+
+  Determine impacts of this and how to resolve...
+
+Note that we will need to structure our V&V of SQLNS effects so that we evaluate the prevalence-based impacts for standard effects and the ratio-based impacts for modified effects. `See an example here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/64e46a3d0758a10492435b4c8e07dfe5c9981c60/data_prep/sqlns/subnational_effect_vv.ipynb>`__.
 
 Notebooks that generated these values can be found here:
 
