@@ -166,7 +166,7 @@ There have been several recent meta-analyses on the effects of SQ-LNS, outlined 
 
     - Increased prevalence of walking without support at 12 months
 
-Note, we have received data directly from the [Dewey-et-al-2021b]_ authors on the 4-category severity-specific prevalence ratios of SQ-LNS wasting and stunting. This data can be found at :code:`J:\Project\simulation_science\ciff_malnutrition\Data\sqlns_effects\`. There are two files present in this location.
+Note, we have received data directly from the [Dewey-et-al-2021b]_ authors on the 4-category severity-specific prevalence ratios of SQ-LNS wasting and stunting. This data can be found at `J:\Project\simulation_science\ciff_malnutrition\Data\sqlns_effects\`. There are two files present in this location.
 
 - `ipd_list_request_20220727.xlsx` Contains meta-analyzed prevalence ratios of SQ-LNS on four-category wasting and stunting prevalence, both overall and stratified by region (Africa only, Bangladesh only). The prevalence ratios (PR) in this file are calculated using standard prevalence measures (for example, the PR for SQ-LNS on severe stunting is equal to the prevalence of severe stunting among the SQ-LNS-exposed group divided by the prevalence of severe stunting among the non-SQ-LNS-exposed group, where prevalence is the proportion of the population with severe stunting).
 
