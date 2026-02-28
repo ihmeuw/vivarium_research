@@ -197,7 +197,7 @@ and these have to be in temporal order; otherwise something an intervention will
 could already have occurred before the intervention has a chance to act.
 For all relationships between attributes that aren't in a pathway between an intervention and an outcome,
 however, the order doesn't matter.
-We can choose according to convenience, most commonly what data are available,
+We can choose however is convenient, and often make the choice based on the data that are available,
 though we should keep in mind that "fortune-telling" does make the model a bit harder to reason about
 and less intuitive.
 In the case of broad pregnancy outcome and ANC attendance, we currently don't model interventions that
