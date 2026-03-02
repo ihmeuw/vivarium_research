@@ -140,11 +140,11 @@ Because we can assume incident cases of maternal hemorrhage all occur at the end
 we will not model maternal hemorrhage as a state machine
 with dynamic state transitions like our typical cause models. Rather,
 all "transitions" in the model will be modeled as decisions made during
-a single timestep. To obtain the decision probabilities of each incident
-case or maternal hemorrhage death, we will convert GBD's annual incidence
-and mortality rates among women of reproductive age into event rates
-*per birth* (including stillbirths). We will track maternal hemorrhage
-deaths to calculate YLLs, and we will track incident cases to calculate
+a single timestep. To obtain the decision probabilities,
+we will convert GBD's annual rates
+among females of reproductive age into conditional event rates.
+We will track maternal hemorrhage
+deaths to calculate YLLs, and we will track incident cases by severity to calculate
 YLDs.
 
 Assumptions and Limitations
@@ -170,8 +170,11 @@ represent decision probabilities rather than rates per unit time.
 
         start -> alive  [label = "1 - ir"]
         start -> hemorrhage [label = "ir"]
-        hemorrhage -> alive [label = "1 - cfr"]
-        hemorrhage -> dead [label = "cfr"]
+        hemorrhage -> moderate [label = "1 - severe_fraction"]
+        hemorrhage -> severe [label = "severe_fraction"]
+        severe -> alive [label = "1 - cfr"]
+        severe -> dead [label = "cfr"]
+        moderate -> alive [label = "1"]
         alive -> end  [label = "1"]
         dead -> end  [label = "1"]
     }
@@ -188,7 +191,11 @@ represent decision probabilities rather than rates per unit time.
         <other_models_pregnancy_closed_cohort_mncnh>` (due to condition on the overall intrapartum component)
     * - hemorrhage
       - Parent simulant has maternal hemorrhage
-    * - parent not dead of maternal hemorrhage
+    * - moderate
+      - Parent simulant has moderate maternal hemorrhage (i.e., blood loss greater than 500 mL but less than 1 liter)
+    * - severe
+      - Parent simulant has severe maternal hemorrhage (i.e., blood loss 1 liter or more)
+    * - parent did not die of maternal hemorrhage
       - Parent simulant did not die of maternal hemorrhage
     * - parent died of maternal hemorrhage
       - Parent simulant died of maternal hemorrhage
@@ -205,15 +212,18 @@ represent decision probabilities rather than rates per unit time.
     * - ir
       - incidence risk
       - The probability that a pregnant simulant gets maternal hemorrhage
+    * - severe_fraction
+      - severe fraction
+      - The probability that a simulant with maternal hemorrhage has severe hemorrhage (i.e., blood loss of 1 liter or more)
     * - cfr
       - case fatality rate
-      - The probability that a simulant with hemorrhage dies of that hemorrhage
+      - The probability that a simulant with severe hemorrhage dies of that hemorrhage
 
-Data Tables
-+++++++++++
+Probabilities
++++++++++++++
 
-The maternal hemorrhage cause model requires two probabilities, the
-incidence risk (ir) per birth and the case fatality rate (cfr), for use
+The maternal hemorrhage cause model requires three probabilities, the
+incidence risk (ir) per birth, the severe fraction (severe_fraction), and the case fatality rate (cfr), for use
 in the decision graph. The incidence risk per birth will be computed as
 
 .. math::
@@ -222,6 +232,12 @@ in the decision graph. The incidence risk per birth will be computed as
         = \frac{\text{(hemorrhage cases) / person-time}}
             {\text{births / person-time}}
         = \frac{\text{hemorrhage incidence rate}}{\text{birth rate}}.
+
+The severe fraction will be computed as
+
+.. math::
+
+    \text{severe_fraction} = \frac{\text{incidence_s181}}{\text{incidence_s181} + \text{incidence_s180}}.
 
 The case fatality rate will be computed as
 
@@ -235,8 +251,27 @@ The case fatality rate will be computed as
             {\text{hemorrhage incidence rate}}.
     \end{align*}
 
+Calculating years lived with disability
++++++++++++++++++++++++++++++++++++++++
+
+We apply the YLDs per case for the corresponding severity level to each incident case to calculate YLDs.
+
+.. math::
+
+    \text{ylds_per_case_severe} = \frac{\text{yld_rate_s181}}{\text{incidence_s181}}
+
+.. math::
+  
+    \text{ylds_per_case_moderate} = \frac{\text{yld_rate_s180}}{\text{incidence_s180}}
+
+Note that we do *not* include YLDs for mild, moderate, or severe anemia due to maternal hemorrhage (s_182, s_183, s_184) in our calculations because these
+sequelae are already counted under the anemia cause model, and we want to avoid double counting.
+
+Data table
+++++++++++
+
 The following table shows the data needed from GBD for these
-calculations as well as for the calculation of YLDs in the next section.
+calculations.
 
 .. note::
 
@@ -276,6 +311,14 @@ calculations as well as for the calculation of YLDs in the next section.
         condition prevalence. Total population person-time is used in
         the denominator in order to cancel out with the person-time in
         the denominators of birth_rate and csmr_c367.
+    * - incidence_s181
+      - incidence rate of severe maternal hemorrhage
+      - como
+      -
+    * - incidence_s180
+      - incidence rate of moderate maternal hemorrhage
+      - como
+      -
     * - csmr_c367
       - maternal hemorrhage cause-specific mortality rate
       - deaths_c367 / population
@@ -303,27 +346,14 @@ calculations as well as for the calculation of YLDs in the next section.
       - get_covariate_estimates: covariate_id=2267
       - Parameter is not age specific and has no draw-level uncertainty.
         Use mean_value as location-specific point parameter.
-    * - yld_rate_c367
-      - rate of maternal hemorrhage YLDs per person-year
+    * - yld_rate_s180
+      - YLD rate per person-year due to moderate maternal hemorrhage
+      - como
+      - 
+    * - yld_rate_s181
+      - YLD rate per person-year due to severe maternal hemorrhage
       - como
       -
-    * - anemia_yld_rate_c367
-      - rate of YLDs due to anemia caused by maternal hemorrhage per person-year
-      - como, sum of YLDs per person year across sequela 182, 183, and 184
-      - 
-    * - ylds_per_case_c367
-      - YLDs per case of maternal hemorrhage
-      - (yld_rate_c367 - anemia_yld_rate_c367) / incidence_c367
-      - Note that YLDs due to anemia will be calculated in the hemoglobin/anemia model and therefore should not be double-counted in this cause model
-
-Calculating Burden
-++++++++++++++++++
-
-Years of life lost
-"""""""""""""""""""
-
-Years lived with disability
-"""""""""""""""""""""""""""
 
 Validation Criteria
 +++++++++++++++++++
