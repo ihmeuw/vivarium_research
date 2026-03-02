@@ -483,7 +483,7 @@ Additionally, as suggested by the observed prevalence ratios from the meta-analy
     - Modified effects
     - 0.78 (0.65, 0.93) in high burden areas, lognormal distribution of uncertainty
       0.92 (0.83, 1.02) in low burden areas, lognormal distribution of uncertainty
-    - Similar to the modified effect on moderate stunting, this effect is the custom ratio-based measure rather than a prevalence ratio. Notably, there is no difference in the ratio- and prevalence-based standandard SQLNs effects on severe stunting (likely because the prevalence of severe stunting is low, causing the prevalence to approximate the ratio based measure of severe stunting / (moderate, mild, and no stunting combined)).
+    - Similar to the modified effect on moderate stunting, this effect is the custom ratio-based measure rather than a prevalence ratio. Notably, there is no difference in the ratio- and prevalence-based standard SQLNS effects on severe stunting (likely because the prevalence of severe stunting is low, causing the prevalence to approximate the ratio based measure of severe stunting / (moderate, mild, and no stunting combined)).
 
 .. image:: viviarium_strategy_stunting.svg
 
