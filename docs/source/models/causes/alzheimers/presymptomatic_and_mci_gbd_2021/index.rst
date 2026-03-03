@@ -28,9 +28,9 @@
 
 .. _2021_cause_alzheimers_presymptomatic_mci:
 
-==================================================================
+===============================================================
 Alzheimer's disease  with preclinical and MCI stages (GBD 2023)
-==================================================================
+===============================================================
 
 .. contents::
   :local:
@@ -73,7 +73,7 @@ in the envelope for the GBD cause "Alzheimer's disease and
 other dementias" (cause ID 543).
 
 For this simulation, we use the dementia envelope incidence, prevalence, and excess mortality
-from GBD 2023 (release ID 16) and multiply incidence and prevalence by the proportion due to
+from GBD 2023 (release ID 16) and multiply incidence and prevalence by the proportion due at least partially to
 Alzheimer's disease to obtain AD-specific estimates. See the
 `Data Values and Sources`_ section for details.
 
@@ -130,16 +130,17 @@ model these predementia states, so we calibrate transition rates and
 prevalences using GBD data combined
 with additional evidence on state durations. See :ref:`below for details <cause_alzheimers_rate_calibration>`.
 
-To obtain Alzheimer's-specific estimates (excluding "other dementias"), we
-multiply the GBD 2023 dementia envelope by the proportion due to Alzheimer's
+To obtain Alzheimer's-specific estimates, we
+multiply the GBD 2023 dementia envelope by the proportion due at least in part to Alzheimer's
 disease. See the `Data Values and Sources`_ section for details.
 
 .. note::
 
-  The dementia envelope also includes "mixed" dementias, which involve two or
-  more causes, often Alzheimer's disease combined with another etiology. We
-  hypothesize that the modeled treatment will not help these mixed dementias,
-  so we exclude them by using only the Alzheimer's-only proportion.
+  The dementia envelope includes "mixed" dementias, which involve two or
+  more causes, and we assume that 94% of these mixed dementias include Alzheimer's Disease combined with another etiology. While
+  it seems logical that the modeled treatment will not help for these mixed dementias,
+  it is impractical to exclude them from a trial population, and therefore a treatment efficacy measured in a trial will as include
+  a similar proportion of patients with mixed dementias.
 
 Cause Model Diagram
 -------------------
@@ -641,7 +642,7 @@ inference with NumPyro/JAX to fit disease progression rates to GBD data while
 enforcing ODE-based consistency constraints.
 
 To elaborate, we use MCMC optimization to sample from the likely values of the seven parameters listed in the "model parameters" section, subject to the constraints imposed by the DisMod ODEs. Many of these parameters vary as a function of age, and the system of ODEs describes how the age patterns are related (such as prevalent cases at age a+1 are the prevalent cases at age a, minus deaths at age a, plus incident cases.
-The MCMC samples from an objective that can be interpreted as a Bayesian posterior distribution (joint across all parameters), which ends up being a relatively high dimensional distribution, since many of the model parameters have different values for different ages.  Unlike most Bayesian computation, there is not new data to encode in a likelihood function, and the evidence synthesis is focused on finding parameters that satisfy the DisMod equations as well as the "priors" from GBD and other sources.
+The MCMC algorithm draws samples from an objective that can be interpreted as a Bayesian posterior distribution (joint across all parameters), which ends up being a relatively high dimensional distribution, since many of the model parameters have different values for different ages.  Unlike most Bayesian computation, there is not new data to encode in a likelihood function, and the evidence synthesis is focused on finding parameters that satisfy the DisMod equations as well as the "priors" from GBD and other sources.
 
 The calibration is implemented in ``consistent_rates.py`` in the
 `vivarium_csu_alzheimers repository <https://github.com/ihmeuw/vivarium_csu_alzheimers>`_. We fit separate models for males and
@@ -654,9 +655,29 @@ with truncated normal priors on :math:`[0, 1]`:
 - :math:`\delta_\text{BBBM}`, :math:`\delta_\text{MCI}`: Conditional
   prevalences of BBBM and MCI states among AD cases
 - :math:`h_{S \to \text{BBBM}}`: Transition rate from susceptible to BBBM
-- :math:`i`: Population incidence rate of dementia
+- :math:`i`: Total-population incidence rate of dementia
 - :math:`f`: Excess mortality rate
 - :math:`m`: Background (non-AD) mortality rate
+
+
+**ODE Consistency Constraints.** The calibration produces consistent parameters by
+solving a 5-compartment ODE system starting with initial conditions at from age :math:`a` to find the implied values at :math:`a + 5`; we include the squared difference between these implied values and the parameter values in the MCMC objective.  
+
+The state variables are S (susceptible), BBBM, MCI, D (dementia), and
+:math:`D_\text{new}` (cumulative incident dementia, which is used to calibrate the total-population incidence rate of AD dementia). The ODE system is:
+
+.. math::
+
+  \frac{dS}{dt} &= -m \cdot S - h_{S \to \text{BBBM}} \cdot S \\
+  \frac{d(\text{BBBM})}{dt} &= h_{S \to \text{BBBM}} \cdot S - m \cdot \text{BBBM} - h_{\text{BBBM} \to \text{MCI}} \cdot \text{BBBM} \\
+  \frac{d(\text{MCI})}{dt} &= h_{\text{BBBM} \to \text{MCI}} \cdot \text{BBBM} - m \cdot \text{MCI} - h_{\text{MCI} \to D} \cdot \text{MCI} \\
+  \frac{dD}{dt} &= h_{\text{MCI} \to D} \cdot \text{MCI} - (m + f) \cdot D \\
+  \frac{dD_\text{new}}{dt} &= h_{\text{MCI} \to D} \cdot \text{MCI}
+
+The transition rates :math:`h_{\text{BBBM} \to \text{MCI}} = 1 / \Delta_\text{BBBM}`
+and :math:`h_{\text{MCI} \to D} = 1 / \Delta_\text{MCI}` are fixed based on
+literature values in the data values table above and the assumption that the Weibull distribution is approximated acceptably by a constant hazard for calibration purposes.
+Note that :math:`dD_\text{new}` is not required for solving this system of differential equations; it is included to allow us to calibrate the total-population incidence rate of AD dementia.
 
 **Non-ODE Consistency Constraints.** Dementia prevalence derives from total AD prevalence:
 
@@ -671,7 +692,7 @@ weighted by dementia prevalence:
 
   m_\text{all}(a) = m(a) + f(a) \cdot p_\text{dementia}(a)
 
-Population incidence rate of dementia can be expressed in terms of the :math:`h_{\text{MCI} \to D}` hazard because it is the same numerator with a different population time in for the denominator:
+Total-population incidence rate of AD-dementia can be expressed in terms of the :math:`h_{\text{MCI} \to D}` hazard because it is the same numerator with a different population time in for the denominator:
 
 .. math::
 
@@ -695,24 +716,6 @@ And the prevalences and fractions can be represented in terms of compartment siz
 
   p\_\text{dementia} = \frac{D}{S + \text{BBBM + MCI} + D}
 
-
-**ODE Consistency Constraints.** The calibration produces consistent parameters by
-solving a 5-compartment ODE system starting with initial conditions at from age :math:`a` to find the implied values at :math:`a + 5`; we include the squared difference between these implied values and the parameter values in the MCMC objective.  
-
-The state variables are S (susceptible), BBBM, MCI, D (dementia), and
-:math:`D_\text{new}` (cumulative incident dementia, which is used to calibrate the incidence rate of AD dementia). The ODE system is:
-
-.. math::
-
-  \frac{dS}{dt} &= -m \cdot S - h_{S \to \text{BBBM}} \cdot S \\
-  \frac{d(\text{BBBM})}{dt} &= h_{S \to \text{BBBM}} \cdot S - m \cdot \text{BBBM} - h_{\text{BBBM} \to \text{MCI}} \cdot \text{BBBM} \\
-  \frac{d(\text{MCI})}{dt} &= h_{\text{BBBM} \to \text{MCI}} \cdot \text{BBBM} - m \cdot \text{MCI} - h_{\text{MCI} \to D} \cdot \text{MCI} \\
-  \frac{dD}{dt} &= h_{\text{MCI} \to D} \cdot \text{MCI} - (m + f) \cdot D \\
-  \frac{dD_\text{new}}{dt} &= h_{\text{MCI} \to D} \cdot \text{MCI}
-
-The transition rates :math:`h_{\text{BBBM} \to \text{MCI}} = 1 / \Delta_\text{BBBM}`
-and :math:`h_{\text{MCI} \to D} = 1 / \Delta_\text{MCI}` are fixed based on
-literature values in the data values table above and the assumption that the Weibull distribution is approximated acceptably by a constant for calibration purposes.
 
 **Loss Function.** After solving the ODE with initial values for age :math:`a` to find the ODE-implied values at :math:`a + 5`,
 the calibration computes the root-sum-squared log-difference between ODE-impled values and parameter values:
@@ -743,7 +746,7 @@ NUTS with 500 warmup and 500 sample iterations.
     - Artifact key
     - Source and Year
   * - p_dementia
-    - Prevalence of Alzheimer's disease dementia
+    - Prevalence of Alzheimer's Disease dementia
     - ``cause.alzheimers.prevalence``
     - GBD 2023 Dementia Envelope, scaled by fraction due to AD, for year 2023
   * - i_dementia
