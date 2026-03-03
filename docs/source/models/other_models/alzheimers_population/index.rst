@@ -152,15 +152,6 @@ among the above quantities are:
   X^\text{real}_{g,t} = p_{g,t} \cdot Y^\text{real}_{g,t}.
   \end{align*}
 
-and
-
-.. math::
-
-  \begin{align*}
-  % X_{g,t} &= p_g \cdot Y_{g,t} \\
-  % Y_{g,t} & = S \cdot Y^\text{real}_{g,t}
-  \end{align*}
-
 (For :math:`t\ne t_0`, the first relation assumes that our simulated
 population accurately tracks the real-world population over time.)
 Therefore, at time :math:`t_0`,
@@ -257,9 +248,74 @@ indicator function zeros out the entrance rate at times when the
 simulation is not taking a step). Our goal is to determine the entrance
 rate :math:`\lambda_{g,t}` for each :math:`g` and :math:`t`.
 
+Calculating entrance rate when simulating AD-dementia only
+----------------------------------------------------------
+
+First we describe how to calculate the entrance rate in the case where
+we are modeling only simulants with AD-dementia (i.e., we are not
+modeling the presymptomatic or MCI statges). Let :math:`A_g(t)` be the
+cumulative number of incident cases of AD by time :math:`t` in
+demographic group :math:`g` in the real population. Since our simulation
+is scaled down by a factor of :math:`S`, the rate at which we want to
+add simulants is
+
+.. math::
+
+  \lambda_{g,t} = S \cdot \dot A_g(t),
+
+where :math:`\dot A_g(t)` is the derivative of :math:`A_g(t)` with respect
+to :math:`t`.
+To calculate :math:`\lambda_{g,t}`, we rewrite it in terms of quantities
+that we can estimate from the available data:
+
+.. math::
+  :label: AD_entrance_rate_eq
+
+  \lambda_{g,t}
+  = S \cdot \dot A_g(t)
+  = S \cdot \frac{\dot A_g(t)}{Y^\text{real}_{g,t}}
+    \cdot Y^\text{real}_{g,t}
+  = S \cdot i_{g,t}^\text{AD} \cdot Y^\text{real}_{g,t},
+
+where :math:`i_{g,t}^\text{AD} = \dot A_g(t) /Y^\text{real}_{g,t}` is the
+**total population incidence hazard** of AD in demographic group
+:math:`g` at time :math:`t`. We know the model scale :math:`S` from
+:eq:`model_scale_eq` above, and we can estimate the quantities
+:math:`i_{g,t}^\text{AD}` and :math:`Y^\text{real}_{g,t}` from GBD as
+follows.
+
+Let :math:`y(t)` denote the year to which time :math:`t` belongs. If we
+assume that the hazard :math:`i_{g,t}^\text{AD}` is constant throughout
+the year :math:`y(t)`, then it is equal to its person-time-average over
+the year, which is the **total population incidence rate**:
+
+.. math::
+
+  i_{g,t}^\text{AD}
+  = \frac{\text{\# of incident cases of AD in group $g$ in year $y(t)$}}
+    {\text{total person-years in group $g$ in year $y(t)$}}.
+
+This is the :ref:`raw AD incidence rate we pull from GBD <total
+population incidence rate>` (*not* the susceptible population incidence
+rate usually calculated by Vivarium Inputs). If we assume that the
+population :math:`Y^\text{real}_{g,t}` is constant throughout the year
+:math:`y(t)`, then it is equal to its time-average over the year:
+
+.. math::
+
+  Y^\text{real}_{g,t}
+  = \text{average population in group $g$ during the year $y(t)$}.
+
+This is the population we pull from GBD using get_population. Thus,
+:eq:`AD_entrance_rate_eq` expresses the entrance rate
+:math:`\lambda_{g,t}` in terms of quantities we can estimate from data.
+
+
 Calculating entrance rate of simulants in the BBBM-AD state
 -----------------------------------------------------------
-See :ref:`Cause Model Calibration Strategy Docs for details <cause_alzheimers_rate_calibration>`.
+
+The number of simulants to add in the BBBM-AD state was determined through an MCMC optimization
+simultaneously with the other parameters for the cause model. See :ref:`Cause Model Calibration Strategy Docs for details <cause_alzheimers_rate_calibration>`.
 
 
 Data Tables
