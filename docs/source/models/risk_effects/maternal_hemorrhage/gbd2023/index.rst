@@ -103,10 +103,14 @@ Assumptions and Limitations
 - This modeling strategy does not consider that the impact of maternal hemorrhage is already reflected in the pregnancy adjustment factor used for the :ref:`hemoglobin model <2019_hemoglobin_model>` and therefore we may slightly underestimate hemoglobin concentration (and therefore overestimate anemia prevalence) on average during the pregnancy and lactation period by applying an additional negative hemoglobin shift associated with maternal hemorrhage.
 - This modeling strategy applies an average hemoglobin shift for all incident maternal hemorrhage cases during the first six weeks after the end of pregnancy and an average hemoglobin shift for all incident maternal hemorrhage cases during the period from 6 weeks to 9 months after the end of pregnancy, which does not capture the continuous nature of hemoglobin changes over time.
   The continuous curves could result in simulants moving between several anemia categories over the course of the postpartum period, which is not captured here.
+  This also means that the (relatively arbitrary) choices of durations of these periods are impactful.
 - We currently apply the same hemoglobin shift for all incident maternal hemorrhage cases, but in reality the hemoglobin shift likely differs by severity of maternal hemorrhage (moderate vs severe), which is not captured here.
   We may address this in the future based on our approach in the :ref:`previous maternal hemorrhage effects model <2019_2021_risk_effect_maternal_hemorrhage>`.
 - The GBD shift is derived from data about *postpartum* hemorrhage only, and we are applying it to all maternal hemorrhage cases (including antepartum hemorrhage), which may not be appropriate.
   We may address this in the future by using GBD crosswalk models to split antepartum vs postpartum hemorrhage cases.
+- The GBD shift is derived from USA MarketScan data, which may not be generalizable to other locations.
+  In particular, treatment in the USA may be more effective at mitigating the hemoglobin shift associated with maternal hemorrhage than treatment in other locations, which could lead to an underestimation of the hemoglobin shift in locations with less effective treatment.
+  Additionally, the USA has more access to ultrasound than our modeled locations which could lead to better prevention.
 
 .. todo::
 
