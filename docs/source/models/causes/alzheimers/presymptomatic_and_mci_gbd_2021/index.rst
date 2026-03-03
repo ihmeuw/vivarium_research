@@ -495,7 +495,7 @@ table below:
       - s454: 0.449 (0.304-0.595)
   * - :math:`\text{DW}_\text{c543}`
     - Average disability weight of AD-dementia
-    - :math:`\sum_\limits{s\in \text{sequelae_c543}}
+    - :math:`\sum_\limits{s\in \text{sequelae\_c543}}
       \text{DW}_s \cdot \text{prevalence}_s`
     - Prevalence-weighted average disability weight over sequelae,
       computed automatically by Vivarium Inputs. Used to calculate
@@ -641,8 +641,13 @@ GBD. To derive internally consistent rates for these states, we use Bayesian
 inference with NumPyro/JAX to fit disease progression rates to GBD data while
 enforcing ODE-based consistency constraints.
 
-To elaborate, we use MCMC optimization to sample from the likely values of the seven parameters listed in the "model parameters" section, subject to the constraints imposed by the DisMod ODEs. Many of these parameters vary as a function of age, and the system of ODEs describes how the age patterns are related (such as prevalent cases at age a+1 are the prevalent cases at age a, minus deaths at age a, plus incident cases.
-The MCMC algorithm draws samples from an objective that can be interpreted as a Bayesian posterior distribution (joint across all parameters), which ends up being a relatively high dimensional distribution, since many of the model parameters have different values for different ages.  Unlike most Bayesian computation, there is not new data to encode in a likelihood function, and the evidence synthesis is focused on finding parameters that satisfy the DisMod equations as well as the "priors" from GBD and other sources.
+To elaborate, we use MCMC optimization to sample from the likely values of the seven parameters listed in the "model parameters" section below,
+subject to the constraints imposed by the DisMod ODEs. Many of these parameters vary as a function of age, and the system of ODEs describes how
+the age patterns are related (such as prevalent cases at age a+1 are the prevalent cases at age a, minus deaths at age a, plus incident cases.
+The MCMC algorithm draws samples from an objective that can be interpreted as a Bayesian posterior distribution (joint across all parameters),
+which ends up being a relatively high dimensional distribution, since many of the model parameters have different values for different ages.
+Unlike most Bayesian computation, there is not new data to encode in a likelihood function, and the evidence synthesis is focused on finding 
+parameters that satisfy the DisMod equations as well as the "priors" from GBD and other sources.
 
 The calibration is implemented in ``consistent_rates.py`` in the
 `vivarium_csu_alzheimers repository <https://github.com/ihmeuw/vivarium_csu_alzheimers>`_. We fit separate models for males and
