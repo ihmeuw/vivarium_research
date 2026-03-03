@@ -485,6 +485,10 @@ Additionally, as suggested by the observed prevalence ratios from the meta-analy
       0.92 (0.83, 1.02) in low burden areas, lognormal distribution of uncertainty
     - Similar to the modified effect on moderate stunting, this effect is the custom ratio-based measure rather than a prevalence ratio. Notably, there is no difference in the ratio- and prevalence-based standard SQLNS effects on severe stunting (likely because the prevalence of severe stunting is low, causing the prevalence to approximate the ratio based measure of severe stunting / (moderate, mild, and no stunting combined)).
 
+.. note::
+
+  Similar to the effects on Wasting_, erroneously applying ratio-based effects as prevalence ratios is expected to overestimate the effect of SQLNS on stunting in our effect modified sensitivity analysis for both high and low burden locations, but to a greater degree for high burden locations. Because this will cause us to overestimate the degree of effect modification and therefore make it less likely to conclude that our results are robust to the effect modification sensitivity analysis, we have decided to accept this as a limitation given that our conclusion is that our results are already robust to this sensitivity analysis. We will plan not to directly report results from this sensitivity analysis. Note that there should be an analytic solution to convert between the ratio-based and prevalence-based measures, but it has not been pursued as of March 2026.
+
 .. image:: viviarium_strategy_stunting.svg
 
 Mortality
