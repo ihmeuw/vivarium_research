@@ -1727,6 +1727,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline 
     - Default
     -
+  * - 30.0
+    - Oral iron GA shift refactor
+    - Uses different IFA shifts for ANC and non-ANC attendees and recalibrates MMS shifts as described in `this PR <https://github.com/ihmeuw/vivarium_research/pull/1896>`__
+    - Baseline and MMS scale-up scenarios
+    - Default
+    -
   * -
     - Larger run for neonatal mortality V&V
     - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
@@ -2753,6 +2759,15 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm that YLDs due to obstructed labor in Pakistan have been updated and our simulated values match input expectations
     - All checks passed
     - `Model 28.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/257>`__ 
+  * - 30.0
+    - Oral iron GA shift refactor
+    - * Checks from 17.0
+      * Regression testing
+      * Confirm that updated shifts were implemented correctly based on the ANC and IFA categories (in interactive sim)
+      * Confirm that oral iron effect on preterm birth in simulation results meets verification target (was not met in 17.0), verify effect on GA and BW
+      * Facility choice model targets (checks from 15.0)
+    - 
+    - 
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
