@@ -980,6 +980,10 @@ Default stratifications to all observers should include scenario and input draw.
   * - 11. Anemia YLDs
     - * Maternal age group
     - Inclusive of anemia YLDs accrued during pregnancy and the postpartum period
+  * - 12. Anemia person-time
+    - * Maternal age group
+      * Anemia status (not_anemic, mild, moderate, severe)
+    - Inclusive of anemia person-time accrued during pregnancy and the postpartum period
 
 .. todo::
 
