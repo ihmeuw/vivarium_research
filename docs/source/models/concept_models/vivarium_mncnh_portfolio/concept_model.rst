@@ -979,6 +979,7 @@ Default stratifications to all observers should include scenario and input draw.
       All of these quantities can aggregate across seeds in the normal way (summation).
   * - 11. Anemia YLDs
     - * Maternal age group
+      * Anemia status (not_anemic, mild, moderate, severe)
     - Inclusive of anemia YLDs accrued during pregnancy and the postpartum period
   * - 12. Anemia person-time
     - * Maternal age group
