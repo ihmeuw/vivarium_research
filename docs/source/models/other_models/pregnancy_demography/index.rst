@@ -77,8 +77,8 @@ This document is intended to represent the demography model for a simulation of 
   for abortion and miscarriage (miscarriages included are only those that require medical care, and abortions need medical care by definition)
   and ectopic pregnancy (ectopic pregnancies need medical care by definition).
   This is a bit confusing to think about because it is an example of "fortune-telling" -- inclusion in our cohort at the *beginning* of pregnancy depends on what happens at the *end*.
-  We may write more about this general kind of thing in the future (as it is very common in the MNCNH simulation)
-  but in this specific case, we know it is fine to fortune-tell because we don't have any interventions that
+  See the note about fortune-telling in the :ref:`concept model document <2024_concept_model_vivarium_mncnh_portfolio>`.
+  In this specific case, we know it is fine to fortune-tell because we don't have any interventions that
   causally impact whether pregnancies have a medically-relevant outcome.
 
 GBD Modeling Strategy
