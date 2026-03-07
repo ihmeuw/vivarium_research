@@ -166,7 +166,17 @@ There have been several recent meta-analyses on the effects of SQ-LNS, outlined 
 
     - Increased prevalence of walking without support at 12 months
 
-Note, we have received data directly from the [Dewey-et-al-2021b]_ authors on the 4-category severity-specific prevalence ratios of SQ-LNS wasting and stunting. This data can be found at :code:`J:\Project\simulation_science\ciff_malnutrition\Data\sqlns_effects\ipd_list request_20220727.xlsx` and will be what we use to inform our analysis.
+Note, we have received data directly from the [Dewey-et-al-2021b]_ authors on the 4-category severity-specific prevalence ratios of SQ-LNS wasting and stunting. This data can be found at J:\Project\simulation_science\ciff_malnutrition\Data\sqlns_effects\. There are two files present in this location.
+
+  - ipd_list_request_20220727.xlsx Contains meta-analyzed prevalence ratios of SQ-LNS on four-category wasting and stunting prevalence, both overall and stratified by region (Africa only, Bangladesh only). The prevalence ratios (PR) in this file are calculated using standard prevalence measures (for example, the PR for SQ-LNS on severe stunting is equal to the prevalence of severe stunting among the SQ-LNS-exposed group divided by the prevalence of severe stunting among the non-SQ-LNS-exposed group, where prevalence is the proportion of the population with severe stunting).
+
+  - ipd_list_request_20240620.xlsx Contains meta-analyzed effect of SQ-LNS on four-category wasting and stunting prevalence, both overall and stratified by wasting and stunting burden level (enabling evaluation of SQLNS effect modification by background wasting and stunting burden). **WARNING:** the measures of effect in this file are NOT prevalence ratios. Rather, they are measures of effect on a ratio measure of the prevalence of given wasting or stunting category relative to the prevalence of all other wasting or stunting categories that are "healthier" than it. For example, the measure of effect of SQLNS on moderate stunting in this file is a ratio of the prevalence of moderate stunting divided by the combined prevalence of mild stunting and no stunting among the SQ-LNS exposed population relative to that same measure among the SQ-LNS unexposed population. 
+
+The relevant values from each of these files have been compiled into a `single CSV found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/64e46a3d0758a10492435b4c8e07dfe5c9981c60/data_prep/sqlns/sqlns_effects_uc_davis.csv>`__.
+
+.. warning::
+
+  In the nutrition optimization subnational analyses as of March 2026, we have erroneously applied ratio-based measures of effects as prevalence ratios for the wasting 10-18 month age group (although not for the 6-10 month age group) as well as for stunting effects specifically for the effect modified sensitivity analyses. See the Wasting_ and Stunting_ sections below for more details and modeling implications. 
 
 .. _`sqlns-baseline-parameters`:
 
@@ -347,7 +357,11 @@ Wasting
 
 Since the effect of SQ-LNS on child wasting was measured in prevalence ratios, it is not known whether SQ-LNS reduces wasting prevalence through a reduction of wasting incidence or duration. Therefore, we will run a sensitivity analysis in which SQ-LNS affects wasting incidence rates and another in which SQ-LNS affects wasting recovery rates. There is some evidence from [Huybregts-et-al-2019-sqlns]_ that SQ-LNS affects the incidence of acute malnutrition and some evidence that it may affect time to recovery, although it appears that the pathway through incidence is the primary route by which SQ-LNS impacts wasting prevalence from this limited evidence. 
 
-Additionally, due to the multi-compartment transition model of child wasting used in our simulation, we cannot apply the observed prevalence ratios directly to wasting transition rates to replicate the intended prevalence ratios. Rather, we solved for specific transition rate ratios (separately for incidence and recovery rates) that resulted in the intended prevalence ratios of SQ-LNS. Due to the finding by [Huybregts-et-al-2019-sqlns]_ that "the difference between study arms in the probability of developing the first AM episode mainly occurred during the first 4 months of follow-up and then remained constant" (p. 19), we decided to implement age-specific effects such that for those who begin SQ-LNS supplementation at six months of age, the prevalence ratios from the meta-analysis are achieved at 12 months of age and maintained through 23 months of age. Notably, these values were calibrated to the child population in Ethiopia and the calibration may not hold for all other populations and should be tested before applying to different locations. 
+Additionally, due to the multi-compartment transition model of child wasting used in our simulation, we cannot apply the observed prevalence ratios directly to wasting transition rates to replicate the intended prevalence ratios. Rather, we solved for specific transition rate ratios (separately for incidence and recovery rates) that resulted in the intended prevalence ratios of SQ-LNS. Due to the finding by [Huybregts-et-al-2019-sqlns]_ that "the difference between study arms in the probability of developing the first AM episode mainly occurred during the first 4 months of follow-up and then remained constant" (p. 19), we decided to implement age-specific effects such that for those who begin SQ-LNS supplementation at six months of age, the prevalence ratios from the meta-analysis are achieved at 12 months of age and maintained through 23 months of age. 
+
+For standard SQ-LNS effects for which we have data measured in standard prevalence ratios, we calibrated incidence rate effects to replicate prevalence ratios. However, for the SQ-LNS effects modified by wasting burden, we only have the custom ratio-based measures of effects. In these cases, we calibrated the incidence rate effects among 6-10 month olds to replicate these ratio-based measures. However, we did NOT account for the ratio-based nature of these effects in the analytic portion of our SQ-LNS effect generation. This will cause us to overestimate the impact of SQLNS on mild and moderate wasting in our scenarios with SQLNS effect modification. Notably, this overestimation will be present for both the high and low burden locations, but there is expected to be a greater degree of overestimation in the high burden locations than the low burden locations (as those locations have a greater prevalence of wasting and therefore the ratios will differ from prevalence to a greater degree). Therefore, the impact of applying these ratio based effects as prevalence ratios in our analytic solution for SQLNS effects on wasting transition rates will exaggerate the degree of effect modification between high and low burden locations. Given that this approach makes it *less* likely for our analyses to be robust to effect modification sensitivity analysis, we decided to accept this limitation for our targeted SQ-LNS publication given that the conclusion is that our analyses are in fact robust to SQLNS effect modification. We will plan not to directly report results from this effect modification analysis given these known issues. Note that there should be an analytic solution to convert from the ratio-based to prevalence-based effects if needed, but it has not been pursued as of March 2026.
+
+Note that we will need to structure our V&V of SQLNS effects so that we evaluate the prevalence-based impacts for standard effects and the ratio-based impacts for modified effects. `See an example here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/64e46a3d0758a10492435b4c8e07dfe5c9981c60/data_prep/sqlns/subnational_effect_vv.ipynb>`__.
 
 Notebooks that generated these values can be found here:
 
@@ -452,24 +466,28 @@ Additionally, as suggested by the observed prevalence ratios from the meta-analy
     - Prevalence ratio
     - Standard effects
     - 0.89 (0.86, 0.93), lognormal distribution of uncertainty
-    - 
+    - Effect is a standard prevalence ratio
   * - Moderate (cat2) stunting exposure
     - Prevalence ratio
     - Modified effects
     - 0.83 (0.78, 0.89) in high burden areas, lognormal distribution of uncertainty
       0.87 (0.77, 0.98) in low burden areas, lognormal distribution of uncertainty
-    - 
+    - Effect is the custom ratio-based measure (prevalence of moderate stunting / prevalence of mild and no stunting combined) among the SQLNS group relative to the no SQLNS group. These custom ratio-based measures were erroneously applied as prevalence ratios in the nutrition optimization simulation (`see this V&V notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/64e46a3d0758a10492435b4c8e07dfe5c9981c60/data_prep/sqlns/subnational_effect_vv.ipynb>`__). While we do not have prevalence ratio modified effects to compare to, the ratio-based standard effects systematically exaggerate the impact of SQLNS on moderate stunting relative to the prevalence-based standard effects (a 14% vs 11% reduction in moderate stunting), implying that this error will cause us to systematically overestimate the impact of SQLNS on moderate stunting in our simulation. Note that since the magnitude of this bias is relativly modest and the modified SQLNS effects were included only as a sensitivity analysis, we have accepted this limitation for now. If we were to revisit this in the future, we should ideally receive prevalence-based modified effects on child stunting or construct a calibration calculation to convert the ratio-based effects to prevalence-based effects for application to our simulation.
   * - Severe (cat1) stunting exposure
     - Prevalence ratio
     - Standard effects
     - 0.83 (0.78, 0.90), lognormal distribution of uncertainty
-    - 
+    - Effect is a standard prevalence ratio
   * - Severe (cat1) stunting exposure
     - Prevalence ratio
     - Modified effects
     - 0.78 (0.65, 0.93) in high burden areas, lognormal distribution of uncertainty
       0.92 (0.83, 1.02) in low burden areas, lognormal distribution of uncertainty
-    - 
+    - Similar to the modified effect on moderate stunting, this effect is the custom ratio-based measure rather than a prevalence ratio. Notably, there is no difference in the ratio- and prevalence-based standard SQLNS effects on severe stunting (likely because the prevalence of severe stunting is low, causing the prevalence to approximate the ratio based measure of severe stunting / (moderate, mild, and no stunting combined)).
+
+.. note::
+
+  Similar to the effects on Wasting_, erroneously applying ratio-based effects as prevalence ratios is expected to overestimate the effect of SQLNS on stunting in our effect modified sensitivity analysis for both high and low burden locations, but to a greater degree for high burden locations. Because this will cause us to overestimate the degree of effect modification and therefore make it less likely to conclude that our results are robust to the effect modification sensitivity analysis, we have decided to accept this as a limitation given that our conclusion is that our results are already robust to this sensitivity analysis. We will plan not to directly report results from this sensitivity analysis. Note that there should be an analytic solution to convert between the ratio-based and prevalence-based measures, but it has not been pursued as of March 2026.
 
 .. image:: viviarium_strategy_stunting.svg
 
