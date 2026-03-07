@@ -282,7 +282,7 @@ References
 
 .. [Degefie-Hailegebriel-et-al-2017]
 
-  `Degefie Hailegebriel T, Mulligan B, Cousens S, Mathewos B, Wall S, Bekele A, Russell J, Sitrin D, Tensou B, Lawn J, de Graft Johnson J, Legesse H, Hailu S, Nigussie A, Worku B, Baqui A. Effect on Neonatal Mortality of Newborn Infection Management at Health Posts When Referral Is Not Possible: A Cluster-Randomized Trial in Rural Ethiopia. Glob Health Sci Pract. 2017 Jun 27;5(2):202-216. doi: 10.9745/GHSP-D-16-00312. PMID: 28611102; PMCID: PMC5487084. <https://pubmed-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/28611102/>`_
+  `Degefie Hailegebriel T, Mulligan B, Cousens S, Mathewos B, Wall S, Bekele A, Russell J, Sitrin D, Tensou B, Lawn J, de Graft Johnson J, Legesse H, Hailu S, Nigussie A, Worku B, Baqui A. Effect on Neonatal Mortality of Newborn Infection Management at Health Posts When Referral Is Not Possible: A Cluster-Randomized Trial in Rural Ethiopia. Glob Health Sci Pract. 2017 Jun 27;5(2):202-216. doi: 10.9745/GHSP-D-16-00312. PMID: 28611102; PMCID: PMC5487084. <https://pmc.ncbi.nlm.nih.gov/articles/PMC5487084/>`_
 
 .. [Gill-et-al-2014]
 
