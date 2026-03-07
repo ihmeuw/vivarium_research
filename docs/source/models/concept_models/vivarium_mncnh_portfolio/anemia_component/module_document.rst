@@ -32,7 +32,7 @@
 .. _2024_vivarium_mncnh_portfolio_anemia_module:
 
 ======================================
-Anemia Module
+Anemia YLDs Module
 ======================================
 
 .. contents::
@@ -86,10 +86,17 @@ strategy can be summarized as follows:
 
         - Pregnancy duration (according to intervention-modified gestational age) - gestational timing of first trimester ANC visit for those who attended the first trimester but not later pregnancy ANC visit
 
+    5. Progress to the six weeks after the end of pregnancy hemoglobin timestep
 
-.. todo::
+      - For simulants who survived labor and progressed to the postpartum period, update their anemia YLD values according to their hemoglobin exposure during the first six weeks after pregnancy and a duration of six weeks (in years) 
 
-  Include summary of the strategy for accruing postpartum anemia YLDs once implementation plan is formed
+      - For simulants who did not survive labor and therefore do not progress to the postpartum period, do not update their anemia YLDs given that they should not experience any YLDs in the post-pregnancy timesteps
+    
+    6. Progress to the nine months after the end of pregnancy hemoglobin timestep
+
+      - For simulants who survived labor and progressed to the postpartum period, update their anemia YLD values according to their hemoglobin exposure between six weeks and nine months after pregnancy and a duration of 40 - 6 = 34 weeks (in years) 
+
+      - For simulants who did not survive labor and therefore do not progress to the postpartum period, do not update their anemia YLDs given that they should not experience any YLDs in the post-pregnancy timesteps
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -121,7 +128,11 @@ strategy can be summarized as follows:
     - :ref:`Hemoglobin module<2024_vivarium_mncnh_portfolio_hemoglobin_module>`
     - Used to calculate anemia YLDs
     - 
-  * - Postpartum hemoglobin
+  * - Hemoglobin during the first six weeks after the end of pregnancy
+    - :ref:`Postpartum hemoglobin module<2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
+    - Used to calculate anemia YLDs
+    - Note that this value will be missing for simulants who did not survive labor
+  * - Hemoglobin between six weeks and nine months after the end of pregnancy
     - :ref:`Postpartum hemoglobin module<2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
     - Used to calculate anemia YLDs
     - Note that this value will be missing for simulants who did not survive labor
@@ -164,9 +175,9 @@ strategy can be summarized as follows:
 2.4 Module Action Points
 ---------------------------
 
-We assume that hemoglobin may vary throughout the course of pregnancy/postpartum at the following distinct points opportunities: (1) following IFA/MMS supplementation at the first trimester ANC visit, (2) following IFA/MMS supplementation or IV iron administration at the later pregnancy ANC visit, and (3) following an incident case of maternal hemorrhage during labor, which will persist through the end of the postpartum period. Therefore, we will calculate YLDs due to anemia during pregnancy in this model as a weighted sum over the course of pregnancy stratified by these specified events.
+We assume that hemoglobin may vary throughout the course of pregnancy/postpartum at the following distinct points opportunities: (1) following IFA/MMS supplementation at the first trimester ANC visit, (2) following IFA/MMS supplementation or IV iron administration at the later pregnancy ANC visit, and (3) following an incident case of maternal hemorrhage during labor, and (4) six weeks after the end of pregnancy when the simulant is no longer "physiologically pregnant." Therefore, we will calculate YLDs due to anemia during pregnancy in this model as a weighted sum over the course of pregnancy stratified by these specified events.
 
-Note that simulants who died during labor should not experience any YLDs due to anemia in the postpartum period. In other words, :math:`\text{DW}(\text{hgb}^\text{pp}_i) * \text{duration}^\text{pp} = 0` for these simulants.
+Note that simulants who died during labor should not experience any YLDs due to anemia in the post-pregnancy timesteps. In other words, :math:`\text{DW}_\text{preg}(\text{hgb}^\text{6w}_i) * \text{duration}^\text{6w} = \text{DW}(\text{hgb}^\text{9m}_i) * \text{duration}^\text{9m} = 0` for these simulants.
 
 .. list-table:: Hemoglobin module action point
   :header-rows: 1
@@ -175,16 +186,16 @@ Note that simulants who died during labor should not experience any YLDs due to 
     - Value
     - Note
   * - I
-    - :math:`\text{DW}(\text{hgb}^\text{start}_i) * \text{duration}^\text{preg}_i + \text{DW}(\text{hgb}^\text{pp}_i) * \text{duration}^\text{pp}` 
+    - :math:`\text{DW}_\text{preg}(\text{hgb}^\text{start}_i) * \text{duration}^\text{preg}_i + \text{DW}_\text{preg}(\text{hgb}^\text{6w}_i) * \text{duration}^\text{6w} + \text{DW}(\text{hgb}^\text{9m}_i) * \text{duration}^\text{9m}` 
     - No interventions in pregnancy
   * - II
-    - :math:`\text{DW}(\text{hgb}^\text{start}_i) * T^\text{first trimester}_i + \text{DW}(\text{hgb}^\text{birth}_i) * (\text{duration}^\text{preg}_i - T^\text{first trimester}_i) + \text{DW}(\text{hgb}^\text{pp}_i) * \text{duration}^\text{pp}` 
+    - :math:`\text{DW}_\text{preg}(\text{hgb}^\text{start}_i) * T^\text{first trimester}_i + \text{DW}_\text{preg}(\text{hgb}^\text{birth}_i) * (\text{duration}^\text{preg}_i - T^\text{first trimester}_i) + \text{DW}_\text{preg}(\text{hgb}^\text{6w}_i) * \text{duration}^\text{6w} + \text{DW}(\text{hgb}^\text{9m}_i) * \text{duration}^\text{9m}` 
     - Received IFA/MMS and/or IV iron at later pregnancy visit
   * - III
-    - :math:`\text{DW}(\text{hgb}^\text{start}_i) * T^\text{later pregnancy}_i + \text{DW}(\text{hgb}^\text{birth}_i) * (\text{duration}^\text{preg}_i - T^\text{later pregnancy}_i) + \text{DW}(\text{hgb}^\text{pp}_i) * \text{duration}^\text{pp}` 
+    - :math:`\text{DW}_\text{preg}(\text{hgb}^\text{start}_i) * T^\text{later pregnancy}_i + \text{DW}_\text{preg}(\text{hgb}^\text{birth}_i) * (\text{duration}^\text{preg}_i - T^\text{later pregnancy}_i) + \text{DW}_\text{preg}(\text{hgb}^\text{6w}_i) * \text{duration}^\text{6w} + \text{DW}(\text{hgb}^\text{9m}_i) * \text{duration}^\text{9m}` 
     - Received IFA/MMS at first trimester visit, no IV iron
   * - IV
-    - :math:`\text{DW}(\text{hgb}^\text{start}_i) * T^\text{first trimester}_i + \text{DW}(\text{hgb}^\text{start}_i + \text{shift}^\text{IFA/MMS}) * (T^\text{later pregnancy}_i - T^\text{first trimester}_i) + \text{DW}(\text{hgb}^\text{birth}_i) * (\text{duration}^\text{preg}_i - T^\text{later pregnancy}_i) + \text{DW}(\text{hgb}^\text{pp}_i) * \text{duration}^\text{pp}` 
+    - :math:`\text{DW}_\text{preg}(\text{hgb}^\text{start}_i) * T^\text{first trimester}_i + \text{DW}_\text{preg}(\text{hgb}^\text{start}_i + \text{shift}^\text{IFA/MMS}) * (T^\text{later pregnancy}_i - T^\text{first trimester}_i) + \text{DW}_\text{preg}(\text{hgb}^\text{birth}_i) * (\text{duration}^\text{preg}_i - T^\text{later pregnancy}_i) + \text{DW}_\text{preg}(\text{hgb}^\text{6w}_i) * \text{duration}^\text{6w} + \text{DW}(\text{hgb}^\text{9m}_i) * \text{duration}^\text{9m}` 
     - Received IFA/MMS at first trimester visit, IV iron at later pregnancy visit
 
 .. list-table:: Parameters
@@ -193,24 +204,33 @@ Note that simulants who died during labor should not experience any YLDs due to 
   * - Parameter
     - Value
     - Source/Note
-  * - :math:`\text{DW}(\text{hgb})`
-    - Function that returns the anemia disability weight for a given hemoglobin level. Note that as written this function will need to be able to handle simulants who have died in the intrapartum component and did not progress to the postpartum period (i.e. return zero for these simulants)
+  * - :math:`\text{DW}_\text{preg}(\text{hgb})`
+    - Function that returns the anemia disability weight for a given hemoglobin level during pregnancy. Note that as written this function will need to be able to handle simulants who have died in the intrapartum component and did not progress to the postpartum period (i.e. return zero for these simulants)
     - See the :ref:`anemia impairment document<2019_anemia_impairment>` for anemia hemoglobin thresholds (use the pregnancy-specific values) and disability weights
+  * - :math:`\text{DW}(\text{hgb})`
+    - Function that returns the anemia disability weight for a given hemoglobin level not during pregnancy. Note that as written this function will need to be able to handle simulants who have died in the intrapartum component and did not progress to the postpartum period (i.e. return zero for these simulants)
+    - See the :ref:`anemia impairment document<2019_anemia_impairment>` for anemia hemoglobin thresholds (use the non-pregnancy-specific values) and disability weights
   * - :math:`\text{hgb}^\text{start}_i`
     - Hemoglobin exposure at the start of pregnancy for individual simulant
     - :ref:`Hemoglobin module<2024_vivarium_mncnh_portfolio_hemoglobin_module>`
   * - :math:`\text{hgb}^\text{birth}_i`
     - Hemoglobin exposure at birth for individual simulant
     - :ref:`Hemoglobin module<2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-  * - :math:`\text{hgb}^\text{pp}_i`
-    - Postpartum hemoglobin for individual simulant
+  * - :math:`\text{hgb}^\text{6w}_i`
+    - Hemoglobin during first six weeks after end of pregnancy for individual simulant
+    - :ref:`Postpartum hemoglobin module<2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`. Note that there are some simulants who will not survive to the postpartum period and will have undefined postpartum hemoglobin.
+  * - :math:`\text{hgb}^\text{9m}_i`
+    - Hemoglobin during the period from 6 weeks to 9 months after the end of pregnancy for individual simulant
     - :ref:`Postpartum hemoglobin module<2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`. Note that there are some simulants who will not survive to the postpartum period and will have undefined postpartum hemoglobin.
   * - :math:`\text{duration}^\text{preg}_i`
     - Pregnancy duration in years for individual simulant
     - :ref:`Pregnancy II module <2024_vivarium_mncnh_portfolio_pregnancy_module>`, note a unit conversion to years may be necessary
-  * - :math:`\text{duration}_\text{pp}`
+  * - :math:`\text{duration}_\text{6w}`
     - 6 * 7 / 365.25
-    - We track six weeks of postpartum anemia YLDs
+    -
+  * - :math:`\text{duration}_\text{9m}`
+    - 34 * 7 / 365.25
+    -
   * - :math:`\text{shift}_\text{IFA/MMS}`
     - Effect of IFA/MMS on hemoglobin
     - :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
@@ -253,13 +273,17 @@ Note that simulants who died during labor should not experience any YLDs due to 
 
 - We assume uniform distribution across assumed plausible ranges for timing of ANC visits as well as timing of pregnancies that end in ectopic pregnancy/miscarriage/abortion (as detailed on the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`) rather than informing these parameters with data
 - We assume that interventions affect anemia YLDs at the time of administration at ANC (as according to the timed assumptions in the two prior bullets) with no additional delay 
-- We only track anemia YLDs for six weeks postpartum
+- We do not model any deaths in the 9 months after pregnancy, so we assume that all simulants who survive labor also survive 9 months afterward and therefore experience anemia YLDs during this period. This may lead to a slight overestimation of anemia YLDs.
+- We do not model simulants changing age groups during the 9 months after pregnancy, and thereby slightly underestimate the ages
+  of people in this period.
+  The impact of this on anemia YLDs depends on how hemoglobin changes with age: if hemoglobin increases with age, then we will underestimate anemia YLDs during this period, and if hemoglobin decreases with age, then we will overestimate anemia YLDs during this period.
+  We expect this effect to be small.
 - We use the exposure value for gestational age at birth as an input to determining the timing of ANC visits in our simulation. Given that gestational age at birth exposures are affected by interventions and therefore are different between scenarios and also change across timesteps within scenarios as simulants gain access to different interventions, our model is limited in that there may be slightly different ANC visit timing for the same simulant in different scenarios. Additionally, there may be differences in the pregnancy duration value used to determine timing of an ANC visit and the final gestational age at birth exposure for a maternal/child dyad. Given that the ANC visit timing variable only affects anemia YLDs in our simulation (which is expected to be a small portion of overall impact), we have deemed this an acceptable limitation. 
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-- Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values. Run the following command to load the data from GBD 2023:
+- Baseline simulated anemia YLDs, excluding the six weeks to nine months after pregnancy timestep, should match corresponding pregnancy-specific GBD values. Run the following command to load the data from GBD 2023:
 
 .. code-block:: python
 
