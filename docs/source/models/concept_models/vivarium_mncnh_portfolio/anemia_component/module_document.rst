@@ -276,8 +276,10 @@ Note that simulants who died during labor should not experience any YLDs due to 
 - We do not model any deaths in the 9 months after pregnancy, so we assume that all simulants who survive labor also survive 9 months afterward and therefore experience anemia YLDs during this period. This may lead to a slight overestimation of anemia YLDs.
 - We do not model simulants changing age groups during the 9 months after pregnancy, and thereby slightly underestimate the ages
   of people in this period.
-  The impact of this on anemia YLDs depends on how hemoglobin changes with age: if hemoglobin increases with age, then we will underestimate anemia YLDs during this period, and if hemoglobin decreases with age, then we will overestimate anemia YLDs during this period.
-  We expect this effect to be small.
+  The impact of this on anemia YLDs depends on how hemoglobin differs between a simulant's age group and the next:
+  if the next age group has higher hemoglobin, and the simulant would have aged into it, then we will underestimate anemia YLDs during this period,
+  and if the next age group has lower hemoglobin, and the simulant would have aged into it, then we will overestimate anemia YLDs during this period.
+  We expect this effect to be small, but it is unclear whether it will lead to an overall overestimation or underestimation of anemia YLDs.
 - We use the exposure value for gestational age at birth as an input to determining the timing of ANC visits in our simulation. Given that gestational age at birth exposures are affected by interventions and therefore are different between scenarios and also change across timesteps within scenarios as simulants gain access to different interventions, our model is limited in that there may be slightly different ANC visit timing for the same simulant in different scenarios. Additionally, there may be differences in the pregnancy duration value used to determine timing of an ANC visit and the final gestational age at birth exposure for a maternal/child dyad. Given that the ANC visit timing variable only affects anemia YLDs in our simulation (which is expected to be a small portion of overall impact), we have deemed this an acceptable limitation. 
 
 4.0 Verification and Validation Criteria

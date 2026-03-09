@@ -66,11 +66,11 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
     - Note
   * - Hemoglobin at end of pregnancy
     - :ref:`Hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-    - Informs postpartum and post-postpartum hemoglobin exposure
+    - Informs hemoglobin exposure between birth and 6 weeks postpartum, and between 6 weeks and 9 months postpartum
     - 
   * - Maternal hemorrhage incidence
     - :ref:`Maternal disorders module <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
-    - Incident maternal hemorrhage cases decrease postpartum and post-postpartum hemoglobin exposure
+    - Incident maternal hemorrhage cases decrease hemoglobin exposure between birth and 6 weeks postpartum, and between 6 weeks and 9 months postpartum
     - 
 
 
@@ -91,8 +91,8 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
 * We assume the pregnancy-specific hemoglobin thresholds for anemia apply to the first six weeks after the end of pregnancy
 * We apply the effect of maternal hemorrhage on hemoglobin to the first six weeks after the end of pregnancy and the period from 6 weeks to 9 months after the end of pregnancy as discrete timesteps,
   which does not capture the continuous nature of hemoglobin changes over time
-* We assume that all modifications that have been made to hemoglobin during pregnancy last only until six weeks after the end of pregnancy,
-  *except* for the effect of maternal hemorrhage
+* We assume that the impacts of all interventions that have modified hemoglobin during pregnancy
+  last only until six weeks after the end of pregnancy
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
