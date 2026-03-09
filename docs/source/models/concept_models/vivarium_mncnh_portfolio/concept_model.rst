@@ -2800,10 +2800,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Anemia YLDs bugfixes 2
     - Same as 29.0.1, and confirm that oral iron effects on gestational age are being applied
     - Round 1:
+
       * Oral iron effects on gestational age are fixed
       * Anemia YLDs still overestimated, but to a lesser extent than in 29.0
 
       Round 2:
+
       * Negative durations are present in anemia YLD calculations both due to abortion/miscarriage/ectopic pregnancies
         having a "placeholder" later ANC time which may be after the end of pregnancy, *and* due to stillbirths having
         their later ANC time calculated based on pregnancy duration before stillbirth truncation is applied
