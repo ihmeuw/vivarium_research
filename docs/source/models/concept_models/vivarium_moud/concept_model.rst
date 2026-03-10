@@ -158,9 +158,9 @@ The simulation also includes an "Incarceration Model" representing each individu
        incarcerated [label="Incarcerated"];
        formerly_incarcerated [label="Formerly Incarcerated"];
 
-       not_incarcerated -> incarcerated [label="c_ni_i"];
-       incarcerated -> formerly_incarcerated [label="c_i_fi"];
-       formerly_incarcerated -> incarcerated [label="c_fi_i"];
+       not_incarcerated -> incarcerated [label="h_ni_i"];
+       incarcerated -> formerly_incarcerated [label="h_i_fi"];
+       formerly_incarcerated -> incarcerated [label="h_fi_i"];
    }
 
 This submodel uses a state machine with three states:
@@ -187,13 +187,13 @@ Transitions between these states occur based on defined rates:
    * - Symbol
      - Name
      - Definition
-   * - c_ni_i
+   * - h_ni_i
      - Rate of first incarceration
      - Rate at which individuals transition from not incarcerated to incarcerated.
-   * - c_i_fi
+   * - h_i_fi
      - Rate of release
      - Rate at which incarcerated individuals transition to formerly incarcerated.
-   * - c_fi_i
+   * - h_fi_i
      - Rate of reincarceration
      - Rate at which formerly incarcerated individuals transition back to incarceration.
 
@@ -228,16 +228,16 @@ The Housing Model requires data on the distribution of the population across the
 4.2 Incarceration Model Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Incarceration Model requires data on the distribution of the population across the three states (Not Incarcerated, Incarcerated, and Formerly Incarcerated) and the transition rates between them (``c_ni_i``, ``c_i_fi``, and ``c_fi_i``).
+The Incarceration Model requires data on the distribution of the population across the three states (Not Incarcerated, Incarcerated, and Formerly Incarcerated) and the transition rates between them (``h_ni_i``, ``h_i_fi``, and ``h_fi_i``).
 
 * **Population Distribution:**
     * **Not Incarcerated:** Baseline estimates for the population without a history of incarceration may be derived indirectly by combining census population estimates with administrative or survey-based estimates of current and prior incarceration.
     * **Incarcerated:** Data on jail and prison populations can be obtained from the **Bureau of Justice Statistics (BJS)** and state or local corrections agencies.
     * **Formerly Incarcerated:** Estimates of the population living in the community after incarceration may require synthesis across correctional release data, longitudinal surveys, and reentry-focused studies.
 * **Transition Rates:** Estimating the rates of movement *between* these states requires combining administrative data with assumptions about follow-up periods and competing risks:
-    * *First Incarceration (``c_ni_i``):* Incident incarceration may be informed by correctional admissions data, arrest-to-incarceration pipelines, and published estimates stratified by age, sex, race and ethnicity, and geography where available.
-    * *Release (``c_i_fi``):* Release rates can be informed by average length of stay, prison and jail release counts, and jurisdiction-specific reporting on discharge patterns.
-    * *Reincarceration (``c_fi_i``):* Reincarceration rates may be estimated from recidivism reports, cohort studies following release, or linked administrative data.
+    * *First Incarceration* (``h_ni_i``): Incident incarceration may be informed by correctional admissions data, arrest-to-incarceration pipelines, and published estimates stratified by age, sex, race and ethnicity, and geography where available.
+    * *Release* (``h_i_fi``): Release rates can be informed by average length of stay, prison and jail release counts, and jurisdiction-specific reporting on discharge patterns.
+    * *Reincarceration* (``h_fi_i``): Reincarceration rates may be estimated from recidivism reports, cohort studies following release, or linked administrative data.
 * **Interaction with Housing and Homelessness:** Housing instability is an important consideration for this model. For example, Augustine and Kushel report that "Formerly incarcerated people in the United States are almost ten times more likely than the general public to experience homelessness" in their review of community supervision, housing insecurity, and homelessness (`Augustine and Kushel, 2022 <https://pmc.ncbi.nlm.nih.gov/articles/PMC9762769/>`_). This supports modeling strong interactions between incarceration history and the Housing Model, especially during the period following release.
 * **Stratification and Interaction:** A critical step involves estimating how incarceration, release, and reincarceration rates differ based on OUD status, housing status, and demographic factors. This may require linked administrative data, literature-derived relative risks, or carefully documented assumptions where direct evidence is limited.
 
