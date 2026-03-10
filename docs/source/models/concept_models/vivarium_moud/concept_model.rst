@@ -57,7 +57,7 @@ Opioid Epidemic  Simulation
 ++++++++++
 
 This document outlines the concept model for simulating interventions that might reduce the burden of the opioid epidemic.
-We categorize interventions into four broad groups: (1) Enhanced Delivery of Evidence-Based Treatment such as Medications for Opioid Use Disorder (MOUD), (2) Recovery Support, (3) Harm Reduction, and (4) Data Monitoring and Primary Prevention. The core of this model is a state-transition model that includes states such as "opioid use disorder" and "opioid misuse-but-not-disorder", as well as treatment and recovery states. The model also includes a housing component that captures whether individuals are living in a private residence or are unhoused.
+We categorize interventions into four broad groups: (1) Enhanced Delivery of Evidence-Based Treatment such as Medications for Opioid Use Disorder (MOUD), (2) Recovery Support, (3) Harm Reduction, and (4) Data Monitoring and Primary Prevention. The core of this model is a state-transition model that includes states such as "opioid use disorder" and "opioid misuse-but-not-disorder", as well as treatment and recovery states. The model also includes a housing component that captures whether individuals are living in a private residence or are unhoused, and an incarceration component that tracks whether individuals are currently incarcerated, have no history of incarceration, or have a history of incarceration.
 
 2 Modeling aims and objectives
 ++++++++++++++++++++++++++++++
@@ -143,10 +143,72 @@ Key features and interactions of this submodel include:
 - **Parameterization:** Rates need to be parameterized using available data sources on housing instability and homelessness, potentially stratified by relevant demographic factors and OUD status where data permits. The bulk of data that can inform the OUD cause model comes from household and school surveys that do not fully capture people experiencing homelessness.
 
 
+3.3 Incarceration Model
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The simulation also includes an "Incarceration Model" representing each individual's incarceration status. This submodel tracks transitions between three states: not incarcerated, incarcerated, and formerly incarcerated.
+
+.. graphviz::
+
+   digraph incarceration_model {
+       rankdir = TD;
+       node [shape=box];
+
+       not_incarcerated [label="Not Incarcerated"];
+       incarcerated [label="Incarcerated"];
+       formerly_incarcerated [label="Formerly Incarcerated"];
+
+       not_incarcerated -> incarcerated [label="c_ni_i"];
+       incarcerated -> formerly_incarcerated [label="c_i_fi"];
+       formerly_incarcerated -> incarcerated [label="c_fi_i"];
+   }
+
+This submodel uses a state machine with three states:
+
+.. list-table:: State Definitions
+   :widths: 15 30
+   :header-rows: 1
+
+   * - State
+     - Definition
+   * - Not Incarcerated
+     - Individual is living in the community and has not previously been incarcerated.
+   * - Incarcerated
+     - Individual is currently incarcerated in jail, prison, or another correctional setting.
+   * - Formerly Incarcerated
+     - Individual is living in the community after a prior period of incarceration.
+
+Transitions between these states occur based on defined rates:
+
+.. list-table:: Transition Rate Definitions
+   :widths: 5 15 30
+   :header-rows: 1
+
+   * - Symbol
+     - Name
+     - Definition
+   * - c_ni_i
+     - Rate of first incarceration
+     - Rate at which individuals transition from not incarcerated to incarcerated.
+   * - c_i_fi
+     - Rate of release
+     - Rate at which incarcerated individuals transition to formerly incarcerated.
+   * - c_fi_i
+     - Rate of reincarceration
+     - Rate at which formerly incarcerated individuals transition back to incarceration.
+
+Key features and interactions of this submodel include:
+
+- **Interdependence with OUD Status:** Transition rates *within* this Incarceration Model may be influenced by the individual's state in the Core Disease Model. For example, untreated OUD may increase the risk of incarceration, while treatment or recovery may reduce that risk.
+- **Interaction with Housing:** The Housing Model and the Incarceration Model are closely linked. Housing instability may increase incarceration risk, and release from incarceration may alter the probability of experiencing homelessness or returning to stable housing.
+- **Influence on OUD Transitions:** An individual's incarceration status may also affect OUD-related transitions. For example, incarceration may interrupt treatment continuity, while the period following release may be associated with elevated overdose risk, relapse risk, or changes in treatment engagement.
+- **Parameterization:** Rates need to be parameterized using available data on incarceration, release, and reincarceration, potentially stratified by demographic factors, OUD status, and housing status where data permits.
+
+
 4 Data Notes
 ++++++++++++
 
-Parameterizing the MOUD simulation requires integrating data from various sources to define initial population states and the transition rates governing movement between states in both the Core Disease Model and the Housing Model. For details on Core Disease Model parameters (OUD prevalence, treatment coverage, transition rates, and the NumPyro/DisMod-AT methodology), see the :ref:`Opioid Use Disorder Cause Model <2023_cause_opioid_use_disorder>` documentation.
+Parameterizing the MOUD simulation requires integrating data from various sources to define initial population states and the transition rates governing movement between states in the Core Disease Model, the Housing Model, and the Incarceration Model. For details on Core Disease Model parameters (OUD prevalence, treatment coverage, transition rates, and the NumPyro/DisMod-AT methodology), see the :ref:`Opioid Use Disorder Cause Model <2023_cause_opioid_use_disorder>` documentation.
 
 Key data requirements and methodologies for the simulation include:
 
@@ -163,7 +225,23 @@ The Housing Model requires data on the distribution of the population across the
     * *Returns to Private Residence (``h_uh_pr``):* HMIS data and longitudinal studies of people experiencing homelessness are key sources for estimating transitions back to private residence.
 * **Stratification and Interaction:** A critical step involves estimating how these population distributions and transition rates differ based on OUD status (from the Core Disease Model) and demographic factors (age, sex). This often requires analyzing linked data sources (if available), applying relative risks derived from literature, or making informed assumptions due to data scarcity linking OUD directly to housing transitions at a population level.
 
-4.2 General Considerations
+4.2 Incarceration Model Parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Incarceration Model requires data on the distribution of the population across the three states (Not Incarcerated, Incarcerated, and Formerly Incarcerated) and the transition rates between them (``c_ni_i``, ``c_i_fi``, and ``c_fi_i``).
+
+* **Population Distribution:**
+    * **Not Incarcerated:** Baseline estimates for the population without a history of incarceration may be derived indirectly by combining census population estimates with administrative or survey-based estimates of current and prior incarceration.
+    * **Incarcerated:** Data on jail and prison populations can be obtained from the **Bureau of Justice Statistics (BJS)** and state or local corrections agencies.
+    * **Formerly Incarcerated:** Estimates of the population living in the community after incarceration may require synthesis across correctional release data, longitudinal surveys, and reentry-focused studies.
+* **Transition Rates:** Estimating the rates of movement *between* these states requires combining administrative data with assumptions about follow-up periods and competing risks:
+    * *First Incarceration (``c_ni_i``):* Incident incarceration may be informed by correctional admissions data, arrest-to-incarceration pipelines, and published estimates stratified by age, sex, race and ethnicity, and geography where available.
+    * *Release (``c_i_fi``):* Release rates can be informed by average length of stay, prison and jail release counts, and jurisdiction-specific reporting on discharge patterns.
+    * *Reincarceration (``c_fi_i``):* Reincarceration rates may be estimated from recidivism reports, cohort studies following release, or linked administrative data.
+* **Interaction with Housing and Homelessness:** Housing instability is an important consideration for this model. For example, Augustine and Kushel report that "Formerly incarcerated people in the United States are almost ten times more likely than the general public to experience homelessness" in their review of community supervision, housing insecurity, and homelessness (`Augustine and Kushel, 2022 <https://pmc.ncbi.nlm.nih.gov/articles/PMC9762769/>`_). This supports modeling strong interactions between incarceration history and the Housing Model, especially during the period following release.
+* **Stratification and Interaction:** A critical step involves estimating how incarceration, release, and reincarceration rates differ based on OUD status, housing status, and demographic factors. This may require linked administrative data, literature-derived relative risks, or carefully documented assumptions where direct evidence is limited.
+
+4.3 General Considerations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Data from different sources must be reconciled for the specific simulation timeframe, location (e.g., Seattle, King County, Washington State), and population demographics. Significant data processing, harmonization, and potentially imputation may be necessary, particularly for deriving transition rates and stratifying them appropriately. Assumptions made due to data limitations should be clearly documented alongside the model specifications.

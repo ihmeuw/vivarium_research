@@ -87,7 +87,7 @@ The severity of OUD is classified as mild (2-3 criteria), moderate (4-5 criteria
 
 **DSM-IV-TR Criteria** (used in GBD 2023): Requires at least 3 of 7 criteria for opioid dependence (see GBD 2023 Modeling Strategy section for full criteria).
 
-OUD is a chronic condition with a relapsing and remitting nature, where individuals may cycle between periods of active use, treatment, recovery, and relapse.
+OUD is a chronic condition with a relapsing and remitting nature, where individuals may cycle between periods of opioid misuse without disorder, active disorder, treatment, recovery, and relapse.
 
 Clinical Course and Natural History
 ------------------------------------
@@ -118,7 +118,7 @@ Simulation Modeling Approaches for OUD
 
 The opioid overdose crisis is driven by an intersecting set of social, structural, and economic forces. Simulation models are a valuable tool to help us understand and address this complex, dynamic, and nonlinear social phenomenon. [Cerda-2022]_ A systematic review of simulation models for opioid use and overdose identified several modeling frameworks used in this domain:
 
-- **Compartmental models** (36% of opioid epidemic models): Track population flows between defined health states (e.g., susceptible, with OUD, on treatment). Most commonly used approach for modeling OUD dynamics at the population level.
+- **Compartmental models** (36% of opioid epidemic models): Track population flows between defined health states (e.g., susceptible, misuse, with OUD, on treatment). Most commonly used approach for modeling OUD dynamics at the population level.
 
 - **Markov models** (20% of models): Account for state transitions with memory, allowing transition probabilities to depend on prior states or time spent in current state.
 
@@ -294,21 +294,23 @@ Vivarium Modeling Strategy
 Scope
 -----
 
-This cause model represents opioid use disorder as a four-state compartmental model capturing susceptible, active disorder, on treatment, and recovery states. The model is designed to be compatible with GBD 2023 estimates while allowing for simulation of medication treatment interventions (Medications for Opioid Use Disorder, or MOUD).
+This cause model represents opioid use disorder as a five-state compartmental model capturing susceptible, misuse, active disorder, on treatment, and recovery states. The model is designed to be compatible with GBD 2023 estimates while allowing for simulation of medication treatment interventions (Medications for Opioid Use Disorder, or MOUD).
 
 The model captures:
 
-- Incidence of new OUD cases in the susceptible population
-- Transitioning from from OUD to Recovery without MOUD
+- Initiation of opioid misuse among susceptible individuals
+- Cessation of opioid misuse without progression to disorder
+- Progression from opioid misuse to opioid use disorder
+- Transitioning from OUD to recovery without MOUD
 - Treatment initiation and engagement with MOUD
 - MOUD Treatment failure
 - MOUD Treatment recovery
-- Excess mortality associated with untreated and treated OUD states
+- Excess mortality associated with misuse, untreated, and treated OUD states
 
 State Definitions
 -----------------
 
-The model includes four mutually exclusive states:
+The model includes five mutually exclusive states:
 
 .. list-table:: State Definitions
    :widths: 5 10 30
@@ -319,7 +321,10 @@ The model includes four mutually exclusive states:
      - Definition
    * - S
      - **S**\usceptible
-     - Individual does not currently have opioid use disorder
+     - Individual does not currently misuse opioids, does not currently have opioid use disorder, and is not in the recovery state
+   * - M
+     - **M**\isuse
+     - Individual is currently misusing opioids but does not meet criteria for opioid use disorder
    * - C
      - **C**\ondition (With Condition)
      - Individual has opioid use disorder but is not receiving medication treatment (MOUD)
@@ -332,7 +337,14 @@ The model includes four mutually exclusive states:
 
 **State Characteristics**
 
-- **Susceptible (S)**: This state includes individuals who have never had OUD. These individuals face the baseline population risk of developing OUD.
+- **Susceptible (S)**: This state includes individuals who are not currently misusing opioids and do not currently have OUD. These individuals face the baseline population risk of initiating opioid misuse.
+
+- **Misuse (M)**: This state represents individuals who are using opioids in a way that does not meet diagnostic criteria for OUD. Individuals in this state:
+
+  - Do not contribute to OUD prevalence estimates
+  - Face elevated mortality risk (excess mortality)
+  - May stop misuse and return to the susceptible state
+  - May progress to active opioid use disorder
 
 - **With Condition (C)**: This state represents individuals with active, untreated OUD. Individuals in this state:
 
@@ -363,11 +375,14 @@ Cause Model Diagram
       node [shape=box, style=rounded];
 
       susceptible [label="Susceptible\n(S)"]
+      misuse [label="Misuse\n(M)"]
       with_condition [label="With Condition\n(Not receiving MOUD)\n(C)"]
       on_treatment [label="On Treatment\n(Receiving MOUD)\n(T)"]
       recovery [label="Recovery state\n(Not receiving MOUD)\n(R)"]
 
-      susceptible -> with_condition [label="Incidence\n(i)"]
+      susceptible -> misuse [label="Incidence\nof Misuse\n(im)"]
+      misuse -> susceptible [label="Cessation\nof Misuse\n(cm)"]
+      misuse -> with_condition [label="Incidence\nof Disorder\n(id)"]
       with_condition -> recovery [label="Untreated\nRecovery\n(r1)"]
       with_condition -> on_treatment [label="Treatment\nInitiation\n(ti)"]
       on_treatment -> with_condition [label="Treatment\nFailure\n(tf)"]
@@ -385,9 +400,15 @@ Transitions
    * - Symbol
      - Name
      - Definition
-   * - i
-     - Incidence rate
-     - Rate at which susceptible individuals develop opioid use disorder. This represents new cases of OUD arising in the susceptible population.
+   * - im
+     - Misuse incidence rate
+     - Rate at which susceptible individuals initiate opioid misuse.
+   * - cm
+     - Misuse cessation rate
+     - Rate at which individuals in the Misuse state stop misusing opioids and return to the susceptible state.
+   * - id
+     - Disorder incidence rate
+     - Rate at which individuals in the Misuse state develop opioid use disorder.
    * - r1
      - Untreated recovery rate
      - Rate at which individuals without MOUD transition to recovery. Untreated recovery may occur through spontaneous behavior change, informal social support, or other mechanisms.
@@ -424,8 +445,12 @@ States Data
      - Post-CoDCorrect cause-level CSMR for opioid use disorder (cause_id=562)
    * - S
      - Prevalence
-     - :math:`1 - \text{prevalence}_{\text{lifetime}}`
-     - Complement of lifetime OUD prevalence
+     - :math:`1 - \text{prevalence}_{\text{misuse}} - \text{prevalence}_{\text{lifetime}}`
+     - Complement of current misuse prevalence and lifetime OUD prevalence
+   * - M
+     - Prevalence
+     - :math:`\text{prevalence}_{\text{misuse}}`
+     - Current prevalence of opioid misuse without disorder
    * - C
      - Prevalence
      - :math:`\text{prevalence}_{\text{c562}} \times (1 - \text{treatment_coverage})`
@@ -442,6 +467,10 @@ States Data
      - Excess mortality rate (EMR)
      - 0
      - No excess mortality in susceptible state
+   * - M
+     - Excess mortality rate (EMR)
+     - ?
+     - TODO: develop a strategy to attribute some fraction of fatal overdose to misuse that is not OUD
    * - C
      - Excess mortality rate (EMR)
      - :math:`\text{emr}_{\text{base}} \times (1 + \text{emr_multiplier}_{\text{untreated}})`
@@ -458,6 +487,10 @@ States Data
      - Disability weight
      - 0
      - No disability burden in susceptible state
+   * - M
+     - Disability weight
+     - ?
+     - TODO: determine if some amount of burden is appropriate for misuse state (e.g. for non-fatal overdose)
    * - C
      - Disability weight
      - :math:`\frac{1}{\text{prevalence}_{\text{c562}}} \times \sum\limits_{s \in \text{sequelae}} \text{disability_weight}_s \times \text{prevalence}_s`
@@ -488,11 +521,21 @@ Transition Data
      - Sink
      - Value
      - Notes
-   * - i
+   * - im
      - S
+     - M
+     - External misuse data and calibration assumptions
+     - Incidence rate of opioid misuse. Not directly provided by GBD OUD models and likely requires external survey or literature inputs.
+   * - cm
+     - M
+     - S
+     - External misuse data and calibration assumptions
+     - Misuse cessation rate. Represents stopping opioid misuse without progression to disorder.
+   * - id
+     - M
      - C
-     - Derived from DisMod-AT/NumPyro model
-     - Incidence rate of OUD. Estimated using NumPyro implementation of DisMod-AT-like model.
+     - Derived from DisMod-AT/NumPyro model plus misuse-state assumptions
+     - Incidence rate of OUD from the Misuse state. Estimated using the NumPyro implementation together with assumptions or external data on the misuse state.
    * - r1
      - C
      - R
@@ -546,10 +589,14 @@ Data Sources
      - ST-GPR model of percentage of dependents in treatment (if we can find it!)
      - Proportion of individuals with OUD receiving MOUD
      - This covariate is mentioned in the description of the IHME-indirect data creation in the Supplementary Appendix section on OUD
-   * - Transition rates (i, r1, ti, td, ts, r2)
+   * - prevalence_misuse
+     - External survey data or literature
+     - Prevalence of opioid misuse without disorder
+     - Not part of the core GBD OUD outputs; likely requires external estimation
+   * - Transition rates (im, cm, id, r1, ti, tf, ts, r2)
      - NumPyro DisMod-AT-like model
      - Internally consistent transition rates
-     - Estimated using Bayesian model that integrates GBD prevalence, treatment coverage, and other available data to solve for consistent set of transition rates
+     - Estimated using Bayesian model that integrates GBD prevalence, treatment coverage, and other available data to solve for a consistent set of transition rates; misuse-related transitions may require external priors or assumptions
    * - emr_base
      - GBD 2023 (DisMod-MR 2.1)
      - Base excess mortality rate for OUD
@@ -566,25 +613,27 @@ Data Sources
 Estimation of Transition Rates Using NumPyro/DisMod-AT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A key challenge in parameterizing this model is that GBD 2023 does not directly provide all required transition rates (particularly non-MOUD recovery *r1*, treatment initiation *ti*, treatment failure *tf*, treatment-associated recovery *ts*, and relapse *r2*). To address this, we use a **NumPyro implementation of a DisMod-AT-like model**.
+A key challenge in parameterizing this model is that GBD 2023 does not directly provide all required transition rates, particularly misuse initiation *im*, misuse cessation *cm*, disorder incidence *id*, non-MOUD recovery *r1*, treatment initiation *ti*, treatment failure *tf*, treatment-associated recovery *ts*, and relapse *r2*. To address this, we use a **NumPyro implementation of a DisMod-AT-like model** together with external inputs or assumptions for the misuse state.
 
 **Methodology**
 
 DisMod-AT (Disease Model – Age-and-Time) is a Bayesian meta-analytic tool designed to synthesize diverse epidemiological data to produce internally consistent transition rates for compartmental disease models. Our NumPyro implementation:
 
-1. **Model Structure**: Configures a four-state compartmental model (Susceptible, With Condition, On Treatment, Recovery) matching the structure defined above
+1. **Model Structure**: Configures a five-state compartmental model (Susceptible, Misuse, With Condition, On Treatment, Recovery) matching the structure defined above
 
 2. **Input Data**: Incorporates:
 
    - GBD 2023 prevalence estimates for OUD
+  - External prevalence estimates for opioid misuse without disorder, when available
    - Treatment coverage ratios (proportion of OUD cases receiving MOUD)
-   - GBD 2023 incidence estimates (as prior/constraint)
+  - GBD 2023 incidence estimates for OUD (as prior/constraint on progression to disorder)
    - Excess mortality estimates from GBD 2023
-   - Literature-based estimates or assumptions about remission and treatment rates
+  - Literature-based estimates or assumptions about misuse transitions, remission, and treatment rates
 
 3. **Bayesian Inference**: Uses Markov Chain Monte Carlo (MCMC) sampling to estimate the posterior distribution of all transition rates conditional on:
 
    - Observed prevalence matching GBD estimates
+  - Misuse prevalence matching available external estimates when available
    - Treatment coverage matching available data
    - Internal consistency constraints (prevalence, incidence, remission, and mortality must be mutually consistent in dynamic equilibrium)
    - Weakly informative prior distributions to help with convergence
@@ -594,7 +643,7 @@ Assumptions and Limitations
 
 **Key Assumptions**
 
-1. **Four-State Model**: The model simplifies the complex heterogeneity of OUD into four discrete states. In reality, OUD severity exists on a continuum, and individuals may have varying levels of use, dependence, and treatment engagement.
+1. **Five-State Model**: The model simplifies the complex heterogeneity of opioid use and OUD into five discrete states. In reality, misuse, disorder severity, treatment engagement, and recovery exist on a continuum.
 
 2. **MOUD as Single Treatment State**: The "on_treatment" state aggregates all forms of MOUD (methadone, buprenorphine, naltrexone) despite important differences in effectiveness, retention, and accessibility across these medications.
 
@@ -602,7 +651,9 @@ Assumptions and Limitations
 
 4. **Treatment Effectiveness**: The model assumes that MOUD substantially reduces disability and mortality. Actual treatment effectiveness varies by medication type, dosage, adherence, and individual factors.
 
-5. **Transition to Recovery without Medication**: The non-medication remission rate (*r*) represents transition to recovery without medication treatment. This is poorly characterized in the literature and is primarily identified through model calibration to match observed prevalence.
+5. **Misuse State Simplification**: The misuse state aggregates a broad range of opioid use patterns that do not meet OUD criteria. Transitions into and out of misuse are likely to be weakly identified unless supported by external data.
+
+6. **Transition to Recovery without Medication**: The non-medication remission rate (*r1*) represents transition to recovery without medication treatment. This is poorly characterized in the literature and is primarily identified through model calibration to match observed prevalence.
 
 **Limitations**
 
@@ -610,7 +661,9 @@ Assumptions and Limitations
 
 2. **Comorbidities**: The model does not explicitly represent common comorbidities (mental health disorders, polysubstance use, infectious diseases) that influence OUD progression and treatment outcomes.
 
-6. **Overdose Mortality**: While the model includes excess mortality associated with OUD, overdose deaths may be coded separately in mortality data and require careful reconciliation with OUD-attributed deaths.
+3. **Misuse Data Availability**: Population data on opioid misuse without disorder may be sparse, inconsistently defined, or not directly aligned with the model's Misuse state, which can make initialization and calibration difficult.
+
+4. **Overdose Mortality**: While the model includes excess mortality associated with OUD, overdose deaths may be coded separately in mortality data and require careful reconciliation with OUD-attributed deaths.
 
 
 Validation Criteria
@@ -620,17 +673,19 @@ Model validation should compare simulated outputs to reference data:
 
 1. **Prevalence**: Total OUD prevalence in the simulation (C + T states) should match GBD 2023 prevalence estimates within uncertainty bounds
 
-2. **Treatment Coverage**: The proportion of individuals with OUD in the treatment state (T / (C + T)) should match observed treatment coverage ratios
+2. **Misuse Prevalence**: Misuse prevalence in the simulation (M state) should match external survey or literature estimates when such inputs are used
 
-3. **Cause-Specific Mortality**: Deaths attributed to OUD in the simulation should match GBD 2023 CSMR estimates
+3. **Treatment Coverage**: The proportion of individuals with OUD in the treatment state (T / (C + T)) should match observed treatment coverage ratios
+
+4. **Cause-Specific Mortality**: Deaths attributed to OUD in the simulation should match GBD 2023 CSMR estimates
 
 TODO: add YLD, disability weights, and DALYs.  Figure out if there is something meaningful to check about EMR.
 
-4. **Incidence**: Population incidence rate (transitions from S to C) should be consistent with GBD 2023 incidence estimates
+5. **Incidence**: Population incidence rate of OUD (transitions from M to C) should be consistent with GBD 2023 incidence estimates
 
-5. **Age Patterns**: Age-specific prevalence and incidence should follow observed patterns from GBD and epidemiological studies
+6. **Age Patterns**: Age-specific prevalence and incidence should follow observed patterns from GBD and epidemiological studies
 
-6. **Temporal Trends**: Trends in prevalence, incidence, and mortality should match observed temporal patterns
+7. **Temporal Trends**: Trends in prevalence, incidence, and mortality should match observed temporal patterns
 
 
 References
