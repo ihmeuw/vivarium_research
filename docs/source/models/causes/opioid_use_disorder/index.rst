@@ -623,20 +623,20 @@ DisMod-AT (Disease Model – Age-and-Time) is a Bayesian meta-analytic tool desi
 
 2. **Input Data**: Incorporates:
 
-   - GBD 2023 prevalence estimates for OUD
+  - GBD 2023 prevalence estimates for OUD
   - External prevalence estimates for opioid misuse without disorder, when available
-   - Treatment coverage ratios (proportion of OUD cases receiving MOUD)
+  - Treatment coverage ratios (proportion of OUD cases receiving MOUD)
   - GBD 2023 incidence estimates for OUD (as prior/constraint on progression to disorder)
-   - Excess mortality estimates from GBD 2023
+  - Excess mortality estimates from GBD 2023
   - Literature-based estimates or assumptions about misuse transitions, remission, and treatment rates
 
 3. **Bayesian Inference**: Uses Markov Chain Monte Carlo (MCMC) sampling to estimate the posterior distribution of all transition rates conditional on:
 
-   - Observed prevalence matching GBD estimates
+  - Observed prevalence matching GBD estimates
   - Misuse prevalence matching available external estimates when available
-   - Treatment coverage matching available data
-   - Internal consistency constraints (prevalence, incidence, remission, and mortality must be mutually consistent in dynamic equilibrium)
-   - Weakly informative prior distributions to help with convergence
+  - Treatment coverage matching available data
+  - Internal consistency constraints (prevalence, incidence, remission, and mortality must be mutually consistent in dynamic equilibrium)
+  - Weakly informative prior distributions to help with convergence
 
 Assumptions and Limitations
 ----------------------------
