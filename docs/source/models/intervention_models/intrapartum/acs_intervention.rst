@@ -100,7 +100,7 @@ Vivarium Modeling Strategy
 
 To be eligible to receive the ACS intervention (see the :ref:`intrapartum intervention module document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>` 
 for how to obtain this information in the MNCNH portfolio simulation), a simulant must be expected to give birth to a early or moderate preterm infant with a believed GA
-of 26 to 33 weeks.
+of 26 to 33 weeks. Pregnancies that end in live births or intrapartum stillbirth will be eligible for ACS if believed GA is within this range, however antepartum stillbirths will not be eligible.
 
 This intervention requires adding an attribute to all simulants who expect to give birth to a preterm infant (i.e., based on believed GA if 26 to 33 weeks from 
 pregnancy module output)  to specify if a parent-child dyad receives ACS or not.  We will track this and the model will 
@@ -185,6 +185,8 @@ Assumptions and Limitations
   We do not consider anything related to ultrasound exposure for the 'accurate GA dating' criteria in the [WHO-2022]_ recommendations.
 - Despite the fact that our preterm cause model (based on the GBD cause) considers under 37 weeks of gestation, and despite the [WHO-2022]_ recommendations 
   that infants with 24-34 weeks of gestation receive ACS, we will only apply the ACS intervention to simulants with 26-33 weeks of gestation, based BMGF assumptions (see email from CT on 6/30/2025).
+- We assume that ACS would not in practice be given if antepartum stillbirth is detected prior to labor (i.e., the birth attendant could detect no fetal health rate via stethoscope or doppler upon presentation to a health facility (i.e., ANC or delivery facility)).
+  Given ACS is only provided at facilities with CPAP capability (i.e., CEmONC facilites), we assume that these facilities would have the capacity to detect antepartum stillbirth and therefore would not administer ACS in these cases.
 
 .. todo::
 

@@ -215,14 +215,14 @@ Note that simulants who died during labor should not experience any YLDs due to 
     - Effect of IFA/MMS on hemoglobin
     - :ref:`Oral iron supplementation intervention (IFA/MMS) <maternal_supplementation_intervention>`
   * - :math:`T^\text{first trimester}_i`
-    - Randomly sample a different value for each simulant who attends a first trimester ANC visit. Use the distribution corresponding to the simulant's assigned pregnancy duration:
+    - Randomly sample a different value for each simulant who attends a first trimester ANC visit. Use the distribution corresponding to the simulant's assigned pregnancy duration (based on gestational age at birth exposure before it has been modified by interventions as a modeling convenience):
 
         - Pregnancy duration > 12 weeks: uniform distribution between 8 and 12 weeks 
         - Pregnancy duration between 8 and 12 weeks: uniform distribution between 8 weeks and the simulant's pregnancy duration
         - Pregnancy duration < 8 weeks: uniform distribution between 6 and the simulant's pregnancy duration
     - Note that we define minimum pregnancy duration/gestational age at birth values of 20 weeks for live births, 24 weeks for stillbirths, and 6 weeks for abortion/miscarriage/ectopic pregnancies (see details on the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`)
   * - :math:`T^\text{later pregnancy}_i`
-    - Randomly sample a different value for each simulant who attends the later pregnancy ANC visit from a uniform distribution between 12/52 and :math:`\text{duration}^\text{pregnancy}_i - 2/52` 
+    - Randomly sample a different value for each simulant who attends the later pregnancy ANC visit from a uniform distribution between 12/52 and :math:`\text{duration}^\text{pregnancy}_i - 2/52`. Note that pregnancy duration used in this context will be affected by interventions received at the first trimester visit and unaffected by interventions received at the later pregnancy visit as a modeling convenience.
     - Note that abortion/miscarriage/ectopic pregnancies cannot attend later pregnancy ANC visits according to the :ref:`ANC attendance module <2024_vivarium_mncnh_portfolio_anc_module>`. The minimum gestational age at birth for the remaining relevant pregnancy outcomes is 20 weeks for live births and 24 weeks for stillbirth, so we will not encounter later pregnancy ANC attendance among pregnancies that end prior to 14 weeks of gestation, which would result in a negative value.
   * - pregnancy duration
     - Duration of pregnancy for a given simulant, output from the :ref:`pregnancy module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
@@ -254,6 +254,7 @@ Note that simulants who died during labor should not experience any YLDs due to 
 - We assume uniform distribution across assumed plausible ranges for timing of ANC visits as well as timing of pregnancies that end in ectopic pregnancy/miscarriage/abortion (as detailed on the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`) rather than informing these parameters with data
 - We assume that interventions affect anemia YLDs at the time of administration at ANC (as according to the timed assumptions in the two prior bullets) with no additional delay 
 - We only track anemia YLDs for six weeks postpartum
+- We use the exposure value for gestational age at birth as an input to determining the timing of ANC visits in our simulation. Given that gestational age at birth exposures are affected by interventions and therefore are different between scenarios and also change across timesteps within scenarios as simulants gain access to different interventions, our model is limited in that there may be slightly different ANC visit timing for the same simulant in different scenarios. Additionally, there may be differences in the pregnancy duration value used to determine timing of an ANC visit and the final gestational age at birth exposure for a maternal/child dyad. Given that the ANC visit timing variable only affects anemia YLDs in our simulation (which is expected to be a small portion of overall impact), we have deemed this an acceptable limitation. 
 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++

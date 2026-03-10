@@ -366,6 +366,11 @@ scenario, and input draw.
     - Treatment completion stratification for transitions to `Full treatment effect` state allows us to validate the 10% discontinuation rate.
       Note that the diagram states `Full treatment effect LONG` and `Full treatment effect SHORT` are both considered the same status (`Full treatment effect`),
       but are stratified by completion status.
+  * - Months on treatment
+    - Number of months on treatment (integer between 0 and 9, inclusive)
+    - Count the number of simulants in each (year, sex, age group,
+      months on treatment) stratum. This will be used for cost
+      estimates.
   * - Treatment status person-time
     - Status (`In treatment/ Waiting for treatment`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect`).
       Also stratify by treatment completion (completed, discontinuated) from transition observer
@@ -658,6 +663,40 @@ scenario, and input draw.
       * Number of draws: 3
       * Population size per draw: 2 million (100 seeds of 20,000
         simulants each)
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 10.0
+    - Add mixed dementia cases that include AD (instead of modeling AD
+      only, as we have been since model 5.0)
+    - Baseline, Alternative Scenario 2
+    - * Locations: USA, China
+      * Population size per draw: 2 million (100 seeds of 20,000
+        simulants each). **Note:** We did not actually need this big of a
+        run, it just happened to be what was already on ``main``
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 11.0
+    - Updates to treatment model
+    - Baseline, Alternative Scenario 2
+    - * Locations: USA, China, Brazil
+    - Stratify disease state transitions and person-time by treatment
+    - Add observer for months on treatment
+  * - 11.1
+    - Bugfix: change to new artifact, observer bugfix
+    - Baseline, Alternative Scenario 2
+    - * Locations: USA, China, Brazil
+    - Stratify disease state transitions and person-time by treatment
+    - Add observer for months on treatment
+  * - 12.0
+    - Updates to testing model
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA, China, Brazil
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 12.1
+    - Updates to testing constants: sensitivity and elgibility age
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: USA, China, Brazil
     - Stratify disease state transitions and person-time by treatment
     - Default
 
@@ -1126,14 +1165,15 @@ scenario, and input draw.
         (USA) <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.1_vv.ipynb>`__
   * - 8.2
     - * See how variance and uncertainty in averted deaths scale with
-        population size
+        population size, and use the results to choose a population size
+        for final runs
     - See linked notebooks →
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/88fd461cb6c040964d3b6aaf7fadfff5b9ec2078/verification_and_validation/2025_10_27b_model8.2_vv.ipynb>`__
       * `Treatment
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/85e167993e790ca561657a62c3d713630f89bc7a/verification_and_validation/2025_10_28_model8.2_vv_treatment.ipynb>`__
-      * Abie's notebook estimating variance when scaling up [[Add link
-        once uploaded]]
+      * `Abie's notebook estimating variance when scaling up population
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/5c20610b43d9c560dfafd487a89af6c5f7672a9f/verification_and_validation/2025_10_29c_model_8.2_monte_carlo_error_calc.ipynb>`_
   * - 8.3
     - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
         etc.)
@@ -1214,9 +1254,8 @@ scenario, and input draw.
     - No V&V (model is identical to 8.5/8.6), just generate results
       tables
     - N/A
-    - * `Preliminary results tables in PR 32
-        <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/32>`_
-      * Final results tables in PR XXX [[Add link once it exists]]
+    - * `Results tables in PR 34
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/34>`_
   * - 9.0
     - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
         etc.)
@@ -1242,6 +1281,51 @@ scenario, and input draw.
         parameter uncertainty.
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/8d0339e3ac748c5eed213a3a98e40b11a3aabffa/verification_and_validation/2025_11_19_model9.0_vv.ipynb>`__
+  * - 10.0
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Check that incidence and prevalence increase by an amount that
+        corresponds to the proportions in the .csv file from the
+        dementia modelers; I predict approximately a 69% increase in the
+        all-ages prevalence
+    - * V&V checks still passing for mortality, comparison to artifact
+      * Increased prevalence and incidence by expected factor
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2026_01_12_model10.0_vv.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2026_01_12_model10.0_vv_treatment.ipynb>`__
+  * - 11.0
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Check that the new observer for months on treatment works as expected and the months on treatment is uniformly distributed between 1 and 8
+      * Check that changes in treatment ramp and efficacy are implemented
+    - * Incidence, prevalence, mortality all look as expected. Artifact used was incorrect, need to update to Model 10.0 artifact data. 
+      * Observer for months to discontinuation has a bug, need to fix
+      * Efficacy looks as expected 
+      * Treatment ramp up is unknown if changes are correct as changes to testing have not been implemented yet 
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2026_01_26_model11.0_vv.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/main/verification_and_validation/2026_01_27_model11.0_vv_treatment.ipynb>`__
+  * - 11.1
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Confirm updates to the new observer for months on treatment work as expected
+    - 
+    - 
+  * - 12.0
+    - * NOT running V&V on Model 12.0, will instead run on Model 12.1 
+    - * N/A
+    - * N/A
+  * - 12.1
+    - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Check that testing and treatment only start at age 65
+      * Check that ramp up for testing and treatment is aligned to new input values
+      * Check that the new sensitivity value (50%) is implemented correctly
+      * Check that simulants are being retested every 3-5 years instead of every 3 years 
+    -
+    -
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
