@@ -56,7 +56,8 @@ Opioid Epidemic  Simulation
 1 Overview
 ++++++++++
 
-This document outlines the concept model for simulating interventions that might reduce the burden of the opioid epidemic, such as Medications for Opioid Use Disorder (MOUD). The core of this model is a state-transition model representing opioid use disorder states and treatment dynamics. The model also includes a "quarters" component that captures the living conditions of individuals, including private residence, unhoused status, and incarceration.
+This document outlines the concept model for simulating interventions that might reduce the burden of the opioid epidemic.
+We categorize interventions into four broad groups: (1) Enhanced Delivery of Evidence-Based Treatment such as Medications for Opioid Use Disorder (MOUD), (2) Recovery Support, (3) Harm Reduction, and (4) Data Monitoring and Primary Prevention. The core of this model is a state-transition model that includes states such as "opioid use disorder" and "opioid misuse-but-not-disorder", as well as treatment and recovery states. The model also includes a housing component that captures whether individuals are living in a private residence or are unhoused.
 
 2 Modeling aims and objectives
 ++++++++++++++++++++++++++++++
@@ -78,42 +79,35 @@ By allowing the simulation of interventions individually and, crucially, *in com
 3.1 Opioid Use Disorder Cause Model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The core of this simulation is the Opioid Use Disorder (OUD) cause model, which represents the epidemiology and natural history of OUD using a three-state compartmental model. This model captures the states of **susceptible** (no OUD), **with_condition** (untreated OUD), and **on_treatment** (receiving Medications for Opioid Use Disorder, or MOUD).
+The core of this simulation is the Opioid Use Disorder (OUD) cause model, which represents the epidemiology and natural history of OUD using a state transition model. This model captures the states of **susceptible** (no OUD), **with_condition** (untreated OUD), and **on_treatment** (receiving Medications for Opioid Use Disorder, or MOUD), as well as states for **in_recovery** and **misuse** (to capture when an individual's opioid use is not a use disorder).
 
 For complete documentation of the OUD cause model, including detailed state definitions, transition rates, GBD 2023 alignment, parameter estimation methodology, and data sources, please see:
 
 :ref:`Opioid Use Disorder Cause Model <2023_cause_opioid_use_disorder>`
 
 
-3.2 Quarters Model
+3.2 Housing Model
 ~~~~~~~~~~~~~~~~~~
 
-The simulation also includes a "Quarters Model" representing the living situation of each individual. This submodel tracks transitions between distinct states related to housing, homelessness, and incarceration.
+The simulation also includes a "Housing Model" representing each individual's housing status. This submodel tracks transitions between two housing-related states: private residence and being unhoused.
 
 .. graphviz::
 
-   digraph quarters_model {
+  digraph housing_model {
        rankdir = TD; // Suggesting Top-Down layout for potential clarity
        node [shape=box]; // Optional: make nodes boxes like states
 
        private_residence [label="Private Residence"];
        unhoused [label="Unhoused"];
-       incarcerated [label="Incarcerated"];
 
        // Transitions out of Private Residence
-       private_residence -> unhoused [label="pr_uh"];
-       private_residence -> incarcerated [label="pr_inc"];
+       private_residence -> unhoused [label="h_pr_uh"];
 
        // Transitions out of Unhoused
-       unhoused -> private_residence [label="uh_pr"];
-       unhoused -> incarcerated [label="uh_inc"];
-
-       // Transitions out of Incarcerated
-       incarcerated -> private_residence [label="inc_pr"];
-       incarcerated -> unhoused [label="inc_uh"];
+       unhoused -> private_residence [label="h_uh_pr"];
    }
 
-This submodel uses a state machine with three states:
+This submodel uses a state machine with two states:
 
 .. list-table:: State Definitions
    :widths: 15 30
@@ -124,9 +118,7 @@ This submodel uses a state machine with three states:
    * - Private Residence
      - Individual resides in stable, private housing (e.g., house, apartment).
    * - Unhoused
-     - Individual lacks stable housing (e.g., living on streets, in shelters, temporary arrangements).
-   * - Incarcerated
-     - Individual resides in a correctional facility (e.g., jail, prison).
+     - Individual is experiencing homelessness or otherwise does not have stable housing (e.g., living outdoors, in shelters, or in temporary arrangements).
 
 Transitions between these states occur based on defined rates:
 
@@ -137,53 +129,39 @@ Transitions between these states occur based on defined rates:
    * - Symbol
      - Name
      - Definition
-   * - pr_uh
+   * - h_pr_uh
      - Rate of becoming unhoused
      - Rate at which individuals transition from private residence to being unhoused.
-   * - pr_inc
-     - Rate of incarceration (from residence)
-     - Rate at which individuals transition from private residence to incarceration.
-   * - uh_pr
+   * - h_uh_pr
      - Rate of obtaining housing
-     - Rate at which unhoused individuals transition to private residence.
-   * - uh_inc
-     - Rate of incarceration (from unhoused)
-     - Rate at which unhoused individuals transition to incarceration.
-   * - inc_pr
-     - Rate of release to housing
-     - Rate at which incarcerated individuals are released to private residence.
-   * - inc_uh
-     - Rate of release to unhoused
-     - Rate at which incarcerated individuals are released into unhoused status.
+     - Rate at which people who are unhoused transition to private residence.
 
 Key features and interactions of this submodel include:
 
-- **Interdependence with OUD Status:** Transition rates *within* this Quarters Model (e.g., ``pr_uh``, ``uh_inc``) may be influenced by the individual's state in the Core Disease Model (susceptible, with condition, on treatment). For example, individuals with untreated OUD might have a higher rate of becoming unhoused.  See below for details on how this is implemented using the :code:`RiskEffect` component.
-- **Influence on OUD Transitions:** Conversely, an individual's state in the Quarters Model can affect transition rates *within* the Core Disease Model. For instance, being unhoused or incarcerated might increase OUD incidence risk (``i``), decrease treatment initiation rates (``ti``), or increase treatment discontinuation rates (``td``). See below for details on how this is implemented using the :code:`RiskEffect` component.
-- **Parameterization:** Rates need to be parameterized using available data sources on housing instability, homelessness, incarceration, and release patterns, potentially stratified by relevant demographic factors and OUD status where data permits.
+- **Interdependence with OUD Status:** Transition rates *within* this Housing Model (e.g., ``h_pr_uh``) may be influenced by the individual's state in the Core Disease Model (susceptible, with condition, on treatment). For example, individuals with untreated OUD might have a higher rate of becoming unhoused. See below for details on how this is implemented using the :code:`RiskEffect` component.
+- **Influence on OUD Transitions:** Conversely, an individual's state in the Housing Model can affect transition rates *within* the Core Disease Model. For instance, being unhoused might increase OUD incidence risk (``i``), decrease treatment initiation rates (``ti``), or increase treatment discontinuation rates (``td``). See below for details on how this is implemented using the :code:`RiskEffect` component.
+- **Parameterization:** Rates need to be parameterized using available data sources on housing instability and homelessness, potentially stratified by relevant demographic factors and OUD status where data permits. The bulk of data that can inform the OUD cause model comes from household and school surveys that do not fully capture people experiencing homelessness.
 
 
 4 Data Notes
 ++++++++++++
 
-Parameterizing the MOUD simulation requires integrating data from various sources to define initial population states and the transition rates governing movement between states in both the Core Disease Model and the Quarters Model. For details on Core Disease Model parameters (OUD prevalence, treatment coverage, transition rates, and the NumPyro/DisMod-AT methodology), see the :ref:`Opioid Use Disorder Cause Model <2023_cause_opioid_use_disorder>` documentation.
+Parameterizing the MOUD simulation requires integrating data from various sources to define initial population states and the transition rates governing movement between states in both the Core Disease Model and the Housing Model. For details on Core Disease Model parameters (OUD prevalence, treatment coverage, transition rates, and the NumPyro/DisMod-AT methodology), see the :ref:`Opioid Use Disorder Cause Model <2023_cause_opioid_use_disorder>` documentation.
 
 Key data requirements and methodologies for the simulation include:
 
-4.1 Quarters Model Parameters
+4.1 Housing Model Parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Quarters Model requires data on the distribution of the population across the three states (Private Residence, Unhoused, Incarcerated) and the transition rates between them (``pr_uh``, ``pr_inc``, ``uh_pr``, ``uh_inc``, ``inc_pr``, ``inc_uh``).
+The Housing Model requires data on the distribution of the population across the two states (Private Residence and Unhoused) and the transition rates between them (``h_pr_uh`` and ``h_uh_pr``).
 
 * **Population Distribution:**
     * **Private Residence:** Baseline population estimates, potentially stratified by age and sex, are typically derived from U.S. Census Bureau data, particularly the **American Community Survey (ACS)** which provides detailed yearly housing characteristics.
-    * **Unhoused:** Estimates often rely on annual **Point-in-Time (PIT) counts** conducted by Continuums of Care (CoCs) and reported to HUD. These provide a snapshot but may undercount the true population. Local **Homelessness Management Information System (HMIS)** data, where available (e.g., for Seattle/King County), can offer more detailed longitudinal information but may have coverage limitations. Specific research studies on local unhoused populations are also valuable.
-    * **Incarcerated:** Data on jail and prison populations can be obtained from the **Bureau of Justice Statistics (BJS)** and state/local sources like the Washington State Department of Corrections or county jail dashboards/reports.
+    * **Unhoused:** Estimates often rely on annual **Point-in-Time (PIT) counts** conducted by Continuums of Care (CoCs) and reported to HUD. These provide a snapshot but may undercount the true population. Local **Homelessness Management Information System (HMIS)** data, where available (e.g., for Seattle/King County), can offer more detailed longitudinal information but may have coverage limitations. Specific research studies focused on people experiencing homelessness are also valuable.
 * **Transition Rates:** Estimating the rates of movement *between* these states is complex and often requires synthesizing multiple data sources and making assumptions:
-    * *Incarceration/Release Dynamics (``pr_inc``, ``uh_inc``, ``inc_pr``, ``inc_uh``):* BJS and local corrections data provide information on entries and releases. Determining the housing status upon release (to stable housing vs. homelessness) often requires specialized reports or research studies.
-    * *Housing Instability (``pr_uh``):* Data on eviction rates, housing loss, or entries into homelessness from stable housing can be sourced from local housing authorities, HMIS data, or specific surveys/studies.
-    * *Exits from Homelessness (``uh_pr``, ``uh_inc``):* HMIS data and longitudinal studies of unhoused individuals are key sources for estimating transitions back to private residence or into incarceration.
-* **Stratification and Interaction:** A critical step involves estimating how these population distributions and transition rates differ based on OUD status (from the Core Disease Model) and demographic factors (age, sex). This often requires analyzing linked data sources (if available), applying relative risks derived from literature, or making informed assumptions due to data scarcity linking OUD directly to housing/incarceration transitions at a population level.
+    * *Housing Instability (``h_pr_uh``):* Data on eviction rates, housing loss, or entries into homelessness from stable housing can be sourced from local housing authorities, HMIS data, or specific surveys/studies.
+    * *Returns to Private Residence (``h_uh_pr``):* HMIS data and longitudinal studies of people experiencing homelessness are key sources for estimating transitions back to private residence.
+* **Stratification and Interaction:** A critical step involves estimating how these population distributions and transition rates differ based on OUD status (from the Core Disease Model) and demographic factors (age, sex). This often requires analyzing linked data sources (if available), applying relative risks derived from literature, or making informed assumptions due to data scarcity linking OUD directly to housing transitions at a population level.
 
 4.2 General Considerations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
