@@ -36,7 +36,7 @@ in the indicated model-building wave:
 .. toctree::
     :maxdepth: 1
 
-    maternal_hemorrhage
+    postpartum_hemorrhage
     maternal_sepsis
     obstructed_labor
     postpartum_depression
@@ -338,7 +338,7 @@ relationships. The specified order is:
 #. Abortion/miscarriage/ectopic pregnancy maternal disorders
 #. Maternal hypertensive disorders
 #. Obstructed labor and uterine rupture
-#. Maternal hemorrhage
+#. Postpartum hemorrhage
 #. Maternal sepsis and other maternal infections
 #. Residual maternal disorders
 #. Postpartum depression

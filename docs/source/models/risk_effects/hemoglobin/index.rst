@@ -133,9 +133,9 @@ Note that we will not be modeling direct effects of hemoglobin on the affected o
      - Affected measure
      - Note
    * - Maternal disorders
-     - :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+     - :ref:`Postpartum hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>`
      - cause
-     - c367
+     - (a subset of) c367
      - :math:`ir`
      - 
    * - Maternal disorders
@@ -172,7 +172,7 @@ Maternal disorders
 
 Use the modeling strategy described below for the following maternal disorders subcauses:
 
-- :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+- :ref:`Postpartum hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>`
 - :ref:`Maternal sepsis and other maternal infections <2021_cause_maternal_sepsis_mncnh>`
 - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
 - Maternal hypertensive disorders
@@ -199,7 +199,7 @@ Before being applied in the simulation, these relative risk values are first re-
 
 We calculate custom PAFs for hemoglobin on maternal disorders outcome for use in the MNCNH simulation. Code to generate these PAFs can be found here ``TODO: POST LINK``. We utilize the interactive context to initialize a population with assigned hemoglobin exposure values, assign relative risk values in accordance with observed exposure, and calculate PAFs among the population as (mean_rr - 1) / mean_rr among the age-stratified population (note that the hemoglobin risk factor data as well as maternal disorders outcome data are both already specific to ``sex=='female'``). This PAF calculation process is limited in the following ways:
 
-- The PAF calculation does not take detailed correlation with other factors that affect maternal hemorrhage and maternal sepsis risk into account. For instance, the correlation between ANC attendance and in-facility delivery in our simulation will induce a correlation between hemoglobin (as a result of baseline IFA coverage distributed at ANC) and misoprostol coverage (available at home deliveries only), both of which affect maternal hemorrhage risk. We hypothesize that the impact of ignoring this sort of correlation will be small enough for our model to calibrate, but we can revisit this assumption if the model calibrates poorly.
+- The PAF calculation does not take detailed correlation with other factors that affect postpartum hemorrhage and maternal sepsis risk into account. For instance, the correlation between ANC attendance and in-facility delivery in our simulation will induce a correlation between hemoglobin (as a result of baseline IFA coverage distributed at ANC) and misoprostol coverage (available at home deliveries only), both of which affect postpartum hemorrhage risk. We hypothesize that the impact of ignoring this sort of correlation will be small enough for our model to calibrate, but we can revisit this assumption if the model calibrates poorly.
 - We use the hemoglobin exposure distribution during pregnancy to calculate the PAF on postpartum depression rather than the hemoglobin exposure distribution among simulants who survive to the postpartum period. Given that maternal mortality is a rare event, we assume this limitation will be small, but it can be revisited if the model calibrates poorly.
 
 Also note that the simulated population does not have a uniform distribution of maternal ages. The PAF values for age groups with less person time have less statistical precision than age groups with more person time represented in our simulation.
@@ -230,15 +230,15 @@ Assumptions and Limitations
 
   To minimize bias, the PAFs of hemoglobin on affected maternal disorder outcomes should account for the joint effects of any additional modeled factors that (1) are correlated with hemoglobin exposure and (2) affect the same outcome. A list of potential factors that satisfy these criteria are listed below:
 
-    - Cesarean section and maternal hemorrhage
+    - Cesarean section and postpartum hemorrhage
 
     - Intrapartum azithromycin intervention and maternal sepsis
 
     - Preeclampsia prevention/treatment interventions and maternal hypertensive disorders
 
-  All of these interventions may be expected to be positively correlated with hemoglobin exposure through access to the health care system or other factors. Therefore, by not considering the joint effects of these factors with the hemoglobin risk effect in baseline calibration of our model, we are likely underestimate the PAF for maternal hemorrhage and overestimate the PAF for maternal sepsis and hypertensive disorders. 
+  All of these interventions may be expected to be positively correlated with hemoglobin exposure through access to the health care system or other factors. Therefore, by not considering the joint effects of these factors with the hemoglobin risk effect in baseline calibration of our model, we are likely underestimate the PAF for postpartum hemorrhage and overestimate the PAF for maternal sepsis and hypertensive disorders. 
 
-  This will likely result in an overestimate of the impact of interventions that work through reductions in anemia (MMS, IV iron) on maternal hemorrhage and overestimate the impact on maternal sepsis and hypertensive disorders.
+  This will likely result in an overestimate of the impact of interventions that work through reductions in anemia (MMS, IV iron) on postpartum hemorrhage and overestimate the impact on maternal sepsis and hypertensive disorders.
 
 2. We do not consider how hemoglobin exposure and/or risk effects vary with gestational age at birth in this model.
 

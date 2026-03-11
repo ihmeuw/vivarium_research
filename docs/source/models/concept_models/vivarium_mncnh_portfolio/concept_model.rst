@@ -383,7 +383,7 @@ Intrapartum component
         * Hemoglobin at end of pregnancy
       - * Maternal disorders outcomes (see outcome table)
       - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
-        * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+        * :ref:`Postpartum hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
         * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
@@ -440,11 +440,11 @@ Postpartum component
     - Nested subcomponents
   * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
     - * Hemoglobin at end of pregnancy
-      * Maternal hemorrhage incidence
+      * Postpartum hemorrhage incidence
     - * Hemoglobin during the first six weeks after the end of pregnancy
       * Hemoglobin between six weeks and nine months after the end of pregnancy
     - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
-      * :ref:`Maternal hemorrhage risk effects <2023_risk_effect_maternal_hemorrhage>` 
+      * :ref:`Postpartum hemorrhage risk effects <2023_risk_effect_postpartum_hemorrhage>` 
   * - :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`
     - * Hemoglobin at start of pregnancy
       * Hemoglobin at end of pregnancy
@@ -1732,11 +1732,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Default, note new anemia YLD observer
     - Postpartum hemoglobin run
   * -
-    - Effects of maternal disorders on postpartum hemoglobin
-    - Effects of maternal hemorrhage (and possibly maternal sepsis) on postpartum hemoglobin. Model run is blocked by 
+    - E-MOTIVE and maternal sepsis effects on postpartum hemoglobin
+    - Effects of postpartum hemorrhage (and possibly maternal sepsis) on postpartum hemoglobin, as well as E-MOTIVE on postpartum hemorrhage
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
-    - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__, postpartum hemoglobin
+    - Research tickets to `document E-MOTIVE <https://jira.ihme.washington.edu/browse/SSCI-2584>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__, postpartum hemoglobin
   * - 
     - Separate LBWSG affected causes
     - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__

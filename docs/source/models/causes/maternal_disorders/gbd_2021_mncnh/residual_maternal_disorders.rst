@@ -116,7 +116,7 @@ document is included in the table below.
     - Documentation link
   * - Maternal hemorrhage (c_367)
     - Modeled
-    - :ref:`Maternal hemorrhage document <2021_cause_maternal_hemorrhage_mncnh>`
+    - Antepartum hemorrhage document (to come) and :ref:`Postpartum hemorrhage document <2023_cause_postpartum_hemorrhage_mncnh>`
   * - Maternal sepsis and other maternal infections (c_368)
     - Modeled
     - :ref:`Maternal sepsis document <2021_cause_maternal_sepsis_mncnh>`

@@ -53,7 +53,7 @@ There is no specific decision tree diagram for this module. Rather, the overall 
 
   * Maternal hypertensive disorders
   * :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
-  * :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+  * :ref:`Postpartum Hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>`
   * :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
   * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
   * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
