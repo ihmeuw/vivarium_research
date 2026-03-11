@@ -51,11 +51,11 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
 
 1. Determine if simulant survived labor and progressed to the postpartum period
 2. Among surviving simulants, assign hemoglobin exposure for the first six weeks after delivery equal to hemoglobin exposure at birth
-3. Shift hemoglobin exposures for incident cases of maternal hemorrhage according to the :ref:`maternal hemorrhage risk effects document <2023_risk_effect_maternal_hemorrhage>` effect on the first six weeks after the end of pregnancy
+3. Shift hemoglobin exposures for incident cases of postpartum hemorrhage according to the :ref:`postpartum hemorrhage risk effects document <2023_risk_effect_postpartum_hemorrhage>` effect on the first six weeks after the end of pregnancy
 4. Among surviving simulants, assign the hemoglobin exposure between 6 weeks and 9 months postpartum
    using the non-pregnant hemoglobin distribution (MEID 27596, GBD 2023 version mv_20250804_flash_regal_snake)
    and the *same* propensity that was used to assign the simulant their initial hemoglobin exposure.
-5. Shift hemoglobin exposures for incident cases of maternal hemorrhage according to the :ref:`maternal hemorrhage risk effects document <2023_risk_effect_maternal_hemorrhage>` effect on the period from 6 weeks to 9 months after the end of pregnancy
+5. Shift hemoglobin exposures for incident cases of postpartum hemorrhage according to the :ref:`postpartum hemorrhage risk effects document <2023_risk_effect_postpartum_hemorrhage>` effect on the period from 6 weeks to 9 months after the end of pregnancy
 
 .. list-table:: Module required inputs
   :header-rows: 1
