@@ -2830,9 +2830,20 @@ Default stratifications to all observers should include scenario and input draw.
   * - 29.0.2
     - Anemia YLDs bugfixes 2
     - Same as 29.0.1, and confirm that oral iron effects on gestational age are being applied
-    - * Oral iron effects on gestational age are fixed
+    - Round 1:
+
+      * Oral iron effects on gestational age are fixed
       * Anemia YLDs still overestimated, but to a lesser extent than in 29.0
-    - `Model 29.0.2 V&V notebooks round 1 <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/282>`__ (round 2 forthcoming)
+
+      Round 2:
+
+      * Negative durations are present in anemia YLD calculations both due to abortion/miscarriage/ectopic pregnancies
+        having a "placeholder" later ANC time which may be after the end of pregnancy, *and* due to stillbirths having
+        their later ANC time calculated based on pregnancy duration before stillbirth truncation is applied
+      * There is also a theoretical possibility of negative durations if IV iron *shortens* a pregnancy (which it can)
+        but we do not see this (at reasonable sample size) because these effects are small
+    - * `Model 29.0.2 V&V notebooks round 1 <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/282>`__
+      * `Model 29.0.2 V&V notebooks round 2 <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/286>`__
   * - 29.2.1
     - Merge 29.2 and 29.0.2
     - Same as 29.2
