@@ -472,13 +472,15 @@ Postpartum component
   * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
     - * Hemoglobin at end of pregnancy
       * Maternal hemorrhage incidence
-    - * Postpartum hemoglobin
+    - * Hemoglobin during the first six weeks after the end of pregnancy
+      * Hemoglobin between six weeks and nine months after the end of pregnancy
     - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
-      * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>` 
+      * :ref:`Maternal hemorrhage risk effects <2023_risk_effect_maternal_hemorrhage>` 
   * - :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`
     - * Hemoglobin at start of pregnancy
       * Hemoglobin at end of pregnancy
-      * Postpartum hemoglobin
+      * Hemoglobin during the first six weeks after the end of pregnancy
+      * Hemoglobin between six weeks and nine months after the end of pregnancy
       * IFA/MMS coverage
       * IV iron coverage
       * First trimester ANC attendance
@@ -1011,10 +1013,14 @@ Default stratifications to all observers should include scenario and input draw.
   * - 11. Anemia YLDs
     - * Maternal age group
       * Anemia status (not_anemic, mild, moderate, severe)
+      * Pregnancy outcome
+      * Timestep
     - Inclusive of anemia YLDs accrued during pregnancy and the postpartum period
   * - 12. Anemia person-time
     - * Maternal age group
       * Anemia status (not_anemic, mild, moderate, severe)
+      * Pregnancy outcome
+      * Timestep
     - Inclusive of anemia person-time accrued during pregnancy and the postpartum period
 
 .. todo::
