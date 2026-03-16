@@ -31,23 +31,21 @@ Data Best Practices
    :local:
    :depth: 2
 
-The research and engineering teams handle a variety of data from sources such as GBD, literature and 
-vivarium simulations themselves, which may be used direcly or undergo processing. This page is 
-intended to outline typical and best practices for data preparation and generation tasks for consistency,
+The research and engineering teams handle a variety of data from original sources such as GBD and literature
+as well as intermediate data generated from scripts or other code including the vivarium simulation itself.
+Intermediate data generation may include calculations or processing based on GBD and literature data. 
+This page is intended to outline typical and best practices for data preparation and generation tasks for consistency,
 reproducibility and transfer between researchers and engineers. 
 
-The page lists typical locations where processed data is stored and 
-provides guidelines for when each should be used. 
-It also describes where and how data is processed, which depends on the data source and type of 
-processing.
+The page is organized by locations where original or intermediate data is stored and provides guidelines for when to use each storage location.
+For each location, it describes any common types of data processing that store results there, including 
+the data inputs and code used and where that code should be stored.
 
-Data may be stored in the artifact, 
-in a constants file, or in the model specification. 
-Note that final results from the simulation also have their
-own storage locations. 
+Data may be stored in the artifact, in a constants file, in the model specification, or in other less common places. 
+Final results from the simulation also have their own storage locations. 
 
-Data processing depends on the source and type of data. GBD data might be processed 
-by the ``make artifact`` command with code stored in ``loader.py``, or outside ``make artifact`` for
+Data processing practices depend on the source and type of data. GBD data might be processed 
+by the ``make artifact`` command with code stored in ``loader.py``, by other scripts or code for
 more complex processing. Literature data might also be pre-processed by hand or used directly. 
 Vivarium simulations themselves can also generate data inputs for other simulations or simulation 
 iterations. 
@@ -57,16 +55,24 @@ iterations.
 
 Artifact
 --------
-GBD data or other data with draws should be loaded into the artifact. Even if some data is not directly 
-used by the simulation, it may be useful to load it into the artifact in order to make it 
-available later during V&V.  
+The artifact is a very common location for data to be stored. All draw-level data including GBD data should be loaded into the artifact.
+Generally, data is loaded into the artifact because it is used by the simulation, but it can also be useful to store draw-level data 
+relevant to the V&V process in the artifact for easy access at that time.
+
+It is generally not recommended to store non-draw level data in the artifact.
+Theoretically, when performing a sensitivity analysis, multiple artifacts could be created to store constant or location-specific values for different runs.
+However, the more common and recommended practice is to store sensitivity analysis run values in the model specification as described below.
+This approach provides better integration with vivarium tools such as setting run values via the CLI or interactive sim rather than building separate artifacts for each run.
+
+Often researchers will directly store location-specific paramaters that describe a distribution (like mean effect sizes) in a dictionary in the constants directory, as described below.
+Setting these parameters in the constants directory is important for visibility and to make them easier to update.
+But for some distributions it may be useful for V&V to additionally generate draw-level data based on the parameters.
 
 .. todo::
-    non draw level data for sensitivity analysis could be put here, but generally has been put 
-    in model spec
+    My notes about the above paragraph from my last doc session aren't the best so I'm not sure if this is the right interpretation of our discussion of storing location specific values in the artifact instead of constants file. Are there any times it would be a problem to store both the parameters in the constants directory and draw-level data generated from them in the artifact? Or are there any times where we'd store the constant parameters in the artifact instead of the constants directory?
 
-.. todo::
-    scalars in artifact?
+Draw-level data stored in the artifact may have been generated or processed either during the ``make artifact`` command, or before it, 
+depending on the type of data inputs and code used in the processing.
 
 Processed in make artifact
 ++++++++++++++++++++++++++
