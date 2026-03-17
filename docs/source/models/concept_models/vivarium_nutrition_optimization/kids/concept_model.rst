@@ -1815,9 +1815,11 @@ Wave III
   * - 17.0
     - * Confirm that results for production runs match expected outputs
     - * As in model 16, we checked the SQ-LNS effects to ensure these matched for both standard, and modifed effects. In general, all subnational locations were within the confidence intervals. The cases where this is untrue and the rationale for approval are noted in the Jupyter notebook here. `Model 17 SQLNS effects <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/0858f98bd9e19f2621873c83a20efef055a0a5d8/verification_and_validation/child_model/model_17.0_sqlns_effects.ipynb>`_. 
+      * An issue with artifact data used for subnational locations in Ethiopia was identified that necessitates a rerun (`see details here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/fea37d5913dca2a65c814decbe3a457d383913b6/emulator/sqlns_targeting/artifact_data_checks.ipynb>`__)
+      * An issue with the application of modified SQ-LNS effects was identified and `summarized in this PR <https://github.com/ihmeuw/vivarium_research/pull/1902>`__, but deemed an acceptable limitation.
   * - 18.0
     - * Confirm that results for production runs match expected outputs
-    - 
+    - * An issue with artifact data used for subnational locations in Ethiopia was identified that necessitates a rerun (`see details here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/fea37d5913dca2a65c814decbe3a457d383913b6/emulator/sqlns_targeting/artifact_data_checks.ipynb>`__)
   * - 19.0
     - Re-run model 17.0 V&V for updated Ethiopian locations
     - 
