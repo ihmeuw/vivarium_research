@@ -488,21 +488,29 @@ to calibrate the IFA shift optimization.
 
 The IFA shifts above can be thought of as being made up from a negative ":ref:`baseline <vivarium_best_practices_baseline_coverage_calibration>` deletion shift"
 (``-WEIGHTED_AVG_SHIFT * baseline_ifa_overall``) and a positive "IFA shift" (``SHIFT_TRUE`` or ``SHIFT_FALSE``). 
-The baseline deletion shift is the shift necessary to transform the gestational age exposure distribution of the baseline population
-(in which some individuals already receive IFA) to the exposure distribution of the poplation which does not receive IFA. 
-In other words, it "deletes" the IFA effect already present in the baseline population exposure distribution, leaving us with the non-IFA population distribution.
+The baseline deletion shift is a shift intended to transform the gestational age exposure distribution of the baseline population
+(in which some individuals already receive IFA) to the exposure distribution of the population which does not receive IFA. 
+In other words, it aims to "delete" the IFA effect already present in the baseline population exposure distribution, leaving us with the non-IFA population distribution.
 The IFA shift is the shift necessary to transform the gestational age exposure distribution of the non-IFA population to that of the IFA population.
+Equivalently, it is the individual-level additive causal effect of IFA on gestational age (which we assume is the same for every individual).
 
 SHIFT_TRUE and SHIFT_FALSE are solved for by an `optimization <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/ifa_gestational_age_shifts.ipynb>`_
-with two constraints: (a) that the relative risk on preterm birth prevalence of the IFA shift matches our target value from the literature, and
-(b) that the baseline deletion shift equals the IFA shift times the baseline IFA coverage. 
-Constraint (b) is meant to preserve the overall population mean gestational age after applying both the baseline deletion and IFA shift. 
-However, in the current implementation (since model 30.0), because the basline deletion shift is a weighted average of shifts on 
-the IFA and non-IFA populations, rather than an actual shift on the overall population, we may not be preserving the population mean gestational age.
-The reason is that the weighted average shift only approximates the overall population shift, so since a fractional shift does not necessarily have that fraction of an effect on preterm birth,
-the weighted average of ANC and non-ANC shifts is not equivalent to an overall shift. 
-Additionally, preserving the mean gestational age may not necessarily preserve the prevalence of preterm birth, which is one of 
-our validation targets. 
+with the two constraints that the relative risk on preterm birth prevalence of applying (a) SHIFT_TRUE to the ANC population and (b) SHIFT_FALSE to the non-ANC population,
+both match our target RR value from the literature.
+
+.. note::
+  Prior to model 30.0, constraint (b) was that the baseline deletion shift equals the IFA shift times the baseline IFA coverage,
+  in order to preserve the overall population mean gestational age after applying both the baseline deletion and IFA shift.
+  Applying the baseline deletion shift to the whole population lowers the mean gestational age by the amount of that shift.
+  Applying the IFA shift to the IFA population increases the mean gestational age by the amount of the IFA shift times the proportion of the population taking IFA.
+
+  In the current implementation (since model 30.0), the baseline deletion shift is still calculated from the IFA shift, but now
+  there are two IFA shifts, SHIFT_TRUE and SHIFT_FALSE, and the calculation no longer maintains the overall population mean gestational age.
+  The weighted average calculation for the baseline deletion shift only approximates an "IFA shift times baseline IFA coverage" sized shift.
+  A fractional shift does not necessarily have that fraction of an effect on preterm birth, so the weighted average of ANC and non-ANC shifts is not equivalent to an overall shift. 
+ 
+  Additionally, note that preserving the mean gestational age may still not necessarily preserve the prevalence of preterm birth, which is one of 
+  our validation targets. 
 
 .. note::
   In the future, our approximation of either the preservation of the overall population mean gestational age or of the preterm birth prevalence target
