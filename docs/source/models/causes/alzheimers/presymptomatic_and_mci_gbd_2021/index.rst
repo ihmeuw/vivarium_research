@@ -666,7 +666,7 @@ with truncated normal priors on :math:`[0, 1]`:
 
 
 **ODE Consistency Constraints.** The calibration produces consistent parameters by
-solving a 5-compartment ODE system starting with initial conditions at from age :math:`a` to find the implied values at :math:`a + 5`; we include the squared difference between these implied values and the parameter values in the MCMC objective.  
+solving a 5-compartment ODE system starting with initial conditions at age :math:`a` to find the implied values at age :math:`a + 5`; we include the squared difference between these implied values and the parameter values in the MCMC objective.  
 
 The state variables are S (susceptible), BBBM, MCI, D (dementia), and
 :math:`D_\text{new}` (cumulative incident dementia, which is used to calibrate the total-population incidence rate of AD dementia). The ODE system is:
@@ -697,7 +697,7 @@ weighted by dementia prevalence:
 
   m_\text{all}(a) = m(a) + f(a) \cdot p_\text{dementia}(a)
 
-Total-population incidence rate of AD-dementia can be expressed in terms of the :math:`h_{\text{MCI} \to D}` hazard because it is the same numerator with a different population time in for the denominator:
+Total-population incidence rate of AD-dementia can be expressed in terms of the :math:`h_{\text{MCI} \to D}` hazard because it has the same numerator with a different population for the denominator:
 
 .. math::
 
