@@ -1630,9 +1630,7 @@ Wave III
     - Same as model 17.0
     - Same as model 17.0
     - Same as model 17.0
-    - This run is to resolve an issue for Ethiopian results in model 17.0 in which data were scrambled across subnational locations (`see details here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/fea37d5913dca2a65c814decbe3a457d383913b6/emulator/sqlns_targeting/artifact_data_checks.ipynb>`__). New custom data was generated based on an updated Ethiopian artifact without this issue (`see PR here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/207>`__) and updated in the simulation repo (`see PR here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/pull/197>`__). Notably, these runs will be performed in 2026 almost two years after model 17.0 and the exact environments used to run model 19.0 is not expected to exactly match that used to run model 17.0.
-
-    This model will include Standard and modified SQ-LNS effects.
+    - This run is to resolve an issue for Ethiopian results in model 17.0 in which data were scrambled across subnational locations (`see details here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/fea37d5913dca2a65c814decbe3a457d383913b6/emulator/sqlns_targeting/artifact_data_checks.ipynb>`__). New custom data was generated based on an updated Ethiopian artifact without this issue (`see PR here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/207>`__ and `here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/212>`__) and updated in the simulation repo (`see PR here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/pull/197>`__ and `here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/pull/198>`__). Notably, these runs will be performed in 2026 almost two years after model 17.0 and the exact environments used to run model 19.0 is not expected to exactly match that used to run model 17.0. This model will include Standard and modified SQ-LNS effects.
 
 
 
@@ -1746,7 +1744,7 @@ Wave III
       4. Count of incident MAM cases stratified by MAM treatment coverage
       5. Stunting state person time stratified by SQ-LNS coverage
     - * Age group
-      * Subnational location (need to determine how this will be "stratified")
+      * Results specific to subnational location (in the same manner as model 17.0)
 
 
 .. list-table:: Verification and validation tracking
