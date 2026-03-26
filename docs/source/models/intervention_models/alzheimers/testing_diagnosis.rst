@@ -246,8 +246,8 @@ their BBBM testing propensity. At the client's request, we will retest
 simulants every 3-5 years, rather than having all simulants be retested
 at a fixed interval of 3 years (which can cause unrealistic oscillations
 in the number of tests over time). In the implementation below, we
-use a formula for testing that creates uniform testing in the interval :math:`[3, 5]`
-years.
+assume that the time between tests is uniformly distributed in the
+interval :math:`[3, 5]` years.
 
 On initialization
 '''''''''''''''''
@@ -256,47 +256,65 @@ simulants be tested immediately upon entering the simulation, we will
 assign a future BBBM test date to each initialized simulant who otherwise would
 have an opportunity for BBBM testing on their first time step.
 
-For this future BBBM test date assignment, we must meet the following requirements:
+This future BBBM test date assignment should meet the following requirements:
 
-#. Test date is assigned to simulants who meet
-   the :ref:`eligibility requirements for BBBM testing
-   <bbbm_requirements>` and has a testing propensity is less than the
-   current BBBM testing rate.
-#. The BBBM test date should mirror the future testing scheme of uniformly random 
-   retesting between 3-5 years.
+#. A next test date is assigned to simulants who meet the
+   :ref:`eligibility requirements for BBBM testing <bbbm_requirements>`
+   and have a testing propensity is less than the current BBBM testing
+   rate. For simulants who don't meet both these requirements, assign
+   "not a time" (NaT) for their next test date.
+#. The future BBBM test date should mirror the testing scheme of uniformly
+   random retesting every 3-5 years.
 
 .. note::
 
-  Implementation: we achieve the above criteria by having two random draws. First,
-  a random time between 3 and 5 years is selected. This value is the time the simulant
-  was assigned to wait to retest. Second, a duration between zero and the time from the prior draw is picked.
-  This is the amount of time into the waiting period the simulant is. The time to testing
-  is then calculated from these two draws. For example, if in the first draw we select
-  4 years, and the second draw we select 2 years, the simulant would be assigned to
-  retesting 4-2=2 years in the future.
+  **Implementation:** We achieve the above criteria by having two random draws.
+  First, a uniformly random time :math:`W` between 3 and 5 years is selected.
+  This value is the time the simulant was assigned to wait to retest. Second, a
+  uniformly random time :math:`T` between zero and :math:`W` is picked. This is
+  the amount of time the simulant has been waiting so far. The time until the
+  next test date is then calculated from these two draws as :math:`W - T`. For
+  example, if in the first draw we select 4 years, and in the second draw we
+  select 1.5 years, the simulant would be scheduled to retest at :math:`4-1.5 =
+  2.5` years after entering the simulation.
 
-We assume for simplicity that there were no prior false positive tests
-among simulants entering the simulation, so all previous BBBM tests are
-negative. For simulants who are assigned a previous test date, the first
-time they could become eligible for testing again is 6 time steps after
-the chosen previous test date.
+  **Note:** Although the simulation does not explicitly track a "prior BBBM
+  testing history" for simulants entering the simulation, the above sampling
+  strategy in effect assigns a prior BBBM test date to every eligile,
+  low-propensity simulant when they are initialized. Namely, we can interpret
+  the first draw :math:`W` as the time the simulant waits to retest after a
+  prior, negative BBBM test, and we can interpret the second draw :math:`T` as
+  the time it has been since that prior test. In this case the simulant's prior
+  BBBM test would have been at time :math:`t-T`, where :math:`t` is the time
+  the simulant enters the simulation. However, since we are not tracking this
+  prior test date, we don't know whether the simulant would have been eligible
+  for testing at time :math:`t-T` or whether their propensity would have been
+  low enough to get a test at that time. Thus, the current strategy for
+  selecting a next test date can't be interpreted too literally as a "prior
+  testing history," and should instead be viewed mostly as a randomization
+  strategy to avoid large numbers of simulants being tested immediately on
+  initialization. On the other hand, if we *do* interpret this randomization
+  strategy as assigning a testing history, note that we are assuming for
+  simplicity that there were no prior false positive tests among simulants
+  entering the simulation, so all previous BBBM tests are negative.
 
 On timestep
 '''''''''''
 On each timestep, simulants will have a chance to receive a BBBM test. 
-This process must meet the following requirements: 
+This process should meet the following requirements:
 
-#. Only simulants who are eligible based on the :ref:`eligibility requirements for
-   BBBM testing <bbbm_requirements>` and whose propensity is within the time specific
-   value will receive testing.
-#. If a simulant meets these criteria and has NaT assigned, they will be tested
-   immediately.
+#. Only simulants who are eligible based on the :ref:`eligibility requirements
+   for BBBM testing <bbbm_requirements>` and whose propensity is below the
+   time-specific testing rate can receive testing.
+#. If a simulant meets both these criteria, check their next test date. If this
+   date either corresponds to the current time step or is NaT, test the
+   simulant now.
 #. For those who get tested, assign a positive diagnosis to 50% of people and a
    negative diagnosis to 50% of people. This 50% draw should be independent of
    any previous draws, e.g., people who test negative still have a 50% chance
    of being positive on a re-test.
 #. If a simulant tests negative, the time of their next test is uniformly
-   distributed between 3 and 5 years since their prior test.
+   distributed between 3 and 5 years from the time of the negative test.
 #. Record time of last test and yes/no diagnosis for determining future testing eligibility.
 
 .. note::
