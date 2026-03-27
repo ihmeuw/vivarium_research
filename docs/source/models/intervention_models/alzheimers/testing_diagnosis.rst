@@ -241,13 +241,13 @@ requirements:
 
 Implementation
 ^^^^^^^^^^^^^^
-The simulant's existing CSF/PET testing propensity will also be used as
-their BBBM testing propensity. At the client's request, we will retest
-simulants every 3-5 years, rather than having all simulants be retested
-at a fixed interval of 3 years (which can cause unrealistic oscillations
-in the number of tests over time). In the implementation below, we
-assume that the time between tests is uniformly distributed in the
-interval :math:`[3, 5]` years.
+The simulant's existing CSF/PET testing propensity will also be used as their
+BBBM testing propensity. This will cause CSF and PET testing to be displaced as
+BBBM testing scales up. At the client's request, we will retest simulants every
+3-5 years, rather than having all simulants be retested at a fixed interval of
+3 years (which can cause unrealistic oscillations in the number of tests over
+time). In the implementation below, we assume that the time between tests is
+uniformly distributed in the interval :math:`[3, 5]` years.
 
 On initialization
 '''''''''''''''''
@@ -268,15 +268,15 @@ This future BBBM test date assignment should meet the following requirements:
 
 .. note::
 
-  **Implementation:** We achieve the above criteria by having two random draws.
-  First, a uniformly random time :math:`W` between 3 and 5 years is selected.
-  This value is the time the simulant was assigned to wait to retest. Second, a
-  uniformly random time :math:`T` between zero and :math:`W` is picked. This is
-  the amount of time the simulant has been waiting so far. The time until the
-  next test date is then calculated from these two draws as :math:`W - T`. For
-  example, if in the first draw we select 4 years, and in the second draw we
-  select 1.5 years, the simulant would be scheduled to retest at :math:`4-1.5 =
-  2.5` years after entering the simulation.
+  **Implementation:** We achieve the second criterion above by having two
+  random draws. First, a uniformly random time :math:`W` between 3 and 5 years
+  is selected. This value is the time the simulant was assigned to wait to
+  retest. Second, a uniformly random time :math:`T` between zero and :math:`W`
+  is picked. This is the amount of time the simulant has been waiting so far.
+  The time until the next test date is then calculated from these two draws as
+  :math:`W - T`. For example, if in the first draw we select 4 years, and in
+  the second draw we select 1.5 years, the simulant would be scheduled to
+  retest at :math:`4-1.5 = 2.5` years after entering the simulation.
 
   **Note:** Although the simulation does not explicitly track a "prior BBBM
   testing history" for simulants entering the simulation, the above sampling
@@ -308,7 +308,9 @@ This process should meet the following requirements:
    time-specific testing rate can receive testing.
 #. If a simulant meets both these criteria, check their next test date. If this
    date either corresponds to the current time step or is NaT, test the
-   simulant now.
+   simulant now. (Thus, simulants who have not had a previous BBBM test will be
+   tested as soon as they are eligible and the coverage rate increases above
+   their propensity.)
 #. For those who get tested, assign a positive diagnosis to 50% of people and a
    negative diagnosis to 50% of people. This 50% draw should be independent of
    any previous draws, e.g., people who test negative still have a 50% chance
@@ -319,17 +321,22 @@ This process should meet the following requirements:
 
 .. note::
 
-  Implementation: there are multiple possible ways to implement a uniform
-  distribution of retesting. The current model implementation assigns a
-  future retest date between 3 and 5 years in the future.
+  **Implementation:** there are multiple possible ways to implement a uniform
+  distribution for the waiting time between tests. The current model uses a
+  "fortune-telling" implementation and assigns a future retest date between 3
+  and 5 years in the future.
 
   Another mathematically equivalent option is to use a non-constant hazard
-  function to that increases the test liklihood each timestep. The formula
-  for for the non-constant hazard function for this would be :math:`1/(11 - k)`.
-  This results in a uniformly distributed population between 6 and 10 time steps,
-  or 3 to 5 years. To conceptualize why this works, please see the table below
-  outlining the time step value :math:`k`, the resulting probability of testing
-  and how a hypothetical population of 100 simulants is distributed over the time steps.
+  function that increases the test liklihood on each timestep. This approach
+  allows the decision of whether to test to be made "in the moment" rather than
+  being predetermined, but it would require a new random draw on each time
+  step. The discrete probability corresponding to this non-constant hazard
+  function would be :math:`P(\text{test on the $k^\mathrm{th}$ time step}) =
+  1/(11 - k)`, for :math:`6\le k\le 10`. This results in a uniformly
+  distributed population between 6 and 10 time steps, or 3 to 5 years. To
+  conceptualize why this works, please see the table below outlining the time
+  step value :math:`k`, the resulting probability of testing, and how a
+  hypothetical population of 100 simulants is distributed over the time steps.
 
   .. list-table:: Simulation Components
     :header-rows: 1
@@ -389,14 +396,14 @@ Assumptions and Limitations
   calculations in the MSLT; if the false positive rate were nonzero,
   some people would have prematurely started treatment before entering
   the simulation;
-- The strategy for assigning BBBM test history does not account for the
-  fact that simulants may not have been eligible for BBBM testing on all
-  of the previous 10 time steps prior to entering the simulation; for
-  example, we will assign a previous BBBM test date to a 65-year-old
-  entering the simulation in, say, 2035 even though they wouldn't have
-  been eligible; the effects of this are hopefully small because
-  improper testing can only happen during the first 5 years of the 20
-  years of eligible ages;
+- The strategy for implicitly assigning simulants' BBBM test history does not
+  account for the fact that simulants may not have been eligible for BBBM
+  testing on all of the previous 10 time steps prior to entering the
+  simulation; for example, we will implicitly assign a previous BBBM test date
+  to a 65-year-old entering the simulation in, say, 2035 even though they
+  wouldn't have been eligible; the effects of this are hopefully small because
+  improper testing can only happen during the first 5 years of the 20 years of
+  eligible ages;
 
 
 
