@@ -708,6 +708,15 @@ scenario, and input draw.
     - * Locations: USA, China, Brazil
     - Stratify disease state transitions and person-time by treatment
     - Default
+  * - 12.2
+    - Final runs based on model 12.1
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: All
+      * Population size per draw: 2 million (100 seeds of 20,000
+        simulants each)
+    - **Remove** stratification of disease state transitions and
+      person-time by treatment
+    - Default
 
 5.2 V & V Tracking
 ------------------------
