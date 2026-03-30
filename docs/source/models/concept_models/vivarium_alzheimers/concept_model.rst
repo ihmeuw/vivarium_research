@@ -199,6 +199,13 @@ The basic plan for the design of the simulation is as follows:
     - Hypothetical disease-modifying therapy
     - Reduction in progression rate, adherence
     - Disease model, testing model
+  * - :ref:`Multistate Life Table (MSLT) model
+      <other_models_alzheimers_mslt>`
+    - Testing and treatment among the susceptible population
+    - Counts of BBBM tests, false positive BBBM tests, and (unnecessary)
+      treatments initiated among the susceptible population
+    - Forecasted population and mortality rates, incident preclinical AD
+      cases, testing and treatment rates, specificity of BBBM testing
   * - Economic Impact model
     - Cost-effectiveness analysis
     - Comprehensive cost modeling, ICER calculations
