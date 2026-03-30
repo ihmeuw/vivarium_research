@@ -52,10 +52,12 @@ Alzheimer's Disease Early Detection Simulation
     - Blood-Based Biomarkers
   * - CSF
     - Cerebrospinal Fluid
-  * - computed tomography
-    - CT
+  * - CT
+    - Computed Tomography
   * - MCI
     - Mild Cognitive Impairment
+  * - MSLT
+    - Multistate Life Table
   * - PET
     - Positron Emission Tomography
   * - DALYs
