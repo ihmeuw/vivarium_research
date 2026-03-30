@@ -709,7 +709,9 @@ scenario, and input draw.
     - Stratify disease state transitions and person-time by treatment
     - Default
   * - 12.2
-    - Final runs based on model 12.1
+    - Final runs based on model 12.1, with `minor bugfix to testing
+      ramp-up
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/68>`_
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: All
       * Population size per draw: 2 million (100 seeds of 20,000
@@ -1330,7 +1332,10 @@ scenario, and input draw.
         etc.)
       * Confirm updates to the new observer for months on treatment work as expected
     - 
-    - 
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_03_model11.1_vv.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_04_model11.1_vv_treatment.ipynb>`__
   * - 12.0
     - * NOT running V&V on Model 12.0, will instead run on Model 12.1 
     - * N/A
@@ -1343,7 +1348,12 @@ scenario, and input draw.
       * Check that the new sensitivity value (50%) is implemented correctly
       * Check that simulants are being retested every 3-5 years instead of every 3 years 
     -
-    -
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_05_model12.1_vv.ipynb>`__
+      * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_06_model12.1_vv_testing.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_05_model12.1_vv_treatment.ipynb>`__
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
