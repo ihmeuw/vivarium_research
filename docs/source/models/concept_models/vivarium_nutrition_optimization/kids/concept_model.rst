@@ -1653,7 +1653,7 @@ Wave III
     - Run NO Child model with increased stratifications to enable regression testing V&V with the vivarium/VPH framework updates
     - See desired maternal/child scenario pairs in next column 
     - Baseline/Baseline, Zero coverage/Zero coverage, Zero coverage/3: SQ-LNS
-    - National runs (informed from subnational model 15.0 artifact). 10 draws including draw_0 (mean draw)
+    - National runs (informed from subnational model 15.0 artifact). 10 draws including draw_0 (mean draw). Start with Nigeria only.
     - Standard SQ-LNS effects only. Note updated stratification requests in next table.
   * - 19.0
     - Production runs for re-run of model 17 for Ethiopia to resolve subnational scrambling issue
@@ -1862,7 +1862,7 @@ Wave III
       * TODO: update with links to general V&V notebooks for this run
   * - V1.0
     - * Confirm baseline scenario cause burden and CGF risk exposures meets GBD expectation
-    - Look good, but still have more checks to perform in subsequent runs
+    - Look good (link to follow), but still have more checks to perform in subsequent runs
   * - V2.0
     - * Confirm deaths/YLDs closely match results from model 18.0 for the same scenarios/draws
     - * Unconfirmed! Systematically underestimating YLDs and systematically underestimating burden due to LRI (link to follow)
