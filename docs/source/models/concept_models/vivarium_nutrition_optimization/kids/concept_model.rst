@@ -1526,7 +1526,7 @@ Wave II
       * `MMS effect size update and implementation confirmed to be functioning in interactive sim <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/model_12.1.1_interactive_MMS_effect.ipynb>`_
   * - 12.2
     - Check that results for this run approximate the mean of the results from run 12.1
-    - 
+    - [TODO: CONFIRM V&V CONCLUSIONS FROM THIS RUN]
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
@@ -1624,6 +1624,12 @@ Wave III
     - All
     - All
     - National runs
+    - Standard SQ-LNS effects only
+  * - ``vivarium_v4.0_vph_v5.0_update``
+    - Runs that integrate vivarium and vivarium_public_health framework updates to confirm we still meet V&V criteria following these updates
+    - Baseline, MMS (run using maternal simulation outputs from the ``vivarium_v4.0_vph_v5.0_update`` model version)
+    - Baseline, 8 (all)
+    - National runs (informed from subnational artifact). 10 draws (not the mean draw). Nigeria and Pakistan only. 
     - Standard SQ-LNS effects only
   * - 19.0
     - Production runs for re-run of model 17 for Ethiopia to resolve subnational scrambling issue
@@ -1730,9 +1736,9 @@ Wave III
       5. Stunting state person time stratified by SQ-LNS coverage
     - * Age group
       * Subnational location (need to determine how this will be "stratified")
-  * - 18.0
-    - 1. Deaths and YLLs (non-cause-specific)
-      2. YLDs (all-cause observer only)
+  * - 18.0, ``vivarium_v4.0_vph_v5.0_update``
+    - 1. Deaths and YLLs 
+      2. YLDs 
       3. Count of incident SAM cases stratified by SAM treatment coverage
       4. Count of incident MAM cases stratified by MAM treatment coverage
       5. Stunting state person time stratified by SQ-LNS coverage
@@ -1743,7 +1749,7 @@ Wave III
       3. Count of incident SAM cases stratified by SAM treatment coverage
       4. Count of incident MAM cases stratified by MAM treatment coverage
       5. Stunting state person time stratified by SQ-LNS coverage
-    - * Age group
+    - * Age strata of 0-6 months, 6-18 months, 18-60 months
       * Results specific to subnational location (in the same manner as model 17.0)
 
 
@@ -1818,6 +1824,12 @@ Wave III
   * - 18.0
     - * Confirm that results for production runs match expected outputs
     - * An issue with artifact data used for subnational locations in Ethiopia was identified that necessitates a rerun (`see details here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/fea37d5913dca2a65c814decbe3a457d383913b6/emulator/sqlns_targeting/artifact_data_checks.ipynb>`__)
+      * Potential issue with mean draw systematically overestimating baseline parameters is expected (TODO: update with notebook demonstrating this issue)
+      * TODO: update with links to general V&V notebooks for this run
+  * - ``viv4.0_vph_v5.0_update``
+    - * Confirm baseline scenario cause burden and CGF risk exposures meets GBD expectation
+      * Compare total scenario-specifc (maternal MMS, child scenario 8) DALYs to results from model 18.0
+    - 
   * - 19.0
     - Re-run model 17.0 V&V for updated Ethiopian locations
     - 
