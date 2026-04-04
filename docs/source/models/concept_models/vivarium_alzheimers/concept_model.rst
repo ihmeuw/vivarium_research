@@ -1366,6 +1366,13 @@ scenario, and input draw.
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/aeb2159f44bf5bf0942d73471c0d7439b7835d46/verification_and_validation/2026_02_05_model12.1_vv_treatment.ipynb>`__
       * `AI-assisted interactive sim notebooks
         <https://github.com/ihmeuw/vivarium_csu_alzheimers/tree/7ff024c495bad7d14bc68f629daed991f0ba8e3b/tests>`__
+  * - 12.2
+    - No V&V (due to difficulty in running notebooks on batched results;
+      model is the same as 12.1 except for minor bugfix), just generate
+      results tables
+    - N/A
+    - * `Results tables and plots in PR 45
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/45>`_
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
