@@ -1351,13 +1351,21 @@ scenario, and input draw.
       * Check that ramp up for testing and treatment is aligned to new input values
       * Check that the new sensitivity value (50%) is implemented correctly
       * Check that simulants are being retested every 3-5 years instead of every 3 years 
-    -
+    - * Model 5.0 V&V looks the same as in model 11.1, except for small
+        differences in the testing and treatment scenarios
+      * Testing and treatment correctly start at age 65
+      * Ramp-ups look mostly good, but there was a small bug in the
+        dates for the testing ramp-up
+      * Test sensitivity is now 50% as expected
+      * Things look good in Abie's interactive sim notebooks
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_05_model12.1_vv.ipynb>`__
       * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_06_model12.1_vv_testing.ipynb>`__
       * `Treatment
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/aeb2159f44bf5bf0942d73471c0d7439b7835d46/verification_and_validation/2026_02_05_model12.1_vv_treatment.ipynb>`__
+      * `AI-assisted interactive sim notebooks
+        <https://github.com/ihmeuw/vivarium_csu_alzheimers/tree/7ff024c495bad7d14bc68f629daed991f0ba8e3b/tests>`__
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
