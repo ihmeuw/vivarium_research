@@ -1331,7 +1331,11 @@ scenario, and input draw.
     - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
         etc.)
       * Confirm updates to the new observer for months on treatment work as expected
-    - 
+    - * Some of the incidence and prevalence plots look slightly worse
+        than before, but still in acceptable range
+      * Months of treatment observer seems to be working as expected
+      * Months to discontinuation has the correct distribution (90% complete
+        all 9 months, 1.25% complete :math:`k` months for :math:`1\le k\le 8`)
     - * `Disease transition rates, mortality, incidence, prevalence
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_03_model11.1_vv.ipynb>`__
       * `Treatment
@@ -1353,7 +1357,7 @@ scenario, and input draw.
       * `Testing
         <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_06_model12.1_vv_testing.ipynb>`__
       * `Treatment
-        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_05_model12.1_vv_treatment.ipynb>`__
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/aeb2159f44bf5bf0942d73471c0d7439b7835d46/verification_and_validation/2026_02_05_model12.1_vv_treatment.ipynb>`__
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
