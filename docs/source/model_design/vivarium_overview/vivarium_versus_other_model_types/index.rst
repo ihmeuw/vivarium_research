@@ -197,13 +197,16 @@ strategy.
 Residual confounding
 ~~~~~~~~~~~~~~~~~~~~
 
-Unlike compartmental or multiplication models, which typically assume a homogeneous 
-population within a "state", microsimulations explicitly model individual-level heterogeneity.
-As such, we model individual-level risk exposures which have varying levels of correlation with 
-one another. Our team does our best to account for the relationships between all risk exposures,
-there will always be unaccounted-for factors associated with the risk exposure and outcome of
-interest in our microsimulations. This is known as residual confounding, which you can read more 
-about and how our team accounts for it :ref:`here <residual_confounding>`.
+Unlike compartmental or multiplication models, which typically assume a homogeneous population within a "state," 
+microsimulations explicitly model individual-level heterogeneity. This shift in granularity does not introduce 
+new confounding; rather, it surfaces existing data limitations that are often obscured by aggregation in other 
+model types. Whether a model is individual-level or population-level, the data required to fully eliminate residual 
+confounding remains the same: a complete map of the correlations between all risk exposures and outcomes. 
+
+While our team strives to account for the relationships between all risk exposures, no dataset can capture every 
+variable. Consequently, there will always be a degree of residual confounding in any model structure, and Vivarium
+is no exception to this. You can read more about how our team conceptualizes and accounts for limitations related to
+residual confounding :ref:`here <residual_confounding>`.
 
 .. todo::
 
