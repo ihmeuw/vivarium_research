@@ -203,7 +203,7 @@ As such, we model individual-level risk exposures which have varying levels of c
 one another. Our team does our best to account for the relationships between all risk exposures,
 there will always be unaccounted-for factors associated with the risk exposure and outcome of
 interest in our microsimulations. This is known as residual confounding, which you can read more 
-about and how our team accounts for it `here <https://vivarium-research.readthedocs.io/en/latest/model_design/vivarium_model_components/risk_factors/residual_confounding/index.html>`__.
+about and how our team accounts for it :ref:`here <residual_confounding>`.
 
 .. todo::
 
