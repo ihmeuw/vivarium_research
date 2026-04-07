@@ -376,9 +376,10 @@ scenario, and input draw.
       Note that the diagram states `Full treatment effect LONG` and `Full treatment effect SHORT` are both considered the same status (`Full treatment effect`),
       but are stratified by completion status.
   * - Months on treatment
-    - Number of months on treatment (integer between 0 and 9, inclusive)
-    - Count the number of simulants in each (year, sex, age group,
-      months on treatment) stratum. This will be used for cost
+    - Number of months on treatment (integer between 1 and 9,
+      inclusive), among simulants who get treated
+    - Count the number of treated simulants in each (year, sex, age
+      group, months on treatment) stratum. This will be used for cost
       estimates.
   * - Treatment status person-time
     - Status (`In treatment/ Waiting for treatment`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect`).
