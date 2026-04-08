@@ -43,8 +43,8 @@ LDL-C-lowering agent on MACE incidence under trial conditions.
 
 .. _macerct3.0:
 
-3.0 Concept Model
-+++++++++++++++++
+3.0 Concept Model Diagram
++++++++++++++++++++++++++
 
 The concept model diagram will represent the trial population, the randomization
 to treatment and control arms, LDL-C exposure, and downstream MACE outcomes.
