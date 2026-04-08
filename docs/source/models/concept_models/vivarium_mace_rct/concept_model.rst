@@ -1,8 +1,8 @@
 .. _2026_concept_model_vivarium_mace_rct:
 
-==========================================
-Vivarium MACE RCT Simulation Concept Model
-==========================================
+===================
+MACE RCT Simulation
+===================
 
 .. contents::
    :local:
