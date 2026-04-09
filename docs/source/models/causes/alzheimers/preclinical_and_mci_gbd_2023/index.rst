@@ -402,7 +402,7 @@ table below:
       and are not yet published, so they should not be stored directly
       in the Artifact or any other public location.
   * - prevalence_m24351
-    - Prevalence of GBD 2023 dementia envelope
+    - Prevalence of GBD 2023 dementia envelope in year 2023
     - get_draws( source="epi", gbd_id_type = "modelable_entity_id",
       gbd_id=24351, release_id=16, year_id=2023, measure_id=5 )
     - The dementia envelope represents the combined prevalence all types
@@ -430,7 +430,8 @@ table below:
     - Prevalence of each state in the total population is :math:`p` times
       the conditional prevalence
   * - incidence_m24351
-    - Total-population incidence rate for GBD 2023 dementia envelope
+    - Total-population incidence rate for GBD 2023 dementia envelope in
+      year 2023
     - get_draws( source="epi", gbd_id_type = "modelable_entity_id",
       gbd_id=24351, release_id=16, year_id=2023, measure_id=6 )
     - Raw value from get_draws, different from susceptible-population
@@ -455,7 +456,7 @@ table below:
       calculate BBBM-AD incidence counts. See `Abie's population and
       mortality forecasts notebook`_ for a demonstration of how to load
       and transform the ``.nc`` file.
-  * - :math:`m_\text{all}`
+  * - :math:`\text{ACMR}`
     - All-cause mortality rate
     - :file:`mortality_all.nc`
     - Draw-level, age-specific forecasts from GBD 2021 Forecasting
@@ -464,6 +465,7 @@ table below:
       ``.nc`` file
   * - emr_m24351
     - Excess mortality rate of dementia from GBD 2023 dementia envelope
+      in year 2023
     - get_draws( source="epi", gbd_id_type = "modelable_entity_id",
       gbd_id=24351, release_id=16, year_id=2023, measure_id=9 )
     - This EMR from DisMod is a true excess mortality rate, including
@@ -757,26 +759,29 @@ NUTS with 500 warmup and 500 sample iterations.
   :widths: 15 35 30 20
   :header-rows: 1
 
-  * - Variable
-    - Definition
+  * - Input Data
+    - Definition and source
     - Artifact key
-    - Source and Year
-  * - p_dementia
-    - Prevalence of Alzheimer's Disease dementia
+    - Model parameter
+  * - prevalence_AD
+    - Prevalence of AD dementia in year 2023 (derived from GBD 2023
+      dementia envelope)
     - ``cause.alzheimers.prevalence``
-    - GBD 2023 Dementia Envelope, scaled by fraction due to AD, for year 2023
-  * - i_dementia
-    - Total-population incidence rate of AD dementia
+    - :math:`p_\text{dementia}`
+  * - incidence_AD
+    - Total-population incidence rate of AD dementia in year 2023
+      (derived from GBD 2023 dementia envelope)
     - ``cause.alzheimers.population_incidence_rate``
-    - GBD 2023 Dementia Envelope, scaled by fraction due to AD, for year 2023
+    - :math:`i`
   * - emr_m24351
-    - Excess mortality rate of dementia from GBD 2023 dementia envelope
+    - Excess mortality rate of dementia in year 2023 (from GBD 2023
+      dementia envelope)
     - ``cause.alzheimers.excess_mortality_rate``
-    - GBD 2023 Dementia Envelope, unscaled, for year 2023
-  * - :math:`m_\text{all}`
-    - All-cause mortality rate
+    - :math:`f`
+  * - :math:`\text{ACMR}_{2025}`
+    - All-cause mortality rate in year 2025 (from FHS forecasts)
     - ``cause.all_causes.cause_specific_mortality_rate``
-    - FHS 2023 estimates for year 2025
+    - :math:`m_\text{all}`
 
 .. list-table:: Calibrated Outputs (written to artifact for year 2025)
   :widths: 25 75
