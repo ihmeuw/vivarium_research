@@ -446,13 +446,6 @@ table below:
       rate is constant over time in each demographic group. We assume
       94% of mixed dementias include Alzheimer's, based on this `mixed
       dementias presentation`_ from the dementia modelers.
-  * - acmr
-    - All-cause mortality rate
-    - :file:`mortality_all.nc`
-    - Draw-level, age-specific forecasts from GBD 2021 Forecasting
-      Capstone. See `Abie's population and mortality forecasts
-      notebook`_ for a demonstration of how to load and transform the
-      ``.nc`` file
   * - population_forecast
     - Forecasted average population during specified year
     - :file:`population_agg.nc`
@@ -462,6 +455,24 @@ table below:
       calculate BBBM-AD incidence counts. See `Abie's population and
       mortality forecasts notebook`_ for a demonstration of how to load
       and transform the ``.nc`` file.
+  * - :math:`m_\text{all}`
+    - All-cause mortality rate
+    - :file:`mortality_all.nc`
+    - Draw-level, age-specific forecasts from GBD 2021 Forecasting
+      Capstone. See `Abie's population and mortality forecasts
+      notebook`_ for a demonstration of how to load and transform the
+      ``.nc`` file
+  * - emr_m24351
+    - Excess mortality rate of dementia from GBD 2023 dementia envelope
+    - get_draws( source="epi", gbd_id_type = "modelable_entity_id",
+      gbd_id=24351, release_id=16, year_id=2023, measure_id=9 )
+    - This EMR from DisMod is a true excess mortality rate, including
+      all deaths *associated* with dementia, as opposed to only those
+      deaths *caused* by dementia, which is what we usually use in our
+      simulations. Consequently, the "CSMR" derived from this EMR is
+      **not** a true "cause-specific" mortality rate, as it will include
+      deaths *associated* with AD dementia, rather than just those
+      *caused* by AD dementia.
   * - :math:`m`
     - Background mortality rate (non-AD mortality)
     - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
@@ -755,14 +766,14 @@ NUTS with 500 warmup and 500 sample iterations.
     - ``cause.alzheimers.prevalence``
     - GBD 2023 Dementia Envelope, scaled by fraction due to AD, for year 2023
   * - i_dementia
-    - Population incidence rate of dementia
+    - Total-population incidence rate of AD dementia
     - ``cause.alzheimers.population_incidence_rate``
     - GBD 2023 Dementia Envelope, scaled by fraction due to AD, for year 2023
-  * - f
-    - Excess mortality rate for dementia
+  * - emr_m24351
+    - Excess mortality rate of dementia from GBD 2023 dementia envelope
     - ``cause.alzheimers.excess_mortality_rate``
     - GBD 2023 Dementia Envelope, unscaled, for year 2023
-  * - m_all
+  * - :math:`m_\text{all}`
     - All-cause mortality rate
     - ``cause.all_causes.cause_specific_mortality_rate``
     - FHS 2023 estimates for year 2025
