@@ -666,7 +666,10 @@ The calibration is implemented in ``consistent_rates.py`` in the
 `vivarium_csu_alzheimers repository <https://github.com/ihmeuw/vivarium_csu_alzheimers>`_. We fit separate models for males and
 females.
 
-**Model Parameters.** The NumPyro model defines 7 age-varying parameters, each
+Model Parameters
+~~~~~~~~~~~~~~~~
+
+The NumPyro model defines 7 age-varying parameters, each
 with truncated normal priors on :math:`[0, 1]`:
 
 - :math:`p`: Total prevalence of any AD state
@@ -678,7 +681,10 @@ with truncated normal priors on :math:`[0, 1]`:
 - :math:`m`: Background (non-AD) mortality rate
 
 
-**ODE Consistency Constraints.** The calibration produces consistent parameters by
+ODE Consistency Constraints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The calibration produces consistent parameters by
 solving a 5-compartment ODE system starting with initial conditions at age :math:`a` to find the implied values at age :math:`a + 5`; we include the squared difference between these implied values and the parameter values in the MCMC objective.  
 
 The state variables are S (susceptible), BBBM, MCI, D (dementia), and
@@ -697,7 +703,10 @@ and :math:`h_{\text{MCI} \to D} = 1 / \Delta_\text{MCI}` are fixed based on
 literature values in the data values table above and the assumption that the Weibull distribution is approximated acceptably by a constant hazard for calibration purposes.
 Note that :math:`dD_\text{new}` is not required for solving this system of differential equations; it is included to allow us to calibrate the total-population incidence rate of AD dementia.
 
-**Non-ODE Consistency Constraints.** Dementia prevalence derives from total AD prevalence:
+Non-ODE Consistency Constraints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Dementia prevalence derives from total AD prevalence:
 
 .. math::
 
@@ -735,7 +744,10 @@ And the prevalences and fractions can be represented in terms of compartment siz
   p\_\text{dementia} = \frac{D}{S + \text{BBBM + MCI} + D}
 
 
-**Loss Function.** After solving the ODE with initial values for age :math:`a` to find the ODE-implied values at :math:`a + 5`,
+Loss Function
+~~~~~~~~~~~~~
+
+After solving the ODE with initial values for age :math:`a` to find the ODE-implied values at :math:`a + 5`,
 the calibration computes the root-sum-squared log-difference between ODE-impled values and parameter values:
 
 .. math::
@@ -752,8 +764,14 @@ where :math:`\hat\delta_\text{BBBM}`, :math:`\hat\delta_\text{MCI}`,
 solution with initial values from the parameters for age :math:`a`. The calibration applies a penalty by assuming a priori that the ODE error :math:`\epsilon(a) \sim
 \mathcal{N}(0, \sigma)` with :math:`\sigma = 0.005`.
 
-**Numerical Methods.** We solve the ODE using diffrax (Dopri5) and sample using
+Numerical Methods
+~~~~~~~~~~~~~~~~~
+
+We solve the ODE using diffrax (Dopri5) and sample using
 NUTS with 500 warmup and 500 sample iterations.
+
+Inputs and Outputs
+~~~~~~~~~~~~~~~~~~
 
 .. list-table:: Calibration Input Data
   :widths: 15 35 30 20
@@ -806,7 +824,9 @@ NUTS with 500 warmup and 500 sample iterations.
   * - ``cause.alzheimers_consistent.ode_errors``
     - ODE consistency residuals for validation (should be < 0.01)
 
-**Running the Calibration:**
+Running the Calibration
+~~~~~~~~~~~~~~~~~~~~~~~
+
 
 .. code-block:: python
 
