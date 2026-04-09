@@ -696,12 +696,32 @@ The state variables are S (susceptible), BBBM, MCI, D (dementia), and
   \frac{d(\text{BBBM})}{dt} &= h_{S \to \text{BBBM}} \cdot S - m \cdot \text{BBBM} - h_{\text{BBBM} \to \text{MCI}} \cdot \text{BBBM} \\
   \frac{d(\text{MCI})}{dt} &= h_{\text{BBBM} \to \text{MCI}} \cdot \text{BBBM} - m \cdot \text{MCI} - h_{\text{MCI} \to D} \cdot \text{MCI} \\
   \frac{dD}{dt} &= h_{\text{MCI} \to D} \cdot \text{MCI} - (m + f) \cdot D \\
-  \frac{dD_\text{new}}{dt} &= h_{\text{MCI} \to D} \cdot \text{MCI}
+  \frac{dD_\text{new}}{dt} &= h_{\text{MCI} \to D} \cdot \text{MCI}.
 
 The transition rates :math:`h_{\text{BBBM} \to \text{MCI}} = 1 / \Delta_\text{BBBM}`
 and :math:`h_{\text{MCI} \to D} = 1 / \Delta_\text{MCI}` are fixed based on
 literature values in the data values table above and the assumption that the Weibull distribution is approximated acceptably by a constant hazard for calibration purposes.
-Note that :math:`dD_\text{new}` is not required for solving this system of differential equations; it is included to allow us to calibrate the total-population incidence rate of AD dementia.
+
+Note that the model parameters :math:`p`, :math:`\delta_\text{BBBM}`,
+and :math:`\delta_\text{MCI}` can be represented in terms of
+compartment sizes as follows:
+
+.. math::
+
+  p = \frac{\text{BBBM + MCI + D}}{S + \text{BBBM + MCI} + D}
+
+.. math::
+
+  \delta_\text{BBBM} = \frac{\text{BBBM}}{\text{BBBM + MCI} + D}
+
+.. math::
+
+  \delta_\text{MCI} = \frac{\text{MCI}}{\text{BBBM + MCI} + D}.
+
+Also note that :math:`D_\text{new}` is not required for solving this
+system of differential equations; it is included for convenience to
+allow us to easily calibrate the total-population incidence rate of AD
+dementia, :math:`i`.
 
 Non-ODE Consistency Constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -724,24 +744,6 @@ Total-population incidence rate of AD-dementia can be expressed in terms of the 
 .. math::
 
   i(a) = h_{\text{MCI} \to D} \cdot \text{MCI} / (S + BBBM + MCI + D)
-
-And the prevalences and fractions can be represented in terms of compartment sizes as well:
-
-.. math::
-
-  \delta\_\text{BBBM} = \frac{\text{BBBM}}{\text{BBBM + MCI} + D}
-
-.. math::
-
-  \delta\_\text{MCI} = \frac{\text{BBBM}}{\text{BBBM + MCI} + D}
-
-.. math::
-
-  p = \frac{\text{BBBM + MCI + D}}{S + \text{BBBM + MCI} + D}
-
-.. math::
-
-  p\_\text{dementia} = \frac{D}{S + \text{BBBM + MCI} + D}
 
 
 Loss Function
@@ -773,6 +775,13 @@ NUTS with 500 warmup and 500 sample iterations.
 Inputs and Outputs
 ~~~~~~~~~~~~~~~~~~
 
+The calibration uses the following input data to constrain certain model
+parameters. The variable names in the first table column are from the
+:ref:`Data values and sources table
+<2021_cause_alzheimers_presymptomatic_mci_data_sources_table>` above,
+which contains additional details about the input data. The last column
+shows which model parameter is constrained by the data.
+
 .. list-table:: Calibration Input Data
   :widths: 15 35 30 20
   :header-rows: 1
@@ -800,6 +809,9 @@ Inputs and Outputs
     - All-cause mortality rate in year 2025 (from FHS forecasts)
     - ``cause.all_causes.cause_specific_mortality_rate``
     - :math:`m_\text{all}`
+
+The calibration outputs the following data to be used by the Vivarium
+simulation.
 
 .. list-table:: Calibrated Outputs (written to artifact for year 2025)
   :widths: 25 75
