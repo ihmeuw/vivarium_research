@@ -40,10 +40,12 @@ Modeling Aims and Objectives
 The aim of this simulation is to estimate the effect of the experimental
 LDL-C-lowering agent on MACE incidence under trial conditions.
 
-Concept Model
-+++++++++++++
+.. _macerct3.0:
 
-The concept model will represent the trial population, the randomization
+Concept Model Diagram
++++++++++++++++++++++
+
+The concept model diagram will represent the trial population, the randomization
 to treatment and control arms, LDL-C exposure, and downstream MACE outcomes.
 
 Vivarium Modeling Components
