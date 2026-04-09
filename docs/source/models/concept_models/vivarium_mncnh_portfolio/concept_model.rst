@@ -119,22 +119,26 @@ the simulation.
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
+This simulation aims to answer the research question:
+**What impacts would different (combinations of) interventions have on maternal, newborn, and child nutrition and health outcomes?**
+We model three locations currently: Nigeria, Ethiopia, and Pakistan.
+We aim to incorporate quite an expansive list of interventions in various stages of development
+that are under consideration by the Gates Foundation.
+The "combinations of" part of the research question is crucial -- interventions might *interact*, for example due to prevention
+reducing the need for treatment down the line.
+
 The MNCNH Portfolio simulation builds on work our team has done in other simulations
 of pregnancy and early childhood.
 The most recent was the :ref:`Nutrition Optimization (NO) <2021_concept_model_vivarium_nutrition_optimization>` simulation,
 which (as the name suggests) focused particularly on nutrition interventions.
 That simulation allowed us to estimate the impacts of each intervention, and crucially also
-how the interventions might *interact*, for example due to prevention
-reducing the need for treatment down the line.
+how the interventions interacted.
 "Optimization" refers to the fact that we used the output of the NO sim to calculate
 *optimal* allocation of money to have the biggest impact given a budget,
 taking all these interactions into account.
 
-Nutrition interventions continue to be included in the MNCNH portfolio sim, but the "portfolio" is
-broader; the intervention space includes more products.
-These products, like the nutrition interventions in the NO project,
-interact in complex ways, and an aim of this simulation is to estimate the impact
-of different *combinations* of these interventions.
+Nutrition interventions continue to be included in the MNCNH portfolio sim, but the "portfolio" is broader,
+including non-nutrition interventions as well.
 As before, we also plan to estimate costs and calculate optimal budget allocation,
 possibly with improved costing methodology.
 This page serves as documentation for the simulation part of the project, which is focused
@@ -150,7 +154,7 @@ We plan to complete this work in 3 waves.
 * Wave 2 will add in some antenatal supplements (MMS, IV iron), the hemoglobin risk for birthing parents, all downstream causes affected by hemoglobin, and higher level delivery facility interventions.
 * Wave 3 will add in gestational blood pressure and relevant causes and risks including pre-eclampsia care and downstream effects of high blood pressure.
 
-As of August 2025, Wave 1 is mostly complete in both documentation and implementation, and Wave 2 is partially documented and has just started implementation.
+As of February 2026, Wave 1 is complete in both documentation and implementation and Wave 2 is mostly documented and partly implemented.
 
 .. _mncnh_portfolio_3.0:
 
@@ -173,6 +177,33 @@ format in which we jump directly to from one decision point to the next rather t
 through time.
 For this reason, throughout this model we calculate and express events in terms of probabilities,
 rather than rates per person-time or similar.
+
+In part because of this unusual handling of time, this model also contains much more "fortune-telling" than a typical sim:
+instances in which the order that decisions are made in the simulation does not correspond to the real-life
+order in which events occur.
+For example, one of the first attributes assigned to each pregnant person, in :ref:`the initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`,
+is their broad pregnancy outcome: whether their pregnancy will result in a live/stillbirth, or an abortion/miscarriage/ectopic pregnancy.
+In real life, however, this doesn't all get determined at the same time.
+Whether a pregnancy is ectopic, for example, is determined at the time of implantation (around 3-4 weeks gestation).
+A full-term pregnancy and one that will end in miscarriage are indistinguishable until the miscarriage occurs, which is much later (up to 24 weeks gestation).
+Our simulation makes all of these decisions at once by choosing broad pregnancy outcome.
+The broad pregnancy outcome then informs the attribute of whether and when the pregnant person will attend antenatal care (ANC).
+This leads to the strange situation that, in our simulation,
+simulants attending early ANC are already "fated" to have, or not have, a miscarriage,
+hence the term "fortune-telling."
+While odd to think through, this is a valid approach as long as we don't need to simulate a *causal* relationship between broad pregnancy outcome and ANC attendance.
+We have to simulate *causal* relationships for each step in the pathways between our interventions and outcomes,
+and these have to be in temporal order; otherwise something an intervention will avert from happening
+could already have occurred before the intervention has a chance to act.
+For all relationships between attributes that aren't in a pathway between an intervention and an outcome,
+however, the order doesn't matter.
+We can choose however is convenient, and often make the choice based on the data that are available,
+though we should keep in mind that "fortune-telling" does make the model a bit harder to reason about
+and less intuitive.
+In the case of broad pregnancy outcome and ANC attendance, we currently don't model interventions that
+impact either of these attributes.
+Even in the future if we modeled an intervention that increased ANC attendance, that intervention
+wouldn't act through changing broad pregnancy outcome, hence there is no need to model a causal relationship.
 
 The overall simulation model is divided into four "components," which are differentiated by the timespan
 and the simulant that they model.
@@ -980,7 +1011,12 @@ Default stratifications to all observers should include scenario and input draw.
   * - 11. Anemia YLDs
     - * Maternal age group
       * Pregnancy outcome
+      * Anemia status (not_anemic, mild, moderate, severe)
     - Inclusive of anemia YLDs accrued during pregnancy and the postpartum period
+  * - 12. Anemia person-time
+    - * Maternal age group
+      * Anemia status (not_anemic, mild, moderate, severe)
+    - Inclusive of anemia person-time accrued during pregnancy and the postpartum period
 
 .. todo::
 
@@ -1697,21 +1733,57 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline 
     - Default
     -
+  * - 28.1
+    - Merge 28.0 and 27.1
+    -
+    - Baseline 
+    - Default
+    -
   * - 29.0
     - Anemia YLDs and postpartum hemoglobin
-    - 
+    -
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default, note new anemia YLD observer
     -
-  * -
-    - Anemia YLDs run without oral iron effects on hemoglobin
-    - Same as previous, but without oral iron effects on hemoglobin to eliminate baseline IFA calibration contribution
-      to anemia YLDs difference from GBD.
+  * - 29.1
+    - Anemia YLDs sensitivity analysis
+    - As a sensitivity analysis, disable the effect of oral iron on hemoglobin
 
       **Note: this model is for sensitivity analysis only and future models should not be based on it.**
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
-    - Default, note new stratification by pregnancy outcome in anemia YLDs observer
-    - None
+    - Default
+    -
+  * - 29.2
+    - Anemia YLDs sensitivity analysis bugfix
+    - Fix issue in 29.1 where baseline IFA deletion was still applied to hemoglobin
+    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - Default
+    -
+  * - 29.0.1
+    - Anemia YLDs bugfixes
+    - Fix issue in 29.0 where anemia YLDs duration for abortion/miscarriage/ectopic pregnancies were longer than the pregnancy;
+      consolidate pregnancy duration and gestational age pipelines
+    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - Default
+    -
+  * - 29.0.2
+    - Anemia YLDs bugfixes 2
+    - Fix issue in 29.0.1 where oral iron effects were not being applied to the anemia YLDs calculation
+    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - Default
+    -
+  * - 29.2.1
+    - Merge 29.2 and 29.0.2
+    - Merge anemia YLDs bugfixes into sensitivity analysis, and fix a small bug that was causing job failures in the sensitivity analysis run
+    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - Default
+    -
+  * - 30.0
+    - Oral iron GA shift refactor
+    - Uses different IFA shifts for ANC and non-ANC attendees and recalibrates MMS shifts as described in `this PR <https://github.com/ihmeuw/vivarium_research/pull/1896>`__
+    - Baseline and MMS scale-up scenarios
+    - Default
+    -
   * -
     - Larger run for neonatal mortality V&V
     - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
@@ -1730,7 +1802,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Effects of maternal hemorrhage (and possibly maternal sepsis) on postpartum hemoglobin. Model run is blocked by 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
-    - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__, postpartum hemoglobin
+    - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__
   * - 
     - Separate LBWSG affected causes
     - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__
@@ -2725,21 +2797,73 @@ Default stratifications to all observers should include scenario and input draw.
     - Pakistan fistula update
     - * Confirm that YLDs due to obstructed labor in Pakistan have been updated and our simulated values match input expectations
     - All checks passed
-    - `Model 28.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/257>`__ 
+    - `Model 28.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/257>`__
+  * - 28.1
+    - Merge 28.0 and 27.1
+    - Regression testing
+    - All checks passed
+    - `Model 28.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/274>`__
   * - 29.0
-    - Anemia YLDs and postpartum hemoglobin
+    - Anemia YLDs
     - * In the interactive simulation, confirm postpartum hemoglobin exposure matches hemoglobin exposure at the end of pregnancy for simulants who survive to the postpartum period
-      * In the interactive simulation, confirm that anemia YLDs at each relevant timestep match recalculated values based on the hemoglobin exposure at that timestep and the pregnancy-specific anemia impairment thresholds
       * Baseline simulated anemia YLDs should match corresponding pregnancy-specific GBD values
       * Anemia YLDs should decrease in MMS/IV iron scale-up scenarios 
       * Confirm that ferritin screening results are unchanged
-    - Interactive simulation checks passed, but anemia YLDs are overestimated relative to GBD.
+    - * Baseline anemia YLDs systematically overestimated
+      * Ferritin screening results unchanged, as expected
+      * Anemia YLDs do decrease in the MMS and IV iron scale-up scenarios
     - `Model 29.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/270>`__
-  * - 
-    - Anemia YLDs run without oral iron effects on hemoglobin
-    - Same as 29.0, but should *not* see oral iron effects on hemoglobin; hope to see improvement in anemia YLD estimates relative to GBD as a result of this change 
-    - 
-    - 
+  * - 29.1
+    - Anemia YLDs sensitivity analysis
+    - * Check whether overestimation in anemia YLDs goes away without oral iron effects on hemoglobin
+    - * Anemia YLDs even more overestimated
+      * Debugging indicates that IFA deletion is still being applied
+    - `Model 29.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/c3115c9c04d3ef8ba6e60375fc9763029ac689c5>`__
+  * - 29.2
+    - Anemia YLDs sensitivity analysis bugfix
+    - Same as 29.1
+    - * Anemia YLD overestimate now smaller than in 29.0, but still present
+      * Interactive sim checks indicate that abortion/miscarriage/ectopic pregnancies are calculating anemia YLDs based on durations longer than the pregnancy duration
+    - `Model 29.2 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/89e8942fc5ec40361409de529b73af1443181637>`__
+  * - 29.0.1
+    - Anemia YLDs bugfixes
+    - Same as 29.0, and that issues noticed in 29.2 are resolved
+    - Results indicate that oral iron effects on gestational age are not being applied
+    - `Model 29.0.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/f6617a90aafa8ded721ef61a45e88ab60869e61a/tests/model_notebooks>`__
+  * - 29.0.2
+    - Anemia YLDs bugfixes 2
+    - Same as 29.0.1, and confirm that oral iron effects on gestational age are being applied
+    - Round 1:
+
+      * Oral iron effects on gestational age are fixed
+      * Anemia YLDs still overestimated, but to a lesser extent than in 29.0
+
+      Round 2:
+
+      * Negative durations are present in anemia YLD calculations both due to abortion/miscarriage/ectopic pregnancies
+        having a "placeholder" later ANC time which may be after the end of pregnancy, *and* due to stillbirths having
+        their later ANC time calculated based on pregnancy duration before stillbirth truncation is applied
+      * There is also a theoretical possibility of negative durations if IV iron *shortens* a pregnancy (which it can)
+        but we do not see this (at reasonable sample size) because these effects are small
+    - * `Model 29.0.2 V&V notebooks round 1 <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/282>`__
+      * `Model 29.0.2 V&V notebooks round 2 <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/286>`__
+  * - 29.2.1
+    - Merge 29.2 and 29.0.2
+    - Same as 29.2
+    - * Anemia YLDs still overestimated, but even less than in 29.0.2
+      * Interactive sim checks indicate that there are still some negative durations in the anemia YLD calculations
+    - `Model 29.2.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/75c9ac66cded8b1d780c10bb736dd66e0b3b442b>`__
+  * - 30.0
+    - Oral iron GA shift refactor
+    - * Checks from 17.0
+      * Regression testing
+      * Confirm that updated shifts were implemented correctly based on the ANC and IFA categories (in interactive sim)
+      * Confirm that oral iron effect on preterm birth in simulation results meets verification target (was not met in 17.0), verify effect on GA and BW
+      * Facility choice model targets (checks from 15.0)
+    - * Oral iron effect on preterm birth improved -- about half as underestimated as in model 17.0
+      * Preterm birth still equally overestimated in facility choice model targets, which we thought would improve
+      * All other checks passing
+    - `Model 30.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/281>`__
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
@@ -2750,7 +2874,7 @@ Default stratifications to all observers should include scenario and input draw.
     - * Confirm that neonatal mortality (particularly for neonatal sepsis) still matches expectation in the baseline scenario
       * Using the interactive simulation, confirm effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. The total effect should be evaluated by stepping through the simulation and observing the rate of mortality due to neonatal sepsis stratified by maternal hemoglobin exposure.
     - 
-    -  
+    - 
   * - 
     - Effects of maternal disorders on postpartum hemoglobin
     - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident maternal disorders

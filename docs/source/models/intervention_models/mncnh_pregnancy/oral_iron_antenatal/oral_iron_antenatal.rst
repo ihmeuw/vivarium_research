@@ -377,8 +377,6 @@ Assumptions and limitations
 
 - In the case of IFA, we assume that the entire distribution experiences the same constant shift in gestational age. It is more likely that the lower end of the distribution experiences a greater shift and that the upper end experiences little to no shift (as supported from the MMS evidence). This limitation will result in an underestimation of the impact of the lower end of the distribution (which has a high magnitude of risk, but a low overall exposure) and an overestimation of the impact on the upper end of the distribution (which has lower risk magnitude, but higher overall exposure). However, we have limited data on how to better apply such a shift.
 
-- Our calculation of the IFA and MMS gestational age shifts does not take into account the correlation between ANC attendance (and therefore the population eligible to receive these interventions) and gestational age exposure that is induced through the correlated propensities used in the :ref:`facility choice model <2024_facility_model_vivarium_mncnh_portfolio>` in the MNCNH portfolio simulation. Given that there is a positive modeled correlation between these variables, there will be slightly less preterm birth among the population eligible for these interventions than among the population overall in our simulation. Therefore, our estimates of the gestational age shifts are likely less than they would be if they were calculated with consideration to this underyling correlation. Additionally, the modeled correlation in our simulation not considered in the calculation of the shifts may cause us to not exactly replicate the observed intervention RR on preterm birth that our modeling strategy aims to replicate.
-
 - We assume no effect modification by when in pregnancy oral iron is received. In reality, the effect on gestational age is likely greater for those who have taken oral iron for longer.
 
 - Our baseline calibration preserves the population mean value of gestational age at birth, but only approximates the overall exposure distribution.
@@ -434,10 +432,20 @@ The same instructions written in pseduocode in the Birthweight_ section can be f
     - Subpopulation
     - Shift
     - Note
+  * - None
+    - Overall baseline population
+    - Not covered by IFA at baseline
+    - -WEIGHTED_AVG_SHIFT * baseline_ifa_overall
+    - 
   * - IFA
-    - No supplementation
-    - Overall
-    - IFA_SHIFT
+    - Overall baseline population
+    - Non ANC attendees covered by IFA at baseline
+    - -WEIGHTED_AVG_SHIFT * baseline_ifa_overall + SHIFT_FALSE
+    - Hypothetical shift for calibration - only ANC attendees receive IFA
+  * - IFA
+    - Overall baseline population
+    - ANC attendees covered by IFA at baseline
+    - -WEIGHTED_AVG_SHIFT * baseline_ifa_overall + SHIFT_TRUE
     - 
   * - MMS
     - IFA
@@ -457,12 +465,62 @@ Where,
 
   * - Parameter
     - Value
-  * - IFA_SHIFT
-    - `Location-specific IFA_SHIFT values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/ifa_ga_shifts.csv>`_
+  * - WEIGHTED_AVG_SHIFT
+    - SHIFT_TRUE * ANC1 + SHIFT_FALSE * (1 - ANC1)
+  * - SHIFT_TRUE
+    - IFA shift for ANC attendees.
+      `Location-specific IFA_SHIFT values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/ifa_ga_shifts.csv>`_
+  * - SHIFT_FALSE
+    - IFA shift for non-ANC attendees.
+      `Location-specific IFA_SHIFT values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/ifa_ga_shifts.csv>`_
   * - MMS_SHIFT_1
     - `Location-specific .csv files of MMS_SHIFT_1 values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/updated_mms_shifts.csv>`_
   * - MMS_SHIFT_2
     - `Location-specific .csv files of MMS_SHIFT_2 values can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/updated_mms_shifts.csv>`_
+
+
+The IFA shifts above are relative to the overall baseline population-level GBD exposure values. Individually for each simulant we apply 
+the shifts to the exposure value sampled from GBD for that simulant. 
+
+The "ANC attendees covered by IFA at baseline" subpopulation IFA shift above is applied to simulants.
+The "Non ANC attendees covered by IFA at baseline" subpopulation IFA shift is not applied to any simulants and is only used 
+to calibrate the IFA shift optimization. 
+
+The IFA shifts above can be thought of as being made up from a negative ":ref:`baseline <vivarium_best_practices_baseline_coverage_calibration>` deletion shift"
+(``-WEIGHTED_AVG_SHIFT * baseline_ifa_overall``) and a positive "IFA shift" (``SHIFT_TRUE`` or ``SHIFT_FALSE``). 
+The baseline deletion shift is a shift intended to transform the gestational age exposure distribution of the baseline population
+(in which some individuals already receive IFA) to the exposure distribution of the population which does not receive IFA. 
+In other words, it aims to "delete" the IFA effect already present in the baseline population exposure distribution, leaving us with the non-IFA population distribution.
+The IFA shift is the shift necessary to transform the gestational age exposure distribution of the non-IFA population to that of the IFA population.
+Equivalently, it is the individual-level additive causal effect of IFA on gestational age (which we assume is the same for every individual).
+
+SHIFT_TRUE and SHIFT_FALSE are solved for by an `optimization <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/2bb721ab7b99ca60e284a0a3a948e6504d639a6d/src/vivarium_gates_mncnh/data/ifa_mms_gestation_shifts/ifa_gestational_age_shifts.ipynb>`_
+with the two constraints that the relative risk on preterm birth prevalence of applying (a) SHIFT_TRUE to the ANC population and (b) SHIFT_FALSE to the non-ANC population,
+both match our target RR value from the literature.
+
+.. note::
+  Prior to model 30.0, constraint (b) was that the baseline deletion shift equals the IFA shift times the baseline IFA coverage,
+  in order to preserve the overall population mean gestational age after applying both the baseline deletion and IFA shift.
+  Applying the baseline deletion shift to the whole population lowers the mean gestational age by the amount of that shift.
+  Applying the IFA shift to the IFA population increases the mean gestational age by the amount of the IFA shift times the proportion of the population taking IFA.
+
+  In the current implementation (since model 30.0), the baseline deletion shift is still calculated from the IFA shift, but now
+  there are two IFA shifts, SHIFT_TRUE and SHIFT_FALSE, and the calculation no longer maintains the overall population mean gestational age.
+  The weighted average calculation for the baseline deletion shift only approximates an "IFA shift times baseline IFA coverage" sized shift.
+  A fractional shift does not necessarily have that fraction of an effect on preterm birth, so the weighted average of ANC and non-ANC shifts is not equivalent to an overall shift. 
+ 
+  Additionally, note that preserving the mean gestational age may still not necessarily preserve the prevalence of preterm birth, which is one of 
+  our validation targets. 
+
+.. note::
+  In the future, our approximation of either the preservation of the overall population mean gestational age or of the preterm birth prevalence target
+  can be made more exact. Currently our optimization solves for SHIFT_TRUE and SHIFT_FALSE. To improve one of the above approximations, we could
+  first reparameterize our optimization to solve for SHIFT_TRUE and a direct baseline deletion shift on the overall population 
+  (rather than the baseline deletion shift being calculated as a weighted average of a SHIFT_TRUE on the ANC population and a SHIFT_FALSE on the non-ANC population). 
+  By solving for a baseline deletion shift on the overall population, if we continue setting the baseline deletion shift equal to the 
+  IFA shift times the baseline IFA expsoure, the overall population mean gestational age will be preserved (rather than approximated).
+  To target preterm birth prevalence instead, we could use that target as a constraint and relax the above relationship between 
+  the baseline deletion and IFA shifts.
 
 .. todo:: 
 
@@ -476,6 +534,9 @@ In the baseline scenario, the LBWSG exposure distribution as well as the mortali
 When birthweight exposures are stratified by supplementation regimen and maternal nourishment strata, then birthweight differences between regimens should match the effect sizes within a given maternal nourishment exposure strata.
 
 The dichotomous measures of effects should also replicate the intended values.
+
+As described above, ideally the mean gestational age of the baseline population should be preserved in the simulation, as well as 
+the prevalence of preterm birth. However our current implementation only approximates these targets. 
 
 Birth outcomes
 ++++++++++++++++++
