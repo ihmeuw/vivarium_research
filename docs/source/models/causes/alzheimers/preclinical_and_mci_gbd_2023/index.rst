@@ -26,7 +26,7 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _2021_cause_alzheimers_presymptomatic_mci:
+.. _2023_cause_alzheimers_preclinical_mci:
 
 ===============================================================
 Alzheimer's disease  with preclinical and MCI stages (GBD 2023)
@@ -220,7 +220,7 @@ modeling only simulants with AD dementia or predementia AD as described
 in the :ref:`Alzheimer's population model
 <other_models_alzheimers_population>`:
 
-.. _2021_cause_alzheimers_presymptomatic_mci_state_data_table:
+.. _2023_cause_alzheimers_preclinical_mci_state_data_table:
 
 .. list-table:: State data when modeling only simulants with AD dementia or predementia AD
   :header-rows: 1
@@ -256,7 +256,7 @@ in the :ref:`Alzheimer's population model
 are obtained from the :ref:`rate calibration
 <cause_alzheimers_rate_calibration>`.
 
-.. _2021_cause_alzheimers_presymptomatic_mci_transition_data_table:
+.. _2023_cause_alzheimers_preclinical_mci_transition_data_table:
 
 .. list-table:: Transition Data
   :header-rows: 1
@@ -295,7 +295,7 @@ are obtained from the :ref:`rate calibration
 
 **Note:** :math:`h_\text{MCI}(t)` is the time-dependent hazard function for
 transitioning from BBBM-AD to MCI-AD, defined in the :ref:`data values and
-sources table below <2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`.
+sources table below <2023_cause_alzheimers_preclinical_mci_data_sources_table>`.
 
 Simulants initialized into the BBBM-AD state need an assigned value for
 :math:`T_\text{BBBM}` to determine their dwell time. For simulants in BBBM-AD
@@ -369,7 +369,7 @@ table below:
   # Disability weights saved by Simscience team:
   /mnt/team/simulation_science/costeffectiveness/auxiliary_data/GBD_2021/02_processed_data/disability_weight/sequela/all/all.hdf
 
-.. _2021_cause_alzheimers_presymptomatic_mci_data_sources_table:
+.. _2023_cause_alzheimers_preclinical_mci_data_sources_table:
 
 .. list-table:: Data values and sources
   :widths: 20 30 25 25
@@ -778,7 +778,7 @@ Inputs and Outputs
 The calibration uses the following input data to constrain certain model
 parameters. The variable names in the first table column are from the
 :ref:`Data values and sources table
-<2021_cause_alzheimers_presymptomatic_mci_data_sources_table>` above,
+<2023_cause_alzheimers_preclinical_mci_data_sources_table>` above,
 which contains additional details about the input data. The last column
 shows which model parameter is constrained by the data.
 
