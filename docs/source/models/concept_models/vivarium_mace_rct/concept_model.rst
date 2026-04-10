@@ -26,13 +26,61 @@ MACE RCT Simulation
   * - RCT
     - Randomized Controlled Trial
     - Study design
+  * - IHD
+    - Ischemic Heart Disease
+    - Cause of cardiovascular mortality
+  * - NASH
+    - Non-Alcoholic Steatohepatitis
+    - Also referred to as MASH (metabolic dysfunction-associated steatohepatitis)
+  * - NAFLD
+    - Non-Alcoholic Fatty Liver Disease
+    - Spectrum of liver disease ranging from simple steatosis to NASH
+  * - MASH
+    - Metabolic Dysfunction-Associated Steatohepatitis
+    - Updated nomenclature for NASH
 
 Background
 ++++++++++
 
-This concept model describes a simulation of a randomized controlled trial
-(RCT) designed to reduce major adverse cardiovascular events (MACE) by
-lowering LDL-C with an experimental new agent.
+Elevated low-density lipoprotein cholesterol (LDL-C) is a well-established causal risk factor for
+atherosclerotic cardiovascular disease, including ischemic heart disease (IHD) and ischemic stroke.
+Despite the availability of statins and other
+lipid-lowering therapies, a substantial fraction of patients at elevated cardiovascular risk do not
+achieve guideline-recommended LDL-C targets, motivating the development of novel LDL-C-lowering
+agents.
+
+Non-alcoholic steatohepatitis (NASH), now more commonly referred to as metabolic dysfunction-associated
+steatohepatitis (MASH), is an increasingly prevalent condition characterized by hepatic inflammation
+and fibrosis in the setting of metabolic syndrome. Patients with NASH and significant liver fibrosis
+carry a metabolic risk profile that differs from the general population in important ways: they have
+higher rates of insulin resistance, dyslipidemia, obesity, and systemic inflammation. These
+comorbidities place NASH patients at substantially elevated risk of cardiovascular events. Indeed,
+cardiovascular disease is the leading cause of death in patients with non-alcoholic fatty liver
+disease (NAFLD), surpassing liver-related mortality in all but the most advanced stages of fibrosis.
+
+The randomized controlled trial (RCT) that this concept model simulates will enroll patients with a
+to-be-determined level of liver fibrosis (e.g., fibrosis stage F2--F3) and elevated LDL-C. Because
+this trial focuses on a population selected for hepatic fibrosis, the enrolled participants are
+expected to have a metabolic risk profile that is meaningfully different from the general population.
+In particular, they may have higher baseline rates of major adverse cardiovascular events (MACE)
+due to the clustering of cardiometabolic
+risk factors associated with NASH. Understanding these differences is critical for several reasons.
+
+First, it is useful to understand what fraction of the general population would meet the trial's
+inclusion criteria, as this determines the generalizability of the trial findings and the potential
+market size for the intervention. 
+
+Second, it is important to estimate how MACE rates in the trial population might differ from
+general population rates. If the trial population has meaningfully higher baseline MACE risk, the
+trial may be better powered to detect a treatment effect, but the absolute risk reduction observed
+may not translate directly to lower-risk populations. Conversely, if the novel agent also has
+hepatoprotective effects or modifies metabolic risk beyond LDL-C lowering, the benefit in this
+population could exceed what would be predicted from LDL-C reduction alone.
+
+This simulation will model the trial population, the randomization to treatment and control arms,
+LDL-C trajectories under the experimental agent, and the downstream incidence of MACE
+(cardiovascular death, myocardial infarction, and ischemic stroke) to inform trial design and
+expected outcomes.
 
 Modeling Aims and Objectives
 ++++++++++++++++++++++++++++
