@@ -93,7 +93,7 @@ Documents that contain information specific to the overall model and the child s
 
 .. note::
 
-  Unless specifically noted, only change from the IV iron implementation is the update from GBD 2019 to GBD 2021 data
+  Unless specifically noted, only change from the IV iron implementation is the update from GBD 2019 to GBD 2023 data
 
 +---------------------+-----------------------------------------------------+---------------------+
 | Category            | Model                                               | Note                |
@@ -105,33 +105,34 @@ Documents that contain information specific to the overall model and the child s
 |                     |:ref:`Pregnancy model (closed cohort)                |                     |
 |                     |<other_models_pregnancy_closed_cohort>`              |                     |
 +---------------------+-----------------------------------------------------+---------------------+
-|Risk exposure        |:ref:`Hemoglobin/anemia                              |Wave II update to    |
-|                     |<2019_hemoglobin_model>`                             |most detailed locs.  |
+|Risk exposure        |:ref:`Hemoglobin/anemia                              |Updated to GDB 2023  |
+|                     |<2019_hemoglobin_model>`                             |and release ID 33.   |
 |                     +-----------------------------------------------------+---------------------+
-|                     |:ref:`Pre-pregnancy/first trimester BMI              |Will need custom data|
-|                     |<2019_risk_exposure_maternal_bmi_hgb>`               |update for 2021 (Ali)|
+|                     |:ref:`Pre-pregnancy/first trimester BMI              |Custom data updates  |
+|                     |<2019_risk_exposure_maternal_bmi_hgb>`               |being done by JKUAT. |
 |                     +-----------------------------------------------------+---------------------+
-|                     |:ref:`Birth weight and gestational age               |                     |
+|                     |:ref:`Birth weight and gestational age               |Using GBD 2021 still.|
 |                     |<2019_risk_exposure_lbwsg>`                          |                     |
 +---------------------+-----------------------------------------------------+---------------------+
-|Risk correlation     |:ref:`Hgb/BMI/LBWSG                                  |Will need custom data|
-|                     |<2019_risk_correlation_maternal_bmi_hgb_birthweight>`|update for 2021 (Ali)|
+|Risk correlation     |:ref:`Hgb/BMI/LBWSG                                  |Needs custom data    |
+|                     |<2019_risk_correlation_maternal_bmi_hgb_birthweight>`|update for 2023.     |
 +---------------------+-----------------------------------------------------+---------------------+
 |Risk effects         |:ref:`Hemoglobin<2019_risk_effect_iron_deficiency>`  |Do not include effect|
 |                     |, including effects on (1) maternal disorders, and   |on birth outcomes    |
 |                     |(2) maternal hemorrhage incidence                    |(stillbirth), change |
-|                     |                                                     |from IV iron. Will   |
-|                     |                                                     |need custom data     |
-|                     |                                                     |update for 2021 (Ali)|
+|                     |                                                     |from IV iron. This   |
+|                     |                                                     |will continue to use |
+|                     |                                                     |GBD 2021, PAFs being |
+|                     |                                                     |calculated by JKUAT. |
 |                     +-----------------------------------------------------+---------------------+
 |                     |:ref:`Maternal hemorrhage effect on                  |                     |
 |                     |hemoglobin                                           |                     |
 |                     |<2019_risk_effect_maternal_hemorrhage>`              |                     |
 +---------------------+-----------------------------------------------------+---------------------+
-|Causes               |:ref:`Maternal disorders                             |                     |
+|Causes               |:ref:`Maternal disorders                             |Updated to GBD 2023. |
 |                     |<2021_cause_maternal_disorders>`                     |                     |
 |                     +-----------------------------------------------------+---------------------+
-|                     |:ref:`Maternal hemorrhage incidence                  |                     |
+|                     |:ref:`Maternal hemorrhage incidence                  |Updated to GBD 2023. |
 |                     |<2019_cause_maternal_hemorrhage_incidence>`          |                     |
 |                     +-----------------------------------------------------+---------------------+
 |                     |:ref:`Background morbidity due to other              |Modeled causes: r192 |
@@ -150,7 +151,9 @@ Documents that contain information specific to the overall model and the child s
 |                     |<maternal_supplementation_intervention>`             |changes to hemoglobin|
 |                     |                                                     |effects). Also,      |
 |                     |                                                     |coverage algorithm is|
-|                     |                                                     |updated              |
+|                     |                                                     |updated. GA shifts   |
+|                     |                                                     |are being calculated |
+|                     |                                                     |by JKUAT for 2023.   |
 +---------------------+-----------------------------------------------------+---------------------+
 
 .. list-table:: Wave I outstanding tasks
