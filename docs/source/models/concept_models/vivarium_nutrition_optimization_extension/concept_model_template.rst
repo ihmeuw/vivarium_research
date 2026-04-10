@@ -42,7 +42,7 @@ Components unchanged from the existing :ref:`nutrition optimization child model 
 - :ref:`Malaria <2021_cause_malaria>`
 - :ref:`Child stunting risk exposure <2020_risk_exposure_child_stunting>`
 
-Artifact-only updates
+Artifact-only updates (data updates to come):
 
 - :ref:`MAM treatment <intervention_wasting_treatment>`: parameter updates to C_MAM and E_MAM only
 - :ref:`SAM treatment for uncomplicated SAM <intervention_wasting_treatment>`: parameter updates to C_SAM and E_SAM only
@@ -146,6 +146,7 @@ Default stratifications for all observers should include:
   * - 2
     - Disability
     - * ylds
+    - 
     - Cause-specific 
   * - 3
     - Child wasting
