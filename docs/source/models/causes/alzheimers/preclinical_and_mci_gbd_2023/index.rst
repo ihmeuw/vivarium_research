@@ -680,6 +680,8 @@ with truncated normal priors on :math:`[0, 1]`:
 - :math:`f`: Excess mortality rate
 - :math:`m`: Background (non-AD) mortality rate
 
+The model solves for the parameters for ages 30 to 100 in 5-year
+intervals.
 
 ODE Consistency Constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -749,8 +751,11 @@ Total-population incidence rate of AD-dementia can be expressed in terms of the 
 Loss Function
 ~~~~~~~~~~~~~
 
-After solving the ODE with initial values for age :math:`a` to find the ODE-implied values at :math:`a + 5`,
-the calibration computes the root-sum-squared log-difference between ODE-impled values and parameter values:
+After solving the ODE with initial values for age :math:`a` to find the
+ODE-implied values at :math:`a + 5`, the calibration computes the
+root-sum-squared log-difference between these ODE-impled values and the
+parameter values :math:`\delta_\text{BBBM}`, :math:`\delta_\text{MCI}`,
+:math:`p_\text{dementia}`, and :math:`i` in the MCMC objective:
 
 .. math::
 
@@ -762,8 +767,10 @@ the calibration computes the root-sum-squared log-difference between ODE-impled 
   }
 
 where :math:`\hat\delta_\text{BBBM}`, :math:`\hat\delta_\text{MCI}`,
-:math:`\hat p_\text{dementia}`, and :math:`\hat\imath` are the values implied by the ODE
-solution with initial values from the parameters for age :math:`a`. The calibration applies a penalty by assuming a priori that the ODE error :math:`\epsilon(a) \sim
+:math:`\hat p_\text{dementia}`, and :math:`\hat\imath` are the values at
+age :math:`a+5` implied by the ODE solution with initial values from the
+parameters for age :math:`a`. The calibration applies a penalty by
+assuming a priori that the ODE error :math:`\epsilon(a) \sim
 \mathcal{N}(0, \sigma)` with :math:`\sigma = 0.005`.
 
 Numerical Methods
