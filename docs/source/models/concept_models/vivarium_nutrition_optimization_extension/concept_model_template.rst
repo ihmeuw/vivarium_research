@@ -10,21 +10,17 @@ Nutrition Optimization Child Model Extension to include Inpatient SAM Treatment
 .. contents::
   :local:
 
-.. __nutrition_optimization_extension1.0:
-
-1.0 Project overview
+Project overview
 ++++++++++++++++++++
 
 This model will be built off of the existing :ref:`Nutrition Optimization <2021_concept_model_vivarium_nutrition_optimization>` simulation and extended to support the distinction between complicated and uncomplicated severe acute malnutrition in order to compare the relative priority of treatment for each condition. This model will use the :ref:`nutrition optimization pregnancy simulation <2021_concept_model_vivarium_nutrition_optimization_pregnancies>` without changes from the previous version and will make several changes to the :ref:`nutrition optimization child simulation <2021_concept_model_vivarium_nutrition_optimization_children>` (outlined below).
 
-.. _nutrition_optimization_extension2.0:
-
-2.0 Simulation Design
+Simulation Design
 ++++++++++++++++++++++
 
 .. _nutrition_optimization_extension2.1:
 
-2.1 Model components 
+Model components 
 --------------------------------------
 
 Pregnancy model: unchanged from those listed in the :ref:`nutrition optimization pregnancy simulation concept model document <2021_concept_model_vivarium_nutrition_optimization_pregnancies>` 
@@ -63,7 +59,7 @@ Components with substantial updates (links/updates to come)
 
 .. _nutrition_optimization_extension2.2:
 
-2.2 Scenario descriptions
+Scenario descriptions
 -------------------------
 
 **Baseline scenario:**
@@ -78,9 +74,7 @@ There will be a total of 54 child intervention scenarios.
 
 `Download this excel file for a list of intervention scenarios and their specified intervention coverage levels <scenario_map.xlsx>`.
 
-.. _nutrition_optimization_extension2.3:
-
-2.3 Default specifications 
+Default specifications 
 --------------------------
 
 The below table is intended to outline the default specifications of your simulation. 
@@ -112,9 +106,7 @@ fill out the table.
   All other specifications remain unchanged from the :ref:`nutrition optimization pregnancy <2021_concept_model_vivarium_nutrition_optimization_pregnancies>` and :ref:`nutrition optimization child <2021_concept_model_vivarium_nutrition_optimization_children>` simulation specifications 
 
 
-.. _nutrition_optimization_extension2.5:
-
-2.5 Simulation Observers
+Simulation Observers
 -------------------------
 
 Default stratifications for all observers should include:
@@ -173,9 +165,7 @@ Default stratifications for all observers should include:
     - These observers are for V&V and can be excluded from production runs
 
 
-.. _nutrition_optimization_extension3.0:
-
-3.0 Verification & validation (V&V) tracking
+Verification & validation (V&V) tracking
 ++++++++++++++++++++++++++++++++++++++++++++
 
 This section is intended for tracking the progress of V&V of simulation
@@ -223,8 +213,4 @@ The below tables can be filled out iteratively as new model runs are requested a
      - 
 
 
-.. _nutrition_optimization_extension4.0:
-
-4.0 Miscellaneous
-+++++++++++++++++
 
