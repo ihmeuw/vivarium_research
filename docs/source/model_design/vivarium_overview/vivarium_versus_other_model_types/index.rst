@@ -197,10 +197,16 @@ strategy.
 Residual confounding
 ~~~~~~~~~~~~~~~~~~~~
 
-Another limitation or disadvantage of microsimulations is that getting realistic, individual-level characteristics from population-level data is difficult, and 
-creates opportunity for residual confounding. 
+Unlike compartmental or multiplication models, which typically assume a homogeneous population within a "state," 
+microsimulations explicitly model individual-level heterogeneity. This shift in granularity does not introduce 
+new confounding; rather, it surfaces existing data limitations that are often obscured by aggregation in other 
+model types. Whether a model is individual-level or population-level, the data required to fully eliminate residual 
+confounding remains the same: a complete map of the correlations between all risk exposures and outcomes. 
 
-You can read more about residual confounding and how our team accounts for it `here <https://vivarium-research.readthedocs.io/en/latest/model_design/vivarium_model_components/risk_factors/residual_confounding/index.html>`__.
+While our team strives to account for the relationships between all risk exposures, no dataset can capture every 
+variable. Consequently, there will always be a degree of residual confounding in any model structure, and Vivarium
+is no exception to this. You can read more about how our team conceptualizes and accounts for limitations related to
+residual confounding :ref:`here <residual_confounding>`.
 
 .. todo::
 
