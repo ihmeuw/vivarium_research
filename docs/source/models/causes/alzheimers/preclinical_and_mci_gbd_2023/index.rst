@@ -50,6 +50,8 @@ Alzheimer's disease  with preclinical and MCI stages (GBD 2023)
     - Disability Weight
   * - FHS
     - Future Health Scenarios
+  * - GBD
+    - Global Burden of Disease
   * - MCI
     - Mild Cognitive Impairment
   * - YLD
@@ -666,6 +668,8 @@ The calibration is implemented in ``consistent_rates.py`` in the
 `vivarium_csu_alzheimers repository <https://github.com/ihmeuw/vivarium_csu_alzheimers>`_. We fit separate models for males and
 females.
 
+.. _cause_alzheimers_rate_calibration_model_parameters:
+
 Model Parameters
 ~~~~~~~~~~~~~~~~
 
@@ -677,7 +681,7 @@ with truncated normal priors on :math:`[0, 1]`:
   prevalences of BBBM and MCI states among AD cases
 - :math:`h_{S \to \text{BBBM}}`: Transition rate from susceptible to BBBM
 - :math:`i`: Total-population incidence rate of dementia
-- :math:`f`: Excess mortality rate
+- :math:`f`: Excess mortality rate of dementia
 - :math:`m`: Background (non-AD) mortality rate
 
 The model solves for the parameters for ages 30 to 100 in 5-year
@@ -690,7 +694,8 @@ The calibration produces consistent parameters by
 solving a 5-compartment ODE system starting with initial conditions at age :math:`a` to find the implied values at age :math:`a + 5`; we include the squared difference between these implied values and the parameter values in the MCMC objective.  
 
 The state variables are S (susceptible), BBBM, MCI, D (dementia), and
-:math:`D_\text{new}` (cumulative incident dementia, which is used to calibrate the total-population incidence rate of AD dementia). The ODE system is:
+:math:`D_\text{new}` (cumulative incident dementia, which is used to calibrate
+the total-population incidence rate of AD dementia). The DisMOd ODE system is:
 
 .. math::
 
@@ -723,30 +728,63 @@ compartment sizes as follows:
 Also note that :math:`D_\text{new}` is not required for solving this
 system of differential equations; it is included for convenience to
 allow us to easily calibrate the total-population incidence rate of AD
-dementia, :math:`i`.
+dementia, which has the same numerator as :math:`h_{\text{MCI} \to D}`,
+but a different population for the denominator:
+
+.. math::
+
+  \begin{aligned}
+  i &= h_{\text{MCI} \to D} \cdot \frac{\text{MCI}}{S + BBBM + MCI + D} \\
+    &= \frac{d D_\text{new}}{dt} \cdot \frac{1}{S + BBBM + MCI + D}.
+  \end{aligned}
+
+.. _cause_alzheimers_rate_calibration_non_ode_constraints:
 
 Non-ODE Consistency Constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Dementia prevalence derives from total AD prevalence:
+In addition to the logical constraints that the DisMod ODEs impose on rates at
+different ages, we have constraints imposed by the data we get from GBD and
+FHS. The following auxiliary quantities are computed to match against this
+input data.
+
+Dementia prevalence derives from total AD prevalence and the conditional
+prevalences of the predementia states:
 
 .. math::
 
-  p_\text{dementia}(a) = p(a) \cdot \left(1 - \delta_\text{BBBM}(a) - \delta_\text{MCI}(a)\right)
+  \begin{aligned}
+  p_\text{dementia}(a)
+  &= p(a) \cdot \left(1 - \delta_\text{BBBM}(a) -
+    \delta_\text{MCI}(a)\right)\\
+  &= p(a) \cdot \delta_D(a),
+  \end{aligned}
+
+where :math:`\delta_D = 1 - \delta_\text{BBBM} - \delta_\text{MCI}` is the
+conditional prevalence of AD dementia among AD cases.
 
 All-cause mortality combines background mortality with excess mortality
 weighted by dementia prevalence:
 
 .. math::
 
-  m_\text{all}(a) = m(a) + f(a) \cdot p_\text{dementia}(a)
+  \begin{aligned}
+  m_\text{all}(a)
+  &= m(a) + f(a) \cdot p_\text{dementia}(a) \\
+  &= m(a) + \text{CSMR}(a),
+  \end{aligned}
 
-Total-population incidence rate of AD-dementia can be expressed in terms of the :math:`h_{\text{MCI} \to D}` hazard because it has the same numerator with a different population for the denominator:
+where :math:`\text{CSMR} = f \cdot p_\text{dementia}` is the "cause-specific"
+mortality rate of AD dementia. Note that this CSMR is not necessarily causal
+(i.e., it includes deaths *associated* with AD, not just caused by AD) since
+:math:`f` is calibrated to the excess mortality rate we get from DisMod, which
+is not necessarily causal. Despite this limitation, we use the CSMR derived
+from this rate calibration model as the causal CSMR of AD dementia for the
+Alzheimer's disease cause model.
 
-.. math::
-
-  i(a) = h_{\text{MCI} \to D} \cdot \text{MCI} / (S + BBBM + MCI + D)
-
+The :ref:`Inputs and Outputs
+<cause_alzheimers_rate_calibration_inputs_outputs>` section below lists the
+input data that these model variables are calibrated against.
 
 Loss Function
 ~~~~~~~~~~~~~
@@ -767,17 +805,19 @@ parameter values :math:`\delta_\text{BBBM}`, :math:`\delta_\text{MCI}`,
   }
 
 where :math:`\hat\delta_\text{BBBM}`, :math:`\hat\delta_\text{MCI}`,
-:math:`\hat p_\text{dementia}`, and :math:`\hat\imath` are the values at
-age :math:`a+5` implied by the ODE solution with initial values from the
-parameters for age :math:`a`. The calibration applies a penalty by
-assuming a priori that the ODE error :math:`\epsilon(a) \sim
-\mathcal{N}(0, \sigma)` with :math:`\sigma = 0.005`.
+:math:`\hat p_\text{dementia}`, and :math:`\hat\imath` are the values at age
+:math:`a+5` implied by the ODE solution with initial values from the parameters
+for age :math:`a`. The calibration applies a penalty for large errors by
+assuming a priori that the ODE error :math:`\epsilon(a) \sim \mathcal{N}(0,
+\sigma)` with :math:`\sigma = 0.005`.
 
 Numerical Methods
 ~~~~~~~~~~~~~~~~~
 
 We solve the ODE using diffrax (Dopri5) and sample using
 NUTS with 500 warmup and 500 sample iterations.
+
+.. _cause_alzheimers_rate_calibration_inputs_outputs:
 
 Inputs and Outputs
 ~~~~~~~~~~~~~~~~~~
@@ -787,7 +827,11 @@ parameters. The variable names in the first table column are from the
 :ref:`Data values and sources table
 <2023_cause_alzheimers_preclinical_mci_data_sources_table>` above,
 which contains additional details about the input data. The last column
-shows which model parameter is constrained by the data.
+shows which model parameter is constrained by the data; the model parameters
+are defined in the :ref:`Model Parameters
+<cause_alzheimers_rate_calibration_model_parameters>` and :ref:`Non-ODE
+Consistency Constraints
+<cause_alzheimers_rate_calibration_non_ode_constraints>` sections above.
 
 .. list-table:: Calibration Input Data
   :widths: 15 35 30 20
@@ -817,8 +861,16 @@ shows which model parameter is constrained by the data.
     - ``cause.all_causes.cause_specific_mortality_rate``
     - :math:`m_\text{all}`
 
-The calibration outputs the following data to be used by the Vivarium
-simulation.
+Note that we include only a single year of input data for each of the
+calibration targets, and the calibration assumes that these rates remain
+constant over time.
+
+The calibration generates the following outputs for use in the Vivarium
+simulation and for verification and validation. The output variables are
+defined in the :ref:`Model Parameters
+<cause_alzheimers_rate_calibration_model_parameters>` and :ref:`Non-ODE
+Consistency Constraints
+<cause_alzheimers_rate_calibration_non_ode_constraints>` sections above.
 
 .. list-table:: Calibrated Outputs (written to artifact for year 2025)
   :widths: 25 75
@@ -833,13 +885,16 @@ simulation.
   * - ``cause.alzheimers_consistent.population_incidence_dementia``
     - :math:`i`: Population incidence rate of dementia
   * - ``cause.alzheimers_consistent.excess_mortality_rate``
-    - :math:`f`: Excess mortality rate
+    - :math:`f`: Excess mortality rate of AD
   * - ``cause.alzheimers_consistent.cause_specific_mortality_rate``
-    - :math:`\text{CSMR}`: Cause-specific mortality rate
+    - :math:`\text{CSMR}`: Cause-specific mortality rate, defined as
+      :math:`f \cdot p_\text{dementia}`
   * - ``cause.alzheimers_consistent.bbbm_conditional_prevalence``
     - :math:`\delta_\text{BBBM}`: Proportion of AD cases in BBBM state
   * - ``cause.alzheimers_consistent.mci_conditional_prevalence``
     - :math:`\delta_\text{MCI}`: Proportion of AD cases in MCI state
+  * - ``cause.alzheimers_consistent.dementia_conditional_prevalence``
+    - :math:`\delta_D`: Proportion of AD cases in :math:`D` state
   * - ``cause.alzheimers_consistent.ode_errors``
     - ODE consistency residuals for validation (should be < 0.01)
 
