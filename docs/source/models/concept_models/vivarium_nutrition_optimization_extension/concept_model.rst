@@ -54,7 +54,7 @@ Components with substantial updates (links/updates to come)
 
 - :ref:`Child wasting exposure <2021_risk_exposure_wasting_with_complicated_sam>`, including changes to:
 
-  - Exposure initialization (TODO: post github commit with changes)
+  - Exposure initialization, see relevant changes in the third (and any later) commits of `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1922>`__
   - Transition rates (TODO: post github commit with changes)
 
 - SAM treatment for complicated SAM 
