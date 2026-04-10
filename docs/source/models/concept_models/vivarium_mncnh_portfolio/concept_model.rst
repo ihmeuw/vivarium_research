@@ -1784,6 +1784,54 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline and MMS scale-up scenarios
     - Default
     -
+  * - 29.0.3
+    - Anemia YLDs with pipeline consolidation (PC)
+    - Consolidate pipelines for pregnancy duration and gestational age, and ensure that the pregnancy duration/gestational age used in the anemia YLDs calculation is consistent with the pregnancy duration/gestational age used in the rest of the model
+    - Baseline
+    - Default
+    -
+  * - 29.0.3s
+    - Anemia YLDs with pipeline consolidation (PC) sensitivity analysis
+    - Same as 29.0.3, but with oral iron effects on hemoglobin disabled as a sensitivity analysis
+    - Baseline
+    - Default
+    -
+  * - 29.0.4
+    - Anemia YLDs with stillbirth fix
+    - Fix issue with stillbirths having negative durations between later ANC and end of pregnancy
+    - Baseline
+    - Default
+    -
+  * - 29.0.4s
+    - Anemia YLDs with stillbirth fix sensitivity analysis
+    - Same as 29.0.4, but with oral iron effects on hemoglobin disabled as a sensitivity analysis
+    - Baseline
+    - Default
+    -
+  * - 29.0.5
+    - Anemia YLDs with person-time observer fix
+    - Fix issue with anemia person-time observer where it did not sum across simulants in the postpartum timestep
+    - Baseline
+    - Default
+    -
+  * - 29.0.5s
+    - Anemia YLDs with person-time observer fix sensitivity analysis
+    - Same as 29.0.5, but with oral iron effects on hemoglobin disabled as a sensitivity analysis
+    - Baseline
+    - Default
+    -
+  * - 31.0
+    - Update hemoglobin exposure to release ID 33
+    - Merges 29.0.5 and 30.0, and updates hemoglobin exposure to release ID 33
+    - Baseline
+    - Default
+    -
+  * - 31.0s
+    - Update hemoglobin exposure to release ID 33 sensitivity analysis
+    - Same as 31.0, but with oral iron effects on hemoglobin disabled as a sensitivity analysis
+    - Baseline
+    - Default
+    -
   * -
     - Larger run for neonatal mortality V&V
     - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
@@ -2864,6 +2912,47 @@ Default stratifications to all observers should include scenario and input draw.
       * Preterm birth still equally overestimated in facility choice model targets, which we thought would improve
       * All other checks passing
     - `Model 30.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/pull/281>`__
+  * - 29.0.3
+    - Anemia YLDs with pipeline consolidation (PC)
+    - Same as 29.0.2
+    - * YLD rates and prevalence rates look high, in addition to YLDs per pregnancy
+    - `Model 29.0.3 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/8ab14f2bef428ab3a28f1b5dac595620fc8b6996>`__
+  * - 29.0.3s (note that this was based on 29.2.1 in addition to 29.0.3; this was a numbering error)
+    - Anemia YLDs with pipeline consolidation (PC) sensitivity analysis
+    - Same as 29.2.1
+    - YLD rates and prevalence rates still look high, in addition to YLDs per pregnancy, but they are lower than in 29.0.3
+    - `Model 29.0.3s V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/ad109ae537d9b5e1696dccddb4044014604176c4>`__
+  * - 29.0.4
+    - Anemia YLDs with stillbirth fix
+    - Same as 29.0.3
+    - * Issue of negative durations in stillbirths (identified in 29.2.1) is fixed
+    - `Model 29.0.4 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/8506fd405ad145279d55cb959829a6902debfde2>`__
+  * - 29.0.4s
+    - Anemia YLDs with stillbirth fix sensitivity analysis
+    - Same as 29.0.3s
+    - * Similar to 29.0.4
+      * However, issue (not new) noted in person-time observer: person-time not observed correctly in the postpartum period
+    - `Model 29.0.4s V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/3022998c90c0d15d53c19deb53e317370898dc7a>`__
+  * - 29.0.5
+    - Anemia YLDs with person-time observer fix
+    - Same as 29.0.4
+    - * Issue of person-time not observed correctly in the postpartum period is fixed
+    - `Model 29.0.5 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/e540a68325cafdbea47a7a9cde552871d1afa0b3>`__
+  * - 29.0.5s
+    - Anemia YLDs with person-time observer fix sensitivity analysis
+    - Same as 29.0.4s
+    - * Similar to 29.0.4s, but with person-time observer fix
+    - `Model 29.0.5s V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/1d22664bd4c1651d4398daf8c88808779eeb5bd2>`__
+  * - 31.0
+    - Update hemoglobin exposure to release ID 33
+    - Confirm that hemoglobin checks continue to pass, with validation targets updated to release ID 33
+    - All checks pass (except for known issues)
+    - `Model 31.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/b2d3d7f9a4dcc3a8890a7f39fa279a97f4209b7d>`__
+  * - 31.0s
+    - Update hemoglobin exposure to release ID 33 sensitivity analysis
+    - Same as 29.0.5s, but with hemoglobin exposure updated to release ID 33
+    - Anemia YLDs still look high
+    - `Model 31.0s V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/b2d3d7f9a4dcc3a8890a7f39fa279a97f4209b7d>`__
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
