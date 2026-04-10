@@ -2952,7 +2952,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Update hemoglobin exposure to release ID 33 sensitivity analysis
     - Same as 29.0.5s, but with hemoglobin exposure updated to release ID 33
     - Anemia YLDs still look high
-    - `Model 31.0s V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/b2d3d7f9a4dcc3a8890a7f39fa279a97f4209b7d>`__
+    - `Model 31.0s V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/34d1a66c78af365ec3d695ca79c4127899339471>`__
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
