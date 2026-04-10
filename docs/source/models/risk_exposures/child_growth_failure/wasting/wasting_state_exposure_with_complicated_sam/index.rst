@@ -55,29 +55,99 @@ Wasting dynamic transition model with complicated SAM (GBD 2021)
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-Our transition model of child wasting will consist of the same 4 GBD risk exposure
-categories as the GBD child wasting model. In our transition model, simulants may
-transition between adjacent categories as well as between the cat1 (SAM) and cat3
-(mild) categories, representing a pathway for those successfully treated for SAM.
-
 **Risk exposure model diagram**
 
 .. image:: wasting_sim_transitions.png
 
-.. important::
-
-  The modeling strategy on this page applies to all simulants from birth to 5 years of age
-  for use in wave II of the nutrition optimization model.
-  Note that this is a change from the wave I strategy, described in the note below.
-
 .. note::
 
-  For wave I of the nutrition optimization model:
+  A summary of changes for the nutrition optimization extension model include:
 
-  We will modeled wasting transitions as detailed on this page **only** among simulants at least six months of age.
+    - Renaming of super/substates for clarity 
+    - Separation of SAM superstate into complicated and uncomplicated substates
+    - Subtraction of moderate wasting with oedema from MAM superstate prevalence
+    - Addition of moderate wasting of oedema to SAM superstate prevalence 
+    - Edits to the Initialization_ section to detail specific behavior for all modeled substates (substates treated the same as their superstates without any other structural or parameter changes to modeling strategy).
 
-  For wave I, infants 0-6 months followed the 
-  :ref:`Static wasting exposure modeling strategy <2020_risk_exposure_static_wasting>`.
+.. list-table:: Modeled wasting exposure states
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - **cat4**
+    - Child wasting TMREL (susceptible to child wasting)
+    - gbd_cat4
+    - No change from prior model
+  * - **cat3**
+    - Mild wasting
+    - gbd_cat3
+    - No change from prior model
+  * - cat2_superstate 
+    - Total moderate acute malnutrition
+    - gbd_cat2 - moderate_wasting_with_oedema
+    - Note cat2_superstate here refers to the combination of the "better" and "worse" MAM substates. Update from prior version includes subtraction of moderate wasting with oedema prevalence
+  * - **cat2.5_better** MAM
+    - "Better" moderate acute malnutrition
+    - cat2_superstate * (1 - worse_fraction)
+    - 
+  * - **cat2.0_worse** MAM
+    - "Worse" moderate acute malnutrition
+    - cat2_superstate * worse_fraction
+    - Note potential for confusion around "cat2" naming: at risk of confusing cat2 substate with superstate
+  * - cat1_superstate
+    - Total severe acute malnutrition
+    - gbd_cat1 + moderate_wasting_with_oedema
+    - Note this superstate is inclusive of the two cat1_uncomplicated and cat1_complicated substates. Update from prior version includes addition of moderate wasting with oedema prevalence
+  * - **cat1_uncomplicated** SAM
+    - Uncomplicated severe acute malnutrition (SAM)
+    - cat1_superstate * (1 - complicated_fraction)
+    - 
+  * - **cat1_complicated** SAM 
+    - Complicated severe acute malnutrition (SAM)
+    - cat1_superstate * (1 - complicated_fraction)
+    - 
+  
+.. list-table:: Exposure parameter data values
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - gbd_cat4
+    - GBD prevalence of no child wasting (TMREL)
+    - ``get_draws(source='exposure', gbd_id_type='rei_id', gbd_id=240)['parameter'=='cat4]``
+    - 
+  * - gbd_cat3
+    - GBD prevalence of mild child wasting
+    - ``get_draws(source='exposure', gbd_id_type='rei_id', gbd_id=240)['parameter'=='cat3]``
+    - 
+  * - gbd_cat2
+    - GBD prevalence of moderate child wasting
+    - ``get_draws(source='exposure', gbd_id_type='rei_id', gbd_id=240)['parameter'=='cat2]``
+    - 
+  * - gbd_cat4
+    - GBD prevalence of no child wasting (TMREL)
+    - ``get_draws(source='exposure', gbd_id_type='rei_id', gbd_id=240)['parameter'=='cat1]``
+    - 
+  * - moderate_wasting_with_oedema
+    - GBD prevalence of the moderate protein energy malnutrition with oedma sequela
+    - ``get_draws(source='como', measure_id=5, gbd_id_type='sequela', gbd_id=190)``
+    - 
+  * - worse_fraction
+    - Fraction of MAM cases in "worse" substate
+    - Values found in `simulation repository raw data directory here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/blob/main/src/vivarium_gates_nutrition_optimization_child/data/raw/worse_exp_frac_only_loc.csv>`__. No changes required for nutrition optimization extension simulation.
+    - See detail of the derivation of this parameter on the :ref:`2021 wasting risk exposure page <2021_risk_exposure_wasting_state_exposure>`
+  * - complicated_sam_fraction
+    - Fraction of MAM cases in the "complicated" substate
+    - Values will be output at the draw/age/sex/subnational-specific level from the wasting calibration. TODO: post link when ready
+    - TODO: include reference used to inform input range for this parameter
+
+.. todo::
+
+  Add data for complicated_sam_fraction parameter
 
 Initialization
 --------------
@@ -95,9 +165,9 @@ probability of being wasted than adequate birth weight (ABW) infants with birth 
   * - Parameter
     - Definition
     - Note
-  * - :math:`p_\text{cat(i)}`
-    - Population level prevalence of wasting category i
-    - In the 1-5 month age group (ID=388)
+  * - :math:`p_\text{cat(i)}` for i in [4, 3, 2.5_better, 2.0_worse, 1_uncomplicated, 1_complicated]
+    - Population level prevalence of wasting category i in the 1-5 month age group (ID=388)
+    - 
   * - :math:`p_\text{cat(i),LBW}`
     - Prevalence of wasting category i among the low birth weight population
     - Low birth weight as BW =< 2,500 grams
@@ -123,29 +193,63 @@ We can then solve for the ABW and LBW probabilities of initialization into wasti
   :header-rows: 1
 
   * - Wasting category
-    - ABW probability
-    - LBW probability
-  * - cat1
-    - :math:`p_\text{cat1} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
-    - :math:`p_\text{ABW,cat1} * RR`
-  * - cat2
-    - :math:`p_\text{cat2} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
-    - :math:`p_\text{ABW,cat2} * RR`
+    - Birth weight status
+    - Wasting exposure
+  * - cat1_superstate
+    - ABW
+    - :math:`p_\text{cat1_superstate} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
+  * - cat1_superstate
+    - LBW
+    - :math:`p_\text{ABW,cat1_superstate} * RR`
+  * - cat2_superstate
+    - ABW
+    - :math:`p_\text{cat2_superstate} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
+  * - cat2_superstate
+    - LBW
+    - :math:`p_\text{ABW,cat2_superstate} * RR`
   * - cat3
-    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{ABW,cat1} - p_\text{ABW,cat2}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
-    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{LBW,cat1} - p_\text{LBW,cat2}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
+    - ABW
+    - :math:`(p_\text{cat1_superstate} + p_\text{cat2_superstate} - p_\text{ABW,cat1_superstate} - p_\text{ABW,cat2_superstate}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
+  * - cat3
+    - LBW
+    - :math:`(p_\text{cat1_superstate} + p_\text{cat2_superstate} - p_\text{LBW,cat1_superstate} - p_\text{LBW,cat2_superstate}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
   * - cat4
-    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{ABW,cat1} - p_\text{ABW,cat2}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
-    - :math:`(p_\text{cat1} + p_\text{cat2} - p_\text{LBW,cat1} - p_\text{LBW,cat2}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
+    - ABW
+    - :math:`(p_\text{cat1_superstate} + p_\text{cat2_superstate} - p_\text{ABW,cat1_superstate} - p_\text{ABW,cat2_superstate}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
+  * - cat4
+    - LBW
+    - :math:`(p_\text{cat1_superstate} + p_\text{cat2_superstate} - p_\text{LBW,cat1_superstate} - p_\text{LBW,cat2_superstate}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
+  * - cat1_uncomplicated
+    - ABW
+    - :math:`p_\text{ABW,cat1_superstate} * (1 - \text{complicated_fraction})`
+  * - cat1_uncomplicated
+    - LBW
+    - :math:`p_\text{LBW,cat1_superstate} * (1 - \text{complicated_fraction})`
+  * - cat1_complicated
+    - ABW
+    - :math:`p_\text{ABW,cat1_superstate} * \text{complicated_fraction}`
+  * - cat1_complicated
+    - LBW
+    - :math:`p_\text{LBW,cat1_superstate} * \text{complicated_fraction}`
+  * - cat2.5_better
+    - ABW
+    - :math:`p_\text{ABW,cat2_superstate} * (1 - \text{worse_fraction})`
+  * - cat2.5_better
+    - LBW
+    - :math:`p_\text{LBW,cat2_superstate} * (1 - \text{worse_fraction})`
+  * - cat2.0_worse
+    - ABW
+    - :math:`p_\text{ABW,cat2_superstate} * \text{worse_fraction}`
+  * - cat2.0_worse
+    - LBW
+    - :math:`p_\text{LBW,cat2_superstate} * \text{worse_fraction}`
 
 .. note::
 
   The values in the *Wasting state probabilities by birth weight status* should **not**
   change between scenarios as LBWSG exposures change.
 
-.. todo::
-
-  Update placeholder values below
+  ^This note is intended to mean that the probability of a given wasting exposure conditional on birthweight status should be calibrated to the values in the baseline scenario and not be recalculated in each scenario. However, as LBWSG exposure changes between scenario (and shifts individual-level low vs. adequate birth weight status), wasting exposure at birth may change between scenarios. This is not a change from the original nutrition optimization model.
 
 .. list-table:: Parameter values
   :header-rows: 1
@@ -163,16 +267,6 @@ We can then solve for the ABW and LBW probabilities of initialization into wasti
         * Sum over the following categories: *['cat10', 'cat106', 'cat11', 'cat116', 'cat117', 'cat123', 'cat124', 'cat14', 'cat15', 'cat17', 'cat19', 'cat2', 'cat20', 'cat21', 'cat22', 'cat23', 'cat24', 'cat25', 'cat26', 'cat27', 'cat28', 'cat29', 'cat30', 'cat31', 'cat32', 'cat34', 'cat35', 'cat36', 'cat8', 'cat80']*
     - :ref:`LBWSG exposure document found here for reference <2019_risk_exposure_lbwsg>`. List of LBW categories was `generated from this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/LBW%20categories.ipynb>`_
 
-Note that prevalence of each wasting state for use in this model can be pulled using the following call:
-
-.. code-block:: python
-
-    get_draws(gbd_id_type='rei_id',
-                    gbd_id=240,
-                    source='exposure',
-                    year_id=2021,
-                    gbd_round_id=7,
-                    decomp_step='iterative')
 
 Transitions
 ------------
@@ -219,30 +313,6 @@ Draw-specific values for transition rates (defined in the table below) for Ethio
  * - inc_rate_mild
    - CAT 4
    - CAT 3
-
-MAM (cat2) substates
-----------------------
-
-.. note::
-
-  This was implemented in a manner that divided the MAM state into two separate states, creating an overall 5-category wasting transition model. Transition rates from the 4-category model were scaled such that transitions in and out of the MAM category did not vary by MAM substate. 
-
-For simulants that transition into the moderate acute malnutrition (MAM, cat2) wasting exposure state, they will be assigned one of the two following sub-exposures:
-
-1. "Better" MAM/cat2.5: WHZ between -2 and -2.5
-2. "Worse" MAM/cat2.0: WHZ between -2.5 and -3
-
-`The probability of occupying the "Worse" MAM/cat2.0 sub-exposure upon transitioning into the MAM state is can be found in this CSV file <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/worse_exp_frac_only_loc.csv>`_. The probability of "Better" MAM/cat2.5 is equal to 1-the probability of Worse MAM. 
-
-  These probabilities were generated according to a continuous distribution of child WHZ scores, `as performed in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/f58b327a853aa3eeb5f947b60fcbeb5dc3eefa27/data_prep/cgf_correlation/subcategory%20data.ipynb>`_. Note that mean WHZ and WHZ sd estimates from GBD were not available for GBD 2021, so we used DHS data to inform these parameters paired with GBD ensemble distribution weights to generate a continuous WHZ distribution for this purpose.
-
-  In April of 2024, this was updated due to a found bug in the code. The data was aggregated over age and sex, though kept location specific. The data file and notebook were updated accordingly. This change was due to lack of difference at the age or sex level, and small counts leading to NaN values and incorrect final data. 
-
-These subexposures will vary with respect to their wasting relative risk values (detailed on the CGF risk effects page) and their targeted MAM treatment eligibility (detailed on the wasting treatment page), but they will **not** differ with respect to wasting transition rates (e.g. progression to SAM or recovery to mild wasting states).
-
-.. note::
-
-  These sub-exposures should be included in wasting state person-time observers.
 
 Validation 
 ++++++++++
