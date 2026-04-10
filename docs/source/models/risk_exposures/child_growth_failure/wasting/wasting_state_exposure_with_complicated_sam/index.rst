@@ -41,107 +41,16 @@ Wasting dynamic transition model with complicated SAM (GBD 2021)
 
 .. note::
 
-  This page has been adapted from the :ref:`2020 wasting/PEM model document <2020_risk_exposure_wasting_state_exposure>`
-  used in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
+  This page has been adapted from the :ref:`2021 wasting risk exposure page <2021_risk_exposure_wasting_state_exposure>`
+  used in the :ref:`nutrition optimization child simulation <2021_concept_model_vivarium_nutrition_optimization_children>`.
 
-  This adaptation is intended for use in the 
-  :ref:`nutrition optimization simulation <2021_concept_model_vivarium_nutrition_optimization>`.
+  The wasting exposure model on this page has been extended to subdivide the severe acute malnutrition (SAM) exposure state into two separate exposures: uncomplicated and complicated SAM and is intended for use in the 
+  :ref:`nutrition optimization extension simulation <nutrition_optimization_extension>`.
 
-  There have been many updates to this model from the original implementation, but the underlying risk exposure model diagram (the risk exposure states and possible transitions between them) remain the same. Notably, the values for these transition rates are now directly provided rather than only providing equations to calculate the transition rates.
-
-  Also note that the protein energy malnutrition (PEM) risk-attributable cause model
-  has been removed from this page and is :ref:`instead available here <2021_pem>`.
+  For brevity, background research information has been removed from this document. Consult the :ref:`2021 wasting risk exposure page <2021_risk_exposure_wasting_state_exposure>` for more information
 
 .. contents::
   :local:
-
-Overview
-++++++++
-
-This page contains information pertaining to the child wasting risk exposure model. 
-GBD stratifies wasting into four categories: TMREL, mild, moderate, and severe wasting. 
-Pages related to the wasting risk exposure model include:
-
-- :ref:`Protein energy malnutrition risk attributable cause <2021_pem>`
-- :ref:`Child growth failure risk effects <2021_risk_effect_cgf>`
-
-.. note::
-
- For background information on child wasting, see the :ref:`2020 wasting/PEM model document <2020_risk_exposure_wasting_state_exposure>`.
-
-+-------------------------------------------------+
-| List of abbreviations                           |
-+=======+=========================================+
-| AM    | Acute malnutrition                      |
-+-------+-----------------------------------------+
-| MAM   | Moderate acute malnutrtion              |
-+-------+-----------------------------------------+
-| SAM   | Severe acute malnutrition               |
-+-------+-----------------------------------------+
-| TMREL | Theoretical minimum risk exposure level |
-+-------+-----------------------------------------+
-| CGF   | Child growth failure composed of wasting|
-|       | stunging and underweight                |
-+-------+-----------------------------------------+
-| PEM   | Protein energy malnutrition             |
-+-------+-----------------------------------------+
-
-Wasting Exposure in GBD 2021
-++++++++++++++++++++++++++++
-
-Case definition
----------------
-
-Wasting, a sub-component indicator of child growth failure (CGF), is based on a 
-categorical definition using the WHO 2006 growth standards for children 0-59 
-months. Definitions are based on z-scores from the growth standards, which were 
-derived from an international reference population. Mild, moderate and severe 
-categorical prevalences were estimated for each of the three indicators. 
-Theoretical minimum risk exposure level (TMREL) for wasting was assigned to be 
-greater than or equal to one standard deviation below the mean (-1 SD) of the 
-WHO 2006 standard weight-for-height curve. This has not changed since GBD 2010.
-
-+----------------------------------------------+
-| Wasting category definition (range -7 to +7) |
-+=======+======================================+
-| TMREL |  >= -1                               |            
-+-------+--------------------------------------+
-| MILD  |  < -1 to -2 Z score                  |
-+-------+--------------------------------------+
-| MAM   |  < -2 to -3 Z score                  |
-+-------+--------------------------------------+
-| SAM   |  < -3 Z score                        |
-+-------+--------------------------------------+
-
-Exposure estimation
--------------------
-
-In modeling CGF, all data types go into ST-GPR modeling. GBD has ST-GPR models 
-for moderate, severe, and mean stunting, wasting, and underweight. The output 
-of these STGPR models is an estimate of moderate, severe, and mean stunting, 
-wasting, and underweight for all under 5 age groups, all locations, both sexes, 
-and all years. 
-
-They also take the microdata sources and fit ensemble distributions to the 
-shapes of the stunting, wasting, and underweight distributions. They thus find 
-characteristic shapes of stunting, wasting, and underweight curves. Once they 
-have ST-GPR output as well as weights that define characteristic curve shapes, 
-the last step is to combine them. They anchor the curves at the mean output from 
-ST-GPR, use the curve shape from the ensemble distribution modeling, and then 
-use an optimization function to find the standard deviation value that allows 
-them to stretch/shrink the curve to best match the moderate and severe CGF 
-estimates from ST-GPR. The final CGF estimates are the area under 
-the curve for this optimized curve.
-
-Note that the z-score ranges from -7 to +7. If we limit ourselves to Z-scores 
-between -4 and +4, we will be excluding a lot of kids.
-
-CGF burden does not start until *after* neonatal age groups (from 1mo onwards). 
-In the neonatal age groups (0-1mo), burden comes from LBWSG. See risk effects 
-page for details on model structure. The literature on interventions for wasting 
-target age groups 6mo onwards. This coincides with the timing of supplementary 
-food introduction. Prior to 6mo, interventions to reduce DALYs focus on 
-breastfeeding and reduction of LBWSG. 
 
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
