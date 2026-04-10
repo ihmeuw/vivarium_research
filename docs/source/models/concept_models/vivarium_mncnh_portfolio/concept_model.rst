@@ -491,9 +491,23 @@ Postpartum component
     - * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
       * :ref:`Hemoglobin risk effects document <2023_hemoglobin_effects>`
 
-**Wave 1 Concept Model Map (has not been updated recently):**
+**Concept Model Map:**
 
-.. image:: wave_1_full.drawio.png
+Please note that this is designed as a helpful visual aid, but is not
+designed to be fully inclusive of all work or modeled components. 
+
+**Pregnancy, influenced by ANC attendance**
+
+.. image:: pregnancy_figure_overview.png
+
+**Intrapartum, influenced by delivery facility**
+
+.. image:: intrapartum_figure_overview.png
+
+**Neonatal, influenced by neonatal care facility**
+
+.. image:: neonatal_figure_overview.png
+
 
 .. _mncnh_portfolio_3.1:
 
