@@ -115,8 +115,10 @@ Default stratifications for all observers should include:
   - Scenario
   - Sex
   - Age group
+
     - Default: GBD age groups
     - Alternative groupings for production runs:
+    
         - 0-6 months
         - 6-18 months
         - 18-60 months
