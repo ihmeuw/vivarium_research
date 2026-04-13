@@ -104,6 +104,9 @@ MACE RCT Simulation
   * - NASH
     - Non-Alcoholic Steatohepatitis
     - Also referred to as MASH (metabolic dysfunction-associated steatohepatitis)
+  * - MASLD
+    - Metabolic dysfunction–Associated Steatotic Liver Disease
+    - Spectrum of liver disease ranging from simple steatosis to MASH; a term gradually replacing NAFLD.  
   * - NAFLD
     - Non-Alcoholic Fatty Liver Disease
     - Spectrum of liver disease ranging from simple steatosis to NASH
