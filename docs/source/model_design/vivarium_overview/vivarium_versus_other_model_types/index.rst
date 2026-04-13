@@ -168,6 +168,18 @@ regard to relationship type. Fortunately, this limitation has since been resolve
 individual-level data, but because this information is aggregated, the limitation won't be surfaced and improved upon. 
 Read more about this project `here <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_census_synthdata/concept_model.html>`__.
 
+A third example of this occurs with residual confounding. Unlike compartmental or multiplication models, which 
+typically assume a homogeneous population within a "state," 
+microsimulations explicitly model individual-level heterogeneity. This shift in granularity does not introduce 
+new confounding; rather, it surfaces existing data limitations that are often obscured by aggregation in other 
+model types. Whether a model is individual-level or population-level, the data required to fully eliminate residual 
+confounding remains the same: a complete map of the correlations between all risk exposures and outcomes. 
+
+While our team strives to account for the relationships between all risk exposures, no dataset can capture every 
+variable. Consequently, there will always be a degree of residual confounding in any model structure, and Vivarium
+is no exception to this. You can read more about how our team conceptualizes and accounts for limitations related to
+residual confounding :ref:`here <residual_confounding>`.
+
 
 Disadvantages of microsimulation
 ++++++++++++++++++++++++++++++++
@@ -193,20 +205,6 @@ records, medication histories, and other highly personal information.
 
 If we're not interested in the complexities described in the section above, then it is likely a less data- and resource-intensive alternative, such as a multiplication model, is a suitable modeling 
 strategy.
-
-Residual confounding
-~~~~~~~~~~~~~~~~~~~~
-
-Unlike compartmental or multiplication models, which typically assume a homogeneous population within a "state," 
-microsimulations explicitly model individual-level heterogeneity. This shift in granularity does not introduce 
-new confounding; rather, it surfaces existing data limitations that are often obscured by aggregation in other 
-model types. Whether a model is individual-level or population-level, the data required to fully eliminate residual 
-confounding remains the same: a complete map of the correlations between all risk exposures and outcomes. 
-
-While our team strives to account for the relationships between all risk exposures, no dataset can capture every 
-variable. Consequently, there will always be a degree of residual confounding in any model structure, and Vivarium
-is no exception to this. You can read more about how our team conceptualizes and accounts for limitations related to
-residual confounding :ref:`here <residual_confounding>`.
 
 .. todo::
 
