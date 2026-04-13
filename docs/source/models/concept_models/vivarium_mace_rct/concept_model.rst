@@ -145,9 +145,9 @@ market size for the intervention.
 Second, it is important to estimate how MACE rates in the trial population might differ from
 general population rates. If the trial population has meaningfully higher baseline MACE risk, the
 trial may be better powered to detect a treatment effect, but the absolute risk reduction observed
-may not translate directly to lower-risk populations. Conversely, if the novel agent also has
-hepatoprotective effects or modifies metabolic risk beyond LDL-C lowering, the benefit in this
-population could exceed what would be predicted from LDL-C reduction alone.
+may not translate directly to lower-risk populations. Conversely, if the trial population
+has lower baseline MACE risk, the trial may need to recruit an unexpectedly large sample
+of study participants to be likely to detect the treatment effect.
 
 This simulation will model the trial population, the randomization to treatment and control arms,
 LDL-C trajectories under the experimental agent, and the downstream incidence of MACE
