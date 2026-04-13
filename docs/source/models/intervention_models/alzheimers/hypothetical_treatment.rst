@@ -257,7 +257,12 @@ is defined below.
 Initialization
 ~~~~~~~~~~~~~~
 
-Since :math:`I` is 0 until 2030, on simulation initialization no simulants have received treatment.
+Since :math:`I` is 0 until 2027, on simulation initialization no
+simulants have received treatment. We also assume that when simulants
+are initialized into the simulation (even after 2027), they have not
+previously initiated treatment, despite this being theoretically
+possible due to false positive BBBM tests (see :ref:`assumptions and
+limitations <alzheimers_intervention_treatment_assumptions>` below).
 
 Outcomes
 ~~~~~~~~
@@ -284,6 +289,14 @@ Outcomes
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. note::
+
+  People in the susceptible state (who are not modeled in Vivarium) may
+  also initiate treatment due to false positive BBBM tests. We count
+  these "incorrectly initiated" treatments outside the Vivarium
+  simulation using a :ref:`multistate life table (MSLT) model
+  <other_models_alzheimers_mslt>`.
+
 - Those who do not initiate treatment following their first positive BBBM test result, or those who discontinue, 
   will never take the intervention, so propensity can be assigned for simulant lifetime
 - Treatment occurs instantaneously (i.e., the duration of the "receiving
@@ -299,3 +312,14 @@ Assumptions and Limitations
   assumptions to model discontinuation occurring instantaneously during
   the transient "receiving treatment" and "months to discontinuation"
   states as above.
+- A simulant in the susceptible state who incorrectly initiates
+  treatment may actually receive some benefit from this treatment.
+  Namely, they may transition to the BBBM-AD state during the period of
+  1.89--17 years (depending on months to discontinuation) when the
+  treatment still has an effect. However, our MSLT model does not track
+  simulants' treatment effect duration, and the Vivarium simulation
+  assumes that no simulants have been treated when they are initialized,
+  so our simulation does not capture this additional benefit. Since the
+  BBBM test is currently assumed to have a very high specificity, there
+  are very few false positive tests, so the effects of modeling this
+  additional benefit would be small.

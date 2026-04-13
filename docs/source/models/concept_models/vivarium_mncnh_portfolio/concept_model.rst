@@ -491,9 +491,23 @@ Postpartum component
     - * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
       * :ref:`Hemoglobin risk effects document <2023_hemoglobin_effects>`
 
-**Wave 1 Concept Model Map (has not been updated recently):**
+**Concept Model Map:**
 
-.. image:: wave_1_full.drawio.png
+Please note that this is designed as a helpful visual aid, but is not
+designed to be fully inclusive of all work or modeled components. 
+
+**Pregnancy, influenced by ANC attendance**
+
+.. image:: pregnancy_figure_overview.png
+
+**Intrapartum, influenced by delivery facility**
+
+.. image:: intrapartum_figure_overview.png
+
+**Neonatal, influenced by neonatal care facility**
+
+.. image:: neonatal_figure_overview.png
+
 
 .. _mncnh_portfolio_3.1:
 
@@ -1010,6 +1024,7 @@ Default stratifications to all observers should include scenario and input draw.
       All of these quantities can aggregate across seeds in the normal way (summation).
   * - 11. Anemia YLDs
     - * Maternal age group
+      * Pregnancy outcome
       * Anemia status (not_anemic, mild, moderate, severe)
     - Inclusive of anemia YLDs accrued during pregnancy and the postpartum period
   * - 12. Anemia person-time
@@ -1739,7 +1754,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     -
   * - 29.0
-    - Anemia YLDs
+    - Anemia YLDs and postpartum hemoglobin
     -
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default, note new anemia YLD observer
@@ -1747,6 +1762,8 @@ Default stratifications to all observers should include scenario and input draw.
   * - 29.1
     - Anemia YLDs sensitivity analysis
     - As a sensitivity analysis, disable the effect of oral iron on hemoglobin
+
+      **Note: this model is for sensitivity analysis only and future models should not be based on it.**
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
     -
