@@ -442,13 +442,14 @@ table below:
     - Total-population incidence rate of AD dementia
     - incidence_m24351 :math:`\cdot` (proportion_AD + 0.94
       :math:`\cdot` proportion_mixed)
-    - Used in :ref:`AD population model
-      <other_models_alzheimers_population>` to calculate BBBM-AD
-      incidence. We are assuming the prevalence proportions can be
-      applied to incidence. We are assuming the AD-dementia incidence
-      rate is constant over time in each demographic group. We assume
-      94% of mixed dementias include Alzheimer's, based on this `mixed
-      dementias presentation`_ from the dementia modelers.
+    - Used as input data in :ref:`rate calibration
+      <cause_alzheimers_rate_calibration>`; formerly used in a previous version
+      of the :ref:`AD population model <other_models_alzheimers_population>` to
+      calculate BBBM-AD incidence. We are assuming the prevalence proportions
+      can be applied to incidence. We are assuming the AD-dementia incidence
+      rate is constant over time in each demographic group. We assume 94% of
+      mixed dementias include Alzheimer's, based on this `mixed dementias
+      presentation`_ from the dementia modelers.
   * - population_forecast
     - Forecasted average population during specified year
     - :file:`population_agg.nc`
@@ -473,21 +474,28 @@ table below:
     - This EMR from DisMod is a true excess mortality rate, including
       all deaths *associated* with dementia, as opposed to only those
       deaths *caused* by dementia, which is what we usually use in our
-      simulations. Consequently, the "CSMR" derived from this EMR is
-      **not** a true "cause-specific" mortality rate, as it will include
-      deaths *associated* with AD dementia, rather than just those
-      *caused* by AD dementia.
+      simulations
+  * - :math:`\text{CSMR}`
+    - Cause-specific mortality rate of AD
+    - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
+      artifact key
+      ``cause.alzheimers_consistent.cause_specific_mortality_rate``
+    - Defined to be :math:`f \cdot p_\text{dementia}`, where :math:`f` and
+      :math:`p_\text{dementa}` are the calibrated excess mortality rate of AD
+      and prevalence of AD dementia, respectively. Since :math:`f` is derived
+      from emr_m24351 from DisMod, this "CSMR" is **not** necessarily a true
+      "cause-specific" mortality rate, as it will include deaths *associated*
+      with AD dementia, rather than just those *caused* by AD dementia.
   * - :math:`m`
     - Background mortality rate (non-AD mortality)
-    - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
-      artifact key ``cause.alzheimers_consistent.background_mortality_rate``
-    - Applies to all states. Derived from forecasts of all-cause mortality.
+    - :math:`\text{ACMR} - \text{CSMR}`
+    - Applies to all states. Calculated automatically by mortality component.
   * - :math:`f`
     - Excess mortality rate due to AD-dementia
     - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
       artifact key ``cause.alzheimers_consistent.excess_mortality_rate``
     - Applies only to AD-dementia state; total mortality in that state is
-      :math:`m + f`
+      :math:`m + f`. Derived from emr_m24351 from DisMod.
   * - sequelae_c543
     - Sequelae of Alzheimer's disease and other dementias
     - Set of 3 sequelae: s452, s453, s454
@@ -530,7 +538,7 @@ table below:
       on pulling the correct value.
   * - :math:`\text{DW}_\text{MCI}`
     - Disability weight of mild cognitive impairment
-    - :math:`\frac{\text{DW}_\text{motor+cog} -
+    - :math:`\displaystyle \frac{\text{DW}_\text{motor+cog} -
       \text{DW}_\text{motor}} {1 - \text{DW}_\text{motor}}`
     - Disability weights are stored as draws and do not vary by location, age
       group, or sex. For reference, the value is
@@ -784,7 +792,7 @@ Alzheimer's disease cause model.
 
 The :ref:`Inputs and Outputs
 <cause_alzheimers_rate_calibration_inputs_outputs>` section below lists the
-input data that these model variables are calibrated against.
+input data used to calibrate the different model variables.
 
 Loss Function
 ~~~~~~~~~~~~~
@@ -882,6 +890,9 @@ Consistency Constraints
     - :math:`h_{S \to \text{BBBM}}`: S to BBBM transition rate
   * - ``cause.alzheimers_consistent.prevalence_any``
     - :math:`p`: Total prevalence of any AD state
+  * - ``cause.alzheimers_consistent.susceptible_to_bbbm_transition_count``
+    - :math:`h_{S \to \text{BBBM}} \cdot (1 - p) \cdot` population_forecast:
+      Annual count of incident cases entering BBBM
   * - ``cause.alzheimers_consistent.population_incidence_dementia``
     - :math:`i`: Population incidence rate of dementia
   * - ``cause.alzheimers_consistent.excess_mortality_rate``
