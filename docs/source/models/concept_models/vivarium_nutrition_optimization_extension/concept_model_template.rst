@@ -91,7 +91,7 @@ fill out the table.
   * - Location(s)
     - 
     - Nigeria (modeled at the subnational level)
-    - We will be modeling simulants a the subnational level in Nigeria and aggregating results to the national level. In practice, we should use the ``vivarium_gates_nutrition_optimization_child`` ``PopulationLineList`` component (as opposed to the ``EvenlyDistributedPopulation``) and set ``subnational: All`` in the model spec file. This will ensure that simulants are distributed across all Nigerian subnational locations proportionately to subnational population size. 
+    - We will be modeling simulants at the subnational level in Nigeria and aggregating results to the national level. In practice, we should use the ``vivarium_gates_nutrition_optimization_child`` ``PopulationLineList`` component (as opposed to the ``EvenlyDistributedPopulation``) and set ``subnational: All`` in the model spec file. This will ensure that simulants are distributed across all Nigerian subnational locations proportionately to subnational population size. 
   * - Number of draws
     - Desired number of draws that a given simulation is to be run for. (Generally, this should be a number between 1 and 1,000.)
     - 20 to start
