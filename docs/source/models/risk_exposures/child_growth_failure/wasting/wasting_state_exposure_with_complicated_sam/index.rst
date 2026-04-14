@@ -141,7 +141,7 @@ Vivarium Modeling Strategy
     - Values found in `simulation repository raw data directory here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/blob/main/src/vivarium_gates_nutrition_optimization_child/data/raw/worse_exp_frac_only_loc.csv>`__. No changes required for nutrition optimization extension simulation.
     - See detail of the derivation of this parameter on the :ref:`2021 wasting risk exposure page <2021_risk_exposure_wasting_state_exposure>`
   * - complicated_sam_fraction
-    - Fraction of MAM cases in the "complicated" substate
+    - Fraction of SAM cases in the "complicated" substate
     - Values will be output at the draw/age/sex/subnational-specific level from the wasting calibration. TODO: post link when ready
     - TODO: include reference used to inform input range for this parameter
 
