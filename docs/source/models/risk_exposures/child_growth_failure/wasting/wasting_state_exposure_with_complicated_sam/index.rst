@@ -106,7 +106,7 @@ Vivarium Modeling Strategy
     - 
   * - **cat1_complicated** SAM 
     - Complicated severe acute malnutrition (SAM)
-    - cat1_superstate * (1 - complicated_fraction)
+    - cat1_superstate * complicated_fraction
     - 
   
 .. list-table:: Exposure parameter data values
