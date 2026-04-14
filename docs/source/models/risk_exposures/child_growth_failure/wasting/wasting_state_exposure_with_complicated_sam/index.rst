@@ -197,52 +197,52 @@ We can then solve for the ABW and LBW probabilities of initialization into wasti
     - Wasting exposure
   * - cat1_superstate
     - ABW
-    - :math:`p_\text{cat1_superstate} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
+    - :math:`p_\text{cat1superstate} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
   * - cat1_superstate
     - LBW
-    - :math:`p_\text{ABW,cat1_superstate} * RR`
+    - :math:`p_\text{ABW,cat1superstate} * RR`
   * - cat2_superstate
     - ABW
-    - :math:`p_\text{cat2_superstate} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
+    - :math:`p_\text{cat2superstate} / (RR * p_\text{LBW} + (1 - p_\text{LBW}))`
   * - cat2_superstate
     - LBW
-    - :math:`p_\text{ABW,cat2_superstate} * RR`
+    - :math:`p_\text{ABW,cat2superstate} * RR`
   * - cat3
     - ABW
-    - :math:`(p_\text{cat1_superstate} + p_\text{cat2_superstate} - p_\text{ABW,cat1_superstate} - p_\text{ABW,cat2_superstate}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
+    - :math:`(p_\text{cat1superstate} + p_\text{cat2superstate} - p_\text{ABW,cat1superstate} - p_\text{ABW,cat2superstate}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
   * - cat3
     - LBW
-    - :math:`(p_\text{cat1_superstate} + p_\text{cat2_superstate} - p_\text{LBW,cat1_superstate} - p_\text{LBW,cat2_superstate}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
+    - :math:`(p_\text{cat1superstate} + p_\text{cat2superstate} - p_\text{LBW,cat1superstate} - p_\text{LBW,cat2superstate}) * p_\text{cat3} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat3}`
   * - cat4
     - ABW
-    - :math:`(p_\text{cat1_superstate} + p_\text{cat2_superstate} - p_\text{ABW,cat1_superstate} - p_\text{ABW,cat2_superstate}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
+    - :math:`(p_\text{cat1superstate} + p_\text{cat2superstate} - p_\text{ABW,cat1superstate} - p_\text{ABW,cat2superstate}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
   * - cat4
     - LBW
-    - :math:`(p_\text{cat1_superstate} + p_\text{cat2_superstate} - p_\text{LBW,cat1_superstate} - p_\text{LBW,cat2_superstate}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
+    - :math:`(p_\text{cat1superstate} + p_\text{cat2superstate} - p_\text{LBW,cat1superstate} - p_\text{LBW,cat2superstate}) * p_\text{cat4} / (p_\text{cat3} + p_\text{cat4}) + p_\text{cat4}`
   * - cat1_uncomplicated
     - ABW
-    - :math:`p_\text{ABW,cat1_superstate} * (1 - \text{complicated_fraction})`
+    - :math:`p_\text{ABW,cat1superstate} * (1 - \text{complicated fraction})`
   * - cat1_uncomplicated
     - LBW
-    - :math:`p_\text{LBW,cat1_superstate} * (1 - \text{complicated_fraction})`
+    - :math:`p_\text{LBW,cat1superstate} * (1 - \text{complicated fraction})`
   * - cat1_complicated
     - ABW
-    - :math:`p_\text{ABW,cat1_superstate} * \text{complicated_fraction}`
+    - :math:`p_\text{ABW,cat1superstate} * \text{complicated fraction}`
   * - cat1_complicated
     - LBW
-    - :math:`p_\text{LBW,cat1_superstate} * \text{complicated_fraction}`
+    - :math:`p_\text{LBW,cat1superstate} * \text{complicated fraction}`
   * - cat2.5_better
     - ABW
-    - :math:`p_\text{ABW,cat2_superstate} * (1 - \text{worse_fraction})`
+    - :math:`p_\text{ABW,cat2superstate} * (1 - \text{worse fraction})`
   * - cat2.5_better
     - LBW
-    - :math:`p_\text{LBW,cat2_superstate} * (1 - \text{worse_fraction})`
+    - :math:`p_\text{LBW,cat2superstate} * (1 - \text{worse fraction})`
   * - cat2.0_worse
     - ABW
-    - :math:`p_\text{ABW,cat2_superstate} * \text{worse_fraction}`
+    - :math:`p_\text{ABW,cat2superstate} * \text{worse fraction}`
   * - cat2.0_worse
     - LBW
-    - :math:`p_\text{LBW,cat2_superstate} * \text{worse_fraction}`
+    - :math:`p_\text{LBW,cat2superstate} * \text{worse fraction}`
 
 .. note::
 
