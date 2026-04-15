@@ -117,9 +117,9 @@ which the cause applies.
     - 95 plus
     - age_group_id = 235
   * - YLD age group start
-    - * 40 to 44 for AD-dementia cause state
+    - * 40 to 44 for Dementia-AD cause state
       * No *a priori* age restriction for MCI-AD cause state
-    - * Restriction to age_group_id = 13 (40 to 44) for AD-dementia
+    - * Restriction to age_group_id = 13 (40 to 44) for Dementia-AD
         cause state is from GBD. However, due to simulation dynamics, it is
         possible for simulants to enter this state before age 40.
   * - YLD age group end
@@ -157,7 +157,7 @@ Cause Model Diagram
     rankdir=LR;
     bbbm [label="BBBM-AD"]
     mci [label="MCI-AD"]
-    ad [label="AD-dementia"]
+    ad [label="Dementia-AD"]
     S -> bbbm [label="h_S→BBBM"]
     bbbm -> mci [label="h_BBBM→MCI"]
     mci -> ad [label="h_MCI→D"]
@@ -181,7 +181,7 @@ Cause Model Diagram
   * - MCI-AD
     - Mild Cognitive Impairment due to Alzheimer's Disease
     - Simulant has mild cognitive impairment due to Alzheimer's disease
-  * - AD-dementia
+  * - Dementia-AD
     - Alzheimer's Disease dementia
     - Simulant has mild, moderate, or severe dementia due to Alzheimer's
       disease
@@ -204,15 +204,15 @@ Cause Model Diagram
     - Time-dependent hazard based on dwell time in BBBM-AD state;
       see :math:`h_\text{MCI}(t)` in `Data Values and Sources`_; approximated as a constant hazard during rate calibration
   * - :math:`h_{\text{MCI} \to D}`
-    - Hazard rate of transitioning from MCI-AD to AD-dementia
+    - Hazard rate of transitioning from MCI-AD to Dementia-AD
     - Constant hazard, defined below as the inverse of the average duration of MCI-AD, :math:`1 / \Delta_\text{MCI}`
   * - :math:`m`
     - Background mortality rate (non-AD mortality)
     - Applies to all states; computed by mortality component in the simulation
   * - :math:`f`
-    - Excess mortality rate due to AD-dementia
+    - Excess mortality rate due to AD dementia
     - Obtained from :ref:`rate calibration <cause_alzheimers_rate_calibration>`;
-      applies only to AD-dementia state
+      applies only to Dementia-AD state
 
 State and Transition Data
 -------------------------
@@ -251,7 +251,7 @@ in the :ref:`Alzheimer's population model
     - 0
     - 0
     - :math:`\text{DW}_\text{MCI}`
-  * - AD-dementia
+  * - Dementia-AD
     - :math:`1 - \delta_\text{BBBM} - \delta_\text{MCI}`
     - 0
     - :math:`f`
@@ -289,17 +289,17 @@ table below <2023_cause_alzheimers_preclinical_mci_data_sources_table>`.
       Adjusted in :ref:`intervention_hypothetical_alzheimers_treatment` scenario.
   * - :math:`h_{\text{MCI} \to D}`
     - MCI-AD
-    - AD-dementia
+    - Dementia-AD
     - :math:`1 / \Delta_\text{MCI}`
   * - :math:`m`
     - Any state
     - Death
     - :math:`\text{ACMR} - \text{CSMR}`
   * - :math:`f`
-    - AD-dementia
+    - Dementia-AD
     - Death
     - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`;
-      total mortality in AD-dementia state is :math:`m + f`
+      total mortality in Dementia-AD state is :math:`m + f`
 
 **Note:** :math:`h_\text{MCI}(t)` is the time-dependent hazard function for
 transitioning from BBBM-AD to MCI-AD, and :math:`\Delta_\text{MCI}` is the
@@ -347,7 +347,7 @@ average duration of BBBM-AD in the absence of mortality, defined in the
     * - MCI-AD
       - :math:`p \cdot \delta_\text{MCI}`
       - 0
-    * - AD-dementia
+    * - Dementia-AD
       - :math:`p \cdot (1 - \delta_\text{BBBM} - \delta_\text{MCI})`
       - 0
 
@@ -458,7 +458,7 @@ table below:
       <cause_alzheimers_rate_calibration>`; formerly used in a previous version
       of the :ref:`AD population model <other_models_alzheimers_population>` to
       calculate BBBM-AD incidence. We are assuming the prevalence proportions
-      can be applied to incidence. We are assuming the AD-dementia incidence
+      can be applied to incidence. We are assuming the AD dementia incidence
       rate is constant over time in each demographic group. We assume 94% of
       mixed dementias include Alzheimer's, based on this `mixed dementias
       presentation`_ from the dementia modelers.
@@ -506,10 +506,10 @@ table below:
     - Applies to all states. Calculated in the simulation by mortality
       component.
   * - :math:`f`
-    - Excess mortality rate due to AD-dementia
+    - Excess mortality rate due to AD dementia
     - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
       artifact key ``cause.alzheimers_consistent.excess_mortality_rate``
-    - Applies only to AD-dementia state; total mortality in that state is
+    - Applies only to Dementia-AD state; total mortality in that state is
       :math:`m + f`. Derived from emr_m24351 from DisMod.
   * - sequelae_c543
     - Sequelae of Alzheimer's disease and other dementias
@@ -532,7 +532,7 @@ table below:
       - s453: 0.377 (0.252-0.508)
       - s454: 0.449 (0.304-0.595)
   * - :math:`\text{DW}_\text{c543}`
-    - Average disability weight of AD-dementia
+    - Average disability weight of AD dementia
     - :math:`\sum_\limits{s\in \text{sequelae\_c543}}
       \text{DW}_s \cdot \text{prevalence}_s`
     - Prevalence-weighted average disability weight over sequelae,
@@ -617,7 +617,7 @@ table below:
     - Average duration of MCI due to AD in the absence of mortality
     - 3.85 years
     - Obtained from Table 3 in `Potashman et al.`_, assuming a constant
-      hazard rate of transitioning to AD-dementia. Corresponds to an
+      hazard rate of transitioning to AD dementia. Corresponds to an
       annual conditional probability of 0.771 of staying in MCI-AD given
       that you don't die within one year, since :math:`\exp(-1 / 3.85)
       \approx 0.771`. Does not vary by year, location, age group, or
