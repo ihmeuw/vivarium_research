@@ -382,7 +382,7 @@ We utilized information from several sources to develop a wasting transition mod
 
 - **Incidence rates from less to more severe wasting categories:** 
 
-  - BMGF Knowledge Integration (KI) longitudinal database for transitions into mild wasting, MAM, and uncomplicated SAM. `A description of included studies is available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/KI%20studies.xlsx>`_
+  - GF Knowledge Integration (KI) longitudinal database for transitions into mild wasting, MAM, and uncomplicated SAM. `A description of included studies is available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/KI%20studies.xlsx>`_
 
   - Literature-based reports on the proportion of cases in treatment for outpatient uncomplicated SAM who deteriorate to complicated SAM prior to discharge (see table below)
 
