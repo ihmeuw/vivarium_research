@@ -2948,7 +2948,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Confirm that hemoglobin checks continue to pass, with validation targets updated to release ID 33
     - * Anemia YLDs (per pregnancy and in rate space) remain higher than GBD
       * By severity, moderate anemia YLD rates are overestimated and severe anemia YLD rates are underestimated
-      * GBD location aggregation for prevalence was done using total (not pregnant) population; all checks below are using a re-aggregated correction
+      * GBD location aggregation for prevalence was done using total (not pregnant) population; all checks below and in 31.0s are using a re-aggregated correction
       * Significant difference between prevalence in the draws we selected and the full set of draws
       * Moderate anemia prevalence rates are systematically higher than GBD, and not much of this can be explained by location aggregation of hemoglobin exposure
         (presumed to be due to baseline IFA deletion, see 31.0s)
@@ -2962,8 +2962,6 @@ Default stratifications to all observers should include scenario and input draw.
     - * Anemia YLDs per pregnancy remain higher than GBD even without oral iron effects
       * However, anemia YLD *rates* are lower than GBD, indicating that pregnancy durations are longer in our simulation
       * Anemia YLD rate underestimation is primarily due to an underestimation of the severe anemia YLD rate
-      * GBD location aggregation for prevalence was done using total (not pregnant) population; all checks below are using a re-aggregated correction
-      * Significant difference between prevalence in the draws we selected and the full set of draws
       * Severe anemia prevalence rates are systematically lower than GBD; most of this can be explained by location aggregation of hemoglobin exposure
       * In Ethiopia and Nigeria the sim underestimates anemia prevalence as compared to risk_distributions using location-aggegated hemoglobin exposure;
         we do not understand the reason for this, and it contributes to the underestimation of severe anemia in these countries
