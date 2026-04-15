@@ -109,15 +109,15 @@ The following disability weights and excess mortality weights should apply to ea
     - 
   * - d1_complicated
     - Daily probability of mortality in the complicated SAM state
-    - Values found here. TODO: LINK VALUES
+    - `See placeholder values here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/0acb49fac8[…]lation/nigeria/kebbi-copied-dummy-transitions-all-locations.csv>`__ (parameter == 'd1_complicated')
     - Represents mortality due to all causes 
   * - d1_uncomplicated
     - Daily probability of mortality in the uncomplicated SAM state
-    - Values found here. TODO: LINK VALUES
+    - `See placeholder values here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/0acb49fac8[…]lation/nigeria/kebbi-copied-dummy-transitions-all-locations.csv>`__ (parameter == 'd1_complicated')
     - Represents mortality due to all causes 
   * - other_causes_mortality_daily_probability
     - Daily probability of mortality due to causes other than diarrheal diseases, lower respiratory infections, malaria, or measles
-    - Values found here. TODO: LINK VALUES
+    - `See placeholder values here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/0acb49fac8[…]lation/nigeria/kebbi-copied-dummy-transitions-all-locations.csv>`__ (parameter == 'other_causes_mortality_daily_probability')
     - Represents mortality due to causes other than modeled infectious diseases in non-SAM states and mortality experienced in SAM states
 
 Validation 
