@@ -147,8 +147,8 @@ Vivarium Modeling Strategy
     - GBD prevalence of moderate child wasting
     - ``get_draws(source='exposure', gbd_id_type='rei_id', gbd_id=240)['parameter'=='cat2]``
     - 
-  * - gbd_cat4
-    - GBD prevalence of no child wasting (TMREL)
+  * - gbd_cat1
+    - GBD prevalence of severe child wasting
     - ``get_draws(source='exposure', gbd_id_type='rei_id', gbd_id=240)['parameter'=='cat1]``
     - 
   * - moderate_wasting_with_oedema
