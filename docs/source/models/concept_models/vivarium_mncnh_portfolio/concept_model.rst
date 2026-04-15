@@ -2946,8 +2946,8 @@ Default stratifications to all observers should include scenario and input draw.
   * - 31.0
     - Update hemoglobin exposure to release ID 33
     - Confirm that hemoglobin checks continue to pass, with validation targets updated to release ID 33
-    - * Anemia YLDs per pregnancy remain higher than GBD
-      * In rate space, moderate anemia YLDs are overestimated and severe anemia YLDs are underestimated
+    - * Anemia YLDs (per pregnancy and in rate space) remain higher than GBD
+      * By severity, moderate anemia YLD rates are overestimated and severe anemia YLD rates are underestimated
       * GBD location aggregation for prevalence was done using total (not pregnant) population; all checks below are using a re-aggregated correction
       * Significant difference between prevalence in the draws we selected and the full set of draws
       * Moderate anemia prevalence rates are systematically higher than GBD, and not much of this can be explained by location aggregation of hemoglobin exposure
