@@ -40,10 +40,14 @@ Alzheimer's disease  with preclinical and MCI stages (GBD 2023)
 
   * - Abbreviation
     - Definition
+  * - ACMR
+    - All-Cause Mortality Rate
   * - AD
     - Alzheimer's Disease
   * - BBBM
     - Blood-Based Biomarker
+  * - CSMR
+    - Cause-Specific Mortality Rate
   * - CSU
     - Client Services Unit
   * - DW
@@ -204,7 +208,7 @@ Cause Model Diagram
     - Constant hazard, defined below as the inverse of the average duration of MCI-AD, :math:`1 / \Delta_\text{MCI}`
   * - :math:`m`
     - Background mortality rate (non-AD mortality)
-    - Applies to all states, derived from forecasts of all-cause mortality
+    - Applies to all states; computed by mortality component in the simulation
   * - :math:`f`
     - Excess mortality rate due to AD-dementia
     - Obtained from :ref:`rate calibration <cause_alzheimers_rate_calibration>`;
@@ -254,9 +258,11 @@ in the :ref:`Alzheimer's population model
     - :math:`\text{DW}_\text{c543}`
 
 **Note:** The conditional prevalences :math:`\delta_\text{BBBM}` and
-:math:`\delta_\text{MCI}`, and the excess mortality rate :math:`f`,
-are obtained from the :ref:`rate calibration
-<cause_alzheimers_rate_calibration>`.
+:math:`\delta_\text{MCI}`, and the excess mortality rate :math:`f`, are
+obtained from the :ref:`rate calibration <cause_alzheimers_rate_calibration>`.
+The disability weights :math:`\text{DW}_\text{MCI}` and
+:math:`\text{DW}_\text{c543}` are defined in the :ref:`data values and sources
+table below <2023_cause_alzheimers_preclinical_mci_data_sources_table>`.
 
 .. _2023_cause_alzheimers_preclinical_mci_transition_data_table:
 
@@ -288,7 +294,7 @@ are obtained from the :ref:`rate calibration
   * - :math:`m`
     - Any state
     - Death
-    - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`
+    - :math:`\text{ACMR} - \text{CSMR}`
   * - :math:`f`
     - AD-dementia
     - Death
@@ -296,13 +302,18 @@ are obtained from the :ref:`rate calibration
       total mortality in AD-dementia state is :math:`m + f`
 
 **Note:** :math:`h_\text{MCI}(t)` is the time-dependent hazard function for
-transitioning from BBBM-AD to MCI-AD, defined in the :ref:`data values and
-sources table below <2023_cause_alzheimers_preclinical_mci_data_sources_table>`.
+transitioning from BBBM-AD to MCI-AD, and :math:`\Delta_\text{MCI}` is the
+average duration of MCI-AD in the absence of mortality; see the :ref:`data
+values and sources table below
+<2023_cause_alzheimers_preclinical_mci_data_sources_table>`.
 
 Simulants initialized into the BBBM-AD state need an assigned value for
 :math:`T_\text{BBBM}` to determine their dwell time. For simulants in BBBM-AD
 at time :math:`t=0`, assign :math:`T_\text{BBBM}` uniformly in the interval
-:math:`[-\Delta_\text{BBBM}, 0]`.
+:math:`[-\Delta_\text{BBBM}, 0]`, where :math:`\Delta_\text{BBBM}` is the
+average duration of BBBM-AD in the absence of mortality, defined in the
+:ref:`data values and sources table below
+<2023_cause_alzheimers_preclinical_mci_data_sources_table>`.
 
 .. _alzheimers_cause_state_data_including_susceptible_note:
 
@@ -415,9 +426,10 @@ table below:
     - Prevalence of AD dementia in total population
     - prevalence_m24351 :math:`\cdot` (proportion_AD + 0.94
       :math:`\cdot` proportion_mixed)
-    - We assume that 94% of mixed dementias include Alzheimer's disease,
-      based on this `mixed dementias presentation`_ from the dementia
-      modelers
+    - Used as input data in :ref:`rate calibration
+      <cause_alzheimers_rate_calibration>`. We assume that 94% of mixed
+      dementias include Alzheimer's disease, based on this `mixed dementias
+      presentation`_ from the dementia modelers.
   * - :math:`p`
     - Total prevalence of any AD state (BBBM + MCI + dementia) in total
       population
@@ -462,19 +474,21 @@ table below:
   * - :math:`\text{ACMR}`
     - All-cause mortality rate
     - :file:`mortality_all.nc`
-    - Draw-level, age-specific forecasts from GBD 2021 Forecasting
-      Capstone. See `Abie's population and mortality forecasts
-      notebook`_ for a demonstration of how to load and transform the
-      ``.nc`` file
+    - Draw-level, age-specific forecasts from GBD 2021 Forecasting Capstone.
+      See `Abie's population and mortality forecasts notebook`_ for a
+      demonstration of how to load and transform the ``.nc`` file. Used as
+      input data in :ref:`rate calibration
+      <cause_alzheimers_rate_calibration>`, as well as in mortality component.
   * - emr_m24351
     - Excess mortality rate of dementia from GBD 2023 dementia envelope
       in year 2023
     - get_draws( source="epi", gbd_id_type = "modelable_entity_id",
       gbd_id=24351, release_id=16, year_id=2023, measure_id=9 )
-    - This EMR from DisMod is a true excess mortality rate, including
-      all deaths *associated* with dementia, as opposed to only those
-      deaths *caused* by dementia, which is what we usually use in our
-      simulations
+    - Used as input data in :ref:`rate calibration
+      <cause_alzheimers_rate_calibration>`. This EMR from DisMod is a true
+      excess mortality rate, including all deaths *associated* with dementia,
+      as opposed to only those deaths *caused* by dementia, which is what we
+      usually use in our simulations
   * - :math:`\text{CSMR}`
     - Cause-specific mortality rate of AD
     - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
@@ -489,7 +503,8 @@ table below:
   * - :math:`m`
     - Background mortality rate (non-AD mortality)
     - :math:`\text{ACMR} - \text{CSMR}`
-    - Applies to all states. Calculated automatically by mortality component.
+    - Applies to all states. Calculated in the simulation by mortality
+      component.
   * - :math:`f`
     - Excess mortality rate due to AD-dementia
     - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
@@ -615,22 +630,6 @@ table below:
       is not possible. The conditional probability above is computed as
       :math:`0.771 = 0.735 / (1 - 0.047)` since the paper reports a 4.7%
       chance of dying within a year when starting in the MCI state.
-  * - :math:`\Delta_\text{AD}`
-    - Average duration of AD-dementia
-    - * prevalence_AD / incidence_AD for ages 40+
-      * 0 for ages under 40
-    - Follows from the steady-state equation (prevalent cases) = (incident
-      cases) x (average duration). Note that the denominator is the **raw
-      total-population incidence rate from GBD**, not the
-      susceptible-population incidence rate usually returned by Vivarium
-      Inputs. This is because we want the total-population person-time in the
-      denominators of prevalence and incidence to cancel out, leaving a ratio
-      of counts.
-  * - :math:`\Delta_\text{(all AD states)}`
-    - Average duration of all stages of AD combined if there is no
-      mortality in the BBBM-AD and MCI-AD stages
-    - :math:`\Delta_\text{BBBM} + \Delta_\text{MCI} + \Delta_\text{AD}`
-    -
 
 .. _mixed dementias presentation:
   https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/Alzheimer%27s%20CSU/01_planning/Mixed%20Dementia%20GV%20Follow-Up%20TV%20EN%20-%20to%20Sim%20Sci.pptx?d=wdc4e17c5661f40a7816768c2fd0c1e2d&csf=1&web=1&e=vhPSJa
