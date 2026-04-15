@@ -379,10 +379,6 @@ We utilized information from several sources to develop a wasting transition mod
 
 However, recovery from MAM and SAM states for those who do not receive treatment is very limited in the case of MAM and not observable in the case of SAM as it would be unethical for researchers to track the natural history of SAM without providing access to treatment. Therefore, we utilized a Markov model to solve for the untreated wasting recovery rates that would result in a steady state equilibrium of the system below and the values from the sources described above.
 
-.. todo::
-
-  Update the calibration equations in this doc (Ali)
-
 :download:`See this word document for a description of these parameters and the equations used to solve the system <WASTING CALIBRATION.docx>`
 
 .. image:: calibration_transitions.svg
@@ -418,15 +414,12 @@ The process of generating draw-level values for all wasting transitions is outli
 
   Include data table for all of these parameters (Tyler to make PR with table, values, and references)
 
-4. Using the randomly sampled values from step #3, calculate the daily probabilities for all transitions in the steady state system (see linked word document for specific equations), including:
+4. Using the randomly sampled values from step #3, calculate the daily probabilities for all transitions in the steady state system (see linked word document for specific equations), including: 
 
   - State mortality rates (d variables)
   - Untreated recovery rates (r variables)
   - Incidence rate of uncomplicated to complicated SAM (ic variable)
 
-.. todo::
-
-  Include equations for all of these parameters (Ali to make PR that includes equations)
 
 6. Assess validity of results according to the following rules:
 
@@ -465,6 +458,8 @@ Assumptions and Limitations
   Post an analysis of how influential baseline coverage rates are on our calibration results
 
 - Our model of complicated and uncomplicated SAM as it relates to infectious diseases is illogical at the individual level. For instance, it is possible in our model for a simulant to occupy the uncomplicated SAM state while infected with diarrheal diseases, LRI, measles, or malaria, despite the fact that the active infection while classified as SAM by WHZ/MUAC/edema status would classify the case as complicated SAM. This is a limitation of our model chosen for modeling convenience and will cause us to underestimate the impact of inpatient SAM treatment and overestimate the impact of outpatient SAM treatment on YLDs due to infectious diseases in our simulation. 
+
+- Our model does not include a transition rate directly from MAM to complicated SAM depsite this transition exisiting in reality. For instance, by definition, an HIV-positive MAM case who deteriorates to SAM would transition directly from MAM to complicated SAM. 
 
 References
 ++++++++++
