@@ -47,10 +47,29 @@ Wasting dynamic transition model with complicated SAM (GBD 2021)
   The wasting exposure model on this page has been extended to subdivide the severe acute malnutrition (SAM) exposure state into two separate exposures: uncomplicated and complicated SAM and is intended for use in the 
   :ref:`nutrition optimization extension simulation <nutrition_optimization_extension>`.
 
-  For brevity, background research information has been removed from this document. Consult the :ref:`2021 wasting risk exposure page <2021_risk_exposure_wasting_state_exposure>` for more information
-
 .. contents::
   :local:
+
+Research background
+++++++++++++++++++++
+
+For brevity, background research information not specific to the complicated SAM state that is new to this version of the wasting model has been removed from this document. Consult the :ref:`2021 wasting risk exposure page <2021_risk_exposure_wasting_state_exposure>` for additional background information on child wasting/acute malnutrition.
+
+Severe acute malnutrition (SAM) is classified by the following criteria:
+
+- Weight-for-height z-score (WHZ) < -3, 
+- Mid-upper arm circumference (MUAC) < 115 mm, or
+- Bilateral pitting oedema
+
+Among those classified as SAM, a subset of cases are further classified as complicated SAM, including those who:
+
+- Fail an appetite test (failure to consume a specified amount of ready-to-eat therapeutic food (RUTF))
+- Have an active severe infection
+- Have high grade edema
+- Metabolic issues such as hypoglycenmia, hypothermia, or dehydration
+- Have another medical complication such as severe anemia, HIV, etc.
+
+Generally, complicated cases will require inpatient care where they are fed with specially formulated milks (potentially via a feeding tube) and provided with additional supportive care as needed. Uncomplicated cases may be managed in an outpatient setting with solid RUTF.
 
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
@@ -271,20 +290,9 @@ We can then solve for the ABW and LBW probabilities of initialization into wasti
 Transitions
 ------------
 
-Draw-specific values for transition rates (defined in the table below) for Ethiopia, Nigeria, and Pakistan (GBD 2019 cause data and GBD 2021 CGF data for use in Nutrition Optimization Wave I) can be found listed below. Values in these files are defined in terms of transitions per person-year in the source state. 
+.. todo::
 
-- `Ethiopia wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/ethiopia_2019_wasting_transitions_5.csv>`_ 
-
-  - `Ethiopian values were generated in this notebook as of 11/20/2023 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_transition_sampling.ipynb>`_
-
-- `Nigeria wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/nigeria_2019_wasting_transitions_5.csv>`_ 
-
-  - `Nigerian values were generated in this notebook as of 11/20/2023 <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/wasting_transition_sampling.ipynb>`_
-
-- `Pakistan wasting transition rates <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/pakistan_2019_wasting_transitions_5.csv>`_ 
-
-  - `Pakistan values were generated in this notebook (11/20/2023) <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/wasting_transition_sampling.ipynb>`_
-
+  Link to wasting transition rates and notebook used to generate them when ready.
 
 .. list-table:: Transition Data
  :header-rows: 1
@@ -292,34 +300,52 @@ Draw-specific values for transition rates (defined in the table below) for Ethio
  * - Transition
    - Source State
    - Sink State
+   - Note
  * - ux_rem_rate_sam
-   - CAT 1
-   - CAT 2
+   - cat1_uncomplicated
+   - cat2_superstate
+   - * Source state updated from cat1_superstate to cat1_uncomplicated
+     * Same rate applies to both MAM substates, strategy unchanged from N.O. implementation, but docs updated for clarity
  * - tx_rem_rate_sam
-   - CAT 1
-   - CAT 3
+   - cat1_uncomplicated
+   - cat3
+   - * Source state updated from cat1_superstate to cat1_uncomplicated
  * - rem_rate_mam
-   - CAT 2
-   - CAT 3
+   - cat2_superstate
+   - cat3
+   - * Same rate applies to both MAM substates, strategy unchanged from N.O. implementation, but docs updated for clarity
  * - rem_rate_mild
-   - CAT 3
-   - CAT 4
+   - cat3
+   - cat4
+   - 
  * - inc_rate_sam
-   - CAT 2
-   - CAT 1
+   - cat2_superstate
+   - cat1_uncomplicated
+   - * Sink state updated from cat1_superstate to cat1_uncomplicated
+     * Same rate applies to both MAM substates, strategy unchanged from N.O. implementation, but docs updated for clarity
  * - inc_rate_mam
-   - CAT 3
-   - CAT 2
+   - cat3
+   - cat2_superstate
+   - * Same rate applies to both MAM substates, strategy unchanged from N.O. implementation, but docs updated for clarity
  * - inc_rate_mild
-   - CAT 4
-   - CAT 3
+   - cat4
+   - cat3
+   - 
+ * - inc_rate_complicated_sam***
+   - cat1_uncomplicated
+   - cat1_complicated
+   - New transition for the N.O. extension simulation
+ * - rem_rate_complicated_sam***
+   - cat1_complicated
+   - cat1_uncomplicated
+   - New transition for the N.O. extension simulation
 
 Validation 
 ++++++++++
 
 Wasting model
 
-  - prevalence of cat 1-4 (including the MAM sub-states)
+  - prevalence of all wasting exposure states
   - model transition rates
 
 Note that validation of this model is dependent on validation of wasting-specific mortality rates, which are dependent on the following models meeting their individual validation criteria:
@@ -334,31 +360,40 @@ Deriving the wasting transition rates
 
 We utilized information from several sources to develop a wasting transition model.
 
-- **Wasting risk exposure:** GBD 2021 risk prevalence
-- **Wasting-specific mortality rates:** 
+- **Wasting-exposures:** 
 
-  - :ref:`GBD 2021 CGF risk effects <2021_risk_effect_cgf>`
-  - :ref:`GBD 2019 PEM risk-attributable cause model <2021_pem>`
-  - GBD 2019 cause models for diarrheal diseases, lower respiratory infections, measles, and malaria (as linked on the :ref:`nutrition optimization child concept model <2021_concept_model_vivarium_nutrition_optimization>`)
+  - GBD 2021 child wasting risk exposure
+  - Prevalence of moderate wasting with oedema sequela from GBD 2021
+  - WHZ exposure data from DHS to inform the relative prevalence of the better and worse MAM substates
+  - Reports from the literature to inform the relative prevalence of the complicated and uncomplicated SAM substates
 
-- **Treated MAM and SAM recovery rates:** :ref:`wasting treatment intervention model <intervention_wasting_tx_combined_protocol>`
-- **Incidence rates from less to more severe wasting categories:** BMGF Knowledge Integration (KI) longitudinal database. `A description of included studies is available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/KI%20studies.xlsx>`_
+- **Wasting-specific mortality rates:** detailed on the WASTING-ATTRIBUTABLE MORTALITY DOCUMENT TODO: LINK WHEN READY
+
+- **Treated recovery rates for acute malnutrition:** detailed on the WASTING TREATMENT DOCUMENT TODO: LINK WHEN READY
+
+- **Incidence rates from less to more severe wasting categories:** 
+
+  - BMGF Knowledge Integration (KI) longitudinal database for transitions into mild wasting, MAM, and uncomplicated SAM. `A description of included studies is available here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/KI%20studies.xlsx>`_
+
+  - Literature-based reports on the proportion of cases in treatment for outpatient uncomplicated SAM who deteriorate to complicated SAM prior to discharge (see table below)
 
 However, recovery from MAM and SAM states for those who do not receive treatment is very limited in the case of MAM and not observable in the case of SAM as it would be unethical for researchers to track the natural history of SAM without providing access to treatment. Therefore, we utilized a Markov model to solve for the untreated wasting recovery rates that would result in a steady state equilibrium of the system below and the values from the sources described above.
 
-.. note::
+.. todo::
 
-  The previous implementation of this model relied on literature estimates of untreated recovery rates from SAM and MAM (observed indirectly in the case of untreated SAM) and used the markov steady state model to solve for wasting incidence rates. This update is an improvement upon the previous implementation in that it relies on directly observed data as inputs to the model and outputs values for limited/un-observable parameters rather than the other way around. Additionally, this implementation results in values that better validate to KI transition rate data where applicable. 
+  Update the calibration equations in this doc (Ali)
 
 :download:`See this word document for a description of these parameters and the equations used to solve the system <WASTING CALIBRATION.docx>`
 
 .. image:: calibration_transitions.svg
 
-A small-level individual-based simulation has demonstrated the system of equations used in the derivation of these rates successfully maintains steady state. `See a demonstration of the steady state equilibrium maintained by this system of equations in this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_calibration_solved_from_incidence_rates.ipynb>`_
+The process of generating draw-level values for all wasting transitions is outlined below. See the code for generating draw-specific transition values in this notebook here: TODO: link when ready/merged
 
-The process of generating draw-level values for all wasting transitions is outlined below. `See the code for generating draw-specific transition values in this notebook here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/wasting_transition_sampling.ipynb>`_
+1. Load all pre-defined input data values (in accordance with documentation linked above). These include:
 
-1. Load all input data values (in accordance with documentation linked above)
+  - Wasting superstate exposures
+  - GBD all-cause mortality rate
+  - Wasting state-speciifc mortality rates due to modeled causes
 
 2. Exclude studies in the KI database that have inappropriate study populations. A list of excluded studies and there reasons for exclusion are provided below.
 
@@ -368,20 +403,39 @@ The process of generating draw-level values for all wasting transitions is outli
   - Ilins-Dyad: LNS supplementation
   - SAS_LBW: LBW babies
 
-3. At the sex, age, and draw-specific level, randomly sample a study from the remaining KI studies 
+3. At the sex, age, and draw-specific level, randomly sample values from the uncertainty distribution for the following parameters:
 
-4. Randomly sample event count values (numerator values) for i1, i2, and i3 transition rates under the assumption that the event counts follow a Poisson distribution of uncertainty, divide by person-time denominators (child days in provided KI data), and then convert to daily transition probabilities
+  - Case fatality rate of uncomplicated SAM
+  - Case fatality rate of complicated SAM
+  - Time to treatment initialization for complicated SAM
+  - Inpatient stabilization time for complicated SAM
+  - Complicated SAM fraction
+  - Baseline coverage of AM treatment (separately for MAM, outpatient SAM, and inpatient SAM)
+  - Proportion of cases that deteriorate from uncomplicated to complicated SAM during outpatient treatment
+  - Incidence rates from the KI database for transitions into mild wasting, MAM, and uncomplicated SAM
 
-5. Calculate r4, r3 (as well as r3_treated and r3_untreated), r2 recovery probabilities according to draw-specific input parameters and sampled i1, i2, and i3 values
+.. todo::
+
+  Include data table for all of these parameters (Tyler to make PR with table, values, and references)
+
+4. Using the randomly sampled values from step #3, calculate the daily probabilities for all transitions in the steady state system (see linked word document for specific equations), including:
+
+  - State mortality rates (d variables)
+  - Untreated recovery rates (r variables)
+  - Incidence rate of uncomplicated to complicated SAM (ic variable)
+
+.. todo::
+
+  Include equations for all of these parameters (Ali to make PR that includes equations)
 
 6. Assess validity of results according to the following rules:
 
-  - r4, r3, r3_untreated, and r2 must be positive
-  - t1 must be greater than r2
-  - r3_treated must be greater than r3_untreated
+  - All transition rates must be positive
+  - Treated recovery rates must be faster than untreated recovery rates
+  - Coverage of inpatient SAM treatment must be greater or equal to coverage of outpatient SAM treatment, which must be greater or equal to coverage of MAM treatment
   - result for r3 value solved by two different methods must be within 10% of one another
 
-7. If any of the rules in step #6 fail, begin again at step #3 until valid result is obtained. Repeat until 1,000 valid draws are generated for each age/sex group
+7. If any of the rules in step #6 fail, begin again at step #3 until valid result is obtained. Repeat until valid result is obtained.
 
 8. Convert daily probabilities to annual rates and output as .csv
 
@@ -390,18 +444,31 @@ Assumptions and Limitations
 
 - We do not consider seasonal variation in wasting exposure or transition rates
 
-- We do not consider individual heterogeneity in wasting transition rates beyond what is modeled in the :ref:`wasting x-factor <2019_risk_exposure_x_factor>` model when it is included in the simulation
+- We do not consider individual heterogeneity in wasting transition rates (we do not capture relapse dynamics)
 
-- We rely on treatment data with sparse availability and assume that child wasting measured by WHZ is a reasonable proxy for acute malnutrition (often measured by MUAC)
+- Our model does not consider MUAC exposure and therefore may underestimate the prevalence of acute malnutrition
 
 - We cannot directly observe recovery time of untreated wasting as it would be unethical. Therefore, we must indirectly estimate this parameter
 
-- We assume that those successfully treated for SAM transition directly to the mild wasting state without transitioning through the MAM state. By definition, a transition through the MAM state must occur in reality. However, this design was selected for convenient compatibility with the standard discharge criteria for SAM treatment used in studies that report treated SAM recovery rates. Additionally, there is some data to suggest that immunologic recovery (and therefore reduction in mortality risk) of SAM cases lags behind anthropomorphic recovery. 
+- We assume that those successfully treated for uncomplicated SAM transition directly to the mild wasting state without transitioning through the MAM state. By definition, a transition through the MAM state must occur in reality. However, this design was selected for convenient compatibility with the standard discharge criteria for uncomplicated SAM treatment used in studies that report treated SAM recovery rates. Additionally, there is some data to suggest that immunologic recovery (and therefore reduction in mortality risk) of uncomplicated SAM cases lags behind anthropomorphic recovery. 
 
+- We are modeling *total* mortality that occurs while in the SAM state (both complicatcated and uncomplicated) without differentiating between mortality that occurs while in SAM and mortality that occurs *due to* SAM. Our calibration strategy is expected to accurately reflect the average total impact of SAM treatment reflected in the literature due to direct calibration with reported SAM treatment mortality outcomes. It is important to note that SAM treatment (and particularly inpatient treatment for complicated SAM) is expected to reduce total mortality within SAM and not only mortality directly *caused by* SAM as the intervention may include additional treatments beyond just therapeutic foods such as antibiotics for infection, blood transfusions for severe anemia, fluids for severe dehydration, support for HIV, etc., etc. 
+
+  However, our model will be limited in that it will not capture potential differences in impact in populations that do not generalize well to the study populations of the SAM treatment literature. As much of the SAM treatment studies are based in Africa, this is a particular risk for modeling populations outside of the continent and/or for populations with HIV prevalence that differs significantly from that found in the SAM treatment literature.
+
+  Additionally, our model will assume that mortality risk of SAM cases will be reduced to background levels following recovery from SAM. However, in reality, it would be expected that mortality risk experienced within but not due to SAM would remain elevated for these cases (excess mortality due to HIV, which is correlated with both malnutrition and mortality, for example). Therefore, our model will overestimate the impact of interventions that reduce SAM prevalence. `See this document <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/Nutrition%20Optimization/01_Planning/SAM%20mortality%20modeling%20strategies.docx?d=w6d360798378a4b8597a9e76ec2d5b67f&csf=1&web=1&e=C18VoT>`__ for more discussion of why this modeling strategy was chosen and a potential approach for addressing this limitation if/when we are able.
+
+- There is little quality data available on the baseline coverage of acute malnutrition, particularly at the subnational level. Therefore, we model wide ranges of possibility for this parameter.
+
+.. todo::
+
+  Post an analysis of how influential baseline coverage rates are on our calibration results
+
+- Our model of complicated and uncomplicated SAM as it relates to infectious diseases is illogical at the individual level. For instance, it is possible in our model for a simulant to occupy the uncomplicated SAM state while infected with diarrheal diseases, LRI, measles, or malaria, despite the fact that the active infection while classified as SAM by WHZ/MUAC/edema status would classify the case as complicated SAM. This is a limitation of our model chosen for modeling convenience and will cause us to underestimate the impact of inpatient SAM treatment and overestimate the impact of outpatient SAM treatment on YLDs due to infectious diseases in our simulation. 
 
 References
 ++++++++++
 
 .. todo::
 
-  Link GBD 2021 methods appendix when finished
+  Link GBD 2021 methods appendix and all of our input data sources
