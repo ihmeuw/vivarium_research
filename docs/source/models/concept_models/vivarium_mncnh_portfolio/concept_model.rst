@@ -2946,13 +2946,28 @@ Default stratifications to all observers should include scenario and input draw.
   * - 31.0
     - Update hemoglobin exposure to release ID 33
     - Confirm that hemoglobin checks continue to pass, with validation targets updated to release ID 33
-    - All checks pass (except for known issues)
-    - `Model 31.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/b2d3d7f9a4dcc3a8890a7f39fa279a97f4209b7d>`__
+    - * Anemia YLDs per pregnancy remain higher than GBD
+      * In rate space, moderate anemia YLDs are overestimated and severe anemia YLDs are underestimated
+      * GBD location aggregation for prevalence was done using total (not pregnant) population; all checks below are using a re-aggregated correction
+      * Significant difference between prevalence in the draws we selected and the full set of draws
+      * Moderate anemia prevalence rates are systematically higher than GBD, and not much of this can be explained by location aggregation of hemoglobin exposure
+        (presumed to be due to baseline IFA deletion, see 31.0s)
+      * Severe anemia prevalence rates are systematically lower than GBD, but this is *more than* explained by location aggregation of hemoglobin exposure; accounting for that, they are overestimated
+        (also presumed to be due to baseline IFA deletion, see 31.0s)
+      * Disability weights by severity approximately match GBD, though we have not yet found a citation for these
+    - `Model 31.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/42e0120c46e1be6825a3942013f770fab4f36c16/tests/model_notebooks/results/executed>`__
   * - 31.0s
     - Update hemoglobin exposure to release ID 33 sensitivity analysis
     - Same as 29.0.5s, but with hemoglobin exposure updated to release ID 33
-    - Anemia YLDs still look high
-    - `Model 31.0s V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/commit/34d1a66c78af365ec3d695ca79c4127899339471>`__
+    - * Anemia YLDs per pregnancy remain higher than GBD even without oral iron effects
+      * However, anemia YLD *rates* are lower than GBD, indicating that pregnancy durations are longer in our simulation
+      * Anemia YLD rate underestimation is primarily due to an underestimation of the severe anemia YLD rate
+      * GBD location aggregation for prevalence was done using total (not pregnant) population; all checks below are using a re-aggregated correction
+      * Significant difference between prevalence in the draws we selected and the full set of draws
+      * Severe anemia prevalence rates are systematically lower than GBD; most of this can be explained by location aggregation of hemoglobin exposure
+      * In Ethiopia and Nigeria the sim underestimates anemia prevalence as compared to risk_distributions using location-aggegated hemoglobin exposure;
+        we do not understand the reason for this, and it contributes to the underestimation of severe anemia in these countries
+    - `Model 31.0s V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/76cdb75a1e267430984bd48cdddd1764fe7d8833/tests/model_notebooks/results/executed>`__
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
