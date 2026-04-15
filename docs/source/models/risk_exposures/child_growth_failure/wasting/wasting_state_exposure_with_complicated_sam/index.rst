@@ -162,7 +162,7 @@ Vivarium Modeling Strategy
   * - complicated_sam_fraction
     - Fraction of SAM cases in the "complicated" substate
     - Values will be output at the draw/age/sex/subnational-specific level from the wasting calibration. TODO: post link when ready
-    - TODO: include reference used to inform input range for this parameter
+    - `See placeholder values here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/0acb49fac8[…]lation/nigeria/kebbi-copied-dummy-transitions-all-locations.csv>`__ parameter == 'comp_frac'
 
 .. todo::
 
@@ -290,9 +290,8 @@ We can then solve for the ABW and LBW probabilities of initialization into wasti
 Transitions
 ------------
 
-.. todo::
+`See placeholder values here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/0acb49fac8[…]lation/nigeria/kebbi-copied-dummy-transitions-all-locations.csv>`__
 
-  Link to wasting transition rates and notebook used to generate them when ready.
 
 .. list-table:: Transition Data
  :header-rows: 1
@@ -300,44 +299,54 @@ Transitions
  * - Transition
    - Source State
    - Sink State
+   - Name in output calibration
    - Note
  * - ux_rem_rate_sam
    - cat1_uncomplicated
    - cat2_superstate
+   - r2
    - * Source state updated from cat1_superstate to cat1_uncomplicated
      * Same rate applies to both MAM substates, strategy unchanged from N.O. implementation, but docs updated for clarity
  * - tx_rem_rate_sam
    - cat1_uncomplicated
    - cat3
+   - t1
    - * Source state updated from cat1_superstate to cat1_uncomplicated
  * - rem_rate_mam
    - cat2_superstate
    - cat3
+   - r3
    - * Same rate applies to both MAM substates, strategy unchanged from N.O. implementation, but docs updated for clarity
  * - rem_rate_mild
    - cat3
    - cat4
+   - r4
    - 
  * - inc_rate_sam
    - cat2_superstate
    - cat1_uncomplicated
+   - i1
    - * Sink state updated from cat1_superstate to cat1_uncomplicated
      * Same rate applies to both MAM substates, strategy unchanged from N.O. implementation, but docs updated for clarity
  * - inc_rate_mam
    - cat3
    - cat2_superstate
+   - i2
    - * Same rate applies to both MAM substates, strategy unchanged from N.O. implementation, but docs updated for clarity
  * - inc_rate_mild
    - cat4
    - cat3
+   - i3
    - 
  * - inc_rate_complicated_sam***
    - cat1_uncomplicated
    - cat1_complicated
+   - ic
    - New transition for the N.O. extension simulation
  * - rem_rate_complicated_sam***
    - cat1_complicated
    - cat1_uncomplicated
+   - r1
    - New transition for the N.O. extension simulation
 
 Validation 
