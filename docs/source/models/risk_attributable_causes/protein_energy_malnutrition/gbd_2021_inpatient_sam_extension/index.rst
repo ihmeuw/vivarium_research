@@ -45,12 +45,12 @@
 Overview
 ++++++++
 
-This page contains information pertaining to morbidity and mortality directly attributable to the child wasting risk factor. Note that this risk-attributable model has been extended beyond the scope of the :ref:`protein energy malnutrition risk-attributable cause <2021_pem>` used in the :ref:`original nutrition optimization child simulation model <2021_concept_model_vivarium_nutrition_optimization_children>` to support the modeling strategy of inpatient SAM treatment in the :ref:`nutrition optimization inpatient SAM extension simulation model <>`.
+This page contains information pertaining to morbidity and mortality directly attributable to the child wasting risk factor. Note that this risk-attributable model has been extended beyond the scope of the :ref:`protein energy malnutrition risk-attributable cause <2021_pem>` used in the :ref:`original nutrition optimization child simulation model <2021_concept_model_vivarium_nutrition_optimization_children>` to support the modeling strategy of inpatient SAM treatment in the :ref:`nutrition optimization inpatient SAM extension simulation model <nutrition_optimization_extension>`. This modeling strategy was designed for the specific application in the N.O. inpatient SAM extension model and will not generalize to other use cases.
 
 Modeling strategy
 +++++++++++++++++
 
-The following disability weights and excess mortality weights should apply to each wasting exposure state as detailed on the :ref:`wasting risk exposure with complicated SAM model document <>`. We have suggested cause nomenclature in the table below for consistency with prior implementation, but the choice is arbitrary and we can deviate from it if desired. 
+The following disability weights and excess mortality weights should apply to each wasting exposure state as detailed on the :ref:`wasting risk exposure with complicated SAM model document <2021_risk_exposure_wasting_with_complicated_sam>`. We have suggested cause nomenclature in the table below for consistency with prior implementation, but the choice is arbitrary and we can deviate from it if desired. 
 
 .. list-table:: State data
   :header-rows: 1
