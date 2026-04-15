@@ -52,7 +52,11 @@ Components that need to be altered to support new wasting state (more details to
 
 Components with substantial updates (links/updates to come)
 
-- Child wasting exposure
+- :ref:`Child wasting exposure <2021_risk_exposure_wasting_with_complicated_sam>`, including changes to:
+
+  - Exposure initialization, see relevant changes in the third (and any later) commits of `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1922>`__
+  - Transition rates, see `relevant changes to modeling strategy in this PR <https://github.com/ihmeuw/vivarium_research/pull/1926>`__. Data values for transition rates still to come as of 4/15/2026
+
 - SAM treatment for complicated SAM 
 - Protein energy malnutrition/mortality attributable to child wasting
 - Mortality due to other causes 
