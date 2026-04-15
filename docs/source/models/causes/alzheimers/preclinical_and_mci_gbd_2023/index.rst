@@ -698,11 +698,18 @@ ODE Consistency Constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The calibration produces consistent parameters by
-solving a 5-compartment ODE system starting with initial conditions at age :math:`a` to find the implied values at age :math:`a + 5`; we include the squared difference between these implied values and the parameter values in the MCMC objective.  
+solving a 5-compartment ODE system starting with initial conditions at age
+:math:`a` to find the implied values at age :math:`a + 5`; we include the
+squared difference between these implied values and the parameter values in the
+MCMC objective. This is basically an implementation of the `method of multiple
+shootings`_ for solving boundary value problems.
+
+.. _method of multiple shootings:
+  https://en.wikipedia.org/wiki/Direct_multiple_shooting_method
 
 The state variables are S (susceptible), BBBM, MCI, D (dementia), and
 :math:`D_\text{new}` (cumulative incident dementia, which is used to calibrate
-the total-population incidence rate of AD dementia). The DisMOd ODE system is:
+the total-population incidence rate of AD dementia). The DisMod ODE system is:
 
 .. math::
 
@@ -722,7 +729,7 @@ compartment sizes as follows:
 
 .. math::
 
-  p = \frac{\text{BBBM + MCI + D}}{S + \text{BBBM + MCI} + D}
+  p = \frac{\text{BBBM + MCI} + D}{S + \text{BBBM + MCI} + D}
 
 .. math::
 
