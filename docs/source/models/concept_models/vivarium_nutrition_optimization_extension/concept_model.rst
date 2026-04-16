@@ -47,7 +47,7 @@ Artifact-only updates (data updates to come):
 Components that need to be altered to support new wasting state (more details to come):
 
 - :ref:`Child underweight risk exposure <2020_risk_exposure_child_underweight>`: exposure lookup table needs to support additional wasting state (apply existing cat1 values to both cat1_complicated and cat1_uncomplicated)
-- :ref:`CGF risk effects <2019_risk_effect_wasting>`: EMRs for all SAM states set to zero
+- :ref:`CGF risk effects <2019_risk_effect_wasting>`: EMR RRs for both SAM states set to zero, incidence rate RRs set to cat1_superstate value for both SAM substates
 
 Components with substantial updates (links/updates to come)
 
@@ -178,6 +178,10 @@ results.
 
 The below tables can be filled out iteratively as new model runs are requested and later V&V'd. 
 
+.. note::
+
+  More detail will be added to these runs as we become closer to launching them -- details and V&V criteria may change depending on whether we are running with placeholder data or not
+
 .. list-table:: Model runs
   :header-rows: 1
 
@@ -187,12 +191,34 @@ The below tables can be filled out iteratively as new model runs are requested a
     - Specification modifications
     - Stratification modifications
     - Observer modifications
-  * - 
-    - 
-    -  
-    - 
-    - 
-    - 
+  * - 1.0
+    - Wasting model update
+    - Baseline (maternal and child)
+    - 10 draws
+    - Default
+    - Default
+  * - 2.0
+    - Intervention model updates
+    - * Baseline (maternal and child)
+      * MMS at ANC1 maternal scenario and child scenarios 0-7, 36 (uncomplicated_sam_tx__complicated_sam_stabilization__), 45 (uncomplicated_sam_tx__complicated_sam_recovery__)
+    - 10 draws
+    - Default
+    - Default
+  * - 3.0
+    - Production run test
+    - * Baseline (maternal and child)
+    - 1 draw
+    - * Stratify by alternative age groups of 0-6 months, 6-18 months, 18-60 months
+      * Exclude wasting state stratification from mortality observer
+    - Exclude child underweight and disease observers (observers #5 and #6)
+  * - 3.1
+    - Production runs
+    - * Baseline (maternal and child)
+      * MMS at ANC maternal scenario and all child scenarios
+    - 20 draws
+    - * Stratify by alternative age groups of 0-6 months, 6-18 months, 18-60 months
+      * Exclude wasting state stratification from mortality observer
+    - Exclude child underweight and disease observers (observers #5 and #6)
 
 .. list-table:: Model verification and validation tracking
    :widths: 3 10 20
@@ -201,9 +227,15 @@ The below tables can be filled out iteratively as new model runs are requested a
    * - Run number
      - V&V criteria
      - V&V summary
-   * -  
-     - 
+   * - 1.0
+     - * Verify population ACMR to GBD
+       * Verify wasting state-specific mortality rates are as expected
+       * Verify CGF exposures
+       * Verify wasting transition rates
      -  
+   * - 2.0
+     - * Confirm all intervention effects and coverage match expectations 
+     - 
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
