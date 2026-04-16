@@ -3027,7 +3027,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Originally thought to be related to failure to account for additional correlation induced by the baseline IFA calibration with respect to gestational age,
       but this has not been resolved by model 30.0 updates to the oral iron GA shift implementation.
       New theory is that our calibration causes mean gestational age to match, but not the proportion of preterm.
-    - Research to investigate
+    - `Research to investigate <https://jira.ihme.washington.edu/browse/SSCI-2614>`
     - TBD
   * - Early neonatal other causes mortality risk in Pakistan overestimated
     - Unknown
