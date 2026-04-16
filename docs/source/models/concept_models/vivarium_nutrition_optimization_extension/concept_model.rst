@@ -47,7 +47,6 @@ Artifact-only updates (data updates to come):
 Components that need to be altered to support new wasting state (more details to come):
 
 - :ref:`Child underweight risk exposure <2020_risk_exposure_child_underweight>`: exposure lookup table needs to support additional wasting state (apply existing cat1 values to both cat1_complicated and cat1_uncomplicated)
-- :ref:`Effect of birthweight on wasting (see initialization section) <2021_risk_exposure_wasting_state_exposure>`: needs to support additional wasting state
 - :ref:`CGF risk effects <2019_risk_effect_wasting>`: EMRs for all SAM states set to zero
 
 Components with substantial updates (links/updates to come)
@@ -58,8 +57,8 @@ Components with substantial updates (links/updates to come)
   - Transition rates, see `relevant changes to modeling strategy in this PR <https://github.com/ihmeuw/vivarium_research/pull/1926>`__. Data values for transition rates still to come as of 4/15/2026
 
 - SAM treatment for complicated SAM 
-- Protein energy malnutrition/mortality attributable to child wasting
-- Mortality due to other causes 
+- :ref:`Child wasting state-specific mortality and morbidity <2021_pem_inpatient_sam_extension>`
+- Mortality due to other causes: set to zero for this simulation (all mortality will be captured in the :ref:`Child wasting state-specific mortality and morbidity <2021_pem_inpatient_sam_extension>` modeling strategy)
 
 .. _nutrition_optimization_extension2.2:
 
