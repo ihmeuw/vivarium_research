@@ -377,7 +377,7 @@ terms of these values.
 
 .. |AD cause model data sources table| replace::
   :ref:`AD cause model data sources table
-  <2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`
+  <2023_cause_alzheimers_preclinical_mci_data_sources_table>`
 
 .. |Attention box on the AD cause model page| replace::
   :ref:`Attention box on the AD cause model page
