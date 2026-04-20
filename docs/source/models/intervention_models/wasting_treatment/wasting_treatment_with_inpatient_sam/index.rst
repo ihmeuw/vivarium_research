@@ -170,8 +170,6 @@ and
     * ``MAM_TX_RECOVERY_TIME_OVER_6MO``. Instead, inform this paraemter using ``tx_rem_rate_mam`` from the custom data file
 
 
-.. _WastingPropensityNote:
-
 Coverage Propensities
 ++++++++++++++++++++++
 
