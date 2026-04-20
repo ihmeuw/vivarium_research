@@ -86,7 +86,7 @@ Vivarium Modeling Strategy
 
 The wasting treatment intervention will be implemented as a variable that affects the relative risk of certain transition rates between wasting states in the :ref:`dynamic wasting model <2021_risk_exposure_wasting_with_complicated_sam>`. The following table details the relative risks for each dynamic wasting model transition rate that is affected by wasting treatment based on a given treatment category.
 
-All parameters for this intervention model should come from the custom data .csv output from the wasting calibration model. Parameter names in this table should match parameter names in that file.
+All parameters for this intervention model discussed on this page as well as baseline coverage levels for all interventions should come from the custom data .csv output from the wasting calibration model. Parameter names in this table should match parameter names in that file.
 
 .. important::
 
@@ -118,9 +118,9 @@ All parameters for this intervention model should come from the custom data .csv
 
 Where ``e`` represents intervention "efficacy" as the proportion of the population who does not refuse or otherwise drop out of treatment. Those who refuse or otherwise drop out of treatment are assumed to recover via the untreated recovery rates. Intervention-specific values are shown below and were chosen to be compatible with the SPHERE standard default rate for acute malnutrition management of <15% and an assumption that default rates will decrease with increasing acute malnutrition severity.
 
-- e_mam = 0.15
-- e_sam = 0.10
-- e_complicated_sam = 0.05
+- e_mam = 0.85
+- e_sam = 0.90
+- e_complicated_sam = 0.95
 
 .. note::
 
