@@ -40,8 +40,7 @@ Components unchanged from the existing :ref:`nutrition optimization child model 
 
 Artifact-only updates (data updates to come):
 
-- :ref:`MAM treatment <intervention_wasting_treatment>`: parameter updates to C_MAM and E_MAM only
-- :ref:`SAM treatment for uncomplicated SAM <intervention_wasting_treatment>`: parameter updates to C_SAM and E_SAM only
+- :ref:`SAM treatment for uncomplicated SAM <2021_risk_exposure_wasting_with_complicated_sam>`: parameter updates to C_SAM and E_SAM only
 - :ref:`SQ-LNS <lipid_based_nutrient_supplements>`, wasting transition rate value updates, no changes to stunting effects
 
 Components that need to be altered to support new wasting state (more details to come):
@@ -56,7 +55,8 @@ Components with substantial updates (links/updates to come)
   - Exposure initialization, see relevant changes in the third (and any later) commits of `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1922>`__
   - Transition rates, see `relevant changes to modeling strategy in this PR <https://github.com/ihmeuw/vivarium_research/pull/1926>`__. Data values for transition rates still to come as of 4/15/2026
 
-- SAM treatment for complicated SAM 
+- :ref:`SAM treatment for complicated SAM <intervention_wasting_tx_inpatient_sam>`: new intervention to this model
+- :ref:`MAM treatment <intervention_wasting_tx_inpatient_sam>`: parameter updates to treated and untreated MAM recovery rates, C_MAM, and E_MAM and some bugfixes to the ``load_mam_treatment_rr`` function as described in a note on the intervention model document
 - :ref:`Child wasting state-specific mortality and morbidity <2021_pem_inpatient_sam_extension>`
 - Mortality due to other causes: set to zero for this simulation (all mortality will be captured in the :ref:`Child wasting state-specific mortality and morbidity <2021_pem_inpatient_sam_extension>` modeling strategy)
 
