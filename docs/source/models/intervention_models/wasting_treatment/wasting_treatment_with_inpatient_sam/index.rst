@@ -270,7 +270,7 @@ At the age/sex/location/draw-specific level:
   - rate from uncomplicated SAM to mild child wasting among those covered by uncomplicated SAM treatment == tx_rem_rate_sam * E_SAM 
   - rate from uncomplicated SAM to {better/worse}_MAM among those uncovered by uncomplicated SAM treatment == ux_rem_rate_sam
   - rate from uncomplicated SAM to {better/worse}_MAM among those covered by uncomplicated SAM treatment == ux_rem_rate_sam * (1 - E_SAM)
-  - rate from complicated SAM to uncomplicated SAM among those covered by complicated SAM treatment == tx_rem_rate_complicated_sam * E_SAM_INPATIENT * ux_rem_rate_complicated_sam * (1 - E_SAM_INPATIENT) 
+  - rate from complicated SAM to uncomplicated SAM among those covered by complicated SAM treatment == tx_rem_rate_complicated_sam * E_SAM_INPATIENT + ux_rem_rate_complicated_sam * (1 - E_SAM_INPATIENT) 
   - rate from complicated SAM to uncomplicated SAM among those uncovered by complicated SAM treatment == ux_rem_rate_complicated_sam 
 
 2. Verify expected levels of baseline coverage 
