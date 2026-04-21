@@ -404,16 +404,12 @@ The process of generating draw-level values for all wasting transitions is outli
   - Ilins-Dyad: LNS supplementation
   - SAS_LBW: LBW babies
 
-3. At the sex, age, and draw-specific level, randomly sample values from the uncertainty distribution for the following parameters:
+3. At the sex, age, and draw-specific level, randomly sample values from the uncertainty distribution for the below parameters.
 
-  - Case fatality rate of uncomplicated SAM
-  - Case fatality rate of complicated SAM
-  - Time to treatment initialization for complicated SAM
-  - Inpatient stabilization time for complicated SAM
-  - Complicated SAM fraction
-  - Baseline coverage of AM treatment (separately for MAM, outpatient SAM, and inpatient SAM)
-  - Proportion of cases that deteriorate from uncomplicated to complicated SAM during outpatient treatment
-  - Incidence rates from the KI database for transitions into mild wasting, MAM, and uncomplicated SAM
+.. note::
+  For parameters with a "widened value" listed in the table, if after N tries sampling from the "first-pass values" the draw has not converged, 
+  the calibration will begin sampling all parameters from their "widened" distributions for another N tries. 
+
 
 .. list-table:: Calibration input parameters
   :header-rows: 1
@@ -423,11 +419,11 @@ The process of generating draw-level values for all wasting transitions is outli
     - Widened value
     - Source
   * - Daily mortality probability of uncomplicated SAM
-    - (0.02 / (112 * 365.25), 0.01 / (112 * 365.25), 0.03 / (112 * 365.25))
-    - (0.02 / (112 * 365.25), 0.005 / (112 * 365.25), 0.035 / (112 * 365.25))
-    - `Bitew 2020 <https://pubmed.ncbi.nlm.nih.gov/32631260/>`_ (Ethiopian meta-analysis); `Bailey 2020 <https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003192>` (COMPAS Trial) 
+    - normal with mean ``0.02 / (112 * 365.25)`` and 95% CI (``0.01 / (112 * 365.25)``, ``0.03 / (112 * 365.25)``)
+    - normal with mean ``0.02 / (112 * 365.25)`` and 95% CI (``0.005 / (112 * 365.25)``, ``0.035 / (112 * 365.25)``)
+    - `Bitew 2020 <https://pubmed.ncbi.nlm.nih.gov/32631260/>`_ (Ethiopian meta-analysis); `Bailey 2020 <https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003192>`_ (COMPAS Trial) 
   * - Case fatality rate of complicated SAM
-    - (0.157, 0.104, 0.210)
+    - normal with mean 0.157 and 95% CI (0.104, 0.210)
     - uniform (0.036, 0.414)
     - `Karunaratne 2020 <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC7528552/>`_ (meta-analysis, primarily Africa)
   * - Time to treatment initialization for complicated SAM
@@ -435,12 +431,12 @@ The process of generating draw-level values for all wasting transitions is outli
     -
     - Assumption
   * - Inpatient stabilization time for complicated SAM
-    - (6, 5, 7)
+    - normal with mean 6 and 95% CI (5, 7)
     -
     - `Joseph 2023 (Large retrospective review in Northern Nigeria) <https://link.springer.com/article/10.1186/s41043-023-00352-y?fromPaywallRec=false>`_
   * - Complicated SAM fraction
-    - (0.087, 0.067, 0.107)
-    - (.01, .1)
+    - normal with mean 0.087 and 95% CI (0.067, 0.107)
+    - uniform (0.01, 0.1)
     - `UNICEF 2023 report <https://www.unicef.org/nigeria/media/7196/file/Nigeria%20Consolidated%20Emergency%20Report%20.pdf>`_ in northern Nigeria  
   * - Baseline coverage of MAM treatment
     - uniform (0, 0.2)
