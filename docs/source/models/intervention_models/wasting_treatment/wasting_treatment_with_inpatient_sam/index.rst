@@ -97,7 +97,7 @@ All parameters for this intervention model discussed on this page as well as bas
 
   * - Transition
     - Relevant intervention
-    - Unovered RR
+    - Uncovered RR
     - Note
   * - rem_rate_mam
     - MAM treatment
