@@ -177,7 +177,7 @@ The coverage propensity for wasting treatment parameter :math:`C` for any given 
 
 **NEW TO INPATIENT SAM MODEL EXTENSION:**
 
-  The wasting treatment coverage propensity resetting should be overwritten specifically for simulants who transition from complicated to uncomplicated SAM while covered for complicated SAM treatment. In scenarios with coverage of "Complicated SAM recovery" intervention, these simulants should automatically receive outpatient SAM intervention coverage.
+  The wasting treatment coverage propensity resetting should be overwritten specifically for simulants who transition from complicated to uncomplicated SAM while covered for complicated SAM treatment. In scenarios with coverage of "Complicated SAM recovery" intervention, these simulants should automatically receive outpatient SAM intervention coverage, and all other simulants should not receive it.
 
 .. note::
 
