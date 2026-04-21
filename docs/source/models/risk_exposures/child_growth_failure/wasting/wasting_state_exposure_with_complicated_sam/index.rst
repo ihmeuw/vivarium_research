@@ -161,12 +161,8 @@ Vivarium Modeling Strategy
     - See detail of the derivation of this parameter on the :ref:`2021 wasting risk exposure page <2021_risk_exposure_wasting_state_exposure>`
   * - complicated_sam_fraction
     - Fraction of SAM cases in the "complicated" substate
-    - Values will be output at the draw/age/sex/subnational-specific level from the wasting calibration. TODO: post link when ready
-    - `See placeholder values here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/0acb49fac8[…]lation/nigeria/kebbi-copied-dummy-transitions-all-locations.csv>`__ parameter == 'comp_frac'
-
-.. todo::
-
-  Add data for complicated_sam_fraction parameter
+    - Values will be output at the draw/age/sex/subnational-specific level from the wasting calibration. TODO: update link as current csv changes
+    - `See current values here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/ba62a66d56638703cee9be1415c34f04b2e5762c/data_prep/cgf_correlation/nigeria/wasting_processed_csam__filled_mean_converging__500draws.csv>`__ parameter == 'complicated_fraction'
 
 Initialization
 --------------
@@ -392,7 +388,7 @@ However, recovery from MAM and SAM states for those who do not receive treatment
 
 .. image:: calibration_transitions.svg
 
-The process of generating draw-level values for all wasting transitions is outlined below. See the code for generating draw-specific transition values in this notebook here: TODO: link when ready/merged
+The process of generating draw-level values for all wasting transitions is outlined below. See the code for generating draw-specific transition values in this notebook `here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/ba62a66d56638703cee9be1415c34f04b2e5762c/data_prep/cgf_correlation/nigeria/wasting_transition_sampling_subnational_COMPLICATED_SAM.ipynb>`_: TODO: update link when the nb changes are merged
 
 1. Load all pre-defined input data values (in accordance with documentation linked above). These include:
 
@@ -419,9 +415,54 @@ The process of generating draw-level values for all wasting transitions is outli
   - Proportion of cases that deteriorate from uncomplicated to complicated SAM during outpatient treatment
   - Incidence rates from the KI database for transitions into mild wasting, MAM, and uncomplicated SAM
 
-.. todo::
+.. list-table:: Calibration input parameters
+  :header-rows: 1
 
-  Include data table for all of these parameters (Tyler to make PR with table, values, and references)
+  * - Parameter
+    - First-pass value
+    - Widened value
+    - Source
+  * - Daily mortality probability of uncomplicated SAM
+    - (0.02 / (112 * 365.25), 0.01 / (112 * 365.25), 0.03 / (112 * 365.25))
+    - (0.02 / (112 * 365.25), 0.005 / (112 * 365.25), 0.035 / (112 * 365.25))
+    - `Bitew 2020 <https://pubmed.ncbi.nlm.nih.gov/32631260/>`_ (Ethiopian meta-analysis); `Bailey 2020 <https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003192>` (COMPAS Trial) 
+  * - Case fatality rate of complicated SAM
+    - (0.157, 0.104, 0.210)
+    - uniform (0.036, 0.414)
+    - `Karunaratne 2020 <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC7528552/>`_ (meta-analysis, primarily Africa)
+  * - Time to treatment initialization for complicated SAM
+    - uniform (3, 21)
+    -
+    - Assumption
+  * - Inpatient stabilization time for complicated SAM
+    - (6, 5, 7)
+    -
+    - `Joseph 2023 (Large retrospective review in Northern Nigeria) <https://link.springer.com/article/10.1186/s41043-023-00352-y?fromPaywallRec=false>`_
+  * - Complicated SAM fraction
+    - (0.087, 0.067, 0.107)
+    - (.01, .1)
+    - `UNICEF 2023 report <https://www.unicef.org/nigeria/media/7196/file/Nigeria%20Consolidated%20Emergency%20Report%20.pdf>`_ in northern Nigeria  
+  * - Baseline coverage of MAM treatment
+    - uniform (0, 0.2)
+    - uniform (0, 1)
+    - Assumption
+  * - Baseline coverage of outpatient SAM treatment
+    - uniform (0.2, 0.4)
+    - uniform (0, 1)
+    - `Isanaka 2021 <https://gh.bmj.com/content/6/3/e004342>`_
+  * - Baseline coverage of inpatient SAM treatment 
+    - uniform (0.2, 0.4)
+    - uniform (0, 1)
+    - `Isanaka 2021 <https://gh.bmj.com/content/6/3/e004342>`_
+  * - Proportion of cases that deteriorate from uncomplicated to complicated SAM during outpatient treatment
+    - uniform (0.014, 0.22)
+    - 
+    - `Bailey 2020 <https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003192>`_ (COMPAS Trial); `Wilunda 2021 <https://link.springer.com/article/10.1038/s41598-021-81811-6?fromPaywallRec=false>`_ (pilot study in Tanzania); `Alvarez Morán 2018 <https://link.springer.com/article/10.1186/s12913-018-2987-z>`_ (trial in Mali); `Kangas 2022 <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0267538>`_ (trial in Burkina Faso) 
+  * - Incidence rates for transitions into mild wasting, MAM, and uncomplicated SAM
+    - Randomly sampled event count / time values from study set
+    -
+    - KI database
+  
 
 4. Using the randomly sampled values from step #3, calculate the daily probabilities for all transitions in the steady state system (see linked word document for specific equations), including: 
 
