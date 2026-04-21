@@ -75,7 +75,7 @@ We will run all child simulation scenarios using fertility input data from a new
 
 There will be a total of 54 child intervention scenarios.
 
-`Download this excel file for a list of intervention scenarios and their specified intervention coverage levels <scenario_map.xlsx>`.
+:download:`Download this excel file for a list of intervention scenarios and their specified intervention coverage levels<scenario_map.xlsx>`.
 
 Default specifications 
 --------------------------
@@ -182,37 +182,69 @@ The below tables can be filled out iteratively as new model runs are requested a
 
   More detail will be added to these runs as we become closer to launching them -- details and V&V criteria may change depending on whether we are running with placeholder data or not
 
+  A note on **fertility input data** from the pregnancy model.
+
+  * First pass fertility input data specs
+
+    * Filepath: ``/mnt/team/simulation_science/pub/models/vivarium_gates_nutrition_optimization/results/vivarium_v4.0_vph_v5.0_update/v3/nigeria/2026_03_31_12_55_44``
+    * Input draws: [8, 13, 41]
+    * Random seeds: [4344, 5616, 6810, 2787, 2284]
+    * Maternal scenario: baseline
+
+  * Updated fertility input data specs
+
+    * Filepath: [path for **TO-BE-GENERATED RESULTS**]
+    * Input draws: random sample of 20 draws between 1-99. Note we avoid draw 0 here as it has been overwritten with mean across all draws in N.O. artifacts
+    * Random seeds: Unspecified, up to engineers
+    * Maternal scenarios:
+
+      * Baseline
+      * **NEW TO-BE-IMPLEMENTED SCENARIO** of MMS coverage equal to ANC1 value 
+
+
 .. list-table:: Model runs
   :header-rows: 1
 
   * - Run number
     - Run description
-    - Scenarios
+    - Preg. Sim Specs
+    - Scenario
     - Specification modifications
     - Stratification modifications
     - Observer modifications
   * - 1.0
-    - Wasting model update
-    - Baseline (maternal and child)
-    - 10 draws
+    - Wasting model update (without updates to the PEM model, but with no mortality due to infectious diseases in the SAM states)
+    - First pass fertility input data specs
+    - Baseline 
+    - [8, 13, 41]
     - Default
     - Default
   * - 2.0
-    - Intervention model updates
-    - * Baseline (maternal and child)
-      * MMS at ANC1 maternal scenario and child scenarios 0-7, 36 (uncomplicated_sam_tx__complicated_sam_stabilization__), 45 (uncomplicated_sam_tx__complicated_sam_recovery__)
-    - 10 draws
+    - Updates to PEM model
+    - Ideally Updated fertility input data specs, but first pass can be used if updated spec results are not ready
+    - Baseline
+    - 10 draws with updated fertility input specs or [8, 13, 41] with first pass specs
     - Default
     - Default
   * - 3.0
+    - Intervention model updates
+    - Updated fertility input data specs
+    - * For baseline maternal scenario: Baseline child scenario
+      * For MMS at ANC1 maternal scenario: child scenarios 0-7, 36 (*uncomplicated_sam_tx__complicated_sam_stabilization__*), 45 (*uncomplicated_sam_tx__complicated_sam_recovery__*)
+    - 10 draws
+    - Default
+    - Default
+  * - 4.0
     - Production run test
-    - * Baseline (maternal and child)
+    - Updated fertility input data specs
+    - Baseline (maternal and child)
     - 1 draw
     - * Stratify by alternative age groups of 0-6 months, 6-18 months, 18-60 months
       * Exclude wasting state stratification from mortality observer
     - Exclude child underweight and disease observers (observers #5 and #6)
-  * - 3.1
+  * - 4.1
     - Production runs
+    - Updated fertility input data specs
     - * Baseline (maternal and child)
       * MMS at ANC maternal scenario and all child scenarios
     - 20 draws
@@ -228,12 +260,28 @@ The below tables can be filled out iteratively as new model runs are requested a
      - V&V criteria
      - V&V summary
    * - 1.0
-     - * Verify population ACMR to GBD
-       * Verify wasting state-specific mortality rates are as expected
-       * Verify CGF exposures
-       * Verify wasting transition rates
-     -  
+     - Note this model is not expected to validate to GBD with regard to mortality or wasting exposure given that PEM mortality has not been included in this run. The following checks can be performed:
+
+       1. Confirm that underweight exposure in the SAM substates from the simulation does not vary by SAM substate and matches the expectation of underweight exposure in the SAM superstate from the artifact
+       
+       2. Confirm that no deaths due to diarrheal diseases, LRI, malaria, or measles occurred in either SAM substate
+       
+       3. Confirm that CGF RRs are functioning as expected (given asssumption that SAM substates both have the SAM superstate RRs for incidence rates while having EMR RRs equal to zero)
+       
+       4. Confirm that the wasting transition rates match input data expectation
+       
+       5. Confirm that the wasting state initialization (in neonatal age groups) in the sim matches input data expectation for the substate-specific input data from the artifact (relevant age group = 1-5 months)
+     - 
    * - 2.0
+     - 1. Verify population ACMR to GBD
+       
+       2. Verify wasting state-specific mortality rates are as expected
+       
+       3. Verify CGF exposures
+       
+       4. Confirm all 1.0 criteria as well
+     -  
+   * - 3.0
      - * Confirm all intervention effects and coverage match expectations 
      - 
 
