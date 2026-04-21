@@ -237,10 +237,10 @@ For treatment of SAM and MAM, we model treatment starting at six months of age. 
     - 
   * - Age group start
     - 6-11 months, age_group_id = 389
-    - (GBD 2019 does not have age_group_id=389. Use six months of age within the postneontal age group (1 month - 1 year) when using GBD 2019 results rather than GBD 2020)
+    - 
   * - Age group end
     - 2 - 4 years age_group_id = 34
-    - 2y-4y = 34 GBD 2020; 1y-4y = 5 GBD 2019
+    - 
   * - Other
     -
     -
