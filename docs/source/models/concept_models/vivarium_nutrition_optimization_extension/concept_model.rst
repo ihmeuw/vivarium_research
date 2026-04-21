@@ -51,14 +51,9 @@ Components that need to be altered to support new wasting state (more details to
 
 Components with substantial updates (links/updates to come)
 
-- :ref:`Child wasting exposure <2021_risk_exposure_wasting_with_complicated_sam>`, including changes to:
-
-  - Exposure initialization, see relevant changes in the third (and any later) commits of `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1922>`__
-  - Transition rates, see `relevant changes to modeling strategy in this PR <https://github.com/ihmeuw/vivarium_research/pull/1926>`__. Data values for transition rates still to come as of 4/15/2026
-
+- :ref:`Child wasting exposure <2021_risk_exposure_wasting_with_complicated_sam>`
 - SAM treatment for complicated SAM 
 - :ref:`Child wasting state-specific mortality and morbidity <2021_pem_inpatient_sam_extension>`
-- Mortality due to other causes: set to zero for this simulation (all mortality will be captured in the :ref:`Child wasting state-specific mortality and morbidity <2021_pem_inpatient_sam_extension>` modeling strategy)
 
 .. _nutrition_optimization_extension2.2:
 
