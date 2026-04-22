@@ -296,9 +296,11 @@ Estimates of the fatality of pooled SAM in the absence of treatment:
 
   * To compare how our model validates to these estimates: divide total mortality counts that occur in the SAM substates in our model by person time spent in the SAM superstate in our model among the uncovered population (at the national level)
 
-`Tekeste et al. 2012 <https://link-springer-com.offcampus.lib.washington.edu/article/10.1186/1478-7547-10-4>`__ found that a program with higher coverage of uncomplicated SAM treatment (outpatient/community treatment) had ~3 times lower complication rates than a program with lower coverage of uncomplicated SAM treatemnt (facility-based treatment).
+.. todo::
 
-  * To evaluate how our model validates to this finding, we can compare the ratio of complicated SAM prevalence to total SAM prevalence in a scenario without treatment for uncomplicated SAM to a scenario with treatment for uncomplicated SAM. We would expect the difference to be >3 times as our modeled coverage differences are larger than what is expected in this publication.
+  Find an appropriate study to act as a validation target for the impact of an outpatient/uncomplicated SAM treatment program on the population-level complicated SAM inpatient admission rate.
+
+  Note that Ali had hoped `Tekeste et al. 2012 <https://link-springer-com.offcampus.lib.washington.edu/article/10.1186/1478-7547-10-4>`__ (which found that a program with higher coverage of uncomplicated SAM treatment (outpatient/community treatment) had ~3 times lower complication rates than a program with lower coverage of uncomplicated SAM treatment) could be used a validation target here, but something that evaluates this measure more directly would be ideal.
 
 References
 ----------
