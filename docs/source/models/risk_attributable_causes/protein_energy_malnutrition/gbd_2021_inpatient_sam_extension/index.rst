@@ -166,6 +166,8 @@ As a verification, EMRs of for the wasting-attributable cause model should match
 
 As a verification, ACMR at the population level should match GBD expectation.
 
+As a verification, number of deaths in moderate and severe wasting state should be compared to number of deaths attributable to wasting in GBD 2021; we expect the number implied by the sim to be substantially higher, but we anticipate this being a surprise to some audiences and we need to be able to justify this difference.
+
 Once YLDs due to PEM are included: As a validation, YLDs due to the wasting-attributable cause model should be similar in magnitude to YLDs due to PEM.
 
 References
