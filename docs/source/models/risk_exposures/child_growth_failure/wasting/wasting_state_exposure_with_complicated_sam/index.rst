@@ -407,8 +407,8 @@ The process of generating draw-level values for all wasting transitions is outli
 3. At the sex, age, and draw-specific level, randomly sample values from the uncertainty distribution for the below parameters.
 
 .. note::
-  For parameters with a "widened value" listed in the table, if after N tries sampling from the "first-pass values" the draw has not converged, 
-  the calibration will begin sampling all parameters from their "widened" distributions for another N tries. 
+  For parameters with a "widened value" listed in the table, if after 1000 tries sampling from the "first-pass values" the draw has not converged, 
+  the calibration will begin sampling all parameters from their "widened" distributions for another 1000 tries. 
 
 
 .. list-table:: Calibration input parameters
@@ -418,14 +418,14 @@ The process of generating draw-level values for all wasting transitions is outli
     - First-pass value
     - Widened value
     - Source
-  * - Daily mortality probability of uncomplicated SAM
+  * - Daily mortality probability of uncomplicated SAM during outpatient treatment
     - normal with mean ``0.02 / (112 * 365.25)`` and 95% CI (``0.01 / (112 * 365.25)``, ``0.03 / (112 * 365.25)``)
     - normal with mean ``0.02 / (112 * 365.25)`` and 95% CI (``0.005 / (112 * 365.25)``, ``0.035 / (112 * 365.25)``)
-    - `Bitew 2020 <https://pubmed.ncbi.nlm.nih.gov/32631260/>`_ (Ethiopian meta-analysis); `Bailey 2020 <https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003192>`_ (COMPAS Trial) 
-  * - Case fatality rate of complicated SAM
+    - `Bitew 2020 <https://pubmed.ncbi.nlm.nih.gov/32631260/>`_ (Ethiopian meta-analysis); `Bailey 2020 <https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003192>`_ (COMPAS Trial); NOTE: 112 here is the assumed duration of outpatient uncomplicated SAM treatment in our model from the COMPAS trial. We assume an average of 2% mortality occurring between outpatient treatment admission and discharge.
+  * - Case fatality rate of complicated SAM among those with access to inpatient stabilization
     - normal with mean 0.157 and 95% CI (0.104, 0.210)
     - uniform (0.036, 0.414)
-    - `Karunaratne 2020 <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC7528552/>`_ (meta-analysis, primarily Africa)
+    - `Karunaratne 2020 <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC7528552/>`_ (meta-analysis, primarily Africa). NOTE: Could consider incorporating the `SPHERE standard for SAM treatment of <10% CFR <https://doi-org.offcampus.lib.washington.edu/10.1111/j.0361-3666.2004.00245.x>__
   * - Time to treatment initialization for complicated SAM
     - uniform (3, 21)
     -
@@ -441,11 +441,11 @@ The process of generating draw-level values for all wasting transitions is outli
   * - Baseline coverage of MAM treatment
     - uniform (0, 0.2)
     - uniform (0, 1)
-    - Assumption
+    - Assumption. NOTE: we enforced baseline coverage of MAM treatment was always lower than baseline coverage of uncomplicated/outpatient SAM treatment coverage.
   * - Baseline coverage of outpatient SAM treatment
     - uniform (0.2, 0.4)
     - uniform (0, 1)
-    - `Isanaka 2021 <https://gh.bmj.com/content/6/3/e004342>`_
+    - `Isanaka 2021 <https://gh.bmj.com/content/6/3/e004342>`_; NOTE: we enforced that baseline coverage of outpatient/uncomplicated SAM treatment coverage was always lower than baseline coverage of inpatient/complicated SAM treatment coverage.
   * - Baseline coverage of inpatient SAM treatment 
     - uniform (0.2, 0.4)
     - uniform (0, 1)
