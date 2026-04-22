@@ -425,7 +425,7 @@ The process of generating draw-level values for all wasting transitions is outli
   * - Case fatality rate of complicated SAM among those with access to inpatient stabilization
     - normal with mean 0.157 and 95% CI (0.104, 0.210)
     - uniform (0.036, 0.414)
-    - `Karunaratne 2020 <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC7528552/>`_ (meta-analysis, primarily Africa). NOTE: Could consider incorporating the `SPHERE standard for SAM treatment of <10% CFR <https://doi-org.offcampus.lib.washington.edu/10.1111/j.0361-3666.2004.00245.x>__
+    - `Karunaratne 2020 <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC7528552/>`_ (meta-analysis, primarily Africa). NOTE: Could consider incorporating the `SPHERE standard for SAM treatment of \<10% CFR <https://doi-org.offcampus.lib.washington.edu/10.1111/j.0361-3666.2004.00245.x>`__
   * - Time to treatment initialization for complicated SAM
     - uniform (3, 21)
     -
