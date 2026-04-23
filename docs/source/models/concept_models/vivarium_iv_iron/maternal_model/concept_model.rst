@@ -96,7 +96,7 @@ Vivarium Intravenous Iron - Women of reproductive age
 3.1 Additional figures
 -----------------------
 
-There are several components that affect hemoglobin during pregnancy, including in multiplicative (for the hemoglobin pregnancy adjustment factor) and additive (for the :ref:`antenatal supplementation <maternal_supplementation_intervention>`, :ref:`antenatal IV iron <intervention_iv_iron_antenatal>`, and :ref:`postpartum IV iron <intervention_iv_iron_postpartum>` interventions as well as :ref:`maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`) manners. The figures below visually represent these changes.
+There are several components that affect hemoglobin during pregnancy, including in multiplicative (for the hemoglobin pregnancy adjustment factor) and additive (for the :ref:`antenatal supplementation <maternal_supplementation_intervention>`, :ref:`antenatal IV iron <intervention_iv_iron_antenatal>`, and :ref:`postpartum IV iron <intervention_iv_iron_postpartum>` interventions as well as :ref:`maternal hemorrhage risk effects <2019_2021_risk_effect_maternal_hemorrhage>`) manners. The figures below visually represent these changes.
 
 .. image:: hemoglobin_trajectory_plot.png
 
@@ -227,7 +227,7 @@ Including,
   * Birth outcomes, and
   * Postpartum depression
 
-* :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`
+* :ref:`Maternal hemorrhage risk effects <2019_2021_risk_effect_maternal_hemorrhage>`
 
 4.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
