@@ -197,6 +197,10 @@ The below tables can be filled out iteratively as new model runs are requested a
       * **NEW TO-BE-IMPLEMENTED SCENARIO** of MMS coverage equal to ANC1 value 
 
 
+.. todo::
+
+  Fill in V&V summaries for all runs and run specs for 2.1 and 2.2
+
 .. list-table:: Model runs
   :header-rows: 1
 
@@ -222,10 +226,11 @@ The below tables can be filled out iteratively as new model runs are requested a
     - Default
     - Default
   * - 3.0
-    - Intervention model updates
+    - * Intervention model update implementation
+      * Used Kano-only calibration data ``wasting_processed_rates_kano_20260428.csv`` `found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/9ddd5e07a6c0fe0e96249aa8271dda6bcfe88630/data_prep/cgf_correlation/nigeria/wasting_processed_rates_kano_20260428.csv>`__. Note this data was missing the ``complicated_fraction`` parameter, which was filled using values from the prior run (2.2)
     - First pass fertility input data specs
-    - * For baseline maternal scenario: Baseline child scenario
-      * For MMS at ANC1 maternal scenario: child scenarios 0-7, 36 (*uncomplicated_sam_tx__complicated_sam_stabilization__*), 45 (*uncomplicated_sam_tx__complicated_sam_recovery__*)
+    - * Baseline maternal scenario
+      * Baseline child scenario and: 0-7, 36 (*uncomplicated_sam_tx__complicated_sam_stabilization__*), 45 (*uncomplicated_sam_tx__complicated_sam_recovery__*)
     - 10 draws
     - Default
     - Default
