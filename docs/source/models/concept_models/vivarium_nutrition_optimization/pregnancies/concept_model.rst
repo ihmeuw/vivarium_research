@@ -607,7 +607,13 @@ Specific outputs for specific models are specified in the following section.
     - Same as 9.2 but including count of live births and still births 
     - Same as 9.2
     - 
-
+  * - ``vivarium_v4.0_vph_v5.0_update``
+    - Runs that integrate vivarium and vivarium_public_health framework updates to confirm we still meet V&V criteria following these updates
+    - All
+    - 10 draws, 10 seeds with 20,000 population (200,000 pregnancies per draw). Nigeria and Pakistan only
+    - Default
+    - Default
+    - 
 
 .. note::
 
@@ -737,6 +743,13 @@ Specific outputs for specific models are specified in the following section.
     - `V&V notebooks for model 11.2 can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/146>`_
       * Maternal disorders YLDs now look as expected -- ready to move on to production runs
       * Also confirmed that the birth outcome observer is capturing outcomes among all simulated individuals, including those who die during the simulation
+  * - ``vivarium_v4.0_vph_v5.0_update``
+    - All V&V checks
+    - All models are meeting V&V criteria. Notebooks linked below have been updated to support the results management system format as of March 2026, but currently only support a single location at once.
+
+      * `Intervention coverage notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_viv4.0_intervention_coverage.ipynb>`__
+      * `Maternal disorders and anemia burden notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_viv4.0_maternal_disorders_anemia.ipynb>`__
+      * `Pregnancy model notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_viv4.0_preg_states.ipynb>`__
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
