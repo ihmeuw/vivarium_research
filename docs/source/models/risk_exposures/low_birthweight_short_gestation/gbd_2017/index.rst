@@ -462,9 +462,9 @@ We will need the following variables (see the :ref:`note below <RR and PAF
 information>` for information about the RR's and PAF):
 
 .. math::
-  :nowrap:
+  :no-wrap:
 
-  \begin{aligned}
+  \begin{align*}
   &i &&= \text{identifier for an individual simulant}\\
   &c &&= \text{identifier for a cause}\\
   &\text{cat}(i) &&= \text{low birth weight short gestation category of individual $i$}\\
@@ -473,7 +473,7 @@ information>` for information about the RR's and PAF):
   &\text{EMR}_{\text{state}_c(i)} &&= \text{excess mortality rate for the cause state state$_c(i)$}\\
   &\textit{RR}_{\text{cat}(i)} &&= \text{relative risk for all-cause mortality in LBWSG category cat$(i)$}\\
   &\text{PAF} &&= \text{PAF of LBWSG for affected causes at most-detailed cause level}
-  \end{aligned}
+  \end{align*}
 
 Note that since :math:`\text{state}_c(i)` implicitly depends on the time
 :math:`t`, the individual mortality hazard will also depend on time.
