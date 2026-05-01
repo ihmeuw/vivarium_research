@@ -227,13 +227,13 @@ The case fatality rate will be computed as
 
 .. math::
 
-    \begin{align*}
+    \begin{aligned}
     \text{cfr} &= \frac{\text{hemorrhage deaths}}{\text{hemorrhage cases}} \\
         &= \frac{\text{(hemorrhage deaths) / person-time}}
             {\text{(hemorrhage cases) / person-time}}
         = \frac{\text{hemorrhage cause specific mortality rate}}
             {\text{hemorrhage incidence rate}}.
-    \end{align*}
+    \end{aligned}
 
 The following table shows the data needed from GBD for these
 calculations as well as for the calculation of YLDs in the next section.

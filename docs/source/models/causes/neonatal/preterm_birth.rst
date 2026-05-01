@@ -167,14 +167,14 @@ For both preterm subcauses, the formula is:
 .. _preterm_csmrisk_equation:
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
     \text{CSMRisk}^{k}_{\text{BW},\text{GA}}
     &=
     \begin{cases}
     \text{CSMRisk} / p_\text{preterm} \cdot f_k \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z, & \text{if GA} < 37; \\
     0, & \text{if GA} \geq 37;
     \end{cases}
-    \end{align*}
+    \end{aligned}
 
 where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 :math:`\text{CSMRisk}` is the cause-specific mortality risk for preterm birth complications,

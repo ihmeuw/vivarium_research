@@ -171,12 +171,12 @@ incidence rate.
     }
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
         p(\text{maternal\_sepsis}) 
         &= \sum_{\text{paths without azithromycin}} p(\text{path})\cdot p(\text{maternal\_sepsis}|\text{no azithromycin})\\
         &+ \sum_{\text{paths with azithromycin}} p(\text{path})\cdot p(\text{maternal\_sepsis}|\text{azithromycin})\\[.1in]
         p(\text{maternal\_sepsis}|\text{no azithromycin}) &= \text{RR}_\text{no azithromycin} \cdot p(\text{maternal\_sepsis}|\text{azithromycin})
-    \end{align*}
+    \end{aligned}
 
 where :math:`p(\text{maternal\_sepsis})` is the probability of contracting maternal sepsis in the general population, and :math:`p(\text{maternal\_sepsis}|\text{azithromycin})` and
 :math:`p(\text{maternal\_sepsis}|\text{no azithromycin})` are the probability of contracting maternal sepsis in settings with and without receiving prophylactic azithromycin.  For each 

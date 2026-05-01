@@ -224,13 +224,13 @@ The case fatality rate will be computed as
 
 .. math::
 
-    \begin{align*}
+    \begin{aligned}
     \text{cfr} &= \frac{\text{OL deaths}}{\text{OL cases}} \\
         &= \frac{\text{(OL deaths) / person-time}}
             {\text{(OL cases) / person-time}}
         = \frac{\text{OL cause specific mortality rate}}
             {\text{OL incidence rate}}.
-    \end{align*}
+    \end{aligned}
 
 The following table shows the data needed from GBD for these
 calculations as well as for the calculation of YLDs in the next section.
@@ -362,13 +362,13 @@ table as
 
 .. math::
 
-    \begin{align*}
+    \begin{aligned}
     \text{ylds\_per\_case\_c368}
         &= \frac{\text{OL YLDs}}{\text{OL cases}}\\
         &= \frac{\text{(OL YLDs) / person-time}}
             {\text{(OL cases) / person-time}}
         = \frac{\text{OL YLD rate}}{\text{OL incidence rate}}.
-    \end{align*}
+    \end{aligned}
 
 We are using the fact that  each simulant can get at most one case of
 obstructed labor or uterine rupture during the simulation, so the average 

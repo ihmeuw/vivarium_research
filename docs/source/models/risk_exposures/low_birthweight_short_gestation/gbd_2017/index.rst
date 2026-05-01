@@ -464,7 +464,7 @@ information>` for information about the RR's and PAF):
 .. math::
   :nowrap:
 
-  \begin{align*}
+  \begin{aligned}
   &i &&= \text{identifier for an individual simulant}\\
   &c &&= \text{identifier for a cause}\\
   &\text{cat}(i) &&= \text{low birth weight short gestation category of individual $i$}\\
@@ -473,7 +473,7 @@ information>` for information about the RR's and PAF):
   &\text{EMR}_{\text{state}_c(i)} &&= \text{excess mortality rate for the cause state state$_c(i)$}\\
   &\textit{RR}_{\text{cat}(i)} &&= \text{relative risk for all-cause mortality in LBWSG category cat$(i)$}\\
   &\text{PAF} &&= \text{PAF of LBWSG for affected causes at most-detailed cause level}
-  \end{align*}
+  \end{aligned}
 
 Note that since :math:`\text{state}_c(i)` implicitly depends on the time
 :math:`t`, the individual mortality hazard will also depend on time.
@@ -508,11 +508,11 @@ mortality rates below:
 .. math::
   :nowrap:
 
-  \begin{align*}
+  \begin{aligned}
   &\text{csmr}_c(i) &&= \text{conditional cause-specific mortality hazard of cause $c$ for individual $i$}\\
   &\text{csmr}_c^*(i) &&= \text{LBWSG-stratified cause-specific mortality hazard of $c$ for $i$}\\
   &\text{mr}(i) &&= \text{overall mortality hazard for individual $i$}
-  \end{align*}
+  \end{aligned}
 
 For each cause :math:`c`, define the conditional cause-specific mortality
 hazard for individual :math:`i` to be
