@@ -250,11 +250,11 @@ Vivarium Modeling Strategy
      - Notes
    * - Wasting exposure cat2 (MAM)
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in xt{MAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in xt{MAM}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for MAM
    * - Wasting exposure cat1 (SAM)
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{SAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{SAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{SAM}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{SAM}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for SAM
    * - Wasting exposure cat3 and cat4
      - disability weight
@@ -262,7 +262,7 @@ Vivarium Modeling Strategy
      - No disability in wasting cat3 or cat4
    * - Wasting exposure cat1 and cat2 (SAM and MAM)
      - excess mortality 
-     - :math:`\frac{\text{deaths_c387}}{\text{population} \times \text{prevalence_c387}}`
+     - :math:`\frac{\text{deaths\_c387}}{\text{population} \times \text{prevalence\_c387}}`
      - death counts come from codcorrect
    * - wasting exposure cat3 and cat4
      - excess mortality rate
@@ -270,7 +270,7 @@ Vivarium Modeling Strategy
      - No PEM deaths in wasting cat3 or cat4
    * - All
      - cause specific mortality
-     - :math:`\frac{\text{deaths_c387}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c387}}{\text{population}}`
      - death counts come from codcorrect
 
 .. todo::

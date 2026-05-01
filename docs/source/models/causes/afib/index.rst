@@ -209,11 +209,11 @@ States Data
      - Notes
    * - All
      - cause-specific mortality (CSMR)
-     - :math:`\frac{\text{deaths_c500}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c500}}{\text{population}}`
      - Post CoDCorrect cause-level CSMR
    * - S
      - Prevalence
-     - :math:`1 - \text{prev_c500}`
+     - :math:`1 - \text{prev\_c500}`
      - 
    * - A
      - Prevalence
@@ -233,7 +233,7 @@ States Data
      - 
    * - A
      - disability weight
-     - :math:`\frac{1}{\text{{prevalence}_c500}} \times \sum\limits_{s \in \text{sequelae}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{{prevalence}_c500}} \times \sum\limits_{s \in \text{sequelae}} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      - 
 
 

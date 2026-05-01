@@ -928,19 +928,19 @@ Data Description Tables
      - Notes
    * - MAM
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in xt{MAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in xt{MAM}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for MAM
    * - SAM
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{SAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{SAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{SAM}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{SAM}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for SAM
    * - MAM & SAM 
      - excess mortality 
-     - :math:`\frac{\text{deaths_c387}}{\text{population} \times \text{prevalence_c387}}`
+     - :math:`\frac{\text{deaths\_c387}}{\text{population} \times \text{prevalence\_c387}}`
      - death counts come from codecorrect
    * - All
      - cause specific mortality
-     - :math:`\frac{\text{deaths_c387}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c387}}{\text{population}}`
      - death counts come from codecorrect
 
 .. note::

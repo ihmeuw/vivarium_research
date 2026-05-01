@@ -188,11 +188,11 @@ team is located in the following folder:
   * - csmr_c543
     - Cause-specific mortality rate for Alzheimer's disease and other
       dementias
-    - :math:`\frac{\text{deaths_c543}}{(\text{population}) \cdot (\text{1 year})}`
+    - :math:`\frac{\text{deaths\_c543}}{(\text{population}) \cdot (\text{1 year})}`
     - Calculated automatically by Vivarium Inputs
   * - emr_c543
     - Excess mortality rate for Alzheimer's disease and other dementias
-    - :math:`\frac{\text{csmr_c543}}{\text{prevalence_c543}}`
+    - :math:`\frac{\text{csmr\_c543}}{\text{prevalence\_c543}}`
     - Calculated automatically by Vivarium Inputs
   * - sequelae_c543
     - Sequelae of Alzheimer's disease and other dementias
@@ -200,7 +200,7 @@ team is located in the following folder:
     - Obtained from gbd_mapping.
       Sequela names are "Mild," "Moderate," or "Severe Alzheimer's
       disease and other dementias," respectively.
-  * - :math:`\text{disability_weight}_s`
+  * - :math:`\text{disability\_weight}_s`
     - Disability weight of sequela :math:`s`
     - YLD Appendix
     - For reference, the values are:
@@ -263,8 +263,8 @@ table.
     - Added onto mortality hazard for simulants with AD
   * - AD
     - disability weight
-    - :math:`\sum_\limits{s\in \text{sequelae_c543}}
-      \text{disability_weight}_s \cdot \text{prevalence}_s`
+    - :math:`\sum_\limits{s\in \text{sequelae\_c543}}
+      \text{disability\_weight}_s \cdot \text{prevalence}_s`
     - Prevalence-weighted average disability weight over sequelae,
       computed automatically by Vivarium Inputs. Used to calculate
       YLDs.
@@ -286,7 +286,7 @@ table.
   * - i_AD
     - S
     - AD
-    - :math:`\frac{\text{incidence_rate_c543}}{\text{1 - prevalence_c543}}`
+    - :math:`\frac{\text{incidence\_rate\_c543}}{\text{1 - prevalence\_c543}}`
     - Compute susceptible population incidence rate from GBD's "total
       population incidence rate." Conversion is automatic when using
       the get_measure function in Vivarium Inputs.

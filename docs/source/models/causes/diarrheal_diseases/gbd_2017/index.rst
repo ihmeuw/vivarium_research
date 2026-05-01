@@ -128,11 +128,11 @@ Data Description
 	  - 
 	* - I
 	  - excess mortality rate
-	  - :math:`\frac{\text{deaths_c302}}{\text{population} \,\times\, \text{prevalence_c302}}`
+	  - :math:`\frac{\text{deaths\_c302}}{\text{population} \,\times\, \text{prevalence\_c302}}`
 	  -
 	* - I
 	  - disability weight
-	  - :math:`\displaystyle{\sum_{s\in \text{sequelae_c302}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+	  - :math:`\displaystyle{\sum_{s\in \text{sequelae\_c302}}} \scriptstyle{\text{disability\_weight}_s \,\times\, \text{prevalence}_s}`
 	  -
 	* - S
 	  - prevalence
@@ -152,7 +152,7 @@ Data Description
 	  -
 	* - All
 	  - cause-specific mortality rate
-	  - :math:`\frac{\text{deaths_c302}}{\text{population}}`
+	  - :math:`\frac{\text{deaths\_c302}}{\text{population}}`
 	  -
 
 .. list-table:: Transition Data
@@ -167,7 +167,7 @@ Data Description
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{prevalence_c302}}`
+	  - :math:`\frac{\text{incidence\_rate\_c302}}{1-\text{prevalence\_c302}}`
 	  - We transform incidence to be a rate within the susceptible population.
 	* - r
 	  - I

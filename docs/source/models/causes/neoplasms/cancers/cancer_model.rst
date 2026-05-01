@@ -398,7 +398,7 @@ State and Transition Data Tables
      - 
    * - I
      - disability weights
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c{cid}}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c{cid}}}} \scriptstyle{\text{disability\_weight}_s \,\times\, \text{prevalence}_s}`
      - total disability weight over all sequelae corresponding to the cancer
    * - ALL
      - cause specific mortality rate

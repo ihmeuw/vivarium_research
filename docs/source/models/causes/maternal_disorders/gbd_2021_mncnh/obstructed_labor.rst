@@ -363,7 +363,7 @@ table as
 .. math::
 
     \begin{align*}
-    \text{ylds_per_case_c368}
+    \text{ylds\_per\_case\_c368}
         &= \frac{\text{OL YLDs}}{\text{OL cases}}\\
         &= \frac{\text{(OL YLDs) / person-time}}
             {\text{(OL cases) / person-time}}

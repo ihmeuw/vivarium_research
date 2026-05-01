@@ -347,7 +347,7 @@ simulant's age group, which is defined in the above data table as
 .. math::
 
     \begin{align*}
-    \text{ylds_per_case_c368}
+    \text{ylds\_per\_case\_c368}
         &= \frac{\text{sepsis YLDs}}{\text{sepsis cases}}\\
         &= \frac{\text{(sepsis YLDs) / person-time}}
             {\text{(sepsis cases) / person-time}}

@@ -256,7 +256,7 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - prev_PC = :math:`\frac{\text{i_pc}}{\text{(1 - prev_c414)}}` x MST 
+     - prev_PC = :math:`\frac{\text{i\_pc}}{\text{(1 - prev\_c414)}}` x MST 
      - we scale prev_PC by 1-prev_c414 to account for 0 prevalence in the C state at initialization so as to preserve the ratio of people without stomach cancers to people with pre-clinical cancers. 
    * - PC
      - birth prevalence
@@ -284,7 +284,7 @@ State and Transition Data Tables
      - 
    * - C
      - disabilty weights
-     - :math:`\displaystyle{\sum_{s\in\text{s_c414}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prev_c414}}}`
+     - :math:`\displaystyle{\sum_{s\in\text{s\_c414}}}\scriptstyle{\text{disability\_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prev\_c414}}}`
      - Total stomach cancer disability weight over all sequelae with IDs s248, s249, s250, s251
    * - R
      - prevalence
@@ -315,7 +315,7 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - :math:`\frac{\text{i_c414*}}{\text{(1 - prev_c414)}}`
+     - :math:`\frac{\text{i\_c414*}}{\text{(1 - prev\_c414)}}`
      - \*draw at age 'current age + MST'
    * - i_c
      - PC
