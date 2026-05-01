@@ -672,14 +672,14 @@ and
 
 .. math::
 
-  P(\text{cause of death } = \textsf{other_causes})
+  P(\text{cause of death } = \textsf{other\_causes})
   = \frac{\text{BGMR}}{\text{mr}(i)}.
 
 Note that this does in fact define a probability distribution since
 
 .. math::
 
-  P(\text{cause of death } = \textsf{other_causes})
+  P(\text{cause of death } = \textsf{other\_causes})
   + \sum_{c\,\in\, \text{modelled}} P(\text{cause of death } = c) = 1.
 
 This probability distribution can be derived by observing that each individual
@@ -736,7 +736,7 @@ and
 
 .. math::
 
-  P(\text{cause of death } = \textsf{other_causes})
+  P(\text{cause of death } = \textsf{other\_causes})
   = \frac{\text{bgmr}(i)}{\text{mr}(i)}.
 
 To assign a cause of death when LBWSG is included, randomly sample a cause (or
