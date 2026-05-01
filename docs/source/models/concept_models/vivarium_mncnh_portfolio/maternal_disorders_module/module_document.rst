@@ -79,12 +79,12 @@ There are specific variables that will affect these cause models, summarized in 
     - 
   * - Misoprostol coverage
     - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - Maternal hemorrhage incidence rate
+    - Postpartum hemorrhage incidence rate
     - See the :ref:`Misoprostol intervention page <misoprostol_intervention>`
     - 
   * - Hemoglobin at end of pregnancy
     - :ref:`Hemoglobin component <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-    - Maternal sepsis, maternal hemorrhage, maternal depressive disorders, maternal hypertensive disorders
+    - Maternal sepsis, postpartum hemorrhage, maternal depressive disorders, maternal hypertensive disorders
     - See :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>`
     - For wave II
 

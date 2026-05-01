@@ -36,6 +36,7 @@ in the indicated model-building wave:
 .. toctree::
     :maxdepth: 1
 
+    antepartum_hemorrhage
     postpartum_hemorrhage
     maternal_sepsis
     obstructed_labor

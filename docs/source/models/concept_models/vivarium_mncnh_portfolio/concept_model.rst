@@ -301,13 +301,13 @@ Pregnancy component
         * Ferritin screening coverage/result
         * True hemoglobin exposure (dichotomous)
       - * :ref:`Anemia screening interventions <anemia_screening>`
-    * - :ref:`Hemoglobin at the end of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+    * - :ref:`Hemoglobin after later ANC visit <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
       - * Hemoglobin after first trimester ANC visit
         * Later pregnancy ANC attendance
         * Hemoglobin screening coverage/result
         * Ferritin screening coverage/result
         * Receipt of IFA/MMS at first trimester ANC visit
-      - * Hemoglobin at end of pregnancy
+      - * Hemoglobin after later ANC visit
         * Coverage of IFA/MMS at any time in pregnancy
         * Coverage of IV iron 
       - * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
@@ -332,6 +332,17 @@ Pregnancy component
         * Estimated gestational age
         * Believed preterm status
       - 
+    * - :ref:`Antepartum hemorrhage <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
+      - * Maternal age at end of pregnancy
+        * Hemoglobin after later ANC visit
+      - * Antepartum hemorrhage incidence
+        * Antepartum hemorrhage death
+      - :ref:`Antepartum hemorrhage model <2023_cause_antepartum_hemorrhage_mncnh>`
+    * - :ref:`Hemoglobin at end of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+      - * Hemoglobin after later ANC visit
+        * Antepartum hemorrhage incidence
+      - * Hemoglobin at end of pregnancy
+      - :ref:`Antepartum hemorrhage risk effects <2023_risk_effect_maternal_hemorrhage>` 
 
 .. _mncnh_portfolio_intrapartum_component:
 
@@ -444,7 +455,7 @@ Postpartum component
     - * Hemoglobin during the first six weeks after the end of pregnancy
       * Hemoglobin between six weeks and nine months after the end of pregnancy
     - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
-      * :ref:`Postpartum hemorrhage risk effects <2023_risk_effect_postpartum_hemorrhage>` 
+      * :ref:`Postpartum hemorrhage risk effects <2023_risk_effect_maternal_hemorrhage>` 
   * - :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`
     - * Hemoglobin at start of pregnancy
       * Hemoglobin at end of pregnancy

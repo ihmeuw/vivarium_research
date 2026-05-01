@@ -133,6 +133,12 @@ Note that we will not be modeling direct effects of hemoglobin on the affected o
      - Affected measure
      - Note
    * - Maternal disorders
+     - :ref:`Antepartum hemorrhage <2023_cause_antepartum_hemorrhage_mncnh>`
+     - cause
+     - (a subset of) c367
+     - :math:`ir`
+     - 
+   * - Maternal disorders
      - :ref:`Postpartum hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>`
      - cause
      - (a subset of) c367
