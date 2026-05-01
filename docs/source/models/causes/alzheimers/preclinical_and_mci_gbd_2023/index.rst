@@ -533,7 +533,7 @@ table below:
       - s454: 0.449 (0.304-0.595)
   * - :math:`\text{DW}_\text{c543}`
     - Average disability weight of AD dementia
-    - :math:`\sum_\limits{s\in \text{sequelae\_c543}}
+    - :math:`\sum\limits_{s\in \text{sequelae\_c543}}
       \text{DW}_s \cdot \text{prevalence}_s`
     - Prevalence-weighted average disability weight over sequelae,
       computed automatically by Vivarium Inputs. Used to calculate
