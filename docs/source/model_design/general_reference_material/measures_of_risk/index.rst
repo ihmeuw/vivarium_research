@@ -159,7 +159,7 @@ Relationship between rate and risk
 
 Risk depends on both the incidence rate and on the duration of the at-risk period. In vivarium, we apply the incidence rate to each simulant at each time step to estimate the risk of developing disease where the duration of the period is the duration of the time-step:
 
-    Risk = :math:`1 - e^{-( \text{incidence rate} \times \text{duration of the period at risk})}`
+    Risk = :math:`1 - e^{-( \text{incidence rate } \times \text{ duration of the period at risk})}`
 
 For disease that have a low incidence rate or when the period at risk is short, the following approximation can be used:
 
@@ -169,13 +169,19 @@ Example:
 
   * The incidence rate of a particular condition in a population is 50 per 100 000 person-years. The risk for an individual in this population of developing this condition during a five-year period (assuming no other causes of death) is given by
 
-      - 5-year risk = :math:`1 - e^{-(0.0005 \text{ per person-year} \times 5 \text{ years})}` = 0.25%
-        | The simplified equation can yield the same result
+      - 5-year risk = :math:`1 - e^{-(0.0005 \text{ per person-year }
+        \times\ 5 \text{ years})}` = 0.25%
+
+        | The simplified equation can yield the same result:
+
       - 5-year risk=0.0005 per person-year X 5 years = 0.25%
   * Consider now a common condition with an incidence rate of 300 per 1000 person-years
 
-      - 5-year risk = :math:`1 - e^{-(0.3 \text{ per person-year} \times 5 \text{ years})}` = 78%
-        | The simplified equation does not yield the same result
+      - 5-year risk = :math:`1 - e^{-(0.3 \text{ per person-year }
+        \times\ 5 \text{ years})}` = 78%
+
+        | The simplified equation does not yield the same result:
+
       - 5-year risk = 0.3 per person-year X 5 years = 150%
 
 Measures of effect
