@@ -54,8 +54,8 @@ Intervention Overview
 -----------------------
 
 The hypothetical treatment intervention is triggered by a positive BBBM test, and has the effect of slowing the progression
-from pre-clinical to MCI state via the :ref:`BBBM to MCI transition hazard rate i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`. 
-In the baseline scenario, i_MCI equals the time-dependent hazard function :math:`h_{MCI}`,
+from pre-clinical to MCI state via the :ref:`BBBM to MCI transition hazard rate h_BBBM→MCI <2023_cause_alzheimers_preclinical_mci_transition_data_table>`.
+In the baseline scenario, h_BBBM→MCI equals the time-dependent hazard function :math:`h_{MCI}`,
 which in the treatment scenario is multiplied by a hazard ratio :math:`R_h` < 1 when a simulant has an active treatment effect in order to slow the progression.
 This effect can wane over time (udpated each time step) and when the effect fully expires, :math:`R_h` returns to 1. 
 
@@ -70,7 +70,7 @@ This treatment is hypothetical and we don't have confirmed information about the
     - Effect
     - Modeled?
     - Note
-  * - BBBM to MCI transition hazard rate (:ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`)
+  * - BBBM to MCI transition hazard rate (:ref:`h_BBBM→MCI <2023_cause_alzheimers_preclinical_mci_transition_data_table>`)
     - Adjust multiplicatively using hazard ratio :ref:`R_h <alzheimers_intervention_treatment_data_table>`
     - Yes
     -
@@ -148,9 +148,9 @@ For example, if a simulant discontinues after 4 months, they would have (4/9) * 
 full effect, or 2.67 which we round to the nearest 6 month interval, which is 2.5 years.
 
 Below are tables with details on how to model these states and transitions, and necessary data values. 
-The value of :math:`i_{MCI}` in the :ref:`cause model <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>` is now updated
+The value of h_BBBM→MCI in the :ref:`cause model <2023_cause_alzheimers_preclinical_mci_transition_data_table>` is now updated
 to be equal to :math:`h_{adj} = h_{MCI} \cdot R_h`, where :math:`h_{adj}` is the intervention-adjusted hazard rate used for progression to MCI,
-:math:`h_{MCI}` is the :ref:`time-dependent hazard function <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>` and :math:`R_h`
+:math:`h_{MCI}` is the :ref:`time-dependent hazard function <2023_cause_alzheimers_preclinical_mci_transition_data_table>` and :math:`R_h`
 is defined below.
 
 .. _alzheimers_intervention_treatment_data_table:
@@ -189,7 +189,7 @@ is defined below.
     - 1 if simulant has never recieved treatment or has transitioned to the `No treatment effect` state after completing or discontinuing treatment.
       Set to `R_d` on transition to a `Full treatment effect` state, and adjusted linearly during `Waning treatment effect` states.
       See below table for waning value details. 
-    - :math:`R_h \cdot h_{MCI} = h_{adj}`, adjusting :ref:`i_MCI <2021_cause_alzheimers_presymptomatic_mci_transition_data_table>`.
+    - :math:`R_h \cdot h_{MCI} = h_{adj}`, adjusting :ref:`h_BBBM→MCI <2023_cause_alzheimers_preclinical_mci_transition_data_table>`.
   * - :math:`R_d`
     - Draw-specific effect size value
     - Drawn uniformly from [.4, .6]
@@ -257,7 +257,12 @@ is defined below.
 Initialization
 ~~~~~~~~~~~~~~
 
-Since :math:`I` is 0 until 2030, on simulation initialization no simulants have received treatment.
+Since :math:`I` is 0 until 2027, on simulation initialization no
+simulants have received treatment. We also assume that when simulants
+are initialized into the simulation (even after 2027), they have not
+previously initiated treatment, despite this being theoretically
+possible due to false positive BBBM tests (see :ref:`assumptions and
+limitations <alzheimers_intervention_treatment_assumptions>` below).
 
 Outcomes
 ~~~~~~~~
@@ -284,6 +289,14 @@ Outcomes
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. note::
+
+  People in the susceptible state (who are not modeled in Vivarium) may
+  also initiate treatment due to false positive BBBM tests. We count
+  these "incorrectly initiated" treatments outside the Vivarium
+  simulation using a :ref:`multistate life table (MSLT) model
+  <other_models_alzheimers_mslt>`.
+
 - Those who do not initiate treatment following their first positive BBBM test result, or those who discontinue, 
   will never take the intervention, so propensity can be assigned for simulant lifetime
 - Treatment occurs instantaneously (i.e., the duration of the "receiving
@@ -299,3 +312,14 @@ Assumptions and Limitations
   assumptions to model discontinuation occurring instantaneously during
   the transient "receiving treatment" and "months to discontinuation"
   states as above.
+- A simulant in the susceptible state who incorrectly initiates
+  treatment may actually receive some benefit from this treatment.
+  Namely, they may transition to the BBBM-AD state during the period of
+  1.89--17 years (depending on months to discontinuation) when the
+  treatment still has an effect. However, our MSLT model does not track
+  simulants' treatment effect duration, and the Vivarium simulation
+  assumes that no simulants have been treated when they are initialized,
+  so our simulation does not capture this additional benefit. Since the
+  BBBM test is currently assumed to have a very high specificity, there
+  are very few false positive tests, so the effects of modeling this
+  additional benefit would be small.
