@@ -495,7 +495,7 @@ table below:
       artifact key
       ``cause.alzheimers_consistent.cause_specific_mortality_rate``
     - Defined to be :math:`f \cdot p_\text{dementia}`, where :math:`f` and
-      :math:`p_\text{dementa}` are the calibrated excess mortality rate of AD
+      :math:`p_\text{dementia}` are the calibrated excess mortality rate of AD
       and prevalence of AD dementia, respectively. Since :math:`f` is derived
       from emr_m24351 from DisMod, this "CSMR" is **not** necessarily a true
       "cause-specific" mortality rate, as it will include deaths *associated*

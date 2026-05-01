@@ -928,7 +928,7 @@ Data Description Tables
      - Notes
    * - MAM
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in xt{MAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{MAM}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for MAM
    * - SAM
      - disability weight
