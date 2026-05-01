@@ -126,7 +126,7 @@ Documents that contain information specific to the overall model and the child s
 |                     +-----------------------------------------------------+---------------------+
 |                     |:ref:`Maternal hemorrhage effect on                  |                     |
 |                     |hemoglobin                                           |                     |
-|                     |<2019_risk_effect_maternal_hemorrhage>`              |                     |
+|                     |<2019_2021_risk_effect_maternal_hemorrhage>`         |                     |
 +---------------------+-----------------------------------------------------+---------------------+
 |Causes               |:ref:`Maternal disorders                             |                     |
 |                     |<2021_cause_maternal_disorders>`                     |                     |
