@@ -63,7 +63,7 @@ approach that combined DisMod-MR and CODEm models to generate fatal and nonfatal
 
 3. We calculated the excess mortality rate (EMR) for the year 2019 according to the following formula: 
 
-   Excess mortality rate = :math:`\frac{\text{\{cause-specific-mortality-rate\}_codem}}{\text{\{prevalence\}_dismod}}`
+   Excess mortality rate = :math:`\frac{\text{\{cause-specific-mortality-rate\}\_codem}}{\text{\{prevalence\}\_dismod}}`
 
    We then selected 17 countries based on four conditions: 1) ranking of 4 or 5 stars on the system for assessing the quality of VR data; 2) prevalence data available from the literature were included in 
    the DisMod-MR estimation; 3) prevalence rate ≥ 0.005; and, 4) CSMR ≥ 0.00002. Using information from these countries as input data, we ran a MR-BRT model of logEMR on sex, a cubic spline of age, and 
@@ -233,7 +233,7 @@ States Data
      - 
    * - A
      - disability weight
-     - :math:`\frac{1}{\text{{prevalence}_c500}} \times \sum\limits_{s \in \text{sequelae}} \text{disability\_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{{prevalence}\_c500}} \times \sum\limits_{s \in \text{sequelae}} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      - 
 
 

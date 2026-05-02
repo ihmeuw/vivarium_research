@@ -394,15 +394,15 @@ State and Transition Data Tables
      - 
    * - I
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c{cid}}}{\text{population} \times \text{prevalence_c{cid}}}`
+     - :math:`\frac{\text{deaths\_c{cid}}}{\text{population} \times \text{prevalence\_c{cid}}}`
      - 
    * - I
      - disability weights
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c{cid}}}} \scriptstyle{\text{disability\_weight}_s \,\times\, \text{prevalence}_s}`
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae\_c{cid}}}} \scriptstyle{\text{disability\_weight}_s \,\times\, \text{prevalence}_s}`
      - total disability weight over all sequelae corresponding to the cancer
    * - ALL
      - cause specific mortality rate
-     - :math:`\frac{\text{deaths_c{cid}}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c{cid}}}{\text{population}}`
      - 
 
 
@@ -418,7 +418,7 @@ State and Transition Data Tables
    * - i
      - S
      - I
-     - :math:`\frac{\text{incidence_rate_c{cid}}}{\text{1 - prevalence_c{cid}}}`
+     - :math:`\frac{\text{incidence\_rate\_c{cid}}}{\text{1 - prevalence\_c{cid}}}`
      - Incidence rate in total population is divided by 1-prevalence_c{cid} to get incidence rate among the susceptible population.
 
 
