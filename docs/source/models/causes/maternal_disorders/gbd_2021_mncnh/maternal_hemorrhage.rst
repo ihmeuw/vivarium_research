@@ -237,7 +237,7 @@ The severe fraction will be computed as
 
 .. math::
 
-    \text{severe_fraction} = \frac{\text{incidence_s181}}{\text{incidence_s181} + \text{incidence_s180}}.
+    \text{severe\_fraction} = \frac{\text{incidence\_s181}}{\text{incidence\_s181} + \text{incidence\_s180}}.
 
 The case fatality rate will be computed as
 
@@ -258,11 +258,11 @@ We apply the YLDs per case for the corresponding severity level to each incident
 
 .. math::
 
-    \text{ylds_per_case_severe} = \frac{\text{yld_rate_s181}}{\text{incidence_s181}}
+    \text{ylds\_per\_case\_severe} = \frac{\text{yld\_rate\_s181}}{\text{incidence\_s181}}
 
 .. math::
   
-    \text{ylds_per_case_moderate} = \frac{\text{yld_rate_s180}}{\text{incidence_s180}}
+    \text{ylds\_per\_case\_moderate} = \frac{\text{yld\_rate\_s180}}{\text{incidence\_s180}}
 
 Note that we do *not* include YLDs for mild, moderate, or severe anemia due to maternal hemorrhage (s_182, s_183, s_184) in our calculations because these
 sequelae are already counted under the anemia cause model, and we want to avoid double counting.
