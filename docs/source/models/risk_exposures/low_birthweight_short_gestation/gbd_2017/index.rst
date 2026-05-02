@@ -506,13 +506,13 @@ Using the above variables, we will define the following individual
 mortality rates below:
 
 .. math::
-  :nowrap:
+  :no-wrap:
 
-  \begin{aligned}
+  \begin{align*}
   &\text{csmr}_c(i) &&= \text{conditional cause-specific mortality hazard of cause $c$ for individual $i$}\\
   &\text{csmr}_c^*(i) &&= \text{LBWSG-stratified cause-specific mortality hazard of $c$ for $i$}\\
   &\text{mr}(i) &&= \text{overall mortality hazard for individual $i$}
-  \end{aligned}
+  \end{align*}
 
 For each cause :math:`c`, define the conditional cause-specific mortality
 hazard for individual :math:`i` to be
