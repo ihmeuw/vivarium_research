@@ -285,7 +285,7 @@ The age- and sex-specific values for RR_{i3, i2, i1} calculated as described abo
 
 .. math::
 
-   \text{i{x}}_i = \text{i{x}} * (1 - PAF_\text{i{x}}) * RR_\text{i{x}_i}
+   \text{i{x}}_i = \text{i{x}} * (1 - PAF_\text{i{x}}) * RR_{\text{i{x}}_i}
 
 .. note::
 
