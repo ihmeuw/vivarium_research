@@ -658,7 +658,7 @@ in terms of the following variables:
      - Proportion of children treated for MAM who successfully respond to treatment
      - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`E_{MAM}`
      - Baseline scenario value
-   * - :math:`time_to_mam_ux_recovery`
+   * - time_to_mam_ux_recovery
      - Without treatment or death, average days spent in MAM before recovery
      - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`\text{time to recovery}_\text{untreated MAM}`
      - 
