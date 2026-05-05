@@ -197,6 +197,10 @@ The below tables can be filled out iteratively as new model runs are requested a
       * **NEW TO-BE-IMPLEMENTED SCENARIO** of MMS coverage equal to ANC1 value 
 
 
+.. todo::
+
+  Fill in V&V summaries for all runs and run specs for 2.1 and 2.2
+
 .. list-table:: Model runs
   :header-rows: 1
 
@@ -222,30 +226,46 @@ The below tables can be filled out iteratively as new model runs are requested a
     - Default
     - Default
   * - 3.0
-    - Intervention model updates
-    - Updated fertility input data specs
-    - * For baseline maternal scenario: Baseline child scenario
-      * For MMS at ANC1 maternal scenario: child scenarios 0-7, 36 (*uncomplicated_sam_tx__complicated_sam_stabilization__*), 45 (*uncomplicated_sam_tx__complicated_sam_recovery__*)
+    - * Intervention model update implementation
+      * Used Kano-only calibration data ``wasting_processed_rates_kano_20260428.csv`` `found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/9ddd5e07a6c0fe0e96249aa8271dda6bcfe88630/data_prep/cgf_correlation/nigeria/wasting_processed_rates_kano_20260428.csv>`__. Note this data was missing the ``complicated_fraction`` parameter, which was filled using values from the prior run (2.2)
+    - First pass fertility input data specs
+    - * Baseline maternal scenario
+      * Baseline child scenario and: 0-7, 36 (*uncomplicated_sam_tx__complicated_sam_stabilization__*), 45 (*uncomplicated_sam_tx__complicated_sam_recovery__*)
     - 10 draws
     - Default
+    - Default
+  * - 3.1
+    - * Update to complicated SAM treatment baseline coverage (was zero in 3.0)
+      * Updated wasting calibration values in ``wasting_processed_rates_kano_20260429.csv`` `found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/741c5f53e060bcca1f0db6b3776df0bc02658366/data_prep/cgf_correlation/nigeria/wasting_processed_rates_kano_20260429.csv>`__ (fixed issue with missing complicated_fraction parameter from 3.0)
+      * Updated SQ-LNS effect values [ALI TO LINK SOON]
+    - First pass fertility input data specs
+    - Baseline maternal scenario and the following child scenarios: ``[baseline, zero_coverage__, targeted_mam_tx__, universal_mam_tx__, targeted_mam_tx__universal_sqlns__, universal_sqlns__, universal_mam_tx__universal_sqlns__, complicated_sam_stabilization__, complicated_sam_stabilization__targeted_mam_tx__, complicated_sam_stabilization__universal_mam_tx__, complicated_sam_stabilization__targeted_mam_tx__universal_sqlns__, complicated_sam_stabilization__universal_sqlns__, complicated_sam_stabilization__universal_mam_tx__universal_sqlns__, complicated_sam_recovery__, complicated_sam_recovery__targeted_mam_tx__, complicated_sam_recovery__universal_mam_tx__, complicated_sam_recovery__targeted_mam_tx__universal_sqlns__, complicated_sam_recovery__universal_sqlns__, complicated_sam_recovery__universal_mam_tx__universal_sqlns__, uncomplicated_sam_tx__, uncomplicated_sam_tx__targeted_mam_tx__, uncomplicated_sam_tx__universal_mam_tx__, uncomplicated_sam_tx__targeted_mam_tx__universal_sqlns__, uncomplicated_sam_tx__universal_sqlns__, uncomplicated_sam_tx__universal_mam_tx__universal_sqlns__, uncomplicated_sam_tx__complicated_sam_stabilization__, uncomplicated_sam_tx__complicated_sam_stabilization__targeted_mam_tx__, uncomplicated_sam_tx__complicated_sam_stabilization__universal_mam_tx__, uncomplicated_sam_tx__complicated_sam_stabilization__targeted_mam_tx__universal_sqlns__, uncomplicated_sam_tx__complicated_sam_stabilization__universal_sqlns__, uncomplicated_sam_tx__complicated_sam_stabilization__universal_mam_tx__universal_sqlns__]`` aka: numbers ``[baseline, 0, 1, 4, 6, 7, 8, 9, 10, 13, 15, 16, 17, 18, 19, 22, 24, 25, 26, 27, 28, 31, 33, 34, 35, 36, 37, 40, 42, 43, 44]``
+    - 10 draws
+    - Use the following age groups:
+      * Early neonatal (GBD)
+      * Late neonatal (GBD)
+      * 1-5 months (GBD)
+      * 6-12 months (GBD)
+      * 12-18 months (Custom for SQLNS eligible age)
+      * 18-24 months (Custom for SQLNS eligible age)
+      * 2-4 years (GBD)
     - Default
   * - 4.0
     - Production run test
     - Updated fertility input data specs
-    - Baseline (maternal and child)
-    - 1 draw
-    - * Stratify by alternative age groups of 0-6 months, 6-18 months, 18-60 months
-      * Exclude wasting state stratification from mortality observer
-    - Exclude child underweight and disease observers (observers #5 and #6)
+    - Baseline and MMS at ANC1 maternal scenarios, baseline child scenario
+    - 10 draws
+    - * Same age groups as 3.1, or 0-6 months, 6-18 months, 18-60 months for run time
+      * Can exclude wasting state stratification from mortality observer for run time
+    - Can exclude child underweight and disease observers (observers #5 and #6) for run time
   * - 4.1
     - Production runs
     - Updated fertility input data specs
     - * Baseline (maternal and child)
-      * MMS at ANC maternal scenario and all child scenarios
+      * MMS at ANC maternal scenario and child scenarios listed for 3.1
     - 20 draws
-    - * Stratify by alternative age groups of 0-6 months, 6-18 months, 18-60 months
-      * Exclude wasting state stratification from mortality observer
-    - Exclude child underweight and disease observers (observers #5 and #6)
+    - Same as 4.0
+    - Same as 4.0
 
 .. list-table:: Model verification and validation tracking
    :widths: 3 10 20
