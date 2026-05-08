@@ -186,27 +186,27 @@ State and Transition Data Tables
      - Notes
    * - All
      - cause-specific mortality rate (csmr)
-     - :math:`\frac{\text{deaths_c495}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c495}}{\text{population}}`
      -
    * - D\ :sub:`A`
      - acute cause-specific mortality rate (csmr) 
-     - :math:`\frac{\text{acute-deaths_c495}}{\text{population}}`
+     - :math:`\frac{\text{acute-deaths\_c495}}{\text{population}}`
      - custom CSMR split 
    * - D\ :sub:`C`
      - chronic cause-specific mortality rate (csmr) 
-     - :math:`\frac{\text{chronic-deaths_c495}}{\text{population}}`
+     - :math:`\frac{\text{chronic-deaths\_c495}}{\text{population}}`
      - custom CSMR split 
    * - S
      - prevalence
-     - :math:`1 - \text{prev_c495}`
+     - :math:`1 - \text{prev\_c495}`
      -
    * - A
      - prevalence
-     - :math:`\sum\limits_{s \in \text{acute_sequelae}} \text{prevalence}_s`
+     - :math:`\sum\limits_{s \in \text{acute\_sequelae}} \text{prevalence}_s`
      - 
    * - C
      - prevalence
-     - :math:`\sum\limits_{s \in \text{chronic_sequelae}} \text{prevalence}_s`
+     - :math:`\sum\limits_{s \in \text{chronic\_sequelae}} \text{prevalence}_s`
      -
    * - S
      - excess mortality rate (emr)
@@ -226,11 +226,11 @@ State and Transition Data Tables
      -
    * - A
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_c495}} \times \sum\limits_{s \in \text{acute-sequelae}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_c495}} \times \sum\limits_{s \in \text{acute-sequelae}} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      -
    * - C
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_c495}} \times \sum\limits_{s \in \text{chronic-sequelae}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_c495}} \times \sum\limits_{s \in \text{chronic-sequelae}} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      -
 
 
