@@ -161,8 +161,8 @@ Vivarium Modeling Strategy
     - See detail of the derivation of this parameter on the :ref:`2021 wasting risk exposure page <2021_risk_exposure_wasting_state_exposure>`
   * - complicated_sam_fraction
     - Fraction of SAM cases in the "complicated" substate
-    - Values will be output at the draw/age/sex/subnational-specific level from the wasting calibration. TODO: update link as current csv changes
-    - `See current values here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/ba62a66d56638703cee9be1415c34f04b2e5762c/data_prep/cgf_correlation/nigeria/wasting_processed_csam__filled_mean_converging__500draws.csv>`__ parameter == 'complicated_fraction'
+    - Values will be output at the draw/age/sex/subnational-specific level from the wasting calibration.
+    - Values csv generated `here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/wasting_transition_sampling_subnational_COMPLICATED_SAM.ipynb>`_. parameter == 'complicated_fraction'
 
 Initialization
 --------------
@@ -388,7 +388,7 @@ However, recovery from MAM and SAM states for those who do not receive treatment
 
 .. image:: calibration_transitions.svg
 
-The process of generating draw-level values for all wasting transitions is outlined below. See the code for generating draw-specific transition values in this notebook `here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/ba62a66d56638703cee9be1415c34f04b2e5762c/data_prep/cgf_correlation/nigeria/wasting_transition_sampling_subnational_COMPLICATED_SAM.ipynb>`_: TODO: update link when the nb changes are merged
+The process of generating draw-level values for all wasting transitions is outlined below. See the code for generating draw-specific transition values in this notebook `here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/wasting_transition_sampling_subnational_COMPLICATED_SAM.ipynb>`_.
 
 1. Load all pre-defined input data values (in accordance with documentation linked above). These include:
 
