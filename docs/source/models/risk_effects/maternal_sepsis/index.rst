@@ -1,7 +1,7 @@
-.. _risk_effect_maternal_hemorrhage:
+.. _risk_effect_maternal_sepsis:
 
 ==================================================
-Maternal Hemorrhage Risk Effects
+Maternal Sepsis Risk Effects
 ==================================================
 
 .. toctree::
