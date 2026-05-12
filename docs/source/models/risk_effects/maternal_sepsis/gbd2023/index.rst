@@ -28,9 +28,9 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-=========================================
-GBD 2023 Maternal Hemorrhage Risk Effects
-=========================================
+=====================================
+GBD 2023 Maternal Sepsis Risk Effects
+=====================================
 
 .. contents::
    :local:
