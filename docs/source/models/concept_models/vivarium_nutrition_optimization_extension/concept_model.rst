@@ -188,13 +188,13 @@ The below tables can be filled out iteratively as new model runs are requested a
 
   * Updated fertility input data specs
 
-    * Filepath: [path for **TO-BE-GENERATED RESULTS**]
-    * Input draws: [80, 13, 64, 74, 29, 52, 74, 60, 1, 83, 16, 26, 12, 28, 44, 88, 72, 35, 53, 52]. These draws were selected by randomly sampling 20 numbers between 1 and 99 as we have only generated wasting calibration data for 100 draws. Note we avoid draw 0 here as it has been overwritten with mean across all draws in N.O. artifacts
+    * Filepath: ``/mnt/team/simulation_science/pub/models/vivarium_gates_inpatient_sam_maternal_model/results/model_1.0/nigeria/2026_05_05_17_55_13/results/``
+    * Input draws: [80, 13, 64, 74, 29, 52, 91, 60, 1, 83, 16, 26, 12, 28, 44, 88, 72, 35, 53, 47]. These draws were selected by randomly sampling 20 numbers between 1 and 99 as we have only generated wasting calibration data for 100 draws. Note we avoid draw 0 here as it has been overwritten with mean across all draws in N.O. artifacts
     * Random seeds: Unspecified, up to engineers
     * Maternal scenarios:
 
       * Baseline
-      * **NEW TO-BE-IMPLEMENTED SCENARIO** of MMS coverage equal to ANC1 value 
+      * MMS coverage equal to ANC1 value 
 
 
 .. todo::
