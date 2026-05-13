@@ -212,7 +212,7 @@ State and Transition Data Tables
      - 
    * - BCC, S_hrHPV
      - prevalence (prev_BCC_and_S_hrHPV)
-     - :math:`\text{prev_BCC}\times(1-PAF\times\frac{\text{RR_hrHPV}}{\text{RR_hrHPV}-1})`
+     - :math:`\text{prev\_BCC}\times(1-PAF\times\frac{\text{RR\_hrHPV}}{\text{RR\_hrHPV}-1})`
      - prev_BCC, PAF, and RR_hrHPV are specified in `Data sources`
    * - BCC, S_hrHPV
      - excess mortality rate
@@ -224,7 +224,7 @@ State and Transition Data Tables
      - 
    * - BCC, C_hrHPV
      - prevalence (prev_BCC_and_C_hrHPV)
-     - :math:`\text{prev_BCC}\times\text{PAF}\times\frac{\text{RR_hrHPV}}{\text{RR_hrHPV}-1}`
+     - :math:`\text{prev\_BCC}\times\text{PAF}\times\frac{\text{RR\_hrHPV}}{\text{RR\_hrHPV}-1}`
      - prev_BCC, PAF, and RR_hrHPV are specified in `Data sources`
    * - BCC, C_hrHPV
      - excess mortality rate
@@ -236,27 +236,27 @@ State and Transition Data Tables
      - 
    * - ICC, S_hrHPV
      - prevalence (prev_ICC_and_S_hrHPV)
-     - :math:`\text{prev_c432}\times(1-PAF\times\frac{\text{RR_hrHPV}}{\text{RR_hrHPV}-1})`
+     - :math:`\text{prev\_c432}\times(1-PAF\times\frac{\text{RR\_hrHPV}}{\text{RR\_hrHPV}-1})`
      - prev_c432, PAF, and RR_hrHPV are specified in `Data sources`
    * - ICC, S_hrHPV
      - excess mortality rate
-     - :math:`\frac{\text{csmr_c432}}{\text{prev_c432}}`
+     - :math:`\frac{\text{csmr\_c432}}{\text{prev\_c432}}`
      - 
    * - ICC, S_hrHPV  
      - disability weights
-     - :math:`\frac{\displaystyle{\sum_{s\in\text{s_c432}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}}{\displaystyle{\sum_{s\in\text{s_c432}}}\scriptstyle{\text{prev}_s}}`
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{s\_c432}}}\scriptstyle{\text{disability\_weight}_s\,\times\,\text{prev}_s}}{\displaystyle{\sum_{s\in\text{s\_c432}}}\scriptstyle{\text{prev}_s}}`
      - weighted average of cervical cancer disability weight over all sequelae including ids s_282, s_283, s_284, s_285
    * - ICC, C_hrHPV
      - prevalence (prev_ICC_and_C_hrHPV)
-     - :math:`\text{prev_c432}\times\text{PAF}\times\frac{\text{RR_hrHPV}}{\text{RR_hrHPV}-1}`
+     - :math:`\text{prev\_c432}\times\text{PAF}\times\frac{\text{RR\_hrHPV}}{\text{RR\_hrHPV}-1}`
      - prev_c432, PAF, and RR_hrHPV are specified in `Data sources`
    * - ICC, C_hrHPV
      - excess mortality rate
-     - :math:`\frac{\text{csmr_c432}}{\text{prev_c432}}`
+     - :math:`\frac{\text{csmr\_c432}}{\text{prev\_c432}}`
      - 
    * - ICC, C_hrHPV  
      - disability weights
-     - :math:`\frac{\displaystyle{\sum_{s\in\text{s_c432}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}}{\displaystyle{\sum_{s\in\text{s_c432}}}\scriptstyle{\text{prev}_s}}`
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{s\_c432}}}\scriptstyle{\text{disability\_weight}_s\,\times\,\text{prev}_s}}{\displaystyle{\sum_{s\in\text{s\_c432}}}\scriptstyle{\text{prev}_s}}`
      - weighted average of cervical cancer disability weight over all sequelae including ids s_282, s_283, s_284, s_285
 
 S = susceptible; C = with condition
@@ -283,12 +283,12 @@ S = susceptible; C = with condition
    * - i_BCC_hrHPV+
      - hrHPV-infected
      - BCC, C_hrHPV
-     - :math:`\text{incidence_BCC}\times(1-PAF)\times\text{RR_hrHPV}`
+     - :math:`\text{incidence\_BCC}\times(1-PAF)\times\text{RR\_hrHPV}`
      - incidence_BCC, PAF, and RR_hrHPV are specified in `Data sources`.
    * - i_BCC_hrHPV-
      - Susceptible
      - BCC, S_hrHPV
-     - :math:`\text{incidence_BCC}\times(1-PAF)`
+     - :math:`\text{incidence\_BCC}\times(1-PAF)`
      - incidence_BCC and PAF are specified in `Data sources`.
    * - i_hrHPV
      - BCC, S_hrHPV
@@ -387,7 +387,7 @@ prev = prevalence; i = incidence; r = remission; RR = relative risk; PAF = popul
      - relative risk of HPV 16/18 causing CIN2+ = 27.4 (95%CI 19.7 to 38.0)
    * - PAF
      - derived from prev_hrHPV and RR_hrHPV
-     - PAF = :math:`\frac{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)}{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)+1}`
+     - PAF = :math:`\frac{\text{prev\_hrHPV}\times(\text{RR\_hrHPV}-1)}{\text{prev\_hrHPV}\times(\text{RR\_hrHPV}-1)+1}`
 
 .. todo::
 

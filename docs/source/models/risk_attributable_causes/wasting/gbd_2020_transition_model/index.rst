@@ -658,7 +658,7 @@ in terms of the following variables:
      - Proportion of children treated for MAM who successfully respond to treatment
      - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`E_{MAM}`
      - Baseline scenario value
-   * - :math:`time_to_mam_ux_recovery`
+   * - time_to_mam_ux_recovery
      - Without treatment or death, average days spent in MAM before recovery
      - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`\text{time to recovery}_\text{untreated MAM}`
      - 
@@ -928,19 +928,19 @@ Data Description Tables
      - Notes
    * - MAM
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in xt{MAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{\text{sequelae}\in \text{MAM}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{\text{sequelae}\in \text{MAM}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for MAM
    * - SAM
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{SAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{SAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{\text{sequelae}\in \text{SAM}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{\text{sequelae}\in \text{SAM}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for SAM
    * - MAM & SAM 
      - excess mortality 
-     - :math:`\frac{\text{deaths_c387}}{\text{population} \times \text{prevalence_c387}}`
+     - :math:`\frac{\text{deaths\_c387}}{\text{population} \times \text{prevalence\_c387}}`
      - death counts come from codecorrect
    * - All
      - cause specific mortality
-     - :math:`\frac{\text{deaths_c387}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c387}}{\text{population}}`
      - death counts come from codecorrect
 
 .. note::

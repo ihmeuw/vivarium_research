@@ -63,7 +63,7 @@ approach that combined DisMod-MR and CODEm models to generate fatal and nonfatal
 
 3. We calculated the excess mortality rate (EMR) for the year 2019 according to the following formula: 
 
-   Excess mortality rate = :math:`\frac{\text{\{cause-specific-mortality-rate\}_codem}}{\text{\{prevalence\}_dismod}}`
+   Excess mortality rate = :math:`\frac{\text{\{cause-specific-mortality-rate\}\_codem}}{\text{\{prevalence\}\_dismod}}`
 
    We then selected 17 countries based on four conditions: 1) ranking of 4 or 5 stars on the system for assessing the quality of VR data; 2) prevalence data available from the literature were included in 
    the DisMod-MR estimation; 3) prevalence rate ≥ 0.005; and, 4) CSMR ≥ 0.00002. Using information from these countries as input data, we ran a MR-BRT model of logEMR on sex, a cubic spline of age, and 
@@ -209,11 +209,11 @@ States Data
      - Notes
    * - All
      - cause-specific mortality (CSMR)
-     - :math:`\frac{\text{deaths_c500}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c500}}{\text{population}}`
      - Post CoDCorrect cause-level CSMR
    * - S
      - Prevalence
-     - :math:`1 - \text{prev_c500}`
+     - :math:`1 - \text{prev\_c500}`
      - 
    * - A
      - Prevalence
@@ -225,7 +225,7 @@ States Data
      -
    * - A
      - excess mortality
-     - :math:`{emr}_m9366`
+     - emr_m9366
      - 
    * - S
      - disability weight
@@ -233,7 +233,7 @@ States Data
      - 
    * - A
      - disability weight
-     - :math:`\frac{1}{\text{{prevalence}_c500}} \times \sum\limits_{s \in \text{sequelae}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{{prevalence}\_c500}} \times \sum\limits_{s \in \text{sequelae}} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      - 
 
 
@@ -252,7 +252,7 @@ Transition Data
    * - 1
      - S
      - A
-     - :math:`{incidence}_c500`
+     - incidence_c500
      - This is cause-level incidence which is equivalent to the “population rate”
 	 
 
@@ -267,15 +267,15 @@ Data Sources
      - Source
      - Description
      - Notes
-   * - :math:`{prevalence}_c500`
+   * - prevalence_c500
      - como
      - Prevalence of atrial fibrillation
      - 
-   * - :math:`{deaths}_c500`
+   * - deaths_c500
      - codcorrect
      - Deaths from atrial fibrillation
      - 
-   * - :math:`{incidence}_c500`
+   * - incidence_c500
      - como
      - Incidence of atrial fibrillation
      - This is the population incidence rate for atrial fibrillation
@@ -283,19 +283,19 @@ Data Sources
      - demography
      - Mid-year population for given age/sex/year/location
      - 
-   * - :math:`{sequelae}_c500`
+   * - sequelae_c500
      - gbd_mapping
      - List of 2 sequelae for atrial fibrillation
      - 
-   * - :math:`prevalence_{s\{sid\}}`
+   * - :math:`\text{prevalence}_{s\{sid\}}`
      - como
      - Prevalence of sequela with id sid
      - 
-   * - :math:`disability-weight_{s\{sid\}}`
+   * - :math:`\text{disability-weight}_{s\{sid\}}`
      - YLD appendix
      - Disability weight of sequela with id sid
      - 
-   * - :math:`{emr}_m9366`
+   * - emr_m9366
      - dismod-mr 2.1
      - excess mortality rate of atrial fibrillation
      - 

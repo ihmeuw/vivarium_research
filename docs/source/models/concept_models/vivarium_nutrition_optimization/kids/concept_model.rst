@@ -1625,12 +1625,36 @@ Wave III
     - All
     - National runs
     - Standard SQ-LNS effects only
-  * - ``vivarium_v4.0_vph_v5.0_update``
+  * - V1.0: ``vivarium_v4.0_vph_v5.0_update``
     - Runs that integrate vivarium and vivarium_public_health framework updates to confirm we still meet V&V criteria following these updates
     - Baseline, MMS (run using maternal simulation outputs from the ``vivarium_v4.0_vph_v5.0_update`` model version)
     - Baseline, 8 (all)
     - National runs (informed from subnational artifact). 10 draws (not the mean draw). Nigeria and Pakistan only. 
     - Standard SQ-LNS effects only
+  * - V2.0: ``vivarium_v4.0_vph_v5.0_update/match_model18_draws``, iteration 1 (launched) 3/20
+    - Rerun V1.0 but this time with matching scenarios and draws to model 18 for direct comparison
+    - MMS
+    - Scenario 8 (all)
+    - National runs (informed from subnational model 15.0 artifact). 10 draws that were also run for model 18.0 (not the mean draw). Nigeria and Pakistan only. 
+    - Standard SQ-LNS effects only
+  * - V2.1: ``vivarium_v4.0_vph_v5.0_update/match_model18_draws``, iteration 2 (launched) 3/27
+    - Rerun of V2.0, but with reverted order of listed child wasting states 
+    - MMS
+    - Scenario 8
+    - National runs (informed from subnational model 15.0 artifact). 10 draws that were also run for model 18.0  (not the mean draw). Nigeria and Pakistan only. 
+    - Standard SQ-LNS effects only
+  * - V2.2: ``vivarium_v4.0_vph_v5.0_update/match_model18_draws``, iteration 3 (launched) 3/28
+    - Rerun of V2.2, but with a background update from Steve
+    - MMS
+    - Scenario 8
+    - National runs (informed from subnational model 15.0 artifact). 10 draws that were also run for model 18.0  (not the mean draw). Nigeria and Pakistan only. 
+    - Standard SQ-LNS effects only
+  * - V3.0: detailed V&V run for framework updates
+    - Run NO Child model with increased stratifications to enable regression testing V&V with the vivarium/VPH framework updates
+    - See desired maternal/child scenario pairs in next column 
+    - Baseline/Baseline, Zero coverage/Zero coverage, Zero coverage/3: SQ-LNS
+    - National runs (informed from subnational model 15.0 artifact). 10 draws including draw_0 (mean draw). Start with Nigeria only.
+    - Standard SQ-LNS effects only. Note updated stratification requests in next table.
   * - 19.0
     - Production runs for re-run of model 17 for Ethiopia to resolve subnational scrambling issue
     - Same as model 17.0
@@ -1736,13 +1760,23 @@ Wave III
       5. Stunting state person time stratified by SQ-LNS coverage
     - * Age group
       * Subnational location (need to determine how this will be "stratified")
-  * - 18.0, ``vivarium_v4.0_vph_v5.0_update``
+  * - 18.0, ``vivarium_v4.0_vph_v5.0_update`` runs V1.0 through V2.2
     - 1. Deaths and YLLs 
       2. YLDs 
       3. Count of incident SAM cases stratified by SAM treatment coverage
       4. Count of incident MAM cases stratified by MAM treatment coverage
       5. Stunting state person time stratified by SQ-LNS coverage
     - Age strata of 0-6 months, 6-18 months, 18-60 months
+  * - V3.0
+    - 1. Deaths and YLLs, stratified by child wasting exposure
+      2. YLDs
+      3. Child wasting transition counts, stratified by MAM and SAM treatment coverage 
+      4. Child wasting person time, stratified by MAM and SAM treatment coverage as well as SQ-LNS coverage
+      5. Child stunting person time
+      6. Child underweight person time
+      7. Cause-specific person time, stratified by child wasting exposure
+      8. Cause transition counts, stratified by chlid wasting exposure
+    - GBD age group and sex as stratifications for all observers
   * - 19.0
     - 1. Deaths and YLLs (non-cause-specific)
       2. YLDs (all-cause observer only)
@@ -1826,11 +1860,56 @@ Wave III
     - * An issue with artifact data used for subnational locations in Ethiopia was identified that necessitates a rerun (`see details here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/fea37d5913dca2a65c814decbe3a457d383913b6/emulator/sqlns_targeting/artifact_data_checks.ipynb>`__)
       * Potential issue with mean draw systematically overestimating baseline parameters is expected (TODO: update with notebook demonstrating this issue)
       * TODO: update with links to general V&V notebooks for this run
-  * - ``viv4.0_vph_v5.0_update``
+  * - V1.0
     - * Confirm baseline scenario cause burden and CGF risk exposures meets GBD expectation
-      * Compare total scenario-specifc (maternal MMS, child scenario 8) DALYs to results from model 18.0
-    - 
+    - Look good (link to follow), but still have more checks to perform in subsequent runs
+  * - V2.0
+    - * Confirm deaths/YLDs closely match results from model 18.0 for the same scenarios/draws
+    - * Unconfirmed! Systematically underestimating YLDs and systematically underestimating burden due to LRI (link to follow)
+  * - V2.1
+    - Same as V2.0
+    - Unchanged from V2.0 (link to follow)
+  * - V2.2
+    - Same as V2.0
+    - Unchanged from V2.0 and V2.1 (link to follow)
+  * - V3.0
+    - Perform detailed V&V checks, including:
+      1. Cause burden and risk exposure in baseline scenario matches GBD (perform this check for draw-level and mean draw results separately)
+      2. Cause incidence and mortality risk by wasting state matches expected joint CGF RR values
+      3. Wasting transition rates match expectation (evaluate within baseline scenario)
+      4. Wasting treatment affects wasting transition rates in expected manner (evaluate within baseline scenario)
+      5. SQ-LNS effects on CGF exposure (wasting, stunting) are as expected (evaluate as difference between zero coverage and SQLNS scenarios)
+      6. Confirm joint underweight exposure matches expectation (in the interactive simulation)
+      7. Confirm CGF RR functioning in expected manner (in the interactive simulation)
+      8. Confirm intervention coverage affects stillbirth, BW and GA exposures, and neonatal mortality as expected (in interactive simulation and fertility data from maternal simulation)
+      9. Confirm whether mean draw baseline values match model 18.0 results
+    - * Confirmed results meet GBD risk exposure and cause targets, both at the `draw-specific <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_risk_and_cause_checks.ipynb>`__ and `mean draw <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_risk_and_cause_checks_mean_draw.ipynb>`__ level
+      * Scenario-specific results differed from model 18.0 results (`see notebook comparison here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_scenario_comparison.ipynb>`__). This is hypothesized to be due to an update in the rate-to-probability conversion equation from the exponential approach used for model 18.0 results and the multiplicative approach used for the present results. Given that `model 18.0 results overestimate GBD validation targets <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_risk_and_cause_checks_mean_draw_MODEL_18.ipynb>`__ in a manner not seen in the present results, we have concluded that the discrepancy seen between model 18.0 and the current results is an improvement in the model. To be certain that there are no additional changes to the underlying model introduced with the vivarium framework update, we could rerun the simulation using the exponential rather than multiplicative rate to probability conversion and confirm that scenario-specific results are similar to model 18.0. However, this rerun has not yet been prioritized as of May 2026.
+      * Using the interactive context (`see notebook here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_child_interactive_sim.ipynb>`__), we have confirmed the following are functioning as expected:
+
+        * Antenatal intervention effects on BW and GA exposures
+        * Effect of MMS on stillbirth is being applied (although effect is slightly underestimated from target)
+        * LBWSG exposure is affecting neonatal mortality. NOTE that there are negative mortality risk values for some simulants. This is expected to be a results of national-level mortality rates due to LBWSG-affected CSMRs but subnational ACMRs
+        * Child underweight exposure functioning as expected
+        * CGF RRs assigned as expected
   * - 19.0
     - Re-run model 17.0 V&V for updated Ethiopian locations
     - 
 
+
+
+.. list-table:: Outstanding V&V issues
+  :header-rows: 1
+
+  * - Issue
+    - Explanation
+    - Action plan
+    - Timeline
+  * - MMS effect on stillbirth appears underestimated
+    - Unknown, could be unlucky draws? `See this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_child_interactive_sim.ipynb>`__
+    - Keep an eye on this for future model updates
+    - N/A
+  * - Negative neonatal mortality risk values at the indiviudal level 
+    - Thought to be due to national-level CSMRs for LBWSG-affected causes and subnational-level ACMRs leading to illogial pairings of mortality risks
+    - Update artifact for neonatal CSMRs to be subnationally specific
+    - TBD
