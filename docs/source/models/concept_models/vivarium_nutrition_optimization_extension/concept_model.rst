@@ -188,13 +188,13 @@ The below tables can be filled out iteratively as new model runs are requested a
 
   * Updated fertility input data specs
 
-    * Filepath: [path for **TO-BE-GENERATED RESULTS**]
-    * Input draws: random sample of 20 draws between 1-99. Note we avoid draw 0 here as it has been overwritten with mean across all draws in N.O. artifacts
+    * Filepath: ``/mnt/team/simulation_science/pub/models/vivarium_gates_inpatient_sam_maternal_model/results/model_1.0/nigeria/2026_05_05_17_55_13/results/``
+    * Input draws: [80, 13, 64, 74, 29, 52, 91, 60, 1, 83, 16, 26, 12, 28, 44, 88, 72, 35, 53, 47]. These draws were selected by randomly sampling 20 numbers between 1 and 99 as we have only generated wasting calibration data for 100 draws. Note we avoid draw 0 here as it has been overwritten with mean across all draws in N.O. artifacts
     * Random seeds: Unspecified, up to engineers
     * Maternal scenarios:
 
       * Baseline
-      * **NEW TO-BE-IMPLEMENTED SCENARIO** of MMS coverage equal to ANC1 value 
+      * MMS coverage equal to ANC1 value 
 
 
 .. todo::
@@ -242,14 +242,40 @@ The below tables can be filled out iteratively as new model runs are requested a
     - Baseline maternal scenario and the following child scenarios: ``[baseline, zero_coverage__, targeted_mam_tx__, universal_mam_tx__, targeted_mam_tx__universal_sqlns__, universal_sqlns__, universal_mam_tx__universal_sqlns__, complicated_sam_stabilization__, complicated_sam_stabilization__targeted_mam_tx__, complicated_sam_stabilization__universal_mam_tx__, complicated_sam_stabilization__targeted_mam_tx__universal_sqlns__, complicated_sam_stabilization__universal_sqlns__, complicated_sam_stabilization__universal_mam_tx__universal_sqlns__, complicated_sam_recovery__, complicated_sam_recovery__targeted_mam_tx__, complicated_sam_recovery__universal_mam_tx__, complicated_sam_recovery__targeted_mam_tx__universal_sqlns__, complicated_sam_recovery__universal_sqlns__, complicated_sam_recovery__universal_mam_tx__universal_sqlns__, uncomplicated_sam_tx__, uncomplicated_sam_tx__targeted_mam_tx__, uncomplicated_sam_tx__universal_mam_tx__, uncomplicated_sam_tx__targeted_mam_tx__universal_sqlns__, uncomplicated_sam_tx__universal_sqlns__, uncomplicated_sam_tx__universal_mam_tx__universal_sqlns__, uncomplicated_sam_tx__complicated_sam_stabilization__, uncomplicated_sam_tx__complicated_sam_stabilization__targeted_mam_tx__, uncomplicated_sam_tx__complicated_sam_stabilization__universal_mam_tx__, uncomplicated_sam_tx__complicated_sam_stabilization__targeted_mam_tx__universal_sqlns__, uncomplicated_sam_tx__complicated_sam_stabilization__universal_sqlns__, uncomplicated_sam_tx__complicated_sam_stabilization__universal_mam_tx__universal_sqlns__]`` aka: numbers ``[baseline, 0, 1, 4, 6, 7, 8, 9, 10, 13, 15, 16, 17, 18, 19, 22, 24, 25, 26, 27, 28, 31, 33, 34, 35, 36, 37, 40, 42, 43, 44]``
     - 10 draws
     - Use the following age groups:
+
       * Early neonatal (GBD)
       * Late neonatal (GBD)
       * 1-5 months (GBD)
       * 6-12 months (GBD)
-      * 12-18 months (Custom for SQLNS eligible age)
-      * 18-24 months (Custom for SQLNS eligible age)
+      * 12-23 months (GBD)
       * 2-4 years (GBD)
     - Default
+  * - 3.2
+    - Same as 3.1, but with updated ordering of assigning the ``post_discharge`` state variable within a timestep to resolve the coverage issues seen in the ``complicated_sam_recovery`` scenarios
+    - Same as 3.1
+    - Same as 3.1
+    - Same as 3.1
+    - Same as 3.1
+    - Same as 3.1
+  * - 3.3
+    - Parameter update for wasting calibration (not yet for SQLNS effects). `Use data found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/57e2beeb00e56df4f1a8202b455a9c91f2a8f8f2/data_prep/cgf_correlation/nigeria/wasting_processed_rates_kano_20260505_incidence_update_100_draws.csv>`__
+    - **UPDATED** fertility input data specs (see details in note above)
+    - * Baseline maternal scenario + baseline child scenario
+      * MMS at ANC1 maternal scenario and all child scenarios listed in model 3.1 request
+    - 10 draws (use first 10 from the list of 20 specified in the fertility input data specs in the note above this table)
+    - Use the following age groups:
+
+      * Early neonatal (GBD)
+      * Late neonatal (GBD)
+      * 1-5 months (GBD)
+      * 6-12 months (GBD)
+      * #12-23 months (GBD)
+      * **12-18 months (Custom for SQLNS eligible age)**
+      * **18-24 months (Custom for SQLNS eligible age)**
+      * 2-4 years (GBD)
+
+      Exclude post_discharge and/or previous wasting state stratifications from all observers.
+    - Can exclude disease observers
   * - 4.0
     - Production run test
     - Updated fertility input data specs
