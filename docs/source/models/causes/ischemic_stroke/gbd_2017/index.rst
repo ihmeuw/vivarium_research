@@ -150,7 +150,7 @@ State and Transition Data Tables
      - Notes
    * - -
      - cause-specific mortality rate (csmr)
-     - :math:`\frac{\text{deaths_c495}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c495}}{\text{population}}`
      -
    * - P
      - excess mortality rate (emr)
@@ -166,11 +166,11 @@ State and Transition Data Tables
      -
    * - P
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_c495}} \times \sum\limits_{s \in \text{chronic-sequelae}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_c495}} \times \sum\limits_{s \in \text{chronic-sequelae}} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      -
    * - A
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_c495}} \times \sum\limits_{s \in \text{acute-sequelae}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_c495}} \times \sum\limits_{s \in \text{acute-sequelae}} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      -
    * - S
      - disability weight
@@ -186,7 +186,7 @@ State and Transition Data Tables
      -
    * - S
      - prevalence
-     - :math:`1 - \text{prev_c495}`
+     - :math:`1 - \text{prev\_c495}`
      -
 
 .. list-table:: Transition Data

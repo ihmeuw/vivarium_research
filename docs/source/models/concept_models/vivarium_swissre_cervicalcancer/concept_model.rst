@@ -531,9 +531,9 @@ cervical cancer development, the mean sojourn time is around **4** years.
    distribution **exp(normal(mean=log(27.4), SD=0.17))**
 
 relevant formulas 
- (1) PAF = :math:`\frac{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)}{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)+1}`
- (2) :math:`\text{incidence_BCC_HPV+} =  \text{incidence_BCC}\times(1-PAF)\times\text{RR_hrHPV}`
- (3) :math:`\text{incidence_BCC_HPV-} =  \text{incidence_BCC}\times(1-PAF)`
+ (1) PAF = :math:`\frac{\text{prev\_hrHPV}\times(\text{RR\_hrHPV}-1)}{\text{prev\_hrHPV}\times(\text{RR\_hrHPV}-1)+1}`
+ (2) :math:`\text{incidence\_BCC\_HPV+} =  \text{incidence\_BCC}\times(1-PAF)\times\text{RR\_hrHPV}`
+ (3) :math:`\text{incidence\_BCC\_HPV-} =  \text{incidence\_BCC}\times(1-PAF)`
   
 :underline:`II. HPV vaccination`
 
@@ -559,24 +559,24 @@ Vaccine efficacy
    unvaccinated versus vaccinated.
 
 relevant formulas 
- (1) PAF = :math:`\frac{\text{prev_vaccine}\times(\text{RR_vaccine}-1)}{\text{prev_vaccine}\times(\text{RR_vaccine}-1)+1}`
- (2) :math:`\text{incidence_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
- (3) :math:`\text{incidence_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_no_vaccine_hrHPV}`
- (4) :math:`\text{incidence_BCC_S_hrHPV_with_vaccine} =  \text{incidence_BCC}\times(1-PAF)`
- (5) :math:`\text{incidence_BCC_S_hrHPV_without_vaccine} =  \text{incidence_BCC}\times(1-PAF)\times\text{RR_no_vaccine_CIN2+}`
- (6) :math:`\text{incidence_hrHPV_for_BCC_S_hrHPV_to_BCC_C_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
- (7) :math:`\text{incidence_hrHPV_for_BCC_S_hrHPV_to_BCC_C_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_no_vaccine_hrHPV}`
- (8) :math:`\text{incidence_hrHPV_for_ICC_S_hrHPV_to_ICC_C_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
- (9) :math:`\text{incidence_hrHPV_for_ICC_S_hrHPV_to_ICC_C_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_no_vaccine_hrHPV}`
+ (1) PAF = :math:`\frac{\text{prev\_vaccine}\times(\text{RR\_vaccine}-1)}{\text{prev\_vaccine}\times(\text{RR\_vaccine}-1)+1}`
+ (2) :math:`\text{incidence\_hrHPV\_with\_vaccine} =  \text{incidence\_hrHPV}\times(1-PAF)`
+ (3) :math:`\text{incidence\_hrHPV\_without\_vaccine} =  \text{incidence\_hrHPV}\times(1-PAF)\times\text{RR\_no\_vaccine\_hrHPV}`
+ (4) :math:`\text{incidence\_BCC\_S\_hrHPV\_with\_vaccine} =  \text{incidence\_BCC}\times(1-PAF)`
+ (5) :math:`\text{incidence\_BCC\_S\_hrHPV\_without\_vaccine} =  \text{incidence\_BCC}\times(1-PAF)\times\text{RR\_no\_vaccine\_CIN2+}`
+ (6) :math:`\text{incidence\_hrHPV\_for\_BCC\_S\_hrHPV\_to\_BCC\_C\_hrHPV\_with\_vaccine} =  \text{incidence\_hrHPV}\times(1-PAF)`
+ (7) :math:`\text{incidence\_hrHPV\_for\_BCC\_S\_hrHPV\_to\_BCC\_C\_hrHPV\_without\_vaccine} =  \text{incidence\_hrHPV}\times(1-PAF)\times\text{RR\_no\_vaccine\_hrHPV}`
+ (8) :math:`\text{incidence\_hrHPV\_for\_ICC\_S\_hrHPV\_to\_ICC\_C\_hrHPV\_with\_vaccine} =  \text{incidence\_hrHPV}\times(1-PAF)`
+ (9) :math:`\text{incidence\_hrHPV\_for\_ICC\_S\_hrHPV\_to\_ICC\_C\_hrHPV\_without\_vaccine} =  \text{incidence\_hrHPV}\times(1-PAF)\times\text{RR\_no\_vaccine\_hrHPV}`
  
 .. _swcc5.3.4:
 
 5.3.4 Treatment model
 ~~~~~~~~~~~~~~~~~~~~~
 
- - PAF = :math:`\frac{\text{prev_tx}\times(\text{RR_tx}-1)}{\text{prev_tx}\times(\text{RR_tx}-1)+1}`
- - :math:`\text{incidence_ICC_with_tx} =  \text{incidence_ICC}\times(1-PAF)`
- - :math:`\text{incidence_ICC_without_tx} =  \text{incidence_ICC}\times(1-PAF)\times\text{RR_no_tx}`
+ - PAF = :math:`\frac{\text{prev\_tx}\times(\text{RR\_tx}-1)}{\text{prev\_tx}\times(\text{RR\_tx}-1)+1}`
+ - :math:`\text{incidence\_ICC\_with\_tx} =  \text{incidence\_ICC}\times(1-PAF)`
+ - :math:`\text{incidence\_ICC\_without\_tx} =  \text{incidence\_ICC}\times(1-PAF)\times\text{RR\_no\_tx}`
 
 1. prev_tx = baseline screening coverage * treatment coverage among those who 
    attended cervical cancer screening = 25% * 9% = **2.25%** (Tai et al. 2018)

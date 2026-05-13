@@ -362,13 +362,13 @@ The smoking risk factor should affect the incidence rates of the preclinical *an
 
 .. math::
 
-  incidence_\text{PC_i} = incidence_\text{PC} * (1 - PAF_\text{a,s,l,y}) * rr_i
+  incidence_\text{PC\_i} = incidence_\text{PC} * (1 - PAF_\text{a,s,l,y}) * rr_i
 
 And,
 
 .. math::
 
-  incidence_\text{I_i} = incidence_\text{I} * (1 - PAF_\text{a,s,l,y}) * rr_i
+  incidence_\text{I\_i} = incidence_\text{I} * (1 - PAF_\text{a,s,l,y}) * rr_i
 
 Where,
 
@@ -378,13 +378,13 @@ Where,
    * - Parameter
      - Definition
      - Note
-   * - :math:`incidence_\text{PC_i}`
+   * - :math:`incidence_\text{PC\_i}`
      - Individual simulant's preclinical lung cancer incidence probability
      - 
    * - :math:`incidence_\text{PC}`
      - Population level incidence rate of preclinical lung cancer
      - As defined in :ref:`the lung cancer cause model document <2017_lung_cancer>`
-   * - :math:`incidence_\text{I_i}`
+   * - :math:`incidence_\text{I\_i}`
      - Individual simulant's incidence lung cancer incidence probability
      - 
    * - :math:`incidence_\text{I}`

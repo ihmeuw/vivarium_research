@@ -52,10 +52,12 @@ Alzheimer's Disease Early Detection Simulation
     - Blood-Based Biomarkers
   * - CSF
     - Cerebrospinal Fluid
-  * - computed tomography
-    - CT
+  * - CT
+    - Computed Tomography
   * - MCI
     - Mild Cognitive Impairment
+  * - MSLT
+    - Multistate Life Table
   * - PET
     - Positron Emission Tomography
   * - DALYs
@@ -199,6 +201,13 @@ The basic plan for the design of the simulation is as follows:
     - Hypothetical disease-modifying therapy
     - Reduction in progression rate, adherence
     - Disease model, testing model
+  * - :ref:`Multistate Life Table (MSLT) model
+      <other_models_alzheimers_mslt>`
+    - Testing and treatment among the susceptible population
+    - Counts of BBBM tests, false positive BBBM tests, and treatments
+      initiated (incorrectly) among the susceptible population
+    - Forecasted population and mortality rates, incident preclinical AD
+      cases, testing and treatment rates, specificity of BBBM testing
   * - Economic Impact model
     - Cost-effectiveness analysis
     - Comprehensive cost modeling, ICER calculations
@@ -367,9 +376,10 @@ scenario, and input draw.
       Note that the diagram states `Full treatment effect LONG` and `Full treatment effect SHORT` are both considered the same status (`Full treatment effect`),
       but are stratified by completion status.
   * - Months on treatment
-    - Number of months on treatment (integer between 0 and 9, inclusive)
-    - Count the number of simulants in each (year, sex, age group,
-      months on treatment) stratum. This will be used for cost
+    - Number of months on treatment (integer between 1 and 9,
+      inclusive), among simulants who get treated
+    - Count the number of treated simulants in each (year, sex, age
+      group, months on treatment) stratum. This will be used for cost
       estimates.
   * - Treatment status person-time
     - Status (`In treatment/ Waiting for treatment`, `Full treatment effect`, `Waning treatment effect`, `No treatment effect`).
@@ -698,6 +708,17 @@ scenario, and input draw.
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
     - * Locations: USA, China, Brazil
     - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 12.2
+    - Final runs based on model 12.1, with `minor bugfix to testing
+      ramp-up
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/68>`_
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: All
+      * Population size per draw: 2 million (100 seeds of 20,000
+        simulants each)
+    - **Remove** stratification of disease state transitions and
+      person-time by treatment
     - Default
 
 5.2 V & V Tracking
@@ -1311,8 +1332,15 @@ scenario, and input draw.
     - * Re-run model 5.0 V&V notebook (incidence, prevalence, mortality,
         etc.)
       * Confirm updates to the new observer for months on treatment work as expected
-    - 
-    - 
+    - * Some of the incidence and prevalence plots look slightly worse
+        than before, but still in acceptable range
+      * Months of treatment observer seems to be working as expected
+      * Months to discontinuation has the correct distribution (90% complete
+        all 9 months, 1.25% complete :math:`k` months for :math:`1\le k\le 8`)
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_03_model11.1_vv.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_04_model11.1_vv_treatment.ipynb>`__
   * - 12.0
     - * NOT running V&V on Model 12.0, will instead run on Model 12.1 
     - * N/A
@@ -1324,8 +1352,28 @@ scenario, and input draw.
       * Check that ramp up for testing and treatment is aligned to new input values
       * Check that the new sensitivity value (50%) is implemented correctly
       * Check that simulants are being retested every 3-5 years instead of every 3 years 
-    -
-    -
+    - * Model 5.0 V&V looks the same as in model 11.1, except for small
+        differences in the testing and treatment scenarios
+      * Testing and treatment correctly start at age 65
+      * Ramp-ups look mostly good, but there was a small bug in the
+        dates for the testing ramp-up
+      * Test sensitivity is now 50% as expected
+      * Things look good in Abie's interactive sim notebooks
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_05_model12.1_vv.ipynb>`__
+      * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/c0eaa1fd37bd0f2d1876d0e729490f371418f161/verification_and_validation/2026_02_06_model12.1_vv_testing.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/aeb2159f44bf5bf0942d73471c0d7439b7835d46/verification_and_validation/2026_02_05_model12.1_vv_treatment.ipynb>`__
+      * `AI-assisted interactive sim notebooks
+        <https://github.com/ihmeuw/vivarium_csu_alzheimers/tree/7ff024c495bad7d14bc68f629daed991f0ba8e3b/tests>`__
+  * - 12.2
+    - No V&V (due to difficulty in running notebooks on batched results;
+      model is the same as 12.1 except for minor bugfix), just generate
+      results tables
+    - N/A
+    - * `Results tables and plots in PR 45
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/45>`_
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1

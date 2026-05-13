@@ -239,19 +239,19 @@ The calculation of :math:`\text{ACMRisk}_i` (the all-cause mortality risk for a 
 Starting with this equation, we omit age group subscripts for brevity; all quantities are still age-, sex-, and location-specific.
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
     \text{ACMRisk}_{\text{BW},\text{GA}} &= \text{ACMRisk} \times (1 - \text{PAF}_{\text{LBWSG}}) \times \text{RR}_{\text{BW},\text{GA}},
-    \end{align*}
+    \end{aligned}
 
 where :math:`\text{ACMRisk}_{\text{BW},\text{GA}}` is the all-cause mortality risk for a population with birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`, :math:`\text{ACMRisk}` is the all-cause mortality risk for the total population in one of the neonatal age groups (i.e., :math:`\text{ACMRisk}` equals :math:`\text{ACMRisk}_\text{ENN}` or :math:`\text{ACMRisk}_\text{LNN}` as defined above), :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, and :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative mortality risk for a specific birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`.
 
 To obtain the ACMRisk for a specific simulant (:math:`\text{ACMRisk}_i`), we subtract off the *population* CSMRisks for each modeled subcause for the birth weight and gestational age of the simulant, and then add back in the (potentially pipeline-modified) *individual* CSMRisks for the specific simulant, which might differ from baseline due to intervention coverage:
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
     \text{ACMRisk}_i &= \text{ACMRisk}_{\text{BW}_i,\text{GA}_i} - \sum_k \text{CSMRisk}_{\text{BW}_i,\text{GA}_i}^{k}
     + \sum_k \text{CSMRisk}_{i}^{k},
-    \end{align*}
+    \end{aligned}
 
 where :math:`\text{BW}_i` and :math:`\text{GA}_i` are the birth weight and gestational age for simulant :math:`i`,
 :math:`\text{CSMRisk}_{\text{BW}_i,\text{GA}_i}^{k}` is the cause-specific mortality risk for subcause :math:`k` for a population with the same gestational age and birth weight as this simulant,
@@ -261,10 +261,10 @@ linked from this page).
 In addition to determining which simulants die due to any cause, we also need to determine which subcause is underlying the death.  This is done by sampling from a categorical distribution obtained by renormalizing the CSMRisks:
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
     \text{Pr}[\text{subcause} = k\;|\;\text{neonate died}] &= \frac{\text{CSMRisk}_{i}^{k}}
     {\text{ACMRisk}_i},
-    \end{align*}
+    \end{aligned}
 
 including a special :math:`k=0` for the residual "all other causes" category defined by :math:`\text{CSMRisk}_{i}^{0} = \text{ACMRisk}_i - \sum_{k=1}^K \text{CSMRisk}_{i}^{k}.`
 

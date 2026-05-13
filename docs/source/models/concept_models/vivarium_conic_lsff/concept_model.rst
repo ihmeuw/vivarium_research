@@ -1853,7 +1853,7 @@ done by using `inverse transform sampling`_ to generate all three variables
 *Between* countries, the random vectors :math:`(a,b,c)` should be independent.
 That is, the three random vectors :math:`(a,b,c)_\textit{Ethiopia}`,
 :math:`(a,b,c)_\textit{India}`, and :math:`(a,b,c)_\textit{Nigeria}` should be
-mutually independent, where :math:`(a,b,c)_\text{[country_name]}` indicates
+mutually independent, where :math:`(a,b,c)_\text{[country\_name]}` indicates
 the national estimate  obtained as described above.
 
 .. todo::
