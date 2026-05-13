@@ -1883,8 +1883,33 @@ Wave III
       7. Confirm CGF RR functioning in expected manner (in the interactive simulation)
       8. Confirm intervention coverage affects stillbirth, BW and GA exposures, and neonatal mortality as expected (in interactive simulation and fertility data from maternal simulation)
       9. Confirm whether mean draw baseline values match model 18.0 results
-    - 
+    - * Confirmed results meet GBD risk exposure and cause targets, both at the `draw-specific <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_risk_and_cause_checks.ipynb>`__ and `mean draw <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_risk_and_cause_checks_mean_draw.ipynb>`__ level
+      * Scenario-specific results differed from model 18.0 results (`see notebook comparison here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_scenario_comparison.ipynb>`__). This is hypothesized to be due to an update in the rate-to-probability conversion equation from the exponential approach used for model 18.0 results and the multiplicative approach used for the present results. Given that `model 18.0 results overestimate GBD validation targets <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_risk_and_cause_checks_mean_draw_MODEL_18.ipynb>`__ in a manner not seen in the present results, we have concluded that the discrepancy seen between model 18.0 and the current results is an improvement in the model. To be certain that there are no additional changes to the underlying model introduced with the vivarium framework update, we could rerun the simulation using the exponential rather than multiplicative rate to probability conversion and confirm that scenario-specific results are similar to model 18.0. However, this rerun has not yet been prioritized as of May 2026.
+      * Using the interactive context (`see notebook here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_child_interactive_sim.ipynb>`__), we have confirmed the following are functioning as expected:
+
+        * Antenatal intervention effects on BW and GA exposures
+        * Effect of MMS on stillbirth is being applied (although effect is slightly underestimated from target)
+        * LBWSG exposure is affecting neonatal mortality. NOTE that there are negative mortality risk values for some simulants. This is expected to be a results of national-level mortality rates due to LBWSG-affected CSMRs but subnational ACMRs
+        * Child underweight exposure functioning as expected
+        * CGF RRs assigned as expected
   * - 19.0
     - Re-run model 17.0 V&V for updated Ethiopian locations
     - 
 
+
+
+.. list-table:: Outstanding V&V issues
+  :header-rows: 1
+
+  * - Issue
+    - Explanation
+    - Action plan
+    - Timeline
+  * - MMS effect on stillbirth appears underestimated
+    - Unknown, could be unlucky draws? `See this notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/child_model/viv4.0_child_interactive_sim.ipynb>`__
+    - Keep an eye on this for future model updates
+    - N/A
+  * - Negative neonatal mortality risk values at the indiviudal level 
+    - Thought to be due to national-level CSMRs for LBWSG-affected causes and subnational-level ACMRs leading to illogial pairings of mortality risks
+    - Update artifact for neonatal CSMRs to be subnationally specific
+    - TBD
