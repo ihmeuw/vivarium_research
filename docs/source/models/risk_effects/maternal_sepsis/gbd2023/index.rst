@@ -77,18 +77,18 @@ Vivarium Modeling Strategy
      - 376
      - Hemoglobin concentration
      - During the first six weeks after the end of pregnancy only
-   * - Hemoglobin concentration between 6 weeks and 6 months after the end of pregnancy
+   * - Hemoglobin concentration between 6 weeks and 38 weeks after the end of pregnancy
      - Modelable entity
      - 27596
      - Hemoglobin concentration
-     - During the period from 6 weeks to 6 months after the end of pregnancy only; this is the "non-pregnant" hemoglobin distribution
+     - During the period from 6 weeks to 38 weeks after the end of pregnancy only; this is the "non-pregnant" hemoglobin distribution
 
 Hemoglobin effects after the end of pregnancy
 +++++++++++++++++++++++++++++++++++++++++++++
 
 For simulants who experience an incident case of puerperal sepsis as determined in the :ref:`maternal sepsis <2021_cause_maternal_sepsis_mncnh>` page,
-we will decrease the simulant's hemoglobin concentration during two distinct time periods: the first six weeks after the end of pregnancy and the period from 6 weeks to 6 months after the end of pregnancy.
-We chose the 6 month cutoff because this is the point at which the GBD 2023 shift curve for puerperal sepsis returns to approximately 0, indicating no difference in hemoglobin concentration between those with and without puerperal sepsis.
+we will decrease the simulant's hemoglobin concentration during two distinct time periods: the first six weeks after the end of pregnancy and the period from 6 weeks to 38 weeks after the end of pregnancy.
+We chose the 38 week cutoff for consistency with :ref:`postpartum hemorrhage effects <2023_risk_effect_maternal_hemorrhage>`.
 The magnitude of the decrease will be determined by the maternal sepsis hemoglobin effect estimated in GBD 2023,
 which is time-dependent by days relative to delivery.
 For each time period, we take an average of the continuous hemoglobin shift curve across that time period to determine the hemoglobin shift value applied during that time period.
@@ -104,12 +104,12 @@ Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - This modeling strategy does not consider that the impact of maternal sepsis is already reflected in the pregnancy adjustment factor used for the :ref:`hemoglobin model <2019_hemoglobin_model>` and therefore we may slightly underestimate hemoglobin concentration (and therefore overestimate anemia prevalence) on average during the pregnancy and lactation period by applying an additional negative hemoglobin shift associated with maternal sepsis.
-- This modeling strategy applies an average hemoglobin shift for all incident maternal sepsis cases during the first six weeks after the end of pregnancy and an average hemoglobin shift for all incident maternal sepsis cases during the period from 6 weeks to 6 months after the end of pregnancy, which does not capture the continuous nature of hemoglobin changes over time.
+- This modeling strategy applies an average hemoglobin shift for all incident maternal sepsis cases during the first six weeks after the end of pregnancy and an average hemoglobin shift for all incident maternal sepsis cases during the period from 6 weeks to 38 weeks after the end of pregnancy, which does not capture the continuous nature of hemoglobin changes over time.
   The continuous curves could result in simulants moving between several anemia categories over the course of the postpartum period, which is not captured here.
   This also means that the (relatively arbitrary) choices of durations of these periods are impactful.
 - The GBD shift is derived from USA MarketScan data, which may not be generalizable to other locations.
   In particular, treatment in the USA may be more effective at mitigating the hemoglobin shift associated with maternal sepsis than treatment in other locations, which could lead to an underestimation of the hemoglobin shift in locations with less effective treatment.
-  Additionally, the USA has more access to ultrasound than our modeled locations which could lead to better prevention.
+  Additionally, the USA has more access to antibiotic treatment than our modeled locations which could lead to better prevention.
 
 .. todo::
 
