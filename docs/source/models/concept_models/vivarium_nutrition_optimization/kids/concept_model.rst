@@ -181,8 +181,8 @@ in the simulation will be informed using data specific to the post neonatal age 
     - :ref:`2020 docs<2020_risk_exposure_wasting_state_exposure>`, implemented in wasting paper
     - :ref:`Updated docs for children 6-59 months <2021_risk_exposure_wasting_state_exposure>` (use transitions rate values linked in .csv file) use :ref:`static wasting exposure <2020_risk_exposure_static_wasting>` for children 0-6 months of age (as implemented in IV iron)
     - :ref:`Updated documentation for children 0-6 months included in wasting exposure model document <2021_risk_exposure_wasting_state_exposure>`
-    - Updated to GBD 2023
-    - 
+    - Exposure values updated to GBD 2023. Transition rates need to be recalculated and added.
+    - Currently mixed 2021 and 2023.
   * - Child stunting exposure
     - :ref:`2020 docs<2020_risk_exposure_child_stunting>`, implemented in IV iron, wasting paper
     - Artifact rebuild, effects applied to 1-5 month age group
@@ -261,19 +261,19 @@ in the simulation will be informed using data specific to the post neonatal age 
     - :ref:`Docs here <intervention_wasting_treatment>`, implemented in wasting paper
     - :ref:`Updated modeling strategy (combined protocol data) found here <intervention_wasting_tx_combined_protocol>`. Use draw-level E_SAM and C_SAM parameters linked on this page.
     - 
-    - 
+    - SAM treatment RRs and PAFs will need to be recalculated with updated wasting transition rates.
     - 
   * - MAM tx
     - :ref:`Docs here <intervention_wasting_treatment>`, implemented in wasting paper
     - :ref:`Updated modeling strategy (combined protocol data) found here <intervention_wasting_tx_combined_protocol>`. Use draw-level E_MAM and C_MAM parameters linked on this page.
     - 
-    - 
+    - MAM treatment RRs and PAFs will need to be recalculated with updated wasting transition rates.
     - 
   * - SQLNS
     - :ref:`Docs here <lipid_based_nutrient_supplements>`, implemented in wasting paper
     - :ref:`Updates described in docs <lipid_based_nutrient_supplements>` and `found in this PR <https://github.com/ihmeuw/vivarium_research/pull/1327>`_
     - 
-    - 
+    - SQLNS effect sizes will need to be recalculated with updated wasting transition rates.
     - 
 
 .. list-table:: Cause subcomponents
@@ -334,6 +334,8 @@ in the simulation will be informed using data specific to the post neonatal age 
   Notably, CGF risks do not affect these causes during the neonatal period and we are able to model the effect of the LBWSG risk factor on diarrheal diseases and LRI by including them as "affected unmodeled causes" in the risk effects modeling strategy. 
 
   Also note that the measles cause model age start value in GBD is the postneonatal (GBD 2019)/6-11 month (GBD 2021) age gorups, so these changes are not necessary to apply to the measles cause model.
+
+  Noting that for the 2021 models, we use 2019 data in several cases to account for COVID shocks. In updating to 2023, we were able to use the 2023 data as COVID shocks were no longer present. 
 
 2.3.1 Task tracking for each wave
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
