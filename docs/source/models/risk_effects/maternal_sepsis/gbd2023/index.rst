@@ -50,7 +50,7 @@ GBD 2023 Modeling Strategy
 
     Add link to 2023 anemia impairment page once it is created and describes the new anemia causal attribution process for GBD 2023. 
 
-GBD does not explicitly model maternal sepsis as a risk factor. However, as of GBD 2023, it models a hemoglobin shift associated with puerperal sepsis in the anemia causal attribution process.
+GBD does not explicitly model maternal (also referred to as puerperal) sepsis as a risk factor. However, as of GBD 2023, it models a hemoglobin shift associated with puerperal sepsis in the anemia causal attribution process.
 Newly for GBD 2023, this hemoglobin shift is time-dependent (by days relative to delivery) and is informed by an observational analysis of US MarketScan data.
 The graph below is from the nonfatal methods appendix.
 Note that it compares postpartum people with sepsis to postpartum people without sepsis, so the hemoglobin shift values are *in addition*
@@ -58,7 +58,7 @@ to the hemoglobin changes associated with pregnancy itself.
 
 .. image:: ./hb_shift_plot.png
    :align: center
-   :alt: Plot of hemoglobin shift by days relative to delivery, for both maternal sepsis and puerperal sepsis.
+   :alt: Plot of hemoglobin shift by days relative to delivery, for both maternal hemorrhage and puerperal sepsis.
 
 Vivarium Modeling Strategy
 --------------------------
