@@ -55,7 +55,22 @@ Components with substantial updates (links/updates to come)
 - :ref:`MAM treatment <intervention_wasting_tx_inpatient_sam>`: parameter updates to treated and untreated MAM recovery rates, C_MAM, and E_MAM and some bugfixes to the ``load_mam_treatment_rr`` function as described in a note on the intervention model document
 - :ref:`Child wasting state-specific mortality and morbidity <2021_pem_inpatient_sam_extension>`
 
-.. _nutrition_optimization_extension2.2:
+Assumptions and limitations
+------------------------------
+
+* We do not model any dynamics related to wasting relapse (see the :ref:`wasting x-factor document page <2019_risk_effect_x_factor>` for a summary of relevant literature that demonstrates elevated SAM incidence rates among those with a history of SAM relative to healthy controls). In effect, this model limitation is expected to cause us to undervalue the "complicated SAM treatment through recovery" intervention relative to the "complicated SAM treatment through stabilization" intervention.
+
+* We apply the GBD wasting risk effects that are based on WHZ exposure alone to our modeled moderate acute malnutrition state. Given that there are cases that may be classified as moderate wasting by WHZ alone and classified as SAM when their MUAC and/or oedema exposures are also considered, this may cause us to overestimate the effect of MAM on morbidity and mortality in our model as some higher risk cases by the full acute malnutrition classification criteria will be (mis)classified as MAM using the WHZ-only GBD exposure assessment approach. This may contribute to an overestimation of overall child growth failure attributable mortality in our model.
+
+* Our wasting exposure model is informed by WHZ and oedema exposures only and does not consider MUAC exposures. This may cause us to underestimate the prevalence of acute malnutrition by excluding the cases that only meet the MUAC criteria and not the WHZ or oedema criteria.
+
+* Our approach to modeling SAM mortality separate from the GBD CGF effects in this model causes us to underestimate the expected impact of SQLNS on mortality risk experienced in the SAM states as we will not capture any mortality risk reductions within the SAM states due to improvements in child stunting exposures (and additional associated downstream improvements in child underweight exposure).
+
+* We do not consider dynamics related to wasting seasonality and/or treatment capacity.
+
+* We do not model morbidity associated with our PEM model.
+
+* See additional key limitations of this model on the :ref:`wasting exposure model document <2021_risk_exposure_wasting_with_complicated_sam>`. Limitations specific to each modeled component may be found on individual model documents linked in the above section as well.
 
 Scenario descriptions
 -------------------------
