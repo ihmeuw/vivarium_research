@@ -347,7 +347,7 @@ The below tables can be filled out iteratively as new model runs are requested a
 
       * Neonatal mortality underestimation resolved
       * Overestimation of ACMR for the non-neonatal age group remains despite underestimation of SAM exposure in some age groups -- this was determined to be caused by a bug in the wasting calibration that overestimated the other causes mortality rate among non-SAM states
-      * `Wasting transition rates (overall, not specific to treatment coverage) meetin verification criteria <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/796f993e0639ef9ba068781dd3ad072487adbf54/verification_and_validation/child_model/inpatient_sam_child_wasting_transitions.ipynb>`__, with exception of recovery from uncomplicated SAM to mild child wasting, which is underestimated particularly among older age groups
+      * `Wasting transition rates (overall, not specific to treatment coverage) meeting verification criteria <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/796f993e0639ef9ba068781dd3ad072487adbf54/verification_and_validation/child_model/inpatient_sam_child_wasting_transitions.ipynb>`__, with exception of recovery from uncomplicated SAM to mild child wasting, which is underestimated particularly among older age groups
   * - 3.0
     - * Confirm all intervention effects and coverage match expectations 
     - `See 3.0 wasting transition rate V&V here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/d86b742e39383805e813ee64f2ec219b6267ffdf/verification_and_validation/child_model/inpatient_sam_model_3.0_child_wasting_transitions.ipynb>`__
