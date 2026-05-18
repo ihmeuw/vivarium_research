@@ -281,22 +281,24 @@ The below tables can be filled out iteratively as new model runs are requested a
 
       Exclude post_discharge and/or previous wasting state stratifications from all observers.
     - Can exclude disease observers
+  * - 3.4
+    - `Updated SQ-LNS effects, as found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/eb788c54be2b5aee5766ae8699d4a24c55769a2a/data_prep/sqlns/214_subnational_sqlns_effects_standard_csam.csv>`__
+    - Updated fertility input data specs 
+    - MMS at ANC1 maternal scenario and the following child scenarios:
+
+      * *zero_coverage__*
+      * *universal_sqlns__*
+    - Same as 3.3
+    - Same as 3.3
+    - Same as 3.3
   * - 4.0
-    - Production run test
-    - Updated fertility input data specs
-    - Baseline and MMS at ANC1 maternal scenarios, baseline child scenario
-    - 10 draws
-    - * Same age groups as 3.1, or 0-6 months, 6-18 months, 18-60 months for run time
-      * Can exclude wasting state stratification from mortality observer for run time
-    - Can exclude child underweight and disease observers (observers #5 and #6) for run time
-  * - 4.1
     - Production runs
     - Updated fertility input data specs
-    - * Baseline (maternal and child)
-      * MMS at ANC maternal scenario and child scenarios listed for 3.1
-    - 20 draws
-    - Same as 4.0
-    - Same as 4.0
+    - * Baseline maternal/baseline child (note we do not need to run additional child scenarios for baseline maternal scenario)
+      * MMS at ANC1 and the child scenarios listed for run 3.1
+    - 20 draws to start, may expand up to 50 in increments of 10
+    - Same as 3.3
+    - Same as 3.3
 
 .. list-table:: Model verification and validation tracking
   :widths: 3 10 20
@@ -375,7 +377,9 @@ The below tables can be filled out iteratively as new model runs are requested a
       * `SQ-LNS effects on child stunting match targets. SQ-LNS effects on child wasting underestimated as we have not updated these to match updated wasting transition rates yet <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/f0fa8370f4754323b40c7f1875c39a25bb11078e/verification_and_validation/child_model/inpatient_sam_model_3.3_sqlns_and_scenarios.ipynb>`__
       * `Untreated case fatality rate of SAM within reasonable range of expected validation target <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/006c310e5591197cfb337160c2496046c16c9ba4/emulator/in_patient_sam/validation_plots.ipynb>`__
       * `Baseline fraction of inpatient SAM treatment count among total SAM treatment counts (inpatient and outpatient) matches expectation of complicated fraction value <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/006c310e5591197cfb337160c2496046c16c9ba4/emulator/in_patient_sam/validation_plots.ipynb>`__
-
+  * - 3.4
+    - Confirm SQLNS effects on child wasting
+    - `Looks good! <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/241>`__
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1
@@ -392,10 +396,6 @@ The below tables can be filled out iteratively as new model runs are requested a
     - We have draw/location-specific values for the "worse fraction" parameter in the artifact input data. However, these get overwritten with a constant value of 0.33 within the simulation. This causes some oddities in comparing MAM exposure to artifact values in our V&V notebooks and is not the intention of our modeling strategy.
     - No action for production runs, but we should update our model, documentation, and/or V&V processing appropriately moving forward.
     - TBD
-  * - SQ-LNS effects on child wasting underestimated
-    - Have not rerun calibration of SQLNS on updated wasting transition rates
-    - Rerun SQLNS effect size calibration for updated wasting transition rates and rerun model
-    - Next model run
 
 
 
