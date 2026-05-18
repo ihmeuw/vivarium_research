@@ -199,7 +199,7 @@ The below tables can be filled out iteratively as new model runs are requested a
     * NOTE: V&V of these updated fertility input data can be found here:
 
       * `Scenario-specific intervention coverage matches expectation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/95ad19d1bc897d4f22e66e7f9a292a6c9cbf1a9e/verification_and_validation/pregnancy_model/model_inpatient_sam_inputs_intervention_coverage.ipynb>`__
-      * `Baseline pregnancy model V&V criteria maintained <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/95ad19d1bc897d4f22e66e7f9a292a6c9cbf1a9e/verification_and_validation/pregnancy_model/model_inpatient_sam_inputs_preg_statesipynb>`__
+      * `Baseline pregnancy model V&V criteria maintained <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/95ad19d1bc897d4f22e66e7f9a292a6c9cbf1a9e/verification_and_validation/pregnancy_model/model_inpatient_sam_inputs_preg_states.ipynb>`__
 
 
 .. todo::
