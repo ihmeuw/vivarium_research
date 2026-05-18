@@ -379,7 +379,7 @@ The below tables can be filled out iteratively as new model runs are requested a
       * `Baseline fraction of inpatient SAM treatment count among total SAM treatment counts (inpatient and outpatient) matches expectation of complicated fraction value <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/006c310e5591197cfb337160c2496046c16c9ba4/emulator/in_patient_sam/validation_plots.ipynb>`__
   * - 3.4
     - Confirm SQLNS effects on child wasting
-    - 
+    - `Looks good! <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/241>`__
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1
@@ -396,10 +396,6 @@ The below tables can be filled out iteratively as new model runs are requested a
     - We have draw/location-specific values for the "worse fraction" parameter in the artifact input data. However, these get overwritten with a constant value of 0.33 within the simulation. This causes some oddities in comparing MAM exposure to artifact values in our V&V notebooks and is not the intention of our modeling strategy.
     - No action for production runs, but we should update our model, documentation, and/or V&V processing appropriately moving forward.
     - TBD
-  * - SQ-LNS effects on mild child wasting underestimated
-    - Have not rerun calibration of SQLNS on updated wasting transition rates
-    - Rerun SQLNS effect size calibration for updated wasting transition rates and rerun model
-    - 3.4
 
 
 
