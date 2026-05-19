@@ -1867,10 +1867,10 @@ Default stratifications to all observers should include scenario and input draw.
     - RT-owned data generation that is blocked by Separate LBWSG affected causes run
   * -
     - Effects of maternal disorders on postpartum hemoglobin
-    - Effects of maternal hemorrhage (and possibly maternal sepsis) on postpartum hemoglobin. Model run is blocked by 
+    - Effects of maternal hemorrhage on postpartum hemoglobin. Model run is blocked by 
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
-    - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ and `consider adding risk effect for maternal sepsis <https://jira.ihme.washington.edu/browse/SSCI-2462>`__
+    - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ 
   * - 
     - Separate LBWSG affected causes
     - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__
@@ -1883,7 +1883,12 @@ Default stratifications to all observers should include scenario and input draw.
     - All
     - Default, note that observed value for ultrasound is now "ultrasound summary" rather than "ultrasound type" with this update
     - Updated data values for trimester-specific GA error values, updated facility choice model and values that reflect the updated GA error values, Remaining pregnancy model refactor run
-
+  * -
+    - Effects of maternal sepsis on postpartum hemoglobin
+    - Effects of maternal sepsis on postpartum hemoglobin as described :ref:`on the sepsis risk effects page <2023_risk_effect_maternal_sepsis>`
+    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - Default
+    - 
 
 .. note:: 
 
@@ -2999,7 +3004,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
   * - 
     - Effects of maternal disorders on postpartum hemoglobin
-    - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident maternal disorders
+    - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident maternal disorders (postpartum hemorrhage and maternal sepsis) 
       * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
     - 
     -
