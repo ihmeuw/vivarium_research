@@ -163,7 +163,7 @@ State and Transition Data Tables
      - 
    * - PC
      - prevalence
-     - :math:`\frac{\text{i_PC} \times MST}{1 - \text{prev_c441}}`
+     - :math:`\frac{\text{i\_PC} \times MST}{1 - \text{prev\_c441}}`
      - We scale the prevalence of PC state by (1 - prev_c441) to account for zero 
        prev_C at initialization. Formula used to calculate `i_PC` is specified 
        in `Transition Data` table.
@@ -181,11 +181,11 @@ State and Transition Data Tables
      - Assume zero clinical cases for insured population at initialization 
    * - C
      - excess mortality rate
-     - :math:`\frac{\text{csmr_c441}}{\text{prev_c441}}`
+     - :math:`\frac{\text{csmr\_c441}}{\text{prev\_c441}}`
      - 
    * - C
      - disabilty weights
-     - :math:`\frac{\displaystyle{\sum_{s\in\text{s_c441}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}}{\displaystyle{\sum_{s\in\text{s_c441}}}\scriptstyle{\text{prev}_s}}`
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{s\_c441}}}\scriptstyle{\text{disability\_weight}_s\,\times\,\text{prev}_s}}{\displaystyle{\sum_{s\in\text{s\_c441}}}\scriptstyle{\text{prev}_s}}`
      - weighted average of colon and rectum cancer disability weight over all 
        sequelae including ids s_296, s_298, s_299, s_5519, s_5522, s_5525
    * - R
@@ -213,7 +213,7 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - :math:`\frac{\text{incidence_c441(age + MST)}}{1-\text{prev_c441}}`
+     - :math:`\frac{\text{incidence\_c441(age + MST)}}{1-\text{prev\_c441}}`
      - incidence of PC state among susceptible population
    * - i_c
      - PC

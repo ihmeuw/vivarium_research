@@ -141,7 +141,7 @@ sublingually received misoprostol during labor on the prevention of postpartum h
     - [Gallos-et-al-2018-Cochrane-Review]_
     - 
   * - mean_rr
-    - :math:`\text{RR}^\text{no misoprostol} * (1 - p_\text{baseline coverage}) + p_\text{baseline_coverage}`
+    - :math:`\text{RR}^\text{no misoprostol} * (1 - p_\text{baseline coverage}) + p_\text{baseline\_coverage}`
     - N/A
     - Despite intervention eligibility criteria of attending ANC, we will use :math:`p_\text{baseline coverage}` defined in the baseline coverage section above among all home births (regardless of ANC attendance) to calculate the mean_rr and PAF values
   * - PAF
