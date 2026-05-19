@@ -3003,8 +3003,8 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     - 
   * - 
-    - Effects of maternal disorders on postpartum hemoglobin
-    - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident maternal disorders (postpartum hemorrhage and maternal sepsis) 
+    - Effects of postpartum hemorrhage on postpartum hemoglobin
+    - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident PPH
       * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
     - 
     -
@@ -3025,6 +3025,12 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type and timing (specific distribution of errors assessed in the interactive simulation and summary "confusion matrix" assessed as part of the facility choice model V&V targets)
     - 
     - 
+  * - 
+    - Effects of maternal sepsis on postpartum hemoglobin
+    - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident maternal sepsis
+      * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
+    - 
+    -
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
