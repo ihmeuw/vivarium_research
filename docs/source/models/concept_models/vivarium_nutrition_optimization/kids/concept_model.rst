@@ -335,7 +335,7 @@ in the simulation will be informed using data specific to the post neonatal age 
 
   Also note that the measles cause model age start value in GBD is the postneonatal (GBD 2019)/6-11 month (GBD 2021) age gorups, so these changes are not necessary to apply to the measles cause model.
 
-  Noting that for the 2021 models, we use 2019 data in several cases to account for COVID shocks. In updating to 2023, we were able to use the 2023 data as COVID shocks were no longer present. 
+  Noting that for the 2021 models, we use 2019 data in several cases to account for COVID shocks. In updating to 2023, we were able to use the 2023 data as COVID shocks were assumed to be no longer present. 
 
 2.3.1 Task tracking for each wave
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
