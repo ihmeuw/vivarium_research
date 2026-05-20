@@ -139,7 +139,7 @@ Documents that contain information specific to the overall model and the child s
     - This will continue to use GBD 2021, PAFs being calculated by JKUAT.
     - NOTE: Due to substantial changes in GBD methodology that would necessitate breaking the maternal disorders cause model apart and updating to non-log-linear risk effects, this model was NOT updated to GBD 2023. 
   * - Risk effects
-    - :ref:`Maternal hemorrhage effect on hemoglobin<2019_risk_effect_maternal_hemorrhage>`
+    - :ref:`Maternal hemorrhage effect on hemoglobin<2019_2021_risk_effect_maternal_hemorrhage>`
     - Updated GBD 2021
     - This will continue to use GBD 2021 and is behind GBD methods.
     - NOTE: THIS IS NOT UPDATED TO GBD 2023. Newer methods are being used in MNCNH that we might consider. We also should consider rerunning the calculation of the ratio of moderate:severe hemorrhage.
