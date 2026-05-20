@@ -137,7 +137,7 @@ Documents that contain information specific to the overall model and the child s
     - :ref:`Hemoglobin<2019_risk_effect_iron_deficiency>`
     - Do not include effect on birth outcomes (stillbirth), change from IV iron. Updated GBD 2021
     - This will continue to use GBD 2021, PAFs being calculated by JKUAT.
-    - NOTE: THIS IS NOT UPDATED TO GBD 2023. 
+    - NOTE: Due to substantial changes in GBD methodology that would necessitate breaking the maternal disorders cause model apart and updating to non-log-linear risk effects, this model was NOT updated to GBD 2023. 
   * - Risk effects
     - :ref:`Maternal hemorrhage effect on hemoglobin<2019_risk_effect_maternal_hemorrhage>`
     - Updated GBD 2021

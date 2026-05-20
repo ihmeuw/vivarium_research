@@ -175,7 +175,7 @@ in the simulation will be informed using data specific to the post neonatal age 
     - :ref:`2019 docs<2019_risk_exposure_lbwsg>`, implemented in IV iron
     - Artifact rebuild
     - 
-    - Updated to GBD 2023
+    - 
     - 
   * - Child wasting exposure
     - :ref:`2020 docs<2020_risk_exposure_wasting_state_exposure>`, implemented in wasting paper
@@ -238,7 +238,7 @@ in the simulation will be informed using data specific to the post neonatal age 
     - Only wasting is documented :ref:`found here <2019_risk_effect_wasting>`. Docs need updating
     - Updated to 2021 values, added underweight risk effects, added malaria as affected outcome. :ref:`Updated version of CGF risk effects <2021_risk_effect_cgf>`
     - None
-    - Stunting and underweight were updated through artifact code changes. Wasting requires data generation and will be recalculated as part of JKUAT work.
+    - Stunting and underweight were updated through artifact code changes. Wasting should be confirmed that updates are not required to RR values. CGF PAF data generation is needed as part of JKUAT work.
     - Currently mixed 2021 and 2023.
   * - Target area
     - CGF
