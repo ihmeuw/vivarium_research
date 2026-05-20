@@ -221,12 +221,12 @@ mortality rate.
     }
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
         p(\text{sepsis}) 
         &= \sum_{\text{paths without probiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{no probiotics})\\
         &+ \sum_{\text{paths with probiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{probiotics})\\[.1in]
         p(\text{sepsis}|\text{no probiotics}) &= \text{RR}_\text{no probiotics} \cdot p(\text{sepsis}|\text{probiotics})
-    \end{align*}
+    \end{aligned}
 
 where :math:`p(\text{sepsis})` is the probability of dying from sepsis in the general population, and :math:`p(\text{sepsis}|\text{probiotics})` 
 and :math:`p(\text{sepsis}|\text{no probiotics})` are the probability of dying from sepsis in setting with and without access to probiotics.  

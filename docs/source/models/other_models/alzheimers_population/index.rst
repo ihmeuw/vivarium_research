@@ -146,11 +146,11 @@ among the above quantities are:
 
 .. math::
 
-  \begin{align*}
+  \begin{aligned}
   X_{g,t} = S \cdot X^\text{real}_{g,t}
   \quad\text{and}\quad
   X^\text{real}_{g,t} = p_{g,t} \cdot Y^\text{real}_{g,t}.
-  \end{align*}
+  \end{aligned}
 
 (For :math:`t\ne t_0`, the first relation assumes that our simulated
 population accurately tracks the real-world population over time.)
@@ -188,7 +188,7 @@ known parameters.
 
   .. math::
 
-    \begin{align*}
+    \begin{aligned}
     \sum_g X_{g,t_0}
     = \sum_g X_{t_0}
       \cdot \frac{p_{g,t_0} \cdot Y^\text{real}_{g,t_0}}
@@ -200,7 +200,7 @@ known parameters.
     = X_{t_0} \cdot
       \frac{X^\text{real}_{t_0}}{X^\text{real}_{t_0}}
     = X_{t_0}.
-    \end{align*}
+    \end{aligned}
 
 .. todo::
 
@@ -377,7 +377,7 @@ terms of these values.
 
 .. |AD cause model data sources table| replace::
   :ref:`AD cause model data sources table
-  <2021_cause_alzheimers_presymptomatic_mci_data_sources_table>`
+  <2023_cause_alzheimers_preclinical_mci_data_sources_table>`
 
 .. |Attention box on the AD cause model page| replace::
   :ref:`Attention box on the AD cause model page

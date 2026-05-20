@@ -249,27 +249,27 @@ State and Transition Data Tables
      -
    * - M
      - prevalence
-     - :math:`{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c589}}}`
+     - :math:`{\sum_{s\in \text{prevalence\_sequelae\_mod.sub\_causes.c589}}}`
      - = prevalence of Albuminuria sequelae + CKD stage III sequelae + CKD stage IV sequelae
    * - Sev
      - prevalence
-     - :math:`{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c589}}}`
+     - :math:`{\sum_{s\in \text{prevalence\_sequelae\_sev.sub\_causes.c589}}}`
      - = prevalence of CKD stage V sequelae + CKD end stage sequelae
    * - cat1
      - excess mortality rate (EMR) of cat1
-     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - :math:`\frac{\text{CSMR*\_c589}}{\text{prevalencec589}}`
      - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
    * - cat2
      - excess mortality rate (EMR) of cat2
-     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - :math:`\frac{\text{CSMR*\_c589}}{\text{prevalencec589}}`
      - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
    * - cat3
      - excess mortality rate (EMR) of cat3
-     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - :math:`\frac{\text{CSMR*\_c589}}{\text{prevalencec589}}`
      - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
    * - cat4
      - excess mortality rate (EMR) of cat4
-     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - :math:`\frac{\text{CSMR*\_c589}}{\text{prevalencec589}}`
      - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
    * - cat5
      - excess mortality rate (EMR) of cat4
@@ -277,23 +277,23 @@ State and Transition Data Tables
      - this equals 0 because the disease state mapped to this is 'susceptible'
    * - M
      - excess mortality rate (EMR) of moderate CKD
-     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - :math:`\frac{\text{CSMR*\_c589}}{\text{prevalencec589}}`
      - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
    * - cat1
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{cat1}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat1}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{cat1}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat1}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for IKF cat1 (sequelae mapped to IKF cat1)
    * - cat2
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{cat2}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat2}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{cat2}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat2}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for IKF cat2 (sequelae mapped to IKF cat2)
    * - cat3
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{cat3}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat3}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{cat3}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat3}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for IKF cat3 (sequelae mapped to IKF cat3)
    * - cat4
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{cat4}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat4}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{cat4}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat4}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for IKF cat4 (sequelae mapped to IKF cat4)
    * - cat5
      - disability weight
@@ -301,7 +301,7 @@ State and Transition Data Tables
      - this equals 0 because the disease state mapped to this is 'susceptible'
    * - All
      - cause-specific mortality rate
-     - :math:`\frac{\text{deaths_c589}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c589}}{\text{population}}`
      - calculated CSMR, not a direct input from GBD 2017
 
 

@@ -187,27 +187,27 @@ States Data
      - Notes
    * - All
      - cause-specific mortality rate (csmr)
-     - :math:`\frac{\text{deaths_c496}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c496}}{\text{population}}`
      -
    * - :math:`\text{D}_A`
      - acute cause-specific mortality rate (csmr)
-     - :math:`\frac{\text{acute_deaths_c496}}{\text{population}}`
+     - :math:`\frac{\text{acute\_deaths\_c496}}{\text{population}}`
      - custom CSMR split
    * - :math:`\text{D}_C`
      - chronic cause-specific mortality rate (csmr)
-     - :math:`\frac{\text{chronic_deaths_c496}}{\text{population}}`
+     - :math:`\frac{\text{chronic\_deaths\_c496}}{\text{population}}`
      - custom CSMR split
    * - S
      - prevalence
-     - :math:`1-\text{prevalence_c496}`
+     - :math:`1-\text{prevalence\_c496}`
      - 
    * - A
      - prevalence
-     - :math:`\sum\limits_{s \in sequelae} \text{acute_prevalence}_s`
+     - :math:`\sum\limits_{s \in sequelae} \text{acute\_prevalence}_s`
      - 
    * - C
      - prevalence
-     - :math:`\sum\limits_{s \in sequelae} \text{chronic_prevalence}_s`
+     - :math:`\sum\limits_{s \in sequelae} \text{chronic\_prevalence}_s`
      - 
    * - S
      - excess mortality rate (emr)
@@ -227,11 +227,11 @@ States Data
      - 
    * - A
      - disability weight
-     - :math:`\frac{1}{\text{acute_prevalence_c496}} \times \sum\limits_{s \in sequelae} \text{disability_weight}_s \times \text{acute_prevalence}_s`
+     - :math:`\frac{1}{\text{acute\_prevalence\_c496}} \times \sum\limits_{s \in sequelae} \text{disability\_weight}_s \times \text{acute\_prevalence}_s`
      - 
    * - C
      - disability weight
-     - :math:`\frac{1}{\text{chronic_prevalence_c496}} \times \sum\limits_{s \in sequelae} \text{disability_weight}_s \times \text{chronic_prevalence}_s`
+     - :math:`\frac{1}{\text{chronic\_prevalence\_c496}} \times \sum\limits_{s \in sequelae} \text{disability\_weight}_s \times \text{chronic\_prevalence}_s`
      - 
 
 Transition Data
