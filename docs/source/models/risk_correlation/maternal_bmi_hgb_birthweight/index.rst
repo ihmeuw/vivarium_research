@@ -165,7 +165,7 @@ Therefore, the association between maternal BMI/hemoglobin joint risk exposure a
 
 .. math::
 
-   BW_\text{i, shifted} = BW_\text{i, unshifted} + shift_\text{cat_i, adjusted}
+   BW_\text{i, shifted} = BW_\text{i, unshifted} + shift_\text{cat\_i, adjusted}
 
 Where,
 

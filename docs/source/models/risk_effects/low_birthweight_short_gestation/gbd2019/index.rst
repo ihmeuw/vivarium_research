@@ -431,21 +431,21 @@ March 2021.
 
     .. math::
 
-      \text{ga_grid} &=
+      \text{ga\_grid} &=
         \{ x_\text{cat} : \text{cat is a LBWSG category}\}
         \cup \{0,42\}\\
-      \text{bw_grid} &=
+      \text{bw\_grid} &=
         \{ y_\text{cat} : \text{cat is a LBWSG category}\}
         \cup \{0,4500\},
 
     and then define the rectangular grid :math:`G` as the `Cartesian product`_
     of these coordinates,
 
-    .. math:: G = \text{ga_grid} \times \text{bw_grid}.
+    .. math:: G = \text{ga\_grid} \times \text{bw\_grid}.
 
     More explicitly, we can list the 13 :math:`x`-coordinates in
-    :math:`\text{ga_grid}` and 11 :math:`y`-coordinates in
-    :math:`\text{bw_grid}` in increasing order,
+    :math:`\text{ga\_grid}` and 11 :math:`y`-coordinates in
+    :math:`\text{bw\_grid}` in increasing order,
 
     .. math::
       :nowrap:
