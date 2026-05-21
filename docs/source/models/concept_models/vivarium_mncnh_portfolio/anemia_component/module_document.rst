@@ -221,8 +221,8 @@ Anemia YLDs are estimated according to the following steps:
 
 - We assume uniform distribution across assumed plausible ranges for timing of ANC visits as well as timing of pregnancies that end in ectopic pregnancy/miscarriage/abortion (as detailed on the :ref:`pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>`) rather than informing these parameters with data
 - We assume that interventions affect anemia YLDs at the time of administration at ANC (as according to the timed assumptions in the two prior bullets) with no additional delay 
-- We do not model any deaths in the 9 months after pregnancy, so we assume that all simulants who survive labor also survive 9 months afterward and therefore experience anemia YLDs during this period. This may lead to a slight overestimation of anemia YLDs.
-- We do not model simulants changing age groups during the 9 months after pregnancy, and thereby slightly underestimate the ages
+- We do not model any deaths in the 39 weeks after pregnancy, so we assume that all simulants who survive labor also survive 39 weeks afterward and therefore experience anemia YLDs during this period. This may lead to a slight overestimation of anemia YLDs.
+- We do not model simulants changing age groups during the 39 weeks after pregnancy, and thereby slightly underestimate the ages
   of people in this period.
   The impact of this on anemia YLDs depends on how hemoglobin differs between a simulant's age group and the next:
   if the next age group has higher hemoglobin, and the simulant would have aged into it, then we will underestimate anemia YLDs during this period,
