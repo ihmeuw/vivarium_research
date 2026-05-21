@@ -75,7 +75,7 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
     - 
   * - Antepartum hemorrhage incidence
     - :ref:`Antepartum hemorrhage module <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
-    - Incident antepartum hemorrhage cases decrease hemoglobin exposure between 6 weeks and 9 months postpartum (in addition to affecting hemoglobin exposure at the end of pregnancy)
+    - Incident antepartum hemorrhage cases decrease hemoglobin exposure between birth and 6 weeks postpartum, and between 6 weeks and 9 months postpartum (in addition to affecting hemoglobin between incidence and birth)
     -
 
 

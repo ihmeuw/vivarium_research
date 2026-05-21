@@ -387,7 +387,9 @@ Limitations
 
 * Because we use the YLD rate and mortality rate of maternal hemorrhage overall, we are assuming that these are the same for postpartum hemorrhage as for antepartum hemorrhage.
 * We assume that all postpartum hemorrhage fatalities occur among those with severe postpartum hemorrhage, which may not be the case in reality.
-* We assume that postpartum hemorrhage is uncorrelated with antepartum hemorrhage. In reality, there may be both confounding and a causal effect.
+* We assume that postpartum hemorrhage is uncorrelated with antepartum hemorrhage, except for the causal effect through hemoglobin. In reality, there may be both confounding and a direct causal effect.
+* Splitting out maternal hemorrhage (modeled as one cause in the GBD) into antepartum and postpartum hemorrhage (modeled as two separate causes in our model, with a vicious cycle between them through hemoglobin)
+  will lead us to overestimate the total burden of maternal hemorrhage relative to GBD due to cases that have both antepartum and postpartum hemorrhage and have double-shifted hemoglobin.
 
 References
 ----------

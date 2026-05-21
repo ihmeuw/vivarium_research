@@ -134,7 +134,7 @@ Summary of modeling strategy
 ++++++++++++++++++++++++++++
 
 We will not model antepartum hemorrhage as a state machine, but as a one-time decision.
-We will choose whether the pregnant person has antepartum hemorrhage at *some* time between the later ANC visit (if there is one) and the end of pregnancy.
+We will choose whether the pregnant person has antepartum hemorrhage at *some* time during pregnancy.
 To obtain the decision probabilities,
 we will convert GBD's annual rates
 among females of reproductive age into conditional event rates.
@@ -375,6 +375,8 @@ Limitations
   so we don't think there are likely to be many cases of ANC visits occurring after the onset of antepartum hemorrhage.
 * We assume that antepartum hemorrhage is uncorrelated with the length of pregnancy and the probability of stillbirth (except through hemoglobin),
   which is likely not true.
+* Splitting out maternal hemorrhage (modeled as one cause in the GBD) into antepartum and postpartum hemorrhage (modeled as two separate causes in our model, with a vicious cycle between them through hemoglobin)
+  will lead us to overestimate the total burden of maternal hemorrhage relative to GBD due to cases that have both antepartum and postpartum hemorrhage and have double-shifted hemoglobin.
 
 References
 ----------
