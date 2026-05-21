@@ -332,13 +332,13 @@ Pregnancy component
         * Ferritin screening coverage/result
         * True hemoglobin exposure (dichotomous)
       - * :ref:`Anemia screening interventions <anemia_screening>`
-    * - :ref:`Hemoglobin at the end of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+    * - :ref:`Hemoglobin after later ANC visit <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
       - * Hemoglobin after first trimester ANC visit
         * Later pregnancy ANC attendance
         * Hemoglobin screening coverage/result
         * Ferritin screening coverage/result
         * Receipt of IFA/MMS at first trimester ANC visit
-      - * Hemoglobin at end of pregnancy
+      - * Hemoglobin after later ANC visit
         * Coverage of IFA/MMS at any time in pregnancy
         * Coverage of IV iron 
       - * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
@@ -363,6 +363,17 @@ Pregnancy component
         * Estimated gestational age
         * Believed preterm status
       - 
+    * - :ref:`Antepartum hemorrhage <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
+      - * Maternal age at end of pregnancy
+        * Hemoglobin after later ANC visit
+      - * Antepartum hemorrhage incidence
+        * Antepartum hemorrhage death
+      - :ref:`Antepartum hemorrhage model <2023_cause_antepartum_hemorrhage_mncnh>`
+    * - :ref:`Hemoglobin at end of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
+      - * Hemoglobin after later ANC visit
+        * Antepartum hemorrhage incidence
+      - * Hemoglobin at end of pregnancy
+      - :ref:`Antepartum hemorrhage risk effects <2023_risk_effect_maternal_hemorrhage>` 
 
 .. _mncnh_portfolio_intrapartum_component:
 
@@ -414,7 +425,7 @@ Intrapartum component
         * Hemoglobin at end of pregnancy
       - * Maternal disorders outcomes (see outcome table)
       - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
-        * :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+        * :ref:`Postpartum hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>`
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
         * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
@@ -471,11 +482,11 @@ Postpartum component
     - Nested subcomponents
   * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
     - * Hemoglobin at end of pregnancy
-      * Maternal hemorrhage incidence
+      * Postpartum hemorrhage incidence
     - * Hemoglobin during the first six weeks after the end of pregnancy
       * Hemoglobin between six weeks and nine months after the end of pregnancy
     - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
-      * :ref:`Maternal hemorrhage risk effects <2023_risk_effect_maternal_hemorrhage>` 
+      * :ref:`Postpartum hemorrhage risk effects <2023_risk_effect_maternal_hemorrhage>` 
   * - :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`
     - * Hemoglobin at start of pregnancy
       * Hemoglobin at end of pregnancy
@@ -1866,11 +1877,11 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - RT-owned data generation that is blocked by Separate LBWSG affected causes run
   * -
-    - Effects of maternal disorders on postpartum hemoglobin
-    - Effects of maternal hemorrhage on postpartum hemoglobin. Model run is blocked by 
+    - E-MOTIVE and postpartum hemorrhage effect on postpartum hemoglobin
+    - Effects of postpartum hemorrhage on postpartum hemoglobin, as well as E-MOTIVE on postpartum hemorrhage
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
-    - Research tickets to `update maternal hemorrhage risk effect docs to GBD 2023 <https://jira.ihme.washington.edu/browse/SSCI-2457>`__ 
+    - Research tickets to `document E-MOTIVE <https://jira.ihme.washington.edu/browse/SSCI-2584>`__, postpartum hemoglobin
   * - 
     - Separate LBWSG affected causes
     - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__
