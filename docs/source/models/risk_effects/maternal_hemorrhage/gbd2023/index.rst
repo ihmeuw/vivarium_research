@@ -74,19 +74,19 @@ Vivarium Modeling Strategy
      - 376
      - Hemoglobin concentration
      - During the first six weeks after the end of pregnancy only
-   * - Hemoglobin concentration between 6 weeks and 9 months after the end of pregnancy
+   * - Hemoglobin concentration between 6 weeks and 39 weeks after the end of pregnancy
      - Modelable entity
      - 27596
      - Hemoglobin concentration
-     - During the period from 6 weeks to 9 months after the end of pregnancy only; this is the "non-pregnant" hemoglobin distribution
+     - During the period from 6 weeks to 39 weeks after the end of pregnancy only; this is the "non-pregnant" hemoglobin distribution
 
 Hemoglobin effects after the end of pregnancy
 +++++++++++++++++++++++++++++++++++++++++++++
 
 For simulants who experience an incident case of postpartum hemorrhage (moderate or severe) as determined in the :ref:`postpartum hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>` page,
-we will decrease the simulant's hemoglobin concentration during two distinct time periods: the first six weeks after the end of pregnancy and the period from 6 weeks to 9 months (which we approximate as 34 weeks) after the end of pregnancy.
-We chose the 9 month cutoff because this is the point at which the GBD 2023 shift curve for postpartum hemorrhage returns to approximately 0, indicating no difference in hemoglobin concentration between those with and without postpartum hemorrhage;
-we do not find the positive shifts after 9 months postpartum to be biologically plausible and therefore do not apply a positive hemoglobin shift after 9 months postpartum.
+we will decrease the simulant's hemoglobin concentration during two distinct time periods: the first six weeks after the end of pregnancy and the period from 6 weeks to 39 weeks after the end of pregnancy.
+We chose the 39 week cutoff because this is the point at which the GBD 2023 shift curve for postpartum hemorrhage returns to approximately 0, indicating no difference in hemoglobin concentration between those with and without postpartum hemorrhage;
+we do not find the positive shifts after 39 weeks postpartum to be biologically plausible and therefore do not apply a positive hemoglobin shift after 39 weeks postpartum.
 The magnitude of the decrease will be determined by the postpartum hemorrhage hemoglobin effect estimated in GBD 2023,
 which is time-dependent by days relative to delivery.
 For each time period, we take an average of the continuous hemoglobin shift curve across that time period to determine the hemoglobin shift value applied during that time period.
@@ -98,14 +98,14 @@ Hemoglobin effects at antepartum hemorrhage
 
 For simulants who experience an incident case of antepartum hemorrhage as determined in the :ref:`antepartum hemorrhage <2023_cause_antepartum_hemorrhage_mncnh>` page,
 we will decrease the simulant's hemoglobin concentration during two distinct time periods: from antepartum hemorrhage incidence
-until six weeks after the end of pregnancy and from 6 weeks after the end of pregnancy until 9 months after the end of pregnancy.
-We chose the 9 month cutoff for consistency with postpartum hemorrhage effects, see section above.
+until six weeks after the end of pregnancy and from 6 weeks after the end of pregnancy until 39 weeks after the end of pregnancy.
+We chose the 39 week cutoff for consistency with postpartum hemorrhage effects, see section above.
 
 As with postpartum hemorrhage, the magnitude of the decrease will be determined by an average of the continuous hemoglobin shift curve from GBD 2023.
 This was calculated for postpartum hemorrhage and used days relative to delivery.
 We will apply the same curve for antepartum hemorrhage, but we will shift the curve to be relative to antepartum hemorrhage incidence rather than delivery.
 Also, to simplify the calculation of shifts, we will assume that all incident antepartum hemorrhage cases occur a week before delivery;
-so the shift for the first time period (from antepartum hemorrhage incidence until six weeks after the end of pregnancy) will be an average of the curve from 0 to 49 days after delivery and the shift for the second time period (from 6 weeks after the end of pregnancy until 9 months after the end of pregnancy) will be an average of the curve from 49 days after delivery to 245 days after delivery.
+so the shift for the first time period (from antepartum hemorrhage incidence until six weeks after the end of pregnancy) will be an average of the curve from 0 to 49 days after delivery and the shift for the second time period (from 6 weeks after the end of pregnancy until 39 weeks after the end of pregnancy) will be an average of the curve from 49 days after delivery to 280 days after delivery.
 This approximation prevents us from having to calculate a unique shift curve for each simulant based on their specific timing of antepartum hemorrhage incidence, which would be computationally intensive.
 
 Validation and Verification Criteria
