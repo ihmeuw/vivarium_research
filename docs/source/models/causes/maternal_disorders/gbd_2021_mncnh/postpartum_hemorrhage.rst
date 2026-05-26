@@ -297,11 +297,10 @@ calculations.
       - Note
     * - postpartum_fraction
       - fraction of maternal hemorrhage cases that are postpartum
-      - The exponentiated prediction of the GBD 2023 crosswalk model, age group specific using the age midpoint of the age group
+      - The exponentiated prediction of the GBD 2023 postpartum hemorrhage crosswalk model, age group specific using the age midpoint of the age group
       - Sample uncertainty from the normal distribution of uncertainty around the prediction.
-        See https://github.com/ihmeuw/vivarium_gates_mncnh/pull/308 for data and details about how to extract this value.
-        Note that there is a separate crosswalk for antepartum hemorrhage specifically, but there is no guarantee of the antepartum
-        and postpartum fractions summing to 1 in the GBD data, so we will use the postpartum fraction from the overall maternal hemorrhage crosswalk to calculate the antepartum fraction as (1 - postpartum_fraction).
+        Clip to be no greater than 1 (which should very rarely occur).
+        See `the notebook <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ec5b9d663a929beb1a9aefad3917fa1b03e29e01/src/vivarium_gates_mncnh/data/postpartum_hemorrhage_split/postpartum_hemorrhage_split.ipynb>`__ for more details about the crosswalk model and how to extract this value.
     * - ir
       - postpartum hemorrhage incidence risk per birth
       - postpartum_fraction * incidence_c367 / birth_rate
