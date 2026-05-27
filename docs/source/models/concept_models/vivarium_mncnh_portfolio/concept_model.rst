@@ -354,8 +354,7 @@ Pregnancy component
         * Sex of infant
         * Birthweight
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-          
-          * :ref:`LBWSG exposure <2021_risk_exposure_lbwsg>`
+        * :ref:`LBWSG exposure <2021_risk_exposure_lbwsg>`
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
       - * ANC attendance category
         * Gestational age at end of pregnancy
@@ -363,12 +362,17 @@ Pregnancy component
         * Estimated gestational age
         * Believed preterm status
       - 
-    * - :ref:`Antepartum hemorrhage <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
-      - * Maternal age at end of pregnancy
+    * - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
+      - * Broad pregnancy outcome
+        * Maternal age at end of pregnancy
         * Hemoglobin after later ANC visit
       - * Antepartum hemorrhage incidence
+        * Antepartum hemorrhage YLDs
         * Antepartum hemorrhage death
-      - :ref:`Antepartum hemorrhage model <2023_cause_antepartum_hemorrhage_mncnh>`
+        * Abortion/miscarriage/ectopic pregnancy maternal disorders YLDs
+        * Abortion/miscarriage/ectopic pregnancy maternal disorders death
+      - * :ref:`Antepartum hemorrhage model <2023_cause_antepartum_hemorrhage_mncnh>`
+        * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
     * - :ref:`Hemoglobin at end of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
       - * Hemoglobin after later ANC visit
         * Antepartum hemorrhage incidence
@@ -429,7 +433,6 @@ Intrapartum component
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
         * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
-        * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
 
 .. _mncnh_portfolio_neonatal_component:
 

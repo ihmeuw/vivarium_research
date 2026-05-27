@@ -213,15 +213,15 @@ Probabilities
 +++++++++++++
 
 The antepartum hemorrhage cause model requires three probabilities, the
-incidence risk (ir) per pregnancy, the severe fraction (severe_fraction), and the case fatality rate (cfr), for use
-in the decision graph. The incidence risk per pregnancy will be computed as
+incidence risk (ir) per birth, the severe fraction (severe_fraction), and the case fatality rate (cfr), for use
+in the decision graph. The incidence risk per birth will be computed as
 
 .. math::
 
-    \text{ir} = \frac{\text{hemorrhage cases}}{\text{pregnancies}}
+    \text{ir} = \frac{\text{hemorrhage cases}}{\text{births}}
         = \frac{\text{(hemorrhage cases) / person-time}}
-            {\text{pregnancies / person-time}}
-        = \frac{\text{hemorrhage incidence rate}}{\text{pregnancy rate}}.
+            {\text{births / person-time}}
+        = \frac{\text{hemorrhage incidence rate}}{\text{birth rate}}.
 
 The severe fraction will be computed as
 
@@ -290,10 +290,10 @@ calculations.
         Clip to be no greater than 1 (which should very rarely occur).
         See `the notebook <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ec5b9d663a929beb1a9aefad3917fa1b03e29e01/src/vivarium_gates_mncnh/data/postpartum_hemorrhage_split/postpartum_hemorrhage_split.ipynb>`__ for more details about the crosswalk model and how to extract this value.
     * - ir
-      - antepartum hemorrhage incidence risk per pregnancy
-      - (1 - postpartum_fraction) * incidence_c367 / pregnancy_rate
+      - antepartum hemorrhage incidence risk per birth
+      - (1 - postpartum_fraction) * incidence_c367 / birth_rate
       - The value of ir is a probability in [0,1]. Denominator includes
-        all pregnancies.
+        all births (still and live births).
     * - incidence_c367
       - incidence rate of maternal hemorrhage
       - como
@@ -324,13 +324,13 @@ calculations.
       - get_population
       - Specific to age/sex/location/year demographic group. Numerically
         equal to person-time for the year.
-    * - pregnancy_rate
-      - pregnancy rate
-      - (1 + SBR) * ASFR + incidence_c995 + incidence_c374
-      - Units are total pregnancies per person-year
+    * - birth_rate
+      - birth rate
+      - (1 + SBR) * ASFR
+      - Units are total births per person-year
     * - ASFR
       - Age-specific fertility rate
-      - get_covariate_estimates: coviarate_id=13
+      - get_covariate_estimates: covariate_id=13
       - Assume lognormal distribution of uncertainty. Units in GBD are
         live births per person, or equivalently, per person-year.
     * - SBR
@@ -338,14 +338,6 @@ calculations.
       - get_covariate_estimates: covariate_id=2267
       - Parameter is not age specific and has no draw-level uncertainty.
         Use mean_value as location-specific point parameter.
-    * - incidence_c995
-      - Incidence rate per person-year of abortion and miscarriage
-      - como
-      - 
-    * - incidence_c374
-      - Incidence rate per person-year of ectopic pregnancy
-      - como
-      -
     * - yld_rate_s180
       - YLD rate per person-year due to moderate maternal hemorrhage
       - como
@@ -376,6 +368,8 @@ Limitations
   which is likely not true.
 * Splitting out maternal hemorrhage (modeled as one cause in the GBD) into antepartum and postpartum hemorrhage (modeled as two separate causes in our model, with a vicious cycle between them through hemoglobin)
   will lead us to overestimate the total burden of maternal hemorrhage relative to GBD due to cases that have both antepartum and postpartum hemorrhage and have double-shifted hemoglobin.
+* We assume that abortion/miscarriage/ectopic pregnancies are too short to experience in antepartum hemorrhage.
+  In reality, some abortions may occur late enough in pregnancy to experience antepartum hemorrhage.
 
 References
 ----------

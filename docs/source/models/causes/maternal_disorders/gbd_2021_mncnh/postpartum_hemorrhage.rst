@@ -187,7 +187,7 @@ represent decision probabilities rather than rates per unit time.
     * - start
       - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>` (due to condition on the overall intrapartum component)
+        <other_models_pregnancy_closed_cohort_mncnh>` and not have died from antepartum hemorrhage (due to condition on the overall intrapartum component)
     * - hemorrhage
       - Parent simulant has postpartum hemorrhage
     * - moderate
@@ -227,10 +227,10 @@ in the decision graph. The incidence risk per birth will be computed as
 
 .. math::
 
-    \text{ir} = \frac{\text{hemorrhage cases}}{\text{births}}
-        = \frac{\text{(hemorrhage cases) / person-time}}
-            {\text{births / person-time}}
-        = \frac{\text{hemorrhage incidence rate}}{\text{birth rate}}.
+    \text{ir} = \frac{\text{postpartum hemorrhage cases}}{\text{births} - \text{antepartum hemorrhage deaths}}
+        = \frac{\text{(postpartum hemorrhage cases) / person-time}}
+            {\text{births / person-time} - \text{(antepartum hemorrhage deaths) / person-time}}
+        = \frac{\text{postpartum hemorrhage incidence rate}}{\text{birth rate} - \text{antepartum hemorrhage cause-specific mortality rate}}.
 
 The severe fraction will be computed as
 
@@ -298,14 +298,14 @@ calculations.
     * - postpartum_fraction
       - fraction of maternal hemorrhage cases that are postpartum
       - The exponentiated prediction of the GBD 2023 postpartum hemorrhage crosswalk model, age group specific using the age midpoint of the age group
-      - Sample uncertainty from the normal distribution of uncertainty around the prediction.
-        Clip to be no greater than 1 (which should very rarely occur).
+      - Sample uncertainty from the normal distribution of uncertainty around the prediction, before exponentiating.
+        Clip to be no greater than 1 after exponentiating (which should very rarely occur).
         See `the notebook <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ec5b9d663a929beb1a9aefad3917fa1b03e29e01/src/vivarium_gates_mncnh/data/postpartum_hemorrhage_split/postpartum_hemorrhage_split.ipynb>`__ for more details about the crosswalk model and how to extract this value.
     * - ir
       - postpartum hemorrhage incidence risk per birth
-      - postpartum_fraction * incidence_c367 / birth_rate
+      - postpartum_fraction * incidence_c367 / (birth_rate - antepartum_hemorrhage_csmr)
       - The value of ir is a probabiity in [0,1]. Denominator includes
-        live births and stillbirths.
+        live births and stillbirths among parents who did not die from antepartum hemorrhage.
     * - incidence_c367
       - incidence rate of maternal hemorrhage
       - como
@@ -358,6 +358,10 @@ calculations.
       - YLD rate per person-year due to severe maternal hemorrhage
       - como
       -
+    * - antepartum_hemorrhage_csmr
+      - cause-specific mortality rate of antepartum hemorrhage
+      - csmr_c367 * (1 - postpartum_fraction)
+      - See :ref:`antepartum hemorrhage document <2023_cause_antepartum_hemorrhage_mncnh>` for more details on how this value is calculated.
 
 Validation Criteria
 +++++++++++++++++++
