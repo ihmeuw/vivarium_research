@@ -205,7 +205,7 @@ impact either of these attributes.
 Even in the future if we modeled an intervention that increased ANC attendance, that intervention
 wouldn't act through changing broad pregnancy outcome, hence there is no need to model a causal relationship.
 
-The overall simulation model is divided into four "components," which are differentiated by the timespan
+The overall simulation model is divided into four "components," which are roughly differentiated by the timespan
 and the simulant that they model.
 
 * The :ref:`Pregnancy component <mncnh_portfolio_pregnancy_component>`, which models
@@ -221,6 +221,14 @@ and the simulant that they model.
 
   When we say "component" here, we mean something distinct from a
   :ref:`Vivarium component <vivarium:components_concept>`.
+  Because this is confusing, we intend to switch to a different term.
+
+.. todo::
+
+  There are several ways in which this "timespan and simulant" split is not respected.
+  This is a leaky abstraction.
+  A more principled way to describe these components would be by their causal relationships.
+  We should revisit this.
 
 Graphically, the component breakdown looks like this:
 
@@ -232,27 +240,22 @@ Graphically, the component breakdown looks like this:
   constant.
   Also, if misinterpreted this way, the x-axis would be wildly not to scale.
 
-However, the only situation in which all components are actually reached for a given simulant
+However, the only situation in which all components are actually used for a given simulant
 dyad is the case in which the pregnancy results in a live birth and the birthing person survives
 childbirth.
-In other situations, some components will not be reached.
-The rules by which components flow into other components are as follows:
+In other situations, some components will not be used.
+The rules by which components are triggered is as follows:
 
-* All simulant dyads start at the pregnancy component.
-* If the birth outcome from the pregnancy component is a live or stillbirth (NOT abortion/miscarriage/ectopic pregnancy), proceed to the intrapartum component.
-  Otherwise, skip to the postpartum component.
-* At the end of the intrapartum component, if the birth outcome from the pregnancy component is a live birth,
-  proceed to the neonatal component.
-  Otherwise, if the birth parent survives childbirth, proceed to the postpartum component.
-* At the end of the neonatal component, if the birth parent survived childbirth in the intrapartum component,
-  proceed to the postpartum component.
-
-Here is a graphic representation of the same information:
-
-.. image:: component_flow_diagram.drawio.png
+* All simulant dyads pass through the pregnancy component.
+* If the broad pregnancy outcome from the pregnancy component was a live or stillbirth (NOT abortion/miscarriage/ectopic pregnancy)
+  *and* the birth parent did not die from antepartum maternal disorders, the dyad goes through the intrapartum component.
+* If the birth outcome from the intrapartum component is a live birth,
+  the dyad goes through the neonatal component.
+* If the birth parent did not die from maternal disorders (antepartum or intrapartum),
+  the dyad goes through the postpartum component.
 
 Each component is further subdivided into "modules,"
-which are organized by topic (rather than by time/simulant as in the components).
+which are organized by topic.
 Each module may have some simulant dyad attributes as input (values it needs)
 and some simulant dyad attributes as output (values it initializes).
 Module outputs may be 
@@ -386,7 +389,7 @@ Intrapartum component
 
 .. note::
 
-  Only live births or stillbirths (NOT abortions/miscarriages/ectopic pregnancies) will proceed to the intrapartum component,
+  Only pregnancies resulting in live births or stillbirths (NOT abortions/miscarriages/ectopic pregnancies), in which the parent does not die of antepartum maternal disorders, will proceed to the intrapartum component,
   as described above. Both antepartum and intrapartum stillbirths will proceed to the intrapartum component. However, antepartum stillbirths will only be eligible for intrapartum interventions that act on maternal health (such as misoprostol and azithromycin) and will not be eligible for intrapartum interventions intended for neonatal health (such as antenatal corticosteroids) as the fetus will have already passed prior to the onset of labor, but delivery of the fetal remains will still be necessary. Intrapartum stillbirths will remain eligible for all intrapartum interventions. 
 
 .. warning::
