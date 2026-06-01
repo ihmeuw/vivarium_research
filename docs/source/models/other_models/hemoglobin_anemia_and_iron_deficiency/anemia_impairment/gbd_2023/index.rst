@@ -53,13 +53,21 @@ Once the hemoglobin concentration distribution is estimated, the anemia envelope
     - Mild Anemia
     - Moderate Anemia
     - Severe Anemia
-  * - Males and Females <28 days
-    - 130-149
-    - 90-129
-    - <90
-  * - Males and Females 1 month - 4 years
+  * - Males and Females 0-6 days
+    - 145-159
+    - 100-144
+    - <100
+  * - Males and Females 7-27 days
+    - 120-134
+    - 85-119
+    - <85
+  * - Males and Females 1 month - 5 months
     - 100-109
     - 70-99
+    - <70
+   * - Males and Females 5 months - 4 years
+    - 95-104
+    - 70-94
     - <70
   * - Males and Females 5-14 years
     - 110-114
@@ -80,13 +88,18 @@ Once the hemoglobin concentration distribution is estimated, the anemia envelope
 
 .. note::
 
-  GBD uses the hemoglobin thresholds specific to *Males and Females 5-14 years* for pregnant females in this age group (as opposed to the pregnancy-specific thresholds).
+  GBD uses the hemoglobin thresholds specific to *Males and Females 5-14 years* for pregnant females in this age group (as 
+  opposed to the pregnancy-specific thresholds).
 
-  GBD 2019 used a different threshold for the neonatal period than the rest of the <5 age group, although there are not any international guidelines on appropriate thresholds of anemia in neonates. The thresholds chosen were "a blend" of those recommended by the WHO for 6 to 59 months and the higher hemoglobin levels typically seen in newborns.
+  GBD 2019 used a different threshold for the neonatal period than the rest of the <5 age group, although there are not any 
+  international guidelines on appropriate thresholds of anemia in neonates. The thresholds chosen were "a blend" of those 
+  recommended by the WHO for 6 to 59 months and the higher hemoglobin levels typically seen in newborns.
 
 .. warning::
 
-  The GBD 2019 anemia impairment estimates among women of reproductive age are underestimated (particularly among locations/ages with high fertility rates) due to erroneously applying the inverse of the pregnancy adjustment factor in the estimation of the anemia envelope, described on the :ref:`hemoglobin document <2019_hemoglobin_model>` and `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/R%20code%20comparisons/R%20code%20prevalence%20plotting.ipynb>`_.
+  The GBD 2019 anemia impairment estimates among women of reproductive age are underestimated (particularly among locations/ages 
+  with high fertility rates) due to erroneously applying the inverse of the pregnancy adjustment factor in the estimation of the 
+  anemia envelope, described on the :ref:`hemoglobin document <2019_hemoglobin_model>` and `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/R%20code%20comparisons/R%20code%20prevalence%20plotting.ipynb>`_.
 
 Once severity-specific anemia prevalence is estimated, years lived with disability due to anemia can be estimated using the following severity-specific disability weights. NOTE: the anemia impairment is a YLD-only impairment and anemia is not considered a direct cause of death in GBD 2019.
 
