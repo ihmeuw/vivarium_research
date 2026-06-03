@@ -68,7 +68,7 @@ Assumptions and limitations
 
 * We do not consider dynamics related to wasting seasonality and/or treatment capacity.
 
-* We do not model morbidity associated with our PEM model.
+* We do not model morbidity associated with our PEM model (this was a "stretch goal" noted on our PEM model document that we did not get to for our final results as of 5/29/26). Note that at `~500 YLDs per 100,000 PYs among children under five in Kano, Nigeria <http://ihmeuw.org/7kty>`__, YLDs due to PEM comprise only about 1.5% of DALYs attributable to child wasting (`about 30,000 DALYs per 100,000 PY <http://ihmeuw.org/7ktz>`__). 
 
 * See additional key limitations of this model on the :ref:`wasting exposure model document <2021_risk_exposure_wasting_with_complicated_sam>`. Limitations specific to each modeled component may be found on individual model documents linked in the above section as well.
 
