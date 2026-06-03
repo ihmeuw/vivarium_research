@@ -42,7 +42,7 @@ Postpartum hemoglobin module
 1.0 Overview
 ++++++++++++
 
-This module exists to model hemoglobin and anemia outcomes in the postpartum period among birthing parents who survive labor and is part of the postpartum component of the simulation. Notably, postpartum hemoglobin is determined from hemoglobin at end of pregnancy (an output of the pregnancy component hemoglobin module) and whether a simulant experienced postpartum hemorrhage.
+This module exists to model hemoglobin and anemia outcomes in the postpartum period among birthing parents who survive labor and is part of the postpartum component of the simulation. Notably, postpartum hemoglobin is determined from hemoglobin at end of pregnancy (an output of the pregnancy component hemoglobin module) and whether a simulant experienced antepartum and/or postpartum hemorrhage.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
@@ -51,11 +51,12 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
 
 1. Determine if simulant survived labor and progressed to the postpartum period
 2. Among surviving simulants, assign hemoglobin exposure for the first six weeks after delivery equal to hemoglobin exposure at birth
-3. Shift hemoglobin exposures for incident cases of maternal hemorrhage according to the :ref:`maternal hemorrhage risk effects document <2023_risk_effect_maternal_hemorrhage>` effect on the first six weeks after the end of pregnancy
-4. Among surviving simulants, assign the hemoglobin exposure between 6 weeks and 9 months postpartum
-   using the non-pregnant hemoglobin distribution (MEID 27596, GBD 2023 version mv_20250804_flash_regal_snake)
+3. Shift hemoglobin exposures for incident cases of postpartum hemorrhage according to the :ref:`postpartum hemorrhage risk effects document <2023_risk_effect_maternal_hemorrhage>` effect on the first six weeks after the end of pregnancy
+4. Among surviving simulants, assign the hemoglobin exposure between 6 weeks and 39 weeks postpartum
+   using the non-pregnant hemoglobin distribution (the mean can be found at MEID 27596, GBD 2023 version mv_20250804_flash_regal_snake; the standard deviation is the same as the standard deviation of the pregnant hemoglobin distribution)
    and the *same* propensity that was used to assign the simulant their initial hemoglobin exposure.
-5. Shift hemoglobin exposures for incident cases of maternal hemorrhage according to the :ref:`maternal hemorrhage risk effects document <2023_risk_effect_maternal_hemorrhage>` effect on the period from 6 weeks to 9 months after the end of pregnancy
+5. Shift hemoglobin exposures for incident cases of postpartum hemorrhage according to the :ref:`postpartum hemorrhage risk effects document <2023_risk_effect_maternal_hemorrhage>` effect on the period from 6 weeks to 39 weeks after the end of pregnancy
+6. Shift hemoglobin exposures for incident cases of antepartum hemorrhage according to the :ref:`antepartum hemorrhage risk effects document <2023_risk_effect_maternal_hemorrhage>` effect on the period from 6 weeks to 39 weeks after the end of pregnancy
 
 .. list-table:: Module required inputs
   :header-rows: 1
@@ -66,12 +67,16 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
     - Note
   * - Hemoglobin at end of pregnancy
     - :ref:`Hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-    - Informs hemoglobin exposure between birth and 6 weeks postpartum, and between 6 weeks and 9 months postpartum
+    - Informs hemoglobin exposure between birth and 6 weeks postpartum, and between 6 weeks and 39 weeks postpartum
     - 
-  * - Maternal hemorrhage incidence
-    - :ref:`Maternal disorders module <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
-    - Incident maternal hemorrhage cases decrease hemoglobin exposure between birth and 6 weeks postpartum, and between 6 weeks and 9 months postpartum
+  * - Postpartum hemorrhage incidence
+    - :ref:`Postpartum disorders module <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
+    - Incident postpartum hemorrhage cases decrease hemoglobin exposure between birth and 6 weeks postpartum, and between 6 weeks and 39 weeks postpartum
     - 
+  * - Antepartum hemorrhage incidence
+    - :ref:`Antepartum hemorrhage module <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
+    - Incident antepartum hemorrhage cases decrease hemoglobin exposure between birth and 6 weeks postpartum, and between 6 weeks and 39 weeks postpartum (in addition to affecting hemoglobin between incidence and birth)
+    -
 
 
 .. list-table:: Module outputs
@@ -80,16 +85,19 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
   * - Output
     - Value
     - Dependencies
-  * - Postpartum hemoglobin
+  * - Hemoglobin concentration during the first six weeks after the end of pregnancy
     - Point value
-    - Used for V&V of maternal hemorrhage effect on postpartum hemoglobin
+    - Used for V&V of maternal hemorrhage effect on postpartum hemoglobin, and as an input to the :ref:`Anemia YLDs module <2024_vivarium_mncnh_portfolio_anemia_module>` to calculate anemia YLDs during the first six weeks after the end of pregnancy
+  * - Hemoglobin concentration between 6 weeks and 39 weeks after the end of pregnancy
+    - Point value
+    - Used for V&V of maternal hemorrhage effect on postpartum hemoglobin, and as an input to the :ref:`Anemia YLDs module <2024_vivarium_mncnh_portfolio_anemia_module>` to calculate anemia YLDs during the period from 6 weeks to 39 weeks after the end of pregnancy
 
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
 * We assume the pregnancy-specific hemoglobin thresholds for anemia apply to the first six weeks after the end of pregnancy
-* We apply the effect of maternal hemorrhage on hemoglobin to the first six weeks after the end of pregnancy and the period from 6 weeks to 9 months after the end of pregnancy as discrete timesteps,
+* We apply the effect of maternal hemorrhage on hemoglobin to the first six weeks after the end of pregnancy and the period from 6 weeks to 39 weeks after the end of pregnancy as discrete timesteps,
   which does not capture the continuous nature of hemoglobin changes over time
 * We assume that the impacts of all interventions that have modified hemoglobin during pregnancy
   last only until six weeks after the end of pregnancy
@@ -97,7 +105,7 @@ Follow the steps below to model the postpartum hemoglobin module. Module inputs 
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-* Effect of maternal hemorrhage on postpartum hemoglobin (postpartum hemoglobin stratified by maternal hemorrhage incidence) should be as expected
+* Effect of postpartum and antepartum hemorrhage on postpartum hemoglobin (postpartum hemoglobin stratified by postpartum and antepartum hemorrhage incidence) should vary by the size of the relevant hemoglobin shift in the :ref:`postpartum hemorrhage risk effects document <2023_risk_effect_maternal_hemorrhage>`, during each postpartum time period (first six weeks after the end of pregnancy and the period from 6 weeks to 39 weeks after the end of pregnancy)
 
 5.0 References
 +++++++++++++++

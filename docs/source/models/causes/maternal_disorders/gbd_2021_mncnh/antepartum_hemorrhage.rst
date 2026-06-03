@@ -1,21 +1,20 @@
-.. _2021_cause_maternal_hemorrhage_mncnh:
+.. _2023_cause_antepartum_hemorrhage_mncnh:
 
-===================
-Maternal hemorrhage
-===================
-
-.. note::
-
-  There were no updates to this modeling strategy between GBD 2021 and GBD 2023 so this document can be used for both GBD rounds
+=====================
+Antepartum hemorrhage
+=====================
 
 Disease Overview
 ----------------
 
-GBD 2021 Modeling Strategy
+GBD 2023 Modeling Strategy
 --------------------------
 
 Cause Hierarchy
 +++++++++++++++
+
+Antepartum hemorrhage does not appear in the GBD cause hierarchy.
+It is a *subset* of maternal hemorrhage (c_367), which is a most detailed cause in GBD 2023. The relevant portion of the GBD hierarchy is as follows:
 
 - All causes (c_294) [level 0]
 
@@ -37,7 +36,7 @@ Cause Hierarchy
 
           - Severe anemia due to maternal hemorrhage (s_184)
 
-*Maternal hemorrhage (c_367)* ia a most detailed cause, at level 4 of the GBD hierarchy. 
+*Maternal hemorrhage (c_367)* is a most detailed cause, at level 4 of the GBD hierarchy. 
 It has five sequelae, detailed in the following table:
 
 .. list-table:: Sequelae of maternal hemorrhage
@@ -82,11 +81,11 @@ It has five sequelae, detailed in the following table:
 Restrictions
 ++++++++++++
 
-The following table describes any restrictions in GBD 2021 on the
+The following table describes any restrictions in GBD 2023 on the
 effects of this cause (such as being only fatal or only nonfatal), as
 well as restrictions on the ages and sexes to which the cause applies.
 
-.. list-table:: GBD 2021 Cause Restrictions
+.. list-table:: GBD 2023 Cause Restrictions
    :widths: 15 15 20
    :header-rows: 1
 
@@ -124,36 +123,29 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-The goal of the maternal hemorrhage model is to capture YLLs and YLDs due to
-maternal hemorrhage among women of reproductive age. We only model maternal 
-hemorrhage among simulants who give (live or still) birth.
-This page documents how to model the baseline burden of maternal 
-hemorrhage. Other simulation components such as c-sections will affect the 
-rates of maternal hemorrhage; such effects will be described on the pages 
-for the corresponding :ref:`intervention <intervention_models>` or 
-:ref:`risk effects <risk_effects_models>` model.
+The goal of the antepartum hemorrhage model is to capture YLLs and YLDs due to
+antepartum hemorrhage among pregnant people.
+This page documents how to model the baseline burden of antepartum 
+hemorrhage.
+Hemoglobin after the later ANC visit will affect the rates of antepartum hemorrhage;
+such effects are described on the relevant risk effects model page.
 
 Summary of modeling strategy
 ++++++++++++++++++++++++++++
 
-Because we can assume incident cases of maternal hemorrhage all occur at the end of pregnancy,
-we will not model maternal hemorrhage as a state machine
-with dynamic state transitions like our typical cause models. Rather,
-all "transitions" in the model will be modeled as decisions made during
-a single timestep. To obtain the decision probabilities,
+We will not model antepartum hemorrhage as a state machine, but as a one-time decision.
+We will choose whether the pregnant person has antepartum hemorrhage at *some* time during pregnancy.
+To obtain the decision probabilities,
 we will convert GBD's annual rates
 among females of reproductive age into conditional event rates.
-We will track maternal hemorrhage
+We will track antepartum hemorrhage
 deaths to calculate YLLs, and we will track incident cases by severity to calculate
 YLDs.
-
-Assumptions and Limitations
-+++++++++++++++++++++++++++
 
 Cause Model Diagram
 +++++++++++++++++++
 
-Although we're not modeling hemorrhage dynamically as a finite state
+Although we're not modeling antepartum hemorrhage dynamically as a finite state
 machine, we can draw an analogous directed graph that can be interpreted
 as a (collapsed) decision tree rather than a state transition diagram.
 The main difference is that the values on the transition arrows
@@ -186,19 +178,17 @@ represent decision probabilities rather than rates per unit time.
     * - State
       - Definition
     * - start
-      - Parent simulant must have a live or stillbirth pregnancy as determined by the
-        :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>` (due to condition on the overall intrapartum component)
+      -
     * - hemorrhage
-      - Parent simulant has maternal hemorrhage
+      - Parent simulant has antepartum hemorrhage
     * - moderate
-      - Parent simulant has moderate maternal hemorrhage (i.e., blood loss greater than 500 mL but less than 1 liter)
+      - Parent simulant has moderate antepartum hemorrhage (i.e., blood loss greater than 500 mL but less than 1 liter)
     * - severe
-      - Parent simulant has severe maternal hemorrhage (i.e., blood loss 1 liter or more)
-    * - parent did not die of maternal hemorrhage
-      - Parent simulant did not die of maternal hemorrhage
-    * - parent died of maternal hemorrhage
-      - Parent simulant died of maternal hemorrhage
+      - Parent simulant has severe antepartum hemorrhage (i.e., blood loss 1 liter or more)
+    * - parent did not die of antepartum hemorrhage
+      - Parent simulant did not die of antepartum hemorrhage
+    * - parent died of antepartum hemorrhage
+      - Parent simulant died of antepartum hemorrhage
     * - end
       -
 
@@ -211,45 +201,45 @@ represent decision probabilities rather than rates per unit time.
       - Definition
     * - ir
       - incidence risk
-      - The probability that a pregnant simulant gets maternal hemorrhage
+      - The probability that a pregnant simulant gets antepartum hemorrhage
     * - severe_fraction
       - severe fraction
-      - The probability that a simulant with maternal hemorrhage has severe hemorrhage (i.e., blood loss of 1 liter or more)
+      - The probability that a simulant with antepartum hemorrhage has severe antepartum hemorrhage (i.e., blood loss of 1 liter or more)
     * - cfr
       - case fatality rate
-      - The probability that a simulant with severe hemorrhage dies of that hemorrhage
+      - The probability that a simulant with severe antepartum hemorrhage dies of that hemorrhage
 
 Probabilities
 +++++++++++++
 
-The maternal hemorrhage cause model requires three probabilities, the
-incidence risk (ir) per birth, the severe fraction (severe_fraction), and the case fatality rate (cfr), for use
-in the decision graph. The incidence risk per birth will be computed as
+The antepartum hemorrhage cause model requires three probabilities, the
+incidence risk (ir) per pregnancy, the severe fraction (severe_fraction), and the case fatality rate (cfr), for use
+in the decision graph. The incidence risk per pregnancy will be computed as
 
 .. math::
 
-    \text{ir} = \frac{\text{hemorrhage cases}}{\text{births}}
+    \text{ir} = \frac{\text{hemorrhage cases}}{\text{pregnancies}}
         = \frac{\text{(hemorrhage cases) / person-time}}
-            {\text{births / person-time}}
-        = \frac{\text{hemorrhage incidence rate}}{\text{birth rate}}.
+            {\text{pregnancies / person-time}}
+        = \frac{\text{hemorrhage incidence rate}}{\text{pregnancy rate}}.
 
 The severe fraction will be computed as
 
 .. math::
 
-    \text{severe\_fraction} = \frac{\text{incidence\_s181}}{\text{incidence\_s181} + \text{incidence\_s180}}.
+    \text{severe_fraction} = \frac{\text{incidence_s181}}{\text{incidence_s181} + \text{incidence_s180}}.
 
 The case fatality rate will be computed as
 
 .. math::
 
-    \begin{aligned}
+    \begin{align*}
     \text{cfr} &= \frac{\text{hemorrhage deaths}}{\text{hemorrhage cases}} \\\\
         &= \frac{\text{(hemorrhage deaths) / person-time}}
             {\text{(hemorrhage cases) / person-time}}
         = \frac{\text{hemorrhage cause specific mortality rate}}
             {\text{hemorrhage incidence rate}}.
-    \end{aligned}
+    \end{align*}
 
 Calculating years lived with disability
 +++++++++++++++++++++++++++++++++++++++
@@ -258,13 +248,13 @@ We apply the YLDs per case for the corresponding severity level to each incident
 
 .. math::
 
-    \text{ylds\_per\_case\_severe} = \frac{\text{yld\_rate\_s181}}{\text{incidence\_s181}}
+    \text{ylds_per_case_severe} = \frac{\text{yld_rate_s181}}{\text{incidence_s181}}
 
 .. math::
   
-    \text{ylds\_per\_case\_moderate} = \frac{\text{yld\_rate\_s180}}{\text{incidence\_s180}}
+    \text{ylds_per_case_moderate} = \frac{\text{yld_rate_s180}}{\text{incidence_s180}}
 
-Note that we do *not* include YLDs for mild, moderate, or severe anemia due to maternal hemorrhage (s_182, s_183, s_184) in our calculations because these
+Note that we do *not* include YLDs for mild, moderate, or severe anemia due to antepartum hemorrhage (s_182, s_183, s_184) in our calculations because these
 sequelae are already counted under the anemia cause model, and we want to avoid double counting.
 
 Data table
@@ -293,15 +283,18 @@ calculations.
       - Definition
       - Value or source
       - Note
+    * - postpartum_fraction
+      - fraction of maternal hemorrhage cases that are postpartum
+      - The exponentiated prediction of the GBD 2023 crosswalk model, age group specific using the age midpoint of the age group
+      - Sample uncertainty from the normal distribution of uncertainty around the prediction.
+        See https://github.com/ihmeuw/vivarium_gates_mncnh/pull/308 for data and details about how to extract this value.
+        Note that there is a separate crosswalk for antepartum hemorrhage specifically, but there is no guarantee of the antepartum
+        and postpartum fractions summing to 1 in the GBD data, so we will use the postpartum fraction from the overall maternal hemorrhage crosswalk to calculate the antepartum fraction as (1 - postpartum_fraction).
     * - ir
-      - maternal hemorrhage incidence risk per birth
-      - incidence_c367 / birth_rate
+      - antepartum hemorrhage incidence risk per pregnancy
+      - (1 - postpartum_fraction) * incidence_c367 / pregnancy_rate
       - The value of ir is a probabiity in [0,1]. Denominator includes
-        live births and stillbirths.
-    * - cfr
-      - case fatality rate of maternal hemorrhage
-      - csmr_c367 / incidence_c367
-      - The value of cfr is a probabiity in [0,1]
+        all pregnancies.
     * - incidence_c367
       - incidence rate of maternal hemorrhage
       - como
@@ -332,10 +325,10 @@ calculations.
       - get_population
       - Specific to age/sex/location/year demographic group. Numerically
         equal to person-time for the year.
-    * - birth_rate
-      - birth rate (live or still)
-      - (1 + SBR) ASFR
-      - Units are total births (live or still) per person-year
+    * - pregnancy_rate
+      - pregnancy rate
+      - (1 + SBR) * ASFR + incidence_c995 + incidence_c374
+      - Units are total pregnancies per person-year
     * - ASFR
       - Age-specific fertility rate
       - get_covariate_estimates: coviarate_id=13
@@ -346,6 +339,14 @@ calculations.
       - get_covariate_estimates: covariate_id=2267
       - Parameter is not age specific and has no draw-level uncertainty.
         Use mean_value as location-specific point parameter.
+    * - incidence_c995
+      - Incidence rate per person-year of abortion and miscarriage
+      - como
+      - 
+    * - incidence_c374
+      - Incidence rate per person-year of ectopic pregnancy
+      - como
+      -
     * - yld_rate_s180
       - YLD rate per person-year due to moderate maternal hemorrhage
       - como
@@ -358,24 +359,24 @@ calculations.
 Validation Criteria
 +++++++++++++++++++
 
-In order to verify and validate the model, we should record at least the
-following information:
+Limitations
+-----------
 
-- Number of simulants with live/stillbirth pregnancies in each age group
-  before the maternal hemorrhage model is run
-- Number of maternal hemorrhage cases and maternal hemorrhage deaths in each age
-  group
-- Number of maternal hemorrhage YLDs and YLLs in each age group
-
-Using the above data, we should be able to verify/validate the
-following:
-
-- Validate the maternal hemorrhage incidence risk and case fatality rate in
-  each age group against the corresponding quantities calculated from
-  GBD data
-- Validate the number of maternal hemorrhage deaths per population against
-  the maternal hemorrhage CSMR from GBD
-- Validate the total maternal hemorrhage YLDs and YLLs per population
+* Because we use the severity split and mortality rate of maternal hemorrhage overall, we are assuming that these are the same for postpartum hemorrhage as for antepartum hemorrhage.
+  In reality, postpartum hemorrhage is likely to be more severe.
+* We assume that the impact of antepartum hemorrhage on hemoglobin is the same as the impact of postpartum hemorrhage on hemoglobin, which is likely not true.
+  We suspect that APH would have a smaller impact on average; however, the MarketScan data the GBD effect is calculated from are
+  from PPH in the US, so may already be capturing a smaller average impact than we would expect from PPH in a lower-resource setting.
+* We assume that all antepartum hemorrhage fatalities occur among those with severe antepartum hemorrhage, which may not be the case in reality.
+* We assume that postpartum hemorrhage is uncorrelated with antepartum hemorrhage, except for the causal effect through hemoglobin. In reality, there may be both confounding and a direct causal effect.
+* We assume that when a simulant has both antepartum hemorrhage and a later ANC visit, the ANC visit occurs before the onset of antepartum hemorrhage.
+  Antepartum hemorrhage typically occurs late in pregnancy, so this would often be the case.
+  Also, in real life, antepartum hemorrhage may lead directly to delivery, even if the fetus is premature,
+  so we don't think there are likely to be many cases of ANC visits occurring after the onset of antepartum hemorrhage.
+* We assume that antepartum hemorrhage is uncorrelated with the length of pregnancy and the probability of stillbirth (except through hemoglobin),
+  which is likely not true.
+* Splitting out maternal hemorrhage (modeled as one cause in the GBD) into antepartum and postpartum hemorrhage (modeled as two separate causes in our model, with a vicious cycle between them through hemoglobin)
+  will lead us to overestimate the total burden of maternal hemorrhage relative to GBD due to cases that have both antepartum and postpartum hemorrhage and have double-shifted hemoglobin.
 
 References
 ----------
