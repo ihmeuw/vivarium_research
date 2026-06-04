@@ -1863,43 +1863,78 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - Default
     -
+  * - 32.0
+    - Vivarium/VPH update
+    - Same as 31.0 with Vivarium 4.0 (and bumped versions of related packages)
+    - Baseline
+    - Default
+    -
+  * - 33.0
+    - Maternal disorders PAFs
+    - Calculate custom PAFs of hemoglobin on maternal disorders rather than using GBD values
+    - Baseline
+    - Default
+    -
+  * - 33.1
+    - Maternal disorders PAFs bugfixes
+    - Fix maternal disorder PAF calculation to step forward the PAF calculation simulation until the time of maternal disorders
+    - Baseline
+    - Default
+    -
+  * - 34.0
+    - PPH/APH split and direct burden
+    - Split postpartum hemorrhage and antepartum hemorrhage into separate causes, and include direct YLDs and mortality of postpartum hemorrhage and antepartum hemorrhage
+    - Baseline
+    - Default
+    -
+  * - 35.0
+    - Fresh run
+    - Exactly like 33.0 but rerun due to stale effects of parent hemoglobin on neonatal sepsis that hadn't been recalculated
+    - Baseline
+    - Default
+    -
+  * - 36.0
+    - Fresh run with timestep and sepsis updates
+    - Exactly like 35.0 but ensuring that 33.1's timestep update was included
+    - Baseline
+    - Default
+    -
   * -
     - Larger run for neonatal mortality V&V
-    - Includes "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
+    - Larger population, with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers (already included in previous runs).
     - Baseline
-    - * For this run only, 10,000,000 population size per draw
-      * Default, note addition of "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers.
-    - Oral iron GA shift optimization and facility choice model interaction resolution?
-  * -
-    - Update hemoglobin effects
-    - As defined on the :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>` (Custom PAFs and neonatal sepsis effects have yet to be calculated for GBD 2023): Updated custom PAF values for maternal hemorrhage and maternal sepsis outcomes (paired with existing implementation of GBD RRs); New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
-    - Baseline and IV iron scale-up scenarios
-    - Default
-    - RT-owned data generation that is blocked by Separate LBWSG affected causes run
-  * -
-    - E-MOTIVE and postpartum hemorrhage effect on postpartum hemoglobin
-    - Effects of postpartum hemorrhage on postpartum hemoglobin, as well as E-MOTIVE on postpartum hemorrhage
-    - Baseline, MMS scale-up, and IV iron scale-up scenarios
-    - Default
-    - Research tickets to `document E-MOTIVE <https://jira.ihme.washington.edu/browse/SSCI-2584>`__, postpartum hemoglobin
-  * - 
-    - Separate LBWSG affected causes
-    - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__
-    - All
-    - Default
-    - Larger run for neonatal mortality V&V run
-  * - 
-    - Trimester-specific ultrasound
-    - Update ultrasound model to include gestational age estimation error specific to timing of ultrasound in addition to ultrasound type. :ref:`See the ultrasound module document <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>` for details
-    - All
-    - Default, note that observed value for ultrasound is now "ultrasound summary" rather than "ultrasound type" with this update
-    - Updated data values for trimester-specific GA error values, updated facility choice model and values that reflect the updated GA error values, Remaining pregnancy model refactor run
+    - For this run only, 10,000,000 population size per draw
+    -
   * -
     - Effects of maternal sepsis on postpartum hemoglobin
     - Effects of maternal sepsis on postpartum hemoglobin as described :ref:`on the sepsis risk effects page <2023_risk_effect_maternal_sepsis>`
     - Baseline, MMS scale-up, and IV iron scale-up scenarios
     - Default
     - 
+  * -
+    - PPH/APH effects on hemoglobin
+    - Include effects of postpartum hemorrhage and antepartum hemorrhage on postpartum hemoglobin
+    - Baseline
+    - Default
+    -
+  * -
+    - Hemoglobin effects on depression and neonatal sepsis
+    - New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
+    - Baseline and IV iron scale-up scenarios
+    - Default
+    -
+  * -
+    - E-MOTIVE
+    - E-MOTIVE and its effects on postpartum hemorrhage
+    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - Default
+    - Research tickets to `document E-MOTIVE <https://jira.ihme.washington.edu/browse/SSCI-2584>`__, PPH/APH effects on hemoglobin run
+  * - 
+    - Separate LBWSG affected causes
+    - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__
+    - All
+    - Default
+    - Larger run for neonatal mortality V&V run
 
 .. note:: 
 
