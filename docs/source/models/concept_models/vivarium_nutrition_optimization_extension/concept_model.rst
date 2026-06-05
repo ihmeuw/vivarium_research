@@ -15,6 +15,12 @@ Project overview
 
 This model will be built off of the existing :ref:`Nutrition Optimization <2021_concept_model_vivarium_nutrition_optimization>` simulation and extended to support the distinction between complicated and uncomplicated severe acute malnutrition in order to compare the relative priority of treatment for each condition. This model will use the :ref:`nutrition optimization pregnancy simulation <2021_concept_model_vivarium_nutrition_optimization_pregnancies>` without changes from the previous version and will make several changes to the :ref:`nutrition optimization child simulation <2021_concept_model_vivarium_nutrition_optimization_children>` (outlined below).
 
+**Key resources:**
+
+- `Analysis of model results can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/emulator/in_patient_sam>`__
+- `Final ppt overview of methods and results can be found here <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/Nutrition%20Optimization/02_Communication/Inpatient%20SAM%20project%20results%2020260529.pptx?d=w3243ba59e2ea4f0e872c29e4e1fb7f3a&csf=1&web=1&e=0lPUW1>`__
+- `Simulation model repository can be found here <https://github.com/patricktnast/vivarium_gates_inpatient_sam>`__
+
 Simulation Design
 ++++++++++++++++++++++
 
@@ -217,10 +223,6 @@ The below tables can be filled out iteratively as new model runs are requested a
       * `Baseline pregnancy model V&V criteria maintained <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/95ad19d1bc897d4f22e66e7f9a292a6c9cbf1a9e/verification_and_validation/pregnancy_model/model_inpatient_sam_inputs_preg_states.ipynb>`__
 
 
-.. todo::
-
-  Fill in V&V summaries for all runs and run specs for 2.1 and 2.2
-
 .. list-table:: Model runs
   :header-rows: 1
 
@@ -411,6 +413,10 @@ The below tables can be filled out iteratively as new model runs are requested a
     - We have draw/location-specific values for the "worse fraction" parameter in the artifact input data. However, these get overwritten with a constant value of 0.33 within the simulation. This causes some oddities in comparing MAM exposure to artifact values in our V&V notebooks and is not the intention of our modeling strategy.
     - No action for production runs, but we should update our model, documentation, and/or V&V processing appropriately moving forward.
     - TBD
+  * - Unresolved questions regarding treatment propensity resets
+    - On transitions into the MAM states in the baseline scenario, there is higher coverage of MAM treatment among simulants entering from the mild child wasting state than those entering from the uncomplicated SAM state (`see demonstration and discussion here <https://app.reviewnb.com/ihmeuw/vivarium_research_nutrition_optimization/pull/232/?path=ead29a26&cell_index=6&sha=eea81293bdb154a63dc332eb30e6cfc6eb87f469>`__). We are unable to explain this pattern given our intention of resetting AM treatment coverage propensities upon rentering the MAM state and it may warrant further investigation. However, due to the fact that we are reasonably meeting our baseline V&V targets and that our intervention scenarios should be unaffected by treatment coverage propensity bugs due to the fact that we only simulate either 0% or 100% coverage in scenarios that are used in our results, we have deemed this an acceptable limitation.
+    - None
+    - N/A
 
 
 
