@@ -88,12 +88,15 @@ Once the hemoglobin concentration distribution is estimated, the anemia envelope
 
 .. note::
 
-  GBD uses the hemoglobin thresholds specific to *Males and Females 5-14 years* for pregnant females in this age group (as 
-  opposed to the pregnancy-specific thresholds).
+  GBD uses the hemoglobin thresholds specific to *Males and Females 5-14 years* for pregnant females in this age group 
+  (as opposed to the pregnancy-specific thresholds).
 
-  GBD 2019 used a different threshold for the neonatal period than the rest of the <5 age group, although there are not any 
-  international guidelines on appropriate thresholds of anemia in neonates. The thresholds chosen were "a blend" of those 
-  recommended by the WHO for 6 to 59 months and the higher hemoglobin levels typically seen in newborns.
+  GBD 2023 used different thresholds for the early, middle, and late neonatal periods (0-6 days, 7-27 days, and 1-5 months, respectively) 
+  than the rest of the <5 age group,
+  although there are not any international guidelines on appropriate thresholds of anemia in neonates. 
+  To account for the higher hemoglobin levels typically seen in newborns, 
+  GBD 2023 calculated the ratio of “normal” hemoglobin (defined as the 50th percentile of the global hemoglobin distribution) 
+  for the different neonatal age groups by severity, and then multiplied the WHO 6–59-months thresholds by these ratios. 
 
 .. warning::
 
@@ -101,7 +104,9 @@ Once the hemoglobin concentration distribution is estimated, the anemia envelope
   with high fertility rates) due to erroneously applying the inverse of the pregnancy adjustment factor in the estimation of the 
   anemia envelope, described on the :ref:`hemoglobin document <2019_hemoglobin_model>` and `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/R%20code%20comparisons/R%20code%20prevalence%20plotting.ipynb>`_.
 
-Once severity-specific anemia prevalence is estimated, years lived with disability due to anemia can be estimated using the following severity-specific disability weights. NOTE: the anemia impairment is a YLD-only impairment and anemia is not considered a direct cause of death in GBD 2019.
+Once severity-specific anemia prevalence is estimated, years lived with disability due to anemia can be estimated using the 
+following severity-specific disability weights. NOTE: the anemia impairment is a YLD-only impairment and anemia is not considered 
+a direct cause of death in GBD 2023.
 
 .. _`Anemia Disability Weights`:
 
@@ -122,10 +127,21 @@ Once severity-specific anemia prevalence is estimated, years lived with disabili
 
   For the early and late neonatal age groups, the post-neonatal anemia prevalence was simply copied as the anemia prevalence for these age-groups rather than direct estimation of anemia among these age groups in GBD 2019.
 
+.. todo:: 
+
+  Elaborate here or add link to further documentation on how Vivarium uses GBD disability weights from health states to be for the impairment.
+
 Causal Attribution
 ++++++++++++++++++
 
-While the anemia envelope represents the total prevalence of anemia, the causal attribution process allows for estimation of what conditions *cause* that anemia. With some exceptions (see below), two inputs were required for each cause included in the causal attribution process, 1) the cause prevalence (generated from other GBD processes), and 2) the cause-specific hemoglobin shift. Cause-specific hemoglobin shifts were derived from published studies that compared hemoglobin concentrations among diseased and non-diseased populations; these shifts were meta-analyzed for use in GBD 2019.
+While the anemia envelope represents the total prevalence of anemia, 
+the causal attribution process allows for estimation of what conditions *cause* that anemia. 
+With some exceptions (see below), two inputs were required for each cause included in the causal attribution process, 
+1) the cause prevalence (generated from other GBD processes), and 2) the cause-specific hemoglobin shift. 
+The GBD 2023 cause-specific hemoglobin shifts are derived from individual-level insurance-claims data from the MarketScan research database to generate age-, sex-, and pregnancy-specific hemoglobin shifts associated with sickle cell disease, sickle cell trait, HIV, postpartum hemorrhage, and peuerperal sepsis.
+This is an improvement from the GBD 2019 anemia causal attribution process, which used single, non-age-specific scalar values without uncertainties for cause-specific hemoglobin shifts, thereby ignoring how the effects of a disease may vary by age, sex, and pregnancy status. 
+ 
+
 
 Notably, there were several causes that were not assigned specific hemoglobin shifts, including dietary iron deficiency; other infectious diseases; other neglected tropical diseases; other endocrine, nutrition, blood, and immune disorders; and other hemoglobinopathies and hemolytic anemias. Instead, the residual anemia envelope (with an enforced minimum 10%) were assigned to these causes in a manner analogous to fixed proportion redistribution.
 
@@ -133,11 +149,9 @@ A complete list of the causes included in the causal attribution process for ane
 
   P. falciparum parasitaemia without clinical malaria; P. vivax parasitaemia without clinical malaria; Clinical malaria; Schistosomiasis; Hookworm disease; Other neglected tropical diseases; Maternal haemorrhage; Vitamin A deficiency (under 15 years only); Other infectious diseases; Peptic ulcer disease; Gastritis; Stage III chronic kidney disease; Stage IV chronic kidney disease ; Stage V chronic kidney disease; End stage renal disease; Uterine fibroids; Menstrual disorders; Other haemoglobinopathies and haemolytic anaemias; Other endocrine, nutrition, blood, and immune disorders; G6PD deficiency; Hemizygous G6PD deficiency; Beta-thalassaemia major; Beta-thalassaemia trait; Haemoglobin E trait; Haemoglobin E/beta-thalassaemia; Haemoglobin H disease; Homozygous sickle cell and severe sickle cell/beta-thalassaemia parent; Haemoglobin SC disease; Mild sickle cell/beta-thalassaemia; Sickle cell trait; HIV; Cirrhosis and other chronic liver diseases, decompensated; Ulcerative colitis; Crohn’s disease; dietary iron deficiency; other infectious diseases; other neglected tropical diseases; other endocrine, nutrition, blood, and immune disorders; and other hemoglobinopathies and hemolytic anemias.
 
-The following table displays the cause- and sex-specific hemoglobin shifts used for the anemia causal attribution process in GBD 2019. These shifts are hosted `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia_causal_attribution/browse/priors/hb_shifts.csv>`_.
+Unlike with GBD 2019, cause- and sex-specific hemoglobin shifts used for the anemia causal attribution process in GBD 2023 can be pulled directly from Shared Functions.
 
-.. csv-table:: Cause- and Sex-Specific Hemoglobin Shifts
-  :widths: 15 15 15
-  :file: hb_shifts.csv
+
 
 Iron Responsive Causes
 ^^^^^^^^^^^^^^^^^^^^^^
