@@ -1102,8 +1102,15 @@ Default stratifications to all observers should include scenario and input draw.
     - N/A; All pregnant simulants observed through conclusion of relevant modeled outcomes. All neonatal simulants observed until 28 days (end of late neonatal age group)
     - Pregnant/birthing simulants do not age in this simulation
   * - Standard v&v scenarios list
-    - Baseline, misoprostol v&v, misoprostol scale-up, azithromycin v&v, azithromycin scale-up, anemia screening v&v, anemia screening and IV iron scale-up, MMS total scale-up
-    - These are the scenarios currently tested in our v&v
+    - * Baseline
+      * Misoprostol v&v
+      * Misoprostol scale-up
+      * Azithromycin v&v
+      * Azithromycin scale-up
+      * Anemia screening v&v 
+      * Anemia screening and IV iron scale-up
+      * MMS total scale-up
+    - These are the scenarios currently tested in our v&v checks
 
 .. list-table:: Summary of draw metadata by input parameter
   :header-rows: 1
