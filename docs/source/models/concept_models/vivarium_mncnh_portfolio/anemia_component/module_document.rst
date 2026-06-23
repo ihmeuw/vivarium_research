@@ -237,23 +237,23 @@ Anemia YLDs are estimated according to the following steps:
 
 .. code-block:: python
 
-   get_outputs(
-       location_id=[165,179,214],
-       topic='rei',
-       rei_id=[206,206,207], # We also have rei_id=192 for all anemia and rei_id=432 for moderate and severe combined
-       population_group_id=16,
-       sex_id=2,
-       year_id=2023,
-       release_id=16, # release_id=33 also works
-       compare_version_id=8306,
-       measure_id=[3,5],
-       age_group_id=[7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 169]
-   )
+   get_draws(
+        gbd_id_type='rei_id',
+        gbd_id=[205, 206, 207], # Mild, moderate, and severe anemia, respectively. We also have rei_id=192 for all anemia and rei_id=432 for moderate and severe combined
+        location_id=list(location_ids.location_id),
+        population_group_id=16, # pregnant population
+        sex_id=2, # female
+        year_id=2023,
+        release_id=33, # GBD 2023, special publications
+        source='como',
+        measure_id=5, # prevalence
+        metric_id=3, # rate
+        age_group_id=[7, 8, 9, 10, 11, 12, 13, 14, 15], # constituent age groups of 10-54 years (169)
+    )
 
 .. note::
 
    Make sure you have the latest version of ``db_queries`` to be able to use the ``population_group_id`` argument. To get pregnancy-specific results, the population group and the age groups need to be specified, because the default is all ages.
-   As of the time of writing (July 2025), we can only use ``population_group_id=16`` with ``get_outputs()``. There were a few EPIC/COMO runs with pregnancy this GBD round, which are noted in the `tracking HUB page <https://hub.ihme.washington.edu/spaces/GBDdirectory/pages/229280352/GBD+2023+EPIC+COMO+tracking>`_.
 
 
 5.0 References
