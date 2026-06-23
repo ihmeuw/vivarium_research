@@ -188,8 +188,8 @@ and maternal sepsis incidence probability (which is also age-specific), this bec
 and :math:`p(\text{maternal\_sepsis}|\text{no azithromycin})`), which we can solve analytically.
 
 As mentioned above, it is convenient to model this intervention like a dichotomous risk factor, so that we can reuse the
-:class:`Risk<vivarium.public_health.risks.base_risk.Risk>`
-and :class:`RiskEffect<vivarium.public_health.risks.effect.RiskEffect>` components in Vivarium Public Health,
+:class:`Risk<vivarium_public_health.risks.base_risk.Risk>`
+and :class:`RiskEffect<vivarium_public_health.risks.effect.RiskEffect>` components in Vivarium Public Health,
 rather than having to write new components from scratch.
 Calling the intervention a risk factor can sound a bit confusing because intervention access is a good thing, so it doesn't sound "risky."
 Instead, we flip it so the risk factor is "*lack* of access to the intervention."
