@@ -310,6 +310,10 @@ Values were calculated in this `sex of infant notebook <https://github.com/ihmeu
 This should be performed at the start of pregnancy (transition from np to p states)
 or upon initialization into the p state. Note that there is no variation by draw in this parameter. 
 
+.. todo::
+
+  The Nutrition Optimization simulation still uses hard coded values from the notebook above. We should update to pull directly from GBD.
+
 Duration of pregnancy
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -253,7 +253,7 @@ Anemia YLDs are estimated according to the following steps:
 
 .. note::
 
-   Make sure you have the latest version of ``db_queries`` to be able to use the ``population_group_id`` argument. To get pregnancy-specific results, the population group and the age groups need to be specified, because the default is all ages.
+   Converting this to a get_outputs call is a bit complex. To do so, make sure you have the latest version of ``db_queries`` to be able to use the ``population_group_id`` argument. To get pregnancy-specific results, the population group and the age groups need to be specified, because the default is all ages. Additionally, you will need to specify a compare version ID, which is 8352 for GBD 2023.
 
 
 5.0 References
