@@ -1685,7 +1685,7 @@ Wave III
     - Same as model 17.0
     - Same as model 17.0
     - Same as model 17.0
-    - This run should be launched from the ``gbd-2021`` branch. The fertility input data should be read from ``pregnancy model 13.0 results``. The artifact used for this run should be ``/mnt/team/simulation_science/pub/models/vivarium_gates_nutrition_optimization_child/artifacts/ethiopia_targeted_sqlns_reruns/ethiopia.hdf``.
+    - This run should be launched from the ``gbd-2021`` branch. The fertility input data should be read from ``pregnancy model 13.0 results``. The artifact used for this run should be ``/mnt/team/simulation_science/pub/models/vivarium_gates_nutrition_optimization_child/artifacts/model_19.0_ethiopia/ethiopia.hdf`` with the ``risk_factor.sqlns_treatment.risk_ratios`` key remade (an update was made to the raw data in the simulation repo and the artifact version was not remade to reflect this update). The artifact key remake can be performed from the ``gbd-2021`` branch.
 
       This model should include standard and modified SQ-LNS effects (and stratify results accordingly), utilize the evenly distributed population component, and results should be stratified by subnational location.
 
