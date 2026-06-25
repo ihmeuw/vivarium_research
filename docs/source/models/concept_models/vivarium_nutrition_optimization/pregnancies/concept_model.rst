@@ -631,6 +631,13 @@ Specific outputs for specific models are specified in the following section.
     - Default
     - Default
     - 
+  * - 13.0
+    - Rerun of Ethiopian location with framework updates to support rerun of child model production runs with resolved subnational scrambling issue for the targeted SQ-LNS model results
+    - Baseline and MMS+BEP
+    - Same as 12.0: 1,600,000 population size per draw, 100 draws
+    - Same as 12.0: Deaths, YLLs, YLDs, intervention counts, count of pregnancy outcomes 
+    - Same as 12.0: Live and still births with maternal_ids, infant sex, joint BMI/anemia exposure, intervention coverage, and LBWSG exposures
+    - Including more observations or stratifications is fine, this is just the minimal requirement
 
 .. note::
 
