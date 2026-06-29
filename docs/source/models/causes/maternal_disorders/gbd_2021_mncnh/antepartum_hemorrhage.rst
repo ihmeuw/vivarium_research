@@ -10,6 +10,10 @@ Disease Overview
 GBD 2023 Modeling Strategy
 --------------------------
 
+The GBD nonfatal methods appendix states that antepartum hemorrhage is defined as occurring "at or
+beyond 20 weeks of gestation."
+Note that many sources define this as after 24 weeks of gestation.
+
 Cause Hierarchy
 +++++++++++++++
 
@@ -368,8 +372,9 @@ Limitations
   which is likely not true.
 * Splitting out maternal hemorrhage (modeled as one cause in the GBD) into antepartum and postpartum hemorrhage (modeled as two separate causes in our model, with a vicious cycle between them through hemoglobin)
   will lead us to overestimate the total burden of maternal hemorrhage relative to GBD due to cases that have both antepartum and postpartum hemorrhage and have double-shifted hemoglobin.
-* We assume that abortion/miscarriage/ectopic pregnancies are too short to experience in antepartum hemorrhage.
-  In reality, some abortions may occur late enough in pregnancy to experience antepartum hemorrhage.
+* We assume that abortion/miscarriage/ectopic pregnancies are too short to experience antepartum hemorrhage.
+  In reality, some abortions and miscarriages may occur late enough in pregnancy to experience antepartum hemorrhage.
+  (In our simulation, miscarriage is defined as occurring before 24 weeks of gestation.)
 
 References
 ----------
