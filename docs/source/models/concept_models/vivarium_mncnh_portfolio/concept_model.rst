@@ -1906,6 +1906,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     -
   * -
+    - PPH/APH split updates
+    - Update antepartum hemorrhage to only affect still or live births (not abortion/miscarriage/ectopic pregnancies) and adjust maternal disorders incidence rates for antepartum hemorrhage mortality.
+      See `the relevant documentation <https://github.com/ihmeuw/vivarium_research/pull/1946>`__ for details on these updates.
+    - Baseline
+    - Default
+    -
+  * -
     - Larger run for neonatal mortality V&V
     - Larger population, with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers (already included in previous runs).
     - Baseline
@@ -1922,7 +1929,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Include effects of postpartum hemorrhage and antepartum hemorrhage on postpartum hemoglobin
     - Baseline
     - Default
-    -
+    - PPH/APH split updates run
   * -
     - Hemoglobin effects on depression and neonatal sepsis
     - New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
