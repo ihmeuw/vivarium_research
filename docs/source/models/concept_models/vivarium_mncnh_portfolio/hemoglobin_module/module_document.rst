@@ -361,10 +361,10 @@ The details of how to apply this effect are on the :ref:`risk effects page <2023
     - Source
     - Note
   * - Antepartum hemorrhage incidence
-    - :ref:`Antepartum hemorrhage module <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
+    - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
     - 
   * - Antepartum hemorrhage death
-    - :ref:`Antepartum hemorrhage module <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
+    - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
     - 
 
 .. list-table:: End of pregnancy hemoglobin module decision nodes
@@ -376,11 +376,11 @@ The details of how to apply this effect are on the :ref:`risk effects page <2023
     - Note
   * - 1
     - Died of antepartum hemorrhage?
-    - Direct input from :ref:`Antepartum hemorrhage module <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
+    - Direct input from :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
     -
   * - 2
     - Incidence of antepartum hemorrhage?
-    - Direct input from :ref:`Antepartum hemorrhage module <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
+    - Direct input from :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
     - 
 
 .. list-table:: End of pregnancy hemoglobin module outputs

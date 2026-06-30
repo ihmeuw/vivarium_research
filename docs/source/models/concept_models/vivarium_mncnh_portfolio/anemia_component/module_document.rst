@@ -167,11 +167,11 @@ Anemia YLDs are estimated according to the following steps:
     - Used to calculate anemia YLDs
     - 
   * - Antepartum hemorrhage incidence
-    - :ref:`Antepartum hemorrhage module <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
+    - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
     - Used to calculate anemia YLDs
     - 
   * - Antepartum hemorrhage death
-    - :ref:`Antepartum hemorrhage module <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
+    - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
     - Used to calculate anemia YLDs
     - 
 
