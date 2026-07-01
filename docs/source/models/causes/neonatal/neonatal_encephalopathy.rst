@@ -160,11 +160,11 @@ The way these CSMRisks are used is the same for all subcauses, and therefore is 
 The formula is:
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
     \text{CSMRisk}_{\text{BW},\text{GA}}
     &=
     \text{CSMRisk} \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z
-    \end{align*}
+    \end{aligned}
 
 where 
 :math:`\text{CSMRrisk}` is the cause-specific mortality risk for encephalopathy,

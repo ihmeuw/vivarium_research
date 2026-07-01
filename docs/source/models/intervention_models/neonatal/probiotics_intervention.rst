@@ -221,12 +221,12 @@ mortality rate.
     }
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
         p(\text{sepsis}) 
         &= \sum_{\text{paths without probiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{no probiotics})\\
         &+ \sum_{\text{paths with probiotics}} p(\text{path})\cdot p(\text{sepsis}|\text{probiotics})\\[.1in]
         p(\text{sepsis}|\text{no probiotics}) &= \text{RR}_\text{no probiotics} \cdot p(\text{sepsis}|\text{probiotics})
-    \end{align*}
+    \end{aligned}
 
 where :math:`p(\text{sepsis})` is the probability of dying from sepsis in the general population, and :math:`p(\text{sepsis}|\text{probiotics})` 
 and :math:`p(\text{sepsis}|\text{no probiotics})` are the probability of dying from sepsis in setting with and without access to probiotics.  
@@ -239,8 +239,8 @@ and mortality probability (which is also age-specific), this becomes a system of
 and :math:`p(\text{sepsis}|\text{no probiotics})`), which we can solve analytically.
 
 As mentioned above, it is convenient to model this intervention like a dichotomous risk factor, so that we can reuse the
-:class:`Risk<vivarium_public_health.risks.base_risk.Risk>`
-and :class:`RiskEffect<vivarium_public_health.risks.effect.RiskEffect>` components in Vivarium Public Health,
+:class:`Risk<vivarium.public_health.risks.base_risk.Risk>`
+and :class:`RiskEffect<vivarium.public_health.risks.effect.RiskEffect>` components in Vivarium Public Health,
 rather than having to write new components from scratch.
 Calling the intervention a risk factor can sound a bit confusing because intervention access is a good thing, so it doesn't sound "risky."
 Instead, we flip it so the risk factor is "*lack* of access to the intervention."

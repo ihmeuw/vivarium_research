@@ -167,14 +167,14 @@ For both preterm subcauses, the formula is:
 .. _preterm_csmrisk_equation:
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
     \text{CSMRisk}^{k}_{\text{BW},\text{GA}}
     &=
     \begin{cases}
     \text{CSMRisk} / p_\text{preterm} \cdot f_k \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z, & \text{if GA} < 37; \\
     0, & \text{if GA} \geq 37;
     \end{cases}
-    \end{align*}
+    \end{aligned}
 
 where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 :math:`\text{CSMRisk}` is the cause-specific mortality risk for preterm birth complications,
@@ -215,16 +215,16 @@ We define the ENN CSMRisk as:
 
 .. math::
 
-  \text{CSMRisk}_\text{ENN} = \frac{\text{enn_death_count}}{\text{live_birth_count}},
+  \text{CSMRisk}_\text{ENN} = \frac{\text{enn\_death\_count}}{\text{live\_birth\_count}},
 
-where the :math:`\text{enn_death_count}` and :math:`\text{live_birth_count}` are
+where the :math:`\text{enn\_death\_count}` and :math:`\text{live\_birth\_count}` are
 quantities pulled from GBD, as detailed in the table below.
 
 The LNN CSMRisk is:
 
 .. math::
 
-  \text{CSMRisk}_\text{LNN} = \frac{\text{lnn_death_count}}{\text{live_birth_count} - \text{enn_all_cause_death_count}},
+  \text{CSMRisk}_\text{LNN} = \frac{\text{lnn\_death\_count}}{\text{live\_birth\_count} - \text{enn\_all\_cause\_death\_count}},
 
 where, again, all quantities are pulled from GBD as detailed in the table below.
 
@@ -236,9 +236,9 @@ age less than 37 weeks:
 
 .. math::
 
-  p_{\text{preterm},\text{ENN}} = \sum_{\{\text{cat}: \text{GA}<37\}} \text{lbwsg_birth_prevalence}_\text{cat},
+  p_{\text{preterm},\text{ENN}} = \sum_{\{\text{cat}: \text{GA}<37\}} \text{lbwsg\_birth\_prevalence}_\text{cat},
 
-where :math:`\text{lbwsg_birth_prevalence}` can be pulled from GBD with minor transformations,
+where :math:`\text{lbwsg\_birth\_prevalence}` can be pulled from GBD with minor transformations,
 as detailed in the table below.
 
 For LNN, the situation is more complicated, because we need to account
@@ -264,9 +264,9 @@ Therefore, :math:`p_{\text{preterm},\text{LNN}}` is calculated as follows:
 .. math::
 
   p_{\text{preterm},\text{LNN}} = \frac{
-    \sum_{\{\text{cat}: \text{GA}<37\}} \text{lbwsg_birth_prevalence}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}
+    \sum_{\{\text{cat}: \text{GA}<37\}} \text{lbwsg\_birth\_prevalence}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}
   }{
-    \sum_{\text{cat}} \text{lbwsg_birth_prevalence}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}
+    \sum_{\text{cat}} \text{lbwsg\_birth\_prevalence}_\text{cat} \times \frac{n_\text{cat} - n^\text{deaths}_\text{cat}}{n_\text{cat}}
   },
 
 where :math:`n_\text{cat}` is the number of simulants initialized into each LBWSG category at birth

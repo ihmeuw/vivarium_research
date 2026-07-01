@@ -173,12 +173,12 @@ fill out the table.
   * - Number of draws
     - Desired number of draws that a given simulation is to be run for. (Generally, this should be a number between 1 and 1,000.)
     - e.g. 50 draws 
-    - Read more about draws in Vivarium :ref:`here <vivarium_best_practices_monte_carlo_uncertainty>`.
+    - Read more about draws in Vivarium :ref:`here <vivarium_best_practices_uncertainty>`.
   * - Population size per draw
     - Desired simulated population size per draw for a given simulation. 
     - e.g. 100,000 simulants
     - Read more about how to determine a reasonable population size for your simulation 
-      :ref:`here <vivarium_best_practices_monte_carlo_uncertainty>`. Note that engineers will
+      :ref:`here <vivarium_best_practices_uncertainty>`. Note that engineers will
       decide how many random seeds to use to achieve the specified population size per draw.
   * - Age start (initialization)
     - Minimum age that simulants are initialized at when the simulation begins.

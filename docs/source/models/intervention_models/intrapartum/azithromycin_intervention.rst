@@ -171,25 +171,25 @@ incidence rate.
     }
 
 .. math::
-    \begin{align*}
-        p(\text{maternal_sepsis}) 
-        &= \sum_{\text{paths without azithromycin}} p(\text{path})\cdot p(\text{maternal_sepsis}|\text{no azithromycin})\\
-        &+ \sum_{\text{paths with azithromycin}} p(\text{path})\cdot p(\text{maternal_sepsis}|\text{azithromycin})\\[.1in]
-        p(\text{maternal_sepsis}|\text{no azithromycin}) &= \text{RR}_\text{no azithromycin} \cdot p(\text{maternal_sepsis}|\text{azithromycin})
-    \end{align*}
+    \begin{aligned}
+        p(\text{maternal\_sepsis}) 
+        &= \sum_{\text{paths without azithromycin}} p(\text{path})\cdot p(\text{maternal\_sepsis}|\text{no azithromycin})\\
+        &+ \sum_{\text{paths with azithromycin}} p(\text{path})\cdot p(\text{maternal\_sepsis}|\text{azithromycin})\\[.1in]
+        p(\text{maternal\_sepsis}|\text{no azithromycin}) &= \text{RR}_\text{no azithromycin} \cdot p(\text{maternal\_sepsis}|\text{azithromycin})
+    \end{aligned}
 
-where :math:`p(\text{maternal_sepsis})` is the probability of contracting maternal sepsis in the general population, and :math:`p(\text{maternal_sepsis}|\text{azithromycin})` and
-:math:`p(\text{maternal_sepsis}|\text{no azithromycin})` are the probability of contracting maternal sepsis in settings with and without receiving prophylactic azithromycin.  For each 
+where :math:`p(\text{maternal\_sepsis})` is the probability of contracting maternal sepsis in the general population, and :math:`p(\text{maternal\_sepsis}|\text{azithromycin})` and
+:math:`p(\text{maternal\_sepsis}|\text{no azithromycin})` are the probability of contracting maternal sepsis in settings with and without receiving prophylactic azithromycin.  For each 
 path through the decision tree, :math:`p(\text{path})` is the probability of that path; for example the path that includes the edges labeled BEmONC and 
 unavailable occurs with probability that the birth is in a BEmONC facility times the probability that the simulant receives prophylactic azithromycin.
 
 When we fill in the location-specific values for delivery facility rates, azithromycin coverage, relative risk of maternal sepsis incidence with azithromycin, 
-and maternal sepsis incidence probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{maternal_sepsis}|\text{azithromycin})` 
-and :math:`p(\text{maternal_sepsis}|\text{no azithromycin})`), which we can solve analytically.
+and maternal sepsis incidence probability (which is also age-specific), this becomes a system of two linear equations with two unknowns (:math:`p(\text{maternal\_sepsis}|\text{azithromycin})` 
+and :math:`p(\text{maternal\_sepsis}|\text{no azithromycin})`), which we can solve analytically.
 
 As mentioned above, it is convenient to model this intervention like a dichotomous risk factor, so that we can reuse the
-:class:`Risk<vivarium_public_health.risks.base_risk.Risk>`
-and :class:`RiskEffect<vivarium_public_health.risks.effect.RiskEffect>` components in Vivarium Public Health,
+:class:`Risk<vivarium.public_health.risks.base_risk.Risk>`
+and :class:`RiskEffect<vivarium.public_health.risks.effect.RiskEffect>` components in Vivarium Public Health,
 rather than having to write new components from scratch.
 Calling the intervention a risk factor can sound a bit confusing because intervention access is a good thing, so it doesn't sound "risky."
 Instead, we flip it so the risk factor is "*lack* of access to the intervention."

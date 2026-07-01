@@ -43,16 +43,18 @@ Hemoglobin Risk Effects (GBD 2023)
 Risk Overview
 -------------
 
-.. todo::
-
-  Provide overview and references for hemoglobin team's efforts for the hemoglobin burden of proof models when they are available
+`See the pre-print for the GBD burden of proof model of low hemoglobin publication here <https://www.researchsquare.com/article/rs-7567885/v1>`__
 
 GBD 2023 Modeling Strategy
 --------------------------
 
 .. note::
 
-  As of March 2025 it is undecided whether the hemoglobin risk factor will be included in the GBD 2023 publication. Regardless, risk effects estimates for the following affected outcomes have been uploaded to GBD shared functions.
+  The low hemoglobin risk factor was NOT included in the GBD 2023 risk factors capstone publication (release ID 16). However, estimates specific to the low hemoglobin risk factor that were used to inform the low hemoglobin burden of proof publication are available within release ID 33 (`see details here <https://hub.ihme.washington.edu/spaces/GBDdirectory/pages/171583888/Releases+rounds+and+versioning>`__). Release ID 33 should be used to pull all data related to the low hemoglobin risk effects -- note that release ID 16 may return data, but it is expected to be outdated.
+
+    Note that :ref:`low hemoglobin risk exposure <2023_hemoglobin_exposure>` values are expected to be similar between release ID 16 and 33, although there appear to be at least slight rounding differences. We have used release ID 16 to inform low hemoglobin risk exposure in the MNCNH portfolio model to maximize consistency with GBD anemia estimates (affected by hemoglobin exposure). However, if we were to utilize the low hemoglobin PAF values directly in our model (we calculate custom PAFs for the MNCNH portfolio simulation), it may be preferable to inform hemoglobin risk exposure from release ID 33 rather than 16.
+
+  See `the pre-print for the GBD burden of proof model of low hemoglobin publication here <https://www.researchsquare.com/article/rs-7567885/v1>`__ for all details on the low hemoglobin risk modeling strategy.
 
 In GBD 2023, the hemoglobin risk effects are modeled as continuous risk curves with 1,000 exposure estimates ranging between values of 40 and 150. Exposure values <40 are assigned a risk value consistent with an exposure of 40 and exposure values >150 are assigned a risk value consistent with an exposure of 150.
 
@@ -94,7 +96,7 @@ The relative risk curves for maternal disorders affected outcomes in GBD shared 
 
 .. image:: maternal_disorders_risk_curve.png
 
-The hemoglobin team has also estimated risk effects for several additional outcomes. A list of these affected outcomes is shown below and risk curve values for each of these outcomes can be found at :code:`/mnt/team/anemia/pub/bop/sim_studies/`.
+The hemoglobin team has also estimated risk effects for several additional outcomes. A list of these affected outcomes is shown below and risk curve values for each of these outcomes can be found at :code:`/mnt/team/anemia/pub/bop/sim_studies/`. These risk curves were provided by the low hemoglobin risk modeller Ditha Nanditha in July of 2025.
 
 - Low birth weight (Operationalized as categorical for <2,500 grams and additional severities)
 
@@ -131,9 +133,15 @@ Note that we will not be modeling direct effects of hemoglobin on the affected o
      - Affected measure
      - Note
    * - Maternal disorders
-     - :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+     - :ref:`Antepartum hemorrhage <2023_cause_antepartum_hemorrhage_mncnh>`
      - cause
-     - c367
+     - (a subset of) c367
+     - :math:`ir`
+     - 
+   * - Maternal disorders
+     - :ref:`Postpartum hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>`
+     - cause
+     - (a subset of) c367
      - :math:`ir`
      - 
    * - Maternal disorders
@@ -170,7 +178,7 @@ Maternal disorders
 
 Use the modeling strategy described below for the following maternal disorders subcauses:
 
-- :ref:`Maternal hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+- :ref:`Postpartum hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>`
 - :ref:`Maternal sepsis and other maternal infections <2021_cause_maternal_sepsis_mncnh>`
 - :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
 - Maternal hypertensive disorders
@@ -197,7 +205,7 @@ Before being applied in the simulation, these relative risk values are first re-
 
 We calculate custom PAFs for hemoglobin on maternal disorders outcome for use in the MNCNH simulation. Code to generate these PAFs can be found here ``TODO: POST LINK``. We utilize the interactive context to initialize a population with assigned hemoglobin exposure values, assign relative risk values in accordance with observed exposure, and calculate PAFs among the population as (mean_rr - 1) / mean_rr among the age-stratified population (note that the hemoglobin risk factor data as well as maternal disorders outcome data are both already specific to ``sex=='female'``). This PAF calculation process is limited in the following ways:
 
-- The PAF calculation does not take detailed correlation with other factors that affect maternal hemorrhage and maternal sepsis risk into account. For instance, the correlation between ANC attendance and in-facility delivery in our simulation will induce a correlation between hemoglobin (as a result of baseline IFA coverage distributed at ANC) and misoprostol coverage (available at home deliveries only), both of which affect maternal hemorrhage risk. We hypothesize that the impact of ignoring this sort of correlation will be small enough for our model to calibrate, but we can revisit this assumption if the model calibrates poorly.
+- The PAF calculation does not take detailed correlation with other factors that affect postpartum hemorrhage and maternal sepsis risk into account. For instance, the correlation between ANC attendance and in-facility delivery in our simulation will induce a correlation between hemoglobin (as a result of baseline IFA coverage distributed at ANC) and misoprostol coverage (available at home deliveries only), both of which affect postpartum hemorrhage risk. We hypothesize that the impact of ignoring this sort of correlation will be small enough for our model to calibrate, but we can revisit this assumption if the model calibrates poorly.
 - We use the hemoglobin exposure distribution during pregnancy to calculate the PAF on postpartum depression rather than the hemoglobin exposure distribution among simulants who survive to the postpartum period. Given that maternal mortality is a rare event, we assume this limitation will be small, but it can be revisited if the model calibrates poorly.
 
 Also note that the simulated population does not have a uniform distribution of maternal ages. The PAF values for age groups with less person time have less statistical precision than age groups with more person time represented in our simulation.
@@ -228,15 +236,15 @@ Assumptions and Limitations
 
   To minimize bias, the PAFs of hemoglobin on affected maternal disorder outcomes should account for the joint effects of any additional modeled factors that (1) are correlated with hemoglobin exposure and (2) affect the same outcome. A list of potential factors that satisfy these criteria are listed below:
 
-    - Cesarean section and maternal hemorrhage
+    - Cesarean section and postpartum hemorrhage
 
     - Intrapartum azithromycin intervention and maternal sepsis
 
     - Preeclampsia prevention/treatment interventions and maternal hypertensive disorders
 
-  All of these interventions may be expected to be positively correlated with hemoglobin exposure through access to the health care system or other factors. Therefore, by not considering the joint effects of these factors with the hemoglobin risk effect in baseline calibration of our model, we are likely underestimate the PAF for maternal hemorrhage and overestimate the PAF for maternal sepsis and hypertensive disorders. 
+  All of these interventions may be expected to be positively correlated with hemoglobin exposure through access to the health care system or other factors. Therefore, by not considering the joint effects of these factors with the hemoglobin risk effect in baseline calibration of our model, we are likely underestimate the PAF for postpartum hemorrhage and overestimate the PAF for maternal sepsis and hypertensive disorders. 
 
-  This will likely result in an overestimate of the impact of interventions that work through reductions in anemia (MMS, IV iron) on maternal hemorrhage and overestimate the impact on maternal sepsis and hypertensive disorders.
+  This will likely result in an overestimate of the impact of interventions that work through reductions in anemia (MMS, IV iron) on postpartum hemorrhage and overestimate the impact on maternal sepsis and hypertensive disorders.
 
 2. We do not consider how hemoglobin exposure and/or risk effects vary with gestational age at birth in this model.
 
@@ -272,7 +280,7 @@ Effect application
 
 .. math::
 
-  \text{CSMRisk}_i = \text{CSMRisk} \times (1 - \text{PAF}) \times \text{RR}_\text{hemoglobin}_i
+  \text{CSMRisk}_i = \text{CSMRisk} \times (1 - \text{PAF}) \times \text{RR}_{\text{hemoglobin}_i}
 
 Where,
 
@@ -295,7 +303,7 @@ Where,
     - Population attributable fraction of hemoglobin on neonatal sepsis
     - Custom-calculated PAF values available here ``TODO: POST LINK``
     - See details on the PAF calculation below 
-  * - :math:`\text{RR}_\text{hemoglobin}_i`
+  * - :math:`\text{RR}_{\text{hemoglobin}_i}`
     - Relative risk value for the direct effect of hemoglobin on neonatal sepsis, specific to that individual simulated dyad's hemoglobin exposure level at birth
     - Defined in the `Effect derivation`_ section
     - 

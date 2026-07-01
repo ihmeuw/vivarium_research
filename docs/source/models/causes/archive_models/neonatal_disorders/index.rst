@@ -165,7 +165,7 @@ State and Transition Data Tables
      -
    * - C
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c380}}{\text{population} \,\times\, \text{prevalence_c380}}`
+     - :math:`\frac{\text{deaths\_c380}}{\text{population} \,\times\, \text{prevalence\_c380}}`
      - = (cause-specific mortality rate) / prevalence
    * - C
      - disability weight
@@ -189,7 +189,7 @@ State and Transition Data Tables
      - this is a fatal-only model
    * - All
      - cause-specific mortality rate
-     - :math:`\frac{\text{deaths_c380}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c380}}{\text{population}}`
      -
 
 .. list-table:: Transition Data

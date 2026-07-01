@@ -561,7 +561,7 @@ following function :math:`f_\text{IFD}`:
 
 .. math::
 
-  \begin{align*}
+  \begin{aligned}
   \text{IFD status}
   &= f_\text{IFD}(\text{believed preterm status},\ u_\text{IFD}) \\
   &=  \begin{cases}
@@ -570,7 +570,7 @@ following function :math:`f_\text{IFD}`:
           \operatorname{do}(\text{believed preterm status})] \\
       \text{in-facility}, & \text{otherwise}.
       \end{cases}
-  \end{align*}
+  \end{aligned}
 
 Note that, as described in the previous section,  smaller values of
 :math:`u_\text{IFD}` correspond with home delivery, while larger values
@@ -686,6 +686,8 @@ in the artifact:
     - Proportion of all births that occur in CEmONC facilities
     - :code:`in_facility_delivery_proportion * (1 - bemonc_facility_fraction)`
     - Used in calculating total population intervention coverage as a weighted average across delivery settings for intervention with coverage that varies by delivery facility at baseline and for V&V
+
+.. _facility_choice_calibration:
 
 Challenge of calibrating the model
 ----------------------------------

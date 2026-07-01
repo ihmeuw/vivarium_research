@@ -36,7 +36,8 @@ in the indicated model-building wave:
 .. toctree::
     :maxdepth: 1
 
-    maternal_hemorrhage
+    antepartum_hemorrhage
+    postpartum_hemorrhage
     maternal_sepsis
     obstructed_labor
     postpartum_depression
@@ -335,10 +336,9 @@ future waves, the simulation should make decisions about incidence of
 the different subcauses in the order of the suspected causal
 relationships. The specified order is:
 
-#. Abortion/miscarriage/ectopic pregnancy maternal disorders
 #. Maternal hypertensive disorders
 #. Obstructed labor and uterine rupture
-#. Maternal hemorrhage
+#. Postpartum hemorrhage
 #. Maternal sepsis and other maternal infections
 #. Residual maternal disorders
 #. Postpartum depression
@@ -417,7 +417,7 @@ by averaging over the entire population of simulants who have the cause
  .. math::
     :label: cfr_correct_eqn
 
-    \begin{align*}
+    \begin{aligned}
     P(\text{simulant dies of $c_i$} \mid \text{simulant has $c_i$})
         \hspace{-7.5cm}& \\
     &= \sum_k \sum_{\substack{c_1,\dotsc, c_k\in \text{causes}
@@ -434,7 +434,7 @@ by averaging over the entire population of simulants who have the cause
             \\ c_i \in \{c_1,\dotsc, c_k\}}}
         P(\text{has $c_1,\dotsc, c_k$ only} \mid \text{has $c_i$})\\
     &= \operatorname{cfr}_i \cdot 1.
-    \end{align*}
+    \end{aligned}
 
 The first step and last step hold because the union of the disjoint
 events :math:`\{\text{has $c_1,\dotsc, c_k$ only}\}` over all subsets

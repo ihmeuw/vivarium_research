@@ -301,25 +301,18 @@ Sex of infant
 
   The IV iron simulation assumed 50/50 probability
 
-For pregnancies that result in live birth or stillbirth outcomes, infant sex should be determined and recorded acording to the probability of male sex shown in the table below (probability of female birth is equal to 1 minus the probability of male birth). This should be performed at the start of pregnancy (transition from np to p states) or upon initialization into the p state. These sex ratios were calculated using the live births by sex 2020 GBD covariate (ID 1106), `shown here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/Live%20births%20by%20sex.ipynb>`_. Note that there is no variation by draw in this parameter. 
+For pregnancies that result in live birth or stillbirth outcomes,
+infant sex should be determined and recorded acording to the probability
+of male sex calculated using the live births by sex GBD covariate
+(ID 1106) for the appropriate GBD cycle (2021 or 2023 depending on the run).
+Values were calculated in this `sex of infant notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/Live%20births%20by%20sex.ipynb>`_
+(probability of female birth is equal to 1 minus the probability of male birth).
+This should be performed at the start of pregnancy (transition from np to p states)
+or upon initialization into the p state. Note that there is no variation by draw in this parameter. 
 
-.. _sex_ratio_table_21:
+.. todo::
 
-.. list-table:: Probability of male birth
-    :header-rows: 1
-
-    *   - Location
-        - Location ID
-        - Value
-    *   - Pakistan 
-        - 165
-        - 0.514583
-    *   - Nigeria
-        - 214
-        - 0.511785 
-    *   - Ethiopia
-        - 179
-        - 0.514271  
+  The Nutrition Optimization simulation still uses hard coded values from the notebook above. We should update to pull directly from GBD.
 
 Duration of pregnancy
 ~~~~~~~~~~~~~~~~~~~~~~~~

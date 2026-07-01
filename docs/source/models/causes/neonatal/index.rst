@@ -250,10 +250,10 @@ Mathematically this is achieved by the following formula.
 Starting with this equation, we omit age group subscripts for brevity; all quantities are still age-, sex-, and location-specific.
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
     \text{ACMRisk}_{\text{BW},\text{GA}}^{\text{BW}^0,\text{GA}^0} &= \sum_{\text{c} \in \text{affected}} \text{CSMRisk}_c \times (1 - \text{PAF}_{\text{LBWSG}}) \times \text{RR}_{\text{BW},\text{GA}} \\
     & + (\text{ACMRisk} - \sum_{\text{c} \in \text{affected}} \text{CSMRisk}_c) \times (1 - \text{PAF}_{\text{LBWSG}}) \times \text{RR}_{\text{BW}^0,\text{GA}^0}
-    \end{align*}
+    \end{aligned}
 
 Where:
 
@@ -267,11 +267,10 @@ Where:
 To obtain the ACMRisk for a specific simulant (:math:`\text{ACMRisk}_i`), we subtract off the *population* CSMRisks for each modeled subcause :math:`k` for the birth weight and gestational age of the simulant, and then add back in the (potentially pipeline-modified) *individual* CSMRisks for the specific simulant, which might differ from baseline due to intervention coverage:
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
     \text{ACMRisk}_i &= \text{ACMRisk}_{\text{BW}_i,\text{GA}_i}^{\text{BW}_i^0,\text{GA}_i^0} - \sum_{k \in \text{affected}} \text{CSMRisk}_{\text{BW}_i,\text{GA}_i}^{k} \\
     & - \sum_{k \in \text{unaffected}} \text{CSMRisk}_{\text{BW}_i^0,\text{GA}_i^0}{k}
-    + \sum_k \text{CSMRisk}_{i}^{k}
-    \end{align*}
+    \end{aligned}
 
 where:
 
@@ -287,10 +286,10 @@ where:
 In addition to determining which simulants die due to any cause, we also need to determine which subcause is underlying the death.  This is done by sampling from a categorical distribution obtained by renormalizing the CSMRisks:
 
 .. math::
-    \begin{align*}
+    \begin{aligned}
     \text{Pr}[\text{subcause} = k\;|\;\text{neonate died}] &= \frac{\text{CSMRisk}_{i}^{k}}
     {\text{ACMRisk}_i},
-    \end{align*}
+    \end{aligned}
 
 including a special :math:`k=0` for the residual "all other causes" category defined by :math:`\text{CSMRisk}_{i}^{0} = \text{ACMRisk}_i - \sum_{k=1}^K \text{CSMRisk}_{i}^{k}.`
 

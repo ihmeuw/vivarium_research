@@ -191,7 +191,7 @@ represent decision probabilities rather than rates per unit time.
     * - start
       - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>` (due to condition on the overall intrapartum component)
+        <other_models_pregnancy_closed_cohort_mncnh>` and not have died from antepartum hemorrhage (due to condition on the overall intrapartum component)
     * - sepsis
       - Parent simulant has maternal sepsis
     * - parent not dead of maternal sepsis
@@ -226,22 +226,22 @@ in the decision graph. The incidence risk per birth will be computed as
 
 .. math::
 
-    \text{ir} = \frac{\text{sepsis cases}}{\text{births}}
+    \text{ir} = \frac{\text{sepsis cases}}{\text{births} - \text{antepartum hemorrhage deaths}}
         = \frac{\text{(sepsis cases) / person-time}}
-            {\text{births / person-time}}
-        = \frac{\text{sepsis incidence rate}}{\text{birth rate}}.
+            {\text{births / person-time} - \text{(antepartum hemorrhage deaths) / person-time}}
+        = \frac{\text{sepsis incidence rate}}{\text{birth rate} - \text{antepartum hemorrhage cause-specific mortality rate}}.
 
 The case fatality rate will be computed as
 
 .. math::
 
-    \begin{align*}
+    \begin{aligned}
     \text{cfr} &= \frac{\text{sepsis deaths}}{\text{sepsis cases}} \\
         &= \frac{\text{(sepsis deaths) / person-time}}
             {\text{(sepsis cases) / person-time}}
         = \frac{\text{sepsis cause specific mortality rate}}
             {\text{sepsis incidence rate}}.
-    \end{align*}
+    \end{aligned}
 
 The following table shows the data needed from GBD for these
 calculations as well as for the calculation of YLDs in the next section.
@@ -268,9 +268,9 @@ calculations as well as for the calculation of YLDs in the next section.
       - Note
     * - ir
       - maternal sepsis incidence risk per birth
-      - incidence_c368 / birth_rate
+      - incidence_c368 / (birth_rate - antepartum_hemorrhage_csmr)
       - The value of ir is a probabiity in [0,1]. Denominator includes
-        live births and stillbirths.
+        live births and stillbirths among parents who did not die from antepartum hemorrhage.
     * - cfr
       - case fatality rate of maternal sepsis
       - csmr_c368 / incidence_368
@@ -320,6 +320,10 @@ calculations as well as for the calculation of YLDs in the next section.
       - YLDs per case of maternal sepsis
       - yld_rate_c368 / incidence_c368
       -
+    * - antepartum_hemorrhage_csmr
+      - cause-specific mortality rate of antepartum hemorrhage
+      - csmr_c367 * (1 - postpartum_fraction)
+      - See :ref:`antepartum hemorrhage document <2023_cause_antepartum_hemorrhage_mncnh>` for more details on how this value is calculated.
 
 
 Calculating Burden
@@ -346,13 +350,13 @@ simulant's age group, which is defined in the above data table as
 
 .. math::
 
-    \begin{align*}
-    \text{ylds_per_case_c368}
+    \begin{aligned}
+    \text{ylds\_per\_case\_c368}
         &= \frac{\text{sepsis YLDs}}{\text{sepsis cases}}\\
         &= \frac{\text{(sepsis YLDs) / person-time}}
             {\text{(sepsis cases) / person-time}}
         = \frac{\text{sepsis YLD rate}}{\text{sepsis incidence rate}}.
-    \end{align*}
+    \end{aligned}
 
 We are using the fact that  each simulant can get at most one case of
 maternal sepsis during the simulation, so the average number of YLDs per

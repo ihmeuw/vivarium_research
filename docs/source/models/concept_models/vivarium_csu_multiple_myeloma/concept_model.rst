@@ -840,9 +840,9 @@ For the burn-in period (both scenarios):
 
     Then, the probability of treatment category exposure for each treatment category at treatment line :math:`x` is as follows:
 
-    :math:`p_\text{x,isa} = \frac{(c_\text{x,isa} - ever_\text{x-1} \times 0.15  \times \frac{c_\text{x,isa}}{(c_\text{x,dara} + c_\text{x,isa})}}{1 - ever_\text{x-1}}`
+    :math:`p_\text{x,isa} = \frac{(c_\text{x,isa} - ever_\text{x-1}) \times 0.15  \times \frac{c_\text{x,isa}}{(c_\text{x,dara} + c_\text{x,isa})}}{1 - ever_\text{x-1}}`
 
-    :math:`p_\text{x,dara} = \frac{(c_\text{x,dara} - ever_\text{x-1} \times 0.15  \times \frac{c_\text{x,dara}}{(c_\text{x,dara} + c_\text{x,isa})}}{1 - ever_\text{x-1}}`
+    :math:`p_\text{x,dara} = \frac{(c_\text{x,dara} - ever_\text{x-1}) \times 0.15  \times \frac{c_\text{x,dara}}{(c_\text{x,dara} + c_\text{x,isa})}}{1 - ever_\text{x-1}}`
 
     :math:`p_\text{x,resid} = 1 - p_\text{x,isa} - p_\text{x,dara}`
 

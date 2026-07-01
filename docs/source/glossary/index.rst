@@ -6,6 +6,10 @@ Glossary
 
 .. glossary::
 
+   Burn-in Period
+      A period prior to the simulation time frame in which the Vivarium model is
+      run in order to intialize simulation parameters.
+   
    Concept Model
       A detailed description of an entire simulation model.  Concept models
       use narrative, math equations, and diagrams to describe a system

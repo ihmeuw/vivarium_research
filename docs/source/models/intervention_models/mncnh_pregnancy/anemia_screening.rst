@@ -61,15 +61,21 @@ Ferritin is a protein that stores iron within the body and low blood ferritin le
 screen will also be screened for ferritin levels via a minimally invasive screening (finger prick). Pregnancies that have a hemoglobin level <100 g/L and a blood ferritin level below 15 ug/L 
 (anemic AND iron deficient) are eligible for IV iron.
 
-Notably, the GBD does not have any estimates related to ferritin exposure. However, the GBD assigns specific causes to all cases of anemia. Some of these causes of anemia are considered "iron 
+Notably, the GBD does not have any estimates related to ferritin exposure or ferritin screening. However, the GBD assigns specific causes to all cases of anemia. Some of these causes of anemia are considered "iron 
 responsive," indicating that they are iron deficiency anemia. An example of an iron deficiency anemia is anemia caused by maternal hemorrhage (caused by blood loss, decreasing systemic levels 
 of both hemoglobin and iron). An example of a non-iron responsive anemia is sickle cell trait (low hemoglobin is due to a defect in hemoglobin protein rather than low iron levels). Notably, it 
 is possible for non-iron-responsive anemias to also have low iron levels. See the :ref:`anemia impairment document <2019_anemia_impairment>` for a list of iron responsive and non iron responsive 
 causes of anemia in the GBD.
 
-Therefore, in our model we will use the severity-specific fraction of iron responsive anemia among all causes of anemia in GBD as a proxy measure for the fraction of anemia cases with low ferritin. 
-This approach is limited in that we may slightly underestimate total eligibility by not considering the proportion of the population who has low hemoglobin due to an iron-non-responsive cause and 
+Unlike hemoglobin screening, we do not explicitly model any test inaccuracy with e.g. a sensitivity and specificity.
+We assign simulants only a *tested* ferritin value, not a true underlying value.
+
+In our model we will use the severity-specific fraction of iron-responsive anemia among all causes of anemia
+in GBD as a proxy measure for the fraction of anemia cases (of that severity) who receive a low ferritin test result when screened. 
+This approach is limited in that we may slightly underestimate low ferritin by not considering the proportion of the population who has low hemoglobin due to an iron-non-responsive cause and 
 also coincidentally has low ferritin.
+It is also limited in that we may overstate the differences between anemia severities with respect to ferritin *test* results
+due to testing inaccuracies (false positives and false negatives).
 
 .. note::
 
@@ -189,8 +195,11 @@ Assumptions and Limitations
   in order to match the desired sensitivity and specificity of the screening test, we would need to solve for the uncertainty 
   distribution, likely via optimization, at the location-specific level (as it will depend on the underlying population 
   hemoglobin exposure distribution).
-- We use the severity-specific fraction of iron responsive anemia among all causes of anemia in GBD as a proxy measure for the fraction of anemia cases with low ferritin. This approach is limited in that we may slightly underestimate total eligibility by not considering the proportion of the population who has low hemoglobin due to an iron-non-responsive cause and also coincidentally has low ferritin.
-- In the absence of data to directly inform otherwise, we assume that the population without anemia has half the rate of low ferritin exposure as the population with mild anemia. We made this assumption given that the population without anemia is expected to have a low ferritin exposure level that is greater than zero but less than that of the population with mild anemia.
+- We use the severity-specific fraction of iron responsive anemia among all causes of anemia in GBD as a proxy measure for the fraction of anemia cases with low ferritin test results.
+  This approach is limited in that we may slightly underestimate total eligibility by not considering the proportion of the population who has low hemoglobin due to an iron-non-responsive cause and also coincidentally has low ferritin.
+  It is also limited in that we may overstate the differences between anemia severities with respect to ferritin *test* results
+  due to testing inaccuracies (false positives and false negatives).
+- In the absence of data to directly inform otherwise, we assume that the population without anemia has half the rate of low ferritin test results as the population with mild anemia. We made this assumption given that the population without anemia is expected to have a low ferritin exposure level that is greater than zero but less than that of the population with mild anemia.
 
 .. todo:: 
 
