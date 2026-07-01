@@ -1959,7 +1959,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__
     - All
     - Default
-    - Larger run for neonatal mortality V&V run
+    -
 
 .. note:: 
 
@@ -3109,8 +3109,8 @@ Default stratifications to all observers should include scenario and input draw.
   * - 36.1
     - Larger run for neonatal mortality V&V
     - Regression testing with larger sample size for neonatal mortality
-    - 
-    -
+    - All checks passing within acceptable margins
+    - `Model 36.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/b198d8c466f8ed40b4759bba330d42a089da98df/tests/model_notebooks/results/executed>`__
   * - 37.0
     - Effects of maternal sepsis on postpartum hemoglobin
     - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident maternal sepsis
@@ -3118,19 +3118,14 @@ Default stratifications to all observers should include scenario and input draw.
     - 
     -
   * - 
-    - Larger run for neonatal mortality V&V
-    - Confirm expected rates of cause-specific and overall maternal disorders causes
-    -
-    -
-  * - 
-    - Update hemoglobin effects
+    - Hemoglobin effects on depression and neonatal sepsis
     - * Confirm that neonatal mortality (particularly for neonatal sepsis) still matches expectation in the baseline scenario
       * Using the interactive simulation, confirm effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. The total effect should be evaluated by stepping through the simulation and observing the rate of mortality due to neonatal sepsis stratified by maternal hemoglobin exposure.
     - 
     - 
   * - 
-    - Effects of postpartum hemorrhage on postpartum hemoglobin
-    - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident PPH
+    - PPH/APH effects on hemoglobin
+    - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident APH/PPH
       * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
     - 
     -
@@ -3140,15 +3135,6 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm that deaths averted between the baseline and MMS scale-up scenarios have decreased between this model run and the previous
       * In the interactive simulation, confirm that mortality due to both LBWSG-affected and LBWSG-unaffected causes vary in accordance with baseline LBWSG exposures
       * In the interactive simulation, confirm that mortality due to LBWSG-affected causes varies in accordance with intervention modified LBWSG exposure and that mortality due to LBWSG-unaffected causes varies in accordance with pre-intervention modified LBWSG exposure
-    - 
-    - 
-  * - 
-    - Trimester-specific ultrasound
-    - * Confirm that all facility choice model targets are met (see list for model 15.0)
-      * Confirm ultrasound coverage matches inputs for all scenarios 
-      * Confirm that ratio between ultrasound timing categories matches the expected ratio between first trimester ANC attendance and later pregnancy only ANC attendance. More specifically, the following should be true ``standard_first_trimester / standard_later_pregnancy == ai_assisted_first_trimester / ai_assisted_later_pregnancy == (anc_first_trimester_only + anc_first_trimester_and_later_pregnancy) / anc_later_pregnancy_only``
-      * Confirm that ultrasounds performed in the first trimester occur only among those who attend ANC in the first trimester according to their ANC attendance category (and likewise for later pregnancy)
-      * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type and timing (specific distribution of errors assessed in the interactive simulation and summary "confusion matrix" assessed as part of the facility choice model V&V targets)
     - 
     - 
 
