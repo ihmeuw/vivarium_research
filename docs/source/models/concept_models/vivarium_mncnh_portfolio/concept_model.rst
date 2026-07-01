@@ -1107,6 +1107,16 @@ Default stratifications to all observers should include scenario and input draw.
   * - Age end (observation)
     - N/A; All pregnant simulants observed through conclusion of relevant modeled outcomes. All neonatal simulants observed until 28 days (end of late neonatal age group)
     - Pregnant/birthing simulants do not age in this simulation
+  * - Standard V&V scenarios list
+    - * Baseline
+      * Misoprostol V&V
+      * Misoprostol scale-up
+      * Azithromycin V&V
+      * Azithromycin scale-up
+      * Anemia screening V&V 
+      * Anemia screening and IV iron scale-up
+      * MMS total scale-up
+    - These are the scenarios currently tested in our V&V checks
 
 .. list-table:: Summary of draw metadata by input parameter
   :header-rows: 1
@@ -1915,31 +1925,31 @@ Default stratifications to all observers should include scenario and input draw.
   * -
     - Larger run for neonatal mortality V&V
     - Larger population, with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers (already included in previous runs).
-    - Baseline
+    - Standard V&V scenarios
     - For this run only, 10,000,000 population size per draw
     -
   * -
     - Effects of maternal sepsis on postpartum hemoglobin
     - Effects of maternal sepsis on postpartum hemoglobin as described :ref:`on the sepsis risk effects page <2023_risk_effect_maternal_sepsis>`
-    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - Standard V&V scenarios
     - Default
     - 
   * -
     - PPH/APH effects on hemoglobin
     - Include effects of postpartum hemorrhage and antepartum hemorrhage on postpartum hemoglobin
-    - Baseline
+    - Standard V&V scenarios
     - Default
     - PPH/APH split updates run
   * -
     - Hemoglobin effects on depression and neonatal sepsis
     - New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
-    - Baseline and IV iron scale-up scenarios
+    - Standard V&V scenarios
     - Default
     -
   * -
     - E-MOTIVE
     - E-MOTIVE and its effects on postpartum hemorrhage
-    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - Standard V&V scenarios
     - Default
     - Research tickets to `document E-MOTIVE <https://jira.ihme.washington.edu/browse/SSCI-2584>`__, PPH/APH effects on hemoglobin run
   * - 
