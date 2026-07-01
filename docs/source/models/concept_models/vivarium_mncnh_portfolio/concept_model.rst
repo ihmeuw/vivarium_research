@@ -205,7 +205,7 @@ impact either of these attributes.
 Even in the future if we modeled an intervention that increased ANC attendance, that intervention
 wouldn't act through changing broad pregnancy outcome, hence there is no need to model a causal relationship.
 
-The overall simulation model is divided into four "components," which are differentiated by the timespan
+The overall simulation model is divided into four "components," which are roughly differentiated by the timespan
 and the simulant that they model.
 
 * The :ref:`Pregnancy component <mncnh_portfolio_pregnancy_component>`, which models
@@ -221,6 +221,14 @@ and the simulant that they model.
 
   When we say "component" here, we mean something distinct from a
   :ref:`Vivarium component <vivarium:components_concept>`.
+  Because this is confusing, we intend to switch to a different term.
+
+.. todo::
+
+  There are several ways in which this "timespan and simulant" split is not respected.
+  This is a leaky abstraction.
+  A more principled way to describe these components would be by their causal relationships.
+  We should revisit this.
 
 Graphically, the component breakdown looks like this:
 
@@ -232,27 +240,22 @@ Graphically, the component breakdown looks like this:
   constant.
   Also, if misinterpreted this way, the x-axis would be wildly not to scale.
 
-However, the only situation in which all components are actually reached for a given simulant
+However, the only situation in which all components are actually used for a given simulant
 dyad is the case in which the pregnancy results in a live birth and the birthing person survives
 childbirth.
-In other situations, some components will not be reached.
-The rules by which components flow into other components are as follows:
+In other situations, some components will not be used.
+The rules by which components are triggered is as follows:
 
-* All simulant dyads start at the pregnancy component.
-* If the birth outcome from the pregnancy component is a live or stillbirth (NOT abortion/miscarriage/ectopic pregnancy), proceed to the intrapartum component.
-  Otherwise, skip to the postpartum component.
-* At the end of the intrapartum component, if the birth outcome from the pregnancy component is a live birth,
-  proceed to the neonatal component.
-  Otherwise, if the birth parent survives childbirth, proceed to the postpartum component.
-* At the end of the neonatal component, if the birth parent survived childbirth in the intrapartum component,
-  proceed to the postpartum component.
-
-Here is a graphic representation of the same information:
-
-.. image:: component_flow_diagram.drawio.png
+* All simulant dyads pass through the pregnancy component.
+* If the broad pregnancy outcome from the pregnancy component was a live or stillbirth (NOT abortion/miscarriage/ectopic pregnancy)
+  *and* the birth parent did not die from antepartum maternal disorders, the dyad goes through the intrapartum component.
+* If the birth outcome from the intrapartum component is a live birth,
+  the dyad goes through the neonatal component.
+* If the birth parent did not die from maternal disorders (antepartum or intrapartum),
+  the dyad goes through the postpartum component.
 
 Each component is further subdivided into "modules,"
-which are organized by topic (rather than by time/simulant as in the components).
+which are organized by topic.
 Each module may have some simulant dyad attributes as input (values it needs)
 and some simulant dyad attributes as output (values it initializes).
 Module outputs may be 
@@ -354,8 +357,7 @@ Pregnancy component
         * Sex of infant
         * Birthweight
       - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-          
-          * :ref:`LBWSG exposure <2021_risk_exposure_lbwsg>`
+        * :ref:`LBWSG exposure <2021_risk_exposure_lbwsg>`
     * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
       - * ANC attendance category
         * Gestational age at end of pregnancy
@@ -363,12 +365,17 @@ Pregnancy component
         * Estimated gestational age
         * Believed preterm status
       - 
-    * - :ref:`Antepartum hemorrhage <2024_vivarium_mncnh_portfolio_antepartum_hemorrhage_module>`
-      - * Maternal age at end of pregnancy
+    * - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
+      - * Broad pregnancy outcome
+        * Maternal age at end of pregnancy
         * Hemoglobin after later ANC visit
       - * Antepartum hemorrhage incidence
+        * Antepartum hemorrhage YLDs
         * Antepartum hemorrhage death
-      - :ref:`Antepartum hemorrhage model <2023_cause_antepartum_hemorrhage_mncnh>`
+        * Abortion/miscarriage/ectopic pregnancy maternal disorders YLDs
+        * Abortion/miscarriage/ectopic pregnancy maternal disorders death
+      - * :ref:`Antepartum hemorrhage model <2023_cause_antepartum_hemorrhage_mncnh>`
+        * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
     * - :ref:`Hemoglobin at end of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
       - * Hemoglobin after later ANC visit
         * Antepartum hemorrhage incidence
@@ -382,7 +389,7 @@ Intrapartum component
 
 .. note::
 
-  Only live births or stillbirths (NOT abortions/miscarriages/ectopic pregnancies) will proceed to the intrapartum component,
+  Only pregnancies resulting in live births or stillbirths (NOT abortions/miscarriages/ectopic pregnancies), in which the parent does not die of antepartum maternal disorders, will proceed to the intrapartum component,
   as described above. Both antepartum and intrapartum stillbirths will proceed to the intrapartum component. However, antepartum stillbirths will only be eligible for intrapartum interventions that act on maternal health (such as misoprostol and azithromycin) and will not be eligible for intrapartum interventions intended for neonatal health (such as antenatal corticosteroids) as the fetus will have already passed prior to the onset of labor, but delivery of the fetal remains will still be necessary. Intrapartum stillbirths will remain eligible for all intrapartum interventions. 
 
 .. warning::
@@ -429,7 +436,6 @@ Intrapartum component
         * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
         * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
         * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
-        * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
 
 .. _mncnh_portfolio_neonatal_component:
 
@@ -1910,6 +1916,13 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     -
   * -
+    - PPH/APH split updates
+    - Update antepartum hemorrhage to only affect still or live births (not abortion/miscarriage/ectopic pregnancies) and adjust maternal disorders incidence rates for antepartum hemorrhage mortality.
+      See `the relevant documentation <https://github.com/ihmeuw/vivarium_research/pull/1946>`__ for details on these updates.
+    - Baseline
+    - Default
+    -
+  * -
     - Larger run for neonatal mortality V&V
     - Larger population, with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers (already included in previous runs).
     - Baseline
@@ -1926,7 +1939,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Include effects of postpartum hemorrhage and antepartum hemorrhage on postpartum hemoglobin
     - Baseline
     - Default
-    -
+    - PPH/APH split updates run
   * -
     - Hemoglobin effects on depression and neonatal sepsis
     - New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
