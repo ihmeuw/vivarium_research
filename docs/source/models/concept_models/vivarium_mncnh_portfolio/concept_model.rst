@@ -1949,7 +1949,7 @@ Default stratifications to all observers should include scenario and input draw.
   * -
     - E-MOTIVE
     - E-MOTIVE and its effects on postpartum hemorrhage
-    - Baseline, MMS scale-up, and IV iron scale-up scenarios
+    - Standard V&V scenarios
     - Default
     - Research tickets to `document E-MOTIVE <https://jira.ihme.washington.edu/browse/SSCI-2584>`__, PPH/APH effects on hemoglobin run
   * - 
