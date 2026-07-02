@@ -1941,8 +1941,8 @@ Default stratifications to all observers should include scenario and input draw.
     - 
   * -
     - PPH/APH split updates
-    - Update antepartum hemorrhage to only affect still or live births (not abortion/miscarriage/ectopic pregnancies) and adjust maternal disorders incidence rates for antepartum hemorrhage mortality.
-      See `the relevant documentation <https://github.com/ihmeuw/vivarium_research/pull/1946>`__ for details on these updates.
+    - Include the PAF bugfixes from model 33.1. Update antepartum hemorrhage to only affect still or live births (not abortion/miscarriage/ectopic pregnancies) and adjust maternal disorders incidence rates for antepartum hemorrhage mortality.
+      See `the relevant documentation <https://github.com/ihmeuw/vivarium_research/pull/1946>`__ for details on the latter updates.
     - Standard V&V scenarios
     - Default
     -
