@@ -179,7 +179,7 @@ For both preterm subcauses, the formula is:
 where :math:`k` is the subcause of interest (preterm birth with or without RDS),
 :math:`\text{CSMRisk}` is the cause-specific mortality risk for preterm birth complications,
 :math:`p_{\text{preterm}}` is the prevalence of preterm (gestational age < 37 weeks) at the *beginning* of the age group,
-:math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`, and :math:`Z` is a normalizing constant selected so that :math:`E[\text{RR}_{\text{BW,GA}} | \text{GA}<37] \cdot Z = 1`. Solving for :math:`Z` gives :math:`Z = 1 / E[\text{RR}_{\text{BW,GA}} | \text{GA}<37]`.
+:math:`f_k` is the fraction of preterm deaths due to subsubcause :math:`k` (with or without RDS), :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}` (after intervention effects have been applied), and :math:`Z` is a normalizing constant selected so that :math:`E[\text{RR}_{\text{BW,GA}} | \text{GA}<37] \cdot Z = 1`. Solving for :math:`Z` gives :math:`Z = 1 / E[\text{RR}_{\text{BW,GA}} | \text{GA}<37]`.
 
 .. note::
 
