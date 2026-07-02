@@ -816,6 +816,46 @@ race which can include all or none of these.
 Risk factors vs. risk markers
 -----------------------------
 
+"Risk factor" and "risk marker" are terms used to refer to or categorize variables which are associated with outcomes.
+Defined loosely, they might be considered to mean the same thing:
+
+- A :ref:`risk factor <models_risk_factors>` is any attribute that is associated with some outcome
+- A risk marker is "not necessarily involved in the cause or set of causes of a cardiovascular disease (CVD), like a risk factor" [Thiriet 2019], 
+  or is "an attribute or exposure that is associated with increased probability of disease, but is not necessarily a causal factor" [Burt 2001]
+
+However, for some authors or contexts, the terms may mean different things. 
+"Risk factor" has been defined more specifically, for example:
+
+- By Beck 1996 as causal (maybe theres a more concise way to show some defintiions or causal - Bradford specificity? sex/gender guide example eg testosterone): "an environmental, behavioral, or biologic factor confirmed by temporal sequence, usually in longitudinal studies, which
+  if present directly increases the probability of a disease occurring, and if absent or removed reduces the probability. 
+  Risk factors are part of the causal chain, or expose the host to the causal chain. 
+  Once disease occurs, removal of a risk factor may not result in a cure.""
+- Or within a :ref:`health metrics context <risk_factors_gbd>`: 
+  "The Global Burden of Disease study models risk factors and their effects on specific outcomes that meet the burden of proof for causality."
+
+In contexts where the term "risk factor" has additonal connotations, such as implying causality, the term "risk marker"
+may be used to differentiate variables which do not meet the criteria for risk factors.
+
+This distinction can be especially useful and important in contexts where additional connotations can be harmful.
+
+Race is a particularly critical and illustrative example. 
+Due to connotations in specific contexts, literature has critiqued the use of race as a risk factor for various reasons.
+
+- it implies race is a cause  [],
+- that effects of race are intrinsic to the patient [],
+- that effects of race cannot be separated from other social or environmental variables, including experiences of racism [],
+- that race is "treatable" or alterable [],
+- that race is associated with inherent differences that should be adjusted for, particularly in medical algorithms [],
+
+.. todo:: 
+  elaborate on the above/ what the contexts are
+
+The above literature provides examples of contexts where clarification is necessary with regards to the terminology used to 
+describe race as a variable to avoid harm. 
+
+.. todo::
+  Citations
+
 .. todo::
 
     In this section we'll discuss the question "Does/should my research look at race and ethnicity as risk factors or as risk markers?" and how a health
