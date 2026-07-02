@@ -1915,25 +1915,37 @@ Default stratifications to all observers should include scenario and input draw.
     - Baseline
     - Default
     -
-  * -
-    - PPH/APH split updates
-    - Update antepartum hemorrhage to only affect still or live births (not abortion/miscarriage/ectopic pregnancies) and adjust maternal disorders incidence rates for antepartum hemorrhage mortality.
-      See `the relevant documentation <https://github.com/ihmeuw/vivarium_research/pull/1946>`__ for details on these updates.
+  * - 36.0.1
+    - Fix neonatal risk observer bug
+    - Fix bug in the neonatal risk observer that was causing simulants who were not alive to contribute risk
     - Baseline
     - Default
     -
-  * -
+  * - 36.0.2
+    - Fix neonatal risk observer bug 2
+    - Correct fix for the bug that we attempted to address in 36.0.1
+    - Baseline
+    - Default
+    -
+  * - 36.1
     - Larger run for neonatal mortality V&V
     - Larger population, with "neonatal all-cause mortality risk", "neonatal cause-specific mortality risks", and "impossible neonatal CSMRisk" observers (already included in previous runs).
-    - Standard V&V scenarios
-    - For this run only, 10,000,000 population size per draw
+    - Baseline
+    - For this run only, 400^2 * 58 * 2 population size per draw in the LBWSG PAF sim, and 10,000,000 population size per draw in the main simulation
     -
-  * -
+  * - 37.0
     - Effects of maternal sepsis on postpartum hemoglobin
     - Effects of maternal sepsis on postpartum hemoglobin as described :ref:`on the sepsis risk effects page <2023_risk_effect_maternal_sepsis>`
     - Standard V&V scenarios
     - Default
     - 
+  * -
+    - PPH/APH split updates
+    - Update antepartum hemorrhage to only affect still or live births (not abortion/miscarriage/ectopic pregnancies) and adjust maternal disorders incidence rates for antepartum hemorrhage mortality.
+      See `the relevant documentation <https://github.com/ihmeuw/vivarium_research/pull/1946>`__ for details on these updates.
+    - Standard V&V scenarios
+    - Default
+    -
   * -
     - PPH/APH effects on hemoglobin
     - Include effects of postpartum hemorrhage and antepartum hemorrhage on postpartum hemoglobin
@@ -3060,6 +3072,61 @@ Default stratifications to all observers should include scenario and input draw.
       * In Ethiopia and Nigeria the sim underestimates anemia prevalence as compared to risk_distributions using location-aggegated hemoglobin exposure;
         we do not understand the reason for this, and it contributes to the underestimation of severe anemia in these countries
     - `Model 31.0s V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/76cdb75a1e267430984bd48cdddd1764fe7d8833/tests/model_notebooks/results/executed>`__
+  * - 32.0
+    - Vivarium/VPH update
+    - Regression testing only
+    - All checks passing
+    - `Model 32.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/41dbb136c750f9bbe4475b7cb75f10a6f192ffb8/tests/model_notebooks/results/executed>`__
+  * - 33.0
+    - Maternal disorders PAFs
+    - Check that overestimation of maternal disorders is addressed
+    - Overestimation has been replaced by underestimation
+    - `Model 33.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/833a6939327a2db550256ada8cc6a439175e91ae/tests/model_notebooks/results/executed>`__
+  * - 33.1
+    - Maternal disorders PAFs bugfixes
+    - Check that underestimation of maternal disorders is addressed
+    - All checks passing
+    - `Model 33.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/23b80d01e8b5358a57340dab2ba58b12733c06b9/tests/model_notebooks/results/executed>`__
+  * - 34.0
+    - PPH/APH split and direct burden
+    - * Check that APH and PPH incidence rates match those in the artifact
+      * Check that APH and PPH YLDs combined match those for maternal hemorrhage (not including anemia) from GBD
+      * Check that incidence, YLDs, and mortality for each type of hemorrhage (APH and PPH) correspond with the GBD maternal hemorrhage values (with anemia YLDs subtracted) modified by the postpartum fraction
+      * Check that the severity split (moderate vs severe) for each type of hemorrhage (APH and PPH) corresponds with the ratio of the GBD sequelae incidence and is not modified by any risk factors
+      * Check that only simulants with severe APH or PPH die of those causes
+    - TODO
+    - TODO
+  * - 35.0
+    - Fresh run
+    - Was not V&Ved, skipped to 36.0
+    - Was not V&Ved, skipped to 36.0
+    - Was not V&Ved, skipped to 36.0
+  * - 36.0
+    - Fresh run with timestep and sepsis updates
+    - Regression testing and newly-added checks on neonatal mortality before sampling (using the neonatal risk observers)
+    - Neonatal risk observer values too high for early neonatal
+    - `Model 36.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/d7bfbca399e4d48aff301fbd49ff4154990b7405/tests/model_notebooks/results/executed>`__
+  * - 36.0.1
+    - Fix neonatal risk observer bug
+    - Check that neonatal risk observer values for early neonatal are corrected and no longer too high
+    - Neonatal risk observer values now too low for both neonatal age groups
+    - Notebooks not saved
+  * - 36.0.2
+    - Fix neonatal risk observer bug 2
+    - Check that neonatal risk observer values are no longer too low
+    - Neonatal risk observer values now similar to artifact as expected from interactive sim V&V
+    - `Model 36.0.2 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/4479aac5e0fd25d5a5e04ef834a72dffc3d060e3/tests/model_notebooks/results/executed>`__
+  * - 36.1
+    - Larger run for neonatal mortality V&V
+    - Regression testing with larger sample size for neonatal mortality
+    - 
+    -
+  * - 37.0
+    - Effects of maternal sepsis on postpartum hemoglobin
+    - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident maternal sepsis
+      * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
+    - 
+    -
   * - 
     - Larger run for neonatal mortality V&V
     - Confirm expected rates of cause-specific and overall maternal disorders causes
@@ -3094,12 +3161,6 @@ Default stratifications to all observers should include scenario and input draw.
       * Confirm gestational age estimate and real gestational age have the correct margin of error based on ultrasound type and timing (specific distribution of errors assessed in the interactive simulation and summary "confusion matrix" assessed as part of the facility choice model V&V targets)
     - 
     - 
-  * - 
-    - Effects of maternal sepsis on postpartum hemoglobin
-    - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident maternal sepsis
-      * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
-    - 
-    -
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
@@ -3153,10 +3214,6 @@ Default stratifications to all observers should include scenario and input draw.
     - Current implementation is based off of an adaptation of the assumptions used in the GBD 2021 major depressive disorders cause model
     - We will need to either (1) update our model to be in line with the GBD 2023 model and consider updating our PAF calculation strategy as described in this ticket, or (2) update to the extra-GBD data on peripartum depression obtained from the mental disorders modelers
     - Will decide how to proceed after discussing with the mental disorders modelers 
-  * - Miscalibration of maternal sepsis incidence rates, particularly for Nigeria
-    - Thought to be due to using the fatal PAF from GBD applied to incidence and/or the location-aggregated PAF for our modeled locations which are not most detailed locations
-    - Update to custom-calculated PAF and reassess
-    - TBD
   * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
     - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
     - Neonatal mortality observers
