@@ -3094,8 +3094,12 @@ Default stratifications to all observers should include scenario and input draw.
       * Check that incidence, YLDs, and mortality for each type of hemorrhage (APH and PPH) correspond with the GBD maternal hemorrhage values (with anemia YLDs subtracted) modified by the postpartum fraction
       * Check that the severity split (moderate vs severe) for each type of hemorrhage (APH and PPH) corresponds with the ratio of the GBD sequelae incidence and is not modified by any risk factors
       * Check that only simulants with severe APH or PPH die of those causes
-    - TODO
-    - TODO
+    - * 
+      * This update fixes an existing bug in both simulation and V&V where we used the `cause.maternal_hemorrhage.yld_rate` overall YLD rate key which incorrectly includes anemia YLDs
+      * Maternal hemorrhage incidence continues to be overestimated (see model 13.0). It appears to be specific to antepartum hemorrhage. Could also be related to the PAF calibration issues in model 33.0 (fixed in 33.1), 
+        and that current APH at-risk population includes abortion/miscarriage/ectopic (which is about to change).
+      * 
+    - TODO NB LINK
   * - 35.0
     - Fresh run
     - Was not V&Ved, skipped to 36.0
