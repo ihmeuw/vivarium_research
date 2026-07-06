@@ -1110,7 +1110,6 @@ Default stratifications to all observers should include scenario and input draw.
   * - Standard V&V scenarios list
     - * Baseline
       * Misoprostol V&V
-      * Misoprostol scale-up
       * Azithromycin V&V
       * Azithromycin scale-up
       * Anemia screening V&V 
