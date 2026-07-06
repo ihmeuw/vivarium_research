@@ -3098,7 +3098,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Maternal hemorrhage incidence continues to be overestimated (see model 13.0). It appears to be specific to antepartum hemorrhage. Could also be related to the PAF calibration issues in model 33.0 (fixed in 33.1), 
         and that current APH at-risk population includes abortion/miscarriage/ectopic (which is about to change).
       * 
-    - TODO NB LINK
+    - `Model 34.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/9de38c13e3c3220bb3c5ea7e6276ee9b50b64212/tests/model_notebooks/results/executed>`__
   * - 35.0
     - Fresh run
     - Was not V&Ved, skipped to 36.0
