@@ -40,24 +40,37 @@ MNCNH Portfolio Costing Model
 Background
 ----------
 
-[[TODO: Add background information about the MNCNH costing model 
-and why we are doing it, what we've done costing-wise in the past here.]]
+.. todo::
 
-Cost Taxonomy
+    Add background information about the MNCNH costing model 
+    and why we are doing it, what we've done costing-wise in the past here.
+
+Cost taxonomy
 -------------
 
-[[TODO: Add a description of the cost taxonomy used in the MNCNH costing model here, along with
-the diagram that we created]]
+.. todo:: 
 
-[[TODO: Add list of interventions and which costs are associated with each intervention here]]
+    Add a description of the cost taxonomy used in the MNCNH costing model here, along with
+    the diagram that we created
 
-Literature Review
+    Add list of interventions and which costs are associated with each intervention here
+
+There are three 'buckets' which different costs fall into in the MNCNH portfolio project: 
+unit costs, cost-effectiveness estimates, and offset costs. Intervention unit costs are the 
+focus of our costing model, which are the costs of delivering 1 unit of a given intervntion 
+to 1 person. 
+
+Literature review
 -----------------
 
-[[TODO: Add docs about literature review: description of process, 
-inclusion/exclusion criteria, search strategy, and link to results spreadsheet here]]
+.. todo:: 
+    
+    Add docs about literature review: description of process, 
+    inclusion/exclusion criteria, search strategy, and link to results spreadsheet here
 
-Costing Meta-regression
+Costing meta-regression
 -----------------------
 
-[[TODO: Add doc about costing meta-regression]]
+.. todo:: 
+    
+    Add doc about costing meta-regression
