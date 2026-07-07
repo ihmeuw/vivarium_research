@@ -98,12 +98,6 @@ Once the hemoglobin concentration distribution is estimated, the anemia envelope
   GBD 2023 calculated the ratio of “normal” hemoglobin (defined as the 50th percentile of the global hemoglobin distribution) 
   for the different neonatal age groups by severity, and then multiplied the WHO 6–59-months thresholds by these ratios. 
 
-.. warning::
-
-  The GBD 2019 anemia impairment estimates among women of reproductive age are underestimated (particularly among locations/ages 
-  with high fertility rates) due to erroneously applying the inverse of the pregnancy adjustment factor in the estimation of the 
-  anemia envelope, described on the :ref:`hemoglobin document <2019_hemoglobin_model>` and `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/R%20code%20comparisons/R%20code%20prevalence%20plotting.ipynb>`_.
-
 Once severity-specific anemia prevalence is estimated, years lived with disability due to anemia can be estimated using the 
 following severity-specific disability weights. NOTE: the anemia impairment is a YLD-only impairment and anemia is not considered 
 a direct cause of death in GBD 2023.
