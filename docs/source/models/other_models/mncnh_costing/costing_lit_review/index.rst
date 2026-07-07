@@ -1,4 +1,4 @@
-.. _costing_model_vivarium_mncnh_portfolio:
+.. _costing_lit_review_vivarium_mncnh_portfolio:
 
 
 ..
@@ -68,9 +68,5 @@ Literature review
     Add docs about literature review: description of process, 
     inclusion/exclusion criteria, search strategy, and link to results spreadsheet here
 
-Costing meta-regression
------------------------
+    Add link to docs on lit review best practices 
 
-.. todo:: 
-    
-    Add doc about costing meta-regression

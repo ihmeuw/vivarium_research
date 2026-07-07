@@ -40,4 +40,4 @@ MNCNH Portfolio Costing Meta-Regression
 
 .. todo:: 
     
-    Add doc about costing meta-regression
+    Add doc about costing meta-regressions
