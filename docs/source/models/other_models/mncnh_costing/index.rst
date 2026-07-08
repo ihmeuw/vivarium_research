@@ -1,4 +1,4 @@
-.. _costing_lit_review_vivarium_mncnh_portfolio:
+.. _costing_vivarium_mncnh_portfolio:
 
 =======================
 MNCNH Portfolio Costing
