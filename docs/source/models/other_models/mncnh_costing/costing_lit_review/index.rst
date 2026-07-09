@@ -55,7 +55,7 @@ Cost taxonomy
 
     Add list of interventions and which costs are associated with each intervention here
 
-There are three 'buckets' which different costs fall into in the MNCNH portfolio project: 
+There are three 'buckets' which different extracted cost estimates fall into in the MNCNH portfolio project: 
 unit costs, cost-effectiveness estimates, and offset costs. Intervention unit costs are the 
 focus of our costing model, which are the costs of delivering 1 unit of a given intervntion 
 to 1 person. 
