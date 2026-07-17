@@ -247,7 +247,7 @@ First, we must decompose the population ACMRisk into two groups: causes affected
 This decomposition allows us to apply the effects of LBWSG exposures to the affected causes *causally* (so intervention-induced changes impact this part of mortality)
 and also maintain the *non-causal correlation* between LBWSG exposures and mortality for the unaffected causes (so intervention-induced changes do not impact this part of mortality).
 Including the non-causal correlation improves the accuracy of background mortality rates across the LBWSG exposure distribution, which may influence our estimates of impact for interventions that are targeted by LBWSG exposure.
-Both the causal relationship and the non-causal correlation use the same LBWSG relative risk values, which were derived from all-cause mortality data without adjustment for confounding.
+Both the causal relationship and the non-causal correlation use the same LBWSG relative risk values, which were derived by GBD from all-cause mortality data without adjustment for confounding.
 GBD assumes that these relative risk values represent the causal effect of LBWSG on the subset of specific affected causes, and we will do the same in our simulation.
 Mathematically, it works as follows:
 
