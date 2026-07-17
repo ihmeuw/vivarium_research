@@ -243,13 +243,17 @@ and for a given cause of death:
 Note that this strategy was updated in May of 2025 from a prior strategy of converting GBD mortality rates to probabilities. `The pull request that updated this strategy can be found here for reference. <https://github.com/ihmeuw/vivarium_research/pull/1654>`_ This strategy update was pursued following verification and validation issues in neonatal mortality and an exploration of potential solutions in model runs 6.1 through 6.4. Ultimately, a change from mortality rates to mortality risk was preferred given that it is the more policy relevant measure in the context of neonates, and accurately apportioning person time alive within the neonatal age group given the input data available to us was a challenge we judged to be unnecessary.
 
 The calculation of :math:`\text{ACMRisk}_i` (the all-cause mortality risk for a single simulant, :math:`i`) is a bit complicated, however.
-First, we must decompose the population ACMRisk into two groups: causes affected by the :ref:`LBWSG risk factor <2021_risk_effect_lbwsg>` and those unaffected by it.
-This decomposition allows us to apply the effects of LBWSG exposures to the affected causes *causally* (so intervention-induced changes impact this part of mortality)
-and also maintain the *non-causal correlation* between LBWSG exposures and mortality for the unaffected causes (so intervention-induced changes do not impact this part of mortality).
-Including the non-causal correlation improves the accuracy of background mortality rates across the LBWSG exposure distribution, which may influence our estimates of impact for interventions that are targeted by LBWSG exposure.
-Both the causal relationship and the non-causal correlation use the same LBWSG relative risk values, which were derived by GBD from all-cause mortality data without adjustment for confounding.
-GBD assumes that these relative risk values represent the causal effect of LBWSG on the subset of specific affected causes, and we will do the same in our simulation.
-Mathematically, it works as follows:
+
+We want the :ref:`LBWSG risk factor <2021_risk_effect_lbwsg>` to be associated with mortality risk in **two** ways: causal, and non-causal.
+The causal relationship reflects that LBWSG exposure causes increased risk of death for certain causes of death (e.g., preterm birth, sepsis, and encephalopathy; the full list of affected causes can be found on the risk factor page).
+The non-causal association reflects that LBWSG exposure is correlated with other causes of death (e.g., congenital anomalies) due to confounding factors such as general poor pregnancy health, but does not cause those deaths.
+The non-causal association is still important to include because some of our interventions are targeted by LBWSG exposure,
+so estimation of their impact depends on understanding how much burden is in the population at different levels of LBWSG exposure, even if that burden is not causally affected by LBWSG.
+The **total** association (causal + non-causal) between LBWSG exposure and all-cause mortality is well-captured by the GBD relative risk values for LBWSG,
+which were derived from all-cause mortality data without adjustment for confounding.
+Additionally, GBD assumes that these relative risk values represent the *causal* effect of LBWSG on the subset of specific affected causes, and we will do the same in our simulation.
+
+First, we decompose the population ACMRisk into two parts: risk due to causes affected by the :ref:`LBWSG risk factor <2021_risk_effect_lbwsg>` and risk due to causes unaffected by it.
 
 .. math::
 
@@ -263,6 +267,7 @@ Mathematically, it works as follows:
 Where:
 
 - :math:`\text{ACMRisk}` is the all-cause mortality risk for the total population in one of the neonatal age groups (i.e., :math:`\text{ACMRisk}` equals :math:`\text{ACMRisk}_\text{ENN}` or :math:`\text{ACMRisk}_\text{LNN}` as defined above)
+- :math:`\text{c} \in \text{affected}` is the set of causes that are affected by LBWSG (see :ref:`the LBWSG risk factor page <2021_risk_effect_lbwsg>`)
 - :math:`\text{CSMRisk}_c` is the cause-specific mortality risk for cause :math:`c` in one of the neonatal age groups
 
 All quantities are age-, sex-, and location-specific; we omit these subscripts for brevity.
@@ -278,9 +283,10 @@ where:
 - :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, 
 - :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative mortality risk for a specific birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`
 
-We can see algebraically that :math:`\text{LBWSG}(\text{ACMRisk}, \text{BW},\text{GA}) = \text{LBWSG}(\text{ACMRisk}_{\text{affected}}, \text{BW},\text{GA}) + \text{LBWSG}(\text{ACMRisk}_{\text{unaffected}}, \text{BW},\text{GA})`, so we have maintained the baseline association through our partition of the mortality risk.
+We can see algebraically that :math:`\text{LBWSG}(\text{ACMRisk}, \text{BW},\text{GA}) = \text{LBWSG}(\text{ACMRisk}_{\text{affected}}, \text{BW},\text{GA}) + \text{LBWSG}(\text{ACMRisk}_{\text{unaffected}}, \text{BW},\text{GA})`, so we have maintained the total baseline association through our partition of the mortality risk.
 
-The non-causal correlation with LBWSG is applied to the unaffected causes by using the baseline LBWSG exposure value (which we will denote with :math:`\text{BW}^0` and :math:`\text{GA}^0`), while the causal effect of LBWSG is applied to the affected causes by using the scenario-specific LBWSG exposure value (:math:`\text{BW}` and :math:`\text{GA}`):
+This decomposition allows us to apply the non-causal association of LBWSG exposure with the affected causes' risk using the baseline LBWSG exposure value (which we will denote with :math:`\text{BW}^0` and :math:`\text{GA}^0`)
+and apply the causal effects of LBWSG exposure on the unaffected causes' risk using the scenario-specific LBWSG exposure value (:math:`\text{BW}` and :math:`\text{GA}`).
 
 .. math::
     \begin{aligned}
@@ -288,13 +294,19 @@ The non-causal correlation with LBWSG is applied to the unaffected causes by usi
     & + \text{LBWSG}(\text{ACMRisk}_{\text{unaffected}}, \text{BW}^0,\text{GA}^0),
     \end{aligned}
 
+As a result, we maintain the *causal association* between LBWSG exposures and mortality for the affected causes' mortality (so intervention-induced changes impact this part of mortality),
+and also maintain the *non-causal association* between LBWSG exposures and mortality for the unaffected causes' mortality (so intervention-induced changes do not impact this part of mortality).
+
 Implementing this exactly would require the baseline LBWSG exposure value to be known in all scenarios.
 For ease of implementation, we will use the pre-intervention-modified LBWSG exposure as a proxy for the baseline LBWSG exposure.
 This is different only in that there is IFA coverage in the baseline scenario, which modifies LBWSG exposure.
 
-The last modifiers to :math:`\text{ACMRisk}_i` are the cause-specific mortality risks for each modeled subcause :math:`k` (see `Modeled Subcauses`_).
-All of these subcauses are affected by LBWSG causally (i.e. they are in the list of affected causes), *and* they may be affected by interventions that act directly on the cause-specific mortality risk values.
-To obtain the ACMRisk for a specific simulant (:math:`\text{ACMRisk}_i`), we subtract off the CSMRisks for each modeled subcause :math:`k` *before any interventions act directly on the CSMRisks*, and then add back in CSMRisks *modified by interventions*:
+The last modifiers to :math:`\text{ACMRisk}_i` are the cause-specific mortality risks for each **modeled** subcause :math:`k` (see `Modeled Subcauses`_).
+In a typical Vivarium simulation, we delete CSMR for each modeled cause from the total ACMR, and then add back in EMR for the simulants with the cause.
+In this simulation, we do not track prevalence of our modeled subcauses, so we add back in CSMRisk (spreading mortality risk across all simulants rather than restricting it to those with the modeled subcause);
+therefore, the only difference between what we delete and what we add back in is the effect of interventions directly (i.e. not through LBWSG) on the CSMRisk values.
+All of our modeled subcauses are affected by LBWSG causally (i.e. they are in the list of LBWSG-affected causes discussed above), so we apply LBWSG effects to them using the scenario-specific, not baseline, exposure values.
+Mathematically, we subtract off the CSMRisks for each modeled subcause :math:`k` *before any interventions act directly on the CSMRisks*, and then add back in CSMRisks *modified by interventions*:
 
 .. math::
     \begin{aligned}
