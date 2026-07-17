@@ -33,7 +33,7 @@ Test that you've got it with::
 
 ::
 
-   (base) $> conda activate vivarium_research # This line is only needed if vivarium_research has not been activated yet
+   $> conda activate vivarium_research # This line is only needed if vivarium_research has not been activated yet
    (vivarium_research) $> sphinx-autobuild docs/source docs/build/
 
 .. _end_build:
