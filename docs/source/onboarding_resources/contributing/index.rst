@@ -80,16 +80,14 @@ in this page for :ref:`computing tools <computing_interfaces>`.
 
 Use these commands to build your page with edits: 
 
-::
+.. include:: ../../../../README.rst
+   :start-after: .. _build:
+   :end-before: .. _end_build:
 
-   (base) $> cd vivarium_research/docs
-   (base) $> conda activate vivarium_research #This line is only needed if vivarium_research has not been activated yet
-   (vivarium_research) $> sphinx-autobuild source build/html
-
-This will create a new ``build`` sub-directory with the new documentation
+This will create a new ``docs/build`` sub-directory with the new documentation
 rendered in html, and will open a browser window with the result.
 It should automatically update as you save edits to reStructuredText files, though occasionally
-you may need to manually delete ``build`` and re-run the command.
+you may need to manually delete ``docs/build`` and re-run the command.
 
 Note that any warnings in your terminal will cause the build to 
 fail in GitHub. These include issues like duplicated references. Be sure to check for and correct 
@@ -99,7 +97,7 @@ Push your changes
 -----------------
 
 Once you're satisfied, you should push your changes to the remote repository
-(the one on GitHub).  Make sure you're in the main `vivairum_research`
+(the one on GitHub).  Make sure you're in the main `vivarium_research`
 directory and run::
 
    (vivarium_research) $> git add .
@@ -170,5 +168,4 @@ the ``Merge Pull Request`` button, there's a few housekeeping best practices::
    (vivarium_research) $> git pull #This pulls in the new changes you merged 
    (vivarium_research) $> git branch -d YOUR-BRANCH-NAME 
 
-You should also delete your branch from GitHub. While this step is not strictly necessary, it 
-is best practice to keep things clean and avoid confusion. 
+Your branch will be deleted from GitHub automatically. 

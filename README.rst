@@ -29,5 +29,11 @@ Use the following steps to get set up to build the docs locally:
 
 Test that you've got it with::
 
-   (vivarium_research) $> cd docs
-   (vivarium_research) $> make html
+.. _build:
+
+::
+
+   (base) $> conda activate vivarium_research # This line is only needed if vivarium_research has not been activated yet
+   (vivarium_research) $> sphinx-autobuild docs/source docs/build/
+
+.. _end_build:
