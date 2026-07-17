@@ -303,7 +303,7 @@ This is different only in that there is IFA coverage in the baseline scenario, w
 
 The last modifiers to :math:`\text{ACMRisk}_i` are the cause-specific mortality risks for each **modeled** subcause :math:`k` (see `Modeled Subcauses`_).
 In a typical Vivarium simulation, we delete CSMR for each modeled cause from the total ACMR, and then add back in EMR for the simulants with the cause.
-In this simulation, we do not track prevalence of our modeled subcauses, so we add back in CSMRisk (spreading mortality risk across all simulants rather than restricting it to those with the modeled subcause);
+In this simulation, we do not track prevalence of our modeled subcauses, so we add back in CSMRisk (spreading mortality risk across all simulants rather than restricting it to prevalent cases);
 therefore, the only difference between what we delete and what we add back in is the effect of interventions directly (i.e. not through LBWSG) on the CSMRisk values.
 All of our modeled subcauses are affected by LBWSG causally (i.e. they are in the list of LBWSG-affected causes discussed above), so we apply LBWSG effects to them using the scenario-specific, not baseline, exposure values.
 Mathematically, we subtract off the CSMRisks for each modeled subcause :math:`k` *before any interventions act directly on the CSMRisks*, and then add back in CSMRisks *modified by interventions*:
