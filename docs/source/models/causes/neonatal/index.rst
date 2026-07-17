@@ -286,7 +286,7 @@ where:
 We can see algebraically that :math:`\text{LBWSG}(\text{ACMRisk}, \text{BW},\text{GA}) = \text{LBWSG}(\text{ACMRisk}_{\text{affected}}, \text{BW},\text{GA}) + \text{LBWSG}(\text{ACMRisk}_{\text{unaffected}}, \text{BW},\text{GA})`, so we have maintained the total baseline association through our partition of the mortality risk.
 
 This decomposition allows us to apply the causal effects of LBWSG exposure on the affected causes' risk using the scenario-specific LBWSG exposure value (which we will denote with :math:`\text{BW}` and :math:`\text{GA}`)
-and apply the non-causal association of LBWSG exposure with the unaffected causes' risk using the scenario-specific LBWSG exposure value (:math:`\text{BW}^0` and :math:`\text{GA}^0`).
+and apply the non-causal association of LBWSG exposure with the unaffected causes' risk using the *baseline* LBWSG exposure value (:math:`\text{BW}^0` and :math:`\text{GA}^0`).
 
 .. math::
     \begin{aligned}
