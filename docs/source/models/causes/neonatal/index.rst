@@ -294,8 +294,8 @@ and apply the non-causal association of LBWSG exposure with the unaffected cause
     & + \text{LBWSG}(\text{ACMRisk}_{\text{unaffected}}, \text{BW}^0,\text{GA}^0),
     \end{aligned}
 
-As a result, we maintain the *causal association* between LBWSG exposures and mortality for the affected causes' mortality (so intervention-induced changes impact this part of mortality),
-and also maintain the *non-causal association* between LBWSG exposures and mortality for the unaffected causes' mortality (so intervention-induced changes do not impact this part of mortality).
+As a result, intervention-induced changes in LBWSG impact the part of mortality due to the affected causes,
+but do not impact the part of mortality due to the unaffected causes.
 
 Implementing this exactly would require the baseline LBWSG exposure value to be known in all scenarios.
 For ease of implementation, we will use the pre-intervention-modified LBWSG exposure as a proxy for the baseline LBWSG exposure.
