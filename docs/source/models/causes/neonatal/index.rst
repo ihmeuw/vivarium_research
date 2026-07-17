@@ -280,16 +280,13 @@ where:
 
 We can see algebraically that :math:`\text{LBWSG}(\text{ACMRisk}, \text{BW},\text{GA}) = \text{LBWSG}(\text{ACMRisk}_{\text{affected}}, \text{BW},\text{GA}) + \text{LBWSG}(\text{ACMRisk}_{\text{unaffected}}, \text{BW},\text{GA})`, so we have maintained the baseline association through our partition of the mortality risk.
 
-The non-causal correlation with LBWSG is applied to the unaffected causes by using the baseline LBWSG exposure value, while the causal effect of LBWSG is applied to the affected causes by using the scenario-specific LBWSG exposure value.
-We then calculate the all-cause mortality risk for a baseline birth weight of :math:`\text{BW}^0` and gestational age :math:`\text{GA}^0` and a scenario-specific birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}`:
+The non-causal correlation with LBWSG is applied to the unaffected causes by using the baseline LBWSG exposure value (which we will denote with :math:`\text{BW}^0` and :math:`\text{GA}^0`), while the causal effect of LBWSG is applied to the affected causes by using the scenario-specific LBWSG exposure value (:math:`\text{BW}` and :math:`\text{GA}`):
 
 .. math::
     \begin{aligned}
     \text{ACMRisk}_{\text{BW},\text{GA}}^{\text{BW}^0,\text{GA}^0} &= \text{LBWSG}(\text{ACMRisk}_{\text{affected}}, \text{BW},\text{GA}) \\
     & + \text{LBWSG}(\text{ACMRisk}_{\text{unaffected}}, \text{BW}^0,\text{GA}^0),
     \end{aligned}
-
-where :math:`\sum_{\text{c} \in \text{affected}} \text{CSMRisk}_c` is the sum of the cause-specific mortality risk values of all causes affected by LBWSG (see the :ref:`LBWSG risk effects document for a list of affected causes <2021_risk_effect_lbwsg>`) for the total population.
 
 Implementing this exactly would require the baseline LBWSG exposure value to be known in all scenarios.
 For ease of implementation, we will use the pre-intervention-modified LBWSG exposure as a proxy for the baseline LBWSG exposure.
