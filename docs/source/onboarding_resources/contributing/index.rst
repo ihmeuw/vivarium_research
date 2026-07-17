@@ -97,7 +97,7 @@ Push your changes
 -----------------
 
 Once you're satisfied, you should push your changes to the remote repository
-(the one on GitHub).  Make sure you're in the main `vivarium_research`
+(the one on GitHub).  Make sure you're in the main ``vivarium_research``
 directory and run::
 
    (vivarium_research) $> git add .
