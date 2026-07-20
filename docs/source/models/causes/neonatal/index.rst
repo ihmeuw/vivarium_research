@@ -268,7 +268,7 @@ Where:
 
 - :math:`\text{ACMRisk}` is the all-cause mortality risk for the total population in one of the neonatal age groups (i.e., :math:`\text{ACMRisk}` equals :math:`\text{ACMRisk}_\text{ENN}` or :math:`\text{ACMRisk}_\text{LNN}` as defined above)
 - :math:`\text{c} \in \text{affected}` is the set of causes that are affected by LBWSG (see :ref:`the LBWSG risk factor page <2021_risk_effect_lbwsg>`)
-- :math:`\text{CSMRisk}_c` is the cause-specific mortality risk for cause :math:`c` in one of the neonatal age groups
+- :math:`\text{CSMRisk}_c` is the cause-specific mortality risk for cause :math:`c` in one of the neonatal age groups (i.e. :math:`\text{CSMRisk}_c` equals :math:`\text{CSMRisk}_\text{ENN}` or :math:`\text{CSMRisk}_\text{LNN}` as defined above)
 
 All quantities are age-, sex-, and location-specific; we omit these subscripts for brevity.
 
@@ -276,10 +276,11 @@ We can make mortality risk values specific to a birth weight and gestational age
 
 .. math::
 
-  \text{LBWSG}(x, \text{BW},\text{GA}) = x \times (1 - \text{PAF}_{\text{LBWSG}}) \times \text{RR}_{\text{BW},\text{GA}},
+  \text{LBWSG}(\text{risk},\text{BW},\text{GA}) = \text{risk} \times (1 - \text{PAF}_{\text{LBWSG}}) \times \text{RR}_{\text{BW},\text{GA}},
 
 where:
 
+- :math:`\text{risk}` is a mortality risk (this :math:`\text{LBWSG}` will be applied to both all-cause mortality risks and cause-specific mortality risks in the following formulas)
 - :math:`\text{PAF}_{\text{LBWSG}}` is the population attributable fraction for LBWSG, 
 - :math:`\text{RR}_{\text{BW},\text{GA}}` is the relative mortality risk for a specific birth weight :math:`\text{BW}` and gestational age :math:`\text{GA}`
 
