@@ -361,8 +361,35 @@ The antenatal supplementation products affect child gestational age at birth exp
 
 In order to make these effects compatible with our continuous exposure modeling strategy for LBWSG, we have converted these relative risks of dichotomous outcomes to continuous gestational age "shifts" that result in preterm (and very preterm, if applicable) birth prevalence that replicates the appropriate dichotomous measure of effect. 
 
-The methodology for this conversion was inspired in part by the methodology of the air pollution GBD team in calculating the impact of the risk on LBWSG exposures. As with GBD, we assume that these shifts are independent of any shifts in birth weight. However, rather than implement the conversion using the LBWSG exposure distribution specific to the individual study included in a meta-analysis of the overall effect to find a global shift as GBD did, we used the meta-analyzed global relative risks and applied the conversion for each of our modeled locations, resulting in location-specific continuous shifts that replicate the global dichotomous effect.
-In the case of birth weight shifts, it may be more accurate to assume that the relative risks are generalizable across locations.
+The methodology for this conversion was inspired in part by the methodology of the air pollution GBD team in calculating the impact of the risk on LBWSG exposures. As with GBD, we assume that these shifts are independent of any shifts in birth weight. However, rather than implement the conversion using the LBWSG exposure distribution specific to the individual study included in a meta-analysis of the overall effect to find a global shift as GBD did, we used the meta-analyzed global relative risks and applied the conversion for each of our modeled locations *in the ANC-attending population*, resulting in location-specific continuous shifts that replicate the global dichotomous effect *for ANC-attending simulants.*
+We decided to assume that the relative risks are generalizable across locations, rather than the additive shifts.
+In our simulation, ANC-attending simulants have a different pre-intervention distribution of gestational age because ANC
+and LBWSG :ref:`are correlated <facility_choice_correlated_propensities_section>`.
+
+Because there is baseline coverage of IFA, we also needed to perform baseline IFA deletion on the gestational age distribution,
+so that after applying the effects of baseline IFA, we approximately calibrated to the GBD gestational age distribution
+(the GBD distribution "bakes in" the effects of baseline IFA coverage).
+We currently do this using a constant (negative) additive shift on gestational age, which is calculated as the negative of a weighted average
+of the shift in gestational age needed to replicate the preterm birth RR of IFA among ANC-attenders (as described in the previous paragraph),
+and the shift in gestational age that *would* be needed to replicate the preterm birth RR of IFA among non-ANC-attenders (if they received IFA),
+weighted by ANC attendance.
+
+.. note::
+
+  Before MNCNH model 30.0, we found the IFA->GA shift necessary to replicate the preterm birth RR of IFA in the total population, rather than the ANC-attending population.
+  This resulted in a miscalibration of the IFA->PTB relative risk, which in practice was too low (though the direction of effect depends on particularities of the GA distribution shape).
+  The baseline IFA deletion in these model versions subtracted the coverage of IFA multiplied by the IFA->GA shift,
+  which in theory calibrated the sim to GBD's mean GA (but not to GBD's prevalence of preterm birth; in practice, we saw an overestimation of preterm birth in the sim).
+
+  In model 30.0, we began finding the IFA->GA shift in the ANC-attending population (which is who is actually eligible for IFA).
+  As a result we saw a substantial improvement in the calibration of the IFA->PTB relative risk.
+  However, this new IFA->GA shift complicated the baseline IFA deletion process, and we took the approach documented above,
+  which does not in theory calibrate to GBD's mean GA, nor to the prevalence of preterm birth.
+  In model 30.0 V&V the prevalence of preterm was slightly closer to GBD than before.
+
+  We are considering `a better approach to this calibration <https://jira.ihme.washington.edu/browse/SSCI-2571>`__, but have not yet implemented it.
+  That approach would be to find the deletion shift in a way that theoretically calibrates to either (a) the mean GA or (b) the prevalence of preterm birth.
+  We think (b) is more important.
 
 Additionally, our methods differ from GBD's in that we estimated two separate GA shifts, conditional on baseline GA exposure, for the effect of MMS relative to IFA rather than a single shift applied equally to the entire distribution. This approach allowed us to replicate the literature-reported relative risks of MMS on both preterm birth (<37 weeks) as well as very preterm birth (<32 weeks). This "dual shift" approach follows these steps:
 
@@ -379,7 +406,7 @@ Assumptions and limitations
 
 - We assume no effect modification by when in pregnancy oral iron is received. In reality, the effect on gestational age is likely greater for those who have taken oral iron for longer.
 
-- Our baseline calibration preserves the population mean value of gestational age at birth, but only approximates the overall exposure distribution.
+- Our baseline calibration does not preserve the population mean value of gestational age at birth (see note above), nor the overall exposure distribution.
 
 - In the case of MMS, although we have improved the assumption of a single shift applied to the entire distribution through our "dual shift" strategy, it is still limited in that the true shift is likely more of a continuous function with baseline gestational age rather than two conditional values. In particular, a limitation of this approach is the illogical implication that the effect of treatment on a birth that would have been 31.9 weeks without treatment leads to a longer gestation than the effect of the same treatment on a birth that would have been 32.1 weeks without treatment.
 
