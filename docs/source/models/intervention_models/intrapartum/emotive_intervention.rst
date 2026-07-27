@@ -1,8 +1,8 @@
 .. _emotive_intervention:
 
-===========================================
+============================================
 E-MOTIVE for postpartum hemorrhage treatment
-===========================================
+============================================
 
 .. contents::
    :local:
@@ -51,7 +51,7 @@ will be modified as follows for simulants who receive E-MOTIVE:
 
 .. math::
 
-  \text{cesarean_fraction_ifd} = \text{csection_coverage_prop} / \text{IFD_coverage_prop}
+  \text{cesarean_fraction_ifd} = \frac{\text{csection_coverage_prop}}{\text{IFD_coverage_prop}}
 
 .. math::
 

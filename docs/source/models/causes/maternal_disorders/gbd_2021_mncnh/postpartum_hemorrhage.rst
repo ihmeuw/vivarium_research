@@ -245,7 +245,7 @@ using GBD data only:
 
 .. math::
 
-    \text{ir\_500mL\_per\_birth} = \frac{\text{postpartum hemorrhage cases}}{\text{births} - \text{antepartum hemorrhage deaths}}
+    \text{ir_500mL_per_birth} = \frac{\text{postpartum hemorrhage cases}}{\text{births} - \text{antepartum hemorrhage deaths}}
         = \frac{\text{(postpartum hemorrhage cases) / person-time}}
             {\text{births / person-time} - \text{(antepartum hemorrhage deaths) / person-time}}
         = \frac{\text{maternal hemorrhage incidence rate} \times \text{postpartum\_fraction}}{\text{birth rate} - \text{antepartum hemorrhage cause-specific mortality rate}}.
@@ -257,7 +257,7 @@ The 300 mL incidence risk per birth is then:
 
 .. math::
 
-    \text{ir\_300mL} = \text{ir\_500mL\_per\_birth} \times \frac{1}{\text{ir\_500mL}}.
+    \text{ir_300mL} = \text{ir_500mL_per_birth} \times \frac{1}{\text{ir_500mL}}.
 
 We get the 500 mL incidence risk per case of at least 300 mL directly from the data, see table below.
 
@@ -265,7 +265,7 @@ The 1000 mL incidence risk per case of at least 500 mL blood loss will be comput
 
 .. math::
 
-    \text{ir\_1000ml} = \frac{\text{incidence\_s181}}{\text{incidence\_s181} + \text{incidence\_s180}}.
+    \text{ir_1000ml} = \frac{\text{incidence_s181}}{\text{incidence_s181} + \text{incidence_s180}}.
 
 The case fatality rate (CFR) will be computed as
 
