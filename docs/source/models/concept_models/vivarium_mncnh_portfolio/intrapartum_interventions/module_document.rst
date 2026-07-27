@@ -69,7 +69,7 @@ This module in the intrapartum component determines coverage of intrapartum inte
   * - Delivery facility
     - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
     - Determines intervention availability
-      * Coverage of azithromycin and antenatal corticosteroids is delivery facility-specific (see decision nodes #1 and #3)
+    - * Coverage of azithromycin and antenatal corticosteroids is delivery facility-specific (see decision nodes #1 and #3)
       * Only home births are eligible for misoprostol intervention (decision node #5)
       * E-MOTIVE coverage is delivery facility-specific (see decision node #6)
   * - Believed gestational age
