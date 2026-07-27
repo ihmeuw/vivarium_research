@@ -69,8 +69,9 @@ This module in the intrapartum component determines coverage of intrapartum inte
   * - Delivery facility
     - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
     - Determines intervention availability
-    - * Coverage of azithromycin and antenatal corticosteroids is delivery facility-specific (see decision nodes #1 and #3)
+      * Coverage of azithromycin and antenatal corticosteroids is delivery facility-specific (see decision nodes #1 and #3)
       * Only home births are eligible for misoprostol intervention (decision node #5)
+      * E-MOTIVE coverage is delivery facility-specific (see decision node #6)
   * - Believed gestational age
     - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
     - Affects antenatal corticosteroid coverage (decision node #2)
@@ -115,6 +116,10 @@ This module in the intrapartum component determines coverage of intrapartum inte
     - Delivers at home?
     - Delivery facility == home based on module input
     - 
+  * - 6
+    - Delivers in facility?
+    - Delivery facility != home based on module input
+    -
 
 2.3.1 Baseline coverage
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -127,6 +132,10 @@ Please see :ref:`the misoprostol intervention documentation page <misoprostol_in
 
 Please see :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` for baseline coverage values for births at 
 home and in BEmONC and CEmONC facilities. 
+
+**E-MOTIVE:**
+
+Zero, see :ref:`the E-MOTIVE intervention documentation page <emotive_intervention>` for more information.
 
 **Antenatal corticosteroids:** 
 
@@ -161,6 +170,10 @@ that the coverage of ACS in the delivery facility is the same as the baseline co
     - Record receipt of misoprostol
     - Record to output
     - 
+  * - IV
+    - Record receipt of E-MOTIVE
+    - Record to output
+    -
 
 2.4: Module Outputs
 -----------------------
@@ -180,6 +193,9 @@ that the coverage of ACS in the delivery facility is the same as the baseline co
   * - Misoprostol
     - *True* / *False*
     - Coverage can only be *True* if simulant attended ANC and delivered at home
+  * - E-MOTIVE
+    - *True* / *False*
+    - Coverage can only be *True* if simulant delivered in a facility
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
@@ -191,7 +207,7 @@ that the coverage of ACS in the delivery facility is the same as the baseline co
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` and  :ref:`the misoprostol intervention documentation page <misoprostol_intervention>` for V&V criteria.
+* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>`, :ref:`the misoprostol intervention documentation page <misoprostol_intervention>`, and :ref:`the E-MOTIVE intervention documentation page <emotive_intervention>` for V&V criteria.
 
 * Confirm no simulants believed to be outside of 26 and 33 weeks of gestational age at birth recieve corticosteroids
 

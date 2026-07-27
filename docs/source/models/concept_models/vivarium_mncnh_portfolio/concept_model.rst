@@ -424,11 +424,15 @@ Intrapartum component
       - * Intrapartum azithromycin coverage 
         * Antenatal corticosteroid coverage
         * Misoprostol coverage
+        * E-MOTIVE coverage
       - * :ref:`Intrapartum azithromycin <azithromycin_intervention>` 
         * :ref:`Misoprostol coverage <misoprostol_intervention>`
         * :ref:`Antenatal corticosteroids <acs_intervention>`
+        * :ref:`E-MOTIVE <emotive_intervention>`
     * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
       - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
+        * :ref:`Misoprostol coverage <misoprostol_intervention>`
+        * :ref:`E-MOTIVE coverage <emotive_intervention>`
         * Hemoglobin at end of pregnancy
       - * Maternal disorders outcomes (see outcome table)
       - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
@@ -695,6 +699,14 @@ designed to be fully inclusive of all work or modeled components.
     - 100% of eligible population
     - Baseline
     - 
+  * - 19. E-MOTIVE total scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
 
 .. _MNCNH intrapartum component scenario table:
 
@@ -705,23 +717,28 @@ designed to be fully inclusive of all work or modeled components.
     - Azithromycin coverage
     - Corticosteroid coverage
     - Misoprostol coverage
+    - E-MOTIVE coverage
     - Note
   * - 1. Baseline
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - 
+    - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    -
   * - 2. CPAP and ACS scale-up
     - Baseline
     - 100% at BEmONC and CEmONC, baseline at home
+    - Baseline
     - Baseline
     - 
   * - 3. CPAP, ACS, and AI-assisted ultrasound scale-up
     - Baseline
     - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
+    - Baseline
     -  
   * - 4. Neonatal antibiotics scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -730,13 +747,16 @@ designed to be fully inclusive of all work or modeled components.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 6. Azithromycin scale-up
     - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 7. AI-assisted ultrasound scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -745,13 +765,16 @@ designed to be fully inclusive of all work or modeled components.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 9. Full product scale-up, October 2025
     - 100% at BEmONC and CEmONC, baseline at home
     - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
+    - Baseline
     - Not including misoprostol scale-up in this run because as of October 2025 we have known calibration issues with our hemorrhage model by delivery facility setting
   * - 10. MMS scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -760,33 +783,40 @@ designed to be fully inclusive of all work or modeled components.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     -
   * - 12. Azithromycin V&V
     - 50% at BEmONC and CEmONC, baseline at home
     - 0%
     - 0%
+    - Baseline
     - 
   * - 13. Misoprostol V&V
     - 0%
     - 0%
     - 50% among eligible population (attends ANC and delivers at home)
+    - Baseline
     - 
   * - 14. No ACS and total CPAP V&V
     - Baseline
     - 0% coverage at all delivery location types 
+    - Baseline
     - Baseline
     - see neonatal table for CPAP coverage
   * - 15. Total ACS and CPAP V&V
     - Baseline
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
+    - Baseline
     - see neonatal table for CPAP coverage
   * - 16. Total ACS and no CPAP V&V
     - Baseline
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
+    - Baseline
     - see neonatal table for CPAP coverage    
   * - 17. Ultrasound V&V
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -795,6 +825,13 @@ designed to be fully inclusive of all work or modeled components.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
+    - 
+  * - 19. E-MOTIVE total scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 100% coverage at BEmONC and CEmONC facilities (none at home)
     - 
 
 .. _MNCNH neonatal component scenario table:
@@ -893,6 +930,11 @@ designed to be fully inclusive of all work or modeled components.
     - Baseline
     - 
   * - 18. Anemia screening V&V
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
+  * - 19. E-MOTIVE total scale-up
     - Baseline
     - Baseline
     - Baseline
@@ -1115,6 +1157,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Anemia screening V&V 
       * Anemia screening and IV iron scale-up
       * MMS total scale-up
+      * E-MOTIVE total scale-up
     - These are the scenarios currently tested in our V&V checks
 
 .. list-table:: Summary of draw metadata by input parameter
@@ -1957,12 +2000,19 @@ Default stratifications to all observers should include scenario and input draw.
     - Standard V&V scenarios
     - Default
     -
+  * - 
+    - Postpartum hemorrhage split at 300 mL
+    - Differentiate the current "non-cases" of PPH (those with <500 mL blood loss) into "<300 mL" and "300-500 mL".
+      See `this pull request <https://github.com/ihmeuw/vivarium_research/pull/XXXX>`__ for details.
+    - Standard V&V scenarios
+    - Default
+    -
   * -
     - E-MOTIVE
     - E-MOTIVE and its effects on postpartum hemorrhage
-    - Standard V&V scenarios
+    - Standard V&V scenarios; note that #19 E-MOTIVE total scaleup has been added to the list for this run
     - Default
-    - Research tickets to `document E-MOTIVE <https://jira.ihme.washington.edu/browse/SSCI-2584>`__, PPH/APH effects on hemoglobin run
+    - Postpartum hemorrhage split at 300 mL run
   * - 
     - Separate LBWSG affected causes
     - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__

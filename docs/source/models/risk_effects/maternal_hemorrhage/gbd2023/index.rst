@@ -120,7 +120,8 @@ Assumptions and Limitations
 - This modeling strategy applies an average hemoglobin shift over discrete time periods, which does not capture the continuous nature of hemoglobin changes over time.
   The continuous curves could result in simulants moving between several anemia categories over the course of a single time period, which is not captured here.
   This also means that the (relatively arbitrary) choices of durations of these periods are impactful.
-- We currently apply the same hemoglobin shift for all incident postpartum hemorrhage cases, but in reality the hemoglobin shift likely differs by severity of postpartum hemorrhage (moderate vs severe), which is not captured here.
+- We currently apply the same hemoglobin shift for all incident postpartum hemorrhage cases with more than 500mL of blood loss, but in reality the hemoglobin shift likely differs by severity (moderate vs severe), which is not captured here.
+  Additionally, we do not currently apply a hemoglobin shift for incident postpartum hemorrhage cases with less than 500mL of blood loss, but in reality there may be a hemoglobin shift for these cases as well.
   We may address this in the future based on our approach in the :ref:`previous maternal hemorrhage effects model <2019_2021_risk_effect_maternal_hemorrhage>`.
 - The GBD shift is derived from USA MarketScan data, which may not be generalizable to other locations.
   In particular, treatment in the USA may be more effective at mitigating the hemoglobin shift associated with postpartum hemorrhage than treatment in other locations, which could lead to an underestimation of the hemoglobin shift in locations with less effective treatment.

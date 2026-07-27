@@ -10,11 +10,16 @@ Disease Overview
 GBD 2023 Modeling Strategy
 --------------------------
 
+Postpartum hemorrhage does not appear in the GBD cause hierarchy.
+It is a *subset* of maternal hemorrhage (c_367), which is a most detailed cause in GBD 2023. 
+GBD defines maternal hemorrhage (and therefore postpartum hemorrhage) as bleeding in excess of 500 mL within 24 hours after birth.
+Note that in October 2025 the WHO issued new guidelines redefining postpartum hemorrhage as bleeding in excess of **300 mL**,
+which has not yet been incorporated into GBD.
+
 Cause Hierarchy
 +++++++++++++++
 
-Postpartum hemorrhage does not appear in the GBD cause hierarchy.
-It is a *subset* of maternal hemorrhage (c_367), which is a most detailed cause in GBD 2023. The relevant portion of the GBD hierarchy is as follows:
+The relevant portion of the GBD cause hierarchy is as follows:
 
 - All causes (c_294) [level 0]
 
@@ -140,7 +145,9 @@ we will not model postpartum hemorrhage as a state machine
 with dynamic state transitions like our typical cause models. Rather,
 all "transitions" in the model will be modeled as decisions made during
 a single timestep. To obtain the decision probabilities,
-we will convert GBD's annual rates
+we will use a combination of GBD data (which is relevant to the 500 mL definition of postpartum hemorrhage)
+and data from the E-MOTIVE trial to inform the 300 mL threshold decisions.
+We will convert GBD's annual rates
 among females of reproductive age into conditional event rates.
 We will track postpartum hemorrhage
 deaths to calculate YLLs, and we will track incident cases by severity to calculate
@@ -167,13 +174,14 @@ represent decision probabilities rather than rates per unit time.
         alive [label="parent did not die of hemorrhage"]
         dead [label="parent died of hemorrhage"]
 
-        start -> alive  [label = "1 - ir"]
-        start -> hemorrhage [label = "ir"]
-        hemorrhage -> moderate [label = "1 - severe_fraction"]
-        hemorrhage -> severe [label = "severe_fraction"]
-        severe -> alive [label = "1 - cfr"]
-        severe -> dead [label = "cfr"]
-        moderate -> alive [label = "1"]
+        start -> alive [label = "1 - ir_300mL"]
+        start -> hemorrhage_300mL [label = "ir_300mL"]
+        hemorrhage_300mL -> alive [label = "1 - ir_500mL"]
+        hemorrhage_300mL -> hemorrhage_500mL [label = "ir_500mL"]
+        hemorrhage_500mL -> alive [label = "1 - ir_1000mL"]
+        hemorrhage_500mL -> hemorrhage_1000mL [label = "ir_1000mL"]
+        hemorrhage_1000mL -> alive [label = "1 - cfr"]
+        hemorrhage_1000mL -> dead [label = "cfr"]
         alive -> end  [label = "1"]
         dead -> end  [label = "1"]
     }
@@ -188,15 +196,15 @@ represent decision probabilities rather than rates per unit time.
       - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>` and not have died from antepartum hemorrhage (due to condition on the overall intrapartum component)
-    * - hemorrhage
-      - Parent simulant has postpartum hemorrhage
-    * - moderate
-      - Parent simulant has moderate postpartum hemorrhage (i.e., blood loss greater than 500 mL but less than 1 liter)
-    * - severe
-      - Parent simulant has severe postpartum hemorrhage (i.e., blood loss 1 liter or more)
-    * - parent did not die of postpartum hemorrhage
+    * - hemorrhage_300ml
+      - Parent simulant loses at least 300 mL of blood postpartum (WHO 2025 definition of postpartum hemorrhage)
+    * - hemorrhage_500ml
+      - Parent simulant loses at least 500 mL of blood postpartum (GBD 2023 definition of postpartum hemorrhage)
+    * - hemorrhage_1000ml
+      - Parent simulant loses at least 1000 mL (1 L) of blood postpartum (i.e., has severe postpartum hemorrhage)
+    * - alive
       - Parent simulant did not die of postpartum hemorrhage
-    * - parent died of postpartum hemorrhage
+    * - dead
       - Parent simulant died of postpartum hemorrhage
     * - end
       -
@@ -208,35 +216,56 @@ represent decision probabilities rather than rates per unit time.
     * - Symbol
       - Name
       - Definition
-    * - ir
-      - incidence risk
-      - The probability that a pregnant simulant gets postpartum hemorrhage
-    * - severe_fraction
-      - severe fraction
-      - The probability that a simulant with postpartum hemorrhage has severe postpartum hemorrhage (i.e., blood loss of 1 liter or more)
+    * - ir_300ml
+      - incidence risk of 300 mL postpartum hemorrhage
+      - The probability that a pregnant simulant loses at least 300 mL of blood postpartum
+    * - ir_500ml
+      - incidence risk of 500 mL postpartum hemorrhage
+      - The probability that a simulant who loses at least 300 mL of blood postpartum loses at least 500 mL
+    * - ir_1000ml
+      - incidence risk of 1000 mL postpartum hemorrhage
+      - The probability that a simulant who loses at least 500 mL of blood postpartum has blood loss of 1000 mL or more (i.e., severe postpartum hemorrhage).
+        Note that this is called :math:`\text{severe_fraction}` in the antepartum hemorrhage cause model.
     * - cfr
       - case fatality rate
-      - The probability that a simulant with severe postpartum hemorrhage dies of that hemorrhage
+      - The probability that a simulant with 1000 mL postpartum hemorrhage dies of that hemorrhage
 
 Probabilities
 +++++++++++++
 
-The postpartum hemorrhage cause model requires three probabilities, the
-incidence risk (ir) per birth, the severe fraction (severe_fraction), and the case fatality rate (cfr), for use
-in the decision graph. The incidence risk per birth will be computed as
+The postpartum hemorrhage cause model requires four probabilities, the
+300 mL incidence risk (ir_300mL) per birth,
+the 500 mL incidence risk (ir_500mL) per case of at least 300 mL blood loss,
+the 1000 mL incidence risk (ir_1000ml) per case of at least 500 mL blood loss,
+and the case fatality rate (cfr) per case of 1000 mL postpartum hemorrhage,
+for use in the decision graph.
+
+First, even though it won't directly be used, it is helpful to define the 500 mL incidence risk per birth (ir_500mL_per_birth)
+using GBD data only:
 
 .. math::
 
-    \text{ir} = \frac{\text{postpartum hemorrhage cases}}{\text{births} - \text{antepartum hemorrhage deaths}}
+    \text{ir\_500mL\_per\_birth} = \frac{\text{postpartum hemorrhage cases}}{\text{births} - \text{antepartum hemorrhage deaths}}
         = \frac{\text{(postpartum hemorrhage cases) / person-time}}
             {\text{births / person-time} - \text{(antepartum hemorrhage deaths) / person-time}}
-        = \frac{\text{postpartum hemorrhage incidence rate}}{\text{birth rate} - \text{antepartum hemorrhage cause-specific mortality rate}}.
+        = \frac{\text{maternal hemorrhage incidence rate} \times \text{postpartum\_fraction}}{\text{birth rate} - \text{antepartum hemorrhage cause-specific mortality rate}}.
 
-The severe fraction will be computed as
+Like all incidence risks, this is a probabiity in [0,1]. Its denominator includes
+live births and stillbirths among parents who did not die from antepartum hemorrhage.
+
+The 300 mL incidence risk per birth is then:
 
 .. math::
 
-    \text{severe\_fraction} = \frac{\text{incidence\_s181}}{\text{incidence\_s181} + \text{incidence\_s180}}.
+    \text{ir\_300mL} = \text{ir\_500mL\_per\_birth} \times \frac{1}{\text{ir\_500mL}}.
+
+We get the 500 mL incidence risk per case of at least 300 mL directly from the data, see table below.
+
+The 1000 mL incidence risk per case of at least 500 mL blood loss will be computed as
+
+.. math::
+
+    \text{ir\_1000ml} = \frac{\text{incidence\_s181}}{\text{incidence\_s181} + \text{incidence\_s180}}.
 
 The case fatality rate (CFR) will be computed as
 
@@ -260,14 +289,21 @@ We apply the YLDs per case for the corresponding severity level to each incident
 
 .. math::
 
-    \text{ylds\_per\_case\_severe} = \frac{\text{yld\_rate\_s181}}{\text{incidence\_s181}}
+    \text{ylds_per_case_1000mL} = \frac{\text{yld_rate_s181}}{\text{incidence_s181}}
 
 .. math::
   
-    \text{ylds\_per\_case\_moderate} = \frac{\text{yld\_rate\_s180}}{\text{incidence\_s180}}
+    \text{ylds_per_case_500mL_to_1L} = \frac{\text{yld_rate_s180}}{\text{incidence_s180}}
+  
+.. math::
+  
+    \text{ylds_per_case_300mL_to_500mL} = \text{ylds_per_case_500mL_to_1L} / 2
 
 Note that we do *not* include YLDs for mild, moderate, or severe anemia due to postpartum hemorrhage (s_182, s_183, s_184) in our calculations because these
 sequelae are already counted under the anemia cause model, and we want to avoid double counting.
+We do, however, by including disability for the 300-500mL category, count more disability than GBD does.
+The choice of half the YLDs for the 300mL-500mL category vs the YLDs for the 500mL-1L category is arbitrary,
+picked between the logical bounds (0 and the YLDs for 500mL-1L).
 
 Data table
 ++++++++++
@@ -301,11 +337,6 @@ calculations.
       - Sample uncertainty from the normal distribution of uncertainty around the prediction, before exponentiating.
         Clip to be no greater than 1 after exponentiating (which should very rarely occur).
         See `the notebook <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ec5b9d663a929beb1a9aefad3917fa1b03e29e01/src/vivarium_gates_mncnh/data/postpartum_hemorrhage_split/postpartum_hemorrhage_split.ipynb>`__ for more details about the crosswalk model and how to extract this value.
-    * - ir
-      - postpartum hemorrhage incidence risk per birth
-      - postpartum_fraction * incidence_c367 / (birth_rate - antepartum_hemorrhage_csmr)
-      - The value of ir is a probabiity in [0,1]. Denominator includes
-        live births and stillbirths among parents who did not die from antepartum hemorrhage.
     * - incidence_c367
       - incidence rate of maternal hemorrhage
       - como
@@ -362,6 +393,12 @@ calculations.
       - cause-specific mortality rate of antepartum hemorrhage
       - csmr_c367 * (1 - postpartum_fraction)
       - See :ref:`antepartum hemorrhage document <2023_cause_antepartum_hemorrhage_mncnh>` for more details on how this value is calculated.
+    * - ir_500mL_per_300mL_case
+      - incidence risk of postpartum hemorrhage of at least 500 mL when postpartum hemorrhage of at least 300 mL has occurred
+      - 45.33% (95% CI: 44.61%, 46.05%)
+      - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [EMOTIVE]_, all of which can be found at :code:`J:\Project\simulation_science\mnch_grant\MNCNH portfolio\EMOTIVE trial data.xlsx`.
+        The confidence interval was calculated using the normal approximation to the binomial distribution (see spreadsheet for calculation).
+        Assume a normal distribution of uncertainty when sampling values.
 
 Validation Criteria
 +++++++++++++++++++
@@ -393,6 +430,12 @@ Limitations
 * We assume that postpartum hemorrhage is uncorrelated with antepartum hemorrhage, except for the causal effect through hemoglobin. In reality, there may be both confounding and a direct causal effect.
 * Splitting out maternal hemorrhage (modeled as one cause in the GBD) into antepartum and postpartum hemorrhage (modeled as two separate causes in our model, with a vicious cycle between them through hemoglobin)
   will lead us to overestimate the total burden of maternal hemorrhage relative to GBD due to cases that have both antepartum and postpartum hemorrhage and have double-shifted hemoglobin.
+* The ratio between 300mL+ and 500mL+ blood loss is informed by the E-MOTIVE trial, which included only vaginal deliveries.
+  This is likely to differ for cesarean deliveries, but we do not have any data about this.
+* The choice of YLDs for the 300-500mL category is arbitrary, and we do not have any data to inform this choice.
 
 References
 ----------
+
+.. [EMOTIVE]
+  Gallos, Ioannis, et al. "Randomized trial of early detection and treatment of postpartum hemorrhage." New England Journal of Medicine 389.1 (2023): 11-21.
