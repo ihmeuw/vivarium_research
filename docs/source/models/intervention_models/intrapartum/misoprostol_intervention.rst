@@ -60,7 +60,7 @@ See the :ref:`Postpartum hemorrhage cause model <2023_cause_postpartum_hemorrhag
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Postpartum hemorrhage incidence risk at the 300mL level :math:`\text{ir}_\text{300mL}`
+  * - Postpartum hemorrhage incidence risk at the 300mL level :math:`\text{ir\_300mL}`
     - Adjust multiplicatively using RR
     - Yes 
     - 
@@ -112,11 +112,11 @@ component requires data on (1) the relative risk of postpartum hemorrhage incide
 due to not receiving misoprostol.  We will use the decision tree below to estimate the probability of postpartum hemorrhage incidence with and without the use of misoprostol, ensuring consistency
 with the baseline delivery facility rates and baseline misoprostol coverage.
 
-In Vivarium, this risk effect will modify the pipeline for postpartum hemorrhage incidence at the 300mL level (:math:`\text{ir}_\text{300mL}` in the :ref:`postpartum hemorrhage cause model <2023_cause_postpartum_hemorrhage_mncnh>`), resulting in
+In Vivarium, this risk effect will modify the pipeline for postpartum hemorrhage incidence at the 300mL level (:math:`\text{ir\_300mL}` in the :ref:`postpartum hemorrhage cause model <2023_cause_postpartum_hemorrhage_mncnh>`), resulting in
 
 .. math::
 
-   \text{ir}_\text{i,300mL} = \text{ir}_\text{300mL} \cdot (1 - \text{PAF}_\text{no misoprostol}) \cdot \text{RR}_i^\text{no misoprostol}
+   \text{ir\_300mL}_i = \text{ir\_300mL} \cdot (1 - \text{PAF}_\text{no misoprostol}) \cdot \text{RR}_i^\text{no misoprostol}
 
 where :math:`\text{RR}_i^\text{no misoprostol}` is simulant *i*'s individual relative risk for "no misoprostol", meaning :math:`\text{RR}_i^\text{no misoprostol} = \text{RR}_\text{no misoprostol}` 
 if simulant *i* does not receive misoprostol, and :math:`\text{RR}_i^\text{no misoprostol} = 1` if simulant *i* receives misoprostol. 

@@ -46,7 +46,7 @@ before 300 mL of blood loss in very rare circumstances.
 The most plausible explanation for the substantial improvement seen in the E-MOTIVE trial is training spillovers leading to better preventative care,
 which we exclude here because we will not be able to cost these preventative care changes without understanding more about them.
 
-In our model, the parameters :math:`\text{ir}_\text{500mL}` and :math:`\text{ir}_\text{1000mL}` on the :ref:`postpartum hemorrhage cause model <2023_cause_postpartum_hemorrhage_mncnh>` page
+In our model, the parameters :math:`\text{ir\_500mL}` and :math:`\text{ir\_1000mL}` on the :ref:`postpartum hemorrhage cause model <2023_cause_postpartum_hemorrhage_mncnh>` page
 will be modified as follows for simulants who receive E-MOTIVE:
 
 .. math::
@@ -59,7 +59,7 @@ will be modified as follows for simulants who receive E-MOTIVE:
 
 where:
 
-- :math:`\text{ir}` is one of :math:`\text{ir}_\text{500mL}` or :math:`\text{ir}_\text{1000mL}`,
+- :math:`\text{ir}` is one of :math:`\text{ir\_500mL}` or :math:`\text{ir\_1000mL}`,
 - :math:`\text{RR}^\text{E-MOTIVE}` is the relative risk on the relevant incidence parameter from the table below,
 - :math:`\text{cesarean\_fraction\_ifd}` is the fraction of facility births that are cesarean deliveries,
 - :math:`\text{csection\_coverage\_prop}` is GBD covariate ID 2381 "proportion of live births delivered by Caesarean Section (c-section)",
@@ -75,12 +75,12 @@ but let's note if this is happening often.
   * - Parameter
     - RR for vaginal deliveries
     - Note
-  * - :math:`\text{ir}_\text{500mL}`
+  * - :math:`\text{ir\_500mL}`
     - 0.846 (95% CI: 0.822, 0.871)
     - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [E-MOTIVE]_, all of which can be found at :code:`J:\\Project\\simulation_science\\mnch_grant\\MNCNH portfolio\\E-MOTIVE trial data.xlsx`.
       The confidence interval was calculated using the standard error of the log RR (see spreadsheet for calculation).
       Assume a log-normal distribution of uncertainty when sampling values.
-  * - :math:`\text{ir}_\text{1000mL}`
+  * - :math:`\text{ir\_1000mL}`
     - 0.741 (95% CI: 0.689, 0.797)
     - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [E-MOTIVE]_, all of which can be found at :code:`J:\\Project\\simulation_science\\mnch_grant\\MNCNH portfolio\\E-MOTIVE trial data.xlsx`.
       The confidence interval was calculated using the standard error of the log RR (see spreadsheet for calculation).
@@ -95,7 +95,7 @@ which means that our baseline burden estimates from GBD do not require any adjus
 Assumptions and Limitations
 ---------------------------
 
-- By not including an effect of E-MOTIVE on :math:`\text{ir}_\text{300mL}`, we exclude a substantial portion of the benefit seen in the E-MOTIVE trial.
+- By not including an effect of E-MOTIVE on :math:`\text{ir\_300mL}`, we exclude a substantial portion of the benefit seen in the E-MOTIVE trial.
   We do this because we do not understand the mechanism of this effect, which makes costing it challenging.
 - Our knowledge of coverage in 2023 (assumed 0%) is based only on circumstantial evidence such as reports from research studies.
 - We do not model specifically who is diagnosed with postpartum hemorrhage, and therefore spread the benefits (and costs) of the intervention over all pregnant simulants in facilities, rather than only those who are diagnosed with postpartum hemorrhage.
