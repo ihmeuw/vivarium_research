@@ -51,21 +51,21 @@ will be modified as follows for simulants who receive E-MOTIVE:
 
 .. math::
 
-  \text{cesarean_fraction_ifd} = \frac{\text{csection_coverage_prop}}{\text{IFD_coverage_prop}}
+  \text{cesarean\_fraction\_ifd} = \frac{\text{csection\_coverage\_prop}}{\text{IFD\_coverage\_prop}}
 
 .. math::
 
-  \text{ir}^\text{E-MOTIVE} = (1 - \text{cesarean_fraction_ifd}) \times \text{ir} \times \text{RR}^\text{E-MOTIVE} + \text{cesarean_fraction_ifd} \times \text{ir},
+  \text{ir}^\text{E-MOTIVE} = (1 - \text{cesarean\_fraction\_ifd}) \times \text{ir} \times \text{RR}^\text{E-MOTIVE} + \text{cesarean\_fraction\_ifd} \times \text{ir},
 
 where:
 
 - :math:`\text{ir}` is one of :math:`\text{ir}_\text{500mL}` or :math:`\text{ir}_\text{1000mL}`,
 - :math:`\text{RR}^\text{E-MOTIVE}` is the relative risk on the relevant incidence parameter from the table below,
-- :math:`\text{cesarean_fraction_ifd}` is the fraction of facility births that are cesarean deliveries,
-- :math:`\text{csection_coverage_prop}` is GBD covariate ID 2381 "proportion of live births delivered by Caesarean Section (c-section)",
-- :math:`\text{IFD_coverage_prop}` is GBD covariate ID 51 "Percent of women giving birth in a health facility".
+- :math:`\text{cesarean\_fraction\_ifd}` is the fraction of facility births that are cesarean deliveries,
+- :math:`\text{csection\_coverage\_prop}` is GBD covariate ID 2381 "proportion of live births delivered by Caesarean Section (c-section)",
+- :math:`\text{IFD\_coverage\_prop}` is GBD covariate ID 51 "Percent of women giving birth in a health facility".
 
-The :math:`\text{cesarean_fraction_ifd}` should be clipped to 1 if :math:`\text{csection_coverage_prop} \gt \text{IFD_coverage_prop}`,
+The :math:`\text{cesarean\_fraction\_ifd}` should be clipped to 1 if :math:`\text{csection\_coverage\_prop} \gt \text{IFD\_coverage\_prop}`,
 but let's note if this is happening often.
 
 .. list-table:: E-MOTIVE Intervention Parameters

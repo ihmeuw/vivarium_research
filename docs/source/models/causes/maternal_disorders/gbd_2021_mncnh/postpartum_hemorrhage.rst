@@ -225,7 +225,7 @@ represent decision probabilities rather than rates per unit time.
     * - ir_1000ml
       - incidence risk of 1000 mL postpartum hemorrhage
       - The probability that a simulant who loses at least 500 mL of blood postpartum has blood loss of 1000 mL or more (i.e., severe postpartum hemorrhage).
-        Note that this is called :math:`\text{severe_fraction}` in the antepartum hemorrhage cause model.
+        Note that this is called :math:`\text{severe\_fraction}` in the antepartum hemorrhage cause model.
     * - cfr
       - case fatality rate
       - The probability that a simulant with 1000 mL postpartum hemorrhage dies of that hemorrhage
@@ -245,7 +245,7 @@ using GBD data only:
 
 .. math::
 
-    \text{ir_500mL_per_birth} = \frac{\text{postpartum hemorrhage cases}}{\text{births} - \text{antepartum hemorrhage deaths}}
+    \text{ir\_500mL\_per\_birth} = \frac{\text{postpartum hemorrhage cases}}{\text{births} - \text{antepartum hemorrhage deaths}}
         = \frac{\text{(postpartum hemorrhage cases) / person-time}}
             {\text{births / person-time} - \text{(antepartum hemorrhage deaths) / person-time}}
         = \frac{\text{maternal hemorrhage incidence rate} \times \text{postpartum\_fraction}}{\text{birth rate} - \text{antepartum hemorrhage cause-specific mortality rate}}.
@@ -257,7 +257,7 @@ The 300 mL incidence risk per birth is then:
 
 .. math::
 
-    \text{ir_300mL} = \text{ir_500mL_per_birth} \times \frac{1}{\text{ir_500mL}}.
+    \text{ir\_300mL} = \text{ir\_500mL\_per\_birth} \times \frac{1}{\text{ir\_500mL}}.
 
 We get the 500 mL incidence risk per case of at least 300 mL directly from the data, see table below.
 
@@ -265,7 +265,7 @@ The 1000 mL incidence risk per case of at least 500 mL blood loss will be comput
 
 .. math::
 
-    \text{ir_1000ml} = \frac{\text{incidence_s181}}{\text{incidence_s181} + \text{incidence_s180}}.
+    \text{ir\_1000ml} = \frac{\text{incidence\_s181}}{\text{incidence\_s181} + \text{incidence\_s180}}.
 
 The case fatality rate (CFR) will be computed as
 
@@ -289,15 +289,15 @@ We apply the YLDs per case for the corresponding severity level to each incident
 
 .. math::
 
-    \text{ylds_per_case_1000mL} = \frac{\text{yld_rate_s181}}{\text{incidence_s181}}
+    \text{ylds\_per\_case\_1000mL} = \frac{\text{yld\_rate\_s181}}{\text{incidence\_s181}}
 
 .. math::
   
-    \text{ylds_per_case_500mL_to_1L} = \frac{\text{yld_rate_s180}}{\text{incidence_s180}}
+    \text{ylds\_per\_case\_500mL\_to\_1L} = \frac{\text{yld\_rate\_s180}}{\text{incidence\_s180}}
   
 .. math::
   
-    \text{ylds_per_case_300mL_to_500mL} = \text{ylds_per_case_500mL_to_1L} / 2
+    \text{ylds\_per\_case\_300mL\_to\_500mL} = \text{ylds\_per\_case\_500mL\_to\_1L} / 2
 
 Note that we do *not* include YLDs for mild, moderate, or severe anemia due to postpartum hemorrhage (s_182, s_183, s_184) in our calculations because these
 sequelae are already counted under the anemia cause model, and we want to avoid double counting.
