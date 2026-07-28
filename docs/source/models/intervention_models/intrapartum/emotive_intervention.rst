@@ -77,12 +77,12 @@ but let's note if this is happening often.
     - Note
   * - :math:`\text{ir\_500mL}`
     - 0.846 (95% CI: 0.822, 0.871)
-    - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [E-MOTIVE]_, all of which can be found at :code:`J:\\Project\\simulation_science\\mnch_grant\\MNCNH portfolio\\E-MOTIVE trial data.xlsx`.
+    - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [E-MOTIVE]_, all of which can be found at :code:`J:\\Project\\simulation_science\\mnch_grant\\MNCNH portfolio\\EMOTIVE trial data.xlsx`.
       The confidence interval was calculated using the standard error of the log RR (see spreadsheet for calculation).
       Assume a log-normal distribution of uncertainty when sampling values.
   * - :math:`\text{ir\_1000mL}`
     - 0.741 (95% CI: 0.689, 0.797)
-    - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [E-MOTIVE]_, all of which can be found at :code:`J:\\Project\\simulation_science\\mnch_grant\\MNCNH portfolio\\E-MOTIVE trial data.xlsx`.
+    - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [E-MOTIVE]_, all of which can be found at :code:`J:\\Project\\simulation_science\\mnch_grant\\MNCNH portfolio\\EMOTIVE trial data.xlsx`.
       The confidence interval was calculated using the standard error of the log RR (see spreadsheet for calculation).
       Assume a log-normal distribution of uncertainty when sampling values.
 

@@ -396,7 +396,7 @@ calculations.
     * - ir_500mL_per_300mL_case
       - incidence risk of postpartum hemorrhage of at least 500 mL when postpartum hemorrhage of at least 300 mL has occurred
       - 45.33% (95% CI: 44.61%, 46.05%)
-      - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [E-MOTIVE]_, all of which can be found at :code:`J:\\Project\\simulation_science\\mnch_grant\\MNCNH portfolio\\E-MOTIVE trial data.xlsx`.
+      - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [E-MOTIVE]_, all of which can be found at :code:`J:\\Project\\simulation_science\\mnch_grant\\MNCNH portfolio\\EMOTIVE trial data.xlsx`.
         The confidence interval was calculated using the normal approximation to the binomial distribution (see spreadsheet for calculation).
         Assume a normal distribution of uncertainty when sampling values.
 
