@@ -241,7 +241,7 @@ and the case fatality rate (cfr) per case of 1000 mL postpartum hemorrhage,
 for use in the decision graph.
 
 First, even though it won't directly be used, it is helpful to define the 500 mL incidence risk per birth (ir_500mL_per_birth)
-using GBD data only:
+using only GBD data (before incorporating the E-MOTIVE trial data) as follows:
 
 .. math::
 
