@@ -169,10 +169,10 @@ represent decision probabilities rather than rates per unit time.
 
     digraph hemorrhage_decisions {
         rankdir = LR;
-        start [label="start"]
-        end [label="end"]
-        alive [label="parent did not die of hemorrhage"]
-        dead [label="parent died of hemorrhage"]
+        start
+        end
+        alive
+        dead
 
         start -> alive [label = "1 - ir_300mL"]
         start -> hemorrhage_300mL [label = "ir_300mL"]
