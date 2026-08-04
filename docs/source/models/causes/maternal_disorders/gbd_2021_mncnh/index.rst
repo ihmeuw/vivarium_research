@@ -336,7 +336,6 @@ future waves, the simulation should make decisions about incidence of
 the different subcauses in the order of the suspected causal
 relationships. The specified order is:
 
-#. Abortion/miscarriage/ectopic pregnancy maternal disorders
 #. Maternal hypertensive disorders
 #. Obstructed labor and uterine rupture
 #. Postpartum hemorrhage
