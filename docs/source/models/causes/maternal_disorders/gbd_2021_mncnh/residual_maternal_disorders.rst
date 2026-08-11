@@ -115,8 +115,8 @@ document is included in the table below.
     - Modeled?
     - Documentation link
   * - Maternal hemorrhage (c_367)
-    - Modeled
-    - Antepartum hemorrhage document (to come) and :ref:`Postpartum hemorrhage document <2023_cause_postpartum_hemorrhage_mncnh>`
+    - **Partially unmodeled**
+    - :ref:`Postpartum hemorrhage document <2023_cause_postpartum_hemorrhage_mncnh>`, but we do not model antepartum hemorrhage
   * - Maternal sepsis and other maternal infections (c_368)
     - Modeled
     - :ref:`Maternal sepsis document <2021_cause_maternal_sepsis_mncnh>`
@@ -206,6 +206,11 @@ available for each cause).
     - False
     - False
     - 
+  * - Antepartum hemorrhage
+    - **Subset** of ID 367
+    - True
+    - True
+    - True
 
 Summary of modeling strategy
 ++++++++++++++++++++++++++++
@@ -257,7 +262,7 @@ Where,
     * - start
       - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>` and not have died from antepartum hemorrhage (due to condition on the overall intrapartum component)
+        <other_models_pregnancy_closed_cohort_mncnh>`
     * - assign YLDs due to residual maternal disorders
       - state in which YLDs due to residual maternal disorders are accrued
     * - parent did not die of residual maternal disorders
@@ -300,7 +305,7 @@ While the above diagram represents the conceptual aims of the residual maternal 
     * - start
       - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>` and not have died from antepartum hemorrhage (due to condition on the overall intrapartum component)
+        <other_models_pregnancy_closed_cohort_mncnh>`
     * - affected with residual maternal disorders
       - Parent is "affected with" residual maternal disorders 
     * - parent did not die of residual maternal disorders
@@ -347,11 +352,11 @@ Data Tables
       - model assumption
     * - cfr
       - "case" fatality rate of residual maternal disorders
-      - csmr / (birth_rate - antepartum_hemorrhage_csmr)
+      - csmr / birth_rate
       - The value of cfr is a probabiity in [0,1]. Note that this value of the cfr (shown in the "implementation-driven cause model diagram") is equivalent to the fr parameter shown in the "conceptual cause model diagram" 
     * - csmr
       - cause-specific mortality rate of residual maternal disorders
-      - sum of cause-specific mortality rates across causes [375, 1118, 1119, 379, 376, 741, 369]
+      - sum of cause-specific mortality rates across causes [375, 1118, 1119, 379, 376, 741, 369], plus cause-specific mortality rate of cause 367 scaled by (1 - postpartum_fraction)
       - note that cause-specific mortality rates are a measure of deaths (from source='codcorrect') divided by population
     * - birth_rate
       - birth rate (live or still)
@@ -369,25 +374,21 @@ Data Tables
         Use mean_value as location-specific point parameter.
     * - yld_rate
       - Rate of YLDs due to all residual maternal disorders subcauses among the total population
-      - sum of cause-specific mortality rates across causes [375, 1118, 1119, 379, 376, 741, 369]. Note that only causes 379 and 369 have YLDs.
+      - sum of cause-specific YLD rates across causes [375, 1118, 1119, 379, 376, 741, 369], plus cause-specific YLD rate of cause 367 scaled by (1 - postpartum_fraction). Note that only causes 379 and 369 have YLDs.
       - source=como
     * - ylds_per_case
-      - YLDs accumulated due to residual maternal disorders per case of residual maternal disorders (live/stillbirth pregnancy that did not die from antepartum hemorrhage)
-      - yld_rate / (birth_rate - antepartum_hemorrhage_csmr)
+      - YLDs accumulated due to residual maternal disorders per case of residual maternal disorders (live/stillbirth pregnancy)
+      - yld_rate / birth_rate
       - 
-    * - antepartum_hemorrhage_csmr
-      - cause-specific mortality rate of antepartum hemorrhage
-      - csmr_c367 * (1 - postpartum_fraction)
-      - See :ref:`antepartum hemorrhage document <2023_cause_antepartum_hemorrhage_mncnh>` for more details on how this value is calculated.
 
-- The ylds_per_case parameter should be applied to all simulants affected by residual maternal disorders (equivalent to all live or still birth pregnancies that did not die from antepartum hemorrhage)
-- The cfr (case fatality rate) parameter should be applied to all simulants affected by residual maternal disorders (equivalent to all live or still birth pregnancies that did not die from antepartum hemorrhage)
+- The ylds_per_case parameter should be applied to all simulants affected by residual maternal disorders (equivalent to all live or still birth pregnancies)
+- The cfr (case fatality rate) parameter should be applied to all simulants affected by residual maternal disorders (equivalent to all live or still birth pregnancies)
 
 Validation Criteria
 +++++++++++++++++++
 
 - Deaths due to residual maternal disorders should occur among pregnancies that end in live or still births only
-- Mortality, YLL, and YLDs rate due to residual maternal disorders should match expectation in the baseline scenario
+- Overall maternal mortality per pregnancy, YLLs per pregnancy, and YLDs per pregnancy should match the GBD "maternal disorders" parent cause (to make the GBD numbers per-pregnancy, divide their rates by the pregnancy incidence rate) in the baseline scenario
 
 References
 ----------

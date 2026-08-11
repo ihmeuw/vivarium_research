@@ -187,7 +187,7 @@ represent decision probabilities rather than rates per unit time.
     * - start
       - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>` and not have died from antepartum hemorrhage (due to condition on the overall intrapartum component)
+        <other_models_pregnancy_closed_cohort_mncnh>`
     * - hemorrhage
       - Parent simulant has postpartum hemorrhage
     * - moderate
@@ -227,10 +227,10 @@ in the decision graph. The incidence risk per birth will be computed as
 
 .. math::
 
-    \text{ir} = \frac{\text{postpartum hemorrhage cases}}{\text{births} - \text{antepartum hemorrhage deaths}}
+    \text{ir} = \frac{\text{postpartum hemorrhage cases}}{\text{births}}
         = \frac{\text{(postpartum hemorrhage cases) / person-time}}
-            {\text{births / person-time} - \text{(antepartum hemorrhage deaths) / person-time}}
-        = \frac{\text{postpartum hemorrhage incidence rate}}{\text{birth rate} - \text{antepartum hemorrhage cause-specific mortality rate}}.
+            {\text{births / person-time}}
+        = \frac{\text{postpartum hemorrhage incidence rate}}{\text{birth rate}}.
 
 The severe fraction will be computed as
 
@@ -303,9 +303,9 @@ calculations.
         See `the notebook <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ec5b9d663a929beb1a9aefad3917fa1b03e29e01/src/vivarium_gates_mncnh/data/postpartum_hemorrhage_split/postpartum_hemorrhage_split.ipynb>`__ for more details about the crosswalk model and how to extract this value.
     * - ir
       - postpartum hemorrhage incidence risk per birth
-      - postpartum_fraction * incidence_c367 / (birth_rate - antepartum_hemorrhage_csmr)
+      - postpartum_fraction * incidence_c367 / birth_rate
       - The value of ir is a probabiity in [0,1]. Denominator includes
-        live births and stillbirths among parents who did not die from antepartum hemorrhage.
+        live births and stillbirths.
     * - incidence_c367
       - incidence rate of maternal hemorrhage
       - como
@@ -358,10 +358,6 @@ calculations.
       - YLD rate per person-year due to severe maternal hemorrhage
       - como
       -
-    * - antepartum_hemorrhage_csmr
-      - cause-specific mortality rate of antepartum hemorrhage
-      - csmr_c367 * (1 - postpartum_fraction)
-      - See :ref:`antepartum hemorrhage document <2023_cause_antepartum_hemorrhage_mncnh>` for more details on how this value is calculated.
 
 Validation Criteria
 +++++++++++++++++++
@@ -390,9 +386,6 @@ Limitations
 
 * Because we use the YLD rate and mortality rate of maternal hemorrhage overall, we are assuming that these are the same for postpartum hemorrhage as for antepartum hemorrhage.
 * We assume that all postpartum hemorrhage fatalities occur among those with severe postpartum hemorrhage, which may not be the case in reality.
-* We assume that postpartum hemorrhage is uncorrelated with antepartum hemorrhage, except for the causal effect through hemoglobin. In reality, there may be both confounding and a direct causal effect.
-* Splitting out maternal hemorrhage (modeled as one cause in the GBD) into antepartum and postpartum hemorrhage (modeled as two separate causes in our model, with a vicious cycle between them through hemoglobin)
-  will lead us to overestimate the total burden of maternal hemorrhage relative to GBD due to cases that have both antepartum and postpartum hemorrhage and have double-shifted hemoglobin.
 
 References
 ----------
