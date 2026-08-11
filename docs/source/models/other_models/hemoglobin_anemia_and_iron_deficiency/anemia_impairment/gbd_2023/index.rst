@@ -17,7 +17,7 @@ See the REI IDs for the anemia impairments in the table below.
 
 [GBD_2021_Anaemia_Collaborators]_
 
-.. _`Anemia Impairment REI IDs Table`:
+.. _`2023 Anemia Impairment REI IDs Table`:
 
 .. list-table:: Anemia Impairment REI IDs
   :widths: 15, 15
@@ -46,7 +46,7 @@ The anemia envelope refers to the total prevalence and burden due to anemia in a
 Once the hemoglobin concentration distribution is estimated, the anemia envelope is calculated by evaluating the area under the distribution curve below the severity-specific hemoglobin thresholds for anemia. 
 GBD 2023 uses the WHO thresholds shown in the table below.
 
-.. _`WHO hemoglobin thresholds table`:
+.. _`2023 WHO hemoglobin thresholds table`:
 
 .. list-table:: WHO Hemoglobin Thresholds (g/L)
   :widths: 15, 15, 15, 15
@@ -68,7 +68,7 @@ GBD 2023 uses the WHO thresholds shown in the table below.
     - 100-109
     - 70-99
     - <70
-   * - Males and Females 5 months - 4 years
+  * - Males and Females 5 months - 4 years
     - 95-104
     - 70-94
     - <70
@@ -105,7 +105,7 @@ Once severity-specific anemia prevalence is estimated, years lived with disabili
 following severity-specific disability weights. NOTE: the anemia impairment is a YLD-only impairment and anemia is not considered 
 a direct cause of death in GBD 2023.
 
-.. _`Anemia Disability Weights`:
+.. _`2023 Anemia Disability Weights`:
 
 .. list-table:: Anemia Disability Weights
   :widths: 15, 15
@@ -222,7 +222,8 @@ Assumptions and Limitations
 
 The assumptions and limitations of this vivarium anemia impairment model include the same assumptions and limitations as the :ref:`Hemoglobin distribution model <2019_hemoglobin_model>`.
 
-Additionally, the GBD 2019 causal attribution process assumes no change in hemoglobin standard deviation by cause, which is likely not accurate, but represents a significant data gap. The causal attribution process also relies on residual attribution rather than direct attribution to several causes of anemia, including dietary iron deficiency anemia, which makes the prevalence estimates of these causes sensitive to the prevalence estimates of other anemia causes. 
+Additionally, the GBD 2019 causal attribution process assumes no change in hemoglobin standard deviation by cause, which is likely not accurate, but represents a significant data gap. 
+The causal attribution process also relies on residual attribution rather than direct attribution to several causes of anemia, including dietary iron deficiency anemia, which makes the prevalence estimates of these causes sensitive to the prevalence estimates of other anemia causes. 
 
 .. todo:: 
 
