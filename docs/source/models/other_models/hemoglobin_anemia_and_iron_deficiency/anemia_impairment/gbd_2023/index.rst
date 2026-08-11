@@ -168,7 +168,7 @@ Scope
 ++++++++
 
 The Vivarium modeling strategy for the anemia impairment will first rely
-on the :ref:`hemoglobin model <2019_hemoglobin_model>`. Vivarium simulants should first be
+on the :ref:`hemoglobin model <2023_hemoglobin_model>`. Vivarium simulants should first be
 assigned a hemoglobin value and then their anemia status can be evaluated
 by the hemoglobin thresholds shown on this page (thresholds are
 pregnancy-specific for women of reproductive age; see the pregnancy
@@ -185,6 +185,10 @@ is not yet described in this document).
   The male and female aged 5 to 14 hemoglobin thresholds should be used for pregnant females less than 15 years of age.
 
   Women who are pregnant and in the postpartum period (according to the :ref:`pregnancy model document <other_models_pregnancy>` should be evaluated for anemia according to the pregnancy-specific thresholds.
+
+.. todo:: 
+
+  Finish updating this section to 2023 hemoglobin model.
 
 Restrictions
 ++++++++++++
@@ -209,12 +213,20 @@ Restrictions
      - 95+
      - 
 
+.. todo:: 
+
+  Update this section to 2023 anemia impiarment restrictions.
+
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
 The assumptions and limitations of this vivarium anemia impairment model include the same assumptions and limitations as the :ref:`Hemoglobin distribution model <2019_hemoglobin_model>`.
 
 Additionally, the GBD 2019 causal attribution process assumes no change in hemoglobin standard deviation by cause, which is likely not accurate, but represents a significant data gap. The causal attribution process also relies on residual attribution rather than direct attribution to several causes of anemia, including dietary iron deficiency anemia, which makes the prevalence estimates of these causes sensitive to the prevalence estimates of other anemia causes. 
+
+.. todo:: 
+
+  Update this section to 2023 anemia impiarment restrictions.
 
 Validation Criteria
 +++++++++++++++++++
@@ -224,6 +236,10 @@ Prevalence of severity-specific anemia as calculated in the Vivarium simulation 
 0 < severity-specific anemia prevalence < 1
 
 0 < total anemia prevalence < 1
+
+.. todo:: 
+
+  Update this section to 2023 anemia impiarment validation criteria.
 
 References
 ----------
