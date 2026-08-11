@@ -11,9 +11,11 @@ Anemia Impairment
 Impairment Description in GBD 2023
 ----------------------------------
 
-The anemia impairment in GBD 2023 represents the total burden due to anemia across *all* GBD causes with anemia sequelae. For instance, mild anemia due to dietary iron deficiency, mild anemia due to hookworm disease, and mild anemia due to maternal hemorrhage all contribute to the mild anemia *impairment* in GBD. See the REI IDs for the anemia impairments in the table below.
+The anemia impairment in GBD 2023 represents the total burden due to anemia across *all* GBD causes with anemia sequelae. 
+For instance, mild anemia due to dietary iron deficiency, mild anemia due to hookworm disease, and mild anemia due to maternal hemorrhage all contribute to the mild anemia *impairment* in GBD. 
+See the REI IDs for the anemia impairments in the table below.
 
-[Kassebaum-et-al-2016-anemia]_
+[GBD_2021_Anaemia_Collaborators]_
 
 .. _`Anemia Impairment REI IDs Table`:
 
@@ -41,7 +43,8 @@ Anemia Envelope Estimation
 
 The anemia envelope refers to the total prevalence and burden due to anemia in a given demographic group and is estimated using the :ref:`GBD 2023 Hemoglobin Model <2023_hemoglobin_model>`.
 
-Once the hemoglobin concentration distribution is estimated, the anemia envelope is calculated by evaluating the area under the distribution curve below the severity-specific hemoglobin thresholds for anemia. GBD 2023 uses the WHO thresholds shown in the table below.
+Once the hemoglobin concentration distribution is estimated, the anemia envelope is calculated by evaluating the area under the distribution curve below the severity-specific hemoglobin thresholds for anemia. 
+GBD 2023 uses the WHO thresholds shown in the table below.
 
 .. _`WHO hemoglobin thresholds table`:
 
@@ -123,7 +126,7 @@ a direct cause of death in GBD 2023.
 
 .. todo:: 
 
-  Elaborate here or add link to further documentation on how Vivarium uses GBD disability weights from health states to be for the impairment.
+  Add link to further documentation on how Vivarium uses GBD disability weights from health states to be for the impairment.
 
 Causal Attribution
 ++++++++++++++++++
@@ -145,7 +148,13 @@ A complete list of the causes included in the causal attribution process for ane
 
 Unlike with GBD 2019, cause- and sex-specific hemoglobin shifts used for the anemia causal attribution process in GBD 2023 can be pulled directly from Shared Functions.
 
+.. todo:: 
 
+  Figure out how to pull the cause- and sex-specific hemoglobin shifts from Shared Functions.
+
+.. note:: 
+
+  Even though pregnancy-specific shifts were estimated, they were not used in the causal attribution pipeline.
 
 Iron Responsive Causes
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -219,11 +228,6 @@ Prevalence of severity-specific anemia as calculated in the Vivarium simulation 
 References
 ----------
 
-.. [Kassebaum-et-al-2016-anemia]
+.. [GBD_2021_Anaemia_Collaborators]
 
-  View `Kassebaum et al. 2016`_
-
-    Kassebaum NJ, GBD 2013 Anemia Collaborators. The Global Burden of
-    Anemia. Hematol Oncol Clin North Am. 2016 Apr;30(2):247-308. doi: https://doi.org/10.1016/j.hoc.2015.11.002
-
-.. _`Kassebaum et al. 2016`: https://www.clinicalkey.com/service/content/pdf/watermarked/1-s2.0-S0889858815001896.pdf?locale=en_US&searchIndex=
+  GBD 2021 Anaemia Collaborators. Prevalence, years lived with disability, and trends in anaemia burden by severity and cause, 1990-2021: findings from the Global Burden of Disease Study 2021. Lancet Haematol. 2023 Sep;10(9):e713-e734. doi: 10.1016/S2352-3026(23)00160-6. Epub 2023 Jul 31. Erratum in: Lancet Haematol. 2023 Oct;10(10):e796. doi: 10.1016/S2352-3026(23)00283-1. Erratum in: Lancet Haematol. 2024 Jan;11(1):e10. doi: 10.1016/S2352-3026(23)00373-3. PMID: 37536353; PMCID: PMC10465717.
