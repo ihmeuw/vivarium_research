@@ -36,7 +36,8 @@ in the indicated model-building wave:
 .. toctree::
     :maxdepth: 1
 
-    maternal_hemorrhage
+    antepartum_hemorrhage
+    postpartum_hemorrhage
     maternal_sepsis
     obstructed_labor
     postpartum_depression
@@ -335,10 +336,9 @@ future waves, the simulation should make decisions about incidence of
 the different subcauses in the order of the suspected causal
 relationships. The specified order is:
 
-#. Abortion/miscarriage/ectopic pregnancy maternal disorders
 #. Maternal hypertensive disorders
 #. Obstructed labor and uterine rupture
-#. Maternal hemorrhage
+#. Postpartum hemorrhage
 #. Maternal sepsis and other maternal infections
 #. Residual maternal disorders
 #. Postpartum depression

@@ -48,7 +48,7 @@ modules in the pregnancy component on the MNCNH portfolio simulation:
 #. `Hemoglobin at the Start of Pregnancy Module`_
 #. `First Trimester Hemoglobin Module`_
 #. `Anemia Screening Module`_
-#. `End of Pregnancy Hemoglobin Module`_
+#. `After Later ANC Hemoglobin Module`_
 
 Importantly, in the simulation implementation, YLDs due to anemia are accrued throughout the progression of these hemoglobin modules (despite the docs indicating that they are accrued as a lump sum in a separate "Anemia YLDs" module). See the :ref:`anemia YLDs input module document <2024_vivarium_mncnh_portfolio_anemia_module>` for specific details.
 
@@ -164,7 +164,7 @@ This module adds the effect of oral iron supplementation received at a first tri
     - Dependencies
   * - Oral iron coverage in first trimester
     - :code:`none` / :code:`ifa` / :code:`mms`
-    - Input to `End of Pregnancy Hemoglobin Module`_
+    - Input to `After Later ANC Hemoglobin Module`_
   * - First trimester hemoglobin
     - point value
     - Input to `Anemia Screening Module`_
@@ -250,15 +250,14 @@ This module performs the anemia screening interventions, including hemoglobin an
     - :code:`low` if first trimester hemoglobin <100 g/L, :code:`adequate if first trimester hemoglobin 100+ g/L`
     - Used for V&V (via observation) to assess sensitivity and specificity of the hemoglobin screening test and as a convenient stratifying variable for specific observed outcomes. Not used as an input to any other module.
 
-
-End of Pregnancy Hemoglobin Module
+After Later ANC Hemoglobin Module
 -------------------------------------------
 
 This module applies the effect of the IV iron intervention for those who received it and applies the effect of oral iron intervention for those who have not already received the effect from their earlier first trimester ANC visit. Only those who have "low" test results for both the hemoglobin and ferritin screenings are eligible for IV iron. We assume that among those who receive both IV and oral iron interventions at the later pregnancy ANC visit, they receive only the effect of IV iron on their hemoglobin exposure rather than the additive impact of both interventions.
 
-.. image:: end_of_pregnancy_diagram.drawio.png
+.. image:: after_later_anc_diagram.drawio.png
 
-.. list-table:: End of pregnancy hemoglobin module inputs
+.. list-table:: After later ANC hemoglobin module inputs
   :header-rows: 1
 
   * - Input
@@ -280,7 +279,7 @@ This module applies the effect of the IV iron intervention for those who receive
     - `Anemia Screening Module`_ output
     - 
 
-.. list-table:: End of pregnancy hemoglobin module data values
+.. list-table:: After later ANC hemoglobin module data values
   :header-rows: 1
 
   * - Parameter
@@ -299,7 +298,7 @@ This module applies the effect of the IV iron intervention for those who receive
     - Defined on the :ref:`IV iron intervention model document <intervention_iv_iron_antenatal_mncnh>`
     - 
 
-.. list-table:: End of pregnancy hemoglobin module decision nodes
+.. list-table:: After later ANC hemoglobin module decision nodes
   :header-rows: 1
 
   * - Decision node
@@ -331,7 +330,7 @@ This module applies the effect of the IV iron intervention for those who receive
     - Direct input from the `First Trimester Hemoglobin Module`_
     - Note that another way to answer this question would be if ANC attendance == 'first_trimester_and_later_pregnancy'
 
-.. list-table:: End of pregnancy hemoglobin module outputs
+.. list-table:: After later ANC hemoglobin module outputs
   :header-rows: 1
 
   * - Output
@@ -343,10 +342,56 @@ This module applies the effect of the IV iron intervention for those who receive
   * - Oral iron coverage at any time in pregnancy
     - :code:`none` / :code:`ifa` / :code:`mms`
     - V&V (via observation), simulation result
-  * - Hemoglobin at the end of pregnancy
+  * - Hemoglobin after later ANC visit
+    - point value
+    - Input to `Hemoglobin at End of Pregnancy Module`_
+
+Hemoglobin at End of Pregnancy Module
+-------------------------------------------
+
+This module applies the effect of antepartum hemorrhage on hemoglobin exposure at the end of pregnancy for those who experience this complication.
+The details of how to apply this effect are on the :ref:`risk effects page <2023_risk_effect_maternal_hemorrhage>`.
+
+.. image:: end_of_pregnancy_diagram.drawio.png
+
+.. list-table:: End of pregnancy hemoglobin module inputs
+  :header-rows: 1
+
+  * - Input
+    - Source
+    - Note
+  * - Antepartum hemorrhage incidence
+    - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
+    - 
+  * - Antepartum hemorrhage death
+    - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
+    - 
+
+.. list-table:: End of pregnancy hemoglobin module decision nodes
+  :header-rows: 1
+
+  * - Decision node
+    - Description
+    - Information
+    - Note
+  * - 1
+    - Died of antepartum hemorrhage?
+    - Direct input from :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
+    -
+  * - 2
+    - Incidence of antepartum hemorrhage?
+    - Direct input from :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
+    - 
+
+.. list-table:: End of pregnancy hemoglobin module outputs
+  :header-rows: 1
+
+  * - Output
+    - Value
+    - Dependencies
+  * - Hemoglobin at end of pregnancy
     - point value
     - Used to inform the risk effects of the hemoglobin risk factor (as an input to the :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`, :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`, and the :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>` modules. Also used as an input to the :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`.
-
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++

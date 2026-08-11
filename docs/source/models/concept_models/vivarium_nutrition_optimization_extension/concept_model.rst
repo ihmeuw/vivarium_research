@@ -15,6 +15,12 @@ Project overview
 
 This model will be built off of the existing :ref:`Nutrition Optimization <2021_concept_model_vivarium_nutrition_optimization>` simulation and extended to support the distinction between complicated and uncomplicated severe acute malnutrition in order to compare the relative priority of treatment for each condition. This model will use the :ref:`nutrition optimization pregnancy simulation <2021_concept_model_vivarium_nutrition_optimization_pregnancies>` without changes from the previous version and will make several changes to the :ref:`nutrition optimization child simulation <2021_concept_model_vivarium_nutrition_optimization_children>` (outlined below).
 
+**Key resources:**
+
+- `Analysis of model results can be found here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/tree/data_prep/emulator/in_patient_sam>`__
+- `Final ppt overview of methods and results can be found here <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/Nutrition%20Optimization/02_Communication/Inpatient%20SAM%20project%20results%2020260529.pptx?d=w3243ba59e2ea4f0e872c29e4e1fb7f3a&csf=1&web=1&e=0lPUW1>`__
+- `Simulation model repository can be found here <https://github.com/patricktnast/vivarium_gates_inpatient_sam>`__
+
 Simulation Design
 ++++++++++++++++++++++
 
@@ -55,7 +61,22 @@ Components with substantial updates (links/updates to come)
 - :ref:`MAM treatment <intervention_wasting_tx_inpatient_sam>`: parameter updates to treated and untreated MAM recovery rates, C_MAM, and E_MAM and some bugfixes to the ``load_mam_treatment_rr`` function as described in a note on the intervention model document
 - :ref:`Child wasting state-specific mortality and morbidity <2021_pem_inpatient_sam_extension>`
 
-.. _nutrition_optimization_extension2.2:
+Assumptions and limitations
+------------------------------
+
+* We do not model any dynamics related to wasting relapse (see the :ref:`wasting x-factor document page <2019_risk_effect_x_factor>` for a summary of relevant literature that demonstrates elevated SAM incidence rates among those with a history of SAM relative to healthy controls). In effect, this model limitation is expected to cause us to undervalue the "complicated SAM treatment through recovery" intervention relative to the "complicated SAM treatment through stabilization" intervention.
+
+* We apply the GBD wasting risk effects that are based on WHZ exposure alone to our modeled moderate acute malnutrition state. Given that there are cases that may be classified as moderate wasting by WHZ alone and classified as SAM when their MUAC and/or oedema exposures are also considered, this may cause us to overestimate the effect of MAM on morbidity and mortality in our model as some higher risk cases by the full acute malnutrition classification criteria will be (mis)classified as MAM using the WHZ-only GBD exposure assessment approach. This may contribute to an overestimation of overall child growth failure attributable mortality in our model. Note that the fact we inform the SAM state mortality rates from literature that uses the full rather than WHZ-only classification of SAM (rather than using the GBD CGF risk effects to inform SAM-specific mortality) causes us to not be internally consistent on this point.
+
+* Our wasting exposure model is informed by WHZ and oedema exposures only and does not consider MUAC exposures. This may cause us to underestimate the prevalence of acute malnutrition by excluding the cases that only meet the MUAC criteria and not the WHZ or oedema criteria.
+
+* Our approach to modeling SAM mortality separate from the GBD CGF effects in this model causes us to underestimate the expected impact of SQLNS on mortality risk experienced in the SAM states as we will not capture any mortality risk reductions within the SAM states due to improvements in child stunting exposures (and additional associated downstream improvements in child underweight exposure).
+
+* We do not consider dynamics related to wasting seasonality and/or treatment capacity.
+
+* We do not model morbidity associated with our PEM model (this was a "stretch goal" noted on our PEM model document that we did not get to for our final results as of 5/29/26). Note that at `~500 YLDs per 100,000 PYs among children under five in Kano, Nigeria <http://ihmeuw.org/7kty>`__, YLDs due to PEM comprise only about 1.5% of DALYs attributable to child wasting (`about 30,000 DALYs per 100,000 PY <http://ihmeuw.org/7ktz>`__). 
+
+* See additional key limitations of this model on the :ref:`wasting exposure model document <2021_risk_exposure_wasting_with_complicated_sam>`. Limitations specific to each modeled component may be found on individual model documents linked in the above section as well.
 
 Scenario descriptions
 -------------------------
@@ -201,10 +222,6 @@ The below tables can be filled out iteratively as new model runs are requested a
       * `Scenario-specific intervention coverage matches expectation <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/95ad19d1bc897d4f22e66e7f9a292a6c9cbf1a9e/verification_and_validation/pregnancy_model/model_inpatient_sam_inputs_intervention_coverage.ipynb>`__
       * `Baseline pregnancy model V&V criteria maintained <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/95ad19d1bc897d4f22e66e7f9a292a6c9cbf1a9e/verification_and_validation/pregnancy_model/model_inpatient_sam_inputs_preg_states.ipynb>`__
 
-
-.. todo::
-
-  Fill in V&V summaries for all runs and run specs for 2.1 and 2.2
 
 .. list-table:: Model runs
   :header-rows: 1
@@ -396,6 +413,10 @@ The below tables can be filled out iteratively as new model runs are requested a
     - We have draw/location-specific values for the "worse fraction" parameter in the artifact input data. However, these get overwritten with a constant value of 0.33 within the simulation. This causes some oddities in comparing MAM exposure to artifact values in our V&V notebooks and is not the intention of our modeling strategy.
     - No action for production runs, but we should update our model, documentation, and/or V&V processing appropriately moving forward.
     - TBD
+  * - Unresolved questions regarding treatment propensity resets
+    - On transitions into the MAM states in the baseline scenario, there is higher coverage of MAM treatment among simulants entering from the mild child wasting state than those entering from the uncomplicated SAM state (`see demonstration and discussion here <https://app.reviewnb.com/ihmeuw/vivarium_research_nutrition_optimization/pull/232/?path=ead29a26&cell_index=6&sha=eea81293bdb154a63dc332eb30e6cfc6eb87f469>`__). We are unable to explain this pattern given our intention of resetting AM treatment coverage propensities upon rentering the MAM state and it may warrant further investigation. However, due to the fact that we are reasonably meeting our baseline V&V targets and that our intervention scenarios should be unaffected by treatment coverage propensity bugs due to the fact that we only simulate either 0% or 100% coverage in scenarios that are used in our results, we have deemed this an acceptable limitation.
+    - None
+    - N/A
 
 
 

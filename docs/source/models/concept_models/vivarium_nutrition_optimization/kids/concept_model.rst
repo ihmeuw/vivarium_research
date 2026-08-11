@@ -169,31 +169,37 @@ in the simulation will be informed using data specific to the post neonatal age 
     - Existing version
     - Wave I update
     - Wave II update
+    - 2023 update
     - Note
   * - LBWSG exposure
     - :ref:`2019 docs<2019_risk_exposure_lbwsg>`, implemented in IV iron
     - Artifact rebuild
     - 
     - 
+    - 
   * - Child wasting exposure
     - :ref:`2020 docs<2020_risk_exposure_wasting_state_exposure>`, implemented in wasting paper
     - :ref:`Updated docs for children 6-59 months <2021_risk_exposure_wasting_state_exposure>` (use transitions rate values linked in .csv file) use :ref:`static wasting exposure <2020_risk_exposure_static_wasting>` for children 0-6 months of age (as implemented in IV iron)
     - :ref:`Updated documentation for children 0-6 months included in wasting exposure model document <2021_risk_exposure_wasting_state_exposure>`
-    - (Does not require separate 2021 update)
+    - Exposure values updated to GBD 2023. Transition rates need to be recalculated and added.
+    - Currently mixed 2021 and 2023.
   * - Child stunting exposure
     - :ref:`2020 docs<2020_risk_exposure_child_stunting>`, implemented in IV iron, wasting paper
     - Artifact rebuild, effects applied to 1-5 month age group
     - 
-    - (Does not require separate 2021 update)
+    - Updated to GBD 2023
+    - 
   * - Child underweight exposure
     - No
     - New :ref:`child underweight exposure model <2020_risk_exposure_child_underweight>`, effects applied to 1-5 month age group
     - 
-    - (Does not require separate 2021 update)
+    - Values updated based on stunting and wasting updates, but correlation not recalculated. Since this is based on DHS, should not be impacted by GBD cycles.
+    - 
   * - Target area
     - No
     - N/A
     - Needs to be created!
+    - 
     - 
  
 .. list-table:: Risk effects subcomponents
@@ -204,36 +210,42 @@ in the simulation will be informed using data specific to the post neonatal age 
     - Existing version
     - Wave I update
     - Wave II update
+    - 2023 update
     - Note
   * - LBWSG
     - Mortality
     - :ref:`Docs here<2019_risk_effect_lbwsg>`, implemented in IV iron
     - 
     - Will need PAF calculation for GBD 2021
+    - Updated to GBD 2023
     - 
   * - LBWSG
     - Wasting
     - Yes, docs part of :ref:`antenatal supplementation intervention CGF effects <maternal_supplementation_intervention>`. Implemented in IV iron
     - Use "static child wasting" effects from birth through initialization into the 6-11 month age group only; then wasting exposure model updates to transition model
     - :ref:`Described in the initialization section of the wasting exposure model document <2021_risk_exposure_wasting_state_exposure>`
+    - Updated to GBD 2023
     - 
   * - LBWSG
     - Stunting
     - Yes, docs part of :ref:`antenatal supplementation intervention CGF effects <maternal_supplementation_intervention>`, implemented in IV iron
     - 
     - 
+    - Updated to GBD 2023
     - 
   * - CGF (wasting, stunting, and underweight)
     - Infectious disease
     - Only wasting is documented :ref:`found here <2019_risk_effect_wasting>`. Docs need updating
     - Updated to 2021 values, added underweight risk effects, added malaria as affected outcome. :ref:`Updated version of CGF risk effects <2021_risk_effect_cgf>`
     - None
-    - (Does not require separate 2021 update)
+    - Stunting and underweight were updated through artifact code changes. Wasting should be confirmed that updates are not required to RR values. CGF PAF data generation is needed as part of JKUAT work.
+    - Currently mixed 2021 and 2023.
   * - Target area
     - CGF
     - No
     - N/A
     - Needs to be created
+    - 
     - 
 
 .. list-table:: Intervention subcomponents
@@ -243,21 +255,25 @@ in the simulation will be informed using data specific to the post neonatal age 
     - Existing version
     - Wave I update
     - Wave II update
+    - 2023 update
     - Note
   * - SAM tx
     - :ref:`Docs here <intervention_wasting_treatment>`, implemented in wasting paper
     - :ref:`Updated modeling strategy (combined protocol data) found here <intervention_wasting_tx_combined_protocol>`. Use draw-level E_SAM and C_SAM parameters linked on this page.
     - 
+    - SAM treatment RRs and PAFs will need to be recalculated with updated wasting transition rates.
     - 
   * - MAM tx
     - :ref:`Docs here <intervention_wasting_treatment>`, implemented in wasting paper
     - :ref:`Updated modeling strategy (combined protocol data) found here <intervention_wasting_tx_combined_protocol>`. Use draw-level E_MAM and C_MAM parameters linked on this page.
     - 
+    - MAM treatment RRs and PAFs will need to be recalculated with updated wasting transition rates.
     - 
   * - SQLNS
     - :ref:`Docs here <lipid_based_nutrient_supplements>`, implemented in wasting paper
     - :ref:`Updates described in docs <lipid_based_nutrient_supplements>` and `found in this PR <https://github.com/ihmeuw/vivarium_research/pull/1327>`_
     - 
+    - SQLNS effect sizes will need to be recalculated with updated wasting transition rates.
     - 
 
 .. list-table:: Cause subcomponents
@@ -267,34 +283,41 @@ in the simulation will be informed using data specific to the post neonatal age 
     - Existing version
     - Wave I update
     - Wave II update
+    - 2023 update
     - Note
   * - Diarrheal diseases
     - :ref:`Docs here <2019_cause_diarrhea>`, implemented in IV iron
     -  
     - 
+    - Updated to GBD 2023
     - See note below
   * - Measles
     - :ref:`Docs here <2019_cause_measles>`, implemented in IV iron
     - 
     - 
+    - Updated to GBD 2023
     - 
   * - Lower respiratory infections (LRI)
     - :ref:`Docs here <2019_cause_lower_respiratory_infections>`, implemented in IV iron
     - 
     - 
+    - Updated to GBD 2023
     - See note below
   * - Malaria
     - No existing version
     - :ref:`Docs here <2021_cause_malaria>`, was not included in IV iron
     - 
+    - Updated to GBD 2023
     - See note below
   * - Protein energy malnutrition (PEM)
     - :ref:`Old docs here <2020_risk_exposure_wasting_state_exposure>`, implemented in IV iron and CIFF
     - :ref:`New docs here <2021_pem>`. TODO: list whether or not there are updates other than breaking up docs pages
     - 
+    - Updated to GBD 2023
     - 
   * - Background morbidity
     - :ref:`Docs here <other_causes_ylds>`, but has not yet been implemented
+    - 
     - 
     - 
     - Bonus model, not a high priority
@@ -311,6 +334,8 @@ in the simulation will be informed using data specific to the post neonatal age 
   Notably, CGF risks do not affect these causes during the neonatal period and we are able to model the effect of the LBWSG risk factor on diarrheal diseases and LRI by including them as "affected unmodeled causes" in the risk effects modeling strategy. 
 
   Also note that the measles cause model age start value in GBD is the postneonatal (GBD 2019)/6-11 month (GBD 2021) age gorups, so these changes are not necessary to apply to the measles cause model.
+
+  Noting that for the 2021 models, we use 2019 data in several cases to account for COVID shocks. In updating to 2023, we were able to use the 2023 data as COVID shocks were assumed to be no longer present. 
 
 2.3.1 Task tracking for each wave
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1660,7 +1685,11 @@ Wave III
     - Same as model 17.0
     - Same as model 17.0
     - Same as model 17.0
-    - This run is to resolve an issue for Ethiopian results in model 17.0 in which data were scrambled across subnational locations (`see details here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/fea37d5913dca2a65c814decbe3a457d383913b6/emulator/sqlns_targeting/artifact_data_checks.ipynb>`__). New custom data was generated based on an updated Ethiopian artifact without this issue (`see PR here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/207>`__ and `here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/212>`__) and updated in the simulation repo (`see PR here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/pull/197>`__ and `here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/pull/198>`__). Notably, these runs will be performed in 2026 almost two years after model 17.0 and the exact environments used to run model 19.0 is not expected to exactly match that used to run model 17.0. This model will include Standard and modified SQ-LNS effects.
+    - This run should be launched from the ``gbd-2021`` branch. The fertility input data should be read from ``pregnancy model 13.0 results``. The artifact used for this run should be ``/mnt/team/simulation_science/pub/models/vivarium_gates_nutrition_optimization_child/artifacts/model_19.0_ethiopia/ethiopia.hdf`` with the ``risk_factor.sqlns_treatment.risk_ratios`` key remade (an update was made to the raw data in the simulation repo and the artifact version was not remade to reflect this update). The artifact key remake can be performed from the ``gbd-2021`` branch.
+
+      This model should include standard and modified SQ-LNS effects (and stratify results accordingly), utilize the evenly distributed population component, and results should be stratified by subnational location.
+
+      This run is to resolve an issue for Ethiopian results in model 17.0 in which data were scrambled across subnational locations (`see details here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/fea37d5913dca2a65c814decbe3a457d383913b6/emulator/sqlns_targeting/artifact_data_checks.ipynb>`__). New custom data was generated based on an updated Ethiopian artifact without this issue (`see PR here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/207>`__ and `here <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/212>`__) and updated in the simulation repo (`see PR here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/pull/197>`__ and `here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/pull/198>`__). Notably, these runs will be performed in 2026 almost two years after model 17.0 and the exact environments used to run model 19.0. The vivarium framework updates will be present in model 19.0 (Ethiopian production runs), but not for model 17.0 (most recent production runs for Pakistan and Nigeria). We have performed V&V on the framework updates (see summary for model run V3.0), but there is one additional important difference to note as a result of these updates: Model 19.0 will use the multiplicative rate-to-probability conversion and model 17.0 will use the multiplicative. This results in model 19.0 NOT having the overestimation of child mortality that is observed in model 17.0
 
 
 
@@ -1912,4 +1941,16 @@ Wave III
   * - Negative neonatal mortality risk values at the indiviudal level 
     - Thought to be due to national-level CSMRs for LBWSG-affected causes and subnational-level ACMRs leading to illogial pairings of mortality risks
     - Update artifact for neonatal CSMRs to be subnationally specific
+    - TBD
+  * - Worse MAM exposure fraction in artifact gets overwritten with a scalar
+    - `Scalar value defined here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/blob/c8367e78139f26daa6fefeeeb1e15b6acb2b9179/src/vivarium_gates_nutrition_optimization_child/constants/data_values.py#L132>`__ is utilized rather than the artifact key in some places
+    - Engineers to address prior to JKUAT runs (acceptable limitation for targeted SQ-LNS runs)
+    - TBD
+  * - MAM treatment and transition rate data informed from scalar values defined in ``constants/data_values.py`` rather than calculated based on values from the artifact
+    - ``MAM_UX_RECOVERY_TIME_OVER_6MO`` constant should be replaced with ``ux_rem_rate_mam`` parameter from the wasting transition rate custom data file. ``MAM_TX_RECOVERY_TIME_OVER_6MO`` constant should be replaced with ``tx_rem_rate_mam`` parameter value from the wsating transition rate custom data file.
+    - Engineers to address prior to JKUAT runs (acceptable limitation for targeted SQ-LNS runs). Note that a fix to this issue was implemented in the inpatient SAM simulation that was forked from this simulation
+    - TBD
+  * - Error in the derivation of the relative risk of MAM treatment on the MAM recovery rate
+    - The ``load_mam_treatment_rr`` function (`defined here <https://github.com/ihmeuw/vivarium_gates_nutrition_optimization_child/blob/2c0bc125fe14967700f1019c40d25d48faaa84c7/src/vivarium_gates_nutrition_optimization_child/data/loader.py#L1355>`__) calculates the RR based on durations rather than rates. These are not equivalent when E_MAM != 1. We should update this equation to use treated/untreated transition rates provided in the custom data input file rather than the durations. However, when informing the currently named ``mam_tx_duration`` and ``mam_ux_duration`` variables as rates rather than durations, it requires us to either (1) switch all instances of ``mam_ux_duration`` to ``mam_tx_duration`` and vise versa, OR (2) add a line where rr = 1/rr. Note that this does not apply for the ``load_sam_treatment_rr`` function as this equation does not use the transitions rates directly and is only a function of the ``E_SAM`` parameter.
+    - Engineers to address prior to JKUAT runs (acceptable limitation for targeted SQ-LNS runs). Note that a fix to this issue was implemented in the inpatient SAM simulation that was forked from this simulation
     - TBD

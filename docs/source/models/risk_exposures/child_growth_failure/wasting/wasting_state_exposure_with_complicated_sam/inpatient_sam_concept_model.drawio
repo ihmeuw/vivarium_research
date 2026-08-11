@@ -1,0 +1,172 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="bQO5m9iRvYvnGwNiit_o">
+    <mxGraphModel dx="1603" dy="1085" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="szFzd5-ENFgJ33xx0ouW-5" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-61" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-84">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-61" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Low birth weight and short gestation&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="207" width="149" x="1535" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-55" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-51" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-51" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="565.5" width="440" x="64" y="25.5" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-50" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-20" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="417" width="199" x="110" y="144" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-52" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-8" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="167" width="142" x="108" y="-161" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-9" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Multiple micronutrient supplementation in pregnancy" vertex="1">
+          <mxGeometry height="60" width="120" x="-84" y="-7" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-26" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-2" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Inpatient treatment for complicated severe acute malnutrition" vertex="1">
+          <mxGeometry height="60" width="120" x="-77" y="204" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-27" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-3" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Outpatient treatment for uncomplicated severe acute malnutrition" vertex="1">
+          <mxGeometry height="60" width="120" x="-77" y="281" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-28" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-4" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Outpatient treatment for moderate acute malnutrition" vertex="1">
+          <mxGeometry height="60" width="120" x="-77" y="358" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-46" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-5" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Small quantity lipid-based nutrient supplementation" vertex="1">
+          <mxGeometry height="60" width="120" x="-84" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-54" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-6" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Gestational age at birth" vertex="1">
+          <mxGeometry height="60" width="120" x="120" y="-145" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Birth weight" vertex="1">
+          <mxGeometry height="60" width="120" x="120" y="-69" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-21" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Complicated severe acute malnutrition" vertex="1">
+          <mxGeometry height="60" width="120" x="151" y="183" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Uncomplicated severe acute malnutrition" vertex="1">
+          <mxGeometry height="60" width="120" x="151" y="259" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Moderate acute malnutrition" vertex="1">
+          <mxGeometry height="60" width="120" x="151" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Mild child wasting" vertex="1">
+          <mxGeometry height="60" width="120" x="151" y="411" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="No child wasting" vertex="1">
+          <mxGeometry height="60" width="120" x="151" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-49" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-45" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-45" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Child stunting" vertex="1">
+          <mxGeometry height="60" width="120" x="149.5" y="53" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-47" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-5" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0.024;entryY=0.089;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-48" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Child underweight" vertex="1">
+          <mxGeometry height="60" width="120" x="352" y="53" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-53" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Child morbidity and mortality" vertex="1">
+          <mxGeometry height="60" width="120" x="568" y="-166" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-56" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-57" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-84">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-57" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Child growth failure&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="200.5" width="355" x="1566" y="286.5" as="geometry" />
+        </mxCell>
+        <mxCell id="szFzd5-ENFgJ33xx0ouW-6" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-63" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-73">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="szFzd5-ENFgJ33xx0ouW-7" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-63" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-74">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-63" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Multiple micronutrient supplementation in pregnancy" vertex="1">
+          <mxGeometry height="60" width="120" x="1307" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-87" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-65" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-85">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-65" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Inpatient&lt;div&gt;treatment for complicated severe acute malnutrition&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="1314" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-88" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-67" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-85">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-67" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Outpatient treatment for uncomplicated severe acute malnutrition" vertex="1">
+          <mxGeometry height="60" width="120" x="1314" y="372" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-91" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-69" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-85">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-69" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Outpatient treatment for moderate acute malnutrition" vertex="1">
+          <mxGeometry height="60" width="120" x="1314" y="449" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-70" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-71" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-81">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-92" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-71" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-85">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-71" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Small quantity lipid-based nutrient supplementation" vertex="1">
+          <mxGeometry height="60" width="120" x="1320" y="526" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-73" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Gestational age at birth" vertex="1">
+          <mxGeometry height="60" width="120" x="1554" y="116" as="geometry" />
+        </mxCell>
+        <mxCell id="szFzd5-ENFgJ33xx0ouW-4" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-74" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-74" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Birth weight" vertex="1">
+          <mxGeometry height="60" width="120" x="1554" y="192" as="geometry" />
+        </mxCell>
+        <mxCell id="szFzd5-ENFgJ33xx0ouW-2" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-81" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-83">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-81" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Child stunting" vertex="1">
+          <mxGeometry height="60" width="120" x="1594" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-83" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Child underweight" vertex="1">
+          <mxGeometry height="60" width="120" x="1743" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-84" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Child morbidity and mortality" vertex="1">
+          <mxGeometry height="60" width="120" x="2027" y="113" as="geometry" />
+        </mxCell>
+        <mxCell id="szFzd5-ENFgJ33xx0ouW-3" edge="1" parent="1" source="FLxe4cQq4pHdzivwJmsu-85" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="FLxe4cQq4pHdzivwJmsu-83">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FLxe4cQq4pHdzivwJmsu-85" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Child wasting" vertex="1">
+          <mxGeometry height="60" width="120" x="1594" y="312" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
