@@ -1966,7 +1966,7 @@ Default stratifications to all observers should include scenario and input draw.
     -
   * -
     - Remove APH
-    - Remove antepartum hemorrhage from the model
+    - Remove antepartum hemorrhage from the model; see `this PR <https://github.com/ihmeuw/vivarium_research/pull/1964>`__ for detailed changes
     - Standard V&V scenarios
     - Default
     -
