@@ -258,7 +258,7 @@ calculations as well as for the calculation of YLDs in the next section.
     * - ir
       - obstructed labor and uterine rupture incidence risk per birth
       - incidence_c370 / birth_rate
-      - The value of ir is a probabiity in [0,1]. Denominator includes
+      - The value of ir is a probability in [0,1]. Denominator includes
         live births and stillbirths.
     * - cfr
       - case fatality rate of obstructed labor and uterine rupture
