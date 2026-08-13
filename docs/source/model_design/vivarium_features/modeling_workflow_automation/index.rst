@@ -193,7 +193,7 @@ after the PAF simulation but before generating final artifacts.
 Note that it is necessary to manually execute these steps for *each* location being modeled.
 If we add a new location, we will need to complete all these steps again.
 This is quite time-consuming to do manually, and is prone to errors.
-Furthermore, this doesn't include V&V or results processing, and represents a fairly simple data pipeline
+Furthermore, this represents a fairly simple data pipeline
 compared to our real models.
 
 We also need to manually track what *needs* to be re-run, or do a (wasteful) full re-run every time.

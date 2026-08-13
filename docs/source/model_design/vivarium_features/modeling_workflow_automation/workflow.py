@@ -81,7 +81,6 @@ for location in workflow.iterate(location=LOCATIONS):
     workflow.simulation_step(
         name='main sim',
         artifact_inputs=keys_needed_for_main_sim,
-        # artifact_path=f'src/tutorial/artifacts/{location}.hdf',
         model_specification='src/tutorial/model_specifications/model_spec.yaml',
         output=f'src/tutorial/results/{location}/',
         input_draw_count=NUM_DRAWS,
