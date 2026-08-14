@@ -10,7 +10,7 @@ workflow = Workflow()
 # nor to specify that artifact keys within this loop refer to a location-specific artifact.
 for location in workflow.iterate(location=LOCATIONS):
     # We specify individual artifact **keys** needed by steps,
-    # and can use a variable to avoid repeating the same keys for multiple steps.
+    # and can use a variable to avoid repeating the same list of keys for multiple steps.
     keys_needed_for_paf = [
         # Loaded using the functions in loader.py
         ArtifactKey('population.structure'),
