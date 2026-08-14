@@ -342,56 +342,9 @@ This module applies the effect of the IV iron intervention for those who receive
   * - Oral iron coverage at any time in pregnancy
     - :code:`none` / :code:`ifa` / :code:`mms`
     - V&V (via observation), simulation result
-  * - Hemoglobin after later ANC visit
-    - point value
-    - Input to `Hemoglobin at End of Pregnancy Module`_
-
-Hemoglobin at End of Pregnancy Module
--------------------------------------------
-
-This module applies the effect of antepartum hemorrhage on hemoglobin exposure at the end of pregnancy for those who experience this complication.
-The details of how to apply this effect are on the :ref:`risk effects page <2023_risk_effect_maternal_hemorrhage>`.
-
-.. image:: end_of_pregnancy_diagram.drawio.png
-
-.. list-table:: End of pregnancy hemoglobin module inputs
-  :header-rows: 1
-
-  * - Input
-    - Source
-    - Note
-  * - Antepartum hemorrhage incidence
-    - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
-    - 
-  * - Antepartum hemorrhage death
-    - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
-    - 
-
-.. list-table:: End of pregnancy hemoglobin module decision nodes
-  :header-rows: 1
-
-  * - Decision node
-    - Description
-    - Information
-    - Note
-  * - 1
-    - Died of antepartum hemorrhage?
-    - Direct input from :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
-    -
-  * - 2
-    - Incidence of antepartum hemorrhage?
-    - Direct input from :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
-    - 
-
-.. list-table:: End of pregnancy hemoglobin module outputs
-  :header-rows: 1
-
-  * - Output
-    - Value
-    - Dependencies
   * - Hemoglobin at end of pregnancy
     - point value
-    - Used to inform the risk effects of the hemoglobin risk factor (as an input to the :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`, :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`, and the :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>` modules. Also used as an input to the :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`.
+    - Used to inform the risk effects of the hemoglobin risk factor (as an input to the :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`, :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`, and the :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>` modules). Also used as an input to the :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`.
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++

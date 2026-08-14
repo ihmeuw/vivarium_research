@@ -247,8 +247,9 @@ In other situations, some components will not be used.
 The rules by which components are triggered is as follows:
 
 * All simulant dyads pass through the pregnancy component.
-* If the broad pregnancy outcome from the pregnancy component was a live or stillbirth (NOT abortion/miscarriage/ectopic pregnancy)
-  *and* the birth parent did not die from antepartum maternal disorders, the dyad goes through the intrapartum component.
+* If the broad pregnancy outcome from the pregnancy component was a live or stillbirth (NOT abortion/miscarriage/ectopic pregnancy),
+  the dyad goes through the intrapartum component.
+  (The pregnant person will never have died from antepartum maternal disorders, since the only one is abortion/miscarriage/ectopic maternal disorders.)
 * If the birth outcome from the intrapartum component is a live birth,
   the dyad goes through the neonatal component.
 * If the birth parent did not die from maternal disorders (antepartum or intrapartum),
@@ -341,7 +342,7 @@ Pregnancy component
         * Hemoglobin screening coverage/result
         * Ferritin screening coverage/result
         * Receipt of IFA/MMS at first trimester ANC visit
-      - * Hemoglobin after later ANC visit
+      - * Hemoglobin at end of pregnancy
         * Coverage of IFA/MMS at any time in pregnancy
         * Coverage of IV iron 
       - * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
@@ -370,19 +371,9 @@ Pregnancy component
     * - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
       - * Broad pregnancy outcome
         * Maternal age at end of pregnancy
-        * Hemoglobin after later ANC visit
-      - * Antepartum hemorrhage incidence
-        * Antepartum hemorrhage YLDs
-        * Antepartum hemorrhage death
-        * Abortion/miscarriage/ectopic pregnancy maternal disorders YLDs
+      - * Abortion/miscarriage/ectopic pregnancy maternal disorders YLDs
         * Abortion/miscarriage/ectopic pregnancy maternal disorders death
-      - * :ref:`Antepartum hemorrhage model <2023_cause_antepartum_hemorrhage_mncnh>`
-        * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
-    * - :ref:`Hemoglobin at end of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-      - * Hemoglobin after later ANC visit
-        * Antepartum hemorrhage incidence
-      - * Hemoglobin at end of pregnancy
-      - :ref:`Antepartum hemorrhage risk effects <2023_risk_effect_maternal_hemorrhage>` 
+      - * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
 
 .. _mncnh_portfolio_intrapartum_component:
 
@@ -2021,6 +2012,12 @@ Default stratifications to all observers should include scenario and input draw.
     - Separate LBWSG affected causes
     - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__
     - All
+    - Default
+    -
+  * -
+    - Remove APH
+    - Remove antepartum hemorrhage from the model; see `this PR <https://github.com/ihmeuw/vivarium_research/pull/1964>`__ for detailed changes
+    - Standard V&V scenarios
     - Default
     -
 
