@@ -88,33 +88,24 @@ Anemia YLDs are estimated according to the following steps:
 
       - For simulants who do not attend that visit, do not update their anemia YLDs
 
-    4. Progress to the antepartum hemorrhage hemoglobin timestep
-
-      - For simulants who experience an incident case of antepartum hemorrhage as determined in the :ref:`antepartum hemorrhage <2023_cause_antepartum_hemorrhage_mncnh>` page, update their anemia YLD values according to their most recent hemoglobin exposure and a duration equal to the incidence time of their antepartum hemorrhage (:math:`T^\text{antepartum hemorrhage}_i` as defined in the parameter table on this document) minus the last time their anemia YLDs were updated.
-
-      - For simulants who do not experience an incident case of antepartum hemorrhage, do not update their anemia YLDs
     
-    5. Progress to the end of pregnancy hemoglobin timestep
+    4. Progress to the end of pregnancy hemoglobin timestep
 
-      - **For simulants who did not die of antepartum hemorrhage**, update anemia YLDs according to hemoglobin exposure going into this timestep and the simulant-specific gestational time elapsed since the last time anemia YLDs were updated
+      - Update anemia YLDs according to hemoglobin exposure going into this timestep and the simulant-specific gestational time elapsed since the last time anemia YLDs were updated
 
-        - Pregnancy duration for those who never attended any ANC visits and did not have antepartum hemorrhage
+        - Pregnancy duration for those who never attended any ANC visits
 
-        - Pregnancy duration (according to intervention-modified gestational age) - gestational timing of later pregnancy ANC visit for those who attended later pregnancy ANC and did not have antepartum hemorrhage
+        - Pregnancy duration (according to intervention-modified gestational age) - gestational timing of later pregnancy ANC visit for those who attended later pregnancy ANC
 
-        - Pregnancy duration (according to intervention-modified gestational age) - gestational timing of first trimester ANC visit for those who attended the first trimester but not later pregnancy ANC visit and did not have antepartum hemorrhage
+        - Pregnancy duration (according to intervention-modified gestational age) - gestational timing of first trimester ANC visit for those who attended the first trimester but not later pregnancy ANC visit
 
-        - Pregnancy duration (according to intervention-modified gestational age) - incidence time of antepartum hemorrhage for those who experienced an incident case of antepartum hemorrhage
-      
-      - For simulants who died of antepartum hemorrhage, update anemia YLDs according to their hemoglobin exposure going into this timestep and a duration equal to the time between the last time their anemia YLDs were updated and their death time due to antepartum hemorrhage.
-
-    6. Progress to the six weeks after the end of pregnancy hemoglobin timestep
+    5. Progress to the six weeks after the end of pregnancy hemoglobin timestep
 
       - For simulants who survived labor and progressed to the postpartum period, update their anemia YLD values according to their hemoglobin exposure during the first six weeks after pregnancy and a duration of six weeks (in years) 
 
       - For simulants who did not survive labor and therefore do not progress to the postpartum period, do not update their anemia YLDs given that they should not experience any YLDs in the post-pregnancy timesteps
     
-    7. Progress to the nine months after the end of pregnancy hemoglobin timestep
+    6. Progress to the nine months after the end of pregnancy hemoglobin timestep
 
       - For simulants who survived labor and progressed to the postpartum period, update their anemia YLD values according to their hemoglobin exposure between six weeks and nine months after pregnancy (mapped to an anemia status using **non-pregnancy-specific** thresholds) and a duration of 40 - 6 = 34 weeks (in years) 
 
@@ -166,14 +157,6 @@ Anemia YLDs are estimated according to the following steps:
     - :ref:`Pregnancy II module <2024_vivarium_mncnh_portfolio_pregnancy_module>`
     - Used to calculate anemia YLDs
     - 
-  * - Antepartum hemorrhage incidence
-    - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
-    - Used to calculate anemia YLDs
-    - 
-  * - Antepartum hemorrhage death
-    - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
-    - Used to calculate anemia YLDs
-    - 
 
 .. list-table:: Parameters
   :header-rows: 1
@@ -191,10 +174,6 @@ Anemia YLDs are estimated according to the following steps:
   * - :math:`T^\text{later pregnancy}_i`
     - Randomly sample a different value for each simulant who attends the later pregnancy ANC visit from a uniform distribution between 12/52 and :math:`\text{duration}^\text{pregnancy}_i - 2/52`. Note that pregnancy duration used in this context will be affected by interventions received at the first trimester visit and unaffected by interventions received at the later pregnancy visit as a modeling convenience.
     - Note that abortion/miscarriage/ectopic pregnancies cannot attend later pregnancy ANC visits according to the :ref:`ANC attendance module <2024_vivarium_mncnh_portfolio_anc_module>`. The minimum gestational age at birth for the remaining relevant pregnancy outcomes is 20 weeks for live births and 24 weeks for stillbirth, so we will not encounter later pregnancy ANC attendance among pregnancies that end prior to 14 weeks of gestation, which would result in a negative value.
-  * - :math:`T^\text{antepartum hemorrhage}_i`
-    - The incidence time is sampled uniformly between the last ANC visit attended and delivery, or if the last ANC visit attended was prior to 28 weeks or no ANC visits were attended, then between 28 weeks and delivery.
-      This reflects the fact that risk of antepartum hemorrhage is highest in the third trimester.
-    - 
 
 .. note::
 
