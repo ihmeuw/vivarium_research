@@ -10,7 +10,7 @@ Disease Overview
 GBD 2023 Modeling Strategy
 --------------------------
 
-Postpartum hemorrhage does not appear in the GBD cause hierarchy.
+Postpartum hemorrhage (PPH) does not appear in the GBD cause hierarchy.
 It is a *subset* of maternal hemorrhage (c_367), which is a most detailed cause in GBD 2023. 
 GBD defines maternal hemorrhage (and therefore postpartum hemorrhage) as bleeding in excess of 500 mL within 24 hours after birth.
 Note that in October 2025 the WHO issued new guidelines redefining postpartum hemorrhage as bleeding in excess of **300 mL**,
