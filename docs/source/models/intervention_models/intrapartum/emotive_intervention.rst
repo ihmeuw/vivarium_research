@@ -98,7 +98,7 @@ Assumptions and Limitations
 - By not including an effect of E-MOTIVE on :math:`\text{ir\_300mL}`, we exclude a substantial portion of the benefit seen in the E-MOTIVE trial.
   We do this because we do not understand the mechanism of this effect, which makes costing it challenging.
 - Our knowledge of coverage in 2023 (assumed 0%) is based only on circumstantial evidence such as reports from research studies.
-- We do not model specifically who is diagnosed with postpartum hemorrhage, and therefore spread the benefits (and costs) of the intervention over all pregnant simulants in facilities, rather than only those who are diagnosed with postpartum hemorrhage.
+- We do not model specifically who is diagnosed with postpartum hemorrhage, and therefore spread the benefits (and costs) of the intervention over all pregnant simulants in facilities covered by the E-MOTIVE intervention, rather than only those who are diagnosed with postpartum hemorrhage.
   This is due to a lack of sufficient data on the diagnosis process.
 - We do not currently model specifically who gives birth via cesarean section, so we dilute the effect of E-MOTIVE over all facility births.
   We plan to revisit this in a future model when C-sections are differentiated.
