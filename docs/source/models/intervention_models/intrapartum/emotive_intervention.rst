@@ -46,7 +46,7 @@ before 300 mL of blood loss in very rare circumstances.
 The most plausible explanation for the substantial improvement seen in the E-MOTIVE trial is training spillovers leading to better preventative care,
 which we exclude here because we will not be able to cost these preventative care changes without understanding more about them.
 
-In our model, the parameters :math:`\text{ir\_500mL}` and :math:`\text{ir\_1000mL}` on the :ref:`postpartum hemorrhage cause model <2023_cause_postpartum_hemorrhage_mncnh>` page
+In our model, the parameters :math:`\text{ir\_500mL\_per\_300mL\_case}` and :math:`\text{ir\_1L\_per\_500mL\_case}` on the :ref:`postpartum hemorrhage cause model <2023_cause_postpartum_hemorrhage_mncnh>` page
 will be modified as follows for simulants who receive E-MOTIVE:
 
 .. math::
@@ -59,7 +59,7 @@ will be modified as follows for simulants who receive E-MOTIVE:
 
 where:
 
-- :math:`\text{ir}` is one of :math:`\text{ir\_500mL}` or :math:`\text{ir\_1000mL}`,
+-- :math:`\text{ir}` is one of :math:`\text{ir\_500mL\_per\_300mL\_case}` or :math:`\text{ir\_1L\_per\_500mL\_case}`,
 - :math:`\text{RR}^\text{E-MOTIVE}` is the relative risk on the relevant incidence parameter from the table below,
 - :math:`\text{cesarean\_fraction\_ifd}` is the fraction of facility births that are cesarean deliveries,
 - :math:`\text{csection\_coverage\_prop}` is GBD covariate ID 2381 "proportion of live births delivered by Caesarean Section (c-section)",
@@ -75,12 +75,12 @@ but let's note if this is happening often.
   * - Parameter
     - RR for vaginal deliveries
     - Note
-  * - :math:`\text{ir\_500mL}`
+  * - :math:`\text{ir\_500mL\_per\_300mL\_case}`
     - 0.846 (95% CI: 0.822, 0.871)
     - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [E-MOTIVE]_, all of which can be found at :code:`J:\\Project\\simulation_science\\mnch_grant\\MNCNH portfolio\\EMOTIVE trial data.xlsx`.
       The confidence interval was calculated using the standard error of the log RR (see spreadsheet for calculation).
       Assume a log-normal distribution of uncertainty when sampling values.
-  * - :math:`\text{ir\_1000mL}`
+  * - :math:`\text{ir\_1L\_per\_500mL\_case}`
     - 0.741 (95% CI: 0.689, 0.797)
     - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [E-MOTIVE]_, all of which can be found at :code:`J:\\Project\\simulation_science\\mnch_grant\\MNCNH portfolio\\EMOTIVE trial data.xlsx`.
       The confidence interval was calculated using the standard error of the log RR (see spreadsheet for calculation).
@@ -97,11 +97,16 @@ Assumptions and Limitations
 
 - By not including an effect of E-MOTIVE on :math:`\text{ir\_300mL}`, we exclude a substantial portion of the benefit seen in the E-MOTIVE trial.
   We do this because we do not understand the mechanism of this effect, which makes costing it challenging.
-- Our knowledge of coverage in 2023 (assumed 0%) is based only on circumstantial evidence such as reports from research studies.
+- Our knowledge of coverage in 2023 (assumed 0%) is based only on circumstantial evidence such as recent reports from pilot studies.
 - We do not model specifically who is diagnosed with postpartum hemorrhage, and therefore spread the benefits (and costs) of the intervention over all pregnant simulants in facilities covered by the E-MOTIVE intervention, rather than only those who are diagnosed with postpartum hemorrhage.
   This is due to a lack of sufficient data on the diagnosis process.
-- We do not currently model specifically who gives birth via cesarean section, so we dilute the effect of E-MOTIVE over all facility births.
+- We do not currently model specifically who gives birth via cesarean section, so we spread the effect of E-MOTIVE over all births in covered facilities,
+  rather than limiting it to those who give birth vaginally.
   We plan to revisit this in a future model when C-sections are differentiated.
+- Our proportional adjustment to the E-MOTIVE effect for C-sections being ineligible and therefore having no impact from E-MOTIVE
+  assumes that PPH is independent of the mode of delivery, but in fact we expect that PPH is more common after C-section, and more often severe.
+  This will cause us to overestimate the impact of E-MOTIVE, since we are not accounting for the eligible population being lower-risk
+  than the total population. 
 
 Validation and Verification Criteria
 ------------------------------------
