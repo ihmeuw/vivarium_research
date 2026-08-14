@@ -1,15 +1,16 @@
 from vivarium.workflow import Workflow, ArtifactKey
 
-from vivarium.gbd_mapping import causes, risk_factors, covariates
-
-from tutorial.constants.metadata import LOCATIONS, NUM_DRAWS, GBD_DATA_YEAR
+from tutorial.constants.metadata import LOCATIONS
 
 workflow = Workflow()
 
-# In addition to iterating over the values, `iterate` adds the specified parameter
-# as an argument to every step that is appended to the workflow within the loop,
-# and automatically scopes ArtifactKeys to the specified location.
+# We can use a loop over the locations (or other parameters) to avoid repeating the steps
+# for each location.
+# It is *not* necessary to pass the location explicitly to each step as an argument,
+# nor to specify that artifact keys within this loop refer to a location-specific artifact.
 for location in workflow.iterate(location=LOCATIONS):
+    # We specify individual artifact **keys** needed by steps,
+    # and can use a variable to avoid repeating the same keys for multiple steps.
     keys_needed_for_paf = [
         # Loaded using the functions in loader.py
         ArtifactKey('population.structure'),
@@ -23,21 +24,21 @@ for location in workflow.iterate(location=LOCATIONS):
 
     workflow.simulation_step(
         name='PAF sim',
-        # The following line *automatically* makes an artifact with only the specified keys
         input=keys_needed_for_paf,
         model_specification='src/tutorial/data/custom_paf/paf_model_spec.yaml',
+        branches_file='src/tutorial/data/custom_paf/scenarios.yaml',
         output=f'src/tutorial/data/custom_paf/results/{location}/',
-        input_draw_count=NUM_DRAWS,
-        random_seed_count=10,
-        # These resource requests would also have defaults
+        # These resource requests should be optional (have defaults) but can also be specified
         memory_gb=2,
         runtime='00:30:00',
     )
 
-    # In src/tutorial/custom_paf/reformat_results.py:
-    # def reformat_results(input: pd.DataFrame) -> pd.DataFrame:
-    #     ...
     workflow.python_step(
+        # We specify the fully qualified function to run as a Python step.
+        # This example would indicate a function called reformat_results,
+        # in src/tutorial/data/custom_paf/reformat_results.py
+        # The signature of the function would be:
+        # def reformat_results(input: pd.DataFrame, location: str) -> pd.DataFrame:
         'tutorial.data.custom_paf.reformat_results.reformat_results',
         input=f'src/tutorial/data/custom_paf/results/{location}/paf_observer.parquet',
         # The dataframe returned gets automatically saved into the artifact at this key.
@@ -49,8 +50,9 @@ for location in workflow.iterate(location=LOCATIONS):
     workflow.python_step(
         'tutorial.data.custom_remission.custom_remission.custom_remission',
         input=ArtifactKey('risk_factor.child_wasting.population_attributable_fraction'),
-        # There would no longer be a CSV for the remission rate -- it would get saved
-        # directly into the artifact.
+        # There would no longer be a CSV for the remission rate
+        # (as in the current practice section above) --
+        # it would get saved directly into the artifact.
         output=ArtifactKey('cause.diarrheal_disease.remission_rate'),
     )
 
@@ -68,11 +70,12 @@ for location in workflow.iterate(location=LOCATIONS):
         ArtifactKey('cause.diarrheal_disease.remission_rate'),
     ]
 
-    # This **automatically** makes all workflow steps that depend on a superset of its
-    # inputs gate on whether these ran successfully.
-    # Saves notebook output to a `executed` subdir.
+    # A test step will halt the workflow if the tests fail.
+    # This one saves notebook output to a `executed` subdir for human inspection.
     workflow.test_notebooks_step(
         name='interactive sim V&V',
+        # The input is the artifact keys, not the results, since interactive sim V&V
+        # can run before the sim has been run.
         input=keys_needed_for_main_sim,
         notebooks='tests/interactive/*.ipynb',
         environment='simulation',
@@ -82,17 +85,13 @@ for location in workflow.iterate(location=LOCATIONS):
         name='main sim',
         artifact_inputs=keys_needed_for_main_sim,
         model_specification='src/tutorial/model_specifications/model_spec.yaml',
+        branches_file='src/tutorial/model_specifications/branches/scenarios.yaml',
         output=f'src/tutorial/results/{location}/',
-        input_draw_count=NUM_DRAWS,
-        random_seed_count=10,
-        scenarios=[
-            'baseline',
-            'sqlns_scaleup',
-        ],
         memory_gb=2,
         runtime='10:00:00',
     )
 
+    # Another test step, this time using the simulation results.
     workflow.test_notebooks_step(
         name='results V&V',
         input=f'src/tutorial/results/{location}/',
@@ -100,7 +99,6 @@ for location in workflow.iterate(location=LOCATIONS):
         environment='artifact',
     )
 
-    # Automatically saves executed notebook to an `executed` subdir.
     workflow.notebook_step(
         'src/tutorial/results_processing/results_processing.ipynb',
         input=f'src/tutorial/results/{location}/',
