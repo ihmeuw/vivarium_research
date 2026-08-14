@@ -249,7 +249,7 @@ using only GBD data (before incorporating the E-MOTIVE trial data) as follows:
 
 See the data table below for the values of incidence_c367, postpartum_fraction, and birth_rate used in this calculation.
 
-Like all incidence risks, this is a probabiity in [0,1]. Its denominator includes
+Like all incidence risks, this is a probability in [0,1]. Its denominator includes
 live births and stillbirths.
 
 The 300 mL incidence risk per birth is then:

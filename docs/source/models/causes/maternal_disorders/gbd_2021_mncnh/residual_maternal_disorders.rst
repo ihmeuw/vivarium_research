@@ -354,7 +354,7 @@ Data Tables
     * - cfr
       - "case" fatality rate of residual maternal disorders
       - csmr / birth_rate
-      - The value of cfr is a probabiity in [0,1]. Note that this value of the cfr (shown in the "implementation-driven cause model diagram") is equivalent to the fr parameter shown in the "conceptual cause model diagram" 
+      - The value of cfr is a probability in [0,1]. Note that this value of the cfr (shown in the "implementation-driven cause model diagram") is equivalent to the fr parameter shown in the "conceptual cause model diagram" 
     * - csmr
       - cause-specific mortality rate of residual maternal disorders
       - sum of cause-specific mortality rates across causes [375, 1118, 1119, 379, 376, 741, 369], plus cause-specific mortality rate of cause 367 scaled by (1 - postpartum_fraction)
