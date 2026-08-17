@@ -11,7 +11,7 @@ E-MOTIVE for postpartum hemorrhage treatment
 Intervention Overview
 -----------------------
 
-E-MOTIVE is a bundle of interventions -- each denoted by a letter in the name -- to detect (E) and treat (MOTIVE) postpartum hemorrhage.
+E-MOTIVE is a bundle of interventions -- each denoted by a letter in the name -- to detect and treat postpartum hemorrhage (PPH).
 
 This section describes how an E-MOTIVE intervention can be implemented for the :ref:`MNCNH Portfolio model <2024_concept_model_vivarium_mncnh_portfolio>`.
 See the :ref:`Postpartum hemorrhage cause model <2023_cause_postpartum_hemorrhage_mncnh>` for relevant details.
@@ -97,6 +97,13 @@ Assumptions and Limitations
 
 - By not including an effect of E-MOTIVE on :math:`\text{ir\_300mL}`, we exclude a substantial portion of the benefit seen in the E-MOTIVE trial.
   We do this because we do not understand the mechanism of this effect, which makes costing it challenging.
+- We assume that E-MOTIVE's effectiveness for an individual is unrelated to the severity of PPH that individual *would* have had without E-MOTIVE.
+  For example, when E-MOTIVE averts PPH at the 300mL level, it does not *differentially* avert (or not avert) cases that would have gone on to 500mL, 1L+, or death.
+- In the E-MOTIVE trial,[E-MOTIVE]_ the observed relative risk on death due to bleeding was 0.80 (0.38 to 1.68),
+  which we do not include here due to statistical imprecision.
+  As a result of the previous assumption, our simulation will replicate the observed 0.39 (0.31 to 0.49) RR on 1L+ blood loss, on PPH death as well.
+  Despite the imprecision of the trial RR for PPH death, this is near the edge of its confidence interval, which suggests that there
+  may be a differential effect we are not capturing, and that we are overestimating the effect on PPH death.
 - Our knowledge of coverage in 2023 (assumed 0%) is based only on circumstantial evidence such as recent reports from pilot studies.
 - We do not model specifically who is diagnosed with postpartum hemorrhage, and therefore spread the benefits (and costs) of the intervention over all pregnant simulants in facilities covered by the E-MOTIVE intervention, rather than only those who are diagnosed with postpartum hemorrhage.
   This is due to a lack of sufficient data on the diagnosis process.
