@@ -1259,3 +1259,19 @@ References
 
 .. [Johfre_2021]
     Sasha Shen Johfre, Aliya Saperstein, Jill A. Hollenbach; Measuring Race and Ancestry in the Age of Genetic Testing. Demography 1 June 2021; 58 (3): 785–810. doi: https://doi.org/10.1215/00703370-9142013
+
+.. [Blackmore_1993]
+    Blackmore, C. A., Ferré, C. D., Rowley, D. L., Hogue, C. J. R., Gaiter, J., & Atrash, H. (1993). IS RACE A RISK FACTOR OR A RISK MARKER FOR PRETERM DELIVERY? Ethnicity & Disease, 3(4), 372–377. http://www.jstor.org.offcampus.lib.washington.edu/stable/45403143
+
+.. [Cooper_1984]
+    Richard Cooper, A note on the biologic concept of race and its application in epidemiologic research, American Heart Journal, Volume 108, Issue 3, Part 2, 1984, Pages 715-723, ISSN 0002-8703, https://doi.org/10.1016/0002-8703(84)90662-8.
+
+.. [Chokshi_2022]
+    Chokshi DA, Foote MMK, Morse ME. How to Act Upon Racism—not Race—as a Risk Factor. JAMA Health Forum. 2022;3(2):e220548. doi:10.1001/jamahealthforum.2022.0548
+
+.. [Kittles_2003]
+    Rick A. Kittles, Kenneth M. Weiss. 2003. Race, Ancestry, and Genes: Implications for Defining Disease Risk. Annual Review of Genomics and Human Genetics 4:33-67. https://doi.org/10.1146/annurev.genom.4.070802.110356
+
+.. [Kaufman_2001]
+    Jay S. Kaufman, Richard S. Cooper, Commentary: Considerations for Use of Racial/Ethnic Classification in Etiologic Research, American Journal of Epidemiology, Volume 154, Issue 4, 15 August 2001, Pages 291–298, https://doi.org/10.1093/aje/154.4.291
+
