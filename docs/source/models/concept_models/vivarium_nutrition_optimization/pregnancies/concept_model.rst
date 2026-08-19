@@ -641,14 +641,14 @@ Specific outputs for specific models are specified in the following section.
   * - 13.0_JKUAT_GBD_2023_runs
     - Running the model to include Kenya and update to GBD 2023. Running with the JKUAT students
     - All
-    - 10 draws, 10 seeds with 20,000 population (200,000 pregnancies per draw). Nigeria and Pakistan only
+    - 10 draws, 5 seeds with 20,000 population
     - Default
     - Default
     - 
   * - 13.2_JKUAT_GBD_2023_runs
     - Fixing bugs identified in the model 13 GBD 2023 JKUAT runs.
     - All
-    - 10 draws, 10 seeds with 20,000 population (200,000 pregnancies per draw). Nigeria and Pakistan only
+    - 10 draws, 5 seeds with 20,000 population
     - Default
     - Default
     - 
