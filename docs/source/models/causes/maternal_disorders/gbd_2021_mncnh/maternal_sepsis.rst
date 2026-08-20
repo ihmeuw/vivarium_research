@@ -168,11 +168,10 @@ represent decision probabilities rather than rates per unit time.
 .. graphviz::
 
     digraph sepsis_decisions {
-        rankdir = LR;
         start [label="start"]
         end [label="end"]
-        alive [label="parent did not die of sepsis"]
-        dead [label="parent died of sepsis"]
+        alive [label="parent did not\ndie of sepsis"]
+        dead [label="parent died\nof sepsis"]
 
         start -> alive  [label = "1 - ir"]
         start -> sepsis [label = "ir"]

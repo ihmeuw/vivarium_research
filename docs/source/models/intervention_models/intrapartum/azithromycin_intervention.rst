@@ -151,13 +151,13 @@ incidence rate.
     digraph azithromycin {
         rankdir = LR;
         facility [label="Facility type"]
-        home [label="p_maternal_sepsis_without_azithromycin"]
+        home [label="p_maternal_sepsis\nwithout_azithromycin"]
         BEmONC [label="azithromycin?"]
         CEmONC [label="azithromycin?"]
-        BEmONC_wo [label="p_maternal_sepsis_without_azithromycin"] 
-        BEmONC_w [label="p_maternal_sepsis_with_azithromycin"]
-        CEmONC_wo [label="p_maternal_sepsis_without_azithromycin"] 
-        CEmONC_w [label="p_maternal_sepsis_with_azithromycin"]
+        BEmONC_wo [label="p_maternal_sepsis\nwithout_azithromycin"]
+        BEmONC_w [label="p_maternal_sepsis\nwith_azithromycin"]
+        CEmONC_wo [label="p_maternal_sepsis\nwithout_azithromycin"]
+        CEmONC_w [label="p_maternal_sepsis\nwith_azithromycin"]
 
         facility -> home  [label = "home birth"]
         facility -> BEmONC  [label = "BEmONC"]

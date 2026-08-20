@@ -231,7 +231,6 @@ Conceptually, the modeling strategy for the residual maternal disorders cause ca
 .. graphviz::
 
     digraph RMD_decisions {
-        rankdir = LR;
         start [label="start"]
         end [label="end"]
         alive [label="parent did not\ndie of residual maternal\ndisorders"]
@@ -277,7 +276,6 @@ While the above diagram represents the conceptual aims of the residual maternal 
 .. graphviz::
 
     digraph hemorrhage_decisions {
-        rankdir = LR;
         start;
         end;
         alive [label="parent did not\ndie of residual maternal\ndisorders"]

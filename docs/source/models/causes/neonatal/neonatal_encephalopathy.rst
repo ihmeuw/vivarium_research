@@ -114,7 +114,6 @@ Note that these probabilities are not used directly in the model and are include
 .. graphviz::
 
     digraph NN_encephalopathy_decisions {
-        rankdir = LR;
         lb [label="live birth", style=dashed]
         nn_alive [label="neonate did not die\nof encephalopathy"]
         nn_dead [label="neonate died of\nencephalopathy"]

@@ -103,7 +103,6 @@ Note that these probabilities are not used directly in the model and are include
 .. graphviz::
 
     digraph NN_sepsis_decisions {
-        rankdir = LR;
         lb [label="live birth", style=dashed]
         nn_alive [label="neonate did not \ndie of sepsis"]
         nn_dead [label="neonate died \nof sepsis"]
