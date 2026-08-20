@@ -59,7 +59,7 @@ will be modified as follows for simulants who receive E-MOTIVE:
 
 where:
 
--- :math:`\text{ir}` is one of :math:`\text{ir\_500mL\_per\_300mL\_case}` or :math:`\text{ir\_1L\_per\_500mL\_case}`,
+- :math:`\text{ir}` is one of :math:`\text{ir\_500mL\_per\_300mL\_case}` or :math:`\text{ir\_1L\_per\_500mL\_case}`,
 - :math:`\text{RR}^\text{E-MOTIVE}` is the relative risk on the relevant incidence parameter from the table below,
 - :math:`\text{cesarean\_fraction\_ifd}` is the fraction of facility births that are cesarean deliveries,
 - :math:`\text{csection\_coverage\_prop}` is GBD covariate ID 2381 "proportion of live births delivered by Caesarean Section (c-section)",
