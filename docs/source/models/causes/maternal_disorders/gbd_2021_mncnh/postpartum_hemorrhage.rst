@@ -135,7 +135,7 @@ postpartum hemorrhage among people giving birth.
 We only model postpartum hemorrhage among simulants who give (live or still) birth.
 This page documents how to model the baseline burden of postpartum 
 hemorrhage. Other simulation components such as c-sections will affect the 
-rates of postpartum hemorrhage; such effects will be described on the pages 
+risks of postpartum hemorrhage; such effects will be described on the pages 
 for the corresponding :ref:`intervention <intervention_models>` or 
 :ref:`risk effects <risk_effects_models>` model.
 
@@ -150,7 +150,7 @@ a single timestep. To obtain the decision probabilities,
 we will use a combination of GBD data (which is relevant to the 500 mL definition of postpartum hemorrhage)
 and data from the E-MOTIVE trial to inform the 300 mL threshold decisions.
 We will convert GBD's annual rates
-among females of reproductive age into conditional event rates.
+among females of reproductive age into conditional event risks.
 We will track postpartum hemorrhage
 deaths to calculate YLLs, and we will track incident cases by severity to calculate
 YLDs.
@@ -228,7 +228,7 @@ represent decision probabilities rather than rates per unit time.
       - incidence risk of 1 L postpartum hemorrhage per case of at least 500 mL blood loss
       - The probability that a simulant who loses at least 500 mL of blood postpartum has blood loss of 1 L or more.
     * - cfr_1L
-      - case fatality rate for 1 L postpartum hemorrhage
+      - case fatality risk for 1 L postpartum hemorrhage
       - The probability that a simulant with 1 L postpartum hemorrhage dies of that hemorrhage
 
 Probabilities
@@ -266,7 +266,7 @@ The 1 L incidence risk per case of at least 500 mL blood loss will be computed a
 
     \text{ir\_1L\_per\_500mL\_case} = \frac{\text{incidence\_s181}}{\text{incidence\_s181} + \text{incidence\_s180}}.
 
-The case fatality rate (CFR) will be computed as
+The case fatality risk (CFR) will be computed as
 
 .. math::
 
