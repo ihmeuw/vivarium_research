@@ -154,7 +154,6 @@ Cause Model Diagram
 .. graphviz::
 
   digraph AlzheimersDisease {
-    rankdir=LR;
     bbbm [label="BBBM-AD"]
     mci [label="MCI-AD"]
     ad [label="Dementia-AD"]

@@ -108,11 +108,10 @@ Cause Model Diagram
 .. graphviz::
 
     digraph hemorrhage_decisions {
-        rankdir = LR;
-        ptp [label="abortion/miscarriage/ectopic\npregnancy", style=dashed]
-        alive [label="parent did not die\nof abortion/miscarriage/ectopic pregnancy\nmaternal disorders"]
-        dead [label="parent died of abortion/miscarriage/ectopic\npregnancy maternal disorders"]
-        PTPMD [label="affected with\nabortion/miscarriage/ectopic pregnancy\nmaternal disorders"]
+        ptp [label="abortion/miscarriage/\nectopic pregnancy", style=dashed]
+        alive [label="parent did not die of\nabortion/miscarriage/ectopic\npregnancy maternal disorders"]
+        dead [label="parent died of\nabortion/miscarriage/ectopic\npregnancy maternal disorders"]
+        PTPMD [label="affected with\nabortion/miscarriage/ectopic\npregnancy maternal disorders"]
 
         ptp -> alive  [label = "1 - ir"]
         ptp -> PTPMD [label = "ir"]

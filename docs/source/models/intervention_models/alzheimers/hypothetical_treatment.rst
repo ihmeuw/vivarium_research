@@ -84,22 +84,22 @@ Vivarium Modeling Strategy
 
     digraph treatment_states {
         rankdir = TB;
-        el [label="BBBM test eligible [variable]"]
+        el [label="BBBM test eligible\n[variable]"]
         test [label="BBBM test received", style=dashed, shape=box]
 
         pos [label="BBBM test positive", style=dashed, shape=box]
-        neg [label="BBBM test negative [3 y]"]
+        neg [label="BBBM test negative\n[3 y]"]
 
-        wait [label="Waiting for treatment [6 mo]"]
+        wait [label="Waiting for treatment\n[6 mo]"]
         in_treat [label="Receiving treatment", style=dashed, shape=box]
-        no_treat [label="No treatment effect [permanent]"]
+        no_treat [label="No treatment effect\n[permanent]"]
 
-        treat [label="Full treatment effect LONG [6 y]"]
-        wane [label="Waning treatment effect LONG (update each step) [11 y]"]
+        treat [label="Full treatment effect LONG\n[6 y]"]
+        wane [label="Waning treatment effect LONG\n(update each step) [11 y]"]
 
-        discon_time [label = "Months to discontinuation D_t", style=dashed, shape=box]
-        treat_short [label = "Full treatment effect SHORT [(Months on Treatment/9) * 6 y]"]
-        wane_short [label = "Waning treatment effect SHORT (update each step) [(Months on Treatment/9) * 11 y]"]
+        discon_time [label = "Months to discontinuation\nD_t", style=dashed, shape=box]
+        treat_short [label = "Full treatment effect SHORT\n[(Months on Treatment/9) * 6 y]"]
+        wane_short [label = "Waning treatment effect SHORT\n(update each step)\n[(Months on Treatment/9) * 11 y]"]
 
         el -> test [label = "tested"]
         el -> el [label = "not tested"]
@@ -108,8 +108,8 @@ Vivarium Modeling Strategy
         test -> neg [label = "(10%)", style=dashed]
         neg -> el [label = "test re-eligible"]
 
-        pos -> wait [label = "decides to initiate treatment (I)", style=dashed]
-        pos -> no_treat [label = "decides not to initiate treatment (1 - I)", style=dashed]
+        pos -> wait [label = "decides to initiate\ntreatment (I)", style=dashed]
+        pos -> no_treat [label = "decides not to initiate\ntreatment (1 - I)", style=dashed]
 
         wait -> in_treat [label = "begins treatment"]
         in_treat -> treat [label = "completes (90%)", style=dashed]

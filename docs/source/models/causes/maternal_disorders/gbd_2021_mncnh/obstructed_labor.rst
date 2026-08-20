@@ -156,11 +156,10 @@ unit time.
 .. graphviz::
 
     digraph OL_decisions {
-        rankdir = LR;
         start [label="start"]
         end [label="end"]
-        alive [label="parent did not die of OL"]
-        dead [label="parent died of OL"]
+        alive [label="parent did not\ndie of OL"]
+        dead [label="parent died\nof OL"]
 
         start -> alive  [label = "1 - ir"]
         start -> OL [label = "ir"]

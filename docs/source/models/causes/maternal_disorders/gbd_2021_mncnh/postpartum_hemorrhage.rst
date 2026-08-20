@@ -161,11 +161,10 @@ represent decision probabilities rather than rates per unit time.
 .. graphviz::
 
     digraph hemorrhage_decisions {
-        rankdir = LR;
         start [label="start"]
         end [label="end"]
-        alive [label="parent did not die of hemorrhage"]
-        dead [label="parent died of hemorrhage"]
+        alive [label="parent did not\ndie of hemorrhage"]
+        dead [label="parent died\nof hemorrhage"]
 
         start -> alive  [label = "1 - ir"]
         start -> hemorrhage [label = "ir"]

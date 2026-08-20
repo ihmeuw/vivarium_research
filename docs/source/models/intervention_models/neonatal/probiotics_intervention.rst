@@ -112,19 +112,14 @@ is based on an impact table for Bifidobacterium infantis (B. infantis) provided 
 .. graphviz::
 
     digraph probiotics {
-        
-        rankdir = LR;
-        nodesep = 1.0;
-        ranksep = 1.2;
-        
+
         node [shape=box]
-        rankdir = LR;
         birth [label="Simulant is born"]
-        preterm [label="Simulant is preterm (<37 weeks)"]
-        not_preterm [label="Simulant is not preterm"]
-        preterm_wo [label="Simulant is eligible but does not have access to probiotics"] 
-        preterm_w [label="Simulant is eligible and has access to probiotics"]
-        not_preterm_wo [label="Simulant is not eligible for probiotics"]
+        preterm [label="Simulant is preterm\n(<37 weeks)"]
+        not_preterm [label="Simulant is\nnot preterm"]
+        preterm_wo [label="Simulant is eligible\nbut does not have\naccess to probiotics"]
+        preterm_w [label="Simulant is eligible\nand has access\nto probiotics"]
+        not_preterm_wo [label="Simulant is not eligible\nfor probiotics"]
       
         birth -> preterm 
         birth -> not_preterm
@@ -201,13 +196,13 @@ mortality rate.
     digraph probiotics {
         rankdir = LR;
         facility [label="Facility type"]
-        home [label="p_sepsis_without_probiotics"]
+        home [label="p_sepsis\nwithout_probiotics"]
         BEmONC [label="probiotics?"]
         CEmONC [label="probiotics?"]
-        BEmONC_wo [label="p_sepsis_without_probiotics"] 
-        BEmONC_w [label="p_sepsis_with_probiotics"]
-        CEmONC_wo [label="p_sepsis_without_probiotics"] 
-        CEmONC_w [label="p_sepsis_with_probiotics"]
+        BEmONC_wo [label="p_sepsis\nwithout_probiotics"]
+        BEmONC_w [label="p_sepsis\nwith_probiotics"]
+        CEmONC_wo [label="p_sepsis\nwithout_probiotics"]
+        CEmONC_w [label="p_sepsis\nwith_probiotics"]
 
         facility -> home  [label = "home birth"]
         facility -> BEmONC  [label = "BEmONC"]

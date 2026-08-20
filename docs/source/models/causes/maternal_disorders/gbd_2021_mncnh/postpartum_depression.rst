@@ -145,11 +145,10 @@ represent decision probabilities rather than rates per unit time.
 .. graphviz::
 
     digraph ppd_decisions {
-        rankdir = LR;
         start [label="start"]
         end [label="end"]
-        alive [label="parent did not die of PPD"]
-        dead [label="parent died of PPD"]
+        alive [label="parent did not\ndie of PPD"]
+        dead [label="parent died\nof PPD"]
 
         start -> alive  [label = "1 - ir"]
         start -> PPD [label = "ir"]
