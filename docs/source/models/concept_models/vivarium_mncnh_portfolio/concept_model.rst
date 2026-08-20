@@ -1998,13 +1998,14 @@ Default stratifications to all observers should include scenario and input draw.
   * - 
     - Postpartum hemorrhage split at 300 mL
     - Differentiate the current "non-cases" of PPH (those with <500 mL blood loss) into "<300 mL" and "300-500 mL".
-      See `this pull request <https://github.com/ihmeuw/vivarium_research/pull/XXXX>`__ for details.
+      See `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1961>`__ for details.
     - Standard V&V scenarios
     - Default
     -
   * -
     - E-MOTIVE
-    - E-MOTIVE and its effects on postpartum hemorrhage
+    - E-MOTIVE and its effects on postpartum hemorrhage.
+      See `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1961>`__ for details.
     - Standard V&V scenarios; note that #19 E-MOTIVE total scaleup has been added to the list for this run
     - Default
     - Postpartum hemorrhage split at 300 mL run
