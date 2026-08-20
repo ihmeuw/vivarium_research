@@ -178,7 +178,7 @@ unit time.
     * - start
       - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>` (due to condition on the overall intrapartum component)
+        <other_models_pregnancy_closed_cohort_mncnh>`
     * - OL
       - Parent simulant has maternal OL
     * - parent not dead of maternal OL
@@ -223,13 +223,13 @@ The case fatality rate will be computed as
 
 .. math::
 
-    \begin{align*}
+    \begin{aligned}
     \text{cfr} &= \frac{\text{OL deaths}}{\text{OL cases}} \\
         &= \frac{\text{(OL deaths) / person-time}}
             {\text{(OL cases) / person-time}}
         = \frac{\text{OL cause specific mortality rate}}
             {\text{OL incidence rate}}.
-    \end{align*}
+    \end{aligned}
 
 The following table shows the data needed from GBD for these
 calculations as well as for the calculation of YLDs in the next section.
@@ -257,11 +257,11 @@ calculations as well as for the calculation of YLDs in the next section.
     * - ir
       - obstructed labor and uterine rupture incidence risk per birth
       - incidence_c370 / birth_rate
-      - The value of ir is a probabiity in [0,1]. Denominator includes
+      - The value of ir is a probability in [0,1]. Denominator includes
         live births and stillbirths.
     * - cfr
       - case fatality rate of obstructed labor and uterine rupture
-      - csmr_c370 / incidence_368
+      - csmr_c370 / incidence_c370
       - The value of cfr is a probabiity in [0,1]
     * - incidence_c370
       - incidence rate of obstructed labor and uterine rupture
@@ -361,13 +361,13 @@ table as
 
 .. math::
 
-    \begin{align*}
-    \text{ylds_per_case_c368}
+    \begin{aligned}
+    \text{ylds\_per\_case\_c370}
         &= \frac{\text{OL YLDs}}{\text{OL cases}}\\
         &= \frac{\text{(OL YLDs) / person-time}}
             {\text{(OL cases) / person-time}}
         = \frac{\text{OL YLD rate}}{\text{OL incidence rate}}.
-    \end{align*}
+    \end{aligned}
 
 We are using the fact that  each simulant can get at most one case of
 obstructed labor or uterine rupture during the simulation, so the average 

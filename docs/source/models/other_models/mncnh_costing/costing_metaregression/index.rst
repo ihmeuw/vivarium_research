@@ -1,17 +1,25 @@
+.. _costing_metaregression_vivarium_mncnh_portfolio:
+
+
 ..
   Section title decorators for this document:
-  
+
   ==============
   Document Title
   ==============
-  Section Level 1
-  ---------------
-  Section Level 2
-  +++++++++++++++
-  Section Level 3
-  ~~~~~~~~~~~~~~~
+
+  Section Level 1 (#.0)
+  ---------------------
+
+  Section Level 2 (#.#)
+  +++++++++++++++++++++
+
+  Section Level 3 (#.#.#)
+  ~~~~~~~~~~~~~~~~~~~~~~~
+
   Section Level 4
   ^^^^^^^^^^^^^^^
+
   Section Level 5
   '''''''''''''''
 
@@ -21,23 +29,15 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_best_practices_uncertainty:
 
-========================================
-Uncertainty in Vivarium
-========================================
+MNCNH Portfolio Costing Meta-Regression
+=======================================
 
 .. contents::
-   :local:
-   :depth: 1
+  :local:
+  :depth: 2
+
 
 .. todo:: 
-
-  Outline types of uncertainty in vivarium simulations:
-
-    - Parameter
-    - Heterogeneity
-    - Stochastic
-    - Structural
-
-  Link to existing page on monte carlo uncertainty
+    
+    Add doc about costing meta-regressions

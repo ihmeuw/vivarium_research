@@ -358,11 +358,11 @@ States Data
      - Notes
    * - All
      - cause-specific mortality rate
-     - :math:`[\text{prevalence_m2412} \cdot emr_m2412] + [\sum\limits_{s\in acute-sequelae} \text{prevalence}_s \cdot emr_m24694] + [\sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s \cdot emr_m15755]` 
+     - :math:`[\text{prevalence\_m2412} \cdot emr_m2412] + [\sum\limits_{s\in acute-sequelae} \text{prevalence}_s \cdot emr_m24694] + [\sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s \cdot emr_m15755]` 
      - Tested the CSMR in this `workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/HF_CSMR.ipynb>`_ and found that the summed value was different than the IHD GBD value. Using the summed value will affect validation with GBD. 
    * - S1
      - prevalence
-     - :math:`\text{1−(prevalence_s378 + prevalence_s379 + ((1 - prevalence_m2412} \times \text{propHF_IHD)} \times \text{prevalence_s1040) + prevalence_m2412)}`
+     - :math:`\text{1−(prevalence\_s378 + prevalence\_s379 + ((1 - prevalence\_m2412} \times \text{propHF\_IHD)} \times \text{prevalence\_s1040) + prevalence\_m2412)}`
      - Simulants without prevalent AMI, PostMI or heart failure
    * - T1
      - prevalence
@@ -374,7 +374,7 @@ States Data
      - No prevalent simulants exist in the T2 state 
    * - AMI
      - prevalence
-     - :math:`\text{(1−(prevalence_m2412} \times \text{propHF_IHD))} \times \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
+     - :math:`\text{(1−(prevalence\_m2412} \times \text{propHF\_IHD))} \times \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
      - There are two acute sequelae
    * - AMI 
      - excess mortality rate
@@ -382,11 +382,11 @@ States Data
      -
    * - AMI
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_s378 + prevalence_s379}} \cdot \sum\limits_{s\in acute-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_s378 + prevalence\_s379}} \cdot \sum\limits_{s\in acute-sequelae} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      -
    * - AMI_HF
      - prevalence
-     - :math:`\text{(prevalence_m2412} \times \text{propHF_IHD)} \cdot \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`     
+     - :math:`\text{(prevalence\_m2412} \times \text{propHF\_IHD)} \cdot \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`     
      - There are two acute sequelae
    * - AMI_HF
      - excess mortality rate
@@ -394,11 +394,11 @@ States Data
      -
    * - AMI_HF
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_s378 + prevalence_s379}} \cdot \sum\limits_{s\in acute-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_s378 + prevalence\_s379}} \cdot \sum\limits_{s\in acute-sequelae} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      -
    * - P
      - prevalence
-     - :math:`\text{(1−(prevalence_m2412} \times \text{propHF_IHD))} \cdot \sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s`
+     - :math:`\text{(1−(prevalence\_m2412} \times \text{propHF\_IHD))} \cdot \sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s`
      - this is the prevalence generated after exclusivity adjustment 
    * - P
      - excess mortality rate
@@ -406,11 +406,11 @@ States Data
      -
    * - P
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_s1040}} \cdot \sum\limits_{s\in post-AMI-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_s1040}} \cdot \sum\limits_{s\in post-AMI-sequelae} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      - this is zero, per the GBD estimates
    * - HF_IHD
      - prevalence
-     - :math:`\text{prevalence_m2412} \times \text{propHF_IHD}`
+     - :math:`\text{prevalence\_m2412} \times \text{propHF\_IHD}`
      - this is the prevalence generated from the sum of IHD HF sequela 
    * - HF_IHD
      - excess mortality rate
@@ -418,11 +418,11 @@ States Data
      - Excess mortality rate of the overall HF envelope
    * - HF_IHD
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_m2412} \times \text{propHF_IHD}} \cdot \sum\limits_{s\in hf-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_m2412} \times \text{propHF\_IHD}} \cdot \sum\limits_{s\in hf-sequelae} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      - 
    * - HF_Resid
      - prevalence
-     - :math:`\text{prevalence_m2412} \times \text{propHF_RESID}`
+     - :math:`\text{prevalence\_m2412} \times \text{propHF\_RESID}`
      - Proportion of prevalence from the overall HF envelope due to the residual category
    * - HF_Resid
      - excess mortality rate
@@ -430,7 +430,7 @@ States Data
      - Excess mortality rate of the overall HF envelope
    * - HF_Resid
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_m2412} \cdot \text{propHF_RESID}} \cdot \sum\limits_{s\in hf-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s` 
+     - :math:`\frac{1}{\text{prevalence\_m2412} \cdot \text{propHF\_RESID}} \cdot \sum\limits_{s\in hf-sequelae} \text{disability\_weight}_s \cdot \text{prevalence}_s` 
      - 
 
 
@@ -449,7 +449,7 @@ Transition Data
    * - 1
      - S1, P or HF_IHD
      - AMI or AMI_HF 
-     - :math:`\frac{\text{incidence_m24694}}{1-\text{(prevalence_s378 + prevalence_s379 + prevalence_m2412} \times \text{propHF_RESID)}}`
+     - :math:`\frac{\text{incidence\_m24694}}{1-\text{(prevalence\_s378 + prevalence\_s379 + prevalence\_m2412} \times \text{propHF\_RESID)}}`
      - 
    * - 2
      - AMI
@@ -459,12 +459,12 @@ Transition Data
    * - 3
      - S1 or P 
      - HF_IHD
-     - :math:`\frac{\text{incidence_m2412} \times \text{propHF_IHD}}{1-\text{(prevalence_m2412 + prevalence of AMI)}}` 
+     - :math:`\frac{\text{incidence\_m2412} \times \text{propHF\_IHD}}{1-\text{(prevalence\_m2412 + prevalence of AMI)}}` 
      - 
    * - 4
      - S1  
      - HF_Resid
-     - :math:`\frac{\text{incidence_m2412} \times \text{propHF_RESID}}{\text{prevalence of S1}}`
+     - :math:`\frac{\text{incidence\_m2412} \times \text{propHF\_RESID}}{\text{prevalence of S1}}`
      - Prevalence of S1 is defined above 
 
 .. note::
@@ -493,11 +493,11 @@ Data Sources
      - YLD appendix
      - Disability weight of sequela with id {id}
      -
-   * - :math:`\frac{\text{incidence_m24694}}{(1-\text{(prevalence_s378 + prevalence_s379)})}`
+   * - :math:`\frac{\text{incidence\_m24694}}{(1-\text{(prevalence\_s378 + prevalence\_s379)})}`
      - dismod-mr, como
      - Incidence of MI due to ischemic heart disease
      - 
-   * - :math:`\frac{\text{incidence_m2412} \times \text{propHF_IHD}}{1-\text{(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)})}`
+   * - :math:`\frac{\text{incidence\_m2412} \times \text{propHF\_IHD}}{1-\text{(prevalence\_s5726 + prevalence\_s383 + prevalence\_s384 + prevalence\_s385)})}`
      - dismod-mr, como
      - Incidence of HF due to ischemic heart disease
      - 

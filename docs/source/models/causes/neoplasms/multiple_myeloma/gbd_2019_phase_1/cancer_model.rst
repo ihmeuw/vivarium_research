@@ -168,6 +168,7 @@ Model Assumptions and Limitations
    we will not calculate progress-free survival among simulants with fourth or 
    higher relapse of RRMM.
 
+.. _2019_cancer_model_multiple_myeloma_cause_model_diagram:
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -274,7 +275,7 @@ data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
    * - incidence_MM
      - S
      - MM
-     - :math:`\frac{\text{incidence_c486}}{1-\text{prev_c486}}`
+     - :math:`\frac{\text{incidence\_c486}}{1-\text{prev\_c486}}`
      - incidence of MM among susceptible population
    * - incidence_MM_first_relapse
      - MM

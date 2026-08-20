@@ -417,15 +417,15 @@ An example of SI model with both prevalence and birth prevalence in the initiali
      - 
    * - I
      - excess mortality rate
-     - :math:`\frac{\text{deaths_cid}}{\text{population} \times \text{prevalence_cid}}`
+     - :math:`\frac{\text{deaths\_cid}}{\text{population} \times \text{prevalence\_cid}}`
      - = (cause-specific mortality rate) / prevalence
    * - I
      - disability weights
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_cid}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae\_cid}}} \scriptstyle{\text{disability\_weight}_s \,\times\, \text{prevalence}_s}`
      - = total disability weight over all sequelae
    * - ALL
      - cause specific mortality rate
-     - :math:`\frac{\text{deaths_cid}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_cid}}{\text{population}}`
      - 
 
 Transition Data
@@ -472,7 +472,7 @@ An example, if the data is present in GBD,
    * - i
      - S
      - I
-     - :math:`\frac{\text{incidence_rate_cid}}{\text{1 - prevalence_cid}}`
+     - :math:`\frac{\text{incidence\_rate\_cid}}{\text{1 - prevalence\_cid}}`
      - 
    * - r
      - I

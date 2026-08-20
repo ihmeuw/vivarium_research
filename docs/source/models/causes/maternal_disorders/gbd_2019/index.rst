@@ -321,7 +321,7 @@ Simulants who experience an incident case of maternal disorders and occupy the p
     \text{YLDs per non-fatal maternal disorders case} = 
     
 
-    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - \text{csmr}_\text{c366}}
+    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence\_rate}_{c366} - \text{csmr}_\text{c366}}
 
   This equation has been updated for the :ref:`2021 maternal disorders cause model document <2021_cause_maternal_disorders>` and will be implemented in the nutrition optimization simulation. The erroneous equation implemented in IV iron is kept below for reference. Note that the impact of this discepency will be quite small given the small magnitude of the ACMR parameter.
 
@@ -330,7 +330,7 @@ Simulants who experience an incident case of maternal disorders and occupy the p
   \text{YLDs per non-fatal maternal disorders case} = 
   
 
-  \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366}) * \text{incidence_rate}_\text{c366} - csmr_\text{c366}}
+  \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence\_rate}_{c366} - (ACMR - csmr_\text{c366}) * \text{incidence\_rate}_\text{c366} - csmr_\text{c366}}
 
 .. warning::
 
@@ -338,7 +338,7 @@ Simulants who experience an incident case of maternal disorders and occupy the p
 
   .. math::
 
-    \text{YLDs per non-fatal maternal disorders case} = \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366}}
+    \text{YLDs per non-fatal maternal disorders case} = \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence\_rate}_{c366}}
 
   The equation may eventually be updated to the resolved version in the main section above, although it is approximately 98-99% of the temporary fix, so it is a low priority for implementation.
 
@@ -346,7 +346,7 @@ Simulants who experience an incident case of maternal disorders and occupy the p
 
   .. math::
 
-    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / \text{incidence_rate}_\text{c366})}
+    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence\_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / \text{incidence\_rate}_\text{c366})}
 
 .. todo::
 

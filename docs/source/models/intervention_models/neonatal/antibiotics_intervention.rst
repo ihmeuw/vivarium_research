@@ -172,7 +172,7 @@ locations.
   * - Ethiopia
     - All newborns (baseline coverage does not vary by delivery)
     - 0.5
-    - Assumption of 50% functional capacity to manage PSBI on an outpatient basis given on findings from [Tiruneh-et-al-2024]_ of frequent stock-outs and limited health worker capacity
+    - Assumption of 50% functional capacity to manage PSBI on an outpatient basis given on findings from [Tiruneh-et-al-2024]_ of frequent stock-outs and limited health worker capacity as well as estimated coverage from this cluster randomized trial in Ethiopia [Degefie-Hailegebriel-et-al-2017]_
   * - Nigeria
     - All newborns (baseline coverage does not vary by delivery facility)
     - 0
@@ -280,6 +280,10 @@ References
 
   `Duby J, Lassi ZS, Bhutta ZA. Community-based antibiotic delivery for possible serious bacterial infections in neonates in low- and middle-income countries. Cochrane Database Syst Rev. 2019 Apr 11;4(4):CD007646. doi: 10.1002/14651858.CD007646.pub3. PMID: 30970390; PMCID: PMC6458055. <https://pubmed.ncbi.nlm.nih.gov/30970390/>`_
 
+.. [Degefie-Hailegebriel-et-al-2017]
+
+  `Degefie Hailegebriel T, Mulligan B, Cousens S, Mathewos B, Wall S, Bekele A, Russell J, Sitrin D, Tensou B, Lawn J, de Graft Johnson J, Legesse H, Hailu S, Nigussie A, Worku B, Baqui A. Effect on Neonatal Mortality of Newborn Infection Management at Health Posts When Referral Is Not Possible: A Cluster-Randomized Trial in Rural Ethiopia. Glob Health Sci Pract. 2017 Jun 27;5(2):202-216. doi: 10.9745/GHSP-D-16-00312. PMID: 28611102; PMCID: PMC5487084. <https://pmc.ncbi.nlm.nih.gov/articles/PMC5487084/>`_
+
 .. [Gill-et-al-2014]
 
   `Gill CJ, MacLeod WB, Phiri-Mazala G, Guerina NG, Mirochnick M, Knapp AB, Hamer DH. Can traditional birth attendants be trained to accurately identify septic infants, initiate antibiotics, and refer in a rural African setting? Glob Health Sci Pract. 2014 Aug 31;2(3):318-27. doi: 10.9745/GHSP-D-14-00045. PMID: 25276591; PMCID: PMC4168634. <https://pubmed.ncbi.nlm.nih.gov/25276591/>`_
@@ -299,3 +303,4 @@ References
 .. [Zaidi-et-al-2011]
 
   `Zaidi AK, Ganatra HA, Syed S, Cousens S, Lee AC, Black R, Bhutta ZA, Lawn JE. Effect of case management on neonatal mortality due to sepsis and pneumonia. BMC Public Health. 2011 Apr 13;11 Suppl 3(Suppl 3):S13. doi: 10.1186/1471-2458-11-S3-S13. PMID: 21501430; PMCID: PMC3231886. <https://pmc-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/articles/PMC3231886/>`_
+

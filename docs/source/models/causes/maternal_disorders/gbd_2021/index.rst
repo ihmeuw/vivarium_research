@@ -343,7 +343,7 @@ Simulants who experience an incident case of maternal disorders and occupy the p
   \text{YLDs per non-fatal maternal disorders case} = 
   
 
-  \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - \text{csmr}_\text{c366}}
+  \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence\_rate}_{c366} - \text{csmr}_\text{c366}}
 
 .. _YLDUpdateNote:
 
@@ -356,7 +356,7 @@ Simulants who experience an incident case of maternal disorders and occupy the p
     \text{YLDs per non-fatal maternal disorders case} = 
     
 
-    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366}) * \text{incidence_rate}_\text{c366} - csmr_\text{c366}}
+    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence\_rate}_{c366} - (ACMR - csmr_\text{c366}) * \text{incidence\_rate}_\text{c366} - csmr_\text{c366}}
 
 Validation Criteria
 +++++++++++++++++++

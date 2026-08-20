@@ -255,16 +255,16 @@ State and transition data tables
      - 
    * - AcTB, S_HIV
      - excess mortality rate
-     - :math:`\frac{\text{csmr_c934} \,+\, \text{csmr_c946} \,+\,
-       \text{csmr_c947}}{\text{prev_c934} \,+\, \text{prev_c946} \,+\,
-       \text{prev_c947}}`
+     - :math:`\frac{\text{csmr\_c934} \,+\, \text{csmr\_c946} \,+\,
+       \text{csmr\_c947}}{\text{prev\_c934} \,+\, \text{prev\_c946} \,+\,
+       \text{prev\_c947}}`
      - confirm csmr_c954 = 0, csmr_c297 = csmr_c934 + csmr_c946 + csmr_c947
    * - AcTB, S_HIV
      - disability weight
-     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae_c934, sequelae_c946,
-       sequelae_c947}}} \text{dw_s} \,\times\, \text{prev_s}}{\displaystyle
-       {\sum_{s\in\text{sequelae_c934, sequelae_c946, sequelae_c947}}}
-       \text{prev_s}}`
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae\_c934, sequelae\_c946,
+       sequelae\_c947}}} \text{dw\_s} \,\times\, \text{prev\_s}}{\displaystyle
+       {\sum_{s\in\text{sequelae\_c934, sequelae\_c946, sequelae\_c947}}}
+       \text{prev\_s}}`
      - sequelae_c934, sequelae_c946, sequelae_c947; each of them has a list of
        4 sequelaes. dw_c934, dw_c946, dw_c947; expect to match 0.333 [0.224, 0.454].
    * - S_TB, C_HIV
@@ -273,13 +273,13 @@ State and transition data tables
      - 
    * - S_TB, C_HIV
      - excess mortality rate
-     - :math:`\text{emr_c300} = \frac{\text{csmr_c300}}{\text{prev_c300}}`
+     - :math:`\text{emr\_c300} = \frac{\text{csmr\_c300}}{\text{prev\_c300}}`
      -
    * - S_TB, C_HIV
      - disability weight
-     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae_c300}}} \text{dw_s}
-       \,\times\, \text{prev_s}}{\displaystyle{\sum_{s\in\text{sequelae_c300}}}
-       \text{prev_s}}`
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae\_c300}}} \text{dw\_s}
+       \,\times\, \text{prev\_s}}{\displaystyle{\sum_{s\in\text{sequelae\_c300}}}
+       \text{prev\_s}}`
      - sequelae_c300 has a list of 16 sequelaes
    * - LTBI, C_HIV
      - prevalence
@@ -287,13 +287,13 @@ State and transition data tables
      - 
    * - LTBI, C_HIV
      - excess mortality rate
-     - :math:`\text{emr_c300} = \frac{\text{csmr_c300}}{\text{prev_c300}}`
+     - :math:`\text{emr\_c300} = \frac{\text{csmr\_c300}}{\text{prev\_c300}}`
      -
    * - LTBI, C_HIV
      - disability weight
-     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae_c300}}} \text{dw_s}
-       \,\times\, \text{prev_s}}{\displaystyle{\sum_{s\in\text{sequelae_c300}}}
-       \text{prev_s}}`
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae\_c300}}} \text{dw\_s}
+       \,\times\, \text{prev\_s}}{\displaystyle{\sum_{s\in\text{sequelae\_c300}}}
+       \text{prev\_s}}`
      - sequelae_c300 has a list of 16 sequelaes
    * - AcTB, C_HIV
      - prevalence
@@ -301,16 +301,16 @@ State and transition data tables
      - 
    * - AcTB, C_HIV
      - excess mortality rate
-     - :math:`\frac{\text{csmr_c948} \,+\, \text{csmr_c949} \,+\,
-       \text{csmr_c950}}{\text{prev_c948} \,+\, \text{prev_c949} \,+\,
-       \text{prev_c950}}`
+     - :math:`\frac{\text{csmr\_c948} \,+\, \text{csmr\_c949} \,+\,
+       \text{csmr\_c950}}{\text{prev\_c948} \,+\, \text{prev\_c949} \,+\,
+       \text{prev\_c950}}`
      - 
    * - AcTB, C_HIV
      - disability weight
-     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae_c948, sequelae_c949,
-       sequelae_c950}}} \text{dw_s} \,\times\, \text{prev_s}}{\displaystyle
-       {\sum_{s\in\text{sequelae_c948, sequelae_c949, sequelae_c950}}}
-       \text{prev_s}}`
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae\_c948, sequelae\_c949,
+       sequelae\_c950}}} \text{dw\_s} \,\times\, \text{prev\_s}}{\displaystyle
+       {\sum_{s\in\text{sequelae\_c948, sequelae\_c949, sequelae\_c950}}}
+       \text{prev\_s}}`
      - sequelae_c948, sequelae_c949, sequelae_c950; each of them has a list of
        4 sequelaes. dw_c948, dw_c949, dw_c950; expect to match 0.408 [0.274, 0.549].
 
@@ -331,8 +331,8 @@ State and transition data tables
    * - 2
      - LTBI, C_HIV
      - AcTB, C_HIV
-     - :math:`\frac{\text{i_c948} \,+\, \text{i_c949} \,+\,
-       \text{i_c950}}{\text{prev_c954} \,\times\, \text{prev_c300}}`
+     - :math:`\frac{\text{i\_c948} \,+\, \text{i\_c949} \,+\,
+       \text{i\_c950}}{\text{prev\_c954} \,\times\, \text{prev\_c300}}`
      - 
    * - 3
      - AcTB, C_HIV
@@ -347,8 +347,8 @@ State and transition data tables
    * - 5
      - LTBI, S_HIV
      - AcTB, S_HIV
-     - :math:`\frac{\text{i_c934} \,+\, \text{i_c946} \,+\,
-       \text{i_c947}}{\text{prev_c954} \,\times\, (1 \,-\, \text{prev_c300})}`
+     - :math:`\frac{\text{i\_c934} \,+\, \text{i\_c946} \,+\,
+       \text{i\_c947}}{\text{prev\_c954} \,\times\, (1 \,-\, \text{prev\_c300})}`
      -
    * - 6
      - AcTB, S_HIV

@@ -221,7 +221,7 @@ State and Transition Data Tables
      - Notes
    * - All
      - cause-specific mortality rate
-     - :math:`\frac{\text{deaths_c493}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c493}}{\text{population}}`
      -
    * - P
      - excess mortality rate
@@ -237,11 +237,11 @@ State and Transition Data Tables
      -
    * - P
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_c493}} \times \sum\limits_{s \in post-mi-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_c493}} \times \sum\limits_{s \in post-mi-sequelae} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      -
    * - A
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_c493}} \times \sum\limits_{s\in acute-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_c493}} \times \sum\limits_{s\in acute-sequelae} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      -
    * - S
      - disability weight

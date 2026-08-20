@@ -190,7 +190,7 @@ represent decision probabilities rather than rates per unit time.
     * - start
       - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
-        <other_models_pregnancy_closed_cohort_mncnh>` (due to condition on the overall intrapartum component)
+        <other_models_pregnancy_closed_cohort_mncnh>`
     * - sepsis
       - Parent simulant has maternal sepsis
     * - parent not dead of maternal sepsis
@@ -234,13 +234,13 @@ The case fatality rate will be computed as
 
 .. math::
 
-    \begin{align*}
+    \begin{aligned}
     \text{cfr} &= \frac{\text{sepsis deaths}}{\text{sepsis cases}} \\
         &= \frac{\text{(sepsis deaths) / person-time}}
             {\text{(sepsis cases) / person-time}}
         = \frac{\text{sepsis cause specific mortality rate}}
             {\text{sepsis incidence rate}}.
-    \end{align*}
+    \end{aligned}
 
 The following table shows the data needed from GBD for these
 calculations as well as for the calculation of YLDs in the next section.
@@ -345,13 +345,13 @@ simulant's age group, which is defined in the above data table as
 
 .. math::
 
-    \begin{align*}
-    \text{ylds_per_case_c368}
+    \begin{aligned}
+    \text{ylds\_per\_case\_c368}
         &= \frac{\text{sepsis YLDs}}{\text{sepsis cases}}\\
         &= \frac{\text{(sepsis YLDs) / person-time}}
             {\text{(sepsis cases) / person-time}}
         = \frac{\text{sepsis YLD rate}}{\text{sepsis incidence rate}}.
-    \end{align*}
+    \end{aligned}
 
 We are using the fact that  each simulant can get at most one case of
 maternal sepsis during the simulation, so the average number of YLDs per

@@ -218,7 +218,7 @@ States Data
      - Notes
    * - All
      - cause-specific mortality rate (CSMR)
-     - :math:`\frac{\text{deaths_c976}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c976}}{\text{population}}`
      - Post CoDCorrect cause-level CSMR, type 2 only
    * - S
      - prevalence
@@ -234,7 +234,7 @@ States Data
      - 
    * - P
      - excess mortality rate
-     - :math:`\frac{\text{csmr_976}}{\text{prevalence_976}}`
+     - :math:`\frac{\text{csmr\_976}}{\text{prevalence\_976}}`
      - Cannot use EMR from overall DM model as it represents combination of risk for type 1 and type 2
    * - S
      - disabilty weights
@@ -242,7 +242,7 @@ States Data
      -
    * - P
      - disability weights
-     - :math:`\frac{1}{\text{prevalence_c976}} \times \sum\limits_{s \in sequelae} \text{disability_weight}_s \times \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_c976}} \times \sum\limits_{s \in sequelae} \text{disability\_weight}_s \times \text{prevalence}_s`
      - 
 
 Transition Data

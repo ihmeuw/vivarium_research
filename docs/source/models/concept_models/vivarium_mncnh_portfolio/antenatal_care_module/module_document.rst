@@ -76,7 +76,76 @@ and :ref:`our facility choice module documentation <2024_vivarium_mncnh_portfoli
     - ANC propensity is correlated with LBWSG category propensity and IFD propensity as described in the the :ref:`correlated propensities <facility_choice_correlated_propensities_section>` 
       section of the facility choice model document. Currently we assume that there is no correlation of ANC with other factors.
 
-  
+
+2.2 Module Outputs
+------------------
+
+ANC attendance impacts hemoglobin exposure and facility choice in our model, and in order for the 
+outputs of this component to be compatible with the data needs of these two downstream components, we will need two different
+outputs, one being polychotomous for the facility choice component and the other being dichotomous for the hemoglobin component.  
+
+.. list-table:: Module outputs
+  :header-rows: 1
+  :widths: 10 15 15
+
+  * - Output
+    - Value
+    - Dependencies
+  * - ANC attendance category 
+    - 
+      1. :code:`none`
+      2. :code:`later_pregnancy_only`
+      3. :code:`first_trimester_only`
+      4. :code:`first_trimester_and_later_pregnancy`
+
+      The categories of this polytomous variable are listed from highest risk (1) to lowest risk (4) in terms of ultrasound timing, 
+      in accordance with the :ref:`special ordering of the categories section <facility_choice_special_ordering_of_categories_section>`
+      of the delivery facility choice model document: The categories need to be ordered 1 < 2 < 3 < 4 when sampling the ANC attendance 
+      variable using the correlated ANC propensity in order to induce the correct correlations for the facility choice model.
+    - Used as an input for the :ref:`AI Ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`, for determining receipt and timing of ultrasound.
+  * - First trimester ANC attendance
+    - 
+      - *True* when ANC attendance category is :code:`first_trimester_only` or :code:`first_trimester_and_later_pregnancy`
+      - *False* when ANC attendance category is :code:`none` or :code:`later_pregnancy_only`
+    - Used as an input for the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`, for eligibility for receipt of oral iron in the first trimester.
+      This variable is dichotomous for each pregnancy.
+  * - Late pregnancy ANC attendance
+    - 
+      - *True* when ANC attendance category is :code:`first_trimester_and_later_pregnancy` or :code:`later_pregnancy_only`
+      - *False* when ANC attendance category is :code:`none` or :code:`first_trimester_only`
+    - Used as an input for the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`, for eligibility for anemia screening, as well as receipt of oral or IV iron in later pregnancy.
+      This variable is dichotomous for each pregnancy.
+
+The categorical variable is simply a polytomous encoding of the 2x2 table implied by the dichotomous variables:
+
+.. list-table:: ANC exposure options
+  :header-rows: 1
+
+  * - 
+    - **Late pregnancy ANC attendance** = **True**
+    - **Late pregnancy ANC attendance** = **False**
+  * - **First trimester ANC attendance** = **True**
+    - :code:`first_trimester_and_later_pregnancy`
+    - :code:`first_trimester_only`
+  * - **First trimester ANC attendance** = **False**
+    - :code:`later_pregnancy_only`
+    - :code:`none`
+
+2.3 Module Description 
+----------------------
+
+Data strategy
+~~~~~~~~~~~~~
+
+Data to inform the exact breakdown of our categories are not available uniformly
+across our modeled locations.
+For example, the DHS survey only asks the date of the first visit and the number of total visits,
+but doesn't ask the date of each visit, so we don't specifically know if a respondent went to ANC
+in later pregnancy (they could have gone to multiple visits, all in the first trimester).
+
+Rather than using DHS data directly, we use GBD covariates and other IHME modeling based on the DHS data.
+The data we have are as follows:
+
 .. list-table:: Additional input data
   :header-rows: 1
 
@@ -94,141 +163,94 @@ and :ref:`our facility choice module documentation <2024_vivarium_mncnh_portfoli
     - GBD covariate ID 8: :code:`get_covariate_estimates(location_id=location_id, release_id=16, year_id=2023, covariate_id=8)` 
     - Proportion of pregnant people receiving 4 or more antenatal care visits including 1 or more from a skilled provider
 
+The use of ANC1 is straightforward: it determines how many people *never* attend ANC, vs attend ANC at all.
+Similarly, ANCfirst determines how many people should attend in the first trimester.
+Lastly, we use ANC4 as a proxy measure for attending ANC *throughout pregnancy*, though this could miss in both directions:
+someone could attend only 2-3 visits and have these spread across time (more likely),
+or they could attend 4+ visits all during one phase of pregnancy (less likely).
+Due to the imperfectness of this proxy measure, we decided to treat it as an upper bound on attending throughout pregnancy,
+which means it is only impactful when it is *lower* than ANCfirst (see next section for details).
+In practice, in our modeled locations, this only occurs in Pakistan.
 
-2.2 Module Description 
-----------------------
+In the absence of better data, we assume that the DHS data used to produce the ANCfirst, ANC1, and ANC4 covariates applies to abortion/miscarriage/ectopic pregnancies 
+as well as pregnancies resulting in live birth or stillbirth.
+We further assume that abortion/miscarriage/ectopic pregnancies end before they can attend later pregnancy ANC visits (though in fact abortions and miscarriages in particular could happen beyond this point).
 
-ANC attendance will be modeled as a single variable with 4 possible exposure options:
+.. note:: 
 
-A. Attends ANC during first trimester AND later pregnancy
-B. Attends ANC during first trimester but NOT later pregnancy
-C. Attends ANC during later pregnancy but NOT first trimester
-D. Does not attend ANC at all during pregnancy
+    As of `pull request #1690 <https://github.com/ihmeuw/vivarium_research/pull/1690>`_ we updated our strategy to 
+    include the ANCfirst variable that the HS team processed and shared with us. Please see
+    `this JIRA ticket <https://jira.ihme.washington.edu/browse/SSCI-2474>`__
+    for more information on this strategy update and other options considered.
 
-.. list-table:: ANC exposure options
-  :header-rows: 1
+Vivarium modeling strategy
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  * - 
-    - Visit during late pregnancy
-    - No visit during late pregnancy
-  * - **Visit during first trimester**
-    - A
-    - B
-  * - **No visit during first trimester**
-    - C
-    - D
+With the data and assumptions in the previous section, we can fully determine the proportions in the 4 categories of ANC attendance.
+Here is the procedure for **live birth or stillbirth** pregnancies:
 
-The below table describes what probability values to use for each exposure option outlined above, **for pregnancies resulting in live birth or stillbirth**.
+1. First, assign probability of 1 - ANC1 to the :code:`none` category.
+2. Then, assign probability to :code:`later_pregnancy_only` so that it and :code:`none`, taken together, equal 1 - ANCfirst.
+   (You'll never run out of probability on this step, since ANCfirst must be less than or equal to ANC1).
+3. Then, assign probability to :code:`first_trimester_and_later_pregnancy` until
+   you have either assigned all remaining probability, or the probability in this category has become equal to ANC4 (which we treat as an upper bound).
+4. Assign any remaining probability to :code:`first_trimester_only`. Note that in our actual data, this category only receives
+   non-zero probability when ANC4 > ANCfirst, which only occurs in Pakistan out of our modeled locations.
+
+Mathematically, that means the probabilities are as follows, **for pregnancies resulting in live birth or stillbirth**.
 
 .. list-table:: ANC exposure probability values for pregnancies resulting in live birth or stillbirth
   :header-rows: 1
 
   * - ANC exposure option
-    - Description
     - Probability value
     - Notes
-  * - A
-    - Attends ANC during first trimester AND later pregnancy
+  * - :code:`first_trimester_and_later_pregnancy`
     - ``min(ANCfirst, ANC4)``
     - Assume that attending ANC in first trimester reflects "active care seeking behavior" and that it is unlikely
       for someone who attends first trimester ANC to attend no subsequent visits. 
-  * - B
-    - Attends ANC during first trimester but NOT later pregnancy
+  * - :code:`first_trimester_only`
     - ``ANCfirst - min(ANCfirst, ANC4)``
     - Prevalence of first trimester visit ONLY (and no late pregnancy visit) only occurs if ANCfirst > ANC4
-  * - C
-    - Attends ANC during later pregnancy but NOT first trimester
+  * - :code:`later_pregnancy_only`
     - ``ANC1 - ANCfirst``
     - 
-  * - D
-    - Does not attend ANC at all during pregnancy
+  * - :code:`none`
     - ``1 - ANC1``  
     - 
 
-.. note:: 
-
-    As of `pull request #1690 <https://github.com/ihmeuw/vivarium_research/pull/1690>`_ we updated how we assign our ANC exposures to 
-    include the ANCfirst variable that the HS team processed and shared with us. Please see `these slides <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BADD6223E-9FCA-40BB-BB7F-FE44F377CCDB%7D&file=ANC%20visit%20timing%20data%20strategy%20options.pptx&action=edit&mobileredirect=true>`_ 
-    for more information on this strategy update.
-
-The above probabilities are to be implemented pregnancies resulting in live birth or stillbirth only.
-Abortion/miscarriage/ectopic pregnancies are assigned 
-probabilities differently because we assume their pregnancies end before they can attend later pregnancy ANC visits. 
-The below table describes what probabilities to use for each exposure option **for abortion/miscarriage/ectopic pregnancies**:
+Abortion/miscarriage/ectopic pregnancies are similar, except that we make it impossible for them to attend later
+pregnancy ANC visits, resulting in the following (simpler) probabilities:
 
 .. list-table:: ANC exposure probabilities for abortion/miscarriage/ectopic pregnancies
   :header-rows: 1
 
   * - ANC exposure option
-    - Description
     - Probability value
     - Notes
-  * - A
-    - Attends ANC during first trimester AND later pregnancy
+  * - :code:`first_trimester_and_later_pregnancy`
     - 0
     - Assumption
-  * - B
-    - Attends ANC during first trimester but NOT later pregnancy
+  * - :code:`first_trimester_only`
     - ``ANCfirst``
     -
-  * - C
-    - Attends ANC during later pregnancy but NOT first trimester
+  * - :code:`later_pregnancy_only`
     - 0 
     - Assumption
-  * - D
-    - Does not attend ANC at all during pregnancy
-    - Probability equal to ``1 – ANCfirst``  
+  * - :code:`none`
+    - ``1 – ANCfirst``  
     - 
-
-
-2.3 Module Outputs
-------------------
-
-As mentioned earlier, ANC attendance impacts hemoglobin exposure and facility choice in our model, and in order for the 
-outputs of this component to be compatible with the data needs of these two downstream components, we will need two different
-outputs, one being dichotomous for the hemoglobin component and the other being polychotomous for the facility choice component.  
-
-.. list-table:: Module outputs
-  :header-rows: 1
-  :widths: 10 15 15
-
-  * - Output
-    - Value
-    - Dependencies
-  * - First trimester ANC attendance
-    - 
-      - *True*  for groups A and B 
-      - *False* for groups C and D
-    - Used as an input for the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`.
-      This variable is dichotomous for each pregnancy.
-  * - Late pregnancy ANC attendance
-    - 
-      - *True*  for groups A and C 
-      - *False* for groups B and D
-    - Used as an input for the :ref:`hemoglobin module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`.
-      This variable is dichotomous for each pregnancy.
-  * - ANC attendance category 
-    - 
-      1. :code:`none` for group D
-      2. :code:`later_pregnancy_only` for group C
-      3. :code:`first_trimester_only` for group B
-      4. :code:`first_trimester_and_later_pregnancy` for group A
-
-      The categories of this polytomous variable are listed from highest risk (1) to lowest risk (4) in terms of ultrasound timing, 
-      in accordance with the :ref:`special ordering of the categories section <facility_choice_special_ordering_of_categories_section>`
-      of the delivery facility choice model document: The categories need to be ordered D < C < B < A when sampling the ANC attendance 
-      variable using the correlated ANC propensity in order to induce the correct correlations for the facility choice model.
-    - Used as an input for the :ref:`AI Ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`.
 
 
 3.0 Assumptions and limitations
 ++++++++++++++++++++++++++++++++
 
-* We assume that the prevalence of attending both first trimester and later pregnancy visits is the minimum of ANCfirst (as processed by the HS team) and ANC4 
-  (GBD covariate also processed by HS team). There is non-zero prevalence of first trimester visits only when ANC4 > ANC1 (such as in Pakistan). We are likely
-  overestimating the correlation between first trimester ANC and later pregnancy ANC (i.e., the prevalence of a first trimester ANC visit ONLY is likely non-zero 
-  despite this assertion in our model.) We assume that the DHS data used to produce the ANCfirst, ANC1, and ANC4 covariates applies to abortion/miscarriage/ectopic pregnancies 
+* We use ANC4 as an upper bound on attending ANC throughout pregnancy in Pakistan, though strictly speaking this isn't logically necessary,
+  but represents our assumption that this proxy measure is an underestimate.
+  This assumption could be wrong if many people attend 4+ visits all during one phase of pregnancy.
+* We assume that the DHS data used to produce the ANCfirst, ANC1, and ANC4 covariates applies to abortion/miscarriage/ectopic pregnancies 
   as well as pregnancies resulting in live birth or stillbirth.
+* We assume that abortion/miscarriage/ectopic pregnancies can only attend ANC in the first trimester (though in fact abortions and miscarriages in particular can happen beyond this point).
 
 .. todo:: 
 

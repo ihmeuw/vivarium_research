@@ -42,7 +42,7 @@ The antenatal IV iron intervention is intended to treat moderate and severe iron
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-IV iron treatment for iron-definiciency anemia pregnancy remains a relatively new intervention, and as such, coverage remains relatively low in low- and middle-income countries, such as Nigeria (see [Akinajo-et-al-2024]_). 
+IV iron treatment for iron-definiciency anemia pregnancy remains a relatively new intervention, and as such, coverage remains relatively low in low- and middle-income countries, such as Nigeria (see [Balogun-et-al-2026]_, [Akinajo-et-al-2024]_). 
 As such, we will assume a baseline coverage of 0% for all locations for the IV iron intervention. 
 
 .. note::
@@ -147,6 +147,7 @@ Assumptions and limitations
     * We have a `JIRA ticket to address this limitation <https://jira.ihme.washington.edu/browse/SSCI-2377>`_ if we choose to do so.
 - We assume that there is no individual-level heterogeneity in the effect of IV iron on hemoglobin concentrations, despite having some data that could inform this. 
   We chose not to include stochastic uncertainty in order to simplify the data prep needed for this intervention model.
+- We assume that the effect of IV iron on probability of stillbirth (as mediated through hemoglobin concentration) applies equally to both types of stillbirth (intrapartum and antepartum).
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -166,15 +167,11 @@ We will model the effect of IV iron on both gestational age at birth (GA) and bi
 Effect size derivation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
-
-  Perform GBD 2023 update for effect size calculations (dependent on GBD 2023 LBWSG exposure and draw availability strategy will change)
-
 The code to derive of IV iron's effect on gestational age and birth weight exposures as 100% mediated through hemoglobin is `hosted here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/hgb_birth_effect_generation.py>`_ and a `notebook that steps through these functions can be found here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/function_tester.ipynb>`_. 
 
 The general steps of the derivation are summarized here:
 
-1. Load the burden of proof estimates and convert the beta coefficients to relative risks by exponentiating. Duplicate the 250 draws available from the BoP model so that we have 500 working draws such that draw 0 has the same values as 250, etc.
+1. Load the burden of proof estimates and convert the beta coefficients to relative risks by exponentiating. 
 2. Interpolate the RR values as a function of exposure and store the function with exposure values that are the same as those used in the :ref:`GBD hemoglobin risk effects model for maternal disorders <2023_hemoglobin_effects>`. Note that if we have to extrapolate beyond the bounds of the burden of proof exposure values, we assume "piecewise constant extrapolation" where the RRs for the exposure values beyond the bounds are equal to the RR value for the nearest exposure boundary value.
 3. Transform the relative risk values to be relative to the hemgolobin TMREL value of 120 g/L by dividing all relative risk values by the exposure level closest to 120 g/L.
 4. In a manner similar to the `GBD custom calculation for the PAF of a risk on the outcome as mediated through LBWSG <https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/custom_pafs.html#mortality-paf-calculation-for-subcauses-of-the-aggregate-lbwsga-outcome>`_: for each hemoglobin exposure level, X, use optimization to solve for the shift in continuous GA or BW exposure between X and the hemoglobin TMREL that results in the observed relative risk of dichotomous PTB or LBW between X and the hemoglobin TMREL. This step is performed under the following assumptions:
@@ -250,7 +247,7 @@ And the probabilities of experiencing the remaining birth outcomes are as follow
 
 Where, :math:`\text{stillbirth probability}_{overall}`, :math:`\text{live birth probability}_{overall}`, and :math:`\text{other probability}_{overall}` are defined on the :ref:`MNCNH pregnancy model document <other_models_pregnancy_closed_cohort_mncnh>` and :math:`RR_\text{IV iron, x}` is the IV iron relative risk of stillbirth for a given hemoglobin exposure :math:`\text{x}`.
 
-`Effects can be found in .csv file here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/iv_iron_stillbirth_rrs.csv>`_. This csv file contains values for 250 draws stratified by location and hemoglobin "exposure" in grams per liter. To obtain values for the 500 draws to be added to the MNCNH simulation artifact, duplicate the values twice such that draw 0 has the same values as draw 250, etc.
+`Effects can be found in .csv file here <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/main/src/vivarium_gates_mncnh/data/hemoglobin_effects/iv_iron_stillbirth_rrs.csv>`_. This csv file contains values for 250 draws stratified by location and hemoglobin "exposure" in grams per liter. 
 
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -275,6 +272,10 @@ References
 
   Akinajo, O.R., Babah, O.A., Banke-Thomas, A. et al. Acceptability of IV iron treatment for iron deficiency anaemia in pregnancy in Nigeria: a qualitative study with pregnant women, domestic decision-makers, and health care providers. Reprod Health 21, 22 (2024). https://doi.org/10.1186/s12978-024-01743-y
 
+.. [Balogun-et-al-2026]
+
+  Balogun M, Kumah EA, Adaramoye VO, Eboreime E, Ameh C, Afolabi BB. Implementation strategies and outcomes of intravenous iron use for treatment of anaemia during and after pregnancy in low- and middle-income countries: A scoping review. PLOS Glob Public Health. 2026 Jan 9;6(1):e0004858. doi: 10.1371/journal.pgph.0004858. PMID: 41512006; PMCID: PMC12788625.
+
 .. [Derman-et-al-2025]
 
   Derman RJ, Bellad MB, Somannavar MS, Bhandari S, Mehta S, Mehta S, Sharma DK, Yogeshkumar S, Charantimath U, Patil AP, Mallapur AA, Ramadurg U, Sangavi R, Patil PS, Roy S, Vastrad P, Shekhar C, Leiby BE, Hartman RL, Georgieff M, Mennemeyer S, Aghai Z, Thind S, Boelig RC; RAPIDIRON Trial Group (Appendix). Single-dose intravenous iron vs oral iron for treatment of maternal iron deficiency anemia: a randomized clinical trial. Am J Obstet Gynecol. 2025 Aug;233(2):120.e1-120.e18. doi: 10.1016/j.ajog.2025.01.037. Epub 2025 Feb 3. PMID: 39909327.
@@ -286,3 +287,4 @@ References
 .. [Pasricha-et-al-2025]
 
   Pasricha, SR., Moya, E., Ataíde, R. et al. Ferric carboxymaltose for anemia in late pregnancy: a randomized controlled trial. Nat Med 31, 197–206 (2025). https://doi.org/10.1038/s41591-024-03385-w
+

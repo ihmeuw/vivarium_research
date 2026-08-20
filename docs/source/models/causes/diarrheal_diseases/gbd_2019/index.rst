@@ -181,11 +181,11 @@ Data Descriptions
 	  - 
 	* - I
 	  - excess mortality rate
-	  - :math:`\frac{\text{deaths_c302}}{\text{population} \,\times\, \text{prevalence_I}}`
+	  - :math:`\frac{\text{deaths\_c302}}{\text{population} \,\times\, \text{prevalence\_I}}`
 	  - Use prevalence calculated for the I state in the row above
 	* - I
 	  - disability weight
-	  - :math:`\displaystyle{\sum_{s\in \text{sequelae_c302}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+	  - :math:`\displaystyle{\sum_{s\in \text{sequelae\_c302}}} \scriptstyle{\text{disability\_weight}_s \,\times\, \text{prevalence}_s}`
 	  -
 	* - S
 	  - prevalence
@@ -205,7 +205,7 @@ Data Descriptions
 	  -
 	* - All
 	  - cause-specific mortality rate
-	  - :math:`\frac{\text{deaths_c302}}{\text{population}}`
+	  - :math:`\frac{\text{deaths\_c302}}{\text{population}}`
 	  -
 
 .. list-table:: Transition Data
@@ -220,7 +220,7 @@ Data Descriptions
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{incidence_rate_c302}*(\text{duration_c302} / 365)}`
+	  - :math:`\frac{\text{incidence\_rate\_c302}}{1-\text{incidence\_rate\_c302}*(\text{duration\_c302} / 365)}`
 	  - We transform incidence to be a rate within the susceptible population under the assumption that prevalence ~= incidence * duration.
 	* - r: USED IN CIFF AND IV IRON SIMULATIONS AS WELL AS MODELS 1-11 OF NUTRITION OPTIMIZATION SIMULATION
 	  - I

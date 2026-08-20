@@ -195,15 +195,15 @@ State and Transition Data Tables
      - use forecasted prev to calculate EMR for future years
    * - BC
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c429}}{\text{population}\times\text{prev_c429}}`
+     - :math:`\frac{\text{deaths\_c429}}{\text{population}\times\text{prev\_c429}}`
      - 
    * - BC  
      - disability weights
-     - :math:`\displaystyle{\sum_{s\in\text{s_c429}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}`
+     - :math:`\displaystyle{\sum_{s\in\text{s\_c429}}}\scriptstyle{\text{disability\_weight}_s\,\times\,\text{prev}_s}`
      - total breast cancer disability weight over all sequelae with ids s_277, s_5486, s_5489, s_279, s_280, s_5492
    * - BC
      - cause specific mortality rate
-     - csmr_c429= :math:`\frac{\text{deaths_c429}}{\text{population}}`
+     - csmr_c429= :math:`\frac{\text{deaths\_c429}}{\text{population}}`
      - 
    * - R
      - prevalence
@@ -230,22 +230,22 @@ State and Transition Data Tables
    * - i_DCIS
      - S
      - DCIS
-     - :math:`\frac{\text{prev_c429}\times\text{crude prevalence ratio of DCIS}}{\text{duration_DCIS}}`
+     - :math:`\frac{\text{prev\_c429}\times\text{crude prevalence ratio of DCIS}}{\text{duration\_DCIS}}`
      - prev_c429 comes from forecast data for 2020-2040
    * - i_LCIS
      - S
      - LCIS
-     - :math:`\frac{\text{prev_c429}\times\text{crude prevalence ratio of LCIS}}{\text{duration_LCIS}}`
+     - :math:`\frac{\text{prev\_c429}\times\text{crude prevalence ratio of LCIS}}{\text{duration\_LCIS}}`
      - prev_c429 comes from forecast data for 2020-2040
    * - i_BC|DCIS
      - DCIS
      - BC
-     - :math:`\frac{\text{incidence_c429}}{\text{prev_DCIS+prev_LCIS}}`
+     - :math:`\frac{\text{incidence\_c429}}{\text{prev\_DCIS+prev\_LCIS}}`
      - i_BC|DCIS = i_BC / prev_(DCIS+LCIS)
    * - i_BC|LCIS
      - LCIS
      - BC
-     - :math:`\frac{\text{incidence_c429}}{\text{prev_DCIS+prev_LCIS}}`
+     - :math:`\frac{\text{incidence\_c429}}{\text{prev\_DCIS+prev\_LCIS}}`
      - i_BC|LCIS = i_BC / prev_(DCIS+LCIS)
    * - r_BC
      - BC

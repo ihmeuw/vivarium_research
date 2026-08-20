@@ -462,7 +462,7 @@ We will need the following variables (see the :ref:`note below <RR and PAF
 information>` for information about the RR's and PAF):
 
 .. math::
-  :nowrap:
+  :no-wrap:
 
   \begin{align*}
   &i &&= \text{identifier for an individual simulant}\\
@@ -506,7 +506,7 @@ Using the above variables, we will define the following individual
 mortality rates below:
 
 .. math::
-  :nowrap:
+  :no-wrap:
 
   \begin{align*}
   &\text{csmr}_c(i) &&= \text{conditional cause-specific mortality hazard of cause $c$ for individual $i$}\\
@@ -672,14 +672,14 @@ and
 
 .. math::
 
-  P(\text{cause of death } = \textsf{other_causes})
+  P(\text{cause of death } = \textsf{other\_causes})
   = \frac{\text{BGMR}}{\text{mr}(i)}.
 
 Note that this does in fact define a probability distribution since
 
 .. math::
 
-  P(\text{cause of death } = \textsf{other_causes})
+  P(\text{cause of death } = \textsf{other\_causes})
   + \sum_{c\,\in\, \text{modelled}} P(\text{cause of death } = c) = 1.
 
 This probability distribution can be derived by observing that each individual
@@ -736,7 +736,7 @@ and
 
 .. math::
 
-  P(\text{cause of death } = \textsf{other_causes})
+  P(\text{cause of death } = \textsf{other\_causes})
   = \frac{\text{bgmr}(i)}{\text{mr}(i)}.
 
 To assign a cause of death when LBWSG is included, randomly sample a cause (or
@@ -785,15 +785,15 @@ Bias
     | LWB=low birth weight babies
     | NBW=normal birth weight babies (or TMREL category)
 
-    :math:`RR_{acmr}` = :math:`\frac{\text{(LBW_deaths_affected + LBW_deaths_unaffected)/LBW_births}}{\text{(NBW_deaths_affected + NBW_deaths_unaffected)/NBW_births}}`
+    :math:`RR_{acmr}` = :math:`\frac{\text{(LBW\_deaths\_affected + LBW\_deaths\_unaffected)/LBW\_births}}{\text{(NBW\_deaths\_affected + NBW\_deaths\_unaffected)/NBW\_births}}`
 
-                      = :math:`\frac{\text{(LBW_deaths_affected + LBW_deaths_unaffected)}}{\text{(NBW_deaths_affected + NBW_deaths_unaffected)}} \times \frac{\text{NBW_births}}{\text{LBW_births}}`
+                      = :math:`\frac{\text{(LBW\_deaths\_affected + LBW\_deaths\_unaffected)}}{\text{(NBW\_deaths\_affected + NBW\_deaths\_unaffected)}} \times \frac{\text{NBW\_births}}{\text{LBW\_births}}`
 
-    :math:`RR_{aacmr}` = :math:`\frac{\text{LBW_deaths_affected/LBW_births}}{\text{NBW_deaths_affected/NBW_births}}`
+    :math:`RR_{aacmr}` = :math:`\frac{\text{LBW\_deaths\_affected/LBW\_births}}{\text{NBW\_deaths\_affected/NBW\_births}}`
 
-                       = :math:`\frac{\text{LBW_deaths_affected}}{\text{NBW_deaths_affected}} \times \frac{\text{NBW_births}}{\text{LBW_births}}`
+                       = :math:`\frac{\text{LBW\_deaths\_affected}}{\text{NBW\_deaths\_affected}} \times \frac{\text{NBW\_births}}{\text{LBW\_births}}`
 
-   Since we do not know the ratio of the number of :math:`\text{LBW_deaths_unaffected}` to the number of :math:`\text{NBW_deaths_unaffected}`, we do not know the direction of bias. We would need to analyse the stratified microdata.
+   Since we do not know the ratio of the number of :math:`\text{LBW\_deaths\_unaffected}` to the number of :math:`\text{NBW\_deaths\_unaffected}`, we do not know the direction of bias. We would need to analyse the stratified microdata.
 
    .. todo::
       check to see (LBW_deaths_unaffected / NBW_deaths_unaffected) ?<? (LBW_deaths_affected / NBW_deaths_affected) or the reverse inequality?

@@ -663,6 +663,38 @@ The observed effect of each antenatal supplementation product on the risk of sti
   the MMS effect on very preterm birth in [Keats-et-al-2019-maternal-supplementation]_.
   However, it was implemented as written in the nutrition optimization simulation.
 
+  Notably, the function that generates the lognormal distribution (``get_lognorm_from_quantiles``) uses the quantiles to calculate a standard deviation and apply that about the mean rather than use the quantiles directly. Therefore, the transcription error in the confidence interval of the effect of MMS resulted in an overestimation of the uncertainty of this parameter, but did not significantly bias the mean value of the distribution. A comparison of the intended versus erroneous distribution that was used in the simulation and the code used to create it is shown below.
+
+  .. image:: mms_sb_ci.png
+
+  .. code::
+
+    import matplotlib.pyplot as plt
+    from vivarium_gates_mncnh.utilities import get_lognorm_from_quantiles
+
+    mn = 0.92
+    lcl = 0.86
+    ucl = 0.98
+    lcl_alt = 0.71
+    ucl_alt = 0.93
+    
+    dist = get_lognorm_from_quantiles(mn, lcl, ucl)
+    dist_alt = get_lognorm_from_quantiles(mn, lcl_alt, ucl_alt)
+    
+    x = np.linspace(0.7, 1.2, 100)
+    plt.plot(x, dist.pdf(x), label='Correct distribution')
+    plt.plot(x, dist_alt.pdf(x), label='Erroneous distribution')
+    plt.axvline(dist.mean(), color='tab:blue', linestyle='--')
+    plt.axvline(dist_alt.mean(), color='tab:orange', linestyle='--')
+    y_val = 13.5
+    plt.fill_between([dist.ppf(0.025), dist.ppf(0.975)], [0, 0], [y_val, y_val], color='tab:blue', alpha=0.1)
+    plt.fill_between([dist_alt.ppf(0.025), dist_alt.ppf(0.975)], [0, 0], [y_val, y_val], color='tab:orange', alpha=0.1)
+    plt.legend()
+    plt.ylim(ymax=y_val)
+    plt.xlabel('Relative risk')
+    plt.title('MMS and stillbirth RR distributions')
+    plt.grid()
+
 Because there is no effect of IFA on stillbirths and we assume there is no baseline coverage of MMS or BEP, there is no differentiation in stillbirth rate due to baseline coverage of antenatal supplementation products in our modeled populations. Therefore, we can simply apply the relative risk of stillbirth directly to the baseline stillbirth rate without accounting for calibration of baseline coverage (in other words, the PAF of antenatal supplementation on stillbirths is equal to 0).
 
 The relative risk for this risk factor will apply to the probability of experiencing still birth such that:

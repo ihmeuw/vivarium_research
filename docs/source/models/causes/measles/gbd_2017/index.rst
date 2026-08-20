@@ -228,7 +228,7 @@ Data Description
      - 
    * - I
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c341}}{\text{population} \times \text{prevalence_c341}}`
+     - :math:`\frac{\text{deaths\_c341}}{\text{population} \times \text{prevalence\_c341}}`
      - 
    * - I
      - disability weights
@@ -250,7 +250,7 @@ Data Description
      - 
    * - ALL
      - cause specific mortality rate
-     - :math:`\frac{\text{deaths_c341}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c341}}{\text{population}}`
      - 
 
 
@@ -266,7 +266,7 @@ Data Description
    * - i
      - S
      - I
-     - :math:`\frac{\text{incidence_rate_c341}}{\text{1 - prevalence_c341}}`
+     - :math:`\frac{\text{incidence\_rate\_c341}}{\text{1 - prevalence\_c341}}`
      - Incidence rate in total population is divided by 1-prevalence_c341 to get incidence rate among the recovered and susceptible population.
    * - r
      - I

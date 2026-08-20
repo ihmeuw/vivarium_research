@@ -629,7 +629,7 @@ For rate, :math:`r`, in [r3, r2, t1]:
 
 .. math::
 
-  r_i = r * (1 - PAF_{r}) * RR_\text{r, i (given C_i)}
+  r_i = r * (1 - PAF_{r}) * RR_\text{r, i (given C\_i)}
 
 Given,
 

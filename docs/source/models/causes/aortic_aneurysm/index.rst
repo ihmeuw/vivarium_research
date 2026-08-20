@@ -125,7 +125,7 @@ States Data
      - Notes
    * - All
      - cause-specific mortality (CSMR)
-     - :math:`\frac{\text{deaths_c501}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c501}}{\text{population}}`
      - Post CoDCorrect cause-level CSMR
 
 

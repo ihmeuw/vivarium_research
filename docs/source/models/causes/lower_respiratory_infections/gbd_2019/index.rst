@@ -193,7 +193,7 @@ Data Description
      - Justification included below. Early neonatal age group exception due to non-steady state dynamics in this age group given birth prevalence of zero causes increasing prevalence within age group and short duration of age group. `Citation on these dynamics and approximations here for reference <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3465772/>`_.
    * - I
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c322}}{\text{population} \,\times\,\text{prevalence_calculated}}`
+     - :math:`\frac{\text{deaths\_c322}}{\text{population} \,\times\,\text{prevalence\_calculated}}`
      -
    * - I
      - disability weights
@@ -201,7 +201,7 @@ Data Description
      -
    * - ALL
      - cause specific mortality rate
-     - :math:`\frac{\text{deaths_c322}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c322}}{\text{population}}`
      -
 
 We calculate prevalence using the equation prevalence = incidence * duration. 
@@ -221,7 +221,7 @@ This is appropriate because LRI has a short and relatively uniform duration of
    * - i
      - S
      - I
-     - :math:`\frac{\text{incidence_rate_c322}}{(1-\text{prevalence_calculated})}`
+     - :math:`\frac{\text{incidence\_rate\_c322}}{(1-\text{prevalence\_calculated})}`
      - Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
    * - r: USED IN CIFF AND IV IRON SIMULATIONS AS WELL AS MODELS 1-11 OF NUTRITION OPTIMIZATION SIMULATION
      - I
