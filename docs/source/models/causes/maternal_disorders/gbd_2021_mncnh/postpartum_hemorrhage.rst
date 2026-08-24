@@ -402,14 +402,16 @@ Validation Criteria
 +++++++++++++++++++
 
 Pre-simulation data checks:
-* The disability weight for postpartum hemorrhage **300-500 mL** should be equal to half the disability weight for postpartum hemorrhage **500 mL-1 L**.
-* The mean and confidence interval of :math:`ir_500mL_per_300mL_case` across draws should be approximately equal to the values in the data table above.
+
+* The disability weight for postpartum hemorrhage 300mL-500mL should be equal to half the disability weight for postpartum hemorrhage 500mL-1L.
+* The mean and confidence interval of ir_500mL_per_300mL_case across draws should be approximately equal to the values in the data table above.
 
 From observed outputs:
+
 * The simulation's incident cases of postpartum hemorrhage **500 mL+** divided by cases **300 mL+**
-  should be approximately equal to the :math:`ir_500mL_per_300mL_case` value derived from the E-MOTIVE trial data, for each age group and draw.
+  should be approximately equal to the ir_500mL_per_300mL_case value, for each age group and draw.
 * The simulation's incident cases of postpartum hemorrhage **1 L+** divided by cases **500 mL+**
-  should be approximately equal to the :math:`ir_1L_per_500mL_case` value derived from GBD data, for each age group and draw.
+  should be approximately equal to the ir_1L_per_500mL_case value, for each age group and draw.
 * The simulation's incidence risk (incident cases divided by pregnancies) of postpartum hemorrhage **500 mL+**
   should be approximately equal to the GBD 2023 incidence risk of maternal hemorrhage (incidence rate divided by pregnancy incidence rate)
   multiplied by the postpartum fraction, for each age group and draw.

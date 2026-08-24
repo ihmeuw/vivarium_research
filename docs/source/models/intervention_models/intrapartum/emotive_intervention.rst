@@ -135,8 +135,8 @@ In the interactive context:
 
 * E-MOTIVE coverage should be 0% in the baseline scenario, and should be identical to in-facility delivery at the simulant
   level in the E-MOTIVE total scale-up scenario.
-* At the simulant level, :math:`\text{ir\_500mL\_per\_300mL\_case}` and :math:`\text{ir\_1L\_per\_500mL\_case}` should be equal to the baseline values documented on the :ref:`2023_cause_postpartum_hemorrhage_mncnh` page for simulants who do not receive E-MOTIVE,
-  and should be equal to the baseline values multiplied by the draw-specific relative risk for that parameter (after the adjustment for C-sections) for those who do receive E-MOTIVE.
+* At the simulant level, in both the baseline and E-MOTIVE total scale-up scenarios, :math:`\text{ir\_500mL\_per\_300mL\_case}` and :math:`\text{ir\_1L\_per\_500mL\_case}` should be equal to the baseline values documented on the :ref:`2023_cause_postpartum_hemorrhage_mncnh` page for simulants who do not receive E-MOTIVE,
+  and should be equal to the baseline values multiplied by the draw-specific :math:`\text{RR}^\text{E-MOTIVE}_\text{population}` for that parameter for those who do receive E-MOTIVE.
 
 From observed outputs:
 
@@ -144,6 +144,7 @@ From observed outputs:
   by the same incidence in the baseline scenario should be approximately :math:`\text{RR}^\text{E-MOTIVE}_\text{population}` for :math:`\text{ir\_500mL\_per\_300mL\_case}`, for each age group and draw.
 * Among in-facility deliveries, 1L+ postpartum hemorrhage incident cases, and postpartum hemorrhage deaths, in the E-MOTIVE total scale-up scenario divided
   by the same value in the baseline scenario should be approximately :math:`\text{RR}^\text{E-MOTIVE}_\text{population}` for :math:`\text{ir\_500mL\_per\_300mL\_case}` times :math:`\text{RR}^\text{E-MOTIVE}_\text{population}` for :math:`\text{ir\_1L\_per\_500mL\_case}`, for each age group and draw.
+* Incidence/YLDs/mortality of postpartum hemorrhage among home births should be the same between the baseline and E-MOTIVE total scale-up scenarios, for each age group and draw.
 * When this intervention is first implemented in the simulation, incidence/YLDs/mortality of postpartum hemorrhage in the baseline scenario
   should not change from the previous iteration of the model.
 
