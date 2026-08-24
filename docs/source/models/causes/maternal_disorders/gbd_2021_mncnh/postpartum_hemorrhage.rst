@@ -401,24 +401,25 @@ calculations.
 Validation Criteria
 +++++++++++++++++++
 
-In order to verify and validate the model, we should record at least the
-following information:
+Pre-simulation data checks:
+* The disability weight for postpartum hemorrhage **300-500 mL** should be equal to half the disability weight for postpartum hemorrhage **500 mL-1 L**.
+* The mean of :math:`ir_500mL_per_300mL_case` across draws should be approximately equal to 45.33%, the value derived from the E-MOTIVE trial data.
 
-- Number of simulants with live/stillbirth pregnancies in each age group
-  before the maternal hemorrhage model is run
-- Number of maternal hemorrhage cases and maternal hemorrhage deaths in each age
-  group
-- Number of maternal hemorrhage YLDs and YLLs in each age group
-
-Using the above data, we should be able to verify/validate the
-following:
-
-- Validate the maternal hemorrhage incidence risk and case fatality rate in
-  each age group against the corresponding quantities calculated from
-  GBD data
-- Validate the number of maternal hemorrhage deaths per population against
-  the maternal hemorrhage CSMR from GBD
-- Validate the total maternal hemorrhage YLDs and YLLs per population
+From observed outputs:
+* The simulation's incident cases of postpartum hemorrhage **500 mL+** divided by cases **300 mL+**
+  should be approximately equal to the :math:`ir_500mL_per_300mL_case` value derived from the E-MOTIVE trial data, for each age group and draw.
+* The simulation's incident cases of postpartum hemorrhage **1 L+** divided by cases **500 mL+**
+  should be approximately equal to the :math:`ir_1L_per_500mL_case` value derived from GBD data, for each age group and draw.
+* The simulation's incidence risk (incident cases divided by pregnancies) of postpartum hemorrhage **500 mL+**
+  should be approximately equal to the GBD 2023 incidence risk of maternal hemorrhage (incidence rate divided by pregnancy incidence rate)
+  multiplied by the postpartum fraction, for each age group and draw.
+* The simulation's YLDs per pregnancy (YLDs divided by pregnancies) of postpartum hemorrhage **500 mL+**
+  should be approximately equal to the GBD 2023 YLDs per pregnancy of maternal hemorrhage (YLD rate divided by pregnancy incidence rate)
+  multiplied by the postpartum fraction, for each age group and draw.
+* The simulation's mortality risk (postpartum hemorrhage deaths divided by pregnancies) should be approximately equal to the
+  GBD 2023 maternal hemorrhage mortality risk per pregnancy (CSMR divided by pregnancy incidence rate)
+  multiplied by the postpartum fraction, for each age group and draw.
+* The simulation should record no postpartum hemorrhage mortality among simulants with less than 1 L blood loss.
 
 Limitations
 -----------
