@@ -55,12 +55,15 @@ will be modified as follows for simulants who receive E-MOTIVE:
 
 .. math::
 
-  \text{ir}^\text{E-MOTIVE} = (1 - \text{cesarean\_fraction\_ifd}) \times \text{ir} \times \text{RR}^\text{E-MOTIVE} + \text{cesarean\_fraction\_ifd} \times \text{ir},
+  \begin{aligned}
+  \text{ir}^\text{E-MOTIVE} &= (1 - \text{cesarean\_fraction\_ifd}) \times \text{ir} \times \text{RR}^\text{E-MOTIVE} + \text{cesarean\_fraction\_ifd} \times \text{ir} \\
+  &= \text{ir} \times \left( 1 + (\text{RR}^\text{E-MOTIVE} - 1) \times (1 - \text{cesarean\_fraction\_ifd}) \right),
+  \end{aligned}
 
 where:
 
 - :math:`\text{ir}` is one of :math:`\text{ir\_500mL\_per\_300mL\_case}` or :math:`\text{ir\_1L\_per\_500mL\_case}`,
-- :math:`\text{RR}^\text{E-MOTIVE}` is the relative risk on the relevant incidence parameter from the table below,
+- :math:`\text{RR}^\text{E-MOTIVE}` is the relative risk on the relevant incidence parameter from the table below (specific to vaginal deliveries),
 - :math:`\text{cesarean\_fraction\_ifd}` is the fraction of facility births that are cesarean deliveries,
 - :math:`\text{csection\_coverage\_prop}` is GBD covariate ID 2381 "proportion of live births delivered by Caesarean Section (c-section)",
 - :math:`\text{IFD\_coverage\_prop}` is GBD covariate ID 51 "Percent of women giving birth in a health facility".
@@ -85,6 +88,12 @@ but let's note if this is happening often.
     - This value is derived from unpublished data shared with us by the E-MOTIVE trial team, along with published data from the trial report [E-MOTIVE]_, all of which can be found at :code:`J:\\Project\\simulation_science\\mnch_grant\\MNCNH portfolio\\EMOTIVE trial data.xlsx`.
       The confidence interval was calculated using the standard error of the log RR (see spreadsheet for calculation).
       Assume a log-normal distribution of uncertainty when sampling values.
+
+For convenience we will call the overall population (vaginal and C-section deliveries) relative risk :math:`\text{RR}^\text{E-MOTIVE}_\text{population} = 1 + (\text{RR}^\text{E-MOTIVE} - 1) \times (1 - \text{cesarean\_fraction\_ifd})` and write the above as:
+
+.. math::
+
+  \text{ir}^\text{E-MOTIVE} = \text{ir} \times \text{RR}^\text{E-MOTIVE}_\text{population}
 
 Calibration Strategy
 --------------------
@@ -118,8 +127,25 @@ Assumptions and Limitations
 Validation and Verification Criteria
 ------------------------------------
 
-* The incidence at the 300mL level should be the same as when this intervention is not included in the model.
-* The ratio of postpartum hemorrhage incidence (at the 500mL level) among those without E-MOTIVE divided by those with E-MOTIVE should equal the relative risk parameter used in the model.
+Pre-simulation data checks:
+
+* The mean of :math:`\text{RR}^\text{E-MOTIVE}` for :math:`\text{ir\_500mL\_per\_300mL\_case}` and :math:`\text{RR}^\text{E-MOTIVE}` for :math:`\text{ir\_1L\_per\_500mL\_case}` should be approximately equal to the values in the table above, and the 95% confidence intervals should be approximately equal to the values in the table above.
+
+In the interactive context:
+
+* E-MOTIVE coverage should be 0% in the baseline scenario, and should be identical to in-facility delivery at the simulant
+  level in the E-MOTIVE total scale-up scenario.
+* At the simulant level, :math:`\text{ir\_500mL\_per\_300mL\_case}` and :math:`\text{ir\_1L\_per\_500mL\_case}` should be equal to the baseline values documented on the :ref:`2023_cause_postpartum_hemorrhage_mncnh` page for simulants who do not receive E-MOTIVE,
+  and should be equal to the baseline values multiplied by the draw-specific relative risk for that parameter (after the adjustment for C-sections) for those who do receive E-MOTIVE.
+
+From observed outputs:
+
+* Among in-facility deliveries, 500mL+ postpartum hemorrhage incident cases in the E-MOTIVE total scale-up scenario divided
+  by the same incidence in the baseline scenario should be approximately :math:`\text{RR}^\text{E-MOTIVE}_\text{population}` for :math:`\text{ir\_500mL\_per\_300mL\_case}`, for each age group and draw.
+* Among in-facility deliveries, 1L+ postpartum hemorrhage incident cases, and postpartum hemorrhage deaths, in the E-MOTIVE total scale-up scenario divided
+  by the same value in the baseline scenario should be approximately :math:`\text{RR}^\text{E-MOTIVE}_\text{population}` for :math:`\text{ir\_500mL\_per\_300mL\_case}` times :math:`\text{RR}^\text{E-MOTIVE}_\text{population}` for :math:`\text{ir\_1L\_per\_500mL\_case}`, for each age group and draw.
+* When this intervention is first implemented in the simulation, incidence/YLDs/mortality of postpartum hemorrhage in the baseline scenario
+  should not change from the previous iteration of the model.
 
 References
 ------------

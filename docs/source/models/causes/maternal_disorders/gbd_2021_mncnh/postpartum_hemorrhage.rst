@@ -403,7 +403,7 @@ Validation Criteria
 
 Pre-simulation data checks:
 * The disability weight for postpartum hemorrhage **300-500 mL** should be equal to half the disability weight for postpartum hemorrhage **500 mL-1 L**.
-* The mean of :math:`ir_500mL_per_300mL_case` across draws should be approximately equal to 45.33%, the value derived from the E-MOTIVE trial data.
+* The mean and confidence interval of :math:`ir_500mL_per_300mL_case` across draws should be approximately equal to the values in the data table above.
 
 From observed outputs:
 * The simulation's incident cases of postpartum hemorrhage **500 mL+** divided by cases **300 mL+**
