@@ -60,7 +60,7 @@ See the :ref:`Postpartum hemorrhage cause model <2023_cause_postpartum_hemorrhag
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Postpartum Hemorrhage Incidence Probability :math:`\text{IR}_i^\text{postpartum hemorrhage}`
+  * - Postpartum hemorrhage incidence risk at the 300mL level :math:`\text{ir\_300mL}`
     - Adjust multiplicatively using RR
     - Yes 
     - 
@@ -89,7 +89,7 @@ administration of misoprostol is not directly data-backed, so we will need to up
     - 0
     - N/A
     - This is an assumption based on literature evidence that community distribution of oral misoprostol 
-      as not been widely implemented in Nigeria, Ethiopia, or Pakistan. (e.g. [Hobday-et-al-2017-misoprostol-scale-up]_ conducted a narrative 
+      has not been widely implemented in Nigeria, Ethiopia, or Pakistan. (e.g. [Hobday-et-al-2017-misoprostol-scale-up]_ conducted a narrative 
       review of the scale-up of community-based misoprostol and found little evidence of scale-up.)
 
 Vivarium Modeling Strategy
@@ -108,15 +108,15 @@ The ``Risk`` component adds an attribute to each simulant indicating whether the
 during pregnancy and who give birth at home are eligible for this intervention.
 
 To make this work naturally with the ``RiskEffect`` component, it is best to think of the risk as "no misoprostol".  With this framing, the ``RiskEffect`` 
-component requires data on (1) the relative risk of postpartum hemorrhage incidence for people who did not receive misoprostol before labor began, and (2) the population attributable fraction (PAF) of postpartum hemorrhage 
+component requires data on (1) the relative risk of postpartum hemorrhage incidence (at the 300mL level) for people who did not receive misoprostol before labor began, and (2) the population attributable fraction (PAF) of postpartum hemorrhage 
 due to not receiving misoprostol.  We will use the decision tree below to estimate the probability of postpartum hemorrhage incidence with and without the use of misoprostol, ensuring consistency
 with the baseline delivery facility rates and baseline misoprostol coverage.
 
-In Vivarium, this risk effect will modify the postpartum hemorrhage incidence pipeline, resulting in 
+In Vivarium, this risk effect will modify the pipeline for postpartum hemorrhage incidence at the 300mL level (:math:`\text{ir\_300mL}` in the :ref:`postpartum hemorrhage cause model <2023_cause_postpartum_hemorrhage_mncnh>`), resulting in
 
 .. math::
 
-   \text{IR}_i^\text{postpartum hemorrhage} = \text{IR}^\text{postpartum hemorrhage} \cdot (1 - \text{PAF}_\text{no misoprostol}) \cdot \text{RR}_i^\text{no misoprostol}
+   \text{ir\_300mL}_i = \text{ir\_300mL} \cdot (1 - \text{PAF}_\text{no misoprostol}) \cdot \text{RR}_i^\text{no misoprostol}
 
 where :math:`\text{RR}_i^\text{no misoprostol}` is simulant *i*'s individual relative risk for "no misoprostol", meaning :math:`\text{RR}_i^\text{no misoprostol} = \text{RR}_\text{no misoprostol}` 
 if simulant *i* does not receive misoprostol, and :math:`\text{RR}_i^\text{no misoprostol} = 1` if simulant *i* receives misoprostol. 
@@ -136,7 +136,7 @@ sublingually received misoprostol during labor on the prevention of postpartum h
     - :math:`1/\text{RR}^\text{misoprostol}`
     - N/A
     - Value to be used in sim
-  * - :math:`1/\text{RR}^\text{misoprostol}`
+  * - :math:`\text{RR}^\text{misoprostol}`
     - RR = 0.61 (95% CI: 0.50 to 0.74). Parameter uncertainty implemented as a lognormal distribution: :code:`get_lognorm_from_quantiles(0.61, 0.50, 0.74)`
     - [Gallos-et-al-2018-Cochrane-Review]_
     - 
@@ -149,14 +149,29 @@ sublingually received misoprostol during labor on the prevention of postpartum h
     - N/A
     - 
 
+.. todo::
+  The 0.61 RR cited above does not appear to be directly reported in [Gallos-et-al-2018-Cochrane-Review]_, and we're not sure how it was derived.
+  Additionally, a 2025 update has been published to the Cochrane review.
+  We should update this relative risk.
+
+.. todo::
+  As noted below in the limitations, our single relative risk appears to miss a dynamic in which misoprostol is more effective at preventing
+  less severe hemorrhage.
+  We should explore using separate relative risks for different severities of postpartum hemorrhage.
+
 Assumptions and Limitations
 ---------------------------
 
-- We assume that the relative risk of postpartum hemorrhage incidence with misoprostol in practice is a value that we can find in the literature (Note: 
-  the value we are using is from [Gallos-et-al-2018-Cochrane-Review]_.)
+- We apply a single relative risk to the incidence at the 300mL level (and due to the cascading nature of the PPH cause model design, this ripples as-is to all levels of PPH).
+  The Cochrane review reports values for the 500mL level and the 1L level.
+  It reports a relative risk closer to 1 (less effectiveness) on PPH at the 1L level, so we are likely overestimating the impact
+  there.
+  It does not report anything directly on incidence at the 300mL level, nor on PPH death, but the directionality of the two RRs reported
+  suggest that we may be underestimating the effect on incidence at the 300mL level and overestimating the effect on PPH death.
+- We assume that misoprostol's effectiveness for an individual is unrelated to the severity of PPH that individual *would* have had without misoprostol.
 - We only consider the use of misoprostol in the prevention of postpartum hemorrhage, despite other documented clinical uses of misoprostol,
   such as for therapeutic abortion.
-- We currenty do not model the increased risk of hyperpyrexia due to misoprostol consumption, because this adverse effect is most likely to occur 
+- We currently do not model the increased risk of hyperpyrexia due to misoprostol consumption, because this adverse effect is most likely to occur 
   when dosage is higher than the recommended 600 micrograms of misoprostol. (Note: [Hofmeyr-et-al-2013-Cochrane-Review]_ found that "Pyrexia (defined as body temperature over 38°C) was increased with misoprostol compared 
   with controls (56 studies, 2776/25,647 (10.8%) versus 614/26,800 (2.3%); average RR 3.97, 95% CI 3.13 to 5.04; Tau² = 0.47, I² = 80%). The effect 
   was greater for trials using misoprostol 600 µg or more (27 studies; 2197/17,864 (12.3%) versus 422/18,161 (2.3%); average RR 4.64; 95% CI 3.33 to 
@@ -183,7 +198,7 @@ Validation and Verification Criteria
 ------------------------------------
 
 - Population-level incidence rate should be the same as when this intervention is not included in the model.
-- The ratio of postpartum hemorrhage incidence among those without misoprostol divided by those with misoprostol
+- The ratio of postpartum hemorrhage incidence (at the 300mL level) among those without misoprostol divided by those with misoprostol
   should equal the relative risk parameter used in the model.
 - The baseline coverage of misoprostol in each facility type should match the values in the artifact.
 - Only simulants who attend ANC and deliver at home receive misoprostol
