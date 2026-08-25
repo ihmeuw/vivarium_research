@@ -183,7 +183,7 @@ Data Tables
     * - cfr
       - case fatality rate of abortion/miscarriage/ectopic pregnancy maternal disorders
       - (csmr_c374 + csmr_c995) / (incidence_c374 + incidence_c995)
-      - The value of cfr is a probabiity in [0,1]
+      - The value of cfr is a probability in [0,1]
     * - incidence_c374, incidence_c995
       - incidence rate of ectopic pregnancy, abortion/miscarriage (respectively)
       - como

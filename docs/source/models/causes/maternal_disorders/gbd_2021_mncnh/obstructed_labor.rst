@@ -263,7 +263,7 @@ calculations as well as for the calculation of YLDs in the next section.
     * - cfr
       - case fatality rate of obstructed labor and uterine rupture
       - csmr_c370 / incidence_c370
-      - The value of cfr is a probabiity in [0,1]
+      - The value of cfr is a probability in [0,1]
     * - incidence_c370
       - incidence rate of obstructed labor and uterine rupture
       - como
