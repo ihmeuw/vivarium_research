@@ -37,7 +37,8 @@ Conceptual framing
 What is uncertainty?
 ++++++++++++++++++++
 
-"Uncertainty" refers to all the reasons we don't know something.
+"Uncertainty" is the extent to which we don't know something.
+We can subdivide it into groups by the different *reasons* we have for not knowing.
 
 To make this concrete, we use a guiding example.
 Suppose we are interested in the impact of 70% coverage of iron and folic acid (IFA) supplementation (versus none) on anemia during pregnancy
@@ -53,7 +54,7 @@ We won't describe the entirety of how the hypothetical model works here,
 but let's say it uses the GBD 2023 estimates of hemoglobin exposure in pregnancy
 and then applies a constant additive effect of IFA supplementation from a meta-analysis.
 
-What are some limits on our knowledge that cause us not to know exactly that 2.3 percentage point number,
+What are some *reasons* we do not know exactly that 2.3 percentage point number,
 when we have the Vivarium model standing in for the time machine, perfect control, and perfect measurements?
 
 Here are a few:
@@ -78,17 +79,17 @@ Just from the few examples we've enumerated in the previous section, we can star
 Items 1 and 2 are examples of **parameter uncertainty** --
 uncertainty about the values of parameters to put into the model.
 
-Items 3-5 are examples of **structural** or **model uncertainty** --
-they arise from simplifications and assumptions in the model structure itself.
-This can also include the inclusion or exclusion of certain attributes or causal effects in the model.
+Items 3-5 are examples of **model structure uncertainty** --
+they arise from simplifications and assumptions in the model structure itself,
+e.g. the inclusion or exclusion of certain attributes or causal effects in the model.
 
 Items 6-7 are examples of **computational uncertainty** -- this is uncertainty that
 is caused by the finite computational resources we use, not the real-world data we
 have or the way we structure our model.
-Item 6 is called **stochastic uncertainty** -- it arises from our use of (pseudo-)randomness in the simulation process.
+Item 6 is called **Monte Carlo uncertainty** -- it arises from our use of (pseudo-)randomness in the simulation process.
 Item 7 is called **parameter sampling uncertainty** -- it arises from our use of a finite number of samples of the parameter distributions in the simulation process.
 
-Item 8 is an example of **finite-population uncertainty** -- a specific type of **model uncertainty** that arises
+Item 8 is an example of **finite-population uncertainty** -- a specific type of **model structure uncertainty** that arises
 from an assumption implicit in our models that a population is an infinite distribution of individuals,
 and therefore that no specific individual matters to the population-level outcome.
 This is clearly incorrect (a population is truly a finite set of individuals),
@@ -108,8 +109,8 @@ so both the GBD and Vivarium models make this assumption.
   was a shorthand way to refer to the continuous *distribution* of hemoglobin in a hypothetical infinite population,
   which is what GBD actually estimates about 2023.
 
-Parameter, model, and computational uncertainty collectively cover *all* our uncertainty.
-Parameter and model uncertainty cover how our model *design* differs from the real world.
+Parameter, model structure, and computational uncertainty collectively cover *all* our uncertainty.
+Parameter and model structure uncertainty cover how our model *design* differs from the real world.
 Computational uncertainty is how the model we run on a real computer differs from its idealized design.
 
 In diagram form, here is the hierarchical taxonomy we have created:
@@ -121,10 +122,10 @@ In diagram form, here is the hierarchical taxonomy we have created:
   Some aspects of this taxonomy are derived from `Briggs et al. <https://www.sciencedirect.com/science/article/pii/S1098301512016592>`__,
   but we have adapted it.
 
-The connection between parameter and model uncertainty
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The connection between parameter and model structure uncertainty
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Parameter and model uncertainty are more closely related than you might initially think.
+Parameter and model structure uncertainty are more closely related than you might initially think.
 We actually *choose* when designing the model which aspects of our uncertainty to put in which
 category.
 To see this, consider the example item 5 above: "Our model oversimplifies by assuming that the effect of IFA supplementation is to increase everyone's hemoglobin by a constant amount."
@@ -132,12 +133,12 @@ It would be *exactly equivalent* for our model to assume that the effect of IFA 
 is, instead of a constant, a normally distributed random variable, with a standard deviation of **zero**.
 With the model parameterized this way, we could have sought out data about the standard deviation of the effect,
 and found an estimate with uncertainty about this parameter instead of assuming it is any fixed value.
-In so doing, we would have transferred the question of individual heterogeneity of effect from model uncertainty to parameter uncertainty.
+In so doing, we would have transferred the question of individual heterogeneity of effect from model structure uncertainty to parameter uncertainty.
 
-In this light, model uncertainty is simply the uncertainty we have chosen not to quantify within our model;
+In this light, model structure uncertainty is simply the uncertainty we have chosen not to quantify within our model;
 it is the uncertainty we have *ignored* by making fixed modeling assumptions rather than
 adding more parameters.
-This doesn't mean that model uncertainty is bad.
+This doesn't mean that model structure uncertainty is bad.
 There is a real cost to us of making our model more complex, and our model **always** must make
 some assumptions.
 When we add more parameters, as in the above example, we also add even more (but smaller) structural
@@ -180,7 +181,7 @@ For non-GBD parameters from literature sources or for GBD covariate estimates, i
 This assumes independence between parameters.
 
 We *also* use different randomness between draws in addition to different parameter values,
-which means that results differ between draws due to both parameter uncertainty and stochastic uncertainty.
+which means that results differ between draws due to both parameter uncertainty and Monte Carlo uncertainty.
 
 For each result we are interested in, we calculate it separately for each draw.
 We only summarize final results across all draws as the *last* step before visualization/reporting (see also the :ref:`results processing tips page <vivarium_best_practices_results_processing>`).
@@ -200,28 +201,28 @@ We address uncertainty qualitatively by:
 
 .. todo::
   Sections below here have not been updated.
-  We should have a section on CRN and how it reduces stochastic uncertainty in the current practice above.
+  We should have a section on CRN and how it reduces Monte Carlo uncertainty in the current practice above.
   We should consolidate (and simplify?) advice on selecting simulated population size, and the "random seed" stuff should likely be its own section.
   Then, include a section with a proposal for how to improve our current practice, which I think of as having multiple paths forward:
   
-  * Short-term: what do our uncertainty intervals mean now? Basically, a parameter uncertainty and an overestimate of stochastic uncertainty.
+  * Short-term: what do our uncertainty intervals mean now? Basically, a parameter uncertainty and an overestimate of Monte Carlo uncertainty.
     Add parameter sampling uncertainty.
     Is this useful or meaningful to our clients? What should we communicate?
-  * Medium-term: with cross-scenario communication, correctly quantify stochastic uncertainty.
+  * Medium-term: with cross-scenario communication, correctly quantify Monte Carlo uncertainty.
   * Long-term: out-of-sample validation to directly quantify total uncertainty;
     does this obviate everything we've already done, or will we use our
     parameter + computational uncertainty as a predictor?
 
-Stochastic uncertainty
-----------------------
+Monte Carlo uncertainty
+-----------------------
 
 We can do this by increasing the number of simulants in our simulation, **per draw** (remember, we need to run a simulation for each draw).
 The only downside of more simulants is more computational cost.
-Vivarium also utilizes a technique called :ref:`common random numbers <vivarium:crn_concept>` to reduce stochastic uncertainty (for a given population size).
+Vivarium also utilizes a technique called :ref:`common random numbers <vivarium:crn_concept>` to reduce Monte Carlo uncertainty (for a given population size).
 
-This overstates our stochastic uncertainty because each draw has a smaller population size
+This overstates our Monte Carlo uncertainty because each draw has a smaller population size
 than the total population size across all draws.
-A simulation that splits its population across more draws will appear to have more stochastic uncertainty
+A simulation that splits its population across more draws will appear to have more Monte Carlo uncertainty
 than a simulation that splits the same total population across fewer draws,
 even though the total number of random events informing our estimate is the same.
 
@@ -245,7 +246,7 @@ As we split our simulated population size into subgroups, each subgroup will uti
 
 Therefore, you may hear software engineers or researchers discussing "how many seeds" to include in a given simulation run *per draw*. While this is useful shorthand from a simulation implementation standpoint, researchers should always consider it in tandem with **simulated population size per draw**.
 
-Simulated population size per draw will directly affect the impact of stochastic uncertainty in simulation results. You can think of this like stochastic uncertainty in coin flip experiments. If you flip a coin a small number of times, you may not be surprised if you see tails more or less than 50% of the time. However, if you flip a coin *many* times, you will expect that you will see tails pretty close to 50% of the time. In this same way, if we have a small number of simulants in our population, we should not be suprised if we simulation outputs vary from expected population rates due to random chance (stochastic variation). However, as we increase the population size, we should expect that simulation outputs will be generally closer to expected population rates.
+Simulated population size per draw will directly affect the impact of Monte Carlo uncertainty in simulation results. You can think of this like stochastic uncertainty in coin flip experiments. If you flip a coin a small number of times, you may not be surprised if you see tails more or less than 50% of the time. However, if you flip a coin *many* times, you will expect that you will see tails pretty close to 50% of the time. In this same way, if we have a small number of simulants in our population, we should not be suprised if we simulation outputs vary from expected population rates due to random chance (Monte Carlo variation). However, as we increase the population size, we should expect that simulation outputs will be generally closer to expected population rates.
 
 Interaction between random seeds and simulated population sizes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
