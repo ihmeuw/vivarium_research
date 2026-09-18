@@ -61,6 +61,7 @@ extensions = [
     'nbsphinx',
     'IPython.sphinxext.ipython_console_highlighting',
     'fix-secnum',
+    'causal_graph',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

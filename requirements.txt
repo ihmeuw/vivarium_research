@@ -5,3 +5,4 @@ nbsphinx
 ipython
 ipywidgets
 matplotlib
+pyyaml

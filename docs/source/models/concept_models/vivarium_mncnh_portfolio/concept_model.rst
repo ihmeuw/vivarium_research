@@ -215,30 +215,13 @@ and the simulant that they model.
 * The :ref:`Neonatal component <mncnh_portfolio_neonatal_component>`, which models the
   first month of life for newborns.
 * The :ref:`Postpartum component <mncnh_portfolio_postpartum_component>`, which models the
-  six weeks after the end of pregnancy for the pregnant person.
+  nine months after the end of pregnancy for the pregnant person.
 
 .. warning::
 
   When we say "component" here, we mean something distinct from a
   :ref:`Vivarium component <vivarium:components_concept>`.
   Because this is confusing, we intend to switch to a different term.
-
-.. todo::
-
-  There are several ways in which this "timespan and simulant" split is not respected.
-  This is a leaky abstraction.
-  A more principled way to describe these components would be by their causal relationships.
-  We should revisit this.
-
-Graphically, the component breakdown looks like this:
-
-.. image:: component_overview_diagram.drawio.png
-
-.. note::
-
-  Do not interpret the x-axis in this diagram as time, since e.g. the duration of pregnancy is not at all
-  constant.
-  Also, if misinterpreted this way, the x-axis would be wildly not to scale.
 
 However, the only situation in which all components are actually used for a given simulant
 dyad is the case in which the pregnancy results in a live birth and the birthing person survives
@@ -269,6 +252,16 @@ This helps us make sure we aren't creating any cyclic dependencies.
 Technically, any order satisfying this property is an equivalent, valid order in which
 the modules could be run in the simulation.
 
+Here is an interactive causal diagram/concept model diagram of this model:
+
+.. causal-graph:: causal_graph.yaml
+   :collapse: 1
+   :height: 700px
+
+The diagram above and the module tables below are both generated from
+:download:`causal_graph.yaml <causal_graph.yaml>`, which is the single source of truth
+for this model's causal structure.
+
 .. note::
 
   There is :ref:`a template <2024_vivarium_mncnh_portfolio_module_template>` to use when creating new module pages.
@@ -292,88 +285,8 @@ Pregnancy component
 
 .. _mncnh_portfolio_pregnancy_component_modules:
 
-.. list-table:: Pregnancy Component Modules
-    :header-rows: 1
-
-    * - Module
-      - Inputs
-      - Outputs
-      - Nested subcomponents
-    * - :ref:`Initial attributes <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-      - 
-      - * Maternal age at end of pregnancy
-        * Broad pregnancy outcome (live/stillbirth vs abortion/miscarriage/ectopic)
-        * ANC propensity
-        * LBWSG category propensity
-        * IFD propensity
-        * Anemia intervention propensity
-      - * :ref:`Pregnancy demography <other_models_pregnancy_demography>`
-        * :ref:`Broad pregnancy outcome <pregnancy_broad_outcome_section>`
-        * :ref:`Facility choice propensity correlation <facility_choice_correlated_propensities_section>`
-    * - :ref:`Antenatal care <2024_vivarium_mncnh_portfolio_anc_module>`
-      - * Broad pregnancy outcome
-        * ANC propensity
-      - * First trimester ANC attendance
-        * Later pregnancy ANC attendance
-        * ANC attendance category
-      - 
-    * - :ref:`Hemoglobin at the start of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-      - * Maternal age at end of pregnancy
-      - * Hemoglobin at the start of pregnancy
-      - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
-    * - :ref:`First trimester hemoglobin <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-      - * Hemoglobin at the start of pregnancy
-        * First trimester ANC attendance
-        * Anemia intervention propensity
-      - * Hemoglobin after first trimester ANC visit
-        * Coverage of IFA/MMS at first trimester ANC visit
-      - * :ref:`Oral iron supplementation intervention (IFA/MMS) <oral_iron_antenatal>`
-    * - :ref:`Anemia screening <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-      - * Hemoglobin after first trimester ANC visit
-        * Later pregnancy ANC attendance
-        * Anemia intervention propensity
-      - * Hemoglobin screening (test hemoglobin) coverage/result
-        * Ferritin screening coverage/result
-        * True hemoglobin exposure (dichotomous)
-      - * :ref:`Anemia screening interventions <anemia_screening>`
-    * - :ref:`Hemoglobin after later ANC visit <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-      - * Hemoglobin after first trimester ANC visit
-        * Later pregnancy ANC attendance
-        * Hemoglobin screening coverage/result
-        * Ferritin screening coverage/result
-        * Receipt of IFA/MMS at first trimester ANC visit
-      - * Hemoglobin at end of pregnancy
-        * Coverage of IFA/MMS at any time in pregnancy
-        * Coverage of IV iron 
-      - * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
-        * :ref:`Oral iron supplementation intervention (IFA/MMS) <oral_iron_antenatal>`
-    * - :ref:`Pregnancy <2024_vivarium_mncnh_portfolio_pregnancy_module>`
-      - * Broad pregnancy outcome
-        * LBWSG category propensity
-        * Coverage of IFA/MMS at any time in pregnancy (affects birth outcome, gestational age, birthweight)
-        * Coverage of IV iron (affects birth outcome, gestational age, birthweight)
-      - * Pregnancy outcome (live birth vs stillbirth vs abortion/miscarriage/ectopic)
-        * Gestational age at end of pregnancy, unmodified by interventions
-        * Gestational age at end of pregnancy, modified by interventions
-        * Preterm status
-        * Sex of infant
-        * Birthweight, unmodified by interventions
-        * Birthweight, modified by interventions
-      - * :ref:`Pregnancy model <other_models_pregnancy_closed_cohort_mncnh>`
-        * :ref:`LBWSG exposure <2021_risk_exposure_lbwsg>`
-    * - :ref:`AI ultrasound <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-      - * ANC attendance category
-        * Gestational age at end of pregnancy, modified by interventions
-      - * Ultrasound summary
-        * Estimated gestational age
-        * Believed preterm status
-      - 
-    * - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
-      - * Broad pregnancy outcome
-        * Maternal age at end of pregnancy
-      - * Abortion/miscarriage/ectopic pregnancy maternal disorders YLDs
-        * Abortion/miscarriage/ectopic pregnancy maternal disorders death
-      - * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
+.. causal-graph-table:: pregnancy
+   :file: causal_graph.yaml
 
 .. _mncnh_portfolio_intrapartum_component:
 
@@ -383,7 +296,14 @@ Intrapartum component
 .. note::
 
   Only pregnancies resulting in live births or stillbirths (NOT abortions/miscarriages/ectopic pregnancies), in which the parent does not die of antepartum maternal disorders, will proceed to the intrapartum component,
-  as described above. Both antepartum and intrapartum stillbirths will proceed to the intrapartum component. However, antepartum stillbirths will only be eligible for intrapartum interventions that act on maternal health (such as misoprostol and azithromycin) and will not be eligible for intrapartum interventions intended for neonatal health (such as antenatal corticosteroids) as the fetus will have already passed prior to the onset of labor, but delivery of the fetal remains will still be necessary. Intrapartum stillbirths will remain eligible for all intrapartum interventions. 
+  as described above.
+
+.. todo::
+  We plan to refine our stillbirth model in the future, and this may include categorizing stillbirths more finely
+  by time of occurrence (antepartum vs intrapartum).
+  There is still some thinking to do about how this may relate to the gate on this component in the previous note.
+  Whether or not intrapartum interventions are delivered may depend on when the stillbirth is *discovered* vs when it *occurred*.
+  Known antepartum stillbirths may only be eligible for intrapartum interventions that act on maternal health (such as misoprostol and azithromycin) and not intrapartum interventions intended for neonatal health (such as antenatal corticosteroids).
 
 .. warning::
 
@@ -397,42 +317,8 @@ Intrapartum component
   noting this limitation until we implement a strategy to address this (`see related 
   ticket here <https://jira.ihme.washington.edu/browse/SSCI-2310>`_)
 
-.. list-table:: Intrapartum Component Modules
-    :header-rows: 1
-
-    * - Module
-      - Inputs
-      - Outputs
-      - Nested subcomponents
-    * - :ref:`Facility choice <2024_vivarium_mncnh_portfolio_facility_choice_module>`
-      - * IFD propensity
-        * Believed preterm status
-      - * IFD status
-        * Birth facility
-      - * :ref:`Facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
-    * - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-      - * Birth facility
-        * Believed gestational age
-        * ANC attendance
-      - * Intrapartum azithromycin coverage 
-        * Antenatal corticosteroid coverage
-        * Misoprostol coverage
-        * E-MOTIVE coverage
-      - * :ref:`Intrapartum azithromycin <azithromycin_intervention>` 
-        * :ref:`Misoprostol coverage <misoprostol_intervention>`
-        * :ref:`Antenatal corticosteroids <acs_intervention>`
-        * :ref:`E-MOTIVE <emotive_intervention>`
-    * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
-      - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
-        * :ref:`Misoprostol coverage <misoprostol_intervention>`
-        * :ref:`E-MOTIVE coverage <emotive_intervention>`
-        * Hemoglobin at end of pregnancy
-      - * Maternal disorders outcomes (see outcome table)
-      - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
-        * :ref:`Postpartum hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>`
-        * :ref:`Maternal sepsis <2021_cause_maternal_sepsis_mncnh>`
-        * :ref:`Maternal obstructed labor and uterine rupture <2021_cause_obstructed_labor_mncnh>`
-        * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
+.. causal-graph-table:: intrapartum
+   :file: causal_graph.yaml
 
 .. _mncnh_portfolio_neonatal_component:
 
@@ -443,89 +329,16 @@ Neonatal component
 
   Only live births proceed to the neonatal component, as described above.
 
-.. list-table:: Neonatal Component Modules
-  :header-rows: 1
-
-  * - Module
-    - Inputs
-    - Outputs
-    - Nested subcomponents
-  * - :ref:`Neonatal module <2024_vivarium_mncnh_portfolio_neonatal_module>`
-    - * Birth facility
-      * Birthweight, modified by interventions
-      * Birthweight, unmodified by interventions
-      * Gestational age at end of pregnancy, modified by interventions
-      * Gestational age at end of pregnancy, unmodified by interventions 
-      * RDS intervention propensity
-      * Hemoglobin exposure at birth (affects neonatal sepsis)
-      * Sex of infant (determines sex-specific mortality rates)
-    - * Neonatal probiotics coverage
-      * CPAP coverage
-      * Neonatal mortality outcomes (see outcome table)
-    - * :ref:`Neonatal Mortality Model <2021_cause_neonatal_disorders_mncnh>`
-      * :ref:`Neonatal Sepsis and Other Infections Model <2021_cause_neonatal_sepsis_mncnh>`
-      * :ref:`Neonatal Encephalopathy Model <2021_cause_neonatal_encephalopathy_mncnh>`
-      * :ref:`Preterm Birth <2021_cause_preterm_birth_mncnh>`
-      * :ref:`Antibiotics for treating bacterial infections <intervention_neonatal_antibiotics>`
-      * :ref:`CPAP for treating Preterm with RDS <intervention_neonatal_cpap>`
-      * :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
-      * :ref:`Antenatal corticosteroids <acs_intervention>`
-      * :ref:`LBWSG risk effects <2019_risk_effect_lbwsg>`
-      * :ref:`Hemoglobin risk effects <2023_hemoglobin_effects>`
+.. causal-graph-table:: neonatal
+   :file: causal_graph.yaml
 
 .. _mncnh_portfolio_postpartum_component:
 
 Postpartum component
 --------------------
 
-.. list-table:: Postpartum Component Modules
-  :header-rows: 1
-
-  * - Module
-    - Inputs
-    - Outputs
-    - Nested subcomponents
-  * - :ref:`Postpartum hemoglobin <2024_vivarium_mncnh_portfolio_postpartum_hemoglobin>`
-    - * Hemoglobin at end of pregnancy
-      * Postpartum hemorrhage incidence
-    - * Hemoglobin during the first six weeks after the end of pregnancy
-      * Hemoglobin between six weeks and nine months after the end of pregnancy
-    - * :ref:`Hemoglobin risk exposure <2023_hemoglobin_exposure>`
-      * :ref:`Postpartum hemorrhage risk effects <2023_risk_effect_maternal_hemorrhage>` 
-  * - :ref:`Anemia YLDs <2024_vivarium_mncnh_portfolio_anemia_module>`
-    - * Hemoglobin at start of pregnancy
-      * Hemoglobin at end of pregnancy
-      * Hemoglobin during the first six weeks after the end of pregnancy
-      * Hemoglobin between six weeks and nine months after the end of pregnancy
-      * IFA/MMS coverage
-      * IV iron coverage
-      * First trimester ANC attendance
-      * Pregnancy duration
-    - * Anemia YLDs
-    - * :ref:`Anemia impairment <2019_anemia_impairment>`
-  * - :ref:`Postpartum depression <2024_vivarium_mncnh_portfolio_ppd_module>`
-    - * Hemoglobin at end of pregnancy
-    - * Maternal disorders outcomes (see outcome table)
-    - * :ref:`Postpartum depression <2021_cause_postpartum_depression_mncnh>`
-      * :ref:`Hemoglobin risk effects document <2023_hemoglobin_effects>`
-
-**Concept Model Map:**
-
-Please note that this is designed as a helpful visual aid, but is not
-designed to be fully inclusive of all work or modeled components. 
-
-**Pregnancy, influenced by ANC attendance**
-
-.. image:: pregnancy_figure_overview.png
-
-**Intrapartum, influenced by delivery facility**
-
-.. image:: intrapartum_figure_overview.png
-
-**Neonatal, influenced by neonatal care facility**
-
-.. image:: neonatal_figure_overview.png
-
+.. causal-graph-table:: postpartum
+   :file: causal_graph.yaml
 
 .. _mncnh_portfolio_3.1:
 

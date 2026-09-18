@@ -1,0 +1,346 @@
+/* Interactive causal graph viewer (see causal_graph.py / causal_graph.js). */
+
+.causal-graph {
+  margin: 1em 0;
+  border: 1px solid #d7dbe0;
+  border-radius: 4px;
+  background: #fbfbfc;
+  /* Stated explicitly rather than inherited: this widget also renders on the
+     standalone "New tab" page, which has no docs theme to inherit from. */
+  font-family: Lato, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+               Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #404040;
+}
+
+.causal-graph-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  align-items: center;
+  padding: 0.5em 0.7em;
+  border-bottom: 1px solid #e4e7ea;
+  font-size: 0.85em;
+}
+
+.causal-graph-controls select,
+.causal-graph-controls button {
+  font-size: inherit;
+  padding: 0.15em 0.5em;
+}
+
+/* Preset levels read as one segmented control. */
+.causal-graph-controls .cg-presets {
+  display: inline-flex;
+}
+
+.causal-graph-controls .cg-presets button {
+  border: 1px solid #c8cdd4;
+  background: #fff;
+  margin: 0 0 0 -1px;
+  cursor: pointer;
+}
+
+.causal-graph-controls .cg-presets button:first-child {
+  margin-left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.causal-graph-controls .cg-presets button:last-child {
+  border-radius: 0 3px 3px 0;
+}
+
+.causal-graph-controls .cg-presets button:hover {
+  background: #f0f3f7;
+}
+
+/* Two canvases are stacked here. A redraw builds the next graph in the hidden
+   one and only swaps once its layout is done, so the current graph stays on
+   screen throughout instead of blanking. */
+.causal-graph-stage {
+  position: relative;
+  height: var(--cg-height, 640px);
+  width: 100%;
+}
+
+.causal-graph-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: grab;
+}
+
+/* Nodes are clickable, the background is draggable. Order matters: panning
+   wins over both, since these have equal specificity. */
+.causal-graph-canvas.cg-over-node {
+  cursor: pointer;
+}
+
+.causal-graph-canvas.cg-panning {
+  cursor: grabbing;
+}
+
+.causal-graph-canvas.cg-offstage {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------------- legend */
+
+.causal-graph-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15em 1.1em;
+  align-items: center;
+  padding: 0.5em 0.7em;
+  border-top: 1px solid #e4e7ea;
+  font-size: 0.78em;
+  color: #444;
+}
+
+/* An author `display` beats what the hidden attribute does, so hiding a legend
+   has to be spelled out or both views' legends show at once. */
+.causal-graph-legend[hidden] {
+  display: none;
+}
+
+.causal-graph-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.causal-graph-legend .cg-key {
+  display: inline-block;
+  width: 22px;
+  height: 13px;
+  flex: none;
+}
+
+.cg-key-stochastic {
+  border: 3px solid #4C72B0;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.cg-key-deterministic {
+  border: 1px solid #4C72B0;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.cg-key-collapsed {
+  border: 2px dashed #4C72B0;
+  border-radius: 3px;
+  background: #fff;
+}
+
+/* Drawn with members inside it. Without them this swatch was a pale box, and
+   so was the one for a reported variable: at 22x13 the two were the same
+   picture. What distinguishes an open group is that it contains things. */
+.cg-key-box {
+  border: 1px solid #4C72B0;
+  border-radius: 3px;
+  background-color: rgba(76, 114, 176, 0.07);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='5'%3E%3Crect width='7' height='5' rx='1.5' fill='%234C72B0' fill-opacity='.5'/%3E%3Crect x='9' width='7' height='5' rx='1.5' fill='%234C72B0' fill-opacity='.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cg-key-observed {
+  border: 1px solid #4C72B0;
+  border-radius: 3px;
+  background: #eef3fa;
+}
+
+/* The query view's own keys: both query variables share one colour, since the
+   question does not care which is which. */
+.cg-key-query {
+  border: 2.5px solid #1f6feb;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.cg-key-shared {
+  border: 2.5px solid #b06f00;
+  border-radius: 3px;
+  background: #fff;
+}
+
+/* Edge keys are drawn as a rule through the middle of the swatch. */
+.cg-key-causal,
+.cg-key-correlated {
+  height: 13px;
+  position: relative;
+}
+
+.cg-key-causal::before,
+.cg-key-correlated::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  border-top: 2px solid #9aa0a6;
+}
+
+.cg-key-correlated::before {
+  border-top-style: dashed;
+  border-top-color: #c44e52;
+}
+
+/* ------------------------------------------------------------- fullscreen */
+
+.causal-graph.cg-fullscreen {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #fbfbfc;
+}
+
+.causal-graph.cg-fullscreen .causal-graph-stage {
+  flex: 1;
+  height: auto;
+}
+
+/* The generated module tables. Column widths are left to the browser, as they
+   were when these were hand-written list-tables. */
+table.causal-graph-table {
+  width: 100%;
+}
+
+/* The one thing the browser gets wrong unaided: with the other columns holding
+   long bullet lists, it shrinks this one to its longest word -- 80px -- and
+   sets each module name one word per line. */
+table.causal-graph-table th:first-child,
+table.causal-graph-table td:first-child {
+  min-width: 9em;
+}
+
+
+table.causal-graph-table th,
+table.causal-graph-table td {
+  vertical-align: top;
+}
+
+table.causal-graph-table ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+/* ------------------------------------------------------- query panel */
+
+.causal-graph-panel {
+  padding: 0.6em 0.8em;
+  border-bottom: 1px solid #e4e7ea;
+  font-size: 0.85em;
+  background: #f7f9fc;
+}
+
+.causal-graph-panel .cg-hint {
+  display: block;
+  color: #555;
+}
+
+.causal-graph-panel .cg-panel-pair {
+  font-weight: bold;
+  font-size: 1.05em;
+}
+
+.causal-graph-panel .cg-panel-body {
+  margin: 0.4em 0;
+}
+
+.causal-graph-panel .cg-fact {
+  display: block;
+  margin: 0.15em 0;
+}
+
+.causal-graph-panel .cg-good { color: #2f7d32; }
+.causal-graph-panel .cg-bad { color: #b3261e; }
+
+.causal-graph-panel .cg-note {
+  display: block;
+  margin-top: 0.3em;
+  color: #777;
+  font-style: italic;
+}
+
+.causal-graph-panel .cg-panel-actions button {
+  font-size: inherit;
+  margin-right: 0.4em;
+  padding: 0.15em 0.5em;
+}
+
+.causal-graph-controls button.cg-active {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: #fff;
+}
+
+.causal-graph-panel .cg-panel-pick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  align-items: center;
+  margin-bottom: 0.4em;
+}
+
+.causal-graph-panel .cg-pick-label {
+  color: #555;
+}
+
+.causal-graph-panel select {
+  font-size: inherit;
+  max-width: 17em;
+}
+
+/* Hover explanation, floating over the stage rather than sitting in the panel:
+   what a link stands for belongs next to the link. pointer-events:none so it
+   cannot come between the pointer and what it is describing. */
+.causal-graph .cg-tip {
+  position: absolute;
+  z-index: 30;
+  max-width: 24em;
+  padding: 0.3em 0.5em;
+  border-radius: 3px;
+  background: rgba(28, 33, 40, 0.93);
+  color: #fff;
+  font-size: 0.82em;
+  line-height: 1.35;
+  pointer-events: none;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.causal-graph .cg-tip[hidden] {
+  display: none;
+}
+
+/* The whole-window page (_static/causal-graph-*.html), which holds one graph
+   and nothing else. The stage takes the leftover height; min-height:0 is what
+   stops it from pushing the legend off the bottom. */
+body.cg-standalone {
+  margin: 0;
+  background: #fff;
+}
+
+body.cg-standalone .causal-graph {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.cg-standalone .causal-graph-stage {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+}
