@@ -54,7 +54,7 @@ GBD 2023 Modeling Strategy
 
     Note that :ref:`low hemoglobin risk exposure <2023_hemoglobin_exposure>` values are expected to be similar between release ID 16 and 33, although there appear to be at least slight rounding differences. We have used release ID 33 to inform low hemoglobin risk exposure in the MNCNH portfolio model.
 
-    **NOTE:** As of September, 2026, low hemoglobin risk factor estimates from release ID 33 are reported to be unavailable via ``get_model_estimates`` shared functions despite being available in the now depracated ``get_draws`` according to correspondence with central computation. They have advised us to store these estimates as flat files rather than accessing them via shared functions. TODO: Include filepath when Hussain has it active.
+    **NOTE:** As of September, 2026, low hemoglobin risk factor estimates from release ID 33 are reported to be unavailable via ``get_model_estimates`` shared functions despite being available in the now deprecated ``get_draws`` according to correspondence with central computation. They have advised us to store these estimates as flat files rather than accessing them via shared functions. TODO: Include filepath when Hussain has it active.
 
   See `the pre-print for the GBD burden of proof model of low hemoglobin publication here <https://www.researchsquare.com/article/rs-7567885/v1>`__ for all details on the low hemoglobin risk modeling strategy.
 
