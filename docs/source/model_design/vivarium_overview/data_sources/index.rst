@@ -24,6 +24,10 @@ difficult task. Some helpful resources for understanding the GBD study are liste
 Pulling GBD Data using *Shared Functions*
 -----------------------------------------
 
+.. todo::
+
+   Update this section to reflect recent transition from ``get_draws`` to ``get_model_estimates`` and the implications for us (difficulty accessing past GBD rounds and especially release_id 33 (extra-capstone GBD 2023 estimates) that we had been using to inform components like our hemoglobin risk factor)
+
 IHME central computation maintains functions for accessing GBD data, referred to as "Shared Functions." `The main HUB page for shared functions can be found here <https://hub.ihme.washington.edu/display/SF/Shared+Functions+Home>`_
 
 Note that there is a central computation maintained conda environment that is guaranteed to have the latest version of all GBD shared functions, called :code:`gbd_env`, as described on the Shared Functions HUB page. 
