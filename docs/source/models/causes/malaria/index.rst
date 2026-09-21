@@ -178,15 +178,15 @@ Data Description
 	  - 
 	* - I
 	  - excess mortality rate
-	  - :math:`\frac{\text{deaths_c345}}{\text{population} \,\times\, \text{prevalence_calculated}}`
+	  - :math:`\frac{\text{deaths\_c345}}{\text{population} \,\times\, \text{prevalence\_calculated}}`
 	  - 
 	* - I
 	  - disability weight
-	  - 0 for early neonatal (ID 2) and late neonatal (ID 3) age groups, :math:`\displaystyle{\sum_{s\in \text{sequelae_malaria}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}` for all others
+	  - 0 for early neonatal (ID 2) and late neonatal (ID 3) age groups, :math:`\displaystyle{\sum_{s\in \text{sequelae\_malaria}}} \scriptstyle{\text{disability\_weight}_s \,\times\, \text{prevalence}_s}` for all others
 	  - Malaria sequelae are: 121, 122, 123
 	* - All
 	  - cause-specific mortality rate
-	  - 0 for early neonatal (ID 2) and late neonatal (ID 3) age groups, :math:`\frac{\text{deaths_c345}}{\text{population}}` for all other age groups
+	  - 0 for early neonatal (ID 2) and late neonatal (ID 3) age groups, :math:`\frac{\text{deaths\_c345}}{\text{population}}` for all other age groups
 	  - See note below for justification
 
 .. note:: 
@@ -223,12 +223,12 @@ steady state conditions.
 	* - i
 	  - S
 	  - I
-	  - 0 for neonatal age groups, :math:`\frac{\text{incidence_rate_c345}}{1-\text{prevalence_calculated}}` for all other ages
+	  - 0 for neonatal age groups, :math:`\frac{\text{incidence\_rate\_c345}}{1-\text{prevalence\_calculated}}` for all other ages
 	  - Equivalent to "load standard data" Vivarium public health function for incidence rates ("susceptible-population" incidence rate). Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
 	* - r
 	  - I
 	  - S
-	  - 0 for neonatal age groups, :math:`\frac{1}{\text{duration_c345}}` for all other ages
+	  - 0 for neonatal age groups, :math:`\frac{1}{\text{duration\_c345}}` for all other ages
 	  - 
 
 

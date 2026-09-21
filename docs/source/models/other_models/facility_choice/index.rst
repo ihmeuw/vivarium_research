@@ -561,7 +561,7 @@ following function :math:`f_\text{IFD}`:
 
 .. math::
 
-  \begin{align*}
+  \begin{aligned}
   \text{IFD status}
   &= f_\text{IFD}(\text{believed preterm status},\ u_\text{IFD}) \\
   &=  \begin{cases}
@@ -570,7 +570,7 @@ following function :math:`f_\text{IFD}`:
           \operatorname{do}(\text{believed preterm status})] \\
       \text{in-facility}, & \text{otherwise}.
       \end{cases}
-  \end{align*}
+  \end{aligned}
 
 Note that, as described in the previous section,  smaller values of
 :math:`u_\text{IFD}` correspond with home delivery, while larger values

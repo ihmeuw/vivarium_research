@@ -234,7 +234,7 @@ Data Description
      - 
    * - I
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c341}}{\text{population} \times \text{prevalence_c341}}`
+     - :math:`\frac{\text{deaths\_c341}}{\text{population} \times \text{prevalence\_c341}}`
      - 
    * - I
      - disability weights
@@ -254,7 +254,7 @@ Data Description
      - 
    * - ALL
      - cause specific mortality rate
-     - :math:`\frac{\text{deaths_c341}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c341}}{\text{population}}`
      - 
 
 **Prevalence of recovered state**
@@ -310,7 +310,7 @@ This approach makes the following assumptions:
    * - i
      - S
      - I
-     - :math:`\frac{\text{incidence_rate_c341}}{prevalence_S}`
+     - :math:`\frac{\text{incidence\_rate\_c341}}{prevalence_S}`
      - 
    * - r
      - I

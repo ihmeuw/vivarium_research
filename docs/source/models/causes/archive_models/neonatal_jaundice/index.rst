@@ -119,11 +119,11 @@ Data Descriptions
 	  - 
 	* - C
 	  - excess mortality rate
-	  - :math:`\frac{\text{deaths_c384}}{\text{population} \,\times\, \text{prevalence_c384}}`
+	  - :math:`\frac{\text{deaths\_c384}}{\text{population} \,\times\, \text{prevalence\_c384}}`
 	  -
 	* - C
 	  - disability weight
-	  - :math:`\displaystyle{\sum_{s\in \text{sequelae_c384}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+	  - :math:`\displaystyle{\sum_{s\in \text{sequelae\_c384}}} \scriptstyle{\text{disability\_weight}_s \,\times\, \text{prevalence}_s}`
 	  -
 	* - F
 	  - prevalence
@@ -143,7 +143,7 @@ Data Descriptions
 	  -
 	* - All
 	  - cause-specific mortality rate
-	  - :math:`\frac{\text{deaths_c384}}{\text{population}}`
+	  - :math:`\frac{\text{deaths\_c384}}{\text{population}}`
 	  -
 	 
 	  

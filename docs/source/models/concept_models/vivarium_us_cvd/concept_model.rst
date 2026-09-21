@@ -619,7 +619,7 @@ normal distribution with mean 0 and variance 0.5.
 The last step is combining these two components, which is done with this equation:
 
 .. math::
-  \text{inertia_propensity} = \Phi(\text{simulant_component} + \text{random_component})
+  \text{inertia\_propensity} = \Phi(\text{simulant\_component} + \text{random\_component})
 
 The sum of the two components has a standard normal distribution, which means 
 that the standard normal’s CDF of that sum is uniformly distributed between 

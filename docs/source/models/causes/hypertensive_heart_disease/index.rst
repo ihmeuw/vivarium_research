@@ -142,7 +142,7 @@ States Data
      - Notes
    * - All
      - cause-specific mortality (CSMR)
-     - :math:`\frac{\text{deaths_c498}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c498}}{\text{population}}`
      - Post CoDCorrect cause-level CSMR
    * - S
      - prevalence
@@ -158,7 +158,7 @@ States Data
      - EMR from the HF envelope model
    * - P
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_c498}} \times \sum\limits_{s\in sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_c498}} \times \sum\limits_{s\in sequelae} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      - 
 
 Transition Data
@@ -176,7 +176,7 @@ Transition Data
    * - 1
      - S
      - P
-     - :math:`{\text{incidence_m2412}} \times \text{propHF_HHD}`
+     - :math:`{\text{incidence\_m2412}} \times \text{propHF\_HHD}`
      - This is the incidence of HF due to HHD, assuming that the split for incidence is the same as prevalence
 
 Data Sources

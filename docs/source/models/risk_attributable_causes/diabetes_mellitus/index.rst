@@ -168,31 +168,31 @@ State and Transition Data Tables
      - 
    * - M 
      - prevalence
-     - :math:`{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{prevalence}_s}` 
+     - :math:`{\sum_{s\in \text{sequelae\_mod}}} \scriptstyle{\text{prevalence}_s}` 
      - = (prevalence of Diabetes Mellitus Type 1 uncomplicated sequelae + prevalence of Diabetes Mellitus Type 2 uncomplicated sequelae  
    * - Sev
      - prevalence
-     - :math:`{\sum_{s\in \text{sequelae_sev}}} \scriptstyle{\text{prevalence}_s}` 
+     - :math:`{\sum_{s\in \text{sequelae\_sev}}} \scriptstyle{\text{prevalence}_s}` 
      - = (prevalence of Diabetes Mellitus Type 1 all other sequelae (not including uncomplicated) + prevalence of Diabetes Mellitus Type 2 all other sequelae (not including uncomplicated)
    * - Sev
      - excess mortality rate (EMR) for severe DM 
-     - :math:`\frac{\text{CSMR*_c587}}{\text{prevalence_c587}}`
+     - :math:`\frac{\text{CSMR*\_c587}}{\text{prevalence\_c587}}`
      - cause-specific mortality rate of DM (\*indicates calculated measure) / prevalence of DM
    * - M
      - excess mortality rate (EMR) of moderate DM
-     - :math:`\frac{\text{CSMR*_c587}}{\text{prevalence_c587}}`
+     - :math:`\frac{\text{CSMR*\_c587}}{\text{prevalence\_c587}}`
      - cause-specific mortality rate of DM (\*indicates calculated measure) / prevalence of DM
    * - M
      - disability_weight
-     - :math:`\frac{{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c587}}`
+     - :math:`\frac{{\sum_{s\in \text{sequelae\_mod}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence\_c587}}`
      -
    * - Sev
      - disability_weight
-     - :math:`\frac{{\sum_{s\in \text{sequelae_sev}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c587}}`
+     - :math:`\frac{{\sum_{s\in \text{sequelae\_sev}}} \scriptstyle{\text{disability\_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence\_c587}}`
      -
    * - All
      - cause-specific mortality rate (csmr)
-     - :math:`\frac{\text{deaths_c587}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c587}}{\text{population}}`
      - calculated, not a direct GBD 2017 data input
 
 .. list-table:: Transition Data
@@ -207,12 +207,12 @@ State and Transition Data Tables
    * - 1
      - S  
      - M
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c587}}}{\text{prevalence_c587}} \times\ {\text{incidence_c587}}`
+     - :math:`\frac{\sum_{s\in \text{prevalence\_sequelae\_mod.sub\_causes.c587}}}{\text{prevalence\_c587}} \times\ {\text{incidence\_c587}}`
      - = weighted prevalence of moderate DM * incidence of DM
    * - 2
      - S  
      - Sev
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}}}{\text{prevalence_c587}} \times\ {\text{incidence_c587}}`
+     - :math:`\frac{\sum_{s\in \text{prevalence\_sequelae\_sev.sub\_causes.c587}}}{\text{prevalence\_c587}} \times\ {\text{incidence\_c587}}`
      - = weighted prevalence of severe DM * incidence of DM
    * - 3
      - M  

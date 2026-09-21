@@ -89,11 +89,11 @@ State and Transition Data Tables
      -
    * - C
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c382}}{\text{population} \,\times\, \text{prevalence_c382}}`
+     - :math:`\frac{\text{deaths\_c382}}{\text{population} \,\times\, \text{prevalence\_c382}}`
      - = (cause-specific mortality rate) / prevalence
    * - C
      - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c382}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae\_c382}}} \scriptstyle{\text{disability\_weight}_s \,\times\, \text{prevalence}_s}`
      - = average disability weight over all sequelae
    * - F
      - prevalence
@@ -113,7 +113,7 @@ State and Transition Data Tables
      -
    * - All
      - cause-specific mortality rate
-     - :math:`\frac{\text{deaths_c382}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c382}}{\text{population}}`
      -
 
 .. list-table:: Transition Data

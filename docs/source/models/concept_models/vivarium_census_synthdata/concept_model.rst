@@ -4259,7 +4259,7 @@ See the data sources and analysis section for how these variances were calculate
 The last step is combining these two components, which is done with this equation:
 
 .. math::
-  \text{income_propensity} = \Phi(\text{simulant_component} + \text{job_component})
+  \text{income\_propensity} = \Phi(\text{simulant\_component} + \text{job\_component})
 
 The sum of the two components has a standard normal distribution,
 which means that the standard normal's CDF of that sum is uniformly distributed between 0 and 1.
@@ -4372,13 +4372,13 @@ We break this down into two sub-questions:
 
   \text{employed}(t) = \text{employed}(t - 1) + (1 - \text{employed}(t - 1)) * 0.5 * 1 * \frac{28}{365} - \text{employed}(t - 1) * 0.5 * 0.42 * \frac{28}{365}
 
-2. Of those employed at time t1, what proportion are in the same job at time t2? Similarly, if we break the transition rate into 28-day timesteps, :math:`\text{same_job}(t) = 1 - (1 - 0.5 * \frac{28}{365})^{t}`
+2. Of those employed at time t1, what proportion are in the same job at time t2? Similarly, if we break the transition rate into 28-day timesteps, :math:`\text{same\_job}(t) = 1 - (1 - 0.5 * \frac{28}{365})^{t}`
 
 This implies:
 
 .. math::
 
-  log(income_\text{t2}) - log(income_\text{t1}) \sim Normal(0, 2 * \frac{\text{same_job}(12)}{\text{employed}(12)} * \sigma_\text{job}^2\sigma_\text{log(income)}^2)
+  log(income_\text{t2}) - log(income_\text{t1}) \sim Normal(0, 2 * \frac{\text{same\_job}(12)}{\text{employed}(12)} * \sigma_\text{job}^2\sigma_\text{log(income)}^2)
 
 where t2 is one year after t1.
 
@@ -4388,7 +4388,7 @@ Because we need to calculate a *single* simulant-specific/job-specific split (th
 
 .. math::
 
-  2 * \frac{\text{same_job}(12)}{\text{employed}(12)} * \sigma_\text{job}^2E(\sigma_\text{log(income)}^2) = 0.09
+  2 * \frac{\text{same\_job}(12)}{\text{employed}(12)} * \sigma_\text{job}^2E(\sigma_\text{log(income)}^2) = 0.09
 
 .. math::
 
@@ -4464,18 +4464,18 @@ non-military employed population, that is:
 
 .. math::
 
-  \text{num_employers}=
-  \frac{E(\text{num_simulants_needing_employer})}{E(\text{employer_size})}
+  \text{num\_employers}=
+  \frac{E(\text{num\_simulants\_needing\_employer})}{E(\text{employer\_size})}
 
 .. math::
 
-  E(\text{num_simulants_needing_employer}) = \text{num_simulants_working_age} * (1 - 0.3886 - 0.0032)
+  E(\text{num\_simulants\_needing\_employer}) = \text{num\_simulants\_working\_age} * (1 - 0.3886 - 0.0032)
 
 .. math::
 
-  E(\text{employer_size}) = e^{\mu_\text{size}+\frac{1}{2}*\sigma_\text{size}} \approx 90.017131
+  E(\text{employer\_size}) = e^{\mu_\text{size}+\frac{1}{2}*\sigma_\text{size}} \approx 90.017131
 
-where :math:`\text{num_simulants_working_age}` is the actual (not expected) number of working-age
+where :math:`\text{num\_simulants\_working\_age}` is the actual (not expected) number of working-age
 simulants in the initialized population.
 
 .. note::

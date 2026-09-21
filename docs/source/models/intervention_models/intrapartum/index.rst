@@ -10,3 +10,4 @@ Intrapartum Interventions
     azithromycin_intervention
     misoprostol_intervention
     acs_intervention
+    emotive_intervention

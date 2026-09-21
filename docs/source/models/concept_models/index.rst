@@ -13,6 +13,7 @@ Active concept model documents can be found here:
    vivarium_mncnh_portfolio/concept_model
    vivarium_moud/concept_model
    vivarium_alzheimers/concept_model
+   vivarium_mace_rct/concept_model
 
 A list of all (active and complete) concept model documents can be found here:
 

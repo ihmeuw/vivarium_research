@@ -322,7 +322,7 @@ The mortality and relapse inputs depend on the timestep size; input files are pr
    * - incidence_MM
      - S
      - NDMM
-     - :math:`\frac{\text{incidence_c486} * multiplier}{1 - \text{prev_c486}}`; multiplier is currently 1; see multiplier section above
+     - :math:`\frac{\text{incidence\_c486} * multiplier}{1 - \text{prev\_c486}}`; multiplier is currently 1; see multiplier section above
      - incidence of MM among susceptible population
    * - incidence_MM_first_relapse
      - NDMM

@@ -117,7 +117,7 @@ but we will use EMR. To adjust between CSMR and EMR values, you can use this equ
 
 .. math::
    
-   \text{EMR RR_cause,i} = \frac{\text{CSMR RR_cause,i}}{\text{incidence RR_cause,i}}
+   \text{EMR RR\_cause,i} = \frac{\text{CSMR RR\_cause,i}}{\text{incidence RR\_cause,i}}
 
 We have validated this equation in two ways. First, we checked this mathematically. 
 Using equations for incidence, EMR, and prevalence based on information we knew in the 

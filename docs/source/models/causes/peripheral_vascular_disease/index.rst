@@ -181,11 +181,11 @@ States Data
      - Notes
    * - All
      - cause-specific mortality (CSMR) 
-     - :math:`\frac{\text{deaths_c502}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c502}}{\text{population}}`
      - Post CoDCorrect cause-level CSMR
    * - S
      - prevalence
-     - :math:`1 - \text{prevalence_c502}`
+     - :math:`1 - \text{prevalence\_c502}`
      - 
    * - P
      - prevalence
@@ -201,7 +201,7 @@ States Data
      - 
    * - P
      - excess mortality
-     - :math:`\text{emr_m2532}`
+     - :math:`\text{emr\_m2532}`
      - 
    * - S
      - disability weight
@@ -209,7 +209,7 @@ States Data
      - 
    * - P
      - disability weights
-     - :math:`\frac{1}{\text{prevalence_c502}} \times \sum\limits_{s \in \text{sequelae}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence\_c502}} \times \sum\limits_{s \in \text{sequelae}} \text{disability\_weight}_s \cdot \text{prevalence}_s`
      - 
    * - D
      - disability weight

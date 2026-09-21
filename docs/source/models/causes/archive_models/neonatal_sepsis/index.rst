@@ -124,15 +124,15 @@ Data Description
      - 
    * - I
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c383}}{\text{population} \times \text{prevalence_c383}}`
+     - :math:`\frac{\text{deaths\_c383}}{\text{population} \times \text{prevalence\_c383}}`
      - = (cause-specific mortality rate) / prevalence
    * - I
      - disability weights
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c383}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae\_c383}}} \scriptstyle{\text{disability\_weight}_s \,\times\, \text{prevalence}_s}`
      - = average disability weight over all sequelae
    * - ALL
      - cause specific mortality rate
-     - :math:`\frac{\text{deaths_c383}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c383}}{\text{population}}`
      - 
 
 

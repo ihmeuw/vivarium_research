@@ -247,7 +247,7 @@ For rate, :math:`r`, in [rem_rate_mam, ux_rem_rate_sam, tx_rem_rate_sam]:
 
 .. math::
 
-  r_i = r * (1 - PAF_{r}) * RR_\text{r, i (given C_i)}
+  r_i = r * (1 - PAF_{r}) * RR_\text{r, i (given C\_i)}
 
 Given,
 

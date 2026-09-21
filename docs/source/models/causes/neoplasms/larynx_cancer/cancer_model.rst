@@ -157,15 +157,15 @@ State and Transition Data Tables
      - 
    * - I
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c423}}{\text{population} \times \text{prevalence_c423}}`
+     - :math:`\frac{\text{deaths\_c423}}{\text{population} \times \text{prevalence\_c423}}`
      - 
    * - I
      - disability weights
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c423}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae\_c423}}} \scriptstyle{\text{disability\_weight}_s \,\times\, \text{prevalence}_s}`
      - total disability weight over all sequelae with ids s_268, s_5510, s_5513, s_270, s_271, s_5516
    * - ALL
      - cause specific mortality rate
-     - :math:`\frac{\text{deaths_c423}}{\text{population}}`
+     - :math:`\frac{\text{deaths\_c423}}{\text{population}}`
      - 
 
 
@@ -181,7 +181,7 @@ State and Transition Data Tables
    * - i
      - S
      - I
-     - :math:`\frac{\text{incidence_rate_c423}}{\text{1 - prevalence_c423}}`
+     - :math:`\frac{\text{incidence\_rate\_c423}}{\text{1 - prevalence\_c423}}`
      - Incidence rate in total population is divided by 1-prevalence_c423 to get incidence rate among the susceptible population.
 
 

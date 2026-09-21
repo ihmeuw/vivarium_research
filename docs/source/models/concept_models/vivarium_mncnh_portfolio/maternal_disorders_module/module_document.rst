@@ -53,10 +53,9 @@ There is no specific decision tree diagram for this module. Rather, the overall 
 
   * Maternal hypertensive disorders
   * :ref:`Obstructed Labor <2021_cause_obstructed_labor_mncnh>`
-  * :ref:`Maternal Hemorrhage <2021_cause_maternal_hemorrhage_mncnh>`
+  * :ref:`Postpartum Hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>`
   * :ref:`Maternal Sepsis <2021_cause_maternal_sepsis_mncnh>`
   * :ref:`Residual maternal disorders <2021_cause_residual_maternal_disorders_mncnh>`
-  * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
 
 .. note::
 
@@ -74,19 +73,24 @@ There are specific variables that will affect these cause models, summarized in 
     - Note
   * - Azithromycin coverage
     - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - Maternal sepsis incidence rate
+    - Maternal sepsis incidence risk
     - See the :ref:`Azithromycin intervention page <azithromycin_intervention>`
     - 
   * - Misoprostol coverage
     - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - Maternal hemorrhage incidence rate
+    - Postpartum hemorrhage incidence risk (of 300mL severity level)
     - See the :ref:`Misoprostol intervention page <misoprostol_intervention>`
     - 
+  * - E-MOTIVE coverage
+    - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    - Postpartum hemorrhage incidence risks (of 500mL and 1000mL severity levels)
+    - See the :ref:`E-MOTIVE intervention page <emotive_intervention>`
+    -
   * - Hemoglobin at end of pregnancy
     - :ref:`Hemoglobin component <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-    - Maternal sepsis, maternal hemorrhage, maternal depressive disorders, maternal hypertensive disorders
+    - Maternal sepsis, postpartum hemorrhage, maternal depressive disorders, maternal hypertensive disorders
     - See :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>`
-    - For wave II
+    -
 
 .. note::
 
@@ -109,7 +113,7 @@ Incidence, mortality, YLDs, and YLLs due to cause-specific maternal disorders.
 +++++++++++++++++++++++++++++++++++++++++
 
 * Confirm outcomes for each maternal disorder (OL, sepsis, and hemorrhage) matches GBD data 
-* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` and :ref:`misoprostol intervention documentation page <misoprostol_intervention>` for V&V criteria specific to azithromycin intervention model
+* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>`, :ref:`misoprostol intervention documentation page <misoprostol_intervention>`, and :ref:`E-MOTIVE intervention documentation page <emotive_intervention>` for V&V criteria specific to those intervention models
 
 5.0 References
 +++++++++++++++
