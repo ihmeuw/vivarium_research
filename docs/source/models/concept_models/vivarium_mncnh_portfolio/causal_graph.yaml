@@ -123,12 +123,14 @@ groups:
     contains:
       - maternal_sepsis_incidence
       - maternal_sepsis_mortality
+      - maternal_sepsis_ylds
       - postpartum_hemorrhage_incidence
       - postpartum_hemorrhage_blood_loss_category
       - postpartum_hemorrhage_ylds
       - postpartum_hemorrhage_mortality
       - obstructed_labor_incidence
       - obstructed_labor_mortality
+      - obstructed_labor_ylds
       - residual_maternal_disorders_ylds
       - residual_maternal_disorders_mortality
       - maternal_mortality
