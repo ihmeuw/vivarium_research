@@ -52,7 +52,7 @@ GBD 2023 Modeling Strategy
 
   The low hemoglobin risk factor was NOT included in the GBD 2023 risk factors capstone publication (release ID 16). However, estimates specific to the low hemoglobin risk factor that were used to inform the low hemoglobin burden of proof publication are available within release ID 33 (`see details here <https://hub.ihme.washington.edu/spaces/GBDdirectory/pages/171583888/Releases+rounds+and+versioning>`__). Release ID 33 should be used to pull all data related to the low hemoglobin risk effects -- note that release ID 16 may return data, but it is expected to be outdated.
 
-    Note that :ref:`low hemoglobin risk exposure <2023_hemoglobin_exposure>` values are expected to be similar between release ID 16 and 33, although there appear to be at least slight rounding differences. We have used release ID 16 to inform low hemoglobin risk exposure in the MNCNH portfolio model to maximize consistency with GBD anemia estimates (affected by hemoglobin exposure). However, if we were to utilize the low hemoglobin PAF values directly in our model (we calculate custom PAFs for the MNCNH portfolio simulation), it may be preferable to inform hemoglobin risk exposure from release ID 33 rather than 16.
+    Note that :ref:`low hemoglobin risk exposure <2023_hemoglobin_exposure>` values are expected to be similar between release ID 16 and 33, although there appear to be at least slight rounding differences. We have used release ID 33 to inform low hemoglobin risk exposure in the MNCNH portfolio model.
 
   See `the pre-print for the GBD burden of proof model of low hemoglobin publication here <https://www.researchsquare.com/article/rs-7567885/v1>`__ for all details on the low hemoglobin risk modeling strategy.
 
@@ -133,12 +133,6 @@ Note that we will not be modeling direct effects of hemoglobin on the affected o
      - Affected measure
      - Note
    * - Maternal disorders
-     - :ref:`Antepartum hemorrhage <2023_cause_antepartum_hemorrhage_mncnh>`
-     - cause
-     - (a subset of) c367
-     - :math:`ir`
-     - 
-   * - Maternal disorders
      - :ref:`Postpartum hemorrhage <2023_cause_postpartum_hemorrhage_mncnh>`
      - cause
      - (a subset of) c367
@@ -172,6 +166,10 @@ Note that we will not be modeling direct effects of hemoglobin on the affected o
 .. todo::
 
   Update this page with hypertension cause model links when ready
+
+Note that *antepartum* (as opposed to postpartum) hemorrhage is not impacted by hemoglobin in our model,
+and as a result we exclude the antepartum hemorrhage cause model from our simulation entirely.
+The Burden of Proof paper referenced above reports that "Three studies examining the association between maternal hemoglobin and antepartum hemorrhage found no statistically significant relationship across conventional anemia severity categories"
 
 Maternal disorders
 ++++++++++++++++++++

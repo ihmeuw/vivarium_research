@@ -73,19 +73,24 @@ There are specific variables that will affect these cause models, summarized in 
     - Note
   * - Azithromycin coverage
     - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - Maternal sepsis incidence rate
+    - Maternal sepsis incidence risk
     - See the :ref:`Azithromycin intervention page <azithromycin_intervention>`
     - 
   * - Misoprostol coverage
     - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - Postpartum hemorrhage incidence rate
+    - Postpartum hemorrhage incidence risk (of 300mL severity level)
     - See the :ref:`Misoprostol intervention page <misoprostol_intervention>`
     - 
+  * - E-MOTIVE coverage
+    - :ref:`Intrapartum interventions <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    - Postpartum hemorrhage incidence risks (of 500mL and 1000mL severity levels)
+    - See the :ref:`E-MOTIVE intervention page <emotive_intervention>`
+    -
   * - Hemoglobin at end of pregnancy
     - :ref:`Hemoglobin component <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
     - Maternal sepsis, postpartum hemorrhage, maternal depressive disorders, maternal hypertensive disorders
     - See :ref:`hemoglobin risk effects document <2023_hemoglobin_effects>`
-    - For wave II
+    -
 
 .. note::
 
@@ -108,7 +113,7 @@ Incidence, mortality, YLDs, and YLLs due to cause-specific maternal disorders.
 +++++++++++++++++++++++++++++++++++++++++
 
 * Confirm outcomes for each maternal disorder (OL, sepsis, and hemorrhage) matches GBD data 
-* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>` and :ref:`misoprostol intervention documentation page <misoprostol_intervention>` for V&V criteria specific to azithromycin intervention model
+* See :ref:`the azithromycin intervention documentation page <azithromycin_intervention>`, :ref:`misoprostol intervention documentation page <misoprostol_intervention>`, and :ref:`E-MOTIVE intervention documentation page <emotive_intervention>` for V&V criteria specific to those intervention models
 
 5.0 References
 +++++++++++++++

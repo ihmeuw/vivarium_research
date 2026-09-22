@@ -247,8 +247,9 @@ In other situations, some components will not be used.
 The rules by which components are triggered is as follows:
 
 * All simulant dyads pass through the pregnancy component.
-* If the broad pregnancy outcome from the pregnancy component was a live or stillbirth (NOT abortion/miscarriage/ectopic pregnancy)
-  *and* the birth parent did not die from antepartum maternal disorders, the dyad goes through the intrapartum component.
+* If the broad pregnancy outcome from the pregnancy component was a live or stillbirth (NOT abortion/miscarriage/ectopic pregnancy),
+  the dyad goes through the intrapartum component.
+  (The pregnant person will never have died from antepartum maternal disorders, since the only one is abortion/miscarriage/ectopic maternal disorders.)
 * If the birth outcome from the intrapartum component is a live birth,
   the dyad goes through the neonatal component.
 * If the birth parent did not die from maternal disorders (antepartum or intrapartum),
@@ -341,7 +342,7 @@ Pregnancy component
         * Hemoglobin screening coverage/result
         * Ferritin screening coverage/result
         * Receipt of IFA/MMS at first trimester ANC visit
-      - * Hemoglobin after later ANC visit
+      - * Hemoglobin at end of pregnancy
         * Coverage of IFA/MMS at any time in pregnancy
         * Coverage of IV iron 
       - * :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
@@ -370,19 +371,9 @@ Pregnancy component
     * - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
       - * Broad pregnancy outcome
         * Maternal age at end of pregnancy
-        * Hemoglobin after later ANC visit
-      - * Antepartum hemorrhage incidence
-        * Antepartum hemorrhage YLDs
-        * Antepartum hemorrhage death
-        * Abortion/miscarriage/ectopic pregnancy maternal disorders YLDs
+      - * Abortion/miscarriage/ectopic pregnancy maternal disorders YLDs
         * Abortion/miscarriage/ectopic pregnancy maternal disorders death
-      - * :ref:`Antepartum hemorrhage model <2023_cause_antepartum_hemorrhage_mncnh>`
-        * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
-    * - :ref:`Hemoglobin at end of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-      - * Hemoglobin after later ANC visit
-        * Antepartum hemorrhage incidence
-      - * Hemoglobin at end of pregnancy
-      - :ref:`Antepartum hemorrhage risk effects <2023_risk_effect_maternal_hemorrhage>` 
+      - * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
 
 .. _mncnh_portfolio_intrapartum_component:
 
@@ -426,11 +417,15 @@ Intrapartum component
       - * Intrapartum azithromycin coverage 
         * Antenatal corticosteroid coverage
         * Misoprostol coverage
+        * E-MOTIVE coverage
       - * :ref:`Intrapartum azithromycin <azithromycin_intervention>` 
         * :ref:`Misoprostol coverage <misoprostol_intervention>`
         * :ref:`Antenatal corticosteroids <acs_intervention>`
+        * :ref:`E-MOTIVE <emotive_intervention>`
     * - :ref:`Maternal disorders <2024_vivarium_mncnh_portfolio_maternal_disorders_module>`
       - * :ref:`Intrapartum azithromycin coverage <azithromycin_intervention>`
+        * :ref:`Misoprostol coverage <misoprostol_intervention>`
+        * :ref:`E-MOTIVE coverage <emotive_intervention>`
         * Hemoglobin at end of pregnancy
       - * Maternal disorders outcomes (see outcome table)
       - * :ref:`Overall maternal disorders <2021_cause_maternal_disorders_mncnh>`
@@ -699,6 +694,14 @@ designed to be fully inclusive of all work or modeled components.
     - 100% of eligible population
     - Baseline
     - 
+  * - 19. E-MOTIVE total scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
 
 .. _MNCNH intrapartum component scenario table:
 
@@ -709,23 +712,28 @@ designed to be fully inclusive of all work or modeled components.
     - Azithromycin coverage
     - Corticosteroid coverage
     - Misoprostol coverage
+    - E-MOTIVE coverage
     - Note
   * - 1. Baseline
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - 
+    - Defined on :ref:`intrapartum intervention model document <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
+    -
   * - 2. CPAP and ACS scale-up
     - Baseline
     - 100% at BEmONC and CEmONC, baseline at home
+    - Baseline
     - Baseline
     - 
   * - 3. CPAP, ACS, and AI-assisted ultrasound scale-up
     - Baseline
     - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
+    - Baseline
     -  
   * - 4. Neonatal antibiotics scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -734,13 +742,16 @@ designed to be fully inclusive of all work or modeled components.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 6. Azithromycin scale-up
     - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 7. AI-assisted ultrasound scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -749,13 +760,16 @@ designed to be fully inclusive of all work or modeled components.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     - 
   * - 9. Full product scale-up, October 2025
     - 100% at BEmONC and CEmONC, baseline at home
     - 100% at BEmONC and CEmONC, baseline at home
     - Baseline
+    - Baseline
     - Not including misoprostol scale-up in this run because as of October 2025 we have known calibration issues with our hemorrhage model by delivery facility setting
   * - 10. MMS scale-up
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -764,33 +778,40 @@ designed to be fully inclusive of all work or modeled components.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
     -
   * - 12. Azithromycin V&V
     - 50% at BEmONC and CEmONC, baseline at home
     - 0%
     - 0%
+    - Baseline
     - 
   * - 13. Misoprostol V&V
     - 0%
     - 0%
     - 50% among eligible population (attends ANC and delivers at home)
+    - Baseline
     - 
   * - 14. No ACS and total CPAP V&V
     - Baseline
     - 0% coverage at all delivery location types 
+    - Baseline
     - Baseline
     - see neonatal table for CPAP coverage
   * - 15. Total ACS and CPAP V&V
     - Baseline
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
+    - Baseline
     - see neonatal table for CPAP coverage
   * - 16. Total ACS and no CPAP V&V
     - Baseline
     - 100% coverage at BEmONC and CEmONC facilities, baseline at home
     - Baseline
+    - Baseline
     - see neonatal table for CPAP coverage    
   * - 17. Ultrasound V&V
+    - Baseline
     - Baseline
     - Baseline
     - Baseline
@@ -799,6 +820,13 @@ designed to be fully inclusive of all work or modeled components.
     - Baseline
     - Baseline
     - Baseline
+    - Baseline
+    - 
+  * - 19. E-MOTIVE total scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 100% coverage at BEmONC and CEmONC facilities (none at home)
     - 
 
 .. _MNCNH neonatal component scenario table:
@@ -901,6 +929,11 @@ designed to be fully inclusive of all work or modeled components.
     - Baseline
     - Baseline
     - 
+  * - 19. E-MOTIVE total scale-up
+    - Baseline
+    - Baseline
+    - Baseline
+    - 
 
 .. _mncnh_portfolio_4.0:
 
@@ -927,6 +960,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Delivery facility
       * Azithromycin coverage
       * Misoprostol coverage
+      * (for postpartum hemorrhage only) Blood loss severity category (300-500 mL, 500mL-1L, 1L+)
     - 
   * - 2. Births (this observer includes ALL pregnancy outcomes, including abortion/miscarriage/ectopic pregnancies that may not typically be considered "births")
     - * Pregnancy outcome
@@ -1119,6 +1153,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Anemia screening V&V 
       * Anemia screening and IV iron scale-up
       * MMS total scale-up
+      * E-MOTIVE total scale-up
     - These are the scenarios currently tested in our V&V checks
 
 .. list-table:: Summary of draw metadata by input parameter
@@ -1961,16 +1996,31 @@ Default stratifications to all observers should include scenario and input draw.
     - Standard V&V scenarios
     - Default
     -
-  * -
-    - E-MOTIVE
-    - E-MOTIVE and its effects on postpartum hemorrhage
+  * - 
+    - Postpartum hemorrhage split at 300 mL
+    - Differentiate the current "non-cases" of PPH (those with <500 mL blood loss) into "<300 mL" and "300-500 mL",
+      and stratify the postpartum hemorrhage burden observer by blood loss severity category.
+      See `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1961>`__ for details.
     - Standard V&V scenarios
     - Default
-    - Research tickets to `document E-MOTIVE <https://jira.ihme.washington.edu/browse/SSCI-2584>`__, PPH/APH effects on hemoglobin run
+    -
+  * -
+    - E-MOTIVE
+    - E-MOTIVE and its effects on postpartum hemorrhage.
+      See `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1961>`__ for details.
+    - Standard V&V scenarios; note that #19 E-MOTIVE total scaleup has been added to the list for this run
+    - Default
+    - Postpartum hemorrhage split at 300 mL run
   * - 
     - Separate LBWSG affected causes
     - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__
     - All
+    - Default
+    -
+  * -
+    - Remove APH
+    - Remove antepartum hemorrhage from the model; see `this PR <https://github.com/ihmeuw/vivarium_research/pull/1964>`__ for detailed changes
+    - Standard V&V scenarios
     - Default
     -
 

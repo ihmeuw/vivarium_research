@@ -82,6 +82,13 @@ Baseline coverage of IFA varies by location, and we will be using estimates proc
 The country-specific estimates are available at ``/snfs1/Project/simulation_science/mnch_grant/MNCNH portfolio/anc_iron_prop_st-gpr_results_aggregates_scaled2025-05-30.csv``. These estimates are specific to the proportion
 *of ANC attendees* who are covered by oral iron supplementation.
 
+.. todo::
+
+  MMS coverage may become substantial
+  under existing scale-up plans, so we will likely want to add another scenario in the future that models our
+  best guess of a future year for comparison with optimized portfolios, rather than only our best guess of 2023
+  for calibration checking with GBD 2023 (which is currently the purpose of the baseline scenario).
+
 A summary of relevant baseline coverage parameters is included below:
 
 .. list-table:: Oral iron baseline coverage parameters

@@ -42,19 +42,18 @@ Antepartum maternal disorders module
 1.0 Overview
 ++++++++++++
 
-This module represents two maternal disorders that are applied during the pregnancy component:
-*  the portion of the GBD "maternal hemorrhage" cause *not* captured by the :ref:`postpartum hemorrhage cause model <2023_cause_postpartum_hemorrhage_mncnh>`
-*  the :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
+This module represents
+the :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
+which is applied during the pregnancy component.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
 
-All instructions are detailed on the :ref:`MNCNH portfolio antepartum hemorrhage model document <2023_cause_antepartum_hemorrhage_mncnh>`,
-the :ref:`Hemoglobin risk effects model document <2023_hemoglobin_effects>`,
-and the :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model document <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`.
-These documents also contain a list of model assumptions and limitations as well as verification and validation criteria.
+All instructions are detailed on
+the :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model document <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`.
+This document also contains a list of model assumptions and limitations as well as verification and validation criteria.
 
-**Antepartum hemorrhage risk should only be applied to pregnancies that do not end in abortion/miscarriage/ectopic pregnancy, and abortion/miscarriage/ectopic pregnancy maternal disorders should only be applied to pregnancies that do end in abortion/miscarriage/ectopic pregnancy.**
+**Abortion/miscarriage/ectopic pregnancy maternal disorders should only be applied to pregnancies that end in abortion/miscarriage/ectopic pregnancy.**
 
 The inputs and outputs for this module are summarized in the tables below.
 
@@ -67,15 +66,11 @@ The inputs and outputs for this module are summarized in the tables below.
     - Note
   * - Broad pregnancy outcome
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-    - Used to apply antepartum hemorrhage only to pregnancies that do not end in abortion/miscarriage/ectopic pregnancy, and to apply abortion/miscarriage/ectopic pregnancy maternal disorders only to pregnancies that do end in abortion/miscarriage/ectopic pregnancy
+    - Used to apply abortion/miscarriage/ectopic pregnancy maternal disorders only to pregnancies that do end in abortion/miscarriage/ectopic pregnancy
     -
   * - Maternal age at end of pregnancy
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-    - Used for age-specific risk of antepartum hemorrhage
-    - 
-  * - Hemoglobin after later ANC visit
-    - :ref:`Hemoglobin after later ANC visit module <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
-    - Used for hemoglobin effects on antepartum hemorrhage risk
+    - Used for age-specific risk of abortion/miscarriage/ectopic pregnancy maternal disorders
     - 
 
 .. list-table:: Module outputs
@@ -84,18 +79,6 @@ The inputs and outputs for this module are summarized in the tables below.
   * - Output
     - Value
     - Note
-  * - Antepartum hemorrhage incidence
-    - Binary (yes/no)
-    - 
-  * - Antepartum hemorrhage YLDs
-    - Non-negative real number
-    -
-  * - Antepartum hemorrhage death
-    - Binary (yes/no)
-    - 
-  * - Antepartum hemorrhage YLLs
-    - Non-negative real number
-    -
   * - Abortion/miscarriage/ectopic pregnancy maternal disorders YLDs
     - Non-negative real number
     - 
