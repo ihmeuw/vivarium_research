@@ -202,11 +202,13 @@ Validation and Verification Criteria
 ------------------------------------
 
 **In the interactive context:**
+
 - Check RDS and all-cause mortality rates between 33 weeks with ACS coverage and 34 weeks (no ACS coverage due to ineligibility). If mortality is LOWER in the 33 week with ACS than 34 weeks, we may need to revisit our strategy of assigning the fraction of RDS among preterm births in a way that does not consider gestational age at birth (logically early preterm births should have more RDS than late preterm births).
 - Confirm that the same propensity value is used for ACS and CPAP (when coverage is equal, there should be no eligible simulants who have one intervention and not the other).
 - Make sure there is no coverage of ACS outside of the eligible gestational age range.
 
 **From observed outputs:**
+
 - Coverage of ACS by delivery facility type in the baseline scenario should approximately match the baseline
   coverage values documented above.
 - The ratio of preterm with RDS neonatal mortality risks (neonatal deaths divided by births) between those with and without ACS available,

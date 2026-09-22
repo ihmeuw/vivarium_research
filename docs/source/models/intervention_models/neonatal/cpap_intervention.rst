@@ -220,9 +220,11 @@ Validation and Verification Criteria
 ------------------------------------
 
 **In the interactive context:**
+
 * Confirm that the same propensity value is used for ACS and CPAP (when coverage is equal, there should be no eligible simulants who have one intervention and not the other).
 
 **From observed outputs:**
+
 * Coverage of CPAP by delivery facility type in the baseline scenario should approximately match the baseline
   coverage values documented above.
 * The ratio of observed neonatal mortality risks (neonatal deaths divided by births) between those with CPAP available and not available,

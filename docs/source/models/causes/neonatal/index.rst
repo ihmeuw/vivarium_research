@@ -476,9 +476,11 @@ Validation Criteria
 +++++++++++++++++++
 
 **Pre-simulation data checks:**
+
 * Stored RRs of LBWSG on each cause should all be the same
 
 **In the interactive context:**
+
 * Initial (pre-LBWSG-modified) ACMRisk pipeline values should exactly match the sex- and age-specific ACMRisk in the artifact, for every simulant.
 * If modified by LBWSG *using the LBWSG value before any interventions*, the mean of the ACMRisk pipeline values should be similar to the sex- and age-specific ACMRisk in the artifact.
 * Once ACMRisk pipeline values have been modified by using LBWSG post-interventions,
@@ -495,6 +497,7 @@ Validation Criteria
   their mean should be similar to the sex-, age-, and subcause-specific CSMRisk in the artifact (or calculated from it), in the baseline scenario.
 
 For the inexact checks, the level of similarity we expect depends on the check, due to known limitations:
+
 * Checks that are impacted by LBWSG after intervention modifiers may be off due to the IFA shifts
   on birthweight and gestational age changing the population distribution of LBWSG RRs.
   When the check is directly on a risk modified by post-intervention LBWSG, we say that could
@@ -520,6 +523,7 @@ For the inexact checks, the level of similarity we expect depends on the check, 
 When multiple of these conditions apply to the same check, we combine percent acceptable miscalibrations additively.
 
 **From observed outputs:**
+
 * The mean ACMRisk observed in each age and sex group in the baseline scenario should be within 10% of
   the GBD number of deaths in that age and sex group, divided by the GBD number of births for that sex
   minus the GBD number of deaths for that sex in younger age groups.
