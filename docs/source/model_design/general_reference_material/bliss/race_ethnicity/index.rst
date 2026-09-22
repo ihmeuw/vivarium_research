@@ -821,11 +821,10 @@ Defined loosely, they might be considered to mean the same thing:
 
 - A :ref:`risk factor <models_risk_factors>` is any attribute that is associated with some outcome
 - A risk marker has been defined as 
-  "an attribute or exposure that is associated with increased probability of disease, but is not necessarily a causal factor" [Burt 2001],
-  and describes as "not necessarily involved in the cause or set of causes of a cardiovascular disease (CVD), like a risk factor" [Thiriet 2019]. 
+  "an attribute or exposure that is associated with increased probability of disease, but is not necessarily a causal factor" [Burt_2001]_
 
-Both risk marker definitions indicate that, similarly to risk factors as defined above, markers are not necessarily causal.
-The second even presents risk factors and risk markers as synonyms. 
+The risk marker definition indicates that, similarly to the risk factor definition above, markers are not necessarily causal.
+Based on these definitions, the terms could be considered to be synonyms.
 
 However, in some contexts, the terms take on more specific meanings.
 "Risk factors" are sometimes defined as specificically causal. For example:
@@ -833,23 +832,27 @@ However, in some contexts, the terms take on more specific meanings.
 - As "an environmental, behavioral, or biologic factor confirmed by temporal sequence, usually in longitudinal studies, which
   if present directly increases the probability of a disease occurring, and if absent or removed reduces the probability. 
   Risk factors are part of the causal chain, or expose the host to the causal chain. 
-  Once disease occurs, removal of a risk factor may not result in a cure" [Beck 1996].
+  Once disease occurs, removal of a risk factor may not result in a cure" [Beck_1998]_.
 - Note that "the Global Burden of Disease study models risk factors and their effects on specific outcomes that meet 
   the burden of proof for causality", :ref:`per our team and the GBD <risk_factors_gbd>`.
 
 And in cases where "risk factors" imply causality, "risk markers" 
-are sometimes used to specifiy non-causality.
+are sometimes used to specifiy non-causality, for example:
 
-For example in the literature, many discussions of the use of the term "risk marker" in reference to racial variables indicate that
+- "A risk marker is not necessarily involved in the cause or set of causes of a cardiovascular disease (CVD), like a risk factor" [Thiriet_2019]_. 
+
+Many discussions of the use of the term "risk marker" in reference to racial variables indicate that
 the term was used because implying race to be a causal variable could be harmful or misleading. 
-The hypothetical causal diagram under "option 1a" in the section above is a practical example relevant to our modeling work -
-"experiences of racism" would be a causal risk factor, but it would be best to refer to race itself as a risk marker, 
-due to the issues mentioned in the example's first paragraph. 
+The hypothetical causal diagram under "option 1a" in the section above is a practical example relevant to our modeling work.
+In the diagram as pictured, it's clear that the effect of race is mediated through the "experiences of racism" factor. 
+However, if we had not included that factor, it would be best to refer to race itself as a risk marker, 
+to ephasize that this is not an inherent effect, but one created by society. 
+Using the term risk marker makes it clear that there are other variables involved that are not pictured.
 
 To further explore why referring to race as a causal risk factor may be harmful or misleading, we will present several 
 instances in the literature that discuss the use of "risk marker" as an alternative. 
 
-To understand these examples, it's helpful to review the Bradford Hill criteria for causality, used to evaluate the 
+To understand these examples, it's helpful to review the :ref:`Bradford Hill criteria <causal_relationships>` for causality, used to evaluate the 
 epidemiologic evidence of a causal relationship such that the more criteria are satisfied, the more likely it is that a 
 causal relationship exists. 
 While there are a number of other criteria which are also important in such an evaluation, the three most relevant to 
@@ -870,23 +873,18 @@ impluasible, or suggest an inaccurate, race essentialist mechanism such as genet
 In the context of medical algorithms or risk assesments, authors argue that race's use 
 "suggests that the effect of race is intrinsic to the patient or that its effects can be distinct 
 or separated from other social and environmental variables", 
-and implies different races have inherently different risks, reinforcing inequalities [Cerdeña, Chokski]. 
+and implies different races have inherently different risks, reinforcing inequalities [Cerdeña_2020]_ [Chokshi_2022]_. 
 Within epidemiologic research, others write that 
 "racial definitions should be seen as primarily social in origin and should be clues to environmental — rather 
 than genetic — causes of disease" 
 and note that failiure "to define race and ethnicity or explore structural racism as a fundamental cause" 
-"may perpetuate notions of racial essentialism by inappropriately framing race, rather than racism, as a risk factor for CVD" [Cooper, Silverman-Lloyd]. 
-Similarly a genetisist urges that "careful distinction must be made between race as a statistical [noncausal] risk factor 
-and causal genetic variables" [Kittles].
+"may perpetuate notions of racial essentialism by inappropriately framing race, rather than racism, as a risk factor for CVD" [Cooper_1984]_ [Silverman-Lloyd_2021]_. 
+Similarly a genetisist urges that "careful distinction must be made between race as a statistical (noncausal) risk factor 
+and causal genetic variables" [Kittles_2003]_.
 
 Other authors focus on reversibility, noting that in the biomedical model, only treatable variables are considered risk factors, 
 and that "the absurdity of the counterfactual distribution have led several authors to reject race as a valid cause", being a 
-"fundamental or unalterable characteristic of an individual" [Blackmore, Kaufman].
-
-
-.. todo::
-  Citations
-
+"fundamental or unalterable characteristic of an individual" [Blackmore_1993]_, [Kaufman_2001]_.
 
 
 Methodology
@@ -1275,3 +1273,14 @@ References
 .. [Kaufman_2001]
     Jay S. Kaufman, Richard S. Cooper, Commentary: Considerations for Use of Racial/Ethnic Classification in Etiologic Research, American Journal of Epidemiology, Volume 154, Issue 4, 15 August 2001, Pages 291–298, https://doi.org/10.1093/aje/154.4.291
 
+.. [Burt_2001]
+    Burt, B.A.. (2001). Definitions of risk.. Journal of dental education. 65. 1007-1008. 
+
+.. [Thiriet_2019]
+    Thiriet M. Cardiovascular Risk Factors and Markers. Vasculopathies. 2019 Feb 19;8:91–198. doi: 10.1007/978-3-319-89315-0_2. PMCID: PMC7123062.
+
+.. [Beck_1998]
+    James D. Beck, & Steven Offenbacher. (1998). PERIODONTAL DISEASE AS A RISK FACTOR FOR CORONARY HEART DISEASE. Journal of the Japanese Society of Periodontology, 40(suppl-40th), 28–40.
+
+.. [Silverman-Lloyd_2021]
+    Silverman-Lloyd LG, Bishop NS, Cerdeña JP. Race is not a risk factor: Reframing discourse on racial health inequities in CVD prevention. Am J Prev Cardiol. 2021 Apr 18;6:100185. doi: 10.1016/j.ajpc.2021.100185. PMID: 34327505; PMCID: PMC8315343.
