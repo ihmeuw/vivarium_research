@@ -475,10 +475,6 @@ For simplicity, we will not include YLDs in this model.
 Validation Criteria
 +++++++++++++++++++
 
-**Pre-simulation data checks:**
-
-* Stored RRs of LBWSG on each cause should all be the same
-
 **In the interactive context:**
 
 * Initial (pre-LBWSG-modified) ACMRisk pipeline values should exactly match the sex- and age-specific ACMRisk in the artifact, for every simulant.

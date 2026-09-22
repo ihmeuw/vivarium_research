@@ -142,6 +142,9 @@ See V&V criteria on subcomponent pages:
 * :ref:`CPAP intervention <intervention_neonatal_cpap>`
 * :ref:`Probiotics intervention <intervention_neonatal_probiotics>`
 
+.. todo::
+  There are not V&V criteria for the LBWSG risk effects subcomponent
+
 
 5.0 References
 +++++++++++++++
