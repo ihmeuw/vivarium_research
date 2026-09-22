@@ -828,7 +828,7 @@ Both risk marker definitions indicate that, similarly to risk factors as defined
 The second even presents risk factors and risk markers as synonyms. 
 
 However, in some contexts, the terms take on more specific meanings.
-"Risk factors" are sometimes defined as specificically causal. For example:
+"Risk factors" are sometimes defined as specifically causal. For example:
 
 - As "an environmental, behavioral, or biologic factor confirmed by temporal sequence, usually in longitudinal studies, which
   if present directly increases the probability of a disease occurring, and if absent or removed reduces the probability. 
@@ -838,7 +838,7 @@ However, in some contexts, the terms take on more specific meanings.
   the burden of proof for causality", :ref:`per our team and the GBD <risk_factors_gbd>`.
 
 And in cases where "risk factors" imply causality, "risk markers" 
-are sometimes used to specifiy non-causality.
+are sometimes used to specify non-causality.
 
 For example in the literature, many discussions of the use of the term "risk marker" in reference to racial variables indicate that
 the term was used because implying race to be a causal variable could be harmful or misleading. 
@@ -865,7 +865,7 @@ imply that one or more of these three criteria are true, and argues that such an
 Specificity and plausibility often go hand in hand in these discusisons. 
 Many authors argue that race itself is not a specific factor compared to social or environmental variables such as 
 experiences of racism, and that without introducing the additional specificity the explanation must either be 
-impluasible, or suggest an inaccurate, race essentialist mechanism such as genetics.
+implausible, or suggest an inaccurate, race essentialist mechanism such as genetics.
 
 In the context of medical algorithms or risk assesments, authors argue that race's use 
 "suggests that the effect of race is intrinsic to the patient or that its effects can be distinct 
@@ -874,9 +874,9 @@ and implies different races have inherently different risks, reinforcing inequal
 Within epidemiologic research, others write that 
 "racial definitions should be seen as primarily social in origin and should be clues to environmental — rather 
 than genetic — causes of disease" 
-and note that failiure "to define race and ethnicity or explore structural racism as a fundamental cause" 
+and note that failure "to define race and ethnicity or explore structural racism as a fundamental cause" 
 "may perpetuate notions of racial essentialism by inappropriately framing race, rather than racism, as a risk factor for CVD" [Cooper, Silverman-Lloyd]. 
-Similarly a genetisist urges that "careful distinction must be made between race as a statistical [noncausal] risk factor 
+Similarly a geneticist urges that "careful distinction must be made between race as a statistical [noncausal] risk factor 
 and causal genetic variables" [Kittles].
 
 Other authors focus on reversibility, noting that in the biomedical model, only treatable variables are considered risk factors, 
