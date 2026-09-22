@@ -390,9 +390,9 @@ throughout this style guide.
    * - Health disparities
      - Differences in health outcomes, such as life expectancy, disease burden, or other adverse health conditions between different groups of people within a population. The term is often used to describe differences seen between racial or ethnic groups, but it can also be applied to differences observed across any individual characteristic including geographies, sex, gender, sexual orientation or socioeconomic status.
    * - Risk factor
-     - Attributes, characteristics, or exposures that are associated with or cause an increaesed likelihood that a person develops a disease or health disorder. Risk factors are diverse and can span attributes such as diet, physical activity, alcohol use, genetics, age, and experiences of discrimination. Where the use of this term implies a variable has a causal effect, the term "risk marker" may be used instead for variables which are not possible or ethical to change, as "risk factor" may indicate a variable we should intervene on. 
+     - Attributes, characteristics, or exposures that are associated with or cause an increased likelihood that a person develops a disease or health disorder. Risk factors are diverse and can span attributes such as diet, physical activity, alcohol use, genetics, age, and experiences of discrimination. Where the use of this term may imply a variable related to REA has a causal effect or would be intervened on, "risk marker" may be a more appropriate term.
    * - Risk marker
-     - Similar to a risk factor, but used to indicate a variable which is not possible or ethical to change, but which may have a causal relationship to another variable more suitable to intervene on. Race and its relationship to cardiovascular disease is an example. Some races have higher rates of cardiovascular disease but it is thought this is due to experiences of racism, either interpersonal or societal. Race itself is not thought to be causally linked with CVD except through these societal pathways.
+     - Similar to a risk factor, but used to indicate a variable which is not possible or ethical to change itself, but which may have a causal relationship to another variable more suitable to intervene on. Race and its relationship to cardiovascular disease is an example. Some races have higher rates of cardiovascular disease but it is thought this is due to experiences of racism, either interpersonal or societal. Race itself is not thought to be causally linked with CVD except through these societal pathways.
    * - Nativity
      - The general definition refers to the occasion of one’s birth. However, it is used here to mean the country someone was born in. 
    * - Colonialism
@@ -819,9 +819,9 @@ Risk factors vs. risk markers
 "Risk factor" and "risk marker" are terms used to refer to or categorize variables which are associated with outcomes.
 Defined loosely, they might be considered to mean the same thing:
 
-- A :ref:`risk factor <models_risk_factors>` is any attribute that is associated with some outcome
+- A :ref:`risk factor <models_risk_factors>` is any attribute that is associated with some outcome.
 - A risk marker has been defined as 
-  "an attribute or exposure that is associated with increased probability of disease, but is not necessarily a causal factor" [Burt_2001]_
+  "an attribute or exposure that is associated with increased probability of disease, but is not necessarily a causal factor". [Burt_2001]_
 
 The risk marker definition indicates that, similarly to the risk factor definition above, markers are not necessarily causal.
 Based on these definitions, the terms could be considered to be synonyms.
@@ -877,7 +877,7 @@ and implies different races have inherently different risks, reinforcing inequal
 Within epidemiologic research, others write that 
 "racial definitions should be seen as primarily social in origin and should be clues to environmental — rather 
 than genetic — causes of disease" 
-and note that failiure "to define race and ethnicity or explore structural racism as a fundamental cause" 
+and note that failure "to define race and ethnicity or explore structural racism as a fundamental cause" 
 "may perpetuate notions of racial essentialism by inappropriately framing race, rather than racism, as a risk factor for CVD" [Cooper_1984]_ [Silverman-Lloyd_2021]_. 
 Similarly a geneticist urges that "careful distinction must be made between race as a statistical (noncausal) risk factor 
 and causal genetic variables" [Kittles_2003]_.
