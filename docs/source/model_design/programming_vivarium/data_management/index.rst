@@ -33,43 +33,49 @@ Data Best Practices
 
 The research and engineering teams handle a variety of data from original sources such as GBD and literature
 as well as intermediate data generated from scripts or other code including the vivarium simulation itself.
-Intermediate data generation may include calculations or processing based on GBD and literature data. 
+Intermediate data generation may include calculations or processing from original data. 
 This page is intended to outline typical and best practices for data preparation and generation tasks for consistency,
 reproducibility and transfer between researchers and engineers. 
 
 The page is organized by locations where original or intermediate data is stored and provides guidelines for when to use each storage location.
-For each location, it describes any common types of data processing that store results there, including 
-the data inputs and code used and where that code should be stored.
+For each location, it describes any common types of data processing that typically store their outputs there 
+and whether inputs and code associated with that processing are also stored there, or somewhere else.
 
 Data may be stored in the artifact, in a constants file, in the model specification, or in other less common places. 
 Final results from the simulation also have their own storage locations. 
 
 Data processing practices depend on the source and type of data. GBD data might be processed 
-by the ``make artifact`` command with code stored in ``loader.py``, by other scripts or code for
-more complex processing. Literature data might also be pre-processed by hand or used directly. 
+by the ``make artifact`` command (via code stored in ``loader.py``), or by other scripts or code for
+more complex processing. Literature data might also be pre-processed by hand. 
 Vivarium simulations themselves can also generate data inputs for other simulations or simulation 
 iterations. 
-
-.. todo::
-    Add examples for each section?
 
 Artifact
 --------
 The artifact is a very common location for data to be stored. All draw-level data including GBD data should be loaded into the artifact.
 Generally, data is loaded into the artifact because it is used by the simulation, but it can also be useful to store draw-level data 
-relevant to the V&V process in the artifact for easy access at that time.
+relevant to the V&V process in the artifact for easy access later.
 
-It is generally not recommended to store non-draw level data in the artifact.
-Theoretically, when performing a sensitivity analysis, multiple artifacts could be created to store constant or location-specific values for different runs.
-However, the more common and recommended practice is to store sensitivity analysis run values in the model specification as described below.
-This approach provides better integration with vivarium tools such as setting run values via the CLI or interactive sim rather than building separate artifacts for each run.
-
-Often researchers will directly store location-specific paramaters that describe a distribution (like mean effect sizes) in a dictionary in the constants directory, as described below.
-Setting these parameters in the constants directory is important for visibility and to make them easier to update.
-But for some distributions it may be useful for V&V to additionally generate draw-level data based on the parameters.
+.. note::
+    Generally it is recommended to represent data in a singele place, either as as parameters describing a distribution,
+    or as draw-level data generated from that distribution. 
+    However sometimes important to both 
+    (a) store location-specific paramaters that describe a distribution (like mean effect sizes) 
+    in a dictionary in the constants directory, as described below, for visibility and updatability, and 
+    (b) store draw-level data in the artifact based on the distribution parameters for V&V.
 
 .. todo::
-    My notes about the above paragraph from my last doc session aren't the best so I'm not sure if this is the right interpretation of our discussion of storing location specific values in the artifact instead of constants file. Are there any times it would be a problem to store both the parameters in the constants directory and draw-level data generated from them in the artifact? Or are there any times where we'd store the constant parameters in the artifact instead of the constants directory?
+    Anything else to be said about storing location specific values in the artifact vs constants file?
+    Are there specific times it would be a problem to store both the parameters in the constants directory and 
+    draw-level data generated from them in the artifact? 
+    Or are there specific times where we'd want to store the constant parameters in the artifact instead of the constants directory?
+
+It is generally not recommended to store non-draw level data in the artifact.
+
+.. note::
+    Sensitivity analysis run values are a special case. The most common and recommended practice is to store sensitivity analysis run values in the model specification as described below.
+    This approach provides integration with vivarium tools such as setting run values via the CLI or interactive sim.
+    However, theoretically, separate artifacts could be created to store constant or location-specific values for different runs.
 
 Draw-level data stored in the artifact may have been generated or processed either during the ``make artifact`` command, or before it, 
 depending on the type of data inputs and code used in the processing.
@@ -97,17 +103,17 @@ run only when needed, but it is on the user to track dependences and determine w
 
 Constants file
 --------------
-Non draw level data is generally put in a constants file, or more rarely, the model specification. 
+Non draw-level data is generally put in a constants file, or more rarely, the model specification. 
 
 This data includes literature values that don't have uncertainty, which could be used by the 
 simulation directly, or by the artifact generation code.
 
-Literature data used directly in a constants file may be pre-processed by a human and listed in 
-model documentation.
+Literature data stored directly in a constants file is generally described in model documentation.
+If it needs pre-processing, this is generally done by a human.
 
 Model specification
 -------------------
-Uncommonly, non draw level data may be put here if we want to do a sensitivity analysis on it.
+Uncommonly, non draw-level data may be put here if we want to do a sensitivity analysis on it.
 
 .. todo::
     more about this?
@@ -115,7 +121,4 @@ Uncommonly, non draw level data may be put here if we want to do a sensitivity a
 Todos
 -----
 .. todo::
-    other situations not covered here?
-
-.. todo::
-    complex situations eg artifact depending on artifact?
+    other situations not covered here? complex situations eg artifact depending on artifact? would examples be helpful of times we did things a certain way?
