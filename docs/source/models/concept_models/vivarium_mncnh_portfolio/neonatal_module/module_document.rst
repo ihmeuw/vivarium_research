@@ -136,6 +136,7 @@ See observer/outputs section on main concept model document.
 +++++++++++++++++++++++++++++++++++++++++
 
 See V&V criteria on subcomponent pages:
+
 * :ref:`Neonatal mortality <2021_cause_neonatal_disorders_mncnh>`
 * :ref:`ACS intervention <acs_intervention>`
 * :ref:`Antibiotics intervention <intervention_neonatal_antibiotics>`
