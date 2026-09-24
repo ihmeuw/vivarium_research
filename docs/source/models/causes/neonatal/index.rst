@@ -481,8 +481,9 @@ Our ACMRisk targets are the ACMRisk values stored in the artifact, which are age
 
 * Initial (pre-LBWSG-modified) ACMRisk pipeline values should exactly match the targets, for every simulant.
 * If modified by LBWSG *using the LBWSG value before any interventions*, the mean of the ACMRisk pipeline values should be similar to the targets.
-* Once ACMRisk pipeline values have been modified by using LBWSG post-interventions,
+* Once ACMRisk pipeline values have been modified by using LBWSG post-interventions for the proportion of ACMRisk that is affected by LBWSG,
   their mean should be similar to the targets, in the baseline scenario.
+  The correspondingly modified pipeline values should be lower in the MMS-scale-up scenario, than they are in the baseline scenario.
 * Once ACMRisk pipeline values have been modified by cause-specific mortality risks,
   their mean should be similar to the targets, in the baseline scenario.
 
@@ -495,8 +496,14 @@ For the preterm-without-RDS subcause, our target is 15% of the same.
 * For preterm birth subcauses, CSMRisk pipeline values should be exactly zero for simulants
   who are not preterm (i.e. those with gestational age >= 37 weeks).
 * If modified by LBWSG *using the LBWSG value before any interventions*, the mean of the CSMRisk pipeline values should be similar to the targets.
-* Once CSMRisk pipeline values have been modified by using LBWSG post-interventions,
+  This value should be the same between the baseline scenario and the MMS-scale-up scenario.
+* Once CSMRisk pipeline values have been modified by using LBWSG post-interventions for the proportion of their CSMRisk that is affected by LBWSG (100% for all modeled causes, partial for "other causes"),
   their mean should be similar to the targets, in the baseline scenario.
+  The same value should be lower in the MMS-scale-up scenario than in baseline
+  by approximately the same proportion for all modeled causes, except that neonatal sepsis should be lower by more
+  (because it is also affected by MMS through the hemoglobin pathway).
+  This between-scenario contrast should be less pronounced for the "other causes" cause than the non-neonatal-sepsis modeled causes,
+  by a ratio of approximately the fraction of unmodeled cause mortality that is due to LBWSG-affected causes.
 * Once CSMRisk pipeline values have been modified by interventions,
   their mean should be similar to the targets, in the baseline scenario.
 
@@ -540,13 +547,6 @@ When multiple of these conditions apply to the same check, we combine percent ac
 * The observed number of deaths due to each subcause in each age and sex group divided by the observed number of births
   for that sex minus the observed number of deaths for that sex in younger age groups,
   should be within 10% of the corresponding GBD value (which was also the target in the previous check).
-
-.. todo::
-  Update these criteria to capture the LBWSG affected vs unaffected split. Below is a previous
-  rough draft, but this is not correct, because other-causes mortality is *not* completely unaffected
-  by LBWSG (there are LBWSG-affected causes that are not modeled causes).
-
-    Using the interactive simulation, verify that other causes mortality (and/or any future modeled unaffected subcauses) varies by LBWSG exposure but does not change in a scenario with added coverage of a LBWSG-affecting intervention such as IFA/MMS or IV iron. Additionally, verify that mortality due to modeled affected causes (including preterm, sepsis, and encephalopathy) varies as expected according to LBWSG exposure and is appropriately modified by new LBWSG-affecting intervention coverage.
 
 References
 ----------
