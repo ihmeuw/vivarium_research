@@ -240,9 +240,7 @@ For simplicity, we will not include YLDs in this model.
 Validation Criteria
 +++++++++++++++++++
 
-* Neonatal Sepsis mortality risk in simulation should match GBD estimates.
-
-* Relative Risk of Neonatal Sepsis death due to LBWSG should match overall neonatal mortality RR.
+For the MNCNH simulation, neonatal mortality V&V criteria are documented on :ref:`the neonatal mortality page <2021_cause_neonatal_disorders_mncnh>`.
 
 References
 ----------

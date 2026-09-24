@@ -219,9 +219,17 @@ Assumptions and Limitations
 Validation and Verification Criteria
 ------------------------------------
 
-- Population-level mortality rate should be the same as when this intervention is not included in the model
-- The ratio of RDS deaths per birth among those without CPAP access divided by those with CPAP access should equal the relative risk from the Cochrane Review
-- The baseline coverage of CPAP in each facility type should match the values in the artifact
+**In the interactive context:**
+
+* Confirm that the same propensity value is used for ACS and CPAP (when coverage is equal, there should be no eligible simulants who have one intervention and not the other).
+
+**From observed outputs:**
+
+* Coverage of CPAP by delivery facility type in the baseline scenario should approximately match the baseline
+  coverage values documented above.
+* The ratio of observed neonatal mortality risks (neonatal deaths divided by births) between those with CPAP available and not available,
+  within the subpopulation of those who are *not* ACS eligible and are preterm,
+  should be approximately the CPAP RR from the Cochrane Review.
 
 References
 ------------

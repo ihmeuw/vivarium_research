@@ -269,6 +269,9 @@ Validation and Verification Criteria
 - The ratio of sepsis deaths per birth among those without antibiotics access divided by those with antibiotics access should equal the relative risk parameter used in the model
 - The baseline coverage of antibiotics in each facility type should match the values in the artifact
 
+.. todo::
+  Update these criteria to be more detailed
+
 References
 ------------
 

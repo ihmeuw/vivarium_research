@@ -332,6 +332,9 @@ Validation and Verification Criteria
 - The baseline coverage of probiotics in each facility type should match the values in the artifact
 - Check whether the effect size on all cause mortality is within the confidence interval of the observed effect from [Lee-Him-et-al-2025]_
 
+.. todo::
+  Update these criteria to be more detailed
+
 References
 ------------
 
