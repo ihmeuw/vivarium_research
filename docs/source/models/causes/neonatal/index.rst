@@ -477,20 +477,28 @@ Validation Criteria
 
 **In the interactive context:**
 
-* Initial (pre-LBWSG-modified) ACMRisk pipeline values should exactly match the sex- and age-specific ACMRisk in the artifact, for every simulant.
-* If modified by LBWSG *using the LBWSG value before any interventions*, the mean of the ACMRisk pipeline values should be similar to the sex- and age-specific ACMRisk in the artifact.
+Our ACMRisk targets are the ACMRisk values stored in the artifact, which are age- and sex-specific.
+
+* Initial (pre-LBWSG-modified) ACMRisk pipeline values should exactly match the targets, for every simulant.
+* If modified by LBWSG *using the LBWSG value before any interventions*, the mean of the ACMRisk pipeline values should be similar to the targets.
 * Once ACMRisk pipeline values have been modified by using LBWSG post-interventions,
-  their mean should be similar to the sex- and age-specific ACMRisk in the artifact, in the baseline scenario.
+  their mean should be similar to the targets, in the baseline scenario.
 * Once ACMRisk pipeline values have been modified by cause-specific mortality risks,
-  their mean should be similar to the sex- and age-specific ACMRisk in the artifact, in the baseline scenario.
-* Initial (pre-LBWSG-modified) CSMRisk pipeline values should exactly match the sex- and age-specific CSMRisk in the artifact (or 85% and 15% of the preterm birth CSMRisk for preterm-with-RDS and preterm-without-RDS subcauses respectively), for every simulant and subcause.
+  their mean should be similar to the targets, in the baseline scenario.
+
+Our CSMRisk targets for all subcauses besides the preterm subcauses are the CSMRisk values stored
+in the artifact, which are age- and sex-specific.
+For the preterm-with-RDS subcause, our target is 85% of the preterm birth CSMRisk stored in the artifact.
+For the preterm-without-RDS subcause, our target is 15% of the same.
+
+* Initial (pre-LBWSG-modified) CSMRisk pipeline values should exactly match the targets, for every simulant and subcause.
 * For preterm birth subcauses, CSMRisk pipeline values should be exactly zero for simulants
   who are not preterm (i.e. those with gestational age >= 37 weeks).
-* If modified by LBWSG *using the LBWSG value before any interventions*, the mean of the CSMRisk pipeline values should be similar to the sex-, age-, and subcause-specific CSMRisk in the artifact (or calculated from it).
+* If modified by LBWSG *using the LBWSG value before any interventions*, the mean of the CSMRisk pipeline values should be similar to the targets.
 * Once CSMRisk pipeline values have been modified by using LBWSG post-interventions,
-  their mean should be similar to the sex-, age-, and subcause-specific CSMRisk in the artifact (or calculated from it), in the baseline scenario.
+  their mean should be similar to the targets, in the baseline scenario.
 * Once CSMRisk pipeline values have been modified by interventions,
-  their mean should be similar to the sex-, age-, and subcause-specific CSMRisk in the artifact (or calculated from it), in the baseline scenario.
+  their mean should be similar to the targets, in the baseline scenario.
 
 For the inexact checks, the level of similarity we expect depends on the check, due to known limitations:
 
