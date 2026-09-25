@@ -9,7 +9,7 @@
 - [ ] AI was NOT used for this PR <!--Skip the rest of this section, move to Verification and Testing -->
 - [ ] AI was used for this PR <!--Complete the below questions -->
 
-- *AI Use Description*: <!-- SHORT description about the amount of AI use. -->
+- *Short description of AI use*: <!-- Briefly describe how you used AI for this PR, including the amount of content that is AI-generated vs. not. -->
 - *Human TLDR of AI prompts and collaboration*:
 - *AI generated summary of prompts and collaboration*:
 
