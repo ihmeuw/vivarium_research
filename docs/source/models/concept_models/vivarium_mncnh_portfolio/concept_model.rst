@@ -1204,6 +1204,9 @@ Default stratifications to all observers should include scenario and input draw.
   The subdirectory names did not match the model numbers before model 6.1, and are given in parentheses next
   to the model number for older models.
 
+.. important:: 
+  The below table is **no longer being updated**! Model runs are now tracked via `this excel <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/MNCNH%20portfolio%20products/01_Planning/mncnh_run_tracker.xlsx?d=w29a6961c147443b3978c1f8843a7b351&csf=1&web=1&e=N5HyW9>`__.
+
 .. list-table:: Model runs
   :header-rows: 1
 
@@ -1977,52 +1980,88 @@ Default stratifications to all observers should include scenario and input draw.
     - Standard V&V scenarios
     - Default
     - 
-  * -
+  * - 37.1
+    - Postpartum bugfix
+    - Defines early and late postpartum periods to properly apply sepsis effects
+    - Standard V&V scenarios
+    - Default
+    - 
+  * - 37.1a
+    - Larger runs for exact maternal disorders check
+    - This larger run was done so we can have an exact check against the base version which was run at a larger population size. Closed without merging as we want the smaller population size in main.
+    - Standard V&V scenarios
+    - Default
+    - 
+  * - 37.2
+    - Remove late postpartum anemia YLDs
+    - Remove late postpartum hemoglobin from anemia YLDs results check because GBD targets are only for pregnancy period (does not include late postpartum)
+    - Standard V&V scenarios
+    - Default
+    - 
+  * - 38.0
+    - PPH/APH effects on hemoglobin
+    - Include effects of postpartum hemorrhage and antepartum hemorrhage on postpartum hemoglobin
+    - Standard V&V scenarios
+    - Default
+    - 
+  * - 38.1
+    - Postpartum bugfix
+    - Defines early and late postpartum periods in the same way as for sepsis on hemoglobin and apply hemorrhage effects during these periods.
+    - Standard V&V scenarios
+    - Default
+    - 
+  * - 38.2
+    - Don't apply iron effects to non-pregnant hemoglobin
+    - Updates the non-pregnant hemoglobin exposure so the iron interventions are no longer applied to it
+    - Standard V&V scenarios
+    - Default
+    - 
+  * - 38.3
+    - Redraw partial-term pregnancies at late postpartum
+    - Fix issue where we were not avoiding applying the baseline IFA deletion to non-pregnant hemoglobin
+    - Standard V&V scenarios
+    - Default
+    - 
+  * - 39.0
     - PPH/APH split updates
     - Include the PAF bugfixes from model 33.1. Update antepartum hemorrhage to only affect still or live births (not abortion/miscarriage/ectopic pregnancies) and adjust maternal disorders incidence rates for antepartum hemorrhage mortality.
       See `the relevant documentation <https://github.com/ihmeuw/vivarium_research/pull/1946>`__ for details on the latter updates.
     - Standard V&V scenarios
     - Default
     -
-  * -
-    - PPH/APH effects on hemoglobin
-    - Include effects of postpartum hemorrhage and antepartum hemorrhage on postpartum hemoglobin
-    - Standard V&V scenarios
-    - Default
-    - PPH/APH split updates run
-  * -
+  * - 40.0
     - Hemoglobin effects on depression and neonatal sepsis
     - New risk effect (using GBD RRs and custom PAFs) for depressive disorders; New risk effect (using custom RRs and PAFs) for neonatal sepsis
     - Standard V&V scenarios
     - Default
     -
-  * - 
-    - Postpartum hemorrhage split at 300 mL
-    - Differentiate the current "non-cases" of PPH (those with <500 mL blood loss) into "<300 mL" and "300-500 mL",
-      and stratify the postpartum hemorrhage burden observer by blood loss severity category.
-      See `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1961>`__ for details.
-    - Standard V&V scenarios
-    - Default
-    -
-  * -
-    - E-MOTIVE
-    - E-MOTIVE and its effects on postpartum hemorrhage.
-      See `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1961>`__ for details.
-    - Standard V&V scenarios; note that #19 E-MOTIVE total scaleup has been added to the list for this run
-    - Default
-    - Postpartum hemorrhage split at 300 mL run
-  * - 
+  * - 41.0
     - Separate LBWSG affected causes
     - Update neonatal mortality model to treat LBWSG-affected and -unaffected causes differently in accordance with `this pull request <https://github.com/ihmeuw/vivarium_research/pull/1760>`__
     - All
     - Default
     -
-  * -
-    - Remove APH
-    - Remove antepartum hemorrhage from the model; see `this PR <https://github.com/ihmeuw/vivarium_research/pull/1964>`__ for detailed changes
+  * - 42.0
+    - IFA risk specific shift bugfix
+    - Use same draw as excess shift for IFA birth-weight risk-specific (deletion) shift rather than independent draw per `this ticket <https://jira.ihme.washington.edu/browse/MIC-7350>`__
     - Standard V&V scenarios
     - Default
     -
+  * - 43.0
+    - Make ACS access independently configurable
+    - Enable `scenarios <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_mncnh_portfolio/concept_model.html#scenario-information>`__ where ACS coverage and CPAP coverage are independent
+    - Standard V&V scenarios
+    - Default
+    -
+  * - 43.0a
+    - Beginnings fund run
+    - Adds a scenario for comparison with the Beginnings Fund use of the LiST model per `this ticket <https://jira.ihme.washington.edu/browse/SSCI-2685>`__
+    - Beginnings fund
+    - Default
+    -
+
+.. important:: 
+  The above table is **no longer being updated**! Model runs are now tracked via `this excel <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/MNCNH%20portfolio%20products/01_Planning/mncnh_run_tracker.xlsx?d=w29a6961c147443b3978c1f8843a7b351&csf=1&web=1&e=N5HyW9>`__.
 
 .. note:: 
 
@@ -3182,21 +3221,61 @@ Default stratifications to all observers should include scenario and input draw.
     - Effects of maternal sepsis on postpartum hemoglobin
     - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident maternal sepsis
       * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
-    - 
-    -
-  * - 
-    - Hemoglobin effects on depression and neonatal sepsis
-    - * Confirm that neonatal mortality (particularly for neonatal sepsis) still matches expectation in the baseline scenario
-      * Using the interactive simulation, confirm effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. The total effect should be evaluated by stepping through the simulation and observing the rate of mortality due to neonatal sepsis stratified by maternal hemoglobin exposure.
-    - 
-    - 
-  * - 
+    - Sepsis effects not applied on the correct timesteps
+    - `Model 37.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/14c8dafde2ee0e5a2dca11d68234d46c6dc8d9e6/tests/model_notebooks>`__
+  * - 37.1
+    - Postpartum bugfix
+    - Same as above
+    - Variation due to smaller run than base
+    - `Model 37.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/c5e760d2ef10558c4579e1c488d0f0c191213e18/tests/model_notebooks>`__
+  * - 37.1a
+    - Larger runs for exact maternal disorders check
+    - Same as above
+    - Anemia YLDs overestimated
+    - `Model 37.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/0e42e6fcaf59c3ca4a33ab5cd49711c6b37fd66a/tests/model_notebooks>`__
+  * - 37.2
+    - Remove late postpartum anemia YLDs
+    - Same as above, do not include late postpartum in anemia YLDs values
+    - All checks passing
+    - `Model 37.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/c5e760d2ef10558c4579e1c488d0f0c191213e18/tests/model_notebooks>`__
+  * - 38.0
     - PPH/APH effects on hemoglobin
     - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident APH/PPH
       * Note that the baseline value of anemia YLDs should slightly increase relative to the value in the "Anemia YLDs" model run
-    - 
-    -
-  * - 
+    - Sepsis effects not applied on the correct timesteps
+    - `Model 38.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/9acba0aed0fc93db96af3729dcc34ac296c0cb46/tests/model_notebooks>`__
+  * - 38.1
+    - Postpartum bugfix
+    - Same as above
+    - Iron effects being applied to non-pregnant hemoglobin
+    - Notebooks not saved
+  * - 38.2
+    - Don’t apply iron effects to non-pregnant hemoglobin
+    - Same as above
+    - Not avoiding applying the baseline IFA deletion to non-pregnant hemoglobin
+    - Notebooks not saved
+  * - 38.3
+    - Redraw partial-term pregnancies at late postpartum
+    - Same as above
+    - All checks passing
+    - `Model 38.3 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/e4ad7aaf5297199ff92a786781c0dd770bed886f/tests/model_notebooks>`__
+  * - 39.0
+    - PPH/APH split updates
+    - * Confirm that maternal disorders incidences and moralities still matches expectations. Incidence and mortality for PPH as well as other maternal disorders should stay the same as APH cases are no longer eligible but incidence and CFR are increased.
+      * Check no partial term APH cases and APH cases disjoint w intrapartum disorders
+    - * All checks passing. 
+      * Significant overestimation in APH incidence and mortality was corrected by excluding a/m/e pregnancies. 
+      * Created `ticket <https://jira.ihme.washington.edu/browse/SSCI-2696>`__ for residual maternal disorders checks since we don't currently have any.
+    - `Model 39.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/5b132c7c10289d733ea907b00226925f19a29170/tests/model_notebooks>`__
+  * - 40.0
+    - Hemoglobin effects on depression and neonatal sepsis
+    - * Confirm that neonatal mortality (particularly for neonatal sepsis) still matches expectation in the baseline scenario
+      * Using the interactive simulation, confirm direct effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. 
+      * Using the interactive simualation, confirm total effect of IV iron on neonatal sepsis. The total effect should be evaluated by comparing the neonatal sepsis mortality risk values at the simulant level between the baseline scenario and the anemia screening and IV iron scale-up scenarios. Calculate the expected total effect using the neonatal sepsis mortality relative risk for IV iron and the observed using the direct and indirect CSV data. 
+    - * All unmodified existing checks and new checks are passing. 
+      * When adding the postpartum depression outcome incidence effect check, a bug was discovered in the other outcome incidence checks, which when fixed made the previous underestimation of PPH and maternal sepsis (and APH but we are removing that) worse. Not related to current V&V so made a `ticekt <https://jira.ihme.washington.edu/browse/SSCI-2786>`__.  
+    - `Model 40.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/3d6dad01272f93e3865ec1f223c0f5683359dd6a/tests/model_notebooks>`__
+  * - 41.0
     - Separate LBWSG affected causes
     - * Confirm that neonatal mortality continues to validate in the baseline scenario
       * Confirm that deaths averted between the baseline and MMS scale-up scenarios have decreased between this model run and the previous
@@ -3204,6 +3283,16 @@ Default stratifications to all observers should include scenario and input draw.
       * In the interactive simulation, confirm that mortality due to LBWSG-affected causes varies in accordance with intervention modified LBWSG exposure and that mortality due to LBWSG-unaffected causes varies in accordance with pre-intervention modified LBWSG exposure
     - 
     - 
+  * - 42.0
+    - IFA risk specific shift bugfix
+    - Same as base
+    - All tests passing
+    - `Model 42.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/0d620bd033cd0b288a1765a2acaec3db2a8e2840/tests/model_notebooks>`__
+  * - 43.0
+    -  Make ACS access independently configurable
+    - Same as base
+    - All tests passing
+    - `Model 43.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/54befc004cf9f40dfde284f67f054bccaa26f7f0/tests/model_notebooks>`__
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
@@ -3216,84 +3305,6 @@ Default stratifications to all observers should include scenario and input draw.
 .. _facility choice optimization results .csv file:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/blob/main/facility_choice/facility_choice_optimization_results.csv
 
-.. list-table:: Outstanding model verification and validation issues
-  :header-rows: 1
-
-  * - Issue
-    - Explanation
-    - Action plan
-    - Timeline
-  * - Unnecessary data assigned to abortion/miscarriage/ectopic pregnancy in the interactive simulation
-    - Including gestational age/birth weight exposures as well as neonatal mortality risk
-    - Engineers to update at their convenience
-    - TBD
-  * - Overestimating proportion of believed term given preterm fraction
-    - Originally thought to be related to failure to account for additional correlation induced by the baseline IFA calibration with respect to gestational age,
-      but this has not been resolved by model 30.0 updates to the oral iron GA shift implementation.
-      New theory is that our calibration causes mean gestational age to match, but not the proportion of preterm.
-    - `Research to investigate <https://jira.ihme.washington.edu/browse/SSCI-2614>`
-    - TBD
-  * - Early neonatal other causes mortality risk in Pakistan overestimated
-    - Unknown
-    - Assess whether this is due to the negative other causes mortality rate issue in the neonatal mortality V&V run
-    - Neonatal mortality V&V run
-  * - Abortion/miscarriage/ectopic pregnancies have non-null values for preterm birth, believed preterm, ACS eligibility in observed simulation results. While we can filter these results out, it presents opportunity for error in analyzing results and these values should be updated to N/A for partial term pregnancies
-    - Partial term pregnancies are assigned LBWSG exposures in the interactive sim and therefore are observed for these outputs
-    - Engineers to update at the same time as implementing observer revamp (`not yet documented as of 12/18/25 <https://jira.ihme.washington.edu/browse/SSCI-2517>`__)
-    - TBD
-  * - There is zero coverage of "ACS availability" among stillbirths even though stillbirths should be eligible and covered by this intervention.
-    - Likely a result of there being null coverage for CPAP availability for stillbirths (because they are not alive to receive CPAP). However, stillbirths should receive ACS coverage if they are in the relevant believed gestational age range and delivering in a facility that has CPAP access.
-    - Wait until we split stillbirths into antepartum and intrapartum before we address this issue, as only intrapartum stillbirths should receive ACS coverage (?)
-    - TBD
-  * - `Ferritin exposure model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2439>`__
-    - Ali's documentation issue resulted in known issues with ferritin data used for implementation of anemia screening model
-    - Either update to strategy outlined `in this PR <https://github.com/ihmeuw/vivarium_research/pull/1810>`__ or an alternative strategy using PRISMA data shared by the Gates foundation
-    - Will decide how to proceed when we receive PRISMA data
-  * - Unable to verify ferritin screening results among those who are not anemic according to hemoglobin level at the time of testing
-    - Re-address when we update ferritin exposure model
-    - Maintain existing behavior for now
-    - TBD
-  * - `Peripartum depression model needs updating <https://jira.ihme.washington.edu/browse/SSCI-2415>`__
-    - Current implementation is based off of an adaptation of the assumptions used in the GBD 2021 major depressive disorders cause model
-    - We will need to either (1) update our model to be in line with the GBD 2023 model and consider updating our PAF calculation strategy as described in this ticket, or (2) update to the extra-GBD data on peripartum depression obtained from the mental disorders modelers
-    - Will decide how to proceed after discussing with the mental disorders modelers 
-  * - Late neonatal mortality due to preterm birth slightly underestimated and other-causes mortality may be slightly overestimated (though within 10%)
-    - Unknown -- possibly related to negative other causes mortality in Pakistan and Nigeria.
-    - Neonatal mortality observers
-    - Larger run for neonatal mortality V&V
-  * - Late neonatal mortality due to preterm birth with RDS slightly (~2%) underestimated
-    - The PAF of ACS and CPAP on preterm birth with RDS CSMRisk is calculated with delivery facility proportions at birth, not at 7 days
-    - Accept this limitation, until/unless there are other reasons to revamp PAF calculation, since this would require many components not currently present in PAF sim
-    - N/A
-  * - Early neonatal mortality due to preterm birth with RDS slightly (~1.5%) overestimated and
-      late neonatal mortality slightly (~0.75%) underestimated across all causes
-    - The PAF of ACS and CPAP on preterm birth with RDS CSMRisk is calculated without accounting for
-      correlation between LBWSG and CPAP/ACS, which is induced by the facility choice model.
-      The miscalibration in ENN causes miscalibration of LBWSG exposure for LNN.
-    - Accept these limitations, until/unless there are other reasons to revamp PAF calculation,
-      since this would require many components not currently present in PAF sim.
-      Note that the LNN limitation stacks with the previous limitation for preterm birth with RDS to result in
-      a nearly 3% underestimate in that LNN CSMRisk.
-    - N/A
-  * - In GBD 2023 data for Pakistan the mortality values for the abortion and miscarriage cause (c_995) are very small (nearly the lowest of any national location globally),
-      causing unexpectedly low YLLs (~100 times fewer than India)
-    - Possible issue with ST-GPR model reacting to an all-zero datapoint added in GBD 2023 for Pakistan
-    - Determine cause of issue with GBD modeling team, decide whether to leave as-is or use a proxy location
-    - TBD
-  * - LBWSG exposures change between scenarios for simulants whose birth outcome changes between scenarios
-    - Due to different exposure distributions used for stillbirths vs. livebirths, given the different floors.
-    - Accept this limitation
-    - N/A
-  * - Severe anemia underestimated due to underestimate of hemoglobin exposure standard deviation for aggregated locations
-    - Hemoglobin exposure SDs for aggregated locations have been generated by central machinery as a population-weighted mean of the SDs for the most detailed locations,
-      which would only be correct if the mean exposure were the same across the most detailed locations.
-    - GBD anemia team to update the database and/or provide a flat file for these SDs
-    - N/A
-  * - Moderate anemia overestimated due to IFA delays
-    - We delete baseline IFA from all simulants and only add back the impact on hemoglobin when they receive IFA at ANC.
-      This inflates anemia prevalence vs the GBD hemoglobin distribution.
-    - Accept this limitation for now; if we revisit the baseline IFA deletion in the future, we can reassess this issue
-    - N/A
 
 .. _mncnh_portfolio_6.0:
 
