@@ -37,7 +37,21 @@ MNCNH Portfolio Costing Meta-Regression
   :local:
   :depth: 2
 
+.. _costing_mr_overview:
 
-.. todo:: 
-    
-    Add doc about costing meta-regressions
+1.0 Overview
+------------
+
+This document describes what happens to cost estimates after they have been
+extracted from the literature: how they are standardized into comparable units,
+how they are pooled into a single estimate per intervention, and how that estimate
+becomes a cost the
+:ref:`MNCNH Portfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>`
+can use.
+
+The companion document,
+:ref:`MNCNH Portfolio Costing Literature Review <costing_lit_review_vivarium_mncnh_portfolio>`,
+covers the search strategy, the cost taxonomy, and the extraction sheet. Reading it
+first will make the terminology here — cost category, unit cost, conversion factor,
+perspective — considerably easier to follow.
+
