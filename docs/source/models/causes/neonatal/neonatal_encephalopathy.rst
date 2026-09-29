@@ -86,13 +86,6 @@ and sex of simulants to which different aspects of the cause model apply.
 Vivarium Modeling Strategy
 --------------------------
 
-Scope
-+++++
-
-The Level 4 neonatal conditions included in the MNCNH Portfolio model are closely linked to the 
-:ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>`.  Since the LBWSG Risk Factor has an effect on overall neonatal mortality, this subcause will define a birth-weight- and gestational-age-specific cause specific mortality rate that the Overall Neonatal Disorders Model can use.  This risk-specific CSMR might then be further individualized based on treatment coverage and efficacy, to ensure that individuals who have access to a treatment like emergency C-section have a lower risk of mortality from neonatal encephalopathy than those who do not.
-
-
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
@@ -154,26 +147,34 @@ Note that these probabilities are not used directly in the model and are include
 Modeling Strategy
 +++++++++++++++++
 
-The Neonatal Encephalopathy submodel requires only the birth-weight- and gestation-age-stratified cause specific mortality risk during the early and late neonatal periods.
+The Neonatal Encephalopathy submodel needs to produce cause-specific mortality risks (CSMRisks) for encephalopathy for each simulant.
 
-The way these CSMRisks are used is the same for all subcauses, and therefore is included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.  This page describes the birth-weight- and gestational-age-specific cause specific mortality risks that are used for this cause on that page, :math:`\text{CSMR}^{\text{encephalopathy}}_{\text{BW},\text{GA}}`.
-The formula is:
+The way these CSMRisks are used is the same for all subcauses, and therefore is included in the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page.
+This page describes the CSMRisks modified by birth weight and gestational age,
+but not modified by interventions, :math:`\text{CSMRisk}_{i,\text{encephalopathy}}^0`.
+The other value used in the overall neonatal disorders model is
+:math:`\text{CSMRisk}_{i,\text{encephalopathy}}`, which is the value after direct modifications by interventions.
+These modifications are described on the relevant intervention pages.
+
+The formula for :math:`\text{CSMRisk}_{i,\text{encephalopathy}}^0` is:
 
 .. math::
-    \begin{aligned}
-    \text{CSMRisk}_{\text{BW},\text{GA}}
-    &=
-    \text{CSMRisk} \cdot \text{RR}_{\text{BW},\text{GA}} \cdot Z
-    \end{aligned}
+    \text{CSMRisk}_{i,\text{encephalopathy}}^0
+    =
+    \text{LBWSG}(\text{CSMRisk}_{\text{age}_i,\text{sex}_i}, \text{BW}_i, \text{GA}_i)
 
-where 
-:math:`\text{CSMRrisk}` is the cause-specific mortality risk for encephalopathy,
-:math:`\text{RR}_{\text{BW},\text{GA}}` is the relative risk of all-cause mortality for a birth weight of :math:`\text{BW}` and gestational age of :math:`\text{GA}` (after intervention effects have been applied), and :math:`Z` is a normalizing constant selected so that :math:`\int_{\text{BW}} \int_{\text{GA}} \text{RR}_{\text{BW},\text{GA}} \cdot Z = 1`.
+where
+:math:`\text{LBWSG}` is a function defined on the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>` page which applies the risk effects of LBWSG,
+:math:`\text{CSMRisk}_{\text{age},\text{sex}}` is the population-level cause-specific mortality risk for encephalopathy for a given age group and sex,
+:math:`\text{age}_i` and :math:`\text{sex}_i` are the age group and sex of simulant :math:`i`,
+and :math:`\text{BW}_i` and :math:`\text{GA}_i` are the birth weight and gestational age respectively of simulant :math:`i` (after intervention effects have been applied).
 
-.. note::
-  the choice to use :math:`\text{RR}_{\text{BW},\text{GA}}` in this equation is essentially arbitrary, and it could be replaced by any other nonnegative "weight function" :math:`w(\text{BW},\text{GA})` as long it doesn't lead to a negative "other causes" mortality risk.  But with this choice, :math:`Z` is equal to the :math:`1-\text{PAF}` of LBWSG on all-cause mortality.
-
-Each individual simulant :math:`i` has their own :math:`\text{CSMRisk}_i` that might be different from :math:`\text{CSMRisk}_{\text{BW}_i,\text{GA}_i}` (meaning the average birth-weight- and gestational-age-specific CSMRisk for simulants with the birth weight and gestational age matching simulant :math:`i`.  We recommend implementing this as a pipeline eventually because it will be modified by interventions (or access to interventions) relevant to this subcause.  (Until we implement those, we will have :math:`\text{CSMRisk}_{i} = \text{CSMRisk}_{\text{BW}_i,\text{GA}_i}`, though.)
+As described on the :ref:`Overall Neonatal Disorders Model <2021_cause_neonatal_disorders_mncnh>`
+page, the :math:`\text{LBWSG}` function makes use of the GBD relative risks of LBWSG (which are the
+same across all affected causes, including neonatal encephalopathy) and a custom-calculated PAF derived from
+these relative risks.
+GBD uses all-cause mortality data without adjustment for confounding to inform these relative risks,
+but assumes they represent the *causal* effect of LBWSG on each affected cause, and we do the same here.
 
 The following table shows the data needed for these
 calculations.
@@ -221,14 +222,6 @@ Data Tables
       - neonatal encephalopathy mortality risk
       - either csmrisk_enn or csmrisk_lnn depending on the simulant's age group
       - 
-    * - :math:`\text{RR}_{\text{BW},\text{GA}}`
-      - Relative Risk of all-cause mortality for a birth weight of BW and gestational age of GA
-      - interpolated from GBD data
-      - See :ref:`Low Birth Weight and Short Gestation (LBWSG) <2019_risk_effect_lbwsg>` page for details.
-    * - :math:`Z`
-      - Normalizing constant
-      - calculated from :math:`\text{RR}_{\text{BW},\text{GA}}` and LBWSG exposure distribution.
-      - see above for details.
         
 Calculating Burden
 ++++++++++++++++++

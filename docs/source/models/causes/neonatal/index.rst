@@ -219,9 +219,11 @@ The neonatal death model requires only the probability of death (aka "mortality 
 These mortality risks are age-group-, sex-, and location-specific.
 For brevity, sex and location subscripts are omitted in all equations.
 
-Rather than using GBD mortality rates and converting them into probability of deaths, we will use mortality risk as direct input data into our model. We will calculate mortality risk input data as age-specific death counts divided by live birth counts from GBD.
-
+Rather than using GBD mortality rates and converting them into probability of deaths, we will use mortality risk as direct input data into our model.
 Note that this strategy does not require any conversion between rates to probabilities NOR does it require any scaling to the duration of the age group. The mortality risk calculated as described below already represents the probability of dying within a neonatal age group and can be used directly as such in the simulation.
+
+.. note::
+  This strategy was updated in May of 2025 from a prior strategy of converting GBD mortality rates to probabilities. `The pull request that updated this strategy can be found here for reference. <https://github.com/ihmeuw/vivarium_research/pull/1654>`_ This strategy update was pursued following verification and validation issues in neonatal mortality and an exploration of potential solutions in model runs 6.1 through 6.4. Ultimately, a change from mortality rates to mortality risk was preferred given that it is the more policy relevant measure in the context of neonates, and accurately apportioning person time alive within the neonatal age group given the input data available to us was a challenge we judged to be unnecessary.
 
 To avoid confusion with mortality *rates* (typically referred to as the all-cause mortality rate, ACMR, or cause-specific mortality rates, CSMRs), we will refer to mortality *risk* as ACMRisk (all-cause mortality risk) and CSMRisk (cause-specific mortality risk), where:
 
@@ -239,9 +241,6 @@ and for a given cause of death:
 
   \text{CSMRisk}_\text{LNN} = \frac{\text{cause-specific deaths in the LNN age group}}{\text{live births} - \text{deaths due to all causes in the ENN age group}}
 
-
-Note that this strategy was updated in May of 2025 from a prior strategy of converting GBD mortality rates to probabilities. `The pull request that updated this strategy can be found here for reference. <https://github.com/ihmeuw/vivarium_research/pull/1654>`_ This strategy update was pursued following verification and validation issues in neonatal mortality and an exploration of potential solutions in model runs 6.1 through 6.4. Ultimately, a change from mortality rates to mortality risk was preferred given that it is the more policy relevant measure in the context of neonates, and accurately apportioning person time alive within the neonatal age group given the input data available to us was a challenge we judged to be unnecessary.
-
 The calculation of :math:`\text{ACMRisk}_i` (the all-cause mortality risk for a single simulant, :math:`i`) is a bit complicated, however.
 
 We want the :ref:`LBWSG risk factor <2021_risk_effect_lbwsg>` to be associated with mortality risk in **two** ways: causal, and non-causal.
@@ -249,9 +248,8 @@ The causal relationship reflects that LBWSG exposure causes increased risk of de
 The non-causal association reflects that LBWSG exposure is correlated with other causes of death (e.g., congenital anomalies) due to confounding factors such as general poor pregnancy health, but does not cause those deaths.
 The non-causal association is still important to include because some of our interventions are targeted by LBWSG exposure,
 so estimation of their impact depends on understanding how much burden is in the population at different levels of LBWSG exposure, even if that burden is not causally affected by LBWSG.
-The **total** association (causal + non-causal) between LBWSG exposure and all-cause mortality is well-captured by the GBD relative risk values for LBWSG,
+The **total** association (causal + non-causal) between LBWSG exposure and all-cause mortality is informed by the GBD relative risk values for LBWSG,
 which were derived from all-cause mortality data without adjustment for confounding.
-Additionally, GBD assumes that these relative risk values represent the *causal* effect of LBWSG on the subset of specific affected causes, and we will do the same in our simulation.
 
 First, we decompose the population ACMRisk into two parts: risk due to causes affected by the :ref:`LBWSG risk factor <2021_risk_effect_lbwsg>` and risk due to causes unaffected by it.
 
@@ -306,30 +304,43 @@ The last modifiers to :math:`\text{ACMRisk}_i` are the cause-specific mortality 
 In a typical Vivarium simulation, we delete CSMR for each modeled cause from the total ACMR, and then add back in EMR for the simulants with the cause.
 In this simulation, we do not track prevalence of our modeled subcauses, so we add back in CSMRisk (spreading mortality risk across all simulants rather than restricting it to prevalent cases);
 therefore, the only difference between what we delete and what we add back in is the effect of interventions directly (i.e. not through LBWSG) on the CSMRisk values.
-All of our modeled subcauses are affected by LBWSG causally (i.e. they are in the list of LBWSG-affected causes discussed above), so we apply LBWSG effects to them using the scenario-specific, not baseline, exposure values.
 Mathematically, we subtract off the CSMRisks for each modeled subcause :math:`k` *before any interventions act directly on the CSMRisks*, and then add back in CSMRisks *modified by interventions*:
 
 .. math::
     \begin{aligned}
-    \text{ACMRisk}_i &= \text{ACMRisk}_{\text{BW}_i,\text{GA}_i}^{\text{BW}_i^0,\text{GA}_i^0} - \sum_{k \in \text{modeled}} \text{LBWSG}(\text{CSMRisk}_k, \text{BW}_i, \text{GA}_i) \\
-    & + \sum_{k \in \text{modeled}} \text{CSMRisk}_{i}^{k},
+    \text{ACMRisk}_i &= \text{ACMRisk}_{\text{BW}_i,\text{GA}_i}^{\text{BW}_i^0,\text{GA}_i^0} - \sum_{k \in \text{modeled}} \text{CSMRisk}_{i,k}^0 \\
+    & + \sum_{k \in \text{modeled}} \text{CSMRisk}_{i,k},
     \end{aligned}
 
 where:
 
-- :math:`\text{CSMRisk}_k` is the cause-specific mortality risk for subcause :math:`k` in the total population
-- and :math:`\text{CSMRisk}_{i}^{k}` is the cause-specific mortality risk for subcause :math:`k` for simulant :math:`i` (both detailed in the `Modeled Subcauses`_ linked from this page).
+- :math:`\text{CSMRisk}_{i,k}^0` is the cause-specific mortality risk for subcause :math:`k` for simulant :math:`i` before any interventions have been applied directly to the CSMRisk
+- and :math:`\text{CSMRisk}_{i,k}` is the cause-specific mortality risk for subcause :math:`k` for simulant :math:`i` after interventions have been applied directly to the CSMRisk
+
+The calculation of both of these quantities is detailed on the cause-specific page linked
+under `Modeled Subcauses`_.
 
 In addition to determining which simulants die due to any cause, we also need to determine which subcause is underlying the death.  This is done by sampling from a categorical distribution obtained by renormalizing the CSMRisks:
 
 .. math::
     \begin{aligned}
-    \text{Pr}[\text{subcause} = k\;|\;\text{neonate died}] &= \frac{\text{CSMRisk}_{i}^{k}}
-    {\text{ACMRisk}_i},
+    \text{Pr}[\text{subcause} = k\;|\;\text{neonate died}] &=\frac{\text{CSMRisk}_{i,k}}
+    {\max(\text{ACMRisk}_i, \sum_{k=1}^K \text{CSMRisk}_{i,k})},
     \end{aligned}
 
-including a special :math:`k=0` for the residual "all other causes" category defined by :math:`\text{CSMRisk}_{i}^{0} = \text{ACMRisk}_i - \sum_{k=1}^K \text{CSMRisk}_{i}^{k}.`
+including a special :math:`k=0` for the residual "all other causes" category defined by :math:`\text{CSMRisk}_{i}^{0} = \max(\text{ACMRisk}_i, \sum_{k=1}^K \text{CSMRisk}_{i,k}) - \sum_{k=1}^K \text{CSMRisk}_{i,k}.`
 
+.. note::
+  This renormalization will cause our simulation not to underestimate GBD's CSMRisks
+  when :math:`\sum_{k=1}^K \text{CSMRisk}_{i,k} \gt \text{ACMRisk}_i`.
+  In practice, this rarely occurs in our modeled locations.
+
+.. note::
+  Because *all* of our modeled subcauses currently use the same LBWSG relative risks
+  as all-cause mortality, except that the preterm subcauses set these to 0 for non-preterm categories
+  and rescale them by a constant in the preterm categories,
+  it then follows that the conditional probability of death from each cause (given that the neonate dies) will be equal across preterm LBWSG categories,
+  and also equal across non-preterm LBWSG categories.
 
 Data Tables
 +++++++++++
@@ -412,11 +423,11 @@ Data Tables
           * ``'risk_factor.low_birth_weight_and_short_gestation.birth_exposure'``
           * ``'risk_factor.low_birth_weight_and_short_gestation.relative_risk'``
       - Capping of LBWSG RRs is intended to guarentee that there will be no individual mortality risk value is greater than 1 in our simulation 
-    * - :math:`\text{CSMRisk}^k_{\text{BW},\text{GA}}`
-      - cause-specific mortality risk for subcause k, for population with birth weight BW and gestational age GA
+    * - :math:`\text{CSMRisk}_{i,k}^0`
+      - cause-specific mortality risk for subcause k, for individual i, before any interventions are applied directly to the CSMRisk
       - GBD + assumption about relative risks
       - see subcause models for details
-    * - :math:`\text{CSMRisk}^k_i`
+    * - :math:`\text{CSMRisk}_{i,k}`
       - cause-specific mortality risk for subcause k, for individual i
       - GBD + assumption about relative risks + intervention model effects
       - see subcause models for details
