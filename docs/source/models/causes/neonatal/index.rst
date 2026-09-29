@@ -331,7 +331,7 @@ In addition to determining which simulants die due to any cause, we also need to
 including a special :math:`k=0` for the residual "all other causes" category defined by :math:`\text{CSMRisk}_{i}^{0} = \max(\text{ACMRisk}_i, \sum_{k=1}^K \text{CSMRisk}_{i,k}) - \sum_{k=1}^K \text{CSMRisk}_{i,k}.`
 
 .. note::
-  This renormalization will cause our simulation not to underestimate GBD's CSMRisks
+  This renormalization will cause our simulation to underestimate GBD's CSMRisks
   when :math:`\sum_{k=1}^K \text{CSMRisk}_{i,k} \gt \text{ACMRisk}_i`.
   In practice, this rarely occurs in our modeled locations.
 
