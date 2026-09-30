@@ -526,6 +526,13 @@ For the inexact checks, the level of similarity we expect depends on the check, 
 
 When multiple of these conditions apply to the same check, we combine percent acceptable miscalibrations additively.
 
+.. note::
+  These expected deviations are a bit of an anachronism.
+  We didn't actually pre-specify these values. Instead, we went into V&V expecting everything to match exactly, and then it didn't.
+  We figured out why, and we said that the current levels of deviation as a result were acceptable.
+  We then added bounds for approximately the current levels of deviation, so we would notice if things got worse.
+  The numbers above are rounded up from these bounds, to roughly reflect that what we saw wasn't the *most* extreme deviation we would have found acceptable.
+
 **From observed outputs:**
 
 * The mean ACMRisk observed in each age and sex group in the baseline scenario should be within 10% of
