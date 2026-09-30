@@ -211,13 +211,16 @@ Validation and Verification Criteria
 
 - Coverage of ACS by delivery facility type in the baseline scenario should approximately match the baseline
   coverage values documented above.
-- The ratio of preterm with RDS neonatal mortality risks (neonatal deaths divided by births) between those with and without ACS available,
+- The ratio of preterm with RDS neonatal mortality risks (neonatal deaths divided by births) between those with and without ACS available in the baseline scenario,
   within the subpopulation of those who are ACS eligible and deliver in CEmONC,
   should be approximately the product of the ACS and CPAP RRs in the documentation,
   since everyone with ACS also has CPAP.
 
-.. todo::
-  Better document the reason for the subsetting in the RR check
+.. note::
+  This last check could be made less approximate (but still not exact) by comparing between
+  two custom scenarios with 0% and 100% ACS coverage, rather than comparing simulants with and without ACS available
+  within a scenario.
+  This would take advantage of CRN.
 
 References
 ------------
