@@ -488,7 +488,7 @@ Our ACMRisk targets are the ACMRisk values stored in the artifact, which are loc
 
 Our CSMRisk targets for all subcauses besides the preterm subcauses are the CSMRisk values stored
 in the artifact, which are age- and sex-specific.
-For the preterm-with-RDS subcause, our target is the RDS-specific fraction of the preterm birth CSMRisk stored in the artifact (85%, as defined on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`.
+For the preterm-with-RDS subcause, our target is the RDS-specific fraction of the preterm birth CSMRisk stored in the artifact (85%, as defined on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`).
 For the preterm-without-RDS subcause, our target is (1 - the RDS-specific fraction) of the same (15%).
 
 * Initial (pre-LBWSG-modified) CSMRisk pipeline values should exactly match the targets, for every simulant and subcause.
