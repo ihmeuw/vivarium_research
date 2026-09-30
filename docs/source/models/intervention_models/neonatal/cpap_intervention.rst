@@ -221,7 +221,7 @@ Validation and Verification Criteria
 
 **In the interactive context:**
 
-* Confirm that the same propensity value is used for ACS and CPAP (when coverage is equal, there should be no eligible simulants who have one intervention and not the other).
+* Confirm that the same propensity value is used for ACS and CPAP: when coverage is equal (true for the baseline and ACS/CPAP scale-up scenarios), there should be no eligible simulants who have one intervention and not the other.
 
 **From observed outputs:**
 

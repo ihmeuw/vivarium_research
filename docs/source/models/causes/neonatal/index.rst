@@ -477,10 +477,10 @@ Validation Criteria
 
 **In the interactive context:**
 
-Our ACMRisk targets are the ACMRisk values stored in the artifact, which are age- and sex-specific.
+Our ACMRisk targets are the ACMRisk values stored in the artifact, which are location-, age-, and sex-specific.
 
 * Initial (pre-LBWSG-modified) ACMRisk pipeline values should exactly match the targets, for every simulant.
-* If modified by LBWSG *using the LBWSG value before any interventions*, the mean of the ACMRisk pipeline values should be similar to the targets.
+* If modified by LBWSG *using the LBWSG value before the application of any intervention calibration or effects*, the mean of the ACMRisk pipeline values should be similar to the targets.
 * Once ACMRisk pipeline values have been modified by using LBWSG post-interventions for the proportion of ACMRisk that is affected by LBWSG,
   their mean should be similar to the targets, in the baseline scenario.
   The correspondingly modified pipeline values should be lower in the MMS-scale-up scenario, than they are in the baseline scenario.
@@ -489,8 +489,8 @@ Our ACMRisk targets are the ACMRisk values stored in the artifact, which are age
 
 Our CSMRisk targets for all subcauses besides the preterm subcauses are the CSMRisk values stored
 in the artifact, which are age- and sex-specific.
-For the preterm-with-RDS subcause, our target is 85% of the preterm birth CSMRisk stored in the artifact.
-For the preterm-without-RDS subcause, our target is 15% of the same.
+For the preterm-with-RDS subcause, our target is the RDS-specific fraction of the preterm birth CSMRisk stored in the artifact (85%, as defined on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`).
+For the preterm-without-RDS subcause, our target is (1 - the RDS-specific fraction) of the same (15%).
 
 * Initial (pre-LBWSG-modified) CSMRisk pipeline values should exactly match the targets, for every simulant and subcause.
 * For preterm birth subcauses, CSMRisk pipeline values should be exactly zero for simulants
@@ -532,6 +532,13 @@ For the inexact checks, the level of similarity we expect depends on the check, 
   been modified by an impacted preterm CSMRisk, we say that could cause up to a 2.5% miscalibration.
 
 When multiple of these conditions apply to the same check, we combine percent acceptable miscalibrations additively.
+
+.. note::
+  These expected deviations are a bit of an anachronism.
+  We didn't actually pre-specify these values. Instead, we went into V&V expecting everything to match exactly, and then it didn't.
+  We figured out why, and we said that the current levels of deviation as a result were acceptable.
+  We then added bounds for approximately the current levels of deviation, so we would notice if things got worse.
+  The numbers above are rounded up from these bounds, to roughly reflect that what we saw wasn't the *most* extreme deviation we would have found acceptable.
 
 **From observed outputs:**
 
