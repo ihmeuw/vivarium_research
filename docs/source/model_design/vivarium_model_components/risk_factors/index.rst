@@ -21,6 +21,8 @@ See the following pages for more information on these risk factor sub-components
    risk_mediation/index
    residual_confounding/index
 
+.. _risk_factors_gbd:
+
 Risk factors in GBD
 ^^^^^^^^^^^^^^^^^^^
 
