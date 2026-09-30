@@ -477,19 +477,19 @@ Validation Criteria
 
 **In the interactive context:**
 
-Our ACMRisk targets are the ACMRisk values stored in the artifact, which are age- and sex-specific.
+Our ACMRisk targets are the ACMRisk values stored in the artifact, which are location-, age-, and sex-specific.
 
 * Initial (pre-LBWSG-modified) ACMRisk pipeline values should exactly match the targets, for every simulant.
-* If modified by LBWSG *using the LBWSG value before any interventions*, the mean of the ACMRisk pipeline values should be similar to the targets.
-* Once ACMRisk pipeline values have been modified by using LBWSG post-interventions,
+* If modified by LBWSG *using the LBWSG value before the application of any intervention calibration or effects*, the mean of the ACMRisk pipeline values should be similar to the targets.
+* Once ACMRisk pipeline values have been modified by using intervention-modified LBWSG exposures,
   their mean should be similar to the targets, in the baseline scenario.
 * Once ACMRisk pipeline values have been modified by cause-specific mortality risks,
   their mean should be similar to the targets, in the baseline scenario.
 
 Our CSMRisk targets for all subcauses besides the preterm subcauses are the CSMRisk values stored
 in the artifact, which are age- and sex-specific.
-For the preterm-with-RDS subcause, our target is 85% of the preterm birth CSMRisk stored in the artifact.
-For the preterm-without-RDS subcause, our target is 15% of the same.
+For the preterm-with-RDS subcause, our target is the RDS-specific fraction of the preterm birth CSMRisk stored in the artifact (85%, as defined on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`.
+For the preterm-without-RDS subcause, our target is (1 - the RDS-specific fraction) of the same (15%).
 
 * Initial (pre-LBWSG-modified) CSMRisk pipeline values should exactly match the targets, for every simulant and subcause.
 * For preterm birth subcauses, CSMRisk pipeline values should be exactly zero for simulants
