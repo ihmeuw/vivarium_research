@@ -481,30 +481,37 @@ Our ACMRisk targets are the ACMRisk values stored in the artifact, which are loc
 
 * Initial (pre-LBWSG-modified) ACMRisk pipeline values should exactly match the targets, for every simulant.
 * If modified by LBWSG *using the LBWSG value before the application of any intervention calibration or effects*, the mean of the ACMRisk pipeline values should be similar to the targets.
-* Once ACMRisk pipeline values have been modified by using LBWSG post-interventions for the proportion of ACMRisk that is affected by LBWSG,
+* Once ACMRisk pipeline values have been modified by using intervention-modified LBWSG exposures,
   their mean should be similar to the targets, in the baseline scenario.
-  The correspondingly modified pipeline values should be lower in the MMS-scale-up scenario, than they are in the baseline scenario.
+* The mean of ACMRisk pipeline values that have been modified by intervention-modified LBWSG exposures should be lower in the MMS-scale-up scenario than it is in the baseline scenario.
 * Once ACMRisk pipeline values have been modified by cause-specific mortality risks,
   their mean should be similar to the targets, in the baseline scenario.
+* The mean of ACMRisk pipeline values modified by cause-specific mortality risks should be lower in the MMS-scale-up scenario, than it is in the baseline scenario.
 
-Our CSMRisk targets for all subcauses besides the preterm subcauses are the CSMRisk values stored
+Our CSMRisk targets for all modeled subcauses besides the preterm subcauses are the CSMRisk values stored
 in the artifact, which are age- and sex-specific.
-For the preterm-with-RDS subcause, our target is the RDS-specific fraction of the preterm birth CSMRisk stored in the artifact (85%, as defined on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`).
-For the preterm-without-RDS subcause, our target is (1 - the RDS-specific fraction) of the same (15%).
+For the preterm-with-RDS subcause, our target is the RDS-specific fraction (85%, as defined on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`) of the preterm birth CSMRisk stored in the artifact.
+For the preterm-without-RDS subcause, our target is one minus the RDS-specific fraction (15%) of the same.
 
 * Initial (pre-LBWSG-modified) CSMRisk pipeline values should exactly match the targets, for every simulant and subcause.
 * For preterm birth subcauses, CSMRisk pipeline values should be exactly zero for simulants
   who are not preterm (i.e. those with gestational age >= 37 weeks).
 * If modified by LBWSG *using the LBWSG value before any interventions*, the mean of the CSMRisk pipeline values should be similar to the targets.
   This value should be the same between the baseline scenario and the MMS-scale-up scenario.
-* Once CSMRisk pipeline values have been modified by using LBWSG post-interventions for the proportion of their CSMRisk that is affected by LBWSG (100% for all modeled causes, partial for "other causes"),
+* Once CSMRisk pipeline values have been modified by using intervention-modified LBWSG exposures, but not by any other risk factors,
   their mean should be similar to the targets, in the baseline scenario.
-  The same value should be lower in the MMS-scale-up scenario than in baseline
-  by approximately the same proportion for all modeled causes, except that neonatal sepsis should be lower by more
-  (because it is also affected by MMS through the hemoglobin pathway).
-  This between-scenario contrast should be less pronounced for the "other causes" cause than the non-neonatal-sepsis modeled causes,
-  by a ratio of approximately the fraction of unmodeled cause mortality that is due to LBWSG-affected causes.
-* Once CSMRisk pipeline values have been modified by interventions,
+  The same value should be lower in the MMS-scale-up scenario than in baseline.
+  The proportion by which the value is lower should be the same between the two modeled preterm subcauses,
+  and between the two modeled non-preterm subcauses, within each sex.
+  When the same check is additionally stratified by preterm/non-preterm status, the proportions should be the same
+  across all applicable modeled subcauses.
+* If "other causes" mortality risk is calculated using the CSMRisk pipelines modified by intervention-modified LBWSG exposures
+  (but not by other risk factors or interventions directly), combined with the ACMRisk modified by *the same partially-modified CSMRisks*,
+  then the ratio between the mean value in the MMS-scale-up scenario and in baseline,
+  within each sex and preterm/non-preterm group,
+  should be closer to 1 than the same ratio for the modeled subcauses
+  by approximately the fraction of unmodeled cause mortality that is not due to LBWSG-affected causes.
+* Once CSMRisk pipeline values have been modified by additional risk factors (e.g. hemoglobin) and interventions,
   their mean should be similar to the targets, in the baseline scenario.
 
 For the inexact checks, the level of similarity we expect depends on the check, due to known limitations:
