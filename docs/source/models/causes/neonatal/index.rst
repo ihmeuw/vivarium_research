@@ -483,7 +483,7 @@ Our ACMRisk targets are the ACMRisk values stored in the artifact, which are loc
 * If modified by LBWSG *using the LBWSG value before the application of any intervention calibration or effects*, the mean of the ACMRisk pipeline values should be similar to the targets.
 * Once ACMRisk pipeline values have been modified by using intervention-modified LBWSG exposures,
   their mean should be similar to the targets, in the baseline scenario.
-* The mean of ACMRisk pipeline values that have been modified by intervention-modified LBWSG exposures should be lower in the MMS-scale-up scenario than it is in the baseline scenario.
+* The mean of ACMRisk pipeline values that have been modified by intervention-modified LBWSG exposures should be lower in the MMS-scale-up scenario than in the baseline scenario.
 * Once ACMRisk pipeline values have been modified by cause-specific mortality risks,
   their mean should be similar to the targets, in the baseline scenario.
 * The mean of ACMRisk pipeline values modified by cause-specific mortality risks should be lower in the MMS-scale-up scenario, than it is in the baseline scenario.
@@ -511,8 +511,12 @@ For the preterm-without-RDS subcause, our target is one minus the RDS-specific f
   within each sex and preterm/non-preterm group,
   should be closer to 1 than the same ratio for the modeled subcauses
   by approximately the fraction of unmodeled cause mortality that is not due to LBWSG-affected causes.
-* Once CSMRisk pipeline values have been modified by additional risk factors (e.g. hemoglobin) and interventions,
+* Once CSMRisk pipeline values have been fully modified, by additional risk factors (e.g. hemoglobin) and interventions,
   their mean should be similar to the targets, in the baseline scenario.
+* Once CSMRisk pipeline values have been fully modified, the mean "other causes" mortality risk ratios between baseline
+  and MMS-scale-up scenarios, stratified by sex and preterm/non-preterm status,
+  should still be closer to 1 than the same ratios for the modeled subcauses
+  (which will have diverged from each other).
 
 For the inexact checks, the level of similarity we expect depends on the check, due to known limitations:
 
