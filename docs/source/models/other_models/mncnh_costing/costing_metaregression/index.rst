@@ -51,7 +51,11 @@ can use.
 
 The companion document,
 :ref:`MNCNH Portfolio Costing Literature Review <costing_lit_review_vivarium_mncnh_portfolio>`,
-covers the search strategy, the cost taxonomy, and the extraction sheet. Reading it
-first will make the terminology here — cost category, unit cost, conversion factor,
-perspective — considerably easier to follow.
+covers the search strategy, the cost taxonomy, and the extraction sheet. We suggest you read 
+that first if you have questions about the context of the input data used in the meta-regression
+described here. 
 
+.. todo:: 
+
+  Fill in the rest of this document with info on data processing step (SOP once estimates are extracted) 
+  and meta-regression with MR-BRT (and other statistical methods considered).

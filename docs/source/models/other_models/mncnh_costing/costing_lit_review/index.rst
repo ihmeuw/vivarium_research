@@ -90,11 +90,12 @@ along with their corresponding model documentation and the status of cost estima
   * - Antenatal
     - Anemia screening (ANC hemoglobin testing)
     - :ref:`Anemia screening <anemia_screening>`
-    - Cost estimates have been extracted from literature but not yet processed
+    - Cost estimates have been extracted from literature but not yet processed; 
+      second wave of literature search is needed due to minimal evidence found in the first wave
   * - Antenatal
-    - Standard and AI-assisted ultrasound
+    - Standard, point-of-care, and AI-assisted ultrasound
     - :ref:`AI ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-    - Cost estimates have been extracted from literature and partially processed
+    - Cost estimates have been extracted from literature and partially processed [[todo: double-check the types of ultrasound we want to process costs for]]
   * - Antenatal
     - Pre-eclampsia testing and treatment
     - Not yet documented
@@ -108,7 +109,7 @@ along with their corresponding model documentation and the status of cost estima
     - :ref:`Misoprostol intervention <misoprostol_intervention>`
     - Cost estimates have been extracted from literature but not yet processed
   * - Intrapartum
-    - Antenatal corticosteroids
+    - Antenatal corticosteroids (ACS)
     - :ref:`ACS intervention <acs_intervention>`
     - Cost estimates have not yet been extracted from literature
   * - Intrapartum
@@ -116,7 +117,7 @@ along with their corresponding model documentation and the status of cost estima
     - :ref:`E-MOTIVE intervention <emotive_intervention>`
     - Cost estimates have not yet been extracted from literature
   * - Intrapartum
-    - Caesarean section (elective and emergent [[double-check types of c-section]])
+    - Caesarean section (elective and emergent [[todo: double-check types of c-section]])
     - :ref:`Intrapartum interventions module <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Cost estimates have not yet been extracted from literature 
   * - Intrapartum
@@ -124,13 +125,17 @@ along with their corresponding model documentation and the status of cost estima
     - Not yet documented
     - Cost estimates have not yet been extracted from literature
   * - Neonatal
-    - Inpatient and outpatient antibiotic management of PSBI
+    - Inpatient antibiotic management of PSBI
+    - :ref:`Neonatal antibiotics <intervention_neonatal_antibiotics>`
+    - Cost estimates have been extracted from literature and partially processed
+  * - Neonatal
+    - Outpatient antibiotic management of PSBI
     - :ref:`Neonatal antibiotics <intervention_neonatal_antibiotics>`
     - Cost estimates have been extracted from literature and partially processed
   * - Neonatal
     - CPAP for respiratory distress syndrome
     - :ref:`CPAP intervention <intervention_neonatal_cpap>`
-    - Cost estimates have been partially extracted from literature ([[double-check: literature review still in screening phase?]])
+    - Cost estimates have been partially extracted from literature ([[todo: double-check: literature review still in screening phase?]])
   * - Neonatal
     - Probiotics for infection prevention in preterm neonates
     - :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
@@ -149,32 +154,37 @@ along with their corresponding model documentation and the status of cost estima
 2.1 Three kinds of extracted estimate
 +++++++++++++++++++++++++++++++++++++
 
-Extracted values fall into one of three buckets, recorded in the ``cost_type``
-field of the extraction sheet:
+In this literature review, we are extracting cost estimates that fall into one of 3 buckets (listed below), 
+not all of which will be used directly as inputs to our costing meta-regression. 
 
-**Unit costs** — the cost of delivering one unit of intervention to one person.
+1. **Unit costs** — the cost of delivering one unit of intervention to one person.
 These are the focus of the costing model and the input to the meta-regression.
+As noted previously, in a future iteration of this analysis, we hope to more realistically reflect the costs of intervention scale-up beyond the per-person unit cost, 
+by considering how various cost components might scale by a factor other than the number of persons reached.
 
-**Cost-effectiveness estimates** — published ICERs and similar. These are *not*
+2. **Cost-effectiveness estimates** — published ICERs and similar estimates. These are *not*
 inputs to our analysis; they are retained as validity checks against the
 cost-effectiveness estimates we eventually produce from our own unit costs and
 simulation output.
 
-**Offset costs** — as above: extracted, but out of scope for the unit cost.
+3. **Offset costs** — averted costs due to reduction of burden downstream of intervention delivery
+(e.g., averted health system costs due to decreased time spent in NICU or hospital, averted personnel costs due to decreased staff time treating burden, and averted patient spending).
 
 2.2 Unit cost taxonomy (wave 1)
 -------------------------------
 
-[[after defining unit costs, show how we're using  wave 1 cost taxonomy and 
-to calculate our first estimates via regression (regression for each intervention-category
-pair, then sum total to get overall cost of intervention per person)]]
+In our wave 1 analysis, we are calculating unit cost by considering the following components which make up the total cost required to treat one person with a given intervention.
+The cost taxonomy diagram below illustrates how we break down each unit cost. 
+
+
+[[todo: insert PNG of cost taxonomy]]
 
 2.3 Unit cost taxonomy (wave 2 & 3)
 -----------------------------------
 
-[[describe how each cost category has a different natural unit
+[[todo:describe how each cost category has a different natural unit
 and even though for wave 1 costs we are assuming all cost categories scale up by person, 
-we know it's more complicated than this in reality]]
+we know it's more complicated than this in reality for most of the cost categories except for personnel costs.]]
 
 
 3.1 Intervention Profile Sheet
@@ -205,32 +215,43 @@ For each intervention, the sheet records:
 4.0 Literature review methods
 -----------------------------
 
-We follow PRISMA 2020 guidelines and the GBD systematic review protocol so that the
-search is systematic and replicable. Searches are conducted and tracked in
-**DistillerSR**, which retains PubMed search history, allows inclusion criteria to
-be edited retroactively without restarting screening, and maintains the PRISMA 2020
-flow diagram automatically. One search is run per intervention. 
+We follow PRISMA 2020 guidelines and the GBD systematic review protocol so that each
+search is systematic and replicable. Each intervention has its own search strategy 
+and set of inclusion criteria, aside from IFA and MMS which we bundled together, 
+as well as IV iron and oral iron treatment for anemia. 
+Searches are conducted and tracked in **DistillerSR**, 
+which retains PubMed search history, 
+allows inclusion criteria to be edited retroactively without restarting screening, 
+and maintains the PRISMA 2020 flow diagram automatically. 
 
 
-4.1 Review process
-++++++++++++++++++
+
+4.2 Our review process
+++++++++++++++++++++++
 
 1. Develop inclusion criteria and the search string, with assistance from a UW
-   Health Sciences librarian.
-2. Run the search in PubMed within Distiller; import EMBASE references (and Web of
-   Science and EconLit where relevant) separately; de-duplicate.
-3. **Screening level 1 (title/abstract).** One reviewer screens 100% of references;
+   Health Sciences librarian. (Note: after consulting with a UW Health Sciences 
+   librarian for our first few interventions, we shifted to developing our own search strategies independently.)
+2. Run the search in PubMed within Distiller; import EMBASE references separately; de-duplicate.
+3. Create screening forms in DistillerSR for both title/abstract and full-text screening 
+  (Note: can copyforms from other interventions and adapt as needed.)
+4. **Screening level 1 (title/abstract).** One reviewer screens 100% of references;
    a second reviewer screens a random 10% as a quality check. Conflicts are
    resolved by group discussion.
-4. **Screening level 2 (full text).** Same dual-screening protocol.
-5. Iterate on search strategy and inclusion criteria depending on the number of
+5. **Screening level 2 (full text).** Same dual-screening protocol.
+6. Iterate on search strategy and inclusion criteria depending on the number of
    references returned.
-6. Data extraction into the extraction sheet.
-7. Data processing for meta-regression — see the
+7. Extract cost estimates and relevant study information into the extraction sheet.
+8. Process data for meta-regression — see the
    :ref:`meta-regression document <costing_metaregression_vivarium_mncnh_portfolio>`.
 
-Reviews and meta-analyses are excluded from extraction, but are flagged during
-screening so that their reference lists can be used to augment the search.
+..note:: 
+  
+  Reviews and meta-analyses are excluded from extraction (except where cost-effectiveness
+  estimates are reported, which we will use to validate our own estimates once calculated), 
+  but are flagged during screening so that their reference lists can be used to augment the search.
+  Every stage of the review process should be fully documented with notes of any decisions, assumptions,
+  or other observations made during the process.
 
 
 4.2 Inclusion and exclusion criteria
@@ -241,7 +262,8 @@ Intervention, Comparison, Outcome, Study design. In DistillerSR, exclusion reaso
 are selected from a form so that exclusions are auditable.
 
 Across all interventions the study design criterion is the same: **RCT or costing
-study collecting primary data**.
+study collecting primary data or using modeled costs in which sources of input cost
+data are clearly reported**.
 
 .. list-table:: PICOS criteria by intervention
   :header-rows: 1
@@ -302,7 +324,7 @@ study collecting primary data**.
 4.3 Search strategy
 +++++++++++++++++++
 
-[[ link to sharepoint excel with search strategies for each intervention and note that
+[[todo: add link to sharepoint excel with search strategies for each intervention and note that
 searches are also tracked in distiller]]
 
 .. _costing_lit_review_extraction:
@@ -310,83 +332,8 @@ searches are also tracked in distiller]]
 5.0 Data extraction
 -------------------
 
-.. list-table:: Extraction sheet fields
-  :header-rows: 1
-  :widths: 32 68
-
-  * - Field
-    - Description
-  * - ``citation``
-    - Short citation.
-  * - ``URL/file_path``
-    - URL, file path, or DOI for the source.
-  * - ``year_published``
-    - Publication year.
-  * - ``study_design``
-    - Type of study or article.
-  * - ``study_location``
-    - Country or location; repeated for every value from that study.
-  * - ``year_start``, ``year_end``
-    - Years the data in the study pertain to.
-  * - ``table or page_number``
-    - Where in the source the value was reported.
-  * - ``intervention_name``
-    - Name of the MNCNH portfolio intervention.
-  * - ``target_population``
-    - Who was included in the study's cost estimates.
-  * - ``healthcare_setting``
-    - Facility type or setting.
-  * - ``intervention_description``
-    - What the intervention consisted of, including dosage and regimen.
-  * - ``cost_type_description``
-    - How the study authors described this cost, in their words.
-  * - ``cost_type_description_simplified``
-    - Standardized description of what the cost includes. More specific than the
-      cost category — "probiotics" rather than "product cost" — and standardized
-      enough to group like costs across studies for the regression.
-  * - ``cost_category``
-    - Which taxonomy category or categories this maps to.
-  * - ``cost_value``
-    - The extracted cost estimate. One value per row.
-  * - ``uncertainty_value``
-    - The uncertainty value or values, if reported.
-  * - ``uncertainty_type``
-    - How uncertainty is defined: 95% CI, standard deviation, min–max.
-  * - ``uncertainty_origin``
-    - How the uncertainty arose — three different costs averaged, a range of prices
-      across facilities. This informs how the uncertainty can be used in the
-      regression.
-  * - ``cost_unit``
-    - Unit of the cost as reported: per visit, per patient, per cohort, per day.
-  * - ``conversion_factor``
-    - The number needed to convert the reported value to a unit cost: length of
-      treatment, number of people, dosage.
-  * - ``conversion_factor_description``
-    - What the conversion factor represents for this study.
-  * - ``payer_perspective``
-    - Perspective, if reported.
-  * - ``currency``
-    - Currency the cost was reported in.
-  * - ``base_year``
-    - Base year for inflation adjustment.
-  * - ``data_source``
-    - Where the study obtained the cost: primary micro-costing, price catalogue,
-      facility survey, expert opinion, manufacturer quote. Also indicates whether
-      prices were collected locally or from international markets, which determines
-      the currency conversion approach.
-  * - ``notes``
-    - Anything else needed to interpret the value.
-  * - ``extractor``
-    - Who extracted the row.
-  * - ``cost_type``
-    - Unit cost, cost-effectiveness estimate, or offset cost.
-
-
-
 5.1 Extraction conventions
 ++++++++++++++++++++++++++
-
-[[Review]]
 
 A few conventions exist specifically to keep downstream processing tractable.
 
@@ -406,12 +353,12 @@ These go in ``conversion_factor``, with their meaning in
 and a min–max range across price catalogue entries are different kinds of
 uncertainty and are usable in different ways.
 
-**Standardize location and currency fields** for direct use by the currency
+**Record currency type (e.g., USD, EUR, GBP) and currency base year** for direct use by the currency
 conversion script.
 
-**Do not be afraid to add columns**, as long as extraction does not become onerous.
-The important thing is a standardized place for each kind of value — the more
-standardized the sheet, the more of the processing can be automated and trusted.
+**Take notes of any assumptions or decisions made** during the extraction process.
+There is a lot of heterogeneity in the data and the extraction sheet is not always sufficient to capture all the nuances, 
+so detailed notes are very important and useful for processing and analysis later on.
 
 
 5.2 Summary of Data sources 
@@ -428,46 +375,7 @@ sources, and the source materially affects how the estimate should be treated:
 - Household or patient surveys
 - Manufacturer, supplier, or implementer quotes
 
+6.0 References
+--------------
 
-8.0 Relevant links
-------------------
-
-[[Todo: add relevant links]]
-
-Methodological references informing this work:
-
-- PRISMA 2020 statement and checklist.
-- WHO-CHOICE guidelines on cost-effectiveness analysis: perspective, discounting,
-  and allocation of joint costs.
-- Guttmacher Institute *Adding It Up* methodology report — transparent cost
-  breakdowns by personnel, commodities, inpatient days, and overhead, with indirect
-  markup rates applied to direct costs for programme and systems costs.
-- Disease Control Priorities, 3rd edition (DCP3) — ICER estimates generalized to
-  LIC/LMIC contexts using GDP or wage proxies.
-- OneHealth Tool, LiST, and Optima Nutrition — existing MNCH costing tools.
-- MINIMOD — fortified food product costing, including start-up and operational
-  costs.
-- *Economic evaluations of maternal health interventions: a scoping review*.
-- *Economic evaluations of interventions to reduce neonatal morbidity and mortality:
-  a review of the evidence in LMICs and its implications for South Africa*.
-- Portnoy et al. (2020) — population size as a proxy for service volume at site
-  level.
-- Ward et al. (2022) — scale-up costs for ultrasound.
-
-Related IHME work:
-
-- **DEX** — US health care spending, bottom-up, stratified by condition, type of
-  care, age, payer, county, and race/ethnicity.
-- **Cost-Effectiveness project** — meta-regression of ICERs for HIV/AIDS, malaria,
-  syphilis, and tuberculosis across 128 countries, using a Bayesian mixed-effects
-  framework; top-down.
-- **DAH project** — spending on health care associated with malaria and brain
-  disorders globally, using DEX price-of-care estimates adjusted by type of care,
-  year, and country factors from National Health Accounts.
-- :ref:`Nutrition Optimization <2021_concept_model_vivarium_nutrition_optimization>`
-  — prior Simulation Science costing: funder perspective, bottom-up, categories of
-  service, product, distribution, and other (training, supervision), stratified by
-  location.
-- :ref:`Alzheimer's Disease Early Detection Simulation <2025_concept_model_vivarium_alzheimers>`
-  — prior Simulation Science costing, including the currency conversion
-  implementation this project builds on.
+[[todo: add references: PRISMA 2020, what else?]]
