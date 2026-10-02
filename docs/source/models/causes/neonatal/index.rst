@@ -553,18 +553,34 @@ When multiple of these conditions apply to the same check, we combine percent ac
 
 **From observed outputs:**
 
+All checks in this section are location-specific.
+They are done at the draw level, matching draws between the simulation outputs and the GBD targets,
+then aggregated by taking a mean (of e.g. the ratio between simulation and GBD) across draws.
+
 * The mean ACMRisk observed in each age and sex group in the baseline scenario should be within 10% of
   the GBD number of deaths in that age and sex group, divided by the GBD number of births for that sex
   minus the GBD number of deaths for that sex in younger age groups.
+* The mean ACMRisk observed in the MMS-scale-up scenario should be less than in the baseline scenario
+  in each age and sex group.
 * The observed number of deaths in each age and sex group divided by the observed number of births
   for that sex minus the observed number of deaths for that sex in younger age groups,
   should be within 10% of the corresponding GBD value (which was also the target in the previous check).
+* The observed number of deaths in the MMS-scale-up scenario should be less than in the baseline scenario
+  in each age and sex group.
 * The mean CSMRisk observed for each subcause in each age and sex group in the baseline scenario should be within 10% of
   the GBD number of deaths due to that cause in that age and sex group (or 85% and 15% of the GBD preterm birth deaths for preterm-with-RDS and preterm-without-RDS subcauses respectively), divided by the GBD number of births for that sex
   minus the GBD number of deaths for that sex in younger age groups.
+* The mean CSMRisk observed for each modeled subcause in the MMS-scale-up scenario should be less than in the baseline scenario
+  in each age and sex group.
+  The mean "other causes" CSMRisk observed in the MMS-scale-up scenario should be less than in the baseline scenario,
+  by a ratio closer to 1 than for any of the modeled subcauses.
 * The observed number of deaths due to each subcause in each age and sex group divided by the observed number of births
   for that sex minus the observed number of deaths for that sex in younger age groups,
   should be within 10% of the corresponding GBD value (which was also the target in the previous check).
+* The observed number of deaths due to each modeled subcause in the MMS-scale-up scenario should be less than in the baseline scenario
+  in each age and sex group.
+  The observed number of "other causes" deaths in the MMS-scale-up scenario should be less than in the baseline scenario,
+  by a ratio closer to 1 than for any of the modeled subcauses.
 
 References
 ----------
