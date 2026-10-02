@@ -109,7 +109,6 @@ as python code:
 .. code-block:: python
 
   import numpy as np
-  import scipy.interpolate
   import matplotlib.pyplot as plt
   import gbd_mapping, vivarium_gbd_access.gbd
 
@@ -138,46 +137,33 @@ as python code:
   relative_risk_functions = {}
 
   # Do calculation at the draw level
+  exposure = relative_risk_data.exposure.to_numpy()
   for draw_id in range(1_000):
-      relative_risk_draw = relative_risk_data[f'draw_{draw_id}']
-      # interpolate a continuous function between the points,
-      # and extrapolate outside the range with the endpoints
-      raw_relative_risk_function = scipy.interpolate.interp1d(
-          relative_risk_data.exposure,
-          relative_risk_draw,
-          kind='linear',
-          bounds_error=False,
-          fill_value=(
-              relative_risk_draw.min(),
-              relative_risk_draw.max(),
-          )
-      )
+      relative_risk_draw = relative_risk_data[f'draw_{draw_id}'].to_numpy()
 
       # pick a tmrel between tmred.min and tmred.max and calculate relative risk at tmrel
       # for certain risk factors, the modeling team uploads a model for this with TMREL draws --
       # those should be used instead of this, when available!
       tmrel = np.random.uniform(risk.tmred.min, risk.tmred.max)
-      rr_at_tmrel = raw_relative_risk_function(tmrel)
-      normalized_relative_risk_draw = relative_risk_draw / rr_at_tmrel
+      # interpolate linearly between the points, and hold the RR at the first and
+      # last points flat outside the exposure range
+      rr_at_tmrel = np.interp(tmrel, exposure, relative_risk_draw)
 
-      # This clipping is what the GBD PAF calculator does, but it is not clear that it makes
-      # sense conceptually.
-      # A single risk factor can have positive (protective) and negative (harmful) effects on
-      # different causes, and the TMREL can then be a balance between them, which doesn't necessarily
-      # imply it is the ideal exposure when looking at either cause individually.
-      # TODO: Revisit this.
-      clipped_normalized_relative_risk_draw = np.clip(normalized_relative_risk_draw, 1.0, np.inf)
-
-      relative_risk_function = scipy.interpolate.interp1d(
-          relative_risk_data.exposure,
-          clipped_normalized_relative_risk_draw,
-          kind='linear',
-          bounds_error=False,
-          fill_value=(
-              clipped_normalized_relative_risk_draw.min(),
-              clipped_normalized_relative_risk_draw.max(),
-          )
-      )
+      def relative_risk_function(x, rr=relative_risk_draw, tmrel=tmrel, rr_at_tmrel=rr_at_tmrel):
+          # This clamping is what the GBD PAF calculator does: on the side of the TMREL
+          # it treats as harmless, exposures are replaced with the TMREL, so the RR there
+          # equals the RR at the TMREL. That is below the TMREL for most risks, and above
+          # it for risks flagged protective (inv_exp in GBD, tmred.inverted in gbd_mapping).
+          # It is not clear that this makes sense conceptually. Protective vs. harmful is
+          # set per risk, not per cause, so it can be wrong for some causes. And a single
+          # risk factor can have positive (protective) and negative (harmful) effects on
+          # different causes, and the TMREL can then be a balance between them, which
+          # doesn't necessarily imply it is the ideal exposure when looking at either
+          # cause individually.
+          # TODO: Revisit this.
+          x = np.minimum(x, tmrel) if risk.tmred.inverted else np.maximum(x, tmrel)
+          # dividing by the RR at the TMREL doesn't change the PAF, but makes the RR 1 there
+          return np.interp(x, exposure, rr) / rr_at_tmrel
 
       relative_risk_functions[draw_id] = relative_risk_function
 
@@ -200,11 +186,28 @@ This code generates a separate function/curve for each *draw*, as seen in the pl
 
 .. image:: ./sbp_ihd_risk_curve.png
 
-We've validated that using this approach, we can get approximately the same result
-as the GBD PAF calculator.
-The relevant code in the PAF calculator is `on Stash <https://stash.ihme.washington.edu/projects/CCGMOD/repos/ihme_cc_paf_calculator/browse/src/ihme_cc_paf_calculator/lib/math.py>`_;
-the clipping is implemented `here <https://stash.ihme.washington.edu/projects/CCGMOD/repos/ihme_cc_paf_calculator/browse/src/ihme_cc_paf_calculator/lib/math.py#171-207>`_.
-This is demonstrated in `this notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/edae08c5f034efa84d33413b923b1edcdf692538/pre_processing/nonlinear_risk_factors/nonlinear_risk_salt_stomach_cancer.ipynb>`_.
+Note that the GBD PAF calculator does not floor RRs at 1. It clamps
+*exposure* to the TMREL on the harmless side, as above. The two agree
+for curves that rise steadily away from the TMREL on the harmful side, but
+not for non-monotonic curves. On the harmful side, flooring would raise
+dips below the RR at the TMREL to 1, but GBD keeps them. On the harmless
+side, GBD sets the RR to its value at the TMREL even where the raw curve is
+higher.
+See the CC documentation on `modifying relative risk curves
+<https://scicomp-docs.ihme.washington.edu/ihme_cc_paf_calculator/current/standard_methods.html#modifying-relative-risk-curves>`_
+for an example.
+
+The PAF calculator does not keep the TMREL draws it used, so a Vivarium
+model that draws its own TMRELs as above cannot reproduce them. Relative risks
+normalized this way and paired with GBD's PAFs can therefore be miscalibrated.
+
+The relevant code in the PAF calculator is `on Stash <https://stash.ihme.washington.edu/projects/CCGMOD/repos/ihme_cc_paf_calculator/browse/src/ihme_cc_paf_calculator/lib/math.py>`_:
+interpolation is in ``_make_exposure_dependent_rr_functions``, the clamping
+is in ``_modify_exposure_dependent_rr_function``, and the PAF formula is in
+``evaluate_paf_formula`` (as of ``ihme_cc_paf_calculator`` 4.2.4).
+An earlier version of this page floored the normalized RRs at 1 instead. That
+was validated as giving approximately the same result as the GBD PAF
+calculator for a monotonic risk curve, as shown in `this notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/edae08c5f034efa84d33413b923b1edcdf692538/pre_processing/nonlinear_risk_factors/nonlinear_risk_salt_stomach_cancer.ipynb>`_.
 
 Finally, it is important to note that because the GBD relative risks represent
 the *causal* impact between and risk and an outcome, they cannot represent
