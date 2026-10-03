@@ -515,8 +515,11 @@ For the preterm-without-RDS subcause, our target is one minus the RDS-specific f
   their mean should be similar to the targets, in the baseline scenario.
 * Once CSMRisk pipeline values have been fully modified, the mean "other causes" mortality risk ratios between baseline
   and MMS-scale-up scenarios, stratified by sex and preterm/non-preterm status,
-  should still be closer to 1 than the same ratios for the modeled subcauses
-  (which will have diverged from each other).
+  should still be closer to 1 than for any modeled subcause.
+
+For all cross-scenario checks, it is necessary to subset to the simulants who are alive in both scenarios.
+In cross-scenario checks that stratify by preterm/non-preterm, it is necessary to exclude simulants whose
+gestational age moved across the preterm boundary between scenarios.
 
 For the inexact checks, the level of similarity we expect depends on the check, due to known limitations:
 
@@ -567,14 +570,14 @@ then aggregated by taking a mean (of e.g. the ratio between simulation and GBD) 
   should be within 10% of the corresponding GBD value (which was also the target in the previous check).
 * The observed number of deaths in the MMS-scale-up scenario should be less than in the baseline scenario
   in each age and sex group.
-* The mean CSMRisk observed for each subcause in each age and sex group in the baseline scenario should be within 10% of
+* The mean CSMRisk observed for each modeled subcause in each age and sex group in the baseline scenario should be within 10% of
   the GBD number of deaths due to that cause in that age and sex group (or 85% and 15% of the GBD preterm birth deaths for preterm-with-RDS and preterm-without-RDS subcauses respectively), divided by the GBD number of births for that sex
   minus the GBD number of deaths for that sex in younger age groups.
 * The mean CSMRisk observed for each modeled subcause in the MMS-scale-up scenario should be less than in the baseline scenario
   in each age and sex group.
   The mean "other causes" CSMRisk observed in the MMS-scale-up scenario should be less than in the baseline scenario,
   by a ratio closer to 1 than for any of the modeled subcauses.
-* The observed number of deaths due to each subcause in each age and sex group divided by the observed number of births
+* The observed number of deaths due to each modeled subcause in each age and sex group divided by the observed number of births
   for that sex minus the observed number of deaths for that sex in younger age groups,
   should be within 10% of the corresponding GBD value (which was also the target in the previous check).
 * The observed number of deaths due to each modeled subcause in the MMS-scale-up scenario should be less than in the baseline scenario
