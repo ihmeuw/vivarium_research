@@ -41,25 +41,41 @@ MNCNH Portfolio Costing Analysis
 1.0 Background
 --------------
 
-In tandem with our simulation of the MNCNH portfolio [[todo: insert link to concept model]], 
+In tandem with our simulation of the MNCNH portfolio (:ref:`concept model <2024_concept_model_vivarium_mncnh_portfolio>`), 
 we are conducting a systematic literature review to estimate the costs of delivering several different maternal and newborn health interventions in low- and middle-income countries. 
 Cost estimates derived from this literature review (extracted in the form of reported components such as personnel, consumables, and distribution, 
 then meta-regressed to understand variability across locations and delivery contexts) will be paired with the effectiveness estimates from the microsimulation to determine cost-effectiveness of these interventions, 
 helping funders and other decision-makers compare interventions and allocate resources to ensure greatest reduction in maternal and newborn burden of disease.
-In past iterations of this work, we have also conducted cost-effectiveness analyses [[todo: insert reference to past costing work, appendix from NO]], 
+In past iterations of this work, we have also conducted cost-effectiveness analyses (see Appendix 6 of this manuscript for more details `<https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/Nutrition%20Optimization/NO%20Paper%20%231%20Model%20Overview.docx?d=w54bc12085d904be3a5356efcb7b0239c&csf=1&web=1&e=xqNgPO&nav=eyJoIjoiNzE1NDkzNTYzIn0>`_). 
 however, the methods by which we are conducting our current economic analysis differ from previous projects in 3 key ways:
 
-1. Systematic literature review of all available published data on each intervention and associated costs. [[todo: insert link to lit review section]]
-2. Use of regression tool (MR-BRT) as opposed to a simple calculation of average. [[todo: insert link to data processing SOP and MR-BRT methodology section]]
-3. Finer granularity in cost categories. [[todo: insert link to cost taxonomy]]
+1. Systematic literature review of all available published data on each intervention and associated costs;
+2. Use of regression tool (MR-BRT) as opposed to a simple calculation of average; and
+3. Finer granularity in cost categories.
 
 We have also scoped a Wave 2 and Wave 3 of this costing analysis which will complicate the way by which the different cost components associated with intervention delivery are scaled, 
 such that rather than estimating the cost of delivering each additional unit of an intervention (i.e., cost per person treated), 
 we will consider the natural unit of scale for each cost category modeled in order to more realistically capture the true costs of scaling up the delivery of an intervention (e.g., cost per facility-year, cost per new health worker-year). 
 We also hope to include what are known as offset costs in later iterations of our costing model, such as cost savings from averted healthcare utilization due to improved maternal and newborn health outcomes.
-The details of these later waves are still being determined, and you can read more later in this document. [[todo: insert link to descriptions of wave 2 and 3]]
+The details of these later waves are still being determined, and you can read more in later sections of this document. 
 
+*Resources to learn more about our literature review process*: 
+- How to conduct a systematic review
+  - `Ten Steps to Conduct a Systematic Literature Review <https://pmc.ncbi.nlm.nih.gov/articles/PMC10828625/>`_
+  - `PRISMA 2020 Checklist <https://static1.squarespace.com/static/65b880e13b6ca75573dfe217/t/67ad313f1c80aa5235fce0d0/1739403584136/PRISMA_2020_checklist.pdf>`_
+  - `Reading Articles Strategically <https://uwnetid.sharepoint.com/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials%2FStrategically%20Reading%20Articles%2Epdf&parent=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials>`_
+- How to use Distiller-SR (our chosen systematic review software for this project)
+  - `Distiller-SR Guide for IHMErs <https://uwnetid.sharepoint.com/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials%2FDistiller%5FSR%20Guidelines%20for%20NFRQ%5F8bc816bee446450faa11b903e6589298%2D180226%2D1736%2D8%2Epdf&parent=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials>`_
+  - `Distiller-SR Tutorials <https://evidencepartners.wistia.com/medias/028x70nmp9>`_
 
+*Resources to learn more about healthcare costing*:
+- `Cost-Effectiveness Meta-Regression <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BD50FB7F8-3ACB-4CB2-AA63-7FC4DBEA50BA%7D&file=2_Cost-Effectiveness%20Meta-Regression_presentation%20version.pptx&action=edit&mobileredirect=true>`_
+- `Estimating health care costs at scale in low- and middle-income countries: Mathematical notations and frameworks for the application of cost functions <https://onlinelibrary.wiley.com/doi/10.1002/hec.4722>`_
+- `Costs of scaling up health interventions: a systematic review <https://pubmed.ncbi.nlm.nih.gov/15689425/>`_
+- Other economic analyses by fellow IHME researchers: 
+  - `Evaluating US county health-care system performance and key associated factors (2014-2019): a Triple Aim framework analysis <https://linkinghub.elsevier.com/retrieve/pii/S2468-2667(25)00173-2>`_
+  - `Cost-effectiveness of interventions for HIV/AIDS, malaria, syphilis, and tuberculosis in 128 countries: a meta-regression analysis <https://www.thelancet.com/journals/langlo/article/PIIS2214-109X(24)00181-5/fulltext>`_
+  - `Historic and future spending estimates of maternal health and family planning in 139 low- and middle-income countries, 2000–2030: a modelling study <https://bmjpublichealth.bmj.com/content/4/2/e004211>`_
 
 1.1 Scope
 +++++++++
@@ -176,55 +192,55 @@ simulation output.
 In our wave 1 analysis, we are calculating unit cost by considering the following components which make up the total cost required to treat one person with a given intervention.
 The cost taxonomy diagram below illustrates how we break down each unit cost. 
 
-
-[[todo: insert PNG of cost taxonomy]]
+.. figure:: cost_taxonomy_wave1.png
 
 2.3 Unit cost taxonomy (wave 2 & 3)
 -----------------------------------
 
-[[todo:describe how each cost category has a different natural unit
-and even though for wave 1 costs we are assuming all cost categories scale up by person, 
-we know it's more complicated than this in reality for most of the cost categories except for personnel costs.]]
+.. todo:: 
+  describe how each cost category has a different natural unit and even though for wave 1 costs we are assuming all cost categories scale up by person, 
+  we know it's more complicated than this in reality for most of the cost categories except for personnel costs.
 
+.. figure:: cost_taxonomy_wave2.png
 
 3.1 Intervention Profile Sheet
 ++++++++++++++++++++++++++++++
 
-[[Unit definitions, protocols, and delivery assumptions are maintained in the
-**Intervention Profile Sheet**, which serves three purposes: it standardizes what
-each intervention is assumed to consist of, it records which cost categories are
-relevant to each intervention, and it identifies which interventions share delivery
-platforms and are therefore reasonable cost proxies for one another.
+Unit definitions, protocols, and delivery assumptions are maintained in the
+`Intervention Profile Sheet <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/MNCNH%20portfolio%20products/04_costing/Intervention%20Profiles%20for%20Costing.xlsx?d=wc7b6dad8525741a981889a3624225e77&csf=1&web=1&e=K0z7cp>`_, 
+which serves three purposes: it attempts to standardize what each intervention is assumed to consist of, 
+it records which cost categories are relevant to each intervention, 
+and it summarizes the delivery protocols for each intervention across the literature we use for the costing analysis, 
+the effectiveness literature, and what protocols our stakeholders are interested in.
 
 For each intervention, the sheet records:
 
 - The unit being costed, and the dosage or quantity constituting a full treatment.
-- The relevant WHO guideline, and the narrowed-down protocol we assume.
+- The relevant WHO guideline, the protocol used in costing literuature, and the narrowed-down protocol we assume.
 - The standard-of-care comparator, if any.
 - Personnel type and time required to deliver, and the delivery facility type. See
   the
   :ref:`delivery facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
   for the facility types represented in the simulation.
 - Which cost categories from the taxonomy are relevant.
-- Covariates and stratifications for that intervention.
-- Assumed time frame for scale-up.
 - The literature used for effects and the literature used for costs, kept in
   separate columns because they are frequently different bodies of work.
-]]
+
+.. todo::
+
+  Finish filling in the Intervention Profile Sheet for all interventions and determine how to best document information there
+  (i.e., move to a table here rather than Sharepoint Excel spreadsheet?)
 
 4.0 Literature review methods
 -----------------------------
 
-We follow PRISMA 2020 guidelines and the GBD systematic review protocol so that each
-search is systematic and replicable. Each intervention has its own search strategy 
-and set of inclusion criteria, aside from IFA and MMS which we bundled together, 
+We follow PRISMA 2020 guidelines and the GBD systematic review protocol so that each search is systematic and replicable. 
+Each intervention has its own search strategy and set of inclusion criteria, aside from IFA and MMS which we bundled together, 
 as well as IV iron and oral iron treatment for anemia. 
 Searches are conducted and tracked in **DistillerSR**, 
 which retains PubMed search history, 
 allows inclusion criteria to be edited retroactively without restarting screening, 
 and maintains the PRISMA 2020 flow diagram automatically. 
-
-
 
 4.2 Our review process
 ++++++++++++++++++++++
@@ -374,8 +390,3 @@ sources, and the source materially affects how the estimate should be treated:
 - Expert opinion surveys
 - Household or patient surveys
 - Manufacturer, supplier, or implementer quotes
-
-6.0 References
---------------
-
-[[todo: add references: PRISMA 2020, what else?]]
