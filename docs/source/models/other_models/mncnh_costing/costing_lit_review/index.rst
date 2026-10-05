@@ -250,11 +250,11 @@ and maintains the PRISMA 2020 flow diagram automatically.
    librarian for our first few interventions, we shifted to developing our own search strategies independently.)
 2. Run the search in PubMed within Distiller; import EMBASE references separately; de-duplicate.
 3. Create screening forms in DistillerSR for both title/abstract and full-text screening 
-  (Note: can copyforms from other interventions and adapt as needed.)
-4. **Screening level 1 (title/abstract).** One reviewer screens 100% of references;
+   (Note: can copy forms from other interventions and adapt as needed.)
+4. Screening level 1 (title/abstract): One reviewer screens 100% of references;
    a second reviewer screens a random 10% as a quality check. Conflicts are
    resolved by group discussion.
-5. **Screening level 2 (full text).** Same dual-screening protocol.
+5. Screening level 2 (full text): Same dual-screening protocol.
 6. Iterate on search strategy and inclusion criteria depending on the number of
    references returned.
 7. Extract cost estimates and relevant study information into the extraction sheet.
