@@ -269,12 +269,12 @@ calculations as well as for the calculation of YLDs in the next section.
     * - ir
       - maternal sepsis incidence risk per birth
       - incidence_c368 / birth_rate
-      - The value of ir is a probabiity in [0,1]. Denominator includes
+      - The value of ir is a probability in [0,1]. Denominator includes
         live births and stillbirths.
     * - cfr
       - case fatality rate of maternal sepsis
       - csmr_c368 / incidence_368
-      - The value of cfr is a probabiity in [0,1]
+      - The value of cfr is a probability in [0,1]
     * - incidence_c368
       - incidence rate of maternal sepsis and other maternal infections
       - como

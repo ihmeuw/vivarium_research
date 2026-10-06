@@ -631,13 +631,27 @@ Specific outputs for specific models are specified in the following section.
     - Default
     - Default
     - 
-  * - 13.0
+  * - 13.0_SQLNS_Reruns
     - Rerun of Ethiopian location with framework updates to support rerun of child model production runs with resolved subnational scrambling issue for the targeted SQ-LNS model results
     - Baseline and MMS+BEP
     - Same as 12.0: 1,600,000 population size per draw, 100 draws
     - Same as 12.0: Deaths, YLLs, YLDs, intervention counts, count of pregnancy outcomes 
     - Same as 12.0: Live and still births with maternal_ids, infant sex, joint BMI/anemia exposure, intervention coverage, and LBWSG exposures
     - Including more observations or stratifications is fine, this is just the minimal requirement
+  * - 13.0_JKUAT_GBD_2023_runs
+    - Running the model to include Kenya and update to GBD 2023. Running with the JKUAT students
+    - All
+    - 10 draws, 5 seeds with 20,000 population
+    - Default
+    - Default
+    - 
+  * - 13.2_JKUAT_GBD_2023_runs
+    - Fixing bugs identified in the model 13 GBD 2023 JKUAT runs.
+    - All
+    - 10 draws, 5 seeds with 20,000 population
+    - Default
+    - Default
+    - 
 
 .. note::
 
@@ -774,6 +788,19 @@ Specific outputs for specific models are specified in the following section.
       * `Intervention coverage notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_viv4.0_intervention_coverage.ipynb>`__
       * `Maternal disorders and anemia burden notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_viv4.0_maternal_disorders_anemia.ipynb>`__
       * `Pregnancy model notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_viv4.0_preg_states.ipynb>`__
+  * - 13.0_JKUAT_GBD_2023_runs
+    - All V&V checks
+    - Models were not meeting all V&V criteria. The intervention coverage and pregnancy model notebooks were both passing, but maternal disorders were a bit low, anemia rates were high and maternal hemorrhage was extremely high.
+
+      * `Kenya intervention coverage notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_13.0_kenya_intervention_coverage.ipynb>`__
+      * `Kenya maternal disorders and anemia burden notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_13.0_kenya_maternal_disorders_anemia.ipynb>`__
+      * `Kenya pregnancy model notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_13.0_kenya_preg_states.ipynb>`__
+  * - 13.2_JKUAT_GBD_2023_runs
+    - All V&V checks
+    - All checks are now passing. All locations have been checked.
+
+      * `PR for all non-Kenya locations <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/pull/259>`__
+      * `Updated Kenya maternal disorders and anemia burden notebook <https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/verification_and_validation/pregnancy_model/model_13.2_kenya_maternal_disorders_anemia.ipynb>`__
 
 .. list-table:: Outstanding V&V issues
   :header-rows: 1
