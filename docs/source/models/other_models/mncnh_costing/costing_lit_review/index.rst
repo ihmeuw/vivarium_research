@@ -41,11 +41,12 @@ MNCNH Portfolio Costing Analysis
 1.0 Background
 --------------
 
-In tandem with our simulation of the MNCNH portfolio (:ref:`concept model <2024_concept_model_vivarium_mncnh_portfolio>`), 
-we are conducting a systematic literature review to estimate the costs of delivering several different maternal and newborn health interventions in low- and middle-income countries. 
+In tandem with our simulation of the MNCNH portfolio (:ref:`see the Concept Model documentation here <2024_concept_model_vivarium_mncnh_portfolio>`), 
+we are conducting a systematic literature review and meta-regression analysis to estimate the costs of delivering several different maternal and newborn health interventions in low- and middle-income countries. 
 Cost estimates derived from this literature review (extracted in the form of reported components such as personnel, consumables, and distribution, 
 then meta-regressed to understand variability across locations and delivery contexts) will be paired with the effectiveness estimates from the microsimulation to determine cost-effectiveness of these interventions, 
 helping funders and other decision-makers compare interventions and allocate resources to ensure greatest reduction in maternal and newborn burden of disease.
+
 In past iterations of this work, we have also conducted cost-effectiveness analyses (see Appendix 6 of `this manuscript <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/Nutrition%20Optimization/NO%20Paper%20%231%20Model%20Overview.docx?d=w54bc12085d904be3a5356efcb7b0239c&csf=1&web=1&e=xqNgPO&nav=eyJoIjoiNzE1NDkzNTYzIn0>`_ 
 for more details), however, the methods by which we are conducting our current economic analysis differ from previous projects in 3 key ways:
 
@@ -206,8 +207,8 @@ The cost taxonomy diagram below illustrates how we break down each unit cost.
 -----------------------------------
 
 .. todo:: 
-  describe how each cost category has a different natural unit and even though for wave 1 costs we are assuming all cost categories scale up by person, 
-  we know it's more complicated than this in reality for most of the cost categories except for personnel costs.
+  Describe how each cost category has a different natural unit and although our wave 1 cost estimates assume all cost categories scale up by person, 
+  we know it's more complicated than this in reality for most of the cost categories (except for personnel costs).
 
 .. figure:: cost_taxonomy_wave2.png
 
@@ -269,7 +270,7 @@ and maintains the PRISMA 2020 flow diagram automatically.
 8. Process data for meta-regression — see the
    :ref:`meta-regression document <costing_metaregression_vivarium_mncnh_portfolio>`.
 
-..note:: 
+.. note:: 
   
   Reviews and meta-analyses are excluded from extraction (except where cost-effectiveness
   estimates are reported, which we will use to validate our own estimates once calculated), 
