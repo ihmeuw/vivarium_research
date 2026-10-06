@@ -44,7 +44,7 @@ MNCNH Portfolio Costing Analysis
 In tandem with our simulation of the MNCNH portfolio (:ref:`see the Concept Model documentation here <2024_concept_model_vivarium_mncnh_portfolio>`), 
 we are conducting a systematic literature review and meta-regression analysis to estimate the costs of delivering several different maternal and newborn health interventions in low- and middle-income countries. 
 Cost estimates derived from this literature review (extracted in the form of reported components such as personnel, consumables, and distribution, 
-then meta-regressed to understand variability across locations and delivery contexts) will be paired with the effectiveness estimates from the microsimulation to determine cost-effectiveness of these interventions, 
+then meta-regressed to summarize across inputs and understand variability across covariates such as locations and/or delivery contexts) will be paired with the effectiveness estimates from the microsimulation to determine cost-effectiveness of these interventions, 
 helping funders and other decision-makers compare interventions and allocate resources to ensure greatest reduction in maternal and newborn burden of disease.
 
 In past iterations of this work, we have also conducted cost-effectiveness analyses (see Appendix 6 of `this manuscript <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/Nutrition%20Optimization/NO%20Paper%20%231%20Model%20Overview.docx?d=w54bc12085d904be3a5356efcb7b0239c&csf=1&web=1&e=xqNgPO&nav=eyJoIjoiNzE1NDkzNTYzIn0>`_ 
