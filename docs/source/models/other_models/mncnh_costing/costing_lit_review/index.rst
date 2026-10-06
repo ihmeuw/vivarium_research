@@ -46,8 +46,8 @@ we are conducting a systematic literature review to estimate the costs of delive
 Cost estimates derived from this literature review (extracted in the form of reported components such as personnel, consumables, and distribution, 
 then meta-regressed to understand variability across locations and delivery contexts) will be paired with the effectiveness estimates from the microsimulation to determine cost-effectiveness of these interventions, 
 helping funders and other decision-makers compare interventions and allocate resources to ensure greatest reduction in maternal and newborn burden of disease.
-In past iterations of this work, we have also conducted cost-effectiveness analyses (see Appendix 6 of this manuscript for more details `<https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/Nutrition%20Optimization/NO%20Paper%20%231%20Model%20Overview.docx?d=w54bc12085d904be3a5356efcb7b0239c&csf=1&web=1&e=xqNgPO&nav=eyJoIjoiNzE1NDkzNTYzIn0>`_). 
-however, the methods by which we are conducting our current economic analysis differ from previous projects in 3 key ways:
+In past iterations of this work, we have also conducted cost-effectiveness analyses (see Appendix 6 of `this manuscript <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/Nutrition%20Optimization/NO%20Paper%20%231%20Model%20Overview.docx?d=w54bc12085d904be3a5356efcb7b0239c&csf=1&web=1&e=xqNgPO&nav=eyJoIjoiNzE1NDkzNTYzIn0>`_ 
+for more details), however, the methods by which we are conducting our current economic analysis differ from previous projects in 3 key ways:
 
 1. Systematic literature review of all available published data on each intervention and associated costs;
 2. Use of regression tool (MR-BRT) as opposed to a simple calculation of average; and
@@ -57,31 +57,29 @@ We have also scoped a Wave 2 and Wave 3 of this costing analysis which will comp
 such that rather than estimating the cost of delivering each additional unit of an intervention (i.e., cost per person treated), 
 we will consider the natural unit of scale for each cost category modeled in order to more realistically capture the true costs of scaling up the delivery of an intervention (e.g., cost per facility-year, cost per new health worker-year). 
 We also hope to include what are known as offset costs in later iterations of our costing model, such as cost savings from averted healthcare utilization due to improved maternal and newborn health outcomes.
-The details of these later waves are still being determined, and you can read more in later sections of this document. 
+The details of these later waves are still being determined, and you can read more in later sections of this document.
 
-*Resources to learn more about our literature review process*: 
-- How to conduct a systematic review
+.. list-table:: Recommended resources
+   :header-rows: 1
+   :widths: 35 65
 
-  - `Ten Steps to Conduct a Systematic Literature Review <https://pmc.ncbi.nlm.nih.gov/articles/PMC10828625/>`_
-  - `PRISMA 2020 Checklist <https://static1.squarespace.com/static/65b880e13b6ca75573dfe217/t/67ad313f1c80aa5235fce0d0/1739403584136/PRISMA_2020_checklist.pdf>`_
-  - `Reading Articles Strategically <https://uwnetid.sharepoint.com/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials%2FStrategically%20Reading%20Articles%2Epdf&parent=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials>`_
-
-- How to use Distiller-SR (our chosen systematic review software for this project)
-
-  - `Distiller-SR Guide for IHMErs <https://uwnetid.sharepoint.com/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials%2FDistiller%5FSR%20Guidelines%20for%20NFRQ%5F8bc816bee446450faa11b903e6589298%2D180226%2D1736%2D8%2Epdf&parent=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials>`_
-  - `Distiller-SR Tutorials <https://evidencepartners.wistia.com/medias/028x70nmp9>`_
-
-*Resources to learn more about healthcare costing*:
-
-- `Cost-Effectiveness Meta-Regression <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BD50FB7F8-3ACB-4CB2-AA63-7FC4DBEA50BA%7D&file=2_Cost-Effectiveness%20Meta-Regression_presentation%20version.pptx&action=edit&mobileredirect=true>`_
-- `Estimating health care costs at scale in low- and middle-income countries: Mathematical notations and frameworks for the application of cost functions <https://onlinelibrary.wiley.com/doi/10.1002/hec.4722>`_
-- `Costs of scaling up health interventions: a systematic review <https://pubmed.ncbi.nlm.nih.gov/15689425/>`_
-
-- Other economic analyses by fellow IHME researchers: 
-
-  - `Evaluating US county health-care system performance and key associated factors (2014-2019): a Triple Aim framework analysis <https://linkinghub.elsevier.com/retrieve/pii/S2468-2667(25)00173-2>`_
-  - `Cost-effectiveness of interventions for HIV/AIDS, malaria, syphilis, and tuberculosis in 128 countries: a meta-regression analysis <https://www.thelancet.com/journals/langlo/article/PIIS2214-109X(24)00181-5/fulltext>`_
-  - `Historic and future spending estimates of maternal health and family planning in 139 low- and middle-income countries, 2000–2030: a modelling study <https://bmjpublichealth.bmj.com/content/4/2/e004211>`_
+   * - You want to know more about...
+     - So we recommend you check out...
+   * - How to conduct a systematic review
+     - * `Ten Steps to Conduct a Systematic Literature Review <https://pmc.ncbi.nlm.nih.gov/articles/PMC10828625/>`__
+       * `PRISMA 2020 Checklist <https://static1.squarespace.com/static/65b880e13b6ca75573dfe217/t/67ad313f1c80aa5235fce0d0/1739403584136/PRISMA_2020_checklist.pdf>`__
+       * `Reading Articles Strategically <https://uwnetid.sharepoint.com/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials%2FStrategically%20Reading%20Articles%2Epdf&parent=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials>`__
+   * - How to use Distiller-SR (systematic review software being used for this project)
+     - * `Distiller-SR Guide for IHMErs <https://uwnetid.sharepoint.com/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials%2FDistiller%5FSR%20Guidelines%20for%20NFRQ%5F8bc816bee446450faa11b903e6589298%2D180226%2D1736%2D8%2Epdf&parent=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FSystematic%20Review%20Training%20%26%20Materials>`__
+       * `Distiller-SR Tutorials <https://evidencepartners.wistia.com/medias/028x70nmp9>`__
+   * - Methods for estimating healthcare costs
+     - * `Cost-Effectiveness Meta-Regression Slides <https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BD50FB7F8-3ACB-4CB2-AA63-7FC4DBEA50BA%7D&file=2_Cost-Effectiveness%20Meta-Regression_presentation%20version.pptx&action=edit&mobileredirect=true>`__
+       * `Estimating health care costs at scale in low- and middle-income countries: Mathematical notations and frameworks for the application of cost functions <https://onlinelibrary.wiley.com/doi/10.1002/hec.4722>`__
+       * `Costs of scaling up health interventions: a systematic review <https://pubmed.ncbi.nlm.nih.gov/15689425/>`__
+   * - Economic analyses by fellow IHME researchers
+     - * `Evaluating US county health-care system performance and key associated factors (2014-2019): a Triple Aim framework analysis <https://linkinghub.elsevier.com/retrieve/pii/S2468-2667(25)00173-2>`__
+       * `Cost-effectiveness of interventions for HIV/AIDS, malaria, syphilis, and tuberculosis in 128 countries: a meta-regression analysis <https://www.thelancet.com/journals/langlo/article/PIIS2214-109X(24)00181-5/fulltext>`__
+       * `Historic and future spending estimates of maternal health and family planning in 139 low- and middle-income countries, 2000–2030: a modelling study <https://bmjpublichealth.bmj.com/content/4/2/e004211>`__
 
 1.1 Scope
 +++++++++
@@ -117,7 +115,7 @@ along with their corresponding model documentation and the status of cost estima
   * - Antenatal
     - Standard, point-of-care, and AI-assisted ultrasound
     - :ref:`AI ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-    - Cost estimates have been extracted from literature and partially processed [[todo: double-check the types of ultrasound we want to process costs for]]
+    - Cost estimates have been extracted from literature and partially processed 
   * - Antenatal
     - Pre-eclampsia testing and treatment
     - Not yet documented
@@ -139,7 +137,7 @@ along with their corresponding model documentation and the status of cost estima
     - :ref:`E-MOTIVE intervention <emotive_intervention>`
     - Cost estimates have not yet been extracted from literature
   * - Intrapartum
-    - Caesarean section (elective and emergent [[todo: double-check types of c-section]])
+    - Caesarean section (elective and emergent)
     - :ref:`Intrapartum interventions module <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
     - Cost estimates have not yet been extracted from literature 
   * - Intrapartum
@@ -157,11 +155,15 @@ along with their corresponding model documentation and the status of cost estima
   * - Neonatal
     - CPAP for respiratory distress syndrome
     - :ref:`CPAP intervention <intervention_neonatal_cpap>`
-    - Cost estimates have been partially extracted from literature ([[todo: double-check: literature review still in screening phase?]])
+    - Cost estimates have been partially extracted from literature
   * - Neonatal
     - Probiotics for infection prevention in preterm neonates
     - :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
     - Cost estimates have been extracted from literature and partially processed
+
+.. todo::
+
+  Double-check the types of ultrasound and c-sections we are considering in the costing analysis and simulation. 
 
 .. note::
 
@@ -346,10 +348,8 @@ data are clearly reported**.
 4.3 Search strategy
 +++++++++++++++++++
 
-[[todo: add link to sharepoint excel with search strategies for each intervention and note that
-searches are also tracked in distiller]]
-
-.. _costing_lit_review_extraction:
+See `here <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B2875F475-2FA5-4344-AE93-30A2C70B2D36%7D&file=Intervention%20Search%20Terms.xlsx&action=default&mobileredirect=true>`_
+for our intervention search strategies. Search strategies are also tracked in the Distiller project for each intervention.
 
 5.0 Data extraction
 -------------------
@@ -357,26 +357,24 @@ searches are also tracked in distiller]]
 5.1 Extraction conventions
 ++++++++++++++++++++++++++
 
-A few conventions exist specifically to keep downstream processing tractable.
+Below are a few rules-of-thumb to follow during data extraction that will make processing and analysis of the extracted cost data a lot easier down the road!
 
 **One value per row.** Cells containing multiple numbers, or numbers mixed with
-explanatory text, cannot be processed programmatically. Where a study reports
-several values for what is conceptually the same cost, they are split into separate
+explanatory text, will be a lot harder to manage later in our modeling process.
+Where a study reports several values for what is conceptually the same cost, they are split into separate
 rows.
 
 **Record conversion factors explicitly.** Most reported costs are not in the unit we
-need, and the number required to convert them is often buried in the methods
-section — a mean 23.6 days of treatment, 82 participants in a trial arm, a 2 g single
-dose delivered as four 500 mg tablets, three minutes of pharmacy technician time.
-These go in ``conversion_factor``, with their meaning in
-``conversion_factor_description``.
+need, which for Wave 1 of this project, is in a 'per person treated' unitspace. 
+Specificity is key for understanding how to process the very heterogeneous cost values 
+into a standardized unit cost we can input to our meta-regression model. 
 
-**Record how uncertainty was obtained, not just its value.** A 95% CI from a trial
-and a min–max range across price catalogue entries are different kinds of
-uncertainty and are usable in different ways.
+**Record how the cost estimate was obtained.** Indicate whether it was derived from primary 
+data collection, modeled estimates, or another source. This will be used in how we weight 
+each estimate in our meta-regression!
 
 **Record currency type (e.g., USD, EUR, GBP) and currency base year** for direct use by the currency
-conversion script.
+conversion script. We will need this when we standardize all extracted costs to a single unit!
 
 **Take notes of any assumptions or decisions made** during the extraction process.
 There is a lot of heterogeneity in the data and the extraction sheet is not always sufficient to capture all the nuances, 
@@ -387,7 +385,7 @@ so detailed notes are very important and useful for processing and analysis late
 +++++++++++++++++++++++++++
 
 Cost estimates in the included literature come from a wide range of underlying
-sources, and the source materially affects how the estimate should be treated:
+sources, such as:
 
 - Primary micro-costing at study sites
 - Programme and facility financial or expenditure records
@@ -396,3 +394,5 @@ sources, and the source materially affects how the estimate should be treated:
 - Expert opinion surveys
 - Household or patient surveys
 - Manufacturer, supplier, or implementer quotes
+
+To see how we deal with all of this data, check out our :ref:`accompanying page on the data processing and metaregression <costing_metaregression_vivarium_mncnh_portfolio>`.
