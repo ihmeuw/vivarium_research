@@ -206,7 +206,7 @@ Design
 ------
 
 We would like the process described in the previous section to be accomplished with a single command,
-something like ``dagger run --run-name=third_run``.
+something like ``workflow run --run-name=third_run``.
 The net result is that you could, for example, add a new location in one metadata file,
 add data for that location only in the places it is manually provided,
 and with a single command, generate results for that new location.
