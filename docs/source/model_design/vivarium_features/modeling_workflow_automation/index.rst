@@ -139,8 +139,9 @@ Between steps 1 and 2 above, we now must:
 2. Run the PAF simulation using ``psimulate``, making sure to pass the path to the custom PAF model specification and the artifact generated in the previous step.
    We will pass an output directory for the PAF simulation results, also in the team directory, something like
    ``/mnt/team/simulation_science/pub/models/tutorial/results/second_run/paf_simulation/``.
-3. Copy the results from the PAF simulation into a standard location for the artifact to pull from,
-   such as within the repo, or update a constant in the artifact generation code to point to the new PAF simulation output location.
+3. Either update a constant used by the artifact generation code to point to the new PAF simulation output location,
+   or copy the results from the PAF simulation into a standard location for the artifact to pull from,
+   such as within the repo.
 
 The rest of the process continues unchanged.
 
@@ -194,11 +195,12 @@ Note that it is necessary to manually execute these steps for *each* location be
 If we add a new location, we will need to complete all these steps again.
 This is quite time-consuming to do manually, and is prone to errors.
 Furthermore, this represents a fairly simple data pipeline
-compared to our real models.
+compared to our real models, so a more realistic example would be even more time-consuming and error-prone.
 
 We also need to manually track what *needs* to be re-run, or do a (wasteful) full re-run every time.
 If we update our PAF sim, we need to re-run
 the custom remission step, but if we update the custom remission script, we don't need to re-run the PAF simulation.
+Again, in a real example this would be even harder to track due to more interdependencies.
 
 Design
 ------
