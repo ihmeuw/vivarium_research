@@ -366,6 +366,8 @@ including a special :math:`k=0` for the residual "all other causes" category def
   towards non-preterm categories to compensate for shifting all the preterm-cause CSMRisk to the preterm categories.
   Currently we shift LBWSG-affected risk.
 
+  This is tracked on JIRA at `SSCI-2808 <https://jira.ihme.washington.edu/browse/SSCI-2808>`__.
+
 Data Tables
 +++++++++++
 
