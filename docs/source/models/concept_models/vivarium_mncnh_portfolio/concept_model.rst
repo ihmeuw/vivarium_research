@@ -1981,7 +1981,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - 
   * - 37.1
-    - Postpartum bugfix
+    - 37.0 with postpartum bugfix
     - Defines early and late postpartum periods to properly apply sepsis effects
     - Standard V&V scenarios
     - Default
@@ -1993,8 +1993,8 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - 
   * - 37.2
-    - Remove late postpartum anemia YLDs
-    - Remove late postpartum hemoglobin from anemia YLDs results check because GBD targets are only for pregnancy period (does not include late postpartum)
+    - 37.1 with timestep anemia YLDs stratification
+    - Added stratification of anemia YLDs by timestep 
     - Standard V&V scenarios
     - Default
     - 
@@ -2005,7 +2005,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Default
     - 
   * - 38.1
-    - Postpartum bugfix
+    - 38.0 with postpartum bugfix
     - Defines early and late postpartum periods in the same way as for sepsis on hemoglobin and apply hemorrhage effects during these periods.
     - Standard V&V scenarios
     - Default
@@ -2018,7 +2018,7 @@ Default stratifications to all observers should include scenario and input draw.
     - 
   * - 38.3
     - Redraw partial-term pregnancies at late postpartum
-    - Fix issue where we were not avoiding applying the baseline IFA deletion to non-pregnant hemoglobin
+    - Redraw partial-term pregnancies from non-pregnant hemoglobin distribution at late postpartum step, so that oral iron effects are no longer applied after pregnancy. Previous run updated non-pregnant hemoglobin distribution so that oral iron interventions are no longer applied to it, but the non-pregnant hemoglobin was not being used for partial-term pregnancies.
     - Standard V&V scenarios
     - Default
     - 
@@ -3224,7 +3224,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Sepsis effects not applied on the correct timesteps
     - `Model 37.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/14c8dafde2ee0e5a2dca11d68234d46c6dc8d9e6/tests/model_notebooks>`__
   * - 37.1
-    - Postpartum bugfix
+    - 37.0 with postpartum bugfix
     - Same as above
     - Variation due to smaller run than base
     - `Model 37.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/c5e760d2ef10558c4579e1c488d0f0c191213e18/tests/model_notebooks>`__
@@ -3234,10 +3234,10 @@ Default stratifications to all observers should include scenario and input draw.
     - Anemia YLDs overestimated
     - `Model 37.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/0e42e6fcaf59c3ca4a33ab5cd49711c6b37fd66a/tests/model_notebooks>`__
   * - 37.2
-    - Remove late postpartum anemia YLDs
-    - Same as above, do not include late postpartum in anemia YLDs values
+    - 37.1 with timestep anemia YLDs stratification 
+    - Same as above, do not include late postpartum in anemia YLDs values, because GBD targets are only for pregnancy period (does not include late postpartum)
     - All checks passing
-    - `Model 37.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/c5e760d2ef10558c4579e1c488d0f0c191213e18/tests/model_notebooks>`__
+    - `Model 37.2 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/5394a3ac9543406d71b444f9ebd435f402e98c44/tests/model_notebooks>`__
   * - 38.0
     - PPH/APH effects on hemoglobin
     - * In the interactive simulation, confirm expected effects on postpartum hemoglobin according to incident APH/PPH
@@ -3245,7 +3245,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Sepsis effects not applied on the correct timesteps
     - `Model 38.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/9acba0aed0fc93db96af3729dcc34ac296c0cb46/tests/model_notebooks>`__
   * - 38.1
-    - Postpartum bugfix
+    - 38.0 with postpartum bugfix
     - Same as above
     - Iron effects being applied to non-pregnant hemoglobin
     - Notebooks not saved
