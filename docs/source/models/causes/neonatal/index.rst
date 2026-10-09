@@ -288,6 +288,8 @@ This decomposition allows us to apply the causal effects of LBWSG exposure on th
 and apply the non-causal association of LBWSG exposure with the unaffected causes' risk using the *baseline* LBWSG exposure value (:math:`\text{BW}^0` and :math:`\text{GA}^0`).
 
 .. math::
+  :label: acmrisk-decomposition
+
     \begin{aligned}
     \text{ACMRisk}_{\text{BW},\text{GA}}^{\text{BW}^0,\text{GA}^0} &= \text{LBWSG}(\text{ACMRisk}_{\text{affected}}, \text{BW},\text{GA}) \\
     & + \text{LBWSG}(\text{ACMRisk}_{\text{unaffected}}, \text{BW}^0,\text{GA}^0),
@@ -341,6 +343,30 @@ including a special :math:`k=0` for the residual "all other causes" category def
   and rescale them by a constant in the preterm categories,
   it then follows that the conditional probability of death from each cause (given that the neonate dies) will be equal across preterm LBWSG categories,
   and also equal across non-preterm LBWSG categories.
+
+.. note::
+  The current design of the split between LBWSG-affected causes mortality and LBWSG-unaffected causes mortality:
+  
+  * Is quite difficult to verify (see V&V criteria below).
+  * Sometimes behaves illogically, when the LBWSG-affected mortality risk is less than the sum of the modeled-cause CSMRisks.
+
+  This could be improved by making LBWSG-affected mortality risk, which is currently the first term in :eq:`acmrisk-decomposition`,
+  a first-class quantity that is used as follows:
+
+  * Modeled-cause CSMRisks modify LBWSG-affected mortality risk
+  * Modeled-cause CSMRisks are either clipped so that their sum is less than or equal to LBWSG-affected mortality risk,
+    or something more involved happens in order to allow LBWSG-affected mortality risk to increase in these cases but decrease elsewhere.
+    (We know from our V&V process that these cases do exist but we don't know how common they are.)
+
+  This implementation would greatly ease verification because we could calculate from simulation values the LBWSG-affected
+  and LBWSG-unaffected portions of "other causes" mortality risk and check that the former changes between scenarios like
+  the modeled causes, and the latter does not change between scenarios.
+
+  One open question is whether we should be shifting *LBWSG-affected* risk or *LBWSG-unaffected* risk (or some mixture)
+  towards non-preterm categories to compensate for shifting all the preterm-cause CSMRisk to the preterm categories.
+  Currently we shift LBWSG-affected risk.
+
+  This is tracked on JIRA at `SSCI-2808 <https://jira.ihme.washington.edu/browse/SSCI-2808>`__.
 
 Data Tables
 +++++++++++
@@ -504,6 +530,10 @@ in the artifact, which are age- and sex-specific.
 For the preterm-with-RDS subcause, our target is the RDS-specific fraction (85%, as defined on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`) of the preterm birth CSMRisk stored in the artifact.
 For the preterm-without-RDS subcause, our target is one minus the RDS-specific fraction (15%) of the same.
 
+There is an additional target for the proportion of "other causes" (unmodeled) mortality risk that
+is due to LBWSG-unaffected causes, which is calculated as :math:`1 - (\text{affected_acmrisk} - \text{modeled_csmrisk}) / (\text{acmrisk} - \text{modeled_csmrisk})`
+where all values are from the artifact and modeled_csmrisk is the sum of all modeled subcause CSMRisks.
+
 * Initial (pre-LBWSG-modified) CSMRisk pipeline values should exactly match the targets, for every simulant and subcause.
 * For preterm birth subcauses, CSMRisk pipeline values should be exactly zero for simulants
   who are not preterm (i.e. those with gestational age >= 37 weeks).
@@ -520,8 +550,15 @@ For the preterm-without-RDS subcause, our target is one minus the RDS-specific f
   (but not by other risk factors or interventions directly), combined with the ACMRisk modified by *the same partially-modified CSMRisks*,
   then the ratio between the mean value in the MMS-scale-up scenario and in baseline,
   within each sex and preterm/non-preterm group,
-  should be closer to 1 than the same ratio for the modeled subcauses
-  by approximately the fraction of unmodeled cause mortality that is not due to LBWSG-affected causes.
+  should be greater than the same ratio for the modeled subcauses but less than 1,
+  except that it may exceed 1 when modeled CSMRisks sum to more than LBWSG-affected mortality risk.
+  For non-preterm groups, the ratio should be closer to 1 than for modeled subcauses
+  by *more* than the target fraction of unmodeled cause mortality that is due to LBWSG-unaffected causes,
+  since preterm-birth CSMRisk has been shifted to "other causes" in these groups, increasing the proportion
+  that is LBWSG-affected.
+  For preterm groups, the ratio should be closer to 1 than for modeled subcauses
+  by *less* than the target fraction of unmodeled cause mortality that is due to LBWSG-unaffected causes,
+  due to the opposite process.
 * Once CSMRisk pipeline values have been fully modified, by additional risk factors (e.g. hemoglobin) and interventions,
   their mean should be similar to the targets, in the baseline scenario.
 * Once CSMRisk pipeline values have been fully modified, the mean "other causes" mortality risk ratios between baseline
