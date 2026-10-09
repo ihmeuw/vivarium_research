@@ -353,13 +353,7 @@ For simplicity, we will not include YLDs in this model.
 Validation Criteria
 +++++++++++++++++++
 
-* Preterm mortality risk in simulation should match GBD estimates.
-
-* No preterm deaths for simulants with LBWSG categories for gestational ages of 37 weeks or greater.
-
-* Relative Risk of preterm with and without RDS deaths due to LBWSG should match overall neonatal mortality RR (when comparing between categories with :math:`GA < 37` weeks).
-
-* Fraction of preterm deaths with RDS should match assumption in data table above.
+For the MNCNH simulation, neonatal mortality V&V criteria are documented on :ref:`the neonatal mortality page <2021_cause_neonatal_disorders_mncnh>`.
 
 References
 ----------
