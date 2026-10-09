@@ -2049,7 +2049,7 @@ Default stratifications to all observers should include scenario and input draw.
     -
   * - 43.0
     - Make ACS access independently configurable
-    - Enable `scenarios <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_mncnh_portfolio/concept_model.html#scenario-information>`__ where ACS coverage and CPAP coverage are independent
+    - Enable `scenarios <https://vivarium-research.readthedocs.io/en/latest/models/concept_models/vivarium_mncnh_portfolio/concept_model.html#scenario-information>`__ where ACS coverage and CPAP coverage are not equal
     - Standard V&V scenarios
     - Default
     -
@@ -3232,7 +3232,7 @@ Default stratifications to all observers should include scenario and input draw.
     - Larger runs for exact maternal disorders check
     - Same as above
     - Anemia YLDs overestimated
-    - `Model 37.1 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/0e42e6fcaf59c3ca4a33ab5cd49711c6b37fd66a/tests/model_notebooks>`__
+    - `Model 37.1a V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/0e42e6fcaf59c3ca4a33ab5cd49711c6b37fd66a/tests/model_notebooks>`__
   * - 37.2
     - 37.1 with timestep anemia YLDs stratification 
     - Same as above, do not include late postpartum in anemia YLDs values, because GBD targets are only for pregnancy period (does not include late postpartum)
@@ -3252,7 +3252,7 @@ Default stratifications to all observers should include scenario and input draw.
   * - 38.2
     - Don’t apply iron effects to non-pregnant hemoglobin
     - Same as above
-    - Not avoiding applying the baseline IFA deletion to non-pregnant hemoglobin
+    - Still applying the baseline IFA deletion to non-pregnant hemoglobin
     - Notebooks not saved
   * - 38.3
     - Redraw partial-term pregnancies at late postpartum
@@ -3261,19 +3261,19 @@ Default stratifications to all observers should include scenario and input draw.
     - `Model 38.3 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/e4ad7aaf5297199ff92a786781c0dd770bed886f/tests/model_notebooks>`__
   * - 39.0
     - PPH/APH split updates
-    - * Confirm that maternal disorders incidences and moralities still matches expectations. Incidence and mortality for PPH as well as other maternal disorders should stay the same as APH cases are no longer eligible but incidence and CFR are increased.
-      * Check no partial term APH cases and APH cases disjoint w intrapartum disorders
+    - * Confirm that maternal disorders incidences and mortalities still matches expectations. Incidence and mortality for PPH as well as other maternal disorders should stay the same as APH cases are no longer eligible but incidence and CFR are increased.
+      * Check no partial term APH cases, and that APH deaths are disjoint with intrapartum disorders
     - * All checks passing. 
-      * Significant overestimation in APH incidence and mortality was corrected by excluding a/m/e pregnancies. 
+      * Significant overestimation in APH incidence and mortality was corrected by excluding abortion/miscarriage/ectopic pregnancies. 
       * Created `ticket <https://jira.ihme.washington.edu/browse/SSCI-2696>`__ for residual maternal disorders checks since we don't currently have any.
     - `Model 39.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/5b132c7c10289d733ea907b00226925f19a29170/tests/model_notebooks>`__
   * - 40.0
     - Hemoglobin effects on depression and neonatal sepsis
     - * Confirm that neonatal mortality (particularly for neonatal sepsis) still matches expectation in the baseline scenario
       * Using the interactive simulation, confirm direct effect of hemoglobin exposure on neonatal sepsis. Direct effect should be evaluated using the pipeline RR values. 
-      * Using the interactive simualation, confirm total effect of IV iron on neonatal sepsis. The total effect should be evaluated by comparing the neonatal sepsis mortality risk values at the simulant level between the baseline scenario and the anemia screening and IV iron scale-up scenarios. Calculate the expected total effect using the neonatal sepsis mortality relative risk for IV iron and the observed using the direct and indirect CSV data. 
+      * Using the interactive simulation, confirm total effect of IV iron on neonatal sepsis. The total effect should be evaluated by comparing the neonatal sepsis mortality risk values at the simulant level between the baseline scenario and the anemia screening and IV iron scale-up scenarios, for simulants who received IV iron in the latter scenario. Calculate the expected total effect using the neonatal sepsis mortality relative risk for IV iron and the observed using the direct and indirect CSV data. This check should be stratified by (bins of) hemoglobin, since the expected effects are hemoglobin-dependent.
     - * All unmodified existing checks and new checks are passing. 
-      * When adding the postpartum depression outcome incidence effect check, a bug was discovered in the other outcome incidence checks, which when fixed made the previous underestimation of PPH and maternal sepsis (and APH but we are removing that) worse. Not related to current V&V so made a `ticekt <https://jira.ihme.washington.edu/browse/SSCI-2786>`__.  
+      * When adding the postpartum depression outcome incidence effect check, a bug was discovered in the other outcome incidence checks, which when fixed made the previous underestimation of PPH and maternal sepsis (and APH but we are removing that) worse. Not related to current V&V so made a `ticket <https://jira.ihme.washington.edu/browse/SSCI-2786>`__.  
     - `Model 40.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/3d6dad01272f93e3865ec1f223c0f5683359dd6a/tests/model_notebooks>`__
   * - 41.0
     - Separate LBWSG affected causes
