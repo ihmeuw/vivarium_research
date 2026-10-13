@@ -349,6 +349,8 @@ including a special :math:`k=0` for the residual "all other causes" category def
   
   * Is quite difficult to verify (see V&V criteria below).
   * Sometimes behaves illogically, when the LBWSG-affected mortality risk is less than the sum of the modeled-cause CSMRisks.
+    (This can occur due to our shifting of all the mortality risk due to the preterm causes into the preterm LBWSG categories,
+    or more rarely due to baseline intervention deletion effects.)
 
   This could be improved by making LBWSG-affected mortality risk, which is currently the first term in :eq:`acmrisk-decomposition`,
   a first-class quantity that is used as follows:
