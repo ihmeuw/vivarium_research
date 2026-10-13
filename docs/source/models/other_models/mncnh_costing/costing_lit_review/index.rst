@@ -33,6 +33,9 @@
 MNCNH Portfolio Costing Analysis
 ================================
 
+.. sectnum::
+  :depth: 3
+
 .. contents::
   :local:
   :depth: 2
@@ -57,7 +60,7 @@ for more details), however, the methods by which we are conducting our current e
 We have also scoped a Wave 2 and Wave 3 of this costing analysis which will complicate the way by which the different cost components associated with intervention delivery are scaled, 
 such that rather than estimating the cost of delivering each additional unit of an intervention (i.e., cost per person treated), 
 we will consider the natural unit of scale for each cost category modeled in order to more realistically capture the true costs of scaling up the delivery of an intervention (e.g., cost per facility-year, cost per new health worker-year). 
-We also hope to include what are known as offset costs in later iterations of our costing model, such as cost savings from averted healthcare utilization due to improved maternal and newborn health outcomes.
+We also hope to include what can be called offset costs in later iterations of our costing model, such as cost savings from averted healthcare utilization due to improved maternal and newborn health outcomes.
 The details of these later waves are still being determined, and you can read more in later sections of this document.
 
 .. list-table:: Recommended resources
@@ -207,8 +210,9 @@ The cost taxonomy diagram below illustrates how we break down each unit cost.
 -----------------------------------
 
 .. todo:: 
-  Describe how each cost category has a different natural unit and although our wave 1 cost estimates assume all cost categories scale up by person, 
-  we know it's more complicated than this in reality for most of the cost categories (except for personnel costs).
+  Describe Wave 2 (how each cost category has a different natural unit and although our wave 1 cost estimates assume all cost categories scale up by person, 
+  we know it's more complicated than this in reality for most of the cost categories (except for personnel costs)) and Wave 3 (how there are averted costs
+  downstream of intervention delivery, due to reduced health system utilization and patient spending).
 
 .. figure:: cost_taxonomy_wave2.png
 
@@ -395,5 +399,6 @@ sources, such as:
 - Expert opinion surveys
 - Household or patient surveys
 - Manufacturer, supplier, or implementer quotes
+- Economic models
 
 To see how we deal with all of this data, check out our :ref:`accompanying page on the data processing and metaregression <costing_metaregression_vivarium_mncnh_portfolio>`.
