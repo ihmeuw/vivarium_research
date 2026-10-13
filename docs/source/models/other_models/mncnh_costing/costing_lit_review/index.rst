@@ -256,7 +256,7 @@ the effectiveness literature, and what protocols our stakeholders are interested
 For each intervention, the sheet records:
 
 - The unit being costed, and the dosage or quantity constituting a full treatment.
-- The relevant WHO guideline, the protocol used in costing literuature, and the narrowed-down protocol we assume.
+- The relevant WHO guideline, the protocol used in costing literature, and the narrowed-down protocol we assume.
 - The standard-of-care comparator, if any.
 - Personnel type and time required to deliver, and the delivery facility type. See
   the
