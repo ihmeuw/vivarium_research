@@ -176,6 +176,13 @@ these relative risks.
 GBD uses all-cause mortality data without adjustment for confounding to inform these relative risks,
 but assumes they represent the *causal* effect of LBWSG on each affected cause, and we do the same here.
 
+.. note::
+  It is a big assumption that these all-cause-mortality-derived LBWSG relative risks apply to each cause identically.
+  We may want to consider seeking data about cause-specific LBWSG relative risks, and using those instead.
+
+  From a mathematical standpoint, no matter what LBWSG relative risks we use, we can still calculate a PAF
+  that ensures the overall population CSMRisk matches GBD, in exactly the same way we currently do.
+
 The following table shows the data needed for these
 calculations.
 

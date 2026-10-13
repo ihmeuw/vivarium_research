@@ -226,9 +226,13 @@ The GBD assumes they represent the *causal* effect of LBWSG on each affected cau
 except that we add the additional constraint that the risk must be 0 for neonates not
 born preterm.
 
-.. note::  
-  If we get more specific data about RDS or non-RDS preterm death rates stratified by gestational age, we may want to use different relative risks to reflect that.
-  However, at the moment we don't even have relative risks that are *cause*-specific, much less *subcause*-specific.
+.. note::
+  It is a big assumption that these all-cause-mortality-derived LBWSG relative risks apply to each subcause identically.
+  We may want to consider seeking data about subcause-specific LBWSG relative risks, and using those instead;
+  from a very rough initial search, it appeared that such data might be available for RDS.
+
+  From a mathematical standpoint, no matter what LBWSG relative risks we use, we can still calculate a normalizing
+  constant that ensures the overall population CSMRisk matches GBD, in exactly the same way we currently do.
 
 .. note::
   There is no guarantee from GBD that after moving all of the preterm CSMRisk into the preterm categories,
@@ -240,8 +244,9 @@ born preterm.
   subcauses are the *only* modeled subcauses that do not use the GBD relative risks unmodified, it is *only*
   due to these subcauses that this is possible at all).
   In practice, we find that this does happen, but quite rarely, in our modeled locations.
-  In these rare cases, we scale down the CSMRisks so that their sum is equal to ACMRisk,
-  as described on the overall neonatal disorders cause model page.
+  In these rare cases, we scale down the CSMRisks so that their sum is equal to ACMRisk.
+  More details about the scale of this issue and what we do when it occurs
+  are described on the overall neonatal disorders cause model page.
 
 :math:`p_{\text{preterm},\text{age}}`, as mentioned above, represents the prevalence/exposure
 of preterm (gestational age < 37 weeks) at the *beginning* of the age group.

@@ -219,7 +219,7 @@ The neonatal death model requires only the probability of death (aka "mortality 
 These mortality risks are age-group-, sex-, and location-specific.
 For brevity, sex and location subscripts are omitted in all equations.
 
-Rather than using GBD mortality rates and converting them into probability of deaths, we will use mortality risk as direct input data into our model.
+Rather than using GBD mortality rates and converting them into probabilities of death, we will use mortality risk as direct input data into our model.
 Note that this strategy does not require any conversion between rates to probabilities NOR does it require any scaling to the duration of the age group. The mortality risk calculated as described below already represents the probability of dying within a neonatal age group and can be used directly as such in the simulation.
 
 .. note::
@@ -270,7 +270,8 @@ Where:
 
 All quantities are age-, sex-, and location-specific; we omit these subscripts for brevity.
 
-We can make mortality risk values specific to a birth weight and gestational age by applying the PAF and relative risk of LBWSG:
+We can make mortality risk values specific to a birth weight and gestational age by applying the PAF and relative risk of LBWSG,
+which we will encapsulate as a function :math:`\text{LBWSG}(\text{risk},\text{BW},\text{GA})`:
 
 .. math::
 
@@ -335,7 +336,9 @@ including a special :math:`k=0` for the residual "all other causes" category def
 .. note::
   This renormalization will cause our simulation to underestimate GBD's CSMRisks
   when :math:`\sum_{k=1}^K \text{CSMRisk}_{i,k} \gt \text{ACMRisk}_i`.
-  In practice, this rarely occurs in our modeled locations.
+  In practice, this rarely occurs in our modeled locations, and never by much at a population level;
+  see `this V&V notebook <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/33f8a65f032fc52e904522b9764c089a5f9fc1b5/tests/model_notebooks/results/executed/neonatal.ipynb>`__ cell 37
+  for the *proportion* by which the CSMRisks are underestimated, across locations and draws.
 
 .. note::
   Because *all* of our modeled subcauses currently use the same LBWSG relative risks
