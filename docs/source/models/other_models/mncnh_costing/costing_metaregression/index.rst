@@ -57,5 +57,7 @@ described here.
 
 .. todo:: 
 
-  Fill in the rest of this document with info on data processing step (SOP once estimates are extracted) 
-  and meta-regression with MR-BRT (and other statistical methods considered).
+  - Fill in the rest of this document with info on data processing step (SOP once estimates are extracted: summarize data sources as with MMS,
+    standardize costs to per-person total cost, adjust to USD 2026, set up data for meta-regression with {cost_category}_included columns, again using MMS as example) 
+    and meta-regression with MR-BRT (and other statistical methods considered).
+  - Add links to MR-BRT and ST-GPR docs here; learning resources for meta-regression (e.g., Health Metrics Toolbox)

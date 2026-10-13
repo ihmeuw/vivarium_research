@@ -41,8 +41,8 @@ MNCNH Portfolio Costing Analysis
   :depth: 2
 
 
-1.0 Background
---------------
+Background
+----------
 
 In tandem with our simulation of the MNCNH portfolio (:ref:`see the Concept Model documentation here <2024_concept_model_vivarium_mncnh_portfolio>`), 
 we are conducting a systematic literature review and meta-regression analysis to estimate the costs of delivering several different maternal and newborn health interventions in low- and middle-income countries. 
@@ -85,11 +85,13 @@ The details of these later waves are still being determined, and you can read mo
        * `Cost-effectiveness of interventions for HIV/AIDS, malaria, syphilis, and tuberculosis in 128 countries: a meta-regression analysis <https://www.thelancet.com/journals/langlo/article/PIIS2214-109X(24)00181-5/fulltext>`__
        * `Historic and future spending estimates of maternal health and family planning in 139 low- and middle-income countries, 2000–2030: a modelling study <https://bmjpublichealth.bmj.com/content/4/2/e004211>`__
 
-1.1 Scope
-+++++++++
+Scope
++++++
 
 The below table lists the MNCNH portfolio interventions that we are planning to produce cost estimates for, 
-along with their corresponding model documentation and the status of cost estimation.
+along with their corresponding model documentation and where to find the literature review materials (i.e., PDFs of included studies and summary of extracted costs).
+To view the status of generating cost estimates for each intervention,
+please see our tracking page `here <https://uwnetid.sharepoint.com/:x:/s/ihme_simulation_science_team/cQooGQ8rNNTrSIeQL0trZowZEgUC_WQ-3-tgJ00y9w9_NgDtYw?nav=MTVfezJCMDAyQUE1LTA2RDAtNDBDRC1BODFELUY4RUY4NjdEOUYwQX0>`__.
 
 .. list-table:: Interventions in scope for costing
   :header-rows: 1
@@ -98,89 +100,114 @@ along with their corresponding model documentation and the status of cost estima
   * - Simulation stage
     - Intervention
     - Model documentation
-    - Status of costing
+    - Where to find literature review materials 
   * - Antenatal
     - Iron and folic acid supplementation (IFA)
     - :ref:`Oral iron in pregnancy <oral_iron_antenatal>`
-    - Cost estimates have been extracted from literature but not yet processed
+    - 
+      - `Included studies <https://uwnetid.sharepoint.com/:f:/r/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2Firon%20interventions&p=true&share=cgqF7b95W2lpRKMuoFpaUkN2EgUCtud10aPT0IViMq%2D5jr3eCw>`__
+      - Summary of extracted costs not available yet
   * - Antenatal
     - Multiple micronutrient supplementation (MMS)
     - :ref:`Oral iron in pregnancy <oral_iron_antenatal>`
-    - Cost estimates have been extracted from literature but not yet processed
+    -
+      - `Included studies <https://uwnetid.sharepoint.com/:f:/r/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2Firon%20interventions&p=true&share=cgqF7b95W2lpRKMuoFpaUkN2EgUCtud10aPT0IViMq%2D5jr3eCw>`__
+      - `Summary of extracted costs <https://uwnetid.sharepoint.com/:x:/s/ihme_simulation_science_team/cQpmPMdPHo3MSZBLjMdMER7xEgUC58VFXqdGDvVKhmRGezGtuw>`__
   * - Antenatal
     - Intravenous iron for anemia in pregnancy
     - :ref:`IV iron intervention <intervention_iv_iron_antenatal_mncnh>`
-    - Cost estimates have been extracted from literature but not yet processed
+    -      
+      - `Included studies <https://uwnetid.sharepoint.com/:f:/r/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2Firon%20interventions&p=true&share=cgqF7b95W2lpRKMuoFpaUkN2EgUCtud10aPT0IViMq%2D5jr3eCw>`__
+      - Summary of extracted costs not available yet
   * - Antenatal
     - Anemia screening (ANC hemoglobin testing)
     - :ref:`Anemia screening <anemia_screening>`
-    - Cost estimates have been extracted from literature but not yet processed; 
-      second wave of literature search is needed due to minimal evidence found in the first wave
+    -
+      - `Included studies <https://uwnetid.sharepoint.com/:f:/r/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2Firon%20interventions&p=true&share=cgqF7b95W2lpRKMuoFpaUkN2EgUCtud10aPT0IViMq%2D5jr3eCw>`__
+      - Summary of extracted costs not available yet
   * - Antenatal
     - Standard, point-of-care, and AI-assisted ultrasound
     - :ref:`AI ultrasound module <2024_vivarium_mncnh_portfolio_ai_ultrasound_module>`
-    - Cost estimates have been extracted from literature and partially processed 
+    -
+      - `Included studies <https://uwnetid.sharepoint.com/:f:/r/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FStandard%20Ultrasound&p=true&share=cgqt%5Fv6KTWDnS4mnPhqrmmTBEgUCN%5FqUWfE9KHfvQNfL305AIQ>`__
+      - Summary of extracted costs not available yet
   * - Antenatal
-    - Pre-eclampsia testing and treatment
-    - Not yet documented
-    - Cost estimates have not yet been extracted from literature
+    - Pre-eclampsia testing and treatment (not yet documented)
+    - N/A
+    -
+      - Included studies not available yet
+      - Summary of extracted costs not available yet
   * - Intrapartum
     - Intrapartum azithromycin for maternal sepsis prevention
     - :ref:`Azithromycin intervention <azithromycin_intervention>`
-    - Cost estimates have been extracted from literature and partially processed
+    -
+      - `Included studies <https://uwnetid.sharepoint.com/:f:/r/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FAzithromycin%2FReferences&p=true&share=cgpwyWum%2DUlXSLwYncsCuBBkEgUCpt2pzriKbwt9ZLVJJMIDhw>`__
+      - Summary of extracted costs not available yet 
   * - Intrapartum
     - Misoprostol for prevention of postpartum hemorrhage
     - :ref:`Misoprostol intervention <misoprostol_intervention>`
-    - Cost estimates have been extracted from literature but not yet processed
+    -
+      - Included studies not available yet
+      - Summary of extracted costs not available yet
   * - Intrapartum
     - Antenatal corticosteroids (ACS)
     - :ref:`ACS intervention <acs_intervention>`
-    - Cost estimates have not yet been extracted from literature
+    -
+      - Included studies not available yet
+      - Summary of extracted costs not available yet
   * - Intrapartum
     - E-MOTIVE bundle for postpartum hemorrhage treatment
-    - :ref:`E-MOTIVE intervention <emotive_intervention>`
-    - Cost estimates have not yet been extracted from literature
-  * - Intrapartum
-    - Caesarean section (elective and emergent)
-    - :ref:`Intrapartum interventions module <2024_vivarium_mncnh_portfolio_intrapartum_interventions_module>`
-    - Cost estimates have not yet been extracted from literature 
+    - :ref:`E-MOTIVE intervention <emotive_intervention>` 
+    -
+      - Included studies not available yet
+      - Summary of extracted costs not available yet
   * - Intrapartum
     - Intrapartum sensors
     - Not yet documented
-    - Cost estimates have not yet been extracted from literature
+    - 
+      - Included studies not available yet
+      - Summary of extracted costs not available yet
   * - Neonatal
     - Inpatient antibiotic management of PSBI
     - :ref:`Neonatal antibiotics <intervention_neonatal_antibiotics>`
-    - Cost estimates have been extracted from literature and partially processed
+    - 
+      - 
+      - Summary of extracted costs not available yet
   * - Neonatal
     - Outpatient antibiotic management of PSBI
     - :ref:`Neonatal antibiotics <intervention_neonatal_antibiotics>`
-    - Cost estimates have been extracted from literature and partially processed
+    - 
+      - `Included studies <https://uwnetid.sharepoint.com/:f:/r/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FNeonatal%20Antibiotics&p=true&share=cgqwGaMeZWs5TbSCReCnFVVQEgUCEWz70egilCOoYgtWFPAu4w>`__
+      - Summary of extracted costs not available yet
   * - Neonatal
     - CPAP for respiratory distress syndrome
     - :ref:`CPAP intervention <intervention_neonatal_cpap>`
-    - Cost estimates have been partially extracted from literature
+    - 
+      - Included studies not available yet
+      - Summary of extracted costs not available yet
   * - Neonatal
     - Probiotics for infection prevention in preterm neonates
     - :ref:`Neonatal probiotics <intervention_neonatal_probiotics>`
-    - Cost estimates have been extracted from literature and partially processed
+    - 
+      - `Included studies <https://uwnetid.sharepoint.com/:f:/r/sites/ihme_simulation_science_team/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fihme%5Fsimulation%5Fscience%5Fteam%2FShared%20Documents%2FResearch%2FBMGF%5FMNCH%2FMNCNH%20portfolio%20products%2F04%5Fcosting%2FNeonatal%20Antibiotics&p=true&share=cgqwGaMeZWs5TbSCReCnFVVQEgUCEWz70egilCOoYgtWFPAu4w>`__
+      - Summary of extracted costs not available yet
 
 .. todo::
 
-  Double-check the types of ultrasound and c-sections we are considering in the costing analysis and simulation. 
+  - Double-check the types of ultrasound we are considering in the costing analysis and simulation. 
+  - Add a list-table of offset costs that are scoped for Wave 3 (C-sections, NICU admissions, others?)
 
 .. note::
 
-  This table summarizes the status of the costs estimated for scoped interventions and was 
-  last updated on 2025-09-28.
+  This table summarizes where to find the literature review materials for scoped interventions and was last updated on 2025-10-13-2026.
 
 .. _costing_lit_review_taxonomy:
 
-2.0 Cost taxonomy
------------------
+Cost taxonomy
+-------------
 
-2.1 Three kinds of extracted estimate
-+++++++++++++++++++++++++++++++++++++
+Extracted cost types
+++++++++++++++++++++
 
 In this literature review, we are extracting cost estimates that fall into one of 3 buckets (listed below), 
 not all of which will be used directly as inputs to our costing meta-regression. 
@@ -198,16 +225,16 @@ simulation output.
 3. **Offset costs** — averted costs due to reduction of burden downstream of intervention delivery
 (e.g., averted health system costs due to decreased time spent in NICU or hospital, averted personnel costs due to decreased staff time treating burden, and averted patient spending).
 
-2.2 Unit cost taxonomy (wave 1)
--------------------------------
+Unit cost taxonomy (Wave 1)
+---------------------------
 
 In our wave 1 analysis, we are calculating unit cost by considering the following components which make up the total cost required to treat one person with a given intervention.
 The cost taxonomy diagram below illustrates how we break down each unit cost. 
 
 .. figure:: cost_taxonomy_wave1.png
 
-2.3 Unit cost taxonomy (wave 2 & 3)
------------------------------------
+Unit cost taxonomy (Wave 2 & 3)
+-------------------------------
 
 .. todo:: 
   Describe Wave 2 (how each cost category has a different natural unit and although our wave 1 cost estimates assume all cost categories scale up by person, 
@@ -216,8 +243,8 @@ The cost taxonomy diagram below illustrates how we break down each unit cost.
 
 .. figure:: cost_taxonomy_wave2.png
 
-3.1 Intervention Profile Sheet
-++++++++++++++++++++++++++++++
+Intervention Profile Sheet
+++++++++++++++++++++++++++
 
 Unit definitions, protocols, and delivery assumptions are maintained in the
 `Intervention Profile Sheet <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/MNCNH%20portfolio%20products/04_costing/Intervention%20Profiles%20for%20Costing.xlsx?d=wc7b6dad8525741a981889a3624225e77&csf=1&web=1&e=K0z7cp>`_, 
@@ -244,8 +271,8 @@ For each intervention, the sheet records:
   Finish filling in the Intervention Profile Sheet for all interventions and determine how to best document information there
   (i.e., move to a table here rather than Sharepoint Excel spreadsheet?)
 
-4.0 Literature review methods
------------------------------
+Literature review methods
+-------------------------
 
 We follow PRISMA 2020 guidelines and the GBD systematic review protocol so that each search is systematic and replicable. 
 Each intervention has its own search strategy and set of inclusion criteria, aside from IFA and MMS which we bundled together, 
@@ -255,8 +282,8 @@ which retains PubMed search history,
 allows inclusion criteria to be edited retroactively without restarting screening, 
 and maintains the PRISMA 2020 flow diagram automatically. 
 
-4.2 Our review process
-++++++++++++++++++++++
+Our review process
+++++++++++++++++++
 
 1. Develop inclusion criteria and the search string, with assistance from a UW
    Health Sciences librarian. (Note: after consulting with a UW Health Sciences 
@@ -272,7 +299,8 @@ and maintains the PRISMA 2020 flow diagram automatically.
    references returned.
 7. Extract cost estimates and relevant study information into the extraction sheet.
 8. Process data for meta-regression — see the
-   :ref:`meta-regression document <costing_metaregression_vivarium_mncnh_portfolio>`.
+   :ref:`meta-regression document <costing_metaregression_vivarium_mncnh_portfolio>`
+   for more details on what this entails.
 
 .. note:: 
   
@@ -283,8 +311,8 @@ and maintains the PRISMA 2020 flow diagram automatically.
   or other observations made during the process.
 
 
-4.2 Inclusion and exclusion criteria
-++++++++++++++++++++++++++++++++++++
+Inclusion and exclusion criteria
+++++++++++++++++++++++++++++++++
 
 Criteria are defined per intervention using the **PICOS** framework — Population,
 Intervention, Comparison, Outcome, Study design. In DistillerSR, exclusion reasons
@@ -350,17 +378,23 @@ data are clearly reported**.
   E-MOTIVE, generalized hospitalization and patient admission, and caesarean section).
 
 
-4.3 Search strategy
-+++++++++++++++++++
+Search strategy
++++++++++++++++
 
 See `here <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B2875F475-2FA5-4344-AE93-30A2C70B2D36%7D&file=Intervention%20Search%20Terms.xlsx&action=default&mobileredirect=true>`_
 for our intervention search strategies. Search strategies are also tracked in the Distiller project for each intervention.
 
-5.0 Data extraction
--------------------
+.. todo:: 
 
-5.1 Extraction conventions
-++++++++++++++++++++++++++
+  Make a clean, new extraction spreadsheet file for future interventions.
+
+Data extraction
+---------------
+
+Extraction conventions
+++++++++++++++++++++++
+
+The extracted cost estimates of each literature review are stored in `this Excel spreadsheet on SharePoint <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BB52D2751-6796-4A64-A053-55C2EC2C97CC%7D&file=mncnh_costing_extraction.xlsx&action=default&mobileredirect=true&share=cQpRJy21lmdkSqBTVcLsLJfMEgUC9pjEB5v6v_7vkTCRCinfuQ>`_. 
 
 Below are a few rules-of-thumb to follow during data extraction that will make processing and analysis of the extracted cost data a lot easier down the road!
 
@@ -386,8 +420,8 @@ There is a lot of heterogeneity in the data and the extraction sheet is not alwa
 so detailed notes are very important and useful for processing and analysis later on.
 
 
-5.2 Summary of Data sources 
-+++++++++++++++++++++++++++
+Summary of Data sources 
++++++++++++++++++++++++
 
 Cost estimates in the included literature come from a wide range of underlying
 sources, such as:
