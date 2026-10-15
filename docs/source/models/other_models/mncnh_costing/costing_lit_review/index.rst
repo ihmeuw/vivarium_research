@@ -51,11 +51,15 @@ then meta-regressed to summarize across inputs and understand variability across
 helping funders and other decision-makers compare interventions and allocate resources to ensure greatest reduction in maternal and newborn burden of disease.
 
 In past iterations of this work, we have also conducted cost-effectiveness analyses (see Appendix 6 of `this manuscript <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/Nutrition%20Optimization/NO%20Paper%20%231%20Model%20Overview.docx?d=w54bc12085d904be3a5356efcb7b0239c&csf=1&web=1&e=xqNgPO&nav=eyJoIjoiNzE1NDkzNTYzIn0>`_ 
-for more details), however, the methods by which we are conducting our current economic analysis differ from previous projects in 3 key ways:
+for more details), however, the methods by which we are conducting our current economic analysis differ from previous projects in a few key ways:
 
 1. Systematic literature review of all available published data on each intervention and associated costs;
-2. Use of regression tool (MR-BRT) as opposed to a simple calculation of average; and
-3. Finer granularity in cost categories.
+2. More robust statistical analysis of available cost data found in systematic review:
+  a. Use of meta-analysis rather than a simple average of study-reported values (or picking the most trusted or 'best' paper for each cost category and using value reported there),
+       thus enabling weighting by precision of each study and a more robust synthesis of the available evidence; 
+  b. Exploration of meta-regression (with IHME-developed tool MR-BRT) to adjust for alternative approaches and definitions within included studies;
+  c. Potential use of ST-GPR to extrapolate meta-regression results across location, time, and other relevant covariates; and
+4. Finer granularity in cost categories.
 
 We have also scoped a Wave 2 and Wave 3 of this costing analysis which will complicate the way by which the different cost components associated with intervention delivery are scaled, 
 such that rather than estimating the cost of delivering each additional unit of an intervention (i.e., cost per person treated), 
