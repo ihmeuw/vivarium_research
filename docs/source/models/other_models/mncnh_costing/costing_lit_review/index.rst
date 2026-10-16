@@ -50,8 +50,8 @@ Cost estimates derived from this literature review (extracted in the form of rep
 then meta-regressed to summarize across inputs and understand variability across covariates such as locations and/or delivery contexts) will be paired with the effectiveness estimates from the microsimulation to determine cost-effectiveness of these interventions, 
 helping funders and other decision-makers compare interventions and allocate resources to ensure greatest reduction in maternal and newborn burden of disease.
 
-In past iterations of this work, we have also conducted cost-effectiveness analyses (see Appendix 6 of `this manuscript <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/Nutrition%20Optimization/NO%20Paper%20%231%20Model%20Overview.docx?d=w54bc12085d904be3a5356efcb7b0239c&csf=1&web=1&e=xqNgPO&nav=eyJoIjoiNzE1NDkzNTYzIn0>`_ 
-for more details), however, the methods by which we are conducting our current economic analysis differ from previous projects in a few key ways:
+In past iterations of this work, we have also conducted cost-effectiveness analyses (:ref:`costing_nutrition_optimization` for more details), 
+however, the methods by which we are conducting our current economic analysis differ from previous projects in a few key ways:
 
 1. Systematic literature review of all available published data on each intervention and associated costs;
 2. More robust statistical analysis of available cost data found in systematic review:
@@ -378,8 +378,12 @@ data are clearly reported**.
     - Respiratory distress syndrome and associated costs
 
 .. todo:: 
-  Define criteria for the remaining portfolio interventions (antenatal corticosteroids,
-  E-MOTIVE, generalized hospitalization and patient admission, and caesarean section).
+
+  - Define inclusion criteria for the remaining portfolio interventions (antenatal corticosteroids,
+    E-MOTIVE, generalized hospitalization and patient admission, and caesarean section).
+  - Revisit inclusion criteria for interventions already defined, and determine if searches and screenings should be broadened for more data.
+    (e.g., restricting to pregnancy population might not be necessary to capture accurate cost data for interventions like anemia screening.)
+
 
 
 Search strategy
