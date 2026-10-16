@@ -30,8 +30,8 @@
   And then add it to the list of decorators above.
 
 
-Nutrition Optimization Costing Analysis
-=======================================
+Nutrition Optimization Costing Analysis (2021)
+==============================================
 
 .. sectnum::
   :depth: 3
