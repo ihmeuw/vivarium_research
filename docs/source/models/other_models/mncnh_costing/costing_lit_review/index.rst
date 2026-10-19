@@ -424,12 +424,25 @@ To see how we deal with all of this data, check out our :ref:`accompanying page 
 Intervention Profile Sheet
 ++++++++++++++++++++++++++
 
-Aside from using the extracted cost data in our metaregression to estimate unit cost of each intervention, 
-we will also use the findings from this literature review to inform our assumptions regarding the delivery specifics of each intervention.
-
 In our `Intervention Profile Sheet <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/MNCNH%20portfolio%20products/04_costing/Intervention%20Profiles%20for%20Costing.xlsx?d=wc7b6dad8525741a981889a3624225e77&csf=1&web=1&e=K0z7cp>`_,  
-we will summarize the delivery protocols for each intervention across the literature we use for the costing analysis.
+we will summarize intervention-specific details across the costing literature found in this review,
+with respect to details such as dose and delivery context (e.g., facility type, personnel type, etc.).
+This will enable us to compare the scope of interveniton details and protocols among included studies in costing literature with other components of the MNCNH portfolio project,
+such as in the literature used to inform effect sizes of interventions in our simulation. 
+
+After summarizing intervention-specific details, we will evaluate the study-level variation within input literature. 
+If there is variation and at least some representation of desired values (based on alignment with other project components), 
+we can test inclusion of various intervention-specific variables as covariates in the model to determine if they are influential and have enough statistical precision to be informative.
+
+If these variables are valid model predictors, then we may either 
+(a) standardize our MR-BRT outputs to the desired covariate level (aligned with WHO dose, for example), 
+or (b) offer customizability of covariate level selection (like a user-defined sensitivity analysis). 
+If the desired intervention definition is not represented in inputs and expected to be influential on cost, 
+we will need to consider manual adjustments like scaling or overwriting literature values with some other approach, 
+or note this as a limitation of our model.
 
 .. todo::
 
-  Finish filling in the Intervention Profile Sheet for all interventions we've extracted cost data for. 
+  - Finish filling in the Intervention Profile Sheet for all interventions we've extracted cost data for. 
+  - Determine study-level variation and how to use such variation in our meta-regression models.
+  - Determine where to document the less costing-specific aspects of this task: i.e. determining alignment of costing literature intervention-specific details with effect literature, WHO guidelines, and/or other stakeholder interests? 
