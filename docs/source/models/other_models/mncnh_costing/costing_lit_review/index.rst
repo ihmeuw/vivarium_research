@@ -30,8 +30,8 @@
   And then add it to the list of decorators above.
 
 
-MNCNH Portfolio Costing Analysis
-================================
+MNCNH Portfolio CostingLiterature Review
+========================================
 
 .. sectnum::
   :depth: 3
@@ -250,33 +250,6 @@ Unit cost taxonomy (Wave 2 & 3)
 
 .. figure:: cost_taxonomy_wave2.png
 
-Intervention Profile Sheet
-++++++++++++++++++++++++++
-
-Unit definitions, protocols, and delivery assumptions are maintained in the
-`Intervention Profile Sheet <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/MNCNH%20portfolio%20products/04_costing/Intervention%20Profiles%20for%20Costing.xlsx?d=wc7b6dad8525741a981889a3624225e77&csf=1&web=1&e=K0z7cp>`_, 
-which serves three purposes: it attempts to standardize what each intervention is assumed to consist of, 
-it records which cost categories are relevant to each intervention, 
-and it summarizes the delivery protocols for each intervention across the literature we use for the costing analysis, 
-the effectiveness literature, and what protocols our stakeholders are interested in.
-
-For each intervention, the sheet records:
-
-- The unit being costed, and the dosage or quantity constituting a full treatment.
-- The relevant WHO guideline, the protocol used in costing literature, and the narrowed-down protocol we assume.
-- The standard-of-care comparator, if any.
-- Personnel type and time required to deliver, and the delivery facility type. See
-  the
-  :ref:`delivery facility choice model <2024_facility_model_vivarium_mncnh_portfolio>`
-  for the facility types represented in the simulation.
-- Which cost categories from the taxonomy are relevant.
-- The literature used for effects and the literature used for costs, kept in
-  separate columns because they are frequently different bodies of work.
-
-.. todo::
-
-  Finish filling in the Intervention Profile Sheet for all interventions and determine how to best document information there
-  (i.e., move to a table here rather than Sharepoint Excel spreadsheet?)
 
 Literature review methods
 -------------------------
@@ -325,9 +298,9 @@ Criteria are defined per intervention using the **PICOS** framework — Populati
 Intervention, Comparison, Outcome, Study design. In DistillerSR, exclusion reasons
 are selected from a form so that exclusions are auditable.
 
-Across all interventions the study design criterion is the same: **RCT or costing
-study collecting primary data or using modeled costs in which sources of input cost
-data are clearly reported**.
+Across all interventions the study design criterion is the same: **RCT, costing
+study, or other primary source reporting observed cost data**. 
+We are also exploring the inclusion of modeled costs in our meta-regression analysis to increase the amount of input data.
 
 .. list-table:: PICOS criteria by intervention
   :header-rows: 1
@@ -431,7 +404,7 @@ There is a lot of heterogeneity in the data and the extraction sheet is not alwa
 so detailed notes are very important and useful for processing and analysis later on.
 
 
-Summary of Data sources 
+Summary of data sources 
 +++++++++++++++++++++++
 
 Cost estimates in the included literature come from a wide range of underlying
@@ -447,3 +420,16 @@ sources, such as:
 - Economic models
 
 To see how we deal with all of this data, check out our :ref:`accompanying page on the data processing and metaregression <costing_metaregression_vivarium_mncnh_portfolio>`.
+
+Intervention Profile Sheet
+++++++++++++++++++++++++++
+
+Aside from using the extracted cost data in our metaregression to estimate unit cost of each intervention, 
+we will also use the findings from this literature review to inform our assumptions regarding the delivery specifics of each intervention.
+
+In our `Intervention Profile Sheet <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/BMGF_MNCH/MNCNH%20portfolio%20products/04_costing/Intervention%20Profiles%20for%20Costing.xlsx?d=wc7b6dad8525741a981889a3624225e77&csf=1&web=1&e=K0z7cp>`_,  
+we will summarize the delivery protocols for each intervention across the literature we use for the costing analysis.
+
+.. todo::
+
+  Finish filling in the Intervention Profile Sheet for all interventions we've extracted cost data for. 
