@@ -30,8 +30,8 @@
   And then add it to the list of decorators above.
 
 
-MNCNH Portfolio CostingLiterature Review
-========================================
+MNCNH Portfolio Costing Literature Review
+=========================================
 
 .. sectnum::
   :depth: 3
