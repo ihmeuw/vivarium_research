@@ -233,7 +233,7 @@ simulation output.
 (e.g., averted health system costs due to decreased time spent in NICU or hospital, averted personnel costs due to decreased staff time treating burden, and averted patient spending).
 
 Unit cost taxonomy (Wave 1)
----------------------------
++++++++++++++++++++++++++++
 
 In our wave 1 analysis, we are calculating unit cost by considering the following components which make up the total cost required to treat one person with a given intervention.
 The cost taxonomy diagram below illustrates how we break down each unit cost. 
@@ -241,7 +241,7 @@ The cost taxonomy diagram below illustrates how we break down each unit cost.
 .. figure:: cost_taxonomy_wave1.png
 
 Unit cost taxonomy (Wave 2 & 3)
--------------------------------
++++++++++++++++++++++++++++++++
 
 .. todo:: 
   Describe Wave 2 (how each cost category has a different natural unit and although our wave 1 cost estimates assume all cost categories scale up by person, 
@@ -284,11 +284,14 @@ Our review process
 
 .. note:: 
   
-  Reviews and meta-analyses are excluded from extraction (except where cost-effectiveness
-  estimates are reported, which we will use to validate our own estimates once calculated), 
-  but are flagged during screening so that their reference lists can be used to augment the search.
-  Every stage of the review process should be fully documented with notes of any decisions, assumptions,
-  or other observations made during the process.
+  - Reviews and meta-analyses are excluded from extraction (except where cost-effectiveness
+    estimates are reported, which we will use to validate our own estimates once calculated), 
+    but are flagged during screening so that their reference lists can be used to augment the search.
+    Every stage of the review process should be fully documented with notes of any decisions, assumptions,
+    or other observations made during the process.
+  - Due to time and personnel constraints and the broad scope of this review,
+    we have not yet conducted dual screenings as described here, but plan to do so in the future as resources allow,
+    in order to ensure our alignment with PRISMA guidelines.
 
 
 Inclusion and exclusion criteria
