@@ -3289,10 +3289,17 @@ Default stratifications to all observers should include scenario and input draw.
     - All tests passing
     - `Model 42.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/0d620bd033cd0b288a1765a2acaec3db2a8e2840/tests/model_notebooks>`__
   * - 43.0
-    -  Make ACS access independently configurable
+    - Make ACS access independently configurable
     - Same as base
     - All tests passing
     - `Model 43.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/54befc004cf9f40dfde284f67f054bccaa26f7f0/tests/model_notebooks>`__
+  * - 
+    - PPH split at 300mL
+    - * Confirm 500mL cases per 300mL case and 1L cases per 500mL case
+      * Confirm 500mL incidence and YLDs and overall postpartum deaths match GBD maternal hemorrhage incidence/YLDs/deaths per pregnancy times postpartum fraction
+      * Confirm PPH mortality is only among simulants with 1L+ blood loss 
+    - Looks good!
+    -  `PPH split at 300mL V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/cbf64cd16fec5acb66a27fa879aea891e1494542/tests/model_notebooks>`__
 
 .. _facility choice code:
   https://github.com/ihmeuw/vivarium_research_mncnh_portfolio/tree/main/facility_choice
