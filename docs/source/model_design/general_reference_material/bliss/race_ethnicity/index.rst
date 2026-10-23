@@ -390,9 +390,9 @@ throughout this style guide.
    * - Health disparities
      - Differences in health outcomes, such as life expectancy, disease burden, or other adverse health conditions between different groups of people within a population. The term is often used to describe differences seen between racial or ethnic groups, but it can also be applied to differences observed across any individual characteristic including geographies, sex, gender, sexual orientation or socioeconomic status.
    * - Risk factor
-     - Attributes, characteristics, or exposures that biologically increase the likelihood that a person develops a disease or health disorder. Risk factors are diverse and can span attributes such as diet, physical activity, alcohol use, genetics, age, and experiences of discrimination.
+     - Attributes, characteristics, or exposures that are associated with or cause an increased likelihood that a person develops a disease or health disorder. Risk factors are diverse and can span attributes such as diet, physical activity, alcohol use, genetics, age, and experiences of discrimination. Where the use of this term may imply a variable related to REA has a causal effect or would be intervened on, "risk marker" may be a more appropriate term.
    * - Risk marker
-     - Similar to a risk factor but not thought to biologically cause the development of a disease or health disorder. Race and its relationship to cardiovascular disease is an example. Some races have higher rates of cardiovascular disease but it is thought this is due to experiences of racism, either interpersonal or societal. Race itself is not thought to be causally linked with CVD except through these societal pathways.
+     - Similar to a risk factor, but used to indicate a variable which is not possible or ethical to change itself, but which may have a causal relationship to another variable more suitable to intervene on. Race and its relationship to cardiovascular disease is an example. Some races have higher rates of cardiovascular disease but it is thought this is due to experiences of racism, either interpersonal or societal. Race itself is not thought to be causally linked with CVD except through these societal pathways.
    * - Nativity
      - The general definition refers to the occasion of one’s birth. However, it is used here to mean the country someone was born in. 
    * - Colonialism
@@ -816,10 +816,76 @@ race which can include all or none of these.
 Risk factors vs. risk markers
 -----------------------------
 
-.. todo::
+"Risk factor" and "risk marker" are terms used to refer to or categorize variables which are associated with outcomes.
+Defined loosely, they might be considered to mean the same thing:
 
-    In this section we'll discuss the question "Does/should my research look at race and ethnicity as risk factors or as risk markers?" and how a health
-    metrics researcher would answer this question and use that answer to inform their research question.
+- A :ref:`risk factor <models_risk_factors>` is any attribute that is associated with some outcome.
+- A risk marker has been defined as 
+  "an attribute or exposure that is associated with increased probability of disease, but is not necessarily a causal factor". [Burt_2001]_
+
+The risk marker definition indicates that, similarly to the risk factor definition above, markers are not necessarily causal.
+Based on these definitions, the terms could be considered to be synonyms.
+
+However, in some contexts, the terms take on more specific meanings.
+"Risk factors" are sometimes defined as specifically causal. For example:
+
+- As "an environmental, behavioral, or biologic factor confirmed by temporal sequence, usually in longitudinal studies, which
+  if present directly increases the probability of a disease occurring, and if absent or removed reduces the probability. 
+  Risk factors are part of the causal chain, or expose the host to the causal chain. 
+  Once disease occurs, removal of a risk factor may not result in a cure" [Beck_1998]_.
+- Note that "the Global Burden of Disease study models risk factors and their effects on specific outcomes that meet 
+  the burden of proof for causality", :ref:`per our team and the GBD <risk_factors_gbd>`.
+
+And in cases where "risk factors" imply causality, "risk markers" 
+are sometimes used to specify non-causality.
+
+- "A risk marker is not necessarily involved in the cause or set of causes of a cardiovascular disease (CVD), like a risk factor" [Thiriet_2019]_. 
+
+Many discussions of the use of the term "risk marker" in reference to racial variables indicate that
+the term was used because implying race to be a causal variable could be harmful or misleading. 
+The hypothetical causal diagram under "option 1a" in the section above is a practical example relevant to our modeling work.
+In the diagram as pictured, it's clear that the effect of race is mediated through the "experiences of racism" factor. 
+However, if we had not included that factor, it would be best to refer to race itself as a risk marker, 
+to ephasize that this is not an inherent effect, but one created by society. 
+Using the term risk marker makes it clear that there are other variables involved that are not pictured.
+
+To further explore why referring to race as a causal risk factor may be harmful or misleading, we will present several 
+instances in the literature that discuss the use of "risk marker" as an alternative. 
+
+To understand these examples, it's helpful to review the :ref:`Bradford Hill criteria <causal_relationships>` for causality, used to evaluate the 
+epidemiologic evidence of a causal relationship such that the more criteria are satisfied, the more likely it is that a 
+causal relationship exists. 
+While there are a number of other criteria which are also important in such an evaluation, the three most relevant to 
+our discussion are:
+
+- **Specificity**: The more specific the association between a cause and an effect, the more likely that it is causal.
+- **Plausibility**: A plausible mechanism between cause and effect is helpful (although limited by current knowledge).
+- **Reversibility**: If the cause is deleted, the effect should also disappear.
+
+Each of the literature discussions cited below notes that describing race as a causal risk factor could be interpreted to  
+imply that one or more of these three criteria are true, and argues that such an implication would be harmful or misleading.
+
+Specificity and plausibility often go hand in hand in these discusisons. 
+Many authors argue that race itself is not a specific factor compared to social or environmental variables such as 
+experiences of racism, and that without introducing the additional specificity the explanation must either be 
+implausible, or suggest an inaccurate, race essentialist mechanism such as genetics.
+
+In the context of medical algorithms or risk assesments, authors argue that race's use 
+"suggests that the effect of race is intrinsic to the patient or that its effects can be distinct 
+or separated from other social and environmental variables", 
+and implies different races have inherently different risks, reinforcing inequalities [Cerdeña_2020]_ [Chokshi_2022]_. 
+Within epidemiologic research, others write that 
+"racial definitions should be seen as primarily social in origin and should be clues to environmental — rather 
+than genetic — causes of disease" 
+and note that failure "to define race and ethnicity or explore structural racism as a fundamental cause" 
+"may perpetuate notions of racial essentialism by inappropriately framing race, rather than racism, as a risk factor for CVD" [Cooper_1984]_ [Silverman-Lloyd_2021]_. 
+Similarly a geneticist urges that "careful distinction must be made between race as a statistical (noncausal) risk factor 
+and causal genetic variables" [Kittles_2003]_.
+
+Other authors focus on reversibility, noting that in the biomedical model, only treatable variables are considered risk factors, 
+and that "the absurdity of the counterfactual distribution have led several authors to reject race as a valid cause", being a 
+"fundamental or unalterable characteristic of an individual" [Blackmore_1993]_, [Kaufman_2001]_.
+
 
 Methodology
 +++++++++++
@@ -1191,3 +1257,30 @@ References
 
 .. [Johfre_2021]
     Sasha Shen Johfre, Aliya Saperstein, Jill A. Hollenbach; Measuring Race and Ancestry in the Age of Genetic Testing. Demography 1 June 2021; 58 (3): 785–810. doi: https://doi.org/10.1215/00703370-9142013
+
+.. [Blackmore_1993]
+    Blackmore, C. A., Ferré, C. D., Rowley, D. L., Hogue, C. J. R., Gaiter, J., & Atrash, H. (1993). IS RACE A RISK FACTOR OR A RISK MARKER FOR PRETERM DELIVERY? Ethnicity & Disease, 3(4), 372–377. http://www.jstor.org.offcampus.lib.washington.edu/stable/45403143
+
+.. [Cooper_1984]
+    Richard Cooper, A note on the biologic concept of race and its application in epidemiologic research, American Heart Journal, Volume 108, Issue 3, Part 2, 1984, Pages 715-723, ISSN 0002-8703, https://doi.org/10.1016/0002-8703(84)90662-8.
+
+.. [Chokshi_2022]
+    Chokshi DA, Foote MMK, Morse ME. How to Act Upon Racism—not Race—as a Risk Factor. JAMA Health Forum. 2022;3(2):e220548. doi:10.1001/jamahealthforum.2022.0548
+
+.. [Kittles_2003]
+    Rick A. Kittles, Kenneth M. Weiss. 2003. Race, Ancestry, and Genes: Implications for Defining Disease Risk. Annual Review of Genomics and Human Genetics 4:33-67. https://doi.org/10.1146/annurev.genom.4.070802.110356
+
+.. [Kaufman_2001]
+    Jay S. Kaufman, Richard S. Cooper, Commentary: Considerations for Use of Racial/Ethnic Classification in Etiologic Research, American Journal of Epidemiology, Volume 154, Issue 4, 15 August 2001, Pages 291–298, https://doi.org/10.1093/aje/154.4.291
+
+.. [Burt_2001]
+    Burt, B.A.. (2001). Definitions of risk.. Journal of dental education. 65. 1007-1008. 
+
+.. [Thiriet_2019]
+    Thiriet M. Cardiovascular Risk Factors and Markers. Vasculopathies. 2019 Feb 19;8:91–198. doi: 10.1007/978-3-319-89315-0_2. PMCID: PMC7123062.
+
+.. [Beck_1998]
+    James D. Beck, & Steven Offenbacher. (1998). PERIODONTAL DISEASE AS A RISK FACTOR FOR CORONARY HEART DISEASE. Journal of the Japanese Society of Periodontology, 40(suppl-40th), 28–40.
+
+.. [Silverman-Lloyd_2021]
+    Silverman-Lloyd LG, Bishop NS, Cerdeña JP. Race is not a risk factor: Reframing discourse on racial health inequities in CVD prevention. Am J Prev Cardiol. 2021 Apr 18;6:100185. doi: 10.1016/j.ajpc.2021.100185. PMID: 34327505; PMCID: PMC8315343.
