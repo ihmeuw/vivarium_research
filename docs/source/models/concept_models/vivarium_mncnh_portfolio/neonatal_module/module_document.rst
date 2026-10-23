@@ -135,12 +135,17 @@ See observer/outputs section on main concept model document.
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
-* Confirm ACMR in sim matches ACMR in artifact
-* Confirm LBWSG exposure match
-* Confirm LBWSG RR on ACMR matches
-* Confirm CSMR matches for preterm, sepsis, encephalopathy
-* Confirm that RDS incidence and mortality match expectations
-* Confirm that interventions have expected efficacy and coverage rates
+See V&V criteria on subcomponent pages:
+
+* :ref:`Neonatal mortality <2021_cause_neonatal_disorders_mncnh>`
+* :ref:`ACS intervention <acs_intervention>`
+* :ref:`Antibiotics intervention <intervention_neonatal_antibiotics>`
+* :ref:`CPAP intervention <intervention_neonatal_cpap>`
+* :ref:`Probiotics intervention <intervention_neonatal_probiotics>`
+
+.. todo::
+  There are not V&V criteria for the LBWSG risk effects subcomponent
+
 
 5.0 References
 +++++++++++++++

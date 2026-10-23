@@ -219,9 +219,11 @@ The neonatal death model requires only the probability of death (aka "mortality 
 These mortality risks are age-group-, sex-, and location-specific.
 For brevity, sex and location subscripts are omitted in all equations.
 
-Rather than using GBD mortality rates and converting them into probability of deaths, we will use mortality risk as direct input data into our model. We will calculate mortality risk input data as age-specific death counts divided by live birth counts from GBD.
-
+Rather than using GBD mortality rates and converting them into probabilities of death, we will use mortality risk as direct input data into our model.
 Note that this strategy does not require any conversion between rates to probabilities NOR does it require any scaling to the duration of the age group. The mortality risk calculated as described below already represents the probability of dying within a neonatal age group and can be used directly as such in the simulation.
+
+.. note::
+  This strategy was updated in May of 2025 from a prior strategy of converting GBD mortality rates to probabilities. `The pull request that updated this strategy can be found here for reference. <https://github.com/ihmeuw/vivarium_research/pull/1654>`_ This strategy update was pursued following verification and validation issues in neonatal mortality and an exploration of potential solutions in model runs 6.1 through 6.4. Ultimately, a change from mortality rates to mortality risk was preferred given that it is the more policy relevant measure in the context of neonates, and accurately apportioning person time alive within the neonatal age group given the input data available to us was a challenge we judged to be unnecessary.
 
 To avoid confusion with mortality *rates* (typically referred to as the all-cause mortality rate, ACMR, or cause-specific mortality rates, CSMRs), we will refer to mortality *risk* as ACMRisk (all-cause mortality risk) and CSMRisk (cause-specific mortality risk), where:
 
@@ -239,9 +241,6 @@ and for a given cause of death:
 
   \text{CSMRisk}_\text{LNN} = \frac{\text{cause-specific deaths in the LNN age group}}{\text{live births} - \text{deaths due to all causes in the ENN age group}}
 
-
-Note that this strategy was updated in May of 2025 from a prior strategy of converting GBD mortality rates to probabilities. `The pull request that updated this strategy can be found here for reference. <https://github.com/ihmeuw/vivarium_research/pull/1654>`_ This strategy update was pursued following verification and validation issues in neonatal mortality and an exploration of potential solutions in model runs 6.1 through 6.4. Ultimately, a change from mortality rates to mortality risk was preferred given that it is the more policy relevant measure in the context of neonates, and accurately apportioning person time alive within the neonatal age group given the input data available to us was a challenge we judged to be unnecessary.
-
 The calculation of :math:`\text{ACMRisk}_i` (the all-cause mortality risk for a single simulant, :math:`i`) is a bit complicated, however.
 
 We want the :ref:`LBWSG risk factor <2021_risk_effect_lbwsg>` to be associated with mortality risk in **two** ways: causal, and non-causal.
@@ -249,9 +248,8 @@ The causal relationship reflects that LBWSG exposure causes increased risk of de
 The non-causal association reflects that LBWSG exposure is correlated with other causes of death (e.g., congenital anomalies) due to confounding factors such as general poor pregnancy health, but does not cause those deaths.
 The non-causal association is still important to include because some of our interventions are targeted by LBWSG exposure,
 so estimation of their impact depends on understanding how much burden is in the population at different levels of LBWSG exposure, even if that burden is not causally affected by LBWSG.
-The **total** association (causal + non-causal) between LBWSG exposure and all-cause mortality is well-captured by the GBD relative risk values for LBWSG,
+The **total** association (causal + non-causal) between LBWSG exposure and all-cause mortality is informed by the GBD relative risk values for LBWSG,
 which were derived from all-cause mortality data without adjustment for confounding.
-Additionally, GBD assumes that these relative risk values represent the *causal* effect of LBWSG on the subset of specific affected causes, and we will do the same in our simulation.
 
 First, we decompose the population ACMRisk into two parts: risk due to causes affected by the :ref:`LBWSG risk factor <2021_risk_effect_lbwsg>` and risk due to causes unaffected by it.
 
@@ -272,7 +270,8 @@ Where:
 
 All quantities are age-, sex-, and location-specific; we omit these subscripts for brevity.
 
-We can make mortality risk values specific to a birth weight and gestational age by applying the PAF and relative risk of LBWSG:
+We can make mortality risk values specific to a birth weight and gestational age by applying the PAF and relative risk of LBWSG,
+which we will encapsulate as a function :math:`\text{LBWSG}(\text{risk},\text{BW},\text{GA})`:
 
 .. math::
 
@@ -290,6 +289,8 @@ This decomposition allows us to apply the causal effects of LBWSG exposure on th
 and apply the non-causal association of LBWSG exposure with the unaffected causes' risk using the *baseline* LBWSG exposure value (:math:`\text{BW}^0` and :math:`\text{GA}^0`).
 
 .. math::
+  :label: acmrisk-decomposition
+
     \begin{aligned}
     \text{ACMRisk}_{\text{BW},\text{GA}}^{\text{BW}^0,\text{GA}^0} &= \text{LBWSG}(\text{ACMRisk}_{\text{affected}}, \text{BW},\text{GA}) \\
     & + \text{LBWSG}(\text{ACMRisk}_{\text{unaffected}}, \text{BW}^0,\text{GA}^0),
@@ -306,30 +307,71 @@ The last modifiers to :math:`\text{ACMRisk}_i` are the cause-specific mortality 
 In a typical Vivarium simulation, we delete CSMR for each modeled cause from the total ACMR, and then add back in EMR for the simulants with the cause.
 In this simulation, we do not track prevalence of our modeled subcauses, so we add back in CSMRisk (spreading mortality risk across all simulants rather than restricting it to prevalent cases);
 therefore, the only difference between what we delete and what we add back in is the effect of interventions directly (i.e. not through LBWSG) on the CSMRisk values.
-All of our modeled subcauses are affected by LBWSG causally (i.e. they are in the list of LBWSG-affected causes discussed above), so we apply LBWSG effects to them using the scenario-specific, not baseline, exposure values.
 Mathematically, we subtract off the CSMRisks for each modeled subcause :math:`k` *before any interventions act directly on the CSMRisks*, and then add back in CSMRisks *modified by interventions*:
 
 .. math::
     \begin{aligned}
-    \text{ACMRisk}_i &= \text{ACMRisk}_{\text{BW}_i,\text{GA}_i}^{\text{BW}_i^0,\text{GA}_i^0} - \sum_{k \in \text{modeled}} \text{LBWSG}(\text{CSMRisk}_k, \text{BW}_i, \text{GA}_i) \\
-    & + \sum_{k \in \text{modeled}} \text{CSMRisk}_{i}^{k},
+    \text{ACMRisk}_i &= \text{ACMRisk}_{\text{BW}_i,\text{GA}_i}^{\text{BW}_i^0,\text{GA}_i^0} - \sum_{k \in \text{modeled}} \text{CSMRisk}_{i,k}^0 \\
+    & + \sum_{k \in \text{modeled}} \text{CSMRisk}_{i,k},
     \end{aligned}
 
 where:
 
-- :math:`\text{CSMRisk}_k` is the cause-specific mortality risk for subcause :math:`k` in the total population
-- and :math:`\text{CSMRisk}_{i}^{k}` is the cause-specific mortality risk for subcause :math:`k` for simulant :math:`i` (both detailed in the `Modeled Subcauses`_ linked from this page).
+- :math:`\text{CSMRisk}_{i,k}^0` is the cause-specific mortality risk for subcause :math:`k` for simulant :math:`i` before any interventions have been applied directly to the CSMRisk
+- and :math:`\text{CSMRisk}_{i,k}` is the cause-specific mortality risk for subcause :math:`k` for simulant :math:`i` after interventions have been applied directly to the CSMRisk
+
+The calculation of both of these quantities is detailed on the cause-specific page linked
+under `Modeled Subcauses`_.
 
 In addition to determining which simulants die due to any cause, we also need to determine which subcause is underlying the death.  This is done by sampling from a categorical distribution obtained by renormalizing the CSMRisks:
 
 .. math::
     \begin{aligned}
-    \text{Pr}[\text{subcause} = k\;|\;\text{neonate died}] &= \frac{\text{CSMRisk}_{i}^{k}}
-    {\text{ACMRisk}_i},
+    \text{Pr}[\text{subcause} = k\;|\;\text{neonate died}] &=\frac{\text{CSMRisk}_{i,k}}
+    {\max(\text{ACMRisk}_i, \sum_{k=1}^K \text{CSMRisk}_{i,k})},
     \end{aligned}
 
-including a special :math:`k=0` for the residual "all other causes" category defined by :math:`\text{CSMRisk}_{i}^{0} = \text{ACMRisk}_i - \sum_{k=1}^K \text{CSMRisk}_{i}^{k}.`
+including a special :math:`k=0` for the residual "all other causes" category defined by :math:`\text{CSMRisk}_{i}^{0} = \max(\text{ACMRisk}_i, \sum_{k=1}^K \text{CSMRisk}_{i,k}) - \sum_{k=1}^K \text{CSMRisk}_{i,k}.`
 
+.. note::
+  This renormalization will cause our simulation to underestimate GBD's CSMRisks
+  when :math:`\sum_{k=1}^K \text{CSMRisk}_{i,k} \gt \text{ACMRisk}_i`.
+  In practice, this rarely occurs in our modeled locations, and never by much at a population level;
+  see `this V&V notebook <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/33f8a65f032fc52e904522b9764c089a5f9fc1b5/tests/model_notebooks/results/executed/neonatal.ipynb>`__ cell 37
+  for the *proportion* by which the CSMRisks are underestimated, across locations and draws.
+
+.. note::
+  Because *all* of our modeled subcauses currently use the same LBWSG relative risks
+  as all-cause mortality, except that the preterm subcauses set these to 0 for non-preterm categories
+  and rescale them by a constant in the preterm categories,
+  it then follows that the conditional probability of death from each cause (given that the neonate dies) will be equal across preterm LBWSG categories,
+  and also equal across non-preterm LBWSG categories.
+
+.. note::
+  The current design of the split between LBWSG-affected causes mortality and LBWSG-unaffected causes mortality:
+  
+  * Is quite difficult to verify (see V&V criteria below).
+  * Sometimes behaves illogically, when the LBWSG-affected mortality risk is less than the sum of the modeled-cause CSMRisks.
+    (This can occur due to our shifting of all the mortality risk due to the preterm causes into the preterm LBWSG categories,
+    or more rarely due to baseline intervention deletion effects.)
+
+  This could be improved by making LBWSG-affected mortality risk, which is currently the first term in :eq:`acmrisk-decomposition`,
+  a first-class quantity that is used as follows:
+
+  * Modeled-cause CSMRisks modify LBWSG-affected mortality risk
+  * Modeled-cause CSMRisks are either clipped so that their sum is less than or equal to LBWSG-affected mortality risk,
+    or something more involved happens in order to allow LBWSG-affected mortality risk to increase in these cases but decrease elsewhere.
+    (We know from our V&V process that these cases do exist but we don't know how common they are.)
+
+  This implementation would greatly ease verification because we could calculate from simulation values the LBWSG-affected
+  and LBWSG-unaffected portions of "other causes" mortality risk and check that the former changes between scenarios like
+  the modeled causes, and the latter does not change between scenarios.
+
+  One open question is whether we should be shifting *LBWSG-affected* risk or *LBWSG-unaffected* risk (or some mixture)
+  towards non-preterm categories to compensate for shifting all the preterm-cause CSMRisk to the preterm categories.
+  Currently we shift LBWSG-affected risk.
+
+  This is tracked on JIRA at `SSCI-2808 <https://jira.ihme.washington.edu/browse/SSCI-2808>`__.
 
 Data Tables
 +++++++++++
@@ -412,11 +454,11 @@ Data Tables
           * ``'risk_factor.low_birth_weight_and_short_gestation.birth_exposure'``
           * ``'risk_factor.low_birth_weight_and_short_gestation.relative_risk'``
       - Capping of LBWSG RRs is intended to guarentee that there will be no individual mortality risk value is greater than 1 in our simulation 
-    * - :math:`\text{CSMRisk}^k_{\text{BW},\text{GA}}`
-      - cause-specific mortality risk for subcause k, for population with birth weight BW and gestational age GA
+    * - :math:`\text{CSMRisk}_{i,k}^0`
+      - cause-specific mortality risk for subcause k, for individual i, before any interventions are applied directly to the CSMRisk
       - GBD + assumption about relative risks
       - see subcause models for details
-    * - :math:`\text{CSMRisk}^k_i`
+    * - :math:`\text{CSMRisk}_{i,k}`
       - cause-specific mortality risk for subcause k, for individual i
       - GBD + assumption about relative risks + intervention model effects
       - see subcause models for details
@@ -475,11 +517,126 @@ For simplicity, we will not include YLDs in this model.
 Validation Criteria
 +++++++++++++++++++
 
-Neonatal mortality risk (due to all causes and at the cause-specific level) in simulation should match corresponding quantity as derived from GBD estimates.
+**In the interactive context:**
 
-Relative Risk of neonatal death at specific categories of LBWSG exposure should be within 10% of same ratio derived from GBD.  (We don't expect it to match exactly because of (1) our interpolation of the RRs, and (2) we use a constant mortality hazard at each BW-GA level, rather than the GBD's more complex model.)
+Our ACMRisk targets are the ACMRisk values stored in the artifact, which are location-, age-, and sex-specific.
 
-Using the interactive simulation, verify that other causes mortality (and/or any future modeled unaffected subcauses) varies by LBWSG exposure but does not change in a scenario with added coverage of a LBWSG-affecting intervention such as IFA/MMS or IV iron. Additionally, verify that mortality due to modeled affected causes (including preterm, sepsis, and encephalopathy) varies as expected according to LBWSG exposure and is appropriately modified by new LBWSG-affecting intervention coverage.
+* Initial (pre-LBWSG-modified) ACMRisk pipeline values should exactly match the targets, for every simulant.
+* If modified by LBWSG *using the LBWSG value before the application of any intervention calibration or effects*, the mean of the ACMRisk pipeline values should be similar to the targets.
+* Once ACMRisk pipeline values have been modified by using intervention-modified LBWSG exposures,
+  their mean should be similar to the targets, in the baseline scenario.
+* The mean of ACMRisk pipeline values that have been modified by intervention-modified LBWSG exposures should be lower in the MMS-scale-up scenario than in the baseline scenario.
+* Once ACMRisk pipeline values have been modified by cause-specific mortality risks,
+  their mean should be similar to the targets, in the baseline scenario.
+* The mean of ACMRisk pipeline values modified by cause-specific mortality risks should be lower in the MMS-scale-up scenario, than it is in the baseline scenario.
+
+Our CSMRisk targets for all modeled subcauses besides the preterm subcauses are the CSMRisk values stored
+in the artifact, which are age- and sex-specific.
+For the preterm-with-RDS subcause, our target is the RDS-specific fraction (85%, as defined on the :ref:`neonatal preterm birth cause model document <2021_cause_preterm_birth_mncnh>`) of the preterm birth CSMRisk stored in the artifact.
+For the preterm-without-RDS subcause, our target is one minus the RDS-specific fraction (15%) of the same.
+
+There is an additional target for the proportion of "other causes" (unmodeled) mortality risk that
+is due to LBWSG-unaffected causes, which is calculated as :math:`1 - (\text{affected_acmrisk} - \text{modeled_csmrisk}) / (\text{acmrisk} - \text{modeled_csmrisk})`
+where all values are from the artifact and modeled_csmrisk is the sum of all modeled subcause CSMRisks.
+
+* Initial (pre-LBWSG-modified) CSMRisk pipeline values should exactly match the targets, for every simulant and subcause.
+* For preterm birth subcauses, CSMRisk pipeline values should be exactly zero for simulants
+  who are not preterm (i.e. those with gestational age >= 37 weeks).
+* If modified by LBWSG *using the LBWSG value before any interventions*, the mean of the CSMRisk pipeline values should be similar to the targets.
+  This value should be the same between the baseline scenario and the MMS-scale-up scenario.
+* Once CSMRisk pipeline values have been modified by using intervention-modified LBWSG exposures, but not by any other risk factors,
+  their mean should be similar to the targets, in the baseline scenario.
+  The same value should be lower in the MMS-scale-up scenario than in baseline.
+  The proportion by which the value is lower should be the same between the two modeled preterm subcauses,
+  and between the two modeled non-preterm subcauses, within each sex.
+  When the same check is additionally stratified by preterm/non-preterm status, the proportions should be the same
+  across all applicable modeled subcauses.
+* If "other causes" mortality risk is calculated using the CSMRisk pipelines modified by intervention-modified LBWSG exposures
+  (but not by other risk factors or interventions directly), combined with the ACMRisk modified by *the same partially-modified CSMRisks*,
+  then the ratio between the mean value in the MMS-scale-up scenario and in baseline,
+  within each sex and preterm/non-preterm group,
+  should be greater than the same ratio for the modeled subcauses but less than 1,
+  except that it may exceed 1 when modeled CSMRisks sum to more than LBWSG-affected mortality risk.
+  For non-preterm groups, the ratio should be closer to 1 than for modeled subcauses
+  by *more* than the target fraction of unmodeled cause mortality that is due to LBWSG-unaffected causes,
+  since preterm-birth CSMRisk has been shifted to "other causes" in these groups, increasing the proportion
+  that is LBWSG-affected.
+  For preterm groups, the ratio should be closer to 1 than for modeled subcauses
+  by *less* than the target fraction of unmodeled cause mortality that is due to LBWSG-unaffected causes,
+  due to the opposite process.
+* Once CSMRisk pipeline values have been fully modified, by additional risk factors (e.g. hemoglobin) and interventions,
+  their mean should be similar to the targets, in the baseline scenario.
+* Once CSMRisk pipeline values have been fully modified, the mean "other causes" mortality risk ratios between baseline
+  and MMS-scale-up scenarios, stratified by sex and preterm/non-preterm status,
+  should still be closer to 1 than for any modeled subcause.
+
+For all cross-scenario checks, it is necessary to subset to the simulants who are alive in both scenarios.
+In cross-scenario checks that stratify by preterm/non-preterm, it is necessary to exclude simulants whose
+gestational age moved across the preterm boundary between scenarios.
+
+For the inexact checks, the level of similarity we expect depends on the check, due to known limitations:
+
+* Checks that are impacted by LBWSG after intervention modifiers may be off due to the IFA shifts
+  on birthweight and gestational age changing the population distribution of LBWSG RRs.
+  When the check is directly on a risk modified by post-intervention LBWSG, we say that could
+  cause up to a 5% miscalibration.
+  When the check is on a risk that is indirectly impacted by another mortality risk due to
+  mortality events changing the susceptible population (i.e. all late neonatal checks),
+  we say that could cause up to a 2.5% miscalibration.
+* Checks that are impacted by limiting mortality risk for the "preterm birth" subcauses to
+  simulants who are preterm may be off due to IFA shifts on gestational age changing the
+  population prevalence of preterm.
+  When the check is directly on a preterm birth CSMRisk that has been modified by limiting
+  its mortality in this way, we say it could cause up to a 10% miscalibration.
+  When the check is on a risk that is indirectly impacted, such as an ACMRisk after that has
+  been modified by a preterm CSMRisk, we say that could cause up to a 5% miscalibration.
+* Checks that depend on the late neonatal application of the PAF of CPAP on preterm birth subcauses may be off due
+  to that PAF being calculated using the birth facility distribution at birth, which changes
+  by the late neonatal period due to differential mortality.
+  When the check is directly on a preterm birth CSMRisk that has been modified by the CPAP PAF in LNN,
+  we say it could cause up to a 5% miscalibration.
+  When the check is on a risk that is indirectly impacted, such as an ACMRisk after that has
+  been modified by an impacted preterm CSMRisk, we say that could cause up to a 2.5% miscalibration.
+
+When multiple of these conditions apply to the same check, we combine percent acceptable miscalibrations additively.
+
+.. note::
+  These expected deviations are a bit of an anachronism.
+  We didn't actually pre-specify these values. Instead, we went into V&V expecting everything to match exactly, and then it didn't.
+  We figured out why, and we said that the current levels of deviation as a result were acceptable.
+  We then added bounds for approximately the current levels of deviation, so we would notice if things got worse.
+  The numbers above are rounded up from these bounds, to roughly reflect that what we saw wasn't the *most* extreme deviation we would have found acceptable.
+
+**From observed outputs:**
+
+All checks in this section are location-specific.
+They are done at the draw level, matching draws between the simulation outputs and the GBD targets,
+then aggregated by taking a mean (of e.g. the ratio between simulation and GBD) across draws.
+
+* The mean ACMRisk observed in each age and sex group in the baseline scenario should be within 10% of
+  the GBD number of deaths in that age and sex group, divided by the GBD number of births for that sex
+  minus the GBD number of deaths for that sex in younger age groups.
+* The mean ACMRisk observed in the MMS-scale-up scenario should be less than in the baseline scenario
+  in each age and sex group.
+* The observed number of deaths in each age and sex group divided by the observed number of births
+  for that sex minus the observed number of deaths for that sex in younger age groups,
+  should be within 10% of the corresponding GBD value (which was also the target in the previous check).
+* The observed number of deaths in the MMS-scale-up scenario should be less than in the baseline scenario
+  in each age and sex group.
+* The mean CSMRisk observed for each modeled subcause in each age and sex group in the baseline scenario should be within 10% of
+  the GBD number of deaths due to that cause in that age and sex group (or 85% and 15% of the GBD preterm birth deaths for preterm-with-RDS and preterm-without-RDS subcauses respectively), divided by the GBD number of births for that sex
+  minus the GBD number of deaths for that sex in younger age groups.
+* The mean CSMRisk observed for each modeled subcause in the MMS-scale-up scenario should be less than in the baseline scenario
+  in each age and sex group.
+  The mean "other causes" CSMRisk observed in the MMS-scale-up scenario should be less than in the baseline scenario,
+  by a ratio closer to 1 than for any of the modeled subcauses.
+* The observed number of deaths due to each modeled subcause in each age and sex group divided by the observed number of births
+  for that sex minus the observed number of deaths for that sex in younger age groups,
+  should be within 10% of the corresponding GBD value (which was also the target in the previous check).
+* The observed number of deaths due to each modeled subcause in the MMS-scale-up scenario should be less than in the baseline scenario
+  in each age and sex group.
+  The observed number of "other causes" deaths in the MMS-scale-up scenario should be less than in the baseline scenario,
+  by a ratio closer to 1 than for any of the modeled subcauses.
 
 References
 ----------
