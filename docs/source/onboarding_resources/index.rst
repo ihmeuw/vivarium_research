@@ -12,3 +12,4 @@ This section contains information for new hires or folks tackling a new aspect o
    tutorial/index
    computing/index
    contributing/index
+   v&v/index
