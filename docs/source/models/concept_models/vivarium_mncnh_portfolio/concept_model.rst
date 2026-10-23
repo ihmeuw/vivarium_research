@@ -3295,7 +3295,9 @@ Default stratifications to all observers should include scenario and input draw.
     - `Model 43.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/54befc004cf9f40dfde284f67f054bccaa26f7f0/tests/model_notebooks>`__
   * - 
     - PPH split at 300mL
-    - * Confirm 500mL cases per 300mL case and 1L cases per 500mL case
+    - Summary of `new criteria <https://github.com/ihmeuw/vivarium_research/pull/1961/changes#diff-d76763e5c3a2f9adb1a9a5fdd8581be1e8de5159c279ae19a9a238a681a3c441R411-R424>`__:
+
+      * Confirm 500mL cases per 300mL case and 1L cases per 500mL case
       * Confirm 500mL incidence and YLDs and overall postpartum deaths match GBD maternal hemorrhage incidence/YLDs/deaths per pregnancy times postpartum fraction
       * Confirm PPH mortality is only among simulants with 1L+ blood loss 
     - Looks good!
