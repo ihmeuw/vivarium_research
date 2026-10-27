@@ -1407,4 +1407,17 @@ scenario, and input draw.
       Jira ticket: `SSCI-2411
       <https://jira.ihme.washington.edu/browse/SSCI-2411>`_
     - After model 8 or model 9
+  * - The consistent-rates fit behind the model 10.0 to 12.2 artifacts did
+      not converge for USA females
+    - The fit ran one MCMC chain and wrote its iterations straight into the
+      draws, with no convergence check. The USA female chain had an effective
+      sample size of 3 to 6 per age knot, so the female rates in the
+      published USA artifact come from a chain that was stuck, and the draws
+      understate uncertainty in every location. See the :ref:`rate
+      calibration <cause_alzheimers_rate_calibration>` section.
+    - `PR #84 <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/84>`_
+      runs four chains, starts the knots at age 40, smooths the S→BBBM
+      hazard across age, and stops the artifact build unless every knot
+      converges. Rebuild the artifacts with it and rerun.
+    - Next model run
 
