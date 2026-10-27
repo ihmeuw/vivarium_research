@@ -918,11 +918,15 @@ if any of these conditions is true for any parameter at any age knot:
 * more than 1% of transitions diverge.
 
 The fit keeps 250 of the 5000 posterior samples as the artifact draws, one
-per draw column. It takes the samples at even spacing along each chain and
-interleaves the chains, so neighbouring draws come from different chains and
-are close to independent. The fit writes the posterior mean, standard
-deviation, :math:`\hat R`, and effective sample size of every knot to the
-artifact key ``cause.alzheimers_consistent.mcmc_diagnostics``.
+per draw column. It takes the samples 20 iterations apart along each chain
+and interleaves the chains, so neighbouring draws come from different
+chains. The draws are close to independent because of the spacing, not the
+interleaving: the effective sample sizes imply an integrated autocorrelation
+time of at most 12 iterations, and the correlation between draws taken 20
+iterations apart from the same chain is near zero. The fit writes the
+posterior mean, standard deviation, :math:`\hat R`, and effective sample
+size of every knot to the artifact key
+``cause.alzheimers_consistent.mcmc_diagnostics``.
 
 On the ten locations of the model, the fit runs at 63 to 85 leapfrog steps
 per iteration, with no divergent transitions, a worst :math:`\hat R` of
