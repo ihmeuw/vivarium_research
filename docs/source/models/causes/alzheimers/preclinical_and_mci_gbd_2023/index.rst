@@ -493,7 +493,9 @@ table below:
     - Cause-specific mortality rate of AD
     - From :ref:`rate calibration <cause_alzheimers_rate_calibration>`,
       artifact key
-      ``cause.alzheimers_consistent.cause_specific_mortality_rate``
+      ``cause.alzheimers_disease_and_other_dementias.cause_specific_mortality_rate``
+      (the calibration writes its CSMR under the GBD cause key, in place of
+      the GBD value)
     - Defined to be :math:`f \cdot p_\text{dementia}`, where :math:`f` and
       :math:`p_\text{dementia}` are the calibrated excess mortality rate of AD
       and prevalence of AD dementia, respectively. Since :math:`f` is derived
@@ -680,8 +682,8 @@ females.
 Model Parameters
 ~~~~~~~~~~~~~~~~
 
-The NumPyro model defines 7 age-varying parameters, each
-with truncated normal priors on :math:`[0, 1]`:
+The NumPyro model defines 7 age-varying parameters. Each parameter has one
+value per 5-year age knot from age 40 to age 100:
 
 - :math:`p`: Total prevalence of any AD state
 - :math:`\delta_\text{BBBM}`, :math:`\delta_\text{MCI}`: Conditional
@@ -691,8 +693,51 @@ with truncated normal priors on :math:`[0, 1]`:
 - :math:`f`: Excess mortality rate of dementia
 - :math:`m`: Background (non-AD) mortality rate
 
-The model solves for the parameters for ages 30 to 100 in 5-year
-intervals.
+The sampler does not work on the rates directly. It samples a latent
+standard-normal value for each knot and maps the latent value to the rate:
+
+- :math:`p`, :math:`\delta_\text{BBBM}`, and :math:`\delta_\text{MCI}` are
+  the logistic function of two times the latent value. The prior median is
+  0.5, and 95% of the prior mass is between 0.02 and 0.98.
+- Each hazard rate and mortality rate is the exponential of
+  :math:`\log(0.05)` plus two times the latent value. The prior median is
+  0.05, and 95% of the prior mass is between 0.001 and 2.5.
+
+This latent scale lets the sampler move across knots whose rates range from
+:math:`10^{-4}` at age 40 to 0.5 at age 100. Model 10.0 sampled the rates
+themselves, with a normal prior truncated to :math:`[0, 1]`.
+
+The knots start at age 40 because GBD has no dementia below age 40. The
+section :ref:`Ages without GBD data
+<cause_alzheimers_rate_calibration_young_ages>` describes what the
+calibration writes for ages 30 and 35.
+
+.. _cause_alzheimers_rate_calibration_priors:
+
+Prior on the Age Pattern
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+GBD does not observe the transition rate from susceptible to BBBM-AD. The
+ODE identifies :math:`h_{S \to \text{BBBM}}` only together with the other
+parameters, and adjacent age knots can trade off against each other.
+Without a prior, the fitted rate zigzags between adjacent knots, and
+different chains find zigzags of opposite phase. The fit therefore puts a
+light curvature prior on :math:`h_{S \to \text{BBBM}}`. The first
+differences of the log rate between adjacent 5-year knots are
+:math:`\sim \mathcal{N}(0, 10)`, and the second differences are
+:math:`\sim \mathcal{N}(0, 0.25)`. The first-difference term is loose
+enough to have no effect. The second-difference term keeps the age pattern
+smooth.
+
+On the USA inputs, this prior changes the posterior mean of
+:math:`h_{S \to \text{BBBM}}` by up to about 50% at ages 80 to 90, where the
+fit without the prior zigzags, and by less than 20% at younger ages. It
+narrows the posterior band of the rate three to five fold. The prevalence
+of any AD state changes by less than 12% at every age. The prior also halves
+the cost of each sampler iteration.
+
+The other parameters have no age-pattern prior. The GBD data constrain them
+at every age.
 
 ODE Consistency Constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -800,6 +845,31 @@ The :ref:`Inputs and Outputs
 <cause_alzheimers_rate_calibration_inputs_outputs>` section below lists the
 input data used to calibrate the different model variables.
 
+.. _cause_alzheimers_rate_calibration_young_ages:
+
+Ages without GBD data
+~~~~~~~~~~~~~~~~~~~~~
+
+GBD has no dementia below age 40. In the artifact, the prevalence,
+incidence, and excess mortality of dementia are exactly zero in every draw
+at ages 30 and 35. Model 10.0 fed these six cells to the likelihood with a
+standard error of :math:`10^{-8}`. This made a hard wall in the posterior.
+The fit can satisfy a wall of this kind in two ways: no AD states at these
+ages, or AD states that are all predementia. One chain in four sat on the
+second branch and did not mix. The wall also pulled the age-40 value of
+:math:`p_\text{dementia}` 3.6 standard errors below the GBD value, because
+the consistency constraint ties age 40 to age 35.
+
+The fit now starts at age 40, the youngest age with GBD dementia data, and
+leaves the zero cells out of the likelihood. For ages 30 and 35, the
+calibration writes :math:`p = 0`, :math:`h_{S \to \text{BBBM}} = 0`, and
+:math:`i = 0` to the artifact. It copies :math:`\delta_\text{BBBM}`,
+:math:`\delta_\text{MCI}`, and :math:`f` from age 40, because the
+simulation needs a value in every row. No simulant is in an AD state at
+these ages, so these copied values never act. The simulation does not
+change: the model 10.0 USA artifact sent 3 of 721,000 new BBBM-AD entrants
+in below age 40.
+
 Loss Function
 ~~~~~~~~~~~~~
 
@@ -823,13 +893,49 @@ where :math:`\hat\delta_\text{BBBM}`, :math:`\hat\delta_\text{MCI}`,
 :math:`a+5` implied by the ODE solution with initial values from the parameters
 for age :math:`a`. The calibration applies a penalty for large errors by
 assuming a priori that the ODE error :math:`\epsilon(a) \sim \mathcal{N}(0,
-\sigma)` with :math:`\sigma = 0.005`.
+\sigma)` with :math:`\sigma = 0.02`.
+
+.. note::
+
+  Model 10.0 used :math:`\sigma = 0.005`. With that value, NUTS hit its
+  tree-depth cap on every iteration and could not reach convergence on the
+  USA inputs. With :math:`\sigma = 0.02` the chains mix. The posterior means
+  at ages 65 to 90 move by 2 to 9%, which is inside the chain-to-chain noise
+  of the old fit.
 
 Numerical Methods
 ~~~~~~~~~~~~~~~~~
 
-We solve the ODE using diffrax (Dopri5) and sample using
-NUTS with 500 warmup and 500 sample iterations.
+We solve the ODE with diffrax (Dopri5). We sample with NUTS, with a dense
+mass matrix and a target acceptance probability of 0.95. We run 4 chains,
+one after the other. Each chain has 1000 warmup iterations and 1250 samples.
+
+The fit checks its own convergence. The artifact build stops with an error
+if any of these conditions is true for any parameter at any age knot:
+
+* split :math:`\hat R > 1.02`,
+* effective sample size :math:`< 100`,
+* more than 1% of transitions diverge.
+
+The fit keeps 250 of the 5000 posterior samples as the artifact draws, one
+per draw column. It takes the samples at even spacing along each chain and
+interleaves the chains, so neighbouring draws come from different chains and
+are close to independent. The fit writes the posterior mean, standard
+deviation, :math:`\hat R`, and effective sample size of every knot to the
+artifact key ``cause.alzheimers_consistent.mcmc_diagnostics``.
+
+On the ten locations of the model, the fit runs at 63 to 85 leapfrog steps
+per iteration, with no divergent transitions, a worst :math:`\hat R` of
+1.011, and a smallest effective sample size of 440. One sex takes about 15
+minutes on one CPU core.
+
+.. note::
+
+  Model 10.0 ran one chain of 500 warmup and 500 sample iterations and
+  wrote the 500 sample iterations straight into the draws, with no
+  convergence check. Neighbouring draws of that fit have a correlation of
+  0.85 to 0.9. The Female chain of the published USA artifact did not
+  converge: its effective sample size was 3 to 6 per knot.
 
 .. _cause_alzheimers_rate_calibration_inputs_outputs:
 
@@ -886,6 +992,9 @@ defined in the :ref:`Model Parameters
 Consistency Constraints
 <cause_alzheimers_rate_calibration_non_ode_constraints>` sections above.
 
+Rows for ages 30 and 35 hold the values described in :ref:`Ages without
+GBD data <cause_alzheimers_rate_calibration_young_ages>`.
+
 .. list-table:: Calibrated Outputs (written to artifact for year 2025)
   :widths: 25 75
   :header-rows: 1
@@ -903,9 +1012,11 @@ Consistency Constraints
     - :math:`i`: Population incidence rate of dementia
   * - ``cause.alzheimers_consistent.excess_mortality_rate``
     - :math:`f`: Excess mortality rate of AD
-  * - ``cause.alzheimers_consistent.cause_specific_mortality_rate``
+  * - ``cause.alzheimers_disease_and_other_dementias.cause_specific_mortality_rate``
     - :math:`\text{CSMR}`: Cause-specific mortality rate, defined as
-      :math:`f \cdot p_\text{dementia}`
+      :math:`f \cdot p_\text{dementia}`. Written under the GBD cause key in
+      place of the GBD value, because the simulation's mortality component
+      reads that key.
   * - ``cause.alzheimers_consistent.bbbm_conditional_prevalence``
     - :math:`\delta_\text{BBBM}`: Proportion of AD cases in BBBM state
   * - ``cause.alzheimers_consistent.mci_conditional_prevalence``
@@ -913,7 +1024,13 @@ Consistency Constraints
   * - ``cause.alzheimers_consistent.dementia_conditional_prevalence``
     - :math:`\delta_D`: Proportion of AD cases in :math:`D` state
   * - ``cause.alzheimers_consistent.ode_errors``
-    - ODE consistency residuals for validation (should be < 0.01)
+    - ODE consistency residuals :math:`\epsilon(a)` for validation. With
+      :math:`\sigma = 0.02` and four terms, the expected residual is about
+      0.04. The mean over draws at each age should stay near that value.
+  * - ``cause.alzheimers_consistent.mcmc_diagnostics``
+    - Posterior mean, standard deviation, split :math:`\hat R`, and
+      effective sample size of every parameter at every age knot, for both
+      sexes. Not a draw table.
 
 Running the Calibration
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -921,11 +1038,14 @@ Running the Calibration
 
 .. code-block:: python
 
-  from vivarium.framework.artifact import Artifact
+  from vivarium.artifact import Artifact
   from vivarium_csu_alzheimers.data.consistent_rates import generate_consistent_rates
 
   art = Artifact("path/to/artifact.hdf")
-  generate_consistent_rates(art)  # Takes several minutes
+  generate_consistent_rates(art)  # Takes about 30 minutes per location on one core
+
+The call raises an error if any chain fails the convergence check. It then
+writes nothing, and the artifact is left as it was.
 
 .. _alzheimers_mci_disability_weight_derivation:
 
