@@ -720,21 +720,6 @@ scenario, and input draw.
     - **Remove** stratification of disease state transitions and
       person-time by treatment
     - Default
-  * - 13.0
-    - Rebuild all artifacts with the converged consistent-rates fit
-      (`vivarium_csu_alzheimers PR #84
-      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/84>`_) and
-      250 draws per key (`PR #82
-      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/82>`_). No
-      change to the simulation code. See the :ref:`rate calibration
-      <cause_alzheimers_rate_calibration>` section for what changed in the
-      fit.
-    - Baseline, Alternative Scenario 1, Alternative Scenario 2
-    - * Locations: All
-      * Population size per draw: 2 million (100 seeds of 20,000
-        simulants each)
-    - Default
-    - Default
 
 5.2 V & V Tracking
 ------------------------
@@ -1389,19 +1374,6 @@ scenario, and input draw.
     - N/A
     - * `Results tables and plots in PR 45
         <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/45>`_
-  * - 13.0
-    - * The artifacts built, so every fit passed the convergence gate. No
-        further check of the fit is needed.
-      * Compare the headline results with model 12.2 for each location:
-        person-time by cause state, new simulants, deaths, YLLs, YLDs,
-        test counts, and treatment counts.
-      * Expect both-sex totals within 20% of model 12.2. Expect female
-        BBBM-AD and MCI-AD person-time and female new simulants to be
-        higher by 15 to 25% in the USA and Japan, because the old fit's
-        female chain was stuck there. Expect dementia person-time to be
-        unchanged, because the fit is pinned to GBD dementia prevalence.
-    -
-    -
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -1435,17 +1407,4 @@ scenario, and input draw.
       Jira ticket: `SSCI-2411
       <https://jira.ihme.washington.edu/browse/SSCI-2411>`_
     - After model 8 or model 9
-  * - The consistent-rates fit behind the model 10.0 to 12.2 artifacts did
-      not converge for USA females
-    - The fit ran one MCMC chain and wrote its iterations straight into the
-      draws, with no convergence check. The USA female chain had an effective
-      sample size of 3 to 6 per age knot, so the female rates in the
-      published USA artifact come from a chain that was stuck, and the draws
-      understate uncertainty in every location. See the :ref:`rate
-      calibration <cause_alzheimers_rate_calibration>` section.
-    - `PR #84 <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/84>`_
-      runs four chains, starts the knots at age 40, smooths the S→BBBM
-      hazard across age, and stops the artifact build unless every knot
-      converges. Rebuild the artifacts with it and rerun.
-    - Next model run
 
