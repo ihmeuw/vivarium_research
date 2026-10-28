@@ -297,18 +297,18 @@ The basic plan for the design of the simulation is as follows:
     - Out dated scenario from phase 1, included for clarity in model run request table below.
   * - 2. Old Testing, Old Treatment (Alternative 2)
     - Out dated scenario from phase 1, included for clarity in model run request table below.
-  * - 3. Slow Testing, No Treatment
-    -
-  * - 4. Intermediate Testing, No Treatment
-    -
-  * - 5. Accelerated Testing, No Treatment
-    -
+  * - 3. Slow Testing, Zero-Impact Treatment
+    - To help with calculations, please include treatment assignment but have NO impact on outcomes.
+  * - 4. Intermediate Testing, Zero-Impact Treatment
+    - To help with calculations, please include treatment assignment but have NO impact on outcomes.
+  * - 5. Accelerated Testing, Zero-Impact Treatment
+    - To help with calculations, please include treatment assignment but have NO impact on outcomes.
   * - 6. Slow Testing, With Treatment
-    -
+    - Treatment is included and has an impact on outcomes.
   * - 7. Intermediate Testing, With Treatment
-    -
+    - Treatment is included and has an impact on outcomes.
   * - 8. Accelerated Testing, With Treatment
-    -
+    - Treatment is included and has an impact on outcomes.
 
 
 4.3 Outputs and Observers
@@ -342,7 +342,7 @@ scenario, and input draw.
     -
     -
   * - Transition counts between Alzheimer's cause states
-    -
+    - Include treatment status with all values from the treatment status person-time observer.
     -
   * - Person-time in each Alzheimer's cause state
     -
