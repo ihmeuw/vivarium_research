@@ -776,17 +776,13 @@ coupled. It also keeps the coupling all-or-nothing. A specification
 adopts the incidence effect and the death reassignment together or
 omits both.
 
-.. todo::
-   The deaths that ``HF_I`` emits
-   (:math:`\text{prevalence}_{HF\_I} \times \text{emr\_hf}`) are not
-   the same number as the deaths that GBD assigns to HF due to IHD
-   (:math:`\text{CSMR}_{HF \text{ due to } IHD}`). The modifier above
-   nets the first quantity so that the cross-model invariant holds
-   exactly. Netting the second quantity instead would match the GBD
-   attribution but break the invariant by the difference. The
-   mortality-shares check in `Validation Criteria`_ reports the ratio
-   of the two quantities. Decide which to net once that ratio is
-   known.
+The deaths that ``HF_I`` emits
+(:math:`\text{prevalence}_{HF\_I} \times \text{emr\_hf}`) are not
+the same number as the deaths that GBD assigns to HF due to IHD
+(:math:`\text{CSMR}_{HF \text{ due to } IHD}`). The modifier nets the
+first quantity, so that the cross-model invariant holds exactly
+(decision of 2026-10-28). The comparison of the two quantities is a
+validation check. See `Validation Criteria`_.
 
 .. todo::
    The subtraction can make :math:`\text{EMR}^{net}_{chronic}`
@@ -1101,9 +1097,20 @@ Each check is by age and sex at each comparison year.
   independent estimate of the same deaths). A large disagreement
   means that one of the two GBD quantities is not credible for this
   location.
+- **HF-due-to-IHD deaths.** The simulated deaths from the ``HF_I``
+  state match :math:`\text{CSMR}_{HF \text{ due to } IHD}`. The
+  envelope EMR and the etiology proportions supply the first
+  quantity, and the GBD etiology pipeline supplies the second, so the
+  two are independent estimates of the same deaths.
 - **Disability.** The simulated YLDs per prevalent case match the GBD
   YLDs of the HF impairment. This confirms that the blended
   disability weights are correct.
+- **Boundary age groups.** The youngest and the oldest age groups are
+  reported separately, in addition to the pooled comparison. The
+  envelope has non-zero prevalence from birth, which an incidence-only
+  entry process does not reproduce without birth prevalence, and the
+  oldest group is where we expect the netting floor to bind. Neither
+  group is a large part of most results.
 
 Death accounting
 """"""""""""""""
@@ -1191,8 +1198,6 @@ source did not supply.
    - Numerical checks. Report the simulant count per age, sex, and
      year cell, the sensitivity to the time step, and the draws
      covered.
-   - Boundary age groups. Check the youngest and the oldest age group
-     separately rather than only in the pooled comparison.
    - Uncertainty. Run the comparison across draws and report the
      coverage of the GBD uncertainty intervals.
 
