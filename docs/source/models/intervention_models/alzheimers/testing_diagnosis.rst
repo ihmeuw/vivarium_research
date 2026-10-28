@@ -208,19 +208,30 @@ assign positive/negative diagnosis which will inform treatment in :ref:`Alternat
 Time-specific testing rates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Testing rates do not vary by location, age or sex. 
-In 2020, 0% of eligible simulants are tested annually. This becomes
-nonzero in 2027, increasing to 10% at year 2030,
-then increases linearly for awhile, then levels off and eventually maxes
-out at 60% after 2045. We will model this as a piecewise linear function
+There are 3 testing ramp up scenarios: slow, intermediate, and accelerated.
+For all, in 2027, 0% of eligible simulants are tested annually. 
+This becomes non-zero in 2028 for all scenarios and moves to 2%, 
+it continues increasing linearly until it reaches 60%. 
+The year that 60% is reached varies by scenario. 
+We will model this as a piecewise linear function, shown in the table below
 with knots at the following (year, coverage) values:
 
-* (2020.0, 0%)
-* (2027.0, 0%) -- Note that this is 0% at the *beginning* of 2027, but
-  coverage will become positive on the second time step that year
-* (2030.5, 10%) -- Note that this is 10% at **mid**-year
-* (2045.0, 50%)
-* (2055.0, 60%)
-* (2100.0, 60%)
+.. list-table:: Scenario-specific testing rates
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Scenario
+    - Initial piece-wise linear knots
+    - Final piece-wise linear knot
+  * - Slow
+    - (2027.0, 0%), (2028.0, 2%)	
+    - (2048.0, 60%), (2100.0, 60%)	
+  * - Intermediate
+    - (2027.0, 0%), (2028.0, 2%)	
+    - (2043.0, 60%), (2100.0, 60%)	
+  * - Accelerated
+    - (2027.0, 0%), (2028.0, 2%)	
+    - (2038.0, 60%), (2100.0, 60%)	
 
 .. _bbbm_requirements:
 
