@@ -209,9 +209,9 @@ Time-specific testing rates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Testing rates do not vary by location, age or sex. 
 There are 3 testing ramp up scenarios: slow, intermediate, and accelerated.
-For all, in 2027, 0% of eligible simulants are tested annually. 
-This becomes non-zero in 2028 for all scenarios and moves to 2%, 
-it continues increasing linearly until it reaches 60%. 
+For all, in 2027 0% of eligible simulants are tested annually. 
+This becomes non-zero in 2028 for all scenarios and moves to 2%.
+It continues increasing linearly until it reaches 60%. 
 The year that 60% is reached varies by scenario. 
 We will model this as a piecewise linear function, shown in the table below
 with knots at the following (year, coverage) values:
