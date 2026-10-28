@@ -36,7 +36,7 @@
   <text x="225" y="46" text-anchor="middle" fill="#555" font-weight="bold">Optional IHD-HF coupling component</text>
   <text x="225" y="66" text-anchor="middle" fill="#555">1. MI-history effect (exposure: IHD model's</text>
   <text x="225" y="84" text-anchor="middle" fill="#555">MI-history attribute) multiplies T1, PAF-renormalized</text>
-  <text x="225" y="104" text-anchor="middle" fill="#555">2. reassigns HF-due-to-IHD deaths (nets IHD EMR, splits HF EMRs)</text>
+  <text x="225" y="104" text-anchor="middle" fill="#555">2. reassigns HF-due-to-IHD deaths (nets the IHD EMR)</text>
   <line x1="340" y1="128" x2="382" y2="152" stroke="#888" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-dash)"/>
 
   <!-- EF attribute overlay -->
@@ -48,6 +48,6 @@
 
   <!-- Caption -->
   <text x="60" y="425" fill="#555">HF_I and HF_NI are absorbing (no remission). Deaths occur from either HF state via EMR</text>
-  <text x="60" y="445" fill="#555">derived from GBD death space (CSMR/prevalence); this model owns all HF-attributable</text>
+  <text x="60" y="445" fill="#555">from the GBD DisMod-AT fit of the HF envelope. This model owns all HF-attributable</text>
   <text x="60" y="465" fill="#555">deaths, and the coupling component reassigns the HF-due-to-IHD share from the IHD model.</text>
 </svg>

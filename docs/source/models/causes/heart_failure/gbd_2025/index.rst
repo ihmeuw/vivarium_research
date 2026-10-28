@@ -1,7 +1,7 @@
-.. _2023_cause_heart_failure:
+.. _2025_cause_heart_failure:
 
 ========================
-Heart Failure: GBD 2023
+Heart Failure: GBD 2025
 ========================
 
 In GBD, heart failure (HF) is an impairment, not a cause. GBD
@@ -9,7 +9,7 @@ distributes the nonfatal burden of HF across the causes that produce
 it, as severity-graded sequelae of those causes. GBD treats deaths
 coded to HF as "garbage codes" and redistributes them to an
 underlying cause. This page documents a Vivarium cause model of heart
-failure built on GBD 2023 inputs. The model splits the HF envelope
+failure built on GBD 2025 inputs. The model splits the HF envelope
 into two states by etiology, ischemic and non-ischemic. It gives each
 simulant a continuous ejection fraction (EF) attribute at HF onset.
 Observers classify events into HFrEF, HFmrEF, and HFpEF with
@@ -17,7 +17,9 @@ configurable cutoffs.
 
 This model succeeds the fused ischemic heart disease and heart failure
 model documented at :ref:`2019_cause_ihd`. It keeps the etiology
-proportions of that model. It differs in four ways:
+proportions of that model, and like that model it uses the excess
+mortality rate of the HF envelope, undifferentiated by etiology. It
+differs in three ways:
 
 1. HF has its own cause model. It does not share a state machine with
    ischemic heart disease (IHD).
@@ -27,11 +29,7 @@ proportions of that model. It differs in four ways:
    HF-due-to-IHD deaths from the excess mortality of the IHD model.
    The population-level HF incidence does not change. See `The IHD-HF
    coupling component`_.
-3. The excess mortality comes from the etiology-specific HF
-   cause-specific mortality rates of the GBD etiology pipeline. It
-   does not come from the DisMod excess mortality rate of the HF
-   envelope.
-4. The EF attribute is new.
+3. The EF attribute is new.
 
 .. contents::
    :local:
@@ -78,6 +76,9 @@ proportions of that model. It differs in four ways:
    * - ME
      - Modelable entity
      - The GBD identifier of a modeled quantity
+   * - DisMod-AT
+     - DisMod age-time
+     - The GBD 2025 non-fatal estimation tool
    * - BoP
      - Burden of proof
      - The GBD meta-regression framework for risk-outcome curves
@@ -132,10 +133,18 @@ The EF attribute lets the model represent treatments whose efficacy
 differs between HFrEF and HFpEF.
 
 
-GBD 2023 Modeling Strategy
+GBD 2025 Modeling Strategy
 --------------------------
 
-GBD 2023 Non-Fatal Modeling Strategy
+.. todo::
+   The GBD 2025 methods appendix is not published yet. The methods
+   below are from the GBD 2023 appendix [GBD-2023-NF]_
+   [GBD-2023-CoD]_. We expect GBD 2025 to estimate the HF envelope
+   with DisMod-AT in place of DisMod-MR 2.1, and to keep the etiology
+   proportion machinery. Update this section, the ME identifiers, and
+   the references when the GBD 2025 appendix is published.
+
+GBD 2025 Non-Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++++++
 
 **Case definition**
@@ -153,14 +162,22 @@ distinction.
 **Input data**
 
 Literature data, inpatient hospital data, and claims data inform the
-HF envelope (ME 2412). Two further data streams inform the etiology
-machinery. Person-level vital registration data with causal-chain
-codes (United States, Mexico, Brazil, Taiwan, and Colombia) inform,
-for each etiology, the fraction of deaths from that underlying cause
-that have HF in the causal chain (:math:`\text{PropDeathsWithHF}_{e}`
-below). Person-level hospital discharge data from Friuli Venezia
-Giulia, Italy, linked to the death records of that region, inform the
-excess mortality of HF due to each etiology.
+HF envelope (ME 2412 in GBD 2023). Two further data streams inform
+the etiology machinery. Person-level vital registration data with
+causal-chain codes (United States, Mexico, Brazil, Taiwan, and
+Colombia) inform, for each etiology, the fraction of deaths from that
+underlying cause that have HF in the causal chain
+(:math:`\text{PropDeathsWithHF}_{e}` below). Person-level hospital
+discharge data from Friuli Venezia Giulia, Italy, linked to the death
+records of that region, inform the excess mortality of HF due to each
+etiology.
+
+**Envelope estimation**
+
+The non-fatal model of the HF envelope produces prevalence,
+incidence, and an excess mortality rate for the envelope as a whole.
+This cause model uses all three. See `Excess mortality`_ for the use
+of the EMR.
 
 **Etiological fraction estimation**
 
@@ -195,7 +212,8 @@ alcoholic cardiomyopathy, and other cardiomyopathy, GBD sets the
 proportion to 1, because all deaths from these causes involve HF. GBD
 estimates the etiology-specific EMR in MR-BRT from the linked Friuli
 Venezia Giulia data. GBD sets the EMR equal across etiologies for
-ages under 45.
+ages under 45 because the number of deaths at those ages is small
+[GBD-2023-NF]_.
 
 GBD divides each etiology-specific prevalence by the prevalence of
 the HF envelope to give a proportion. GBD aggregates the proportions
@@ -203,13 +221,13 @@ to seven mutually exclusive and collectively exhaustive etiology
 groupings: coronary artery disease, pressure overload of the left
 heart, pressure overload of the right heart, valve diseases, primary
 myocardial diseases, toxins, and stress cardiomyopathies. These
-death-derived proportions and literature data inform one DisMod-MR
-2.1 proportion model per grouping, with country-level SEV covariates.
-GBD then scales the DisMod outputs so that they sum to one. The
-scaling happens after the DisMod models, not on the raw quotients. In
-sub-Saharan Africa, GBD excludes the death-derived proportions and
-uses the THESUS-HF study instead [THESUS]_. GBD then splits each
-grouping into its sub-causes in proportion.
+death-derived proportions and literature data inform one proportion
+model per grouping, with country-level SEV covariates. GBD then
+scales the outputs of the proportion models so that they sum to one.
+The scaling happens after the proportion models, not on the raw
+quotients. In sub-Saharan Africa, GBD excludes the death-derived
+proportions and uses the THESUS-HF study instead [THESUS]_. GBD then
+splits each grouping into its sub-causes in proportion.
 
 The seven groupings are the taxonomy of the HF proportion models.
 They are not GBD cause-list labels. Coronary artery disease
@@ -233,7 +251,7 @@ have not changed across recent rounds. See the todo below.
 
 .. todo::
    Check the severity-split proportions and the DW values against the
-   GBD 2023 YLD appendix.
+   GBD 2025 YLD appendix when it is published.
 
 .. list-table:: Severity levels for heart failure and associated disability weights
    :widths: 15 25 12
@@ -264,16 +282,22 @@ have not changed across recent rounds. See the todo below.
        breathing problems.
      - 0.179 (0.122–0.251)
 
-GBD defines the severity levels by symptoms, not by EF. The EF
-attribute in this model (see `Ejection-fraction attribute`_) is
-independent of the severity split. The disability weights do not
-depend on EF (see `Assumptions and Limitations`_).
+This model does not represent the severity levels as states. Each HF
+state carries the prevalence-weighted blend of the disability weights
+of its severity sequelae. The severity-split proportions by age and
+sex are available from GBD (the como sequela prevalences) if a
+consuming project needs them. GBD defines the severity levels by
+symptoms, not by EF. The EF attribute in this model (see
+`Ejection-fraction attribute`_) is independent of the severity split.
+The disability weights do not depend on EF (see `Assumptions and
+Limitations`_). The YLD check in `Validation Criteria`_ confirms that
+the blended weights reproduce the GBD YLDs.
 
 .. todo::
    Find out whether the literature reports a relationship between EF
    and symptom severity.
 
-GBD 2023 Fatal Modeling Strategy
+GBD 2025 Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++
 
 In GBD, heart failure is an impairment. When a reporting organization
@@ -282,14 +306,13 @@ underlying etiology as part of garbage-code redistribution
 [GBD-2023-CoD]_. CODEm and CoDCorrect produce no estimates of
 mortality due to heart failure. The etiology-fraction estimation does
 produce the quantity :math:`\text{CSMR}_{HF \text{ due to } e}`
-defined above as an intermediate. This model uses that quantity as
-the mortality target for its death accounting. See `Excess
-mortality`_.
+defined above as an intermediate. This model uses that quantity as a
+validation target for its HF deaths. See `Validation Criteria`_.
 
 Simulants in this model occupy HF states that have an excess
 mortality rate. The simulation therefore produces deaths attributed
-to heart failure. GBD has no directly comparable quantity. The
-validation must check these deaths with care. See `Validation
+to heart failure. GBD has no directly comparable published quantity.
+The validation must check these deaths with care. See `Validation
 Criteria`_.
 
 What GBD does not estimate
@@ -298,22 +321,15 @@ What GBD does not estimate
 **No ejection-fraction axis.** No GBD quantity is resolved by
 ejection fraction. This applies to the envelope prevalence and
 incidence, the etiology proportions, the severity splits, and the
-mortality. Every EF-related parameter in this model therefore comes
-from the clinical and epidemiologic literature. The model places the
-EF attribute downstream of all GBD-derived quantities, so the EF
+EMR. Every EF-related parameter in this model therefore comes from
+the clinical and epidemiologic literature. The model places the EF
+attribute downstream of all GBD-derived quantities, so the EF
 attribute does not change the GBD calibration.
 
-**The DisMod envelope EMR is not used.** DisMod-MR produces an EMR
-for the HF envelope (ME 2412) when it fits the non-fatal model. This
-cause model does not use it. The model derives its excess mortality
-from the etiology-specific HF CSMR instead. See `Excess mortality`_.
-
-.. todo::
-   [VOICE] Give the case against the DisMod envelope EMR: what data
-   it is fit from, why its level and age pattern are not credible for
-   a clinical HF cohort, and what happened when a consuming project
-   used it (HF deaths were inflated, and the project removed the
-   EMR).
+**No published HF deaths.** GBD publishes no deaths due to heart
+failure. The EMR of the HF envelope is the only GBD quantity that
+gives a mortality rate for HF, and this model uses it. See `Excess
+mortality`_.
 
 Cause Hierarchy
 +++++++++++++++
@@ -327,9 +343,12 @@ Cause Hierarchy
 Restrictions
 ++++++++++++
 
-GBD estimates the HF envelope (ME 2412, ``rei_id`` 196) for males and
-females across the full GBD age range. The etiology mix varies
-strongly with age.
+GBD estimates the HF envelope (ME 2412 and ``rei_id`` 196 in GBD
+2023) for males and females across the full GBD age range. The
+etiology mix varies strongly with age.
+
+.. todo::
+   Confirm the ME and ``rei_id`` of the HF envelope in GBD 2025.
 
 ============================  =============================================
 Sex                           Both (male and female estimated separately)
@@ -365,9 +384,9 @@ Scope
      natural history of HF (severity progression, remission, or
      repeated decompensation).
    - The model splits the envelope by etiology (ischemic and
-     non-ischemic) for two reasons. Mortality can differ by etiology
-     through the etiology-specific HF CSMR. MI history can act on
-     ischemic entry through the optional coupling component.
+     non-ischemic) so that MI history can act on ischemic entry
+     through the optional coupling component, and so that the
+     HF-due-to-IHD deaths can be moved out of the IHD model.
    - The model assigns a continuous EF attribute at onset. Observers
      classify events into HFrEF, HFmrEF, and HFpEF with configurable
      cutoffs. EF is an attribute, not a state.
@@ -376,9 +395,8 @@ Scope
      the MI-history effect and moves the HF-due-to-IHD deaths out of
      the EMR of the IHD model.
    - Relationship to :ref:`2019_cause_ihd`: this model keeps the
-     etiology proportions. It separates HF from the IHD state
-     machine, derives the EMR from the etiology-specific HF CSMR
-     instead of the envelope EMR, and adds the EF attribute.
+     etiology proportions and the envelope EMR. It separates HF from
+     the IHD state machine and adds the EF attribute.
 
 Model structure
 +++++++++++++++
@@ -389,9 +407,9 @@ etiology (``HF_NI``). Both HF states are absorbing. There is no
 remission. The two HF states are mutually exclusive. The etiology of
 a simulant is fixed at entry.
 
-The model splits the envelope incidence and prevalence from ME 2412
-by the GBD etiology proportions. It aggregates the seven etiology
-groupings two ways (see `GBD 2023 Non-Fatal Modeling Strategy`_):
+The model splits the envelope incidence and prevalence by the GBD
+etiology proportions. It aggregates the seven etiology groupings two
+ways (see `GBD 2025 Non-Fatal Modeling Strategy`_):
 
 .. math::
    \text{prop}_I = \text{propHF}_{CAD}, \qquad
@@ -402,20 +420,20 @@ CAD is the coronary artery disease grouping, which is the IHD share.
 The sum runs over the other six groupings: pressure overload of the
 left heart, pressure overload of the right heart, valve diseases,
 primary myocardial diseases, toxins, and stress cardiomyopathies. The
-artifact keeps the per-grouping detail for the mortality accounting
-(see `Excess mortality`_). The state machine uses only the two
-aggregates.
+artifact keeps the per-grouping detail for the validation of HF
+deaths (see `Validation Criteria`_). The state machine uses only the
+two aggregates.
 
 .. todo::
    The four bypass etiologies (Chagas disease, degenerative mitral
    valve disease, calcific aortic valve disease, and HF after acute
    stroke) sit outside the seven-grouping proportions. Decide whether
-   the prevalence and CSMR of the non-ischemic state include them
-   (their HF burden lives in the parent-cause models) or whether the
-   envelope used here already excludes them. For a high-income
-   application, we expect the valve diseases to be the bypass
-   etiologies with material burden. That expectation is a judgment,
-   not a measurement.
+   the prevalence of the non-ischemic state includes them (their HF
+   burden lives in the parent-cause models) or whether the envelope
+   used here already excludes them. For a high-income application,
+   we expect the valve diseases to be the bypass etiologies with
+   material burden. That expectation is a judgment, not a
+   measurement.
 
 The cause model itself never refers to MI history. In a simulation
 that also models IHD, MI history acts on the ``HF_I`` incidence-rate
@@ -449,20 +467,17 @@ component makes two adjustments.
    no configuration for this.
 
 2. **The death reassignment.** This model always owns the
-   HF-attributable deaths across the etiology groupings. Its CSMR is
-   :math:`\sum_e \text{CSMR}_{HF \text{ due to } e}`. The standard
-   Vivarium accounting deducts this CSMR from the mortality of the
-   unmodeled causes. GBD assigns HF deaths to their underlying causes.
-   An IHD model built from GBD data therefore carries the
-   HF-due-to-IHD deaths a second time. The coupling component
-   subtracts them from the chronic and post-MI excess-mortality
-   pipeline of the IHD model at run time. At the same time it splits
-   the shared excess mortality of the HF states by etiology, so that
-   ``HF_I`` emits exactly the reassigned deaths. See `Reassigning
-   HF-due-to-IHD deaths`_. The validation invariant is: the
-   IHD-attributable deaths summed across the two models (the IHD
-   model states plus ``HF_I``) match the GBD IHD CSMR. See
-   `Validation Criteria`_.
+   HF-attributable deaths. Its CSMR is the envelope prevalence times
+   the envelope EMR. The standard Vivarium accounting deducts this
+   CSMR from the mortality of the unmodeled causes. GBD assigns HF
+   deaths to their underlying causes. An IHD model built from GBD
+   data therefore carries the HF-due-to-IHD deaths a second time. The
+   coupling component subtracts the deaths that the ``HF_I`` state
+   emits from the chronic and post-MI excess-mortality pipeline of
+   the IHD model at run time. See `Reassigning HF-due-to-IHD
+   deaths`_. The validation invariant is: the IHD-attributable deaths
+   summed across the two models (the IHD model states plus ``HF_I``)
+   match the GBD IHD CSMR. See `Validation Criteria`_.
 
 All of these modifiers live in one component. A model specification
 therefore adopts both adjustments or neither. One misconfiguration
@@ -515,29 +530,25 @@ States Data
      - Notes
    * - All
      - cause-specific mortality rate
-     - :math:`\sum_{e} \text{CSMR}_{HF \text{ due to } e}` summed over
-       the etiology groupings, in every configuration
-     - Mortality target. See `Excess mortality`_. When an IHD model
-       runs alongside, the coupling component removes the ischemic
-       term from the EMR pipeline of that model (see `The IHD-HF
-       coupling component`_). The model derives the state EMRs from
-       this quantity, so prev × EMR equals this CSMR by construction.
-       Literature survival is a validation target, not an input.
+     - :math:`\text{prevalence\_hf} \times \text{emr\_hf}`
+     - Both HF states carry the envelope EMR, so prev × EMR summed
+       over the two states equals this CSMR by construction. See
+       `Excess mortality`_. When an IHD model runs alongside, the
+       coupling component removes the ``HF_I`` deaths from the EMR
+       pipeline of that model (see `The IHD-HF coupling component`_).
    * - S
      - prevalence
-     - :math:`1 - \text{prevalence\_m2412}`
+     - :math:`1 - \text{prevalence\_hf}`
      -
    * - HF_I
      - prevalence
-     - :math:`\text{prevalence\_m2412} \times \text{prop}_I`
+     - :math:`\text{prevalence\_hf} \times \text{prop}_I`
      -
    * - HF_I
      - excess mortality rate
-     - :math:`\text{EMR}_{HF}` (shared, prevalence-weighted). See
-       `Excess mortality`_
-     - The coupling component replaces this with the
-       etiology-specific EMR (see `Reassigning HF-due-to-IHD
-       deaths`_)
+     - :math:`\text{emr\_hf}`
+     - The envelope EMR, modified by the EF contrast. See `Excess
+       mortality`_
    * - HF_I
      - disability weight
      - prevalence-weighted blend of the DWs of the HF-due-to-IHD
@@ -545,15 +556,13 @@ States Data
      - Same method as :ref:`2019_cause_ihd`
    * - HF_NI
      - prevalence
-     - :math:`\text{prevalence\_m2412} \times \text{prop}_{NI}`
+     - :math:`\text{prevalence\_hf} \times \text{prop}_{NI}`
      -
    * - HF_NI
      - excess mortality rate
-     - :math:`\text{EMR}_{HF}` (shared, prevalence-weighted). See
-       `Excess mortality`_
-     - The coupling component replaces this with the
-       etiology-specific EMR (see `Reassigning HF-due-to-IHD
-       deaths`_)
+     - :math:`\text{emr\_hf}`
+     - The envelope EMR, modified by the EF contrast. See `Excess
+       mortality`_
    * - HF_NI
      - disability weight
      - prevalence-weighted blend of the DWs of the non-IHD HF severity
@@ -575,16 +584,16 @@ Transition Data
    * - T1
      - S
      - HF_I
-     - :math:`i_I(a,s) = \frac{\text{incidence\_m2412} \times
-       \text{prop}_I}{1 - \text{prevalence\_m2412}}`
+     - :math:`i_I(a,s) = \frac{\text{incidence\_hf} \times
+       \text{prop}_I}{1 - \text{prevalence\_hf}}`
      - Rate per susceptible simulant. In a simulation that also
        models IHD, the optional MI-history effect modifies this
        pipeline. See `Effect of MI history on ischemic HF incidence`_
    * - T2
      - S
      - HF_NI
-     - :math:`i_{NI}(a,s) = \frac{\text{incidence\_m2412} \times
-       \text{prop}_{NI}}{1 - \text{prevalence\_m2412}}`
+     - :math:`i_{NI}(a,s) = \frac{\text{incidence\_hf} \times
+       \text{prop}_{NI}}{1 - \text{prevalence\_hf}}`
      - Rate per susceptible simulant. Not conditioned on MI history
 
 .. todo::
@@ -603,35 +612,38 @@ Data Sources
      - Source
      - Description
      - Notes
-   * - prevalence_m2412
+   * - prevalence_hf
      - como
      - Prevalence of the HF envelope
-     -
-   * - incidence_m2412
-     - dismod-mr, como
+     - ME 2412 in GBD 2023
+   * - incidence_hf
+     - DisMod-AT, como
      - Incidence of the HF envelope
-     -
+     - ME 2412 in GBD 2023
+   * - emr_hf
+     - DisMod-AT
+     - Excess mortality rate of the HF envelope
+     - ME 2412 in GBD 2023. See `Excess mortality`_
    * - propHF_e (seven groupings)
      - CVD team / GBD etiology proportion models
      - Proportion of HF attributable to grouping :math:`e`, by age,
        sex, and location, in the seven-grouping proportion taxonomy
-     - GBD 2023 regeneration of the proportions file used in
+     - GBD 2025 regeneration of the proportions file used in
        :ref:`2019_cause_ihd`
    * - CSMR_e
      - CoDCorrect
      - Cause-specific mortality of etiology :math:`e` (after
        CoDCorrect)
-     -
+     - Validation only
    * - :math:`\text{CSMR}_{HF \text{ due to } e}`
      - CVD team (= CSMR_e :math:`\times` PropDeathsWithHF_e)
      - HF-attributable death rate per grouping
-     - Drives the model CSMR and every derived EMR. See `Excess
-       mortality`_
+     - Validation only. See `Validation Criteria`_
    * - PropDeathsWithHF_e
      - CVD team (MR-BRT)
      - Fraction of etiology-:math:`e` deaths with HF in the causal
        chain
-     - Equals 1 for HHD and the cardiomyopathies
+     - Validation only. Equals 1 for HHD and the cardiomyopathies
    * - HF severity sequela prevalences and DWs
      - como, YLD appendix
      - For the per-state blended disability weights
@@ -732,46 +744,26 @@ special case. It is the model specification without this component.
 Reassigning HF-due-to-IHD deaths
 """"""""""""""""""""""""""""""""
 
-This model always owns the HF-attributable deaths across the etiology
-groupings (see `Running standalone or alongside an IHD model`_). GBD
-assigns the HF-due-to-IHD deaths to the IHD cause. An IHD model with
-an EMR derived from GBD data therefore carries those deaths a second
-time. The coupling component moves those deaths from the IHD model to
-the ``HF_I`` state with two modifiers that act as one operation.
-
-**Netting.** A subtractive modifier on the chronic and post-MI
-excess-mortality pipeline of the IHD model:
+This model always owns the HF-attributable deaths (see `Running
+standalone or alongside an IHD model`_). GBD assigns the
+HF-due-to-IHD deaths to the IHD cause. An IHD model with an EMR
+derived from GBD data therefore carries those deaths a second time.
+The coupling component moves those deaths from the IHD model to the
+``HF_I`` state with one subtractive modifier on the chronic and
+post-MI excess-mortality pipeline of the IHD model:
 
 .. math::
    \text{EMR}^{net}_{chronic}(a,s) = \max\!\left(0, \;
    \text{EMR}_{chronic}(a,s) -
-   \frac{\text{CSMR}_{HF \text{ due to } IHD}(a,s)}
+   \frac{\text{prevalence}_{HF\_I}(a,s) \times \text{emr\_hf}(a,s)}
         {\text{prevalence}_{chronic}(a,s)}\right)
 
-**Etiology split of the HF excess mortality.** Without the coupling
-component, both HF states carry the shared prevalence-weighted EMR
-(see `Excess mortality`_). The coupling component replaces it with
-the etiology-specific pair
-
-.. math::
-   \text{EMR}_{HF\_I}(a,s) =
-   \frac{\text{CSMR}_{HF \text{ due to } IHD}(a,s)}
-        {\text{prevalence}_{HF\_I}(a,s)},
-   \qquad
-   \text{EMR}_{HF\_NI}(a,s) =
-   \frac{\sum_{e \neq CAD} \text{CSMR}_{HF \text{ due to } e}(a,s)}
-        {\text{prevalence}_{HF\_NI}(a,s)}
-
-The prevalence-weighted combination of the pair equals the shared
-EMR. The total number of HF deaths does not change. Only their
-attribution moves.
-
-Together the two modifiers close the death accounting exactly.
-``HF_I`` emits :math:`\text{prevalence}_{HF\_I} \times
-\text{EMR}_{HF\_I} = \text{CSMR}_{HF \text{ due to } IHD}`. These are
-exactly the deaths that the netting removed from the IHD model. There
-is no reconciliation residual. All inputs are artifact data, so the
-modifiers are deterministic given the artifact. Unlike the MI-history
+The numerator is the number of deaths that the ``HF_I`` state emits
+per person-year of population. The modifier removes exactly those
+deaths from the IHD model. The total number of IHD-attributable
+deaths across the two models therefore does not change, as long as
+the floor at zero does not bind. All inputs are artifact data, so the
+modifier is deterministic given the artifact. Unlike the MI-history
 effect, this operation changes the population-level mortality of each
 cause model. It moves deaths by design. The invariant it preserves is
 the cross-model one: the IHD-attributable deaths summed across the
@@ -785,14 +777,27 @@ adopts the incidence effect and the death reassignment together or
 omits both.
 
 .. todo::
+   The deaths that ``HF_I`` emits
+   (:math:`\text{prevalence}_{HF\_I} \times \text{emr\_hf}`) are not
+   the same number as the deaths that GBD assigns to HF due to IHD
+   (:math:`\text{CSMR}_{HF \text{ due to } IHD}`). The modifier above
+   nets the first quantity so that the cross-model invariant holds
+   exactly. Netting the second quantity instead would match the GBD
+   attribution but break the invariant by the difference. The
+   mortality-shares check in `Validation Criteria`_ reports the ratio
+   of the two quantities. Decide which to net once that ratio is
+   known.
+
+.. todo::
    The subtraction can make :math:`\text{EMR}^{net}_{chronic}`
-   negative in strata where the HF-due-to-IHD deaths exceed the
-   chronic residual EMR. We expect this at the oldest ages, where
-   most IHD deaths involve HF. The floor at zero moves that shortfall
-   to the mortality of the ``HF_I`` state without a warning. Add a
-   validation check that reports how much death mass reaches the
-   floor. If the amount is material, revisit the residual-EMR
-   derivation of the IHD model.
+   negative in strata where the ``HF_I`` deaths exceed the chronic
+   residual IHD deaths. We expect this at the oldest ages, where
+   most IHD deaths involve HF. The floor at zero leaves that excess
+   in the ``HF_I`` state without a warning, and the cross-model
+   invariant then fails by the excess. Add a validation check that
+   reports how much death mass reaches the floor. If the amount is
+   material, revisit the residual-EMR derivation of the IHD model or
+   the envelope EMR.
 
 .. todo::
    Choose the prevalence denominator: the artifact chronic-IHD
@@ -868,65 +873,64 @@ gradient does not change (see `Risk-effects interface`_).
    fibrillation is a strong HFpEF predictor, and it is not in the
    covariate set of the consuming simulation. The age and sex terms
    absorb its contribution. Record this under `Assumptions and
-   Limitations`_.
+   Limitations`_. For each block, name a calibration source and a
+   separate validation source. See `Checks of the parts that GBD does
+   not estimate`_.
 
 Excess mortality
 ++++++++++++++++
 
-Neither the DisMod envelope EMR nor literature survival supplies the
-excess mortality in this model (see `What GBD does not estimate`_ for
-the case against the envelope EMR). The model derives the state EMRs
-from the etiology-specific HF CSMR with the same identity that GBD
-uses, :math:`\text{prevalence} = \text{CSMR} / \text{EMR}`. The EMR
-of each state is its HF-attributable CSMR divided by its prevalence.
+The excess mortality of both HF states is the EMR of the HF envelope
+from the GBD 2025 non-fatal model (DisMod-AT). The two states carry
+the same EMR. The CSMR of the model is the envelope prevalence times
+the envelope EMR, so the deaths that the two states emit sum to the
+CSMR by construction.
 
-Without the coupling component, both HF states carry the shared
-prevalence-weighted EMR
+This is the same source that the GBD 2019 model used
+(:ref:`2019_cause_ihd`). An intermediate design derived the state
+EMRs from the etiology-specific HF CSMR instead. That design was
+dropped on 2026-10-28 in favor of the envelope EMR, because GBD 2025
+put more effort into the envelope EMR than earlier rounds did.
 
-.. math::
-   \text{EMR}_{HF}(a,s) =
-   \frac{\sum_e \text{CSMR}_{HF \text{ due to } e}(a,s)}
-        {\text{prevalence\_m2412}(a,s)}
+.. todo::
+   Cite the GBD 2025 appendix for the DisMod-AT EMR of the HF
+   envelope when it is published.
 
-The total number of HF deaths then equals
-:math:`\sum_e \text{CSMR}_{HF \text{ due to } e}`, which is the CSMR
-of the model, with no reconciliation residual. With the coupling
-component, the etiology-specific pair replaces the shared EMR (see
-`Reassigning HF-due-to-IHD deaths`_). The split preserves the
-prevalence-weighted total. The identity holds in every configuration.
+.. todo::
+   [VOICE] Record what happened when a consuming project used the GBD
+   2023 envelope EMR in a risk-enriched adult cohort: HF deaths were
+   about two thirds of all simulated deaths, against about one
+   quarter of deaths from all diseases of the heart in the national
+   vital statistics, and the project set the EMR to zero. The
+   mortality-shares check in `Validation Criteria`_ is the test that
+   would have caught this.
+
+The etiology-specific HF CSMR from the GBD etiology pipeline,
+:math:`\sum_e \text{CSMR}_{HF \text{ due to } e}`, is not an input.
+It is the validation target for the total HF deaths of the model. See
+`Validation Criteria`_.
+
+.. todo::
+   GBD estimates an etiology-specific EMR for ages 45 and over from
+   the Friuli Venezia Giulia data (see `GBD 2025 Non-Fatal Modeling
+   Strategy`_). Decide whether the model should scale the envelope
+   EMR by the ischemic and non-ischemic ratio from that estimate.
+   The base design does not.
 
 Literature survival after diagnosis, from community HF cohorts
-[Gerber-2015]_ and the MAGGIC meta-analysis [MAGGIC-2012]_, is
-therefore free to serve as an external validation target for the
-derived EMRs. It is not a model input. See `Validation Criteria`_.
-
-.. todo::
-   Confirm the extraction path for
-   :math:`\text{CSMR}_{HF \text{ due to } e}`. It is an intermediate
-   of the etiology-fraction pipeline (:math:`\text{CSMR}_e` after
-   CoDCorrect times :math:`\text{PropDeathsWithHF}_e`). We expect it
-   to arrive as a handoff from the CVD modeling team, like the
-   proportions, rather than from a central-machinery pull. Also
-   decide how the HF deaths of the four bypass etiologies (in
-   particular degenerative mitral valve disease and calcific aortic
-   valve disease) enter the sum. See the todo in `Model structure`_.
-
-.. todo::
-   The derived EMRs inherit the GBD assumptions upstream of them
-   through the proportions: the EMR structure from the linked Friuli
-   Venezia Giulia data and the equal EMR across etiologies under age
-   45. Keep these in `Assumptions and Limitations`_ and check them
-   against the survival validation targets.
+[Gerber-2015]_ and the MAGGIC meta-analysis [MAGGIC-2012]_, is an
+external validation target for the envelope EMR. It is not a model
+input. See `Validation Criteria`_.
 
 The EF class modifies the state EMR multiplicatively through a
 function :math:`g(\text{EF})` (or through class-based hazard ratios).
 The model renormalizes the modifier within each state and each age
-and sex stratum, so that the etiology-level EMR, and therefore the
-CSMR, does not change:
+and sex stratum, so that the state EMR, and therefore the CSMR, does
+not change:
 
 .. math::
    \text{EMR}(a, s, \text{state}, \text{EF}) =
-   \text{EMR}_{\text{state}}(a,s) \cdot
+   \text{emr\_hf}(a,s) \cdot
    \frac{g(\text{EF})}{E[\,g(\text{EF}) \mid \text{state}, a, s\,]}
 
 .. list-table:: Mortality parameters
@@ -937,15 +941,14 @@ CSMR, does not change:
      - Form
      - Source
      - Notes
-   * - :math:`\text{CSMR}_{HF \text{ due to } e}`
-     - by age and sex, per grouping
-     - GBD etiology-fraction pipeline (CVD team)
-     - Drives the model CSMR and every derived EMR
+   * - emr_hf
+     - by age and sex
+     - GBD 2025 non-fatal model of the HF envelope (DisMod-AT)
+     - The only mortality input
    * - EF mortality contrast :math:`g(\text{EF})`
      - class HRs or a smooth function of EF
      - [MAGGIC-2012]_, [Gerber-2015]_
-     - Renormalized to preserve the etiology-level EMR. Extraction
-       pending
+     - Renormalized to preserve the state EMR. Extraction pending
    * - Post-diagnosis survival targets
      - survival curves by etiology and EF class
      - [MAGGIC-2012]_, [Gerber-2015]_
@@ -955,7 +958,8 @@ CSMR, does not change:
    [LIT] Extract :math:`g(\text{EF})` with uncertainty. The MAGGIC
    adjusted comparison (lower mortality in HFpEF) and the community
    cohort comparison (near-equal mortality) disagree. Decide which
-   one the model carries.
+   one the model carries, and use the other as the validation
+   source.
 
 Risk-effects interface
 ++++++++++++++++++++++
@@ -1001,7 +1005,7 @@ Assumptions and Limitations
    [VOICE] Edit, cut, and re-rank this candidate list.
 
 #. **No remission or recovery.** The HF states are absorbing. The GBD
-   DisMod model permits remission. Clinically, some patients (in
+   non-fatal model permits remission. Clinically, some patients (in
    particular patients with improved EF) leave the Stage C symptom
    level. We expect the model to overstate prevalent person-time at
    older ages by a small amount.
@@ -1023,24 +1027,23 @@ Assumptions and Limitations
    that the incident and prevalent etiology mixes agree at the age
    and sex resolution of the proportions.
 #. **Non-ischemic entry is independent of MI history.** The six
-   non-IHD groupings form one state with one EMR.
+   non-IHD groupings form one state.
 #. **The MI-history hazard ratio is constant** unless the extraction
    supports stratification. A constant ignores the higher HF risk in
    the first months after an MI.
 #. **Atrial fibrillation is absent from the EF allocation
    covariates.** The consuming simulation does not model it. The age
    and sex terms absorb its HFpEF association.
-#. **The derived EMRs inherit the etiology-fraction assumptions of
-   GBD.** The EMR structure comes from linked data for one Italian
-   region (Friuli Venezia Giulia). GBD sets the EMR equal across
-   etiologies under age 45. Like every GBD quantity on this page, the
-   EMRs are general-population values. A consuming simulation may
-   apply them to a risk-enriched cohort.
+#. **The EMR is the envelope EMR, equal across etiologies.** GBD
+   estimates etiology-specific EMRs for ages 45 and over, and the
+   base model does not use them. Like every GBD quantity on this
+   page, the EMR is a general-population value. A consuming
+   simulation may apply it to a risk-enriched cohort.
 #. **HF due to the four bypass etiologies** (Chagas disease,
    degenerative mitral valve disease, calcific aortic valve disease,
    and HF after acute stroke) sits outside the seven-grouping
-   proportions. Their treatment in the envelope and CSMR of this
-   model is an open decision (see the todo in `Model structure`_).
+   proportions. Their treatment in the envelope of this model is an
+   open decision (see the todo in `Model structure`_).
 #. **Etiology is a label fixed at entry.** The model does not
    re-adjudicate it. A simulant who enters ``HF_NI`` and later has an
    MI stays in ``HF_NI``.
@@ -1063,57 +1066,114 @@ Validation Criteria
 +++++++++++++++++++
 
 The primary validation is a large baseline simulation of one location
-(the United States of America), compared with the GBD estimates by
-age and sex. The GBD round for the comparison is GBD 2025. We expect
-GBD 2025 to enforce age-period-cohort consistency of the non-fatal
-cause models more strictly than earlier rounds. The comparison
-therefore covers a 20-year horizon, with one comparison at each of
-2005, 2010, 2015, 2020, and 2025.
+(the United States of America), compared with the GBD 2025 estimates
+by age and sex. We expect GBD 2025 to enforce age-period-cohort
+consistency of the non-fatal cause models more strictly than earlier
+rounds. The comparison therefore covers a 20-year horizon, with one
+comparison at each of 2005, 2010, 2015, 2020, and 2025. The
+simulation reads year-specific inputs for every GBD quantity on this
+page.
 
-.. todo::
-   This page names GBD 2023 as the input round. If the artifact is
-   rebuilt from GBD 2025, rename the page and update the data
-   sources.
+Comparison with GBD
+"""""""""""""""""""
 
-**Primary criteria (GBD comparison, by age and sex, at each
-comparison year)**
+Each check is by age and sex at each comparison year.
 
-- Incidence: the simulated all-HF incidence rate matches the GBD
+- **Incidence.** The simulated all-HF incidence rate matches the GBD
   incidence of the HF envelope.
-- Prevalence: the simulated all-HF prevalence matches the GBD
+- **Prevalence.** The simulated all-HF prevalence matches the GBD
   prevalence of the HF envelope.
-- Excess mortality and case fatality: the simulated excess mortality
-  rate of the HF states matches the GBD excess mortality rate (the
-  etiology-specific EMR that GBD uses as an input, or the envelope
-  EMR that GBD produces as an output). The simulated case fatality
-  after incident HF matches the case fatality that the GBD inputs
-  imply.
-- Etiology split: the simulated ``HF_I`` share of incidence and
+- **Excess mortality and case fatality.** The simulated excess
+  mortality rate of the HF states matches the envelope EMR. The EMR
+  is the model input, so this check tests the simulation machinery
+  and the age-period-cohort consistency of the inputs, not the EMR
+  value. The simulated one-year and five-year case fatality after
+  incident HF matches the case fatality computed from the GBD EMR and
+  all-cause mortality rate.
+- **Etiology split.** The simulated ``HF_I`` share of incidence and
   prevalence matches :math:`\text{prop}_I`.
-- Death accounting (simulations that also model IHD): the
+- **Mortality shares.** The simulated HF deaths as a share of all
+  deaths, and as a share of IHD deaths, match
+  :math:`\sum_e \text{CSMR}_{HF \text{ due to } e}` divided by the
+  all-cause mortality rate and
+  :math:`\text{PropDeathsWithHF}_{IHD}`. This check compares the
+  envelope EMR (the input) with the etiology pipeline of GBD (an
+  independent estimate of the same deaths). A large disagreement
+  means that one of the two GBD quantities is not credible for this
+  location.
+- **Disability.** The simulated YLDs per prevalent case match the GBD
+  YLDs of the HF impairment. This confirms that the blended
+  disability weights are correct.
+
+Death accounting
+""""""""""""""""
+
+The death accounting must pass in two configurations.
+
+- **HF alone.** The HF deaths equal the envelope prevalence times the
+  envelope EMR. The all-cause mortality rate stays calibrated, which
+  means that the mortality of the unmodeled causes absorbs the HF
+  deaths correctly.
+- **HF with the IHD model and the coupling component.** The
   IHD-attributable deaths summed across the two models (the IHD model
   states plus ``HF_I``) match the GBD IHD CSMR. No HF-due-to-IHD
   death is counted twice. The all-cause mortality rate stays
-  calibrated.
+  calibrated. Report the death mass that reaches the floor of the
+  netting modifier.
+- **Negative control.** HF with the IHD model and no coupling
+  component must fail the IHD death check by the ``HF_I`` deaths.
+  This confirms that the check can detect the misconfiguration. This
+  control is a judgment call, not a requirement.
 
-**Secondary criteria (internal invariants)**
+Internal invariants
+"""""""""""""""""""
 
-- Risk-gradient invariant: the population-level all-HF
-  exposure-incidence relationship recovers the input curve after the
-  etiology and EF layers.
-- MI-history effect: the population-level ``HF_I`` incidence is the
-  same with and without the coupling component.
+- **Risk gradient.** The population-level all-HF exposure-incidence
+  relationship recovers the input curve after the etiology and EF
+  layers.
+- **MI-history effect.** The population-level ``HF_I`` incidence is
+  the same with and without the coupling component.
 
-**External validation (literature targets, not inputs)**
+Checks of the parts that GBD does not estimate
+""""""""""""""""""""""""""""""""""""""""""""""
 
-- EF class shares: the incident HFpEF, HFmrEF, and HFrEF shares by
-  age and sex fall within the ranges of the cohort and registry
-  sources [Ho-2016]_ [Gerber-2015]_ [Steinberg-2012]_.
-- MI-history effect: the cumulative incidence of HF among post-MI
-  simulants matches the registry sources [Jernberg-2015]_ [VALIANT]_.
-- Survival: the derived EMRs imply a survival after diagnosis, by
-  etiology and EF class, that is consistent with [MAGGIC-2012]_ and
-  [Gerber-2015]_.
+The EF attribute, the MI-history effect, and the EF mortality
+contrast come from the literature, and some of their parameters are
+calibrated to literature targets. A quantity that calibrates a
+parameter cannot also validate it. For each literature parameter,
+the extraction therefore names a calibration source and a separate
+validation source, or a validation quantity that the calibration
+source did not supply.
+
+.. list-table:: Calibration and validation sources for the literature parameters
+   :widths: 15 20 25
+   :header-rows: 1
+
+   * - Parameter
+     - Calibration source
+     - Validation source or quantity
+   * - Incident EF class shares by age and sex
+     - One community cohort or registry (for example
+       [Gerber-2015]_)
+     - A second source not used for calibration (for example
+       [Ho-2016]_ or [Steinberg-2012]_). Expect a known difference
+       between community and hospitalized populations
+   * - Within-class EF distributions
+     - One registry (for example [Steinberg-2012]_)
+     - The class-conditional EF moments in a second registry, to be
+       chosen in the extraction
+   * - :math:`RR_{MI}`
+     - One post-MI cohort (for example [Jernberg-2015]_)
+     - The cumulative incidence of HF after MI in a second cohort
+       (for example [VALIANT]_), which the hazard ratio alone does
+       not fix
+   * - :math:`g(\text{EF})`
+     - One of [MAGGIC-2012]_ or [Gerber-2015]_
+     - The five-year survival by EF class in the other source
+   * - Envelope EMR (GBD input)
+     - none
+     - Survival after diagnosis by etiology and EF class in
+       [MAGGIC-2012]_ and [Gerber-2015]_
 
 .. todo::
    Candidate additions to the validation plan, for review:
@@ -1128,21 +1188,11 @@ comparison year)**
    - A birth-cohort trace. Follow one or more birth cohorts across
      the 20 years and compare their age-specific prevalence with the
      GBD cells at the same age and year.
-   - The GBD identity check. Report the ratio of the derived state
-     EMR to the GBD etiology-specific EMR. GBD scales the DisMod
-     proportions to sum to one after the identity, so we expect the
-     ratio to differ from one by the scaling factor.
-   - Mortality shares. Report the HF-attributable deaths as a share
-     of all deaths and of IHD deaths, and compare with
-     :math:`\text{PropDeathsWithHF}_{e}`.
-   - Disability. Compare the simulated YLDs per prevalent case with
-     the GBD YLDs of the HF impairment.
    - Numerical checks. Report the simulant count per age, sex, and
      year cell, the sensitivity to the time step, and the draws
      covered.
    - Boundary age groups. Check the youngest and the oldest age group
-     separately. The envelope has non-zero prevalence from birth, and
-     the oldest group is where we expect the netting floor to bind.
+     separately rather than only in the pooled comparison.
    - Uncertainty. Run the comparison across draws and report the
      coverage of the GBD uncertainty intervals.
 
