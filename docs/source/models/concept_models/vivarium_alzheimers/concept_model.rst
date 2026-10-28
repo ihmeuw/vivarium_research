@@ -730,7 +730,7 @@ scenario, and input draw.
       <cause_alzheimers_rate_calibration>` section for what changed in the
       fit.
     - Baseline, Alternative Scenario 1, Alternative Scenario 2
-    - * Locations: All
+    - * Locations: Brazil, China, USA
       * 25 draws
       * Population size per draw: traditional V&V run size (which is 100,000 simulants per draw [see Section 4.1], and in the past was accomplished with 5 seeds × 20,000 simulants per seed [Abie thinks])
         simulants each)
