@@ -172,13 +172,8 @@ is defined below.
     - The percent of patients with a positive BBBM test who initiate
       treatment will vary over time – but will not vary by age, sex, or
       location. We will use a piecewise linear ramp-up with knots at the
-      following (year, level) values: `(2022.0, 0), (2027.0, 0),
-      (2035.5, 30), (2100.0, 80), (2101.0, 80)`.
-
-      This captures the CSU client's specification that "30% of eligible patients
-      initiate by 2035, with a steady increase to 80% by 2100, for all
-      countries," and that treatment should first be available in 2027,
-      slowly ramping up to 30% in 2035.
+      following (year, level) values: `(2027.0, 0),
+      (2028, 25), (2035.0, 35), (2100.0, 80), (2101.0, 80)`.
     - 
   * - :math:`D_t`
     - Months to discontinuation
