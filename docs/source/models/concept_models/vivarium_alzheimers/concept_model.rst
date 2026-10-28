@@ -290,17 +290,22 @@ The basic plan for the design of the simulation is as follows:
   :header-rows: 1
 
   * - Scenario
-    - Columns with more details go here
-    - Note
+    - Notes
   * - 0. Baseline (Reference)
     -
+  * - 1. Slow Testing, No Treatment
     -
-  * - 1. Testing scale-up (Alternative 1)
+  * - 2. Intermediate Testing, No Treatment
     -
+  * - 3. Accelerated Testing, No Treatment
     -
-  * - 2. Treatment scale-up (Alternative 2)
+  * - 4. Slow Testing, With Treatment
     -
+  * - 5. Intermediate Testing, With Treatment
     -
+  * - 6. Accelerated Testing, With Treatment
+    -
+
 
 4.3 Outputs and Observers
 --------------------------
