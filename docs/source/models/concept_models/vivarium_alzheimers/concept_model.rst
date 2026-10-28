@@ -293,17 +293,21 @@ The basic plan for the design of the simulation is as follows:
     - Notes
   * - 0. Baseline (Reference)
     -
-  * - 1. Slow Testing, No Treatment
+  * - 1. Old Testing, No Treatment (Alternative 1)
+    - Out dated scenario from phase 1, included for clarity in model run request table below.
+  * - 2. Old Testing, Old Treatment (Alternative 2)
+    - Out dated scenario from phase 1, included for clarity in model run request table below.
+  * - 3. Slow Testing, No Treatment
     -
-  * - 2. Intermediate Testing, No Treatment
+  * - 4. Intermediate Testing, No Treatment
     -
-  * - 3. Accelerated Testing, No Treatment
+  * - 5. Accelerated Testing, No Treatment
     -
-  * - 4. Slow Testing, With Treatment
+  * - 6. Slow Testing, With Treatment
     -
-  * - 5. Intermediate Testing, With Treatment
+  * - 7. Intermediate Testing, With Treatment
     -
-  * - 6. Accelerated Testing, With Treatment
+  * - 8. Accelerated Testing, With Treatment
     -
 
 
