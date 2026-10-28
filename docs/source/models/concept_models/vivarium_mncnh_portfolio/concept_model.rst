@@ -2072,7 +2072,7 @@ Default stratifications to all observers should include scenario and input draw.
 .. list-table:: V&V tracking 
   :header-rows: 1
 
-  * - Model number
+  * - Model number or git tag
     - Short name
     - V&V plan
     - V&V summary
@@ -3293,7 +3293,20 @@ Default stratifications to all observers should include scenario and input draw.
     - Same as base
     - All tests passing
     - `Model 43.0 V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/54befc004cf9f40dfde284f67f054bccaa26f7f0/tests/model_notebooks>`__
-  * - 
+  * - 41.2 (41.0 and 41.1 were predecessors to this that were not V&Ved)
+    - Separate LBWSG affected causes
+    - New criteria added by `this PR <https://github.com/ihmeuw/vivarium_research/pull/1976/changes>`__ and `this PR diff section <https://github.com/ihmeuw/vivarium_research/pull/1982/changes#diff-b271710fb04839c6836406d54b945d2c223aaf854a55bf6d330eccbfccdc6ed2R538-R566>`__.
+      Also had expectations for how the relevant checks would *change* from the previous, which are described `in this PR comment <https://github.com/ihmeuw/vivarium_research/pull/1976#issue-5574859096>`__.
+      Summary of expectations:
+
+      * ACMRisk and all-cause deaths should be lower in the MMS scale-up scenario than in baseline, but this reduction should be less after separating LBWSG-affected mortality.
+      * CSMRisks and cause-specific deaths should (generally, see note in next column) be lower in the MMS scale-up scenario for the modeled causes, and this should not change after separating LBWSG-affected mortality.
+      * CSMRisk and deaths for "other causes" (which is a mixture of LBWSG-affected and not) should be reduced by MMS, and should be reduced by less after separating LBWSG-affected mortality.
+      * The ratio between modeled-cause and "other causes" CSMRisk reduction by MMS (after implementation) should be less than the proportion of "other causes" that is LBWSG-affected
+        for non-preterm LBWSG categories, and more than that proportion for preterm LBWSG categories. 
+    - All passing; noticed and built into the V&V criteria some rare cases in which MMS can actually make things worse
+    -  `Separate LBWSG affected causes V&V notebooks <https://github.com/ihmeuw/vivarium_gates_mncnh/tree/235302e42873dfa9eb91c0f413ab145930c4f846/tests/model_notebooks>`__
+  * - :code:`pph_split_300ml`
     - PPH split at 300mL
     - Summary of `new criteria <https://github.com/ihmeuw/vivarium_research/pull/1961/changes#diff-d76763e5c3a2f9adb1a9a5fdd8581be1e8de5159c279ae19a9a238a681a3c441R411-R424>`__:
 
