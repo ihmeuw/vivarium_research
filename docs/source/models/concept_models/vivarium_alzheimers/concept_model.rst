@@ -744,6 +744,12 @@ scenario, and input draw.
         simulants each)
     - Default
     - Default
+  * - 14.0
+    - Update treatment and testing ramps and new scenarios
+    - Baseline, Scenarios 3-8
+    - * Locations: All
+    - Stratify disease state transitions and person-time by treatment
+    - Default
 
 5.2 V & V Tracking
 ------------------------
