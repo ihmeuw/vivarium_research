@@ -290,17 +290,26 @@ The basic plan for the design of the simulation is as follows:
   :header-rows: 1
 
   * - Scenario
-    - Columns with more details go here
-    - Note
+    - Notes
   * - 0. Baseline (Reference)
     -
-    -
-  * - 1. Testing scale-up (Alternative 1)
-    -
-    -
-  * - 2. Treatment scale-up (Alternative 2)
-    -
-    -
+  * - 1. Old Testing, No Treatment (Alternative 1)
+    - Out dated scenario from phase 1, included for clarity in model run request table below.
+  * - 2. Old Testing, Old Treatment (Alternative 2)
+    - Out dated scenario from phase 1, included for clarity in model run request table below.
+  * - 3. Slow Testing, Zero-Impact Treatment
+    - To help with calculations, please include treatment assignment but have NO impact on outcomes.
+  * - 4. Intermediate Testing, Zero-Impact Treatment
+    - To help with calculations, please include treatment assignment but have NO impact on outcomes.
+  * - 5. Accelerated Testing, Zero-Impact Treatment
+    - To help with calculations, please include treatment assignment but have NO impact on outcomes.
+  * - 6. Slow Testing, With Treatment
+    - Treatment is included and has an impact on outcomes.
+  * - 7. Intermediate Testing, With Treatment
+    - Treatment is included and has an impact on outcomes.
+  * - 8. Accelerated Testing, With Treatment
+    - Treatment is included and has an impact on outcomes.
+
 
 4.3 Outputs and Observers
 --------------------------
@@ -333,10 +342,10 @@ scenario, and input draw.
     -
     -
   * - Transition counts between Alzheimer's cause states
-    -
+    - Include treatment status with all values from the treatment status person-time observer.
     -
   * - Person-time in each Alzheimer's cause state
-    -
+    - Include treatment status with all values from the treatment status person-time observer.
     -
   * - CSF/PET-eligible simulant count
     - Test state: CSF test received, PET test received, no test received, (negative) BBBM test received
@@ -735,6 +744,13 @@ scenario, and input draw.
       * Population size per draw: traditional V&V run size (which is 100,000 simulants per draw [see Section 4.1], and in the past was accomplished with 5 seeds × 20,000 simulants per seed [Abie thinks])
         simulants each)
     - Default
+    - Default
+  * - 14.0
+    - Update treatment and testing ramps and new scenarios
+    - Baseline, Scenarios 3-8
+    - * Locations: All
+      * 25 draws, 5 seeds, 20,000 simulants per seed 
+    - Stratify disease state transitions and person-time by treatment
     - Default
 
 5.2 V & V Tracking
