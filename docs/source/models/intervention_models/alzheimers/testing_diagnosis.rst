@@ -224,13 +224,13 @@ with knots at the following (year, coverage) values:
     - Initial piece-wise linear knots
     - Final piece-wise linear knot
   * - Slow
-    - (2027.5, 0%), (2028.0, 2%)	
+    - (2028.0, 2%)	
     - (2048.0, 60%), (2100.0, 60%)	
   * - Intermediate
-    - (2027.5, 0%), (2028.0, 2%)	
+    - (2028.0, 2%)	
     - (2043.0, 60%), (2100.0, 60%)	
   * - Accelerated
-    - (2027.5, 0%), (2028.0, 2%)	
+    - (2028.0, 2%)	
     - (2038.0, 60%), (2100.0, 60%)	
 
 .. _bbbm_requirements:
