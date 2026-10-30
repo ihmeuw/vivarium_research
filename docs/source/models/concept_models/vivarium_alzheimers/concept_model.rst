@@ -345,7 +345,7 @@ scenario, and input draw.
     - Include treatment status with all values from the treatment status person-time observer.
     -
   * - Person-time in each Alzheimer's cause state
-    -
+    - Include treatment status with all values from the treatment status person-time observer.
     -
   * - CSF/PET-eligible simulant count
     - Test state: CSF test received, PET test received, no test received, (negative) BBBM test received
@@ -749,6 +749,7 @@ scenario, and input draw.
     - Update treatment and testing ramps and new scenarios
     - Baseline, Scenarios 3-8
     - * Locations: All
+    - * 25 draws, 5 seeds, 20,000 simulants per seed 
     - Stratify disease state transitions and person-time by treatment
     - Default
 
