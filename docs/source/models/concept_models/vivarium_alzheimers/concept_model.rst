@@ -749,7 +749,7 @@ scenario, and input draw.
     - Update treatment and testing ramps and new scenarios
     - Baseline, Scenarios 3-8
     - * Locations: All
-    - * 25 draws, 5 seeds, 20,000 simulants per seed 
+      * 25 draws, 5 seeds, 20,000 simulants per seed 
     - Stratify disease state transitions and person-time by treatment
     - Default
 
