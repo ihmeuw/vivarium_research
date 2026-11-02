@@ -6,3 +6,4 @@ ipython
 ipywidgets
 matplotlib
 pyyaml
+causalweb @ git+https://github.com/zmbc/causalweb.git@95285242bbfaf8c56a1005e3366baac3edd4e073
