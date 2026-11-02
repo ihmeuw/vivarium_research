@@ -54,6 +54,8 @@ GBD 2023 Modeling Strategy
 
     Note that :ref:`low hemoglobin risk exposure <2023_hemoglobin_exposure>` values are expected to be similar between release ID 16 and 33, although there appear to be at least slight rounding differences. We have used release ID 33 to inform low hemoglobin risk exposure in the MNCNH portfolio model.
 
+    **NOTE:** As of September, 2026, low hemoglobin risk factor estimates from release ID 33 are reported to be unavailable via ``get_model_estimates`` shared functions despite being available in the now deprecated ``get_draws`` according to correspondence with central computation. They have advised us to store these estimates as flat files rather than accessing them via shared functions. TODO: Include filepath when Hussain has it active.
+
   See `the pre-print for the GBD burden of proof model of low hemoglobin publication here <https://www.researchsquare.com/article/rs-7567885/v1>`__ for all details on the low hemoglobin risk modeling strategy.
 
 In GBD 2023, the hemoglobin risk effects are modeled as continuous risk curves with 1,000 exposure estimates ranging between values of 40 and 150. Exposure values <40 are assigned a risk value consistent with an exposure of 40 and exposure values >150 are assigned a risk value consistent with an exposure of 150.
@@ -186,6 +188,10 @@ Use the modeling strategy described below for the following maternal disorders s
   Link hypertension cause model documents when ready and write custom strategy for hypertensive disorders as necessary
 
 Relative risk values to calculate custom PAFs for maternal disorders can be accessed via shared functions with the following call. Prior to the GBD 2023 update, duplicate the 250 available draws twice to obtain 500 draws such that draw 0 and draw 250 have the same value.
+
+.. note::
+
+  The following code is deprecated and the translation of release ID 33 to the updated ``get_model_estimates`` is not supported according to correspondence with central computation. We are referencing flat files generated from the following code instead.
 
 .. code-block:: python
 
