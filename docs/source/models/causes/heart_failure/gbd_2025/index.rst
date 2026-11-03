@@ -51,6 +51,10 @@ for reasons of confidentiality. This model differs from past approaches in three
    * - HFpEF
      - Heart failure with preserved ejection fraction
      - LVEF :math:`\geq` 50%
+   * - HFimpEF
+     - Heart failure with improved ejection fraction
+     - baseline LVEF :math:`\leq` 40%, a rise of at least 10 points,
+       and a second measurement above 40%
    * - IHD
      - Ischemic heart disease
      -
@@ -84,7 +88,7 @@ Disease Overview
 
 Heart failure is a condition in which the heart does not pump enough
 blood to meet the needs of the body. In some patients the heart does
-not fill with enough blood. In other patients the heart does not
+not fill with enough blood. In others, the heart does not
 eject blood with enough force. Some patients have both problems.
 Heart failure can develop suddenly or over time as the heart gets
 weaker. It can affect one or both sides of the heart. [NHLBI-HF]_
@@ -242,16 +246,16 @@ case-fatality rates from the literature, converts them to EMRs under
 the assumption that deaths among persons diagnosed with HF are caused
 by HF, and models the log EMR in MR-BRT on sex and a cubic spline in
 age, with the Healthcare Access and Quality (HAQ) Index as a
-covariate constrained to a negative coefficient. The MR-BRT
+covariate with a prior of a negative coefficient. The MR-BRT
 predictions by location, year, sex, and ten-year age group are the
 EMR inputs, and the HAQ Index is also a country-level covariate on
 EMR in DisMod-MR 2.1 [GBD-2023-NF]_. The non-fatal model therefore
 produces prevalence, incidence, and an excess mortality rate for the
-envelope as a whole. This cause model uses all three.
+envelope as a whole.
 
 **Etiological fraction estimation**
 
-GBD attributes the HF envelope to 30 mutually exclusive and
+GBD attributes the HF envelope to 31 mutually exclusive and
 collectively exhaustive etiologies, including an "other" category.
 Table 3 of the GBD 2023 appendix lists them, with stroke split into
 acute and chronic [GBD-2023-NF]_. For most etiologies, GBD estimates
@@ -273,8 +277,11 @@ where the etiology-specific HF CSMR is
 the modeled fraction of deaths from etiology :math:`e` in which HF
 appears in the causal chain. GBD estimates it in MR-BRT from the
 person-level vital registration data. GBD estimates the
-etiology-specific EMR in MR-BRT from the linked Friuli Venezia Giulia
-data [GBD-2023-NF]_.
+etiology-specific EMR from the linked Friuli Venezia Giulia data. A
+person has HF due to an etiology when a hospital record codes HF
+concurrent with or after an admission coded for that etiology. The
+EMR is the mortality rate of those persons minus the background
+mortality rate, modeled in MR-BRT by age and sex [GBD-2023-NF]_.
 
 GBD divides each etiology-specific prevalence by the prevalence of
 the HF envelope to give a proportion. GBD aggregates the proportions
@@ -288,10 +295,10 @@ grouping. Each model has one country-level covariate: an SEV scalar
 for six of the groupings, and mean systolic blood pressure for
 pressure overload of the left heart. GBD then scales the outputs of
 the proportion models so that they sum to one. The scaling happens
-after the proportion models, not on the raw quotients. GBD multiplies
-the scaled proportions by the prevalence of the HF envelope and then
-splits each grouping into its sub-causes with proportions from the
-same death-derived data [GBD-2023-NF]_.
+after the proportion models, not on the raw quotients. GBD next
+scales each etiology within its grouping with proportions from the
+same death-derived data, and then multiplies each etiology
+proportion by the prevalence of the HF envelope [GBD-2023-NF]_.
 
 Four special cases depart from this approach [GBD-2023-NF]_.
 
@@ -343,11 +350,6 @@ cirrhosis, and stroke [GBD-2023-NF]_.
    chronic kidney disease, cirrhosis, and stroke into sub-causes.
    Check the list against the GBD 2025 appendix.
 
-This model aggregates the seven groupings two ways. The coronary
-artery disease proportion defines the ischemic state. The other six
-groupings together define the non-ischemic state. See `Model
-structure`_.
-
 Severity splits and disability weights
 ++++++++++++++++++++++++++++++++++++++
 
@@ -359,14 +361,13 @@ that links EQ-5D to ICD codes. For Chagas disease, which MEPS does
 not represent adequately, the splits come from a meta-analysis of
 NYHA class among persons with HF due to Chagas disease in endemic
 areas. The disability weights below are from Table 4 of the GBD 2023
-appendix [GBD-2023-NF]_.
+appendix [GBD-2023-NF]_. Each row equals the mean and the 2.5th and
+97.5th percentiles of the 1000 draws in the GBD disability-weight
+file for health states 559, 381, 382, and 383 (checked 2026-11-03).
 
 .. todo::
-   Only the first row of the table (controlled, medically managed)
-   was checked verbatim against Table 4 of the GBD 2023 appendix
-   (p. 657). Check the mild, moderate, and severe rows against the
-   PDF, and check the severity-split proportions and the DW values
-   against the GBD 2025 YLD appendix when it is published.
+   Check the severity-split proportions and the DW values against
+   the GBD 2025 YLD appendix when it is published.
 
 .. list-table:: Severity levels for heart failure and associated disability weights
    :widths: 15 25 12
@@ -397,20 +398,7 @@ appendix [GBD-2023-NF]_.
        breathing problems.
      - 0.179 (0.122–0.251)
 
-This model does not represent the severity levels as states. Each HF
-state carries the prevalence-weighted blend of the disability weights
-of its severity sequelae. The severity-split proportions by age and
-sex are available from GBD (the como sequela prevalences) if a
-consuming project needs them. GBD defines the severity levels by
-symptoms, not by EF. The EF attribute in this model (see
-`Ejection-fraction attribute`_) is independent of the severity split.
-The disability weights do not depend on EF (see `Assumptions and
-Limitations`_). The YLD check in `Validation Criteria`_ confirms that
-the blended weights reproduce the GBD YLDs.
-
-.. todo::
-   Find out whether the literature reports a relationship between EF
-   and symptom severity.
+GBD defines the severity levels by symptoms, not by EF.
 
 GBD 2025 Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++
@@ -429,8 +417,7 @@ location, and year redistribute the deaths [GBD-2023-CoD]_. CODEm
 and CoDCorrect therefore produce no estimate of deaths due to heart
 failure. The etiology-fraction estimation does produce the quantity
 :math:`\text{CSMR}_{HF \text{ due to } e}` defined above as an
-intermediate. This model uses that quantity as a validation target
-for its HF deaths. See `Validation Criteria`_.
+intermediate.
 
 Cause Hierarchy
 +++++++++++++++
@@ -439,8 +426,7 @@ Cause Hierarchy
 
 The figure shows the GBD heart failure impairment as the HF
 envelope, the seven proportion groupings with the etiologies that
-each one holds, the five bypass etiologies, and the aggregation of
-the groupings into the two HF states of this model.
+each one holds, and the five bypass etiologies.
 
 Restrictions
 ++++++++++++
@@ -517,7 +503,8 @@ left heart, pressure overload of the right heart, valve diseases,
 primary myocardial diseases, toxins, and stress cardiomyopathies. The
 artifact keeps the per-grouping detail for the validation of HF
 deaths (see `Validation Criteria`_). The state machine uses only the
-two aggregates.
+two aggregates. The brackets in the figure under `Cause Hierarchy`_
+show this aggregation.
 
 The five bypass etiologies (Chagas disease, degenerative mitral valve
 disease, calcific aortic valve disease, pulmonary arterial
@@ -883,9 +870,12 @@ states ``heart_failure_mild`` (381), ``heart_failure_moderate``
 medically managed level,
 ``generic_uncomplicated_disease_worry_and_daily_medication`` (559).
 The build reads their disability weights through the four IHD HF
-sequelae (5726, 383, 384, 385). The GBD 2023 mean DWs are 0.051 for
+sequelae (5726, 383, 384, 385). ``vivarium_inputs`` serves 250 of
+the 1000 GBD draws, and the means over those 250 draws are 0.051 for
 the controlled level, 0.043 for mild, 0.074 for moderate, and 0.183
-for severe. The prevalence of each level by cause comes from the four
+for severe. The means over all 1000 draws are the values in
+`Severity splits and disability weights`_. The prevalence of each
+level by cause comes from the four
 child impairments of HF (379 treated, 217 mild, 218 moderate, 219
 severe), which sum to the HF impairment prevalence of each cause. The
 DW of a state is the prevalence-weighted mean of the four DWs over
@@ -1373,9 +1363,29 @@ Assumptions and Limitations
    The model supports time-to-first-event endpoints. Total
    hospitalization and win-ratio analyses need a hospitalization
    process on top of the prevalent state.
+
+   .. todo::
+      Possible extension for future work: add an HF hospitalization
+      event to the model, with age- and sex-specific hospitalization
+      rates for persons with and without IHD estimated from the
+      Friuli Venezia Giulia linked data. Linked data from Brazil may
+      also be relevant.
+
 #. **Disability weights do not depend on EF and blend the severity
    levels.** The GBD severity splits are symptom-based. The model
-   does not vary the DW by EF class.
+   does not represent the severity levels as states. Each HF state
+   carries the prevalence-weighted blend of the DWs of its severity
+   sequelae, and the artifact carries the severity-split proportions
+   by age and sex (see `GBD identifiers and artifact keys`_) if a
+   consuming project needs them. The EF attribute is independent of
+   the severity split, and the model does not vary the DW by EF
+   class. The YLD check in `Validation Criteria`_ confirms that the
+   blended weights reproduce the GBD YLDs.
+
+   .. todo::
+      Find out whether the literature reports a relationship between
+      EF and symptom severity.
+
 #. **Etiology proportions estimated in prevalence space are applied
    to incidence.** The GBD etiology fractions come from prevalence
    (CSMR divided by EMR). Applying them to incident events assumes
@@ -1635,7 +1645,8 @@ References
    subnational locations, 1990-2023: a systematic analysis for the
    Global Burden of Disease Study 2023. Lancet. 2025;406(10513):1811-1872.
    doi:10.1016/S0140-6736(25)01917-8. Supplementary appendix 1,
-   §3.7 Redistribution of garbage codes, pp. 20-21.
+   §3.7 Redistribute (Step 5), pp. 20-22. The multiple-cause method
+   is in §3.7.3.
 
 .. [Wilcox-2020] Wilcox JE, Fang JC, Margulies KB, et al. Heart
    failure with recovered left ventricular ejection fraction: JACC
