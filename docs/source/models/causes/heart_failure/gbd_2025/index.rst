@@ -4,29 +4,35 @@
 Heart Failure: GBD 2025
 ========================
 
-In GBD, heart failure (HF) is an impairment, not a cause. GBD
-distributes the nonfatal burden of HF across the causes that produce
-it, as severity-graded sequelae of those causes. GBD treats deaths
-coded to HF as "garbage codes" and redistributes them to an
-underlying cause. This page documents a Vivarium cause model of heart
-failure built on GBD 2025 inputs. The model splits the HF envelope
+This page documents a Vivarium cause model of heart
+failure built on GBD 2025 inputs. The model can split the HF envelope
 into two states by etiology, ischemic and non-ischemic. It gives each
 simulant a continuous ejection fraction (EF) attribute at HF onset.
 Observers classify events into HFrEF, HFmrEF, and HFpEF with
 configurable cutoffs.
 
-This model succeeds the fused ischemic heart disease and heart failure
-model documented at :ref:`2019_cause_ihd`. It keeps the etiology
-proportions of that model, and like that model it uses the excess
+In GBD, heart failure (HF) is an impairment, not a cause. GBD
+distributes the nonfatal burden of HF across the causes that produce
+it, as severity-graded sequelae of those causes. GBD treats deaths
+coded to HF as "garbage codes" and redistributes them to an
+underlying cause. 
+
+This model is a successor to the ischemic-heart-disease-and-heart-failure
+model documented at :ref:`2019_cause_ihd` and incorporates experience from a 
+simulation we did for a CSU client in 2026 that we did not document in this repo
+for reasons of confidentiality. This model matches the etiology
+proportions from :ref:`2019_cause_ihd`, and like that model it uses the excess
 mortality rate of the HF envelope, undifferentiated by etiology. It
 differs in three ways:
 
 1. HF has its own cause model. It does not share a state machine with
    ischemic heart disease (IHD).
-2. In a simulation that also models IHD, one optional coupling
-   component raises the ischemic HF hazard for simulants with a
+2. In a simulation that also models IHD, it uses a "coupling
+   component" pattern to increase the ischemic HF hazard for simulants with a
    history of myocardial infarction (MI) and removes the
-   HF-due-to-IHD deaths from the excess mortality of the IHD model.
+   HF-due-to-IHD deaths from the excess mortality of the IHD model (a pattern analogous to the
+   approach we use to match all-cause mortality when a model with cause-specific mortality 
+   is included in a sim).
    The population-level HF incidence does not change. See `The IHD-HF
    coupling component`_.
 3. The EF attribute is new.
@@ -93,44 +99,105 @@ Heart failure is a condition in which the heart does not pump enough
 blood to meet the needs of the body. In some patients the heart does
 not fill with enough blood. In other patients the heart does not
 eject blood with enough force. Some patients have both problems.
-Heart failure develops over time as the pumping action of the heart
-weakens. It can affect one or both sides of the heart. The leading
-causes are diseases that damage the heart, including ischemic heart
-disease, high blood pressure, and cardiomyopathies. Heart failure is
-a chronic and progressive condition. Medication, devices, and
-lifestyle change can control the symptoms. Most patients have
-repeated hospitalizations and a high mortality rate. [NHLBI-HF]_
+Heart failure can develop suddenly or over time as the heart gets
+weaker. It can affect one or both sides of the heart. [NHLBI-HF]_
 [AHA-HF]_
+
+Heart failure is a clinical syndrome with many underlying causes, not
+a single disease [Bozkurt-2021]_. GBD models it as an impairment of
+other causes. The GBD 2017 analysis attributed it to 23 underlying
+causes. Ischemic heart disease (26.5% of the age-standardized
+prevalence), hypertensive heart disease (26.2%), and chronic
+obstructive pulmonary disease (23.4%) were the three largest
+contributors worldwide, and the levels and trends of HF burden varied
+widely by geography and socio-demographic index [Bragazzi-2021]_.
+This page uses the GBD cause taxonomy. See `Cause Hierarchy`_ and
+`GBD 2025 Non-Fatal Modeling Strategy`_.
+
+Heart failure is usually chronic and progressive, but not always.
+Some patients improve, usually with treatment. The universal
+definition names this group HF with improved EF (HFimpEF). About 10%
+to 40% of patients with HFrEF reach that definition, depending on the
+cohort and the definition, and relapse is frequent [Bozkurt-2021]_
+[Wilcox-2020]_. Medication, devices, and lifestyle change can control
+the symptoms. Most patients have repeated hospitalizations, more than
+half of them for non-cardiovascular reasons [Dunlay-2009]_, and
+mortality after diagnosis is high [Gerber-2015]_. The model on this
+page does not represent improvement or recovery. See `Assumptions and
+Limitations`_.
 
 **Ejection-fraction phenotypes**
 
 Clinicians stratify heart failure by left ventricular ejection
 fraction (LVEF). The consensus definitions [Bozkurt-2021]_
-[ESC-2021]_ distinguish three phenotypes: heart failure with reduced
+[ESC-2021]_ distinguish three classes: heart failure with reduced
 ejection fraction (HFrEF, LVEF :math:`\leq` 40%), heart failure with
 mildly reduced ejection fraction (HFmrEF, LVEF 41–49%), and heart
 failure with preserved ejection fraction (HFpEF, LVEF :math:`\geq`
-50%). This page calls these three phenotypes the EF classes. The EF
-classes differ in etiology and epidemiology:
+50%). The universal definition [Bozkurt-2021]_ adds a fourth
+category, HF with improved EF (HFimpEF): a baseline LVEF of 40% or
+less, a rise of at least 10 points, and a second measurement above
+40%. HFimpEF is a trajectory after diagnosis, usually under
+treatment, rather than a class at onset. This page does not use it.
+See `Assumptions and Limitations`_. This page calls the three classes
+the EF classes. The EF classes differ in etiology and epidemiology:
 
-- HFrEF is more often ischemic in origin (prior MI or coronary
-  disease). It is more common in men. Most guideline-directed medical
-  therapy was developed for HFrEF.
+- HFrEF is more often ischemic in origin than HFpEF, but the contrast
+  is moderate. In a pooled analysis of 12 observational studies,
+  ischemic heart disease was present in 53% of HFrEF and 39% of HFpEF
+  [Lauritsen-2018]_, and in the MAGGIC meta-analysis ischemic
+  etiology was 59% in HFrEF and 43% in HFpEF [MAGGIC-2012]_. HFrEF
+  is more common in men. Historically, most
+  guideline-directed medical therapy was developed for HFrEF. Since
+  2023, SGLT2 inhibitors carry a class I recommendation in HFmrEF and
+  HFpEF as well [ESC-2023]_.
 - HFpEF is more often associated with hypertension, obesity, atrial
   fibrillation, and older age. It is more common in women. Its share
-  of incident HF rises with age. In community cohorts, about half of
-  incident HF is HFpEF. Its share of hospitalized HF has risen over
-  time. [Ho-2016]_ [Gerber-2015]_ [Steinberg-2012]_
-- HFmrEF is intermediate on most characteristics. The model keeps it
-  as a class so that analysts can vary the cutoffs.
+  of incident HF rises with age. In the pooled community cohorts,
+  HFpEF was about half of classified incident HF in an analysis that
+  set the HFpEF cutoff at an EF above 45% [Ho-2016]_, and about 40%
+  in one that used the 50% cutoff with a separate HFmrEF band
+  [Bhambhani-2018]_. Its share of hospitalized
+  HF has risen over time. [Ho-2016]_ [Gerber-2015]_ [Steinberg-2012]_
+- HFmrEF sits between the other two classes on age and sex, but it
+  resembles HFrEF in etiology (ischemic heart disease in 49% of
+  HFmrEF, 53% of HFrEF, and 39% of HFpEF) and in the use of
+  neurohormonal therapy [Lauritsen-2018]_. Its prognosis relative to
+  the other classes is unsettled. The pooled observational studies
+  found lower all-cause mortality in HFmrEF than in either other
+  class [Lauritsen-2018]_. The pooled community cohorts found
+  mortality after HFmrEF onset similar to HFrEF and higher than HFpEF
+  [Bhambhani-2018]_. The model keeps HFmrEF as a class so that
+  analysts can vary the cutoffs.
 
-Mortality after an HF diagnosis is high in all three classes. A
-meta-analysis of adjusted comparisons found a modestly lower
-mortality in HFpEF than in HFrEF [MAGGIC-2012]_. A community cohort
-found a smaller difference [Gerber-2015]_.
+The cutoffs are conventions, and they are contested. Healthy women
+have a higher LVEF than men. In the Dallas Heart Study the median was
+75% in women and 70% in men, and a low LVEF at the 2.5th percentile
+was below 61% in women and below 55% in men [Chung-2006]_. One
+proposal sets the normal threshold by sex, at 55% or more in men and
+60% or more in women, with "reduced" below 40% and "mildly reduced"
+in between [Lam-Solomon-2021]_. Another view treats EF as a
+continuum. It calls the cutoffs arbitrary [Triposkiadis-2019]_,
+traces them to trial enrichment decisions rather than physiology, and
+recommends at most a split between reduced and not reduced
+[Dimond-2024]_. In the MAGGIC meta-analysis, the risk of death did
+not increase notably until EF fell below 40% [MAGGIC-2012]_. The EF
+attribute of this model is continuous, and its cutoffs are
+configurable, so an analysis can adopt any of these conventions.
 
-The EF attribute lets the model represent treatments whose efficacy
-differs between HFrEF and HFpEF.
+Mortality after an HF diagnosis is high in all three classes.
+Whether it differs by class is unsettled. The MAGGIC meta-analysis of
+adjusted comparisons found possibly lower all-cause mortality in
+HFpEF than in HFrEF (adjusted hazard ratio 0.68) [MAGGIC-2012]_.
+Community cohorts found a smaller difference or none. In Olmsted
+County, HFpEF had a lower hazard of cardiovascular death than HFrEF
+(0.79) and the same hazard of non-cardiovascular death
+[Gerber-2015]_, and in an earlier Olmsted cohort preserved EF was
+associated with lower cardiovascular death but not lower all-cause
+death [Henkel-2008]_. In the Framingham and Cardiovascular Health
+Study cohorts, mortality did not differ between HFpEF and HFrEF
+[Tsao-2018]_. In these community cohorts, about half of the deaths
+after HF were non-cardiovascular [Gerber-2015]_ [Henkel-2008]_.
 
 
 GBD 2025 Modeling Strategy
@@ -176,22 +243,16 @@ etiology.
 
 The non-fatal model of the HF envelope produces prevalence,
 incidence, and an excess mortality rate for the envelope as a whole.
-This cause model uses all three. See `Excess mortality`_ for the use
-of the EMR.
+This cause model uses all three.
 
 **Etiological fraction estimation**
 
-Four etiologies bypass the proportion framework. GBD models HF due to
-Chagas disease, degenerative mitral valve disease, and calcific
-aortic valve disease inside each parent cause. GBD sets HF after
-acute stroke by a literature assumption that 5% of acute strokes
-result in HF. GBD subtracts all four from the envelope before it
-estimates and applies the proportions below. The scaled proportions
-multiply the HF prevalence that excludes these four etiologies
-[GBD-2023-NF]_.
-
-For every other etiology, GBD estimates the prevalence of HF due to
-that etiology with the epidemiological identity
+GBD attributes the HF envelope to 30 mutually exclusive and
+collectively exhaustive etiologies, including an "other" category.
+Table 3 of the GBD 2023 appendix lists them, with stroke split into
+acute and chronic [GBD-2023-NF]_. For most etiologies, GBD estimates
+the prevalence of HF due to that etiology with the epidemiological
+identity
 
 .. math::
    \text{Prevalence}_{HF \text{ due to } e} =
@@ -207,13 +268,9 @@ where the etiology-specific HF CSMR is
 :math:`e` after CoDCorrect. :math:`\text{PropDeathsWithHF}_{e}` is
 the modeled fraction of deaths from etiology :math:`e` in which HF
 appears in the causal chain. GBD estimates it in MR-BRT from the
-person-level vital registration data. For hypertensive heart disease,
-alcoholic cardiomyopathy, and other cardiomyopathy, GBD sets the
-proportion to 1, because all deaths from these causes involve HF. GBD
-estimates the etiology-specific EMR in MR-BRT from the linked Friuli
-Venezia Giulia data. GBD sets the EMR equal across etiologies for
-ages under 45 because the number of deaths at those ages is small
-[GBD-2023-NF]_.
+person-level vital registration data. GBD estimates the
+etiology-specific EMR in MR-BRT from the linked Friuli Venezia Giulia
+data [GBD-2023-NF]_.
 
 GBD divides each etiology-specific prevalence by the prevalence of
 the HF envelope to give a proportion. GBD aggregates the proportions
@@ -225,16 +282,59 @@ death-derived proportions and literature data inform one proportion
 model per grouping, with country-level SEV covariates. GBD then
 scales the outputs of the proportion models so that they sum to one.
 The scaling happens after the proportion models, not on the raw
-quotients. In sub-Saharan Africa, GBD excludes the death-derived
-proportions and uses the THESUS-HF study instead [THESUS]_. GBD then
-splits each grouping into its sub-causes in proportion.
+quotients. GBD multiplies the scaled proportions by the prevalence of
+the HF envelope and then splits each grouping into its sub-causes in
+proportion [GBD-2023-NF]_.
+
+Four special cases depart from this approach [GBD-2023-NF]_.
+
+#. **Proportion of deaths fixed at one.** For hypertensive heart
+   disease, alcoholic cardiomyopathy, and other cardiomyopathy, GBD
+   sets :math:`\text{PropDeathsWithHF}_{e}` to 1, because all deaths
+   from these causes involve HF.
+#. **One EMR under age 45.** GBD sets the EMR equal across etiologies
+   for ages under 45, because the number of deaths at those ages is
+   small.
+#. **Sub-Saharan Africa.** GBD excludes the death-derived proportions
+   and informs the proportion models with published literature alone.
+   GBD bases this choice on expert opinion and on the THESUS-HF
+   study, an echocardiographic study of HF etiologies in several
+   African countries, which found an etiology pattern that differed
+   from the pattern the death data would have given [THESUS]_.
+#. **Bypass etiologies.** Five etiologies bypass the proportion
+   framework. GBD estimates HF due to Chagas disease, degenerative
+   mitral valve disease, calcific aortic valve disease, and pulmonary
+   arterial hypertension inside each parent cause model, because
+   those models estimate their HF burden directly. GBD sets HF after
+   acute stroke by a literature assumption that 5% of acute strokes
+   result in HF. GBD adds the Chagas estimate to the envelope,
+   because the envelope data are sparse where Chagas is endemic, and
+   subtracts the other four from the envelope. The scaled proportions
+   multiply the envelope prevalence that excludes all five. HF due to
+   chronic stroke follows the typical approach.
 
 The seven groupings are the taxonomy of the HF proportion models.
 They are not GBD cause-list labels. Coronary artery disease
 corresponds to the IHD cause. Pressure overload of the left heart
 corresponds to hypertensive heart disease. Pressure overload of the
-right heart corresponds to the cardiopulmonary causes. Valve diseases
-include rheumatic and non-rheumatic valve disease.
+right heart corresponds to the chronic respiratory diseases and
+pulmonary arterial hypertension. Valve diseases include rheumatic
+heart disease, congenital heart anomalies, endocarditis, and the
+non-rheumatic valve diseases. Primary myocardial diseases are
+myocarditis and other cardiomyopathy. Toxins are alcoholic
+cardiomyopathy, cocaine and amphetamine use disorders, and Chagas
+disease. Stress cardiomyopathies collect the remaining etiologies:
+thyroid disease, the hemoglobinopathies, other cardiovascular and
+circulatory diseases, atrial fibrillation, chronic kidney disease,
+cirrhosis, and stroke [GBD-2023-NF]_.
+
+.. todo::
+   Reconcile the etiology count. The GBD 2023 appendix prose says 27
+   causes, and its Table 3 lists 30 etiologies, or 31 with acute and
+   chronic stroke separate. The GBD 2023 reporting hierarchy lists 40
+   most-detailed cause-impairment pairs for HF, because it splits
+   chronic kidney disease, cirrhosis, and stroke into sub-causes.
+   Check the list against the GBD 2025 appendix.
 
 This model aggregates the seven groupings two ways. The coronary
 artery disease proportion defines the ischemic state. The other six
@@ -309,34 +409,12 @@ produce the quantity :math:`\text{CSMR}_{HF \text{ due to } e}`
 defined above as an intermediate. This model uses that quantity as a
 validation target for its HF deaths. See `Validation Criteria`_.
 
-Simulants in this model occupy HF states that have an excess
-mortality rate. The simulation therefore produces deaths attributed
-to heart failure. GBD has no directly comparable published quantity.
-The validation must check these deaths with care. See `Validation
-Criteria`_.
-
-What GBD does not estimate
-++++++++++++++++++++++++++
-
-**No ejection-fraction axis.** No GBD quantity is resolved by
-ejection fraction. This applies to the envelope prevalence and
-incidence, the etiology proportions, the severity splits, and the
-EMR. Every EF-related parameter in this model therefore comes from
-the clinical and epidemiologic literature. The model places the EF
-attribute downstream of all GBD-derived quantities, so the EF
-attribute does not change the GBD calibration.
-
-**No published HF deaths.** GBD publishes no deaths due to heart
-failure. The EMR of the HF envelope is the only GBD quantity that
-gives a mortality rate for HF, and this model uses it. See `Excess
-mortality`_.
-
 Cause Hierarchy
 +++++++++++++++
 
 .. todo::
    Add ``cause_hierarchy_hf.svg``: the seven GBD proportion groupings
-   (plus the four bypass etiologies) feeding the HF envelope, with
+   (plus the five bypass etiologies) feeding the HF envelope, with
    the ischemic and non-ischemic aggregation used by this model
    marked.
 
@@ -351,23 +429,11 @@ etiology mix varies strongly with age.
    Confirm the ME and ``rei_id`` of the HF envelope in GBD 2025.
 
 ============================  =============================================
-Sex                           Both (male and female estimated separately)
+Sex                           Male and female estimated separately
 Age group start               Early Neonatal (``age_group_id`` 2)
 Age group end                 95 plus (``age_group_id`` 235)
 Measures published            Prevalence, YLDs
 ============================  =============================================
-
-Heart failure is an impairment, not a cause. The cause-level YLL-only
-and YLD-only restriction flags do not apply. GBD publishes no YLLs for
-the impairment. GBD redistributes deaths coded to heart failure to the
-underlying cause of death. Heart failure contributes YLDs only, and
-GBD attributes those YLDs to the etiologic causes.
-
-Prevalence is non-zero in every age group from birth. In infancy,
-congenital heart anomalies dominate the envelope (76% at 1 to 5
-months). Ischemic and hypertensive heart disease together account for
-55% of the envelope at age 40 to 44 and 65% at age 85 to 89
-[GBD-2023-NF]_.
 
 
 Vivarium Modeling Strategy
@@ -404,8 +470,10 @@ Model structure
 The cause model has three states: susceptible (``S``), heart failure
 of ischemic etiology (``HF_I``), and heart failure of non-ischemic
 etiology (``HF_NI``). Both HF states are absorbing. There is no
-remission. The two HF states are mutually exclusive. The etiology of
-a simulant is fixed at entry.
+remission, no recovery transition, and no state for HF with improved
+EF (HFimpEF). The two HF states are mutually exclusive. The etiology
+of a simulant is fixed at entry, and so is the EF attribute. See
+`Assumptions and Limitations`_.
 
 The model splits the envelope incidence and prevalence by the GBD
 etiology proportions. It aggregates the seven etiology groupings two
@@ -425,15 +493,15 @@ deaths (see `Validation Criteria`_). The state machine uses only the
 two aggregates.
 
 .. todo::
-   The four bypass etiologies (Chagas disease, degenerative mitral
-   valve disease, calcific aortic valve disease, and HF after acute
-   stroke) sit outside the seven-grouping proportions. Decide whether
-   the prevalence of the non-ischemic state includes them (their HF
-   burden lives in the parent-cause models) or whether the envelope
-   used here already excludes them. For a high-income application,
-   we expect the valve diseases to be the bypass etiologies with
-   material burden. That expectation is a judgment, not a
-   measurement.
+   The five bypass etiologies (Chagas disease, degenerative mitral
+   valve disease, calcific aortic valve disease, pulmonary arterial
+   hypertension, and HF after acute stroke) sit outside the
+   seven-grouping proportions. Decide whether the prevalence of the
+   non-ischemic state includes them (their HF burden lives in the
+   parent-cause models) or whether the envelope used here already
+   excludes them. For a high-income application, we expect the valve
+   diseases to be the bypass etiologies with material burden. That
+   expectation is a judgment, not a measurement.
 
 The cause model itself never refers to MI history. In a simulation
 that also models IHD, MI history acts on the ``HF_I`` incidence-rate
@@ -547,8 +615,8 @@ States Data
    * - HF_I
      - excess mortality rate
      - :math:`\text{emr\_hf}`
-     - The envelope EMR, modified by the EF contrast. See `Excess
-       mortality`_
+     - The envelope EMR. The same value for both states and for all
+       EF values. See `Excess mortality`_
    * - HF_I
      - disability weight
      - prevalence-weighted blend of the DWs of the HF-due-to-IHD
@@ -561,8 +629,8 @@ States Data
    * - HF_NI
      - excess mortality rate
      - :math:`\text{emr\_hf}`
-     - The envelope EMR, modified by the EF contrast. See `Excess
-       mortality`_
+     - The envelope EMR. The same value for both states and for all
+       EF values. See `Excess mortality`_
    * - HF_NI
      - disability weight
      - prevalence-weighted blend of the DWs of the non-IHD HF severity
@@ -660,10 +728,6 @@ Data Sources
      - literature (registries)
      - Continuous EF draw given class
      - See `Ejection-fraction attribute`_
-   * - EF mortality contrast :math:`g(\text{EF})`
-     - literature
-     - EF-differential modifier on the state EMRs
-     - See `Excess mortality`_
 
 The IHD-HF coupling component
 +++++++++++++++++++++++++++++
@@ -718,9 +782,11 @@ special case. It is the model specification without this component.
      - Notes
    * - :math:`RR_{MI}`
      - TBD
-     - TBD. Candidate sources: post-MI registry cohorts
-       [Jernberg-2015]_, trial placebo arms [VALIANT]_, community
-       cohorts
+     - TBD. Candidate calibration source: the prior-MI hazard ratios
+       of the pooled community cohorts [Ho-2016]_ (one per EF
+       subtype, in the full text). Candidate validation sources: the
+       cumulative incidence of HF after MI in MI cohorts
+       [Hellermann-2003]_ [Gerber-2016]_ [Sulo-2016]_
      - Extraction pending. Decide between a constant value and a
        value stratified by age, sex, or time since MI
 
@@ -878,7 +944,10 @@ Excess mortality
 
 The excess mortality of both HF states is the EMR of the HF envelope
 from the GBD 2025 non-fatal model (DisMod-AT). The two states carry
-the same EMR. The CSMR of the model is the envelope prevalence times
+the same EMR, and the EMR does not vary with the EF attribute. This
+is an explicit simplifying assumption of the data strategy: one
+mortality input, the same for ischemic and non-ischemic HF and for
+all EF values. The CSMR of the model is the envelope prevalence times
 the envelope EMR, so the deaths that the two states emit sum to the
 CSMR by construction.
 
@@ -916,18 +985,24 @@ It is the validation target for the total HF deaths of the model. See
 Literature survival after diagnosis, from community HF cohorts
 [Gerber-2015]_ and the MAGGIC meta-analysis [MAGGIC-2012]_, is an
 external validation target for the envelope EMR. It is not a model
-input. See `Validation Criteria`_.
+input. Both sources report survival by EF class. Neither reports
+survival by etiology: MAGGIC adjusts for etiology, and the Olmsted
+cohort stratifies by EF type and by cause of death. See `Validation
+Criteria`_.
 
-The EF class modifies the state EMR multiplicatively through a
-function :math:`g(\text{EF})` (or through class-based hazard ratios).
-The model renormalizes the modifier within each state and each age
-and sex stratum, so that the state EMR, and therefore the CSMR, does
-not change:
+The literature does not settle whether mortality differs by EF
+class. The MAGGIC adjusted comparison found possibly lower mortality
+in HFpEF, and the community cohorts found a smaller difference or
+none (see `Disease Overview`_). GBD does not estimate the EMR by EF.
+The base model therefore carries no EF contrast on mortality.
 
-.. math::
-   \text{EMR}(a, s, \text{state}, \text{EF}) =
-   \text{emr\_hf}(a,s) \cdot
-   \frac{g(\text{EF})}{E[\,g(\text{EF}) \mid \text{state}, a, s\,]}
+.. todo::
+   Possible extension, not part of the base design. An EF-differential
+   modifier :math:`g(\text{EF})`, renormalized within each state and
+   each age and sex stratum so that the state EMR and the CSMR do not
+   change, would give the model a mortality gradient by EF class. If
+   it is added, extract :math:`g(\text{EF})` from one of
+   [MAGGIC-2012]_ or [Gerber-2015]_ and validate against the other.
 
 .. list-table:: Mortality parameters
    :widths: 15 20 25 25
@@ -941,21 +1016,11 @@ not change:
      - by age and sex
      - GBD 2025 non-fatal model of the HF envelope (DisMod-AT)
      - The only mortality input
-   * - EF mortality contrast :math:`g(\text{EF})`
-     - class HRs or a smooth function of EF
-     - [MAGGIC-2012]_, [Gerber-2015]_
-     - Renormalized to preserve the state EMR. Extraction pending
    * - Post-diagnosis survival targets
-     - survival curves by etiology and EF class
+     - survival curves by EF class
      - [MAGGIC-2012]_, [Gerber-2015]_
-     - Validation targets, not inputs
-
-.. todo::
-   [LIT] Extract :math:`g(\text{EF})` with uncertainty. The MAGGIC
-   adjusted comparison (lower mortality in HFpEF) and the community
-   cohort comparison (near-equal mortality) disagree. Decide which
-   one the model carries, and use the other as the validation
-   source.
+     - Validation targets, not inputs. Neither source gives survival
+       by etiology
 
 Risk-effects interface
 ++++++++++++++++++++++
@@ -1001,10 +1066,25 @@ Assumptions and Limitations
    [VOICE] Edit, cut, and re-rank this candidate list.
 
 #. **No remission or recovery.** The HF states are absorbing. The GBD
-   non-fatal model permits remission. Clinically, some patients (in
-   particular patients with improved EF) leave the Stage C symptom
-   level. We expect the model to overstate prevalent person-time at
-   older ages by a small amount.
+   non-fatal model permits remission. Clinically, some patients leave
+   the Stage C symptom level. The universal definition names the
+   group whose LVEF rises from 40% or less to above 40% HF with
+   improved EF (HFimpEF) [Bozkurt-2021]_. About 10% to 40% of HFrEF
+   patients reach that definition, depending on the cohort and the
+   definition, and relapse is frequent [Wilcox-2020]_. The model has
+   no HFimpEF state and no recovery transition. We expect the model
+   to overstate prevalent person-time at older ages by a small
+   amount, and to overstate the HFrEF share of the prevalent
+   population, because simulants who would have improved keep their
+   EF at onset.
+#. **One EMR for all EF values and both etiologies.** The excess
+   mortality rate is the GBD envelope EMR, with no contrast by EF
+   class and no contrast between ischemic and non-ischemic HF. The
+   literature comparisons by EF class disagree (see `Disease
+   Overview`_), and the GBD etiology-specific EMR is a possible
+   refinement that the base design does not use (see `Excess
+   mortality`_). Analyses that compare mortality between EF classes
+   or between etiologies see no difference by construction.
 #. **EF is fixed at onset.** There is no EF trajectory, no
    deterioration, and no improvement after treatment. The model does
    not represent a change of class over time (HF with improved EF).
@@ -1035,11 +1115,12 @@ Assumptions and Limitations
    base model does not use them. Like every GBD quantity on this
    page, the EMR is a general-population value. A consuming
    simulation may apply it to a risk-enriched cohort.
-#. **HF due to the four bypass etiologies** (Chagas disease,
+#. **HF due to the five bypass etiologies** (Chagas disease,
    degenerative mitral valve disease, calcific aortic valve disease,
-   and HF after acute stroke) sits outside the seven-grouping
-   proportions. Their treatment in the envelope of this model is an
-   open decision (see the todo in `Model structure`_).
+   pulmonary arterial hypertension, and HF after acute stroke) sits
+   outside the seven-grouping proportions. Their treatment in the
+   envelope of this model is an open decision (see the todo in `Model
+   structure`_).
 #. **Etiology is a label fixed at entry.** The model does not
    re-adjudicate it. A simulant who enters ``HF_NI`` and later has an
    MI stays in ``HF_NI``.
@@ -1144,9 +1225,9 @@ Internal invariants
 Checks of the parts that GBD does not estimate
 """"""""""""""""""""""""""""""""""""""""""""""
 
-The EF attribute, the MI-history effect, and the EF mortality
-contrast come from the literature, and some of their parameters are
-calibrated to literature targets. A quantity that calibrates a
+The EF attribute and the MI-history effect come from the
+literature, and some of their parameters are calibrated to literature
+targets. A quantity that calibrates a
 parameter cannot also validate it. For each literature parameter,
 the extraction therefore names a calibration source and a separate
 validation source, or a validation quantity that the calibration
@@ -1170,17 +1251,19 @@ source did not supply.
      - The class-conditional EF moments in a second registry, to be
        chosen in the extraction
    * - :math:`RR_{MI}`
-     - One post-MI cohort (for example [Jernberg-2015]_)
-     - The cumulative incidence of HF after MI in a second cohort
-       (for example [VALIANT]_), which the hazard ratio alone does
-       not fix
-   * - :math:`g(\text{EF})`
-     - One of [MAGGIC-2012]_ or [Gerber-2015]_
-     - The five-year survival by EF class in the other source
+     - The prior-MI hazard ratios of the pooled community cohorts
+       [Ho-2016]_
+     - The cumulative incidence of HF after MI in an MI cohort
+       ([Hellermann-2003]_: 36% over a mean of 7.6 years in Olmsted
+       County, 1979 to 1994; [Gerber-2016]_: 35% over a mean of 7.6
+       years, 1990 to 2010; [Sulo-2016]_: 12.6% of patients
+       discharged without HF, within a median of 3.2 years, in
+       Norway), which the hazard ratio alone does not fix
    * - Envelope EMR (GBD input)
      - none
-     - Survival after diagnosis by etiology and EF class in
-       [MAGGIC-2012]_ and [Gerber-2015]_
+     - Survival after diagnosis by EF class in [MAGGIC-2012]_ and
+       [Gerber-2015]_. Survival by etiology needs a source that
+       neither paper provides
 
 .. todo::
    Candidate additions to the validation plan, for review:
@@ -1221,7 +1304,7 @@ References
 
 .. [Framingham] McKee PA, Castelli WP, McNamara PM, Kannel WB. The
    natural history of congestive heart failure: the Framingham study.
-   N Engl J Med. 1971;285:1441-1446.
+   N Engl J Med. 1971;285(26):1441-1446.
 
 .. [Cardiology] Ponikowski P, et al. 2016 ESC Guidelines for the
    diagnosis and treatment of acute and chronic heart failure. Eur
@@ -1248,34 +1331,90 @@ References
    individual patient data meta-analysis. Eur Heart J.
    2012;33(14):1750-1757.
 
-.. [Jernberg-2015] Jernberg T, Hasvold P, Henriksson M, Hjelm H,
-   Thuresson M, Janzon M. Cardiovascular risk in post-myocardial
-   infarction patients: nationwide real world data demonstrate the
-   importance of a long-term perspective. Eur Heart J.
-   2015;36(19):1163-1170.
-
-.. [VALIANT] Velazquez EJ, Francis GS, Armstrong PW, et al. An
-   international perspective on heart failure and left ventricular
-   systolic dysfunction complicating myocardial infarction: the
-   VALIANT registry. Eur Heart J. 2004;25(21):1911-1919.
-
 .. [THESUS] Damasceno A, Mayosi BM, Sani M, et al. The causes,
    treatment, and outcome of acute heart failure in 1006 Africans
-   from 9 countries: results of the sub-Saharan Africa survey of
-   heart failure. Arch Intern Med. 2012;172(18):1386-1394.
+   from 9 countries. Arch Intern Med. 2012;172(18):1386-1394.
 
 .. [GBD-2023-NF] GBD 2023 Diseases, Injuries, and Risk Factors
    Collaborators. Burden of 375 diseases and injuries,
    risk-attributable burden of 88 risk factors, and healthy life
    expectancy in 204 countries and territories, including 660
    subnational locations, 1990-2023: a systematic analysis for the
-   Global Burden of Disease Study 2023. Lancet. 2025; published online
-   Oct 12. doi:10.1016/S0140-6736(25)01637-X. Supplementary appendix 1,
+   Global Burden of Disease Study 2023. Lancet. 2025;406(10513):1873-1922.
+   doi:10.1016/S0140-6736(25)01637-X. Supplementary appendix 1,
    "Heart failure impairment," pp. 645-660 (case definition, p. 648).
 
 .. [GBD-2023-CoD] GBD 2023 Causes of Death Collaborators. Global burden
    of 292 causes of death in 204 countries and territories and 660
    subnational locations, 1990-2023: a systematic analysis for the
-   Global Burden of Disease Study 2023. Lancet. 2025; published online
-   Oct 12. doi:10.1016/S0140-6736(25)01917-8. Supplementary appendix 1,
+   Global Burden of Disease Study 2023. Lancet. 2025;406(10513):1811-1872.
+   doi:10.1016/S0140-6736(25)01917-8. Supplementary appendix 1,
    §3.7 Redistribution of garbage codes, pp. 20-21.
+
+.. [Bragazzi-2021] Bragazzi NL, Zhong W, Shu J, et al. Burden of heart
+   failure and underlying causes in 195 countries and territories
+   from 1990 to 2017. Eur J Prev Cardiol. 2021;28(15):1682-1690.
+
+.. [Wilcox-2020] Wilcox JE, Fang JC, Margulies KB, et al. Heart
+   failure with recovered left ventricular ejection fraction: JACC
+   scientific expert panel. J Am Coll Cardiol. 2020;76(6):719-734.
+
+.. [Dunlay-2009] Dunlay SM, Redfield MM, Weston SA, et al.
+   Hospitalizations after heart failure diagnosis: a community
+   perspective. J Am Coll Cardiol. 2009;54(18):1695-1702.
+
+.. [Henkel-2008] Henkel DM, Redfield MM, Weston SA, et al. Death in
+   heart failure: a community perspective. Circ Heart Fail.
+   2008;1(2):91-97.
+
+.. [Tsao-2018] Tsao CW, Lyass A, Enserro D, et al. Temporal trends in
+   the incidence of and mortality associated with heart failure with
+   preserved and reduced ejection fraction. JACC Heart Fail.
+   2018;6(8):678-685.
+
+.. [Lauritsen-2018] Lauritsen J, Gustafsson F, Abdulla J.
+   Characteristics and long-term prognosis of patients with heart
+   failure and mid-range ejection fraction compared with reduced and
+   preserved ejection fraction: a systematic review and
+   meta-analysis. ESC Heart Fail. 2018;5(4):685-694.
+
+.. [Bhambhani-2018] Bhambhani V, Kizer JR, Lima JAC, et al.
+   Predictors and outcomes of heart failure with mid-range ejection
+   fraction. Eur J Heart Fail. 2018;20(4):651-659.
+
+.. [Chung-2006] Chung AK, Das SR, Leonard D, et al. Women have higher
+   left ventricular ejection fractions than men independent of
+   differences in left ventricular volume: the Dallas Heart Study.
+   Circulation. 2006;113(12):1597-1604.
+
+.. [Lam-Solomon-2021] Lam CSP, Solomon SD. Classification of heart
+   failure according to ejection fraction: JACC review topic of the
+   week. J Am Coll Cardiol. 2021;77(25):3217-3225.
+
+.. [Triposkiadis-2019] Triposkiadis F, Butler J, Abboud FM, et al. The
+   continuous heart failure spectrum: moving beyond an ejection
+   fraction classification. Eur Heart J. 2019;40(26):2155-2163.
+
+.. [Dimond-2024] Dimond MG, Ibrahim NE, Fiuzat M, et al. Left
+   ventricular ejection fraction and the future of heart failure
+   phenotyping. JACC Heart Fail. 2024;12(3):451-460.
+
+.. [ESC-2023] McDonagh TA, Metra M, Adamo M, et al. 2023 Focused
+   Update of the 2021 ESC Guidelines for the diagnosis and treatment
+   of acute and chronic heart failure. Eur Heart J.
+   2023;44(37):3627-3639.
+
+.. [Hellermann-2003] Hellermann JP, Goraya TY, Jacobsen SJ, et al.
+   Incidence of heart failure after myocardial infarction: is it
+   changing over time? Am J Epidemiol. 2003;157(12):1101-1107.
+
+.. [Gerber-2016] Gerber Y, Weston SA, Enriquez-Sarano M, et al.
+   Mortality associated with heart failure after myocardial
+   infarction: a contemporary community perspective. Circ Heart Fail.
+   2016;9(1):e002460.
+
+.. [Sulo-2016] Sulo G, Igland J, Vollset SE, et al. Heart failure
+   complicating acute myocardial infarction; burden and timing of
+   occurrence: a nation-wide analysis including 86 771 patients from
+   the Cardiovascular Disease in Norway (CVDNOR) project. J Am Heart
+   Assoc. 2016;5(1):e002667.

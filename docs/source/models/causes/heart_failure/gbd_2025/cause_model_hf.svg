@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="860" height="480" viewBox="0 0 860 480" font-family="Helvetica, Arial, sans-serif" font-size="15">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" font-family="Helvetica, Arial, sans-serif" font-size="15">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
@@ -8,46 +8,66 @@
     </marker>
   </defs>
 
+  <!-- White background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- Disease states: rounded rectangles with a solid border -->
+
   <!-- Susceptible state -->
-  <rect x="60" y="180" width="180" height="90" rx="8" fill="#ffffff" stroke="#333" stroke-width="2"/>
-  <text x="150" y="218" text-anchor="middle" font-weight="bold">S</text>
-  <text x="150" y="242" text-anchor="middle">Susceptible to HF</text>
+  <rect x="60" y="190" width="180" height="90" rx="8" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="150" y="228" text-anchor="middle" font-weight="bold">S</text>
+  <text x="150" y="252" text-anchor="middle">Susceptible to HF</text>
 
   <!-- HF ischemic state -->
-  <rect x="540" y="70" width="220" height="90" rx="8" fill="#ffffff" stroke="#333" stroke-width="2"/>
-  <text x="650" y="106" text-anchor="middle" font-weight="bold">HF_I</text>
-  <text x="650" y="130" text-anchor="middle">Heart failure, ischemic</text>
+  <rect x="580" y="70" width="220" height="90" rx="8" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="690" y="106" text-anchor="middle" font-weight="bold">HF_I</text>
+  <text x="690" y="130" text-anchor="middle">Heart failure, ischemic</text>
 
   <!-- HF non-ischemic state -->
-  <rect x="540" y="300" width="220" height="90" rx="8" fill="#ffffff" stroke="#333" stroke-width="2"/>
-  <text x="650" y="336" text-anchor="middle" font-weight="bold">HF_NI</text>
-  <text x="650" y="360" text-anchor="middle">Heart failure, non-ischemic</text>
+  <rect x="580" y="320" width="220" height="90" rx="8" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="690" y="356" text-anchor="middle" font-weight="bold">HF_NI</text>
+  <text x="690" y="380" text-anchor="middle">Heart failure, non-ischemic</text>
 
   <!-- T1: S -> HF_I -->
-  <line x1="240" y1="200" x2="535" y2="125" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="368" y="150" text-anchor="middle">T1: i_I(a,s)</text>
+  <line x1="240" y1="210" x2="575" y2="125" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="400" y="150" text-anchor="middle">T1: i_I(a,s)</text>
 
   <!-- T2: S -> HF_NI -->
-  <line x1="240" y1="250" x2="535" y2="330" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="365" y="320" text-anchor="middle">T2: i_NI(a,s)</text>
+  <line x1="240" y1="260" x2="575" y2="350" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="400" y="292" text-anchor="middle">T2: i_NI(a,s)</text>
 
-  <!-- Optional IHD-HF coupling component -->
-  <rect x="60" y="22" width="330" height="106" rx="8" fill="#f5f5f5" stroke="#888" stroke-width="2" stroke-dasharray="6,4"/>
-  <text x="225" y="46" text-anchor="middle" fill="#555" font-weight="bold">Optional IHD-HF coupling component</text>
-  <text x="225" y="66" text-anchor="middle" fill="#555">1. MI-history effect (exposure: IHD model's</text>
-  <text x="225" y="84" text-anchor="middle" fill="#555">MI-history attribute) multiplies T1, PAF-renormalized</text>
-  <text x="225" y="104" text-anchor="middle" fill="#555">2. reassigns HF-due-to-IHD deaths (nets the IHD EMR)</text>
-  <line x1="340" y1="128" x2="382" y2="152" stroke="#888" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-dash)"/>
+  <!-- Excess mortality out of HF_I -->
+  <line x1="805" y1="115" x2="930" y2="115" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="878" y="104" text-anchor="middle">excess mortality</text>
+  <text x="878" y="136" text-anchor="middle">emr_hf(a,s)</text>
 
-  <!-- EF attribute overlay -->
-  <rect x="560" y="185" width="180" height="80" rx="8" fill="#f5f5f5" stroke="#888" stroke-width="2" stroke-dasharray="6,4"/>
-  <text x="650" y="213" text-anchor="middle" fill="#555">EF attribute drawn</text>
-  <text x="650" y="235" text-anchor="middle" fill="#555">at state entry</text>
-  <line x1="650" y1="185" x2="650" y2="165" stroke="#888" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-dash)"/>
-  <line x1="650" y1="265" x2="650" y2="295" stroke="#888" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-dash)"/>
+  <!-- Excess mortality out of HF_NI -->
+  <line x1="805" y1="365" x2="930" y2="365" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="878" y="354" text-anchor="middle">excess mortality</text>
+  <text x="878" y="386" text-anchor="middle">emr_hf(a,s)</text>
+
+  <!-- Optional IHD-HF coupling component: chamfered box, dashed border (not a state), below S -->
+  <polygon points="72,320 368,320 380,332 380,442 368,454 72,454 60,442 60,332" fill="#f5f5f5" stroke="#888" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="220" y="344" text-anchor="middle" fill="#555" font-size="14" font-weight="bold">Optional IHD-HF coupling component</text>
+  <text x="220" y="366" text-anchor="middle" fill="#555" font-size="14">1. MI-history effect (exposure: the</text>
+  <text x="220" y="385" text-anchor="middle" fill="#555" font-size="14">IHD model's MI-history attribute)</text>
+  <text x="220" y="404" text-anchor="middle" fill="#555" font-size="14">multiplies T1, PAF-renormalized</text>
+  <text x="220" y="423" text-anchor="middle" fill="#555" font-size="14">2. reassigns HF-due-to-IHD deaths</text>
+  <text x="220" y="442" text-anchor="middle" fill="#555" font-size="14">(nets the IHD EMR)</text>
+  <!-- Dashed arrow from the component up to the T1 line; the gap is a jump over the T2 line -->
+  <line x1="330" y1="320" x2="330" y2="294" stroke="#888" stroke-width="2" stroke-dasharray="6,4"/>
+  <line x1="330" y1="274" x2="330" y2="190" stroke="#888" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-dash)"/>
+
+  <!-- EF attribute overlay: ellipse, dashed border (a simulant attribute, not a state) -->
+  <ellipse cx="690" cy="240" rx="105" ry="40" fill="#f5f5f5" stroke="#888" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="690" y="236" text-anchor="middle" fill="#555">EF attribute drawn</text>
+  <text x="690" y="258" text-anchor="middle" fill="#555">at state entry</text>
+  <line x1="690" y1="200" x2="690" y2="164" stroke="#888" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-dash)"/>
+  <line x1="690" y1="280" x2="690" y2="316" stroke="#888" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-dash)"/>
 
   <!-- Caption -->
-  <text x="60" y="425" fill="#555">HF_I and HF_NI are absorbing (no remission). Deaths occur from either HF state via EMR</text>
-  <text x="60" y="445" fill="#555">from the GBD DisMod-AT fit of the HF envelope. This model owns all HF-attributable</text>
-  <text x="60" y="465" fill="#555">deaths, and the coupling component reassigns the HF-due-to-IHD share from the IHD model.</text>
+  <text x="60" y="495" fill="#555">HF_I and HF_NI are absorbing (no remission). The emr_hf arrows show the excess mortality of either HF state,</text>
+  <text x="60" y="515" fill="#555">from the GBD DisMod-AT fit of the HF envelope. This model owns all HF-attributable deaths, and the coupling</text>
+  <text x="60" y="535" fill="#555">component reassigns the HF-due-to-IHD share from the IHD model. Dashed shapes are not states: the chamfered</text>
+  <text x="60" y="555" fill="#555">box is an optional component, and the ellipse is a simulant attribute.</text>
 </svg>
