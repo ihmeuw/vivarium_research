@@ -4,26 +4,15 @@
 Heart Failure: GBD 2025
 ========================
 
-This page documents a Vivarium cause model of heart
-failure built on GBD 2025 inputs. The model can split the HF envelope
-into two states by etiology, ischemic and non-ischemic. It gives each
+This page documents a Vivarium cause model for heart
+failure (HF) built on GBD 2025 inputs. The model splits the HF envelope
+into ischemic and non-ischemic HF. It gives each
 simulant a continuous ejection fraction (EF) attribute at HF onset.
-Observers classify events into HFrEF, HFmrEF, and HFpEF with
-configurable cutoffs.
-
-In GBD, heart failure (HF) is an impairment, not a cause. GBD
-distributes the nonfatal burden of HF across the causes that produce
-it, as severity-graded sequelae of those causes. GBD treats deaths
-coded to HF as "garbage codes" and redistributes them to an
-underlying cause. 
 
 This model is a successor to the ischemic-heart-disease-and-heart-failure
-model documented at :ref:`2019_cause_ihd` and incorporates experience from a 
+model documented at :ref:`2019_cause_ihd` and incorporates experience from a
 simulation we did for a CSU client in 2026 that we did not document in this repo
-for reasons of confidentiality. This model matches the etiology
-proportions from :ref:`2019_cause_ihd`, and like that model it uses the excess
-mortality rate of the HF envelope, undifferentiated by etiology. It
-differs in three ways:
+for reasons of confidentiality. This model differs from past approaches in three ways:
 
 1. HF has its own cause model. It does not share a state machine with
    ischemic heart disease (IHD).
@@ -31,10 +20,8 @@ differs in three ways:
    component" pattern to increase the ischemic HF hazard for simulants with a
    history of myocardial infarction (MI) and removes the
    HF-due-to-IHD deaths from the excess mortality of the IHD model (a pattern analogous to the
-   approach we use to match all-cause mortality when a model with cause-specific mortality 
+   approach we use to match all-cause mortality when a model with cause-specific mortality
    is included in a sim).
-   The population-level HF incidence does not change. See `The IHD-HF
-   coupling component`_.
 3. The EF attribute is new.
 
 .. contents::
@@ -101,36 +88,14 @@ not fill with enough blood. In other patients the heart does not
 eject blood with enough force. Some patients have both problems.
 Heart failure can develop suddenly or over time as the heart gets
 weaker. It can affect one or both sides of the heart. [NHLBI-HF]_
-[AHA-HF]_
-
-Heart failure is a clinical syndrome with many underlying causes, not
-a single disease [Bozkurt-2021]_. GBD models it as an impairment of
-other causes. The GBD 2017 analysis attributed it to 23 underlying
-causes. Ischemic heart disease (26.5% of the age-standardized
-prevalence), hypertensive heart disease (26.2%), and chronic
-obstructive pulmonary disease (23.4%) were the three largest
-contributors worldwide, and the levels and trends of HF burden varied
-widely by geography and socio-demographic index [Bragazzi-2021]_.
-This page uses the GBD cause taxonomy. See `Cause Hierarchy`_ and
-`GBD 2025 Non-Fatal Modeling Strategy`_.
-
-Heart failure is usually chronic and progressive, but not always.
-Some patients improve, usually with treatment. The universal
-definition names this group HF with improved EF (HFimpEF). About 10%
-to 40% of patients with HFrEF reach that definition, depending on the
-cohort and the definition, and relapse is frequent [Bozkurt-2021]_
-[Wilcox-2020]_. Medication, devices, and lifestyle change can control
-the symptoms. Most patients have repeated hospitalizations, more than
-half of them for non-cardiovascular reasons [Dunlay-2009]_, and
-mortality after diagnosis is high [Gerber-2015]_. The model on this
-page does not represent improvement or recovery. See `Assumptions and
-Limitations`_.
+[AHA-HF]_ Heart failure is a clinical syndrome with many underlying
+causes, not a single disease [Bozkurt-2021]_.
 
 **Ejection-fraction phenotypes**
 
 Clinicians stratify heart failure by left ventricular ejection
 fraction (LVEF). The consensus definitions [Bozkurt-2021]_
-[ESC-2021]_ distinguish three classes: heart failure with reduced
+[ESC-2021]_ distinguish three EF classes: heart failure with reduced
 ejection fraction (HFrEF, LVEF :math:`\leq` 40%), heart failure with
 mildly reduced ejection fraction (HFmrEF, LVEF 41–49%), and heart
 failure with preserved ejection fraction (HFpEF, LVEF :math:`\geq`
@@ -138,9 +103,8 @@ failure with preserved ejection fraction (HFpEF, LVEF :math:`\geq`
 category, HF with improved EF (HFimpEF): a baseline LVEF of 40% or
 less, a rise of at least 10 points, and a second measurement above
 40%. HFimpEF is a trajectory after diagnosis, usually under
-treatment, rather than a class at onset. This page does not use it.
-See `Assumptions and Limitations`_. This page calls the three classes
-the EF classes. The EF classes differ in etiology and epidemiology:
+treatment, rather than a class at onset.
+The EF classes differ in etiology and epidemiology:
 
 - HFrEF is more often ischemic in origin than HFpEF, but the contrast
   is moderate. In a pooled analysis of 12 observational studies,
@@ -167,8 +131,7 @@ the EF classes. The EF classes differ in etiology and epidemiology:
   found lower all-cause mortality in HFmrEF than in either other
   class [Lauritsen-2018]_. The pooled community cohorts found
   mortality after HFmrEF onset similar to HFrEF and higher than HFpEF
-  [Bhambhani-2018]_. The model keeps HFmrEF as a class so that
-  analysts can vary the cutoffs.
+  [Bhambhani-2018]_.
 
 The cutoffs are conventions, and they are contested. Healthy women
 have a higher LVEF than men. In the Dallas Heart Study the median was
@@ -181,9 +144,7 @@ continuum. It calls the cutoffs arbitrary [Triposkiadis-2019]_,
 traces them to trial enrichment decisions rather than physiology, and
 recommends at most a split between reduced and not reduced
 [Dimond-2024]_. In the MAGGIC meta-analysis, the risk of death did
-not increase notably until EF fell below 40% [MAGGIC-2012]_. The EF
-attribute of this model is continuous, and its cutoffs are
-configurable, so an analysis can adopt any of these conventions.
+not increase notably until EF fell below 40% [MAGGIC-2012]_.
 
 Mortality after an HF diagnosis is high in all three classes.
 Whether it differs by class is unsettled. The MAGGIC meta-analysis of
@@ -198,6 +159,15 @@ death [Henkel-2008]_. In the Framingham and Cardiovascular Health
 Study cohorts, mortality did not differ between HFpEF and HFrEF
 [Tsao-2018]_. In these community cohorts, about half of the deaths
 after HF were non-cardiovascular [Gerber-2015]_ [Henkel-2008]_.
+
+Heart failure is usually chronic and progressive, but not always.
+Some patients improve, usually with treatment, and about 10%
+to 40% of patients with HFrEF reach the HFimpEF definition, depending on the
+cohort and the definition, and relapse is frequent [Bozkurt-2021]_
+[Wilcox-2020]_. Medication, devices, and lifestyle change can control
+the symptoms. Most patients have repeated hospitalizations, more than
+half of them for non-cardiovascular reasons [Dunlay-2009]_, and
+mortality after diagnosis is high [Gerber-2015]_.
 
 
 GBD 2025 Modeling Strategy
@@ -214,36 +184,70 @@ GBD 2025 Modeling Strategy
 GBD 2025 Non-Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++++++
 
+In GBD, heart failure is an impairment, not a cause. GBD estimates
+the total prevalence of HF in one model and then distributes that
+prevalence across the causes that produce HF. The result is a set of
+HF sequelae of those causes, each split into four severity levels.
+This page calls the total the HF envelope. Deaths coded to HF are
+redistributed to underlying causes (see `GBD 2025 Fatal Modeling
+Strategy`_).
+
 **Case definition**
 
-Clinicians diagnose heart failure with structured criteria such as
-the Framingham criteria [Framingham]_ or the European Society of
-Cardiology criteria [Cardiology]_. Since GBD 2016, the GBD case
-definition is ACC/AHA Stage C and above. The definition includes
-persons who have symptoms now and persons who have a diagnosis but no
-symptoms now (for example, persons whose HF is controlled by
-treatment). The GBD case definition does not refer to ejection
-fraction. The envelope includes HFrEF, HFmrEF, and HFpEF without
-distinction.
+GBD 2023 defines prevalent heart failure by the Universal Definition
+of Heart Failure: a clinical syndrome with signs or symptoms due to a
+structural or functional cardiac abnormality, corroborated by
+elevated natriuretic peptide levels, objective evidence of pulmonary
+or systemic congestion, or echocardiography. The definition includes
+structural heart disease with current or previous symptoms of HF
+(ACC/AHA Stage C and D). It excludes persons with structural heart
+disease, abnormal cardiac function, or elevated natriuretic peptides
+who have not had clinical signs or symptoms (Stage B). The reference
+case definition for input data is HF diagnosed by clinicians with
+structured criteria such as the Framingham criteria [Framingham]_ or
+the European Society of Cardiology criteria [Cardiology]_. The
+alternative definition is HF as coded in administrative health
+facility data, which GBD adjusts to the reference definition with an
+MR-BRT crosswalk [GBD-2023-NF]_. The GBD case definition does not
+refer to ejection fraction, so the envelope includes HFrEF, HFmrEF,
+and HFpEF without distinction.
 
 **Input data**
 
-Literature data, inpatient hospital data, and claims data inform the
-HF envelope (ME 2412 in GBD 2023). Two further data streams inform
-the etiology machinery. Person-level vital registration data with
+Literature data, inpatient hospital data, and inpatient and
+outpatient claims data inform the HF envelope. GBD does the age-sex
+splitting and the bias adjustments before the model, including an
+adjustment of inpatient data from primary-code to all-code counts
+based on claims data [GBD-2023-NF]_. The modelable entity of the
+envelope is ME 2412 in GBD 2023. That identifier comes from the GBD
+modelable-entity database, not from the appendix. Two further data
+streams inform the etiology machinery. Person-level vital registration data with
 causal-chain codes (United States, Mexico, Brazil, Taiwan, and
 Colombia) inform, for each etiology, the fraction of deaths from that
 underlying cause that have HF in the causal chain
 (:math:`\text{PropDeathsWithHF}_{e}` below). Person-level hospital
 discharge data from Friuli Venezia Giulia, Italy, linked to the death
 records of that region, inform the excess mortality of HF due to each
-etiology.
+etiology. The appendix states that this is the only location
+available to GBD with population-level linked data of this kind
+[GBD-2023-NF]_.
 
 **Envelope estimation**
 
-The non-fatal model of the HF envelope produces prevalence,
-incidence, and an excess mortality rate for the envelope as a whole.
-This cause model uses all three.
+GBD estimates the prevalence of the HF envelope in DisMod-MR 2.1 from
+the literature and administrative data, with a prior of no remission
+at all ages and all data adjustments done before the model. The EMR
+of the envelope enters DisMod-MR 2.1 as data. GBD extracts
+case-fatality rates from the literature, converts them to EMRs under
+the assumption that deaths among persons diagnosed with HF are caused
+by HF, and models the log EMR in MR-BRT on sex and a cubic spline in
+age, with the Healthcare Access and Quality (HAQ) Index as a
+covariate constrained to a negative coefficient. The MR-BRT
+predictions by location, year, sex, and ten-year age group are the
+EMR inputs, and the HAQ Index is also a country-level covariate on
+EMR in DisMod-MR 2.1 [GBD-2023-NF]_. The non-fatal model therefore
+produces prevalence, incidence, and an excess mortality rate for the
+envelope as a whole. This cause model uses all three.
 
 **Etiological fraction estimation**
 
@@ -278,13 +282,16 @@ to seven mutually exclusive and collectively exhaustive etiology
 groupings: coronary artery disease, pressure overload of the left
 heart, pressure overload of the right heart, valve diseases, primary
 myocardial diseases, toxins, and stress cardiomyopathies. These
-death-derived proportions and literature data inform one proportion
-model per grouping, with country-level SEV covariates. GBD then
-scales the outputs of the proportion models so that they sum to one.
-The scaling happens after the proportion models, not on the raw
-quotients. GBD multiplies the scaled proportions by the prevalence of
-the HF envelope and then splits each grouping into its sub-causes in
-proportion [GBD-2023-NF]_.
+death-derived proportions and literature data on the etiological
+attribution of HF inform one DisMod-MR 2.1 proportion model per
+grouping. Each model has one country-level covariate: an SEV scalar
+for six of the groupings, and mean systolic blood pressure for
+pressure overload of the left heart. GBD then scales the outputs of
+the proportion models so that they sum to one. The scaling happens
+after the proportion models, not on the raw quotients. GBD multiplies
+the scaled proportions by the prevalence of the HF envelope and then
+splits each grouping into its sub-causes with proportions from the
+same death-derived data [GBD-2023-NF]_.
 
 Four special cases depart from this approach [GBD-2023-NF]_.
 
@@ -344,14 +351,22 @@ structure`_.
 Severity splits and disability weights
 ++++++++++++++++++++++++++++++++++++++
 
-GBD splits the HF envelope into four severity levels: treated
-(controlled or medically managed), mild, moderate, and severe. The
-disability weights below are the GBD 2019 values. We believe they
-have not changed across recent rounds. See the todo below.
+GBD splits each etiology-specific HF estimate into four severity
+levels: controlled or medically managed (asymptomatic), mild,
+moderate, and severe. The splits come from an analysis of MEPS data,
+which the appendix describes as the only population-based source
+that links EQ-5D to ICD codes. For Chagas disease, which MEPS does
+not represent adequately, the splits come from a meta-analysis of
+NYHA class among persons with HF due to Chagas disease in endemic
+areas. The disability weights below are from Table 4 of the GBD 2023
+appendix [GBD-2023-NF]_.
 
 .. todo::
-   Check the severity-split proportions and the DW values against the
-   GBD 2025 YLD appendix when it is published.
+   Only the first row of the table (controlled, medically managed)
+   was checked verbatim against Table 4 of the GBD 2023 appendix
+   (p. 657). Check the mild, moderate, and severe rows against the
+   PDF, and check the severity-split proportions and the DW values
+   against the GBD 2025 YLD appendix when it is published.
 
 .. list-table:: Severity levels for heart failure and associated disability weights
    :widths: 15 25 12
@@ -360,7 +375,7 @@ have not changed across recent rounds. See the todo below.
    * - Severity level
      - Lay description
      - DW (95% CI)
-   * - Treated (controlled, medically managed)
+   * - Controlled, medically managed
      - Has been diagnosed with clinical heart failure, a chronic
        disease that requires medication every day and causes some
        worry but minimal interference with daily activities.
@@ -400,30 +415,42 @@ the blended weights reproduce the GBD YLDs.
 GBD 2025 Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++
 
-In GBD, heart failure is an impairment. When a reporting organization
-codes a death to heart failure, GBD redistributes the death to the
-underlying etiology as part of garbage-code redistribution
-[GBD-2023-CoD]_. CODEm and CoDCorrect produce no estimates of
-mortality due to heart failure. The etiology-fraction estimation does
-produce the quantity :math:`\text{CSMR}_{HF \text{ due to } e}`
-defined above as an intermediate. This model uses that quantity as a
-validation target for its HF deaths. See `Validation Criteria`_.
+In GBD, heart failure is an impairment, not a cause of death. The
+GBD causes-of-death appendix lists heart failure among the garbage
+codes, the intermediate or immediate causes that should not be
+considered the underlying cause of death. GBD redistributes deaths
+coded to heart failure (left, right, and unspecified) to underlying
+causes with fractions estimated from multiple-cause-of-death records
+from ten countries, in which the underlying cause and the causal
+chain are both coded. A mixed-effects linear regression estimates
+the fraction of heart-failure-related deaths by underlying GBD cause,
+and the resulting intermediate-cause fractions by age, sex,
+location, and year redistribute the deaths [GBD-2023-CoD]_. CODEm
+and CoDCorrect therefore produce no estimate of deaths due to heart
+failure. The etiology-fraction estimation does produce the quantity
+:math:`\text{CSMR}_{HF \text{ due to } e}` defined above as an
+intermediate. This model uses that quantity as a validation target
+for its HF deaths. See `Validation Criteria`_.
 
 Cause Hierarchy
 +++++++++++++++
 
-.. todo::
-   Add ``cause_hierarchy_hf.svg``: the seven GBD proportion groupings
-   (plus the five bypass etiologies) feeding the HF envelope, with
-   the ischemic and non-ischemic aggregation used by this model
-   marked.
+.. image:: cause_hierarchy_hf.svg
+
+The figure shows the GBD heart failure impairment as the HF
+envelope, the seven proportion groupings with the etiologies that
+each one holds, the five bypass etiologies, and the aggregation of
+the groupings into the two HF states of this model.
 
 Restrictions
 ++++++++++++
 
 GBD estimates the HF envelope (ME 2412 and ``rei_id`` 196 in GBD
 2023) for males and females across the full GBD age range. The
-etiology mix varies strongly with age.
+appendix does not state the age range. The GBD 2023 results carry
+nonzero prevalence of HF due to congenital heart anomalies from the
+early neonatal age group upward. In our judgment the etiology mix
+varies strongly with age.
 
 .. todo::
    Confirm the ME and ``rei_id`` of the HF envelope in GBD 2025.
@@ -492,16 +519,20 @@ artifact keeps the per-grouping detail for the validation of HF
 deaths (see `Validation Criteria`_). The state machine uses only the
 two aggregates.
 
-.. todo::
-   The five bypass etiologies (Chagas disease, degenerative mitral
-   valve disease, calcific aortic valve disease, pulmonary arterial
-   hypertension, and HF after acute stroke) sit outside the
-   seven-grouping proportions. Decide whether the prevalence of the
-   non-ischemic state includes them (their HF burden lives in the
-   parent-cause models) or whether the envelope used here already
-   excludes them. For a high-income application, we expect the valve
-   diseases to be the bypass etiologies with material burden. That
-   expectation is a judgment, not a measurement.
+The five bypass etiologies (Chagas disease, degenerative mitral valve
+disease, calcific aortic valve disease, pulmonary arterial
+hypertension, and HF after acute stroke) sit outside the
+seven-grouping proportion models, but they are inside the published
+results. The GBD prevalence of the HF impairment is the sum of the
+prevalence of HF due to each of its 40 most-detailed cause pairs, and
+those pairs include the bypass etiologies. This model takes its
+proportions from those pairs (see `GBD identifiers and artifact
+keys`_), so the non-ischemic state includes the bypass etiologies.
+They matter in a high-income location. In the GBD 2023 results for
+the United States in 2023, the two bypass valve diseases are 15% of
+HF prevalence in males aged 70 to 74 and 47% in males aged 95 and
+over. Chagas disease and pulmonary arterial hypertension are each
+under 1% at those ages.
 
 The cause model itself never refers to MI history. In a simulation
 that also models IHD, MI history acts on the ``HF_I`` incidence-rate
@@ -664,10 +695,16 @@ Transition Data
        \text{prop}_{NI}}{1 - \text{prevalence\_hf}}`
      - Rate per susceptible simulant. Not conditioned on MI history
 
-.. todo::
-   Confirm the denominator convention against the rate-rescaling
-   behavior of the consuming framework (population-rate input or
-   susceptible-rate input) before implementation.
+The transition rates are rates per susceptible simulant, which is the
+convention of the Vivarium framework. ``vivarium_inputs`` makes this
+conversion for a GBD cause: it divides the GBD population incidence
+by one minus the prevalence (``core.py``). The HF envelope is a
+modelable entity, not a cause, so ``vivarium_inputs`` does not pull
+it, and the artifact build makes the same division itself. The
+artifact key ``cause.heart_failure.incidence_rate`` holds the
+susceptible-population rate, and
+``cause.heart_failure.population_incidence_rate`` holds the GBD
+population rate for the incidence check in `Validation Criteria`_.
 
 Data Sources
 """"""""""""
@@ -681,41 +718,59 @@ Data Sources
      - Description
      - Notes
    * - prevalence_hf
-     - como
+     - como, HF impairment
      - Prevalence of the HF envelope
-     - ME 2412 in GBD 2023
+     - The all-cause row of the HF impairment (``rei_id`` 196,
+       measure 5). It equals the sum over the 40 cause-impairment
+       pairs. See `GBD identifiers and artifact keys`_
    * - incidence_hf
-     - DisMod-AT, como
-     - Incidence of the HF envelope
-     - ME 2412 in GBD 2023
+     - DisMod, HF envelope model
+     - Population incidence of the HF envelope
+     - ME 2412 in GBD 2023 (measure 6). como has no incidence for an
+       impairment. The artifact converts the population rate to a
+       susceptible-population rate (see `Transition Data`_)
    * - emr_hf
-     - DisMod-AT
+     - DisMod, HF envelope model
      - Excess mortality rate of the HF envelope
-     - ME 2412 in GBD 2023. See `Excess mortality`_
+     - ME 2412 in GBD 2023 (measure 9). See `Excess mortality`_
    * - propHF_e (seven groupings)
-     - CVD team / GBD etiology proportion models
+     - como, HF impairment by cause
      - Proportion of HF attributable to grouping :math:`e`, by age,
-       sex, and location, in the seven-grouping proportion taxonomy
-     - GBD 2025 regeneration of the proportions file used in
-       :ref:`2019_cause_ihd`
+       sex, year, and location
+     - Prevalence of HF due to each most-detailed cause (``rei_id``
+       196 by ``cause_id``), summed over the causes of the grouping
+       and divided by prevalence_hf. Not the DisMod proportion-model
+       MEs. See `GBD identifiers and artifact keys`_
    * - CSMR_e
      - CoDCorrect
      - Cause-specific mortality of etiology :math:`e` (after
        CoDCorrect)
-     - Validation only
+     - Validation only. Pulled with ``vivarium_inputs`` for each of
+       the 40 causes. The United States has no non-zero CSMR for
+       Chagas disease
    * - :math:`\text{CSMR}_{HF \text{ due to } e}`
      - CVD team (= CSMR_e :math:`\times` PropDeathsWithHF_e)
      - HF-attributable death rate per grouping
-     - Validation only. See `Validation Criteria`_
+     - Validation only. Not in the central GBD databases. See
+       `Validation Criteria`_
    * - PropDeathsWithHF_e
      - CVD team (MR-BRT)
      - Fraction of etiology-:math:`e` deaths with HF in the causal
        chain
-     - Validation only. Equals 1 for HHD and the cardiomyopathies
-   * - HF severity sequela prevalences and DWs
-     - como, YLD appendix
+     - Validation only. Not in the central GBD databases. Equals 1
+       for HHD and the cardiomyopathies
+   * - HF severity prevalences and DWs
+     - como, HF severity impairments; GBD disability weights
      - For the per-state blended disability weights
-     -
+     - Prevalence of the four severity-level child impairments of HF
+       by cause (``rei_id`` 379 treated, which is the controlled and
+       medically managed level, 217 mild, 218 moderate, 219 severe).
+       The DWs are those of the four HF health states. See `GBD
+       identifiers and artifact keys`_
+   * - YLD rate of the HF impairment
+     - como
+     - For the disability check
+     - Validation only. ``rei_id`` 196, measure 3, all-cause row
    * - :math:`RR_{MI}`
      - literature
      - Hazard ratio for incident HF given prior MI
@@ -728,6 +783,228 @@ Data Sources
      - literature (registries)
      - Continuous EF draw given class
      - See `Ejection-fraction attribute`_
+
+GBD identifiers and artifact keys
+"""""""""""""""""""""""""""""""""
+
+A build of the artifact from the sources above ran on 2026-11-02 for
+the United States of America with GBD 2023 (release 16), which stands
+in for GBD 2025 until GBD 2025 is published. This section records the
+identifiers and derivations that the build needed and that the tables
+above do not give.
+
+**The HF envelope.** The GBD 2023 envelope is the DisMod-MR 2.1
+modelable entity 2412, best model version 831628. It serves
+prevalence, incidence, remission (zero), the excess mortality rate,
+and a cause-specific mortality rate that equals prevalence times EMR
+within 2%. The GBD 2025 DisMod-AT envelope is modelable entity 36582.
+It had no best model on 2026-11-02, and the GBD 2025 como results had
+no best version either. GBD serves DisMod results at the estimation
+years only (1990, 1995, 2000, 2005, 2010, 2015, 2020, 2022, 2023, and
+2024 for GBD 2023). ``vivarium_inputs`` interpolates them to annual
+years with the PCHIP routine of GBD, and the artifact build applies
+that routine to the envelope. como and CoDCorrect results are annual.
+The artifact carries annual inputs from 2005 to 2023.
+
+**Prevalence from como or from DisMod.** The published prevalence of
+the HF impairment (como) and the DisMod envelope prevalence (ME 2412)
+are not identical, because GBD subtracts four bypass etiologies from
+the envelope before the proportion split, adds Chagas disease to it,
+and estimates the bypass etiologies in their parent-cause models. For
+the United States from 2005 to 2023, the ratio of the como prevalence
+to the DisMod prevalence lies between 0.99 and 1.02 at ages 70 and
+over, between 0.96 and 1.01 at ages 45 to 69, between 0.90 and 1.02
+at ages 15 to 44, and between 0.87 and 1.03 under age 15. The
+artifact uses the como prevalence as prevalence_hf, so that the two
+state prevalences equal the GBD prevalence of HF due to the causes of
+each state. This is a judgment. The alternative, the DisMod
+prevalence, keeps the prevalence and the EMR from one model. The
+artifact stores the DisMod prevalence for comparison.
+
+**Proportions from como by cause, not from the proportion models.**
+The seven DisMod proportion models are modelable entities 24401
+(coronary artery disease), 24405 (pressure overload, left heart),
+24402 (pressure overload, right heart), 24404 (valvular heart
+disease), 24403 (primary myocardial disease), 2414 (toxins), and
+24406 (stress cardiomyopathies). Their outputs are the proportions
+before GBD scales them to sum to one. For the United States in 2023
+they sum to between 2.0 and 2.4. They also exclude the bypass
+etiologies, which GBD adds back from the parent-cause models after
+the split. The artifact therefore takes the proportions from the como
+prevalence of HF due to each cause, which is the final GBD output.
+The table below maps the 40 most-detailed GBD 2023 cause-impairment
+pairs to the seven groupings, following the taxonomy paragraph of
+`GBD 2025 Non-Fatal Modeling Strategy`_. The seven proportions sum to
+one by construction. For the United States in 2023, the coronary
+artery disease proportion in males is 0.34 at ages 50 to 54, 0.44 at
+ages 70 to 74, and 0.28 at ages 95 and over, where the valve diseases
+take 0.48.
+
+.. list-table:: GBD 2023 causes in each proportion grouping
+   :widths: 12 30
+   :header-rows: 1
+
+   * - Grouping
+     - Most-detailed GBD 2023 causes with an HF impairment pair
+   * - Coronary artery disease
+     - Ischemic heart disease
+   * - Pressure overload, left heart
+     - Hypertensive heart disease
+   * - Pressure overload, right heart
+     - Chronic obstructive pulmonary disease, silicosis, asbestosis,
+       coal workers pneumoconiosis, other pneumoconiosis,
+       interstitial lung disease and pulmonary sarcoidosis, and
+       pulmonary arterial hypertension (bypass)
+   * - Valve diseases
+     - Rheumatic heart disease, congenital heart anomalies,
+       endocarditis, non-rheumatic calcific aortic valve disease
+       (bypass), non-rheumatic degenerative mitral valve disease
+       (bypass), and other non-rheumatic valve diseases
+   * - Primary myocardial diseases
+     - Myocarditis and other cardiomyopathy
+   * - Toxins
+     - Alcoholic cardiomyopathy, cocaine use disorders, amphetamine
+       use disorders, and Chagas disease (bypass)
+   * - Stress cardiomyopathies
+     - Thyroid diseases, thalassemias, G6PD deficiency, other
+       hemoglobinopathies and hemolytic anemias, other cardiovascular
+       and circulatory diseases, atrial fibrillation and flutter, the
+       five chronic kidney disease sub-causes (hypertension,
+       glomerulonephritis, type 1 diabetes, type 2 diabetes, other
+       and unspecified causes), the five cirrhosis sub-causes
+       (hepatitis B, hepatitis C, alcohol, NAFLD, other causes), and
+       the three stroke sub-causes (ischemic stroke, intracerebral
+       hemorrhage, subarachnoid hemorrhage), which hold HF after
+       acute stroke (bypass) and after chronic stroke
+
+**Disability weights.** The four HF severity levels are the health
+states ``heart_failure_mild`` (381), ``heart_failure_moderate``
+(382), ``heart_failure_severe`` (383), and, for the controlled and
+medically managed level,
+``generic_uncomplicated_disease_worry_and_daily_medication`` (559).
+The build reads their disability weights through the four IHD HF
+sequelae (5726, 383, 384, 385). The GBD 2023 mean DWs are 0.051 for
+the controlled level, 0.043 for mild, 0.074 for moderate, and 0.183
+for severe. The prevalence of each level by cause comes from the four
+child impairments of HF (379 treated, 217 mild, 218 moderate, 219
+severe), which sum to the HF impairment prevalence of each cause. The
+DW of a state is the prevalence-weighted mean of the four DWs over
+the causes of the state. For the United States in 2023, both states
+have a DW of 0.095 in males aged 70 to 74. The sum over the states of
+prevalence times DW is 0% to 6% above the como YLD rate of the
+impairment. Our guess is that the gap is the comorbidity correction
+that como applies to YLDs.
+
+**Artifact keys.** The build writes the keys below. The state names
+``heart_failure_ischemic`` and ``heart_failure_non_ischemic`` are the
+``HF_I`` and ``HF_NI`` states. The standard population keys and the
+all-cause mortality key come from ``vivarium_inputs``.
+
+.. list-table:: Artifact keys
+   :widths: 25 30
+   :header-rows: 1
+
+   * - Key
+     - Contents
+   * - ``cause.heart_failure.prevalence``
+     - prevalence_hf (como)
+   * - ``cause.heart_failure.population_incidence_rate``
+     - incidence_hf (ME 2412), per person-year of population
+   * - ``cause.heart_failure.incidence_rate``
+     - incidence_hf divided by one minus prevalence_hf
+   * - ``cause.heart_failure.excess_mortality_rate``
+     - emr_hf (ME 2412)
+   * - ``cause.heart_failure.cause_specific_mortality_rate``
+     - prevalence_hf times emr_hf
+   * - ``cause.heart_failure.restrictions``
+     - No restrictions
+   * - ``cause.heart_failure.etiology_proportion``
+     - propHF_e for the seven groupings, with an index level
+       ``grouping``
+   * - ``cause.heart_failure.prevalence_by_cause``
+     - Prevalence of HF due to each of the 40 causes, with an index
+       level ``cause``
+   * - ``cause.heart_failure.yld_rate``
+     - YLD rate of the HF impairment (validation)
+   * - ``cause.heart_failure.dismod_prevalence`` and
+       ``cause.heart_failure.dismod_cause_specific_mortality_rate``
+     - ME 2412 prevalence and CSMR (comparison)
+   * - ``cause.heart_failure_ischemic.<measure>`` and
+       ``cause.heart_failure_non_ischemic.<measure>``
+     - ``prevalence``, ``incidence_rate``, ``excess_mortality_rate``,
+       ``disability_weight``, and ``cause_specific_mortality_rate``
+       for each state, as the state and transition tables define
+       them, and ``severity_split``, the share of each of the four
+       severity levels in the state, with an index level
+       ``severity``
+   * - ``cause.<cause>.cause_specific_mortality_rate``
+     - CSMR_e for 39 of the 40 causes (validation)
+   * - ``metadata.hf_artifact_build``
+     - Release, model version, years, and the grouping map of the
+       build
+
+**Reference values.** The table gives the mean over 250 draws for
+males in the United States in 2023 from the GBD 2023 build.
+
+.. list-table:: Reference values from the GBD 2023 build (United States, males, 2023)
+   :widths: 10 8 8 10 8 8 8
+   :header-rows: 1
+
+   * - Age group
+     - prevalence_hf
+     - :math:`\text{prop}_I`
+     - Incidence per susceptible person-year
+     - emr_hf (per year)
+     - DW of HF_I
+     - DW of HF_NI
+   * - 40 to 44
+     - 0.0025
+     - 0.23
+     - 0.0007
+     - 0.21
+     - 0.095
+     - 0.094
+   * - 60 to 64
+     - 0.015
+     - 0.44
+     - 0.0086
+     - 0.39
+     - 0.095
+     - 0.095
+   * - 70 to 74
+     - 0.054
+     - 0.44
+     - 0.028
+     - 0.43
+     - 0.095
+     - 0.095
+   * - 80 to 84
+     - 0.10
+     - 0.41
+     - 0.063
+     - 0.53
+     - 0.095
+     - 0.095
+   * - 95 and over
+     - 0.21
+     - 0.28
+     - 0.19
+     - 0.90
+     - 0.095
+     - 0.095
+
+A run of the three-state model (``S``, ``HF_I``, ``HF_NI``) from this
+artifact, with 50,000 simulants aged 30 to 95 for one year, ran end
+to end in the consuming framework. That run checks that the keys have
+the shapes and names the framework expects. It is not one of the
+runs of `Validation Criteria`_.
+
+.. todo::
+   The build of 2026-11-02 passed the model version of ME 2412
+   explicitly, because the central best-version service of GBD was
+   returning errors that day. Drop the explicit version when the
+   service is back. Move the build to GBD 2025 when ME 36582 has a
+   best model and como has a GBD 2025 version.
 
 The IHD-HF coupling component
 +++++++++++++++++++++++++++++
@@ -949,7 +1226,9 @@ is an explicit simplifying assumption of the data strategy: one
 mortality input, the same for ischemic and non-ischemic HF and for
 all EF values. The CSMR of the model is the envelope prevalence times
 the envelope EMR, so the deaths that the two states emit sum to the
-CSMR by construction.
+CSMR by construction. Until GBD 2025 is published, the GBD 2023
+DisMod-MR 2.1 envelope (ME 2412) stands in. See `GBD identifiers and
+artifact keys`_.
 
 This is the same source that the GBD 2019 model used
 (:ref:`2019_cause_ihd`). An intermediate design derived the state
@@ -1117,10 +1396,15 @@ Assumptions and Limitations
    simulation may apply it to a risk-enriched cohort.
 #. **HF due to the five bypass etiologies** (Chagas disease,
    degenerative mitral valve disease, calcific aortic valve disease,
-   pulmonary arterial hypertension, and HF after acute stroke) sits
-   outside the seven-grouping proportions. Their treatment in the
-   envelope of this model is an open decision (see the todo in `Model
-   structure`_).
+   pulmonary arterial hypertension, and HF after acute stroke) is
+   inside the non-ischemic state, because the proportions come from
+   the published prevalence of HF by cause, which includes them (see
+   `Model structure`_). The proportion models of GBD do not cover
+   them. In the GBD 2023 results for the United States in 2023, the
+   two valve diseases are 47% of HF prevalence in males and 30% in
+   females at ages 95 and over, so the parent-cause models of those
+   two diseases set much of the non-ischemic prevalence at the oldest
+   ages.
 #. **Etiology is a label fixed at entry.** The model does not
    re-adjudicate it. A simulant who enters ``HF_NI`` and later has an
    MI stays in ``HF_NI``.
@@ -1149,7 +1433,9 @@ consistency of the non-fatal cause models more strictly than earlier
 rounds. The comparison therefore covers a 20-year horizon, with one
 comparison at each of 2005, 2010, 2015, 2020, and 2025. The
 simulation reads year-specific inputs for every GBD quantity on this
-page.
+page. The GBD 2023 artifact carries annual inputs from 2005 to 2023
+(see `GBD identifiers and artifact keys`_). GBD 2023 has no 2025
+results, so the 2025 comparison waits for GBD 2025.
 
 Comparison with GBD
 """""""""""""""""""
@@ -1350,10 +1636,6 @@ References
    Global Burden of Disease Study 2023. Lancet. 2025;406(10513):1811-1872.
    doi:10.1016/S0140-6736(25)01917-8. Supplementary appendix 1,
    §3.7 Redistribution of garbage codes, pp. 20-21.
-
-.. [Bragazzi-2021] Bragazzi NL, Zhong W, Shu J, et al. Burden of heart
-   failure and underlying causes in 195 countries and territories
-   from 1990 to 2017. Eur J Prev Cardiol. 2021;28(15):1682-1690.
 
 .. [Wilcox-2020] Wilcox JE, Fang JC, Margulies KB, et al. Heart
    failure with recovered left ventricular ejection fraction: JACC

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="690" viewBox="0 0 1000 690" font-family="Helvetica, Arial, sans-serif" font-size="15">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+    <marker id="arrow-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- GBD quantities: plain rectangles with a solid border -->
+
+  <!-- HF envelope -->
+  <rect x="60" y="40" width="400" height="70" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="260" y="68" text-anchor="middle" font-weight="bold">HF envelope</text>
+  <text x="260" y="92" text-anchor="middle" font-size="14">GBD impairment: prevalence, incidence, and EMR</text>
+
+  <!-- Bypass etiologies: chamfered box, dashed border (estimated outside the proportion models) -->
+  <polygon points="532,40 948,40 960,52 960,98 948,110 532,110 520,98 520,52" fill="#f5f5f5" stroke="#888" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="740" y="60" text-anchor="middle" fill="#555" font-size="13" font-weight="bold">Bypass etiologies (†), estimated in parent-cause models</text>
+  <text x="740" y="80" text-anchor="middle" fill="#555" font-size="13">added to the envelope: Chagas disease</text>
+  <text x="740" y="99" text-anchor="middle" fill="#555" font-size="13">subtracted from it: DMVD, CAVD, PAH, HF after acute stroke</text>
+  <line x1="520" y1="75" x2="465" y2="75" stroke="#888" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-dash)"/>
+
+  <!-- Envelope to groupings -->
+  <line x1="185" y1="110" x2="185" y2="145" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="200" y="134" fill="#555" font-size="13">times the scaled proportion of each grouping (proportions sum to one)</text>
+
+  <!-- Seven proportion groupings, one row each; sub-causes to the right -->
+  <rect x="60" y="150" width="250" height="48" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="185" y="179" text-anchor="middle" font-size="14">Coronary artery disease</text>
+  <text x="325" y="179" font-size="13">Ischemic heart disease</text>
+
+  <rect x="60" y="208" width="250" height="48" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="185" y="237" text-anchor="middle" font-size="14">Pressure overload, left heart</text>
+  <text x="325" y="237" font-size="13">Hypertensive heart disease</text>
+
+  <rect x="60" y="266" width="250" height="48" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="185" y="295" text-anchor="middle" font-size="14">Pressure overload, right heart</text>
+  <text x="325" y="287" font-size="13">COPD, interstitial lung disease, pneumoconioses,</text>
+  <text x="325" y="304" font-size="13">pulmonary arterial hypertension†</text>
+
+  <rect x="60" y="324" width="250" height="48" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="185" y="353" text-anchor="middle" font-size="14">Valve diseases</text>
+  <text x="325" y="339" font-size="13">Rheumatic heart disease, congenital heart anomalies,</text>
+  <text x="325" y="355" font-size="13">endocarditis, non-rheumatic valve diseases</text>
+  <text x="325" y="371" font-size="13">(degenerative mitral†, calcific aortic†, other)</text>
+
+  <rect x="60" y="382" width="250" height="48" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="185" y="411" text-anchor="middle" font-size="14">Primary myocardial diseases</text>
+  <text x="325" y="411" font-size="13">Myocarditis, other cardiomyopathy</text>
+
+  <rect x="60" y="440" width="250" height="48" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="185" y="469" text-anchor="middle" font-size="14">Toxins</text>
+  <text x="325" y="461" font-size="13">Alcoholic cardiomyopathy, cocaine use disorders,</text>
+  <text x="325" y="478" font-size="13">amphetamine use disorders, Chagas disease†</text>
+
+  <rect x="60" y="498" width="250" height="48" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="185" y="527" text-anchor="middle" font-size="14">Stress cardiomyopathies</text>
+  <text x="325" y="513" font-size="13">Thyroid disease, hemoglobinopathies, atrial fibrillation,</text>
+  <text x="325" y="529" font-size="13">chronic kidney disease, cirrhosis, other cardiovascular</text>
+  <text x="325" y="545" font-size="13">diseases, stroke (acute†, chronic)</text>
+
+  <!-- States of this model: rounded rectangles with a solid border -->
+  <rect x="760" y="150" width="190" height="48" rx="8" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="855" y="171" text-anchor="middle" font-weight="bold">HF_I</text>
+  <text x="855" y="190" text-anchor="middle" font-size="14">ischemic HF state</text>
+
+  <rect x="760" y="208" width="190" height="338" rx="8" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="855" y="368" text-anchor="middle" font-weight="bold">HF_NI</text>
+  <text x="855" y="390" text-anchor="middle" font-size="14">non-ischemic HF state</text>
+  <text x="855" y="410" text-anchor="middle" font-size="14">(the other six groupings)</text>
+
+  <!-- Grouping to state: row 1 feeds HF_I, rows 2 to 7 feed HF_NI -->
+  <line x1="732" y1="174" x2="755" y2="174" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="740" y1="232" x2="740" y2="522" stroke="#333" stroke-width="2"/>
+  <line x1="732" y1="232" x2="740" y2="232" stroke="#333" stroke-width="2"/>
+  <line x1="732" y1="290" x2="740" y2="290" stroke="#333" stroke-width="2"/>
+  <line x1="732" y1="348" x2="740" y2="348" stroke="#333" stroke-width="2"/>
+  <line x1="732" y1="406" x2="740" y2="406" stroke="#333" stroke-width="2"/>
+  <line x1="732" y1="464" x2="740" y2="464" stroke="#333" stroke-width="2"/>
+  <line x1="732" y1="522" x2="740" y2="522" stroke="#333" stroke-width="2"/>
+  <line x1="740" y1="377" x2="755" y2="377" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Caption -->
+  <text x="60" y="585" fill="#555">Plain rectangles are GBD quantities. The seven groupings are the proportion models of the GBD HF impairment.</text>
+  <text x="60" y="605" fill="#555">Their scaled proportions sum to one and multiply the envelope prevalence. The dashed box holds the bypass</text>
+  <text x="60" y="625" fill="#555">etiologies (†), estimated in their parent-cause models and added to or subtracted from the envelope before</text>
+  <text x="60" y="645" fill="#555">the proportions apply. Rounded rectangles are the states of this model: HF_I takes the coronary artery</text>
+  <text x="60" y="665" fill="#555">disease grouping, and HF_NI takes the other six.</text>
+</svg>
