@@ -249,7 +249,6 @@ The rules by which components are triggered is as follows:
 * All simulant dyads pass through the pregnancy component.
 * If the broad pregnancy outcome from the pregnancy component was a live or stillbirth (NOT abortion/miscarriage/ectopic pregnancy),
   the dyad goes through the intrapartum component.
-  (The pregnant person will never have died from antepartum maternal disorders, since the only one is abortion/miscarriage/ectopic maternal disorders.)
 * If the birth outcome from the intrapartum component is a live birth,
   the dyad goes through the neonatal component.
 * If the birth parent did not die from maternal disorders (antepartum or intrapartum),
@@ -317,6 +316,15 @@ Pregnancy component
         * Later pregnancy ANC attendance
         * ANC attendance category
       - 
+    * - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
+      - * Broad pregnancy outcome
+        * Maternal age at end of pregnancy
+      - * Abortion/miscarriage/ectopic pregnancy maternal disorders YLDs
+        * Abortion/miscarriage/ectopic pregnancy maternal disorders death
+        * Pre-eclampsia syndrome most severe category
+        * Pre-eclampsia syndrome death
+      - * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
+        * :ref:`Pre-eclampsia syndrome model <2023_cause_pre_eclampsia_syndrome_mncnh>`
     * - :ref:`Hemoglobin at the start of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
       - * Maternal age at end of pregnancy
       - * Hemoglobin at the start of pregnancy
@@ -368,12 +376,6 @@ Pregnancy component
         * Estimated gestational age
         * Believed preterm status
       - 
-    * - :ref:`Antepartum maternal disorders module <2024_vivarium_mncnh_portfolio_antepartum_maternal_disorders_module>`
-      - * Broad pregnancy outcome
-        * Maternal age at end of pregnancy
-      - * Abortion/miscarriage/ectopic pregnancy maternal disorders YLDs
-        * Abortion/miscarriage/ectopic pregnancy maternal disorders death
-      - * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
 
 .. _mncnh_portfolio_intrapartum_component:
 
@@ -382,7 +384,7 @@ Intrapartum component
 
 .. note::
 
-  Only pregnancies resulting in live births or stillbirths (NOT abortions/miscarriages/ectopic pregnancies), in which the parent does not die of antepartum maternal disorders, will proceed to the intrapartum component,
+  Only pregnancies resulting in live births or stillbirths (NOT abortions/miscarriages/ectopic pregnancies) will proceed to the intrapartum component,
   as described above. Both antepartum and intrapartum stillbirths will proceed to the intrapartum component. However, antepartum stillbirths will only be eligible for intrapartum interventions that act on maternal health (such as misoprostol and azithromycin) and will not be eligible for intrapartum interventions intended for neonatal health (such as antenatal corticosteroids) as the fetus will have already passed prior to the onset of labor, but delivery of the fetal remains will still be necessary. Intrapartum stillbirths will remain eligible for all intrapartum interventions. 
 
 .. warning::
