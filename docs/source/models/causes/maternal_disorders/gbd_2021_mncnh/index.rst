@@ -320,7 +320,7 @@ future waves, the simulation should make decisions about incidence of
 the different subcauses in the order of the suspected causal
 relationships. The specified order is:
 
-#. Pre-eclampsia
+#. Pre-eclampsia syndrome
 #. Obstructed labor and uterine rupture
 #. Postpartum hemorrhage
 #. Maternal sepsis and other maternal infections
