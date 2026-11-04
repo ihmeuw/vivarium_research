@@ -32,7 +32,7 @@ and even then it can take days or weeks to resolve.
 Until delivery, treatment focuses on preventing complications like stroke and seizures.
 
 Most pre-eclampsia starts late in the third trimester, with median onset at 35-37 weeks gestation
-and about a third of cases beginning before 34 weeks (Magee et al 2019, Table 3). TODO https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1002783
+and about a third of cases beginning before 34 weeks ([Magee_2019]_, Table 3).
 Early-progressing and late-progressing pre-eclampsia syndrome tend to have different causes;
 the former is more associated with abnormal placental development.
 
@@ -284,8 +284,5 @@ Limitations
 References
 ----------
 
-.. note::
-
-  The modeling strategy for the :ref:`residual maternal disorders cause <2021_cause_residual_maternal_disorders_mncnh>` was developed to include mortality due to maternal hypertensive disorders as the hypertensive disorders cause was not modeled in the MNCNH portfolio simulation at the time that the residual maternal disorders cause was implemented. 
-
-  When the maternal hypertensive disorders cause is added to the MNCNH simulation, the :ref:`residual maternal disorders cause <2021_cause_residual_maternal_disorders_mncnh>` modeling strategy will need to be updated to exclude mortality due to maternal hypertensive disorders so that we do not double count these deaths in our simulation.
+.. [Magee_2019]
+  Magee, Laura A., et al. "The incidence of pregnancy hypertension in India, Pakistan, Mozambique, and Nigeria: a prospective population-level analysis." PLoS medicine 16.4 (2019): e1002783.
