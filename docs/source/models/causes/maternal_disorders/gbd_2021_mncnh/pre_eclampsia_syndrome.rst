@@ -152,20 +152,22 @@ well as restrictions on the ages and sexes to which the cause applies.
 Vivarium Modeling Strategy
 --------------------------
 
-Scope
-+++++
-
-We only model pre-eclampsia syndrome among simulants who give (live or still) birth.
-
 Summary of modeling strategy
 ++++++++++++++++++++++++++++
 
+We only model pre-eclampsia syndrome among simulants who give (live or still) birth.
 We will not model pre-eclampsia syndrome as a state machine
 with dynamic state transitions like our typical cause models.
 Rather, all "transitions" in the model will be modeled as decisions made during
 a single timestep, which represent that state being reached at any point during pregnancy.
 To obtain the decision probabilities,
 we augment GBD data with literature values.
+
+Due to a lack of data on the underlying syndrome progression, which is difficult to measure,
+we model decisions of meeting the criteria of particular diagnostic categories.
+Note that we are not modeling only those who are actually diagnosed; these decisions represent
+whether those criteria are actually *met*, regardless of whether the individual is tested.
+We assume that GBD (and other data sources) represent this underlying reality.
 
 Cause Model Diagram
 +++++++++++++++++++
