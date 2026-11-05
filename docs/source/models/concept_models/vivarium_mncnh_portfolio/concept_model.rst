@@ -963,6 +963,7 @@ Default stratifications to all observers should include scenario and input draw.
       * Azithromycin coverage
       * Misoprostol coverage
       * (for postpartum hemorrhage only) Blood loss severity category (300-500 mL, 500mL-1L, 1L+)
+      * (for hypertensive disorders of pregnancy only) Most severe category (gestational hypertension, non-severe pre-eclampsia, severe pre-eclampsia, eclampsia)
     - 
   * - 2. Births (this observer includes ALL pregnancy outcomes, including abortion/miscarriage/ectopic pregnancies that may not typically be considered "births")
     - * Pregnancy outcome
