@@ -36,7 +36,7 @@ in the indicated model-building wave:
 .. toctree::
     :maxdepth: 1
 
-    pre_eclampsia_syndrome
+    hypertensive_disorders_of_pregnancy
     postpartum_hemorrhage
     maternal_sepsis
     obstructed_labor
@@ -320,7 +320,7 @@ future waves, the simulation should make decisions about incidence of
 the different subcauses in the order of the suspected causal
 relationships. The specified order is:
 
-#. Pre-eclampsia syndrome
+#. Hypertensive disorders of pregnancy, including pre-eclampsia syndrome
 #. Obstructed labor and uterine rupture
 #. Postpartum hemorrhage
 #. Maternal sepsis and other maternal infections

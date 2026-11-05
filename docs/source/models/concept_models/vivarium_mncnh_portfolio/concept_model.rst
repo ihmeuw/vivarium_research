@@ -321,10 +321,10 @@ Pregnancy component
         * Maternal age at end of pregnancy
       - * Abortion/miscarriage/ectopic pregnancy maternal disorders YLDs
         * Abortion/miscarriage/ectopic pregnancy maternal disorders death
-        * Pre-eclampsia syndrome most severe category
-        * Pre-eclampsia syndrome death
+        * Hypertensive disorders of pregnancy most severe category
+        * Hypertensive disorders of pregnancy death
       - * :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
-        * :ref:`Pre-eclampsia syndrome model <2023_cause_pre_eclampsia_syndrome_mncnh>`
+        * :ref:`Hypertensive disorders of pregnancy model <2023_cause_hypertensive_disorders_of_pregnancy_mncnh>`
     * - :ref:`Hemoglobin at the start of pregnancy <2024_vivarium_mncnh_portfolio_hemoglobin_module>`
       - * Maternal age at end of pregnancy
       - * Hemoglobin at the start of pregnancy

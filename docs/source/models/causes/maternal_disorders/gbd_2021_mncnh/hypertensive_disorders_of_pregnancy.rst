@@ -1,13 +1,16 @@
-.. _2023_cause_pre_eclampsia_syndrome_mncnh:
+.. _2023_cause_hypertensive_disorders_of_pregnancy_mncnh:
 
 ======================================================================
-Pre-eclampsia syndrome
+Hypertensive disorders of pregnancy, including pre-eclampsia syndrome
 ======================================================================
 
 Disease Overview
 ----------------
 
-The pre-eclampsia *syndrome* (the underlying disease process) is dysfunction of multiple organs
+Hypertensive disorders of pregnancy are conditions that occur during pregnancy and are characterized by high blood pressure.
+Pre-eclampsia syndrome is one underlying disease process associated with hypertension during pregnancy, and it is the main focus of this cause model.
+
+Pre-eclampsia syndrome is dysfunction of multiple organs
 that occurs during pregnancy and originates from placental stress.
 The placenta becomes stressed when its blood supply can't keep up with its needs,
 and it then releases harmful substances into the bloodstream.
@@ -39,10 +42,31 @@ the former is more associated with abnormal placental development.
 GBD 2023 Modeling Strategy
 --------------------------
 
-Pre-eclampsia does not appear in the GBD cause hierarchy.
-It is a *subset* of maternal hypertensive disorders (c_369), which is a most detailed cause in GBD 2023 (also called "hypertensive disorders of pregnancy" in some places in the GBD methods appendix).
-The GBD cause also includes gestational hypertension (high blood pressure without any of the other signs of pre-eclampsia),
-which is *not* included in this cause model.
+Hypertensive disorders of pregnancy is equivalent to the most-detailed cause ID 369 in GBD 2023,
+which is primarily referred to as "maternal hypertensive disorders" but is also called "hypertensive disorders of pregnancy" in some places in the GBD methods appendix.
+The cause has sequelae for *severe* pre-eclampsia and eclampsia, as well as long-term sequelae for both of those conditions,
+but a single sequela covering both non-severe pre-eclampsia and gestational hypertension.
+
+The case definition is as follows in the methods appendix:
+
+#. **Hypertensive disorders of pregnancy** includes several
+   subcategories:
+
+   a. Gestational hypertension is the new onset of hypertension in a
+      pregnant person after 20 weeks’ gestation, as defined by having a
+      blood pressure measured >140/90 mmHg on more than one occasion.
+   #. Preeclampsia is defined by hypertension [>140/90 mmHg] and
+      proteinuria [≥0.3 g/l], with or without signs of end-organ damage.
+   #. Severe preeclampsia is defined by preeclampsia with severe
+      hypertension [>160/100 mmHg] or other signs of end organ damage
+      [liver: low platelets, elevated liver enzymes, coagulation issues;
+      kidney: elevated creatinine; central nervous system: headaches or
+      visual disturbances], syndrome of hypertension, elevated liver
+      enzymes, low platelets [HELLP syndrome]).
+   #. Eclampsia is defined as hypertension and seizures, with or without
+      proteinuria. This definition excludes chronic hypertension in a
+      pregnant person (hypertension present prior to 20 weeks’
+      gestation) unless superimposed preeclampsia develops.
 
 Cause Hierarchy
 +++++++++++++++
@@ -155,24 +179,24 @@ Vivarium Modeling Strategy
 Summary of modeling strategy
 ++++++++++++++++++++++++++++
 
-We only model pre-eclampsia syndrome among simulants who give (live or still) birth.
-We will not model pre-eclampsia syndrome as a state machine
+We only model hypertensive disorders of pregnancy among simulants who give (live or still) birth.
+We will not model hypertensive disorders of pregnancy as a state machine
 with dynamic state transitions like our typical cause models.
 Rather, all "transitions" in the model will be modeled as decisions made during
 a single timestep, which represent that state being reached at any point during pregnancy.
 To obtain the decision probabilities,
 we augment GBD data with literature values.
 
-Due to a lack of data on the underlying syndrome progression, which is difficult to measure,
+Due to a lack of data on progression of underlying disease, which is difficult to measure,
 we model decisions of meeting the criteria of particular diagnostic categories.
 Note that we are not modeling only those who are actually diagnosed; these decisions represent
 whether those criteria are actually *met*, regardless of whether the individual is tested.
-We assume that GBD (and other data sources) represent this underlying reality.
+We assume that GBD (and other data sources) are representative of this underlying reality.
 
 Cause Model Diagram
 +++++++++++++++++++
 
-Although we're not modeling pre-eclampsia syndrome dynamically as a finite state
+Although we're not modeling hypertensive disorders of pregnancy dynamically as a finite state
 machine, we can draw an analogous directed graph that can be interpreted
 as a (collapsed) decision tree rather than a state transition diagram.
 The main difference is that the values on the transition arrows
@@ -180,14 +204,16 @@ represent decision probabilities rather than rates per unit time.
 
 .. graphviz::
 
-    digraph pre_eclampsia_decisions {
+    digraph hypertensive_disorders_decisions {
         start
         end
         alive
         dead
 
-        start -> alive [label = "1 - ir_pre_eclampsia"]
-        start -> pre_eclampsia [label = "ir_pre_eclampsia"]
+        start -> alive [label = "1 - ir_gestational_hypertension"]
+        start -> gestational_hypertension [label = "ir_gestational_hypertension"]
+        gestational_hypertension -> gestational_hypertension_without_pre_eclampsia [label = "1 - ir_pre_eclampsia"]
+        gestational_hypertension -> pre_eclampsia [label = "ir_pre_eclampsia"]
         pre_eclampsia -> non_severe_pre_eclampsia [label = "1 - ir_severe_pre_eclampsia"]
         pre_eclampsia -> severe_pre_eclampsia [label = "ir_severe_pre_eclampsia"]
         severe_pre_eclampsia -> severe_pre_eclampsia_without_eclampsia [label = "1 - ir_eclampsia_from_severe"]
@@ -196,6 +222,8 @@ represent decision probabilities rather than rates per unit time.
         severe_pre_eclampsia_without_eclampsia -> dead [label = "cfr_severe_pre_eclampsia"]
         non_severe_pre_eclampsia -> eclampsia [label = "ir_eclampsia_from_non_severe"]
         non_severe_pre_eclampsia -> non_severe_pre_eclampsia_without_eclampsia [label = "1 - ir_eclampsia_from_non_severe"]
+        gestational_hypertension_without_pre_eclampsia -> alive [label = "1 - cfr_gestational_hypertension"]
+        gestational_hypertension_without_pre_eclampsia -> dead [label = "cfr_gestational_hypertension"]
         non_severe_pre_eclampsia_without_eclampsia -> alive [label = "1 - cfr_non_severe_pre_eclampsia"]
         non_severe_pre_eclampsia_without_eclampsia -> dead [label = "cfr_non_severe_pre_eclampsia"]
         eclampsia -> alive [label = "1 - cfr_eclampsia"]
@@ -213,18 +241,26 @@ represent decision probabilities rather than rates per unit time.
       - Parent simulant must have a live or stillbirth pregnancy as determined by the
         :ref:`pregnancy model
         <other_models_pregnancy_closed_cohort_mncnh>`
+    * - gestational_hypertension
+      - Parent simulant has gestational hypertension at some point during pregnancy
     * - pre_eclampsia
       - Parent simulant meets the pre-eclampsia diagnostic criteria at some point during pregnancy
     * - severe_pre_eclampsia
       - Parent simulant meets the diagnostic criteria for "pre-eclampsia with severe features" at some point during pregnancy
+    * - gestational_hypertension_without_pre_eclampsia
+      - Parent simulant has gestational hypertension at some point during pregnancy but never meets the criteria for pre-eclampsia.
+        Simulants who pass through this state will have their most severe category set to "gestational hypertension".
     * - non_severe_pre_eclampsia
-      - Parent simulant meets the pre-eclampsia diagnostic criteria at some point during pregnancy but never meets the criteria for "pre-eclampsia with severe features"
+      - Parent simulant meets the pre-eclampsia diagnostic criteria at some point during pregnancy but never meets the criteria for "pre-eclampsia with severe features."
     * - non_severe_pre_eclampsia_without_eclampsia
-      - Parent simulant meets the pre-eclampsia criteria at some point during pregnancy but never meets the diagnostic criteria for "pre-eclampsia with severe features" or has eclampsia
+      - Parent simulant meets the pre-eclampsia criteria at some point during pregnancy but never meets the diagnostic criteria for "pre-eclampsia with severe features" or has eclampsia.
+        Simulants who pass through this state will have their most severe category set to "non-severe pre-eclampsia".
     * - severe_pre_eclampsia_without_eclampsia
-      - Parent simulant meets the diagnostic criteria for "pre-eclampsia with severe features" at some point during pregnancy but never has eclampsia
+      - Parent simulant meets the diagnostic criteria for "pre-eclampsia with severe features" at some point during pregnancy but never has eclampsia.
+        Simulants who pass through this state will have their most severe category set to "severe pre-eclampsia".
     * - eclampsia
-      - Parent simulant has eclampsia at some point during pregnancy
+      - Parent simulant has eclampsia at some point during pregnancy.
+        Simulants who pass through this state will have their most severe category set to "eclampsia".
     * - alive
       - Parent simulant did not die of pre-eclampsia syndrome
     * - dead
@@ -239,6 +275,9 @@ represent decision probabilities rather than rates per unit time.
     * - Symbol
       - Name
       - Definition
+    * - ir_gestational_hypertension
+      - incidence risk of gestational hypertension
+      - The probability that a pregnant simulant develops gestational hypertension at some point during pregnancy
     * - ir_pre_eclampsia
       - incidence risk of pre-eclampsia
       - The probability that a pregnant simulant develops pre-eclampsia at some point during pregnancy
@@ -251,6 +290,9 @@ represent decision probabilities rather than rates per unit time.
     * - ir_eclampsia_from_severe
       - incidence risk of eclampsia from severe pre-eclampsia
       - The probability that a pregnant simulant who has severe pre-eclampsia at some point during pregnancy develops eclampsia
+    * - cfr_gestational_hypertension
+      - case fatality risk for gestational hypertension
+      - The probability that a simulant with gestational hypertension (and not pre-eclampsia or eclampsia) dies of it
     * - cfr_non_severe_pre_eclampsia
       - case fatality risk for non-severe pre-eclampsia
       - The probability that a simulant with non-severe pre-eclampsia (and not eclampsia) dies of it
@@ -276,10 +318,29 @@ Data Tables
 Validation Criteria
 +++++++++++++++++++
 
+Pre-simulation data checks:
+
+* All transition probabilities are between 0 and 1.
+
+.. todo::
+  For any literature values that get saved in the artifact, we will want to check that the mean and uncertainty (confidence interval, standard error, etc.) match extracted values.
+
+From observed outputs:
+
+* The simulation's incidence risk (cases divided by pregnancies) of *any* level of hypertensive disorders of pregnancy
+  should be approximately equal to the GBD 2023 incidence risk of the hypertensive disorders of pregnancy cause (incidence rate divided by pregnancy incidence rate), for each age group and draw.
+* The simulation's mortality risk (hypertensive disorders of pregnancy deaths divided by pregnancies) should be approximately equal to GBD 2023 hypertensive disorder mortality risk per pregnancy (CSMR divided by pregnancy incidence rate), for each age group and draw.
+
+.. todo::
+  We will want to validate that the ratios between the different severity levels match ratios we extract (if we extract ratios), or more generally that our data on severity split is respected by the simulation.
+  We will do this for both incidence and mortality.
+
 Limitations
 -----------
 
-* We do not currently model disability/morbidity/YLDs due to pre-eclampsia syndrome.
+* We do not currently model disability/morbidity/YLDs due to hypertensive disorders of pregnancy, despite GBD modeling this.
+* We model pre-eclampsia as only occurring when gestational hypertension diagnostic criteria are met, but in practice pre-eclampsia can occur without meeting those criteria (when the required hypertension is not *new*).
+* We model eclampsia as only occurring when pre-eclampsia diagnostic criteria are met, but in practice eclampsia can occur without meeting those criteria ("atypical eclampsia").
 
 References
 ----------
