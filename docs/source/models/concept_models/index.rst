@@ -14,6 +14,7 @@ Active concept model documents can be found here:
    vivarium_moud/concept_model
    vivarium_alzheimers/concept_model
    vivarium_mace_rct/concept_model
+   vivarium_gates_lsff_2026/concept_model
 
 A list of all (active and complete) concept model documents can be found here:
 
