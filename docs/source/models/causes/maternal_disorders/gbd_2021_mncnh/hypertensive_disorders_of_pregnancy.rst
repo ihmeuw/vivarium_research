@@ -280,7 +280,7 @@ represent decision probabilities rather than rates per unit time.
       - The probability that a pregnant simulant develops gestational hypertension at some point during pregnancy
     * - ir_pre_eclampsia
       - incidence risk of pre-eclampsia
-      - The probability that a pregnant simulant develops pre-eclampsia at some point during pregnancy
+      - The probability that a pregnant simulant who has gestational hypertension develops pre-eclampsia at some point during pregnancy
     * - ir_severe_pre_eclampsia
       - incidence risk of severe pre-eclampsia
       - The probability that a pregnant simulant who has pre-eclampsia at some point during pregnancy develops severe pre-eclampsia
