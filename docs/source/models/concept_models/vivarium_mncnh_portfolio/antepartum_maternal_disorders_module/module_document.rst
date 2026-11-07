@@ -44,13 +44,16 @@ Antepartum maternal disorders module
 
 This module represents
 the :ref:`abortion/miscarriage/ectopic pregnancy maternal disorders model <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
-which is applied during the pregnancy component.
+and the :ref:`hypertensive disorders of pregnancy model <2023_cause_hypertensive_disorders_of_pregnancy_mncnh>`,
+which are applied during the pregnancy component,
+unlike the rest of the maternal disorders which are applied in the intrapartum component.
 
 2.0 Module Diagram and Data
 +++++++++++++++++++++++++++++++
 
 All instructions are detailed on
-the :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model document <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`.
+the :ref:`Abortion/miscarriage/ectopic pregnancy maternal disorders model document <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`
+and the :ref:`Hypertensive disorders of pregnancy model document <2023_cause_hypertensive_disorders_of_pregnancy_mncnh>`.
 This document also contains a list of model assumptions and limitations as well as verification and validation criteria.
 
 **Abortion/miscarriage/ectopic pregnancy maternal disorders should only be applied to pregnancies that end in abortion/miscarriage/ectopic pregnancy.**
@@ -66,11 +69,11 @@ The inputs and outputs for this module are summarized in the tables below.
     - Note
   * - Broad pregnancy outcome
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-    - Used to apply abortion/miscarriage/ectopic pregnancy maternal disorders only to pregnancies that do end in abortion/miscarriage/ectopic pregnancy
+    - Used to apply abortion/miscarriage/ectopic pregnancy maternal disorders only to pregnancies that end in abortion/miscarriage/ectopic pregnancy
     -
   * - Maternal age at end of pregnancy
     - :ref:`Initial attributes module <2024_vivarium_mncnh_portfolio_initial_attributes_module>`
-    - Used for age-specific risk of abortion/miscarriage/ectopic pregnancy maternal disorders
+    - Used for age-specific risk of both included kinds of maternal disorders
     - 
 
 .. list-table:: Module outputs
@@ -87,5 +90,11 @@ The inputs and outputs for this module are summarized in the tables below.
     -
   * - Abortion/miscarriage/ectopic pregnancy maternal disorders YLLs
     - Non-negative real number
+    -
+  * - Hypertensive disorders of pregnancy most severe category
+    - Categorical (gestational hypertension/non-severe pre-eclampsia/severe pre-eclampsia/eclampsia)
+    -
+  * - Hypertensive disorders of pregnancy death
+    - Binary (yes/no)
     -
 

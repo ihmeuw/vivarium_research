@@ -155,9 +155,6 @@ We will track postpartum hemorrhage
 deaths to calculate YLLs, and we will track incident cases by severity to calculate
 YLDs.
 
-Assumptions and Limitations
-+++++++++++++++++++++++++++
-
 Cause Model Diagram
 +++++++++++++++++++
 
