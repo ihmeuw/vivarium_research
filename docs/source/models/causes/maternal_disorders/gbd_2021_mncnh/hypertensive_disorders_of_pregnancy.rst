@@ -20,7 +20,7 @@ There are several diagnostic categories that describe how the syndrome is showin
 
 * "Pre-eclampsia" (used as a diagnostic term and not for the overall syndrome) when there is new high blood pressure (because the syndrome affects the blood vessels) and at least one sign of organ dysfunction.
 * "Pre-eclampsia with severe features" when, in addition to the pre-eclampsia criteria, blood pressure reaches very high levels, certain signs of organ dysfunction become severe, or there are symptoms showing the brain is affected.
-* "Eclampsia" when the syndrome causes seizures.
+* "Eclampsia" when the syndrome causes seizures, which can occur with or without meeting the pre-eclampsia criteria.
 * "HELLP" when the syndrome damages the liver and the blood's ability to clot, which can cause severe bleeding.
 
 Because it can rapidly progress, the syndrome should be closely monitored
@@ -67,6 +67,15 @@ The case definition is as follows in the methods appendix:
       proteinuria. This definition excludes chronic hypertension in a
       pregnant person (hypertension present prior to 20 weeks’
       gestation) unless superimposed preeclampsia develops.
+
+GBD uses an older case definition of pre-eclampsia which absolutely requires proteinuria,
+whereas more recent definitions (which informed the discussion in the overview section)
+treat any sign of organ dysfunction as sufficient when co-occurring with hypertension.
+
+GBD requires hypertension to be present in the eclampsia case definition,
+which is a bit unusual -- though the vast majority of people who have seizures
+will have hypertension, eclampsia is often diagnosed by seizures alone (in the absence of another explanation for the seizures),
+and "atypical eclampsia" (eclampsia without hypertension) is a known phenomenon.
 
 Cause Hierarchy
 +++++++++++++++
@@ -192,6 +201,22 @@ we model decisions of meeting the criteria of particular diagnostic categories.
 Note that we are not modeling only those who are actually diagnosed; these decisions represent
 whether those criteria are actually *met*, regardless of whether the individual is tested.
 We assume that GBD (and other data sources) are representative of this underlying reality.
+
+The diagnostic categories that we model are:
+
+* Gestational hypertension
+* Pre-eclampsia
+* Severe pre-eclampsia (also known as "pre-eclampsia with severe features")
+* Eclampsia
+
+Here is a Venn diagram of how these categories relate (vastly not to scale):
+
+.. image:: hypertensive_disorders_of_pregnancy_venn_diagram.drawio.png
+
+The X symbols mark regions/intersections that do exist in real life/are logically possible
+given the diagnostic criteria, but that we do not model.
+For simplicity we assume that eclampsia only occurs in the presence of pre-eclampsia,
+and that pre-eclampsia only occurs in the presence of gestational hypertension.
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -341,6 +366,9 @@ Limitations
 * We do not currently model disability/morbidity/YLDs due to hypertensive disorders of pregnancy, despite GBD modeling this.
 * We model pre-eclampsia as only occurring when gestational hypertension diagnostic criteria are met, but in practice pre-eclampsia can occur without meeting those criteria (when the required hypertension is not *new*).
 * We model eclampsia as only occurring when pre-eclampsia diagnostic criteria are met, but in practice eclampsia can occur without meeting those criteria ("atypical eclampsia").
+* We use GBD pre-eclampsia incidence for our pre-eclampsia incidence, despite GBD nominally excluding cases that have organ dysfunction but not proteinuria (which we want to capture).
+* We use GBD eclampsia incidence for our eclampsia incidence, despite GBD nominally excluding cases that have seizures but not hypertension (which we want to capture).
+  These should be rare, and it is unclear whether input data to GBD actually exclude such cases.
 
 References
 ----------
