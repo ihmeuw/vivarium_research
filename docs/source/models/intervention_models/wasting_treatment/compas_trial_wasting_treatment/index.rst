@@ -149,47 +149,67 @@ Vivarium Modeling Strategy
     - Ethiopia
     - 0.488 (95% CI:0.374-0.604), normal distribution of uncertainty (0 for those <6 months)
     - [Isanaka-et-al-2021]_
-    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/ethiopia_treatment_data_draws_2023.csv>`_
   * - :math:`C_{SAM}` (baseline)
     - Nigeria
     - 0.353 (95% CI: 0.263-0.443), normal distribution of uncertainty (0 for those <6 months)
     - [Isanaka-et-al-2021]_
-    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/nigeria_treatment_data_draws_2023.csv>`_
   * - :math:`C_{SAM}` (baseline)
     - Pakistan
     - 0.05 (point value); zero for those <6 months
     - CMAM 2021 Virtual Conference - Scaling Up Management of Wasting in South Asia: A Case Study. :download:`PDF available here <04_South Asia_CMAM_EN.pdf>`
-    - Note acknowledged lack of data on CMAM coverage in South Asia. Reference was provided to us by KOL Indi Trehan. Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/treatment_data_draws.csv>`_
+    - Note acknowledged lack of data on CMAM coverage in South Asia. Reference was provided to us by KOL Indi Trehan. Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/pakistan_treatment_data_draws_2023.csv>`_
+  * - :math:`C_{SAM}` (baseline)
+    - Kenya
+    - 0.548 (95% CI:0.37-0.65), truncated normal distribution of uncertainty (0 for those <6 months)
+    - [Kenya_SQUEAC_2024]_ Uncertainty bounds are based on the highest and lowest values from SQUEAC.
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/kenya_treatment_data_draws_2023.csv>`_
   * - :math:`C_{MAM}` (baseline)
     - Ethiopia and Nigeria
     - 0.15 (95% CI: 0.1, 0.2), normal distribution of uncertainty (0 for those <6 months)
     - Informed through discussion with CIFF/UNICEF that reported there is not reliable data on this parameter, but that this appeared to be a plausible range
-    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/{location}_treatment_data_draws_2023.csv>`_
   * - :math:`C_{MAM}` (baseline)
     - Pakistan
     - 0.05 (point value); zero for those <6 months
     - Assumed to be the same as :math:`C_{SAM}` due to lack of data and fact that Pakistan national guideline suggests treatment for both SAM and MAM
-    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/pakistan_treatment_data_draws_2023.csv>`_
+  * - :math:`C_{MAM}` (baseline)
+    - Kenya
+    - 0.519 (95% CI: 0.37-0.72); truncated normal distribution of uncertainty
+    - [Kenya_UNICEF_IMAM_2012]_ The interval is anchored to the observed range of SFP coverage in the SQUEAC synthesis (lowest 36.6%, highest 72.2%).
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/kenya_treatment_data_draws_2023.csv>`_
   * - :math:`E_\text{SAM}`
     - Ethiopia
     - 0.70 (95% CI:0.64-0.76); normal distribution of uncertainty
     - [Bitew-et-al-2020]_
-    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/ethiopia_treatment_data_draws_2023.csv>`_
   * - :math:`E_{SAM}`
     - Nigeria
     - 0.712 (95% CI: 0.685–0.738); normal distribution of uncertainty
     - [Desyibelew-et-al-2020]_ Systematic review of sub-Saharan African countries as Nigerian-specific meta-analysis could not be found.  
-    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/nigeria/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/nigeria_treatment_data_draws_2023.csv>`_
   * - :math:`E_{SAM}`
     - Pakistan
     - 0.88 (95% CI: 0.87, 0.89); normal distribution of uncertainty
     - [Aguayo-et-al-2020]_ NOTE: this value does not come from a meta-analysis, but a single study; uncertainty reflects only sample size of this study and no heterogeneity between studies.  
-    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/pakistan/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/pakistan_treatment_data_draws_2023.csv>`_
+  * - :math:`E_{SAM}`
+    - Kenya
+    - 0.841 (95% CI: 0.75-0.88); truncated normal distribution of uncertainty
+    - [Kenya_UNICEF_Annual_report_2023]_ Uncertainty bounds derived from Sphere minimum and Kenyan OTP performance.
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/kenya_treatment_data_draws_2023.csv>`_
   * - :math:`E_\text{MAM}`
     - Ethiopia, Nigeria, Pakistan
     - Location-specific :math:`E_\text{SAM}` value 
     - Assumption in lack of direct data
-    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/data_prep/cgf_correlation/ethiopia/treatment_data_draws.csv>`_
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/{location}_treatment_data_draws_2023.csv>`_
+  * - :math:`E_{MAM}`
+    - Kenya
+    - 0.805 (95% CI: 0.75-0.95); truncated normal distribution of uncertainty
+    - [Kenya_UNICEF_IMAM_2012]_ Uncertainty bounds derived from the Sphere minimum and UNICEF IMAM Evaluation 2012 maximum.
+    - Use draw-level values defined here: `<https://github.com/ihmeuw/vivarium_research_nutrition_optimization/blob/data_prep/cgf_correlation/all_locations_2023/kenya_treatment_data_draws_2023.csv>`_
 
 
 Affected Outcomes
@@ -400,6 +420,32 @@ References
     Improving estimates of the burden of severe wasting: analysis of secondary prevalence and incidence data from 352 sites
 
 .. _`Isanaka et al. 2021`: https://gh.bmj.com/content/6/3/e004342
+
+
+.. [Kenya_SQUEAC_2024]
+
+  View `Kenya SQUEAC 2024`_
+
+    Kenya SQUEAC 2024 report on severe wasting treatment coverage and impact.
+
+.. _`Kenya SQUEAC 2024`: https://www.ennonline.net/sites/default/files/2024-07/pg_18_kenya_linking_information_to_action._synthesis_of_coverage_assessment_findings.pdf
+
+.. [Kenya_UNICEF_Annual_report_2023]
+
+  View `Kenya UNICEF Annual Report 2023`_
+
+    Overview of UNICEF's annual report for Kenya in 2023.
+
+.. _`Kenya UNICEF Annual Report 2023`: https://www.unicef.org/kenya/media/3981/file/UNICEF%20Kenya%20Annual%20Report%202023.pdf.pdf
+
+
+.. [Kenya_UNICEF_IMAM_2012]
+
+  View `Kenya UNICEF IMAM 2012`_
+
+    Evaluation of Integrated Management of Acute Malnutrition (IMAM) Kenya case study.
+
+.. _`Kenya UNICEF IMAM 2012`: https://evaluationreports.unicef.org/GetDocument?documentID=677&fileID=25091
 
 
 .. [Laillou-et-al-2022-combined]
