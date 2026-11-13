@@ -171,12 +171,13 @@ and thus
   Our current implementation (as of 2026-11-12) uses FFV to measure
   baseline fortification, so the first factorization is more relevant
   for the baseline scenario. On the other hand, GF gives us
-  consolidation and compliance, so the second factorization is more
-  relevant for intervention scenarios, and we need to convert to FFV if
-  we want to use GF's numbers in baseline. It may make things simpler
-  (and less confusing) if we standardized our treatment of baseline and
-  intervention data, factoring both into all four basic components of
-  effective coverage.
+  consolidation and compliance (both baseline estimates and
+  projected/aspirational intervention levels), so the second
+  factorization is more relevant for intervention scenarios, and we need
+  to convert to FFV if we want to use GF's numbers in baseline. It may
+  make things simpler (and less confusing) if we standardized our
+  treatment of baseline and intervention data, factoring both into all
+  four basic components of effective coverage.
 
 Arms and scenarios
 ------------------
