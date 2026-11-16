@@ -323,6 +323,13 @@ Default stratifications for all observations:
 Additionally, all output should automatically be stratified by location,
 scenario, and input draw.
 
+We would like one custom stratification that we will call the NNT stratification.
+This stratification will create cohorts of simulants who start treatment in the
+same year. There will be four categories: started treatment in 2040,
+started treatment in 2050, started treatment in 2060, or other. Other
+should include both simulants that were treated in any other year, and
+those who were never treated.
+
 .. _alz_observer_outputs:
 
 .. list-table:: Outputs of simulation observers
@@ -342,7 +349,7 @@ scenario, and input draw.
     -
     -
   * - Transition counts between Alzheimer's cause states
-    - Include treatment status with all values from the treatment status person-time observer.
+    - Include treatment status with all values from the treatment status person-time observer. Include NNT stratification.
     -
   * - Person-time in each Alzheimer's cause state
     - Include treatment status with all values from the treatment status person-time observer.
@@ -751,6 +758,13 @@ scenario, and input draw.
     - * Locations: All
       * 25 draws, 5 seeds, 20,000 simulants per seed 
     - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 15.0
+    - Smooth testing curves and add NNT stratification
+    - Baseline, Scenarios 3-8
+    - * Locations: Brazil, China, USA
+      * 25 draws, 5 seeds, 20,000 simulants per seed 
+    - Stratify disease state transitions by NNT. Keep all other stratifications from model 14.
     - Default
 
 5.2 V & V Tracking
