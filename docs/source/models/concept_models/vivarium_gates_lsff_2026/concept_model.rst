@@ -264,3 +264,39 @@ location, and sometimes a separate *zero scenario*, which represents a
 counterfactual in which no fortification occurs. These will be used as
 reference scenarios for evaluating the impact of the intervention
 scenarios.
+
+Interventions
++++++++++++++
+
+The fortification interventions are organized by nutrient and are listed
+on the :ref:`LSFF interventions page <lsff_intervention_models>`:
+
+* :ref:`Folic acid fortification <folic_acid_fortification>`
+* :ref:`Iron fortification <iron_fortification>`
+
+Data needed for model
++++++++++++++++++++++
+
+Raw input data
+++++++++++++++
+
+Inputs from Gates Foundation
+----------------------------
+
+Country-specific data
+---------------------
+
+.. toctree::
+    :maxdepth: 1
+    :glob:
+
+    country_data/*
+
+Model runs
+++++++++++
+
+Model runs are tracked in an `Excel file on Sharepoint <model run
+tracker_>`_.
+
+.. _model run tracker:
+  https://uwnetid.sharepoint.com/:x:/s/ihme_simulation_science_team/cQoOrjRm_7QbTYioFBGs8d1dEgUDWsuca0eF3vLtQ_GTtgm8Cg
