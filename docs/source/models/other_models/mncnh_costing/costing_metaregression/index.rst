@@ -48,10 +48,8 @@ Overview
 This document describes what happens to cost estimates after they have been
 extracted from the literature: how they are standardized into comparable units,
 how they are pooled into a single estimate per intervention, and how that estimate
-becomes a cost the
+becomes a cost that can be integrated into the
 :ref:`MNCNH Portfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>`
-can use.
-
 The companion document,
 :ref:`MNCNH Portfolio Costing Literature Review <costing_lit_review_vivarium_mncnh_portfolio>`,
 covers the search strategy, the cost taxonomy, and the extraction sheet. We suggest you read 
@@ -63,23 +61,21 @@ described here.
 Data Processing SOP
 -------------------
 
-This section outlines the standard operating procedure (SOP) for processing
+This section outlines the standard operating procedure (SOP) for processing our
 cost data after it has been extracted from the literature. 
 Please follow the steps below to ensure consistent and accurate processing of cost data.
 
 **Step 1**
    Map the unit cost estimates reported in each included study to one or more
-   cost categories in our taxonomy, and record the decision (see
+   cost categories in our
+   :ref:`unit cost taxonomy (Wave 1) <costing_lit_review_unit_cost_taxonomy_wave1>`, and record the
+   decision (see
    :ref:`Intervention-Specific Considerations <costing_mr_intervention_specific_considerations>`
    for where these decisions are documented).
 
 **Step 2**
-   Summarize the data sources for each cost category estimate (if included in
-   the extracted study) in the Excel sheet linked here.
-
-   .. todo::
-
-     Add link to the Excel data source summary sheet.
+   Summarize the data sources for each cost category estimate (if reported by
+   a given included study) in the Excel sheet linked `here <https://uwnetid.sharepoint.com/:x:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B4FC73C66-8D1E-49CC-904B-8CC74C111EF1%7D&file=mncnh_costing_extraction_summary.xlsx&action=default&mobileredirect=true&share=cQpmPMdPHo3MSZBLjMdMER7xEgUDA-Jn1arthdXOR8lOElQFBg>`__.
 
 **Step 3**
    Manually process the input data for MR-BRT:
@@ -91,8 +87,8 @@ Please follow the steps below to ensure consistent and accurate processing of co
       estimates to USD 2026, but for now, make sure to include the currency
       (type and year) in which a given estimate is reported.
 
-   ii. Each row in the input data corresponds to a single cost estimate. One
-       study might have multiple cost estimates reported (e.g., product cost of
+   ii. Each row in the input dataset corresponds to a single cost estimate. One
+       study might have multiple cost category estimates reported (e.g., product cost of
        $X, personnel cost of $Y, and infrastructure cost of $Z). Some studies do
        not report total cost by category, but instead report a total cost and
        tell us which categories were included in that total (e.g., total
@@ -116,7 +112,7 @@ Please follow the steps below to ensure consistent and accurate processing of co
        of a regression analysis conducted by modelers). While we want to
        maximize the amount of primary, observed data in our meta-regressions,
        it is helpful to include modeled costs too, given limited data
-       availability. We therefore include an ``observed_vs_modeled`` column in
+       availability. We therefore include an ``modeled_vs_observed`` column in
        the input dataset. It has not yet been determined how we will use this
        column. With MMS, we tested several methods: model fit did not improve
        (and even worsened) when filtering to observed costs only, and using the
@@ -131,27 +127,29 @@ Please follow the steps below to ensure consistent and accurate processing of co
         e.g., a study that reports separate costs for three countries or
         regions.
       - **Other stratifications**, e.g., a study that reports the unit costs of
-        three different formulations of IV iron. We want to use all of these
-        estimates, but record these details in the ``addit_stratification``
-        column.
-      - Other potential stratifications include facility type (e.g., NGO-run vs.
+        three different formulations of IV iron. Please include each of these
+        estimates in their own row, but record the details in the ``addit_stratification``
+        column. These other potential stratifications may include facility type (e.g., NGO-run vs.
         government-run) and rurality.
-
-   vi. Example of what the final CSV should look like (columns and example
-       values):
-
-       .. todo::
-
-         Add an example table showing the columns and what the values look like.
 
    vii. Once the data have been processed, save them as a CSV in
         ``R:\team\simulation_science\pub\models\vivarium_gates_mncnh\data\vivarium_gates_mncnh_costing\mrbrt``.
         This can be done from the command line (e.g., download and save the CSV
         to your homes directory on the cluster, then use ``mv`` to move it to
         the team drive). Follow the naming convention for each intervention
-        CSV: ``mncnh_costing_extraction_{intervention}.csv``.
+        CSV: ``mncnh_costing_extraction_{intervention}.csv``. 
+        Please update the README file in the same directory accordingly.
 
-   viii. Update the README file accordingly.
+Below is an example of what the final CSV should look like.
+
+       .. csv-table:: Example rows from the processed IFA input data
+          :header: study,intervention_name,total_cost,standard_error,location,currency_type,currency_year,product_cost_included,...,infrastructure_cost_included,modeled_vs_observed,addit_stratification
+
+          zeng_2009,ifa,8.8,0,china,USD,2007,1,...,0,observed,
+          pandav_1998,ifa,3.6,0,india,INR,1995,1,...,1,observed,
+          kashi_2019,ifa,12.98,0,pakistan,USD,2016,0,...,0,modeled,
+          shaheen_2015,ifa,3.09,0,bangladesh,USD,2013,0,...,0,observed,facility type (NGO run CNC)
+          ...,...,...,...,...,...,...,...,...,...,...,...
 
 Meta-regression Analysis with MR-BRT 
 ------------------------------------
@@ -212,5 +210,5 @@ including descriptions of the sources included as well as any concerns that aros
   Add intervention- and study-specific notes for all interventions modeled so far (IFA, MMS, IV iron). 
   This will include things like how we mapped the cost categories reported in a given study to our taxonomy, 
   whether we consider a given estimate modeled or observed by the study authors,
-   and other concerns that arose either during the processing or modeling stage. 
+  and other concerns that arose either during the processing or modeling stage. 
 
