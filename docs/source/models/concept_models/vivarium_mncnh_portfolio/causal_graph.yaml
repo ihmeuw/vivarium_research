@@ -241,12 +241,12 @@ nodes:
     data:
       documentation_ref:
         - {ref: other_models_pregnancy_demography, text: Pregnancy demography}
-    kind: outcome
+      force_output: true
   - name: broad_pregnancy_outcome
     data:
       documentation_ref:
         - {ref: pregnancy_broad_outcome_section, text: Broad pregnancy outcome}
-    values: [live/stillbirth, abortion/miscarriage/ectopic]
+      categories: [live/stillbirth, abortion/miscarriage/ectopic]
     caused_by:
       - maternal_age_at_end_of_pregnancy
   - name: anc_propensity
@@ -269,8 +269,9 @@ nodes:
   - name: anc_attendance_category
     label: "ANC attendance category"
     deterministic: true
-    values: [none, later_pregnancy_only, first_trimester_only, first_trimester_and_later_pregnancy]
-    kind: outcome
+    data:
+      categories: [none, later_pregnancy_only, first_trimester_only, first_trimester_and_later_pregnancy]
+      force_output: true
     caused_by:
       - broad_pregnancy_outcome
       - anc_propensity
@@ -293,8 +294,9 @@ nodes:
       - maternal_age_at_end_of_pregnancy
   - name: anemia_status_at_the_start_of_pregnancy
     deterministic: true
-    values: [not_anemic, mild, moderate, severe]
-    kind: outcome
+    data:
+      categories: [not_anemic, mild, moderate, severe]
+      force_output: true
     caused_by:
       - hemoglobin_at_the_start_of_pregnancy
       - maternal_age_at_end_of_pregnancy
@@ -304,8 +306,8 @@ nodes:
     label: "IFA/MMS at first trimester ANC visit"
     data:
       documentation_ref: oral_iron_antenatal
+      categories: [none, IFA, MMS]
     deterministic: true
-    values: [none, IFA, MMS]
     caused_by:
       - first_trimester_anc_attendance
       - anemia_intervention_propensity
@@ -318,46 +320,52 @@ nodes:
   - name: anemia_status_after_first_trimester_anc_visit
     label: "Anemia status after first trimester ANC visit"
     deterministic: true
-    values: [not_anemic, mild, moderate, severe]
-    kind: outcome
+    data:
+      categories: [not_anemic, mild, moderate, severe]
+      force_output: true
     caused_by:
       - hemoglobin_after_first_trimester_anc_visit
       - maternal_age_at_end_of_pregnancy
 
   # ---- anemia_screening ----
   - name: hemoglobin_screening_coverage
+    kind: intervention
     data:
       documentation_ref: anemia_screening
+      categories: [screened, not_screened]
     deterministic: true
-    values: [screened, not_screened]
     caused_by:
       - later_anc_attendance
       - anemia_intervention_propensity
   - name: hemoglobin_screening_result
-    values: [low, adequate, not_tested]
-    kind: outcome
+    data:
+      categories: [low, adequate, not_tested]
+      force_output: true
     caused_by:
       - hemoglobin_after_first_trimester_anc_visit
       - hemoglobin_screening_coverage
   - name: ferritin_screening_coverage
+    kind: intervention
     data:
       documentation_ref: anemia_screening
+      categories: [screened, not_screened]
     deterministic: true
-    values: [screened, not_screened]
     caused_by:
       - hemoglobin_screening_result
       - anemia_intervention_propensity
   - name: ferritin_screening_result
-    values: [low, adequate, not_tested]
-    kind: outcome
+    data:
+      categories: [low, adequate, not_tested]
+      force_output: true
     caused_by:
       - ferritin_screening_coverage
       - anemia_status_after_first_trimester_anc_visit
       - maternal_age_at_end_of_pregnancy
   - name: true_hemoglobin_exposure
     deterministic: true
-    values: [low, adequate]
-    kind: outcome
+    data:
+      categories: [low, adequate]
+      force_output: true
     caused_by:
       - hemoglobin_after_first_trimester_anc_visit
 
@@ -366,9 +374,9 @@ nodes:
     label: "IFA/MMS at any ANC"
     data:
       documentation_ref: oral_iron_antenatal
+      categories: [none, IFA, MMS]
+      force_output: true
     deterministic: true
-    values: [none, IFA, MMS]
-    kind: outcome
     caused_by:
       - ifa_mms_at_first_trimester_anc_visit
       - later_anc_attendance
@@ -377,8 +385,9 @@ nodes:
     label: "IV iron coverage"
     data:
       documentation_ref: intervention_iv_iron_antenatal_mncnh
+      force_output: true
     deterministic: true
-    kind: outcome
+    kind: intervention
     caused_by:
       - ferritin_screening_result
       - anemia_intervention_propensity
@@ -416,8 +425,9 @@ nodes:
       - iv_iron_hemoglobin_effect
   - name: anemia_status_at_end_of_pregnancy
     deterministic: true
-    values: [not_anemic, mild, moderate, severe]
-    kind: outcome
+    data:
+      categories: [not_anemic, mild, moderate, severe]
+      force_output: true
     caused_by:
       - hemoglobin_at_end_of_pregnancy
       - maternal_age_at_end_of_pregnancy
@@ -427,8 +437,8 @@ nodes:
     data:
       documentation_ref:
         - {ref: other_models_pregnancy_closed_cohort_mncnh, text: Pregnancy model}
-    values: [live_birth, stillbirth, abortion/miscarriage/ectopic]
-    kind: outcome
+      categories: [live_birth, stillbirth, abortion/miscarriage/ectopic]
+      force_output: true
     caused_by:
       - broad_pregnancy_outcome
       - ifa_mms_at_any_anc
@@ -480,20 +490,23 @@ nodes:
       - pregnancy_duration
   - name: preterm_status
     deterministic: true
-    values: [preterm, term]
-    kind: outcome
+    data:
+      categories: [preterm, term]
+      force_output: true
     caused_by:
       - pregnancy_duration
   - name: sex_of_infant
-    values: [male, female]
-    kind: outcome
+    data:
+      categories: [male, female]
+      force_output: true
     caused_by:
       - pregnancy_outcome
 
   # ---- ai_ultrasound ----
   - name: ultrasound
-    values: [none, standard, AI]
-    kind: outcome
+    data:
+      categories: [none, standard, AI]
+      force_output: true
     caused_by:
       - anc_attendance_category
   - name: believed_pregnancy_duration
@@ -504,8 +517,9 @@ nodes:
   - name: believed_preterm
     label: "Believed preterm?"
     deterministic: true
-    values: [preterm, term]
-    kind: outcome
+    data:
+      categories: [preterm, term]
+      force_output: true
     caused_by:
       - believed_pregnancy_duration
 
@@ -514,6 +528,7 @@ nodes:
     label: "Abortion, miscarriage, ectopic maternal disorders YLDs"
     data:
       documentation_ref: 2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh
+      force_output: true
     deterministic: true
     kind: outcome
     caused_by:
@@ -521,6 +536,7 @@ nodes:
       - maternal_age_at_end_of_pregnancy
   - name: abortion_miscarriage_ectopic_maternal_disorders_death
     label: "Abortion, miscarriage, ectopic maternal disorders death"
+    kind: outcome
     data:
       documentation_ref: 2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh
     caused_by:
@@ -530,9 +546,9 @@ nodes:
   # ---- facility_choice ----
   - name: ifd
     label: "IFD"
-    values: [at-home, in-facility]
     data:
       documentation_ref: 2024_facility_model_vivarium_mncnh_portfolio
+      categories: [at-home, in-facility]
     deterministic: true
     caused_by:
       - broad_pregnancy_outcome
@@ -540,10 +556,10 @@ nodes:
       - believed_preterm
       - abortion_miscarriage_ectopic_maternal_disorders_death
   - name: birth_facility
-    values: [home, BEmONC, CEmONC]
     data:
       documentation_ref: 2024_facility_model_vivarium_mncnh_portfolio
-    kind: outcome
+      categories: [home, BEmONC, CEmONC]
+      force_output: true
     caused_by:
       - ifd
 
@@ -551,24 +567,25 @@ nodes:
   - name: intrapartum_azithromycin
     data:
       documentation_ref: azithromycin_intervention
-    kind: outcome
+      force_output: true
     caused_by:
       - birth_facility
   - name: acs_eligibility
     label: "ACS eligibility"
     data:
       documentation_ref: acs_intervention
+      categories: [eligible, not eligible]
+      force_output: true
     deterministic: true
-    values: [eligible, not eligible]
-    kind: outcome
     caused_by:
       - believed_pregnancy_duration
   - name: acs_coverage
     label: "Antenatal corticosteroid coverage"
     data:
       documentation_ref: acs_intervention
+      force_output: true
     deterministic: true
-    kind: outcome
+    kind: intervention
     caused_by:
       - acs_eligibility
       - birth_facility
@@ -576,7 +593,7 @@ nodes:
   - name: misoprostol
     data:
       documentation_ref: misoprostol_intervention
-    kind: outcome
+      force_output: true
     caused_by:
       - anc_attendance_category
       - birth_facility
@@ -592,7 +609,7 @@ nodes:
   - name: maternal_sepsis_incidence
     data:
       documentation_ref: 2021_cause_maternal_sepsis_mncnh
-    kind: outcome
+      force_output: true
     caused_by:
       - abortion_miscarriage_ectopic_maternal_disorders_death
       - broad_pregnancy_outcome
@@ -601,6 +618,7 @@ nodes:
   - name: maternal_sepsis_ylds
     data:
       documentation_ref: 2021_cause_maternal_sepsis_mncnh
+      force_output: true
     kind: outcome
     deterministic: true
     caused_by:
@@ -609,6 +627,7 @@ nodes:
   - name: maternal_sepsis_mortality
     data:
       documentation_ref: 2021_cause_maternal_sepsis_mncnh
+      force_output: true
     kind: outcome
     caused_by:
       - maternal_sepsis_incidence
@@ -617,8 +636,8 @@ nodes:
   - name: postpartum_hemorrhage_blood_loss_category
     data:
       documentation_ref: 2023_cause_postpartum_hemorrhage_mncnh
-    values: [300-500 mL, 500 mL-1 L, 1 L+]
-    kind: outcome
+      categories: [300-500 mL, 500 mL-1 L, 1 L+]
+      force_output: true
     caused_by:
       - abortion_miscarriage_ectopic_maternal_disorders_death
       - broad_pregnancy_outcome
@@ -629,6 +648,7 @@ nodes:
   - name: postpartum_hemorrhage_ylds
     data:
       documentation_ref: 2023_cause_postpartum_hemorrhage_mncnh
+      force_output: true
     kind: outcome
     deterministic: true
     caused_by:
@@ -637,13 +657,14 @@ nodes:
   - name: postpartum_hemorrhage_incidence
     data:
       documentation_ref: 2023_cause_postpartum_hemorrhage_mncnh
-    kind: outcome
+      force_output: true
     deterministic: true
     caused_by:
       - postpartum_hemorrhage_blood_loss_category
   - name: postpartum_hemorrhage_mortality
     data:
       documentation_ref: 2023_cause_postpartum_hemorrhage_mncnh
+      force_output: true
     kind: outcome
     caused_by:
       - postpartum_hemorrhage_blood_loss_category
@@ -652,7 +673,7 @@ nodes:
   - name: obstructed_labor_incidence
     data:
       documentation_ref: 2021_cause_obstructed_labor_mncnh
-    kind: outcome
+      force_output: true
     caused_by:
       - abortion_miscarriage_ectopic_maternal_disorders_death
       - broad_pregnancy_outcome
@@ -660,6 +681,7 @@ nodes:
   - name: obstructed_labor_ylds
     data:
       documentation_ref: 2021_cause_obstructed_labor_mncnh
+      force_output: true
     kind: outcome
     deterministic: true
     caused_by:
@@ -668,6 +690,7 @@ nodes:
   - name: obstructed_labor_mortality
     data:
       documentation_ref: 2021_cause_obstructed_labor_mncnh
+      force_output: true
     kind: outcome
     caused_by:
       - obstructed_labor_incidence
@@ -676,6 +699,7 @@ nodes:
   - name: residual_maternal_disorders_ylds
     data:
       documentation_ref: 2021_cause_obstructed_labor_mncnh
+      force_output: true
     kind: outcome
     deterministic: true
     caused_by:
@@ -685,6 +709,7 @@ nodes:
   - name: residual_maternal_disorders_mortality
     data:
       documentation_ref: 2021_cause_residual_maternal_disorders_mncnh
+      force_output: true
     kind: outcome
     caused_by:
       - abortion_miscarriage_ectopic_maternal_disorders_death
@@ -693,6 +718,7 @@ nodes:
   - name: maternal_mortality
     data:
       documentation_ref: 2021_cause_maternal_disorders_mncnh
+      force_output: true
     deterministic: true
     kind: outcome
     caused_by:
@@ -706,20 +732,20 @@ nodes:
   - name: antibiotics_availability
     data:
       documentation_ref: intervention_neonatal_antibiotics
-    kind: outcome
+      force_output: true
   - name: cpap_availability
     label: "CPAP availability"
     data:
       documentation_ref: intervention_neonatal_cpap
-    kind: outcome
+      force_output: true
     caused_by:
       - birth_facility
       - rds_intervention_propensity
   - name: probiotics_availability
     data:
       documentation_ref: intervention_neonatal_probiotics
+      force_output: true
     deterministic: true
-    kind: outcome
     caused_by:
       - birth_facility
   - name: preterm_with_rds
@@ -731,6 +757,7 @@ nodes:
       - pregnancy_outcome
   - name: probiotics_coverage
     label: "Neonatal probiotics coverage"
+    kind: intervention
     data:
       documentation_ref: intervention_neonatal_probiotics
     caused_by:
@@ -743,6 +770,7 @@ nodes:
         - 2021_cause_neonatal_sepsis_mncnh
         - {ref: 2019_risk_effect_lbwsg, text: LBWSG risk effects}
         - {ref: 2023_hemoglobin_effects, text: Hemoglobin risk effects}
+      force_output: true
     kind: outcome
     caused_by:
       - pregnancy_outcome
@@ -758,6 +786,7 @@ nodes:
         - 2021_cause_preterm_birth_mncnh
         - acs_intervention
         - {ref: 2019_risk_effect_lbwsg, text: LBWSG risk effects}
+      force_output: true
     kind: outcome
     caused_by:
       - acs_coverage
@@ -771,6 +800,7 @@ nodes:
       documentation_ref:
         - 2021_cause_neonatal_encephalopathy_mncnh
         - {ref: 2019_risk_effect_lbwsg, text: LBWSG risk effects}
+      force_output: true
     kind: outcome
     caused_by:
       - lbwsg
@@ -789,6 +819,7 @@ nodes:
       documentation_ref:
         - 2021_cause_neonatal_disorders_mncnh
         - {ref: 2019_risk_effect_lbwsg, text: LBWSG risk effects}
+      force_output: true
     kind: outcome
     caused_by:
       - lbwsg
@@ -799,6 +830,7 @@ nodes:
     label: "Early neonatal mortality"
     data:
       documentation_ref: 2021_cause_neonatal_disorders_mncnh
+      force_output: true
     deterministic: true
     kind: outcome
     caused_by:
@@ -813,6 +845,7 @@ nodes:
         - 2021_cause_neonatal_sepsis_mncnh
         - {ref: 2019_risk_effect_lbwsg, text: LBWSG risk effects}
         - {ref: 2023_hemoglobin_effects, text: Hemoglobin risk effects}
+      force_output: true
     kind: outcome
     caused_by:
       - antibiotics_availability
@@ -829,6 +862,7 @@ nodes:
         - 2021_cause_preterm_birth_mncnh
         - acs_intervention
         - {ref: 2019_risk_effect_lbwsg, text: LBWSG risk effects}
+      force_output: true
     kind: outcome
     caused_by:
       - acs_coverage
@@ -843,6 +877,7 @@ nodes:
       documentation_ref:
         - 2021_cause_neonatal_encephalopathy_mncnh
         - {ref: 2019_risk_effect_lbwsg, text: LBWSG risk effects}
+      force_output: true
     kind: outcome
     caused_by:
       - lbwsg
@@ -855,6 +890,7 @@ nodes:
       documentation_ref:
         - 2021_cause_neonatal_disorders_mncnh
         - {ref: 2019_risk_effect_lbwsg, text: LBWSG risk effects}
+      force_output: true
     kind: outcome
     caused_by:
       - lbwsg
@@ -866,6 +902,7 @@ nodes:
     label: "Late neonatal mortality"
     data:
       documentation_ref: 2021_cause_neonatal_disorders_mncnh
+      force_output: true
     deterministic: true
     kind: outcome
     caused_by:
@@ -877,6 +914,7 @@ nodes:
   - name: neonatal_mortality
     data:
       documentation_ref: 2021_cause_neonatal_disorders_mncnh
+      force_output: true
     deterministic: true
     kind: outcome
     caused_by:
@@ -906,16 +944,18 @@ nodes:
   - name: anemia_status_first_six_weeks_postpartum
     label: "Anemia status in the first six weeks postpartum"
     deterministic: true
-    values: [not_anemic, mild, moderate, severe]
-    kind: outcome
+    data:
+      categories: [not_anemic, mild, moderate, severe]
+      force_output: true
     caused_by:
       - postpartum_hemoglobin_six_weeks
       - maternal_age_at_end_of_pregnancy
   - name: anemia_status_six_weeks_to_nine_months
     label: "Anemia status six weeks to nine months postpartum"
     deterministic: true
-    values: [not_anemic, mild, moderate, severe]
-    kind: outcome
+    data:
+      categories: [not_anemic, mild, moderate, severe]
+      force_output: true
     caused_by:
       - postpartum_hemoglobin_nine_months
       - maternal_age_at_end_of_pregnancy
@@ -956,6 +996,7 @@ nodes:
 
   - name: anemia_ylds_to_first_trimester_anc
     label: "Anemia YLDs to first trimester ANC"
+    kind: outcome
     deterministic: true
     caused_by:
       - anemia_status_at_the_start_of_pregnancy
@@ -964,6 +1005,7 @@ nodes:
 
   - name: anemia_ylds_between_anc_visits
     label: "Anemia YLDs between ANC visits"
+    kind: outcome
     deterministic: true
     caused_by:
       - anemia_status_after_first_trimester_anc_visit
@@ -973,6 +1015,7 @@ nodes:
 
   - name: anemia_ylds_to_end_of_pregnancy
     label: "Anemia YLDs to end of pregnancy"
+    kind: outcome
     deterministic: true
     caused_by:
       - anemia_status_at_end_of_pregnancy
@@ -986,6 +1029,7 @@ nodes:
   # value being missing, so maternal mortality is a parent here in its own right.
   - name: anemia_ylds_first_six_weeks_postpartum
     label: "Anemia YLDs in the first six weeks postpartum"
+    kind: outcome
     deterministic: true
     caused_by:
       - anemia_status_first_six_weeks_postpartum
@@ -994,18 +1038,21 @@ nodes:
   # The only window scored against NON-pregnancy anemia thresholds.
   - name: anemia_ylds_six_weeks_to_nine_months
     label: "Anemia YLDs six weeks to nine months postpartum"
+    kind: outcome
     deterministic: true
     caused_by:
       - anemia_status_six_weeks_to_nine_months
       - maternal_mortality
 
   # The observer writes the five windows separately, stratified by timestep; this
-  # is their sum, which is the quantity the results report. `observed` sits here
+  # is their sum, which is the quantity the results report. `force_output` sits here
   # rather than on the five, which are rows of this one measure rather than five
   # measures of their own.
   - name: anemia_ylds
     label: "Anemia YLDs"
     deterministic: true
+    data:
+      force_output: true
     kind: outcome
     caused_by:
       - anemia_ylds_to_first_trimester_anc
@@ -1016,7 +1063,8 @@ nodes:
 
   # ---- postpartum_depression ----
   - name: postpartum_depression
-    kind: outcome
+    data:
+      force_output: true
     caused_by:
       - hemoglobin_at_end_of_pregnancy
       - maternal_mortality

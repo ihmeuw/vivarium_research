@@ -254,7 +254,7 @@ the modules could be run in the simulation.
 
 Here is an interactive causal diagram/concept model diagram of this model:
 
-.. causal-graph:: causal_graph.yaml
+.. causalweb-interactive:: causal_graph.yaml
    :collapse: 1
    :height: 700px
 
@@ -285,7 +285,7 @@ Pregnancy component
 
 .. _mncnh_portfolio_pregnancy_component_modules:
 
-.. causal-graph-table:: pregnancy
+.. causalweb-table:: pregnancy
    :file: causal_graph.yaml
 
 .. _mncnh_portfolio_intrapartum_component:
@@ -317,7 +317,7 @@ Intrapartum component
   noting this limitation until we implement a strategy to address this (`see related 
   ticket here <https://jira.ihme.washington.edu/browse/SSCI-2310>`_)
 
-.. causal-graph-table:: intrapartum
+.. causalweb-table:: intrapartum
    :file: causal_graph.yaml
 
 .. _mncnh_portfolio_neonatal_component:
@@ -329,7 +329,7 @@ Neonatal component
 
   Only live births proceed to the neonatal component, as described above.
 
-.. causal-graph-table:: neonatal
+.. causalweb-table:: neonatal
    :file: causal_graph.yaml
 
 .. _mncnh_portfolio_postpartum_component:
@@ -337,7 +337,7 @@ Neonatal component
 Postpartum component
 --------------------
 
-.. causal-graph-table:: postpartum
+.. causalweb-table:: postpartum
    :file: causal_graph.yaml
 
 .. _mncnh_portfolio_3.1:
