@@ -348,7 +348,8 @@ Pre-simulation data checks:
 * All transition probabilities are between 0 and 1.
 
 .. todo::
-  For any literature values that get saved in the artifact, we will want to check that the mean and uncertainty (confidence interval, standard error, etc.) match extracted values.
+  For any literature values that get saved in the artifact, we will want to check that the mean and uncertainty (confidence interval, standard error, etc.) match extracted values,
+  and approximately match extracted values after subsampling to our modeled draws.
 
 From observed outputs:
 
