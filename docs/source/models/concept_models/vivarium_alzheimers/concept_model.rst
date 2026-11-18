@@ -770,6 +770,7 @@ those who were never treated.
     - Final runs based on model 15.0
     - Baseline, Scenarios 3-8
     - * Locations: All
+      * 25 draws
       * Population size per draw: 2 million (100 seeds of 20,000
         simulants each)
     - **Remove** stratification of disease state transitions and
