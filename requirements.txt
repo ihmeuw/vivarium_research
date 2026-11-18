@@ -5,3 +5,5 @@ nbsphinx
 ipython
 ipywidgets
 matplotlib
+pyyaml
+causalweb @ git+https://github.com/zmbc/causalweb.git@4fa15cb6c4858b29c60d06344a78296e2123cffc
