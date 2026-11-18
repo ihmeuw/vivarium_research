@@ -58,8 +58,8 @@ described here.
 
 .. _costing_mr_data_processing_sop:
 
-Data Processing SOP
--------------------
+How to process extracted unit costs
+-----------------------------------
 
 This section outlines the standard operating procedure (SOP) for processing our
 cost data after it has been extracted from the literature. 
@@ -143,7 +143,7 @@ Please follow the steps below to ensure consistent and accurate processing of co
 Below is an example of what the final CSV should look like.
 
        .. csv-table:: Example rows from the processed IFA input data
-          :header: study,intervention_name,total_cost,standard_error,location,currency_type,currency_year,product_cost_included,...,infrastructure_cost_included,modeled_vs_observed,addit_stratification
+          :header: study,intervention_​name,total_​cost,standard_​error,location,currency_​type,currency_​year,product_​cost_​included,...,infrastructure_​cost_​included,modeled_​vs_​observed,addit_​stratification
 
           zeng_2009,ifa,8.8,0,china,USD,2007,1,...,0,observed,
           pandav_1998,ifa,3.6,0,india,INR,1995,1,...,1,observed,
@@ -151,7 +151,7 @@ Below is an example of what the final CSV should look like.
           shaheen_2015,ifa,3.09,0,bangladesh,USD,2013,0,...,0,observed,facility type (NGO run CNC)
           ...,...,...,...,...,...,...,...,...,...,...,...
 
-Meta-regression Analysis with MR-BRT 
+Meta-regression analysis with MR-BRT 
 ------------------------------------
 
 Why MR-BRT?
@@ -162,44 +162,49 @@ Why MR-BRT?
   Explain what MR-BRT is and why it was chosen for this meta-regression analysis.
   We tried ST-GPR, but decided against it (for now), so explain that decision process here. 
 
-Helpful Resources
+Helpful resources
 +++++++++++++++++
 
 .. todo:: 
 
   Add links: 
-  - MR-BRT docs
-  - ST-GPR docs
-  - Meta-regression learning resources (link to meta-regression page on Vivarium Research; link to Health Metrics Toolbox) 
+
+    - MR-BRT docs
+    - ST-GPR docs
+    - Meta-regression learning resources (link to meta-regression page on Vivarium Research; link to Health Metrics Toolbox) 
 
 Using MR-BRT 
 ++++++++++++
 
 .. todo:: 
 
-  - Outline current process of how we use our intervention input data: (1) standardize all rows to USD 2026,
-    currently keeping models intervention-specific as opposed to pooling across interventions
-    (although this may likely change in the future, given sparse data for some interventions as well as expectation that some cost categories will be similar across certain interventions).
-    (2) Set up MR-BRT model with log-transformed total cost, intercept forced through 0, standard error set as near to 0 as possible.
-    (3) Add study covariate (fixed effect of SDI).
-    (4) Run model and review results for similarity to input data and face validity (using both tables and figures).
+  - Outline current process of how we use our intervention input data: 
+
+      (1) standardize all rows to USD 2026,
+      currently keeping models intervention-specific as opposed to pooling across interventions
+      (although this may likely change in the future, given sparse data for some interventions as well as expectation that some cost categories will be similar across certain interventions).
+      (2) Set up MR-BRT model with log-transformed total cost, intercept forced through 0, standard error set as near to 0 as possible.
+      (3) Add study covariate (fixed effect of SDI).
+      (4) Run model and review results for similarity to input data and face validity (using both tables and figures).
+
   - Describe how we go to our current model structure via testing with MMS (then subsequently IFA and IV iron). 
 
-Outstanding Questions
+Outstanding questions
 +++++++++++++++++++++
 
 .. todo:: 
 
-  List any outstanding questions related to our current meta-regression analyses, e.g.
-  - Are there additional covariates that should be included in the model? (SDI, rurality, facility type)
-  - If we add more covariates, which covariates will be most relevant to which cost categories in which interventions? 
-  - Should we pool data across interventions for certain cost categories? Which categories and which interventions? 
-  - How to handle uncertainty? (This is two-fold: how to account for uncertainty in the input data and how to assess uncertainty in our model outputs.)
-  - How will our model process work with other types of interventions beyond IFA, MMS, and IV iron? 
+  List any outstanding questions related to our current meta-regression analyses, e.g.:
+
+    - Are there additional covariates that should be included in the model? (SDI, rurality, facility type)
+    - If we add more covariates, which covariates will be most relevant to which cost categories in which interventions? 
+    - Should we pool data across interventions for certain cost categories? Which categories and which interventions? 
+    - How to handle uncertainty? (This is two-fold: how to account for uncertainty in the input data and how to assess uncertainty in our model outputs.)
+    - How will our model process work with other types of interventions beyond IFA, MMS, and IV iron? 
 
 .. _costing_mr_intervention_specific_considerations:
 
-Intervention-Specific Considerations
+Intervention-specific considerations
 ------------------------------------
 
 This section documents decisions and considerations made during the data processing and modeling of each intervention, 
