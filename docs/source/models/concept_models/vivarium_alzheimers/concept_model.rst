@@ -323,6 +323,13 @@ Default stratifications for all observations:
 Additionally, all output should automatically be stratified by location,
 scenario, and input draw.
 
+We would like one custom stratification that we will call the NNT stratification.
+This stratification will create cohorts of simulants who start treatment in the
+same year. There will be four categories: started treatment in 2040,
+started treatment in 2050, started treatment in 2060, or other. Other
+should include both simulants that were treated in any other year, and
+those who were never treated.
+
 .. _alz_observer_outputs:
 
 .. list-table:: Outputs of simulation observers
@@ -342,7 +349,7 @@ scenario, and input draw.
     -
     -
   * - Transition counts between Alzheimer's cause states
-    - Include treatment status with all values from the treatment status person-time observer.
+    - Include treatment status with all values from the treatment status person-time observer. Include NNT stratification.
     -
   * - Person-time in each Alzheimer's cause state
     - Include treatment status with all values from the treatment status person-time observer.
@@ -751,6 +758,23 @@ scenario, and input draw.
     - * Locations: All
       * 25 draws, 5 seeds, 20,000 simulants per seed 
     - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 15.0
+    - Smooth testing curves and add NNT stratification
+    - Baseline, Scenarios 3-8
+    - * Locations: Brazil, China, USA
+      * 25 draws, 5 seeds, 20,000 simulants per seed 
+    - Stratify disease state transitions by NNT. Keep all other stratifications from model 14.
+    - Default
+  * - 16.0
+    - Final runs based on model 15.0
+    - Baseline, Scenarios 3-8
+    - * Locations: All
+      * 25 draws
+      * Population size per draw: 2 million (100 seeds of 20,000
+        simulants each)
+    - **Remove** stratification of disease state transitions and
+      person-time by treatment but need to include NNT stratification still
     - Default
 
 5.2 V & V Tracking
@@ -1419,6 +1443,41 @@ scenario, and input draw.
         unchanged, because the fit is pinned to GBD dementia prevalence.
     -
     -
+  * - 14.0
+    - * Re-run base V&V notebook (incidence, prevalence, mortality,
+        etc.)
+      * Check that testing rates follow the new testing ramps in each
+        scenario
+      * Check that treatment initiation follows the new treatment ramp
+      * Check that the new scenarios (Scenarios 3-8) run, and that the
+        zero-impact treatment scenarios have the same testing as the
+        matching with-treatment scenarios
+      * Check that disease state transitions and person-time are
+        stratified by treatment
+      * Re-run testing and treatment V&V notebooks
+    - * All checks pass
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/66de650b5649a3c936485f81582c206c68726023/verification_and_validation/2026_11_02_model14.0_vv.ipynb>`__
+      * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/66de650b5649a3c936485f81582c206c68726023/verification_and_validation/2026_11_02_model14.0_vv_testing.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/66de650b5649a3c936485f81582c206c68726023/verification_and_validation/2026_11_02_model14.0_vv_treatment.ipynb>`__
+  * - 15.0
+    - * Re-run base V&V notebook (incidence, prevalence, mortality,
+        etc.) for the baseline scenario
+      * Check that testing rates follow the smoothed testing curves in
+        each scenario, and plot total BBBM tests over time by scenario
+      * Re-run testing and treatment V&V notebooks
+      * Check the NNT stratification facilitates the NNT calculation successfully
+    - * All checks pass
+    - * `Disease transition rates, mortality, incidence, prevalence
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/4656342bf6c2093a288e1a8ac4e28db21c82bb38/verification_and_validation/2026_11_17_model15.0_vv.ipynb>`__
+      * `Testing
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/4656342bf6c2093a288e1a8ac4e28db21c82bb38/verification_and_validation/2026_11_17_model15.0_vv_testing.ipynb>`__
+      * `Treatment
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/4656342bf6c2093a288e1a8ac4e28db21c82bb38/verification_and_validation/2026_11_17_model15.0_vv_treatment.ipynb>`__
+      * `NNT results and checks
+        <https://github.com/ihmeuw/vivarium_research_alzheimers/blob/4656342bf6c2093a288e1a8ac4e28db21c82bb38/results_tables/results_NNT.ipynb>`__
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
