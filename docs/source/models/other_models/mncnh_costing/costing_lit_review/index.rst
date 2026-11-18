@@ -232,6 +232,8 @@ simulation output.
 3. **Offset costs** — averted costs due to reduction of burden downstream of intervention delivery
 (e.g., averted health system costs due to decreased time spent in NICU or hospital, averted personnel costs due to decreased staff time treating burden, and averted patient spending).
 
+.. _costing_lit_review_unit_cost_taxonomy_wave1:
+
 Unit cost taxonomy (Wave 1)
 +++++++++++++++++++++++++++
 
