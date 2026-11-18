@@ -135,25 +135,17 @@ See observer/outputs section on main concept model document.
 4.0 Verification and Validation Criteria
 +++++++++++++++++++++++++++++++++++++++++
 
+See V&V criteria on subcomponent pages:
 
+* :ref:`Neonatal mortality <2021_cause_neonatal_disorders_mncnh>`
+* :ref:`ACS intervention <acs_intervention>`
+* :ref:`Antibiotics intervention <intervention_neonatal_antibiotics>`
+* :ref:`CPAP intervention <intervention_neonatal_cpap>`
+* :ref:`Probiotics intervention <intervention_neonatal_probiotics>`
 
-* Neonatal Sepsis mortality risk in simulation should match GBD estimates.
-* Relative Risk of Neonatal Sepsis death due to LBWSG should match overall neonatal mortality RR.
+.. todo::
+  There are not V&V criteria for the LBWSG risk effects subcomponent
 
-* Neonatal Encephalopathy mortality risk in simulation should match GBD estimates.
-* Relative Risk of Neonatal Encephalopathy death due to LBWSG should match overall neonatal mortality RR.
-
-* Preterm mortality risk in simulation should match GBD estimates.
-* No preterm deaths for simulants with LBWSG categories for gestational ages of 37 weeks or greater.
-* Relative Risk of preterm with and without RDS deaths due to LBWSG should match overall neonatal mortality RR (when comparing between categories with :math:`GA < 37` weeks).
-* Fraction of preterm deaths with RDS should match assumption in data table above.
-
-* Confirm ACMR in sim matches ACMR in artifact
-* Confirm LBWSG exposure match
-* Confirm LBWSG RR on ACMR matches
-* Confirm CSMR matches for preterm, sepsis, encephalopathy
-* Confirm that RDS incidence and mortality match expectations
-* Confirm that interventions have expected efficacy and coverage rates
 
 5.0 References
 +++++++++++++++

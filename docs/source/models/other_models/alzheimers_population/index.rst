@@ -316,6 +316,11 @@ Calculating entrance rate of simulants in the BBBM-AD state
 
 The number of simulants to add in the BBBM-AD state was determined through an MCMC optimization
 simultaneously with the other parameters for the cause model. See :ref:`Cause Model Calibration Strategy Docs for details <cause_alzheimers_rate_calibration>`.
+The calibration writes this count to the artifact key
+``cause.alzheimers_consistent.susceptible_to_bbbm_transition_count``. The
+count is zero below age 40, because the calibration writes a zero
+susceptible-to-BBBM-AD rate for ages 30 and 35 and has no rows below age
+30. So no simulant enters the simulation before age 40.
 
 
 Data Tables

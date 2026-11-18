@@ -37,7 +37,27 @@ MNCNH Portfolio Costing Meta-Regression
   :local:
   :depth: 2
 
+.. _costing_mr_overview:
+
+1.0 Overview
+------------
+
+This document describes what happens to cost estimates after they have been
+extracted from the literature: how they are standardized into comparable units,
+how they are pooled into a single estimate per intervention, and how that estimate
+becomes a cost the
+:ref:`MNCNH Portfolio simulation <2024_concept_model_vivarium_mncnh_portfolio>`
+can use.
+
+The companion document,
+:ref:`MNCNH Portfolio Costing Literature Review <costing_lit_review_vivarium_mncnh_portfolio>`,
+covers the search strategy, the cost taxonomy, and the extraction sheet. We suggest you read 
+that first if you have questions about the context of the input data used in the meta-regression
+described here. 
 
 .. todo:: 
-    
-    Add doc about costing meta-regressions
+
+  - Fill in the rest of this document with info on data processing step (SOP once estimates are extracted: summarize data sources as with MMS,
+    standardize costs to per-person total cost, adjust to USD 2026, set up data for meta-regression with {cost_category}_included columns, again using MMS as example) 
+    and meta-regression with MR-BRT (and other statistical methods considered).
+  - Add links to MR-BRT and ST-GPR docs here; learning resources for meta-regression (e.g., Health Metrics Toolbox)

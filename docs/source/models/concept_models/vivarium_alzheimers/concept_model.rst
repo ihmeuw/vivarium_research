@@ -290,17 +290,26 @@ The basic plan for the design of the simulation is as follows:
   :header-rows: 1
 
   * - Scenario
-    - Columns with more details go here
-    - Note
+    - Notes
   * - 0. Baseline (Reference)
     -
-    -
-  * - 1. Testing scale-up (Alternative 1)
-    -
-    -
-  * - 2. Treatment scale-up (Alternative 2)
-    -
-    -
+  * - 1. Old Testing, No Treatment (Alternative 1)
+    - Out dated scenario from phase 1, included for clarity in model run request table below.
+  * - 2. Old Testing, Old Treatment (Alternative 2)
+    - Out dated scenario from phase 1, included for clarity in model run request table below.
+  * - 3. Slow Testing, Zero-Impact Treatment
+    - To help with calculations, please include treatment assignment but have NO impact on outcomes.
+  * - 4. Intermediate Testing, Zero-Impact Treatment
+    - To help with calculations, please include treatment assignment but have NO impact on outcomes.
+  * - 5. Accelerated Testing, Zero-Impact Treatment
+    - To help with calculations, please include treatment assignment but have NO impact on outcomes.
+  * - 6. Slow Testing, With Treatment
+    - Treatment is included and has an impact on outcomes.
+  * - 7. Intermediate Testing, With Treatment
+    - Treatment is included and has an impact on outcomes.
+  * - 8. Accelerated Testing, With Treatment
+    - Treatment is included and has an impact on outcomes.
+
 
 4.3 Outputs and Observers
 --------------------------
@@ -313,6 +322,13 @@ Default stratifications for all observations:
 
 Additionally, all output should automatically be stratified by location,
 scenario, and input draw.
+
+We would like one custom stratification that we will call the NNT stratification.
+This stratification will create cohorts of simulants who start treatment in the
+same year. There will be four categories: started treatment in 2040,
+started treatment in 2050, started treatment in 2060, or other. Other
+should include both simulants that were treated in any other year, and
+those who were never treated.
 
 .. _alz_observer_outputs:
 
@@ -333,10 +349,10 @@ scenario, and input draw.
     -
     -
   * - Transition counts between Alzheimer's cause states
-    -
+    - Include treatment status with all values from the treatment status person-time observer. Include NNT stratification.
     -
   * - Person-time in each Alzheimer's cause state
-    -
+    - Include treatment status with all values from the treatment status person-time observer.
     -
   * - CSF/PET-eligible simulant count
     - Test state: CSF test received, PET test received, no test received, (negative) BBBM test received
@@ -719,6 +735,36 @@ scenario, and input draw.
         simulants each)
     - **Remove** stratification of disease state transitions and
       person-time by treatment
+    - Default
+  * - 13.0
+    - Rebuild all artifacts with the converged consistent-rates fit
+      (`vivarium_csu_alzheimers PR #84
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/84>`_) and
+      250 draws per key (`PR #82
+      <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/82>`_). No
+      change to the simulation code. See the :ref:`rate calibration
+      <cause_alzheimers_rate_calibration>` section for what changed in the
+      fit.
+    - Baseline, Alternative Scenario 1, Alternative Scenario 2
+    - * Locations: Brazil, China, USA
+      * 25 draws
+      * Population size per draw: traditional V&V run size (which is 100,000 simulants per draw [see Section 4.1], and in the past was accomplished with 5 seeds × 20,000 simulants per seed [Abie thinks])
+        simulants each)
+    - Default
+    - Default
+  * - 14.0
+    - Update treatment and testing ramps and new scenarios
+    - Baseline, Scenarios 3-8
+    - * Locations: All
+      * 25 draws, 5 seeds, 20,000 simulants per seed 
+    - Stratify disease state transitions and person-time by treatment
+    - Default
+  * - 15.0
+    - Smooth testing curves and add NNT stratification
+    - Baseline, Scenarios 3-8
+    - * Locations: Brazil, China, USA
+      * 25 draws, 5 seeds, 20,000 simulants per seed 
+    - Stratify disease state transitions by NNT. Keep all other stratifications from model 14.
     - Default
 
 5.2 V & V Tracking
@@ -1374,6 +1420,19 @@ scenario, and input draw.
     - N/A
     - * `Results tables and plots in PR 45
         <https://github.com/ihmeuw/vivarium_research_alzheimers/pull/45>`_
+  * - 13.0
+    - * The artifacts built, so every fit passed the convergence gate. No
+        further check of the fit is needed.
+      * Compare the headline results with model 12.2 for each location:
+        person-time by cause state, new simulants, deaths, YLLs, YLDs,
+        test counts, and treatment counts.
+      * Expect both-sex totals within 20% of model 12.2. Expect female
+        BBBM-AD and MCI-AD person-time and female new simulants to be
+        higher by 15 to 25% in the USA and Japan, because the old fit's
+        female chain was stuck there. Expect dementia person-time to be
+        unchanged, because the fit is pinned to GBD dementia prevalence.
+    -
+    -
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -1407,4 +1466,17 @@ scenario, and input draw.
       Jira ticket: `SSCI-2411
       <https://jira.ihme.washington.edu/browse/SSCI-2411>`_
     - After model 8 or model 9
+  * - The consistent-rates fit behind the model 10.0 to 12.2 artifacts did
+      not converge for USA females
+    - The fit ran one MCMC chain and wrote its iterations straight into the
+      draws, with no convergence check. The USA female chain had an effective
+      sample size of 3 to 6 per age knot, so the female rates in the
+      published USA artifact come from a chain that was stuck, and the draws
+      understate uncertainty in every location. See the :ref:`rate
+      calibration <cause_alzheimers_rate_calibration>` section.
+    - `PR #84 <https://github.com/ihmeuw/vivarium_csu_alzheimers/pull/84>`_
+      runs four chains, starts the knots at age 40, smooths the S→BBBM
+      hazard across age, and stops the artifact build unless every knot
+      converges. Rebuild the artifacts with it and rerun.
+    - Next model run
 
