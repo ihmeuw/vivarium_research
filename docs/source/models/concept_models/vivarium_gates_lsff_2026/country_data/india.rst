@@ -207,7 +207,7 @@ home.
 
   The Gates Foundation's industrially produced fraction for rice covers the
   whole market, including government rice, so using it here would count
-  government rice twice. Instead, we choose the industrially produced fraction
+  government rice twice. Instead, we calculate the industrially produced fraction
   for non-government rice so that national rice fortifiability for women of
   reproductive age matches the Gates Foundation value.
 
