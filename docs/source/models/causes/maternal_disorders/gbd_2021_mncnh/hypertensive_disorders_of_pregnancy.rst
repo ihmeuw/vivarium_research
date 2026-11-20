@@ -72,8 +72,8 @@ GBD uses an older case definition of pre-eclampsia which absolutely requires pro
 whereas more recent definitions (which informed the discussion in the overview section)
 treat any sign of organ dysfunction as sufficient when co-occurring with hypertension.
 
-GBD requires hypertension to be present in the eclampsia case definition,
-which is a bit unusual -- though the vast majority of people who have seizures
+GBD requires hypertension to be present in the eclampsia case definition.
+Though the vast majority of people who have seizures
 will have hypertension, eclampsia is often diagnosed by seizures alone (in the absence of another explanation for the seizures).
 
 Cause Hierarchy
@@ -367,7 +367,7 @@ Limitations
 
 * We do not currently model disability/morbidity/YLDs due to hypertensive disorders of pregnancy, despite GBD modeling this.
 * We model pre-eclampsia as only occurring when gestational hypertension diagnostic criteria are met, but in practice pre-eclampsia can occur without meeting those criteria (when the required hypertension is not *new* after 20 weeks gestation).
-* We only model eclampsia that occurs when pre-eclampsia diagnostic criteria are met, which excludes seizures that occur without meeting those criteria (often called "atypical eclampsia").
+* We only model eclampsia that occurs when pre-eclampsia diagnostic criteria are met, which excludes seizures that occur without high blood pressure (often called "atypical eclampsia").
 * We use GBD pre-eclampsia incidence for our pre-eclampsia incidence, despite GBD nominally excluding cases that have organ dysfunction but not proteinuria (which we want to capture).
 
 References
