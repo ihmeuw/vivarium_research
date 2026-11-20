@@ -121,8 +121,8 @@ document is included in the table below.
     - Modeled
     - :ref:`Maternal sepsis document <2021_cause_maternal_sepsis_mncnh>`
   * - Maternal hypertensive disorders (c_369)
-    - **Unmodeled** (will eventually be modeled in wave III)
-    - Covered in this document (:ref:`Future documentation page for hypertensive disorders <2021_cause_maternal_hypertension_mncnh>`)
+    - Modeled
+    - :ref:`Hypertensive disorders of pregnancy <2023_cause_hypertensive_disorders_of_pregnancy_mncnh>`
   * - Maternal obstructed labor and uterine rupture (c_370)
     - Modeled
     - :ref:`Maternal obstructed labor and uterine rupture docs <2021_cause_obstructed_labor_mncnh>`
@@ -164,12 +164,6 @@ available for each cause).
     - YLDs
     - Incidence
     - Note
-  * - Maternal hypertensive disorders
-    - 369
-    - True
-    - True
-    - True
-    - Note this cause will eventually be excluded from the residual maternal disorders cause model
   * - Gestational diabetes
     - 1118
     - True
@@ -211,7 +205,7 @@ available for each cause).
     - True
     - True
     - True
-    -
+    - All estimates available through combination of cause-level data and crosswalk coefficients
 
 Summary of modeling strategy
 ++++++++++++++++++++++++++++
@@ -357,7 +351,7 @@ Data Tables
       - The value of cfr is a probability in [0,1]. Note that this value of the cfr (shown in the "implementation-driven cause model diagram") is equivalent to the fr parameter shown in the "conceptual cause model diagram" 
     * - csmr
       - cause-specific mortality rate of residual maternal disorders
-      - sum of cause-specific mortality rates across causes [375, 1118, 1119, 379, 376, 741, 369], plus cause-specific mortality rate of cause 367 scaled by (1 - postpartum_fraction)
+      - sum of cause-specific mortality rates across causes [375, 1118, 1119, 379, 376, 741], plus cause-specific mortality rate of cause 367 scaled by (1 - postpartum_fraction)
       - note that cause-specific mortality rates are a measure of deaths (from source='codcorrect') divided by population
     * - birth_rate
       - birth rate (live or still)
@@ -375,12 +369,18 @@ Data Tables
         Use mean_value as location-specific point parameter.
     * - yld_rate
       - Rate of YLDs due to all residual maternal disorders subcauses among the total population
-      - sum of cause-specific YLD rates across causes [375, 1118, 1119, 379, 376, 741, 369], plus cause-specific YLD rate of cause 367 scaled by (1 - postpartum_fraction). Note that only causes 379 and 369 have YLDs.
+      - sum of cause-specific YLD rates across causes [375, 1118, 1119, 379, 376, 741], plus cause-specific YLD rate of cause 367 scaled by (1 - postpartum_fraction)
       - source=como
     * - ylds_per_case
       - YLDs accumulated due to residual maternal disorders per case of residual maternal disorders (live/stillbirth pregnancy)
       - yld_rate / birth_rate
       - 
+    * - postpartum_fraction
+      - fraction of maternal hemorrhage cases that are postpartum
+      - The exponentiated prediction of the GBD 2023 postpartum hemorrhage crosswalk model, age group specific using the age midpoint of the age group
+      - Sample uncertainty from the normal distribution of uncertainty around the prediction, before exponentiating.
+        Clip to be no greater than 1 after exponentiating (which should very rarely occur).
+        See `the notebook <https://github.com/ihmeuw/vivarium_gates_mncnh/blob/ec5b9d663a929beb1a9aefad3917fa1b03e29e01/src/vivarium_gates_mncnh/data/postpartum_hemorrhage_split/postpartum_hemorrhage_split.ipynb>`__ for more details about the crosswalk model and how to extract this value.
 
 - The ylds_per_case parameter should be applied to all simulants affected by residual maternal disorders (equivalent to all live or still birth pregnancies)
 - The cfr (case fatality rate) parameter should be applied to all simulants affected by residual maternal disorders (equivalent to all live or still birth pregnancies)

@@ -36,6 +36,7 @@ in the indicated model-building wave:
 .. toctree::
     :maxdepth: 1
 
+    hypertensive_disorders_of_pregnancy
     postpartum_hemorrhage
     maternal_sepsis
     obstructed_labor
@@ -43,26 +44,10 @@ in the indicated model-building wave:
     residual_maternal_disorders
     abortion_miscarriage_ectopic_pregnancy_causes
 
-.. todo::
-
-  The intrapartum component (which contains this model) says in
-  :ref:`the concept model <2024_concept_model_vivarium_mncnh_portfolio>`
-  that abortion/miscarriage/ectopic pregnancies skip it altogether.
-  That contradicts this page, in which we apply :ref:`abortion/miscarriage/ectopic
-  pregnancy maternal disorders <2021_cause_abortion_miscarriage_ectopic_pregnancy_causes_mncnh>`.
-  This should be resolved by moving that cause model to a module in the pregnancy component.
-
 Note that the postpartum depression cause model is outside of the GBD maternal disorders
 hierarchy (implemented using custom rather than GBD data) and also differs from the remaining
 maternal disorders causes in that only simulants who do not die due to any maternal disorder
 cause are eligible to become "infected" with postpartum depression.
-
-Additional maternal disorders causes to be included in a future version of the model:
-
-.. toctree::
-    :maxdepth: 1
-
-    maternal_hypertensive_disorders
 
 The remainder of this document describes maternal disorders overall,
 describes the strategy for capturing the burden of the maternal
@@ -335,7 +320,7 @@ future waves, the simulation should make decisions about incidence of
 the different subcauses in the order of the suspected causal
 relationships. The specified order is:
 
-#. Maternal hypertensive disorders
+#. Hypertensive disorders of pregnancy, including pre-eclampsia syndrome
 #. Obstructed labor and uterine rupture
 #. Postpartum hemorrhage
 #. Maternal sepsis and other maternal infections
