@@ -86,6 +86,8 @@ pathways for each nutrient. Since the modeling strategy is dependent on
 the pathway and hence the nutrient, it will be convenient to organize
 certain parts of the documentation by nutrient.
 
+.. _effective_coverage_components:
+
 Components of effective coverage
 --------------------------------
 
@@ -274,8 +276,112 @@ on the :ref:`LSFF interventions page <lsff_intervention_models>`:
 * :ref:`Folic acid fortification <folic_acid_fortification>`
 * :ref:`Iron fortification <iron_fortification>`
 
-Data needed for model
-+++++++++++++++++++++
+Common data needed in all scenarios
++++++++++++++++++++++++++++++++++++
+
+Certain data is needed for each fortificant scenario (including
+intervention, baseline, and zero scenarios). This section lists these
+common data needs, which can be broadly categorized as vechicle
+consumption data or vehicle fortification data. All the data needs
+depend on the location and vehicle (the arm). The following table lists
+each data need and the additional variables it is (or may be) stratified
+by.
+
+.. list-table:: Data needs for each fortificant scenario
+    :header-rows: 1
+    :widths: 20 40 40
+
+    * - Category
+      - Data needed by model
+      - Additional stratifications
+    * - Vehicle consumption data
+      - * coverage (% of population)
+        * intake per capita (g/day)
+
+          * mean
+          * standard deviation
+      - * population (WRA, Children U5, or all), or more generally,
+
+          * age
+          * sex
+        * wealth quintile
+    * - Vehicle fortification data
+      - * consolidation (% of vehicle)
+        * FFF (% of fortifiable)
+        * effectiveness (% of fortified)
+        * nutrient concentration (ppm)
+      - * fortificant
+        * wealth quintile
+
+Observe that the table includes the four components (coverage,
+consolidation, FFF, effectiveness) of effective coverage , which is
+usually the quantity the model cares about.
+
+Note that not every possible stratification will apply to every data
+need in a category, and whether we stratify or not depends on what data
+we have available. The following subsections give some additional
+details about the data needs in each category.
+
+Vehicle consumption data
+------------------------
+
+* Different parts of our model apply to different population groups. For
+  example, the pregnancy simulation applies only to pregnant people, the
+  neural tub defects model applies to women and birthing people of
+  reproductive age, and the iron anemia model applies to all ages and
+  sexes. So which population we need data for depends on the
+  fortificant. If we can't find consumption data for the population
+  group we're interested in, we may need to fill in this data based on
+  data about a different population group.
+* When consumption data is stratified by age in the data source, the age
+  groups may not exactly match the age groups used in our model, in
+  which case we may need to do additional processing to align them with
+  our model's age groups.
+* When consumption data is stratified by wealth quintile, our data
+  processing code requires an overall value for the total population as
+  well, and it then verifies that the overall value is roughly
+  consistent with the quintiles.
+* Some nutrient → outcome pathways use intake data while others do not.
+  Whether intake data is needed depends on whether we use a
+  dose-response model in the pathway or whether we have an effect size
+  that only depends on a binary fortification variable indicating
+  whether a vehicle is fortified or not.
+
+Partial fortification coverage
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As noted when we defined :ref:`effective coverage
+<effective_coverage_components>` above, effective coverage does not
+capture the fact that people can eat some fortified vehicle and some
+non-fortified vehicle. Since the Vivarium microsimulations model
+individual people, these models can handle this situation directly if
+given the following additional data:
+
+* Full fortification coverage (% of vehicle consumers who consume only
+  fortified vehicle)
+* Any fortification coverage (% of vehicle consumers who consume any
+  fortified vehicle)
+* Partial coverage mean and SD (mean and SD of % of consumed vehicle
+  that is fortified, for those where the vehicle they consume is
+  partially fortified)
+
+Vehicle fortification data
+--------------------------
+
+* While it is theoretically possible for vehicle consolidation
+  (fortifiability) to depend on the fortificant, in practice we
+  generally assume that consolidation is a property of the vehicle
+  itself, independent of the fortificant.
+* We sometimes have data showing that FFV varies by wealth quintile,
+  which makes sense if people in different quintiles are getting their
+  food from different sources. We could encode this difference by
+  stratifying either consolidation or FFF by wealth quintile.
+* In general, FFF may or may not vary by fortificant.
+* Sometimes we have fortificant-specific data for effectiveness,
+  and sometimes we don't. Typically, we will assume that effectiveness
+  is independent of wealth quintile.
+* Nutrient concentration obviously must depend on the fortificant, and
+  it will never depend on wealth quintile.
 
 Raw input data
 ++++++++++++++
