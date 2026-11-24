@@ -283,6 +283,68 @@ Raw input data
 Inputs from Gates Foundation
 ----------------------------
 
+The Gates Foundation (GF) gives us a spreadsheet containing data they
+would like us to use in the model. Some of these values we use as-is,
+while some of them we prefer to get from the literature instead, using
+the GF values as a cross-check, and some of them are redundant with GBD
+or are incompatible with our modeling strategy, so we don't use them.
+Here is a table summarizing the data that GF provides.
+
+.. list-table:: Data provided by Gates Foundation, organized by our data strategy
+    :header-rows: 1
+    :widths: 20 30 40
+
+    * - Data strategy
+      - Data values
+      - Notes
+    * - Typically use GF values
+      - * consolidation and compliance in 2026
+        * consolidation and compliance in 2035
+        * target nutrient concentrations for salt and bouillon
+      - * The consolidation and compliance values for 2035 and the
+          target nutrient concentrations are part of the intervention
+          definition, so we always take these from GF.
+        * We can sometimes find current consolidation and compliance
+          values in the literature. In this case, we can cross-check
+          what we find against the GF values, and we may prefer the
+          literature values in some cases.
+        * The consolidation and copliance values from GF depend only on
+          the location and vehicle, not the nutrient. However, in some
+          cases it may be better to use nutrient-specific values,
+          particularly for current estimates.
+        * None of these values are stratified by wealth quintile.
+    * - Typically use literature values
+      - * coverage (same in baseline and intervention)
+        * intake per-capita in g/day (mean only)
+      - * The consumption data from GF often come from literature or
+          data sources that we can obtain ourselves, so we prefer to do
+          our own extraction rather than relying on their numbers.
+        * Depending on the location and vehicle, GF may give us numbers
+          stratified by wealth quintile and/or subnational location, or
+          they may give us a single national number.
+        * For intake per capita, GF only provides a point estimate, so
+          we still need to get SDs from the literature even if we want
+          to use the GF numbers.
+    * - Not used
+      - * consolidation and compliance in 2031
+        * fraction of population with micronutrient deficiency (iron,
+          folate, vitamin A, zinc)
+        * fraction of population with inadequate micronutrient intake
+          (iron, folate, vitamin A, zinc)
+      - * GF gives us projected consolidation and compliance values for
+          2031, but these are unused because they are only asking us to
+          model the intervention in 2035.
+        * Depending on the nutrient, the prevalence of micronutrient
+          deficiencies is either redundant with GBD data or is
+          incompatible with how GBD models the risk factor, so we are
+          currently not using these data.
+        * Our models do not take the prevalence of inadequate intake as
+          an input, so these values are currently unused. However, we
+          could potentially use the GF numbers as a validation check in
+          some cases.
+        * The numbers from GF are sometimes stratified by subnational
+          location or wealth quintile and sometimes not.
+
 Country-specific data
 ---------------------
 
