@@ -226,6 +226,10 @@ Therefore, in our simulation the diagram is substantially simplified:
 
 .. image:: hypertensive_disorders_of_pregnancy_venn_diagram_sim.drawio.png
 
+We further categorize pre-eclampsia (and the categories nested within it) by the timing of its onset:
+early-onset (onset before 34 weeks gestation) and late-onset (onset after 34 weeks gestation).
+All the incidence and case fatality risks for the nested categories are stratified by the timing of pre-eclampsia onset.
+
 Cause Model Diagram
 +++++++++++++++++++
 
@@ -242,23 +246,28 @@ represent decision probabilities rather than rates per unit time.
         end
         alive
         dead
+        onset_decided [label = ""]
 
         start -> alive [label = "1 - ir_gestational_hypertension"]
         start -> gestational_hypertension [label = "ir_gestational_hypertension"]
         gestational_hypertension -> gestational_hypertension_without_pre_eclampsia [label = "1 - ir_pre_eclampsia"]
         gestational_hypertension -> pre_eclampsia [label = "ir_pre_eclampsia"]
-        pre_eclampsia -> non_severe_pre_eclampsia [label = "1 - ir_severe_pre_eclampsia"]
-        pre_eclampsia -> severe_pre_eclampsia [label = "ir_severe_pre_eclampsia"]
-        severe_pre_eclampsia -> severe_pre_eclampsia_without_eclampsia [label = "1 - ir_eclampsia"]
-        severe_pre_eclampsia -> eclampsia [label = "ir_eclampsia"]
-        severe_pre_eclampsia_without_eclampsia -> alive [label = "1 - cfr_severe_pre_eclampsia"]
-        severe_pre_eclampsia_without_eclampsia -> dead [label = "cfr_severe_pre_eclampsia"]
-        gestational_hypertension_without_pre_eclampsia -> alive [label = "1 - cfr_gestational_hypertension"]
-        gestational_hypertension_without_pre_eclampsia -> dead [label = "cfr_gestational_hypertension"]
-        non_severe_pre_eclampsia -> alive [label = "1 - cfr_non_severe_pre_eclampsia"]
-        non_severe_pre_eclampsia -> dead [label = "cfr_non_severe_pre_eclampsia"]
-        eclampsia -> alive [label = "1 - cfr_eclampsia"]
-        eclampsia -> dead [label = "cfr_eclampsia"]
+        pre_eclampsia -> early_onset [label = "prob_early_onset"]
+        pre_eclampsia -> late_onset [label = "1 - prob_early_onset"]
+        early_onset -> onset_decided
+        late_onset -> onset_decided
+        onset_decided -> non_severe_pre_eclampsia [label = "1 - ir_severe_pre_eclampsia_{onset}"]
+        onset_decided -> severe_pre_eclampsia [label = "ir_severe_pre_eclampsia_{onset}"]
+        severe_pre_eclampsia -> severe_pre_eclampsia_without_eclampsia [label = "1 - ir_eclampsia_{onset}"]
+        severe_pre_eclampsia -> eclampsia [label = "ir_eclampsia_{onset}"]
+        severe_pre_eclampsia_without_eclampsia -> alive [label = "1 - cfr_severe_pre_eclampsia_{onset}"]
+        severe_pre_eclampsia_without_eclampsia -> dead [label = "cfr_severe_pre_eclampsia_{onset}"]
+        gestational_hypertension_without_pre_eclampsia -> alive [label = "1 - cfr_gestational_hypertension_{onset}"]
+        gestational_hypertension_without_pre_eclampsia -> dead [label = "cfr_gestational_hypertension_{onset}"]
+        non_severe_pre_eclampsia -> alive [label = "1 - cfr_non_severe_pre_eclampsia_{onset}"]
+        non_severe_pre_eclampsia -> dead [label = "cfr_non_severe_pre_eclampsia_{onset}"]
+        eclampsia -> alive [label = "1 - cfr_eclampsia_{onset}"]
+        eclampsia -> dead [label = "cfr_eclampsia_{onset}"]
         alive -> end  [label = "1"]
         dead -> end  [label = "1"]
     }
@@ -310,24 +319,42 @@ represent decision probabilities rather than rates per unit time.
     * - ir_pre_eclampsia
       - incidence risk of pre-eclampsia
       - The probability that a pregnant simulant who has gestational hypertension develops pre-eclampsia at some point during pregnancy
-    * - ir_severe_pre_eclampsia
-      - incidence risk of severe pre-eclampsia (inclusive of eclampsia)
-      - The probability that a pregnant simulant who has pre-eclampsia at some point during pregnancy develops severe pre-eclampsia (including eclampsia) at some point during pregnancy
-    * - ir_eclampsia
-      - incidence risk of eclampsia from severe pre-eclampsia
-      - The probability that a pregnant simulant who has severe pre-eclampsia at some point during pregnancy develops eclampsia
+    * - prob_early_onset
+      - probability that an incident case of pre-eclampsia is early-onset
+      - The probability that a pregnant simulant who develops pre-eclampsia at any point during pregnancy, develops it before 34 weeks of gestation
+    * - ir_severe_pre_eclampsia_early_onset
+      - incidence risk of severe pre-eclampsia (inclusive of eclampsia) for early-onset pre-eclampsia
+      - The probability that a pregnant simulant who has early-onset pre-eclampsia develops severe pre-eclampsia (including eclampsia) at some point during pregnancy
+    * - ir_severe_pre_eclampsia_late_onset
+      - incidence risk of severe pre-eclampsia (inclusive of eclampsia) for late-onset pre-eclampsia
+      - The probability that a pregnant simulant who has late-onset pre-eclampsia develops severe pre-eclampsia (including eclampsia) at some point during pregnancy
+    * - ir_eclampsia_early_onset
+      - incidence risk of eclampsia from severe pre-eclampsia for early-onset pre-eclampsia
+      - The probability that a pregnant simulant who has early-onset severe pre-eclampsia develops eclampsia at some point during pregnancy
+    * - ir_eclampsia_late_onset
+      - incidence risk of eclampsia from severe pre-eclampsia for late-onset pre-eclampsia
+      - The probability that a pregnant simulant who has late-onset severe pre-eclampsia develops eclampsia at some point during pregnancy
     * - cfr_gestational_hypertension
       - case fatality risk for gestational hypertension
       - The probability that a simulant with gestational hypertension (and not pre-eclampsia or eclampsia) dies of it
-    * - cfr_non_severe_pre_eclampsia
-      - case fatality risk for non-severe pre-eclampsia
-      - The probability that a simulant with non-severe pre-eclampsia dies of it
-    * - cfr_severe_pre_eclampsia
-      - case fatality risk for severe pre-eclampsia
-      - The probability that a simulant with severe pre-eclampsia (and not eclampsia) dies of it
-    * - cfr_eclampsia
-      - case fatality risk for eclampsia
-      - The probability that a simulant with eclampsia dies of it
+    * - cfr_non_severe_pre_eclampsia_early_onset
+      - case fatality risk for non-severe early-onset pre-eclampsia
+      - The probability that a simulant with non-severe early-onset pre-eclampsia dies of it
+    * - cfr_non_severe_pre_eclampsia_late_onset
+      - case fatality risk for non-severe late-onset pre-eclampsia
+      - The probability that a simulant with non-severe late-onset pre-eclampsia dies of it
+    * - cfr_severe_pre_eclampsia_early_onset
+      - case fatality risk for severe early-onset pre-eclampsia
+      - The probability that a simulant with severe early-onset pre-eclampsia (and not eclampsia) dies of it
+    * - cfr_severe_pre_eclampsia_late_onset
+      - case fatality risk for severe late-onset pre-eclampsia
+      - The probability that a simulant with severe late-onset pre-eclampsia (and not eclampsia) dies of it
+    * - cfr_eclampsia_early_onset
+      - case fatality risk for eclampsia from early-onset pre-eclampsia
+      - The probability that a simulant with eclampsia from early-onset pre-eclampsia dies of it
+    * - cfr_eclampsia_late_onset
+      - case fatality risk for eclampsia from late-onset pre-eclampsia
+      - The probability that a simulant with eclampsia from late-onset pre-eclampsia dies of it
 
 Probabilities
 +++++++++++++
